@@ -45,13 +45,13 @@ import os.path
 
 def generatePackageFor(filename): 
   """This function generates a libSBML extension for the given filename"""
-  sys.path.append(os.path.dirname(__file__) + "/legacy/")
+  sys.path.append(os.path.dirname(__file__) + "/legacy")
   import run
   run.generatePackageForFile(filename)
 
 def generateLaTeXFor(filename): 
   """This function generates a LaTeX scaffold for the given filename"""
-  sys.path.append(os.path.dirname(__file__) + "/util/")
+  sys.path.append(os.path.dirname(__file__) + "/util")
   import generateLatex
   generateLatex.generateLatexFor(filename)
 
