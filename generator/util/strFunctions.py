@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    strFunctions.py
-# @brief   base class for cpp files to be generated
+# @brief   functions atht adjust strings in some way
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,10 +37,6 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
-import os
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
 import re
 
 

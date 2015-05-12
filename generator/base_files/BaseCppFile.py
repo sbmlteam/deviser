@@ -43,7 +43,7 @@ sys.path.append(os.path.dirname(__file__) + "/../util")
 sys.path.append(os.path.dirname(__file__) + "/..")
 
 import BaseFile
-import strFunctions
+from strFunctions import *
 
 
 class BaseCppFile(BaseFile.BaseFile):
