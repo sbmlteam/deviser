@@ -16,7 +16,7 @@ with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 *Pivotal tracker*: [https://www.pivotaltracker.com/n/projects/977192](https://www.pivotaltracker.com/n/projects/977192)
 
 
-### Background ###
+#### Background ###
 ----------
 
 Computation modeling has become a crucial aspect of biological research, and [SBML](http://sbml.org) (the Systems Biology Markup Language) has become the de facto standard open format for exchanging models between software tools in systems biology.
@@ -29,7 +29,7 @@ the package specific code and building with the package enabled.
 
 DEVISER is written in Python and is compatible with Python 2.7 and 3.3.
 
-### Installation ###
+#### Installation ###
 ------------
 
 
