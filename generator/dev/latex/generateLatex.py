@@ -1,6 +1,6 @@
+#!/usr/bin/python
 __author__ = 'Sarah'
 
-#!/usr/bin/python
 
 import sys
 import os
@@ -11,13 +11,14 @@ sys.path.append(os.path.dirname(__file__)  + "/../../spec_files")
 sys.path.append(os.path.dirname(__file__)  + "/../../util")
 sys.path.append(os.path.dirname(__file__)  + "/../../validation")
 sys.path.append(os.path.dirname(__file__)  + "/../..")
+
 import TexValidationRulesFile
 import TexBodySyntaxFile
 import TexMacrosFile
-from createPackageFromXml import *
+import createPackageFromXml
 
 def generateLatexFor(file):
-  ob = parse_deviser_xml(file)
+  ob = createPackageFromXml.parse_deviser_xml(file)
   ff = TexValidationRulesFile.TexValidationRulesFile(ob)
   ff.write_file()
   ff.close_file()

@@ -22,6 +22,7 @@ def createDirectories(pkgName):
     if createDir(pkgName) == False:
       exit
     else:
+      thisDir = os.getcwd()
       os.chdir(pkgName)
       createDir('examples')
       createDir('src')
@@ -49,6 +50,7 @@ def createDirectories(pkgName):
       createDir('validator')
       os.chdir('validator')
       createDir('constraints')
+      os.chdir(thisDir)
     
 def main(args):     
   if len(args) != 2:

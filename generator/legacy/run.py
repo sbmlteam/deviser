@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file   createDirStruct.py
-# @brief  Create teh directory structure for package code
+# @brief  Create the directory structure for package code
 # @author Sarah Keating
 #
 
@@ -20,18 +20,27 @@ import createValidatorFiles
 import createPackageFromXml
 import createDirStruct
 
-if len(sys.argv) < 2:
-  print 'Usage: run.py name <fileName>'
-else:
-  name = sys.argv[1]
+def getPackageDefinitionFromArgs(args):
   packageDefn = None
-  if len(sys.argv) > 2:
-    packageDefn = createPackageFromXml.parseDeviserXML(sys.argv[2])
+  name = args[1]
+  if len(args) > 2:
+    packageDefn = createPackageFromXml.parseDeviserXML(args[2])
   else:
     packageDefn = createNewPackage.createPackage(name)
   if packageDefn == None:
     print 'package definition for {0} not available'.format(name)
     sys.exit(0)
+  return packageDefn
+
+def getPackageDefinitionFromFile(filename):
+  return createPackageFromXml.parseDeviserXML(filename)
+
+def generatePackageForFile(filename):
+  packageDefn = getPackageDefinitionFromFile(filename)
+  generatePackageForDefinition(packageDefn)
+  
+def generatePackageForDefinition(packageDefn):
+  name = packageDefn['name'].lower()
   thisDir = os.getcwd()
   extDir = './' + name + '/src/sbml/packages/' + name + '/extension'
   sbmlDir = './' + name + '/src/sbml/packages/' + name + '/sbml'
@@ -40,10 +49,12 @@ else:
   packDir = './' + name + '/src/sbml/packages'
   bindDir = './' + name + '/src/bindings'
   #check directories exist
+  
   if os.path.exists(extDir) == False:
     createDirStruct.createDirectories(name)
     #print 'directory structure for {0} not available - please run createDirStruct'.format(name)
     #sys.exit(0)
+    
   os.chdir(extDir)
   createExtensionFiles.main(packageDefn)
   os.chdir(thisDir)
@@ -69,4 +80,15 @@ else:
   createBindingsFiles.main(packageDefn)
   os.chdir(thisDir)
   createArchiveFile.main(name)
+  
+def main(args):
+  """Usage: run.py name <fileName>"""
+  if len(args) < 2:
+    print (main.__doc__)
+  else:
+    packageDefn = getPackageDefinitionFromArgs(args)
+    generatePackageForDefinition(packageDefn)
+  return 0
 
+if __name__ == '__main__':
+  main(sys.argv)  
