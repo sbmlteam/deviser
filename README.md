@@ -5,7 +5,8 @@ DEVISER
 Viewer for Iterative SBML Enhancement of Representations"*. 
 
 ----
-*Authors*:      [Sarah Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e).
+*Authors*:      [Sarah Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
+with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 
 *License*:      This code is licensed under the LGPL version 2.1.  Please see the file [../LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/moccasin/master/LICENSE.txt) for details.
 
@@ -15,7 +16,7 @@ Viewer for Iterative SBML Enhancement of Representations"*.
 *Pivotal tracker*: [https://www.pivotaltracker.com/n/projects/977192](https://www.pivotaltracker.com/n/projects/977192)
 
 
-Background
+### Background ###
 ----------
 
 Computation modeling has become a crucial aspect of biological research, and [SBML](http://sbml.org) (the Systems Biology Markup Language) has become the de facto standard open format for exchanging models between software tools in systems biology.
@@ -28,33 +29,22 @@ the package specific code and building with the package enabled.
 
 DEVISER is written in Python and is compatible with Python 2.7 and 3.3.
 
-How it works
+### Installation ###
 ------------
 
 
-
-Installation
-------------
-
-
-Using DEVISER
+### Using DEVISER ###
 -------------
-
-
-Getting Help
-------------
+Full documentation is available in the [docs](docs) directory.
 
 
 
-Contributing
-------------
-
-
-Acknowledgments
+### Acknowledgments ###
 -----------------------
+We achnowledge funding for DEVISER from the National Institutes of Health (USA) under
+grant R01 GM070923.
 
-
-Copyright and license
+### Copyright and license ###
 ---------------------
 
 Copyright (C) 2014-2015 jointly by the California Institute of Technology, Pasadena, CA, USA, EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK and the University of Heidelberg, Heidelberg, Germany
