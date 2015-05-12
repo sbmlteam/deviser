@@ -1,4 +1,4 @@
-DEVISER
+###DEVISER
 ========
 
 *DEVISER* stands for *"Design Explorer and
@@ -33,18 +33,18 @@ DEVISER is written in Python and is compatible with Python 2.7 and 3.3.
 ------------
 
 
-### Using DEVISER ###
+#### Using DEVISER ###
 -------------
 Full documentation is available in the [docs](docs) directory.
 
 
 
-### Acknowledgments ###
+#### Acknowledgments ###
 -----------------------
 We achnowledge funding for DEVISER from the National Institutes of Health (USA) under
 grant R01 GM070923.
 
-### Copyright and license ###
+#### Copyright and license ###
 ---------------------
 
 Copyright (C) 2014-2015 jointly by the California Institute of Technology, Pasadena, CA, USA, EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK and the University of Heidelberg, Heidelberg, Germany
