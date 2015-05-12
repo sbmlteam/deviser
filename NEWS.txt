@@ -1,0 +1,12 @@
+           DEVISER NEWS -- History of user-visible changes
+
+====================================================================
+0.9.0 (2016-05-19)
+====================================================================
+
+This is the first public release of DEVISER. 
+
+# The following is for [X]Emacs users.  Please leave in place.
+# Local Variables:
+# fill-column: 70
+# End:

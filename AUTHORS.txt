@@ -1,0 +1,10 @@
+                 DEVISER was primarily developed by
+ 
+            Sarah Keating, Frank Bergmann and Michael Hucka
+
+                                   
+         For more information about DEVISER, contact:
+
+                            The SBML Team
+                         http://www.sbml.org/
+                     mailto:sbml-team@caltech.edu
