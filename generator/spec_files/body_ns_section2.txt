@@ -1,0 +1,5 @@
+In addition, SBML documents using a given package must indicate whether
+understanding the package is required for complete mathematical
+interpretation of a model, or whether the package is optional.  This is
+done using the attribute \token{required} on the \token{<sbml>} element
+in the SBML document.  For the PACKAGENAME the value of the required attribute is \val{false}.

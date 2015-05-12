@@ -1,0 +1,5 @@
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+\emph{requirement} for SBML conformance. If a model does not follow this
+rule, it does not conform to the PACKAGENAME specification.
+(Mnemonic intention behind the choice of symbol: ``This must be
+checked.'')

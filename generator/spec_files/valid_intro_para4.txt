@@ -1,0 +1,7 @@
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+recommendation for good modeling practice. This rule is not strictly a
+matter of SBML encoding, but the recommendation comes from logical
+reasoning. As in the previous case, if a model does not follow this
+rule, it is not strictly considered an invalid SBML encoding. (Mnemonic
+intention behind the choice of symbol: ``You're a star if you heed
+this.'')

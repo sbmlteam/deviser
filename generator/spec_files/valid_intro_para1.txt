@@ -1,0 +1,12 @@
+This section summarizes all the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBML Level~LEVELNUM Version~VERSIONNUM model that
+uses the PACKAGENAME. We use the same conventions as are used in the
+SBML Level~LEVELNUM Version~VERSIONNUM Core specification document. In particular, there
+are different degrees of rule strictness. Formally, the differences are
+expressed in the statement of a rule: either a rule states that a
+condition \emph{must} be true, or a rule states that it \emph{should} be
+true. Rules of the former kind are strict SBML validation rules---a
+model encoded in SBML must conform to all of them in order to be
+considered valid. Rules of the latter kind are consistency rules. To
+help highlight these differences, we use the following three symbols
+next to the rule numbers:

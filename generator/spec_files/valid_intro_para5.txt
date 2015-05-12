@@ -1,0 +1,5 @@
+The validation rules listed in the following subsections are all stated
+or implied in the rest of this specification document. They are
+enumerated here for convenience. Unless explicitly stated, all
+validation rules concern objects and attributes specifically defined in
+the PACKAGENAME package.

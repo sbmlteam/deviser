@@ -1,0 +1,9 @@
+For \notice convenience and brevity, we use the shorthand
+``\token{PKGNAME:\-x}'' to stand for an attribute or element name \token{x}
+in the namespace for the PACKAGENAME package, using the namespace prefix
+\token{PKGNAME}. In reality, the prefix string may be different from the
+literal ``\token{PKGNAME}'' used here (and indeed, it can be any valid XML
+namespace prefix that the modeler or software chooses). We use
+``\token{PKGNAME:\-x}'' because it is shorter than to write a full
+explanation everywhere we refer to an attribute or element in the
+PACKAGENAME namespace.

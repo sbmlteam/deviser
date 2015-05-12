@@ -1,0 +1,5 @@
+Every SBML Level~LEVELNUM package is identified uniquely by an XML namespace
+URI.  For an SBML document to be able to use a given SBML Level~LEVELNUM
+package, it must declare the use of that package by referencing its URI.
+The following is the namespace URI for this version of the PACKAGENAME for
+SBML Level~LEVELNUM Version~VERSIONNUM:
