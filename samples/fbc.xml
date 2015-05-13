@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="fbc" fullname="Flux Balance Constraints" number="800" offset="20000000" version="1" required="false">
+  <versions>
+    <pkgVersion pkg_version="1">
+      <elements>
+        <element name="FluxBound" typeCode="SBML_FBC_FLUXBOUND" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="SId" abstract="false" />
+            <attribute name="name" required="false" type="string" abstract="false" />
+            <attribute name="reaction" required="true" type="SIdRef" element="Reaction" abstract="false" />
+            <attribute name="operation" required="true" type="enum" element="FbcOperation" abstract="false" />
+            <attribute name="value" required="false" type="double" abstract="false" />
+          </attributes>
+        </element>
+        <element name="FluxObjective" typeCode="SBML_FBC_FLUXOBJECTIVE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="SId" abstract="false" />
+            <attribute name="name" required="false" type="string" abstract="false" />
+            <attribute name="reaction" required="true" type="SIdRef" element="Reaction" abstract="false" />
+            <attribute name="coefficient" required="false" type="double" abstract="false" />
+          </attributes>
+        </element>
+        <element name="Objective" typeCode="SBML_FBC_OBJECTIVE" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false" />
+            <attribute name="name" required="false" type="string" abstract="false" />
+            <attribute name="type" required="true" type="enum" element="FbcType" abstract="false" />
+            <attribute name="fluxObjective" required="true" type="lo_element" element="FluxObjective" abstract="false" />
+          </attributes>
+          <listOfAttributes>
+            <listOfAttribute name="activeObjective" required="true" type="SIdRef" element="Objective" abstract="false" />
+          </listOfAttributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ListOfFluxBounds" />
+            <reference name="ListOfObjectives" />
+          </references>
+        </plugin>
+      </plugins>
+      <enums>
+        <enum name="FbcType">
+          <enumValues>
+            <enumValue name="OBJECTIVE_TYPE_MAXIMIZE" value="maximize" />
+            <enumValue name="OBJECTIVE_TYPE_MINIMIZE" value="minimize" />
+          </enumValues>
+        </enum>
+        <enum name="FbcOperation">
+          <enumValues>
+            <enumValue name="FLUXBOUND_OPERATION_LESS_EQUAL" value="lessEqual" />
+            <enumValue name="FLUXBOUND_OPERATION_GREATER_EQUAL" value="greaterEqual" />
+            <enumValue name="FLUXBOUND_OPERATION_EQUAL" value="equal" />
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+  </versions>
+</package>
