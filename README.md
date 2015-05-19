@@ -37,12 +37,64 @@ DEVISER is written in Python and is compatible with Python 2.7 and 3.3.
 
 ----------
 
+#### Using DEVISER
+
+The Deviser Edit tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
+
+1.	Create and view a UML diagram.
+2.	Generate the necessary libSBML code for the package.
+3.	Generate TeX files and generate a pdf of a basic specification document for the package.
+4.	Integrate and test the package with libSBML.
+
+The Deviser Edit tool creates an XML description of the package that is used by the deviser code to generate the requested files. This XML description is exemplified in the [samples](deviser/samples) directory.
+
+
+There is command line version of the function that can be used to invoke the deviser functionality on the XML file. This is the deviser.py file found in the generator directory.
+
+    deviser.py [--generate][--latex] input-file.xml    
+
+This program will use a DEVISER xml file, and generate either a C++ 
+libSBML extension for it, or generate a LaTeX scaffold for its 
+specification. 
+
+Full documentation is available in the [docs](deviser\docs) directory.
+
+------------
 
 #### Installation
 
+##### Microsoft Windows OS
+
+The deviser release includes a windows installation executable. When installed this provides the user with the Deviser Edit tool (CsDeviser.exe) and additionally includes a python interpreter and the sbmlpkgspec files for generating SBML L3 Package specifications.
+
+##### Linux OS
+
+The deviser release includes a tarball suitable for Linux. This includes the Deviser Edit tool which can be used is mono is installed.
+
+
+#####Mac OS X
+
+The Deviser Edit tool does not (yet) work on Mac OS X systems.  However the command line version can be used. Thus downloading the release src code will provide this functionality.
 
 ----------
 
+#### Other resources
+
+Not all of the following are necessary as what is necessary depends on which operating system is being used and which DEVISER functionality is required. These links are given as a quick reference.
+
+[libSBML source code](https://sourceforge.net/projects/sbml/files/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz/download) 
+
+[libSBML dependency libraries for Windows users](https://github.com/sbmlteam/libSBML-dependencies)
+
+[SBML package specification template files](https://sourceforge.net/projects/sbml/files/specifications/tex/sbmlpkgspec-1.6.0.tar.gz/download)
+
+[Mono install scripts for Linux](https://github.com/nathanb/iws-snippets/tree/master/mono-install-scripts)
+
+
+
+
+
+-----
 
 #### Using DEVISER
 

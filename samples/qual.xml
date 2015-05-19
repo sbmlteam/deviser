@@ -35,10 +35,10 @@
         <element name="Output" typeCode="SBML_QUAL_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false" />
-            <attribute name="name" required="false" type="string" abstract="false" />
             <attribute name="qualitativeSpecies" required="false" type="SIdRef" element="QualitativeSpecies" abstract="false" />
             <attribute name="transitionEffect" required="false" type="enum" element="TransitionOutputEffect" abstract="false" />
-            <attribute name="outputLevel" required="false" abstract="false" />
+            <attribute name="name" required="false" type="string" abstract="false" />
+            <attribute name="outputLevel" required="false" type="int" abstract="false" />
           </attributes>
         </element>
         <element name="DefaultTerm" typeCode="SBML_QUAL_DEFAULT_TERM" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
