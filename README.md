@@ -1,12 +1,11 @@
-###DEVISER
+##DEVISER
 
-----------
 
 
 *DEVISER* stands for *"Design Explorer and
 Viewer for Iterative SBML Enhancement of Representations"*. 
 
-----
+
 *Authors*:      [Sarah Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
 with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 
@@ -18,10 +17,10 @@ with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 *Pivotal tracker*: [https://www.pivotaltracker.com/n/projects/977192](https://www.pivotaltracker.com/n/projects/977192)
 
 
-----------
 
 
-#### Background
+
+## Background ##
 
 
 Computation modeling has become a crucial aspect of biological research, and [SBML](http://sbml.org) (the Systems Biology Markup Language) has become the de facto standard open format for exchanging models between software tools in systems biology.
@@ -35,9 +34,8 @@ the package specific code and building with the package enabled.
 DEVISER is written in Python and is compatible with Python version 2.6 onwards.
 
 
-----------
 
-#### Using DEVISER
+## Using DEVISER ##
 
 The Deviser Edit tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
 
@@ -59,9 +57,8 @@ specification.
 
 Full documentation is available in the [docs](deviser\docs) directory.
 
-------------
 
-#### Installation
+## Installation ##
 
 ##### Microsoft Windows OS
 
@@ -76,9 +73,9 @@ The deviser release includes a tarball suitable for Linux. This includes the Dev
 
 The Deviser Edit tool does not (yet) work on Mac OS X systems.  However the command line version can be used. Thus downloading the release src code will provide this functionality.
 
-----------
 
-#### Other resources
+
+## Other resources ##
 
 Not all of the following are necessary as what is necessary depends on which operating system is being used and which DEVISER functionality is required. These links are given as a quick reference.
 
@@ -94,25 +91,13 @@ Not all of the following are necessary as what is necessary depends on which ope
 
 
 
------
-
-#### Using DEVISER
-
-Full documentation is available in the [docs](docs) directory.
-
-
-----------
-
-
-#### Acknowledgments
+## Acknowledgments ##
 
 We achnowledge funding for DEVISER from the National Institutes of Health (USA) under
 grant R01 GM070923.
 
 
-----------
-
-#### Copyright and license
+## Copyright and license ##
 
 
 Copyright (C) 2014-2015 jointly by the California Institute of Technology, Pasadena, CA, USA, EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK and the University of Heidelberg, Heidelberg, Germany
