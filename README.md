@@ -10,7 +10,7 @@ Viewer for Iterative SBML Enhancement of Representations"*.
 *Authors*:      [Sarah Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
 with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 
-*License*:      This code is licensed under the LGPL version 2.1.  Please see the file [../LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/moccasin/master/LICENSE.txt) for details.
+*License*:      This code is licensed under the LGPL version 2.1.  Please see the file [LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/moccasin/master/LICENSE.txt) for details.
 
 *Repository*:   [https://github.com/sbmlteam/deviser](https://github.com/sbmlteam/deviser)
 
@@ -32,7 +32,7 @@ the package specific code and building with the package enabled.
  SBML Level 3 is being developed as a core with additional optional packages. DEVISER facilitates the development of these packages by providing a means of creating a basic specification, UML diagrams and code for integration with libSBML.
 
 
-DEVISER is written in Python and is compatible with Python 2.7 and 3.3.
+DEVISER is written in Python and is compatible with Python version 2.6 onwards.
 
 
 ----------
