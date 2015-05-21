@@ -1,8 +1,8 @@
-##DEVISER
+##Deviser
 
 
 
-*DEVISER* stands for *"Design Explorer and
+*Deviser* stands for *"Design Explorer and
 Viewer for Iterative SBML Enhancement of Representations"*. 
 
 
@@ -28,14 +28,14 @@ Computation modeling has become a crucial aspect of biological research, and [SB
 [LibSBML](http://sbml.org/Software/libSBML) is a free, open-source programming library to help you read, write, manipulate, translate, and validate SBML files and data streams. Support for SBML Level 3 packages can be added by integrating 
 the package specific code and building with the package enabled.
 
- SBML Level 3 is being developed as a core with additional optional packages. DEVISER facilitates the development of these packages by providing a means of creating a basic specification, UML diagrams and code for integration with libSBML.
+ SBML Level 3 is being developed as a core with additional optional packages. Deviser facilitates the development of these packages by providing a means of creating a basic specification, UML diagrams and code for integration with libSBML.
 
 
-DEVISER is written in Python and is compatible with Python version 2.6 onwards.
+Deviser is written in Python and is compatible with Python version 2.6 onwards.
 
 
 
-## Using DEVISER ##
+## Using Deviser ##
 
 The Deviser Edit tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
 
@@ -51,7 +51,7 @@ There is command line version of the function that can be used to invoke the dev
 
     deviser.py [--generate][--latex] input-file.xml    
 
-This program will use a DEVISER xml file, and generate either a C++ 
+This program will use a Deviser xml file, and generate either a C++ 
 libSBML extension for it, or generate a LaTeX scaffold for its 
 specification. 
 
@@ -77,7 +77,7 @@ The Deviser Edit tool does not (yet) work on Mac OS X systems.  However the comm
 
 ## Other resources ##
 
-Not all of the following are necessary as what is necessary depends on which operating system is being used and which DEVISER functionality is required. These links are given as a quick reference.
+Not all of the following are necessary as what is necessary depends on which operating system is being used and which Deviser functionality is required. These links are given as a quick reference.
 
 [libSBML source code](https://sourceforge.net/projects/sbml/files/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz/download) 
 
@@ -93,7 +93,7 @@ Not all of the following are necessary as what is necessary depends on which ope
 
 ## Acknowledgments ##
 
-We achnowledge funding for DEVISER from the National Institutes of Health (USA) under
+We achnowledge funding for Deviser from the National Institutes of Health (USA) under
 grant R01 GM070923.
 
 
