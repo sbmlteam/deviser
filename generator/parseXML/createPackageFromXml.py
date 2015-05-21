@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    createPackageFromXml.py
-# @brief   function to take the output from DEVISER Edit and create
+# @brief   function to take the output from Deviser Edit and create
 #             the expected dictionaries
 # @author  Frank Bergmann
 # @author  Sarah Keating
