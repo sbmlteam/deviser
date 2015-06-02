@@ -122,8 +122,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_constructors(class_name)
         self.write_attribute_functions(class_name, class_attributes)
         if base_class == 'ListOf':
-            self.write_get_element_functions(class_name, [], is_list_of=True)
-            self.write_remove_element_functions(class_name, [], is_list_of=True)
+            self.write_listof_functions(class_name, class_attributes)
         self.write_listofelement_functions(class_name, class_attributes)
         self.write_general_functions(class_name, class_attributes,
                                      base_class == 'ListOf')
@@ -143,7 +142,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_general_functions(self.name, self.attributes,
                                      is_list_of, is_cpp_api)
         self.write_get_element_functions(self.name, [], is_list_of, is_cpp_api)
-        self.write_remove_element_functions(self.name, [], is_list_of=True)
+        self.write_remove_element_functions(self.name, [], is_list_of,
+                                            is_cpp_api)
 
     ########################################################################
 
@@ -1105,7 +1105,19 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
-    # Functions for writing function dealing with a child listOf element
+    # Functions for writing functions for the main ListOf class
+
+    def write_listof_functions(self, class_name, class_attributes):
+        self.write_get_element_functions(class_name, [], is_list_of=True)
+        self.write_add_element_function(class_name, [])
+        self.write_get_num_elements_function(class_name, [])
+        self.write_create_element_function(class_name, [])
+        self.write_remove_element_functions(class_name, [], is_list_of=True)
+        num_attributes = len(self.attributes)
+        for i in range(0, num_attributes):
+            attribute = self.attributes[i]
+            if attribute['type'] == 'SIdRef':
+                self.write_get_by_sidref_functions(class_name, attribute)
 
     # main function to write the functions dealing with a child listOf element
     def write_listofelement_functions(self, class_name, class_attributes):
@@ -1145,10 +1157,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # function to write the getElement/get functions from ListOf
     def write_get_element_functions(self, class_name, attribute,
                                     is_list_of=False, is_cpp_api=True):
+        if is_list_of is None:
+            is_list_of = False
+        if is_cpp_api is None:
+            is_cpp_api = True
         # these may not used in all cases but declared to keep PEP8 happy
         cap_name = ''
         plural = ''
-        abbrev_ob = ''
         if not is_list_of:
             if is_cpp_api:
                 name = attribute['name']
@@ -1160,7 +1175,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 name = self.name + '_t'
                 indef_name = strFunctions.get_indefinite(name)
                 parent = strFunctions.list_of_name(self.name)
-                abbrev_ob = strFunctions.abbrev_name(self.name)
         else:
             name = self.name
             indef_name = strFunctions.get_indefinite(name)
@@ -1227,7 +1241,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                        return_type, constant, virtual)
             self.skip_line(2)
 
-        # const get by index
+        # const get by id
         # create doc string header
         title_line = 'Get {} {} from the {} based on its identifier.'\
             .format(indef_name, name, parent)
@@ -1262,28 +1276,63 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                    return_type, constant, virtual)
         self.skip_line(2)
 
+    # function to get an element by SIdRef
+    def write_get_by_sidref_functions(self, class_name, attribute):
+        # const get by sidref
+        # create doc string header
+        ob_name = self.name
+        indef = strFunctions.get_indefinite(ob_name)
+        sidref = attribute['element']
+        title_line = 'Get {} {} from the {} based on the {} to which ' \
+                     'it refers.'.format(indef, ob_name, class_name, sidref)
+        params = ['@param sid a string representing the {} attribute of the {} '
+                  'object to retrieve.'.format(strFunctions.lower_first(sidref),
+                                               ob_name)]
+        return_lines = ['@return the first {0} in this {1} based on the '
+                        'given {2} attribute or NULL if no such {0} exists.'
+                        .format(ob_name, class_name,
+                                strFunctions.lower_first(sidref))]
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+        # create the function declaration
+        function = 'getBy{}'.format(sidref)
+        arguments = ['const std::string& sid']
+        return_type = 'const {}*'.format(ob_name)
+        virtual = False
+        constant = True
+        self.write_function_header(True, function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+        #non-const version
+        constant = False
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+        self.write_function_header(True, function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+
     # function to write the getElement/get functions from ListOf
     def write_remove_element_functions(self, class_name, attribute,
                                        is_list_of=False, is_cpp_api=True):
+        if is_list_of is None:
+            is_list_of = False
+        if is_cpp_api is None:
+            is_cpp_api = True
         # these may not used in all cases but declared to keep PEP8 happy
         cap_name = ''
         plural = ''
-        abbrev_ob = ''
         if not is_list_of:
             if is_cpp_api:
                 name = attribute['name']
-                indef_name = strFunctions.get_indefinite(name)
                 cap_name = attribute['capAttName']
                 plural = strFunctions.upper_first(attribute['pluralName'])
                 parent = class_name
             else:
                 name = self.name + '_t'
-                indef_name = strFunctions.get_indefinite(name)
                 parent = strFunctions.list_of_name(self.name)
-                abbrev_ob = strFunctions.abbrev_name(self.name)
         else:
             name = self.name
-            indef_name = strFunctions.get_indefinite(name)
             parent = class_name
 
         if is_cpp_api:
@@ -1300,7 +1349,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             additional.append(' ')
             additional.append('@note the caller owns the returned object and '
                               'is responsible for deleting it.')
-            self.write_comment_header(title_line, params, return_lines, class_name,
+            self.write_comment_header(title_line, params, return_lines,
+                                      class_name,
                                       additional)
             # create the function declaration
             function = 'remove' if is_list_of else 'get{}'.format(cap_name)
@@ -1349,26 +1399,85 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # function to write the addElement function
     def write_add_element_function(self, class_name, attribute):
-        abbrev = strFunctions.abbrev_name(attribute['capAttName'])
-        self.open_comment()
-        self.write_comment_line('Adds a copy of the given {0} to this {1}.'
-                                .format(attribute['capAttName'], class_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@param {0}; the {1} object to add.'
-                                .format(abbrev,
-                                        attribute['capAttName']))
-        self.write_blank_comment_line()
-        self.write_comment_line('@return integer value indicating success/'
-                                'failure of the operation. The possible return'
-                                ' values are:')
-        self.write_comment_line('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS,'
-                                ' OperationReturnValues_t}')
-        self.write_comment_line('@li @sbmlconstant'
-                                '{LIBSBML_INVALID_ATTRIBUTE_VALUE, '
-                                'OperationReturnValues_t}')
-        self.close_comment()
-        self.write_line('int add{0}(const {0}* {1});'
-                        .format(attribute['capAttName'], abbrev))
+        if len(attribute) == 0:
+            ob_name = self.name
+        else:
+            ob_name = attribute['capAttName']
+        abbrev = strFunctions.abbrev_name(ob_name)
+        # create doc string header
+        title_line = 'Adds a copy of the given {} to this {}.'\
+            .format(ob_name, class_name)
+
+        params = ['@param {}; the {} object to add.'.format(abbrev, ob_name)]
+        return_lines = ['@copydetails doc_returns_success_code',
+                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t}',
+                        '@li @sbmlconstant{LIBSBML_OPERATION_FAILED,'
+                        ' OperationReturnValues_t}']
+        additional = ['@copydetails doc_note_object_is_copied', ' ',
+                      '@see create{}()'.format(ob_name)]
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+        # create the function declaration
+        function = 'add{}'.format(ob_name)
+        arguments = ['const {}* {}'.format(ob_name, abbrev)]
+        return_type = 'int'
+        virtual = False
+        constant = False
+        self.write_function_header(True, function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+
+    # function to write the getNumElements function
+    def write_get_num_elements_function(self, class_name, attribute):
+        if len(attribute) == 0:
+            ob_name = self.name
+        else:
+            ob_name = attribute['capAttName']
+        # create doc string header
+        title_line = 'Get the number of {} objects in this {}.'\
+            .format(ob_name, class_name)
+
+        params = []
+        return_lines = ['@return the number of {} objects in this {}.'
+                            . format(ob_name, class_name)]
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+        # create the function declaration
+        function = 'getNum{}'.format(strFunctions.plural(ob_name))
+        arguments = []
+        return_type = 'unsigned int'
+        virtual = False
+        constant = True
+        self.write_function_header(True, function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+
+    # function to write the createElement function
+    def write_create_element_function(self, class_name, attribute):
+        if len(attribute) == 0:
+            ob_name = self.name
+        else:
+            ob_name = attribute['capAttName']
+        abbrev = strFunctions.abbrev_name(ob_name)
+        # create doc string header
+        title_line = 'Creates a new {0} object, adds it to this {1} object ' \
+                     'and returns the {0} object created.'.format(ob_name,
+                                                                  class_name)
+        params = []
+        return_lines = ['@return a new {} object instance.'. format(ob_name)]
+        additional = ['@see add{0}(const {0}* {1})'.format(ob_name, abbrev)]
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+        # create the function declaration
+        function = 'create{}'.format(ob_name)
+        arguments = []
+        return_type = '{}*'.format(ob_name)
+        virtual = False
+        constant = False
+        self.write_function_header(True, function, arguments,
+                                   return_type, constant, virtual)
         self.skip_line(2)
 
     ########################################################################
