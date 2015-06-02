@@ -37,13 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
-import os
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
 
 import BaseFile
-from strFunctions import *
+from util import strFunctions
 
 
 class BaseCppFile(BaseFile.BaseFile):
@@ -252,7 +248,9 @@ class BaseCppFile(BaseFile.BaseFile):
 # FUNCTIONS FOR WRITING STANDARD DOC COMMENTS
 
     def write_comment_header(self, title_line, params, return_line,
-                             object_name, additional=[]):
+                             object_name, additional=None):
+        if additional is None:
+            additional = []
         self.open_comment()
         self.write_comment_line(title_line)
         for i in range(0, len(params)):
@@ -273,5 +271,3 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_blank_comment_line()
             self.write_comment_line('@memberof {}'.format(object_name))
         self.close_comment()
-
-

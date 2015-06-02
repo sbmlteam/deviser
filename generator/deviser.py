@@ -40,46 +40,44 @@
 
 
 import sys
-import os.path
+
+from util import generateLatex
+from legacy import run
 
 
 def generatePackageFor(filename): 
-  """This function generates a libSBML extension for the given filename"""
-  sys.path.append(os.path.dirname(__file__) + "/legacy")
-  import run
-  run.generatePackageForFile(filename)
+    """This function generates a libSBML extension for the given filename"""
+    run.generatePackageForFile(filename)
 
-def generateLaTeXFor(filename): 
-  """This function generates a LaTeX scaffold for the given filename"""
-  sys.path.append(os.path.dirname(__file__) + "/util")
-  import generateLatex
-  generateLatex.generateLatexFor(filename)
 
-def main (args):
-  """Usage: deviser  [--generate | --latex ] input-filename output-dir
-     This program will use a Deviser xml file, and generate either a C++ 
-     libSBML extionsion for it, or generate a LaTeX scaffold for its 
-     specification. 
-  """
+def generateLaTeXFor(filename):
+    """This function generates a LaTeX scaffold for the given filename"""
+    generateLatex.generateLatexFor(filename)
 
-  if len(args) != 3:
-    print(main.__doc__)
-    sys.exit(1)
+
+def main(args):
+    """Usage: deviser  [--generate | --latex ] input-filename output-dir
+       This program will use a Deviser xml file, and generate either a C++
+       libSBML extionsion for it, or generate a LaTeX scaffold for its
+       specification.
+    """
+
+    if len(args) != 3:
+        print(main.__doc__)
+        sys.exit(1)
+
+    operation = args[1].lower()
+    filename = args[2]
   
-  
-  operation = args[1].lower();
-  filename = args[2];
-  
-  if operation == '--generate' or operation == '-g': 
-    generatePackageFor(filename)
-  elif operation == '--latex' or operation =='-l': 
-    generateLaTeXFor(filename)
-  else:
-    print(main.__doc__)
-    sys.exit(1)
-  
-  
-  return 0;
+    if operation == '--generate' or operation == '-g':
+        generatePackageFor(filename)
+    elif operation == '--latex' or operation == '-l':
+        generateLaTeXFor(filename)
+    else:
+        print(main.__doc__)
+        sys.exit(1)
+
+    return 0
   
 if __name__ == '__main__':
-  main(sys.argv)  
+    main(sys.argv)

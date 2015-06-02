@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-import strFunctions
+from util import strFunctions
 
 
 class ValidationRulesForClass():

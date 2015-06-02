@@ -37,16 +37,11 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
-import os
+
 import re
 
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
-
-import BaseTexFile
-import BaseFile
-import strFunctions
+from base_files import BaseTexFile
+from util import strFunctions
 
 
 
@@ -152,7 +147,7 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
     # Write file
 
     def write_file(self):
-        BaseFile.BaseFile.write_file(self)
+        BaseTexFile.BaseTexFile.write_file(self)
         self.write_general_commands()
         self.skip_line()
         self.write_comment_line('commands for classes')

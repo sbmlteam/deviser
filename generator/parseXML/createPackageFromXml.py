@@ -41,12 +41,8 @@
 
 from xml.dom.minidom import *
 import os.path
-import sys
 
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
-
-import strFunctions
+from util import strFunctions
 
 
 def to_bool(v):

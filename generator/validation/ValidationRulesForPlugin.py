@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import strFunctions
+from util import strFunctions
 
 
 class ValidationRulesForPlugin():

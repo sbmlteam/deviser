@@ -37,12 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys, os
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
 
 import BaseFile
-import strFunctions
+from util import strFunctions
 
 
 class BaseTexFile(BaseFile.BaseFile):

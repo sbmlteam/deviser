@@ -37,17 +37,9 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
-import os
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
-sys.path.append(os.path.dirname(__file__) + "/../base_files")
-
-
-import BaseCppFile
-import BaseFile
-import strFunctions
-import query
+from base_files import BaseCppFile
+from util import strFunctions
+from util import query
 
 
 class CppHeaderFile(BaseCppFile.BaseCppFile):
@@ -806,6 +798,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 self.write_set_document(class_name)
                 self.write_enable_pkg_internal(class_name)
         else:
+            if is_cpp_api is None:
+                is_cpp_api = False
             self.write_has_reqd_attributes(class_name, attributes, is_cpp_api)
 
     def write_rename_sidrefs_function(self, class_name):
@@ -880,29 +874,30 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
 
     def write_has_reqd_attributes(self, class_name, attributes, is_cpp=True):
+        if is_cpp is None:
+            is_cpp = True
         abbrev_object = ''
         if is_cpp is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
+            true = '@c 1'
+            false = '@c 0'
         else:
             object_name = class_name
+            true = '@c true'
+            false = '@c false'
         # create doc string header
         title_line = 'Predicate returning @c {} if all the required ' \
-                         'attributes for this {} object have been set.' \
-                .format('true' if is_cpp else 'true (non-zero)', object_name)
+                     'attributes for this {} object have been set.'\
+            .format('true' if is_cpp else 'true (non-zero)', object_name)
         params = []
         if not is_cpp:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
 
-        return_lines = []
-        return_lines.append('@return {0} to indicate that all the required attributes of this {1} have been '
-                            'set, otherwise {2} is returned.'
-                            .format(('@c true'
-                                     if is_cpp else '@c 1'),
-                                    object_name,
-                                    ('@c false' if is_cpp
-                                     else '@c 0')))
+        return_lines = ['@return {0} to indicate that all the required '
+                        'attributes of this {1} have been set, otherwise '
+                        '{2} is returned.'.format(true, object_name, false)]
         additional = [' ', '@note The required attributes for the {} object'
                            ' are:'.format(object_name)]
         for i in range(0, len(attributes)):
@@ -1174,13 +1169,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if is_cpp_api:
             # non const get by index
             # create doc string header
-            title_line = 'Get {} {} from the {}.'.format(indef_name, name, parent)
+            title_line = 'Get {} {} from the {}.'.format(indef_name, name,
+                                                         parent)
             params = ['@param n an unsigned int representing '
                       'the index of the {} to retrieve.'.format(name)]
-            return_lines = ['@return the nth {} in this {}.'.format(name, parent)]
+            return_lines = ['@return the nth {} in this {}.'.format(name,
+                                                                    parent)]
             additional = ['@see size()'] if is_list_of \
                 else ['@see getNum{}'.format(plural)]
-            self.write_comment_header(title_line, params, return_lines, class_name,
+            self.write_comment_header(title_line, params, return_lines,
+                                      class_name,
                                       additional)
             # create the function declaration
             function = 'get' if is_list_of else 'get{}'.format(cap_name)
@@ -1194,7 +1192,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
             # const get by index
             # create doc string header
-            self.write_comment_header(title_line, params, return_lines, class_name,
+            self.write_comment_header(title_line, params, return_lines,
+                                      class_name,
                                       additional)
             # create the function declaration
             return_type = 'const {}*'.format(name)
@@ -1215,7 +1214,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                             .format(name, parent)]
             additional = ['@see size()'] if is_list_of \
                 else ['@see getNum{}'.format(plural)]
-            self.write_comment_header(title_line, params, return_lines, class_name,
+            self.write_comment_header(title_line, params, return_lines,
+                                      class_name,
                                       additional)
             # create the function declaration
             function = 'get' if is_list_of else 'get{}'.format(cap_name)
@@ -1391,7 +1391,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Write file
 
     def write_file(self):
-        BaseFile.BaseFile.write_file(self)
+        BaseCppFile.BaseCppFile.write_file(self)
         self.write_defn_begin()
         self.write_common_includes()
         self.write_cpp_begin()

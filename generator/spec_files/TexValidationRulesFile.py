@@ -37,19 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
 import os
 import re
 
-sys.path.append(os.path.dirname(__file__) + "/../util")
-sys.path.append(os.path.dirname(__file__) + "/..")
-
-import BaseTexFile
-import BaseFile
-import ValidationRulesForClass
-import ValidationRulesForPlugin
-import strFunctions
-
+from base_files import BaseTexFile
+from util import strFunctions
+from validation import ValidationRulesForClass
+from validation import ValidationRulesForPlugin
 
 class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     """Class for the validation appendix in LaTeX"""
@@ -252,7 +246,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     # Write file
 
     def write_file(self):
-        BaseFile.BaseFile.write_file(self)
+        BaseTexFile.BaseTexFile.write_file(self)
         self.skip_line()
         self.write_introduction()
         self.write_general_rules()
