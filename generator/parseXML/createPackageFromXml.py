@@ -194,7 +194,7 @@ def parse_deviser_xml(filename):
             temp = get_value(attr, 'element')
             # expect this to be uppercase
             if temp is not None:
-                attr_element = strFunctions.upper_first(temp)
+                attr_element = strFunctions.standard_element_name(temp)
             else:
                 attr_element = ''
 

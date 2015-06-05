@@ -68,6 +68,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         else:
             self.brief_description = 'Definition of {0}.'.format(self.name)
 
+        self.hasMath = class_object['hasMath']
+        self.hasListOf = class_object['hasListOf']
+
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'h',
                                          class_object['attribs'])
 
@@ -96,10 +99,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         # additional includes for child elements
         for i in range(0, len(self.child_elements)):
-            child = self.child_elements[i]['capAttName']
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-                            .format(self.language, self.package.lower(),
-                                    child))
+            child = self.child_elements[i]['element']
+            if child != 'ASTNode':
+                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                                .format(self.language, self.package.lower(),
+                                        child))
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['capAttName']
@@ -163,8 +167,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_child_element_functions(self.name)
         self.write_child_lo_element_functions(self.name)
         self.write_general_functions(self.name, self.attributes)
-        self.is_list_of = True
-        self.write_listof_functions(self.name)
+        if self.hasListOf:
+            self.is_list_of = True
+            self.write_listof_functions(self.name)
 
     ########################################################################
 
@@ -430,6 +435,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         for i in range(0, num_elements):
             self.write_set_function(class_name, self.child_elements[i], False)
         for i in range(0, num_elements):
+            self.write_create_element_function(class_name,
+                                               self.child_elements[i], True)
+        for i in range(0, num_elements):
             self.write_unset_function(class_name, self.child_elements[i], False)
 
     # function to write get function
@@ -508,8 +516,19 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_function_header(function, arguments, return_type,
                                    constant, virtual)
         self.skip_line(2)
+        # for an enum write a string version
         if attribute['isEnum'] is True:
             self.write_get_string_for_enum_function(class_name, attribute)
+        # for a child element write a non const version
+        if not is_attribute and self.is_cpp_api:
+            if attribute['attType'] == 'element':
+                self.write_comment_header(title_line, params,
+                                          return_lines, object_name)
+                return_type = attribute['attTypeCode']
+                constant = False
+                self.write_function_header(function, arguments, return_type,
+                                           constant, virtual)
+                self.skip_line(2)
 
     # function to write get function string version for enums
     def write_get_string_for_enum_function(self, class_name, attribute):
@@ -802,6 +821,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # main general function writing function
     def write_general_functions(self, class_name, attributes):
         has_children = query.has_children(attributes)
+        has_package_children = query.has_children_not_math(attributes)
 
         if self.is_cpp_api:
             if query.has_sid_ref(attributes):
@@ -815,9 +835,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 self.write_write_elements(class_name)
                 self.write_accept_function(class_name)
                 self.write_set_document(class_name)
-                if has_children:
+                if has_package_children:
                     self.write_connect_to_child(class_name)
                 self.write_enable_pkg_internal(class_name)
+            else:
+                self.write_get_item_typecode(class_name)
         else:
             self.write_has_reqd_attributes(class_name, attributes)
             if has_children:
@@ -854,19 +876,42 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_get_typecode(self, class_name):
         # create doc string header
-        if self.is_list_of:
-            title_line = 'Returns the libSBML type code for the SBML objects ' \
-                         'contained in this {} object.'.format(class_name)
-        else:
-            title_line = 'Returns the libSBML typcode of this {} object' \
-                .format(class_name)
+        title_line = 'Returns the libSBML typcode of this {} object'\
+            .format(class_name)
         params = ['@copydetails doc_what_are_typecodes']
-        return_lines = []
+        return_lines = ['@return the SBML type code for this object:']
+        additional = []
         if self.is_list_of:
-            return_lines.append('@return the SBML typecode for the '
-                                'objects contained in this list:')
+            line = '@sbmlconstant{SBML_LIST_OF, SBMLTypeCode_t}'
         else:
-            return_lines.append('@return the SBML type code for this object:')
+            line = '@sbmlconstant{' + '{}'.format(self.typecode) \
+                   + ', SBML{}TypeCode_t'.format(self.package) + '}'
+        additional.append(line)
+        additional.append(' ')
+        additional.append('@copydetails doc_warning_typecodes_not_unique')
+        if not self.is_list_of:
+            additional.append(' ')
+            additional.append('@see getElementName()')
+            additional.append('@see getPackageName()')
+        self.write_comment_header(title_line, params, return_lines, class_name,
+                                  additional)
+        # create the function declaration
+        function = 'getTypeCode'
+        return_type = 'int'
+        virtual = True
+        constant = True
+        self.write_function_header(function, [], return_type, constant, virtual)
+        self.skip_line(2)
+
+    def write_get_item_typecode(self, class_name):
+        if not self.is_list_of:
+            return
+        # create doc string header
+        title_line = 'Returns the libSBML type code for the SBML objects ' \
+                     'contained in this {} object.'.format(class_name)
+        params = ['@copydetails doc_what_are_typecodes']
+        return_lines = ['@return the SBML typecode for the '
+                        'objects contained in this list:']
         additional = []
         line = '@sbmlconstant{' + '{}'.format(self.typecode) \
                + ', SBML{}TypeCode_t'.format(self.package) + '}'
@@ -879,10 +924,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_comment_header(title_line, params, return_lines, class_name,
                                   additional)
         # create the function declaration
-        if self.is_list_of:
-            function = 'getItemTypeCode'
-        else:
-            function = 'getTypeCode'
+        function = 'getItemTypeCode'
         return_type = 'int'
         virtual = True
         constant = True
@@ -1159,10 +1201,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_protected_functions(self):
         if not self.is_list_of:
-            if (len(self.child_elements) + len(self.child_lo_elements)) > 0:
+            # if the only child is math we do not need this
+            if query.has_children_not_math(self.attributes):
                 self.write_create_object()
             self.write_add_expected_attributes()
             self.write_read_attributes()
+            if self.hasMath:
+                self.write_read_other_xml()
             self.write_write_attributes()
         else:
             self.write_create_object()
@@ -1261,6 +1306,23 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line()
         self.write_doxygen_end()
 
+    def write_read_other_xml(self):
+        self.write_doxygen_start()
+        # create doc string header
+        title_line = 'Reads other XML such as math/notes etc.'
+        self.write_comment_header(title_line, [], [], '')
+
+        # create the function declaration
+        function = 'readOtherXML'
+        return_type = 'bool'
+        arguments = ['XMLInputStream& stream']
+        virtual = True
+        constant = False
+        self.write_function_header(function,
+                                   arguments, return_type, constant, virtual)
+        self.skip_line()
+        self.write_doxygen_end()
+
     ########################################################################
 
     # Functions for writing functions for the main ListOf class
@@ -1271,7 +1333,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if self.is_cpp_api:
             self.write_add_element_function(class_name, [])
             self.write_get_num_elements_function(class_name, [])
-            self.write_create_element_function(class_name, [])
+            self.write_create_element_function(class_name, [], False)
             num_attributes = len(self.attributes)
             for i in range(0, num_attributes):
                 attribute = self.attributes[i]
@@ -1291,11 +1353,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 self.write_child_get_by_sidref(class_name, element)
                 self.write_add_element_function(class_name, element)
                 self.write_get_num_elements_function(class_name, element)
-                self.write_create_element_function(class_name, element)
+                self.write_create_element_function(class_name, element, False)
                 self.write_remove_element_functions(class_name, element)
             else:
                 self.write_add_element_function(class_name, element)
-                self.write_create_element_function(class_name, element)
+                self.write_create_element_function(class_name, element, False)
                 self.write_get_listof_functions(class_name, element)
                 self.write_get_element_functions(class_name, element)
                 self.write_get_num_elements_function(class_name, element)
@@ -1403,7 +1465,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             function = 'get' if self.is_list_of else 'get{}'.format(cap_name)
             arguments = ['unsigned int n']
             return_type = '{}*'.format(name)
-            virtual = False
+            virtual = True if self.is_list_of else False
             constant = False
             self.write_function_header(function, arguments,
                                        return_type, constant, virtual)
@@ -1422,7 +1484,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         return_lines = ['@return the nth {} in this {}.'.format(ob_name,
                                                                 ob_parent)]
         additional = []
-        object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
+        object_name = ob_parent \
+            if ob_parent != 'ListOf_t' else class_name + '_t'
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
                 else ['@see getNum{}'.format(plural)]
@@ -1439,7 +1502,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
                          'unsigned int']
         return_type = 'const {}*'.format(ob_name)
-        virtual = False
+        virtual = True if self.is_list_of else False
         constant = True
         self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
@@ -1447,7 +1510,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_get_by_id_functions(self, struct):
         # these may not used in all cases but declared to keep PEP8 happy
-        cap_name = struct['cap_name']
         plural = struct['plural']
         name = struct['name']
         ob_name = struct['ob_name']
@@ -1456,7 +1518,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         indef_name = struct['indef']
         class_name = struct['class_name']
         abbrev_parent = strFunctions.abbrev_name(parent)
-        additional = []
         if self.is_cpp_api:
             # non const get by id
             # create doc string header
@@ -1476,7 +1537,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             function = 'get' if self.is_list_of else 'get{}'.format(name)
             arguments = ['const std::string& sid']
             return_type = '{}*'.format(name)
-            virtual = False
+            virtual = True if self.is_list_of else False
             constant = False
             self.write_function_header(function, arguments,
                                        return_type, constant, virtual)
@@ -1491,14 +1552,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if not self.is_cpp_api:
             params.append('@param {}, the {} structure to search.'
                           .format(abbrev_parent, ob_parent))
-            object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
+            object_name = ob_parent \
+                if ob_parent != 'ListOf_t' else class_name + '_t'
         params.append('@param sid a string representing the identifier '
                       'of the {} to retrieve.'.format(ob_name))
         return_lines = ['@return the {0} in this {1} based on the '
                         'identifier or NULL if no such {0} exists.'
                         .format(ob_name, ob_parent)]
         additional = []
-        self.write_comment_header(title_line, params, return_lines, object_name, additional)
+        self.write_comment_header(title_line, params, return_lines,
+                                  object_name, additional)
 
         # create the function declaration
         if self.is_cpp_api:
@@ -1511,7 +1574,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
                          'const char *sid']
             return_type = '{}*'.format(ob_name)
-        virtual = False
+        virtual = True if self.is_list_of else False
         constant = True
         self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
@@ -1572,22 +1635,22 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         ob_name = struct['ob_name']
         parent = struct['parent']
         ob_parent = struct['ob_parent']
-        indef_name = struct['indef']
         class_name = struct['class_name']
         abbrev_parent = strFunctions.abbrev_name(parent)
-
-
         # by index
         # create doc string header
         title_line = 'Removes the nth {} from this {} and returns a ' \
                      'pointer to it.'.format(ob_name, ob_parent)
         params = []
         additional = []
-        object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
+        object_name = ob_parent \
+            if ob_parent != 'ListOf_t' else class_name + '_t'
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'.format(abbrev_parent, ob_parent))
+            params.append('@param {}, the {} structure to search.'
+                          .format(abbrev_parent, ob_parent))
 
-        params.append('@param n an unsigned int representing the index of the {} to remove.'.format(ob_name))
+        params.append('@param n an unsigned int representing the index of '
+                      'the {} to remove.'.format(ob_name))
         return_lines = ['@return a pointer to the nth {} in this {}.'
                         .format(ob_name, ob_parent)]
         if self.is_cpp_api:
@@ -1610,7 +1673,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
                          'unsigned int']
             return_type = '{}*'.format(ob_name)
-        virtual = False
+        virtual = True if self.is_list_of else False
         constant = False
         self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
@@ -1623,14 +1686,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             .format(ob_name, ob_parent)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'.format(abbrev_parent, ob_parent))
+            params.append('@param {}, the {} structure to search.'
+                          .format(abbrev_parent, ob_parent))
         params.append('@param sid a string representing the identifier '
                       'of the {} to remove.'.format(ob_name))
         return_lines = ['@return the {0} in this {1} based on the '
                         'identifier or NULL if no such {0} exists.'
                         .format(ob_name, ob_parent)]
         additional = []
-        self.write_comment_header(title_line, params, return_lines, object_name, additional)
+        self.write_comment_header(title_line, params, return_lines,
+                                  object_name, additional)
         # create the function declaration
         if self.is_cpp_api:
             function = 'remove' if self.is_list_of \
@@ -1642,7 +1707,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
                          'const char* sid']
             return_type = '{}*'.format(ob_name)
-        virtual = False
+        virtual = True if self.is_list_of else False
         constant = False
         self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
@@ -1667,7 +1732,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             params.append('@param {}, the {} structure to which the '
                           '{} should be added.'.format(abbrev_parent,
                                                        ob_parent, ob_name))
-        params.append('@param {}; the {} object to add.'.format(abbrev, ob_name))
+        params.append('@param {}; the {} object to add.'
+                      .format(abbrev, ob_name))
         return_lines = ['@copydetails doc_returns_success_code',
                         '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
                         'OperationReturnValues_t}',
@@ -1704,7 +1770,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         ob_name = struct['ob_name']
         parent = struct['parent']
         ob_parent = struct['ob_parent']
-        abbrev = strFunctions.abbrev_name(ob_name)
         abbrev_parent = strFunctions.abbrev_name(parent)
         # create doc string header
         title_line = 'Get the number of {} objects in this {}.'\
@@ -1721,7 +1786,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_comment_header(title_line, params, return_lines,
                                   class_name, additional)
         # create the function declaration
-        arguments= []
+        arguments = []
         if self.is_cpp_api:
             function = 'getNum{}'.format(strFunctions.plural(ob_name))
         else:
@@ -1735,10 +1800,12 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
 
     # function to write the createElement function
-    def write_create_element_function(self, class_name, attribute):
+    def write_create_element_function(self, class_name, attribute, is_single):
+        if is_single and attribute['element'] == 'ASTNode':
+            return
         # attribute will be empty when working from a ListOf parent
         if not self.is_list_of:
-            name = attribute['element']
+            name = attribute['element'] if not is_single else attribute['name']
             parent = class_name
             if self.is_cpp_api:
                 ob_name = attribute['element']
@@ -1764,7 +1831,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                        ob_parent, ob_name))
         return_lines = ['@return a new {} object instance.'. format(ob_name)]
         additional = []
-        if self.is_cpp_api:
+        if self.is_cpp_api and not is_single:
             additional.append('@see add{0}(const {0}* {1})'.format(ob_name,
                                                                    abbrev))
         self.write_comment_header(title_line, params, return_lines,

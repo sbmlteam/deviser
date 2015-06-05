@@ -39,6 +39,7 @@
 
 import strFunctions
 
+
 # return True is any of the attributes are of type SIdRef
 def has_sid_ref(attributes):
     if any(attribute['type'] == 'SIdRef' for attribute in attributes):
@@ -52,6 +53,17 @@ def has_children(attributes):
         return True
     elif any(attribute['type'] == 'lo_element' for attribute in attributes):
         return True
+    return False
+
+
+# return True is any of the attributes refer to elements but not math
+def has_children_not_math(attributes):
+    for i in range(0, len(attributes)):
+        if attributes[i]['type'] == 'lo_element':
+            return True
+        elif attributes[i]['type'] == 'element' \
+                and attributes[i]['name'] != 'math':
+            return True
     return False
 
 
@@ -79,8 +91,10 @@ def seperate_attributes(full_attributes):
 ###############################################################
 # function to clarify the object names for the different types
 
+
 # get functions
-def create_structure_for_getters(in_name, class_name, attribute, is_cpp, is_list):
+def create_structure_for_getters(in_name, class_name, attribute, is_cpp,
+                                 is_list):
     # attribute will be empty if we are using a ListOf class
     if len(attribute) == 0:
         if is_cpp:
@@ -97,7 +111,7 @@ def create_structure_for_getters(in_name, class_name, attribute, is_cpp, is_list
     if is_list and not is_cpp:
         parent = strFunctions.list_of_name(in_name)
         name = in_name
-        ob_parent = 'ListOf_t' # strFunctions.list_of_name(in_name) + '_t'
+        ob_parent = 'ListOf_t'
     else:
         parent = class_name
         ob_parent = class_name
@@ -116,8 +130,10 @@ def create_structure_for_getters(in_name, class_name, attribute, is_cpp, is_list
                    'class_name': class_name})
     return struct
 
+
 # add/getNum functions
-def create_structure_for_children(in_name, class_name, attribute, is_cpp, is_list):
+def create_structure_for_children(in_name, class_name, attribute, is_cpp,
+                                  is_list):
     if not is_list:
         name = attribute['element']
         parent = class_name

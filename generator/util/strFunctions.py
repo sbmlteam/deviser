@@ -95,6 +95,13 @@ def get_indefinite(name):
         return 'a'
 
 
+def standard_element_name(name):
+    if name.endswith('*'):
+        length = len(name)
+        name = name[0:length-1]
+    return upper_first(name)
+
+
 def wrap_token(name, pkg=''):
     """ returns the name wrapped as a token
        e.g. \token{'id'} or \token{'comp:\-id'} """
