@@ -49,7 +49,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         # members from object
         self.name = class_object['name']
         self.package = class_object['package']
-        self.child_elements = []  # class_object['childElements']
+        self.child_elements = []
         self.has_list_of = class_object['hasListOf']
         self.attributes_on_list_of = ''  # class_object['loattrib']
         self.typecode = class_object['typecode']
@@ -94,24 +94,40 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 '#include <{0}/packages/{1}/extension/{2}Extension.h>'
                 .format(self.language, self.package.lower(), self.package))
 
+        # additional includes for child elements
         for i in range(0, len(self.child_elements)):
+            child = self.child_elements[i]['capAttName']
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
-                                    self.child_elements[i]))
+                                    child))
+
+        for i in range(0, len(self.child_lo_elements)):
+            child = self.child_lo_elements[i]['capAttName']
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                            .format(self.language, self.package.lower(),
+                                    child))
 
     ########################################################################
 
     # Functions for writing the class
-    def write_class(self, base_class, class_name, class_attributes):
+    def write_class(self, base_class, class_name, attributes):
+        if base_class == 'ListOf':
+            self.is_list_of = True
+            class_attributes = attributes
+            has_children = 0
+        else:
+            class_attributes = query.seperate_attributes(attributes)
+            has_children = \
+                (len(self.child_elements) + len(self.child_lo_elements)) > 0
         self.write_line('class {0}_EXTERN {1} : public {2}'
                         .format(self.library_name.upper(),
                                 class_name, base_class))
         self.write_line('{')
-        if len(class_attributes) > 0:
+        if len(attributes) > 0:
             self.write_line('protected:')
             self.up_indent()
             self.write_doxygen_start()
-            self.write_data_members(class_attributes)
+            self.write_data_members(attributes)
             self.write_doxygen_end()
             self.down_indent()
         else:
@@ -121,29 +137,34 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.up_indent()
         self.write_constructors(class_name)
         self.write_attribute_functions(class_name, class_attributes)
+        if base_class != 'ListOf':
+            self.write_child_element_functions(class_name)
         if base_class == 'ListOf':
-            self.write_listof_functions(class_name, class_attributes)
-        self.write_listofelement_functions(class_name, class_attributes)
-        self.write_general_functions(class_name, class_attributes,
-                                     base_class == 'ListOf')
+            self.write_listof_functions(class_name)
+        else:
+            self.write_child_lo_element_functions(class_name)
+        self.write_general_functions(class_name, attributes)
+        if has_children:
+            self.write_functions_to_retrieve(class_name)
         self.down_indent()
         self.write_line('protected:')
         self.skip_line()
         self.up_indent()
-        self.write_protected_functions(base_class == 'ListOf')
+        self.write_protected_functions()
         self.down_indent()
         self.write_line('};\n')
 
-    def write_c_header(self, is_cpp_api=False):
-        is_list_of = False
-        self.write_constructors(self.name, is_cpp_api)
-        self.write_attribute_functions(self.name, self.attributes,
-                                       is_cpp_api)
-        self.write_general_functions(self.name, self.attributes,
-                                     is_list_of, is_cpp_api)
-        self.write_get_element_functions(self.name, [], is_list_of, is_cpp_api)
-        self.write_remove_element_functions(self.name, [], is_list_of,
-                                            is_cpp_api)
+    def write_c_header(self):
+        self.is_list_of = False
+        self.is_cpp_api = False
+        class_attributes = query.seperate_attributes(self.attributes)
+        self.write_constructors(self.name)
+        self.write_attribute_functions(self.name, class_attributes)
+        self.write_child_element_functions(self.name)
+        self.write_child_lo_element_functions(self.name)
+        self.write_general_functions(self.name, self.attributes)
+        self.is_list_of = True
+        self.write_listof_functions(self.name)
 
     ########################################################################
 
@@ -166,17 +187,17 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing constructors
 
     # function to write the constructors
-    def write_constructors(self, class_name, is_cpp_api=True):
-        self.write_level_version_constructor(class_name, is_cpp_api)
-        self.write_namespace_constructor(class_name, is_cpp_api)
-        self.write_copy_constructor(class_name, is_cpp_api)
-        self.write_assignment_operator(class_name, is_cpp_api)
-        self.write_clone(class_name, is_cpp_api)
-        self.write_destructor(class_name, is_cpp_api)
+    def write_constructors(self, class_name):
+        self.write_level_version_constructor(class_name)
+        self.write_namespace_constructor(class_name)
+        self.write_copy_constructor(class_name)
+        self.write_assignment_operator(class_name)
+        self.write_clone(class_name)
+        self.write_destructor(class_name)
 
     # function to write level version constructor
-    def write_level_version_constructor(self, class_name, is_cpp_api):
-        if is_cpp_api is False:
+    def write_level_version_constructor(self, class_name):
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
         else:
             object_name = class_name
@@ -208,7 +229,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = class_name
             return_type = ''
         else:
@@ -227,13 +248,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             arguments = ['unsigned int level',
                          'unsigned int version']
 
-        self.write_function_header(is_cpp_api, function,
+        self.write_function_header(function,
                                    arguments, return_type)
         self.skip_line(2)
 
     # function to write namespace constructor
-    def write_namespace_constructor(self, class_name, is_cpp_api):
-        if is_cpp_api is False:
+    def write_namespace_constructor(self, class_name):
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
         else:
             object_name = class_name
@@ -266,7 +287,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = class_name
             return_type = ''
         else:
@@ -275,7 +296,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         arguments = []
         if self.package:
-            if is_cpp_api:
+            if self.is_cpp_api:
                 arguments.append('{0}PkgNamespaces *{1}ns'
                                  .format(self.package, self.package.lower()))
             else:
@@ -283,21 +304,21 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                  .format(self.package, self.package.lower()))
 
         else:
-            if is_cpp_api:
+            if self.is_cpp_api:
                 arguments.append('{0}Namespaces *{1}ns'
                                  .format(self.language.upper(), self.language))
             else:
                 arguments.append('{0}Namespaces_t *{1}ns'
                                  .format(self.language.upper(), self.language))
 
-        self.write_function_header(is_cpp_api, function,
+        self.write_function_header(function,
                                    arguments, return_type)
         self.skip_line(2)
 
     # function to write copy constructor
-    def write_copy_constructor(self, class_name, is_cpp_api):
+    def write_copy_constructor(self, class_name):
         # do not write for C API
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             return
         self.open_comment()
         self.write_comment_line('Copy constructor for {0}.'.format(class_name))
@@ -309,9 +330,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
 
     # function to write assignment operator
-    def write_assignment_operator(self, class_name, is_cpp_api):
+    def write_assignment_operator(self, class_name):
         # do not write for C API
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             return
         self.open_comment()
         self.write_comment_line('Assignment operator for {0}.'
@@ -325,9 +346,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
 
     # function to write clone
-    def write_clone(self, class_name, is_cpp_api):
+    def write_clone(self, class_name):
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
@@ -335,7 +356,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.open_comment()
         self.write_comment_line('Creates and returns a deep copy of '
                                 'this {0} object.'.format(object_name))
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             self.write_blank_comment_line()
             self.write_comment_line('@param {0} the {1} structure'
                                     .format(abbrev_object, object_name))
@@ -343,7 +364,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_comment_line('@return a (deep) copy of this {0} object.'
                                 .format(object_name))
         self.close_comment()
-        if is_cpp_api:
+        if self.is_cpp_api:
             self.write_line('virtual {0}* clone () const;'.format(class_name))
         else:
             self.write_extern_decl()
@@ -354,15 +375,15 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
 
     # function to write destructor
-    def write_destructor(self, class_name, is_cpp_api):
+    def write_destructor(self, class_name):
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
             object_name = class_name
         self.open_comment()
-        if is_cpp_api:
+        if self.is_cpp_api:
             self.write_comment_line('Destructor for {0}.'.format(class_name))
         else:
             self.write_comment_line('Frees this {0} object.'
@@ -371,7 +392,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_comment_line('@param {0} the {1} structure'
                                     .format(abbrev_object, object_name))
         self.close_comment()
-        if is_cpp_api:
+        if self.is_cpp_api:
             self.write_line('virtual ~{0}();'.format(class_name))
         else:
             self.write_extern_decl()
@@ -383,54 +404,38 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     ########################################################################
 
     # Functions for writing the attribute manipulation functions
+    # these are for attributes and elements that occur as a single child
 
     # function to write the get/set/isSet/unset functions for attributes
-    # and child elements
-    def write_attribute_functions(self, class_name, class_attributes,
-                                  is_cpp_api=True):
+    def write_attribute_functions(self, class_name, class_attributes):
         num_attributes = len(class_attributes)
         for i in range(0, num_attributes):
-            attribute = class_attributes[i]
-            if attribute['attType'] != 'element' \
-                    and attribute['attType'] != 'lo_element':
-                self.write_get_function(class_name, attribute, True,
-                                        is_cpp_api)
-            else:
-                self.write_get_function(class_name, attribute, False,
-                                        is_cpp_api)
+            self.write_get_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            attribute = class_attributes[i]
-            if attribute['attType'] != 'element' \
-                    and attribute['attType'] != 'lo_element':
-                self.write_is_set_function(class_name, attribute, True,
-                                           is_cpp_api)
-            else:
-                self.write_is_set_function(class_name, attribute, False,
-                                           is_cpp_api)
+            self.write_is_set_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            attribute = class_attributes[i]
-            if attribute['attType'] != 'element' \
-                    and attribute['attType'] != 'lo_element':
-                self.write_set_function(class_name, attribute, True,
-                                        is_cpp_api)
-            else:
-                self.write_set_function(class_name, attribute, False,
-                                        is_cpp_api)
+            self.write_set_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            attribute = class_attributes[i]
-            if attribute['attType'] != 'element' \
-                    and attribute['attType'] != 'lo_element':
-                self.write_unset_function(class_name, attribute, True,
-                                          is_cpp_api)
-            else:
-                self.write_unset_function(class_name, attribute, False,
-                                          is_cpp_api)
+            self.write_unset_function(class_name, class_attributes[i], True)
+
+    # function to write the get/set/isSet/unset functions for single
+    # child elements
+    def write_child_element_functions(self, class_name):
+        num_elements = len(self.child_elements)
+        for i in range(0, num_elements):
+            self.write_get_function(class_name, self.child_elements[i], False)
+        for i in range(0, num_elements):
+            self.write_is_set_function(class_name, self.child_elements[i],
+                                       False)
+        for i in range(0, num_elements):
+            self.write_set_function(class_name, self.child_elements[i], False)
+        for i in range(0, num_elements):
+            self.write_unset_function(class_name, self.child_elements[i], False)
 
     # function to write get function
-    def write_get_function(self, class_name, attribute, is_attribute,
-                           is_cpp_api):
+    def write_get_function(self, class_name, attribute, is_attribute):
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
@@ -442,14 +447,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         title_line = 'Returns the value of the \"{0}\" {1} of this {2}.' \
             .format(attribute['name'],
                     ('attribute' if is_attribute else 'element'),
-                    (class_name if is_cpp_api else object_name))
+                    (class_name if self.is_cpp_api else object_name))
 
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure whose {2} is sought.'
                           .format(abbrev_object, object_name,
                                   attribute['name']))
 
-        if is_cpp_api:
+        if self.is_cpp_api:
             return_lines.append('@return the value of the \"{0}\" {1} of '
                                 'this {2} as a {3}.'
                                 .format(attribute['name'],
@@ -479,7 +484,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'get{0}'.format(attribute['capAttName'])
             if attribute['attType'] == 'string' \
                     or attribute['attType'] == 'element':
@@ -494,22 +499,22 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 return_type = '{0}'.format(attribute['CType'])
 
         arguments = []
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(object_name, abbrev_object))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, True)
+        virtual = False
+        constant = True
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
         if attribute['isEnum'] is True:
-            self.write_get_string_for_enum_function(class_name, attribute,
-                                                    is_cpp_api)
+            self.write_get_string_for_enum_function(class_name, attribute)
 
     # function to write get function string version for enums
-    def write_get_string_for_enum_function(self, class_name, attribute,
-                                           is_cpp_api):
+    def write_get_string_for_enum_function(self, class_name, attribute):
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
@@ -520,14 +525,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         return_lines = []
         title_line = 'Returns the value of the \"{0}\" attribute of this {1}.' \
             .format(attribute['name'],
-                    (class_name if is_cpp_api else object_name))
+                    (class_name if self.is_cpp_api else object_name))
 
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure whose {2} is sought.'
                           .format(abbrev_object, object_name,
                                   attribute['name']))
 
-        if is_cpp_api:
+        if self.is_cpp_api:
             return_lines.append('@return the value of the \"{0}\" attribute '
                                 'of this {1} as a string.'
                                 .format(attribute['name'], class_name))
@@ -539,7 +544,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'get{0}'.format(attribute['capAttName'])
             return_type = 'const std::string&'
         else:
@@ -547,51 +552,52 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'const char *'
 
         arguments = []
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(object_name, abbrev_object))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, True)
+        virtual = False
+        constant = True
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
 
     # function to write is set function
-    def write_is_set_function(self, class_name, attribute, is_attribute,
-                              is_cpp_api):
+    def write_is_set_function(self, class_name, attribute, is_attribute):
+        if is_attribute:
+            ob_type = 'attribute'
+        else:
+            ob_type = 'element'
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
+            true = '@c 1'
+            false = '@c 0'
         else:
             object_name = class_name
+            true = '@c true'
+            false = '@c false'
 
         # create doc string header
         params = []
         return_lines = []
-        title_line = 'Predicate returning {0} depending on whether ' \
-                     'this {1}\'s \"{2}\" {3} has been set.' \
-            .format(('@c true or @c false' if is_cpp_api else '@c 1 or @c 0'),
-                    object_name, attribute['name'],
-                    ('attribute' if is_attribute else 'element'))
-        if not is_cpp_api:
+        title_line = 'Predicate returning {} or {} depending on whether ' \
+                     'this {}\'s \"{}\" {} has been set.' \
+            .format(true, false, object_name, attribute['name'], ob_type)
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
 
         return_lines.append('@return {0} if this {1}\'s \"{2}\" {3} has been '
                             'set, otherwise {4} is returned.'
-                            .format(('@c true'
-                                     if is_cpp_api else '@c 1'),
-                                    object_name,
-                                    attribute['name'],
-                                    ('attribute'
-                                     if is_attribute else 'element'),
-                                    ('@c false' if is_cpp_api
-                                     else '@c 0')))
+                            .format(true, object_name, attribute['name'],
+                                    ob_type, false))
         self.write_comment_header(title_line, params, return_lines,
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'isSet{0}'.format(attribute['capAttName'])
             return_type = 'bool'
         else:
@@ -600,19 +606,24 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'int'
 
         arguments = []
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(object_name, abbrev_object))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, True)
+        virtual = False
+        constant = True
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
 
     # function to write set function
-    def write_set_function(self, class_name, attribute, is_attribute,
-                           is_cpp_api):
+    def write_set_function(self, class_name, attribute, is_attribute):
+        if is_attribute:
+            ob_type = 'attribute'
+        else:
+            ob_type = 'element'
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
@@ -621,15 +632,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         params = []
         return_lines = []
         title_line = 'Sets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'],
-                    ('attribute' if is_attribute else 'element'), object_name)
+            .format(attribute['name'], ob_type, object_name)
 
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
         params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
                       .format(attribute['name'], attribute['attTypeCode'],
-                              ('attribute' if is_attribute else 'element')))
+                              ob_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
         return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
@@ -642,7 +652,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
@@ -650,7 +660,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'int'
 
         arguments = []
-        if is_cpp_api:
+        if self.is_cpp_api:
             arguments.append('{0} {1}'
                              .format(('const ' + attribute['attTypeCode']
                                       if (attribute['attType'] == 'string' or
@@ -670,35 +680,36 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                  .format(attribute['CType'],
                                          attribute['name']))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, False)
+        virtual = False
+        constant = False
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
 
         if attribute['isEnum'] is True:
-            self.write_set_for_enums_function(class_name, attribute,
-                                              is_cpp_api)
+            self.write_set_for_enums_function(class_name, attribute)
 
     # function to write set function with string version for enums
-    def write_set_for_enums_function(self, class_name, attribute, is_cpp_api):
+    def write_set_for_enums_function(self, class_name, attribute):
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
+            att_type = 'const char *'
         else:
             object_name = class_name
+            att_type = 'std::string&'
         # create doc string header
         params = []
         return_lines = []
         title_line = 'Sets the value of the \"{0}\" attribute of this {1}.' \
             .format(attribute['name'], object_name)
 
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
         params.append('@param {0} {1} of the \"{0}\" attribute to be set.'
-                      .format(attribute['name'],
-                              'std::string&'
-                              if is_cpp_api else 'const char *'))
+                      .format(attribute['name'], att_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
         return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
@@ -711,7 +722,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
@@ -719,7 +730,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'int'
 
         arguments = []
-        if is_cpp_api:
+        if self.is_cpp_api:
             arguments.append('{0} {1}'.format('const std::string&',
                                               attribute['name']))
         else:
@@ -727,15 +738,20 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                              .format(object_name, abbrev_object))
             arguments.append('const char * {}'.format(attribute['name']))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, False)
+        virtual = False
+        constant = False
+        self.write_function_header(function,
+                                   arguments, return_type, constant, virtual)
         self.skip_line(2)
 
     # function to write unset function
-    def write_unset_function(self, class_name, attribute, is_attribute,
-                             is_cpp_api):
+    def write_unset_function(self, class_name, attribute, is_attribute):
+        if is_attribute:
+            ob_type = 'attribute'
+        else:
+            ob_type = 'element'
         abbrev_object = ''
-        if is_cpp_api is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
         else:
@@ -744,10 +760,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         params = []
         return_lines = []
         title_line = 'Unsets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'],
-                    ('attribute' if is_attribute else 'element'), object_name)
+            .format(attribute['name'], ob_type, object_name)
 
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
 
@@ -761,7 +776,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                   object_name)
 
         # create the function declaration
-        if is_cpp_api:
+        if self.is_cpp_api:
             function = 'unset{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
@@ -770,13 +785,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'int'
 
         arguments = []
-        if not is_cpp_api:
+        if not self.is_cpp_api:
             arguments.append('{0} * {1}'
                              .format(object_name, abbrev_object))
 
-        self.write_function_header(is_cpp_api, function,
-                                   arguments, return_type, is_const=False,
-                                   is_virtual=False)
+        virtual = False
+        constant = False
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
 
     ########################################################################
@@ -784,23 +800,28 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing general functions
 
     # main general function writing function
-    def write_general_functions(self, class_name, attributes, is_list_of,
-                                is_cpp_api=True):
-        if is_cpp_api:
-            if query.hasSIdRef(attributes):
+    def write_general_functions(self, class_name, attributes):
+        has_children = query.has_children(attributes)
+
+        if self.is_cpp_api:
+            if query.has_sid_ref(attributes):
                 self.write_rename_sidrefs_function(class_name)
             self.write_get_element_name(class_name)
-            self.write_get_typecode(class_name, is_list_of)
-            if not is_list_of:
+            self.write_get_typecode(class_name)
+            if not self.is_list_of:
                 self.write_has_reqd_attributes(class_name, attributes)
+                if has_children:
+                    self.write_has_reqd_elements(class_name, attributes)
                 self.write_write_elements(class_name)
                 self.write_accept_function(class_name)
                 self.write_set_document(class_name)
+                if has_children:
+                    self.write_connect_to_child(class_name)
                 self.write_enable_pkg_internal(class_name)
         else:
-            if is_cpp_api is None:
-                is_cpp_api = False
-            self.write_has_reqd_attributes(class_name, attributes, is_cpp_api)
+            self.write_has_reqd_attributes(class_name, attributes)
+            if has_children:
+                self.write_has_reqd_elements(class_name, attributes)
 
     def write_rename_sidrefs_function(self, class_name):
         # create doc string header
@@ -811,11 +832,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'renameSIdRefs'
         return_type = 'void'
         arguments = ['const std::string& oldid', 'const std::string& newid']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
-                                   arguments, return_type, constant, virtual)
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
         self.skip_line(2)
 
     def write_get_element_name(self, class_name):
@@ -827,16 +847,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         # create the function declaration
         function = 'getElementName'
         return_type = 'const std::string&'
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function, [],
-                                   return_type, constant, virtual)
+        self.write_function_header(function, [], return_type, constant, virtual)
         self.skip_line(2)
 
-    def write_get_typecode(self, class_name, is_list_of):
+    def write_get_typecode(self, class_name):
         # create doc string header
-        if is_list_of:
+        if self.is_list_of:
             title_line = 'Returns the libSBML type code for the SBML objects ' \
                          'contained in this {} object.'.format(class_name)
         else:
@@ -844,7 +862,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 .format(class_name)
         params = ['@copydetails doc_what_are_typecodes']
         return_lines = []
-        if is_list_of:
+        if self.is_list_of:
             return_lines.append('@return the SBML typecode for the '
                                 'objects contained in this list:')
         else:
@@ -861,23 +879,19 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_comment_header(title_line, params, return_lines, class_name,
                                   additional)
         # create the function declaration
-        if is_list_of:
+        if self.is_list_of:
             function = 'getItemTypeCode'
         else:
             function = 'getTypeCode'
         return_type = 'int'
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function, [],
-                                   return_type, constant, virtual)
+        self.write_function_header(function, [], return_type, constant, virtual)
         self.skip_line(2)
 
-    def write_has_reqd_attributes(self, class_name, attributes, is_cpp=True):
-        if is_cpp is None:
-            is_cpp = True
+    def write_has_reqd_attributes(self, class_name, attributes):
         abbrev_object = ''
-        if is_cpp is False:
+        if self.is_cpp_api is False:
             object_name = class_name + '_t'
             abbrev_object = strFunctions.abbrev_name(class_name)
             true = '@c 1'
@@ -887,11 +901,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             true = '@c true'
             false = '@c false'
         # create doc string header
-        title_line = 'Predicate returning @c {} if all the required ' \
+        title_line = 'Predicate returning {} if all the required ' \
                      'attributes for this {} object have been set.'\
-            .format('true' if is_cpp else 'true (non-zero)', object_name)
+            .format(true, object_name)
         params = []
-        if not is_cpp:
+        if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, object_name))
 
@@ -902,11 +916,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                            ' are:'.format(object_name)]
         for i in range(0, len(attributes)):
             if attributes[i]['reqd']:
-                additional.append('@li \"{}\"'.format(attributes[i]['name']))
+                att_type = attributes[i]['type']
+                att_name = attributes[i]['name']
+                if att_type != 'element' and att_type != 'lo_element':
+                    additional.append('@li \"{}\"'.format(att_name))
         self.write_comment_header(title_line, params, return_lines, object_name,
                                   additional)
         # create the function declaration
-        if is_cpp:
+        if self.is_cpp_api:
             function = 'hasRequiredAttributes'
             return_type = 'bool'
         else:
@@ -914,12 +931,63 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = 'int'
 
         arguments = []
-        if not is_cpp:
+        if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(object_name, abbrev_object))
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function, arguments,
+        self.write_function_header(function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+
+    def write_has_reqd_elements(self, class_name, attributes):
+        abbrev_object = ''
+        if self.is_cpp_api is False:
+            object_name = class_name + '_t'
+            abbrev_object = strFunctions.abbrev_name(class_name)
+            true = '@c 1'
+            false = '@c 0'
+        else:
+            object_name = class_name
+            true = '@c true'
+            false = '@c false'
+        # create doc string header
+        title_line = 'Predicate returning {} if all the required ' \
+                     'elements for this {} object have been set.'\
+            .format(true, object_name)
+        params = []
+        if not self.is_cpp_api:
+            params.append('@param {0} the {1} structure.'
+                          .format(abbrev_object, object_name))
+
+        return_lines = ['@return {0} to indicate that all the required '
+                        'elements of this {1} have been set, otherwise '
+                        '{2} is returned.'.format(true, object_name, false)]
+        additional = [' ', '@note The required elements for the {} object'
+                           ' are:'.format(object_name)]
+        for i in range(0, len(attributes)):
+            if attributes[i]['reqd']:
+                if attributes[i]['type'] == 'element' \
+                        or attributes[i]['type'] == 'lo_element':
+                    additional.append('@li \"{}\"'
+                                      .format(attributes[i]['name']))
+        self.write_comment_header(title_line, params, return_lines, object_name,
+                                  additional)
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'hasRequiredElements'
+            return_type = 'bool'
+        else:
+            function = '{0}_hasRequiredElements'.format(class_name)
+            return_type = 'int'
+
+        arguments = []
+        if not self.is_cpp_api:
+            arguments.append('const {0} * {1}'
+                             .format(object_name, abbrev_object))
+        virtual = True
+        constant = True
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
@@ -933,12 +1001,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'writeElements'
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_accept_function(self, class_name):
@@ -951,12 +1018,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'accept'
         return_type = 'bool'
         arguments = ['SBMLVisitor& v']
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_set_document(self, class_name):
@@ -969,12 +1035,28 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'setSBMLDocument'
         return_type = 'void'
         arguments = ['SBMLDocument* d']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
+        self.write_doxygen_end()
+
+    def write_connect_to_child(self, class_name):
+        self.write_doxygen_start()
+        # create doc string header
+        title_line = 'Connects to child elements'
+        self.write_comment_header(title_line, [], [], class_name)
+
+        # create the function declaration
+        function = 'connectToChild'
+        return_type = 'void'
+        arguments = []
+        virtual = True
+        constant = False
+        self.write_function_header(function,
+                                   arguments, return_type, constant, virtual)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_enable_pkg_internal(self, class_name):
@@ -988,20 +1070,97 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         return_type = 'void'
         arguments = ['const std::string& pkgURI',
                      'const std::string& pkgPrefix', 'bool flag']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
+                                   arguments, return_type, constant, virtual)
+        self.skip_line()
+        self.write_doxygen_end()
+
+    ########################################################################
+
+    # Retrieve element functions
+    def write_functions_to_retrieve(self, class_name):
+        self.write_get_by_sid(class_name)
+        self.write_get_by_metaid(class_name)
+        self.write_get_all_elements(class_name)
+
+    def write_get_by_sid(self, class_name):
+        # create doc string header
+        title_line = 'Returns the first child element that has the given ' \
+                     '@p id in the model-wide SId namespace, or @c NULL if ' \
+                     'no such object is found.'
+        params = ['@param id a string representing the id attribute '
+                  'of the object to retrieve.']
+        return_lines = ['@return  a pointer to the SBase element with the '
+                        'given @p id.']
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+
+        # create the function declaration
+        function = 'getElementBySId'
+        return_type = 'SBase*'
+        arguments = ['const std::string& id']
+        virtual = True
+        constant = False
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
+        self.skip_line(2)
+
+    def write_get_by_metaid(self, class_name):
+        # create doc string header
+        title_line = 'Returns the first child element that has the given ' \
+                     '@p metaid, or @c NULL if ' \
+                     'no such object is found.'
+        params = ['@param metaid a string representing the metaid attribute '
+                  'of the object to retrieve.']
+        return_lines = ['@return  a pointer to the SBase element with the '
+                        'given @p metaid.']
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+
+        # create the function declaration
+        function = 'getElementByMetaId'
+        return_type = 'SBase*'
+        arguments = ['const std::string& metaid']
+        virtual = True
+        constant = False
+        self.write_function_header(function, arguments, return_type,
+                                   constant, virtual)
+        self.skip_line(2)
+
+    def write_get_all_elements(self, class_name):
+        # create doc string header
+        title_line = 'Returns a List of all child SBase objects, including ' \
+                     'those nested to an arbitrary depth.'
+        params = ['filter, an ElementFilter that may impose restrictions on '
+                  'the objects to be retrieved.']
+        return_lines = ['@return  a List* pointer of pointers to all '
+                        'SBase child objects with any restriction imposed.']
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  class_name, additional)
+
+        # create the function declaration
+        function = 'getAll Elements'
+        return_type = 'List*'
+        arguments = ['ElementFilter * filter = NULL']
+        virtual = True
+        constant = False
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
         self.skip_line(2)
-        self.write_doxygen_end()
 
     ########################################################################
 
     # Protected functions
 
-    def write_protected_functions(self, is_list_of=False):
-        if not is_list_of:
+    def write_protected_functions(self):
+        if not self.is_list_of:
+            if (len(self.child_elements) + len(self.child_lo_elements)) > 0:
+                self.write_create_object()
             self.write_add_expected_attributes()
             self.write_read_attributes()
             self.write_write_attributes()
@@ -1019,12 +1178,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'addExpectedAttributes'
         return_type = 'void'
         arguments = ['ExpectedAttributes& attributes']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_read_attributes(self):
@@ -1039,12 +1197,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         return_type = 'void'
         arguments = ['const XMLAttributes& attributes',
                      'const ExpectedAttributes& expectedAttributes']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_write_attributes(self):
@@ -1057,31 +1214,33 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'writeAttributes'
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_create_object(self):
         self.write_doxygen_start()
         # create doc string header
-        title_line = 'Creates a new {} in this {}'.format(self.name,
-                                                          self.list_of_name)
+        if self.is_list_of:
+            title_line = 'Creates a new {} in this {}'.format(self.name,
+                                                              self.list_of_name)
+        else:
+            title_line = 'Creates a new object from the next XMLToken ' \
+                         'on the XMLInputStream'
         self.write_comment_header(title_line, [], [], '')
 
         # create the function declaration
         function = 'createObject'
         return_type = 'SBase*'
         arguments = ['XMLInputStream& stream']
-        is_cpp = True
         virtual = True
         constant = False
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     def write_create_write_xmlns(self):
@@ -1095,128 +1254,210 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         function = 'writeXMLNS'
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
-        is_cpp = True
         virtual = True
         constant = True
-        self.write_function_header(is_cpp, function,
+        self.write_function_header(function,
                                    arguments, return_type, constant, virtual)
-        self.skip_line(2)
+        self.skip_line()
         self.write_doxygen_end()
 
     ########################################################################
 
     # Functions for writing functions for the main ListOf class
 
-    def write_listof_functions(self, class_name, class_attributes):
-        self.write_get_element_functions(class_name, [], is_list_of=True)
-        self.write_add_element_function(class_name, [])
-        self.write_get_num_elements_function(class_name, [])
-        self.write_create_element_function(class_name, [])
-        self.write_remove_element_functions(class_name, [], is_list_of=True)
-        num_attributes = len(self.attributes)
-        for i in range(0, num_attributes):
-            attribute = self.attributes[i]
-            if attribute['type'] == 'SIdRef':
-                self.write_get_by_sidref_functions(class_name, attribute)
+    def write_listof_functions(self, class_name):
+        self.write_get_element_functions(class_name, [])
+        self.write_remove_element_functions(class_name, [])
+        if self.is_cpp_api:
+            self.write_add_element_function(class_name, [])
+            self.write_get_num_elements_function(class_name, [])
+            self.write_create_element_function(class_name, [])
+            num_attributes = len(self.attributes)
+            for i in range(0, num_attributes):
+                attribute = self.attributes[i]
+                if attribute['type'] == 'SIdRef':
+                    self.write_get_by_sidref_functions(class_name,
+                                                       attribute, [])
 
     # main function to write the functions dealing with a child listOf element
-    def write_listofelement_functions(self, class_name, class_attributes):
-        num_attributes = len(class_attributes)
-        for i in range(0, num_attributes):
-            attribute = class_attributes[i]
-            if attribute['attType'] == 'lo_element':
-                self.write_get_listof_functions(class_name, attribute)
-                self.write_get_element_functions(class_name, attribute)
-                self.write_add_element_function(class_name, attribute)
-                # getNum
-                # create
-                # remove
+    def write_child_lo_element_functions(self, class_name):
+        num_elements = len(self.child_lo_elements)
+        for i in range(0, num_elements):
+            element = self.child_lo_elements[i]
+            # for hacking purposes
+            if self.is_cpp_api:
+                self.write_get_listof_functions(class_name, element)
+                self.write_get_element_functions(class_name, element)
+                self.write_child_get_by_sidref(class_name, element)
+                self.write_add_element_function(class_name, element)
+                self.write_get_num_elements_function(class_name, element)
+                self.write_create_element_function(class_name, element)
+                self.write_remove_element_functions(class_name, element)
+            else:
+                self.write_add_element_function(class_name, element)
+                self.write_create_element_function(class_name, element)
+                self.write_get_listof_functions(class_name, element)
+                self.write_get_element_functions(class_name, element)
+                self.write_get_num_elements_function(class_name, element)
+                self.write_remove_element_functions(class_name, element)
+
+    # function to work out and call get By reference
+    def write_child_get_by_sidref(self, class_name, attribute):
+        child_element = query.get_class(attribute['element'], attribute['root'])
+        if child_element is not None:
+            num_attributes = len(child_element['attribs'])
+            for i in range(0, num_attributes):
+                attrib = child_element['attribs'][i]
+                if attrib['type'] == 'SIdRef':
+                    self.write_get_by_sidref_functions(class_name, attrib,
+                                                       attribute['element'])
 
     # function to write the getListOf functions
     def write_get_listof_functions(self, class_name, attribute):
-        self.open_comment()
-        self.write_comment_line('Returns the \"{0}\" from this {1}.'
-                                .format(attribute['attTypeCode'], class_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@return the \"{0}\" from this {1}.'
-                                .format(attribute['attTypeCode'], class_name))
-        self.close_comment()
-        self.write_line('const {0}* get{0}() const;'
-                        .format(attribute['attTypeCode']))
+        abbrev_object = ''
+        if self.is_cpp_api:
+            parent = class_name
+            loname = attribute['attTypeCode']
+            ob_name = attribute['element']
+        else:
+            parent = class_name + '_t'
+            loname = attribute['attTypeCode']
+            ob_name = attribute['element'] + '_t'
+            abbrev_object = strFunctions.abbrev_name(class_name)
+
+        params = []
+        if self.is_cpp_api:
+            title_line = 'Returns the {} from this {}.'.format(loname, parent)
+            return_lines = ['@return the {} from this {}.'.format(loname,
+                                                                  parent)]
+        else:
+            title_line = 'Returns a ListOf_t* containing {} objects ' \
+                         'from this {}.'.format(ob_name, parent)
+            params.append('@param {} the {} structure whose \"{}\" is sought.'
+                          .format(abbrev_object, parent, loname))
+            return_lines = ['@return the \"{}\" from this {} as a '
+                            'ListOf_t *.'.format(loname, parent)]
+        additional = []
+        self.write_comment_header(title_line, params, return_lines,
+                                  parent, additional)
+
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'get{}'.format(loname)
+            arguments = []
+            return_type = 'const {}*'.format(loname)
+        else:
+            function = '{}_get{}'.format(class_name, loname)
+            arguments = ['const {}* {}'.format(parent, abbrev_object)]
+            return_type = 'ListOf_t*'
+        virtual = False
+        constant = True
+        self.write_function_header(function, arguments,
+                                   return_type, constant, virtual)
         self.skip_line(2)
-        self.open_comment()
-        self.write_comment_line('Returns the \"{0}\" from this {1}.'
-                                .format(attribute['attTypeCode'], class_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@return the \"{0}\" from this {1}.'
-                                .format(attribute['attTypeCode'], class_name))
-        self.close_comment()
-        self.write_line('{0}* get{0}();'.format(attribute['attTypeCode']))
-        self.skip_line(2)
+
+        if self.is_cpp_api:
+            # write non - const version
+            return_type = '{}*'.format(loname)
+            constant = False
+            self.write_comment_header(title_line, params, return_lines,
+                                      parent, additional)
+            self.write_function_header(function, arguments,
+                                       return_type, constant, virtual)
+            self.skip_line(2)
 
     # function to write the getElement/get functions from ListOf
-    def write_get_element_functions(self, class_name, attribute,
-                                    is_list_of=False, is_cpp_api=True):
-        if is_list_of is None:
-            is_list_of = False
-        if is_cpp_api is None:
-            is_cpp_api = True
-        # these may not used in all cases but declared to keep PEP8 happy
-        cap_name = ''
-        plural = ''
-        if not is_list_of:
-            if is_cpp_api:
-                name = attribute['name']
-                indef_name = strFunctions.get_indefinite(name)
-                cap_name = attribute['capAttName']
-                plural = strFunctions.upper_first(attribute['pluralName'])
-                parent = class_name
-            else:
-                name = self.name + '_t'
-                indef_name = strFunctions.get_indefinite(name)
-                parent = strFunctions.list_of_name(self.name)
-        else:
-            name = self.name
-            indef_name = strFunctions.get_indefinite(name)
-            parent = class_name
+    def write_get_element_functions(self, class_name, attribute):
+        struct = query.create_structure_for_getters(self.name, class_name,
+                                                    attribute, self.is_cpp_api,
+                                                    self.is_list_of)
+        self.write_get_by_index_functions(struct)
+        self.write_get_by_id_functions(struct)
 
-        if is_cpp_api:
+    def write_get_by_index_functions(self, struct):
+        cap_name = struct['cap_name']
+        plural = struct['plural']
+        name = struct['name']
+        ob_name = struct['ob_name']
+        parent = struct['parent']
+        ob_parent = struct['ob_parent']
+        indef_name = struct['indef']
+        class_name = struct['class_name']
+        abbrev_parent = strFunctions.abbrev_name(parent)
+
+        if self.is_cpp_api:
             # non const get by index
             # create doc string header
             title_line = 'Get {} {} from the {}.'.format(indef_name, name,
                                                          parent)
             params = ['@param n an unsigned int representing '
-                      'the index of the {} to retrieve.'.format(name)]
+                      'the index of the {} to retrieve.'.format(ob_name)]
             return_lines = ['@return the nth {} in this {}.'.format(name,
                                                                     parent)]
-            additional = ['@see size()'] if is_list_of \
+            additional = ['@see size()'] if self.is_list_of \
                 else ['@see getNum{}'.format(plural)]
             self.write_comment_header(title_line, params, return_lines,
                                       class_name,
                                       additional)
             # create the function declaration
-            function = 'get' if is_list_of else 'get{}'.format(cap_name)
+            function = 'get' if self.is_list_of else 'get{}'.format(cap_name)
             arguments = ['unsigned int n']
             return_type = '{}*'.format(name)
             virtual = False
             constant = False
-            self.write_function_header(is_cpp_api, function, arguments,
+            self.write_function_header(function, arguments,
                                        return_type, constant, virtual)
             self.skip_line(2)
 
-            # const get by index
-            # create doc string header
-            self.write_comment_header(title_line, params, return_lines,
-                                      class_name,
-                                      additional)
-            # create the function declaration
-            return_type = 'const {}*'.format(name)
-            virtual = False
-            constant = True
-            self.write_function_header(is_cpp_api, function, arguments,
-                                       return_type, constant, virtual)
-            self.skip_line(2)
+        # const get by index
+        title_line = 'Get {} {} from the {}.'\
+            .format(indef_name, ob_name, ob_parent)
+        params = []
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to search.'
+                          .format(abbrev_parent, ob_parent))
+        params.append('@param n, an unsigned int representing the '
+                      'index of the {} to retrieve.'.format(ob_name))
 
+        return_lines = ['@return the nth {} in this {}.'.format(ob_name,
+                                                                ob_parent)]
+        additional = []
+        object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
+        if self.is_cpp_api:
+            additional = ['@see size()'] if self.is_list_of \
+                else ['@see getNum{}'.format(plural)]
+            object_name = class_name
+
+        self.write_comment_header(title_line, params, return_lines,
+                                  object_name, additional)
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'get' if self.is_list_of else 'get{}'.format(cap_name)
+            arguments = ['unsigned int n']
+        else:
+            function = '{}_get{}'.format(parent, name)
+            arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
+                         'unsigned int']
+        return_type = 'const {}*'.format(ob_name)
+        virtual = False
+        constant = True
+        self.write_function_header(function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
+
+    def write_get_by_id_functions(self, struct):
+        # these may not used in all cases but declared to keep PEP8 happy
+        cap_name = struct['cap_name']
+        plural = struct['plural']
+        name = struct['name']
+        ob_name = struct['ob_name']
+        parent = struct['parent']
+        ob_parent = struct['ob_parent']
+        indef_name = struct['indef']
+        class_name = struct['class_name']
+        abbrev_parent = strFunctions.abbrev_name(parent)
+        additional = []
+        if self.is_cpp_api:
             # non const get by id
             # create doc string header
             title_line = 'Get {} {} from the {} based on its identifier.'\
@@ -1226,63 +1467,71 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_lines = ['@return the {0} in this {1} based on the '
                             'identifier or NULL if no such {0} exists.'
                             .format(name, parent)]
-            additional = ['@see size()'] if is_list_of \
+            additional = ['@see size()'] if self.is_list_of \
                 else ['@see getNum{}'.format(plural)]
             self.write_comment_header(title_line, params, return_lines,
                                       class_name,
                                       additional)
             # create the function declaration
-            function = 'get' if is_list_of else 'get{}'.format(cap_name)
+            function = 'get' if self.is_list_of else 'get{}'.format(name)
             arguments = ['const std::string& sid']
             return_type = '{}*'.format(name)
             virtual = False
             constant = False
-            self.write_function_header(is_cpp_api, function, arguments,
+            self.write_function_header(function, arguments,
                                        return_type, constant, virtual)
             self.skip_line(2)
 
         # const get by id
         # create doc string header
+        object_name = class_name
         title_line = 'Get {} {} from the {} based on its identifier.'\
-            .format(indef_name, name, parent)
+            .format(indef_name, ob_name, ob_parent)
         params = []
-        if not is_cpp_api:
-            params.append('@param lo the ListOf_t structure to search.')
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to search.'
+                          .format(abbrev_parent, ob_parent))
+            object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
         params.append('@param sid a string representing the identifier '
-                      'of the {} to retrieve.'.format(name))
+                      'of the {} to retrieve.'.format(ob_name))
         return_lines = ['@return the {0} in this {1} based on the '
                         'identifier or NULL if no such {0} exists.'
-                        .format(name, parent)]
+                        .format(ob_name, ob_parent)]
         additional = []
-        if is_cpp_api:
-            self.write_comment_header(title_line, params, return_lines,
-                                      class_name, additional)
-        else:
-            self.write_comment_header(title_line, params, return_lines,
-                                      name, additional)
+        self.write_comment_header(title_line, params, return_lines, object_name, additional)
 
         # create the function declaration
-        if is_cpp_api:
-            function = 'get' if is_list_of else 'get{}'.format(cap_name)
+        if self.is_cpp_api:
+            function = 'get' if self.is_list_of else 'get{}'.format(name)
             arguments = ['const std::string& sid']
             return_type = 'const {}*'.format(name)
         else:
-            function = '{}_getById'.format(parent)
-            arguments = ['ListOf_t* lo', 'const char *sid'.format(name)]
-            return_type = '{}*'.format(name)
+            function = '{}_getById'.format(parent) if self.is_list_of \
+                else '{}_get{}ById'.format(parent, name)
+            arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
+                         'const char *sid']
+            return_type = '{}*'.format(ob_name)
         virtual = False
         constant = True
-        self.write_function_header(is_cpp_api, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
     # function to get an element by SIdRef
-    def write_get_by_sidref_functions(self, class_name, attribute):
-        # const get by sidref
-        # create doc string header
-        ob_name = self.name
+    def write_get_by_sidref_functions(self, class_name, attribute,
+                                      child_lo):
+        if child_lo is None:
+            child_lo = []
+        if len(child_lo) > 0:
+            ob_name = child_lo
+            child = child_lo
+        else:
+            ob_name = self.name
+            child = ''
         indef = strFunctions.get_indefinite(ob_name)
         sidref = attribute['element']
+        # const get by sidref
+        # create doc string header
         title_line = 'Get {} {} from the {} based on the {} to which ' \
                      'it refers.'.format(indef, ob_name, class_name, sidref)
         params = ['@param sid a string representing the {} attribute of the {} '
@@ -1296,187 +1545,242 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_comment_header(title_line, params, return_lines,
                                   class_name, additional)
         # create the function declaration
-        function = 'getBy{}'.format(sidref)
+        function = 'get{}By{}'.format(child, sidref)
         arguments = ['const std::string& sid']
         return_type = 'const {}*'.format(ob_name)
         virtual = False
         constant = True
-        self.write_function_header(True, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
-        #non-const version
+        # non-const version
         constant = False
         self.write_comment_header(title_line, params, return_lines,
                                   class_name, additional)
-        self.write_function_header(True, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
     # function to write the getElement/get functions from ListOf
-    def write_remove_element_functions(self, class_name, attribute,
-                                       is_list_of=False, is_cpp_api=True):
-        if is_list_of is None:
-            is_list_of = False
-        if is_cpp_api is None:
-            is_cpp_api = True
-        # these may not used in all cases but declared to keep PEP8 happy
-        cap_name = ''
-        plural = ''
-        if not is_list_of:
-            if is_cpp_api:
-                name = attribute['name']
-                cap_name = attribute['capAttName']
-                plural = strFunctions.upper_first(attribute['pluralName'])
-                parent = class_name
-            else:
-                name = self.name + '_t'
-                parent = strFunctions.list_of_name(self.name)
-        else:
-            name = self.name
-            parent = class_name
+    def write_remove_element_functions(self, class_name, attribute):
+        struct = query.create_structure_for_getters(self.name, class_name,
+                                                    attribute, self.is_cpp_api,
+                                                    self.is_list_of)
+        cap_name = struct['cap_name']
+        plural = struct['plural']
+        name = struct['name']
+        ob_name = struct['ob_name']
+        parent = struct['parent']
+        ob_parent = struct['ob_parent']
+        indef_name = struct['indef']
+        class_name = struct['class_name']
+        abbrev_parent = strFunctions.abbrev_name(parent)
 
-        if is_cpp_api:
-            # by index
-            # create doc string header
-            title_line = 'Removes the nth {} from this {} and returns a ' \
-                         'pointer to it.'.format(name, parent)
-            params = ['@param n an unsigned int representing '
-                      'the index of the {} to remove.'.format(name)]
-            return_lines = ['@return a pointer to the nth {} in this {}.'
-                            .format(name, parent)]
-            additional = ['@see size()'] if is_list_of \
+
+        # by index
+        # create doc string header
+        title_line = 'Removes the nth {} from this {} and returns a ' \
+                     'pointer to it.'.format(ob_name, ob_parent)
+        params = []
+        additional = []
+        object_name = ob_parent if ob_parent != 'ListOf_t' else class_name + '_t'
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to search.'.format(abbrev_parent, ob_parent))
+
+        params.append('@param n an unsigned int representing the index of the {} to remove.'.format(ob_name))
+        return_lines = ['@return a pointer to the nth {} in this {}.'
+                        .format(ob_name, ob_parent)]
+        if self.is_cpp_api:
+            additional = ['@see size()'] if self.is_list_of \
                 else ['@see getNum{}'.format(plural)]
             additional.append(' ')
             additional.append('@note the caller owns the returned object and '
                               'is responsible for deleting it.')
-            self.write_comment_header(title_line, params, return_lines,
-                                      class_name,
-                                      additional)
-            # create the function declaration
-            function = 'remove' if is_list_of else 'get{}'.format(cap_name)
+            object_name = class_name
+        self.write_comment_header(title_line, params, return_lines,
+                                  object_name, additional)
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'remove' if self.is_list_of \
+                else 'remove{}'.format(cap_name)
             arguments = ['unsigned int n']
             return_type = '{}*'.format(name)
-            virtual = False
-            constant = False
-            self.write_function_header(is_cpp_api, function, arguments,
-                                       return_type, constant, virtual)
-            self.skip_line(2)
+        else:
+            function = '{}_remove{}'.format(parent, name)
+            arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
+                         'unsigned int']
+            return_type = '{}*'.format(ob_name)
+        virtual = False
+        constant = False
+        self.write_function_header(function, arguments,
+                                   return_type, constant, virtual)
+        self.skip_line(2)
 
         # by id
         # create doc string header
         title_line = 'Removes the {} from this {} based on its identifier ' \
                      'and returns a pointer to it.'\
-            .format(name, parent)
+            .format(ob_name, ob_parent)
         params = []
-        if not is_cpp_api:
-            params.append('@param lo the ListOf_t structure to search.')
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to search.'.format(abbrev_parent, ob_parent))
         params.append('@param sid a string representing the identifier '
-                      'of the {} to remove.'.format(name))
+                      'of the {} to remove.'.format(ob_name))
         return_lines = ['@return the {0} in this {1} based on the '
                         'identifier or NULL if no such {0} exists.'
-                        .format(name, parent)]
+                        .format(ob_name, ob_parent)]
         additional = []
-        if is_cpp_api:
-            self.write_comment_header(title_line, params, return_lines,
-                                      class_name, additional)
-        else:
-            self.write_comment_header(title_line, params, return_lines,
-                                      name, additional)
+        self.write_comment_header(title_line, params, return_lines, object_name, additional)
         # create the function declaration
-        if is_cpp_api:
-            function = 'remove' if is_list_of else 'remove{}'.format(cap_name)
+        if self.is_cpp_api:
+            function = 'remove' if self.is_list_of \
+                else 'remove{}'.format(cap_name)
             arguments = ['const std::string& sid']
-            return_type = 'const {}*'.format(name)
-        else:
-            function = '{}_removeById'.format(parent)
-            arguments = ['ListOf_t* lo', 'const char *sid'.format(name)]
             return_type = '{}*'.format(name)
+        else:
+            function = '{}_remove{}ById'.format(parent, name)
+            arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
+                         'const char* sid']
+            return_type = '{}*'.format(ob_name)
         virtual = False
         constant = False
-        self.write_function_header(is_cpp_api, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
     # function to write the addElement function
     def write_add_element_function(self, class_name, attribute):
-        if len(attribute) == 0:
-            ob_name = self.name
-        else:
-            ob_name = attribute['capAttName']
+        struct = query.create_structure_for_children(self.name, class_name,
+                                                     attribute, self.is_cpp_api,
+                                                     self.is_list_of)
+        name = struct['name']
+        ob_name = struct['ob_name']
+        parent = struct['parent']
+        ob_parent = struct['ob_parent']
         abbrev = strFunctions.abbrev_name(ob_name)
+        abbrev_parent = strFunctions.abbrev_name(parent)
         # create doc string header
         title_line = 'Adds a copy of the given {} to this {}.'\
-            .format(ob_name, class_name)
-
-        params = ['@param {}; the {} object to add.'.format(abbrev, ob_name)]
+            .format(ob_name, ob_parent)
+        params = []
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to which the '
+                          '{} should be added.'.format(abbrev_parent,
+                                                       ob_parent, ob_name))
+        params.append('@param {}; the {} object to add.'.format(abbrev, ob_name))
         return_lines = ['@copydetails doc_returns_success_code',
                         '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
                         'OperationReturnValues_t}',
                         '@li @sbmlconstant{LIBSBML_OPERATION_FAILED,'
                         ' OperationReturnValues_t}']
-        additional = ['@copydetails doc_note_object_is_copied', ' ',
-                      '@see create{}()'.format(ob_name)]
+        additional = []
+        if self.is_cpp_api:
+            additional.append('@copydetails doc_note_object_is_copied')
+            additional.append(' ')
+            additional.append('@see create{}()'.format(ob_name))
         self.write_comment_header(title_line, params, return_lines,
-                                  class_name, additional)
+                                  ob_parent, additional)
         # create the function declaration
-        function = 'add{}'.format(ob_name)
-        arguments = ['const {}* {}'.format(ob_name, abbrev)]
+        if self.is_cpp_api:
+            function = 'add{}'.format(name)
+            arguments = ['const {}* {}'.format(ob_name, abbrev)]
+        else:
+            function = '{}_add{}'.format(parent, name)
+            arguments = ['{}* {}'.format(ob_parent, abbrev_parent),
+                         '{}* {}'.format(ob_name, abbrev)]
         return_type = 'int'
         virtual = False
         constant = False
-        self.write_function_header(True, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
     # function to write the getNumElements function
     def write_get_num_elements_function(self, class_name, attribute):
-        if len(attribute) == 0:
-            ob_name = self.name
-        else:
-            ob_name = attribute['capAttName']
+        struct = query.create_structure_for_children(self.name, class_name,
+                                                     attribute, self.is_cpp_api,
+                                                     self.is_list_of)
+        name = struct['name']
+        ob_name = struct['ob_name']
+        parent = struct['parent']
+        ob_parent = struct['ob_parent']
+        abbrev = strFunctions.abbrev_name(ob_name)
+        abbrev_parent = strFunctions.abbrev_name(parent)
         # create doc string header
         title_line = 'Get the number of {} objects in this {}.'\
-            .format(ob_name, class_name)
+            .format(ob_name, ob_parent)
 
         params = []
-        return_lines = ['@return the number of {} objects in this {}.'
-                            . format(ob_name, class_name)]
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to which the '
+                          '{} should be added.'.format(abbrev_parent,
+                                                       ob_parent, ob_name))
+        return_lines = ['@return the number of {} objects in '
+                        'this {}.'.format(ob_name, ob_parent)]
         additional = []
         self.write_comment_header(title_line, params, return_lines,
                                   class_name, additional)
         # create the function declaration
-        function = 'getNum{}'.format(strFunctions.plural(ob_name))
-        arguments = []
+        arguments= []
+        if self.is_cpp_api:
+            function = 'getNum{}'.format(strFunctions.plural(ob_name))
+        else:
+            function = '{}_getNum{}'.format(parent, strFunctions.plural(name))
+            arguments.append('const {}* {}'.format(ob_parent, abbrev_parent))
         return_type = 'unsigned int'
         virtual = False
         constant = True
-        self.write_function_header(True, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 
     # function to write the createElement function
     def write_create_element_function(self, class_name, attribute):
-        if len(attribute) == 0:
-            ob_name = self.name
+        # attribute will be empty when working from a ListOf parent
+        if not self.is_list_of:
+            name = attribute['element']
+            parent = class_name
+            if self.is_cpp_api:
+                ob_name = attribute['element']
+                ob_parent = class_name
+            else:
+                ob_name = attribute['element'] + '_t'
+                ob_parent = class_name + '_t'
         else:
-            ob_name = attribute['capAttName']
+            ob_name = self.name
+            name = self.name
+            parent = class_name
+            ob_parent = class_name
         abbrev = strFunctions.abbrev_name(ob_name)
+        abbrev_parent = strFunctions.abbrev_name(parent)
         # create doc string header
         title_line = 'Creates a new {0} object, adds it to this {1} object ' \
                      'and returns the {0} object created.'.format(ob_name,
-                                                                  class_name)
+                                                                  ob_parent)
         params = []
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure to which the '
+                          '{} should be added.'.format(abbrev_parent,
+                                                       ob_parent, ob_name))
         return_lines = ['@return a new {} object instance.'. format(ob_name)]
-        additional = ['@see add{0}(const {0}* {1})'.format(ob_name, abbrev)]
+        additional = []
+        if self.is_cpp_api:
+            additional.append('@see add{0}(const {0}* {1})'.format(ob_name,
+                                                                   abbrev))
         self.write_comment_header(title_line, params, return_lines,
-                                  class_name, additional)
+                                  ob_parent, additional)
         # create the function declaration
-        function = 'create{}'.format(ob_name)
+        if self.is_cpp_api:
+            function = 'create{}'.format(name)
+        else:
+            function = '{}_create{}'.format(parent, name)
         arguments = []
+        if not self.is_cpp_api:
+            arguments.append('{}* {}'.format(ob_parent, abbrev_parent))
         return_type = '{}*'.format(ob_name)
         virtual = False
         constant = False
-        self.write_function_header(True, function, arguments,
+        self.write_function_header(function, arguments,
                                    return_type, constant, virtual)
         self.skip_line(2)
 

@@ -17,9 +17,9 @@
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false" />
             <attribute name="name" required="false" type="string" abstract="false" />
-            <attribute name="functionTerm" required="true" type="lo_element" element="FunctionTerm" abstract="false" />
             <attribute name="input" required="false" type="lo_element" element="Input" abstract="false" />
             <attribute name="output" required="false" type="lo_element" element="Output" abstract="false" />
+            <attribute name="functionTerm" required="true" type="lo_element" element="FunctionTerm" abstract="false" />
           </attributes>
         </element>
         <element name="Input" typeCode="SBML_QUAL_INPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false">

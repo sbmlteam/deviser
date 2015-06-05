@@ -53,6 +53,13 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # expand the information for the attributes
         self.attributes = self.expand_attributes(attributes)
+        self.child_elements = self.get_children()
+        self.child_lo_elements = self.get_lo_children()
+
+        # default values
+        self.is_cpp_api = True
+        self.is_list_of = False
+
 
     ########################################################################
 
@@ -119,10 +126,11 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['isNumber'] = False
             elif att_type == 'lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
+                plural = strFunctions.plural(attributes[i]['element'])
                 attributes[i]['attType'] = 'lo_element'
                 attributes[i]['attTypeCode'] = name
                 attributes[i]['CType'] = name + '_t'
-                attributes[i]['memberName'] = 'm' + name
+                attributes[i]['memberName'] = 'm' + plural
                 attributes[i]['isNumber'] = False
             else:
                 attributes[i]['attType'] = 'FIX ME'
@@ -131,6 +139,21 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['isNumber'] = False
         return attributes
 
+    def get_children(self):
+        elements = []
+        for i in range(0, len(self.attributes)):
+            att_type = self.attributes[i]['attType']
+            if att_type == 'element':
+                elements.append(self.attributes[i])
+        return elements
+
+    def get_lo_children(self):
+        elements = []
+        for i in range(0, len(self.attributes)):
+            att_type = self.attributes[i]['attType']
+            if att_type == 'lo_element':
+                elements.append(self.attributes[i])
+        return elements
     ########################################################################
 
     #   FUNCTIONS FOR WRITING STANDARD OPENING CLOSING ELEMENTS
@@ -185,9 +208,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
 # FUNCTIONS FOR WRITING STANDARD FUNCTION DECLARATIONS
 
-    def write_function_header(self, is_cpp,
+    def write_function_header(self,
                               function_name, arguments, return_type,
                               is_const=False, is_virtual=False):
+        is_cpp = self.is_cpp_api
         num_arguments = len(arguments)
         if not is_cpp:
             self.write_extern_decl()

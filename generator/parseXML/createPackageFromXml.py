@@ -191,7 +191,12 @@ def parse_deviser_xml(filename):
             required = to_bool(get_value(attr, 'required'))
             attr_type = standardize_types(get_value(attr, 'type'))
             attr_abstract = to_bool(get_value(attr, 'abstract'))
-            attr_element = get_value(attr, 'element')
+            temp = get_value(attr, 'element')
+            # expect this to be uppercase
+            if temp is not None:
+                attr_element = strFunctions.upper_first(temp)
+            else:
+                attr_element = ''
 
             attribute_dict = dict({'type': attr_type,
                                    'reqd': required,
