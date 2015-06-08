@@ -47,6 +47,15 @@ def has_sid_ref(attributes):
     return False
 
 
+# return a set of attributes that are of type SIdRef
+def get_sid_refs(attributes):
+    sid_refs = []
+    for i in range(0, len(attributes)):
+        if strFunctions.compare_no_case(attributes[i]['type'], 'SIdRef'):
+            sid_refs.append(attributes[i])
+    return sid_refs
+
+
 # return True is any of the attributes refer to elements
 def has_children(attributes):
     if any(attribute['type'] == 'element' for attribute in attributes):

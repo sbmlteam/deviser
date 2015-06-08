@@ -58,8 +58,6 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # default values
         self.is_cpp_api = True
-        self.is_list_of = False
-
 
     ########################################################################
 
@@ -224,7 +222,10 @@ class BaseCppFile(BaseFile.BaseFile):
                 else:
                     line = return_type + ' ' + function_name + '('
             else:
-                line = function_name + '('
+                if is_virtual:
+                    line = 'virtual ' + function_name + '('
+                else:
+                    line = function_name + '('
 
         if num_arguments == 0:
             if is_cpp and is_const:
@@ -280,7 +281,7 @@ class BaseCppFile(BaseFile.BaseFile):
         for i in range(0, len(params)):
             self.write_blank_comment_line()
             self.write_comment_line(params[i])
-        if len(params) > 0 or len(return_line) > 0:
+        if len(return_line) > 0:
             self.write_blank_comment_line()
         for i in range(0, len(return_line)):
             self.write_comment_line((return_line[i]))
@@ -295,3 +296,22 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_blank_comment_line()
             self.write_comment_line('@memberof {}'.format(object_name))
         self.close_comment()
+
+#########################################################################
+
+# Function for writing a function definition with comment
+    def write_function_declaration(self, code, exclude = False):
+        if code is not None:
+            if exclude:
+                self.write_doxygen_start()
+            self.write_comment_header(code['title_line'], code['params'],
+                                      code['return_lines'], code['object_name'],
+                                      code['additional'])
+            self.write_function_header(code['function'], code['arguments'],
+                                       code['return_type'], code['constant'],
+                                       code['virtual'])
+            if exclude:
+                self.write_doxygen_end()
+                self.skip_line()
+            else:
+                self.skip_line(2)

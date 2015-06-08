@@ -199,3 +199,12 @@ def texify(name):
     name = replace_underscore(name)
     name = remove_spaces(name)
     return name
+
+
+def compare_no_case(name, reference):
+    caseless_name = name.lower()
+    caseless_ref = reference.lower()
+    if caseless_name == caseless_ref:
+        return True
+    else:
+        return False

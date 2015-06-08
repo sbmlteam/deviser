@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    CppHeaderFile.py
-# @brief   class for generating cpp header files
+# @brief   class for generating header file for the given class
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -38,6 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 from base_files import BaseCppFile
+from cpp_functions import *
 from util import strFunctions
 from util import query
 
@@ -46,34 +47,38 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Cpp Header files"""
 
     def __init__(self, class_object):
+
+        self.brief_description = \
+            'Definition of {}.'.format(class_object['name'])
+        BaseCppFile.BaseCppFile.__init__(self, class_object['name'], 'h',
+                                         class_object['attribs'])
+
         # members from object
+        self.class_object = class_object
+        self.is_list_of = class_object['is_list_of']
         self.name = class_object['name']
+        self.class_name = class_object['name']
         self.package = class_object['package']
-        self.child_elements = []
-        self.has_list_of = class_object['hasListOf']
-        self.attributes_on_list_of = ''  # class_object['loattrib']
         self.typecode = class_object['typecode']
+        if class_object['is_list_of']:
+            self.list_of_name = class_object['list_of_name']
+            self.list_of_child = class_object['lo_child']
+        else:
+            self.list_of_name = ''
+            self.list_of_child = ''
+        self.baseClass = class_object['baseClass']
+        self.sid_refs = class_object['sid_refs']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
 
-        # derived members
-        self.list_of_name = strFunctions.list_of_name(self.name)
-
-        # derived members for description
-        if class_object['hasListOf'] is True:
-            self.brief_description = 'Definitions of {0} and {1}.' \
-                .format(self.name, self.list_of_name)
-        else:
-            self.brief_description = 'Definition of {0}.'.format(self.name)
-
         self.hasMath = class_object['hasMath']
-        self.hasListOf = class_object['hasListOf']
+        self.class_attributes = query.seperate_attributes(self.attributes)
 
-        BaseCppFile.BaseCppFile.__init__(self, self.name, 'h',
-                                         class_object['attribs'])
-
+        self.class_object['class_attributes'] = self.class_attributes
+        self.class_object['child_lo_elements'] = self.child_lo_elements
+        self.class_object['child_elements'] = self.child_elements
     ########################################################################
 
     # Functions for writing specific includes
@@ -90,8 +95,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line(2)
         self.write_line('#include <{0}/{1}.h>'.
                         format(self.language, self.baseClass))
-        if self.has_list_of:
-            self.write_line('#include <{0}/ListOf.h>'.format(self.language))
         if self.package:
             self.write_line(
                 '#include <{0}/packages/{1}/extension/{2}Extension.h>'
@@ -111,18 +114,17 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                             .format(self.language, self.package.lower(),
                                     child))
 
+        if self.is_list_of:
+            child = self.list_of_child
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                            .format(self.language, self.package.lower(),
+                                    child))
     ########################################################################
 
     # Functions for writing the class
     def write_class(self, base_class, class_name, attributes):
-        if base_class == 'ListOf':
-            self.is_list_of = True
-            class_attributes = attributes
-            has_children = 0
-        else:
-            class_attributes = query.seperate_attributes(attributes)
-            has_children = \
-                (len(self.child_elements) + len(self.child_lo_elements)) > 0
+        class_attributes = query.seperate_attributes(attributes)
+        has_children = query.has_children(attributes)
         self.write_line('class {0}_EXTERN {1} : public {2}'
                         .format(self.library_name.upper(),
                                 class_name, base_class))
@@ -139,15 +141,15 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line('public:')
         self.skip_line()
         self.up_indent()
-        self.write_constructors(class_name)
-        self.write_attribute_functions(class_name, class_attributes)
+        self.write_constructors()
+        self.write_attribute_functions()
         if base_class != 'ListOf':
             self.write_child_element_functions(class_name)
         if base_class == 'ListOf':
-            self.write_listof_functions(class_name)
+            self.write_listof_functions()
         else:
             self.write_child_lo_element_functions(class_name)
-        self.write_general_functions(class_name, attributes)
+        self.write_general_functions()
         if has_children:
             self.write_functions_to_retrieve(class_name)
         self.down_indent()
@@ -159,17 +161,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line('};\n')
 
     def write_c_header(self):
-        self.is_list_of = False
         self.is_cpp_api = False
-        class_attributes = query.seperate_attributes(self.attributes)
-        self.write_constructors(self.name)
-        self.write_attribute_functions(self.name, class_attributes)
-        self.write_child_element_functions(self.name)
-        self.write_child_lo_element_functions(self.name)
-        self.write_general_functions(self.name, self.attributes)
-        if self.hasListOf:
-            self.is_list_of = True
-            self.write_listof_functions(self.name)
+        if not self.is_list_of:
+            class_attributes = query.seperate_attributes(self.attributes)
+            self.write_constructors()
+            self.write_attribute_functions()
+            self.write_child_element_functions(self.name)
+            self.write_child_lo_element_functions(self.name)
+            self.write_general_functions()
+        else:
+            self.write_listof_functions()
 
     ########################################################################
 
@@ -189,222 +190,29 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
-    # Functions for writing constructors
-
     # function to write the constructors
-    def write_constructors(self, class_name):
-        self.write_level_version_constructor(class_name)
-        self.write_namespace_constructor(class_name)
-        self.write_copy_constructor(class_name)
-        self.write_assignment_operator(class_name)
-        self.write_clone(class_name)
-        self.write_destructor(class_name)
+    def write_constructors(self):
+        constructor = Constructors.Constructors(self.language,
+                                                self.is_cpp_api,
+                                                self.class_object)
 
-    # function to write level version constructor
-    def write_level_version_constructor(self, class_name):
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-        else:
-            object_name = class_name
+        code = constructor.write_level_version_constructor()
+        self.write_function_declaration(code)
 
-        # create doc string header
-        title_line = 'Creates a new {0} using the given SBML @p level' \
-            .format(object_name)
-        if self.package:
-            title_line += ', @ p version and package version values.'
-        else:
-            title_line += ' and @ p version values.'
+        code = constructor.write_namespace_constructor()
+        self.write_function_declaration(code)
 
-        params = ['@param level an unsigned int, the SBML Level to '
-                  'assign to this {0}'.format(object_name),
-                  '@param version an unsigned int, the SBML Version to '
-                  'assign to this {0}'.format(object_name)]
-        if self.package:
-            params.append('@param pkgVersion an unsigned int, the SBML {0} '
-                          'Version to assign to this {1}'
-                          .format(self.package, object_name))
+        code = constructor.write_copy_constructor()
+        self.write_function_declaration(code)
 
-        return_lines = ['@throws SBMLConstructorException',
-                        'Thrown if the given @p level and @p version '
-                        'combination, or this kind of SBML object, are '
-                        'either invalid or mismatched with respect to the '
-                        'parent SBMLDocument object.',
-                        '@copydetails doc_note_setting_lv']
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
+        code = constructor.write_assignment_operator()
+        self.write_function_declaration(code)
 
-        # create the function declaration
-        if self.is_cpp_api:
-            function = class_name
-            return_type = ''
-        else:
-            function = '{}_create'.format(class_name)
-            return_type = '{0} *'.format(object_name)
+        code = constructor.write_clone()
+        self.write_function_declaration(code)
 
-        if self.package:
-            arguments = [
-                'unsigned int level = '
-                '{}Extension::getDefaultLevel()'.format(self.package),
-                'unsigned int version = '
-                '{}Extension::getDefaultVersion()'.format(self.package),
-                'unsigned int pkgVersion = '
-                '{}Extension::getDefaultPackageVersion()'.format(self.package)]
-        else:
-            arguments = ['unsigned int level',
-                         'unsigned int version']
-
-        self.write_function_header(function,
-                                   arguments, return_type)
-        self.skip_line(2)
-
-    # function to write namespace constructor
-    def write_namespace_constructor(self, class_name):
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-        else:
-            object_name = class_name
-
-        # create doc string header
-        title_line = 'Creates a new {0} using the given'.format(object_name)
-        if self.package:
-            title_line = title_line + ' {0}PkgNamespaces object.' \
-                .format(self.package)
-        else:
-            title_line = title_line + ' {0}Namespaces object @p {1}ns.' \
-                .format(self.language.upper(), self.language)
-
-        params = []
-        if self.package:
-            params.append('@param {0}ns the {1}PkgNamespaces object'
-                          .format(self.package.lower(), self.package))
-        else:
-            params.append('@param {0}ns the {1}Namespaces object'
-                          .format(self.language, self.language.upper()))
-
-        return_lines = ['@throws SBMLConstructorException',
-                        'Thrown if the given @p level and @p version '
-                        'combination, or this kind of SBML object, are '
-                        'either invalid or mismatched with respect to the '
-                        'parent SBMLDocument object.',
-                        '@copydetails doc_note_setting_lv']
-
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = class_name
-            return_type = ''
-        else:
-            function = '{0}_createWithNS'.format(class_name)
-            return_type = '{0} *'.format(object_name)
-
-        arguments = []
-        if self.package:
-            if self.is_cpp_api:
-                arguments.append('{0}PkgNamespaces *{1}ns'
-                                 .format(self.package, self.package.lower()))
-            else:
-                arguments.append('{0}PkgNamespaces_t *{1}ns'
-                                 .format(self.package, self.package.lower()))
-
-        else:
-            if self.is_cpp_api:
-                arguments.append('{0}Namespaces *{1}ns'
-                                 .format(self.language.upper(), self.language))
-            else:
-                arguments.append('{0}Namespaces_t *{1}ns'
-                                 .format(self.language.upper(), self.language))
-
-        self.write_function_header(function,
-                                   arguments, return_type)
-        self.skip_line(2)
-
-    # function to write copy constructor
-    def write_copy_constructor(self, class_name):
-        # do not write for C API
-        if self.is_cpp_api is False:
-            return
-        self.open_comment()
-        self.write_comment_line('Copy constructor for {0}.'.format(class_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@param orig; the {0} instance to copy.'
-                                .format(class_name))
-        self.close_comment()
-        self.write_line('{0}(const {0}& orig);'.format(class_name))
-        self.skip_line(2)
-
-    # function to write assignment operator
-    def write_assignment_operator(self, class_name):
-        # do not write for C API
-        if self.is_cpp_api is False:
-            return
-        self.open_comment()
-        self.write_comment_line('Assignment operator for {0}.'
-                                .format(class_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@param rhs; the {0} object whose values are '
-                                'to be used as the basis of the assignment'
-                                .format(class_name))
-        self.close_comment()
-        self.write_line('{0}& operator=(const {0}& rhs);'.format(class_name))
-        self.skip_line(2)
-
-    # function to write clone
-    def write_clone(self, class_name):
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-        self.open_comment()
-        self.write_comment_line('Creates and returns a deep copy of '
-                                'this {0} object.'.format(object_name))
-        if not self.is_cpp_api:
-            self.write_blank_comment_line()
-            self.write_comment_line('@param {0} the {1} structure'
-                                    .format(abbrev_object, object_name))
-        self.write_blank_comment_line()
-        self.write_comment_line('@return a (deep) copy of this {0} object.'
-                                .format(object_name))
-        self.close_comment()
-        if self.is_cpp_api:
-            self.write_line('virtual {0}* clone () const;'.format(class_name))
-        else:
-            self.write_extern_decl()
-            self.write_line('{0} *'.format(object_name))
-            self.write_line('{0}_clone(const {1} * {2});'
-                            .format(class_name, object_name, abbrev_object))
-
-        self.skip_line(2)
-
-    # function to write destructor
-    def write_destructor(self, class_name):
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-        self.open_comment()
-        if self.is_cpp_api:
-            self.write_comment_line('Destructor for {0}.'.format(class_name))
-        else:
-            self.write_comment_line('Frees this {0} object.'
-                                    .format(object_name))
-            self.write_blank_comment_line()
-            self.write_comment_line('@param {0} the {1} structure'
-                                    .format(abbrev_object, object_name))
-        self.close_comment()
-        if self.is_cpp_api:
-            self.write_line('virtual ~{0}();'.format(class_name))
-        else:
-            self.write_extern_decl()
-            self.write_line('void')
-            self.write_line('{0}_free({1} * {2});'
-                            .format(class_name, object_name, abbrev_object))
-        self.skip_line(2)
+        code = constructor.write_destructor()
+        self.write_function_declaration(code)
 
     ########################################################################
 
@@ -412,16 +220,37 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # these are for attributes and elements that occur as a single child
 
     # function to write the get/set/isSet/unset functions for attributes
-    def write_attribute_functions(self, class_name, class_attributes):
-        num_attributes = len(class_attributes)
+    def write_attribute_functions(self):
+        attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
+                                                           self.is_cpp_api,
+                                                           self.is_list_of,
+                                                           self.class_object)
+
+        num_attributes = len(self.class_attributes)
         for i in range(0, num_attributes):
-            self.write_get_function(class_name, class_attributes[i], True)
+            code = attrib_functions.write_get(True, i)
+            self.write_function_declaration(code)
+
+            code = attrib_functions.write_get_string_for_enum(True, i)
+            self.write_function_declaration(code)
+
+#            self.write_get_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            self.write_is_set_function(class_name, class_attributes[i], True)
+            code = attrib_functions.write_is_set(True, i)
+            self.write_function_declaration(code)
+
+#            self.write_is_set_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            self.write_set_function(class_name, class_attributes[i], True)
+            code = attrib_functions.write_set(True, i)
+            self.write_function_declaration(code)
+
+            code = attrib_functions.write_set_string_for_enum(True, i)
+            self.write_function_declaration(code)
+#            self.write_set_function(class_name, class_attributes[i], True)
         for i in range(0, num_attributes):
-            self.write_unset_function(class_name, class_attributes[i], True)
+            code = attrib_functions.write_unset(True, i)
+            self.write_function_declaration(code)
+#            self.write_unset_function(class_name, class_attributes[i], True)
 
     # function to write the get/set/isSet/unset functions for single
     # child elements
@@ -819,32 +648,70 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing general functions
 
     # main general function writing function
-    def write_general_functions(self, class_name, attributes):
-        has_children = query.has_children(attributes)
-        has_package_children = query.has_children_not_math(attributes)
+    def write_general_functions(self):
+        gen_functions = GeneralFunctions.GeneralFunctions(self.language,
+                                                          self.is_cpp_api,
+                                                          self.is_list_of,
+                                                          self.class_object)
+        code = gen_functions.write_rename_sidrefs()
+        self.write_function_declaration(code)
 
-        if self.is_cpp_api:
-            if query.has_sid_ref(attributes):
-                self.write_rename_sidrefs_function(class_name)
-            self.write_get_element_name(class_name)
-            self.write_get_typecode(class_name)
-            if not self.is_list_of:
-                self.write_has_reqd_attributes(class_name, attributes)
-                if has_children:
-                    self.write_has_reqd_elements(class_name, attributes)
-                self.write_write_elements(class_name)
-                self.write_accept_function(class_name)
-                self.write_set_document(class_name)
-                if has_package_children:
-                    self.write_connect_to_child(class_name)
-                self.write_enable_pkg_internal(class_name)
-            else:
-                self.write_get_item_typecode(class_name)
-        else:
-            self.write_has_reqd_attributes(class_name, attributes)
-            if has_children:
-                self.write_has_reqd_elements(class_name, attributes)
+        code = gen_functions.write_get_element_name()
+        self.write_function_declaration(code)
 
+        code = gen_functions.write_get_typecode()
+        self.write_function_declaration(code)
+
+        code = gen_functions.write_get_item_typecode()
+        self.write_function_declaration(code)
+
+        code = gen_functions.write_has_required_attributes()
+        self.write_function_declaration(code)
+
+        code = gen_functions.write_has_required_elements()
+        self.write_function_declaration(code)
+
+        code = gen_functions.write_write_elements()
+        self.write_function_declaration(code, exclude=True)
+
+        code = gen_functions.write_accept()
+        self.write_function_declaration(code, exclude=True)
+
+        code = gen_functions.write_set_document()
+        self.write_function_declaration(code, exclude=True)
+
+        code = gen_functions.write_connect_to_child()
+        self.write_function_declaration(code, exclude=True)
+
+        code = gen_functions.write_enable_package()
+        self.write_function_declaration(code, exclude=True)
+
+
+#         has_children = query.has_children(attributes)
+#         has_package_children = query.has_children_not_math(attributes)
+#
+#         if self.is_cpp_api:
+#             # if query.has_sid_ref(attributes):
+#             #     self.write_rename_sidrefs_function(class_name)
+#             # self.write_get_element_name(class_name)
+#             # self.write_get_typecode(class_name)
+#             if not self.is_list_of:
+# #                self.write_has_reqd_attributes(class_name, attributes)
+#                 if has_children:
+#                     self.write_has_reqd_elements(class_name, attributes)
+# #                self.write_write_elements(class_name)
+# #                self.write_accept_function(class_name)
+# #                self.write_set_document(class_name)
+#                 if has_package_children:
+#                     self.write_connect_to_child(class_name)
+# #                self.write_enable_pkg_internal(class_name)
+# #            else:
+# #                self.write_get_item_typecode(class_name)
+#         else:
+# #            self.write_has_reqd_attributes(class_name, attributes)
+#             if has_children:
+#                 self.write_has_reqd_elements(class_name, attributes)
+#
     def write_rename_sidrefs_function(self, class_name):
         # create doc string header
         title_line = '@copydoc doc_renamesidref_common'
@@ -1200,18 +1067,39 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Protected functions
 
     def write_protected_functions(self):
-        if not self.is_list_of:
-            # if the only child is math we do not need this
-            if query.has_children_not_math(self.attributes):
-                self.write_create_object()
-            self.write_add_expected_attributes()
-            self.write_read_attributes()
-            if self.hasMath:
-                self.write_read_other_xml()
-            self.write_write_attributes()
-        else:
-            self.write_create_object()
-            self.write_create_write_xmlns()
+        protect_functions = ProtectedFunctions.ProtectedFunctions(self.language,
+                                  self.is_cpp_api, self.is_list_of, self.class_object)
+        exclude = True
+        code = protect_functions.write_create_object()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_add_expected_attributes()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_read_attributes()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_read_other_xml()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_write_attributes()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_write_xmlns()
+        self.write_function_declaration(code, exclude)
+
+#         if not self.is_list_of:
+#             # if the only child is math we do not need this
+# #            if query.has_children_not_math(self.attributes):
+# #                self.write_create_object()
+#             self.write_add_expected_attributes()
+#             self.write_read_attributes()
+#             if self.hasMath:
+#                 self.write_read_other_xml()
+#             self.write_write_attributes()
+#         else:
+#             self.write_create_object()
+#             self.write_create_write_xmlns()
 
     def write_add_expected_attributes(self):
         self.write_doxygen_start()
@@ -1327,19 +1215,60 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # Functions for writing functions for the main ListOf class
 
-    def write_listof_functions(self, class_name):
-        self.write_get_element_functions(class_name, [])
-        self.write_remove_element_functions(class_name, [])
+    def write_listof_functions(self):
+        lo_functions = ListOfQueryFunctions\
+            .ListOfQueryFunctions(self.language, self.is_cpp_api,
+                                  self.is_list_of,
+                                  self.class_object)
+
+        code = lo_functions.write_get_element_by_index(is_const=False)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_get_element_by_index(is_const=True)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_get_element_by_id(is_const=False)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_get_element_by_id(is_const=True)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_remove_element_by_index()
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_remove_element_by_id()
+        self.write_function_declaration(code)
+
         if self.is_cpp_api:
-            self.write_add_element_function(class_name, [])
-            self.write_get_num_elements_function(class_name, [])
-            self.write_create_element_function(class_name, [], False)
-            num_attributes = len(self.attributes)
-            for i in range(0, num_attributes):
-                attribute = self.attributes[i]
-                if attribute['type'] == 'SIdRef':
-                    self.write_get_by_sidref_functions(class_name,
-                                                       attribute, [])
+            code = lo_functions.write_add_element_function()
+            self.write_function_declaration(code)
+
+            code = lo_functions.write_get_num_element_function()
+            self.write_function_declaration(code)
+
+            code = lo_functions.write_create_element_function()
+            self.write_function_declaration(code)
+
+            for i in range(0, len(self.sid_refs)):
+                code = \
+                    lo_functions.write_get_element_by_sidref(self.sid_refs[i],
+                                                                const = True)
+                self.write_function_declaration(code)
+
+                code = \
+                    lo_functions.write_get_element_by_sidref(self.sid_refs[i],
+                                                                const = False)
+                self.write_function_declaration(code)
+            ############
+
+            #THIS WILL HAVE NO ATTRIBUTES
+            # num_attributes = len(self.attributes)
+            #
+            # for i in range(0, num_attributes):
+            #     attribute = self.attributes[i]
+            #     if attribute['type'] == 'SIdRef':
+            #         self.write_get_by_sidref_functions(class_name,
+            #                                            attribute, [])
 
     # main function to write the functions dealing with a child listOf element
     def write_child_lo_element_functions(self, class_name):
@@ -1878,9 +1807,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_general_includes()
         self.write_cppns_begin()
         self.write_class(self.baseClass, self.name, self.attributes)
-        if self.has_list_of:
-            self.write_class('ListOf', self.list_of_name,
-                             self.attributes_on_list_of)
         self.write_cppns_end()
         self.write_cpp_end()
         self.write_swig_begin()
