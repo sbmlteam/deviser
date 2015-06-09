@@ -101,8 +101,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.up_indent()
         self.write_constructors()
         self.write_attribute_functions()
-        if base_class != 'ListOf':
-            self.write_child_element_functions(class_name)
+        self.write_child_element_functions()
         self.write_listof_functions()
         self.write_child_lo_element_functions()
         self.write_general_functions()
@@ -120,7 +119,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if not self.is_list_of:
             self.write_constructors()
             self.write_attribute_functions()
-            self.write_child_element_functions(self.name)
+            self.write_child_element_functions()
             self.write_child_lo_element_functions()
             self.write_general_functions()
         else:
@@ -243,399 +242,38 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # function to write the get/set/isSet/unset functions for single
     # child elements
-    def write_child_element_functions(self, class_name):
-        # attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
-        #                                                    self.is_cpp_api,
-        #                                                    self.is_list_of,
-        #                                                    self.class_object)
+    def write_child_element_functions(self):
+        if self.is_list_of:
+            return
+
+        attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
+                                                           self.is_cpp_api,
+                                                           self.is_list_of,
+                                                           self.class_object)
 
         num_elements = len(self.child_elements)
         for i in range(0, num_elements):
-            self.write_get_function(class_name, self.child_elements[i], False)
+            code = attrib_functions.write_get(False, i)
+            self.write_function_declaration(code)
+
+            code = attrib_functions.write_get(False, i, const=False)
+            self.write_function_declaration(code)
+
         for i in range(0, num_elements):
-            self.write_is_set_function(class_name, self.child_elements[i],
-                                       False)
+            code = attrib_functions.write_is_set(False, i)
+            self.write_function_declaration(code)
+
         for i in range(0, num_elements):
-            self.write_set_function(class_name, self.child_elements[i], False)
-        # for i in range(0, num_elements):
-        #     self.write_create_element_function(class_name,
-        #                                        self.child_elements[i], True)
+            code = attrib_functions.write_set(False, i)
+            self.write_function_declaration(code)
+
         for i in range(0, num_elements):
-            self.write_unset_function(class_name, self.child_elements[i], False)
+            code = attrib_functions.write_create(False, i)
+            self.write_function_declaration(code)
 
-    # function to write get function
-    def write_get_function(self, class_name, attribute, is_attribute):
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Returns the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'],
-                    ('attribute' if is_attribute else 'element'),
-                    (class_name if self.is_cpp_api else object_name))
-
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure whose {2} is sought.'
-                          .format(abbrev_object, object_name,
-                                  attribute['name']))
-
-        if self.is_cpp_api:
-            return_lines.append('@return the value of the \"{0}\" {1} of '
-                                'this {2} as a {3}.'
-                                .format(attribute['name'],
-                                        ('attribute' if is_attribute
-                                         else 'element'),
-                                        class_name,
-                                        (attribute['attType']
-                                         if (is_attribute
-                                             and attribute['isEnum'] is False)
-                                         else attribute['attTypeCode'])))
-        else:
-            return_lines.append('@return the value of the \"{0}\" {1} of '
-                                'this {2} as a {3} {4}.'
-                                .format(attribute['name'],
-                                        ('attribute' if is_attribute
-                                         else 'element'),
-                                        object_name,
-                                        ('pointer to a'
-                                         if (is_attribute and
-                                             attribute['attType'] == 'string')
-                                         else ''),
-                                        (attribute['attType']
-                                         if (is_attribute
-                                             and attribute['isEnum'] is False)
-                                         else attribute['attTypeCode'])))
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'get{0}'.format(attribute['capAttName'])
-            if attribute['attType'] == 'string' \
-                    or attribute['attType'] == 'element':
-                return_type = 'const ' + attribute['attTypeCode']
-            else:
-                return_type = attribute['attTypeCode']
-        else:
-            function = '{0}_get{1}'.format(class_name, attribute['capAttName'])
-            if attribute['attType'] == 'element':
-                return_type = 'const {0}'.format(attribute['CType'])
-            else:
-                return_type = '{0}'.format(attribute['CType'])
-
-        arguments = []
-        if not self.is_cpp_api:
-            arguments.append('const {0} * {1}'
-                             .format(object_name, abbrev_object))
-
-        virtual = False
-        constant = True
-        self.write_function_header(function, arguments, return_type,
-                                   constant, virtual)
-        self.skip_line(2)
-        # for an enum write a string version
-        if attribute['isEnum'] is True:
-            self.write_get_string_for_enum_function(class_name, attribute)
-        # for a child element write a non const version
-        if not is_attribute and self.is_cpp_api:
-            if attribute['attType'] == 'element':
-                self.write_comment_header(title_line, params,
-                                          return_lines, object_name)
-                return_type = attribute['attTypeCode']
-                constant = False
-                self.write_function_header(function, arguments, return_type,
-                                           constant, virtual)
-                self.skip_line(2)
-
-    # function to write get function string version for enums
-    def write_get_string_for_enum_function(self, class_name, attribute):
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Returns the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'],
-                    (class_name if self.is_cpp_api else object_name))
-
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure whose {2} is sought.'
-                          .format(abbrev_object, object_name,
-                                  attribute['name']))
-
-        if self.is_cpp_api:
-            return_lines.append('@return the value of the \"{0}\" attribute '
-                                'of this {1} as a string.'
-                                .format(attribute['name'], class_name))
-        else:
-            return_lines.append('@return the value of the \"{0}\" attribute '
-                                'of this {1} as a const char *.'
-                                .format(attribute['name'], object_name))
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'get{0}'.format(attribute['capAttName'])
-            return_type = 'const std::string&'
-        else:
-            function = '{0}_get{1}'.format(class_name, attribute['capAttName'])
-            return_type = 'const char *'
-
-        arguments = []
-        if not self.is_cpp_api:
-            arguments.append('const {0} * {1}'
-                             .format(object_name, abbrev_object))
-
-        virtual = False
-        constant = True
-        self.write_function_header(function, arguments, return_type,
-                                   constant, virtual)
-        self.skip_line(2)
-
-    # function to write is set function
-    def write_is_set_function(self, class_name, attribute, is_attribute):
-        if is_attribute:
-            ob_type = 'attribute'
-        else:
-            ob_type = 'element'
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-            true = '@c 1'
-            false = '@c 0'
-        else:
-            object_name = class_name
-            true = '@c true'
-            false = '@c false'
-
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Predicate returning {} or {} depending on whether ' \
-                     'this {}\'s \"{}\" {} has been set.' \
-            .format(true, false, object_name, attribute['name'], ob_type)
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure.'
-                          .format(abbrev_object, object_name))
-
-        return_lines.append('@return {0} if this {1}\'s \"{2}\" {3} has been '
-                            'set, otherwise {4} is returned.'
-                            .format(true, object_name, attribute['name'],
-                                    ob_type, false))
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'isSet{0}'.format(attribute['capAttName'])
-            return_type = 'bool'
-        else:
-            function = '{0}_isSet{1}'.format(class_name,
-                                             attribute['capAttName'])
-            return_type = 'int'
-
-        arguments = []
-        if not self.is_cpp_api:
-            arguments.append('const {0} * {1}'
-                             .format(object_name, abbrev_object))
-
-        virtual = False
-        constant = True
-        self.write_function_header(function, arguments, return_type,
-                                   constant, virtual)
-        self.skip_line(2)
-
-    # function to write set function
-    def write_set_function(self, class_name, attribute, is_attribute):
-        if is_attribute:
-            ob_type = 'attribute'
-        else:
-            ob_type = 'element'
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Sets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'], ob_type, object_name)
-
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure.'
-                          .format(abbrev_object, object_name))
-        params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
-                      .format(attribute['name'], attribute['attTypeCode'],
-                              ob_type))
-
-        return_lines.append("@copydetails doc_returns_success_code")
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
-
-        return_lines.append('@li @sbmlconstant '
-                            '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                            ' OperationReturnValues_t}')
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'set{0}'.format(attribute['capAttName'])
-            return_type = 'int'
-        else:
-            function = '{0}_set{1}'.format(class_name, attribute['capAttName'])
-            return_type = 'int'
-
-        arguments = []
-        if self.is_cpp_api:
-            arguments.append('{0} {1}'
-                             .format(('const ' + attribute['attTypeCode']
-                                      if (attribute['attType'] == 'string' or
-                                          attribute['attType'] == 'enum' or
-                                          attribute['attType'] == 'element')
-                                      else attribute['attTypeCode']),
-                                     attribute['name']))
-        else:
-            arguments.append('{0} * {1}'
-                             .format(object_name, abbrev_object))
-            if attribute['attType'] == 'element':
-                arguments.append('const {0} {1}'
-                                 .format(attribute['CType'],
-                                         attribute['name']))
-            else:
-                arguments.append('{0} {1}'
-                                 .format(attribute['CType'],
-                                         attribute['name']))
-
-        virtual = False
-        constant = False
-        self.write_function_header(function, arguments, return_type,
-                                   constant, virtual)
-        self.skip_line(2)
-
-        if attribute['isEnum'] is True:
-            self.write_set_for_enums_function(class_name, attribute)
-
-    # function to write set function with string version for enums
-    def write_set_for_enums_function(self, class_name, attribute):
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-            att_type = 'const char *'
-        else:
-            object_name = class_name
-            att_type = 'std::string&'
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Sets the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'], object_name)
-
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure.'
-                          .format(abbrev_object, object_name))
-        params.append('@param {0} {1} of the \"{0}\" attribute to be set.'
-                      .format(attribute['name'], att_type))
-
-        return_lines.append("@copydetails doc_returns_success_code")
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
-
-        return_lines.append('@li @sbmlconstant '
-                            '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                            ' OperationReturnValues_t}')
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'set{0}'.format(attribute['capAttName'])
-            return_type = 'int'
-        else:
-            function = '{0}_set{1}'.format(class_name, attribute['capAttName'])
-            return_type = 'int'
-
-        arguments = []
-        if self.is_cpp_api:
-            arguments.append('{0} {1}'.format('const std::string&',
-                                              attribute['name']))
-        else:
-            arguments.append('{0} * {1}'
-                             .format(object_name, abbrev_object))
-            arguments.append('const char * {}'.format(attribute['name']))
-
-        virtual = False
-        constant = False
-        self.write_function_header(function,
-                                   arguments, return_type, constant, virtual)
-        self.skip_line(2)
-
-    # function to write unset function
-    def write_unset_function(self, class_name, attribute, is_attribute):
-        if is_attribute:
-            ob_type = 'attribute'
-        else:
-            ob_type = 'element'
-        abbrev_object = ''
-        if self.is_cpp_api is False:
-            object_name = class_name + '_t'
-            abbrev_object = strFunctions.abbrev_name(class_name)
-        else:
-            object_name = class_name
-        # create doc string header
-        params = []
-        return_lines = []
-        title_line = 'Unsets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'], ob_type, object_name)
-
-        if not self.is_cpp_api:
-            params.append('@param {0} the {1} structure.'
-                          .format(abbrev_object, object_name))
-
-        return_lines.append('@copydetails doc_returns_success_code')
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
-
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_FAILED,'
-                            ' OperationReturnValues_t}')
-        self.write_comment_header(title_line, params, return_lines,
-                                  object_name)
-
-        # create the function declaration
-        if self.is_cpp_api:
-            function = 'unset{0}'.format(attribute['capAttName'])
-            return_type = 'int'
-        else:
-            function = '{0}_unset{1}'.format(class_name,
-                                             attribute['capAttName'])
-            return_type = 'int'
-
-        arguments = []
-        if not self.is_cpp_api:
-            arguments.append('{0} * {1}'
-                             .format(object_name, abbrev_object))
-
-        virtual = False
-        constant = False
-        self.write_function_header(function, arguments, return_type,
-                                   constant, virtual)
-        self.skip_line(2)
+        for i in range(0, num_elements):
+            code = attrib_functions.write_unset(False, i)
+            self.write_function_declaration(code)
 
     ########################################################################
 

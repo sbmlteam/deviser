@@ -274,7 +274,12 @@ class ListOfQueryFunctions():
             function = 'remove' if self.is_list_of \
                 else 'remove{}'.format(self.object_child_name)
         else:
-            function = '{}_remove{}'.format(self.class_name, self.child_name)
+            if self.is_list_of:
+                function = '{}_remove'.format(self.class_name)
+            else:
+                function = '{}_remove{}'.format(self.class_name,
+                                                self.child_name)
+
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
         arguments.append('unsigned int n')
@@ -322,8 +327,11 @@ class ListOfQueryFunctions():
                 else 'remove{}'.format(self.object_child_name)
             arguments = ['const std::string& sid']
         else:
-            function = '{}_remove{}ById'.format(self.class_name,
-                                                self.child_name)
+            if self.is_list_of:
+                function = '{}_removeById'.format(self.class_name)
+            else:
+                function = '{}_remove{}ById'.format(self.class_name,
+                                                    self.child_name)
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
             arguments.append('const char* sid')

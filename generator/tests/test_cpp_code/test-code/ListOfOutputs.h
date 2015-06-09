@@ -412,7 +412,7 @@ ListOfOutputs_getById(ListOf_t* lo, const char *sid);
  */
 LIBSBML_EXTERN
 Output_t*
-ListOfOutputs_removeOutput(ListOf_t* lo, unsigned int n);
+ListOfOutputs_remove(ListOf_t* lo, unsigned int n);
 
 
 /**
@@ -430,7 +430,7 @@ ListOfOutputs_removeOutput(ListOf_t* lo, unsigned int n);
  */
 LIBSBML_EXTERN
 Output_t*
-ListOfOutputs_removeOutputById(ListOf_t* lo, const char* sid);
+ListOfOutputs_removeById(ListOf_t* lo, const char* sid);
 
 
 

@@ -60,7 +60,7 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false" />
             <attribute name="type" required="true" type="enum" element="CoordinateKind" abstract="false" />
-            <attribute name="unit" required="false" type="SIdRef" element="Unit" abstract="false" />
+            <attribute name="unit" required="false" type="UnitSIdRef" element="Unit" abstract="false" />
             <attribute name="boundaryMin" required="true" type="element" element="Boundary" abstract="false" />
             <attribute name="boundaryMax" required="true" type="element" element="Boundary" abstract="false" />
           </attributes>

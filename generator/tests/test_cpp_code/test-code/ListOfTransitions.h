@@ -392,7 +392,7 @@ ListOfTransitions_getById(ListOf_t* lo, const char *sid);
  */
 LIBSBML_EXTERN
 Transition_t*
-ListOfTransitions_removeTransition(ListOf_t* lo, unsigned int n);
+ListOfTransitions_remove(ListOf_t* lo, unsigned int n);
 
 
 /**
@@ -411,7 +411,7 @@ ListOfTransitions_removeTransition(ListOf_t* lo, unsigned int n);
  */
 LIBSBML_EXTERN
 Transition_t*
-ListOfTransitions_removeTransitionById(ListOf_t* lo, const char* sid);
+ListOfTransitions_removeById(ListOf_t* lo, const char* sid);
 
 
 

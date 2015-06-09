@@ -24,51 +24,73 @@ def read_file(path):
 
 
 def compare_files(infile, outfile):
+    ret = 0;
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
         print('PASSED')
     else:
         print('FAILED')
-
+        ret = 1
+    return ret
 
 def run_test(name, num, class_name, test_case, list_of):
+    fail = 0
     filename = '.\\test_xml_files\\{}.xml'.format(name)
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     generate_cpp_header(filename, num)
     correct_file = '.\\test-code\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
-    compare_files(correct_file, temp_file)
+    fail = compare_files(correct_file, temp_file)
     if len(list_of) > 0:
         class_name = list_of
         print('Testing {}:{} {}'.format(name, class_name, test_case))
         correct_file = '.\\test-code\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
-        compare_files(correct_file, temp_file)
+        fail +=compare_files(correct_file, temp_file)
+    return fail
 
 
 def main():
+    fail = 0;
     name = 'qual'
     num = 3
     class_name = 'Output'
     list_of = 'ListOfOutputs'
     test_case = 'simple class'
-    run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'qual'
     num = 1
     class_name = 'Transition'
     list_of = 'ListOfTransitions'
     test_case = 'class with child list of elements'
-    run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
     num = 12
     class_name = 'AnalyticVolume'
     list_of = ''
     test_case = 'class with math child'
-    run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'distrib'
+    num = 2
+    class_name = 'Uncertainty'
+    list_of = ''
+    test_case = 'class with other child'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
+    num = 7
+    class_name = 'CoordinateComponent'
+    list_of = 'ListOfCoordinateComponents'
+    test_case = 'class with same child element diff name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    if fail > 0:
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print('Check fails')
     # filename = 'C:\Development\git\deviser\samples\qual.xml'
     #
     # generate_cpp_header(filename, 3)

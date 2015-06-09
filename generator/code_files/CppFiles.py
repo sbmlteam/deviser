@@ -56,10 +56,11 @@ class CppFiles():
         ff = CppHeaderFile.CppHeaderFile(working_class)
         ff.write_file()
         ff.close_file()
-        lo_working_class = self.create_list_of_description()
-        gg = CppHeaderFile.CppHeaderFile(lo_working_class)
-        gg.write_file()
-        gg.close_file()
+        if self.class_object['hasListOf']:
+            lo_working_class = self.create_list_of_description()
+            gg = CppHeaderFile.CppHeaderFile(lo_working_class)
+            gg.write_file()
+            gg.close_file()
 
     def create_list_of_description(self):
         lo_name = strFunctions.list_of_name(self.class_object['name'])
@@ -70,5 +71,4 @@ class CppFiles():
         descrip['list_of_name'] = lo_name
         descrip['lo_child'] = self.class_object['name']
         descrip['name'] = lo_name
-#        descrip['typecode'] = 'SBML_LIST_OF'
         return descrip
