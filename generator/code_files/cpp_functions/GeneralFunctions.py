@@ -68,6 +68,7 @@ class GeneralFunctions():
         self.sid_refs = class_object['sid_refs']
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
+        self.has_math = class_object['hasMath']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -466,6 +467,8 @@ class GeneralFunctions():
         if not self.is_cpp_api:
             return
         elif (len(self.child_elements) + len(self.child_lo_elements)) == 0:
+            return
+        elif self.has_math and len(self.child_elements) == 1:
             return
 
         # create comment parts
