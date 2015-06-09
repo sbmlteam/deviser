@@ -45,10 +45,15 @@ class ListOfQueryFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
-        self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
-        self.child_name = class_object['lo_child']
+        self.class_object = class_object
+        if is_list_of:
+            self.child_name = class_object['lo_child']
+            self.class_name = class_object['name']
+        else:
+            self.child_name = strFunctions.upper_first(class_object['name'])
+            self.class_name = class_object['parent']['name']
         if is_cpp_api:
             self.object_name = self.class_name
             self.object_child_name = self.child_name
@@ -177,8 +182,13 @@ class ListOfQueryFunctions():
                      'virtual': virtual,
                      'object_name': self.struct_name})
 
-    # function to write get by sidred from a listOf
+    # function to write get by sidref from a listOf
     def write_get_element_by_sidref(self, sid_ref, const):
+        # c api does not need a non constant version
+        if not self.is_cpp_api and not const:
+            return
+
+        # useful variables
         element = sid_ref['element']
         att_name = sid_ref['name']
 
@@ -203,10 +213,14 @@ class ListOfQueryFunctions():
 
         # create function declaration
         if self.is_cpp_api:
-            function = 'getBy{}'.format(element)
+            if self.is_list_of:
+                function = 'getBy{}'.format(element)
+            else:
+                function = 'get{}By{}'.format(self.object_child_name, element)
             arguments = ['const std::string& sid']
         else:
-            function = '{}_getBy{}'.format(self.class_name, element)
+            function = '{}_get{}By{}'.format(self.class_name,
+                                             self.child_name, element)
             arguments = ['{}* {}'.format(self.object_name, self.abbrev_parent),
                          'const char *sid']
         if const:
@@ -423,7 +437,7 @@ class ListOfQueryFunctions():
 
     # Functions for writing get num element functions
 
-    # function to write remove by index from a listOf
+    # function to write get num
     def write_get_num_element_function(self):
         # create comment parts
         title_line = 'Get the number of {} objects in ' \
@@ -456,5 +470,58 @@ class ListOfQueryFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': True,
+                     'virtual': False,
+                     'object_name': self.struct_name})
+
+    ########################################################################
+
+    # Functions for writing getListOf
+
+    # function to write get num
+    def write_get_list_of_function(self, is_const=False):
+        if not self.is_cpp_api and not is_const:
+            return
+
+        loname = strFunctions.list_of_name(self.child_name)
+        # create comment parts
+        params = []
+        if self.is_cpp_api:
+            title_line = 'Returns the {} from this {}.'.format(loname,
+                                                               self.object_name)
+            return_lines = ['@return the {} '
+                            'from this {}.'.format(loname, self.object_name)]
+        else:
+            title_line = 'Returns a ListOf_t* containing {} objects ' \
+                         'from this {}.'.format(self.object_child_name,
+                                                self.object_name)
+            params.append('@param {} the {} structure whose \"{}\" is sought.'
+                          .format(self.abbrev_parent, self.object_name, loname))
+            return_lines = ['@return the \"{}\" from this {} as a '
+                            'ListOf_t *.'.format(loname, self.object_name)]
+        additional = []
+
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'get{}'.format(loname)
+            arguments = []
+            if is_const:
+                return_type = 'const {}*'.format(loname)
+            else:
+                return_type = '{}*'.format(loname)
+        else:
+            function = '{}_get{}'.format(self.class_name, loname)
+            arguments = ['const {}* {}'.format(self.object_name,
+                                               self.abbrev_parent)]
+            return_type = 'ListOf_t*'
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': is_const,
                      'virtual': False,
                      'object_name': self.struct_name})

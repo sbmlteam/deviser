@@ -39,6 +39,7 @@
 
 import Constructors
 import GeneralFunctions
+import GlobalQueryFunctions
 import ListOfQueryFunctions
 import ProtectedFunctions
 import SetGetFunctions

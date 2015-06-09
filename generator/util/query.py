@@ -56,6 +56,16 @@ def get_sid_refs(attributes):
     return sid_refs
 
 
+# return a set of attributes that are SIdRefs for the given class
+def get_sid_refs_for_class(working_class):
+    sid_refs = []
+    child_element = get_class(working_class['element'],
+                              working_class['root'])
+    if child_element is not None:
+        sid_refs = get_sid_refs(child_element['attribs'])
+    return sid_refs
+
+
 # return True is any of the attributes refer to elements
 def has_children(attributes):
     if any(attribute['type'] == 'element' for attribute in attributes):
@@ -78,6 +88,10 @@ def has_children_not_math(attributes):
 
 # return the class with the matching name from the root object
 def get_class(name, root_object):
+    """
+
+    :rtype :
+    """
     if root_object is None:
         return None
     elif root_object['sbmlElements'] is None:
@@ -96,70 +110,3 @@ def seperate_attributes(full_attributes):
         if att_type != 'element' and att_type != 'lo_element':
             attributes.append(full_attributes[i])
     return attributes
-
-###############################################################
-# function to clarify the object names for the different types
-
-
-# get functions
-def create_structure_for_getters(in_name, class_name, attribute, is_cpp,
-                                 is_list):
-    # attribute will be empty if we are using a ListOf class
-    if len(attribute) == 0:
-        if is_cpp:
-            name = in_name
-        else:
-            name = in_name + '_t'
-        cap_name = name
-        plural = strFunctions.plural(name)
-    else:
-        name = attribute['element']
-        cap_name = attribute['capAttName']
-        plural = strFunctions.upper_first(attribute['pluralName'])
-    ob_name = name
-    if is_list and not is_cpp:
-        parent = strFunctions.list_of_name(in_name)
-        name = in_name
-        ob_parent = 'ListOf_t'
-    else:
-        parent = class_name
-        ob_parent = class_name
-    if not is_list and not is_cpp:
-        ob_parent = class_name + '_t'
-        ob_name = name + '_t'
-
-    indef = strFunctions.get_indefinite(name)
-    struct = dict({'name': name,
-                   'cap_name': cap_name,
-                   'plural': plural,
-                   'parent': parent,
-                   'ob_parent': ob_parent,
-                   'ob_name': ob_name,
-                   'indef': indef,
-                   'class_name': class_name})
-    return struct
-
-
-# add/getNum functions
-def create_structure_for_children(in_name, class_name, attribute, is_cpp,
-                                  is_list):
-    if not is_list:
-        name = attribute['element']
-        parent = class_name
-        if is_cpp:
-            ob_name = attribute['element']
-            ob_parent = class_name
-        else:
-            ob_name = attribute['element'] + '_t'
-            ob_parent = class_name + '_t'
-    else:
-        ob_name = in_name
-        name = in_name
-        parent = class_name
-        ob_parent = class_name
-    struct = dict({'name': name,
-                   'parent': parent,
-                   'ob_parent': ob_parent,
-                   'ob_name': ob_name,
-                   'class_name': class_name})
-    return struct

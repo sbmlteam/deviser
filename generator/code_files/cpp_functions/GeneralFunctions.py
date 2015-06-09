@@ -66,6 +66,8 @@ class GeneralFunctions():
         self.typecode = class_object['typecode']
         self.attributes = class_object['class_attributes']
         self.sid_refs = class_object['sid_refs']
+        self.child_lo_elements = class_object['child_lo_elements']
+        self.child_elements = class_object['child_elements']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -257,7 +259,6 @@ class GeneralFunctions():
                            ' are:'.format(self.object_name)]
         for i in range(0, len(self.attributes)):
             if self.attributes[i]['reqd']:
-                att_type = self.attributes[i]['type']
                 att_name = self.attributes[i]['name']
                 additional.append('@li \"{}\"'.format(att_name))
 
@@ -288,8 +289,56 @@ class GeneralFunctions():
 
     # function to write hasRequiredElements
     def write_has_required_elements(self):
+        if (len(self.child_elements) + len(self.child_lo_elements)) == 0:
             return
 
+        # create comment parts
+        title_line = 'Predicate returning {} if all the required ' \
+                     'elements for this {} object have been set.'\
+            .format(self.true, self.object_name)
+        params = []
+        if not self.is_cpp_api:
+            params.append('@param {0} the {1} structure.'
+                          .format(self.abbrev_parent, self.object_name))
+
+        return_lines = ['@return {0} to indicate that all the required '
+                        'elements of this {1} have been set, otherwise '
+                        '{2} is returned.'.format(self.true, self.object_name,
+                                                  self.false)]
+        additional = [' ', '@note The required elements for the {} object'
+                           ' are:'.format(self.object_name)]
+        for i in range(0, len(self.child_elements)):
+            if self.child_elements[i]['reqd']:
+                additional.append('@li \"{}\"'
+                                  .format(self.child_elements[i]['name']))
+        for i in range(0, len(self.child_lo_elements)):
+            if self.child_lo_elements[i]['reqd']:
+                additional.append('@li \"{}\"'
+                                  .format(self.child_lo_elements[i]['name']))
+
+        # create the function declaration
+        if self.is_cpp_api:
+            function = 'hasRequiredElements'
+            return_type = 'bool'
+        else:
+            function = '{0}_hasRequiredElements'.format(self.class_name)
+            return_type = 'int'
+
+        arguments = []
+        if not self.is_cpp_api:
+            arguments.append('const {0} * {1}'
+                             .format(self.object_name, self.abbrev_parent))
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name})
     ########################################################################
 
     # Functions for writing general functions: writeElement, accept
@@ -414,4 +463,30 @@ class GeneralFunctions():
 
     # function to write connectToChild
     def write_connect_to_child(self):
-        return
+        if not self.is_cpp_api:
+            return
+        elif (len(self.child_elements) + len(self.child_lo_elements)) == 0:
+            return
+
+        # create comment parts
+        title_line = 'Connects to child elements'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'connectToChild'
+        return_type = 'void'
+        arguments = []
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name})
