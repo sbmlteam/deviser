@@ -68,11 +68,17 @@ class ProtectedFunctions():
         self.all_attributes = class_object['attribs']
         self.sid_refs = class_object['sid_refs']
         self.has_math = class_object['hasMath']
+        self.base_class = class_object['baseClass']
+        self.child_base_class = ''
+        if 'child_base_class' in class_object:
+            self.child_base_class = class_object['child_base_class']
+        self.concretes = []
+        if 'concretes' in class_object:
+            self.concretes = class_object['concretes']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
-
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -97,13 +103,14 @@ class ProtectedFunctions():
     # function to write create_object
     def write_create_object(self):
         # if not list of only write if has children other than math
-        if not self.is_list_of and not query.has_children_not_math(self.all_attributes):
+        if not self.is_list_of and \
+                not query.has_children_not_math(self.all_attributes):
             return
 
         # create comment parts
         if self.is_list_of:
-            title_line = 'Creates a new {} in this {}'.format(self.object_child_name,
-                                                              self.object_name)
+            title_line = 'Creates a new {} in this ' \
+                         '{}'.format(self.object_child_name, self.object_name)
         else:
             title_line = 'Creates a new object from the next XMLToken ' \
                          'on the XMLInputStream'
@@ -200,7 +207,6 @@ class ProtectedFunctions():
         return_lines = []
         additional = []
 
-
         # create function declaration
         function = 'readOtherXML'
         return_type = 'bool'
@@ -229,7 +235,6 @@ class ProtectedFunctions():
         return_lines = []
         additional = []
 
-
         # create function declaration
         function = 'writeAttributes'
         return_type = 'void'
@@ -246,7 +251,6 @@ class ProtectedFunctions():
                      'constant': True,
                      'virtual': True,
                      'object_name': self.struct_name})
-
 
     ########################################################################
 
@@ -268,6 +272,39 @@ class ProtectedFunctions():
         function = 'writeXMLNS'
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name})
+
+    ########################################################################
+
+    # Functions for writing isValidTypeForList
+
+    def write_is_valid_type_for_list(self):
+        if not self.is_list_of:
+            return
+        elif len(self.concretes) == 0:
+            return
+
+        # create comment parts
+        title_line = 'checks concrete types'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'isValidTypeForList'
+        return_type = 'bool'
+        arguments = ['{}* item'.format(self.child_base_class)]
 
         # return the parts
         return dict({'title_line': title_line,

@@ -67,6 +67,7 @@ class CppFiles():
         descrip = self.class_object
         descrip['is_list_of'] = True
         descrip['attribs'] = self.class_object['lo_attribs']
+        descrip['child_base_class'] = self.class_object['baseClass']
         descrip['baseClass'] = 'ListOf'
         descrip['list_of_name'] = lo_name
         descrip['lo_child'] = self.class_object['name']

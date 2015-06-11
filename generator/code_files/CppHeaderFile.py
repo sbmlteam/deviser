@@ -74,15 +74,21 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.package = strFunctions.upper_first(class_object['package'])
 
         self.hasMath = class_object['hasMath']
-        self.class_attributes = query.seperate_attributes(self.attributes)
 
+        if 'concrete' in class_object:
+            self.concretes = query.get_concretes(class_object['root'],
+                                                 class_object['concrete'])
+
+        self.class_attributes = query.seperate_attributes(self.attributes)
         self.class_object['class_attributes'] = self.class_attributes
         self.class_object['child_lo_elements'] = self.child_lo_elements
         self.class_object['child_elements'] = self.child_elements
+        self.class_object['concretes'] = self.concretes
     ########################################################################
 
     # Functions for writing the class
     def write_class(self, base_class, class_name, attributes):
+        self.write_forward_class()
         self.write_line('class {0}_EXTERN {1} : public {2}'
                         .format(self.library_name.upper(),
                                 class_name, base_class))
@@ -104,6 +110,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_child_element_functions()
         self.write_listof_functions()
         self.write_child_lo_element_functions()
+        self.write_concrete_functions()
         self.write_general_functions()
         self.write_functions_to_retrieve()
         self.down_indent()
@@ -121,12 +128,20 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_attribute_functions()
             self.write_child_element_functions()
             self.write_child_lo_element_functions()
+            self.write_concrete_functions()
             self.write_general_functions()
         else:
             self.write_listof_functions()
 
     ########################################################################
-    # Functions for writing specific includes
+    # Functions for writing specific includes and forward declarations
+
+    def write_forward_class(self):
+        if len(self.concretes) == 0:
+            return
+        for element in self.concretes:
+            self.write_line('class {};'.format(element['element']))
+        self.skip_line()
 
     def write_common_includes(self):
         self.write_line('#include <{0}/common/extern.h>'.format(self.language))
@@ -187,12 +202,19 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         constructor = Constructors.Constructors(self.language,
                                                 self.is_cpp_api,
                                                 self.class_object)
+        if self.is_cpp_api:
+            code = constructor.write_level_version_constructor()
+            self.write_function_declaration(code)
 
-        code = constructor.write_level_version_constructor()
-        self.write_function_declaration(code)
+            code = constructor.write_namespace_constructor()
+            self.write_function_declaration(code)
+        else:
+            for i in range(0, len(self.concretes)+1):
+                code = constructor.write_level_version_constructor(i)
+                self.write_function_declaration(code)
 
-        code = constructor.write_namespace_constructor()
-        self.write_function_declaration(code)
+                code = constructor.write_namespace_constructor(i)
+                self.write_function_declaration(code)
 
         code = constructor.write_copy_constructor()
         self.write_function_declaration(code)
@@ -341,6 +363,20 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
+    # concrete class functions
+
+    def write_concrete_functions(self):
+        conc_functions = \
+            ConcreteClassFunctions.ConcreteClassFunctions(self.language,
+                                                          self.is_cpp_api,
+                                                          self.is_list_of,
+                                                          self.class_object)
+        for i in range(0, len(self.concretes)):
+            code = conc_functions.write_is_foo(i)
+            self.write_function_declaration(code)
+
+    ########################################################################
+
     # Protected functions
 
     def write_protected_functions(self):
@@ -366,6 +402,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_function_declaration(code, exclude)
 
         code = protect_functions.write_write_xmlns()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_is_valid_type_for_list()
         self.write_function_declaration(code, exclude)
 
     ########################################################################
@@ -406,8 +445,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             code = lo_functions.write_get_num_element_function()
             self.write_function_declaration(code)
 
-            code = lo_functions.write_create_element_function()
-            self.write_function_declaration(code)
+            for i in range(0, len(self.concretes)+1):
+                code = lo_functions.write_create_element_function(i)
+                self.write_function_declaration(code)
 
             for i in range(0, len(self.sid_refs)):
                 code = \

@@ -318,6 +318,10 @@ class SetGetFunctions():
             ob_type = 'attribute'
         else:
             ob_type = 'element'
+        if self.is_cpp_api:
+            att_type = attribute['attTypeCode']
+        else:
+            att_type = attribute['CType']
 
         # create comment parts
         params = []
@@ -330,7 +334,7 @@ class SetGetFunctions():
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
-                      .format(attribute['name'], attribute['attTypeCode'],
+                      .format(attribute['name'], att_type,
                               ob_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
@@ -346,7 +350,8 @@ class SetGetFunctions():
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
-            function = '{0}_set{1}'.format(self.class_name, attribute['capAttName'])
+            function = '{0}_set{1}'.format(self.class_name,
+                                           attribute['capAttName'])
             return_type = 'int'
 
         arguments = []
@@ -390,10 +395,10 @@ class SetGetFunctions():
             return
         if not attribute['isEnum']:
             return
-        if self.is_cpp_api is False:
+        if not self.is_cpp_api:
             att_type = 'const char *'
         else:
-           att_type = 'std::string&'
+            att_type = 'std::string&'
 
         # create comment parts
         params = []
@@ -420,7 +425,8 @@ class SetGetFunctions():
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
-            function = '{0}_set{1}'.format(self.class_name, attribute['capAttName'])
+            function = '{0}_set{1}'.format(self.class_name,
+                                           attribute['capAttName'])
             return_type = 'int'
 
         arguments = []
@@ -492,7 +498,6 @@ class SetGetFunctions():
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
-
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -555,7 +560,6 @@ class SetGetFunctions():
                                              self.abbrev_parent))
         return_type = '{}'.format(att_type)
 
-
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -567,4 +571,3 @@ class SetGetFunctions():
                      'constant': False,
                      'virtual': False,
                      'object_name': self.struct_name})
-

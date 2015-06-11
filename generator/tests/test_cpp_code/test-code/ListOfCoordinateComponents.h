@@ -79,8 +79,9 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  ListOfCoordinateComponents(unsigned int level =
-  SpatialExtension::getDefaultLevel(),
+  ListOfCoordinateComponents(
+                             unsigned int level =
+                             SpatialExtension::getDefaultLevel(),
                              unsigned int version =
                              SpatialExtension::getDefaultVersion(),
                              unsigned int pkgVersion =

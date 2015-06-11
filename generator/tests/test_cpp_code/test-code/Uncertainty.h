@@ -640,7 +640,7 @@ Uncertainty_isSetName(const Uncertainty_t * u);
  *
  * @param u the Uncertainty_t structure.
  *
- * @param id std::string& value of the "id" attribute to be set.
+ * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -658,7 +658,7 @@ Uncertainty_setId(Uncertainty_t * u, const char * id);
  *
  * @param u the Uncertainty_t structure.
  *
- * @param name std::string& value of the "name" attribute to be set.
+ * @param name const char * value of the "name" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -739,7 +739,7 @@ Uncertainty_isSetUncertML(const Uncertainty_t * u);
  *
  * @param u the Uncertainty_t structure.
  *
- * @param UncertML UncertMLNode* value of the "UncertML" element to be set.
+ * @param UncertML UncertMLNode_t* value of the "UncertML" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}

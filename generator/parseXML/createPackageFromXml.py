@@ -74,14 +74,24 @@ def find_element(elements, name):
 
 
 def standardize_types(attrib_type):
-    if attrib_type == 'boolean':
+    name = attrib_type.lower()
+    if name == 'boolean' or name == 'bool':
         return 'bool'
-    elif attrib_type == 'unsigned integer':
+    elif name == 'unsigned integer' or name == 'unsigned int':
         return 'uint'
-    elif attrib_type == 'unsigned int':
-        return 'uint'
-    elif attrib_type == 'integer':
+    elif name == 'integer' or name == 'int':
         return 'int'
+    elif name == 'sidref':
+        return 'SIdRef'
+    elif name == 'unitsidref':
+        return 'UnitSIdRef'
+    elif name == 'sid':
+        return 'SId'
+    elif name == 'unitsid':
+        return 'UnitSId'
+    elif name == 'uint' or name == 'string' or name == 'double' \
+            or name == 'enum' or name == 'element' or name == 'lo_element':
+        return name
     else:
         return attrib_type
 

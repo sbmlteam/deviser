@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="test" fullname="testChild" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="Sid" abstract="false" />
+          </attributes>
+        </element>
+        <element name="MySecondClass" typeCode="MY_SECOND_TYPE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="second" required="false" type="element" element="MyTestClass" abstract="false" />
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

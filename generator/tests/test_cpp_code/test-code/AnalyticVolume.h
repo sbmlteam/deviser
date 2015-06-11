@@ -821,7 +821,7 @@ AnalyticVolume_isSetDomainType(const AnalyticVolume_t * av);
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @param id std::string& value of the "id" attribute to be set.
+ * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -896,7 +896,7 @@ AnalyticVolume_setOrdinal(AnalyticVolume_t * av, int ordinal);
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @param domainType std::string& value of the "domainType" attribute to be
+ * @param domainType const char * value of the "domainType" attribute to be
  * set.
  *
  * @copydetails doc_returns_success_code
@@ -1010,7 +1010,7 @@ AnalyticVolume_isSetMath(const AnalyticVolume_t * av);
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @param math ASTNode* value of the "math" element to be set.
+ * @param math ASTNode_t* value of the "math" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="test" fullname="testAttributes" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="Sid" abstract="false" />
+            <attribute name="name" required="false" type="string" abstract="false" />
+            <attribute name="num" required="false" type="unsigned int" abstract="false" />
+            <attribute name="num2" required="false" type="uint" abstract="false" />
+            <attribute name="num3" required="false" type="int" abstract="false" />
+            <attribute name="num1" required="false" type="double" abstract="false" />
+            <attribute name="true" required="false" type="bool" abstract="false" />
+            <attribute name="false" required="false" type="boolean" abstract="false" />
+            <attribute name="unit" required="false" type="UnitSid" abstract="false" />
+            <attribute name="ref1" required="false" type="SIDREF" element="Thing1" abstract="false" />
+            <attribute name="ref2" required="false" type="SIdRef" element="Thing2" abstract="false" />
+            <attribute name="refUnit" required="false" type="UnitSIDref" element="Unit1" abstract="false" />
+            <attribute name="correctId" required="false" type="SId" abstract="false" />
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

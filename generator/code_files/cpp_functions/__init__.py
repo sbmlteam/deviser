@@ -37,6 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+import ConcreteClassFunctions
 import Constructors
 import GeneralFunctions
 import GlobalQueryFunctions

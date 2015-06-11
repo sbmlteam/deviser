@@ -662,8 +662,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 CoordinateComponent_t *
-CoordinateComponent_create(unsigned int level =
-SpatialExtension::getDefaultLevel(),
+CoordinateComponent_create(
+                           unsigned int level =
+                           SpatialExtension::getDefaultLevel(),
                            unsigned int version =
                            SpatialExtension::getDefaultVersion(),
                            unsigned int pkgVersion =
@@ -828,7 +829,7 @@ CoordinateComponent_isSetUnit(const CoordinateComponent_t * cc);
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @param id std::string& value of the "id" attribute to be set.
+ * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -883,7 +884,7 @@ CoordinateComponent_setType(CoordinateComponent_t * cc, const char * type);
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @param unit std::string& value of the "unit" attribute to be set.
+ * @param unit const char * value of the "unit" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1013,7 +1014,7 @@ CoordinateComponent_isSetBoundaryMax(const CoordinateComponent_t * cc);
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @param boundaryMin Boundary* value of the "boundaryMin" element to be set.
+ * @param boundaryMin Boundary_t* value of the "boundaryMin" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1032,7 +1033,7 @@ CoordinateComponent_setBoundaryMin(CoordinateComponent_t * cc,
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @param boundaryMax Boundary* value of the "boundaryMax" element to be set.
+ * @param boundaryMax Boundary_t* value of the "boundaryMax" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}

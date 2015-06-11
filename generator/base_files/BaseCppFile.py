@@ -56,6 +56,8 @@ class BaseCppFile(BaseFile.BaseFile):
         self.child_elements = self.get_children()
         self.child_lo_elements = self.get_lo_children()
 
+        self.concretes = []
+
         # default values
         self.is_cpp_api = True
 
@@ -256,7 +258,12 @@ class BaseCppFile(BaseFile.BaseFile):
                 att_start = len(line)
                 line += arguments[0]
                 line += ','
-                self.write_line(line)
+                if len(line) > self.line_length:
+                    self.write_line(saved_line)
+                    line = '' + arguments[0] + ','
+                    self.write_line(line, att_start)
+                else:
+                    self.write_line(line)
                 for i in range(1, num_arguments - 1):
                     line = arguments[i] + ','
                     self.write_line(line, att_start)
@@ -300,7 +307,7 @@ class BaseCppFile(BaseFile.BaseFile):
 #########################################################################
 
 # Function for writing a function definition with comment
-    def write_function_declaration(self, code, exclude = False):
+    def write_function_declaration(self, code, exclude=False):
         if code is not None:
             if exclude:
                 self.write_doxygen_start()

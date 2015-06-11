@@ -63,6 +63,9 @@ class ListOfQueryFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        self.concretes = []
+        if 'concretes' in class_object:
+            self.concretes = class_object['concretes']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -401,11 +404,19 @@ class ListOfQueryFunctions():
                      'object_name': self.struct_name})
 
     # function to write create element
-    def write_create_element_function(self):
+    def write_create_element_function(self, index=0):
+        if len(self.concretes) == 0 and index == 0:
+            child = self.object_child_name
+        else:
+            if index == 0:
+                return
+            else:
+                i = index - 1
+            child = self.concretes[i]['element']
         # create comment parts
         title_line = 'Creates a new {0} object, adds it to this {1} object ' \
                      'and returns the {0} object ' \
-                     'created.'.format(self.object_child_name, self.object_name)
+                     'created.'.format(child, self.object_name)
         params = []
         if not self.is_cpp_api:
             params.append('@param {}, the {} structure '
@@ -413,7 +424,7 @@ class ListOfQueryFunctions():
                           'added.'.format(self.abbrev_parent, self.object_name,
                                           self.object_child_name))
         return_lines = ['@return a new {} object '
-                        'instance.'.format(self.object_child_name)]
+                        'instance.'.format(child)]
         additional = []
         if self.is_cpp_api:
             additional.append('@see add{0}(const {0}* {1})'
@@ -422,12 +433,12 @@ class ListOfQueryFunctions():
         # create the function declaration
         arguments = []
         if self.is_cpp_api:
-            function = 'create{}'.format(self.object_child_name)
+            function = 'create{}'.format(child)
         else:
             function = '{}_create{}'.format(self.class_name, self.child_name)
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
-        return_type = '{}*'.format(self.object_child_name)
+        return_type = '{}*'.format(child)
 
         # return the parts
         return dict({'title_line': title_line,

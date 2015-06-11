@@ -771,7 +771,7 @@ Output_isSetOutputLevel(const Output_t * o);
  *
  * @param o the Output_t structure.
  *
- * @param id std::string& value of the "id" attribute to be set.
+ * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -789,7 +789,7 @@ Output_setId(Output_t * o, const char * id);
  *
  * @param o the Output_t structure.
  *
- * @param qualitativeSpecies std::string& value of the "qualitativeSpecies"
+ * @param qualitativeSpecies const char * value of the "qualitativeSpecies"
  * attribute to be set.
  *
  * @copydetails doc_returns_success_code
@@ -847,7 +847,7 @@ Output_setTransitionEffect(Output_t * o, const char * transitionEffect);
  *
  * @param o the Output_t structure.
  *
- * @param name std::string& value of the "name" attribute to be set.
+ * @param name const char * value of the "name" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}

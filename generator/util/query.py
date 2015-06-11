@@ -88,10 +88,6 @@ def has_children_not_math(attributes):
 
 # return the class with the matching name from the root object
 def get_class(name, root_object):
-    """
-
-    :rtype :
-    """
     if root_object is None:
         return None
     elif root_object['sbmlElements'] is None:
@@ -100,6 +96,26 @@ def get_class(name, root_object):
         for i in range(0, len(root_object['sbmlElements'])):
             if name == root_object['sbmlElements'][i]['name']:
                 return root_object['sbmlElements'][i]
+
+
+# return a list of the actual concrete classes
+def get_concretes(root_object, concrete_list):
+    concretes = []
+    for c in concrete_list:
+        add_concrete_to_list(root_object, c, concretes)
+    return concretes
+
+
+# add the non-abstract class to the list
+def add_concrete_to_list(root, concrete, mylist):
+    current = get_class(concrete['element'], root)
+    if current is not None:
+        if current['abstract'] is False:
+            mylist.append(concrete)
+        else:
+            for c in current['concrete']:
+                if c != concrete:
+                    add_concrete_to_list(root, c, mylist)
 
 
 # return a set of attributes with any elements/lo_elements removed

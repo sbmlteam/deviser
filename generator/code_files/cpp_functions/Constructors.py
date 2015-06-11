@@ -44,7 +44,7 @@ class Constructors():
     """Class for all constructors"""
 
     def __init__(self, language, is_cpp_api, class_object):
-        self.language = 'language'
+        self.language = language
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
@@ -57,16 +57,31 @@ class Constructors():
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
 
+        self.concretes = class_object['concretes']
+
     ########################################################################
 
     # Functions for writing constructors
 
     # function to write level version constructor
-    def write_level_version_constructor(self):
-
+    def write_level_version_constructor(self, index=0):
+        if len(self.concretes) == 0 and index == 0:
+            ob_name = self.object_name
+            create = 'create'
+        elif self.is_cpp_api:
+            ob_name = self.object_name
+            create = 'create'
+        else:
+            if index == 0:
+                return
+            else:
+                i = index - 1
+            ob_name = '{} ({})'.format(self.concretes[i]['element'],
+                                       self.object_name)
+            create = 'create{}'.format(self.concretes[i]['element'])
         # create doc string header
         title_line = 'Creates a new {0} using the given SBML @p level' \
-            .format(self.object_name)
+            .format(ob_name)
         if self.package:
             title_line += ', @ p version and package version values.'
         else:
@@ -94,7 +109,7 @@ class Constructors():
             function = self.class_name
             return_type = ''
         else:
-            function = '{}_create'.format(self.class_name)
+            function = '{}_{}'.format(self.class_name, create)
             return_type = '{0} *'.format(self.object_name)
 
         if self.package:
@@ -121,10 +136,24 @@ class Constructors():
                      'object_name': self.object_name})
 
     # function to write namespace constructor
-    def write_namespace_constructor(self):
+    def write_namespace_constructor(self, index=0):
+        if len(self.concretes) == 0 and index == 0:
+            ob_name = self.object_name
+            create = 'create'
+        elif self.is_cpp_api:
+            ob_name = self.object_name
+            create = 'create'
+        else:
+            if index == 0:
+                return
+            else:
+                i = index - 1
+            ob_name = '{} ({})'.format(self.concretes[i]['element'],
+                                       self.object_name)
+            create = 'create{}'.format(self.concretes[i]['element'])
         # create doc string header
         title_line = 'Creates a new {0} using the given'\
-            .format(self.object_name)
+            .format(ob_name)
         if self.package:
             title_line = title_line + ' {0}PkgNamespaces object.' \
                 .format(self.package)
@@ -153,7 +182,7 @@ class Constructors():
             function = self.class_name
             return_type = ''
         else:
-            function = '{0}_createWithNS'.format(self.class_name)
+            function = '{0}_{1}WithNS'.format(self.class_name, create)
             return_type = '{0} *'.format(self.object_name)
 
         arguments = []

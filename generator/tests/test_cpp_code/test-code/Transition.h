@@ -1037,7 +1037,7 @@ Transition_isSetName(const Transition_t * t);
  *
  * @param t the Transition_t structure.
  *
- * @param id std::string& value of the "id" attribute to be set.
+ * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1055,7 +1055,7 @@ Transition_setId(Transition_t * t, const char * id);
  *
  * @param t the Transition_t structure.
  *
- * @param name std::string& value of the "name" attribute to be set.
+ * @param name const char * value of the "name" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
