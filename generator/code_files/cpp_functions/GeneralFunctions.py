@@ -69,6 +69,7 @@ class GeneralFunctions():
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
         self.has_math = class_object['hasMath']
+        self.has_array = class_object['has_array']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -343,7 +344,7 @@ class GeneralFunctions():
     ########################################################################
 
     # Functions for writing general functions: writeElement, accept
-    #                                setDocument
+    #                                setDocument, write (if we have an array)
 
     # function to write writeElement
     def write_write_elements(self):
@@ -426,6 +427,36 @@ class GeneralFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name})
+
+    # function to write_write if there is an array
+    def write_write(self):
+        if not self.has_array:
+            return
+        elif not self.is_cpp_api or self.is_list_of:
+            return
+
+        # create comment parts
+        title_line = 'used to write arrays'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'write'
+        return_type = 'void'
+        arguments = ['XMLOutputStream& stream']
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
                      'virtual': True,
                      'object_name': self.struct_name})
 

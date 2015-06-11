@@ -32,8 +32,8 @@
         <element name="AdjacentDomains" typeCode="SBML_SPATIAL_ADJACENTDOMAINS" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false" />
-            <attribute name="domain1" required="true" type="SIdRef" abstract="false" />
-            <attribute name="domain2" required="true" type="SIdRef" abstract="false" />
+            <attribute name="domain1" required="true" type="SIdRef" element="Domain" abstract="false" />
+            <attribute name="domain2" required="true" type="SIdRef" element="Domain" abstract="false" />
           </attributes>
         </element>
         <element name="GeometryDefinition" typeCode="SBML_SPATIAL_GEOMETRYDEFINITION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
@@ -52,7 +52,7 @@
         <element name="CompartmentMapping" typeCode="SBML_SPATIAL_COMPARTMENTMAPPING" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false" />
-            <attribute name="domainType" required="true" type="SIdRef" abstract="false" />
+            <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false" />
             <attribute name="unitSize" required="true" type="double" abstract="false" />
           </attributes>
         </element>
@@ -68,7 +68,7 @@
         <element name="SampledFieldGeometry" typeCode="SBML_SPATIAL_SAMPLEDFIELDGEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="GeometryDefinition" abstract="false">
           <attributes>
             <attribute name="sampledVolume" required="false" type="lo_element" element="SampledVolume" abstract="false" />
-            <attribute name="sampledField" required="true" type="SIdRef" abstract="false" />
+            <attribute name="sampledField" required="true" type="SIdRef" element="SampledField" abstract="false" />
           </attributes>
         </element>
         <element name="SampledField" typeCode="SBML_SPATIAL_SAMPLEDFIELD" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" additionalDecls="spatial_sampledfield.h.txt" additionalDefs="spatial_sampledfield.cpp.txt">
@@ -87,7 +87,7 @@
         <element name="SampledVolume" typeCode="SBML_SPATIAL_SAMPLEDVOLUME" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false" />
-            <attribute name="domainType" required="true" type="SIdRef" abstract="false" />
+            <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false" />
             <attribute name="sampledValue" required="true" type="double" abstract="false" />
             <attribute name="minValue" required="false" type="double" abstract="false" />
             <attribute name="maxValue" required="false" type="double" abstract="false" />
@@ -117,7 +117,7 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false" />
             <attribute name="polygonType" required="true" type="enum" element="PolygonKind" abstract="false" />
-            <attribute name="domainType" required="true" type="SIdRef" abstract="false" />
+            <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false" />
             <attribute name="pointIndex" required="true" type="array" element="int" abstract="false" />
             <attribute name="pointIndexLength" required="true" type="int" abstract="false" />
             <attribute name="compression" required="true" type="enum" element="CompressionKind" abstract="false" />
@@ -200,7 +200,7 @@
         </element>
         <element name="CSGPseudoPrimitive" typeCode="SBML_SPATIAL_CSGPSEUDOPRIMITIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgPseudoPrimitive">
           <attributes>
-            <attribute name="csgObjectRef" required="true" type="SIdRef" abstract="false" />
+            <attribute name="csgObjectRef" required="true" type="SIdRef" element="CSGObject" abstract="false" />
           </attributes>
         </element>
         <element name="CSGSetOperator" typeCode="SBML_SPATIAL_CSGSETOPERATOR" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgSetOperator">
@@ -263,7 +263,7 @@
         </element>
         <element name="OrdinalMapping" typeCode="SBML_SPATIAL_ORDINALMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="geometryDefinition" required="true" type="SIdRef" abstract="false" />
+            <attribute name="geometryDefinition" required="true" type="SIdRef" element="GeometryDefinition" abstract="false" />
             <attribute name="ordinal" required="true" type="int" abstract="false" />
           </attributes>
         </element>

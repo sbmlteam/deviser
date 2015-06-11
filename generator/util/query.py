@@ -126,3 +126,10 @@ def seperate_attributes(full_attributes):
         if att_type != 'element' and att_type != 'lo_element':
             attributes.append(full_attributes[i])
     return attributes
+
+
+# return True is any of the attributes are of type array
+def has_array(attributes):
+    if any(attribute['type'] == 'array' for attribute in attributes):
+        return True
+    return False

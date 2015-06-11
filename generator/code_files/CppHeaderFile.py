@@ -84,6 +84,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.class_object['child_lo_elements'] = self.child_lo_elements
         self.class_object['child_elements'] = self.child_elements
         self.class_object['concretes'] = self.concretes
+        self.class_object['has_array'] = query.has_array(self.class_attributes)
     ########################################################################
 
     # Functions for writing the class
@@ -333,6 +334,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_set_document()
         self.write_function_declaration(code, exclude=True)
 
+        code = gen_functions.write_write()
+        self.write_function_declaration(code, exclude=True)
+
         code = gen_functions.write_connect_to_child()
         self.write_function_declaration(code, exclude=True)
 
@@ -405,6 +409,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_function_declaration(code, exclude)
 
         code = protect_functions.write_is_valid_type_for_list()
+        self.write_function_declaration(code, exclude)
+
+        code = protect_functions.write_set_element_text()
         self.write_function_declaration(code, exclude)
 
     ########################################################################

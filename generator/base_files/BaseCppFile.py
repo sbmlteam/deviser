@@ -73,6 +73,7 @@ class BaseCppFile(BaseFile.BaseFile):
             attributes[i]['pluralName'] = \
                 strFunctions.plural(attributes[i]['name'])
             attributes[i]['isEnum'] = False
+            attributes[i]['isArray'] = False
             att_type = attributes[i]['type']
             if att_type == 'SId' or att_type == 'SIdRef':
                 attributes[i]['attType'] = 'string'
@@ -131,6 +132,14 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = name
                 attributes[i]['CType'] = name + '_t'
                 attributes[i]['memberName'] = 'm' + plural
+                attributes[i]['isNumber'] = False
+            elif att_type == 'array':
+                attributes[i]['isArray'] = True
+                attributes[i]['element'] = \
+                    strFunctions.lower_first(attributes[i]['element'])
+                attributes[i]['attType'] = 'array'
+                attributes[i]['attTypeCode'] = attributes[i]['element'] + '*'
+                attributes[i]['CType'] = attributes[i]['attTypeCode']
                 attributes[i]['isNumber'] = False
             else:
                 attributes[i]['attType'] = 'FIX ME'

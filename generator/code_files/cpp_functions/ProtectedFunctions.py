@@ -75,6 +75,7 @@ class ProtectedFunctions():
         self.concretes = []
         if 'concretes' in class_object:
             self.concretes = class_object['concretes']
+        self.has_array = class_object['has_array']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -272,6 +273,40 @@ class ProtectedFunctions():
         function = 'writeXMLNS'
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name})
+
+    ########################################################################
+
+    # Functions for writing arrays
+
+    # function to write write_test
+    def write_set_element_text(self):
+        if not self.has_array:
+            return
+        elif not self.is_cpp_api:
+            return
+
+        # create comment parts
+        title_line = 'Writes the array data as a text element'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'setElementText'
+        return_type = 'void'
+        arguments = ['const std::string& text']
 
         # return the parts
         return dict({'title_line': title_line,

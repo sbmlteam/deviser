@@ -98,7 +98,8 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
-
+        if attribute['isArray'] and self.is_cpp_api:
+            return self.write_get_array(index, const)
         # create comment parts
         params = []
         return_lines = []
@@ -233,6 +234,43 @@ class SetGetFunctions():
                      'virtual': False,
                      'object_name': self.struct_name})
 
+    # function to write get function for an array
+    # specialised c++ function to use an array pointer
+    # as an argument to be read into
+    def write_get_array(self, index, const):
+        if index < len(self.attributes):
+            attribute = self.attributes[index]
+        else:
+            return None
+        # create comment parts
+        title_line = 'Returns the value of the \"{}\" attribute of this {}.' \
+            .format(attribute['name'], self.class_name)
+        params = ['@param outArray {} array that will be used to return the '
+                  'value of the \"{}\" attribute of this '
+                  '{}.'.format(attribute['attTypeCode'], attribute['name'],
+                               self.class_name)]
+        return_lines = []
+        additional = ['@note the value of the \"{}\" attribute of this '
+                      '{} is returned in the argument '
+                      'array.'.format(attribute['name'], self.class_name)]
+
+        # create the function declaration
+        function = 'get{0}'.format(attribute['capAttName'])
+        return_type = 'void'
+        arguments = ['{} outArray'.format(attribute['attTypeCode'])]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': const,
+                     'virtual': False,
+                     'object_name': self.struct_name})
+
     ########################################################################
 
     # Functions for writing is set functions
@@ -314,6 +352,8 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
+        if attribute['isArray'] and self.is_cpp_api:
+            return self.write_set_array(index)
         if is_attribute:
             ob_type = 'attribute'
         else:
@@ -437,6 +477,49 @@ class SetGetFunctions():
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
             arguments.append('const char * {}'.format(attribute['name']))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name})
+
+    # function to write set function for an array
+    # specialised c++ function to use an array pointer
+    # as an argument to be read into
+    def write_set_array(self, index):
+        if index < len(self.attributes):
+            attribute = self.attributes[index]
+        else:
+            return None
+        # create comment parts
+        title_line = 'Sets the value of the \"{}\" attribute of this {}.' \
+            .format(attribute['name'], self.class_name)
+        params = ['@param inArray {} array value of the \"{}\" attribute '
+                  'to be set.'.format(attribute['attTypeCode'],
+                                      attribute['name']),
+                  '@param arrayLength int value for the length of '
+                  'the \"{}\" attribute to be '
+                  'set.'.format(attribute['name'])]
+        return_lines = ["@copydetails doc_returns_success_code",
+                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t}', '@li @sbmlconstant '
+                        '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
+                        ' OperationReturnValues_t}']
+
+        additional = []
+
+        # create the function declaration
+        function = 'set{0}'.format(attribute['capAttName'])
+        return_type = 'int'
+        arguments = ['{} inArray'.format(attribute['attTypeCode']),
+                     'int arrayLength']
 
         # return the parts
         return dict({'title_line': title_line,
