@@ -871,7 +871,8 @@ SpatialPoints_setCompression(SpatialPoints_t * sp,
  */
 LIBSBML_EXTERN
 int
-SpatialPoints_setCompression(SpatialPoints_t * sp, const char * compression);
+SpatialPoints_setCompressionAsString(SpatialPoints_t * sp,
+                                     const char * compression);
 
 
 /**
@@ -944,7 +945,8 @@ SpatialPoints_setDataType(SpatialPoints_t * sp, DataKind_t dataType);
  */
 LIBSBML_EXTERN
 int
-SpatialPoints_setDataType(SpatialPoints_t * sp, const char * dataType);
+SpatialPoints_setDataTypeAsString(SpatialPoints_t * sp,
+                                  const char * dataType);
 
 
 /**

@@ -1257,7 +1257,7 @@ SampledField_setDataType(SampledField_t * sf, DataKind_t dataType);
  */
 LIBSBML_EXTERN
 int
-SampledField_setDataType(SampledField_t * sf, const char * dataType);
+SampledField_setDataTypeAsString(SampledField_t * sf, const char * dataType);
 
 
 /**
@@ -1350,8 +1350,8 @@ SampledField_setInterpolationType(SampledField_t * sf,
  */
 LIBSBML_EXTERN
 int
-SampledField_setInterpolationType(SampledField_t * sf,
-                                  const char * interpolationType);
+SampledField_setInterpolationTypeAsString(SampledField_t * sf,
+                                          const char * interpolationType);
 
 
 /**
@@ -1389,7 +1389,8 @@ SampledField_setCompression(SampledField_t * sf,
  */
 LIBSBML_EXTERN
 int
-SampledField_setCompression(SampledField_t * sf, const char * compression);
+SampledField_setCompressionAsString(SampledField_t * sf,
+                                    const char * compression);
 
 
 /**

@@ -526,7 +526,7 @@ public:
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
-  virtual List* getAll Elements(ElementFilter * filter = NULL);
+  virtual List* getAllElements(ElementFilter * filter = NULL);
 
 
 protected:
@@ -851,8 +851,8 @@ AnalyticVolume_setFunctionType(AnalyticVolume_t * av,
  */
 LIBSBML_EXTERN
 int
-AnalyticVolume_setFunctionType(AnalyticVolume_t * av,
-                               const char * functionType);
+AnalyticVolume_setFunctionTypeAsString(AnalyticVolume_t * av,
+                                       const char * functionType);
 
 
 /**

@@ -821,7 +821,8 @@ Output_setTransitionEffect(Output_t * o,
  */
 LIBSBML_EXTERN
 int
-Output_setTransitionEffect(Output_t * o, const char * transitionEffect);
+Output_setTransitionEffectAsString(Output_t * o,
+                                   const char * transitionEffect);
 
 
 /**

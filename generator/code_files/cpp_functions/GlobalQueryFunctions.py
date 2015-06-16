@@ -174,7 +174,7 @@ class GlobalQueryFunctions():
         additional = []
 
         # create the function declaration
-        function = 'getAll Elements'
+        function = 'getAllElements'
         return_type = 'List*'
         arguments = ['ElementFilter * filter = NULL']
 

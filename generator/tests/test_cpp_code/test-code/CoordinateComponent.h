@@ -562,7 +562,7 @@ public:
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
-  virtual List* getAll Elements(ElementFilter * filter = NULL);
+  virtual List* getAllElements(ElementFilter * filter = NULL);
 
 
 protected:
@@ -857,7 +857,8 @@ CoordinateComponent_setType(CoordinateComponent_t * cc,
  */
 LIBSBML_EXTERN
 int
-CoordinateComponent_setType(CoordinateComponent_t * cc, const char * type);
+CoordinateComponent_setTypeAsString(CoordinateComponent_t * cc,
+                                    const char * type);
 
 
 /**
