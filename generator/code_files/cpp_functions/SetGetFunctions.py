@@ -210,10 +210,10 @@ class SetGetFunctions():
 
         # create the function declaration
         if self.is_cpp_api:
-            function = 'get{0}'.format(attribute['capAttName'])
+            function = 'get{0}AsString'.format(attribute['capAttName'])
             return_type = 'const std::string&'
         else:
-            function = '{0}_get{1}'.format(self.class_name,
+            function = '{0}_get{1}AsString'.format(self.class_name,
                                            attribute['capAttName'])
             return_type = 'const char *'
 

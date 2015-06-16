@@ -170,7 +170,7 @@ public:
    * @return the value of the "transitionEffect" attribute of this Output as a
    * string.
    */
-  const std::string& getTransitionEffect() const;
+  const std::string& getTransitionEffectAsString() const;
 
 
   /**
@@ -635,7 +635,7 @@ Output_getTransitionEffect(const Output_t * o);
  */
 LIBSBML_EXTERN
 const char *
-Output_getTransitionEffect(const Output_t * o);
+Output_getTransitionEffectAsString(const Output_t * o);
 
 
 /**

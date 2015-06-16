@@ -171,7 +171,7 @@ public:
    * @return the value of the "dataType" attribute of this SampledField as a
    * string.
    */
-  const std::string& getDataType() const;
+  const std::string& getDataTypeAsString() const;
 
 
   /**
@@ -218,7 +218,7 @@ public:
    * @return the value of the "interpolationType" attribute of this
    * SampledField as a string.
    */
-  const std::string& getInterpolationType() const;
+  const std::string& getInterpolationTypeAsString() const;
 
 
   /**
@@ -236,7 +236,7 @@ public:
    * @return the value of the "compression" attribute of this SampledField as a
    * string.
    */
-  const std::string& getCompression() const;
+  const std::string& getCompressionAsString() const;
 
 
   /**
@@ -922,7 +922,7 @@ SampledField_getDataType(const SampledField_t * sf);
  */
 LIBSBML_EXTERN
 const char *
-SampledField_getDataType(const SampledField_t * sf);
+SampledField_getDataTypeAsString(const SampledField_t * sf);
 
 
 /**
@@ -999,7 +999,7 @@ SampledField_getInterpolationType(const SampledField_t * sf);
  */
 LIBSBML_EXTERN
 const char *
-SampledField_getInterpolationType(const SampledField_t * sf);
+SampledField_getInterpolationTypeAsString(const SampledField_t * sf);
 
 
 /**
@@ -1029,7 +1029,7 @@ SampledField_getCompression(const SampledField_t * sf);
  */
 LIBSBML_EXTERN
 const char *
-SampledField_getCompression(const SampledField_t * sf);
+SampledField_getCompressionAsString(const SampledField_t * sf);
 
 
 /**

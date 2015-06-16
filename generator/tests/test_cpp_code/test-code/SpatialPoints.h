@@ -164,7 +164,7 @@ public:
    * @return the value of the "compression" attribute of this SpatialPoints as
    * a string.
    */
-  const std::string& getCompression() const;
+  const std::string& getCompressionAsString() const;
 
 
   /**
@@ -204,7 +204,7 @@ public:
    * @return the value of the "dataType" attribute of this SpatialPoints as a
    * string.
    */
-  const std::string& getDataType() const;
+  const std::string& getDataTypeAsString() const;
 
 
   /**
@@ -674,7 +674,7 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  */
 LIBSBML_EXTERN
 const char *
-SpatialPoints_getCompression(const SpatialPoints_t * sp);
+SpatialPoints_getCompressionAsString(const SpatialPoints_t * sp);
 
 
 /**
@@ -735,7 +735,7 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  */
 LIBSBML_EXTERN
 const char *
-SpatialPoints_getDataType(const SpatialPoints_t * sp);
+SpatialPoints_getDataTypeAsString(const SpatialPoints_t * sp);
 
 
 /**

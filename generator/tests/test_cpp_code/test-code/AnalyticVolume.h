@@ -165,7 +165,7 @@ public:
    * @return the value of the "functionType" attribute of this AnalyticVolume
    * as a string.
    */
-  const std::string& getFunctionType() const;
+  const std::string& getFunctionTypeAsString() const;
 
 
   /**
@@ -701,7 +701,7 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  */
 LIBSBML_EXTERN
 const char *
-AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
+AnalyticVolume_getFunctionTypeAsString(const AnalyticVolume_t * av);
 
 
 /**

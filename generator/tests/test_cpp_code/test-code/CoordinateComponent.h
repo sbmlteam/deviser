@@ -168,7 +168,7 @@ public:
    * @return the value of the "type" attribute of this CoordinateComponent as a
    * string.
    */
-  const std::string& getType() const;
+  const std::string& getTypeAsString() const;
 
 
   /**
@@ -739,7 +739,7 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  */
 LIBSBML_EXTERN
 const char *
-CoordinateComponent_getType(const CoordinateComponent_t * cc);
+CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc);
 
 
 /**
