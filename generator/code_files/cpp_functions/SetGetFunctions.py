@@ -465,7 +465,7 @@ class SetGetFunctions():
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
         else:
-            function = '{0}_set{1}'.format(self.class_name,
+            function = '{0}_set{1}AsString'.format(self.class_name,
                                            attribute['capAttName'])
             return_type = 'int'
 
