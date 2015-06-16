@@ -67,6 +67,8 @@ class ListOfQueryFunctions():
         if 'concretes' in class_object:
             self.concretes = class_object['concretes']
 
+        self.used_sidrefs = []
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -194,6 +196,11 @@ class ListOfQueryFunctions():
         # useful variables
         element = sid_ref['element']
         att_name = sid_ref['name']
+        match = [element, const]
+        if match in self.used_sidrefs:
+            return
+        else:
+            self.used_sidrefs.append(match)
 
         # create comment
         title_line = 'Get {} {} from the {} based on the {} to which ' \
