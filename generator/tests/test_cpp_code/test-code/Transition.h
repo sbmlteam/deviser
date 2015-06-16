@@ -49,9 +49,9 @@
 
 #include <sbml/SBase.h>
 #include <sbml/packages/qual/extension/QualExtension.h>
-#include <sbml/packages/qual/sbml/Input.h>
-#include <sbml/packages/qual/sbml/Output.h>
-#include <sbml/packages/qual/sbml/FunctionTerm.h>
+#include <sbml/packages/qual/sbml/ListOfInputs.h>
+#include <sbml/packages/qual/sbml/ListOfOutputs.h>
+#include <sbml/packages/qual/sbml/ListOfFunctionTerms.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN

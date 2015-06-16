@@ -325,6 +325,19 @@ public:
 
 
   /**
+   * Predicate returning @c true if all the required attributes for this
+   * CSGTransformation object have been set.
+   *
+   * @return @c true to indicate that all the required attributes of this
+   * CSGTransformation have been set, otherwise @c false is returned.
+   *
+   *
+   * @note The required attributes for the CSGTransformation object are:
+   */
+  virtual bool hasRequiredAttributes() const;
+
+
+  /**
    * Predicate returning @c true if all the required elements for this
    * CSGTransformation object have been set.
    *
@@ -902,6 +915,25 @@ LIBSBML_EXTERN
 int
 CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
 csgt);
+
+
+/**
+ * Predicate returning @c 1 if all the required attributes for this
+ * CSGTransformation_t object have been set.
+ *
+ * @param csgt the CSGTransformation_t structure.
+ *
+ * @return @c 1 to indicate that all the required attributes of this
+ * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ *
+ *
+ * @note The required attributes for the CSGTransformation_t object are:
+ *
+ * @memberof CSGTransformation_t
+ */
+LIBSBML_EXTERN
+int
+CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt);
 
 
 /**

@@ -67,6 +67,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.list_of_name = ''
             self.list_of_child = ''
         self.baseClass = class_object['baseClass']
+        # TO DO include info about standard base
+        self.has_std_base = True
+        if self.language != 'sbml':
+            self.has_std_base = False
+        elif not self.is_list_of and self.baseClass != 'SBase':
+            self.has_std_base = False
+        elif self.is_list_of and self.baseClass != 'ListOf':
+            self.has_std_base = False
+        self.class_object['has_std_base'] = self.has_std_base
+
         self.sid_refs = class_object['sid_refs']
         self.add_decls = None
         if 'addDecls' in class_object:
@@ -191,7 +201,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                         child))
 
         for i in range(0, len(self.child_lo_elements)):
-            child = self.child_lo_elements[i]['capAttName']
+            child = self.child_lo_elements[i]['attTypeCode']
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     child))
@@ -505,7 +515,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         num_elements = len(self.child_lo_elements)
         for i in range(0, num_elements):
             element = self.child_lo_elements[i]
-            # for hacking purposes the order for c amd cpp is different
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,

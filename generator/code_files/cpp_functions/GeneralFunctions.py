@@ -47,6 +47,7 @@ class GeneralFunctions():
         self.language = language
         self.package = class_object['package']
         self.class_name = class_object['name']
+        self.has_std_base = class_object['has_std_base']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
         if is_list_of:
@@ -242,7 +243,7 @@ class GeneralFunctions():
 
     # function to write hasRequiredAttributes
     def write_has_required_attributes(self):
-        if len(self.attributes) == 0:
+        if self.has_std_base and len(self.attributes) == 0:
             return
 
         # create comment parts

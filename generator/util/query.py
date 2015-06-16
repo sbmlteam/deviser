@@ -48,10 +48,14 @@ def has_sid_ref(attributes):
 
 
 # return a set of attributes that are of type SIdRef
-def get_sid_refs(attributes):
+def get_sid_refs(attributes, unit=False):
     sid_refs = []
+    if not unit:
+        match = 'SIdRef'
+    else:
+        match = 'UnitSIdRef'
     for i in range(0, len(attributes)):
-        if strFunctions.compare_no_case(attributes[i]['type'], 'SIdRef'):
+        if strFunctions.compare_no_case(attributes[i]['type'], match):
             sid_refs.append(attributes[i])
     return sid_refs
 

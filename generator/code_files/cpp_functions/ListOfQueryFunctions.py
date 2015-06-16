@@ -52,7 +52,7 @@ class ListOfQueryFunctions():
             self.child_name = class_object['lo_child']
             self.class_name = class_object['name']
         else:
-            self.child_name = strFunctions.upper_first(class_object['name'])
+            self.child_name = strFunctions.upper_first(class_object['element'])
             self.class_name = class_object['parent']['name']
         if is_cpp_api:
             self.object_name = self.class_name

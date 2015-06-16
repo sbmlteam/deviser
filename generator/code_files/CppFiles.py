@@ -53,6 +53,8 @@ class CppFiles():
         working_class['is_list_of'] = False
         working_class['sid_refs'] = \
             query.get_sid_refs(self.class_object['attribs'])
+        working_class['unit_sid_refs'] = \
+            query.get_sid_refs(self.class_object['attribs'], unit=True)
         ff = CppHeaderFile.CppHeaderFile(working_class)
         ff.write_file()
         ff.close_file()

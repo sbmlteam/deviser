@@ -49,7 +49,7 @@
 
 #include <sbml/packages/spatial/sbml/GeometryDefinition.h>
 #include <sbml/packages/spatial/extension/SpatialExtension.h>
-#include <sbml/packages/spatial/sbml/SampledVolume.h>
+#include <sbml/packages/spatial/sbml/ListOfSampledVolumes.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
