@@ -634,24 +634,6 @@ AnalyticVolume_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 
 
 /**
- * Creates a new AnalyticVolume_t using the given SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof AnalyticVolume_t
- */
-LIBSBML_EXTERN
-AnalyticVolume_t *
-AnalyticVolume_createWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates and returns a deep copy of this AnalyticVolume_t object.
  *
  * @param av; the AnalyticVolume_t structure

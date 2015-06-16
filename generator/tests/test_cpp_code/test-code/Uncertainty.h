@@ -530,24 +530,6 @@ Uncertainty_create(unsigned int level = DistribExtension::getDefaultLevel(),
 
 
 /**
- * Creates a new Uncertainty_t using the given DistribPkgNamespaces object.
- *
- * @param distribns the DistribPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-Uncertainty_t *
-Uncertainty_createWithNS(DistribPkgNamespaces_t *distribns);
-
-
-/**
  * Creates and returns a deep copy of this Uncertainty_t object.
  *
  * @param u; the Uncertainty_t structure

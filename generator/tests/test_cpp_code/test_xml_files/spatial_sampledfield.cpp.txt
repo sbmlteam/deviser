@@ -1,0 +1,153 @@
+#include <sbml/compress/CompressCommon.h>
+
+#ifdef USE_ZLIB
+#include <zlib.h>
+#endif
+
+/**  
+ *  Returns the data of this image as uncompressed array of integers
+ * 
+ * @param data the output array of integers (it will be allocated using
+ *             malloc and will have to be freed using free)
+ * @param length the output length of the array
+ *
+ */
+void 
+SampledField::getUncompressedData(int* &data, int& length) 
+{
+  if (mUncompressedSamples == NULL)
+  {
+    uncompress();
+  }
+
+  copySampleArrays(data, length, mUncompressedSamples, mUncompressedLength);
+  return;
+
+}
+
+void 
+SampledField::uncompress()
+{
+  freeUncompressed();
+  if (mCompression == SPATIAL_COMPRESSIONKIND_DEFLATED)
+  {
+    char* csamples = (char*)malloc(sizeof(char)*mSamplesLength);
+    for (unsigned int i = 0 ; i < mSamplesLength; ++i)
+      csamples[i] = mSamples[i];
+    SampledField::uncompress_data(csamples, mSamplesLength, mUncompressedSamples, mUncompressedLength);
+    free(csamples);
+
+    if (mUncompressedSamples == 0)
+      copySampleArrays(mUncompressedSamples, mUncompressedLength, mSamples, mSamplesLength);
+  }
+  else
+  {
+    copySampleArrays(mUncompressedSamples, mUncompressedLength, mSamples, mSamplesLength);
+  }
+
+}
+
+unsigned int 
+SampledField::getUncompressedLength()
+{
+  if (mUncompressedSamples == NULL)
+    uncompress();
+  return mUncompressedLength;
+}
+
+void 
+SampledField::getUncompressed(int* outputSamples)
+{
+  if (outputSamples == NULL) return;
+  if (mUncompressedSamples == NULL)
+    uncompress();
+  memcpy(outputSamples , mUncompressedSamples, sizeof(int)*mUncompressedLength);   
+}
+
+void 
+SampledField::freeUncompressed()
+{
+  if (mUncompressedSamples == NULL) return;
+  mUncompressedLength = 0;
+  free(mUncompressedSamples);
+  mUncompressedSamples = NULL;
+}
+
+
+void 
+SampledField::uncompress_data(void *data, size_t length, int*& result, int& outLength)
+{
+#ifndef USE_ZLIB
+  // throwing an exception won't help our users, better set the result array and length to NULL. 
+  // throw ZlibNotLinked();
+  outLength = 0;
+  result = NULL;  
+#else
+  std::vector<char> buffer;
+
+ const size_t BUFSIZE = 128 * 1024;
+ Bytef temp_buffer[BUFSIZE];
+
+ z_stream strm;
+ strm.zalloc = 0;
+ strm.zfree = 0;
+ strm.next_in = reinterpret_cast<Bytef *>(data);
+ strm.avail_in = length;
+ strm.next_out = reinterpret_cast<Bytef *>(temp_buffer);
+ strm.avail_out = BUFSIZE;
+
+ int res = inflateInit(&strm);
+
+ while (strm.avail_in != 0)
+ {
+  res = inflate(&strm, Z_NO_FLUSH);
+  if (res < 0)
+  {
+    outLength = 0;
+    result = NULL;
+    break;
+  }
+  if (strm.avail_out == 0)
+  {
+   buffer.insert(buffer.end(), temp_buffer, temp_buffer + BUFSIZE);
+   strm.next_out = reinterpret_cast<Bytef *>(temp_buffer);
+   strm.avail_out = BUFSIZE;
+  }
+ }
+
+ res = Z_OK;
+ while (res == Z_OK)
+ {
+  if (strm.avail_out == 0)
+  {
+   buffer.insert(buffer.end(), temp_buffer, temp_buffer + BUFSIZE);
+   strm.next_out = reinterpret_cast<Bytef *>(temp_buffer);
+   strm.avail_out = BUFSIZE;
+  }
+  res = inflate(&strm, Z_FINISH);
+  if (res < 0)
+  {
+    outLength = 0;
+    result = NULL;
+  }
+ }
+
+ buffer.insert(buffer.end(), temp_buffer, temp_buffer + BUFSIZE - strm.avail_out);
+ deflateEnd(&strm);
+
+ outLength = buffer.size();
+ result = (int*) malloc(sizeof(int)*outLength);
+ for (int i = 0; i < outLength; i++)
+   result[i] = buffer[i];
+#endif
+}
+
+void 
+SampledField::copySampleArrays(int* &target, int& targetLength, int* source, int sourceLength)
+{
+    targetLength = sourceLength;
+    target = (int*)malloc(sizeof(int)*sourceLength);
+    memset(target, 0, sizeof(int)*sourceLength);
+    memcpy(target, source, sizeof(int)*sourceLength);
+}
+

@@ -79,9 +79,13 @@ class BaseFile:
             max_length -= 3
 
         lines = []
+        if len(line) == 0:
+            return lines
         words = line.split()
         num_words = len(words)
-        if num_words == 1:
+        if num_words == 0:
+            lines.append(line)
+        elif num_words == 1:
             lines.append(line)
         else:
             i = 1
@@ -180,6 +184,17 @@ class BaseFile:
             tabs += '  '
         self.file_out.write('{0}{1}_EXTERN\n'
                             .format(tabs, self.library_name.upper()))
+
+    ########################################################################
+
+    # Function to copy from another file verbatim
+    def copy_additional_file(self, filename):
+        in_file = open(filename, 'r')
+        for line in in_file:
+            self.file_out.write('{0}'.format(line))
+
+ #           self.write_line(line)
+        in_file.close()
 
     ########################################################################
 

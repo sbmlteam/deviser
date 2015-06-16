@@ -68,6 +68,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.list_of_child = ''
         self.baseClass = class_object['baseClass']
         self.sid_refs = class_object['sid_refs']
+        self.add_decls = None
+        if 'addDecls' in class_object:
+            self.add_decls = class_object['addDecls']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -79,7 +82,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.concretes = query.get_concretes(class_object['root'],
                                                  class_object['concrete'])
 
-        self.class_attributes = query.seperate_attributes(self.attributes)
+        self.class_attributes = query.separate_attributes(self.attributes)
         self.class_object['class_attributes'] = self.class_attributes
         self.class_object['child_lo_elements'] = self.child_lo_elements
         self.class_object['child_elements'] = self.child_elements
@@ -120,6 +123,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.up_indent()
         self.write_protected_functions()
         self.down_indent()
+        if self.add_decls is not None:
+            self.copy_additional_file(self.add_decls)
         self.write_line('};\n')
 
     def write_c_header(self):
@@ -214,9 +219,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 code = constructor.write_level_version_constructor(i)
                 self.write_function_declaration(code)
 
-                code = constructor.write_namespace_constructor(i)
-                self.write_function_declaration(code)
-
         code = constructor.write_copy_constructor()
         self.write_function_declaration(code)
 
@@ -292,7 +294,17 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         for i in range(0, num_elements):
             code = attrib_functions.write_create(False, i)
-            self.write_function_declaration(code)
+            if code is None and 'concrete' in self.child_elements[i]:
+                # need to write creates for the concrete
+                concrete = self.child_elements[i]['concrete']
+                concretes = query.get_concretes(self.class_object['root'],
+                                                concrete)
+                for j in range(0, len(concretes)):
+                    code = attrib_functions\
+                        .write_create_concrete_child(concretes[j])
+                    self.write_function_declaration(code)
+            else:
+                self.write_function_declaration(code)
 
         for i in range(0, num_elements):
             code = attrib_functions.write_unset(False, i)

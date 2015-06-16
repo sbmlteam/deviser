@@ -430,25 +430,6 @@ CSGNode_createCSGPrimitive(
 
 
 /**
- * Creates a new CSGPrimitive (CSGNode_t) using the given SpatialPkgNamespaces
- * object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGPrimitiveWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates a new CSGTranslation (CSGNode_t) using the given SBML @p level, @ p
  * version and package version values.
  *
@@ -476,25 +457,6 @@ CSGNode_createCSGTranslation(
                              SpatialExtension::getDefaultVersion(),
                              unsigned int pkgVersion =
                              SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGTranslation (CSGNode_t) using the given
- * SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGTranslationWithNS(SpatialPkgNamespaces_t *spatialns);
 
 
 /**
@@ -528,25 +490,6 @@ CSGNode_createCSGRotation(
 
 
 /**
- * Creates a new CSGRotation (CSGNode_t) using the given SpatialPkgNamespaces
- * object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGRotationWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates a new CSGScale (CSGNode_t) using the given SBML @p level, @ p
  * version and package version values.
  *
@@ -574,25 +517,6 @@ CSGNode_createCSGScale(
                        SpatialExtension::getDefaultVersion(),
                        unsigned int pkgVersion =
                        SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGScale (CSGNode_t) using the given SpatialPkgNamespaces
- * object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGScaleWithNS(SpatialPkgNamespaces_t *spatialns);
 
 
 /**
@@ -626,26 +550,6 @@ CSGNode_createCSGHomogeneousTransformation(
 
 
 /**
- * Creates a new CSGHomogeneousTransformation (CSGNode_t) using the given
- * SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGHomogeneousTransformationWithNS(SpatialPkgNamespaces_t
-*spatialns);
-
-
-/**
  * Creates a new CSGPseudoPrimitive (CSGNode_t) using the given SBML @p level,
  * @ p version and package version values.
  *
@@ -676,25 +580,6 @@ CSGNode_createCSGPseudoPrimitive(
 
 
 /**
- * Creates a new CSGPseudoPrimitive (CSGNode_t) using the given
- * SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGPseudoPrimitiveWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates a new CSGSetOperator (CSGNode_t) using the given SBML @p level, @ p
  * version and package version values.
  *
@@ -722,25 +607,6 @@ CSGNode_createCSGSetOperator(
                              SpatialExtension::getDefaultVersion(),
                              unsigned int pkgVersion =
                              SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGSetOperator (CSGNode_t) using the given
- * SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGSetOperatorWithNS(SpatialPkgNamespaces_t *spatialns);
 
 
 /**

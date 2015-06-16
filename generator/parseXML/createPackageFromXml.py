@@ -264,13 +264,14 @@ def parse_deviser_xml(filename):
             element['lo_class_name'] = lo_class_name
 
         if add_decls is not None:
-            if os.path.exists(os.path.dirname(filename) + '/' + add_decls):
-                add_decls += os.path.dirname(filename) + '/'
+            temp = os.path.dirname(filename) + '//' + add_decls
+            if os.path.exists(temp):
+                add_decls = os.path.abspath(temp)
             element['addDecls'] = add_decls
 
         if add_defs is not None:
             if os.path.exists(os.path.dirname(filename) + '/' + add_defs):
-                add_defs += os.path.dirname(filename) + '/'
+                add_defs += os.path.abspath(filename) + '/'
             element['addDefs'] = add_defs
 
         if abstract:

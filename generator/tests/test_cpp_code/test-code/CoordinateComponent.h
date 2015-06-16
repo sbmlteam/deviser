@@ -672,25 +672,6 @@ CoordinateComponent_create(
 
 
 /**
- * Creates a new CoordinateComponent_t using the given SpatialPkgNamespaces
- * object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CoordinateComponent_t
- */
-LIBSBML_EXTERN
-CoordinateComponent_t *
-CoordinateComponent_createWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates and returns a deep copy of this CoordinateComponent_t object.
  *
  * @param cc; the CoordinateComponent_t structure

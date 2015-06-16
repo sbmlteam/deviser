@@ -927,24 +927,6 @@ Transition_create(unsigned int level = QualExtension::getDefaultLevel(),
 
 
 /**
- * Creates a new Transition_t using the given QualPkgNamespaces object.
- *
- * @param qualns the QualPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof Transition_t
- */
-LIBSBML_EXTERN
-Transition_t *
-Transition_createWithNS(QualPkgNamespaces_t *qualns);
-
-
-/**
  * Creates and returns a deep copy of this Transition_t object.
  *
  * @param t; the Transition_t structure

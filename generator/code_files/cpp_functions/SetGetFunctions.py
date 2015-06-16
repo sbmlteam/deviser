@@ -597,7 +597,7 @@ class SetGetFunctions():
 
     # Functions for writing create for a child element
 
-    # function to write set functions
+    # function to write create functions
     def write_create(self, is_attribute, index):
         if is_attribute:
             return
@@ -606,8 +606,10 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
-        # not if element is Math
+        # not if element is Math or is abstract
         if attribute['attTypeCode'] == 'ASTNode*':
+            return
+        elif attribute['abstract']:
             return
 
         # useful variables
@@ -617,6 +619,53 @@ class SetGetFunctions():
             att_name = attribute['element']
         else:
             att_type = attribute['CType']
+            att_name = attribute['element'] + '_t'
+
+        # create comment parts
+        title_line = 'Creates a new {0} object, adds it to this {1} object ' \
+                     'and returns the {0} object ' \
+                     'created.'.format(att_name, self.object_name)
+        params = []
+        if not self.is_cpp_api:
+            params.append('@param {}, the {} structure '
+                          'to which the {} should be '
+                          'added.'.format(self.abbrev_parent, self.object_name,
+                                          att_name))
+        return_lines = ['@return a new {} object '
+                        'instance.'.format(att_name)]
+        additional = []
+
+        # create the function declaration
+        arguments = []
+        if self.is_cpp_api:
+            function = 'create{}'.format(name)
+        else:
+            function = '{}_create{}'.format(self.class_name, name)
+            arguments.append('{}* {}'.format(self.object_name,
+                                             self.abbrev_parent))
+        return_type = '{}'.format(att_type)
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name})
+
+    # function to write create functions
+    def write_create_concrete_child(self, attribute):
+        # useful variables
+        name = strFunctions.upper_first(attribute['element'])
+        if self.is_cpp_api:
+            att_type = attribute['element'] + '*'
+            att_name = attribute['element']
+        else:
+            att_type = attribute['element'] + '_t*'
             att_name = attribute['element'] + '_t'
 
         # create comment parts

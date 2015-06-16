@@ -206,19 +206,19 @@
         <element name="CSGSetOperator" typeCode="SBML_SPATIAL_CSGSETOPERATOR" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgSetOperator">
           <attributes>
             <attribute name="operationType" required="true" type="enum" element="SetOperation" abstract="false" />
-            <attribute name="complementA" required="false" type="SIdRef" abstract="false" />
-            <attribute name="complementB" required="false" type="SIdRef" abstract="false" />
+            <attribute name="complementA" required="false" type="SIdRef" element="CSGNode" abstract="false" />
+            <attribute name="complementB" required="false" type="SIdRef" element="CSGNode" abstract="false" />
             <attribute name="csgNode" required="false" type="lo_element" element="CSGNode" abstract="true" />
           </attributes>
         </element>
         <element name="SpatialSymbolReference" typeCode="SBML_SPATIAL_SPATIALSYMBOLREFERENCE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="spatialRef" required="true" type="SIdRef" abstract="false" />
+            <attribute name="spatialRef" required="true" type="SIdRef" element="Geometry" abstract="false" />
           </attributes>
         </element>
         <element name="DiffusionCoefficient" typeCode="SBML_SPATIAL_DIFFUSIONCOEFFICIENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="variable" required="true" type="SIdRef" abstract="false" />
+            <attribute name="variable" required="true" type="SIdRef" element="Species" abstract="false" />
             <attribute name="type" required="true" type="enum" element="DiffusionKind" abstract="false" />
             <attribute name="coordinateReference1" required="false" type="enum" element="CoordinateKind" abstract="false" />
             <attribute name="coordinateReference2" required="false" type="enum" element="CoordinateKind" abstract="false" />
@@ -226,16 +226,16 @@
         </element>
         <element name="AdvectionCoefficient" typeCode="SBML_SPATIAL_ADVECTIONCOEFFICIENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="variable" required="true" type="SIdRef" abstract="false" />
+            <attribute name="variable" required="true" type="SIdRef" element="Species" abstract="false" />
             <attribute name="coordinate" required="true" type="enum" element="CoordinateKind" abstract="false" />
           </attributes>
         </element>
         <element name="BoundaryCondition" typeCode="SBML_SPATIAL_BOUNDARYCONDITION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="variable" required="true" type="SIdRef" abstract="false" />
+            <attribute name="variable" required="true" type="SIdRef" element="Species" abstract="false" />
             <attribute name="type" required="true" type="enum" element="BoundaryConditionKind" abstract="false" />
-            <attribute name="coordinateBoundary" required="false" type="SIdRef" abstract="false" />
-            <attribute name="boundaryDomainType" required="false" type="SIdRef" abstract="false" />
+            <attribute name="coordinateBoundary" required="false" type="SIdRef" element="Boundary" abstract="false" />
+            <attribute name="boundaryDomainType" required="false" type="SIdRef" element="DomainType" abstract="false" />
           </attributes>
         </element>
         <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">

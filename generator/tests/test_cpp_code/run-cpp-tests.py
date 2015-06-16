@@ -109,6 +109,27 @@ def main():
     test_case = 'array type'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'spatial'
+    num = 8
+    class_name = 'SampledFieldGeometry'
+    list_of = ''
+    test_case = 'non sbase base class'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
+    num = 9
+    class_name = 'SampledField'
+    list_of = ''
+    test_case = 'additional code files'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
+    num = 18
+    class_name = 'CSGTransformation'
+    list_of = ''
+    test_case = 'abstract non base class'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))

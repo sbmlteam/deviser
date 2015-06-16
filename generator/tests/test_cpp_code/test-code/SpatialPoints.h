@@ -607,24 +607,6 @@ SpatialPoints_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 
 
 /**
- * Creates a new SpatialPoints_t using the given SpatialPkgNamespaces object.
- *
- * @param spatialns the SpatialPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof SpatialPoints_t
- */
-LIBSBML_EXTERN
-SpatialPoints_t *
-SpatialPoints_createWithNS(SpatialPkgNamespaces_t *spatialns);
-
-
-/**
  * Creates and returns a deep copy of this SpatialPoints_t object.
  *
  * @param sp; the SpatialPoints_t structure

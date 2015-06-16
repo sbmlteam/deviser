@@ -877,24 +877,6 @@ MyTestClass_create(unsigned int level = TestExtension::getDefaultLevel(),
 
 
 /**
- * Creates a new MyTestClass_t using the given TestPkgNamespaces object.
- *
- * @param testns the TestPkgNamespaces object
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof MyTestClass_t
- */
-LIBSBML_EXTERN
-MyTestClass_t *
-MyTestClass_createWithNS(TestPkgNamespaces_t *testns);
-
-
-/**
  * Creates and returns a deep copy of this MyTestClass_t object.
  *
  * @param mtc; the MyTestClass_t structure

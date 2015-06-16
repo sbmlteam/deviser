@@ -119,7 +119,7 @@ def add_concrete_to_list(root, concrete, mylist):
 
 
 # return a set of attributes with any elements/lo_elements removed
-def seperate_attributes(full_attributes):
+def separate_attributes(full_attributes):
     attributes = []
     for i in range(0, len(full_attributes)):
         att_type = full_attributes[i]['attType']
