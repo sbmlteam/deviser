@@ -417,6 +417,13 @@ public:
 
 
   /**
+   * @copydoc doc_renamesidref_common
+   */
+  virtual void renameSIdRefs(const std::string& oldid,
+                             const std::string& newid);
+
+
+  /**
    * Returns the XML name of this CoordinateComponent object.
    *
    * @return the name of this element; that is "coordinateComponent".

@@ -137,6 +137,13 @@ def main():
     test_case = 'overwrites element name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_att'
+    num = 1
+    class_name = 'Unit'
+    list_of = ''
+    test_case = 'unit sid ref'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))

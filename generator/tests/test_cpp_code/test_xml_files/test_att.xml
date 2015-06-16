@@ -20,6 +20,11 @@
             <attribute name="correctId" required="false" type="SId" abstract="false" />
           </attributes>
         </element>
+        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="unit" required="false" type="UnitSIdRef" abstract="false" />
+          </attributes>
+        </element>
       </elements>
     </pkgVersion>
   </versions>

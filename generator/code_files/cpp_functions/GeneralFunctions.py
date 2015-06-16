@@ -67,6 +67,7 @@ class GeneralFunctions():
         self.typecode = class_object['typecode']
         self.attributes = class_object['class_attributes']
         self.sid_refs = class_object['sid_refs']
+        self.unit_sid_refs = class_object['unit_sid_refs']
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
         self.has_math = class_object['hasMath']
@@ -99,7 +100,7 @@ class GeneralFunctions():
         # only write is not list of and has sidrefs
         if not self.is_cpp_api or self.is_list_of:
             return
-        elif len(self.sid_refs) == 0:
+        elif len(self.sid_refs) == 0 and len(self.unit_sid_refs) == 0:
             return
 
         # create comment parts

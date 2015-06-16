@@ -78,6 +78,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.class_object['has_std_base'] = self.has_std_base
 
         self.sid_refs = class_object['sid_refs']
+        self.unit_sid_refs = class_object['unit_sid_refs']
         self.add_decls = None
         if 'addDecls' in class_object:
             self.add_decls = class_object['addDecls']
