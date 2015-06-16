@@ -3,7 +3,7 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="Fred">
           <attributes>
             <attribute name="id" required="false" type="Sid" abstract="false" />
           </attributes>
