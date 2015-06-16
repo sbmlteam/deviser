@@ -71,6 +71,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.add_decls = None
         if 'addDecls' in class_object:
             self.add_decls = class_object['addDecls']
+        self.overwrites_children = False
+        if 'childrenOverwriteElementName' in class_object:
+            self.overwrites_children = \
+                class_object['childrenOverwriteElementName']
+        self.class_object['overwrites_children'] = self.overwrites_children
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -159,8 +164,19 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def write_general_includes(self):
         self.write_line('#include <string>')
         self.skip_line(2)
-        self.write_line('#include <{0}/{1}.h>'.
-                        format(self.language, self.baseClass))
+        # TO DO make generic
+        if self.language == 'sbml':
+            if self.baseClass == 'SBase' or self.baseClass == 'ListOf':
+                self.write_line('#include <{0}/{1}.h>'.
+                                format(self.language, self.baseClass))
+            elif self.package:
+                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                                .format(self.language, self.package.lower(),
+                                        self.baseClass))
+        else:
+            self.write_line('#include <{0}/{1}.h>'.
+                            format(self.language, self.baseClass))
+
         if self.package:
             self.write_line(
                 '#include <{0}/packages/{1}/extension/{2}Extension.h>'
@@ -200,6 +216,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                     or attributes[i]['attType'] == 'boolean':
                 self.write_line('bool mIsSet{0};'
                                 .format(attributes[i]['capAttName']))
+        if self.overwrites_children:
+            self.write_line('std::string mElementName;')
 
     ########################################################################
 
@@ -324,6 +342,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         code = gen_functions.write_get_element_name()
         self.write_function_declaration(code)
+
+        code = gen_functions.write_set_element_name()
+        self.write_function_declaration(code, exclude=True)
 
         code = gen_functions.write_get_typecode()
         self.write_function_declaration(code)

@@ -130,6 +130,13 @@ def main():
     test_case = 'abstract non base class'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'spatial'
+    num = 3
+    class_name = 'Boundary'
+    list_of = ''
+    test_case = 'overwrites element name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))

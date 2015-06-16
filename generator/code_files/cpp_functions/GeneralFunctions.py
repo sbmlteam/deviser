@@ -70,6 +70,7 @@ class GeneralFunctions():
         self.child_elements = class_object['child_elements']
         self.has_math = class_object['hasMath']
         self.has_array = class_object['has_array']
+        self.overwrites_children = class_object['overwrites_children']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -524,3 +525,38 @@ class GeneralFunctions():
                      'constant': False,
                      'virtual': True,
                      'object_name': self.struct_name})
+
+    ########################################################################
+
+    # Functions for when an element has a different XML name
+
+    # function to write setElementName
+    def write_set_element_name(self):
+        if not self.is_cpp_api:
+            return
+        if not self.overwrites_children:
+            return
+        # create comment parts
+        title_line = 'Sets the XML name of this {} object.'\
+            .format(self.object_name,)
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        arguments = ['const std::string& name']
+        function = 'setElementName'
+        return_type = 'void'
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name})
+

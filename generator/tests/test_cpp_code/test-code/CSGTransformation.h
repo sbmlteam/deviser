@@ -47,7 +47,7 @@
 #include <string>
 
 
-#include <sbml/CSGNode.h>
+#include <sbml/packages/spatial/sbml/CSGNode.h>
 #include <sbml/packages/spatial/extension/SpatialExtension.h>
 #include <sbml/packages/spatial/sbml/CSGNode.h>
 
