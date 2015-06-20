@@ -52,7 +52,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.baseClass = 'SBase'
 
         # expand the information for the attributes
-        self.attributes = self.expand_attributes(attributes)
+        self.attributes = self.expand_attributes(self, attributes)
         self.child_elements = self.get_children()
         self.child_lo_elements = self.get_lo_children()
 
@@ -65,7 +65,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # Function to expand the attribute information
     @staticmethod
-    def expand_attributes(attributes):
+    def expand_attributes(self, attributes):
         for i in range(0, len(attributes)):
             capname = strFunctions.upper_first(attributes[i]['name'])
             attributes[i]['capAttName'] = capname
@@ -80,42 +80,51 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = 'std::string&'
                 attributes[i]['CType'] = 'const char *'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = '""'
             elif att_type == 'UnitSId' or att_type == 'UnitSIdRef':
                 attributes[i]['attType'] = 'string'
                 attributes[i]['attTypeCode'] = 'std::string&'
                 attributes[i]['CType'] = 'const char *'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = '""'
             elif att_type == 'string':
                 attributes[i]['attType'] = 'string'
                 attributes[i]['attTypeCode'] = 'std::string&'
                 attributes[i]['CType'] = 'const char *'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = '""'
             elif att_type == 'double':
                 attributes[i]['attType'] = 'double'
                 attributes[i]['attTypeCode'] = 'double'
                 attributes[i]['CType'] = 'double'
                 attributes[i]['isNumber'] = True
+                attributes[i]['default'] = 'util_NaN()'
             elif att_type == 'int':
                 attributes[i]['attType'] = 'integer'
                 attributes[i]['attTypeCode'] = 'int'
                 attributes[i]['CType'] = 'int'
                 attributes[i]['isNumber'] = True
+                attributes[i]['default'] = 'SBML_INT_MAX'
             elif att_type == 'uint':
                 attributes[i]['attType'] = 'unsigned integer'
                 attributes[i]['attTypeCode'] = 'unsigned int'
                 attributes[i]['CType'] = 'unsigned int'
                 attributes[i]['isNumber'] = True
+                attributes[i]['default'] = 'SBML_INT_MAX'
             elif att_type == 'bool' or att_type == 'boolean':
                 attributes[i]['attType'] = 'boolean'
                 attributes[i]['attTypeCode'] = 'bool'
                 attributes[i]['CType'] = 'int'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'false'
             elif att_type == 'enum':
                 attributes[i]['isEnum'] = True
                 attributes[i]['attType'] = 'enum'
                 attributes[i]['attTypeCode'] = attributes[i]['element'] + '_t'
                 attributes[i]['CType'] = attributes[i]['element'] + '_t'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = \
+                    self.get_default_enum_value(self, attributes[i])
             elif att_type == 'element':
                 attributes[i]['attType'] = 'element'
                 if attributes[i]['name'] == 'math':
@@ -125,6 +134,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['attTypeCode'] = attributes[i]['element']+'*'
                     attributes[i]['CType'] = attributes[i]['element']+'_t*'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'NULL'
             elif att_type == 'lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
                 plural = strFunctions.plural(attributes[i]['element'])
@@ -133,6 +143,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['CType'] = name + '_t'
                 attributes[i]['memberName'] = 'm' + plural
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'NULL'
             elif att_type == 'array':
                 attributes[i]['isArray'] = True
                 attributes[i]['element'] = \
@@ -141,11 +152,13 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = attributes[i]['element'] + '*'
                 attributes[i]['CType'] = attributes[i]['attTypeCode']
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'FIX ME'
             else:
                 attributes[i]['attType'] = 'FIX ME'
                 attributes[i]['attTypeCode'] = 'FIX ME'
                 attributes[i]['CType'] = 'FIX ME'
                 attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'FIX ME'
         return attributes
 
     def get_children(self):
@@ -284,6 +297,67 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.write_line(line)
 
+    def write_class_function_header(self, function_name, arguments,
+                                    return_type, is_const=False,
+                                    constructor_args=None):
+        is_cpp = self.is_cpp_api
+        num_arguments = len(arguments)
+        if not is_cpp:
+            self.write_extern_decl()
+        self.write_line(return_type)
+        line = function_name + '('
+        if num_arguments == 0:
+            if is_cpp and is_const:
+                line += ') const'
+            else:
+                line += ')'
+            self.write_line(line)
+        elif num_arguments == 1:
+            if is_cpp and is_const:
+                line = line + arguments[0] + ') const'
+            else:
+                line = line + arguments[0] + ')'
+            self.write_line(line)
+        else:
+            saved_line = line
+            line = line + arguments[0] + ', '
+            # create the full line
+            for n in range(1, num_arguments-1):
+                line = line + arguments[n] + ', '
+            if is_cpp and is_const:
+                line = line + arguments[num_arguments-1] + ') const'
+            else:
+                line = line + arguments[num_arguments-1] + ')'
+            # look at length and adjust
+            if len(line) >= self.line_length:
+                # do something else
+                line = saved_line
+                att_start = len(line)
+                line += arguments[0]
+                line += ','
+                if len(line) > self.line_length:
+                    self.write_line(saved_line)
+                    line = '' + arguments[0] + ','
+                    self.write_line(line, att_start)
+                else:
+                    self.write_line(line)
+                for i in range(1, num_arguments - 1):
+                    line = arguments[i] + ','
+                    self.write_line(line, att_start)
+                if is_cpp and is_const:
+                    line = arguments[num_arguments - 1] + ') const'
+                else:
+                    line = arguments[num_arguments - 1] + ')'
+                self.write_line(line, att_start)
+            else:
+                self.write_line(line)
+        if constructor_args is not None:
+            self.up_indent()
+            for i in range(0, len(constructor_args)):
+                self.write_line(constructor_args[i])
+            self.down_indent()
+
+
 ########################################################################
 
 # FUNCTIONS FOR WRITING STANDARD DOC COMMENTS
@@ -313,6 +387,11 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_line('@memberof {}'.format(object_name))
         self.close_comment()
 
+    def write_brief_header(self, title_line):
+        self.open_single_comment(self)
+        self.write_comment_line(title_line)
+        self.close_comment()
+
 #########################################################################
 
 # Function for writing a function definition with comment
@@ -331,3 +410,107 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.skip_line()
             else:
                 self.skip_line(2)
+
+    # Function for writing a function implementation
+    def write_function_implementation(self, code, exclude=False):
+        if code is not None:
+            if exclude:
+                self.write_doxygen_start()
+            self.write_brief_header(code['title_line'])
+            function_name = code['function']
+            if self.is_cpp_api:
+                function_name = code['object_name'] + '::' + code['function']
+            if 'args_no_defaults' in code:
+                arguments = code['args_no_defaults']
+            else:
+                arguments = code['arguments']
+            constructor_args = None
+            if 'constructor_args' in code:
+                constructor_args = code['constructor_args']
+            self.write_class_function_header(function_name, arguments,
+                                             code['return_type'],
+                                             code['constant'],
+                                             constructor_args)
+            if 'implementation' in code:
+                self.write_implementation(code['implementation'])
+            if exclude:
+                self.write_doxygen_end()
+                self.skip_line()
+            else:
+                self.skip_line(2)
+
+    ########################################################################
+
+    # FUNCTIONS FOR WRITING STANDARD FUNCTION Implementation
+
+    def write_implementation(self, implementation):
+        self.write_line('{')
+        for i in range(0, len(implementation)):
+            self.write_implementation_block(implementation[i]['code_type'],
+                                            implementation[i]['code'])
+            if i < len(implementation) - 1:
+                self.skip_line()
+        self.write_line('}')
+
+    def write_implementation_block(self, code_type, code):
+        self.up_indent()
+        if code_type == 'line':
+            self.write_lines(code)
+        elif code_type == 'if':
+            self.write_if_block(code)
+        elif code_type == 'if_else':
+            self.write_if_else_block(code)
+        self.down_indent()
+
+    def write_lines(self, code):
+        for i in range(0, len(code)):
+            self.write_line('{};'.format(code[i]))
+
+    def write_if_block(self, code):
+        self.write_line('if ({})'.format(code[0]))
+        self.write_line('{')
+        self.up_indent()
+        self.write_lines(code[1:len(code)])
+        self.down_indent()
+        self.write_line('}')
+
+    def write_if_else_block(self, code):
+        if_code = [code[0]]
+        i = 1
+        while code[i] != 'else' and i < len(code):
+            if_code.append(code[i])
+            i += 1
+        self.write_if_block(if_code)
+        self.write_line('else')
+        self.write_line('{')
+        self.up_indent()
+        self.write_lines(code[i+1:len(code)])
+        self.down_indent()
+        self.write_line('}')
+
+    ######################################################################
+
+    # HELPER FUNCTIONS
+
+    @staticmethod
+    def get_default_enum_value(self, attribute):
+        prefix = ''
+        name = attribute['name']
+        enums = attribute['root']['enums']
+        for i in range(0, len(enums)):
+            if name == enums[i]['name']:
+                prefix = self.get_prefix(enums[i])
+        default = prefix + '_UNKNOWN'
+        return default
+
+    @staticmethod
+    def get_prefix(enum):
+        val1 = enum['values'][0]
+        return val1
+
+    @staticmethod
+    def open_single_comment(self):
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        self.file_out.write('{0}{1}\n'.format(tabs, '/*'))

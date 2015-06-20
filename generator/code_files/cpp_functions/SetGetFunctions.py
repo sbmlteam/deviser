@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, query
 
 
 class SetGetFunctions():
@@ -165,6 +165,10 @@ class SetGetFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
+        # create the function implementation
+        implementation = ['return {}'.format(attribute['memberName'])]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -175,7 +179,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': const,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.object_name,
+                     'implementation': code})
 
     # function to write get functions
     def write_get_string_for_enum(self, is_attribute, index):
@@ -214,13 +219,18 @@ class SetGetFunctions():
             return_type = 'const std::string&'
         else:
             function = '{0}_get{1}AsString'.format(self.class_name,
-                                           attribute['capAttName'])
+                                                   attribute['capAttName'])
             return_type = 'const char *'
 
         arguments = []
         if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
+
+        implementation = ['return {}_'
+                          'toString({})'.format(attribute['element'],
+                                                attribute['memberName'])]
+        code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -232,7 +242,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write get function for an array
     # specialised c++ function to use an array pointer
@@ -324,6 +335,21 @@ class SetGetFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
+        # create the function implementation
+        if query.is_string(attribute):
+            implementation = ['return ({}.empty() == false)'.format(
+                attribute['memberName'])]
+        elif attribute['attType'] == 'enum':
+            implementation = ['return ({} != '
+                              '{})'.format(attribute['memberName'],
+                                           attribute['default'])]
+        elif query.has_is_set_member(attribute):
+            implementation = ['return mIsSet{}'.format(attribute['capAttName'])]
+        else:
+            implementation = ['']
+
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -334,7 +360,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -415,6 +442,50 @@ class SetGetFunctions():
                                  .format(attribute['CType'],
                                          attribute['name']))
 
+        # create the function implementation
+        if attribute['type'] == 'SId':
+            if self.language == 'sbml':
+                implementation = ['return SyntaxChecker::'
+                                  'checkAndSetSId(id, mId)']
+            else:
+                implementation = ['{} = {}'.format(attribute['memberName'],
+                                                   attribute['name']),
+                                  'return {}_OPERATION_'
+                                  'SUCCESS'.format(self.language.upper())]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['type'] == 'SIdRef':
+            implementation = ['!(SyntaxChecker::isValidInternalSId({})'
+                              ')'.format(attribute['name']),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        elif attribute['type'] == 'string':
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['type'] == 'enum':
+            implementation = ['{0}_isValid{0}({1}) == '
+                              '0'.format(attribute['element'],
+                                         attribute['name']),
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        elif query.has_is_set_member(attribute):
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'mIsSet{} = true'.format(attribute['capAttName']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = [dict({'code_type': 'blank', 'code': []})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -425,7 +496,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write set functions
     def write_set_string_for_enum(self, is_attribute, index):
@@ -466,7 +538,7 @@ class SetGetFunctions():
             return_type = 'int'
         else:
             function = '{0}_set{1}AsString'.format(self.class_name,
-                                           attribute['capAttName'])
+                                                   attribute['capAttName'])
             return_type = 'int'
 
         arguments = []
@@ -478,6 +550,16 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
             arguments.append('const char * {}'.format(attribute['name']))
 
+        implementation = ['{0}_isValid{0}String({1}) == '
+                          '0'.format(attribute['element'],
+                                     attribute['name']),
+                          '{} = {}'.format(attribute['memberName'],
+                                           attribute['default']),
+                          'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                          '{} = {}'.format(attribute['memberName'],
+                                           attribute['name']),
+                          'return LIBSBML_OPERATION_SUCCESS']
+        code = [dict({'code_type': 'if_else', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -488,7 +570,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write set function for an array
     # specialised c++ function to use an array pointer
@@ -581,6 +664,34 @@ class SetGetFunctions():
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
+        # create the function implementation
+        if attribute['attType'] == 'string':
+            implementation = ['{}.erase()'.format(attribute['memberName'])]
+            implementation2 = ['{}.empty() == '
+                               'true'.format(attribute['memberName']),
+                               'return LIBSBML_OPERATION_SUCCESS', 'else',
+                               'return LIBSBML_OPERATION_FAILED']
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    dict({'code_type': 'if_else', 'code': implementation2})]
+        elif attribute['attType'] == 'enum':
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'return LIBSBML_OPERATION_SUCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif query.has_is_set_member(attribute):
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'mIsSet{} = '
+                              'false'.format(attribute['capAttName'])]
+            implementation2 = ['isSet{}() == '
+                               'false'.format(attribute['capAttName']),
+                               'return LIBSBML_OPERATION_SUCCESS', 'else',
+                               'return LIBSBML_OPERATION_FAILED']
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    dict({'code_type': 'if_else', 'code': implementation2})]
+        else:
+            implementation = ['TO DO']
+            code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -591,7 +702,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 

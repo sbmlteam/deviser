@@ -38,6 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 import CppHeaderFile
+import CppCodeFile
 from util import strFunctions, query
 
 
@@ -55,14 +56,17 @@ class CppFiles():
             query.get_sid_refs(self.class_object['attribs'])
         working_class['unit_sid_refs'] = \
             query.get_sid_refs(self.class_object['attribs'], unit=True)
-        ff = CppHeaderFile.CppHeaderFile(working_class)
-        ff.write_file()
-        ff.close_file()
+        header = CppHeaderFile.CppHeaderFile(working_class)
+        header.write_file()
+        header.close_file()
+        code = CppCodeFile.CppCodeFile(working_class)
+        code.write_file()
+        code.close_file()
         if self.class_object['hasListOf']:
             lo_working_class = self.create_list_of_description()
-            gg = CppHeaderFile.CppHeaderFile(lo_working_class)
-            gg.write_file()
-            gg.close_file()
+            lo_header = CppHeaderFile.CppHeaderFile(lo_working_class)
+            lo_header.write_file()
+            lo_header.close_file()
 
     def create_list_of_description(self):
         lo_name = strFunctions.list_of_name(self.class_object['name'])

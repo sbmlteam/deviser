@@ -58,6 +58,8 @@ class Constructors():
             self.package = strFunctions.upper_first(class_object['package'])
 
         self.concretes = class_object['concretes']
+        self.base_class = class_object['baseClass']
+        self.attributes = class_object['attribs']
 
     ########################################################################
 
@@ -112,6 +114,7 @@ class Constructors():
             function = '{}_{}'.format(self.class_name, create)
             return_type = '{0} *'.format(self.object_name)
 
+        arguments_no_defaults = []
         if self.package:
             arguments = [
                 'unsigned int level = '
@@ -120,9 +123,24 @@ class Constructors():
                 '{}Extension::getDefaultVersion()'.format(self.package),
                 'unsigned int pkgVersion = '
                 '{}Extension::getDefaultPackageVersion()'.format(self.package)]
+            arguments_no_defaults = ['unsigned int level',
+                                     'unsigned int version',
+                                     'unsigned int pkgVersion']
         else:
             arguments = ['unsigned int level',
                          'unsigned int version']
+
+        # create the function implementation
+        constructor_args = self.write_constructor_args(self, None)
+        if self.package:
+            implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
+                              '(level, version, '
+                              'pkgVersion))'.format(self.language.upper(),
+                                                    self.package)]
+        else:
+            implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
+                              '(level, version))'.format(self.language.upper())]
+        code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -133,7 +151,10 @@ class Constructors():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'args_no_defaults': arguments_no_defaults,
+                     'constructor_args': constructor_args})
 
     # function to write namespace constructor
     def write_namespace_constructor(self, index=0):
@@ -186,6 +207,7 @@ class Constructors():
             return_type = '{0} *'.format(self.object_name)
 
         arguments = []
+
         if self.package:
             if self.is_cpp_api:
                 arguments.append('{0}PkgNamespaces *{1}ns'
@@ -193,7 +215,7 @@ class Constructors():
             else:
                 arguments.append('{0}PkgNamespaces_t *{1}ns'
                                  .format(self.package, self.package.lower()))
-
+            ns = '{}ns'.format(self.package.lower())
         else:
             if self.is_cpp_api:
                 arguments.append('{0}Namespaces *{1}ns'
@@ -201,6 +223,18 @@ class Constructors():
             else:
                 arguments.append('{0}Namespaces_t *{1}ns'
                                  .format(self.language.upper(), self.language))
+            ns = '{}ns'.format(self.language)
+
+        # create the function implementation
+        constructor_args = self.write_constructor_args(self, ns)
+        if self.package:
+            implementation = ['setElementNamespace({}'
+                              'ns->getURI())'.format(self.package.lower()),
+                              'loadPlugins({}ns)'.format(self.package.lower())]
+        else:
+            implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
+                              '(level, version))'.format(self.language.upper())]
+        code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -211,7 +245,9 @@ class Constructors():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'constructor_args': constructor_args})
 
     # function to write copy constructor
     def write_copy_constructor(self):
@@ -224,9 +260,15 @@ class Constructors():
             self.object_name)]
         return_lines = []
         additional = []
+        # create function decl
         function = '{}'.format(self.object_name)
         return_type = ''
         arguments = ['const {}& orig'.format(self.object_name)]
+        # create the function implementation
+        constructor_args = self.write_copy_constructor_args(self)
+        implementation = ['']
+        code = [dict({'code_type': 'blank', 'code': implementation})]
+
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -236,7 +278,9 @@ class Constructors():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'constructor_args': constructor_args})
 
     # function to write assignment operator
     def write_assignment_operator(self):
@@ -252,6 +296,13 @@ class Constructors():
         function = 'operator='.format(self.object_name)
         return_type = '{}&'.format(self.object_name)
         arguments = ['const {}& rhs'.format(self.object_name)]
+        # create the function implementation
+        implementation = ['&rhs != this']
+        implementation += self.write_assignment_args(self)
+        implementation2 = ['return *this']
+        code = [dict({'code_type': 'if', 'code': implementation}),
+                dict({'code_type': 'line', 'code': implementation2})]
+
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -261,7 +312,8 @@ class Constructors():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code})
 
     # function to write clone
     def write_clone(self):
@@ -285,6 +337,10 @@ class Constructors():
         if not self.is_cpp_api:
             arguments.append('const {}* {}'.format(self.object_name,
                                                    abbrev_object))
+        # create the function implementation
+        implementation = ['return new {}(*this)'.format(self.object_name)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -294,7 +350,8 @@ class Constructors():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code})
 
     # function to write destructor
     def write_destructor(self):
@@ -319,6 +376,10 @@ class Constructors():
         arguments = []
         if not self.is_cpp_api:
             arguments.append('{}* {}'.format(self.object_name, abbrev_object))
+        # create the function implementation
+        implementation = []
+        code = [dict({'code_type': 'blank', 'code': implementation})]
+
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -328,4 +389,45 @@ class Constructors():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.object_name})
+                     'object_name': self.object_name,
+                     'implementation': code})
+
+    ########################################################################
+
+    # HELPER FUNCTIONS
+
+    @staticmethod
+    def write_constructor_args(self, ns):
+        if ns is None:
+            constructor_args = [': {}(level, version)'.format(self.base_class)]
+        else:
+            constructor_args = [': {}({})'.format(self.base_class, ns)]
+        for attrib in self.attributes:
+            constructor_args.append(', {} ({})'.format(attrib['memberName'],
+                                                       attrib['default']))
+            if attrib['isNumber'] or attrib['attType'] == 'boolean':
+                constructor_args.append(', mIsSet{} (false)'
+                                        .format(attrib['capAttName']))
+        return constructor_args
+
+    @staticmethod
+    def write_copy_constructor_args(self):
+        constructor_args = [': {}( orig )'.format(self.base_class)]
+        for attrib in self.attributes:
+            constructor_args.append(', {0} ( orig.{0} )'
+                                    .format(attrib['memberName']))
+            if attrib['isNumber'] or attrib['attType'] == 'boolean':
+                constructor_args.append(', mIsSet{0} ( orig.mIsSet{0} )'
+                                        .format(attrib['capAttName']))
+        return constructor_args
+
+    @staticmethod
+    def write_assignment_args(self):
+        constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
+        for attrib in self.attributes:
+            constructor_args.append('{0} = rhs.{0}'
+                                    .format(attrib['memberName']))
+            if attrib['isNumber'] or attrib['attType'] == 'boolean':
+                constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
+                                        .format(attrib['capAttName']))
+        return constructor_args
