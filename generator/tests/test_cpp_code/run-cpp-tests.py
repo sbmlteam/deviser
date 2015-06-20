@@ -160,6 +160,13 @@ def main():
     test_case = 'unit sid ref'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_att'
+    num = 2
+    class_name = 'MyLoTest'
+    list_of = 'ListOfMyLoTests'
+    test_case = 'attribute on ListOf'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))

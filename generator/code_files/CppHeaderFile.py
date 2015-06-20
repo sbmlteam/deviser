@@ -153,6 +153,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_concrete_functions()
             self.write_general_functions()
         else:
+            self.write_attribute_functions()
             self.write_listof_functions()
 
     ########################################################################
