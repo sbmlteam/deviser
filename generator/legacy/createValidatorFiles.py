@@ -125,7 +125,7 @@ def createValidatorFile(pkg, classes):
       output.write('  }\n\n')
   output.write('  virtual bool visit(const SBase &x)\n')
   output.write('  {\n')
-  output.write('    if (&x == NULL || x.getPackageName() != "{0}")\n'.format(pkg.lower()))
+  output.write('    if (x.getPackageName() != "{0}")\n'.format(pkg.lower()))
   output.write('    {\n      return SBMLVisitor::visit(x);\n    }\n\n')
   output.write('    int code = x.getTypeCode();\n\n')
   output.write('    const ListOf* list = dynamic_cast<const ListOf*>(&x);\n\n')
