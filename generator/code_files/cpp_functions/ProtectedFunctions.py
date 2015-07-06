@@ -124,6 +124,10 @@ class ProtectedFunctions():
         return_type = 'SBase*'
         arguments = ['XMLInputStream& stream']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -134,7 +138,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -155,6 +160,15 @@ class ProtectedFunctions():
         return_type = 'void'
         arguments = ['ExpectedAttributes& attributes']
 
+        # create the function implementation
+        implementation = ['{}::addExpectedAttributes'
+                          '(attributes)'.format(self.base_class)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+        for i in range(0, len(self.attributes)):
+            name = self.attributes[i]['name']
+            implementation = ['attributes.add(\"{}\")'.format(name)]
+            code.append(dict({'code_type': 'line', 'code': implementation}))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -165,7 +179,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write readAttributes
     def write_read_attributes(self):
@@ -185,6 +200,12 @@ class ProtectedFunctions():
         arguments = ['const XMLAttributes& attributes',
                      'const ExpectedAttributes& expectedAttributes']
 
+        # create the function implementation
+        implementation = ['bool assigned = false']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+        for i in range(0, len(self.attributes)):
+            self.write_read_att(i, code)
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -195,7 +216,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write read other xml
     def write_read_other_xml(self):
@@ -213,6 +235,10 @@ class ProtectedFunctions():
         return_type = 'bool'
         arguments = ['XMLInputStream& stream']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -223,7 +249,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write writeAttributes
     def write_write_attributes(self):
@@ -241,6 +268,10 @@ class ProtectedFunctions():
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -251,7 +282,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -274,6 +306,10 @@ class ProtectedFunctions():
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -284,7 +320,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -308,6 +345,10 @@ class ProtectedFunctions():
         return_type = 'void'
         arguments = ['const std::string& text']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -318,7 +359,8 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -341,6 +383,10 @@ class ProtectedFunctions():
         return_type = 'bool'
         arguments = ['{}* item'.format(self.child_base_class)]
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -351,4 +397,131 @@ class ProtectedFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    #####################################################################
+
+    # HELPER FUNCTIONS
+
+    def write_read_att(self, index, code):
+        attribute = self.attributes[index]
+        name = attribute['name']
+        att_type = attribute['type']
+        member = attribute['memberName']
+        status = 'required' if attribute['reqd'] else 'optional'
+
+        implementation = ['', '{} {} (use = \"{}\"'
+                              ' )'.format(name, att_type, status),
+                          '']
+        code.append(self.create_code_block('comment', implementation))
+
+        if att_type == 'SId' or att_type == 'SIdRef':
+            self.write_sid_read(index, code)
+        elif att_type == 'enum':
+            self.write_enum_read(index, code)
+        else:
+            line = ['assigned = attributes.readInto(\"{}\", '
+                    '{})'.format(name, member)]
+            code.append(self.create_code_block('line', line))
+
+    def write_sid_read(self, index, code):
+        attribute = self.attributes[index]
+        name = attribute['name']
+        att_type = attribute['type']
+        member = attribute['memberName']
+        status = 'required' if attribute['reqd'] else 'optional'
+
+        line = ['assigned = attributes.readInto(\"{}\", {})'.format(name,
+                                                                    member)]
+        code.append(self.create_code_block('line', line))
+
+        if att_type == 'SId':
+            invalid_line = '\"The id \'\" + {} + \"\' does not conform to ' \
+                           'the syntax.\"'.format(member)
+        else:
+            invalid_line = '\"The syntax of the attribute {}=\'\" + {} + ' \
+                           '\"\' does not conform to the ' \
+                           'syntax.\"'.format(name, member)
+        line = ['{}.empty() == true'.format(member),
+                'logEmptyString({}, level, version, '
+                '\"<{}>\")'.format(member, self.class_name),
+                'else if',
+                'SyntaxChecker::isValidSBMLSId({}) == false'.format(member),
+                'logError(InvalidIdSyntax, level, version, '
+                '{})'.format(invalid_line)]
+        first_if = self.create_code_block('else_if', line)
+
+        line = 'assigned == true'
+        if status == 'optional':
+            block = [line, first_if]
+            code.append(self.create_code_block('if', block))
+        else:
+            extra_lines = ['std::string message = \"{} attribute \'{}\' '
+                           'is missing.\"'.format(self.package, name),
+                           'getErrorLog()->logPackageError(\"{}\", '
+                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           'level, version, message'
+                           ')'.format(self.package.lower(), self.package,
+                                      self.class_name)]
+            block = [line, first_if, 'else',
+                     self.create_code_block('line', extra_lines)]
+            code.append(self.create_code_block('if_else', block))
+
+    def write_enum_read(self, index, code):
+        attribute = self.attributes[index]
+        name = attribute['name']
+        element = attribute['element']
+        member = attribute['memberName']
+        status = 'required' if attribute['reqd'] else 'optional'
+
+        line = ['std::string {}'.format(name.lower()),
+                'assigned = attributes.readInto(\"{}\", '
+                '{})'.format(name, name.lower())]
+        code.append(self.create_code_block('line', line))
+
+        line = ['isSetId()', 'msg += \"with id \'\" + getId() + \"\'\"']
+        if_id = self.create_code_block('if', line)
+
+        line = ['{0}_isValid{0}({1}) == 0'.format(element, member),
+                self.create_code_block('line',
+                                       ['std::string msg = \"The {} on the <{} '
+                                        '\"'.format(name, self.class_name)]),
+                if_id,
+                self.create_code_block('line',
+                                       ['msg += \"is \'\" + {} + \"\', which '
+                                        'is not a valid option.'
+                                        '\"'.format(name.lower())])]
+        second_if = self.create_code_block('if', line)
+
+        line = ['{}.empty() == true'.format(name.lower()),
+                'logEmptyString({}, level, version, '
+                '\"<{}>\")'.format(name.lower(), self.class_name),
+                'else',
+                self.create_code_block('line',
+                                       ['{} = {}_fromString({}.'
+                                        'c_str())'.format(member, element,
+                                                          name.lower())]),
+                second_if]
+        first_if = self.create_code_block('if_else', line)
+
+        line = 'assigned == true'
+        if status == 'optional':
+            block = [line, first_if]
+            code.append(self.create_code_block('if', block))
+        else:
+            extra_lines = ['std::string message = \"{} attribute \'{}\' '
+                           'is missing.\"'.format(self.package, name),
+                           'getErrorLog()->logPackageError(\"{}\", '
+                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           'level, version, message'
+                           ')'.format(self.package.lower(), self.package,
+                                      self.class_name)]
+            block = [line, first_if, 'else',
+                     self.create_code_block('line', extra_lines)]
+            code.append(self.create_code_block('if_else', block))
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

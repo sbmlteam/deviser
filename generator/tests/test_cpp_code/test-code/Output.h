@@ -412,6 +412,8 @@ public:
    *
    *
    * @note The required attributes for the Output object are:
+   * @li "qualitativeSpecies"
+   * @li "transitionEffect"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -952,6 +954,8 @@ Output_unsetOutputLevel(Output_t * o);
  *
  *
  * @note The required attributes for the Output_t object are:
+ * @li "qualitativeSpecies"
+ * @li "transitionEffect"
  *
  * @memberof Output_t
  */

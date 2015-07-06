@@ -58,12 +58,23 @@ def run_test(name, num, class_name, test_case, list_of):
     correct_file = '.\\test-code\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
     fail = compare_files(correct_file, temp_file)
+    correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
+    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+    if os.path.isfile(correct_cpp_file):
+        print('Testing {}: code'.format(class_name))
+        fail += compare_files(correct_cpp_file, temp_cpp_file)
     if len(list_of) > 0:
         class_name = list_of
         print('Testing {}:{} {}'.format(name, class_name, test_case))
         correct_file = '.\\test-code\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
         fail += compare_files(correct_file, temp_file)
+        correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
+        temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+        if os.path.isfile(correct_cpp_file):
+            print('Testing {}: code'.format(name))
+            fail += compare_files(correct_cpp_file, temp_cpp_file)
+
     return fail
 
 

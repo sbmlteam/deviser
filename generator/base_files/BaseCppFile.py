@@ -456,37 +456,84 @@ class BaseCppFile(BaseFile.BaseFile):
         self.up_indent()
         if code_type == 'line':
             self.write_lines(code)
+        elif code_type == 'comment':
+            self.write_comments(code)
         elif code_type == 'if':
             self.write_if_block(code)
         elif code_type == 'if_else':
             self.write_if_else_block(code)
+        elif code_type == 'else_if':
+            self.write_else_if_block(code)
         self.down_indent()
+
+    def write_nested_implementation(self, implementation):
+        num = len(implementation)
+        for i in range(0, num):
+            this_impl = implementation[i]
+            if len(this_impl) == 0:
+                return
+            else:
+                if 'code_type' in this_impl:
+                    self.write_implementation_block(this_impl['code_type'],
+                                                    this_impl['code'])
+                else:
+                    self.write_line('{}'.format(this_impl))
 
     def write_lines(self, code):
         for i in range(0, len(code)):
             self.write_line('{};'.format(code[i]))
 
+    def write_comments(self, code):
+        for i in range(0, len(code)):
+            self.write_line('// {}'.format(code[i]))
+
     def write_if_block(self, code):
         self.write_line('if ({})'.format(code[0]))
         self.write_line('{')
         self.up_indent()
-        self.write_lines(code[1:len(code)])
+        self.write_nested_implementation(code[1:len(code)])
+        self.down_indent()
+        self.write_line('}')
+
+    def write_elif_block(self, code):
+        self.write_line('else if ({})'.format(code[0]))
+        self.write_line('{')
+        self.up_indent()
+        self.write_nested_implementation(code[1:len(code)])
+        self.down_indent()
+        self.write_line('}')
+
+    def write_else_block(self, code):
+        self.write_line('else')
+        self.write_line('{')
+        self.up_indent()
+        self.write_nested_implementation(code)
         self.down_indent()
         self.write_line('}')
 
     def write_if_else_block(self, code):
         if_code = [code[0]]
         i = 1
-        while code[i] != 'else' and i < len(code):
+        while i < len(code) and code[i] != 'else':
             if_code.append(code[i])
             i += 1
         self.write_if_block(if_code)
-        self.write_line('else')
-        self.write_line('{')
-        self.up_indent()
-        self.write_lines(code[i+1:len(code)])
-        self.down_indent()
-        self.write_line('}')
+        self.write_else_block(code[i+1:len(code)])
+
+    def write_else_if_block(self, code):
+        if_code = [code[0]]
+        i = 1
+        while i < len(code) and code[i] != 'else if':
+            if_code.append(code[i])
+            i += 1
+        self.write_if_block(if_code)
+        i += 1
+        else_if_code = [code[i]]
+        i += 1
+        while i < len(code) and code[i] != 'else if':
+            else_if_code.append(code[i])
+            i += 1
+        self.write_elif_block(else_if_code)
 
     ######################################################################
 
@@ -495,18 +542,29 @@ class BaseCppFile(BaseFile.BaseFile):
     @staticmethod
     def get_default_enum_value(self, attribute):
         prefix = ''
-        name = attribute['name']
+        name = attribute['element']
         enums = attribute['root']['enums']
         for i in range(0, len(enums)):
             if name == enums[i]['name']:
-                prefix = self.get_prefix(enums[i])
+                prefix = self.get_prefix(name)
         default = prefix + '_UNKNOWN'
         return default
 
     @staticmethod
-    def get_prefix(enum):
-        val1 = enum['values'][0]
-        return val1
+    def get_prefix(name):
+        prefix = ''
+        first = True
+        for i in range(0, len(name)):
+            char = name[i]
+            if char.isupper():
+                if first:
+                    prefix += char
+                    first = False
+                else:
+                    prefix += '_{}'.format(char)
+            else:
+                prefix += char.upper()
+        return prefix
 
     @staticmethod
     def open_single_comment(self):

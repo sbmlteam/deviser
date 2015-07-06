@@ -48,6 +48,7 @@ class GeneralFunctions():
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.has_std_base = class_object['has_std_base']
+        self.base_class = class_object['baseClass']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
         if is_list_of:
@@ -114,6 +115,23 @@ class GeneralFunctions():
         return_type = 'void'
         arguments = ['const std::string& oldid', 'const std::string& newid']
 
+        # create the function implementation
+        code = []
+        for i in range(0, len(self.sid_refs)):
+            ref = self.sid_refs[i]
+            implementation = ['isSet{}() && {} == '
+                              'oldid'.format(ref['capAttName'],
+                                             ref['memberName']),
+                              'set{}(newid)'.format(ref['capAttName'])]
+            code.append(dict({'code_type': 'if', 'code': implementation}))
+        for i in range(0, len(self.unit_sid_refs)):
+            ref = self.unit_sid_refs[i]
+            implementation = ['isSet{} && {} == '
+                              'oldid'.format(ref['capAttName'],
+                                             ref['memberName']),
+                              'set{}(newid)'.format(ref['capAttName'])]
+            code.append(dict({'code_type': 'if', 'code': implementation}))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -124,7 +142,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -147,6 +166,11 @@ class GeneralFunctions():
         function = 'getElementName'
         return_type = 'const std::string&'
 
+        # create the function implementation
+        name = strFunctions.lower_first(self.object_name)
+        implementation = ['static const string name = \"{}\"'.format(name),
+                          'return name']
+        code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -157,7 +181,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write getTypeCode
     def write_get_typecode(self):
@@ -188,6 +213,10 @@ class GeneralFunctions():
         arguments = []
         return_type = 'int'
 
+        # create the function implementation
+        implementation = ['return {}'.format(self.typecode)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -198,7 +227,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write getTypeCode
     def write_get_item_typecode(self):
@@ -226,6 +256,10 @@ class GeneralFunctions():
         arguments = []
         return_type = 'int'
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -236,7 +270,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -280,6 +315,17 @@ class GeneralFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
+        # create the function implementation
+        code = [dict({'code_type': 'line', 'code': ['bool allPresent = true']})]
+        for i in range(0, len(self.attributes)):
+            att = self.attributes[i]
+            if att['reqd']:
+                implementation = ['isSet{}() == '
+                                  'false'.format(att['capAttName']),
+                                  'allPresent = false']
+                code.append(dict({'code_type': 'if', 'code': implementation}))
+        code.append(dict({'code_type': 'line', 'code': ['return allPresent']}))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -290,7 +336,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write hasRequiredElements
     def write_has_required_elements(self):
@@ -333,6 +380,10 @@ class GeneralFunctions():
         if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -343,7 +394,9 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
     ########################################################################
 
     # Functions for writing general functions: writeElement, accept
@@ -365,6 +418,12 @@ class GeneralFunctions():
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
 
+        # create the function implementation
+        base = self.base_class
+        implementation = ['{}::writeElements(stream)'.format(base),
+                          '{}::writeExtensionElements(stream)'.format(base)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -375,7 +434,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write accept
     def write_accept(self):
@@ -393,6 +453,10 @@ class GeneralFunctions():
         return_type = 'bool'
         arguments = ['SBMLVisitor& v']
 
+        # create the function implementation
+        implementation = ['return v.visit(*this)']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -403,7 +467,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write setDocument
     def write_set_document(self):
@@ -421,6 +486,15 @@ class GeneralFunctions():
         return_type = 'void'
         arguments = ['SBMLDocument* d']
 
+        # create the function implementation
+        if self.language == 'sbml':
+            line = '{}::setSBMLDocument(d)'.format(self.base_class)
+        else:
+            line = '{}::set{}Document(d)'.format(self.base_class,
+                                                 self.language.upper())
+        implementation = [line]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -431,7 +505,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write_write if there is an array
     def write_write(self):
@@ -451,6 +526,10 @@ class GeneralFunctions():
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -461,7 +540,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -484,6 +564,11 @@ class GeneralFunctions():
         arguments = ['const std::string& pkgURI',
                      'const std::string& pkgPrefix', 'bool flag']
 
+        # create the function implementation
+        implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
+                          'flag)'.format(self.base_class)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -494,7 +579,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write connectToChild
     def write_connect_to_child(self):
@@ -516,6 +602,10 @@ class GeneralFunctions():
         return_type = 'void'
         arguments = []
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -526,7 +616,8 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -550,6 +641,10 @@ class GeneralFunctions():
         function = 'setElementName'
         return_type = 'void'
 
+        # create the function implementation
+        implementation = ['TO DO']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -560,5 +655,5 @@ class GeneralFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
-
+                     'object_name': self.struct_name,
+                     'implementation': code})

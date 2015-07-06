@@ -179,7 +179,7 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': const,
                      'virtual': False,
-                     'object_name': self.object_name,
+                     'object_name': self.struct_name,
                      'implementation': code})
 
     # function to write get functions
