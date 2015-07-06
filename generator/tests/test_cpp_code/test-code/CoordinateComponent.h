@@ -93,9 +93,9 @@ public:
    */
   CoordinateComponent(unsigned int level = SpatialExtension::getDefaultLevel(),
                       unsigned int version =
-                      SpatialExtension::getDefaultVersion(),
+                        SpatialExtension::getDefaultVersion(),
                       unsigned int pkgVersion =
-                      SpatialExtension::getDefaultPackageVersion());
+                        SpatialExtension::getDefaultPackageVersion());
 
 
   /**
@@ -671,11 +671,11 @@ LIBSBML_EXTERN
 CoordinateComponent_t *
 CoordinateComponent_create(
                            unsigned int level =
-                           SpatialExtension::getDefaultLevel(),
+                             SpatialExtension::getDefaultLevel(),
                            unsigned int version =
-                           SpatialExtension::getDefaultVersion(),
+                             SpatialExtension::getDefaultVersion(),
                            unsigned int pkgVersion =
-                           SpatialExtension::getDefaultPackageVersion());
+                             SpatialExtension::getDefaultPackageVersion());
 
 
 /**

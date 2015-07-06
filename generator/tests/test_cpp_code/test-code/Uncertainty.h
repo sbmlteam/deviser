@@ -90,7 +90,7 @@ public:
   Uncertainty(unsigned int level = DistribExtension::getDefaultLevel(),
               unsigned int version = DistribExtension::getDefaultVersion(),
               unsigned int pkgVersion =
-              DistribExtension::getDefaultPackageVersion());
+                DistribExtension::getDefaultPackageVersion());
 
 
   /**
@@ -524,9 +524,9 @@ LIBSBML_EXTERN
 Uncertainty_t *
 Uncertainty_create(unsigned int level = DistribExtension::getDefaultLevel(),
                    unsigned int version =
-                   DistribExtension::getDefaultVersion(),
+                     DistribExtension::getDefaultVersion(),
                    unsigned int pkgVersion =
-                   DistribExtension::getDefaultPackageVersion());
+                     DistribExtension::getDefaultPackageVersion());
 
 
 /**

@@ -127,6 +127,7 @@ class BaseFile:
         lines = self.create_lines(line, len(tabs))
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
+            tabs += '  '
 
     # function for blankLines
     def skip_line(self, num=1):
@@ -192,8 +193,6 @@ class BaseFile:
         in_file = open(filename, 'r')
         for line in in_file:
             self.file_out.write('{0}'.format(line))
-
- #           self.write_line(line)
         in_file.close()
 
     ########################################################################

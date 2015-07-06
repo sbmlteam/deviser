@@ -105,7 +105,7 @@ public:
   MyTestClass(unsigned int level = TestExtension::getDefaultLevel(),
               unsigned int version = TestExtension::getDefaultVersion(),
               unsigned int pkgVersion =
-              TestExtension::getDefaultPackageVersion());
+                TestExtension::getDefaultPackageVersion());
 
 
   /**
@@ -873,7 +873,7 @@ MyTestClass_t *
 MyTestClass_create(unsigned int level = TestExtension::getDefaultLevel(),
                    unsigned int version = TestExtension::getDefaultVersion(),
                    unsigned int pkgVersion =
-                   TestExtension::getDefaultPackageVersion());
+                     TestExtension::getDefaultPackageVersion());
 
 
 /**

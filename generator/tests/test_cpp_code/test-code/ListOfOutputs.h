@@ -82,7 +82,7 @@ public:
   ListOfOutputs(unsigned int level = QualExtension::getDefaultLevel(),
                 unsigned int version = QualExtension::getDefaultVersion(),
                 unsigned int pkgVersion =
-                QualExtension::getDefaultPackageVersion());
+                  QualExtension::getDefaultPackageVersion());
 
 
   /**

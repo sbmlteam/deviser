@@ -352,7 +352,7 @@ Unit_t *
 Unit_create(unsigned int level = TestExtension::getDefaultLevel(),
             unsigned int version = TestExtension::getDefaultVersion(),
             unsigned int pkgVersion =
-            TestExtension::getDefaultPackageVersion());
+              TestExtension::getDefaultPackageVersion());
 
 
 /**

@@ -93,9 +93,9 @@ public:
    */
   CSGTransformation(unsigned int level = SpatialExtension::getDefaultLevel(),
                     unsigned int version =
-                    SpatialExtension::getDefaultVersion(),
+                      SpatialExtension::getDefaultVersion(),
                     unsigned int pkgVersion =
-                    SpatialExtension::getDefaultPackageVersion());
+                      SpatialExtension::getDefaultPackageVersion());
 
 
   /**
@@ -543,11 +543,11 @@ LIBSBML_EXTERN
 CSGTransformation_t *
 CSGTransformation_createCSGTranslation(
                                        unsigned int level =
-                                       SpatialExtension::getDefaultLevel(),
+                                         SpatialExtension::getDefaultLevel(),
                                        unsigned int version =
-                                       SpatialExtension::getDefaultVersion(),
+                                         SpatialExtension::getDefaultVersion(),
                                        unsigned int pkgVersion =
-                                       SpatialExtension::getDefaultPackageVersion());
+                                         SpatialExtension::getDefaultPackageVersion());
 
 
 /**
@@ -575,11 +575,11 @@ LIBSBML_EXTERN
 CSGTransformation_t *
 CSGTransformation_createCSGRotation(
                                     unsigned int level =
-                                    SpatialExtension::getDefaultLevel(),
+                                      SpatialExtension::getDefaultLevel(),
                                     unsigned int version =
-                                    SpatialExtension::getDefaultVersion(),
+                                      SpatialExtension::getDefaultVersion(),
                                     unsigned int pkgVersion =
-                                    SpatialExtension::getDefaultPackageVersion());
+                                      SpatialExtension::getDefaultPackageVersion());
 
 
 /**
@@ -607,11 +607,11 @@ LIBSBML_EXTERN
 CSGTransformation_t *
 CSGTransformation_createCSGScale(
                                  unsigned int level =
-                                 SpatialExtension::getDefaultLevel(),
+                                   SpatialExtension::getDefaultLevel(),
                                  unsigned int version =
-                                 SpatialExtension::getDefaultVersion(),
+                                   SpatialExtension::getDefaultVersion(),
                                  unsigned int pkgVersion =
-                                 SpatialExtension::getDefaultPackageVersion());
+                                   SpatialExtension::getDefaultPackageVersion());
 
 
 /**
@@ -639,11 +639,11 @@ LIBSBML_EXTERN
 CSGTransformation_t *
 CSGTransformation_createCSGHomogeneousTransformation(
                                                      unsigned int level =
-                                                     SpatialExtension::getDefaultLevel(),
+                                                       SpatialExtension::getDefaultLevel(),
                                                      unsigned int version =
-                                                     SpatialExtension::getDefaultVersion(),
+                                                       SpatialExtension::getDefaultVersion(),
                                                      unsigned int pkgVersion =
-                                                     SpatialExtension::getDefaultPackageVersion());
+                                                       SpatialExtension::getDefaultPackageVersion());
 
 
 /**
@@ -801,7 +801,7 @@ CSGTransformation_createCSGScale(CSGTransformation_t* csgt);
 LIBSBML_EXTERN
 CSGHomogeneousTransformation_t*
 CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t*
-csgt);
+  csgt);
 
 
 /**
@@ -914,7 +914,7 @@ CSGTransformation_isCSGScale(const CSGTransformation_t * csgt);
 LIBSBML_EXTERN
 int
 CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
-csgt);
+  csgt);
 
 
 /**

@@ -93,7 +93,7 @@ public:
   SpatialPoints(unsigned int level = SpatialExtension::getDefaultLevel(),
                 unsigned int version = SpatialExtension::getDefaultVersion(),
                 unsigned int pkgVersion =
-                SpatialExtension::getDefaultPackageVersion());
+                  SpatialExtension::getDefaultPackageVersion());
 
 
   /**
@@ -601,9 +601,9 @@ LIBSBML_EXTERN
 SpatialPoints_t *
 SpatialPoints_create(unsigned int level = SpatialExtension::getDefaultLevel(),
                      unsigned int version =
-                     SpatialExtension::getDefaultVersion(),
+                       SpatialExtension::getDefaultVersion(),
                      unsigned int pkgVersion =
-                     SpatialExtension::getDefaultPackageVersion());
+                       SpatialExtension::getDefaultPackageVersion());
 
 
 /**

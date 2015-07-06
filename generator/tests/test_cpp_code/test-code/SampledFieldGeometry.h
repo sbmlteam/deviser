@@ -88,11 +88,11 @@ public:
    * @copydetails doc_note_setting_lv
    */
   SampledFieldGeometry(unsigned int level =
-  SpatialExtension::getDefaultLevel(),
+    SpatialExtension::getDefaultLevel(),
                        unsigned int version =
-                       SpatialExtension::getDefaultVersion(),
+                         SpatialExtension::getDefaultVersion(),
                        unsigned int pkgVersion =
-                       SpatialExtension::getDefaultPackageVersion());
+                         SpatialExtension::getDefaultPackageVersion());
 
 
   /**
@@ -268,7 +268,7 @@ public:
    * given domainType attribute or NULL if no such SampledVolume exists.
    */
   const SampledVolume* getSampledVolumeByDomainType(const std::string& sid)
-  const;
+    const;
 
 
   /**
@@ -604,11 +604,11 @@ LIBSBML_EXTERN
 SampledFieldGeometry_t *
 SampledFieldGeometry_create(
                             unsigned int level =
-                            SpatialExtension::getDefaultLevel(),
+                              SpatialExtension::getDefaultLevel(),
                             unsigned int version =
-                            SpatialExtension::getDefaultVersion(),
+                              SpatialExtension::getDefaultVersion(),
                             unsigned int pkgVersion =
-                            SpatialExtension::getDefaultPackageVersion());
+                              SpatialExtension::getDefaultPackageVersion());
 
 
 /**
@@ -723,7 +723,7 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg);
 LIBSBML_EXTERN
 ListOf_t*
 SampledFieldGeometry_getListOfSampledVolumes(const SampledFieldGeometry_t*
-sfg);
+  sfg);
 
 
 /**

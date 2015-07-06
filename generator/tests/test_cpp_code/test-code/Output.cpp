@@ -286,7 +286,7 @@ int
 Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 {
   if (TransitionOutputEffect_isValidTransitionOutputEffect(transitionEffect) ==
-  0)
+    0)
   {
     mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
@@ -306,8 +306,8 @@ int
 Output::setTransitionEffect(const std::string& transitionEffect)
 {
   if
-  (TransitionOutputEffect_isValidTransitionOutputEffectString(transitionEffect)
-  == 0)
+    (TransitionOutputEffect_isValidTransitionOutputEffectString(transitionEffect)
+      == 0)
   {
     mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
@@ -559,6 +559,19 @@ Output::enablePackageInternal(const std::string& pkgURI,
  */
 void
 Output::addExpectedAttributes(ExpectedAttributes& attributes)
+{
+  SBase::addExpectedAttributes(attributes);
+
+  attributes.add("id");
+
+  attributes.add("qualitativeSpecies");
+
+  attributes.add("transitionEffect");
+
+  attributes.add("name");
+
+  attributes.add("outputLevel");
+}
 
 /** @endcond */
 

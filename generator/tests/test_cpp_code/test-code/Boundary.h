@@ -90,7 +90,7 @@ public:
   Boundary(unsigned int level = SpatialExtension::getDefaultLevel(),
            unsigned int version = SpatialExtension::getDefaultVersion(),
            unsigned int pkgVersion =
-           SpatialExtension::getDefaultPackageVersion());
+             SpatialExtension::getDefaultPackageVersion());
 
 
   /**
@@ -405,7 +405,7 @@ Boundary_t *
 Boundary_create(unsigned int level = SpatialExtension::getDefaultLevel(),
                 unsigned int version = SpatialExtension::getDefaultVersion(),
                 unsigned int pkgVersion =
-                SpatialExtension::getDefaultPackageVersion());
+                  SpatialExtension::getDefaultPackageVersion());
 
 
 /**

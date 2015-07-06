@@ -201,8 +201,20 @@ class ProtectedFunctions():
                      'const ExpectedAttributes& expectedAttributes']
 
         # create the function implementation
-        implementation = ['bool assigned = false']
+        implementation = ['unsigned int level = getLevel()',
+                          'unsigned int version = getVersion()',
+                          'unsigned int numErrs',
+                          'bool assigned = false']
         code = [dict({'code_type': 'line', 'code': implementation})]
+
+        line = ['static_cast<{}*>(getParentSBMLObject())->size() '
+                '< 2'.format(strFunctions.cap_list_of_name(self.class_name)),
+                'numErrs = getErrorLog()->getNumErrors()']
+        code.append(self.create_code_block('if', line))
+
+        line = ['SBase::readAttributes(attributes, expectedAttributes)',
+                'numErrs = getErrorLog()->getNumErrors()']
+        code.append(self.create_code_block('line', line))
         for i in range(0, len(self.attributes)):
             self.write_read_att(i, code)
 
@@ -420,6 +432,10 @@ class ProtectedFunctions():
             self.write_sid_read(index, code)
         elif att_type == 'enum':
             self.write_enum_read(index, code)
+        elif att_type == 'string':
+            self.write_string_read(index, code)
+        elif att_type == 'int':
+            self.write_uint_read(index, code)
         else:
             line = ['assigned = attributes.readInto(\"{}\", '
                     '{})'.format(name, member)]
@@ -468,6 +484,37 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
+    def write_string_read(self, index, code):
+        attribute = self.attributes[index]
+        name = attribute['name']
+        member = attribute['memberName']
+        status = 'required' if attribute['reqd'] else 'optional'
+
+        line = ['assigned = attributes.readInto(\"{}\", {})'.format(name,
+                                                                    member)]
+        code.append(self.create_code_block('line', line))
+
+        line = ['{}.empty() == true'.format(member),
+                'logEmptyString({}, level, version, '
+                '\"<{}>\")'.format(member, self.class_name)]
+        first_if = self.create_code_block('if', line)
+
+        line = 'assigned == true'
+        if status == 'optional':
+            block = [line, first_if]
+            code.append(self.create_code_block('if', block))
+        else:
+            extra_lines = ['std::string message = \"{} attribute \'{}\' '
+                           'is missing.\"'.format(self.package, name),
+                           'getErrorLog()->logPackageError(\"{}\", '
+                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           'level, version, message'
+                           ')'.format(self.package.lower(), self.package,
+                                      self.class_name)]
+            block = [line, first_if, 'else',
+                     self.create_code_block('line', extra_lines)]
+            code.append(self.create_code_block('if_else', block))
+
     def write_enum_read(self, index, code):
         attribute = self.attributes[index]
         name = attribute['name']
@@ -485,13 +532,19 @@ class ProtectedFunctions():
 
         line = ['{0}_isValid{0}({1}) == 0'.format(element, member),
                 self.create_code_block('line',
-                                       ['std::string msg = \"The {} on the <{} '
-                                        '\"'.format(name, self.class_name)]),
+                                       ['std::string msg = \"The {} on the <{}'
+                                        '> \"'.format(name, self.class_name)]),
                 if_id,
                 self.create_code_block('line',
                                        ['msg += \"is \'\" + {} + \"\', which '
                                         'is not a valid option.'
-                                        '\"'.format(name.lower())])]
+                                        '\"'.format(name.lower())]),
+                self.create_code_block('line', ['getErrorLog()->logPackage'
+                                                'Error(\"{}\", {}{}Values, '
+                                                'getPackageVersion(), level,'
+                                                ' version, msg)'
+                                       .format(self.package.lower(),
+                                               self.package, element)])]
         second_if = self.create_code_block('if', line)
 
         line = ['{}.empty() == true'.format(name.lower()),
@@ -520,6 +573,45 @@ class ProtectedFunctions():
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
+
+    def write_uint_read(self, index, code):
+        attribute = self.attributes[index]
+        name = attribute['name']
+        up_name = strFunctions.upper_first(name)
+        member = attribute['memberName']
+        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
+
+        line = ['numErrs = getErrorLog()->getNumErrors()',
+                '{} = attributes.readInto(\"{}\", {})'.format(set_name,
+                                                              name,
+                                                              member)]
+        code.append(self.create_code_block('line', line))
+
+        line = ['getErrorLog()->getNumErrors() == numErrs + 1 && '
+                'getErrorLog()->contains(XMLAttributeTypeMismatch)',
+                'getErrorLog()->remove(XMLAttributeTypeMismatch)',
+                'getErrorLog()->logPackageError(\"{}\", {}{}MustBeInteger,'
+                ' getPackageVersion(), level, version, msg.str()))'.format(
+                    self.package.lower(), self.package, up_name)]
+        if_error = self.create_code_block('if', line)
+
+        line = ['isSetId()', 'msg << \"with id \'\" << getId() << \"\' \"']
+        if_id = self.create_code_block('if', line)
+
+        line = ['{} < 0'.format(member), 'std::stringstream msg',
+                'msg << \"The {} of the <{}> \"'.format(name, self.class_name),
+                if_id,
+                'msg << \"is \'\" << {} << \"\', which is '
+                'negative.\"'.format(member),
+                'getErrorLog()->logPackageError(\"{}\", {}{}MustBeNonNegative,'
+                ' getPackageVersion(), level, version'.format(
+                    self.package.lower(), self.package, up_name)]
+        if_neg = self.create_code_block('if', line)
+
+        line = [' {} == false'.format(set_name),
+                if_error, 'else', if_neg]
+        second_if = self.create_code_block('if_else', line)
+        code.append(second_if)
 
     @staticmethod
     def create_code_block(code_type, lines):

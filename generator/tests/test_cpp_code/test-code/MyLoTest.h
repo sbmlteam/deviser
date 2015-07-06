@@ -80,7 +80,7 @@ public:
   MyLoTest(unsigned int level = TestExtension::getDefaultLevel(),
            unsigned int version = TestExtension::getDefaultVersion(),
            unsigned int pkgVersion =
-           TestExtension::getDefaultPackageVersion());
+             TestExtension::getDefaultPackageVersion());
 
 
   /**
@@ -287,7 +287,7 @@ MyLoTest_t *
 MyLoTest_create(unsigned int level = TestExtension::getDefaultLevel(),
                 unsigned int version = TestExtension::getDefaultVersion(),
                 unsigned int pkgVersion =
-                TestExtension::getDefaultPackageVersion());
+                  TestExtension::getDefaultPackageVersion());
 
 
 /**

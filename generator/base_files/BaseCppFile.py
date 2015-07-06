@@ -445,15 +445,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_implementation(self, implementation):
         self.write_line('{')
-        for i in range(0, len(implementation)):
-            self.write_implementation_block(implementation[i]['code_type'],
-                                            implementation[i]['code'])
-            if i < len(implementation) - 1:
-                self.skip_line()
+        self.write_nested_implementation(implementation)
         self.write_line('}')
 
     def write_implementation_block(self, code_type, code):
-        self.up_indent()
         if code_type == 'line':
             self.write_lines(code)
         elif code_type == 'comment':
@@ -464,10 +459,10 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_if_else_block(code)
         elif code_type == 'else_if':
             self.write_else_if_block(code)
-        self.down_indent()
 
     def write_nested_implementation(self, implementation):
         num = len(implementation)
+        self.up_indent()
         for i in range(0, num):
             this_impl = implementation[i]
             if len(this_impl) == 0:
@@ -476,8 +471,11 @@ class BaseCppFile(BaseFile.BaseFile):
                 if 'code_type' in this_impl:
                     self.write_implementation_block(this_impl['code_type'],
                                                     this_impl['code'])
+                    if i < num - 1:
+                        self.skip_line()
                 else:
-                    self.write_line('{}'.format(this_impl))
+                    self.write_line('{};'.format(this_impl))
+        self.down_indent()
 
     def write_lines(self, code):
         for i in range(0, len(code)):
@@ -490,25 +488,19 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_if_block(self, code):
         self.write_line('if ({})'.format(code[0]))
         self.write_line('{')
-        self.up_indent()
         self.write_nested_implementation(code[1:len(code)])
-        self.down_indent()
         self.write_line('}')
 
     def write_elif_block(self, code):
         self.write_line('else if ({})'.format(code[0]))
         self.write_line('{')
-        self.up_indent()
         self.write_nested_implementation(code[1:len(code)])
-        self.down_indent()
         self.write_line('}')
 
     def write_else_block(self, code):
         self.write_line('else')
         self.write_line('{')
-        self.up_indent()
         self.write_nested_implementation(code)
-        self.down_indent()
         self.write_line('}')
 
     def write_if_else_block(self, code):

@@ -56,9 +56,9 @@ class CppFiles():
             query.get_sid_refs(self.class_object['attribs'])
         working_class['unit_sid_refs'] = \
             query.get_sid_refs(self.class_object['attribs'], unit=True)
-#        header = CppHeaderFile.CppHeaderFile(working_class)
-#        header.write_file()
-#        header.close_file()
+        header = CppHeaderFile.CppHeaderFile(working_class)
+        header.write_file()
+        header.close_file()
         code = CppCodeFile.CppCodeFile(working_class)
         code.write_file()
         code.close_file()
