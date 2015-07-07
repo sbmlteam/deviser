@@ -121,7 +121,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if self.add_decls is not None:
             self.copy_additional_file(self.add_decls)
 
-    def write_c_header(self):
+    def write_c_code(self):
         self.is_cpp_api = False
         if not self.is_list_of:
             self.write_constructors()
@@ -563,5 +563,5 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_cpp_begin()
         self.write_class()
         self.write_cpp_end()
-#        self.write_c_header()
+        self.write_c_code()
         self.write_cppns_end()

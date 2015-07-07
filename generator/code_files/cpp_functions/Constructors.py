@@ -133,13 +133,22 @@ class Constructors():
         # create the function implementation
         constructor_args = self.write_constructor_args(self, None)
         if self.package:
-            implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
-                              '(level, version, '
-                              'pkgVersion))'.format(self.language.upper(),
-                                                    self.package)]
+            if self.is_cpp_api:
+                implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
+                                  '(level, version, '
+                                  'pkgVersion))'.format(self.language.upper(),
+                                                        self.package)]
+            else:
+                implementation = ['return new {}(level, version, '
+                                  'pkgVersion)'.format(self.class_name)]
         else:
-            implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
-                              '(level, version))'.format(self.language.upper())]
+            if self.is_cpp_api:
+                implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
+                                  '(level, '
+                                  'version))'.format(self.language.upper())]
+            else:
+                implementation = ['return new {}(level, '
+                                  'version)'.format(self.class_name)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
@@ -338,8 +347,17 @@ class Constructors():
             arguments.append('const {}* {}'.format(self.object_name,
                                                    abbrev_object))
         # create the function implementation
-        implementation = ['return new {}(*this)'.format(self.object_name)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.is_cpp_api:
+            implementation = ['return new {}(*this)'.format(self.object_name)]
+            code_type = 'line'
+        else:
+            implementation = ['{} != NULL'.format(abbrev_object),
+                              'return static_cast<{}*>({}->'
+                              'clone())'.format(self.object_name,
+                                                abbrev_object),
+                              'else', 'return NULL']
+            code_type = 'if_else'
+        code = [self.create_code_block(code_type, implementation)]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -377,8 +395,14 @@ class Constructors():
         if not self.is_cpp_api:
             arguments.append('{}* {}'.format(self.object_name, abbrev_object))
         # create the function implementation
-        implementation = []
-        code = [dict({'code_type': 'blank', 'code': implementation})]
+        if self.is_cpp_api:
+            implementation = []
+            code_type = 'blank'
+        else:
+            implementation = ['{} != NULL'.format(abbrev_object),
+                              'delete {}'.format(abbrev_object)]
+            code_type = 'if'
+        code = [self.create_code_block(code_type, implementation)]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -431,3 +455,8 @@ class Constructors():
                 constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
                                         .format(attrib['capAttName']))
         return constructor_args
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

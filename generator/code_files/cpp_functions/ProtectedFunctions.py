@@ -204,17 +204,59 @@ class ProtectedFunctions():
         implementation = ['unsigned int level = getLevel()',
                           'unsigned int version = getVersion()',
                           'unsigned int numErrs',
-                          'bool assigned = false']
+                          'bool assigned = false',
+                          'SBMLErrorLog* log = getErrorLog()']
         code = [dict({'code_type': 'line', 'code': implementation})]
+
+        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownPackageAttribute)',
+                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name),
+                'else if', 'log->getError(n)->getErrorId() == '
+                           'UnknownCoreAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownCoreAttribute)',
+                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name)]
+        if_err = self.create_code_block('else_if', line)
+
+        line = ['int n = numErrs-1; n >= 0; n--', if_err]
+        for_loop = self.create_code_block('for', line)
 
         line = ['static_cast<{}*>(getParentSBMLObject())->size() '
                 '< 2'.format(strFunctions.cap_list_of_name(self.class_name)),
-                'numErrs = getErrorLog()->getNumErrors()']
+                'numErrs = log->getNumErrors()', for_loop]
         code.append(self.create_code_block('if', line))
 
         line = ['SBase::readAttributes(attributes, expectedAttributes)',
-                'numErrs = getErrorLog()->getNumErrors()']
+                'numErrs = log->getNumErrors()']
         code.append(self.create_code_block('line', line))
+
+        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownPackageAttribute)',
+                'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name),
+                'else if', 'log->getError(n)->getErrorId() == '
+                           'UnknownCoreAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownCoreAttribute)',
+                'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name)]
+        if_err = self.create_code_block('else_if', line)
+
+        line = ['int n = numErrs-1; n >= 0; n--', if_err]
+        code.append(self.create_code_block('for', line))
+
         for i in range(0, len(self.attributes)):
             self.write_read_att(i, code)
 
@@ -281,8 +323,15 @@ class ProtectedFunctions():
         arguments = ['XMLOutputStream& stream']
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['SBase::writeAttributes(stream)']
         code = [dict({'code_type': 'line', 'code': implementation})]
+
+        for i in range(0, len(self.attributes)):
+            self.write_write_att(i, code)
+
+        code.append(self.create_code_block('line',
+                                           ['SBase::writeExtension'
+                                            'Attributes(stream)']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -416,6 +465,21 @@ class ProtectedFunctions():
 
     # HELPER FUNCTIONS
 
+    def write_write_att(self, index, code):
+        name = self.attributes[index]['name']
+        cap_name = self.attributes[index]['capAttName']
+        member = self.attributes[index]['memberName']
+        att_type = self.attributes[index]['attType']
+        if att_type == 'enum':
+            element = self.attributes[index]['element']
+            variable = '{}_toString({})'.format(element, member)
+        else:
+            variable = member
+        line = ['isSet{}() == true'.format(cap_name),
+                'stream.writeAttribute(\"{}\", getPrefix(), '
+                '{})'.format(name, variable)]
+        code.append(self.create_code_block('if', line))
+
     def write_read_att(self, index, code):
         attribute = self.attributes[index]
         name = attribute['name']
@@ -506,7 +570,7 @@ class ProtectedFunctions():
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
                            'is missing.\"'.format(self.package, name),
-                           'getErrorLog()->logPackageError(\"{}\", '
+                           'log->logPackageError(\"{}\", '
                            '{}{}AllowedAttributes, getPackageVersion(), '
                            'level, version, message'
                            ')'.format(self.package.lower(), self.package,
@@ -539,7 +603,7 @@ class ProtectedFunctions():
                                        ['msg += \"is \'\" + {} + \"\', which '
                                         'is not a valid option.'
                                         '\"'.format(name.lower())]),
-                self.create_code_block('line', ['getErrorLog()->logPackage'
+                self.create_code_block('line', ['log->logPackage'
                                                 'Error(\"{}\", {}{}Values, '
                                                 'getPackageVersion(), level,'
                                                 ' version, msg)'
@@ -565,7 +629,7 @@ class ProtectedFunctions():
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
                            'is missing.\"'.format(self.package, name),
-                           'getErrorLog()->logPackageError(\"{}\", '
+                           'log->logPackageError(\"{}\", '
                            '{}{}AllowedAttributes, getPackageVersion(), '
                            'level, version, message'
                            ')'.format(self.package.lower(), self.package,
@@ -587,10 +651,10 @@ class ProtectedFunctions():
                                                               member)]
         code.append(self.create_code_block('line', line))
 
-        line = ['getErrorLog()->getNumErrors() == numErrs + 1 && '
-                'getErrorLog()->contains(XMLAttributeTypeMismatch)',
-                'getErrorLog()->remove(XMLAttributeTypeMismatch)',
-                'getErrorLog()->logPackageError(\"{}\", {}{}MustBeInteger,'
+        line = ['log->getNumErrors() == numErrs + 1 && '
+                'log->contains(XMLAttributeTypeMismatch)',
+                'log->remove(XMLAttributeTypeMismatch)',
+                'log->logPackageError(\"{}\", {}{}MustBeInteger,'
                 ' getPackageVersion(), level, version, msg.str()))'.format(
                     self.package.lower(), self.package, up_name)]
         if_error = self.create_code_block('if', line)
@@ -603,7 +667,7 @@ class ProtectedFunctions():
                 if_id,
                 'msg << \"is \'\" << {} << \"\', which is '
                 'negative.\"'.format(member),
-                'getErrorLog()->logPackageError(\"{}\", {}{}MustBeNonNegative,'
+                'log->logPackageError(\"{}\", {}{}MustBeNonNegative,'
                 ' getPackageVersion(), level, version'.format(
                     self.package.lower(), self.package, up_name)]
         if_neg = self.create_code_block('if', line)

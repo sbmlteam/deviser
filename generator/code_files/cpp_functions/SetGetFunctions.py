@@ -556,8 +556,10 @@ class SetGetFunctions():
                           '{} = {}'.format(attribute['memberName'],
                                            attribute['default']),
                           'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                          '{} = {}'.format(attribute['memberName'],
-                                           attribute['name']),
+                          '{} = {}_fromString'
+                          '({})'.format(attribute['memberName'],
+                                        attribute['element'],
+                                        attribute['name']),
                           'return LIBSBML_OPERATION_SUCCESS']
         code = [dict({'code_type': 'if_else', 'code': implementation})]
         # return the parts
