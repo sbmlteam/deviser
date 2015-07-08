@@ -316,15 +316,23 @@ class GeneralFunctions():
                              .format(self.object_name, self.abbrev_parent))
 
         # create the function implementation
-        code = [dict({'code_type': 'line', 'code': ['bool allPresent = true']})]
-        for i in range(0, len(self.attributes)):
-            att = self.attributes[i]
-            if att['reqd']:
-                implementation = ['isSet{}() == '
-                                  'false'.format(att['capAttName']),
-                                  'allPresent = false']
-                code.append(dict({'code_type': 'if', 'code': implementation}))
-        code.append(dict({'code_type': 'line', 'code': ['return allPresent']}))
+        if self.is_cpp_api:
+            code = [dict({'code_type': 'line',
+                          'code': ['bool allPresent = true']})]
+            for i in range(0, len(self.attributes)):
+                att = self.attributes[i]
+                if att['reqd']:
+                    implementation = ['isSet{}() == '
+                                      'false'.format(att['capAttName']),
+                                      'allPresent = false']
+                    code.append(dict({'code_type': 'if',
+                                      'code': implementation}))
+            code.append(dict({'code_type': 'line',
+                              'code': ['return allPresent']}))
+        else:
+            line = ['return ({0} != NULL) ? static_cast<int>({0}->'
+                    'hasRequiredAttributes()) : 0'.format(self.abbrev_parent)]
+            code = [dict({'code_type': 'line', 'code': line})]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -657,3 +665,12 @@ class GeneralFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    ########################################################################
+
+    # HELPER FUNCTIONS
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

@@ -166,8 +166,11 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
 
         # create the function implementation
-        implementation = ['return {}'.format(attribute['memberName'])]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.is_cpp_api:
+            implementation = ['return {}'.format(attribute['memberName'])]
+            code = [self.create_code_block('line', implementation)]
+        else:
+            code = self.get_c_attribute(attribute)
 
         # return the parts
         return dict({'title_line': title_line,
@@ -336,17 +339,23 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
 
         # create the function implementation
-        if query.is_string(attribute):
-            implementation = ['return ({}.empty() == false)'.format(
-                attribute['memberName'])]
-        elif attribute['attType'] == 'enum':
-            implementation = ['return ({} != '
-                              '{})'.format(attribute['memberName'],
-                                           attribute['default'])]
-        elif query.has_is_set_member(attribute):
-            implementation = ['return mIsSet{}'.format(attribute['capAttName'])]
+        if self.is_cpp_api:
+            if query.is_string(attribute):
+                implementation = ['return ({}.empty() == false)'.format(
+                    attribute['memberName'])]
+            elif attribute['attType'] == 'enum':
+                implementation = ['return ({} != '
+                                  '{})'.format(attribute['memberName'],
+                                               attribute['default'])]
+            elif query.has_is_set_member(attribute):
+                implementation = ['return '
+                                  'mIsSet{}'.format(attribute['capAttName'])]
+            else:
+                implementation = ['']
         else:
-            implementation = ['']
+            implementation = ['return ({0} != NULL) ? static_cast<int>({0}->is'
+                              'Set{1}()) : 0'.format(self.abbrev_parent,
+                                                     attribute['capAttName'])]
 
         code = [dict({'code_type': 'line', 'code': implementation})]
 
@@ -443,48 +452,15 @@ class SetGetFunctions():
                                          attribute['name']))
 
         # create the function implementation
-        if attribute['type'] == 'SId':
-            if self.language == 'sbml':
-                implementation = ['return SyntaxChecker::'
-                                  'checkAndSetSId(id, mId)']
-            else:
-                implementation = ['{} = {}'.format(attribute['memberName'],
-                                                   attribute['name']),
-                                  'return {}_OPERATION_'
-                                  'SUCCESS'.format(self.language.upper())]
-            code = [dict({'code_type': 'line', 'code': implementation})]
-        elif attribute['type'] == 'SIdRef':
-            implementation = ['!(SyntaxChecker::isValidInternalSId({})'
-                              ')'.format(attribute['name']),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                              '{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
-        elif attribute['type'] == 'string':
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            code = [dict({'code_type': 'line', 'code': implementation})]
-        elif attribute['type'] == 'enum':
-            implementation = ['{0}_isValid{0}({1}) == '
-                              '0'.format(attribute['element'],
-                                         attribute['name']),
-                              '{} = {}'.format(attribute['memberName'],
-                                               attribute['default']),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                              '{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
-        elif query.has_is_set_member(attribute):
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
-                              'mIsSet{} = true'.format(attribute['capAttName']),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.is_cpp_api:
+            code = self.set_cpp_attribute(attribute)
         else:
-            code = [dict({'code_type': 'blank', 'code': []})]
+            implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
+                              'LIBSBML'
+                              '_INVALID_OBJECT'.format(self.abbrev_parent,
+                                                       attribute['capAttName'],
+                                                       attribute['name'])]
+            code = [self.create_code_block('line', implementation)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -550,18 +526,25 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
             arguments.append('const char * {}'.format(attribute['name']))
 
-        implementation = ['{0}_isValid{0}String({1}) == '
-                          '0'.format(attribute['element'],
-                                     attribute['name']),
-                          '{} = {}'.format(attribute['memberName'],
-                                           attribute['default']),
-                          'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                          '{} = {}_fromString'
-                          '({})'.format(attribute['memberName'],
-                                        attribute['element'],
-                                        attribute['name']),
-                          'return LIBSBML_OPERATION_SUCCESS']
-        code = [dict({'code_type': 'if_else', 'code': implementation})]
+        if self.is_cpp_api:
+            implementation = ['{0}_isValid{0}String({1}) == '
+                              '0'.format(attribute['element'],
+                                         attribute['name']),
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}_fromString'
+                              '({})'.format(attribute['memberName'],
+                                            attribute['element'],
+                                            attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        else:
+            implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): LIBSBML'
+                              '_INVALID_OBJECT'.format(self.abbrev_parent,
+                                                       attribute['capAttName'],
+                                                       attribute['name'])]
+            code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -667,33 +650,13 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
 
         # create the function implementation
-        if attribute['attType'] == 'string':
-            implementation = ['{}.erase()'.format(attribute['memberName'])]
-            implementation2 = ['{}.empty() == '
-                               'true'.format(attribute['memberName']),
-                               'return LIBSBML_OPERATION_SUCCESS', 'else',
-                               'return LIBSBML_OPERATION_FAILED']
-            code = [dict({'code_type': 'line', 'code': implementation}),
-                    dict({'code_type': 'if_else', 'code': implementation2})]
-        elif attribute['attType'] == 'enum':
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['default']),
-                              'return LIBSBML_OPERATION_SUCESS']
-            code = [dict({'code_type': 'line', 'code': implementation})]
-        elif query.has_is_set_member(attribute):
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['default']),
-                              'mIsSet{} = '
-                              'false'.format(attribute['capAttName'])]
-            implementation2 = ['isSet{}() == '
-                               'false'.format(attribute['capAttName']),
-                               'return LIBSBML_OPERATION_SUCCESS', 'else',
-                               'return LIBSBML_OPERATION_FAILED']
-            code = [dict({'code_type': 'line', 'code': implementation}),
-                    dict({'code_type': 'if_else', 'code': implementation2})]
+        if self.is_cpp_api:
+            code = self.unset_cpp_attribute(attribute)
         else:
-            implementation = ['TO DO']
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIBSBML'
+                              '_INVALID_OBJECT'.format(self.abbrev_parent,
+                                                       attribute['capAttName'])]
+            code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -817,3 +780,112 @@ class SetGetFunctions():
                      'constant': False,
                      'virtual': False,
                      'object_name': self.struct_name})
+
+    ########################################################################
+
+    # HELPER FUNCTIONS
+
+    def get_c_attribute(self, attribute):
+        code = []
+        null_line = 'NULL'
+        if attribute['attType'] == 'enum':
+            null_line = '{}'.format(attribute['default'])
+        if attribute['attType'] != 'integer':
+            line = ['{} == NULL'.format(self.abbrev_parent),
+                    'return {}'.format(null_line)]
+            code = [self.create_code_block('if', line)]
+
+        if attribute['attType'] == 'enum':
+            line = ['return {}->get{}()'.format(self.abbrev_parent,
+                                                attribute['capAttName'])]
+        elif attribute['attType'] == 'integer':
+            line = ['return ({0} != NULL) ? {0}->get{1}() : '
+                    'SBML_INT_MAX'.format(self.abbrev_parent,
+                                          attribute['capAttName'])]
+        else:
+            line = ['return {0}->get{1}().empty() ? NULL : safe_strdup({0}'
+                    '->get{1}().c_str())'.format(self.abbrev_parent,
+                                                 attribute['capAttName'])]
+        code.append(self.create_code_block('line', line))
+        return code
+
+    def set_cpp_attribute(self, attribute):
+        if attribute['type'] == 'SId':
+            if self.language == 'sbml':
+                implementation = ['return SyntaxChecker::'
+                                  'checkAndSetSId(id, mId)']
+            else:
+                implementation = ['{} = {}'.format(attribute['memberName'],
+                                                   attribute['name']),
+                                  'return {}_OPERATION_'
+                                  'SUCCESS'.format(self.language.upper())]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['type'] == 'SIdRef':
+            implementation = ['!(SyntaxChecker::isValidInternalSId({})'
+                              ')'.format(attribute['name']),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        elif attribute['type'] == 'string':
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['type'] == 'enum':
+            implementation = ['{0}_isValid{0}({1}) == '
+                              '0'.format(attribute['element'],
+                                         attribute['name']),
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        elif query.has_is_set_member(attribute):
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'mIsSet{} = true'.format(attribute['capAttName']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = [dict({'code_type': 'blank', 'code': []})]
+        return code
+
+    @staticmethod
+    def unset_cpp_attribute(attribute):
+        if attribute['attType'] == 'string':
+            implementation = ['{}.erase()'.format(attribute['memberName'])]
+            implementation2 = ['{}.empty() == '
+                               'true'.format(attribute['memberName']),
+                               'return LIBSBML_OPERATION_SUCCESS', 'else',
+                               'return LIBSBML_OPERATION_FAILED']
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    dict({'code_type': 'if_else', 'code': implementation2})]
+        elif attribute['attType'] == 'enum':
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'return LIBSBML_OPERATION_SUCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif query.has_is_set_member(attribute):
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['default']),
+                              'mIsSet{} = '
+                              'false'.format(attribute['capAttName'])]
+            implementation2 = ['isSet{}() == '
+                               'false'.format(attribute['capAttName']),
+                               'return LIBSBML_OPERATION_SUCCESS', 'else',
+                               'return LIBSBML_OPERATION_FAILED']
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    dict({'code_type': 'if_else', 'code': implementation2})]
+        else:
+            implementation = ['TO DO']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        return code
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

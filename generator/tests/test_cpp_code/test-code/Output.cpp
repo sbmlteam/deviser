@@ -314,7 +314,7 @@ Output::setTransitionEffect(const std::string& transitionEffect)
   }
   else
   {
-    mTransitionEffect = transitionEffect;
+    mTransitionEffect = TransitionOutputEffect_fromString(transitionEffect);
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -585,6 +585,192 @@ Output::addExpectedAttributes(ExpectedAttributes& attributes)
 void
 Output::readAttributes(const XMLAttributes& attributes,
                        const ExpectedAttributes& expectedAttributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  unsigned int numErrs;
+  bool assigned = false;
+  SBMLErrorLog* log = getErrorLog();
+
+  if (static_cast<ListOfOutputs*>(getParentSBMLObject())->size() < 2)
+  {
+    numErrs = log->getNumErrors();
+    for (int n = numErrs-1; n >= 0; n--)
+    {
+      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownPackageAttribute);
+        log->logPackageError("qual", QualLOOutputAllowedAttributes,
+          getPackageVersion(), level, version, details);
+      }
+      else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownCoreAttribute);
+        log->logPackageError("qual", QualLOOutputAllowedAttributes,
+          getPackageVersion(), level, version, details);
+      }
+    }
+  }
+
+  SBase::readAttributes(attributes, expectedAttributes);
+  numErrs = log->getNumErrors();
+
+  for (int n = numErrs-1; n >= 0; n--)
+  {
+    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownPackageAttribute);
+      log->logPackageError("qual", QualOutputAllowedAttributes,
+        getPackageVersion(), level, version, details);
+    }
+    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownCoreAttribute);
+      log->logPackageError("qual", QualOutputAllowedAttributes,
+        getPackageVersion(), level, version, details);
+    }
+  }
+
+  // 
+  // id SId (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("id", mId);
+
+  if (assigned == true)
+  {
+    if (mId.empty() == true)
+    {
+      logEmptyString(mId, level, version, "<Output>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+    {
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
+        conform to the syntax.");
+    }
+  }
+
+  // 
+  // qualitativeSpecies SIdRef (use = "required" )
+  // 
+
+  assigned = attributes.readInto("qualitativeSpecies", mQualitativeSpecies);
+
+  if (assigned == true)
+  {
+    if (mQualitativeSpecies.empty() == true)
+    {
+      logEmptyString(mQualitativeSpecies, level, version, "<Output>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mQualitativeSpecies) == false)
+    {
+      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
+        qualitativeSpecies='" + mQualitativeSpecies + "' does not conform to the
+          syntax.");
+    }
+  }
+  else
+  {
+    std::string message = "Qual attribute 'qualitativeSpecies' is missing.";
+    getErrorLog()->logPackageError("qual", QualOutputAllowedAttributes,
+      getPackageVersion(), level, version, message);
+  }
+
+  // 
+  // transitionEffect enum (use = "required" )
+  // 
+
+  std::string transitioneffect;
+  assigned = attributes.readInto("transitionEffect", transitioneffect);
+
+  if (assigned == true)
+  {
+    if (transitioneffect.empty() == true)
+    {
+      logEmptyString(transitioneffect, level, version, "<Output>");
+    }
+    else
+    {
+      mTransitionEffect =
+        TransitionOutputEffect_fromString(transitioneffect.c_str());
+
+      if
+        (TransitionOutputEffect_isValidTransitionOutputEffect(mTransitionEffect)
+          == 0)
+      {
+        std::string msg = "The transitionEffect on the <Output> ";
+
+        if (isSetId())
+        {
+          msg += "with id '" + getId() + "'";
+        }
+
+        msg += "is '" + transitioneffect + "', which is not a valid option.";
+
+        log->logPackageError("qual", QualTransitionOutputEffectValues,
+          getPackageVersion(), level, version, msg);
+      }
+    }
+  }
+  else
+  {
+    std::string message = "Qual attribute 'transitionEffect' is missing.";
+    log->logPackageError("qual", QualOutputAllowedAttributes,
+      getPackageVersion(), level, version, message);
+  }
+
+  // 
+  // name string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("name", mName);
+
+  if (assigned == true)
+  {
+    if (mName.empty() == true)
+    {
+      logEmptyString(mName, level, version, "<Output>");
+    }
+  }
+
+  // 
+  // outputLevel int (use = "optional" )
+  // 
+
+  numErrs = getErrorLog()->getNumErrors();
+  mIsSetOutputLevel = attributes.readInto("outputLevel", mOutputLevel);
+
+  if ( mIsSetOutputLevel == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("qual", QualOutputLevelMustBeInteger,
+        getPackageVersion(), level, version, msg.str()));
+    }
+  }
+  else
+  {
+    if (mOutputLevel < 0)
+    {
+      std::stringstream msg;
+      msg << "The outputLevel of the <Output> ";
+      if (isSetId())
+      {
+        msg << "with id '" << getId() << "' ";
+      }
+
+      msg << "is '" << mOutputLevel << "', which is negative.";
+      log->logPackageError("qual", QualOutputLevelMustBeNonNegative,
+        getPackageVersion(), level, version;
+    }
+  }
+}
 
 /** @endcond */
 
@@ -597,6 +783,38 @@ Output::readAttributes(const XMLAttributes& attributes,
  */
 void
 Output::writeAttributes(XMLOutputStream& stream) const
+{
+  SBase::writeAttributes(stream);
+
+  if (isSetId() == true)
+  {
+    stream.writeAttribute("id", getPrefix(), mId);
+  }
+
+  if (isSetQualitativeSpecies() == true)
+  {
+    stream.writeAttribute("qualitativeSpecies", getPrefix(),
+      mQualitativeSpecies);
+  }
+
+  if (isSetTransitionEffect() == true)
+  {
+    stream.writeAttribute("transitionEffect", getPrefix(),
+      TransitionOutputEffect_toString(mTransitionEffect));
+  }
+
+  if (isSetName() == true)
+  {
+    stream.writeAttribute("name", getPrefix(), mName);
+  }
+
+  if (isSetOutputLevel() == true)
+  {
+    stream.writeAttribute("outputLevel", getPrefix(), mOutputLevel);
+  }
+
+  SBase::writeExtensionAttributes(stream);
+}
 
 /** @endcond */
 
@@ -604,6 +822,337 @@ Output::writeAttributes(XMLOutputStream& stream) const
 
 
 #endif /* __cplusplus */
+
+
+/*
+ * Creates a new Output_t using the given SBML @p level, @ p version and
+ * package version values.
+ */
+LIBSBML_EXTERN
+Output_t *
+Output_create(unsigned int level,
+              unsigned int version,
+              unsigned int pkgVersion)
+{
+  return new Output(level, version, pkgVersion);
+}
+
+
+/*
+ * Creates and returns a deep copy of this Output_t object.
+ */
+LIBSBML_EXTERN
+Output_t*
+Output_clone(const Output_t* o)
+{
+  if (o != NULL)
+  {
+    return static_cast<Output_t*>(o->clone());
+  }
+  else
+  {
+    return NULL;
+  }
+}
+
+
+/*
+ * Frees this Output_t object.
+ */
+LIBSBML_EXTERN
+void
+Output_free(Output_t* o)
+{
+  if (o != NULL)
+  {
+    delete o;
+  }
+}
+
+
+/*
+ * Returns the value of the "id" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+const char *
+Output_getId(const Output_t * o)
+{
+  if (o == NULL)
+  {
+    return NULL;
+  }
+
+  return o->getId().empty() ? NULL : safe_strdup(o->getId().c_str());
+}
+
+
+/*
+ * Returns the value of the "qualitativeSpecies" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+const char *
+Output_getQualitativeSpecies(const Output_t * o)
+{
+  if (o == NULL)
+  {
+    return NULL;
+  }
+
+  return o->getQualitativeSpecies().empty() ? NULL :
+    safe_strdup(o->getQualitativeSpecies().c_str());
+}
+
+
+/*
+ * Returns the value of the "transitionEffect" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+TransitionOutputEffect_t
+Output_getTransitionEffect(const Output_t * o)
+{
+  if (o == NULL)
+  {
+    return TRANSITION_OUTPUT_EFFECT_UNKNOWN;
+  }
+
+  return o->getTransitionEffect();
+}
+
+
+/*
+ * Returns the value of the "transitionEffect" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+const char *
+Output_getTransitionEffectAsString(const Output_t * o)
+{
+  return TransitionOutputEffect_toString(mTransitionEffect);
+}
+
+
+/*
+ * Returns the value of the "name" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+const char *
+Output_getName(const Output_t * o)
+{
+  if (o == NULL)
+  {
+    return NULL;
+  }
+
+  return o->getName().empty() ? NULL : safe_strdup(o->getName().c_str());
+}
+
+
+/*
+ * Returns the value of the "outputLevel" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_getOutputLevel(const Output_t * o)
+{
+  return (o != NULL) ? o->getOutputLevel() : SBML_INT_MAX;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Output_t's "id"
+ * attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+Output_isSetId(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->isSetId()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Output_t's
+ * "qualitativeSpecies" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+Output_isSetQualitativeSpecies(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->isSetQualitativeSpecies()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Output_t's
+ * "transitionEffect" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+Output_isSetTransitionEffect(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->isSetTransitionEffect()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Output_t's "name"
+ * attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+Output_isSetName(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->isSetName()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Output_t's
+ * "outputLevel" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+Output_isSetOutputLevel(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->isSetOutputLevel()) : 0;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setId(Output_t * o, const char * id)
+{
+  return (o != NULL) ? o->setId(id) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "qualitativeSpecies" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setQualitativeSpecies(Output_t * o, const char * qualitativeSpecies)
+{
+  return (o != NULL) ? o->setQualitativeSpecies(qualitativeSpecies) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "transitionEffect" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setTransitionEffect(Output_t * o,
+                           TransitionOutputEffect_t transitionEffect)
+{
+  return (o != NULL) ? o->setTransitionEffect(transitionEffect) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "transitionEffect" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setTransitionEffectAsString(Output_t * o,
+                                   const char * transitionEffect)
+{
+  return (o != NULL) ? o->setTransitionEffect(transitionEffect):
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "name" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setName(Output_t * o, const char * name)
+{
+  return (o != NULL) ? o->setName(name) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "outputLevel" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_setOutputLevel(Output_t * o, int outputLevel)
+{
+  return (o != NULL) ? o->setOutputLevel(outputLevel) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_unsetId(Output_t * o)
+{
+  return (o != NULL) ? o->unsetId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "qualitativeSpecies" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_unsetQualitativeSpecies(Output_t * o)
+{
+  return (o != NULL) ? o->unsetQualitativeSpecies() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "transitionEffect" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_unsetTransitionEffect(Output_t * o)
+{
+  return (o != NULL) ? o->unsetTransitionEffect() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_unsetName(Output_t * o)
+{
+  return (o != NULL) ? o->unsetName() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "outputLevel" attribute of this Output_t.
+ */
+LIBSBML_EXTERN
+int
+Output_unsetOutputLevel(Output_t * o)
+{
+  return (o != NULL) ? o->unsetOutputLevel() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Predicate returning @c 1 if all the required attributes for this Output_t
+ * object have been set.
+ */
+LIBSBML_EXTERN
+int
+Output_hasRequiredAttributes(const Output_t * o)
+{
+  return (o != NULL) ? static_cast<int>(o->hasRequiredAttributes()) : 0;
+}
 
 
 

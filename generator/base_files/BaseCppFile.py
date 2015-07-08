@@ -433,7 +433,7 @@ class BaseCppFile(BaseFile.BaseFile):
                                              code['constant'],
                                              constructor_args)
 
-            if 'implementation' in code:
+            if 'implementation' in code and code['implementation'] is not None:
                 self.write_implementation(code['implementation'])
             if exclude:
                 self.write_doxygen_end()
