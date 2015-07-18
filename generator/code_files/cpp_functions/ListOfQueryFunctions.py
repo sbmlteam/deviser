@@ -48,6 +48,7 @@ class ListOfQueryFunctions():
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
         self.class_object = class_object
+        self.package = class_object['package']
         if is_list_of:
             self.child_name = class_object['lo_child']
             self.class_name = class_object['name']
@@ -63,6 +64,7 @@ class ListOfQueryFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        self.std_base = class_object['std_base']
         self.concretes = []
         if 'concretes' in class_object:
             self.concretes = class_object['concretes']
@@ -121,7 +123,17 @@ class ListOfQueryFunctions():
             return_type = 'const {}*'.format(self.object_child_name)
         else:
             return_type = '{}*'.format(self.object_child_name)
-
+        if self.is_cpp_api:
+            const = 'const ' if is_const else ''
+            implementation = ['return static_cast<{}{}*>(ListOf::'
+                              'get(n))'.format(const, self.child_name)]
+            code = [self.create_code_block('line', implementation)]
+        else:
+            line = ['lo == NULL', 'return NULL']
+            code = [self.create_code_block('if', line)]
+            line = ['return static_cast <{}*>(lo)->get'
+                    '(n)'.format(self.class_name)]
+            code.append(self.create_code_block('line', line))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -132,7 +144,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': is_const,
                      'virtual': virtual,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write get by id from a listOf
     def write_get_element_by_id(self, is_const):
@@ -175,6 +188,28 @@ class ListOfQueryFunctions():
         else:
             return_type = '{}*'.format(self.object_child_name)
 
+        code = []
+        if not self.is_cpp_api:
+            line = ['lo == NULL', 'return NULL']
+            code.append(self.create_code_block('if', line))
+
+        if self.is_cpp_api and is_const:
+            implementation = ['vector<{}*>::const_iterator '
+                              'result'.format(self.std_base),
+                              'result = find_if(mItems.begin(), mItems.end(), '
+                              'IdEq<{}>(sid))'.format(self.object_child_name),
+                              'return (result == mItems.end()) ? 0 : '
+                              'static_cast  <const {}*> '
+                              '(*result)'.format(self.object_child_name)]
+        elif self.is_cpp_api:
+            implementation = ['return const_cast<{}*>(static_cast<const {}&>'
+                              '(*this).get(sid))'.format(self.object_child_name,
+                                                         self.object_name)]
+        else:
+            implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
+                              '->get(sid) : NULL'.format(self.class_name)]
+
+        code.append(self.create_code_block('line', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -185,7 +220,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': is_const,
                      'virtual': virtual,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write get by sidref from a listOf
     def write_get_element_by_sidref(self, sid_ref, const):
@@ -237,7 +273,21 @@ class ListOfQueryFunctions():
             return_type = 'const {}*'.format(self.object_child_name)
         else:
             return_type = '{}*'.format(self.object_child_name)
-
+        up_name = strFunctions.abbrev_name(element).upper()
+        if const:
+            implementation = ['vector<{}*>::const_iterator '
+                              'result'.format(self.std_base),
+                              'result = find_if(mItems.begin(), mItems.end(), '
+                              'IdEq{}<>(sid))'.format(up_name),
+                              'return (result == mItems.end()) ? 0 : '
+                              'static_cast  <const {}*> '
+                              '(*result)'.format(self.object_child_name)]
+        else:
+            implementation = ['return const_cast<{}*>(static_cast<const {}'
+                              '&>(*this).getBy{}(sid))'.format(self.child_name,
+                                                               self.class_name,
+                                                               element)]
+        code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -248,7 +298,56 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': const,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write lookup by sidref from a listOf
+    def write_lookup(self, sid_ref):
+        # c api does not need it
+        if not self.is_cpp_api:
+            return
+
+        # useful variables
+        element = sid_ref['element']
+        eq_name = 'IdEq{}'.format(strFunctions.abbrev_name(element).upper())
+        match = [element]
+        if match in self.used_sidrefs:
+            return
+        else:
+            self.used_sidrefs.append(match)
+        open_b = '{'
+        close_b = '}'
+        # create comment
+        title_line = 'Used by {}::get() to lookup {} {} ' \
+                     'based on its {}.'.format(self.class_name, self.indef_name,
+                                               self.child_name, element)
+        params = []
+        return_lines = []
+        additional = []
+
+        # create function declaration
+        function = 'struct {} : public std::unary_function' \
+                   '<SBase*, bool>'.format(eq_name)
+        arguments = []
+        return_type = ''
+        code = ['const string& id;', ' ',
+                '{} (const string& id) : id(id) {}  '
+                '{}'.format(eq_name, open_b, close_b),
+                'bool operator() (SBase* sb)', '{',
+                '        return (static_cast<{}*>(sb)'
+                '->get{}() == id);'.format(self.child_name, element), '}']
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -295,6 +394,16 @@ class ListOfQueryFunctions():
         arguments.append('unsigned int n')
         return_type = '{}*'.format(self.object_child_name)
 
+        if self.is_cpp_api:
+            implementation = ['return static_cast<{}*>(ListOf::'
+                              'remove(n))'.format(self.object_child_name)]
+            code = [self.create_code_block('line', implementation)]
+        else:
+            line = ['lo == NULL', 'return NULL']
+            code = [self.create_code_block('if', line)]
+            line = ['return static_cast <{}*>(lo)->remove'
+                    '(n)'.format(self.class_name)]
+            code.append(self.create_code_block('line', line))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -305,7 +414,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': virtual,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write remove by id from a listOf
     def write_remove_element_by_id(self):
@@ -347,6 +457,31 @@ class ListOfQueryFunctions():
             arguments.append('const char* sid')
         return_type = '{}*'.format(self.object_child_name)
 
+        if self.is_cpp_api:
+            implementation = ['{}* item = NULL'.format(self.std_base),
+                              'vector<{}*>::iterator '
+                              'result'.format(self.std_base)]
+            code = [self.create_code_block('line', implementation),
+                    self.create_code_block('line',
+                                           ['result = find_if(mItems.begin(), '
+                                            'mItems.end(), IdEq<{}>(sid)'
+                                            ')'.format(self.
+                                                       object_child_name)])]
+            implementation = ['result != mItems.end()', 'item = *result',
+                              'mItems.erase(result)']
+            code.append(self.create_code_block('if', implementation))
+            code.append(
+                self.create_code_block(
+                    'line',
+                    ['return static_cast <{}*> '
+                     '(item)'.format(self.object_child_name)]))
+        else:
+            line = ['lo == NULL', 'return NULL']
+            code = [self.create_code_block('if', line)]
+            line = ['return (sid != NULL) ? static_cast <{}*>(lo)->remove'
+                    '(sid) : NULL'.format(self.class_name)]
+            code.append(self.create_code_block('line', line))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -357,7 +492,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': virtual,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -398,6 +534,25 @@ class ListOfQueryFunctions():
                                                self.abbrev_child))
         return_type = 'int'
 
+        else_lines = ['append({})'.format(self.abbrev_child),
+                      'return LIBSBML_OPERATION_SUCCESS']
+        implementation = ['{} == NULL'.format(self.abbrev_child),
+                          'return LIBSBML_OPERATION_FAILED', 'else if',
+                          '{}->hasRequiredAttributes() == '
+                          'false'.format(self.abbrev_child),
+                          'return LIBSBML_INVALID_OBJECT', 'else if',
+                          'getLevel() != {}->'
+                          'getLevel()'.format(self.abbrev_child),
+                          'return LIBSBML_LEVEL_MISMATCH', 'else if',
+                          'getVersion() != {}->'
+                          'getVersion()'.format(self.abbrev_child),
+                          'return LIBSBML_VERSION_MISMATCH', 'else if',
+                          'matchesRequiredSBMLNamespacesForAddition(static_cast'
+                          '<const {}*>({})) == '
+                          'false'.format(self.std_base, self.abbrev_child),
+                          'return LIBSBML_NAMESPACES_MISMATCH', 'else',
+                          self.create_code_block('line', else_lines)]
+        code = [self.create_code_block('else_if', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -408,7 +563,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write create element
     def write_create_element_function(self, index=0):
@@ -447,6 +603,23 @@ class ListOfQueryFunctions():
                                              self.abbrev_parent))
         return_type = '{}*'.format(child)
 
+        implementation = ['{}* {} = NULL'.format(self.child_name,
+                                                 self.abbrev_child)]
+        code = [self.create_code_block('line', implementation)]
+        implementation = ['{}_CREATE_NS({}ns, '
+                          'getSBMLNamespaces())'.format(self.package.upper(),
+                                                        self.package.lower()),
+                          '{} = new {}({}ns)'.format(self.abbrev_child,
+                                                     self.child_name,
+                                                     self.package),
+                          'delete {}ns'.format(self.package),
+                          'catch', '...', '']
+        code.append(self.create_code_block('try', implementation))
+        implementation = ['{} != NULL'.format(self.abbrev_child),
+                          'appendAndOwn({})'.format(self.abbrev_child)]
+        code.append(self.create_code_block('if', implementation))
+        implementation = ['return {}'.format(self.abbrev_child)]
+        code.append(self.create_code_block('line', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -457,7 +630,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -487,6 +661,8 @@ class ListOfQueryFunctions():
                                              self.abbrev_parent))
         return_type = 'unsigned int'
 
+        implementation = ['return size()']
+        code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -497,7 +673,8 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -540,6 +717,8 @@ class ListOfQueryFunctions():
                                                self.abbrev_parent)]
             return_type = 'ListOf_t*'
 
+        implementation = ['TO DO']
+        code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -550,4 +729,14 @@ class ListOfQueryFunctions():
                      'arguments': arguments,
                      'constant': is_const,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    ########################################################################
+
+    # HELPER FUNCTIONS
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

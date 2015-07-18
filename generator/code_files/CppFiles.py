@@ -67,6 +67,9 @@ class CppFiles():
             lo_header = CppHeaderFile.CppHeaderFile(lo_working_class)
             lo_header.write_file()
             lo_header.close_file()
+            lo_code = CppCodeFile.CppCodeFile(lo_working_class)
+            lo_code.write_file()
+            lo_code.close_file()
 
     def create_list_of_description(self):
         lo_name = strFunctions.list_of_name(self.class_object['name'])

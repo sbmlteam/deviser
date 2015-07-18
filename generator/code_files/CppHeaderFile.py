@@ -67,15 +67,17 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.list_of_name = ''
             self.list_of_child = ''
         self.baseClass = class_object['baseClass']
-        # TO DO include info about standard base
         self.has_std_base = True
+        self.std_base = 'SBase'
         if self.language != 'sbml':
+            self.std_base = 'Foo'
             self.has_std_base = False
         elif not self.is_list_of and self.baseClass != 'SBase':
             self.has_std_base = False
         elif self.is_list_of and self.baseClass != 'ListOf':
             self.has_std_base = False
         self.class_object['has_std_base'] = self.has_std_base
+        self.class_object['std_base'] = self.std_base
 
         self.sid_refs = class_object['sid_refs']
         self.unit_sid_refs = class_object['unit_sid_refs']
@@ -176,18 +178,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def write_general_includes(self):
         self.write_line('#include <string>')
         self.skip_line(2)
-        # TO DO make generic
-        if self.language == 'sbml':
-            if self.baseClass == 'SBase' or self.baseClass == 'ListOf':
-                self.write_line('#include <{0}/{1}.h>'.
-                                format(self.language, self.baseClass))
-            elif self.package:
-                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-                                .format(self.language, self.package.lower(),
-                                        self.baseClass))
-        else:
+        if self.has_std_base:
             self.write_line('#include <{0}/{1}.h>'.
                             format(self.language, self.baseClass))
+        else:
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                            .format(self.language, self.package.lower(),
+                                    self.baseClass))
 
         if self.package:
             self.write_line(
@@ -517,6 +514,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         num_elements = len(self.child_lo_elements)
         for i in range(0, num_elements):
             element = self.child_lo_elements[i]
+            element['std_base'] = self.std_base
+            element['package'] = self.package
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,

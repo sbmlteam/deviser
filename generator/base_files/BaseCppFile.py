@@ -441,6 +441,21 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 self.skip_line(2)
 
+    # Function for writing a function implementation
+    def write_function_verbatim(self, code):
+        if code is not None:
+            self.write_brief_header(code['title_line'])
+            self.write_line(code['function'])
+
+            if 'implementation' in code and code['implementation'] is not None:
+                self.write_line('{')
+                self.up_indent()
+                for i in range(0, len(code['implementation'])):
+                    self.write_line(code['implementation'][i])
+                self.down_indent()
+                self.write_line('};')
+                self.skip_line(2)
+
     ########################################################################
 
     # FUNCTIONS FOR WRITING STANDARD FUNCTION Implementation
@@ -463,6 +478,8 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_else_if_block(code)
         elif code_type == 'for':
             self.write_block('for', code, True)
+        elif code_type == 'try':
+            self.write_try_block(code)
 
     def write_nested_implementation(self, implementation):
         num = len(implementation)
@@ -470,6 +487,7 @@ class BaseCppFile(BaseFile.BaseFile):
         for i in range(0, num):
             this_impl = implementation[i]
             if len(this_impl) == 0:
+                self.down_indent()
                 return
             else:
                 if 'code_type' in this_impl:
@@ -488,24 +506,6 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_comments(self, code):
         for i in range(0, len(code)):
             self.write_line('// {}'.format(code[i]))
-
-    # def write_if_block(self, code):
-    #     self.write_line('if ({})'.format(code[0]))
-    #     self.write_line('{')
-    #     self.write_nested_implementation(code[1:len(code)])
-    #     self.write_line('}')
-    #
-    # def write_elif_block(self, code):
-    #     self.write_line('else if ({})'.format(code[0]))
-    #     self.write_line('{')
-    #     self.write_nested_implementation(code[1:len(code)])
-    #     self.write_line('}')
-    #
-    # def write_else_block(self, code):
-    #     self.write_line('else')
-    #     self.write_line('{')
-    #     self.write_nested_implementation(code)
-    #     self.write_line('}')
 
     def write_if_else_block(self, code):
         if_code = [code[0]]
@@ -526,10 +526,31 @@ class BaseCppFile(BaseFile.BaseFile):
         i += 1
         else_if_code = [code[i]]
         i += 1
-        while i < len(code) and code[i] != 'else if':
-            else_if_code.append(code[i])
+        while i < len(code):
+            while i < len(code) and \
+                    (code[i] != 'else if' and code[i] != "else"):
+                else_if_code.append(code[i])
+                i += 1
+            self.write_block('else if', else_if_code, True)
+            if i < len(code):
+                flag_else = (code[i] == 'else')
+                if not flag_else:
+                    if i < len(code):
+                        i += 1
+                        else_if_code = [code[i]]
+                        i += 1
+                else:
+                    self.write_block('else', code[i+1:len(code)], False)
+                    break
+
+    def write_try_block(self, code):
+        try_code = [code[0]]
+        i = 1
+        while i < len(code) and code[i] != 'catch':
+            try_code.append(code[i])
             i += 1
-        self.write_block('else if', else_if_code, True)
+        self.write_block('try', try_code, False)
+        self.write_block('catch', code[i+1:len(code)], True)
 
     def write_block(self, block_start, code, condition):
         if condition:

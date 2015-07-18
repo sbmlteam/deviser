@@ -214,7 +214,10 @@ class GeneralFunctions():
         return_type = 'int'
 
         # create the function implementation
-        implementation = ['return {}'.format(self.typecode)]
+        if self.is_list_of:
+            implementation = ['return SBML_LIST_OF']
+        else:
+            implementation = ['return {}'.format(self.typecode)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -257,7 +260,7 @@ class GeneralFunctions():
         return_type = 'int'
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['return {}'.format(self.typecode)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

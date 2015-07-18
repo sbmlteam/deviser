@@ -60,6 +60,9 @@ class Constructors():
         self.concretes = class_object['concretes']
         self.base_class = class_object['baseClass']
         self.attributes = class_object['attribs']
+        self.is_list_of = False
+        if class_object['name'].startswith('ListOf'):
+            self.is_list_of = True
 
     ########################################################################
 
@@ -238,8 +241,10 @@ class Constructors():
         constructor_args = self.write_constructor_args(self, ns)
         if self.package:
             implementation = ['setElementNamespace({}'
-                              'ns->getURI())'.format(self.package.lower()),
-                              'loadPlugins({}ns)'.format(self.package.lower())]
+                              'ns->getURI())'.format(self.package.lower())]
+            if not self.is_list_of:
+                implementation.append('loadPlugins({}ns)'
+                                      .format(self.package.lower()))
         else:
             implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
                               '(level, version))'.format(self.language.upper())]

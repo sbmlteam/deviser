@@ -68,6 +68,8 @@ class GlobalQueryFunctions():
         self.sid_refs = class_object['sid_refs']
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
+        self.base_class = class_object['baseClass']
+        self.std_base = class_object['std_base']
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -104,13 +106,13 @@ class GlobalQueryFunctions():
                      'no such object is found.'
         params = ['@param id a string representing the id attribute '
                   'of the object to retrieve.']
-        return_lines = ['@return  a pointer to the SBase element with the '
-                        'given @p id.']
+        return_lines = ['@return  a pointer to the {} element with the '
+                        'given @p id.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
         function = 'getElementBySId'
-        return_type = 'SBase*'
+        return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& id']
 
         # return the parts
@@ -137,13 +139,13 @@ class GlobalQueryFunctions():
                      'no such object is found.'
         params = ['@param metaid a string representing the metaid attribute '
                   'of the object to retrieve.']
-        return_lines = ['@return  a pointer to the SBase element with the '
-                        'given @p metaid.']
+        return_lines = ['@return  a pointer to the {} element with the '
+                        'given @p metaid.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
         function = 'getElementByMetaId'
-        return_type = 'SBase*'
+        return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& metaid']
 
         # return the parts
@@ -165,12 +167,13 @@ class GlobalQueryFunctions():
                 return
 
         # create comment parts
-        title_line = 'Returns a List of all child SBase objects, including ' \
-                     'those nested to an arbitrary depth.'
+        title_line = 'Returns a List of all child {} objects, including ' \
+                     'those nested to an arbitrary depth.'.format(self.std_base)
         params = ['filter, an ElementFilter that may impose restrictions on '
                   'the objects to be retrieved.']
         return_lines = ['@return  a List* pointer of pointers to all '
-                        'SBase child objects with any restriction imposed.']
+                        '{} child objects with any restriction '
+                        'imposed.'.format(self.std_base)]
         additional = []
 
         # create the function declaration

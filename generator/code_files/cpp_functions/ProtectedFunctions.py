@@ -125,8 +125,26 @@ class ProtectedFunctions():
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
-        implementation = ['TO DO']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        ns = '{}ns'.format(self.package.lower())
+        upkg = self.package.upper()
+        if self.is_list_of:
+            implementation = ['const std::string& name = '
+                              'stream.peek().getName()',
+                              'SBase* object = NULL']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+            implementation = ['name == \"{}\"'.format(self.child_name.lower()),
+                              '{}_CREATE_NS({}, '
+                              'getSBMLNamespaces())'.format(upkg,
+                                                            ns),
+                              'object = new {}({})'.format(self.child_name,
+                                                           ns),
+                              'appendAndOwn(object)',
+                              'delete {}'.format(ns)]
+            code.append(self.create_code_block('if', implementation))
+            code.append(self.create_code_block('line', ['return object']))
+        else:
+            implementation = ['TO DO']
+            code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -368,8 +386,19 @@ class ProtectedFunctions():
         arguments = ['XMLOutputStream& stream']
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['XMLNamespaces xmlns',
+                          'std::string prefix = getPrefix()']
         code = [dict({'code_type': 'line', 'code': implementation})]
+        implementation = ['thisxmlns && thisxmlns->hasURI({}Extension::'
+                          'getXmlnsL3V1V1())'.format(self.package),
+                          'xmlns.add({}Extension::getXmlnsL3V1V1(), '
+                          'prefix)'.format(self.package)]
+        nested_if = self.create_code_block('if', implementation)
+        implementation = ['prefix.empty()',
+                          'XMLNamespaces* thisxmlns = getNamespaces()',
+                          nested_if]
+        code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block('line', ['stream << xmlns']))
 
         # return the parts
         return dict({'title_line': title_line,

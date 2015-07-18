@@ -67,15 +67,17 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             self.list_of_name = ''
             self.list_of_child = ''
         self.baseClass = class_object['baseClass']
-        # TO DO include info about standard base
         self.has_std_base = True
+        self.std_base = 'SBase'
         if self.language != 'sbml':
+            self.std_base = 'Foo'
             self.has_std_base = False
         elif not self.is_list_of and self.baseClass != 'SBase':
             self.has_std_base = False
         elif self.is_list_of and self.baseClass != 'ListOf':
             self.has_std_base = False
         self.class_object['has_std_base'] = self.has_std_base
+        self.class_object['std_base'] = self.std_base
 
         self.sid_refs = class_object['sid_refs']
         self.unit_sid_refs = class_object['unit_sid_refs']
@@ -473,6 +475,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                 self.write_function_implementation(code)
 
             for i in range(0, len(self.sid_refs)):
+                code = lo_functions.write_lookup(self.sid_refs[i])
+                self.write_function_verbatim(code)
+
                 code = \
                     lo_functions.write_get_element_by_sidref(self.sid_refs[i],
                                                              const=True)
@@ -512,6 +517,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
             sid_ref = query.get_sid_refs_for_class(element)
             for j in range(0, len(sid_ref)):
+                code = lo_functions.write_lookup(sid_ref[j])
+                self.write_function_verbatim(code)
+
                 code = \
                     lo_functions.write_get_element_by_sidref(sid_ref[j],
                                                              const=True)
