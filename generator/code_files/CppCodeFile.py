@@ -163,6 +163,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             self.write_line('#include <{0}/{1}.h>'.
                             format(self.language, self.baseClass))
 
+        if len(self.child_lo_elements) > 0:
+            self.write_line('#include <{}'
+                            '/util/ElementFilter.h>'.format(self.language))
+
         self.skip_line(2)
         self.write_line('using namespace std;')
         self.skip_line()
@@ -343,7 +347,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_has_required_elements()
         self.write_function_implementation(code)
 
-        code = gen_functions.write_write_elements()
+        code = gen_functions.write_write_elements
         self.write_function_implementation(code, exclude=True)
 
         code = gen_functions.write_accept()
@@ -464,7 +468,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_function_implementation(code)
 
         if self.is_cpp_api:
-            code = lo_functions.write_add_element_function()
+            code = lo_functions.write_add_element_function
             self.write_function_implementation(code)
 
             code = lo_functions.write_get_num_element_function()
@@ -493,6 +497,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         num_elements = len(self.child_lo_elements)
         for i in range(0, num_elements):
             element = self.child_lo_elements[i]
+            element['std_base'] = self.std_base
+            element['package'] = self.package
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,
@@ -517,8 +523,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
             sid_ref = query.get_sid_refs_for_class(element)
             for j in range(0, len(sid_ref)):
-                code = lo_functions.write_lookup(sid_ref[j])
-                self.write_function_verbatim(code)
+                if self.is_list_of:
+                    code = lo_functions.write_lookup(sid_ref[j])
+                    self.write_function_verbatim(code)
 
                 code = \
                     lo_functions.write_get_element_by_sidref(sid_ref[j],
@@ -530,7 +537,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                                              const=False)
                 self.write_function_implementation(code)
 
-            code = lo_functions.write_add_element_function()
+            code = lo_functions.write_add_element_function
             self.write_function_implementation(code)
 
             code = lo_functions.write_get_num_element_function()

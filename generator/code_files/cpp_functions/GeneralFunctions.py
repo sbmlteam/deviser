@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, query
 
 
 class GeneralFunctions():
@@ -74,6 +74,7 @@ class GeneralFunctions():
         self.has_math = class_object['hasMath']
         self.has_array = class_object['has_array']
         self.overwrites_children = class_object['overwrites_children']
+        self.has_children = query.has_children(class_object['attribs'])
 
         # check case of things where we assume upper/lower
         if self.package[0].islower():
@@ -392,8 +393,32 @@ class GeneralFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
         # create the function implementation
-        implementation = ['TO DO']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.is_cpp_api:
+            code = [dict({'code_type': 'line',
+                          'code': ['bool allPresent = true']})]
+            for i in range(0, len(self.child_elements)):
+                att = self.child_elements[i]
+                if att['reqd']:
+                    implementation = ['isSet{}() == '
+                                      'false'.format(att['capAttName']),
+                                      'allPresent = false']
+                    code.append(dict({'code_type': 'if',
+                                      'code': implementation}))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                if att['reqd']:
+                    name = strFunctions.upper_first(att['pluralName'])
+                    implementation = ['getNum{}() == '
+                                      '0'.format(name),
+                                      'allPresent = false']
+                    code.append(dict({'code_type': 'if',
+                                      'code': implementation}))
+            code.append(dict({'code_type': 'line',
+                              'code': ['return allPresent']}))
+        else:
+            line = ['return ({0} != NULL) ? static_cast<int>({0}->'
+                    'hasRequiredElements()) : 0'.format(self.abbrev_parent)]
+            code = [dict({'code_type': 'line', 'code': line})]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -414,6 +439,7 @@ class GeneralFunctions():
     #                                setDocument, write (if we have an array)
 
     # function to write writeElement
+    @property
     def write_write_elements(self):
         if not self.is_cpp_api or self.is_list_of:
             return
@@ -431,9 +457,29 @@ class GeneralFunctions():
 
         # create the function implementation
         base = self.base_class
-        implementation = ['{}::writeElements(stream)'.format(base),
-                          '{}::writeExtensionElements(stream)'.format(base)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        code = [dict({'code_type': 'line',
+                      'code': ['{}::writeElements(stream)'.format(base)]})]
+        for i in range(0, len(self.child_elements)):
+            att = self.child_elements[i]
+            implementation = ['isSet{}() == '
+                              'false'.format(att['capAttName']),
+                              'TO DO']
+            code.append(dict({'code_type': 'if',
+                              'code': implementation}))
+        for i in range(0, len(self.child_lo_elements)):
+            att = self.child_lo_elements[i]
+            name = strFunctions.upper_first(att['pluralName'])
+            implementation = ['getNum{}() > '
+                              '0'.format(name),
+                              '{}.write(stream)'.format(att['memberName'])]
+            code.append(dict({'code_type': 'if',
+                              'code': implementation}))
+        code.append(dict({'code_type': 'line',
+                          'code': ['{}::writeExtension'
+                                   'Elements(stream)'.format(base)]}))
+#        implementation = ['{}::writeElements(stream)'.format(base),
+#                        '{}::writeExtensionElements(stream)'.format(base)]
+#        code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -465,8 +511,23 @@ class GeneralFunctions():
         arguments = ['SBMLVisitor& v']
 
         # create the function implementation
-        implementation = ['return v.visit(*this)']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if not self.has_children:
+            implementation = ['return v.visit(*this)']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = [dict({'code_type': 'line',
+                          'code': ['v.visit(*this)']})]
+            for i in range(0, len(self.child_elements)):
+                implementation = ['{}.accept(v)'.format('TO DO')]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                implementation = ['{}.accept(v)'.format(att['memberName'])]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+            code.append(dict({'code_type': 'line',
+                              'code': ['v.leave(*this)', 'return true']}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -505,6 +566,17 @@ class GeneralFunctions():
                                                  self.language.upper())
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.has_children:
+            for i in range(0, len(self.child_elements)):
+                implementation = ['{}.setSBMLDocument(d)'.format('TO DO')]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                implementation = ['{}.setSBMLDocument'
+                                  '(d)'.format(att['memberName'])]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -579,6 +651,19 @@ class GeneralFunctions():
         implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
                           'flag)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.has_children:
+            for i in range(0, len(self.child_elements)):
+                implementation = ['{}.enablePackageInternal'
+                                  '(pkgURI, pkgPrefix, flag)'.format('TO DO')]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                implementation = ['{}.enablePackageInternal'
+                                  '(pkgURI, pkgPrefix, '
+                                  'flag)'.format(att['memberName'])]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -597,7 +682,7 @@ class GeneralFunctions():
     def write_connect_to_child(self):
         if not self.is_cpp_api:
             return
-        elif (len(self.child_elements) + len(self.child_lo_elements)) == 0:
+        elif not self.has_children:
             return
         elif self.has_math and len(self.child_elements) == 1:
             return
@@ -614,9 +699,18 @@ class GeneralFunctions():
         arguments = []
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['SBase::connectToChild()']
         code = [dict({'code_type': 'line', 'code': implementation})]
-
+        for i in range(0, len(self.child_elements)):
+            implementation = ['{}.connectToParent(this)'.format('TO DO')]
+            code.append(dict({'code_type': 'line',
+                              'code': implementation}))
+        for i in range(0, len(self.child_lo_elements)):
+            att = self.child_lo_elements[i]
+            implementation = ['{}.connectToParent'
+                              '(this)'.format(att['memberName'])]
+            code.append(dict({'code_type': 'line',
+                              'code': implementation}))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

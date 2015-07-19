@@ -367,7 +367,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_has_required_elements()
         self.write_function_declaration(code)
 
-        code = gen_functions.write_write_elements()
+        code = gen_functions.write_write_elements
         self.write_function_declaration(code, exclude=True)
 
         code = gen_functions.write_accept()
@@ -488,7 +488,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_function_declaration(code)
 
         if self.is_cpp_api:
-            code = lo_functions.write_add_element_function()
+            code = lo_functions.write_add_element_function
             self.write_function_declaration(code)
 
             code = lo_functions.write_get_num_element_function()
@@ -550,7 +550,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                              const=False)
                 self.write_function_declaration(code)
 
-            code = lo_functions.write_add_element_function()
+            code = lo_functions.write_add_element_function
             self.write_function_declaration(code)
 
             code = lo_functions.write_get_num_element_function()

@@ -48,28 +48,31 @@ class CppFiles():
     def __init__(self, class_object):
         # members from object
         self.class_object = class_object
+        self.class_object['is_list_of'] = False
+        self.class_object['sid_refs'] = \
+            query.get_sid_refs(class_object['attribs'])
+        self.class_object['unit_sid_refs'] = \
+            query.get_sid_refs(class_object['attribs'], unit=True)
 
     def write_files(self):
-        working_class = self.class_object
-        working_class['is_list_of'] = False
-        working_class['sid_refs'] = \
-            query.get_sid_refs(self.class_object['attribs'])
-        working_class['unit_sid_refs'] = \
-            query.get_sid_refs(self.class_object['attribs'], unit=True)
-        header = CppHeaderFile.CppHeaderFile(working_class)
-        header.write_file()
-        header.close_file()
-        code = CppCodeFile.CppCodeFile(working_class)
-        code.write_file()
-        code.close_file()
+        self.write_header(self.class_object)
+        self.write_code(self.class_object)
         if self.class_object['hasListOf']:
             lo_working_class = self.create_list_of_description()
-            lo_header = CppHeaderFile.CppHeaderFile(lo_working_class)
-            lo_header.write_file()
-            lo_header.close_file()
-            lo_code = CppCodeFile.CppCodeFile(lo_working_class)
-            lo_code.write_file()
-            lo_code.close_file()
+            self.write_header(lo_working_class)
+            self.write_code(lo_working_class)
+
+    @staticmethod
+    def write_header(class_desc):
+        fileout = CppHeaderFile.CppHeaderFile(class_desc)
+        fileout.write_file()
+        fileout.close_file()
+
+    @staticmethod
+    def write_code(class_desc):
+        fileout = CppCodeFile.CppCodeFile(class_desc)
+        fileout.write_file()
+        fileout.close_file()
 
     def create_list_of_description(self):
         lo_name = strFunctions.list_of_name(self.class_object['name'])
@@ -82,3 +85,6 @@ class CppFiles():
         descrip['lo_child'] = self.class_object['name']
         descrip['name'] = lo_name
         return descrip
+
+    def test_func(self):
+        self.write_code(self.class_object)

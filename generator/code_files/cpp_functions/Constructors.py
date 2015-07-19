@@ -64,6 +64,8 @@ class Constructors():
         if class_object['name'].startswith('ListOf'):
             self.is_list_of = True
 
+        self.has_children = len(class_object['child_lo_elements']) > 0
+
     ########################################################################
 
     # Functions for writing constructors
@@ -141,6 +143,8 @@ class Constructors():
                                   '(level, version, '
                                   'pkgVersion))'.format(self.language.upper(),
                                                         self.package)]
+                if self.has_children:
+                    implementation.append('connectToChild()')
             else:
                 implementation = ['return new {}(level, version, '
                                   'pkgVersion)'.format(self.class_name)]
@@ -242,6 +246,8 @@ class Constructors():
         if self.package:
             implementation = ['setElementNamespace({}'
                               'ns->getURI())'.format(self.package.lower())]
+            if self.has_children:
+                implementation.append('connectToChild()')
             if not self.is_list_of:
                 implementation.append('loadPlugins({}ns)'
                                       .format(self.package.lower()))
@@ -281,7 +287,11 @@ class Constructors():
         # create the function implementation
         constructor_args = self.write_copy_constructor_args(self)
         implementation = ['']
-        code = [dict({'code_type': 'blank', 'code': implementation})]
+        if self.has_children:
+            implementation = ['connectToChild()']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = [dict({'code_type': 'blank', 'code': implementation})]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -313,6 +323,8 @@ class Constructors():
         # create the function implementation
         implementation = ['&rhs != this']
         implementation += self.write_assignment_args(self)
+        if self.has_children:
+            implementation.append('connectToChild()')
         implementation2 = ['return *this']
         code = [dict({'code_type': 'if', 'code': implementation}),
                 dict({'code_type': 'line', 'code': implementation2})]

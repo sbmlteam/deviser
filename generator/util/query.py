@@ -139,15 +139,28 @@ def has_array(attributes):
     return False
 
 
-# return True is teh attribute is saved as a string
+# return True is the attribute is saved as a string
 def is_string(attribute):
     if attribute['attType'] == 'string':
         return True
     return False
 
 
-# return True is teh attribute has an isSet member variable
+# return True is the attribute has an isSet member variable
 def has_is_set_member(attribute):
-    if attribute['isNumber']  or attribute['attType'] == 'boolean':
+    if attribute['isNumber'] or attribute['attType'] == 'boolean':
         return True
+    return False
+
+
+# return True if the element has the attribute specified
+def has_attribute(element, attribute):
+    if element is None:
+        return False
+    elif element['attribs'] is None:
+        return False
+    else:
+        for i in range(0, len(element['attribs'])):
+            if attribute == element['attribs'][i]['name']:
+                return True
     return False

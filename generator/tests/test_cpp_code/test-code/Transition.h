@@ -583,34 +583,6 @@ public:
 
 
   /**
-   * Get a FunctionTerm from the Transition based on its identifier.
-   *
-   * @param sid a string representing the identifier of the FunctionTerm to
-   * retrieve.
-   *
-   * @return the FunctionTerm in this Transition based on the identifier or
-   * NULL if no such FunctionTerm exists.
-   *
-   * @see getNumFunctionTerms
-   */
-  FunctionTerm* getFunctionTerm(const std::string& sid);
-
-
-  /**
-   * Get a FunctionTerm from the Transition based on its identifier.
-   *
-   * @param sid a string representing the identifier of the FunctionTerm to
-   * retrieve.
-   *
-   * @return the FunctionTerm in this Transition based on the identifier or
-   * NULL if no such FunctionTerm exists.
-   *
-   * @see getNumFunctionTerms
-   */
-  const FunctionTerm* getFunctionTerm(const std::string& sid) const;
-
-
-  /**
    * Adds a copy of the given FunctionTerm to this Transition.
    *
    * @param ft, the FunctionTerm object to add.
@@ -660,22 +632,6 @@ public:
    * it.
    */
   FunctionTerm* removeFunctionTerm(unsigned int n);
-
-
-  /**
-   * Removes the FunctionTerm from this Transition based on its identifier and
-   * returns a pointer to it.
-   *
-   * @param sid, a string representing the identifier of the FunctionTerm to
-   * remove.
-   *
-   * @return the FunctionTerm in this Transition based on the identifier or
-   * NULL if no such FunctionTerm exists.
-   *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
-   */
-  FunctionTerm* removeFunctionTerm(const std::string& sid);
 
 
   /**
@@ -1410,24 +1366,6 @@ Transition_getFunctionTerm(Transition_t* t, unsigned int n);
 
 
 /**
- * Get a FunctionTerm_t from the Transition_t based on its identifier.
- *
- * @param t, the Transition_t structure to search.
- *
- * @param sid a string representing the identifier of the FunctionTerm_t to
- * retrieve.
- *
- * @return the FunctionTerm_t in this Transition_t based on the identifier or
- * NULL if no such FunctionTerm_t exists.
- *
- * @memberof Transition_t
- */
-LIBSBML_EXTERN
-const FunctionTerm_t*
-Transition_getFunctionTermById(Transition_t* t, const char *sid);
-
-
-/**
  * Adds a copy of the given FunctionTerm_t to this Transition_t.
  *
  * @param t, the Transition_t structure to which the FunctionTerm_t should be
@@ -1492,25 +1430,6 @@ Transition_createFunctionTerm(Transition_t* t);
 LIBSBML_EXTERN
 FunctionTerm_t*
 Transition_removeFunctionTerm(Transition_t* t, unsigned int n);
-
-
-/**
- * Removes the FunctionTerm_t from this Transition_t based on its identifier
- * and returns a pointer to it.
- *
- * @param t, the Transition_t structure to search.
- *
- * @param sid, a string representing the identifier of the FunctionTerm_t to
- * remove.
- *
- * @return the FunctionTerm_t in this Transition_t based on the identifier or
- * NULL if no such FunctionTerm_t exists.
- *
- * @memberof Transition_t
- */
-LIBSBML_EXTERN
-FunctionTerm_t*
-Transition_removeFunctionTermById(Transition_t* t, const char* sid);
 
 
 /**
