@@ -138,12 +138,16 @@ class ListOfQueryFunctions():
             implementation = ['return {}.get'
                               '(n)'.format(self.class_object['memberName'])]
             code = [self.create_code_block('line', implementation)]
-        else:
+        elif self.is_list_of:
             line = ['lo == NULL', 'return NULL']
             code = [self.create_code_block('if', line)]
             line = ['return static_cast <{}*>(lo)->get'
                     '(n)'.format(self.class_name)]
             code.append(self.create_code_block('line', line))
+        else:
+            line = ['return ({0} != NULL) ? {0}->get{1}(n) : '
+                    'NULL'.format(self.abbrev_parent, self.child_name)]
+            code = [self.create_code_block('line', line)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -201,10 +205,17 @@ class ListOfQueryFunctions():
             return_type = '{}*'.format(self.object_child_name)
 
         code = []
-        if not self.is_cpp_api:
+        implementation = []
+        if not self.is_cpp_api and self.is_list_of:
             line = ['lo == NULL', 'return NULL']
             code.append(self.create_code_block('if', line))
-
+            implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
+                              '->get(sid) : NULL'.format(self.class_name)]
+        elif not self.is_cpp_api and not self.is_list_of:
+            implementation = ['return ({0} != NULL && '
+                              'sid != NULL) ? {0}->get{1}'
+                              '(sid) : NULL'.format(self.abbrev_parent,
+                                                    self.child_name)]
         if self.is_cpp_api and is_const and self.is_list_of:
             implementation = ['vector<{}*>::const_iterator '
                               'result'.format(self.std_base),
@@ -220,9 +231,6 @@ class ListOfQueryFunctions():
         elif self.is_cpp_api and not self.is_list_of:
             implementation = ['return {}.get'
                               '(sid)'.format(self.class_object['memberName'])]
-        else:
-            implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
-                              '->get(sid) : NULL'.format(self.class_name)]
 
         code.append(self.create_code_block('line', implementation))
         # return the parts
@@ -289,7 +297,7 @@ class ListOfQueryFunctions():
         else:
             return_type = '{}*'.format(self.object_child_name)
         up_name = strFunctions.abbrev_name(element).upper()
-        if const and self.is_list_of:
+        if const and self.is_cpp_api and self.is_list_of:
             implementation = ['vector<{}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
@@ -297,15 +305,21 @@ class ListOfQueryFunctions():
                               'return (result == mItems.end()) ? 0 : '
                               'static_cast  <const {}*> '
                               '(*result)'.format(self.object_child_name)]
-        elif not self.is_list_of:
+        elif self.is_cpp_api and not self.is_list_of:
             implementation = ['return {}.getBy{}'
                               '(sid)'.format(self.class_object['memberName'],
                                              element)]
-        else:
+        elif not const and self.is_cpp_api and self.is_list_of:
             implementation = ['return const_cast<{}*>(static_cast<const {}'
                               '&>(*this).getBy{}(sid))'.format(self.child_name,
                                                                self.class_name,
                                                                element)]
+        else:
+            implementation = ['return ({0} != NULL && '
+                              'sid != NULL) ? {0}->get{1}By{2}'
+                              '(sid) : NULL'.format(self.abbrev_parent,
+                                                    self.child_name,
+                                                    element)]
         code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
@@ -421,12 +435,17 @@ class ListOfQueryFunctions():
             member = self.class_object['memberName']
             implementation = ['return {}.remove(n)'.format(member)]
             code = [self.create_code_block('line', implementation)]
-        else:
+        elif not self.is_cpp_api and self.is_list_of:
             line = ['lo == NULL', 'return NULL']
             code = [self.create_code_block('if', line)]
             line = ['return static_cast <{}*>(lo)->remove'
                     '(n)'.format(self.class_name)]
             code.append(self.create_code_block('line', line))
+        else:
+            line = ['return ({0} != NULL) ? '
+                    '{0}->remove{1}(n) : '
+                    'NULL'.format(self.abbrev_parent, self.child_name)]
+            code = [self.create_code_block('line', line)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -504,12 +523,17 @@ class ListOfQueryFunctions():
             member = self.class_object['memberName']
             implementation = ['return {}.remove(sid)'.format(member)]
             code = [self.create_code_block('line', implementation)]
-        else:
+        elif not self.is_cpp_api and self.is_list_of:
             line = ['lo == NULL', 'return NULL']
             code = [self.create_code_block('if', line)]
             line = ['return (sid != NULL) ? static_cast <{}*>(lo)->remove'
                     '(sid) : NULL'.format(self.class_name)]
             code.append(self.create_code_block('line', line))
+        else:
+            line = ['return ({0} != NULL && sid != NULL) ? '
+                    '{0}->remove{1}(sid) : '
+                    'NULL'.format(self.abbrev_parent, self.child_name)]
+            code = [self.create_code_block('line', line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -571,30 +595,40 @@ class ListOfQueryFunctions():
         else:
             else_lines = ['append({})'.format(self.abbrev_child),
                           'return LIBSBML_OPERATION_SUCCESS']
-        implementation = ['{} == NULL'.format(self.abbrev_child),
-                          'return LIBSBML_OPERATION_FAILED', 'else if',
-                          '{}->hasRequiredAttributes() == '
-                          'false'.format(self.abbrev_child),
-                          'return LIBSBML_INVALID_OBJECT', 'else if',
-                          'getLevel() != {}->'
-                          'getLevel()'.format(self.abbrev_child),
-                          'return LIBSBML_LEVEL_MISMATCH', 'else if',
-                          'getVersion() != {}->'
-                          'getVersion()'.format(self.abbrev_child),
-                          'return LIBSBML_VERSION_MISMATCH', 'else if',
-                          'matchesRequiredSBMLNamespacesForAddition(static_cast'
-                          '<const {}*>({})) == '
-                          'false'.format(self.std_base, self.abbrev_child),
-                          'return LIBSBML_NAMESPACES_MISMATCH']
-        if not self.is_list_of and self.has_id:
-            implementation.append('else if')
-            implementation.append('{0}->isSetId() '
-                                  '&& ({1}->get({0}->getId())) '
-                                  '!= NULL'.format(self.abbrev_child, member))
-            implementation.append('return LIBSBML_DUPLICATE_OBJECT_ID')
-        implementation.append('else')
-        implementation.append(self.create_code_block('line', else_lines))
-        code = [self.create_code_block('else_if', implementation)]
+        if self.is_cpp_api:
+            implementation = ['{} == NULL'.format(self.abbrev_child),
+                              'return LIBSBML_OPERATION_FAILED', 'else if',
+                              '{}->hasRequiredAttributes() == '
+                              'false'.format(self.abbrev_child),
+                              'return LIBSBML_INVALID_OBJECT', 'else if',
+                              'getLevel() != {}->'
+                              'getLevel()'.format(self.abbrev_child),
+                              'return LIBSBML_LEVEL_MISMATCH', 'else if',
+                              'getVersion() != {}->'
+                              'getVersion()'.format(self.abbrev_child),
+                              'return LIBSBML_VERSION_MISMATCH', 'else if',
+                              'matchesRequiredSBMLNamespacesForAddition'
+                              '(static_cast<const {}*>({})) == '
+                              'false'.format(self.std_base, self.abbrev_child),
+                              'return LIBSBML_NAMESPACES_MISMATCH']
+            if not self.is_list_of and self.has_id:
+                implementation.append('else if')
+                implementation.append('{0}->isSetId() '
+                                      '&& ({1}->get({0}->getId())) '
+                                      '!= NULL'.format(self.abbrev_child,
+                                                       member))
+                implementation.append('return LIBSBML_DUPLICATE_OBJECT_ID')
+            implementation.append('else')
+            implementation.append(self.create_code_block('line', else_lines))
+            code = [self.create_code_block('else_if', implementation)]
+        else:
+            implementation = ['return ({0} != NULL) ? {0}->add{1}({2}) : '
+                              'LIBSBML_INVALID'
+                              '_OBJECT'.format(self.abbrev_parent,
+                                               self.child_name,
+                                               self.abbrev_child)]
+            code = [self.create_code_block('line', implementation)]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -645,28 +679,36 @@ class ListOfQueryFunctions():
                                              self.abbrev_parent))
         return_type = '{}*'.format(child)
 
-        implementation = ['{}* {} = NULL'.format(self.child_name,
-                                                 self.abbrev_child)]
-        code = [self.create_code_block('line', implementation)]
-        implementation = ['{}_CREATE_NS({}ns, '
-                          'getSBMLNamespaces())'.format(self.package.upper(),
-                                                        self.package.lower()),
-                          '{} = new {}({}ns)'.format(self.abbrev_child,
-                                                     self.child_name,
-                                                     self.package.lower()),
-                          'delete {}ns'.format(self.package.lower()),
-                          'catch', '...', '']
-        code.append(self.create_code_block('try', implementation))
-        implementation = ['{} != NULL'.format(self.abbrev_child)]
-        if self.is_list_of:
-            implementation.append('appendAndOwn({})'.format(self.abbrev_child))
+        if self.is_cpp_api:
+            pack_up = self.package.upper()
+            pack_low = self.package.lower()
+            implementation = ['{}* {} = NULL'.format(self.child_name,
+                                                     self.abbrev_child)]
+            code = [self.create_code_block('line', implementation)]
+            implementation = ['{}_CREATE_NS({}ns, '
+                              'getSBMLNamespaces())'.format(pack_up, pack_low),
+                              '{} = new {}({}ns)'.format(self.abbrev_child,
+                                                         self.child_name,
+                                                         pack_low),
+                              'delete {}ns'.format(pack_low),
+                              'catch', '...', '']
+            code.append(self.create_code_block('try', implementation))
+            implementation = ['{} != NULL'.format(self.abbrev_child)]
+            if self.is_list_of:
+                implementation.append('appendAndOwn'
+                                      '({})'.format(self.abbrev_child))
+            else:
+                member = self.class_object['memberName']
+                implementation.append('{}.appendAndOwn'
+                                      '({})'.format(member, self.abbrev_child))
+            code.append(self.create_code_block('if', implementation))
+            implementation = ['return {}'.format(self.abbrev_child)]
+            code.append(self.create_code_block('line', implementation))
         else:
-            member = self.class_object['memberName']
-            implementation.append('{}.appendAndOwn'
-                                  '({})'.format(member, self.abbrev_child))
-        code.append(self.create_code_block('if', implementation))
-        implementation = ['return {}'.format(self.abbrev_child)]
-        code.append(self.create_code_block('line', implementation))
+            implementation = ['return ({0} != NULL) ? {0}->create{1}() : '
+                              'NULL'.format(self.abbrev_parent,
+                                            self.child_name)]
+            code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -708,11 +750,15 @@ class ListOfQueryFunctions():
                                              self.abbrev_parent))
         return_type = 'unsigned int'
 
-        if self.is_list_of:
+        if self.is_cpp_api and self.is_list_of:
             implementation = ['return size()']
-        else:
+        elif self.is_cpp_api and not self.is_list_of:
             implementation = ['return {}.'
                               'size()'.format(self.class_object['memberName'])]
+        else:
+            implementation = ['return ({0} != NULL) ? {0}->getNum{1}() : '
+                              'SBML_INT_MAX'.format(self.abbrev_parent,
+                                                    self.plural)]
         code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
@@ -767,9 +813,14 @@ class ListOfQueryFunctions():
             arguments = ['const {}* {}'.format(self.object_name,
                                                self.abbrev_parent)]
             return_type = 'ListOf_t*'
-
-        implementation = ['return &{}'.format(self.class_object['memberName'])]
-        code = [self.create_code_block('line', implementation)]
+        if self.is_cpp_api:
+            implementation = ['return '
+                              '&{}'.format(self.class_object['memberName'])]
+            code = [self.create_code_block('line', implementation)]
+        else:
+            implementation = ['return ({0} != NULL) ? {0}->get{1}() : '
+                              'NULL'.format(self.abbrev_parent, loname)]
+            code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

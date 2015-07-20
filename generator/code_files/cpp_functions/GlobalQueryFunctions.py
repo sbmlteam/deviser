@@ -115,6 +115,22 @@ class GlobalQueryFunctions():
         return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& id']
 
+        implementation = ['id.empty()', 'return NULL']
+        code = [self.create_code_block('if', implementation),
+                self.create_code_block('line', ['SBase* obj = NULL'])]
+
+        if_block = ['obj != NULL', 'return obj']
+        if_code = self.create_code_block('if', if_block)
+        for i in range(0, len(self.child_elements)):
+            code.append(self.create_code_block('line', 'TO DO'))
+
+        for i in range(0, len(self.child_lo_elements)):
+            line = [' obj = {}.getElementBy'
+                    'SId(id)'.format(self.child_lo_elements[i]['memberName'])]
+            code.append(self.create_code_block('line', line))
+            code.append(if_code)
+        code.append(self.create_code_block('line', ['return obj']))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -125,7 +141,8 @@ class GlobalQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write get by metaid
     def write_get_by_metaid(self):
@@ -148,6 +165,33 @@ class GlobalQueryFunctions():
         return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& metaid']
 
+        code = [self.create_code_block('if',
+                                       ['metaid.empty()', 'return NULL'])]
+        for i in range(0, len(self.child_elements)):
+            code.append(
+                self.create_code_block('if',
+                                       ['{}.getMetaId == '
+                                        'metaid'.format('TO DO'),
+                                        'return &{}'.format('TO DO')]))
+        num_lo = len(self.child_lo_elements)
+        name = []
+        for i in range(0, num_lo):
+            name.append(self.child_lo_elements[i]['memberName'])
+            first_if = ['{}.getMetaId() == metaid'.format(name[i]),
+                        'return &{}'.format(name[i])]
+            code.append(self.create_code_block('if', first_if))
+        if_block = ['obj != NULL', 'return obj']
+        if_code = self.create_code_block('if', if_block)
+        if num_lo > 0:
+            code.append(self.create_code_block('line',['SBase* obj = NULL']))
+        for i in range(0, num_lo):
+            line = 'obj = {}.getElementByMetaId' \
+                   '(metaid)'.format(name[i])
+            code.append(self.create_code_block('line', [line]))
+            code.append(if_code)
+        if num_lo > 0:
+            code.append(self.create_code_block('line', ['return obj']))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -158,7 +202,8 @@ class GlobalQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write get all elements
     def write_get_all_elements(self):
@@ -181,6 +226,18 @@ class GlobalQueryFunctions():
         return_type = 'List*'
         arguments = ['ElementFilter * filter = NULL']
 
+        implementation = ['List* ret = new List()', 'List* sublist = NULL']
+        for i in range(0, len(self.child_elements)):
+            implementation.append('TO DO')
+        for i in range(0, len(self.child_lo_elements)):
+            name = self.child_lo_elements[i]['memberName']
+            implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
+                                  'filter)'.format(name))
+        implementation.append('ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter)')
+        implementation.append('return ret')
+
+        code = [self.create_code_block('line', implementation)]
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -191,4 +248,11 @@ class GlobalQueryFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code
+

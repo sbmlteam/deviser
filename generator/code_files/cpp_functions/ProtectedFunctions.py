@@ -77,6 +77,10 @@ class ProtectedFunctions():
             self.concretes = class_object['concretes']
         self.has_array = class_object['has_array']
 
+        self.child_lo_elements = class_object['child_lo_elements']
+        self.child_elements = class_object['child_elements']
+        self.std_base = class_object['std_base']
+
         # check case of things where we assume upper/lower
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
@@ -143,9 +147,50 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', implementation))
             code.append(self.create_code_block('line', ['return object']))
         else:
-            implementation = ['TO DO']
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            implementation = ['SBase* obj = NULL']
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    self.create_code_block('line', [
+                        'const string& name = stream.peek().getName()'])]
+            error_line = 'getErrorLog()->logPackageError(\"{}\", {}{}' \
+                         'LOElements, getPackageVersion(), getLevel(), ' \
+                         'getVersion())'.format(self.package.lower(),
+                                                self.package,
+                                                self.class_name)
+            num_child = len(self.child_lo_elements)
+            has_else = False
+            if num_child > 1:
+                has_else = True
+            if not has_else and num_child == 1:
+                name = self.child_lo_elements[0]['memberName']
+                loname = strFunctions.\
+                    lower_first(self.child_lo_elements[0]['attTypeCode'])
+                nested_if = self.create_code_block('if',
+                                                   ['{}.size() '
+                                                    '!= 0'.format(name),
+                                                    error_line])
+                line = 'obj = &{}'.format(name)
+                implementation = ['name == \"{}\"'.format(loname),
+                                  nested_if, line]
+                code.append(self.create_code_block('if', implementation))
+            implementation = []
+            for i in range(0, num_child):
+                name = self.child_lo_elements[i]['memberName']
+                loname = strFunctions.\
+                    lower_first(self.child_lo_elements[i]['attTypeCode'])
+                nested_if = self.create_code_block('if',
+                                                   ['{}.size() '
+                                                    '!= 0'.format(name),
+                                                    error_line])
+                line = 'obj = &{}'.format(name)
+                implementation.append('name == \"{}\"'.format(loname))
+                implementation.append(nested_if)
+                implementation.append(line)
 
+                if i < num_child - 1:
+                    implementation.append('else if')
+            if has_else:
+                code.append(self.create_code_block('else_if', implementation))
+            code.append(self.create_code_block('line', ['return obj']))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
