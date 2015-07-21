@@ -221,18 +221,18 @@ public:
 
 
   /**
-   * Returns the value of the "UncertML" element of this Uncertainty.
+   * Returns the value of the "uncertML" element of this Uncertainty.
    *
-   * @return the value of the "UncertML" element of this Uncertainty as a
+   * @return the value of the "uncertML" element of this Uncertainty as a
    * UncertMLNode*.
    */
   const UncertMLNode* getUncertML() const;
 
 
   /**
-   * Returns the value of the "UncertML" element of this Uncertainty.
+   * Returns the value of the "uncertML" element of this Uncertainty.
    *
-   * @return the value of the "UncertML" element of this Uncertainty as a
+   * @return the value of the "uncertML" element of this Uncertainty as a
    * UncertMLNode*.
    */
   UncertMLNode* getUncertML();
@@ -240,25 +240,25 @@ public:
 
   /**
    * Predicate returning @c true or @c false depending on whether this
-   * Uncertainty's "UncertML" element has been set.
+   * Uncertainty's "uncertML" element has been set.
    *
-   * @return @c true if this Uncertainty's "UncertML" element has been set,
+   * @return @c true if this Uncertainty's "uncertML" element has been set,
    * otherwise @c false is returned.
    */
   bool isSetUncertML() const;
 
 
   /**
-   * Sets the value of the "UncertML" element of this Uncertainty.
+   * Sets the value of the "uncertML" element of this Uncertainty.
    *
-   * @param UncertML UncertMLNode* value of the "UncertML" element to be set.
+   * @param uncertML UncertMLNode* value of the "uncertML" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setUncertML(const UncertMLNode* UncertML);
+  int setUncertML(const UncertMLNode* uncertML);
 
 
   /**
@@ -271,7 +271,7 @@ public:
 
 
   /**
-   * Unsets the value of the "UncertML" element of this Uncertainty.
+   * Unsets the value of the "uncertML" element of this Uncertainty.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -327,7 +327,7 @@ public:
    *
    *
    * @note The required elements for the Uncertainty object are:
-   * @li "UncertML"
+   * @li "uncertML"
    */
   virtual bool hasRequiredElements() const;
 
@@ -686,11 +686,11 @@ Uncertainty_unsetName(Uncertainty_t * u);
 
 
 /**
- * Returns the value of the "UncertML" element of this Uncertainty_t.
+ * Returns the value of the "uncertML" element of this Uncertainty_t.
  *
- * @param u the Uncertainty_t structure whose UncertML is sought.
+ * @param u the Uncertainty_t structure whose uncertML is sought.
  *
- * @return the value of the "UncertML" element of this Uncertainty_t as a
+ * @return the value of the "uncertML" element of this Uncertainty_t as a
  * UncertMLNode*.
  *
  * @memberof Uncertainty_t
@@ -702,11 +702,11 @@ Uncertainty_getUncertML(const Uncertainty_t * u);
 
 /**
  * Predicate returning @c 1 or @c 0 depending on whether this Uncertainty_t's
- * "UncertML" element has been set.
+ * "uncertML" element has been set.
  *
  * @param u the Uncertainty_t structure.
  *
- * @return @c 1 if this Uncertainty_t's "UncertML" element has been set,
+ * @return @c 1 if this Uncertainty_t's "uncertML" element has been set,
  * otherwise @c 0 is returned.
  *
  * @memberof Uncertainty_t
@@ -717,11 +717,11 @@ Uncertainty_isSetUncertML(const Uncertainty_t * u);
 
 
 /**
- * Sets the value of the "UncertML" element of this Uncertainty_t.
+ * Sets the value of the "uncertML" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
- * @param UncertML UncertMLNode_t* value of the "UncertML" element to be set.
+ * @param uncertML UncertMLNode_t* value of the "uncertML" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -731,7 +731,7 @@ Uncertainty_isSetUncertML(const Uncertainty_t * u);
  */
 LIBSBML_EXTERN
 int
-Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* UncertML);
+Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* uncertML);
 
 
 /**
@@ -751,7 +751,7 @@ Uncertainty_createUncertML(Uncertainty_t* u);
 
 
 /**
- * Unsets the value of the "UncertML" element of this Uncertainty_t.
+ * Unsets the value of the "uncertML" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
@@ -796,7 +796,7 @@ Uncertainty_hasRequiredAttributes(const Uncertainty_t * u);
  *
  *
  * @note The required elements for the Uncertainty_t object are:
- * @li "UncertML"
+ * @li "uncertML"
  *
  * @memberof Uncertainty_t
  */
