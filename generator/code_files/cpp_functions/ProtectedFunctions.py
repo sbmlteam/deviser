@@ -333,7 +333,7 @@ class ProtectedFunctions():
     # function to write read other xml
     def write_read_other_xml(self):
         # only needed for cpp list of class
-        if self.is_list_of or not self.has_math:
+        if self.is_list_of or self.num_non_std_children == 0:
             return
         # create comment
         title_line = 'Reads other XML such as math/notes etc.'
@@ -351,18 +351,31 @@ class ProtectedFunctions():
                           'const string& name = stream.peek().getName()']
         code = [dict({'code_type': 'line', 'code': implementation})]
 
-        line = ['stream.getSBMLNamespaces() == NULL',
-                'stream.setSBMLNamespaces(new SBMLNamespaces(getLevel(), '
-                'getVersion()))']
-        nested_if = self.create_code_block('if', line)
-        implementation = ['name == \"math\"',
-                          'const XMLToken elem = stream.peek()',
-                          'const std::string prefix = '
-                          'checkMathMLNamespace(elem)',
-                          nested_if, 'delete mMath',
-                          'mMath = readMathML(stream, prefix)',
-                          'read = true']
-        code.append(self.create_code_block('if', implementation))
+        # math is unique - assume others are XMLNode based
+        for i in range(0, len(self.child_elements)):
+            element = self.child_elements[i]
+            if element['element'] == 'ASTNode':
+                line = ['stream.getSBMLNamespaces() == NULL',
+                        'stream.setSBMLNamespaces(new SBMLNamespaces(getLevel(), '
+                        'getVersion()))']
+                nested_if = self.create_code_block('if', line)
+                implementation = ['name == \"math\"',
+                                  'const XMLToken elem = stream.peek()',
+                                  'const std::string prefix = '
+                                  'checkMathMLNamespace(elem)',
+                                  nested_if, 'delete mMath',
+                                  'mMath = readMathML(stream, prefix)',
+                                  'read = true']
+                code.append(self.create_code_block('if', implementation))
+            elif 'is_ml' in element and element['is_ml']:
+                member = element['memberName']
+                name = element['capAttName'] if element['name'] == 'uncertML' else element['name']
+                line = ['name == \"{}\"'.format(name),
+                        'delete {}'.format(member),
+                        'XMLNode* xml = new XMLNode(stream)',
+                        '{} = new {}(xml)'.format(member, element['element']),
+                        'delete xml', 'read = true']
+                code.append(self.create_code_block('if', line))
         line = ['SBase::readOtherXML(stream)',
                 'read = true']
         code.append(self.create_code_block('if', line))

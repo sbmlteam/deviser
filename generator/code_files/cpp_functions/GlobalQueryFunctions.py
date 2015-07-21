@@ -69,6 +69,8 @@ class GlobalQueryFunctions():
         self.std_base = class_object['std_base']
 
         self.has_only_math = class_object['has_only_math']
+        self.num_children = class_object['num_children']
+        self.num_non_std_children = class_object['num_non_std_children']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -82,8 +84,6 @@ class GlobalQueryFunctions():
         else:
             self.true = '@c true'
             self.false = '@c false'
-        self.no_children = \
-            len(self.child_elements) + len(self.child_lo_elements)
 
     ########################################################################
 
@@ -91,10 +91,10 @@ class GlobalQueryFunctions():
 
     # function to write get by sid
     def write_get_by_sid(self):
-        # only write for elements with children in cpp
-        if not self.is_cpp_api or self.no_children == 0:
+        # only write for elements with  base derived children in cpp
+        if not self.is_cpp_api or self.num_children == 0:
                 return
-        elif self.no_children == 1 and self.has_only_math:
+        elif self.num_children == self.num_non_std_children:
             return
 
         # create comment parts
@@ -143,10 +143,10 @@ class GlobalQueryFunctions():
 
     # function to write get by metaid
     def write_get_by_metaid(self):
-        # only write for elements with children in cpp
-        if not self.is_cpp_api or self.no_children == 0:
+        # only write for elements with  base derived children in cpp
+        if not self.is_cpp_api or self.num_children == 0:
                 return
-        elif self.no_children == 1 and self.has_only_math:
+        elif self.num_children == self.num_non_std_children:
             return
 
         # create comment parts
@@ -206,10 +206,10 @@ class GlobalQueryFunctions():
 
     # function to write get all elements
     def write_get_all_elements(self):
-        # only write for elements with children in cpp
-        if not self.is_cpp_api or self.no_children == 0:
+        # only write for elements with  base derived children in cpp
+        if not self.is_cpp_api or self.num_children == 0:
                 return
-        elif self.no_children == 1 and self.has_only_math:
+        elif self.num_children == self.num_non_std_children:
             return
 
         # create comment parts

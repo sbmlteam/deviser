@@ -76,6 +76,8 @@ class GeneralFunctions():
         self.overwrites_children = class_object['overwrites_children']
         self.has_children = class_object['has_children']
         self.has_only_math = class_object['has_only_math']
+        self.num_non_std_children = class_object['num_non_std_children']
+        self.num_children = class_object['num_children']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -478,9 +480,9 @@ class GeneralFunctions():
             if att['element'] == 'ASTNode':
                 line = 'writeMathML(getMath(), stream, getSBMLNamespaces())'
             else:
-                line = 'TO DO'
+                line = '{}->write(stream)'.format(att['memberName'])
             implementation = ['isSet{}() == '
-                              'false'.format(att['capAttName']),
+                              'true'.format(att['capAttName']),
                               line]
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
@@ -529,7 +531,8 @@ class GeneralFunctions():
         arguments = ['SBMLVisitor& v']
 
         # create the function implementation
-        if not self.has_children or self.has_only_math:
+        if not self.has_children \
+                or (self.num_non_std_children == self.num_children):
             implementation = ['return v.visit(*this)']
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -586,9 +589,14 @@ class GeneralFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
-                implementation = ['{}.setSBMLDocument(d)'.format('TO DO')]
-                code.append(dict({'code_type': 'line',
-                                  'code': implementation}))
+                att = self.child_elements[i]
+                if 'is_ml' in att and att['is_ml']:
+                    continue
+                else:
+                    implementation = ['{}.setSBMLDocument'
+                                      '(d)'.format(att['memberName'])]
+                    code.append(dict({'code_type': 'line',
+                                      'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
                 implementation = ['{}.setSBMLDocument'
@@ -671,10 +679,15 @@ class GeneralFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
-                implementation = ['{}.enablePackageInternal'
-                                  '(pkgURI, pkgPrefix, flag)'.format('TO DO')]
-                code.append(dict({'code_type': 'line',
-                                  'code': implementation}))
+                att = self.child_elements[i]
+                if 'is_ml' in att and att['is_ml']:
+                    continue
+                else:
+                    implementation = ['{}.enablePackageInternal'
+                                      '(pkgURI, pkgPrefix, '
+                                      'flag)'.format(att['memberName'])]
+                    code.append(dict({'code_type': 'line',
+                                      'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
                 implementation = ['{}.enablePackageInternal'
@@ -718,9 +731,14 @@ class GeneralFunctions():
         implementation = ['SBase::connectToChild()']
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.child_elements)):
-            implementation = ['{}.connectToParent(this)'.format('TO DO')]
-            code.append(dict({'code_type': 'line',
-                              'code': implementation}))
+            att = self.child_elements[i]
+            if 'is_ml' in att and att['is_ml']:
+                continue
+            else:
+                implementation = ['{}.connectToParent'
+                                  '(this)'.format(att['memberName'])]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
             implementation = ['{}.connectToParent'

@@ -618,8 +618,6 @@ void
 AnalyticVolume::connectToChild()
 {
   SBase::connectToChild();
-
-  TO DO.connectToParent(this);
 }
 
 /** @endcond */

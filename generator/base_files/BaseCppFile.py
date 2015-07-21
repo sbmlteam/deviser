@@ -56,8 +56,8 @@ class BaseCppFile(BaseFile.BaseFile):
         self.child_elements = self.get_children()
         self.child_lo_elements = self.get_lo_children()
 
-        self.num_children = len(self.child_lo_elements) \
-                            + len(self.child_elements)
+        self.num_children = \
+            len(self.child_lo_elements) + len(self.child_elements)
 
         self.concretes = []
 
@@ -87,7 +87,6 @@ class BaseCppFile(BaseFile.BaseFile):
         # check case of things where we assume upper/lower
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
-
 
         # information about the base class
         self.baseClass = class_object['baseClass']
@@ -128,7 +127,8 @@ class BaseCppFile(BaseFile.BaseFile):
         # mark child elements as ML nodes
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
-            if element['element'].endswith('Node'):
+            if element['element'].endswith('Node') \
+                    and not element['element'].endswith('CSGNode'):
                 self.child_elements[i]['is_ml'] = True
                 self.has_non_std_children = True
                 self.num_non_std_children += 1
@@ -163,6 +163,7 @@ class BaseCppFile(BaseFile.BaseFile):
     def expand_attributes(self, attributes):
         for i in range(0, len(attributes)):
             capname = strFunctions.upper_first(attributes[i]['name'])
+            attributes[i]['name'] = strFunctions.lower_first((capname))
             attributes[i]['capAttName'] = capname
             attributes[i]['memberName'] = 'm' + capname
             attributes[i]['pluralName'] = \
