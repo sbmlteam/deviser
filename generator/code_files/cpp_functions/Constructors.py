@@ -53,10 +53,6 @@ class Constructors():
         else:
             self.object_name = class_object['name'] + '_t'
 
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
-
         self.concretes = class_object['concretes']
         self.base_class = class_object['baseClass']
         self.attributes = class_object['attribs']
@@ -64,7 +60,10 @@ class Constructors():
         if class_object['name'].startswith('ListOf'):
             self.is_list_of = True
 
-        self.has_children = len(class_object['child_lo_elements']) > 0
+        self.has_children = class_object['has_children']
+        self.has_math = class_object['has_math']
+        self.num_non_std_children = class_object['num_non_std_children']
+        self.child_elements = class_object['child_elements']
 
     ########################################################################
 
@@ -286,12 +285,25 @@ class Constructors():
         arguments = ['const {}& orig'.format(self.object_name)]
         # create the function implementation
         constructor_args = self.write_copy_constructor_args(self)
-        implementation = ['']
+        code = []
+        if self.num_non_std_children > 0:
+            clone = 'clone'
+            for i in range(0, len(self.child_elements)):
+                element = self.child_elements[i]
+                if element['is_ml']:
+                    member = element['memberName']
+                    if element['element'] == 'ASTNode':
+                        clone = 'deepCopy'
+                    implementation = ['orig.{} != NULL'.format(member),
+                                      '{0} = orig.{0}->{1}()'.format(member,
+                                                                     clone)]
+                    code.append(self.create_code_block('if', implementation))
         if self.has_children:
             implementation = ['connectToChild()']
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            code.append(dict({'code_type': 'line', 'code': implementation}))
         else:
-            code = [dict({'code_type': 'blank', 'code': implementation})]
+            implementation = ['']
+            code.append(dict({'code_type': 'blank', 'code': implementation}))
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -321,8 +333,14 @@ class Constructors():
         return_type = '{}&'.format(self.object_name)
         arguments = ['const {}& rhs'.format(self.object_name)]
         # create the function implementation
-        implementation = ['&rhs != this']
-        implementation += self.write_assignment_args(self)
+        args = ['&rhs != this'] + self.write_assignment_args(self)
+        if self.has_math:
+            line = ['rhs.mMath != NULL', 'mMath = rhs.mMath->deepCopy()',
+                    'else', 'mMath = NULL']
+            nested_if = self.create_code_block('if_else', line)
+            implementation = [args, nested_if]
+        else:
+            implementation = args
         if self.has_children:
             implementation.append('connectToChild()')
         implementation2 = ['return *this']
@@ -412,9 +430,12 @@ class Constructors():
         if not self.is_cpp_api:
             arguments.append('{}* {}'.format(self.object_name, abbrev_object))
         # create the function implementation
-        if self.is_cpp_api:
+        if self.is_cpp_api and not self.has_math:
             implementation = []
             code_type = 'blank'
+        elif self.is_cpp_api and self.has_math:
+            implementation = ['delete mMath', 'mMath = NULL']
+            code_type = 'line'
         else:
             implementation = ['{} != NULL'.format(abbrev_object),
                               'delete {}'.format(abbrev_object)]
@@ -455,22 +476,28 @@ class Constructors():
     def write_copy_constructor_args(self):
         constructor_args = [': {}( orig )'.format(self.base_class)]
         for attrib in self.attributes:
-            constructor_args.append(', {0} ( orig.{0} )'
-                                    .format(attrib['memberName']))
-            if attrib['isNumber'] or attrib['attType'] == 'boolean':
-                constructor_args.append(', mIsSet{0} ( orig.mIsSet{0} )'
-                                        .format(attrib['capAttName']))
+            if attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
+                constructor_args.append(', {0} ( orig.{0} )'
+                                        .format(attrib['memberName']))
+                if attrib['isNumber'] or attrib['attType'] == 'boolean':
+                    constructor_args.append(', mIsSet{0} ( orig.mIsSet{0} )'
+                                            .format(attrib['capAttName']))
+            else:
+                constructor_args.append(', {} ( NULL )'
+                                        .format(attrib['memberName']))
+
         return constructor_args
 
     @staticmethod
     def write_assignment_args(self):
         constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
         for attrib in self.attributes:
-            constructor_args.append('{0} = rhs.{0}'
-                                    .format(attrib['memberName']))
-            if attrib['isNumber'] or attrib['attType'] == 'boolean':
-                constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
-                                        .format(attrib['capAttName']))
+            if attrib['element'] != 'ASTNode':
+                constructor_args.append('{0} = rhs.{0}'
+                                        .format(attrib['memberName']))
+                if attrib['isNumber'] or attrib['attType'] == 'boolean':
+                    constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
+                                            .format(attrib['capAttName']))
         return constructor_args
 
     @staticmethod

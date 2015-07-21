@@ -39,7 +39,7 @@
 
 
 import BaseFile
-from util import strFunctions
+from util import strFunctions, query
 
 
 class BaseCppFile(BaseFile.BaseFile):
@@ -56,10 +56,105 @@ class BaseCppFile(BaseFile.BaseFile):
         self.child_elements = self.get_children()
         self.child_lo_elements = self.get_lo_children()
 
+        self.num_children = len(self.child_lo_elements) \
+                            + len(self.child_elements)
+
         self.concretes = []
 
         # default values
         self.is_cpp_api = True
+
+    ########################################################################
+
+    def expand_class(self, class_object):
+        self.class_object = class_object
+        if self.extension == 'h':
+            self.is_header = True
+        else:
+            self.is_header = False
+
+        self.is_list_of = class_object['is_list_of']
+        self.name = class_object['name']
+        self.class_name = class_object['name']
+        self.package = class_object['package']
+        self.typecode = class_object['typecode']
+        if class_object['is_list_of']:
+            self.list_of_name = class_object['list_of_name']
+            self.list_of_child = class_object['lo_child']
+        else:
+            self.list_of_name = ''
+            self.list_of_child = ''
+        # check case of things where we assume upper/lower
+        if self.package[0].islower():
+            self.package = strFunctions.upper_first(class_object['package'])
+
+
+        # information about the base class
+        self.baseClass = class_object['baseClass']
+        self.has_std_base = True
+        self.std_base = 'SBase'
+        if self.language != 'sbml':
+            self.std_base = 'Foo'
+            self.has_std_base = False
+        elif not self.is_list_of and self.baseClass != 'SBase':
+            self.has_std_base = False
+        elif self.is_list_of and self.baseClass != 'ListOf':
+            self.has_std_base = False
+        self.class_object['has_std_base'] = self.has_std_base
+        self.class_object['std_base'] = self.std_base
+
+        # references
+        self.sid_refs = class_object['sid_refs']
+        self.unit_sid_refs = class_object['unit_sid_refs']
+        self.add_decls = None
+        if 'addDecls' in class_object:
+            self.add_decls = class_object['addDecls']
+        self.overwrites_children = False
+        if 'childrenOverwriteElementName' in class_object:
+            self.overwrites_children = \
+                class_object['childrenOverwriteElementName']
+        self.class_object['overwrites_children'] = self.overwrites_children
+
+        # child elements
+        self.has_math = class_object['hasMath']
+        self.has_children = query.has_children(class_object['attribs'])
+        self.has_only_math = False
+        if self.has_math and \
+                not query.has_children_not_math(class_object['attribs']):
+            self.has_only_math = True
+        self.has_non_std_children = False
+
+        self.num_non_std_children = 0
+        # mark child elements as ML nodes
+        for i in range(0, len(self.child_elements)):
+            element = self.child_elements[i]
+            if element['element'].endswith('Node'):
+                self.child_elements[i]['is_ml'] = True
+                self.has_non_std_children = True
+                self.num_non_std_children += 1
+            else:
+                self.child_elements[i]['is_ml'] = False
+
+        if 'concrete' in class_object:
+            self.concretes = query.get_concretes(class_object['root'],
+                                                 class_object['concrete'])
+
+        self.class_attributes = query.separate_attributes(self.attributes)
+
+        # add info back to the class_object so we can pass it on
+        self.class_object['package'] = self.package
+        self.class_object['class_attributes'] = self.class_attributes
+        self.class_object['child_lo_elements'] = self.child_lo_elements
+        self.class_object['child_elements'] = self.child_elements
+        self.class_object['concretes'] = self.concretes
+        self.class_object['has_array'] = query.has_array(self.class_attributes)
+        self.class_object['has_math'] = self.has_math
+        self.class_object['has_children'] = self.has_children
+        self.class_object['has_only_math'] = self.has_only_math
+        self.class_object['num_children'] = self.num_children
+        self.class_object['has_non_std_chilren'] = self.has_non_std_children
+        self.class_object['num_non_std_children'] = self.num_non_std_children
+        self.class_object['is_header'] = self.is_header
 
     ########################################################################
 

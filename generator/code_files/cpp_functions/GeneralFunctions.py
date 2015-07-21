@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query
+from util import strFunctions
 
 
 class GeneralFunctions():
@@ -71,14 +71,11 @@ class GeneralFunctions():
         self.unit_sid_refs = class_object['unit_sid_refs']
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
-        self.has_math = class_object['hasMath']
+        self.has_math = class_object['has_math']
         self.has_array = class_object['has_array']
         self.overwrites_children = class_object['overwrites_children']
-        self.has_children = query.has_children(class_object['attribs'])
-
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
+        self.has_children = class_object['has_children']
+        self.has_only_math = class_object['has_only_math']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -93,6 +90,18 @@ class GeneralFunctions():
             self.true = '@c true'
             self.false = '@c false'
 
+        # status
+        if self.is_cpp_api:
+            if self.is_list_of:
+                self.status = 'cpp_list'
+            else:
+                self.status = 'cpp_not_list'
+        else:
+            if self.is_list_of:
+                self.status = 'c_list'
+            else:
+                self.status = 'c_not_list'
+
     ########################################################################
 
     # Functions for writing renamesidref
@@ -100,9 +109,10 @@ class GeneralFunctions():
     # function to write rename_sid_ref
     def write_rename_sidrefs(self):
         # only write is not list of and has sidrefs
-        if not self.is_cpp_api or self.is_list_of:
+        if not self.status == 'cpp_not_list':
             return
-        elif len(self.sid_refs) == 0 and len(self.unit_sid_refs) == 0:
+        elif len(self.sid_refs) == 0 and len(self.unit_sid_refs) == 0\
+                and not self.has_math:
             return
 
         # create comment parts
@@ -132,6 +142,10 @@ class GeneralFunctions():
                                              ref['memberName']),
                               'set{}(newid)'.format(ref['capAttName'])]
             code.append(dict({'code_type': 'if', 'code': implementation}))
+        if self.has_math:
+            implementation = ['isSetMath()',
+                              'mMath->renameSIdRefs(oldid, newid)']
+            code.append(self.create_code_block('if', implementation))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -237,7 +251,7 @@ class GeneralFunctions():
     # function to write getTypeCode
     def write_get_item_typecode(self):
         # only needed for cpp list of class
-        if not self.is_cpp_api or not self.is_list_of:
+        if not self.status == 'cpp_list':
             return
         # create comment
         title_line = 'Returns the libSBML type code for the SBML objects ' \
@@ -353,7 +367,7 @@ class GeneralFunctions():
 
     # function to write hasRequiredElements
     def write_has_required_elements(self):
-        if (len(self.child_elements) + len(self.child_lo_elements)) == 0:
+        if not self.has_children:
             return
 
         # create comment parts
@@ -441,7 +455,7 @@ class GeneralFunctions():
     # function to write writeElement
     @property
     def write_write_elements(self):
-        if not self.is_cpp_api or self.is_list_of:
+        if not self.status == 'cpp_not_list':
             return
 
         # create comment parts
@@ -461,9 +475,13 @@ class GeneralFunctions():
                       'code': ['{}::writeElements(stream)'.format(base)]})]
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
+            if att['element'] == 'ASTNode':
+                line = 'writeMathML(getMath(), stream, getSBMLNamespaces())'
+            else:
+                line = 'TO DO'
             implementation = ['isSet{}() == '
                               'false'.format(att['capAttName']),
-                              'TO DO']
+                              line]
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
         for i in range(0, len(self.child_lo_elements)):
@@ -496,7 +514,7 @@ class GeneralFunctions():
 
     # function to write accept
     def write_accept(self):
-        if not self.is_cpp_api or self.is_list_of:
+        if not self.status == 'cpp_not_list':
             return
 
         # create comment parts
@@ -511,7 +529,7 @@ class GeneralFunctions():
         arguments = ['SBMLVisitor& v']
 
         # create the function implementation
-        if not self.has_children:
+        if not self.has_children or self.has_only_math:
             implementation = ['return v.visit(*this)']
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -544,7 +562,7 @@ class GeneralFunctions():
 
     # function to write setDocument
     def write_set_document(self):
-        if not self.is_cpp_api or self.is_list_of:
+        if not self.status == 'cpp_not_list':
             return
 
         # create comment parts
@@ -566,7 +584,7 @@ class GeneralFunctions():
                                                  self.language.upper())
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
-        if self.has_children:
+        if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
                 implementation = ['{}.setSBMLDocument(d)'.format('TO DO')]
                 code.append(dict({'code_type': 'line',
@@ -595,7 +613,7 @@ class GeneralFunctions():
     def write_write(self):
         if not self.has_array:
             return
-        elif not self.is_cpp_api or self.is_list_of:
+        elif not self.status == 'cpp_not_list':
             return
 
         # create comment parts
@@ -632,7 +650,7 @@ class GeneralFunctions():
 
     # function to write enable_package
     def write_enable_package(self):
-        if not self.is_cpp_api or self.is_list_of:
+        if not self.status == 'cpp_not_list':
             return
 
         # create comment parts
@@ -651,7 +669,7 @@ class GeneralFunctions():
         implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
                           'flag)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
-        if self.has_children:
+        if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
                 implementation = ['{}.enablePackageInternal'
                                   '(pkgURI, pkgPrefix, flag)'.format('TO DO')]
@@ -683,8 +701,6 @@ class GeneralFunctions():
         if not self.is_cpp_api:
             return
         elif not self.has_children:
-            return
-        elif self.has_math and len(self.child_elements) == 1:
             return
 
         # create comment parts

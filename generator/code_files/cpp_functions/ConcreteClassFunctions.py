@@ -45,7 +45,6 @@ class ConcreteClassFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
-        self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
@@ -62,16 +61,6 @@ class ConcreteClassFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
-
-        self.typecode = class_object['typecode']
-        self.attributes = class_object['class_attributes']
-        self.all_attributes = class_object['attribs']
-        self.sid_refs = class_object['sid_refs']
-        self.has_math = class_object['hasMath']
-
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
 
         self.concretes = class_object['concretes']
 

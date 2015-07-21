@@ -63,17 +63,12 @@ class GlobalQueryFunctions():
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
 
-        self.typecode = class_object['typecode']
-        self.attributes = class_object['class_attributes']
-        self.sid_refs = class_object['sid_refs']
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
         self.base_class = class_object['baseClass']
         self.std_base = class_object['std_base']
 
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
+        self.has_only_math = class_object['has_only_math']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -99,6 +94,8 @@ class GlobalQueryFunctions():
         # only write for elements with children in cpp
         if not self.is_cpp_api or self.no_children == 0:
                 return
+        elif self.no_children == 1 and self.has_only_math:
+            return
 
         # create comment parts
         title_line = 'Returns the first child element that has the given ' \
@@ -149,6 +146,8 @@ class GlobalQueryFunctions():
         # only write for elements with children in cpp
         if not self.is_cpp_api or self.no_children == 0:
                 return
+        elif self.no_children == 1 and self.has_only_math:
+            return
 
         # create comment parts
         title_line = 'Returns the first child element that has the given ' \
@@ -183,7 +182,7 @@ class GlobalQueryFunctions():
         if_block = ['obj != NULL', 'return obj']
         if_code = self.create_code_block('if', if_block)
         if num_lo > 0:
-            code.append(self.create_code_block('line',['SBase* obj = NULL']))
+            code.append(self.create_code_block('line', ['SBase* obj = NULL']))
         for i in range(0, num_lo):
             line = 'obj = {}.getElementByMetaId' \
                    '(metaid)'.format(name[i])
@@ -210,6 +209,8 @@ class GlobalQueryFunctions():
         # only write for elements with children in cpp
         if not self.is_cpp_api or self.no_children == 0:
                 return
+        elif self.no_children == 1 and self.has_only_math:
+            return
 
         # create comment parts
         title_line = 'Returns a List of all child {} objects, including ' \
@@ -255,4 +256,3 @@ class GlobalQueryFunctions():
     def create_code_block(code_type, lines):
         code = dict({'code_type': code_type, 'code': lines})
         return code
-

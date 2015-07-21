@@ -86,6 +86,20 @@ class ListOfQueryFunctions():
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
+
+        # status
+        if self.is_cpp_api:
+            if self.is_list_of:
+                self.status = 'cpp_list'
+            else:
+                self.status = 'cpp_not_list'
+        else:
+            if self.is_list_of:
+                self.status = 'c_list'
+            else:
+                self.status = 'c_not_list'
+        self.is_header = class_object['is_header']
+
     ########################################################################
 
     # Functions for writing get element functions
@@ -129,25 +143,28 @@ class ListOfQueryFunctions():
             return_type = 'const {}*'.format(self.object_child_name)
         else:
             return_type = '{}*'.format(self.object_child_name)
-        if self.is_cpp_api and self.is_list_of:
-            const = 'const ' if is_const else ''
-            implementation = ['return static_cast<{}{}*>(ListOf::'
-                              'get(n))'.format(const, self.child_name)]
-            code = [self.create_code_block('line', implementation)]
-        elif self.is_cpp_api and not self.is_list_of:
-            implementation = ['return {}.get'
-                              '(n)'.format(self.class_object['memberName'])]
-            code = [self.create_code_block('line', implementation)]
-        elif self.is_list_of:
-            line = ['lo == NULL', 'return NULL']
-            code = [self.create_code_block('if', line)]
-            line = ['return static_cast <{}*>(lo)->get'
-                    '(n)'.format(self.class_name)]
-            code.append(self.create_code_block('line', line))
-        else:
-            line = ['return ({0} != NULL) ? {0}->get{1}(n) : '
-                    'NULL'.format(self.abbrev_parent, self.child_name)]
-            code = [self.create_code_block('line', line)]
+        # if appropriate write the code
+        code = []
+        if not self.is_header:
+            if self.status == 'cpp_list':
+                const = 'const ' if is_const else ''
+                implementation = ['return static_cast<{}{}*>(ListOf::'
+                                  'get(n))'.format(const, self.child_name)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'cpp_not_list':
+                implementation = ['return {}.get'
+                                  '(n)'.format(self.class_object['memberName'])]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'c_list':
+                line = ['lo == NULL', 'return NULL']
+                code = [self.create_code_block('if', line)]
+                line = ['return static_cast <{}*>(lo)->get'
+                        '(n)'.format(self.class_name)]
+                code.append(self.create_code_block('line', line))
+            else:
+                line = ['return ({0} != NULL) ? {0}->get{1}(n) : '
+                        'NULL'.format(self.abbrev_parent, self.child_name)]
+                code = [self.create_code_block('line', line)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -203,36 +220,17 @@ class ListOfQueryFunctions():
             return_type = 'const {}*'.format(self.object_child_name)
         else:
             return_type = '{}*'.format(self.object_child_name)
-
+        # if appropriate write the code
         code = []
-        implementation = []
-        if not self.is_cpp_api and self.is_list_of:
-            line = ['lo == NULL', 'return NULL']
-            code.append(self.create_code_block('if', line))
-            implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
-                              '->get(sid) : NULL'.format(self.class_name)]
-        elif not self.is_cpp_api and not self.is_list_of:
-            implementation = ['return ({0} != NULL && '
-                              'sid != NULL) ? {0}->get{1}'
-                              '(sid) : NULL'.format(self.abbrev_parent,
-                                                    self.child_name)]
-        if self.is_cpp_api and is_const and self.is_list_of:
-            implementation = ['vector<{}*>::const_iterator '
-                              'result'.format(self.std_base),
-                              'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq<{}>(sid))'.format(self.object_child_name),
-                              'return (result == mItems.end()) ? 0 : '
-                              'static_cast  <const {}*> '
-                              '(*result)'.format(self.object_child_name)]
-        elif self.is_cpp_api and self.is_list_of:
-            implementation = ['return const_cast<{}*>(static_cast<const {}&>'
-                              '(*this).get(sid))'.format(self.object_child_name,
-                                                         self.object_name)]
-        elif self.is_cpp_api and not self.is_list_of:
-            implementation = ['return {}.get'
-                              '(sid)'.format(self.class_object['memberName'])]
-
-        code.append(self.create_code_block('line', implementation))
+        if not self.is_header:
+            if self.status == 'cpp_list':
+                code = self.cpp_list_write_get_element_by_id(is_const)
+            elif self.status == 'cpp_not_list':
+                code = self.cpp_not_list_write_get_element_by_id()
+            elif self.status == 'c_list':
+                code = self.c_list_write_get_element_by_id()
+            else:
+                code = self.c_not_list_write_get_element_by_id()
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -245,6 +243,45 @@ class ListOfQueryFunctions():
                      'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def cpp_list_write_get_element_by_id(self, const):
+        if const:
+            implementation = ['vector<{}*>::const_iterator '
+                              'result'.format(self.std_base),
+                              'result = find_if(mItems.begin(), mItems.end(), '
+                              'IdEq<{}>(sid))'.format(self.object_child_name),
+                              'return (result == mItems.end()) ? 0 : '
+                              'static_cast  <const {}*> '
+                              '(*result)'.format(self.object_child_name)]
+        else:
+            implementation = ['return const_cast<{}*>(static_cast<const {}&>'
+                              '(*this).get(sid))'.format(self.object_child_name,
+                                                         self.object_name)]
+        code = [self.create_code_block('line', implementation)]
+        return code
+
+    def cpp_not_list_write_get_element_by_id(self):
+        implementation = ['return {}.'
+                          'get(sid)'.format(self.class_object['memberName'])]
+        code = [self.create_code_block('line', implementation)]
+        return code
+
+    def c_list_write_get_element_by_id(self):
+        code = []
+        line = ['lo == NULL', 'return NULL']
+        code.append(self.create_code_block('if', line))
+        implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
+                              '->get(sid) : NULL'.format(self.class_name)]
+        code.append(self.create_code_block('line', implementation))
+        return code
+
+    def c_not_list_write_get_element_by_id(self):
+        implementation = ['return ({0} != NULL && '
+                          'sid != NULL) ? {0}->get{1}'
+                          '(sid) : NULL'.format(self.abbrev_parent,
+                                                self.child_name)]
+        code = [self.create_code_block('line', implementation)]
+        return code
 
     # function to write get by sidref from a listOf
     def write_get_element_by_sidref(self, sid_ref, const):

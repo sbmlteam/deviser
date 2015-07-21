@@ -63,8 +63,8 @@ class SetGetFunctions():
             self.object_child_name = self.child_name + '_t'
 
         self.attributes = class_object['class_attributes']
-        self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -350,6 +350,10 @@ class SetGetFunctions():
             elif query.has_is_set_member(attribute):
                 implementation = ['return '
                                   'mIsSet{}'.format(attribute['capAttName'])]
+            elif attribute['type'] == 'element':
+                implementation = ['return ({} != '
+                                  '{})'.format(attribute['memberName'],
+                                               attribute['default'])]
             else:
                 implementation = ['']
         else:
@@ -802,6 +806,10 @@ class SetGetFunctions():
             line = ['return ({0} != NULL) ? {0}->get{1}() : '
                     'SBML_INT_MAX'.format(self.abbrev_parent,
                                           attribute['capAttName'])]
+        elif attribute['type'] == 'element':
+            line = ['return ({})({}->get{}())'.format(attribute['CType'],
+                                                      self.abbrev_parent,
+                                                      attribute['capAttName'])]
         else:
             line = ['return {0}->get{1}().empty() ? NULL : safe_strdup({0}'
                     '->get{1}().c_str())'.format(self.abbrev_parent,
@@ -810,46 +818,69 @@ class SetGetFunctions():
         return code
 
     def set_cpp_attribute(self, attribute):
+        member = attribute['memberName']
+        name = attribute['name']
         if attribute['type'] == 'SId':
             if self.language == 'sbml':
                 implementation = ['return SyntaxChecker::'
                                   'checkAndSetSId(id, mId)']
             else:
-                implementation = ['{} = {}'.format(attribute['memberName'],
-                                                   attribute['name']),
+                implementation = ['{} = {}'.format(member, name),
                                   'return {}_OPERATION_'
                                   'SUCCESS'.format(self.language.upper())]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({})'
-                              ')'.format(attribute['name']),
+                              ')'.format(name),
                               'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                              '{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
+                              '{} = {}'.format(member, name),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif attribute['type'] == 'string':
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
+            implementation = ['{} = {}'.format(member, name),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'enum':
             implementation = ['{0}_isValid{0}({1}) == '
-                              '0'.format(attribute['element'],
-                                         attribute['name']),
-                              '{} = {}'.format(attribute['memberName'],
+                              '0'.format(attribute['element'], name),
+                              '{} = {}'.format(member,
                                                attribute['default']),
                               'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
-                              '{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
+                              '{} = {}'.format(member, name),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif query.has_is_set_member(attribute):
-            implementation = ['{} = {}'.format(attribute['memberName'],
-                                               attribute['name']),
+            implementation = ['{} = {}'.format(member, name),
                               'mIsSet{} = true'.format(attribute['capAttName']),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['type'] == 'element':
+            clone = 'clone'
+            nested_if = []
+            implementation = ['{} == {}'.format(member, name),
+                              'return LIBSBML_OPERATION_SUCCESS',
+                              'else if',
+                              '{} == NULL'.format(name),
+                              'delete {}'.format(member),
+                              '{} = NULL'.format(member),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            if attribute['element'] == 'ASTNode':
+                clone = 'deepCopy'
+                implementation.append('else if')
+                implementation.append('!({}->isWellFormedASTNode()'
+                                      ')'.format(name))
+                implementation.append('return LIBSBML_INVALID_OBJECT')
+                line = ['{} != NULL'.format(member),
+                        '{}->setParentSBMLObject(this)'.format(member)]
+                nested_if = self.create_code_block('if', line)
+            implementation.append('else')
+            implementation.append('delete {}'.format(member))
+            implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
+                                  ': NULL'.format(member, name, clone))
+            if len(nested_if) > 0:
+                implementation.append(nested_if)
+            implementation.append('return LIBSBML_OPERATION_SUCCESS')
+            code = [self.create_code_block('else_if', implementation)]
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code
@@ -867,7 +898,7 @@ class SetGetFunctions():
         elif attribute['attType'] == 'enum':
             implementation = ['{} = {}'.format(attribute['memberName'],
                                                attribute['default']),
-                              'return LIBSBML_OPERATION_SUCESS']
+                              'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif query.has_is_set_member(attribute):
             implementation = ['{} = {}'.format(attribute['memberName'],
@@ -880,6 +911,11 @@ class SetGetFunctions():
                                'return LIBSBML_OPERATION_FAILED']
             code = [dict({'code_type': 'line', 'code': implementation}),
                     dict({'code_type': 'if_else', 'code': implementation2})]
+        elif attribute['type'] == 'element':
+            implementation = ['delete {}'.format(attribute['memberName']),
+                              '{} = NULL'.format(attribute['memberName']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'line', 'code': implementation})]
         else:
             implementation = ['TO DO']
             code = [dict({'code_type': 'line', 'code': implementation})]

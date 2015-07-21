@@ -63,11 +63,9 @@ class ProtectedFunctions():
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
 
-        self.typecode = class_object['typecode']
         self.attributes = class_object['class_attributes']
         self.all_attributes = class_object['attribs']
-        self.sid_refs = class_object['sid_refs']
-        self.has_math = class_object['hasMath']
+        self.has_math = class_object['has_math']
         self.base_class = class_object['baseClass']
         self.child_base_class = ''
         if 'child_base_class' in class_object:
@@ -79,11 +77,7 @@ class ProtectedFunctions():
 
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
-        self.std_base = class_object['std_base']
-
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
+        self.num_non_std_children = class_object['num_non_std_children']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -107,9 +101,9 @@ class ProtectedFunctions():
 
     # function to write create_object
     def write_create_object(self):
-        # if not list of only write if has children other than math
-        if not self.is_list_of and \
-                not query.has_children_not_math(self.all_attributes):
+        # if not list of only write if has children other than node based
+        if not self.is_list_of and not query.has_children_not_math(self.all_attributes):
+#        if (len(self.child_elements) - self.num_non_std_children) > 0:
             return
 
         # create comment parts
@@ -353,8 +347,26 @@ class ProtectedFunctions():
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['bool read = false',
+                          'const string& name = stream.peek().getName()']
         code = [dict({'code_type': 'line', 'code': implementation})]
+
+        line = ['stream.getSBMLNamespaces() == NULL',
+                'stream.setSBMLNamespaces(new SBMLNamespaces(getLevel(), '
+                'getVersion()))']
+        nested_if = self.create_code_block('if', line)
+        implementation = ['name == \"math\"',
+                          'const XMLToken elem = stream.peek()',
+                          'const std::string prefix = '
+                          'checkMathMLNamespace(elem)',
+                          nested_if, 'delete mMath',
+                          'mMath = readMathML(stream, prefix)',
+                          'read = true']
+        code.append(self.create_code_block('if', implementation))
+        line = ['SBase::readOtherXML(stream)',
+                'read = true']
+        code.append(self.create_code_block('if', line))
+        code.append(self.create_code_block('line', ['return read']))
 
         # return the parts
         return dict({'title_line': title_line,

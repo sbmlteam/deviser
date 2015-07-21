@@ -54,58 +54,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                          class_object['attribs'])
 
         # members from object
-        self.class_object = class_object
-        self.is_list_of = class_object['is_list_of']
-        self.name = class_object['name']
-        self.class_name = class_object['name']
-        self.package = class_object['package']
-        self.typecode = class_object['typecode']
-        if class_object['is_list_of']:
-            self.list_of_name = class_object['list_of_name']
-            self.list_of_child = class_object['lo_child']
-        else:
-            self.list_of_name = ''
-            self.list_of_child = ''
-        self.baseClass = class_object['baseClass']
-        self.has_std_base = True
-        self.std_base = 'SBase'
-        if self.language != 'sbml':
-            self.std_base = 'Foo'
-            self.has_std_base = False
-        elif not self.is_list_of and self.baseClass != 'SBase':
-            self.has_std_base = False
-        elif self.is_list_of and self.baseClass != 'ListOf':
-            self.has_std_base = False
-        self.class_object['has_std_base'] = self.has_std_base
-        self.class_object['std_base'] = self.std_base
-
-        self.sid_refs = class_object['sid_refs']
-        self.unit_sid_refs = class_object['unit_sid_refs']
-        self.add_decls = None
-        if 'addDecls' in class_object:
-            self.add_decls = class_object['addDecls']
-        self.overwrites_children = False
-        if 'childrenOverwriteElementName' in class_object:
-            self.overwrites_children = \
-                class_object['childrenOverwriteElementName']
-        self.class_object['overwrites_children'] = self.overwrites_children
-
-        # check case of things where we assume upper/lower
-        if self.package[0].islower():
-            self.package = strFunctions.upper_first(class_object['package'])
-
-        self.hasMath = class_object['hasMath']
-
-        if 'concrete' in class_object:
-            self.concretes = query.get_concretes(class_object['root'],
-                                                 class_object['concrete'])
-
-        self.class_attributes = query.separate_attributes(self.attributes)
-        self.class_object['class_attributes'] = self.class_attributes
-        self.class_object['child_lo_elements'] = self.child_lo_elements
-        self.class_object['child_elements'] = self.child_elements
-        self.class_object['concretes'] = self.concretes
-        self.class_object['has_array'] = query.has_array(self.class_attributes)
+        self.expand_class(class_object)
     ########################################################################
 
     # Functions for writing the class
@@ -166,6 +115,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(self.child_lo_elements) > 0:
             self.write_line('#include <{}'
                             '/util/ElementFilter.h>'.format(self.language))
+
+        if self.has_math:
+            self.write_line('#include <{}/math/MathML.h>'.format(self.language))
 
         self.skip_line(2)
         self.write_line('using namespace std;')
@@ -499,6 +451,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             element = self.child_lo_elements[i]
             element['std_base'] = self.std_base
             element['package'] = self.package
+            element['is_header'] = self.is_header
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,

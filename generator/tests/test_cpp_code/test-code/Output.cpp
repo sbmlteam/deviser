@@ -388,7 +388,7 @@ int
 Output::unsetTransitionEffect()
 {
   mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
-  return LIBSBML_OPERATION_SUCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
