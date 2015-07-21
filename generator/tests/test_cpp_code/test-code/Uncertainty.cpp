@@ -302,14 +302,6 @@ Uncertainty::setUncertML(const UncertMLNode* uncertML)
 
 
 /*
- * Creates a new UncertMLNode object, adds it to this Uncertainty object and
- * returns the UncertMLNode object created.
- */
-UncertMLNode*
-Uncertainty::createUncertML()
-
-
-/*
  * Unsets the value of the "uncertML" element of this Uncertainty.
  */
 int
@@ -452,25 +444,6 @@ Uncertainty::enablePackageInternal(const std::string& pkgURI,
                                    bool flag)
 {
   SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Creates a new object from the next XMLToken on the XMLInputStream
- */
-SBase*
-Uncertainty::createObject(XMLInputStream& stream)
-{
-  SBase* obj = NULL;
-
-  const string& name = stream.peek().getName();
-
-  return obj;
 }
 
 /** @endcond */
@@ -838,15 +811,6 @@ Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* uncertML)
 {
   return (u != NULL) ? u->setUncertML(uncertML) : LIBSBML_INVALID_OBJECT;
 }
-
-
-/*
- * Creates a new UncertMLNode_t object, adds it to this Uncertainty_t object
- * and returns the UncertMLNode_t object created.
- */
-LIBSBML_EXTERN
-UncertMLNode_t*
-Uncertainty_createUncertML(Uncertainty_t* u)
 
 
 /*

@@ -161,6 +161,11 @@ class BaseCppFile(BaseFile.BaseFile):
     # Function to expand the attribute information
     @staticmethod
     def expand_attributes(self, attributes):
+        if len(attributes) > 0:
+            if 'root' in attributes[0]:
+                root = attributes[0]['root']
+            else:
+                root = None
         for i in range(0, len(attributes)):
             capname = strFunctions.upper_first(attributes[i]['name'])
             attributes[i]['name'] = strFunctions.lower_first((capname))
@@ -170,6 +175,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 strFunctions.plural(attributes[i]['name'])
             attributes[i]['isEnum'] = False
             attributes[i]['isArray'] = False
+            attributes[i]['children_overwrite'] = False
             att_type = attributes[i]['type']
             if att_type == 'SId' or att_type == 'SIdRef':
                 attributes[i]['attType'] = 'string'
@@ -222,6 +228,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['default'] = \
                     self.get_default_enum_value(self, attributes[i])
             elif att_type == 'element':
+                el_name = attributes[i]['element']
                 attributes[i]['attType'] = 'element'
                 if attributes[i]['name'] == 'math':
                     attributes[i]['attTypeCode'] = 'ASTNode*'
@@ -231,6 +238,8 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['CType'] = attributes[i]['element']+'_t*'
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
+                attributes[i]['children_overwrite'] = \
+                    query.overwrites_name(root, el_name)
             elif att_type == 'lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
                 plural = strFunctions.plural(attributes[i]['element'])

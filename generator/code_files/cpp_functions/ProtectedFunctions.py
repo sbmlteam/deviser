@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query
+from util import strFunctions
 
 
 class ProtectedFunctions():
@@ -78,6 +78,7 @@ class ProtectedFunctions():
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
         self.num_non_std_children = class_object['num_non_std_children']
+        self.num_children = class_object['num_children']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -101,9 +102,9 @@ class ProtectedFunctions():
 
     # function to write create_object
     def write_create_object(self):
+        num_children = self.num_children - self.num_non_std_children
         # if not list of only write if has children other than node based
-        if not self.is_list_of and not query.has_children_not_math(self.all_attributes):
-#        if (len(self.child_elements) - self.num_non_std_children) > 0:
+        if not self.is_list_of and num_children == 0:
             return
 
         # create comment parts
@@ -141,23 +142,37 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', implementation))
             code.append(self.create_code_block('line', ['return object']))
         else:
-            implementation = ['SBase* obj = NULL']
-            code = [dict({'code_type': 'line', 'code': implementation}),
-                    self.create_code_block('line', [
-                        'const string& name = stream.peek().getName()'])]
+            code = [self.create_code_block('line', ['SBase* obj = NULL']),
+                    self.create_code_block('line',
+                                           ['const string& name = '
+                                            'stream.peek().getName()'])]
+            if len(self.child_elements) != self.num_non_std_children:
+                line = ['{}_CREATE_NS({}, '
+                        'getSBMLNamespaces())'.format(upkg, ns)]
+                code.append(self.create_code_block('line', line))
             error_line = 'getErrorLog()->logPackageError(\"{}\", {}{}' \
-                         'LOElements, getPackageVersion(), getLevel(), ' \
+                         'Elements, getPackageVersion(), getLevel(), ' \
                          'getVersion())'.format(self.package.lower(),
                                                 self.package,
                                                 self.class_name)
-            num_child = len(self.child_lo_elements)
             has_else = False
-            if num_child > 1:
+            if num_children > 1:
                 has_else = True
-            if not has_else and num_child == 1:
-                name = self.child_lo_elements[0]['memberName']
+            if not has_else and num_children == 1:
+                # find the element
+                element = None
+                for i in range(0, len(self.child_elements)):
+                    element = self.child_elements[i]
+                    if 'is_ml' in element and element['is_ml']:
+                        element = None
+                        continue
+                    else:
+                        break
+                if element is None:
+                    element = self.child_lo_elements[0]
+                name = element['memberName']
                 loname = strFunctions.\
-                    lower_first(self.child_lo_elements[0]['attTypeCode'])
+                    lower_first(element['attTypeCode'])
                 nested_if = self.create_code_block('if',
                                                    ['{}.size() '
                                                     '!= 0'.format(name),
@@ -167,10 +182,37 @@ class ProtectedFunctions():
                                   nested_if, line]
                 code.append(self.create_code_block('if', implementation))
             implementation = []
-            for i in range(0, num_child):
-                name = self.child_lo_elements[i]['memberName']
+            i = 0
+            for i in range(0, len(self.child_elements)):
+                element = self.child_elements[i]
+                if 'is_ml' in element and element['is_ml']:
+                    continue
+
+                name = element['memberName']
                 loname = strFunctions.\
-                    lower_first(self.child_lo_elements[i]['attTypeCode'])
+                    lower_first(element['element'])
+                if element['children_overwrite']:
+                    loname = element['name']
+                nested_if = self.create_code_block('if',
+                                                   ['{} '
+                                                    '!= NULL'.format(name),
+                                                    error_line])
+                implementation.append('name == \"{}\"'.format(loname))
+                implementation.append(nested_if)
+                implementation.append('{} = new {}'
+                                      '({})'.format(name,
+                                                    element['element'], ns))
+                if element['children_overwrite']:
+                    implementation.append('{}->setElementName'
+                                          '(name)'.format(name))
+                implementation.append('obj = {}'.format(name))
+
+                if i < num_children - 1:
+                    implementation.append('else if')
+            for j in range(i, i + len(self.child_lo_elements)):
+                name = self.child_lo_elements[j-i]['memberName']
+                loname = strFunctions.\
+                    lower_first(self.child_lo_elements[j-i]['attTypeCode'])
                 nested_if = self.create_code_block('if',
                                                    ['{}.size() '
                                                     '!= 0'.format(name),
@@ -180,10 +222,15 @@ class ProtectedFunctions():
                 implementation.append(nested_if)
                 implementation.append(line)
 
-                if i < num_child - 1:
+                if j < num_children - 1:
                     implementation.append('else if')
             if has_else:
                 code.append(self.create_code_block('else_if', implementation))
+            if len(self.child_elements) != self.num_non_std_children:
+                code.append(self.create_code_block('line',
+                                                   ['delete {}'.format(ns)]))
+                code.append(self.create_code_block('line',
+                                                   ['connectToChild()']))
             code.append(self.create_code_block('line', ['return obj']))
         # return the parts
         return dict({'title_line': title_line,
@@ -356,7 +403,8 @@ class ProtectedFunctions():
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
                 line = ['stream.getSBMLNamespaces() == NULL',
-                        'stream.setSBMLNamespaces(new SBMLNamespaces(getLevel(), '
+                        'stream.setSBMLNamespaces(new '
+                        'SBMLNamespaces(getLevel(), '
                         'getVersion()))']
                 nested_if = self.create_code_block('if', line)
                 implementation = ['name == \"math\"',
@@ -369,7 +417,8 @@ class ProtectedFunctions():
                 code.append(self.create_code_block('if', implementation))
             elif 'is_ml' in element and element['is_ml']:
                 member = element['memberName']
-                name = element['capAttName'] if element['name'] == 'uncertML' else element['name']
+                name = element['capAttName'] if element['name'] == 'uncertML' \
+                    else element['name']
                 line = ['name == \"{}\"'.format(name),
                         'delete {}'.format(member),
                         'XMLNode* xml = new XMLNode(stream)',
@@ -591,7 +640,8 @@ class ProtectedFunctions():
                           '']
         code.append(self.create_code_block('comment', implementation))
 
-        if att_type == 'SId' or att_type == 'SIdRef':
+        if att_type == 'SId' or att_type == 'SIdRef' \
+                or att_type == 'UnitSId' or att_type == 'UnitSIdRef':
             self.write_sid_read(index, code)
         elif att_type == 'enum':
             self.write_enum_read(index, code)

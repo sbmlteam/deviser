@@ -262,15 +262,6 @@ public:
 
 
   /**
-   * Creates a new UncertMLNode object, adds it to this Uncertainty object and
-   * returns the UncertMLNode object created.
-   *
-   * @return a new UncertMLNode object instance.
-   */
-  UncertMLNode* createUncertML();
-
-
-  /**
    * Unsets the value of the "uncertML" element of this Uncertainty.
    *
    * @copydetails doc_returns_success_code
@@ -390,17 +381,6 @@ public:
 
 
 protected:
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Creates a new object from the next XMLToken on the XMLInputStream
-   */
-  virtual SBase* createObject(XMLInputStream& stream);
-
-  /** @endcond */
-
 
 
   /** @cond doxygenLibsbmlInternal */
@@ -706,22 +686,6 @@ Uncertainty_isSetUncertML(const Uncertainty_t * u);
 LIBSBML_EXTERN
 int
 Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* uncertML);
-
-
-/**
- * Creates a new UncertMLNode_t object, adds it to this Uncertainty_t object
- * and returns the UncertMLNode_t object created.
- *
- * @param u, the Uncertainty_t structure to which the UncertMLNode_t should be
- * added.
- *
- * @return a new UncertMLNode_t object instance.
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-UncertMLNode_t*
-Uncertainty_createUncertML(Uncertainty_t* u);
 
 
 /**

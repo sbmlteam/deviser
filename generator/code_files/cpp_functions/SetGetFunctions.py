@@ -45,6 +45,7 @@ class SetGetFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
@@ -690,6 +691,8 @@ class SetGetFunctions():
         # not if element is Math or is abstract
         if attribute['attTypeCode'] == 'ASTNode*':
             return
+        elif 'is_ml' in attribute and attribute['is_ml']:
+            return
         elif attribute['abstract']:
             return
 
@@ -726,6 +729,37 @@ class SetGetFunctions():
                                              self.abbrev_parent))
         return_type = '{}'.format(att_type)
 
+        if self.is_cpp_api:
+            member = attribute['memberName']
+            up_pack = self.package.upper()
+            low_pack = self.package.lower()
+            implementation = ['{} != NULL'.format(member),
+                              'delete {}'.format(member)]
+            code = [self.create_code_block('if', implementation)]
+            implementation = ['{}_CREATE_NS({}ns, '
+                              'getSBMLNamespaces())'.format(up_pack, low_pack),
+                              '{} = new {}'
+                              '({}ns)'.format(member, att_name, low_pack)]
+            code.append(self.create_code_block('line', implementation))
+            if attribute['children_overwrite']:
+                line = ['{}->setElementName(\"{}\")'.format(member,
+                                                            attribute['name'])]
+                code.append(self.create_code_block('line', line))
+            code.append(self.create_code_block('line',
+                                               ['delete {}'
+                                                'ns'.format(low_pack)]))
+            code.append(self.create_code_block('line', ['connectToChild()']))
+            code.append((self.create_code_block('line',
+                                                ['return {}'.format(member)])))
+        else:
+            implementation = ['{} == NULL'.format(self.abbrev_parent),
+                              'return NULL']
+            code = [self.create_code_block('if', implementation)]
+            implementation = ['return ({})({}->'
+                              'create{}())'.format(att_type,
+                                                   self.abbrev_parent, name)]
+            code.append(self.create_code_block('line', implementation))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -736,7 +770,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write create functions
     def write_create_concrete_child(self, attribute):
@@ -772,6 +807,7 @@ class SetGetFunctions():
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
         return_type = '{}'.format(att_type)
+        code = [self.create_code_block('line', 'to do')]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -783,7 +819,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -872,6 +909,11 @@ class SetGetFunctions():
                 implementation.append('return LIBSBML_INVALID_OBJECT')
                 line = ['{} != NULL'.format(member),
                         '{}->setParentSBMLObject(this)'.format(member)]
+                nested_if = self.create_code_block('if', line)
+            elif attribute['children_overwrite']:
+                line = ['{} != NULL'.format(member),
+                        '{}->setElementName(\"{}\")'.format(member, name),
+                        '{}->connectToParent(this)'.format(member)]
                 nested_if = self.create_code_block('if', line)
             implementation.append('else')
             implementation.append('delete {}'.format(member))

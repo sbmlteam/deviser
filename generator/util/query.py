@@ -164,3 +164,14 @@ def has_attribute(element, attribute):
             if attribute == element['attribs'][i]['name']:
                 return True
     return False
+
+
+# returns the status of the child overwrite flag
+def overwrites_name(root, name):
+    if root is None:
+        return False
+    obj = get_class(name, root)
+    if obj is not None:
+        if 'childrenOverwriteElementName' in obj:
+            return obj['childrenOverwriteElementName']
+    return False

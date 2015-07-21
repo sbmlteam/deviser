@@ -997,10 +997,14 @@ Transition::getAllElements(ElementFilter * filter = NULL)
 {
   List* ret = new List();
   List* sublist = NULL;
+
+
   ADD_FILTERED_LIST(ret, sublist, mInputs, filter);
   ADD_FILTERED_LIST(ret, sublist, mOutputs, filter);
   ADD_FILTERED_LIST(ret, sublist, mFunctionTerms, filter);
+
   ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
+
   return ret;
 }
 
@@ -1022,7 +1026,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mInputs.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionLOElements,
+      getErrorLog()->logPackageError("qual", QualTransitionElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 
@@ -1032,7 +1036,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mOutputs.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionLOElements,
+      getErrorLog()->logPackageError("qual", QualTransitionElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 
@@ -1042,7 +1046,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mFunctionTerms.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionLOElements,
+      getErrorLog()->logPackageError("qual", QualTransitionElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 

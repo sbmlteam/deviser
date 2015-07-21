@@ -593,10 +593,10 @@ class GeneralFunctions():
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['{}.setSBMLDocument'
+                    implementation = ['{} != NULL'.format(att['memberName']),
+                                      '{}->setSBMLDocument'
                                       '(d)'.format(att['memberName'])]
-                    code.append(dict({'code_type': 'line',
-                                      'code': implementation}))
+                    code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
                 implementation = ['{}.setSBMLDocument'
@@ -735,10 +735,10 @@ class GeneralFunctions():
             if 'is_ml' in att and att['is_ml']:
                 continue
             else:
-                implementation = ['{}.connectToParent'
+                implementation = ['{} != NULL'.format(att['memberName']),
+                                  '{}->connectToParent'
                                   '(this)'.format(att['memberName'])]
-                code.append(dict({'code_type': 'line',
-                                  'code': implementation}))
+                code.append(self.create_code_block('if', implementation))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
             implementation = ['{}.connectToParent'

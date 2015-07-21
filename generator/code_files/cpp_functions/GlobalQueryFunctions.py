@@ -228,16 +228,23 @@ class GlobalQueryFunctions():
         arguments = ['ElementFilter * filter = NULL']
 
         implementation = ['List* ret = new List()', 'List* sublist = NULL']
+        code = [self.create_code_block('line', implementation)]
+        implementation = []
         for i in range(0, len(self.child_elements)):
-            implementation.append('TO DO')
+            name = self.child_elements[i]['memberName']
+            implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
+                                  'filter)'.format(name))
+        code.append(self.create_code_block('line', implementation))
+        implementation = []
         for i in range(0, len(self.child_lo_elements)):
             name = self.child_lo_elements[i]['memberName']
             implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
                                   'filter)'.format(name))
-        implementation.append('ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter)')
-        implementation.append('return ret')
-
-        code = [self.create_code_block('line', implementation)]
+        code.append(self.create_code_block('line', implementation))
+        code.append(self.create_code_block('line',
+                                           ['ADD_FILTERED_FROM_PLUGIN(ret, '
+                                            'sublist, filter)']))
+        code.append(self.create_code_block('line', ['return ret']))
 
         # return the parts
         return dict({'title_line': title_line,
