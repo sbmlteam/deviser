@@ -334,13 +334,20 @@ class Constructors():
         arguments = ['const {}& rhs'.format(self.object_name)]
         # create the function implementation
         args = ['&rhs != this'] + self.write_assignment_args(self)
-        if self.has_math:
-            line = ['rhs.mMath != NULL', 'mMath = rhs.mMath->deepCopy()',
-                    'else', 'mMath = NULL']
-            nested_if = self.create_code_block('if_else', line)
-            implementation = [args, nested_if]
-        else:
-            implementation = args
+        if self.num_non_std_children > 0:
+            clone = 'clone'
+            for i in range(0, len(self.child_elements)):
+                element = self.child_elements[i]
+                if element['is_ml']:
+                    member = element['memberName']
+                    if element['element'] == 'ASTNode':
+                        clone = 'deepCopy'
+                    implementation = ['rhs.{} != NULL'.format(member),
+                                      '{0} = rhs.{0}->{1}()'.format(member,
+                                                                    clone),
+                                      'else', '{} = NULL'.format(member)]
+                    args += [self.create_code_block('if_else', implementation)]
+        implementation = args
         if self.has_children:
             implementation.append('connectToChild()')
         implementation2 = ['return *this']
@@ -430,12 +437,17 @@ class Constructors():
         if not self.is_cpp_api:
             arguments.append('{}* {}'.format(self.object_name, abbrev_object))
         # create the function implementation
-        if self.is_cpp_api and not self.has_math:
+        if self.is_cpp_api:
             implementation = []
             code_type = 'blank'
-        elif self.is_cpp_api and self.has_math:
-            implementation = ['delete mMath', 'mMath = NULL']
-            code_type = 'line'
+            if self.num_non_std_children > 0:
+                for i in range(0, len(self.child_elements)):
+                    element = self.child_elements[i]
+                    if element['is_ml']:
+                        member = element['memberName']
+                        implementation.append('delete {}'.format(member))
+                        implementation.append('{} = NULL'.format(member))
+                code_type = 'line'
         else:
             implementation = ['{} != NULL'.format(abbrev_object),
                               'delete {}'.format(abbrev_object)]
@@ -492,7 +504,13 @@ class Constructors():
     def write_assignment_args(self):
         constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
         for attrib in self.attributes:
-            if attrib['element'] != 'ASTNode':
+            if attrib['type'] == 'element':
+                if 'is_ml' in attrib and attrib['is_ml']:
+                    continue
+                else:
+                    constructor_args.append('{0} = rhs.{0}'
+                                            .format(attrib['memberName']))
+            else:
                 constructor_args.append('{0} = rhs.{0}'
                                         .format(attrib['memberName']))
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
