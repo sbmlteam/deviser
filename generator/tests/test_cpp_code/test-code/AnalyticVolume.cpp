@@ -567,7 +567,7 @@ AnalyticVolume::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
-  if (isSetMath() == false)
+  if (isSetMath() == true)
   {
     writeMathML(getMath(), stream, getSBMLNamespaces());
   }
