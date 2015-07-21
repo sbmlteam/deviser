@@ -113,10 +113,14 @@ AnalyticVolume::AnalyticVolume(const AnalyticVolume& orig)
 AnalyticVolume&
 AnalyticVolume::operator=(const AnalyticVolume& rhs)
 {
-  if (['&rhs != this', 'SBase::operator=(rhs)', 'mId = rhs.mId', 'mFunctionType
-    = rhs.mFunctionType', 'mOrdinal = rhs.mOrdinal', 'mIsSetOrdinal =
-      rhs.mIsSetOrdinal', 'mDomainType = rhs.mDomainType'])
+  if (&rhs != this)
   {
+    SBase::operator=(rhs);
+    mId = rhs.mId;
+    mFunctionType = rhs.mFunctionType;
+    mOrdinal = rhs.mOrdinal;
+    mIsSetOrdinal = rhs.mIsSetOrdinal;
+    mDomainType = rhs.mDomainType;
     if (rhs.mMath != NULL)
     {
       mMath = rhs.mMath->deepCopy();
