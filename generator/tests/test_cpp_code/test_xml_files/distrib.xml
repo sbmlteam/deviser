@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package name="Distrib" fullname="Distributions" number="1300" offset="5000000" required="true">
+<package name="Distrib" fullname="Distributions" number="1300" offset="5000000" version="1" required="true">
   <versions>
     <pkgVersion>
       <elements>
@@ -18,7 +18,7 @@
         </element>
         <element name="Uncertainty" typeCode="SBML_DISTRIB_UNCERTAINTY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="false" type="string" abstract="false" />
+            <attribute name="id" required="false" type="SId" abstract="false" />
             <attribute name="name" required="false" type="string" abstract="false" />
             <attribute name="UncertML" required="true" type="element" element="UncertMLNode" abstract="false" />
           </attributes>
