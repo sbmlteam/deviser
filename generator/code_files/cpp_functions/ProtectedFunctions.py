@@ -269,6 +269,8 @@ class ProtectedFunctions():
                           '(attributes)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.attributes)):
+            if self.attributes[i]['isArray']:
+                continue
             name = self.attributes[i]['name']
             implementation = ['attributes.add(\"{}\")'.format(name)]
             code.append(dict({'code_type': 'line', 'code': implementation}))
@@ -554,9 +556,35 @@ class ProtectedFunctions():
         return_type = 'void'
         arguments = ['const std::string& text']
 
+        # find the array attribute
+        name = ''
+        array_type = ''
+        for attrib in self.attributes:
+            if attrib['isArray']:
+                name = attrib['capAttName']
+                array_type = attrib['element']
         # create the function implementation
-        implementation = ['TO DO']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        implementation = ['stringstream strStream(text)',
+                          '{} val'.format(array_type),
+                          'vector<{}> valuesVector'.format(array_type)]
+        code = [self.create_code_block('line', implementation),
+                self.create_code_block('while',
+                                       ['strStream >> val',
+                                        'valuesVector.push_back(val)']),
+                self.create_code_block('line',
+                                       ['unsigned int length = (unsigned '
+                                        'int)valuesVector.size()'])]
+        for_loop = self.create_code_block('for',
+                                          ['unsigned int i = 0; '
+                                           'i < length; ++i',
+                                           'data[i] = valuesVector.at(i)'])
+        code.append(self.create_code_block('if',
+                                           ['length > 0',
+                                            '{0}* data = new {0}'
+                                            '[length]'.format(array_type),
+                                            for_loop,
+                                            'set{}(data, length)'.format(name),
+                                            'delete[] data']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -614,6 +642,8 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def write_write_att(self, index, code):
+        if self.attributes[index]['isArray']:
+            return
         name = self.attributes[index]['name']
         cap_name = self.attributes[index]['capAttName']
         member = self.attributes[index]['memberName']
@@ -630,6 +660,8 @@ class ProtectedFunctions():
 
     def write_read_att(self, index, code):
         attribute = self.attributes[index]
+        if attribute['isArray']:
+            return
         name = attribute['name']
         att_type = attribute['type']
         member = attribute['memberName']
@@ -798,6 +830,7 @@ class ProtectedFunctions():
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']
         set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
+        reqd = attribute['reqd']
         if att_type == 'int':
             num_type = 'Integer'
         elif att_type == 'uint':
@@ -819,7 +852,19 @@ class ProtectedFunctions():
                 'log->logPackageError(\"{}\", {}{}MustBe{},'
                 ' getPackageVersion(), level, version, msg.str()))'.format(
                     self.package.lower(), self.package, up_name, num_type)]
-        if_error = self.create_code_block('if', line)
+        if reqd:
+            line += ['else',
+                     'std::string message = \"{} attribute \'{}\' is missing '
+                     'from the <{}> element.\"'.format(self.package, name,
+                                                       self.class_name),
+                     'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                     'getPackageVersion(), level, version, '
+                     'message)'.format(self.package.lower(), self.package,
+                                       self.class_name)]
+
+            if_error = self.create_code_block('if_else', line)
+        else:
+            if_error = self.create_code_block('if', line)
 
         # line = ['isSetId()', 'msg << \"with id \'\" << getId() << \"\' \"']
         # if_id = self.create_code_block('if', line)

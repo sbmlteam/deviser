@@ -1033,21 +1033,6 @@ SampledField_getCompressionAsString(const SampledField_t * sf);
 
 
 /**
- * Returns the value of the "samples" attribute of this SampledField_t.
- *
- * @param sf the SampledField_t structure whose samples is sought.
- *
- * @return the value of the "samples" attribute of this SampledField_t as a
- * array.
- *
- * @memberof SampledField_t
- */
-LIBSBML_EXTERN
-int*
-SampledField_getSamples(const SampledField_t * sf);
-
-
-/**
  * Returns the value of the "samplesLength" attribute of this SampledField_t.
  *
  * @param sf the SampledField_t structure whose samplesLength is sought.

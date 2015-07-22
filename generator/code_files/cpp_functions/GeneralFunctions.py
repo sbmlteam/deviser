@@ -636,8 +636,26 @@ class GeneralFunctions():
         arguments = ['XMLOutputStream& stream']
 
         # create the function implementation
-        implementation = ['TO DO']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        # find the array attribute
+        name = ''
+        member = ''
+        array_type = ''
+        for attrib in self.attributes:
+            if attrib['isArray']:
+                name = attrib['capAttName']
+                member = attrib['memberName']
+                array_type = attrib['element']
+        code = [self.create_code_block('line',
+                                       ['stream.startElement(getElementName(), '
+                                        'getPrefix())',
+                                        'writeAttributes(stream)'])]
+        nested_for = self.create_code_block(
+            'for', ['int i = 0; i < m{}Length; ++i'.format(name),
+                    'stream << ({}){}[i] << \" \"'.format(array_type, member)])
+        implementation = ['isSet{}()'.format(name), nested_for]
+        code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block(
+            'line', ['stream.endElement(getElementName(), getPrefix())']))
 
         # return the parts
         return dict({'title_line': title_line,

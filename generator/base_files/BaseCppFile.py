@@ -273,7 +273,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = attributes[i]['element'] + '*'
                 attributes[i]['CType'] = attributes[i]['attTypeCode']
                 attributes[i]['isNumber'] = False
-                attributes[i]['default'] = 'FIX ME'
+                attributes[i]['default'] = 'NULL'
             else:
                 attributes[i]['attType'] = 'FIX ME'
                 attributes[i]['attTypeCode'] = 'FIX ME'
@@ -599,6 +599,8 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_else_if_block(code)
         elif code_type == 'for':
             self.write_block('for', code, True)
+        elif code_type == 'while':
+            self.write_block('while', code, True)
         elif code_type == 'try':
             self.write_try_block(code)
 

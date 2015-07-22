@@ -39,7 +39,6 @@
 
 from base_files import BaseCppFile
 from cpp_functions import *
-from util import strFunctions
 from util import query
 
 

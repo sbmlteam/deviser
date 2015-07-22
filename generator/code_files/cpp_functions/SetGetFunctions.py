@@ -94,6 +94,9 @@ class SetGetFunctions():
                 attribute = self.attributes[index]
             else:
                 return
+            # dont write a get for c
+            if not self.is_cpp_api and attribute['isArray']:
+                return
         else:
             if index < len(self.child_elements):
                 attribute = self.child_elements[index]
@@ -273,6 +276,13 @@ class SetGetFunctions():
         function = 'get{0}'.format(attribute['capAttName'])
         return_type = 'void'
         arguments = ['{} outArray'.format(attribute['attTypeCode'])]
+        code = [self.create_code_block(
+            'if',
+            ['outArray == NULL || {} == NULL'.format(attribute['memberName']),
+             'return'])]
+        line = ['memcpy(outArray, {0}, sizeof({1})*{0}'
+                'Length)'.format(attribute['memberName'], attribute['element'])]
+        code.append(self.create_code_block('line', line))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -284,7 +294,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': const,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     ########################################################################
 
@@ -344,7 +355,7 @@ class SetGetFunctions():
             if query.is_string(attribute):
                 implementation = ['return ({}.empty() == false)'.format(
                     attribute['memberName'])]
-            elif attribute['attType'] == 'enum':
+            elif attribute['attType'] == 'enum' or attribute['isArray']:
                 implementation = ['return ({} != '
                                   '{})'.format(attribute['memberName'],
                                                attribute['default'])]
@@ -593,6 +604,26 @@ class SetGetFunctions():
         return_type = 'int'
         arguments = ['{} inArray'.format(attribute['attTypeCode']),
                      'int arrayLength']
+        member = attribute['memberName']
+        length = member + 'Length'
+        ar_type = attribute['element']
+        is_set_l = 'mIsSet' + strFunctions.upper_first(attribute['name']) \
+                   + 'Length'
+        code = [self.create_code_block('if',
+                                       ['inArray == NULL',
+                                        'return LIBSBML_INVALID_'
+                                        'ATTRIBUTE_VALUE']),
+                self.create_code_block('if',
+                                       ['{} != NULL'.format(member),
+                                        'delete[] {}'.format(member)])]
+        implementation = ['{} = new {}[arrayLength]'.format(member, ar_type),
+                          'memcpy({}, inArray, sizeof('
+                          '{})*arrayLength)'.format(member, ar_type),
+                          '{} = true'.format(is_set_l),
+                          '{} = arrayLength'.format(length)]
+        code.append(self.create_code_block('line', implementation))
+        code.append(self.create_code_block(
+            'line', ['return LIBSBML_OPERATION_SUCCESS']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -604,7 +635,8 @@ class SetGetFunctions():
                      'arguments': arguments,
                      'constant': False,
                      'virtual': False,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
 
     # function to write unset functions
     def write_unset(self, is_attribute, index):
@@ -827,6 +859,8 @@ class SetGetFunctions():
     # HELPER FUNCTIONS
 
     def get_c_attribute(self, attribute):
+        if attribute['isArray']:
+            return
         code = []
         null_line = 'NULL'
         if attribute['attType'] == 'enum':
@@ -944,8 +978,7 @@ class SetGetFunctions():
             code = [dict({'code_type': 'blank', 'code': []})]
         return code
 
-    @staticmethod
-    def unset_cpp_attribute(attribute):
+    def unset_cpp_attribute(self, attribute):
         if attribute['attType'] == 'string':
             implementation = ['{}.erase()'.format(attribute['memberName'])]
             implementation2 = ['{}.empty() == '
@@ -975,6 +1008,15 @@ class SetGetFunctions():
                               '{} = NULL'.format(attribute['memberName']),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
+        elif attribute['isArray']:
+            code = [self.create_code_block(
+                'if', ['{} != NULL'.format(attribute['memberName']),
+                       'delete[] {}'.format(attribute['memberName'])]),
+                    self.create_code_block('line', [
+                        '{} = NULL'.format(attribute['memberName'])]),
+                    self.create_code_block('line', [
+                        'return unset{}Length()'.format(
+                            strFunctions.upper_first(attribute['name']))])]
         else:
             implementation = ['TO DO']
             code = [dict({'code_type': 'line', 'code': implementation})]

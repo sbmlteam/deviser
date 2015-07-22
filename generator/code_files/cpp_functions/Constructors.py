@@ -287,6 +287,10 @@ class Constructors():
         constructor_args = self.write_copy_constructor_args(self)
         code = []
         clone = 'clone'
+        for i in range(0, len(self.attributes)):
+            if self.attributes[i]['isArray']:
+                line = self.write_set_array(i)
+                code.append(self.create_code_block('line', line))
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             member = element['memberName']
@@ -435,18 +439,26 @@ class Constructors():
         # create the function implementation
         if self.is_cpp_api:
             implementation = []
-            code_type = 'blank'
+            code = []
+            for attrib in self.attributes:
+                if attrib['isArray']:
+                    member = attrib['memberName']
+                    code.append(self.create_code_block(
+                        'if', ['{} != NULL'.format(member),
+                               'delete [] {}'.format(member)]))
+                    code.append(self.create_code_block(
+                        'line', ['{} = NULL'.format(member)]))
             for i in range(0, len(self.child_elements)):
                 element = self.child_elements[i]
                 member = element['memberName']
                 implementation.append('delete {}'.format(member))
                 implementation.append('{} = NULL'.format(member))
-                code_type = 'line'
+            if len(implementation) > 0:
+                code.append(self.create_code_block('line', implementation))
         else:
             implementation = ['{} != NULL'.format(abbrev_object),
                               'delete {}'.format(abbrev_object)]
-            code_type = 'if'
-        code = [self.create_code_block(code_type, implementation)]
+            code = [self.create_code_block('if', implementation)]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -482,7 +494,10 @@ class Constructors():
     def write_copy_constructor_args(self):
         constructor_args = [': {}( orig )'.format(self.base_class)]
         for attrib in self.attributes:
-            if attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
+            if attrib['isArray']:
+                constructor_args.append(', {0} ( NULL )'
+                                        .format(attrib['memberName']))
+            elif attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
                 constructor_args.append(', {0} ( orig.{0} )'
                                         .format(attrib['memberName']))
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
@@ -498,13 +513,26 @@ class Constructors():
     def write_assignment_args(self):
         constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
         for attrib in self.attributes:
-            if attrib['type'] != 'element':
+            if attrib['isArray']:
+                member = attrib['memberName']
+                length = strFunctions.upper_first(attrib['name'])
+                constructor_args.append('{} = NULL'.format(member))
+                constructor_args.append('set{0}(rhs.{1}, '
+                                        'rhs.{1}Length)'.format(length, member))
+            elif attrib['type'] != 'element':
                 constructor_args.append('{0} = rhs.{0}'
                                         .format(attrib['memberName']))
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
                     constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
                                             .format(attrib['capAttName']))
         return constructor_args
+
+    def write_set_array(self, index):
+        name = self.attributes[index]['capAttName']
+        member = self.attributes[index]['memberName']
+        length = member + 'Length'
+        line = ['set{}(orig.{}, orig.{})'.format(name, member, length)]
+        return line
 
     @staticmethod
     def create_code_block(code_type, lines):

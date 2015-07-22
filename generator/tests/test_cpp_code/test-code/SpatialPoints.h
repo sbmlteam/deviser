@@ -678,21 +678,6 @@ SpatialPoints_getCompressionAsString(const SpatialPoints_t * sp);
 
 
 /**
- * Returns the value of the "arrayData" attribute of this SpatialPoints_t.
- *
- * @param sp the SpatialPoints_t structure whose arrayData is sought.
- *
- * @return the value of the "arrayData" attribute of this SpatialPoints_t as a
- * array.
- *
- * @memberof SpatialPoints_t
- */
-LIBSBML_EXTERN
-double*
-SpatialPoints_getArrayData(const SpatialPoints_t * sp);
-
-
-/**
  * Returns the value of the "arrayDataLength" attribute of this
  * SpatialPoints_t.
  *
