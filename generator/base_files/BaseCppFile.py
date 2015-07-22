@@ -64,15 +64,38 @@ class BaseCppFile(BaseFile.BaseFile):
         # default values
         self.is_cpp_api = True
 
-    ########################################################################
-
-    def expand_class(self, class_object):
-        self.class_object = class_object
+        # populate useful variables
         if self.extension == 'h':
             self.is_header = True
         else:
             self.is_header = False
 
+        self.class_object = []
+
+        # declare variables that will populate by the class object
+        self.is_list_of = ''
+        self.name = ''
+        self.class_name = ''
+        self.package = ''
+        self.typecode = ''
+        self.list_of_name = ''
+        self.list_of_child = ''
+        self.has_std_base = True
+        self.std_base = 'SBase'
+        self.sid_refs = ''
+        self.unit_sid_refs = ''
+        self.add_decls = None
+        self.overwrites_children = False
+        self.has_math = False
+        self.has_children = False
+        self.has_only_math = False
+        self.has_non_std_children = False
+        self.num_non_std_children = 0
+        self.class_attributes = []
+
+    ########################################################################
+
+    def expand_class(self, class_object):
         self.is_list_of = class_object['is_list_of']
         self.name = class_object['name']
         self.class_name = class_object['name']
@@ -90,8 +113,6 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # information about the base class
         self.baseClass = class_object['baseClass']
-        self.has_std_base = True
-        self.std_base = 'SBase'
         if self.language != 'sbml':
             self.std_base = 'Foo'
             self.has_std_base = False
@@ -105,10 +126,8 @@ class BaseCppFile(BaseFile.BaseFile):
         # references
         self.sid_refs = class_object['sid_refs']
         self.unit_sid_refs = class_object['unit_sid_refs']
-        self.add_decls = None
         if 'addDecls' in class_object:
             self.add_decls = class_object['addDecls']
-        self.overwrites_children = False
         if 'childrenOverwriteElementName' in class_object:
             self.overwrites_children = \
                 class_object['childrenOverwriteElementName']
@@ -117,13 +136,10 @@ class BaseCppFile(BaseFile.BaseFile):
         # child elements
         self.has_math = class_object['hasMath']
         self.has_children = query.has_children(class_object['attribs'])
-        self.has_only_math = False
         if self.has_math and \
                 not query.has_children_not_math(class_object['attribs']):
             self.has_only_math = True
-        self.has_non_std_children = False
 
-        self.num_non_std_children = 0
         # mark child elements as ML nodes
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
@@ -161,14 +177,13 @@ class BaseCppFile(BaseFile.BaseFile):
     # Function to expand the attribute information
     @staticmethod
     def expand_attributes(self, attributes):
+        root = None
         if len(attributes) > 0:
             if 'root' in attributes[0]:
                 root = attributes[0]['root']
-            else:
-                root = None
         for i in range(0, len(attributes)):
             capname = strFunctions.upper_first(attributes[i]['name'])
-            attributes[i]['name'] = strFunctions.lower_first((capname))
+            attributes[i]['name'] = strFunctions.lower_first(capname)
             attributes[i]['capAttName'] = capname
             attributes[i]['memberName'] = 'm' + capname
             attributes[i]['pluralName'] = \
