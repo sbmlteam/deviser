@@ -39,7 +39,6 @@
 
 from base_files import BaseCppFile
 from cpp_functions import *
-from util import strFunctions
 from util import query
 
 
@@ -118,6 +117,12 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         if self.has_math:
             self.write_line('#include <{}/math/MathML.h>'.format(self.language))
+
+        for i in range(0, len(self.concretes)):
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'.format(
+                self.language, self.package.lower(),
+                self.concretes[i]['element']
+            ))
 
         self.skip_line(2)
         self.write_line('using namespace std;')

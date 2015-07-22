@@ -119,6 +119,13 @@ class ConcreteClassFunctions():
             return_type = 'int'
             arguments = ['const {0} * '
                          '{1}'.format(self.object_name, self.abbrev_parent)]
+        if self.is_cpp_api:
+            line = ['return dynamic_cast<const {}*>(this) != '
+                    'NULL'.format(conc_name)]
+        else:
+            line = ['return ({0} != NULL) ? static_cast<int>({0}'
+                    '->is{1}()) : 0'.format(self.abbrev_parent, conc_name)]
+        code = [self.create_code_block('line', line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -130,4 +137,10 @@ class ConcreteClassFunctions():
                      'arguments': arguments,
                      'constant': True,
                      'virtual': True,
-                     'object_name': self.struct_name})
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code

@@ -46,7 +46,11 @@ def upper_first(word):
 
 
 def lower_first(word):
-    returned_word = word[0].lower() + word[1:len(word)]
+    # hack for spatial CSGFoo classes
+    if word.startswith('CSG'):
+        returned_word = 'csg' + word[3:len(word)]
+    else:
+        returned_word = word[0].lower() + word[1:len(word)]
     return returned_word
 
 

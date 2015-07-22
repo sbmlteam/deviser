@@ -255,7 +255,7 @@ public:
   /**
    * Returns the XML name of this CSGNode object.
    *
-   * @return the name of this element; that is "cSGNode".
+   * @return the name of this element; that is "csgNode".
    */
   virtual const std::string& getElementName() const;
 

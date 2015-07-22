@@ -302,7 +302,7 @@ public:
   /**
    * Returns the XML name of this CSGTransformation object.
    *
-   * @return the name of this element; that is "cSGTransformation".
+   * @return the name of this element; that is "csgTransformation".
    */
   virtual const std::string& getElementName() const;
 
