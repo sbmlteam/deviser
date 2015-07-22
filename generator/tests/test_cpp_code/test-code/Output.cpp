@@ -755,22 +755,6 @@ Output::readAttributes(const XMLAttributes& attributes,
         getPackageVersion(), level, version, msg.str()));
     }
   }
-  else
-  {
-    if (mOutputLevel < 0)
-    {
-      std::stringstream msg;
-      msg << "The outputLevel of the <Output> ";
-      if (isSetId())
-      {
-        msg << "with id '" << getId() << "' ";
-      }
-
-      msg << "is '" << mOutputLevel << "', which is negative.";
-      log->logPackageError("qual", QualOutputLevelMustBeNonNegative,
-        getPackageVersion(), level, version;
-    }
-  }
 }
 
 /** @endcond */

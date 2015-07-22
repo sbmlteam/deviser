@@ -807,22 +807,6 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         getPackageVersion(), level, version, msg.str()));
     }
   }
-  else
-  {
-    if (mOrdinal < 0)
-    {
-      std::stringstream msg;
-      msg << "The ordinal of the <AnalyticVolume> ";
-      if (isSetId())
-      {
-        msg << "with id '" << getId() << "' ";
-      }
-
-      msg << "is '" << mOrdinal << "', which is negative.";
-      log->logPackageError("spatial", SpatialOrdinalMustBeNonNegative,
-        getPackageVersion(), level, version;
-    }
-  }
 
   // 
   // domainType SIdRef (use = "required" )

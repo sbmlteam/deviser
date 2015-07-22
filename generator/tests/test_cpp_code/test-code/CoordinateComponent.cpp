@@ -295,6 +295,15 @@ CoordinateComponent::setType(const std::string& type)
 int
 CoordinateComponent::setUnit(const std::string& unit)
 {
+  if (!(SyntaxChecker::isValidInternalUnitSId(unit)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mUnit = unit;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 

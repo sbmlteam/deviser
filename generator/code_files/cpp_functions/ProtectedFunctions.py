@@ -634,6 +634,7 @@ class ProtectedFunctions():
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
+        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
 
         implementation = ['', '{} {} (use = \"{}\"'
                               ' )'.format(name, att_type, status),
@@ -647,8 +648,12 @@ class ProtectedFunctions():
             self.write_enum_read(index, code)
         elif att_type == 'string':
             self.write_string_read(index, code)
-        elif att_type == 'int':
-            self.write_uint_read(index, code)
+        elif att_type == 'int' or att_type == 'uint' or att_type == 'double':
+            self.write_number_read(index, code, att_type)
+        elif att_type == 'bool':
+            line = ['{} = attributes.readInto(\"{}\", '
+                    '{})'.format(set_name, name, member)]
+            code.append(self.create_code_block('line', line))
         else:
             line = ['assigned = attributes.readInto(\"{}\", '
                     '{})'.format(name, member)]
@@ -787,12 +792,20 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
-    def write_uint_read(self, index, code):
+    def write_number_read(self, index, code, att_type):
         attribute = self.attributes[index]
         name = attribute['name']
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']
         set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
+        if att_type == 'int':
+            num_type = 'Integer'
+        elif att_type == 'uint':
+            num_type = 'UnInteger'
+        elif att_type == 'double':
+            num_type = 'Double'
+        else:
+            num_type = 'FIX ME'
 
         line = ['numErrs = getErrorLog()->getNumErrors()',
                 '{} = attributes.readInto(\"{}\", {})'.format(set_name,
@@ -803,27 +816,28 @@ class ProtectedFunctions():
         line = ['log->getNumErrors() == numErrs + 1 && '
                 'log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
-                'log->logPackageError(\"{}\", {}{}MustBeInteger,'
+                'log->logPackageError(\"{}\", {}{}MustBe{},'
                 ' getPackageVersion(), level, version, msg.str()))'.format(
-                    self.package.lower(), self.package, up_name)]
+                    self.package.lower(), self.package, up_name, num_type)]
         if_error = self.create_code_block('if', line)
 
-        line = ['isSetId()', 'msg << \"with id \'\" << getId() << \"\' \"']
-        if_id = self.create_code_block('if', line)
-
-        line = ['{} < 0'.format(member), 'std::stringstream msg',
-                'msg << \"The {} of the <{}> \"'.format(name, self.class_name),
-                if_id,
-                'msg << \"is \'\" << {} << \"\', which is '
-                'negative.\"'.format(member),
-                'log->logPackageError(\"{}\", {}{}MustBeNonNegative,'
-                ' getPackageVersion(), level, version'.format(
-                    self.package.lower(), self.package, up_name)]
-        if_neg = self.create_code_block('if', line)
+        # line = ['isSetId()', 'msg << \"with id \'\" << getId() << \"\' \"']
+        # if_id = self.create_code_block('if', line)
+        #
+        # line = ['{} < 0'.format(member), 'std::stringstream msg',
+        #         'msg << \"The {} of the <{}> \"'.format(name,
+        # self.class_name),
+        #         if_id,
+        #         'msg << \"is \'\" << {} << \"\', which is '
+        #         'negative.\"'.format(member),
+        #         'log->logPackageError(\"{}\", {}{}MustBeNonNegative,'
+        #         ' getPackageVersion(), level, version'.format(
+        #             self.package.lower(), self.package, up_name)]
+        # if_neg = self.create_code_block('if', line)
 
         line = [' {} == false'.format(set_name),
-                if_error, 'else', if_neg]
-        second_if = self.create_code_block('if_else', line)
+                if_error]
+        second_if = self.create_code_block('if', line)
         code.append(second_if)
 
     @staticmethod

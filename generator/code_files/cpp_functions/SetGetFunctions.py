@@ -831,7 +831,7 @@ class SetGetFunctions():
         null_line = 'NULL'
         if attribute['attType'] == 'enum':
             null_line = '{}'.format(attribute['default'])
-        if attribute['attType'] != 'integer':
+        if not attribute['isNumber'] and attribute['attType'] != 'boolean':
             line = ['{} == NULL'.format(self.abbrev_parent),
                     'return {}'.format(null_line)]
             code = [self.create_code_block('if', line)]
@@ -839,10 +839,19 @@ class SetGetFunctions():
         if attribute['attType'] == 'enum':
             line = ['return {}->get{}()'.format(self.abbrev_parent,
                                                 attribute['capAttName'])]
-        elif attribute['attType'] == 'integer':
+        elif attribute['attType'] == 'integer' \
+                or attribute['attType'] == 'unsigned integer':
             line = ['return ({0} != NULL) ? {0}->get{1}() : '
                     'SBML_INT_MAX'.format(self.abbrev_parent,
                                           attribute['capAttName'])]
+        elif attribute['attType'] == 'double':
+            line = ['return ({0} != NULL) ? {0}->get{1}() : '
+                    'util_NaN()'.format(self.abbrev_parent,
+                                        attribute['capAttName'])]
+        elif attribute['attType'] == 'boolean':
+            line = ['return ({0} != NULL) ? static_cast<int>({0}->get{1}()) : '
+                    '0'.format(self.abbrev_parent,
+                               attribute['capAttName'])]
         elif attribute['type'] == 'element':
             line = ['return ({})({}->get{}())'.format(attribute['CType'],
                                                       self.abbrev_parent,
@@ -868,6 +877,14 @@ class SetGetFunctions():
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({})'
+                              ')'.format(name),
+                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              '{} = {}'.format(member, name),
+                              'return LIBSBML_OPERATION_SUCCESS']
+            code = [dict({'code_type': 'if_else', 'code': implementation})]
+        elif attribute['type'] == 'UnitSId' \
+                or attribute['type'] == 'UnitSIdRef':
+            implementation = ['!(SyntaxChecker::isValidInternalUnitSId({})'
                               ')'.format(name),
                               'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
                               '{} = {}'.format(member, name),
