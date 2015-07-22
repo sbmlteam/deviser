@@ -70,7 +70,7 @@ class BaseCppFile(BaseFile.BaseFile):
         else:
             self.is_header = False
 
-        self.class_object = []
+        self.class_object = {}
 
         # declare variables that will populate by the class object
         self.is_list_of = ''
@@ -96,6 +96,7 @@ class BaseCppFile(BaseFile.BaseFile):
     ########################################################################
 
     def expand_class(self, class_object):
+        self.class_object = class_object
         self.is_list_of = class_object['is_list_of']
         self.name = class_object['name']
         self.class_name = class_object['name']
