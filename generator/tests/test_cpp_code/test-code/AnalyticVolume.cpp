@@ -738,8 +738,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
   else
@@ -822,8 +822,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mDomainType) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        domainType='" + mDomainType + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute domainType='" +
+        mDomainType + "' does not conform to the syntax.");
     }
   }
   else

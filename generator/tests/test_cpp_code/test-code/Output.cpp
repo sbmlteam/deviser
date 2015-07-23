@@ -650,8 +650,8 @@ Output::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
 
@@ -669,9 +669,9 @@ Output::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mQualitativeSpecies) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        qualitativeSpecies='" + mQualitativeSpecies + "' does not conform to the
-          syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute "
+        "qualitativeSpecies='" + mQualitativeSpecies + "' does not conform to the "
+          "syntax.");
     }
   }
   else

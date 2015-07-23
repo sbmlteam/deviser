@@ -719,8 +719,8 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
   else
@@ -790,8 +790,8 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
     }
     else
     {
-      std::string message = "Spatial attribute 'arrayDataLength' is missing
-        from the <SpatialPoints> element.";
+      std::string message = "Spatial attribute 'arrayDataLength' is missing "
+        "from the <SpatialPoints> element.";
       log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
         getPackageVersion(), level, version, message);
     }

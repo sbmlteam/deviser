@@ -55,7 +55,9 @@ class BaseFile:
         self.comment_end = '*/'
 
         # derived members for description
-        if len(self.brief_description) == 0:
+        if not hasattr(self, 'brief_description'):
+            self.brief_description = "Base file"
+        elif len(self.brief_description) == 0:
             self.brief_description = 'Base file'
 
             # derived members for spacing
@@ -88,28 +90,73 @@ class BaseFile:
         elif num_words == 1:
             lines.append(line)
         else:
+            in_quotes = False
+            quotes_closed = True
+            reopen_quotes = False
             i = 1
             temp = words[0]
+            if temp.startswith('\"'):
+                in_quotes = True
             newline = words[0]
             while i < num_words:
                 if len(newline) < max_length:
+                    if not in_quotes:
+                        if words[i].startswith('\"'):
+                            in_quotes = True
+                            quotes_closed = False
+                        # check we dont also end
+                        if words[i].endswith('\"'):
+                            in_quotes = False
+                            quotes_closed = True
+                    else:
+                        if words[i].endswith('\"'):
+                            in_quotes = False
                     if len(temp) > 0:
                         temp = temp + ' ' + words[i]
                     else:
-                        temp = words[i]
+                        if reopen_quotes:
+                            temp = '\"' + words[i]
+                            reopen_quotes = False
+                        else:
+                            temp = words[i]
                     i += 1
                     if len(temp) <= max_length:
+                        if temp.endswith('\"'):
+                            quotes_closed = True
                         newline = temp
                     else:
                         if len(newline) == 0:
+                            if in_quotes or not quotes_closed:
+                                temp += ' \"'
+                                quotes_closed = True
+                            if in_quotes and not quotes_closed:
+                                reopen_quotes = True
                             lines.append(temp)
                             temp = ''
                         else:
+                            if in_quotes:
+                                if words[i-1].startswith('\"'):
+                                    # do not add the quotes as we are throwing
+                                    # the word away
+                                    in_quotes = False
+                                    quotes_closed = True
+                                else:
+                                    newline += ' \"'
+                                    quotes_closed = True
+                                    reopen_quotes = True
+                            elif not quotes_closed:
+                                newline += ' \"'
+                                quotes_closed = True
+                                reopen_quotes = True
                             lines.append(newline)
                             newline = ''
                             temp = ''
                             i -= 1
                 else:
+                    if in_quotes or not quotes_closed:
+                        newline += ' \"'
+                        quotes_closed = True
+                        reopen_quotes = True
                     lines.append(newline)
                     newline = ''
                     temp = ''

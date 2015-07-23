@@ -706,9 +706,9 @@ class ProtectedFunctions():
             invalid_line = '\"The id \'\" + {} + \"\' does not conform to ' \
                            'the syntax.\"'.format(member)
         else:
-            invalid_line = '\"The syntax of the attribute {}=\'\" + {} + ' \
+            invalid_line = '\"The attribute {}=\'\" + {} + ' \
                            '\"\' does not conform to the ' \
-                           'syntax.\"'.format(name, member)
+                           'syntax."'.format(name, member)
         line = ['{}.empty() == true'.format(member),
                 'logEmptyString({}, level, version, '
                 '\"<{}>\")'.format(member, self.class_name),

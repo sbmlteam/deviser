@@ -438,8 +438,8 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
 }

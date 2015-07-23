@@ -1124,8 +1124,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
 
@@ -1241,8 +1241,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        unit='" + mUnit + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute unit='" + mUnit
+        + "' does not conform to the syntax.");
     }
   }
 
@@ -1260,8 +1260,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        ref1='" + mRef1 + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute ref1='" + mRef1
+        + "' does not conform to the syntax.");
     }
   }
 
@@ -1279,8 +1279,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        ref2='" + mRef2 + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute ref2='" + mRef2
+        + "' does not conform to the syntax.");
     }
   }
 
@@ -1298,8 +1298,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        refUnit='" + mRefUnit + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute refUnit='" +
+        mRefUnit + "' does not conform to the syntax.");
     }
   }
 
@@ -1317,8 +1317,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mCorrectId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mCorrectId + "'
-        does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mCorrectId + "' "
+        "does not conform to the syntax.");
     }
   }
 }

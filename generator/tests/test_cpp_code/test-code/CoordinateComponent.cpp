@@ -981,8 +981,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not
-        conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
     }
   }
   else
@@ -1048,8 +1048,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The syntax of the attribute
-        unit='" + mUnit + "' does not conform to the syntax.");
+      logError(InvalidIdSyntax, level, version, "The attribute unit='" + mUnit
+        + "' does not conform to the syntax.");
     }
   }
 }
