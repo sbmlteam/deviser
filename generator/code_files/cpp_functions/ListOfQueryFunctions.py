@@ -271,7 +271,7 @@ class ListOfQueryFunctions():
         line = ['lo == NULL', 'return NULL']
         code.append(self.create_code_block('if', line))
         implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
-                              '->get(sid) : NULL'.format(self.class_name)]
+                          '->get(sid) : NULL'.format(self.class_name)]
         code.append(self.create_code_block('line', implementation))
         return code
 
@@ -681,14 +681,18 @@ class ListOfQueryFunctions():
 
     # function to write create element
     def write_create_element_function(self, index=0):
+        is_concrete = False
         if len(self.concretes) == 0 and index == 0:
             child = self.object_child_name
+            abbrev_child = self.abbrev_child
         else:
             if index == 0:
                 return
             else:
                 i = index - 1
             child = self.concretes[i]['element']
+            is_concrete = True
+            abbrev_child = strFunctions.abbrev_name(child)
         # create comment parts
         title_line = 'Creates a new {0} object, adds it to this {1} object ' \
                      'and returns the {0} object ' \
@@ -716,7 +720,7 @@ class ListOfQueryFunctions():
                                              self.abbrev_parent))
         return_type = '{}*'.format(child)
 
-        if self.is_cpp_api:
+        if self.is_cpp_api and not is_concrete:
             pack_up = self.package.upper()
             pack_low = self.package.lower()
             implementation = ['{}* {} = NULL'.format(self.child_name,
@@ -740,6 +744,31 @@ class ListOfQueryFunctions():
                                       '({})'.format(member, self.abbrev_child))
             code.append(self.create_code_block('if', implementation))
             implementation = ['return {}'.format(self.abbrev_child)]
+            code.append(self.create_code_block('line', implementation))
+        elif self.is_cpp_api and is_concrete:
+            pack_up = self.package.upper()
+            pack_low = self.package.lower()
+            implementation = ['{}* {} = NULL'.format(child,
+                                                     abbrev_child)]
+            code = [self.create_code_block('line', implementation)]
+            implementation = ['{}_CREATE_NS({}ns, '
+                              'getSBMLNamespaces())'.format(pack_up, pack_low),
+                              '{} = new {}({}ns)'.format(abbrev_child,
+                                                         child,
+                                                         pack_low),
+                              'delete {}ns'.format(pack_low),
+                              'catch', '...', '']
+            code.append(self.create_code_block('try', implementation))
+            implementation = ['{} != NULL'.format(abbrev_child)]
+            if self.is_list_of:
+                implementation.append('appendAndOwn'
+                                      '({})'.format(abbrev_child))
+            else:
+                member = self.class_object['memberName']
+                implementation.append('{}.appendAndOwn'
+                                      '({})'.format(member, abbrev_child))
+            code.append(self.create_code_block('if', implementation))
+            implementation = ['return {}'.format(abbrev_child)]
             code.append(self.create_code_block('line', implementation))
         else:
             implementation = ['return ({0} != NULL) ? {0}->create{1}() : '

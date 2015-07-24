@@ -131,15 +131,14 @@ class ProtectedFunctions():
                               'stream.peek().getName()',
                               'SBase* object = NULL']
             code = [dict({'code_type': 'line', 'code': implementation})]
-            implementation = ['name == \"{}\"'.format(self.child_name.lower()),
-                              '{}_CREATE_NS({}, '
-                              'getSBMLNamespaces())'.format(upkg,
-                                                            ns),
-                              'object = new {}({})'.format(self.child_name,
-                                                           ns),
-                              'appendAndOwn(object)',
-                              'delete {}'.format(ns)]
+            implementation = self.write_create_object_class(self.child_name,
+                                                            upkg, ns)
             code.append(self.create_code_block('if', implementation))
+            for i in range(0, len(self.concretes)):
+                implementation = \
+                    self.write_create_object_class(self.concretes[i]['element'],
+                                                   upkg, ns)
+                code.append(self.create_code_block('if', implementation))
             code.append(self.create_code_block('line', ['return object']))
         else:
             code = [self.create_code_block('line', ['SBase* obj = NULL']),
@@ -621,9 +620,15 @@ class ProtectedFunctions():
         arguments = ['{}* item'.format(self.child_base_class)]
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['unsigned int tc = getTypeCode()']
         code = [dict({'code_type': 'line', 'code': implementation})]
-
+        tc = self.concretes[0]['type_code']
+        implementation = 'return ((tc == {}'.format(tc)
+        for i in range(1, len(self.concretes)):
+            tc = self.concretes[i]['type_code']
+            implementation += ' || (tc == {})'.format(tc)
+        implementation += ')'
+        code.append(self.create_code_block('line', [implementation]))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -640,6 +645,18 @@ class ProtectedFunctions():
     #####################################################################
 
     # HELPER FUNCTIONS
+    @staticmethod
+    def write_create_object_class(name, upkg, ns):
+        implementation = ['name == '
+                          '\"{}\"'.format(strFunctions.lower_first(name)),
+                          '{}_CREATE_NS({}, '
+                          'getSBMLNamespaces())'.format(upkg,
+                                                        ns),
+                          'object = new {}({})'.format(name,
+                                                       ns),
+                          'appendAndOwn(object)',
+                          'delete {}'.format(ns)]
+        return implementation
 
     def write_write_att(self, index, code):
         if self.attributes[index]['isArray']:

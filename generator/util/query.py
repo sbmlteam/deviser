@@ -115,6 +115,7 @@ def add_concrete_to_list(root, concrete, mylist):
     current = get_class(concrete['element'], root)
     if current is not None:
         if current['abstract'] is False:
+            concrete['type_code'] = current['typecode']
             mylist.append(concrete)
         else:
             for c in current['concrete']:

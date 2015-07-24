@@ -317,7 +317,7 @@ ListOfCoordinateComponents::createObject(XMLInputStream& stream)
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
 
-  if (name == "coordinatecomponent")
+  if (name == "coordinateComponent")
   {
     SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CoordinateComponent(spatialns);
