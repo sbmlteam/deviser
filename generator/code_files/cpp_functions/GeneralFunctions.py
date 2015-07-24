@@ -184,9 +184,12 @@ class GeneralFunctions():
         return_type = 'const std::string&'
 
         # create the function implementation
-        name = strFunctions.lower_first(self.object_name)
-        implementation = ['static const string name = \"{}\"'.format(name),
-                          'return name']
+        if self.overwrites_children:
+            implementation = ['return mElementName']
+        else:
+            name = strFunctions.lower_first(self.object_name)
+            implementation = ['static const string name = \"{}\"'.format(name),
+                              'return name']
         code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
@@ -811,7 +814,7 @@ class GeneralFunctions():
         return_type = 'void'
 
         # create the function implementation
-        implementation = ['TO DO']
+        implementation = ['mElementName = name']
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

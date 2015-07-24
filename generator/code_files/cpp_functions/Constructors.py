@@ -64,6 +64,8 @@ class Constructors():
         self.has_math = class_object['has_math']
         self.num_non_std_children = class_object['num_non_std_children']
         self.child_elements = class_object['child_elements']
+        self.overwrites_children = class_object['overwrites_children']
+        self.xml_name = strFunctions.lower_first(class_object['name'])
 
     ########################################################################
 
@@ -488,6 +490,9 @@ class Constructors():
             if attrib['isNumber'] or attrib['attType'] == 'boolean':
                 constructor_args.append(', mIsSet{} (false)'
                                         .format(attrib['capAttName']))
+        if self.overwrites_children:
+            constructor_args.append(', mElementName(\"'
+                                    '{}\")'.format(self.xml_name))
         return constructor_args
 
     @staticmethod
@@ -506,6 +511,8 @@ class Constructors():
             else:
                 constructor_args.append(', {} ( NULL )'
                                         .format(attrib['memberName']))
+        if self.overwrites_children:
+            constructor_args.append(', mElementName ( orig.mElementName )')
 
         return constructor_args
 
@@ -525,6 +532,8 @@ class Constructors():
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
                     constructor_args.append('mIsSet{0} = rhs.mIsSet{0}'
                                             .format(attrib['capAttName']))
+        if self.overwrites_children:
+            constructor_args.append('mElementName = rhs.mElementName')
         return constructor_args
 
     def write_set_array(self, index):
