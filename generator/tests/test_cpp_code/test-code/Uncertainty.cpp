@@ -484,28 +484,6 @@ Uncertainty::readAttributes(const XMLAttributes& attributes,
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
 
-  if (static_cast<ListOfUncertaintys*>(getParentSBMLObject())->size() < 2)
-  {
-    numErrs = log->getNumErrors();
-    for (int n = numErrs-1; n >= 0; n--)
-    {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
-      {
-        const std::string details = log->getError(n)->getMessage();
-        log->remove(UnknownPackageAttribute);
-        log->logPackageError("distrib", DistribLOUncertaintyAllowedAttributes,
-          getPackageVersion(), level, version, details);
-      }
-      else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
-      {
-        const std::string details = log->getError(n)->getMessage();
-        log->remove(UnknownCoreAttribute);
-        log->logPackageError("distrib", DistribLOUncertaintyAllowedAttributes,
-          getPackageVersion(), level, version, details);
-      }
-    }
-  }
-
   SBase::readAttributes(attributes, expectedAttributes);
   numErrs = log->getNumErrors();
 

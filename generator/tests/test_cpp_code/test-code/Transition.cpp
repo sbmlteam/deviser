@@ -1053,6 +1053,8 @@ Transition::createObject(XMLInputStream& stream)
     obj = &mFunctionTerms;
   }
 
+  connectToChild();
+
   return obj;
 }
 

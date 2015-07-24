@@ -79,6 +79,7 @@ class ProtectedFunctions():
         self.child_elements = class_object['child_elements']
         self.num_non_std_children = class_object['num_non_std_children']
         self.num_children = class_object['num_children']
+        self.has_list_of = class_object['hasListOf']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -228,8 +229,8 @@ class ProtectedFunctions():
             if len(self.child_elements) != self.num_non_std_children:
                 code.append(self.create_code_block('line',
                                                    ['delete {}'.format(ns)]))
-                code.append(self.create_code_block('line',
-                                                   ['connectToChild()']))
+            code.append(self.create_code_block('line',
+                                               ['connectToChild()']))
             code.append(self.create_code_block('line', ['return obj']))
         # return the parts
         return dict({'title_line': title_line,
@@ -312,33 +313,13 @@ class ProtectedFunctions():
                           'bool assigned = false',
                           'SBMLErrorLog* log = getErrorLog()']
         code = [dict({'code_type': 'line', 'code': implementation})]
+        # only do this if has a list of
+        if self.has_list_of:
+            line = self.get_error_from_list_of_read()
+            code.append(self.create_code_block('if', line))
 
-        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownPackageAttribute)',
-                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  self.class_name),
-                'else if', 'log->getError(n)->getErrorId() == '
-                           'UnknownCoreAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownCoreAttribute)',
-                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  self.class_name)]
-        if_err = self.create_code_block('else_if', line)
-
-        line = ['int n = numErrs-1; n >= 0; n--', if_err]
-        for_loop = self.create_code_block('for', line)
-
-        line = ['static_cast<{}*>(getParentSBMLObject())->size() '
-                '< 2'.format(strFunctions.cap_list_of_name(self.class_name)),
-                'numErrs = log->getNumErrors()', for_loop]
-        code.append(self.create_code_block('if', line))
-
-        line = ['SBase::readAttributes(attributes, expectedAttributes)',
+        line = ['{}::readAttributes(attributes, '
+                'expectedAttributes)'.format(self.base_class),
                 'numErrs = log->getNumErrors()']
         code.append(self.create_code_block('line', line))
 
@@ -461,7 +442,7 @@ class ProtectedFunctions():
         arguments = ['XMLOutputStream& stream']
 
         # create the function implementation
-        implementation = ['SBase::writeAttributes(stream)']
+        implementation = ['{}::writeAttributes(stream)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         for i in range(0, len(self.attributes)):
@@ -645,6 +626,34 @@ class ProtectedFunctions():
     #####################################################################
 
     # HELPER FUNCTIONS
+
+    def get_error_from_list_of_read(self):
+        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownPackageAttribute)',
+                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name),
+                'else if', 'log->getError(n)->getErrorId() == '
+                           'UnknownCoreAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownCoreAttribute)',
+                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'getPackageVersion(), level, version, '
+                'details)'.format(self.package.lower(), self.package,
+                                  self.class_name)]
+        if_err = self.create_code_block('else_if', line)
+
+        line = ['int n = numErrs-1; n >= 0; n--', if_err]
+        for_loop = self.create_code_block('for', line)
+
+        line = ['static_cast<{}*>(getParentSBMLObject())->size() '
+                '< 2'.format(strFunctions.cap_list_of_name(self.class_name)),
+                'numErrs = log->getNumErrors()', for_loop]
+
+        return line
+
     @staticmethod
     def write_create_object_class(name, upkg, ns):
         implementation = ['name == '

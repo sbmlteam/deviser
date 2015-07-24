@@ -337,8 +337,14 @@ class GeneralFunctions():
 
         # create the function implementation
         if self.is_cpp_api:
+            if self.has_std_base:
+                all_present = 'true'
+            else:
+                all_present = '{}::hasRequired' \
+                              'Attributes()'.format(self.base_class)
             code = [dict({'code_type': 'line',
-                          'code': ['bool allPresent = true']})]
+                          'code': ['bool all'
+                                   'Present = {}'.format(all_present)]})]
             for i in range(0, len(self.attributes)):
                 att = self.attributes[i]
                 if att['reqd']:
@@ -410,8 +416,14 @@ class GeneralFunctions():
                              .format(self.object_name, self.abbrev_parent))
         # create the function implementation
         if self.is_cpp_api:
+            if self.has_std_base:
+                all_present = 'true'
+            else:
+                all_present = '{}::hasRequired' \
+                              'Elements()'.format(self.base_class)
             code = [dict({'code_type': 'line',
-                          'code': ['bool allPresent = true']})]
+                          'code': ['bool allPresent '
+                                   '= {}'.format(all_present)]})]
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]
                 if att['reqd']:
@@ -746,7 +758,7 @@ class GeneralFunctions():
         arguments = []
 
         # create the function implementation
-        implementation = ['SBase::connectToChild()']
+        implementation = ['{}::connectToChild()'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
