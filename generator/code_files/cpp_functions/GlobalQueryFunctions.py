@@ -114,7 +114,8 @@ class GlobalQueryFunctions():
 
         implementation = ['id.empty()', 'return NULL']
         code = [self.create_code_block('if', implementation),
-                self.create_code_block('line', ['SBase* obj = NULL'])]
+                self.create_code_block('line', ['{}* obj = '
+                                                'NULL'.format(self.std_base)])]
 
         if_block = ['obj != NULL', 'return obj']
         if_code = self.create_code_block('if', if_block)
@@ -182,7 +183,9 @@ class GlobalQueryFunctions():
         if_block = ['obj != NULL', 'return obj']
         if_code = self.create_code_block('if', if_block)
         if num_lo > 0:
-            code.append(self.create_code_block('line', ['SBase* obj = NULL']))
+            code.append(self.create_code_block('line',
+                                               ['{}* obj = '
+                                                'NULL'.format(self.std_base)]))
         for i in range(0, num_lo):
             line = 'obj = {}.getElementByMetaId' \
                    '(metaid)'.format(name[i])

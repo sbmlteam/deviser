@@ -397,13 +397,13 @@ class ListOfQueryFunctions():
 
         # create function declaration
         function = 'struct {} : public std::unary_function' \
-                   '<SBase*, bool>'.format(eq_name)
+                   '<{}*, bool>'.format(eq_name, self.std_base)
         arguments = []
         return_type = ''
         code = ['const string& id;', ' ',
                 '{} (const string& id) : id(id) {}  '
                 '{}'.format(eq_name, open_b, close_b),
-                'bool operator() (SBase* sb)', '{',
+                'bool operator() ({}* sb)'.format(self.std_base), '{',
                 '        return (static_cast<{}*>(sb)'
                 '->get{}() == id);'.format(self.child_name, element), '}']
         # return the parts

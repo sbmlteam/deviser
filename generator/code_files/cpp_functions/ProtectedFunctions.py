@@ -66,6 +66,7 @@ class ProtectedFunctions():
         self.attributes = class_object['class_attributes']
         self.all_attributes = class_object['attribs']
         self.has_math = class_object['has_math']
+        self.std_base = class_object['std_base']
         self.base_class = class_object['baseClass']
         self.child_base_class = ''
         if 'child_base_class' in class_object:
@@ -121,7 +122,7 @@ class ProtectedFunctions():
 
         # create the function declaration
         function = 'createObject'
-        return_type = 'SBase*'
+        return_type = '{}*'.format(self.std_base)
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
@@ -130,7 +131,7 @@ class ProtectedFunctions():
         if self.is_list_of:
             implementation = ['const std::string& name = '
                               'stream.peek().getName()',
-                              'SBase* object = NULL']
+                              '{}* object = NULL'.format(self.std_base)]
             code = [dict({'code_type': 'line', 'code': implementation})]
             implementation = self.write_create_object_class(self.child_name,
                                                             upkg, ns)
@@ -142,7 +143,9 @@ class ProtectedFunctions():
                 code.append(self.create_code_block('if', implementation))
             code.append(self.create_code_block('line', ['return object']))
         else:
-            code = [self.create_code_block('line', ['SBase* obj = NULL']),
+            code = [self.create_code_block('line',
+                                           ['{}* obj = '
+                                            'NULL'.format(self.std_base)]),
                     self.create_code_block('line',
                                            ['const string& name = '
                                             'stream.peek().getName()'])]
@@ -407,7 +410,7 @@ class ProtectedFunctions():
                         '{} = new {}(xml)'.format(member, element['element']),
                         'delete xml', 'read = true']
                 code.append(self.create_code_block('if', line))
-        line = ['SBase::readOtherXML(stream)',
+        line = ['{}::readOtherXML(stream)'.format(self.std_base),
                 'read = true']
         code.append(self.create_code_block('if', line))
         code.append(self.create_code_block('line', ['return read']))
@@ -449,8 +452,9 @@ class ProtectedFunctions():
             self.write_write_att(i, code)
 
         code.append(self.create_code_block('line',
-                                           ['SBase::writeExtension'
-                                            'Attributes(stream)']))
+                                           ['{}::writeExtension'
+                                            'Attributes'
+                                            '(stream)'.format(self.std_base)]))
 
         # return the parts
         return dict({'title_line': title_line,
