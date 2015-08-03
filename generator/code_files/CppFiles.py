@@ -45,7 +45,7 @@ from util import strFunctions, query
 class CppFiles():
     """Class for all Cpp files"""
 
-    def __init__(self, class_object):
+    def __init__(self, class_object, verbose=False):
         # members from object
         self.class_object = class_object
         self.class_object['is_list_of'] = False
@@ -53,6 +53,8 @@ class CppFiles():
             query.get_sid_refs(class_object['attribs'])
         self.class_object['unit_sid_refs'] = \
             query.get_sid_refs(class_object['attribs'], unit=True)
+
+        self.verbose = verbose
 
     def write_files(self):
         self.write_header(self.class_object)
@@ -62,15 +64,17 @@ class CppFiles():
             self.write_header(lo_working_class)
             self.write_code(lo_working_class)
 
-    @staticmethod
-    def write_header(class_desc):
+    def write_header(self, class_desc):
         fileout = CppHeaderFile.CppHeaderFile(class_desc)
+        if not self.verbose:
+            print('Writing file {}'.format(fileout.name))
         fileout.write_file()
         fileout.close_file()
 
-    @staticmethod
-    def write_code(class_desc):
+    def write_code(self, class_desc):
         fileout = CppCodeFile.CppCodeFile(class_desc)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.name))
         fileout.write_file()
         fileout.close_file()
 
@@ -87,8 +91,8 @@ class CppFiles():
         return descrip
 
     def test_func(self):
- #       self.write_code(self.class_object)
-        if self.class_object['hasListOf']:
-            lo_working_class = self.create_list_of_description()
+        self.write_code(self.class_object)
+ #       if self.class_object['hasListOf']:
+ #           lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)
-            self.write_code(lo_working_class)
+ #           self.write_code(lo_working_class)
