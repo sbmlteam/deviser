@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="Vers" fullname="Versioning" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="ClassOne" typeCode="CLASS_ONE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false" />
+            <attribute name="att1" required="false" type="bool" abstract="false" />
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+    <pkgVersion level="3" version="1" pkg_version="2">
+      <elements>
+        <element name="ClassOne" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false" />
+            <attribute name="att2" required="false" type="bool" abstract="false" />
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>
