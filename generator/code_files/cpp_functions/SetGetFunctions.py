@@ -65,6 +65,7 @@ class SetGetFunctions():
 
         self.attributes = class_object['class_attributes']
         self.child_elements = class_object['child_elements']
+        self.has_multiple_versions = class_object['has_multiple_versions']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
