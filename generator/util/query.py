@@ -126,11 +126,40 @@ def add_concrete_to_list(root, concrete, mylist):
 # return a set of attributes with any elements/lo_elements removed
 def separate_attributes(full_attributes):
     attributes = []
+#    names = []
+
     for i in range(0, len(full_attributes)):
+#        name = full_attributes[i]['name']
         att_type = full_attributes[i]['attType']
+
         if att_type != 'element' and att_type != 'lo_element':
+#            if get_matching_element('name', name, attributes):
             attributes.append(full_attributes[i])
     return attributes
+
+
+# return a set of unique attributes
+#  any with multiple versions appear only once
+def get_unique_attributes(full_attributes):
+    attributes = []
+    for i in range(0, len(full_attributes)):
+        name = full_attributes[i]['name']
+        existing = get_matching_element('name', name, attributes)
+        if existing:
+            continue
+        else:
+            attributes.append(full_attributes[i])
+    return attributes
+
+
+def get_matching_element(name, match_name, list_elements):
+    element = None
+    if not list_elements:
+        return element
+    for existing in list_elements:
+        if existing[name] == match_name:
+            element = existing
+    return element
 
 
 # return True is any of the attributes are of type array

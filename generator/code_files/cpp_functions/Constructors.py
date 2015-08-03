@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, query
 
 
 class Constructors():
@@ -55,7 +55,7 @@ class Constructors():
 
         self.concretes = class_object['concretes']
         self.base_class = class_object['baseClass']
-        self.attributes = class_object['attribs']
+        self.attributes = query.get_unique_attributes(class_object['attribs'])
         self.is_list_of = False
         if class_object['name'].startswith('ListOf'):
             self.is_list_of = True

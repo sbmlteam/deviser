@@ -41,6 +41,7 @@
 
 from xml.dom.minidom import *
 import os.path
+from util import query
 
 from util import strFunctions
 
@@ -57,6 +58,8 @@ class ParseXML():
 
         self.concrete_dict = dict({})
         self.package_name = ''
+        self.elements = []
+        self.sbml_elements = []
 
     #####################################################################
 
@@ -151,10 +154,12 @@ class ParseXML():
     def find_element(elements, name):
         if elements is None or name is None:
             return None
-        for element in elements:
-            if element['name'] == name:
-                return element
-        return None
+        else:
+            return query.get_matching_element('name', name, elements)
+        # for element in elements:
+        #     if element['name'] == name:
+        #         return element
+        # return None
 
     @staticmethod
     def find_lo_element(elements, name):
@@ -213,7 +218,7 @@ class ParseXML():
         return concrete_list
 
     @staticmethod
-    def get_attribute_description(self, node):
+    def get_attribute_description(self, node, pkg_version):
         attr_name = self.get_value(node, 'name')
         required = self.get_bool_value(self, node, 'required')
         attr_type = self.get_type_value(self, node)
@@ -224,6 +229,7 @@ class ParseXML():
                                'name': attr_name,
                                'element': attr_element,
                                'abstract': attr_abstract,
+                               'version': pkg_version
                                })
         if attr_abstract:
             attribute_dict['concrete'] = self.concrete_dict[attr_element]
@@ -231,60 +237,111 @@ class ParseXML():
         return attribute_dict
 
     @staticmethod
-    def get_element_description(self, node):
+    def get_element_description(self, node, pkg_version):
         element_name = self.get_value(node, 'name')
-        base_class = self.get_value(node, 'baseClass')
-        type_code = self.get_value(node, 'typeCode')
-        has_math = self.get_bool_value(self, node, 'hasMath')
-        has_children = self.get_bool_value(self, node, 'hasChildren')
-        has_list_of = self.get_bool_value(self, node, 'hasListOf')
-        abstract = self.get_bool_value(self, node, 'abstract')
-        children_overwrite_element_name = \
-            self.get_bool_value(self, node, 'childrenOverwriteElementName')
-        xml_element_name = \
-            self.get_element_name_value(self, node, 'elementName')
-        xml_lo_element_name = \
-            self.get_element_name_value(self, node, 'listOfName')
-        lo_class_name = \
-            self.get_loclass_name_value(self, node, 'listOfClassName')
-        add_decls = self.get_add_code_value(self, node, 'additionalDecls')
-        add_defs = self.get_add_code_value(self, node, 'additionalDefs')
+        element = None
+        # check whether we have an element with this
+        # name in a different version
+        if pkg_version > 1:
+            element = query.get_matching_element('name', element_name,
+                                                 self.sbml_elements)
+            # for existing in self.sbml_elements:
+            #     if existing['name'] == element_name:
+            #         element = existing
 
-        attributes = []
-        for attr in node.getElementsByTagName('attribute'):
-            attributes.append(self.get_attribute_description(self, attr))
+        if element:
+            for attr in node.getElementsByTagName('attribute'):
+                element['attribs'].append(self.get_attribute_description(self, attr,
+                                                                 pkg_version))
 
-        lo_attributes = []
-        for attr in node.getElementsByTagName('listOfAttribute'):
-            lo_attributes.append(self.get_attribute_description(self, attr))
+            for attr in node.getElementsByTagName('listOfAttribute'):
+                element['lo_attribs'].append(self.get_attribute_description(self, attr,
+                                                                    pkg_version))
+            element['has_multiple_versions'] = True
+            for existing in self.elements:
+                if existing['name'] == element_name:
+                    existing['has_multiple_versions'] = True
 
-        # construct element
-        element = dict({'name': element_name,
-                        'package': self.package_name,
-                        'typecode': type_code,
-                        'hasListOf': has_list_of,
-                        'attribs': attributes,
-                        'lo_attribs': lo_attributes,
-                        'hasChildren': has_children,
-                        'hasMath': has_math,
-                        'childrenOverwriteElementName':
-                            children_overwrite_element_name,
-                        'baseClass': base_class,
-                        'abstract': abstract,
-                        'elementName': xml_element_name,
-                        'lo_elementName': xml_lo_element_name,
-                        'lo_class_name': lo_class_name
-                        })
-        if add_decls is not None:
-            element['addDecls'] = add_decls
+            return None
 
-        if add_defs is not None:
-            element['addDefs'] = add_defs
+        else:
+            base_class = self.get_value(node, 'baseClass')
+            type_code = self.get_value(node, 'typeCode')
+            has_math = self.get_bool_value(self, node, 'hasMath')
+            has_children = self.get_bool_value(self, node, 'hasChildren')
+            has_list_of = self.get_bool_value(self, node, 'hasListOf')
+            abstract = self.get_bool_value(self, node, 'abstract')
+            children_overwrite_element_name = \
+                self.get_bool_value(self, node, 'childrenOverwriteElementName')
+            xml_element_name = \
+                self.get_element_name_value(self, node, 'elementName')
+            xml_lo_element_name = \
+                self.get_element_name_value(self, node, 'listOfName')
+            lo_class_name = \
+                self.get_loclass_name_value(self, node, 'listOfClassName')
+            add_decls = self.get_add_code_value(self, node, 'additionalDecls')
+            add_defs = self.get_add_code_value(self, node, 'additionalDefs')
 
-        if abstract:
-            element['concrete'] = self.concrete_dict[element_name]
+            attributes = []
+            for attr in node.getElementsByTagName('attribute'):
+                attributes.append(self.get_attribute_description(self, attr,
+                                                                 pkg_version))
 
-        return element
+            lo_attributes = []
+            for attr in node.getElementsByTagName('listOfAttribute'):
+                lo_attributes.append(self.get_attribute_description(self, attr,
+                                                                    pkg_version))
+
+            # construct element
+            element = dict({'name': element_name,
+                            'package': self.package_name,
+                            'typecode': type_code,
+                            'hasListOf': has_list_of,
+                            'attribs': attributes,
+                            'lo_attribs': lo_attributes,
+                            'hasChildren': has_children,
+                            'hasMath': has_math,
+                            'childrenOverwriteElementName':
+                                children_overwrite_element_name,
+                            'baseClass': base_class,
+                            'abstract': abstract,
+                            'elementName': xml_element_name,
+                            'lo_elementName': xml_lo_element_name,
+                            'lo_class_name': lo_class_name,
+                            'has_multiple_versions': False
+                            })
+            if add_decls is not None:
+                element['addDecls'] = add_decls
+
+            if add_defs is not None:
+                element['addDefs'] = add_defs
+
+            if abstract:
+                element['concrete'] = self.concrete_dict[element_name]
+
+            return element
+
+    def get_elements_for_version(self, pkg_node):
+        pkg_version = self.get_int_value(self, pkg_node, 'pkg_version')
+
+        # read concrete versions of abstract classes and fill dictionary
+        for node in pkg_node.getElementsByTagName('element'):
+            element_name = self.get_value(node, 'name')
+            self.concrete_dict[element_name] = \
+                self.get_concrete_list(self, node)
+
+        # read element
+        for node in pkg_node.getElementsByTagName('element'):
+            element = self.get_element_description(self, node, pkg_version)
+
+            if element:
+                self.elements.append(dict({'name': element['name'],
+                                      'typecode': element['typecode'],
+                                      'isListOf': element['hasListOf'],
+                                      'listOfName': element['elementName'],
+                                      'listOfClassName': element['lo_class_name']
+                                      }))
+                self.sbml_elements.append(element)
 
     #####################################################################
 
@@ -310,33 +367,32 @@ class ParseXML():
         required = self.get_bool_value(self, self.dom.documentElement, 
                                        'required')
 
-        # get package information (assume we want the first only)
+        # get package information
         sbml_level = 3
         sbml_version = 1
         pkg_version = 1
         for node in self.dom.getElementsByTagName('pkgVersion'):
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
-            pkg_version = self.get_int_value(self, node, 'pkg_version')
-            break
+            self.get_elements_for_version(node)
 
-        # read concrete versions of abstract classes and fill dictionary
-        for node in self.dom.getElementsByTagName('element'):
-            element_name = self.get_value(node, 'name')
-            self.concrete_dict[element_name] = \
-                self.get_concrete_list(self, node)
-
-        # read element
-        for node in self.dom.getElementsByTagName('element'):
-            element = self.get_element_description(self, node)
-
-            elements.append(dict({'name': element['name'],
-                                  'typecode': element['typecode'],
-                                  'isListOf': element['hasListOf'],
-                                  'listOfName': element['elementName'],
-                                  'listOfClassName': element['lo_class_name']
-                                  }))
-            sbml_elements.append(element)
+        # # read concrete versions of abstract classes and fill dictionary
+        # for node in self.dom.getElementsByTagName('element'):
+        #     element_name = self.get_value(node, 'name')
+        #     self.concrete_dict[element_name] = \
+        #         self.get_concrete_list(self, node)
+        #
+        # # read element
+        # for node in self.dom.getElementsByTagName('element'):
+        #     element = self.get_element_description(self, node)
+        #
+        #     elements.append(dict({'name': element['name'],
+        #                           'typecode': element['typecode'],
+        #                           'isListOf': element['hasListOf'],
+        #                           'listOfName': element['elementName'],
+        #                           'listOfClassName': element['lo_class_name']
+        #                           }))
+        #     sbml_elements.append(element)
 
         for node in self.dom.getElementsByTagName('plugin'):
 
@@ -412,10 +468,10 @@ class ParseXML():
             enums.append(dict({'name': enum_name, 'values': values}))
 
         package = dict({'name': self.package_name,
-                        'elements': elements,
+                        'elements': self.elements,
                         'plugins': plugins,
                         'number': number,
-                        'sbmlElements': sbml_elements,
+                        'sbmlElements': self.sbml_elements,
                         'enums': enums,
                         'offset': offset,
                         'fullname': fullname,
