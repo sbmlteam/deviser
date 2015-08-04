@@ -480,6 +480,7 @@ Uncertainty::readAttributes(const XMLAttributes& attributes,
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
   unsigned int numErrs;
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
@@ -494,14 +495,14 @@ Uncertainty::readAttributes(const XMLAttributes& attributes,
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
       log->logPackageError("distrib", DistribUncertaintyAllowedAttributes,
-        getPackageVersion(), level, version, details);
+        pkgVersion, level, version, details);
     }
     else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
       log->logPackageError("distrib", DistribUncertaintyAllowedAttributes,
-        getPackageVersion(), level, version, details);
+        pkgVersion, level, version, details);
     }
   }
 

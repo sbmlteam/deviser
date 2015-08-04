@@ -65,7 +65,10 @@ class SetGetFunctions():
 
         self.attributes = class_object['class_attributes']
         self.child_elements = class_object['child_elements']
-        self.has_multiple_versions = class_object['has_multiple_versions']
+        if 'num_versions' in class_object and class_object['num_versions'] > 1:
+            self.has_multiple_versions = True
+        else:
+            self.has_multiple_versions = False
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -901,6 +904,15 @@ class SetGetFunctions():
     def set_cpp_attribute(self, attribute):
         member = attribute['memberName']
         name = attribute['name']
+        if 'version_info' in attribute and False in attribute['version_info']:
+            code = [self.create_code_block('line',
+                                           ['unsigned int pkgVersion = '
+                                            'getPackageVersion()'])]
+            deal_with_versions = True
+        else:
+            code = []
+            deal_with_versions = False
+
         if attribute['type'] == 'SId':
             if self.language == 'sbml':
                 implementation = ['return SyntaxChecker::'
@@ -939,10 +951,21 @@ class SetGetFunctions():
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif query.has_is_set_member(attribute):
-            implementation = ['{} = {}'.format(member, name),
-                              'mIsSet{} = true'.format(attribute['capAttName']),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            if not deal_with_versions:
+                implementation = self.write_set_att_with_member(attribute, True)
+                code.append(self.create_code_block('line', implementation))
+            else:
+                if attribute['num_versions'] == 2:
+                    implementation = ['pkgVersion == 1']
+                    atts = attribute['version_info'][0]
+                    implementation += self.write_set_att_with_member(attribute,
+                                                                     atts)
+                    implementation.append('else')
+                    atts = attribute['version_info'][1]
+                    implementation += self.write_set_att_with_member(attribute,
+                                                                     atts)
+                    code.append(self.create_code_block('if_else',
+                                                       implementation))
         elif attribute['type'] == 'element':
             clone = 'clone'
             nested_if = []
@@ -978,6 +1001,21 @@ class SetGetFunctions():
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code
+
+    @staticmethod
+    def write_set_att_with_member(attribute, in_version):
+        if in_version:
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'mIsSet{} = true'.format(attribute['capAttName']),
+                              'return LIBSBML_OPERATION_SUCCESS']
+        else:
+            implementation = ['{} = {}'.format(attribute['memberName'],
+                                               attribute['name']),
+                              'mIsSet{} = '
+                              'false'.format(attribute['capAttName']),
+                              'return LIBSBML_UNEXPECTED_ATTRIBUTE']
+        return implementation
 
     def unset_cpp_attribute(self, attribute):
         if attribute['attType'] == 'string':

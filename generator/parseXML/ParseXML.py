@@ -60,6 +60,7 @@ class ParseXML():
         self.package_name = ''
         self.elements = []
         self.sbml_elements = []
+        self.num_versions = 1
 
     #####################################################################
 
@@ -219,6 +220,10 @@ class ParseXML():
 
     @staticmethod
     def get_attribute_description(self, node, pkg_version):
+        version_info = []
+        for i in range(0, self.num_versions):
+            version_info.append(False)
+        version_info[pkg_version-1] = True
         attr_name = self.get_value(node, 'name')
         required = self.get_bool_value(self, node, 'required')
         attr_type = self.get_type_value(self, node)
@@ -229,7 +234,9 @@ class ParseXML():
                                'name': attr_name,
                                'element': attr_element,
                                'abstract': attr_abstract,
-                               'version': pkg_version
+                               'num_versions': self.num_versions,
+                               'version': pkg_version,
+                               'version_info': version_info
                                })
         if attr_abstract:
             attribute_dict['concrete'] = self.concrete_dict[attr_element]
@@ -251,16 +258,14 @@ class ParseXML():
 
         if element:
             for attr in node.getElementsByTagName('attribute'):
-                element['attribs'].append(self.get_attribute_description(self, attr,
-                                                                 pkg_version))
+                element['attribs'].append(
+                    self.get_attribute_description(self, attr, pkg_version))
 
             for attr in node.getElementsByTagName('listOfAttribute'):
-                element['lo_attribs'].append(self.get_attribute_description(self, attr,
-                                                                    pkg_version))
-            element['has_multiple_versions'] = True
-            for existing in self.elements:
-                if existing['name'] == element_name:
-                    existing['has_multiple_versions'] = True
+                element['lo_attribs'].append(
+                    self.get_attribute_description(self, attr, pkg_version))
+            element['num_versions'] = self.num_versions
+            element['version'] = pkg_version
 
             return None
 
@@ -289,8 +294,8 @@ class ParseXML():
 
             lo_attributes = []
             for attr in node.getElementsByTagName('listOfAttribute'):
-                lo_attributes.append(self.get_attribute_description(self, attr,
-                                                                    pkg_version))
+                lo_attributes.append(
+                    self.get_attribute_description(self, attr, pkg_version))
 
             # construct element
             element = dict({'name': element_name,
@@ -308,7 +313,8 @@ class ParseXML():
                             'elementName': xml_element_name,
                             'lo_elementName': xml_lo_element_name,
                             'lo_class_name': lo_class_name,
-                            'has_multiple_versions': False
+                            'num_versions': self.num_versions,
+                            'version': pkg_version
                             })
             if add_decls is not None:
                 element['addDecls'] = add_decls
@@ -333,14 +339,13 @@ class ParseXML():
         # read element
         for node in pkg_node.getElementsByTagName('element'):
             element = self.get_element_description(self, node, pkg_version)
-
             if element:
                 self.elements.append(dict({'name': element['name'],
-                                      'typecode': element['typecode'],
-                                      'isListOf': element['hasListOf'],
-                                      'listOfName': element['elementName'],
-                                      'listOfClassName': element['lo_class_name']
-                                      }))
+                                           'typecode': element['typecode'],
+                                           'isListOf': element['hasListOf'],
+                                           'listOfName': element['elementName'],
+                                           'listOfClassName':
+                                               element['lo_class_name']}))
                 self.sbml_elements.append(element)
 
     #####################################################################
@@ -353,7 +358,6 @@ class ParseXML():
         the definition contained in it
         """
 
-        sbml_elements = []
         elements = []
         plugins = []
         enums = []
@@ -371,6 +375,8 @@ class ParseXML():
         sbml_level = 3
         sbml_version = 1
         pkg_version = 1
+        self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
+
         for node in self.dom.getElementsByTagName('pkgVersion'):
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
@@ -478,7 +484,8 @@ class ParseXML():
                         'sbml_level': sbml_level,
                         'sbml_version': sbml_version,
                         'pkg_version': pkg_version,
-                        'required': required
+                        'required': required,
+                        'num_versions': self.num_versions
                         })
 
         # link elements

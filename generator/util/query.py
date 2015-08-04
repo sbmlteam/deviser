@@ -124,18 +124,29 @@ def add_concrete_to_list(root, concrete, mylist):
 
 
 # return a set of attributes with any elements/lo_elements removed
+# populating the version information
 def separate_attributes(full_attributes):
     attributes = []
-#    names = []
-
     for i in range(0, len(full_attributes)):
-#        name = full_attributes[i]['name']
         att_type = full_attributes[i]['attType']
-
+        name = full_attributes[i]['name']
         if att_type != 'element' and att_type != 'lo_element':
-#            if get_matching_element('name', name, attributes):
-            attributes.append(full_attributes[i])
+            existing = get_matching_element('name', name, attributes)
+            if existing:
+                vers = full_attributes[i]['version']
+                existing['version_info'][vers-1] = True
+            else:
+                attributes.append(full_attributes[i])
     return attributes
+
+
+# return attributes for the given version only
+def get_version_attributes(attributes, version):
+    ver_attribs = []
+    for i in range(0, len(attributes)):
+        if attributes[i]['version'] == version:
+            ver_attribs.append(attributes[i])
+    return ver_attribs
 
 
 # return a set of unique attributes

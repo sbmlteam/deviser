@@ -6,7 +6,7 @@ from parseXML import createPackageFromXml
 from code_files import CppFiles
 from parseXML import ParseXML
 
-use_new = False
+use_new = True
 
 
 def generate_cpp_header(filename, num):
@@ -50,6 +50,7 @@ def compare_files(infile, outfile):
 
 def run_test(name, num, class_name, test_case, list_of):
     filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
@@ -59,8 +60,9 @@ def run_test(name, num, class_name, test_case, list_of):
         generate_cpp_header(filename, num)
     correct_file = '.\\test-code\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
-    print('{}.h'.format(class_name))
-    fail = compare_files(correct_file, temp_file)
+    if os.path.isfile(correct_file):
+        print('{}.h'.format(class_name))
+        fail = compare_files(correct_file, temp_file)
     correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
     temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
     if os.path.isfile(correct_cpp_file):
@@ -180,6 +182,14 @@ def main():
     list_of = 'ListOfMyLoTests'
     test_case = 'attribute on ListOf'
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    if use_new:
+        name = 'test_vers'
+        num = 0
+        class_name = 'ClassOne'
+        list_of = ''
+        test_case = 'multiple versions'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

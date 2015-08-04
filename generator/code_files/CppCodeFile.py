@@ -377,12 +377,22 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         code = protect_functions.write_read_attributes()
         self.write_function_implementation(code, exclude)
+        if 'num_versions' in self.class_object \
+                and self.class_object['num_versions'] > 1:
+            for i in range(0, self.class_object['num_versions']):
+                code = protect_functions.write_read_version_attributes(i+1)
+                self.write_function_implementation(code, exclude)
 
         code = protect_functions.write_read_other_xml()
         self.write_function_implementation(code, exclude)
 
         code = protect_functions.write_write_attributes()
         self.write_function_implementation(code, exclude)
+        if 'num_versions' in self.class_object \
+                and self.class_object['num_versions'] > 1:
+            for i in range(0, self.class_object['num_versions']):
+                code = protect_functions.write_write_version_attributes(i+1)
+                self.write_function_implementation(code, exclude)
 
         code = protect_functions.write_write_xmlns()
         self.write_function_implementation(code, exclude)

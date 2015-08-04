@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, query
 
 
 class ProtectedFunctions():
@@ -81,6 +81,15 @@ class ProtectedFunctions():
         self.num_non_std_children = class_object['num_non_std_children']
         self.num_children = class_object['num_children']
         self.has_list_of = class_object['hasListOf']
+        self.has_multiple_versions = False
+        self.version_attributes = []
+        if 'num_versions' in class_object and class_object['num_versions'] > 1:
+            self.has_multiple_versions = True
+            self.version_attributes.append(
+                query.get_version_attributes(self.all_attributes, 1))
+            for i in range(1, class_object['num_versions']):
+                self.version_attributes.append(
+                    query.get_version_attributes(self.all_attributes, i+1))
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -271,13 +280,27 @@ class ProtectedFunctions():
         implementation = ['{}::addExpectedAttributes'
                           '(attributes)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
-        for i in range(0, len(self.attributes)):
-            if self.attributes[i]['isArray']:
-                continue
-            name = self.attributes[i]['name']
-            implementation = ['attributes.add(\"{}\")'.format(name)]
-            code.append(dict({'code_type': 'line', 'code': implementation}))
-
+        if not self.has_multiple_versions:
+            for i in range(0, len(self.attributes)):
+                if self.attributes[i]['isArray']:
+                    continue
+                name = self.attributes[i]['name']
+                implementation = ['attributes.add(\"{}\")'.format(name)]
+                code.append(dict({'code_type': 'line', 'code': implementation}))
+        else:
+            code.append(self.create_code_block('line',
+                                               ['unsigned int pkgVersion = '
+                                                'getPackageVersion()']))
+            implementation = ['pkgVersion == 1']
+            for i in range(0, len(self.version_attributes)):
+                for j in range(0, len(self.version_attributes[i])):
+                    if self.version_attributes[i][j]['isArray']:
+                        continue
+                    name = self.version_attributes[i][j]['name']
+                    implementation.append('attributes.add(\"{}\")'.format(name))
+                if i < len(self.version_attributes) - 1:
+                    implementation.append('else')
+            code.append(self.create_code_block('if_else', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -312,6 +335,7 @@ class ProtectedFunctions():
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
                           'unsigned int version = getVersion()',
+                          'unsigned int pkgVersion = getPackageVersion()',
                           'unsigned int numErrs',
                           'bool assigned = false',
                           'SBMLErrorLog* log = getErrorLog()']
@@ -330,7 +354,7 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
+                'pkgVersion, level, version, '
                 'details)'.format(self.package.lower(), self.package,
                                   self.class_name),
                 'else if', 'log->getError(n)->getErrorId() == '
@@ -338,7 +362,7 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
                 'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
+                'pkgVersion, level, version, '
                 'details)'.format(self.package.lower(), self.package,
                                   self.class_name)]
         if_err = self.create_code_block('else_if', line)
@@ -346,8 +370,52 @@ class ProtectedFunctions():
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         code.append(self.create_code_block('for', line))
 
-        for i in range(0, len(self.attributes)):
-            self.write_read_att(i, code)
+        if not self.has_multiple_versions:
+            for i in range(0, len(self.attributes)):
+                self.write_read_att(self.attributes, i, code)
+        else:
+            implementation = ['pkgVersion == 1', 'readV1Attributes(attributes)',
+                              'else', 'readV2Attributes(attributes)']
+            code.append(self.create_code_block('if_else', implementation))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write individual version reads
+    def write_read_version_attributes(self, version):
+        if self.is_list_of or not self.has_multiple_versions:
+            return
+
+        # create comment
+        title_line = 'Reads the expected attributes into the member ' \
+                     'data variables'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create function declaration
+        function = 'readV{}Attributes'.format(version)
+        return_type = 'void'
+        arguments = ['const XMLAttributes& attributes']
+
+        # create the function implementation
+        implementation = ['unsigned int level = getLevel()',
+                          'unsigned int version = getVersion()',
+                          'bool assigned = false']
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        for i in range(0, len(self.version_attributes[version-1])):
+            self.write_read_att(self.version_attributes[version-1], i, code)
 
         # return the parts
         return dict({'title_line': title_line,
@@ -448,13 +516,55 @@ class ProtectedFunctions():
         implementation = ['{}::writeAttributes(stream)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
-        for i in range(0, len(self.attributes)):
-            self.write_write_att(i, code)
+        if not self.has_multiple_versions:
+            for i in range(0, len(self.attributes)):
+                self.write_write_att(self.attributes, i, code)
+        else:
+            code.append(self.create_code_block('line',
+                                               ['unsigned int pkgVersion = '
+                                                'getPackageVersion()']))
+            implementation = ['pkgVersion == 1', 'writeV1Attributes(stream)',
+                              'else', 'writeV2Attributes(stream)']
+            code.append(self.create_code_block('if_else', implementation))
 
         code.append(self.create_code_block('line',
                                            ['{}::writeExtension'
                                             'Attributes'
                                             '(stream)'.format(self.std_base)]))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write individual version writeAttributes
+    def write_write_version_attributes(self, version):
+        if self.is_list_of or not self.has_multiple_versions:
+            return
+
+        # create comment
+        title_line = 'Writes the attributes to the stream'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create function declaration
+        function = 'writeV{}Attributes'.format(version)
+        return_type = 'void'
+        arguments = ['XMLOutputStream& stream']
+
+        # create the function implementation
+        code = []
+        for i in range(0, len(self.version_attributes[version-1])):
+            self.write_write_att(self.version_attributes[version-1], i, code)
 
         # return the parts
         return dict({'title_line': title_line,
@@ -636,7 +746,7 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
+                'pkgVersion, level, version, '
                 'details)'.format(self.package.lower(), self.package,
                                   self.class_name),
                 'else if', 'log->getError(n)->getErrorId() == '
@@ -644,7 +754,7 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
                 'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
-                'getPackageVersion(), level, version, '
+                'pkgVersion, level, version, '
                 'details)'.format(self.package.lower(), self.package,
                                   self.class_name)]
         if_err = self.create_code_block('else_if', line)
@@ -671,15 +781,15 @@ class ProtectedFunctions():
                           'delete {}'.format(ns)]
         return implementation
 
-    def write_write_att(self, index, code):
-        if self.attributes[index]['isArray']:
+    def write_write_att(self, attributes, index, code):
+        if attributes[index]['isArray']:
             return
-        name = self.attributes[index]['name']
-        cap_name = self.attributes[index]['capAttName']
-        member = self.attributes[index]['memberName']
-        att_type = self.attributes[index]['attType']
+        name = attributes[index]['name']
+        cap_name = attributes[index]['capAttName']
+        member = attributes[index]['memberName']
+        att_type = attributes[index]['attType']
         if att_type == 'enum':
-            element = self.attributes[index]['element']
+            element = attributes[index]['element']
             variable = '{}_toString({})'.format(element, member)
         else:
             variable = member
@@ -688,8 +798,8 @@ class ProtectedFunctions():
                 '{})'.format(name, variable)]
         code.append(self.create_code_block('if', line))
 
-    def write_read_att(self, index, code):
-        attribute = self.attributes[index]
+    def write_read_att(self, attributes, index, code):
+        attribute = attributes[index]
         if attribute['isArray']:
             return
         name = attribute['name']
