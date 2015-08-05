@@ -920,7 +920,7 @@ class ProtectedFunctions():
         line = ['isSetId()', 'msg += \"with id \'\" + getId() + \"\'\"']
         if_id = self.create_code_block('if', line)
 
-        line = ['{0}_isValid{0}({1}) == 0'.format(element, member),
+        line = ['{0}_isValid({1}) == 0'.format(element, member),
                 self.create_code_block('line',
                                        ['std::string msg = \"The {} on the <{}'
                                         '> \"'.format(name, self.class_name)]),

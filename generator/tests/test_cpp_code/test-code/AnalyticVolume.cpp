@@ -56,7 +56,7 @@ AnalyticVolume::AnalyticVolume(unsigned int level,
                                unsigned int pkgVersion)
   : SBase(level, version)
   , mId ("")
-  , mFunctionType (FUNCTION_KIND_UNKNOWN)
+  , mFunctionType (FUNCTION_KIND_INVALID)
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
   , mDomainType ("")
@@ -74,7 +74,7 @@ AnalyticVolume::AnalyticVolume(unsigned int level,
 AnalyticVolume::AnalyticVolume(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
   , mId ("")
-  , mFunctionType (FUNCTION_KIND_UNKNOWN)
+  , mFunctionType (FUNCTION_KIND_INVALID)
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
   , mDomainType ("")
@@ -225,7 +225,7 @@ AnalyticVolume::isSetId() const
 bool
 AnalyticVolume::isSetFunctionType() const
 {
-  return (mFunctionType != FUNCTION_KIND_UNKNOWN);
+  return (mFunctionType != FUNCTION_KIND_INVALID);
 }
 
 
@@ -267,9 +267,9 @@ AnalyticVolume::setId(const std::string& id)
 int
 AnalyticVolume::setFunctionType(const FunctionKind_t functionType)
 {
-  if (FunctionKind_isValidFunctionKind(functionType) == 0)
+  if (FunctionKind_isValid(functionType) == 0)
   {
-    mFunctionType = FUNCTION_KIND_UNKNOWN;
+    mFunctionType = FUNCTION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -286,9 +286,9 @@ AnalyticVolume::setFunctionType(const FunctionKind_t functionType)
 int
 AnalyticVolume::setFunctionType(const std::string& functionType)
 {
-  if (FunctionKind_isValidFunctionKindString(functionType) == 0)
+  if (FunctionKind_isValidString(functionType) == 0)
   {
-    mFunctionType = FUNCTION_KIND_UNKNOWN;
+    mFunctionType = FUNCTION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -354,7 +354,7 @@ AnalyticVolume::unsetId()
 int
 AnalyticVolume::unsetFunctionType()
 {
-  mFunctionType = FUNCTION_KIND_UNKNOWN;
+  mFunctionType = FUNCTION_KIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -768,7 +768,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     {
       mFunctionType = FunctionKind_fromString(functiontype.c_str());
 
-      if (FunctionKind_isValidFunctionKind(mFunctionType) == 0)
+      if (FunctionKind_isValid(mFunctionType) == 0)
       {
         std::string msg = "The functionType on the <AnalyticVolume> ";
 
@@ -990,7 +990,7 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av)
 {
   if (av == NULL)
   {
-    return FUNCTION_KIND_UNKNOWN;
+    return FUNCTION_KIND_INVALID;
   }
 
   return av->getFunctionType();

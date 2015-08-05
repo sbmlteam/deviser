@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    __init__.py
-# @brief   init for cpp_functions directory
+# @file    ExtensionFiles.py
+# @brief   class for generating the extension files
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,12 +37,46 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import ConcreteClassFunctions
-import Constructors
-import ExtensionFunctions
-import ExtensionInitFunctions
-import GeneralFunctions
-import GlobalQueryFunctions
-import ListOfQueryFunctions
-import ProtectedFunctions
-import SetGetFunctions
+import ExtensionCodeFile, ExtensionHeaderFile
+from util import strFunctions, query
+
+
+class ExtensionFiles():
+    """Class for all Extension files"""
+
+    def __init__(self, class_object, verbose=False):
+        # # members from object
+        self.class_object = class_object
+        # self.class_object['is_list_of'] = False
+        # self.class_object['sid_refs'] = \
+        #     query.get_sid_refs(class_object['attribs'])
+        # self.class_object['unit_sid_refs'] = \
+        #     query.get_sid_refs(class_object['attribs'], unit=True)
+
+        self.verbose = verbose
+
+    def write_files(self):
+        self.write_header(self.class_object)
+        self.write_code(self.class_object)
+
+    def write_header(self, class_desc):
+        fileout = ExtensionHeaderFile.ExtensionHeaderFile(class_desc)
+        if not self.verbose:
+            print('Writing file {}'.format(fileout.name))
+        fileout.write_file()
+        fileout.close_file()
+
+    def write_code(self, class_desc):
+        fileout = ExtensionCodeFile.ExtensionCodeFile(class_desc)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.name))
+        fileout.write_file()
+        fileout.close_file()
+
+
+    def test_func(self):
+        self.write_header(self.class_object)
+ #       if self.class_object['hasListOf']:
+ #           lo_working_class = self.create_list_of_description()
+#            self.write_header(lo_working_class)
+ #           self.write_code(lo_working_class)

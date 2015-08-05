@@ -55,7 +55,7 @@ CoordinateComponent::CoordinateComponent(unsigned int level,
                                          unsigned int pkgVersion)
   : SBase(level, version)
   , mId ("")
-  , mType (COORDINATE_KIND_UNKNOWN)
+  , mType (COORDINATE_KIND_INVALID)
   , mUnit ("")
   , mBoundaryMin (NULL)
   , mBoundaryMax (NULL)
@@ -73,7 +73,7 @@ CoordinateComponent::CoordinateComponent(unsigned int level,
 CoordinateComponent::CoordinateComponent(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
   , mId ("")
-  , mType (COORDINATE_KIND_UNKNOWN)
+  , mType (COORDINATE_KIND_INVALID)
   , mUnit ("")
   , mBoundaryMin (NULL)
   , mBoundaryMax (NULL)
@@ -226,7 +226,7 @@ CoordinateComponent::isSetId() const
 bool
 CoordinateComponent::isSetType() const
 {
-  return (mType != COORDINATE_KIND_UNKNOWN);
+  return (mType != COORDINATE_KIND_INVALID);
 }
 
 
@@ -257,9 +257,9 @@ CoordinateComponent::setId(const std::string& id)
 int
 CoordinateComponent::setType(const CoordinateKind_t type)
 {
-  if (CoordinateKind_isValidCoordinateKind(type) == 0)
+  if (CoordinateKind_isValid(type) == 0)
   {
-    mType = COORDINATE_KIND_UNKNOWN;
+    mType = COORDINATE_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -276,9 +276,9 @@ CoordinateComponent::setType(const CoordinateKind_t type)
 int
 CoordinateComponent::setType(const std::string& type)
 {
-  if (CoordinateKind_isValidCoordinateKindString(type) == 0)
+  if (CoordinateKind_isValidString(type) == 0)
   {
-    mType = COORDINATE_KIND_UNKNOWN;
+    mType = COORDINATE_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -332,7 +332,7 @@ CoordinateComponent::unsetId()
 int
 CoordinateComponent::unsetType()
 {
-  mType = COORDINATE_KIND_UNKNOWN;
+  mType = COORDINATE_KIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1011,7 +1011,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     {
       mType = CoordinateKind_fromString(type.c_str());
 
-      if (CoordinateKind_isValidCoordinateKind(mType) == 0)
+      if (CoordinateKind_isValid(mType) == 0)
       {
         std::string msg = "The type on the <CoordinateComponent> ";
 
@@ -1166,7 +1166,7 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc)
 {
   if (cc == NULL)
   {
-    return COORDINATE_KIND_UNKNOWN;
+    return COORDINATE_KIND_INVALID;
   }
 
   return cc->getType();

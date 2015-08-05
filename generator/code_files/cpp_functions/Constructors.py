@@ -61,8 +61,6 @@ class Constructors():
             self.is_list_of = True
 
         self.has_children = class_object['has_children']
-        self.has_math = class_object['has_math']
-        self.num_non_std_children = class_object['num_non_std_children']
         self.child_elements = class_object['child_elements']
         self.overwrites_children = class_object['overwrites_children']
         self.xml_name = strFunctions.lower_first(class_object['name'])
@@ -268,6 +266,76 @@ class Constructors():
                      'virtual': False,
                      'object_name': self.object_name,
                      'implementation': code,
+                     'constructor_args': constructor_args})
+
+    # function to write general constructor
+    def write_constructor(self, index=0):
+        if len(self.concretes) == 0 and index == 0:
+            ob_name = self.object_name
+            create = 'create'
+        elif self.is_cpp_api:
+            ob_name = self.object_name
+            create = 'create'
+        else:
+            if index == 0:
+                return
+            else:
+                i = index - 1
+            ob_name = '{} ({})'.format(self.concretes[i]['element'],
+                                       self.object_name)
+            create = 'create{}'.format(self.concretes[i]['element'])
+        # create doc string header
+        title_line = 'Creates a new {0}.'.format(ob_name)
+        params = []
+
+        return_lines = []
+        additional = ''
+
+        # create the function declaration
+        if self.is_cpp_api:
+            function = self.class_name
+            return_type = ''
+        else:
+            function = '{}_{}'.format(self.class_name, create)
+            return_type = '{0} *'.format(self.object_name)
+
+        arguments = []
+
+        # create the function implementation
+        constructor_args = self.write_constructor_args(self, None)
+        if self.package:
+            if self.is_cpp_api:
+                implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
+                                  '(level, version, '
+                                  'pkgVersion))'.format(self.language.upper(),
+                                                        self.package)]
+                if self.has_children:
+                    implementation.append('connectToChild()')
+            else:
+                implementation = ['return new {}(level, version, '
+                                  'pkgVersion)'.format(self.class_name)]
+        else:
+            if self.is_cpp_api:
+                implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
+                                  '(level, '
+                                  'version))'.format(self.language.upper())]
+            else:
+                implementation = ['return new {}(level, '
+                                  'version)'.format(self.class_name)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'args_no_defaults': [],
                      'constructor_args': constructor_args})
 
     # function to write copy constructor

@@ -52,9 +52,14 @@ class BaseCppFile(BaseFile.BaseFile):
         self.baseClass = 'SBase'
 
         # expand the information for the attributes
-        self.attributes = self.expand_attributes(self, attributes)
-        self.child_elements = self.get_children()
-        self.child_lo_elements = self.get_lo_children()
+        if attributes:
+            self.attributes = self.expand_attributes(self, attributes)
+            self.child_elements = self.get_children()
+            self.child_lo_elements = self.get_lo_children()
+        else:
+            self.attributes = []
+            self.child_elements = []
+            self.child_lo_elements = []
 
         self.num_children = \
             len(self.child_lo_elements) + len(self.child_elements)
@@ -73,8 +78,9 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_object = {}
 
         # declare variables that will populate by the class object
+        if not self.name:
+            self.name = ''
         self.is_list_of = ''
-        self.name = ''
         self.class_name = ''
         self.package = ''
         self.typecode = ''
@@ -242,7 +248,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['CType'] = attributes[i]['element'] + '_t'
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = \
-                    self.get_default_enum_value(self, attributes[i])
+                    query.get_default_enum_value(attributes[i])
             elif att_type == 'element':
                 el_name = attributes[i]['element']
                 attributes[i]['attType'] = 'element'
@@ -577,6 +583,44 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_line('};')
                 self.skip_line(2)
 
+    # Function to write the header about the typecode enumeration
+    def write_type_code_enum_header(self, package):
+        up_package = strFunctions.upper_first(package)
+        self.open_comment()
+        self.write_comment_line('@enum {}{}'
+                                'TypeCode_t'.format(self.language.upper(),
+                                                    up_package))
+        self.write_comment_line('@brief {}{}TypeCode_t is the enumeration '
+                                'of possible types from the \"{}\" '
+                                'package.'.format(self.language.upper(),
+                                                  up_package, package))
+        self.write_blank_comment_line()
+        self.write_comment_line('@copydetails doc_what_are_typecodes')
+        self.write_blank_comment_line()
+        self.write_comment_line('@copydetails doc_additional_typecode_details')
+        self.close_comment()
+
+    # Function to write the header about the typecode enumeration
+    def write_enum(self, name, enum_no, enum_val, enum_str, length):
+        number = len(enum_val)
+        if len(enum_str) != number:
+            return
+        self.write_line('typedef enum')
+        self.write_line('{')
+        self.file_out.write('  {:{width}}'.format(enum_val[0], width=length))
+        if enum_no != 0:
+            self.file_out.write('= {:{width}}'.format(enum_no, width=5))
+            enum_no += 1
+        self.file_out.write('  /*!<{} */\n'.format(enum_str[0]))
+        for i in range(1, number):
+            self.file_out.write(', {:{width}}'.format(enum_val[i],
+                                                      width=length))
+            if enum_no != 0:
+                self.file_out.write('= {:{width}}'.format(enum_no, width=5))
+                enum_no += 1
+            self.file_out.write('  /*!<{} */\n'.format(enum_str[i]))
+        self.write_line('{} {};'.format('}', name))
+
     ########################################################################
 
     # FUNCTIONS FOR WRITING STANDARD FUNCTION Implementation
@@ -690,33 +734,6 @@ class BaseCppFile(BaseFile.BaseFile):
     ######################################################################
 
     # HELPER FUNCTIONS
-
-    @staticmethod
-    def get_default_enum_value(self, attribute):
-        prefix = ''
-        name = attribute['element']
-        enums = attribute['root']['enums']
-        for i in range(0, len(enums)):
-            if name == enums[i]['name']:
-                prefix = self.get_prefix(name)
-        default = prefix + '_UNKNOWN'
-        return default
-
-    @staticmethod
-    def get_prefix(name):
-        prefix = ''
-        first = True
-        for i in range(0, len(name)):
-            char = name[i]
-            if char.isupper():
-                if first:
-                    prefix += char
-                    first = False
-                else:
-                    prefix += '_{}'.format(char)
-            else:
-                prefix += char.upper()
-        return prefix
 
     @staticmethod
     def open_single_comment(self):

@@ -56,7 +56,7 @@ Output::Output(unsigned int level,
   : SBase(level, version)
   , mId ("")
   , mQualitativeSpecies ("")
-  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_UNKNOWN)
+  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
   , mName ("")
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
@@ -72,7 +72,7 @@ Output::Output(QualPkgNamespaces *qualns)
   : SBase(qualns)
   , mId ("")
   , mQualitativeSpecies ("")
-  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_UNKNOWN)
+  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
   , mName ("")
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
@@ -225,7 +225,7 @@ Output::isSetQualitativeSpecies() const
 bool
 Output::isSetTransitionEffect() const
 {
-  return (mTransitionEffect != TRANSITION_OUTPUT_EFFECT_UNKNOWN);
+  return (mTransitionEffect != TRANSITION_OUTPUT_EFFECT_INVALID);
 }
 
 
@@ -285,10 +285,9 @@ Output::setQualitativeSpecies(const std::string& qualitativeSpecies)
 int
 Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 {
-  if (TransitionOutputEffect_isValidTransitionOutputEffect(transitionEffect) ==
-    0)
+  if (TransitionOutputEffect_isValid(transitionEffect) == 0)
   {
-    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
+    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -305,11 +304,9 @@ Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 int
 Output::setTransitionEffect(const std::string& transitionEffect)
 {
-  if
-    (TransitionOutputEffect_isValidTransitionOutputEffectString(transitionEffect)
-      == 0)
+  if (TransitionOutputEffect_isValidString(transitionEffect) == 0)
   {
-    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
+    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -387,7 +384,7 @@ Output::unsetQualitativeSpecies()
 int
 Output::unsetTransitionEffect()
 {
-  mTransitionEffect = TRANSITION_OUTPUT_EFFECT_UNKNOWN;
+  mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -700,9 +697,7 @@ Output::readAttributes(const XMLAttributes& attributes,
       mTransitionEffect =
         TransitionOutputEffect_fromString(transitioneffect.c_str());
 
-      if
-        (TransitionOutputEffect_isValidTransitionOutputEffect(mTransitionEffect)
-          == 0)
+      if (TransitionOutputEffect_isValid(mTransitionEffect) == 0)
       {
         std::string msg = "The transitionEffect on the <Output> ";
 
@@ -898,7 +893,7 @@ Output_getTransitionEffect(const Output_t * o)
 {
   if (o == NULL)
   {
-    return TRANSITION_OUTPUT_EFFECT_UNKNOWN;
+    return TRANSITION_OUTPUT_EFFECT_INVALID;
   }
 
   return o->getTransitionEffect();

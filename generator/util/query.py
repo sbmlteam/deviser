@@ -216,3 +216,99 @@ def overwrites_name(root, name):
         if 'childrenOverwriteElementName' in obj:
             return obj['childrenOverwriteElementName']
     return False
+
+def get_static_extension_attribs():
+    attribs = []
+    att = dict({'name': 'packageName',
+                'capAttName': 'PackageName',
+                'attTypeCode' : 'std::string&',
+                'attType': 'string',
+                'memberName': ''})
+    attribs.append(att)
+    att = dict({'name': 'defaultLevel',
+                'capAttName': 'DefaultLevel',
+                'attTypeCode': 'unsigned int',
+                'attType': 'unsigned integer',
+                'memberName': 3})
+    attribs.append(att)
+    att = dict({'name': 'defaultVersion',
+                'capAttName': 'DefaultVersion',
+                'attTypeCode': 'unsigned int',
+                'attType': 'unsigned integer',
+                'memberName': 1})
+    attribs.append(att)
+    att = dict({'name': 'defaultPackageVersion',
+                'capAttName': 'DefaultPackageVersion',
+                'attTypeCode': 'unsigned int',
+                'attType': 'unsigned integer',
+                'memberName': 1})
+    attribs.append(att)
+    att = dict({'name': 'xmlnsL3V1V1',
+                'capAttName': 'XmlnsL3V1V1',
+                'attTypeCode' : 'std::string&',
+                'attType': 'string',
+                'memberName': 'fix this'})
+    attribs.append(att)
+    return attribs
+
+
+# get enumeration values
+def get_typecode_enum(elements):
+    value = []
+    strvalue = []
+    max_length = 0
+    for i in range(0, len(elements)):
+        tc = elements[i]['typecode']
+        if len(tc) > max_length:
+            max_length = len(tc)
+        value.append(tc)
+        strvalue.append(elements[i]['name'])
+    return [value, strvalue, max_length]
+
+
+# get enumeration values
+def get_enum(element):
+    name = element['name']
+    value = []
+    strvalue = []
+    max_length = 0
+    for i in range(0, len(element['values'])):
+        tc = element['values'][i]['name']
+        if len(tc) > max_length:
+            max_length = len(tc)
+        value.append(tc)
+        strvalue.append(element['values'][i]['value'])
+    tc = get_prefix(name) + '_INVALID'
+    if len(tc) > max_length:
+        max_length = len(tc)
+    value.append(tc)
+    strvalue.append('invalid')
+    return [value, strvalue, max_length]
+
+
+def get_default_enum_value(attribute):
+    prefix = ''
+    name = attribute['element']
+    enums = attribute['root']['enums']
+    for i in range(0, len(enums)):
+        if name == enums[i]['name']:
+            prefix = get_prefix(name)
+    default = prefix + '_INVALID'
+    return default
+
+
+def get_prefix(name):
+    prefix = ''
+    first = True
+    for i in range(0, len(name)):
+        char = name[i]
+        if char.isupper():
+            if first:
+                prefix += char
+                first = False
+            else:
+                prefix += '_{}'.format(char)
+        else:
+            prefix += char.upper()
+    return prefix
+

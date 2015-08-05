@@ -301,6 +301,52 @@ class SetGetFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
+    # function to write get functions for extension
+    def write_static_extension_get(self, index, const=True):
+        if index < len(self.attributes):
+            attribute = self.attributes[index]
+        else:
+            return
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Returns the {} used by this libSBML package extension.' \
+            .format(attribute['name'])
+
+        return_lines.append('@return the {} as a {}.'
+                            .format(attribute['name'],
+                                    attribute['attType']))
+        # create the function declaration
+        function = 'get{0}'.format(attribute['capAttName'])
+        if attribute['attType'] == 'string' \
+                or attribute['attType'] == 'element':
+            if const:
+                return_type = 'static const ' + attribute['attTypeCode']
+            else:
+                return_type = 'static ' + attribute['attTypeCode']
+        else:
+            return_type = 'static ' + attribute['attTypeCode']
+
+        arguments = []
+
+        # create the function implementation
+        implementation = ['return {}'.format(attribute['memberName'])]
+        code = [self.create_code_block('line', implementation)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
     ########################################################################
 
     # Functions for writing is set functions
@@ -547,7 +593,7 @@ class SetGetFunctions():
             arguments.append('const char * {}'.format(attribute['name']))
 
         if self.is_cpp_api:
-            implementation = ['{0}_isValid{0}String({1}) == '
+            implementation = ['{0}_isValidString({1}) == '
                               '0'.format(attribute['element'],
                                          attribute['name']),
                               '{} = {}'.format(attribute['memberName'],
@@ -942,7 +988,7 @@ class SetGetFunctions():
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'enum':
-            implementation = ['{0}_isValid{0}({1}) == '
+            implementation = ['{0}_isValid({1}) == '
                               '0'.format(attribute['element'], name),
                               '{} = {}'.format(member,
                                                attribute['default']),
