@@ -43,13 +43,15 @@ from util import strFunctions
 class ExtensionFunctions():
     """Class for extension functions"""
 
-    def __init__(self, language, package):
+    def __init__(self, language, package, elements, offset):
         self.language = language
         self.package = package
+        self.elements = elements
+        self.offset = offset
 
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
-        self.cap_language = self.language.upper()
+        self.cap_language = language.upper()
         self.struct_name = '{}Extension'.format(self.up_package)
 
     ########################################################################
@@ -72,7 +74,7 @@ class ExtensionFunctions():
         return_type = 'const std::string&'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['return getPackageName()']
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -115,9 +117,13 @@ class ExtensionFunctions():
         return_type = 'const std::string&'
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
-
+        bottom_if = self.create_code_block('if', ['pkgVersion == 1',
+                                                  'return getXmlnsL3V1V1()'])
+        middle_if = self.create_code_block('if', ['sbmlVersion == 1',
+                                                  bottom_if])
+        code = [self.create_code_block('if', ['sbmlLevel == 3', middle_if])]
+        implementation = ['static std::string empty = \"\"', 'return empty']
+        code.append(self.create_code_block('line', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -153,8 +159,13 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if other == 'Level':
+            value = 3
+        else:
+            value = 1
+        implementation = ['uri == getXmlnsL3V1V1()', 'return {}'.format(value)]
+        code = [dict({'code_type': 'if', 'code': implementation})]
+        code.append(self.create_code_block('line', ['return 0']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -189,8 +200,14 @@ class ExtensionFunctions():
         return_type = '{}Namespaces*'.format(self.cap_language)
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        code = [dict({'code_type': 'line',
+                      'code': ['{}PkgNamespaces* pkgns = '
+                               'NULL'.format(self.up_package)]})]
+        code.append(self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
+                                                  'pkgns = new {}PkgNamespaces'
+                                                  '(3, 1, 1)'
+                                                  ''.format(self.up_package)]))
+        code.append(self.create_code_block('line', ['return pkgns']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -221,8 +238,21 @@ class ExtensionFunctions():
         return_type = 'const char*'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        n = len(self.elements)
+        implementation = ['int min = {}'.format(self.elements[0]['typecode']),
+                          'int max = {}'.format(self.elements[n-1]['typecode'])]
         code = [dict({'code_type': 'line', 'code': implementation})]
+        code.append(self.create_code_block('if', ['typeCode < min || '
+                                                  'typeCode > max',
+                                                  'return \"(Unknown '
+                                                  '{} {} Type)\"'
+                                                  ''.format(self.cap_language,
+                                                            self.up_package)]))
+        code.append(self.create_code_block('line',
+                                           ['return {}_{}_TYPECODE_STRINGS'
+                                            '[typeCode - min'
+                                            ']'.format(self.cap_language,
+                                                       self.package.upper())]))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -258,7 +288,7 @@ class ExtensionFunctions():
         return_type = 'packageErrorTableEntry'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['return {}ErrorTable[index]'.format(self.package)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -292,8 +322,15 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['unsigned int tableSize = sizeof({0}ErrorTable)/'
+                          'sizeof({0}ErrorTable[0])'.format(self.package),
+                          'unsigned int index = 0']
         code = [dict({'code_type': 'line', 'code': implementation})]
+        if_code = self.create_code_block('if', ['errorId == {}ErrorTable[i]'
+                                                '.code'.format(self.package),
+                                                'index = i', 'break'])
+        code.append(self.create_code_block('for', ['unsigned int i = 0; i < tableSize; i++', if_code]))
+        code.append(self.create_code_block('line', ['return index']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -326,7 +363,7 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['return {}'.format(self.offset)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

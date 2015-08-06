@@ -599,7 +599,7 @@ class GeneralFunctions():
             line = '{}::setSBMLDocument(d)'.format(self.base_class)
         else:
             line = '{}::set{}Document(d)'.format(self.base_class,
-                                                 self.language.upper())
+                                                 self.cap_language)
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:

@@ -302,7 +302,7 @@ class SetGetFunctions():
                      'implementation': code})
 
     # function to write get functions for extension
-    def write_static_extension_get(self, index, const=True):
+    def write_static_extension_get(self, index, const=True, static=True):
         if index < len(self.attributes):
             attribute = self.attributes[index]
         else:
@@ -327,11 +327,26 @@ class SetGetFunctions():
                 return_type = 'static ' + attribute['attTypeCode']
         else:
             return_type = 'static ' + attribute['attTypeCode']
+        if not static:
+            temp = return_type[7:]
+            return_type = temp
 
         arguments = []
 
         # create the function implementation
-        implementation = ['return {}'.format(attribute['memberName'])]
+        if attribute['attType'] == 'string':
+            if attribute['name'] == 'packageName':
+                name = 'pkgName'
+                value = '{}'.format(self.package)
+            else:
+                name = 'xmlns'
+                value = 'http://www.{0}.org/{0}/level3/version1/{1}/' \
+                        'version1'.format(self.language, self.package)
+            implementation = ['static const std::string {} '
+                              '= \"{}\"'.format(name, value),
+                              'return {}'.format(name)]
+        else:
+            implementation = ['return {}'.format(attribute['memberName'])]
         code = [self.create_code_block('line', implementation)]
 
         # return the parts
@@ -966,7 +981,7 @@ class SetGetFunctions():
             else:
                 implementation = ['{} = {}'.format(member, name),
                                   'return {}_OPERATION_'
-                                  'SUCCESS'.format(self.language.upper())]
+                                  'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({})'

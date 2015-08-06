@@ -74,6 +74,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.is_header = True
         else:
             self.is_header = False
+        self.cap_language = self.language.upper()
 
         self.class_object = {}
 
@@ -588,11 +589,11 @@ class BaseCppFile(BaseFile.BaseFile):
         up_package = strFunctions.upper_first(package)
         self.open_comment()
         self.write_comment_line('@enum {}{}'
-                                'TypeCode_t'.format(self.language.upper(),
+                                'TypeCode_t'.format(self.cap_language,
                                                     up_package))
         self.write_comment_line('@brief {}{}TypeCode_t is the enumeration '
                                 'of possible types from the \"{}\" '
-                                'package.'.format(self.language.upper(),
+                                'package.'.format(self.cap_language,
                                                   up_package, package))
         self.write_blank_comment_line()
         self.write_comment_line('@copydetails doc_what_are_typecodes')
@@ -620,6 +621,17 @@ class BaseCppFile(BaseFile.BaseFile):
                 enum_no += 1
             self.file_out.write('  /*!<{} */\n'.format(enum_str[i]))
         self.write_line('{} {};'.format('}', name))
+
+    # Function to write the header about the typecode enumeration
+    def write_enum_strings(self, name, enum_str):
+        number = len(enum_str)
+        self.write_line('static')
+        self.write_line('const char* {}[] ='.format(name))
+        self.write_line('{')
+        self.file_out.write('  \"{}\"\n'.format(enum_str[0]))
+        for i in range(1, number):
+            self.file_out.write(', \"{}\"\n'.format(enum_str[i]))
+        self.write_line('};')
 
     ########################################################################
 

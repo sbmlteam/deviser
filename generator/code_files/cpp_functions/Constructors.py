@@ -45,6 +45,7 @@ class Constructors():
 
     def __init__(self, language, is_cpp_api, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
@@ -140,7 +141,7 @@ class Constructors():
             if self.is_cpp_api:
                 implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
                                   '(level, version, '
-                                  'pkgVersion))'.format(self.language.upper(),
+                                  'pkgVersion))'.format(self.cap_language,
                                                         self.package)]
                 if self.has_children:
                     implementation.append('connectToChild()')
@@ -151,7 +152,7 @@ class Constructors():
             if self.is_cpp_api:
                 implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
                                   '(level, '
-                                  'version))'.format(self.language.upper())]
+                                  'version))'.format(self.cap_language)]
             else:
                 implementation = ['return new {}(level, '
                                   'version)'.format(self.class_name)]
@@ -195,7 +196,7 @@ class Constructors():
                 .format(self.package)
         else:
             title_line = title_line + ' {0}Namespaces object @p {1}ns.' \
-                .format(self.language.upper(), self.language)
+                .format(self.cap_language, self.language)
 
         params = []
         if self.package:
@@ -203,7 +204,7 @@ class Constructors():
                           .format(self.package.lower(), self.package))
         else:
             params.append('@param {0}ns the {1}Namespaces object'
-                          .format(self.language, self.language.upper()))
+                          .format(self.language, self.cap_language))
 
         return_lines = ['@throws SBMLConstructorException',
                         'Thrown if the given @p level and @p version '
@@ -234,10 +235,10 @@ class Constructors():
         else:
             if self.is_cpp_api:
                 arguments.append('{0}Namespaces *{1}ns'
-                                 .format(self.language.upper(), self.language))
+                                 .format(self.cap_language, self.language))
             else:
                 arguments.append('{0}Namespaces_t *{1}ns'
-                                 .format(self.language.upper(), self.language))
+                                 .format(self.cap_language, self.language))
             ns = '{}ns'.format(self.language)
 
         # create the function implementation
@@ -252,7 +253,7 @@ class Constructors():
                                       .format(self.package.lower()))
         else:
             implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
-                              '(level, version))'.format(self.language.upper())]
+                              '(level, version))'.format(self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
@@ -302,27 +303,7 @@ class Constructors():
         arguments = []
 
         # create the function implementation
-        constructor_args = self.write_constructor_args(self, None)
-        if self.package:
-            if self.is_cpp_api:
-                implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
-                                  '(level, version, '
-                                  'pkgVersion))'.format(self.language.upper(),
-                                                        self.package)]
-                if self.has_children:
-                    implementation.append('connectToChild()')
-            else:
-                implementation = ['return new {}(level, version, '
-                                  'pkgVersion)'.format(self.class_name)]
-        else:
-            if self.is_cpp_api:
-                implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
-                                  '(level, '
-                                  'version))'.format(self.language.upper())]
-            else:
-                implementation = ['return new {}(level, '
-                                  'version)'.format(self.class_name)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        code = [dict({'code_type': 'blank', 'code': []})]
 
         return dict({'title_line': title_line,
                      'params': params,
@@ -334,9 +315,7 @@ class Constructors():
                      'constant': False,
                      'virtual': False,
                      'object_name': self.object_name,
-                     'implementation': code,
-                     'args_no_defaults': [],
-                     'constructor_args': constructor_args})
+                     'implementation': code})
 
     # function to write copy constructor
     def write_copy_constructor(self):

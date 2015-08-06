@@ -282,7 +282,7 @@ def get_enum(element):
     if len(tc) > max_length:
         max_length = len(tc)
     value.append(tc)
-    strvalue.append('invalid')
+    strvalue.append('invalid {}'.format(name))
     return [value, strvalue, max_length]
 
 
@@ -312,3 +312,12 @@ def get_prefix(name):
             prefix += char.upper()
     return prefix
 
+
+def get_typecode_format(name, language):
+    tc = language.upper()
+    for i in range(0, len(name)):
+        char = name[i]
+        if char.isupper():
+            tc += '_'
+        tc += char.upper()
+    return tc

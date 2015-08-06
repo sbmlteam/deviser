@@ -38,22 +38,23 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, query
 
 
 class ExtensionInitFunctions():
     """Class for extension functions"""
 
-    def __init__(self, language, package, base, enums=None):
+    def __init__(self, language, package, base, enums, plugins):
         self.language = language
         self.package = package
         self.std_base = base
 
         self.enums = enums
+        self.plugins = plugins
 
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
-        self.cap_language = self.language.upper()
+        self.cap_language = language.upper()
         self.struct_name = '{}Extension'.format(self.up_package)
 
     ########################################################################
@@ -61,7 +62,7 @@ class ExtensionInitFunctions():
     # Function to initialise
 
     # function to write init
-    def write_init_function(self):
+    def write_init_function(self, static=True):
         # create comment parts
         title_line = 'Initializes {} extension by creating an object of this ' \
                      'class with the required {}Plugin derived objects and ' \
@@ -80,12 +81,51 @@ class ExtensionInitFunctions():
         # create the function declaration
         arguments = []
         function = 'init'
-        return_type = 'static void'
+        return_type = 'static void' if static else 'void'
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
-
+        code = [self.create_code_block('if', ['SBMLExtensionRegistry::'
+                                              'getInstance().isRegistered'
+                                              '(getPackageName))', 'return']),
+                self.create_code_block('line', ['{}Extension {}Extension'
+                                                ''.format(self.up_package,
+                                                          self.package)]),
+                self.create_code_block('blank', []),
+                self.create_code_block('line', ['std::vector<std::string> '
+                                                'packageURIs',
+                                                'packageURIs.push_back'
+                                                '(getXmlnsL3V1V1())'])]
+        implementation = ['SBaseExtensionPoint sbmldocExtPoint(\"core\", '
+                          'SBML_DOCUMENT)']
+        for i in range(0, len(self.plugins)):
+            name = self.plugins[i]['sbase']
+            tc = query.get_typecode_format(name, self.language)
+            implementation.append('SBaseExtensionPoint {}ExtPoint(\"core\", '
+                                  '{})'.format(name.lower(), tc))
+        code.append(self.create_code_block('line', implementation))
+        implementation = ['SBasePluginCreator<{0}SBMLDocumentPlugin, '
+                          '{0}Extension> sbmldocPluginCreator(sbmldocExtPoint, '
+                          'packageURIs)'.format(self.up_package)]
+        for i in range(0, len(self.plugins)):
+            name = self.plugins[i]['sbase']
+            implementation.append('SBasePluginCreator<{0}{1}Plugin, '
+                                  '{0}Extension> {2}PluginCreator({2}ExtPoint, '
+                                  'packageURIs)'.format(self.up_package,
+                                                        name, name.lower()))
+        code.append(self.create_code_block('line', implementation))
+        implementation = ['{}Extension.addSBasePluginCreator('
+                          '&sbmldocPluginCreator)'.format(self.package)]
+        for i in range(0, len(self.plugins)):
+            name = self.plugins[i]['sbase']
+            implementation.append('{}Extension.addSBasePluginCreator('
+                                  '&{}PluginCreator)'.format(self.package,
+                                                             name.lower()))
+        code.append(self.create_code_block('line', implementation))
+        code.append(self.create_code_block('line', ['int result = '
+                                                    'SBMLExtensionRegistry::'
+                                                    'getInstance().addExtension'
+                                                    '(&{}Extension'
+                                                    ')'.format(self.package)]))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -103,7 +143,7 @@ class ExtensionInitFunctions():
 
     # Functions for enums
 
-    def write_enum_to_string_function(self, index):
+    def write_enum_to_string_function(self, index, values=None, str_name=''):
         enum = self.enums[index]
         name = enum['name']
         abbrev_name = strFunctions.abbrev_name(name)
@@ -119,9 +159,12 @@ class ExtensionInitFunctions():
         return_type = 'const char*'
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['int min = {}'.format(values[0]),
+                          'int max = {}'.format(values[-1])]
         code = [dict({'code_type': 'line', 'code': implementation})]
-
+        code.append(self.create_code_block('if', ['{0} < min || {0} > max'.format(abbrev_name),
+                                                  'return \"(Unknown {} value)\"'.format(name)]))
+        code.append(self.create_code_block('line', ['return {}[{} - min]'.format(str_name, abbrev_name)]))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

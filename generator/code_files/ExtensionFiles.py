@@ -44,30 +44,24 @@ from util import strFunctions, query
 class ExtensionFiles():
     """Class for all Extension files"""
 
-    def __init__(self, class_object, verbose=False):
+    def __init__(self, package, verbose=False):
         # # members from object
-        self.class_object = class_object
-        # self.class_object['is_list_of'] = False
-        # self.class_object['sid_refs'] = \
-        #     query.get_sid_refs(class_object['attribs'])
-        # self.class_object['unit_sid_refs'] = \
-        #     query.get_sid_refs(class_object['attribs'], unit=True)
-
+        self.package = package
         self.verbose = verbose
 
     def write_files(self):
-        self.write_header(self.class_object)
-        self.write_code(self.class_object)
+        self.write_header()
+        self.write_code()
 
-    def write_header(self, class_desc):
-        fileout = ExtensionHeaderFile.ExtensionHeaderFile(class_desc)
+    def write_header(self):
+        fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package)
         if not self.verbose:
             print('Writing file {}'.format(fileout.name))
         fileout.write_file()
         fileout.close_file()
 
-    def write_code(self, class_desc):
-        fileout = ExtensionCodeFile.ExtensionCodeFile(class_desc)
+    def write_code(self):
+        fileout = ExtensionCodeFile.ExtensionCodeFile(self.package)
         if self.verbose:
             print('Writing file {}'.format(fileout.name))
         fileout.write_file()
@@ -75,7 +69,7 @@ class ExtensionFiles():
 
 
     def test_func(self):
-        self.write_header(self.class_object)
+        self.write_code()
  #       if self.class_object['hasListOf']:
  #           lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)

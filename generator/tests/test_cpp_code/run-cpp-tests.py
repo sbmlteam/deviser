@@ -3,7 +3,7 @@
 import os
 
 from parseXML import createPackageFromXml
-from code_files import CppFiles
+from code_files import CppFiles, ExtensionFiles
 from parseXML import ParseXML
 
 use_new = True
@@ -24,6 +24,15 @@ def generate_new_cpp_header(filename, num):
     working_class = ob['sbmlElements'][num]
     os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class)
+    all_files.write_files()
+    os.chdir('../.')
+
+
+def generate_extension_header(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ExtensionFiles.ExtensionFiles(ob)
     all_files.write_files()
     os.chdir('../.')
 
@@ -79,6 +88,27 @@ def run_test(name, num, class_name, test_case, list_of):
         if os.path.isfile(correct_cpp_file):
             print('{}.cpp'.format(class_name))
             fail += compare_files(correct_cpp_file, temp_cpp_file)
+    print('')
+    return fail
+
+
+def run_ext_test(name, class_name, test_case):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('====================================================')
+    generate_extension_header(filename)
+    correct_file = '.\\test-extension\\{}.h'.format(class_name)
+    temp_file = '.\\temp\\{}.h'.format(class_name)
+    if os.path.isfile(correct_file):
+        print('{}.h'.format(class_name))
+        fail = compare_files(correct_file, temp_file)
+    correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
+    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+    if os.path.isfile(correct_cpp_file):
+        print('{}.cpp'.format(class_name))
+        fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
 
@@ -190,6 +220,12 @@ def main():
         list_of = ''
         test_case = 'multiple versions'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'qual'
+    class_name = 'QualExtension'
+    test_case = 'basic extension file'
+    fail += run_ext_test(name, class_name, test_case)
+
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

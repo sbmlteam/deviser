@@ -58,11 +58,12 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         # members from object
         self.package = package['name']
         self.cap_package = package['name'].upper()
-        self.baseClass = '{}Extension'.format(self.language.upper())
+        self.baseClass = '{}Extension'.format(self.cap_language)
 
         self.elements = package['elements']
         self.number = package['number']
         self.enums = package['enums']
+        self.offset = package['offset']
 
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
@@ -98,11 +99,11 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line('#include <{0}/common/extern.h>'.format(self.language))
         self.write_line('#include <{}/{}'
                         'TypeCodes.h>'.format(self.language,
-                                              self.language.upper()))
+                                              self.cap_language))
 
     def write_general_includes(self):
         lang = self.language
-        up_lang = self.language.upper()
+        up_lang = self.cap_language
         self.write_line('#include <{}/extension/{}Extension.h>'.format(lang,
                                                                        up_lang))
         self.write_line('#include <{}/extension/{}'
@@ -162,7 +163,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_virtual_functions(self):
         ext_functions = ExtensionFunctions.ExtensionFunctions(self.language,
-                                                              self.package)
+                                                              self.package,
+                                                              self.elements,
+                                                              self.offset)
 
         code = ext_functions.write_get_name()
         self.write_function_declaration(code)
@@ -201,13 +204,14 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         init_functions = \
             ExtensionInitFunctions.ExtensionInitFunctions(self.language,
                                                           self.package,
-                                                          self.std_base)
+                                                          self.std_base,
+                                                          [], [])
         code = init_functions.write_init_function()
         self.write_function_declaration(code, True)
 
     ########################################################################
 
-    # write the error function
+    # write the instantiation
     def write_extension_instance(self):
         up_package = strFunctions.upper_first(self.package)
         self.open_comment()
@@ -218,26 +222,27 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                                 'class and used when creating an object of {} '
                                 'derived classes defined in the {} '
                                 'package'.format(up_package,
-                                                 self.language.upper(),
+                                                 self.cap_language,
                                                  self.std_base, self.package))
         self.write_blank_comment_line()
         self.write_comment_line('{0}ExtensionNamespaces<{1}Extension> must be '
                                 'instantiated in {1}Extension.cpp for '
-                                'DLL'.format(self.language.upper(), up_package))
+                                'DLL'.format(self.cap_language, up_package))
         self.write_blank_comment_line()
         self.close_comment()
         self.write_line('typedef {0}ExtensionNamespaces<{1}Extension> '
-                        '{1}PkgNamespaces;'.format(self.language.upper(),
+                        '{1}PkgNamespaces;'.format(self.cap_language,
                                                    up_package))
 
     ########################################################################
+
     # write the type defs
 
     def write_type_defs(self):
         # write the enum for typecodes
         self.write_type_code_enum_header(self.package)
         values = query.get_typecode_enum(self.elements)
-        name = '{}{}TypeCode_t'.format(self.language.upper(), self.up_package)
+        name = '{}{}TypeCode_t'.format(self.cap_language, self.up_package)
         self.write_enum(name, self.number, values[0], values[1], values[2]+5)
         self.skip_line(2)
 
@@ -248,7 +253,8 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             ExtensionInitFunctions.ExtensionInitFunctions(self.language,
                                                           self.package,
                                                           self.std_base,
-                                                          self.enums)
+                                                          self.enums,
+                                                          [])
 #        code = init_functions.write_init_function()
 #        self.write_function_declaration(code, True)
         self.is_cpp_api = False
@@ -269,6 +275,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
 
     ########################################################################
+
     # Functions for writing definition declaration
 
     def write_defn_begin(self):
@@ -279,7 +286,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_defn_end(self):
         self.skip_line(2)
-        self.write_line('#endif  /*  {0}_H__  */'.format(self.name))
+        self.write_line('#endif  /*  !{0}_H__  */'.format(self.name))
         self.skip_line(2)
 
     ########################################################################
