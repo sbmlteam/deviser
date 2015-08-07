@@ -31,6 +31,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbml/packages/spatial/sbml/CSGNode.h>
+#include <sbml/packages/spatial/sbml/ListOfCSGNodes.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGTranslation.h>
@@ -387,7 +388,7 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
@@ -409,7 +410,7 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);

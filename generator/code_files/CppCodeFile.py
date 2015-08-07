@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from cpp_functions import *
-from util import query
+from util import query, strFunctions
 
 
 class CppCodeFile(BaseCppFile.BaseCppFile):
@@ -95,11 +95,20 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.skip_line()
 
     def write_general_includes(self):
+        if self.has_parent_list_of:
+            lo_name = strFunctions.list_of_name(self.class_name)
+        else:
+            lo_name = ''
         if self.language == 'sbml':
             if self.package:
                 self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                                 .format(self.language, self.package.lower(),
                                         self.class_name))
+                if self.has_parent_list_of and not self.is_list_of:
+                    self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                                    .format(self.language,
+                                            self.package.lower(),
+                                            lo_name))
                 self.write_line('#include <{}/packages/{}/validator/'
                                 '{}SBMLError.h>'
                                 .format(self.language, self.package.lower(),
@@ -107,6 +116,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             else:
                 self.write_line('#include <{0}/{1}.h>'.
                                 format(self.language, self.class_name))
+                if self.has_parent_list_of and not self.is_list_of:
+                    self.write_line('#include <{0}/{1}'
+                                    '.h>'.format(self.language, lo_name))
         else:
             self.write_line('#include <{0}/{1}.h>'.
                             format(self.language, self.baseClass))

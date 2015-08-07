@@ -237,10 +237,16 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
-
-        implementation = ['return {}_'
-                          'toString({})'.format(attribute['element'],
-                                                attribute['memberName'])]
+        if self.is_cpp_api:
+            implementation = ['static const std::string code_str =  {}_'
+                              'toString({})'.format(attribute['element'],
+                                                    attribute['memberName']),
+                              'return code_str']
+        else:
+            implementation = ['return {}_toString({}->get{}()'
+                              ')'.format(attribute['element'],
+                                         self.abbrev_parent,
+                                         attribute['capAttName'])]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -608,16 +614,16 @@ class SetGetFunctions():
             arguments.append('const char * {}'.format(attribute['name']))
 
         if self.is_cpp_api:
-            implementation = ['{0}_isValidString({1}) == '
+            implementation = ['{0}_isValidString({1}.c_str()) == '
                               '0'.format(attribute['element'],
                                          attribute['name']),
                               '{} = {}'.format(attribute['memberName'],
                                                attribute['default']),
                               'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
                               '{} = {}_fromString'
-                              '({})'.format(attribute['memberName'],
-                                            attribute['element'],
-                                            attribute['name']),
+                              '({}.c_str())'.format(attribute['memberName'],
+                                                    attribute['element'],
+                                                    attribute['name']),
                               'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         else:
@@ -980,8 +986,7 @@ class SetGetFunctions():
                                   'checkAndSetSId(id, mId)']
             else:
                 implementation = ['{} = {}'.format(member, name),
-                                  'return {}_OPERATION_'
-                                  'SUCCESS'.format(self.cap_language)]
+                                  'return LIBSBML_OPERATION_SUCCESS']
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({})'

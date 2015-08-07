@@ -172,7 +172,8 @@ SpatialPoints::getCompression() const
 const std::string&
 SpatialPoints::getCompressionAsString() const
 {
-  return CompressionKind_toString(mCompression);
+  static const std::string code_str = CompressionKind_toString(mCompression);
+  return code_str;
 }
 
 
@@ -217,7 +218,8 @@ SpatialPoints::getDataType() const
 const std::string&
 SpatialPoints::getDataTypeAsString() const
 {
-  return DataKind_toString(mDataType);
+  static const std::string code_str = DataKind_toString(mDataType);
+  return code_str;
 }
 
 
@@ -311,14 +313,14 @@ SpatialPoints::setCompression(const CompressionKind_t compression)
 int
 SpatialPoints::setCompression(const std::string& compression)
 {
-  if (CompressionKind_isValidString(compression) == 0)
+  if (CompressionKind_isValidString(compression.c_str()) == 0)
   {
     mCompression = COMPRESSION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mCompression = CompressionKind_fromString(compression);
+    mCompression = CompressionKind_fromString(compression.c_str());
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -386,14 +388,14 @@ SpatialPoints::setDataType(const DataKind_t dataType)
 int
 SpatialPoints::setDataType(const std::string& dataType)
 {
-  if (DataKind_isValidString(dataType) == 0)
+  if (DataKind_isValidString(dataType.c_str()) == 0)
   {
     mDataType = DATA_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mDataType = DataKind_fromString(dataType);
+    mDataType = DataKind_fromString(dataType.c_str());
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -666,7 +668,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -762,8 +764,10 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Spatial attribute 'arrayDataLength' from the "
+        "<SpatialPoints> element must be an integer.";
       log->logPackageError("spatial", SpatialArrayDataLengthMustBeInteger,
-        getPackageVersion(), level, version, msg.str()));
+        getPackageVersion(), level, version, message);
     }
     else
     {
@@ -977,7 +981,7 @@ LIBSBML_EXTERN
 const char *
 SpatialPoints_getCompressionAsString(const SpatialPoints_t * sp)
 {
-  return CompressionKind_toString(mCompression);
+  return CompressionKind_toString(sp->getCompression());
 }
 
 
@@ -1016,7 +1020,7 @@ LIBSBML_EXTERN
 const char *
 SpatialPoints_getDataTypeAsString(const SpatialPoints_t * sp)
 {
-  return DataKind_toString(mDataType);
+  return DataKind_toString(sp->getDataType());
 }
 
 

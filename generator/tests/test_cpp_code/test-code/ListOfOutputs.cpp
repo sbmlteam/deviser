@@ -283,7 +283,7 @@ const Output*
 ListOfOutputs::getByQualitativeSpecies(const std::string& sid) const
 {
   vector<SBase*>::const_iterator result;
-  result = find_if(mItems.begin(), mItems.end(), IdEqQS<>(sid));
+  result = find_if(mItems.begin(), mItems.end(), IdEqQS(sid));
   return (result == mItems.end()) ? 0 : static_cast <const Output*> (*result);
 }
 

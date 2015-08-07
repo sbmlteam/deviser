@@ -37,8 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import ExtensionCodeFile, ExtensionHeaderFile
-from util import strFunctions, query
+import ExtensionCodeFile
+import ExtensionHeaderFile
 
 
 class ExtensionFiles():
@@ -67,9 +67,8 @@ class ExtensionFiles():
         fileout.write_file()
         fileout.close_file()
 
-
     def test_func(self):
-        self.write_code()
+        self.write_files()
  #       if self.class_object['hasListOf']:
  #           lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)

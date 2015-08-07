@@ -86,7 +86,7 @@ class ExtensionInitFunctions():
         # create the function implementation
         code = [self.create_code_block('if', ['SBMLExtensionRegistry::'
                                               'getInstance().isRegistered'
-                                              '(getPackageName))', 'return']),
+                                              '(getPackageName())', 'return']),
                 self.create_code_block('line', ['{}Extension {}Extension'
                                                 ''.format(self.up_package,
                                                           self.package)]),
@@ -159,12 +159,17 @@ class ExtensionInitFunctions():
         return_type = 'const char*'
 
         # create the function implementation
-        implementation = ['int min = {}'.format(values[0]),
-                          'int max = {}'.format(values[-1])]
-        code = [dict({'code_type': 'line', 'code': implementation})]
-        code.append(self.create_code_block('if', ['{0} < min || {0} > max'.format(abbrev_name),
-                                                  'return \"(Unknown {} value)\"'.format(name)]))
-        code.append(self.create_code_block('line', ['return {}[{} - min]'.format(str_name, abbrev_name)]))
+        if values:
+            implementation = ['int min = {}'.format(values[0]),
+                              'int max = {}'.format(values[-1])]
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    self.create_code_block('if', [
+                        '{0} < min || {0} > max'.format(abbrev_name),
+                        'return \"(Unknown {} value)\"'.format(name)]),
+                    self.create_code_block('line', [
+                        'return {}[{} - min]'.format(str_name, abbrev_name)])]
+        else:
+            code = []
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -178,7 +183,7 @@ class ExtensionInitFunctions():
                      'object_name': name,
                      'implementation': code})
 
-    def write_enum_from_string_function(self, index):
+    def write_enum_from_string_function(self, index, values=None, str_name=''):
         enum = self.enums[index]
         name = enum['name']
         # create comment parts
@@ -193,8 +198,21 @@ class ExtensionInitFunctions():
         return_type = '{}_t'.format(name)
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if values:
+            implementation = ['static int size = sizeof({0})/sizeof'
+                              '({0}[0])'.format(str_name),
+                              'std::string type(code)']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+            if_code = self.create_code_block('if', ['type == {}'
+                                                    '[i]'.format(str_name),
+                                                    'return ({}_t)'
+                                                    '(i)'.format(name)])
+            code.append(self.create_code_block('for', ['int i = 0; i < size; '
+                                                       'i++', if_code]))
+            code.append(self.create_code_block
+                        ('line', ['return {}'.format(values[-1])]))
+        else:
+            code = []
 
         # return the parts
         return dict({'title_line': title_line,
@@ -209,7 +227,7 @@ class ExtensionInitFunctions():
                      'object_name': name,
                      'implementation': code})
 
-    def write_is_valid_enum_function(self, index):
+    def write_is_valid_enum_function(self, index, values=None):
         enum = self.enums[index]
         name = enum['name']
         abbrev_name = strFunctions.abbrev_name(name)
@@ -225,8 +243,16 @@ class ExtensionInitFunctions():
         return_type = 'int'
 
         # create the function implementation
-        implementation = ['mElementName = name']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if values:
+            implementation = ['int min = {}'.format(values[0]),
+                              'int max = {}'.format(values[-1])]
+            code = [dict({'code_type': 'line', 'code': implementation}),
+                    self.create_code_block
+                    ('if_else',
+                     ['{0} < min || {0} >= max'.format(abbrev_name),
+                      'return 0', 'else', 'return 1'])]
+        else:
+            code = []
 
         # return the parts
         return dict({'title_line': title_line,
@@ -256,7 +282,8 @@ class ExtensionInitFunctions():
         return_type = 'int'.format(name)
 
         # create the function implementation
-        implementation = ['mElementName = name']
+        implementation = ['return {0}_isValid({0}_'
+                          'fromString(code))'.format(name)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

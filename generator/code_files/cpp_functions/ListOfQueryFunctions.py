@@ -338,7 +338,7 @@ class ListOfQueryFunctions():
             implementation = ['vector<{}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq{}<>(sid))'.format(up_name),
+                              'IdEq{}(sid))'.format(up_name),
                               'return (result == mItems.end()) ? 0 : '
                               'static_cast  <const {}*> '
                               '(*result)'.format(self.object_child_name)]
@@ -651,7 +651,7 @@ class ListOfQueryFunctions():
             if not self.is_list_of and self.has_id:
                 implementation.append('else if')
                 implementation.append('{0}->isSetId() '
-                                      '&& ({1}->get({0}->getId())) '
+                                      '&& ({1}.get({0}->getId())) '
                                       '!= NULL'.format(self.abbrev_child,
                                                        member))
                 implementation.append('return LIBSBML_DUPLICATE_OBJECT_ID')
@@ -876,8 +876,8 @@ class ListOfQueryFunctions():
                 return_type = '{}*'.format(loname)
         else:
             function = '{}_get{}'.format(self.class_name, loname)
-            arguments = ['const {}* {}'.format(self.object_name,
-                                               self.abbrev_parent)]
+            arguments = ['{}* {}'.format(self.object_name,
+                                         self.abbrev_parent)]
             return_type = 'ListOf_t*'
         if self.is_cpp_api:
             implementation = ['return '

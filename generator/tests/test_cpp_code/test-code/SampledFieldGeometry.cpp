@@ -55,7 +55,7 @@ SampledFieldGeometry::SampledFieldGeometry(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion)
   : GeometryDefinition(level, version)
-  , mSampledVolumes (NULL)
+  , mSampledVolumes (level, version, pkgVersion)
   , mSampledField ("")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
@@ -70,7 +70,7 @@ SampledFieldGeometry::SampledFieldGeometry(unsigned int level,
  */
 SampledFieldGeometry::SampledFieldGeometry(SpatialPkgNamespaces *spatialns)
   : GeometryDefinition(spatialns)
-  , mSampledVolumes (NULL)
+  , mSampledVolumes (spatialns)
   , mSampledField ("")
 {
   setElementNamespace(spatialns->getURI());
@@ -297,7 +297,7 @@ SampledFieldGeometry::addSampledVolume(const SampledVolume* sv)
   {
     return LIBSBML_NAMESPACES_MISMATCH;
   }
-  else if (sv->isSetId() && (mSampledVolumes->get(sv->getId())) != NULL)
+  else if (sv->isSetId() && (mSampledVolumes.get(sv->getId())) != NULL)
   {
     return LIBSBML_DUPLICATE_OBJECT_ID;
   }
@@ -590,7 +590,7 @@ SampledFieldGeometry::getElementByMetaId(const std::string& metaid)
  * arbitrary depth.
  */
 List*
-SampledFieldGeometry::getAllElements(ElementFilter * filter = NULL)
+SampledFieldGeometry::getAllElements(ElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
@@ -677,7 +677,7 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -860,7 +860,7 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg)
  */
 LIBSBML_EXTERN
 ListOf_t*
-SampledFieldGeometry_getListOfSampledVolumes(const SampledFieldGeometry_t* sfg)
+SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg)
 {
   return (sfg != NULL) ? sfg->getListOfSampledVolumes() : NULL;
 }

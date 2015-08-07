@@ -395,7 +395,7 @@ Boundary::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -449,8 +449,10 @@ Boundary::readAttributes(const XMLAttributes& attributes,
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Spatial attribute 'value' from the <Boundary> "
+        "element must be an integer.";
       log->logPackageError("spatial", SpatialValueMustBeDouble,
-        getPackageVersion(), level, version, msg.str()));
+        getPackageVersion(), level, version, message);
     }
     else
     {

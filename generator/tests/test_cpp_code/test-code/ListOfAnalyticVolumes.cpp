@@ -290,7 +290,7 @@ const AnalyticVolume*
 ListOfAnalyticVolumes::getByDomainType(const std::string& sid) const
 {
   vector<SBase*>::const_iterator result;
-  result = find_if(mItems.begin(), mItems.end(), IdEqDT<>(sid));
+  result = find_if(mItems.begin(), mItems.end(), IdEqDT(sid));
   return (result == mItems.end()) ? 0 : static_cast <const AnalyticVolume*>
     (*result);
 }

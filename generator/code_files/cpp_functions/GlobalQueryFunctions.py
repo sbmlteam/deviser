@@ -49,6 +49,7 @@ class GlobalQueryFunctions():
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
+        self.is_header = class_object['is_header']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -228,8 +229,10 @@ class GlobalQueryFunctions():
         # create the function declaration
         function = 'getAllElements'
         return_type = 'List*'
-        arguments = ['ElementFilter * filter = NULL']
-
+        if self.is_header:
+            arguments = ['ElementFilter * filter = NULL']
+        else:
+            arguments = ['ElementFilter* filter']
         implementation = ['List* ret = new List()', 'List* sublist = NULL']
         code = [self.create_code_block('line', implementation)]
         implementation = []

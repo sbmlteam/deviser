@@ -31,6 +31,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbml/packages/qual/sbml/Output.h>
+#include <sbml/packages/qual/sbml/ListOfOutputs.h>
 #include <sbml/packages/qual/validator/QualSBMLError.h>
 
 
@@ -172,7 +173,9 @@ Output::getTransitionEffect() const
 const std::string&
 Output::getTransitionEffectAsString() const
 {
-  return TransitionOutputEffect_toString(mTransitionEffect);
+  static const std::string code_str =
+    TransitionOutputEffect_toString(mTransitionEffect);
+  return code_str;
 }
 
 
@@ -304,14 +307,15 @@ Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 int
 Output::setTransitionEffect(const std::string& transitionEffect)
 {
-  if (TransitionOutputEffect_isValidString(transitionEffect) == 0)
+  if (TransitionOutputEffect_isValidString(transitionEffect.c_str()) == 0)
   {
     mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mTransitionEffect = TransitionOutputEffect_fromString(transitionEffect);
+    mTransitionEffect =
+      TransitionOutputEffect_fromString(transitionEffect.c_str());
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -596,7 +600,7 @@ Output::readAttributes(const XMLAttributes& attributes,
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
@@ -618,7 +622,7 @@ Output::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -747,8 +751,10 @@ Output::readAttributes(const XMLAttributes& attributes,
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Qual attribute 'outputLevel' from the <Output> "
+        "element must be an integer.";
       log->logPackageError("qual", QualOutputLevelMustBeInteger,
-        getPackageVersion(), level, version, msg.str()));
+        getPackageVersion(), level, version, message);
     }
   }
 }
@@ -907,7 +913,7 @@ LIBSBML_EXTERN
 const char *
 Output_getTransitionEffectAsString(const Output_t * o)
 {
-  return TransitionOutputEffect_toString(mTransitionEffect);
+  return TransitionOutputEffect_toString(o->getTransitionEffect());
 }
 
 

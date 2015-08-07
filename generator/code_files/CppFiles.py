@@ -91,8 +91,10 @@ class CppFiles():
         return descrip
 
     def test_func(self):
-        self.write_code(self.class_object)
- #       if self.class_object['hasListOf']:
- #           lo_working_class = self.create_list_of_description()
+        self.write_files()
+#        self.write_code(self.class_object)
+#        self.write_header(self.class_object)
+#        if self.class_object['hasListOf']:
+#            lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)
- #           self.write_code(lo_working_class)
+#            self.write_code(lo_working_class)

@@ -529,11 +529,18 @@ class Constructors():
     def write_constructor_args(self, ns):
         if ns is None:
             constructor_args = [': {}(level, version)'.format(self.base_class)]
+            parameters = 'level, version, pkgVersion'
         else:
             constructor_args = [': {}({})'.format(self.base_class, ns)]
+            parameters = '{}ns'.format(self.package.lower())
         for attrib in self.attributes:
-            constructor_args.append(', {} ({})'.format(attrib['memberName'],
-                                                       attrib['default']))
+            if attrib['attType'] == 'lo_element':
+                constructor_args.append(', {} '
+                                        '({})'.format(attrib['memberName'],
+                                                      parameters))
+            else:
+                constructor_args.append(', {} ({})'.format(attrib['memberName'],
+                                                           attrib['default']))
             if attrib['isNumber'] or attrib['attType'] == 'boolean':
                 constructor_args.append(', mIsSet{} (false)'
                                         .format(attrib['capAttName']))

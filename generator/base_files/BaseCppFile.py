@@ -53,7 +53,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
         # expand the information for the attributes
         if attributes:
-            self.attributes = self.expand_attributes(self, attributes)
+            self.attributes = self.expand_attributes(attributes)
             self.child_elements = self.get_children()
             self.child_lo_elements = self.get_lo_children()
         else:
@@ -99,12 +99,14 @@ class BaseCppFile(BaseFile.BaseFile):
         self.has_non_std_children = False
         self.num_non_std_children = 0
         self.class_attributes = []
+        self.has_parent_list_of = False
 
     ########################################################################
 
     def expand_class(self, class_object):
         self.class_object = class_object
         self.is_list_of = class_object['is_list_of']
+        self.has_parent_list_of = class_object['hasListOf']
         self.name = class_object['name']
         self.class_name = class_object['name']
         self.package = class_object['package']
@@ -175,6 +177,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_object['has_math'] = self.has_math
         self.class_object['has_children'] = self.has_children
         self.class_object['has_only_math'] = self.has_only_math
+        self.class_object['has_parent_list_of'] = self.has_parent_list_of
         self.class_object['num_children'] = self.num_children
         self.class_object['has_non_std_chilren'] = self.has_non_std_children
         self.class_object['num_non_std_children'] = self.num_non_std_children
@@ -184,7 +187,7 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # Function to expand the attribute information
     @staticmethod
-    def expand_attributes(self, attributes):
+    def expand_attributes(attributes):
         root = None
         if len(attributes) > 0:
             if 'root' in attributes[0]:

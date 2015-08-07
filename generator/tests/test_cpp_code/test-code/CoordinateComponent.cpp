@@ -31,6 +31,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbml/packages/spatial/sbml/CoordinateComponent.h>
+#include <sbml/packages/spatial/sbml/ListOfCoordinateComponents.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
 
 
@@ -194,7 +195,8 @@ CoordinateComponent::getType() const
 const std::string&
 CoordinateComponent::getTypeAsString() const
 {
-  return CoordinateKind_toString(mType);
+  static const std::string code_str = CoordinateKind_toString(mType);
+  return code_str;
 }
 
 
@@ -276,14 +278,14 @@ CoordinateComponent::setType(const CoordinateKind_t type)
 int
 CoordinateComponent::setType(const std::string& type)
 {
-  if (CoordinateKind_isValidString(type) == 0)
+  if (CoordinateKind_isValidString(type.c_str()) == 0)
   {
     mType = COORDINATE_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mType = CoordinateKind_fromString(type);
+    mType = CoordinateKind_fromString(type.c_str());
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -814,7 +816,7 @@ CoordinateComponent::getElementByMetaId(const std::string& metaid)
  * arbitrary depth.
  */
 List*
-CoordinateComponent::getAllElements(ElementFilter * filter = NULL)
+CoordinateComponent::getAllElements(ElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
@@ -926,7 +928,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
@@ -950,7 +952,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -1180,7 +1182,7 @@ LIBSBML_EXTERN
 const char *
 CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc)
 {
-  return CoordinateKind_toString(mType);
+  return CoordinateKind_toString(cc->getType());
 }
 
 

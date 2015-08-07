@@ -1049,7 +1049,7 @@ Transition_unsetName(Transition_t * t);
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfInputs(const Transition_t* t);
+Transition_getListOfInputs(Transition_t* t);
 
 
 /**
@@ -1196,7 +1196,7 @@ Transition_removeInputById(Transition_t* t, const char* sid);
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfOutputs(const Transition_t* t);
+Transition_getListOfOutputs(Transition_t* t);
 
 
 /**
@@ -1345,7 +1345,7 @@ Transition_removeOutputById(Transition_t* t, const char* sid);
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfFunctionTerms(const Transition_t* t);
+Transition_getListOfFunctionTerms(Transition_t* t);
 
 
 /**

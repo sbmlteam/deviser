@@ -350,7 +350,7 @@ class ProtectedFunctions():
                 'numErrs = log->getNumErrors()']
         code.append(self.create_code_block('line', line))
 
-        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
+        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
@@ -742,7 +742,7 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def get_error_from_list_of_read(self):
-        line = ['log->getError(n)->geErrorId() == UnknownPackageAttribute',
+        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
@@ -989,8 +989,11 @@ class ProtectedFunctions():
         line = ['log->getNumErrors() == numErrs + 1 && '
                 'log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
+                'std::string message = \"{} attribute \'{}\' '
+                'from the <{}> element must be an '
+                'integer.\"'.format(self.package, name, self.class_name),
                 'log->logPackageError(\"{}\", {}{}MustBe{},'
-                ' getPackageVersion(), level, version, msg.str()))'.format(
+                ' getPackageVersion(), level, version, message)'.format(
                     self.package.lower(), self.package, up_name, num_type)]
         if reqd:
             line += ['else',
@@ -1005,20 +1008,6 @@ class ProtectedFunctions():
             if_error = self.create_code_block('if_else', line)
         else:
             if_error = self.create_code_block('if', line)
-
-        # line = ['isSetId()', 'msg << \"with id \'\" << getId() << \"\' \"']
-        # if_id = self.create_code_block('if', line)
-        #
-        # line = ['{} < 0'.format(member), 'std::stringstream msg',
-        #         'msg << \"The {} of the <{}> \"'.format(name,
-        # self.class_name),
-        #         if_id,
-        #         'msg << \"is \'\" << {} << \"\', which is '
-        #         'negative.\"'.format(member),
-        #         'log->logPackageError(\"{}\", {}{}MustBeNonNegative,'
-        #         ' getPackageVersion(), level, version'.format(
-        #             self.package.lower(), self.package, up_name)]
-        # if_neg = self.create_code_block('if', line)
 
         line = [' {} == false'.format(set_name),
                 if_error]

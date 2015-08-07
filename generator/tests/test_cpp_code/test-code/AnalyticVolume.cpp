@@ -31,6 +31,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbml/packages/spatial/sbml/AnalyticVolume.h>
+#include <sbml/packages/spatial/sbml/ListOfAnalyticVolumes.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
 #include <sbml/math/MathML.h>
 
@@ -183,7 +184,8 @@ AnalyticVolume::getFunctionType() const
 const std::string&
 AnalyticVolume::getFunctionTypeAsString() const
 {
-  return FunctionKind_toString(mFunctionType);
+  static const std::string code_str = FunctionKind_toString(mFunctionType);
+  return code_str;
 }
 
 
@@ -286,14 +288,14 @@ AnalyticVolume::setFunctionType(const FunctionKind_t functionType)
 int
 AnalyticVolume::setFunctionType(const std::string& functionType)
 {
-  if (FunctionKind_isValidString(functionType) == 0)
+  if (FunctionKind_isValidString(functionType.c_str()) == 0)
   {
     mFunctionType = FUNCTION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mFunctionType = FunctionKind_fromString(functionType);
+    mFunctionType = FunctionKind_fromString(functionType.c_str());
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -685,7 +687,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
@@ -709,7 +711,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -804,8 +806,10 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Spatial attribute 'ordinal' from the "
+        "<AnalyticVolume> element must be an integer.";
       log->logPackageError("spatial", SpatialOrdinalMustBeInteger,
-        getPackageVersion(), level, version, msg.str()));
+        getPackageVersion(), level, version, message);
     }
   }
 
@@ -1004,7 +1008,7 @@ LIBSBML_EXTERN
 const char *
 AnalyticVolume_getFunctionTypeAsString(const AnalyticVolume_t * av)
 {
-  return FunctionKind_toString(mFunctionType);
+  return FunctionKind_toString(av->getFunctionType());
 }
 
 

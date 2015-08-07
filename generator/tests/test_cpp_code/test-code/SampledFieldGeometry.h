@@ -722,8 +722,7 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg);
  */
 LIBSBML_EXTERN
 ListOf_t*
-SampledFieldGeometry_getListOfSampledVolumes(const SampledFieldGeometry_t*
-  sfg);
+SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
 
 
 /**

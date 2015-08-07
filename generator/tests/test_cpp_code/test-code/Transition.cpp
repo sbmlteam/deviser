@@ -31,6 +31,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sbml/packages/qual/sbml/Transition.h>
+#include <sbml/packages/qual/sbml/ListOfTransitions.h>
 #include <sbml/packages/qual/validator/QualSBMLError.h>
 #include <sbml/util/ElementFilter.h>
 
@@ -57,9 +58,9 @@ Transition::Transition(unsigned int level,
   : SBase(level, version)
   , mId ("")
   , mName ("")
-  , mInputs (NULL)
-  , mOutputs (NULL)
-  , mFunctionTerms (NULL)
+  , mInputs (level, version, pkgVersion)
+  , mOutputs (level, version, pkgVersion)
+  , mFunctionTerms (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new QualPkgNamespaces(level, version, pkgVersion));
   connectToChild();
@@ -73,9 +74,9 @@ Transition::Transition(QualPkgNamespaces *qualns)
   : SBase(qualns)
   , mId ("")
   , mName ("")
-  , mInputs (NULL)
-  , mOutputs (NULL)
-  , mFunctionTerms (NULL)
+  , mInputs (qualns)
+  , mOutputs (qualns)
+  , mFunctionTerms (qualns)
 {
   setElementNamespace(qualns->getURI());
   connectToChild();
@@ -347,7 +348,7 @@ Transition::addInput(const Input* i)
   {
     return LIBSBML_NAMESPACES_MISMATCH;
   }
-  else if (i->isSetId() && (mInputs->get(i->getId())) != NULL)
+  else if (i->isSetId() && (mInputs.get(i->getId())) != NULL)
   {
     return LIBSBML_DUPLICATE_OBJECT_ID;
   }
@@ -527,7 +528,7 @@ Transition::addOutput(const Output* o)
   {
     return LIBSBML_NAMESPACES_MISMATCH;
   }
-  else if (o->isSetId() && (mOutputs->get(o->getId())) != NULL)
+  else if (o->isSetId() && (mOutputs.get(o->getId())) != NULL)
   {
     return LIBSBML_DUPLICATE_OBJECT_ID;
   }
@@ -993,7 +994,7 @@ Transition::getElementByMetaId(const std::string& metaid)
  * arbitrary depth.
  */
 List*
-Transition::getAllElements(ElementFilter * filter = NULL)
+Transition::getAllElements(ElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
@@ -1102,7 +1103,7 @@ Transition::readAttributes(const XMLAttributes& attributes,
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
@@ -1124,7 +1125,7 @@ Transition::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->geErrorId() == UnknownPackageAttribute)
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
@@ -1360,7 +1361,7 @@ Transition_unsetName(Transition_t * t)
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfInputs(const Transition_t* t)
+Transition_getListOfInputs(Transition_t* t)
 {
   return (t != NULL) ? t->getListOfInputs() : NULL;
 }
@@ -1463,7 +1464,7 @@ Transition_removeInputById(Transition_t* t, const char* sid)
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfOutputs(const Transition_t* t)
+Transition_getListOfOutputs(Transition_t* t)
 {
   return (t != NULL) ? t->getListOfOutputs() : NULL;
 }
@@ -1567,7 +1568,7 @@ Transition_removeOutputById(Transition_t* t, const char* sid)
  */
 LIBSBML_EXTERN
 ListOf_t*
-Transition_getListOfFunctionTerms(const Transition_t* t)
+Transition_getListOfFunctionTerms(Transition_t* t)
 {
   return (t != NULL) ? t->getListOfFunctionTerms() : NULL;
 }
