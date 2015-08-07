@@ -947,6 +947,8 @@ Transition::getElementByMetaId(const std::string& metaid)
     return NULL;
   }
 
+  SBase* obj = NULL;
+
   if (mInputs.getMetaId() == metaid)
   {
     return &mInputs;
@@ -961,8 +963,6 @@ Transition::getElementByMetaId(const std::string& metaid)
   {
     return &mFunctionTerms;
   }
-
-  SBase* obj = NULL;
 
   obj = mInputs.getElementByMetaId(metaid);
 

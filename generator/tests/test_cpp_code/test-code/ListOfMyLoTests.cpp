@@ -371,15 +371,15 @@ ListOfMyLoTests::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
+  TEST_CREATE_NS(testns, getSBMLNamespaces());
 
   if (name == "myLoTest")
   {
-    TEST_CREATE_NS(testns, getSBMLNamespaces());
     object = new MyLoTest(testns);
     appendAndOwn(object);
-    delete testns;
   }
 
+  delete testns;
   return object;
 }
 

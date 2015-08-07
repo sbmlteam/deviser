@@ -45,6 +45,7 @@ class GeneralFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.has_std_base = class_object['has_std_base']
@@ -473,7 +474,8 @@ class GeneralFunctions():
     @property
     def write_write_elements(self):
         if not self.status == 'cpp_not_list':
-            return
+            if not(self.status == 'cpp_list' and len(self.child_elements) > 0):
+                return
 
         # create comment parts
         title_line = 'Write any contained elements'

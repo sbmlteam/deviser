@@ -567,12 +567,12 @@ SampledFieldGeometry::getElementByMetaId(const std::string& metaid)
     return NULL;
   }
 
+  SBase* obj = NULL;
+
   if (mSampledVolumes.getMetaId() == metaid)
   {
     return &mSampledVolumes;
   }
-
-  SBase* obj = NULL;
 
   obj = mSampledVolumes.getElementByMetaId(metaid);
 

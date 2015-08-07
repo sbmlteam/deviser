@@ -213,6 +213,13 @@ def main():
     test_case = 'attribute on ListOf'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'qual'
+    num = 5
+    class_name = 'FunctionTerm'
+    list_of = 'ListOfFunctionTerms'
+    test_case = 'an element on ListOf'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if use_new:
         name = 'test_vers'
         num = 0
@@ -225,7 +232,6 @@ def main():
     class_name = 'QualExtension'
     test_case = 'basic extension file'
     fail += run_ext_test(name, class_name, test_case)
-
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

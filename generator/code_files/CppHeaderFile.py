@@ -243,7 +243,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # function to write the get/set/isSet/unset functions for single
     # child elements
     def write_child_element_functions(self):
-        if self.is_list_of:
+        if not self.has_children:
             return
 
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,

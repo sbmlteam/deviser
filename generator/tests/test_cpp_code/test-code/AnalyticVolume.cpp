@@ -122,6 +122,7 @@ AnalyticVolume::operator=(const AnalyticVolume& rhs)
     mOrdinal = rhs.mOrdinal;
     mIsSetOrdinal = rhs.mIsSetOrdinal;
     mDomainType = rhs.mDomainType;
+    delete mMath;
     if (rhs.mMath != NULL)
     {
       mMath = rhs.mMath->deepCopy();

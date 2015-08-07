@@ -316,15 +316,15 @@ ListOfCoordinateComponents::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
+  SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
 
   if (name == "coordinateComponent")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CoordinateComponent(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
+  delete spatialns;
   return object;
 }
 

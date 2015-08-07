@@ -343,15 +343,15 @@ ListOfOutputs::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
+  QUAL_CREATE_NS(qualns, getSBMLNamespaces());
 
   if (name == "output")
   {
-    QUAL_CREATE_NS(qualns, getSBMLNamespaces());
     object = new Output(qualns);
     appendAndOwn(object);
-    delete qualns;
   }
 
+  delete qualns;
   return object;
 }
 

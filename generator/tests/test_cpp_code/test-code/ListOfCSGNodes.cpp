@@ -480,71 +480,57 @@ ListOfCSGNodes::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SBase* object = NULL;
+  SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
 
   if (name == "csgNode")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGNode(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgPrimitive")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGPrimitive(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgTranslation")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGTranslation(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgRotation")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGRotation(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgScale")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGScale(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgHomogeneousTransformation")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGHomogeneousTransformation(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgPseudoPrimitive")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGPseudoPrimitive(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
   if (name == "csgSetOperator")
   {
-    SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
     object = new CSGSetOperator(spatialns);
     appendAndOwn(object);
-    delete spatialns;
   }
 
+  delete spatialns;
   return object;
 }
 

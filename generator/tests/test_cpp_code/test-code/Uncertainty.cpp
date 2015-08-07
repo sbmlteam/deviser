@@ -108,6 +108,7 @@ Uncertainty::operator=(const Uncertainty& rhs)
     SBase::operator=(rhs);
     mId = rhs.mId;
     mName = rhs.mName;
+    delete mUncertML;
     if (rhs.mUncertML != NULL)
     {
       mUncertML = rhs.mUncertML->clone();

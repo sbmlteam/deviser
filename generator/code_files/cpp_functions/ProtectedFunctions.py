@@ -138,19 +138,45 @@ class ProtectedFunctions():
         ns = '{}ns'.format(self.package.lower())
         upkg = self.package.upper()
         if self.is_list_of:
-            implementation = ['const std::string& name = '
-                              'stream.peek().getName()',
-                              '{}* object = NULL'.format(self.std_base)]
-            code = [dict({'code_type': 'line', 'code': implementation})]
-            implementation = self.write_create_object_class(self.child_name,
-                                                            upkg, ns)
-            code.append(self.create_code_block('if', implementation))
-            for i in range(0, len(self.concretes)):
-                implementation = \
-                    self.write_create_object_class(self.concretes[i]['element'],
-                                                   upkg, ns)
+            if num_children == 0:
+                implementation = ['const std::string& name = '
+                                  'stream.peek().getName()',
+                                  '{}* object = NULL'.format(self.std_base),
+                                  '{}_CREATE_NS({}, '
+                                  'getSBMLNamespaces())'.format(upkg, ns)]
+                code = [dict({'code_type': 'line', 'code': implementation})]
+                implementation = self.write_create_object_class(self.child_name,
+                                                                ns)
                 code.append(self.create_code_block('if', implementation))
-            code.append(self.create_code_block('line', ['return object']))
+                for i in range(0, len(self.concretes)):
+                    implementation = \
+                        self.write_create_object_class(
+                            self.concretes[i]['element'], ns)
+                    code.append(self.create_code_block('if', implementation))
+                code.append(self.create_code_block('line',
+                                                   ['delete {}'.format(ns),
+                                                    'return object']))
+            else:
+                # the unusual case where a list of have a child element
+                # is not of the same type as the list of
+                implementation = ['const std::string& name = '
+                                  'stream.peek().getName()',
+                                  '{}* object = NULL'.format(self.std_base),
+                                  '{}_CREATE_NS({}, '
+                                  'getSBMLNamespaces())'.format(upkg, ns)]
+                code = [dict({'code_type': 'line', 'code': implementation})]
+                implementation = self.write_create_object_class(self.child_name,
+                                                                ns)
+                code.append(self.create_code_block('if', implementation))
+                for i in range(0, len(self.child_elements)):
+                    implementation = \
+                        self.write_create_object_class(
+                            self.child_elements[i]['element'], ns, True)
+                    code.append(self.create_code_block('if', implementation))
+                code.append(self.create_code_block('line',
+                                                   ['delete {}'.format(ns),
+                                                    'return object']))
+
         else:
             code = [self.create_code_block('line',
                                            ['{}* obj = '
@@ -769,16 +795,19 @@ class ProtectedFunctions():
         return line
 
     @staticmethod
-    def write_create_object_class(name, upkg, ns):
-        implementation = ['name == '
-                          '\"{}\"'.format(strFunctions.lower_first(name)),
-                          '{}_CREATE_NS({}, '
-                          'getSBMLNamespaces())'.format(upkg,
-                                                        ns),
-                          'object = new {}({})'.format(name,
-                                                       ns),
-                          'appendAndOwn(object)',
-                          'delete {}'.format(ns)]
+    def write_create_object_class(name, ns, create=False):
+        if not create:
+            implementation = ['name == '
+                              '\"{}\"'.format(strFunctions.lower_first(name)),
+                              'object = new {}({})'.format(name, ns),
+                              'appendAndOwn(object)']
+        else:
+            abbrev = strFunctions.abbrev_name(name)
+            implementation = ['name == '
+                              '\"{}\"'.format(strFunctions.lower_first(name)),
+                              '{} new{}({})'.format(name, abbrev.upper(), ns),
+                              'set{}(&new{})'.format(name, abbrev.upper()),
+                              'object = get{}()'.format(name)]
         return implementation
 
     def write_write_att(self, attributes, index, code):

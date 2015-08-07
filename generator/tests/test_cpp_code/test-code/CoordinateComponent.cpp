@@ -122,6 +122,7 @@ CoordinateComponent::operator=(const CoordinateComponent& rhs)
     mId = rhs.mId;
     mType = rhs.mType;
     mUnit = rhs.mUnit;
+    delete mBoundaryMin;
     if (rhs.mBoundaryMin != NULL)
     {
       mBoundaryMin = rhs.mBoundaryMin->clone();
@@ -131,6 +132,7 @@ CoordinateComponent::operator=(const CoordinateComponent& rhs)
       mBoundaryMin = NULL;
     }
 
+    delete mBoundaryMax;
     if (rhs.mBoundaryMax != NULL)
     {
       mBoundaryMax = rhs.mBoundaryMax->clone();
@@ -771,17 +773,33 @@ CoordinateComponent::getElementBySId(const std::string& id)
 
   SBase* obj = NULL;
 
-  T;
-  O;
-   ;
-  D;
-  O;
+  if (mBoundaryMin != NULL)
+  {
+    if (mBoundaryMin->getId() == id)
+    {
+      return mBoundaryMin;
+    }
 
-  T;
-  O;
-   ;
-  D;
-  O;
+    obj = mBoundaryMin->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mBoundaryMax != NULL)
+  {
+    if (mBoundaryMax->getId() == id)
+    {
+      return mBoundaryMax;
+    }
+
+    obj = mBoundaryMax->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
 
   return obj;
 }
@@ -799,15 +817,37 @@ CoordinateComponent::getElementByMetaId(const std::string& metaid)
     return NULL;
   }
 
-  if (TO DO.getMetaId == metaid)
+  SBase* obj = NULL;
+
+  if (mBoundaryMin != NULL)
   {
-    return &TO DO;
+    if (mBoundaryMin->getMetaId() == metaid)
+    {
+      return mBoundaryMin;
+    }
+
+    obj = mBoundaryMin->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
   }
 
-  if (TO DO.getMetaId == metaid)
+  if (mBoundaryMax != NULL)
   {
-    return &TO DO;
+    if (mBoundaryMax->getMetaId() == metaid)
+    {
+      return mBoundaryMax;
+    }
+
+    obj = mBoundaryMax->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
   }
+
+  return obj;
 }
 
 

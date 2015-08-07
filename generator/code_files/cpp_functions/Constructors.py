@@ -389,6 +389,7 @@ class Constructors():
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             member = element['memberName']
+            args += ['delete {}'.format(member)]
             if element['element'] == 'ASTNode':
                 clone = 'deepCopy'
             implementation = ['rhs.{} != NULL'.format(member),

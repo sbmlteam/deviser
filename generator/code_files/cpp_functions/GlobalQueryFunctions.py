@@ -121,14 +121,28 @@ class GlobalQueryFunctions():
         if_block = ['obj != NULL', 'return obj']
         if_code = self.create_code_block('if', if_block)
         for i in range(0, len(self.child_elements)):
-            code.append(self.create_code_block('line', 'TO DO'))
+            name = self.child_elements[i]['memberName']
+            middle_if = self.create_code_block('if', ['{}->getId() == '
+                                                      'id'.format(name),
+                                                      'return {}'.format(name)])
+            code.append(self.create_code_block('if', ['{} != NULL'.format(name),
+                                                      middle_if,
+                                                      'obj = {}->getElementBy'
+                                                      'SId(id)'.format(name),
+                                                      if_code]))
 
         for i in range(0, len(self.child_lo_elements)):
             line = [' obj = {}.getElementBy'
                     'SId(id)'.format(self.child_lo_elements[i]['memberName'])]
             code.append(self.create_code_block('line', line))
             code.append(if_code)
-        code.append(self.create_code_block('line', ['return obj']))
+
+        if self.is_list_of:
+            code.append(self.create_code_block('line',
+                                               ['return ListOf::'
+                                                'getElementBySId(id)']))
+        else:
+            code.append(self.create_code_block('line', ['return obj']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -167,13 +181,23 @@ class GlobalQueryFunctions():
         arguments = ['const std::string& metaid']
 
         code = [self.create_code_block('if',
-                                       ['metaid.empty()', 'return NULL'])]
+                                       ['metaid.empty()', 'return NULL']),
+                self.create_code_block('line', ['SBase* obj = NULL'])]
+        if_block = ['obj != NULL', 'return obj']
+        if_code = self.create_code_block('if', if_block)
         for i in range(0, len(self.child_elements)):
-            code.append(
-                self.create_code_block('if',
-                                       ['{}.getMetaId == '
-                                        'metaid'.format('TO DO'),
-                                        'return &{}'.format('TO DO')]))
+            name = self.child_elements[i]['memberName']
+            middle_if = self.create_code_block('if',
+                                               ['{}->getMetaId() == '
+                                                'metaid'.format(name),
+                                                'return {}'.format(name)])
+            code.append(self.create_code_block('if',
+                                               ['{} != NULL'.format(name),
+                                                middle_if,
+                                                'obj = {}->getElementBy'
+                                                'MetaId(metaid)'.format(name),
+                                                if_code]))
+
         num_lo = len(self.child_lo_elements)
         name = []
         for i in range(0, num_lo):
@@ -183,16 +207,21 @@ class GlobalQueryFunctions():
             code.append(self.create_code_block('if', first_if))
         if_block = ['obj != NULL', 'return obj']
         if_code = self.create_code_block('if', if_block)
-        if num_lo > 0:
-            code.append(self.create_code_block('line',
-                                               ['{}* obj = '
-                                                'NULL'.format(self.std_base)]))
+        # if num_lo > 0:
+        #     code.append(self.create_code_block('line',
+        #                                        ['{}* obj = '
+        #                                         'NULL'.format(self.std_base)]))
         for i in range(0, num_lo):
             line = 'obj = {}.getElementByMetaId' \
                    '(metaid)'.format(name[i])
             code.append(self.create_code_block('line', [line]))
             code.append(if_code)
-        if num_lo > 0:
+#        if num_lo > 0:
+        if self.is_list_of:
+            code.append(self.create_code_block('line',
+                                               ['return ListOf::getElement'
+                                                'ByMetaId(metaid)']))
+        else:
             code.append(self.create_code_block('line', ['return obj']))
 
         # return the parts
@@ -233,7 +262,11 @@ class GlobalQueryFunctions():
             arguments = ['ElementFilter * filter = NULL']
         else:
             arguments = ['ElementFilter* filter']
-        implementation = ['List* ret = new List()', 'List* sublist = NULL']
+        sublist = 'NULL'
+        if self.is_list_of:
+            sublist = 'ListOf::getAllElements(filter)'
+        implementation = ['List* ret = new List()',
+                          'List* sublist = {}'.format(sublist)]
         code = [self.create_code_block('line', implementation)]
         implementation = []
         for i in range(0, len(self.child_elements)):
