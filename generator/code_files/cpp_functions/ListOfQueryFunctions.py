@@ -47,11 +47,17 @@ class ListOfQueryFunctions():
         self.language = language
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
         self.class_object = class_object
         self.package = class_object['package']
         if is_list_of:
             self.child_name = class_object['lo_child']
             self.class_name = class_object['name']
+        elif self.is_plugin:
+            self.child_name = strFunctions.upper_first(class_object['element'])
+            self.class_name = class_object['plugin']
         else:
             self.child_name = strFunctions.upper_first(class_object['element'])
             self.class_name = class_object['parent']['name']
@@ -632,22 +638,37 @@ class ListOfQueryFunctions():
         else:
             else_lines = ['append({})'.format(self.abbrev_child),
                           'return LIBSBML_OPERATION_SUCCESS']
+        this_object = query.get_class(self.object_child_name,
+                                      self.class_object['root'])
         if self.is_cpp_api:
             implementation = ['{} == NULL'.format(self.abbrev_child),
                               'return LIBSBML_OPERATION_FAILED', 'else if',
                               '{}->hasRequiredAttributes() == '
                               'false'.format(self.abbrev_child),
-                              'return LIBSBML_INVALID_OBJECT', 'else if',
-                              'getLevel() != {}->'
-                              'getLevel()'.format(self.abbrev_child),
-                              'return LIBSBML_LEVEL_MISMATCH', 'else if',
-                              'getVersion() != {}->'
-                              'getVersion()'.format(self.abbrev_child),
-                              'return LIBSBML_VERSION_MISMATCH', 'else if',
-                              'matchesRequiredSBMLNamespacesForAddition'
-                              '(static_cast<const {}*>({})) == '
-                              'false'.format(self.std_base, self.abbrev_child),
-                              'return LIBSBML_NAMESPACES_MISMATCH']
+                              'return LIBSBML_INVALID_OBJECT']
+            if this_object and 'hasChildren' in this_object \
+                    and this_object['hasChildren']:
+                implementation += ['else if',
+                                   '{}->hasRequiredElements() == '
+                                   'false'.format(self.abbrev_child),
+                                   'return LIBSBML_INVALID_OBJECT']
+            implementation += ['else if',
+                               'getLevel() != {}->'
+                               'getLevel()'.format(self.abbrev_child),
+                               'return LIBSBML_LEVEL_MISMATCH', 'else if',
+                               'getVersion() != {}->'
+                               'getVersion()'.format(self.abbrev_child),
+                               'return LIBSBML_VERSION_MISMATCH', 'else if']
+            if self.is_plugin:
+                implementation.append('getPackageVersion() != {}->getPackage'
+                                      'Version()'.format(self.abbrev_child))
+                implementation.append('return LIBSBML_PKG_VERSION_MISMATCH')
+            else:
+                implementation.append('matchesRequiredSBMLNamespacesForAddition'
+                                      '(static_cast<const {}*>({})) == '
+                                      'false'.format(self.std_base,
+                                                     self.abbrev_child))
+                implementation.append('return LIBSBML_NAMESPACES_MISMATCH')
             if not self.is_list_of and self.has_id:
                 implementation.append('else if')
                 implementation.append('{0}->isSetId() '

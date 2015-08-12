@@ -358,7 +358,6 @@ class ParseXML():
         the definition contained in it
         """
 
-        elements = []
         plugins = []
         enums = []
 
@@ -410,14 +409,14 @@ class ParseXML():
 
             # read references to elements
             for reference in node.getElementsByTagName('reference'):
-                temp = self.find_element(elements,
+                temp = self.find_element(self.elements,
                                          self.get_value(reference, 'name'))
                 if temp is not None:
                     plug_elements.append(temp)
 
             # look for references to ListOf elements
             for reference in node.getElementsByTagName('reference'):
-                temp = self.find_lo_element(elements,
+                temp = self.find_lo_element(self.elements,
                                             self.get_value(reference, 'name'))
                 if temp is not None:
                     plug_lo_elements.append(temp)

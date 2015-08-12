@@ -37,6 +37,16 @@ def generate_extension_header(filename):
     os.chdir('../.')
 
 
+def generate_plugin_header(filename, num):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ExtensionFiles.ExtensionFiles(ob)
+    all_files.write_plugin_files(num)
+    os.chdir('../.')
+
+
+
 # reads file containing expected sbml model and returns it as string
 def read_file(path):
     filein = open(path, 'r')
@@ -107,6 +117,27 @@ def run_ext_test(name, class_name, test_case):
     correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
     temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
     if os.path.isfile(correct_cpp_file):
+        print('{}.cpp'.format(class_name))
+        fail += compare_files(correct_cpp_file, temp_cpp_file)
+    print('')
+    return fail
+
+
+def run_plug_test(name, class_name, test_case, num):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('====================================================')
+    generate_plugin_header(filename, num)
+    correct_file = '.\\test-extension\\{}.h'.format(class_name)
+    temp_file = '.\\temp\\{}.h'.format(class_name)
+    if os.path.isfile(correct_file):
+        print('{}.h'.format(class_name))
+        fail = compare_files(correct_file, temp_file)
+    correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
+    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+    if os.path.isfile(correct_cpp_file) and os.path.isfile(temp_cpp_file):
         print('{}.cpp'.format(class_name))
         fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
@@ -232,6 +263,12 @@ def main():
     class_name = 'QualExtension'
     test_case = 'basic extension file'
     fail += run_ext_test(name, class_name, test_case)
+
+    name = 'qual'
+    num = 0
+    class_name = 'QualModelPlugin'
+    test_case = 'basic plugin'
+    fail += run_plug_test(name, class_name, test_case, num)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

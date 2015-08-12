@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    ExtensionFiles.py
-# @brief   class for generating the extension files
+# @file    PluginFiles.py
+# @brief   class for generating the plugin files
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -39,6 +39,9 @@
 
 import ExtensionCodeFile
 import ExtensionHeaderFile
+import CppCodeFile
+import CppHeaderFile
+from util import strFunctions
 
 
 class ExtensionFiles():
@@ -53,8 +56,28 @@ class ExtensionFiles():
         self.write_header()
         self.write_code()
 
+    def write_plugin_files(self, num):
+        self.write_plugin_header(num)
+        # self.write_code()
+
     def write_header(self):
         fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package)
+        if not self.verbose:
+            print('Writing file {}'.format(fileout.name))
+        fileout.write_file()
+        fileout.close_file()
+
+    def write_plugin_header(self, num):
+        class_descrip = self.create_class_description(num)
+        fileout = CppHeaderFile.CppHeaderFile(class_descrip)
+        if not self.verbose:
+            print('Writing file {}'.format(fileout.name))
+        fileout.write_file()
+        fileout.close_file()
+
+    def write_plugin_code(self, num):
+        class_descrip = self.create_class_description(num)
+        fileout = CppCodeFile.CppCodeFile(class_descrip)
         if not self.verbose:
             print('Writing file {}'.format(fileout.name))
         fileout.write_file()
@@ -67,8 +90,59 @@ class ExtensionFiles():
         fileout.write_file()
         fileout.close_file()
 
-    def test_func(self):
-        self.write_files()
+    def create_class_description(self, num):
+        class_object = self.package['plugins'][num]
+        up_package = strFunctions.upper_first(self.package['name'])
+        class_object['name'] = '{}{}Plugin'.format(up_package,
+                                                   class_object['sbase'])
+        class_object['is_plugin'] = True
+        class_object['is_list_of'] = False
+        class_object['hasListOf'] = False
+        class_object['package'] = self.package['name']
+        class_object['typecode'] = ''
+        class_object['baseClass'] = 'SBasePlugin'
+        class_object['sid_refs'] = []
+        class_object['unit_sid_refs'] = []
+        class_object['hasMath'] = False
+        for i in range(0, len(class_object['extension'])):
+            class_object['attribs'].append(self.get_attrib_descrip
+                                           (class_object['extension'][i]))
+
+        for i in range(0, len(class_object['lo_extension'])):
+            class_object['attribs'].append(self.get_attrib_descrip
+                                           (class_object['lo_extension'][i]))
+
+        return class_object
+
+    @staticmethod
+    def get_attrib_descrip(element):
+        if element['isListOf']:
+            attr_name = strFunctions.list_of_name(element['name'])
+            attr_type = 'lo_element'
+            attr_element = element['name']
+        else:
+            attr_name = element['name']
+            attr_type = 'element'
+            attr_element = element['name']
+        attribute_dict = dict({'type': attr_type,
+                               'reqd': False,
+                               'name': attr_name,
+                               'element': attr_element,
+                               'abstract': False,
+                               'num_versions': 1,
+                               'version': 1,
+                               'version_info': [True],
+                               'parent': element,
+                               'root': element['root']
+                               })
+        return attribute_dict
+
+    def test_func(self, num=-1):
+        if num == -1:
+            self.write_files()
+        else:
+#            self.write_plugin_header(num)
+            self.write_plugin_code(num)
  #       if self.class_object['hasListOf']:
  #           lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)

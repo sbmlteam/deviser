@@ -100,6 +100,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.num_non_std_children = 0
         self.class_attributes = []
         self.has_parent_list_of = False
+        self.is_plugin = False
 
     ########################################################################
 
@@ -121,14 +122,24 @@ class BaseCppFile(BaseFile.BaseFile):
         if self.package[0].islower():
             self.package = strFunctions.upper_first(class_object['package'])
 
+        # are we a plugin
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
+        if self.is_plugin:
+            self.std_base = 'SBasePlugin'
+
         # information about the base class
         self.baseClass = class_object['baseClass']
         if self.language != 'sbml':
             self.std_base = 'Foo'
             self.has_std_base = False
-        elif not self.is_list_of and self.baseClass != 'SBase':
+        elif not self.is_list_of and not self.is_plugin \
+                and self.baseClass != 'SBase':
             self.has_std_base = False
-        elif self.is_list_of and self.baseClass != 'ListOf':
+        elif self.is_list_of and not self.is_plugin \
+                and self.baseClass != 'ListOf':
+            self.has_std_base = False
+        elif self.is_plugin and self.baseClass != 'SBasePlugin':
             self.has_std_base = False
         self.class_object['has_std_base'] = self.has_std_base
         self.class_object['std_base'] = self.std_base

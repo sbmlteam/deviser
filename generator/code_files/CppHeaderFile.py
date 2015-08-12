@@ -118,23 +118,30 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_common_includes(self):
         self.write_line('#include <{0}/common/extern.h>'.format(self.language))
-        self.write_line('#include <{0}/common/{0}fwd.h>'.format(self.language))
-        if self.package:
-            self.write_line('#include <{0}/packages/{1}/common/{1}fwd.h>'.
-                            format(self.language, self.package.lower()))
+        if not self.is_plugin:
+            self.write_line('#include <{0}/common/{0}fwd.'
+                            'h>'.format(self.language))
+            if self.package:
+                self.write_line('#include <{0}/packages/{1}/common/{1}fwd.h>'.
+                                format(self.language, self.package.lower()))
 
     def write_general_includes(self):
-        self.write_line('#include <string>')
-        self.skip_line(2)
+        if not self.is_plugin:
+            self.write_line('#include <string>')
+            self.skip_line(2)
         if self.has_std_base:
-            self.write_line('#include <{0}/{1}.h>'.
-                            format(self.language, self.baseClass))
+            if not self.is_plugin:
+                self.write_line('#include <{0}/{1}.h>'.
+                                format(self.language, self.baseClass))
+            else:
+                self.write_line('#include <{0}/extension/{1}.h>'.
+                                format(self.language, self.baseClass))
         else:
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     self.baseClass))
 
-        if self.package:
+        if self.package and not self.is_plugin:
             self.write_line(
                 '#include <{0}/packages/{1}/extension/{2}Extension.h>'
                 .format(self.language, self.package.lower(), self.package))
@@ -152,7 +159,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     child))
-
+            if self.is_plugin:
+                child = self.child_lo_elements[i]['element']
+                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                                .format(self.language, self.package.lower(),
+                                        child))
         if self.is_list_of:
             child = self.list_of_child
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
@@ -183,11 +194,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         constructor = Constructors.Constructors(self.language,
                                                 self.is_cpp_api,
                                                 self.class_object)
-        if self.is_cpp_api:
+        if self.is_cpp_api and not self.is_plugin:
             code = constructor.write_level_version_constructor()
             self.write_function_declaration(code)
 
             code = constructor.write_namespace_constructor()
+            self.write_function_declaration(code)
+        elif self.is_plugin:
+            code = constructor.write_uri_constructor()
             self.write_function_declaration(code)
         else:
             for i in range(0, len(self.concretes)+1):
@@ -297,14 +311,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_rename_sidrefs()
         self.write_function_declaration(code)
 
-        code = gen_functions.write_get_element_name()
-        self.write_function_declaration(code)
+        if not self.is_plugin:
+            code = gen_functions.write_get_element_name()
+            self.write_function_declaration(code)
 
         code = gen_functions.write_set_element_name()
         self.write_function_declaration(code, exclude=True)
 
-        code = gen_functions.write_get_typecode()
-        self.write_function_declaration(code)
+        if not self.is_plugin:
+            code = gen_functions.write_get_typecode()
+            self.write_function_declaration(code)
 
         code = gen_functions.write_get_item_typecode()
         self.write_function_declaration(code)
@@ -330,6 +346,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_connect_to_child()
         self.write_function_declaration(code, exclude=True)
 
+        if self.is_plugin:
+            code = gen_functions.write_connect_to_parent()
+            self.write_function_declaration(code, exclude=True)
+
         code = gen_functions.write_enable_package()
         self.write_function_declaration(code, exclude=True)
 
@@ -354,6 +374,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         code = gen_functions.write_get_all_elements()
         self.write_function_declaration(code)
+
+        if self.is_plugin:
+            code = gen_functions.write_append_from()
+            self.write_function_declaration(code, True)
 
     ########################################################################
 
@@ -553,11 +577,12 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_class(self.baseClass, self.name, self.attributes)
         self.write_cppns_end()
         self.write_cpp_end()
-        self.write_swig_begin()
-        self.write_cppns_begin()
-        self.write_cdecl_begin()
-        self.write_c_header()
-        self.write_cdecl_end()
-        self.write_cppns_end()
-        self.write_swig_end()
+        if not self.is_plugin:
+            self.write_swig_begin()
+            self.write_cppns_begin()
+            self.write_cdecl_begin()
+            self.write_c_header()
+            self.write_cdecl_end()
+            self.write_cppns_end()
+            self.write_swig_end()
         self.write_defn_end()

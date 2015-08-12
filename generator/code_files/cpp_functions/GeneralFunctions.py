@@ -52,6 +52,9 @@ class GeneralFunctions():
         self.base_class = class_object['baseClass']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -505,7 +508,10 @@ class GeneralFunctions():
                               'code': implementation}))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
-            name = strFunctions.upper_first(att['pluralName'])
+            if self.is_plugin:
+                name = att['pluralName'][6:]
+            else:
+                name = strFunctions.upper_first(att['pluralName'])
             implementation = ['getNum{}() > '
                               '0'.format(name),
                               '{}.write(stream)'.format(att['memberName'])]
@@ -761,6 +767,55 @@ class GeneralFunctions():
         function = 'connectToChild'
         return_type = 'void'
         arguments = []
+
+        # create the function implementation
+        implementation = ['{}::connectToChild()'.format(self.base_class)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+        for i in range(0, len(self.child_elements)):
+            att = self.child_elements[i]
+            if 'is_ml' in att and att['is_ml']:
+                continue
+            else:
+                implementation = ['{} != NULL'.format(att['memberName']),
+                                  '{}->connectToParent'
+                                  '(this)'.format(att['memberName'])]
+                code.append(self.create_code_block('if', implementation))
+        for i in range(0, len(self.child_lo_elements)):
+            att = self.child_lo_elements[i]
+            implementation = ['{}.connectToParent'
+                              '(this)'.format(att['memberName'])]
+            code.append(dict({'code_type': 'line',
+                              'code': implementation}))
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write connectToParent
+    def write_connect_to_parent(self):
+        if not self.is_cpp_api:
+            return
+        elif not self.has_children:
+            return
+
+        # create comment parts
+        title_line = 'Connects to parent element'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'connectToParent'
+        return_type = 'void'
+        arguments = ['SBase* sbase']
 
         # create the function implementation
         implementation = ['{}::connectToChild()'.format(self.base_class)]

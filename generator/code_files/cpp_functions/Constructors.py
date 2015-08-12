@@ -65,6 +65,9 @@ class Constructors():
         self.child_elements = class_object['child_elements']
         self.overwrites_children = class_object['overwrites_children']
         self.xml_name = strFunctions.lower_first(class_object['name'])
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
 
     ########################################################################
 
@@ -136,7 +139,7 @@ class Constructors():
                          'unsigned int version']
 
         # create the function implementation
-        constructor_args = self.write_constructor_args(self, None)
+        constructor_args = self.write_constructor_args(None)
         if self.package:
             if self.is_cpp_api:
                 implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
@@ -242,7 +245,7 @@ class Constructors():
             ns = '{}ns'.format(self.language)
 
         # create the function implementation
-        constructor_args = self.write_constructor_args(self, ns)
+        constructor_args = self.write_constructor_args(ns)
         if self.package:
             implementation = ['setElementNamespace({}'
                               'ns->getURI())'.format(self.package.lower())]
@@ -316,6 +319,48 @@ class Constructors():
                      'virtual': False,
                      'object_name': self.object_name,
                      'implementation': code})
+
+    # function to write uri constructor for plugins
+    def write_uri_constructor(self):
+        ob_name = self.object_name
+        package = self.package.lower()
+        up_package = strFunctions.upper_first(self.package)
+        # create doc string header
+        title_line = 'Creates a new {0} using the given uri, prefix and ' \
+                     'package namespace.'.format(ob_name)
+        params = ['@param uri a string, representing the uri of the package',
+                  '@param prefix a string, the prefix to be used',
+                  '@param {}ns, a pointer to the {}PkgNamespaces object to '
+                  'be used'.format(package, up_package)]
+
+        return_lines = []
+        additional = ''
+
+        # create the function declaration
+        function = self.class_name
+        return_type = ''
+
+        arguments = ['const std::string& uri', 'const std::string& prefix',
+                     '{}PkgNamespaces* '
+                     '{}ns'.format(up_package, package)]
+
+        ns = '{}ns'.format(package)
+        constructor_args = self.write_constructor_args(ns)
+        # create the function implementation
+        code = [dict({'code_type': 'line', 'code': ['connectToChild()']})]
+
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'constructor_args': constructor_args})
 
     # function to write copy constructor
     def write_copy_constructor(self):
@@ -526,11 +571,14 @@ class Constructors():
 
     # HELPER FUNCTIONS
 
-    @staticmethod
     def write_constructor_args(self, ns):
         if ns is None:
             constructor_args = [': {}(level, version)'.format(self.base_class)]
             parameters = 'level, version, pkgVersion'
+        elif ns is not None and self.is_plugin:
+            constructor_args = [': {}(uri, prefix, '
+                                '{})'.format(self.base_class, ns)]
+            parameters = '{}'.format(ns)
         else:
             constructor_args = [': {}({})'.format(self.base_class, ns)]
             parameters = '{}ns'.format(self.package.lower())

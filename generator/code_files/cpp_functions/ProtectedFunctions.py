@@ -291,6 +291,8 @@ class ProtectedFunctions():
     def write_add_expected_attributes(self):
         if self.is_list_of:
             return
+        elif len(self.attributes) == 0:
+            return
         # create comment parts
         title_line = 'Adds the expected attributes for this element'
         params = []
@@ -343,6 +345,8 @@ class ProtectedFunctions():
     # function to write readAttributes
     def write_read_attributes(self):
         if self.is_list_of:
+            return
+        elif len(self.attributes) == 0:
             return
 
         # create comment

@@ -101,9 +101,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             lo_name = ''
         if self.language == 'sbml':
             if self.package:
-                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                folder = self.language if not self.is_plugin else 'extension'
+                self.write_line('#include <{0}/packages/{1}/{2}/{3}.h>'
                                 .format(self.language, self.package.lower(),
-                                        self.class_name))
+                                        folder, self.class_name))
                 if self.has_parent_list_of and not self.is_list_of:
                     self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                                     .format(self.language,
@@ -126,6 +127,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(self.child_lo_elements) > 0:
             self.write_line('#include <{}'
                             '/util/ElementFilter.h>'.format(self.language))
+        if self.is_plugin and self.language == 'sbml':
+            self.write_line('#include <sbml/Model.h>')
 
         if self.has_math:
             self.write_line('#include <{}/math/MathML.h>'.format(self.language))
@@ -184,11 +187,14 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         constructor = Constructors.Constructors(self.language,
                                                 self.is_cpp_api,
                                                 self.class_object)
-        if self.is_cpp_api:
+        if self.is_cpp_api and not self.is_plugin:
             code = constructor.write_level_version_constructor()
             self.write_function_implementation(code)
 
             code = constructor.write_namespace_constructor()
+            self.write_function_implementation(code)
+        elif self.is_plugin:
+            code = constructor.write_uri_constructor()
             self.write_function_implementation(code)
         else:
             for i in range(0, len(self.concretes)+1):
@@ -298,14 +304,16 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_rename_sidrefs()
         self.write_function_implementation(code)
 
-        code = gen_functions.write_get_element_name()
-        self.write_function_implementation(code)
+        if not self.is_plugin:
+            code = gen_functions.write_get_element_name()
+            self.write_function_implementation(code)
 
         code = gen_functions.write_set_element_name()
         self.write_function_implementation(code, exclude=True)
 
-        code = gen_functions.write_get_typecode()
-        self.write_function_implementation(code)
+        if not self.is_plugin:
+            code = gen_functions.write_get_typecode()
+            self.write_function_implementation(code)
 
         code = gen_functions.write_get_item_typecode()
         self.write_function_implementation(code)
@@ -331,6 +339,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_connect_to_child()
         self.write_function_implementation(code, exclude=True)
 
+        if self.is_plugin:
+            code = gen_functions.write_connect_to_parent()
+            self.write_function_implementation(code, exclude=True)
+
         code = gen_functions.write_enable_package()
         self.write_function_implementation(code, exclude=True)
 
@@ -355,6 +367,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         code = gen_functions.write_get_all_elements()
         self.write_function_implementation(code)
+
+        if self.is_plugin:
+            code = gen_functions.write_append_from()
+            self.write_function_implementation(code, True)
 
     ########################################################################
 
@@ -479,6 +495,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             element['std_base'] = self.std_base
             element['package'] = self.package
             element['is_header'] = self.is_header
+            element['is_plugin'] = self.is_plugin
+            if self.is_plugin:
+                element['plugin'] = self.class_name
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,
@@ -558,5 +577,6 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_cpp_begin()
         self.write_class()
         self.write_cpp_end()
-        self.write_c_code()
+        if not self.is_plugin:
+            self.write_c_code()
         self.write_cppns_end()

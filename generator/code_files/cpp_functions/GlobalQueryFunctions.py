@@ -298,6 +298,62 @@ class GlobalQueryFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
+    ########################################################################
+
+    # Function for writing code for comp flattening
+
+    # function to write appendFrom
+    def write_append_from(self):
+        # only write for elements with  base derived children in cpp
+        if not self.is_cpp_api or self.num_children == 0:
+                return
+
+        # create comment parts
+        title_line = 'Append items from model (used in comp flattening)'
+        params = ['@param model a pointer to a model object']
+        return_lines = ['']
+        additional = []
+
+        # create the function declaration
+        function = 'appendFrom'
+        return_type = 'int'
+        arguments = ['const Model* model']
+        sublist = 'NULL'
+        if self.is_list_of:
+            sublist = 'ListOf::getAllElements(filter)'
+        implementation = ['List* ret = new List()',
+                          'List* sublist = {}'.format(sublist)]
+        code = [self.create_code_block('line', implementation)]
+        implementation = []
+        for i in range(0, len(self.child_elements)):
+            name = self.child_elements[i]['memberName']
+            implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
+                                  'filter)'.format(name))
+        code.append(self.create_code_block('line', implementation))
+        implementation = []
+        for i in range(0, len(self.child_lo_elements)):
+            name = self.child_lo_elements[i]['memberName']
+            implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
+                                  'filter)'.format(name))
+        code.append(self.create_code_block('line', implementation))
+        code.append(self.create_code_block('line',
+                                           ['ADD_FILTERED_FROM_PLUGIN(ret, '
+                                            'sublist, filter)']))
+        code.append(self.create_code_block('line', ['return ret']))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
     @staticmethod
     def create_code_block(code_type, lines):
         code = dict({'code_type': code_type, 'code': lines})
