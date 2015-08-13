@@ -55,6 +55,9 @@ class GeneralFunctions():
         self.is_plugin = False
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+        self.ext_class = ''
+        if self.is_plugin:
+            self.ext_class = class_object['sbase']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -493,8 +496,11 @@ class GeneralFunctions():
 
         # create the function implementation
         base = self.base_class
-        code = [dict({'code_type': 'line',
-                      'code': ['{}::writeElements(stream)'.format(base)]})]
+        if not self.is_plugin:
+            code = [dict({'code_type': 'line',
+                          'code': ['{}::writeElements(stream)'.format(base)]})]
+        else:
+            code = []
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
@@ -517,12 +523,10 @@ class GeneralFunctions():
                               '{}.write(stream)'.format(att['memberName'])]
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
-        code.append(dict({'code_type': 'line',
-                          'code': ['{}::writeExtension'
-                                   'Elements(stream)'.format(base)]}))
-#        implementation = ['{}::writeElements(stream)'.format(base),
-#                        '{}::writeExtensionElements(stream)'.format(base)]
-#        code = [dict({'code_type': 'line', 'code': implementation})]
+        if not self.is_plugin:
+            code.append(dict({'code_type': 'line',
+                              'code': ['{}::writeExtension'
+                                       'Elements(stream)'.format(base)]}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -559,8 +563,17 @@ class GeneralFunctions():
             implementation = ['return v.visit(*this)']
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
-            code = [dict({'code_type': 'line',
-                          'code': ['v.visit(*this)']})]
+            if not self.is_plugin:
+                code = [dict({'code_type': 'line',
+                              'code': ['v.visit(*this)']})]
+            else:
+                obj = strFunctions.abbrev_name(self.ext_class)
+                implementation = ['const {0}* {1} = static_cast<const {0}*>'
+                                  '(this->getParentSBMLObject()'
+                                  ')'.format(self.ext_class, obj),
+                                  'v.visit(*{})'.format(obj),
+                                  'v.leave(*{})'.format(obj)]
+                code = [self.create_code_block('line', implementation)]
             for i in range(0, len(self.child_elements)):
                 implementation = ['{}.accept(v)'.format('TO DO')]
                 code.append(dict({'code_type': 'line',
@@ -570,8 +583,11 @@ class GeneralFunctions():
                 implementation = ['{}.accept(v)'.format(att['memberName'])]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
-            code.append(dict({'code_type': 'line',
-                              'code': ['v.leave(*this)', 'return true']}))
+            if not self.is_plugin:
+                code.append(dict({'code_type': 'line',
+                                  'code': ['v.leave(*this)', 'return true']}))
+            else:
+                code.append(self.create_code_block('line', ['return true']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -715,9 +731,11 @@ class GeneralFunctions():
                      'const std::string& pkgPrefix', 'bool flag']
 
         # create the function implementation
-        implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
-                          'flag)'.format(self.base_class)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        code = []
+        if not self.is_plugin:
+            implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
+                              'flag)'.format(self.base_class)]
+            code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]
@@ -769,23 +787,28 @@ class GeneralFunctions():
         arguments = []
 
         # create the function implementation
-        implementation = ['{}::connectToChild()'.format(self.base_class)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
-        for i in range(0, len(self.child_elements)):
-            att = self.child_elements[i]
-            if 'is_ml' in att and att['is_ml']:
-                continue
-            else:
-                implementation = ['{} != NULL'.format(att['memberName']),
-                                  '{}->connectToParent'
+        if not self.is_plugin:
+            implementation = ['{}::connectToChild()'.format(self.base_class)]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+            for i in range(0, len(self.child_elements)):
+                att = self.child_elements[i]
+                if 'is_ml' in att and att['is_ml']:
+                    continue
+                else:
+                    implementation = ['{} != NULL'.format(att['memberName']),
+                                      '{}->connectToParent'
+                                      '(this)'.format(att['memberName'])]
+                    code.append(self.create_code_block('if', implementation))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                implementation = ['{}.connectToParent'
                                   '(this)'.format(att['memberName'])]
-                code.append(self.create_code_block('if', implementation))
-        for i in range(0, len(self.child_lo_elements)):
-            att = self.child_lo_elements[i]
-            implementation = ['{}.connectToParent'
-                              '(this)'.format(att['memberName'])]
-            code.append(dict({'code_type': 'line',
-                              'code': implementation}))
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+        else:
+            code = [self.create_code_block('line',
+                                           ['connectToParent(getParent'
+                                            'SBMLObject())'])]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -818,7 +841,7 @@ class GeneralFunctions():
         arguments = ['SBase* sbase']
 
         # create the function implementation
-        implementation = ['{}::connectToChild()'.format(self.base_class)]
+        implementation = ['{}::connectToParent(sbase)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
@@ -827,14 +850,15 @@ class GeneralFunctions():
             else:
                 implementation = ['{} != NULL'.format(att['memberName']),
                                   '{}->connectToParent'
-                                  '(this)'.format(att['memberName'])]
+                                  '(sbase)'.format(att['memberName'])]
                 code.append(self.create_code_block('if', implementation))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
             implementation = ['{}.connectToParent'
-                              '(this)'.format(att['memberName'])]
+                              '(sbase)'.format(att['memberName'])]
             code.append(dict({'code_type': 'line',
                               'code': implementation}))
+
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

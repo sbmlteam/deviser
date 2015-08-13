@@ -125,8 +125,8 @@ class BaseCppFile(BaseFile.BaseFile):
         # are we a plugin
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
-        if self.is_plugin:
-            self.std_base = 'SBasePlugin'
+        # if self.is_plugin:
+        #     self.std_base = 'SBasePlugin'
 
         # information about the base class
         self.baseClass = class_object['baseClass']

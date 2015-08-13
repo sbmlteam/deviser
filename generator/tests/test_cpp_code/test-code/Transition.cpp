@@ -1025,7 +1025,7 @@ Transition::createObject(XMLInputStream& stream)
 {
   SBase* obj = NULL;
 
-  const string& name = stream.peek().getName();
+  const std::string& name = stream.peek().getName();
 
   if (name == "listOfInputs")
   {

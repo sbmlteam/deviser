@@ -49,6 +49,9 @@ class GlobalQueryFunctions():
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
         self.is_header = class_object['is_header']
         if is_list_of:
             self.child_name = class_object['lo_child']
@@ -113,36 +116,41 @@ class GlobalQueryFunctions():
         return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& id']
 
-        implementation = ['id.empty()', 'return NULL']
-        code = [self.create_code_block('if', implementation),
-                self.create_code_block('line', ['{}* obj = '
-                                                'NULL'.format(self.std_base)])]
+        code = []
+        if not self.is_header:
+            implementation = ['id.empty()', 'return NULL']
+            code = [self.create_code_block('if', implementation),
+                    self.create_code_block('line',
+                                           ['{}* obj = '
+                                            'NULL'.format(self.std_base)])]
 
-        if_block = ['obj != NULL', 'return obj']
-        if_code = self.create_code_block('if', if_block)
-        for i in range(0, len(self.child_elements)):
-            name = self.child_elements[i]['memberName']
-            middle_if = self.create_code_block('if', ['{}->getId() == '
-                                                      'id'.format(name),
-                                                      'return {}'.format(name)])
-            code.append(self.create_code_block('if', ['{} != NULL'.format(name),
-                                                      middle_if,
-                                                      'obj = {}->getElementBy'
-                                                      'SId(id)'.format(name),
-                                                      if_code]))
+            if_block = ['obj != NULL', 'return obj']
+            if_code = self.create_code_block('if', if_block)
+            for i in range(0, len(self.child_elements)):
+                name = self.child_elements[i]['memberName']
+                middle_if = self.create_code_block('if',
+                                                   ['{}->getId() == '
+                                                    'id'.format(name),
+                                                    'return {}'.format(name)])
+                code.append(self.create_code_block('if',
+                                                   ['{} != NULL'.format(name),
+                                                    middle_if,
+                                                    'obj = {}->getElementBy'
+                                                    'SId(id)'.format(name),
+                                                    if_code]))
 
-        for i in range(0, len(self.child_lo_elements)):
-            line = [' obj = {}.getElementBy'
-                    'SId(id)'.format(self.child_lo_elements[i]['memberName'])]
-            code.append(self.create_code_block('line', line))
-            code.append(if_code)
+            for i in range(0, len(self.child_lo_elements)):
+                line = [' obj = {}.getElementBySId('
+                        'id)'.format(self.child_lo_elements[i]['memberName'])]
+                code.append(self.create_code_block('line', line))
+                code.append(if_code)
 
-        if self.is_list_of:
-            code.append(self.create_code_block('line',
-                                               ['return ListOf::'
-                                                'getElementBySId(id)']))
-        else:
-            code.append(self.create_code_block('line', ['return obj']))
+            if self.is_list_of:
+                code.append(self.create_code_block('line',
+                                                   ['return ListOf::'
+                                                    'getElementBySId(id)']))
+            else:
+                code.append(self.create_code_block('line', ['return obj']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -180,49 +188,47 @@ class GlobalQueryFunctions():
         return_type = '{}*'.format(self.std_base)
         arguments = ['const std::string& metaid']
 
-        code = [self.create_code_block('if',
-                                       ['metaid.empty()', 'return NULL']),
-                self.create_code_block('line', ['SBase* obj = NULL'])]
-        if_block = ['obj != NULL', 'return obj']
-        if_code = self.create_code_block('if', if_block)
-        for i in range(0, len(self.child_elements)):
-            name = self.child_elements[i]['memberName']
-            middle_if = self.create_code_block('if',
-                                               ['{}->getMetaId() == '
-                                                'metaid'.format(name),
-                                                'return {}'.format(name)])
-            code.append(self.create_code_block('if',
-                                               ['{} != NULL'.format(name),
-                                                middle_if,
-                                                'obj = {}->getElementBy'
-                                                'MetaId(metaid)'.format(name),
-                                                if_code]))
+        code = []
+        if not self.is_header:
+            code = [self.create_code_block('if',
+                                           ['metaid.empty()', 'return NULL']),
+                    self.create_code_block('line', ['SBase* obj = NULL'])]
+            if_block = ['obj != NULL', 'return obj']
+            if_code = self.create_code_block('if', if_block)
+            for i in range(0, len(self.child_elements)):
+                name = self.child_elements[i]['memberName']
+                middle_if = self.create_code_block('if',
+                                                   ['{}->getMetaId() == '
+                                                    'metaid'.format(name),
+                                                    'return {}'.format(name)])
+                code.append(self.create_code_block('if',
+                                                   ['{} != NULL'.format(name),
+                                                    middle_if,
+                                                    'obj = {}->getElementBy'
+                                                    'MetaId'
+                                                    '(metaid)'.format(name),
+                                                    if_code]))
 
-        num_lo = len(self.child_lo_elements)
-        name = []
-        for i in range(0, num_lo):
-            name.append(self.child_lo_elements[i]['memberName'])
-            first_if = ['{}.getMetaId() == metaid'.format(name[i]),
-                        'return &{}'.format(name[i])]
-            code.append(self.create_code_block('if', first_if))
-        if_block = ['obj != NULL', 'return obj']
-        if_code = self.create_code_block('if', if_block)
-        # if num_lo > 0:
-        #     code.append(self.create_code_block('line',
-        #                                        ['{}* obj = '
-        #                                         'NULL'.format(self.std_base)]))
-        for i in range(0, num_lo):
-            line = 'obj = {}.getElementByMetaId' \
-                   '(metaid)'.format(name[i])
-            code.append(self.create_code_block('line', [line]))
-            code.append(if_code)
-#        if num_lo > 0:
-        if self.is_list_of:
-            code.append(self.create_code_block('line',
-                                               ['return ListOf::getElement'
-                                                'ByMetaId(metaid)']))
-        else:
-            code.append(self.create_code_block('line', ['return obj']))
+            num_lo = len(self.child_lo_elements)
+            name = []
+            for i in range(0, num_lo):
+                name.append(self.child_lo_elements[i]['memberName'])
+                first_if = ['{}.getMetaId() == metaid'.format(name[i]),
+                            'return &{}'.format(name[i])]
+                code.append(self.create_code_block('if', first_if))
+            if_block = ['obj != NULL', 'return obj']
+            if_code = self.create_code_block('if', if_block)
+            for i in range(0, num_lo):
+                line = 'obj = {}.getElementByMetaId' \
+                       '(metaid)'.format(name[i])
+                code.append(self.create_code_block('line', [line]))
+                code.append(if_code)
+            if self.is_list_of:
+                code.append(self.create_code_block('line',
+                                                   ['return ListOf::getElement'
+                                                    'ByMetaId(metaid)']))
+            else:
+                code.append(self.create_code_block('line', ['return obj']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -262,28 +268,32 @@ class GlobalQueryFunctions():
             arguments = ['ElementFilter * filter = NULL']
         else:
             arguments = ['ElementFilter* filter']
-        sublist = 'NULL'
-        if self.is_list_of:
-            sublist = 'ListOf::getAllElements(filter)'
-        implementation = ['List* ret = new List()',
-                          'List* sublist = {}'.format(sublist)]
-        code = [self.create_code_block('line', implementation)]
-        implementation = []
-        for i in range(0, len(self.child_elements)):
-            name = self.child_elements[i]['memberName']
-            implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
-                                  'filter)'.format(name))
-        code.append(self.create_code_block('line', implementation))
-        implementation = []
-        for i in range(0, len(self.child_lo_elements)):
-            name = self.child_lo_elements[i]['memberName']
-            implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
-                                  'filter)'.format(name))
-        code.append(self.create_code_block('line', implementation))
-        code.append(self.create_code_block('line',
-                                           ['ADD_FILTERED_FROM_PLUGIN(ret, '
-                                            'sublist, filter)']))
-        code.append(self.create_code_block('line', ['return ret']))
+
+        code = []
+        if not self.is_header:
+            sublist = 'NULL'
+            if self.is_list_of:
+                sublist = 'ListOf::getAllElements(filter)'
+            implementation = ['List* ret = new List()',
+                              'List* sublist = {}'.format(sublist)]
+            code = [self.create_code_block('line', implementation)]
+            implementation = []
+            for i in range(0, len(self.child_elements)):
+                name = self.child_elements[i]['memberName']
+                implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
+                                      'filter)'.format(name))
+            code.append(self.create_code_block('line', implementation))
+            implementation = []
+            for i in range(0, len(self.child_lo_elements)):
+                name = self.child_lo_elements[i]['memberName']
+                implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
+                                      'filter)'.format(name))
+            code.append(self.create_code_block('line', implementation))
+            if not self.is_plugin:
+                code.append(self.create_code_block('line',
+                                                   ['ADD_FILTERED_FROM_PLUGIN'
+                                                    '(ret, sublist, filter)']))
+            code.append(self.create_code_block('line', ['return ret']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -318,28 +328,49 @@ class GlobalQueryFunctions():
         function = 'appendFrom'
         return_type = 'int'
         arguments = ['const Model* model']
-        sublist = 'NULL'
-        if self.is_list_of:
-            sublist = 'ListOf::getAllElements(filter)'
-        implementation = ['List* ret = new List()',
-                          'List* sublist = {}'.format(sublist)]
-        code = [self.create_code_block('line', implementation)]
-        implementation = []
-        for i in range(0, len(self.child_elements)):
-            name = self.child_elements[i]['memberName']
-            implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
-                                  'filter)'.format(name))
-        code.append(self.create_code_block('line', implementation))
-        implementation = []
-        for i in range(0, len(self.child_lo_elements)):
-            name = self.child_lo_elements[i]['memberName']
-            implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
-                                  'filter)'.format(name))
-        code.append(self.create_code_block('line', implementation))
-        code.append(self.create_code_block('line',
-                                           ['ADD_FILTERED_FROM_PLUGIN(ret, '
-                                            'sublist, filter)']))
-        code.append(self.create_code_block('line', ['return ret']))
+
+        code = []
+        if not self.is_header:
+            code = [self.create_code_block('line',
+                                           ['int ret = LIBSBML_'
+                                            'OPERATION_SUCCESS']),
+                    self.create_code_block('if',
+                                           ['model == NULL',
+                                            'return LIBSBML_'
+                                            'INVALID_OBJECT']),
+                    self.create_code_block('line',
+                                           ['const {0}* plug = static_cast'
+                                            '<const {0}*>(model->getPlugin'
+                                            '(getPrefix()'
+                                            '))'.format(self.class_name)]),
+                    self.create_code_block('if',
+                                           ['plug == NULL', 'return ret']),
+                    self.create_code_block('line',
+                                           ['Model* parent = static_cast'
+                                            '<Model*>(getParentSBML'
+                                            'Object())']),
+                    self.create_code_block('if',
+                                           ['parent == NULL',
+                                            'return LIBSBML_INVALID_'
+                                            'OBJECT'])]
+            # implementation =[]
+            # for i in range(0, len(self.child_elements)):
+            #     name = self.child_elements[i]['memberName']
+            #     implementation.append('ADD_FILTERED_POINTER(ret, sublist, {},'
+            #                           'filter)'.format(name))
+            # code.append(self.create_code_block('line', implementation))
+            for i in range(0, len(self.child_lo_elements)):
+                name = self.child_lo_elements[i]['memberName']
+                loname = strFunctions.\
+                    upper_first(self.child_lo_elements[i]['name'])
+                code.append(self.create_code_block('line',
+                                                   ['ret = {}.appendFrom(plug->'
+                                                    'get{}())'.format(name,
+                                                                      loname)]))
+                code.append(self.create_code_block('if',
+                                                   ['ret != LIBSBML_OPERATION'
+                                                    '_SUCCESS', 'return ret']))
+            code.append(self.create_code_block('line', ['return ret']))
 
         # return the parts
         return dict({'title_line': title_line,

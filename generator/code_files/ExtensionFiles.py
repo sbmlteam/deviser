@@ -57,36 +57,35 @@ class ExtensionFiles():
         self.write_code()
 
     def write_plugin_files(self, num):
-        self.write_plugin_header(num)
-        # self.write_code()
+        class_descrip = self.create_class_description(num)
+        self.write_plugin_header(class_descrip)
+        self.write_plugin_code(class_descrip)
 
     def write_header(self):
         fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package)
-        if not self.verbose:
-            print('Writing file {}'.format(fileout.name))
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
-    def write_plugin_header(self, num):
-        class_descrip = self.create_class_description(num)
+    def write_plugin_header(self, class_descrip):
         fileout = CppHeaderFile.CppHeaderFile(class_descrip)
-        if not self.verbose:
-            print('Writing file {}'.format(fileout.name))
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
-    def write_plugin_code(self, num):
-        class_descrip = self.create_class_description(num)
+    def write_plugin_code(self, class_descrip):
         fileout = CppCodeFile.CppCodeFile(class_descrip)
-        if not self.verbose:
-            print('Writing file {}'.format(fileout.name))
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def write_code(self):
         fileout = ExtensionCodeFile.ExtensionCodeFile(self.package)
         if self.verbose:
-            print('Writing file {}'.format(fileout.name))
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
@@ -141,8 +140,7 @@ class ExtensionFiles():
         if num == -1:
             self.write_files()
         else:
-#            self.write_plugin_header(num)
-            self.write_plugin_code(num)
+            self.write_plugin_files(num)
  #       if self.class_object['hasListOf']:
  #           lo_working_class = self.create_list_of_description()
 #            self.write_header(lo_working_class)

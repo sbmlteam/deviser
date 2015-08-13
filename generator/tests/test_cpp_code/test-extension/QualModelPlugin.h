@@ -511,9 +511,9 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBasePlugin element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id.
    */
-  virtual SBasePlugin* getElementBySId(const std::string& id);
+  virtual SBase* getElementBySId(const std::string& id);
 
 
   /**
@@ -523,20 +523,20 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBasePlugin element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid.
    */
-  virtual SBasePlugin* getElementByMetaId(const std::string& metaid);
+  virtual SBase* getElementByMetaId(const std::string& metaid);
 
 
   /**
-   * Returns a List of all child SBasePlugin objects, including those nested to
-   * an arbitrary depth.
+   * Returns a List of all child SBase objects, including those nested to an
+   * arbitrary depth.
    *
    * filter, an ElementFilter that may impose restrictions on the objects to be
    * retrieved.
    *
-   * @return a List* pointer of pointers to all SBasePlugin child objects with
-   * any restriction imposed.
+   * @return a List* pointer of pointers to all SBase child objects with any
+   * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
 
@@ -563,18 +563,7 @@ protected:
   /**
    * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual SBasePlugin* createObject(XMLInputStream& stream);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  virtual void writeAttributes(XMLOutputStream& stream) const;
+  virtual SBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 

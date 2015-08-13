@@ -49,6 +49,9 @@ class ProtectedFunctions():
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -90,6 +93,7 @@ class ProtectedFunctions():
             for i in range(1, class_object['num_versions']):
                 self.version_attributes.append(
                     query.get_version_attributes(self.all_attributes, i+1))
+        self.is_header = class_object['is_header']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -135,141 +139,92 @@ class ProtectedFunctions():
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
-        ns = '{}ns'.format(self.package.lower())
-        upkg = self.package.upper()
-        if self.is_list_of:
-            if num_children == 0:
-                implementation = ['const std::string& name = '
-                                  'stream.peek().getName()',
-                                  '{}* object = NULL'.format(self.std_base),
-                                  '{}_CREATE_NS({}, '
-                                  'getSBMLNamespaces())'.format(upkg, ns)]
-                code = [dict({'code_type': 'line', 'code': implementation})]
-                implementation = self.write_create_object_class(self.child_name,
-                                                                ns)
-                code.append(self.create_code_block('if', implementation))
-                for i in range(0, len(self.concretes)):
-                    implementation = \
-                        self.write_create_object_class(
-                            self.concretes[i]['element'], ns)
-                    code.append(self.create_code_block('if', implementation))
-                code.append(self.create_code_block('line',
-                                                   ['delete {}'.format(ns),
-                                                    'return object']))
+        code = []
+        if not self.is_header:
+            ns = '{}ns'.format(self.package.lower())
+            upkg = self.package.upper()
+            if self.is_list_of:
+                if num_children == 0:
+                    code = self.write_create_object_lo(upkg, ns)
+                else:
+                    code = self.write_create_object_anomalous_lo(upkg, ns)
             else:
-                # the unusual case where a list of have a child element
-                # is not of the same type as the list of
-                implementation = ['const std::string& name = '
-                                  'stream.peek().getName()',
-                                  '{}* object = NULL'.format(self.std_base),
-                                  '{}_CREATE_NS({}, '
-                                  'getSBMLNamespaces())'.format(upkg, ns)]
-                code = [dict({'code_type': 'line', 'code': implementation})]
-                implementation = self.write_create_object_class(self.child_name,
-                                                                ns)
-                code.append(self.create_code_block('if', implementation))
-                for i in range(0, len(self.child_elements)):
-                    implementation = \
-                        self.write_create_object_class(
-                            self.child_elements[i]['element'], ns, True)
+                code = [self.create_code_block('line',
+                                               ['{}* obj = '
+                                                'NULL'.format(self.std_base)])]
+                if self.is_plugin:
+                    lines = ['const std::string& name = '
+                             'stream.peek().getName()',
+                             'const XMLNamespaces& xmlns = '
+                             'stream.peek().getNamespaces()',
+                             'const std::string& prefix '
+                             '= stream.peek().getPrefix()']
+                else:
+                    lines = ['const std::string& name '
+                             '= stream.peek().getName()']
+                code.append(self.create_code_block('line', lines))
+                if self.is_plugin:
+                    line = ['const std::string& targetPrefix = (xmlns.hasURI'
+                            '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
+                    code.append(self.create_code_block('line', line))
+                if len(self.child_elements) != self.num_non_std_children:
+                    line = ['{}_CREATE_NS({}, '
+                            'getSBMLNamespaces())'.format(upkg, ns)]
+                    code.append(self.create_code_block('line', line))
+                error_line = 'getErrorLog()->logPackageError(\"{}\", {}{}' \
+                             'Elements, getPackageVersion(), getLevel(), ' \
+                             'getVersion())'.format(self.package.lower(),
+                                                    self.package,
+                                                    self.class_name)
+                if num_children == 1:
+                    element = self.find_single_element()
+                    implementation = self.get_lo_block(element, error_line)
                     code.append(self.create_code_block('if', implementation))
-                code.append(self.create_code_block('line',
-                                                   ['delete {}'.format(ns),
-                                                    'return object']))
-
-        else:
-            code = [self.create_code_block('line',
-                                           ['{}* obj = '
-                                            'NULL'.format(self.std_base)]),
-                    self.create_code_block('line',
-                                           ['const string& name = '
-                                            'stream.peek().getName()'])]
-            if len(self.child_elements) != self.num_non_std_children:
-                line = ['{}_CREATE_NS({}, '
-                        'getSBMLNamespaces())'.format(upkg, ns)]
-                code.append(self.create_code_block('line', line))
-            error_line = 'getErrorLog()->logPackageError(\"{}\", {}{}' \
-                         'Elements, getPackageVersion(), getLevel(), ' \
-                         'getVersion())'.format(self.package.lower(),
-                                                self.package,
-                                                self.class_name)
-            has_else = False
-            if num_children > 1:
-                has_else = True
-            if not has_else and num_children == 1:
-                # find the element
-                element = None
-                for i in range(0, len(self.child_elements)):
-                    element = self.child_elements[i]
-                    if 'is_ml' in element and element['is_ml']:
-                        element = None
-                        continue
+                else:
+                    implementation = []
+                    i = 0
+                    for i in range(0, len(self.child_elements)):
+                        element = self.child_elements[i]
+                        if 'is_ml' in element and element['is_ml']:
+                            continue
+                        overwrite = element['children_overwrite']
+                        name = element['memberName']
+                        loname = element['name'] if overwrite \
+                            else strFunctions.lower_first(element['element'])
+                        implementation += self.get_obj_block(name, loname,
+                                                             error_line,
+                                                             overwrite,
+                                                             element['element'],
+                                                             ns)
+                        if i < num_children - 1:
+                            implementation.append('else if')
+                    for j in range(i, i + len(self.child_lo_elements)):
+                        element = self.child_lo_elements[j-i]
+                        if self.is_plugin:
+                            implementation += \
+                                self.get_plugin_lo_block(element, error_line)
+                        else:
+                            implementation += self.get_lo_block(element,
+                                                                error_line)
+                        if j < num_children - 1:
+                            implementation.append('else if')
+                    if not self.is_plugin:
+                        code.append(self.create_code_block('else_if',
+                                                           implementation))
                     else:
-                        break
-                if element is None:
-                    element = self.child_lo_elements[0]
-                name = element['memberName']
-                loname = strFunctions.\
-                    lower_first(element['attTypeCode'])
-                nested_if = self.create_code_block('if',
-                                                   ['{}.size() '
-                                                    '!= 0'.format(name),
-                                                    error_line])
-                line = 'obj = &{}'.format(name)
-                implementation = ['name == \"{}\"'.format(loname),
-                                  nested_if, line]
-                code.append(self.create_code_block('if', implementation))
-            implementation = []
-            i = 0
-            for i in range(0, len(self.child_elements)):
-                element = self.child_elements[i]
-                if 'is_ml' in element and element['is_ml']:
-                    continue
-
-                name = element['memberName']
-                loname = strFunctions.\
-                    lower_first(element['element'])
-                if element['children_overwrite']:
-                    loname = element['name']
-                nested_if = self.create_code_block('if',
-                                                   ['{} '
-                                                    '!= NULL'.format(name),
-                                                    error_line])
-                implementation.append('name == \"{}\"'.format(loname))
-                implementation.append(nested_if)
-                implementation.append('{} = new {}'
-                                      '({})'.format(name,
-                                                    element['element'], ns))
-                if element['children_overwrite']:
-                    implementation.append('{}->setElementName'
-                                          '(name)'.format(name))
-                implementation.append('obj = {}'.format(name))
-
-                if i < num_children - 1:
-                    implementation.append('else if')
-            for j in range(i, i + len(self.child_lo_elements)):
-                name = self.child_lo_elements[j-i]['memberName']
-                loname = strFunctions.\
-                    lower_first(self.child_lo_elements[j-i]['attTypeCode'])
-                nested_if = self.create_code_block('if',
-                                                   ['{}.size() '
-                                                    '!= 0'.format(name),
-                                                    error_line])
-                line = 'obj = &{}'.format(name)
-                implementation.append('name == \"{}\"'.format(loname))
-                implementation.append(nested_if)
-                implementation.append(line)
-
-                if j < num_children - 1:
-                    implementation.append('else if')
-            if has_else:
-                code.append(self.create_code_block('else_if', implementation))
-            if len(self.child_elements) != self.num_non_std_children:
+                        plugin_imp = self.create_code_block('else_if',
+                                                            implementation)
+                        code.append(self.create_code_block('if',
+                                                           ['prefix == '
+                                                            'targetPrefix',
+                                                            plugin_imp]))
+                if len(self.child_elements) != self.num_non_std_children:
+                    code.append(self.create_code_block('line',
+                                                       ['delete '
+                                                        '{}'.format(ns)]))
                 code.append(self.create_code_block('line',
-                                                   ['delete {}'.format(ns)]))
-            code.append(self.create_code_block('line',
-                                               ['connectToChild()']))
-            code.append(self.create_code_block('line', ['return obj']))
+                                                   ['connectToChild()']))
+                code.append(self.create_code_block('line', ['return obj']))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -282,6 +237,100 @@ class ProtectedFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def write_create_object_lo(self, upkg, ns):
+        implementation = ['const std::string& name = '
+                          'stream.peek().getName()',
+                          '{}* object = NULL'.format(self.std_base),
+                          '{}_CREATE_NS({}, '
+                          'getSBMLNamespaces())'.format(upkg, ns)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+        implementation = self.write_create_object_class(self.child_name,
+                                                        ns)
+        code.append(self.create_code_block('if', implementation))
+        for i in range(0, len(self.concretes)):
+            implementation = \
+                self.write_create_object_class(
+                    self.concretes[i]['element'], ns)
+            code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block('line',
+                                           ['delete {}'.format(ns),
+                                            'return object']))
+        return code
+
+    def write_create_object_anomalous_lo(self, upkg, ns):
+        # the unusual case where a list of have a child element
+        # is not of the same type as the list of
+        implementation = ['const std::string& name = '
+                          'stream.peek().getName()',
+                          '{}* object = NULL'.format(self.std_base),
+                          '{}_CREATE_NS({}, '
+                          'getSBMLNamespaces())'.format(upkg, ns)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+        implementation = self.write_create_object_class(self.child_name,
+                                                        ns)
+        code.append(self.create_code_block('if', implementation))
+        for i in range(0, len(self.child_elements)):
+            implementation = \
+                self.write_create_object_class(
+                    self.child_elements[i]['element'], ns, True)
+            code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block('line',
+                                           ['delete {}'.format(ns),
+                                            'return object']))
+        return code
+
+    def get_lo_block(self, element, error_line):
+        name = element['memberName']
+        loname = strFunctions.lower_first(element['attTypeCode'])
+        nested_if = self.create_code_block('if',
+                                           ['{}.size() '
+                                            '!= 0'.format(name),
+                                            error_line])
+        line = 'obj = &{}'.format(name)
+        implementation = ['name == \"{}\"'.format(loname),
+                          nested_if, line]
+        return implementation
+
+    def get_plugin_lo_block(self, element, error_line):
+        name = element['memberName']
+        implementation = self.get_lo_block(element, error_line)
+        second_if = self.create_code_block('if', ['targetPrefix.empty()',
+                                                  '{}.getSBMLDocument()->'
+                                                  'enableDefaultNS(mURI, '
+                                                  'true)'.format(name)])
+        implementation.append(second_if)
+        return implementation
+
+    def get_obj_block(self, name, loname, error_line, over_write, element, ns):
+        implementation = []
+        nested_if = self.create_code_block('if',
+                                           ['{} '
+                                            '!= NULL'.format(name),
+                                            error_line])
+        implementation.append('name == \"{}\"'.format(loname))
+        implementation.append(nested_if)
+        implementation.append('{} = new {}'
+                              '({})'.format(name,
+                                            element, ns))
+        if over_write:
+            implementation.append('{}->setElementName'
+                                  '(name)'.format(name))
+        implementation.append('obj = {}'.format(name))
+        return implementation
+
+    def find_single_element(self):
+        element = None
+        for i in range(0, len(self.child_elements)):
+            element = self.child_elements[i]
+            if 'is_ml' in element and element['is_ml']:
+                element = None
+                continue
+            else:
+                break
+        if element is None:
+            element = self.child_lo_elements[0]
+        return element
 
     ########################################################################
 
@@ -528,7 +577,7 @@ class ProtectedFunctions():
 
     # function to write writeAttributes
     def write_write_attributes(self):
-        if self.is_list_of:
+        if self.is_list_of or len(self.attributes) == 0:
             return
 
         # create comment

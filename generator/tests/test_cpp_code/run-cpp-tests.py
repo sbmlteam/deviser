@@ -23,7 +23,7 @@ def generate_new_cpp_header(filename, num):
     ob = parser.parse_deviser_xml()
     working_class = ob['sbmlElements'][num]
     os.chdir('./temp')
-    all_files = CppFiles.CppFiles(working_class)
+    all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
     os.chdir('../.')
 
@@ -32,7 +32,7 @@ def generate_extension_header(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob)
+    all_files = ExtensionFiles.ExtensionFiles(ob, True)
     all_files.write_files()
     os.chdir('../.')
 
@@ -41,10 +41,9 @@ def generate_plugin_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob)
+    all_files = ExtensionFiles.ExtensionFiles(ob, True)
     all_files.write_plugin_files(num)
     os.chdir('../.')
-
 
 
 # reads file containing expected sbml model and returns it as string

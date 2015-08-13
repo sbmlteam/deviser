@@ -457,17 +457,6 @@ protected:
   /** @endcond */
 
 
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  virtual void writeAttributes(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
 };
 
 

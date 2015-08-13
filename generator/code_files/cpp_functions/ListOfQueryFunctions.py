@@ -97,6 +97,8 @@ class ListOfQueryFunctions():
         if self.is_cpp_api:
             if self.is_list_of:
                 self.status = 'cpp_list'
+            elif self.is_plugin:
+                self.status = 'plugin'
             else:
                 self.status = 'cpp_not_list'
         else:
@@ -160,6 +162,12 @@ class ListOfQueryFunctions():
             elif self.status == 'cpp_not_list':
                 implementation = ['return {}.get'
                                   '(n)'.format(self.class_object['memberName'])]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'plugin':
+                const = 'const ' if is_const else ''
+                name = self.class_object['memberName']
+                implementation = ['return static_cast<{} {}*>({}.get'
+                                  '(n))'.format(const, self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
                 line = ['lo == NULL', 'return NULL']
@@ -233,6 +241,12 @@ class ListOfQueryFunctions():
                 code = self.cpp_list_write_get_element_by_id(is_const)
             elif self.status == 'cpp_not_list':
                 code = self.cpp_not_list_write_get_element_by_id()
+            elif self.status == 'plugin':
+                const = 'const ' if is_const else ''
+                name = self.class_object['memberName']
+                implementation = ['return static_cast<{} {}*>({}.get'
+                                  '(sid))'.format(const, self.child_name, name)]
+                code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
                 code = self.c_list_write_get_element_by_id()
             else:
@@ -470,25 +484,32 @@ class ListOfQueryFunctions():
         arguments.append('unsigned int n')
         return_type = '{}*'.format(self.object_child_name)
 
-        if self.is_cpp_api and self.is_list_of:
-            implementation = ['return static_cast<{}*>(ListOf::'
-                              'remove(n))'.format(self.object_child_name)]
-            code = [self.create_code_block('line', implementation)]
-        elif self.is_cpp_api and not self.is_list_of:
-            member = self.class_object['memberName']
-            implementation = ['return {}.remove(n)'.format(member)]
-            code = [self.create_code_block('line', implementation)]
-        elif not self.is_cpp_api and self.is_list_of:
-            line = ['lo == NULL', 'return NULL']
-            code = [self.create_code_block('if', line)]
-            line = ['return static_cast <{}*>(lo)->remove'
-                    '(n)'.format(self.class_name)]
-            code.append(self.create_code_block('line', line))
-        else:
-            line = ['return ({0} != NULL) ? '
-                    '{0}->remove{1}(n) : '
-                    'NULL'.format(self.abbrev_parent, self.child_name)]
-            code = [self.create_code_block('line', line)]
+        code = []
+        if not self.is_header:
+            if self.status == 'cpp_list':
+                implementation = ['return static_cast<{}*>(ListOf::'
+                                  'remove(n))'.format(self.object_child_name)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'cpp_not_list':
+                member = self.class_object['memberName']
+                implementation = ['return {}.remove(n)'.format(member)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'plugin':
+                name = self.class_object['memberName']
+                implementation = ['return static_cast<{}*>({}.remove'
+                                  '(n))'.format(self.child_name, name)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'c_list':
+                line = ['lo == NULL', 'return NULL']
+                code = [self.create_code_block('if', line)]
+                line = ['return static_cast <{}*>(lo)->remove'
+                        '(n)'.format(self.class_name)]
+                code.append(self.create_code_block('line', line))
+            else:
+                line = ['return ({0} != NULL) ? '
+                        '{0}->remove{1}(n) : '
+                        'NULL'.format(self.abbrev_parent, self.child_name)]
+                code = [self.create_code_block('line', line)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -544,39 +565,47 @@ class ListOfQueryFunctions():
             arguments.append('const char* sid')
         return_type = '{}*'.format(self.object_child_name)
 
-        if self.is_cpp_api and self.is_list_of:
-            implementation = ['{}* item = NULL'.format(self.std_base),
-                              'vector<{}*>::iterator '
-                              'result'.format(self.std_base)]
-            code = [self.create_code_block('line', implementation),
-                    self.create_code_block('line',
-                                           ['result = find_if(mItems.begin(), '
-                                            'mItems.end(), IdEq<{}>(sid)'
-                                            ')'.format(self.
-                                                       object_child_name)])]
-            implementation = ['result != mItems.end()', 'item = *result',
-                              'mItems.erase(result)']
-            code.append(self.create_code_block('if', implementation))
-            code.append(
-                self.create_code_block(
-                    'line',
-                    ['return static_cast <{}*> '
-                     '(item)'.format(self.object_child_name)]))
-        elif self.is_cpp_api and not self.is_list_of:
-            member = self.class_object['memberName']
-            implementation = ['return {}.remove(sid)'.format(member)]
-            code = [self.create_code_block('line', implementation)]
-        elif not self.is_cpp_api and self.is_list_of:
-            line = ['lo == NULL', 'return NULL']
-            code = [self.create_code_block('if', line)]
-            line = ['return (sid != NULL) ? static_cast <{}*>(lo)->remove'
-                    '(sid) : NULL'.format(self.class_name)]
-            code.append(self.create_code_block('line', line))
-        else:
-            line = ['return ({0} != NULL && sid != NULL) ? '
-                    '{0}->remove{1}(sid) : '
-                    'NULL'.format(self.abbrev_parent, self.child_name)]
-            code = [self.create_code_block('line', line)]
+        code = []
+        if not self.is_header:
+            if self.status == 'cpp_list':
+                implementation = ['{}* item = NULL'.format(self.std_base),
+                                  'vector<{}*>::iterator '
+                                  'result'.format(self.std_base)]
+                code = [self.create_code_block('line', implementation),
+                        self.create_code_block('line',
+                                               ['result = find_if('
+                                                'mItems.begin(), '
+                                                'mItems.end(), IdEq<{}>(sid)'
+                                                ')'.format(self.
+                                                           object_child_name)])]
+                implementation = ['result != mItems.end()', 'item = *result',
+                                  'mItems.erase(result)']
+                code.append(self.create_code_block('if', implementation))
+                code.append(
+                    self.create_code_block(
+                        'line',
+                        ['return static_cast <{}*> '
+                         '(item)'.format(self.object_child_name)]))
+            elif self.status == 'cpp_not_list':
+                member = self.class_object['memberName']
+                implementation = ['return {}.remove(sid)'.format(member)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'plugin':
+                name = self.class_object['memberName']
+                implementation = ['return static_cast<{}*>({}.remove'
+                                  '(sid))'.format(self.child_name, name)]
+                code = [self.create_code_block('line', implementation)]
+            elif self.status == 'c_list':
+                line = ['lo == NULL', 'return NULL']
+                code = [self.create_code_block('if', line)]
+                line = ['return (sid != NULL) ? static_cast <{}*>(lo)->remove'
+                        '(sid) : NULL'.format(self.class_name)]
+                code.append(self.create_code_block('line', line))
+            else:
+                line = ['return ({0} != NULL && sid != NULL) ? '
+                        '{0}->remove{1}(sid) : '
+                        'NULL'.format(self.abbrev_parent, self.child_name)]
+                code = [self.create_code_block('line', line)]
 
         # return the parts
         return dict({'title_line': title_line,

@@ -66,15 +66,15 @@ class CppFiles():
 
     def write_header(self, class_desc):
         fileout = CppHeaderFile.CppHeaderFile(class_desc)
-        if not self.verbose:
-            print('Writing file {}'.format(fileout.name))
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def write_code(self, class_desc):
         fileout = CppCodeFile.CppCodeFile(class_desc)
         if self.verbose:
-            print('Writing file {}'.format(fileout.name))
+            print('Writing file {}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
