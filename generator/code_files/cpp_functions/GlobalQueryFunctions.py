@@ -45,6 +45,7 @@ class GlobalQueryFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
@@ -331,14 +332,14 @@ class GlobalQueryFunctions():
         arguments = ['const Model* model']
 
         code = []
+        success = 'LIB{}_OPERATION_SUCCESS'.format(self.cap_language)
+        invalid = 'LIB{}_INVALID_OBJECT'.format(self.cap_language)
         if not self.is_header:
             code = [self.create_code_block('line',
-                                           ['int ret = LIBSBML_'
-                                            'OPERATION_SUCCESS']),
+                                           ['int ret = {}'.format(success)]),
                     self.create_code_block('if',
                                            ['model == NULL',
-                                            'return LIBSBML_'
-                                            'INVALID_OBJECT']),
+                                            'return {}'.format(invalid)]),
                     self.create_code_block('line',
                                            ['const {0}* plug = static_cast'
                                             '<const {0}*>(model->getPlugin'
@@ -348,12 +349,12 @@ class GlobalQueryFunctions():
                                            ['plug == NULL', 'return ret']),
                     self.create_code_block('line',
                                            ['Model* parent = static_cast'
-                                            '<Model*>(getParentSBML'
-                                            'Object())']),
+                                            '<Model*>(getParent{}'
+                                            'Object()'
+                                            ')'.format(self.cap_language)]),
                     self.create_code_block('if',
                                            ['parent == NULL',
-                                            'return LIBSBML_INVALID_'
-                                            'OBJECT'])]
+                                            'return {}'.format(invalid)])]
             # implementation =[]
             # for i in range(0, len(self.child_elements)):
             #     name = self.child_elements[i]['memberName']
@@ -368,9 +369,11 @@ class GlobalQueryFunctions():
                                                    ['ret = {}.appendFrom(plug->'
                                                     'get{}())'.format(name,
                                                                       loname)]))
-                code.append(self.create_code_block('if',
-                                                   ['ret != LIBSBML_OPERATION'
-                                                    '_SUCCESS', 'return ret']))
+                code.append(
+                    self.create_code_block('if',
+                                           ['ret != LIB{}_OPERATION_SUCC'
+                                            'ESS'.format(self.cap_language),
+                                            'return ret']))
             code.append(self.create_code_block('line', ['return ret']))
 
         # return the parts

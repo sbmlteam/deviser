@@ -111,9 +111,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                             self.package.lower(),
                                             lo_name))
                 self.write_line('#include <{}/packages/{}/validator/'
-                                '{}SBMLError.h>'
+                                '{}{}Error.h>'
                                 .format(self.language, self.package.lower(),
-                                        self.package))
+                                        self.package, self.cap_language))
             else:
                 self.write_line('#include <{0}/{1}.h>'.
                                 format(self.language, self.class_name))

@@ -252,8 +252,8 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                             up_package))
         self.write_blank_comment_line()
         self.close_comment()
-        self.write_line('template class LIBSBML_EXTERN {}ExtensionNamespaces<'
-                        '{}Extension>;'.format(self.cap_language,
+        self.write_line('template class LIB{0}_EXTERN {0}ExtensionNamespaces<'
+                        '{1}Extension>;'.format(self.cap_language,
                                                up_package))
         self.skip_line()
 

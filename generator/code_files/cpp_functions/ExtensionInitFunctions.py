@@ -84,9 +84,11 @@ class ExtensionInitFunctions():
         return_type = 'static void' if static else 'void'
 
         # create the function implementation
-        code = [self.create_code_block('if', ['SBMLExtensionRegistry::'
+        code = [self.create_code_block('if', ['{}ExtensionRegistry::'
                                               'getInstance().isRegistered'
-                                              '(getPackageName())', 'return']),
+                                              '(getPackageName'
+                                              '())'.format(self.cap_language),
+                                              'return']),
                 self.create_code_block('line', ['{}Extension {}Extension'
                                                 ''.format(self.up_package,
                                                           self.package)]),
@@ -95,17 +97,21 @@ class ExtensionInitFunctions():
                                                 'packageURIs',
                                                 'packageURIs.push_back'
                                                 '(getXmlnsL3V1V1())'])]
-        implementation = ['{}ExtensionPoint sbmldocExtPoint(\"core\", '
-                          'SBML_DOCUMENT)'.format(self.std_base)]
+        implementation = ['{}ExtensionPoint {}docExtPoint(\"core\", '
+                          '{}_DOCUMENT)'.format(self.std_base,
+                                                self.language,
+                                                self.cap_language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             tc = query.get_typecode_format(name, self.language)
             implementation.append('{}ExtensionPoint {}ExtPoint(\"core\", '
                                   '{})'.format(self.std_base, name.lower(), tc))
         code.append(self.create_code_block('line', implementation))
-        implementation = ['{0}PluginCreator<{1}SBMLDocumentPlugin, '
-                          '{1}Extension> sbmldocPluginCreator(sbmldocExtPoint, '
-                          'packageURIs)'.format(self.std_base, self.up_package)]
+        implementation = ['{0}PluginCreator<{1}{2}DocumentPlugin, '
+                          '{1}Extension> {3}docPluginCreator({3}docExtPoint, '
+                          'packageURIs)'.format(self.std_base, self.up_package,
+                                                self.cap_language,
+                                                self.language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             implementation.append('{0}PluginCreator<{1}{2}Plugin, '
@@ -115,8 +121,9 @@ class ExtensionInitFunctions():
                                                         name, name.lower()))
         code.append(self.create_code_block('line', implementation))
         implementation = ['{}Extension.add{}PluginCreator('
-                          '&sbmldocPluginCreator)'.format(self.package,
-                                                          self.std_base)]
+                          '&{}docPluginCreator)'.format(self.package,
+                                                        self.std_base,
+                                                        self.language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             implementation.append('{}Extension.add{}PluginCreator('
@@ -124,11 +131,12 @@ class ExtensionInitFunctions():
                                                              self.std_base,
                                                              name.lower()))
         code.append(self.create_code_block('line', implementation))
-        code.append(self.create_code_block('line', ['int result = '
-                                                    'SBMLExtensionRegistry::'
-                                                    'getInstance().addExtension'
-                                                    '(&{}Extension'
-                                                    ')'.format(self.package)]))
+        code.append(self.create_code_block('line',
+                                           ['int result = {}ExtensionRegistry::'
+                                            'getInstance().addExtension(&{}'
+                                            'Extension'
+                                            ')'.format(self.cap_language,
+                                                       self.package)]))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

@@ -218,16 +218,20 @@ class GeneralFunctions():
             return
 
         # create comment
-        title_line = 'Returns the libSBML typcode of this {} object.'\
-            .format(self.object_name)
+        title_line = 'Returns the lib{} typcode of this {} object.'\
+            .format(self.cap_language, self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
-        return_lines = ['@return the SBML type code for this object:']
+        return_lines = ['@return the {} type code for this '
+                        'object:'.format(self.cap_language)]
         additional = []
         if self.is_list_of:
-            line = '@sbmlconstant{SBML_LIST_OF, SBMLTypeCode_t}'
+            line = '@{0}constant{2}{1}_LIST_OF, ' \
+                   '{1}TypeCode_t{3}'.format(self.language, self.cap_language,
+                                             '{', '}')
         else:
-            line = '@sbmlconstant{' + '{}'.format(self.typecode) \
-                   + ', SBML{}TypeCode_t'.format(self.package) + '}'
+            line = '@{}constant{}{}, {}{}' \
+                   'TypeCode_t{}'.format(self.language, '{', self.typecode,
+                                         self.cap_language, self.package, '}')
         additional.append(line)
         additional.append(' ')
         additional.append('@copydetails doc_warning_typecodes_not_unique')
@@ -243,7 +247,7 @@ class GeneralFunctions():
 
         # create the function implementation
         if self.is_list_of:
-            implementation = ['return SBML_LIST_OF']
+            implementation = ['return {}_LIST_OF'.format(self.cap_language)]
         else:
             implementation = ['return {}'.format(self.typecode)]
         code = [dict({'code_type': 'line', 'code': implementation})]
@@ -267,14 +271,18 @@ class GeneralFunctions():
         if not self.status == 'cpp_list':
             return
         # create comment
-        title_line = 'Returns the libSBML type code for the SBML objects ' \
-                     'contained in this {} object.'.format(self.object_name)
+        title_line = 'Returns the lib{0} type code for the {0} objects ' \
+                     'contained in this {1} object.'.format(self.cap_language,
+                                                            self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
-        return_lines = ['@return the SBML typecode for the '
-                        'objects contained in this list:']
+        return_lines = ['@return the {} typecode for the '
+                        'objects contained in this '
+                        'list:'.format(self.cap_language)]
         additional = []
-        line = '@sbmlconstant{' + '{}'.format(self.typecode) \
-               + ', SBML{}TypeCode_t'.format(self.package) + '}'
+        line = '@{}constant{}{}, {}{}TypeCode_t{}'.format(self.language, '{',
+                                                          self.typecode,
+                                                          self.cap_language,
+                                                          self.package, '}')
         additional.append(line)
         additional.append(' ')
         additional.append('@copydetails doc_warning_typecodes_not_unique')
@@ -505,7 +513,8 @@ class GeneralFunctions():
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
-                line = 'writeMathML(getMath(), stream, getSBMLNamespaces())'
+                line = 'writeMathML(getMath(), stream, get{}' \
+                       'Namespaces())'.format(self.cap_language)
             else:
                 line = '{}->write(stream)'.format(att['memberName'])
             implementation = ['isSet{}() == '
@@ -548,7 +557,7 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Accepts the given SBMLVisitor'
+        title_line = 'Accepts the given {}Visitor'.format(self.cap_language)
         params = []
         return_lines = []
         additional = []
@@ -556,7 +565,7 @@ class GeneralFunctions():
         # create the function declaration
         function = 'accept'
         return_type = 'bool'
-        arguments = ['SBMLVisitor& v']
+        arguments = ['{}Visitor& v'.format(self.cap_language)]
 
         # create the function implementation
         if not self.has_children \
@@ -570,8 +579,9 @@ class GeneralFunctions():
             else:
                 obj = strFunctions.abbrev_name(self.ext_class)
                 implementation = ['const {0}* {1} = static_cast<const {0}*>'
-                                  '(this->getParentSBMLObject()'
-                                  ')'.format(self.ext_class, obj),
+                                  '(this->getParent{2}Object()'
+                                  ')'.format(self.ext_class, obj,
+                                             self.cap_language),
                                   'v.visit(*{})'.format(obj),
                                   'v.leave(*{})'.format(obj)]
                 code = [self.create_code_block('line', implementation)]
@@ -609,22 +619,20 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Sets the parent SBMLDocument'
+        title_line = 'Sets the parent {}Document'.format(self.cap_language)
         params = []
         return_lines = []
         additional = []
 
         # create the function declaration
-        function = 'setSBMLDocument'
+        function = 'set{}Document'.format(self.cap_language)
         return_type = 'void'
-        arguments = ['SBMLDocument* d']
+        arguments = ['{}Document* d'.format(self.cap_language)]
 
         # create the function implementation
-        if self.language == 'sbml':
-            line = '{}::setSBMLDocument(d)'.format(self.base_class)
-        else:
-            line = '{}::set{}Document(d)'.format(self.base_class,
-                                                 self.cap_language)
+        line = '{}::set{}Document(d)'.format(self.base_class,
+                                             self.cap_language)
+        function = 'set{}Document'.format(self.cap_language)
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
@@ -634,13 +642,13 @@ class GeneralFunctions():
                     continue
                 else:
                     implementation = ['{} != NULL'.format(att['memberName']),
-                                      '{}->setSBMLDocument'
-                                      '(d)'.format(att['memberName'])]
+                                      '{}->{}'
+                                      '(d)'.format(att['memberName'], function)]
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{}.setSBMLDocument'
-                                  '(d)'.format(att['memberName'])]
+                implementation = ['{}.{}'
+                                  '(d)'.format(att['memberName'], function)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
 
@@ -809,7 +817,8 @@ class GeneralFunctions():
         else:
             code = [self.create_code_block('line',
                                            ['connectToParent(getParent'
-                                            'SBMLObject())'])]
+                                            '{}Object()'
+                                            ')'.format(self.cap_language)])]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,

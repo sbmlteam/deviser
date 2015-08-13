@@ -65,8 +65,9 @@ class BaseFile:
         self.num_tabs = 0
 
         # members that might get overridden if creating another library
-        self.library_name = 'libsbml'
+        self.library_name = 'Libsbml'
         self.language = 'sbml'
+        self.cap_language = 'SBML'
 
     ########################################################################
 
@@ -213,8 +214,9 @@ class BaseFile:
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
-        self.file_out.write('\n{0}{1} @cond doxygenLibsbmlInternal {2}\n\n'
+        self.file_out.write('\n{}{} @cond doxygen{}Internal {}\n\n'
                             .format(tabs, self.comment_start,
+                                    self.library_name,
                                     self.comment_end))
 
     def write_doxygen_end(self):

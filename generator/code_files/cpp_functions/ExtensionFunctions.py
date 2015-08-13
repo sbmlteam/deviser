@@ -110,8 +110,10 @@ class ExtensionFunctions():
         additional = []
 
         # create the function declaration
-        arguments = ['unsigned int {}Level'.format(self.language),
-                     'unsigned int {}Version'.format(self.language),
+        level = '{}Level'.format(self.language)
+        vers = '{}Version'.format(self.language)
+        arguments = ['unsigned int {}'.format(level),
+                     'unsigned int {}'.format(vers),
                      'unsigned int pkgVersion']
         function = 'getURI'
         return_type = 'const std::string&'
@@ -119,9 +121,10 @@ class ExtensionFunctions():
         # create the function implementation
         bottom_if = self.create_code_block('if', ['pkgVersion == 1',
                                                   'return getXmlnsL3V1V1()'])
-        middle_if = self.create_code_block('if', ['sbmlVersion == 1',
+        middle_if = self.create_code_block('if', ['{} == 1'.format(vers),
                                                   bottom_if])
-        code = [self.create_code_block('if', ['sbmlLevel == 3', middle_if])]
+        code = [self.create_code_block('if', ['{} == 3'.format(level),
+                                              middle_if])]
         implementation = ['static std::string empty = \"\"', 'return empty']
         code.append(self.create_code_block('line', implementation))
         # return the parts

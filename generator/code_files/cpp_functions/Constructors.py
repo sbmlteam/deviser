@@ -90,27 +90,31 @@ class Constructors():
                                        self.object_name)
             create = 'create{}'.format(self.concretes[i]['element'])
         # create doc string header
-        title_line = 'Creates a new {0} using the given SBML @p level' \
-            .format(ob_name)
+        title_line = 'Creates a new {} using the given {} @p level' \
+            .format(ob_name, self.cap_language)
         if self.package:
             title_line += ', @ p version and package version values.'
         else:
             title_line += ' and @ p version values.'
 
-        params = ['@param level an unsigned int, the SBML Level to '
-                  'assign to this {0}'.format(self.object_name),
-                  '@param version an unsigned int, the SBML Version to '
-                  'assign to this {0}'.format(self.object_name)]
+        params = ['@param level an unsigned int, the {} Level to '
+                  'assign to this {}'.format(self.cap_language,
+                                             self.object_name),
+                  '@param version an unsigned int, the {} Version to '
+                  'assign to this {}'.format(self.cap_language,
+                                             self.object_name)]
         if self.package:
-            params.append('@param pkgVersion an unsigned int, the SBML {0} '
-                          'Version to assign to this {1}'
-                          .format(self.package, self.object_name))
+            params.append('@param pkgVersion an unsigned int, the {} {} '
+                          'Version to assign to this {}'
+                          .format(self.cap_language, self.package,
+                                  self.object_name))
 
-        return_lines = ['@throws SBMLConstructorException',
+        return_lines = ['@throws {}Constructor'
+                        'Exception'.format(self.cap_language),
                         'Thrown if the given @p level and @p version '
-                        'combination, or this kind of SBML object, are '
-                        'either invalid or mismatched with respect to the '
-                        'parent SBMLDocument object.',
+                        'combination, or this kind of {0} object, are either '
+                        'invalid or mismatched with respect to the parent '
+                        '{0}Document object.'.format(self.cap_language),
                         '@copydetails doc_note_setting_lv']
         additional = ''
 
@@ -209,11 +213,12 @@ class Constructors():
             params.append('@param {0}ns the {1}Namespaces object'
                           .format(self.language, self.cap_language))
 
-        return_lines = ['@throws SBMLConstructorException',
+        return_lines = ['@throws {}Constructor'
+                        'Exception'.format(self.cap_language),
                         'Thrown if the given @p level and @p version '
-                        'combination, or this kind of SBML object, are '
-                        'either invalid or mismatched with respect to the '
-                        'parent SBMLDocument object.',
+                        'combination, or this kind of {0} object, are either '
+                        'invalid or mismatched with respect to the parent '
+                        '{0}Document object.'.format(self.cap_language),
                         '@copydetails doc_note_setting_lv']
         additional = ''
 

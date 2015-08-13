@@ -195,8 +195,7 @@ class BaseCppFile(BaseFile.BaseFile):
     ########################################################################
 
     # Function to expand the attribute information
-    @staticmethod
-    def expand_attributes(attributes):
+    def expand_attributes(self, attributes):
         root = None
         if len(attributes) > 0:
             if 'root' in attributes[0]:
@@ -241,13 +240,15 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = 'int'
                 attributes[i]['CType'] = 'int'
                 attributes[i]['isNumber'] = True
-                attributes[i]['default'] = 'SBML_INT_MAX'
+                attributes[i]['default'] = '{}_INT_' \
+                                           'MAX'.format(self.cap_language)
             elif att_type == 'uint':
                 attributes[i]['attType'] = 'unsigned integer'
                 attributes[i]['attTypeCode'] = 'unsigned int'
                 attributes[i]['CType'] = 'unsigned int'
                 attributes[i]['isNumber'] = True
-                attributes[i]['default'] = 'SBML_INT_MAX'
+                attributes[i]['default'] = '{}_INT_' \
+                                           'MAX'.format(self.cap_language)
             elif att_type == 'bool' or att_type == 'boolean':
                 attributes[i]['attType'] = 'boolean'
                 attributes[i]['attTypeCode'] = 'bool'
