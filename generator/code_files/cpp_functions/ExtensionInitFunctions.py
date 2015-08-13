@@ -95,30 +95,33 @@ class ExtensionInitFunctions():
                                                 'packageURIs',
                                                 'packageURIs.push_back'
                                                 '(getXmlnsL3V1V1())'])]
-        implementation = ['SBaseExtensionPoint sbmldocExtPoint(\"core\", '
-                          'SBML_DOCUMENT)']
+        implementation = ['{}ExtensionPoint sbmldocExtPoint(\"core\", '
+                          'SBML_DOCUMENT)'.format(self.std_base)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             tc = query.get_typecode_format(name, self.language)
-            implementation.append('SBaseExtensionPoint {}ExtPoint(\"core\", '
-                                  '{})'.format(name.lower(), tc))
+            implementation.append('{}ExtensionPoint {}ExtPoint(\"core\", '
+                                  '{})'.format(self.std_base, name.lower(), tc))
         code.append(self.create_code_block('line', implementation))
-        implementation = ['SBasePluginCreator<{0}SBMLDocumentPlugin, '
-                          '{0}Extension> sbmldocPluginCreator(sbmldocExtPoint, '
-                          'packageURIs)'.format(self.up_package)]
+        implementation = ['{0}PluginCreator<{1}SBMLDocumentPlugin, '
+                          '{1}Extension> sbmldocPluginCreator(sbmldocExtPoint, '
+                          'packageURIs)'.format(self.std_base, self.up_package)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
-            implementation.append('SBasePluginCreator<{0}{1}Plugin, '
-                                  '{0}Extension> {2}PluginCreator({2}ExtPoint, '
-                                  'packageURIs)'.format(self.up_package,
+            implementation.append('{0}PluginCreator<{1}{2}Plugin, '
+                                  '{1}Extension> {3}PluginCreator({3}ExtPoint, '
+                                  'packageURIs)'.format(self.std_base,
+                                                        self.up_package,
                                                         name, name.lower()))
         code.append(self.create_code_block('line', implementation))
-        implementation = ['{}Extension.addSBasePluginCreator('
-                          '&sbmldocPluginCreator)'.format(self.package)]
+        implementation = ['{}Extension.add{}PluginCreator('
+                          '&sbmldocPluginCreator)'.format(self.package,
+                                                          self.std_base)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
-            implementation.append('{}Extension.addSBasePluginCreator('
+            implementation.append('{}Extension.add{}PluginCreator('
                                   '&{}PluginCreator)'.format(self.package,
+                                                             self.std_base,
                                                              name.lower()))
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block('line', ['int result = '

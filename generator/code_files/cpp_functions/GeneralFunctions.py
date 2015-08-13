@@ -85,6 +85,7 @@ class GeneralFunctions():
         self.has_only_math = class_object['has_only_math']
         self.num_non_std_children = class_object['num_non_std_children']
         self.num_children = class_object['num_children']
+        self.std_base = class_object['std_base']
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -838,10 +839,10 @@ class GeneralFunctions():
         # create the function declaration
         function = 'connectToParent'
         return_type = 'void'
-        arguments = ['SBase* sbase']
+        arguments = ['{}* base'.format(self.std_base)]
 
         # create the function implementation
-        implementation = ['{}::connectToParent(sbase)'.format(self.base_class)]
+        implementation = ['{}::connectToParent(base)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
@@ -850,12 +851,12 @@ class GeneralFunctions():
             else:
                 implementation = ['{} != NULL'.format(att['memberName']),
                                   '{}->connectToParent'
-                                  '(sbase)'.format(att['memberName'])]
+                                  '(base)'.format(att['memberName'])]
                 code.append(self.create_code_block('if', implementation))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
             implementation = ['{}.connectToParent'
-                              '(sbase)'.format(att['memberName'])]
+                              '(base)'.format(att['memberName'])]
             code.append(dict({'code_type': 'line',
                               'code': implementation}))
 

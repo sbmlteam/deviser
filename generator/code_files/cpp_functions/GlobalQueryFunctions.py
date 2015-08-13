@@ -192,7 +192,8 @@ class GlobalQueryFunctions():
         if not self.is_header:
             code = [self.create_code_block('if',
                                            ['metaid.empty()', 'return NULL']),
-                    self.create_code_block('line', ['SBase* obj = NULL'])]
+                    self.create_code_block('line', ['{}* obj = NUL'
+                                                    'L'.format(self.std_base)])]
             if_block = ['obj != NULL', 'return obj']
             if_code = self.create_code_block('if', if_block)
             for i in range(0, len(self.child_elements)):

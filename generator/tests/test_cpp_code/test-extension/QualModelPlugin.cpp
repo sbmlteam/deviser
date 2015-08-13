@@ -554,13 +554,13 @@ QualModelPlugin::connectToChild()
  * Connects to parent element
  */
 void
-QualModelPlugin::connectToParent(SBase* sbase)
+QualModelPlugin::connectToParent(SBase* base)
 {
-  SBasePlugin::connectToParent(sbase);
+  SBasePlugin::connectToParent(base);
 
-  mQualitativeSpecies.connectToParent(sbase);
+  mQualitativeSpecies.connectToParent(base);
 
-  mTransitions.connectToParent(sbase);
+  mTransitions.connectToParent(base);
 }
 
 /** @endcond */

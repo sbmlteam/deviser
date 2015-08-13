@@ -486,7 +486,7 @@ public:
   /**
    * Connects to parent element
    */
-  virtual void connectToParent(SBase* sbase);
+  virtual void connectToParent(SBase* base);
 
   /** @endcond */
 
