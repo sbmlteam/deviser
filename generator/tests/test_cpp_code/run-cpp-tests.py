@@ -32,7 +32,16 @@ def generate_extension_header(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, True)
+    all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
+    all_files.write_files()
+    os.chdir('../.')
+
+
+def generate_types_header(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ExtensionFiles.ExtensionFiles(ob, 'types', True)
     all_files.write_files()
     os.chdir('../.')
 
@@ -101,13 +110,16 @@ def run_test(name, num, class_name, test_case, list_of):
     return fail
 
 
-def run_ext_test(name, class_name, test_case):
+def run_ext_test(name, class_name, test_case, test):
     filename = '.\\test_xml_files\\{}.xml'.format(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
-    generate_extension_header(filename)
+    if test == 0:
+        generate_extension_header(filename)
+    else:
+        generate_types_header(filename)
     correct_file = '.\\test-extension\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
     if os.path.isfile(correct_file):
@@ -261,13 +273,18 @@ def main():
     name = 'qual'
     class_name = 'QualExtension'
     test_case = 'basic extension file'
-    fail += run_ext_test(name, class_name, test_case)
+    fail += run_ext_test(name, class_name, test_case, 0)
 
     name = 'qual'
     num = 0
     class_name = 'QualModelPlugin'
     test_case = 'basic plugin'
     fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'qual'
+    class_name = 'QualExtensionTypes'
+    test_case = 'the types '
+    fail += run_ext_test(name, class_name, test_case, 1)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

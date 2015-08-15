@@ -47,14 +47,16 @@ from util import strFunctions
 class ExtensionFiles():
     """Class for all Extension files"""
 
-    def __init__(self, package, verbose=False):
+    def __init__(self, package, filetype='', verbose=False):
         # # members from object
         self.package = package
         self.verbose = verbose
+        self.file_type = filetype
 
     def write_files(self):
         self.write_header()
-        self.write_code()
+        if self.file_type == '':
+            self.write_code()
 
     def write_plugin_files(self, num):
         class_descrip = self.create_class_description(num)
@@ -62,11 +64,17 @@ class ExtensionFiles():
         self.write_plugin_code(class_descrip)
 
     def write_header(self):
-        fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package)
+        types_fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package,
+                                                                self.file_type)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
-        fileout.write_file()
-        fileout.close_file()
+            print('Writing file {}'.format(types_fileout.filename))
+        if self.file_type == '':
+            types_fileout.write_file()
+        elif self.file_type == 'types':
+            types_fileout.write_types_file()
+        elif self.file_type == 'fwd':
+            types_fileout.write_fwd_file()
+        types_fileout.close_file()
 
     def write_plugin_header(self, class_descrip):
         fileout = CppHeaderFile.CppHeaderFile(class_descrip)

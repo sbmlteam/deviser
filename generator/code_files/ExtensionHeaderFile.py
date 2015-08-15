@@ -45,10 +45,16 @@ from util import query, strFunctions
 class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Extension Header files"""
 
-    def __init__(self, package):
+    def __init__(self, package, filetype=''):
 
         self.up_package = strFunctions.upper_first(package['name'])
-        self.name = '{}Extension'.format(self.up_package)
+        if filetype == '':
+            self.name = '{}Extension'.format(self.up_package)
+        elif filetype == 'types':
+            self.name = '{}ExtensionTypes'.format(self.up_package)
+        elif filetype == 'fwd':
+            self.name = '{}fwd'.format(package['name'])
+
         self.brief_description = \
             'Definition of {}.'.format(self.name)
 
@@ -64,6 +70,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.number = package['number']
         self.enums = package['enums']
         self.offset = package['offset']
+        self.plugins = package['plugins']
 
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
@@ -272,7 +279,33 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             code = init_functions.write_is_valid_enum_string_function(i)
             self.write_function_declaration(code)
 
+    ########################################################################
 
+    # Functions for writing extension types
+
+    def write_type_includes(self):
+        self.write_line('#include <{0}/packages/{1}/common/{1}'
+                        'fwd.h>'.format(self.language, self.package))
+        self.skip_line()
+        self.write_line('#include <{}/packages/{}/extension/{}Extension'
+                        '.h>'.format(self.language, self.package,
+                                     self.up_package))
+        self.write_line('#include <{}/packages/{}/extension/{}{}Document'
+                        'Plugin.h>'.format(self.language, self.package,
+                                           self.up_package,
+                                           self.cap_language))
+
+        for plugin in self.plugins:
+            self.write_line('#include <{}/packages/{}/extension/{}{}'
+                            'Plugin.h>'.format(self.language, self.package,
+                                               self.up_package,
+                                               plugin['sbase']))
+        self.skip_line()
+
+        for element in self.elements:
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}.'
+                            'h>'.format(self.language, self.package,
+                                        element['name']))
 
     ########################################################################
 
@@ -307,4 +340,18 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_cppns_begin()
         self.write_type_defs()
         self.write_cppns_end()
+        self.write_defn_end()
+
+    # Write the extension types file
+    def write_types_file(self):
+        BaseCppFile.BaseCppFile.write_file(self)
+        self.write_defn_begin()
+        self.write_type_includes()
+        self.write_defn_end()
+
+    # Write the extension types file
+    def write_fwd_file(self):
+        BaseCppFile.BaseCppFile.write_file(self)
+        self.write_defn_begin()
+#        self.write_fwd_declarations()
         self.write_defn_end()
