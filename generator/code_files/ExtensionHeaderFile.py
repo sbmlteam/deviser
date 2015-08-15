@@ -309,6 +309,26 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
+    # Functions for writing teh fwd declarations file
+
+    def write_class_or_struct(self):
+        self.write_line('#ifdef __cplusplus')
+        self.write_line('#     define CLASS_OR_STRUCT class')
+        self.write_line('#else')
+        self.write_line('#     define CLASS_OR_STRUCT struct')
+        self.write_line('#endif  /* __cplusplus */')
+
+    def write_classes(self):
+        width = query.get_max_length(self.elements, 'name')
+        for element in self.elements:
+            self.write_spaced_line('typedef CLASS_OR_STRUCT {0:{width}} '
+                                   '{0}_t'.format(element['name'], width=width))
+
+    def write_end_class_or_struct(self):
+        self.write_line('#undef CLASS_OR_STRUCT')
+
+    ########################################################################
+
     # Functions for writing definition declaration
 
     def write_defn_begin(self):
@@ -353,5 +373,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_fwd_file(self):
         BaseCppFile.BaseCppFile.write_file(self)
         self.write_defn_begin()
-#        self.write_fwd_declarations()
+        self.write_class_or_struct()
+        self.write_cppns_begin()
+        self.write_classes()
+        self.write_cppns_end()
+        self.write_end_class_or_struct()
         self.write_defn_end()

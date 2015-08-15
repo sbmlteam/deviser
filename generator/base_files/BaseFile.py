@@ -177,6 +177,13 @@ class BaseFile:
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
             tabs += '  '
 
+    # function to write a line preserving with indenting
+    def write_spaced_line(self, line):
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        self.file_out.write('{0}{1}\n'.format(tabs, line))
+
     # function for blankLines
     def skip_line(self, num=1):
         for i in range(0, num):

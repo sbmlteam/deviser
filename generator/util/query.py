@@ -217,11 +217,12 @@ def overwrites_name(root, name):
             return obj['childrenOverwriteElementName']
     return False
 
+
 def get_static_extension_attribs():
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
-                'attTypeCode' : 'std::string&',
+                'attTypeCode': 'std::string&',
                 'attType': 'string',
                 'memberName': ''})
     attribs.append(att)
@@ -245,7 +246,7 @@ def get_static_extension_attribs():
     attribs.append(att)
     att = dict({'name': 'xmlnsL3V1V1',
                 'capAttName': 'XmlnsL3V1V1',
-                'attTypeCode' : 'std::string&',
+                'attTypeCode': 'std::string&',
                 'attType': 'string',
                 'memberName': 'fix this'})
     attribs.append(att)
@@ -321,3 +322,16 @@ def get_typecode_format(name, language):
             tc += '_'
         tc += char.upper()
     return tc
+
+
+def get_max_length(elements, attribute):
+    if elements is None:
+        return 0
+    if attribute not in elements[0]:
+        return 0
+    else:
+        max_len = len(elements[0][attribute])
+    for i in range(1, len(elements)):
+        if len(elements[i][attribute]) > max_len:
+            max_len = len(elements[i][attribute])
+    return max_len

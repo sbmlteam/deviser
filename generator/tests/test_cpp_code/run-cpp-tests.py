@@ -46,6 +46,15 @@ def generate_types_header(filename):
     os.chdir('../.')
 
 
+def generate_fwd_header(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
+    all_files.write_files()
+    os.chdir('../.')
+
+
 def generate_plugin_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -118,8 +127,10 @@ def run_ext_test(name, class_name, test_case, test):
     print('====================================================')
     if test == 0:
         generate_extension_header(filename)
-    else:
+    elif test == 1:
         generate_types_header(filename)
+    else:
+        generate_fwd_header(filename)
     correct_file = '.\\test-extension\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
     if os.path.isfile(correct_file):
@@ -285,6 +296,11 @@ def main():
     class_name = 'QualExtensionTypes'
     test_case = 'the types '
     fail += run_ext_test(name, class_name, test_case, 1)
+
+    name = 'qual'
+    class_name = 'qualfwd'
+    test_case = 'forward declarations '
+    fail += run_ext_test(name, class_name, test_case, 2)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
