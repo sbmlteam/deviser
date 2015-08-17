@@ -59,7 +59,7 @@ def generate_plugin_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ExtensionFiles.ExtensionFiles(ob, True)
+    all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
     all_files.write_plugin_files(num)
     os.chdir('../.')
 
@@ -301,6 +301,12 @@ def main():
     class_name = 'qualfwd'
     test_case = 'forward declarations '
     fail += run_ext_test(name, class_name, test_case, 2)
+
+    name = 'qual'
+    num = 1
+    class_name = 'QualSBMLDocumentPlugin'
+    test_case = 'document plugin'
+    fail += run_plug_test(name, class_name, test_case, num)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

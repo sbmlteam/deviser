@@ -55,6 +55,9 @@ class GeneralFunctions():
         self.is_plugin = False
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+        self.is_doc_plugin = False
+        if 'is_doc_plugin' in class_object:
+            self.is_doc_plugin = class_object['is_doc_plugin']
         self.ext_class = ''
         if self.is_plugin:
             self.ext_class = class_object['sbase']
@@ -491,6 +494,8 @@ class GeneralFunctions():
         if not self.status == 'cpp_not_list':
             if not(self.status == 'cpp_list' and len(self.child_elements) > 0):
                 return
+        elif self.is_doc_plugin:
+            return
 
         # create comment parts
         title_line = 'Write any contained elements'
@@ -568,8 +573,16 @@ class GeneralFunctions():
         arguments = ['{}Visitor& v'.format(self.cap_language)]
 
         # create the function implementation
-        if not self.has_children \
-                or (self.num_non_std_children == self.num_children):
+        simple = False
+        # cover cases where a doc plugin is used (no children but not simple)
+        # or there are children but they are non std based children (simple)
+        if self.has_children:
+            if self.num_children == self.num_non_std_children:
+                simple = True
+        else:
+            if not self.is_doc_plugin:
+                simple = True
+        if simple:
             implementation = ['return v.visit(*this)']
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -617,6 +630,8 @@ class GeneralFunctions():
     def write_set_document(self):
         if not self.status == 'cpp_not_list':
             return
+        elif self.is_doc_plugin:
+            return
 
         # create comment parts
         title_line = 'Sets the parent {}Document'.format(self.cap_language)
@@ -632,7 +647,6 @@ class GeneralFunctions():
         # create the function implementation
         line = '{}::set{}Document(d)'.format(self.base_class,
                                              self.cap_language)
-        function = 'set{}Document'.format(self.cap_language)
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
@@ -725,6 +739,8 @@ class GeneralFunctions():
     # function to write enable_package
     def write_enable_package(self):
         if not self.status == 'cpp_not_list':
+            return
+        elif self.is_doc_plugin:
             return
 
         # create comment parts
@@ -923,7 +939,178 @@ class GeneralFunctions():
 
     ########################################################################
 
+    # Functions for document plugin
+
+    # function to write is comp flattening done
+    def write_is_comp_flat(self):
+        if not self.is_doc_plugin:
+            return
+
+        # create comment parts
+        title_line = 'Predicate indicating whether \'comp\' flattening has ' \
+                     'been implemented for the {} package.'.format(self.package)
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        arguments = []
+        function = 'isCompFlatteningImplemented'
+        return_type = 'bool'
+
+        # create the function implementation
+        code = [dict({'code_type': 'line', 'code': ['return false']})]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write check consistency
+    def write_check_consistency(self):
+        if not self.is_doc_plugin:
+            return
+
+        # create comment parts
+        title_line = 'Calls check consistency for any relevant ' \
+                     '{} validators.'.format(self.package)
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        arguments = []
+        function = 'checkConsistency'
+        return_type = 'unsigned int'
+
+        # create the function implementation
+        implementation = ['unsigned int nerrors = 0',
+                          'unsigned int total_errors = 0']
+        code = [self.create_code_block('line', implementation)]
+        implementation = ['{0}Document* doc = static_cast<{0}Document*>(this->'
+                          'getParent{0}Object())'.format(self.cap_language),
+                          '{}ErrorLog* log = doc->getError'
+                          'Log()'.format(self.cap_language)]
+        code.append(self.create_code_block('line', implementation))
+        implementation = ['unsigned char applicableValidators = '
+                          'doc->getApplicableValidators()',
+                          'bool id = ((applicableValidators & 0x01) ==0x01)',
+                          'bool sbml = ((applicableValidators & 0x02) ==0x02)']
+        code.append(self.create_code_block('line', implementation))
+        implementation = ['{}IdentifierConsistencyValidator '
+                          'id_validator'.format(self.package),
+                          '{}ConsistencyValidator '
+                          'sbml_validator'.format(self.package)]
+        code.append(self.create_code_block('line', implementation))
+        implementation = self.get_validator_block('id')
+        code.append(self.create_code_block('if', implementation))
+        implementation = self.get_validator_block('sbml')
+        code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block('line', ['return total_errors']))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write read attributes
+    # note not the standard read attributes function; this is specific to
+    # the document plugin
+    def write_read_attributes(self):
+        if not self.is_doc_plugin:
+            return
+
+        # create comment parts
+        title_line = 'Reads the {} attributes in the top-level ' \
+                     'element.'.format(self.package)
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        arguments = ['const XMLAttributes& attributes',
+                     'const ExpectedAttributes& expectedAttributes']
+        function = 'readAttributes'
+        return_type = 'void'
+
+        # create the function implementation
+        implementation = ['get{0}Document() != NULL && get{0}Document()->'
+                          'getLevel() < 3'.format(self.cap_language),
+                          'return']
+        code = [dict({'code_type': 'if', 'code': implementation})]
+        implementation = ['SBMLErrorLog* log = getErrorLog()',
+                          'unsigned int numErrs = log->getNumErrors()',
+                          'XMLTriple tripleReqd(\"required\", mURI, '
+                          'getPrefix())',
+                          'bool assigned = attributes.readInto(tripleReqd, '
+                          'mRequired)']
+        code.append(self.create_code_block('line', implementation))
+        implementation = ['log->getNumErrors() == numErrs + 1 && '
+                          'log->contains(XMLAttributeTypeMismatch)',
+                          'log->remove(XMLAttributeTypeMismatch)',
+                          'log->logPackageError(\"{}\", {}AttributeRequired'
+                          'MustBeBoolean, getPackageVersion(), getLevel(), '
+                          'getVersion())'.format(self.package.lower(),
+                                                 self.package),
+                          'else',
+                          'log->logPackageError(\"{}\", {}AttributeRequired'
+                          'Missing, getPackageVersion(), getLevel(), '
+                          'getVersion())'.format(self.package.lower(),
+                                                 self.package),
+                          ]
+        nested_if = self.create_code_block('if_else', implementation)
+        implementation = ['assigned == false', nested_if,
+                          'else', 'mIsSetRequired = true']
+        code.append(self.create_code_block('if_else', implementation))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    ########################################################################
+
     # HELPER FUNCTIONS
+
+    def get_validator_block(self, valid_id):
+        bail_if = self.create_code_block('if',
+                                         ['log->getNumFailsWithSeverity(LIBSBML'
+                                          '_SEV_ERROR) > 0',
+                                          'return total_errors'])
+        errors_if = self.create_code_block('if',
+                                           ['nerrors > 0',
+                                            'log->add({}_validator.get'
+                                            'Failures())'.format(valid_id),
+                                            bail_if])
+        code_block = ['{}'.format(valid_id),
+                      '{}_validator.init()'.format(valid_id),
+                      'nerrors = {}_validator.validate(*doc)'.format(valid_id),
+                      'total_errors += nerrors', errors_if]
+        return code_block
 
     @staticmethod
     def create_code_block(code_type, lines):

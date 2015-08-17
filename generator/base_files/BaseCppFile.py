@@ -101,6 +101,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_attributes = []
         self.has_parent_list_of = False
         self.is_plugin = False
+        self.is_doc_plugin = False
 
     ########################################################################
 
@@ -125,6 +126,8 @@ class BaseCppFile(BaseFile.BaseFile):
         # are we a plugin
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+        if 'is_doc_plugin' in class_object:
+            self.is_doc_plugin = class_object['is_doc_plugin']
 
         # information about the base class
         self.baseClass = class_object['baseClass']
@@ -137,8 +140,12 @@ class BaseCppFile(BaseFile.BaseFile):
         elif self.is_list_of and not self.is_plugin \
                 and self.baseClass != 'ListOf':
             self.has_std_base = False
-        elif self.is_plugin and self.baseClass != 'SBasePlugin':
+        elif self.is_plugin and not self.is_doc_plugin \
+                and self.baseClass != 'SBasePlugin':
             self.has_std_base = False
+        elif self.is_doc_plugin:
+            self.has_std_base = True
+            self.std_base = 'SBMLDocumentPlugin'
         self.class_object['has_std_base'] = self.has_std_base
         self.class_object['std_base'] = self.std_base
 

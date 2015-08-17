@@ -127,8 +127,19 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(self.child_lo_elements) > 0:
             self.write_line('#include <{}'
                             '/util/ElementFilter.h>'.format(self.language))
-        if self.is_plugin and self.language == 'sbml':
+        if self.is_plugin and not self.is_doc_plugin \
+                and self.language == 'sbml':
             self.write_line('#include <sbml/Model.h>')
+
+        if self.is_doc_plugin:
+            self.write_line('#include <{}/packages/{}/validator/{}Consistency'
+                            'Validator.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  self.package))
+            self.write_line('#include <{}/packages/{}/validator/{}Identifier'
+                            'ConsistencyValidator.'
+                            'h>'.format(self.language, self.package.lower(),
+                                        self.package))
 
         if self.has_math:
             self.write_line('#include <{}/math/MathML.h>'.format(self.language))
@@ -345,6 +356,16 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         code = gen_functions.write_enable_package()
         self.write_function_implementation(code, exclude=True)
+
+        if self.is_doc_plugin:
+            code = gen_functions.write_is_comp_flat()
+            self.write_function_implementation(code, exclude=True)
+
+            code = gen_functions.write_check_consistency()
+            self.write_function_implementation(code, exclude=True)
+
+            code = gen_functions.write_read_attributes()
+            self.write_function_implementation(code, exclude=True)
 
     ########################################################################
 

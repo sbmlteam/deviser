@@ -68,6 +68,9 @@ class Constructors():
         self.is_plugin = False
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+        self.is_doc_plugin = False
+        if 'is_doc_plugin' in class_object:
+            self.is_doc_plugin = class_object['is_doc_plugin']
 
     ########################################################################
 
@@ -352,7 +355,10 @@ class Constructors():
         ns = '{}ns'.format(package)
         constructor_args = self.write_constructor_args(ns)
         # create the function implementation
-        code = [dict({'code_type': 'line', 'code': ['connectToChild()']})]
+        if self.is_doc_plugin:
+            code = []
+        else:
+            code = [dict({'code_type': 'line', 'code': ['connectToChild()']})]
 
         return dict({'title_line': title_line,
                      'params': params,

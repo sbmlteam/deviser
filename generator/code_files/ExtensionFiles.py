@@ -52,6 +52,7 @@ class ExtensionFiles():
         self.package = package
         self.verbose = verbose
         self.file_type = filetype
+        self.language = 'sbml'
 
     def write_files(self):
         self.write_header()
@@ -98,28 +99,51 @@ class ExtensionFiles():
         fileout.close_file()
 
     def create_class_description(self, num):
-        class_object = self.package['plugins'][num]
-        up_package = strFunctions.upper_first(self.package['name'])
-        class_object['name'] = '{}{}Plugin'.format(up_package,
-                                                   class_object['sbase'])
-        class_object['is_plugin'] = True
-        class_object['is_list_of'] = False
-        class_object['hasListOf'] = False
-        class_object['package'] = self.package['name']
-        class_object['typecode'] = ''
-        class_object['baseClass'] = 'SBasePlugin'
-        class_object['sid_refs'] = []
-        class_object['unit_sid_refs'] = []
-        class_object['hasMath'] = False
-        for i in range(0, len(class_object['extension'])):
-            class_object['attribs'].append(self.get_attrib_descrip
-                                           (class_object['extension'][i]))
+        if num >= len(self.package['plugins']):
+            class_object = self.create_document_plugin_desc()
+        else:
+            class_object = self.package['plugins'][num]
+            up_package = strFunctions.upper_first(self.package['name'])
+            class_object['name'] = '{}{}Plugin'.format(up_package,
+                                                       class_object['sbase'])
+            class_object['is_plugin'] = True
+            class_object['is_list_of'] = False
+            class_object['hasListOf'] = False
+            class_object['package'] = self.package['name']
+            class_object['typecode'] = ''
+            class_object['baseClass'] = 'SBasePlugin'
+            class_object['sid_refs'] = []
+            class_object['unit_sid_refs'] = []
+            class_object['hasMath'] = False
+            for i in range(0, len(class_object['extension'])):
+                class_object['attribs'].append(self.get_attrib_descrip
+                                               (class_object['extension'][i]))
 
-        for i in range(0, len(class_object['lo_extension'])):
-            class_object['attribs'].append(self.get_attrib_descrip
-                                           (class_object['lo_extension'][i]))
+            for elem in class_object['lo_extension']:
+                class_object['attribs'].append(self.get_attrib_descrip(elem))
 
         return class_object
+
+    def create_document_plugin_desc(self):
+        up_package = strFunctions.upper_first(self.package['name'])
+        up_language = self.language.upper()
+        doc_plug = dict({'attribs': [],
+                         'extension': [],
+                         'lo_extension': [],
+                         'sbase': '{}Document'.format(up_language),
+                         'name': '{}{}DocumentPlugin'.format(up_package,
+                                                             up_language),
+                         'is_plugin': True,
+                         'is_list_of': False,
+                         'hasListOf': False,
+                         'package': self.package['name'],
+                         'typecode': '',
+                         'baseClass': '{}DocumentPlugin'.format(up_language),
+                         'sid_refs': [],
+                         'unit_sid_refs': [],
+                         'hasMath': False,
+                         'is_doc_plugin': True})
+        return doc_plug
 
     @staticmethod
     def get_attrib_descrip(element):

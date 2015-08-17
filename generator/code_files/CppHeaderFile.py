@@ -140,8 +140,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     self.baseClass))
+        need_extension = False
+        if self.package:
+            if self.is_doc_plugin:
+                need_extension = True
+            elif not self.is_plugin:
+                need_extension = True
 
-        if self.package and not self.is_plugin:
+        if need_extension:
             self.write_line(
                 '#include <{0}/packages/{1}/extension/{2}Extension.h>'
                 .format(self.language, self.package.lower(), self.package))
@@ -352,6 +358,18 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         code = gen_functions.write_enable_package()
         self.write_function_declaration(code, exclude=True)
+
+        if self.is_doc_plugin:
+            code = gen_functions.write_is_comp_flat()
+            self.write_function_declaration(code, exclude=True)
+
+            code = gen_functions.write_check_consistency()
+            self.write_function_declaration(code, exclude=True)
+
+            self.write_swig_begin()
+            code = gen_functions.write_read_attributes()
+            self.write_function_declaration(code, exclude=True)
+            self.write_swig_end()
 
     ########################################################################
 
