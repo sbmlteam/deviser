@@ -577,7 +577,7 @@ ParametricGeometry::enablePackageInternal(const std::string& pkgURI,
 {
   GeometryDefinition::enablePackageInternal(pkgURI, pkgPrefix, flag);
 
-  mSpatialPoints.enablePackageInternal(pkgURI, pkgPrefix, flag);
+  mSpatialPoints->enablePackageInternal(pkgURI, pkgPrefix, flag);
 
   mParametricObjects.enablePackageInternal(pkgURI, pkgPrefix, flag);
 }

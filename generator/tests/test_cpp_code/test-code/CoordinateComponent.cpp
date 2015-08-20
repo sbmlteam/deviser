@@ -565,7 +565,7 @@ void
 CoordinateComponent::renameSIdRefs(const std::string& oldid,
                                    const std::string& newid)
 {
-  if (isSetUnit && mUnit == oldid)
+  if (isSetUnit() && mUnit == oldid)
   {
     setUnit(newid);
   }
@@ -757,9 +757,9 @@ CoordinateComponent::enablePackageInternal(const std::string& pkgURI,
 {
   SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
 
-  mBoundaryMin.enablePackageInternal(pkgURI, pkgPrefix, flag);
+  mBoundaryMin->enablePackageInternal(pkgURI, pkgPrefix, flag);
 
-  mBoundaryMax.enablePackageInternal(pkgURI, pkgPrefix, flag);
+  mBoundaryMax->enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */

@@ -905,7 +905,7 @@ MyTestClass::renameSIdRefs(const std::string& oldid, const std::string& newid)
     setRef2(newid);
   }
 
-  if (isSetRefUnit && mRefUnit == oldid)
+  if (isSetRefUnit() && mRefUnit == oldid)
   {
     setRefUnit(newid);
   }

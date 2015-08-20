@@ -150,7 +150,7 @@ class GeneralFunctions():
             code.append(dict({'code_type': 'if', 'code': implementation}))
         for i in range(0, len(self.unit_sid_refs)):
             ref = self.unit_sid_refs[i]
-            implementation = ['isSet{} && {} == '
+            implementation = ['isSet{}() && {} == '
                               'oldid'.format(ref['capAttName'],
                                              ref['memberName']),
                               'set{}(newid)'.format(ref['capAttName'])]
@@ -768,7 +768,7 @@ class GeneralFunctions():
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['{}.enablePackageInternal'
+                    implementation = ['{}->enablePackageInternal'
                                       '(pkgURI, pkgPrefix, '
                                       'flag)'.format(att['memberName'])]
                     code.append(dict({'code_type': 'line',
