@@ -322,7 +322,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         width = query.get_max_length(self.elements, 'name')
         for element in self.elements:
             self.write_spaced_line('typedef CLASS_OR_STRUCT {0:{width}} '
-                                   '{0}_t'.format(element['name'], width=width))
+                                   '{0}_t;'.format(element['name'], width=width))
 
     def write_end_class_or_struct(self):
         self.write_line('#undef CLASS_OR_STRUCT')

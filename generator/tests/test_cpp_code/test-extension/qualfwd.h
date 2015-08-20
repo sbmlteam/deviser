@@ -46,12 +46,12 @@
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-typedef CLASS_OR_STRUCT QualitativeSpecies QualitativeSpecies_t
-typedef CLASS_OR_STRUCT Transition         Transition_t
-typedef CLASS_OR_STRUCT Input              Input_t
-typedef CLASS_OR_STRUCT Output             Output_t
-typedef CLASS_OR_STRUCT DefaultTerm        DefaultTerm_t
-typedef CLASS_OR_STRUCT FunctionTerm       FunctionTerm_t
+typedef CLASS_OR_STRUCT QualitativeSpecies QualitativeSpecies_t;
+typedef CLASS_OR_STRUCT Transition         Transition_t;
+typedef CLASS_OR_STRUCT Input              Input_t;
+typedef CLASS_OR_STRUCT Output             Output_t;
+typedef CLASS_OR_STRUCT DefaultTerm        DefaultTerm_t;
+typedef CLASS_OR_STRUCT FunctionTerm       FunctionTerm_t;
 
 
 LIBSBML_CPP_NAMESPACE_END
