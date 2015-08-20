@@ -677,9 +677,15 @@ CoordinateComponent::accept(SBMLVisitor& v) const
 {
   v.visit(*this);
 
-  TO DO.accept(v);
+  if (mBoundaryMin != NULL)
+  {
+    mBoundaryMin->accept(v);
+  }
 
-  TO DO.accept(v);
+  if (mBoundaryMax != NULL)
+  {
+    mBoundaryMax->accept(v);
+  }
 
   v.leave(*this);
   return true;

@@ -8,6 +8,7 @@ from parseXML import ParseXML
 
 use_new = True
 
+fails = []
 
 def generate_cpp_header(filename, num):
     ob = createPackageFromXml.parse_deviser_xml(filename)
@@ -73,12 +74,14 @@ def read_file(path):
 
 
 def compare_files(infile, outfile):
+    global fails
     ret = 0
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
         print('PASSED')
     else:
+        fails.append(infile)
         print('=================>> FAILED')
         ret = 1
     return ret
@@ -252,6 +255,13 @@ def main():
     test_case = 'overwrites element name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'spatial'
+    num = 13
+    class_name = 'ParametricGeometry'
+    list_of = ''
+    test_case = 'child element and child lo_element'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'test_att'
     num = 1
     class_name = 'Unit'
@@ -311,6 +321,8 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))
+        for name in fails:
+            print(name)
 
 
 if __name__ == '__main__':

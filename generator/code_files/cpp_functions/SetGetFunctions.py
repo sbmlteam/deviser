@@ -1051,10 +1051,11 @@ class SetGetFunctions():
                 line = ['{} != NULL'.format(member),
                         '{}->setParentSBMLObject(this)'.format(member)]
                 nested_if = self.create_code_block('if', line)
-            elif attribute['children_overwrite']:
-                line = ['{} != NULL'.format(member),
-                        '{}->setElementName(\"{}\")'.format(member, name),
-                        '{}->connectToParent(this)'.format(member)]
+            elif not attribute['is_ml']:
+                line = ['{} != NULL'.format(member)]
+                if attribute['children_overwrite']:
+                    line.append('{}->setElementName(\"{}\")'.format(member, name))
+                line.append('{}->connectToParent(this)'.format(member))
                 nested_if = self.create_code_block('if', line)
             implementation.append('else')
             implementation.append('delete {}'.format(member))

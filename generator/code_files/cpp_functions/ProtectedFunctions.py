@@ -71,6 +71,7 @@ class ProtectedFunctions():
         self.has_math = class_object['has_math']
         self.std_base = class_object['std_base']
         self.base_class = class_object['baseClass']
+        self.has_std_base = class_object['has_std_base']
         self.child_base_class = ''
         if 'child_base_class' in class_object:
             self.child_base_class = class_object['child_base_class']
@@ -149,9 +150,14 @@ class ProtectedFunctions():
                 else:
                     code = self.write_create_object_anomalous_lo(upkg, ns)
             else:
+                base_create = 'NULL'
+                if not self.has_std_base:
+                    base_create = '{}::createObject' \
+                                  '(stream)'.format(self.base_class)
                 code = [self.create_code_block('line',
                                                ['{}* obj = '
-                                                'NULL'.format(self.std_base)])]
+                                                '{}'.format(self.std_base,
+                                                            base_create)])]
                 if self.is_plugin:
                     lines = ['const std::string& name = '
                              'stream.peek().getName()',
@@ -183,6 +189,7 @@ class ProtectedFunctions():
                 else:
                     implementation = []
                     i = 0
+                    children_dealt_with = 0
                     for i in range(0, len(self.child_elements)):
                         element = self.child_elements[i]
                         if 'is_ml' in element and element['is_ml']:
@@ -196,6 +203,7 @@ class ProtectedFunctions():
                                                              overwrite,
                                                              element['element'],
                                                              ns)
+                        children_dealt_with += 1
                         if i < num_children - 1:
                             implementation.append('else if')
                     for j in range(i, i + len(self.child_lo_elements)):
@@ -206,7 +214,7 @@ class ProtectedFunctions():
                         else:
                             implementation += self.get_lo_block(element,
                                                                 error_line)
-                        if j < num_children - 1:
+                        if j < num_children - children_dealt_with - 1:
                             implementation.append('else if')
                     if not self.is_plugin:
                         code.append(self.create_code_block('else_if',

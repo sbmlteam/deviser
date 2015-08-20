@@ -451,7 +451,7 @@ SampledFieldGeometry::writeElements(XMLOutputStream& stream) const
     mSampledVolumes.write(stream);
   }
 
-  GeometryDefinition::writeExtensionElements(stream);
+  SBase::writeExtensionElements(stream);
 }
 
 /** @endcond */
@@ -613,7 +613,7 @@ SampledFieldGeometry::getAllElements(ElementFilter* filter)
 SBase*
 SampledFieldGeometry::createObject(XMLInputStream& stream)
 {
-  SBase* obj = NULL;
+  SBase* obj = GeometryDefinition::createObject(stream);
 
   const std::string& name = stream.peek().getName();
 

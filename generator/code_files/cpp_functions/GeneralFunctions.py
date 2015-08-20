@@ -541,7 +541,7 @@ class GeneralFunctions():
         if not self.is_plugin:
             code.append(dict({'code_type': 'line',
                               'code': ['{}::writeExtension'
-                                       'Elements(stream)'.format(base)]}))
+                                       'Elements(stream)'.format(self.std_base)]}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -599,8 +599,9 @@ class GeneralFunctions():
                                   'v.leave(*{})'.format(obj)]
                 code = [self.create_code_block('line', implementation)]
             for i in range(0, len(self.child_elements)):
-                implementation = ['{}.accept(v)'.format('TO DO')]
-                code.append(dict({'code_type': 'line',
+                elem = self.child_elements[i]
+                implementation = ['{} != NULL'.format(elem['memberName']), '{}->accept(v)'.format(elem['memberName'])]
+                code.append(dict({'code_type': 'if',
                                   'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]

@@ -404,8 +404,8 @@ class ParseXML():
             plug_elements = []
             plug_lo_elements = []
             ext_point = self.get_value(node, 'extensionPoint')
-            add_decls = self.get_value(node, 'additionalDecls')
-            add_defs = self.get_value(node, 'additionalDefs')
+            add_decls = self.get_add_code_value(self, node, 'additionalDecls')
+            add_defs = self.get_add_code_value(self, node, 'additionalDefs')
 
             # read references to elements
             for reference in node.getElementsByTagName('reference'):

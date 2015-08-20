@@ -187,6 +187,11 @@ ListOfFunctionTerms::setDefaultTerm(const DefaultTerm* defaultTerm)
   {
     delete mDefaultTerm;
     mDefaultTerm = (defaultTerm != NULL) ? defaultTerm->clone() : NULL;
+    if (mDefaultTerm != NULL)
+    {
+      mDefaultTerm->connectToParent(this);
+    }
+
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -443,7 +448,7 @@ ListOfFunctionTerms::writeElements(XMLOutputStream& stream) const
     mDefaultTerm->write(stream);
   }
 
-  ListOf::writeExtensionElements(stream);
+  SBase::writeExtensionElements(stream);
 }
 
 /** @endcond */
