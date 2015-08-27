@@ -33,6 +33,7 @@
 #include <sbml/packages/spatial/sbml/CSGNode.h>
 #include <sbml/packages/spatial/sbml/ListOfCSGNodes.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
+
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGTranslation.h>
 #include <sbml/packages/spatial/sbml/CSGRotation.h>
@@ -486,7 +487,7 @@ CSGNode_createCSGPrimitive(unsigned int level,
                            unsigned int version,
                            unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGPrimitive(level, version, pkgVersion);
 }
 
 
@@ -500,7 +501,7 @@ CSGNode_createCSGTranslation(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGTranslation(level, version, pkgVersion);
 }
 
 
@@ -514,7 +515,7 @@ CSGNode_createCSGRotation(unsigned int level,
                           unsigned int version,
                           unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGRotation(level, version, pkgVersion);
 }
 
 
@@ -528,7 +529,7 @@ CSGNode_createCSGScale(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGScale(level, version, pkgVersion);
 }
 
 
@@ -542,7 +543,7 @@ CSGNode_createCSGHomogeneousTransformation(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGHomogeneousTransformation(level, version, pkgVersion);
 }
 
 
@@ -556,7 +557,7 @@ CSGNode_createCSGPseudoPrimitive(unsigned int level,
                                  unsigned int version,
                                  unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGPseudoPrimitive(level, version, pkgVersion);
 }
 
 
@@ -570,7 +571,7 @@ CSGNode_createCSGSetOperator(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion)
 {
-  return new CSGNode(level, version, pkgVersion);
+  return new CSGSetOperator(level, version, pkgVersion);
 }
 
 

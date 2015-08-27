@@ -862,7 +862,7 @@ SpatialPoints::writeAttributes(XMLOutputStream& stream) const
  * Writes the array data as a text element
  */
 void
-SpatialPoints::setElementText(const std::string& text) const
+SpatialPoints::setElementText(const std::string& text)
 {
   stringstream strStream(text);
   double val;

@@ -541,7 +541,8 @@ class GeneralFunctions():
         if not self.is_plugin:
             code.append(dict({'code_type': 'line',
                               'code': ['{}::writeExtension'
-                                       'Elements(stream)'.format(self.std_base)]}))
+                                       'Elements'
+                                       '(stream)'.format(self.std_base)]}))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -600,7 +601,8 @@ class GeneralFunctions():
                 code = [self.create_code_block('line', implementation)]
             for i in range(0, len(self.child_elements)):
                 elem = self.child_elements[i]
-                implementation = ['{} != NULL'.format(elem['memberName']), '{}->accept(v)'.format(elem['memberName'])]
+                implementation = ['{} != NULL'.format(elem['memberName']),
+                                  '{}->accept(v)'.format(elem['memberName'])]
                 code.append(dict({'code_type': 'if',
                                   'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
@@ -768,10 +770,11 @@ class GeneralFunctions():
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['{}->enablePackageInternal'
+                    implementation = ['isSet{}()'.format(att['capAttName']),
+                                      '{}->enablePackageInternal'
                                       '(pkgURI, pkgPrefix, '
                                       'flag)'.format(att['memberName'])]
-                    code.append(dict({'code_type': 'line',
+                    code.append(dict({'code_type': 'if',
                                       'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]

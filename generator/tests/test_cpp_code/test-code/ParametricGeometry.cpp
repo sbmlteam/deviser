@@ -577,7 +577,10 @@ ParametricGeometry::enablePackageInternal(const std::string& pkgURI,
 {
   GeometryDefinition::enablePackageInternal(pkgURI, pkgPrefix, flag);
 
-  mSpatialPoints->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  if (isSetSpatialPoints())
+  {
+    mSpatialPoints->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
 
   mParametricObjects.enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
@@ -708,8 +711,8 @@ ParametricGeometry::createObject(XMLInputStream& stream)
     if (mSpatialPoints != NULL)
     {
       getErrorLog()->logPackageError("spatial",
-        SpatialParametricGeometryElements, getPackageVersion(), getLevel(),
-          getVersion());
+        SpatialParametricGeometryAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
     }
 
     mSpatialPoints = new SpatialPoints(spatialns);
@@ -720,8 +723,8 @@ ParametricGeometry::createObject(XMLInputStream& stream)
     if (mParametricObjects.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
-        SpatialParametricGeometryElements, getPackageVersion(), getLevel(),
-          getVersion());
+        SpatialParametricGeometryAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
     }
 
     obj = &mParametricObjects;

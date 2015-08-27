@@ -747,7 +747,7 @@ protected:
   /**
    * Writes the array data as a text element
    */
-  virtual void setElementText(const std::string& text) const;
+  virtual void setElementText(const std::string& text);
 
   /** @endcond */
 

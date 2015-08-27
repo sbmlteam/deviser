@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/spatial/sbml/ListOfCSGNodes.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
+
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGTranslation.h>
 #include <sbml/packages/spatial/sbml/CSGRotation.h>

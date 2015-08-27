@@ -212,3 +212,10 @@ def compare_no_case(name, reference):
         return True
     else:
         return False
+
+
+def get_class_from_plugin(plugin, package):
+    num = len(package)
+    length = len(plugin)
+    name = plugin[num:length-6]
+    return name

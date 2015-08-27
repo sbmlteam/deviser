@@ -517,6 +517,12 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             element['std_base'] = self.std_base
             element['package'] = self.package
             element['is_header'] = self.is_header
+            element['is_plugin'] = self.is_plugin
+            if self.is_plugin:
+                element['plugin'] = self.class_name
+            if 'concrete' in element:
+                element['concretes'] = query.get_concretes(
+                    self.class_object['root'], element['concrete'])
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,
@@ -557,8 +563,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             code = lo_functions.write_get_num_element_function()
             self.write_function_declaration(code)
 
-            code = lo_functions.write_create_element_function()
-            self.write_function_declaration(code)
+            if 'concretes' in element:
+                for n in range(0, len(element['concretes'])):
+                    code = lo_functions.write_create_element_function(n+1)
+                    self.write_function_declaration(code)
+            else:
+                code = lo_functions.write_create_element_function()
+                self.write_function_declaration(code)
 
             code = lo_functions.write_remove_element_by_index()
             self.write_function_declaration(code)

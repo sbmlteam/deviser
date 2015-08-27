@@ -171,6 +171,34 @@ def run_plug_test(name, class_name, test_case, num):
 
 def main():
     fail = 0
+    name = 'test_att'
+    num = 1
+    class_name = 'Unit'
+    list_of = ''
+    test_case = 'unit sid ref'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_att'
+    num = 2
+    class_name = 'MyLoTest'
+    list_of = 'ListOfMyLoTests'
+    test_case = 'attribute on ListOf'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_att'
+    num = 0
+    class_name = 'MyTestClass'
+    list_of = ''
+    test_case = 'all types of attributes'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'qual'
+    num = 5
+    class_name = 'FunctionTerm'
+    list_of = 'ListOfFunctionTerms'
+    test_case = 'an element on ListOf'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'qual'
     num = 3
     class_name = 'Output'
@@ -185,12 +213,32 @@ def main():
     test_case = 'class with child list of elements'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'spatial'
-    num = 12
-    class_name = 'AnalyticVolume'
-    list_of = ''
-    test_case = 'class with math child'
-    fail += run_test(name, num, class_name, test_case, list_of)
+    name = 'qual'
+    class_name = 'QualExtension'
+    test_case = 'basic extension file'
+    fail += run_ext_test(name, class_name, test_case, 0)
+
+    name = 'qual'
+    num = 0
+    class_name = 'QualModelPlugin'
+    test_case = 'basic plugin'
+    fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'qual'
+    class_name = 'QualExtensionTypes'
+    test_case = 'the types '
+    fail += run_ext_test(name, class_name, test_case, 1)
+
+    name = 'qual'
+    class_name = 'qualfwd'
+    test_case = 'forward declarations '
+    fail += run_ext_test(name, class_name, test_case, 2)
+
+    name = 'qual'
+    num = 1
+    class_name = 'QualSBMLDocumentPlugin'
+    test_case = 'document plugin'
+    fail += run_plug_test(name, class_name, test_case, num)
 
     name = 'distrib'
     num = 2
@@ -204,13 +252,6 @@ def main():
     class_name = 'CoordinateComponent'
     list_of = 'ListOfCoordinateComponents'
     test_case = 'class with same child element diff name'
-    fail += run_test(name, num, class_name, test_case, list_of)
-
-    name = 'test_att'
-    num = 0
-    class_name = 'MyTestClass'
-    list_of = ''
-    test_case = 'all types of attributes'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
@@ -262,26 +303,33 @@ def main():
     test_case = 'child element and child lo_element'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'test_att'
-    num = 1
-    class_name = 'Unit'
+    name = 'spatial'
+    num = 12
+    class_name = 'AnalyticVolume'
     list_of = ''
-    test_case = 'unit sid ref'
+    test_case = 'class with math child'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'test_att'
-    num = 2
-    class_name = 'MyLoTest'
-    list_of = 'ListOfMyLoTests'
-    test_case = 'attribute on ListOf'
+    name = 'spatial'
+    num = 33
+    class_name = 'MixedGeometry'
+    list_of = ''
+    test_case = 'class with math child'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'qual'
-    num = 5
-    class_name = 'FunctionTerm'
-    list_of = 'ListOfFunctionTerms'
-    test_case = 'an element on ListOf'
+
+    name = 'spatial'
+    num = 26
+    class_name = 'CSGSetOperator'
+    list_of = ''
+    test_case = 'contains list of that has abstracts that are abstract'
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
+    num = 1
+    class_name = 'SpatialCompartmentPlugin'
+    test_case = 'plugin with child element'
+    fail += run_plug_test(name, class_name, test_case, num)
 
     if use_new:
         name = 'test_vers'
@@ -291,32 +339,6 @@ def main():
         test_case = 'multiple versions'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'qual'
-    class_name = 'QualExtension'
-    test_case = 'basic extension file'
-    fail += run_ext_test(name, class_name, test_case, 0)
-
-    name = 'qual'
-    num = 0
-    class_name = 'QualModelPlugin'
-    test_case = 'basic plugin'
-    fail += run_plug_test(name, class_name, test_case, num)
-
-    name = 'qual'
-    class_name = 'QualExtensionTypes'
-    test_case = 'the types '
-    fail += run_ext_test(name, class_name, test_case, 1)
-
-    name = 'qual'
-    class_name = 'qualfwd'
-    test_case = 'forward declarations '
-    fail += run_ext_test(name, class_name, test_case, 2)
-
-    name = 'qual'
-    num = 1
-    class_name = 'QualSBMLDocumentPlugin'
-    test_case = 'document plugin'
-    fail += run_plug_test(name, class_name, test_case, num)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

@@ -757,9 +757,15 @@ CoordinateComponent::enablePackageInternal(const std::string& pkgURI,
 {
   SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
 
-  mBoundaryMin->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  if (isSetBoundaryMin())
+  {
+    mBoundaryMin->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
 
-  mBoundaryMax->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  if (isSetBoundaryMax())
+  {
+    mBoundaryMax->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
 }
 
 /** @endcond */
@@ -897,8 +903,8 @@ CoordinateComponent::createObject(XMLInputStream& stream)
     if (mBoundaryMin != NULL)
     {
       getErrorLog()->logPackageError("spatial",
-        SpatialCoordinateComponentElements, getPackageVersion(), getLevel(),
-          getVersion());
+        SpatialCoordinateComponentAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
     }
 
     mBoundaryMin = new Boundary(spatialns);
@@ -910,8 +916,8 @@ CoordinateComponent::createObject(XMLInputStream& stream)
     if (mBoundaryMax != NULL)
     {
       getErrorLog()->logPackageError("spatial",
-        SpatialCoordinateComponentElements, getPackageVersion(), getLevel(),
-          getVersion());
+        SpatialCoordinateComponentAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
     }
 
     mBoundaryMax = new Boundary(spatialns);

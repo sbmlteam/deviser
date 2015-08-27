@@ -85,6 +85,12 @@ class SetGetFunctions():
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
+        self.is_header = True
+        if 'is_header' in class_object:
+            self.is_header = class_object['is_header']
+        self.is_plugin = False
+        if 'is_plugin' in class_object:
+            self.is_plugin = class_object['is_plugin']
     ########################################################################
 
     # Functions for writing get functions
@@ -832,7 +838,8 @@ class SetGetFunctions():
                                              self.abbrev_parent))
         return_type = '{}'.format(att_type)
 
-        if self.is_cpp_api:
+        code = []
+        if not self.is_header and self.is_cpp_api:
             member = attribute['memberName']
             up_pack = self.package.upper()
             low_pack = self.package.lower()
@@ -848,13 +855,17 @@ class SetGetFunctions():
                 line = ['{}->setElementName(\"{}\")'.format(member,
                                                             attribute['name'])]
                 code.append(self.create_code_block('line', line))
+            if self.is_plugin:
+                line = ['{0}->set{1}Document(this->get{1}'
+                        'Document())'.format(member, self.language.upper())]
+                code.append(self.create_code_block('line', line))
             code.append(self.create_code_block('line',
                                                ['delete {}'
                                                 'ns'.format(low_pack)]))
             code.append(self.create_code_block('line', ['connectToChild()']))
             code.append((self.create_code_block('line',
                                                 ['return {}'.format(member)])))
-        else:
+        elif not self.is_header:
             implementation = ['{} == NULL'.format(self.abbrev_parent),
                               'return NULL']
             code = [self.create_code_block('if', implementation)]
@@ -877,7 +888,7 @@ class SetGetFunctions():
                      'implementation': code})
 
     # function to write create functions
-    def write_create_concrete_child(self, attribute):
+    def write_create_concrete_child(self, attribute, member=''):
         # useful variables
         name = strFunctions.upper_first(attribute['element'])
         if self.is_cpp_api:
@@ -910,7 +921,31 @@ class SetGetFunctions():
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
         return_type = '{}'.format(att_type)
-        code = [self.create_code_block('line', 'to do')]
+
+        up_pack = self.package.upper()
+        low_pack = self.package.lower()
+        if self.is_cpp_api:
+            implementation = ['{} != NULL'.format(member),
+                              'delete {}'.format(member)]
+            code = [self.create_code_block('if', implementation)]
+            implementation = ['{}_CREATE_NS({}ns, '
+                              'getSBMLNamespaces())'.format(up_pack, low_pack),
+                              '{} = new {}'
+                              '({}ns)'.format(member, att_name, low_pack)]
+            code.append(self.create_code_block('line', implementation))
+            code.append(self.create_code_block('line',
+                                               ['delete {}'
+                                                'ns'.format(low_pack)]))
+            code.append(self.create_code_block('line', ['connectToChild()']))
+            code.append((self.create_code_block('line',
+                                                ['return static_cast<{}*>'
+                                                 '({})'.format(att_name,
+                                                               member)])))
+        else:
+            implementation = ['return ({0} != NULL) ? {0}->create{1}() : '
+                              'NULL'.format(self.abbrev_parent,
+                                            attribute['element'])]
+            code = [self.create_code_block('line', implementation)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -1033,38 +1068,62 @@ class SetGetFunctions():
                     code.append(self.create_code_block('if_else',
                                                        implementation))
         elif attribute['type'] == 'element':
-            clone = 'clone'
-            nested_if = []
-            implementation = ['{} == {}'.format(member, name),
-                              'return LIBSBML_OPERATION_SUCCESS',
-                              'else if',
-                              '{} == NULL'.format(name),
-                              'delete {}'.format(member),
-                              '{} = NULL'.format(member),
-                              'return LIBSBML_OPERATION_SUCCESS']
-            if attribute['element'] == 'ASTNode':
-                clone = 'deepCopy'
-                implementation.append('else if')
-                implementation.append('!({}->isWellFormedASTNode()'
-                                      ')'.format(name))
-                implementation.append('return LIBSBML_INVALID_OBJECT')
-                line = ['{} != NULL'.format(member),
-                        '{}->setParentSBMLObject(this)'.format(member)]
-                nested_if = self.create_code_block('if', line)
-            elif not attribute['is_ml']:
-                line = ['{} != NULL'.format(member)]
-                if attribute['children_overwrite']:
-                    line.append('{}->setElementName(\"{}\")'.format(member, name))
-                line.append('{}->connectToParent(this)'.format(member))
-                nested_if = self.create_code_block('if', line)
-            implementation.append('else')
-            implementation.append('delete {}'.format(member))
-            implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
-                                  ': NULL'.format(member, name, clone))
-            if len(nested_if) > 0:
-                implementation.append(nested_if)
-            implementation.append('return LIBSBML_OPERATION_SUCCESS')
-            code = [self.create_code_block('else_if', implementation)]
+            if not self.is_plugin:
+                clone = 'clone'
+                nested_if = []
+                implementation = ['{} == {}'.format(member, name),
+                                  'return LIBSBML_OPERATION_SUCCESS',
+                                  'else if',
+                                  '{} == NULL'.format(name),
+                                  'delete {}'.format(member),
+                                  '{} = NULL'.format(member),
+                                  'return LIBSBML_OPERATION_SUCCESS']
+                if attribute['element'] == 'ASTNode':
+                    clone = 'deepCopy'
+                    implementation.append('else if')
+                    implementation.append('!({}->isWellFormedASTNode()'
+                                          ')'.format(name))
+                    implementation.append('return LIBSBML_INVALID_OBJECT')
+                    line = ['{} != NULL'.format(member),
+                            '{}->setParentSBMLObject(this)'.format(member)]
+                    nested_if = self.create_code_block('if', line)
+                elif not attribute['is_ml']:
+                    line = ['{} != NULL'.format(member)]
+                    if attribute['children_overwrite']:
+                        line.append('{}->setElementName'
+                                    '(\"{}\")'.format(member, name))
+                    line.append('{}->connectToParent(this)'.format(member))
+                    nested_if = self.create_code_block('if', line)
+                implementation.append('else')
+                implementation.append('delete {}'.format(member))
+                implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
+                                      ': NULL'.format(member, name, clone))
+                if len(nested_if) > 0:
+                    implementation.append(nested_if)
+                implementation.append('return LIBSBML_OPERATION_SUCCESS')
+                code = [self.create_code_block('else_if', implementation)]
+            else:
+                implementation = ['{} == NULL'.format(name),
+                                  'return LIBSBML_OPERATION_FAILED',
+                                  'else if', '{}->hasRequiredElements() '
+                                             '== false'.format(name),
+                                  'return LIBSBML_INVALID_OBJECT',
+                                  'else if',
+                                  'getLevel() != {}->getLevel()'.format(name),
+                                  'return LIBSBML_LEVEL_MISMATCH',
+                                  'else if', 'getVersion() != {}->'
+                                             'getVersion()'.format(name),
+                                  'return LIBSBML_VERSION_MISMATCH',
+                                  'else if', 'getPackageVersion() != {}->'
+                                             'getPackageVersion()'.format(name),
+                                  'return LIBSBML_PKG_VERSION_MISMATCH',
+                                  'else', 'delete {}'.format(member),
+                                  '{} = static_cast<{}>({}->'
+                                  'clone())'.format(member,
+                                                    attribute['attTypeCode'],
+                                                    name),
+                                  'return LIBSBML_OPERATION_SUCCESS']
+                code = [self.create_code_block('else_if', implementation)]
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code

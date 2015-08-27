@@ -124,14 +124,56 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             self.write_line('#include <{0}/{1}.h>'.
                             format(self.language, self.baseClass))
 
+        # determine whether we need to write other headers
+        write_element_filter = False
+        concrete_classes = []
+        write_model = False
+        write_validators = False
+        write_math = False
+
         if len(self.child_lo_elements) > 0:
-            self.write_line('#include <{}'
-                            '/util/ElementFilter.h>'.format(self.language))
+            write_element_filter = True
+        else:
+            for element in self.child_elements:
+                if 'concrete' in element:
+                    write_element_filter = True
+
         if self.is_plugin and not self.is_doc_plugin \
                 and self.language == 'sbml':
-            self.write_line('#include <sbml/Model.h>')
+            write_model = True
 
         if self.is_doc_plugin:
+            write_validators = True
+
+        if self.has_math:
+            write_math = True
+
+        for lo in self.child_lo_elements:
+            if 'concrete' in lo:
+                for j in range(0, len(lo['concrete'])):
+                    element = lo['concrete'][j]['element']
+                    if element not in concrete_classes:
+                        concrete_classes.append(element)
+
+        for i in range(0, len(self.concretes)):
+            element = self.concretes[i]['element']
+            if element not in concrete_classes:
+                concrete_classes.append(element)
+
+        for child in self.child_elements:
+            if 'concrete' in child:
+                for j in range(0, len(child['concrete'])):
+                    element = child['concrete'][j]['element']
+                    if element not in concrete_classes:
+                        concrete_classes.append(element)
+
+        if write_element_filter:
+            self.write_line('#include <{}/util/ElementFilter.'
+                            'h>'.format(self.language))
+        if write_model:
+            self.write_line('#include <{}/Model.h>'.format(self.language))
+
+        if write_validators:
             self.write_line('#include <{}/packages/{}/validator/{}Consistency'
                             'Validator.h>'.format(self.language,
                                                   self.package.lower(),
@@ -141,38 +183,20 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                             'h>'.format(self.language, self.package.lower(),
                                         self.package))
 
-        if self.has_math:
+        if write_math:
             self.write_line('#include <{}/math/MathML.h>'.format(self.language))
 
-        for i in range(0, len(self.concretes)):
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'.format(
-                self.language, self.package.lower(),
-                self.concretes[i]['element']
-            ))
-
+        if len(concrete_classes) > 0:
+            self.skip_line()
+        for element in concrete_classes:
+            self.write_line('#include <{0}/packages/{1}/{0}/{2}'
+                            '.h>'.format(self.language,
+                                         self.package.lower(),
+                                         element))
         self.skip_line(2)
         self.write_line('using namespace std;')
         self.skip_line()
 
-        # additional includes for child elements
-        # for i in range(0, len(self.child_elements)):
-        #     child = self.child_elements[i]['element']
-        #     if child != 'ASTNode':
-        #         self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-        #                         .format(self.language, self.package.lower(),
-        #                                 child))
-        #
-        # for i in range(0, len(self.child_lo_elements)):
-        #     child = self.child_lo_elements[i]['attTypeCode']
-        #     self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-        #                     .format(self.language, self.package.lower(),
-        #                             child))
-        #
-        # if self.is_list_of:
-        #     child = self.list_of_child
-        #     self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-        #                     .format(self.language, self.package.lower(),
-        #                             child))
     ########################################################################
 
     # function to write the data members
@@ -289,12 +313,13 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             code = attrib_functions.write_create(False, i)
             if code is None and 'concrete' in self.child_elements[i]:
                 # need to write creates for the concrete
+                member = self.child_elements[i]['memberName']
                 concrete = self.child_elements[i]['concrete']
                 concretes = query.get_concretes(self.class_object['root'],
                                                 concrete)
                 for j in range(0, len(concretes)):
                     code = attrib_functions\
-                        .write_create_concrete_child(concretes[j])
+                        .write_create_concrete_child(concretes[j], member)
                     self.write_function_implementation(code)
             else:
                 self.write_function_implementation(code)
@@ -519,6 +544,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             element['is_plugin'] = self.is_plugin
             if self.is_plugin:
                 element['plugin'] = self.class_name
+            if 'concrete' in element:
+                element['concretes'] = query.get_concretes(
+                    self.class_object['root'], element['concrete'])
             lo_functions = ListOfQueryFunctions\
                 .ListOfQueryFunctions(self.language, self.is_cpp_api,
                                       self.is_list_of,
@@ -563,8 +591,13 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             code = lo_functions.write_get_num_element_function()
             self.write_function_implementation(code)
 
-            code = lo_functions.write_create_element_function()
-            self.write_function_implementation(code)
+            if 'concretes' in element:
+                for n in range(0, len(element['concretes'])):
+                        code = lo_functions.write_create_element_function(n+1)
+                        self.write_function_implementation(code)
+            else:
+                code = lo_functions.write_create_element_function()
+                self.write_function_implementation(code)
 
             code = lo_functions.write_remove_element_by_index()
             self.write_function_implementation(code)

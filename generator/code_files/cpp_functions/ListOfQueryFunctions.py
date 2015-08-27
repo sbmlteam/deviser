@@ -74,6 +74,9 @@ class ListOfQueryFunctions():
         self.concretes = []
         if 'concretes' in class_object:
             self.concretes = class_object['concretes']
+        elif 'concrete' in class_object:
+            self.concretes = query.get_concretes(class_object['root'],
+                                                 class_object['concrete'])
 
         self.has_id = True
         if not self.is_list_of:
@@ -525,8 +528,14 @@ class ListOfQueryFunctions():
 
     # function to write remove by id from a listOf
     def write_remove_element_by_id(self):
-        if not self.has_id:
-            return
+        if not self.is_list_of:
+            child = query.get_class(self.child_name,
+                                    self.class_object['root'])
+            has_id = False
+            if child:
+                has_id = query.has_attribute(child, 'id')
+            if not has_id:
+                return
         # useful variables
         virtual = True if self.is_list_of else False
 
@@ -735,12 +744,16 @@ class ListOfQueryFunctions():
         if len(self.concretes) == 0 and index == 0:
             child = self.object_child_name
             abbrev_child = self.abbrev_child
+            child_name = self.child_name
         else:
             if index == 0:
                 return
             else:
                 i = index - 1
-            child = self.concretes[i]['element']
+            child_name = self.concretes[i]['element']
+            child = child_name
+            if not self.is_cpp_api:
+                child += '_t'
             is_concrete = True
             abbrev_child = strFunctions.abbrev_name(child)
         # create comment parts
@@ -752,7 +765,7 @@ class ListOfQueryFunctions():
             params.append('@param {}, the {} structure '
                           'to which the {} should be '
                           'added.'.format(self.abbrev_parent, self.object_name,
-                                          self.object_child_name))
+                                          child))
         return_lines = ['@return a new {} object '
                         'instance.'.format(child)]
         additional = []
@@ -765,7 +778,7 @@ class ListOfQueryFunctions():
         if self.is_cpp_api:
             function = 'create{}'.format(child)
         else:
-            function = '{}_create{}'.format(self.class_name, self.child_name)
+            function = '{}_create{}'.format(self.class_name, child_name)
             arguments.append('{}* {}'.format(self.object_name,
                                              self.abbrev_parent))
         return_type = '{}*'.format(child)
@@ -823,7 +836,7 @@ class ListOfQueryFunctions():
         else:
             implementation = ['return ({0} != NULL) ? {0}->create{1}() : '
                               'NULL'.format(self.abbrev_parent,
-                                            self.child_name)]
+                                            child_name)]
             code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,

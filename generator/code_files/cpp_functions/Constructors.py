@@ -156,8 +156,12 @@ class Constructors():
                 if self.has_children:
                     implementation.append('connectToChild()')
             else:
+                if index == 0:
+                    name = self.class_name
+                else:
+                    name = self.concretes[index-1]['element']
                 implementation = ['return new {}(level, version, '
-                                  'pkgVersion)'.format(self.class_name)]
+                                  'pkgVersion)'.format(name)]
         else:
             if self.is_cpp_api:
                 implementation = ['set{}NamespacesAndOwn(new {}Namespaces'

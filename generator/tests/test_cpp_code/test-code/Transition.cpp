@@ -1031,7 +1031,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mInputs.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionElements,
+      getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 
@@ -1041,7 +1041,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mOutputs.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionElements,
+      getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 
@@ -1051,7 +1051,7 @@ Transition::createObject(XMLInputStream& stream)
   {
     if (mFunctionTerms.size() != 0)
     {
-      getErrorLog()->logPackageError("qual", QualTransitionElements,
+      getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 

@@ -112,28 +112,28 @@ public:
 
 
   /**
-   * Returns the ListOfQualitativeSpecies from this QualitativeSpecies.
+   * Returns the ListOfQualitativeSpecies from this QualModelPlugin.
    *
-   * @return the ListOfQualitativeSpecies from this QualitativeSpecies.
+   * @return the ListOfQualitativeSpecies from this QualModelPlugin.
    */
   const ListOfQualitativeSpecies* getListOfQualitativeSpecies() const;
 
 
   /**
-   * Returns the ListOfQualitativeSpecies from this QualitativeSpecies.
+   * Returns the ListOfQualitativeSpecies from this QualModelPlugin.
    *
-   * @return the ListOfQualitativeSpecies from this QualitativeSpecies.
+   * @return the ListOfQualitativeSpecies from this QualModelPlugin.
    */
   ListOfQualitativeSpecies* getListOfQualitativeSpecies();
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies.
+   * Get a QualitativeSpecies from the QualModelPlugin.
    *
    * @param n, an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the nth QualitativeSpecies in this QualitativeSpecies.
+   * @return the nth QualitativeSpecies in this QualModelPlugin.
    *
    * @see getNumQualitativeSpecies
    */
@@ -141,12 +141,12 @@ public:
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies.
+   * Get a QualitativeSpecies from the QualModelPlugin.
    *
    * @param n, an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the nth QualitativeSpecies in this QualitativeSpecies.
+   * @return the nth QualitativeSpecies in this QualModelPlugin.
    *
    * @see getNumQualitativeSpecies
    */
@@ -154,13 +154,12 @@ public:
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies based on its
-   * identifier.
+   * Get a QualitativeSpecies from the QualModelPlugin based on its identifier.
    *
    * @param sid a string representing the identifier of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the QualitativeSpecies in this QualitativeSpecies based on the
+   * @return the QualitativeSpecies in this QualModelPlugin based on the
    * identifier or NULL if no such QualitativeSpecies exists.
    *
    * @see getNumQualitativeSpecies
@@ -169,13 +168,12 @@ public:
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies based on its
-   * identifier.
+   * Get a QualitativeSpecies from the QualModelPlugin based on its identifier.
    *
    * @param sid a string representing the identifier of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the QualitativeSpecies in this QualitativeSpecies based on the
+   * @return the QualitativeSpecies in this QualModelPlugin based on the
    * identifier or NULL if no such QualitativeSpecies exists.
    *
    * @see getNumQualitativeSpecies
@@ -185,37 +183,35 @@ public:
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies based on the
-   * Compartment to which it refers.
+   * Get a QualitativeSpecies from the QualModelPlugin based on the Compartment
+   * to which it refers.
    *
    * @param sid a string representing the compartment attribute of the
    * QualitativeSpecies object to retrieve.
    *
-   * @return the first QualitativeSpecies in this QualitativeSpecies based on
-   * the given compartment attribute or NULL if no such QualitativeSpecies
-   * exists.
+   * @return the first QualitativeSpecies in this QualModelPlugin based on the
+   * given compartment attribute or NULL if no such QualitativeSpecies exists.
    */
   const QualitativeSpecies* getQualitativeSpeciesByCompartment(const
     std::string& sid) const;
 
 
   /**
-   * Get a QualitativeSpecies from the QualitativeSpecies based on the
-   * Compartment to which it refers.
+   * Get a QualitativeSpecies from the QualModelPlugin based on the Compartment
+   * to which it refers.
    *
    * @param sid a string representing the compartment attribute of the
    * QualitativeSpecies object to retrieve.
    *
-   * @return the first QualitativeSpecies in this QualitativeSpecies based on
-   * the given compartment attribute or NULL if no such QualitativeSpecies
-   * exists.
+   * @return the first QualitativeSpecies in this QualModelPlugin based on the
+   * given compartment attribute or NULL if no such QualitativeSpecies exists.
    */
   QualitativeSpecies* getQualitativeSpeciesByCompartment(const std::string&
     sid);
 
 
   /**
-   * Adds a copy of the given QualitativeSpecies to this QualitativeSpecies.
+   * Adds a copy of the given QualitativeSpecies to this QualModelPlugin.
    *
    * @param qs, the QualitativeSpecies object to add.
    *
@@ -231,18 +227,16 @@ public:
 
 
   /**
-   * Get the number of QualitativeSpecies objects in this QualitativeSpecies.
+   * Get the number of QualitativeSpecies objects in this QualModelPlugin.
    *
-   * @return the number of QualitativeSpecies objects in this
-   * QualitativeSpecies.
+   * @return the number of QualitativeSpecies objects in this QualModelPlugin.
    */
   unsigned int getNumQualitativeSpecies() const;
 
 
   /**
-   * Creates a new QualitativeSpecies object, adds it to this
-   * QualitativeSpecies object and returns the QualitativeSpecies object
-   * created.
+   * Creates a new QualitativeSpecies object, adds it to this QualModelPlugin
+   * object and returns the QualitativeSpecies object created.
    *
    * @return a new QualitativeSpecies object instance.
    *
@@ -252,14 +246,13 @@ public:
 
 
   /**
-   * Removes the nth QualitativeSpecies from this QualitativeSpecies and
-   * returns a pointer to it.
+   * Removes the nth QualitativeSpecies from this QualModelPlugin and returns a
+   * pointer to it.
    *
    * @param n, an unsigned int representing the index of the QualitativeSpecies
    * to remove.
    *
-   * @return a pointer to the nth QualitativeSpecies in this
-   * QualitativeSpecies.
+   * @return a pointer to the nth QualitativeSpecies in this QualModelPlugin.
    *
    * @see getNumQualitativeSpecies
    *
@@ -270,13 +263,13 @@ public:
 
 
   /**
-   * Removes the QualitativeSpecies from this QualitativeSpecies based on its
+   * Removes the QualitativeSpecies from this QualModelPlugin based on its
    * identifier and returns a pointer to it.
    *
    * @param sid, a string representing the identifier of the QualitativeSpecies
    * to remove.
    *
-   * @return the QualitativeSpecies in this QualitativeSpecies based on the
+   * @return the QualitativeSpecies in this QualModelPlugin based on the
    * identifier or NULL if no such QualitativeSpecies exists.
    *
    * @note the caller owns the returned object and is responsible for deleting
@@ -286,28 +279,28 @@ public:
 
 
   /**
-   * Returns the ListOfTransitions from this Transition.
+   * Returns the ListOfTransitions from this QualModelPlugin.
    *
-   * @return the ListOfTransitions from this Transition.
+   * @return the ListOfTransitions from this QualModelPlugin.
    */
   const ListOfTransitions* getListOfTransitions() const;
 
 
   /**
-   * Returns the ListOfTransitions from this Transition.
+   * Returns the ListOfTransitions from this QualModelPlugin.
    *
-   * @return the ListOfTransitions from this Transition.
+   * @return the ListOfTransitions from this QualModelPlugin.
    */
   ListOfTransitions* getListOfTransitions();
 
 
   /**
-   * Get a Transition from the Transition.
+   * Get a Transition from the QualModelPlugin.
    *
    * @param n, an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this Transition.
+   * @return the nth Transition in this QualModelPlugin.
    *
    * @see getNumTransitions
    */
@@ -315,12 +308,12 @@ public:
 
 
   /**
-   * Get a Transition from the Transition.
+   * Get a Transition from the QualModelPlugin.
    *
    * @param n, an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this Transition.
+   * @return the nth Transition in this QualModelPlugin.
    *
    * @see getNumTransitions
    */
@@ -328,13 +321,13 @@ public:
 
 
   /**
-   * Get a Transition from the Transition based on its identifier.
+   * Get a Transition from the QualModelPlugin based on its identifier.
    *
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this Transition based on the identifier or NULL
-   * if no such Transition exists.
+   * @return the Transition in this QualModelPlugin based on the identifier or
+   * NULL if no such Transition exists.
    *
    * @see getNumTransitions
    */
@@ -342,13 +335,13 @@ public:
 
 
   /**
-   * Get a Transition from the Transition based on its identifier.
+   * Get a Transition from the QualModelPlugin based on its identifier.
    *
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this Transition based on the identifier or NULL
-   * if no such Transition exists.
+   * @return the Transition in this QualModelPlugin based on the identifier or
+   * NULL if no such Transition exists.
    *
    * @see getNumTransitions
    */
@@ -356,7 +349,7 @@ public:
 
 
   /**
-   * Adds a copy of the given Transition to this Transition.
+   * Adds a copy of the given Transition to this QualModelPlugin.
    *
    * @param t, the Transition object to add.
    *
@@ -372,16 +365,16 @@ public:
 
 
   /**
-   * Get the number of Transition objects in this Transition.
+   * Get the number of Transition objects in this QualModelPlugin.
    *
-   * @return the number of Transition objects in this Transition.
+   * @return the number of Transition objects in this QualModelPlugin.
    */
   unsigned int getNumTransitions() const;
 
 
   /**
-   * Creates a new Transition object, adds it to this Transition object and
-   * returns the Transition object created.
+   * Creates a new Transition object, adds it to this QualModelPlugin object
+   * and returns the Transition object created.
    *
    * @return a new Transition object instance.
    *
@@ -391,13 +384,13 @@ public:
 
 
   /**
-   * Removes the nth Transition from this Transition and returns a pointer to
-   * it.
+   * Removes the nth Transition from this QualModelPlugin and returns a pointer
+   * to it.
    *
    * @param n, an unsigned int representing the index of the Transition to
    * remove.
    *
-   * @return a pointer to the nth Transition in this Transition.
+   * @return a pointer to the nth Transition in this QualModelPlugin.
    *
    * @see getNumTransitions
    *
@@ -408,14 +401,14 @@ public:
 
 
   /**
-   * Removes the Transition from this Transition based on its identifier and
-   * returns a pointer to it.
+   * Removes the Transition from this QualModelPlugin based on its identifier
+   * and returns a pointer to it.
    *
    * @param sid, a string representing the identifier of the Transition to
    * remove.
    *
-   * @return the Transition in this Transition based on the identifier or NULL
-   * if no such Transition exists.
+   * @return the Transition in this QualModelPlugin based on the identifier or
+   * NULL if no such Transition exists.
    *
    * @note the caller owns the returned object and is responsible for deleting
    * it.
