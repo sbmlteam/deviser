@@ -132,7 +132,7 @@ class ValidationFiles():
         self.error_file.write_defn_begin()
         self.error_file.write_cppns_begin()
         self.error_file.write_cdecl_begin()
-        self.error_file.write_line('typdef enum')
+        self.error_file.write_line('typedef enum')
         self.error_file.write_line('{')
         self.write_general_errors()
         for rule in self.class_rules:
@@ -164,7 +164,7 @@ class ValidationFiles():
         number = self.offset + 20101
         self.write_rule(error, number)
         error = '{}AttributeRequiredMustBeBoolean'.format(self.up_package)
-        number = self.offset + 20202
+        number = self.offset + 20102
         self.write_rule(error, number)
 
     def write_rule(self, tc, number):

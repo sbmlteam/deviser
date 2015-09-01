@@ -85,6 +85,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.sid_refs = ''
         self.unit_sid_refs = ''
         self.add_decls = None
+        self.add_impl = None
         self.overwrites_children = False
         self.has_math = False
         self.has_children = False
@@ -147,6 +148,8 @@ class BaseCppFile(BaseFile.BaseFile):
         self.unit_sid_refs = class_object['unit_sid_refs']
         if 'addDecls' in class_object:
             self.add_decls = class_object['addDecls']
+        if 'addDefs' in class_object:
+            self.add_impl = class_object['addDefs']
         if 'childrenOverwriteElementName' in class_object:
             self.overwrites_children = \
                 class_object['childrenOverwriteElementName']

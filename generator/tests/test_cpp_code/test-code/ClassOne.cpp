@@ -474,8 +474,8 @@ ClassOne::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-        level, version, details);
+      log->logPackageError("vers", VersClassOneAllowedCoreAttributes,
+        pkgVersion, level, version, details);
     }
   }
 

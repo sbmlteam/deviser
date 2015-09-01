@@ -502,7 +502,7 @@ Uncertainty::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("distrib", DistribUncertaintyAllowedAttributes,
+      log->logPackageError("distrib", DistribUncertaintyAllowedCoreAttributes,
         pkgVersion, level, version, details);
     }
   }

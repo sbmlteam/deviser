@@ -693,16 +693,16 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
-          SpatialLOAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
-            details);
+          SpatialAnalyticGeometryLOAnalyticVolumesAllowedCoreAttributes,
+            pkgVersion, level, version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
-          SpatialLOAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
-            details);
+          SpatialAnalyticGeometryLOAnalyticVolumesAllowedCoreAttributes,
+            pkgVersion, level, version, details);
       }
     }
   }
@@ -723,8 +723,9 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-        pkgVersion, level, version, details);
+      log->logPackageError("spatial",
+        SpatialAnalyticVolumeAllowedCoreAttributes, pkgVersion, level, version,
+          details);
     }
   }
 
@@ -782,8 +783,9 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + functiontype + "', which is not a valid option.";
 
-        log->logPackageError("spatial", SpatialFunctionKindValues,
-          getPackageVersion(), level, version, msg);
+        log->logPackageError("spatial",
+          SpatialAnalyticVolumeFunctionTypeMustBeFunctionKindEnum,
+            getPackageVersion(), level, version, msg);
       }
     }
   }
@@ -809,8 +811,9 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Spatial attribute 'ordinal' from the "
         "<AnalyticVolume> element must be an integer.";
-      log->logPackageError("spatial", SpatialOrdinalMustBeInteger,
-        getPackageVersion(), level, version, message);
+      log->logPackageError("spatial",
+        SpatialAnalyticVolumeOrdinalMustBeInteger, getPackageVersion(), level,
+          version, message);
     }
   }
 

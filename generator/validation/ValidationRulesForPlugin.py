@@ -525,5 +525,6 @@ class ValidationRulesForPlugin():
         ref = 'SBML Level~3 Specification for {} Version~1, {}.'\
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': self.tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc})

@@ -46,16 +46,16 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 
-typdef enum
+typedef enum
 {
   QualUnknown                                                 = 3010100
 , QualNSUndeclared                                            = 3010101
 , QualElementNotInNs                                          = 3010102
 , QualDuplicateComponentId                                    = 3010301
 , QualAttributeRequiredMissing                                = 3020101
-, QualAttributeRequiredMustBeBoolean                          = 3020202
+, QualAttributeRequiredMustBeBoolean                          = 3020102
 , QualModelAllowedElements                                    = 3020201
-, TBC                                                         = 3020202
+, QualModelEmptyLOElements                                    = 3020202
 , QualModelLOQualitativeSpeciesAllowedElements                = 3020203
 , QualModelLOTransitionsAllowedElements                       = 3020204
 , QualModelLOQualitativeSpeciesAllowedCoreAttributes          = 3020205

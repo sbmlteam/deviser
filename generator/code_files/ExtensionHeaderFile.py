@@ -103,19 +103,19 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing specific includes and forward declarations
 
     def write_common_includes(self):
-        self.write_line('#include <{0}/common/extern.h>'.format(self.language))
-        self.write_line('#include <{}/{}'
+        self.write_line_verbatim('#include <{0}/common/extern.h>'.format(self.language))
+        self.write_line_verbatim('#include <{}/{}'
                         'TypeCodes.h>'.format(self.language,
                                               self.cap_language))
 
     def write_general_includes(self):
         lang = self.language
         up_lang = self.cap_language
-        self.write_line('#include <{}/extension/{}Extension.h>'.format(lang,
+        self.write_line_verbatim('#include <{}/extension/{}Extension.h>'.format(lang,
                                                                        up_lang))
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'ExtensionNamespaces.h>'.format(lang, up_lang))
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'ExtensionRegister.h>'.format(lang, up_lang))
         self.skip_line()
         self.write_line('#ifndef {}_CREATE_NS'.format(self.cap_package))
@@ -125,7 +125,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                         '{}ns);'.format(self.up_package, self.language))
         self.write_line('#endif')
         self.skip_line()
-        self.write_line('#include <vector>')
+        self.write_line_verbatim('#include <vector>')
 
     ########################################################################
 
@@ -284,26 +284,26 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing extension types
 
     def write_type_includes(self):
-        self.write_line('#include <{0}/packages/{1}/common/{1}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
                         'fwd.h>'.format(self.language, self.package))
         self.skip_line()
-        self.write_line('#include <{}/packages/{}/extension/{}Extension'
+        self.write_line_verbatim('#include <{}/packages/{}/extension/{}Extension'
                         '.h>'.format(self.language, self.package,
                                      self.up_package))
-        self.write_line('#include <{}/packages/{}/extension/{}{}Document'
+        self.write_line_verbatim('#include <{}/packages/{}/extension/{}{}Document'
                         'Plugin.h>'.format(self.language, self.package,
                                            self.up_package,
                                            self.cap_language))
 
         for plugin in self.plugins:
-            self.write_line('#include <{}/packages/{}/extension/{}{}'
+            self.write_line_verbatim('#include <{}/packages/{}/extension/{}{}'
                             'Plugin.h>'.format(self.language, self.package,
                                                self.up_package,
                                                plugin['sbase']))
         self.skip_line()
 
         for element in self.elements:
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.'
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.'
                             'h>'.format(self.language, self.package,
                                         element['name']))
 

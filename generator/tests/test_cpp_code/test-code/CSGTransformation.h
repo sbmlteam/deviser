@@ -485,8 +485,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGTranslation (CSGTransformation_t) using the given SBML @p
- * level, @ p version and package version values.
+ * Creates a new CSGTransformation_t using the given SBML @p level, @ p version
+ * and package version values.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * CSGTransformation_t
@@ -507,109 +507,13 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 CSGTransformation_t *
-CSGTransformation_createCSGTranslation(
-                                       unsigned int level =
-                                         SpatialExtension::getDefaultLevel(),
-                                       unsigned int version =
-                                         SpatialExtension::getDefaultVersion(),
-                                       unsigned int pkgVersion =
-                                         SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGRotation (CSGTransformation_t) using the given SBML @p
- * level, @ p version and package version values.
- *
- * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGRotation(
-                                    unsigned int level =
-                                      SpatialExtension::getDefaultLevel(),
-                                    unsigned int version =
-                                      SpatialExtension::getDefaultVersion(),
-                                    unsigned int pkgVersion =
-                                      SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGScale (CSGTransformation_t) using the given SBML @p level,
- * @ p version and package version values.
- *
- * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGScale(
-                                 unsigned int level =
-                                   SpatialExtension::getDefaultLevel(),
-                                 unsigned int version =
-                                   SpatialExtension::getDefaultVersion(),
-                                 unsigned int pkgVersion =
-                                   SpatialExtension::getDefaultPackageVersion());
-
-
-/**
- * Creates a new CSGHomogeneousTransformation (CSGTransformation_t) using the
- * given SBML @p level, @ p version and package version values.
- *
- * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t
- *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGHomogeneousTransformation(
-                                                     unsigned int level =
-                                                       SpatialExtension::getDefaultLevel(),
-                                                     unsigned int version =
-                                                       SpatialExtension::getDefaultVersion(),
-                                                     unsigned int pkgVersion =
-                                                       SpatialExtension::getDefaultPackageVersion());
+CSGTransformation_create(
+                         unsigned int level =
+                           SpatialExtension::getDefaultLevel(),
+                         unsigned int version =
+                           SpatialExtension::getDefaultVersion(),
+                         unsigned int pkgVersion =
+                           SpatialExtension::getDefaultPackageVersion());
 
 
 /**

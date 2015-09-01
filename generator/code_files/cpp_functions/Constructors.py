@@ -78,7 +78,7 @@ class Constructors():
 
     # function to write level version constructor
     def write_level_version_constructor(self, index=0):
-        if len(self.concretes) == 0 and index == 0:
+        if (len(self.concretes) == 0 and index == 0) or index == -1:
             ob_name = self.object_name
             create = 'create'
         elif self.is_cpp_api:
@@ -156,7 +156,7 @@ class Constructors():
                 if self.has_children:
                     implementation.append('connectToChild()')
             else:
-                if index == 0:
+                if index == 0 or index == -1:
                     name = self.class_name
                 else:
                     name = self.concretes[index-1]['element']
@@ -359,7 +359,7 @@ class Constructors():
         ns = '{}ns'.format(package)
         constructor_args = self.write_constructor_args(ns)
         # create the function implementation
-        if self.is_doc_plugin:
+        if self.is_doc_plugin or not self.has_children:
             code = []
         else:
             code = [dict({'code_type': 'line', 'code': ['connectToChild()']})]

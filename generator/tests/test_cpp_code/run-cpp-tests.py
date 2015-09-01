@@ -361,6 +361,24 @@ def main():
     test_case = 'plugin with child element'
     fail += run_plug_test(name, class_name, test_case, num)
 
+    name = 'spatial'
+    num = 3
+    class_name = 'SpatialParameterPlugin'
+    test_case = 'plugin with additional code'
+    fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'spatial'
+    num = 4
+    class_name = 'SpatialReactionPlugin'
+    test_case = 'plugin only attributes'
+    fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'spatial'
+    num = 5
+    class_name = 'SpatialSBMLDocumentPlugin'
+    test_case = 'include line over extends'
+    fail += run_plug_test(name, class_name, test_case, num)
+
     if use_new:
         name = 'test_vers'
         num = 0

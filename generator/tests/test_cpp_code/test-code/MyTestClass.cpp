@@ -1084,7 +1084,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("test", TestMyTestClassAllowedAttributes,
+      log->logPackageError("test", TestMyTestClassAllowedCoreAttributes,
         pkgVersion, level, version, details);
     }
   }
@@ -1137,8 +1137,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestNumMustBeUnInteger, getPackageVersion(),
-        level, version, message);
+      log->logPackageError("test", TestMyTestClassNumMustBeUnInteger,
+        getPackageVersion(), level, version, message);
     }
   }
 
@@ -1157,7 +1157,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num2' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestNum2MustBeUnInteger,
+      log->logPackageError("test", TestMyTestClassNum2MustBeUnInteger,
         getPackageVersion(), level, version, message);
     }
   }
@@ -1177,8 +1177,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num3' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestNum3MustBeInteger, getPackageVersion(),
-        level, version, message);
+      log->logPackageError("test", TestMyTestClassNum3MustBeInteger,
+        getPackageVersion(), level, version, message);
     }
   }
 
@@ -1197,8 +1197,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num1' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestNum1MustBeDouble, getPackageVersion(),
-        level, version, message);
+      log->logPackageError("test", TestMyTestClassNum1MustBeDouble,
+        getPackageVersion(), level, version, message);
     }
   }
 

@@ -41,7 +41,7 @@ import sys
 import os
 
 from parseXML import ParseXML
-from code_files import ExtensionFiles, CppFiles
+from code_files import ExtensionFiles, CppFiles, ValidationFiles
 
 directories = []
 
@@ -74,6 +74,13 @@ def generate_code_for(filename, overwrite=True):
     for i in range(0, len(ob['plugins'])+1):
         ext.write_plugin_files(i)
     os.chdir(this_dir)
+    valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
+                                                                       os.sep,
+                                                                       language)
+    os.chdir(valid_dir)
+    all_files = ValidationFiles.ValidationFiles(ob, language, True)
+    all_files.write_files()
+    os.chdir(this_dir)
     sbml_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, os.sep,
                                                                language)
     os.chdir(sbml_dir)
@@ -81,6 +88,9 @@ def generate_code_for(filename, overwrite=True):
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     os.chdir(this_dir)
+    valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
+                                                                       os.sep,
+                                                                       language)
 
 
 def populate_directories(name, lang):

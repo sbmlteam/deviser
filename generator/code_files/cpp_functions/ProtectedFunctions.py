@@ -65,6 +65,9 @@ class ProtectedFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        self.parent_class = ''
+        if 'parent' in class_object:
+            self.parent_class = class_object['parent']
 
         self.attributes = class_object['class_attributes']
         self.all_attributes = class_object['attribs']
@@ -506,8 +509,11 @@ class ProtectedFunctions():
         if self.is_plugin:
             class_name = strFunctions.get_class_from_plugin(
                 self.class_name, self.package)
+            core_err = '{}{}AllowedAttributes'.format(self.package, class_name)
         else:
             class_name = self.class_name
+            core_err = '{}{}AllowedCoreAttributes'.format(self.package,
+                                                          class_name)
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
@@ -519,10 +525,9 @@ class ProtectedFunctions():
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
-                'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                'log->logPackageError(\"{}\", {}, '
                 'pkgVersion, level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  class_name)]
+                'details)'.format(self.package.lower(), core_err)]
         if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
@@ -685,10 +690,11 @@ class ProtectedFunctions():
                               'else', 'writeV2Attributes(stream)']
             code.append(self.create_code_block('if_else', implementation))
 
-        code.append(self.create_code_block('line',
-                                           ['{}::writeExtension'
-                                            'Attributes'
-                                            '(stream)'.format(self.std_base)]))
+        if not self.is_plugin:
+            code.append(self.create_code_block('line',
+                                               ['{}::write'
+                                                'ExtensionAttributes(stream'
+                                                ')'.format(self.std_base)]))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -900,21 +906,26 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def get_error_from_list_of_read(self):
+        plural = strFunctions.plural(self.class_name)
+        if self.parent_class != '':
+            error = '{}{}LO{}AllowedCoreAttributes'.format(self.package,
+                                                           self.parent_class,
+                                                           plural)
+        else:
+            error = '{}Unknown'.format(self.package)
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
-                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'log->logPackageError(\"{}\", {}, '
                 'pkgVersion, level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  self.class_name),
+                'details)'.format(self.package.lower(), error),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
-                'log->logPackageError(\"{}\", {}LO{}AllowedAttributes, '
+                'log->logPackageError(\"{}\", {}, '
                 'pkgVersion, level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  self.class_name)]
+                'details)'.format(self.package.lower(), error)]
         if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
@@ -1085,11 +1096,14 @@ class ProtectedFunctions():
                                         'is not a valid option.'
                                         '\"'.format(name.lower())]),
                 self.create_code_block('line', ['log->logPackage'
-                                                'Error(\"{}\", {}{}Values, '
+                                                'Error(\"{}\", {}{}'
+                                                '{}MustBe{}Enum, '
                                                 'getPackageVersion(), level,'
                                                 ' version, msg)'
                                        .format(self.package.lower(),
-                                               self.package, element)])]
+                                               self.package, self.class_name,
+                                               strFunctions.upper_first(name),
+                                               element)])]
         second_if = self.create_code_block('if', line)
 
         line = ['{}.empty() == true'.format(name.lower()),
@@ -1152,9 +1166,10 @@ class ProtectedFunctions():
                 'std::string message = \"{} attribute \'{}\' '
                 'from the <{}> element must be an '
                 'integer.\"'.format(self.package, name, self.class_name),
-                'log->logPackageError(\"{}\", {}{}MustBe{},'
+                'log->logPackageError(\"{}\", {}{}{}MustBe{},'
                 ' getPackageVersion(), level, version, message)'.format(
-                    self.package.lower(), self.package, up_name, num_type)]
+                    self.package.lower(), self.package, self.class_name,
+                    up_name, num_type)]
         if reqd:
             if self.is_plugin:
                 class_name = strFunctions.get_class_from_plugin(

@@ -991,8 +991,9 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("spatial", SpatialCSGSetOperatorAllowedAttributes,
-        pkgVersion, level, version, details);
+      log->logPackageError("spatial",
+        SpatialCSGSetOperatorAllowedCoreAttributes, pkgVersion, level, version,
+          details);
     }
   }
 
@@ -1024,8 +1025,9 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + operationtype + "', which is not a valid option.";
 
-        log->logPackageError("spatial", SpatialSetOperationValues,
-          getPackageVersion(), level, version, msg);
+        log->logPackageError("spatial",
+          SpatialCSGSetOperatorOperationTypeMustBeSetOperationEnum,
+            getPackageVersion(), level, version, msg);
       }
     }
   }

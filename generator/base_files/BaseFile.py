@@ -172,6 +172,13 @@ class BaseFile:
                 lines.append(newline)
         return lines
 
+    # write line without worrying about size
+    def write_line_verbatim(self, line):
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        self.file_out.write('{0}{1}\n'.format(tabs, line))
+
     # functions for writing lines
     def write_line(self, line, space=0):
         tabs = ''

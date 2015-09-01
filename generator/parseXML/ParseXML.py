@@ -348,6 +348,31 @@ class ParseXML():
                                                element['lo_class_name']}))
                 self.sbml_elements.append(element)
 
+    @staticmethod
+    def find_child_occurences(name, elements):
+        found = False
+        parent = ''
+        num_elements = len(elements)
+        index = 0
+        while not found and index < num_elements:
+            elem = elements[index]
+            if 'attribs' in elem:
+                for attr in elem['attribs']:
+                    if attr['type'] == 'lo_element' or attr['type'] == 'element':
+                        if attr['element'] == name:
+                            found = True
+                            parent = elem['name']
+            index += 1
+        return [found, parent]
+
+    def add_parent_elements(self, package):
+        for elem in package['sbmlElements']:
+            name = elem['name']
+            [occurs_as_child, parent] = \
+                self.find_child_occurences(name, package['sbmlElements'])
+            if occurs_as_child:
+                elem['parent'] = parent
+
     #####################################################################
 
     # main parsing function
@@ -505,5 +530,7 @@ class ParseXML():
                 for attr in elem['concrete']:
                     attr['parent'] = elem
                     attr['root'] = package
+
+        self.add_parent_elements(package)
 
         return package

@@ -393,15 +393,17 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("spatial", SpatialLOCSGNodeAllowedAttributes,
-          pkgVersion, level, version, details);
+        log->logPackageError("spatial",
+          SpatialCSGObjectLOCSGNodesAllowedCoreAttributes, pkgVersion, level,
+            version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("spatial", SpatialLOCSGNodeAllowedAttributes,
-          pkgVersion, level, version, details);
+        log->logPackageError("spatial",
+          SpatialCSGObjectLOCSGNodesAllowedCoreAttributes, pkgVersion, level,
+            version, details);
       }
     }
   }
@@ -422,7 +424,7 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("spatial", SpatialCSGNodeAllowedAttributes,
+      log->logPackageError("spatial", SpatialCSGNodeAllowedCoreAttributes,
         pkgVersion, level, version, details);
     }
   }

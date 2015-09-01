@@ -406,7 +406,7 @@ Boundary::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
+      log->logPackageError("spatial", SpatialBoundaryAllowedCoreAttributes,
         pkgVersion, level, version, details);
     }
   }
@@ -451,7 +451,7 @@ Boundary::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Spatial attribute 'value' from the <Boundary> "
         "element must be an integer.";
-      log->logPackageError("spatial", SpatialValueMustBeDouble,
+      log->logPackageError("spatial", SpatialBoundaryValueMustBeDouble,
         getPackageVersion(), level, version, message);
     }
     else

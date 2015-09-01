@@ -690,8 +690,8 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
       log->logPackageError("spatial",
-        SpatialSampledFieldGeometryAllowedAttributes, pkgVersion, level, version,
-          details);
+        SpatialSampledFieldGeometryAllowedCoreAttributes, pkgVersion, level,
+          version, details);
     }
   }
 

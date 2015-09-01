@@ -91,33 +91,33 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
 
     def write_general_includes(self):
 
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'ExtensionRegister.h>'.format(self.language,
                                                       self.cap_language))
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'ExtensionRegistry.h>'.format(self.language,
                                                       self.cap_language))
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'PluginCreator.h>'.format(self.language,
                                                   self.std_base))
-        self.write_line('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{}/extension/{}'
                         'DocumentPlugin.h>'.format(self.language,
                                                    self.cap_language))
         self.skip_line()
-        self.write_line('#include <{}/packages/{}/extension/{}'
+        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
                         'Extension.h>'.format(self.language, self.package,
                                               self.up_package))
-        self.write_line('#include <{}/packages/{}/extension/{}'
+        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
                         '{}DocumentPlugin.h>'.format(self.language,
                                                      self.package,
                                                      self.up_package,
                                                      self.cap_language))
-        self.write_line('#include <{}/packages/{}/validator/{}'
+        self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
                         '{}ErrorTable.h>'.format(self.language, self.package,
                                                  self.up_package,
                                                  self.cap_language))
         for i in range(0, len(self.plugins)):
-            self.write_line('#include <{}/packages/{}/extension/{}'
+            self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
                             '{}Plugin.h>'.format(self.language,
                                                  self.package,
                                                  self.up_package,

@@ -542,7 +542,9 @@ public:
    * 
    * or -1 in case no other is defined.
    */
-  int getType() const;};
+  int getType() const;
+
+};
 
 
 

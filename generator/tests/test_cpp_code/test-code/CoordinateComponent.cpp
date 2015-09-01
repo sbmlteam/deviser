@@ -985,16 +985,16 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
-          SpatialLOCoordinateComponentAllowedAttributes, pkgVersion, level,
-            version, details);
+          SpatialGeometryLOCoordinateComponentsAllowedCoreAttributes, pkgVersion,
+            level, version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
-          SpatialLOCoordinateComponentAllowedAttributes, pkgVersion, level,
-            version, details);
+          SpatialGeometryLOCoordinateComponentsAllowedCoreAttributes, pkgVersion,
+            level, version, details);
       }
     }
   }
@@ -1017,8 +1017,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
       log->logPackageError("spatial",
-        SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
-          details);
+        SpatialCoordinateComponentAllowedCoreAttributes, pkgVersion, level,
+          version, details);
     }
   }
 
@@ -1076,8 +1076,9 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + type + "', which is not a valid option.";
 
-        log->logPackageError("spatial", SpatialCoordinateKindValues,
-          getPackageVersion(), level, version, msg);
+        log->logPackageError("spatial",
+          SpatialCoordinateComponentTypeMustBeCoordinateKindEnum,
+            getPackageVersion(), level, version, msg);
       }
     }
   }

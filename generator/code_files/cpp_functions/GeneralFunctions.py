@@ -581,7 +581,7 @@ class GeneralFunctions():
             if self.num_children == self.num_non_std_children:
                 simple = True
         else:
-            if not self.is_doc_plugin:
+            if not self.is_plugin:
                 simple = True
         if simple:
             implementation = ['return v.visit(*this)']

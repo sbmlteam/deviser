@@ -68,8 +68,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_general_functions()
         self.write_functions_to_retrieve()
         self.write_protected_functions()
-        if self.add_decls is not None:
-            self.copy_additional_file(self.add_decls)
+        if self.add_impl is not None:
+            self.copy_additional_file(self.add_impl)
 
     def write_c_code(self):
         self.is_cpp_api = False
@@ -102,27 +102,34 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if self.language == 'sbml':
             if self.package:
                 folder = self.language if not self.is_plugin else 'extension'
-                self.write_line('#include <{0}/packages/{1}/{2}/{3}.h>'
-                                .format(self.language, self.package.lower(),
-                                        folder, self.class_name))
+                self.write_line_verbatim('#include <{}/packages/{}/{}/{}'
+                                         '.h>'.format(self.language,
+                                                      self.package.lower(),
+                                                      folder, self.class_name))
                 if self.has_parent_list_of and not self.is_list_of:
-                    self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
-                                    .format(self.language,
-                                            self.package.lower(),
-                                            lo_name))
-                self.write_line('#include <{}/packages/{}/validator/'
-                                '{}{}Error.h>'
-                                .format(self.language, self.package.lower(),
-                                        self.package, self.cap_language))
+                    self.write_line_verbatim('#include <{0}/packages/{1}/{0}/'
+                                             '{2}'
+                                             '.h>'.format(self.language,
+                                                          self.package.lower(),
+                                                          lo_name))
+                self.write_line_verbatim('#include <{}/packages/{}/validator/'
+                                         '{}{}Error'
+                                         '.h>'.format(self.language,
+                                                      self.package.lower(),
+                                                      self.package,
+                                                      self.cap_language))
             else:
-                self.write_line('#include <{0}/{1}.h>'.
-                                format(self.language, self.class_name))
+                self.write_line_verbatim('#include <{0}/{1}'
+                                         '.h>'.format(self.language,
+                                                      self.class_name))
                 if self.has_parent_list_of and not self.is_list_of:
-                    self.write_line('#include <{0}/{1}'
-                                    '.h>'.format(self.language, lo_name))
+                    self.write_line_verbatim('#include <{0}/{1}'
+                                             '.h>'.format(self.language,
+                                                          lo_name))
         else:
-            self.write_line('#include <{0}/{1}.h>'.
-                            format(self.language, self.baseClass))
+            self.write_line_verbatim('#include <{0}/{1}'
+                                     '.h>'.format(self.language,
+                                                  self.baseClass))
 
         # determine whether we need to write other headers
         write_element_filter = False
@@ -168,31 +175,35 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                         concrete_classes.append(element)
 
         if write_element_filter:
-            self.write_line('#include <{}/util/ElementFilter.'
-                            'h>'.format(self.language))
+            self.write_line_verbatim('#include <{}/util/ElementFilter.'
+                                     'h>'.format(self.language))
         if write_model:
-            self.write_line('#include <{}/Model.h>'.format(self.language))
+            self.write_line_verbatim('#include <{}/Model'
+                                     '.h>'.format(self.language))
 
         if write_validators:
-            self.write_line('#include <{}/packages/{}/validator/{}Consistency'
-                            'Validator.h>'.format(self.language,
+            self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+                                     'ConsistencyValidator'
+                                     '.h>'.format(self.language,
                                                   self.package.lower(),
                                                   self.package))
-            self.write_line('#include <{}/packages/{}/validator/{}Identifier'
-                            'ConsistencyValidator.'
-                            'h>'.format(self.language, self.package.lower(),
-                                        self.package))
+            self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+                                     'IdentifierConsistencyValidator.'
+                                     'h>'.format(self.language,
+                                                 self.package.lower(),
+                                                 self.package))
 
         if write_math:
-            self.write_line('#include <{}/math/MathML.h>'.format(self.language))
+            self.write_line_verbatim('#include <{}/math/MathML'
+                                     '.h>'.format(self.language))
 
         if len(concrete_classes) > 0:
             self.skip_line()
         for element in concrete_classes:
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}'
-                            '.h>'.format(self.language,
-                                         self.package.lower(),
-                                         element))
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  element))
         self.skip_line(2)
         self.write_line('using namespace std;')
         self.skip_line()
@@ -231,10 +242,14 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         elif self.is_plugin:
             code = constructor.write_uri_constructor()
             self.write_function_implementation(code)
-        else:
+        elif self.has_std_base:
             for i in range(0, len(self.concretes)+1):
                 code = constructor.write_level_version_constructor(i)
                 self.write_function_implementation(code)
+        else:
+            code = constructor.write_level_version_constructor(-1)
+            self.write_function_implementation(code)
+
 
         code = constructor.write_copy_constructor()
         self.write_function_implementation(code)

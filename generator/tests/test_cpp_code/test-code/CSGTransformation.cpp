@@ -730,58 +730,16 @@ CSGTransformation::createObject(XMLInputStream& stream)
 
 
 /*
- * Creates a new CSGTranslation (CSGTransformation_t) using the given SBML @p
- * level, @ p version and package version values.
+ * Creates a new CSGTransformation_t using the given SBML @p level, @ p version
+ * and package version values.
  */
 LIBSBML_EXTERN
 CSGTransformation_t *
-CSGTransformation_createCSGTranslation(unsigned int level,
-                                       unsigned int version,
-                                       unsigned int pkgVersion)
+CSGTransformation_create(unsigned int level,
+                         unsigned int version,
+                         unsigned int pkgVersion)
 {
-  return new CSGTranslation(level, version, pkgVersion);
-}
-
-
-/*
- * Creates a new CSGRotation (CSGTransformation_t) using the given SBML @p
- * level, @ p version and package version values.
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGRotation(unsigned int level,
-                                    unsigned int version,
-                                    unsigned int pkgVersion)
-{
-  return new CSGRotation(level, version, pkgVersion);
-}
-
-
-/*
- * Creates a new CSGScale (CSGTransformation_t) using the given SBML @p level,
- * @ p version and package version values.
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGScale(unsigned int level,
-                                 unsigned int version,
-                                 unsigned int pkgVersion)
-{
-  return new CSGScale(level, version, pkgVersion);
-}
-
-
-/*
- * Creates a new CSGHomogeneousTransformation (CSGTransformation_t) using the
- * given SBML @p level, @ p version and package version values.
- */
-LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_createCSGHomogeneousTransformation(unsigned int level,
-                                                     unsigned int version,
-                                                     unsigned int pkgVersion)
-{
-  return new CSGHomogeneousTransformation(level, version, pkgVersion);
+  return new CSGTransformation(level, version, pkgVersion);
 }
 
 

@@ -604,15 +604,17 @@ Output::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("qual", QualLOOutputAllowedAttributes, pkgVersion,
-          level, version, details);
+        log->logPackageError("qual",
+          QualTransitionLOOutputsAllowedCoreAttributes, pkgVersion, level,
+            version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("qual", QualLOOutputAllowedAttributes, pkgVersion,
-          level, version, details);
+        log->logPackageError("qual",
+          QualTransitionLOOutputsAllowedCoreAttributes, pkgVersion, level,
+            version, details);
       }
     }
   }
@@ -633,7 +635,7 @@ Output::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
+      log->logPackageError("qual", QualOutputAllowedCoreAttributes, pkgVersion,
         level, version, details);
     }
   }
@@ -712,8 +714,9 @@ Output::readAttributes(const XMLAttributes& attributes,
 
         msg += "is '" + transitioneffect + "', which is not a valid option.";
 
-        log->logPackageError("qual", QualTransitionOutputEffectValues,
-          getPackageVersion(), level, version, msg);
+        log->logPackageError("qual",
+          QualOutputTransitionEffectMustBeTransitionOutputEffectEnum,
+            getPackageVersion(), level, version, msg);
       }
     }
   }
@@ -753,7 +756,7 @@ Output::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Qual attribute 'outputLevel' from the <Output> "
         "element must be an integer.";
-      log->logPackageError("qual", QualOutputLevelMustBeInteger,
+      log->logPackageError("qual", QualOutputOutputLevelMustBeInteger,
         getPackageVersion(), level, version, message);
     }
   }

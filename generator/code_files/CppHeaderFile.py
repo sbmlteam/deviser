@@ -93,6 +93,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.down_indent()
         if self.add_decls is not None:
             self.copy_additional_file(self.add_decls)
+            self.skip_line(2)
         self.write_line('};\n')
 
     def write_c_header(self):
@@ -119,27 +120,27 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line()
 
     def write_common_includes(self):
-        self.write_line('#include <{0}/common/extern.h>'.format(self.language))
+        self.write_line_verbatim('#include <{0}/common/extern.h>'.format(self.language))
         if not self.is_plugin:
-            self.write_line('#include <{0}/common/{0}fwd.'
+            self.write_line_verbatim('#include <{0}/common/{0}fwd.'
                             'h>'.format(self.language))
             if self.package:
-                self.write_line('#include <{0}/packages/{1}/common/{1}fwd.h>'.
+                self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}fwd.h>'.
                                 format(self.language, self.package.lower()))
 
     def write_general_includes(self):
         if not self.is_plugin:
-            self.write_line('#include <string>')
+            self.write_line_verbatim('#include <string>')
             self.skip_line(2)
         if self.has_std_base:
             if not self.is_plugin:
-                self.write_line('#include <{0}/{1}.h>'.
+                self.write_line_verbatim('#include <{0}/{1}.h>'.
                                 format(self.language, self.baseClass))
             else:
-                self.write_line('#include <{0}/extension/{1}.h>'.
+                self.write_line_verbatim('#include <{0}/extension/{1}.h>'.
                                 format(self.language, self.baseClass))
         else:
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     self.baseClass))
         need_extension = False
@@ -147,6 +148,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             if self.is_doc_plugin:
                 need_extension = True
             elif not self.is_plugin:
+                need_extension = True
+            elif self.is_plugin and not self.has_children:
                 need_extension = True
 
         if need_extension:
@@ -158,23 +161,23 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         for i in range(0, len(self.child_elements)):
             child = self.child_elements[i]['element']
             if child != 'ASTNode':
-                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
                                 .format(self.language, self.package.lower(),
                                         child))
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     child))
             if self.is_plugin:
                 child = self.child_lo_elements[i]['element']
-                self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
                                 .format(self.language, self.package.lower(),
                                         child))
         if self.is_list_of:
             child = self.list_of_child
-            self.write_line('#include <{0}/packages/{1}/{0}/{2}.h>'
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
                             .format(self.language, self.package.lower(),
                                     child))
     ########################################################################
@@ -211,10 +214,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         elif self.is_plugin:
             code = constructor.write_uri_constructor()
             self.write_function_declaration(code)
-        else:
+        elif self.has_std_base:
             for i in range(0, len(self.concretes)+1):
                 code = constructor.write_level_version_constructor(i)
                 self.write_function_declaration(code)
+        else:
+            code = constructor.write_level_version_constructor(-1)
+            self.write_function_declaration(code)
 
         code = constructor.write_copy_constructor()
         self.write_function_declaration(code)

@@ -1059,7 +1059,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
       if (mSpatialSymbolReference != NULL)
       {
         getErrorLog()->logPackageError("spatial",
-          SpatialSpatialParameterPluginElements, getPackageVersion(), getLevel(),
+          SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
             getVersion());
       }
 
@@ -1071,7 +1071,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
       if (mAdvectionCoefficient != NULL)
       {
         getErrorLog()->logPackageError("spatial",
-          SpatialSpatialParameterPluginElements, getPackageVersion(), getLevel(),
+          SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
             getVersion());
       }
 
@@ -1083,7 +1083,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
       if (mBoundaryCondition != NULL)
       {
         getErrorLog()->logPackageError("spatial",
-          SpatialSpatialParameterPluginElements, getPackageVersion(), getLevel(),
+          SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
             getVersion());
       }
 
@@ -1095,7 +1095,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
       if (mDiffusionCoefficient != NULL)
       {
         getErrorLog()->logPackageError("spatial",
-          SpatialSpatialParameterPluginElements, getPackageVersion(), getLevel(),
+          SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
             getVersion());
       }
 
@@ -1114,24 +1114,48 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
 /** @endcond */
 
 
-public:
-   /** 
-   * @return true, if either the spatial symbol reference, diffusion coefficient, 
-   *   advection coefficient or boundary is set. Otherwise the return value is false.
-   */ 
-  bool isSpatialParameter() const;
+/* 
+ * @return true, if either the spatial symbol reference, diffusion coefficient, 
+ *   advection coefficient or boundary is set. Otherwise the return value is false.
+ */ 
+bool 
+SpatialParameterPlugin::isSpatialParameter() const
+{
+  return getType() != -1;
+}
 
-  /** 
-   * Determines the type of the spatial parameter, that is one of: 
-   * 
-   * SBML_SPATIAL_SPATIALSYMBOLREFERENCE
-   * SBML_SPATIAL_DIFFUSIONCOEFFICIENT
-   * SBML_SPATIAL_ADVECTIONCOEFFICIENT
-   * SBML_SPATIAL_BOUNDARYCONDITION
-   * 
-   * or -1 in case no other is defined.
-   */
-  int getType() const;
+/* 
+ * Determines the type of the spatial parameter, that is one of: 
+ * 
+ * SBML_SPATIAL_SPATIALSYMBOLREFERENCE
+ * SBML_SPATIAL_DIFFUSIONCOEFFICIENT
+ * SBML_SPATIAL_ADVECTIONCOEFFICIENT
+ * SBML_SPATIAL_BOUNDARYCONDITION
+ * 
+ * or -1 in case no other is defined.
+ */
+int 
+SpatialParameterPlugin::getType() const
+{
+  if (isSetSpatialSymbolReference())
+  {
+    return SBML_SPATIAL_SPATIALSYMBOLREFERENCE;
+  }
+  if (isSetDiffusionCoefficient())
+  {
+    return SBML_SPATIAL_DIFFUSIONCOEFFICIENT;
+  }    
+  if (isSetAdvectionCoefficient())
+  {
+    return SBML_SPATIAL_ADVECTIONCOEFFICIENT;
+  }    
+  if (isSetBoundaryCondition())
+  {
+    return SBML_SPATIAL_BOUNDARYCONDITION;
+  }    
+  return -1;
+}
+
 
 #endif /* __cplusplus */
 
