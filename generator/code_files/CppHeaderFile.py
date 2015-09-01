@@ -45,7 +45,7 @@ from util import query
 class CppHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Cpp Header files"""
 
-    def __init__(self, class_object):
+    def __init__(self, class_object, represents_class=True):
 
         self.brief_description = \
             'Definition of {}.'.format(class_object['name'])
@@ -53,7 +53,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                          class_object['attribs'])
 
         # members from object
-        self.expand_class(class_object)
+        self.represents_class = represents_class
+        if represents_class:
+            self.expand_class(class_object)
     ########################################################################
 
     # Functions for writing the class

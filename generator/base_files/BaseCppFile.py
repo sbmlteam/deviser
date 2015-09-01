@@ -69,13 +69,6 @@ class BaseCppFile(BaseFile.BaseFile):
         # default values
         self.is_cpp_api = True
 
-        # populate useful variables
-        if self.extension == 'h':
-            self.is_header = True
-        else:
-            self.is_header = False
-        self.cap_language = self.language.upper()
-
         self.class_object = {}
 
         # declare variables that will populate by the class object

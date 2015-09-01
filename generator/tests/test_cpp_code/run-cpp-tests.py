@@ -3,12 +3,13 @@
 import os
 
 from parseXML import createPackageFromXml
-from code_files import CppFiles, ExtensionFiles
+from code_files import CppFiles, ExtensionFiles, ValidationFiles
 from parseXML import ParseXML
 
 use_new = True
 
 fails = []
+
 
 def generate_cpp_header(filename, num):
     ob = createPackageFromXml.parse_deviser_xml(filename)
@@ -62,6 +63,15 @@ def generate_plugin_header(filename, num):
     os.chdir('./temp')
     all_files = ExtensionFiles.ExtensionFiles(ob, '', True)
     all_files.write_plugin_files(num)
+    os.chdir('../.')
+
+
+def generate_error_header(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files.write_files()
     os.chdir('../.')
 
 
@@ -169,6 +179,22 @@ def run_plug_test(name, class_name, test_case, num):
     return fail
 
 
+def run_valid_test(name, class_name, test_case):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('====================================================')
+    generate_error_header(filename)
+    correct_file = '.\\test-extension\\{}.h'.format(class_name)
+    temp_file = '.\\temp\\{}.h'.format(class_name)
+    if os.path.isfile(correct_file):
+        print('{}.h'.format(class_name))
+        fail = compare_files(correct_file, temp_file)
+    print('')
+    return fail
+
+
 def main():
     fail = 0
     name = 'test_att'
@@ -239,6 +265,11 @@ def main():
     class_name = 'QualSBMLDocumentPlugin'
     test_case = 'document plugin'
     fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'qual'
+    class_name = 'QualSBMLError'
+    test_case = 'error enumeration '
+    fail += run_valid_test(name, class_name, test_case)
 
     name = 'distrib'
     num = 2
@@ -317,7 +348,6 @@ def main():
     test_case = 'class with math child'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-
     name = 'spatial'
     num = 26
     class_name = 'CSGSetOperator'
@@ -338,7 +368,6 @@ def main():
         list_of = ''
         test_case = 'multiple versions'
         fail += run_test(name, num, class_name, test_case, list_of)
-
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

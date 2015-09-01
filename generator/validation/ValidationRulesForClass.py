@@ -49,8 +49,9 @@ class ValidationRulesForClass():
         self.name = object_desc['name']
         self.fullname = spec_name
         self.number = number
-        self.package = package.lower()
+        self.package = package.lower() 
         self.pkg_ref = pkg_ref
+        self.up_package = strFunctions.upper_first(self.package)
 
         # useful repeated text strings
         self.valid = '\\validRule{'
@@ -70,6 +71,7 @@ class ValidationRulesForClass():
 
         self.parse_attributes(self, object_desc['attribs'])
         self.rules = []
+        self.tc = 'TBC'
 
     ########################################################################
 
@@ -147,7 +149,9 @@ class ValidationRulesForClass():
     @staticmethod
     def write_attribute_type_rule(self, attribute):
         att_type = attribute['type']
+        att_name = strFunctions.upper_first(attribute['name'])
         name = strFunctions.wrap_token(attribute['texname'], self.package)
+        rule_type = 'String'
         if att_type == 'SId':
             return
         elif att_type == 'SIdRef':
@@ -159,6 +163,7 @@ class ValidationRulesForClass():
                    'the identifier of an existing \{} object defined in the ' \
                    'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
+            rule_type = ref_name
         elif att_type == 'string':
             text = 'The attribute {} on {} {} must have a value of data ' \
                    'type {}.'\
@@ -169,16 +174,19 @@ class ValidationRulesForClass():
                    'type {}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('integer'))
+            rule_type = 'Integer' if att_type == 'int' else 'UnInteger'
         elif att_type == 'double':
             text = 'The attribute {} on {} {} must have a value of data ' \
                    'type {}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('double'))
+            rule_type = 'Double'
         elif att_type == 'boolean' or att_type == 'bool':
             text = 'The attribute {} on {} {} must have a value of data ' \
                    'type {}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('boolean'))
+            rule_type = 'Boolean'
         elif att_type == 'enum':
             enum_name = strFunctions.texify(attribute['element'])
             enums = attribute['parent']['root']['enums']
@@ -191,6 +199,7 @@ class ValidationRulesForClass():
                                            self.formatted_name,
                                            strFunctions.wrap_enum(enum_name),
                                            enum_values)
+            rule_type = '{}Enum'.format(attribute['element'])
         elif att_type == 'array':
             text = 'The value of the attribute {} of {} {} object must ' \
                    'be an array of values of type {}.'\
@@ -212,8 +221,10 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
+                                     rule_type)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})
 
     @staticmethod
     # write core attribute rule
@@ -227,7 +238,9 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token('sboTerm'), self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
+            tc = '{}{}AllowedCoreAttributes'.format(self.up_package, self.name)
         else:
+            lo_name = strFunctions.plural(lo_child['element'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
                    'SBML Level 3 Core namespaces are permitted on a {0} object.'\
@@ -237,8 +250,10 @@ class ValidationRulesForClass():
             ref = '{}, {}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
+            tc = '{}{}LO{}AllowedCoreAttributes'.format(self.up_package,
+                                                        self.name, lo_name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})
 
     # write core subobjects rule
     @staticmethod
@@ -251,8 +266,10 @@ class ValidationRulesForClass():
                 .format(self.indef_u, self.formatted_name, self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
+            tc = '{}{}AllowedCoreElements'.format(self.up_package, self.name)
         else:
             loname = strFunctions.get_element_name(lo_child)
+            lo_name = strFunctions.plural(lo_child['element'])
             text = 'Apart from the general notes and annotations subobjects ' \
                    'permitted on all SBML objects, a {} container object ' \
                    'may only contain \{} objects.'\
@@ -260,8 +277,10 @@ class ValidationRulesForClass():
             ref = '{}, {}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
+            tc = '{}{}LO{}AllowedElements'.format(self.up_package, self.name,
+                                                  lo_name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})
 
     @staticmethod
     def write_package_attribute_rule(self):
@@ -287,8 +306,9 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        tc = '{}{}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})
 
     @staticmethod
     def write_package_object_rule(self):
@@ -314,8 +334,9 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        tc = '{}{}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})
 
     #########################################################################
 
@@ -498,5 +519,6 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev})
+                     'reference': ref, 'severity': sev, 'typecode': tc})

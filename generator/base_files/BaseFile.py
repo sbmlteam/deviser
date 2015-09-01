@@ -41,13 +41,14 @@
 class BaseFile:
     """Common base class for all files"""
 
-    def __init__(self, name, extension):
+    def __init__(self, name, extension, language='sbml'):
         self.name = name
         self.extension = extension
 
         # derived members for file
         self.filename = name + '.' + extension
-        self.file_out = open(self.filename, 'w')
+        if name != '':
+            self.file_out = open(self.filename, 'w')
 
         # derived members for comments
         self.comment_start = '/**'
@@ -64,10 +65,16 @@ class BaseFile:
         self.line_length = 79
         self.num_tabs = 0
 
+        # populate useful variables
+        if self.extension == 'h':
+            self.is_header = True
+        else:
+            self.is_header = False
+
         # members that might get overridden if creating another library
-        self.library_name = 'Libsbml'
-        self.language = 'sbml'
-        self.cap_language = 'SBML'
+        self.language = language
+        self.library_name = 'Lib{}'.format(language)
+        self.cap_language = language.upper()
 
     ########################################################################
 
