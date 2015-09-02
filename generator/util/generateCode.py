@@ -72,16 +72,19 @@ def generate_code_for(filename, overwrite=True):
     ext.write_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
+    os.chdir(this_dir)
 
     os.chdir(extension_dir)
     ext = ExtensionFiles.ExtensionFiles(ob, '', True)
     ext.write_files()
     for i in range(0, len(ob['plugins'])+1):
         ext.write_plugin_files(i)
+    os.chdir(this_dir)
 
     os.chdir(valid_dir)
     all_files = ValidationFiles.ValidationFiles(ob, language, True)
     all_files.write_files()
+    os.chdir(this_dir)
 
     os.chdir(sbml_dir)
     for working_class in ob['sbmlElements']:

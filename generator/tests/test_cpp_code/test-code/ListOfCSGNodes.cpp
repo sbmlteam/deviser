@@ -572,9 +572,9 @@ ListOfCSGNodes::writeXMLNS(XMLOutputStream& stream) const
  * checks concrete types
  */
 bool
-ListOfCSGNodes::isValidTypeForList(SBase* item) const
+ListOfCSGNodes::isValidTypeForList(SBase* item)
 {
-  unsigned int tc = getTypeCode();
+  unsigned int tc = item->getTypeCode();
 
   return ((tc == SBML_SPATIAL_CSGPRIMITIVE) || (tc ==
     SBML_SPATIAL_CSGTRANSLATION) || (tc == SBML_SPATIAL_CSGROTATION) || (tc ==

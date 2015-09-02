@@ -395,7 +395,7 @@ protected:
   /**
    * checks concrete types
    */
-  virtual bool isValidTypeForList(SBase* item) const;
+  virtual bool isValidTypeForList(SBase* item);
 
   /** @endcond */
 

@@ -879,7 +879,7 @@ class ProtectedFunctions():
         arguments = ['{}* item'.format(self.child_base_class)]
 
         # create the function implementation
-        implementation = ['unsigned int tc = getTypeCode()']
+        implementation = ['unsigned int tc = item->getTypeCode()']
         code = [dict({'code_type': 'line', 'code': implementation})]
         tc = self.concretes[0]['type_code']
         implementation = 'return ((tc == {})'.format(tc)
@@ -896,7 +896,7 @@ class ProtectedFunctions():
                      'function': function,
                      'return_type': return_type,
                      'arguments': arguments,
-                     'constant': True,
+                     'constant': False,
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
