@@ -91,7 +91,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.up_indent()
         self.write_protected_functions()
         self.down_indent()
-        if self.add_decls is not None:
+        if self.add_decls is not None and not self.is_list_of:
             self.copy_additional_file(self.add_decls)
             self.skip_line(2)
         self.write_line('};\n')
@@ -120,13 +120,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.skip_line()
 
     def write_common_includes(self):
-        self.write_line_verbatim('#include <{0}/common/extern.h>'.format(self.language))
+        self.write_line_verbatim('#include <{0}/common/'
+                                 'extern.h>'.format(self.language))
         if not self.is_plugin:
             self.write_line_verbatim('#include <{0}/common/{0}fwd.'
-                            'h>'.format(self.language))
+                                     'h>'.format(self.language))
             if self.package:
-                self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}fwd.h>'.
-                                format(self.language, self.package.lower()))
+                self.write_line_verbatim('#include <{0}/packages/{1}/common/'
+                                         '{1}fwd.'
+                                         'h>'.format(self.language,
+                                                     self.package.lower()))
 
     def write_general_includes(self):
         if not self.is_plugin:
@@ -134,15 +137,18 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.skip_line(2)
         if self.has_std_base:
             if not self.is_plugin:
-                self.write_line_verbatim('#include <{0}/{1}.h>'.
-                                format(self.language, self.baseClass))
+                self.write_line_verbatim('#include <{}/{}'
+                                         '.h>'.format(self.language,
+                                                      self.baseClass))
             else:
-                self.write_line_verbatim('#include <{0}/extension/{1}.h>'.
-                                format(self.language, self.baseClass))
+                self.write_line_verbatim('#include <{}/extension/{}'
+                                         '.h>'.format(self.language,
+                                                      self.baseClass))
         else:
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
-                            .format(self.language, self.package.lower(),
-                                    self.baseClass))
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  self.baseClass))
         need_extension = False
         if self.package:
             if self.is_doc_plugin:
@@ -161,25 +167,29 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         for i in range(0, len(self.child_elements)):
             child = self.child_elements[i]['element']
             if child != 'ASTNode':
-                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
-                                .format(self.language, self.package.lower(),
-                                        child))
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                         '.h>'.format(self.language,
+                                                      self.package.lower(),
+                                                      child))
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
-                            .format(self.language, self.package.lower(),
-                                    child))
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  child))
             if self.is_plugin:
                 child = self.child_lo_elements[i]['element']
-                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
-                                .format(self.language, self.package.lower(),
-                                        child))
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                         '.h>'.format(self.language,
+                                                      self.package.lower(),
+                                                      child))
         if self.is_list_of:
             child = self.list_of_child
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.h>'
-                            .format(self.language, self.package.lower(),
-                                    child))
+            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  child))
     ########################################################################
 
     # function to write the data members

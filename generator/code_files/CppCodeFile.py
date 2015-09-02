@@ -68,7 +68,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_general_functions()
         self.write_functions_to_retrieve()
         self.write_protected_functions()
-        if self.add_impl is not None:
+        if self.add_impl is not None and not self.is_list_of:
             self.copy_additional_file(self.add_impl)
 
     def write_c_code(self):
@@ -157,8 +157,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         for lo in self.child_lo_elements:
             if 'concrete' in lo:
-                for j in range(0, len(lo['concrete'])):
-                    element = lo['concrete'][j]['element']
+                child_concretes = query.get_concretes(lo['root'],
+                                                      lo['concrete'])
+                for j in range(0, len(child_concretes)):
+                    element = child_concretes[j]['element']
                     if element not in concrete_classes:
                         concrete_classes.append(element)
 
@@ -169,8 +171,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         for child in self.child_elements:
             if 'concrete' in child:
-                for j in range(0, len(child['concrete'])):
-                    element = child['concrete'][j]['element']
+                child_concretes = query.get_concretes(child['root'],
+                                                      child['concrete'])
+                for j in range(0, len(child_concretes)):
+                    element = child_concretes[j]['element']
                     if element not in concrete_classes:
                         concrete_classes.append(element)
 
@@ -249,7 +253,6 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         else:
             code = constructor.write_level_version_constructor(-1)
             self.write_function_implementation(code)
-
 
         code = constructor.write_copy_constructor()
         self.write_function_implementation(code)

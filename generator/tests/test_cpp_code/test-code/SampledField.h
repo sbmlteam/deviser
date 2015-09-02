@@ -1385,7 +1385,10 @@ SampledField_setCompressionAsString(SampledField_t * sf,
  *
  * @param sf the SampledField_t structure.
  *
- * @param samples int* value of the "samples" attribute to be set.
+ * @param samples pointer value of the "samples" attribute to be set.
+ *
+ * @param arrayLength int value for the length of the "samples" attribute to be
+ * set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1395,7 +1398,7 @@ SampledField_setCompressionAsString(SampledField_t * sf,
  */
 LIBSBML_EXTERN
 int
-SampledField_setSamples(SampledField_t * sf, int* samples);
+SampledField_setSamples(SampledField_t* sf, int* samples, int arrayLength);
 
 
 /**

@@ -35,7 +35,10 @@
 #include <sbml/util/ElementFilter.h>
 
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
-#include <sbml/packages/spatial/sbml/CSGTransformation.h>
+#include <sbml/packages/spatial/sbml/CSGTranslation.h>
+#include <sbml/packages/spatial/sbml/CSGRotation.h>
+#include <sbml/packages/spatial/sbml/CSGScale.h>
+#include <sbml/packages/spatial/sbml/CSGHomogeneousTransformation.h>
 #include <sbml/packages/spatial/sbml/CSGPseudoPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGSetOperator.h>
 
@@ -746,7 +749,7 @@ CSGSetOperator::writeElements(XMLOutputStream& stream) const
 {
   CSGNode::writeElements(stream);
 
-  if (getNumCsgNodes() > 0)
+  if (getNumCSGNodes() > 0)
   {
     mCSGNodes.write(stream);
   }

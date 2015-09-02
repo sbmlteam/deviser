@@ -37,6 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+import copy
 import CppHeaderFile
 import CppCodeFile
 from util import strFunctions, query
@@ -80,7 +81,7 @@ class CppFiles():
 
     def create_list_of_description(self):
         lo_name = strFunctions.list_of_name(self.class_object['name'])
-        descrip = self.class_object
+        descrip = copy.deepcopy(self.class_object)
         descrip['is_list_of'] = True
         descrip['attribs'] = self.class_object['lo_attribs']
         descrip['child_base_class'] = self.class_object['baseClass']
@@ -91,10 +92,4 @@ class CppFiles():
         return descrip
 
     def test_func(self):
-#        self.write_files()
-#        self.write_code(self.class_object)
-        self.write_header(self.class_object)
-#        if self.class_object['hasListOf']:
-#            lo_working_class = self.create_list_of_description()
-#            self.write_header(lo_working_class)
-#            self.write_code(lo_working_class)
+        self.write_files()

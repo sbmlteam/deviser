@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    generateLatex.py
-# @brief   function for generating all latex files
+# @file    global_variables.py
+# @brief   general functions for querying objects
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,31 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
+global error_list
+error_list = []
 
-import spec_files
-from parseXML import createPackageFromXml
-
-
-def generateLatexFor(file):
-    ob = createPackageFromXml.parse_deviser_xml(file)
-    ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
-    ff.write_file()
-    ff.close_file()
-    body = spec_files.TexBodySyntaxFile.TexBodySyntaxFile(ob)
-    body.write_file()
-    body.close_file()
-    macros = spec_files.TexMacrosFile.TexMacrosFile(ob)
-    macros.write_file()
-    macros.close_file()
-
-
-def main(args):
-    if len(args) != 2:
-        print ('Usage: generateLatex.py xmlfile')
-    else:
-        generateLatexFor(args[1])
-
-
-if __name__ == '__main__':
-    main(sys.argv)
+global running_tests
+running_tests = False

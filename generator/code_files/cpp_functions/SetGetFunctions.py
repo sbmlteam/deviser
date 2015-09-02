@@ -481,8 +481,11 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
-        if attribute['isArray'] and self.is_cpp_api:
-            return self.write_set_array(index)
+        if attribute['isArray']:
+            if self.is_cpp_api:
+                return self.write_cpp_set_array(index)
+            else:
+                return self.write_c_set_array(index)
         if is_attribute:
             ob_type = 'attribute'
         else:
@@ -654,7 +657,7 @@ class SetGetFunctions():
     # function to write set function for an array
     # specialised c++ function to use an array pointer
     # as an argument to be read into
-    def write_set_array(self, index):
+    def write_cpp_set_array(self, index):
         if index < len(self.attributes):
             attribute = self.attributes[index]
         else:
@@ -701,6 +704,60 @@ class SetGetFunctions():
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block(
             'line', ['return LIBSBML_OPERATION_SUCCESS']))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write set function for an array
+    # specialised c function
+    def write_c_set_array(self, index):
+        if index < len(self.attributes):
+            attribute = self.attributes[index]
+        else:
+            return None
+        # create comment parts
+        title_line = 'Sets the value of the \"{}\" attribute of this {}.' \
+            .format(attribute['name'], self.object_name)
+
+        params = ['@param {} the {} structure.'.format(self.abbrev_parent,
+                                                       self.object_name),
+                  '@param {0} pointer value of the \"{0}\" '
+                  'attribute to be set.'.format(attribute['name']),
+                  '@param arrayLength int value for the length of '
+                  'the \"{}\" attribute to be '
+                  'set.'.format(attribute['name'])]
+
+        return_lines = ["@copydetails doc_returns_success_code",
+                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t}', '@li @sbmlconstant '
+                        '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
+                        ' OperationReturnValues_t}']
+
+        additional = []
+
+        # create the function declaration
+        function = '{}_set{}'.format(self.class_name, attribute['capAttName'])
+        return_type = 'int'
+        arguments = ['{}* {}'.format(self.object_name, self.abbrev_parent),
+                     '{} {}'.format(attribute['attTypeCode'],
+                                    attribute['name']),
+                     'int arrayLength']
+        implementation = ['return ({0} != NULL) ? {0}->set{1}({2}, '
+                          'arrayLength) : LIBSBML_INVALID_'
+                          'OBJECT'.format(self.abbrev_parent,
+                                          attribute['capAttName'],
+                                          attribute['name'])]
+        code = [self.create_code_block('line', implementation)]
 
         # return the parts
         return dict({'title_line': title_line,

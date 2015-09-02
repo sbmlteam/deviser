@@ -60,37 +60,34 @@ def generate_code_for(filename, overwrite=True):
     common_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}common'.format(name,
                                                                     os.sep,
                                                                     language)
+    extension_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}' \
+                    'extension'.format(name, os.sep, language)
+    valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
+                                                                      os.sep,
+                                                                      language)
+    sbml_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, os.sep,
+                                                               language)
     os.chdir(common_dir)
     ext = ExtensionFiles.ExtensionFiles(ob, 'types', True)
     ext.write_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
-    os.chdir(this_dir)
-    extension_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}' \
-                    'extension'.format(name, os.sep, language)
+
     os.chdir(extension_dir)
     ext = ExtensionFiles.ExtensionFiles(ob, '', True)
     ext.write_files()
     for i in range(0, len(ob['plugins'])+1):
         ext.write_plugin_files(i)
-    os.chdir(this_dir)
-    valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
-                                                                       os.sep,
-                                                                       language)
+
     os.chdir(valid_dir)
     all_files = ValidationFiles.ValidationFiles(ob, language, True)
     all_files.write_files()
-    os.chdir(this_dir)
-    sbml_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, os.sep,
-                                                               language)
+
     os.chdir(sbml_dir)
     for working_class in ob['sbmlElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     os.chdir(this_dir)
-    valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
-                                                                       os.sep,
-                                                                       language)
 
 
 def populate_directories(name, lang):

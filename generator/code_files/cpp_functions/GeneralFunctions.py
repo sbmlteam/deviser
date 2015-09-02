@@ -532,7 +532,12 @@ class GeneralFunctions():
             if self.is_plugin:
                 name = att['pluralName'][6:]
             else:
-                name = strFunctions.upper_first(att['pluralName'])
+                # hack for spatial csg elements
+                if self.package == 'Spatial' and \
+                        att['pluralName'].startswith('csg'):
+                    name = 'CSG' + att['pluralName'][3:]
+                else:
+                    name = strFunctions.upper_first(att['pluralName'])
             implementation = ['getNum{}() > '
                               '0'.format(name),
                               '{}.write(stream)'.format(att['memberName'])]
@@ -710,6 +715,8 @@ class GeneralFunctions():
                 name = attrib['capAttName']
                 member = attrib['memberName']
                 array_type = attrib['element']
+            if array_type == 'int':
+                array_type = 'long'
         code = [self.create_code_block('line',
                                        ['stream.startElement(getElementName(), '
                                         'getPrefix())',

@@ -1130,9 +1130,12 @@ SpatialPoints_setCompressionAsString(SpatialPoints_t * sp,
  */
 LIBSBML_EXTERN
 int
-SpatialPoints_setArrayData(SpatialPoints_t * sp, double* arrayData)
+SpatialPoints_setArrayData(SpatialPoints_t* sp,
+                           double* arrayData,
+                           int arrayLength)
 {
-  return (sp != NULL) ? sp->setArrayData(arrayData) : LIBSBML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->setArrayData(arrayData, arrayLength) :
+    LIBSBML_INVALID_OBJECT;
 }
 
 

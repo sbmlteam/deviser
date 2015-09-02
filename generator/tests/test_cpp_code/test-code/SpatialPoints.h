@@ -865,7 +865,10 @@ SpatialPoints_setCompressionAsString(SpatialPoints_t * sp,
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @param arrayData double* value of the "arrayData" attribute to be set.
+ * @param arrayData pointer value of the "arrayData" attribute to be set.
+ *
+ * @param arrayLength int value for the length of the "arrayData" attribute to
+ * be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -875,7 +878,9 @@ SpatialPoints_setCompressionAsString(SpatialPoints_t * sp,
  */
 LIBSBML_EXTERN
 int
-SpatialPoints_setArrayData(SpatialPoints_t * sp, double* arrayData);
+SpatialPoints_setArrayData(SpatialPoints_t* sp,
+                           double* arrayData,
+                           int arrayLength);
 
 
 /**

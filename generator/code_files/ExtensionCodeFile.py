@@ -192,7 +192,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         code = ext_functions.write_get_namespaces()
         self.write_function_implementation(code)
 
-        code = ext_functions.write_get_string_typecode()
+        code = ext_functions.write_get_string_typecode
         self.write_function_implementation(code)
 
         code = ext_functions.write_get_error_table()

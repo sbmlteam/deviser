@@ -167,8 +167,8 @@ class ExtensionFunctions():
         else:
             value = 1
         implementation = ['uri == getXmlnsL3V1V1()', 'return {}'.format(value)]
-        code = [dict({'code_type': 'if', 'code': implementation})]
-        code.append(self.create_code_block('line', ['return 0']))
+        code = [dict({'code_type': 'if', 'code': implementation}),
+                self.create_code_block('line', ['return 0'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -205,12 +205,12 @@ class ExtensionFunctions():
         # create the function implementation
         code = [dict({'code_type': 'line',
                       'code': ['{}PkgNamespaces* pkgns = '
-                               'NULL'.format(self.up_package)]})]
-        code.append(self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
-                                                  'pkgns = new {}PkgNamespaces'
-                                                  '(3, 1, 1)'
-                                                  ''.format(self.up_package)]))
-        code.append(self.create_code_block('line', ['return pkgns']))
+                               'NULL'.format(self.up_package)]}),
+                self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
+                                              'pkgns = new {}PkgNamespaces'
+                                              '(3, 1, 1)'
+                                              ''.format(self.up_package)]),
+                self.create_code_block('line', ['return pkgns'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -226,6 +226,7 @@ class ExtensionFunctions():
                      'implementation': code})
 
     # function to write getExtension namespaces
+    @property
     def write_get_string_typecode(self):
         # create comment parts
         title_line = 'Returns the given {}{}TypeCode_t(int) ' \
@@ -244,18 +245,18 @@ class ExtensionFunctions():
         n = len(self.elements)
         implementation = ['int min = {}'.format(self.elements[0]['typecode']),
                           'int max = {}'.format(self.elements[n-1]['typecode'])]
-        code = [dict({'code_type': 'line', 'code': implementation})]
-        code.append(self.create_code_block('if', ['typeCode < min || '
-                                                  'typeCode > max',
-                                                  'return \"(Unknown '
-                                                  '{} {} Type)\"'
-                                                  ''.format(self.cap_language,
-                                                            self.up_package)]))
-        code.append(self.create_code_block('line',
-                                           ['return {}_{}_TYPECODE_STRINGS'
-                                            '[typeCode - min'
-                                            ']'.format(self.cap_language,
-                                                       self.package.upper())]))
+        code = [dict({'code_type': 'line', 'code': implementation}),
+                self.create_code_block('if', ['typeCode < min || '
+                                              'typeCode > max',
+                                              'return \"(Unknown '
+                                              '{} {} Type)\"'
+                                              ''.format(self.cap_language,
+                                                        self.up_package)]),
+                self.create_code_block('line',
+                                       ['return {}_{}_TYPECODE_STRINGS'
+                                        '[typeCode - min'
+                                        ']'.format(self.cap_language,
+                                                   self.package.upper())])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -332,7 +333,9 @@ class ExtensionFunctions():
         if_code = self.create_code_block('if', ['errorId == {}ErrorTable[i]'
                                                 '.code'.format(self.package),
                                                 'index = i', 'break'])
-        code.append(self.create_code_block('for', ['unsigned int i = 0; i < tableSize; i++', if_code]))
+        code.append(self.create_code_block('for', ['unsigned int i = 0; '
+                                                   'i < tableSize; i++',
+                                                   if_code]))
         code.append(self.create_code_block('line', ['return index']))
 
         # return the parts

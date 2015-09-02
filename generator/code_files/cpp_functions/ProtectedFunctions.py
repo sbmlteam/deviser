@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query
+from util import strFunctions, query, global_variables
 
 
 class ProtectedFunctions():
@@ -882,7 +882,7 @@ class ProtectedFunctions():
         implementation = ['unsigned int tc = getTypeCode()']
         code = [dict({'code_type': 'line', 'code': implementation})]
         tc = self.concretes[0]['type_code']
-        implementation = 'return ((tc == {}'.format(tc)
+        implementation = 'return ((tc == {})'.format(tc)
         for i in range(1, len(self.concretes)):
             tc = self.concretes[i]['type_code']
             implementation += ' || (tc == {})'.format(tc)
@@ -907,11 +907,11 @@ class ProtectedFunctions():
 
     def get_error_from_list_of_read(self):
         plural = strFunctions.plural(self.class_name)
-        if self.parent_class != '':
-            error = '{}{}LO{}AllowedCoreAttributes'.format(self.package,
-                                                           self.parent_class,
-                                                           plural)
-        else:
+        error = '{}{}LO{}AllowedCoreAttributes'.format(self.package,
+                                                       self.parent_class,
+                                                       plural)
+        if not global_variables.running_tests \
+                and error not in global_variables.error_list:
             error = '{}Unknown'.format(self.package)
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',

@@ -39,7 +39,6 @@
 #include <sbml/packages/spatial/sbml/CSGScale.h>
 #include <sbml/packages/spatial/sbml/CSGHomogeneousTransformation.h>
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
-#include <sbml/packages/spatial/sbml/CSGTransformation.h>
 #include <sbml/packages/spatial/sbml/CSGPseudoPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGSetOperator.h>
 

@@ -5,6 +5,7 @@ import os
 from parseXML import createPackageFromXml
 from code_files import CppFiles, ExtensionFiles, ValidationFiles
 from parseXML import ParseXML
+from util import global_variables
 
 use_new = True
 
@@ -196,6 +197,8 @@ def run_valid_test(name, class_name, test_case):
 
 
 def main():
+    global_variables.running_tests = True
+
     fail = 0
     name = 'test_att'
     num = 1

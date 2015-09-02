@@ -85,6 +85,7 @@ class ListOfQueryFunctions():
                 'id')
 
         self.used_sidrefs = []
+        self.used_eq_names = []
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -313,7 +314,10 @@ class ListOfQueryFunctions():
             return
 
         # useful variables
-        element = sid_ref['element']
+        if 'capAttName' in sid_ref:
+            element = sid_ref['capAttName']
+        else:
+            element = sid_ref['element']
         att_name = sid_ref['name']
         match = [element, const]
         if match in self.used_sidrefs:
@@ -401,13 +405,19 @@ class ListOfQueryFunctions():
             return
 
         # useful variables
-        element = sid_ref['element']
+        if 'capAttName' in sid_ref:
+            element = sid_ref['capAttName']
+        else:
+            element = sid_ref['element']
         eq_name = 'IdEq{}'.format(strFunctions.abbrev_name(element).upper())
         match = [element]
         if match in self.used_sidrefs:
             return
         else:
             self.used_sidrefs.append(match)
+        if eq_name in self.used_eq_names:
+            eq_name += '_A'
+        self.used_eq_names.append(eq_name)
         open_b = '{'
         close_b = '}'
         # create comment

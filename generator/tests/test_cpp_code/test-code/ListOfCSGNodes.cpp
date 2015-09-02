@@ -576,7 +576,7 @@ ListOfCSGNodes::isValidTypeForList(SBase* item) const
 {
   unsigned int tc = getTypeCode();
 
-  return ((tc == SBML_SPATIAL_CSGPRIMITIVE || (tc ==
+  return ((tc == SBML_SPATIAL_CSGPRIMITIVE) || (tc ==
     SBML_SPATIAL_CSGTRANSLATION) || (tc == SBML_SPATIAL_CSGROTATION) || (tc ==
       SBML_SPATIAL_CSGSCALE) || (tc == SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION)
         || (tc == SBML_SPATIAL_CSGPSEUDOPRIMITIVE) || (tc ==

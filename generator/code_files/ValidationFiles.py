@@ -38,9 +38,8 @@
 # ------------------------------------------------------------------------ -->
 
 import CppHeaderFile
-import CppCodeFile
 from base_files import BaseCppFile, BaseTexFile
-from util import strFunctions
+from util import strFunctions, global_variables
 from validation import ValidationRulesForPlugin, ValidationRulesForClass
 
 
@@ -86,21 +85,18 @@ class ValidationFiles():
         self.write_error_file()
         self.error_file.close_file()
 
-    def write_code(self, class_desc):
-        fileout = CppCodeFile.CppCodeFile(class_desc)
-        if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
-        fileout.write_file()
-        fileout.close_file()
+    # def write_code(self, class_desc):
+    #     fileout = CppCodeFile.CppCodeFile(class_desc)
+    #     if self.verbose:
+    #         print('Writing file {}'.format(fileout.filename))
+    #     fileout.write_file()
+    #     fileout.close_file()
 
     def create_description(self):
         descrip = ({})
         descrip['name'] = '{}{}Error'.format(self.up_package, self.cap_language)
         descrip['attribs'] = []
         return descrip
-
-    def test_func(self):
-        self.write_files()
 
     def create_rule_structure(self):
         tex_file = BaseTexFile.BaseTexFile('', '', self.lib_object)
@@ -126,6 +122,15 @@ class ValidationFiles():
             rules.determine_rules()
             self.class_rules += rules.rules
             number += 100
+        self.populate_error_list()
+
+    def populate_error_list(self):
+        for rule in self.class_rules:
+            global_variables.error_list.append(rule['typecode'])
+
+    #########################################################################
+
+    # Functions to write the error enumeration file
 
     def write_error_file(self):
         BaseCppFile.BaseCppFile.write_file(self.error_file)

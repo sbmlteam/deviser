@@ -9,11 +9,11 @@
  * 
  * @param data the output array of integers (it will be allocated using
  *             malloc and will have to be freed using free)
- * @param length the output length of the array
+ * @param length the output lenght of the array
  *
  */
 void 
-SampledField::getUncompressedData(int* &data, int& length) 
+ImageData::getUncompressedData(int* &data, int& length) 
 {
   if (mUncompressedSamples == NULL)
   {
@@ -26,15 +26,15 @@ SampledField::getUncompressedData(int* &data, int& length)
 }
 
 void 
-SampledField::uncompress()
+ImageData::uncompress()
 {
   freeUncompressed();
-  if (mCompression == SPATIAL_COMPRESSIONKIND_DEFLATED)
+  if (mDataType.empty() || mDataType == "compressed")
   {
     char* csamples = (char*)malloc(sizeof(char)*mSamplesLength);
-    for (int i = 0 ; i < mSamplesLength; ++i)
+    for (unsigned int i = 0 ; i < mSamplesLength; ++i)
       csamples[i] = mSamples[i];
-    SampledField::uncompress_data(csamples, mSamplesLength, mUncompressedSamples, mUncompressedLength);
+    ImageData::uncompress_data(csamples, mSamplesLength, mUncompressedSamples, mUncompressedLength);
     free(csamples);
 
     if (mUncompressedSamples == 0)
@@ -48,7 +48,7 @@ SampledField::uncompress()
 }
 
 unsigned int 
-SampledField::getUncompressedLength()
+ImageData::getUncompressedLength()
 {
   if (mUncompressedSamples == NULL)
     uncompress();
@@ -56,7 +56,7 @@ SampledField::getUncompressedLength()
 }
 
 void 
-SampledField::getUncompressed(int* outputSamples)
+ImageData::getUncompressed(int* outputSamples)
 {
   if (outputSamples == NULL) return;
   if (mUncompressedSamples == NULL)
@@ -65,7 +65,7 @@ SampledField::getUncompressed(int* outputSamples)
 }
 
 void 
-SampledField::freeUncompressed()
+ImageData::freeUncompressed()
 {
   if (mUncompressedSamples == NULL) return;
   mUncompressedLength = 0;
@@ -75,7 +75,7 @@ SampledField::freeUncompressed()
 
 
 void 
-SampledField::uncompress_data(void *data, size_t length, int*& result, int& outLength)
+ImageData::uncompress_data(void *data, size_t length, int*& result, int& outLength)
 {
 #ifndef USE_ZLIB
   // throwing an exception won't help our users, better set the result array and length to NULL. 
@@ -143,7 +143,7 @@ SampledField::uncompress_data(void *data, size_t length, int*& result, int& outL
 }
 
 void 
-SampledField::copySampleArrays(int* &target, int& targetLength, int* source, int sourceLength)
+ImageData::copySampleArrays(int* &target, int& targetLength, int* source, int sourceLength)
 {
     targetLength = sourceLength;
     target = (int*)malloc(sizeof(int)*sourceLength);
