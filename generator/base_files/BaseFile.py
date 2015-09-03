@@ -98,79 +98,84 @@ class BaseFile:
         elif num_words == 1:
             lines.append(line)
         else:
-            in_quotes = False
-            quotes_closed = True
-            reopen_quotes = False
-            i = 1
-            temp = words[0]
-            if temp.startswith('\"'):
-                in_quotes = True
-            newline = words[0]
-            while i < num_words:
-                if len(newline) < max_length:
-                    if not in_quotes:
-                        if words[i].startswith('\"'):
-                            in_quotes = True
-                            quotes_closed = False
-                        # check we dont also end
-                        if words[i].endswith('\"'):
-                            in_quotes = False
+            self.parse_lines(lines, words, max_length)
+        return lines
+
+    @staticmethod
+    def parse_lines(lines, words, max_length):
+        num_words = len(words)
+        in_quotes = False
+        quotes_closed = True
+        reopen_quotes = False
+        i = 1
+        temp = words[0]
+        if temp.startswith('\"'):
+            in_quotes = True
+        newline = words[0]
+        while i < num_words:
+            if len(newline) < max_length:
+                if not in_quotes:
+                    if words[i].startswith('\"'):
+                        in_quotes = True
+                        quotes_closed = False
+                    # check we dont also end
+                    if words[i].endswith('\"'):
+                        in_quotes = False
+                        quotes_closed = True
+                else:
+                    if words[i].endswith('\"'):
+                        in_quotes = False
+                if len(temp) > 0:
+                    temp = temp + ' ' + words[i]
+                else:
+                    if reopen_quotes:
+                        temp = '\"' + words[i]
+                        reopen_quotes = False
+                    else:
+                        temp = words[i]
+                i += 1
+                if len(temp) <= max_length:
+                    if temp.endswith('\"'):
+                        quotes_closed = True
+                    newline = temp
+                else:
+                    if len(newline) == 0:
+                        if in_quotes or not quotes_closed:
+                            temp += ' \"'
                             quotes_closed = True
+                        if in_quotes and not quotes_closed:
+                            reopen_quotes = True
+                        lines.append(temp)
+                        temp = ''
                     else:
-                        if words[i].endswith('\"'):
-                            in_quotes = False
-                    if len(temp) > 0:
-                        temp = temp + ' ' + words[i]
-                    else:
-                        if reopen_quotes:
-                            temp = '\"' + words[i]
-                            reopen_quotes = False
-                        else:
-                            temp = words[i]
-                    i += 1
-                    if len(temp) <= max_length:
-                        if temp.endswith('\"'):
-                            quotes_closed = True
-                        newline = temp
-                    else:
-                        if len(newline) == 0:
-                            if in_quotes or not quotes_closed:
-                                temp += ' \"'
+                        if in_quotes:
+                            if words[i-1].startswith('\"'):
+                                # do not add the quotes as we are throwing
+                                # the word away
+                                in_quotes = False
                                 quotes_closed = True
-                            if in_quotes and not quotes_closed:
-                                reopen_quotes = True
-                            lines.append(temp)
-                            temp = ''
-                        else:
-                            if in_quotes:
-                                if words[i-1].startswith('\"'):
-                                    # do not add the quotes as we are throwing
-                                    # the word away
-                                    in_quotes = False
-                                    quotes_closed = True
-                                else:
-                                    newline += ' \"'
-                                    quotes_closed = True
-                                    reopen_quotes = True
-                            elif not quotes_closed:
+                            else:
                                 newline += ' \"'
                                 quotes_closed = True
                                 reopen_quotes = True
-                            lines.append(newline)
-                            newline = ''
-                            temp = ''
-                            i -= 1
-                else:
-                    if in_quotes or not quotes_closed:
-                        newline += ' \"'
-                        quotes_closed = True
-                        reopen_quotes = True
-                    lines.append(newline)
-                    newline = ''
-                    temp = ''
-            if len(newline) > 0:
+                        elif not quotes_closed:
+                            newline += ' \"'
+                            quotes_closed = True
+                            reopen_quotes = True
+                        lines.append(newline)
+                        newline = ''
+                        temp = ''
+                        i -= 1
+            else:
+                if in_quotes or not quotes_closed:
+                    newline += ' \"'
+                    quotes_closed = True
+                    reopen_quotes = True
                 lines.append(newline)
-        return lines
+                newline = ''
+                temp = ''
+        if len(newline) > 0:
+            lines.append(newline)
 
     # write line without worrying about size
     def write_line_verbatim(self, line):
@@ -179,7 +184,7 @@ class BaseFile:
             tabs += '  '
         self.file_out.write('{0}{1}\n'.format(tabs, line))
 
-    # functions for writing lines
+    # functions for writing lines indenting each new line
     def write_line(self, line, space=0):
         tabs = ''
         for i in range(0, int(self.num_tabs)):
@@ -190,6 +195,15 @@ class BaseFile:
         for i in range(0, len(lines)):
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
             tabs += '  '
+
+    # functions for writing lines indenting each new line
+    def write_line_no_indent(self, line):
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        lines = self.create_lines(line, len(tabs))
+        for i in range(0, len(lines)):
+            self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
 
     # function to write a line preserving with indenting
     def write_spaced_line(self, line):

@@ -221,10 +221,14 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Attributes allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
                                      rule_type)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     # write core attribute rule
@@ -238,6 +242,7 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token('sboTerm'), self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
+            lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{}{}AllowedCoreAttributes'.format(self.up_package, self.name)
         else:
             lo_name = strFunctions.plural(lo_child['element'])
@@ -250,10 +255,14 @@ class ValidationRulesForClass():
             ref = '{}, {}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
+            lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{}{}LO{}AllowedCoreAttributes'.format(self.up_package,
                                                         self.name, lo_name)
+        short = 'Core attributes allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     # write core subobjects rule
     @staticmethod
@@ -266,6 +275,7 @@ class ValidationRulesForClass():
                 .format(self.indef_u, self.formatted_name, self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
+            lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{}{}AllowedCoreElements'.format(self.up_package, self.name)
         else:
             loname = strFunctions.get_element_name(lo_child)
@@ -277,10 +287,14 @@ class ValidationRulesForClass():
             ref = '{}, {}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
+            lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{}{}LO{}AllowedElements'.format(self.up_package, self.name,
                                                   lo_name)
+        short = 'Core elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     def write_package_attribute_rule(self):
@@ -306,9 +320,13 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Attributes allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     def write_package_object_rule(self):
@@ -334,9 +352,48 @@ class ValidationRulesForClass():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    # functions for listOf child elements
+    # might not be lo elements
+    def write_optional_lo_rule(self):
+        number = len(self.opt_child_lo_elem)
+        if number > 1:
+            obj = 'objects'
+            pred = 'these'
+            i = 0
+            elements = '{}'.format(strFunctions.get_element_name(
+                self.opt_child_lo_elem[i]))
+            for i in range(1, number-1):
+                elements += ', {}'.format(strFunctions.get_element_name(
+                    self.opt_child_lo_elem[i]))
+            elements += ' and {}'.format(strFunctions.get_element_name(
+                self.opt_child_lo_elem[i+1]))
+        else:
+            obj = 'object'
+            pred = 'this'
+            elements = '{}'.format(strFunctions.get_element_name(
+                self.opt_child_lo_elem[0]))
+
+        text = 'The {0} sub{1} on {2} {3} object is optional, but if ' \
+               'present, {4} container {1} must not be empty.'\
+            .format(elements, obj, self.indef, self.formatted_name, pred)
+        ref = '{}, {}.'\
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+        sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'No Empty ListOf elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
+        tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     #########################################################################
 
@@ -488,37 +545,3 @@ class ValidationRulesForClass():
             if num_values > 1:
                 values += ' or \"{}\"'.format(this_enum['values'][i+1]['value'])
             return values
-
-    #######################################################################
-
-    # functions for listOf child elements
-
-    # might not be lo elements
-    def write_optional_lo_rule(self):
-        number = len(self.opt_child_lo_elem)
-        if number > 1:
-            obj = 'objects'
-            pred = 'these'
-            i = 0
-            elements = '{}'.format(strFunctions.get_element_name(
-                self.opt_child_lo_elem[i]))
-            for i in range(1, number-1):
-                elements += ', {}'.format(strFunctions.get_element_name(
-                    self.opt_child_lo_elem[i]))
-            elements += ' and {}'.format(strFunctions.get_element_name(
-                self.opt_child_lo_elem[i+1]))
-        else:
-            obj = 'object'
-            pred = 'this'
-            elements = '{}'.format(strFunctions.get_element_name(
-                self.opt_child_lo_elem[0]))
-
-        text = 'The {0} sub{1} on {2} {3} object is optional, but if ' \
-               'present, {4} container {1} must not be empty.'\
-            .format(elements, obj, self.indef, self.formatted_name, pred)
-        ref = '{}, {}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
-        sev = 'ERROR'
-        tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
-        return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})

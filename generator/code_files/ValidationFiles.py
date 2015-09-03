@@ -41,6 +41,8 @@ import CppHeaderFile
 from base_files import BaseCppFile, BaseTexFile
 from util import strFunctions, global_variables
 from validation import ValidationRulesForPlugin, ValidationRulesForClass
+import ValidatorHeaderFile
+import ValidatorCodeFile
 
 
 class ValidationFiles():
@@ -71,33 +73,14 @@ class ValidationFiles():
         self.class_rules = []
         self.create_rule_structure()
 
+        self.open_br = '{'
+        self.close_br = '}'
+
         self.verbose = verbose
 
-    def write_files(self):
-        self.write_error_header()
-#        self.write_code(self.lib_object)
+    ##########################################################################
 
-    def write_error_header(self):
-        class_desc = self.create_description()
-        self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
-        if self.verbose:
-            print('Writing file {}'.format(self.error_file.filename))
-        self.write_error_file()
-        self.error_file.close_file()
-
-    # def write_code(self, class_desc):
-    #     fileout = CppCodeFile.CppCodeFile(class_desc)
-    #     if self.verbose:
-    #         print('Writing file {}'.format(fileout.filename))
-    #     fileout.write_file()
-    #     fileout.close_file()
-
-    def create_description(self):
-        descrip = ({})
-        descrip['name'] = '{}{}Error'.format(self.up_package, self.cap_language)
-        descrip['attribs'] = []
-        return descrip
-
+    # initial populating lists
     def create_rule_structure(self):
         tex_file = BaseTexFile.BaseTexFile('', '', self.lib_object)
         tex_file.sort_class_names(self.sbml_classes)
@@ -125,8 +108,104 @@ class ValidationFiles():
         self.populate_error_list()
 
     def populate_error_list(self):
+        if len(global_variables.error_list) > 0:
+            return
         for rule in self.class_rules:
             global_variables.error_list.append(rule['typecode'])
+
+    ##########################################################################
+
+    def write_files(self):
+#        self.write_error_header()
+#        self.write_error_table_header()
+        self.write_validator_files()
+        self.write_validator_files('id')
+
+    def write_validator_files(self, valid_type=''):
+        fileout = ValidatorHeaderFile.ValidatorHeaderFile(self.language,
+                                                          self.package,
+                                                          'consistency',
+                                                          valid_type)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
+        fileout.write_file()
+        fileout.close_file()
+        fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
+                                                      self.package,
+                                                      'consistency',
+                                                      valid_type)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
+        fileout.write_file()
+        fileout.close_file()
+
+    def write_error_header(self):
+        class_desc = ({})
+        class_desc['name'] = '{}{}Error'.format(self.up_package,
+                                                self.cap_language)
+        class_desc['attribs'] = []
+        self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
+        if self.verbose:
+            print('Writing file {}'.format(self.error_file.filename))
+        self.write_error_file()
+        self.error_file.close_file()
+
+    def write_error_table_header(self):
+        class_desc = ({})
+        class_desc['name'] = '{}{}ErrorTable'.format(self.up_package,
+                                                     self.cap_language)
+        class_desc['attribs'] = []
+        self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
+        if self.verbose:
+            print('Writing file {}'.format(self.error_file.filename))
+        self.write_error_table_file()
+        self.error_file.close_file()
+
+    #########################################################################
+
+    # Functions to write the error enumeration file
+
+    def write_error_table_file(self):
+        BaseCppFile.BaseCppFile.write_file(self.error_file)
+        self.error_file.write_defn_begin()
+        self.error_file.write_line_verbatim('#include <{}/packages/{}/'
+                                            'validator/{}{}Error'
+                                            '.h>'.format(self.language,
+                                                         self.package,
+                                                         self.up_package,
+                                                         self.cap_language))
+        self.error_file.write_cppns_begin()
+        self.error_file.write_doxygen_start()
+        self.error_file.write_line('static const packageErrorTableEntry '
+                                   '{}ErrorTable[] '
+                                   '='.format(self.package.lower()))
+        self.error_file.write_line('{')
+        # for rule in self.class_rules:
+        #     self.write_table_entry(rule)
+        for i in range(0, 5):
+            self.write_table_entry(self.class_rules[i])
+        self.error_file.write_line('};')
+        self.error_file.write_doxygen_end()
+        self.error_file.write_cppns_end()
+        self.error_file.write_defn_end()
+
+    def write_table_entry(self, rule):
+        self.error_file.up_indent()
+        self.error_file.write_line('// {}'.format(rule['number']))
+        self.error_file.write_line('{}  {},'.format(self.open_br,
+                                                    rule['typecode']))
+        self.error_file.up_indent()
+        self.error_file.write_line('\"{}\",'.format(rule['short']))
+        self.error_file.write_line('LIBSBML_CAT_GENERAL_CONSISTENCY,')
+        self.error_file.write_line('{},'.format(rule['lib_sev']))
+        self.error_file.write_line_no_indent('\"{}\",'.format(rule['text']))
+        self.error_file.write_line('{}  \"{}\"'.format(self.open_br,
+                                                       rule['lib_ref']))
+        self.error_file.write_line('{}'.format(self.close_br))
+        self.error_file.down_indent()
+        self.error_file.write_line('},')
+        self.error_file.down_indent()
+        self.error_file.skip_line()
 
     #########################################################################
 

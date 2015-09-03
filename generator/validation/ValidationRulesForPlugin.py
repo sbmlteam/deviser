@@ -208,10 +208,14 @@ class ValidationRulesForPlugin():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Attribute {} values allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
                                      rule_type)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     # write core attribute rule
@@ -239,8 +243,12 @@ class ValidationRulesForPlugin():
             sev = 'ERROR'
             tc = '{}{}LO{}AllowedCoreAttributes'.format(self.up_package,
                                                         self.name, lo_name)
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Core attributes allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     # write core subobjects rule
     @staticmethod
@@ -273,8 +281,12 @@ class ValidationRulesForPlugin():
             sev = 'ERROR'
             tc = '{}{}LO{}AllowedElements'.format(self.up_package, self.name,
                                                   lo_name)
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Core elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     def write_package_attribute_rule(self):
@@ -300,9 +312,13 @@ class ValidationRulesForPlugin():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Attributes allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     @staticmethod
     def write_package_object_rule(self):
@@ -328,9 +344,13 @@ class ValidationRulesForPlugin():
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     #########################################################################
 
@@ -525,6 +545,10 @@ class ValidationRulesForPlugin():
         ref = 'SBML Level~3 Specification for {} Version~1, {}.'\
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'No Empty ListOf elements allowed on <{}>.'.format(self.name)
+        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
-                     'reference': ref, 'severity': sev, 'typecode': tc})
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})

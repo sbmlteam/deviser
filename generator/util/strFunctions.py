@@ -41,6 +41,8 @@ import re
 
 
 def upper_first(word):
+    if len(word) == 0:
+        return word
     returned_word = word[0].upper() + word[1:len(word)]
     return returned_word
 

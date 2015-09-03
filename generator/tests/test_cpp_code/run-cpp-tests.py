@@ -72,7 +72,16 @@ def generate_error_header(filename):
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
-    all_files.write_files()
+    all_files.write_error_header()
+    os.chdir('../.')
+
+
+def generate_validator(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files.write_validator_files()
     os.chdir('../.')
 
 
@@ -87,6 +96,10 @@ def read_file(path):
 def compare_files(infile, outfile):
     global fails
     ret = 0
+    if not os.path.isfile(infile) or not os.path.isfile(outfile):
+        fails.append(infile)
+        print('=================>> FAILED')
+        return 1
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
@@ -180,18 +193,31 @@ def run_plug_test(name, class_name, test_case, num):
     return fail
 
 
-def run_valid_test(name, class_name, test_case):
+def run_valid_test(name, class_name, test_case, is_ext=True):
     filename = '.\\test_xml_files\\{}.xml'.format(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
-    generate_error_header(filename)
-    correct_file = '.\\test-extension\\{}.h'.format(class_name)
-    temp_file = '.\\temp\\{}.h'.format(class_name)
-    if os.path.isfile(correct_file):
-        print('{}.h'.format(class_name))
-        fail = compare_files(correct_file, temp_file)
+    if is_ext:
+        generate_error_header(filename)
+        correct_file = '.\\test-extension\\{}.h'.format(class_name)
+        temp_file = '.\\temp\\{}.h'.format(class_name)
+        if os.path.isfile(correct_file):
+            print('{}.h'.format(class_name))
+            fail = compare_files(correct_file, temp_file)
+    else:
+        generate_validator(filename)
+        correct_file = '.\\test-extension\\{}.h'.format(class_name)
+        temp_file = '.\\temp\\{}.h'.format(class_name)
+        if os.path.isfile(correct_file):
+            print('{}.h'.format(class_name))
+            fail = compare_files(correct_file, temp_file)
+        correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
+        temp_file = '.\\temp\\{}.cpp'.format(class_name)
+        if os.path.isfile(correct_file):
+            print('{}.cpp'.format(class_name))
+            fail = compare_files(correct_file, temp_file)
     print('')
     return fail
 
@@ -273,6 +299,11 @@ def main():
     class_name = 'QualSBMLError'
     test_case = 'error enumeration '
     fail += run_valid_test(name, class_name, test_case)
+
+    name = 'qual'
+    class_name = 'QualConsistencyValidator'
+    test_case = 'validator'
+    fail += run_valid_test(name, class_name, test_case, False)
 
     name = 'distrib'
     num = 2
