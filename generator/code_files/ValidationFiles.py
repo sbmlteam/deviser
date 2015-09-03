@@ -115,11 +115,33 @@ class ValidationFiles():
 
     ##########################################################################
 
+    def write_constraint_files(self):
+        self.write_constraints()
+        self.write_constraints('id')
+
     def write_files(self):
-#        self.write_error_header()
-#        self.write_error_table_header()
+        self.write_error_header()
+        self.write_error_table_header()
         self.write_validator_files()
         self.write_validator_files('id')
+
+    def write_constraints(self, valid_type=''):
+        fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
+                                                      self.package,
+                                                      'constraints',
+                                                      valid_type)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
+        fileout.write_constraints_file()
+        fileout.close_file()
+        fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
+                                                      self.package,
+                                                      'declared',
+                                                      valid_type)
+        if self.verbose:
+            print('Writing file {}'.format(fileout.filename))
+        fileout.write_constraints_file('declared')
+        fileout.close_file()
 
     def write_validator_files(self, valid_type=''):
         fileout = ValidatorHeaderFile.ValidatorHeaderFile(self.language,
@@ -163,7 +185,7 @@ class ValidationFiles():
 
     #########################################################################
 
-    # Functions to write the error enumeration file
+    # Functions to write the error table file
 
     def write_error_table_file(self):
         BaseCppFile.BaseCppFile.write_file(self.error_file)

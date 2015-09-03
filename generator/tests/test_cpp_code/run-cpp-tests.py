@@ -85,6 +85,15 @@ def generate_validator(filename):
     os.chdir('../.')
 
 
+def generate_constraints(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files.write_constraints()
+    os.chdir('../.')
+
+
 # reads file containing expected sbml model and returns it as string
 def read_file(path):
     filein = open(path, 'r')
@@ -218,6 +227,27 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
         if os.path.isfile(correct_file):
             print('{}.cpp'.format(class_name))
             fail = compare_files(correct_file, temp_file)
+    print('')
+    return fail
+
+
+def run_constraints_test(name, class_name, test_case):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('====================================================')
+    generate_constraints(filename)
+    correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
+    temp_file = '.\\temp\\{}.cpp'.format(class_name)
+    if os.path.isfile(correct_file):
+        print('{}.h'.format(class_name))
+        fail = compare_files(correct_file, temp_file)
+    correct_cpp_file = '.\\test-extension\\{}Declared.cxx'.format(class_name)
+    temp_cpp_file = '.\\temp\\{}Declared.cxx'.format(class_name)
+    if os.path.isfile(correct_cpp_file) and os.path.isfile(temp_cpp_file):
+        print('{}.cpp'.format(class_name))
+        fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
 
@@ -412,6 +442,11 @@ def main():
     class_name = 'SpatialSBMLDocumentPlugin'
     test_case = 'include line over extends'
     fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'spatial'
+    class_name = 'SpatialConsistencyConstraints'
+    test_case = 'constraints'
+    fail += run_constraints_test(name, class_name, test_case)
 
     if use_new:
         name = 'test_vers'

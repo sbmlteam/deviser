@@ -209,7 +209,8 @@ class ValidationRulesForPlugin():
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attribute {} values allowed on <{}>.'.format(self.name)
+        short = 'Attribute {} values allowed on <{}>.'.format(attribute['name'],
+                                                              self.name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
                                      rule_type)
