@@ -39,6 +39,7 @@
 
 from base_files import BaseCppFile
 from util import strFunctions
+from cpp_functions import *
 
 
 class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
@@ -47,14 +48,17 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
     def __init__(self, language, package, filetype='', valid_type=''):
         self.up_package = strFunctions.upper_first(package)
         self.valid_type = strFunctions.upper_first(valid_type)
-        if filetype == '':
-            self.name = '{}Extension'.format(self.up_package)
+        self.file_type = filetype
+        if filetype == 'main':
+            self.name = '{}Validator'.format(self.up_package)
         elif filetype == 'consistency':
             self.name = '{}{}ConsistencyValidator'.format(self.up_package,
                                                           self.valid_type)
             self.baseClass = '{}Validator'.format(self.up_package)
-        elif filetype == 'fwd':
-            self.name = '{}fwd'.format(package['name'])
+            if valid_type == '':
+                self.category = 'LIBSBML_CAT_GENERAL_CONSISTENCY'
+            else:
+                self.category = 'LIBSBML_CAT_IDENTIFIER_CONSISTENCY'
 
         self.brief_description = \
             'Definition of {}.'.format(self.name)
@@ -63,35 +67,9 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
                                          None)
         self.language = language
         self.package = package
-
-        if filetype == '':
-            self.name = '{}Extension'.format(self.up_package)
-        elif filetype == 'consistency':
+        if filetype == 'consistency':
             self.baseClass = '{}Validator'.format(self.up_package)
-            self.category = 'LIBSBML_CAT_GENERAL_CONSISTENCY'
-        elif filetype == 'fwd':
-            self.name = '{}fwd'.format(package['name'])
 
-        # members from object
-        # self.package = package['name']
-        # self.cap_package = package['name'].upper()
-        # self.baseClass = '{}Extension'.format(self.cap_language)
-        #
-        # self.elements = package['elements']
-        # self.number = package['number']
-        # self.enums = package['enums']
-        # self.offset = package['offset']
-        # self.plugins = package['plugins']
-        #
-        # # create a class object so we can just reuse code
-        # self.class_object['package'] = self.package
-        # self.class_object['name'] = self.name
-        # self.class_object['concretes'] = []
-        # self.class_object['baseClass'] = self.baseClass
-        # self.class_object['attribs'] = []
-        # self.class_object['has_children'] = False
-        # self.class_object['child_elements'] = []
-        # self.class_object['overwrites_children'] = False
     ########################################################################
 
     # Functions for writing the class
@@ -102,8 +80,17 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line('public:')
         self.skip_line()
         self.up_indent()
-        self.write_constructors()
-        self.write_init_function()
+        if self.file_type == 'consistency':
+            self.write_constructors()
+            self.write_init_function()
+        elif self.file_type == 'main':
+            self.write_validator_class()
+            self.down_indent()
+            self.write_line('protected:')
+            self.up_indent()
+            self.write_doxygen_start()
+            self.write_members()
+            self.write_doxygen_end()
         self.down_indent()
         self.write_line('};\n')
 
@@ -115,6 +102,26 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
                                  '.h>'.format(self.language, self.package,
                                               self.baseClass))
 
+    def write_includes(self):
+        self.write_line_verbatim('#include <{}/{}Error'
+                                 '.h>'.format(self.language, self.cap_language))
+        self.write_line_verbatim('#include <{}/validator/Validator'
+                                 '.h>'.format(self.language))
+        self.write_line_verbatim('#include <{}/{}Reader'
+                                 '.h>'.format(self.language, self.cap_language))
+
+    def write_forward_decls(self):
+        self.write_line_verbatim('class VConstraint;')
+        self.write_line_verbatim('struct {}Validator'
+                                 'Constraints;'.format(self.up_package))
+        self.write_line_verbatim('class {}Document;'.format(self.cap_language))
+
+    def write_members(self):
+        self.write_line('{0}ValidatorConstraints* m{0}'
+                        'Constraints;'.format(self.up_package))
+        self.skip_line()
+        self.write_line('friend class {}Validating'
+                        'Visitor;'.format(self.up_package))
     ########################################################################
 
     # function to write the constructors
@@ -151,6 +158,33 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
+    # Write the validator class
+
+    def write_validator_class(self):
+        constructor = \
+            ValidatorClassFunctions.ValidatorClassFunctions(self.language,
+                                                            self.name,
+                                                            is_header=True)
+        code = constructor.write_constructor()
+        self.write_function_declaration(code)
+
+        code = constructor.write_destructor()
+        self.write_function_declaration(code)
+
+        code = constructor.write_init_function()
+        self.write_function_declaration(code)
+
+        code = constructor.write_add_constraint_function()
+        self.write_function_declaration(code)
+
+        code = constructor.write_validate_function('doc')
+        self.write_function_declaration(code)
+
+        code = constructor.write_validate_function('file')
+        self.write_function_declaration(code)
+
+    ########################################################################
+
     # Functions for writing definition declaration
 
     def write_defn_begin(self):
@@ -173,21 +207,35 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
         BaseCppFile.BaseCppFile.write_file(self)
         self.write_defn_begin()
         self.write_cpp_begin()
-        self.write_general_includes()
+        if self.file_type == 'consistency':
+            self.write_general_includes()
         self.write_cppns_begin()
-        self.write_class(self.baseClass, self.name)
+        if self.file_type == 'consistency':
+            self.write_class(self.baseClass, self.name)
         self.write_cppns_end()
         self.write_cpp_end()
         self.write_defn_end()
         self.write_doxygen_end()
 
-    # # Write the extension types file
-    # def write_types_file(self):
-    #     BaseCppFile.BaseCppFile.write_file(self)
-    #     self.write_defn_begin()
-    #     self.write_type_includes()
-    #     self.write_defn_end()
-    #
+    # Write the main validator file
+    def write_main_file(self):
+        BaseCppFile.BaseCppFile.write_file(self)
+        self.write_defn_begin()
+        self.write_cpp_begin()
+        self.write_doxygen_start()
+        self.write_line_verbatim('#include <list>')
+        self.write_line_verbatim('#include <string>')
+        self.write_doxygen_end()
+        self.write_includes()
+        self.write_cppns_begin()
+        self.write_forward_decls()
+        self.skip_line(2)
+        validator = '{}Validator'.format(self.up_package)
+        self.write_class('Validator', validator)
+        self.write_cppns_end()
+        self.write_cpp_end()
+        self.write_defn_end()
+
     # # Write the extension types file
     # def write_fwd_file(self):
     #     BaseCppFile.BaseCppFile.write_file(self)

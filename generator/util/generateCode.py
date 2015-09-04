@@ -42,11 +42,13 @@ import os
 
 from parseXML import ParseXML
 from code_files import ExtensionFiles, CppFiles, ValidationFiles
+from util import global_variables
 
 directories = []
 
 
 def generate_code_for(filename, overwrite=True):
+    global_variables.running_tests = False
     this_dir = os.getcwd()
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -65,6 +67,8 @@ def generate_code_for(filename, overwrite=True):
     valid_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator'.format(name,
                                                                       os.sep,
                                                                       language)
+    constraints_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}validator{1}' \
+                      'constraints'.format(name, os.sep, language)
     sbml_dir = '{0}{1}src{1}{2}{1}packages{1}{0}{1}{2}'.format(name, os.sep,
                                                                language)
     os.chdir(common_dir)
@@ -86,11 +90,19 @@ def generate_code_for(filename, overwrite=True):
     all_files.write_files()
     os.chdir(this_dir)
 
+    os.chdir(constraints_dir)
+    all_files = ValidationFiles.ValidationFiles(ob, language, True)
+    all_files.write_constraint_files()
+    os.chdir(this_dir)
+
+    # need to do this last so that the error table is populated
     os.chdir(sbml_dir)
     for working_class in ob['sbmlElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     os.chdir(this_dir)
+
+    return True
 
 
 def populate_directories(name, lang):

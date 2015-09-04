@@ -117,13 +117,13 @@ class ValidationFiles():
 
     def write_constraint_files(self):
         self.write_constraints()
-        self.write_constraints('id')
+        self.write_constraints('identifier')
 
     def write_files(self):
         self.write_error_header()
         self.write_error_table_header()
         self.write_validator_files()
-        self.write_validator_files('id')
+        self.write_validator_files('identifier')
 
     def write_constraints(self, valid_type=''):
         fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
@@ -144,6 +144,27 @@ class ValidationFiles():
         fileout.close_file()
 
     def write_validator_files(self, valid_type=''):
+        if valid_type == '':
+            # write the main PkgValidator files
+            fileout = ValidatorHeaderFile.ValidatorHeaderFile(self.language,
+                                                              self.package,
+                                                              'main',
+                                                              valid_type)
+            if self.verbose:
+                print('Writing file {}'.format(fileout.filename))
+            fileout.write_main_file()
+            fileout.close_file()
+            fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
+                                                          self.package,
+                                                          'main',
+                                                          valid_type,
+                                                          self.sbml_classes)
+            if self.verbose:
+                print('Writing file {}'.format(fileout.filename))
+            fileout.write_main_file()
+            fileout.close_file()
+
+        # write the consistency validator files
         fileout = ValidatorHeaderFile.ValidatorHeaderFile(self.language,
                                                           self.package,
                                                           'consistency',

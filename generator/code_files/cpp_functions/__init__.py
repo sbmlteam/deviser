@@ -46,3 +46,4 @@ import GlobalQueryFunctions
 import ListOfQueryFunctions
 import ProtectedFunctions
 import SetGetFunctions
+import ValidatorClassFunctions

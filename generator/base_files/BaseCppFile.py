@@ -376,7 +376,8 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_function_header(self,
                               function_name, arguments, return_type,
-                              is_const=False, is_virtual=False):
+                              is_const=False, is_virtual=False,
+                              is_abstract=False):
         is_cpp = self.is_cpp_api
         num_arguments = len(arguments)
         if not is_cpp:
@@ -398,12 +399,16 @@ class BaseCppFile(BaseFile.BaseFile):
         if num_arguments == 0:
             if is_cpp and is_const:
                 line += ') const;'
+            elif is_abstract:
+                line += ') = 0;'
             else:
                 line += ');'
             self.write_line(line)
         elif num_arguments == 1:
             if is_cpp and is_const:
                 line = line + arguments[0] + ') const;'
+            elif is_abstract:
+                line = line + arguments[0] + ') = 0;'
             else:
                 line = line + arguments[0] + ');'
             self.write_line(line)
@@ -546,9 +551,15 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_comment_header(code['title_line'], code['params'],
                                       code['return_lines'], code['object_name'],
                                       code['additional'])
-            self.write_function_header(code['function'], code['arguments'],
-                                       code['return_type'], code['constant'],
-                                       code['virtual'])
+            if 'pure_abstract' in code and code['pure_abstract']:
+                self.write_function_header(code['function'], code['arguments'],
+                                           code['return_type'],
+                                           code['constant'], code['virtual'],
+                                           True)
+            else:
+                self.write_function_header(code['function'], code['arguments'],
+                                           code['return_type'],
+                                           code['constant'], code['virtual'])
             if exclude:
                 self.write_doxygen_end()
                 self.skip_line()
@@ -564,6 +575,37 @@ class BaseCppFile(BaseFile.BaseFile):
             function_name = code['function']
             if self.is_cpp_api:
                 function_name = code['object_name'] + '::' + code['function']
+            if 'args_no_defaults' in code:
+                arguments = code['args_no_defaults']
+            else:
+                arguments = code['arguments']
+            constructor_args = None
+            if self.is_cpp_api:
+                if 'constructor_args' in code:
+                    constructor_args = code['constructor_args']
+            self.write_class_function_header(function_name, arguments,
+                                             code['return_type'],
+                                             code['constant'],
+                                             constructor_args)
+
+            if 'implementation' in code and code['implementation'] is not None:
+                self.write_implementation(code['implementation'])
+            if exclude:
+                self.write_doxygen_end()
+                self.skip_line()
+            else:
+                self.skip_line(2)
+
+    # Function for writing a function implementation
+    def write_inline_function_implementation(self, code, exclude=False):
+        if code is not None:
+            if exclude:
+                self.write_doxygen_start()
+            if len(code['title_line']) > 0:
+                self.write_brief_header(code['title_line'])
+            function_name = code['function']
+            if self.is_cpp_api:
+                function_name = code['function']
             if 'args_no_defaults' in code:
                 arguments = code['args_no_defaults']
             else:
