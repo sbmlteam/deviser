@@ -71,7 +71,7 @@ def generate_error_header(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_error_header()
     os.chdir('../.')
 
@@ -80,7 +80,7 @@ def generate_validator(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_validator_files()
     os.chdir('../.')
 
@@ -89,7 +89,7 @@ def generate_constraints(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
-    all_files = ValidationFiles.ValidationFiles(ob, 'sbml', True)
+    all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_constraints()
     os.chdir('../.')
 
@@ -460,6 +460,15 @@ def main():
         list_of = ''
         test_case = 'multiple versions'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_child'
+    num = 0
+    class_name = 'MySEDClass'
+    list_of = ''
+    test_case = 'different language'
+    global_variables.language = 'sedml'
+    global_variables.std_base = 'SEDBase'
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

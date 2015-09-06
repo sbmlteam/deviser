@@ -41,7 +41,7 @@ import ExtensionCodeFile
 import ExtensionHeaderFile
 import CppCodeFile
 import CppHeaderFile
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class ExtensionFiles():
@@ -52,7 +52,7 @@ class ExtensionFiles():
         self.package = package
         self.verbose = verbose
         self.file_type = filetype
-        self.language = 'sbml'
+        self.language = global_variables.language
 
     def write_files(self):
         self.write_header()

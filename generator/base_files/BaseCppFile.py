@@ -39,7 +39,7 @@
 
 
 import BaseFile
-from util import strFunctions, query
+from util import strFunctions, query, global_variables
 
 
 class BaseCppFile(BaseFile.BaseFile):
@@ -49,7 +49,7 @@ class BaseCppFile(BaseFile.BaseFile):
         BaseFile.BaseFile.__init__(self, name, extension)
 
         # members that might get overridden if creating another library
-        self.baseClass = 'SBase'
+        self.baseClass = global_variables.baseClass
 
         # expand the information for the attributes
         if attributes:
@@ -81,7 +81,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.list_of_name = ''
         self.list_of_child = ''
         self.has_std_base = True
-        self.std_base = 'SBase'
+        self.std_base = global_variables.std_base
         self.sid_refs = ''
         self.unit_sid_refs = ''
         self.add_decls = None
@@ -126,8 +126,8 @@ class BaseCppFile(BaseFile.BaseFile):
         # information about the base class
         self.baseClass = class_object['baseClass']
         if self.language != 'sbml':
-            self.std_base = 'Foo'
-            self.has_std_base = False
+            if self.std_base != self.baseClass:
+                self.has_std_base = False
         elif not self.is_list_of and not self.is_plugin \
                 and self.baseClass != 'SBase':
             self.has_std_base = False
@@ -320,6 +320,16 @@ class BaseCppFile(BaseFile.BaseFile):
             if att_type == 'lo_element':
                 elements.append(self.attributes[i])
         return elements
+
+    ########################################################################
+
+    # Functions to overwrite base class settings
+    def set_base_class(self, base):
+        self.baseClass = base
+
+    def set_std_base_class(self, base):
+        self.std_base = base
+
     ########################################################################
 
     #   FUNCTIONS FOR WRITING STANDARD OPENING CLOSING ELEMENTS

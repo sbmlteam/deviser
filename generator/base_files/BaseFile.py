@@ -37,11 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+from util import global_variables
+
 
 class BaseFile:
     """Common base class for all files"""
 
-    def __init__(self, name, extension, language='sbml'):
+    def __init__(self, name, extension):
         self.name = name
         self.extension = extension
 
@@ -72,9 +74,17 @@ class BaseFile:
             self.is_header = False
 
         # members that might get overridden if creating another library
+        self.language = global_variables.language
+        self.library_name = 'Lib{}'.format(self.language)
+        self.cap_language = self.language.upper()
+
+    ########################################################################
+
+    # Functions for setting the language
+    def set_language(self, language):
         self.language = language
-        self.library_name = 'Lib{}'.format(language)
         self.cap_language = language.upper()
+        self.library_name = 'Lib{}'.format(language)
 
     ########################################################################
 
@@ -306,11 +316,7 @@ class BaseFile:
     def write_file(self):
         self.add_file_header()
 
-    def add_file_header(self):
-        self.open_comment()
-        self.write_comment_line('@file:   {0}'.format(self.filename))
-        self.write_comment_line('@brief:  {0}'.format(self.brief_description))
-        self.write_comment_line('@author: SBMLTeam')
+    def write_libsbml_licence(self):
         self.write_blank_comment_line()
         self.write_comment_line('<!-----------------------------------------'
                                 '---------------------------------')
@@ -356,4 +362,12 @@ class BaseFile:
                                 '/software/libsbml/license.html')
         self.write_comment_line('--------------------------------------------'
                                 '---------------------------- -->')
+
+    def add_file_header(self):
+        self.open_comment()
+        self.write_comment_line('@file:   {0}'.format(self.filename))
+        self.write_comment_line('@brief:  {0}'.format(self.brief_description))
+        self.write_comment_line('@author: SBMLTeam')
+        if self.library_name == 'Libsbml':
+            self.write_libsbml_licence()
         self.close_comment()

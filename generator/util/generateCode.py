@@ -73,6 +73,7 @@ def generate_code_for(filename, overwrite=True):
                                                                language)
     os.chdir(common_dir)
     ext = ExtensionFiles.ExtensionFiles(ob, 'types', True)
+    ext
     ext.write_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()

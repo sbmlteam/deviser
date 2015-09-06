@@ -45,6 +45,7 @@ class SetGetFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
@@ -91,6 +92,9 @@ class SetGetFunctions():
         self.is_plugin = False
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+
+        self.open_br = '{'
+        self.close_br = '}'
     ########################################################################
 
     # Functions for writing get functions
@@ -510,12 +514,16 @@ class SetGetFunctions():
                               ob_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
+        return_lines.append('@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                            'OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
 
-        return_lines.append('@li @sbmlconstant '
-                            '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                            ' OperationReturnValues_t}')
+        return_lines.append('@li @{}constant '
+                            '{}LIB{}_INVALID_ATTRIBUTE_VALUE,'
+                            ' OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -552,10 +560,11 @@ class SetGetFunctions():
             code = self.set_cpp_attribute(attribute)
         else:
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
-                              'LIBSBML'
+                              'LIB{3}'
                               '_INVALID_OBJECT'.format(self.abbrev_parent,
                                                        attribute['capAttName'],
-                                                       attribute['name'])]
+                                                       attribute['name'],
+                                                       self.cap_language)]
             code = [self.create_code_block('line', implementation)]
 
         # return the parts
@@ -598,11 +607,15 @@ class SetGetFunctions():
                       .format(attribute['name'], att_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
-        return_lines.append('@li @sbmlconstant '
-                            '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                            ' OperationReturnValues_t}')
+        return_lines.append('@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                            ' OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
+        return_lines.append('@li @{}constant '
+                            '{}LIB{}_INVALID_ATTRIBUTE_VALUE,'
+                            ' OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -628,18 +641,21 @@ class SetGetFunctions():
                                          attribute['name']),
                               '{} = {}'.format(attribute['memberName'],
                                                attribute['default']),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              'return LIB{}_INVALID_ATTRIBUTE_'
+                              'VALUE'.format(self.cap_language), 'else',
                               '{} = {}_fromString'
                               '({}.c_str())'.format(attribute['memberName'],
                                                     attribute['element'],
                                                     attribute['name']),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         else:
-            implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): LIBSBML'
+            implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): LIB{3}'
                               '_INVALID_OBJECT'.format(self.abbrev_parent,
                                                        attribute['capAttName'],
-                                                       attribute['name'])]
+                                                       attribute['name'],
+                                                       self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
         return dict({'title_line': title_line,
@@ -672,10 +688,17 @@ class SetGetFunctions():
                   'the \"{}\" attribute to be '
                   'set.'.format(attribute['name'])]
         return_lines = ["@copydetails doc_returns_success_code",
-                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                        'OperationReturnValues_t}', '@li @sbmlconstant '
-                        '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                        ' OperationReturnValues_t}']
+                        '@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t{}'.format(self.language,
+                                                           self.open_br,
+                                                           self.cap_language,
+                                                           self.close_br),
+                        '@li @{}constant '
+                        '{}LIB{}_INVALID_ATTRIBUTE_VALUE,'
+                        ' OperationReturnValues_t{}'.format(self.language,
+                                                            self.open_br,
+                                                            self.cap_language,
+                                                            self.close_br)]
 
         additional = []
 
@@ -691,8 +714,9 @@ class SetGetFunctions():
                    + 'Length'
         code = [self.create_code_block('if',
                                        ['inArray == NULL',
-                                        'return LIBSBML_INVALID_'
-                                        'ATTRIBUTE_VALUE']),
+                                        'return LIB{}_INVALID_'
+                                        'ATTRIBUTE_'
+                                        'VALUE'.format(self.cap_language)]),
                 self.create_code_block('if',
                                        ['{} != NULL'.format(member),
                                         'delete[] {}'.format(member)])]
@@ -703,7 +727,8 @@ class SetGetFunctions():
                           '{} = arrayLength'.format(length)]
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block(
-            'line', ['return LIBSBML_OPERATION_SUCCESS']))
+            'line', ['return LIB{}_OPERATION_'
+                     'SUCCESS'.format(self.cap_language)]))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -738,10 +763,17 @@ class SetGetFunctions():
                   'set.'.format(attribute['name'])]
 
         return_lines = ["@copydetails doc_returns_success_code",
-                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                        'OperationReturnValues_t}', '@li @sbmlconstant '
-                        '{LIBSBML_INVALID_ATTRIBUTE_VALUE,'
-                        ' OperationReturnValues_t}']
+                        '@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t{}'.format(self.language,
+                                                           self.open_br,
+                                                           self.cap_language,
+                                                           self.close_br),
+                        '@li @{}constant '
+                        '{}LIB{}_INVALID_ATTRIBUTE_VALUE,'
+                        ' OperationReturnValues_t{}'.format(self.language,
+                                                            self.open_br,
+                                                            self.cap_language,
+                                                            self.close_br)]
 
         additional = []
 
@@ -801,10 +833,14 @@ class SetGetFunctions():
                           .format(self.abbrev_parent, self.object_name))
 
         return_lines.append('@copydetails doc_returns_success_code')
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                            'OperationReturnValues_t}')
-        return_lines.append('@li @sbmlconstant{LIBSBML_OPERATION_FAILED,'
-                            ' OperationReturnValues_t}')
+        return_lines.append('@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                            ' OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
+        return_lines.append('@li @{}constant{}LIB{}_OPERATION_FAILED,'
+                            ' OperationReturnValues_'
+                            't{}'.format(self.language, self.open_br,
+                                         self.cap_language, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -824,9 +860,10 @@ class SetGetFunctions():
         if self.is_cpp_api:
             code = self.unset_cpp_attribute(attribute)
         else:
-            implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIBSBML'
+            implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIB{2}'
                               '_INVALID_OBJECT'.format(self.abbrev_parent,
-                                                       attribute['capAttName'])]
+                                                       attribute['capAttName'],
+                                                       self.cap_language)]
             code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
@@ -1078,35 +1115,42 @@ class SetGetFunctions():
                                   'checkAndSetSId(id, mId)']
             else:
                 implementation = ['{} = {}'.format(member, name),
-                                  'return LIBSBML_OPERATION_SUCCESS']
+                                  'return LIB{}_OPERATION_'
+                                  'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({})'
                               ')'.format(name),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              'return LIB{}_INVALID_ATTRIBUTE_'
+                              'VALUE'.format(self.cap_language), 'else',
                               '{} = {}'.format(member, name),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif attribute['type'] == 'UnitSId' \
                 or attribute['type'] == 'UnitSIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalUnitSId({})'
                               ')'.format(name),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              'return LIB{}_INVALID_ATTRIBUTE_'
+                              'VALUE'.format(self.cap_language), 'else',
                               '{} = {}'.format(member, name),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif attribute['type'] == 'string':
             implementation = ['{} = {}'.format(member, name),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['type'] == 'enum':
             implementation = ['{0}_isValid({1}) == '
                               '0'.format(attribute['element'], name),
                               '{} = {}'.format(member,
                                                attribute['default']),
-                              'return LIBSBML_INVALID_ATTRIBUTE_VALUE', 'else',
+                              'return LIB{}_INVALID_ATTRIBUTE_'
+                              'VALUE'.format(self.cap_language), 'else',
                               '{} = {}'.format(member, name),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         elif query.has_is_set_member(attribute):
             if not deal_with_versions:
@@ -1129,20 +1173,24 @@ class SetGetFunctions():
                 clone = 'clone'
                 nested_if = []
                 implementation = ['{} == {}'.format(member, name),
-                                  'return LIBSBML_OPERATION_SUCCESS',
+                                  'return LIB{}_OPERATION_'
+                                  'SUCCESS'.format(self.cap_language),
                                   'else if',
                                   '{} == NULL'.format(name),
                                   'delete {}'.format(member),
                                   '{} = NULL'.format(member),
-                                  'return LIBSBML_OPERATION_SUCCESS']
+                                  'return LIB{}_OPERATION_'
+                                  'SUCCESS'.format(self.cap_language)]
                 if attribute['element'] == 'ASTNode':
                     clone = 'deepCopy'
                     implementation.append('else if')
                     implementation.append('!({}->isWellFormedASTNode()'
                                           ')'.format(name))
-                    implementation.append('return LIBSBML_INVALID_OBJECT')
+                    implementation.append('return LIB{}_INVALID_'
+                                          'OBJECT'.format(self.cap_language))
                     line = ['{} != NULL'.format(member),
-                            '{}->setParentSBMLObject(this)'.format(member)]
+                            '{}->setParent{}Object'
+                            '(this)'.format(member, self.cap_language)]
                     nested_if = self.create_code_block('if', line)
                 elif not attribute['is_ml']:
                     line = ['{} != NULL'.format(member)]
@@ -1157,47 +1205,55 @@ class SetGetFunctions():
                                       ': NULL'.format(member, name, clone))
                 if len(nested_if) > 0:
                     implementation.append(nested_if)
-                implementation.append('return LIBSBML_OPERATION_SUCCESS')
+                implementation.append('return LIB{}_OPERATION_'
+                                      'SUCCESS'.format(self.cap_language))
                 code = [self.create_code_block('else_if', implementation)]
             else:
                 implementation = ['{} == NULL'.format(name),
-                                  'return LIBSBML_OPERATION_FAILED',
+                                  'return LIB{}_OPERATION_'
+                                  'FAILED'.format(self.cap_language),
                                   'else if', '{}->hasRequiredElements() '
                                              '== false'.format(name),
-                                  'return LIBSBML_INVALID_OBJECT',
+                                  'return LIB{}_INVALID'
+                                  '_OBJECT'.format(self.cap_language),
                                   'else if',
                                   'getLevel() != {}->getLevel()'.format(name),
-                                  'return LIBSBML_LEVEL_MISMATCH',
+                                  'return LIB{}_LEVEL_'
+                                  'MISMATCH'.format(self.cap_language),
                                   'else if', 'getVersion() != {}->'
                                              'getVersion()'.format(name),
-                                  'return LIBSBML_VERSION_MISMATCH',
+                                  'return LIB{}_VERSION_'
+                                  'MISMATCH'.format(self.cap_language),
                                   'else if', 'getPackageVersion() != {}->'
                                              'getPackageVersion()'.format(name),
-                                  'return LIBSBML_PKG_VERSION_MISMATCH',
+                                  'return LIB{}_PKG_VERSION_'
+                                  'MISMATCH'.format(self.cap_language),
                                   'else', 'delete {}'.format(member),
                                   '{} = static_cast<{}>({}->'
                                   'clone())'.format(member,
                                                     attribute['attTypeCode'],
                                                     name),
-                                  'return LIBSBML_OPERATION_SUCCESS']
+                                  'return LIB{}_OPERATION_'
+                                  'SUCCESS'.format(self.cap_language)]
                 code = [self.create_code_block('else_if', implementation)]
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code
 
-    @staticmethod
-    def write_set_att_with_member(attribute, in_version):
+    def write_set_att_with_member(self, attribute, in_version):
         if in_version:
             implementation = ['{} = {}'.format(attribute['memberName'],
                                                attribute['name']),
                               'mIsSet{} = true'.format(attribute['capAttName']),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
         else:
             implementation = ['{} = {}'.format(attribute['memberName'],
                                                attribute['name']),
                               'mIsSet{} = '
                               'false'.format(attribute['capAttName']),
-                              'return LIBSBML_UNEXPECTED_ATTRIBUTE']
+                              'return LIB{}_UNEXPECTED_'
+                              'ATTRIBUTE'.format(self.cap_language)]
         return implementation
 
     def unset_cpp_attribute(self, attribute):
@@ -1205,14 +1261,17 @@ class SetGetFunctions():
             implementation = ['{}.erase()'.format(attribute['memberName'])]
             implementation2 = ['{}.empty() == '
                                'true'.format(attribute['memberName']),
-                               'return LIBSBML_OPERATION_SUCCESS', 'else',
-                               'return LIBSBML_OPERATION_FAILED']
+                               'return LIB{}_OPERATION_'
+                               'SUCCESS'.format(self.cap_language), 'else',
+                               'return LIB{}_OPERATION_'
+                               'FAILED'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation}),
                     dict({'code_type': 'if_else', 'code': implementation2})]
         elif attribute['attType'] == 'enum':
             implementation = ['{} = {}'.format(attribute['memberName'],
                                                attribute['default']),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif query.has_is_set_member(attribute):
             implementation = ['{} = {}'.format(attribute['memberName'],
@@ -1221,14 +1280,17 @@ class SetGetFunctions():
                               'false'.format(attribute['capAttName'])]
             implementation2 = ['isSet{}() == '
                                'false'.format(attribute['capAttName']),
-                               'return LIBSBML_OPERATION_SUCCESS', 'else',
-                               'return LIBSBML_OPERATION_FAILED']
+                               'return LIB{}_OPERATION_'
+                               'SUCCESS'.format(self.cap_language), 'else',
+                               'return LIB{}_OPERATION_'
+                               'FAILED'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation}),
                     dict({'code_type': 'if_else', 'code': implementation2})]
         elif attribute['type'] == 'element':
             implementation = ['delete {}'.format(attribute['memberName']),
                               '{} = NULL'.format(attribute['memberName']),
-                              'return LIBSBML_OPERATION_SUCCESS']
+                              'return LIB{}_OPERATION_'
+                              'SUCCESS'.format(self.cap_language)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif attribute['isArray']:
             code = [self.create_code_block(

@@ -44,12 +44,13 @@ class ValidatorClassFunctions():
     """Class for all protected functions"""
 
     def __init__(self, language, class_name, is_header, elements=None,
-                 package=''):
+                 package='', std_base=''):
         self.language = language
         self.up_language = strFunctions.upper_first(language)
         self.cap_language = language.upper()
 
         self.class_name = class_name
+        self.std_base = std_base
 
         self.is_header = is_header
         self.elements = elements
@@ -529,7 +530,7 @@ class ValidatorClassFunctions():
         # create the function declaration
         function = 'visit'
         return_type = 'virtual bool'
-        arguments = ['const SBase& x']
+        arguments = ['const {}& x'.format(self.std_base)]
         std_return = 'return {}Visitor::visit(x)'.format(self.cap_language)
         line = ['x.getPackageName() != \"{}\"'.format(self.package),
                 std_return]

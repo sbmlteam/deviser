@@ -45,6 +45,7 @@ class ListOfQueryFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
         self.is_plugin = False
@@ -111,6 +112,8 @@ class ListOfQueryFunctions():
             else:
                 self.status = 'c_not_list'
         self.is_header = class_object['is_header']
+        self.open_br = '{'
+        self.close_br = '}'
 
     ########################################################################
 
@@ -658,10 +661,16 @@ class ListOfQueryFunctions():
         params.append('@param {}, the {} object to '
                       'add.'.format(self.abbrev_child, self.object_child_name))
         return_lines = ['@copydetails doc_returns_success_code',
-                        '@li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, '
-                        'OperationReturnValues_t}',
-                        '@li @sbmlconstant{LIBSBML_OPERATION_FAILED,'
-                        ' OperationReturnValues_t}']
+                        '@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                        'OperationReturnValues_t{}'.format(self.language,
+                                                           self.open_br,
+                                                           self.cap_language,
+                                                           self.close_br),
+                        '@li @{}constant{}LIB{}_OPERATION_FAILED,'
+                        ' OperationReturnValues_t{}'.format(self.language,
+                                                            self.open_br,
+                                                            self.cap_language,
+                                                            self.close_br)]
         additional = []
         if self.is_cpp_api:
             additional.append('@copydetails doc_note_object_is_copied')

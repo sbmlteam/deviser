@@ -42,3 +42,10 @@ error_list = []
 
 global running_tests
 running_tests = False
+
+global language
+language = 'sbml'
+global baseClass
+baseClass = 'SBase'
+global std_base
+std_base = 'SBase'

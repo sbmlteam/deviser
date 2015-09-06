@@ -48,11 +48,11 @@ import ValidatorCodeFile
 class ValidationFiles():
     """Class for all Cpp files"""
 
-    def __init__(self, lib_object, language='sbml', verbose=False):
+    def __init__(self, lib_object, verbose=False):
         # members from object
         self.lib_object = lib_object
-        self.language = language
-        self.cap_language = language.upper()
+        self.language = global_variables.language
+        self.cap_language = self.language.upper()
 
         self.package = lib_object['name']
         self.up_package = strFunctions.upper_first(self.package)

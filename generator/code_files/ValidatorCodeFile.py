@@ -322,7 +322,8 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                                                             name,
                                                             False,
                                                             self.elements,
-                                                            self.package)
+                                                            self.package,
+                                                            self.std_base)
 
         self.write_comments(['-------------------------------------------',
                              'ValidatingVisitor',

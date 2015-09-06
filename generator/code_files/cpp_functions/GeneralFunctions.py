@@ -1023,7 +1023,7 @@ class GeneralFunctions():
         code.append(self.create_code_block('line', implementation))
         implementation = self.get_validator_block('id')
         code.append(self.create_code_block('if', implementation))
-        implementation = self.get_validator_block('sbml')
+        implementation = self.get_validator_block(self.language)
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line', ['return total_errors']))
 

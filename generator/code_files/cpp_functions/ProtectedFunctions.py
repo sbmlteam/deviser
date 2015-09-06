@@ -45,6 +45,7 @@ class ProtectedFunctions():
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object):
         self.language = language
+        self.cap_language = language.upper()
         self.package = class_object['package']
         self.class_name = class_object['name']
         self.is_cpp_api = is_cpp_api
@@ -494,7 +495,8 @@ class ProtectedFunctions():
                           'unsigned int pkgVersion = getPackageVersion()',
                           'unsigned int numErrs',
                           'bool assigned = false',
-                          'SBMLErrorLog* log = getErrorLog()']
+                          '{}ErrorLog* log = '
+                          'getErrorLog()'.format(self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         # only do this if has a list of
         if self.has_list_of:
@@ -1009,7 +1011,8 @@ class ProtectedFunctions():
                 'logEmptyString({}, level, version, '
                 '\"<{}>\")'.format(member, self.class_name),
                 'else if',
-                'SyntaxChecker::isValidSBMLSId({}) == false'.format(member),
+                'SyntaxChecker::isValid{}SId({}) == '
+                'false'.format(self.cap_language, member),
                 'logError(InvalidIdSyntax, level, version, '
                 '{})'.format(invalid_line)]
         first_if = self.create_code_block('else_if', line)
