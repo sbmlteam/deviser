@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# @file    PluginFiles.py
+# @file    ExtensionFiles.py
 # @brief   class for generating the plugin files
 # @author  Frank Bergmann
 # @author  Sarah Keating
