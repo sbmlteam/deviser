@@ -41,7 +41,7 @@ def generate_bindings_downcast_ns(filename, binding):
     os.chdir('../.')
 
 
-def generate_bindings_downcast_pkgs(filename, binding):
+def generate_bindings_downcast_pkgs(filename, binding, local):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
@@ -51,7 +51,12 @@ def generate_bindings_downcast_pkgs(filename, binding):
         os.makedirs(binding)
         os.chdir(binding)
     all_files = BindingsFiles.BindingFiles(ob, binding, True)
-    all_files.write_downcast_packages()
+    if binding == 'swig':
+        all_files.write_swig_files()
+    elif local:
+        all_files.write_local()
+    else:
+        all_files.write_downcast_packages()
     os.chdir('../.')
     os.chdir('../.')
 
@@ -139,14 +144,40 @@ def run_pkgs_test(name, binding, ext):
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'downcast-packages', binding))
     print('====================================================')
-    generate_bindings_downcast_pkgs(filename, binding)
-    correct_file = '.\\test-binding\\{}\\local-downcast-packages-{}.' \
-                   '{}'.format(binding, name, ext)
-    temp_file = '.\\temp\\{}\\local-downcast-packages-{}.' \
-                '{}'.format(binding, name, ext)
+    generate_bindings_downcast_pkgs(filename, binding, False)
+    if binding == 'csharp' or binding == 'java':
+        fileout = 'local-packages-{}.{}'.format(name, ext)
+    else:
+        fileout = 'local-downcast-packages-{}.{}'.format(name, ext)
+    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
+    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
     if os.path.exists(correct_file):
-        print('local-downcast-packages-{}.{}'.format(name, ext))
+        print('{}'.format(fileout))
         fail = compare_files(correct_file, temp_file)
+    else:
+        print('{} file not found'.format(correct_file))
+    print('')
+    return fail
+
+
+def run_local_test(name, binding, ext, local):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, 'local', binding))
+    print('====================================================')
+    generate_bindings_downcast_pkgs(filename, binding, local)
+    if binding == 'csharp' or binding == 'java':
+        fileout = 'local-packages-{}.{}'.format(name, ext)
+    else:
+        fileout = 'local-{}.{}'.format(name, ext)
+    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
+    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
+    if os.path.exists(correct_file):
+        print('{}'.format(fileout))
+        fail = compare_files(correct_file, temp_file)
+    else:
+        print('{} file not found'.format(correct_file))
     print('')
     return fail
 
@@ -165,6 +196,25 @@ def run_plugin_test(name, binding, ext):
     if os.path.exists(correct_file):
         print('local-downcast-plugins-{}.{}'.format(name, ext))
         fail = compare_files(correct_file, temp_file)
+    print('')
+    return fail
+
+
+def run_swig_test(name, binding, ext):
+    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    fail = 0
+    print('====================================================')
+    print('Testing {}:{} {}'.format(name, binding, 'native'))
+    print('====================================================')
+    generate_bindings_downcast_pkgs(filename, binding, True)
+    fileout = '{}-package.{}'.format(name, ext)
+    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
+    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
+    if os.path.exists(correct_file):
+        print('{}'.format(fileout))
+        fail = compare_files(correct_file, temp_file)
+    else:
+        print('{} file not found'.format(correct_file))
     print('')
     return fail
 
@@ -262,6 +312,31 @@ def main():
     test_case = 'ruby'
     ext = 'cpp'
     fail += run_plugin_test(name, test_case, ext)
+
+    name = 'spatial'
+    test_case = 'java'
+    ext = 'i'
+    fail += run_pkgs_test(name, test_case, ext)
+
+    name = 'spatial'
+    test_case = 'csharp'
+    ext = 'i'
+    fail += run_local_test(name, test_case, ext, False)
+
+    name = 'spatial'
+    test_case = 'php'
+    ext = 'i'
+    fail += run_local_test(name, test_case, ext, True)
+
+    name = 'spatial'
+    test_case = 'swig'
+    ext = 'i'
+    fail += run_swig_test(name, test_case, ext)
+
+    name = 'spatial'
+    test_case = 'swig'
+    ext = 'h'
+    fail += run_swig_test(name, test_case, ext)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

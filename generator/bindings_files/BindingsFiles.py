@@ -37,11 +37,12 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, global_variables
+from util import global_variables
 import DowncastExtensionFile
 import DowncastNamespaceFile
 import DowncastPackagesFile
 import DowncastPluginsFile
+import NativeSwigFile
 
 
 class BindingFiles():
@@ -55,6 +56,8 @@ class BindingFiles():
         self.language = global_variables.language
         self.elements = pkg_object['sbmlElements']
         self.plugins = pkg_object['plugins']
+
+    #########################################################################
 
     def write_downcast_extension(self):
         name = 'local-downcast-extension-{}'.format(self.package)
@@ -77,12 +80,16 @@ class BindingFiles():
         ext.close_file()
 
     def write_downcast_packages(self):
-        name = 'local-downcast-packages-{}'.format(self.package)
+        if self.binding == 'csharp' or self.binding == 'java':
+            name = 'local-packages-{}'.format(self.package)
+        else:
+            name = 'local-downcast-packages-{}'.format(self.package)
         ext = DowncastPackagesFile.DowncastPackagesFile(name,
                                                         self.package,
                                                         self.binding,
-                                                        self.elements)
-        if self.verbose:
+                                                        self.elements,
+                                                        self.plugins)
+        if self.verbose and ext.fileout:
             print('Writing file {}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
@@ -93,13 +100,52 @@ class BindingFiles():
                                                       self.package,
                                                       self.binding,
                                                       self.plugins)
-        if self.verbose:
+        if self.verbose and ext.fileout:
             print('Writing file {}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
+    def write_local(self):
+        if self.binding == 'csharp' or self.binding == 'java':
+            return
+        else:
+            name = 'local-{}'.format(self.package)
+        ext = DowncastPackagesFile.DowncastPackagesFile(name,
+                                                        self.package,
+                                                        self.binding,
+                                                        self.elements,
+                                                        self.plugins,
+                                                        True)
+        if self.verbose and ext.fileout:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+
+    def write_swig_files(self):
+        name = '{}-package'.format(self.package)
+        ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
+                                            self.plugins, is_header=True)
+        if self.verbose and ext.fileout:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+
+        name = '{}-package'.format(self.package)
+        ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
+                                            self.plugins, is_header=False)
+        if self.verbose and ext.fileout:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+
+    ########################################################################
+
     def write_files(self):
-        self.write_downcast_extension()
-        self.write_downcast_namespace()
-        self.write_downcast_packages()
-        self.write_downcast_plugins()
+        if self.binding != 'swig':
+            self.write_downcast_extension()
+            self.write_downcast_namespace()
+            self.write_downcast_packages()
+            self.write_downcast_plugins()
+            self.write_local()
+        else:
+            self.write_swig_files()
