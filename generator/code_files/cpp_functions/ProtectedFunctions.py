@@ -148,6 +148,7 @@ class ProtectedFunctions():
         if not self.is_header:
             ns = '{}ns'.format(self.package.lower())
             upkg = self.package.upper()
+
             if self.is_list_of:
                 if num_children == 0:
                     code = self.write_create_object_lo(upkg, ns)
@@ -186,11 +187,15 @@ class ProtectedFunctions():
                         self.class_name, self.package)
                 else:
                     class_name = self.class_name
-                error_line = 'getErrorLog()->logPackageError(\"{}\", {}{}' \
-                             'AllowedElements, getPackageVersion(), getLevel(), ' \
+                # sort error names to be used
+                error = '{}{}AllowedElements'.format(self.package, class_name)
+                if not global_variables.running_tests:
+                    if error not in global_variables.error_list:
+                        error = '{}Unknown'.format(self.package)
+                error_line = 'getErrorLog()->logPackageError(\"{}\", {}, ' \
+                             'getPackageVersion(), getLevel(), ' \
                              'getVersion())'.format(self.package.lower(),
-                                                    self.package,
-                                                    class_name)
+                                                    error)
                 if num_children == 1:
                     element = self.find_single_element()
                     if element['abstract'] and \
@@ -516,13 +521,19 @@ class ProtectedFunctions():
             class_name = self.class_name
             core_err = '{}{}AllowedCoreAttributes'.format(self.package,
                                                           class_name)
+        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        if not global_variables.running_tests:
+            if core_err not in global_variables.error_list:
+                core_err = '{}Unknown'.format(self.package)
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
-                'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                'log->logPackageError(\"{}\", {}, '
                 'pkgVersion, level, version, '
-                'details)'.format(self.package.lower(), self.package,
-                                  class_name),
+                'details)'.format(self.package.lower(), error),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
@@ -1023,6 +1034,12 @@ class ProtectedFunctions():
                 self.class_name, self.package)
         else:
             class_name = self.class_name
+        # sort error names to be used
+        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
@@ -1030,10 +1047,9 @@ class ProtectedFunctions():
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
                            'is missing.\"'.format(self.package, name),
                            'getErrorLog()->logPackageError(\"{}\", '
-                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           '{}, getPackageVersion(), '
                            'level, version, message'
-                           ')'.format(self.package.lower(), self.package,
-                                      class_name)]
+                           ')'.format(self.package.lower(), error)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
@@ -1059,6 +1075,11 @@ class ProtectedFunctions():
                 self.class_name, self.package)
         else:
             class_name = self.class_name
+        # sort error names to be used
+        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
@@ -1066,10 +1087,9 @@ class ProtectedFunctions():
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
                            'is missing.\"'.format(self.package, name),
                            'log->logPackageError(\"{}\", '
-                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           '{}, getPackageVersion(), '
                            'level, version, message'
-                           ')'.format(self.package.lower(), self.package,
-                                      class_name)]
+                           ')'.format(self.package.lower(), error)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
@@ -1080,6 +1100,18 @@ class ProtectedFunctions():
         element = attribute['element']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
+
+        # sort error names to be used
+        error = '{}{}{}MustBe{}Enum'.format(self.package, self.class_name,
+                                            strFunctions.upper_first(name),
+                                            element)
+        att_error = '{}{}AllowedAttributes'.format(self.package,
+                                                   self.class_name)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+            if att_error not in global_variables.error_list:
+                att_error = '{}Unknown'.format(self.package)
 
         line = ['std::string {}'.format(name.lower()),
                 'assigned = attributes.readInto(\"{}\", '
@@ -1099,14 +1131,11 @@ class ProtectedFunctions():
                                         'is not a valid option.'
                                         '\"'.format(name.lower())]),
                 self.create_code_block('line', ['log->logPackage'
-                                                'Error(\"{}\", {}{}'
-                                                '{}MustBe{}Enum, '
+                                                'Error(\"{}\", {}, '
                                                 'getPackageVersion(), level,'
                                                 ' version, msg)'
                                        .format(self.package.lower(),
-                                               self.package, self.class_name,
-                                               strFunctions.upper_first(name),
-                                               element)])]
+                                               error)])]
         second_if = self.create_code_block('if', line)
 
         line = ['{}.empty() == true'.format(name.lower()),
@@ -1133,10 +1162,9 @@ class ProtectedFunctions():
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
                            'is missing.\"'.format(self.package, name),
                            'log->logPackageError(\"{}\", '
-                           '{}{}AllowedAttributes, getPackageVersion(), '
+                           '{}, getPackageVersion(), '
                            'level, version, message'
-                           ')'.format(self.package.lower(), self.package,
-                                      class_name)]
+                           ')'.format(self.package.lower(), att_error)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
@@ -1157,6 +1185,15 @@ class ProtectedFunctions():
         else:
             num_type = 'FIX ME'
 
+        # sort error names to be used
+        error = '{}{}{}MustBe{}'.format(self.package, self.class_name,
+                                        up_name, num_type)
+        att_error = '{}{}AllowedAttributes'.format(self.package, self.class_name)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+            if att_error not in global_variables.error_list:
+                att_error = '{}Unknown'.format(self.package)
         line = ['numErrs = getErrorLog()->getNumErrors()',
                 '{} = attributes.readInto(\"{}\", {})'.format(set_name,
                                                               name,
@@ -1169,10 +1206,9 @@ class ProtectedFunctions():
                 'std::string message = \"{} attribute \'{}\' '
                 'from the <{}> element must be an '
                 'integer.\"'.format(self.package, name, self.class_name),
-                'log->logPackageError(\"{}\", {}{}{}MustBe{},'
+                'log->logPackageError(\"{}\", {},'
                 ' getPackageVersion(), level, version, message)'.format(
-                    self.package.lower(), self.package, self.class_name,
-                    up_name, num_type)]
+                    self.package.lower(), error)]
         if reqd:
             if self.is_plugin:
                 class_name = strFunctions.get_class_from_plugin(
@@ -1183,10 +1219,9 @@ class ProtectedFunctions():
                      'std::string message = \"{} attribute \'{}\' is missing '
                      'from the <{}> element.\"'.format(self.package, name,
                                                        self.class_name),
-                     'log->logPackageError(\"{}\", {}{}AllowedAttributes, '
+                     'log->logPackageError(\"{}\", {}, '
                      'getPackageVersion(), level, version, '
-                     'message)'.format(self.package.lower(), self.package,
-                                       class_name)]
+                     'message)'.format(self.package.lower(), att_error)]
 
             if_error = self.create_code_block('if_else', line)
         else:

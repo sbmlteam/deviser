@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class GeneralFunctions():
@@ -1047,6 +1047,14 @@ class GeneralFunctions():
         if not self.is_doc_plugin:
             return
 
+        # sort error names to be used
+        error = '{}AttributeRequiredMustBeBoolean'.format(self.package)
+        req_error = '{}AttributeRequiredMissing'.format(self.package)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+            if req_error not in global_variables.error_list:
+                req_error = '{}Unknown'.format(self.package)
         # create comment parts
         title_line = 'Reads the {} attributes in the top-level ' \
                      'element.'.format(self.package)
@@ -1065,7 +1073,8 @@ class GeneralFunctions():
                           'getLevel() < 3'.format(self.cap_language),
                           'return']
         code = [dict({'code_type': 'if', 'code': implementation})]
-        implementation = ['SBMLErrorLog* log = getErrorLog()',
+        implementation = ['{}ErrorLog* log = getErrorLog'
+                          '()'.format(self.cap_language),
                           'unsigned int numErrs = log->getNumErrors()',
                           'XMLTriple tripleReqd(\"required\", mURI, '
                           'getPrefix())',
@@ -1075,15 +1084,15 @@ class GeneralFunctions():
         implementation = ['log->getNumErrors() == numErrs + 1 && '
                           'log->contains(XMLAttributeTypeMismatch)',
                           'log->remove(XMLAttributeTypeMismatch)',
-                          'log->logPackageError(\"{}\", {}AttributeRequired'
-                          'MustBeBoolean, getPackageVersion(), getLevel(), '
+                          'log->logPackageError(\"{}\", {}, '
+                          'getPackageVersion(), getLevel(), '
                           'getVersion())'.format(self.package.lower(),
-                                                 self.package),
+                                                 error),
                           'else',
-                          'log->logPackageError(\"{}\", {}AttributeRequired'
-                          'Missing, getPackageVersion(), getLevel(), '
+                          'log->logPackageError(\"{}\", {}, '
+                          'getPackageVersion(), getLevel(), '
                           'getVersion())'.format(self.package.lower(),
-                                                 self.package),
+                                                 req_error),
                           ]
         nested_if = self.create_code_block('if_else', implementation)
         implementation = ['assigned == false', nested_if,
@@ -1109,8 +1118,9 @@ class GeneralFunctions():
 
     def get_validator_block(self, valid_id):
         bail_if = self.create_code_block('if',
-                                         ['log->getNumFailsWithSeverity(LIBSBML'
-                                          '_SEV_ERROR) > 0',
+                                         ['log->getNumFailsWithSeverity(LIB{}'
+                                          '_SEV_ERROR) > '
+                                          '0'.format(self.cap_language),
                                           'return total_errors'])
         errors_if = self.create_code_block('if',
                                            ['nerrors > 0',
