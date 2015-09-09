@@ -14,7 +14,7 @@ fails = []
 
 def generate_cpp_header(filename, num):
     ob = createPackageFromXml.parse_deviser_xml(filename)
-    working_class = ob['sbmlElements'][num]
+    working_class = ob['baseElements'][num]
     os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class)
     all_files.write_files()
@@ -24,7 +24,7 @@ def generate_cpp_header(filename, num):
 def generate_new_cpp_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
-    working_class = ob['sbmlElements'][num]
+    working_class = ob['baseElements'][num]
     os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()

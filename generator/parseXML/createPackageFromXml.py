@@ -360,7 +360,7 @@ def parse_deviser_xml(filename):
                     'elements': elements,
                     'plugins': plugins,
                     'number': number,
-                    'sbmlElements': sbml_elements,
+                    'baseElements': sbml_elements,
                     'enums': enums,
                     'offset': offset,
                     'fullname': fullname,
@@ -378,7 +378,7 @@ def parse_deviser_xml(filename):
                 attr['parent'] = elem
                 attr['root'] = package
 
-    for elem in package['sbmlElements']:
+    for elem in package['baseElements']:
         elem['root'] = package
         if 'attribs' in elem:
             for attr in elem['attribs']:

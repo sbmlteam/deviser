@@ -58,7 +58,7 @@ class ValidationFiles():
         self.up_package = strFunctions.upper_first(self.package)
 
         self.offset = lib_object['offset']
-        self.sbml_classes = lib_object['sbmlElements']
+        self.sbml_classes = lib_object['baseElements']
         self.enums = lib_object['enums']
         self.plugins = lib_object['plugins']
         self.fullname = lib_object['fullname']

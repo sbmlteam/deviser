@@ -173,7 +173,7 @@ def generate_code_files(name, ob):
 
     # need to do this last so that the error table is populated
     os.chdir(sbml_dir)
-    for working_class in ob['sbmlElements']:
+    for working_class in ob['baseElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     os.chdir(this_dir)

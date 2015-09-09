@@ -366,10 +366,10 @@ class ParseXML():
         return [found, parent]
 
     def add_parent_elements(self, package):
-        for elem in package['sbmlElements']:
+        for elem in package['baseElements']:
             name = elem['name']
             [occurs_as_child, parent] = \
-                self.find_child_occurences(name, package['sbmlElements'])
+                self.find_child_occurences(name, package['baseElements'])
             if occurs_as_child:
                 elem['parent'] = parent
 
@@ -501,7 +501,7 @@ class ParseXML():
                         'elements': self.elements,
                         'plugins': plugins,
                         'number': number,
-                        'sbmlElements': self.sbml_elements,
+                        'baseElements': self.sbml_elements,
                         'enums': enums,
                         'offset': offset,
                         'fullname': fullname,
@@ -520,7 +520,7 @@ class ParseXML():
                     attr['parent'] = elem
                     attr['root'] = package
 
-        for elem in package['sbmlElements']:
+        for elem in package['baseElements']:
             elem['root'] = package
             if 'attribs' in elem:
                 for attr in elem['attribs']:

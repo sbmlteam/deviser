@@ -94,12 +94,12 @@ def has_children_not_math(attributes):
 def get_class(name, root_object):
     if root_object is None:
         return None
-    elif root_object['sbmlElements'] is None:
+    elif root_object['baseElements'] is None:
         return None
     else:
-        for i in range(0, len(root_object['sbmlElements'])):
-            if name == root_object['sbmlElements'][i]['name']:
-                return root_object['sbmlElements'][i]
+        for i in range(0, len(root_object['baseElements'])):
+            if name == root_object['baseElements'][i]['name']:
+                return root_object['baseElements'][i]
 
 
 # return a list of the actual concrete classes

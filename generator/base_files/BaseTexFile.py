@@ -54,7 +54,7 @@ class BaseTexFile(BaseFile.BaseFile):
 
         self.package = object_desc['name']
         self.fullname = object_desc['fullname']
-        self.sbml_classes = object_desc['sbmlElements']
+        self.sbml_classes = object_desc['baseElements']
         self.offset = object_desc['offset']
         self.plugins = object_desc['plugins']
         self.enums = object_desc['enums']

@@ -55,7 +55,7 @@ class CMakeFiles():
         self.package = pkg_object['name']
 
         self.language = global_variables.language
-        self.elements = pkg_object['sbmlElements']
+        self.elements = pkg_object['baseElements']
         self.plugins = pkg_object['plugins']
 
     #########################################################################
