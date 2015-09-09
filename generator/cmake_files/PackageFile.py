@@ -123,8 +123,8 @@ class PackageFile():
         self.fileout.write_line('set({}_SOURCES)'.format(self.cap_package))
         self.fileout.skip_line()
         self.fileout.write_comment_line('go through all directories')
-        self.fileout.write_line('foreach(dir common extension sbml validator '
-                                'validator/constraints)')
+        self.fileout.write_line('foreach(dir common extension {} validator '
+                                'validator/constraints)'.format(self.language))
         self.fileout.up_indent()
         self.fileout.skip_line()
         self.fileout.write_comment_line('add to include directory')

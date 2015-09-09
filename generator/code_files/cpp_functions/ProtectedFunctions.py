@@ -180,7 +180,8 @@ class ProtectedFunctions():
                     code.append(self.create_code_block('line', line))
                 if len(self.child_elements) != self.num_non_std_children:
                     line = ['{}_CREATE_NS({}, '
-                            'getSBMLNamespaces())'.format(upkg, ns)]
+                            'get{}Namespaces())'.format(upkg, ns,
+                                                        self.cap_language)]
                     code.append(self.create_code_block('line', line))
                 if self.is_plugin:
                     class_name = strFunctions.get_class_from_plugin(
@@ -278,7 +279,8 @@ class ProtectedFunctions():
                           'stream.peek().getName()',
                           '{}* object = NULL'.format(self.std_base),
                           '{}_CREATE_NS({}, '
-                          'getSBMLNamespaces())'.format(upkg, ns)]
+                          'get{}Namespaces())'.format(upkg, ns,
+                                                      self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -300,7 +302,8 @@ class ProtectedFunctions():
                           'stream.peek().getName()',
                           '{}* object = NULL'.format(self.std_base),
                           '{}_CREATE_NS({}, '
-                          'getSBMLNamespaces())'.format(upkg, ns)]
+                          'get{}Namespaces())'.format(upkg, ns,
+                                                      self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -360,10 +363,10 @@ class ProtectedFunctions():
     def get_plugin_lo_block(self, element, error_line):
         name = element['memberName']
         implementation = self.get_lo_block(element, error_line)
-        second_if = self.create_code_block('if', ['targetPrefix.empty()',
-                                                  '{}.getSBMLDocument()->'
-                                                  'enableDefaultNS(mURI, '
-                                                  'true)'.format(name)])
+        lines = ['targetPrefix.empty()',
+                 '{}.get{}Document()->enableDefaultNS(mURI, '
+                 'true)'.format(name, self.cap_language)]
+        second_if = self.create_code_block('if', lines)
         implementation.append(second_if)
         return implementation
 
@@ -631,10 +634,11 @@ class ProtectedFunctions():
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
-                line = ['stream.getSBMLNamespaces() == NULL',
-                        'stream.setSBMLNamespaces(new '
-                        'SBMLNamespaces(getLevel(), '
-                        'getVersion()))']
+                line = ['stream.get{}Namespaces() == '
+                        'NULL'.format(self.cap_language),
+                        'stream.set{0}Namespaces(new '
+                        '{0}Namespaces(getLevel(), '
+                        'getVersion()))'.format(self.cap_language)]
                 nested_if = self.create_code_block('if', line)
                 implementation = ['name == \"math\"',
                                   'const XMLToken elem = stream.peek()',
@@ -944,8 +948,9 @@ class ProtectedFunctions():
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         for_loop = self.create_code_block('for', line)
 
-        line = ['static_cast<{}*>(getParentSBMLObject())->size() '
-                '< 2'.format(strFunctions.cap_list_of_name(self.class_name)),
+        line = ['static_cast<{}*>(getParent{}Object())->size() '
+                '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
+                             self.cap_language),
                 'numErrs = log->getNumErrors()', for_loop]
 
         return line
@@ -1150,11 +1155,6 @@ class ProtectedFunctions():
         first_if = self.create_code_block('if_else', line)
 
         line = 'assigned == true'
-        if self.is_plugin:
-            class_name = strFunctions.get_class_from_plugin(
-                self.class_name, self.package)
-        else:
-            class_name = self.class_name
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
@@ -1188,7 +1188,8 @@ class ProtectedFunctions():
         # sort error names to be used
         error = '{}{}{}MustBe{}'.format(self.package, self.class_name,
                                         up_name, num_type)
-        att_error = '{}{}AllowedAttributes'.format(self.package, self.class_name)
+        att_error = '{}{}AllowedAttributes'.format(self.package,
+                                                   self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{}Unknown'.format(self.package)
@@ -1218,7 +1219,7 @@ class ProtectedFunctions():
             line += ['else',
                      'std::string message = \"{} attribute \'{}\' is missing '
                      'from the <{}> element.\"'.format(self.package, name,
-                                                       self.class_name),
+                                                       class_name),
                      'log->logPackageError(\"{}\", {}, '
                      'getPackageVersion(), level, version, '
                      'message)'.format(self.package.lower(), att_error)]

@@ -46,6 +46,9 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Validator Header files"""
 
     def __init__(self, language, package, filetype='', valid_type=''):
+        self.language = language
+        self.cap_language = language.upper()
+
         self.up_package = strFunctions.upper_first(package)
         self.valid_type = strFunctions.upper_first(valid_type)
         self.file_type = filetype
@@ -56,16 +59,17 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
                                                           self.valid_type)
             self.baseClass = '{}Validator'.format(self.up_package)
             if valid_type == '':
-                self.category = 'LIBSBML_CAT_GENERAL_CONSISTENCY'
+                self.category = 'LIB{}_CAT_GENERAL_' \
+                                'CONSISTENCY'.format(self.cap_language)
             else:
-                self.category = 'LIBSBML_CAT_IDENTIFIER_CONSISTENCY'
+                self.category = 'LIB{}_CAT_IDENTIFIER_' \
+                                'CONSISTENCY'.format(self.cap_language)
 
         self.brief_description = \
             'Definition of {}.'.format(self.name)
 
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'h',
                                          None)
-        self.language = language
         self.package = package
         if filetype == 'consistency':
             self.baseClass = '{}Validator'.format(self.up_package)

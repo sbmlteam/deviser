@@ -468,6 +468,7 @@ def main():
     test_case = 'different language'
     global_variables.language = 'sedml'
     global_variables.std_base = 'SEDBase'
+    global_variables.set_language('sedml')
     fail += run_test(name, num, class_name, test_case, list_of)
 
     if fail > 0:

@@ -139,7 +139,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.has_std_base = False
         elif self.is_doc_plugin:
             self.has_std_base = True
-            self.std_base = 'SBMLDocumentPlugin'
+            self.std_base = '{}DocumentPlugin'.format(self.cap_language)
         self.class_object['has_std_base'] = self.has_std_base
         self.class_object['std_base'] = self.std_base
 

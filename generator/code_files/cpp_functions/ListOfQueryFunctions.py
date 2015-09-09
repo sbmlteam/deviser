@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query
+from util import strFunctions, query, global_variables
 
 
 class ListOfQueryFunctions():
@@ -660,16 +660,18 @@ class ListOfQueryFunctions():
                                                     self.object_child_name))
         params.append('@param {}, the {} object to '
                       'add.'.format(self.abbrev_child, self.object_child_name))
+        success = global_variables.ret_success
+        failed = global_variables.ret_failed
         return_lines = ['@copydetails doc_returns_success_code',
-                        '@li @{}constant{}LIB{}_OPERATION_SUCCESS, '
+                        '@li @{}constant{}{}, '
                         'OperationReturnValues_t{}'.format(self.language,
                                                            self.open_br,
-                                                           self.cap_language,
+                                                           success,
                                                            self.close_br),
-                        '@li @{}constant{}LIB{}_OPERATION_FAILED,'
+                        '@li @{}constant{}{},'
                         ' OperationReturnValues_t{}'.format(self.language,
                                                             self.open_br,
-                                                            self.cap_language,
+                                                            failed,
                                                             self.close_br)]
         additional = []
         if self.is_cpp_api:
@@ -691,57 +693,68 @@ class ListOfQueryFunctions():
         if not self.is_list_of:
             member = self.class_object['memberName']
             else_lines = ['{}.append({})'.format(member, self.abbrev_child),
-                          'return LIBSBML_OPERATION_SUCCESS']
+                          'return {}'.format(global_variables.ret_success)]
         else:
             else_lines = ['append({})'.format(self.abbrev_child),
-                          'return LIBSBML_OPERATION_SUCCESS']
+                          'return {}'.format(global_variables.ret_success)]
         this_object = query.get_class(self.object_child_name,
                                       self.class_object['root'])
         if self.is_cpp_api:
             implementation = ['{} == NULL'.format(self.abbrev_child),
-                              'return LIBSBML_OPERATION_FAILED', 'else if',
+                              'return {}'.format(global_variables.ret_failed),
+                              'else if',
                               '{}->hasRequiredAttributes() == '
                               'false'.format(self.abbrev_child),
-                              'return LIBSBML_INVALID_OBJECT']
+                              'return '
+                              '{}'.format(global_variables.ret_invalid_obj)]
             if this_object and 'hasChildren' in this_object \
                     and this_object['hasChildren']:
+                ret = global_variables.ret_invalid_obj
                 implementation += ['else if',
                                    '{}->hasRequiredElements() == '
                                    'false'.format(self.abbrev_child),
-                                   'return LIBSBML_INVALID_OBJECT']
+                                   'return {}'.format(ret)]
             implementation += ['else if',
                                'getLevel() != {}->'
                                'getLevel()'.format(self.abbrev_child),
-                               'return LIBSBML_LEVEL_MISMATCH', 'else if',
+                               'return '
+                               '{}'.format(global_variables.ret_level_mis),
+                               'else if',
                                'getVersion() != {}->'
                                'getVersion()'.format(self.abbrev_child),
-                               'return LIBSBML_VERSION_MISMATCH', 'else if']
+                               'return '
+                               '{}'.format(global_variables.ret_vers_mis),
+                               'else if']
             if self.is_plugin:
+                ret = global_variables.ret_pkgv_mis
                 implementation.append('getPackageVersion() != {}->getPackage'
                                       'Version()'.format(self.abbrev_child))
-                implementation.append('return LIBSBML_PKG_VERSION_MISMATCH')
+                implementation.append('return {}'.format(ret))
             else:
-                implementation.append('matchesRequiredSBMLNamespacesForAddition'
+                implementation.append('matchesRequired{}NamespacesForAddition'
                                       '(static_cast<const {}*>({})) == '
-                                      'false'.format(self.std_base,
+                                      'false'.format(self.cap_language,
+                                                     self.std_base,
                                                      self.abbrev_child))
-                implementation.append('return LIBSBML_NAMESPACES_MISMATCH')
+                implementation.append('return '
+                                      '{}'.format(global_variables.ret_ns_mis))
             if not self.is_list_of and self.has_id:
                 implementation.append('else if')
                 implementation.append('{0}->isSetId() '
                                       '&& ({1}.get({0}->getId())) '
                                       '!= NULL'.format(self.abbrev_child,
                                                        member))
-                implementation.append('return LIBSBML_DUPLICATE_OBJECT_ID')
+                implementation.append('return '
+                                      '{}'.format(global_variables.ret_dup_id))
             implementation.append('else')
             implementation.append(self.create_code_block('line', else_lines))
             code = [self.create_code_block('else_if', implementation)]
         else:
             implementation = ['return ({0} != NULL) ? {0}->add{1}({2}) : '
-                              'LIBSBML_INVALID'
-                              '_OBJECT'.format(self.abbrev_parent,
-                                               self.child_name,
-                                               self.abbrev_child)]
+                              '{3}'.format(self.abbrev_parent,
+                                           self.child_name,
+                                           self.abbrev_child,
+                                           global_variables.ret_invalid_obj)]
             code = [self.create_code_block('line', implementation)]
 
         # return the parts
@@ -809,7 +822,8 @@ class ListOfQueryFunctions():
                                                      self.abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'getSBMLNamespaces())'.format(pack_up, pack_low),
+                              'get{}Namespaces())'.format(pack_up, pack_low,
+                                                          self.cap_language),
                               '{} = new {}({}ns)'.format(self.abbrev_child,
                                                          self.child_name,
                                                          pack_low),
@@ -834,7 +848,8 @@ class ListOfQueryFunctions():
                                                      abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'getSBMLNamespaces())'.format(pack_up, pack_low),
+                              'get{}Namespaces())'.format(pack_up, pack_low,
+                                                          self.cap_language),
                               '{} = new {}({}ns)'.format(abbrev_child,
                                                          child,
                                                          pack_low),
@@ -905,8 +920,9 @@ class ListOfQueryFunctions():
                               'size()'.format(self.class_object['memberName'])]
         else:
             implementation = ['return ({0} != NULL) ? {0}->getNum{1}() : '
-                              'SBML_INT_MAX'.format(self.abbrev_parent,
-                                                    self.plural)]
+                              '{2}_INT_MAX'.format(self.abbrev_parent,
+                                                   self.plural,
+                                                   self.cap_language)]
         code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,

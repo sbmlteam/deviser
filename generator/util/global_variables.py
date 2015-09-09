@@ -49,3 +49,68 @@ global baseClass
 baseClass = 'SBase'
 global std_base
 std_base = 'SBase'
+
+global ret_success
+ret_success = 'LIB{}_OPERATION_SUCCESS'.format(language.upper())
+
+global ret_failed
+ret_failed = 'LIB{}_OPERATION_FAILED'.format(language.upper())
+
+global ret_invalid_obj
+ret_invalid_obj = 'LIB{}_INVALID_OBJECT'.format(language.upper())
+
+global ret_invalid_att
+ret_invalid_att = 'LIB{}_INVALID_ATTRIBUTE_VALUE'.format(language.upper())
+
+global ret_level_mis
+ret_level_mis = 'LIB{}_LEVEL_MISMATCH'.format(language.upper())
+
+global ret_vers_mis
+ret_vers_mis = 'LIB{}_VERSION_MISMATCH'.format(language.upper())
+
+global ret_pkgv_mis
+ret_pkgv_mis = 'LIB{}_PKG_VERSION_MISMATCH'.format(language.upper())
+
+global ret_ns_mis
+ret_ns_mis = 'LIB{}_NAMESPACES_MISMATCH'.format(language.upper())
+
+global ret_dup_id
+ret_dup_id = 'LIB{}_DUPLICATE_OBJECT_ID'.format(language.upper())
+
+global ret_att_unex
+ret_att_unex = 'LIB{}_UNEXPECTED_ATTRIBUTE'.format(language.upper())
+
+
+def set_language(name):
+    language = name
+    global ret_success
+    ret_success = 'LIB{}_OPERATION_SUCCESS'.format(language.upper())
+
+    global ret_failed
+    ret_failed = 'LIB{}_OPERATION_FAILED'.format(language.upper())
+
+    global ret_invalid_obj
+    ret_invalid_obj = 'LIB{}_INVALID_OBJECT'.format(language.upper())
+
+    global ret_invalid_att
+    ret_invalid_att = 'LIB{}_INVALID_ATTRIBUTE_VALUE'.format(language.upper())
+
+    global ret_level_mis
+    ret_level_mis = 'LIB{}_LEVEL_MISMATCH'.format(language.upper())
+
+    global ret_vers_mis
+    ret_vers_mis = 'LIB{}_VERSION_MISMATCH'.format(language.upper())
+
+    global ret_pkgv_mis
+    ret_pkgv_mis = 'LIB{}_PKG_VERSION_MISMATCH'.format(language.upper())
+
+    global ret_ns_mis
+    ret_ns_mis = 'LIB{}_NAMESPACES_MISMATCH'.format(language.upper())
+
+    global ret_dup_id
+    ret_dup_id = 'LIB{}_DUPLICATE_OBJECT_ID'.format(language.upper())
+
+    global ret_att_unex
+    ret_att_unex = 'LIB{}_UNEXPECTED_ATTRIBUTE'.format(language.upper())
+
+

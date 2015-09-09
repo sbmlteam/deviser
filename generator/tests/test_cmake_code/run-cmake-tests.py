@@ -18,7 +18,16 @@ def generate_cmake_files(filename):
     if not os.path.exists('src'):
         os.mkdir('src')
     all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
-    all_files.write_files()
+    all_files.write_package_files()
+    os.chdir('../.')
+
+
+def generate_cmake_register_files(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
+    all_files.write_register_files()
     os.chdir('../.')
 
 
@@ -82,7 +91,7 @@ def run_register_test(name):
     print('====================================================')
     print('Testing {}:CMake register files'.format(name))
     print('====================================================')
-    generate_cmake_files(filename)
+    generate_cmake_register_files(filename)
     cmake = '{}-register.h'.format(name)
     correct_file = '.\\test-cmake\\{}'.format(cmake)
     temp_file = '.\\temp\\{}'.format(cmake)

@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class GlobalQueryFunctions():
@@ -332,8 +332,8 @@ class GlobalQueryFunctions():
         arguments = ['const Model* model']
 
         code = []
-        success = 'LIB{}_OPERATION_SUCCESS'.format(self.cap_language)
-        invalid = 'LIB{}_INVALID_OBJECT'.format(self.cap_language)
+        success = '{}'.format(global_variables.ret_success)
+        invalid = '{}'.format(global_variables.ret_invalid_obj)
         if not self.is_header:
             code = [self.create_code_block('line',
                                            ['int ret = {}'.format(success)]),
@@ -361,6 +361,7 @@ class GlobalQueryFunctions():
             #     implementation.append('ADD_FILTERED_POINTER(ret, sublist, {},'
             #                           'filter)'.format(name))
             # code.append(self.create_code_block('line', implementation))
+            ret = global_variables.ret_success
             for i in range(0, len(self.child_lo_elements)):
                 name = self.child_lo_elements[i]['memberName']
                 loname = strFunctions.\
@@ -371,8 +372,7 @@ class GlobalQueryFunctions():
                                                                       loname)]))
                 code.append(
                     self.create_code_block('if',
-                                           ['ret != LIB{}_OPERATION_SUCC'
-                                            'ESS'.format(self.cap_language),
+                                           ['ret != {}'.format(ret),
                                             'return ret']))
             code.append(self.create_code_block('line', ['return ret']))
 

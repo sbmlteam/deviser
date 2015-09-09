@@ -286,7 +286,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_line('{')
         self.up_indent()
         self.skip_line()
-        self.write_constraint_set_member('SBMLDocument')
+        self.write_constraint_set_member('{}Document'.format(self.cap_language))
         self.write_constraint_set_member('Model')
         if self.elements:
             for element in self.elements:

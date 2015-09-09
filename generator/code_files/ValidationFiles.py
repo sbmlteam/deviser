@@ -57,16 +57,18 @@ class ValidationFiles():
         self.package = lib_object['name']
         self.up_package = strFunctions.upper_first(self.package)
 
+        self.cap_lib = 'LIB{}'.format(self.cap_language)
+
         self.offset = lib_object['offset']
         self.sbml_classes = lib_object['baseElements']
         self.enums = lib_object['enums']
         self.plugins = lib_object['plugins']
         self.fullname = lib_object['fullname']
-        self.level = lib_object['sbml_level']
-        self.version = lib_object['sbml_version']
+        self.level = lib_object['base_level']
+        self.version = lib_object['base_version']
         self.pkg_version = lib_object['pkg_version']
-        self.pkg_ref = 'SBML Level~{} Package specification for {}, ' \
-                       'Version~{}'.format(self.level,
+        self.pkg_ref = '{} Level~{} Package specification for {}, ' \
+                       'Version~{}'.format(self.cap_language, self.level,
                                            self.fullname, self.pkg_version)
 
         self.error_file = None
@@ -239,7 +241,8 @@ class ValidationFiles():
                                                     rule['typecode']))
         self.error_file.up_indent()
         self.error_file.write_line('\"{}\",'.format(rule['short']))
-        self.error_file.write_line('LIBSBML_CAT_GENERAL_CONSISTENCY,')
+        self.error_file.write_line('{}_CAT_GENERAL_'
+                                   'CONSISTENCY,'.format(self.cap_lib))
         self.error_file.write_line('{},'.format(rule['lib_sev']))
         self.error_file.write_line_no_indent('\"{}\",'.format(rule['text']))
         self.error_file.write_line('{}  \"{}\"'.format(self.open_br,
