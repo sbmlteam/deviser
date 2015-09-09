@@ -1014,16 +1014,16 @@ class GeneralFunctions():
         implementation = ['unsigned char applicableValidators = '
                           'doc->getApplicableValidators()',
                           'bool id = ((applicableValidators & 0x01) ==0x01)',
-                          'bool sbml = ((applicableValidators & 0x02) ==0x02)']
+                          'bool core = ((applicableValidators & 0x02) ==0x02)']
         code.append(self.create_code_block('line', implementation))
         implementation = ['{}IdentifierConsistencyValidator '
                           'id_validator'.format(self.package),
                           '{}ConsistencyValidator '
-                          'sbml_validator'.format(self.package)]
+                          'core_validator'.format(self.package)]
         code.append(self.create_code_block('line', implementation))
         implementation = self.get_validator_block('id')
         code.append(self.create_code_block('if', implementation))
-        implementation = self.get_validator_block(self.language)
+        implementation = self.get_validator_block('core')
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line', ['return total_errors']))
 

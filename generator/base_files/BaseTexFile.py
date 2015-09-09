@@ -58,8 +58,8 @@ class BaseTexFile(BaseFile.BaseFile):
         self.offset = object_desc['offset']
         self.plugins = object_desc['plugins']
         self.enums = object_desc['enums']
-        self.level = object_desc['sbml_level']
-        self.version = object_desc['sbml_version']
+        self.level = object_desc['base_level']
+        self.version = object_desc['base_version']
         self.pkg_version = object_desc['pkg_version']
 
         self.prim_class = []

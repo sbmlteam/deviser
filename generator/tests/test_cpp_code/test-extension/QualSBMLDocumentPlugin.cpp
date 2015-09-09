@@ -156,10 +156,10 @@ QualSBMLDocumentPlugin::checkConsistency()
 
   unsigned char applicableValidators = doc->getApplicableValidators();
   bool id = ((applicableValidators & 0x01) ==0x01);
-  bool sbml = ((applicableValidators & 0x02) ==0x02);
+  bool core = ((applicableValidators & 0x02) ==0x02);
 
   QualIdentifierConsistencyValidator id_validator;
-  QualConsistencyValidator sbml_validator;
+  QualConsistencyValidator core_validator;
 
   if (id)
   {
@@ -176,14 +176,14 @@ QualSBMLDocumentPlugin::checkConsistency()
     }
   }
 
-  if (sbml)
+  if (core)
   {
-    sbml_validator.init();
-    nerrors = sbml_validator.validate(*doc);
+    core_validator.init();
+    nerrors = core_validator.validate(*doc);
     total_errors += nerrors;
     if (nerrors > 0)
     {
-      log->add(sbml_validator.getFailures());
+      log->add(core_validator.getFailures());
       if (log->getNumFailsWithSeverity(LIBSBML_SEV_ERROR) > 0)
       {
         return total_errors;

@@ -505,8 +505,8 @@ class ParseXML():
                         'enums': enums,
                         'offset': offset,
                         'fullname': fullname,
-                        'sbml_level': sbml_level,
-                        'sbml_version': sbml_version,
+                        'base_level': sbml_level,
+                        'base_version': sbml_version,
                         'pkg_version': pkg_version,
                         'required': required,
                         'num_versions': self.num_versions
