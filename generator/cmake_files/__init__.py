@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    BaseCMakeFile.py
-# @brief   base class for all interface files to be generated
+# @file    __init__.py
+# @brief   init for cmake_files directory
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,14 +37,3 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-
-import BaseFile
-
-
-class BaseInterfaceFile(BaseFile.BaseFile):
-    """Common base class for all interface files"""
-
-    def __init__(self, name):
-        BaseFile.BaseFile.__init__(self, name, 'i')
-
-    ########################################################################

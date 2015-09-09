@@ -41,10 +41,15 @@
 import BaseFile
 
 
-class BaseInterfaceFile(BaseFile.BaseFile):
-    """Common base class for all interface files"""
+class BaseCMakeFile(BaseFile.BaseFile):
+    """Common base class for all cmake files"""
 
     def __init__(self, name):
-        BaseFile.BaseFile.__init__(self, name, 'i')
+
+        BaseFile.BaseFile.__init__(self, name, 'cmake')
+
+        self.comment_start = '#################################################'
+        self.comment = ' #'
+        self.comment_end = '#'
 
     ########################################################################

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    BindingFiles.py
-# @brief   class for generating the binding files
+# @file    CMakeFiles.py
+# @brief   class for generating the cmake files
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #

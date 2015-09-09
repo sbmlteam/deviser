@@ -43,6 +43,7 @@ import os
 from parseXML import ParseXML
 from code_files import ExtensionFiles, CppFiles, ValidationFiles
 from bindings_files import BindingsFiles
+from cmake_files import CMakeFiles
 from util import global_variables
 
 directories = []
@@ -61,6 +62,16 @@ def generate_code_for(filename, overwrite=True):
         return False
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
+    generate_cmake_files(name, ob)
+
+
+def generate_cmake_files(name, ob):
+    os.chdir('{}'.format(name))
+    this_dir = os.getcwd()
+
+    bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    bind.write_files()
+    os.chdir(this_dir)
 
 
 def generate_bindings_files(name, ob):

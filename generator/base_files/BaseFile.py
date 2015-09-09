@@ -78,6 +78,9 @@ class BaseFile:
         self.library_name = 'Lib{}'.format(self.language)
         self.cap_language = self.language.upper()
 
+        self.open_br = '{'
+        self.close_br = '}'
+
     ########################################################################
 
     # Functions for setting the language

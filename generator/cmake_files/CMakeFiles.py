@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# @file    BaseCMakeFile.py
-# @brief   base class for all interface files to be generated
+# @file    CMakeFiles.py
+# @brief   class for generating the cmake files
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #
@@ -37,14 +37,61 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+import os
 
-import BaseFile
+from util import global_variables
+import PackageFile
+import RegisterFile
 
 
-class BaseInterfaceFile(BaseFile.BaseFile):
-    """Common base class for all interface files"""
+class CMakeFiles():
+    """Class for all cmake files"""
 
-    def __init__(self, name):
-        BaseFile.BaseFile.__init__(self, name, 'i')
+    def __init__(self, pkg_object, this_dir, verbose=False):
+        self.verbose = verbose
+        self.this_dir = this_dir
+
+        # # members from object
+        self.package = pkg_object['name']
+
+        self.language = global_variables.language
+        self.elements = pkg_object['sbmlElements']
+        self.plugins = pkg_object['plugins']
+
+    #########################################################################
+
+    def write_package_files(self):
+        name = '{}-package'.format(self.package)
+        ext = PackageFile.PackageFile(name, self.package, False)
+        if self.verbose:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+        os.chdir('src')
+        ext = PackageFile.PackageFile(name, self.package, True)
+        if self.verbose:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+        os.chdir(self.this_dir)
+
+    def write_register_files(self):
+        name = '{}-register'.format(self.package)
+        ext = RegisterFile.RegisterFile(name, self.package, False)
+        if self.verbose:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
+        ext = RegisterFile.RegisterFile(name, self.package, True)
+        if self.verbose:
+            print('Writing file {}'.format(ext.fileout.filename))
+        ext.write_file()
+        ext.close_file()
 
     ########################################################################
+
+    def write_files(self):
+        self.write_package_files()
+        os.chdir('src/{}/packages'.format(self.language))
+        self.write_register_files()
+        os.chdir(self.this_dir)
