@@ -55,7 +55,7 @@ global prefix
 prefix = 'SBML'
 global library_name
 library_name = 'Libsbml'
-global ignore_package
+global is_package
 is_package = True
 
 
