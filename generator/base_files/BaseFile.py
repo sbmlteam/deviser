@@ -209,7 +209,7 @@ class BaseFile:
             self.file_out.write('{0}{1}\n'.format(tabs, lines[i]))
             tabs += '  '
 
-    # functions for writing lines indenting each new line
+    # functions for writing lines without indenting each new line
     def write_line_no_indent(self, line):
         tabs = ''
         for i in range(0, int(self.num_tabs)):

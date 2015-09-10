@@ -124,3 +124,7 @@ class BaseTexFile(BaseFile.BaseFile):
     def write_to_do(self, text):
         self.write_line('\\TODO{}{}{}'.format(self.start_b, text, self.end_b))
         self.skip_line()
+
+    # need to overwrite the write_line function to not add indents
+    def write_line(self, line, space=0):
+        self.write_line_no_indent(line)
