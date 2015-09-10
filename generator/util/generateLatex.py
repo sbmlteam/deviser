@@ -40,11 +40,12 @@
 import sys
 
 import spec_files
-from parseXML import createPackageFromXml
+from parseXML import ParseXML
 
 
-def generateLatexFor(file):
-    ob = createPackageFromXml.parse_deviser_xml(file)
+def generateLatexFor(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
     ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
     ff.write_file()
     ff.close_file()
