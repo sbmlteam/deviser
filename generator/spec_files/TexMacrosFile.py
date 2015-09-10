@@ -44,7 +44,6 @@ from base_files import BaseTexFile
 from util import strFunctions
 
 
-
 class TexMacrosFile(BaseTexFile.BaseTexFile):
     """Class for the definition of class name macros in LaTeX"""
 
@@ -57,6 +56,12 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
 
         # self.full_pkg_command = '\\{}Package'.format(self.fulltexname)
         # self.brief_pkg_command = '\\{}'.format(self.upper_package)
+
+        self.core_classes = ['Model', 'Compartment', 'Species', 'Parameter',
+                             'Rule', 'InitialAssignment', 'Reaction', 'Event',
+                             'Constraint', 'SpeciesReference',
+                             'EventAssignment',
+                             'KineticLaw', 'LocalParameter']
 
     ########################################################################
 
@@ -108,12 +113,13 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
 
     # Write commands for each plugin
     def write_macro_for_plugin(self, plugin):
-        self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
-                        '{0}{3}{2}{2}'
-                        .format(self.start_b, plugin['sbase'],
-                                self.end_b,
-                                strFunctions.make_class(plugin['sbase']),
-                                plugin['sbase']))
+        if plugin['sbase'] not in self.core_classes:
+            self.write_line('\\newcommand{0}\\{1}{2}{0}\\defRef{0}{4}{2}'
+                            '{0}{3}{2}{2}'
+                            .format(self.start_b, plugin['sbase'],
+                                    self.end_b,
+                                    strFunctions.make_class(plugin['sbase']),
+                                    plugin['sbase']))
 
     # Write general commands
     def write_general_commands(self):
