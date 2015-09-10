@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from cpp_functions import *
-from util import query, strFunctions
+from util import query, strFunctions, global_variables
 
 
 class CppCodeFile(BaseCppFile.BaseCppFile):
@@ -100,7 +100,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         else:
             lo_name = ''
         if self.language == 'sbml':
-            if self.package:
+            if global_variables.is_package:
                 folder = self.language if not self.is_plugin else 'extension'
                 self.write_line_verbatim('#include <{}/packages/{}/{}/{}'
                                          '.h>'.format(self.language,

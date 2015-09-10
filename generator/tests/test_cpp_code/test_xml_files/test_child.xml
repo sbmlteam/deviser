@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <package name="test" fullname="testChild" number="100" offset="10000000" version="1" required="false">
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="MySEDClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SEDBase" abstract="false" elementName="Fred">
+        <element name="MySEDClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="Fred">
           <attributes>
-            <attribute name="id" required="false" type="Sid" abstract="false" />
+            <attribute name="id" required="false" type="Sid" abstract="false"/>
           </attributes>
         </element>
         <element name="MySecondClass" typeCode="MY_SECOND_TYPE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="third" required="false" type="lo_element" element="MyThirdClass" abstract="false" />
+            <attribute name="third" required="false" type="lo_element" element="MyThirdClass" abstract="false"/>
           </attributes>
         </element>
         <element name="MyThirdClass" typeCode="MY_THIRD_TYPE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="false" type="string" abstract="false" />
+            <attribute name="id" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
       </elements>

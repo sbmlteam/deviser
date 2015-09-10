@@ -519,7 +519,7 @@ class GeneralFunctions():
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
                 line = 'writeMathML(getMath(), stream, get{}' \
-                       'Namespaces())'.format(self.cap_language)
+                       'Namespaces())'.format(global_variables.prefix)
             else:
                 line = '{}->write(stream)'.format(att['memberName'])
             implementation = ['isSet{}() == '
@@ -642,19 +642,20 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Sets the parent {}Document'.format(self.cap_language)
+        title_line = 'Sets the parent ' \
+                     '{}'.format(global_variables.document_class)
         params = []
         return_lines = []
         additional = []
 
         # create the function declaration
-        function = 'set{}Document'.format(self.cap_language)
+        function = 'set{}'.format(global_variables.document_class)
         return_type = 'void'
-        arguments = ['{}Document* d'.format(self.cap_language)]
+        arguments = ['{}* d'.format(global_variables.document_class)]
 
         # create the function implementation
-        line = '{}::set{}Document(d)'.format(self.base_class,
-                                             self.cap_language)
+        line = '{}::set{}(d)'.format(self.base_class,
+                                     global_variables.document_class)
         implementation = [line]
         code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
@@ -1006,8 +1007,10 @@ class GeneralFunctions():
         implementation = ['unsigned int nerrors = 0',
                           'unsigned int total_errors = 0']
         code = [self.create_code_block('line', implementation)]
-        implementation = ['{0}Document* doc = static_cast<{0}Document*>(this->'
-                          'getParent{0}Object())'.format(self.cap_language),
+        implementation = ['{0}* doc = static_cast<{0}*>(this->'
+                          'getParent{1}'
+                          'Object())'.format(global_variables.document_class,
+                                             self.cap_language),
                           '{}ErrorLog* log = doc->getError'
                           'Log()'.format(self.cap_language)]
         code.append(self.create_code_block('line', implementation))
@@ -1069,8 +1072,9 @@ class GeneralFunctions():
         return_type = 'void'
 
         # create the function implementation
-        implementation = ['get{0}Document() != NULL && get{0}Document()->'
-                          'getLevel() < 3'.format(self.cap_language),
+        implementation = ['get{0}() != NULL && get{0}()->'
+                          'getLevel() < '
+                          '3'.format(global_variables.document_class),
                           'return']
         code = [dict({'code_type': 'if', 'code': implementation})]
         implementation = ['{}ErrorLog* log = getErrorLog'

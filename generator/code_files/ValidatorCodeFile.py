@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 from base_files import BaseCppFile
-from util import strFunctions
+from util import strFunctions, global_variables
 from cpp_functions import *
 
 
@@ -286,7 +286,8 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_line('{')
         self.up_indent()
         self.skip_line()
-        self.write_constraint_set_member('{}Document'.format(self.cap_language))
+        self.write_constraint_set_member(
+            '{}'.format(global_variables.document_class))
         self.write_constraint_set_member('Model')
         if self.elements:
             for element in self.elements:

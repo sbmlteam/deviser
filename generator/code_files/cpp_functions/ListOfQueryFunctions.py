@@ -733,7 +733,7 @@ class ListOfQueryFunctions():
             else:
                 implementation.append('matchesRequired{}NamespacesForAddition'
                                       '(static_cast<const {}*>({})) == '
-                                      'false'.format(self.cap_language,
+                                      'false'.format(global_variables.prefix,
                                                      self.std_base,
                                                      self.abbrev_child))
                 implementation.append('return '
@@ -822,8 +822,9 @@ class ListOfQueryFunctions():
                                                      self.abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}Namespaces())'.format(pack_up, pack_low,
-                                                          self.cap_language),
+                              'get{}Namespaces'
+                              '())'.format(pack_up, pack_low,
+                                           global_variables.prefix),
                               '{} = new {}({}ns)'.format(self.abbrev_child,
                                                          self.child_name,
                                                          pack_low),
@@ -848,8 +849,9 @@ class ListOfQueryFunctions():
                                                      abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}Namespaces())'.format(pack_up, pack_low,
-                                                          self.cap_language),
+                              'get{}'
+                              'Namespaces())'.format(pack_up, pack_low,
+                                                     global_variables.prefix),
                               '{} = new {}({}ns)'.format(abbrev_child,
                                                          child,
                                                          pack_low),

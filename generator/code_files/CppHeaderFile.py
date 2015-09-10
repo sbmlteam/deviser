@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from cpp_functions import *
-from util import query
+from util import query, global_variables
 
 
 class CppHeaderFile(BaseCppFile.BaseCppFile):
@@ -125,7 +125,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if not self.is_plugin:
             self.write_line_verbatim('#include <{0}/common/{0}fwd.'
                                      'h>'.format(self.language))
-            if self.package:
+            if global_variables.is_package:
                 self.write_line_verbatim('#include <{0}/packages/{1}/common/'
                                          '{1}fwd.'
                                          'h>'.format(self.language,
@@ -150,7 +150,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                   self.package.lower(),
                                                   self.baseClass))
         need_extension = False
-        if self.package:
+        if global_variables.is_package:
             if self.is_doc_plugin:
                 need_extension = True
             elif not self.is_plugin:

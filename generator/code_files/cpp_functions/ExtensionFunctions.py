@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class ExtensionFunctions():
@@ -200,7 +200,7 @@ class ExtensionFunctions():
         # create the function declaration
         arguments = ['const std::string& uri']
         function = 'get{}ExtensionNamespaces'.format(self.cap_language)
-        return_type = '{}Namespaces*'.format(self.cap_language)
+        return_type = '{}Namespaces*'.format(global_variables.prefix)
 
         # create the function implementation
         code = [dict({'code_type': 'line',

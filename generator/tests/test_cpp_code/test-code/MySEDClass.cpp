@@ -3,7 +3,7 @@
  * @brief: Implementation of MySEDClass.
  * @author: SBMLTeam
  */
-#include <sedml/SEDBase.h>
+#include <sedml/SedBase.h>
 
 
 using namespace std;
@@ -19,28 +19,25 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MySEDClass using the given SEDML @p level, @ p version and
- * package version values.
+ * Creates a new MySEDClass using the given SEDML @p level and @ p version
+ * values.
  */
-MySEDClass::MySEDClass(unsigned int level,
-                       unsigned int version,
-                       unsigned int pkgVersion)
-  : SEDBase(level, version)
+MySEDClass::MySEDClass(unsigned int level, unsigned int version)
+  : SedBase(level, version)
   , mId ("")
 {
-  setSEDMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new MySEDClass using the given TestPkgNamespaces object.
+ * Creates a new MySEDClass using the given SedNamespaces object @p sedmlns.
  */
-MySEDClass::MySEDClass(TestPkgNamespaces *testns)
-  : SEDBase(testns)
+MySEDClass::MySEDClass(SedNamespaces *sedmlns)
+  : SedBase(sedmlns)
   , mId ("")
 {
-  setElementNamespace(testns->getURI());
-  loadPlugins(testns);
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
@@ -48,7 +45,7 @@ MySEDClass::MySEDClass(TestPkgNamespaces *testns)
  * Copy constructor for MySEDClass.
  */
 MySEDClass::MySEDClass(const MySEDClass& orig)
-  : SEDBase( orig )
+  : SedBase( orig )
   , mId ( orig.mId )
 {
 }
@@ -62,7 +59,7 @@ MySEDClass::operator=(const MySEDClass& rhs)
 {
   if (&rhs != this)
   {
-    SEDBase::operator=(rhs);
+    SedBase::operator=(rhs);
     mId = rhs.mId;
   }
 
@@ -182,9 +179,9 @@ MySEDClass::hasRequiredAttributes() const
 void
 MySEDClass::writeElements(XMLOutputStream& stream) const
 {
-  SEDBase::writeElements(stream);
+  SedBase::writeElements(stream);
 
-  SEDBase::writeExtensionElements(stream);
+  SedBase::writeExtensionElements(stream);
 }
 
 /** @endcond */
@@ -209,12 +206,12 @@ MySEDClass::accept(SEDMLVisitor& v) const
 /** @cond doxygenLibsedmlInternal */
 
 /*
- * Sets the parent SEDMLDocument
+ * Sets the parent SedDocument
  */
 void
-MySEDClass::setSEDMLDocument(SEDMLDocument* d)
+MySEDClass::setSedDocument(SedDocument* d)
 {
-  SEDBase::setSEDMLDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 /** @endcond */
@@ -231,7 +228,7 @@ MySEDClass::enablePackageInternal(const std::string& pkgURI,
                                   const std::string& pkgPrefix,
                                   bool flag)
 {
-  SEDBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
+  SedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */
@@ -246,7 +243,7 @@ MySEDClass::enablePackageInternal(const std::string& pkgURI,
 void
 MySEDClass::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-  SEDBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
   attributes.add("id");
 }
@@ -271,7 +268,7 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
   bool assigned = false;
   SEDMLErrorLog* log = getErrorLog();
 
-  SEDBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
   numErrs = log->getNumErrors();
 
   for (int n = numErrs-1; n >= 0; n--)
@@ -324,14 +321,14 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
 void
 MySEDClass::writeAttributes(XMLOutputStream& stream) const
 {
-  SEDBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
   if (isSetId() == true)
   {
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  SEDBase::writeExtensionAttributes(stream);
+  SedBase::writeExtensionAttributes(stream);
 }
 
 /** @endcond */
@@ -343,16 +340,14 @@ MySEDClass::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new MySEDClass_t using the given SEDML @p level, @ p version and
- * package version values.
+ * Creates a new MySEDClass_t using the given SEDML @p level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 MySEDClass_t *
-MySEDClass_create(unsigned int level,
-                  unsigned int version,
-                  unsigned int pkgVersion)
+MySEDClass_create(unsigned int level, unsigned int version)
 {
-  return new MySEDClass(level, version, pkgVersion);
+  return new MySEDClass(level, version);
 }
 
 

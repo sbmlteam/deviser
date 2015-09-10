@@ -180,8 +180,8 @@ class ProtectedFunctions():
                     code.append(self.create_code_block('line', line))
                 if len(self.child_elements) != self.num_non_std_children:
                     line = ['{}_CREATE_NS({}, '
-                            'get{}Namespaces())'.format(upkg, ns,
-                                                        self.cap_language)]
+                            'get{}Namespaces'
+                            '())'.format(upkg, ns, global_variables.prefix)]
                     code.append(self.create_code_block('line', line))
                 if self.is_plugin:
                     class_name = strFunctions.get_class_from_plugin(
@@ -279,8 +279,8 @@ class ProtectedFunctions():
                           'stream.peek().getName()',
                           '{}* object = NULL'.format(self.std_base),
                           '{}_CREATE_NS({}, '
-                          'get{}Namespaces())'.format(upkg, ns,
-                                                      self.cap_language)]
+                          'get{}Namespaces'
+                          '())'.format(upkg, ns, global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -302,8 +302,8 @@ class ProtectedFunctions():
                           'stream.peek().getName()',
                           '{}* object = NULL'.format(self.std_base),
                           '{}_CREATE_NS({}, '
-                          'get{}Namespaces())'.format(upkg, ns,
-                                                      self.cap_language)]
+                          'get{}Namespaces'
+                          '())'.format(upkg, ns, global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -364,8 +364,8 @@ class ProtectedFunctions():
         name = element['memberName']
         implementation = self.get_lo_block(element, error_line)
         lines = ['targetPrefix.empty()',
-                 '{}.get{}Document()->enableDefaultNS(mURI, '
-                 'true)'.format(name, self.cap_language)]
+                 '{}.get{}()->enableDefaultNS(mURI, '
+                 'true)'.format(name, global_variables.document_class)]
         second_if = self.create_code_block('if', lines)
         implementation.append(second_if)
         return implementation
@@ -635,10 +635,10 @@ class ProtectedFunctions():
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
                 line = ['stream.get{}Namespaces() == '
-                        'NULL'.format(self.cap_language),
+                        'NULL'.format(global_variables.prefix),
                         'stream.set{0}Namespaces(new '
                         '{0}Namespaces(getLevel(), '
-                        'getVersion()))'.format(self.cap_language)]
+                        'getVersion()))'.format(global_variables.prefix)]
                 nested_if = self.create_code_block('if', line)
                 implementation = ['name == \"math\"',
                                   'const XMLToken elem = stream.peek()',

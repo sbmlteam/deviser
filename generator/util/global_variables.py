@@ -49,68 +49,92 @@ global baseClass
 baseClass = 'SBase'
 global std_base
 std_base = 'SBase'
+global document_class
+document_class = 'SBMLDocument'
+global prefix
+prefix = 'SBML'
+global library_name
+library_name = 'Libsbml'
+global ignore_package
+is_package = True
+
 
 global ret_success
-ret_success = 'LIB{}_OPERATION_SUCCESS'.format(language.upper())
+ret_success = '{}_OPERATION_SUCCESS'.format(library_name.upper())
 
 global ret_failed
-ret_failed = 'LIB{}_OPERATION_FAILED'.format(language.upper())
+ret_failed = '{}_OPERATION_FAILED'.format(library_name.upper())
 
 global ret_invalid_obj
-ret_invalid_obj = 'LIB{}_INVALID_OBJECT'.format(language.upper())
+ret_invalid_obj = '{}_INVALID_OBJECT'.format(library_name.upper())
 
 global ret_invalid_att
-ret_invalid_att = 'LIB{}_INVALID_ATTRIBUTE_VALUE'.format(language.upper())
+ret_invalid_att = '{}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
 global ret_level_mis
-ret_level_mis = 'LIB{}_LEVEL_MISMATCH'.format(language.upper())
+ret_level_mis = '{}_LEVEL_MISMATCH'.format(library_name.upper())
 
 global ret_vers_mis
-ret_vers_mis = 'LIB{}_VERSION_MISMATCH'.format(language.upper())
+ret_vers_mis = '{}_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_pkgv_mis
-ret_pkgv_mis = 'LIB{}_PKG_VERSION_MISMATCH'.format(language.upper())
+ret_pkgv_mis = '{}_PKG_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_ns_mis
-ret_ns_mis = 'LIB{}_NAMESPACES_MISMATCH'.format(language.upper())
+ret_ns_mis = '{}_NAMESPACES_MISMATCH'.format(library_name.upper())
 
 global ret_dup_id
-ret_dup_id = 'LIB{}_DUPLICATE_OBJECT_ID'.format(language.upper())
+ret_dup_id = '{}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
 
 global ret_att_unex
-ret_att_unex = 'LIB{}_UNEXPECTED_ATTRIBUTE'.format(language.upper())
+ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 
-def set_language(name):
-    language = name
+def set_globals(lang, base, doc, prfix, lib, is_pack):
+    global language
+    language = lang
+
+    global baseClass
+    baseClass = base
+    global std_base
+    std_base = base
+    global document_class
+    document_class = doc
+    global prefix
+    prefix = prfix
+    global library_name
+    library_name = lib
+    global is_package
+    is_package = is_pack
+
     global ret_success
-    ret_success = 'LIB{}_OPERATION_SUCCESS'.format(language.upper())
+    ret_success = '{}_OPERATION_SUCCESS'.format(library_name.upper())
 
     global ret_failed
-    ret_failed = 'LIB{}_OPERATION_FAILED'.format(language.upper())
+    ret_failed = '{}_OPERATION_FAILED'.format(library_name.upper())
 
     global ret_invalid_obj
-    ret_invalid_obj = 'LIB{}_INVALID_OBJECT'.format(language.upper())
+    ret_invalid_obj = '{}_INVALID_OBJECT'.format(library_name.upper())
 
     global ret_invalid_att
-    ret_invalid_att = 'LIB{}_INVALID_ATTRIBUTE_VALUE'.format(language.upper())
+    ret_invalid_att = '{}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
     global ret_level_mis
-    ret_level_mis = 'LIB{}_LEVEL_MISMATCH'.format(language.upper())
+    ret_level_mis = '{}_LEVEL_MISMATCH'.format(library_name.upper())
 
     global ret_vers_mis
-    ret_vers_mis = 'LIB{}_VERSION_MISMATCH'.format(language.upper())
+    ret_vers_mis = '{}_VERSION_MISMATCH'.format(library_name.upper())
 
     global ret_pkgv_mis
-    ret_pkgv_mis = 'LIB{}_PKG_VERSION_MISMATCH'.format(language.upper())
+    ret_pkgv_mis = '{}_PKG_VERSION_MISMATCH'.format(library_name.upper())
 
     global ret_ns_mis
-    ret_ns_mis = 'LIB{}_NAMESPACES_MISMATCH'.format(language.upper())
+    ret_ns_mis = '{}_NAMESPACES_MISMATCH'.format(library_name.upper())
 
     global ret_dup_id
-    ret_dup_id = 'LIB{}_DUPLICATE_OBJECT_ID'.format(language.upper())
+    ret_dup_id = '{}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
 
     global ret_att_unex
-    ret_att_unex = 'LIB{}_UNEXPECTED_ATTRIBUTE'.format(language.upper())
+    ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 

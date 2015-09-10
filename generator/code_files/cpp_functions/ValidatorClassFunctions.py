@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class ValidatorClassFunctions():
@@ -224,12 +224,12 @@ class ValidatorClassFunctions():
         # create comment parts
         if object_type == 'doc':
             title_line = 'Validates the given ' \
-                         '{}Document'.format(self.cap_language)
-            params = ['@param d the {}Document object to be '
-                      'validated.'.format(self.cap_language)]
+                         '{}'.format(global_variables.document_class)
+            params = ['@param d the {} object to be '
+                      'validated.'.format(global_variables.document_class)]
         else:
-            title_line = 'Validates the {}Document located at the given ' \
-                         'filename'.format(self.cap_language)
+            title_line = 'Validates the {} located at the given ' \
+                         'filename'.format(global_variables.document_class)
             params = ['@param filename, the path to the file to be read '
                       'and validated']
         return_lines = [' @return the number of validation failures that '
@@ -241,7 +241,7 @@ class ValidatorClassFunctions():
         function = 'validate'
         return_type = 'unsigned int'
         if object_type == 'doc':
-            arguments = ['const {}Document& d'.format(self.cap_language)]
+            arguments = ['const {}& d'.format(global_variables.document_class)]
         else:
             arguments = ['const std::string& filename']
         code = []
@@ -266,8 +266,9 @@ class ValidatorClassFunctions():
                                                 '(mFailures.size())']))
         elif not self.is_header and object_type != 'doc':
             line = ['{}Reader  reader'.format(self.cap_language),
-                    '{0}Document* d = reader.read{0}'
-                    '(filename)'.format(self.cap_language)]
+                    '{}* d = reader.read{}'
+                    '(filename)'.format(global_variables.document_class,
+                                        self.cap_language)]
             code = [self.create_code_block('line', line),
                     self.create_code_block('blank', []),
                     self.create_code_block('line',
@@ -458,7 +459,7 @@ class ValidatorClassFunctions():
         code = [self.create_code_block('line', line)]
         line = 'ptrMap.insert(pair<VConstraint*, bool>(c, true))'
         code.append(self.create_code_block('line', [line]))
-        name = '{}Document'.format(self.cap_language)
+        name = '{}'.format(global_variables.document_class)
         block = self.create_if_add_constraint_block(name)
         code.append(block)
         block = self.create_if_add_constraint_block('Model')

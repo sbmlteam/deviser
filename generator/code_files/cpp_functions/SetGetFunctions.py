@@ -942,8 +942,9 @@ class SetGetFunctions():
                               'delete {}'.format(member)]
             code = [self.create_code_block('if', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}Namespaces())'.format(up_pack, low_pack,
-                                                          self.cap_language),
+                              'get{}Namespaces'
+                              '())'.format(up_pack, low_pack,
+                                           global_variables.prefix),
                               '{} = new {}'
                               '({}ns)'.format(member, att_name, low_pack)]
             code.append(self.create_code_block('line', implementation))
@@ -952,8 +953,8 @@ class SetGetFunctions():
                                                             attribute['name'])]
                 code.append(self.create_code_block('line', line))
             if self.is_plugin:
-                line = ['{0}->set{1}Document(this->get{1}'
-                        'Document())'.format(member, self.language.upper())]
+                line = ['{0}->set{1}(this->get{1}'
+                        '())'.format(member, global_variables.document_class)]
                 code.append(self.create_code_block('line', line))
             code.append(self.create_code_block('line',
                                                ['delete {}'
@@ -1025,8 +1026,9 @@ class SetGetFunctions():
                               'delete {}'.format(member)]
             code = [self.create_code_block('if', implementation)]
             implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}Namespaces())'.format(up_pack, low_pack,
-                                                          self.cap_language),
+                              'get{}Namespaces'
+                              '())'.format(up_pack, low_pack,
+                                           global_variables.prefix),
                               '{} = new {}'
                               '({}ns)'.format(member, att_name, low_pack)]
             code.append(self.create_code_block('line', implementation))

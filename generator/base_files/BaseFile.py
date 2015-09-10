@@ -75,7 +75,7 @@ class BaseFile:
 
         # members that might get overridden if creating another library
         self.language = global_variables.language
-        self.library_name = 'Lib{}'.format(self.language)
+        self.library_name = global_variables.library_name
         self.cap_language = self.language.upper()
 
         self.open_br = '{'

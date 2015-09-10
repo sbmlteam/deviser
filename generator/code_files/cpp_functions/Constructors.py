@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, query
+from util import strFunctions, query, global_variables
 
 
 class Constructors():
@@ -95,7 +95,7 @@ class Constructors():
         # create doc string header
         title_line = 'Creates a new {} using the given {} @p level' \
             .format(ob_name, self.cap_language)
-        if self.package:
+        if global_variables.is_package:
             title_line += ', @ p version and package version values.'
         else:
             title_line += ' and @ p version values.'
@@ -106,7 +106,7 @@ class Constructors():
                   '@param version an unsigned int, the {} Version to '
                   'assign to this {}'.format(self.cap_language,
                                              self.object_name)]
-        if self.package:
+        if global_variables.is_package:
             params.append('@param pkgVersion an unsigned int, the {} {} '
                           'Version to assign to this {}'
                           .format(self.cap_language, self.package,
@@ -117,7 +117,8 @@ class Constructors():
                         'Thrown if the given @p level and @p version '
                         'combination, or this kind of {0} object, are either '
                         'invalid or mismatched with respect to the parent '
-                        '{0}Document object.'.format(self.cap_language),
+                        '{1} object.'.format(self.cap_language,
+                                             global_variables.document_class),
                         '@copydetails doc_note_setting_lv']
         additional = ''
 
@@ -130,7 +131,7 @@ class Constructors():
             return_type = '{0} *'.format(self.object_name)
 
         arguments_no_defaults = []
-        if self.package:
+        if global_variables.is_package:
             arguments = [
                 'unsigned int level = '
                 '{}Extension::getDefaultLevel()'.format(self.package),
@@ -144,14 +145,16 @@ class Constructors():
         else:
             arguments = ['unsigned int level',
                          'unsigned int version']
+            arguments_no_defaults = ['unsigned int level',
+                                     'unsigned int version']
 
         # create the function implementation
         constructor_args = self.write_constructor_args(None)
-        if self.package:
+        if global_variables.is_package:
             if self.is_cpp_api:
                 implementation = ['set{}NamespacesAndOwn(new {}PkgNamespaces'
                                   '(level, version, '
-                                  'pkgVersion))'.format(self.cap_language,
+                                  'pkgVersion))'.format(global_variables.prefix,
                                                         self.package)]
                 if self.has_children:
                     implementation.append('connectToChild()')
@@ -164,9 +167,9 @@ class Constructors():
                                   'pkgVersion)'.format(name)]
         else:
             if self.is_cpp_api:
-                implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
-                                  '(level, '
-                                  'version))'.format(self.cap_language)]
+                implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces('
+                                  'level, '
+                                  'version))'.format(global_variables.prefix)]
             else:
                 implementation = ['return new {}(level, '
                                   'version)'.format(self.class_name)]
@@ -205,27 +208,28 @@ class Constructors():
         # create doc string header
         title_line = 'Creates a new {0} using the given'\
             .format(ob_name)
-        if self.package:
+        if global_variables.is_package:
             title_line = title_line + ' {0}PkgNamespaces object.' \
                 .format(self.package)
         else:
             title_line = title_line + ' {0}Namespaces object @p {1}ns.' \
-                .format(self.cap_language, self.language)
+                .format(global_variables.prefix, self.language)
 
         params = []
-        if self.package:
+        if global_variables.is_package:
             params.append('@param {0}ns the {1}PkgNamespaces object'
                           .format(self.package.lower(), self.package))
         else:
             params.append('@param {0}ns the {1}Namespaces object'
-                          .format(self.language, self.cap_language))
+                          .format(self.language, global_variables.prefix))
 
         return_lines = ['@throws {}Constructor'
                         'Exception'.format(self.cap_language),
                         'Thrown if the given @p level and @p version '
-                        'combination, or this kind of {0} object, are either '
+                        'combination, or this kind of {} object, are either '
                         'invalid or mismatched with respect to the parent '
-                        '{0}Document object.'.format(self.cap_language),
+                        '{} object.'.format(self.cap_language,
+                                            global_variables.document_class),
                         '@copydetails doc_note_setting_lv']
         additional = ''
 
@@ -239,7 +243,7 @@ class Constructors():
 
         arguments = []
 
-        if self.package:
+        if global_variables.is_package:
             if self.is_cpp_api:
                 arguments.append('{0}PkgNamespaces *{1}ns'
                                  .format(self.package, self.package.lower()))
@@ -250,15 +254,17 @@ class Constructors():
         else:
             if self.is_cpp_api:
                 arguments.append('{0}Namespaces *{1}ns'
-                                 .format(self.cap_language, self.language))
+                                 .format(global_variables.prefix,
+                                         self.language))
             else:
                 arguments.append('{0}Namespaces_t *{1}ns'
-                                 .format(self.cap_language, self.language))
+                                 .format(global_variables.prefix,
+                                         self.language))
             ns = '{}ns'.format(self.language)
 
         # create the function implementation
         constructor_args = self.write_constructor_args(ns)
-        if self.package:
+        if global_variables.is_package:
             implementation = ['setElementNamespace({}'
                               'ns->getURI())'.format(self.package.lower())]
             if self.has_children:
@@ -267,8 +273,9 @@ class Constructors():
                 implementation.append('loadPlugins({}ns)'
                                       .format(self.package.lower()))
         else:
-            implementation = ['set{}NamespacesAndOwn(new {}Namespaces'
-                              '(level, version))'.format(self.cap_language)]
+            implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces'
+                              '(level, '
+                              'version))'.format(global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,

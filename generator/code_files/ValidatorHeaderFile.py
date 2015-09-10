@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 from base_files import BaseCppFile
-from util import strFunctions
+from util import strFunctions, global_variables
 from cpp_functions import *
 
 
@@ -118,7 +118,8 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line_verbatim('class VConstraint;')
         self.write_line_verbatim('struct {}Validator'
                                  'Constraints;'.format(self.up_package))
-        self.write_line_verbatim('class {}Document;'.format(self.cap_language))
+        self.write_line_verbatim('class {}'
+                                 ';'.format(global_variables.document_class))
 
     def write_members(self):
         self.write_line('{0}ValidatorConstraints* m{0}'

@@ -11,7 +11,6 @@
 
 #include <sedml/common/extern.h>
 #include <sedml/common/sedmlfwd.h>
-#include <sedml/packages/test/common/testfwd.h>
 
 
 #ifdef __cplusplus
@@ -20,14 +19,13 @@
 #include <string>
 
 
-#include <sedml/SEDBase.h>
-#include <sedml/packages/test/extension/TestExtension.h>
+#include <sedml/SedBase.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSEDML_EXTERN MySEDClass : public SEDBase
+class LIBSEDML_EXTERN MySEDClass : public SedBase
 {
 protected:
 
@@ -40,41 +38,35 @@ protected:
 public:
 
   /**
-   * Creates a new MySEDClass using the given SEDML @p level, @ p version and
-   * package version values.
+   * Creates a new MySEDClass using the given SEDML @p level and @ p version
+   * values.
    *
    * @param level an unsigned int, the SEDML Level to assign to this MySEDClass
    *
    * @param version an unsigned int, the SEDML Version to assign to this
    * MySEDClass
    *
-   * @param pkgVersion an unsigned int, the SEDML Test Version to assign to
-   * this MySEDClass
-   *
    * @throws SEDMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
    * SEDML object, are either invalid or mismatched with respect to the parent
-   * SEDMLDocument object.
+   * SedDocument object.
    * @copydetails doc_note_setting_lv
    */
-  MySEDClass(unsigned int level = TestExtension::getDefaultLevel(),
-             unsigned int version = TestExtension::getDefaultVersion(),
-             unsigned int pkgVersion =
-               TestExtension::getDefaultPackageVersion());
+  MySEDClass(unsigned int level, unsigned int version);
 
 
   /**
-   * Creates a new MySEDClass using the given TestPkgNamespaces object.
+   * Creates a new MySEDClass using the given SedNamespaces object @p sedmlns.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param sedmlns the SedNamespaces object
    *
    * @throws SEDMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
    * SEDML object, are either invalid or mismatched with respect to the parent
-   * SEDMLDocument object.
+   * SedDocument object.
    * @copydetails doc_note_setting_lv
    */
-  MySEDClass(TestPkgNamespaces *testns);
+  MySEDClass(SedNamespaces *sedmlns);
 
 
   /**
@@ -213,9 +205,9 @@ public:
   /** @cond doxygenLibsedmlInternal */
 
   /**
-   * Sets the parent SEDMLDocument
+   * Sets the parent SedDocument
    */
-  virtual void setSEDMLDocument(SEDMLDocument* d);
+  virtual void setSedDocument(SedDocument* d);
 
   /** @endcond */
 
@@ -297,31 +289,25 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new MySEDClass_t using the given SEDML @p level, @ p version and
- * package version values.
+ * Creates a new MySEDClass_t using the given SEDML @p level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this MySEDClass_t
  *
  * @param version an unsigned int, the SEDML Version to assign to this
  * MySEDClass_t
  *
- * @param pkgVersion an unsigned int, the SEDML Test Version to assign to this
- * MySEDClass_t
- *
  * @throws SEDMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
  * SEDML object, are either invalid or mismatched with respect to the parent
- * SEDMLDocument object.
+ * SedDocument object.
  * @copydetails doc_note_setting_lv
  *
  * @memberof MySEDClass_t
  */
 LIBSEDML_EXTERN
 MySEDClass_t *
-MySEDClass_create(unsigned int level = TestExtension::getDefaultLevel(),
-                  unsigned int version = TestExtension::getDefaultVersion(),
-                  unsigned int pkgVersion =
-                    TestExtension::getDefaultPackageVersion());
+MySEDClass_create(unsigned int level, unsigned int version);
 
 
 /**
