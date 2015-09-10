@@ -94,7 +94,12 @@ class DowncastPluginsFile():
                                                             name))
             line.append('return SWIGTYPE_p_{}{}Plugin'.format(self.up_package,
                                                               plugin['sbase']))
-        code = self.create_code_block('else_if', line)
+        if len(self.plugins) == 0:
+            code = self.create_code_block('blank', [])
+        elif len(self.plugins) == 1:
+            code = self.create_code_block('if', line)
+        else:
+            code = self.create_code_block('else_if', line)
         return code
 
     ########################################################################

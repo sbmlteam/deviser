@@ -338,6 +338,11 @@ def main():
     ext = 'h'
     fail += run_swig_test(name, test_case, ext)
 
+    name = 'qual'
+    test_case = 'javascript'
+    ext = 'cpp'
+    fail += run_plugin_test(name, test_case, ext)
+
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('Check {} fails'.format(fail))
