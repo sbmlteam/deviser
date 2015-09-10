@@ -338,8 +338,10 @@ class DowncastPackagesFile():
 
     def create_list_of_block(self, b_type=''):
         line = []
+        count = 0
         for element in self.elements:
             if element['hasListOf']:
+                count += 1
                 up_loname = strFunctions.list_of_name(element['name'])
                 loname = strFunctions.lower_first(up_loname)
                 if len(line) > 0:
@@ -352,7 +354,12 @@ class DowncastPackagesFile():
                     line.append('return new {}(cPtr, owner)'.format(up_loname))
                 else:
                     line.append('return SWIGTYPE_p_{}'.format(up_loname))
-        code = self.create_code_block('else_if', line)
+        if count == 0:
+            code = self.create_code_block('blank', [])
+        elif count == 1:
+            code = self.create_code_block('if', line)
+        else:
+            code = self.create_code_block('else_if', line)
         return code
 
     ########################################################################
