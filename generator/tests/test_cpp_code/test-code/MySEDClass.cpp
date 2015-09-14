@@ -171,7 +171,7 @@ MySEDClass::hasRequiredAttributes() const
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Write any contained elements
@@ -188,7 +188,7 @@ MySEDClass::writeElements(XMLOutputStream& stream) const
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Accepts the given SEDMLVisitor
@@ -203,7 +203,7 @@ MySEDClass::accept(SEDMLVisitor& v) const
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Sets the parent SedDocument
@@ -218,7 +218,7 @@ MySEDClass::setSedDocument(SedDocument* d)
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Enables/disables the given package with this element
@@ -235,7 +235,7 @@ MySEDClass::enablePackageInternal(const std::string& pkgURI,
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Adds the expected attributes for this element
@@ -252,7 +252,7 @@ MySEDClass::addExpectedAttributes(ExpectedAttributes& attributes)
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Reads the expected attributes into the member data variables
@@ -313,7 +313,7 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibSEDMLInternal */
 
 /*
  * Writes the attributes to the stream

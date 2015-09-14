@@ -83,14 +83,6 @@ class BaseFile:
 
     ########################################################################
 
-    # Functions for setting the language
-    def set_language(self, language):
-        self.language = language
-        self.cap_language = language.upper()
-        self.library_name = 'Lib{}'.format(language)
-
-    ########################################################################
-
     # FUNCTIONS FOR WRITING LINES/COMMENTS
 
     # based on the number of tabs and the length of line specified

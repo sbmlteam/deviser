@@ -398,27 +398,28 @@ class ParseXML():
         # setup global variables
         languages = self.dom.getElementsByTagName('language')
         if len(languages) > 0: 
-          # read the first element 
-          node = languages[0]
-          language = self.get_value(node, 'name')
-          baseClass = self.get_value(node, 'baseClass')
-          document_class = self.get_value(node, 'documentClass')
-          prefix = self.get_value(node, 'prefix')
-          library_name = self.get_value(node, 'libraryName')
-          
-          # some sanity checking
-          if prefix == None or prefix == '': 
-            prefix = language.upper()
-          if library_name == None or library_name == '':
-            libraryName = language.upper()
-          if baseClass == None or baseClass == "":
-            baseClass = prefix + 'Base'
-          if baseClass == None or baseClass == "":
-            baseClass = prefix + 'Base'
-          
-          # set the globals 
-          global_variables.set_globals(language, baseClass, document_class, prefix,
-                                 library_name, False)
+            # read the first element
+            node = languages[0]
+            language = self.get_value(node, 'name')
+            baseClass = self.get_value(node, 'baseClass')
+            document_class = self.get_value(node, 'documentClass')
+            prefix = self.get_value(node, 'prefix')
+            library_name = self.get_value(node, 'libraryName')
+
+            # some sanity checking
+            if prefix == None or prefix == '':
+                prefix = language.upper()
+            if library_name == None or library_name == '':
+                library_name = language.upper()
+            if baseClass == None or baseClass == "":
+                baseClass = prefix + 'Base'
+            if baseClass == None or baseClass == "":
+                baseClass = prefix + 'Base'
+
+            # set the globals
+            global_variables.set_globals(language.lower(), baseClass,
+                                         document_class, prefix, library_name,
+                                         False)
                                        
         # get package information
         sbml_level = 3

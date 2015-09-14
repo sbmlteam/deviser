@@ -29,7 +29,7 @@ class LIBSEDML_EXTERN MySEDClass : public SedBase
 {
 protected:
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   std::string mId;
 
@@ -180,7 +180,7 @@ public:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Write any contained elements
@@ -191,7 +191,7 @@ public:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Accepts the given SEDMLVisitor
@@ -202,7 +202,7 @@ public:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Sets the parent SedDocument
@@ -213,7 +213,7 @@ public:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Enables/disables the given package with this element
@@ -228,7 +228,7 @@ public:
 protected:
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Adds the expected attributes for this element
@@ -239,7 +239,7 @@ protected:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Reads the expected attributes into the member data variables
@@ -251,7 +251,7 @@ protected:
 
 
 
-  /** @cond doxygenLibsedmlInternal */
+  /** @cond doxygenLibSEDMLInternal */
 
   /**
    * Writes the attributes to the stream
