@@ -46,6 +46,7 @@ from util import query
 from util import strFunctions
 from util import global_variables
 
+
 class ParseXML():
     """Class for all Cpp Header files"""
 
@@ -276,8 +277,6 @@ class ParseXML():
             has_children = self.get_bool_value(self, node, 'hasChildren')
             has_list_of = self.get_bool_value(self, node, 'hasListOf')
             abstract = self.get_bool_value(self, node, 'abstract')
-            children_overwrite_element_name = \
-                self.get_bool_value(self, node, 'childrenOverwriteElementName')
             xml_element_name = \
                 self.get_element_name_value(self, node, 'elementName')
             xml_lo_element_name = \
@@ -306,8 +305,6 @@ class ParseXML():
                             'lo_attribs': lo_attributes,
                             'hasChildren': has_children,
                             'hasMath': has_math,
-                            'childrenOverwriteElementName':
-                                children_overwrite_element_name,
                             'baseClass': base_class,
                             'abstract': abstract,
                             'elementName': xml_element_name,
@@ -358,7 +355,8 @@ class ParseXML():
             elem = elements[index]
             if 'attribs' in elem:
                 for attr in elem['attribs']:
-                    if attr['type'] == 'lo_element' or attr['type'] == 'element':
+                    if attr['type'] == 'lo_element' \
+                            or attr['type'] == 'element':
                         if attr['element'] == name:
                             found = True
                             parent = elem['name']
@@ -401,23 +399,21 @@ class ParseXML():
             # read the first element
             node = languages[0]
             language = self.get_value(node, 'name')
-            baseClass = self.get_value(node, 'baseClass')
+            base_class = self.get_value(node, 'baseClass')
             document_class = self.get_value(node, 'documentClass')
             prefix = self.get_value(node, 'prefix')
             library_name = self.get_value(node, 'libraryName')
 
             # some sanity checking
-            if prefix == None or prefix == '':
+            if not prefix or prefix == '':
                 prefix = language.upper()
-            if library_name == None or library_name == '':
+            if not library_name or library_name == '':
                 library_name = language.upper()
-            if baseClass == None or baseClass == "":
-                baseClass = prefix + 'Base'
-            if baseClass == None or baseClass == "":
-                baseClass = prefix + 'Base'
+            if not base_class or base_class == "":
+                base_class = prefix + 'Base'
 
             # set the globals
-            global_variables.set_globals(language.lower(), baseClass,
+            global_variables.set_globals(language.lower(), base_class,
                                          document_class, prefix, library_name,
                                          False)
                                        

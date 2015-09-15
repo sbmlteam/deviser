@@ -150,9 +150,13 @@ class BaseCppFile(BaseFile.BaseFile):
             self.add_decls = class_object['addDecls']
         if 'addDefs' in class_object:
             self.add_impl = class_object['addDefs']
-        if 'childrenOverwriteElementName' in class_object:
+        # if 'childrenOverwriteElementName' in class_object:
+        #     self.overwrites_children = \
+        #         class_object['childrenOverwriteElementName']
+        if 'root' in class_object:
             self.overwrites_children = \
-                class_object['childrenOverwriteElementName']
+                query.overwrites_name(class_object['root'],
+                                      class_object['name'])
         self.class_object['overwrites_children'] = self.overwrites_children
 
         # child elements
@@ -199,10 +203,6 @@ class BaseCppFile(BaseFile.BaseFile):
 
     # Function to expand the attribute information
     def expand_attributes(self, attributes):
-        root = None
-        if len(attributes) > 0:
-            if 'root' in attributes[0]:
-                root = attributes[0]['root']
         for i in range(0, len(attributes)):
             capname = strFunctions.upper_first(attributes[i]['name'])
             attributes[i]['name'] = strFunctions.lower_first(capname)
@@ -268,6 +268,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     query.get_default_enum_value(attributes[i])
             elif att_type == 'element':
                 el_name = attributes[i]['element']
+                at_name = attributes[i]['name']
                 attributes[i]['attType'] = 'element'
                 if attributes[i]['name'] == 'math':
                     attributes[i]['attTypeCode'] = 'ASTNode*'
@@ -277,8 +278,10 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['CType'] = attributes[i]['element']+'_t*'
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
-                attributes[i]['children_overwrite'] = \
-                    query.overwrites_name(root, el_name)
+                if strFunctions.compare_no_case(el_name, at_name):
+                    attributes[i]['children_overwrite'] = False
+                else:
+                    attributes[i]['children_overwrite'] = True
             elif att_type == 'lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
                 plural = strFunctions.plural(attributes[i]['element'])

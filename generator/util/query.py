@@ -207,14 +207,18 @@ def has_attribute(element, attribute):
     return False
 
 
-# returns the status of the child overwrite flag
+# works out if any classes use this element
+# with a different name
 def overwrites_name(root, name):
     if root is None:
         return False
-    obj = get_class(name, root)
-    if obj is not None:
-        if 'childrenOverwriteElementName' in obj:
-            return obj['childrenOverwriteElementName']
+    for element in root['baseElements']:
+        for attrib in element['attribs']:
+            if attrib['element'] == name:
+                if strFunctions.compare_no_case(name, attrib['name']):
+                    return False
+                else:
+                    return True
     return False
 
 
