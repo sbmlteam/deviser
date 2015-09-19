@@ -38,6 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 import re
+import global_variables
 
 
 def upper_first(word):
@@ -70,12 +71,23 @@ def abbrev_name(element):
 
 
 def list_of_name(name):
-    return 'ListOf' + plural(name)
+    prefix = ''
+    if not global_variables.is_package:
+        prefix = global_variables.prefix
+    return prefix + 'ListOf' + plural_no_prefix(name)
 
 
 def cap_list_of_name(name):
     name = upper_first(name)
     return list_of_name(name)
+
+
+def plural_no_prefix(name):
+    if global_variables.is_package:
+        return plural(name)
+    else:
+        new_name = remove_prefix(name)
+        return plural(new_name)
 
 
 def plural(name):
@@ -89,6 +101,13 @@ def plural(name):
         returned_word = name + 's'
     return returned_word
 
+
+def remove_prefix(name):
+    if global_variables.prefix == 'SBML':
+        return name
+    length = len(global_variables.prefix)
+    newname = name[length:]
+    return newname
 
 def get_indefinite(name):
     if name.startswith('a') or name.startswith('A') \

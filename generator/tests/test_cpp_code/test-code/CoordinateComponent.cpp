@@ -1044,8 +1044,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'id' is missing.";
     getErrorLog()->logPackageError("spatial",
-      SpatialCoordinateComponentAllowedAttributes, getPackageVersion(), level,
-        version, message);
+      SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
+        message);
   }
 
   // 
@@ -1077,8 +1077,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + type + "', which is not a valid option.";
 
         log->logPackageError("spatial",
-          SpatialCoordinateComponentTypeMustBeCoordinateKindEnum,
-            getPackageVersion(), level, version, msg);
+          SpatialCoordinateComponentTypeMustBeCoordinateKindEnum, pkgVersion,
+            level, version, msg);
       }
     }
   }
@@ -1086,8 +1086,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'type' is missing.";
     log->logPackageError("spatial",
-      SpatialCoordinateComponentAllowedAttributes, getPackageVersion(), level,
-        version, message);
+      SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
+        message);
   }
 
   // 

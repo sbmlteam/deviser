@@ -74,6 +74,17 @@ class GeneralFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        if 'elementName' in class_object and not is_list_of:
+            self.element_name = class_object['elementName']
+            if self.element_name == '':
+                self.override_name = False
+            else:
+                self.override_name = not \
+                    strFunctions.compare_no_case(self.element_name,
+                                                 self.class_name)
+        else:
+            self.element_name = ''
+            self.override_name = False
 
         self.typecode = class_object['typecode']
         self.attributes = class_object['class_attributes']
@@ -198,7 +209,10 @@ class GeneralFunctions():
         if self.overwrites_children:
             implementation = ['return mElementName']
         else:
-            name = strFunctions.lower_first(self.object_name)
+            if self.override_name:
+                name = self.element_name
+            else:
+                name = strFunctions.lower_first(self.object_name)
             implementation = ['static const string name = \"{}\"'.format(name),
                               'return name']
         code = [dict({'code_type': 'line', 'code': implementation})]
@@ -489,7 +503,6 @@ class GeneralFunctions():
     #                                setDocument, write (if we have an array)
 
     # function to write writeElement
-    @property
     def write_write_elements(self):
         if not self.status == 'cpp_not_list':
             if not(self.status == 'cpp_list' and len(self.child_elements) > 0):
@@ -518,13 +531,16 @@ class GeneralFunctions():
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
-                line = 'writeMathML(getMath(), stream, get{}' \
-                       'Namespaces())'.format(global_variables.prefix)
+                line = ['writeMathML(getMath(), stream, get{}'
+                        'Namespaces())'.format(global_variables.prefix)]
+            elif att['element'] == 'XMLNode':
+                line = ['stream.startElement(\"{}\")'.format(att['name']),
+                        'stream << *{}'.format(att['memberName']),
+                        'stream.endElement(\"{}\")'.format(att['name'])]
             else:
-                line = '{}->write(stream)'.format(att['memberName'])
-            implementation = ['isSet{}() == '
-                              'true'.format(att['capAttName']),
-                              line]
+                line = ['{}->write(stream)'.format(att['memberName'])]
+            implementation = ['isSet{}() == true'.format(att['capAttName'])]
+            implementation += line
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
         for i in range(0, len(self.child_lo_elements)):
@@ -543,12 +559,11 @@ class GeneralFunctions():
                               '{}.write(stream)'.format(att['memberName'])]
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
-        if not self.is_plugin:
+        if not self.is_plugin and global_variables.is_package:
             code.append(dict({'code_type': 'line',
                               'code': ['{}::writeExtension'
                                        'Elements'
                                        '(stream)'.format(self.std_base)]}))
-
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -568,7 +583,8 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Accepts the given {}Visitor'.format(self.cap_language)
+        title_line = 'Accepts the given ' \
+                     '{}Visitor'.format(global_variables.prefix)
         params = []
         return_lines = []
         additional = []
@@ -576,7 +592,7 @@ class GeneralFunctions():
         # create the function declaration
         function = 'accept'
         return_type = 'bool'
-        arguments = ['{}Visitor& v'.format(self.cap_language)]
+        arguments = ['{}Visitor& v'.format(global_variables.prefix)]
 
         # create the function implementation
         simple = False
@@ -588,7 +604,10 @@ class GeneralFunctions():
         else:
             if not self.is_plugin:
                 simple = True
-        if simple:
+        if not global_variables.is_package:
+            implementation = ['return false']
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        elif simple:
             implementation = ['return v.visit(*this)']
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:

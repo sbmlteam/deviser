@@ -1,7 +1,7 @@
 /**
  * @file: MySEDClass.h
  * @brief: Definition of MySEDClass.
- * @author: SBMLTeam
+ * @author: DEVISER
  */
 
 
@@ -52,7 +52,8 @@ public:
    * SedDocument object.
    * @copydetails doc_note_setting_lv
    */
-  MySEDClass(unsigned int level, unsigned int version);
+  MySEDClass(unsigned int level = SEDML_DEFAULT_LEVEL,
+             unsigned int version = SEDML_DEFAULT_VERSION);
 
 
   /**
@@ -194,9 +195,9 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Accepts the given SEDMLVisitor
+   * Accepts the given SedVisitor
    */
-  virtual bool accept(SEDMLVisitor& v) const;
+  virtual bool accept(SedVisitor& v) const;
 
   /** @endcond */
 
@@ -208,19 +209,6 @@ public:
    * Sets the parent SedDocument
    */
   virtual void setSedDocument(SedDocument* d);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Enables/disables the given package with this element
-   */
-  virtual void enablePackageInternal(const std::string& pkgURI,
-                                     const std::string& pkgPrefix,
-                                     bool flag);
 
   /** @endcond */
 

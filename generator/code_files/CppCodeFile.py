@@ -99,37 +99,33 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             lo_name = strFunctions.list_of_name(self.class_name)
         else:
             lo_name = ''
-        if self.language == 'sbml':
-            if global_variables.is_package:
-                folder = self.language if not self.is_plugin else 'extension'
-                self.write_line_verbatim('#include <{}/packages/{}/{}/{}'
+        if global_variables.is_package:
+            folder = self.language if not self.is_plugin else 'extension'
+            self.write_line_verbatim('#include <{}/packages/{}/{}/{}'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  folder, self.class_name))
+            if self.has_parent_list_of and not self.is_list_of:
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/'
+                                         '{2}'
                                          '.h>'.format(self.language,
                                                       self.package.lower(),
-                                                      folder, self.class_name))
-                if self.has_parent_list_of and not self.is_list_of:
-                    self.write_line_verbatim('#include <{0}/packages/{1}/{0}/'
-                                             '{2}'
-                                             '.h>'.format(self.language,
-                                                          self.package.lower(),
-                                                          lo_name))
-                self.write_line_verbatim('#include <{}/packages/{}/validator/'
-                                         '{}{}Error'
-                                         '.h>'.format(self.language,
-                                                      self.package.lower(),
-                                                      self.package,
-                                                      self.cap_language))
-            else:
-                self.write_line_verbatim('#include <{0}/{1}'
-                                         '.h>'.format(self.language,
-                                                      self.class_name))
-                if self.has_parent_list_of and not self.is_list_of:
-                    self.write_line_verbatim('#include <{0}/{1}'
-                                             '.h>'.format(self.language,
-                                                          lo_name))
+                                                      lo_name))
+            self.write_line_verbatim('#include <{}/packages/{}/validator/'
+                                     '{}{}Error'
+                                     '.h>'.format(self.language,
+                                                  self.package.lower(),
+                                                  self.package,
+                                                  self.cap_language))
         else:
             self.write_line_verbatim('#include <{0}/{1}'
                                      '.h>'.format(self.language,
-                                                  self.baseClass))
+                                                  self.class_name))
+            if self.has_parent_list_of and not self.is_list_of:
+                self.write_line_verbatim('#include <{0}/{1}'
+                                         '.h>'.format(self.language,
+                                                      lo_name))
+            self.write_line_verbatim('#include <sbml/xml/XMLInputStream.h>')
 
         # determine whether we need to write other headers
         write_element_filter = False
@@ -378,7 +374,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_has_required_elements()
         self.write_function_implementation(code)
 
-        code = gen_functions.write_write_elements
+        code = gen_functions.write_write_elements()
         self.write_function_implementation(code, exclude=True)
 
         code = gen_functions.write_accept()
@@ -397,8 +393,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             code = gen_functions.write_connect_to_parent()
             self.write_function_implementation(code, exclude=True)
 
-        code = gen_functions.write_enable_package()
-        self.write_function_implementation(code, exclude=True)
+        if global_variables.is_package:
+            code = gen_functions.write_enable_package()
+            self.write_function_implementation(code, exclude=True)
 
         if self.is_doc_plugin:
             code = gen_functions.write_is_comp_flat()
@@ -527,7 +524,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_function_implementation(code)
 
         if self.is_cpp_api:
-            code = lo_functions.write_add_element_function
+            code = lo_functions.write_add_element_function()
             self.write_function_implementation(code)
 
             code = lo_functions.write_get_num_element_function()
@@ -603,7 +600,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                                              const=False)
                 self.write_function_implementation(code)
 
-            code = lo_functions.write_add_element_function
+            code = lo_functions.write_add_element_function()
             self.write_function_implementation(code)
 
             code = lo_functions.write_get_num_element_function()

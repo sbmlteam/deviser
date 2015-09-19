@@ -751,8 +751,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'id' is missing.";
     getErrorLog()->logPackageError("spatial",
-      SpatialAnalyticVolumeAllowedAttributes, getPackageVersion(), level,
-        version, message);
+      SpatialAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
+        message);
   }
 
   // 
@@ -784,8 +784,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + functiontype + "', which is not a valid option.";
 
         log->logPackageError("spatial",
-          SpatialAnalyticVolumeFunctionTypeMustBeFunctionKindEnum,
-            getPackageVersion(), level, version, msg);
+          SpatialAnalyticVolumeFunctionTypeMustBeFunctionKindEnum, pkgVersion,
+            level, version, msg);
       }
     }
   }
@@ -793,7 +793,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'functionType' is missing.";
     log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      getPackageVersion(), level, version, message);
+      pkgVersion, level, version, message);
   }
 
   // 
@@ -812,8 +812,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
       std::string message = "Spatial attribute 'ordinal' from the "
         "<AnalyticVolume> element must be an integer.";
       log->logPackageError("spatial",
-        SpatialAnalyticVolumeOrdinalMustBeInteger, getPackageVersion(), level,
-          version, message);
+        SpatialAnalyticVolumeOrdinalMustBeInteger, pkgVersion, level, version,
+          message);
     }
   }
 
@@ -839,8 +839,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'domainType' is missing.";
     getErrorLog()->logPackageError("spatial",
-      SpatialAnalyticVolumeAllowedAttributes, getPackageVersion(), level,
-        version, message);
+      SpatialAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
+        message);
   }
 }
 

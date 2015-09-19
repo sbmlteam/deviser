@@ -132,23 +132,28 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                      self.package.lower()))
 
     def write_general_includes(self):
+        pkg = self.package.lower()
+        include_lines = []
         if not self.is_plugin:
             self.write_line_verbatim('#include <string>')
             self.skip_line(2)
-        if self.has_std_base:
-            if not self.is_plugin:
-                self.write_line_verbatim('#include <{}/{}'
-                                         '.h>'.format(self.language,
-                                                      self.baseClass))
+        # write the base class header
+        if global_variables.is_package:
+            if self.has_std_base:
+                if not self.is_plugin:
+                    base_file = '{}/{}'.format(self.language, self.baseClass)
+                else:
+                    base_file = '{}/extension/{}'.format(self.language,
+                                                         self.baseClass)
             else:
-                self.write_line_verbatim('#include <{}/extension/{}'
-                                         '.h>'.format(self.language,
-                                                      self.baseClass))
+                base_file = '{0}/packages/{1}/{0}/{2}'.format(self.language,
+                                                              pkg,
+                                                              self.baseClass)
         else:
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                     '.h>'.format(self.language,
-                                                  self.package.lower(),
-                                                  self.baseClass))
+            base_file = '{}/{}'.format(self.language, self.baseClass)
+        include_lines += ['<{}.h>'.format(base_file)]
+
+        # work out if we need the extension header
         need_extension = False
         if global_variables.is_package:
             if self.is_doc_plugin:
@@ -157,39 +162,45 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 need_extension = True
             elif self.is_plugin and not self.has_children:
                 need_extension = True
-
         if need_extension:
-            self.write_line(
-                '#include <{0}/packages/{1}/extension/{2}Extension.h>'
-                .format(self.language, self.package.lower(), self.package))
+            include_lines += ['<{}/packages/{}/extension/{}Extension'
+                              '.h>'.format(self.language, pkg, self.package)]
 
         # additional includes for child elements
         for i in range(0, len(self.child_elements)):
             child = self.child_elements[i]['element']
-            if child != 'ASTNode':
-                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                         '.h>'.format(self.language,
-                                                      self.package.lower(),
-                                                      child))
+            if child != 'ASTNode' and child != 'XMLNode':
+                if global_variables.is_package:
+                    include_lines += ['<{0}/packages/{1}/{0}/{2}'
+                                      '.h>'.format(self.language, pkg, child)]
+                else:
+                    include_lines += ['<{}/{}.h>'.format(self.language, child)]
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                     '.h>'.format(self.language,
-                                                  self.package.lower(),
-                                                  child))
+            if global_variables.is_package:
+                include_lines += ['<{0}/packages/{1}/{0}/{2}'
+                                  '.h>'.format(self.language, pkg, child)]
+            else:
+                include_lines += ['<{}/{}.h>'.format(self.language, child)]
             if self.is_plugin:
                 child = self.child_lo_elements[i]['element']
-                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                         '.h>'.format(self.language,
-                                                      self.package.lower(),
-                                                      child))
+                include_lines += ['<{0}/packages/{1}/{0}/{2}'
+                                  '.h>'.format(self.language, pkg, child)]
+
+        # if we are a list of we need the header of our child object
         if self.is_list_of:
             child = self.list_of_child
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                     '.h>'.format(self.language,
-                                                  self.package.lower(),
-                                                  child))
+            if global_variables.is_package:
+                include_lines += ['<{0}/packages/{1}/{0}/{2}'
+                                  '.h>'.format(self.language, pkg, child)]
+            else:
+                include_lines += ['<{}/{}.h>'.format(self.language, child)]
+
+        # write them out
+        for line in include_lines:
+            self.write_line_verbatim('#include {}'.format(line))
+
     ########################################################################
 
     # function to write the data members
@@ -355,7 +366,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = gen_functions.write_has_required_elements()
         self.write_function_declaration(code)
 
-        code = gen_functions.write_write_elements
+        code = gen_functions.write_write_elements()
         self.write_function_declaration(code, exclude=True)
 
         code = gen_functions.write_accept()
@@ -374,8 +385,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             code = gen_functions.write_connect_to_parent()
             self.write_function_declaration(code, exclude=True)
 
-        code = gen_functions.write_enable_package()
-        self.write_function_declaration(code, exclude=True)
+        if global_variables.is_package:
+            code = gen_functions.write_enable_package()
+            self.write_function_declaration(code, exclude=True)
 
         if self.is_doc_plugin:
             code = gen_functions.write_is_comp_flat()
@@ -506,7 +518,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_function_declaration(code)
 
         if self.is_cpp_api:
-            code = lo_functions.write_add_element_function
+            code = lo_functions.write_add_element_function()
             self.write_function_declaration(code)
 
             code = lo_functions.write_get_num_element_function()
@@ -575,7 +587,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                              const=False)
                 self.write_function_declaration(code)
 
-            code = lo_functions.write_add_element_function
+            code = lo_functions.write_add_element_function()
             self.write_function_declaration(code)
 
             code = lo_functions.write_get_num_element_function()

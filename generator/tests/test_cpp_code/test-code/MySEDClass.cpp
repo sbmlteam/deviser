@@ -1,9 +1,10 @@
 /**
  * @file: MySEDClass.cpp
  * @brief: Implementation of MySEDClass.
- * @author: SBMLTeam
+ * @author: DEVISER
  */
-#include <sedml/SedBase.h>
+#include <sedml/MySEDClass.h>
+#include <sbml/xml/XMLInputStream.h>
 
 
 using namespace std;
@@ -37,7 +38,7 @@ MySEDClass::MySEDClass(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mId ("")
 {
-  setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  setElementNamespace(sedmlns->getURI());
 }
 
 
@@ -142,7 +143,7 @@ MySEDClass::unsetId()
 const std::string&
 MySEDClass::getElementName() const
 {
-  static const string name = "mySEDClass";
+  static const string name = "fred";
   return name;
 }
 
@@ -180,8 +181,6 @@ void
 MySEDClass::writeElements(XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
-
-  SedBase::writeExtensionElements(stream);
 }
 
 /** @endcond */
@@ -191,12 +190,12 @@ MySEDClass::writeElements(XMLOutputStream& stream) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Accepts the given SEDMLVisitor
+ * Accepts the given SedVisitor
  */
 bool
-MySEDClass::accept(SEDMLVisitor& v) const
+MySEDClass::accept(SedVisitor& v) const
 {
-  return v.visit(*this);
+  return false;
 }
 
 /** @endcond */
@@ -212,23 +211,6 @@ void
 MySEDClass::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Enables/disables the given package with this element
- */
-void
-MySEDClass::enablePackageInternal(const std::string& pkgURI,
-                                  const std::string& pkgPrefix,
-                                  bool flag)
-{
-  SedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */
@@ -263,7 +245,6 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
-  unsigned int pkgVersion = getPackageVersion();
   unsigned int numErrs;
   bool assigned = false;
   SEDMLErrorLog* log = getErrorLog();
@@ -277,15 +258,14 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
-      log->logPackageError("test", TestMySEDClassAllowedAttributes, pkgVersion,
-        level, version, details);
+      log->logError(TestMySEDClassAllowedAttributes, level, version, details);
     }
     else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("test", TestMySEDClassAllowedCoreAttributes,
-        pkgVersion, level, version, details);
+      log->logError(TestMySEDClassAllowedCoreAttributes, level, version,
+        details);
     }
   }
 
@@ -327,8 +307,6 @@ MySEDClass::writeAttributes(XMLOutputStream& stream) const
   {
     stream.writeAttribute("id", getPrefix(), mId);
   }
-
-  SedBase::writeExtensionAttributes(stream);
 }
 
 /** @endcond */

@@ -189,6 +189,13 @@ class BaseFile:
             tabs += '  '
         self.file_out.write('{0}{1}\n'.format(tabs, line))
 
+    # write line without worrying about size
+    def copy_line_verbatim(self, line):
+        tabs = ''
+        for i in range(0, int(self.num_tabs)):
+            tabs += '  '
+        self.file_out.write('{0}{1}'.format(tabs, line))
+
     # functions for writing lines indenting each new line
     def write_line(self, line, space=0):
         tabs = ''
@@ -362,7 +369,10 @@ class BaseFile:
         self.open_comment()
         self.write_comment_line('@file:   {0}'.format(self.filename))
         self.write_comment_line('@brief:  {0}'.format(self.brief_description))
-        self.write_comment_line('@author: SBMLTeam')
+        if global_variables.is_package:
+            self.write_comment_line('@author: SBMLTeam')
+        else:
+            self.write_comment_line('@author: DEVISER')
         if self.library_name == 'Libsbml':
             self.write_libsbml_licence()
         self.close_comment()

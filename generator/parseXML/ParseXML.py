@@ -342,7 +342,8 @@ class ParseXML():
                                            'isListOf': element['hasListOf'],
                                            'listOfName': element['elementName'],
                                            'listOfClassName':
-                                               element['lo_class_name']}))
+                                               element['lo_class_name'],
+                                           'xml_name': element['elementName']}))
                 self.sbml_elements.append(element)
 
     @staticmethod

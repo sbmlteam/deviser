@@ -64,7 +64,11 @@ class Constructors():
         self.has_children = class_object['has_children']
         self.child_elements = class_object['child_elements']
         self.overwrites_children = class_object['overwrites_children']
-        self.xml_name = strFunctions.lower_first(class_object['name'])
+        if 'elementName' in class_object and class_object['elementName'] != '':
+            self.xml_name = \
+                strFunctions.lower_first(class_object['elementName'])
+        else:
+            self.xml_name = strFunctions.lower_first(class_object['name'])
         self.is_plugin = False
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
@@ -130,7 +134,6 @@ class Constructors():
             function = '{}_{}'.format(self.class_name, create)
             return_type = '{0} *'.format(self.object_name)
 
-        arguments_no_defaults = []
         if global_variables.is_package:
             arguments = [
                 'unsigned int level = '
@@ -143,10 +146,17 @@ class Constructors():
                                      'unsigned int version',
                                      'unsigned int pkgVersion']
         else:
-            arguments = ['unsigned int level',
-                         'unsigned int version']
-            arguments_no_defaults = ['unsigned int level',
-                                     'unsigned int version']
+            if self.is_cpp_api:
+                arguments = ['unsigned int level = {}_DEFAULT_'
+                             'LEVEL'.format(global_variables.language.upper()),
+                             'unsigned int version = {}_DEFAULT_VERSI'
+                             'ON'.format(global_variables.language.upper())]
+                arguments_no_defaults = ['unsigned int level',
+                                         'unsigned int version']
+            else:
+                arguments = ['unsigned int level', 'unsigned int version']
+                arguments_no_defaults = ['unsigned int level',
+                                         'unsigned int version']
 
         # create the function implementation
         constructor_args = self.write_constructor_args(None)
@@ -170,9 +180,12 @@ class Constructors():
                 implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces('
                                   'level, '
                                   'version))'.format(global_variables.prefix)]
+                if self.has_children:
+                    implementation.append('connectToChild()')
             else:
                 implementation = ['return new {}(level, '
                                   'version)'.format(self.class_name)]
+
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
@@ -264,18 +277,18 @@ class Constructors():
 
         # create the function implementation
         constructor_args = self.write_constructor_args(ns)
-        if global_variables.is_package:
-            implementation = ['setElementNamespace({}'
-                              'ns->getURI())'.format(self.package.lower())]
-            if self.has_children:
-                implementation.append('connectToChild()')
-            if not self.is_list_of:
-                implementation.append('loadPlugins({}ns)'
-                                      .format(self.package.lower()))
-        else:
-            implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces'
-                              '(level, '
-                              'version))'.format(global_variables.prefix)]
+#        if global_variables.is_package:
+        implementation = ['setElementNamespace({}'
+                          '->getURI())'.format(ns)]
+        if self.has_children:
+            implementation.append('connectToChild()')
+        if global_variables.is_package and not self.is_list_of:
+            implementation.append('loadPlugins({}ns)'
+                                  .format(self.package.lower()))
+        # else:
+        #     implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces'
+        #                       '(level, '
+        #                       'version))'.format(global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         return dict({'title_line': title_line,
@@ -596,14 +609,21 @@ class Constructors():
     def write_constructor_args(self, ns):
         if ns is None:
             constructor_args = [': {}(level, version)'.format(self.base_class)]
-            parameters = 'level, version, pkgVersion'
+            if global_variables.is_package:
+                parameters = 'level, version, pkgVersion'
+            else:
+                parameters = 'level, version'
         elif ns is not None and self.is_plugin:
             constructor_args = [': {}(uri, prefix, '
                                 '{})'.format(self.base_class, ns)]
             parameters = '{}'.format(ns)
         else:
-            constructor_args = [': {}({})'.format(self.base_class, ns)]
-            parameters = '{}ns'.format(self.package.lower())
+            if global_variables.is_package:
+                constructor_args = [': {}({})'.format(self.base_class, ns)]
+                parameters = '{}ns'.format(self.package.lower())
+            else:
+                constructor_args = [': {}({})'.format(self.base_class, ns)]
+                parameters = '{}'.format(ns)
         for attrib in self.attributes:
             if attrib['attType'] == 'lo_element':
                 constructor_args.append(', {} '

@@ -284,7 +284,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['children_overwrite'] = True
             elif att_type == 'lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
-                plural = strFunctions.plural(attributes[i]['element'])
+                plural = strFunctions.plural_no_prefix(attributes[i]['element'])
                 attributes[i]['attType'] = 'lo_element'
                 attributes[i]['attTypeCode'] = name
                 attributes[i]['CType'] = name + '_t'

@@ -41,7 +41,7 @@ import sys
 import os
 
 from parseXML import ParseXML
-from code_files import ExtensionFiles, CppFiles, ValidationFiles
+from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
 from util import global_variables
@@ -55,6 +55,23 @@ def generate_code_for(filename, overwrite=True):
     ob = parser.parse_deviser_xml()
     name = ob['name'.lower()]
     language = global_variables.language
+    if global_variables.is_package:
+        success = generate_package_code(name, language, overwrite, ob)
+    else:
+        success = generate_other_library_code(name, language, overwrite, ob)
+    return success
+
+
+def generate_other_library_code(name, language, overwrite, ob):
+    if not create_dir_structure(name, language, overwrite):
+        print'Problem encountered creating directories'
+        print('Either delete what directory structure is there or')
+        print('re run with overwrite=True')
+        return False
+    generate_other_library_code_files(name, ob)
+
+
+def generate_package_code(name, language, overwrite, ob):
     if not create_dir_structure(name, language, overwrite):
         print'Problem encountered creating directories'
         print('Either delete what directory structure is there or')
@@ -179,7 +196,25 @@ def generate_code_files(name, ob):
     os.chdir(this_dir)
 
 
-def populate_directories(name, lang):
+def generate_other_library_code_files(name, ob):
+    this_dir = os.getcwd()
+    language = global_variables.language
+    main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
+    os.chdir(main_dir)
+    # working_class = ob['baseElements'][10]
+    # all_files = CppFiles.CppFiles(working_class, True)
+    # all_files.write_files()
+
+    for working_class in ob['baseElements']:
+        all_files = CppFiles.CppFiles(working_class, True)
+        all_files.write_files()
+    # base_files = BaseClassFiles.BaseClassFiles(name, True)
+    # base_files.write_files()
+    os.chdir(this_dir)
+
+
+# Functions to create the appropriate directory structure
+def populate_package_directories(name, lang):
     global directories
     sep = os.sep
     directories = ['{}'.format(name),
@@ -213,8 +248,20 @@ def populate_directories(name, lang):
                    'constraints'.format(name, sep, lang)]
 
 
+def populate_other_library_directories(name, lang):
+    global directories
+    sep = os.sep
+    directories = ['{}'.format(name),
+                   '{}{}examples'.format(name, sep),
+                   '{}{}src'.format(name, sep),
+                   '{0}{1}src{1}{2}'.format(name, sep, lang)]
+
+
 def create_dir_structure(pkgname, lang, overwrite):
-    populate_directories(pkgname, lang)
+    if global_variables.is_package:
+        populate_package_directories(pkgname, lang)
+    else:
+        populate_other_library_directories(pkgname, lang)
     print 'creating directory structure for {0}'.format(pkgname)
     index = 0
     all_present = False

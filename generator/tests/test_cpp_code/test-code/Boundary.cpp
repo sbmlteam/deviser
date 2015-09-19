@@ -433,7 +433,7 @@ Boundary::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'id' is missing.";
     getErrorLog()->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
-      getPackageVersion(), level, version, message);
+      pkgVersion, level, version, message);
   }
 
   // 
@@ -452,14 +452,14 @@ Boundary::readAttributes(const XMLAttributes& attributes,
       std::string message = "Spatial attribute 'value' from the <Boundary> "
         "element must be an integer.";
       log->logPackageError("spatial", SpatialBoundaryValueMustBeDouble,
-        getPackageVersion(), level, version, message);
+        pkgVersion, level, version, message);
     }
     else
     {
       std::string message = "Spatial attribute 'value' is missing from the "
         "<Boundary> element.";
       log->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
-        getPackageVersion(), level, version, message);
+        pkgVersion, level, version, message);
     }
   }
 }

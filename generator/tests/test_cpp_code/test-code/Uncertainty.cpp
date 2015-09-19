@@ -558,9 +558,12 @@ Uncertainty::readOtherXML(XMLInputStream& stream)
 
   if (name == "UncertML")
   {
+    const XMLToken& token = stream.next();
+    stream.skipText();
     delete mUncertML;
     XMLNode* xml = new XMLNode(stream);
     mUncertML = new UncertMLNode(xml);
+    stream.skipPastEnd(token);
     delete xml;
     read = true;
   }

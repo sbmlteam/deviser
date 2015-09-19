@@ -707,7 +707,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'id' is missing.";
     getErrorLog()->logPackageError("spatial",
-      SpatialSpatialPointsAllowedAttributes, getPackageVersion(), level, version,
+      SpatialSpatialPointsAllowedAttributes, pkgVersion, level, version,
         message);
   }
 
@@ -740,8 +740,8 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + compression + "', which is not a valid option.";
 
         log->logPackageError("spatial",
-          SpatialSpatialPointsCompressionMustBeCompressionKindEnum,
-            getPackageVersion(), level, version, msg);
+          SpatialSpatialPointsCompressionMustBeCompressionKindEnum, pkgVersion,
+            level, version, msg);
       }
     }
   }
@@ -749,7 +749,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'compression' is missing.";
     log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-      getPackageVersion(), level, version, message);
+      pkgVersion, level, version, message);
   }
 
   // 
@@ -769,15 +769,15 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
       std::string message = "Spatial attribute 'arrayDataLength' from the "
         "<SpatialPoints> element must be an integer.";
       log->logPackageError("spatial",
-        SpatialSpatialPointsArrayDataLengthMustBeInteger, getPackageVersion(),
-          level, version, message);
+        SpatialSpatialPointsArrayDataLengthMustBeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
       std::string message = "Spatial attribute 'arrayDataLength' is missing "
         "from the <SpatialPoints> element.";
       log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-        getPackageVersion(), level, version, message);
+        pkgVersion, level, version, message);
     }
   }
 
@@ -810,8 +810,8 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + datatype + "', which is not a valid option.";
 
         log->logPackageError("spatial",
-          SpatialSpatialPointsDataTypeMustBeDataKindEnum, getPackageVersion(),
-            level, version, msg);
+          SpatialSpatialPointsDataTypeMustBeDataKindEnum, pkgVersion, level,
+            version, msg);
       }
     }
   }
