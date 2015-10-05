@@ -997,13 +997,13 @@ class ProtectedFunctions():
 
         if att_type == 'SId' or att_type == 'SIdRef' \
                 or att_type == 'UnitSId' or att_type == 'UnitSIdRef':
-            self.write_sid_read(index, code)
+            self.write_sid_read(index, code, attributes)
         elif att_type == 'enum':
-            self.write_enum_read(index, code)
+            self.write_enum_read(index, code, attributes)
         elif att_type == 'string':
-            self.write_string_read(index, code)
+            self.write_string_read(index, code, attributes)
         elif att_type == 'int' or att_type == 'uint' or att_type == 'double':
-            self.write_number_read(index, code, att_type)
+            self.write_number_read(index, code, att_type, attributes)
         elif att_type == 'bool':
             line = ['{} = attributes.readInto(\"{}\", '
                     '{})'.format(set_name, name, member)]
@@ -1013,8 +1013,8 @@ class ProtectedFunctions():
                     '{})'.format(name, member)]
             code.append(self.create_code_block('line', line))
 
-    def write_sid_read(self, index, code):
-        attribute = self.attributes[index]
+    def write_sid_read(self, index, code, attributes):
+        attribute = attributes[index]
         name = attribute['name']
         att_type = attribute['type']
         member = attribute['memberName']
@@ -1065,8 +1065,8 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
-    def write_string_read(self, index, code):
-        attribute = self.attributes[index]
+    def write_string_read(self, index, code, attributes):
+        attribute = attributes[index]
         name = attribute['name']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
@@ -1103,8 +1103,8 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
-    def write_enum_read(self, index, code):
-        attribute = self.attributes[index]
+    def write_enum_read(self, index, code, attributes):
+        attribute = attributes[index]
         name = attribute['name']
         element = attribute['element']
         member = attribute['memberName']
@@ -1168,8 +1168,8 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
-    def write_number_read(self, index, code, att_type):
-        attribute = self.attributes[index]
+    def write_number_read(self, index, code, att_type, attributes):
+        attribute = attributes[index]
         name = attribute['name']
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']

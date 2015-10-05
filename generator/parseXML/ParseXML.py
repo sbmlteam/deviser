@@ -62,6 +62,7 @@ class ParseXML():
         self.elements = []
         self.sbml_elements = []
         self.num_versions = 1
+        self.plugins = []
 
     #####################################################################
 
@@ -324,6 +325,81 @@ class ParseXML():
 
             return element
 
+    @staticmethod
+    def get_plugin_description(self, node, pkg_version):
+        ext_point = self.get_value(node, 'extensionPoint')
+        plugin = None
+        # check whether we have an element with this
+        # name in a different version
+        if pkg_version > 1:
+            plugin = query.get_matching_element('sbase', ext_point,
+                                                 self.plugins)
+        if plugin:
+            for reference in node.getElementsByTagName('reference'):
+                temp = self.find_element(self.elements,
+                                         self.get_value(reference, 'name'))
+                if temp is not None and temp not in plugin['extension']:
+                    plugin['extension'].append(temp)
+
+            # look for references to ListOf elements
+            for reference in node.getElementsByTagName('reference'):
+                temp = self.find_lo_element(self.elements,
+                                            self.get_value(reference, 'name'))
+                if temp is not None and temp not in plugin['lo_extension']:
+                    plugin['lo_extension'].append(temp)
+
+            for attr in node.getElementsByTagName('attribute'):
+                plugin['attribs'].append(
+                    self.get_attribute_description(self, attr, pkg_version))
+            plugin['num_versions'] = self.num_versions
+            plugin['version'] = pkg_version
+
+            return None
+
+        else:
+            plug_elements = []
+            plug_lo_elements = []
+            ext_point = self.get_value(node, 'extensionPoint')
+            add_decls = self.get_add_code_value(self, node, 'additionalDecls')
+            add_defs = self.get_add_code_value(self, node, 'additionalDefs')
+
+            # read references to elements
+            for reference in node.getElementsByTagName('reference'):
+                temp = self.find_element(self.elements,
+                                         self.get_value(reference, 'name'))
+                if temp is not None:
+                    plug_elements.append(temp)
+
+            # look for references to ListOf elements
+            for reference in node.getElementsByTagName('reference'):
+                temp = self.find_lo_element(self.elements,
+                                            self.get_value(reference, 'name'))
+                if temp is not None:
+                    plug_lo_elements.append(temp)
+
+            attributes = []
+
+            # read additional attributes
+            for attr in node.getElementsByTagName('attribute'):
+                attributes.append(self.get_attribute_description(self, attr,
+                                                                 pkg_version))
+            plugin_dict = dict({'sbase': ext_point,
+                                'extension': plug_elements,
+                                'attribs': attributes,
+                                'lo_extension': plug_lo_elements})
+
+            if add_decls is not None:
+                if os.path.exists(self.temp_dir + '/' + add_decls):
+                    add_decls += self.temp_dir + '/'
+                plugin_dict['addDecls'] = add_decls
+
+            if add_defs is not None:
+                if os.path.exists(self.temp_dir + '/' + add_defs):
+                    add_defs += self.temp_dir + '/'
+                plugin_dict['addDefs'] = add_defs
+
+            return plugin_dict
+
     def get_elements_for_version(self, pkg_node):
         pkg_version = self.get_int_value(self, pkg_node, 'pkg_version')
 
@@ -345,6 +421,14 @@ class ParseXML():
                                                element['lo_class_name'],
                                            'xml_name': element['elementName']}))
                 self.sbml_elements.append(element)
+
+    def get_plugins_for_version(self, pkg_node):
+        pkg_version = self.get_int_value(self, pkg_node, 'pkg_version')
+
+        for node in pkg_node.getElementsByTagName('plugin'):
+            plugin = self.get_plugin_description(self, node, pkg_version)
+            if plugin:
+                self.plugins.append(plugin)
 
     @staticmethod
     def find_child_occurences(name, elements):
@@ -428,101 +512,24 @@ class ParseXML():
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
             self.get_elements_for_version(node)
+            self.get_plugins_for_version(node)
 
-        # # read concrete versions of abstract classes and fill dictionary
-        # for node in self.dom.getElementsByTagName('element'):
-        #     element_name = self.get_value(node, 'name')
-        #     self.concrete_dict[element_name] = \
-        #         self.get_concrete_list(self, node)
-        #
-        # # read element
-        # for node in self.dom.getElementsByTagName('element'):
-        #     element = self.get_element_description(self, node)
-        #
-        #     elements.append(dict({'name': element['name'],
-        #                           'typecode': element['typecode'],
-        #                           'isListOf': element['hasListOf'],
-        #                           'listOfName': element['elementName'],
-        #                           'listOfClassName': element['lo_class_name']
-        #                           }))
-        #     sbml_elements.append(element)
-
-        for node in self.dom.getElementsByTagName('plugin'):
-
-            plug_elements = []
-            plug_lo_elements = []
-            ext_point = self.get_value(node, 'extensionPoint')
-            add_decls = self.get_add_code_value(self, node, 'additionalDecls')
-            add_defs = self.get_add_code_value(self, node, 'additionalDefs')
-
-            # read references to elements
-            for reference in node.getElementsByTagName('reference'):
-                temp = self.find_element(self.elements,
-                                         self.get_value(reference, 'name'))
-                if temp is not None:
-                    plug_elements.append(temp)
-
-            # look for references to ListOf elements
-            for reference in node.getElementsByTagName('reference'):
-                temp = self.find_lo_element(self.elements,
-                                            self.get_value(reference, 'name'))
-                if temp is not None:
-                    plug_lo_elements.append(temp)
-
-            attributes = []
-
-            # read additional attributes
-            for attr in node.getElementsByTagName('attribute'):
-
-                attr_name = self.get_value(attr, 'name')
-                required = self.get_bool_value(self, attr, 'required')
-                attr_type = self.get_value(attr, 'type')
-
-                attr_abstract = self.get_bool_value(self, attr, 'abstract')
-                attr_element = self.get_value(attr, 'element')
-
-                attribute_dict = dict({'type': attr_type,
-                                       'reqd': required,
-                                       'name': attr_name,
-                                       'element': attr_element,
-                                       'abstract': attr_abstract
-                                       })
-                if attr_abstract:
-                    attribute_dict['concrete'] = \
-                        self.concrete_dict[attr_element]
-
-                attributes.append(attribute_dict)
-
-            plugin_dict = dict({'sbase': ext_point,
-                                'extension': plug_elements,
-                                'attribs': attributes,
-                                'lo_extension': plug_lo_elements})
-
-            if add_decls is not None:
-                if os.path.exists(self.temp_dir + '/' + add_decls):
-                    add_decls += self.temp_dir + '/'
-                plugin_dict['addDecls'] = add_decls
-
-            if add_defs is not None:
-                if os.path.exists(self.temp_dir + '/' + add_defs):
-                    add_defs += self.temp_dir + '/'
-                plugin_dict['addDefs'] = add_defs
-
-            plugins.append(plugin_dict)
-
+        names_listed = []
         for node in self.dom.getElementsByTagName('enum'):
             values = []
             enum_name = self.get_value(node, 'name')
 
-            for val in node.getElementsByTagName('enumValue'):
-                values.append(dict({'name': self.get_value(val, 'name'),
-                                    'value': self.get_value(val, 'value')}))
+            if enum_name not in names_listed:
+                for val in node.getElementsByTagName('enumValue'):
+                    values.append(dict({'name': self.get_value(val, 'name'),
+                                        'value': self.get_value(val, 'value')}))
 
-            enums.append(dict({'name': enum_name, 'values': values}))
+                enums.append(dict({'name': enum_name, 'values': values}))
+                names_listed.append(enum_name)
 
         package = dict({'name': self.package_name,
                         'elements': self.elements,
-                        'plugins': plugins,
+                        'plugins': self.plugins,
                         'number': number,
                         'baseElements': self.sbml_elements,
                         'enums': enums,

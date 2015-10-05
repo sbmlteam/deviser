@@ -361,8 +361,13 @@ class SetGetFunctions():
                 value = '{}'.format(self.package)
             else:
                 name = 'xmlns'
-                value = 'http://www.{0}.org/{0}/level3/version1/{1}/' \
-                        'version1'.format(self.language, self.package)
+                if attribute['name'].endswith('1'):
+                    value = 'http://www.{0}.org/{0}/level3/version1/{1}/' \
+                            'version1'.format(self.language, self.package)
+                else:
+                    value = 'http://www.{0}.org/{0}/level3/version1/{1}/' \
+                            'version2'.format(self.language, self.package)
+
             implementation = ['static const std::string {} '
                               '= \"{}\"'.format(name, value),
                               'return {}'.format(name)]

@@ -7,8 +7,6 @@ from code_files import CppFiles, ExtensionFiles, ValidationFiles
 from parseXML import ParseXML
 from util import global_variables
 
-use_new = True
-
 fails = []
 
 
@@ -126,10 +124,7 @@ def run_test(name, num, class_name, test_case, list_of):
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
-    if use_new:
-        generate_new_cpp_header(filename, num)
-    else:
-        generate_cpp_header(filename, num)
+    generate_new_cpp_header(filename, num)
     correct_file = '.\\test-code\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
     if os.path.isfile(correct_file):
@@ -453,13 +448,29 @@ def main():
     test_case = 'validator'
     fail += run_valid_test(name, class_name, test_case, False)
 
-    if use_new:
-        name = 'test_vers'
-        num = 0
-        class_name = 'ClassOne'
-        list_of = ''
-        test_case = 'multiple versions'
-        fail += run_test(name, num, class_name, test_case, list_of)
+    name = 'test_vers'
+    num = 0
+    class_name = 'ClassOne'
+    list_of = ''
+    test_case = 'multiple versions'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_vers'
+    num = 0
+    class_name = 'VersModelPlugin'
+    test_case = 'versions of plugins - attributes'
+    fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'test_vers'
+    num = 1
+    class_name = 'VersSpeciesPlugin'
+    test_case = 'versions of plugins - elements'
+    fail += run_plug_test(name, class_name, test_case, num)
+
+    name = 'test_vers'
+    class_name = 'VersExtension'
+    test_case = 'multi version extension file'
+    fail += run_ext_test(name, class_name, test_case, 0)
 
     name = 'test_child'
     num = 0

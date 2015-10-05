@@ -63,7 +63,6 @@ protected:
   std::string mId;
   bool mAtt1;
   bool mIsSetAtt1;
-  std::string mId;
   bool mAtt2;
   bool mIsSetAtt2;
 

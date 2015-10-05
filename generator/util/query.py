@@ -144,8 +144,10 @@ def separate_attributes(full_attributes):
 def get_version_attributes(attributes, version):
     ver_attribs = []
     for i in range(0, len(attributes)):
-        if attributes[i]['version'] == version:
-            ver_attribs.append(attributes[i])
+        att_type = attributes[i]['attType']
+        if att_type != 'element' and att_type != 'lo_element':
+            if attributes[i]['version'] == version:
+                ver_attribs.append(attributes[i])
     return ver_attribs
 
 
@@ -222,7 +224,7 @@ def overwrites_name(root, name):
     return False
 
 
-def get_static_extension_attribs():
+def get_static_extension_attribs(num_versions):
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
@@ -248,12 +250,16 @@ def get_static_extension_attribs():
                 'attType': 'unsigned integer',
                 'memberName': 1})
     attribs.append(att)
-    att = dict({'name': 'xmlnsL3V1V1',
-                'capAttName': 'XmlnsL3V1V1',
-                'attTypeCode': 'std::string&',
-                'attType': 'string',
-                'memberName': 'fix this'})
-    attribs.append(att)
+    for i in range(0, num_versions):
+        name = 'xmlnsL3V1V{}'.format(i+1)
+        cap_name = strFunctions.upper_first(name)
+        att = dict({'name': name,
+                    'capAttName': cap_name,
+                    'attTypeCode': 'std::string&',
+                    'attType': 'string',
+                    'memberName': 'fix this'})
+        attribs.append(att)
+
     return attribs
 
 

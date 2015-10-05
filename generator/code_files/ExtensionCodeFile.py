@@ -65,6 +65,10 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         self.plugins = package['plugins']
         self.offset = package['offset']
 
+        self.num_versions = 1
+        if 'num_versions' in package:
+            self.num_versions = package['num_versions']
+
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
         self.class_object['name'] = self.name
@@ -154,7 +158,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
     # function to write the static get functions
     def write_attribute_functions(self):
         self.class_object['class_attributes'] \
-            = query.get_static_extension_attribs()
+            = query.get_static_extension_attribs(self.num_versions)
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
                                                            self.is_cpp_api,
                                                            self.is_list_of,
@@ -172,7 +176,8 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         ext_functions = ExtensionFunctions.ExtensionFunctions(self.language,
                                                               self.package,
                                                               self.elements,
-                                                              self.offset)
+                                                              self.offset,
+                                                              self.num_versions)
 
         code = ext_functions.write_get_name()
         self.write_function_implementation(code)
@@ -192,7 +197,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         code = ext_functions.write_get_namespaces()
         self.write_function_implementation(code)
 
-        code = ext_functions.write_get_string_typecode
+        code = ext_functions.write_get_string_typecode()
         self.write_function_implementation(code)
 
         code = ext_functions.write_get_error_table()

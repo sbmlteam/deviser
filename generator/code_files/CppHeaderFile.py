@@ -205,17 +205,21 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # function to write the data members
     def write_data_members(self, attributes):
+        names_written = []
         for i in range(0, len(attributes)):
-            if attributes[i]['attType'] != 'string':
-                self.write_line('{0} {1};'.format(attributes[i]['attTypeCode'],
-                                                  attributes[i]['memberName']))
-            else:
-                self.write_line('std::string {0};'
-                                .format(attributes[i]['memberName']))
-            if attributes[i]['isNumber'] is True \
-                    or attributes[i]['attType'] == 'boolean':
-                self.write_line('bool mIsSet{0};'
-                                .format(attributes[i]['capAttName']))
+            name = attributes[i]['memberName']
+            if name not in names_written:
+                if attributes[i]['attType'] != 'string':
+                    self.write_line('{0} {1};'.format(attributes[i]['attTypeCode'],
+                                                      name))
+                else:
+                    self.write_line('std::string {0};'
+                                    .format(name))
+                if attributes[i]['isNumber'] is True \
+                        or attributes[i]['attType'] == 'boolean':
+                    self.write_line('bool mIsSet{0};'
+                                    .format(attributes[i]['capAttName']))
+                names_written.append(name)
         if self.overwrites_children:
             self.write_line('std::string mElementName;')
 

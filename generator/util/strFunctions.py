@@ -106,7 +106,10 @@ def remove_prefix(name):
     if global_variables.prefix == 'SBML':
         return name
     length = len(global_variables.prefix)
-    newname = name[length:]
+    if name.startswith(global_variables.prefix):
+        newname = name[length:]
+    else:
+        newname = name
     return newname
 
 def get_indefinite(name):

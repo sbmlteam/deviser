@@ -43,11 +43,12 @@ from util import strFunctions, global_variables
 class ExtensionFunctions():
     """Class for extension functions"""
 
-    def __init__(self, language, package, elements, offset):
+    def __init__(self, language, package, elements, offset, num_versions=1):
         self.language = language
         self.package = package
         self.elements = elements
         self.offset = offset
+        self.num_versions = num_versions
 
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
@@ -119,8 +120,14 @@ class ExtensionFunctions():
         return_type = 'const std::string&'
 
         # create the function implementation
-        bottom_if = self.create_code_block('if', ['pkgVersion == 1',
-                                                  'return getXmlnsL3V1V1()'])
+        if self.num_versions == 1:
+            bottom_if = self.create_code_block('if', ['pkgVersion == 1',
+                                                      'return getXmlnsL3V1V1()'])
+        else:
+            bottom_if = self.create_code_block('if_else', ['pkgVersion == 1',
+                                                      'return getXmlnsL3V1V1()',
+                                                      'else',
+                                                      'return getXmlnsL3V1V2()'])
         middle_if = self.create_code_block('if', ['{} == 1'.format(vers),
                                                   bottom_if])
         code = [self.create_code_block('if', ['{} == 3'.format(level),
@@ -162,13 +169,26 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
+        write_else = False
         if other == 'Level':
             value = 3
-        else:
+        elif other == 'Version':
             value = 1
-        implementation = ['uri == getXmlnsL3V1V1()', 'return {}'.format(value)]
-        code = [dict({'code_type': 'if', 'code': implementation}),
-                self.create_code_block('line', ['return 0'])]
+        elif self.num_versions == 1:
+            value = 1
+        else:
+            write_else = True
+
+        if write_else:
+            implementation = ['uri == getXmlnsL3V1V1()', 'return 1', 'else if',
+                              'uri == getXmlnsL3V1V2()', 'return 2']
+            code = [dict({'code_type': 'else_if', 'code': implementation}),
+                    self.create_code_block('line', ['return 0'])]
+
+        else:
+            implementation = ['uri == getXmlnsL3V1V1()', 'return {}'.format(value)]
+            code = [dict({'code_type': 'if', 'code': implementation}),
+                    self.create_code_block('line', ['return 0'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -205,12 +225,20 @@ class ExtensionFunctions():
         # create the function implementation
         code = [dict({'code_type': 'line',
                       'code': ['{}PkgNamespaces* pkgns = '
-                               'NULL'.format(self.up_package)]}),
-                self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
+                               'NULL'.format(self.up_package)]})]
+        if self.num_versions == 1:
+            code .append(self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
+                                              'pkgns = new {}PkgNamespaces'
+                                              '(3, 1, 1)'.format(self.up_package)]))
+        else:
+            code .append(self.create_code_block('else_if', ['uri == getXmlnsL3V1V1()',
                                               'pkgns = new {}PkgNamespaces'
                                               '(3, 1, 1)'
-                                              ''.format(self.up_package)]),
-                self.create_code_block('line', ['return pkgns'])]
+                                              ''.format(self.up_package),
+                                              'else if', 'uri == getXmlnsL3V1V2()',
+                                              'pkgns = new {}PkgNamespaces(3, 1, 2)'.format(self.up_package)]))
+
+        code.append(self.create_code_block('line', ['return pkgns']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -226,7 +254,6 @@ class ExtensionFunctions():
                      'implementation': code})
 
     # function to write getExtension namespaces
-    @property
     def write_get_string_typecode(self):
         # create comment parts
         title_line = 'Returns the given {}{}TypeCode_t(int) ' \

@@ -71,6 +71,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.enums = package['enums']
         self.offset = package['offset']
         self.plugins = package['plugins']
+        self.num_versions = 1
+        if 'num_versions' in package:
+            self.num_versions = package['num_versions']
 
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
@@ -154,7 +157,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # function to write the static get functions
     def write_attribute_functions(self):
         self.class_object['class_attributes'] \
-            = query.get_static_extension_attribs()
+            = query.get_static_extension_attribs(self.num_versions)
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
                                                            self.is_cpp_api,
                                                            self.is_list_of,
@@ -192,7 +195,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         code = ext_functions.write_get_namespaces()
         self.write_function_declaration(code)
 
-        code = ext_functions.write_get_string_typecode
+        code = ext_functions.write_get_string_typecode()
         self.write_function_declaration(code)
 
         code = ext_functions.write_get_error_table()
