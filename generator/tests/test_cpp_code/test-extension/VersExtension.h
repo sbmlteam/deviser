@@ -336,8 +336,9 @@ typedef enum
 {
   CLASS_ONE       =   100  /*!<ClassOne */
 , CLASS_A         =   101  /*!<Another */
-, CLASS_TWO       =   102  /*!<ClassTwo */
-, CLASS_THREE     =   103  /*!<ClassThree */
+, CLASS_B         =   102  /*!<BBB */
+, CLASS_TWO       =   103  /*!<ClassTwo */
+, CLASS_THREE     =   104  /*!<ClassThree */
 } SBMLVersTypeCode_t;
 
 

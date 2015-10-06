@@ -761,12 +761,15 @@ VersModelPlugin::readV1Attributes(const XMLAttributes& attributes)
   unsigned int level = getLevel();
   unsigned int version = getVersion();
   bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
 
   // 
   // version uint (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetVersion = attributes.readInto("version", mVersion);
 
   if ( mIsSetVersion == false)
@@ -798,12 +801,15 @@ VersModelPlugin::readV2Attributes(const XMLAttributes& attributes)
   unsigned int level = getLevel();
   unsigned int version = getVersion();
   bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
 
   // 
   // version2 uint (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetVersion2 = attributes.readInto("version2", mVersion2);
 
   if ( mIsSetVersion2 == false)

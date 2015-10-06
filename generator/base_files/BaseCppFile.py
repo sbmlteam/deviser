@@ -282,7 +282,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['children_overwrite'] = False
                 else:
                     attributes[i]['children_overwrite'] = True
-            elif att_type == 'lo_element':
+            elif att_type == 'lo_element' or att_type == 'inline_lo_element':
                 name = strFunctions.list_of_name(attributes[i]['element'])
                 plural = strFunctions.plural_no_prefix(attributes[i]['element'])
                 attributes[i]['attType'] = 'lo_element'
@@ -310,18 +310,24 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def get_children(self):
         elements = []
+        listed_elements = []
         for i in range(0, len(self.attributes)):
             att_type = self.attributes[i]['attType']
-            if att_type == 'element':
+            name = self.attributes[i]['name']
+            if att_type == 'element' and name not in listed_elements:
                 elements.append(self.attributes[i])
+                listed_elements.append(name)
         return elements
 
     def get_lo_children(self):
         elements = []
+        listed_elements = []
         for i in range(0, len(self.attributes)):
             att_type = self.attributes[i]['attType']
-            if att_type == 'lo_element':
+            name = self.attributes[i]['name']
+            if att_type == 'lo_element' and name not in listed_elements:
                 elements.append(self.attributes[i])
+                listed_elements.append(name)
         return elements
 
     ########################################################################

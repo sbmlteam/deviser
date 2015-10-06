@@ -1042,8 +1042,9 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing.";
-    getErrorLog()->logPackageError("spatial",
+    std::string message = "Spatial attribute 'id' is missing from the "
+      "<CoordinateComponent> element.";
+    log->logPackageError("spatial",
       SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
         message);
   }

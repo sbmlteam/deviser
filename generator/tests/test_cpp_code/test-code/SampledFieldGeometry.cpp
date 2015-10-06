@@ -715,8 +715,9 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'sampledField' is missing.";
-    getErrorLog()->logPackageError("spatial",
+    std::string message = "Spatial attribute 'sampledField' is missing from the "
+      "<SampledFieldGeometry> element.";
+    log->logPackageError("spatial",
       SpatialSampledFieldGeometryAllowedAttributes, pkgVersion, level, version,
         message);
   }

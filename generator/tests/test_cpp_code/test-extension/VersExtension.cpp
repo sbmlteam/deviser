@@ -132,6 +132,7 @@ const char* SBML_VERS_TYPECODE_STRINGS[] =
 {
     "ClassOne"
   , "Another"
+  , "BBB"
   , "ClassTwo"
   , "ClassThree"
 };

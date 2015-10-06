@@ -597,7 +597,10 @@ class ProtectedFunctions():
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
                           'unsigned int version = getVersion()',
-                          'bool assigned = false']
+                          'bool assigned = false',
+                          'unsigned int pkgVersion = getPackageVersion()',
+                          'SBMLErrorLog* log = getErrorLog()',
+                          'unsigned int numErrs']
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         for i in range(0, len(self.version_attributes[version-1])):
@@ -988,7 +991,6 @@ class ProtectedFunctions():
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
-        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
 
         implementation = ['', '{} {} (use = \"{}\"'
                               ' )'.format(name, att_type, status),
@@ -1005,13 +1007,33 @@ class ProtectedFunctions():
         elif att_type == 'int' or att_type == 'uint' or att_type == 'double':
             self.write_number_read(index, code, att_type, attributes)
         elif att_type == 'bool':
-            line = ['{} = attributes.readInto(\"{}\", '
-                    '{})'.format(set_name, name, member)]
-            code.append(self.create_code_block('line', line))
+            self.write_bool_read(index, code, attributes)
         else:
             line = ['assigned = attributes.readInto(\"{}\", '
                     '{})'.format(name, member)]
             code.append(self.create_code_block('line', line))
+
+    def write_bool_read(self, index, code, attributes):
+        attribute = attributes[index]
+        name = attribute['name']
+        member = attribute['memberName']
+        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
+        line = ['{} = attributes.readInto(\"{}\", '
+                '{})'.format(set_name, name, member)]
+        code.append(self.create_code_block('line', line))
+
+        # sort error names to be used
+        error = '{}{}AllowedAttributes'.format(self.package, self.class_name)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+        if attribute['reqd']:
+            line = ['!{}'.format(set_name),
+                    'std::string message = \"{} attribute \'{}\' is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
+                    'log->{}{}, {}, message)'.format(self.error, error, self.given_args)]
+            code.append(self.create_code_block('if', line))
+
+
 
     def write_sid_read(self, index, code, attributes):
         attribute = attributes[index]
@@ -1058,8 +1080,8 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', block))
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing.\"'.format(self.package, name),
-                           'getErrorLog()->{}{}, {}, message'
+                           'is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
+                           'log->{}{}, {}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1096,7 +1118,7 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', block))
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing.\"'.format(self.package, name),
+                           'is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
                            'log->{}{}, {}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
@@ -1194,7 +1216,7 @@ class ProtectedFunctions():
                 error = '{}Unknown'.format(self.package)
             if att_error not in global_variables.error_list:
                 att_error = '{}Unknown'.format(self.package)
-        line = ['numErrs = getErrorLog()->getNumErrors()',
+        line = ['numErrs = log->getNumErrors()',
                 '{} = attributes.readInto(\"{}\", {})'.format(set_name,
                                                               name,
                                                               member)]

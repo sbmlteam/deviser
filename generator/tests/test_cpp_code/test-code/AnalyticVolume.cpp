@@ -749,10 +749,10 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing.";
-    getErrorLog()->logPackageError("spatial",
-      SpatialAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
-        message);
+    std::string message = "Spatial attribute 'id' is missing from the "
+      "<AnalyticVolume> element.";
+    log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
+      pkgVersion, level, version, message);
   }
 
   // 
@@ -800,7 +800,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   // ordinal int (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetOrdinal = attributes.readInto("ordinal", mOrdinal);
 
   if ( mIsSetOrdinal == false)
@@ -837,10 +837,10 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'domainType' is missing.";
-    getErrorLog()->logPackageError("spatial",
-      SpatialAnalyticVolumeAllowedAttributes, pkgVersion, level, version,
-        message);
+    std::string message = "Spatial attribute 'domainType' is missing from the "
+      "<AnalyticVolume> element.";
+    log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
+      pkgVersion, level, version, message);
   }
 }
 

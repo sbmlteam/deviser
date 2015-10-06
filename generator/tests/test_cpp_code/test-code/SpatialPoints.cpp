@@ -705,10 +705,10 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing.";
-    getErrorLog()->logPackageError("spatial",
-      SpatialSpatialPointsAllowedAttributes, pkgVersion, level, version,
-        message);
+    std::string message = "Spatial attribute 'id' is missing from the "
+      "<SpatialPoints> element.";
+    log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
+      pkgVersion, level, version, message);
   }
 
   // 
@@ -756,7 +756,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   // arrayDataLength int (use = "required" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetArrayDataLength = attributes.readInto("arrayDataLength",
     mArrayDataLength);
 

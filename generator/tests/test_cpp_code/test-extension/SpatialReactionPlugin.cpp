@@ -304,6 +304,15 @@ SpatialReactionPlugin::readAttributes(const XMLAttributes& attributes,
   // 
 
   mIsSetIsLocal = attributes.readInto("isLocal", mIsLocal);
+
+  if (!mIsSetIsLocal)
+  {
+    std::string message = "Spatial attribute 'isLocal' is missing from the "
+      "<SpatialReactionPlugin> element.";
+    log->logPackageError("spatial",
+      SpatialSpatialReactionPluginAllowedAttributes, pkgVersion, level, version,
+        message);
+  }
 }
 
 /** @endcond */

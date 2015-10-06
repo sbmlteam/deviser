@@ -1126,7 +1126,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num uint (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetNum = attributes.readInto("num", mNum);
 
   if ( mIsSetNum == false)
@@ -1146,7 +1146,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num2 uint (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetNum2 = attributes.readInto("num2", mNum2);
 
   if ( mIsSetNum2 == false)
@@ -1166,7 +1166,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num3 int (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetNum3 = attributes.readInto("num3", mNum3);
 
   if ( mIsSetNum3 == false)
@@ -1186,7 +1186,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num1 double (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetNum1 = attributes.readInto("num1", mNum1);
 
   if ( mIsSetNum1 == false)

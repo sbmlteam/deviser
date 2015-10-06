@@ -504,6 +504,9 @@ ClassOne::readV1Attributes(const XMLAttributes& attributes)
   unsigned int level = getLevel();
   unsigned int version = getVersion();
   bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
 
   // 
   // id SId (use = "required" )
@@ -525,9 +528,10 @@ ClassOne::readV1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing.";
-    getErrorLog()->logPackageError("vers", VersClassOneAllowedAttributes,
-      pkgVersion, level, version, message);
+    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
+      "element.";
+    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
+      level, version, message);
   }
 
   // 
@@ -552,6 +556,9 @@ ClassOne::readV2Attributes(const XMLAttributes& attributes)
   unsigned int level = getLevel();
   unsigned int version = getVersion();
   bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
 
   // 
   // id SId (use = "required" )
@@ -573,9 +580,10 @@ ClassOne::readV2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing.";
-    getErrorLog()->logPackageError("vers", VersClassOneAllowedAttributes,
-      pkgVersion, level, version, message);
+    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
+      "element.";
+    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
+      level, version, message);
   }
 
   // 

@@ -680,9 +680,10 @@ Output::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Qual attribute 'qualitativeSpecies' is missing.";
-    getErrorLog()->logPackageError("qual", QualOutputAllowedAttributes,
-      pkgVersion, level, version, message);
+    std::string message = "Qual attribute 'qualitativeSpecies' is missing from "
+      "the <Output> element.";
+    log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
+      level, version, message);
   }
 
   // 
@@ -745,7 +746,7 @@ Output::readAttributes(const XMLAttributes& attributes,
   // outputLevel int (use = "optional" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetOutputLevel = attributes.readInto("outputLevel", mOutputLevel);
 
   if ( mIsSetOutputLevel == false)

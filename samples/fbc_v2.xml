@@ -70,7 +70,7 @@
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
-            <attribute name="reaction" required="true" type="SIdRef" abstract="false"/>
+            <attribute name="reaction" required="true" type="SIdRef" element="Reaction" abstract="false"/>
             <attribute name="coefficient" required="true" type="double" abstract="false"/>
           </attributes>
         </element>
@@ -79,7 +79,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="FbcType" abstract="false"/>
-            <attribute name="fluxObjective" required="false" type="lo_element" element="FluxObjective" abstract="false"/>
+            <attribute name="fluxObjectives" required="false" type="lo_element" element="FluxObjective" abstract="false"/>
           </attributes>
           <listOfAttributes>
             <listOfAttribute name="activeObjective" required="false" type="SIdRef" element="Objective" abstract="false"/>
@@ -110,7 +110,7 @@
             <attribute name="association" required="false" type="inline_lo_element" element="Association" abstract="false"/>
           </attributes>
         </element>
-        <element name="Association" typeCode="SBML_FBC_ASSOCIATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Association" typeCode="SBML_FBC_ASSOCIATION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <concretes>
             <concrete name="and" element="FbcAnd"/>
             <concrete name="or" element="FbcOr"/>

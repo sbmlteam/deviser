@@ -8,6 +8,7 @@ from parseXML import ParseXML
 from util import global_variables
 
 fails = []
+not_tested = []
 
 
 def generate_cpp_header(filename, num):
@@ -102,18 +103,24 @@ def read_file(path):
 
 def compare_files(infile, outfile):
     global fails
+    global not_tested
     ret = 0
-    if not os.path.isfile(infile) or not os.path.isfile(outfile):
+    if not os.path.isfile(infile):
+        # we have not added a file to compare to
+        not_tested.append(infile)
+        return ret
+    elif not os.path.isfile(outfile):
+        print(outfile)
         fails.append(infile)
-        print('=================>> FAILED')
+        print('{}=================>> MISSING'.format(outfile))
         return 1
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
-        print('PASSED')
+        print('{} .... PASSED'.format(outfile))
     else:
         fails.append(infile)
-        print('=================>> FAILED')
+        print('{}=================>> FAILED'.format(outfile))
         ret = 1
     return ret
 
@@ -127,25 +134,18 @@ def run_test(name, num, class_name, test_case, list_of):
     generate_new_cpp_header(filename, num)
     correct_file = '.\\test-code\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
-    if os.path.isfile(correct_file):
-        print('{}.h'.format(class_name))
-        fail = compare_files(correct_file, temp_file)
+    fail = compare_files(correct_file, temp_file)
     correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
     temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
-    if os.path.isfile(correct_cpp_file):
-        print('{}.cpp'.format(class_name))
-        fail += compare_files(correct_cpp_file, temp_cpp_file)
+    fail += compare_files(correct_cpp_file, temp_cpp_file)
     if len(list_of) > 0:
         class_name = list_of
-        print('{}.h'.format(class_name))
         correct_file = '.\\test-code\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
         fail += compare_files(correct_file, temp_file)
         correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
         temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
-        if os.path.isfile(correct_cpp_file):
-            print('{}.cpp'.format(class_name))
-            fail += compare_files(correct_cpp_file, temp_cpp_file)
+        fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
 
@@ -164,13 +164,10 @@ def run_ext_test(name, class_name, test_case, test):
         generate_fwd_header(filename)
     correct_file = '.\\test-extension\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
-    if os.path.isfile(correct_file):
-        print('{}.h'.format(class_name))
-        fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
-    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
-    if os.path.isfile(correct_cpp_file):
-        print('{}.cpp'.format(class_name))
+    fail = compare_files(correct_file, temp_file)
+    if test == 0:
+        correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
+        temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
         fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
@@ -185,14 +182,10 @@ def run_plug_test(name, class_name, test_case, num):
     generate_plugin_header(filename, num)
     correct_file = '.\\test-extension\\{}.h'.format(class_name)
     temp_file = '.\\temp\\{}.h'.format(class_name)
-    if os.path.isfile(correct_file):
-        print('{}.h'.format(class_name))
-        fail = compare_files(correct_file, temp_file)
+    fail = compare_files(correct_file, temp_file)
     correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
     temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
-    if os.path.isfile(correct_cpp_file) and os.path.isfile(temp_cpp_file):
-        print('{}.cpp'.format(class_name))
-        fail += compare_files(correct_cpp_file, temp_cpp_file)
+    fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
 
@@ -207,21 +200,15 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
         generate_error_header(filename)
         correct_file = '.\\test-extension\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
-        if os.path.isfile(correct_file):
-            print('{}.h'.format(class_name))
-            fail = compare_files(correct_file, temp_file)
+        fail = compare_files(correct_file, temp_file)
     else:
         generate_validator(filename)
         correct_file = '.\\test-extension\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
-        if os.path.isfile(correct_file):
-            print('{}.h'.format(class_name))
-            fail = compare_files(correct_file, temp_file)
+        fail = compare_files(correct_file, temp_file)
         correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
         temp_file = '.\\temp\\{}.cpp'.format(class_name)
-        if os.path.isfile(correct_file):
-            print('{}.cpp'.format(class_name))
-            fail += compare_files(correct_file, temp_file)
+        fail += compare_files(correct_file, temp_file)
     print('')
     return fail
 
@@ -235,14 +222,10 @@ def run_constraints_test(name, class_name, test_case):
     generate_constraints(filename)
     correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
     temp_file = '.\\temp\\{}.cpp'.format(class_name)
-    if os.path.isfile(correct_file):
-        print('{}.cpp'.format(class_name))
-        fail = compare_files(correct_file, temp_file)
+    fail = compare_files(correct_file, temp_file)
     correct_cpp_file = '.\\test-extension\\{}Declared.cxx'.format(class_name)
     temp_cpp_file = '.\\temp\\{}Declared.cxx'.format(class_name)
-    if os.path.isfile(correct_cpp_file) and os.path.isfile(temp_cpp_file):
-        print('{}Declared.cxx'.format(class_name))
-        fail += compare_files(correct_cpp_file, temp_cpp_file)
+    fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
 
@@ -270,6 +253,13 @@ def main():
     class_name = 'MyTestClass'
     list_of = ''
     test_case = 'all types of attributes'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_att'
+    num = 3
+    class_name = 'MyRequiredClass'
+    list_of = ''
+    test_case = 'all types attributes required'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'qual'
@@ -456,6 +446,13 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_vers'
+    num = 2
+    class_name = 'BBB'
+    list_of = ''
+    test_case = 'multiple versions same child lo'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_vers'
     num = 0
     class_name = 'VersModelPlugin'
     test_case = 'versions of plugins - attributes'
@@ -480,6 +477,11 @@ def main():
     # global_variables.set_globals('sedml', 'SedBase', 'SedDocument', 'Sed',
     #                              'Libsedml', False)
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    if len(not_tested) > 0:
+        print('The following files were not tested:')
+        for name in not_tested:
+            print(name)
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

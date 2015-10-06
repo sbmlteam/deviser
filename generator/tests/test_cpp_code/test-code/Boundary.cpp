@@ -431,8 +431,9 @@ Boundary::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing.";
-    getErrorLog()->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
+    std::string message = "Spatial attribute 'id' is missing from the "
+      "<Boundary> element.";
+    log->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
       pkgVersion, level, version, message);
   }
 
@@ -440,7 +441,7 @@ Boundary::readAttributes(const XMLAttributes& attributes,
   // value double (use = "required" )
   // 
 
-  numErrs = getErrorLog()->getNumErrors();
+  numErrs = log->getNumErrors();
   mIsSetValue = attributes.readInto("value", mValue);
 
   if ( mIsSetValue == false)
