@@ -308,6 +308,29 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['default'] = 'FIX ME'
         return attributes
 
+    def create_lo_other_child_element_class(self, name, parent):
+        capname = strFunctions.upper_first(name)
+        element = dict({'isArray': False,
+                        'name': strFunctions.lower_first(capname),
+                        'attTypeCode': capname + '*',
+                        'CType': capname + '_t *',
+                        'capAttName': capname,
+                        'attType': 'element',
+                        'memberName': 'm' + capname,
+                        'isNumber': False,
+                        'type': 'element',
+                        'default': 'NULL',
+                        'element': capname,
+                        'is_ml': False,
+                        'children_overwrite': False,
+                        'abstract': False})
+        child_class = dict({'name': parent,
+                            'package': self.package,
+                            'class_attributes': [],
+                            'child_elements': [element]})
+        return child_class
+
+
     def get_children(self):
         elements = []
         listed_elements = []

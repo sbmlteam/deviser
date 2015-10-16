@@ -345,3 +345,15 @@ def get_max_length(elements, attribute):
         if len(elements[i][attribute]) > max_len:
             max_len = len(elements[i][attribute])
     return max_len
+
+
+def get_other_element_children(object, element):
+    other_children = []
+    child = get_class(element['element'], object['root'])
+    if child is None or 'lo_attribs' not in child:
+        return other_children
+    for i in range (0, len(child['lo_attribs'])):
+        if child['lo_attribs'][i]['type'] == 'element':
+            other_children.append(child['lo_attribs'][i]['element'])
+    return other_children
+

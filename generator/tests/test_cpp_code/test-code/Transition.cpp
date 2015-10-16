@@ -728,6 +728,89 @@ Transition::removeFunctionTerm(unsigned int n)
 
 
 /*
+ * Returns the value of the "defaultTerm" element of this Transition.
+ */
+const DefaultTerm*
+Transition::getDefaultTerm() const
+{
+  return mDefaultTerm;
+}
+
+
+/*
+ * Returns the value of the "defaultTerm" element of this Transition.
+ */
+DefaultTerm*
+Transition::getDefaultTerm()
+{
+  return mDefaultTerm;
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * Transition's "defaultTerm" element has been set.
+ */
+bool
+Transition::isSetDefaultTerm() const
+{
+  return (mDefaultTerm != NULL);
+}
+
+
+/*
+ * Sets the value of the "defaultTerm" element of this Transition.
+ */
+int
+Transition::setDefaultTerm(const DefaultTerm* defaultTerm)
+{
+  if (mDefaultTerm == defaultTerm)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (defaultTerm == NULL)
+  {
+    delete mDefaultTerm;
+    mDefaultTerm = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mDefaultTerm;
+    mDefaultTerm = (defaultTerm != NULL) ? defaultTerm->clone() : NULL;
+    if (mDefaultTerm != NULL)
+    {
+      mDefaultTerm->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Creates a new DefaultTerm object, adds it to this Transition object and
+ * returns the DefaultTerm object created.
+ */
+DefaultTerm*
+Transition::createDefaultTerm()
+{
+}
+
+
+/*
+ * Unsets the value of the "defaultTerm" element of this Transition.
+ */
+int
+Transition::unsetDefaultTerm()
+{
+  delete mDefaultTerm;
+  mDefaultTerm = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
  * Returns the XML name of this Transition object.
  */
 const std::string&
@@ -1632,6 +1715,67 @@ FunctionTerm_t*
 Transition_removeFunctionTerm(Transition_t* t, unsigned int n)
 {
   return (t != NULL) ? t->removeFunctionTerm(n) : NULL;
+}
+
+
+/*
+ * Returns the value of the "defaultTerm" element of this Transition_t.
+ */
+LIBSBML_EXTERN
+const DefaultTerm_t *
+Transition_getDefaultTerm(const Transition_t * t)
+{
+  if (t == NULL)
+  {
+    return NULL;
+  }
+
+  return (DefaultTerm_t *)(t->getDefaultTerm());
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
+ * "defaultTerm" element has been set.
+ */
+LIBSBML_EXTERN
+int
+Transition_isSetDefaultTerm(const Transition_t * t)
+{
+  return (t != NULL) ? static_cast<int>(t->isSetDefaultTerm()) : 0;
+}
+
+
+/*
+ * Sets the value of the "defaultTerm" element of this Transition_t.
+ */
+LIBSBML_EXTERN
+int
+Transition_setDefaultTerm(Transition_t * t, const DefaultTerm_t * defaultTerm)
+{
+  return (t != NULL) ? t->setDefaultTerm(defaultTerm) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new DefaultTerm_t object, adds it to this Transition_t object and
+ * returns the DefaultTerm_t object created.
+ */
+LIBSBML_EXTERN
+DefaultTerm_t *
+Transition_createDefaultTerm(Transition_t* t)
+{
+}
+
+
+/*
+ * Unsets the value of the "defaultTerm" element of this Transition_t.
+ */
+LIBSBML_EXTERN
+int
+Transition_unsetDefaultTerm(Transition_t * t)
+{
+  return (t != NULL) ? t->unsetDefaultTerm() : LIBSBML_INVALID_OBJECT;
 }
 
 

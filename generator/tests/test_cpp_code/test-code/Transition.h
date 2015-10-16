@@ -635,6 +635,67 @@ public:
 
 
   /**
+   * Returns the value of the "defaultTerm" element of this Transition.
+   *
+   * @return the value of the "defaultTerm" element of this Transition as a
+   * DefaultTerm*.
+   */
+  const DefaultTerm* getDefaultTerm() const;
+
+
+  /**
+   * Returns the value of the "defaultTerm" element of this Transition.
+   *
+   * @return the value of the "defaultTerm" element of this Transition as a
+   * DefaultTerm*.
+   */
+  DefaultTerm* getDefaultTerm();
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * Transition's "defaultTerm" element has been set.
+   *
+   * @return @c true if this Transition's "defaultTerm" element has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetDefaultTerm() const;
+
+
+  /**
+   * Sets the value of the "defaultTerm" element of this Transition.
+   *
+   * @param defaultTerm DefaultTerm* value of the "defaultTerm" element to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setDefaultTerm(const DefaultTerm* defaultTerm);
+
+
+  /**
+   * Creates a new DefaultTerm object, adds it to this Transition object and
+   * returns the DefaultTerm object created.
+   *
+   * @return a new DefaultTerm object instance.
+   */
+  DefaultTerm* createDefaultTerm();
+
+
+  /**
+   * Unsets the value of the "defaultTerm" element of this Transition.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetDefaultTerm();
+
+
+  /**
    * Returns the XML name of this Transition object.
    *
    * @return the name of this element; that is "transition".
@@ -1430,6 +1491,89 @@ Transition_createFunctionTerm(Transition_t* t);
 LIBSBML_EXTERN
 FunctionTerm_t*
 Transition_removeFunctionTerm(Transition_t* t, unsigned int n);
+
+
+/**
+ * Returns the value of the "defaultTerm" element of this Transition_t.
+ *
+ * @param t the Transition_t structure whose defaultTerm is sought.
+ *
+ * @return the value of the "defaultTerm" element of this Transition_t as a
+ * DefaultTerm*.
+ *
+ * @memberof Transition_t
+ */
+LIBSBML_EXTERN
+const DefaultTerm_t *
+Transition_getDefaultTerm(const Transition_t * t);
+
+
+/**
+ * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
+ * "defaultTerm" element has been set.
+ *
+ * @param t the Transition_t structure.
+ *
+ * @return @c 1 if this Transition_t's "defaultTerm" element has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof Transition_t
+ */
+LIBSBML_EXTERN
+int
+Transition_isSetDefaultTerm(const Transition_t * t);
+
+
+/**
+ * Sets the value of the "defaultTerm" element of this Transition_t.
+ *
+ * @param t the Transition_t structure.
+ *
+ * @param defaultTerm DefaultTerm_t * value of the "defaultTerm" element to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof Transition_t
+ */
+LIBSBML_EXTERN
+int
+Transition_setDefaultTerm(Transition_t * t,
+                          const DefaultTerm_t * defaultTerm);
+
+
+/**
+ * Creates a new DefaultTerm_t object, adds it to this Transition_t object and
+ * returns the DefaultTerm_t object created.
+ *
+ * @param t, the Transition_t structure to which the DefaultTerm_t should be
+ * added.
+ *
+ * @return a new DefaultTerm_t object instance.
+ *
+ * @memberof Transition_t
+ */
+LIBSBML_EXTERN
+DefaultTerm_t *
+Transition_createDefaultTerm(Transition_t* t);
+
+
+/**
+ * Unsets the value of the "defaultTerm" element of this Transition_t.
+ *
+ * @param t the Transition_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof Transition_t
+ */
+LIBSBML_EXTERN
+int
+Transition_unsetDefaultTerm(Transition_t * t);
 
 
 /**
