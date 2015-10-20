@@ -57,6 +57,8 @@ global library_name
 library_name = 'Libsbml'
 global is_package
 is_package = True
+global package_prefix
+package_prefix = ''
 
 
 global ret_success
@@ -90,20 +92,34 @@ global ret_att_unex
 ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 
-def set_globals(lang, base, doc, prfix, lib, is_pack):
+def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix):
     global language
     language = lang
 
-    global baseClass
-    baseClass = base
-    global std_base
-    std_base = base
-    global document_class
-    document_class = doc
-    global prefix
-    prefix = prfix
+    if base:
+        global baseClass
+        baseClass = base
+        global std_base
+        std_base = base
+
+    if doc:
+        global document_class
+        document_class = doc
+
+    if prfix:
+        global prefix
+        prefix = prfix
+
+    if pkg_prefix:
+        global package_prefix
+        package_prefix = pkg_prefix
+
     global library_name
-    library_name = lib
+    if lib:
+        library_name = lib
+    else:
+        library_name = 'Lib' + language
+
     global is_package
     is_package = is_pack
 
@@ -136,5 +152,3 @@ def set_globals(lang, base, doc, prfix, lib, is_pack):
 
     global ret_att_unex
     ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
-
-

@@ -469,6 +469,13 @@ def main():
     test_case = 'multi version extension file'
     fail += run_ext_test(name, class_name, test_case, 0)
 
+    name = 'fbc_v2'
+    num = 5
+    class_name = 'FbcAnd'
+    list_of = ''
+    test_case = 'inline_lo_element'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'test_child'
     num = 0
     class_name = 'MySEDClass'

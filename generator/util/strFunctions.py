@@ -103,14 +103,23 @@ def plural(name):
 
 
 def remove_prefix(name):
+    prefix_to_remove = ''
     if global_variables.prefix == 'SBML':
+        # we might want to remove the name of the package
+        if global_variables.is_package \
+                and global_variables.package_prefix != '':
+            prefix_to_remove = global_variables.package_prefix
+    else:
+        prefix_to_remove = global_variables.prefix
+    length = len(prefix_to_remove)
+    if length == 0:
         return name
-    length = len(global_variables.prefix)
-    if name.startswith(global_variables.prefix):
+    if name.startswith(prefix_to_remove):
         newname = name[length:]
     else:
         newname = name
     return newname
+
 
 def get_indefinite(name):
     if name.startswith('a') or name.startswith('A') \

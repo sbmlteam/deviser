@@ -211,6 +211,11 @@ class ProtectedFunctions():
                         implementation = self.get_abstract_block(element, ns)
                         code.append(self.create_code_block('else_if',
                                                            implementation))
+                    elif element['type'] == 'inline_lo_element':
+                        implementation = ['obj = {}.createObject(stream'
+                                          ')'.format(element['memberName'])]
+                        code.append(self.create_code_block('line',
+                                                           implementation))
                     elif element['attType'] == 'lo_element':
                         implementation = self.get_lo_block(element, error_line)
                         code.append(self.create_code_block('if',
@@ -1031,11 +1036,13 @@ class ProtectedFunctions():
                 error = '{}Unknown'.format(self.package)
         if attribute['reqd']:
             line = ['!{}'.format(set_name),
-                    'std::string message = \"{} attribute \'{}\' is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
-                    'log->{}{}, {}, message)'.format(self.error, error, self.given_args)]
+                    'std::string message = \"{} attribute \'{}\' is '
+                    'missing from the <{}> element.\"'.format(self.package,
+                                                              name,
+                                                              self.class_name),
+                    'log->{}{}, {}, message)'.format(self.error, error,
+                                                     self.given_args)]
             code.append(self.create_code_block('if', line))
-
-
 
     def write_sid_read(self, index, code, attributes):
         attribute = attributes[index]
@@ -1082,7 +1089,9 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', block))
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
+                           'is missing from the <{}> '
+                           'element.\"'.format(self.package, name,
+                                               self.class_name),
                            'log->{}{}, {}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
@@ -1120,7 +1129,9 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', block))
         else:
             extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing from the <{}> element.\"'.format(self.package, name, self.class_name),
+                           'is missing from the <{}> '
+                           'element.\"'.format(self.package, name,
+                                               self.class_name),
                            'log->{}{}, {}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',

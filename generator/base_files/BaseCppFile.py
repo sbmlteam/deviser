@@ -330,7 +330,6 @@ class BaseCppFile(BaseFile.BaseFile):
                             'child_elements': [element]})
         return child_class
 
-
     def get_children(self):
         elements = []
         listed_elements = []
@@ -346,10 +345,16 @@ class BaseCppFile(BaseFile.BaseFile):
         elements = []
         listed_elements = []
         for i in range(0, len(self.attributes)):
-            att_type = self.attributes[i]['attType']
-            name = self.attributes[i]['name']
+            attribute = self.attributes[i]
+            att_type = attribute['attType']
+            name = attribute['name']
             if att_type == 'lo_element' and name not in listed_elements:
-                elements.append(self.attributes[i])
+                # check for concrete instances
+                if attribute['type'] == 'inline_lo_element':
+                    capname = strFunctions.upper_first(name)
+                    attrib_class = query.get_class(capname, attribute['root'])
+                    attribute['concrete'] = attrib_class['concrete']
+                elements.append(attribute)
                 listed_elements.append(name)
         return elements
 

@@ -76,6 +76,9 @@ def has_children(attributes):
         return True
     elif any(attribute['type'] == 'lo_element' for attribute in attributes):
         return True
+    elif any(attribute['type'] == 'inline_lo_element'
+             for attribute in attributes):
+        return True
     return False
 
 
@@ -347,13 +350,12 @@ def get_max_length(elements, attribute):
     return max_len
 
 
-def get_other_element_children(object, element):
+def get_other_element_children(this_object, element):
     other_children = []
-    child = get_class(element['element'], object['root'])
+    child = get_class(element['element'], this_object['root'])
     if child is None or 'lo_attribs' not in child:
         return other_children
-    for i in range (0, len(child['lo_attribs'])):
+    for i in range(0, len(child['lo_attribs'])):
         if child['lo_attribs'][i]['type'] == 'element':
             other_children.append(child['lo_attribs'][i]['element'])
     return other_children
-

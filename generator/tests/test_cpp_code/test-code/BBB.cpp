@@ -293,7 +293,8 @@ BBB::createAnother()
 
   try
   {
-    VERS_CREATE_NS(versns, getSBMLNamespaces());
+    VERS_CREATE_NS_WITH_VERSION(versns, getSBMLNamespaces(),
+      getPackageVersion());
     a = new Another(versns);
     delete versns;
   }

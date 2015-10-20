@@ -832,10 +832,16 @@ class ListOfQueryFunctions():
             implementation = ['{}* {} = NULL'.format(self.child_name,
                                                      self.abbrev_child)]
             code = [self.create_code_block('line', implementation)]
-            implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}Namespaces'
-                              '())'.format(pack_up, pack_low,
-                                           global_variables.prefix),
+
+            if self.class_object['num_versions'] > 1:
+                line = '{}_CREATE_NS_WITH_VERSION({}ns, get{}Namespaces(), ' \
+                       'getPackageVersion())'.format(pack_up, pack_low,
+                                                     global_variables.prefix)
+            else:
+                line = '{}_CREATE_NS({}ns, ' \
+                       'get{}Namespaces())'.format(pack_up, pack_low,
+                                                   global_variables.prefix)
+            implementation = [line,
                               '{} = new {}({}ns)'.format(self.abbrev_child,
                                                          self.child_name,
                                                          pack_low),
@@ -859,10 +865,15 @@ class ListOfQueryFunctions():
             implementation = ['{}* {} = NULL'.format(child,
                                                      abbrev_child)]
             code = [self.create_code_block('line', implementation)]
-            implementation = ['{}_CREATE_NS({}ns, '
-                              'get{}'
-                              'Namespaces())'.format(pack_up, pack_low,
-                                                     global_variables.prefix),
+            if self.class_object['num_versions'] > 1:
+                line = '{}_CREATE_NS_WITH_VERSION({}ns, get{}Namespaces(), ' \
+                       'getPackageVersion())'.format(pack_up, pack_low,
+                                                     global_variables.prefix)
+            else:
+                line = '{}_CREATE_NS({}ns, ' \
+                       'get{}Namespaces())'.format(pack_up, pack_low,
+                                                   global_variables.prefix)
+            implementation = [line,
                               '{} = new {}({}ns)'.format(abbrev_child,
                                                          child,
                                                          pack_low),

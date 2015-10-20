@@ -333,7 +333,7 @@ class ParseXML():
         # name in a different version
         if pkg_version > 1:
             plugin = query.get_matching_element('sbase', ext_point,
-                                                 self.plugins)
+                                                self.plugins)
         if plugin:
             for reference in node.getElementsByTagName('reference'):
                 temp = self.find_element(self.elements,
@@ -456,6 +456,25 @@ class ParseXML():
             if occurs_as_child:
                 elem['parent'] = parent
 
+    def read_language_element(self, node):
+        language = self.get_value(node, 'name')
+        base_class = self.get_value(node, 'baseClass')
+        document_class = self.get_value(node, 'documentClass')
+        prefix = self.get_value(node, 'prefix')
+        library_name = self.get_value(node, 'libraryName')
+        pkg_prefix = self.get_value(node, 'pkg_prefix')
+        if node.getAttributeNode('isPackage'):
+            is_package = self.get_bool_value(self, node, 'isPackage')
+        else:
+            is_package = True
+
+        # some sanity checking
+        if not language or language == '':
+            language = 'sbml'
+        # set the globals
+        global_variables.set_globals(language.lower(), base_class,
+                                     document_class, prefix, library_name,
+                                     is_package, pkg_prefix)
     #####################################################################
 
     # main parsing function
@@ -466,7 +485,6 @@ class ParseXML():
         the definition contained in it
         """
 
-        plugins = []
         enums = []
 
         temp = self.get_value(self.dom.documentElement, 'name')
@@ -483,25 +501,8 @@ class ParseXML():
         if len(languages) > 0: 
             # read the first element
             node = languages[0]
-            language = self.get_value(node, 'name')
-            base_class = self.get_value(node, 'baseClass')
-            document_class = self.get_value(node, 'documentClass')
-            prefix = self.get_value(node, 'prefix')
-            library_name = self.get_value(node, 'libraryName')
+            self.read_language_element(node)
 
-            # some sanity checking
-            if not prefix or prefix == '':
-                prefix = language.upper()
-            if not library_name or library_name == '':
-                library_name = language.upper()
-            if not base_class or base_class == "":
-                base_class = prefix + 'Base'
-
-            # set the globals
-            global_variables.set_globals(language.lower(), base_class,
-                                         document_class, prefix, library_name,
-                                         False)
-                                       
         # get package information
         sbml_level = 3
         sbml_version = 1

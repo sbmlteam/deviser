@@ -106,20 +106,21 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing specific includes and forward declarations
 
     def write_common_includes(self):
-        self.write_line_verbatim('#include <{0}/common/extern.h>'.format(self.language))
+        self.write_line_verbatim('#include <{0}/common'
+                                 '/extern.h>'.format(self.language))
         self.write_line_verbatim('#include <{}/{}'
-                        'TypeCodes.h>'.format(self.language,
-                                              self.cap_language))
+                                 'TypeCodes.h>'.format(self.language,
+                                                       self.cap_language))
 
     def write_general_includes(self):
         lang = self.language
         up_lang = self.cap_language
-        self.write_line_verbatim('#include <{}/extension/{}Extension.h>'.format(lang,
-                                                                       up_lang))
+        self.write_line_verbatim('#include <{}/extension/'
+                                 '{}Extension.h>'.format(lang, up_lang))
         self.write_line_verbatim('#include <{}/extension/{}'
-                        'ExtensionNamespaces.h>'.format(lang, up_lang))
+                                 'ExtensionNamespaces.h>'.format(lang, up_lang))
         self.write_line_verbatim('#include <{}/extension/{}'
-                        'ExtensionRegister.h>'.format(lang, up_lang))
+                                 'ExtensionRegister.h>'.format(lang, up_lang))
         self.skip_line()
         self.write_line('#ifndef {}_CREATE_NS'.format(self.cap_package))
         self.write_line('#define {}_CREATE_NS(variable, {}'
@@ -128,6 +129,19 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                         '{}ns);'.format(self.up_package, self.language))
         self.write_line('#endif')
         self.skip_line()
+        if self.num_versions > 1:
+            self.write_line('#ifndef {}_CREATE_NS_WITH_'
+                            'VERSION'.format(self.cap_package))
+            self.write_line('#define {}_CREATE_NS_WITH_'
+                            'VERSION(variable, {}'
+                            'ns, version)\\'.format(self.cap_package,
+                                                    self.language))
+            self.write_line('  EXTENSION_CREATE_NS_WITH_VERSION('
+                            '{}PkgNamespaces, variable, '
+                            '{}ns, version);'.format(self.up_package,
+                                                     self.language))
+            self.write_line('#endif')
+            self.skip_line()
         self.write_line_verbatim('#include <vector>')
 
     ########################################################################
@@ -288,27 +302,30 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_type_includes(self):
         self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
-                        'fwd.h>'.format(self.language, self.package))
+                                 'fwd.h>'.format(self.language, self.package))
         self.skip_line()
-        self.write_line_verbatim('#include <{}/packages/{}/extension/{}Extension'
-                        '.h>'.format(self.language, self.package,
-                                     self.up_package))
-        self.write_line_verbatim('#include <{}/packages/{}/extension/{}{}Document'
-                        'Plugin.h>'.format(self.language, self.package,
-                                           self.up_package,
-                                           self.cap_language))
+        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
+                                 'Extension.h>'.format(self.language,
+                                                       self.package,
+                                                       self.up_package))
+        self.write_line_verbatim('#include <{}/packages/{}/extension/'
+                                 '{}{}Document'
+                                 'Plugin.h>'.format(self.language, self.package,
+                                                    self.up_package,
+                                                    self.cap_language))
 
         for plugin in self.plugins:
             self.write_line_verbatim('#include <{}/packages/{}/extension/{}{}'
-                            'Plugin.h>'.format(self.language, self.package,
-                                               self.up_package,
-                                               plugin['sbase']))
+                                     'Plugin.h>'.format(self.language,
+                                                        self.package,
+                                                        self.up_package,
+                                                        plugin['sbase']))
         self.skip_line()
 
         for element in self.elements:
             self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}.'
-                            'h>'.format(self.language, self.package,
-                                        element['name']))
+                                     'h>'.format(self.language, self.package,
+                                                 element['name']))
 
     ########################################################################
 
@@ -325,7 +342,8 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         width = query.get_max_length(self.elements, 'name')
         for element in self.elements:
             self.write_spaced_line('typedef CLASS_OR_STRUCT {0:{width}} '
-                                   '{0}_t;'.format(element['name'], width=width))
+                                   '{0}_t;'.format(element['name'],
+                                                   width=width))
 
     def write_end_class_or_struct(self):
         self.write_line('#undef CLASS_OR_STRUCT')

@@ -52,6 +52,11 @@
 EXTENSION_CREATE_NS(VersPkgNamespaces, variable, sbmlns);
 #endif
 
+#ifndef VERS_CREATE_NS_WITH_VERSION
+#define VERS_CREATE_NS_WITH_VERSION(variable, sbmlns, version)\
+EXTENSION_CREATE_NS_WITH_VERSION(VersPkgNamespaces, variable, sbmlns, version);
+#endif
+
 #include <vector>
 
 
