@@ -20,7 +20,7 @@
             <attribute name="correctId" required="false" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
           <attributes>
             <attribute name="unit" required="false" type="UnitSIdRef" abstract="false"/>
           </attributes>
@@ -47,6 +47,7 @@
             <attribute name="correctId" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
+        <element name="Another" typeCode="SBML_TEST_ANOTHER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="another1" listOfClassName="ListOfAns"/>
       </elements>
     </pkgVersion>
   </versions>

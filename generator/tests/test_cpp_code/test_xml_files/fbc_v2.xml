@@ -122,7 +122,7 @@
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
-            <attribute name="association" required="false" type="element" element="Association" abstract="false"/>
+            <attribute name="association" required="false" type="inline_lo_element" element="Association" abstract="false"/>
           </attributes>
         </element>
       </elements>

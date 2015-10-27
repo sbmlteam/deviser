@@ -586,6 +586,8 @@ class ProtectedFunctions():
     def write_read_version_attributes(self, version):
         if self.is_list_of or not self.has_multiple_versions:
             return
+        elif self.has_std_base and len(self.attributes) == 0:
+            return
 
         # create comment
         title_line = 'Reads the expected attributes into the member ' \
@@ -749,6 +751,8 @@ class ProtectedFunctions():
     # function to write individual version writeAttributes
     def write_write_version_attributes(self, version):
         if self.is_list_of or not self.has_multiple_versions:
+            return
+        elif self.has_std_base and len(self.attributes) == 0:
             return
 
         # create comment
@@ -1062,14 +1066,22 @@ class ProtectedFunctions():
             invalid_line = '\"The attribute {}=\'\" + {} + ' \
                            '\"\' does not conform to the ' \
                            'syntax."'.format(name, member)
-        line = ['{}.empty() == true'.format(member),
-                'logEmptyString({}, level, version, '
-                '\"<{}>\")'.format(member, self.class_name),
-                'else if',
-                'SyntaxChecker::isValid{}SId({}) == '
-                'false'.format(self.cap_language, member),
-                'logError(InvalidIdSyntax, level, version, '
-                '{})'.format(invalid_line)]
+        line = ['{}.empty() == true'.format(member)]
+        if self.is_plugin:
+            line.append('logEmptyString({}, level, version, pkgVersion, '
+                        '\"<{}>\")'.format(member, self.class_name))
+        else:
+            line.append('logEmptyString({}, level, version, '
+                        '\"<{}>\")'.format(member, self.class_name))
+        line += ['else if',
+                 'SyntaxChecker::isValid{}SId({}) == '
+                 'false'.format(self.cap_language, member)]
+        if self.is_plugin:
+            line.append('log->{}InvalidIdSyntax, {}, '
+                        '{})'.format(self.error, self.given_args, invalid_line))
+        else:
+            line.append('logError(InvalidIdSyntax, level, version, '
+                        '{})'.format(invalid_line))
         first_if = self.create_code_block('else_if', line)
 
         line = 'assigned == true'
@@ -1108,11 +1120,14 @@ class ProtectedFunctions():
                                                                     member)]
         code.append(self.create_code_block('line', line))
 
-        line = ['{}.empty() == true'.format(member),
-                'logEmptyString({}, level, version, '
-                '\"<{}>\")'.format(member, self.class_name)]
+        line = ['{}.empty() == true'.format(member)]
+        if self.is_plugin:
+            line.append('logEmptyString({}, level, version, pkgVersion, '
+                        '\"<{}>\")'.format(member, self.class_name))
+        else:
+            line.append('logEmptyString({}, level, version, '
+                        '\"<{}>\")'.format(member, self.class_name))
         first_if = self.create_code_block('if', line)
-
         line = 'assigned == true'
         if self.is_plugin:
             class_name = strFunctions.get_class_from_plugin(

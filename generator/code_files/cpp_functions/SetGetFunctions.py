@@ -460,8 +460,14 @@ class SetGetFunctions():
             else:
                 implementation = ['']
         else:
+            if not self.is_list_of:
+                use_name = self.abbrev_parent
+            else:
+                use_name = 'static_cast<const ' \
+                           '{}*>({})'.format(self.class_name,
+                                             self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? static_cast<int>({0}->is'
-                              'Set{1}()) : 0'.format(self.abbrev_parent,
+                              'Set{1}()) : 0'.format(use_name,
                                                      attribute['capAttName'])]
 
         code = [dict({'code_type': 'line', 'code': implementation})]
@@ -569,9 +575,15 @@ class SetGetFunctions():
         if self.is_cpp_api:
             code = self.set_cpp_attribute(attribute)
         else:
+            if not self.is_list_of:
+                use_name = self.abbrev_parent
+            else:
+                use_name = 'static_cast<' \
+                           '{}*>({})'.format(self.class_name,
+                                             self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
                               'LIB{3}'
-                              '_INVALID_OBJECT'.format(self.abbrev_parent,
+                              '_INVALID_OBJECT'.format(use_name,
                                                        attribute['capAttName'],
                                                        attribute['name'],
                                                        self.cap_language)]
@@ -866,8 +878,14 @@ class SetGetFunctions():
         if self.is_cpp_api:
             code = self.unset_cpp_attribute(attribute)
         else:
+            if not self.is_list_of:
+                use_name = self.abbrev_parent
+            else:
+                use_name = 'static_cast<' \
+                           '{}*>({})'.format(self.class_name,
+                                             self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIB{2}'
-                              '_INVALID_OBJECT'.format(self.abbrev_parent,
+                              '_INVALID_OBJECT'.format(use_name,
                                                        attribute['capAttName'],
                                                        self.cap_language)]
             code = [self.create_code_block('line', implementation)]
@@ -1102,8 +1120,14 @@ class SetGetFunctions():
                                                       self.abbrev_parent,
                                                       attribute['capAttName'])]
         else:
+            if not self.is_list_of:
+                use_name = self.abbrev_parent
+            else:
+                use_name = 'static_cast<const ' \
+                           '{}*>({})'.format(self.class_name,
+                                             self.abbrev_parent)
             line = ['return {0}->get{1}().empty() ? NULL : safe_strdup({0}'
-                    '->get{1}().c_str())'.format(self.abbrev_parent,
+                    '->get{1}().c_str())'.format(use_name,
                                                  attribute['capAttName'])]
         code.append(self.create_code_block('line', line))
         return code

@@ -59,6 +59,7 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   std::string mSpecies_att_v1;
+  std::string mString_plugin_att;
   std::string mSpecies_att_v2;
   ClassOne* mClassOne;
   ClassTwo* mClassTwo;
@@ -125,6 +126,16 @@ public:
 
 
   /**
+   * Returns the value of the "string_plugin_att" attribute of this
+   * VersSpeciesPlugin.
+   *
+   * @return the value of the "string_plugin_att" attribute of this
+   * VersSpeciesPlugin as a string.
+   */
+  const std::string& getString_plugin_att() const;
+
+
+  /**
    * Returns the value of the "species_att_v2" attribute of this
    * VersSpeciesPlugin.
    *
@@ -142,6 +153,16 @@ public:
    * been set, otherwise @c false is returned.
    */
   bool isSetSpecies_att_v1() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * VersSpeciesPlugin's "string_plugin_att" attribute has been set.
+   *
+   * @return @c true if this VersSpeciesPlugin's "string_plugin_att" attribute
+   * has been set, otherwise @c false is returned.
+   */
+  bool isSetString_plugin_att() const;
 
 
   /**
@@ -170,6 +191,21 @@ public:
 
 
   /**
+   * Sets the value of the "string_plugin_att" attribute of this
+   * VersSpeciesPlugin.
+   *
+   * @param string_plugin_att std::string& value of the "string_plugin_att"
+   * attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setString_plugin_att(const std::string& string_plugin_att);
+
+
+  /**
    * Sets the value of the "species_att_v2" attribute of this
    * VersSpeciesPlugin.
    *
@@ -193,6 +229,17 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetSpecies_att_v1();
+
+
+  /**
+   * Unsets the value of the "string_plugin_att" attribute of this
+   * VersSpeciesPlugin.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetString_plugin_att();
 
 
   /**

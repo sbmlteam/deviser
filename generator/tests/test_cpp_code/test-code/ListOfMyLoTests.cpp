@@ -430,7 +430,8 @@ ListOfMyLoTests_getId(const ListOf_t * lo)
     return NULL;
   }
 
-  return lo->getId().empty() ? NULL : safe_strdup(lo->getId().c_str());
+  return static_cast<const ListOfMyLoTests*>(lo)->getId().empty() ? NULL :
+    safe_strdup(static_cast<const ListOfMyLoTests*>(lo)->getId().c_str());
 }
 
 
@@ -442,7 +443,8 @@ LIBSBML_EXTERN
 int
 ListOfMyLoTests_isSetId(const ListOf_t * lo)
 {
-  return (lo != NULL) ? static_cast<int>(lo->isSetId()) : 0;
+  return (static_cast<const ListOfMyLoTests*>(lo) != NULL) ?
+    static_cast<int>(static_cast<const ListOfMyLoTests*>(lo)->isSetId()) : 0;
 }
 
 
@@ -453,7 +455,8 @@ LIBSBML_EXTERN
 int
 ListOfMyLoTests_setId(ListOf_t * lo, const char * id)
 {
-  return (lo != NULL) ? lo->setId(id) : LIBSBML_INVALID_OBJECT;
+  return (static_cast<ListOfMyLoTests*>(lo) != NULL) ?
+    static_cast<ListOfMyLoTests*>(lo)->setId(id) : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -464,7 +467,8 @@ LIBSBML_EXTERN
 int
 ListOfMyLoTests_unsetId(ListOf_t * lo)
 {
-  return (lo != NULL) ? lo->unsetId() : LIBSBML_INVALID_OBJECT;
+  return (static_cast<ListOfMyLoTests*>(lo) != NULL) ?
+    static_cast<ListOfMyLoTests*>(lo)->unsetId() : LIBSBML_INVALID_OBJECT;
 }
 
 

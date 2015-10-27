@@ -57,6 +57,7 @@ VersSpeciesPlugin::VersSpeciesPlugin(const std::string& uri,
                                      VersPkgNamespaces* versns)
   : SBasePlugin(uri, prefix, versns)
   , mSpecies_att_v1 ("")
+  , mString_plugin_att ("")
   , mSpecies_att_v2 ("")
   , mClassOne (NULL)
   , mClassTwo (NULL)
@@ -72,6 +73,7 @@ VersSpeciesPlugin::VersSpeciesPlugin(const std::string& uri,
 VersSpeciesPlugin::VersSpeciesPlugin(const VersSpeciesPlugin& orig)
   : SBasePlugin( orig )
   , mSpecies_att_v1 ( orig.mSpecies_att_v1 )
+  , mString_plugin_att ( orig.mString_plugin_att )
   , mSpecies_att_v2 ( orig.mSpecies_att_v2 )
   , mClassOne ( NULL )
   , mClassTwo ( NULL )
@@ -101,6 +103,7 @@ VersSpeciesPlugin::operator=(const VersSpeciesPlugin& rhs)
   {
     SBasePlugin::operator=(rhs);
     mSpecies_att_v1 = rhs.mSpecies_att_v1;
+    mString_plugin_att = rhs.mString_plugin_att;
     mSpecies_att_v2 = rhs.mSpecies_att_v2;
     mAnothers = rhs.mAnothers;
     delete mClassOne;
@@ -164,6 +167,17 @@ VersSpeciesPlugin::getSpecies_att_v1() const
 
 
 /*
+ * Returns the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin.
+ */
+const std::string&
+VersSpeciesPlugin::getString_plugin_att() const
+{
+  return mString_plugin_att;
+}
+
+
+/*
  * Returns the value of the "species_att_v2" attribute of this
  * VersSpeciesPlugin.
  */
@@ -182,6 +196,17 @@ bool
 VersSpeciesPlugin::isSetSpecies_att_v1() const
 {
   return (mSpecies_att_v1.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * VersSpeciesPlugin's "string_plugin_att" attribute has been set.
+ */
+bool
+VersSpeciesPlugin::isSetString_plugin_att() const
+{
+  return (mString_plugin_att.empty() == false);
 }
 
 
@@ -215,6 +240,18 @@ VersSpeciesPlugin::setSpecies_att_v1(const std::string& species_att_v1)
 
 
 /*
+ * Sets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::setString_plugin_att(const std::string& string_plugin_att)
+{
+  mString_plugin_att = string_plugin_att;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
  * Sets the value of the "species_att_v2" attribute of this VersSpeciesPlugin.
  */
 int
@@ -242,6 +279,26 @@ VersSpeciesPlugin::unsetSpecies_att_v1()
   mSpecies_att_v1.erase();
 
   if (mSpecies_att_v1.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::unsetString_plugin_att()
+{
+  mString_plugin_att.erase();
+
+  if (mString_plugin_att.empty() == true)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
@@ -1077,6 +1134,7 @@ VersSpeciesPlugin::addExpectedAttributes(ExpectedAttributes& attributes)
   if (pkgVersion == 1)
   {
     attributes.add("species_att_v1");
+    attributes.add("string_plugin_att");
   }
   else
   {
@@ -1164,13 +1222,29 @@ VersSpeciesPlugin::readV1Attributes(const XMLAttributes& attributes)
   {
     if (mSpecies_att_v1.empty() == true)
     {
-      logEmptyString(mSpecies_att_v1, level, version, "<VersSpeciesPlugin>");
+      logEmptyString(mSpecies_att_v1, level, version, pkgVersion,
+        "<VersSpeciesPlugin>");
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v1) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute "
-        "species_att_v1='" + mSpecies_att_v1 + "' does not conform to the "
-          "syntax.");
+      log->logPackageError("vers", InvalidIdSyntax, pkgVersion, level, version,
+        "The attribute species_att_v1='" + mSpecies_att_v1 + "' does not conform "
+          "to the syntax.");
+    }
+  }
+
+  // 
+  // string_plugin_att string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("string_plugin_att", mString_plugin_att);
+
+  if (assigned == true)
+  {
+    if (mString_plugin_att.empty() == true)
+    {
+      logEmptyString(mString_plugin_att, level, version, pkgVersion,
+        "<VersSpeciesPlugin>");
     }
   }
 }
@@ -1204,13 +1278,14 @@ VersSpeciesPlugin::readV2Attributes(const XMLAttributes& attributes)
   {
     if (mSpecies_att_v2.empty() == true)
     {
-      logEmptyString(mSpecies_att_v2, level, version, "<VersSpeciesPlugin>");
+      logEmptyString(mSpecies_att_v2, level, version, pkgVersion,
+        "<VersSpeciesPlugin>");
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute "
-        "species_att_v2='" + mSpecies_att_v2 + "' does not conform to the "
-          "syntax.");
+      log->logPackageError("vers", InvalidIdSyntax, pkgVersion, level, version,
+        "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
+          "to the syntax.");
     }
   }
 }
@@ -1256,6 +1331,12 @@ VersSpeciesPlugin::writeV1Attributes(XMLOutputStream& stream) const
   if (isSetSpecies_att_v1() == true)
   {
     stream.writeAttribute("species_att_v1", getPrefix(), mSpecies_att_v1);
+  }
+
+  if (isSetString_plugin_att() == true)
+  {
+    stream.writeAttribute("string_plugin_att", getPrefix(),
+      mString_plugin_att);
   }
 }
 

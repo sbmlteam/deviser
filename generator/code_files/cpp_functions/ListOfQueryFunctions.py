@@ -320,10 +320,12 @@ class ListOfQueryFunctions():
             return
 
         # useful variables
-        if 'capAttName' in sid_ref:
-            element = sid_ref['capAttName']
-        else:
-            element = sid_ref['element']
+        element = strFunctions.upper_first(sid_ref['name'])
+        # if 'capAttName' in sid_ref:
+        #     element = sid_ref['capAttName']
+        # else:
+        #     element = sid_ref['element']
+        # if sid_ref['name']
         att_name = sid_ref['name']
         match = [element, const]
         if match in self.used_sidrefs:
