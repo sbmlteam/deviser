@@ -3,7 +3,7 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="myTestClass">
           <attributes>
             <attribute name="id" required="false" type="Sid" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -25,7 +25,7 @@
             <attribute name="unit" required="false" type="UnitSIdRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" listOfName="listOfMyLoTests" listOfClassName="ListOfMyLoTests">
           <listOfAttributes>
             <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
           </listOfAttributes>
@@ -47,7 +47,12 @@
             <attribute name="correctId" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="Another" typeCode="SBML_TEST_ANOTHER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="another1" listOfClassName="ListOfAns"/>
+        <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">
+          <attributes>
+            <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
+            <attribute name="number" required="false" type="array" element="double" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
     </pkgVersion>
   </versions>

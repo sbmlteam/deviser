@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <package name="Distrib" fullname="Distributions" number="1300" offset="5000000" version="1" required="true">
   <versions>
-    <pkgVersion>
+    <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
         <element name="DrawFromDistribution" typeCode="SBML_DISTRIB_DRAW_FROM_DISTRIBUTION" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false" />
-            <attribute name="UncertML" required="true" type="element" element="UncertMLNode" abstract="false" />
+            <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false"/>
+            <attribute name="UncertML" required="true" type="element" element="UncertMLNode" abstract="false"/>
           </attributes>
         </element>
         <element name="DistribInput" typeCode="SBML_DISTRIB_INPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="true" type="string" abstract="false" />
-            <attribute name="name" required="false" type="string" abstract="false" />
-            <attribute name="index" required="true" type="uint" abstract="false" />
+            <attribute name="id" required="true" type="string" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="index" required="true" type="uint" abstract="false"/>
           </attributes>
         </element>
         <element name="Uncertainty" typeCode="SBML_DISTRIB_UNCERTAINTY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="false" type="SId" abstract="false" />
-            <attribute name="name" required="false" type="string" abstract="false" />
-            <attribute name="UncertML" required="true" type="element" element="UncertMLNode" abstract="false" />
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="UncertML" required="true" type="element" element="UncertMLNode" abstract="false"/>
           </attributes>
         </element>
       </elements>
       <plugins>
         <plugin extensionPoint="FunctionDefinition">
           <references>
-            <reference name="DrawFromDistribution" />
+            <reference name="DrawFromDistribution"/>
           </references>
         </plugin>
         <plugin extensionPoint="SBase">
           <references>
-            <reference name="Uncertainty" />
+            <reference name="Uncertainty"/>
           </references>
         </plugin>
       </plugins>

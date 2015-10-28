@@ -262,6 +262,13 @@ def main():
     test_case = 'all types attributes required'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_att'
+    num = 4
+    class_name = 'ArrayChild'
+    list_of = ''
+    test_case = 'child elements and arrays'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'qual'
     num = 5
     class_name = 'FunctionTerm'
