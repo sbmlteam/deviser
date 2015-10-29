@@ -225,10 +225,10 @@ class ValidationFiles():
                                    '{}ErrorTable[] '
                                    '='.format(self.package.lower()))
         self.error_file.write_line('{')
-        # for rule in self.class_rules:
-        #     self.write_table_entry(rule)
-        for i in range(0, 5):
-            self.write_table_entry(self.class_rules[i])
+        for rule in self.class_rules:
+            self.write_table_entry(rule)
+#        for i in range(0, 5):
+#            self.write_table_entry(self.class_rules[i])
         self.error_file.write_line('};')
         self.error_file.write_doxygen_end()
         self.error_file.write_cppns_end()
@@ -244,7 +244,7 @@ class ValidationFiles():
         self.error_file.write_line('{}_CAT_GENERAL_'
                                    'CONSISTENCY,'.format(self.cap_lib))
         self.error_file.write_line('{},'.format(rule['lib_sev']))
-        self.error_file.write_line_no_indent('\"{}\",'.format(rule['text']))
+        self.error_file.write_line_no_indent('\"{}\",'.format(self.format_text(rule['text'])))
         self.error_file.write_line('{}  \"{}\"'.format(self.open_br,
                                                        rule['lib_ref']))
         self.error_file.write_line('{}'.format(self.close_br))
@@ -252,6 +252,33 @@ class ValidationFiles():
         self.error_file.write_line('},')
         self.error_file.down_indent()
         self.error_file.skip_line()
+
+    def format_text(self, text_string):
+        return_string = ''
+        length = len(text_string)
+        in_name = False
+        for i in range(0, length):
+            letter = text_string[i]
+            if i != length-1:
+                next_letter = text_string[i+1]
+            else:
+                next_letter = ' '
+            if letter == '\\':
+                in_name = True
+            if not in_name:
+                return_string += letter
+                continue
+            else:
+                if letter == '\\':
+                    return_string += '<'
+                elif next_letter == ' ' or next_letter == '.':
+                    return_string += '{}>'.format(letter)
+                    in_name = False
+                else:
+                    return_string += letter
+                continue
+        return return_string
+
 
     #########################################################################
 

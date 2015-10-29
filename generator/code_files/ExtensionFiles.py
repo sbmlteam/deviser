@@ -63,6 +63,7 @@ class ExtensionFiles():
         class_descrip = self.create_class_description(num)
         self.write_plugin_header(class_descrip)
         self.write_plugin_code(class_descrip)
+        class_descrip = self.remove_class_description(num)
 
     def write_header(self):
         types_fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package,
@@ -123,6 +124,16 @@ class ExtensionFiles():
                 class_object['attribs'].append(self.get_attrib_descrip(elem))
 
         return class_object
+
+    def remove_class_description(self, num):
+        if num >= len(self.package['plugins']):
+            class_object = self.create_document_plugin_desc()
+        else:
+            class_object = self.package['plugins'][num]
+            class_object['attribs'] = []
+
+        return class_object
+
 
     def create_document_plugin_desc(self):
         up_package = strFunctions.upper_first(self.package['name'])
