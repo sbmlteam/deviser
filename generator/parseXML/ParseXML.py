@@ -182,12 +182,11 @@ class ParseXML():
 
     # Functions for standardizing types/name etc
 
-    @staticmethod
-    def standardize_types(attrib_type):
+    def standardize_types(self, attrib_type):
         name = attrib_type.lower()
         if name == 'boolean' or name == 'bool':
             return 'bool'
-        elif name == 'unsigned integer' or name == 'unsigned int':
+        elif self.matches_unsigned_int(name):
             return 'uint'
         elif name == 'integer' or name == 'int':
             return 'int'
@@ -199,11 +198,30 @@ class ParseXML():
             return 'SId'
         elif name == 'unitsid':
             return 'UnitSId'
+        elif name == 'id':
+            return 'string'
         elif name == 'uint' or name == 'string' or name == 'double' \
                 or name == 'enum' or name == 'element' or name == 'lo_element':
             return name
         else:
             return attrib_type
+
+    @staticmethod
+    def matches_unsigned_int(name):
+        if name == 'unsigned integer':
+            return True
+        elif name == 'unsigned int':
+            return True
+        elif name == 'positive integer':
+            return True
+        elif name == 'positive int':
+            return True
+        elif name == 'non-negative integer':
+            return True
+        elif name == 'non-negative int':
+            return True
+        else:
+            return False
 
     #####################################################################
 

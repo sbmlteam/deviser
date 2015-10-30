@@ -45,6 +45,12 @@
             <attribute name="ref2" required="true" type="SIdRef" element="Thing2" abstract="false"/>
             <attribute name="refUnit" required="true" type="UnitSIDref" element="Unit1" abstract="false"/>
             <attribute name="correctId" required="true" type="SId" abstract="false"/>
+            <attribute name="posint" required="true" type="positive integer" abstract="false"/>
+            <attribute name="posint2" required="true" type="non-negative integer" abstract="false"/>
+            <attribute name="posint1" required="true" type="non-negative int" abstract="false"/>
+            <attribute name="metaid" required="true" type="ID" abstract="false"/>
+            <attribute name="metaid1" required="true" type="Id" abstract="false"/>
+            <attribute name="num4" required="true" type="integer" abstract="false"/>
           </attributes>
         </element>
         <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">

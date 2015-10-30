@@ -73,6 +73,16 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
   , mRef2 ("")
   , mRefUnit ("")
   , mCorrectId ("")
+  , mPosint (SBML_INT_MAX)
+  , mIsSetPosint (false)
+  , mPosint2 (SBML_INT_MAX)
+  , mIsSetPosint2 (false)
+  , mPosint1 (SBML_INT_MAX)
+  , mIsSetPosint1 (false)
+  , mMetaid ("")
+  , mMetaid1 ("")
+  , mNum4 (SBML_INT_MAX)
+  , mIsSetNum4 (false)
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -102,6 +112,16 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   , mRef2 ("")
   , mRefUnit ("")
   , mCorrectId ("")
+  , mPosint (SBML_INT_MAX)
+  , mIsSetPosint (false)
+  , mPosint2 (SBML_INT_MAX)
+  , mIsSetPosint2 (false)
+  , mPosint1 (SBML_INT_MAX)
+  , mIsSetPosint1 (false)
+  , mMetaid ("")
+  , mMetaid1 ("")
+  , mNum4 (SBML_INT_MAX)
+  , mIsSetNum4 (false)
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -132,6 +152,16 @@ MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   , mRef2 ( orig.mRef2 )
   , mRefUnit ( orig.mRefUnit )
   , mCorrectId ( orig.mCorrectId )
+  , mPosint ( orig.mPosint )
+  , mIsSetPosint ( orig.mIsSetPosint )
+  , mPosint2 ( orig.mPosint2 )
+  , mIsSetPosint2 ( orig.mIsSetPosint2 )
+  , mPosint1 ( orig.mPosint1 )
+  , mIsSetPosint1 ( orig.mIsSetPosint1 )
+  , mMetaid ( orig.mMetaid )
+  , mMetaid1 ( orig.mMetaid1 )
+  , mNum4 ( orig.mNum4 )
+  , mIsSetNum4 ( orig.mIsSetNum4 )
 {
 }
 
@@ -164,6 +194,16 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
     mRef2 = rhs.mRef2;
     mRefUnit = rhs.mRefUnit;
     mCorrectId = rhs.mCorrectId;
+    mPosint = rhs.mPosint;
+    mIsSetPosint = rhs.mIsSetPosint;
+    mPosint2 = rhs.mPosint2;
+    mIsSetPosint2 = rhs.mIsSetPosint2;
+    mPosint1 = rhs.mPosint1;
+    mIsSetPosint1 = rhs.mIsSetPosint1;
+    mMetaid = rhs.mMetaid;
+    mMetaid1 = rhs.mMetaid1;
+    mNum4 = rhs.mNum4;
+    mIsSetNum4 = rhs.mIsSetNum4;
   }
 
   return *this;
@@ -319,6 +359,66 @@ MyRequiredClass::getCorrectId() const
 
 
 /*
+ * Returns the value of the "posint" attribute of this MyRequiredClass.
+ */
+unsigned int
+MyRequiredClass::getPosint() const
+{
+  return mPosint;
+}
+
+
+/*
+ * Returns the value of the "posint2" attribute of this MyRequiredClass.
+ */
+unsigned int
+MyRequiredClass::getPosint2() const
+{
+  return mPosint2;
+}
+
+
+/*
+ * Returns the value of the "posint1" attribute of this MyRequiredClass.
+ */
+unsigned int
+MyRequiredClass::getPosint1() const
+{
+  return mPosint1;
+}
+
+
+/*
+ * Returns the value of the "metaid" attribute of this MyRequiredClass.
+ */
+const std::string&
+MyRequiredClass::getMetaid() const
+{
+  return mMetaid;
+}
+
+
+/*
+ * Returns the value of the "metaid1" attribute of this MyRequiredClass.
+ */
+const std::string&
+MyRequiredClass::getMetaid1() const
+{
+  return mMetaid1;
+}
+
+
+/*
+ * Returns the value of the "num4" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::getNum4() const
+{
+  return mNum4;
+}
+
+
+/*
  * Predicate returning @c true or @c false depending on whether this
  * MyRequiredClass's "id" attribute has been set.
  */
@@ -458,6 +558,72 @@ bool
 MyRequiredClass::isSetCorrectId() const
 {
   return (mCorrectId.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "posint" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetPosint() const
+{
+  return mIsSetPosint;
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "posint2" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetPosint2() const
+{
+  return mIsSetPosint2;
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "posint1" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetPosint1() const
+{
+  return mIsSetPosint1;
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "metaid" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetMetaid() const
+{
+  return (mMetaid.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "metaid1" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetMetaid1() const
+{
+  return (mMetaid1.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "num4" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetNum4() const
+{
+  return mIsSetNum4;
 }
 
 
@@ -633,6 +799,76 @@ int
 MyRequiredClass::setCorrectId(const std::string& correctId)
 {
   return SyntaxChecker::checkAndSetSId(id, mId);
+}
+
+
+/*
+ * Sets the value of the "posint" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setPosint(unsigned int posint)
+{
+  mPosint = posint;
+  mIsSetPosint = true;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "posint2" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setPosint2(unsigned int posint2)
+{
+  mPosint2 = posint2;
+  mIsSetPosint2 = true;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "posint1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setPosint1(unsigned int posint1)
+{
+  mPosint1 = posint1;
+  mIsSetPosint1 = true;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "metaid" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setMetaid(const std::string& metaid)
+{
+  mMetaid = metaid;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "metaid1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setMetaid1(const std::string& metaid1)
+{
+  mMetaid1 = metaid1;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "num4" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setNum4(int num4)
+{
+  mNum4 = num4;
+  mIsSetNum4 = true;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -890,6 +1126,124 @@ MyRequiredClass::unsetCorrectId()
 
 
 /*
+ * Unsets the value of the "posint" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetPosint()
+{
+  mPosint = SBML_INT_MAX;
+  mIsSetPosint = false;
+
+  if (isSetPosint() == false)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "posint2" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetPosint2()
+{
+  mPosint2 = SBML_INT_MAX;
+  mIsSetPosint2 = false;
+
+  if (isSetPosint2() == false)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "posint1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetPosint1()
+{
+  mPosint1 = SBML_INT_MAX;
+  mIsSetPosint1 = false;
+
+  if (isSetPosint1() == false)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "metaid" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetMetaid()
+{
+  mMetaid.erase();
+
+  if (mMetaid.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "metaid1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetMetaid1()
+{
+  mMetaid1.erase();
+
+  if (mMetaid1.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "num4" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetNum4()
+{
+  mNum4 = SBML_INT_MAX;
+  mIsSetNum4 = false;
+
+  if (isSetNum4() == false)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -1008,6 +1362,36 @@ MyRequiredClass::hasRequiredAttributes() const
     allPresent = false;
   }
 
+  if (isSetPosint() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetPosint2() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetPosint1() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetMetaid() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetMetaid1() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetNum4() == false)
+  {
+    allPresent = false;
+  }
+
   return allPresent;
 }
 
@@ -1112,6 +1496,18 @@ MyRequiredClass::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("refUnit");
 
   attributes.add("correctId");
+
+  attributes.add("posint");
+
+  attributes.add("posint2");
+
+  attributes.add("posint1");
+
+  attributes.add("metaid");
+
+  attributes.add("metaid1");
+
+  attributes.add("num4");
 }
 
 /** @endcond */
@@ -1467,6 +1863,156 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
       pkgVersion, level, version, message);
   }
+
+  // 
+  // posint uint (use = "required" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetPosint = attributes.readInto("posint", mPosint);
+
+  if ( mIsSetPosint == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Test attribute 'posint' from the <MyRequiredClass> "
+        "element must be an integer.";
+      log->logPackageError("test", TestMyRequiredClassPosintMustBeUnInteger,
+        pkgVersion, level, version, message);
+    }
+    else
+    {
+      std::string message = "Test attribute 'posint' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
+  }
+
+  // 
+  // posint2 uint (use = "required" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetPosint2 = attributes.readInto("posint2", mPosint2);
+
+  if ( mIsSetPosint2 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Test attribute 'posint2' from the "
+        "<MyRequiredClass> element must be an integer.";
+      log->logPackageError("test", TestMyRequiredClassPosint2MustBeUnInteger,
+        pkgVersion, level, version, message);
+    }
+    else
+    {
+      std::string message = "Test attribute 'posint2' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
+  }
+
+  // 
+  // posint1 uint (use = "required" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetPosint1 = attributes.readInto("posint1", mPosint1);
+
+  if ( mIsSetPosint1 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Test attribute 'posint1' from the "
+        "<MyRequiredClass> element must be an integer.";
+      log->logPackageError("test", TestMyRequiredClassPosint1MustBeUnInteger,
+        pkgVersion, level, version, message);
+    }
+    else
+    {
+      std::string message = "Test attribute 'posint1' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
+  }
+
+  // 
+  // metaid string (use = "required" )
+  // 
+
+  assigned = attributes.readInto("metaid", mMetaid);
+
+  if (assigned == true)
+  {
+    if (mMetaid.empty() == true)
+    {
+      logEmptyString(mMetaid, level, version, "<MyRequiredClass>");
+    }
+  }
+  else
+  {
+    std::string message = "Test attribute 'metaid' is missing from the "
+      "<MyRequiredClass> element.";
+    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+      pkgVersion, level, version, message);
+  }
+
+  // 
+  // metaid1 string (use = "required" )
+  // 
+
+  assigned = attributes.readInto("metaid1", mMetaid1);
+
+  if (assigned == true)
+  {
+    if (mMetaid1.empty() == true)
+    {
+      logEmptyString(mMetaid1, level, version, "<MyRequiredClass>");
+    }
+  }
+  else
+  {
+    std::string message = "Test attribute 'metaid1' is missing from the "
+      "<MyRequiredClass> element.";
+    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+      pkgVersion, level, version, message);
+  }
+
+  // 
+  // num4 int (use = "required" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetNum4 = attributes.readInto("num4", mNum4);
+
+  if ( mIsSetNum4 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Test attribute 'num4' from the <MyRequiredClass> "
+        "element must be an integer.";
+      log->logPackageError("test", TestMyRequiredClassNum4MustBeInteger,
+        pkgVersion, level, version, message);
+    }
+    else
+    {
+      std::string message = "Test attribute 'num4' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
+  }
 }
 
 /** @endcond */
@@ -1546,6 +2092,36 @@ MyRequiredClass::writeAttributes(XMLOutputStream& stream) const
   if (isSetCorrectId() == true)
   {
     stream.writeAttribute("correctId", getPrefix(), mCorrectId);
+  }
+
+  if (isSetPosint() == true)
+  {
+    stream.writeAttribute("posint", getPrefix(), mPosint);
+  }
+
+  if (isSetPosint2() == true)
+  {
+    stream.writeAttribute("posint2", getPrefix(), mPosint2);
+  }
+
+  if (isSetPosint1() == true)
+  {
+    stream.writeAttribute("posint1", getPrefix(), mPosint1);
+  }
+
+  if (isSetMetaid() == true)
+  {
+    stream.writeAttribute("metaid", getPrefix(), mMetaid);
+  }
+
+  if (isSetMetaid1() == true)
+  {
+    stream.writeAttribute("metaid1", getPrefix(), mMetaid1);
+  }
+
+  if (isSetNum4() == true)
+  {
+    stream.writeAttribute("num4", getPrefix(), mNum4);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -1786,6 +2362,84 @@ MyRequiredClass_getCorrectId(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Returns the value of the "posint" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+MyRequiredClass_getPosint(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->getPosint() : SBML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "posint2" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+MyRequiredClass_getPosint2(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->getPosint2() : SBML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "posint1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->getPosint1() : SBML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "metaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc)
+{
+  if (mrc == NULL)
+  {
+    return NULL;
+  }
+
+  return mrc->getMetaid().empty() ? NULL :
+    safe_strdup(mrc->getMetaid().c_str());
+}
+
+
+/*
+ * Returns the value of the "metaid1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyRequiredClass_getMetaid1(const MyRequiredClass_t * mrc)
+{
+  if (mrc == NULL)
+  {
+    return NULL;
+  }
+
+  return mrc->getMetaid1().empty() ? NULL :
+    safe_strdup(mrc->getMetaid1().c_str());
+}
+
+
+/*
+ * Returns the value of the "num4" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_getNum4(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->getNum4() : SBML_INT_MAX;
+}
+
+
+/*
  * Predicate returning @c 1 or @c 0 depending on whether this
  * MyRequiredClass_t's "id" attribute has been set.
  */
@@ -1942,6 +2596,78 @@ MyRequiredClass_isSetCorrectId(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "posint" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetPosint(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetPosint()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "posint2" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetPosint2(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetPosint2()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "posint1" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetPosint1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "metaid" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetMetaid()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "metaid1" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetMetaid1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "num4" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetNum4()) : 0;
+}
+
+
+/*
  * Sets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -2085,6 +2811,72 @@ MyRequiredClass_setCorrectId(MyRequiredClass_t * mrc, const char * correctId)
 
 
 /*
+ * Sets the value of the "posint" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setPosint(MyRequiredClass_t * mrc, unsigned int posint)
+{
+  return (mrc != NULL) ? mrc->setPosint(posint) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "posint2" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setPosint2(MyRequiredClass_t * mrc, unsigned int posint2)
+{
+  return (mrc != NULL) ? mrc->setPosint2(posint2) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "posint1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setPosint1(MyRequiredClass_t * mrc, unsigned int posint1)
+{
+  return (mrc != NULL) ? mrc->setPosint1(posint1) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "metaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setMetaid(MyRequiredClass_t * mrc, const char * metaid)
+{
+  return (mrc != NULL) ? mrc->setMetaid(metaid) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "metaid1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setMetaid1(MyRequiredClass_t * mrc, const char * metaid1)
+{
+  return (mrc != NULL) ? mrc->setMetaid1(metaid1) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "num4" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setNum4(MyRequiredClass_t * mrc, int num4)
+{
+  return (mrc != NULL) ? mrc->setNum4(num4) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -2224,6 +3016,72 @@ int
 MyRequiredClass_unsetCorrectId(MyRequiredClass_t * mrc)
 {
   return (mrc != NULL) ? mrc->unsetCorrectId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "posint" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetPosint(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetPosint() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "posint2" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetPosint2(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetPosint2() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "posint1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetPosint1(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetPosint1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "metaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetMetaid(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetMetaid() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "metaid1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetMetaid1(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetMetaid1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "num4" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetNum4(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetNum4() : LIBSBML_INVALID_OBJECT;
 }
 
 
