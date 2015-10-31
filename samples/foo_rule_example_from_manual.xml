@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="Foo" fullname="Another Imaginary Package" number="100" offset="1000000" version="1" required="true">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="FooRule" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="true">
+          <attributes>
+            <attribute name="math" required="true" type="element" element="ASTNode*" abstract="false"/>
+          </attributes>
+          <concretes>
+            <concrete name="assignment" element="FooAssignment"/>
+            <concrete name="rate" element="FooRate"/>
+            <concrete name="algebraic" element="Algebraic"/>
+            <concrete name="undefined" element="Undefined"/>
+          </concretes>
+        </element>
+        <element name="Assignment" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="true">
+          <attributes>
+            <attribute name="variable" required="true" type="SIdRef" element="Parameter" abstract="false"/>
+          </attributes>
+          <concretes>
+            <concrete name="rate" element="FooRate"/>
+            <concrete name="assignment" element="FooAssignment"/>
+          </concretes>
+        </element>
+        <element name="FooRate" typeCode="SBML_FOO_RATE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="rate"/>
+        <element name="FooAssignment" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="assignment"/>
+        <element name="Algebraic" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="false"/>
+        <element name="NewModel" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="rules" required="false" type="inline_lo_element" element="FooRule" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>
