@@ -44,6 +44,7 @@ from base_files import BaseTexFile
 from util import strFunctions
 from validation import ValidationRulesForClass
 from validation import ValidationRulesForPlugin
+from validation import ValidationRulesGeneral
 
 class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     """Class for the validation appendix in LaTeX"""
@@ -181,7 +182,14 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.write_rule(rule)
         self.skip_line()
 
-    # Write rules for a class
+    def write_general_rules1(self, rules):
+        self.write_line('\subsubsection*{General rules about this package}')
+        self.skip_line()
+        for i in range(0, len(rules)):
+            self.write_rule(rules[i])
+            self.skip_line()
+
+    # Write rules for a plugin
     def write_rules_for_plugin(self, name, rules):
         # section heading
         self.write_line('\subsubsection*{Rules for extended \class{'
@@ -249,6 +257,14 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         BaseTexFile.BaseTexFile.write_file(self)
         self.skip_line()
         self.write_introduction()
+        rules = ValidationRulesGeneral.ValidationRulesGeneral(
+            self.fullname, self.offset,
+            self.package, self.pkg_ref, self.level, self.version,
+            self.pkg_version)
+        rules.determine_rules()
+        self.write_general_rules1(rules.rules)
+        self.skip_line()
+
         self.write_general_rules()
         self.write_identifier_rules()
         self.write_to_do('ANY LIST OF ELEMENTS THAT HAVE ATTRIBUTES')
