@@ -9,6 +9,14 @@ from util import global_variables
 
 fails = []
 not_tested = []
+path_to_tests = ''
+
+
+def get_filename(name):
+    global path_to_tests
+    fname = '{}.xml'.format(name)
+    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
+    return filename
 
 
 def generate_cpp_header(filename, num):
@@ -126,7 +134,7 @@ def compare_files(infile, outfile):
 
 
 def run_test(name, num, class_name, test_case, list_of):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
@@ -151,7 +159,7 @@ def run_test(name, num, class_name, test_case, list_of):
 
 
 def run_ext_test(name, class_name, test_case, test):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
@@ -174,7 +182,7 @@ def run_ext_test(name, class_name, test_case, test):
 
 
 def run_plug_test(name, class_name, test_case, num):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
@@ -191,7 +199,7 @@ def run_plug_test(name, class_name, test_case, num):
 
 
 def run_valid_test(name, class_name, test_case, is_ext=True):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
@@ -214,7 +222,7 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
 
 
 def run_constraints_test(name, class_name, test_case):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
@@ -232,6 +240,10 @@ def run_constraints_test(name, class_name, test_case):
 
 def main():
     global_variables.running_tests = True
+    this_dir = os.getcwd()
+    global path_to_tests
+
+    (path_to_tests, other) = os.path.split(this_dir)
 
     fail = 0
     name = 'test_att'

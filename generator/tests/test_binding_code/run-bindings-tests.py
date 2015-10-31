@@ -9,7 +9,14 @@ from util import global_variables
 use_new = True
 
 fails = []
+path_to_tests = ''
 
+
+def get_filename(name):
+    global path_to_tests
+    fname = '{}.xml'.format(name)
+    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
+    return filename
 
 def generate_bindings_downcast_ext(filename, binding):
     parser = ParseXML.ParseXML(filename)
@@ -103,7 +110,7 @@ def compare_files(infile, outfile):
 
 
 def run_ns_test(name, binding, ext):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'downcast-ns', binding))
@@ -121,7 +128,7 @@ def run_ns_test(name, binding, ext):
 
 
 def run_test(name, binding, ext):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'downcast-ext', binding))
@@ -139,7 +146,7 @@ def run_test(name, binding, ext):
 
 
 def run_pkgs_test(name, binding, ext):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'downcast-packages', binding))
@@ -161,7 +168,7 @@ def run_pkgs_test(name, binding, ext):
 
 
 def run_local_test(name, binding, ext, local):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'local', binding))
@@ -183,7 +190,7 @@ def run_local_test(name, binding, ext, local):
 
 
 def run_plugin_test(name, binding, ext):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, 'downcast-plugins', binding))
@@ -201,7 +208,7 @@ def run_plugin_test(name, binding, ext):
 
 
 def run_swig_test(name, binding, ext):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, binding, 'native'))
@@ -222,6 +229,10 @@ def run_swig_test(name, binding, ext):
 def main():
     global_variables.running_tests = True
     fail = 0
+    this_dir = os.getcwd()
+    global path_to_tests
+
+    (path_to_tests, other) = os.path.split(this_dir)
 
     name = 'spatial'
     test_case = 'csharp'

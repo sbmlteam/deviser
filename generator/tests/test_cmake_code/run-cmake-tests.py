@@ -9,6 +9,14 @@ from util import global_variables
 use_new = True
 
 fails = []
+path_to_tests = ''
+
+
+def get_filename(name):
+    global path_to_tests
+    fname = '{}.xml'.format(name)
+    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
+    return filename
 
 
 def generate_cmake_files(filename):
@@ -58,7 +66,7 @@ def compare_files(infile, outfile):
 
 
 def run_cmake_test(name):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:CMake files'.format(name))
@@ -86,7 +94,7 @@ def run_cmake_test(name):
 
 
 def run_register_test(name):
-    filename = '.\\test_xml_files\\{}.xml'.format(name)
+    filename = get_filename(name)
     fail = 0
     print('====================================================')
     print('Testing {}:CMake register files'.format(name))
@@ -116,6 +124,11 @@ def run_register_test(name):
 
 def main():
     global_variables.running_tests = True
+    this_dir = os.getcwd()
+    global path_to_tests
+
+    (path_to_tests, other) = os.path.split(this_dir)
+
     fail = 0
 
     name = 'spatial'
