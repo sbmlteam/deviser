@@ -41,6 +41,7 @@ import CppHeaderFile
 from base_files import BaseCppFile, BaseTexFile
 from util import strFunctions, global_variables
 from validation import ValidationRulesForPlugin, ValidationRulesForClass
+from validation import ValidationRulesGeneral
 import ValidatorHeaderFile
 import ValidatorCodeFile
 
@@ -88,6 +89,13 @@ class ValidationFiles():
         tex_file.sort_class_names(self.sbml_classes)
         tex_file.sort_attribute_names(self.sbml_classes)
         tex_file.sort_enum_names(self.enums)
+        number = self.offset
+        rules = ValidationRulesGeneral\
+            .ValidationRulesGeneral(self.fullname, number, self.package,
+                                    self.pkg_ref, self.level, self.version,
+                                    self.pkg_version)
+        rules.determine_rules()
+        self.class_rules += rules.rules
         number = self.offset + 20200
         for i in range(0, len(self.plugins)):
             rules = ValidationRulesForPlugin.ValidationRulesForPlugin(
@@ -227,8 +235,6 @@ class ValidationFiles():
         self.error_file.write_line('{')
         for rule in self.class_rules:
             self.write_table_entry(rule)
-#        for i in range(0, 5):
-#            self.write_table_entry(self.class_rules[i])
         self.error_file.write_line('};')
         self.error_file.write_doxygen_end()
         self.error_file.write_cppns_end()
@@ -256,28 +262,38 @@ class ValidationFiles():
     def format_text(self, text_string):
         return_string = ''
         length = len(text_string)
-        in_name = False
-        for i in range(0, length):
+        i = 0
+        while i < length:
+            letter = text_string[i]
+            if letter == '\\':
+                [i, ret_str] = self.replace_name(i, text_string, length)
+                return_string += ret_str
+            else:
+                return_string += letter
+            i += 1
+
+        return return_string
+
+
+    def replace_name(self, i, text_string, length):
+        in_name = True
+        return_name_rep = ''
+        while (in_name and i < length):
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
             else:
                 next_letter = ' '
             if letter == '\\':
-                in_name = True
-            if not in_name:
-                return_string += letter
-                continue
+                return_name_rep += '<'
+            elif next_letter == ' ' or next_letter == '.':
+                return_name_rep += '{}>'.format(letter)
+                in_name = False
             else:
-                if letter == '\\':
-                    return_string += '<'
-                elif next_letter == ' ' or next_letter == '.':
-                    return_string += '{}>'.format(letter)
-                    in_name = False
-                else:
-                    return_string += letter
-                continue
-        return return_string
+                return_name_rep += letter
+            i += 1
+            continue
+        return [i-1, return_name_rep]
 
 
     #########################################################################
@@ -291,9 +307,10 @@ class ValidationFiles():
         self.error_file.write_cdecl_begin()
         self.error_file.write_line('typedef enum')
         self.error_file.write_line('{')
-        self.write_general_errors()
+        first = True
         for rule in self.class_rules:
-            self.write_rule(rule['typecode'], rule['number'])
+            self.write_rule(rule['typecode'], rule['number'], first)
+            first = False
         self.error_file.file_out.write('} ')
         self.error_file.file_out.write('{}{}'
                                        'ErrorCode_t'
@@ -303,27 +320,9 @@ class ValidationFiles():
         self.error_file.write_cppns_end()
         self.error_file.write_defn_end()
 
-    def write_general_errors(self):
-        error = '{}Unknown'.format(self.up_package)
-        number = self.offset + 10100
-        self.error_file.file_out.write('  {:{width}}'.format(error, width=60))
-        self.error_file.file_out.write('= {}\n'.format(number))
-        error = '{}NSUndeclared'.format(self.up_package)
-        number = self.offset + 10101
-        self.write_rule(error, number)
-        error = '{}ElementNotInNs'.format(self.up_package)
-        number = self.offset + 10102
-        self.write_rule(error, number)
-        error = '{}DuplicateComponentId'.format(self.up_package)
-        number = self.offset + 10301
-        self.write_rule(error, number)
-        error = '{}AttributeRequiredMissing'.format(self.up_package)
-        number = self.offset + 20101
-        self.write_rule(error, number)
-        error = '{}AttributeRequiredMustBeBoolean'.format(self.up_package)
-        number = self.offset + 20102
-        self.write_rule(error, number)
-
-    def write_rule(self, tc, number):
-        self.error_file.file_out.write(', {:{width}}'.format(tc, width=60))
+    def write_rule(self, tc, number, first):
+        if first:
+            self.error_file.file_out.write('  {:{width}}'.format(tc, width=60))
+        else:
+            self.error_file.file_out.write(', {:{width}}'.format(tc, width=60))
         self.error_file.file_out.write('= {}\n'.format(number))

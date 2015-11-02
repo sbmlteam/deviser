@@ -52,8 +52,10 @@ typedef enum
 , QualNSUndeclared                                            = 3010101
 , QualElementNotInNs                                          = 3010102
 , QualDuplicateComponentId                                    = 3010301
+, QualIdSyntaxRule                                            = 3010302
 , QualAttributeRequiredMissing                                = 3020101
 , QualAttributeRequiredMustBeBoolean                          = 3020102
+, QualAttributeRequiredMustHaveValue                          = 3020103
 , QualModelAllowedElements                                    = 3020201
 , QualModelEmptyLOElements                                    = 3020202
 , QualModelLOQualitativeSpeciesAllowedElements                = 3020203

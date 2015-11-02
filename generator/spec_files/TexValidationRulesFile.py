@@ -93,34 +93,34 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
 
     ####################################################################
     # Write general rules
-    def write_general_rules(self):
-        self.write_line('\subsubsection*{General rules about this package}')
-        self.skip_line()
-        text = 'To conform to the {0} specification for SBML Level~{1} ' \
-               'Version~{2}, an SBML document must declare the use of the ' \
-               'following XML Namespace: \\uri{3}http://www.sbml.org/sbml/' \
-               'level{1}/version{2}/{4}/version{5}{6}.'\
-            .format(self.full_pkg_command, self.level, self.version,
-                    self.start_b, self.package, self.pkg_version, self.end_b)
-        ref = '{} {}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('xml-namespace', False))
-        rule = {'severity': 'ERROR', 'number': 10101+self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
-        text = 'Wherever they appear in an SBML document, elements and ' \
-               'attributes from the {} package must be declared either ' \
-               'implicitly or explicitly to be in the XML namespace ' \
-               '\\uri{}http://www.sbml.org/sbml/level{}/version{}' \
-               '/{}/version{}{}.'\
-            .format(self.full_pkg_command, self.start_b, self.level,
-                    self.version, self.package, self.pkg_version, self.end_b)
-        # same ref
-        rule = {'severity': 'ERROR', 'number': 10102+self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
+    # def write_general_rules(self):
+    #     self.write_line('\subsubsection*{General rules about this package}')
+    #     self.skip_line()
+    #     text = 'To conform to the {0} specification for SBML Level~{1} ' \
+    #            'Version~{2}, an SBML document must declare the use of the ' \
+    #            'following XML Namespace: \\uri{3}http://www.sbml.org/sbml/' \
+    #            'level{1}/version{2}/{4}/version{5}{6}.'\
+    #         .format(self.full_pkg_command, self.level, self.version,
+    #                 self.start_b, self.package, self.pkg_version, self.end_b)
+    #     ref = '{} {}.'\
+    #         .format(self.pkg_ref,
+    #                 strFunctions.wrap_section('xml-namespace', False))
+    #     rule = {'severity': 'ERROR', 'number': 10101+self.offset,
+    #             'text': text, 'reference': ref}
+    #     self.write_rule(rule)
+    #     self.skip_line()
+    #     text = 'Wherever they appear in an SBML document, elements and ' \
+    #            'attributes from the {} package must be declared either ' \
+    #            'implicitly or explicitly to be in the XML namespace ' \
+    #            '\\uri{}http://www.sbml.org/sbml/level{}/version{}' \
+    #            '/{}/version{}{}.'\
+    #         .format(self.full_pkg_command, self.start_b, self.level,
+    #                 self.version, self.package, self.pkg_version, self.end_b)
+    #     # same ref
+    #     rule = {'severity': 'ERROR', 'number': 10102+self.offset,
+    #             'text': text, 'reference': ref}
+    #     self.write_rule(rule)
+    #     self.skip_line()
 
     # Write general rules
     def write_extended_sbml_rules(self):
@@ -158,34 +158,26 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.write_rule(rule)
         self.skip_line()
 
-    #  Write identifier rules
-    def write_identifier_rules(self):
+    def write_general_rules(self, rules):
+        self.write_line('\subsubsection*{General rules about this package}')
+        self.skip_line()
+        for i in range(1, 3):
+            self.write_rule(rules[i])
+            self.skip_line()
+
+    def write_identifier_rules(self, rules):
         self.write_line(
             '\subsubsection*{General rules about identifiers}')
         self.skip_line()
-        text = '(Extends validation rule \\#10301 in the \\sbmlthreecore ' \
-               'specification. TO DO list scope of ids)'
-        ref = '{} {}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('primitive-types', False))
-        rule = {'severity': 'ERROR', 'number': 10301 + self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
-        text = 'The value of a {0} must conform to the syntax of ' \
-               'the \\class{1}SBML{2} data type \\primtype{1}SId{2}'\
-            .format(strFunctions.wrap_token('id', self.package),
-                    self.start_b, self.end_b)
-        # same ref
-        rule = {'severity': 'ERROR', 'number': 10302 + self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
+        for i in range(3, 5):
+            self.write_rule(rules[i])
+            self.skip_line()
 
-    def write_general_rules1(self, rules):
-        self.write_line('\subsubsection*{General rules about this package}')
+    def write_extended_sbml_rules(self, rules):
+        self.write_line('\subsubsection*{Rules for the '
+                        'extended \\class{SBML} class}')
         self.skip_line()
-        for i in range(0, len(rules)):
+        for i in range(5, 8):
             self.write_rule(rules[i])
             self.skip_line()
 
@@ -262,13 +254,10 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
             self.package, self.pkg_ref, self.level, self.version,
             self.pkg_version)
         rules.determine_rules()
-        self.write_general_rules1(rules.rules)
-        self.skip_line()
-
-        self.write_general_rules()
-        self.write_identifier_rules()
+        self.write_general_rules(rules.rules)
+        self.write_identifier_rules(rules.rules)
         self.write_to_do('ANY LIST OF ELEMENTS THAT HAVE ATTRIBUTES')
-        self.write_extended_sbml_rules()
+        self.write_extended_sbml_rules(rules.rules)
         number = self.offset + 20200
         for i in range(0, len(self.plugins)):
             rules = ValidationRulesForPlugin.ValidationRulesForPlugin(

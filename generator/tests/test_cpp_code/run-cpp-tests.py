@@ -80,6 +80,7 @@ def generate_error_header(filename):
     os.chdir('./temp')
     all_files = ValidationFiles.ValidationFiles(ob, True)
     all_files.write_error_header()
+    all_files.write_error_table_header()
     os.chdir('../.')
 
 
@@ -209,6 +210,9 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
         correct_file = '.\\test-extension\\{}.h'.format(class_name)
         temp_file = '.\\temp\\{}.h'.format(class_name)
         fail = compare_files(correct_file, temp_file)
+        correct_file = '.\\test-extension\\{}Table.h'.format(class_name)
+        temp_file = '.\\temp\\{}Table.h'.format(class_name)
+        fail += compare_files(correct_file, temp_file)
     else:
         generate_validator(filename)
         correct_file = '.\\test-extension\\{}.h'.format(class_name)
