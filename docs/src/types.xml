@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+      <elements>
+        <element name="Sample" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="samples" required="false" type="array" element="int" abstract="false"/>
+            <attribute name="kind" required="false" type="enum" element="CompressionKind_t" abstract="false"/>
+            <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
+            <attribute name="parameter" required="false" type="element" element="Parameter" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

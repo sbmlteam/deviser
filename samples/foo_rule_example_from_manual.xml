@@ -8,10 +8,8 @@
             <attribute name="math" required="true" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="assignment" element="FooAssignment"/>
-            <concrete name="rate" element="FooRate"/>
+            <concrete name="assignment" element="Assignment"/>
             <concrete name="algebraic" element="Algebraic"/>
-            <concrete name="undefined" element="Undefined"/>
           </concretes>
         </element>
         <element name="Assignment" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="true">
@@ -26,11 +24,6 @@
         <element name="FooRate" typeCode="SBML_FOO_RATE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="rate"/>
         <element name="FooAssignment" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="assignment"/>
         <element name="Algebraic" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="false"/>
-        <element name="NewModel" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
-          <attributes>
-            <attribute name="rules" required="false" type="inline_lo_element" element="FooRule" abstract="false"/>
-          </attributes>
-        </element>
       </elements>
     </pkgVersion>
   </versions>
