@@ -21,10 +21,14 @@
             <attribute name="math" required="true" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
         </element>
-        <element name="Assignment" typeCode="SBML_FOO_ASSIGNMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="false">
+        <element name="Assignment" typeCode="SBML_FOO_ASSIGNMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="true">
           <attributes>
-            <attribute name="variable" required="true" type="SIdRef" element="Parameter" abstract="false"/>
+            <attribute name="variable" required="true" type="SIdRef" element="FooParameter" abstract="false"/>
           </attributes>
+          <concretes>
+            <concrete name="rate" element="FooRate"/>
+            <concrete name="assignment" element="FooAssignment"/>
+          </concretes>
         </element>
         <element name="FooRule" typeCode="SBML_FOO_RULE" hasListOf="true" hasChildren="false" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="true">
           <attributes>
@@ -32,6 +36,7 @@
           </attributes>
           <concretes>
             <concrete name="assignment" element="Assignment"/>
+            <concrete name="algebraic" element="Algebraic"/>
           </concretes>
         </element>
         <element name="Extra" typeCode="SBML_FOO_EXTRA" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
@@ -40,6 +45,9 @@
             <attribute name="qualitativeSpecies" required="false" type="element" element="QualitativeSpecies" abstract="false"/>
           </attributes>
         </element>
+        <element name="Algebraic" typeCode="SBML_FOO_ALGEBRAIC" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="false"/>
+        <element name="FooRate" typeCode="SBML_FOO_FOORATE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="rate"/>
+        <element name="FooAssignment" typeCode="SBML_FOO_FOOASSIGNMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Assignment" abstract="false" elementName="assignment"/>
       </elements>
       <plugins>
         <plugin extensionPoint="Reaction">
