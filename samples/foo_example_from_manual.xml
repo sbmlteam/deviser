@@ -1,101 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
-<package name="Foo" fullname="Imaginary Package Foo" 
-         number="2000" offset="1200000" version="1" required="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="Foo" fullname="Imaginary Package Foo" number="2000" offset="1400000" version="1" required="true">
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="FooParameter" typeCode="SBML_FOO_PARAMETER" 
-                 hasListOf="true" hasChildren="false" hasMath="false" 
-                 childrenOverwriteElementName="false" minNumListOfChildren="1" 
-                 baseClass="SBase" abstract="false" elementName="parameter" 
-                 listOfName="listOfParameters" listOfClassName="ListOfFooParameters">
+        <element name="FooParameter" typeCode="SBML_FOO_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false" elementName="parameter" listOfName="listOfParameters" listOfClassName="ListOfFooParameters">
           <attributes>
-            <attribute name="value" required="false" type="double" abstract="false" />
-            <attribute name="id" required="true" type="SId" abstract="false" />
-            <attribute name="units" required="false" type="UnitSIdRef" abstract="false" />
-            <attribute name="constant" required="true" type="boolean" abstract="false" />
+            <attribute name="value" required="false" type="double" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="units" required="false" type="UnitSIdRef" abstract="false"/>
+            <attribute name="constant" required="true" type="boolean" abstract="false"/>
           </attributes>
           <listOfAttributes>
-            <listOfAttribute name="local" required="true" type="bool" abstract="false" />
+            <listOfAttribute name="local" required="true" type="bool" abstract="false"/>
           </listOfAttributes>
         </element>
-        <element name="FooKineticLaw" typeCode="SBML_FOO_KINETIC_LAW" 
-                 hasListOf="false" hasChildren="true" hasMath="true" 
-                 childrenOverwriteElementName="false" baseClass="SBase" abstract="false" 
-                 elementName="KineticLaw">
+        <element name="FooKineticLaw" typeCode="SBML_FOO_KINETIC_LAW" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="KineticLaw">
           <attributes>
-            <attribute name="stochastic" required="true" type="boolean" abstract="false" />
-            <attribute name="listOfFooParameters" required="false" 
-                       type="lo_element" element="FooParameter" xmlName="listOfParameters" 
-                       abstract="false" />
-            <attribute name="math" required="true" type="element" element="ASTNode*" 
-                       abstract="false" />
+            <attribute name="stochastic" required="true" type="boolean" abstract="false"/>
+            <attribute name="listOfFooParameters" required="false" type="lo_element" element="FooParameter" xmlName="listOfParameters" abstract="false"/>
+            <attribute name="math" required="true" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
         </element>
-        <element name="Assignment" typeCode="SBML_FOO_ASSIGNMENT" hasListOf="false" 
-                 hasChildren="false" hasMath="false" childrenOverwriteElementName="false" 
-                 baseClass="FooRule" abstract="false">
+        <element name="Assignment" typeCode="SBML_FOO_ASSIGNMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="FooRule" abstract="false">
           <attributes>
-            <attribute name="variable" required="true" type="SIdRef" element="Parameter" 
-                       abstract="false" />
+            <attribute name="variable" required="true" type="SIdRef" element="Parameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="FooRule" typeCode="SBML_FOO_RULE" hasListOf="true" hasChildren="false" 
-                 hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="1" 
-                 baseClass="SBase" abstract="true">
+        <element name="FooRule" typeCode="SBML_FOO_RULE" hasListOf="true" hasChildren="false" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="true">
           <attributes>
-            <attribute name="math" required="true" type="element" element="ASTNode*" 
-                       abstract="false" />
+            <attribute name="math" required="true" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="assignment" element="Assignment" />
+            <concrete name="assignment" element="Assignment"/>
           </concretes>
         </element>
-        <element name="Extra" typeCode="SBML_FOO_EXTRA" hasListOf="false" hasChildren="true" 
-                 hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" 
-                 abstract="false">
+        <element name="Extra" typeCode="SBML_FOO_EXTRA" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="sign" required="true" type="enum" element="Sign_t"  
-                       abstract="false" />
-            <attribute name="qualitativeSpecies" required="false" type="element" 
-                       element="QualitativeSpecies" abstract="false" />
+            <attribute name="sign" required="true" type="enum" element="Sign_t" abstract="false"/>
+            <attribute name="qualitativeSpecies" required="false" type="element" element="QualitativeSpecies" abstract="false"/>
           </attributes>
         </element>
       </elements>
       <plugins>
         <plugin extensionPoint="Reaction">
           <references>
-            <reference name="FooKineticLaw" />
+            <reference name="FooKineticLaw"/>
           </references>
         </plugin>
         <plugin extensionPoint="Model">
           <attributes>
-            <attribute name="useFoo" required="true" type="boolean" abstract="false" />
+            <attribute name="useFoo" required="true" type="boolean" abstract="false"/>
           </attributes>
         </plugin>
         <plugin typecode="SBML_QUAL_TRANSITION" package="qual" extensionPoint="Transition">
           <references>
-            <reference name="ListOfFooRules" />
+            <reference name="ListOfFooRules"/>
           </references>
         </plugin>
         <plugin extensionPoint="Species">
           <references>
-            <reference name="Extra" />
+            <reference name="Extra"/>
           </references>
         </plugin>
       </plugins>
       <enums>
         <enum name="Sign_t">
           <enumValues>
-            <enumValue name="SIGN_FOO_POSITIVE" value="positive" />
-            <enumValue name="SIGN_FOO_NEGATIVE" value="negative" />
-            <enumValue name="SIGN_FOO_NEUTRAL" value="neutral" />
+            <enumValue name="SIGN_FOO_POSITIVE" value="positive"/>
+            <enumValue name="SIGN_FOO_NEGATIVE" value="negative"/>
+            <enumValue name="SIGN_FOO_NEUTRAL" value="neutral"/>
           </enumValues>
         </enum>
       </enums>
       <mappings>
-        <mapping name="Transition" package="qual" />
-        <mapping name="QualitativeSpecies" package="qual" />
+        <mapping name="Transition" package="qual"/>
+        <mapping name="QualitativeSpecies" package="qual"/>
       </mappings>
     </pkgVersion>
   </versions>
