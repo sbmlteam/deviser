@@ -41,7 +41,7 @@
         </element>
         <element name="Extra" typeCode="SBML_FOO_EXTRA" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="sign" required="true" type="enum" element="Sign_t" abstract="false"/>
+            <attribute name="sign" required="true" type="enum" element="Sign" abstract="false"/>
             <attribute name="qualitativeSpecies" required="false" type="element" element="QualitativeSpecies" abstract="false"/>
           </attributes>
         </element>
@@ -72,7 +72,7 @@
         </plugin>
       </plugins>
       <enums>
-        <enum name="Sign_t">
+        <enum name="Sign">
           <enumValues>
             <enumValue name="SIGN_FOO_POSITIVE" value="positive"/>
             <enumValue name="SIGN_FOO_NEGATIVE" value="negative"/>
