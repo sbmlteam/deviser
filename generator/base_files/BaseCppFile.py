@@ -353,7 +353,8 @@ class BaseCppFile(BaseFile.BaseFile):
                 if attribute['type'] == 'inline_lo_element':
                     capname = strFunctions.upper_first(name)
                     attrib_class = query.get_class(capname, attribute['root'])
-                    attribute['concrete'] = attrib_class['concrete']
+                    if 'concrete' in attrib_class:
+                        attribute['concrete'] = attrib_class['concrete']
                 elements.append(attribute)
                 listed_elements.append(name)
         return elements
