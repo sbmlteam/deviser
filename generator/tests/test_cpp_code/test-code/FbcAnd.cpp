@@ -1,7 +1,7 @@
 /**
- * @file: FbcAnd.cpp
- * @brief: Implementation of FbcAnd.
- * @author: SBMLTeam
+ * @file FbcAnd.cpp
+ * @brief Implementation of FbcAnd.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

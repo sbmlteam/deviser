@@ -1,7 +1,7 @@
 /**
- * @file: ListOfOutputs.cpp
- * @brief: Implementation of ListOfOutputs.
- * @author: SBMLTeam
+ * @file ListOfOutputs.cpp
+ * @brief Implementation of ListOfOutputs.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

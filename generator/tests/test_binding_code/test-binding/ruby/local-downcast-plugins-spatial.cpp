@@ -1,7 +1,7 @@
 /**
- * @file: local-downcast-plugins-spatial.cpp
- * @brief: Casting to most specific plugins object for ruby
- * @author: SBMLTeam
+ * @file local-downcast-plugins-spatial.cpp
+ * @brief Casting to most specific plugins object for ruby
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

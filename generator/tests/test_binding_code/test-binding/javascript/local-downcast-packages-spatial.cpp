@@ -1,7 +1,7 @@
 /**
- * @file: local-downcast-packages-spatial.cpp
- * @brief: Casting to most specific packages object for javascript
- * @author: SBMLTeam
+ * @file local-downcast-packages-spatial.cpp
+ * @brief Casting to most specific packages object for javascript
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

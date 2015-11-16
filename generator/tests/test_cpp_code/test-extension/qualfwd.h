@@ -1,7 +1,7 @@
 /**
- * @file: qualfwd.h
- * @brief: Definition of qualfwd.
- * @author: SBMLTeam
+ * @file qualfwd.h
+ * @brief Definition of qualfwd.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

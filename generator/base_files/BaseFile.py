@@ -367,12 +367,12 @@ class BaseFile:
 
     def add_file_header(self):
         self.open_comment()
-        self.write_comment_line('@file:   {0}'.format(self.filename))
-        self.write_comment_line('@brief:  {0}'.format(self.brief_description))
+        self.write_comment_line('@file   {0}'.format(self.filename))
+        self.write_comment_line('@brief  {0}'.format(self.brief_description))
         if global_variables.is_package:
-            self.write_comment_line('@author: SBMLTeam')
+            self.write_comment_line('@author SBMLTeam')
         else:
-            self.write_comment_line('@author: DEVISER')
+            self.write_comment_line('@author DEVISER')
         if self.library_name == 'Libsbml':
             self.write_libsbml_licence()
         self.close_comment()

@@ -1,7 +1,7 @@
 /**
- * @file: FbcAnd.h
- * @brief: Definition of FbcAnd.
- * @author: SBMLTeam
+ * @file FbcAnd.h
+ * @brief Definition of FbcAnd.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

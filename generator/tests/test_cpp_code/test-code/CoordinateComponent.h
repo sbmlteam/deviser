@@ -1,7 +1,7 @@
 /**
- * @file: CoordinateComponent.h
- * @brief: Definition of CoordinateComponent.
- * @author: SBMLTeam
+ * @file CoordinateComponent.h
+ * @brief Definition of CoordinateComponent.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

@@ -1,7 +1,7 @@
 /**
- * @file: local-packages-spatial.i
- * @brief: Casting to most specific packages object for java
- * @author: SBMLTeam
+ * @file local-packages-spatial.i
+ * @brief Casting to most specific packages object for java
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

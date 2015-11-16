@@ -1,7 +1,7 @@
 /**
- * @file: VersModelPlugin.cpp
- * @brief: Implementation of VersModelPlugin.
- * @author: SBMLTeam
+ * @file VersModelPlugin.cpp
+ * @brief Implementation of VersModelPlugin.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

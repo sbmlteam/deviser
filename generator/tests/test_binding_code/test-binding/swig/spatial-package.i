@@ -1,7 +1,7 @@
 /**
- * @file: spatial-package.i
- * @brief: SWIG local file
- * @author: SBMLTeam
+ * @file spatial-package.i
+ * @brief SWIG local file
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

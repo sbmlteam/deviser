@@ -1,7 +1,7 @@
 /**
- * @file: MyRequiredClass.h
- * @brief: Definition of MyRequiredClass.
- * @author: SBMLTeam
+ * @file MyRequiredClass.h
+ * @brief Definition of MyRequiredClass.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

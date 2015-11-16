@@ -1,7 +1,7 @@
 /**
- * @file: Transition.cpp
- * @brief: Implementation of Transition.
- * @author: SBMLTeam
+ * @file Transition.cpp
+ * @brief Implementation of Transition.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

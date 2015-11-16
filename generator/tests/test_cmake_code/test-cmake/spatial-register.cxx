@@ -1,7 +1,7 @@
 /**
- * @file: spatial-register.cxx
- * @brief: CMake register file for spatial package
- * @author: SBMLTeam
+ * @file spatial-register.cxx
+ * @brief CMake register file for spatial package
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

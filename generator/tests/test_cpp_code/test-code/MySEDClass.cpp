@@ -1,7 +1,7 @@
 /**
- * @file: MySEDClass.cpp
- * @brief: Implementation of MySEDClass.
- * @author: DEVISER
+ * @file MySEDClass.cpp
+ * @brief Implementation of MySEDClass.
+ * @author DEVISER
  */
 #include <sedml/MySEDClass.h>
 #include <sbml/xml/XMLInputStream.h>

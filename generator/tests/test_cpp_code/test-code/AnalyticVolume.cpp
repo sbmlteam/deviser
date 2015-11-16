@@ -1,7 +1,7 @@
 /**
- * @file: AnalyticVolume.cpp
- * @brief: Implementation of AnalyticVolume.
- * @author: SBMLTeam
+ * @file AnalyticVolume.cpp
+ * @brief Implementation of AnalyticVolume.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

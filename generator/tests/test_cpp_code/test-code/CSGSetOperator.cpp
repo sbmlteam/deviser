@@ -1,7 +1,7 @@
 /**
- * @file: CSGSetOperator.cpp
- * @brief: Implementation of CSGSetOperator.
- * @author: SBMLTeam
+ * @file CSGSetOperator.cpp
+ * @brief Implementation of CSGSetOperator.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

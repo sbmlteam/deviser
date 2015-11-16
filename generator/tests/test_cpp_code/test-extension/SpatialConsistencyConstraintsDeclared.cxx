@@ -2,9 +2,9 @@
 /** @cond doxygenLibsbmlInternal */
 
 /**
- * @file: SpatialConsistencyConstraintsDeclared.cxx
- * @brief: Definition of SpatialConsistencyConstraintsDeclared.
- * @author: SBMLTeam
+ * @file SpatialConsistencyConstraintsDeclared.cxx
+ * @brief Definition of SpatialConsistencyConstraintsDeclared.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

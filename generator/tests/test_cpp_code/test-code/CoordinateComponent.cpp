@@ -1,7 +1,7 @@
 /**
- * @file: CoordinateComponent.cpp
- * @brief: Implementation of CoordinateComponent.
- * @author: SBMLTeam
+ * @file CoordinateComponent.cpp
+ * @brief Implementation of CoordinateComponent.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

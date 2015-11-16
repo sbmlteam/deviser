@@ -1,7 +1,7 @@
 /**
- * @file: MyLoTest.h
- * @brief: Definition of MyLoTest.
- * @author: SBMLTeam
+ * @file MyLoTest.h
+ * @brief Definition of MyLoTest.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

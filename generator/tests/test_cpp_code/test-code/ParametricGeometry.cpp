@@ -1,7 +1,7 @@
 /**
- * @file: ParametricGeometry.cpp
- * @brief: Implementation of ParametricGeometry.
- * @author: SBMLTeam
+ * @file ParametricGeometry.cpp
+ * @brief Implementation of ParametricGeometry.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

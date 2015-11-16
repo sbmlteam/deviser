@@ -1,7 +1,7 @@
 /**
- * @file: QualModelPlugin.h
- * @brief: Definition of QualModelPlugin.
- * @author: SBMLTeam
+ * @file QualModelPlugin.h
+ * @brief Definition of QualModelPlugin.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

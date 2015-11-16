@@ -1,7 +1,7 @@
 /**
- * @file: BBB.h
- * @brief: Definition of BBB.
- * @author: SBMLTeam
+ * @file BBB.h
+ * @brief Definition of BBB.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

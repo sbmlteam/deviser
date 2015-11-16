@@ -1,7 +1,7 @@
 /**
- * @file: local-downcast-namespaces-spatial.cpp
- * @brief: Casting to most specific namespace object for r
- * @author: SBMLTeam
+ * @file local-downcast-namespaces-spatial.cpp
+ * @brief Casting to most specific namespace object for r
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

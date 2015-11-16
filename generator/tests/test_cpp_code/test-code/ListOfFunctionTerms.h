@@ -1,7 +1,7 @@
 /**
- * @file: ListOfFunctionTerms.h
- * @brief: Definition of ListOfFunctionTerms.
- * @author: SBMLTeam
+ * @file ListOfFunctionTerms.h
+ * @brief Definition of ListOfFunctionTerms.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

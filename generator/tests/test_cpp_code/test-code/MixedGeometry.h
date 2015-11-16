@@ -1,7 +1,7 @@
 /**
- * @file: MixedGeometry.h
- * @brief: Definition of MixedGeometry.
- * @author: SBMLTeam
+ * @file MixedGeometry.h
+ * @brief Definition of MixedGeometry.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

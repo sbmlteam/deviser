@@ -1,7 +1,7 @@
 /**
- * @file: VersExtension.cpp
- * @brief: Implementation of VersExtension.
- * @author: SBMLTeam
+ * @file VersExtension.cpp
+ * @brief Implementation of VersExtension.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

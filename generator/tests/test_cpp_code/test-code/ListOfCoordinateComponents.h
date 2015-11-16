@@ -1,7 +1,7 @@
 /**
- * @file: ListOfCoordinateComponents.h
- * @brief: Definition of ListOfCoordinateComponents.
- * @author: SBMLTeam
+ * @file ListOfCoordinateComponents.h
+ * @brief Definition of ListOfCoordinateComponents.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

@@ -1,7 +1,7 @@
 /**
- * @file: ListOfMyLoTests.cpp
- * @brief: Implementation of ListOfMyLoTests.
- * @author: SBMLTeam
+ * @file ListOfMyLoTests.cpp
+ * @brief Implementation of ListOfMyLoTests.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

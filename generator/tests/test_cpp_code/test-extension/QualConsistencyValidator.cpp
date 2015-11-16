@@ -2,9 +2,9 @@
 /** @cond doxygenLibsbmlInternal */
 
 /**
- * @file: QualConsistencyValidator.cpp
- * @brief: Definition of QualConsistencyValidator.
- * @author: SBMLTeam
+ * @file QualConsistencyValidator.cpp
+ * @brief Definition of QualConsistencyValidator.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

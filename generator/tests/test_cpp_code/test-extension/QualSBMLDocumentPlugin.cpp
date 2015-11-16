@@ -1,7 +1,7 @@
 /**
- * @file: QualSBMLDocumentPlugin.cpp
- * @brief: Implementation of QualSBMLDocumentPlugin.
- * @author: SBMLTeam
+ * @file QualSBMLDocumentPlugin.cpp
+ * @brief Implementation of QualSBMLDocumentPlugin.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

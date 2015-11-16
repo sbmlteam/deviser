@@ -1,7 +1,7 @@
 /**
- * @file: SampledFieldGeometry.h
- * @brief: Definition of SampledFieldGeometry.
- * @author: SBMLTeam
+ * @file SampledFieldGeometry.h
+ * @brief Definition of SampledFieldGeometry.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

@@ -1,7 +1,7 @@
 /**
- * @file: MixedGeometry.cpp
- * @brief: Implementation of MixedGeometry.
- * @author: SBMLTeam
+ * @file MixedGeometry.cpp
+ * @brief Implementation of MixedGeometry.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

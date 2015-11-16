@@ -1,7 +1,7 @@
 /**
- * @file: Uncertainty.h
- * @brief: Definition of Uncertainty.
- * @author: SBMLTeam
+ * @file Uncertainty.h
+ * @brief Definition of Uncertainty.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

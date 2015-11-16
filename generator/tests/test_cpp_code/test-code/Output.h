@@ -1,7 +1,7 @@
 /**
- * @file: Output.h
- * @brief: Definition of Output.
- * @author: SBMLTeam
+ * @file Output.h
+ * @brief Definition of Output.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

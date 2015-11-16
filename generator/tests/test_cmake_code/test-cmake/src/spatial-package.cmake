@@ -1,7 +1,7 @@
 #################################################
- # @file: spatial-package.cmake
- # @brief: Src CMake file for spatial package
- # @author: SBMLTeam
+ # @file spatial-package.cmake
+ # @brief Src CMake file for spatial package
+ # @author SBMLTeam
  #
  # <!--------------------------------------------------------------------------
  # This file is part of libSBML. Please visit http://sbml.org for more

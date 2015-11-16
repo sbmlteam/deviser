@@ -1,7 +1,7 @@
 /**
- * @file: MyTestClass.cpp
- * @brief: Implementation of MyTestClass.
- * @author: SBMLTeam
+ * @file MyTestClass.cpp
+ * @brief Implementation of MyTestClass.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

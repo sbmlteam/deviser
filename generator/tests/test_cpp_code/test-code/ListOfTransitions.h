@@ -1,7 +1,7 @@
 /**
- * @file: ListOfTransitions.h
- * @brief: Definition of ListOfTransitions.
- * @author: SBMLTeam
+ * @file ListOfTransitions.h
+ * @brief Definition of ListOfTransitions.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

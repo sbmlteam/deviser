@@ -1,7 +1,7 @@
 /**
- * @file: SpatialSBMLDocumentPlugin.h
- * @brief: Definition of SpatialSBMLDocumentPlugin.
- * @author: SBMLTeam
+ * @file SpatialSBMLDocumentPlugin.h
+ * @brief Definition of SpatialSBMLDocumentPlugin.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

@@ -1,7 +1,7 @@
 /**
- * @file: SpatialCompartmentPlugin.h
- * @brief: Definition of SpatialCompartmentPlugin.
- * @author: SBMLTeam
+ * @file SpatialCompartmentPlugin.h
+ * @brief Definition of SpatialCompartmentPlugin.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more

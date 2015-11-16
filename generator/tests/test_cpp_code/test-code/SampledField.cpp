@@ -1,7 +1,7 @@
 /**
- * @file: SampledField.cpp
- * @brief: Implementation of SampledField.
- * @author: SBMLTeam
+ * @file SampledField.cpp
+ * @brief Implementation of SampledField.
+ * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more
