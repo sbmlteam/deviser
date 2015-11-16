@@ -155,7 +155,7 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_element_not_ns_rule(self):
         text = 'Wherever they appear in an SBML document, elements and ' \
-               'attributes from the {} package must be declared either ' \
+               'attributes from the {} must be declared either ' \
                'implicitly or explicitly to be in the XML namespace ' \
                '\\uri{}http://www.sbml.org/sbml/level{}/version{}' \
                '/{}/version{}{}.'\
@@ -176,7 +176,7 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_id_rule(self):
         text = '(Extends validation rule \\#10301 in the \\sbmlthreecore ' \
-               'specification. TO DO list scope of ids)'
+               'specification.) TO DO list scope of ids)'
         ref = '{} {}.'\
             .format(self.pkg_ref,
                     strFunctions.wrap_section('primitive-types', False))
@@ -209,9 +209,9 @@ class ValidationRulesGeneral():
 
     @staticmethod
     def write_reqd_rule(self):
-        text = 'In all SBML documents using the \\{}Package, the ' \
-               '\\class{}SBML{} object must have the {} attribute.'\
-            .format(strFunctions.upper_first(self.package), self.start_b,
+        text = 'In all SBML documents using the {}, the ' \
+               '\\class{}sbml{} object must have the {} attribute.'\
+            .format(self.full_pkg_command, self.start_b,
                     self.end_b,
                     strFunctions.wrap_token('required', self.package))
         ref = 'SBML Level~3 Version~1 Core, Section~4.1.2.'

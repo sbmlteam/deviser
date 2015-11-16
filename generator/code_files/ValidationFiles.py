@@ -266,13 +266,105 @@ class ValidationFiles():
         while i < length:
             letter = text_string[i]
             if letter == '\\':
-                [i, ret_str] = self.replace_name(i, text_string, length)
+                status = self.analyse_string(i, text_string, length)
+                if status['is_uri']:
+                    [i, ret_str] = self.replace_uri(i+4, text_string, length)
+                elif status['is_number']:
+                    ret_str = text_string[i+1:i+7]
+                    i += 6
+                elif status['is_sbml_l3']:
+                    ret_str = 'SBML Level 3 Core'
+                    i += 13
+                elif status['is_token']:
+                    [i, ret_str] = self.replace_token(i+6, text_string, length)
+                elif status['is_class']:
+                    [i, ret_str] = self.replace_class(i+6, text_string, length)
+                elif status['is_type']:
+                    [i, ret_str] = self.replace_type(i+9, text_string, length)
+                elif status['is_val']:
+                    [i, ret_str] = self.replace_type(i+4, text_string, length)
+                elif status['is_package']:
+                    [i, ret_str] = self.replace_package(i,
+                                                        status['pkg_length'])
+                else:
+                    [i, ret_str] = self.replace_name(i, text_string, length)
                 return_string += ret_str
             else:
                 return_string += letter
             i += 1
 
         return return_string
+
+
+    def analyse_string(self, i, text_string, length):
+        state = dict({'is_uri': False,
+                      'is_number': False,
+                      'is_sbml_l3': False,
+                      'is_token': False,
+                      'is_class': False,
+                      'is_type': False,
+                      'is_val': False,
+                      'is_package': False,
+                      'pkg_length': 0})
+        if text_string[i+1] == '#':
+            state['is_number'] = True
+            return state
+
+        start_str = text_string[i:i+4]
+        if start_str == '\\uri':
+            state['is_uri'] = True
+            return state
+
+        start_str = text_string[i:i+4]
+        if start_str == '\\val':
+            state['is_val'] = True
+            return state
+
+        start_str = text_string[i:i+14]
+        if start_str == '\\sbmlthreecore':
+            state['is_sbml_l3'] = True
+            return state
+
+        start_str = text_string[i:i+6]
+        if start_str == '\\token':
+            state['is_token'] = True
+            return state
+
+        start_str = text_string[i:i+6]
+        if start_str == '\\class':
+            state['is_class'] = True
+            return state
+
+        start_str = text_string[i:i+9]
+        if start_str == '\\primtype':
+            state['is_type'] = True
+            return state
+
+        [is_package, pkg_len] = self.is_package(i, text_string, length)
+        if is_package:
+            state['is_package'] = True
+            state['pkg_length'] = pkg_len
+            return state
+
+        return state
+
+
+    def is_package(self, i, text_string, length):
+        is_package = False
+        word = ''
+        while (i < length-1):
+            letter = text_string[i]
+            if letter == ' ' or letter == ',' or letter == '.':
+                break;
+            else:
+                word += letter
+                i += 1
+                continue
+        len_word = len(word)
+        end_word = word[len_word-7:len_word]
+        if end_word == 'Package':
+            is_package = True
+        return [is_package, len_word]
 
 
     def replace_name(self, i, text_string, length):
@@ -294,6 +386,103 @@ class ValidationFiles():
             i += 1
             continue
         return [i-1, return_name_rep]
+
+
+    def replace_uri(self, i, text_string, length):
+        in_uri = True
+        return_uri_rep = ''
+        while (in_uri and i < length):
+            letter = text_string[i]
+            if i != length-1:
+                next_letter = text_string[i+1]
+            else:
+                next_letter = ' '
+            if letter == '{':
+                return_uri_rep += '\''
+            elif letter == '}' or next_letter == ' ':
+                return_uri_rep += '\''
+                in_uri = False
+            else:
+                return_uri_rep += letter
+            i += 1
+            continue
+        return [i-1, return_uri_rep]
+
+
+    def replace_token(self, i, text_string, length):
+        in_token = True
+        return_token_rep = ''
+        while (in_token and i < length):
+            letter = text_string[i]
+            if i != length-1:
+                next_letter = text_string[i+1]
+            else:
+                next_letter = ' '
+            if letter == '{':
+                return_token_rep += '\''
+            elif letter == '}' or next_letter == ' ':
+                return_token_rep += '\''
+                in_token = False
+            elif letter == '\\' and next_letter == '-':
+                i += 2
+                continue
+            else:
+                return_token_rep += letter
+            i += 1
+            continue
+        return [i-1, return_token_rep]
+
+
+    def replace_class(self, i, text_string, length):
+        in_class = True
+        return_class_rep = ''
+        while (in_class and i < length):
+            letter = text_string[i]
+            if i != length-1:
+                next_letter = text_string[i+1]
+            else:
+                next_letter = ' '
+            if letter == '{':
+                return_class_rep += '<{}'.format(next_letter.lower())
+                i += 1
+            elif letter == '}' or next_letter == ' ':
+                return_class_rep += '>'
+                in_class = False
+            else:
+                return_class_rep += letter
+            i += 1
+            continue
+        # if we have <sBML> turn it back to just SBML
+        if return_class_rep == '<sBML>':
+            return_class_rep = 'SBML'
+        return [i-1, return_class_rep]
+
+
+    def replace_type(self, i, text_string, length):
+        in_type = True
+        return_type_rep = ''
+        while (in_type and i < length):
+            letter = text_string[i]
+            if i != length-1:
+                next_letter = text_string[i+1]
+            else:
+                next_letter = ' '
+            if letter == '{':
+                return_type_rep += '\'{}'.format(next_letter)
+                i += 1
+            elif letter == '}' or next_letter == ' ':
+                return_type_rep += '\''
+                in_type = False
+            else:
+                return_type_rep += letter
+            i += 1
+            continue
+        return [i-1, return_type_rep]
+
+
+    def replace_package(self, i, pkg_length):
+        return_token_rep = '{} Package'.format(self.fullname)
+        return [i+pkg_length-1, return_token_rep]
 
 
     #########################################################################

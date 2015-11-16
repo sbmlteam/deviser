@@ -60,6 +60,7 @@ class ValidationRulesForPlugin():
         self.formatted_name = '\{}'.format(object_desc['sbase'])
         self.indef = strFunctions.get_indefinite(object_desc['sbase'])
         self.indef_u = strFunctions.upper_first(self.indef)
+        self.lower_name = strFunctions.lower_first(self.name)
 
         self.reqd_att = []
         self.opt_att = []
@@ -210,7 +211,7 @@ class ValidationRulesForPlugin():
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Attribute {} values allowed on <{}>.'.format(attribute['name'],
-                                                              self.name)
+                                                              self.lower_name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
                                      rule_type)
@@ -245,7 +246,7 @@ class ValidationRulesForPlugin():
             tc = '{}{}LO{}AllowedCoreAttributes'.format(self.up_package,
                                                         self.name, lo_name)
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Core attributes allowed on <{}>.'.format(self.name)
+        short = 'Core attributes allowed on <{}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -283,7 +284,7 @@ class ValidationRulesForPlugin():
             tc = '{}{}LO{}AllowedElements'.format(self.up_package, self.name,
                                                   lo_name)
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Core elements allowed on <{}>.'.format(self.name)
+        short = 'Core elements allowed on <{}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -314,7 +315,7 @@ class ValidationRulesForPlugin():
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attributes allowed on <{}>.'.format(self.name)
+        short = 'Attributes allowed on <{}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
@@ -346,7 +347,7 @@ class ValidationRulesForPlugin():
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Elements allowed on <{}>.'.format(self.name)
+        short = 'Elements allowed on <{}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
         tc = '{}{}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,

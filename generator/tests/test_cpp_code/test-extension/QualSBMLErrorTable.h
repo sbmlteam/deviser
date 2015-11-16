@@ -62,10 +62,9 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The Qual namespace is not correctly declared.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "To conform to the <QualitativeModelsPackage> specification for SBML "
+    "To conform to the Qualitative Models Package specification for SBML "
     "Level~3 Version~1, an SBML document must declare the use of the following "
-    "XML Namespace: "
-    "'http://www>.sbml.org/sbml/level3/version1/qual/version1'.",
+    "XML Namespace: 'http://www.sbml.org/sbml/level3/version1/qual/version1'.",
     { "L3V1 Qual V1 Section 3.1"
     }
   },
@@ -76,9 +75,9 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
-    "<QualitativeModelsPackage> package must be declared either implicitly or "
+    "Qualitative Models Package must be declared either implicitly or "
     "explicitly to be in the XML namespace "
-    "'http://www>.sbml.org/sbml/level3/version1/qual/version1'.",
+    "'http://www.sbml.org/sbml/level3/version1/qual/version1'.",
     { "L3V1 Qual V1 Section 3.1"
     }
   },
@@ -88,8 +87,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Duplicate 'id' attribute value",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "(Extends validation rule #10301 in the SBML Level 3 Core specification.) TO "
-    "DO list scope of ids)",
+    "(Extends validation rule #10301 in the SBML Level 3 Core specification.) "
+    "TO DO list scope of ids)",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -99,8 +98,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Invalid SId syntax",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of a 'qual:id' must conform to the syntax of the "
-    "<class{SBML}> data type <primtype{SId}>",
+    "The value of a 'qual:id' must conform to the syntax of the SBML data type "
+    "'SId'",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -110,8 +109,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Required qual:required attribute on <sbml>",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "In all SBML documents using the Qualatitive Models Package, the <sbml> object "
-    "must have the 'qual:required' attribute.",
+    "In all SBML documents using the Qualitative Models Package, the <sbml> "
+    "object must have the 'qual:required' attribute.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -121,8 +120,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The qual:required attribute must be Boolean",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of attribute <token{qual:<-required}> on the <class{SBML}> "
-    "object must be of data type Boolean.",
+    "The value of attribute 'qual:required' on the SBML object must be of data "
+    "type 'boolean'.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -132,15 +131,15 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The qual:required attribute must be 'FIX ME'",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of attribute <token{qual:<-required}> on the <class{SBML}> "
-    "object must be set to <val{false}>.",
+    "The value of attribute 'qual:required' on the SBML object must be set to "
+    "'false'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020201
   { QualModelAllowedElements,
-    "Elements allowed on <Model>.",
+    "Elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <Model> object may contain one and only one instance of each of the "
