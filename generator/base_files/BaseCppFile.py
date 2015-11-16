@@ -301,11 +301,11 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
             else:
-                attributes[i]['attType'] = 'FIX ME'
-                attributes[i]['attTypeCode'] = 'FIX ME'
-                attributes[i]['CType'] = 'FIX ME'
+                attributes[i]['attType'] = 'FIXME'
+                attributes[i]['attTypeCode'] = 'FIXME'
+                attributes[i]['CType'] = 'FIXME'
                 attributes[i]['isNumber'] = False
-                attributes[i]['default'] = 'FIX ME'
+                attributes[i]['default'] = 'FIXME'
         return attributes
 
     def create_lo_other_child_element_class(self, name, parent):
