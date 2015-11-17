@@ -377,7 +377,8 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '\\':
-                return_name_rep += '<'
+                return_name_rep += '<{}'.format(next_letter.lower())
+                i += 1
             elif next_letter == ' ' or next_letter == '.':
                 return_name_rep += '{}>'.format(letter)
                 in_name = False

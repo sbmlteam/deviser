@@ -142,10 +142,10 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <Model> object may contain one and only one instance of each of the "
-    "<ListOfQualitativeSpecies> and <ListOfTransitions> elements. No other "
+    "A <model> object may contain one and only one instance of each of the "
+    "<listOfQualitativeSpecies> and <listOfTransitions> elements. No other "
     "elements from the SBML Level 3 Qualitative Models namespaces are permitted "
-    "on a <Model> object. ",
+    "on a <model> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -155,8 +155,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "No Empty ListOf elements allowed on <Model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The <ListOfQualitativeSpecies> and <ListOfTransitions> subobjects on a "
-    "<Model> object is optional, but if present, these container objects must "
+    "The <listOfQualitativeSpecies> and <listOfTransitions> subobjects on a "
+    "<model> object is optional, but if present, these container objects must "
     "not be empty.",
     { "L3V1 Qual V1 Section"
     }
@@ -164,218 +164,214 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020203
   { QualModelLOQualitativeSpeciesAllowedElements,
-    "Core elements allowed on <Model>.",
+    "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
     "SBML objects, a ListOfQualitativeSpecies container object may only contain "
-    "<QualitativeSpecies> objects.",
+    "<qualitativeSpecies> objects.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020204
   { QualModelLOTransitionsAllowedElements,
-    "Core elements allowed on <Model>.",
+    "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
     "SBML objects, a ListOfTransitions container object may only contain "
-    "<Transition> objects.",
+    "<transition> objects.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020205
   { QualModelLOQualitativeSpeciesAllowedCoreAttributes,
-    "Core attributes allowed on <Model>.",
+    "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <ListOfQualitativeSpecies> object may have the optional SBML Level~3 "
-    "Core attributes <token{metaid}> and <token{sboTerm}>. No other attributes "
-    "from the SBML Level 3 Core namespaces are permitted on a "
-    "<ListOfQualitativeSpecies> object.",
+    "A <listOfQualitativeSpecies> object may have the optional SBML Level~3 "
+    "Core attributes 'metaid' and 'sboTerm'. No other attributes from the SBML "
+    "Level 3 Core namespaces are permitted on a <listOfQualitativeSpecies> "
+    "object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020206
   { QualModelLOTransitionsAllowedCoreAttributes,
-    "Core attributes allowed on <Model>.",
+    "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <ListOfTransitions> object may have the optional SBML Level~3 Core "
-    "attributes <token{metaid}> and <token{sboTerm}>. No other attributes from "
-    "the SBML Level 3 Core namespaces are permitted on a <ListOfTransitions> "
-    "object.",
+    "A <listOfTransitions> object may have the optional SBML Level~3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <listOfTransitions> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020301
   { QualQualitativeSpeciesAllowedCoreAttributes,
-    "Core attributes allowed on <QualitativeSpecies>.",
+    "Core attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <QualitativeSpecies> object may have the optional SBML Level~3 Core "
-    "attributes <token{metaid}> and <token{sboTerm}>. No other attributes from "
-    "the SBML Level 3 Core namespaces are permitted on a "
-    "<QualitativeSpecies>.",
+    "A <qualitativeSpecies> object may have the optional SBML Level~3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <qualitativeSpecies>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020302
   { QualQualitativeSpeciesAllowedCoreElements,
-    "Core elements allowed on <QualitativeSpecies>.",
+    "Core elements allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <QualitativeSpecies> object may have the optional SBML Level~3 Core "
+    "A <qualitativeSpecies> object may have the optional SBML Level~3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <QualitativeSpecies>.",
+    "Level 3 Core namespaces are permitted on a <qualitativeSpecies>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020303
   { QualQualitativeSpeciesAllowedAttributes,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <QualitativeSpecies> object must have the required attributes "
-    "<token{qual:<-id},> <token{qual:<-compartment}> and "
-    "<token{qual:<-constant},> and may have the optional attributes "
-    "<token{qual:<-name},> <token{qual:<-initialLevel}> and "
-    "<token{qual:<-maxLevel}>. No other attributes from the SBML Level 3 "
-    "Qualitative Models namespaces are permitted on a <QualitativeSpecies> "
-    "object. ",
+    "A <qualitativeSpecies> object must have the required attributes 'qual:id', "
+    "'qual:compartment' and 'qual:constant', and may have the optional "
+    "attributes 'qual:name', 'qual:initialLevel' and 'qual:maxLevel'. No other "
+    "attributes from the SBML Level 3 Qualitative Models namespaces are "
+    "permitted on a <qualitativeSpecies> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020304
   { QualQualitativeSpeciesCompartmentMustBeCompartment,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-compartment}> of a "
-    "<QualitativeSpecies> object must be the identifier of an existing "
-    "<Compartment> object defined in the enclosing <Model> object.",
+    "The value of the attribute 'qual:compartment' of a <qualitativeSpecies> "
+    "object must be the identifier of an existing <compartment> object defined "
+    "in the enclosing <model> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020305
   { QualQualitativeSpeciesConstantMustBeBoolean,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-constant}> on a <QualitativeSpecies> must have "
-    "a value of data type <token{boolean}>.",
+    "The attribute 'qual:constant' on a <qualitativeSpecies> must have a value "
+    "of data type 'boolean'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020306
   { QualQualitativeSpeciesNameMustBeString,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-name}> on a <QualitativeSpecies> must have a "
-    "value of data type <token{string}>.",
+    "The attribute 'qual:name' on a <qualitativeSpecies> must have a value of "
+    "data type 'string'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020307
   { QualQualitativeSpeciesInitialLevelMustBeUnInteger,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-initialLevel}> on a <QualitativeSpecies> must "
-    "have a value of data type <token{integer}>.",
+    "The attribute 'qual:initialLevel' on a <qualitativeSpecies> must have a "
+    "value of data type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020308
   { QualQualitativeSpeciesMaxLevelMustBeUnInteger,
-    "Attributes allowed on <QualitativeSpecies>.",
+    "Attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-maxLevel}> on a <QualitativeSpecies> must have "
-    "a value of data type <token{integer}>.",
+    "The attribute 'qual:maxLevel' on a <qualitativeSpecies> must have a value "
+    "of data type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020401
   { QualTransitionAllowedCoreAttributes,
-    "Core attributes allowed on <Transition>.",
+    "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <Transition> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on a <Transition>.",
+    "A <transition> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <transition>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020402
   { QualTransitionAllowedCoreElements,
-    "Core elements allowed on <Transition>.",
+    "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <Transition> object may have the optional SBML Level~3 Core subobjects "
+    "A <transition> object may have the optional SBML Level~3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <Transition>.",
+    "namespaces are permitted on a <transition>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020403
   { QualTransitionAllowedAttributes,
-    "Attributes allowed on <Transition>.",
+    "Attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <Transition> object may have the optional attributes <token{qual:<-id}> "
-    "and <token{qual:<-name}>. No other attributes from the SBML Level 3 "
-    "Qualitative Models namespaces are permitted on a <Transition> object. ",
+    "A <transition> object may have the optional attributes 'qual:id' and "
+    "'qual:name'. No other attributes from the SBML Level 3 Qualitative Models "
+    "namespaces are permitted on a <transition> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020404
   { QualTransitionAllowedElements,
-    "Elements allowed on <Transition>.",
+    "Elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <Transition> object must contain one and only one instance of the "
-    "<ListOfFunctionTerms> element, and may contain one and only one instance "
-    "of each of the <ListOfInputs> and <ListOfOutputs> elements. No other "
+    "A <transition> object must contain one and only one instance of the "
+    "<listOfFunctionTerms> element, and may contain one and only one instance "
+    "of each of the <listOfInputs> and <listOfOutputs> elements. No other "
     "elements from the SBML Level 3 Qualitative Models namespaces are permitted "
-    "on a <Transition> object. ",
+    "on a <transition> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020405
   { QualTransitionNameMustBeString,
-    "Attributes allowed on <Transition>.",
+    "Attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-name}> on a <Transition> must have a value of "
-    "data type <token{string}>.",
+    "The attribute 'qual:name' on a <transition> must have a value of data type "
+    "'string'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020406
   { QualTransitionEmptyLOElements,
-    "No Empty ListOf elements allowed on <Transition>.",
+    "No Empty ListOf elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The <ListOfInputs> and <ListOfOutputs> subobjects on a <Transition> object "
+    "The <listOfInputs> and <listOfOutputs> subobjects on a <transition> object "
     "is optional, but if present, these container objects must not be empty.",
     { "L3V1 Qual V1 Section"
     }
@@ -383,11 +379,11 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020407
   { QualTransitionLOInputsAllowedElements,
-    "Core elements allowed on <Transition>.",
+    "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <ListOfInputs> container object may only contain <Input> "
+    "SBML objects, a <listOfInputs> container object may only contain <input> "
     "objects.",
     { "L3V1 Qual V1 Section"
     }
@@ -395,11 +391,11 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020408
   { QualTransitionLOOutputsAllowedElements,
-    "Core elements allowed on <Transition>.",
+    "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <ListOfOutputs> container object may only contain <Output> "
+    "SBML objects, a <listOfOutputs> container object may only contain <output> "
     "objects.",
     { "L3V1 Qual V1 Section"
     }
@@ -407,344 +403,339 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020409
   { QualTransitionLOFunctionTermsAllowedElements,
-    "Core elements allowed on <Transition>.",
+    "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <ListOfFunctionTerms> container object may only contain "
-    "<FunctionTerm> objects.",
+    "SBML objects, a <listOfFunctionTerms> container object may only contain "
+    "<functionTerm> objects.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020410
   { QualTransitionLOInputsAllowedCoreAttributes,
-    "Core attributes allowed on <Transition>.",
+    "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <ListOfInputs> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on a <ListOfInputs> object.",
+    "A <listOfInputs> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <listOfInputs> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020411
   { QualTransitionLOOutputsAllowedCoreAttributes,
-    "Core attributes allowed on <Transition>.",
+    "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <ListOfOutputs> object may have the optional SBML Level~3 Core "
-    "attributes <token{metaid}> and <token{sboTerm}>. No other attributes from "
-    "the SBML Level 3 Core namespaces are permitted on a <ListOfOutputs> "
-    "object.",
+    "A <listOfOutputs> object may have the optional SBML Level~3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <listOfOutputs> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020412
   { QualTransitionLOFunctionTermsAllowedCoreAttributes,
-    "Core attributes allowed on <Transition>.",
+    "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <ListOfFunctionTerms> object may have the optional SBML Level~3 Core "
-    "attributes <token{metaid}> and <token{sboTerm}>. No other attributes from "
-    "the SBML Level 3 Core namespaces are permitted on a <ListOfFunctionTerms> "
-    "object.",
+    "A <listOfFunctionTerms> object may have the optional SBML Level~3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <listOfFunctionTerms> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020501
   { QualInputAllowedCoreAttributes,
-    "Core attributes allowed on <Input>.",
+    "Core attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Input> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on an <Input>.",
+    "An <input> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on an <input>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020502
   { QualInputAllowedCoreElements,
-    "Core elements allowed on <Input>.",
+    "Core elements allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Input> object may have the optional SBML Level~3 Core subobjects for "
+    "An <input> object may have the optional SBML Level~3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on an <Input>.",
+    "namespaces are permitted on an <input>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020503
   { QualInputAllowedAttributes,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Input> object must have the required attribute "
-    "<token{qual:<-qualitativeSpecies},> and may have the optional attributes "
-    "<token{qual:<-id},> <token{qual:<-name},> <token{qual:<-sign},> "
-    "<token{qual:<-transitionEffect}> and <token{qual:<-thresholdLevel}>. No "
-    "other attributes from the SBML Level 3 Qualitative Models namespaces are "
-    "permitted on an <Input> object. ",
+    "An <input> object must have the required attribute "
+    "'qual:qualitativeSpecies', and may have the optional attributes 'qual:id', "
+    "'qual:name', 'qual:sign', 'qual:transitionEffect' and "
+    "'qual:thresholdLevel'. No other attributes from the SBML Level 3 "
+    "Qualitative Models namespaces are permitted on an <input> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020504
   { QualInputQualitativeSpeciesMustBeQualitativeSpecies,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-qualitativeSpecies}> of an "
-    "<Input> object must be the identifier of an existing <QualitativeSpecies> "
-    "object defined in the enclosing <Model> object.",
+    "The value of the attribute 'qual:qualitativeSpecies' of an <input> object "
+    "must be the identifier of an existing <qualitativeSpecies> object defined "
+    "in the enclosing <model> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020505
   { QualInputNameMustBeString,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-name}> on an <Input> must have a value of data "
-    "type <token{string}>.",
+    "The attribute 'qual:name' on an <input> must have a value of data type "
+    "'string'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020506
   { QualInputSignMustBeSignEnum,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-sign}> of an <Input> object must "
-    "conform to the syntax of SBML data type <primtype{sign}> and may only take "
-    "on the allowed values of <primtype{sign}> defined in SBML; that is the "
-    "value must be one of the following "positive", "negative", "dual" or
-    "unknown".",
+    "The value of the attribute 'qual:sign' of an <input> object must conform "
+    "to the syntax of SBML data type 'sign' and may only take on the allowed "
+    "values of 'sign' defined in SBML; that is the value must be one of the "
+    "following "positive", "negative", "dual" or "unknown".",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020507
   { QualInputTransitionEffectMustBeTransitionInputEffectEnum,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-transitionEffect}> of an <Input> "
-    "object must conform to the syntax of SBML data type "
-    "<primtype{transitionInputEffect}> and may only take on the allowed values "
-    "of <primtype{transitionInputEffect}> defined in SBML; that is the value "
-    "must be one of the following "none" or "consumption".",
+    "The value of the attribute 'qual:transitionEffect' of an <input> object "
+    "must conform to the syntax of SBML data type 'transitionInputEffect' and "
+    "may only take on the allowed values of 'transitionInputEffect' defined in "
+    "SBML; that is the value must be one of the following "none" or
+    "consumption".",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020508
   { QualInputThresholdLevelMustBeUnInteger,
-    "Attributes allowed on <Input>.",
+    "Attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-thresholdLevel}> on an <Input> must have a "
-    "value of data type <token{integer}>.",
+    "The attribute 'qual:thresholdLevel' on an <input> must have a value of "
+    "data type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020601
   { QualOutputAllowedCoreAttributes,
-    "Core attributes allowed on <Output>.",
+    "Core attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Output> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on an <Output>.",
+    "An <output> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on an <output>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020602
   { QualOutputAllowedCoreElements,
-    "Core elements allowed on <Output>.",
+    "Core elements allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Output> object may have the optional SBML Level~3 Core subobjects for "
+    "An <output> object may have the optional SBML Level~3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on an <Output>.",
+    "namespaces are permitted on an <output>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020603
   { QualOutputAllowedAttributes,
-    "Attributes allowed on <Output>.",
+    "Attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <Output> object must have the required attributes "
-    "<token{qual:<-qualitativeSpecies}> and <token{qual:<-transitionEffect},> "
-    "and may have the optional attributes <token{qual:<-id},> "
-    "<token{qual:<-name}> and <token{qual:<-outputLevel}>. No other attributes "
-    "from the SBML Level 3 Qualitative Models namespaces are permitted on an "
-    "<Output> object. ",
+    "An <output> object must have the required attributes "
+    "'qual:qualitativeSpecies' and 'qual:transitionEffect', and may have the "
+    "optional attributes 'qual:id', 'qual:name' and 'qual:outputLevel'. No "
+    "other attributes from the SBML Level 3 Qualitative Models namespaces are "
+    "permitted on an <output> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020604
   { QualOutputQualitativeSpeciesMustBeQualitativeSpecies,
-    "Attributes allowed on <Output>.",
+    "Attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-qualitativeSpecies}> of an "
-    "<Output> object must be the identifier of an existing <QualitativeSpecies> "
-    "object defined in the enclosing <Model> object.",
+    "The value of the attribute 'qual:qualitativeSpecies' of an <output> object "
+    "must be the identifier of an existing <qualitativeSpecies> object defined "
+    "in the enclosing <model> object.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020605
   { QualOutputTransitionEffectMustBeTransitionOutputEffectEnum,
-    "Attributes allowed on <Output>.",
+    "Attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of the attribute <token{qual:<-transitionEffect}> of an <Output> "
-    "object must conform to the syntax of SBML data type "
-    "<primtype{transitionOutputEffect}> and may only take on the allowed values "
-    "of <primtype{transitionOutputEffect}> defined in SBML; that is the value "
-    "must be one of the following "production" or "assignmentLevel".",
+    "The value of the attribute 'qual:transitionEffect' of an <output> object "
+    "must conform to the syntax of SBML data type 'transitionOutputEffect' and "
+    "may only take on the allowed values of 'transitionOutputEffect' defined in "
+    "SBML; that is the value must be one of the following "production" or
+    "assignmentLevel".",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020606
   { QualOutputNameMustBeString,
-    "Attributes allowed on <Output>.",
+    "Attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-name}> on an <Output> must have a value of "
-    "data type <token{string}>.",
+    "The attribute 'qual:name' on an <output> must have a value of data type "
+    "'string'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020607
   { QualOutputOutputLevelMustBeInteger,
-    "Attributes allowed on <Output>.",
+    "Attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-outputLevel}> on an <Output> must have a value "
-    "of data type <token{integer}>.",
+    "The attribute 'qual:outputLevel' on an <output> must have a value of data "
+    "type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020701
   { QualDefaultTermAllowedCoreAttributes,
-    "Core attributes allowed on <DefaultTerm>.",
+    "Core attributes allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <DefaultTerm> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on a <DefaultTerm>.",
+    "A <defaultTerm> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <defaultTerm>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020702
   { QualDefaultTermAllowedCoreElements,
-    "Core elements allowed on <DefaultTerm>.",
+    "Core elements allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <DefaultTerm> object may have the optional SBML Level~3 Core subobjects "
+    "A <defaultTerm> object may have the optional SBML Level~3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <DefaultTerm>.",
+    "namespaces are permitted on a <defaultTerm>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020703
   { QualDefaultTermAllowedAttributes,
-    "Attributes allowed on <DefaultTerm>.",
+    "Attributes allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <DefaultTerm> object must have the required attribute "
-    "<token{qual:<-resultLevel}>. No other attributes from the SBML Level 3 "
-    "Qualitative Models namespaces are permitted on a <DefaultTerm> object. ",
+    "A <defaultTerm> object must have the required attribute "
+    "'qual:resultLevel'. No other attributes from the SBML Level 3 Qualitative "
+    "Models namespaces are permitted on a <defaultTerm> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020704
   { QualDefaultTermResultLevelMustBeUnInteger,
-    "Attributes allowed on <DefaultTerm>.",
+    "Attributes allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-resultLevel}> on a <DefaultTerm> must have a "
-    "value of data type <token{integer}>.",
+    "The attribute 'qual:resultLevel' on a <defaultTerm> must have a value of "
+    "data type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020801
   { QualFunctionTermAllowedCoreAttributes,
-    "Core attributes allowed on <FunctionTerm>.",
+    "Core attributes allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <FunctionTerm> object may have the optional SBML Level~3 Core attributes "
-    "<token{metaid}> and <token{sboTerm}>. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on a <FunctionTerm>.",
+    "A <functionTerm> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <functionTerm>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020802
   { QualFunctionTermAllowedCoreElements,
-    "Core elements allowed on <FunctionTerm>.",
+    "Core elements allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <FunctionTerm> object may have the optional SBML Level~3 Core subobjects "
+    "A <functionTerm> object may have the optional SBML Level~3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <FunctionTerm>.",
+    "namespaces are permitted on a <functionTerm>.",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020803
   { QualFunctionTermAllowedAttributes,
-    "Attributes allowed on <FunctionTerm>.",
+    "Attributes allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <FunctionTerm> object must have the required attribute "
-    "<token{qual:<-resultLevel}>. No other attributes from the SBML Level 3 "
-    "Qualitative Models namespaces are permitted on a <FunctionTerm> object. ",
+    "A <functionTerm> object must have the required attribute "
+    "'qual:resultLevel'. No other attributes from the SBML Level 3 Qualitative "
+    "Models namespaces are permitted on a <functionTerm> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020804
   { QualFunctionTermAllowedElements,
-    "Elements allowed on <FunctionTerm>.",
+    "Elements allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <FunctionTerm> object must contain one and only one instance of the "
+    "A <functionTerm> object must contain one and only one instance of the "
     "ASTNode element. No other elements from the SBML Level 3 Qualitative "
-    "Models namespaces are permitted on a <FunctionTerm> object. ",
+    "Models namespaces are permitted on a <functionTerm> object. ",
     { "L3V1 Qual V1 Section"
     }
   },
 
   // 3020805
   { QualFunctionTermResultLevelMustBeUnInteger,
-    "Attributes allowed on <FunctionTerm>.",
+    "Attributes allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute <token{qual:<-resultLevel}> on a <FunctionTerm> must have a "
-    "value of data type <token{integer}>.",
+    "The attribute 'qual:resultLevel' on a <functionTerm> must have a value of "
+    "data type 'integer'.",
     { "L3V1 Qual V1 Section"
     }
   },
