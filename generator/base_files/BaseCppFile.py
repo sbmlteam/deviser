@@ -301,6 +301,8 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
             else:
+                global_variables.code_returned \
+                    = global_variables.return_codes['unknown type used']
                 attributes[i]['attType'] = 'FIXME'
                 attributes[i]['attTypeCode'] = 'FIXME'
                 attributes[i]['CType'] = 'FIXME'
