@@ -546,7 +546,9 @@ class ValidatorClassFunctions():
         lines = ['code == {}'.format(element['typecode']),
                  'return visit((const {}&)x)'.format(element['name'])]
         index = 1
+        code_type = 'if_else'
         while index < no_elements:
+            code_type = 'else_if'
             element = self.elements[index]
             lines.append('else if')
             lines.append('code == {}'.format(element['typecode']))
@@ -554,7 +556,7 @@ class ValidatorClassFunctions():
             index += 1
         lines.append('else')
         lines.append(std_return)
-        nested_if = self.create_code_block('else_if', lines)
+        nested_if = self.create_code_block(code_type, lines)
 
         code.append(self.create_code_block('if_else', ['list != NULL',
                                                        std_return, 'else',

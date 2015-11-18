@@ -164,6 +164,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix):
     global ret_att_unex
     ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
+
 def get_return_code(index):
     matched = False
     length = len(return_codes)
@@ -181,3 +182,7 @@ def get_return_code(index):
         return items[i]
 
 
+def reset():
+    set_globals('sbml', 'SBase', 'SBMLDocument', 'SBML', 'Libsbml', True, '')
+    global error_list
+    error_list = []

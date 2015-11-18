@@ -525,6 +525,9 @@ class ParseXML():
             # read the first element
             node = languages[0]
             self.read_language_element(node)
+        else:
+            # just in case we generate a new thing
+            global_variables.reset()
 
         # get package information
         sbml_level = 3

@@ -55,6 +55,7 @@ def run_deviser_test(name, flag, expected_return):
 
 def main():
     global_variables.running_tests = True
+    global_variables.code_returned = global_variables.return_codes['success']
     this_dir = os.getcwd()
     global path_to_tests
 
@@ -88,6 +89,9 @@ def main():
     fail += run_deviser_test('unknown_type', '-g',
                              global_variables.
                              return_codes['unknown type used'])
+    fail += run_deviser_test('unknown_error', '-g',
+                             global_variables.
+                             return_codes['unknown error - please report'])
 
     if len(not_tested) > 0:
         print('The following files were not tested:')
@@ -96,9 +100,12 @@ def main():
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print('EXIT CODES FAILED')
         print('Check {} fails'.format(fail))
         for name in fails:
             print(name)
+
+    return fail
 
 
 if __name__ == '__main__':

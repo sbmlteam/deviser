@@ -87,8 +87,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Duplicate 'id' attribute value",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "(Extends validation rule #10301 in the SBML Level 3 Core specification.) "
-    "TO DO list scope of ids)",
+    "(Extends validation rule #10301 in the SBML Level 3 Core specification. TO "
+    "DO list scope of ids)",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -98,8 +98,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Invalid SId syntax",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of a 'qual:id' must conform to the syntax of the SBML data type "
-    "'SId'",
+    "The value of a 'qual:id' must conform to the syntax of the <sbml> data "
+    "type 'SId'",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -120,8 +120,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The qual:required attribute must be Boolean",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of attribute 'qual:required' on the SBML object must be of data "
-    "type 'boolean'.",
+    "The value of attribute 'qual:required' on the <sbml> object must be of "
+    "data type 'boolean'.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -131,7 +131,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The qual:required attribute must be 'FIX ME'",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The value of attribute 'qual:required' on the SBML object must be set to "
+    "The value of attribute 'qual:required' on the <sbml> object must be set to "
     "'false'.",
     { "L3V1 Qual V1 Section"
     }

@@ -455,7 +455,7 @@ class ValidationFiles():
             continue
         # if we have <sBML> turn it back to just SBML
         if return_class_rep == '<sBML>':
-            return_class_rep = 'SBML'
+            return_class_rep = '<sbml>'
         return [i-1, return_class_rep]
 
 

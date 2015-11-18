@@ -176,7 +176,7 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_id_rule(self):
         text = '(Extends validation rule \\#10301 in the \\sbmlthreecore ' \
-               'specification.) TO DO list scope of ids)'
+               'specification. TO DO list scope of ids)'
         ref = '{} {}.'\
             .format(self.pkg_ref,
                     strFunctions.wrap_section('primitive-types', False))
@@ -210,7 +210,7 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_reqd_rule(self):
         text = 'In all SBML documents using the {}, the ' \
-               '\\class{}sbml{} object must have the {} attribute.'\
+               '\\class{}SBML{} object must have the {} attribute.'\
             .format(self.full_pkg_command, self.start_b,
                     self.end_b,
                     strFunctions.wrap_token('required', self.package))

@@ -124,10 +124,13 @@ def run_register_test(name):
 
 def main():
     global_variables.running_tests = True
+    global_variables.code_returned = global_variables.return_codes['success']
     this_dir = os.getcwd()
     global path_to_tests
 
     (path_to_tests, other) = os.path.split(this_dir)
+    if not os.path.isdir('temp'):
+        os.mkdir('temp')
 
     fail = 0
 
@@ -139,9 +142,12 @@ def main():
 
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print('CMAKE FAILS')
         print('Check {} fails'.format(fail))
         for name in fails:
             print(name)
+
+    return fail
 
 
 if __name__ == '__main__':
