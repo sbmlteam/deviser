@@ -136,7 +136,6 @@ def compare_files(infile, outfile):
 
 def run_test(name, num, class_name, test_case, list_of):
     filename = get_filename(name)
-    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
@@ -161,7 +160,6 @@ def run_test(name, num, class_name, test_case, list_of):
 
 def run_ext_test(name, class_name, test_case, test):
     filename = get_filename(name)
-    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
@@ -184,7 +182,6 @@ def run_ext_test(name, class_name, test_case, test):
 
 def run_plug_test(name, class_name, test_case, num):
     filename = get_filename(name)
-    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
@@ -201,7 +198,6 @@ def run_plug_test(name, class_name, test_case, num):
 
 def run_valid_test(name, class_name, test_case, is_ext=True):
     filename = get_filename(name)
-    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
@@ -227,7 +223,6 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
 
 def run_constraints_test(name, class_name, test_case):
     filename = get_filename(name)
-    fail = 0
     print('====================================================')
     print('Testing {}:{} {}'.format(name, class_name, test_case))
     print('====================================================')
