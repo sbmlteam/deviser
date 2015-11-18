@@ -41,21 +41,34 @@ import sys
 
 import spec_files
 from parseXML import ParseXML
+from util import global_variables
 
 
 def generateLatexFor(filename):
     parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
-    ff.write_file()
-    ff.close_file()
-    body = spec_files.TexBodySyntaxFile.TexBodySyntaxFile(ob)
-    body.write_file()
-    body.close_file()
-    macros = spec_files.TexMacrosFile.TexMacrosFile(ob)
-    macros.write_file()
-    macros.close_file()
-
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
+        # catch a problem in the parsing
+        try:
+            ob = parser.parse_deviser_xml()
+        except:
+            global_variables.code_returned \
+                = global_variables.return_codes['parsing error']
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
+        try:
+            ff = spec_files.TexValidationRulesFile.TexValidationRulesFile(ob)
+            ff.write_file()
+            ff.close_file()
+            body = spec_files.TexBodySyntaxFile.TexBodySyntaxFile(ob)
+            body.write_file()
+            body.close_file()
+            macros = spec_files.TexMacrosFile.TexMacrosFile(ob)
+            macros.write_file()
+            macros.close_file()
+        except:
+            global_variables.code_returned = \
+                global_variables.return_codes['unknown error - please report']
 
 def main(args):
     if len(args) != 2:

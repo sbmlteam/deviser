@@ -38,7 +38,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-
+import sys
 from xml.dom.minidom import *
 import os.path
 from util import query
@@ -52,7 +52,12 @@ class ParseXML():
 
     def __init__(self, filename):
 
-        self.dom = parse(filename)
+        if not os.path.isfile(filename):
+            global_variables.code_returned = \
+                global_variables.return_codes['failed to read file']
+
+        if global_variables.code_returned == global_variables.return_codes['success']:
+            self.dom = parse(filename)
 
         self.temp_dir = os.path.dirname(filename)
         self.abs_dir = os.path.abspath(filename)

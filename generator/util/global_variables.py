@@ -60,6 +60,17 @@ is_package = True
 global package_prefix
 package_prefix = ''
 
+global return_codes
+return_codes= dict({'success': 0,
+                    'failed to read file': 1,
+                    'missing function argument': 2,
+                    'invalid function arguments': 3,
+                    'parsing error': 4,
+                    'unknown type used': 5,
+                    'unknown error - please report': 6})
+
+global code_returned
+code_returned = return_codes['success']
 
 global ret_success
 ret_success = '{}_OPERATION_SUCCESS'.format(library_name.upper())
@@ -152,3 +163,21 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix):
 
     global ret_att_unex
     ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
+
+def get_return_code(index):
+    matched = False
+    length = len(return_codes)
+    values = return_codes.values()
+    items = return_codes.keys()
+    i = 0
+    while not matched and i < length:
+        if values[i] == index:
+            matched = True
+        else:
+            i += 1
+    if not matched:
+        return 'not found'
+    else:
+        return items[i]
+
+

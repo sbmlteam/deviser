@@ -41,7 +41,7 @@ import sys
 import os
 
 from parseXML import ParseXML
-from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
+from code_files import ExtensionFiles, CppFiles, ValidationFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
 from util import global_variables
@@ -52,14 +52,27 @@ directories = []
 def generate_code_for(filename, overwrite=True):
     global_variables.running_tests = False
     parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    name = ob['name'.lower()]
-    language = global_variables.language
-    if global_variables.is_package:
-        success = generate_package_code(name, language, overwrite, ob)
-    else:
-        success = generate_other_library_code(name, language, overwrite, ob)
-    return success
+    ob = []
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
+        # catch a problem in the parsing
+        try:
+            ob = parser.parse_deviser_xml()
+        except:
+            global_variables.code_returned \
+                = global_variables.return_codes['parsing error']
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
+        name = ob['name'.lower()]
+        language = global_variables.language
+        try:
+            if global_variables.is_package:
+                generate_package_code(name, language, overwrite, ob)
+            else:
+                generate_other_library_code(name, language, overwrite, ob)
+        except:
+            global_variables.code_returned \
+                = global_variables.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
@@ -306,15 +319,19 @@ def create_dir(name, skip_existing):
 
 
 def main(args):
-    success = False
     if len(args) != 2:
+        global_variables.code_returned = \
+            global_variables.return_codes['missing function argument']
         print ('Usage: generateCode.py xmlfile')
     else:
-        success = generate_code_for(args[1])
-    if success:
+        generate_code_for(args[1])
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
         print('code successfully written')
     else:
         print('writing code failed')
+
+    return global_variables.code_returned
 
 if __name__ == '__main__':
     main(sys.argv)

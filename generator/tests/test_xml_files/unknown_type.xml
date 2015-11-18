@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="test" fullname="testAttributes" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        
+        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
+          <attributes>
+            <attribute name="unit" required="false" type="fred" abstract="false"/>
+          </attributes>
+        </element>
+        
+        
+        
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

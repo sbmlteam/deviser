@@ -41,7 +41,7 @@
 
 import sys
 
-from util import generateLatex, generateCode
+from util import generateLatex, generateCode, global_variables
 from legacy import run
 
 
@@ -68,24 +68,33 @@ def main(args):
        specification.
     """
 
+    # reset the global return code as this is a new call to deviser
+    global_variables.code_returned = global_variables.return_codes['success']
+
     if len(args) != 3:
+        global_variables.code_returned = \
+            global_variables.return_codes['missing function argument']
         print(main.__doc__)
-        sys.exit(1)
 
-    operation = args[1].lower()
-    filename = args[2]
-  
-    if operation == '--legacy' or operation == '-gl':
-        generateLegacyPackageFor(filename)
-    if operation == '--generate' or operation == '-g':
-        generatePackageFor(filename)
-    elif operation == '--latex' or operation == '-l':
-        generateLaTeXFor(filename)
-    else:
-        print(main.__doc__)
-        sys.exit(1)
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
 
-    return 0
+        operation = args[1].lower()
+        filename = args[2]
+
+        if operation == '--legacy' or operation == '-gl':
+            generateLegacyPackageFor(filename)
+        if operation == '--generate' or operation == '-g':
+            generatePackageFor(filename)
+        elif operation == '--latex' or operation == '-l':
+            generateLaTeXFor(filename)
+        else:
+            global_variables.code_returned = \
+                global_variables.return_codes['invalid function arguments']
+            print(main.__doc__)
+
+    return global_variables.code_returned
   
 if __name__ == '__main__':
     main(sys.argv)
+    exit(global_variables.code_returned)
