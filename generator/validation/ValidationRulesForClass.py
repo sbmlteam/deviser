@@ -196,7 +196,7 @@ class ValidationRulesForClass():
                    'conform to the syntax of SBML data type {3} and ' \
                    'may only take on the allowed values of {3} defined ' \
                    'in SBML; that is the value must be one of the ' \
-                   'following {4}.'.format(name, self.indef,
+                   'following: {4}.'.format(name, self.indef,
                                            self.formatted_name,
                                            strFunctions.wrap_enum(enum_name),
                                            enum_values)

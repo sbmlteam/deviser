@@ -518,7 +518,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The value of the attribute 'qual:sign' of an <input> object must conform "
     "to the syntax of SBML data type 'sign' and may only take on the allowed "
     "values of 'sign' defined in SBML; that is the value must be one of the "
-    "following "positive", "negative", "dual" or "unknown".",
+    "following: "positive", "negative", "dual" or "unknown".",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -531,7 +531,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The value of the attribute 'qual:transitionEffect' of an <input> object "
     "must conform to the syntax of SBML data type 'transitionInputEffect' and "
     "may only take on the allowed values of 'transitionInputEffect' defined in "
-    "SBML; that is the value must be one of the following "none" or
+    "SBML; that is the value must be one of the following: "none" or
     "consumption".",
     { "L3V1 Qual V1 Section"
     }
@@ -606,7 +606,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The value of the attribute 'qual:transitionEffect' of an <output> object "
     "must conform to the syntax of SBML data type 'transitionOutputEffect' and "
     "may only take on the allowed values of 'transitionOutputEffect' defined in "
-    "SBML; that is the value must be one of the following "production" or
+    "SBML; that is the value must be one of the following: "production" or
     "assignmentLevel".",
     { "L3V1 Qual V1 Section"
     }
