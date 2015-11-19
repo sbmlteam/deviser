@@ -2077,7 +2077,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // metaidref1 IDRef (use = "required" )
+  // metaidref1 IDREF (use = "required" )
   // 
 
   assigned = attributes.readInto("metaidref1", mMetaidref1);

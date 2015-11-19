@@ -204,7 +204,7 @@ class ParseXML():
         elif name == 'unitsid':
             return 'UnitSId'
         elif name == 'idref':
-            return 'IDRef'
+            return 'IDREF'
         elif name == 'id':
             return 'string'
         elif name == 'uint' or name == 'string' or name == 'double' \

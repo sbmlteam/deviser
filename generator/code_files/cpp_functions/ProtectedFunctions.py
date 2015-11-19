@@ -1013,7 +1013,7 @@ class ProtectedFunctions():
             self.write_sid_read(index, code, attributes)
         elif att_type == 'enum':
             self.write_enum_read(index, code, attributes)
-        elif att_type == 'string' or att_type == 'IDRef':
+        elif att_type == 'string' or att_type == 'IDREF':
             self.write_string_read(index, code, attributes)
         elif att_type == 'int' or att_type == 'uint' or att_type == 'double':
             self.write_number_read(index, code, att_type, attributes)

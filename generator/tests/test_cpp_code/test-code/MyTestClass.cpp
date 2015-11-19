@@ -1481,7 +1481,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // idRef IDRef (use = "optional" )
+  // idRef IDREF (use = "optional" )
   // 
 
   assigned = attributes.readInto("idRef", mIdRef);
@@ -1495,7 +1495,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // idref1 IDRef (use = "optional" )
+  // idref1 IDREF (use = "optional" )
   // 
 
   assigned = attributes.readInto("idref1", mIdref1);
@@ -1509,7 +1509,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // idref2 IDRef (use = "optional" )
+  // idref2 IDREF (use = "optional" )
   // 
 
   assigned = attributes.readInto("idref2", mIdref2);

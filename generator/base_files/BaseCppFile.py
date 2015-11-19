@@ -214,7 +214,7 @@ class BaseCppFile(BaseFile.BaseFile):
             attributes[i]['isArray'] = False
             attributes[i]['children_overwrite'] = False
             att_type = attributes[i]['type']
-            if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'IDRef':
+            if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'IDREF':
                 attributes[i]['attType'] = 'string'
                 attributes[i]['attTypeCode'] = 'std::string&'
                 attributes[i]['CType'] = 'const char *'
