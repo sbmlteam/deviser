@@ -89,6 +89,7 @@ protected:
   std::string mMetaid1;
   int mNum4;
   bool mIsSetNum4;
+  std::string mMetaidref1;
 
   /** @endcond */
 
@@ -336,6 +337,15 @@ public:
 
 
   /**
+   * Returns the value of the "metaidref1" attribute of this MyRequiredClass.
+   *
+   * @return the value of the "metaidref1" attribute of this MyRequiredClass as
+   * a string.
+   */
+  const std::string& getMetaidref1() const;
+
+
+  /**
    * Predicate returning @c true or @c false depending on whether this
    * MyRequiredClass's "id" attribute has been set.
    *
@@ -523,6 +533,16 @@ public:
    * otherwise @c false is returned.
    */
   bool isSetNum4() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * MyRequiredClass's "metaidref1" attribute has been set.
+   *
+   * @return @c true if this MyRequiredClass's "metaidref1" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetMetaidref1() const;
 
 
   /**
@@ -774,6 +794,20 @@ public:
 
 
   /**
+   * Sets the value of the "metaidref1" attribute of this MyRequiredClass.
+   *
+   * @param metaidref1 std::string& value of the "metaidref1" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setMetaidref1(const std::string& metaidref1);
+
+
+  /**
    * Unsets the value of the "id" attribute of this MyRequiredClass.
    *
    * @copydetails doc_returns_success_code
@@ -964,6 +998,16 @@ public:
 
 
   /**
+   * Unsets the value of the "metaidref1" attribute of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetMetaidref1();
+
+
+  /**
    * @copydoc doc_renamesidref_common
    */
   virtual void renameSIdRefs(const std::string& oldid,
@@ -1023,6 +1067,7 @@ public:
    * @li "metaid"
    * @li "metaid1"
    * @li "num4"
+   * @li "metaidref1"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1478,6 +1523,21 @@ MyRequiredClass_getNum4(const MyRequiredClass_t * mrc);
 
 
 /**
+ * Returns the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure whose metaidref1 is sought.
+ *
+ * @return the value of the "metaidref1" attribute of this MyRequiredClass_t as
+ * a pointer to a string.
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+const char *
+MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc);
+
+
+/**
  * Predicate returning @c 1 or @c 0 depending on whether this
  * MyRequiredClass_t's "id" attribute has been set.
  *
@@ -1779,6 +1839,22 @@ MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc);
 LIBSBML_EXTERN
 int
 MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc);
+
+
+/**
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "metaidref1" attribute has been set.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @return @c 1 if this MyRequiredClass_t's "metaidref1" attribute has been
+ * set, otherwise @c 0 is returned.
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetMetaidref1(const MyRequiredClass_t * mrc);
 
 
 /**
@@ -2124,6 +2200,26 @@ MyRequiredClass_setNum4(MyRequiredClass_t * mrc, int num4);
 
 
 /**
+ * Sets the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @param metaidref1 const char * value of the "metaidref1" attribute to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setMetaidref1(MyRequiredClass_t * mrc,
+                              const char * metaidref1);
+
+
+/**
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  *
  * @param mrc the MyRequiredClass_t structure.
@@ -2428,6 +2524,22 @@ MyRequiredClass_unsetNum4(MyRequiredClass_t * mrc);
 
 
 /**
+ * Unsets the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetMetaidref1(MyRequiredClass_t * mrc);
+
+
+/**
  * Predicate returning @c 1 if all the required attributes for this
  * MyRequiredClass_t object have been set.
  *
@@ -2457,6 +2569,7 @@ MyRequiredClass_unsetNum4(MyRequiredClass_t * mrc);
  * @li "metaid"
  * @li "metaid1"
  * @li "num4"
+ * @li "metaidref1"
  *
  * @memberof MyRequiredClass_t
  */

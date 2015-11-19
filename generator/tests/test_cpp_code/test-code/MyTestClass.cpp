@@ -73,6 +73,9 @@ MyTestClass::MyTestClass(unsigned int level,
   , mRef2 ("")
   , mRefUnit ("")
   , mCorrectId ("")
+  , mIdRef ("")
+  , mIdref1 ("")
+  , mIdref2 ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -102,6 +105,9 @@ MyTestClass::MyTestClass(TestPkgNamespaces *testns)
   , mRef2 ("")
   , mRefUnit ("")
   , mCorrectId ("")
+  , mIdRef ("")
+  , mIdref1 ("")
+  , mIdref2 ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -132,6 +138,9 @@ MyTestClass::MyTestClass(const MyTestClass& orig)
   , mRef2 ( orig.mRef2 )
   , mRefUnit ( orig.mRefUnit )
   , mCorrectId ( orig.mCorrectId )
+  , mIdRef ( orig.mIdRef )
+  , mIdref1 ( orig.mIdref1 )
+  , mIdref2 ( orig.mIdref2 )
 {
 }
 
@@ -164,6 +173,9 @@ MyTestClass::operator=(const MyTestClass& rhs)
     mRef2 = rhs.mRef2;
     mRefUnit = rhs.mRefUnit;
     mCorrectId = rhs.mCorrectId;
+    mIdRef = rhs.mIdRef;
+    mIdref1 = rhs.mIdref1;
+    mIdref2 = rhs.mIdref2;
   }
 
   return *this;
@@ -319,6 +331,36 @@ MyTestClass::getCorrectId() const
 
 
 /*
+ * Returns the value of the "idRef" attribute of this MyTestClass.
+ */
+const std::string&
+MyTestClass::getIdRef() const
+{
+  return mIdRef;
+}
+
+
+/*
+ * Returns the value of the "idref1" attribute of this MyTestClass.
+ */
+const std::string&
+MyTestClass::getIdref1() const
+{
+  return mIdref1;
+}
+
+
+/*
+ * Returns the value of the "idref2" attribute of this MyTestClass.
+ */
+const std::string&
+MyTestClass::getIdref2() const
+{
+  return mIdref2;
+}
+
+
+/*
  * Predicate returning @c true or @c false depending on whether this
  * MyTestClass's "id" attribute has been set.
  */
@@ -458,6 +500,39 @@ bool
 MyTestClass::isSetCorrectId() const
 {
   return (mCorrectId.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyTestClass's "idRef" attribute has been set.
+ */
+bool
+MyTestClass::isSetIdRef() const
+{
+  return (mIdRef.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyTestClass's "idref1" attribute has been set.
+ */
+bool
+MyTestClass::isSetIdref1() const
+{
+  return (mIdref1.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyTestClass's "idref2" attribute has been set.
+ */
+bool
+MyTestClass::isSetIdref2() const
+{
+  return (mIdref2.empty() == false);
 }
 
 
@@ -633,6 +708,39 @@ int
 MyTestClass::setCorrectId(const std::string& correctId)
 {
   return SyntaxChecker::checkAndSetSId(id, mId);
+}
+
+
+/*
+ * Sets the value of the "idRef" attribute of this MyTestClass.
+ */
+int
+MyTestClass::setIdRef(const std::string& idRef)
+{
+  mIdRef = idRef;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "idref1" attribute of this MyTestClass.
+ */
+int
+MyTestClass::setIdref1(const std::string& idref1)
+{
+  mIdref1 = idref1;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "idref2" attribute of this MyTestClass.
+ */
+int
+MyTestClass::setIdref2(const std::string& idref2)
+{
+  mIdref2 = idref2;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -890,6 +998,63 @@ MyTestClass::unsetCorrectId()
 
 
 /*
+ * Unsets the value of the "idRef" attribute of this MyTestClass.
+ */
+int
+MyTestClass::unsetIdRef()
+{
+  mIdRef.erase();
+
+  if (mIdRef.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "idref1" attribute of this MyTestClass.
+ */
+int
+MyTestClass::unsetIdref1()
+{
+  mIdref1.erase();
+
+  if (mIdref1.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "idref2" attribute of this MyTestClass.
+ */
+int
+MyTestClass::unsetIdref2()
+{
+  mIdref2.erase();
+
+  if (mIdref2.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -1046,6 +1211,12 @@ MyTestClass::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("refUnit");
 
   attributes.add("correctId");
+
+  attributes.add("idRef");
+
+  attributes.add("idref1");
+
+  attributes.add("idref2");
 }
 
 /** @endcond */
@@ -1308,6 +1479,48 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
         "does not conform to the syntax.");
     }
   }
+
+  // 
+  // idRef IDRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("idRef", mIdRef);
+
+  if (assigned == true)
+  {
+    if (mIdRef.empty() == true)
+    {
+      logEmptyString(mIdRef, level, version, "<MyTestClass>");
+    }
+  }
+
+  // 
+  // idref1 IDRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("idref1", mIdref1);
+
+  if (assigned == true)
+  {
+    if (mIdref1.empty() == true)
+    {
+      logEmptyString(mIdref1, level, version, "<MyTestClass>");
+    }
+  }
+
+  // 
+  // idref2 IDRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("idref2", mIdref2);
+
+  if (assigned == true)
+  {
+    if (mIdref2.empty() == true)
+    {
+      logEmptyString(mIdref2, level, version, "<MyTestClass>");
+    }
+  }
 }
 
 /** @endcond */
@@ -1387,6 +1600,21 @@ MyTestClass::writeAttributes(XMLOutputStream& stream) const
   if (isSetCorrectId() == true)
   {
     stream.writeAttribute("correctId", getPrefix(), mCorrectId);
+  }
+
+  if (isSetIdRef() == true)
+  {
+    stream.writeAttribute("idRef", getPrefix(), mIdRef);
+  }
+
+  if (isSetIdref1() == true)
+  {
+    stream.writeAttribute("idref1", getPrefix(), mIdref1);
+  }
+
+  if (isSetIdref2() == true)
+  {
+    stream.writeAttribute("idref2", getPrefix(), mIdref2);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -1627,6 +1855,56 @@ MyTestClass_getCorrectId(const MyTestClass_t * mtc)
 
 
 /*
+ * Returns the value of the "idRef" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdRef(const MyTestClass_t * mtc)
+{
+  if (mtc == NULL)
+  {
+    return NULL;
+  }
+
+  return mtc->getIdRef().empty() ? NULL : safe_strdup(mtc->getIdRef().c_str());
+}
+
+
+/*
+ * Returns the value of the "idref1" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdref1(const MyTestClass_t * mtc)
+{
+  if (mtc == NULL)
+  {
+    return NULL;
+  }
+
+  return mtc->getIdref1().empty() ? NULL :
+    safe_strdup(mtc->getIdref1().c_str());
+}
+
+
+/*
+ * Returns the value of the "idref2" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdref2(const MyTestClass_t * mtc)
+{
+  if (mtc == NULL)
+  {
+    return NULL;
+  }
+
+  return mtc->getIdref2().empty() ? NULL :
+    safe_strdup(mtc->getIdref2().c_str());
+}
+
+
+/*
  * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
  * "id" attribute has been set.
  */
@@ -1783,6 +2061,42 @@ MyTestClass_isSetCorrectId(const MyTestClass_t * mtc)
 
 
 /*
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idRef" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdRef(const MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? static_cast<int>(mtc->isSetIdRef()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idref1" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdref1(const MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? static_cast<int>(mtc->isSetIdref1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idref2" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdref2(const MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? static_cast<int>(mtc->isSetIdref2()) : 0;
+}
+
+
+/*
  * Sets the value of the "id" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
@@ -1926,6 +2240,39 @@ MyTestClass_setCorrectId(MyTestClass_t * mtc, const char * correctId)
 
 
 /*
+ * Sets the value of the "idRef" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdRef(MyTestClass_t * mtc, const char * idRef)
+{
+  return (mtc != NULL) ? mtc->setIdRef(idRef) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "idref1" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdref1(MyTestClass_t * mtc, const char * idref1)
+{
+  return (mtc != NULL) ? mtc->setIdref1(idref1) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "idref2" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdref2(MyTestClass_t * mtc, const char * idref2)
+{
+  return (mtc != NULL) ? mtc->setIdref2(idref2) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
@@ -2065,6 +2412,39 @@ int
 MyTestClass_unsetCorrectId(MyTestClass_t * mtc)
 {
   return (mtc != NULL) ? mtc->unsetCorrectId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "idRef" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdRef(MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? mtc->unsetIdRef() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "idref1" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdref1(MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? mtc->unsetIdref1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "idref2" attribute of this MyTestClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdref2(MyTestClass_t * mtc)
+{
+  return (mtc != NULL) ? mtc->unsetIdref2() : LIBSBML_INVALID_OBJECT;
 }
 
 

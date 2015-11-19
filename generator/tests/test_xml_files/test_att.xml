@@ -18,6 +18,9 @@
             <attribute name="ref2" required="false" type="SIdRef" element="Thing2" abstract="false"/>
             <attribute name="refUnit" required="false" type="UnitSIDref" element="Unit1" abstract="false"/>
             <attribute name="correctId" required="false" type="SId" abstract="false"/>
+            <attribute name="idRef" required="false" type="IDREF" abstract="false"/>
+            <attribute name="idref1" required="false" type="idref" abstract="false"/>
+            <attribute name="idref2" required="false" type="IDRef" abstract="false"/>
           </attributes>
         </element>
         <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
@@ -51,6 +54,7 @@
             <attribute name="metaid" required="true" type="ID" abstract="false"/>
             <attribute name="metaid1" required="true" type="Id" abstract="false"/>
             <attribute name="num4" required="true" type="integer" abstract="false"/>
+            <attribute name="metaidref1" required="true" type="idref" abstract="false"/>
           </attributes>
         </element>
         <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">

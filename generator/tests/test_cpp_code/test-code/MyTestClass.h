@@ -79,6 +79,9 @@ protected:
   std::string mRef2;
   std::string mRefUnit;
   std::string mCorrectId;
+  std::string mIdRef;
+  std::string mIdref1;
+  std::string mIdref2;
 
   /** @endcond */
 
@@ -265,6 +268,33 @@ public:
 
 
   /**
+   * Returns the value of the "idRef" attribute of this MyTestClass.
+   *
+   * @return the value of the "idRef" attribute of this MyTestClass as a
+   * string.
+   */
+  const std::string& getIdRef() const;
+
+
+  /**
+   * Returns the value of the "idref1" attribute of this MyTestClass.
+   *
+   * @return the value of the "idref1" attribute of this MyTestClass as a
+   * string.
+   */
+  const std::string& getIdref1() const;
+
+
+  /**
+   * Returns the value of the "idref2" attribute of this MyTestClass.
+   *
+   * @return the value of the "idref2" attribute of this MyTestClass as a
+   * string.
+   */
+  const std::string& getIdref2() const;
+
+
+  /**
    * Predicate returning @c true or @c false depending on whether this
    * MyTestClass's "id" attribute has been set.
    *
@@ -392,6 +422,36 @@ public:
    * otherwise @c false is returned.
    */
   bool isSetCorrectId() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * MyTestClass's "idRef" attribute has been set.
+   *
+   * @return @c true if this MyTestClass's "idRef" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetIdRef() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * MyTestClass's "idref1" attribute has been set.
+   *
+   * @return @c true if this MyTestClass's "idref1" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetIdref1() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * MyTestClass's "idref2" attribute has been set.
+   *
+   * @return @c true if this MyTestClass's "idref2" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetIdref2() const;
 
 
   /**
@@ -565,6 +625,45 @@ public:
 
 
   /**
+   * Sets the value of the "idRef" attribute of this MyTestClass.
+   *
+   * @param idRef std::string& value of the "idRef" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setIdRef(const std::string& idRef);
+
+
+  /**
+   * Sets the value of the "idref1" attribute of this MyTestClass.
+   *
+   * @param idref1 std::string& value of the "idref1" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setIdref1(const std::string& idref1);
+
+
+  /**
+   * Sets the value of the "idref2" attribute of this MyTestClass.
+   *
+   * @param idref2 std::string& value of the "idref2" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setIdref2(const std::string& idref2);
+
+
+  /**
    * Unsets the value of the "id" attribute of this MyTestClass.
    *
    * @copydetails doc_returns_success_code
@@ -692,6 +791,36 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetCorrectId();
+
+
+  /**
+   * Unsets the value of the "idRef" attribute of this MyTestClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetIdRef();
+
+
+  /**
+   * Unsets the value of the "idref1" attribute of this MyTestClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetIdref1();
+
+
+  /**
+   * Unsets the value of the "idref2" attribute of this MyTestClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetIdref2();
 
 
   /**
@@ -1097,6 +1226,51 @@ MyTestClass_getCorrectId(const MyTestClass_t * mtc);
 
 
 /**
+ * Returns the value of the "idRef" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure whose idRef is sought.
+ *
+ * @return the value of the "idRef" attribute of this MyTestClass_t as a
+ * pointer to a string.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdRef(const MyTestClass_t * mtc);
+
+
+/**
+ * Returns the value of the "idref1" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure whose idref1 is sought.
+ *
+ * @return the value of the "idref1" attribute of this MyTestClass_t as a
+ * pointer to a string.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdref1(const MyTestClass_t * mtc);
+
+
+/**
+ * Returns the value of the "idref2" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure whose idref2 is sought.
+ *
+ * @return the value of the "idref2" attribute of this MyTestClass_t as a
+ * pointer to a string.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+const char *
+MyTestClass_getIdref2(const MyTestClass_t * mtc);
+
+
+/**
  * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
  * "id" attribute has been set.
  *
@@ -1302,6 +1476,54 @@ MyTestClass_isSetRefUnit(const MyTestClass_t * mtc);
 LIBSBML_EXTERN
 int
 MyTestClass_isSetCorrectId(const MyTestClass_t * mtc);
+
+
+/**
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idRef" attribute has been set.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @return @c 1 if this MyTestClass_t's "idRef" attribute has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdRef(const MyTestClass_t * mtc);
+
+
+/**
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idref1" attribute has been set.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @return @c 1 if this MyTestClass_t's "idref1" attribute has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdref1(const MyTestClass_t * mtc);
+
+
+/**
+ * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
+ * "idref2" attribute has been set.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @return @c 1 if this MyTestClass_t's "idref2" attribute has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_isSetIdref2(const MyTestClass_t * mtc);
 
 
 /**
@@ -1539,6 +1761,60 @@ MyTestClass_setCorrectId(MyTestClass_t * mtc, const char * correctId);
 
 
 /**
+ * Sets the value of the "idRef" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @param idRef const char * value of the "idRef" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdRef(MyTestClass_t * mtc, const char * idRef);
+
+
+/**
+ * Sets the value of the "idref1" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @param idref1 const char * value of the "idref1" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdref1(MyTestClass_t * mtc, const char * idref1);
+
+
+/**
+ * Sets the value of the "idref2" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @param idref2 const char * value of the "idref2" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_setIdref2(MyTestClass_t * mtc, const char * idref2);
+
+
+/**
  * Unsets the value of the "id" attribute of this MyTestClass_t.
  *
  * @param mtc the MyTestClass_t structure.
@@ -1744,6 +2020,54 @@ MyTestClass_unsetRefUnit(MyTestClass_t * mtc);
 LIBSBML_EXTERN
 int
 MyTestClass_unsetCorrectId(MyTestClass_t * mtc);
+
+
+/**
+ * Unsets the value of the "idRef" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdRef(MyTestClass_t * mtc);
+
+
+/**
+ * Unsets the value of the "idref1" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdref1(MyTestClass_t * mtc);
+
+
+/**
+ * Unsets the value of the "idref2" attribute of this MyTestClass_t.
+ *
+ * @param mtc the MyTestClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyTestClass_t
+ */
+LIBSBML_EXTERN
+int
+MyTestClass_unsetIdref2(MyTestClass_t * mtc);
 
 
 /**

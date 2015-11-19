@@ -1167,7 +1167,7 @@ class SetGetFunctions():
                               '{} = {}'.format(member, name),
                               'return {}'.format(self.success)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
-        elif attribute['type'] == 'string':
+        elif attribute['type'] == 'string' or attribute['type'] == 'IDRef':
             implementation = ['{} = {}'.format(member, name),
                               'return {}'.format(self.success)]
             code = [dict({'code_type': 'line', 'code': implementation})]

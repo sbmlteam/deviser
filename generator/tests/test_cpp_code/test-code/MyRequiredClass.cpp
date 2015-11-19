@@ -83,6 +83,7 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
   , mMetaid1 ("")
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
+  , mMetaidref1 ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -122,6 +123,7 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   , mMetaid1 ("")
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
+  , mMetaidref1 ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -162,6 +164,7 @@ MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   , mMetaid1 ( orig.mMetaid1 )
   , mNum4 ( orig.mNum4 )
   , mIsSetNum4 ( orig.mIsSetNum4 )
+  , mMetaidref1 ( orig.mMetaidref1 )
 {
 }
 
@@ -204,6 +207,7 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
     mMetaid1 = rhs.mMetaid1;
     mNum4 = rhs.mNum4;
     mIsSetNum4 = rhs.mIsSetNum4;
+    mMetaidref1 = rhs.mMetaidref1;
   }
 
   return *this;
@@ -419,6 +423,16 @@ MyRequiredClass::getNum4() const
 
 
 /*
+ * Returns the value of the "metaidref1" attribute of this MyRequiredClass.
+ */
+const std::string&
+MyRequiredClass::getMetaidref1() const
+{
+  return mMetaidref1;
+}
+
+
+/*
  * Predicate returning @c true or @c false depending on whether this
  * MyRequiredClass's "id" attribute has been set.
  */
@@ -624,6 +638,17 @@ bool
 MyRequiredClass::isSetNum4() const
 {
   return mIsSetNum4;
+}
+
+
+/*
+ * Predicate returning @c true or @c false depending on whether this
+ * MyRequiredClass's "metaidref1" attribute has been set.
+ */
+bool
+MyRequiredClass::isSetMetaidref1() const
+{
+  return (mMetaidref1.empty() == false);
 }
 
 
@@ -868,6 +893,17 @@ MyRequiredClass::setNum4(int num4)
 {
   mNum4 = num4;
   mIsSetNum4 = true;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "metaidref1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setMetaidref1(const std::string& metaidref1)
+{
+  mMetaidref1 = metaidref1;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1244,6 +1280,25 @@ MyRequiredClass::unsetNum4()
 
 
 /*
+ * Unsets the value of the "metaidref1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetMetaidref1()
+{
+  mMetaidref1.erase();
+
+  if (mMetaidref1.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -1392,6 +1447,11 @@ MyRequiredClass::hasRequiredAttributes() const
     allPresent = false;
   }
 
+  if (isSetMetaidref1() == false)
+  {
+    allPresent = false;
+  }
+
   return allPresent;
 }
 
@@ -1508,6 +1568,8 @@ MyRequiredClass::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("metaid1");
 
   attributes.add("num4");
+
+  attributes.add("metaidref1");
 }
 
 /** @endcond */
@@ -2013,6 +2075,27 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         pkgVersion, level, version, message);
     }
   }
+
+  // 
+  // metaidref1 IDRef (use = "required" )
+  // 
+
+  assigned = attributes.readInto("metaidref1", mMetaidref1);
+
+  if (assigned == true)
+  {
+    if (mMetaidref1.empty() == true)
+    {
+      logEmptyString(mMetaidref1, level, version, "<MyRequiredClass>");
+    }
+  }
+  else
+  {
+    std::string message = "Test attribute 'metaidref1' is missing from the "
+      "<MyRequiredClass> element.";
+    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+      pkgVersion, level, version, message);
+  }
 }
 
 /** @endcond */
@@ -2122,6 +2205,11 @@ MyRequiredClass::writeAttributes(XMLOutputStream& stream) const
   if (isSetNum4() == true)
   {
     stream.writeAttribute("num4", getPrefix(), mNum4);
+  }
+
+  if (isSetMetaidref1() == true)
+  {
+    stream.writeAttribute("metaidref1", getPrefix(), mMetaidref1);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -2440,6 +2528,23 @@ MyRequiredClass_getNum4(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Returns the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc)
+{
+  if (mrc == NULL)
+  {
+    return NULL;
+  }
+
+  return mrc->getMetaidref1().empty() ? NULL :
+    safe_strdup(mrc->getMetaidref1().c_str());
+}
+
+
+/*
  * Predicate returning @c 1 or @c 0 depending on whether this
  * MyRequiredClass_t's "id" attribute has been set.
  */
@@ -2668,6 +2773,18 @@ MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Predicate returning @c 1 or @c 0 depending on whether this
+ * MyRequiredClass_t's "metaidref1" attribute has been set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetMetaidref1(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetMetaidref1()) : 0;
+}
+
+
+/*
  * Sets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -2877,6 +2994,19 @@ MyRequiredClass_setNum4(MyRequiredClass_t * mrc, int num4)
 
 
 /*
+ * Sets the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setMetaidref1(MyRequiredClass_t * mrc,
+                              const char * metaidref1)
+{
+  return (mrc != NULL) ? mrc->setMetaidref1(metaidref1) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -3082,6 +3212,17 @@ int
 MyRequiredClass_unsetNum4(MyRequiredClass_t * mrc)
 {
   return (mrc != NULL) ? mrc->unsetNum4() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "metaidref1" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetMetaidref1(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetMetaidref1() : LIBSBML_INVALID_OBJECT;
 }
 
 

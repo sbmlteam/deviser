@@ -203,6 +203,8 @@ class ParseXML():
             return 'SId'
         elif name == 'unitsid':
             return 'UnitSId'
+        elif name == 'idref':
+            return 'IDRef'
         elif name == 'id':
             return 'string'
         elif name == 'uint' or name == 'string' or name == 'double' \
