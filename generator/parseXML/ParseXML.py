@@ -252,17 +252,18 @@ class ParseXML():
             version_info.append(False)
         version_info[pkg_version-1] = True
         attr_name = self.get_value(node, 'name')
+        if not attr_name:
+            self.report_error(global_variables
+                              .return_codes['missing required information'],
+                              'An attribute must have a Name')
         required = self.get_bool_value(self, node, 'required')
         attr_type = self.get_type_value(self, node)
         if not attr_type:
-            global_variables.code_returned = global_variables.return_codes['missing required information']
+            self.report_error(global_variables
+                              .return_codes['missing required information'],
+                              'An attribute must have a Type')
         attr_abstract = self.get_bool_value(self, node, 'abstract')
         attr_element = self.get_element_value(self, node)
-
-        # xml name defaults to name
-        attr_xml_name = self.get_value(node, 'xmlName')
-        if not attr_xml_name:
-            attr_xml_name = attr_name
 
         # if the type if lo_element we actually want the name to be
         # just that of the element
@@ -292,6 +293,10 @@ class ParseXML():
     @staticmethod
     def get_element_description(self, node, pkg_version):
         element_name = self.get_value(node, 'name')
+        if not element_name:
+            self.report_error(global_variables
+                              .return_codes['missing required information'],
+                              'A Class must have a Name')
         element = None
         # check whether we have an element with this
         # name in a different version
@@ -318,6 +323,10 @@ class ParseXML():
         else:
             base_class = self.get_value(node, 'baseClass')
             type_code = self.get_value(node, 'typeCode')
+            if not type_code:
+                self.report_error(global_variables
+                                  .return_codes['missing required information'],
+                                  'A Class must have a TypeCode')
             has_math = self.get_bool_value(self, node, 'hasMath')
             has_children = self.get_bool_value(self, node, 'hasChildren')
             has_list_of = self.get_bool_value(self, node, 'hasListOf')
@@ -519,6 +528,13 @@ class ParseXML():
         global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix)
+
+    #####################################################################
+
+    def report_error(self, code, message):
+        global_variables.code_returned = code
+        print('{}'.format(global_variables.get_return_code(code)))
+        print('{}'.format(message))
     #####################################################################
 
     # main parsing function

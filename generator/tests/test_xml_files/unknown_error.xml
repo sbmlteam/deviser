@@ -3,15 +3,11 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        
-        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
+        <element name="Unit" typeCode="SBML_TEST_UNIT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
           <attributes>
-            <attribute name="unit" required="false" type="fred" abstract="false"/>
+            <attribute required="false" type="fred" abstract="false"/>
           </attributes>
         </element>
-        
-        
-        
       </elements>
     </pkgVersion>
   </versions>

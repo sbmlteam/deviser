@@ -91,7 +91,7 @@ def main():
                              return_codes['unknown type used'])
     fail += run_deviser_test('unknown_error', '-g',
                              global_variables.
-                             return_codes['unknown error - please report'])
+                             return_codes['missing required information'])
 
     if len(not_tested) > 0:
         print('The following files were not tested:')

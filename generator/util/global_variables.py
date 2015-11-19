@@ -37,6 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+import strFunctions
+
 global error_list
 error_list = []
 
@@ -180,7 +182,7 @@ def get_return_code(index):
     if not matched:
         return 'not found'
     else:
-        return items[i]
+        return strFunctions.upper_first(items[i])
 
 
 def reset():
