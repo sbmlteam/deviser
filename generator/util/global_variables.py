@@ -67,7 +67,8 @@ return_codes= dict({'success': 0,
                     'invalid function arguments': 3,
                     'parsing error': 4,
                     'unknown type used': 5,
-                    'unknown error - please report': 6})
+                    'unknown error - please report': 6,
+                    'missing required information': 7})
 
 global code_returned
 code_returned = return_codes['success']

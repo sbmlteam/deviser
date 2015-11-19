@@ -220,7 +220,7 @@ def overwrites_name(root, name):
     for element in root['baseElements']:
         for attrib in element['attribs']:
             if attrib['element'] == name:
-                if strFunctions.compare_no_case(name, attrib['name']):
+                if strFunctions.compare_no_case(name, attrib['xml_name']):
                     return False
                 else:
                     return True

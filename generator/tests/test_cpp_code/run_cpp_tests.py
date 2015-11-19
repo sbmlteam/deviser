@@ -283,6 +283,13 @@ def main():
     test_case = 'child elements and arrays'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_att'
+    num = 5
+    class_name = 'Container'
+    list_of = ''
+    test_case = 'a listOf child that uses listOfFoo as the name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'qual'
     num = 5
     class_name = 'FunctionTerm'

@@ -196,7 +196,7 @@ public:
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{None, SBMLTestTypeCode_t}
+   * @sbmlconstant{SBML_TEST_UNIT, SBMLTestTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

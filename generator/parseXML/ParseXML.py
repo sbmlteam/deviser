@@ -254,13 +254,32 @@ class ParseXML():
         attr_name = self.get_value(node, 'name')
         required = self.get_bool_value(self, node, 'required')
         attr_type = self.get_type_value(self, node)
+        if not attr_type:
+            global_variables.code_returned = global_variables.return_codes['missing required information']
         attr_abstract = self.get_bool_value(self, node, 'abstract')
         attr_element = self.get_element_value(self, node)
+
+        # xml name defaults to name
+        attr_xml_name = self.get_value(node, 'xmlName')
+        if not attr_xml_name:
+            attr_xml_name = attr_name
+
+        # if the type if lo_element we actually want the name to be
+        # just that of the element
+        if attr_type == 'lo_element':
+            attr_name = strFunctions.lower_first(attr_element)
+
+        # xml name defaults to name
+        attr_xml_name = self.get_value(node, 'xmlName')
+        if not attr_xml_name:
+            attr_xml_name = attr_name
+
         attribute_dict = dict({'type': attr_type,
                                'reqd': required,
                                'name': attr_name,
                                'element': attr_element,
                                'abstract': attr_abstract,
+                               'xml_name': attr_xml_name,
                                'num_versions': self.num_versions,
                                'version': pkg_version,
                                'version_info': version_info

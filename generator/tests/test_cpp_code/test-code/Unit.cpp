@@ -202,7 +202,7 @@ Unit::getElementName() const
 int
 Unit::getTypeCode() const
 {
-  return None;
+  return SBML_TEST_UNIT;
 }
 
 

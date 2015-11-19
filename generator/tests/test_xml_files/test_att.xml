@@ -23,12 +23,12 @@
             <attribute name="idref2" required="false" type="IDRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="Unit" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
+        <element name="Unit" typeCode="SBML_TEST_UNIT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
           <attributes>
             <attribute name="unit" required="false" type="UnitSIdRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" listOfName="listOfMyLoTests" listOfClassName="ListOfMyLoTests">
+        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <listOfAttributes>
             <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
           </listOfAttributes>
@@ -61,6 +61,11 @@
           <attributes>
             <attribute name="unit" required="false" type="element" element="Unit" abstract="false"/>
             <attribute name="number" required="false" type="array" element="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Container" typeCode="SBML_TEST_CONTAINER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="listOfMyLoTests" required="false" type="lo_element" element="MyLoTest" abstract="false"/>
           </attributes>
         </element>
       </elements>
