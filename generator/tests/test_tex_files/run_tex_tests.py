@@ -78,12 +78,12 @@ def run_test(name, test_type):
     print('====================================================')
     if test_type == 'validation':
         generate_validator(filename)
-        correct_file = '.\\test-tex\\apdx-validation.tex'
+        correct_file = '.\\test-tex\\{}\\apdx-validation.tex'.format(name)
         temp_file = '.\\temp\\apdx-validation.tex'
         fail = compare_files(correct_file, temp_file)
     elif test_type == 'macros':
         generate_macros(filename)
-        correct_file = '.\\test-tex\\macros.tex'
+        correct_file = '.\\test-tex\\{}\\macros.tex'.format(name)
         temp_file = '.\\temp\\macros.tex'
         fail = compare_files(correct_file, temp_file)
     print('')
