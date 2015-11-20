@@ -535,14 +535,14 @@ class ValidationRulesForClass():
                 this_enum = enums[i]
                 break
         if this_enum is None:
-            return 'FIX ME: Failed to find the enum {} in parse_enum_values'\
+            return 'FIXME: Failed to find the enum {} in parse_enum_values'\
                 .format(enum)
         else:
             i = 0
             num_values = len(this_enum['values'])
-            values = '\"{}\"'.format(this_enum['values'][i]['value'])
+            values = '\'{}\''.format(this_enum['values'][i]['value'])
             for i in range(1, num_values-1):
-                values += ', \"{}\"'.format(this_enum['values'][i]['value'])
+                values += ', \'{}\''.format(this_enum['values'][i]['value'])
             if num_values > 1:
-                values += ' or \"{}\"'.format(this_enum['values'][i+1]['value'])
+                values += ' or \'{}\''.format(this_enum['values'][i+1]['value'])
             return values
