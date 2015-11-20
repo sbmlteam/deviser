@@ -109,6 +109,14 @@ def main():
     test_case = 'macros'
     fail += run_test(name, test_case)
 
+    name = 'groups'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'unknown_type'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
     if len(not_tested) > 0:
         print('The following files were not tested:')
         for name in not_tested:

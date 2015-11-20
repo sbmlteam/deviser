@@ -165,7 +165,7 @@ class ValidationRulesForClass():
                    'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
             rule_type = ref_name
-        elif att_type == 'string':
+        elif att_type == 'string' or att_type == 'IDREF':
             text = 'The attribute {} on {} {} must have a value of data ' \
                    'type {}.'\
                 .format(name, self.indef, self.formatted_name,
