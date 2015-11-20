@@ -624,46 +624,68 @@ class Constructors():
             else:
                 constructor_args = [': {}({})'.format(self.base_class, ns)]
                 parameters = '{}'.format(ns)
+        if not self.base_class:
+            constructor_args = []
+            sep = ':'
+        else:
+            sep = ','
         for attrib in self.attributes:
             if attrib['attType'] == 'lo_element':
-                constructor_args.append(', {} '
-                                        '({})'.format(attrib['memberName'],
+                constructor_args.append('{} {} '
+                                        '({})'.format(sep,
+                                                      attrib['memberName'],
                                                       parameters))
+                sep = ','
             else:
-                constructor_args.append(', {} ({})'.format(attrib['memberName'],
-                                                           attrib['default']))
+                constructor_args.append('{} {} '
+                                        '({})'.format(sep, attrib['memberName'],
+                                                      attrib['default']))
+                sep = ','
             if attrib['isNumber'] or attrib['attType'] == 'boolean':
                 constructor_args.append(', mIsSet{} (false)'
                                         .format(attrib['capAttName']))
         if self.overwrites_children:
-            constructor_args.append(', mElementName(\"'
-                                    '{}\")'.format(self.xml_name))
+            constructor_args.append('{} mElementName(\"'
+                                    '{}\")'.format(sep, self.xml_name))
         return constructor_args
 
     @staticmethod
     def write_copy_constructor_args(self):
-        constructor_args = [': {}( orig )'.format(self.base_class)]
+        sep = ':'
+        if self.base_class:
+            constructor_args = ['{} {}( orig )'.format(sep, self.base_class)]
+            sep = ','
+        else:
+            constructor_args = []
         for attrib in self.attributes:
             if attrib['isArray']:
-                constructor_args.append(', {0} ( NULL )'
-                                        .format(attrib['memberName']))
+                constructor_args.append('{} {} ( NULL )'
+                                        .format(sep, attrib['memberName']))
+                sep = ','
             elif attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
-                constructor_args.append(', {0} ( orig.{0} )'
-                                        .format(attrib['memberName']))
+                constructor_args.append('{1} {0} ( orig.{0} )'
+                                        .format(attrib['memberName'], sep))
+                sep = ','
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
-                    constructor_args.append(', mIsSet{0} ( orig.mIsSet{0} )'
-                                            .format(attrib['capAttName']))
+                    constructor_args.append('{1} mIsSet{0} ( orig.mIsSet{0} )'
+                                            .format(attrib['capAttName'], sep))
+                    sep = ','
             else:
-                constructor_args.append(', {} ( NULL )'
-                                        .format(attrib['memberName']))
+                constructor_args.append('{} {} ( NULL )'
+                                        .format(sep, attrib['memberName']))
+                sep = ','
         if self.overwrites_children:
-            constructor_args.append(', mElementName ( orig.mElementName )')
+            constructor_args.append('{} mElementName '
+                                    '( orig.mElementName )'.format(sep))
 
         return constructor_args
 
     @staticmethod
     def write_assignment_args(self):
-        constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
+        if self.base_class:
+            constructor_args = ['{}::operator=(rhs)'.format(self.base_class)]
+        else:
+            constructor_args = []
         for attrib in self.attributes:
             if attrib['isArray']:
                 member = attrib['memberName']

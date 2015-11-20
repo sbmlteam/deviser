@@ -453,9 +453,12 @@ class ProtectedFunctions():
         arguments = ['ExpectedAttributes& attributes']
 
         # create the function implementation
-        implementation = ['{}::addExpectedAttributes'
-                          '(attributes)'.format(self.base_class)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.base_class:
+            implementation = ['{}::addExpectedAttributes'
+                              '(attributes)'.format(self.base_class)]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = []
         if not self.has_multiple_versions:
             for i in range(0, len(self.attributes)):
                 if self.attributes[i]['isArray']:
@@ -525,41 +528,14 @@ class ProtectedFunctions():
             line = self.get_error_from_list_of_read()
             code.append(self.create_code_block('if', line))
 
-        line = ['{}::readAttributes(attributes, '
-                'expectedAttributes)'.format(self.base_class),
-                'numErrs = log->getNumErrors()']
-        code.append(self.create_code_block('line', line))
+        if self.base_class:
+            line = ['{}::readAttributes(attributes, '
+                    'expectedAttributes)'.format(self.base_class),
+                    'numErrs = log->getNumErrors()']
+            code.append(self.create_code_block('line', line))
 
-        if self.is_plugin:
-            class_name = strFunctions.get_class_from_plugin(
-                self.class_name, self.package)
-            core_err = '{}{}AllowedAttributes'.format(self.package, class_name)
-        else:
-            class_name = self.class_name
-            core_err = '{}{}AllowedCoreAttributes'.format(self.package,
-                                                          class_name)
-        error = '{}{}AllowedAttributes'.format(self.package, class_name)
-        if not global_variables.running_tests:
-            if core_err not in global_variables.error_list:
-                core_err = '{}Unknown'.format(self.package)
-            if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
-
-        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownPackageAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, error,
-                                                 self.given_args),
-                'else if', 'log->getError(n)->getErrorId() == '
-                           'UnknownCoreAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownCoreAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, core_err,
-                                                 self.given_args)]
-        if_err = self.create_code_block('else_if', line)
-
-        line = ['int n = numErrs-1; n >= 0; n--', if_err]
-        code.append(self.create_code_block('for', line))
+            line = self.get_error_from_base_class()
+            code.append(self.create_code_block('for', line))
 
         if not self.has_multiple_versions:
             for i in range(0, len(self.attributes)):
@@ -715,8 +691,12 @@ class ProtectedFunctions():
         arguments = ['XMLOutputStream& stream']
 
         # create the function implementation
-        implementation = ['{}::writeAttributes(stream)'.format(self.base_class)]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.base_class:
+            implementation = ['{}::writeAttributes'
+                              '(stream)'.format(self.base_class)]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = []
 
         if not self.has_multiple_versions:
             for i in range(0, len(self.attributes)):
@@ -729,7 +709,8 @@ class ProtectedFunctions():
                               'else', 'writeV2Attributes(stream)']
             code.append(self.create_code_block('if_else', implementation))
 
-        if global_variables.is_package and not self.is_plugin:
+        if global_variables.is_package and not self.is_plugin and \
+                self.base_class:
             code.append(self.create_code_block('line',
                                                ['{}::write'
                                                 'ExtensionAttributes(stream'
@@ -975,6 +956,38 @@ class ProtectedFunctions():
                              self.cap_language),
                 'numErrs = log->getNumErrors()', for_loop]
 
+        return line
+
+    def get_error_from_base_class(self):
+        if self.is_plugin:
+            class_name = strFunctions.get_class_from_plugin(
+                self.class_name, self.package)
+            core_err = '{}{}AllowedAttributes'.format(self.package, class_name)
+        else:
+            class_name = self.class_name
+            core_err = '{}{}AllowedCoreAttributes'.format(self.package,
+                                                          class_name)
+        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        if not global_variables.running_tests:
+            if core_err not in global_variables.error_list:
+                core_err = '{}Unknown'.format(self.package)
+            if error not in global_variables.error_list:
+                error = '{}Unknown'.format(self.package)
+
+        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownPackageAttribute)',
+                'log->{}{}, {}, details)'.format(self.error, error,
+                                                 self.given_args),
+                'else if', 'log->getError(n)->getErrorId() == '
+                           'UnknownCoreAttribute',
+                'const std::string details = log->getError(n)->getMessage()',
+                'log->remove(UnknownCoreAttribute)',
+                'log->{}{}, {}, details)'.format(self.error, core_err,
+                                                 self.given_args)]
+        if_err = self.create_code_block('else_if', line)
+
+        line = ['int n = numErrs-1; n >= 0; n--', if_err]
         return line
 
     def write_write_att(self, attributes, index, code):

@@ -61,9 +61,15 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing the class
     def write_class(self, base_class, class_name, attributes):
         self.write_forward_class()
-        self.write_line('class {0}_EXTERN {1} : public {2}'
-                        .format(self.library_name.upper(),
-                                class_name, base_class))
+
+        if base_class:
+            self.write_line('class {0}_EXTERN {1} : public {2}'
+                            .format(self.library_name.upper(),
+                                    class_name, base_class))
+        else:
+            self.write_line('class {0}_EXTERN {1}'
+                            .format(self.library_name.upper(),
+                                    class_name))
         self.write_line('{')
         if len(attributes) > 0:
             self.write_line('protected:')
@@ -138,20 +144,21 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             self.write_line_verbatim('#include <string>')
             self.skip_line(2)
         # write the base class header
-        if global_variables.is_package:
-            if self.has_std_base:
-                if not self.is_plugin:
-                    base_file = '{}/{}'.format(self.language, self.baseClass)
+        if self.baseClass:
+            base = self.baseClass
+            if global_variables.is_package:
+                if self.has_std_base:
+                    if not self.is_plugin:
+                        base_file = '{}/{}'.format(self.language, base)
+                    else:
+                        base_file = '{}/extension/{}'.format(self.language,
+                                                             base)
                 else:
-                    base_file = '{}/extension/{}'.format(self.language,
-                                                         self.baseClass)
+                    base_file = '{0}/packages/{1}/{0}/{2}'.format(self.language,
+                                                                  pkg, base)
             else:
-                base_file = '{0}/packages/{1}/{0}/{2}'.format(self.language,
-                                                              pkg,
-                                                              self.baseClass)
-        else:
-            base_file = '{}/{}'.format(self.language, self.baseClass)
-        include_lines += ['<{}.h>'.format(base_file)]
+                base_file = '{}/{}'.format(self.language, self.baseClass)
+            include_lines += ['<{}.h>'.format(base_file)]
 
         # work out if we need the extension header
         need_extension = False
@@ -208,13 +215,12 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         names_written = []
         for i in range(0, len(attributes)):
             name = attributes[i]['memberName']
+            return_type = attributes[i]['attTypeCode']
             if name not in names_written:
                 if attributes[i]['attType'] != 'string':
-                    self.write_line('{0} {1};'.format(attributes[i]['attTypeCode'],
-                                                      name))
+                    self.write_line('{} {};'.format(return_type, name))
                 else:
-                    self.write_line('std::string {0};'
-                                    .format(name))
+                    self.write_line('std::string {};'.format(name))
                 if attributes[i]['isNumber'] is True \
                         or attributes[i]['attType'] == 'boolean':
                     self.write_line('bool mIsSet{0};'
@@ -300,10 +306,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             if not self.has_children:
                 return
 
-            attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
-                                                               self.is_cpp_api,
-                                                               self.is_list_of,
-                                                               self.class_object)
+            attrib_functions = SetGetFunctions.\
+                SetGetFunctions(self.language, self.is_cpp_api,
+                                self.is_list_of, self.class_object)
             num_elements = len(self.child_elements)
         else:
             attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
@@ -329,7 +334,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         for i in range(0, num_elements):
             code = attrib_functions.write_create(False, i)
-            if override is None and code is None and 'concrete' in self.child_elements[i]:
+            if override is None and code is None \
+                    and 'concrete' in self.child_elements[i]:
                 # need to write creates for the concrete
                 concrete = self.child_elements[i]['concrete']
                 concretes = query.get_concretes(self.class_object['root'],
@@ -622,10 +628,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             # contains an element of another type
             # eg qual:ListOfFunctionTerms contains a DefaultTerm
             if not self.is_plugin:
-                element_children = query.get_other_element_children(self.class_object, element)
+                element_children = query.\
+                    get_other_element_children(self.class_object, element)
 
-                for i in range(0, len(element_children)):
-                    child_class = self.create_lo_other_child_element_class(element_children[0], self.class_name)
+                for j in range(0, len(element_children)):
+                    child_class = self.\
+                        create_lo_other_child_element_class(element_children[0],
+                                                            self.class_name)
                     self.write_child_element_functions(child_class)
 
     ########################################################################

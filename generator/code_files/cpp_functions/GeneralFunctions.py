@@ -673,10 +673,13 @@ class GeneralFunctions():
         arguments = ['{}* d'.format(global_variables.document_class)]
 
         # create the function implementation
-        line = '{}::set{}(d)'.format(self.base_class,
-                                     global_variables.document_class)
-        implementation = [line]
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        if self.base_class:
+            line = '{}::set{}(d)'.format(self.base_class,
+                                         global_variables.document_class)
+            implementation = [line]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = []
         if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]
@@ -787,7 +790,7 @@ class GeneralFunctions():
 
         # create the function implementation
         code = []
-        if not self.is_plugin:
+        if not self.is_plugin and self.base_class:
             implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
                               'flag)'.format(self.base_class)]
             code = [dict({'code_type': 'line', 'code': implementation})]
