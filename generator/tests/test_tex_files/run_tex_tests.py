@@ -2,7 +2,7 @@
 
 import os
 
-from spec_files import TexValidationRulesFile, TexMacrosFile
+from spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
 from parseXML import ParseXML
 from util import global_variables
 
@@ -34,6 +34,15 @@ def generate_macros(filename):
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     all_files = TexMacrosFile.TexMacrosFile(ob)
+    all_files.write_file()
+    os.chdir('../.')
+
+
+def generate_body(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
     all_files.write_file()
     os.chdir('../.')
 
@@ -72,7 +81,8 @@ def compare_files(infile, outfile):
 
 def run_test(name, test_type):
     filename = get_filename(name)
-    fail = 0
+    correct_file = ''
+    temp_file = ''
     print('====================================================')
     print('Testing {}:{}'.format(test_type, name))
     print('====================================================')
@@ -80,12 +90,15 @@ def run_test(name, test_type):
         generate_validator(filename)
         correct_file = '.\\test-tex\\{}\\apdx-validation.tex'.format(name)
         temp_file = '.\\temp\\apdx-validation.tex'
-        fail = compare_files(correct_file, temp_file)
     elif test_type == 'macros':
         generate_macros(filename)
         correct_file = '.\\test-tex\\{}\\macros.tex'.format(name)
         temp_file = '.\\temp\\macros.tex'
-        fail = compare_files(correct_file, temp_file)
+    elif test_type == 'body':
+        generate_body(filename)
+        correct_file = '.\\test-tex\\{}\\body.tex'.format(name)
+        temp_file = '.\\temp\\body.tex'
+    fail = compare_files(correct_file, temp_file)
     print('')
     return fail
 
@@ -111,6 +124,10 @@ def main():
 
     name = 'groups'
     test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'groups'
+    test_case = 'body'
     fail += run_test(name, test_case)
 
     name = 'unknown_type'

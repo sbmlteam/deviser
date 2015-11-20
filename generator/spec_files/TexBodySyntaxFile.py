@@ -148,9 +148,9 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
         self.write_to_do('explain {}'.format(lo_name))
 
-        self.write_line('The \\{0} object derives from the \\class{1}ListOf{2}'
+        self.write_line('The \\{0} object derives from the \\class{1}SBase{2}'
                         ' and inherits the core attributes and subobjects '
-                        'from the \\class{1}SBase{2} class.  It contains '
+                        'from that class.  It contains '
                         'one or more objects of type \\{3}.'
                         .format(lo_name, self.start_b, self.end_b, classname))
         self.skip_line()
@@ -257,6 +257,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                     strFunctions.wrap_type(attrib['type'],
                                                            attrib['element'],
                                                            True)))
+            self.write_to_do('explain {}'.format(att_name))
         self.skip_line()
 
     def write_child_element(self, attrib, name):
@@ -360,11 +361,11 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                         .format(self.start_b, enum['texname'], self.end_b))
         self.skip_line()
         self.write_line('The \\primtype{}{}{} is an emueration of values used '
-                        'to.'.format(self.start_b, enum['texname'], self.end_b))
+                        'to ... '.format(self.start_b, enum['texname'], self.end_b))
+        self.write_to_do('Explain use of {}'.format(enum['texname']))
         self.write_line('The possible values are {}.'
                         .format(self.list_values(enum)))
         self.skip_line()
-        self.write_to_do('Explain use of {}'.format(enum['texname']))
 
     def list_values(self, enum):
         num_values = len(enum['values'])

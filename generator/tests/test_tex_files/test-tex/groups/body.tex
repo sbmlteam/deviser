@@ -1,0 +1,148 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+\section{Package syntax and semantics}
+
+In this section, we define the syntax and semantics of the
+\GroupsPackage for \sbmlthreecore. We expound on the various data types
+and constructs defined in this package, then in \sec{examples}, we
+provide complete examples of using the constructs in example SBML
+models.
+
+\subsection{Namespace URI and other declarations necessary for using
+this package}
+\label{xml-namespace}
+
+Every SBML Level~3 package is identified uniquely by an XML namespace
+URI. For an SBML document to be able to use a given SBML Level~3
+package, it must declare the use of that package by referencing its URI.
+The following is the namespace URI for this version of the
+\GroupsPackage for SBML Level~3 Version~1:
+
+\begin{center}
+\uri{http://www.sbml.org/sbml/level3/version1/groups/version1}
+\end{center}
+
+In addition, SBML documents using a given package must indicate whether
+understanding the package is required for complete mathematical
+interpretation of a model, or whether the package is optional. This is
+done using the attribute \token{required} on the \token{<sbml>} element
+in the SBML document. For the \GroupsPackage the value of the required
+attribute is \val{false}.
+
+\subsection{Primitive data types}
+\label{primitive-types}
+
+Section~3.1 of the SBML Level~3 specification defines a number of
+primitive data types and also uses a number of XML Schema 1.0 data types
+\citep{biron:2000}. We assume and use some of them in the rest of this
+specification, specifically \primtype{boolean}, \primtype{ID},
+\primtype{SId}, \primtype{SIdRef}, and \primtype{string}. The \Groups
+Package defines other primitive types; these are described below.
+
+\TODO{check all necessary types from core are listed}
+
+\subsubsection{Type \fixttspace\primtypeNC{GroupKind}}
+
+The \primtype{GroupKind} is an emueration of values used to ...
+\TODO{Explain use of GroupKind}
+
+The possible values are \const{classification},\const{partonomy}
+and\const{collection}.
+
+% ---------------------------------------------------------
+\subsection{The extended \class{Model} class}
+\label{model-class}
+
+\TODO{explain where Model comes from}
+
+The \GroupsPackage extends the \class{Model} object with the addition of
+a \ListOfGroups object.
+
+% ---------------------------------------------------------
+\subsection{The \class{ListOfGroups} class}
+\label{listofgroups-class}
+
+\TODO{explain ListOfGroups}
+
+The \ListOfGroups object derives from the \class{SBase} and inherits the
+core attributes and subobjects from that class. It contains one or more
+objects of type \Group.
+
+% ---------------------------------------------------------
+\subsection{The \class{Group} class}
+\label{group-class}
+
+\TODO{explain Group}
+
+The \Group object derives from the \SBase class and thus inherits any
+attributes and elements that are present on this class.
+A \Group contains exactly one \ListOfMembers element.
+In addition the \Group object has the following attributes.
+
+\paragraph{The \fixttspace\token{kind} attribute}
+
+A \Group has a required attribute \token{kind} of type
+\primtype{GroupKind}.
+\TODO{explain kind}
+
+
+\paragraph{The \fixttspace\token{id} attribute}
+
+A \Group has an optional attribute \token{id} of type \primtype{string}.
+\TODO{explain id}
+
+
+\paragraph{The \fixttspace\token{name} attribute}
+
+A \Group has an optional attribute \token{name} of type
+\primtype{string}.
+\TODO{explain name}
+
+
+% ---------------------------------------------------------
+\subsection{The \class{ListOfMembers} class}
+\label{listofmembers-class}
+
+\TODO{explain ListOfMembers}
+
+The \ListOfMembers object derives from the \class{SBase} and inherits
+the core attributes and subobjects from that class. It contains one or
+more objects of type \Member.
+
+% ---------------------------------------------------------
+\subsection{The \class{Member} class}
+\label{member-class}
+
+\TODO{explain Member}
+
+The \Member object derives from the \SBase class and thus inherits any
+attributes and elements that are present on this class.
+In addition the \Member object has the following attributes.
+
+\paragraph{The \fixttspace\token{id} attribute}
+
+A \Member has an optional attribute \token{id} of type
+\primtype{string}.
+\TODO{explain id}
+
+
+\paragraph{The \fixttspace\token{name} attribute}
+
+A \Member has an optional attribute \token{name} of type
+\primtype{string}.
+\TODO{explain name}
+
+
+\paragraph{The \fixttspace\token{idRef} attribute}
+
+A \Member has an optional attribute \token{idRef} of type
+\primtype{SIdRef}.
+\TODO{explain idRef}
+
+
+\paragraph{The \fixttspace\token{metaIdRef} attribute}
+
+A \Member has an optional attribute \token{metaIdRef} of type
+\primtype{IDREF}.
+\TODO{explain metaIdRef}
+
+
