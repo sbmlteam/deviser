@@ -138,11 +138,12 @@ class TexMacrosFile(BaseTexFile.BaseTexFile):
                                                         self.full_pkg_command,
                                                         self.end_b,
                                                         self.fullname))
-        self.write_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{1}{2}'
+        self.write_line('\\newcommand{0}{1}{2}{0}\\textsf{0}{3}{2}'
                         '\\xspace{2}'
                         .format(self.start_b,
                                 self.brief_pkg_command,
-                                self.end_b))
+                                self.end_b,
+                                self.fullname))
         self.skip_line()
         self.write_line('\\newcommand{0}\\TODO{1}[1]{0}\\colorbox{0}blue{1}'
                         '{0}\\textcolor{0}white{1}{0}TODO: #1{1}{1}{1}'
