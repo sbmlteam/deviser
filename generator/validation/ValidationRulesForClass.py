@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class ValidationRulesForClass():
@@ -156,7 +156,7 @@ class ValidationRulesForClass():
         if att_type == 'SId':
             return
         elif att_type == 'SIdRef':
-            ref_name = strFunctions.upper_first(attribute['name'])
+            ref_name = strFunctions.upper_first(attribute['element'])
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
@@ -215,9 +215,11 @@ class ValidationRulesForClass():
                    'coordinates is encouraged, but not required.'\
                 .format(name, self.indef, self.formatted_name)
         else:
-            text = 'FIX ME: Encountered an unknown attribute type {} in ' \
-                   'ValidationRulesForClass:write_attribute_type_rule'\
+            text = 'FIXME: Encountered an unknown attribute type {} in ' \
+                   'ValidationRulesForClass'\
                 .format(att_type)
+#            global_variables.code_returned = \
+#                global_variables.return_codes['unknown type used']
 
         ref = '{}, {}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
@@ -535,7 +537,7 @@ class ValidationRulesForClass():
                 this_enum = enums[i]
                 break
         if this_enum is None:
-            return 'FIXME: Failed to find the enum {} in parse_enum_values'\
+            return 'FIXME: Failed to find the enum {} in parse enum values'\
                 .format(enum)
         else:
             i = 0
