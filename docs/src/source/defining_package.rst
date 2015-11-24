@@ -354,7 +354,7 @@ the ClassName of the appropriate object.
 +-----------------------+---------------------------------------------------+
 | SIdRef                | The class name of the object being referenced.    |
 |                       |                                                   |
-|                       | (Limited to one element for now). [1]_            |
+|                       | (Limited to one element for now).                 |
 +-----------------------+---------------------------------------------------+
 | Any other             | blank                                             |
 +-----------------------+---------------------------------------------------+
