@@ -69,8 +69,8 @@ protected:
 public:
 
   /**
-   * Creates a new BBB using the given SBML @p level, @ p version and package
-   * version values.
+   * Creates a new BBB using the given SBML Level, Version and
+   * &ldquo;vers&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this BBB
    *
@@ -576,8 +576,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new BBB_t using the given SBML @p level, @ p version and package
- * version values.
+ * Creates a new BBB_t using the given SBML Level, Version and
+ * &ldquo;vers&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this BBB_t
  *

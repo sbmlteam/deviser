@@ -74,8 +74,8 @@ protected:
 public:
 
   /**
-   * Creates a new Transition using the given SBML @p level, @ p version and
-   * package version values.
+   * Creates a new Transition using the given SBML Level, Version and
+   * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this Transition
    *
@@ -916,8 +916,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new Transition_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Transition_t using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this Transition_t
  *

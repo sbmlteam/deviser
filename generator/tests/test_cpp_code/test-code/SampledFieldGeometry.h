@@ -69,8 +69,8 @@ protected:
 public:
 
   /**
-   * Creates a new SampledFieldGeometry using the given SBML @p level, @ p
-   * version and package version values.
+   * Creates a new SampledFieldGeometry using the given SBML Level, Version and
+   * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * SampledFieldGeometry
@@ -580,8 +580,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SampledFieldGeometry_t using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new SampledFieldGeometry_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * SampledFieldGeometry_t

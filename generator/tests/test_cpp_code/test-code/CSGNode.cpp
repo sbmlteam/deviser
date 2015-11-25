@@ -56,8 +56,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CSGNode using the given SBML @p level, @ p version and package
- * version values.
+ * Creates a new CSGNode using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 CSGNode::CSGNode(unsigned int level,
                  unsigned int version,
@@ -480,8 +480,8 @@ CSGNode::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new CSGPrimitive (CSGNode_t) using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CSGPrimitive (CSGNode_t) using the given SBML Level, Version
+ * and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -494,8 +494,8 @@ CSGNode_createCSGPrimitive(unsigned int level,
 
 
 /*
- * Creates a new CSGTranslation (CSGNode_t) using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CSGTranslation (CSGNode_t) using the given SBML Level, Version
+ * and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -508,8 +508,8 @@ CSGNode_createCSGTranslation(unsigned int level,
 
 
 /*
- * Creates a new CSGRotation (CSGNode_t) using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CSGRotation (CSGNode_t) using the given SBML Level, Version
+ * and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -522,8 +522,8 @@ CSGNode_createCSGRotation(unsigned int level,
 
 
 /*
- * Creates a new CSGScale (CSGNode_t) using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CSGScale (CSGNode_t) using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -537,7 +537,7 @@ CSGNode_createCSGScale(unsigned int level,
 
 /*
  * Creates a new CSGHomogeneousTransformation (CSGNode_t) using the given SBML
- * @p level, @ p version and package version values.
+ * Level, Version and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -550,8 +550,8 @@ CSGNode_createCSGHomogeneousTransformation(unsigned int level,
 
 
 /*
- * Creates a new CSGPseudoPrimitive (CSGNode_t) using the given SBML @p level,
- * @ p version and package version values.
+ * Creates a new CSGPseudoPrimitive (CSGNode_t) using the given SBML Level,
+ * Version and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *
@@ -564,8 +564,8 @@ CSGNode_createCSGPseudoPrimitive(unsigned int level,
 
 
 /*
- * Creates a new CSGSetOperator (CSGNode_t) using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CSGSetOperator (CSGNode_t) using the given SBML Level, Version
+ * and &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGNode_t *

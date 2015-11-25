@@ -699,10 +699,12 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_comment_line('@enum {}{}'
                                 'TypeCode_t'.format(self.cap_language,
                                                     up_package))
-        self.write_comment_line('@brief {}{}TypeCode_t is the enumeration '
-                                'of possible types from the \"{}\" '
-                                'package.'.format(self.cap_language,
-                                                  up_package, package))
+        self.write_comment_line('@brief {0}{1}TypeCode_t Enumeration '
+                                'of possible types in the lib{0} '
+                                '&ldquo;{2}&rdquo; package '
+                                'implementation.'.format(self.cap_language,
+                                                         self.up_package,
+                                                         package))
         self.write_blank_comment_line()
         self.write_comment_line('@copydetails doc_what_are_typecodes')
         self.write_blank_comment_line()

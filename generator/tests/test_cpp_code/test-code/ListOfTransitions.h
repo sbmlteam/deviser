@@ -61,8 +61,8 @@ class LIBSBML_EXTERN ListOfTransitions : public ListOf
 public:
 
   /**
-   * Creates a new ListOfTransitions using the given SBML @p level, @ p version
-   * and package version values.
+   * Creates a new ListOfTransitions using the given SBML Level, Version and
+   * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * ListOfTransitions

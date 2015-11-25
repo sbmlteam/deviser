@@ -373,8 +373,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /**
  * @enum SBMLVersTypeCode_t
- * @brief SBMLVersTypeCode_t is the enumeration of possible types from the
- * "vers" package.
+ * @brief SBMLVersTypeCode_t Enumeration of possible types in the libSBML
+ * &ldquo;vers&rdquo; package implementation.
  *
  * @copydetails doc_what_are_typecodes
  *

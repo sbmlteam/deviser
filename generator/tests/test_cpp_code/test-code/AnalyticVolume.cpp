@@ -49,8 +49,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new AnalyticVolume using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new AnalyticVolume using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 AnalyticVolume::AnalyticVolume(unsigned int level,
                                unsigned int version,
@@ -928,8 +928,8 @@ AnalyticVolume::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new AnalyticVolume_t using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new AnalyticVolume_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 AnalyticVolume_t *

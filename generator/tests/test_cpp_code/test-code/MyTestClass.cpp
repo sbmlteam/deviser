@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MyTestClass using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyTestClass using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 MyTestClass::MyTestClass(unsigned int level,
                          unsigned int version,
@@ -1629,8 +1629,8 @@ MyTestClass::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new MyTestClass_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyTestClass_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 LIBSBML_EXTERN
 MyTestClass_t *

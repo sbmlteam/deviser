@@ -60,8 +60,8 @@ class LIBSBML_EXTERN MyLoTest : public SBase
 public:
 
   /**
-   * Creates a new MyLoTest using the given SBML @p level, @ p version and
-   * package version values.
+   * Creates a new MyLoTest using the given SBML Level, Version and
+   * &ldquo;test&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this MyLoTest
    *
@@ -229,8 +229,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new MyLoTest_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyLoTest_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this MyLoTest_t
  *

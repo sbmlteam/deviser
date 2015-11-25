@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ListOfFunctionTerms using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new ListOfFunctionTerms using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 ListOfFunctionTerms::ListOfFunctionTerms(unsigned int level,
                                          unsigned int version,

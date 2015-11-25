@@ -69,8 +69,8 @@ protected:
 public:
 
   /**
-   * Creates a new ListOfFunctionTerms using the given SBML @p level, @ p
-   * version and package version values.
+   * Creates a new ListOfFunctionTerms using the given SBML Level, Version and
+   * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * ListOfFunctionTerms

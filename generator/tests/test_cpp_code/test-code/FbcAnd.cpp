@@ -52,8 +52,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new FbcAnd using the given SBML @p level, @ p version and package
- * version values.
+ * Creates a new FbcAnd using the given SBML Level, Version and
+ * &ldquo;fbc&rdquo; package version.
  */
 FbcAnd::FbcAnd(unsigned int level,
                unsigned int version,
@@ -723,8 +723,8 @@ FbcAnd::writeV2Attributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new FbcAnd_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new FbcAnd_t using the given SBML Level, Version and
+ * &ldquo;fbc&rdquo; package version.
  */
 LIBSBML_EXTERN
 FbcAnd_t *

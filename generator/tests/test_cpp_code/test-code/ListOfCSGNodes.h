@@ -69,8 +69,8 @@ class LIBSBML_EXTERN ListOfCSGNodes : public ListOf
 public:
 
   /**
-   * Creates a new ListOfCSGNodes using the given SBML @p level, @ p version
-   * and package version values.
+   * Creates a new ListOfCSGNodes using the given SBML Level, Version and
+   * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * ListOfCSGNodes

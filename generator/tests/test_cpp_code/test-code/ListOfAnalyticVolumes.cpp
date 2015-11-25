@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ListOfAnalyticVolumes using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new ListOfAnalyticVolumes using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 ListOfAnalyticVolumes::ListOfAnalyticVolumes(unsigned int level,
                                              unsigned int version,

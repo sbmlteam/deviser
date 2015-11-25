@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ListOfTransitions using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new ListOfTransitions using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 ListOfTransitions::ListOfTransitions(unsigned int level,
                                      unsigned int version,

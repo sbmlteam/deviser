@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Boundary using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Boundary using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 Boundary::Boundary(unsigned int level,
                    unsigned int version,
@@ -501,8 +501,8 @@ Boundary::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new Boundary_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Boundary_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 Boundary_t *

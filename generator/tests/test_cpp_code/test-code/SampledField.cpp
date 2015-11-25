@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SampledField using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new SampledField using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 SampledField::SampledField(unsigned int level,
                            unsigned int version,
@@ -1509,8 +1509,8 @@ SampledField::copySampleArrays(int* &target, int& targetLength, int* source, int
 
 
 /*
- * Creates a new SampledField_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new SampledField_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 SampledField_t *

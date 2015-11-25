@@ -71,8 +71,8 @@ protected:
 public:
 
   /**
-   * Creates a new CSGSetOperator using the given SBML @p level, @ p version
-   * and package version values.
+   * Creates a new CSGSetOperator using the given SBML Level, Version and
+   * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
    * CSGSetOperator
@@ -723,8 +723,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGSetOperator_t using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new CSGSetOperator_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * CSGSetOperator_t

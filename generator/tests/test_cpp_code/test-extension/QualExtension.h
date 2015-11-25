@@ -344,8 +344,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 /**
  * @enum SBMLQualTypeCode_t
- * @brief SBMLQualTypeCode_t is the enumeration of possible types from the
- * "qual" package.
+ * @brief SBMLQualTypeCode_t Enumeration of possible types in the libSBML
+ * &ldquo;qual&rdquo; package implementation.
  *
  * @copydetails doc_what_are_typecodes
  *

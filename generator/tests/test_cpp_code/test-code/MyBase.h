@@ -66,8 +66,8 @@ protected:
 public:
 
   /**
-   * Creates a new MyBase using the given SBML @p level, @ p version and
-   * package version values.
+   * Creates a new MyBase using the given SBML Level, Version and
+   * &ldquo;test&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this MyBase
    *
@@ -321,8 +321,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new MyBase_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyBase_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this MyBase_t
  *

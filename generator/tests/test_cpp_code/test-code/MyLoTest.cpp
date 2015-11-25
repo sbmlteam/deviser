@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MyLoTest using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyLoTest using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 MyLoTest::MyLoTest(unsigned int level,
                    unsigned int version,
@@ -204,8 +204,8 @@ MyLoTest::enablePackageInternal(const std::string& pkgURI,
 
 
 /*
- * Creates a new MyLoTest_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyLoTest_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 LIBSBML_EXTERN
 MyLoTest_t *

@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ClassOne using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new ClassOne using the given SBML Level, Version and
+ * &ldquo;vers&rdquo; package version.
  */
 ClassOne::ClassOne(unsigned int level,
                    unsigned int version,
@@ -676,8 +676,8 @@ ClassOne::writeV2Attributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new ClassOne_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new ClassOne_t using the given SBML Level, Version and
+ * &ldquo;vers&rdquo; package version.
  */
 LIBSBML_EXTERN
 ClassOne_t *

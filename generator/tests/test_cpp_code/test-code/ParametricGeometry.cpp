@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ParametricGeometry using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new ParametricGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 ParametricGeometry::ParametricGeometry(unsigned int level,
                                        unsigned int version,
@@ -823,8 +823,8 @@ ParametricGeometry::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new ParametricGeometry_t using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new ParametricGeometry_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 ParametricGeometry_t *

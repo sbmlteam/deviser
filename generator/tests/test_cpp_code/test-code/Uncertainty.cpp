@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Uncertainty using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Uncertainty using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 Uncertainty::Uncertainty(unsigned int level,
                          unsigned int version,
@@ -612,8 +612,8 @@ Uncertainty::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new Uncertainty_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Uncertainty_t using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
 Uncertainty_t *

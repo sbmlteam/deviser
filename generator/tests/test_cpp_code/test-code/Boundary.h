@@ -70,8 +70,8 @@ protected:
 public:
 
   /**
-   * Creates a new Boundary using the given SBML @p level, @ p version and
-   * package version values.
+   * Creates a new Boundary using the given SBML Level, Version and
+   * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this Boundary
    *
@@ -381,8 +381,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new Boundary_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Boundary_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this Boundary_t
  *

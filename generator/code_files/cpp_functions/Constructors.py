@@ -97,10 +97,12 @@ class Constructors():
                                        self.object_name)
             create = 'create{}'.format(self.concretes[i]['element'])
         # create doc string header
-        title_line = 'Creates a new {} using the given {} @p level' \
+        title_line = 'Creates a new {} using the given {} Level' \
             .format(ob_name, self.cap_language)
         if global_variables.is_package:
-            title_line += ', @ p version and package version values.'
+            title_line += ', Version and &ldquo;{}&rdquo; package ' \
+                          'version.'.format(strFunctions.
+                                            lower_first(self.package))
         else:
             title_line += ' and @ p version values.'
 

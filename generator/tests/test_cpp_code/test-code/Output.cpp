@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Output using the given SBML @p level, @ p version and package
- * version values.
+ * Creates a new Output using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 Output::Output(unsigned int level,
                unsigned int version,
@@ -816,8 +816,8 @@ Output::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new Output_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Output_t using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 LIBSBML_EXTERN
 Output_t *

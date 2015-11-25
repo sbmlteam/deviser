@@ -68,8 +68,8 @@ protected:
 public:
 
   /**
-   * Creates a new FbcAnd using the given SBML @p level, @ p version and
-   * package version values.
+   * Creates a new FbcAnd using the given SBML Level, Version and
+   * &ldquo;fbc&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this FbcAnd
    *
@@ -513,8 +513,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new FbcAnd_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new FbcAnd_t using the given SBML Level, Version and
+ * &ldquo;fbc&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this FbcAnd_t
  *

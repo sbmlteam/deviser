@@ -54,8 +54,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MixedGeometry using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MixedGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 MixedGeometry::MixedGeometry(unsigned int level,
                              unsigned int version,
@@ -924,8 +924,8 @@ MixedGeometry::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new MixedGeometry_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MixedGeometry_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 MixedGeometry_t *

@@ -56,8 +56,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CSGTransformation using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new CSGTransformation using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 CSGTransformation::CSGTransformation(unsigned int level,
                                      unsigned int version,
@@ -805,8 +805,8 @@ CSGTransformation::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new CSGTransformation_t using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new CSGTransformation_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGTransformation_t *

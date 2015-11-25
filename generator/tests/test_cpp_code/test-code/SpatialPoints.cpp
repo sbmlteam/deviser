@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SpatialPoints using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new SpatialPoints using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 SpatialPoints::SpatialPoints(unsigned int level,
                              unsigned int version,
@@ -901,8 +901,8 @@ SpatialPoints::setElementText(const std::string& text)
 
 
 /*
- * Creates a new SpatialPoints_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new SpatialPoints_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 SpatialPoints_t *

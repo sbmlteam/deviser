@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Container using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Container using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 Container::Container(unsigned int level,
                      unsigned int version,
@@ -485,8 +485,8 @@ Container::createObject(XMLInputStream& stream)
 
 
 /*
- * Creates a new Container_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new Container_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 LIBSBML_EXTERN
 Container_t *

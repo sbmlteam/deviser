@@ -20,8 +20,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MySEDClass using the given SEDML @p level and @ p version
- * values.
+ * Creates a new MySEDClass using the given SEDML Level and @ p version values.
  */
 MySEDClass::MySEDClass(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -318,7 +317,7 @@ MySEDClass::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new MySEDClass_t using the given SEDML @p level and @ p version
+ * Creates a new MySEDClass_t using the given SEDML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

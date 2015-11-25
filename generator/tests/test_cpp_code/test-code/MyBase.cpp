@@ -47,8 +47,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new MyBase using the given SBML @p level, @ p version and package
- * version values.
+ * Creates a new MyBase using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 MyBase::MyBase(unsigned int level,
                unsigned int version,
@@ -333,8 +333,8 @@ MyBase::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new MyBase_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new MyBase_t using the given SBML Level, Version and
+ * &ldquo;test&rdquo; package version.
  */
 LIBSBML_EXTERN
 MyBase_t *

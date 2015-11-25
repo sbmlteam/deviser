@@ -56,8 +56,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CSGSetOperator using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new CSGSetOperator using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 CSGSetOperator::CSGSetOperator(unsigned int level,
                                unsigned int version,
@@ -1122,8 +1122,8 @@ CSGSetOperator::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new CSGSetOperator_t using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new CSGSetOperator_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CSGSetOperator_t *

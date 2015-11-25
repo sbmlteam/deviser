@@ -38,7 +38,7 @@ protected:
 public:
 
   /**
-   * Creates a new MySEDClass using the given SEDML @p level and @ p version
+   * Creates a new MySEDClass using the given SEDML Level and @ p version
    * values.
    *
    * @param level an unsigned int, the SEDML Level to assign to this MySEDClass
@@ -277,7 +277,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new MySEDClass_t using the given SEDML @p level and @ p version
+ * Creates a new MySEDClass_t using the given SEDML Level and @ p version
  * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this MySEDClass_t

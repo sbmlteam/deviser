@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CoordinateComponent using the given SBML @p level, @ p version
- * and package version values.
+ * Creates a new CoordinateComponent using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 CoordinateComponent::CoordinateComponent(unsigned int level,
                                          unsigned int version,
@@ -1152,8 +1152,8 @@ CoordinateComponent::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new CoordinateComponent_t using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new CoordinateComponent_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 CoordinateComponent_t *

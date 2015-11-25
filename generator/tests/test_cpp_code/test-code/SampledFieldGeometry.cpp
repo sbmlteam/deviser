@@ -48,8 +48,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SampledFieldGeometry using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new SampledFieldGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 SampledFieldGeometry::SampledFieldGeometry(unsigned int level,
                                            unsigned int version,
@@ -754,8 +754,8 @@ SampledFieldGeometry::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new SampledFieldGeometry_t using the given SBML @p level, @ p
- * version and package version values.
+ * Creates a new SampledFieldGeometry_t using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  */
 LIBSBML_EXTERN
 SampledFieldGeometry_t *

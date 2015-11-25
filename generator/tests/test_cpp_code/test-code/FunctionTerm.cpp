@@ -49,8 +49,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new FunctionTerm using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new FunctionTerm using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 FunctionTerm::FunctionTerm(unsigned int level,
                            unsigned int version,
@@ -606,8 +606,8 @@ FunctionTerm::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
- * Creates a new FunctionTerm_t using the given SBML @p level, @ p version and
- * package version values.
+ * Creates a new FunctionTerm_t using the given SBML Level, Version and
+ * &ldquo;qual&rdquo; package version.
  */
 LIBSBML_EXTERN
 FunctionTerm_t *
