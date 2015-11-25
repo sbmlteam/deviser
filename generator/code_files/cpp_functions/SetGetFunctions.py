@@ -328,16 +328,39 @@ class SetGetFunctions():
             attribute = self.attributes[index]
         else:
             return
+        name = attribute['name']
+        if name == 'packageName':
+            title_name = 'nickname of the {} Level&nbsp;3 package'.format(self.cap_language)
+            ret_name = 'package nickname'
+        elif name == 'defaultLevel':
+            title_name = 'default {} Level'.format(self.cap_language)
+            ret_name = '{} Level'.format(self.cap_language)
+        elif name == 'defaultVersion':
+            title_name = 'default {} Version'.format(self.cap_language)
+            ret_name = 'Version within the default {} Level'.format(self.cap_language)
+        elif name == 'defaultPackageVersion':
+            title_name = 'default version of the {} Level&nbsp;3 package'.format(self.cap_language)
+            ret_name = 'default version number of the {} Level&nbsp;3 package definition'.format(self.cap_language)
+        elif name == 'xmlnsL3V1V1' or name == 'xmlnsL3V1V2':
+            title_name = 'XML namespace URI of the {} Level&nbsp;3 package'.format(self.cap_language)
+            ret_name = 'XML namespace'
+        else:
+            title_name = ''
+            ret_name = ''
+
         # create comment parts
         params = []
         return_lines = []
         additional = []
-        title_line = 'Returns the {} used by this lib{} package extension.' \
-            .format(attribute['name'], self.cap_language)
+        title_line = 'Returns the {} implemented by this lib{} extension.' \
+            .format(title_name, self.cap_language)
 
-        return_lines.append('@return the {} as a {}.'
-                            .format(attribute['name'],
+        return_lines.append('@return the {}, as {} {}.'
+                            .format(ret_name,
+                                    strFunctions.get_indefinite(attribute['attType']),
                                     attribute['attType']))
+        if self.cap_language == 'SBML':
+            additional.append('@copydetails doc_note_static_methods')
         # create the function declaration
         function = 'get{0}'.format(attribute['capAttName'])
         if attribute['attType'] == 'string' \

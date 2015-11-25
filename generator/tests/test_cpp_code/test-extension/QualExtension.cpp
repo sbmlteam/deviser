@@ -54,7 +54,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Returns the packageName used by this libSBML package extension.
+ * Returns the nickname of the SBML Level&nbsp;3 package implemented by this
+ * libSBML extension.
  */
 const std::string&
 QualExtension::getPackageName()
@@ -65,7 +66,7 @@ QualExtension::getPackageName()
 
 
 /*
- * Returns the defaultLevel used by this libSBML package extension.
+ * Returns the default SBML Level implemented by this libSBML extension.
  */
 unsigned int
 QualExtension::getDefaultLevel()
@@ -75,7 +76,7 @@ QualExtension::getDefaultLevel()
 
 
 /*
- * Returns the defaultVersion used by this libSBML package extension.
+ * Returns the default SBML Version implemented by this libSBML extension.
  */
 unsigned int
 QualExtension::getDefaultVersion()
@@ -85,7 +86,8 @@ QualExtension::getDefaultVersion()
 
 
 /*
- * Returns the defaultPackageVersion used by this libSBML package extension.
+ * Returns the default version of the SBML Level&nbsp;3 package implemented by
+ * this libSBML extension.
  */
 unsigned int
 QualExtension::getDefaultPackageVersion()
@@ -95,7 +97,8 @@ QualExtension::getDefaultPackageVersion()
 
 
 /*
- * Returns the xmlnsL3V1V1 used by this libSBML package extension.
+ * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+ * by this libSBML extension.
  */
 const std::string&
 QualExtension::getXmlnsL3V1V1()
@@ -133,7 +136,7 @@ const char* SBML_QUAL_TYPECODE_STRINGS[] =
 template class LIBSBML_EXTERN SBMLExtensionNamespaces<QualExtension>;
 
 /*
- * Creates a new QualExtension.
+ * Creates a new QualExtension instance.
  */
 QualExtension::QualExtension()
 {
@@ -183,7 +186,7 @@ QualExtension::~QualExtension()
 
 
 /*
- * Returns the name of this package ("qual").
+ * Returns the name of this SBML Level&nbsp;3 package ("qual").
  */
 const std::string&
 QualExtension::getName() const
@@ -193,8 +196,8 @@ QualExtension::getName() const
 
 
 /*
- * Returns the namespace URI corresponding to the given SBML Level, Version and
- * PackageVersion
+ * Returns a string representing the SBML XML namespace of this SBML
+ * Level&nbsp;3 package.
  */
 const std::string&
 QualExtension::getURI(unsigned int sbmlLevel,
@@ -233,7 +236,7 @@ QualExtension::getLevel(const std::string& uri) const
 
 
 /*
- * Returns the SBML Version for the given URI of this package.
+ * Returns the Version within the SBML Level for the given URI of this package.
  */
 unsigned int
 QualExtension::getVersion(const std::string& uri) const
@@ -248,7 +251,8 @@ QualExtension::getVersion(const std::string& uri) const
 
 
 /*
- * Returns the SBML PackageVersion for the given URI of this package.
+ * Returns the SBML Level&nbsp;3 package version for the given URI of this
+ * package.
  */
 unsigned int
 QualExtension::getPackageVersion(const std::string& uri) const
@@ -280,7 +284,8 @@ QualExtension::getSBMLExtensionNamespaces(const std::string& uri) const
 
 
 /*
- * Returns the given SBMLQualTypeCode_t(int) as a string.
+ * Takes a type code of the &ldquo;qual&rdquo; package and returns a string
+ * describing the code.
  */
 const char*
 QualExtension::getStringFromTypeCode(int typeCode) const

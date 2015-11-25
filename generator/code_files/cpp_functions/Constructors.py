@@ -321,7 +321,7 @@ class Constructors():
                                        self.object_name)
             create = 'create{}'.format(self.concretes[i]['element'])
         # create doc string header
-        title_line = 'Creates a new {0}.'.format(ob_name)
+        title_line = 'Creates a new {0} instance.'.format(ob_name)
         params = []
 
         return_lines = []

@@ -56,7 +56,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Returns the packageName used by this libSBML package extension.
+ * Returns the nickname of the SBML Level&nbsp;3 package implemented by this
+ * libSBML extension.
  */
 const std::string&
 VersExtension::getPackageName()
@@ -67,7 +68,7 @@ VersExtension::getPackageName()
 
 
 /*
- * Returns the defaultLevel used by this libSBML package extension.
+ * Returns the default SBML Level implemented by this libSBML extension.
  */
 unsigned int
 VersExtension::getDefaultLevel()
@@ -77,7 +78,7 @@ VersExtension::getDefaultLevel()
 
 
 /*
- * Returns the defaultVersion used by this libSBML package extension.
+ * Returns the default SBML Version implemented by this libSBML extension.
  */
 unsigned int
 VersExtension::getDefaultVersion()
@@ -87,7 +88,8 @@ VersExtension::getDefaultVersion()
 
 
 /*
- * Returns the defaultPackageVersion used by this libSBML package extension.
+ * Returns the default version of the SBML Level&nbsp;3 package implemented by
+ * this libSBML extension.
  */
 unsigned int
 VersExtension::getDefaultPackageVersion()
@@ -97,7 +99,8 @@ VersExtension::getDefaultPackageVersion()
 
 
 /*
- * Returns the xmlnsL3V1V1 used by this libSBML package extension.
+ * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+ * by this libSBML extension.
  */
 const std::string&
 VersExtension::getXmlnsL3V1V1()
@@ -109,7 +112,8 @@ VersExtension::getXmlnsL3V1V1()
 
 
 /*
- * Returns the xmlnsL3V1V2 used by this libSBML package extension.
+ * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+ * by this libSBML extension.
  */
 const std::string&
 VersExtension::getXmlnsL3V1V2()
@@ -146,7 +150,7 @@ const char* SBML_VERS_TYPECODE_STRINGS[] =
 template class LIBSBML_EXTERN SBMLExtensionNamespaces<VersExtension>;
 
 /*
- * Creates a new VersExtension.
+ * Creates a new VersExtension instance.
  */
 VersExtension::VersExtension()
 {
@@ -196,7 +200,7 @@ VersExtension::~VersExtension()
 
 
 /*
- * Returns the name of this package ("vers").
+ * Returns the name of this SBML Level&nbsp;3 package ("vers").
  */
 const std::string&
 VersExtension::getName() const
@@ -206,8 +210,8 @@ VersExtension::getName() const
 
 
 /*
- * Returns the namespace URI corresponding to the given SBML Level, Version and
- * PackageVersion
+ * Returns a string representing the SBML XML namespace of this SBML
+ * Level&nbsp;3 package.
  */
 const std::string&
 VersExtension::getURI(unsigned int sbmlLevel,
@@ -250,7 +254,7 @@ VersExtension::getLevel(const std::string& uri) const
 
 
 /*
- * Returns the SBML Version for the given URI of this package.
+ * Returns the Version within the SBML Level for the given URI of this package.
  */
 unsigned int
 VersExtension::getVersion(const std::string& uri) const
@@ -265,7 +269,8 @@ VersExtension::getVersion(const std::string& uri) const
 
 
 /*
- * Returns the SBML PackageVersion for the given URI of this package.
+ * Returns the SBML Level&nbsp;3 package version for the given URI of this
+ * package.
  */
 unsigned int
 VersExtension::getPackageVersion(const std::string& uri) const
@@ -305,7 +310,8 @@ VersExtension::getSBMLExtensionNamespaces(const std::string& uri) const
 
 
 /*
- * Returns the given SBMLVersTypeCode_t(int) as a string.
+ * Takes a type code of the &ldquo;vers&rdquo; package and returns a string
+ * describing the code.
  */
 const char*
 VersExtension::getStringFromTypeCode(int typeCode) const
@@ -374,6 +380,21 @@ unsigned int
 VersExtension::getErrorIdOffset() const
 {
   return 10000000;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns true if the package has multiple versions.
+ */
+bool
+VersExtension::hasMultipleVersions() const
+{
+  return true;
 }
 
 /** @endcond */

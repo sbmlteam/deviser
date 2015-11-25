@@ -36,6 +36,15 @@
 #define qualfwd_H__
 
 
+/**
+ * Forward declaration of all opaque C types.
+ *
+ * Declaring all types up-front avoids "redefinition of type Foo" compile
+ * errors and allows our combined C/C++ headers to depend minimally upon each
+ * other. Put another way, the type definitions below serve the same purpose as
+ * "class Foo;" forward declarations in C++ code.
+ */
+
 #ifdef __cplusplus
 # define CLASS_OR_STRUCT class
 #else

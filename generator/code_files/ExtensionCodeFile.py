@@ -209,7 +209,11 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         code = ext_functions.write_get_error_offset()
         self.write_function_implementation(code, exclude=True)
 
-    ########################################################################
+        if self.num_versions > 1:
+            code = ext_functions.write_has_multiple_versions()
+            self.write_function_implementation(code, True)
+
+   ########################################################################
 
     # write the init function
     def write_init_function(self):

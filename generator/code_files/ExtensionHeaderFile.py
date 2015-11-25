@@ -221,6 +221,10 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         code = ext_functions.write_get_error_offset()
         self.write_function_declaration(code, True)
 
+        if self.num_versions > 1:
+            code = ext_functions.write_has_multiple_versions()
+            self.write_function_declaration(code, True)
+
     ########################################################################
 
     # write the init function
@@ -331,6 +335,21 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     # Functions for writing teh fwd declarations file
 
+    def write_docs_fwd(self):
+        forward_dec = 'Forward declaration of all opaque C types.'
+        fwd_text = 'Declaring all types up-front avoids \"redefinition ' \
+                   'of type Foo\" compile errors and allows our combined ' \
+                   'C/C++ headers to depend minimally upon each other.  Put ' \
+                   'another way, the type definitions below serve the same ' \
+                   'purpose as \"class Foo;\" forward declarations in ' \
+                   'C++ code.'
+        self.open_comment()
+        self.write_comment_line(forward_dec)
+        self.write_blank_comment_line()
+        self.write_comment_line(fwd_text)
+        self.close_comment()
+        self.skip_line()
+
     def write_class_or_struct(self):
         self.write_line('#ifdef __cplusplus')
         self.write_line('#     define CLASS_OR_STRUCT class')
@@ -394,6 +413,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_fwd_file(self):
         BaseCppFile.BaseCppFile.write_file(self)
         self.write_defn_begin()
+        self.write_docs_fwd()
         self.write_class_or_struct()
         self.write_cppns_begin()
         self.write_classes()

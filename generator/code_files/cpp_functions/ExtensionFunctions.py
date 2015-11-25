@@ -62,7 +62,7 @@ class ExtensionFunctions():
     # function to write getName
     def write_get_name(self):
         # create comment parts
-        title_line = 'Returns the name of this ' \
+        title_line = 'Returns the name of this SBML Level&nbsp;3 ' \
                      'package (\"{}\").'.format(self.package)
         params = []
         return_lines = ['@return a string representing the name of '
@@ -98,9 +98,8 @@ class ExtensionFunctions():
     # function to write getName
     def write_get_uri(self):
         # create comment parts
-        title_line = 'Returns the namespace URI corresponding to the ' \
-                     'given {} Level, Version and ' \
-                     'PackageVersion'.format(self.cap_language)
+        title_line = 'Returns a string representing the {0} XML namespace of ' \
+                     'this {0} Level&nbsp;3 package.'.format(self.cap_language)
         params = ['@param {}Level, the level of {}'.format(self.language,
                                                            self.cap_language),
                   '@param {}Version the version of '
@@ -108,7 +107,13 @@ class ExtensionFunctions():
                   '@param pkgVersion the version of this package']
         return_lines = ['@return a string representing the name of '
                         'this package (\"{}\").'.format(self.package)]
-        additional = []
+        additional = ['The namespace URI constructed by this method '
+                      'corresponds to the combination of the Level and '
+                      'Version of SBML, and the Version of the SBML '
+                      'Level&nbsp;3 package.  (At the time of this writing, '
+                      'the only SBML Level that supports packages is '
+                      'Level&nbsp;3, so the value of @p sbmlLevel is '
+                      'necessarily always <code>3</code>.)']
 
         # create the function declaration
         level = '{}Level'.format(self.language)
@@ -153,14 +158,26 @@ class ExtensionFunctions():
 
     # function to write getLevel/Version/PackageVersion
     def write_get_other(self, other):
+        if other == 'Level':
+            title_name = 'SBML Level'
+            ret_name = 'SBML Level'
+        elif other == 'Version':
+            title_name = 'Version within the SBML Level'
+            ret_name = 'SBML Version within the SBML Level'
+        elif other == 'PackageVersion':
+            title_name = 'SBML Level&nbsp;3 package version'
+            ret_name = 'version of the SBML Level&nbsp;3 package'
+        else:
+            title_name = ''
+            ret_name = ''
         # create comment parts
-        title_line = 'Returns the {} {} for the given URI  of this ' \
-                     'package.'.format(self.cap_language, other)
+        title_line = 'Returns the {} for the given URI  of this ' \
+                     'package.'.format(title_name)
         params = ['@param uri the string of the URI that represents one '
                   'of the versions of the \"{}\" package'.format(self.package)]
-        return_lines = ['@return the {} {} with the given URI of this '
+        return_lines = ['@return the {} for the given URI of this '
                         'package, or @c 0 if the given URI is '
-                        'invalid.'.format(self.cap_language, other)]
+                        'invalid.'.format(ret_name)]
         additional = []
 
         # create the function declaration
@@ -256,11 +273,18 @@ class ExtensionFunctions():
     # function to write getExtension namespaces
     def write_get_string_typecode(self):
         # create comment parts
-        title_line = 'Returns the given {}{}TypeCode_t(int) ' \
-                     'as a string.'.format(self.cap_language, self.up_package)
-        params = ['@param typeCode a TypeCode from the \"{}\" '
-                  'package.'.format(self.package)]
-        return_lines = ['@return the typecode as a string.']
+        title_line = 'Takes a type code of the &ldquo;{}&rdquo; package and ' \
+                     'returns a string describing the ' \
+                     'code.'.format(self.package)
+        params = ['@param typeCode a libSBML type code defined by the libSBML '
+                  'extension implementing support for the SBML '
+                  'Level&nbsp;3 &ldquo;{}&rdquo; package.'.format(self.package)]
+        return_lines = ['@return a text string representing the type code '
+                        'given by @p typeCode.  If the type code is '
+                        'unrecognized for this implementation of the '
+                        'libSBML &ldquo;{}&rdquo; package, the string returned '
+                        'will be <code>"(Unknown SBML {} Type)"'
+                        '</code>.'.format(self.package, self.up_package)]
         additional = []
 
         # create the function declaration
@@ -411,6 +435,45 @@ class ExtensionFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    ########################################################################
+
+    # multiple versions
+    def write_has_multiple_versions(self):
+        # create comment parts
+        title_line = 'Returns true if the package has multiple versions.'
+        params = []
+        return_lines = ['@return true if multiple versions, false otherwise']
+        additional = []
+
+        # create the function declaration
+        arguments = ['']
+        function = 'hasMultipleVersions'
+        return_type = 'bool'
+
+        return_value = 'true'
+        # should not get here but double check
+        if self.num_versions == 1:
+            return_value = 'false'
+
+        # create the function implementation
+        implementation = ['return {}'.format(return_value)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+
 
     ########################################################################
 

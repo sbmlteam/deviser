@@ -68,55 +68,72 @@ class LIBSBML_EXTERN VersExtension : public SBMLExtension
 public:
 
   /**
-   * Returns the packageName used by this libSBML package extension.
+   * Returns the nickname of the SBML Level&nbsp;3 package implemented by this
+   * libSBML extension.
    *
-   * @return the packageName as a string.
+   * @return the package nickname, as a string.
+   *
+   * @copydetails doc_note_static_methods
    */
   static const std::string& getPackageName();
 
 
   /**
-   * Returns the defaultLevel used by this libSBML package extension.
+   * Returns the default SBML Level implemented by this libSBML extension.
    *
-   * @return the defaultLevel as a unsigned integer.
+   * @return the SBML Level, as an unsigned integer.
+   *
+   * @copydetails doc_note_static_methods
    */
   static unsigned int getDefaultLevel();
 
 
   /**
-   * Returns the defaultVersion used by this libSBML package extension.
+   * Returns the default SBML Version implemented by this libSBML extension.
    *
-   * @return the defaultVersion as a unsigned integer.
+   * @return the Version within the default SBML Level, as an unsigned integer.
+   *
+   * @copydetails doc_note_static_methods
    */
   static unsigned int getDefaultVersion();
 
 
   /**
-   * Returns the defaultPackageVersion used by this libSBML package extension.
+   * Returns the default version of the SBML Level&nbsp;3 package implemented
+   * by this libSBML extension.
    *
-   * @return the defaultPackageVersion as a unsigned integer.
+   * @return the default version number of the SBML Level&nbsp;3 package
+   * definition, as an unsigned integer.
+   *
+   * @copydetails doc_note_static_methods
    */
   static unsigned int getDefaultPackageVersion();
 
 
   /**
-   * Returns the xmlnsL3V1V1 used by this libSBML package extension.
+   * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+   * by this libSBML extension.
    *
-   * @return the xmlnsL3V1V1 as a string.
+   * @return the XML namespace, as a string.
+   *
+   * @copydetails doc_note_static_methods
    */
   static const std::string& getXmlnsL3V1V1();
 
 
   /**
-   * Returns the xmlnsL3V1V2 used by this libSBML package extension.
+   * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+   * by this libSBML extension.
    *
-   * @return the xmlnsL3V1V2 as a string.
+   * @return the XML namespace, as a string.
+   *
+   * @copydetails doc_note_static_methods
    */
   static const std::string& getXmlnsL3V1V2();
 
 
   /**
-   * Creates a new VersExtension.
+   * Creates a new VersExtension instance.
    */
   VersExtension();
 
@@ -153,7 +170,7 @@ public:
 
 
   /**
-   * Returns the name of this package ("vers").
+   * Returns the name of this SBML Level&nbsp;3 package ("vers").
    *
    * @return a string representing the name of this package ("vers").
    */
@@ -161,8 +178,8 @@ public:
 
 
   /**
-   * Returns the namespace URI corresponding to the given SBML Level, Version
-   * and PackageVersion
+   * Returns a string representing the SBML XML namespace of this SBML
+   * Level&nbsp;3 package.
    *
    * @param sbmlLevel, the level of SBML
    *
@@ -171,6 +188,12 @@ public:
    * @param pkgVersion the version of this package
    *
    * @return a string representing the name of this package ("vers").
+   *
+   * The namespace URI constructed by this method corresponds to the
+   * combination of the Level and Version of SBML, and the Version of the SBML
+   * Level&nbsp;3 package. (At the time of this writing, the only SBML Level
+   * that supports packages is Level&nbsp;3, so the value of @p sbmlLevel is
+   * necessarily always <code>3</code>.)
    */
   virtual const std::string& getURI(unsigned int sbmlLevel,
                                     unsigned int sbmlVersion,
@@ -183,32 +206,34 @@ public:
    * @param uri the string of the URI that represents one of the versions of
    * the "vers" package
    *
-   * @return the SBML Level with the given URI of this package, or @c 0 if the
+   * @return the SBML Level for the given URI of this package, or @c 0 if the
    * given URI is invalid.
    */
   virtual unsigned int getLevel(const std::string& uri) const;
 
 
   /**
-   * Returns the SBML Version for the given URI of this package.
+   * Returns the Version within the SBML Level for the given URI of this
+   * package.
    *
    * @param uri the string of the URI that represents one of the versions of
    * the "vers" package
    *
-   * @return the SBML Version with the given URI of this package, or @c 0 if
-   * the given URI is invalid.
+   * @return the SBML Version within the SBML Level for the given URI of this
+   * package, or @c 0 if the given URI is invalid.
    */
   virtual unsigned int getVersion(const std::string& uri) const;
 
 
   /**
-   * Returns the SBML PackageVersion for the given URI of this package.
+   * Returns the SBML Level&nbsp;3 package version for the given URI of this
+   * package.
    *
    * @param uri the string of the URI that represents one of the versions of
    * the "vers" package
    *
-   * @return the SBML PackageVersion with the given URI of this package, or @c
-   * 0 if the given URI is invalid.
+   * @return the version of the SBML Level&nbsp;3 package for the given URI of
+   * this package, or @c 0 if the given URI is invalid.
    */
   virtual unsigned int getPackageVersion(const std::string& uri) const;
 
@@ -227,11 +252,16 @@ public:
 
 
   /**
-   * Returns the given SBMLVersTypeCode_t(int) as a string.
+   * Takes a type code of the &ldquo;vers&rdquo; package and returns a string
+   * describing the code.
    *
-   * @param typeCode a TypeCode from the "vers" package.
+   * @param typeCode a libSBML type code defined by the libSBML extension
+   * implementing support for the SBML Level&nbsp;3 &ldquo;vers&rdquo; package.
    *
-   * @return the typecode as a string.
+   * @return a text string representing the type code given by @p typeCode. If
+   * the type code is unrecognized for this implementation of the libSBML
+   * &ldquo;vers&rdquo; package, the string returned will be <code>"(Unknown
+   * SBML Vers Type)"</code>.
    */
   virtual const char* getStringFromTypeCode(int typeCode) const;
 
@@ -277,6 +307,19 @@ public:
    * VersSBMLErrorTable.
    */
   virtual unsigned int getErrorIdOffset() const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Returns true if the package has multiple versions.
+   *
+   * @return true if multiple versions, false otherwise
+   */
+  virtual bool hasMultipleVersions() const;
 
   /** @endcond */
 
