@@ -31,7 +31,7 @@
  # ------------------------------------------------------------------------ -->
  #
 
-option(ENABLE_SPATIAL        "Enable libSBML support for the 'spatial' package"      OFF)
+option(ENABLE_SPATIAL     "Enable libSBML support for the SBML Level 3 Spatial ('spatial') package."      OFF)
 
  # provide summary status
 list(APPEND LIBSBML_PACKAGE_SUMMARY "SBML 'spatial' package  = ${ENABLE_SPATIAL}")

@@ -73,10 +73,12 @@ class PackageFile():
 
     def write_top_level_file(self):
         self.fileout.skip_line()
-        self.fileout.write_line_verbatim('option(ENABLE_{}        \"Enable lib'
-                                         '{} support for the \'{}\' package\"'
+        self.fileout.write_line_verbatim('option(ENABLE_{0}     \"Enable lib'
+                                         '{1} support for the {1} Level 3 '
+                                         '{2} (\'{3}\') package.\"'
                                          '      OFF)'.format(self.cap_package,
                                                              self.cap_language,
+                                                             self.up_package,
                                                              self.package))
         self.fileout.skip_line()
         self.fileout.write_comment_line('provide summary status')
