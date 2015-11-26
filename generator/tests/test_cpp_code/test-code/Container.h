@@ -1,6 +1,6 @@
 /**
  * @file Container.h
- * @brief Definition of Container.
+ * @brief Definition of the Container class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

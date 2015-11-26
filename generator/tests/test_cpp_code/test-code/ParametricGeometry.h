@@ -1,6 +1,6 @@
 /**
  * @file ParametricGeometry.h
- * @brief Definition of ParametricGeometry.
+ * @brief Definition of the ParametricGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file Transition.cpp
- * @brief Implementation of Transition.
+ * @brief Implementation of the Transition class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

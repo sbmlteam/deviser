@@ -1,6 +1,6 @@
 /**
  * @file CSGSetOperator.h
- * @brief Definition of CSGSetOperator.
+ * @brief Definition of the CSGSetOperator class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file MyTestClass.cpp
- * @brief Implementation of MyTestClass.
+ * @brief Implementation of the MyTestClass class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

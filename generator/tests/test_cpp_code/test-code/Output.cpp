@@ -1,6 +1,6 @@
 /**
  * @file Output.cpp
- * @brief Implementation of Output.
+ * @brief Implementation of the Output class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

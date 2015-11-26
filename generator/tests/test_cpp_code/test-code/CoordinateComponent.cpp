@@ -1,6 +1,6 @@
 /**
  * @file CoordinateComponent.cpp
- * @brief Implementation of CoordinateComponent.
+ * @brief Implementation of the CoordinateComponent class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

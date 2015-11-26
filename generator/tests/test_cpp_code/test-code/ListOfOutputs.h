@@ -1,6 +1,6 @@
 /**
  * @file ListOfOutputs.h
- * @brief Definition of ListOfOutputs.
+ * @brief Definition of the ListOfOutputs class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

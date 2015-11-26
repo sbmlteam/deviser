@@ -1,6 +1,6 @@
 /**
  * @file MySEDClass.cpp
- * @brief Implementation of MySEDClass.
+ * @brief Implementation of the MySEDClass class.
  * @author DEVISER
  */
 #include <sedml/MySEDClass.h>

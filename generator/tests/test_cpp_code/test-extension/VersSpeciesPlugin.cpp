@@ -1,6 +1,6 @@
 /**
  * @file VersSpeciesPlugin.cpp
- * @brief Implementation of VersSpeciesPlugin.
+ * @brief Implementation of the VersSpeciesPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

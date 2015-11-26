@@ -1,6 +1,6 @@
 /**
  * @file SpatialReactionPlugin.cpp
- * @brief Implementation of SpatialReactionPlugin.
+ * @brief Implementation of the SpatialReactionPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

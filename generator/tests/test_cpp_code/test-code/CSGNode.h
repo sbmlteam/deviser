@@ -1,6 +1,6 @@
 /**
  * @file CSGNode.h
- * @brief Definition of CSGNode.
+ * @brief Definition of the CSGNode class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

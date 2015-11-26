@@ -1,6 +1,6 @@
 /**
  * @file Transition.h
- * @brief Definition of Transition.
+ * @brief Definition of the Transition class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

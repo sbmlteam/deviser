@@ -1,6 +1,6 @@
 /**
  * @file Boundary.cpp
- * @brief Implementation of Boundary.
+ * @brief Implementation of the Boundary class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file Container.cpp
- * @brief Implementation of Container.
+ * @brief Implementation of the Container class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file FunctionTerm.h
- * @brief Definition of FunctionTerm.
+ * @brief Definition of the FunctionTerm class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

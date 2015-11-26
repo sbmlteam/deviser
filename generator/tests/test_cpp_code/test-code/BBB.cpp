@@ -1,6 +1,6 @@
 /**
  * @file BBB.cpp
- * @brief Implementation of BBB.
+ * @brief Implementation of the BBB class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

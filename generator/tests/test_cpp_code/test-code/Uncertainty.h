@@ -1,6 +1,6 @@
 /**
  * @file Uncertainty.h
- * @brief Definition of Uncertainty.
+ * @brief Definition of the Uncertainty class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

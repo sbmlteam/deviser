@@ -1,6 +1,6 @@
 /**
  * @file MySEDClass.h
- * @brief Definition of MySEDClass.
+ * @brief Definition of the MySEDClass class.
  * @author DEVISER
  */
 

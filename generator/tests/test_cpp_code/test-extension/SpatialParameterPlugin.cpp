@@ -1,6 +1,6 @@
 /**
  * @file SpatialParameterPlugin.cpp
- * @brief Implementation of SpatialParameterPlugin.
+ * @brief Implementation of the SpatialParameterPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

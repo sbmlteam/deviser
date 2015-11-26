@@ -1,6 +1,6 @@
 /**
  * @file ListOfCSGNodes.h
- * @brief Definition of ListOfCSGNodes.
+ * @brief Definition of the ListOfCSGNodes class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

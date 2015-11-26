@@ -1,6 +1,6 @@
 /**
  * @file SpatialSBMLDocumentPlugin.h
- * @brief Definition of SpatialSBMLDocumentPlugin.
+ * @brief Definition of the SpatialSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file ListOfAnalyticVolumes.h
- * @brief Definition of ListOfAnalyticVolumes.
+ * @brief Definition of the ListOfAnalyticVolumes class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

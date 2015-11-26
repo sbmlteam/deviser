@@ -1,6 +1,6 @@
 /**
  * @file MixedGeometry.h
- * @brief Definition of MixedGeometry.
+ * @brief Definition of the MixedGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

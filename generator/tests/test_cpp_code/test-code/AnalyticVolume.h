@@ -1,6 +1,6 @@
 /**
  * @file AnalyticVolume.h
- * @brief Definition of AnalyticVolume.
+ * @brief Definition of the AnalyticVolume class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

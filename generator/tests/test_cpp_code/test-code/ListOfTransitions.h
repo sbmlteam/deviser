@@ -1,6 +1,6 @@
 /**
  * @file ListOfTransitions.h
- * @brief Definition of ListOfTransitions.
+ * @brief Definition of the ListOfTransitions class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

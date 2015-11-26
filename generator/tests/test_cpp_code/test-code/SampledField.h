@@ -1,6 +1,6 @@
 /**
  * @file SampledField.h
- * @brief Definition of SampledField.
+ * @brief Definition of the SampledField class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

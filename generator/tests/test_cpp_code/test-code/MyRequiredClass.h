@@ -1,6 +1,6 @@
 /**
  * @file MyRequiredClass.h
- * @brief Definition of MyRequiredClass.
+ * @brief Definition of the MyRequiredClass class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

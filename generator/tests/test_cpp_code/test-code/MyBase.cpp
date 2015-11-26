@@ -1,6 +1,6 @@
 /**
  * @file MyBase.cpp
- * @brief Implementation of MyBase.
+ * @brief Implementation of the MyBase class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file Uncertainty.cpp
- * @brief Implementation of Uncertainty.
+ * @brief Implementation of the Uncertainty class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

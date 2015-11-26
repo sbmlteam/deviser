@@ -1,6 +1,6 @@
 /**
  * @file ListOfMyLoTests.cpp
- * @brief Implementation of ListOfMyLoTests.
+ * @brief Implementation of the ListOfMyLoTests class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

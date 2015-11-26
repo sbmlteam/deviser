@@ -1,6 +1,6 @@
 /**
  * @file QualModelPlugin.cpp
- * @brief Implementation of QualModelPlugin.
+ * @brief Implementation of the QualModelPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

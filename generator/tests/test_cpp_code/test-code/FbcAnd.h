@@ -1,6 +1,6 @@
 /**
  * @file FbcAnd.h
- * @brief Definition of FbcAnd.
+ * @brief Definition of the FbcAnd class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

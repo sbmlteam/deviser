@@ -1,6 +1,6 @@
 /**
  * @file QualSBMLErrorTable.h
- * @brief Definition of QualSBMLErrorTable.
+ * @brief Definition of the QualSBMLErrorTable class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

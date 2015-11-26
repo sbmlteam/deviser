@@ -1,6 +1,6 @@
 /**
  * @file ParametricGeometry.cpp
- * @brief Implementation of ParametricGeometry.
+ * @brief Implementation of the ParametricGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file MyRequiredClass.cpp
- * @brief Implementation of MyRequiredClass.
+ * @brief Implementation of the MyRequiredClass class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

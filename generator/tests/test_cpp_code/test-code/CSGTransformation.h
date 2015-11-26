@@ -1,6 +1,6 @@
 /**
  * @file CSGTransformation.h
- * @brief Definition of CSGTransformation.
+ * @brief Definition of the CSGTransformation class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

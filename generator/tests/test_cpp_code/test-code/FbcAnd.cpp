@@ -1,6 +1,6 @@
 /**
  * @file FbcAnd.cpp
- * @brief Implementation of FbcAnd.
+ * @brief Implementation of the FbcAnd class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

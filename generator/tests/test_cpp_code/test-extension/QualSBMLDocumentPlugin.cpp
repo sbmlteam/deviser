@@ -1,6 +1,6 @@
 /**
  * @file QualSBMLDocumentPlugin.cpp
- * @brief Implementation of QualSBMLDocumentPlugin.
+ * @brief Implementation of the QualSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

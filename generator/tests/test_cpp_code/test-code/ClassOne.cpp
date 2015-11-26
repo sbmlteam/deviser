@@ -1,6 +1,6 @@
 /**
  * @file ClassOne.cpp
- * @brief Implementation of ClassOne.
+ * @brief Implementation of the ClassOne class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

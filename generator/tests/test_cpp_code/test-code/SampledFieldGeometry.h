@@ -1,6 +1,6 @@
 /**
  * @file SampledFieldGeometry.h
- * @brief Definition of SampledFieldGeometry.
+ * @brief Definition of the SampledFieldGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

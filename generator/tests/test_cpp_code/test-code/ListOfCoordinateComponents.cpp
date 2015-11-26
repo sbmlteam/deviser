@@ -1,6 +1,6 @@
 /**
  * @file ListOfCoordinateComponents.cpp
- * @brief Implementation of ListOfCoordinateComponents.
+ * @brief Implementation of the ListOfCoordinateComponents class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

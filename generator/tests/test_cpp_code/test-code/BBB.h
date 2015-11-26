@@ -1,6 +1,6 @@
 /**
  * @file BBB.h
- * @brief Definition of BBB.
+ * @brief Definition of the BBB class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

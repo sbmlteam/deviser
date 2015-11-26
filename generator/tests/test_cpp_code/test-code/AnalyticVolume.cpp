@@ -1,6 +1,6 @@
 /**
  * @file AnalyticVolume.cpp
- * @brief Implementation of AnalyticVolume.
+ * @brief Implementation of the AnalyticVolume class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

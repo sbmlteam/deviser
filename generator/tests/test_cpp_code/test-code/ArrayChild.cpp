@@ -1,6 +1,6 @@
 /**
  * @file ArrayChild.cpp
- * @brief Implementation of ArrayChild.
+ * @brief Implementation of the ArrayChild class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file VersModelPlugin.h
- * @brief Definition of VersModelPlugin.
+ * @brief Definition of the VersModelPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

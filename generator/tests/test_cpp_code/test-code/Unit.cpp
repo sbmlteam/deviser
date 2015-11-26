@@ -1,6 +1,6 @@
 /**
  * @file Unit.cpp
- * @brief Implementation of Unit.
+ * @brief Implementation of the Unit class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

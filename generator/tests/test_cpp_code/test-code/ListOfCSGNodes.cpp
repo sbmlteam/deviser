@@ -1,6 +1,6 @@
 /**
  * @file ListOfCSGNodes.cpp
- * @brief Implementation of ListOfCSGNodes.
+ * @brief Implementation of the ListOfCSGNodes class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

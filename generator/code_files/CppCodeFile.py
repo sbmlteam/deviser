@@ -48,7 +48,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
     def __init__(self, class_object):
 
         self.brief_description = \
-            'Implementation  of {}.'.format(class_object['name'])
+            'Implementation  of the {} class.'.format(class_object['name'])
         BaseCppFile.BaseCppFile.__init__(self, class_object['name'], 'cpp',
                                          class_object['attribs'])
 

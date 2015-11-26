@@ -1,6 +1,6 @@
 /**
  * @file ListOfMyLoTests.h
- * @brief Definition of ListOfMyLoTests.
+ * @brief Definition of the ListOfMyLoTests class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

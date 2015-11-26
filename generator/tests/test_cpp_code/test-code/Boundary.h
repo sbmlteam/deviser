@@ -1,6 +1,6 @@
 /**
  * @file Boundary.h
- * @brief Definition of Boundary.
+ * @brief Definition of the Boundary class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

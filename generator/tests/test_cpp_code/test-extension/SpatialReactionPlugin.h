@@ -1,6 +1,6 @@
 /**
  * @file SpatialReactionPlugin.h
- * @brief Definition of SpatialReactionPlugin.
+ * @brief Definition of the SpatialReactionPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

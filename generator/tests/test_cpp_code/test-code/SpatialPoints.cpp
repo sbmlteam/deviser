@@ -1,6 +1,6 @@
 /**
  * @file SpatialPoints.cpp
- * @brief Implementation of SpatialPoints.
+ * @brief Implementation of the SpatialPoints class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

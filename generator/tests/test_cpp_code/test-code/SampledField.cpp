@@ -1,6 +1,6 @@
 /**
  * @file SampledField.cpp
- * @brief Implementation of SampledField.
+ * @brief Implementation of the SampledField class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

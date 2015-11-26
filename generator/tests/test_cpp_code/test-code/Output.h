@@ -1,6 +1,6 @@
 /**
  * @file Output.h
- * @brief Definition of Output.
+ * @brief Definition of the Output class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

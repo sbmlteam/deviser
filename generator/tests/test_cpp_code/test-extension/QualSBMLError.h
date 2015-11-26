@@ -1,6 +1,6 @@
 /**
  * @file QualSBMLError.h
- * @brief Definition of QualSBMLError.
+ * @brief Definition of the QualSBMLError class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

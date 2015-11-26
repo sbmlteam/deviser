@@ -48,7 +48,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def __init__(self, class_object, represents_class=True):
 
         self.brief_description = \
-            'Definition of {}.'.format(class_object['name'])
+            'Definition of the {} class.'.format(class_object['name'])
         BaseCppFile.BaseCppFile.__init__(self, class_object['name'], 'h',
                                          class_object['attribs'])
 

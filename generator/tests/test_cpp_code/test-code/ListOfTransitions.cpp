@@ -1,6 +1,6 @@
 /**
  * @file ListOfTransitions.cpp
- * @brief Implementation of ListOfTransitions.
+ * @brief Implementation of the ListOfTransitions class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

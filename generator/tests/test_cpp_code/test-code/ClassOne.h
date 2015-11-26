@@ -1,6 +1,6 @@
 /**
  * @file ClassOne.h
- * @brief Definition of ClassOne.
+ * @brief Definition of the ClassOne class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file Unit.h
- * @brief Definition of Unit.
+ * @brief Definition of the Unit class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file MyLoTest.cpp
- * @brief Implementation of MyLoTest.
+ * @brief Implementation of the MyLoTest class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

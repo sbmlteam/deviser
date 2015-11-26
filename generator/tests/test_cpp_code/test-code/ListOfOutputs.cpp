@@ -1,6 +1,6 @@
 /**
  * @file ListOfOutputs.cpp
- * @brief Implementation of ListOfOutputs.
+ * @brief Implementation of the ListOfOutputs class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

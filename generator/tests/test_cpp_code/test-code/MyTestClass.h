@@ -1,6 +1,6 @@
 /**
  * @file MyTestClass.h
- * @brief Definition of MyTestClass.
+ * @brief Definition of the MyTestClass class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

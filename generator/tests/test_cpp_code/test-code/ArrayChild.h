@@ -1,6 +1,6 @@
 /**
  * @file ArrayChild.h
- * @brief Definition of ArrayChild.
+ * @brief Definition of the ArrayChild class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

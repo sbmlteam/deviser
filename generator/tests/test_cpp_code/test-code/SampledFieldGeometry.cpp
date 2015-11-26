@@ -1,6 +1,6 @@
 /**
  * @file SampledFieldGeometry.cpp
- * @brief Implementation of SampledFieldGeometry.
+ * @brief Implementation of the SampledFieldGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file CSGTransformation.cpp
- * @brief Implementation of CSGTransformation.
+ * @brief Implementation of the CSGTransformation class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

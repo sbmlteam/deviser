@@ -1,6 +1,6 @@
 /**
  * @file CSGNode.cpp
- * @brief Implementation of CSGNode.
+ * @brief Implementation of the CSGNode class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

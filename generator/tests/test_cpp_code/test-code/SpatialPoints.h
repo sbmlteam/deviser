@@ -1,6 +1,6 @@
 /**
  * @file SpatialPoints.h
- * @brief Definition of SpatialPoints.
+ * @brief Definition of the SpatialPoints class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file ListOfFunctionTerms.cpp
- * @brief Implementation of ListOfFunctionTerms.
+ * @brief Implementation of the ListOfFunctionTerms class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

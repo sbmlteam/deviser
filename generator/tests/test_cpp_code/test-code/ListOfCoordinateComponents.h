@@ -1,6 +1,6 @@
 /**
  * @file ListOfCoordinateComponents.h
- * @brief Definition of ListOfCoordinateComponents.
+ * @brief Definition of the ListOfCoordinateComponents class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

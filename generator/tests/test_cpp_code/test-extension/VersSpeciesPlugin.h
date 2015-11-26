@@ -1,6 +1,6 @@
 /**
  * @file VersSpeciesPlugin.h
- * @brief Definition of VersSpeciesPlugin.
+ * @brief Definition of the VersSpeciesPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

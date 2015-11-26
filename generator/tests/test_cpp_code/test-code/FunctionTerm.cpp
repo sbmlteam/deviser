@@ -1,6 +1,6 @@
 /**
  * @file FunctionTerm.cpp
- * @brief Implementation of FunctionTerm.
+ * @brief Implementation of the FunctionTerm class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

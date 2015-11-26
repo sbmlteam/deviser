@@ -1,6 +1,6 @@
 /**
  * @file SpatialParameterPlugin.h
- * @brief Definition of SpatialParameterPlugin.
+ * @brief Definition of the SpatialParameterPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /**
  * @file QualSBMLDocumentPlugin.h
- * @brief Definition of QualSBMLDocumentPlugin.
+ * @brief Definition of the QualSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

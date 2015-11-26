@@ -1,6 +1,6 @@
 /**
  * @file CoordinateComponent.h
- * @brief Definition of CoordinateComponent.
+ * @brief Definition of the CoordinateComponent class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

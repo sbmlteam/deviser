@@ -1,6 +1,6 @@
 /**
  * @file SpatialCompartmentPlugin.cpp
- * @brief Implementation of SpatialCompartmentPlugin.
+ * @brief Implementation of the SpatialCompartmentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

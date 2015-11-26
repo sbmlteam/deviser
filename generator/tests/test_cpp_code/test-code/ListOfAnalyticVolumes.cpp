@@ -1,6 +1,6 @@
 /**
  * @file ListOfAnalyticVolumes.cpp
- * @brief Implementation of ListOfAnalyticVolumes.
+ * @brief Implementation of the ListOfAnalyticVolumes class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

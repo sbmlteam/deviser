@@ -1,6 +1,6 @@
 /**
  * @file SpatialSBMLDocumentPlugin.cpp
- * @brief Implementation of SpatialSBMLDocumentPlugin.
+ * @brief Implementation of the SpatialSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

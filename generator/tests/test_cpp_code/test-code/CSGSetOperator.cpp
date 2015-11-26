@@ -1,6 +1,6 @@
 /**
  * @file CSGSetOperator.cpp
- * @brief Implementation of CSGSetOperator.
+ * @brief Implementation of the CSGSetOperator class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

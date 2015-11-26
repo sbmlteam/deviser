@@ -1,6 +1,6 @@
 /**
  * @file MyBase.h
- * @brief Definition of MyBase.
+ * @brief Definition of the MyBase class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------

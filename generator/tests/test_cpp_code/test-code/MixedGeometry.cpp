@@ -1,6 +1,6 @@
 /**
  * @file MixedGeometry.cpp
- * @brief Implementation of MixedGeometry.
+ * @brief Implementation of the MixedGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
