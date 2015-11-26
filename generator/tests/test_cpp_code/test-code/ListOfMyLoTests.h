@@ -211,8 +211,8 @@ public:
    * @param sid a string representing the identifier of the MyLoTest to
    * retrieve.
    *
-   * @return the MyLoTest in this ListOfMyLoTests based on the identifier or
-   * NULL if no such MyLoTest exists.
+   * @return the MyLoTest in this ListOfMyLoTests with the given id or NULL if
+   * no such MyLoTest exists.
    *
    * @see size()
    */
@@ -225,8 +225,8 @@ public:
    * @param sid a string representing the identifier of the MyLoTest to
    * retrieve.
    *
-   * @return the MyLoTest in this ListOfMyLoTests based on the identifier or
-   * NULL if no such MyLoTest exists.
+   * @return the MyLoTest in this ListOfMyLoTests with the given id or NULL if
+   * no such MyLoTest exists.
    *
    * @see size()
    */
@@ -498,8 +498,8 @@ ListOfMyLoTests_getMyLoTest(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the MyLoTest_t to
  * retrieve.
  *
- * @return the MyLoTest_t in this ListOf_t based on the identifier or NULL if
- * no such MyLoTest_t exists.
+ * @return the MyLoTest_t in this ListOf_t with the given id or NULL if no such
+ * MyLoTest_t exists.
  *
  * @memberof MyLoTest_t
  */

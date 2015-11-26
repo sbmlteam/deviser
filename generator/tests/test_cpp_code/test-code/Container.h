@@ -158,9 +158,9 @@ public:
    * @param n, an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in this Container.
+   * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
    *
-   * @see getNumMyLoTests
+   * @see getNumMyLoTests()
    */
   MyLoTest* getMyLoTest(unsigned int n);
 
@@ -171,9 +171,9 @@ public:
    * @param n, an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in this Container.
+   * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
    *
-   * @see getNumMyLoTests
+   * @see getNumMyLoTests()
    */
   const MyLoTest* getMyLoTest(unsigned int n) const;
 
@@ -479,7 +479,7 @@ Container_getListOfMyLoTests(Container_t* c);
  * @param n, an unsigned int representing the index of the MyLoTest_t to
  * retrieve.
  *
- * @return the nth MyLoTest_t in this Container_t.
+ * @return the nth MyLoTest_t in the ListOfMyLoTests within this Container.
  *
  * @memberof Container_t
  */

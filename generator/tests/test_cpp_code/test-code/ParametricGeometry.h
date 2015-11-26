@@ -227,9 +227,10 @@ public:
    * @param n, an unsigned int representing the index of the ParametricObject
    * to retrieve.
    *
-   * @return the nth ParametricObject in this ParametricGeometry.
+   * @return the nth ParametricObject in the ListOfParametricObjects within
+   * this ParametricGeometry.
    *
-   * @see getNumParametricObjects
+   * @see getNumParametricObjects()
    */
   ParametricObject* getParametricObject(unsigned int n);
 
@@ -240,9 +241,10 @@ public:
    * @param n, an unsigned int representing the index of the ParametricObject
    * to retrieve.
    *
-   * @return the nth ParametricObject in this ParametricGeometry.
+   * @return the nth ParametricObject in the ListOfParametricObjects within
+   * this ParametricGeometry.
    *
-   * @see getNumParametricObjects
+   * @see getNumParametricObjects()
    */
   const ParametricObject* getParametricObject(unsigned int n) const;
 
@@ -254,10 +256,12 @@ public:
    * @param sid a string representing the identifier of the ParametricObject to
    * retrieve.
    *
-   * @return the ParametricObject in this ParametricGeometry based on the
-   * identifier or NULL if no such ParametricObject exists.
+   * @return the ParametricObject in the ListOfParametricObjects within this
+   * ParametricGeometry with the given id or NULL if no such ParametricObject
+   * exists.
    *
-   * @see getNumParametricObjects
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
    */
   ParametricObject* getParametricObject(const std::string& sid);
 
@@ -269,10 +273,12 @@ public:
    * @param sid a string representing the identifier of the ParametricObject to
    * retrieve.
    *
-   * @return the ParametricObject in this ParametricGeometry based on the
-   * identifier or NULL if no such ParametricObject exists.
+   * @return the ParametricObject in the ListOfParametricObjects within this
+   * ParametricGeometry with the given id or NULL if no such ParametricObject
+   * exists.
    *
-   * @see getNumParametricObjects
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
    */
   const ParametricObject* getParametricObject(const std::string& sid) const;
 
@@ -762,7 +768,8 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg);
  * @param n, an unsigned int representing the index of the ParametricObject_t
  * to retrieve.
  *
- * @return the nth ParametricObject_t in this ParametricGeometry_t.
+ * @return the nth ParametricObject_t in the ListOfParametricObjects within
+ * this ParametricGeometry.
  *
  * @memberof ParametricGeometry_t
  */
@@ -781,8 +788,9 @@ ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
  * @param sid a string representing the identifier of the ParametricObject_t to
  * retrieve.
  *
- * @return the ParametricObject_t in this ParametricGeometry_t based on the
- * identifier or NULL if no such ParametricObject_t exists.
+ * @return the ParametricObject_t in the ListOfParametricObjects within this
+ * ParametricGeometry with the given id or NULL if no such ParametricObject_t
+ * exists.
  *
  * @memberof ParametricGeometry_t
  */

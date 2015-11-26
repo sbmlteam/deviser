@@ -167,8 +167,8 @@ public:
    * @param sid a string representing the identifier of the CoordinateComponent
    * to retrieve.
    *
-   * @return the CoordinateComponent in this ListOfCoordinateComponents based
-   * on the identifier or NULL if no such CoordinateComponent exists.
+   * @return the CoordinateComponent in this ListOfCoordinateComponents with
+   * the given id or NULL if no such CoordinateComponent exists.
    *
    * @see size()
    */
@@ -182,8 +182,8 @@ public:
    * @param sid a string representing the identifier of the CoordinateComponent
    * to retrieve.
    *
-   * @return the CoordinateComponent in this ListOfCoordinateComponents based
-   * on the identifier or NULL if no such CoordinateComponent exists.
+   * @return the CoordinateComponent in this ListOfCoordinateComponents with
+   * the given id or NULL if no such CoordinateComponent exists.
    *
    * @see size()
    */
@@ -384,8 +384,8 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
  * @param sid a string representing the identifier of the CoordinateComponent_t
  * to retrieve.
  *
- * @return the CoordinateComponent_t in this ListOf_t based on the identifier
- * or NULL if no such CoordinateComponent_t exists.
+ * @return the CoordinateComponent_t in this ListOf_t with the given id or NULL
+ * if no such CoordinateComponent_t exists.
  *
  * @memberof CoordinateComponent_t
  */

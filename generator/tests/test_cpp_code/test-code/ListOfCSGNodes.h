@@ -170,8 +170,8 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this ListOfCSGNodes based on the identifier or NULL
-   * if no such CSGNode exists.
+   * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
+   * such CSGNode exists.
    *
    * @see size()
    */
@@ -184,8 +184,8 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this ListOfCSGNodes based on the identifier or NULL
-   * if no such CSGNode exists.
+   * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
+   * such CSGNode exists.
    *
    * @see size()
    */
@@ -455,8 +455,8 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the CSGNode_t to
  * retrieve.
  *
- * @return the CSGNode_t in this ListOf_t based on the identifier or NULL if no
- * such CSGNode_t exists.
+ * @return the CSGNode_t in this ListOf_t with the given id or NULL if no such
+ * CSGNode_t exists.
  *
  * @memberof CSGNode_t
  */

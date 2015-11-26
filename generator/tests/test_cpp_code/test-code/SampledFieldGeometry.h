@@ -209,9 +209,10 @@ public:
    * @param n, an unsigned int representing the index of the SampledVolume to
    * retrieve.
    *
-   * @return the nth SampledVolume in this SampledFieldGeometry.
+   * @return the nth SampledVolume in the ListOfSampledVolumes within this
+   * SampledFieldGeometry.
    *
-   * @see getNumSampledVolumes
+   * @see getNumSampledVolumes()
    */
   SampledVolume* getSampledVolume(unsigned int n);
 
@@ -222,9 +223,10 @@ public:
    * @param n, an unsigned int representing the index of the SampledVolume to
    * retrieve.
    *
-   * @return the nth SampledVolume in this SampledFieldGeometry.
+   * @return the nth SampledVolume in the ListOfSampledVolumes within this
+   * SampledFieldGeometry.
    *
-   * @see getNumSampledVolumes
+   * @see getNumSampledVolumes()
    */
   const SampledVolume* getSampledVolume(unsigned int n) const;
 
@@ -235,10 +237,12 @@ public:
    * @param sid a string representing the identifier of the SampledVolume to
    * retrieve.
    *
-   * @return the SampledVolume in this SampledFieldGeometry based on the
-   * identifier or NULL if no such SampledVolume exists.
+   * @return the SampledVolume in the ListOfSampledVolumes within this
+   * SampledFieldGeometry with the given id or NULL if no such SampledVolume
+   * exists.
    *
-   * @see getNumSampledVolumes
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
    */
   SampledVolume* getSampledVolume(const std::string& sid);
 
@@ -249,10 +253,12 @@ public:
    * @param sid a string representing the identifier of the SampledVolume to
    * retrieve.
    *
-   * @return the SampledVolume in this SampledFieldGeometry based on the
-   * identifier or NULL if no such SampledVolume exists.
+   * @return the SampledVolume in the ListOfSampledVolumes within this
+   * SampledFieldGeometry with the given id or NULL if no such SampledVolume
+   * exists.
    *
-   * @see getNumSampledVolumes
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
    */
   const SampledVolume* getSampledVolume(const std::string& sid) const;
 
@@ -736,7 +742,8 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
  * @param n, an unsigned int representing the index of the SampledVolume_t to
  * retrieve.
  *
- * @return the nth SampledVolume_t in this SampledFieldGeometry_t.
+ * @return the nth SampledVolume_t in the ListOfSampledVolumes within this
+ * SampledFieldGeometry.
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -755,8 +762,9 @@ SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
  * @param sid a string representing the identifier of the SampledVolume_t to
  * retrieve.
  *
- * @return the SampledVolume_t in this SampledFieldGeometry_t based on the
- * identifier or NULL if no such SampledVolume_t exists.
+ * @return the SampledVolume_t in the ListOfSampledVolumes within this
+ * SampledFieldGeometry with the given id or NULL if no such SampledVolume_t
+ * exists.
  *
  * @memberof SampledFieldGeometry_t
  */

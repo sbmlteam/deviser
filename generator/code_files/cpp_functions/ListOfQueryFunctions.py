@@ -125,6 +125,14 @@ class ListOfQueryFunctions():
         if not self.is_cpp_api and not is_const:
             return
 
+        if self.is_list_of:
+            return_string = 'in this {}'.format(self.object_name)
+        else:
+            return_string = 'in the {} within this ' \
+                            '{}'.format(strFunctions.
+                                        cap_list_of_name(self.child_name),
+                                        self.class_name)
+
         # useful variables
         virtual = True if self.is_list_of else False
         # create comment parts
@@ -137,12 +145,12 @@ class ListOfQueryFunctions():
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param n, an unsigned int representing the index '
                       'of the {} to retrieve.'.format(self.object_child_name))
-        return_lines = ['@return the nth {} in this {}.'.format(
-            self.object_child_name, self.object_name)]
+        return_lines = ['@return the nth {} {}.'.format(
+            self.object_child_name, return_string)]
         additional = []
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{}'.format(self.plural)]
+                else ['@see getNum{}()'.format(self.plural)]
 
         # create the function declaration
         arguments = []
@@ -210,7 +218,16 @@ class ListOfQueryFunctions():
 
         # useful variables
         virtual = True if self.is_list_of else False
+        used_c_name = strFunctions.remove_prefix(self.child_name)
+        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
 
+        if self.is_list_of:
+            return_string = 'in this {}'.format(self.object_name)
+        else:
+            return_string = 'in the {} within this ' \
+                            '{}'.format(strFunctions.
+                                        cap_list_of_name(self.child_name),
+                                        self.class_name)
         # create comment
         title_line = 'Get {} {} from the {} based on its identifier.'\
             .format(self.indef_name, self.object_child_name, self.object_name)
@@ -220,17 +237,19 @@ class ListOfQueryFunctions():
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid a string representing the identifier '
                       'of the {} to retrieve.'.format(self.object_child_name))
-        return_lines = ['@return the {0} in this {1} based on the '
-                        'identifier or NULL if no such {0} exists.'
-                        .format(self.object_child_name, self.object_name)]
+        return_lines = ['@return the {0} {1} with the given id'
+                        ' or NULL if no such {0} exists.'
+                        .format(self.object_child_name, return_string)]
         additional = []
         if self.is_cpp_api:
-            additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{}'.format(self.plural)]
+            if self.is_list_of:
+                additional = ['@see size()']
+            else:
+                additional.append('@see get{}(unsigned int '
+                                  'n)'.format(used_cpp_name))
+                additional.append('@see getNum{}()'.format(self.plural))
 
         # create function declaration
-        used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
         if self.is_cpp_api:
             function = 'get' if self.is_list_of \
                 else 'get{}'.format(used_cpp_name)

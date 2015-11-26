@@ -395,9 +395,10 @@ public:
    * @param n, an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in this VersSpeciesPlugin.
+   * @return the nth Another in the ListOfAnothers within this
+   * VersSpeciesPlugin.
    *
-   * @see getNumAnothers
+   * @see getNumAnothers()
    */
   Another* getAnother(unsigned int n);
 
@@ -408,9 +409,10 @@ public:
    * @param n, an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in this VersSpeciesPlugin.
+   * @return the nth Another in the ListOfAnothers within this
+   * VersSpeciesPlugin.
    *
-   * @see getNumAnothers
+   * @see getNumAnothers()
    */
   const Another* getAnother(unsigned int n) const;
 
@@ -421,10 +423,11 @@ public:
    * @param sid a string representing the identifier of the Another to
    * retrieve.
    *
-   * @return the Another in this VersSpeciesPlugin based on the identifier or
-   * NULL if no such Another exists.
+   * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
+   * with the given id or NULL if no such Another exists.
    *
-   * @see getNumAnothers
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
    */
   Another* getAnother(const std::string& sid);
 
@@ -435,10 +438,11 @@ public:
    * @param sid a string representing the identifier of the Another to
    * retrieve.
    *
-   * @return the Another in this VersSpeciesPlugin based on the identifier or
-   * NULL if no such Another exists.
+   * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
+   * with the given id or NULL if no such Another exists.
    *
-   * @see getNumAnothers
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
    */
   const Another* getAnother(const std::string& sid) const;
 

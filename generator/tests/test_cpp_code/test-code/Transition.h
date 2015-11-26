@@ -245,9 +245,9 @@ public:
    *
    * @param n, an unsigned int representing the index of the Input to retrieve.
    *
-   * @return the nth Input in this Transition.
+   * @return the nth Input in the ListOfInputs within this Transition.
    *
-   * @see getNumInputs
+   * @see getNumInputs()
    */
   Input* getInput(unsigned int n);
 
@@ -257,9 +257,9 @@ public:
    *
    * @param n, an unsigned int representing the index of the Input to retrieve.
    *
-   * @return the nth Input in this Transition.
+   * @return the nth Input in the ListOfInputs within this Transition.
    *
-   * @see getNumInputs
+   * @see getNumInputs()
    */
   const Input* getInput(unsigned int n) const;
 
@@ -269,10 +269,11 @@ public:
    *
    * @param sid a string representing the identifier of the Input to retrieve.
    *
-   * @return the Input in this Transition based on the identifier or NULL if no
-   * such Input exists.
+   * @return the Input in the ListOfInputs within this Transition with the
+   * given id or NULL if no such Input exists.
    *
-   * @see getNumInputs
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
    */
   Input* getInput(const std::string& sid);
 
@@ -282,10 +283,11 @@ public:
    *
    * @param sid a string representing the identifier of the Input to retrieve.
    *
-   * @return the Input in this Transition based on the identifier or NULL if no
-   * such Input exists.
+   * @return the Input in the ListOfInputs within this Transition with the
+   * given id or NULL if no such Input exists.
    *
-   * @see getNumInputs
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
    */
   const Input* getInput(const std::string& sid) const;
 
@@ -403,9 +405,9 @@ public:
    * @param n, an unsigned int representing the index of the Output to
    * retrieve.
    *
-   * @return the nth Output in this Transition.
+   * @return the nth Output in the ListOfOutputs within this Transition.
    *
-   * @see getNumOutputs
+   * @see getNumOutputs()
    */
   Output* getOutput(unsigned int n);
 
@@ -416,9 +418,9 @@ public:
    * @param n, an unsigned int representing the index of the Output to
    * retrieve.
    *
-   * @return the nth Output in this Transition.
+   * @return the nth Output in the ListOfOutputs within this Transition.
    *
-   * @see getNumOutputs
+   * @see getNumOutputs()
    */
   const Output* getOutput(unsigned int n) const;
 
@@ -428,10 +430,11 @@ public:
    *
    * @param sid a string representing the identifier of the Output to retrieve.
    *
-   * @return the Output in this Transition based on the identifier or NULL if
-   * no such Output exists.
+   * @return the Output in the ListOfOutputs within this Transition with the
+   * given id or NULL if no such Output exists.
    *
-   * @see getNumOutputs
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
    */
   Output* getOutput(const std::string& sid);
 
@@ -441,10 +444,11 @@ public:
    *
    * @param sid a string representing the identifier of the Output to retrieve.
    *
-   * @return the Output in this Transition based on the identifier or NULL if
-   * no such Output exists.
+   * @return the Output in the ListOfOutputs within this Transition with the
+   * given id or NULL if no such Output exists.
    *
-   * @see getNumOutputs
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
    */
   const Output* getOutput(const std::string& sid) const;
 
@@ -562,9 +566,10 @@ public:
    * @param n, an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
-   * @return the nth FunctionTerm in this Transition.
+   * @return the nth FunctionTerm in the ListOfFunctionTerms within this
+   * Transition.
    *
-   * @see getNumFunctionTerms
+   * @see getNumFunctionTerms()
    */
   FunctionTerm* getFunctionTerm(unsigned int n);
 
@@ -575,9 +580,10 @@ public:
    * @param n, an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
-   * @return the nth FunctionTerm in this Transition.
+   * @return the nth FunctionTerm in the ListOfFunctionTerms within this
+   * Transition.
    *
-   * @see getNumFunctionTerms
+   * @see getNumFunctionTerms()
    */
   const FunctionTerm* getFunctionTerm(unsigned int n) const;
 
@@ -1122,7 +1128,7 @@ Transition_getListOfInputs(Transition_t* t);
  *
  * @param n, an unsigned int representing the index of the Input_t to retrieve.
  *
- * @return the nth Input_t in this Transition_t.
+ * @return the nth Input_t in the ListOfInputs within this Transition.
  *
  * @memberof Transition_t
  */
@@ -1138,8 +1144,8 @@ Transition_getInput(Transition_t* t, unsigned int n);
  *
  * @param sid a string representing the identifier of the Input_t to retrieve.
  *
- * @return the Input_t in this Transition_t based on the identifier or NULL if
- * no such Input_t exists.
+ * @return the Input_t in the ListOfInputs within this Transition with the
+ * given id or NULL if no such Input_t exists.
  *
  * @memberof Transition_t
  */
@@ -1270,7 +1276,7 @@ Transition_getListOfOutputs(Transition_t* t);
  * @param n, an unsigned int representing the index of the Output_t to
  * retrieve.
  *
- * @return the nth Output_t in this Transition_t.
+ * @return the nth Output_t in the ListOfOutputs within this Transition.
  *
  * @memberof Transition_t
  */
@@ -1286,8 +1292,8 @@ Transition_getOutput(Transition_t* t, unsigned int n);
  *
  * @param sid a string representing the identifier of the Output_t to retrieve.
  *
- * @return the Output_t in this Transition_t based on the identifier or NULL if
- * no such Output_t exists.
+ * @return the Output_t in the ListOfOutputs within this Transition with the
+ * given id or NULL if no such Output_t exists.
  *
  * @memberof Transition_t
  */
@@ -1419,7 +1425,8 @@ Transition_getListOfFunctionTerms(Transition_t* t);
  * @param n, an unsigned int representing the index of the FunctionTerm_t to
  * retrieve.
  *
- * @return the nth FunctionTerm_t in this Transition_t.
+ * @return the nth FunctionTerm_t in the ListOfFunctionTerms within this
+ * Transition.
  *
  * @memberof Transition_t
  */

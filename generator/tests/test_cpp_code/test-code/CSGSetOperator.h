@@ -314,9 +314,9 @@ public:
    * @param n, an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
-   * @return the nth CSGNode in this CSGSetOperator.
+   * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator.
    *
-   * @see getNumCSGNodes
+   * @see getNumCSGNodes()
    */
   CSGNode* getCSGNode(unsigned int n);
 
@@ -327,9 +327,9 @@ public:
    * @param n, an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
-   * @return the nth CSGNode in this CSGSetOperator.
+   * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator.
    *
-   * @see getNumCSGNodes
+   * @see getNumCSGNodes()
    */
   const CSGNode* getCSGNode(unsigned int n) const;
 
@@ -340,10 +340,11 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this CSGSetOperator based on the identifier or NULL
-   * if no such CSGNode exists.
+   * @return the CSGNode in the ListOfCSGNodes within this CSGSetOperator with
+   * the given id or NULL if no such CSGNode exists.
    *
-   * @see getNumCSGNodes
+   * @see getCSGNode(unsigned int n)
+   * @see getNumCSGNodes()
    */
   CSGNode* getCSGNode(const std::string& sid);
 
@@ -354,10 +355,11 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this CSGSetOperator based on the identifier or NULL
-   * if no such CSGNode exists.
+   * @return the CSGNode in the ListOfCSGNodes within this CSGSetOperator with
+   * the given id or NULL if no such CSGNode exists.
    *
-   * @see getNumCSGNodes
+   * @see getCSGNode(unsigned int n)
+   * @see getNumCSGNodes()
    */
   const CSGNode* getCSGNode(const std::string& sid) const;
 
@@ -1039,7 +1041,7 @@ CSGSetOperator_getListOfCSGNodes(CSGSetOperator_t* csgso);
  * @param n, an unsigned int representing the index of the CSGNode_t to
  * retrieve.
  *
- * @return the nth CSGNode_t in this CSGSetOperator_t.
+ * @return the nth CSGNode_t in the ListOfCSGNodes within this CSGSetOperator.
  *
  * @memberof CSGSetOperator_t
  */
@@ -1056,8 +1058,8 @@ CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n);
  * @param sid a string representing the identifier of the CSGNode_t to
  * retrieve.
  *
- * @return the CSGNode_t in this CSGSetOperator_t based on the identifier or
- * NULL if no such CSGNode_t exists.
+ * @return the CSGNode_t in the ListOfCSGNodes within this CSGSetOperator with
+ * the given id or NULL if no such CSGNode_t exists.
  *
  * @memberof CSGSetOperator_t
  */

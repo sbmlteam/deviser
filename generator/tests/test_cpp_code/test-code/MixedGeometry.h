@@ -161,9 +161,10 @@ public:
    * @param n, an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
-   * @return the nth GeometryDefinition in this MixedGeometry.
+   * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
+   * this MixedGeometry.
    *
-   * @see getNumGeometryDefinitions
+   * @see getNumGeometryDefinitions()
    */
   GeometryDefinition* getGeometryDefinition(unsigned int n);
 
@@ -174,9 +175,10 @@ public:
    * @param n, an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
-   * @return the nth GeometryDefinition in this MixedGeometry.
+   * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
+   * this MixedGeometry.
    *
-   * @see getNumGeometryDefinitions
+   * @see getNumGeometryDefinitions()
    */
   const GeometryDefinition* getGeometryDefinition(unsigned int n) const;
 
@@ -187,10 +189,12 @@ public:
    * @param sid a string representing the identifier of the GeometryDefinition
    * to retrieve.
    *
-   * @return the GeometryDefinition in this MixedGeometry based on the
-   * identifier or NULL if no such GeometryDefinition exists.
+   * @return the GeometryDefinition in the ListOfGeometryDefinitions within
+   * this MixedGeometry with the given id or NULL if no such GeometryDefinition
+   * exists.
    *
-   * @see getNumGeometryDefinitions
+   * @see getGeometryDefinition(unsigned int n)
+   * @see getNumGeometryDefinitions()
    */
   GeometryDefinition* getGeometryDefinition(const std::string& sid);
 
@@ -201,10 +205,12 @@ public:
    * @param sid a string representing the identifier of the GeometryDefinition
    * to retrieve.
    *
-   * @return the GeometryDefinition in this MixedGeometry based on the
-   * identifier or NULL if no such GeometryDefinition exists.
+   * @return the GeometryDefinition in the ListOfGeometryDefinitions within
+   * this MixedGeometry with the given id or NULL if no such GeometryDefinition
+   * exists.
    *
-   * @see getNumGeometryDefinitions
+   * @see getGeometryDefinition(unsigned int n)
+   * @see getNumGeometryDefinitions()
    */
   const GeometryDefinition* getGeometryDefinition(const std::string& sid)
     const;
@@ -344,9 +350,10 @@ public:
    * @param n, an unsigned int representing the index of the OrdinalMapping to
    * retrieve.
    *
-   * @return the nth OrdinalMapping in this MixedGeometry.
+   * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
+   * MixedGeometry.
    *
-   * @see getNumOrdinalMappings
+   * @see getNumOrdinalMappings()
    */
   OrdinalMapping* getOrdinalMapping(unsigned int n);
 
@@ -357,9 +364,10 @@ public:
    * @param n, an unsigned int representing the index of the OrdinalMapping to
    * retrieve.
    *
-   * @return the nth OrdinalMapping in this MixedGeometry.
+   * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
+   * MixedGeometry.
    *
-   * @see getNumOrdinalMappings
+   * @see getNumOrdinalMappings()
    */
   const OrdinalMapping* getOrdinalMapping(unsigned int n) const;
 
@@ -746,7 +754,8 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg);
  * @param n, an unsigned int representing the index of the GeometryDefinition_t
  * to retrieve.
  *
- * @return the nth GeometryDefinition_t in this MixedGeometry_t.
+ * @return the nth GeometryDefinition_t in the ListOfGeometryDefinitions within
+ * this MixedGeometry.
  *
  * @memberof MixedGeometry_t
  */
@@ -763,8 +772,9 @@ MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
  * @param sid a string representing the identifier of the GeometryDefinition_t
  * to retrieve.
  *
- * @return the GeometryDefinition_t in this MixedGeometry_t based on the
- * identifier or NULL if no such GeometryDefinition_t exists.
+ * @return the GeometryDefinition_t in the ListOfGeometryDefinitions within
+ * this MixedGeometry with the given id or NULL if no such GeometryDefinition_t
+ * exists.
  *
  * @memberof MixedGeometry_t
  */
@@ -950,7 +960,8 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg);
  * @param n, an unsigned int representing the index of the OrdinalMapping_t to
  * retrieve.
  *
- * @return the nth OrdinalMapping_t in this MixedGeometry_t.
+ * @return the nth OrdinalMapping_t in the ListOfOrdinalMappings within this
+ * MixedGeometry.
  *
  * @memberof MixedGeometry_t
  */

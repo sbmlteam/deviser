@@ -166,8 +166,8 @@ public:
    * @param sid a string representing the identifier of the AnalyticVolume to
    * retrieve.
    *
-   * @return the AnalyticVolume in this ListOfAnalyticVolumes based on the
-   * identifier or NULL if no such AnalyticVolume exists.
+   * @return the AnalyticVolume in this ListOfAnalyticVolumes with the given id
+   * or NULL if no such AnalyticVolume exists.
    *
    * @see size()
    */
@@ -181,8 +181,8 @@ public:
    * @param sid a string representing the identifier of the AnalyticVolume to
    * retrieve.
    *
-   * @return the AnalyticVolume in this ListOfAnalyticVolumes based on the
-   * identifier or NULL if no such AnalyticVolume exists.
+   * @return the AnalyticVolume in this ListOfAnalyticVolumes with the given id
+   * or NULL if no such AnalyticVolume exists.
    *
    * @see size()
    */
@@ -404,8 +404,8 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the AnalyticVolume_t to
  * retrieve.
  *
- * @return the AnalyticVolume_t in this ListOf_t based on the identifier or
- * NULL if no such AnalyticVolume_t exists.
+ * @return the AnalyticVolume_t in this ListOf_t with the given id or NULL if
+ * no such AnalyticVolume_t exists.
  *
  * @memberof AnalyticVolume_t
  */

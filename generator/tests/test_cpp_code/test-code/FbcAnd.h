@@ -156,9 +156,9 @@ public:
    * @param n, an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in this FbcAnd.
+   * @return the nth Association in the ListOfAssociations within this FbcAnd.
    *
-   * @see getNumAssociations
+   * @see getNumAssociations()
    */
   Association* getAssociation(unsigned int n);
 
@@ -169,9 +169,9 @@ public:
    * @param n, an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in this FbcAnd.
+   * @return the nth Association in the ListOfAssociations within this FbcAnd.
    *
-   * @see getNumAssociations
+   * @see getNumAssociations()
    */
   const Association* getAssociation(unsigned int n) const;
 
@@ -589,7 +589,7 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
  * @param n, an unsigned int representing the index of the Association_t to
  * retrieve.
  *
- * @return the nth Association_t in this FbcAnd_t.
+ * @return the nth Association_t in the ListOfAssociations within this FbcAnd.
  *
  * @memberof FbcAnd_t
  */

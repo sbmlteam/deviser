@@ -133,9 +133,10 @@ public:
    * @param n, an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the nth QualitativeSpecies in this QualModelPlugin.
+   * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
+   * this QualModelPlugin.
    *
-   * @see getNumQualitativeSpecies
+   * @see getNumQualitativeSpecies()
    */
   QualitativeSpecies* getQualitativeSpecies(unsigned int n);
 
@@ -146,9 +147,10 @@ public:
    * @param n, an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the nth QualitativeSpecies in this QualModelPlugin.
+   * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
+   * this QualModelPlugin.
    *
-   * @see getNumQualitativeSpecies
+   * @see getNumQualitativeSpecies()
    */
   const QualitativeSpecies* getQualitativeSpecies(unsigned int n) const;
 
@@ -159,10 +161,12 @@ public:
    * @param sid a string representing the identifier of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the QualitativeSpecies in this QualModelPlugin based on the
-   * identifier or NULL if no such QualitativeSpecies exists.
+   * @return the QualitativeSpecies in the ListOfQualitativeSpecies within this
+   * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
+   * exists.
    *
-   * @see getNumQualitativeSpecies
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
    */
   QualitativeSpecies* getQualitativeSpecies(const std::string& sid);
 
@@ -173,10 +177,12 @@ public:
    * @param sid a string representing the identifier of the QualitativeSpecies
    * to retrieve.
    *
-   * @return the QualitativeSpecies in this QualModelPlugin based on the
-   * identifier or NULL if no such QualitativeSpecies exists.
+   * @return the QualitativeSpecies in the ListOfQualitativeSpecies within this
+   * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
+   * exists.
    *
-   * @see getNumQualitativeSpecies
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
    */
   const QualitativeSpecies* getQualitativeSpecies(const std::string& sid)
     const;
@@ -300,9 +306,10 @@ public:
    * @param n, an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this QualModelPlugin.
+   * @return the nth Transition in the ListOfTransitions within this
+   * QualModelPlugin.
    *
-   * @see getNumTransitions
+   * @see getNumTransitions()
    */
   Transition* getTransition(unsigned int n);
 
@@ -313,9 +320,10 @@ public:
    * @param n, an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this QualModelPlugin.
+   * @return the nth Transition in the ListOfTransitions within this
+   * QualModelPlugin.
    *
-   * @see getNumTransitions
+   * @see getNumTransitions()
    */
   const Transition* getTransition(unsigned int n) const;
 
@@ -326,10 +334,11 @@ public:
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this QualModelPlugin based on the identifier or
-   * NULL if no such Transition exists.
+   * @return the Transition in the ListOfTransitions within this
+   * QualModelPlugin with the given id or NULL if no such Transition exists.
    *
-   * @see getNumTransitions
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
    */
   Transition* getTransition(const std::string& sid);
 
@@ -340,10 +349,11 @@ public:
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this QualModelPlugin based on the identifier or
-   * NULL if no such Transition exists.
+   * @return the Transition in the ListOfTransitions within this
+   * QualModelPlugin with the given id or NULL if no such Transition exists.
    *
-   * @see getNumTransitions
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
    */
   const Transition* getTransition(const std::string& sid) const;
 

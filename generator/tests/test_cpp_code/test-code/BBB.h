@@ -198,9 +198,9 @@ public:
    * @param n, an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in this BBB.
+   * @return the nth Another in the ListOfAnothers within this BBB.
    *
-   * @see getNumAnothers
+   * @see getNumAnothers()
    */
   Another* getAnother(unsigned int n);
 
@@ -211,9 +211,9 @@ public:
    * @param n, an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in this BBB.
+   * @return the nth Another in the ListOfAnothers within this BBB.
    *
-   * @see getNumAnothers
+   * @see getNumAnothers()
    */
   const Another* getAnother(unsigned int n) const;
 
@@ -224,10 +224,11 @@ public:
    * @param sid a string representing the identifier of the Another to
    * retrieve.
    *
-   * @return the Another in this BBB based on the identifier or NULL if no such
-   * Another exists.
+   * @return the Another in the ListOfAnothers within this BBB with the given
+   * id or NULL if no such Another exists.
    *
-   * @see getNumAnothers
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
    */
   Another* getAnother(const std::string& sid);
 
@@ -238,10 +239,11 @@ public:
    * @param sid a string representing the identifier of the Another to
    * retrieve.
    *
-   * @return the Another in this BBB based on the identifier or NULL if no such
-   * Another exists.
+   * @return the Another in the ListOfAnothers within this BBB with the given
+   * id or NULL if no such Another exists.
    *
-   * @see getNumAnothers
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
    */
   const Another* getAnother(const std::string& sid) const;
 
@@ -717,7 +719,7 @@ BBB_getListOfAnothers(BBB_t* bbb);
  * @param n, an unsigned int representing the index of the Another_t to
  * retrieve.
  *
- * @return the nth Another_t in this BBB_t.
+ * @return the nth Another_t in the ListOfAnothers within this BBB.
  *
  * @memberof BBB_t
  */
@@ -734,8 +736,8 @@ BBB_getAnother(BBB_t* bbb, unsigned int n);
  * @param sid a string representing the identifier of the Another_t to
  * retrieve.
  *
- * @return the Another_t in this BBB_t based on the identifier or NULL if no
- * such Another_t exists.
+ * @return the Another_t in the ListOfAnothers within this BBB with the given
+ * id or NULL if no such Another_t exists.
  *
  * @memberof BBB_t
  */
