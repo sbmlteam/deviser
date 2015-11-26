@@ -157,8 +157,8 @@ ListOfFunctionTerms::getDefaultTerm()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * ListOfFunctionTerms's "defaultTerm" element has been set.
+ * Predicate returning @c true if this ListOfFunctionTerms's "defaultTerm"
+ * element is set.
  */
 bool
 ListOfFunctionTerms::isSetDefaultTerm() const

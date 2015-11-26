@@ -164,8 +164,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * ClassOne's "id" attribute has been set.
+   * Predicate returning @c true if this ClassOne's "id" attribute is set.
    *
    * @return @c true if this ClassOne's "id" attribute has been set, otherwise
    * @c false is returned.
@@ -174,8 +173,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * ClassOne's "att1" attribute has been set.
+   * Predicate returning @c true if this ClassOne's "att1" attribute is set.
    *
    * @return @c true if this ClassOne's "att1" attribute has been set,
    * otherwise @c false is returned.
@@ -184,8 +182,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * ClassOne's "att2" attribute has been set.
+   * Predicate returning @c true if this ClassOne's "att2" attribute is set.
    *
    * @return @c true if this ClassOne's "att2" attribute has been set,
    * otherwise @c false is returned.
@@ -554,8 +551,7 @@ ClassOne_getAtt2(const ClassOne_t * co);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this ClassOne_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this ClassOne_t's "id" attribute is set.
  *
  * @param co the ClassOne_t structure.
  *
@@ -570,8 +566,7 @@ ClassOne_isSetId(const ClassOne_t * co);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this ClassOne_t's
- * "att1" attribute has been set.
+ * Predicate returning @c 1 if this ClassOne_t's "att1" attribute is set.
  *
  * @param co the ClassOne_t structure.
  *
@@ -586,8 +581,7 @@ ClassOne_isSetAtt1(const ClassOne_t * co);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this ClassOne_t's
- * "att2" attribute has been set.
+ * Predicate returning @c 1 if this ClassOne_t's "att2" attribute is set.
  *
  * @param co the ClassOne_t structure.
  *

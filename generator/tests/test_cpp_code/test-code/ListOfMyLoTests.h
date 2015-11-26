@@ -147,8 +147,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * ListOfMyLoTests's "id" attribute has been set.
+   * Predicate returning @c true if this ListOfMyLoTests's "id" attribute is
+   * set.
    *
    * @return @c true if this ListOfMyLoTests's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -424,8 +424,7 @@ ListOfMyLoTests_getId(const ListOf_t * lo);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this ListOf_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this ListOf_t's "id" attribute is set.
  *
  * @param lo the ListOf_t structure.
  *

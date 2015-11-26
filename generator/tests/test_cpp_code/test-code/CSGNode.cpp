@@ -137,8 +137,7 @@ CSGNode::getId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this CSGNode's
- * "id" attribute has been set.
+ * Predicate returning @c true if this CSGNode's "id" attribute is set.
  */
 bool
 CSGNode::isSetId() const
@@ -626,8 +625,7 @@ CSGNode_getId(const CSGNode_t * csgn)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this CSGNode_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this CSGNode_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

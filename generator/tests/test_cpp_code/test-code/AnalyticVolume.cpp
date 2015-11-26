@@ -211,8 +211,7 @@ AnalyticVolume::getDomainType() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * AnalyticVolume's "id" attribute has been set.
+ * Predicate returning @c true if this AnalyticVolume's "id" attribute is set.
  */
 bool
 AnalyticVolume::isSetId() const
@@ -222,8 +221,8 @@ AnalyticVolume::isSetId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * AnalyticVolume's "functionType" attribute has been set.
+ * Predicate returning @c true if this AnalyticVolume's "functionType"
+ * attribute is set.
  */
 bool
 AnalyticVolume::isSetFunctionType() const
@@ -233,8 +232,8 @@ AnalyticVolume::isSetFunctionType() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * AnalyticVolume's "ordinal" attribute has been set.
+ * Predicate returning @c true if this AnalyticVolume's "ordinal" attribute is
+ * set.
  */
 bool
 AnalyticVolume::isSetOrdinal() const
@@ -244,8 +243,8 @@ AnalyticVolume::isSetOrdinal() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * AnalyticVolume's "domainType" attribute has been set.
+ * Predicate returning @c true if this AnalyticVolume's "domainType" attribute
+ * is set.
  */
 bool
 AnalyticVolume::isSetDomainType() const
@@ -422,8 +421,7 @@ AnalyticVolume::getMath()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * AnalyticVolume's "math" element has been set.
+ * Predicate returning @c true if this AnalyticVolume's "math" element is set.
  */
 bool
 AnalyticVolume::isSetMath() const
@@ -1045,8 +1043,7 @@ AnalyticVolume_getDomainType(const AnalyticVolume_t * av)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "id" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1057,8 +1054,8 @@ AnalyticVolume_isSetId(const AnalyticVolume_t * av)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "functionType" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "functionType" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1069,8 +1066,8 @@ AnalyticVolume_isSetFunctionType(const AnalyticVolume_t * av)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "ordinal" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "ordinal" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1081,8 +1078,8 @@ AnalyticVolume_isSetOrdinal(const AnalyticVolume_t * av)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "domainType" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "domainType" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1212,8 +1209,7 @@ AnalyticVolume_getMath(const AnalyticVolume_t * av)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "math" element has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "math" element is set.
  */
 LIBSBML_EXTERN
 int

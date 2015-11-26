@@ -181,8 +181,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CoordinateComponent's "id" attribute has been set.
+   * Predicate returning @c true if this CoordinateComponent's "id" attribute
+   * is set.
    *
    * @return @c true if this CoordinateComponent's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -191,8 +191,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CoordinateComponent's "type" attribute has been set.
+   * Predicate returning @c true if this CoordinateComponent's "type" attribute
+   * is set.
    *
    * @return @c true if this CoordinateComponent's "type" attribute has been
    * set, otherwise @c false is returned.
@@ -201,8 +201,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CoordinateComponent's "unit" attribute has been set.
+   * Predicate returning @c true if this CoordinateComponent's "unit" attribute
+   * is set.
    *
    * @return @c true if this CoordinateComponent's "unit" attribute has been
    * set, otherwise @c false is returned.
@@ -333,8 +333,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CoordinateComponent's "boundaryMin" element has been set.
+   * Predicate returning @c true if this CoordinateComponent's "boundaryMin"
+   * element is set.
    *
    * @return @c true if this CoordinateComponent's "boundaryMin" element has
    * been set, otherwise @c false is returned.
@@ -343,8 +343,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CoordinateComponent's "boundaryMax" element has been set.
+   * Predicate returning @c true if this CoordinateComponent's "boundaryMax"
+   * element is set.
    *
    * @return @c true if this CoordinateComponent's "boundaryMax" element has
    * been set, otherwise @c false is returned.
@@ -768,8 +768,8 @@ CoordinateComponent_getUnit(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CoordinateComponent_t's "id" attribute has been set.
+ * Predicate returning @c 1 if this CoordinateComponent_t's "id" attribute is
+ * set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
@@ -784,8 +784,8 @@ CoordinateComponent_isSetId(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CoordinateComponent_t's "type" attribute has been set.
+ * Predicate returning @c 1 if this CoordinateComponent_t's "type" attribute is
+ * set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
@@ -800,8 +800,8 @@ CoordinateComponent_isSetType(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CoordinateComponent_t's "unit" attribute has been set.
+ * Predicate returning @c 1 if this CoordinateComponent_t's "unit" attribute is
+ * set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
@@ -970,8 +970,8 @@ CoordinateComponent_getBoundaryMax(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CoordinateComponent_t's "boundaryMin" element has been set.
+ * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMin"
+ * element is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
@@ -986,8 +986,8 @@ CoordinateComponent_isSetBoundaryMin(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CoordinateComponent_t's "boundaryMax" element has been set.
+ * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMax"
+ * element is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *

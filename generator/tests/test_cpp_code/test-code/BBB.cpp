@@ -134,8 +134,7 @@ BBB::getId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this BBB's "id"
- * attribute has been set.
+ * Predicate returning @c true if this BBB's "id" attribute is set.
  */
 bool
 BBB::isSetId() const
@@ -884,8 +883,7 @@ BBB_getId(const BBB_t * bbb)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this BBB_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this BBB_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

@@ -162,8 +162,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * ParametricGeometry's "spatialPoints" element has been set.
+   * Predicate returning @c true if this ParametricGeometry's "spatialPoints"
+   * element is set.
    *
    * @return @c true if this ParametricGeometry's "spatialPoints" element has
    * been set, otherwise @c false is returned.
@@ -675,8 +675,8 @@ ParametricGeometry_getSpatialPoints(const ParametricGeometry_t * pg);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * ParametricGeometry_t's "spatialPoints" element has been set.
+ * Predicate returning @c 1 if this ParametricGeometry_t's "spatialPoints"
+ * element is set.
  *
  * @param pg the ParametricGeometry_t structure.
  *

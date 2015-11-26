@@ -346,8 +346,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "id" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "id" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -356,8 +356,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "name" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "name" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "name" attribute has been set,
    * otherwise @c false is returned.
@@ -366,8 +366,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "num" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "num" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "num" attribute has been set,
    * otherwise @c false is returned.
@@ -376,8 +376,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "num2" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "num2" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "num2" attribute has been set,
    * otherwise @c false is returned.
@@ -386,8 +386,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "num3" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "num3" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "num3" attribute has been set,
    * otherwise @c false is returned.
@@ -396,8 +396,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "num1" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "num1" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "num1" attribute has been set,
    * otherwise @c false is returned.
@@ -406,8 +406,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "true" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "true" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "true" attribute has been set,
    * otherwise @c false is returned.
@@ -416,8 +416,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "false" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "false" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "false" attribute has been set,
    * otherwise @c false is returned.
@@ -426,8 +426,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "unit" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "unit" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "unit" attribute has been set,
    * otherwise @c false is returned.
@@ -436,8 +436,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "ref1" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "ref1" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "ref1" attribute has been set,
    * otherwise @c false is returned.
@@ -446,8 +446,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "ref2" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "ref2" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "ref2" attribute has been set,
    * otherwise @c false is returned.
@@ -456,8 +456,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "refUnit" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "refUnit" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "refUnit" attribute has been
    * set, otherwise @c false is returned.
@@ -466,8 +466,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "correctId" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "correctId"
+   * attribute is set.
    *
    * @return @c true if this MyRequiredClass's "correctId" attribute has been
    * set, otherwise @c false is returned.
@@ -476,8 +476,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "posint" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "posint" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "posint" attribute has been set,
    * otherwise @c false is returned.
@@ -486,8 +486,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "posint2" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "posint2" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "posint2" attribute has been
    * set, otherwise @c false is returned.
@@ -496,8 +496,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "posint1" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "posint1" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "posint1" attribute has been
    * set, otherwise @c false is returned.
@@ -506,8 +506,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "metaid" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "metaid" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "metaid" attribute has been set,
    * otherwise @c false is returned.
@@ -516,8 +516,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "metaid1" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "metaid1" attribute
+   * is set.
    *
    * @return @c true if this MyRequiredClass's "metaid1" attribute has been
    * set, otherwise @c false is returned.
@@ -526,8 +526,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "num4" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "num4" attribute is
+   * set.
    *
    * @return @c true if this MyRequiredClass's "num4" attribute has been set,
    * otherwise @c false is returned.
@@ -536,8 +536,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyRequiredClass's "metaidref1" attribute has been set.
+   * Predicate returning @c true if this MyRequiredClass's "metaidref1"
+   * attribute is set.
    *
    * @return @c true if this MyRequiredClass's "metaidref1" attribute has been
    * set, otherwise @c false is returned.
@@ -1540,8 +1540,7 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "id" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "id" attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1556,8 +1555,8 @@ MyRequiredClass_isSetId(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "name" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "name" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1572,8 +1571,7 @@ MyRequiredClass_isSetName(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num" attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1588,8 +1586,8 @@ MyRequiredClass_isSetNum(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num2" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1604,8 +1602,8 @@ MyRequiredClass_isSetNum2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num3" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num3" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1620,8 +1618,8 @@ MyRequiredClass_isSetNum3(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num1" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1636,8 +1634,8 @@ MyRequiredClass_isSetNum1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "true" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "true" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1652,8 +1650,8 @@ MyRequiredClass_isSetTrue(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "false" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "false" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1668,8 +1666,8 @@ MyRequiredClass_isSetFalse(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "unit" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "unit" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1684,8 +1682,8 @@ MyRequiredClass_isSetUnit(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "ref1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "ref1" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1700,8 +1698,8 @@ MyRequiredClass_isSetRef1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "ref2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "ref2" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1716,8 +1714,8 @@ MyRequiredClass_isSetRef2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "refUnit" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "refUnit" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1732,8 +1730,8 @@ MyRequiredClass_isSetRefUnit(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "correctId" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "correctId" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1748,8 +1746,8 @@ MyRequiredClass_isSetCorrectId(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1764,8 +1762,8 @@ MyRequiredClass_isSetPosint(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint2" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1780,8 +1778,8 @@ MyRequiredClass_isSetPosint2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint1" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1796,8 +1794,8 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaid" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaid" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1812,8 +1810,8 @@ MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaid1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaid1" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1828,8 +1826,8 @@ MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num4" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num4" attribute is
+ * set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -1844,8 +1842,8 @@ MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaidref1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaidref1" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *

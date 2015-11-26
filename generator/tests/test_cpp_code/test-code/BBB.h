@@ -144,8 +144,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this BBB's
-   * "id" attribute has been set.
+   * Predicate returning @c true if this BBB's "id" attribute is set.
    *
    * @return @c true if this BBB's "id" attribute has been set, otherwise @c
    * false is returned.
@@ -648,8 +647,7 @@ BBB_getId(const BBB_t * bbb);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this BBB_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this BBB_t's "id" attribute is set.
  *
  * @param bbb the BBB_t structure.
  *

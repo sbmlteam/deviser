@@ -126,8 +126,7 @@ ListOfMyLoTests::getId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * ListOfMyLoTests's "id" attribute has been set.
+ * Predicate returning @c true if this ListOfMyLoTests's "id" attribute is set.
  */
 bool
 ListOfMyLoTests::isSetId() const
@@ -436,8 +435,7 @@ ListOfMyLoTests_getId(const ListOf_t * lo)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this ListOf_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this ListOf_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

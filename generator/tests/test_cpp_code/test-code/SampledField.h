@@ -261,8 +261,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "id" attribute has been set.
+   * Predicate returning @c true if this SampledField's "id" attribute is set.
    *
    * @return @c true if this SampledField's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -271,8 +270,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "dataType" attribute has been set.
+   * Predicate returning @c true if this SampledField's "dataType" attribute is
+   * set.
    *
    * @return @c true if this SampledField's "dataType" attribute has been set,
    * otherwise @c false is returned.
@@ -281,8 +280,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "numSamples1" attribute has been set.
+   * Predicate returning @c true if this SampledField's "numSamples1" attribute
+   * is set.
    *
    * @return @c true if this SampledField's "numSamples1" attribute has been
    * set, otherwise @c false is returned.
@@ -291,8 +290,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "numSamples2" attribute has been set.
+   * Predicate returning @c true if this SampledField's "numSamples2" attribute
+   * is set.
    *
    * @return @c true if this SampledField's "numSamples2" attribute has been
    * set, otherwise @c false is returned.
@@ -301,8 +300,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "numSamples3" attribute has been set.
+   * Predicate returning @c true if this SampledField's "numSamples3" attribute
+   * is set.
    *
    * @return @c true if this SampledField's "numSamples3" attribute has been
    * set, otherwise @c false is returned.
@@ -311,8 +310,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "interpolationType" attribute has been set.
+   * Predicate returning @c true if this SampledField's "interpolationType"
+   * attribute is set.
    *
    * @return @c true if this SampledField's "interpolationType" attribute has
    * been set, otherwise @c false is returned.
@@ -321,8 +320,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "compression" attribute has been set.
+   * Predicate returning @c true if this SampledField's "compression" attribute
+   * is set.
    *
    * @return @c true if this SampledField's "compression" attribute has been
    * set, otherwise @c false is returned.
@@ -331,8 +330,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "samples" attribute has been set.
+   * Predicate returning @c true if this SampledField's "samples" attribute is
+   * set.
    *
    * @return @c true if this SampledField's "samples" attribute has been set,
    * otherwise @c false is returned.
@@ -341,8 +340,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SampledField's "samplesLength" attribute has been set.
+   * Predicate returning @c true if this SampledField's "samplesLength"
+   * attribute is set.
    *
    * @return @c true if this SampledField's "samplesLength" attribute has been
    * set, otherwise @c false is returned.
@@ -1052,8 +1051,7 @@ SampledField_getSamplesLength(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "id" attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1068,8 +1066,8 @@ SampledField_isSetId(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "dataType" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "dataType" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1084,8 +1082,8 @@ SampledField_isSetDataType(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "numSamples1" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "numSamples1" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1100,8 +1098,8 @@ SampledField_isSetNumSamples1(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "numSamples2" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "numSamples2" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1116,8 +1114,8 @@ SampledField_isSetNumSamples2(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "numSamples3" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "numSamples3" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1132,8 +1130,8 @@ SampledField_isSetNumSamples3(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "interpolationType" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "interpolationType"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1148,8 +1146,8 @@ SampledField_isSetInterpolationType(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "compression" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "compression" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1164,8 +1162,8 @@ SampledField_isSetCompression(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "samples" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "samples" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
@@ -1180,8 +1178,8 @@ SampledField_isSetSamples(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this SampledField_t's
- * "samplesLength" attribute has been set.
+ * Predicate returning @c 1 if this SampledField_t's "samplesLength" attribute
+ * is set.
  *
  * @param sf the SampledField_t structure.
  *

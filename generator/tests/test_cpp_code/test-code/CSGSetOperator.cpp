@@ -184,8 +184,8 @@ CSGSetOperator::getComplementB() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * CSGSetOperator's "operationType" attribute has been set.
+ * Predicate returning @c true if this CSGSetOperator's "operationType"
+ * attribute is set.
  */
 bool
 CSGSetOperator::isSetOperationType() const
@@ -195,8 +195,8 @@ CSGSetOperator::isSetOperationType() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * CSGSetOperator's "complementA" attribute has been set.
+ * Predicate returning @c true if this CSGSetOperator's "complementA" attribute
+ * is set.
  */
 bool
 CSGSetOperator::isSetComplementA() const
@@ -206,8 +206,8 @@ CSGSetOperator::isSetComplementA() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * CSGSetOperator's "complementB" attribute has been set.
+ * Predicate returning @c true if this CSGSetOperator's "complementB" attribute
+ * is set.
  */
 bool
 CSGSetOperator::isSetComplementB() const
@@ -1229,8 +1229,8 @@ CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "operationType" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "operationType"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1241,8 +1241,8 @@ CSGSetOperator_isSetOperationType(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "complementA" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "complementA" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1253,8 +1253,8 @@ CSGSetOperator_isSetComplementA(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "complementB" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "complementB" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

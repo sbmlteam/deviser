@@ -159,8 +159,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * Transition's "id" attribute has been set.
+   * Predicate returning @c true if this Transition's "id" attribute is set.
    *
    * @return @c true if this Transition's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -169,8 +168,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * Transition's "name" attribute has been set.
+   * Predicate returning @c true if this Transition's "name" attribute is set.
    *
    * @return @c true if this Transition's "name" attribute has been set,
    * otherwise @c false is returned.
@@ -659,8 +657,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * Transition's "defaultTerm" element has been set.
+   * Predicate returning @c true if this Transition's "defaultTerm" element is
+   * set.
    *
    * @return @c true if this Transition's "defaultTerm" element has been set,
    * otherwise @c false is returned.
@@ -1008,8 +1006,7 @@ Transition_getName(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this Transition_t's "id" attribute is set.
  *
  * @param t the Transition_t structure.
  *
@@ -1024,8 +1021,7 @@ Transition_isSetId(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "name" attribute has been set.
+ * Predicate returning @c 1 if this Transition_t's "name" attribute is set.
  *
  * @param t the Transition_t structure.
  *
@@ -1518,8 +1514,8 @@ Transition_getDefaultTerm(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "defaultTerm" element has been set.
+ * Predicate returning @c 1 if this Transition_t's "defaultTerm" element is
+ * set.
  *
  * @param t the Transition_t structure.
  *

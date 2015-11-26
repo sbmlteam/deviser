@@ -177,8 +177,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CSGSetOperator's "operationType" attribute has been set.
+   * Predicate returning @c true if this CSGSetOperator's "operationType"
+   * attribute is set.
    *
    * @return @c true if this CSGSetOperator's "operationType" attribute has
    * been set, otherwise @c false is returned.
@@ -187,8 +187,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CSGSetOperator's "complementA" attribute has been set.
+   * Predicate returning @c true if this CSGSetOperator's "complementA"
+   * attribute is set.
    *
    * @return @c true if this CSGSetOperator's "complementA" attribute has been
    * set, otherwise @c false is returned.
@@ -197,8 +197,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * CSGSetOperator's "complementB" attribute has been set.
+   * Predicate returning @c true if this CSGSetOperator's "complementB"
+   * attribute is set.
    *
    * @return @c true if this CSGSetOperator's "complementB" attribute has been
    * set, otherwise @c false is returned.
@@ -843,8 +843,8 @@ CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "operationType" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "operationType"
+ * attribute is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
@@ -859,8 +859,8 @@ CSGSetOperator_isSetOperationType(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "complementA" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "complementA" attribute
+ * is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
@@ -875,8 +875,8 @@ CSGSetOperator_isSetComplementA(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGSetOperator_t's "complementB" attribute has been set.
+ * Predicate returning @c 1 if this CSGSetOperator_t's "complementB" attribute
+ * is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *

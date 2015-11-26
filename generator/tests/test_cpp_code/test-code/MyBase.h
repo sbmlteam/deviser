@@ -141,8 +141,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this MyBase's
-   * "id" attribute has been set.
+   * Predicate returning @c true if this MyBase's "id" attribute is set.
    *
    * @return @c true if this MyBase's "id" attribute has been set, otherwise @c
    * false is returned.
@@ -391,8 +390,7 @@ MyBase_getId(const MyBase_t * mb);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyBase_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this MyBase_t's "id" attribute is set.
  *
  * @param mb the MyBase_t structure.
  *

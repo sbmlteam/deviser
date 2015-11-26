@@ -433,8 +433,7 @@ MyRequiredClass::getMetaidref1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "id" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "id" attribute is set.
  */
 bool
 MyRequiredClass::isSetId() const
@@ -444,8 +443,8 @@ MyRequiredClass::isSetId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "name" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "name" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetName() const
@@ -455,8 +454,8 @@ MyRequiredClass::isSetName() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "num" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "num" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetNum() const
@@ -466,8 +465,8 @@ MyRequiredClass::isSetNum() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "num2" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "num2" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetNum2() const
@@ -477,8 +476,8 @@ MyRequiredClass::isSetNum2() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "num3" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "num3" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetNum3() const
@@ -488,8 +487,8 @@ MyRequiredClass::isSetNum3() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "num1" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "num1" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetNum1() const
@@ -499,8 +498,8 @@ MyRequiredClass::isSetNum1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "true" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "true" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetTrue() const
@@ -510,8 +509,8 @@ MyRequiredClass::isSetTrue() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "false" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "false" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetFalse() const
@@ -521,8 +520,8 @@ MyRequiredClass::isSetFalse() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "unit" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "unit" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetUnit() const
@@ -532,8 +531,8 @@ MyRequiredClass::isSetUnit() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "ref1" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "ref1" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetRef1() const
@@ -543,8 +542,8 @@ MyRequiredClass::isSetRef1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "ref2" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "ref2" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetRef2() const
@@ -554,8 +553,8 @@ MyRequiredClass::isSetRef2() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "refUnit" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "refUnit" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetRefUnit() const
@@ -565,8 +564,8 @@ MyRequiredClass::isSetRefUnit() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "correctId" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "correctId" attribute
+ * is set.
  */
 bool
 MyRequiredClass::isSetCorrectId() const
@@ -576,8 +575,8 @@ MyRequiredClass::isSetCorrectId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "posint" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "posint" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetPosint() const
@@ -587,8 +586,8 @@ MyRequiredClass::isSetPosint() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "posint2" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "posint2" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetPosint2() const
@@ -598,8 +597,8 @@ MyRequiredClass::isSetPosint2() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "posint1" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "posint1" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetPosint1() const
@@ -609,8 +608,8 @@ MyRequiredClass::isSetPosint1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "metaid" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "metaid" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetMetaid() const
@@ -620,8 +619,8 @@ MyRequiredClass::isSetMetaid() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "metaid1" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "metaid1" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetMetaid1() const
@@ -631,8 +630,8 @@ MyRequiredClass::isSetMetaid1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "num4" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "num4" attribute is
+ * set.
  */
 bool
 MyRequiredClass::isSetNum4() const
@@ -642,8 +641,8 @@ MyRequiredClass::isSetNum4() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * MyRequiredClass's "metaidref1" attribute has been set.
+ * Predicate returning @c true if this MyRequiredClass's "metaidref1" attribute
+ * is set.
  */
 bool
 MyRequiredClass::isSetMetaidref1() const
@@ -2545,8 +2544,7 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "id" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2557,8 +2555,8 @@ MyRequiredClass_isSetId(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "name" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "name" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2569,8 +2567,7 @@ MyRequiredClass_isSetName(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2581,8 +2578,8 @@ MyRequiredClass_isSetNum(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2593,8 +2590,8 @@ MyRequiredClass_isSetNum2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num3" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num3" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2605,8 +2602,8 @@ MyRequiredClass_isSetNum3(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2617,8 +2614,8 @@ MyRequiredClass_isSetNum1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "true" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "true" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2629,8 +2626,8 @@ MyRequiredClass_isSetTrue(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "false" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "false" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2641,8 +2638,8 @@ MyRequiredClass_isSetFalse(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "unit" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "unit" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2653,8 +2650,8 @@ MyRequiredClass_isSetUnit(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "ref1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "ref1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2665,8 +2662,8 @@ MyRequiredClass_isSetRef1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "ref2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "ref2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2677,8 +2674,8 @@ MyRequiredClass_isSetRef2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "refUnit" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "refUnit" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2689,8 +2686,8 @@ MyRequiredClass_isSetRefUnit(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "correctId" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "correctId" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2701,8 +2698,8 @@ MyRequiredClass_isSetCorrectId(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2713,8 +2710,8 @@ MyRequiredClass_isSetPosint(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint2" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2725,8 +2722,8 @@ MyRequiredClass_isSetPosint2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "posint1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "posint1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2737,8 +2734,8 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaid" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaid" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2749,8 +2746,8 @@ MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaid1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaid1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2761,8 +2758,8 @@ MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "num4" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "num4" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2773,8 +2770,8 @@ MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * MyRequiredClass_t's "metaidref1" attribute has been set.
+ * Predicate returning @c 1 if this MyRequiredClass_t's "metaidref1" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

@@ -142,8 +142,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this Unit's
-   * "unit" attribute has been set.
+   * Predicate returning @c true if this Unit's "unit" attribute is set.
    *
    * @return @c true if this Unit's "unit" attribute has been set, otherwise @c
    * false is returned.
@@ -399,8 +398,7 @@ Unit_getUnit(const Unit_t * u);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Unit_t's "unit"
- * attribute has been set.
+ * Predicate returning @c 1 if this Unit_t's "unit" attribute is set.
  *
  * @param u the Unit_t structure.
  *

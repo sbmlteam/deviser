@@ -156,8 +156,8 @@ VersModelPlugin::getVersion2() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersModelPlugin's "version" attribute has been set.
+ * Predicate returning @c true if this VersModelPlugin's "version" attribute is
+ * set.
  */
 bool
 VersModelPlugin::isSetVersion() const
@@ -167,8 +167,8 @@ VersModelPlugin::isSetVersion() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersModelPlugin's "version2" attribute has been set.
+ * Predicate returning @c true if this VersModelPlugin's "version2" attribute
+ * is set.
  */
 bool
 VersModelPlugin::isSetVersion2() const
@@ -284,8 +284,8 @@ VersModelPlugin::getClassOne()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersModelPlugin's "classOne" element has been set.
+ * Predicate returning @c true if this VersModelPlugin's "classOne" element is
+ * set.
  */
 bool
 VersModelPlugin::isSetClassOne() const

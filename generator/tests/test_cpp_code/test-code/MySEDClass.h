@@ -110,8 +110,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MySEDClass's "id" attribute has been set.
+   * Predicate returning @c true if this MySEDClass's "id" attribute is set.
    *
    * @return @c true if this MySEDClass's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -342,8 +341,7 @@ MySEDClass_getId(const MySEDClass_t * msedc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MySEDClass_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this MySEDClass_t's "id" attribute is set.
  *
  * @param msedc the MySEDClass_t structure.
  *

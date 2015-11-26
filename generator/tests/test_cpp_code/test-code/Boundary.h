@@ -155,8 +155,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * Boundary's "id" attribute has been set.
+   * Predicate returning @c true if this Boundary's "id" attribute is set.
    *
    * @return @c true if this Boundary's "id" attribute has been set, otherwise
    * @c false is returned.
@@ -165,8 +164,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * Boundary's "value" attribute has been set.
+   * Predicate returning @c true if this Boundary's "value" attribute is set.
    *
    * @return @c true if this Boundary's "value" attribute has been set,
    * otherwise @c false is returned.
@@ -466,8 +464,7 @@ Boundary_getValue(const Boundary_t * b);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Boundary_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this Boundary_t's "id" attribute is set.
  *
  * @param b the Boundary_t structure.
  *
@@ -482,8 +479,7 @@ Boundary_isSetId(const Boundary_t * b);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this Boundary_t's
- * "value" attribute has been set.
+ * Predicate returning @c 1 if this Boundary_t's "value" attribute is set.
  *
  * @param b the Boundary_t structure.
  *

@@ -442,9 +442,9 @@ class SetGetFunctions():
         params = []
         return_lines = []
         additional = []
-        title_line = 'Predicate returning {} or {} depending on whether ' \
-                     'this {}\'s \"{}\" {} has been set.' \
-            .format(self.true, self.false, self.object_name, attribute['name'],
+        title_line = 'Predicate returning {} if ' \
+                     'this {}\'s \"{}\" {} is set.' \
+            .format(self.true, self.object_name, attribute['name'],
                     ob_type)
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'

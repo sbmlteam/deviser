@@ -189,8 +189,8 @@ VersSpeciesPlugin::getSpecies_att_v2() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersSpeciesPlugin's "species_att_v1" attribute has been set.
+ * Predicate returning @c true if this VersSpeciesPlugin's "species_att_v1"
+ * attribute is set.
  */
 bool
 VersSpeciesPlugin::isSetSpecies_att_v1() const
@@ -200,8 +200,8 @@ VersSpeciesPlugin::isSetSpecies_att_v1() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersSpeciesPlugin's "string_plugin_att" attribute has been set.
+ * Predicate returning @c true if this VersSpeciesPlugin's "string_plugin_att"
+ * attribute is set.
  */
 bool
 VersSpeciesPlugin::isSetString_plugin_att() const
@@ -211,8 +211,8 @@ VersSpeciesPlugin::isSetString_plugin_att() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersSpeciesPlugin's "species_att_v2" attribute has been set.
+ * Predicate returning @c true if this VersSpeciesPlugin's "species_att_v2"
+ * attribute is set.
  */
 bool
 VersSpeciesPlugin::isSetSpecies_att_v2() const
@@ -370,8 +370,8 @@ VersSpeciesPlugin::getClassTwo()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersSpeciesPlugin's "classOne" element has been set.
+ * Predicate returning @c true if this VersSpeciesPlugin's "classOne" element
+ * is set.
  */
 bool
 VersSpeciesPlugin::isSetClassOne() const
@@ -381,8 +381,8 @@ VersSpeciesPlugin::isSetClassOne() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * VersSpeciesPlugin's "classTwo" element has been set.
+ * Predicate returning @c true if this VersSpeciesPlugin's "classTwo" element
+ * is set.
  */
 bool
 VersSpeciesPlugin::isSetClassTwo() const

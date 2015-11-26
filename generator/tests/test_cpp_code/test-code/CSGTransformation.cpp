@@ -167,8 +167,8 @@ CSGTransformation::getCsgNode()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * CSGTransformation's "csgNode" element has been set.
+ * Predicate returning @c true if this CSGTransformation's "csgNode" element is
+ * set.
  */
 bool
 CSGTransformation::isSetCsgNode() const
@@ -867,8 +867,8 @@ CSGTransformation_getCsgNode(const CSGTransformation_t * csgt)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * CSGTransformation_t's "csgNode" element has been set.
+ * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
+ * set.
  */
 LIBSBML_EXTERN
 int

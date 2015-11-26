@@ -130,8 +130,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersModelPlugin's "version" attribute has been set.
+   * Predicate returning @c true if this VersModelPlugin's "version" attribute
+   * is set.
    *
    * @return @c true if this VersModelPlugin's "version" attribute has been
    * set, otherwise @c false is returned.
@@ -140,8 +140,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersModelPlugin's "version2" attribute has been set.
+   * Predicate returning @c true if this VersModelPlugin's "version2" attribute
+   * is set.
    *
    * @return @c true if this VersModelPlugin's "version2" attribute has been
    * set, otherwise @c false is returned.
@@ -214,8 +214,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersModelPlugin's "classOne" element has been set.
+   * Predicate returning @c true if this VersModelPlugin's "classOne" element
+   * is set.
    *
    * @return @c true if this VersModelPlugin's "classOne" element has been set,
    * otherwise @c false is returned.

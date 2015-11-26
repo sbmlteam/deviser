@@ -166,8 +166,7 @@ Uncertainty::getName() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Uncertainty's "id" attribute has been set.
+ * Predicate returning @c true if this Uncertainty's "id" attribute is set.
  */
 bool
 Uncertainty::isSetId() const
@@ -177,8 +176,7 @@ Uncertainty::isSetId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Uncertainty's "name" attribute has been set.
+ * Predicate returning @c true if this Uncertainty's "name" attribute is set.
  */
 bool
 Uncertainty::isSetName() const
@@ -267,8 +265,7 @@ Uncertainty::getUncertML()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Uncertainty's "uncertML" element has been set.
+ * Predicate returning @c true if this Uncertainty's "uncertML" element is set.
  */
 bool
 Uncertainty::isSetUncertML() const
@@ -690,8 +687,7 @@ Uncertainty_getName(const Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Uncertainty_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this Uncertainty_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -702,8 +698,7 @@ Uncertainty_isSetId(const Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Uncertainty_t's
- * "name" attribute has been set.
+ * Predicate returning @c 1 if this Uncertainty_t's "name" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -774,8 +769,7 @@ Uncertainty_getUncertML(const Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Uncertainty_t's
- * "uncertML" element has been set.
+ * Predicate returning @c 1 if this Uncertainty_t's "uncertML" element is set.
  */
 LIBSBML_EXTERN
 int

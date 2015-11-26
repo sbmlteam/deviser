@@ -146,8 +146,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersSpeciesPlugin's "species_att_v1" attribute has been set.
+   * Predicate returning @c true if this VersSpeciesPlugin's "species_att_v1"
+   * attribute is set.
    *
    * @return @c true if this VersSpeciesPlugin's "species_att_v1" attribute has
    * been set, otherwise @c false is returned.
@@ -156,8 +156,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersSpeciesPlugin's "string_plugin_att" attribute has been set.
+   * Predicate returning @c true if this VersSpeciesPlugin's
+   * "string_plugin_att" attribute is set.
    *
    * @return @c true if this VersSpeciesPlugin's "string_plugin_att" attribute
    * has been set, otherwise @c false is returned.
@@ -166,8 +166,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersSpeciesPlugin's "species_att_v2" attribute has been set.
+   * Predicate returning @c true if this VersSpeciesPlugin's "species_att_v2"
+   * attribute is set.
    *
    * @return @c true if this VersSpeciesPlugin's "species_att_v2" attribute has
    * been set, otherwise @c false is returned.
@@ -290,8 +290,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersSpeciesPlugin's "classOne" element has been set.
+   * Predicate returning @c true if this VersSpeciesPlugin's "classOne" element
+   * is set.
    *
    * @return @c true if this VersSpeciesPlugin's "classOne" element has been
    * set, otherwise @c false is returned.
@@ -300,8 +300,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * VersSpeciesPlugin's "classTwo" element has been set.
+   * Predicate returning @c true if this VersSpeciesPlugin's "classTwo" element
+   * is set.
    *
    * @return @c true if this VersSpeciesPlugin's "classTwo" element has been
    * set, otherwise @c false is returned.

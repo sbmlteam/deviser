@@ -187,8 +187,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * AnalyticVolume's "id" attribute has been set.
+   * Predicate returning @c true if this AnalyticVolume's "id" attribute is
+   * set.
    *
    * @return @c true if this AnalyticVolume's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -197,8 +197,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * AnalyticVolume's "functionType" attribute has been set.
+   * Predicate returning @c true if this AnalyticVolume's "functionType"
+   * attribute is set.
    *
    * @return @c true if this AnalyticVolume's "functionType" attribute has been
    * set, otherwise @c false is returned.
@@ -207,8 +207,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * AnalyticVolume's "ordinal" attribute has been set.
+   * Predicate returning @c true if this AnalyticVolume's "ordinal" attribute
+   * is set.
    *
    * @return @c true if this AnalyticVolume's "ordinal" attribute has been set,
    * otherwise @c false is returned.
@@ -217,8 +217,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * AnalyticVolume's "domainType" attribute has been set.
+   * Predicate returning @c true if this AnalyticVolume's "domainType"
+   * attribute is set.
    *
    * @return @c true if this AnalyticVolume's "domainType" attribute has been
    * set, otherwise @c false is returned.
@@ -353,8 +353,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * AnalyticVolume's "math" element has been set.
+   * Predicate returning @c true if this AnalyticVolume's "math" element is
+   * set.
    *
    * @return @c true if this AnalyticVolume's "math" element has been set,
    * otherwise @c false is returned.
@@ -711,8 +711,7 @@ AnalyticVolume_getDomainType(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "id" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "id" attribute is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
@@ -727,8 +726,8 @@ AnalyticVolume_isSetId(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "functionType" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "functionType" attribute
+ * is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
@@ -743,8 +742,8 @@ AnalyticVolume_isSetFunctionType(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "ordinal" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "ordinal" attribute is
+ * set.
  *
  * @param av the AnalyticVolume_t structure.
  *
@@ -759,8 +758,8 @@ AnalyticVolume_isSetOrdinal(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "domainType" attribute has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "domainType" attribute
+ * is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
@@ -948,8 +947,7 @@ AnalyticVolume_getMath(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this
- * AnalyticVolume_t's "math" element has been set.
+ * Predicate returning @c 1 if this AnalyticVolume_t's "math" element is set.
  *
  * @param av the AnalyticVolume_t structure.
  *

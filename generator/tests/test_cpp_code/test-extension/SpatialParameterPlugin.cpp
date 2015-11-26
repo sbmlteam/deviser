@@ -270,8 +270,8 @@ SpatialParameterPlugin::getDiffusionCoefficient()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialParameterPlugin's "spatialSymbolReference" element has been set.
+ * Predicate returning @c true if this SpatialParameterPlugin's
+ * "spatialSymbolReference" element is set.
  */
 bool
 SpatialParameterPlugin::isSetSpatialSymbolReference() const
@@ -281,8 +281,8 @@ SpatialParameterPlugin::isSetSpatialSymbolReference() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialParameterPlugin's "advectionCoefficient" element has been set.
+ * Predicate returning @c true if this SpatialParameterPlugin's
+ * "advectionCoefficient" element is set.
  */
 bool
 SpatialParameterPlugin::isSetAdvectionCoefficient() const
@@ -292,8 +292,8 @@ SpatialParameterPlugin::isSetAdvectionCoefficient() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialParameterPlugin's "boundaryCondition" element has been set.
+ * Predicate returning @c true if this SpatialParameterPlugin's
+ * "boundaryCondition" element is set.
  */
 bool
 SpatialParameterPlugin::isSetBoundaryCondition() const
@@ -303,8 +303,8 @@ SpatialParameterPlugin::isSetBoundaryCondition() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialParameterPlugin's "diffusionCoefficient" element has been set.
+ * Predicate returning @c true if this SpatialParameterPlugin's
+ * "diffusionCoefficient" element is set.
  */
 bool
 SpatialParameterPlugin::isSetDiffusionCoefficient() const

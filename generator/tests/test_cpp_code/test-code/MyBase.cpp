@@ -123,8 +123,7 @@ MyBase::getId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this MyBase's
- * "id" attribute has been set.
+ * Predicate returning @c true if this MyBase's "id" attribute is set.
  */
 bool
 MyBase::isSetId() const
@@ -395,8 +394,7 @@ MyBase_getId(const MyBase_t * mb)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this MyBase_t's "id"
- * attribute has been set.
+ * Predicate returning @c 1 if this MyBase_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

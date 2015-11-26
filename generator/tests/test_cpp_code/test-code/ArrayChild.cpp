@@ -166,8 +166,7 @@ ArrayChild::getNumber(double* outArray) const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * ArrayChild's "number" attribute has been set.
+ * Predicate returning @c true if this ArrayChild's "number" attribute is set.
  */
 bool
 ArrayChild::isSetNumber() const
@@ -239,8 +238,7 @@ ArrayChild::getUnit()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * ArrayChild's "unit" element has been set.
+ * Predicate returning @c true if this ArrayChild's "unit" element is set.
  */
 bool
 ArrayChild::isSetUnit() const
@@ -779,8 +777,7 @@ ArrayChild_free(ArrayChild_t* ac)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this ArrayChild_t's
- * "number" attribute has been set.
+ * Predicate returning @c 1 if this ArrayChild_t's "number" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -830,8 +827,7 @@ ArrayChild_getUnit(const ArrayChild_t * ac)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this ArrayChild_t's
- * "unit" element has been set.
+ * Predicate returning @c 1 if this ArrayChild_t's "unit" element is set.
  */
 LIBSBML_EXTERN
 int

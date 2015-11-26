@@ -157,8 +157,8 @@ FunctionTerm::getResultLevel() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * FunctionTerm's "resultLevel" attribute has been set.
+ * Predicate returning @c true if this FunctionTerm's "resultLevel" attribute
+ * is set.
  */
 bool
 FunctionTerm::isSetResultLevel() const
@@ -220,8 +220,7 @@ FunctionTerm::getMath()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * FunctionTerm's "math" element has been set.
+ * Predicate returning @c true if this FunctionTerm's "math" element is set.
  */
 bool
 FunctionTerm::isSetMath() const
@@ -663,8 +662,8 @@ FunctionTerm_getResultLevel(const FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this FunctionTerm_t's
- * "resultLevel" attribute has been set.
+ * Predicate returning @c 1 if this FunctionTerm_t's "resultLevel" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -714,8 +713,7 @@ FunctionTerm_getMath(const FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this FunctionTerm_t's
- * "math" element has been set.
+ * Predicate returning @c 1 if this FunctionTerm_t's "math" element is set.
  */
 LIBSBML_EXTERN
 int

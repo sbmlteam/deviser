@@ -139,8 +139,8 @@ SampledFieldGeometry::getSampledField() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SampledFieldGeometry's "sampledField" attribute has been set.
+ * Predicate returning @c true if this SampledFieldGeometry's "sampledField"
+ * attribute is set.
  */
 bool
 SampledFieldGeometry::isSetSampledField() const
@@ -818,8 +818,8 @@ SampledFieldGeometry_getSampledField(const SampledFieldGeometry_t * sfg)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this
- * SampledFieldGeometry_t's "sampledField" attribute has been set.
+ * Predicate returning @c 1 if this SampledFieldGeometry_t's "sampledField"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

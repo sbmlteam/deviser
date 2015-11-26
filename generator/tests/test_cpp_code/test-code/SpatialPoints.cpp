@@ -224,8 +224,7 @@ SpatialPoints::getDataTypeAsString() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialPoints's "id" attribute has been set.
+ * Predicate returning @c true if this SpatialPoints's "id" attribute is set.
  */
 bool
 SpatialPoints::isSetId() const
@@ -235,8 +234,8 @@ SpatialPoints::isSetId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialPoints's "compression" attribute has been set.
+ * Predicate returning @c true if this SpatialPoints's "compression" attribute
+ * is set.
  */
 bool
 SpatialPoints::isSetCompression() const
@@ -246,8 +245,8 @@ SpatialPoints::isSetCompression() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialPoints's "arrayData" attribute has been set.
+ * Predicate returning @c true if this SpatialPoints's "arrayData" attribute is
+ * set.
  */
 bool
 SpatialPoints::isSetArrayData() const
@@ -257,8 +256,8 @@ SpatialPoints::isSetArrayData() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialPoints's "arrayDataLength" attribute has been set.
+ * Predicate returning @c true if this SpatialPoints's "arrayDataLength"
+ * attribute is set.
  */
 bool
 SpatialPoints::isSetArrayDataLength() const
@@ -268,8 +267,8 @@ SpatialPoints::isSetArrayDataLength() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialPoints's "dataType" attribute has been set.
+ * Predicate returning @c true if this SpatialPoints's "dataType" attribute is
+ * set.
  */
 bool
 SpatialPoints::isSetDataType() const
@@ -1029,8 +1028,7 @@ SpatialPoints_getDataTypeAsString(const SpatialPoints_t * sp)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this SpatialPoints_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this SpatialPoints_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1041,8 +1039,8 @@ SpatialPoints_isSetId(const SpatialPoints_t * sp)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this SpatialPoints_t's
- * "compression" attribute has been set.
+ * Predicate returning @c 1 if this SpatialPoints_t's "compression" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1053,8 +1051,8 @@ SpatialPoints_isSetCompression(const SpatialPoints_t * sp)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this SpatialPoints_t's
- * "arrayData" attribute has been set.
+ * Predicate returning @c 1 if this SpatialPoints_t's "arrayData" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1065,8 +1063,8 @@ SpatialPoints_isSetArrayData(const SpatialPoints_t * sp)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this SpatialPoints_t's
- * "arrayDataLength" attribute has been set.
+ * Predicate returning @c 1 if this SpatialPoints_t's "arrayDataLength"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1077,8 +1075,8 @@ SpatialPoints_isSetArrayDataLength(const SpatialPoints_t * sp)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this SpatialPoints_t's
- * "dataType" attribute has been set.
+ * Predicate returning @c 1 if this SpatialPoints_t's "dataType" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int

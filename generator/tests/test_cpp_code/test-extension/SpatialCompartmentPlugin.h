@@ -128,8 +128,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SpatialCompartmentPlugin's "compartmentMapping" element has been set.
+   * Predicate returning @c true if this SpatialCompartmentPlugin's
+   * "compartmentMapping" element is set.
    *
    * @return @c true if this SpatialCompartmentPlugin's "compartmentMapping"
    * element has been set, otherwise @c false is returned.

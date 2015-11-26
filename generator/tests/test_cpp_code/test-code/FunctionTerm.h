@@ -148,8 +148,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * FunctionTerm's "resultLevel" attribute has been set.
+   * Predicate returning @c true if this FunctionTerm's "resultLevel" attribute
+   * is set.
    *
    * @return @c true if this FunctionTerm's "resultLevel" attribute has been
    * set, otherwise @c false is returned.
@@ -200,8 +200,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * FunctionTerm's "math" element has been set.
+   * Predicate returning @c true if this FunctionTerm's "math" element is set.
    *
    * @return @c true if this FunctionTerm's "math" element has been set,
    * otherwise @c false is returned.
@@ -496,8 +495,8 @@ FunctionTerm_getResultLevel(const FunctionTerm_t * ft);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this FunctionTerm_t's
- * "resultLevel" attribute has been set.
+ * Predicate returning @c 1 if this FunctionTerm_t's "resultLevel" attribute is
+ * set.
  *
  * @param ft the FunctionTerm_t structure.
  *
@@ -562,8 +561,7 @@ FunctionTerm_getMath(const FunctionTerm_t * ft);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this FunctionTerm_t's
- * "math" element has been set.
+ * Predicate returning @c 1 if this FunctionTerm_t's "math" element is set.
  *
  * @param ft the FunctionTerm_t structure.
  *

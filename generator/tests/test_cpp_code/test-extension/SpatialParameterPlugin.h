@@ -194,8 +194,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SpatialParameterPlugin's "spatialSymbolReference" element has been set.
+   * Predicate returning @c true if this SpatialParameterPlugin's
+   * "spatialSymbolReference" element is set.
    *
    * @return @c true if this SpatialParameterPlugin's "spatialSymbolReference"
    * element has been set, otherwise @c false is returned.
@@ -204,8 +204,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SpatialParameterPlugin's "advectionCoefficient" element has been set.
+   * Predicate returning @c true if this SpatialParameterPlugin's
+   * "advectionCoefficient" element is set.
    *
    * @return @c true if this SpatialParameterPlugin's "advectionCoefficient"
    * element has been set, otherwise @c false is returned.
@@ -214,8 +214,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SpatialParameterPlugin's "boundaryCondition" element has been set.
+   * Predicate returning @c true if this SpatialParameterPlugin's
+   * "boundaryCondition" element is set.
    *
    * @return @c true if this SpatialParameterPlugin's "boundaryCondition"
    * element has been set, otherwise @c false is returned.
@@ -224,8 +224,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * SpatialParameterPlugin's "diffusionCoefficient" element has been set.
+   * Predicate returning @c true if this SpatialParameterPlugin's
+   * "diffusionCoefficient" element is set.
    *
    * @return @c true if this SpatialParameterPlugin's "diffusionCoefficient"
    * element has been set, otherwise @c false is returned.

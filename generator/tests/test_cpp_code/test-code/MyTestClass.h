@@ -295,8 +295,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "id" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "id" attribute is set.
    *
    * @return @c true if this MyTestClass's "id" attribute has been set,
    * otherwise @c false is returned.
@@ -305,8 +304,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "name" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "name" attribute is set.
    *
    * @return @c true if this MyTestClass's "name" attribute has been set,
    * otherwise @c false is returned.
@@ -315,8 +313,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "num" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "num" attribute is set.
    *
    * @return @c true if this MyTestClass's "num" attribute has been set,
    * otherwise @c false is returned.
@@ -325,8 +322,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "num2" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "num2" attribute is set.
    *
    * @return @c true if this MyTestClass's "num2" attribute has been set,
    * otherwise @c false is returned.
@@ -335,8 +331,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "num3" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "num3" attribute is set.
    *
    * @return @c true if this MyTestClass's "num3" attribute has been set,
    * otherwise @c false is returned.
@@ -345,8 +340,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "num1" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "num1" attribute is set.
    *
    * @return @c true if this MyTestClass's "num1" attribute has been set,
    * otherwise @c false is returned.
@@ -355,8 +349,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "true" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "true" attribute is set.
    *
    * @return @c true if this MyTestClass's "true" attribute has been set,
    * otherwise @c false is returned.
@@ -365,8 +358,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "false" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "false" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "false" attribute has been set,
    * otherwise @c false is returned.
@@ -375,8 +368,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "unit" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "unit" attribute is set.
    *
    * @return @c true if this MyTestClass's "unit" attribute has been set,
    * otherwise @c false is returned.
@@ -385,8 +377,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "ref1" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "ref1" attribute is set.
    *
    * @return @c true if this MyTestClass's "ref1" attribute has been set,
    * otherwise @c false is returned.
@@ -395,8 +386,7 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "ref2" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "ref2" attribute is set.
    *
    * @return @c true if this MyTestClass's "ref2" attribute has been set,
    * otherwise @c false is returned.
@@ -405,8 +395,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "refUnit" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "refUnit" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "refUnit" attribute has been set,
    * otherwise @c false is returned.
@@ -415,8 +405,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "correctId" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "correctId" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "correctId" attribute has been set,
    * otherwise @c false is returned.
@@ -425,8 +415,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "idRef" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "idRef" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "idRef" attribute has been set,
    * otherwise @c false is returned.
@@ -435,8 +425,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "idref1" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "idref1" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "idref1" attribute has been set,
    * otherwise @c false is returned.
@@ -445,8 +435,8 @@ public:
 
 
   /**
-   * Predicate returning @c true or @c false depending on whether this
-   * MyTestClass's "idref2" attribute has been set.
+   * Predicate returning @c true if this MyTestClass's "idref2" attribute is
+   * set.
    *
    * @return @c true if this MyTestClass's "idref2" attribute has been set,
    * otherwise @c false is returned.
@@ -1273,8 +1263,7 @@ MyTestClass_getIdref2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "id" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1289,8 +1278,7 @@ MyTestClass_isSetId(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "name" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "name" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1305,8 +1293,7 @@ MyTestClass_isSetName(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "num" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "num" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1321,8 +1308,7 @@ MyTestClass_isSetNum(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "num2" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "num2" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1337,8 +1323,7 @@ MyTestClass_isSetNum2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "num3" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "num3" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1353,8 +1338,7 @@ MyTestClass_isSetNum3(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "num1" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "num1" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1369,8 +1353,7 @@ MyTestClass_isSetNum1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "true" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "true" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1385,8 +1368,7 @@ MyTestClass_isSetTrue(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "false" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "false" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1401,8 +1383,7 @@ MyTestClass_isSetFalse(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "unit" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "unit" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1417,8 +1398,7 @@ MyTestClass_isSetUnit(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "ref1" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "ref1" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1433,8 +1413,7 @@ MyTestClass_isSetRef1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "ref2" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "ref2" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1449,8 +1428,7 @@ MyTestClass_isSetRef2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "refUnit" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "refUnit" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1465,8 +1443,8 @@ MyTestClass_isSetRefUnit(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "correctId" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "correctId" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1481,8 +1459,7 @@ MyTestClass_isSetCorrectId(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "idRef" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "idRef" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1497,8 +1474,7 @@ MyTestClass_isSetIdRef(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "idref1" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "idref1" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
@@ -1513,8 +1489,7 @@ MyTestClass_isSetIdref1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 or @c 0 depending on whether this MyTestClass_t's
- * "idref2" attribute has been set.
+ * Predicate returning @c 1 if this MyTestClass_t's "idref2" attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *

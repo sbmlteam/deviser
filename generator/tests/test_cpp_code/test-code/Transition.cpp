@@ -159,8 +159,7 @@ Transition::getName() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Transition's "id" attribute has been set.
+ * Predicate returning @c true if this Transition's "id" attribute is set.
  */
 bool
 Transition::isSetId() const
@@ -170,8 +169,7 @@ Transition::isSetId() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Transition's "name" attribute has been set.
+ * Predicate returning @c true if this Transition's "name" attribute is set.
  */
 bool
 Transition::isSetName() const
@@ -748,8 +746,8 @@ Transition::getDefaultTerm()
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * Transition's "defaultTerm" element has been set.
+ * Predicate returning @c true if this Transition's "defaultTerm" element is
+ * set.
  */
 bool
 Transition::isSetDefaultTerm() const
@@ -1376,8 +1374,7 @@ Transition_getName(const Transition_t * t)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "id" attribute has been set.
+ * Predicate returning @c 1 if this Transition_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1388,8 +1385,7 @@ Transition_isSetId(const Transition_t * t)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "name" attribute has been set.
+ * Predicate returning @c 1 if this Transition_t's "name" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1735,8 +1731,8 @@ Transition_getDefaultTerm(const Transition_t * t)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Transition_t's
- * "defaultTerm" element has been set.
+ * Predicate returning @c 1 if this Transition_t's "defaultTerm" element is
+ * set.
  */
 LIBSBML_EXTERN
 int

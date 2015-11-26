@@ -125,8 +125,7 @@ Unit::getUnit() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this Unit's
- * "unit" attribute has been set.
+ * Predicate returning @c true if this Unit's "unit" attribute is set.
  */
 bool
 Unit::isSetUnit() const
@@ -449,8 +448,7 @@ Unit_getUnit(const Unit_t * u)
 
 
 /*
- * Predicate returning @c 1 or @c 0 depending on whether this Unit_t's "unit"
- * attribute has been set.
+ * Predicate returning @c 1 if this Unit_t's "unit" attribute is set.
  */
 LIBSBML_EXTERN
 int

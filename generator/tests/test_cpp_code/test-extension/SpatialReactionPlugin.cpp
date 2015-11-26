@@ -118,8 +118,8 @@ SpatialReactionPlugin::getIsLocal() const
 
 
 /*
- * Predicate returning @c true or @c false depending on whether this
- * SpatialReactionPlugin's "isLocal" attribute has been set.
+ * Predicate returning @c true if this SpatialReactionPlugin's "isLocal"
+ * attribute is set.
  */
 bool
 SpatialReactionPlugin::isSetIsLocal() const
