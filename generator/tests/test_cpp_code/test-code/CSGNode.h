@@ -263,7 +263,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this CSGNode object.
+   * Returns the libSBML type code for this CSGNode object.
    *
    * @copydetails doc_what_are_typecodes
    *

@@ -236,7 +236,7 @@ class GeneralFunctions():
             return
 
         # create comment
-        title_line = 'Returns the lib{} typcode of this {} object.'\
+        title_line = 'Returns the lib{} type code for this {} object.'\
             .format(self.cap_language, self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
         return_lines = ['@return the {} type code for this '

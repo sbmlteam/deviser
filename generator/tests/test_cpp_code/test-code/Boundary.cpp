@@ -258,7 +258,7 @@ Boundary::setElementName(const std::string& name)
 
 
 /*
- * Returns the libSBML typcode of this Boundary object.
+ * Returns the libSBML type code for this Boundary object.
  */
 int
 Boundary::getTypeCode() const

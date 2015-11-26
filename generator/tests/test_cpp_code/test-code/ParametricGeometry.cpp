@@ -433,7 +433,7 @@ ParametricGeometry::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ParametricGeometry object.
+ * Returns the libSBML type code for this ParametricGeometry object.
  */
 int
 ParametricGeometry::getTypeCode() const

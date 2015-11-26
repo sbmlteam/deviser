@@ -148,7 +148,7 @@ MySEDClass::getElementName() const
 
 
 /*
- * Returns the libSEDML typcode of this MySEDClass object.
+ * Returns the libSEDML type code for this MySEDClass object.
  */
 int
 MySEDClass::getTypeCode() const

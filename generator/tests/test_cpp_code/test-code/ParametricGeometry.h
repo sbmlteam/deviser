@@ -384,7 +384,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this ParametricGeometry object.
+   * Returns the libSBML type code for this ParametricGeometry object.
    *
    * @copydetails doc_what_are_typecodes
    *

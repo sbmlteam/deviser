@@ -457,7 +457,7 @@ Output::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this Output object.
+ * Returns the libSBML type code for this Output object.
  */
 int
 Output::getTypeCode() const

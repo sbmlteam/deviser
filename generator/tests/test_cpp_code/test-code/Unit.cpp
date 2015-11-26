@@ -197,7 +197,7 @@ Unit::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this Unit object.
+ * Returns the libSBML type code for this Unit object.
  */
 int
 Unit::getTypeCode() const

@@ -455,7 +455,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this MixedGeometry object.
+   * Returns the libSBML type code for this MixedGeometry object.
    *
    * @copydetails doc_what_are_typecodes
    *

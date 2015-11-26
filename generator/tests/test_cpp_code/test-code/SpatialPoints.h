@@ -414,7 +414,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this SpatialPoints object.
+   * Returns the libSBML type code for this SpatialPoints object.
    *
    * @copydetails doc_what_are_typecodes
    *

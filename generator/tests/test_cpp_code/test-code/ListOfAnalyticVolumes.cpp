@@ -320,7 +320,7 @@ ListOfAnalyticVolumes::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfAnalyticVolumes object.
+ * Returns the libSBML type code for this ListOfAnalyticVolumes object.
  */
 int
 ListOfAnalyticVolumes::getTypeCode() const

@@ -841,7 +841,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this MyTestClass object.
+   * Returns the libSBML type code for this MyTestClass object.
    *
    * @copydetails doc_what_are_typecodes
    *

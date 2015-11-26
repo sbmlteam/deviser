@@ -326,7 +326,7 @@ Uncertainty::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this Uncertainty object.
+ * Returns the libSBML type code for this Uncertainty object.
  */
 int
 Uncertainty::getTypeCode() const

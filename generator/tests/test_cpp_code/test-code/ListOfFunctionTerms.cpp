@@ -394,7 +394,7 @@ ListOfFunctionTerms::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfFunctionTerms object.
+ * Returns the libSBML type code for this ListOfFunctionTerms object.
  */
 int
 ListOfFunctionTerms::getTypeCode() const

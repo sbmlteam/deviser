@@ -192,7 +192,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Unit object.
+   * Returns the libSBML type code for this Unit object.
    *
    * @copydetails doc_what_are_typecodes
    *

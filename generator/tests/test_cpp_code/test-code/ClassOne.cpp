@@ -322,7 +322,7 @@ ClassOne::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ClassOne object.
+ * Returns the libSBML type code for this ClassOne object.
  */
 int
 ClassOne::getTypeCode() const

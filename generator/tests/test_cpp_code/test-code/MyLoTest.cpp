@@ -125,7 +125,7 @@ MyLoTest::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this MyLoTest object.
+ * Returns the libSBML type code for this MyLoTest object.
  */
 int
 MyLoTest::getTypeCode() const

@@ -562,7 +562,7 @@ MixedGeometry::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this MixedGeometry object.
+ * Returns the libSBML type code for this MixedGeometry object.
  */
 int
 MixedGeometry::getTypeCode() const

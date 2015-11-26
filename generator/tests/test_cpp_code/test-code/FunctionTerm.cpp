@@ -302,7 +302,7 @@ FunctionTerm::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this FunctionTerm object.
+ * Returns the libSBML type code for this FunctionTerm object.
  */
 int
 FunctionTerm::getTypeCode() const

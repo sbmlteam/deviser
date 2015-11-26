@@ -822,7 +822,7 @@ Transition::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this Transition object.
+ * Returns the libSBML type code for this Transition object.
  */
 int
 Transition::getTypeCode() const

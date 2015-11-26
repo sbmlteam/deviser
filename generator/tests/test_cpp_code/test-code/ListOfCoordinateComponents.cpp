@@ -285,7 +285,7 @@ ListOfCoordinateComponents::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfCoordinateComponents object.
+ * Returns the libSBML type code for this ListOfCoordinateComponents object.
  */
 int
 ListOfCoordinateComponents::getTypeCode() const

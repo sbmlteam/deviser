@@ -389,7 +389,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Output object.
+   * Returns the libSBML type code for this Output object.
    *
    * @copydetails doc_what_are_typecodes
    *

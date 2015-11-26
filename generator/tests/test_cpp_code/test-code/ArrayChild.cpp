@@ -326,7 +326,7 @@ ArrayChild::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ArrayChild object.
+ * Returns the libSBML type code for this ArrayChild object.
  */
 int
 ArrayChild::getTypeCode() const

@@ -312,7 +312,7 @@ ListOfOutputs::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfOutputs object.
+ * Returns the libSBML type code for this ListOfOutputs object.
  */
 int
 ListOfOutputs::getTypeCode() const

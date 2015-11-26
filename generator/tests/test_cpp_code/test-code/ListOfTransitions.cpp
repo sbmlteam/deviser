@@ -273,7 +273,7 @@ ListOfTransitions::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfTransitions object.
+ * Returns the libSBML type code for this ListOfTransitions object.
  */
 int
 ListOfTransitions::getTypeCode() const

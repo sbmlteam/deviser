@@ -435,7 +435,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this CoordinateComponent object.
+   * Returns the libSBML type code for this CoordinateComponent object.
    *
    * @copydetails doc_what_are_typecodes
    *

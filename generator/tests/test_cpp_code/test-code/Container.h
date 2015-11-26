@@ -240,7 +240,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Container object.
+   * Returns the libSBML type code for this Container object.
    *
    * @copydetails doc_what_are_typecodes
    *

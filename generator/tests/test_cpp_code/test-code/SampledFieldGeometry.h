@@ -371,7 +371,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this SampledFieldGeometry object.
+   * Returns the libSBML type code for this SampledFieldGeometry object.
    *
    * @copydetails doc_what_are_typecodes
    *

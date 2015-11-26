@@ -509,7 +509,7 @@ AnalyticVolume::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this AnalyticVolume object.
+ * Returns the libSBML type code for this AnalyticVolume object.
  */
 int
 AnalyticVolume::getTypeCode() const

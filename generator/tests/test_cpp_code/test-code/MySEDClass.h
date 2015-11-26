@@ -153,7 +153,7 @@ public:
 
 
   /**
-   * Returns the libSEDML typcode of this MySEDClass object.
+   * Returns the libSEDML type code for this MySEDClass object.
    *
    * @copydetails doc_what_are_typecodes
    *

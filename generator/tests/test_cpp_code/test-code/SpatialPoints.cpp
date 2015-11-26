@@ -491,7 +491,7 @@ SpatialPoints::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this SpatialPoints object.
+ * Returns the libSBML type code for this SpatialPoints object.
  */
 int
 SpatialPoints::getTypeCode() const

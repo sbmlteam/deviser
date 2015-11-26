@@ -450,7 +450,7 @@ ListOfCSGNodes::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this ListOfCSGNodes object.
+ * Returns the libSBML type code for this ListOfCSGNodes object.
  */
 int
 ListOfCSGNodes::getTypeCode() const

@@ -1089,7 +1089,7 @@ MyTestClass::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this MyTestClass object.
+ * Returns the libSBML type code for this MyTestClass object.
  */
 int
 MyTestClass::getTypeCode() const

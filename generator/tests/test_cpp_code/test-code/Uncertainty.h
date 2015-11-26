@@ -282,7 +282,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Uncertainty object.
+   * Returns the libSBML type code for this Uncertainty object.
    *
    * @copydetails doc_what_are_typecodes
    *

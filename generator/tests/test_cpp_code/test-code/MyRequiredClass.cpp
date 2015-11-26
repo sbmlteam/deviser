@@ -1334,7 +1334,7 @@ MyRequiredClass::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this MyRequiredClass object.
+ * Returns the libSBML type code for this MyRequiredClass object.
  */
 int
 MyRequiredClass::getTypeCode() const

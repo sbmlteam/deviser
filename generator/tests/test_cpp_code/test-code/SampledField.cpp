@@ -762,7 +762,7 @@ SampledField::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this SampledField object.
+ * Returns the libSBML type code for this SampledField object.
  */
 int
 SampledField::getTypeCode() const

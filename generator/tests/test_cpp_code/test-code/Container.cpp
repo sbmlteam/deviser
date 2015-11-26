@@ -256,7 +256,7 @@ Container::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this Container object.
+ * Returns the libSBML type code for this Container object.
  */
 int
 Container::getTypeCode() const

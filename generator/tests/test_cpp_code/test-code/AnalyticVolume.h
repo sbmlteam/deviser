@@ -403,7 +403,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this AnalyticVolume object.
+   * Returns the libSBML type code for this AnalyticVolume object.
    *
    * @copydetails doc_what_are_typecodes
    *

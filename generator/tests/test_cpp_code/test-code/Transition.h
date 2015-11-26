@@ -706,7 +706,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Transition object.
+   * Returns the libSBML type code for this Transition object.
    *
    * @copydetails doc_what_are_typecodes
    *

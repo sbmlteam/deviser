@@ -336,7 +336,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this ListOfCSGNodes object.
+   * Returns the libSBML type code for this ListOfCSGNodes object.
    *
    * @copydetails doc_what_are_typecodes
    *

@@ -437,7 +437,7 @@ CSGTransformation::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this CSGTransformation object.
+ * Returns the libSBML type code for this CSGTransformation object.
  */
 int
 CSGTransformation::getTypeCode() const

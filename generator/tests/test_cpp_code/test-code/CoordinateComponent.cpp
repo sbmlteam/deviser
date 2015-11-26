@@ -584,7 +584,7 @@ CoordinateComponent::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this CoordinateComponent object.
+ * Returns the libSBML type code for this CoordinateComponent object.
  */
 int
 CoordinateComponent::getTypeCode() const

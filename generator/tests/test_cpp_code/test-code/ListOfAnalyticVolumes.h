@@ -296,7 +296,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this ListOfAnalyticVolumes object.
+   * Returns the libSBML type code for this ListOfAnalyticVolumes object.
    *
    * @copydetails doc_what_are_typecodes
    *

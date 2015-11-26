@@ -260,7 +260,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this FbcAnd object.
+   * Returns the libSBML type code for this FbcAnd object.
    *
    * @copydetails doc_what_are_typecodes
    *

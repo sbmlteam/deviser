@@ -614,7 +614,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this SampledField object.
+   * Returns the libSBML type code for this SampledField object.
    *
    * @copydetails doc_what_are_typecodes
    *

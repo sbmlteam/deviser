@@ -184,7 +184,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this MyBase object.
+   * Returns the libSBML type code for this MyBase object.
    *
    * @copydetails doc_what_are_typecodes
    *

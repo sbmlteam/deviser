@@ -254,7 +254,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this ArrayChild object.
+   * Returns the libSBML type code for this ArrayChild object.
    *
    * @copydetails doc_what_are_typecodes
    *

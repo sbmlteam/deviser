@@ -175,7 +175,7 @@ MyBase::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this MyBase object.
+ * Returns the libSBML type code for this MyBase object.
  */
 int
 MyBase::getTypeCode() const

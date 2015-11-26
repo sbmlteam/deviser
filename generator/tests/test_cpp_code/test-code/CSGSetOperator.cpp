@@ -698,7 +698,7 @@ CSGSetOperator::getElementName() const
 
 
 /*
- * Returns the libSBML typcode of this CSGSetOperator object.
+ * Returns the libSBML type code for this CSGSetOperator object.
  */
 int
 CSGSetOperator::getTypeCode() const

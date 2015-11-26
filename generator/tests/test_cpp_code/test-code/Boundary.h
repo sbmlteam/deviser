@@ -242,7 +242,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this Boundary object.
+   * Returns the libSBML type code for this Boundary object.
    *
    * @copydetails doc_what_are_typecodes
    *

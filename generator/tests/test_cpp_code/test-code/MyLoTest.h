@@ -139,7 +139,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this MyLoTest object.
+   * Returns the libSBML type code for this MyLoTest object.
    *
    * @copydetails doc_what_are_typecodes
    *

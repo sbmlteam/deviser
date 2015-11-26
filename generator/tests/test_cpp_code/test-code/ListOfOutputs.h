@@ -285,7 +285,7 @@ public:
 
 
   /**
-   * Returns the libSBML typcode of this ListOfOutputs object.
+   * Returns the libSBML type code for this ListOfOutputs object.
    *
    * @copydetails doc_what_are_typecodes
    *
