@@ -703,7 +703,7 @@ class BaseCppFile(BaseFile.BaseFile):
                                 'of possible types in the lib{0} '
                                 '&ldquo;{2}&rdquo; package '
                                 'implementation.'.format(self.cap_language,
-                                                         self.up_package,
+                                                         up_package,
                                                          package))
         self.write_blank_comment_line()
         self.write_comment_line('@copydetails doc_what_are_typecodes')

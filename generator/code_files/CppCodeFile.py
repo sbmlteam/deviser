@@ -303,10 +303,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             if not self.has_children:
                 return
 
-            attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
-                                                               self.is_cpp_api,
-                                                               self.is_list_of,
-                                                               self.class_object)
+            attrib_functions = SetGetFunctions.\
+                SetGetFunctions(self.language, self.is_cpp_api,
+                                self.is_list_of, self.class_object)
 
             num_elements = len(self.child_elements)
         else:
@@ -315,7 +314,6 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                                                self.is_list_of,
                                                                override)
             num_elements = 1
-
 
         for i in range(0, num_elements):
             code = attrib_functions.write_get(False, i)
@@ -334,7 +332,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
         for i in range(0, num_elements):
             code = attrib_functions.write_create(False, i)
-            if override is None and code is None and 'concrete' in self.child_elements[i]:
+            if override is None and code is None \
+                    and 'concrete' in self.child_elements[i]:
                 # need to write creates for the concrete
                 member = self.child_elements[i]['memberName']
                 concrete = self.child_elements[i]['concrete']
@@ -633,10 +632,12 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             # contains an element of another type
             # eg qual:ListOfFunctionTerms contains a DefaultTerm
             if not self.is_plugin:
-                element_children = query.get_other_element_children(self.class_object, element)
+                element_children = \
+                    query.get_other_element_children(self.class_object, element)
 
-                for i in range(0, len(element_children)):
-                    child_class = self.create_lo_other_child_element_class(element_children[0], self.class_name)
+                for j in range(0, len(element_children)):
+                    child_class = self.create_lo_other_child_element_class(
+                        element_children[0], self.class_name)
                     self.write_child_element_functions(child_class)
     ########################################################################
 
