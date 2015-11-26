@@ -18,6 +18,7 @@ def get_filename(name):
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
+
 def generate_bindings_downcast_ext(filename, binding):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()

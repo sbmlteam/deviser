@@ -63,7 +63,7 @@ class ExtensionFiles():
         class_descrip = self.create_class_description(num)
         self.write_plugin_header(class_descrip)
         self.write_plugin_code(class_descrip)
-        class_descrip = self.remove_class_description(num)
+        self.remove_class_description(num)
 
     def write_header(self):
         types_fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package,
@@ -134,7 +134,6 @@ class ExtensionFiles():
 
         return class_object
 
-
     def create_document_plugin_desc(self):
         up_package = strFunctions.upper_first(self.package['name'])
         up_language = self.language.upper()
@@ -178,13 +177,3 @@ class ExtensionFiles():
                                'root': element['root']
                                })
         return attribute_dict
-
-    def test_func(self, num=-1):
-        if num == -1:
-            self.write_files()
-        else:
-            self.write_plugin_files(num)
- #       if self.class_object['hasListOf']:
- #           lo_working_class = self.create_list_of_description()
-#            self.write_header(lo_working_class)
- #           self.write_code(lo_working_class)

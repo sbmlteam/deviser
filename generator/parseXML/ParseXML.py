@@ -38,7 +38,6 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import sys
 from xml.dom.minidom import *
 import os.path
 from util import query
@@ -56,7 +55,8 @@ class ParseXML():
             global_variables.code_returned = \
                 global_variables.return_codes['failed to read file']
 
-        if global_variables.code_returned == global_variables.return_codes['success']:
+        if global_variables.code_returned == \
+                global_variables.return_codes['success']:
             self.dom = parse(filename)
 
         self.temp_dir = os.path.dirname(filename)
@@ -531,7 +531,8 @@ class ParseXML():
 
     #####################################################################
 
-    def report_error(self, code, message):
+    @staticmethod
+    def report_error(code, message):
         global_variables.code_returned = code
         print('{}'.format(global_variables.get_return_code(code)))
         print('{}'.format(message))
