@@ -604,9 +604,11 @@ public:
 
 
   /**
-   * Returns the XML name of this SampledField object.
+   * Returns the XML element name of this SampledField object.
    *
-   * @return the name of this element; that is "sampledField".
+   * For SampledField, the XML element name is always @c "sampledField".
+   *
+   * @return the name of this element, i.e. @c "sampledField".
    */
   virtual const std::string& getElementName() const;
 

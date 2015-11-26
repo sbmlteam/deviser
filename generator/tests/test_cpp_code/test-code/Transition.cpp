@@ -811,7 +811,7 @@ Transition::unsetDefaultTerm()
 
 
 /*
- * Returns the XML name of this Transition object.
+ * Returns the XML element name of this Transition object.
  */
 const std::string&
 Transition::getElementName() const

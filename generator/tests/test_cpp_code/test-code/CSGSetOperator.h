@@ -503,9 +503,11 @@ public:
 
 
   /**
-   * Returns the XML name of this CSGSetOperator object.
+   * Returns the XML element name of this CSGSetOperator object.
    *
-   * @return the name of this element; that is "csgSetOperator".
+   * For CSGSetOperator, the XML element name is always @c "csgSetOperator".
+   *
+   * @return the name of this element, i.e. @c "csgSetOperator".
    */
   virtual const std::string& getElementName() const;
 

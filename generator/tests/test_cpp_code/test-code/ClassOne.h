@@ -263,9 +263,11 @@ public:
 
 
   /**
-   * Returns the XML name of this ClassOne object.
+   * Returns the XML element name of this ClassOne object.
    *
-   * @return the name of this element; that is "classOne".
+   * For ClassOne, the XML element name is always @c "classOne".
+   *
+   * @return the name of this element, i.e. @c "classOne".
    */
   virtual const std::string& getElementName() const;
 

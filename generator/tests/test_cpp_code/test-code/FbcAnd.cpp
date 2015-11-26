@@ -308,7 +308,7 @@ FbcAnd::removeAssociation(unsigned int n)
 
 
 /*
- * Returns the XML name of this FbcAnd object.
+ * Returns the XML element name of this FbcAnd object.
  */
 const std::string&
 FbcAnd::getElementName() const

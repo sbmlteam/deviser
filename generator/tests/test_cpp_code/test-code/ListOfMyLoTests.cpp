@@ -316,7 +316,7 @@ ListOfMyLoTests::createMyLoTest()
 
 
 /*
- * Returns the XML name of this ListOfMyLoTests object.
+ * Returns the XML element name of this ListOfMyLoTests object.
  */
 const std::string&
 ListOfMyLoTests::getElementName() const

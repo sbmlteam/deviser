@@ -274,7 +274,7 @@ ListOfCoordinateComponents::createCoordinateComponent()
 
 
 /*
- * Returns the XML name of this ListOfCoordinateComponents object.
+ * Returns the XML element name of this ListOfCoordinateComponents object.
  */
 const std::string&
 ListOfCoordinateComponents::getElementName() const

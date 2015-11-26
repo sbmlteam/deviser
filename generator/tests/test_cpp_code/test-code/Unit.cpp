@@ -186,7 +186,7 @@ Unit::renameSIdRefs(const std::string& oldid, const std::string& newid)
 
 
 /*
- * Returns the XML name of this Unit object.
+ * Returns the XML element name of this Unit object.
  */
 const std::string&
 Unit::getElementName() const

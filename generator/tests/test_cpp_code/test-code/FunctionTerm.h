@@ -240,9 +240,11 @@ public:
 
 
   /**
-   * Returns the XML name of this FunctionTerm object.
+   * Returns the XML element name of this FunctionTerm object.
    *
-   * @return the name of this element; that is "functionTerm".
+   * For FunctionTerm, the XML element name is always @c "functionTerm".
+   *
+   * @return the name of this element, i.e. @c "functionTerm".
    */
   virtual const std::string& getElementName() const;
 

@@ -393,9 +393,11 @@ public:
 
 
   /**
-   * Returns the XML name of this AnalyticVolume object.
+   * Returns the XML element name of this AnalyticVolume object.
    *
-   * @return the name of this element; that is "analyticVolume".
+   * For AnalyticVolume, the XML element name is always @c "analyticVolume".
+   *
+   * @return the name of this element, i.e. @c "analyticVolume".
    */
   virtual const std::string& getElementName() const;
 

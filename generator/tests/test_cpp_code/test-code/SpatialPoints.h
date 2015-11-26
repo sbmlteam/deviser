@@ -404,9 +404,11 @@ public:
 
 
   /**
-   * Returns the XML name of this SpatialPoints object.
+   * Returns the XML element name of this SpatialPoints object.
    *
-   * @return the name of this element; that is "spatialPoints".
+   * For SpatialPoints, the XML element name is always @c "spatialPoints".
+   *
+   * @return the name of this element, i.e. @c "spatialPoints".
    */
   virtual const std::string& getElementName() const;
 

@@ -446,7 +446,7 @@ Output::renameSIdRefs(const std::string& oldid, const std::string& newid)
 
 
 /*
- * Returns the XML name of this Output object.
+ * Returns the XML element name of this Output object.
  */
 const std::string&
 Output::getElementName() const

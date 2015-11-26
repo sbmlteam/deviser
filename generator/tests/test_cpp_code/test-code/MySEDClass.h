@@ -143,9 +143,11 @@ public:
 
 
   /**
-   * Returns the XML name of this MySEDClass object.
+   * Returns the XML element name of this MySEDClass object.
    *
-   * @return the name of this element; that is "mySEDClass".
+   * For MySEDClass, the XML element name is always @c "fred".
+   *
+   * @return the name of this element, i.e. @c "fred".
    */
   virtual const std::string& getElementName() const;
 

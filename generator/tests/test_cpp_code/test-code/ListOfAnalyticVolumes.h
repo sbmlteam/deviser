@@ -285,9 +285,12 @@ public:
 
 
   /**
-   * Returns the XML name of this ListOfAnalyticVolumes object.
+   * Returns the XML element name of this ListOfAnalyticVolumes object.
    *
-   * @return the name of this element; that is "listOfAnalyticVolumes".
+   * For ListOfAnalyticVolumes, the XML element name is always @c
+   * "listOfAnalyticVolumes".
+   *
+   * @return the name of this element, i.e. @c "listOfAnalyticVolumes".
    */
   virtual const std::string& getElementName() const;
 

@@ -373,9 +373,12 @@ public:
 
 
   /**
-   * Returns the XML name of this ParametricGeometry object.
+   * Returns the XML element name of this ParametricGeometry object.
    *
-   * @return the name of this element; that is "parametricGeometry".
+   * For ParametricGeometry, the XML element name is always @c
+   * "parametricGeometry".
+   *
+   * @return the name of this element, i.e. @c "parametricGeometry".
    */
   virtual const std::string& getElementName() const;
 

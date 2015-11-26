@@ -275,9 +275,11 @@ public:
 
 
   /**
-   * Returns the XML name of this ListOfOutputs object.
+   * Returns the XML element name of this ListOfOutputs object.
    *
-   * @return the name of this element; that is "listOfOutputs".
+   * For ListOfOutputs, the XML element name is always @c "listOfOutputs".
+   *
+   * @return the name of this element, i.e. @c "listOfOutputs".
    */
   virtual const std::string& getElementName() const;
 

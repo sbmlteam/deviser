@@ -245,7 +245,7 @@ Container::removeMyLoTest(unsigned int n)
 
 
 /*
- * Returns the XML name of this Container object.
+ * Returns the XML element name of this Container object.
  */
 const std::string&
 Container::getElementName() const

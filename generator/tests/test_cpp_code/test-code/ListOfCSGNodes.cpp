@@ -439,7 +439,7 @@ ListOfCSGNodes::createCSGSetOperator()
 
 
 /*
- * Returns the XML name of this ListOfCSGNodes object.
+ * Returns the XML element name of this ListOfCSGNodes object.
  */
 const std::string&
 ListOfCSGNodes::getElementName() const

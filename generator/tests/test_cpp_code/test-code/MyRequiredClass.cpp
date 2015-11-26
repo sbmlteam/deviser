@@ -1323,7 +1323,7 @@ MyRequiredClass::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this MyRequiredClass object.
+ * Returns the XML element name of this MyRequiredClass object.
  */
 const std::string&
 MyRequiredClass::getElementName() const

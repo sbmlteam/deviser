@@ -687,7 +687,7 @@ CSGSetOperator::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this CSGSetOperator object.
+ * Returns the XML element name of this CSGSetOperator object.
  */
 const std::string&
 CSGSetOperator::getElementName() const

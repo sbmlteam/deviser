@@ -230,9 +230,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Container object.
+   * Returns the XML element name of this Container object.
    *
-   * @return the name of this element; that is "container".
+   * For Container, the XML element name is always @c "container".
+   *
+   * @return the name of this element, i.e. @c "container".
    */
   virtual const std::string& getElementName() const;
 

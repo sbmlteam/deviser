@@ -422,7 +422,7 @@ ParametricGeometry::removeParametricObject(const std::string& sid)
 
 
 /*
- * Returns the XML name of this ParametricGeometry object.
+ * Returns the XML element name of this ParametricGeometry object.
  */
 const std::string&
 ParametricGeometry::getElementName() const

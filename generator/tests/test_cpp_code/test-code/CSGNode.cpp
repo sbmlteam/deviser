@@ -253,7 +253,7 @@ CSGNode::isCSGSetOperator() const
 
 
 /*
- * Returns the XML name of this CSGNode object.
+ * Returns the XML element name of this CSGNode object.
  */
 const std::string&
 CSGNode::getElementName() const

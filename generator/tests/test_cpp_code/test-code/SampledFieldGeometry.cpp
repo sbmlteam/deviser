@@ -384,7 +384,7 @@ SampledFieldGeometry::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this SampledFieldGeometry object.
+ * Returns the XML element name of this SampledFieldGeometry object.
  */
 const std::string&
 SampledFieldGeometry::getElementName() const

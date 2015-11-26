@@ -326,9 +326,12 @@ public:
 
 
   /**
-   * Returns the XML name of this ListOfFunctionTerms object.
+   * Returns the XML element name of this ListOfFunctionTerms object.
    *
-   * @return the name of this element; that is "listOfFunctionTerms".
+   * For ListOfFunctionTerms, the XML element name is always @c
+   * "listOfFunctionTerms".
+   *
+   * @return the name of this element, i.e. @c "listOfFunctionTerms".
    */
   virtual const std::string& getElementName() const;
 

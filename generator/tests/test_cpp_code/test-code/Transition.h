@@ -696,9 +696,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Transition object.
+   * Returns the XML element name of this Transition object.
    *
-   * @return the name of this element; that is "transition".
+   * For Transition, the XML element name is always @c "transition".
+   *
+   * @return the name of this element, i.e. @c "transition".
    */
   virtual const std::string& getElementName() const;
 

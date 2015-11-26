@@ -498,7 +498,7 @@ AnalyticVolume::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this AnalyticVolume object.
+ * Returns the XML element name of this AnalyticVolume object.
  */
 const std::string&
 AnalyticVolume::getElementName() const

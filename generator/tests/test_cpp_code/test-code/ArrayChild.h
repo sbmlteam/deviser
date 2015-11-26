@@ -244,9 +244,11 @@ public:
 
 
   /**
-   * Returns the XML name of this ArrayChild object.
+   * Returns the XML element name of this ArrayChild object.
    *
-   * @return the name of this element; that is "arrayChild".
+   * For ArrayChild, the XML element name is always @c "arrayChild".
+   *
+   * @return the name of this element, i.e. @c "arrayChild".
    */
   virtual const std::string& getElementName() const;
 

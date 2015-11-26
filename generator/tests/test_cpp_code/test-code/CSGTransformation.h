@@ -300,9 +300,12 @@ public:
 
 
   /**
-   * Returns the XML name of this CSGTransformation object.
+   * Returns the XML element name of this CSGTransformation object.
    *
-   * @return the name of this element; that is "csgTransformation".
+   * For CSGTransformation, the XML element name is always @c
+   * "csgTransformation".
+   *
+   * @return the name of this element, i.e. @c "csgTransformation".
    */
   virtual const std::string& getElementName() const;
 

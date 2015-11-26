@@ -114,7 +114,7 @@ MyLoTest::~MyLoTest()
 
 
 /*
- * Returns the XML name of this MyLoTest object.
+ * Returns the XML element name of this MyLoTest object.
  */
 const std::string&
 MyLoTest::getElementName() const

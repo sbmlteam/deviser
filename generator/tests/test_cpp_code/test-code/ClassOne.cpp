@@ -311,7 +311,7 @@ ClassOne::unsetAtt2()
 
 
 /*
- * Returns the XML name of this ClassOne object.
+ * Returns the XML element name of this ClassOne object.
  */
 const std::string&
 ClassOne::getElementName() const

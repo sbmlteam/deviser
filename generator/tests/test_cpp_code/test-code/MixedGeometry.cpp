@@ -551,7 +551,7 @@ MixedGeometry::removeOrdinalMapping(unsigned int n)
 
 
 /*
- * Returns the XML name of this MixedGeometry object.
+ * Returns the XML element name of this MixedGeometry object.
  */
 const std::string&
 MixedGeometry::getElementName() const

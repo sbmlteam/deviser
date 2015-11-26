@@ -302,9 +302,11 @@ public:
 
 
   /**
-   * Returns the XML name of this ListOfMyLoTests object.
+   * Returns the XML element name of this ListOfMyLoTests object.
    *
-   * @return the name of this element; that is "listOfMyLoTests".
+   * For ListOfMyLoTests, the XML element name is always @c "listOfMyLoTests".
+   *
+   * @return the name of this element, i.e. @c "listOfMyLoTests".
    */
   virtual const std::string& getElementName() const;
 

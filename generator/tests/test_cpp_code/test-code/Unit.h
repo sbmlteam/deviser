@@ -182,9 +182,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Unit object.
+   * Returns the XML element name of this Unit object.
    *
-   * @return the name of this element; that is "unit".
+   * For Unit, the XML element name is always @c "unit".
+   *
+   * @return the name of this element, i.e. @c "unit".
    */
   virtual const std::string& getElementName() const;
 

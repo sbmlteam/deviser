@@ -253,9 +253,11 @@ public:
 
 
   /**
-   * Returns the XML name of this CSGNode object.
+   * Returns the XML element name of this CSGNode object.
    *
-   * @return the name of this element; that is "csgNode".
+   * For CSGNode, the XML element name is always @c "csgNode".
+   *
+   * @return the name of this element, i.e. @c "csgNode".
    */
   virtual const std::string& getElementName() const;
 

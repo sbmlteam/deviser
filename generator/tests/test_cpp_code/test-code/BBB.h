@@ -312,9 +312,11 @@ public:
 
 
   /**
-   * Returns the XML name of this BBB object.
+   * Returns the XML element name of this BBB object.
    *
-   * @return the name of this element; that is "bBB".
+   * For BBB, the XML element name is always @c "bBB".
+   *
+   * @return the name of this element, i.e. @c "bBB".
    */
   virtual const std::string& getElementName() const;
 

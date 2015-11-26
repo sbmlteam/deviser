@@ -233,7 +233,7 @@ Boundary::unsetValue()
 
 
 /*
- * Returns the XML name of this Boundary object.
+ * Returns the XML element name of this Boundary object.
  */
 const std::string&
 Boundary::getElementName() const

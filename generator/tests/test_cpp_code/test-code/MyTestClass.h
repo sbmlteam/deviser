@@ -831,9 +831,11 @@ public:
 
 
   /**
-   * Returns the XML name of this MyTestClass object.
+   * Returns the XML element name of this MyTestClass object.
    *
-   * @return the name of this element; that is "myTestClass".
+   * For MyTestClass, the XML element name is always @c "myTestClass".
+   *
+   * @return the name of this element, i.e. @c "myTestClass".
    */
   virtual const std::string& getElementName() const;
 

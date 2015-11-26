@@ -309,7 +309,7 @@ ListOfAnalyticVolumes::getByDomainType(const std::string& sid)
 
 
 /*
- * Returns the XML name of this ListOfAnalyticVolumes object.
+ * Returns the XML element name of this ListOfAnalyticVolumes object.
  */
 const std::string&
 ListOfAnalyticVolumes::getElementName() const

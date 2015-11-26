@@ -573,7 +573,7 @@ CoordinateComponent::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this CoordinateComponent object.
+ * Returns the XML element name of this CoordinateComponent object.
  */
 const std::string&
 CoordinateComponent::getElementName() const

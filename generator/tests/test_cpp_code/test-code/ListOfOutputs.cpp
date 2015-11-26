@@ -301,7 +301,7 @@ ListOfOutputs::getByQualitativeSpecies(const std::string& sid)
 
 
 /*
- * Returns the XML name of this ListOfOutputs object.
+ * Returns the XML element name of this ListOfOutputs object.
  */
 const std::string&
 ListOfOutputs::getElementName() const

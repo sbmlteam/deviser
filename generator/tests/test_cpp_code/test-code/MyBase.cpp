@@ -164,7 +164,7 @@ MyBase::unsetId()
 
 
 /*
- * Returns the XML name of this MyBase object.
+ * Returns the XML element name of this MyBase object.
  */
 const std::string&
 MyBase::getElementName() const

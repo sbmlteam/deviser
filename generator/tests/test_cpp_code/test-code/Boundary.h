@@ -221,9 +221,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Boundary object.
+   * Returns the XML element name of this Boundary object.
    *
-   * @return the name of this element; that is "boundary".
+   * For Boundary, the XML element name is always @c "boundary".
+   *
+   * @return the name of this element, i.e. @c "boundary".
    */
   virtual const std::string& getElementName() const;
 

@@ -291,7 +291,7 @@ FunctionTerm::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML name of this FunctionTerm object.
+ * Returns the XML element name of this FunctionTerm object.
  */
 const std::string&
 FunctionTerm::getElementName() const

@@ -193,11 +193,16 @@ class GeneralFunctions():
         if not self.is_cpp_api:
             return
         # create comment parts
-        title_line = 'Returns the XML name of this {} object.'\
+        if self.override_name:
+            name = self.element_name
+        else:
+            name = strFunctions.lower_first(self.object_name)
+        title_line = 'Returns the XML element name of this {} object.'\
             .format(self.object_name,)
-        params = []
-        return_lines = ['@return the name of this element; that is \"{}\"'
-                        '.'.format(strFunctions.lower_first(self.object_name))]
+        params = ['For {}, the XML element name is always @c '
+                  '\"{}\".'.format(self.object_name, name)]
+        return_lines = ['@return the name of this element, i.e. @c \"{}\"'
+                        '.'.format(name)]
         additional = []
 
         # create the function declaration
@@ -209,10 +214,6 @@ class GeneralFunctions():
         if self.overwrites_children:
             implementation = ['return mElementName']
         else:
-            if self.override_name:
-                name = self.element_name
-            else:
-                name = strFunctions.lower_first(self.object_name)
             implementation = ['static const string name = \"{}\"'.format(name),
                               'return name']
         code = [dict({'code_type': 'line', 'code': implementation})]

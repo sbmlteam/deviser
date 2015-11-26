@@ -379,9 +379,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Output object.
+   * Returns the XML element name of this Output object.
    *
-   * @return the name of this element; that is "output".
+   * For Output, the XML element name is always @c "output".
+   *
+   * @return the name of this element, i.e. @c "output".
    */
   virtual const std::string& getElementName() const;
 

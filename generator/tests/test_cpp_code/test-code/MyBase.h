@@ -174,9 +174,11 @@ public:
 
 
   /**
-   * Returns the XML name of this MyBase object.
+   * Returns the XML element name of this MyBase object.
    *
-   * @return the name of this element; that is "myBase".
+   * For MyBase, the XML element name is always @c "myBase".
+   *
+   * @return the name of this element, i.e. @c "myBase".
    */
   virtual const std::string& getElementName() const;
 

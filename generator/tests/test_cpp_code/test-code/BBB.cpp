@@ -333,7 +333,7 @@ BBB::removeAnother(const std::string& sid)
 
 
 /*
- * Returns the XML name of this BBB object.
+ * Returns the XML element name of this BBB object.
  */
 const std::string&
 BBB::getElementName() const

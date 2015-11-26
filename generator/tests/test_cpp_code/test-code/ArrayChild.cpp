@@ -315,7 +315,7 @@ ArrayChild::unsetUnit()
 
 
 /*
- * Returns the XML name of this ArrayChild object.
+ * Returns the XML element name of this ArrayChild object.
  */
 const std::string&
 ArrayChild::getElementName() const

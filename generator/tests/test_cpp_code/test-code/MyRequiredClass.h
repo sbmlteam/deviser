@@ -1015,9 +1015,11 @@ public:
 
 
   /**
-   * Returns the XML name of this MyRequiredClass object.
+   * Returns the XML element name of this MyRequiredClass object.
    *
-   * @return the name of this element; that is "myRequiredClass".
+   * For MyRequiredClass, the XML element name is always @c "myRequiredClass".
+   *
+   * @return the name of this element, i.e. @c "myRequiredClass".
    */
   virtual const std::string& getElementName() const;
 

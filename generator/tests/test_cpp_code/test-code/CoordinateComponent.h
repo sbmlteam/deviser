@@ -424,9 +424,12 @@ public:
 
 
   /**
-   * Returns the XML name of this CoordinateComponent object.
+   * Returns the XML element name of this CoordinateComponent object.
    *
-   * @return the name of this element; that is "coordinateComponent".
+   * For CoordinateComponent, the XML element name is always @c
+   * "coordinateComponent".
+   *
+   * @return the name of this element, i.e. @c "coordinateComponent".
    */
   virtual const std::string& getElementName() const;
 

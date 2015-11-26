@@ -137,7 +137,7 @@ MySEDClass::unsetId()
 
 
 /*
- * Returns the XML name of this MySEDClass object.
+ * Returns the XML element name of this MySEDClass object.
  */
 const std::string&
 MySEDClass::getElementName() const

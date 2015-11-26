@@ -751,7 +751,7 @@ SampledField::unsetSamplesLength()
 
 
 /*
- * Returns the XML name of this SampledField object.
+ * Returns the XML element name of this SampledField object.
  */
 const std::string&
 SampledField::getElementName() const

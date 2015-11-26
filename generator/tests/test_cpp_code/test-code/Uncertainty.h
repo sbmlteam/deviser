@@ -272,9 +272,11 @@ public:
 
 
   /**
-   * Returns the XML name of this Uncertainty object.
+   * Returns the XML element name of this Uncertainty object.
    *
-   * @return the name of this element; that is "uncertainty".
+   * For Uncertainty, the XML element name is always @c "uncertainty".
+   *
+   * @return the name of this element, i.e. @c "uncertainty".
    */
   virtual const std::string& getElementName() const;
 

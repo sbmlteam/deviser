@@ -360,9 +360,12 @@ public:
 
 
   /**
-   * Returns the XML name of this SampledFieldGeometry object.
+   * Returns the XML element name of this SampledFieldGeometry object.
    *
-   * @return the name of this element; that is "sampledFieldGeometry".
+   * For SampledFieldGeometry, the XML element name is always @c
+   * "sampledFieldGeometry".
+   *
+   * @return the name of this element, i.e. @c "sampledFieldGeometry".
    */
   virtual const std::string& getElementName() const;
 

@@ -426,7 +426,7 @@ CSGTransformation::isCSGHomogeneousTransformation() const
 
 
 /*
- * Returns the XML name of this CSGTransformation object.
+ * Returns the XML element name of this CSGTransformation object.
  */
 const std::string&
 CSGTransformation::getElementName() const

@@ -315,7 +315,7 @@ Uncertainty::unsetUncertML()
 
 
 /*
- * Returns the XML name of this Uncertainty object.
+ * Returns the XML element name of this Uncertainty object.
  */
 const std::string&
 Uncertainty::getElementName() const

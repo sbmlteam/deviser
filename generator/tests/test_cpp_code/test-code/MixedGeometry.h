@@ -445,9 +445,11 @@ public:
 
 
   /**
-   * Returns the XML name of this MixedGeometry object.
+   * Returns the XML element name of this MixedGeometry object.
    *
-   * @return the name of this element; that is "mixedGeometry".
+   * For MixedGeometry, the XML element name is always @c "mixedGeometry".
+   *
+   * @return the name of this element, i.e. @c "mixedGeometry".
    */
   virtual const std::string& getElementName() const;
 

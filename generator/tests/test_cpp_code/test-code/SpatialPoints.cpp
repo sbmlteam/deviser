@@ -480,7 +480,7 @@ SpatialPoints::unsetDataType()
 
 
 /*
- * Returns the XML name of this SpatialPoints object.
+ * Returns the XML element name of this SpatialPoints object.
  */
 const std::string&
 SpatialPoints::getElementName() const

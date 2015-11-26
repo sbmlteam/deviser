@@ -383,7 +383,7 @@ ListOfFunctionTerms::createFunctionTerm()
 
 
 /*
- * Returns the XML name of this ListOfFunctionTerms object.
+ * Returns the XML element name of this ListOfFunctionTerms object.
  */
 const std::string&
 ListOfFunctionTerms::getElementName() const

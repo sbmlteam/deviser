@@ -253,9 +253,12 @@ public:
 
 
   /**
-   * Returns the XML name of this ListOfTransitions object.
+   * Returns the XML element name of this ListOfTransitions object.
    *
-   * @return the name of this element; that is "listOfTransitions".
+   * For ListOfTransitions, the XML element name is always @c
+   * "listOfTransitions".
+   *
+   * @return the name of this element, i.e. @c "listOfTransitions".
    */
   virtual const std::string& getElementName() const;
 

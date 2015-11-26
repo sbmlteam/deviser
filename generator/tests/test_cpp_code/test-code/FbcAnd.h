@@ -250,9 +250,11 @@ public:
 
 
   /**
-   * Returns the XML name of this FbcAnd object.
+   * Returns the XML element name of this FbcAnd object.
    *
-   * @return the name of this element; that is "fbcAnd".
+   * For FbcAnd, the XML element name is always @c "and".
+   *
+   * @return the name of this element, i.e. @c "and".
    */
   virtual const std::string& getElementName() const;
 

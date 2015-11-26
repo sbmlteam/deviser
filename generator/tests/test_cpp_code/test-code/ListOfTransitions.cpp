@@ -262,7 +262,7 @@ ListOfTransitions::createTransition()
 
 
 /*
- * Returns the XML name of this ListOfTransitions object.
+ * Returns the XML element name of this ListOfTransitions object.
  */
 const std::string&
 ListOfTransitions::getElementName() const

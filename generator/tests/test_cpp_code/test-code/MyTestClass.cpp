@@ -1078,7 +1078,7 @@ MyTestClass::renameSIdRefs(const std::string& oldid, const std::string& newid)
 
 
 /*
- * Returns the XML name of this MyTestClass object.
+ * Returns the XML element name of this MyTestClass object.
  */
 const std::string&
 MyTestClass::getElementName() const
