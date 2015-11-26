@@ -294,7 +294,7 @@ class GeneralFunctions():
         params = ['@copydetails doc_what_are_typecodes']
         return_lines = ['@return the {} typecode for the '
                         'objects contained in this '
-                        'list:'.format(self.cap_language)]
+                        '{}:'.format(self.cap_language, self.object_name)]
         additional = []
         line = '@{}constant{}{}, {}{}TypeCode_t{}'.format(self.language, '{',
                                                           self.typecode,

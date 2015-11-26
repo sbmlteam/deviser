@@ -302,7 +302,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SBML typecode for the objects contained in this list:
+   * @return the SBML typecode for the objects contained in this ListOfOutputs:
    *
    * @sbmlconstant{SBML_QUAL_OUTPUT, SBMLQualTypeCode_t}
    *

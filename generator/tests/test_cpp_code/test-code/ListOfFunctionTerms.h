@@ -353,7 +353,8 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SBML typecode for the objects contained in this list:
+   * @return the SBML typecode for the objects contained in this
+   * ListOfFunctionTerms:
    *
    * @sbmlconstant{SBML_QUAL_FUNCTION_TERM, SBMLQualTypeCode_t}
    *

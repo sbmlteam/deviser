@@ -414,7 +414,7 @@ def main():
     name = 'spatial'
     num = 12
     class_name = 'AnalyticVolume'
-    list_of = ''
+    list_of = 'ListOfAnalyticVolumes'
     test_case = 'class with math child'
     fail += run_test(name, num, class_name, test_case, list_of)
 

@@ -353,7 +353,8 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SBML typecode for the objects contained in this list:
+   * @return the SBML typecode for the objects contained in this
+   * ListOfCSGNodes:
    *
    * @sbmlconstant{SBML_SPATIAL_CSGNODE, SBMLSpatialTypeCode_t}
    *
