@@ -29,6 +29,13 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class QualExtension
+ * @sbmlbrief{qual} Base extension class for the &ldquo;qual&rdquo; package.
+ *
+ * @class QualPkgNamespaces
+ * @sbmlbrief{qual} SBMLNamespaces extension for the &ldquo;qual&rdquo;
+ * package.
  */
 
 

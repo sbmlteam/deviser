@@ -29,6 +29,9 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class SampledField
+ * @sbmlbrief{spatial} TODO:Definition of the SampledField class.
  */
 
 

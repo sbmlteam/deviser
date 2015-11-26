@@ -566,6 +566,8 @@ class ParseXML():
             # just in case we generate a new thing
             global_variables.reset()
 
+        global_variables.set_global_fullname(fullname)
+
         # get package information
         sbml_level = 3
         sbml_version = 1

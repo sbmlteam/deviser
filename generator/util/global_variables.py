@@ -61,6 +61,8 @@ global is_package
 is_package = True
 global package_prefix
 package_prefix = ''
+global package_full_name
+package_full_name = ''
 
 global return_codes
 return_codes= dict({'success': 0,
@@ -106,7 +108,12 @@ global ret_att_unex
 ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 
-def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix):
+def set_global_fullname(fullname):
+    global package_full_name
+    package_full_name = fullname
+
+
+def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname=''):
     global language
     language = lang
 
@@ -127,6 +134,10 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix):
     if pkg_prefix:
         global package_prefix
         package_prefix = pkg_prefix
+
+    if fullname:
+        global package_full_name
+        package_full_name = fullname
 
     global library_name
     if lib:
@@ -186,6 +197,7 @@ def get_return_code(index):
 
 
 def reset():
-    set_globals('sbml', 'SBase', 'SBMLDocument', 'SBML', 'Libsbml', True, '')
+    set_globals('sbml', 'SBase', 'SBMLDocument', 'SBML', 'Libsbml',
+                True, '', '')
     global error_list
     error_list = []

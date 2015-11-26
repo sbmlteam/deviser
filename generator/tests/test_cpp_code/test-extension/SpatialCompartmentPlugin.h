@@ -29,6 +29,10 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class SpatialCompartmentPlugin
+ * @sbmlbrief{spatial} Extension of Compartment by the &ldquo;spatial&rdquo
+ * package.
  */
 
 

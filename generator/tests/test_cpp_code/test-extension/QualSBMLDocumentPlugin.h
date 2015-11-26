@@ -29,6 +29,9 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class QualSBMLDocumentPlugin
+ * @sbmlbrief{qual} Extension of SBMLDocument by the &ldquo;qual&rdquo package.
  */
 
 

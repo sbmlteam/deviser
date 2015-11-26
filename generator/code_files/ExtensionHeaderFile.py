@@ -50,6 +50,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.up_package = strFunctions.upper_first(package['name'])
         if filetype == '':
             self.name = '{}Extension'.format(self.up_package)
+            self.class_name = self.name
         elif filetype == 'types':
             self.name = '{}ExtensionTypes'.format(self.up_package)
         elif filetype == 'fwd':
@@ -65,6 +66,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.package = package['name']
         self.cap_package = package['name'].upper()
         self.baseClass = '{}Extension'.format(self.cap_language)
+        self.class_name = self.name
 
         self.elements = package['elements']
         self.number = package['number']
@@ -84,6 +86,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.class_object['has_children'] = False
         self.class_object['child_elements'] = []
         self.class_object['overwrites_children'] = False
+        self.class_object['name'] = self.name
     ########################################################################
 
     # Functions for writing the class

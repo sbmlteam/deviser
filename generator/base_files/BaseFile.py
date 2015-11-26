@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import global_variables
+from util import global_variables, strFunctions
 
 
 class BaseFile:
@@ -80,6 +80,13 @@ class BaseFile:
 
         self.open_br = '{'
         self.close_br = '}'
+
+        # members used here that will only cone from some
+        # instantiations of this base class
+        # but it needs to know that it can resolve them
+        self.class_name = ''
+        self.package = ''
+        self.class_object = []
 
     ########################################################################
 
@@ -375,4 +382,90 @@ class BaseFile:
             self.write_comment_line('@author DEVISER')
         if self.library_name == 'Libsbml':
             self.write_libsbml_licence()
+        if self.is_header and not self.is_excluded(self.name):
+            if self.name.endswith('Extension'):
+                self.write_class_comments(True, False, False)
+            elif self.name.endswith('Plugin'):
+                self.write_class_comments(False, True, False)
+            elif self.name.endswith('Validator'):
+                self.write_class_comments(False, False, True)
+            else:
+                self.write_class_comments(False, False, False)
+
         self.close_comment()
+
+    def write_class_comments(self, extension, plugin, validator):
+        fullname = global_variables.package_full_name
+        up_package = strFunctions.upper_first(self.package)
+        validator_class_comment = 'The {0} class extends the ' \
+                                  'Validator class from core libSBML to ' \
+                                  'apply validation to the constructs ' \
+                                  'introduced by the SBML Level&nbsp;3 ' \
+                                  '{1} package. This class then acts as a ' \
+                                  'base class for any validators that ' \
+                                  'apply rules to the &ldquo;{2}&rdquo; ' \
+                                  'package specification constructs or to ' \
+                                  'entire models that use the &ldquo;{2}' \
+                                  '&rdquo; package, and may therefore be ' \
+                                  'subject to other global restrictions ' \
+                                  'introduced.'.format(self.name,
+                                                       fullname,
+                                                       self.package.lower())
+        self.write_blank_comment_line()
+        self.write_comment_line('@class {}'.format(self.class_name))
+        if extension:
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class '
+                                    'for the &ldquo;{1}&rdquo; package.'
+                                    ''.format(self.open_br,
+                                              self.package.lower(),
+                                              self.close_br))
+            self.write_blank_comment_line()
+            self.write_comment_line('@class {}PkgNamespaces'
+                                    ''.format(up_package))
+            self.write_comment_line('@sbmlbrief{0}{1}{2} SBMLNamespaces '
+                                    'extension for the &ldquo;{1}&rdquo; '
+                                    'package.'
+                                    ''.format(self.open_br,
+                                              self.package.lower(),
+                                              self.close_br))
+        elif plugin:
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Extension of '
+                                    '{3} by the &ldquo;{1}&rdquo package'
+                                    '.'.format(self.open_br,
+                                               self.package.lower(),
+                                               self.close_br,
+                                               self.class_object['sbase']))
+        elif validator:
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Entry point for '
+                                    '&ldquo;{1}&rdquo package validation'
+                                    '.'.format(self.open_br,
+                                               self.package.lower(),
+                                               self.close_br))
+            self.write_blank_comment_line()
+            self.write_comment_line('@htmlinclude not-sbml-warning.html')
+            self.write_blank_comment_line()
+            self.write_comment_line('@copydetails doc_common_intro_'
+                                    'package_validators')
+            self.write_blank_comment_line()
+            self.write_comment_line('{}'.format(validator_class_comment))
+            self.write_blank_comment_line()
+            self.write_comment_line('@copydetails doc_section_package_'
+                                    'validators_general_info')
+        else:
+            self.write_comment_line('@sbmlbrief{}{}{} TODO:'
+                                    '{}'.format(self.open_br,
+                                                self.package.lower(),
+                                                self.close_br,
+                                                self.brief_description))
+
+    @staticmethod
+    def is_excluded(filename):
+        excluded = False
+        excluded_files = ['Types', 'fwd', 'Error', 'ErrorTable',
+                          'ConsistencyValidator', 'package', 'register']
+        i = 0
+        while not excluded and i < len(excluded_files):
+            if filename.endswith(excluded_files[i]):
+                excluded = True
+            i += 1
+        return excluded

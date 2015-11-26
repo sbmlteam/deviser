@@ -29,6 +29,9 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class VersModelPlugin
+ * @sbmlbrief{vers} Extension of Model by the &ldquo;vers&rdquo package.
  */
 
 

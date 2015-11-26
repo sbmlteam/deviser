@@ -29,6 +29,13 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class VersExtension
+ * @sbmlbrief{vers} Base extension class for the &ldquo;vers&rdquo; package.
+ *
+ * @class VersPkgNamespaces
+ * @sbmlbrief{vers} SBMLNamespaces extension for the &ldquo;vers&rdquo;
+ * package.
  */
 
 

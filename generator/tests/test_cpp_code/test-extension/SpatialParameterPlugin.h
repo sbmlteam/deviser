@@ -29,6 +29,10 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class SpatialParameterPlugin
+ * @sbmlbrief{spatial} Extension of Parameter by the &ldquo;spatial&rdquo
+ * package.
  */
 
 

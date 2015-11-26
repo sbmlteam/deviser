@@ -29,6 +29,23 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class 
+ * @sbmlbrief{spatial} Entry point for &ldquo;spatial&rdquo package validation.
+ *
+ * @htmlinclude not-sbml-warning.html
+ *
+ * @copydetails doc_common_intro_package_validators
+ *
+ * The SpatialValidator class extends the Validator class from core libSBML to
+ * apply validation to the constructs introduced by the SBML Level&nbsp;3
+ * Spatial Processes package. This class then acts as a base class for any
+ * validators that apply rules to the &ldquo;spatial&rdquo; package
+ * specification constructs or to entire models that use the
+ * &ldquo;spatial&rdquo; package, and may therefore be subject to other global
+ * restrictions introduced.
+ *
+ * @copydetails doc_section_package_validators_general_info
  */
 
 

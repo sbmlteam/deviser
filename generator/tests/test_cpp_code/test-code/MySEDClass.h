@@ -2,6 +2,9 @@
  * @file MySEDClass.h
  * @brief Definition of the MySEDClass class.
  * @author DEVISER
+ *
+ * @class MySEDClass
+ * @sbmlbrief{test} TODO:Definition of the MySEDClass class.
  */
 
 
