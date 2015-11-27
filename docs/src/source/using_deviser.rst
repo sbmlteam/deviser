@@ -16,22 +16,24 @@ UML** button on the toolbar or select **Show UML** from the Tool menu.
 Remember that this uses the yUML webservice and so will only work if you
 have an internet connection.
 
-The UML output will appear (Figure 28). Note that each time this option
+The UML output will appear (Figure :num:`fig-yuml`). Note that each time this option
 is selected a new diagram is generated from the definition; the more
 complex the definition the longer it will take.
 
-.. image:: ../screenshots/deviser-yuml.png
+.. _fig-yuml:
+.. figure:: ../screenshots/deviser-yuml.png
 
-Figure : The UML window
+     The UML window
 
 You will note that not all inheritance is determined. Deviser does not
 try to infer inheritance of classes from outside this package
 definition. However these can be added using the **Edit** window (Figure
-29).
+:num:`fig-yuml-edit`).
 
-.. image:: ../screenshots/deviser-yuml-edit.png
+.. _fig-yuml-edit:
+.. figure:: ../screenshots/deviser-yuml-edit.png
 
-Figure : The yUML text representation of the diagram
+     The yUML text representation of the diagram
 
 The **Edit** tab allows access to the text format of the diagram which
 can be edited and updated. Note the update applies to the UML diagram
@@ -52,16 +54,17 @@ Generate libSBML package code.
 ------------------------------
 
 Click on the ‘Generate’ button on the toolbar and the Generate window
-(Figure 30) will appear.
+(Figure :num:`fig-generate`) will appear.
 
 The **Generate Package Code** button will then create the package code
 and put it in a directory name ‘foo’ (i.e. the name of the package) in
 the specified output directory. This code can then be archived and
 expanded over the libSBML source tree.
 
-.. image:: ../screenshots/deviser-generate.png
+.. _fig-generate:
+.. figure:: ../screenshots/deviser-generate.png
 
-Figure The Generate window
+     The Generate window
 
 Generate basic specification documentation.
 -------------------------------------------
@@ -87,9 +90,10 @@ Integrate and test the package with libSBML.
 --------------------------------------------
 
 Click the **Integration and Testing** tab in the Generate window and a
-further set of buttons are revealed (Figure 31).
+further set of buttons are revealed (Figure :num:`fig-integrate`).
 
-.. image:: ../screenshots/deviser-integrate.png
+.. _fig-integrate:
+.. figure:: ../screenshots/deviser-integrate.png
 
 Figure Integration and Testing tab selected on the Generate window.
 

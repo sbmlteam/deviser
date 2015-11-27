@@ -172,11 +172,15 @@ Useful links
 Setting up the Deviser Edit tool
 --------------------------------
 
+.. todo::
+    Finish edits suggested by Mike
+
 In order to access the functionality for generation it is necessary to
 tell the Deviser Edit tool where it will find things on your system.
 
 Select Edit->Edit Preferences (Preferences on Mac OSX)
 
+.. _fig-preferences:
 .. figure:: ../screenshots/deviser-preferences.png
 
     The ‘Preferences’ sheet; adding information about other required software.
@@ -184,7 +188,7 @@ Select Edit->Edit Preferences (Preferences on Mac OSX)
 
 Fill in or browse to the location of the files requested by each field.
 Note it is not necessary to fill in all the fields if you are not
-intending to use all the functionality. Figure 1 illustrates a case
+intending to use all the functionality. Figure :num:`fig-preferences` illustrates a case
 where you could generate code and TeX files but not generate a PDF or
 integrate the code automatically.
 
@@ -239,4 +243,3 @@ is necessary to build and test the Python binding of libSBML.
 
 **Python lib**. The location of the Python library files. This is
 necessary to build and test the Python binding of libSBML.
-
