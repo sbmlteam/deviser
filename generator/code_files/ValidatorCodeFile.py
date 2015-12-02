@@ -51,21 +51,21 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.valid_type = strFunctions.upper_first(valid_type)
         self.file_type = filetype
         if filetype == 'main':
-            self.name = '{}Validator'.format(self.up_package)
+            self.name = '{0}Validator'.format(self.up_package)
         elif filetype == 'constraints':
-            self.name = '{}{}ConsistencyConstraints'.format(self.up_package,
+            self.name = '{0}{1}ConsistencyConstraints'.format(self.up_package,
                                                             self.valid_type)
         elif filetype == 'consistency':
-            self.name = '{}{}ConsistencyValidator'.format(self.up_package,
+            self.name = '{0}{1}ConsistencyValidator'.format(self.up_package,
                                                           self.valid_type)
-            self.baseClass = '{}Validator'.format(self.up_package)
+            self.baseClass = '{0}Validator'.format(self.up_package)
         elif filetype == 'declared':
-            self.name = '{}{}ConsistencyConstraints' \
+            self.name = '{0}{1}ConsistencyConstraints' \
                         'Declared'.format(self.up_package,
                                           self.valid_type)
 
         self.brief_description = \
-            'Definition of {}.'.format(self.name)
+            'Definition of {0}.'.format(self.name)
 
         if filetype == 'declared':
             BaseCppFile.BaseCppFile.__init__(self, self.name, 'cxx', None)
@@ -75,7 +75,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.language = language
         self.package = package
         if filetype == 'consistency':
-            self.baseClass = '{}Validator'.format(self.up_package)
+            self.baseClass = '{0}Validator'.format(self.up_package)
         self.elements = elements
 
     ########################################################################
@@ -91,28 +91,28 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
     # Functions for writing specific includes
 
     def write_general_includes(self):
-        self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
                                  '.h>'.format(self.language, self.package,
                                               self.name))
         self.skip_line()
         self.open_comment()
-        self.write_comment_line('Compile {}Consistency'
+        self.write_comment_line('Compile {0}Consistency'
                                 'Constraints'.format(self.valid_type))
         self.close_comment()
-        self.write_line_verbatim('#include \"constraints/{}{}Consistency'
+        self.write_line_verbatim('#include \"constraints/{0}{1}Consistency'
                                  'Constraints.cpp\"'.format(self.up_package,
                                                             self.valid_type))
 
     def write_validator_includes(self):
         self.skip_line()
-        self.write_line_verbatim('#include <{}/validator/VConstraint'
+        self.write_line_verbatim('#include <{0}/validator/VConstraint'
                                  '.h>'.format(self.language))
         self.skip_line()
-        self.write_line_verbatim('#include <{}/packages/{}/common/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/common/{2}'
                                  'ExtensionTypes.h>'.format(self.language,
                                                             self.package,
                                                             self.up_package))
-        self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
                                  '.h>'.format(self.language, self.package,
                                               self.name))
 
@@ -127,11 +127,11 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                                 'set of Constraints')
         self.close_comment()
         self.write_line('void')
-        self.write_line('{}{}ConsistencyValidator::'
+        self.write_line('{0}{1}ConsistencyValidator::'
                         'init()'.format(self.up_package, self.valid_type))
         self.write_line('{')
         self.write_line_verbatim('#define  AddingConstraintsToValidator 1')
-        self.write_line_verbatim('#include \"constraints/{}{}Consistency'
+        self.write_line_verbatim('#include \"constraints/{0}{1}Consistency'
                                  'ConstraintsDeclared'
                                  '.cxx\"'.format(self.up_package,
                                                  self.valid_type))
@@ -144,17 +144,17 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
     def write_constraint_header(self):
         self.write_line_verbatim('#ifndef AddingConstraintsToValidator')
         self.skip_line()
-        self.write_line_verbatim('#include <{}/validator/VConstraint'
+        self.write_line_verbatim('#include <{0}/validator/VConstraint'
                                  '.h>'.format(self.language))
         self.skip_line()
-        self.write_line_verbatim('#include <{}/packages/{}/validator/{}{}Error'
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}{3}Error'
                                  '.h>'.format(self.language, self.package,
                                               self.up_package,
                                               self.cap_language))
         self.skip_line()
         self.write_line_verbatim('#endif /* AddingConstraintsToValidator')
         self.skip_line()
-        self.write_line_verbatim('#include <{}/validator/ConstraintMacros'
+        self.write_line_verbatim('#include <{0}/validator/ConstraintMacros'
                                  '.h>'.format(self.language))
         self.skip_line()
         self.write_line_verbatim('using namespace std;')
@@ -174,7 +174,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                                                             False, None,
                                                             self.package)
         self.write_comments(['-------------------------------------------',
-                             '{}Validator'.format(self.up_package),
+                             '{0}Validator'.format(self.up_package),
                              '-------------------------------------------'])
         self.skip_line()
         code = constructor.write_constructor()
@@ -206,7 +206,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                              'Apply<T>',
                              '-------------------------------------------'])
         self.open_comment()
-        self.write_comment_line('Applies a Constraint<T> to an {} object of '
+        self.write_comment_line('Applies a Constraint<T> to an {0} object of '
                                 'type T.'.format(self.cap_language))
         self.close_comment()
         self.skip_line()
@@ -273,7 +273,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
     # Write the validator class
 
     def write_specific_constraint_structure(self):
-        name = '{}Constraints'.format(self.name)
+        name = '{0}Constraints'.format(self.name)
         constructor = \
             ValidatorClassFunctions.ValidatorClassFunctions(self.language,
                                                             name,
@@ -282,12 +282,12 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_comments(['-------------------------------------------',
                              'ValidatorConstraints',
                              '-------------------------------------------'])
-        self.write_line('struct {}ValidatorConstraints'.format(self.up_package))
+        self.write_line('struct {0}ValidatorConstraints'.format(self.up_package))
         self.write_line('{')
         self.up_indent()
         self.skip_line()
         self.write_constraint_set_member(
-            '{}'.format(global_variables.document_class))
+            '{0}'.format(global_variables.document_class))
         self.write_constraint_set_member('Model')
         if self.elements:
             for element in self.elements:
@@ -295,7 +295,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.skip_line()
         self.write_line('map<VConstraint*, bool> ptrMap;')
         self.skip_line()
-        self.write_line('~{}ValidatorConstraints();'.format(self.up_package))
+        self.write_line('~{0}ValidatorConstraints();'.format(self.up_package))
         self.skip_line()
         self.write_line('void add(VConstraint* c);')
         self.skip_line()
@@ -309,15 +309,15 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
 
     # function to write spaced sets of data
     def write_constraint_set_member(self, class_name):
-        constraint = 'ConstraintSet<{}>'.format(class_name)
-        self.write_spaced_line('{:{width}} m{};'.format(constraint, class_name,
+        constraint = 'ConstraintSet<{0}>'.format(class_name)
+        self.write_spaced_line('{0:{width}} m{1};'.format(constraint, class_name,
                                                         width=45))
     ########################################################################
 
     # Write the validator class
 
     def write_validating_visitor_class(self):
-        name = '{}ValidatingVisitor'.format(self.up_package)
+        name = '{0}ValidatingVisitor'.format(self.up_package)
         constructor = \
             ValidatorClassFunctions.ValidatorClassFunctions(self.language,
                                                             name,
@@ -330,7 +330,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                              'ValidatingVisitor',
                              '-------------------------------------------'])
         self.skip_line()
-        self.write_line('class {}: public {}Visitor'.format(name,
+        self.write_line('class {0}: public {1}Visitor'.format(name,
                                                             self.cap_language))
         self.write_line('{')
         self.write_line('public:')
@@ -338,7 +338,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.skip_line()
         code = constructor.write_constructor('visitor')
         self.write_inline_function_implementation(code)
-        self.write_line('using {}Visitor::visit;'.format(self.cap_language))
+        self.write_line('using {0}Visitor::visit;'.format(self.cap_language))
         self.skip_line()
         for element in self.elements:
             code = constructor.write_visit_function(element['name'])
@@ -349,7 +349,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_line('protected:')
         self.up_indent()
         self.skip_line()
-        self.write_line('{}Validator& v;'.format(self.up_package))
+        self.write_line('{0}Validator& v;'.format(self.up_package))
         self.write_line('const Model& m;')
         self.down_indent()
         self.write_line('};')

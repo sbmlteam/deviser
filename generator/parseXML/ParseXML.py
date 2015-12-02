@@ -534,8 +534,8 @@ class ParseXML():
     @staticmethod
     def report_error(code, message):
         global_variables.code_returned = code
-        print('{}'.format(global_variables.get_return_code(code)))
-        print('{}'.format(message))
+        print('{0}'.format(global_variables.get_return_code(code)))
+        print('{0}'.format(message))
     #####################################################################
 
     # main parsing function

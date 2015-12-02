@@ -15,7 +15,7 @@ path_to_tests = ''
 
 def get_filename(name):
     global path_to_tests
-    fname = '{}.xml'.format(name)
+    fname = '{0}.xml'.format(name)
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
@@ -66,15 +66,15 @@ def compare_files(infile, outfile):
     elif not os.path.isfile(outfile):
         print(outfile)
         fails.append(infile)
-        print('{}=================>> MISSING'.format(outfile))
+        print('{0}=================>> MISSING'.format(outfile))
         return 1
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
-        print('{} .... PASSED'.format(outfile))
+        print('{0} .... PASSED'.format(outfile))
     else:
         fails.append(infile)
-        print('{}=================>> FAILED'.format(outfile))
+        print('{0}=================>> FAILED'.format(outfile))
         ret = 1
     return ret
 
@@ -84,19 +84,19 @@ def run_test(name, test_type):
     correct_file = ''
     temp_file = ''
     print('====================================================')
-    print('Testing {}:{}'.format(test_type, name))
+    print('Testing {0}:{1}'.format(test_type, name))
     print('====================================================')
     if test_type == 'validation':
         generate_validator(filename)
-        correct_file = '.\\test-tex\\{}\\apdx-validation.tex'.format(name)
+        correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
         temp_file = '.\\temp\\apdx-validation.tex'
     elif test_type == 'macros':
         generate_macros(filename)
-        correct_file = '.\\test-tex\\{}\\macros.tex'.format(name)
+        correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
         temp_file = '.\\temp\\macros.tex'
     elif test_type == 'body':
         generate_body(filename)
-        correct_file = '.\\test-tex\\{}\\body.tex'.format(name)
+        correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
         temp_file = '.\\temp\\body.tex'
     fail = compare_files(correct_file, temp_file)
     print('')
@@ -142,7 +142,7 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('TEX FAILS')
-        print('Check {} fails'.format(fail))
+        print('Check {0} fails'.format(fail))
         for name in fails:
             print(name)
 

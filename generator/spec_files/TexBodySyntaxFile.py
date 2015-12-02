@@ -71,10 +71,10 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         for i in range(0, len(plugin['extension'])):
             name = plugin['extension'][i]['name']
             indef = strFunctions.get_indefinite(name)
-            ex_objects.append('{} \\{} object'.format(indef, name))
+            ex_objects.append('{0} \\{1} object'.format(indef, name))
         for i in range(0, len(plugin['lo_extension'])):
             name = plugin['lo_extension'][i]['listOfClassName']
-            ex_objects.append('a \\{} object'.format(name))
+            ex_objects.append('a \\{0} object'.format(name))
         if len(plugin['attribs']) > 0:
             ex_objects.append('the following attributes.')
         # section heading
@@ -82,25 +82,25 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                 '------------')
         self.write_line('\subsection{0}The extended \class{0}{1}{2} class{2}'
                         .format(self.start_b, plugin['sbase'], self.end_b))
-        self.write_line('\\label{}{}{}'
+        self.write_line('\\label{0}{1}{2}'
                         .format(self.start_b,
                                 strFunctions.make_class(plugin['sbase']),
                                 self.end_b))
         self.skip_line()
-        self.write_to_do('explain where {} comes from'.format(extended_object))
+        self.write_to_do('explain where {0} comes from'.format(extended_object))
 
-        self.write_line('The {} extends the \\class{}{}{} object '
+        self.write_line('The {0} extends the \\class{1}{2}{3} object '
                         'with the addition of '
                         .format(self.full_pkg_command, self.start_b,
                                 extended_object, self.end_b))
         num_additions = len(ex_objects)
         if num_additions > 1:
-            self.write_line('{}'.format(ex_objects[0]))
+            self.write_line('{0}'.format(ex_objects[0]))
             for i in range(1, num_additions-1):
-                self.write_line(', {}'.format(ex_objects[i]))
-            self.write_line(' and {}.'.format(ex_objects[num_additions-1]))
+                self.write_line(', {0}'.format(ex_objects[i]))
+            self.write_line(' and {0}.'.format(ex_objects[num_additions-1]))
         elif num_additions == 1:
-            self.write_line('{}.'.format(ex_objects[0]))
+            self.write_line('{0}.'.format(ex_objects[0]))
         self.skip_line()
 
         for i in range(0, len(plugin['attribs'])):
@@ -143,10 +143,10 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                 '------------')
         self.write_line('\subsection{0}The \class{0}{1}{2} class{2}'
                         .format(self.start_b, lo_name, self.end_b))
-        self.write_line('\label{}{}-class{}'
+        self.write_line('\label{0}{1}-class{2}'
                         .format(self.start_b, lo_name.lower(), self.end_b))
         self.skip_line()
-        self.write_to_do('explain {}'.format(lo_name))
+        self.write_to_do('explain {0}'.format(lo_name))
 
         self.write_line('The \\{0} object derives from the \\class{1}SBase{2}'
                         ' and inherits the core attributes and subobjects '
@@ -158,7 +158,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         written = False
         for i in range(0, len(sbml_class['lo_attribs'])):
             if not written:
-                self.write_line('In addition the  \\{} object has the '
+                self.write_line('In addition the  \\{0} object has the '
                                 'following attributes.'
                                 .format(lo_name))
                 self.skip_line()
@@ -188,21 +188,21 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                 '------------')
         self.write_line('\subsection{0}The \class{0}{1}{2} class{2}'
                         .format(self.start_b, sbml_class['name'], self.end_b))
-        self.write_line('\label{}{}-class{}'
+        self.write_line('\label{0}{1}-class{2}'
                         .format(self.start_b, classname.lower(),
                                 self.end_b))
         self.skip_line()
-        self.write_to_do('explain {}'.format(sbml_class['name']))
+        self.write_to_do('explain {0}'.format(sbml_class['name']))
 
         if len(sbml_class['attribs']) == 0:
-            self.write_line('The \\{} object derives from the '
-                            '\\{} class and thus inherits any '
+            self.write_line('The \\{0} object derives from the '
+                            '\\{1} class and thus inherits any '
                             'attributes and elements that are present on '
                             'this class.'.format(classname, base_class))
             return
 
-        self.write_line('The \\{} object derives from the '
-                        '\\{} class and thus inherits any '
+        self.write_line('The \\{0} object derives from the '
+                        '\\{1} class and thus inherits any '
                         'attributes and elements that are present on '
                         'this class.'
                         .format(classname, base_class))
@@ -225,7 +225,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         written = False
         for i in range(0, len(child_attribs)):
             if not written:
-                self.write_line('In addition the  \\{} object has the '
+                self.write_line('In addition the  \\{0} object has the '
                                 'following attributes.'
                                 .format(classname))
                 self.skip_line()
@@ -247,7 +247,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                             'attribute{2}'.format(self.start_b, att_name,
                                                   self.end_b))
             self.skip_line()
-            self.write_line('{} \{} has {} attribute {} {}.'
+            self.write_line('{0} \{1} has {2} attribute {3} {4}.'
                             .format(strFunctions.get_indefinite(name).
                                     capitalize(),
                                     name,
@@ -257,7 +257,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                     strFunctions.wrap_type(attrib['type'],
                                                            attrib['element'],
                                                            True)))
-            self.write_to_do('explain {}'.format(att_name))
+            self.write_to_do('explain {0}'.format(att_name))
         self.skip_line()
 
     def write_child_element(self, attrib, name):
@@ -277,7 +277,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         if child_name == '\\RelAbsVector':
             return
 
-        self.write_line('{} \{} contains {} {} element.'
+        self.write_line('{0} \{1} contains {2} {3} element.'
                         .format(strFunctions.get_indefinite(name).
                                 capitalize(), name,
                                 'at most one' if attrib['reqd'] is True
@@ -304,8 +304,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.write_line(self.get_text('body_ns_section.txt'))
         self.skip_line()
         self.write_line('\\begin{center}')
-        self.write_line('\\uri{}http://www.sbml.org/sbml/level{}/'
-                        'version{}/{}/version{}{}'
+        self.write_line('\\uri{0}http://www.sbml.org/sbml/level{1}/'
+                        'version{2}/{3}/version{4}{5}'
                         .format(self.start_b, self.level, self.version,
                                 self.package, self.pkg_version, self.end_b))
         self.write_line('\\end{center}')
@@ -345,14 +345,14 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         written = False
         for i in range(0, len(prim_class['attribs'])):
             if not written:
-                self.write_line('The  \\{} object has the '
+                self.write_line('The  \\{0} object has the '
                                 'following attributes.'
                                 .format(prim_class['name']))
                 self.skip_line()
                 written = True
             att = prim_class['attribs'][i]
             self.write_attibute_paragraph(att, prim_class['name'])
-        self.write_to_do('Explain use of {}'.format(prim_class['name']))
+        self.write_to_do('Explain use of {0}'.format(prim_class['name']))
 
     # write sub section for an enum type
     def write_enum_type(self, enum):
@@ -360,24 +360,24 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                         '\\primtypeNC{0}{1}{2}{2}'
                         .format(self.start_b, enum['texname'], self.end_b))
         self.skip_line()
-        self.write_line('The \\primtype{}{}{} is an emueration of values used '
+        self.write_line('The \\primtype{0}{1}{2} is an emueration of values used '
                         'to ... '.format(self.start_b, enum['texname'], self.end_b))
-        self.write_to_do('Explain use of {}'.format(enum['texname']))
-        self.write_line('The possible values are {}.'
+        self.write_to_do('Explain use of {0}'.format(enum['texname']))
+        self.write_line('The possible values are {0}.'
                         .format(self.list_values(enum)))
         self.skip_line()
 
     def list_values(self, enum):
         num_values = len(enum['values'])
-        listed = '\\const{}{}{}'.format(self.start_b,
+        listed = '\\const{0}{1}{2}'.format(self.start_b,
                                         enum['values'][0]['value'],
                                         self.end_b)
         for i in range(1, num_values-1):
-            enum_value = ',\\const{}{}{}'.format(self.start_b,
+            enum_value = ',\\const{0}{1}{2}'.format(self.start_b,
                                                  enum['values'][i]['value'],
                                                  self.end_b)
             listed += enum_value
-        listed += ' and\\const{}{}{}'\
+        listed += ' and\\const{0}{1}{2}'\
             .format(self.start_b, enum['values'][num_values-1]['value'],
                     self.end_b)
         return listed
@@ -422,10 +422,10 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.write_line('\\section{Package syntax and semantics}')
         self.skip_line()
         self.write_line('In this section, we define the syntax and '
-                        'semantics of the {} for '
+                        'semantics of the {0} for '
                         '\\sbmlthreecore. We expound on the various data '
                         'types and constructs defined in this package, '
-                        'then in {}, we provide complete '
+                        'then in {1}, we provide complete '
                         'examples of using the constructs in example '
                         'SBML models.'.format(self.full_pkg_command,
                                               strFunctions.wrap_section(

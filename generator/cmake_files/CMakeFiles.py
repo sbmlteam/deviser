@@ -61,30 +61,30 @@ class CMakeFiles():
     #########################################################################
 
     def write_package_files(self):
-        name = '{}-package'.format(self.package)
+        name = '{0}-package'.format(self.package)
         ext = PackageFile.PackageFile(name, self.package, False)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
         os.chdir('src')
         ext = PackageFile.PackageFile(name, self.package, True)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
         os.chdir(self.this_dir)
 
     def write_register_files(self):
-        name = '{}-register'.format(self.package)
+        name = '{0}-register'.format(self.package)
         ext = RegisterFile.RegisterFile(name, self.package, False)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
         ext = RegisterFile.RegisterFile(name, self.package, True)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
@@ -92,6 +92,6 @@ class CMakeFiles():
 
     def write_files(self):
         self.write_package_files()
-        os.chdir('src/{}/packages'.format(self.language))
+        os.chdir('src/{0}/packages'.format(self.language))
         self.write_register_files()
         os.chdir(self.this_dir)

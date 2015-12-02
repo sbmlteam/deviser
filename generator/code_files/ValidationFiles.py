@@ -58,7 +58,7 @@ class ValidationFiles():
         self.package = lib_object['name']
         self.up_package = strFunctions.upper_first(self.package)
 
-        self.cap_lib = 'LIB{}'.format(self.cap_language)
+        self.cap_lib = 'LIB{0}'.format(self.cap_language)
 
         self.offset = lib_object['offset']
         self.sbml_classes = lib_object['baseElements']
@@ -68,8 +68,8 @@ class ValidationFiles():
         self.level = lib_object['base_level']
         self.version = lib_object['base_version']
         self.pkg_version = lib_object['pkg_version']
-        self.pkg_ref = '{} Level~{} Package specification for {}, ' \
-                       'Version~{}'.format(self.cap_language, self.level,
+        self.pkg_ref = '{0} Level~{1} Package specification for {2}, ' \
+                       'Version~{3}'.format(self.cap_language, self.level,
                                            self.fullname, self.pkg_version)
 
         self.error_file = None
@@ -141,7 +141,7 @@ class ValidationFiles():
                                                       'constraints',
                                                       valid_type)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_constraints_file()
         fileout.close_file()
         fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
@@ -149,7 +149,7 @@ class ValidationFiles():
                                                       'declared',
                                                       valid_type)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_constraints_file('declared')
         fileout.close_file()
 
@@ -161,7 +161,7 @@ class ValidationFiles():
                                                               'main',
                                                               valid_type)
             if self.verbose:
-                print('Writing file {}'.format(fileout.filename))
+                print('Writing file {0}'.format(fileout.filename))
             fileout.write_main_file()
             fileout.close_file()
             fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
@@ -170,7 +170,7 @@ class ValidationFiles():
                                                           valid_type,
                                                           self.sbml_classes)
             if self.verbose:
-                print('Writing file {}'.format(fileout.filename))
+                print('Writing file {0}'.format(fileout.filename))
             fileout.write_main_file()
             fileout.close_file()
 
@@ -180,7 +180,7 @@ class ValidationFiles():
                                                           'consistency',
                                                           valid_type)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
         fileout = ValidatorCodeFile.ValidatorCodeFile(self.language,
@@ -188,29 +188,29 @@ class ValidationFiles():
                                                       'consistency',
                                                       valid_type)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def write_error_header(self):
         class_desc = ({})
-        class_desc['name'] = '{}{}Error'.format(self.up_package,
+        class_desc['name'] = '{0}{1}Error'.format(self.up_package,
                                                 self.cap_language)
         class_desc['attribs'] = []
         self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
         if self.verbose:
-            print('Writing file {}'.format(self.error_file.filename))
+            print('Writing file {0}'.format(self.error_file.filename))
         self.write_error_file()
         self.error_file.close_file()
 
     def write_error_table_header(self):
         class_desc = ({})
-        class_desc['name'] = '{}{}ErrorTable'.format(self.up_package,
+        class_desc['name'] = '{0}{1}ErrorTable'.format(self.up_package,
                                                      self.cap_language)
         class_desc['attribs'] = []
         self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
         if self.verbose:
-            print('Writing file {}'.format(self.error_file.filename))
+            print('Writing file {0}'.format(self.error_file.filename))
         self.write_error_table_file()
         self.error_file.close_file()
 
@@ -221,8 +221,8 @@ class ValidationFiles():
     def write_error_table_file(self):
         BaseCppFile.BaseCppFile.write_file(self.error_file)
         self.error_file.write_defn_begin()
-        self.error_file.write_line_verbatim('#include <{}/packages/{}/'
-                                            'validator/{}{}Error'
+        self.error_file.write_line_verbatim('#include <{0}/packages/{1}/'
+                                            'validator/{2}{3}Error'
                                             '.h>'.format(self.language,
                                                          self.package,
                                                          self.up_package,
@@ -230,7 +230,7 @@ class ValidationFiles():
         self.error_file.write_cppns_begin()
         self.error_file.write_doxygen_start()
         self.error_file.write_line('static const packageErrorTableEntry '
-                                   '{}ErrorTable[] '
+                                   '{0}ErrorTable[] '
                                    '='.format(self.package.lower()))
         self.error_file.write_line('{')
         for rule in self.class_rules:
@@ -242,18 +242,18 @@ class ValidationFiles():
 
     def write_table_entry(self, rule):
         self.error_file.up_indent()
-        self.error_file.write_line('// {}'.format(rule['number']))
-        self.error_file.write_line('{}  {},'.format(self.open_br,
+        self.error_file.write_line('// {0}'.format(rule['number']))
+        self.error_file.write_line('{0}  {1},'.format(self.open_br,
                                                     rule['typecode']))
         self.error_file.up_indent()
-        self.error_file.write_line('\"{}\",'.format(rule['short']))
-        self.error_file.write_line('{}_CAT_GENERAL_'
+        self.error_file.write_line('\"{0}\",'.format(rule['short']))
+        self.error_file.write_line('{0}_CAT_GENERAL_'
                                    'CONSISTENCY,'.format(self.cap_lib))
-        self.error_file.write_line('{},'.format(rule['lib_sev']))
-        self.error_file.write_line_no_indent('\"{}\",'.format(self.format_text(rule['text'])))
-        self.error_file.write_line('{}  \"{}\"'.format(self.open_br,
+        self.error_file.write_line('{0},'.format(rule['lib_sev']))
+        self.error_file.write_line_no_indent('\"{0}\",'.format(self.format_text(rule['text'])))
+        self.error_file.write_line('{0}  \"{1}\"'.format(self.open_br,
                                                        rule['lib_ref']))
-        self.error_file.write_line('{}'.format(self.close_br))
+        self.error_file.write_line('{0}'.format(self.close_br))
         self.error_file.down_indent()
         self.error_file.write_line('},')
         self.error_file.down_indent()
@@ -377,10 +377,10 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '\\':
-                return_name_rep += '<{}'.format(next_letter.lower())
+                return_name_rep += '<{0}'.format(next_letter.lower())
                 i += 1
             elif next_letter == ' ' or next_letter == '.':
-                return_name_rep += '{}>'.format(letter)
+                return_name_rep += '{0}>'.format(letter)
                 in_name = False
             else:
                 return_name_rep += letter
@@ -444,7 +444,7 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '{':
-                return_class_rep += '<{}'.format(next_letter.lower())
+                return_class_rep += '<{0}'.format(next_letter.lower())
                 i += 1
             elif letter == '}' or next_letter == ' ':
                 return_class_rep += '>'
@@ -469,7 +469,7 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '{':
-                return_type_rep += '\'{}'.format(next_letter)
+                return_type_rep += '\'{0}'.format(next_letter)
                 i += 1
             elif letter == '}' or next_letter == ' ':
                 return_type_rep += '\''
@@ -482,7 +482,7 @@ class ValidationFiles():
 
 
     def replace_package(self, i, pkg_length):
-        return_token_rep = '{} Package'.format(self.fullname)
+        return_token_rep = '{0} Package'.format(self.fullname)
         return [i+pkg_length-1, return_token_rep]
 
 
@@ -502,7 +502,7 @@ class ValidationFiles():
             self.write_rule(rule['typecode'], rule['number'], first)
             first = False
         self.error_file.file_out.write('} ')
-        self.error_file.file_out.write('{}{}'
+        self.error_file.file_out.write('{0}{1}'
                                        'ErrorCode_t'
                                        ';\n'.format(self.up_package,
                                                     self.cap_language))
@@ -512,7 +512,7 @@ class ValidationFiles():
 
     def write_rule(self, tc, number, first):
         if first:
-            self.error_file.file_out.write('  {:{width}}'.format(tc, width=60))
+            self.error_file.file_out.write('  {0:{width}}'.format(tc, width=60))
         else:
-            self.error_file.file_out.write(', {:{width}}'.format(tc, width=60))
-        self.error_file.file_out.write('= {}\n'.format(number))
+            self.error_file.file_out.write(', {0:{width}}'.format(tc, width=60))
+        self.error_file.file_out.write('= {0}\n'.format(number))

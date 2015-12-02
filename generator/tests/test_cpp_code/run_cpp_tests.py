@@ -14,7 +14,7 @@ path_to_tests = ''
 
 def get_filename(name):
     global path_to_tests
-    fname = '{}.xml'.format(name)
+    fname = '{0}.xml'.format(name)
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
@@ -121,15 +121,15 @@ def compare_files(infile, outfile):
     elif not os.path.isfile(outfile):
         print(outfile)
         fails.append(infile)
-        print('{}=================>> MISSING'.format(outfile))
+        print('{0}=================>> MISSING'.format(outfile))
         return 1
     indata = read_file(infile)
     out = read_file(outfile)
     if indata.strip() == out.strip():
-        print('{} .... PASSED'.format(outfile))
+        print('{0} .... PASSED'.format(outfile))
     else:
         fails.append(infile)
-        print('{}=================>> FAILED'.format(outfile))
+        print('{0}=================>> FAILED'.format(outfile))
         ret = 1
     return ret
 
@@ -137,22 +137,22 @@ def compare_files(infile, outfile):
 def run_test(name, num, class_name, test_case, list_of):
     filename = get_filename(name)
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     generate_new_cpp_header(filename, num)
-    correct_file = '.\\test-code\\{}.h'.format(class_name)
-    temp_file = '.\\temp\\{}.h'.format(class_name)
+    correct_file = '.\\test-code\\{0}.h'.format(class_name)
+    temp_file = '.\\temp\\{0}.h'.format(class_name)
     fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
-    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+    correct_cpp_file = '.\\test-code\\{0}.cpp'.format(class_name)
+    temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
     fail += compare_files(correct_cpp_file, temp_cpp_file)
     if len(list_of) > 0:
         class_name = list_of
-        correct_file = '.\\test-code\\{}.h'.format(class_name)
-        temp_file = '.\\temp\\{}.h'.format(class_name)
+        correct_file = '.\\test-code\\{0}.h'.format(class_name)
+        temp_file = '.\\temp\\{0}.h'.format(class_name)
         fail += compare_files(correct_file, temp_file)
-        correct_cpp_file = '.\\test-code\\{}.cpp'.format(class_name)
-        temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+        correct_cpp_file = '.\\test-code\\{0}.cpp'.format(class_name)
+        temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
         fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
@@ -161,7 +161,7 @@ def run_test(name, num, class_name, test_case, list_of):
 def run_ext_test(name, class_name, test_case, test):
     filename = get_filename(name)
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     if test == 0:
         generate_extension_header(filename)
@@ -169,12 +169,12 @@ def run_ext_test(name, class_name, test_case, test):
         generate_types_header(filename)
     else:
         generate_fwd_header(filename)
-    correct_file = '.\\test-extension\\{}.h'.format(class_name)
-    temp_file = '.\\temp\\{}.h'.format(class_name)
+    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
+    temp_file = '.\\temp\\{0}.h'.format(class_name)
     fail = compare_files(correct_file, temp_file)
     if test == 0:
-        correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
-        temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+        correct_cpp_file = '.\\test-extension\\{0}.cpp'.format(class_name)
+        temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
         fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
@@ -183,14 +183,14 @@ def run_ext_test(name, class_name, test_case, test):
 def run_plug_test(name, class_name, test_case, num):
     filename = get_filename(name)
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     generate_plugin_header(filename, num)
-    correct_file = '.\\test-extension\\{}.h'.format(class_name)
-    temp_file = '.\\temp\\{}.h'.format(class_name)
+    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
+    temp_file = '.\\temp\\{0}.h'.format(class_name)
     fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-extension\\{}.cpp'.format(class_name)
-    temp_cpp_file = '.\\temp\\{}.cpp'.format(class_name)
+    correct_cpp_file = '.\\test-extension\\{0}.cpp'.format(class_name)
+    temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
     fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
@@ -199,23 +199,23 @@ def run_plug_test(name, class_name, test_case, num):
 def run_valid_test(name, class_name, test_case, is_ext=True):
     filename = get_filename(name)
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     if is_ext:
         generate_error_header(filename)
-        correct_file = '.\\test-extension\\{}.h'.format(class_name)
-        temp_file = '.\\temp\\{}.h'.format(class_name)
+        correct_file = '.\\test-extension\\{0}.h'.format(class_name)
+        temp_file = '.\\temp\\{0}.h'.format(class_name)
         fail = compare_files(correct_file, temp_file)
-        correct_file = '.\\test-extension\\{}Table.h'.format(class_name)
-        temp_file = '.\\temp\\{}Table.h'.format(class_name)
+        correct_file = '.\\test-extension\\{0}Table.h'.format(class_name)
+        temp_file = '.\\temp\\{0}Table.h'.format(class_name)
         fail += compare_files(correct_file, temp_file)
     else:
         generate_validator(filename)
-        correct_file = '.\\test-extension\\{}.h'.format(class_name)
-        temp_file = '.\\temp\\{}.h'.format(class_name)
+        correct_file = '.\\test-extension\\{0}.h'.format(class_name)
+        temp_file = '.\\temp\\{0}.h'.format(class_name)
         fail = compare_files(correct_file, temp_file)
-        correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
-        temp_file = '.\\temp\\{}.cpp'.format(class_name)
+        correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
+        temp_file = '.\\temp\\{0}.cpp'.format(class_name)
         fail += compare_files(correct_file, temp_file)
     print('')
     return fail
@@ -224,14 +224,14 @@ def run_valid_test(name, class_name, test_case, is_ext=True):
 def run_constraints_test(name, class_name, test_case):
     filename = get_filename(name)
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, class_name, test_case))
+    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')
     generate_constraints(filename)
-    correct_file = '.\\test-extension\\{}.cpp'.format(class_name)
-    temp_file = '.\\temp\\{}.cpp'.format(class_name)
+    correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
+    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
     fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-extension\\{}Declared.cxx'.format(class_name)
-    temp_cpp_file = '.\\temp\\{}Declared.cxx'.format(class_name)
+    correct_cpp_file = '.\\test-extension\\{0}Declared.cxx'.format(class_name)
+    temp_cpp_file = '.\\temp\\{0}Declared.cxx'.format(class_name)
     fail += compare_files(correct_cpp_file, temp_cpp_file)
     print('')
     return fail
@@ -526,7 +526,7 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('CPP FAILS')
-        print('Check {} fails'.format(fail))
+        print('Check {0} fails'.format(fail))
         for name in fails:
             print(name)
 

@@ -108,13 +108,13 @@ class GlobalQueryFunctions():
                      'no such object is found.'
         params = ['@param id a string representing the id attribute '
                   'of the object to retrieve.']
-        return_lines = ['@return  a pointer to the {} element with the '
+        return_lines = ['@return  a pointer to the {0} element with the '
                         'given @p id.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
         function = 'getElementBySId'
-        return_type = '{}*'.format(self.std_base)
+        return_type = '{0}*'.format(self.std_base)
         arguments = ['const std::string& id']
 
         code = []
@@ -122,7 +122,7 @@ class GlobalQueryFunctions():
             implementation = ['id.empty()', 'return NULL']
             code = [self.create_code_block('if', implementation),
                     self.create_code_block('line',
-                                           ['{}* obj = '
+                                           ['{0}* obj = '
                                             'NULL'.format(self.std_base)])]
 
             if_block = ['obj != NULL', 'return obj']
@@ -130,18 +130,18 @@ class GlobalQueryFunctions():
             for i in range(0, len(self.child_elements)):
                 name = self.child_elements[i]['memberName']
                 middle_if = self.create_code_block('if',
-                                                   ['{}->getId() == '
+                                                   ['{0}->getId() == '
                                                     'id'.format(name),
-                                                    'return {}'.format(name)])
+                                                    'return {0}'.format(name)])
                 code.append(self.create_code_block('if',
-                                                   ['{} != NULL'.format(name),
+                                                   ['{0} != NULL'.format(name),
                                                     middle_if,
-                                                    'obj = {}->getElementBy'
+                                                    'obj = {0}->getElementBy'
                                                     'SId(id)'.format(name),
                                                     if_code]))
 
             for i in range(0, len(self.child_lo_elements)):
-                line = [' obj = {}.getElementBySId('
+                line = [' obj = {0}.getElementBySId('
                         'id)'.format(self.child_lo_elements[i]['memberName'])]
                 code.append(self.create_code_block('line', line))
                 code.append(if_code)
@@ -180,33 +180,33 @@ class GlobalQueryFunctions():
                      'no such object is found.'
         params = ['@param metaid a string representing the metaid attribute '
                   'of the object to retrieve.']
-        return_lines = ['@return  a pointer to the {} element with the '
+        return_lines = ['@return  a pointer to the {0} element with the '
                         'given @p metaid.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
         function = 'getElementByMetaId'
-        return_type = '{}*'.format(self.std_base)
+        return_type = '{0}*'.format(self.std_base)
         arguments = ['const std::string& metaid']
 
         code = []
         if not self.is_header:
             code = [self.create_code_block('if',
                                            ['metaid.empty()', 'return NULL']),
-                    self.create_code_block('line', ['{}* obj = NUL'
+                    self.create_code_block('line', ['{0}* obj = NUL'
                                                     'L'.format(self.std_base)])]
             if_block = ['obj != NULL', 'return obj']
             if_code = self.create_code_block('if', if_block)
             for i in range(0, len(self.child_elements)):
                 name = self.child_elements[i]['memberName']
                 middle_if = self.create_code_block('if',
-                                                   ['{}->getMetaId() == '
+                                                   ['{0}->getMetaId() == '
                                                     'metaid'.format(name),
-                                                    'return {}'.format(name)])
+                                                    'return {0}'.format(name)])
                 code.append(self.create_code_block('if',
-                                                   ['{} != NULL'.format(name),
+                                                   ['{0} != NULL'.format(name),
                                                     middle_if,
-                                                    'obj = {}->getElementBy'
+                                                    'obj = {0}->getElementBy'
                                                     'MetaId'
                                                     '(metaid)'.format(name),
                                                     if_code]))
@@ -215,13 +215,13 @@ class GlobalQueryFunctions():
             name = []
             for i in range(0, num_lo):
                 name.append(self.child_lo_elements[i]['memberName'])
-                first_if = ['{}.getMetaId() == metaid'.format(name[i]),
-                            'return &{}'.format(name[i])]
+                first_if = ['{0}.getMetaId() == metaid'.format(name[i]),
+                            'return &{0}'.format(name[i])]
                 code.append(self.create_code_block('if', first_if))
             if_block = ['obj != NULL', 'return obj']
             if_code = self.create_code_block('if', if_block)
             for i in range(0, num_lo):
-                line = 'obj = {}.getElementByMetaId' \
+                line = 'obj = {0}.getElementByMetaId' \
                        '(metaid)'.format(name[i])
                 code.append(self.create_code_block('line', [line]))
                 code.append(if_code)
@@ -254,12 +254,12 @@ class GlobalQueryFunctions():
             return
 
         # create comment parts
-        title_line = 'Returns a List of all child {} objects, including ' \
+        title_line = 'Returns a List of all child {0} objects, including ' \
                      'those nested to an arbitrary depth.'.format(self.std_base)
         params = ['filter, an ElementFilter that may impose restrictions on '
                   'the objects to be retrieved.']
         return_lines = ['@return  a List* pointer of pointers to all '
-                        '{} child objects with any restriction '
+                        '{0} child objects with any restriction '
                         'imposed.'.format(self.std_base)]
         additional = []
 
@@ -277,18 +277,18 @@ class GlobalQueryFunctions():
             if self.is_list_of:
                 sublist = 'ListOf::getAllElements(filter)'
             implementation = ['List* ret = new List()',
-                              'List* sublist = {}'.format(sublist)]
+                              'List* sublist = {0}'.format(sublist)]
             code = [self.create_code_block('line', implementation)]
             implementation = []
             for i in range(0, len(self.child_elements)):
                 name = self.child_elements[i]['memberName']
-                implementation.append('ADD_FILTERED_POINTER(ret, sublist, {}, '
+                implementation.append('ADD_FILTERED_POINTER(ret, sublist, {0}, '
                                       'filter)'.format(name))
             code.append(self.create_code_block('line', implementation))
             implementation = []
             for i in range(0, len(self.child_lo_elements)):
                 name = self.child_lo_elements[i]['memberName']
-                implementation.append('ADD_FILTERED_LIST(ret, sublist, {}, '
+                implementation.append('ADD_FILTERED_LIST(ret, sublist, {0}, '
                                       'filter)'.format(name))
             code.append(self.create_code_block('line', implementation))
             if not self.is_plugin:
@@ -332,14 +332,14 @@ class GlobalQueryFunctions():
         arguments = ['const Model* model']
 
         code = []
-        success = '{}'.format(global_variables.ret_success)
-        invalid = '{}'.format(global_variables.ret_invalid_obj)
+        success = '{0}'.format(global_variables.ret_success)
+        invalid = '{0}'.format(global_variables.ret_invalid_obj)
         if not self.is_header:
             code = [self.create_code_block('line',
-                                           ['int ret = {}'.format(success)]),
+                                           ['int ret = {0}'.format(success)]),
                     self.create_code_block('if',
                                            ['model == NULL',
-                                            'return {}'.format(invalid)]),
+                                            'return {0}'.format(invalid)]),
                     self.create_code_block('line',
                                            ['const {0}* plug = static_cast'
                                             '<const {0}*>(model->getPlugin'
@@ -349,16 +349,16 @@ class GlobalQueryFunctions():
                                            ['plug == NULL', 'return ret']),
                     self.create_code_block('line',
                                            ['Model* parent = static_cast'
-                                            '<Model*>(getParent{}'
+                                            '<Model*>(getParent{0}'
                                             'Object()'
                                             ')'.format(self.cap_language)]),
                     self.create_code_block('if',
                                            ['parent == NULL',
-                                            'return {}'.format(invalid)])]
+                                            'return {0}'.format(invalid)])]
             # implementation =[]
             # for i in range(0, len(self.child_elements)):
             #     name = self.child_elements[i]['memberName']
-            #     implementation.append('ADD_FILTERED_POINTER(ret, sublist, {},'
+            #     implementation.append('ADD_FILTERED_POINTER(ret, sublist, {0},'
             #                           'filter)'.format(name))
             # code.append(self.create_code_block('line', implementation))
             ret = global_variables.ret_success
@@ -367,12 +367,12 @@ class GlobalQueryFunctions():
                 loname = strFunctions.\
                     upper_first(self.child_lo_elements[i]['name'])
                 code.append(self.create_code_block('line',
-                                                   ['ret = {}.appendFrom(plug->'
-                                                    'get{}())'.format(name,
+                                                   ['ret = {0}.appendFrom(plug->'
+                                                    'get{1}())'.format(name,
                                                                       loname)]))
                 code.append(
                     self.create_code_block('if',
-                                           ['ret != {}'.format(ret),
+                                           ['ret != {0}'.format(ret),
                                             'return ret']))
             code.append(self.create_code_block('line', ['return ret']))
 

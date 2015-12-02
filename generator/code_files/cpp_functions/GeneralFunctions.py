@@ -154,17 +154,17 @@ class GeneralFunctions():
         code = []
         for i in range(0, len(self.sid_refs)):
             ref = self.sid_refs[i]
-            implementation = ['isSet{}() && {} == '
+            implementation = ['isSet{0}() && {1} == '
                               'oldid'.format(ref['capAttName'],
                                              ref['memberName']),
-                              'set{}(newid)'.format(ref['capAttName'])]
+                              'set{0}(newid)'.format(ref['capAttName'])]
             code.append(dict({'code_type': 'if', 'code': implementation}))
         for i in range(0, len(self.unit_sid_refs)):
             ref = self.unit_sid_refs[i]
-            implementation = ['isSet{}() && {} == '
+            implementation = ['isSet{0}() && {1} == '
                               'oldid'.format(ref['capAttName'],
                                              ref['memberName']),
-                              'set{}(newid)'.format(ref['capAttName'])]
+                              'set{0}(newid)'.format(ref['capAttName'])]
             code.append(dict({'code_type': 'if', 'code': implementation}))
         if self.has_math:
             implementation = ['isSetMath()',
@@ -197,11 +197,11 @@ class GeneralFunctions():
             name = self.element_name
         else:
             name = strFunctions.lower_first(self.object_name)
-        title_line = 'Returns the XML element name of this {} object.'\
+        title_line = 'Returns the XML element name of this {0} object.'\
             .format(self.object_name,)
-        params = ['For {}, the XML element name is always @c '
-                  '\"{}\".'.format(self.object_name, name)]
-        return_lines = ['@return the name of this element, i.e. @c \"{}\"'
+        params = ['For {0}, the XML element name is always @c '
+                  '\"{1}\".'.format(self.object_name, name)]
+        return_lines = ['@return the name of this element, i.e. @c \"{0}\"'
                         '.'.format(name)]
         additional = []
 
@@ -214,7 +214,7 @@ class GeneralFunctions():
         if self.overwrites_children:
             implementation = ['return mElementName']
         else:
-            implementation = ['static const string name = \"{}\"'.format(name),
+            implementation = ['static const string name = \"{0}\"'.format(name),
                               'return name']
         code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
@@ -236,10 +236,10 @@ class GeneralFunctions():
             return
 
         # create comment
-        title_line = 'Returns the lib{} type code for this {} object.'\
+        title_line = 'Returns the lib{0} type code for this {1} object.'\
             .format(self.cap_language, self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
-        return_lines = ['@return the {} type code for this '
+        return_lines = ['@return the {0} type code for this '
                         'object:'.format(self.cap_language)]
         additional = []
         if self.is_list_of:
@@ -247,8 +247,8 @@ class GeneralFunctions():
                    '{1}TypeCode_t{3}'.format(self.language, self.cap_language,
                                              '{', '}')
         else:
-            line = '@{}constant{}{}, {}{}' \
-                   'TypeCode_t{}'.format(self.language, '{', self.typecode,
+            line = '@{0}constant{1}{2}, {3}{4}' \
+                   'TypeCode_t{5}'.format(self.language, '{', self.typecode,
                                          self.cap_language, self.package, '}')
         additional.append(line)
         additional.append(' ')
@@ -265,9 +265,9 @@ class GeneralFunctions():
 
         # create the function implementation
         if self.is_list_of:
-            implementation = ['return {}_LIST_OF'.format(self.cap_language)]
+            implementation = ['return {0}_LIST_OF'.format(self.cap_language)]
         else:
-            implementation = ['return {}'.format(self.typecode)]
+            implementation = ['return {0}'.format(self.typecode)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -293,11 +293,11 @@ class GeneralFunctions():
                      'contained in this {1} object.'.format(self.cap_language,
                                                             self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
-        return_lines = ['@return the {} typecode for the '
+        return_lines = ['@return the {0} typecode for the '
                         'objects contained in this '
-                        '{}:'.format(self.cap_language, self.object_name)]
+                        '{1}:'.format(self.cap_language, self.object_name)]
         additional = []
-        line = '@{}constant{}{}, {}{}TypeCode_t{}'.format(self.language, '{',
+        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}'.format(self.language, '{',
                                                           self.typecode,
                                                           self.cap_language,
                                                           self.package, '}')
@@ -314,7 +314,7 @@ class GeneralFunctions():
         return_type = 'int'
 
         # create the function implementation
-        implementation = ['return {}'.format(self.typecode)]
+        implementation = ['return {0}'.format(self.typecode)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -340,8 +340,8 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Predicate returning {} if all the required ' \
-                     'attributes for this {} object have been set.'\
+        title_line = 'Predicate returning {0} if all the required ' \
+                     'attributes for this {1} object have been set.'\
             .format(self.true, self.object_name)
         params = []
         if not self.is_cpp_api:
@@ -352,12 +352,12 @@ class GeneralFunctions():
                         'attributes of this {1} have been set, otherwise '
                         '{2} is returned.'.format(self.true, self.object_name,
                                                   self.false)]
-        additional = [' ', '@note The required attributes for the {} object'
+        additional = [' ', '@note The required attributes for the {0} object'
                            ' are:'.format(self.object_name)]
         for i in range(0, len(self.attributes)):
             if self.attributes[i]['reqd']:
                 att_name = self.attributes[i]['name']
-                additional.append('@li \"{}\"'.format(att_name))
+                additional.append('@li \"{0}\"'.format(att_name))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -377,15 +377,15 @@ class GeneralFunctions():
             if self.has_std_base:
                 all_present = 'true'
             else:
-                all_present = '{}::hasRequired' \
+                all_present = '{0}::hasRequired' \
                               'Attributes()'.format(self.base_class)
             code = [dict({'code_type': 'line',
                           'code': ['bool all'
-                                   'Present = {}'.format(all_present)]})]
+                                   'Present = {0}'.format(all_present)]})]
             for i in range(0, len(self.attributes)):
                 att = self.attributes[i]
                 if att['reqd']:
-                    implementation = ['isSet{}() == '
+                    implementation = ['isSet{0}() == '
                                       'false'.format(att['capAttName']),
                                       'allPresent = false']
                     code.append(dict({'code_type': 'if',
@@ -416,8 +416,8 @@ class GeneralFunctions():
             return
 
         # create comment parts
-        title_line = 'Predicate returning {} if all the required ' \
-                     'elements for this {} object have been set.'\
+        title_line = 'Predicate returning {0} if all the required ' \
+                     'elements for this {1} object have been set.'\
             .format(self.true, self.object_name)
         params = []
         if not self.is_cpp_api:
@@ -428,15 +428,15 @@ class GeneralFunctions():
                         'elements of this {1} have been set, otherwise '
                         '{2} is returned.'.format(self.true, self.object_name,
                                                   self.false)]
-        additional = [' ', '@note The required elements for the {} object'
+        additional = [' ', '@note The required elements for the {0} object'
                            ' are:'.format(self.object_name)]
         for i in range(0, len(self.child_elements)):
             if self.child_elements[i]['reqd']:
-                additional.append('@li \"{}\"'
+                additional.append('@li \"{0}\"'
                                   .format(self.child_elements[i]['name']))
         for i in range(0, len(self.child_lo_elements)):
             if self.child_lo_elements[i]['reqd']:
-                additional.append('@li \"{}\"'
+                additional.append('@li \"{0}\"'
                                   .format(self.child_lo_elements[i]['name']))
 
         # create the function declaration
@@ -456,15 +456,15 @@ class GeneralFunctions():
             if self.has_std_base:
                 all_present = 'true'
             else:
-                all_present = '{}::hasRequired' \
+                all_present = '{0}::hasRequired' \
                               'Elements()'.format(self.base_class)
             code = [dict({'code_type': 'line',
                           'code': ['bool allPresent '
-                                   '= {}'.format(all_present)]})]
+                                   '= {0}'.format(all_present)]})]
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]
                 if att['reqd']:
-                    implementation = ['isSet{}() == '
+                    implementation = ['isSet{0}() == '
                                       'false'.format(att['capAttName']),
                                       'allPresent = false']
                     code.append(dict({'code_type': 'if',
@@ -473,7 +473,7 @@ class GeneralFunctions():
                 att = self.child_lo_elements[i]
                 if att['reqd']:
                     name = strFunctions.upper_first(att['pluralName'])
-                    implementation = ['getNum{}() == '
+                    implementation = ['getNum{0}() == '
                                       '0'.format(name),
                                       'allPresent = false']
                     code.append(dict({'code_type': 'if',
@@ -526,21 +526,21 @@ class GeneralFunctions():
         base = self.base_class
         if not self.is_plugin:
             code = [dict({'code_type': 'line',
-                          'code': ['{}::writeElements(stream)'.format(base)]})]
+                          'code': ['{0}::writeElements(stream)'.format(base)]})]
         else:
             code = []
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
-                line = ['writeMathML(getMath(), stream, get{}'
+                line = ['writeMathML(getMath(), stream, get{0}'
                         'Namespaces())'.format(global_variables.prefix)]
             elif att['element'] == 'XMLNode':
-                line = ['stream.startElement(\"{}\")'.format(att['name']),
-                        'stream << *{}'.format(att['memberName']),
-                        'stream.endElement(\"{}\")'.format(att['name'])]
+                line = ['stream.startElement(\"{0}\")'.format(att['name']),
+                        'stream << *{0}'.format(att['memberName']),
+                        'stream.endElement(\"{0}\")'.format(att['name'])]
             else:
-                line = ['{}->write(stream)'.format(att['memberName'])]
-            implementation = ['isSet{}() == true'.format(att['capAttName'])]
+                line = ['{0}->write(stream)'.format(att['memberName'])]
+            implementation = ['isSet{0}() == true'.format(att['capAttName'])]
             implementation += line
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
@@ -555,14 +555,14 @@ class GeneralFunctions():
                     name = 'CSG' + att['pluralName'][3:]
                 else:
                     name = strFunctions.upper_first(att['pluralName'])
-            implementation = ['getNum{}() > '
+            implementation = ['getNum{0}() > '
                               '0'.format(name),
-                              '{}.write(stream)'.format(att['memberName'])]
+                              '{0}.write(stream)'.format(att['memberName'])]
             code.append(dict({'code_type': 'if',
                               'code': implementation}))
         if not self.is_plugin and global_variables.is_package:
             code.append(dict({'code_type': 'line',
-                              'code': ['{}::writeExtension'
+                              'code': ['{0}::writeExtension'
                                        'Elements'
                                        '(stream)'.format(self.std_base)]}))
         # return the parts
@@ -585,7 +585,7 @@ class GeneralFunctions():
 
         # create comment parts
         title_line = 'Accepts the given ' \
-                     '{}Visitor'.format(global_variables.prefix)
+                     '{0}Visitor'.format(global_variables.prefix)
         params = []
         return_lines = []
         additional = []
@@ -593,7 +593,7 @@ class GeneralFunctions():
         # create the function declaration
         function = 'accept'
         return_type = 'bool'
-        arguments = ['{}Visitor& v'.format(global_variables.prefix)]
+        arguments = ['{0}Visitor& v'.format(global_variables.prefix)]
 
         # create the function implementation
         simple = False
@@ -621,18 +621,18 @@ class GeneralFunctions():
                                   '(this->getParent{2}Object()'
                                   ')'.format(self.ext_class, obj,
                                              self.cap_language),
-                                  'v.visit(*{})'.format(obj),
-                                  'v.leave(*{})'.format(obj)]
+                                  'v.visit(*{0})'.format(obj),
+                                  'v.leave(*{0})'.format(obj)]
                 code = [self.create_code_block('line', implementation)]
             for i in range(0, len(self.child_elements)):
                 elem = self.child_elements[i]
-                implementation = ['{} != NULL'.format(elem['memberName']),
-                                  '{}->accept(v)'.format(elem['memberName'])]
+                implementation = ['{0} != NULL'.format(elem['memberName']),
+                                  '{0}->accept(v)'.format(elem['memberName'])]
                 code.append(dict({'code_type': 'if',
                                   'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{}.accept(v)'.format(att['memberName'])]
+                implementation = ['{0}.accept(v)'.format(att['memberName'])]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
             if not self.is_plugin:
@@ -663,19 +663,19 @@ class GeneralFunctions():
 
         # create comment parts
         title_line = 'Sets the parent ' \
-                     '{}'.format(global_variables.document_class)
+                     '{0}'.format(global_variables.document_class)
         params = []
         return_lines = []
         additional = []
 
         # create the function declaration
-        function = 'set{}'.format(global_variables.document_class)
+        function = 'set{0}'.format(global_variables.document_class)
         return_type = 'void'
-        arguments = ['{}* d'.format(global_variables.document_class)]
+        arguments = ['{0}* d'.format(global_variables.document_class)]
 
         # create the function implementation
         if self.base_class:
-            line = '{}::set{}(d)'.format(self.base_class,
+            line = '{0}::set{1}(d)'.format(self.base_class,
                                          global_variables.document_class)
             implementation = [line]
             code = [dict({'code_type': 'line', 'code': implementation})]
@@ -687,13 +687,13 @@ class GeneralFunctions():
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['{} != NULL'.format(att['memberName']),
-                                      '{}->{}'
+                    implementation = ['{0} != NULL'.format(att['memberName']),
+                                      '{0}->{1}'
                                       '(d)'.format(att['memberName'], function)]
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{}.{}'
+                implementation = ['{0}.{1}'
                                   '(d)'.format(att['memberName'], function)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
@@ -746,9 +746,9 @@ class GeneralFunctions():
                                         'getPrefix())',
                                         'writeAttributes(stream)'])]
         nested_for = self.create_code_block(
-            'for', ['int i = 0; i < m{}Length; ++i'.format(name),
-                    'stream << ({}){}[i] << \" \"'.format(array_type, member)])
-        implementation = ['isSet{}()'.format(name), nested_for]
+            'for', ['int i = 0; i < m{0}Length; ++i'.format(name),
+                    'stream << ({0}){1}[i] << \" \"'.format(array_type, member)])
+        implementation = ['isSet{0}()'.format(name), nested_for]
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block(
             'line', ['stream.endElement(getElementName(), getPrefix())']))
@@ -792,7 +792,7 @@ class GeneralFunctions():
         # create the function implementation
         code = []
         if not self.is_plugin and self.base_class:
-            implementation = ['{}::enablePackageInternal(pkgURI, pkgPrefix, '
+            implementation = ['{0}::enablePackageInternal(pkgURI, pkgPrefix, '
                               'flag)'.format(self.base_class)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         if self.has_children and not self.has_only_math:
@@ -801,15 +801,15 @@ class GeneralFunctions():
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['isSet{}()'.format(att['capAttName']),
-                                      '{}->enablePackageInternal'
+                    implementation = ['isSet{0}()'.format(att['capAttName']),
+                                      '{0}->enablePackageInternal'
                                       '(pkgURI, pkgPrefix, '
                                       'flag)'.format(att['memberName'])]
                     code.append(dict({'code_type': 'if',
                                       'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{}.enablePackageInternal'
+                implementation = ['{0}.enablePackageInternal'
                                   '(pkgURI, pkgPrefix, '
                                   'flag)'.format(att['memberName'])]
                 code.append(dict({'code_type': 'line',
@@ -848,27 +848,27 @@ class GeneralFunctions():
 
         # create the function implementation
         if not self.is_plugin:
-            implementation = ['{}::connectToChild()'.format(self.base_class)]
+            implementation = ['{0}::connectToChild()'.format(self.base_class)]
             code = [dict({'code_type': 'line', 'code': implementation})]
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]
                 if 'is_ml' in att and att['is_ml']:
                     continue
                 else:
-                    implementation = ['{} != NULL'.format(att['memberName']),
-                                      '{}->connectToParent'
+                    implementation = ['{0} != NULL'.format(att['memberName']),
+                                      '{0}->connectToParent'
                                       '(this)'.format(att['memberName'])]
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{}.connectToParent'
+                implementation = ['{0}.connectToParent'
                                   '(this)'.format(att['memberName'])]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
         else:
             code = [self.create_code_block('line',
                                            ['connectToParent(getParent'
-                                            '{}Object()'
+                                            '{0}Object()'
                                             ')'.format(self.cap_language)])]
         # return the parts
         return dict({'title_line': title_line,
@@ -899,23 +899,23 @@ class GeneralFunctions():
         # create the function declaration
         function = 'connectToParent'
         return_type = 'void'
-        arguments = ['{}* base'.format(self.std_base)]
+        arguments = ['{0}* base'.format(self.std_base)]
 
         # create the function implementation
-        implementation = ['{}::connectToParent(base)'.format(self.base_class)]
+        implementation = ['{0}::connectToParent(base)'.format(self.base_class)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if 'is_ml' in att and att['is_ml']:
                 continue
             else:
-                implementation = ['{} != NULL'.format(att['memberName']),
-                                  '{}->connectToParent'
+                implementation = ['{0} != NULL'.format(att['memberName']),
+                                  '{0}->connectToParent'
                                   '(base)'.format(att['memberName'])]
                 code.append(self.create_code_block('if', implementation))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
-            implementation = ['{}.connectToParent'
+            implementation = ['{0}.connectToParent'
                               '(base)'.format(att['memberName'])]
             code.append(dict({'code_type': 'line',
                               'code': implementation}))
@@ -944,7 +944,7 @@ class GeneralFunctions():
         if not self.overwrites_children:
             return
         # create comment parts
-        title_line = 'Sets the XML name of this {} object.'\
+        title_line = 'Sets the XML name of this {0} object.'\
             .format(self.object_name,)
         params = []
         return_lines = []
@@ -983,7 +983,7 @@ class GeneralFunctions():
 
         # create comment parts
         title_line = 'Predicate indicating whether \'comp\' flattening has ' \
-                     'been implemented for the {} package.'.format(self.package)
+                     'been implemented for the {0} package.'.format(self.package)
         params = []
         return_lines = []
         additional = []
@@ -1016,7 +1016,7 @@ class GeneralFunctions():
 
         # create comment parts
         title_line = 'Calls check consistency for any relevant ' \
-                     '{} validators.'.format(self.package)
+                     '{0} validators.'.format(self.package)
         params = []
         return_lines = []
         additional = []
@@ -1034,7 +1034,7 @@ class GeneralFunctions():
                           'getParent{1}'
                           'Object())'.format(global_variables.document_class,
                                              self.cap_language),
-                          '{}ErrorLog* log = doc->getError'
+                          '{0}ErrorLog* log = doc->getError'
                           'Log()'.format(self.cap_language)]
         code.append(self.create_code_block('line', implementation))
         implementation = ['unsigned char applicableValidators = '
@@ -1042,9 +1042,9 @@ class GeneralFunctions():
                           'bool id = ((applicableValidators & 0x01) ==0x01)',
                           'bool core = ((applicableValidators & 0x02) ==0x02)']
         code.append(self.create_code_block('line', implementation))
-        implementation = ['{}IdentifierConsistencyValidator '
+        implementation = ['{0}IdentifierConsistencyValidator '
                           'id_validator'.format(self.package),
-                          '{}ConsistencyValidator '
+                          '{0}ConsistencyValidator '
                           'core_validator'.format(self.package)]
         code.append(self.create_code_block('line', implementation))
         implementation = self.get_validator_block('id')
@@ -1074,15 +1074,15 @@ class GeneralFunctions():
             return
 
         # sort error names to be used
-        error = '{}AttributeRequiredMustBeBoolean'.format(self.package)
-        req_error = '{}AttributeRequiredMissing'.format(self.package)
+        error = '{0}AttributeRequiredMustBeBoolean'.format(self.package)
+        req_error = '{0}AttributeRequiredMissing'.format(self.package)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
             if req_error not in global_variables.error_list:
-                req_error = '{}Unknown'.format(self.package)
+                req_error = '{0}Unknown'.format(self.package)
         # create comment parts
-        title_line = 'Reads the {} attributes in the top-level ' \
+        title_line = 'Reads the {0} attributes in the top-level ' \
                      'element.'.format(self.package)
         params = []
         return_lines = []
@@ -1100,7 +1100,7 @@ class GeneralFunctions():
                           '3'.format(global_variables.document_class),
                           'return']
         code = [dict({'code_type': 'if', 'code': implementation})]
-        implementation = ['{}ErrorLog* log = getErrorLog'
+        implementation = ['{0}ErrorLog* log = getErrorLog'
                           '()'.format(self.cap_language),
                           'unsigned int numErrs = log->getNumErrors()',
                           'XMLTriple tripleReqd(\"required\", mURI, '
@@ -1111,12 +1111,12 @@ class GeneralFunctions():
         implementation = ['log->getNumErrors() == numErrs + 1 && '
                           'log->contains(XMLAttributeTypeMismatch)',
                           'log->remove(XMLAttributeTypeMismatch)',
-                          'log->logPackageError(\"{}\", {}, '
+                          'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
                           'getVersion())'.format(self.package.lower(),
                                                  error),
                           'else',
-                          'log->logPackageError(\"{}\", {}, '
+                          'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
                           'getVersion())'.format(self.package.lower(),
                                                  req_error),
@@ -1145,18 +1145,18 @@ class GeneralFunctions():
 
     def get_validator_block(self, valid_id):
         bail_if = self.create_code_block('if',
-                                         ['log->getNumFailsWithSeverity(LIB{}'
+                                         ['log->getNumFailsWithSeverity(LIB{0}'
                                           '_SEV_ERROR) > '
                                           '0'.format(self.cap_language),
                                           'return total_errors'])
         errors_if = self.create_code_block('if',
                                            ['nerrors > 0',
-                                            'log->add({}_validator.get'
+                                            'log->add({0}_validator.get'
                                             'Failures())'.format(valid_id),
                                             bail_if])
-        code_block = ['{}'.format(valid_id),
-                      '{}_validator.init()'.format(valid_id),
-                      'nerrors = {}_validator.validate(*doc)'.format(valid_id),
+        code_block = ['{0}'.format(valid_id),
+                      '{0}_validator.init()'.format(valid_id),
+                      'nerrors = {0}_validator.validate(*doc)'.format(valid_id),
                       'total_errors += nerrors', errors_if]
         return code_block
 

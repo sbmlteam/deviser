@@ -69,7 +69,7 @@ class ExtensionFiles():
         types_fileout = ExtensionHeaderFile.ExtensionHeaderFile(self.package,
                                                                 self.file_type)
         if self.verbose:
-            print('Writing file {}'.format(types_fileout.filename))
+            print('Writing file {0}'.format(types_fileout.filename))
         if self.file_type == '':
             types_fileout.write_file()
         elif self.file_type == 'types':
@@ -81,21 +81,21 @@ class ExtensionFiles():
     def write_plugin_header(self, class_descrip):
         fileout = CppHeaderFile.CppHeaderFile(class_descrip)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def write_plugin_code(self, class_descrip):
         fileout = CppCodeFile.CppCodeFile(class_descrip)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def write_code(self):
         fileout = ExtensionCodeFile.ExtensionCodeFile(self.package)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
@@ -105,7 +105,7 @@ class ExtensionFiles():
         else:
             class_object = self.package['plugins'][num]
             up_package = strFunctions.upper_first(self.package['name'])
-            class_object['name'] = '{}{}Plugin'.format(up_package,
+            class_object['name'] = '{0}{1}Plugin'.format(up_package,
                                                        class_object['sbase'])
             class_object['is_plugin'] = True
             class_object['is_list_of'] = False
@@ -140,15 +140,15 @@ class ExtensionFiles():
         doc_plug = dict({'attribs': [],
                          'extension': [],
                          'lo_extension': [],
-                         'sbase': '{}Document'.format(up_language),
-                         'name': '{}{}DocumentPlugin'.format(up_package,
+                         'sbase': '{0}Document'.format(up_language),
+                         'name': '{0}{1}DocumentPlugin'.format(up_package,
                                                              up_language),
                          'is_plugin': True,
                          'is_list_of': False,
                          'hasListOf': False,
                          'package': self.package['name'],
                          'typecode': '',
-                         'baseClass': '{}DocumentPlugin'.format(up_language),
+                         'baseClass': '{0}DocumentPlugin'.format(up_language),
                          'sid_refs': [],
                          'unit_sid_refs': [],
                          'hasMath': False,

@@ -49,15 +49,15 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
         self.up_package = strFunctions.upper_first(package['name'])
         if filetype == '':
-            self.name = '{}Extension'.format(self.up_package)
+            self.name = '{0}Extension'.format(self.up_package)
             self.class_name = self.name
         elif filetype == 'types':
-            self.name = '{}ExtensionTypes'.format(self.up_package)
+            self.name = '{0}ExtensionTypes'.format(self.up_package)
         elif filetype == 'fwd':
-            self.name = '{}fwd'.format(package['name'])
+            self.name = '{0}fwd'.format(package['name'])
 
         self.brief_description = \
-            'Definition of {}.'.format(self.name)
+            'Definition of {0}.'.format(self.name)
 
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'h',
                                          None)
@@ -65,7 +65,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         # members from object
         self.package = package['name']
         self.cap_package = package['name'].upper()
-        self.baseClass = '{}Extension'.format(self.cap_language)
+        self.baseClass = '{0}Extension'.format(self.cap_language)
         self.class_name = self.name
 
         self.elements = package['elements']
@@ -111,37 +111,37 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_common_includes(self):
         self.write_line_verbatim('#include <{0}/common'
                                  '/extern.h>'.format(self.language))
-        self.write_line_verbatim('#include <{}/{}'
+        self.write_line_verbatim('#include <{0}/{1}'
                                  'TypeCodes.h>'.format(self.language,
                                                        self.cap_language))
 
     def write_general_includes(self):
         lang = self.language
         up_lang = self.cap_language
-        self.write_line_verbatim('#include <{}/extension/'
-                                 '{}Extension.h>'.format(lang, up_lang))
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/'
+                                 '{1}Extension.h>'.format(lang, up_lang))
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                                  'ExtensionNamespaces.h>'.format(lang, up_lang))
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                                  'ExtensionRegister.h>'.format(lang, up_lang))
         self.skip_line()
-        self.write_line('#ifndef {}_CREATE_NS'.format(self.cap_package))
-        self.write_line('#define {}_CREATE_NS(variable, {}'
+        self.write_line('#ifndef {0}_CREATE_NS'.format(self.cap_package))
+        self.write_line('#define {0}_CREATE_NS(variable, {1}'
                         'ns)\\'.format(self.cap_package, self.language))
-        self.write_line('  EXTENSION_CREATE_NS({}PkgNamespaces, variable, '
-                        '{}ns);'.format(self.up_package, self.language))
+        self.write_line('  EXTENSION_CREATE_NS({0}PkgNamespaces, variable, '
+                        '{1}ns);'.format(self.up_package, self.language))
         self.write_line('#endif')
         self.skip_line()
         if self.num_versions > 1:
-            self.write_line('#ifndef {}_CREATE_NS_WITH_'
+            self.write_line('#ifndef {0}_CREATE_NS_WITH_'
                             'VERSION'.format(self.cap_package))
-            self.write_line('#define {}_CREATE_NS_WITH_'
-                            'VERSION(variable, {}'
+            self.write_line('#define {0}_CREATE_NS_WITH_'
+                            'VERSION(variable, {1}'
                             'ns, version)\\'.format(self.cap_package,
                                                     self.language))
             self.write_line('  EXTENSION_CREATE_NS_WITH_VERSION('
-                            '{}PkgNamespaces, variable, '
-                            '{}ns, version);'.format(self.up_package,
+                            '{0}PkgNamespaces, variable, '
+                            '{1}ns, version);'.format(self.up_package,
                                                      self.language))
             self.write_line('#endif')
             self.skip_line()
@@ -249,9 +249,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_blank_comment_line()
         self.write_comment_line('Required typedef definitions')
         self.write_blank_comment_line()
-        self.write_comment_line('{}PkgNamespace is derived from {}Namespaces '
-                                'class and used when creating an object of {} '
-                                'derived classes defined in the {} '
+        self.write_comment_line('{0}PkgNamespace is derived from {1}Namespaces '
+                                'class and used when creating an object of {2} '
+                                'derived classes defined in the {3} '
                                 'package'.format(up_package,
                                                  self.cap_language,
                                                  self.std_base, self.package))
@@ -273,7 +273,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         # write the enum for typecodes
         self.write_type_code_enum_header(self.package)
         values = query.get_typecode_enum(self.elements)
-        name = '{}{}TypeCode_t'.format(self.cap_language, self.up_package)
+        name = '{0}{1}TypeCode_t'.format(self.cap_language, self.up_package)
         self.write_enum(name, self.number, values[0], values[1], values[2]+5)
         self.skip_line(2)
 
@@ -311,18 +311,18 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
                                  'fwd.h>'.format(self.language, self.package))
         self.skip_line()
-        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
                                  'Extension.h>'.format(self.language,
                                                        self.package,
                                                        self.up_package))
-        self.write_line_verbatim('#include <{}/packages/{}/extension/'
-                                 '{}{}Document'
+        self.write_line_verbatim('#include <{0}/packages/{1}/extension/'
+                                 '{2}{3}Document'
                                  'Plugin.h>'.format(self.language, self.package,
                                                     self.up_package,
                                                     self.cap_language))
 
         for plugin in self.plugins:
-            self.write_line_verbatim('#include <{}/packages/{}/extension/{}{}'
+            self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}{3}'
                                      'Plugin.h>'.format(self.language,
                                                         self.package,
                                                         self.up_package,

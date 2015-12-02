@@ -254,7 +254,7 @@ def get_static_extension_attribs(num_versions):
                 'memberName': 1})
     attribs.append(att)
     for i in range(0, num_versions):
-        name = 'xmlnsL3V1V{}'.format(i+1)
+        name = 'xmlnsL3V1V{0}'.format(i+1)
         cap_name = strFunctions.upper_first(name)
         att = dict({'name': name,
                     'capAttName': cap_name,
@@ -296,7 +296,7 @@ def get_enum(element):
     if len(tc) > max_length:
         max_length = len(tc)
     value.append(tc)
-    strvalue.append('invalid {}'.format(name))
+    strvalue.append('invalid {0}'.format(name))
     return [value, strvalue, max_length]
 
 
@@ -321,7 +321,7 @@ def get_prefix(name):
                 prefix += char
                 first = False
             else:
-                prefix += '_{}'.format(char)
+                prefix += '_{0}'.format(char)
         else:
             prefix += char.upper()
     return prefix

@@ -139,7 +139,7 @@ class BaseCppFile(BaseFile.BaseFile):
             self.has_std_base = False
         elif self.is_doc_plugin:
             self.has_std_base = True
-            self.std_base = '{}DocumentPlugin'.format(self.cap_language)
+            self.std_base = '{0}DocumentPlugin'.format(self.cap_language)
         self.class_object['has_std_base'] = self.has_std_base
         self.class_object['std_base'] = self.std_base
 
@@ -243,14 +243,14 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = 'int'
                 attributes[i]['CType'] = 'int'
                 attributes[i]['isNumber'] = True
-                attributes[i]['default'] = '{}_INT_' \
+                attributes[i]['default'] = '{0}_INT_' \
                                            'MAX'.format(self.cap_language)
             elif att_type == 'uint':
                 attributes[i]['attType'] = 'unsigned integer'
                 attributes[i]['attTypeCode'] = 'unsigned int'
                 attributes[i]['CType'] = 'unsigned int'
                 attributes[i]['isNumber'] = True
-                attributes[i]['default'] = '{}_INT_' \
+                attributes[i]['default'] = '{0}_INT_' \
                                            'MAX'.format(self.cap_language)
             elif att_type == 'bool' or att_type == 'boolean':
                 attributes[i]['attType'] = 'boolean'
@@ -583,7 +583,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.write_comment_line(additional[i])
         if object_name.endswith('_t'):
             self.write_blank_comment_line()
-            self.write_comment_line('@memberof {}'.format(object_name))
+            self.write_comment_line('@memberof {0}'.format(object_name))
         self.close_comment()
 
     def write_brief_header(self, title_line):
@@ -696,7 +696,7 @@ class BaseCppFile(BaseFile.BaseFile):
     def write_type_code_enum_header(self, package):
         up_package = strFunctions.upper_first(package)
         self.open_comment()
-        self.write_comment_line('@enum {}{}'
+        self.write_comment_line('@enum {0}{1}'
                                 'TypeCode_t'.format(self.cap_language,
                                                     up_package))
         self.write_comment_line('@brief {0}{1}TypeCode_t Enumeration '
@@ -718,29 +718,29 @@ class BaseCppFile(BaseFile.BaseFile):
             return
         self.write_line('typedef enum')
         self.write_line('{')
-        self.file_out.write('  {:{width}}'.format(enum_val[0], width=length))
+        self.file_out.write('  {0:{width}}'.format(enum_val[0], width=length))
         if enum_no != 0:
-            self.file_out.write('= {:{width}}'.format(enum_no, width=5))
+            self.file_out.write('= {0:{width}}'.format(enum_no, width=5))
             enum_no += 1
-        self.file_out.write('  /*!<{} */\n'.format(enum_str[0]))
+        self.file_out.write('  /*!<{0} */\n'.format(enum_str[0]))
         for i in range(1, number):
-            self.file_out.write(', {:{width}}'.format(enum_val[i],
+            self.file_out.write(', {0:{width}}'.format(enum_val[i],
                                                       width=length))
             if enum_no != 0:
-                self.file_out.write('= {:{width}}'.format(enum_no, width=5))
+                self.file_out.write('= {0:{width}}'.format(enum_no, width=5))
                 enum_no += 1
-            self.file_out.write('  /*!<{} */\n'.format(enum_str[i]))
-        self.write_line('{} {};'.format('}', name))
+            self.file_out.write('  /*!<{0} */\n'.format(enum_str[i]))
+        self.write_line('{0} {1};'.format('}', name))
 
     # Function to write the header about the typecode enumeration
     def write_enum_strings(self, name, enum_str):
         number = len(enum_str)
         self.write_line('static')
-        self.write_line('const char* {}[] ='.format(name))
+        self.write_line('const char* {0}[] ='.format(name))
         self.write_line('{')
-        self.file_out.write('  \"{}\"\n'.format(enum_str[0]))
+        self.file_out.write('  \"{0}\"\n'.format(enum_str[0]))
         for i in range(1, number):
-            self.file_out.write(', \"{}\"\n'.format(enum_str[i]))
+            self.file_out.write(', \"{0}\"\n'.format(enum_str[i]))
         self.write_line('};')
 
     ########################################################################
@@ -785,16 +785,16 @@ class BaseCppFile(BaseFile.BaseFile):
                     if i < num - 1:
                         self.skip_line()
                 else:
-                    self.write_line('{};'.format(this_impl))
+                    self.write_line('{0};'.format(this_impl))
         self.down_indent()
 
     def write_lines(self, code):
         for i in range(0, len(code)):
-            self.write_line('{};'.format(code[i]))
+            self.write_line('{0};'.format(code[i]))
 
     def write_comments(self, code):
         for i in range(0, len(code)):
-            self.write_line('// {}'.format(code[i]))
+            self.write_line('// {0}'.format(code[i]))
 
     def write_if_else_block(self, code):
         if_code = [code[0]]
@@ -843,12 +843,12 @@ class BaseCppFile(BaseFile.BaseFile):
 
     def write_block(self, block_start, code, condition):
         if condition:
-            self.write_line('{} ({})'.format(block_start, code[0]))
+            self.write_line('{0} ({1})'.format(block_start, code[0]))
             self.write_line('{')
             self.write_nested_implementation(code[1:len(code)])
             self.write_line('}')
         else:
-            self.write_line('{}'.format(block_start))
+            self.write_line('{0}'.format(block_start))
             self.write_line('{')
             self.write_nested_implementation(code)
             self.write_line('}')

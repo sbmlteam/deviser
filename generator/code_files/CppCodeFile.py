@@ -48,7 +48,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
     def __init__(self, class_object):
 
         self.brief_description = \
-            'Implementation  of the {} class.'.format(class_object['name'])
+            'Implementation  of the {0} class.'.format(class_object['name'])
         BaseCppFile.BaseCppFile.__init__(self, class_object['name'], 'cpp',
                                          class_object['attribs'])
 
@@ -91,7 +91,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(self.concretes) == 0:
             return
         for element in self.concretes:
-            self.write_line('class {};'.format(element['element']))
+            self.write_line('class {0};'.format(element['element']))
         self.skip_line()
 
     def write_general_includes(self):
@@ -101,7 +101,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             lo_name = ''
         if global_variables.is_package:
             folder = self.language if not self.is_plugin else 'extension'
-            self.write_line_verbatim('#include <{}/packages/{}/{}/{}'
+            self.write_line_verbatim('#include <{0}/packages/{1}/{2}/{3}'
                                      '.h>'.format(self.language,
                                                   self.package.lower(),
                                                   folder, self.class_name))
@@ -111,8 +111,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                          '.h>'.format(self.language,
                                                       self.package.lower(),
                                                       lo_name))
-            self.write_line_verbatim('#include <{}/packages/{}/validator/'
-                                     '{}{}Error'
+            self.write_line_verbatim('#include <{0}/packages/{1}/validator/'
+                                     '{2}{3}Error'
                                      '.h>'.format(self.language,
                                                   self.package.lower(),
                                                   self.package,
@@ -175,26 +175,26 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                         concrete_classes.append(element)
 
         if write_element_filter:
-            self.write_line_verbatim('#include <{}/util/ElementFilter.'
+            self.write_line_verbatim('#include <{0}/util/ElementFilter.'
                                      'h>'.format(self.language))
         if write_model:
-            self.write_line_verbatim('#include <{}/Model'
+            self.write_line_verbatim('#include <{0}/Model'
                                      '.h>'.format(self.language))
 
         if write_validators:
-            self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+            self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
                                      'ConsistencyValidator'
                                      '.h>'.format(self.language,
                                                   self.package.lower(),
                                                   self.package))
-            self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+            self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
                                      'IdentifierConsistencyValidator.'
                                      'h>'.format(self.language,
                                                  self.package.lower(),
                                                  self.package))
 
         if write_math:
-            self.write_line_verbatim('#include <{}/math/MathML'
+            self.write_line_verbatim('#include <{0}/math/MathML'
                                      '.h>'.format(self.language))
 
         if len(concrete_classes) > 0:

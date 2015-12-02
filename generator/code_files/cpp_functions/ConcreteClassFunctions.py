@@ -89,38 +89,38 @@ class ConcreteClassFunctions():
         if self.is_list_of:
             return
         if self.is_cpp_api:
-            name = 'abstract \"{}\"'.format(self.object_name)
+            name = 'abstract \"{0}\"'.format(self.object_name)
             conc_type = self.concretes[index]['element']
             conc_name = self.concretes[index]['element']
         else:
-            name = '{}'.format(self.object_name)
+            name = '{0}'.format(self.object_name)
             conc_type = self.concretes[index]['element'] + '_t'
             conc_name = self.concretes[index]['element']
 
         # create comment parts
-        title_line = 'Predicate returning {} if this {} is of type {}'\
+        title_line = 'Predicate returning {0} if this {1} is of type {2}'\
             .format(self.true, name, conc_type)
         params = []
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
-        return_lines = ['@return {} if this {} is of type {}, {} '
+        return_lines = ['@return {0} if this {1} is of type {2}, {3} '
                         'otherwise'.format(self.true, name, conc_type,
                                            self.false)]
         additional = []
 
         # create the function declaration
         if self.is_cpp_api:
-            function = 'is{}'.format(conc_name)
+            function = 'is{0}'.format(conc_name)
             return_type = 'bool'
             arguments = []
         else:
-            function = '{}_is{}'.format(self.class_name, conc_name)
+            function = '{0}_is{1}'.format(self.class_name, conc_name)
             return_type = 'int'
             arguments = ['const {0} * '
                          '{1}'.format(self.object_name, self.abbrev_parent)]
         if self.is_cpp_api:
-            line = ['return dynamic_cast<const {}*>(this) != '
+            line = ['return dynamic_cast<const {0}*>(this) != '
                     'NULL'.format(conc_name)]
         else:
             line = ['return ({0} != NULL) ? static_cast<int>({0}'

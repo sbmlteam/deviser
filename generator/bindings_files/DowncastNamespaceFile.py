@@ -55,12 +55,12 @@ class DowncastNamespaceFile():
             self.fileout = BaseInterfaceFile.BaseInterfaceFile(name)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'namespace object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
         else:
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'namespace object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
 
         self.cap_language = global_variables.language.upper()
 
@@ -70,37 +70,37 @@ class DowncastNamespaceFile():
 
     def write_binding_specific_i_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        self.fileout.write_line('%pragma({}) modulecode ='.format(self.binding))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        self.fileout.write_line('%pragma({0}) modulecode ='.format(self.binding))
         self.fileout.write_line('%{')
         self.fileout.up_indent()
-        self.fileout.write_line('if (ns.hasURI({}Extension.'
+        self.fileout.write_line('if (ns.hasURI({0}Extension.'
                                 'getXmlnsL3V1V1()))'.format(self.up_package))
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('return new {}PkgNamespaces(cPtr, '
+        self.fileout.write_line('return new {0}PkgNamespaces(cPtr, '
                                 'owner);'.format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('}')
         self.fileout.down_indent()
         self.fileout.write_line('%}')
-        self.fileout.write_line('#endif /* USE_{} */'.format(self.cap_package))
+        self.fileout.write_line('#endif /* USE_{0} */'.format(self.cap_package))
         self.fileout.skip_line()
 
     def write_binding_specific_cpp_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        line = 'if (pkgName == \"{}\")'.format(self.package)
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        line = 'if (pkgName == \"{0}\")'.format(self.package)
         self.fileout.write_line(line)
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('return SWIGTYPE_p_{}'
-                                'ExtensionNamespacesT_{}'
+        self.fileout.write_line('return SWIGTYPE_p_{0}'
+                                'ExtensionNamespacesT_{1}'
                                 'Extension_t;'.format(self.cap_language,
                                                       self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('}')
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     ########################################################################

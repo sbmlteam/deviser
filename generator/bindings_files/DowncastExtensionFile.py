@@ -55,12 +55,12 @@ class DowncastExtensionFile():
             self.fileout = BaseInterfaceFile.BaseInterfaceFile(name)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'extension object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
         else:
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'extension object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
 
     ########################################################################
 
@@ -68,39 +68,39 @@ class DowncastExtensionFile():
 
     def write_binding_specific_i_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        self.fileout.write_line('%pragma({}) modulecode ='.format(self.binding))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        self.fileout.write_line('%pragma({0}) modulecode ='.format(self.binding))
         self.fileout.write_line('%{')
         line = 'if (pkgName'
         if self.binding == 'csharp':
-            line += ' == \"{}\")'.format(self.package)
+            line += ' == \"{0}\")'.format(self.package)
         else:
-            line += '.equals(\"{}\"))'.format(self.package)
+            line += '.equals(\"{0}\"))'.format(self.package)
         self.fileout.up_indent()
         self.fileout.write_line(line)
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('return new {}Extension(cPtr, '
+        self.fileout.write_line('return new {0}Extension(cPtr, '
                                 'owner);'.format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('}')
         self.fileout.down_indent()
         self.fileout.write_line('%}')
-        self.fileout.write_line('#endif /* USE_{} */'.format(self.cap_package))
+        self.fileout.write_line('#endif /* USE_{0} */'.format(self.cap_package))
         self.fileout.skip_line()
 
     def write_binding_specific_cpp_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        line = 'if (pkgName == \"{}\")'.format(self.package)
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        line = 'if (pkgName == \"{0}\")'.format(self.package)
         self.fileout.write_line(line)
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('return SWIGTYPE_p_{}'
+        self.fileout.write_line('return SWIGTYPE_p_{0}'
                                 'Extension;'.format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('}')
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     ########################################################################

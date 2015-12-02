@@ -74,8 +74,8 @@ class BaseTexFile(BaseFile.BaseFile):
         self.sort_attribute_names(self.sbml_classes)
         self.sort_enum_names(self.enums)
 
-        self.full_pkg_command = '\\{}Package'.format(self.fulltexname)
-        self.brief_pkg_command = '\\{}'.format(self.upper_package)
+        self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+        self.brief_pkg_command = '\\{0}'.format(self.upper_package)
 
     ########################################################################
 
@@ -122,7 +122,7 @@ class BaseTexFile(BaseFile.BaseFile):
 
     # function to write a to do into text
     def write_to_do(self, text):
-        self.write_line('\\TODO{}{}{}'.format(self.start_b, text, self.end_b))
+        self.write_line('\\TODO{0}{1}{2}'.format(self.start_b, text, self.end_b))
         self.skip_line()
 
     # need to overwrite the write_line function to not add indents

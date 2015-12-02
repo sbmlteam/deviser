@@ -53,32 +53,32 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
         self.valid_type = strFunctions.upper_first(valid_type)
         self.file_type = filetype
         if filetype == 'main':
-            self.name = '{}Validator'.format(self.up_package)
+            self.name = '{0}Validator'.format(self.up_package)
         elif filetype == 'consistency':
-            self.name = '{}{}ConsistencyValidator'.format(self.up_package,
+            self.name = '{0}{1}ConsistencyValidator'.format(self.up_package,
                                                           self.valid_type)
-            self.baseClass = '{}Validator'.format(self.up_package)
+            self.baseClass = '{0}Validator'.format(self.up_package)
             if valid_type == '':
-                self.category = 'LIB{}_CAT_GENERAL_' \
+                self.category = 'LIB{0}_CAT_GENERAL_' \
                                 'CONSISTENCY'.format(self.cap_language)
             else:
-                self.category = 'LIB{}_CAT_IDENTIFIER_' \
+                self.category = 'LIB{0}_CAT_IDENTIFIER_' \
                                 'CONSISTENCY'.format(self.cap_language)
 
         self.brief_description = \
-            'Definition of {}.'.format(self.name)
+            'Definition of {0}.'.format(self.name)
 
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'h',
                                          None)
         self.package = package
         if filetype == 'consistency':
-            self.baseClass = '{}Validator'.format(self.up_package)
+            self.baseClass = '{0}Validator'.format(self.up_package)
 
     ########################################################################
 
     # Functions for writing the class
     def write_class(self, base_class, class_name):
-        self.write_line('class {} : public {}'
+        self.write_line('class {0} : public {1}'
                         .format(class_name, base_class))
         self.write_line('{')
         self.write_line('public:')
@@ -102,38 +102,38 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing specific includes
 
     def write_general_includes(self):
-        self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
                                  '.h>'.format(self.language, self.package,
                                               self.baseClass))
 
     def write_includes(self):
-        self.write_line_verbatim('#include <{}/{}Error'
+        self.write_line_verbatim('#include <{0}/{1}Error'
                                  '.h>'.format(self.language, self.cap_language))
-        self.write_line_verbatim('#include <{}/validator/Validator'
+        self.write_line_verbatim('#include <{0}/validator/Validator'
                                  '.h>'.format(self.language))
-        self.write_line_verbatim('#include <{}/{}Reader'
+        self.write_line_verbatim('#include <{0}/{1}Reader'
                                  '.h>'.format(self.language, self.cap_language))
 
     def write_forward_decls(self):
         self.write_line_verbatim('class VConstraint;')
-        self.write_line_verbatim('struct {}Validator'
+        self.write_line_verbatim('struct {0}Validator'
                                  'Constraints;'.format(self.up_package))
-        self.write_line_verbatim('class {}'
+        self.write_line_verbatim('class {0}'
                                  ';'.format(global_variables.document_class))
 
     def write_members(self):
         self.write_line('{0}ValidatorConstraints* m{0}'
                         'Constraints;'.format(self.up_package))
         self.skip_line()
-        self.write_line('friend class {}Validating'
+        self.write_line('friend class {0}Validating'
                         'Visitor;'.format(self.up_package))
     ########################################################################
 
     # function to write the constructors
     def write_constructors(self):
-        args = [': {}Validator( {} )'.format(self.up_package, self.category)]
+        args = [': {0}Validator( {1} )'.format(self.up_package, self.category)]
         implementation = [dict({'code_type': 'blank', 'code': []})]
-        destruct = 'virtual ~{}'.format(self.name)
+        destruct = 'virtual ~{0}'.format(self.name)
         self.write_class_function_header(self.name, [], '', False, args)
         self.write_implementation(implementation)
         self.skip_line(2)
@@ -235,7 +235,7 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
         self.write_cppns_begin()
         self.write_forward_decls()
         self.skip_line(2)
-        validator = '{}Validator'.format(self.up_package)
+        validator = '{0}Validator'.format(self.up_package)
         self.write_class('Validator', validator)
         self.write_cppns_end()
         self.write_cpp_end()

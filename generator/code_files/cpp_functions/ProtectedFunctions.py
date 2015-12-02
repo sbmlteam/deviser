@@ -117,7 +117,7 @@ class ProtectedFunctions():
             self.false = '@c false'
 
         if global_variables.is_package:
-            self.error = 'logPackageError(\"{}\", '.format(self.package.lower())
+            self.error = 'logPackageError(\"{0}\", '.format(self.package.lower())
             self.error_args = 'getPackageVersion(), getLevel(), getVersion()'
             self.given_args = 'pkgVersion, level, version'
         else:
@@ -138,8 +138,8 @@ class ProtectedFunctions():
 
         # create comment parts
         if self.is_list_of:
-            title_line = 'Creates a new {} in this ' \
-                         '{}'.format(self.object_child_name, self.object_name)
+            title_line = 'Creates a new {0} in this ' \
+                         '{1}'.format(self.object_child_name, self.object_name)
         else:
             title_line = 'Creates a new object from the next XMLToken ' \
                          'on the XMLInputStream'
@@ -149,13 +149,13 @@ class ProtectedFunctions():
 
         # create the function declaration
         function = 'createObject'
-        return_type = '{}*'.format(self.std_base)
+        return_type = '{0}*'.format(self.std_base)
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
         code = []
         if not self.is_header:
-            ns = '{}ns'.format(self.package.lower())
+            ns = '{0}ns'.format(self.package.lower())
             upkg = self.package.upper()
 
             if self.is_list_of:
@@ -166,11 +166,11 @@ class ProtectedFunctions():
             else:
                 base_create = 'NULL'
                 if not self.has_std_base:
-                    base_create = '{}::createObject' \
+                    base_create = '{0}::createObject' \
                                   '(stream)'.format(self.base_class)
                 code = [self.create_code_block('line',
-                                               ['{}* obj = '
-                                                '{}'.format(self.std_base,
+                                               ['{0}* obj = '
+                                                '{1}'.format(self.std_base,
                                                             base_create)])]
                 if self.is_plugin:
                     lines = ['const std::string& name = '
@@ -188,8 +188,8 @@ class ProtectedFunctions():
                             '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
                     code.append(self.create_code_block('line', line))
                 if len(self.child_elements) != self.num_non_std_children:
-                    line = ['{}_CREATE_NS({}, '
-                            'get{}Namespaces'
+                    line = ['{0}_CREATE_NS({1}, '
+                            'get{2}Namespaces'
                             '())'.format(upkg, ns, global_variables.prefix)]
                     code.append(self.create_code_block('line', line))
                 if self.is_plugin:
@@ -198,12 +198,12 @@ class ProtectedFunctions():
                 else:
                     class_name = self.class_name
                 # sort error names to be used
-                error = '{}{}AllowedElements'.format(self.package, class_name)
+                error = '{0}{1}AllowedElements'.format(self.package, class_name)
                 if not global_variables.running_tests:
                     if error not in global_variables.error_list:
-                        error = '{}Unknown'.format(self.package)
-                error_line = 'getErrorLog()->{}{}, ' \
-                             '{})'.format(self.error, error, self.error_args)
+                        error = '{0}Unknown'.format(self.package)
+                error_line = 'getErrorLog()->{0}{1}, ' \
+                             '{2})'.format(self.error, error, self.error_args)
                 if num_children == 1:
                     element = self.find_single_element()
                     if element['abstract'] and \
@@ -212,7 +212,7 @@ class ProtectedFunctions():
                         code.append(self.create_code_block('else_if',
                                                            implementation))
                     elif element['type'] == 'inline_lo_element':
-                        implementation = ['obj = {}.createObject(stream'
+                        implementation = ['obj = {0}.createObject(stream'
                                           ')'.format(element['memberName'])]
                         code.append(self.create_code_block('line',
                                                            implementation))
@@ -269,7 +269,7 @@ class ProtectedFunctions():
                 if len(self.child_elements) != self.num_non_std_children:
                     code.append(self.create_code_block('line',
                                                        ['delete '
-                                                        '{}'.format(ns)]))
+                                                        '{0}'.format(ns)]))
                 code.append(self.create_code_block('line',
                                                    ['connectToChild()']))
                 code.append(self.create_code_block('line', ['return obj']))
@@ -289,9 +289,9 @@ class ProtectedFunctions():
     def write_create_object_lo(self, upkg, ns):
         implementation = ['const std::string& name = '
                           'stream.peek().getName()',
-                          '{}* object = NULL'.format(self.std_base),
-                          '{}_CREATE_NS({}, '
-                          'get{}Namespaces'
+                          '{0}* object = NULL'.format(self.std_base),
+                          '{0}_CREATE_NS({1}, '
+                          'get{2}Namespaces'
                           '())'.format(upkg, ns, global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
@@ -303,7 +303,7 @@ class ProtectedFunctions():
                     self.concretes[i]['element'], ns)
             code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line',
-                                           ['delete {}'.format(ns),
+                                           ['delete {0}'.format(ns),
                                             'return object']))
         return code
 
@@ -312,9 +312,9 @@ class ProtectedFunctions():
         # is not of the same type as the list of
         implementation = ['const std::string& name = '
                           'stream.peek().getName()',
-                          '{}* object = NULL'.format(self.std_base),
-                          '{}_CREATE_NS({}, '
-                          'get{}Namespaces'
+                          '{0}* object = NULL'.format(self.std_base),
+                          '{0}_CREATE_NS({1}, '
+                          'get{2}Namespaces'
                           '())'.format(upkg, ns, global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
@@ -326,7 +326,7 @@ class ProtectedFunctions():
                     self.child_elements[i]['element'], ns, True)
             code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line',
-                                           ['delete {}'.format(ns),
+                                           ['delete {0}'.format(ns),
                                             'return object']))
         return code
 
@@ -334,16 +334,16 @@ class ProtectedFunctions():
     def write_create_object_class(name, ns, create=False):
         if not create:
             implementation = ['name == '
-                              '\"{}\"'.format(strFunctions.lower_first(name)),
-                              'object = new {}({})'.format(name, ns),
+                              '\"{0}\"'.format(strFunctions.lower_first(name)),
+                              'object = new {0}({1})'.format(name, ns),
                               'appendAndOwn(object)']
         else:
             abbrev = strFunctions.abbrev_name(name)
             implementation = ['name == '
-                              '\"{}\"'.format(strFunctions.lower_first(name)),
-                              '{} new{}({})'.format(name, abbrev.upper(), ns),
-                              'set{}(&new{})'.format(name, abbrev.upper()),
-                              'object = get{}()'.format(name)]
+                              '\"{0}\"'.format(strFunctions.lower_first(name)),
+                              '{0} new{1}({2})'.format(name, abbrev.upper(), ns),
+                              'set{0}(&new{1})'.format(name, abbrev.upper()),
+                              'object = get{0}()'.format(name)]
         return implementation
 
     def get_lo_block(self, element, error_line):
@@ -351,11 +351,11 @@ class ProtectedFunctions():
         loname = strFunctions.lower_first(
             strFunctions.remove_prefix(element['attTypeCode']))
         nested_if = self.create_code_block('if',
-                                           ['{}.size() '
+                                           ['{0}.size() '
                                             '!= 0'.format(name),
                                             error_line])
-        line = 'obj = &{}'.format(name)
-        implementation = ['name == \"{}\"'.format(loname),
+        line = 'obj = &{0}'.format(name)
+        implementation = ['name == \"{0}\"'.format(loname),
                           nested_if, line]
         return implementation
 
@@ -364,20 +364,20 @@ class ProtectedFunctions():
         function = element['capAttName']
 
         nested_if = self.create_code_block('if',
-                                           ['isSet{}()'.format(function),
+                                           ['isSet{0}()'.format(function),
                                             error_line])
-        implementation = ['name == \"{}\"'.format(name),
+        implementation = ['name == \"{0}\"'.format(name),
                           nested_if,
-                          '{} = new {}({})'.format(element['memberName'],
+                          '{0} = new {1}({2})'.format(element['memberName'],
                                                    function, ns),
-                          'obj = {}'.format(element['memberName'])]
+                          'obj = {0}'.format(element['memberName'])]
         return [self.create_code_block('if', implementation)]
 
     def get_plugin_lo_block(self, element, error_line):
         name = element['memberName']
         implementation = self.get_lo_block(element, error_line)
         lines = ['targetPrefix.empty()',
-                 '{}.get{}()->enableDefaultNS(mURI, '
+                 '{0}.get{1}()->enableDefaultNS(mURI, '
                  'true)'.format(name, global_variables.document_class)]
         second_if = self.create_code_block('if', lines)
         implementation.append(second_if)
@@ -395,27 +395,27 @@ class ProtectedFunctions():
 
     @staticmethod
     def get_concrete_block(element, name, ns):
-        implementation = ['name == \"{}\"'.format(element['name']),
-                          '{} = new {}({})'.format(name, element['element'],
+        implementation = ['name == \"{0}\"'.format(element['name']),
+                          '{0} = new {1}({2})'.format(name, element['element'],
                                                    ns),
-                          'obj = {}'.format(name)]
+                          'obj = {0}'.format(name)]
         return implementation
 
     def get_obj_block(self, name, loname, error_line, over_write, element, ns):
         implementation = []
         nested_if = self.create_code_block('if',
-                                           ['{} '
+                                           ['{0} '
                                             '!= NULL'.format(name),
                                             error_line])
-        implementation.append('name == \"{}\"'.format(loname))
+        implementation.append('name == \"{0}\"'.format(loname))
         implementation.append(nested_if)
-        implementation.append('{} = new {}'
-                              '({})'.format(name,
+        implementation.append('{0} = new {1}'
+                              '({2})'.format(name,
                                             element, ns))
         if over_write:
-            implementation.append('{}->setElementName'
+            implementation.append('{0}->setElementName'
                                   '(name)'.format(name))
-        implementation.append('obj = {}'.format(name))
+        implementation.append('obj = {0}'.format(name))
         return implementation
 
     def find_single_element(self):
@@ -454,7 +454,7 @@ class ProtectedFunctions():
 
         # create the function implementation
         if self.base_class:
-            implementation = ['{}::addExpectedAttributes'
+            implementation = ['{0}::addExpectedAttributes'
                               '(attributes)'.format(self.base_class)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -464,7 +464,7 @@ class ProtectedFunctions():
                 if self.attributes[i]['isArray']:
                     continue
                 name = self.attributes[i]['name']
-                implementation = ['attributes.add(\"{}\")'.format(name)]
+                implementation = ['attributes.add(\"{0}\")'.format(name)]
                 code.append(dict({'code_type': 'line', 'code': implementation}))
         else:
             code.append(self.create_code_block('line',
@@ -476,7 +476,7 @@ class ProtectedFunctions():
                     if self.version_attributes[i][j]['isArray']:
                         continue
                     name = self.version_attributes[i][j]['name']
-                    implementation.append('attributes.add(\"{}\")'.format(name))
+                    implementation.append('attributes.add(\"{0}\")'.format(name))
                 if i < len(self.version_attributes) - 1:
                     implementation.append('else')
             code.append(self.create_code_block('if_else', implementation))
@@ -520,7 +520,7 @@ class ProtectedFunctions():
             implementation += ['unsigned int pkgVersion = getPackageVersion()']
         implementation += ['unsigned int numErrs',
                            'bool assigned = false',
-                           '{}ErrorLog* log = '
+                           '{0}ErrorLog* log = '
                            'getErrorLog()'.format(self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         # only do this if has a list of
@@ -529,7 +529,7 @@ class ProtectedFunctions():
             code.append(self.create_code_block('if', line))
 
         if self.base_class:
-            line = ['{}::readAttributes(attributes, '
+            line = ['{0}::readAttributes(attributes, '
                     'expectedAttributes)'.format(self.base_class),
                     'numErrs = log->getNumErrors()']
             code.append(self.create_code_block('line', line))
@@ -573,7 +573,7 @@ class ProtectedFunctions():
         additional = []
 
         # create function declaration
-        function = 'readV{}Attributes'.format(version)
+        function = 'readV{0}Attributes'.format(version)
         return_type = 'void'
         arguments = ['const XMLAttributes& attributes']
 
@@ -627,7 +627,7 @@ class ProtectedFunctions():
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
-                line = ['stream.get{}Namespaces() == '
+                line = ['stream.get{0}Namespaces() == '
                         'NULL'.format(global_variables.prefix),
                         'stream.set{0}Namespaces(new '
                         '{0}Namespaces(getLevel(), '
@@ -645,16 +645,16 @@ class ProtectedFunctions():
                 member = element['memberName']
                 name = element['capAttName'] if element['name'] == 'uncertML' \
                     else element['name']
-                line = ['name == \"{}\"'.format(name),
+                line = ['name == \"{0}\"'.format(name),
                         'const XMLToken& token = stream.next()',
                         'stream.skipText()',
-                        'delete {}'.format(member),
+                        'delete {0}'.format(member),
                         'XMLNode* xml = new XMLNode(stream)',
-                        '{} = new {}(xml)'.format(member, element['element']),
+                        '{0} = new {1}(xml)'.format(member, element['element']),
                         'stream.skipPastEnd(token)',
                         'delete xml', 'read = true']
                 code.append(self.create_code_block('if', line))
-        line = ['{}::readOtherXML(stream)'.format(self.base_class),
+        line = ['{0}::readOtherXML(stream)'.format(self.base_class),
                 'read = true']
         code.append(self.create_code_block('if', line))
         code.append(self.create_code_block('line', ['return read']))
@@ -692,7 +692,7 @@ class ProtectedFunctions():
 
         # create the function implementation
         if self.base_class:
-            implementation = ['{}::writeAttributes'
+            implementation = ['{0}::writeAttributes'
                               '(stream)'.format(self.base_class)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -712,7 +712,7 @@ class ProtectedFunctions():
         if global_variables.is_package and not self.is_plugin and \
                 self.base_class:
             code.append(self.create_code_block('line',
-                                               ['{}::write'
+                                               ['{0}::write'
                                                 'ExtensionAttributes(stream'
                                                 ')'.format(self.std_base)]))
 
@@ -743,7 +743,7 @@ class ProtectedFunctions():
         additional = []
 
         # create function declaration
-        function = 'writeV{}Attributes'.format(version)
+        function = 'writeV{0}Attributes'.format(version)
         return_type = 'void'
         arguments = ['XMLOutputStream& stream']
 
@@ -775,7 +775,7 @@ class ProtectedFunctions():
             return
 
         # create comment parts
-        title_line = 'Writes the namespace for the {} package'\
+        title_line = 'Writes the namespace for the {0} package'\
             .format(self.package)
         params = []
         return_lines = []
@@ -790,9 +790,9 @@ class ProtectedFunctions():
         implementation = ['XMLNamespaces xmlns',
                           'std::string prefix = getPrefix()']
         code = [dict({'code_type': 'line', 'code': implementation})]
-        implementation = ['thisxmlns && thisxmlns->hasURI({}Extension::'
+        implementation = ['thisxmlns && thisxmlns->hasURI({0}Extension::'
                           'getXmlnsL3V1V1())'.format(self.package),
-                          'xmlns.add({}Extension::getXmlnsL3V1V1(), '
+                          'xmlns.add({0}Extension::getXmlnsL3V1V1(), '
                           'prefix)'.format(self.package)]
         nested_if = self.create_code_block('if', implementation)
         implementation = ['prefix.empty()',
@@ -845,8 +845,8 @@ class ProtectedFunctions():
                 array_type = attrib['element']
         # create the function implementation
         implementation = ['stringstream strStream(text)',
-                          '{} val'.format(array_type),
-                          'vector<{}> valuesVector'.format(array_type)]
+                          '{0} val'.format(array_type),
+                          'vector<{0}> valuesVector'.format(array_type)]
         code = [self.create_code_block('line', implementation),
                 self.create_code_block('while',
                                        ['strStream >> val',
@@ -863,7 +863,7 @@ class ProtectedFunctions():
                                             '{0}* data = new {0}'
                                             '[length]'.format(array_type),
                                             for_loop,
-                                            'set{}(data, length)'.format(name),
+                                            'set{0}(data, length)'.format(name),
                                             'delete[] data']))
 
         # return the parts
@@ -898,16 +898,16 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'isValidTypeForList'
         return_type = 'bool'
-        arguments = ['{}* item'.format(self.child_base_class)]
+        arguments = ['{0}* item'.format(self.child_base_class)]
 
         # create the function implementation
         implementation = ['unsigned int tc = item->getTypeCode()']
         code = [dict({'code_type': 'line', 'code': implementation})]
         tc = self.concretes[0]['type_code']
-        implementation = 'return ((tc == {})'.format(tc)
+        implementation = 'return ((tc == {0})'.format(tc)
         for i in range(1, len(self.concretes)):
             tc = self.concretes[i]['type_code']
-            implementation += ' || (tc == {})'.format(tc)
+            implementation += ' || (tc == {0})'.format(tc)
         implementation += ')'
         code.append(self.create_code_block('line', [implementation]))
         # return the parts
@@ -929,29 +929,29 @@ class ProtectedFunctions():
 
     def get_error_from_list_of_read(self):
         plural = strFunctions.plural(self.class_name)
-        error = '{}{}LO{}AllowedCoreAttributes'.format(self.package,
+        error = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
                                                        self.parent_class,
                                                        plural)
         if not global_variables.running_tests \
                 and error not in global_variables.error_list:
-            error = '{}Unknown'.format(self.package)
+            error = '{0}Unknown'.format(self.package)
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, error,
+                'log->{0}{1}, {2}, details)'.format(self.error, error,
                                                  self.given_args),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, error,
+                'log->{0}{1}, {2}, details)'.format(self.error, error,
                                                  self.given_args)]
         if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         for_loop = self.create_code_block('for', line)
 
-        line = ['static_cast<{}*>(getParent{}Object())->size() '
+        line = ['static_cast<{0}*>(getParent{1}Object())->size() '
                 '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
                              self.cap_language),
                 'numErrs = log->getNumErrors()', for_loop]
@@ -962,28 +962,28 @@ class ProtectedFunctions():
         if self.is_plugin:
             class_name = strFunctions.get_class_from_plugin(
                 self.class_name, self.package)
-            core_err = '{}{}AllowedAttributes'.format(self.package, class_name)
+            core_err = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         else:
             class_name = self.class_name
-            core_err = '{}{}AllowedCoreAttributes'.format(self.package,
+            core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                           class_name)
-        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
             if core_err not in global_variables.error_list:
-                core_err = '{}Unknown'.format(self.package)
+                core_err = '{0}Unknown'.format(self.package)
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
 
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, error,
+                'log->{0}{1}, {2}, details)'.format(self.error, error,
                                                  self.given_args),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
-                'log->{}{}, {}, details)'.format(self.error, core_err,
+                'log->{0}{1}, {2}, details)'.format(self.error, core_err,
                                                  self.given_args)]
         if_err = self.create_code_block('else_if', line)
 
@@ -999,12 +999,12 @@ class ProtectedFunctions():
         att_type = attributes[index]['attType']
         if att_type == 'enum':
             element = attributes[index]['element']
-            variable = '{}_toString({})'.format(element, member)
+            variable = '{0}_toString({1})'.format(element, member)
         else:
             variable = member
-        line = ['isSet{}() == true'.format(cap_name),
-                'stream.writeAttribute(\"{}\", getPrefix(), '
-                '{})'.format(name, variable)]
+        line = ['isSet{0}() == true'.format(cap_name),
+                'stream.writeAttribute(\"{0}\", getPrefix(), '
+                '{1})'.format(name, variable)]
         code.append(self.create_code_block('if', line))
 
     def write_read_att(self, attributes, index, code):
@@ -1016,7 +1016,7 @@ class ProtectedFunctions():
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
-        implementation = ['', '{} {} (use = \"{}\"'
+        implementation = ['', '{0} {1} (use = \"{2}\"'
                               ' )'.format(name, att_type, status),
                           '']
         code.append(self.create_code_block('comment', implementation))
@@ -1033,31 +1033,31 @@ class ProtectedFunctions():
         elif att_type == 'bool':
             self.write_bool_read(index, code, attributes)
         else:
-            line = ['assigned = attributes.readInto(\"{}\", '
-                    '{})'.format(name, member)]
+            line = ['assigned = attributes.readInto(\"{0}\", '
+                    '{1})'.format(name, member)]
             code.append(self.create_code_block('line', line))
 
     def write_bool_read(self, index, code, attributes):
         attribute = attributes[index]
         name = attribute['name']
         member = attribute['memberName']
-        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
-        line = ['{} = attributes.readInto(\"{}\", '
-                '{})'.format(set_name, name, member)]
+        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(name))
+        line = ['{0} = attributes.readInto(\"{1}\", '
+                '{2})'.format(set_name, name, member)]
         code.append(self.create_code_block('line', line))
 
         # sort error names to be used
-        error = '{}{}AllowedAttributes'.format(self.package, self.class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
         if attribute['reqd']:
-            line = ['!{}'.format(set_name),
-                    'std::string message = \"{} attribute \'{}\' is '
-                    'missing from the <{}> element.\"'.format(self.package,
+            line = ['!{0}'.format(set_name),
+                    'std::string message = \"{0} attribute \'{1}\' is '
+                    'missing from the <{2}> element.\"'.format(self.package,
                                                               name,
                                                               self.class_name),
-                    'log->{}{}, {}, message)'.format(self.error, error,
+                    'log->{0}{1}, {2}, message)'.format(self.error, error,
                                                      self.given_args)]
             code.append(self.create_code_block('if', line))
 
@@ -1068,33 +1068,33 @@ class ProtectedFunctions():
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
-        line = ['assigned = attributes.readInto(\"{}\", {})'.format(name,
+        line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                     member)]
         code.append(self.create_code_block('line', line))
 
         if att_type == 'SId':
-            invalid_line = '\"The id \'\" + {} + \"\' does not conform to ' \
+            invalid_line = '\"The id \'\" + {0} + \"\' does not conform to ' \
                            'the syntax.\"'.format(member)
         else:
-            invalid_line = '\"The attribute {}=\'\" + {} + ' \
+            invalid_line = '\"The attribute {0}=\'\" + {1} + ' \
                            '\"\' does not conform to the ' \
                            'syntax."'.format(name, member)
-        line = ['{}.empty() == true'.format(member)]
+        line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:
-            line.append('logEmptyString({}, level, version, pkgVersion, '
-                        '\"<{}>\")'.format(member, self.class_name))
+            line.append('logEmptyString({0}, level, version, pkgVersion, '
+                        '\"<{1}>\")'.format(member, self.class_name))
         else:
-            line.append('logEmptyString({}, level, version, '
-                        '\"<{}>\")'.format(member, self.class_name))
+            line.append('logEmptyString({0}, level, version, '
+                        '\"<{1}>\")'.format(member, self.class_name))
         line += ['else if',
-                 'SyntaxChecker::isValid{}SId({}) == '
+                 'SyntaxChecker::isValid{0}SId({1}) == '
                  'false'.format(self.cap_language, member)]
         if self.is_plugin:
-            line.append('log->{}InvalidIdSyntax, {}, '
-                        '{})'.format(self.error, self.given_args, invalid_line))
+            line.append('log->{0}InvalidIdSyntax, {1}, '
+                        '{2})'.format(self.error, self.given_args, invalid_line))
         else:
             line.append('logError(InvalidIdSyntax, level, version, '
-                        '{})'.format(invalid_line))
+                        '{0})'.format(invalid_line))
         first_if = self.create_code_block('else_if', line)
 
         line = 'assigned == true'
@@ -1104,20 +1104,20 @@ class ProtectedFunctions():
         else:
             class_name = self.class_name
         # sort error names to be used
-        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
 
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing from the <{}> '
+            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+                           'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
-                           'log->{}{}, {}, message'
+                           'log->{0}{1}, {2}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1129,17 +1129,17 @@ class ProtectedFunctions():
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
-        line = ['assigned = attributes.readInto(\"{}\", {})'.format(name,
+        line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                     member)]
         code.append(self.create_code_block('line', line))
 
-        line = ['{}.empty() == true'.format(member)]
+        line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:
-            line.append('logEmptyString({}, level, version, pkgVersion, '
-                        '\"<{}>\")'.format(member, self.class_name))
+            line.append('logEmptyString({0}, level, version, pkgVersion, '
+                        '\"<{1}>\")'.format(member, self.class_name))
         else:
-            line.append('logEmptyString({}, level, version, '
-                        '\"<{}>\")'.format(member, self.class_name))
+            line.append('logEmptyString({0}, level, version, '
+                        '\"<{1}>\")'.format(member, self.class_name))
         first_if = self.create_code_block('if', line)
         line = 'assigned == true'
         if self.is_plugin:
@@ -1148,19 +1148,19 @@ class ProtectedFunctions():
         else:
             class_name = self.class_name
         # sort error names to be used
-        error = '{}{}AllowedAttributes'.format(self.package, class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{} attribute \'{}\' '
-                           'is missing from the <{}> '
+            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+                           'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
-                           'log->{}{}, {}, message'
+                           'log->{0}{1}, {2}, message'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1174,20 +1174,20 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
         # sort error names to be used
-        error = '{}{}{}MustBe{}Enum'.format(self.package, self.class_name,
+        error = '{0}{1}{2}MustBe{3}Enum'.format(self.package, self.class_name,
                                             strFunctions.upper_first(name),
                                             element)
-        att_error = '{}{}AllowedAttributes'.format(self.package,
+        att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                    self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
             if att_error not in global_variables.error_list:
-                att_error = '{}Unknown'.format(self.package)
+                att_error = '{0}Unknown'.format(self.package)
 
-        line = ['std::string {}'.format(name.lower()),
-                'assigned = attributes.readInto(\"{}\", '
-                '{})'.format(name, name.lower())]
+        line = ['std::string {0}'.format(name.lower()),
+                'assigned = attributes.readInto(\"{0}\", '
+                '{1})'.format(name, name.lower())]
         code.append(self.create_code_block('line', line))
 
         line = ['isSetId()', 'msg += \"with id \'\" + getId() + \"\'\"']
@@ -1195,24 +1195,24 @@ class ProtectedFunctions():
 
         line = ['{0}_isValid({1}) == 0'.format(element, member),
                 self.create_code_block('line',
-                                       ['std::string msg = \"The {} on the <{}'
+                                       ['std::string msg = \"The {0} on the <{1}'
                                         '> \"'.format(name, self.class_name)]),
                 if_id,
                 self.create_code_block('line',
-                                       ['msg += \"is \'\" + {} + \"\', which '
+                                       ['msg += \"is \'\" + {0} + \"\', which '
                                         'is not a valid option.'
                                         '\"'.format(name.lower())]),
-                self.create_code_block('line', ['log->{}{}, {}, msg)'
+                self.create_code_block('line', ['log->{0}{1}, {2}, msg)'
                                        .format(self.error, error,
                                                self.given_args)])]
         second_if = self.create_code_block('if', line)
 
-        line = ['{}.empty() == true'.format(name.lower()),
-                'logEmptyString({}, level, version, '
-                '\"<{}>\")'.format(name.lower(), self.class_name),
+        line = ['{0}.empty() == true'.format(name.lower()),
+                'logEmptyString({0}, level, version, '
+                '\"<{1}>\")'.format(name.lower(), self.class_name),
                 'else',
                 self.create_code_block('line',
-                                       ['{} = {}_fromString({}.'
+                                       ['{0} = {1}_fromString({2}.'
                                         'c_str())'.format(member, element,
                                                           name.lower())]),
                 second_if]
@@ -1223,9 +1223,9 @@ class ProtectedFunctions():
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{} attribute \'{}\' '
+            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
                            'is missing.\"'.format(self.package, name),
-                           'log->{}{}, {}, message'
+                           'log->{0}{1}, {2}, message'
                            ')'.format(self.error, att_error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1236,7 +1236,7 @@ class ProtectedFunctions():
         name = attribute['name']
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']
-        set_name = 'mIsSet{}'.format(strFunctions.upper_first(name))
+        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(name))
         reqd = attribute['reqd']
         if att_type == 'int':
             num_type = 'Integer'
@@ -1248,17 +1248,17 @@ class ProtectedFunctions():
             num_type = 'FIX ME'
 
         # sort error names to be used
-        error = '{}{}{}MustBe{}'.format(self.package, self.class_name,
+        error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
                                         up_name, num_type)
-        att_error = '{}{}AllowedAttributes'.format(self.package,
+        att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                    self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{}Unknown'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
             if att_error not in global_variables.error_list:
-                att_error = '{}Unknown'.format(self.package)
+                att_error = '{0}Unknown'.format(self.package)
         line = ['numErrs = log->getNumErrors()',
-                '{} = attributes.readInto(\"{}\", {})'.format(set_name,
+                '{0} = attributes.readInto(\"{1}\", {2})'.format(set_name,
                                                               name,
                                                               member)]
         code.append(self.create_code_block('line', line))
@@ -1266,10 +1266,10 @@ class ProtectedFunctions():
         line = ['log->getNumErrors() == numErrs + 1 && '
                 'log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
-                'std::string message = \"{} attribute \'{}\' '
-                'from the <{}> element must be an '
+                'std::string message = \"{0} attribute \'{1}\' '
+                'from the <{2}> element must be an '
                 'integer.\"'.format(self.package, name, self.class_name),
-                'log->{}{}, {}, message)'.format(self.error, error,
+                'log->{0}{1}, {2}, message)'.format(self.error, error,
                                                  self.given_args)]
         if reqd:
             if self.is_plugin:
@@ -1278,17 +1278,17 @@ class ProtectedFunctions():
             else:
                 class_name = self.class_name
             line += ['else',
-                     'std::string message = \"{} attribute \'{}\' is missing '
-                     'from the <{}> element.\"'.format(self.package, name,
+                     'std::string message = \"{0} attribute \'{1}\' is missing '
+                     'from the <{2}> element.\"'.format(self.package, name,
                                                        class_name),
-                     'log->{}{}, {}, message)'.format(self.error, att_error,
+                     'log->{0}{1}, {2}, message)'.format(self.error, att_error,
                                                       self.given_args)]
 
             if_error = self.create_code_block('if_else', line)
         else:
             if_error = self.create_code_block('if', line)
 
-        line = [' {} == false'.format(set_name),
+        line = [' {0} == false'.format(set_name),
                 if_error]
         second_if = self.create_code_block('if', line)
         code.append(second_if)

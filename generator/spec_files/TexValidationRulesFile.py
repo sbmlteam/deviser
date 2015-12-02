@@ -59,11 +59,11 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
 
         BaseTexFile.BaseTexFile.__init__(self, 'apdx-validation', 'tex',
                                          object_desc)
-        self.full_pkg_command = '\\{}Package'.format(self.fulltexname)
-        self.brief_pkg_command = '\\{}'.format(self.upper_package)
+        self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
+        self.brief_pkg_command = '\\{0}'.format(self.upper_package)
 
-        self.pkg_ref = 'SBML Level~{} Package specification for {}, ' \
-                       'Version~{}'.format(self.level,
+        self.pkg_ref = 'SBML Level~{0} Package specification for {1}, ' \
+                       'Version~{2}'.format(self.level,
                                            self.fullname, self.pkg_version)
 
     ########################################################################
@@ -85,7 +85,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         else:
             severity = self.consist
 
-        self.write_line('{}{}-{}{}{}{} (Reference: {}){}'
+        self.write_line('{0}{1}-{2}{3}{4}{5} (Reference: {6}){7}'
                         .format(severity, self.package,
                                 rule['number']-self.offset,
                                 self.end_b, self.start_b, text,
@@ -127,8 +127,8 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.write_line('\subsubsection*{Rules for the '
                         'extended \\class{SBML} class}')
         self.skip_line()
-        text = 'In all SBML documents using the \\{}Package, the ' \
-               '\\class{}SBML{} object must have the {} attribute.'\
+        text = 'In all SBML documents using the \\{0}Package, the ' \
+               '\\class{1}SBML{2} object must have the {3} attribute.'\
             .format(strFunctions.upper_first(self.package), self.start_b,
                     self.end_b,
                     strFunctions.wrap_token('required', self.package))
@@ -150,7 +150,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
                'must be set to \\val{1}{3}{2}.' \
             .format(strFunctions.wrap_token('required', self.package),
                     self.start_b, self.end_b, 'false')
-        ref = '{} {}.'\
+        ref = '{0} {1}.'\
             .format(self.pkg_ref,
                     strFunctions.wrap_section('xml-namespace', False))
         rule = {'severity': 'ERROR', 'number': 20103 + self.offset,
@@ -185,7 +185,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     def write_rules_for_plugin(self, name, rules):
         # section heading
         self.write_line('\subsubsection*{Rules for extended \class{'
-                        + '{}'.format(name) + '} object}')
+                        + '{0}'.format(name) + '} object}')
         self.skip_line()
 
         for i in range(0, len(rules)):
@@ -196,7 +196,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     def write_rules_for_class(self, name, texname, rules):
         # section heading
         self.write_line('\subsubsection*{Rules for \class{'
-                        + '{}'.format(name) + '} object}')
+                        + '{0}'.format(name) + '} object}')
         self.skip_line()
 
         for i in range(0, len(rules)):

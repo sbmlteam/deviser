@@ -185,9 +185,9 @@ def wrap_enum(name):
 def get_element_name(attribute):
     if 'type' in attribute:
         if attribute['type'] == 'lo_element':
-            return '\{}'.format(cap_list_of_name(attribute['texname']))
+            return '\{0}'.format(cap_list_of_name(attribute['texname']))
         elif attribute['type'] == 'inline_lo_element':
-            return '\{}'.format(cap_list_of_name(attribute['texname']))
+            return '\{0}'.format(cap_list_of_name(attribute['texname']))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'
@@ -197,9 +197,9 @@ def get_element_name(attribute):
             return 'FIX_ME'
     elif 'isListOf' in attribute:
         if attribute['isListOf']:
-            return '\{}'.format(cap_list_of_name(attribute['name']))
+            return '\{0}'.format(cap_list_of_name(attribute['name']))
         else:
-            return '\{}'.format(upper_first(attribute['name']))
+            return '\{0}'.format(upper_first(attribute['name']))
     else:
         return 'FIX ME'
 

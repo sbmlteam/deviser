@@ -31,7 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class SpatialCompartmentPlugin
- * @sbmlbrief{spatial} Extension of Compartment by the &ldquo;spatial&rdquo
+ * @sbmlbrief{spatial} Extension of Compartment by the &ldquo;spatial&rdquo;
  * package.
  */
 

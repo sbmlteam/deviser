@@ -14,7 +14,7 @@ path_to_tests = ''
 
 def get_filename(name):
     global path_to_tests
-    fname = '{}.xml'.format(name)
+    fname = '{0}.xml'.format(name)
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
@@ -114,15 +114,15 @@ def run_ns_test(name, binding, ext):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, 'downcast-ns', binding))
+    print('Testing {0}:{1} {2}'.format(name, 'downcast-ns', binding))
     print('====================================================')
     generate_bindings_downcast_ns(filename, binding)
-    correct_file = '.\\test-binding\\{}\\local-downcast-namespaces-{}' \
-                   '.{}'.format(binding, name, ext)
-    temp_file = '.\\temp\\{}\\local-downcast-namespaces-{}.' \
-                '{}'.format(binding, name, ext)
+    correct_file = '.\\test-binding\\{0}\\local-downcast-namespaces-{1}' \
+                   '.{2}'.format(binding, name, ext)
+    temp_file = '.\\temp\\{0}\\local-downcast-namespaces-{1}.' \
+                '{2}'.format(binding, name, ext)
     if os.path.exists(correct_file):
-        print('local-downcast-namespaces-{}.{}'.format(name, ext))
+        print('local-downcast-namespaces-{0}.{1}'.format(name, ext))
         fail = compare_files(correct_file, temp_file)
     print('')
     return fail
@@ -132,15 +132,15 @@ def run_test(name, binding, ext):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, 'downcast-ext', binding))
+    print('Testing {0}:{1} {2}'.format(name, 'downcast-ext', binding))
     print('====================================================')
     generate_bindings_downcast_ext(filename, binding)
-    correct_file = '.\\test-binding\\{}\\local-downcast-extension-{}.' \
-                   '{}'.format(binding, name, ext)
-    temp_file = '.\\temp\\{}\\local-downcast-extension-{}.' \
-                '{}'.format(binding, name, ext)
+    correct_file = '.\\test-binding\\{0}\\local-downcast-extension-{1}.' \
+                   '{2}'.format(binding, name, ext)
+    temp_file = '.\\temp\\{0}\\local-downcast-extension-{1}.' \
+                '{2}'.format(binding, name, ext)
     if os.path.exists(correct_file):
-        print('local-downcast-extension-{}.{}'.format(name, ext))
+        print('local-downcast-extension-{0}.{1}'.format(name, ext))
         fail = compare_files(correct_file, temp_file)
     print('')
     return fail
@@ -150,20 +150,20 @@ def run_pkgs_test(name, binding, ext):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, 'downcast-packages', binding))
+    print('Testing {0}:{1} {2}'.format(name, 'downcast-packages', binding))
     print('====================================================')
     generate_bindings_downcast_pkgs(filename, binding, False)
     if binding == 'csharp' or binding == 'java':
-        fileout = 'local-packages-{}.{}'.format(name, ext)
+        fileout = 'local-packages-{0}.{1}'.format(name, ext)
     else:
-        fileout = 'local-downcast-packages-{}.{}'.format(name, ext)
-    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
-    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
+        fileout = 'local-downcast-packages-{0}.{1}'.format(name, ext)
+    correct_file = '.\\test-binding\\{0}\\{1}'.format(binding, fileout)
+    temp_file = '.\\temp\\{0}\\{1}'.format(binding, fileout)
     if os.path.exists(correct_file):
-        print('{}'.format(fileout))
+        print('{0}'.format(fileout))
         fail = compare_files(correct_file, temp_file)
     else:
-        print('{} file not found'.format(correct_file))
+        print('{0} file not found'.format(correct_file))
     print('')
     return fail
 
@@ -172,20 +172,20 @@ def run_local_test(name, binding, ext, local):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, 'local', binding))
+    print('Testing {0}:{1} {2}'.format(name, 'local', binding))
     print('====================================================')
     generate_bindings_downcast_pkgs(filename, binding, local)
     if binding == 'csharp' or binding == 'java':
-        fileout = 'local-packages-{}.{}'.format(name, ext)
+        fileout = 'local-packages-{0}.{1}'.format(name, ext)
     else:
-        fileout = 'local-{}.{}'.format(name, ext)
-    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
-    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
+        fileout = 'local-{0}.{1}'.format(name, ext)
+    correct_file = '.\\test-binding\\{0}\\{1}'.format(binding, fileout)
+    temp_file = '.\\temp\\{0}\\{1}'.format(binding, fileout)
     if os.path.exists(correct_file):
-        print('{}'.format(fileout))
+        print('{0}'.format(fileout))
         fail = compare_files(correct_file, temp_file)
     else:
-        print('{} file not found'.format(correct_file))
+        print('{0} file not found'.format(correct_file))
     print('')
     return fail
 
@@ -194,15 +194,15 @@ def run_plugin_test(name, binding, ext):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, 'downcast-plugins', binding))
+    print('Testing {0}:{1} {2}'.format(name, 'downcast-plugins', binding))
     print('====================================================')
     generate_bindings_downcast_plugins(filename, binding)
-    correct_file = '.\\test-binding\\{}\\local-downcast-plugins-{}.' \
-                   '{}'.format(binding, name, ext)
-    temp_file = '.\\temp\\{}\\local-downcast-plugins-{}.' \
-                '{}'.format(binding, name, ext)
+    correct_file = '.\\test-binding\\{0}\\local-downcast-plugins-{1}.' \
+                   '{2}'.format(binding, name, ext)
+    temp_file = '.\\temp\\{0}\\local-downcast-plugins-{1}.' \
+                '{2}'.format(binding, name, ext)
     if os.path.exists(correct_file):
-        print('local-downcast-plugins-{}.{}'.format(name, ext))
+        print('local-downcast-plugins-{0}.{1}'.format(name, ext))
         fail = compare_files(correct_file, temp_file)
     print('')
     return fail
@@ -212,17 +212,17 @@ def run_swig_test(name, binding, ext):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:{} {}'.format(name, binding, 'native'))
+    print('Testing {0}:{1} {2}'.format(name, binding, 'native'))
     print('====================================================')
     generate_bindings_downcast_pkgs(filename, binding, True)
-    fileout = '{}-package.{}'.format(name, ext)
-    correct_file = '.\\test-binding\\{}\\{}'.format(binding, fileout)
-    temp_file = '.\\temp\\{}\\{}'.format(binding, fileout)
+    fileout = '{0}-package.{1}'.format(name, ext)
+    correct_file = '.\\test-binding\\{0}\\{1}'.format(binding, fileout)
+    temp_file = '.\\temp\\{0}\\{1}'.format(binding, fileout)
     if os.path.exists(correct_file):
-        print('{}'.format(fileout))
+        print('{0}'.format(fileout))
         fail = compare_files(correct_file, temp_file)
     else:
-        print('{} file not found'.format(correct_file))
+        print('{0} file not found'.format(correct_file))
     print('')
     return fail
 
@@ -361,7 +361,7 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('BINDINGS TEST FAILS')
-        print('Check {} fails'.format(fail))
+        print('Check {0} fails'.format(fail))
         for name in fails:
             print(name)
 

@@ -53,7 +53,7 @@ class ExtensionFunctions():
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
         self.cap_language = language.upper()
-        self.struct_name = '{}Extension'.format(self.up_package)
+        self.struct_name = '{0}Extension'.format(self.up_package)
 
     ########################################################################
 
@@ -63,10 +63,10 @@ class ExtensionFunctions():
     def write_get_name(self):
         # create comment parts
         title_line = 'Returns the name of this SBML Level&nbsp;3 ' \
-                     'package (\"{}\").'.format(self.package)
+                     'package (\"{0}\").'.format(self.package)
         params = []
         return_lines = ['@return a string representing the name of '
-                        'this package (\"{}\").'.format(self.package)]
+                        'this package (\"{0}\").'.format(self.package)]
         additional = []
 
         # create the function declaration
@@ -100,13 +100,13 @@ class ExtensionFunctions():
         # create comment parts
         title_line = 'Returns a string representing the {0} XML namespace of ' \
                      'this {0} Level&nbsp;3 package.'.format(self.cap_language)
-        params = ['@param {}Level, the level of {}'.format(self.language,
+        params = ['@param {0}Level, the level of {1}'.format(self.language,
                                                            self.cap_language),
-                  '@param {}Version the version of '
-                  '{}'.format(self.language, self.cap_language),
+                  '@param {0}Version the version of '
+                  '{1}'.format(self.language, self.cap_language),
                   '@param pkgVersion the version of this package']
         return_lines = ['@return a string representing the name of '
-                        'this package (\"{}\").'.format(self.package)]
+                        'this package (\"{0}\").'.format(self.package)]
         additional = ['The namespace URI constructed by this method '
                       'corresponds to the combination of the Level and '
                       'Version of SBML, and the Version of the SBML '
@@ -116,10 +116,10 @@ class ExtensionFunctions():
                       'necessarily always <code>3</code>.)']
 
         # create the function declaration
-        level = '{}Level'.format(self.language)
-        vers = '{}Version'.format(self.language)
-        arguments = ['unsigned int {}'.format(level),
-                     'unsigned int {}'.format(vers),
+        level = '{0}Level'.format(self.language)
+        vers = '{0}Version'.format(self.language)
+        arguments = ['unsigned int {0}'.format(level),
+                     'unsigned int {0}'.format(vers),
                      'unsigned int pkgVersion']
         function = 'getURI'
         return_type = 'const std::string&'
@@ -133,9 +133,9 @@ class ExtensionFunctions():
                                                       'return getXmlnsL3V1V1()',
                                                       'else',
                                                       'return getXmlnsL3V1V2()'])
-        middle_if = self.create_code_block('if', ['{} == 1'.format(vers),
+        middle_if = self.create_code_block('if', ['{0} == 1'.format(vers),
                                                   bottom_if])
-        code = [self.create_code_block('if', ['{} == 3'.format(level),
+        code = [self.create_code_block('if', ['{0} == 3'.format(level),
                                               middle_if])]
         implementation = ['static std::string empty = \"\"', 'return empty']
         code.append(self.create_code_block('line', implementation))
@@ -171,18 +171,18 @@ class ExtensionFunctions():
             title_name = ''
             ret_name = ''
         # create comment parts
-        title_line = 'Returns the {} for the given URI  of this ' \
+        title_line = 'Returns the {0} for the given URI  of this ' \
                      'package.'.format(title_name)
         params = ['@param uri the string of the URI that represents one '
-                  'of the versions of the \"{}\" package'.format(self.package)]
-        return_lines = ['@return the {} for the given URI of this '
+                  'of the versions of the \"{0}\" package'.format(self.package)]
+        return_lines = ['@return the {0} for the given URI of this '
                         'package, or @c 0 if the given URI is '
                         'invalid.'.format(ret_name)]
         additional = []
 
         # create the function declaration
         arguments = ['const std::string& uri']
-        function = 'get{}'.format(other)
+        function = 'get{0}'.format(other)
         return_type = 'unsigned int'
 
         # create the function implementation
@@ -203,7 +203,7 @@ class ExtensionFunctions():
                     self.create_code_block('line', ['return 0'])]
 
         else:
-            implementation = ['uri == getXmlnsL3V1V1()', 'return {}'.format(value)]
+            implementation = ['uri == getXmlnsL3V1V1()', 'return {0}'.format(value)]
             code = [dict({'code_type': 'if', 'code': implementation}),
                     self.create_code_block('line', ['return 0'])]
 
@@ -223,37 +223,37 @@ class ExtensionFunctions():
     # function to write getExtension namespaces
     def write_get_namespaces(self):
         # create comment parts
-        title_line = 'Returns a  {}PkgNamespaces ' \
+        title_line = 'Returns a  {0}PkgNamespaces ' \
                      'object.'.format(self.up_package)
         params = ['@param uri the string of the URI that represents one '
-                  'of the versions of the \"{}\" package'.format(self.package)]
-        return_lines = ['@return {}PkgNamespaces object corresponding to '
+                  'of the versions of the \"{0}\" package'.format(self.package)]
+        return_lines = ['@return {0}PkgNamespaces object corresponding to '
                         'the given URI of this '
                         'package, or @c NULL if the given URI is not '
-                        'defined in the \"{}\" '
+                        'defined in the \"{1}\" '
                         'package.'.format(self.up_package, self.package)]
         additional = []
 
         # create the function declaration
         arguments = ['const std::string& uri']
-        function = 'get{}ExtensionNamespaces'.format(self.cap_language)
-        return_type = '{}Namespaces*'.format(global_variables.prefix)
+        function = 'get{0}ExtensionNamespaces'.format(self.cap_language)
+        return_type = '{0}Namespaces*'.format(global_variables.prefix)
 
         # create the function implementation
         code = [dict({'code_type': 'line',
-                      'code': ['{}PkgNamespaces* pkgns = '
+                      'code': ['{0}PkgNamespaces* pkgns = '
                                'NULL'.format(self.up_package)]})]
         if self.num_versions == 1:
             code .append(self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
-                                              'pkgns = new {}PkgNamespaces'
+                                              'pkgns = new {0}PkgNamespaces'
                                               '(3, 1, 1)'.format(self.up_package)]))
         else:
             code .append(self.create_code_block('else_if', ['uri == getXmlnsL3V1V1()',
-                                              'pkgns = new {}PkgNamespaces'
+                                              'pkgns = new {0}PkgNamespaces'
                                               '(3, 1, 1)'
                                               ''.format(self.up_package),
                                               'else if', 'uri == getXmlnsL3V1V2()',
-                                              'pkgns = new {}PkgNamespaces(3, 1, 2)'.format(self.up_package)]))
+                                              'pkgns = new {0}PkgNamespaces(3, 1, 2)'.format(self.up_package)]))
 
         code.append(self.create_code_block('line', ['return pkgns']))
 
@@ -273,17 +273,17 @@ class ExtensionFunctions():
     # function to write getExtension namespaces
     def write_get_string_typecode(self):
         # create comment parts
-        title_line = 'Takes a type code of the &ldquo;{}&rdquo; package and ' \
+        title_line = 'Takes a type code of the &ldquo;{0}&rdquo; package and ' \
                      'returns a string describing the ' \
                      'code.'.format(self.package)
         params = ['@param typeCode a libSBML type code defined by the libSBML '
                   'extension implementing support for the SBML '
-                  'Level&nbsp;3 &ldquo;{}&rdquo; package.'.format(self.package)]
+                  'Level&nbsp;3 &ldquo;{0}&rdquo; package.'.format(self.package)]
         return_lines = ['@return a text string representing the type code '
                         'given by @p typeCode.  If the type code is '
                         'unrecognized for this implementation of the '
-                        'libSBML &ldquo;{}&rdquo; package, the string returned '
-                        'will be <code>"(Unknown SBML {} Type)"'
+                        'libSBML &ldquo;{0}&rdquo; package, the string returned '
+                        'will be <code>"(Unknown SBML {1} Type)"'
                         '</code>.'.format(self.package, self.up_package)]
         additional = []
 
@@ -294,17 +294,17 @@ class ExtensionFunctions():
 
         # create the function implementation
         n = len(self.elements)
-        implementation = ['int min = {}'.format(self.elements[0]['typecode']),
-                          'int max = {}'.format(self.elements[n-1]['typecode'])]
+        implementation = ['int min = {0}'.format(self.elements[0]['typecode']),
+                          'int max = {0}'.format(self.elements[n-1]['typecode'])]
         code = [dict({'code_type': 'line', 'code': implementation}),
                 self.create_code_block('if', ['typeCode < min || '
                                               'typeCode > max',
                                               'return \"(Unknown '
-                                              '{} {} Type)\"'
+                                              '{0} {1} Type)\"'
                                               ''.format(self.cap_language,
                                                         self.up_package)]),
                 self.create_code_block('line',
-                                       ['return {}_{}_TYPECODE_STRINGS'
+                                       ['return {0}_{1}_TYPECODE_STRINGS'
                                         '[typeCode - min'
                                         ']'.format(self.cap_language,
                                                    self.package.upper())])]
@@ -333,7 +333,7 @@ class ExtensionFunctions():
         params = ['@param index an unsigned integer representing the '
                   'index of the error.']
         return_lines = ['@return packageErrorTableEntry object in the '
-                        '{}{}ErrorTable.'.format(self.up_package,
+                        '{0}{1}ErrorTable.'.format(self.up_package,
                                                  self.cap_language)]
         additional = []
 
@@ -343,7 +343,7 @@ class ExtensionFunctions():
         return_type = 'packageErrorTableEntry'
 
         # create the function implementation
-        implementation = ['return {}ErrorTable[index]'.format(self.package)]
+        implementation = ['return {0}ErrorTable[index]'.format(self.package)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -367,7 +367,7 @@ class ExtensionFunctions():
         params = ['@param errorId an unsigned integer representing the '
                   'errorId of the error.']
         return_lines = ['@return unsigned int representing the index in the '
-                        '{}{}ErrorTable corresponding to the errorId '
+                        '{0}{1}ErrorTable corresponding to the errorId '
                         'given.'.format(self.up_package, self.cap_language)]
         additional = []
 
@@ -381,7 +381,7 @@ class ExtensionFunctions():
                           'sizeof({0}ErrorTable[0])'.format(self.package),
                           'unsigned int index = 0']
         code = [dict({'code_type': 'line', 'code': implementation})]
-        if_code = self.create_code_block('if', ['errorId == {}ErrorTable[i]'
+        if_code = self.create_code_block('if', ['errorId == {0}ErrorTable[i]'
                                                 '.code'.format(self.package),
                                                 'index = i', 'break'])
         code.append(self.create_code_block('for', ['unsigned int i = 0; '
@@ -406,11 +406,11 @@ class ExtensionFunctions():
     def write_get_error_offset(self):
         # create comment parts
         title_line = 'Returns the offset for the errorId range for ' \
-                     'the \"{}\" package.'.format(self.package)
+                     'the \"{0}\" package.'.format(self.package)
         params = []
         return_lines = ['@return unsigned int representing the offset '
                         'for errors in the '
-                        '{}{}ErrorTable.'.format(self.up_package,
+                        '{0}{1}ErrorTable.'.format(self.up_package,
                                                  self.cap_language)]
         additional = []
 
@@ -420,7 +420,7 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
-        implementation = ['return {}'.format(self.offset)]
+        implementation = ['return {0}'.format(self.offset)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
@@ -457,7 +457,7 @@ class ExtensionFunctions():
             return_value = 'false'
 
         # create the function implementation
-        implementation = ['return {}'.format(return_value)]
+        implementation = ['return {0}'.format(return_value)]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

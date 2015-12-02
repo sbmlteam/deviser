@@ -59,17 +59,17 @@ class DowncastPackagesFile():
             self.fileout = BaseCppFile.BaseCppFile(name, 'i', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'packages object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
         elif binding == 'csharp' or binding == 'java':
             self.fileout = BaseCppFile.BaseCppFile(name, 'i', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'packages object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
         else:
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'packages object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
 
         self.elements = elements
         self.plugins = plugins
@@ -86,15 +86,15 @@ class DowncastPackagesFile():
     # javascript, perl,python,r,ruby
     def write_binding_specific_cpp_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        line = 'else if (pkgName == \"{}\")'.format(self.package)
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        line = 'else if (pkgName == \"{0}\")'.format(self.package)
         self.fileout.write_line(line)
         self.fileout.write_line('{')
         self.fileout.up_indent()
         self.fileout.write_line('switch ( sb->getTypeCode() )')
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('case {}_LIST_OF:'.format(self.cap_language))
+        self.fileout.write_line('case {0}_LIST_OF:'.format(self.cap_language))
         self.fileout.up_indent()
         self.fileout.write_line('name = sb->getElementName();')
         code = self.create_list_of_block()
@@ -106,19 +106,19 @@ class DowncastPackagesFile():
         self.write_element_types()
         self.fileout.write_line('default:')
         self.fileout.up_indent()
-        self.fileout.write_line('return SWIGTYPE_p_{};'.format(self.base))
+        self.fileout.write_line('return SWIGTYPE_p_{0};'.format(self.base))
         self.fileout.down_indent()
         self.fileout.write_line('}')
         self.fileout.down_indent()
         self.fileout.write_line('}')
         self.fileout.skip_line()
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     # write the local-packages-{}.i for csharp/java
     def write_binding_specific_i_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
 
         if self.binding == 'csharp':
             code = 'cscode'
@@ -131,7 +131,7 @@ class DowncastPackagesFile():
             args = 'long cPtr, boolean owner'
             equals = ' == 0'
 
-        self.fileout.write_line('%typemap({}) {}'
+        self.fileout.write_line('%typemap({0}) {1}'
                                 'Extension'.format(code, self.up_package))
         self.fileout.write_line('%{')
         self.fileout.up_indent()
@@ -150,20 +150,20 @@ class DowncastPackagesFile():
         self.fileout.skip_line()
         self.write_base_classes_cast()
         self.fileout.skip_line()
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     # write the local-{}.i for
     # javascript, perl,python,r,ruby
     def write_local_file(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
         self.write_exception_list()
         self.fileout.skip_line()
         self.write_base_classes_cast()
         self.fileout.skip_line()
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     #########################################################################
@@ -175,11 +175,11 @@ class DowncastPackagesFile():
                                 'Plugin({2})'.format(public, self.base, args))
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('if (cPtr{}) return null;'.format(equals))
+        self.fileout.write_line('if (cPtr{0}) return null;'.format(equals))
         self.fileout.skip_line()
         self.fileout.write_line('{0}Plugin sbp = new {0}Plugin'
                                 '(cPtr, false);'.format(self.base))
-        self.fileout.write_line('{} sb = sbp.getParent{}'
+        self.fileout.write_line('{0} sb = sbp.getParent{1}'
                                 'Object();'.format(self.base,
                                                    self.cap_language))
         self.fileout.skip_line()
@@ -189,18 +189,18 @@ class DowncastPackagesFile():
         for plugin in self.plugins:
             cap_base = plugin['sbase'].upper()
             up_base = strFunctions.upper_first(plugin['sbase'])
-            self.fileout.write_line('case (int) lib{}.{}_'
-                                    '{}:'.format(self.language,
+            self.fileout.write_line('case (int) lib{0}.{1}_'
+                                    '{2}:'.format(self.language,
                                                  self.cap_language, cap_base))
             self.fileout.up_indent()
-            self.fileout.write_line(' return new {}{}Plugin'
+            self.fileout.write_line(' return new {0}{1}Plugin'
                                     '(cPtr, owner);'.format(self.up_package,
                                                             up_base))
             self.fileout.down_indent()
             self.fileout.skip_line()
         self.fileout.write_line('default:')
         self.fileout.up_indent()
-        self.fileout.write_line('return new {}Plugin(cPtr, '
+        self.fileout.write_line('return new {0}Plugin(cPtr, '
                                 'owner);'.format(self.base))
         self.fileout.down_indent()
         self.fileout.down_indent()
@@ -215,18 +215,18 @@ class DowncastPackagesFile():
                                                                   args))
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('if (cPtr{}) return null;'.format(equals))
+        self.fileout.write_line('if (cPtr{0}) return null;'.format(equals))
         self.fileout.skip_line()
         self.fileout.write_line('{0} sb = new {0}(cPtr, '
                                 'false);'.format(self.base))
         self.fileout.write_line('switch ( sb.getTypeCode() )')
         self.fileout.write_line('{')
         self.fileout.up_indent()
-        self.fileout.write_line('case (int) lib{}.{}_'
+        self.fileout.write_line('case (int) lib{0}.{1}_'
                                 'LIST_OF:'.format(self.language,
                                                   self.cap_language))
         self.fileout.up_indent()
-        self.fileout.write_line('{} name = sb.getElementName();'.format(string))
+        self.fileout.write_line('{0} name = sb.getElementName();'.format(string))
         code = self.create_list_of_block(self.binding)
         self.fileout.write_implementation_block(code['code_type'], code['code'])
         self.fileout.skip_line()
@@ -234,17 +234,17 @@ class DowncastPackagesFile():
         self.fileout.skip_line()
         self.fileout.down_indent()
         for element in self.elements:
-            self.fileout.write_line('case (int) lib{}.'
-                                    '{}:'.format(self.language,
+            self.fileout.write_line('case (int) lib{0}.'
+                                    '{1}:'.format(self.language,
                                                  element['typecode']))
             self.fileout.up_indent()
-            self.fileout.write_line(' return new {}(cPtr, '
+            self.fileout.write_line(' return new {0}(cPtr, '
                                     'owner);'.format(element['name']))
             self.fileout.down_indent()
             self.fileout.skip_line()
         self.fileout.write_line('default:')
         self.fileout.up_indent()
-        self.fileout.write_line('return new {}(cPtr, owner);'.format(self.base))
+        self.fileout.write_line('return new {0}(cPtr, owner);'.format(self.base))
         self.fileout.down_indent()
         self.fileout.down_indent()
         self.fileout.write_line('}')
@@ -253,7 +253,7 @@ class DowncastPackagesFile():
 
     def write_covariant_clone(self):
         rtype = 'COVARIANT_RTYPE_CLONE'
-        self.write_specific_line(rtype, '{}Extension'.format(self.up_package))
+        self.write_specific_line(rtype, '{0}Extension'.format(self.up_package))
         for element in self.elements:
             self.write_specific_line(rtype, element['name'])
         for element in self.elements:
@@ -262,8 +262,8 @@ class DowncastPackagesFile():
                 self.write_specific_line(rtype, name)
 
     def write_exception_list(self):
-        rtype = '{}CONSTRUCTOR_EXCEPTION'.format(self.cap_language)
-        self.write_specific_line(rtype, '{}Pkg'
+        rtype = '{0}CONSTRUCTOR_EXCEPTION'.format(self.cap_language)
+        self.write_specific_line(rtype, '{0}Pkg'
                                         'Namespaces'.format(self.up_package))
         for element in self.elements:
             self.write_specific_line(rtype, element['name'])
@@ -279,7 +279,7 @@ class DowncastPackagesFile():
                 self.write_specific_line(rtype, element['name'])
 
     def write_specific_line(self, rtype, ctype):
-        self.fileout.write_line('{}({})'.format(rtype, ctype))
+        self.fileout.write_line('{0}({1})'.format(rtype, ctype))
 
     def write_base_classes_cast(self):
         if self.local:
@@ -299,26 +299,26 @@ class DowncastPackagesFile():
     def write_cast(self, name, call, my_map):
         if self.local:
             self.fileout.write_line('/**')
-            self.fileout.write_line_verbatim(' * Convert {} objects into the '
+            self.fileout.write_line_verbatim(' * Convert {0} objects into the '
                                              'most specific object '
                                              'possible.'.format(name))
             self.fileout.write_line(' */')
         else:
             self.fileout.write_line('//')
-            self.fileout.write_line('// Convert {} objects into the most '
+            self.fileout.write_line('// Convert {0} objects into the most '
                                     'specific '
                                     'object possible.'.format(name))
             self.fileout.write_line('//')
-        self.fileout.write_line('%typemap({}) {}*'.format(my_map, name))
+        self.fileout.write_line('%typemap({0}) {1}*'.format(my_map, name))
         self.fileout.write_line('{')
         self.fileout.up_indent()
         if self.local:
             self.fileout.write_line('$result = SWIG_NewPointerObj($1, '
                                     'GetDowncastSwigTypeForPackage($1, '
-                                    '\"{}\"), $owner | '
+                                    '\"{0}\"), $owner | '
                                     '%newpointer_flags);'.format(self.package))
         else:
-            self.fileout.write_line('return ({}) lib{}.Downcast{}({}, '
+            self.fileout.write_line('return ({0}) lib{1}.Downcast{2}({3}, '
                                     '$owner);'.format(name, self.language,
                                                       self.base, call))
         self.fileout.down_indent()
@@ -329,10 +329,10 @@ class DowncastPackagesFile():
 
     def write_element_types(self):
         for element in self.elements:
-            self.fileout.write_line('case {}:'.format(element['typecode']))
+            self.fileout.write_line('case {0}:'.format(element['typecode']))
             self.fileout.up_indent()
             self.fileout.write_line('return SWIGTYPE_p_'
-                                    '{};'.format(element['name']))
+                                    '{0};'.format(element['name']))
             self.fileout.down_indent()
             self.fileout.skip_line()
 
@@ -347,13 +347,13 @@ class DowncastPackagesFile():
                 if len(line) > 0:
                     line.append('else if')
                 if b_type == 'java':
-                    line.append('name.equals(\"{}\")'.format(loname))
+                    line.append('name.equals(\"{0}\")'.format(loname))
                 else:
-                    line.append('name == \"{}\"'.format(loname))
+                    line.append('name == \"{0}\"'.format(loname))
                 if b_type == 'java' or b_type == 'csharp':
-                    line.append('return new {}(cPtr, owner)'.format(up_loname))
+                    line.append('return new {0}(cPtr, owner)'.format(up_loname))
                 else:
-                    line.append('return SWIGTYPE_p_{}'.format(up_loname))
+                    line.append('return SWIGTYPE_p_{0}'.format(up_loname))
         if count == 0:
             code = self.create_code_block('blank', [])
         elif count == 1:

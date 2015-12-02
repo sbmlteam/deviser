@@ -12,7 +12,7 @@ path_to_tests = ''
 
 def get_filename(name):
     global path_to_tests
-    fname = '{}.xml'.format(name)
+    fname = '{0}.xml'.format(name)
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
@@ -25,7 +25,7 @@ def run_deviser_test(name, flag, expected_return):
     filename = get_filename(name)
     error = global_variables.get_return_code(expected_return)
     print('====================================================')
-    print('Testing {} {} {}'.format(name, flag, error))
+    print('Testing {0} {1} {2}'.format(name, flag, error))
     print('====================================================')
     args = []
     if flag == '-g'or flag == '-l':
@@ -44,9 +44,9 @@ def run_deviser_test(name, flag, expected_return):
     fail = 0
     if global_variables.code_returned != expected_return:
         fail = 1
-        fails.append('{}: {} {}'.format(name, flag, expected_return))
-        print('Incorrect Return: {} Expected: '
-              '{}'.format(global_variables.get_return_code(global_variables.
+        fails.append('{0}: {1} {2}'.format(name, flag, expected_return))
+        print('Incorrect Return: {0} Expected: '
+              '{1}'.format(global_variables.get_return_code(global_variables.
                                                            code_returned),
                           global_variables.get_return_code(expected_return)))
     print('')
@@ -101,7 +101,7 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('EXIT CODES FAILED')
-        print('Check {} fails'.format(fail))
+        print('Check {0} fails'.format(fail))
         for name in fails:
             print(name)
 

@@ -48,16 +48,16 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
     def __init__(self, package):
 
         self.up_package = strFunctions.upper_first(package['name'])
-        self.name = '{}Extension'.format(self.up_package)
+        self.name = '{0}Extension'.format(self.up_package)
         self.brief_description = \
-            'Implementation  of {}.'.format(self.name)
+            'Implementation  of {0}.'.format(self.name)
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'cpp',
                                          None)
 
         # members from object
         self.package = package['name']
         self.cap_package = package['name'].upper()
-        self.baseClass = '{}Extension'.format(self.cap_language)
+        self.baseClass = '{0}Extension'.format(self.cap_language)
 
         self.elements = package['elements']
         self.number = package['number']
@@ -95,34 +95,34 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
 
     def write_general_includes(self):
 
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                         'ExtensionRegister.h>'.format(self.language,
                                                       self.cap_language))
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                         'ExtensionRegistry.h>'.format(self.language,
                                                       self.cap_language))
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                         'PluginCreator.h>'.format(self.language,
                                                   self.std_base))
-        self.write_line_verbatim('#include <{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/extension/{1}'
                         'DocumentPlugin.h>'.format(self.language,
                                                    self.cap_language))
         self.skip_line()
-        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
+        self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
                         'Extension.h>'.format(self.language, self.package,
                                               self.up_package))
-        self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
-                        '{}DocumentPlugin.h>'.format(self.language,
+        self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
+                        '{3}DocumentPlugin.h>'.format(self.language,
                                                      self.package,
                                                      self.up_package,
                                                      self.cap_language))
-        self.write_line_verbatim('#include <{}/packages/{}/validator/{}'
-                        '{}ErrorTable.h>'.format(self.language, self.package,
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
+                        '{3}ErrorTable.h>'.format(self.language, self.package,
                                                  self.up_package,
                                                  self.cap_language))
         for i in range(0, len(self.plugins)):
-            self.write_line_verbatim('#include <{}/packages/{}/extension/{}'
-                            '{}Plugin.h>'.format(self.language,
+            self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
+                            '{3}Plugin.h>'.format(self.language,
                                                  self.package,
                                                  self.up_package,
                                                  self.plugins[i]['sbase']))
@@ -234,29 +234,29 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         up_package = strFunctions.upper_first(self.package)
         self.open_comment()
         self.write_blank_comment_line()
-        self.write_comment_line('Adds this {}Extension to the {}'
+        self.write_comment_line('Adds this {0}Extension to the {1}'
                                 'ExtensionRegistry '
                                 'class'.format(up_package, self.cap_language))
         self.write_blank_comment_line()
         self.close_comment()
-        self.write_line('static {}ExtensionRegister<{}Extension> '
-                        '{}ExtensionRegistry;'.format(self.cap_language,
+        self.write_line('static {0}ExtensionRegister<{1}Extension> '
+                        '{2}ExtensionRegistry;'.format(self.cap_language,
                                                       up_package, self.package))
         self.skip_line()
         self.write_line('static')
-        self.write_line('const char* {}_{}_TYPECODE_STRINGS[] ='
+        self.write_line('const char* {0}_{1}_TYPECODE_STRINGS[] ='
                         ''.format(self.cap_language, self.cap_package))
         self.write_line('{')
         self.up_indent()
-        self.write_line('  \"{}\"'.format(self.elements[0]['name']))
+        self.write_line('  \"{0}\"'.format(self.elements[0]['name']))
         for i in range(1, len(self.elements)):
-            self.write_line('  , \"{}\"'.format(self.elements[i]['name']))
+            self.write_line('  , \"{0}\"'.format(self.elements[i]['name']))
         self.down_indent()
         self.write_line('};')
         self.skip_line(2)
         self.open_comment()
         self.write_blank_comment_line()
-        self.write_comment_line('Instantiate {}ExtensionNamespaces<{}'
+        self.write_comment_line('Instantiate {0}ExtensionNamespaces<{1}'
                                 'Extension> for DLL'.format(self.cap_language,
                                                             up_package))
         self.write_blank_comment_line()

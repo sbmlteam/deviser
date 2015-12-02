@@ -62,7 +62,7 @@ class BaseClassFiles():
         base_descrip = self.create_base_description()
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
         fileout.skip_line(2)
         self.copy_file_contents(fileout, 'SBase.h')
@@ -71,12 +71,12 @@ class BaseClassFiles():
     def write_code(self, class_desc):
         fileout = CppCodeFile.CppCodeFile(class_desc)
         if self.verbose:
-            print('Writing file {}'.format(fileout.filename))
+            print('Writing file {0}'.format(fileout.filename))
         fileout.write_file()
         fileout.close_file()
 
     def create_base_description(self):
-        decsr = dict({'name': '{}Base'.format(self.name),
+        decsr = dict({'name': '{0}Base'.format(self.name),
                       'attribs': None})
         return decsr
 
@@ -102,7 +102,7 @@ class BaseClassFiles():
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
         line = re.sub('SBML_',
-                      '{}_'.format(global_variables.language.upper()), line)
+                      '{0}_'.format(global_variables.language.upper()), line)
         line = re.sub('sbml', global_variables.language, line)
         line = re.sub('SBML', global_variables.prefix, line)
         return line

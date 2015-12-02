@@ -60,48 +60,48 @@ class BindingFiles():
     #########################################################################
 
     def write_downcast_extension(self):
-        name = 'local-downcast-extension-{}'.format(self.package)
+        name = 'local-downcast-extension-{0}'.format(self.package)
         ext = DowncastExtensionFile.DowncastExtensionFile(name,
                                                           self.package,
                                                           self.binding)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
     def write_downcast_namespace(self):
-        name = 'local-downcast-namespaces-{}'.format(self.package)
+        name = 'local-downcast-namespaces-{0}'.format(self.package)
         ext = DowncastNamespaceFile.DowncastNamespaceFile(name,
                                                           self.package,
                                                           self.binding)
         if self.verbose:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
     def write_downcast_packages(self):
         if self.binding == 'csharp' or self.binding == 'java':
-            name = 'local-packages-{}'.format(self.package)
+            name = 'local-packages-{0}'.format(self.package)
         else:
-            name = 'local-downcast-packages-{}'.format(self.package)
+            name = 'local-downcast-packages-{0}'.format(self.package)
         ext = DowncastPackagesFile.DowncastPackagesFile(name,
                                                         self.package,
                                                         self.binding,
                                                         self.elements,
                                                         self.plugins)
         if self.verbose and ext.fileout:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
     def write_downcast_plugins(self):
-        name = 'local-downcast-plugins-{}'.format(self.package)
+        name = 'local-downcast-plugins-{0}'.format(self.package)
         ext = DowncastPluginsFile.DowncastPluginsFile(name,
                                                       self.package,
                                                       self.binding,
                                                       self.plugins)
         if self.verbose and ext.fileout:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
@@ -109,7 +109,7 @@ class BindingFiles():
         if self.binding == 'csharp' or self.binding == 'java':
             return
         else:
-            name = 'local-{}'.format(self.package)
+            name = 'local-{0}'.format(self.package)
         ext = DowncastPackagesFile.DowncastPackagesFile(name,
                                                         self.package,
                                                         self.binding,
@@ -117,24 +117,24 @@ class BindingFiles():
                                                         self.plugins,
                                                         True)
         if self.verbose and ext.fileout:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
     def write_swig_files(self):
-        name = '{}-package'.format(self.package)
+        name = '{0}-package'.format(self.package)
         ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
                                             self.plugins, is_header=True)
         if self.verbose and ext.fileout:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 
-        name = '{}-package'.format(self.package)
+        name = '{0}-package'.format(self.package)
         ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
                                             self.plugins, is_header=False)
         if self.verbose and ext.fileout:
-            print('Writing file {}'.format(ext.fileout.filename))
+            print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
 

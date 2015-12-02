@@ -53,7 +53,7 @@ def main():
 
     if total_fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print('Check {} fails'.format(total_fail))
+        print('Check {0} fails'.format(total_fail))
         for name in fails:
             print(name)
     else:

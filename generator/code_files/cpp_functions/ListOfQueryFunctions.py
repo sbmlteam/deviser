@@ -126,69 +126,69 @@ class ListOfQueryFunctions():
             return
 
         if self.is_list_of:
-            return_string = 'in this {}'.format(self.object_name)
+            return_string = 'in this {0}'.format(self.object_name)
         else:
-            return_string = 'in the {} within this ' \
-                            '{}'.format(strFunctions.
+            return_string = 'in the {0} within this ' \
+                            '{1}'.format(strFunctions.
                                         cap_list_of_name(self.child_name),
                                         self.class_name)
 
         # useful variables
         virtual = True if self.is_list_of else False
         # create comment parts
-        title_line = 'Get {} {} from the {}.'.format(self.indef_name,
+        title_line = 'Get {0} {1} from the {2}.'.format(self.indef_name,
                                                      self.object_child_name,
                                                      self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'
+            params.append('@param {0}, the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param n, an unsigned int representing the index '
-                      'of the {} to retrieve.'.format(self.object_child_name))
-        return_lines = ['@return the nth {} {}.'.format(
+                      'of the {0} to retrieve.'.format(self.object_child_name))
+        return_lines = ['@return the nth {0} {1}.'.format(
             self.object_child_name, return_string)]
         additional = []
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{}()'.format(self.plural)]
+                else ['@see getNum{0}()'.format(self.plural)]
 
         # create the function declaration
         arguments = []
         used_c_name = strFunctions.remove_prefix(self.child_name)
         if self.is_cpp_api:
-            function = 'get' if self.is_list_of else 'get{}'\
+            function = 'get' if self.is_list_of else 'get{0}'\
                 .format(strFunctions.remove_prefix(self.object_child_name))
         else:
-            function = '{}_get{}'.format(self.class_name, used_c_name)
-            arguments.append('{}* {}'.format(self.object_name,
+            function = '{0}_get{1}'.format(self.class_name, used_c_name)
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
         arguments.append('unsigned int n')
         if is_const:
-            return_type = 'const {}*'.format(self.object_child_name)
+            return_type = 'const {0}*'.format(self.object_child_name)
         else:
-            return_type = '{}*'.format(self.object_child_name)
+            return_type = '{0}*'.format(self.object_child_name)
         # if appropriate write the code
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
                 const = 'const ' if is_const else ''
-                implementation = ['return static_cast<{}{}*>(ListOf::'
+                implementation = ['return static_cast<{0}{1}*>(ListOf::'
                                   'get(n))'.format(const, self.child_name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
-                implementation = ['return {}.get'
+                implementation = ['return {0}.get'
                                   '(n)'.format(self.class_object['memberName'])]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 const = 'const ' if is_const else ''
                 name = self.class_object['memberName']
-                implementation = ['return static_cast<{} {}*>({}.get'
+                implementation = ['return static_cast<{0} {1}*>({2}.get'
                                   '(n))'.format(const, self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
                 line = ['lo == NULL', 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return static_cast <{}*>(lo)->get'
+                line = ['return static_cast <{0}*>(lo)->get'
                         '(n)'.format(self.class_name)]
                 code.append(self.create_code_block('line', line))
             else:
@@ -222,21 +222,21 @@ class ListOfQueryFunctions():
         used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
 
         if self.is_list_of:
-            return_string = 'in this {}'.format(self.object_name)
+            return_string = 'in this {0}'.format(self.object_name)
         else:
-            return_string = 'in the {} within this ' \
-                            '{}'.format(strFunctions.
+            return_string = 'in the {0} within this ' \
+                            '{1}'.format(strFunctions.
                                         cap_list_of_name(self.child_name),
                                         self.class_name)
         # create comment
-        title_line = 'Get {} {} from the {} based on its identifier.'\
+        title_line = 'Get {0} {1} from the {2} based on its identifier.'\
             .format(self.indef_name, self.object_child_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'
+            params.append('@param {0}, the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid a string representing the identifier '
-                      'of the {} to retrieve.'.format(self.object_child_name))
+                      'of the {0} to retrieve.'.format(self.object_child_name))
         return_lines = ['@return the {0} {1} with the given id'
                         ' or NULL if no such {0} exists.'
                         .format(self.object_child_name, return_string)]
@@ -245,24 +245,24 @@ class ListOfQueryFunctions():
             if self.is_list_of:
                 additional = ['@see size()']
             else:
-                additional.append('@see get{}(unsigned int '
+                additional.append('@see get{0}(unsigned int '
                                   'n)'.format(used_cpp_name))
-                additional.append('@see getNum{}()'.format(self.plural))
+                additional.append('@see getNum{0}()'.format(self.plural))
 
         # create function declaration
         if self.is_cpp_api:
             function = 'get' if self.is_list_of \
-                else 'get{}'.format(used_cpp_name)
+                else 'get{0}'.format(used_cpp_name)
             arguments = ['const std::string& sid']
         else:
-            function = '{}_getById'.format(self.class_name) if self.is_list_of \
-                else '{}_get{}ById'.format(self.class_name, used_c_name)
-            arguments = ['{}* {}'.format(self.object_name, self.abbrev_parent),
+            function = '{0}_getById'.format(self.class_name) if self.is_list_of \
+                else '{0}_get{1}ById'.format(self.class_name, used_c_name)
+            arguments = ['{0}* {1}'.format(self.object_name, self.abbrev_parent),
                          'const char *sid']
         if is_const:
-            return_type = 'const {}*'.format(self.object_child_name)
+            return_type = 'const {0}*'.format(self.object_child_name)
         else:
-            return_type = '{}*'.format(self.object_child_name)
+            return_type = '{0}*'.format(self.object_child_name)
         # if appropriate write the code
         code = []
         if not self.is_header:
@@ -273,7 +273,7 @@ class ListOfQueryFunctions():
             elif self.status == 'plugin':
                 const = 'const ' if is_const else ''
                 name = self.class_object['memberName']
-                implementation = ['return static_cast<{} {}*>({}.get'
+                implementation = ['return static_cast<{0} {1}*>({2}.get'
                                   '(sid))'.format(const, self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
@@ -295,22 +295,22 @@ class ListOfQueryFunctions():
 
     def cpp_list_write_get_element_by_id(self, const):
         if const:
-            implementation = ['vector<{}*>::const_iterator '
+            implementation = ['vector<{0}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq<{}>(sid))'.format(self.object_child_name),
+                              'IdEq<{0}>(sid))'.format(self.object_child_name),
                               'return (result == mItems.end()) ? 0 : '
-                              'static_cast  <const {}*> '
+                              'static_cast  <const {0}*> '
                               '(*result)'.format(self.object_child_name)]
         else:
-            implementation = ['return const_cast<{}*>(static_cast<const {}&>'
+            implementation = ['return const_cast<{0}*>(static_cast<const {1}&>'
                               '(*this).get(sid))'.format(self.object_child_name,
                                                          self.object_name)]
         code = [self.create_code_block('line', implementation)]
         return code
 
     def cpp_not_list_write_get_element_by_id(self):
-        implementation = ['return {}.'
+        implementation = ['return {0}.'
                           'get(sid)'.format(self.class_object['memberName'])]
         code = [self.create_code_block('line', implementation)]
         return code
@@ -319,7 +319,7 @@ class ListOfQueryFunctions():
         code = []
         line = ['lo == NULL', 'return NULL']
         code.append(self.create_code_block('if', line))
-        implementation = ['return (sid != NULL) ? static_cast <{}*>(lo)'
+        implementation = ['return (sid != NULL) ? static_cast <{0}*>(lo)'
                           '->get(sid) : NULL'.format(self.class_name)]
         code.append(self.create_code_block('line', implementation))
         return code
@@ -353,17 +353,17 @@ class ListOfQueryFunctions():
             self.used_sidrefs.append(match)
 
         # create comment
-        title_line = 'Get {} {} from the {} based on the {} to which ' \
+        title_line = 'Get {0} {1} from the {2} based on the {3} to which ' \
                      'it refers.'.format(self.indef_name,
                                          self.object_child_name,
                                          self.object_name,
                                          element)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'
+            params.append('@param {0}, the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param sid a string representing the {} attribute '
-                      'of the {} object to '
+        params.append('@param sid a string representing the {0} attribute '
+                      'of the {1} object to '
                       'retrieve.'.format(att_name, self.object_child_name))
         return_lines = ['@return the first {0} in this {1} based on the '
                         'given {2} attribute or NULL if no such {0} exists.'
@@ -376,35 +376,35 @@ class ListOfQueryFunctions():
         used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
         if self.is_cpp_api:
             if self.is_list_of:
-                function = 'getBy{}'.format(element)
+                function = 'getBy{0}'.format(element)
             else:
-                function = 'get{}By{}'.format(used_cpp_name, element)
+                function = 'get{0}By{1}'.format(used_cpp_name, element)
             arguments = ['const std::string& sid']
         else:
-            function = '{}_get{}By{}'.format(self.class_name,
+            function = '{0}_get{1}By{2}'.format(self.class_name,
                                              used_c_name, element)
-            arguments = ['{}* {}'.format(self.object_name, self.abbrev_parent),
+            arguments = ['{0}* {1}'.format(self.object_name, self.abbrev_parent),
                          'const char *sid']
         if const:
-            return_type = 'const {}*'.format(self.object_child_name)
+            return_type = 'const {0}*'.format(self.object_child_name)
         else:
-            return_type = '{}*'.format(self.object_child_name)
+            return_type = '{0}*'.format(self.object_child_name)
         up_name = strFunctions.abbrev_name(element).upper()
         if const and self.is_cpp_api and self.is_list_of:
-            implementation = ['vector<{}*>::const_iterator '
+            implementation = ['vector<{0}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq{}(sid))'.format(up_name),
+                              'IdEq{0}(sid))'.format(up_name),
                               'return (result == mItems.end()) ? 0 : '
-                              'static_cast  <const {}*> '
+                              'static_cast  <const {0}*> '
                               '(*result)'.format(self.object_child_name)]
         elif self.is_cpp_api and not self.is_list_of:
-            implementation = ['return {}.getBy{}'
+            implementation = ['return {0}.getBy{1}'
                               '(sid)'.format(self.class_object['memberName'],
                                              element)]
         elif not const and self.is_cpp_api and self.is_list_of:
-            implementation = ['return const_cast<{}*>(static_cast<const {}'
-                              '&>(*this).getBy{}(sid))'.format(self.child_name,
+            implementation = ['return const_cast<{0}*>(static_cast<const {1}'
+                              '&>(*this).getBy{2}(sid))'.format(self.child_name,
                                                                self.class_name,
                                                                element)]
         else:
@@ -438,7 +438,7 @@ class ListOfQueryFunctions():
             element = sid_ref['capAttName']
         else:
             element = sid_ref['element']
-        eq_name = 'IdEq{}'.format(strFunctions.abbrev_name(element).upper())
+        eq_name = 'IdEq{0}'.format(strFunctions.abbrev_name(element).upper())
         match = [element]
         if match in self.used_sidrefs:
             return
@@ -450,24 +450,24 @@ class ListOfQueryFunctions():
         open_b = '{'
         close_b = '}'
         # create comment
-        title_line = 'Used by {}::get() to lookup {} {} ' \
-                     'based on its {}.'.format(self.class_name, self.indef_name,
+        title_line = 'Used by {0}::get() to lookup {1} {2} ' \
+                     'based on its {3}.'.format(self.class_name, self.indef_name,
                                                self.child_name, element)
         params = []
         return_lines = []
         additional = []
 
         # create function declaration
-        function = 'struct {} : public std::unary_function' \
-                   '<{}*, bool>'.format(eq_name, self.std_base)
+        function = 'struct {0} : public std::unary_function' \
+                   '<{1}*, bool>'.format(eq_name, self.std_base)
         arguments = []
         return_type = ''
         code = ['const string& id;', ' ',
-                '{} (const string& id) : id(id) {}  '
-                '{}'.format(eq_name, open_b, close_b),
-                'bool operator() ({}* sb)'.format(self.std_base), '{',
-                '        return (static_cast<{}*>(sb)'
-                '->get{}() == id);'.format(self.child_name, element), '}']
+                '{0} (const string& id) : id(id) {1}  '
+                '{2}'.format(eq_name, open_b, close_b),
+                'bool operator() ({0}* sb)'.format(self.std_base), '{',
+                '        return (static_cast<{0}*>(sb)'
+                '->get{1}() == id);'.format(self.child_name, element), '}']
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -491,21 +491,21 @@ class ListOfQueryFunctions():
         virtual = True if self.is_list_of else False
 
         # create comment parts
-        title_line = 'Removes the nth {} from this {} and returns a ' \
+        title_line = 'Removes the nth {0} from this {1} and returns a ' \
                      'pointer to it.'.format(self.object_child_name,
                                              self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'
+            params.append('@param {0}, the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param n, an unsigned int representing the index of '
-                      'the {} to remove.'.format(self.object_child_name))
-        return_lines = ['@return a pointer to the nth {} in this {}.'.format(
+                      'the {0} to remove.'.format(self.object_child_name))
+        return_lines = ['@return a pointer to the nth {0} in this {1}.'.format(
             self.object_child_name, self.object_name)]
         additional = []
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{}'.format(self.plural)]
+                else ['@see getNum{0}'.format(self.plural)]
             additional.append(' ')
             additional.append('@note the caller owns the returned object and '
                               'is responsible for deleting it.')
@@ -515,38 +515,38 @@ class ListOfQueryFunctions():
         used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
         if self.is_cpp_api:
             function = 'remove' if self.is_list_of \
-                else 'remove{}'.format(used_cpp_name)
+                else 'remove{0}'.format(used_cpp_name)
         else:
             if self.is_list_of:
-                function = '{}_remove'.format(self.class_name)
+                function = '{0}_remove'.format(self.class_name)
             else:
-                function = '{}_remove{}'.format(self.class_name,
+                function = '{0}_remove{1}'.format(self.class_name,
                                                 used_c_name)
 
-            arguments.append('{}* {}'.format(self.object_name,
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
         arguments.append('unsigned int n')
-        return_type = '{}*'.format(self.object_child_name)
+        return_type = '{0}*'.format(self.object_child_name)
 
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
-                implementation = ['return static_cast<{}*>(ListOf::'
+                implementation = ['return static_cast<{0}*>(ListOf::'
                                   'remove(n))'.format(self.object_child_name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
                 member = self.class_object['memberName']
-                implementation = ['return {}.remove(n)'.format(member)]
+                implementation = ['return {0}.remove(n)'.format(member)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 name = self.class_object['memberName']
-                implementation = ['return static_cast<{}*>({}.remove'
+                implementation = ['return static_cast<{0}*>({1}.remove'
                                   '(n))'.format(self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
                 line = ['lo == NULL', 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return static_cast <{}*>(lo)->remove'
+                line = ['return static_cast <{0}*>(lo)->remove'
                         '(n)'.format(self.class_name)]
                 code.append(self.create_code_block('line', line))
             else:
@@ -581,15 +581,15 @@ class ListOfQueryFunctions():
         virtual = True if self.is_list_of else False
 
         # create comment parts
-        title_line = 'Removes the {} from this {} based on its identifier and ' \
+        title_line = 'Removes the {0} from this {1} based on its identifier and ' \
                      'returns a pointer to it.'.format(self.object_child_name,
                                                        self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to search.'
+            params.append('@param {0}, the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid, a string representing the identifier of '
-                      'the {} to remove.'.format(self.object_child_name))
+                      'the {0} to remove.'.format(self.object_child_name))
         return_lines = ['@return the {0} in this {1} based on the identifier '
                         'or NULL if no such {0} '
                         'exists.'.format(self.object_child_name,
@@ -604,30 +604,30 @@ class ListOfQueryFunctions():
         used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
         if self.is_cpp_api:
             function = 'remove' if self.is_list_of \
-                else 'remove{}'.format(used_cpp_name)
+                else 'remove{0}'.format(used_cpp_name)
             arguments = ['const std::string& sid']
         else:
             if self.is_list_of:
-                function = '{}_removeById'.format(self.class_name)
+                function = '{0}_removeById'.format(self.class_name)
             else:
-                function = '{}_remove{}ById'.format(self.class_name,
+                function = '{0}_remove{1}ById'.format(self.class_name,
                                                     used_c_name)
-            arguments.append('{}* {}'.format(self.object_name,
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
             arguments.append('const char* sid')
-        return_type = '{}*'.format(self.object_child_name)
+        return_type = '{0}*'.format(self.object_child_name)
 
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
-                implementation = ['{}* item = NULL'.format(self.std_base),
-                                  'vector<{}*>::iterator '
+                implementation = ['{0}* item = NULL'.format(self.std_base),
+                                  'vector<{0}*>::iterator '
                                   'result'.format(self.std_base)]
                 code = [self.create_code_block('line', implementation),
                         self.create_code_block('line',
                                                ['result = find_if('
                                                 'mItems.begin(), '
-                                                'mItems.end(), IdEq<{}>(sid)'
+                                                'mItems.end(), IdEq<{0}>(sid)'
                                                 ')'.format(self.
                                                            object_child_name)])]
                 implementation = ['result != mItems.end()', 'item = *result',
@@ -636,21 +636,21 @@ class ListOfQueryFunctions():
                 code.append(
                     self.create_code_block(
                         'line',
-                        ['return static_cast <{}*> '
+                        ['return static_cast <{0}*> '
                          '(item)'.format(self.object_child_name)]))
             elif self.status == 'cpp_not_list':
                 member = self.class_object['memberName']
-                implementation = ['return {}.remove(sid)'.format(member)]
+                implementation = ['return {0}.remove(sid)'.format(member)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 name = self.class_object['memberName']
-                implementation = ['return static_cast<{}*>({}.remove'
+                implementation = ['return static_cast<{0}*>({1}.remove'
                                   '(sid))'.format(self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
                 line = ['lo == NULL', 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return (sid != NULL) ? static_cast <{}*>(lo)->remove'
+                line = ['return (sid != NULL) ? static_cast <{0}*>(lo)->remove'
                         '(sid) : NULL'.format(self.class_name)]
                 code.append(self.create_code_block('line', line))
             else:
@@ -679,26 +679,26 @@ class ListOfQueryFunctions():
     # function to write add element
     def write_add_element_function(self):
         # create comment parts
-        title_line = 'Adds a copy of the given {} to this {}.'.format(
+        title_line = 'Adds a copy of the given {0} to this {1}.'.format(
             self.object_child_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to which the {} '
+            params.append('@param {0}, the {1} structure to which the {2} '
                           'should be added.'.format(self.abbrev_parent,
                                                     self.object_name,
                                                     self.object_child_name))
-        params.append('@param {}, the {} object to '
+        params.append('@param {0}, the {1} object to '
                       'add.'.format(self.abbrev_child, self.object_child_name))
         success = global_variables.ret_success
         failed = global_variables.ret_failed
         return_lines = ['@copydetails doc_returns_success_code',
-                        '@li @{}constant{}{}, '
-                        'OperationReturnValues_t{}'.format(self.language,
+                        '@li @{0}constant{1}{2}, '
+                        'OperationReturnValues_t{3}'.format(self.language,
                                                            self.open_br,
                                                            success,
                                                            self.close_br),
-                        '@li @{}constant{}{},'
-                        ' OperationReturnValues_t{}'.format(self.language,
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
                                                             self.open_br,
                                                             failed,
                                                             self.close_br)]
@@ -706,69 +706,69 @@ class ListOfQueryFunctions():
         if self.is_cpp_api:
             additional.append('@copydetails doc_note_object_is_copied')
             additional.append(' ')
-            additional.append('@see create{}()'.format(self.object_child_name))
+            additional.append('@see create{0}()'.format(self.object_child_name))
         # create the function declaration
         arguments = []
         used_c_name = strFunctions.remove_prefix(self.child_name)
         used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
         if self.is_cpp_api:
-            function = 'add{}'.format(used_cpp_name)
+            function = 'add{0}'.format(used_cpp_name)
         else:
-            function = '{}_add{}'.format(self.class_name, used_c_name)
-            arguments.append('{}* {}'.format(self.object_name,
+            function = '{0}_add{1}'.format(self.class_name, used_c_name)
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
-        arguments.append('const {}* {}'.format(self.object_child_name,
+        arguments.append('const {0}* {1}'.format(self.object_child_name,
                                                self.abbrev_child))
         return_type = 'int'
         member = ''
         if not self.is_list_of:
             member = self.class_object['memberName']
-            else_lines = ['{}.append({})'.format(member, self.abbrev_child),
-                          'return {}'.format(global_variables.ret_success)]
+            else_lines = ['{0}.append({1})'.format(member, self.abbrev_child),
+                          'return {0}'.format(global_variables.ret_success)]
         else:
-            else_lines = ['append({})'.format(self.abbrev_child),
-                          'return {}'.format(global_variables.ret_success)]
+            else_lines = ['append({0})'.format(self.abbrev_child),
+                          'return {0}'.format(global_variables.ret_success)]
         this_object = query.get_class(self.object_child_name,
                                       self.class_object['root'])
         if self.is_cpp_api:
-            implementation = ['{} == NULL'.format(self.abbrev_child),
-                              'return {}'.format(global_variables.ret_failed),
+            implementation = ['{0} == NULL'.format(self.abbrev_child),
+                              'return {0}'.format(global_variables.ret_failed),
                               'else if',
-                              '{}->hasRequiredAttributes() == '
+                              '{0}->hasRequiredAttributes() == '
                               'false'.format(self.abbrev_child),
                               'return '
-                              '{}'.format(global_variables.ret_invalid_obj)]
+                              '{0}'.format(global_variables.ret_invalid_obj)]
             if this_object and 'hasChildren' in this_object \
                     and this_object['hasChildren']:
                 ret = global_variables.ret_invalid_obj
                 implementation += ['else if',
-                                   '{}->hasRequiredElements() == '
+                                   '{0}->hasRequiredElements() == '
                                    'false'.format(self.abbrev_child),
-                                   'return {}'.format(ret)]
+                                   'return {0}'.format(ret)]
             implementation += ['else if',
-                               'getLevel() != {}->'
+                               'getLevel() != {0}->'
                                'getLevel()'.format(self.abbrev_child),
                                'return '
-                               '{}'.format(global_variables.ret_level_mis),
+                               '{0}'.format(global_variables.ret_level_mis),
                                'else if',
-                               'getVersion() != {}->'
+                               'getVersion() != {0}->'
                                'getVersion()'.format(self.abbrev_child),
                                'return '
-                               '{}'.format(global_variables.ret_vers_mis),
+                               '{0}'.format(global_variables.ret_vers_mis),
                                'else if']
             if self.is_plugin:
                 ret = global_variables.ret_pkgv_mis
-                implementation.append('getPackageVersion() != {}->getPackage'
+                implementation.append('getPackageVersion() != {0}->getPackage'
                                       'Version()'.format(self.abbrev_child))
-                implementation.append('return {}'.format(ret))
+                implementation.append('return {0}'.format(ret))
             else:
-                implementation.append('matchesRequired{}NamespacesForAddition'
-                                      '(static_cast<const {}*>({})) == '
+                implementation.append('matchesRequired{0}NamespacesForAddition'
+                                      '(static_cast<const {1}*>({2})) == '
                                       'false'.format(global_variables.prefix,
                                                      self.std_base,
                                                      self.abbrev_child))
                 implementation.append('return '
-                                      '{}'.format(global_variables.ret_ns_mis))
+                                      '{0}'.format(global_variables.ret_ns_mis))
             if not self.is_list_of and self.has_id:
                 implementation.append('else if')
                 implementation.append('{0}->isSetId() '
@@ -776,7 +776,7 @@ class ListOfQueryFunctions():
                                       '!= NULL'.format(self.abbrev_child,
                                                        member))
                 implementation.append('return '
-                                      '{}'.format(global_variables.ret_dup_id))
+                                      '{0}'.format(global_variables.ret_dup_id))
             implementation.append('else')
             implementation.append(self.create_code_block('line', else_lines))
             code = [self.create_code_block('else_if', implementation)]
@@ -825,11 +825,11 @@ class ListOfQueryFunctions():
                      'created.'.format(child, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure '
-                          'to which the {} should be '
+            params.append('@param {0}, the {1} structure '
+                          'to which the {2} should be '
                           'added.'.format(self.abbrev_parent, self.object_name,
                                           child))
-        return_lines = ['@return a new {} object '
+        return_lines = ['@return a new {0} object '
                         'instance.'.format(child)]
         additional = []
         if self.is_cpp_api:
@@ -840,77 +840,77 @@ class ListOfQueryFunctions():
         arguments = []
         used_c_name = strFunctions.remove_prefix(child_name)
         if self.is_cpp_api:
-            function = 'create{}'.format(strFunctions.remove_prefix(child))
+            function = 'create{0}'.format(strFunctions.remove_prefix(child))
         else:
-            function = '{}_create{}'.format(self.class_name, used_c_name)
-            arguments.append('{}* {}'.format(self.object_name,
+            function = '{0}_create{1}'.format(self.class_name, used_c_name)
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
-        return_type = '{}*'.format(child)
+        return_type = '{0}*'.format(child)
 
         if self.is_cpp_api and not is_concrete:
             pack_up = self.package.upper()
             pack_low = self.package.lower()
-            implementation = ['{}* {} = NULL'.format(self.child_name,
+            implementation = ['{0}* {1} = NULL'.format(self.child_name,
                                                      self.abbrev_child)]
             code = [self.create_code_block('line', implementation)]
 
             if self.class_object['num_versions'] > 1:
-                line = '{}_CREATE_NS_WITH_VERSION({}ns, get{}Namespaces(), ' \
+                line = '{0}_CREATE_NS_WITH_VERSION({1}ns, get{2}Namespaces(), ' \
                        'getPackageVersion())'.format(pack_up, pack_low,
                                                      global_variables.prefix)
             else:
-                line = '{}_CREATE_NS({}ns, ' \
-                       'get{}Namespaces())'.format(pack_up, pack_low,
+                line = '{0}_CREATE_NS({1}ns, ' \
+                       'get{2}Namespaces())'.format(pack_up, pack_low,
                                                    global_variables.prefix)
             implementation = [line,
-                              '{} = new {}({}ns)'.format(self.abbrev_child,
+                              '{0} = new {1}({2}ns)'.format(self.abbrev_child,
                                                          self.child_name,
                                                          pack_low),
-                              'delete {}ns'.format(pack_low),
+                              'delete {0}ns'.format(pack_low),
                               'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
-            implementation = ['{} != NULL'.format(self.abbrev_child)]
+            implementation = ['{0} != NULL'.format(self.abbrev_child)]
             if self.is_list_of:
                 implementation.append('appendAndOwn'
-                                      '({})'.format(self.abbrev_child))
+                                      '({0})'.format(self.abbrev_child))
             else:
                 member = self.class_object['memberName']
-                implementation.append('{}.appendAndOwn'
-                                      '({})'.format(member, self.abbrev_child))
+                implementation.append('{0}.appendAndOwn'
+                                      '({1})'.format(member, self.abbrev_child))
             code.append(self.create_code_block('if', implementation))
-            implementation = ['return {}'.format(self.abbrev_child)]
+            implementation = ['return {0}'.format(self.abbrev_child)]
             code.append(self.create_code_block('line', implementation))
         elif self.is_cpp_api and is_concrete:
             pack_up = self.package.upper()
             pack_low = self.package.lower()
-            implementation = ['{}* {} = NULL'.format(child,
+            implementation = ['{0}* {1} = NULL'.format(child,
                                                      abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             if self.class_object['num_versions'] > 1:
-                line = '{}_CREATE_NS_WITH_VERSION({}ns, get{}Namespaces(), ' \
+                line = '{0}_CREATE_NS_WITH_VERSION({1}ns, get{2}Namespaces(), ' \
                        'getPackageVersion())'.format(pack_up, pack_low,
                                                      global_variables.prefix)
             else:
-                line = '{}_CREATE_NS({}ns, ' \
-                       'get{}Namespaces())'.format(pack_up, pack_low,
+                line = '{0}_CREATE_NS({1}ns, ' \
+                       'get{2}Namespaces())'.format(pack_up, pack_low,
                                                    global_variables.prefix)
             implementation = [line,
-                              '{} = new {}({}ns)'.format(abbrev_child,
+                              '{0} = new {1}({2}ns)'.format(abbrev_child,
                                                          child,
                                                          pack_low),
-                              'delete {}ns'.format(pack_low),
+                              'delete {0}ns'.format(pack_low),
                               'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
-            implementation = ['{} != NULL'.format(abbrev_child)]
+            implementation = ['{0} != NULL'.format(abbrev_child)]
             if self.is_list_of:
                 implementation.append('appendAndOwn'
-                                      '({})'.format(abbrev_child))
+                                      '({0})'.format(abbrev_child))
             else:
                 member = self.class_object['memberName']
-                implementation.append('{}.appendAndOwn'
-                                      '({})'.format(member, abbrev_child))
+                implementation.append('{0}.appendAndOwn'
+                                      '({1})'.format(member, abbrev_child))
             code.append(self.create_code_block('if', implementation))
-            implementation = ['return {}'.format(abbrev_child)]
+            implementation = ['return {0}'.format(abbrev_child)]
             code.append(self.create_code_block('line', implementation))
         else:
             implementation = ['return ({0} != NULL) ? {0}->create{1}() : '
@@ -937,14 +937,14 @@ class ListOfQueryFunctions():
     # function to write get num
     def write_get_num_element_function(self):
         # create comment parts
-        title_line = 'Get the number of {} objects in ' \
-                     'this {}.'.format(self.object_child_name, self.object_name)
+        title_line = 'Get the number of {0} objects in ' \
+                     'this {1}.'.format(self.object_child_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {}, the {} structure to query.'
+            params.append('@param {0}, the {1} structure to query.'
                           .format(self.abbrev_parent, self.object_name))
-        return_lines = ['@return the number of {} objects in '
-                        'this {}.'.format(self.object_child_name,
+        return_lines = ['@return the number of {0} objects in '
+                        'this {1}.'.format(self.object_child_name,
                                           self.object_name)]
         additional = []
 
@@ -952,17 +952,17 @@ class ListOfQueryFunctions():
         arguments = []
         used_c_name = strFunctions.remove_prefix(self.plural)
         if self.is_cpp_api:
-            function = 'getNum{}'.format(used_c_name)
+            function = 'getNum{0}'.format(used_c_name)
         else:
-            function = '{}_getNum{}'.format(self.class_name, used_c_name)
-            arguments.append('{}* {}'.format(self.object_name,
+            function = '{0}_getNum{1}'.format(self.class_name, used_c_name)
+            arguments.append('{0}* {1}'.format(self.object_name,
                                              self.abbrev_parent))
         return_type = 'unsigned int'
 
         if self.is_cpp_api and self.is_list_of:
             implementation = ['return size()']
         elif self.is_cpp_api and not self.is_list_of:
-            implementation = ['return {}.'
+            implementation = ['return {0}.'
                               'size()'.format(self.class_object['memberName'])]
         else:
             implementation = ['return ({0} != NULL) ? {0}->getNum{1}() : '
@@ -996,40 +996,40 @@ class ListOfQueryFunctions():
         # create comment parts
         params = []
         if self.is_cpp_api:
-            title_line = 'Returns the {} from this {}.'.format(loname,
+            title_line = 'Returns the {0} from this {1}.'.format(loname,
                                                                self.object_name)
-            return_lines = ['@return the {} '
-                            'from this {}.'.format(loname, self.object_name)]
+            return_lines = ['@return the {0} '
+                            'from this {1}.'.format(loname, self.object_name)]
         else:
-            title_line = 'Returns a ListOf_t* containing {} objects ' \
-                         'from this {}.'.format(self.object_child_name,
+            title_line = 'Returns a ListOf_t* containing {0} objects ' \
+                         'from this {1}.'.format(self.object_child_name,
                                                 self.object_name)
-            params.append('@param {} the {} structure whose \"{}\" is sought.'
+            params.append('@param {0} the {1} structure whose \"{2}\" is sought.'
                           .format(self.abbrev_parent, self.object_name, loname))
-            return_lines = ['@return the \"{}\" from this {} as a '
+            return_lines = ['@return the \"{0}\" from this {1} as a '
                             'ListOf_t *.'.format(loname, self.object_name)]
         additional = []
 
         # create the function declaration
         name_used = strFunctions.remove_prefix(loname)
         if self.is_cpp_api:
-            function = 'get{}'.format(name_used)
+            function = 'get{0}'.format(name_used)
             arguments = []
             if is_const:
-                return_type = 'const {}*'.format(loname)
+                return_type = 'const {0}*'.format(loname)
             else:
-                return_type = '{}*'.format(loname)
+                return_type = '{0}*'.format(loname)
         else:
-            function = '{}_get{}'.format(self.class_name, name_used)
-            arguments = ['{}* {}'.format(self.object_name,
+            function = '{0}_get{1}'.format(self.class_name, name_used)
+            arguments = ['{0}* {1}'.format(self.object_name,
                                          self.abbrev_parent)]
             if global_variables.is_package:
                 return_type = 'ListOf_t*'
             else:
-                return_type = '{}ListOf_t*'.format(global_variables.prefix)
+                return_type = '{0}ListOf_t*'.format(global_variables.prefix)
         if self.is_cpp_api:
             implementation = ['return '
-                              '&{}'.format(self.class_object['memberName'])]
+                              '&{0}'.format(self.class_object['memberName'])]
             code = [self.create_code_block('line', implementation)]
         else:
             implementation = ['return ({0} != NULL) ? {0}->get{1}() : '

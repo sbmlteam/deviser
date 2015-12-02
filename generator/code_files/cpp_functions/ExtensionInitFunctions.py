@@ -55,7 +55,7 @@ class ExtensionInitFunctions():
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
         self.cap_language = language.upper()
-        self.struct_name = '{}Extension'.format(self.up_package)
+        self.struct_name = '{0}Extension'.format(self.up_package)
 
     ########################################################################
 
@@ -64,16 +64,16 @@ class ExtensionInitFunctions():
     # function to write init
     def write_init_function(self, static=True):
         # create comment parts
-        title_line = 'Initializes {} extension by creating an object of this ' \
-                     'class with the required {}Plugin derived objects and ' \
-                     'registering the object to the {}ExtensionRegistry ' \
+        title_line = 'Initializes {0} extension by creating an object of this ' \
+                     'class with the required {1}Plugin derived objects and ' \
+                     'registering the object to the {2}ExtensionRegistry ' \
                      'class'.format(self.package, self.std_base,
                                     self.cap_language)
         params = []
         return_lines = ['This function is automatically invoked when creating'
-                        'the following global object in {}Extension.'
+                        'the following global object in {0}Extension.'
                         'cpp'.format(self.up_package)]
-        additional = ['static {}ExtensionRegister<{}Extension> {}'
+        additional = ['static {0}ExtensionRegister<{1}Extension> {2}'
                       'ExtensionRegistry;'.format(self.cap_language,
                                                   self.up_package,
                                                   self.package)]
@@ -84,12 +84,12 @@ class ExtensionInitFunctions():
         return_type = 'static void' if static else 'void'
 
         # create the function implementation
-        code = [self.create_code_block('if', ['{}ExtensionRegistry::'
+        code = [self.create_code_block('if', ['{0}ExtensionRegistry::'
                                               'getInstance().isRegistered'
                                               '(getPackageName'
                                               '())'.format(self.cap_language),
                                               'return']),
-                self.create_code_block('line', ['{}Extension {}Extension'
+                self.create_code_block('line', ['{0}Extension {1}Extension'
                                                 ''.format(self.up_package,
                                                           self.package)]),
                 self.create_code_block('blank', []),
@@ -97,15 +97,15 @@ class ExtensionInitFunctions():
                                                 'packageURIs',
                                                 'packageURIs.push_back'
                                                 '(getXmlnsL3V1V1())'])]
-        implementation = ['{}ExtensionPoint {}docExtPoint(\"core\", '
-                          '{}_DOCUMENT)'.format(self.std_base,
+        implementation = ['{0}ExtensionPoint {1}docExtPoint(\"core\", '
+                          '{2}_DOCUMENT)'.format(self.std_base,
                                                 self.language,
                                                 self.cap_language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             tc = query.get_typecode_format(name, self.language)
-            implementation.append('{}ExtensionPoint {}ExtPoint(\"core\", '
-                                  '{})'.format(self.std_base, name.lower(), tc))
+            implementation.append('{0}ExtensionPoint {1}ExtPoint(\"core\", '
+                                  '{2})'.format(self.std_base, name.lower(), tc))
         code.append(self.create_code_block('line', implementation))
         implementation = ['{0}PluginCreator<{1}{2}DocumentPlugin, '
                           '{1}Extension> {3}docPluginCreator({3}docExtPoint, '
@@ -120,20 +120,20 @@ class ExtensionInitFunctions():
                                                         self.up_package,
                                                         name, name.lower()))
         code.append(self.create_code_block('line', implementation))
-        implementation = ['{}Extension.add{}PluginCreator('
-                          '&{}docPluginCreator)'.format(self.package,
+        implementation = ['{0}Extension.add{1}PluginCreator('
+                          '&{2}docPluginCreator)'.format(self.package,
                                                         self.std_base,
                                                         self.language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
-            implementation.append('{}Extension.add{}PluginCreator('
-                                  '&{}PluginCreator)'.format(self.package,
+            implementation.append('{0}Extension.add{1}PluginCreator('
+                                  '&{2}PluginCreator)'.format(self.package,
                                                              self.std_base,
                                                              name.lower()))
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block('line',
-                                           ['int result = {}ExtensionRegistry::'
-                                            'getInstance().addExtension(&{}'
+                                           ['int result = {0}ExtensionRegistry::'
+                                            'getInstance().addExtension(&{1}'
                                             'Extension'
                                             ')'.format(self.cap_language,
                                                        self.package)]))
@@ -165,20 +165,20 @@ class ExtensionInitFunctions():
         additional = []
 
         # create the function declaration
-        arguments = ['{}_t {}'.format(name, abbrev_name)]
-        function = '{}_toString'.format(name)
+        arguments = ['{0}_t {1}'.format(name, abbrev_name)]
+        function = '{0}_toString'.format(name)
         return_type = 'const char*'
 
         # create the function implementation
         if values:
-            implementation = ['int min = {}'.format(values[0]),
-                              'int max = {}'.format(values[-1])]
+            implementation = ['int min = {0}'.format(values[0]),
+                              'int max = {0}'.format(values[-1])]
             code = [dict({'code_type': 'line', 'code': implementation}),
                     self.create_code_block('if', [
                         '{0} < min || {0} > max'.format(abbrev_name),
-                        'return \"(Unknown {} value)\"'.format(name)]),
+                        'return \"(Unknown {0} value)\"'.format(name)]),
                     self.create_code_block('line', [
-                        'return {}[{} - min]'.format(str_name, abbrev_name)])]
+                        'return {0}[{1} - min]'.format(str_name, abbrev_name)])]
         else:
             code = []
         # return the parts
@@ -205,8 +205,8 @@ class ExtensionInitFunctions():
 
         # create the function declaration
         arguments = ['const char* code']
-        function = '{}_fromString'.format(name)
-        return_type = '{}_t'.format(name)
+        function = '{0}_fromString'.format(name)
+        return_type = '{0}_t'.format(name)
 
         # create the function implementation
         if values:
@@ -214,14 +214,14 @@ class ExtensionInitFunctions():
                               '({0}[0])'.format(str_name),
                               'std::string type(code)']
             code = [dict({'code_type': 'line', 'code': implementation})]
-            if_code = self.create_code_block('if', ['type == {}'
+            if_code = self.create_code_block('if', ['type == {0}'
                                                     '[i]'.format(str_name),
-                                                    'return ({}_t)'
+                                                    'return ({0}_t)'
                                                     '(i)'.format(name)])
             code.append(self.create_code_block('for', ['int i = 0; i < size; '
                                                        'i++', if_code]))
             code.append(self.create_code_block
-                        ('line', ['return {}'.format(values[-1])]))
+                        ('line', ['return {0}'.format(values[-1])]))
         else:
             code = []
 
@@ -249,14 +249,14 @@ class ExtensionInitFunctions():
         additional = []
 
         # create the function declaration
-        arguments = ['{}_t {}'.format(name, abbrev_name)]
-        function = '{}_isValid'.format(name)
+        arguments = ['{0}_t {1}'.format(name, abbrev_name)]
+        function = '{0}_isValid'.format(name)
         return_type = 'int'
 
         # create the function implementation
         if values:
-            implementation = ['int min = {}'.format(values[0]),
-                              'int max = {}'.format(values[-1])]
+            implementation = ['int min = {0}'.format(values[0]),
+                              'int max = {0}'.format(values[-1])]
             code = [dict({'code_type': 'line', 'code': implementation}),
                     self.create_code_block
                     ('if_else',
@@ -289,7 +289,7 @@ class ExtensionInitFunctions():
 
         # create the function declaration
         arguments = ['const char* code']
-        function = '{}_isValidString'.format(name)
+        function = '{0}_isValidString'.format(name)
         return_type = 'int'.format(name)
 
         # create the function implementation

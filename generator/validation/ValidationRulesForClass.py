@@ -58,7 +58,7 @@ class ValidationRulesForClass():
         self.start_b = '{'
         self.end_b = '}'
 
-        self.formatted_name = '\{}'.format(object_desc['name'])
+        self.formatted_name = '\{0}'.format(object_desc['name'])
         self.indef = strFunctions.get_indefinite(object_desc['name'])
         self.indef_u = strFunctions.upper_first(self.indef)
         self.lower_name = strFunctions.lower_first(self.name)
@@ -160,31 +160,31 @@ class ValidationRulesForClass():
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
-            text = 'The value of the attribute {} of {} {} object must be ' \
-                   'the identifier of an existing \{} object defined in the ' \
+            text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                   'the identifier of an existing \{3} object defined in the ' \
                    'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
             rule_type = ref_name
         elif att_type == 'string' or att_type == 'IDREF':
-            text = 'The attribute {} on {} {} must have a value of data ' \
-                   'type {}.'\
+            text = 'The attribute {0} on {1} {2} must have a value of data ' \
+                   'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('string'))
         elif att_type == 'int' or att_type == 'uint':
-            text = 'The attribute {} on {} {} must have a value of data ' \
-                   'type {}.'\
+            text = 'The attribute {0} on {1} {2} must have a value of data ' \
+                   'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('integer'))
             rule_type = 'Integer' if att_type == 'int' else 'UnInteger'
         elif att_type == 'double':
-            text = 'The attribute {} on {} {} must have a value of data ' \
-                   'type {}.'\
+            text = 'The attribute {0} on {1} {2} must have a value of data ' \
+                   'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('double'))
             rule_type = 'Double'
         elif att_type == 'boolean' or att_type == 'bool':
-            text = 'The attribute {} on {} {} must have a value of data ' \
-                   'type {}.'\
+            text = 'The attribute {0} on {1} {2} must have a value of data ' \
+                   'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('boolean'))
             rule_type = 'Boolean'
@@ -200,10 +200,10 @@ class ValidationRulesForClass():
                                            self.formatted_name,
                                            strFunctions.wrap_enum(enum_name),
                                            enum_values)
-            rule_type = '{}Enum'.format(attribute['element'])
+            rule_type = '{0}Enum'.format(attribute['element'])
         elif att_type == 'array':
-            text = 'The value of the attribute {} of {} {} object must ' \
-                   'be an array of values of type {}.'\
+            text = 'The value of the attribute {0} of {1} {2} object must ' \
+                   'be an array of values of type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token(attribute['element']))
         elif att_type == 'element' and attribute['element'] == 'RelAbsVector':
@@ -215,19 +215,19 @@ class ValidationRulesForClass():
                    'coordinates is encouraged, but not required.'\
                 .format(name, self.indef, self.formatted_name)
         else:
-            text = 'FIXME: Encountered an unknown attribute type {} in ' \
+            text = 'FIXME: Encountered an unknown attribute type {0} in ' \
                    'ValidationRulesForClass'\
                 .format(att_type)
 #            global_variables.code_returned = \
 #                global_variables.return_codes['unknown type used']
 
-        ref = '{}, {}.'\
+        ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attributes allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
-        tc = '{}{}{}MustBe{}'.format(self.up_package, self.name, att_name,
+        short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, self.name, att_name,
                                      rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -246,7 +246,7 @@ class ValidationRulesForClass():
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{}{}AllowedCoreAttributes'.format(self.up_package, self.name)
+            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package, self.name)
         else:
             lo_name = strFunctions.plural(lo_child['element'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -255,14 +255,14 @@ class ValidationRulesForClass():
                 .format(strFunctions.get_element_name(lo_child),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
-            ref = '{}, {}.'\
+            ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{}{}LO{}AllowedCoreAttributes'.format(self.up_package,
+            tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                         self.name, lo_name)
-        short = 'Core attributes allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
+        short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -279,22 +279,22 @@ class ValidationRulesForClass():
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{}{}AllowedCoreElements'.format(self.up_package, self.name)
+            tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
         else:
             loname = strFunctions.get_element_name(lo_child)
             lo_name = strFunctions.plural(lo_child['element'])
             text = 'Apart from the general notes and annotations subobjects ' \
-                   'permitted on all SBML objects, a {} container object ' \
-                   'may only contain \{} objects.'\
+                   'permitted on all SBML objects, a {0} container object ' \
+                   'may only contain \{1} objects.'\
                 .format(loname, lo_child['element'])
-            ref = '{}, {}.'\
+            ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{}{}LO{}AllowedElements'.format(self.up_package, self.name,
+            tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
                                                   lo_name)
-        short = 'Core elements allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
+        short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -305,28 +305,28 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required(self, self.reqd_att)
         opt = self.parse_optional(self, self.opt_att)
-        no_other_statement = 'No other attributes from the SBML Level 3 {} ' \
-                             'namespaces are permitted on {} {} object. '\
+        no_other_statement = 'No other attributes from the SBML Level 3 {0} ' \
+                             'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
-            text = '{} {} object must have {}. {}'\
+            text = '{0} {1} object must have {2}. {3}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, no_other_statement)
         elif len(reqd) == 0 and len(opt) > 0:
-            text = '{} {} object may have {}. {}'\
+            text = '{0} {1} object may have {2}. {3}'\
                 .format(self.indef_u, self.formatted_name,
                         opt, no_other_statement)
         else:
-            text = '{} {} object must have {}, and may have {}. {}'\
+            text = '{0} {1} object must have {2}, and may have {3}. {4}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
-        ref = '{}, {}.'\
+        ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attributes allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
-        tc = '{}{}AllowedAttributes'.format(self.up_package, self.name)
+        short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -337,28 +337,28 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required_elements(self.reqd_elem)
         opt = self.parse_optional_elements(self.opt_elem)
-        no_other_statement = 'No other elements from the SBML Level 3 {} ' \
-                             'namespaces are permitted on {} {} object. '\
+        no_other_statement = 'No other elements from the SBML Level 3 {0} ' \
+                             'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
-            text = '{} {} object must contain {}. {}'\
+            text = '{0} {1} object must contain {2}. {3}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, no_other_statement)
         elif len(reqd) == 0 and len(opt) > 0:
-            text = '{} {} object may contain {}. {}'\
+            text = '{0} {1} object may contain {2}. {3}'\
                 .format(self.indef_u, self.formatted_name,
                         opt, no_other_statement)
         else:
-            text = '{} {} object must contain {}, and may contain {}. {}'\
+            text = '{0} {1} object must contain {2}, and may contain {3}. {4}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
-        ref = '{}, {}.'\
+        ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Elements allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
-        tc = '{}{}AllowedElements'.format(self.up_package, self.name)
+        short = 'Elements allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}{1}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -371,29 +371,29 @@ class ValidationRulesForClass():
             obj = 'objects'
             pred = 'these'
             i = 0
-            elements = '{}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_element_name(
                 self.opt_child_lo_elem[i]))
             for i in range(1, number-1):
-                elements += ', {}'.format(strFunctions.get_element_name(
+                elements += ', {0}'.format(strFunctions.get_element_name(
                     self.opt_child_lo_elem[i]))
-            elements += ' and {}'.format(strFunctions.get_element_name(
+            elements += ' and {0}'.format(strFunctions.get_element_name(
                 self.opt_child_lo_elem[i+1]))
         else:
             obj = 'object'
             pred = 'this'
-            elements = '{}'.format(strFunctions.get_element_name(
+            elements = '{0}'.format(strFunctions.get_element_name(
                 self.opt_child_lo_elem[0]))
 
         text = 'The {0} sub{1} on {2} {3} object is optional, but if ' \
                'present, {4} container {1} must not be empty.'\
             .format(elements, obj, self.indef, self.formatted_name, pred)
-        ref = '{}, {}.'\
+        ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'No Empty ListOf elements allowed on <{}>.'.format(self.lower_name)
-        lib_ref = 'L3V1 {} V1 Section'.format(self.up_package)
-        tc = '{}{}EmptyLOElements'.format(self.up_package, self.name, )
+        short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -408,20 +408,20 @@ class ValidationRulesForClass():
         if num == 0:
             return ''
         elif num == 1:
-            return 'the required attribute {}'\
+            return 'the required attribute {0}'\
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
                                                 self.package))
         else:
-            required_statement = 'the required attributes {}'\
+            required_statement = 'the required attributes {0}'\
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
                                                 self.package))
             i = 1
             while i < num - 1:
-                required_statement += ', {}'\
+                required_statement += ', {0}'\
                     .format(strFunctions.wrap_token(attributes[i]['texname'],
                                                     self.package))
                 i += 1
-            required_statement += ' and {}'\
+            required_statement += ' and {0}'\
                 .format(strFunctions.wrap_token(attributes[i]['texname'],
                                                 self.package))
             return required_statement
@@ -433,20 +433,20 @@ class ValidationRulesForClass():
         if num == 0:
             return ''
         elif num == 1:
-            return 'the optional attribute {}' \
+            return 'the optional attribute {0}' \
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
                                                 self.package))
         else:
-            optional_statement = 'the optional attributes {}' \
+            optional_statement = 'the optional attributes {0}' \
                 .format(strFunctions.wrap_token(attributes[0]['texname'],
                                                 self.package))
             i = 1
             while i < num - 1:
-                optional_statement += ', {}' \
+                optional_statement += ', {0}' \
                     .format(strFunctions.wrap_token(attributes[i]['texname'],
                                                     self.package))
                 i += 1
-            optional_statement += ' and {}' \
+            optional_statement += ' and {0}' \
                 .format(strFunctions.wrap_token(attributes[i]['texname'],
                                                 self.package))
             return optional_statement
@@ -458,17 +458,17 @@ class ValidationRulesForClass():
         if num == 0:
             return ''
         elif num == 1:
-            return 'one and only one instance of the {} element'\
+            return 'one and only one instance of the {0} element'\
                 .format(strFunctions.get_element_name(attributes[0]))
         else:
-            required_statement = 'one and only one instance of each of the {}'\
+            required_statement = 'one and only one instance of each of the {0}'\
                 .format(strFunctions.get_element_name(attributes[0]))
             i = 1
             while i < num - 1:
-                required_statement += ', {}'\
+                required_statement += ', {0}'\
                     .format(strFunctions.get_element_name(attributes[i]))
                 i += 1
-            required_statement += ' and \{} elements'\
+            required_statement += ' and \{0} elements'\
                 .format(strFunctions.get_element_name(attributes[i]))
             return required_statement
 
@@ -479,17 +479,17 @@ class ValidationRulesForClass():
         if num == 0:
             return ''
         elif num == 1:
-            return 'one and only one instance of the {} element' \
+            return 'one and only one instance of the {0} element' \
                 .format(strFunctions.get_element_name(attributes[0]))
         else:
-            optional_statement = 'one and only one instance of each of the {}' \
+            optional_statement = 'one and only one instance of each of the {0}' \
                 .format(strFunctions.get_element_name(attributes[0]))
             i = 1
             while i < num - 1:
-                optional_statement += ', {}' \
+                optional_statement += ', {0}' \
                     .format(strFunctions.get_element_name(attributes[i]))
                 i += 1
-            optional_statement += ' and {} elements'\
+            optional_statement += ' and {0} elements'\
                 .format(strFunctions.get_element_name(attributes[i]))
             return optional_statement
 
@@ -537,14 +537,14 @@ class ValidationRulesForClass():
                 this_enum = enums[i]
                 break
         if this_enum is None:
-            return 'FIXME: Failed to find the enum {} in parse enum values'\
+            return 'FIXME: Failed to find the enum {0} in parse enum values'\
                 .format(enum)
         else:
             i = 0
             num_values = len(this_enum['values'])
-            values = '\'{}\''.format(this_enum['values'][i]['value'])
+            values = '\'{0}\''.format(this_enum['values'][i]['value'])
             for i in range(1, num_values-1):
-                values += ', \'{}\''.format(this_enum['values'][i]['value'])
+                values += ', \'{0}\''.format(this_enum['values'][i]['value'])
             if num_values > 1:
-                values += ' or \'{}\''.format(this_enum['values'][i+1]['value'])
+                values += ' or \'{0}\''.format(this_enum['values'][i+1]['value'])
             return values

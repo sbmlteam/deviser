@@ -14,7 +14,7 @@ path_to_tests = ''
 
 def get_filename(name):
     global path_to_tests
-    fname = '{}.xml'.format(name)
+    fname = '{0}.xml'.format(name)
     filename = os.path.join(path_to_tests, 'test_xml_files', fname)
     return filename
 
@@ -69,25 +69,25 @@ def run_cmake_test(name):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:CMake files'.format(name))
+    print('Testing {0}:CMake files'.format(name))
     print('====================================================')
     generate_cmake_files(filename)
-    cmake = '{}-package.cmake'.format(name)
-    correct_file = '.\\test-cmake\\{}'.format(cmake)
-    temp_file = '.\\temp\\{}'.format(cmake)
+    cmake = '{0}-package.cmake'.format(name)
+    correct_file = '.\\test-cmake\\{0}'.format(cmake)
+    temp_file = '.\\temp\\{0}'.format(cmake)
     if os.path.exists(correct_file):
-        print('{}'.format(cmake))
+        print('{0}'.format(cmake))
         fail = compare_files(correct_file, temp_file)
     else:
-        print('unable to find {}'.format(cmake))
+        print('unable to find {0}'.format(cmake))
     print('')
-    correct_file = '.\\test-cmake\\src\\{}'.format(cmake)
-    temp_file = '.\\temp\\src\\{}'.format(cmake)
+    correct_file = '.\\test-cmake\\src\\{0}'.format(cmake)
+    temp_file = '.\\temp\\src\\{0}'.format(cmake)
     if os.path.exists(correct_file):
-        print('{}'.format(cmake))
+        print('{0}'.format(cmake))
         fail += compare_files(correct_file, temp_file)
     else:
-        print('unable to find src//{}'.format(cmake))
+        print('unable to find src//{0}'.format(cmake))
     print('')
 
     return fail
@@ -97,26 +97,26 @@ def run_register_test(name):
     filename = get_filename(name)
     fail = 0
     print('====================================================')
-    print('Testing {}:CMake register files'.format(name))
+    print('Testing {0}:CMake register files'.format(name))
     print('====================================================')
     generate_cmake_register_files(filename)
-    cmake = '{}-register.h'.format(name)
-    correct_file = '.\\test-cmake\\{}'.format(cmake)
-    temp_file = '.\\temp\\{}'.format(cmake)
+    cmake = '{0}-register.h'.format(name)
+    correct_file = '.\\test-cmake\\{0}'.format(cmake)
+    temp_file = '.\\temp\\{0}'.format(cmake)
     if os.path.exists(correct_file):
-        print('{}'.format(cmake))
+        print('{0}'.format(cmake))
         fail = compare_files(correct_file, temp_file)
     else:
-        print('unable to find {}'.format(cmake))
+        print('unable to find {0}'.format(cmake))
     print('')
-    cmake = '{}-register.cxx'.format(name)
-    correct_file = '.\\test-cmake\\{}'.format(cmake)
-    temp_file = '.\\temp\\{}'.format(cmake)
+    cmake = '{0}-register.cxx'.format(name)
+    correct_file = '.\\test-cmake\\{0}'.format(cmake)
+    temp_file = '.\\temp\\{0}'.format(cmake)
     if os.path.exists(correct_file):
-        print('{}'.format(cmake))
+        print('{0}'.format(cmake))
         fail += compare_files(correct_file, temp_file)
     else:
-        print('unable to find src//{}'.format(cmake))
+        print('unable to find src//{0}'.format(cmake))
     print('')
 
     return fail
@@ -143,7 +143,7 @@ def main():
     if fail > 0:
         print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         print('CMAKE FAILS')
-        print('Check {} fails'.format(fail))
+        print('Check {0} fails'.format(fail))
         for name in fails:
             print(name)
 

@@ -52,10 +52,10 @@ class PackageFile():
         self.fileout = BaseCMakeFile.BaseCMakeFile(name)
 
         if src:
-            self.fileout.brief_description = 'Src CMake file for {} ' \
+            self.fileout.brief_description = 'Src CMake file for {0} ' \
                                              'package'.format(self.package)
         else:
-            self.fileout.brief_description = 'Top-level CMake file for {} ' \
+            self.fileout.brief_description = 'Top-level CMake file for {0} ' \
                                              'package'.format(self.package)
 
         self.cap_package = self.package.upper()
@@ -90,10 +90,10 @@ class PackageFile():
                                                              self.open_br,
                                                              self.close_br))
         self.fileout.skip_line()
-        self.fileout.write_line('if (ENABLE_{})'.format(self.cap_package))
+        self.fileout.write_line('if (ENABLE_{0})'.format(self.cap_package))
         self.fileout.up_indent()
         self.fileout.write_line('add_definitions(-DUSE_'
-                                '{})'.format(self.cap_package))
+                                '{0})'.format(self.cap_package))
         self.fileout.write_line_verbatim('set(LIB{0}_PACKAGE_INCLUDES ${1}'
                                          'LIB{0}_PACKAGE_INCLUDES{2} \"LIB{0}'
                                          '_HAS_PACKAGE_{3}'
@@ -102,30 +102,30 @@ class PackageFile():
                                                       self.close_br,
                                                       self.cap_package))
         self.fileout.write_line_verbatim('list(APPEND SWIG_EXTRA_ARGS -DUSE'
-                                         '_{})'.format(self.cap_package))
+                                         '_{0})'.format(self.cap_package))
         self.fileout.write_line_verbatim('list(APPEND SWIG_SWIGDOCDEFINES '
                                          '--define USE_'
-                                         '{})'.format(self.cap_package))
+                                         '{0})'.format(self.cap_package))
         self.fileout.down_indent()
         self.fileout.write_line('endif()')
         self.fileout.skip_line()
 
     def write_src_file(self):
         self.fileout.skip_line()
-        self.fileout.write_line('if (ENABLE_{})'.format(self.cap_package))
+        self.fileout.write_line('if (ENABLE_{0})'.format(self.cap_package))
         self.fileout.skip_line()
-        self.fileout.write_line_verbatim('include(${}LIB{}_ROOT_SOURCE_DIR{}/'
-                                         '{}-package.'
+        self.fileout.write_line_verbatim('include(${0}LIB{1}_ROOT_SOURCE_DIR{2}/'
+                                         '{3}-package.'
                                          'cmake)'.format(self.open_br,
                                                          self.cap_language,
                                                          self.close_br,
                                                          self.package))
         self.fileout.skip_line()
         self.fileout.write_comment_line('build up sources')
-        self.fileout.write_line('set({}_SOURCES)'.format(self.cap_package))
+        self.fileout.write_line('set({0}_SOURCES)'.format(self.cap_package))
         self.fileout.skip_line()
         self.fileout.write_comment_line('go through all directories')
-        self.fileout.write_line('foreach(dir common extension {} validator '
+        self.fileout.write_line('foreach(dir common extension {0} validator '
                                 'validator/constraints)'.format(self.language))
         self.fileout.up_indent()
         self.fileout.skip_line()
@@ -181,13 +181,13 @@ class PackageFile():
         self.fileout.write_line('endforeach()')
         self.fileout.skip_line()
         self.fileout.write_comment_line('create source group for IDEs')
-        self.fileout.write_line_verbatim('source_group({}_package FILES ${}{}_'
-                                         'SOURCES{})'.format(self.package,
+        self.fileout.write_line_verbatim('source_group({0}_package FILES ${1}{2}_'
+                                         'SOURCES{3})'.format(self.package,
                                                              self.open_br,
                                                              self.cap_package,
                                                              self.close_br))
         self.fileout.skip_line()
-        self.fileout.write_comment_line('add {} sources to {} '
+        self.fileout.write_comment_line('add {0} sources to {1} '
                                         'sources'.format(self.package,
                                                          self.cap_language))
         self.fileout.write_line_verbatim('SET(LIB{3}_SOURCES ${0}LIB{3}_SOURCES'

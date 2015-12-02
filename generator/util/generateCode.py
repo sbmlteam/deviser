@@ -96,7 +96,7 @@ def generate_package_code(name, language, overwrite, ob):
 
 
 def generate_cmake_files(name, ob):
-    os.chdir('{}'.format(name))
+    os.chdir('{0}'.format(name))
     this_dir = os.getcwd()
 
     bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
@@ -230,9 +230,9 @@ def generate_other_library_code_files(name, ob):
 def populate_package_directories(name, lang):
     global directories
     sep = os.sep
-    directories = ['{}'.format(name),
-                   '{}{}examples'.format(name, sep),
-                   '{}{}src'.format(name, sep),
+    directories = ['{0}'.format(name),
+                   '{0}{1}examples'.format(name, sep),
+                   '{0}{1}src'.format(name, sep),
                    '{0}{1}src{1}bindings'.format(name, sep),
                    '{0}{1}src{1}bindings{1}csharp'.format(name, sep),
                    '{0}{1}src{1}bindings{1}java'.format(name, sep),
@@ -264,9 +264,9 @@ def populate_package_directories(name, lang):
 def populate_other_library_directories(name, lang):
     global directories
     sep = os.sep
-    directories = ['{}'.format(name),
-                   '{}{}examples'.format(name, sep),
-                   '{}{}src'.format(name, sep),
+    directories = ['{0}'.format(name),
+                   '{0}{1}examples'.format(name, sep),
+                   '{0}{1}src'.format(name, sep),
                    '{0}{1}src{1}{2}'.format(name, sep, lang)]
 
 

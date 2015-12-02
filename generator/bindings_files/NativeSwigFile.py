@@ -65,9 +65,9 @@ class NativeSwigFile():
         self.cap_language = global_variables.language.upper()
         self.base = global_variables.std_base
 
-        self.ext_dir = '{}/packages/{}/extension/'.format(self.language,
+        self.ext_dir = '{0}/packages/{1}/extension/'.format(self.language,
                                                           self.package)
-        self.common_dir = '{}/packages/{}/common/'.format(self.language,
+        self.common_dir = '{0}/packages/{1}/common/'.format(self.language,
                                                           self.package)
         self.base_dir = '{0}/packages/{1}/{0}/'.format(self.language,
                                                        self.package)
@@ -76,16 +76,16 @@ class NativeSwigFile():
 
     def write_swig_header_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
         self.write_includes('#')
         self.fileout.skip_line()
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     def write_swig_interface_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
         self.write_remove_objects()
         self.fileout.skip_line()
@@ -96,7 +96,7 @@ class NativeSwigFile():
         self.fileout.skip_line()
         self.write_includes('%')
         self.fileout.skip_line()
-        self.fileout.write_line('#endif /* USE_{} */'.format(self.cap_package))
+        self.fileout.write_line('#endif /* USE_{0} */'.format(self.cap_package))
         self.fileout.skip_line()
 
     #########################################################################
@@ -104,13 +104,13 @@ class NativeSwigFile():
     # Function used
     
     def write_includes(self, sep):
-        self.write_include_line(sep, '{}Extension'.format(self.up_package),
+        self.write_include_line(sep, '{0}Extension'.format(self.up_package),
                                 self.ext_dir)
         for plugin in self.plugins:
-            name = '{}{}Plugin'.format(self.up_package, plugin['sbase'])
+            name = '{0}{1}Plugin'.format(self.up_package, plugin['sbase'])
             self.write_include_line(sep, name, self.ext_dir)
         if sep == '#':
-            self.write_include_line(sep, '{}Extension'
+            self.write_include_line(sep, '{0}Extension'
                                          'Types'.format(self.up_package),
                                     self.common_dir)
         for element in self.elements:
@@ -125,10 +125,10 @@ class NativeSwigFile():
         for element in self.elements:
             if element['hasListOf']:
                 self.fileout.write_line('%newobject '
-                                        'remove{};'.format(element['name']))
+                                        'remove{0};'.format(element['name']))
 
     def write_include_line(self, sep, ctype, my_dir):
-        self.fileout.write_line_verbatim('{}include <{}{}.h>'.format(sep,
+        self.fileout.write_line_verbatim('{0}include <{1}{2}.h>'.format(sep,
                                                                      my_dir,
                                                                      ctype))
 

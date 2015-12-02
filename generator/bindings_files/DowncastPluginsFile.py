@@ -57,7 +57,7 @@ class DowncastPluginsFile():
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
             self.fileout.brief_description = 'Casting to most specific ' \
                                              'plugins object for ' \
-                                             '{}'.format(binding)
+                                             '{0}'.format(binding)
 
         self.cap_language = global_variables.language.upper()
         self.plugins = plugins
@@ -69,8 +69,8 @@ class DowncastPluginsFile():
 
     def write_binding_specific_cpp_code(self):
         self.fileout.skip_line(2)
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
-        line = 'if (pkgName == \"{}\")'.format(self.package)
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
+        line = 'if (pkgName == \"{0}\")'.format(self.package)
         self.fileout.write_line(line)
         self.fileout.write_line('{')
         self.fileout.up_indent()
@@ -79,7 +79,7 @@ class DowncastPluginsFile():
         self.fileout.down_indent()
         self.fileout.write_line('}')
         self.fileout.skip_line()
-        self.fileout.write_line('#endif // USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#endif // USE_{0}'.format(self.cap_package))
         self.fileout.skip_line()
 
     ########################################################################
@@ -90,9 +90,9 @@ class DowncastPluginsFile():
             name = plugin['sbase'].upper()
             if len(line) > 0:
                 line.append('else if')
-            line.append('sb->getTypeCode() == {}_{}'.format(self.cap_language,
+            line.append('sb->getTypeCode() == {0}_{1}'.format(self.cap_language,
                                                             name))
-            line.append('return SWIGTYPE_p_{}{}Plugin'.format(self.up_package,
+            line.append('return SWIGTYPE_p_{0}{1}Plugin'.format(self.up_package,
                                                               plugin['sbase']))
         if len(self.plugins) == 0:
             code = self.create_code_block('blank', [])

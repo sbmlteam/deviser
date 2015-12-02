@@ -268,7 +268,7 @@ class BaseFile:
         tabs = ''
         for i in range(0, int(self.num_tabs)):
             tabs += '  '
-        self.file_out.write('\n{}{} @cond doxygen{}Internal {}\n\n'
+        self.file_out.write('\n{0}{1} @cond doxygen{2}Internal {3}\n\n'
                             .format(tabs, self.comment_start,
                                     self.library_name,
                                     self.comment_end))
@@ -412,15 +412,15 @@ class BaseFile:
                                                        fullname,
                                                        self.package.lower())
         self.write_blank_comment_line()
-        self.write_comment_line('@class {}'.format(self.class_name))
+        self.write_comment_line('@class {0}'.format(self.class_name))
         if extension:
-            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class '
-                                    'for the &ldquo;{1}&rdquo; package.'
-                                    ''.format(self.open_br,
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class'
+                                    ' for the &ldquo;{1}&rdquo; '
+                                    'package.'.format(self.open_br,
                                               self.package.lower(),
                                               self.close_br))
             self.write_blank_comment_line()
-            self.write_comment_line('@class {}PkgNamespaces'
+            self.write_comment_line('@class {0}PkgNamespaces'
                                     ''.format(up_package))
             self.write_comment_line('@sbmlbrief{0}{1}{2} SBMLNamespaces '
                                     'extension for the &ldquo;{1}&rdquo; '
@@ -430,8 +430,8 @@ class BaseFile:
                                               self.close_br))
         elif plugin:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Extension of '
-                                    '{3} by the &ldquo;{1}&rdquo package'
-                                    '.'.format(self.open_br,
+                                    '{3} by the &ldquo;{1}&rdquo; '
+                                    'package.'.format(self.open_br,
                                                self.package.lower(),
                                                self.close_br,
                                                self.class_object['sbase']))
@@ -447,13 +447,13 @@ class BaseFile:
             self.write_comment_line('@copydetails doc_common_intro_'
                                     'package_validators')
             self.write_blank_comment_line()
-            self.write_comment_line('{}'.format(validator_class_comment))
+            self.write_comment_line('{0}'.format(validator_class_comment))
             self.write_blank_comment_line()
             self.write_comment_line('@copydetails doc_section_package_'
                                     'validators_general_info')
         else:
-            self.write_comment_line('@sbmlbrief{}{}{} TODO:'
-                                    '{}'.format(self.open_br,
+            self.write_comment_line('@sbmlbrief{0}{1}{2} TODO:'
+                                    '{3}'.format(self.open_br,
                                                 self.package.lower(),
                                                 self.close_br,
                                                 self.brief_description))

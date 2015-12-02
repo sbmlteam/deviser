@@ -66,7 +66,7 @@ class ValidatorClassFunctions():
             title_line = ''
             params = []
         else:
-            title_line = 'Creates a new {} object for the given category of ' \
+            title_line = 'Creates a new {0} object for the given category of ' \
                          'validation.'.format(self.class_name)
             params = ['@param category code indicating the type of validation '
                       'that this validator will perform']
@@ -74,17 +74,17 @@ class ValidatorClassFunctions():
         additional = []
 
         # create the function declaration
-        function = '{}'.format(self.class_name)
+        function = '{0}'.format(self.class_name)
         return_type = ''
         if name == 'visitor':
-            arguments = ['{}Validator& v'.format(self.up_package),
+            arguments = ['{0}Validator& v'.format(self.up_package),
                          'const Model& m']
             constructor_args = [': v(v)', ', m(m)']
             arguments_no_defaults = arguments
         else:
             arguments = ['{0}ErrorCategory_t category = '
                          'LIB{0}_CAT_{0}'.format(self.cap_language)]
-            arguments_no_defaults = ['{}ErrorCategory_t '
+            arguments_no_defaults = ['{0}ErrorCategory_t '
                                      'category'.format(self.cap_language)]
             constructor_args = [': Validator(category)']
         code = []
@@ -113,13 +113,13 @@ class ValidatorClassFunctions():
 
     def write_destructor(self, constraints=False):
         # create comment parts
-        title_line = 'Destroys this {} object.'.format(self.class_name)
+        title_line = 'Destroys this {0} object.'.format(self.class_name)
         params = []
         return_lines = []
         additional = []
 
         # create the function declaration
-        function = '~{}'.format(self.class_name)
+        function = '~{0}'.format(self.class_name)
         return_type = ''
         arguments = []
         code = []
@@ -133,7 +133,7 @@ class ValidatorClassFunctions():
                                                    ['it != ptrMap.end()',
                                                     nested_if, '++it']))
             else:
-                line = ['delete m{}Constraints'.format(self.up_package)]
+                line = ['delete m{0}Constraints'.format(self.up_package)]
                 code = [self.create_code_block('line', line)]
 
         # return the parts
@@ -155,10 +155,10 @@ class ValidatorClassFunctions():
 
     def write_init_function(self):
         # create comment parts
-        title_line = 'Initializes this {} object.'.format(self.class_name)
+        title_line = 'Initializes this {0} object.'.format(self.class_name)
         params = []
         return_lines = []
-        additional = ['When creating a subclass of {}, override this method '
+        additional = ['When creating a subclass of {0}, override this method '
                       'to add your own validation '
                       'code.'.format(self.class_name)]
 
@@ -188,7 +188,7 @@ class ValidatorClassFunctions():
     def write_add_constraint_function(self):
         # create comment parts
         title_line = 'Adds the given VConstraint object to this ' \
-                     '{}.'.format(self.class_name)
+                     '{0}.'.format(self.class_name)
         params = ['@param c the VConstraint (\"validator constraint\") object '
                   'to add.']
         return_lines = []
@@ -200,7 +200,7 @@ class ValidatorClassFunctions():
         arguments = ['VConstraint* c']
         code = []
         if not self.is_header:
-            line = ['m{}Constraints->add(c)'.format(self.up_package)]
+            line = ['m{0}Constraints->add(c)'.format(self.up_package)]
             code = [self.create_code_block('line', line)]
 
         # return the parts
@@ -224,11 +224,11 @@ class ValidatorClassFunctions():
         # create comment parts
         if object_type == 'doc':
             title_line = 'Validates the given ' \
-                         '{}'.format(global_variables.document_class)
-            params = ['@param d the {} object to be '
+                         '{0}'.format(global_variables.document_class)
+            params = ['@param d the {0} object to be '
                       'validated.'.format(global_variables.document_class)]
         else:
-            title_line = 'Validates the {} located at the given ' \
+            title_line = 'Validates the {0} located at the given ' \
                          'filename'.format(global_variables.document_class)
             params = ['@param filename, the path to the file to be read '
                       'and validated']
@@ -241,7 +241,7 @@ class ValidatorClassFunctions():
         function = 'validate'
         return_type = 'unsigned int'
         if object_type == 'doc':
-            arguments = ['const {}& d'.format(global_variables.document_class)]
+            arguments = ['const {0}& d'.format(global_variables.document_class)]
         else:
             arguments = ['const std::string& filename']
         code = []
@@ -251,7 +251,7 @@ class ValidatorClassFunctions():
             nested_if = self.create_code_block('if', ['plugin != NULL',
                                                       'plugin->accept(vv)'])
             lines = ['m != NULL',
-                     '{}ValidatingVisitor vv(*this, '
+                     '{0}ValidatingVisitor vv(*this, '
                      '*m)'.format(self.up_package),
                      'const {0}ModelPlugin* plugin = static_cast<const '
                      '{0}ModelPlugin*>(m->getPlugin(\"{1}\")'
@@ -265,8 +265,8 @@ class ValidatorClassFunctions():
                                                ['return (unsigned int)'
                                                 '(mFailures.size())']))
         elif not self.is_header and object_type != 'doc':
-            line = ['{}Reader  reader'.format(self.cap_language),
-                    '{}* d = reader.read{}'
+            line = ['{0}Reader  reader'.format(self.cap_language),
+                    '{0}* d = reader.read{1}'
                     '(filename)'.format(global_variables.document_class,
                                         self.cap_language)]
             code = [self.create_code_block('line', line),
@@ -388,7 +388,7 @@ class ValidatorClassFunctions():
     def write_apply_to_function(self):
         # create comment parts
         title_line = 'Applies all Constraints in this ConstraintSet to the ' \
-                     'given {} object of type T. Constraint violations are ' \
+                     'given {0} object of type T. Constraint violations are ' \
                      'logged to Validator.'.format(self.cap_language)
         params = []
         return_lines = []
@@ -459,7 +459,7 @@ class ValidatorClassFunctions():
         code = [self.create_code_block('line', line)]
         line = 'ptrMap.insert(pair<VConstraint*, bool>(c, true))'
         code.append(self.create_code_block('line', [line]))
-        name = '{}'.format(global_variables.document_class)
+        name = '{0}'.format(global_variables.document_class)
         block = self.create_if_add_constraint_block(name)
         code.append(block)
         block = self.create_if_add_constraint_block('Model')
@@ -482,7 +482,7 @@ class ValidatorClassFunctions():
                      'implementation': code})
 
     def create_if_add_constraint_block(self, name):
-        lines = ['dynamic_cast< TConstraint<{}>* >(c) != NULL'.format(name),
+        lines = ['dynamic_cast< TConstraint<{0}>* >(c) != NULL'.format(name),
                  'm{0}.add(static_cast< TConstraint<{0}>* >(c) )'.format(name),
                  'return']
         return self.create_code_block('if', lines)
@@ -501,10 +501,10 @@ class ValidatorClassFunctions():
         # create the function declaration
         function = 'visit'
         return_type = 'bool'
-        arguments = ['const {}& x'.format(name)]
-        line = ['v.m{}Constraints->m{}.applyTo(m, x)'.format(self.up_package,
+        arguments = ['const {0}& x'.format(name)]
+        line = ['v.m{0}Constraints->m{1}.applyTo(m, x)'.format(self.up_package,
                                                              name),
-                'return !v.m{}Constraints->m{}.empty()'.format(self.up_package,
+                'return !v.m{0}Constraints->m{1}.empty()'.format(self.up_package,
                                                                name)]
         code = [self.create_code_block('line', line)]
 
@@ -531,9 +531,9 @@ class ValidatorClassFunctions():
         # create the function declaration
         function = 'visit'
         return_type = 'virtual bool'
-        arguments = ['const {}& x'.format(self.std_base)]
-        std_return = 'return {}Visitor::visit(x)'.format(self.cap_language)
-        line = ['x.getPackageName() != \"{}\"'.format(self.package),
+        arguments = ['const {0}& x'.format(self.std_base)]
+        std_return = 'return {0}Visitor::visit(x)'.format(self.cap_language)
+        line = ['x.getPackageName() != \"{0}\"'.format(self.package),
                 std_return]
         code = [self.create_code_block('if', line),
                 self.create_code_block('line',
@@ -543,16 +543,16 @@ class ValidatorClassFunctions():
                                         '<const ListOf*>(&x)'])]
         no_elements = len(self.elements)
         element = self.elements[0]
-        lines = ['code == {}'.format(element['typecode']),
-                 'return visit((const {}&)x)'.format(element['name'])]
+        lines = ['code == {0}'.format(element['typecode']),
+                 'return visit((const {0}&)x)'.format(element['name'])]
         index = 1
         code_type = 'if_else'
         while index < no_elements:
             code_type = 'else_if'
             element = self.elements[index]
             lines.append('else if')
-            lines.append('code == {}'.format(element['typecode']))
-            lines.append('return visit((const {}&)x)'.format(element['name']))
+            lines.append('code == {0}'.format(element['typecode']))
+            lines.append('return visit((const {0}&)x)'.format(element['name']))
             index += 1
         lines.append('else')
         lines.append(std_return)

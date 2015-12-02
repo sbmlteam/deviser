@@ -48,7 +48,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def __init__(self, class_object, represents_class=True):
 
         self.brief_description = \
-            'Definition of the {} class.'.format(class_object['name'])
+            'Definition of the {0} class.'.format(class_object['name'])
         BaseCppFile.BaseCppFile.__init__(self, class_object['name'], 'h',
                                          class_object['attribs'])
 
@@ -122,7 +122,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if len(self.concretes) == 0:
             return
         for element in self.concretes:
-            self.write_line('class {};'.format(element['element']))
+            self.write_line('class {0};'.format(element['element']))
         self.skip_line()
 
     def write_common_includes(self):
@@ -149,16 +149,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             if global_variables.is_package:
                 if self.has_std_base:
                     if not self.is_plugin:
-                        base_file = '{}/{}'.format(self.language, base)
+                        base_file = '{0}/{1}'.format(self.language, base)
                     else:
-                        base_file = '{}/extension/{}'.format(self.language,
+                        base_file = '{0}/extension/{1}'.format(self.language,
                                                              base)
                 else:
                     base_file = '{0}/packages/{1}/{0}/{2}'.format(self.language,
                                                                   pkg, base)
             else:
-                base_file = '{}/{}'.format(self.language, self.baseClass)
-            include_lines += ['<{}.h>'.format(base_file)]
+                base_file = '{0}/{1}'.format(self.language, self.baseClass)
+            include_lines += ['<{0}.h>'.format(base_file)]
 
         # work out if we need the extension header
         need_extension = False
@@ -170,7 +170,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             elif self.is_plugin and not self.has_children:
                 need_extension = True
         if need_extension:
-            include_lines += ['<{}/packages/{}/extension/{}Extension'
+            include_lines += ['<{0}/packages/{1}/extension/{2}Extension'
                               '.h>'.format(self.language, pkg, self.package)]
 
         # additional includes for child elements
@@ -181,7 +181,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                     include_lines += ['<{0}/packages/{1}/{0}/{2}'
                                       '.h>'.format(self.language, pkg, child)]
                 else:
-                    include_lines += ['<{}/{}.h>'.format(self.language, child)]
+                    include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
@@ -189,7 +189,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 include_lines += ['<{0}/packages/{1}/{0}/{2}'
                                   '.h>'.format(self.language, pkg, child)]
             else:
-                include_lines += ['<{}/{}.h>'.format(self.language, child)]
+                include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
             if self.is_plugin:
                 child = self.child_lo_elements[i]['element']
                 include_lines += ['<{0}/packages/{1}/{0}/{2}'
@@ -202,11 +202,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 include_lines += ['<{0}/packages/{1}/{0}/{2}'
                                   '.h>'.format(self.language, pkg, child)]
             else:
-                include_lines += ['<{}/{}.h>'.format(self.language, child)]
+                include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
 
         # write them out
         for line in include_lines:
-            self.write_line_verbatim('#include {}'.format(line))
+            self.write_line_verbatim('#include {0}'.format(line))
 
     ########################################################################
 
@@ -218,9 +218,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             return_type = attributes[i]['attTypeCode']
             if name not in names_written:
                 if attributes[i]['attType'] != 'string':
-                    self.write_line('{} {};'.format(return_type, name))
+                    self.write_line('{0} {1};'.format(return_type, name))
                 else:
-                    self.write_line('std::string {};'.format(name))
+                    self.write_line('std::string {0};'.format(name))
                 if attributes[i]['isNumber'] is True \
                         or attributes[i]['attType'] == 'boolean':
                     self.write_line('bool mIsSet{0};'

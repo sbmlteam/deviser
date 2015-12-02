@@ -55,7 +55,7 @@ class RegisterFile():
             extension = 'h'
         self.fileout = BaseCppFile.BaseCppFile(name, extension, None)
 
-        self.fileout.brief_description = 'CMake register file for {} ' \
+        self.fileout.brief_description = 'CMake register file for {0} ' \
                                          'package'.format(self.package)
 
         self.cap_package = self.package.upper()
@@ -73,10 +73,10 @@ class RegisterFile():
 
     def write_header_file(self):
         self.fileout.skip_line()
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line_verbatim('#include <{}/packages/{}/extension/'
-                                         '{}Extension.'
+        self.fileout.write_line_verbatim('#include <{0}/packages/{1}/extension/'
+                                         '{2}Extension.'
                                          'h>'.format(self.language,
                                                      self.package,
                                                      self.up_package))
@@ -86,9 +86,9 @@ class RegisterFile():
 
     def write_src_file(self):
         self.fileout.skip_line()
-        self.fileout.write_line('#ifdef USE_{}'.format(self.cap_package))
+        self.fileout.write_line('#ifdef USE_{0}'.format(self.cap_package))
         self.fileout.up_indent()
-        self.fileout.write_line('{}Extension::init();'.format(self.up_package))
+        self.fileout.write_line('{0}Extension::init();'.format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('#endif')
         self.fileout.skip_line()

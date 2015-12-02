@@ -78,34 +78,34 @@ global code_returned
 code_returned = return_codes['success']
 
 global ret_success
-ret_success = '{}_OPERATION_SUCCESS'.format(library_name.upper())
+ret_success = '{0}_OPERATION_SUCCESS'.format(library_name.upper())
 
 global ret_failed
-ret_failed = '{}_OPERATION_FAILED'.format(library_name.upper())
+ret_failed = '{0}_OPERATION_FAILED'.format(library_name.upper())
 
 global ret_invalid_obj
-ret_invalid_obj = '{}_INVALID_OBJECT'.format(library_name.upper())
+ret_invalid_obj = '{0}_INVALID_OBJECT'.format(library_name.upper())
 
 global ret_invalid_att
-ret_invalid_att = '{}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
+ret_invalid_att = '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
 global ret_level_mis
-ret_level_mis = '{}_LEVEL_MISMATCH'.format(library_name.upper())
+ret_level_mis = '{0}_LEVEL_MISMATCH'.format(library_name.upper())
 
 global ret_vers_mis
-ret_vers_mis = '{}_VERSION_MISMATCH'.format(library_name.upper())
+ret_vers_mis = '{0}_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_pkgv_mis
-ret_pkgv_mis = '{}_PKG_VERSION_MISMATCH'.format(library_name.upper())
+ret_pkgv_mis = '{0}_PKG_VERSION_MISMATCH'.format(library_name.upper())
 
 global ret_ns_mis
-ret_ns_mis = '{}_NAMESPACES_MISMATCH'.format(library_name.upper())
+ret_ns_mis = '{0}_NAMESPACES_MISMATCH'.format(library_name.upper())
 
 global ret_dup_id
-ret_dup_id = '{}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
+ret_dup_id = '{0}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
 
 global ret_att_unex
-ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
+ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 
 def set_global_fullname(fullname):
@@ -149,34 +149,34 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname=''):
     is_package = is_pack
 
     global ret_success
-    ret_success = '{}_OPERATION_SUCCESS'.format(library_name.upper())
+    ret_success = '{0}_OPERATION_SUCCESS'.format(library_name.upper())
 
     global ret_failed
-    ret_failed = '{}_OPERATION_FAILED'.format(library_name.upper())
+    ret_failed = '{0}_OPERATION_FAILED'.format(library_name.upper())
 
     global ret_invalid_obj
-    ret_invalid_obj = '{}_INVALID_OBJECT'.format(library_name.upper())
+    ret_invalid_obj = '{0}_INVALID_OBJECT'.format(library_name.upper())
 
     global ret_invalid_att
-    ret_invalid_att = '{}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
+    ret_invalid_att = '{0}_INVALID_ATTRIBUTE_VALUE'.format(library_name.upper())
 
     global ret_level_mis
-    ret_level_mis = '{}_LEVEL_MISMATCH'.format(library_name.upper())
+    ret_level_mis = '{0}_LEVEL_MISMATCH'.format(library_name.upper())
 
     global ret_vers_mis
-    ret_vers_mis = '{}_VERSION_MISMATCH'.format(library_name.upper())
+    ret_vers_mis = '{0}_VERSION_MISMATCH'.format(library_name.upper())
 
     global ret_pkgv_mis
-    ret_pkgv_mis = '{}_PKG_VERSION_MISMATCH'.format(library_name.upper())
+    ret_pkgv_mis = '{0}_PKG_VERSION_MISMATCH'.format(library_name.upper())
 
     global ret_ns_mis
-    ret_ns_mis = '{}_NAMESPACES_MISMATCH'.format(library_name.upper())
+    ret_ns_mis = '{0}_NAMESPACES_MISMATCH'.format(library_name.upper())
 
     global ret_dup_id
-    ret_dup_id = '{}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
+    ret_dup_id = '{0}_DUPLICATE_OBJECT_ID'.format(library_name.upper())
 
     global ret_att_unex
-    ret_att_unex = '{}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
+    ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
 
 def get_return_code(index):
