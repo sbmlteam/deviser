@@ -38,11 +38,11 @@
 # ------------------------------------------------------------------------ -->
 
 from util import global_variables
-import DowncastExtensionFile
-import DowncastNamespaceFile
-import DowncastPackagesFile
-import DowncastPluginsFile
-import NativeSwigFile
+from . import DowncastExtensionFile
+from . import DowncastNamespaceFile
+from . import DowncastPackagesFile
+from . import DowncastPluginsFile
+from . import NativeSwigFile
 
 
 class BindingFiles():

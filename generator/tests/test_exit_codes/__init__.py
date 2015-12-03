@@ -37,4 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import run_exit_tests
+from . import run_exit_tests

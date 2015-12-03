@@ -37,6 +37,6 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import TexBodySyntaxFile
-import TexMacrosFile
-import TexValidationRulesFile
+from . import TexBodySyntaxFile
+from . import TexMacrosFile
+from . import TexValidationRulesFile

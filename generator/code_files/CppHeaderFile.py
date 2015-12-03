@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 from base_files import BaseCppFile
-from cpp_functions import *
+from . cpp_functions import *
 from util import query, global_variables
 
 

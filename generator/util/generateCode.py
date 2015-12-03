@@ -77,7 +77,7 @@ def generate_code_for(filename, overwrite=True):
 
 def generate_other_library_code(name, language, overwrite, ob):
     if not create_dir_structure(name, language, overwrite):
-        print'Problem encountered creating directories'
+        print('Problem encountered creating directories')
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
@@ -86,7 +86,7 @@ def generate_other_library_code(name, language, overwrite, ob):
 
 def generate_package_code(name, language, overwrite, ob):
     if not create_dir_structure(name, language, overwrite):
-        print'Problem encountered creating directories'
+        print('Problem encountered creating directories')
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
@@ -275,7 +275,7 @@ def create_dir_structure(pkgname, lang, overwrite):
         populate_package_directories(pkgname, lang)
     else:
         populate_other_library_directories(pkgname, lang)
-    print 'creating directory structure for {0}'.format(pkgname)
+    print('creating directory structure for {0}'.format(pkgname))
     index = 0
     all_present = False
     if os.path.exists(pkgname):
@@ -307,13 +307,13 @@ def create_dir(name, skip_existing):
         if skip_existing:
             done = True
         else:
-            print 'some parts of the directory structure exist and ' \
-                  'others are missing'
+            print('some parts of the directory structure exist and ' \
+                  'others are missing')
             print('terminating as we are not sure what is going on')
             done = False
     else:
         os.mkdir(name)
-        print 'creating dir {0}'.format(name)
+        print('creating dir {0}'.format(name))
         done = True
     return done
 

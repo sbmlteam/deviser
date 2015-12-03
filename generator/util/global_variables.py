@@ -37,8 +37,6 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import strFunctions
-
 global error_list
 error_list = []
 
@@ -182,8 +180,8 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname=''):
 def get_return_code(index):
     matched = False
     length = len(return_codes)
-    values = return_codes.values()
-    items = return_codes.keys()
+    values = list(return_codes.values())
+    items = list(return_codes.keys())
     i = 0
     while not matched and i < length:
         if values[i] == index:
@@ -193,7 +191,9 @@ def get_return_code(index):
     if not matched:
         return 'not found'
     else:
-        return strFunctions.upper_first(items[i])
+        returned_word = items[i]
+        length = len(returned_word)
+        return returned_word[0].upper() + returned_word[1:length]
 
 
 def reset():

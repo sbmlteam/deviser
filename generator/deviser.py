@@ -42,7 +42,7 @@
 import sys
 
 from util import generateLatex, generateCode, global_variables
-from legacy import run
+#from legacy import run
 
 
 def generatePackageFor(filename):
@@ -50,10 +50,10 @@ def generatePackageFor(filename):
     generateCode.generate_code_for(filename, True)
 
 
-def generateLegacyPackageFor(filename):
-    """This function generates a libSBML extension for the given filename
-       using the legacy code"""
-    run.generatePackageForFile(filename)
+#def generateLegacyPackageFor(filename):
+#    """This function generates a libSBML extension for the given filename
+#       using the legacy code"""
+#    run.generatePackageForFile(filename)
 
 
 def generateLaTeXFor(filename):
@@ -82,8 +82,8 @@ def main(args):
         operation = args[1].lower()
         filename = args[2]
 
-        if operation == '--legacy' or operation == '-gl':
-            generateLegacyPackageFor(filename)
+#        if operation == '--legacy' or operation == '-gl':
+#            generateLegacyPackageFor(filename)
         if operation == '--generate' or operation == '-g':
             generatePackageFor(filename)
         elif operation == '--latex' or operation == '-l':

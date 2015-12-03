@@ -37,13 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import ConcreteClassFunctions
-import Constructors
-import ExtensionFunctions
-import ExtensionInitFunctions
-import GeneralFunctions
-import GlobalQueryFunctions
-import ListOfQueryFunctions
-import ProtectedFunctions
-import SetGetFunctions
-import ValidatorClassFunctions
+from . import ConcreteClassFunctions
+from . import Constructors
+from . import ExtensionFunctions
+from . import ExtensionInitFunctions
+from . import GeneralFunctions
+from . import GlobalQueryFunctions
+from . import ListOfQueryFunctions
+from . import ProtectedFunctions
+from . import SetGetFunctions
+from . import ValidatorClassFunctions

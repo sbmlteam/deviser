@@ -37,4 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import run_bindings_tests
+from . import run_bindings_tests

@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-import BaseFile
+from . import BaseFile
 from util import strFunctions
 
 

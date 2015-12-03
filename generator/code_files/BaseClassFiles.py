@@ -40,8 +40,8 @@
 import re
 import os
 
-import CppHeaderFile
-import CppCodeFile
+from . import CppHeaderFile
+from . import CppCodeFile
 from util import strFunctions, global_variables
 
 

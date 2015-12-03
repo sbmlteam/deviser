@@ -37,4 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import run_tex_tests
+from . import run_tex_tests

@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-import BaseFile
+from . import BaseFile
 
 
 class BaseCMakeFile(BaseFile.BaseFile):

@@ -40,8 +40,8 @@
 import os
 
 from util import global_variables
-import PackageFile
-import RegisterFile
+from . import PackageFile
+from . import RegisterFile
 
 
 class CMakeFiles():

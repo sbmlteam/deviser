@@ -37,10 +37,10 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-import ExtensionCodeFile
-import ExtensionHeaderFile
-import CppCodeFile
-import CppHeaderFile
+from . import ExtensionCodeFile
+from . import ExtensionHeaderFile
+from . import CppCodeFile
+from . import CppHeaderFile
 from util import strFunctions, global_variables
 
 
