@@ -42,7 +42,7 @@ import os
 import re
 
 from base_files import BaseTexFile
-from util import strFunctions
+from util import strFunctions, global_variables
 
 
 class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
@@ -86,6 +86,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                         .format(self.start_b,
                                 strFunctions.make_class(plugin['sbase']),
                                 self.end_b))
+        self.skip_line()
+        self.write_figure('extended', plugin['sbase'])
         self.skip_line()
         self.write_to_do('explain where {0} comes from'.format(extended_object))
 
@@ -191,6 +193,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.write_line('\label{0}{1}-class{2}'
                         .format(self.start_b, classname.lower(),
                                 self.end_b))
+        self.skip_line()
+        self.write_figure('class', classname)
         self.skip_line()
         self.write_to_do('explain {0}'.format(sbml_class['name']))
 
@@ -312,6 +316,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
         self.write_line(self.get_text('body_ns_section2.txt'))
         self.skip_line()
+        self.write_figure('complete')
 
     #########################################################################
     # Write data types section
@@ -359,6 +364,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.write_line('\\subsubsection{0}Type \\fixttspace'
                         '\\primtypeNC{0}{1}{2}{2}'
                         .format(self.start_b, enum['texname'], self.end_b))
+        self.skip_line()
+        self.write_figure('enum', enum['texname'])
         self.skip_line()
         self.write_line('The \\primtype{0}{1}{2} is an emueration of values used '
                         'to ... '.format(self.start_b, enum['texname'], self.end_b))
@@ -412,6 +419,61 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                 if strFunctions.cap_list_of_name(this_class['name']) == name:
                     return this_class
         return None
+
+    # function to write a figure
+    def write_figure(self, fig_type, name=''):
+        if fig_type == 'complete':
+            figname = '{0}_version_{1}_complete'.format(self.package,
+                                                        self.pkg_version)
+            caption = 'the \\{0}Package'.format(self.upper_package)
+        elif fig_type == 'enum':
+            figname = '{0}_type_enum_{1}_uml'.format(self.package,
+                                                     name.lower())
+            caption = 'the \\{0} type for the \\{1}Package' \
+                      ''.format(name, self.upper_package)
+        elif fig_type == 'extended':
+            figname = '{0}_extended_{1}_uml'.format(self.package,
+                                                     name.lower())
+            caption = 'the extended \\{0} class for the \\{1}Package' \
+                      ''.format(name, self.upper_package)
+
+        else:
+            figname = '{0}_{1}_uml'.format(self.package,
+                                                     name.lower())
+            caption = 'the \\{0} class for the \\{1}Package' \
+                      ''.format(name, self.upper_package)
+
+
+        if not global_variables.figures_present:
+            self.write_comment_line('\\begin{figure}[ht!]')
+            self.write_comment_line('  \\centering')
+            self.write_comment_line('  \\includegraphics[width=\\textwidth]'
+                                    '{0}figures/{1}.pdf{2}\\\\'
+                                    ''.format(self.open_br, figname,
+                                              self.close_br))
+            self.write_comment_line('  \\caption{0}A UML representation of {1}. '
+                                    'See \\ref{0}conventions{2} for '
+                                    'conventions related to this figure.  {2}'
+                                    ''.format(self.open_br, caption,
+                                              self.close_br))
+            self.write_comment_line('  \\label{0}fig:{1}{2}'
+                                    ''.format(self.open_br, figname,
+                                              self.close_br))
+            self.write_comment_line('\\end{figure}')
+        else:
+            self.write_line('\\begin{figure}[ht!]')
+            self.write_line('  \\centering')
+            self.write_line('  \\includegraphics[width=\\textwidth]{0}figures/'
+                            '{1}.pdf{2}\\\\'.format(self.open_br, figname,
+                                                    self.close_br))
+            self.write_line('  \\caption{0}A UML representation of {1}. '
+                            'See \\ref{0}conventions{2} for '
+                            'conventions related to this figure.  {2}'
+                            ''.format(self.open_br, caption, self.close_br))
+            self.write_line('  \\label{0}fig:{1}{2}'.format(self.open_br, figname,
+                                                            self.close_br))
+            self.write_line('\\end{figure}')
+        self.skip_line()
 
     #######################################################################
     # Write file

@@ -38,6 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 import sys
+import os
 
 import spec_files
 from parseXML import ParseXML
@@ -45,6 +46,11 @@ from util import global_variables
 
 
 def generateLatexFor(filename):
+    # look to see if figures are present
+    this_dir = os.getcwd()
+    figs_dir = '{0}{1}{2}'.format(this_dir, os.sep, 'figures')
+    if os.path.exists(figs_dir):
+        global_variables.figures_present = True
     parser = ParseXML.ParseXML(filename)
     if global_variables.code_returned == \
             global_variables.return_codes['success']:

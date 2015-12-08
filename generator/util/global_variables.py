@@ -43,6 +43,9 @@ error_list = []
 global running_tests
 running_tests = False
 
+global figures_present
+figures_present = False
+
 global language
 language = 'sbml'
 global baseClass
