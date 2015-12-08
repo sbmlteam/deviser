@@ -43,7 +43,7 @@ import writeCode
 import writeHeader
 
 if len(sys.argv) != 1:
-  print 'Usage: createSBMLFiles.py'
+  print ('Usage: createSBMLFiles.py')
 else:
   element = createNewElementDictObj.createCompDeletion()
   writeCode.createCode(element)

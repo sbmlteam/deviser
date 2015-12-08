@@ -41,16 +41,16 @@ import re, os, sys, string
 
 def createDir(name):
   if os.path.exists(name):
-    print 'directory already exists - please use a different name'
+    print ('directory already exists - please use a different name')
     done = False
   else:
     os.mkdir(name)
-    print 'creating dir {0}'.format(name)
+    print ('creating dir {0}'.format(name))
     done =True
   return done
 
 def createDirectories(pkgName):
-    print 'creating directory structure for {0}'.format(pkgName)
+    print ('creating directory structure for {0}'.format(pkgName))
     if createDir(pkgName) == False:
       exit
     else:
@@ -86,7 +86,7 @@ def createDirectories(pkgName):
     
 def main(args):     
   if len(args) != 2:
-    print 'Usage: createDirStruct.py name'
+    print ('Usage: createDirStruct.py name')
   else:
     name = args[1]
     createDirectories(name)

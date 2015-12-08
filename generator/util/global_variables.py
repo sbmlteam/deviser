@@ -37,6 +37,8 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
+import os
+
 global error_list
 error_list = []
 
@@ -45,6 +47,12 @@ running_tests = False
 
 global figures_present
 figures_present = False
+
+global deviser_file
+deviser_file = ''
+
+global currend_dir
+currend_dir = os.getcwd()
 
 global language
 language = 'sbml'

@@ -47,8 +47,9 @@ from util import global_variables
 
 def generateLatexFor(filename):
     # look to see if figures are present
-    this_dir = os.getcwd()
-    figs_dir = '{0}{1}{2}'.format(this_dir, os.sep, 'figures')
+    global_variables.deviser_file = filename
+    global_variables.currend_dir =  os.getcwd()
+    figs_dir = '{0}{1}{2}'.format(global_variables.currend_dir, os.sep, 'figures')
     if os.path.exists(figs_dir):
         global_variables.figures_present = True
     parser = ParseXML.ParseXML(filename)

@@ -1283,7 +1283,7 @@ def writeInternalCPPCode(outFile, element, attributes, hasChildren, hasMath,base
     writeConnectCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeEnablePkgCPPCode(outFile, element, attributes, baseClass)
 
-def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, pkg, isListOf, baseClass, elementDict):
+def writeProtectedCPPCode(outFile, element, attribs, FalseValue, hasChildren, hasMath, pkg, isListOf, baseClass, elementDict):
   if hasChildren == True or baseClass != 'SBase':
     writeCreateObjectCPPCode(outFile, element, attribs, pkg, isListOf, hasChildren, hasMath, baseClass)
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)

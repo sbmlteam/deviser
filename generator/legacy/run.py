@@ -60,7 +60,7 @@ def getPackageDefinitionFromArgs(args):
   else:
     packageDefn = createNewPackage.createPackage(name)
   if packageDefn == None:
-    print 'package definition for {0} not available'.format(name)
+    print ('package definition for {0} not available'.format(name))
     sys.exit(0)
   return packageDefn
 
