@@ -130,7 +130,8 @@ and run the following from the command line
 
 -  tlmgr install fourier
 
-TO DO: Add anything Mac specific
+.. todo::
+    Add anything Mac specific
 
 UML diagrams
 ~~~~~~~~~~~~
@@ -143,7 +144,8 @@ create UML diagrams.
 Available bundles
 ~~~~~~~~~~~~~~~~~
 
-TO DO: What are we releasing this time ?
+.. todo::
+    What are we releasing this time ?
 
 Useful links
 ~~~~~~~~~~~~
@@ -172,9 +174,6 @@ Useful links
 Setting up the Deviser Edit tool
 --------------------------------
 
-.. todo::
-    Finish edits suggested by Mike
-
 In order to access the functionality for generation it is necessary to
 tell the Deviser Edit tool where it will find things on your system.
 
@@ -187,59 +186,79 @@ Select Edit->Edit Preferences (Preferences on Mac OSX)
    
 
 Fill in or browse to the location of the files requested by each field.
-Note it is not necessary to fill in all the fields if you are not
-intending to use all the functionality. Figure :num:`fig-preferences` illustrates a case
-where you could generate code and TeX files but not generate a PDF or
+Note it is not necessary to fill in all the fields if you do not
+intend to use all the functionality. Figure :num:`fig-preferences` illustrates 
+a case
+where you want to generate code and TeX files but do not want to generate a 
+PDF or
 integrate the code automatically.
 
 Without any of this information the Deviser Edit tool will save the XML
 description and create UML diagrams.
 
+.. todo::
+    Change MikTeX mention
+
 The fields requested are:
 
-**Python Interpreter**. This is location of the python executable. This
-is necessary to invoke any functionality of Deviser.
+- **Python Interpreter**. 
+  This is the location of the python executable. This is necessary to 
+  invoke any functionality of Deviser.
 
-**Deviser repository**. This is the location of the deviser/generator
-directory. This will have been bundled with an installer but may also be
-obtained directly from our GitHub repository
-[https://github.com/sbmlteam/deviser].
 
-**Default output dir**. The location where generated files should be
-written\ **.**
+- **Deviser repository**. 
+  This is the location of the 'deviser' directory containing the scripts used 
+  to generate code/LaTeX. This will have 
+  been bundled with an installer but may also be obtained directly from our 
+  GitHub repository [https://github.com/sbmlteam/deviser].
 
-**sbmlpkgspec dir**. The location of the SBML documentation class files
-sbmlpkgspec.
 
-**MikTeX Bin dir**. The location of the MikTex executables.
+- **Default output dir**. 
+  The location where generated files should be written.
 
-NEED TO CLARIFY THIS
 
-**Compiler**. The location of the C++ compiler to be used when building
-libSBML with integrated package code.
+- **sbmlpkgspec dir**. 
+  The location of the SBML documentation style files sbmlpkgspec.
 
-**libSBML Source dir**. The location of the libSBML source tree. This
-should be the top-level libSBML directory.
 
-**Dependencies Source dir**. The location of the libSBML dependencies
-source code. Note that particularly on Windows it is necessary for the
-libSBML dependencies to be built with the same Compiler as that to be
-used to build libSBML. Deviser Edit allows a user to specify the
-location of the source code for the dependencies and offers an option to
-build them if this should be necessary.
+- **MikTeX Bin dir**. 
+  The location of the MikTex executables.
 
-**CMake executable**. The location of the CMake executable. Deviser
-creates the necessary CMake files to allow package code to be
-integrated. This will be necessary if you intend to use Deviser Edit to
-integrate and build your code. Note Deviser does not support any other
-build system.
 
-**SWIG executable**. The location of the SWIG executable. Since Deviser
-uses a python interpreter to create code, the integration and testing
-will create the Python binding of libSBML. SWIG is necessary for this.
+- **Compiler**.
+  The location of the C++ compiler to be used when building libSBML with 
+  integrated package code.
 
-**Python include dir**: The location of the python include files. This
-is necessary to build and test the Python binding of libSBML.
 
-**Python lib**. The location of the Python library files. This is
-necessary to build and test the Python binding of libSBML.
+- **libSBML Source dir**. 
+  The location of the libSBML source tree. This should be the top-level 
+  libSBML directory.
+
+
+- **Dependencies Source dir**. 
+  The location of the libSBML dependencies source code. Note that 
+  particularly on Windows it is necessary for the
+  libSBML dependencies to be built with the same compiler as that to be
+  used to build libSBML. Deviser Edit allows a user to specify the
+  location of the source code for the dependencies and offers an option to
+  build them if this should be necessary.
+
+
+- **CMake executable**. 
+  The location of the CMake executable. Deviser creates the necessary CMake 
+  files to allow package code to be integrated. This will be necessary if 
+  you intend to use Deviser Edit to integrate and build your code. 
+  Note Deviser does not support any other build system.
+
+- **SWIG executable**. 
+  The location of the SWIG executable. Since Deviser
+  uses a python interpreter to create code, the integration and testing
+  will create the Python binding of libSBML. SWIG is necessary for this.
+
+- **Python include dir**. 
+  The location of the python include files. This
+  is necessary to build and test the Python binding of libSBML.
+
+- **Python lib**. 
+  The location of the Python library files. This is
+  necessary to build and test the Python binding of libSBML.
