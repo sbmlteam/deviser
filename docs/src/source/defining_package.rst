@@ -29,11 +29,21 @@ left hand side.
    The ‘Package’ sheet - Illustrating the first step in defining the ‘foo’ 
    package.
 
+
+The **Name** field
+~~~~~~~~~~~~~~~~~~
+
 The **Name** field is the short name that will be used as a prefix for
 the package e.g. ‘foo’.
 
+The **Full Name** field
+~~~~~~~~~~~~~~~~~~~~~~~
+
 The **Full Name** field is the name that will be used to refer to the
 package in documentation e.g. ‘Imaginary Package Foo’.
+
+The **required** checkbox
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **required** checkbox is used to indicate whether the package may
 change the mathematical interpretation of the core model and corresponds
@@ -47,10 +57,16 @@ to the required attribute on the <sbml> element declaring this package
          level="3" version="1" foo:required="true">
 
 
+The **Number** field
+~~~~~~~~~~~~~~~~~~~~~
+
 The **Number** field is the starting point for the enumeration of the
 typecodes for this package. Pressing the information button will pop-up
 with information regarding the Number and Offset values used by existing
 L3 packages (Figure :num:`fig-offsets`).
+
+The **Offset** field
+~~~~~~~~~~~~~~~~~~~~~
 
 The **Offset** field is the number added to the validation rules given
 in the specification to allow this to be identified uniquely in code.
@@ -61,6 +77,9 @@ the Number and Offset values used by existing L3 packages.
 .. figure:: ../screenshots/deviser-numbers-offsets-1.png
 
     The Numbers and Offsets information box
+
+The **requires additional code** checkbox
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **requires additional code** checkbox can be used to indicate that
 there is additional code that will be required by the package that will
@@ -116,7 +135,7 @@ gives a brief overview of what is meant by a ‘class’. The next two
 subsections give an overview of the information that needs to be
 provided and then we work through several examples.
 
-An SBML ‘element’ or ‘class’
+What is a class ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In SBML XML elements are used to capture the information relating to
@@ -132,7 +151,7 @@ represented as a class object.
 
 .. _SBML-snippet-reaction:
 
-   SBML snippet showing a SBML Level 3 Core ListOfReactions element.
+   SBML snippet 1: A SBML Level 3 Core ListOfReactions element.
 
 
 .. code-block:: XML
@@ -160,7 +179,7 @@ represented as a class object.
 
 Figure :num:`fig-libsbml-class` shows a snapshot of libSBML class hierarchy 
 corresponding to
-the :ref:`SBML snippet above<SBML-snippet-reaction>`. Note the correspondence of names and the getXYZ
+:ref:`SBML snippet 1 above<SBML-snippet-reaction>`. Note the correspondence of names and the getXYZ
 functions etc.
 
 .. _fig-libsbml-class:
@@ -168,7 +187,7 @@ functions etc.
 
    Snapshot of part of libSBML class hierarchy
 
-General class description
+General class information
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We use class to mean the description of an XML element. You will need to
@@ -193,9 +212,15 @@ NOTE: Using the ‘wand’ button will populate the adjacent field with the
 value of the field that conforms most closely to SBML and libSBML
 conventions.
 
+The **Name** field
+******************
+
 The **Name** field is the name of the class that will be used by the
 code generation (see XML ElementName below). This field is required and
 must be populated.
+
+The **BaseClass** field
+***********************
 
 The **BaseClass** field gives a base class if this class derives from a
 base. Clicking the wand will populate the field with ‘SBase’, as this is
@@ -207,6 +232,9 @@ the field empty
 implies that the base class is SBase
 
 
+The **TypeCode** field
+***********************
+
 .. todo::
    Change typecode when we decide what happens
 
@@ -215,6 +243,9 @@ the types for this package. Clicking on the wand populates it with
 SBML\_PACKAGE\_CLASS where PACKAGE is the short package name given and
 CLASS is the name field for this class. This field is also required and
 cannot be left blank. You must populate it.
+
+The **XML ElementName** field
+*******************************
 
 The **XML ElementName** is an optional field that can be used to specify
 the name of the element as it will appear in the XML output. This
@@ -227,6 +258,9 @@ class ‘KineticLaw’ within our package 'foo' and indicate that code should
 generate a class named FooKineticLaw but that text and the XML output
 should use ‘kineticLaw’ as the name of the element.
 
+The **hasListOf** checkbox
+***************************
+
 The **hasListOf** checkbox is used to indicate whether the element has a
 parent ListOf class. In SBML it is common for elements ‘bar’ to occur
 within a list of element ‘listOfBars’. However some elements may occur
@@ -234,9 +268,24 @@ without a containing ListOf. If this checkbox is selected code will also
 be generated for a ListOfXYZ class corresponding to the class being
 described.
 
+When the **hasListOf** checkbox is selected further information is required
+and several additional fields appear. These are detailed
+in :ref:`a later section<listof>`.
+
+The **isBaseClass** checkbox
+****************************
+
 The **isBaseClass** checkbox is used to indicate that the class being
 defined is in fact a base class for other classes within the
 specification.
+
+When the **isBaseClass** checkbox is selected further information is required
+and an additional table appears. The information required is detailed
+in the :ref:`instantiations section<instants>`.
+
+
+The **requires additional code** checkbox
+******************************************
 
 The **requires additional code** checkbox can be used to indicate that
 there is additional code that will be required by the package that will
@@ -263,6 +312,8 @@ Adding attributes and child elements
 
 Here we expand on the fields in the **Class attributes and child
 elements** table for a class as shown in Figure :num:`fig-add-class`.
+These fields are identical to those in the **ListOf attributes** table 
+that appears when the **hasListOf** checkbox is checked.
 
 The **Name** field
 ******************
@@ -331,6 +382,11 @@ The ‘array’ type refers to an XML element that may contain text that
 represents a list of numerical values of a particular type. For example
 the L3 Spatial Package uses a SampledField element that contains an
 ‘array’ of integers (see below).
+
+.. _SBML-snippet-array: 
+   
+   SBML snippet 2: An SBML Level 3 Spatial SampledField element.
+
 
 .. code-block:: XML
 
@@ -436,7 +492,7 @@ of another class that is a child of the defining class.
 
 .. _SBML-snippet-event: 
    
-   SBML Snippet showing an SBML Level 3 Core Event element.
+   SBML snippet 3: An SBML Level 3 Core Event element.
 
 .. code-block:: XML
 
@@ -464,7 +520,7 @@ of another class that is a child of the defining class.
 .. todo::
    Add figure showing a class with a child element/lo\_element and ref in next paragraph
 
-The :ref:`SBML snippet above<SBML-snippet-event>` shows an Event from SBML Level 3 Core
+:ref:`SBML snippet 3 above<SBML-snippet-event>` shows an Event from SBML Level 3 Core
 which has a Trigger child element. The DeviserEdit entries in the Attributes 
 and child element table for the Event class are shown 
 in Figure TBC. 
@@ -579,6 +635,18 @@ the ClassName of the appropriate object.
 .. todo::
    Update when multiple SIDrefs are supported
 
+
+   .. _astnode:
+
+Note that Deviser does
+specifically recognize the elements ASTNode and XMLNode and treats them
+appropriately as elements that will contain either MathML or XML content
+respectively. Other class names that are listed are assumed to be parsed as 
+classes
+belonging to libSBML; either those being defined by this package or ones
+defined in L3 core or other available L3 package code.
+
+
 The **Required** field
 ***********************
 
@@ -624,11 +692,99 @@ The **XML name** field can be used to specify the name of the element as
 it will appear in the XML output where this may differ from the Name
 field. For attributes it is unlikely that the Name used will differ from
 the XML name; however if the object being listed is an element or listOf
-element there may be situations where they differ – as in `Example 2 - Adding a class with a containing ListOf`_
-below.
+element there may be situations where they differ – as in 
+:ref:`Example 2<example2>` below.
 
-.. todo::
-   Work out how to use different text to link a heading
+.. _listof:
+
+Adding further ListOf information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the **hasListOf** checkbox is selected four other fields appear.
+
+The **ListOfClassName** field
+*******************************
+
+The **ListOfClassName** is the name used in code for the class
+representing the ListOf object. It need only be populated if the
+default of ‘ListOfBars’ is inappropriate.
+
+The **XML ListOfName** field
+*******************************
+
+The **XML ListOfName** field is the XML name for the list of objects. It
+only needs to be populated if there is a difference in name between XML
+and code. It will default to ‘listOfBars’ where ‘Bar’ is the class name.
+
+The **Minimum number of children** field
+*****************************************
+
+The **Minimum number of children** field is used to indicate the minimum
+number of child objects of type Bar a ListOfBars expects. Currently in
+SBML L3 ListOf elements cannot be empty so this will default to '1'.
+
+The **Maximum number of children** field
+*****************************************
+
+The **Maximum number of children** field is used to indicate the maximum
+number of child objects a ListOf expects. Leaving this blank implies
+there is no stated maximum value for the number of children.
+
+The **ListOf attributes** table (which has the same fields as the table
+for entering class attributes and child elements) allows you to add
+attributes to the ListOf class. This table could also be used in the very rare
+case where a listOf element contains a child that is not the same type as 
+the expected children. For example the Qualitative Models Package defines 
+a listOfFunctionTerms that must contain one instance of a defaultTerm in 
+addition to the functionTerm children.
+
+.. _instants:
+
+Adding instantiations information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the isBaseClass checkbox is selected the
+**Instantiations** table then appears.
+
+The **Instantiations** table allows you to specify the class(es) that
+will be derived from this base class. Note Deviser Edit expects these to
+be listed here – even if the information could be determined elsewhere.
+Entries in this table do not define a class, the definition of the class
+should be created as a separate class entry. Only classes that directly
+inherit from this class need be listed; it may be that the classes
+listed are themselves base classes for further classes. These should be
+listed as the Instantiations on the relevant base class description.
+
+The **XML Name** field
+***********************
+
+The **XML name** field specifies the XML name of the object.
+
+The **Element** field
+***********************
+
+The **Element** field specifies a class that will be derived from this
+base class.
+
+The **Min No. Children** field
+*******************************
+
+The **Min No. Children** field is used to specify a minimum number of
+children that this element may have.
+
+The **Min No. Children** field
+*******************************
+
+The **Max No. Children** field is used to specify the maximum number of
+children.
+
+Note that sometimes a specific instantiation adds further requirements.
+For example, where one class may contain children of the same base class
+there may be a requirement that it contains a certain number of children
+as with Associations in the FBC package an FBCAnd instantiation MUST
+have two children. Where there are no such requirements these fields
+should be left as ‘0’.
+
 
 A note on repeated information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -637,22 +793,28 @@ Users may become aware of the fact that at times they are entering
 duplicate information. For example if a child element is used that does
 not have the default XML Name then this will be declared both when
 describing the Class for that element AND when listing the child element
-occurrence (see Example 2). Also, classes derived from a base class are
+occurrence (see :ref:`Example 2<example2>`). Also, classes derived from a 
+base class are
 listed as Instantiations of that class when it would be possible to work
 out this information from the BaseClass information given for each
 class.
 
 Deviser Edit **does require this information to be duplicated** as this
 facilitates the storing of unfinished definitions and allows the
-definition to be validated to an extent. It also means that each sheet
+definition to be validated to some extent. It also means that each sheet
 contains all the pertinent information for the Class being specified
 rather than this information being distributed across various sheets in
 the GUI.
+
+.. _example1:
 
 Example 1 - Adding a class with no containing ListOf
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we define the KineticLaw class for our imaginary package ‘foo’.
+
+.. todo::
+   Update figure
 
 .. _fig-foo-kl:
 .. figure:: ../screenshots/deviser-foo-kl.png
@@ -678,70 +840,75 @@ conflict with the class ListOfParameters so we add the name
 ‘listOfFooParameters’, the type ‘lo\_element’, the element
 ‘FooParameter’ and state that the XML name is ‘listOfParameters’. Note
 that we will need to specify the class FooParameter later on; which we
-do in Example 2.
+do in :ref:`Example 2<example2>`.
 
 The third child is a math element. So we add the name ‘math’, the type
-‘element’ and the element ‘ASTNode\*’. Note that Deviser does
-specifically recognize the elements ASTNode and XMLNode and treats them
-appropriately as elements that will contain either MathML or XML content
-respectively. Other elements listed are assumed to be parsed as elements
-belonging to libSBML; either those defined by this package or ones
-defined in core or other available package code.
+‘element’ and the element ‘ASTNode\*’. :ref:`As mentioned above<astnode>` 
+Deviser does
+specifically recognize the elements ASTNode and XMLNode.
+
+.. _example2:
 
 Example 2 - Adding a class with a containing ListOf
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we specify the FooParameter class used by the FooKineticLaw that we
-specified in Example 1.
+specified in :ref:`Example 1<example1>`.
+
+.. todo::
+   Update figure
 
 .. _fig-foo-param:
 .. figure:: ../screenshots/deviser-foo-param.png
 
      Defining the FooParameter class.
 
-The **hasListOf** checkbox has been selected and a number of additional
+The **hasListOf** checkbox has been selected the additional
 fields appear.
 
-The **ListOfClassName** is the name used in code for the class
-representing the ListOf object. Again it need only be populated if the
-default of ‘ListOfBars’ is inappropriate.
-
-The **XML ListOfName** field is the XML name for the list of objects. It
-only needs to be populated if there is a difference in name between XML
-and code. It will default to ‘listOfBars’ where ‘Bar’ is the class name.
-
-In our example we have populated these fields as we have used a class
-name ‘FooParameter’ but will have XML names of ‘parameter’ and
+In our example we have populated the **ListOfClassName** and  **XML ListOfName**
+fields as we have used a class
+name ‘FooParameter’ but want to have XML names of ‘parameter’ and
 ‘listOfParameters’.
 
-The **Minimum number of children** field is used to indicate the minimum
-number of child objects of type Bar a ListOfBars expects. Currently in
-SBML ListOf elements cannot be empty and so must have a minimum of 1
-child; which we have indicated in our example. Leaving this blank
-implies there is no stated minimum value for the number of children.
 
-The **Maximum number of children** field is used to indicate the maximum
-number of child objects a ListOf expects. Leaving this blank implies
-there is no stated maximum value for the number of children.
 
-The **ListOf attributes** table (which has the same fields as the table
-for entering class attributes and child elements) allows you to add
-attributes to the ListOf class.
 
-Figure 13 shows the UML diagram produced by Deviser Edit of the package
+Figure :num:`fig-uml-foo-kl` shows the UML diagram produced by Deviser Edit of the package
 ‘foo’ as described so far in examples 1 and 2 while the corresponding
-SBML is shown in SBML snippet 4.
+SBML is shown in :ref:`SBML snippet 4<sbml-4>`.
 
 .. _fig-uml-foo-kl:
 .. figure:: ../figures/deviser-uml-foo-kl.png
 
-The UML diagram produced by Deviser Edit following the definition of package 'Foo' in Examples 1 and 2
+   The UML diagram produced by Deviser Edit following the definition of package 'Foo' in Examples 1 and 2
+
+.. _sbml-4: 
+   
+   SBML Snippet 4: The 'foo' kineticLaw element as defined in Examples 1 and 2.
+
+.. code-block:: XML
+
+    <foo:kineticLaw foo:stochastic="false">
+        <foo:listOfParameters foo:local="true">
+            <foo:parameter foo:id="p1" foo:constant="true"/>
+        </foo:listOfParameters>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            ...
+        </math>
+    </foo:kineticLaw>
+
+
+
 
 Example 3 – Adding a base class and derived classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we define a class that will be used as a base class for others (see
 Figure :num:`fig-foo-rule`).
+
+.. todo::
+   Update figure 
 
 .. _fig-foo-rule:
 .. figure:: ../screenshots/deviser-foo-rule.png
@@ -755,39 +922,13 @@ element called listOfFooRules in the XML.
 This class is a base class and we tick the isBaseClass checkbox. The
 **Instantiations** table then appears.
 
-The **Instantiations** table allows you to specify the class(es) that
-will be derived from this base class. Note Deviser Edit expects these to
-be listed here – even if the information could be determined elsewhere.
-Entries in this table do not define a class, the definition of the class
-should be created as a separate class entry. Only classes that directly
-inherit from this class need be listed; it may be that the classes
-listed are themselves base classes for further classes. These should be
-listed as the Instantiations on the relevant base class description.
-
-Instantiations fields
-*********************
-
-The **XML name** field specifies the XML name of the object.
-
-The **Element** field specifies a class that will be derived from this
-FooRule base class.
-
-The **Min No. Children** field is used to specify a minimum number of
-children that this element may have.
-
-The **Max No. Children** field is used to specify the maximum number of
-children.
-
-Note that sometimes a specific instantiation adds further requirements.
-For example, where one class may contain children of the same base class
-there may be a requirement that it contains a certain number of children
-as with Associations in the FBC package an FBCAnd instantiation MUST
-have two children. Where there are no such requirements these fields
-should be left as ‘0’.
-
 Here we have specified that the ListOfFooRules may contain objects of
-type Assignment or Algebraic. We specify Algebraic as a new class as in
+type Assignment or Algebraic. We specify Algebraic as a new class in
 Figure :num:`fig-foo-algebraic` and Assignment in Figure :num:`fig-foo-assignment`.
+
+.. todo::
+   Update figure 
+
 
 .. _fig-foo-algebraic:
 .. figure:: ../screenshots/deviser-foo-algebraic.png
@@ -795,6 +936,9 @@ Figure :num:`fig-foo-algebraic` and Assignment in Figure :num:`fig-foo-assignmen
      Defining the Algebraic class
 
 Note that we have changed the BaseClass field to FooRule.
+
+.. todo::
+   Update figure 
 
 .. _fig-foo-assignment:
 .. figure:: ../screenshots/deviser-foo-assignment.png
@@ -805,12 +949,36 @@ The Assignment class illustrates a slightly more complex scenario. Here
 it derives from the baseClass FooRule and adds an attribute ‘variable’
 that is a reference to a FooParameter. It have also acts as a base class
 for two further classes FooRate and FooAssignment. Figure :num:`fig-uml-foo-rules` shows the
-hierarchy and SBML snippet 5 the resulting XML.
+hierarchy and :ref:`SBML snippet 5<sbml-5>` the resulting XML.
 
 .. _fig-uml-foo-rules:
 .. figure:: ../figures/deviser-uml-foo-rules.png
 
      The UML diagram from DeviserEdit of the ListOfFooRules class
+
+.. _sbml-5: 
+   
+   SBML Snippet 5: The listOfFooRules element as defined in Example 3.
+
+.. code-block:: XML
+
+    <foo:listOfFooRules>
+        <foo:assignment foo:variable="p">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                ...
+            </math>
+        </foo:assignment>
+        <foo:rate foo:variable="s">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                ...
+            </math>
+        </foo:rate>
+        <foo:algebraic>
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                ...
+            </math>
+        </foo:algebraic>
+    </foo:listOfFooRules>
 
 Add plugin information
 ----------------------

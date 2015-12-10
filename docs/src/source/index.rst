@@ -9,7 +9,7 @@ Deviser
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 6
    
    getting_started
    defining_package
