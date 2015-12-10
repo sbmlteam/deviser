@@ -130,6 +130,11 @@ below. DeviserEdit uses 'class' to mean the description of an XML element. In
 object-oriented programming languages (such as C++ or Java), this is
 represented as a class object.
 
+.. _SBML-snippet-reaction:
+
+   SBML snippet showing a SBML Level 3 Core ListOfReactions element.
+
+
 .. code-block:: XML
 
    <listOfReactions>
@@ -155,7 +160,7 @@ represented as a class object.
 
 Figure :num:`fig-libsbml-class` shows a snapshot of libSBML class hierarchy 
 corresponding to
-the SBML snippet above. Note the correspondence of names and the getXYZ
+the :ref:`SBML snippet above<SBML-snippet-reaction>`. Note the correspondence of names and the getXYZ
 functions etc.
 
 .. _fig-libsbml-class:
@@ -253,13 +258,22 @@ deleted using the ‘+’ and ‘-‘ buttons to the left of this table.
 Adding attributes and child elements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. todo::
+   Order the fields as they eventually occur
+
 Here we expand on the fields in the **Class attributes and child
 elements** table for a class as shown in Figure :num:`fig-add-class`.
+
+The **Name** field
+******************
 
 The **Name** field gives the name of the attribute or child element. In
 the rare cases where this Name is not an exact match with the name that
 will appear in the XML the ‘XML name’ field can be used to override the 
 Name supplied.
+
+The **Type** field
+******************
 
 The **Type** field gives the type of the attribute or child.
 
@@ -316,42 +330,204 @@ Attribute/child element type ‘array’
 The ‘array’ type refers to an XML element that may contain text that
 represents a list of numerical values of a particular type. For example
 the L3 Spatial Package uses a SampledField element that contains an
-‘array’ of integers (see SBML snippet 3).
+‘array’ of integers (see below).
+
+.. code-block:: XML
+
+  <spatial:sampledField spatial:id="SegmentedImage">
+                0 0 1 
+  </spatial:sampledField>
+
 
 This information would be defined in the ‘Class attributes and child
-elements’ section of the Class description as an entry with
+elements’ section of the Class description as an entry with the 
+following field values:
 
-Name: the name to be used by code to store and manipulate this
-information
+:Name: the name to be used by code to store and manipulate this information
 
-Type: array
+:Type: array
 
-Element: integer (the numeric type of the data)
+:Element: integer (the numeric type of the data)
 
-and the corresponding functions are produced.
+:Required: true/false as appropriate
+
+Figure :num:`fig-array-sampledfield` shows the DeviserEdit entry for the 
+SampledField class. Note
+it also includes an attribute to record the length of the array. This proved
+useful when using this sort of construct.
+
+.. todo::
+   Replace this figure
+
+.. _fig-array-sampledfield:
+.. figure:: ../screenshots/deviser-array-sampledfield.png
+
+    Attributes of the SampledField class.
+
+The code generator produces the following code for an attribute of type 'array':
+
+
+.. code-block:: C++
+
+   void    get[Name]    ([Type]* outArray)
+   bool    isSet[Name]  ()
+   int     set[Name]    ([Type]* inArray, int arrayLength)
+   int     unset[Name]  ()
+		
+         where 
+               [Type] 
+                      is a placeholder for the appropriate C++ type
+               [Name] 
+                      is a placeholder for the attribute name 
+                      given to the array
+
 
 Attribute/child element type ‘enum’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the attribute is of an enumeration type defined within the package it
-should have type ‘enum’ and the Element field should give the name of
-the enumeration. The enumeration is declared fully by adding an
-enumeration to the description (see Add enum information).
+An attribute can have a type corresponding to an enumeration type defined 
+within the package. In this 
+case the attribute has type 'enum' and would be defined as an entry with the 
+following field values:
+
+:Name: the name to be used by code to store and manipulate this attribute
+
+:Type: enum
+
+:Element: the name of the enumeration
+
+:Required: true/false as appropriate
+
+The enumeration is declared fully by adding an
+enumeration to the package description (see `Add enum information`_).
+
+.. todo::
+   Remove array from this figure
 
 .. _fig-array-enum:
 .. figure:: ../screenshots/deviser-array-enum.png
 
-    Attributes of type 'array' and 'enum'
+    Attribute of type 'enum'
 
-Attribute/child element types ‘element’ and ‘lo\_element’
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The code generator produces the following code for an attribute of type 'enum':
 
-Here the child refers to a single instance of another class. If that
-class is a ListOfClass ‘lo\_element’ should be used. The name of the
-child element is given in the Element field; where the container is a
-listOf the Element field should be the child of the listOf. Table 1
-gives examples of the expected XML and the functions produced for each
-type.
+.. code-block:: C++
+
+   [EnumType_t]    get[Name]          ()
+   std::string&    get{Name]AsString  ()
+   bool            isSet[Name]        ()
+   int             set[Name]          ([EnumType_t] value)
+   int             set[Name]          (std::string& value)
+   int             unset[Name]        ()
+		
+         where 
+               [EnumType_t] 
+                      is a placeholder for the C++ type of the enumeration
+               [Name] 
+                      is a placeholder for the attribute name 
+
+
+Attribute/child element type ‘element’
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This type can be used to define a child element of the defining class. The 
+type 'element' refers to a single instance 
+of another class that is a child of the defining class.
+
+.. _SBML-snippet-event: 
+   
+   SBML Snippet showing an SBML Level 3 Core Event element.
+
+.. code-block:: XML
+
+   <event id="event1" name="event1" useValuesFromTriggerTime="true">
+       <trigger initialValue="true" persistent="true">
+           <math xmlns="http://www.w3.org/1998/Math/MathML">
+               <apply>
+                   <lt/>
+                   <ci> S1 </ci>
+                   <cn> 0.1 </cn>
+               </apply>
+           </math>
+       </trigger>
+       <listOfEventAssignments>
+           <eventAssignment variable="S1">
+               <math xmlns="http://www.w3.org/1998/Math/MathML">
+                  <cn type="integer"> 1 </cn>
+               </math>
+           </eventAssignment>
+       </listOfEventAssignments>
+   </event>
+
+
+
+.. todo::
+   Add figure showing a class with a child element/lo\_element and ref in next paragraph
+
+The :ref:`SBML snippet above<SBML-snippet-event>` shows an Event from SBML Level 3 Core
+which has a Trigger child element. The DeviserEdit entries in the Attributes 
+and child element table for the Event class are shown 
+in Figure TBC. 
+
+:ref:`Table 1<table1>`
+gives examples of the expected XML and the functions produced for type 'element'.
+
+
+Attribute/child element type ‘lo\_element’
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This type is used to define a child that is an instance of a 'ListOf' class. In
+the :ref:`SBML Event<SBML-snippet-event>` shown the listOfEventAssignments is
+defined as a child of type 'lo\_element' (see Figure TBC). :ref:`Table 1<table1>` 
+details the corresponding XML outpout and functions generated.
+
+
+.. _table1:
+
+   Table 1: The XML output and generated functions for each of the Deviser
+   child element types.
+
++-------------------------+------------------------------+----------------------------------------+
+| **Type**                | **XML output**               | **Functions**                          |
++=========================+==============================+========================================+
+| **element**             | <container>                  | getParameter()                         |
+|                         |                              |                                        |
+|                         | <parameter attributes= …/>   | isSetParameter()                       |
+|                         |                              |                                        |
+|                         | </container>                 | setParameter(Parameter\*)              |
+|                         |                              |                                        |
+|                         |                              | unsetParameter()                       |
+|                         |                              |                                        |
+|                         |                              | createParameter()                      |
++-------------------------+------------------------------+----------------------------------------+
+| **lo\_element**         | <container>                  | getListOfParameters()                  |
+|                         |                              |                                        |
+|                         | <listOfParameters>           | getParameter(index) getParameter(id)   |
+|                         |                              |                                        |
+|                         | <parameter attributes= …/>   | addParameter(Parameter\*)              |
+|                         |                              |                                        |
+|                         | <parameter attributes= …/>   | getNumParameters()                     |
+|                         |                              |                                        |
+|                         | …                            | createParameter()                      |
+|                         |                              |                                        |
+|                         | </listOfParameters>          | removeParameter(index)                 |
+|                         |                              |                                        |
+|                         | </container>                 | removeParameter(id)                    |
++-------------------------+------------------------------+----------------------------------------+
+| **inline\_lo\_element** | <container>                  | getListOfParameters()                  |
+|                         |                              |                                        |
+|                         | <parameter attributes= …/>   | getParameter(index) getParameter(id)   |
+|                         |                              |                                        |
+|                         | <parameter attributes= …/>   | addParameter(Parameter\*)              |
+|                         |                              |                                        |
+|                         | …                            | getNumParameters()                     |
+|                         |                              |                                        |
+|                         | </container>                 | createParameter()                      |
+|                         |                              |                                        |
+|                         |                              | removeParameter(index)                 |
+|                         |                              |                                        |
+|                         |                              | removeParameter(id)                    |
++-------------------------+------------------------------+----------------------------------------+
 
 Attribute/child element type ‘inline\_lo\_element’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -363,57 +539,22 @@ listOf element as this provides functionality to access and manipulate
 potentially variable numbers of child elements. The
 ‘inline\_lo\_element’ type allows the user to specify that there are
 multiple instances of the same child element but that these do not occur
-within a specified ListOf element. Table 1 gives examples of the
+within a specified ListOf element. :ref:`Table 1<table1>` gives examples of the
 expected XML and the functions produced.
 
-+---------------------------+------------------------------+----------------------------------------+
-| **Type**                  | **XML output**               | **Functions**                          |
-+===========================+==============================+========================================+
-| **element**               | <container>                  | getParameter()                         |
-|                           |                              |                                        |
-|                           | <parameter attributes= …/>   | isSetParameter()                       |
-|                           |                              |                                        |
-|                           | </container>                 | setParameter(Parameter\*)              |
-|                           |                              |                                        |
-|                           |                              | unsetParameter()                       |
-|                           |                              |                                        |
-|                           |                              | createParameter()                      |
-+---------------------------+------------------------------+----------------------------------------+
-| **lo\_element**           | <container>                  | getListOfParameters()                  |
-|                           |                              |                                        |
-|                           | <listOfParameters>           | getParameter(index) getParameter(id)   |
-|                           |                              |                                        |
-|                           | <parameter attributes= …/>   | addParameter(Parameter\*)              |
-|                           |                              |                                        |
-|                           | <parameter attributes= …/>   | getNumParameters()                     |
-|                           |                              |                                        |
-|                           | …                            | createParameter()                      |
-|                           |                              |                                        |
-|                           | </listOfParameters>          | removeParameter(index)                 |
-|                           |                              |                                        |
-|                           | </container>                 | removeParameter(id)                    |
-+---------------------------+------------------------------+----------------------------------------+
-| **inline\_lo\_element**   | <container>                  | getListOfParameters()                  |
-|                           |                              |                                        |
-|                           | <parameter attributes= …/>   | getParameter(index) getParameter(id)   |
-|                           |                              |                                        |
-|                           | <parameter attributes= …/>   | addParameter(Parameter\*)              |
-|                           |                              |                                        |
-|                           | …                            | getNumParameters()                     |
-|                           |                              |                                        |
-|                           | </container>                 | createParameter()                      |
-|                           |                              |                                        |
-|                           |                              | removeParameter(index)                 |
-|                           |                              |                                        |
-|                           |                              | removeParameter(id)                    |
-+---------------------------+------------------------------+----------------------------------------+
+The **Element** field
+*********************
 
-Table : The 'element', 'lo\_element' and 'inline\_lo\_element' types
 
 The **Element** field provides additional information depending on the
-type of the object being described. Table 2 describes how this field
+type of the attribute/child element being described. :ref:`Table 2<table2>` 
+describes how and when this field
 should be populated. Note the ‘name’ of an element or object refers to
 the ClassName of the appropriate object.
+
+ .. _table2:
+
+    Table 2: The expected entries in the 'Element' field depending on the 'Type'.
 
 +-----------------------+---------------------------------------------------+
 | **Type**              | **Element field**                                 |
@@ -435,7 +576,11 @@ the ClassName of the appropriate object.
 | Any other             | blank                                             |
 +-----------------------+---------------------------------------------------+
 
-Table : Expected values for the Element field based on attribute Type
+.. todo::
+   Update when multiple SIDrefs are supported
+
+The **Required** field
+***********************
 
 The **Required** field indicates whether the attribute or child element
 is mandatory. On occasion SBML has conditional requirements e.g. you
@@ -443,6 +588,9 @@ must set either StoichiometryMath or stoichiometry but you cannot have
 both. As yet Deviser does not deal with this situation. We recommend
 that if you need to facilitate this situation you mark both attributes
 as ‘unrequired’ and adjust the generated code accordingly.
+
+The **isBaseClass** field
+**************************
 
 The **isBaseClass** field indicates that the child element is a base
 class and not instantiated directly. This is a situation that will not
@@ -467,17 +615,20 @@ This tells Deviser to generate code relevant to the instantiations of
 the CSGNode class rather than for a concrete CSGNode child. For example,
 instead of getting a ‘createCSGNode()’ function, you would get create
 functions for all the instantiations of the base class:
-createCSGTransformation(); createCSGPrimitive();
-createCSGPseudoPrimitive() and createCSGSetOperator() corresponding to
-CSGTransformation, CSGPrimitive, CSGPseudoPrimitive and CSGSetOperator
-that are the direct instantiations of the CSGNode class.
+createCSGTransformation(); createCSGPrimitive() etc.
+
+The **XML Name** field
+***********************
 
 The **XML name** field can be used to specify the name of the element as
 it will appear in the XML output where this may differ from the Name
 field. For attributes it is unlikely that the Name used will differ from
 the XML name; however if the object being listed is an element or listOf
-element there may be situations where they differ – as in Example 2
+element there may be situations where they differ – as in `Example 2 - Adding a class with a containing ListOf`_
 below.
+
+.. todo::
+   Work out how to use different text to link a heading
 
 A note on repeated information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -614,7 +765,7 @@ listed are themselves base classes for further classes. These should be
 listed as the Instantiations on the relevant base class description.
 
 Instantiations fields
-^^^^^^^^^^^^^^^^^^^^^
+*********************
 
 The **XML name** field specifies the XML name of the object.
 

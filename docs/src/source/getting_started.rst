@@ -174,6 +174,10 @@ Useful links
 Setting up the Deviser Edit tool
 --------------------------------
 
+.. todo::
+   Document new tabs
+
+
 In order to access the functionality for generation it is necessary to
 tell the Deviser Edit tool where it will find things on your system.
 
