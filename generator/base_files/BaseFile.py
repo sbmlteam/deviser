@@ -97,6 +97,10 @@ class BaseFile:
     # function to create lines of size specified
     def create_lines(self, line, tabsize, is_comment=False):
         max_length = self.line_length - tabsize
+        if max_length <= 0:
+            # we must have a line where the tabsize is so long
+            # multi did this with ListOfSpeciesTypeComponentMapsInProduct
+            max_length = self.line_length - 4
         if is_comment:
             max_length -= 3
 
