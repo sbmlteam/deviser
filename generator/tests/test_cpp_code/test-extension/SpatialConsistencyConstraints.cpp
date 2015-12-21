@@ -39,7 +39,7 @@
 
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
 
-#endif /* AddingConstraintsToValidator
+#endif /* AddingConstraintsToValidator */
 
 #include <sbml/validator/ConstraintMacros.h>
 

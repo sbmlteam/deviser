@@ -152,7 +152,7 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                                               self.up_package,
                                               self.cap_language))
         self.skip_line()
-        self.write_line_verbatim('#endif /* AddingConstraintsToValidator')
+        self.write_line_verbatim('#endif /* AddingConstraintsToValidator */')
         self.skip_line()
         self.write_line_verbatim('#include <{0}/validator/ConstraintMacros'
                                  '.h>'.format(self.language))
