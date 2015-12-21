@@ -79,7 +79,7 @@ Prerequisites
 
 The main functionality (generating code or TeX files) is
 invoked using a Python Interpreter. This release of Deviser has been 
-tested with Python 2.7, 3.3 and 3.4. Other functions may require further
+tested with Python 2.6, 2.7, 3.3 and 3.4. Other functions may require further
 software. The prerequisites for each function are listed below:
 
 
@@ -151,7 +151,7 @@ Useful links
 ~~~~~~~~~~~~
 
 1. libSBML source code (latest release):
-   https://sourceforge.net/projects/sbml/files/libsbml/5.12.0/stable/libSBML-5.11.4-core-src.tar.gz/download
+   https://sourceforge.net/projects/sbml/files/libsbml/5.12.0/stable/libSBML-5.12.0-core-src.tar.gz/download
 
 2. libSBML source code (latest code):
    https://sourceforge.net/p/sbml/code/HEAD/tree/trunk/libsbml/
@@ -174,19 +174,29 @@ Useful links
 Setting up the Deviser Edit tool
 --------------------------------
 
-.. todo::
-   Document new tabs
-
-
 In order to access the functionality for generation it is necessary to
-tell the Deviser Edit tool where it will find things on your system.
+tell the Deviser Edit tool where it will find things on your system. You can
+also add data types not fully supported by Deviser which will allow these
+to be used as types for attributes.  
 
-Select Edit->Edit Preferences (Preferences on Mac OSX)
+Setting these values is done by selecting 
+
+Edit->Edit Preferences (Preferences on Mac OSX)
+
+and choosing either the **Deviser Settings** or **User Defined Types** tab. 
+Settings used here will be saved and persist between sessions.
+
+Deviser Settings
+~~~~~~~~~~~~~~~~~
+
+.. todo::
+    Replace screenshot
 
 .. _fig-preferences:
 .. figure:: ../screenshots/deviser-preferences.png
 
-    The ‘Preferences’ sheet; adding information about other required software.
+    The ‘Deviser Settings’ sheet; adding information about other required software.
+ 
    
 
 Fill in or browse to the location of the files requested by each field.
@@ -199,9 +209,6 @@ integrate the code automatically.
 
 Without any of this information the Deviser Edit tool will save the XML
 description and create UML diagrams.
-
-.. todo::
-    Change MikTeX mention
 
 The fields requested are:
 
@@ -225,8 +232,8 @@ The fields requested are:
   The location of the SBML documentation style files sbmlpkgspec.
 
 
-- **MikTeX Bin dir**. 
-  The location of the MikTex executables.
+- **TeX Bin dir**. 
+  The location of the TeX executables.
 
 
 - **Compiler**.
@@ -266,3 +273,42 @@ The fields requested are:
 - **Python lib**. 
   The location of the Python library files. This is
   necessary to build and test the Python binding of libSBML.
+
+User Defined Types
+~~~~~~~~~~~~~~~~~~
+
+.. todo::
+    Replace screenshot
+
+.. _fig-user-types:
+.. figure:: ../screenshots/deviser-add-type.png
+
+    The ‘User Defined Types’ sheet; adding information about other data types.
+
+.. todo::
+    Work out cross doc referencing and put in ref below
+
+In order to generate usable code Deviser needs to know about the possible data
+types that may be used. SBML uses a number of predefined types and these
+are all supported by Deviser (see section ...). However it is possible for
+other SBML L3 packages to introduce types. In order to facilitate the use of 
+these 'unsupported' types the names can be entered here. This will add the 
+new type to the dropdown list of Types available when entering attribute 
+information. Figure :num:`fig-user-types` will add the type *PType* to the
+available attribute types. 
+
+Note any C++ code produced will use the type 'FIXME_[type]' where [type] 
+is the type name entered by the user (see :ref:`code snippet below<code_for_PType>`). 
+The resulting code will need to be manually adjusted before 
+compilation.
+
+.. _code_for_PType:
+  
+    .. code-block:: C++ 
+
+            FIXME_PType getP() const;
+
+            int setP(FIXME_PType p);
+
+    Code generated for an attribute named 'P' of user defined type 'PType'.
+

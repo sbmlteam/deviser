@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Deviser
-=======
+DEVISER
+========
 
 Contents:
 
@@ -16,11 +16,12 @@ Contents:
    using_deviser
    appendix_a_xml_example
    appendix_b_types
+   appendix_c_adding_type
    
    references
 
 
-
-
+References
+==========
 * :ref:`search`
 
