@@ -3,7 +3,7 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="Unit" typeCode="SBML_TEST_UNIT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="UnknownType" typeCode="SBML_TEST_UNIT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="attribue" required="false" type="fred" abstract="false"/>
           </attributes>

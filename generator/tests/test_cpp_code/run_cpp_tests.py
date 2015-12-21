@@ -518,6 +518,13 @@ def main():
     test_case = 'class with no given base class'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'unknown_type'
+    num = 0
+    class_name = 'UnknownType'
+    list_of = ''
+    test_case = 'class using an unknown attribute type'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     if len(not_tested) > 0:
         print('The following files were not tested:')
         for name in not_tested:
