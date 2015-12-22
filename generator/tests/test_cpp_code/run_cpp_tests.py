@@ -525,6 +525,11 @@ def main():
     test_case = 'class with lower case name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'base_class'
+    class_name = 'TestExtension'
+    test_case = 'default typecodes extension file'
+    fail += run_ext_test(name, class_name, test_case, 0)
+
     name = 'unknown_type'
     num = 0
     class_name = 'UnknownType'
