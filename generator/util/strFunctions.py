@@ -133,10 +133,14 @@ def get_indefinite(name):
 
 
 def standard_element_name(name):
+    length = len(name)
     if name.endswith('*'):
-        length = len(name)
-        name = name[0:length-1]
-    return upper_first(name)
+        temp = name[0:length-1]
+    elif name.endswith('_t'):
+        temp = name[0:length-2]
+    else:
+        temp = name
+    return upper_first(temp)
 
 
 def wrap_token(name, pkg=''):

@@ -360,9 +360,82 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  */
 typedef enum
 {
-  SBML_TEST_MYBASE       =   100  /*!<MyBase */
-, SBML_TEST_CLASSTWO     =   101  /*!<ClassTwo */
+  SBML_TEST_MYBASE         =   100  /*!<MyBase */
+, SBML_TEST_CLASSTWO       =   101  /*!<ClassTwo */
+, SBML_TEST_CLASSTHREE     =   102  /*!<ClassThree */
 } SBMLTestTypeCode_t;
+
+
+typedef enum
+{
+  TEST_ENUM_ONE       /*!<One */
+, TEST_ENUM_TWO       /*!<Two */
+, ENUM_INVALID        /*!<invalid Enum */
+} Enum_t;
+
+
+/**
+ */
+LIBSBML_EXTERN
+const char*
+Enum_toString(Enum_t e);
+
+
+/**
+ */
+LIBSBML_EXTERN
+Enum_t
+Enum_fromString(const char* code);
+
+
+/**
+ */
+LIBSBML_EXTERN
+int
+Enum_isValid(Enum_t e);
+
+
+/**
+ */
+LIBSBML_EXTERN
+int
+Enum_isValidString(const char* code);
+
+
+typedef enum
+{
+  TEST_FRED_T_TOM        /*!<tom */
+, TEST_FRED_T_DICK       /*!<dick */
+, FRED_INVALID           /*!<invalid Fred */
+} Fred_t;
+
+
+/**
+ */
+LIBSBML_EXTERN
+const char*
+Fred_toString(Fred_t f);
+
+
+/**
+ */
+LIBSBML_EXTERN
+Fred_t
+Fred_fromString(const char* code);
+
+
+/**
+ */
+LIBSBML_EXTERN
+int
+Fred_isValid(Fred_t f);
+
+
+/**
+ */
+LIBSBML_EXTERN
+int
+Fred_isValidString(const char* code);
 
 
 

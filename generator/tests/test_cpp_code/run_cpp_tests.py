@@ -526,6 +526,13 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'base_class'
+    num = 2
+    class_name = 'ClassThree'
+    list_of = ''
+    test_case = 'class with enum lower case name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'base_class'
     class_name = 'TestExtension'
     test_case = 'default typecodes extension file'
     fail += run_ext_test(name, class_name, test_case, 0)

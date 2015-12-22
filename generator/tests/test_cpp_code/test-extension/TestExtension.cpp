@@ -120,6 +120,7 @@ const char* SBML_TEST_TYPECODE_STRINGS[] =
 {
     "MyBase"
   , "ClassTwo"
+  , "ClassThree"
 };
 
 
@@ -286,7 +287,7 @@ const char*
 TestExtension::getStringFromTypeCode(int typeCode) const
 {
   int min = SBML_TEST_MYBASE;
-  int max = SBML_TEST_CLASSTWO;
+  int max = SBML_TEST_CLASSTHREE;
 
   if (typeCode < min || typeCode > max)
   {
@@ -393,6 +394,162 @@ TestExtension::init()
 
 
 #endif /* __cplusplus */
+
+
+static
+const char* SBML_ENUM_STRINGS[] =
+{
+  "One"
+, "Two"
+, "invalid Enum"
+};
+
+
+/*
+ */
+LIBSBML_EXTERN
+const char*
+Enum_toString(Enum_t e)
+{
+  int min = TEST_ENUM_ONE;
+  int max = ENUM_INVALID;
+
+  if (e < min || e > max)
+  {
+    return "(Unknown Enum value)";
+  }
+
+  return SBML_ENUM_STRINGS[e - min];
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+Enum_t
+Enum_fromString(const char* code)
+{
+  static int size = sizeof(SBML_ENUM_STRINGS)/sizeof(SBML_ENUM_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SBML_ENUM_STRINGS[i])
+    {
+      return (Enum_t)(i);
+    }
+  }
+
+  return ENUM_INVALID;
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+int
+Enum_isValid(Enum_t e)
+{
+  int min = TEST_ENUM_ONE;
+  int max = ENUM_INVALID;
+
+  if (e < min || e >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+int
+Enum_isValidString(const char* code)
+{
+  return Enum_isValid(Enum_fromString(code));
+}
+
+
+static
+const char* SBML_FRED_STRINGS[] =
+{
+  "tom"
+, "dick"
+, "invalid Fred"
+};
+
+
+/*
+ */
+LIBSBML_EXTERN
+const char*
+Fred_toString(Fred_t f)
+{
+  int min = TEST_FRED_T_TOM;
+  int max = FRED_INVALID;
+
+  if (f < min || f > max)
+  {
+    return "(Unknown Fred value)";
+  }
+
+  return SBML_FRED_STRINGS[f - min];
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+Fred_t
+Fred_fromString(const char* code)
+{
+  static int size = sizeof(SBML_FRED_STRINGS)/sizeof(SBML_FRED_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SBML_FRED_STRINGS[i])
+    {
+      return (Fred_t)(i);
+    }
+  }
+
+  return FRED_INVALID;
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+int
+Fred_isValid(Fred_t f)
+{
+  int min = TEST_FRED_T_TOM;
+  int max = FRED_INVALID;
+
+  if (f < min || f >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ */
+LIBSBML_EXTERN
+int
+Fred_isValidString(const char* code)
+{
+  return Fred_isValid(Fred_fromString(code));
+}
 
 
 

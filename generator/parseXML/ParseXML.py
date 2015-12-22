@@ -144,6 +144,19 @@ class ParseXML():
         return class_name
 
     @staticmethod
+    def get_enum_name(self, node):
+        enum_name = ''
+        temp = self.get_value(node, 'name')
+        # expect camelcase with upper first
+        if temp is not None:
+            last = len(temp)
+            # strip _t if it is there; since we add it later
+            if temp.endswith('_t'):
+                last = last - 2
+            enum_name = strFunctions.upper_first(temp[0:last])
+        return enum_name
+
+    @staticmethod
     def get_loclass_name_value(self, node, name):
         xml_loclass_name = ''
         temp = self.get_value(node, name)
@@ -595,7 +608,7 @@ class ParseXML():
         names_listed = []
         for node in self.dom.getElementsByTagName('enum'):
             values = []
-            enum_name = self.get_value(node, 'name')
+            enum_name = self.get_enum_name(self, node)
 
             if enum_name not in names_listed:
                 for val in node.getElementsByTagName('enumValue'):

@@ -9,7 +9,29 @@
           </attributes>
         </element>
         <element name="classTwo" typeCode="SBML_TEST_CLASSTWO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
+        <element name="ClassThree" typeCode="SBML_TEST_CLASSTHREE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="number" required="true" type="enum" element="enum" abstract="false"/>
+            <attribute name="name" required="true" type="enum" element="Fred_t" abstract="false"/>
+            <attribute name="badName" required="false" type="enum" element="fred" abstract="false"/>
+            <attribute name="otherNum" required="false" type="enum" element="Enum_t" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
+      <enums>
+        <enum name="enum">
+          <enumValues>
+            <enumValue name="TEST_ENUM_ONE" value="One"/>
+            <enumValue name="TEST_ENUM_TWO" value="Two"/>
+          </enumValues>
+        </enum>
+        <enum name="Fred_t">
+          <enumValues>
+            <enumValue name="TEST_FRED_T_TOM" value="tom"/>
+            <enumValue name="TEST_FRED_T_DICK" value="dick"/>
+          </enumValues>
+        </enum>
+      </enums>
     </pkgVersion>
   </versions>
 </package>
