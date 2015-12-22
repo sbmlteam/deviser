@@ -322,6 +322,8 @@ class ParseXML():
 
         else:
             base_class = self.get_value(node, 'baseClass')
+            if not base_class:
+                base_class = 'SBase'
             type_code = self.get_value(node, 'typeCode')
             if not type_code:
                 self.report_error(global_variables

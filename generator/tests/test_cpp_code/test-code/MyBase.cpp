@@ -53,7 +53,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 MyBase::MyBase(unsigned int level,
                unsigned int version,
                unsigned int pkgVersion)
-  : mId ("")
+  : SBase(level, version)
+  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -63,7 +64,8 @@ MyBase::MyBase(unsigned int level,
  * Creates a new MyBase using the given TestPkgNamespaces object.
  */
 MyBase::MyBase(TestPkgNamespaces *testns)
-  : mId ("")
+  : SBase(testns)
+  , mId ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -74,7 +76,8 @@ MyBase::MyBase(TestPkgNamespaces *testns)
  * Copy constructor for MyBase.
  */
 MyBase::MyBase(const MyBase& orig)
-  : mId ( orig.mId )
+  : SBase( orig )
+  , mId ( orig.mId )
 {
 }
 
@@ -87,6 +90,7 @@ MyBase::operator=(const MyBase& rhs)
 {
   if (&rhs != this)
   {
+    SBase::operator=(rhs);
     mId = rhs.mId;
   }
 
@@ -190,7 +194,7 @@ MyBase::getTypeCode() const
 bool
 MyBase::hasRequiredAttributes() const
 {
-  bool allPresent = None::hasRequiredAttributes();
+  bool allPresent = true;
 
   return allPresent;
 }
@@ -205,7 +209,7 @@ MyBase::hasRequiredAttributes() const
 void
 MyBase::writeElements(XMLOutputStream& stream) const
 {
-  None::writeElements(stream);
+  SBase::writeElements(stream);
 
   SBase::writeExtensionElements(stream);
 }
@@ -237,6 +241,7 @@ MyBase::accept(SBMLVisitor& v) const
 void
 MyBase::setSBMLDocument(SBMLDocument* d)
 {
+  SBase::setSBMLDocument(d);
 }
 
 /** @endcond */
@@ -253,6 +258,7 @@ MyBase::enablePackageInternal(const std::string& pkgURI,
                               const std::string& pkgPrefix,
                               bool flag)
 {
+  SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */
@@ -267,6 +273,8 @@ MyBase::enablePackageInternal(const std::string& pkgURI,
 void
 MyBase::addExpectedAttributes(ExpectedAttributes& attributes)
 {
+  SBase::addExpectedAttributes(attributes);
+
   attributes.add("id");
 }
 
@@ -289,6 +297,27 @@ MyBase::readAttributes(const XMLAttributes& attributes,
   unsigned int numErrs;
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
+
+  SBase::readAttributes(attributes, expectedAttributes);
+  numErrs = log->getNumErrors();
+
+  for (int n = numErrs-1; n >= 0; n--)
+  {
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownPackageAttribute);
+      log->logPackageError("test", TestMyBaseAllowedAttributes, pkgVersion,
+        level, version, details);
+    }
+    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownCoreAttribute);
+      log->logPackageError("test", TestMyBaseAllowedCoreAttributes, pkgVersion,
+        level, version, details);
+    }
+  }
 
   // 
   // id string (use = "optional" )
@@ -317,10 +346,14 @@ MyBase::readAttributes(const XMLAttributes& attributes,
 void
 MyBase::writeAttributes(XMLOutputStream& stream) const
 {
+  SBase::writeAttributes(stream);
+
   if (isSetId() == true)
   {
     stream.writeAttribute("id", getPrefix(), mId);
   }
+
+  SBase::writeExtensionAttributes(stream);
 }
 
 /** @endcond */

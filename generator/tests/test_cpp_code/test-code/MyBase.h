@@ -50,13 +50,14 @@
 #include <string>
 
 
+#include <sbml/SBase.h>
 #include <sbml/packages/test/extension/TestExtension.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN MyBase
+class LIBSBML_EXTERN MyBase : public SBase
 {
 protected:
 
