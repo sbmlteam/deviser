@@ -135,6 +135,15 @@ class ParseXML():
         return xml_element_name
 
     @staticmethod
+    def get_element_class_name(self, node):
+        class_name = None
+        temp = self.get_value(node, 'name')
+        # expect camelcase with upper first
+        if temp is not None:
+            class_name = strFunctions.upper_first(temp)
+        return class_name
+
+    @staticmethod
     def get_loclass_name_value(self, node, name):
         xml_loclass_name = ''
         temp = self.get_value(node, name)
@@ -292,7 +301,7 @@ class ParseXML():
 
     @staticmethod
     def get_element_description(self, node, pkg_version):
-        element_name = self.get_value(node, 'name')
+        element_name = self.get_element_class_name(self, node)
         if not element_name:
             self.report_error(global_variables
                               .return_codes['missing required information'],

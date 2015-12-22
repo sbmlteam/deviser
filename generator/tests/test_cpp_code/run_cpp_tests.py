@@ -518,6 +518,13 @@ def main():
     test_case = 'class with no given base class'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'base_class'
+    num = 1
+    class_name = 'ClassTwo'
+    list_of = 'ListOfClassTwos'
+    test_case = 'class with lower case name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'unknown_type'
     num = 0
     class_name = 'UnknownType'

@@ -8,6 +8,7 @@
             <attribute name="id" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
+        <element name="classTwo" typeCode="SBML_TEST_CLASSTWO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
       </elements>
     </pkgVersion>
   </versions>
