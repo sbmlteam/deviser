@@ -31,8 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class QualSBMLDocumentPlugin
- * @sbmlbrief{qual} Extension of SBMLDocument by the &ldquo;qual&rdquo;
- * package.
+ * @sbmlbrief{qual} Extension of SBMLDocument.
  */
 
 

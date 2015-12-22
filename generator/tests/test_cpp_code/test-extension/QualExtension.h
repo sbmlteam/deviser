@@ -31,11 +31,10 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class QualExtension
- * @sbmlbrief{qual} Base extension class for the &ldquo;qual&rdquo; package.
+ * @sbmlbrief{qual} Base extension class.
  *
  * @class QualPkgNamespaces
- * @sbmlbrief{qual} SBMLNamespaces extension for the &ldquo;qual&rdquo;
- * package.
+ * @sbmlbrief{qual} SBMLNamespaces extension.
  */
 
 

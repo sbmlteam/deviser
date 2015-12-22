@@ -31,7 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class VersSpeciesPlugin
- * @sbmlbrief{vers} Extension of Species by the &ldquo;vers&rdquo; package.
+ * @sbmlbrief{vers} Extension of Species.
  */
 
 

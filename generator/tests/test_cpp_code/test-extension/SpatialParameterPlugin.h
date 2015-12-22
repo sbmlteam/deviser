@@ -31,8 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class SpatialParameterPlugin
- * @sbmlbrief{spatial} Extension of Parameter by the &ldquo;spatial&rdquo;
- * package.
+ * @sbmlbrief{spatial} Extension of Parameter.
  */
 
 

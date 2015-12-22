@@ -31,11 +31,10 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class TestExtension
- * @sbmlbrief{test} Base extension class for the &ldquo;test&rdquo; package.
+ * @sbmlbrief{test} Base extension class.
  *
  * @class TestPkgNamespaces
- * @sbmlbrief{test} SBMLNamespaces extension for the &ldquo;test&rdquo;
- * package.
+ * @sbmlbrief{test} SBMLNamespaces extension.
  */
 
 

@@ -31,7 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class QualModelPlugin
- * @sbmlbrief{qual} Extension of Model by the &ldquo;qual&rdquo; package.
+ * @sbmlbrief{qual} Extension of Model.
  */
 
 

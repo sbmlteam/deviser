@@ -31,8 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class SpatialReactionPlugin
- * @sbmlbrief{spatial} Extension of Reaction by the &ldquo;spatial&rdquo;
- * package.
+ * @sbmlbrief{spatial} Extension of Reaction.
  */
 
 

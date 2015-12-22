@@ -31,7 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class VersModelPlugin
- * @sbmlbrief{vers} Extension of Model by the &ldquo;vers&rdquo; package.
+ * @sbmlbrief{vers} Extension of Model.
  */
 
 

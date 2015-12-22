@@ -31,8 +31,7 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class SpatialSBMLDocumentPlugin
- * @sbmlbrief{spatial} Extension of SBMLDocument by the &ldquo;spatial&rdquo;
- * package.
+ * @sbmlbrief{spatial} Extension of SBMLDocument.
  */
 
 

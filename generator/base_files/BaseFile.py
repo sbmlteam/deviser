@@ -419,26 +419,23 @@ class BaseFile:
         self.write_comment_line('@class {0}'.format(self.class_name))
         if extension:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class'
-                                    ' for the &ldquo;{1}&rdquo; '
-                                    'package.'.format(self.open_br,
-                                              self.package.lower(),
-                                              self.close_br))
+                                    '.'.format(self.open_br,
+                                               self.package.lower(),
+                                               self.close_br))
             self.write_blank_comment_line()
             self.write_comment_line('@class {0}PkgNamespaces'
                                     ''.format(up_package))
             self.write_comment_line('@sbmlbrief{0}{1}{2} SBMLNamespaces '
-                                    'extension for the &ldquo;{1}&rdquo; '
-                                    'package.'
+                                    'extension.'
                                     ''.format(self.open_br,
                                               self.package.lower(),
                                               self.close_br))
         elif plugin:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Extension of '
-                                    '{3} by the &ldquo;{1}&rdquo; '
-                                    'package.'.format(self.open_br,
-                                               self.package.lower(),
-                                               self.close_br,
-                                               self.class_object['sbase']))
+                                    '{3}.'.format(self.open_br,
+                                                  self.package.lower(),
+                                                  self.close_br,
+                                                  self.class_object['sbase']))
         elif validator:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Entry point for '
                                     '&ldquo;{1}&rdquo package validation'

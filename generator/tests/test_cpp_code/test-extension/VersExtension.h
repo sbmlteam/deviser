@@ -31,11 +31,10 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class VersExtension
- * @sbmlbrief{vers} Base extension class for the &ldquo;vers&rdquo; package.
+ * @sbmlbrief{vers} Base extension class.
  *
  * @class VersPkgNamespaces
- * @sbmlbrief{vers} SBMLNamespaces extension for the &ldquo;vers&rdquo;
- * package.
+ * @sbmlbrief{vers} SBMLNamespaces extension.
  */
 
 
