@@ -4,29 +4,28 @@ import os
 
 from util import global_variables
 import deviser
+from tests import test_functions
 
+##############################################################################
+# Set up variables
 fails = []
 not_tested = []
-path_to_tests = ''
 
 
-def get_filename(name):
-    global path_to_tests
-    fname = '{0}.xml'.format(name)
-    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
-    return filename
+##############################################################################
+# Specific generation functions
 
 
 def generate_deviser(args):
     deviser.main(args)
 
+#############################################################################
+# Specific test functions
+
 
 def run_deviser_test(name, flag, expected_return):
-    filename = get_filename(name)
     error = global_variables.get_return_code(expected_return)
-    print('====================================================')
-    print('Testing {0} {1} {2}'.format(name, flag, error))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, flag, error)
     args = []
     if flag == '-g'or flag == '-l':
         args.append('deviser')
@@ -41,27 +40,27 @@ def run_deviser_test(name, flag, expected_return):
         args.append(filename)
 
     generate_deviser(args)
-    fail = 0
-    if global_variables.code_returned != expected_return:
-        fail = 1
-        fails.append('{0}: {1} {2}'.format(name, flag, expected_return))
-        print('Incorrect Return: {0} Expected: '
-              '{1}'.format(global_variables.get_return_code(global_variables.
-                                                           code_returned),
-                          global_variables.get_return_code(expected_return)))
+    fail = test_functions.compare_return_codes(name, flag, expected_return,
+                                               fails)
     print('')
     return fail
 
 
+#########################################################################
+# Main function
+
+
 def main():
-    global_variables.running_tests = True
-    global_variables.code_returned = global_variables.return_codes['success']
+
+    # set up the enivornment
     this_dir = os.getcwd()
-    global path_to_tests
 
     (path_to_tests, other) = os.path.split(this_dir)
+    test_functions.set_path_to_tests(path_to_tests)
 
     fail = 0
+
+    # run the individual tests
     fail += run_deviser_test('non-existent', '-g',
                              global_variables.
                              return_codes['failed to read file'])
@@ -93,18 +92,8 @@ def main():
                              global_variables.
                              return_codes['missing required information'])
 
-    if len(not_tested) > 0:
-        print('The following files were not tested:')
-        for name in not_tested:
-            print(name)
 
-    if fail > 0:
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print('EXIT CODES FAILED')
-        print('Check {0} fails'.format(fail))
-        for name in fails:
-            print(name)
-
+    test_functions.report('EXIT CODES', fail, fails, not_tested)
     return fail
 
 

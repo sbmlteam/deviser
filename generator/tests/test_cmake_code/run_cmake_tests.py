@@ -4,19 +4,17 @@ import os
 
 from cmake_files import CMakeFiles
 from parseXML import ParseXML
-from util import global_variables
 
-use_new = True
+from tests import test_functions
 
+##############################################################################
+# Set up variables
 fails = []
-path_to_tests = ''
+not_tested = []
 
 
-def get_filename(name):
-    global path_to_tests
-    fname = '{0}.xml'.format(name)
-    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
-    return filename
+##############################################################################
+# Specific generation functions
 
 
 def generate_cmake_files(filename):
@@ -39,114 +37,79 @@ def generate_cmake_register_files(filename):
     os.chdir('../.')
 
 
-# reads file containing expected sbml model and returns it as string
-def read_file(path):
-    filein = open(path, 'r')
-    contents = filein.read()
-    filein.close()
-    return contents
+#############################################################################
+# Specific compare functions
+
+def compare_files(correct_file, temp_file):
+    return test_functions.compare_files(correct_file, temp_file, fails,
+                                        not_tested)
 
 
-def compare_files(infile, outfile):
-    global fails
-    ret = 0
-    if not os.path.isfile(infile) or not os.path.isfile(outfile):
-        fails.append(infile)
-        print('=================>> FAILED')
-        return 1
-    indata = read_file(infile)
-    out = read_file(outfile)
-    if indata.strip() == out.strip():
-        print('PASSED')
+def compare_cmake(name, is_src=False):
+    if is_src:
+        correct_file = '.\\test-cmake\\{0}-package.cmake'.format(name)
+        temp_file = '.\\temp\\{0}-package.cmake'.format(name)
     else:
-        fails.append(infile)
-        print('=================>> FAILED')
-        ret = 1
-    return ret
+        correct_file = '.\\test-cmake\\{0}-package.cmake'.format(name)
+        temp_file = '.\\temp\\{0}-package.cmake'.format(name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_cmake_register(name, is_cxx=False):
+    if is_cxx:
+        correct_file = '.\\test-cmake\\{0}-register.h'.format(name)
+        temp_file = '.\\temp\\{0}-register.h'.format(name)
+    else:
+        correct_file = '.\\test-cmake\\{0}-register.cxx'.format(name)
+        temp_file = '.\\temp\\{0}-register.cxx'.format(name)
+    return compare_files(correct_file, temp_file)
+
+
+#############################################################################
+# Specific test functions
 
 
 def run_cmake_test(name):
-    filename = get_filename(name)
-    fail = 0
-    print('====================================================')
-    print('Testing {0}:CMake files'.format(name))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, 'CMake')
     generate_cmake_files(filename)
-    cmake = '{0}-package.cmake'.format(name)
-    correct_file = '.\\test-cmake\\{0}'.format(cmake)
-    temp_file = '.\\temp\\{0}'.format(cmake)
-    if os.path.exists(correct_file):
-        print('{0}'.format(cmake))
-        fail = compare_files(correct_file, temp_file)
-    else:
-        print('unable to find {0}'.format(cmake))
+    fail = compare_cmake(name)
+    fail += compare_cmake(name, True)
     print('')
-    correct_file = '.\\test-cmake\\src\\{0}'.format(cmake)
-    temp_file = '.\\temp\\src\\{0}'.format(cmake)
-    if os.path.exists(correct_file):
-        print('{0}'.format(cmake))
-        fail += compare_files(correct_file, temp_file)
-    else:
-        print('unable to find src//{0}'.format(cmake))
-    print('')
-
     return fail
 
 
 def run_register_test(name):
-    filename = get_filename(name)
-    fail = 0
-    print('====================================================')
-    print('Testing {0}:CMake register files'.format(name))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, 'CMake', 'register')
     generate_cmake_register_files(filename)
-    cmake = '{0}-register.h'.format(name)
-    correct_file = '.\\test-cmake\\{0}'.format(cmake)
-    temp_file = '.\\temp\\{0}'.format(cmake)
-    if os.path.exists(correct_file):
-        print('{0}'.format(cmake))
-        fail = compare_files(correct_file, temp_file)
-    else:
-        print('unable to find {0}'.format(cmake))
+    fail = compare_cmake_register(name)
+    fail += compare_cmake_register(name, True)
     print('')
-    cmake = '{0}-register.cxx'.format(name)
-    correct_file = '.\\test-cmake\\{0}'.format(cmake)
-    temp_file = '.\\temp\\{0}'.format(cmake)
-    if os.path.exists(correct_file):
-        print('{0}'.format(cmake))
-        fail += compare_files(correct_file, temp_file)
-    else:
-        print('unable to find src//{0}'.format(cmake))
-    print('')
-
     return fail
 
 
+#########################################################################
+# Main function
+
+
 def main():
-    global_variables.running_tests = True
-    global_variables.code_returned = global_variables.return_codes['success']
+
+    # set up the enivornment
     this_dir = os.getcwd()
-    global path_to_tests
 
     (path_to_tests, other) = os.path.split(this_dir)
+    test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
-
     fail = 0
 
+    # run the individual tests
     name = 'spatial'
     fail += run_cmake_test(name)
 
     name = 'spatial'
     fail += run_register_test(name)
 
-    if fail > 0:
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print('CMAKE FAILS')
-        print('Check {0} fails'.format(fail))
-        for name in fails:
-            print(name)
-
+    test_functions.report('CMAKE', fail, fails, not_tested)
     return fail
 
 

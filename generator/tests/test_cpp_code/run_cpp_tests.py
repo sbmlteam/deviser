@@ -2,30 +2,19 @@
 
 import os
 
-from parseXML import createPackageFromXml
 from code_files import CppFiles, ExtensionFiles, ValidationFiles
 from parseXML import ParseXML
-from util import global_variables
 
+from tests import test_functions
+
+##############################################################################
+# Set up variables
 fails = []
 not_tested = []
-path_to_tests = ''
 
 
-def get_filename(name):
-    global path_to_tests
-    fname = '{0}.xml'.format(name)
-    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
-    return filename
-
-
-def generate_cpp_header(filename, num):
-    ob = createPackageFromXml.parse_deviser_xml(filename)
-    working_class = ob['baseElements'][num]
-    os.chdir('./temp')
-    all_files = CppFiles.CppFiles(working_class)
-    all_files.write_files()
-    os.chdir('../.')
+##############################################################################
+# Specific generation functions
 
 
 def generate_new_cpp_header(filename, num):
@@ -102,152 +91,119 @@ def generate_constraints(filename):
     os.chdir('../.')
 
 
-# reads file containing expected sbml model and returns it as string
-def read_file(path):
-    filein = open(path, 'r')
-    contents = filein.read()
-    filein.close()
-    return contents
+#############################################################################
+# Specific compare functions
+
+def compare_files(correct_file, temp_file):
+    return test_functions.compare_files(correct_file, temp_file, fails,
+                                        not_tested)
 
 
-def compare_files(infile, outfile):
-    global fails
-    global not_tested
-    ret = 0
-    if not os.path.isfile(infile):
-        # we have not added a file to compare to
-        not_tested.append(infile)
-        return ret
-    elif not os.path.isfile(outfile):
-        print(outfile)
-        fails.append(infile)
-        print('{0}=================>> MISSING'.format(outfile))
-        return 1
-    indata = read_file(infile)
-    out = read_file(outfile)
-    if indata.strip() == out.strip():
-        print('{0} .... PASSED'.format(outfile))
-    else:
-        fails.append(infile)
-        print('{0}=================>> FAILED'.format(outfile))
-        ret = 1
-    return ret
-
-
-def run_test(name, num, class_name, test_case, list_of):
-    filename = get_filename(name)
-    print('====================================================')
-    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
-    print('====================================================')
-    generate_new_cpp_header(filename, num)
+def compare_code_headers(class_name):
     correct_file = '.\\test-code\\{0}.h'.format(class_name)
     temp_file = '.\\temp\\{0}.h'.format(class_name)
-    fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-code\\{0}.cpp'.format(class_name)
-    temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
-    fail += compare_files(correct_cpp_file, temp_cpp_file)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_ext_headers(class_name):
+    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
+    temp_file = '.\\temp\\{0}.h'.format(class_name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_code_impl(class_name):
+    correct_file = '.\\test-code\\{0}.cpp'.format(class_name)
+    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_ext_impl(class_name, declared=False):
+    if declared:
+        correct_file = '.\\test-extension\\{0}Declared.cxx'.format(class_name)
+        temp_file = '.\\temp\\{0}Declared.cxx'.format(class_name)
+    else:
+        correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
+        temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+    return compare_files(correct_file, temp_file)
+
+
+#############################################################################
+# Specific test functions
+
+def run_test(name, num, class_name, test_case, list_of):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_new_cpp_header(filename, num)
+    fail = compare_code_headers(class_name)
+    fail += compare_code_impl(class_name)
     if len(list_of) > 0:
         class_name = list_of
-        correct_file = '.\\test-code\\{0}.h'.format(class_name)
-        temp_file = '.\\temp\\{0}.h'.format(class_name)
-        fail += compare_files(correct_file, temp_file)
-        correct_cpp_file = '.\\test-code\\{0}.cpp'.format(class_name)
-        temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
-        fail += compare_files(correct_cpp_file, temp_cpp_file)
+        fail += compare_code_headers(class_name)
+        fail += compare_code_impl(class_name)
     print('')
     return fail
 
 
 def run_ext_test(name, class_name, test_case, test):
-    filename = get_filename(name)
-    print('====================================================')
-    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, class_name, test_case)
     if test == 0:
         generate_extension_header(filename)
     elif test == 1:
         generate_types_header(filename)
     else:
         generate_fwd_header(filename)
-    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
-    fail = compare_files(correct_file, temp_file)
+    fail = compare_ext_headers(class_name)
     if test == 0:
-        correct_cpp_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-        temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
-        fail += compare_files(correct_cpp_file, temp_cpp_file)
+        fail += compare_ext_impl(class_name)
     print('')
     return fail
 
 
 def run_plug_test(name, class_name, test_case, num):
-    filename = get_filename(name)
-    print('====================================================')
-    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, class_name, test_case)
     generate_plugin_header(filename, num)
-    correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
-    fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-    temp_cpp_file = '.\\temp\\{0}.cpp'.format(class_name)
-    fail += compare_files(correct_cpp_file, temp_cpp_file)
+    fail = compare_ext_headers(class_name)
+    fail += compare_ext_impl(class_name)
     print('')
     return fail
 
 
 def run_valid_test(name, class_name, test_case, is_ext=True):
-    filename = get_filename(name)
-    print('====================================================')
-    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, class_name, test_case)
     if is_ext:
         generate_error_header(filename)
-        correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-        temp_file = '.\\temp\\{0}.h'.format(class_name)
-        fail = compare_files(correct_file, temp_file)
-        correct_file = '.\\test-extension\\{0}Table.h'.format(class_name)
-        temp_file = '.\\temp\\{0}Table.h'.format(class_name)
-        fail += compare_files(correct_file, temp_file)
+        fail = compare_ext_headers(class_name)
+        fail += compare_ext_headers('{0}Table'.format(class_name))
     else:
         generate_validator(filename)
-        correct_file = '.\\test-extension\\{0}.h'.format(class_name)
-        temp_file = '.\\temp\\{0}.h'.format(class_name)
-        fail = compare_files(correct_file, temp_file)
-        correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-        temp_file = '.\\temp\\{0}.cpp'.format(class_name)
-        fail += compare_files(correct_file, temp_file)
+        fail = compare_ext_headers(class_name)
+        fail += compare_ext_impl(class_name)
     print('')
     return fail
 
 
 def run_constraints_test(name, class_name, test_case):
-    filename = get_filename(name)
-    print('====================================================')
-    print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, class_name, test_case)
     generate_constraints(filename)
-    correct_file = '.\\test-extension\\{0}.cpp'.format(class_name)
-    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
-    fail = compare_files(correct_file, temp_file)
-    correct_cpp_file = '.\\test-extension\\{0}Declared.cxx'.format(class_name)
-    temp_cpp_file = '.\\temp\\{0}Declared.cxx'.format(class_name)
-    fail += compare_files(correct_cpp_file, temp_cpp_file)
+    fail = compare_ext_impl(class_name)
+    fail += compare_ext_impl(class_name, declared=True)
     print('')
     return fail
 
 
-def main():
-    global_variables.running_tests = True
-    global_variables.code_returned = global_variables.return_codes['success']
-    this_dir = os.getcwd()
-    global path_to_tests
+#########################################################################
+# Main function
 
+def main():
+
+    # set up the enivornment
+    this_dir = os.getcwd()
     (path_to_tests, other) = os.path.split(this_dir)
+    test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
-
     fail = 0
+
+    # run the individual tests
     name = 'test_att'
     num = 1
     class_name = 'Unit'
@@ -544,18 +500,7 @@ def main():
     test_case = 'class using an unknown attribute type'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    if len(not_tested) > 0:
-        print('The following files were not tested:')
-        for name in not_tested:
-            print(name)
-
-    if fail > 0:
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print('CPP FAILS')
-        print('Check {0} fails'.format(fail))
-        for name in fails:
-            print(name)
-
+    test_functions.report('CPP', fail, fails, not_tested)
     return fail
 
 if __name__ == '__main__':

@@ -303,11 +303,11 @@ class BaseCppFile(BaseFile.BaseFile):
             else:
                 global_variables.code_returned \
                     = global_variables.return_codes['unknown type used']
-                attributes[i]['attType'] = 'FIXME_{}'.format(att_type)
-                attributes[i]['attTypeCode'] = 'FIXME_{}'.format(att_type)
-                attributes[i]['CType'] = 'FIXME_{}'.format(att_type)
+                attributes[i]['attType'] = 'FIXME_{0}'.format(att_type)
+                attributes[i]['attTypeCode'] = 'FIXME_{0}'.format(att_type)
+                attributes[i]['CType'] = 'FIXME_{0}'.format(att_type)
                 attributes[i]['isNumber'] = False
-                attributes[i]['default'] = 'FIXME_{}'.format(att_type)
+                attributes[i]['default'] = 'FIXME_{0}'.format(att_type)
         return attributes
 
     def create_lo_other_child_element_class(self, name, parent):

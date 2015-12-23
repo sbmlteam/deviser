@@ -4,20 +4,17 @@ import os
 
 from spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
 from parseXML import ParseXML
-from util import global_variables
 
-use_new = True
+from tests import test_functions
 
+##############################################################################
+# Set up variables
 fails = []
 not_tested = []
-path_to_tests = ''
 
 
-def get_filename(name):
-    global path_to_tests
-    fname = '{0}.xml'.format(name)
-    filename = os.path.join(path_to_tests, 'test_xml_files', fname)
-    return filename
+##############################################################################
+# Specific generation functions
 
 
 def generate_validator(filename):
@@ -47,73 +44,68 @@ def generate_body(filename):
     os.chdir('../.')
 
 
-# reads file containing expected sbml model and returns it as string
-def read_file(path):
-    filein = open(path, 'r')
-    contents = filein.read()
-    filein.close()
-    return contents
+#############################################################################
+# Specific compare functions
+
+def compare_files(correct_file, temp_file):
+    return test_functions.compare_files(correct_file, temp_file, fails,
+                                        not_tested)
 
 
-def compare_files(infile, outfile):
-    global fails
-    global not_tested
-    ret = 0
-    if not os.path.isfile(infile):
-        # we have not added a file to compare to
-        not_tested.append(infile)
-        return ret
-    elif not os.path.isfile(outfile):
-        print(outfile)
-        fails.append(infile)
-        print('{0}=================>> MISSING'.format(outfile))
-        return 1
-    indata = read_file(infile)
-    out = read_file(outfile)
-    if indata.strip() == out.strip():
-        print('{0} .... PASSED'.format(outfile))
-    else:
-        fails.append(infile)
-        print('{0}=================>> FAILED'.format(outfile))
-        ret = 1
-    return ret
+def compare_validation(name):
+    correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
+    temp_file = '.\\temp\\apdx-validation.tex'.format(name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_macros(name):
+    correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
+    temp_file = '.\\temp\\macros.tex'.format(name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_body(name):
+    correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
+    temp_file = '.\\temp\\body.tex'.format(name)
+    return compare_files(correct_file, temp_file)
+
+
+#############################################################################
+# Specific test functions
 
 
 def run_test(name, test_type):
-    filename = get_filename(name)
-    correct_file = ''
-    temp_file = ''
-    print('====================================================')
-    print('Testing {0}:{1}'.format(test_type, name))
-    print('====================================================')
+    filename = test_functions.set_up_test(name, 'Tex', test_type)
+    fail = 0
     if test_type == 'validation':
         generate_validator(filename)
-        correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
-        temp_file = '.\\temp\\apdx-validation.tex'
+        fail = compare_validation(name)
     elif test_type == 'macros':
         generate_macros(filename)
-        correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
-        temp_file = '.\\temp\\macros.tex'
+        fail = compare_macros(name)
     elif test_type == 'body':
         generate_body(filename)
-        correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
-        temp_file = '.\\temp\\body.tex'
-    fail = compare_files(correct_file, temp_file)
+        fail = compare_body(name)
     print('')
     return fail
 
 
+#########################################################################
+# Main function
+
+
 def main():
-    global_variables.running_tests = True
-    global_variables.code_returned = global_variables.return_codes['success']
-    fail = 0
+
+    # set up the enivornment
     this_dir = os.getcwd()
-    global path_to_tests
 
     (path_to_tests, other) = os.path.split(this_dir)
+    test_functions.set_path_to_tests(path_to_tests)
     if not os.path.isdir('temp'):
         os.mkdir('temp')
+    fail = 0
 
+    # run the individual tests
     name = 'qual'
     test_case = 'validation'
     fail += run_test(name, test_case)
@@ -134,18 +126,8 @@ def main():
     test_case = 'validation'
     fail += run_test(name, test_case)
 
-    if len(not_tested) > 0:
-        print('The following files were not tested:')
-        for name in not_tested:
-            print(name)
-
-    if fail > 0:
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print('TEX FAILS')
-        print('Check {0} fails'.format(fail))
-        for name in fails:
-            print(name)
-
+    # write summary
+    test_functions.report('TEX', fail, fails, not_tested)
     return fail
 
 
