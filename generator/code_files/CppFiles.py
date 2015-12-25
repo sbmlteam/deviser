@@ -80,7 +80,12 @@ class CppFiles():
         fileout.close_file()
 
     def create_list_of_description(self):
+        # default list of name
         lo_name = strFunctions.list_of_name(self.class_object['name'])
+        # check that we have not specified this should be different
+        if 'lo_class_name' in self.class_object and \
+                len(self.class_object['lo_class_name']) > 0:
+            lo_name = self.class_object['lo_class_name']
         descrip = copy.deepcopy(self.class_object)
         descrip['is_list_of'] = True
         descrip['attribs'] = self.class_object['lo_attribs']
