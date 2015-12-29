@@ -197,11 +197,13 @@ class ParseXML():
             return None
         for element in elements:
             if 'isListOf' in element and element['isListOf'] is True:
-                match = strFunctions.list_of_name(element['name'])
-                if 'listOfClassName' in element \
-                        and element['listOfClassName'] != '':
-                    match = element['listOfClassName']
-                if match.lower() == name.lower():
+                name_to_match = strFunctions.list_of_name(element['name'])
+                if 'listOfClassName' in element:
+                    if element['listOfClassName'] != '':
+                        name_to_match = element['listOfClassName']
+                    else:
+                        element['listOfClassName'] = name_to_match
+                if name_to_match.lower() == name.lower():
                     return element
         return None
 

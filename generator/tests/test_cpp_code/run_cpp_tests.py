@@ -500,6 +500,11 @@ def main():
     test_case = 'class using an unknown attribute type'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_sidrefs'
+    class_name = 'RefsSBMLError'
+    test_case = 'sidref with multiple targets '
+    fail += run_valid_test(name, class_name, test_case)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

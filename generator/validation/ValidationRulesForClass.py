@@ -156,7 +156,8 @@ class ValidationRulesForClass():
         if att_type == 'SId':
             return
         elif att_type == 'SIdRef':
-            ref_name = strFunctions.upper_first(attribute['element'])
+            [ref_name, ref_type] = \
+                strFunctions.get_sid_refs(attribute['element'])
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
@@ -164,7 +165,7 @@ class ValidationRulesForClass():
                    'the identifier of an existing \{3} object defined in the ' \
                    'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
-            rule_type = ref_name
+            rule_type = ref_type
         elif att_type == 'string' or att_type == 'IDREF':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\

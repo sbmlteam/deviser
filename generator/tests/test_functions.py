@@ -29,6 +29,7 @@ def set_running_tests():
 # get the xml filename
 # and print a banner defining the test
 def set_up_test(name, class_name, test_case=''):
+    set_running_tests()
     print('====================================================')
     print('Testing {0}:{1} {2}'.format(name, class_name, test_case))
     print('====================================================')

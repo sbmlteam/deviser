@@ -186,6 +186,23 @@ def wrap_enum(name):
     return '\\primtype{' + lower_first(name) + '}'
 
 
+def get_sid_refs(refs):
+    if ',' not in refs:
+        return [upper_first(refs), upper_first(refs)]
+    else:
+        ret_string = ''
+        ret_type = ''
+        str = refs.split(', ')
+        length = len(str)
+        if length > 0:
+            ret_string = upper_first(str[0])
+            ret_type = upper_first(str[0])
+            for i in range(1, length):
+                ret_string += ' or \{0}'.format(upper_first(str[i]))
+                ret_type += 'Or{0}'.format(upper_first(str[i]))
+        return [ret_string, ret_type]
+
+
 def get_element_name(attribute):
     if 'type' in attribute:
         if attribute['type'] == 'lo_element':

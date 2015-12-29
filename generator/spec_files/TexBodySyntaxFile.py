@@ -261,6 +261,10 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                     strFunctions.wrap_type(attrib['type'],
                                                            attrib['element'],
                                                            True)))
+            if attrib['type'] == 'SIdRef':
+                [string_name, a] = strFunctions.get_sid_refs(attrib['element'])
+                self.write_line('This attribute must be the identifier of '
+                                'an existing \{0} object.'.format(string_name))
             self.write_to_do('explain {0}'.format(att_name))
         self.skip_line()
 

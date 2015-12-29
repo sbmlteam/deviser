@@ -126,6 +126,14 @@ def main():
     test_case = 'validation'
     fail += run_test(name, test_case)
 
+    name = 'test_sidrefs'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'test_sidrefs'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
     # write summary
     test_functions.report('TEX', fail, fails, not_tested)
     return fail
