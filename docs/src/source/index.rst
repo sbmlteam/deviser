@@ -14,9 +14,11 @@ Contents:
    getting_started
    defining_package
    using_deviser
+   defining_multiple_versions
    appendix_a_xml_example
    appendix_b_types
    appendix_c_adding_type
+   appendix_d_licensing
    
    references
 

@@ -1,3 +1,4 @@
+.. _add-types:
 
 Appendix C
 ==========

@@ -217,7 +217,7 @@ latex_elements = {
 #'preamble': '',
 
 # Latex figure (float) alignment
-'figure_align': 'htb',
+'figure_align': 'ht',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
