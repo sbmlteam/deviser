@@ -15,13 +15,11 @@ Contents:
    defining_package
    using_deviser
    defining_multiple_versions
-   appendix_a_xml_example
-   appendix_b_types
-   appendix_c_adding_type
-   appendix_d_licensing
-   appendix_e_validation
-   
-   references
+   appendix_xml_example
+   appendix_types
+   appendix_adding_type
+   appendix_licensing
+   appendix_validation
 
 
 References

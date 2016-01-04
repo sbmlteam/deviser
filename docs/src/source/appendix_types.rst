@@ -1,8 +1,8 @@
 
-Appendix B
-==========
+Appendix B: Data Types
+=======================
 
-Data types recognized by Deviser Edit and the corresponding C++ data
+The attribute types recognized by Deviser Edit and the corresponding C++ data
 type.
 
 +-----------------------------------+-----------------------------------+
@@ -22,7 +22,7 @@ type.
 +-----------------------------------+-----------------------------------+
 | non-negative integer              | unsigned int                      |
 +-----------------------------------+-----------------------------------+
-| ID                                | std::string                       |
+| IDREF                             | std::string                       |
 +-----------------------------------+-----------------------------------+
 | SId                               | std::string                       |
 +-----------------------------------+-----------------------------------+
