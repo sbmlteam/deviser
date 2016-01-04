@@ -371,8 +371,8 @@ elements** table for a class as shown in Figure :num:`fig-add-class`.
 These fields are identical to those in the **ListOf attributes** table 
 that appears when the **hasListOf** checkbox is checked.
 
-The **Required** field
-***********************
+The **Required** checkbox
+**************************
 
 The **Required** field indicates whether the attribute or child element
 is mandatory in terms of the SBML definition. 
@@ -513,7 +513,8 @@ The code generator produces the following code for an attribute of type 'array':
                       is a placeholder for the attribute name 
                       given to the array
 
-
+.. _enum:  
+       
 Attribute/child element type ‘enum’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1103,6 +1104,10 @@ reflect the package and the object being extended.
 
      libSBML class hierarchy showing ‘plugins’ to the Model class
 
+.. raw:: latex
+
+  \clearpage
+
 General plugin information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1117,16 +1122,34 @@ Select ‘Add Plugin’ from the toolbar or the ‘Edit’ menu.
 
      The ‘Plugin’ sheet.
 
+The **ExtensionPoint** field
+****************************
+
 The **ExtensionPoint** field is used to specify the name of the element
 that is being extended. This will be the name of the class as used by
 libSBML.
 
+The **element from core** checkbox
+***********************************
+
 The **element from core** checkbox is used to specify whether the object
-being extended originates in SBML Core or another Level 3 package.
+being extended originates in SBML Core or another Level 3 package. It is checked 
+by default as to date the majority of SBML L3 packages have only extended 
+elements from SBML core. Unchecking the box reveals the **Package** and 
+**TypeCode** fields discussed below.
+
+The **hasAttributes** checkbox
+******************************
 
 The **hasAttributes** checkbox should be ticked if the package is going
 to extend an object with attributes rather than (or as well as)
 elements.
+
+The **requires additional code** checkbox
+******************************************
+
+.. todo::
+    Update additional code stuff
 
 As on other sheets the **requires additional code** checkbox can be used
 to indicate that there is additional code that will be required by the
@@ -1135,9 +1158,36 @@ additional code’ box reveals further boxes that can be used to specify
 the location of the additional code files. Deviser will incorporate this
 code ‘as-is’.
 
+The Defined Classes and Child Classes boxes
+********************************************
+
 The sheet for adding a plugin lists the classes that have already been
 specified (**Defined Classes**) and are ‘available’ to extend an object.
 These can be selected and moved into the **Child Classes** column.
+
+The **Up** and **Down** buttons can be used to reorder the classes that have
+been added as extensions for the given extension point. This will impact the 
+order in which Deviser deals with plugins and thus will affect typecode 
+enumerations and the order in which plugin objects are documented.
+
+The **Package** field
+*********************
+
+In cases where the **ExtensionPoint** does not originate in SBML L3 Core 
+Deviser needs to know in which L3 Package the class does originate.
+
+
+The **TypeCode** field
+**********************
+
+In cases where the **ExtensionPoint** does not originate in SBML L3 Core 
+Deviser also needs to know the TypeCode that libSBML has used for the 
+object being extended. It will be necessary for the user to consult libSBML 
+documentation (or code) to determine this value.
+
+.. raw:: latex
+
+  \clearpage
 
 Example 4 – Extending a core element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1155,7 +1205,27 @@ note that the element is from core. Highlight FooKineticLaw in the
 **Defined Classes** column and use the arrows to move it to the **Child
 Classes** column. Essentially this is telling Deviser to generate the
 class FooReactionPlugin which will expect to have a data member of type
-FooKineticLaw class.
+FooKineticLaw class and the functions necessary to create and manipulate it 
+(as shown below).
+
+.. code-block:: C++
+
+    class LIBSBML_EXTERN FooReactionPlugin : public SBasePlugin
+    {
+    protected:
+      FooKineticLaw* mFooKineticLaw;
+    public:
+      const FooKineticLaw* getFooKineticLaw() const;
+      bool isSetFooKineticLaw() const;
+      int setFooKineticLaw(const FooKineticLaw* fooKineticLaw);
+      FooKineticLaw* createFooKineticLaw();
+      int unsetFooKineticLaw();
+      ...
+    }
+
+.. raw:: latex
+
+  \clearpage
 
 Example 5 – Extending a core element with attributes only
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1166,20 +1236,30 @@ the **hasAttributes** checkbox.
 The table **Child attributes and child elements** appears. This is used
 for adding attributes and child elements as previously described. Here
 we specify that the Model will have a required boolean attribute
-‘useFoo’ from the foo package (Figure 21). Note that it is not necessary
+‘useFoo’ from the foo package (Figure :num:`fig-plugin-model`). Note that it is not necessary
 to specify child elements that originate in the package being defined
-i.e. those that have already been listed as **Child classes**.
+as these that have already been listed as **Child classes**.
+
+.. todo::
+   Change figure :num:`fig-plugin-model`
+
 
 .. _fig-plugin-model:
 .. figure:: ../screenshots/deviser-plugin-model.png
 
      Defining the extension of SBML Level 3 Core Model by package foo.
 
+.. raw:: latex
+
+  \clearpage
+
 Example 6 – Extending a non-core element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we declare that the **ExtensionPoint** is Transition from the
-Qualitative Models (qual) Package. The package foo adds the
+Qualitative Models (qual) Package. Unchecking the **element from core** checkbox
+reveals the **Package** and **TypeCode** fields which have been filled in as 
+appropriate. The package 'foo' adds the
 ListOfFooRules object to the Transition object.
 
 .. _fig-plugin-trans:
@@ -1187,11 +1267,49 @@ ListOfFooRules object to the Transition object.
 
      Defining the extension of SBML Level 3 Qual Transition by package foo.
 
+.. raw:: latex
+
+  \clearpage
+
 Add enum information
 --------------------
 
 SBML allows users to define data types as enumerations of allowed
-values. Here we describe how to specify these.
+values. Section :ref:`enum` describes using 'enum' as an attribute **Type**. 
+Here we describe how to fully specify the enumeration.
+
+General enum information
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Name field
+***************
+
+The **Name** field is used to declare the name of the enumeration, in
+this case Sign. Note that when generating code Deviser will append an
+‘\_t’ to this name if it does not already have a name of the format Name\_t.
+
+The enumeration table
+**********************
+The table is used to specify the individual allowed values of the
+enumeration.
+
+The **Name** field
+^^^^^^^^^^^^^^^^^^^
+The **Name** field is the enumeration value that will appear in the
+enumeration itself.
+
+The **Value** field
+^^^^^^^^^^^^^^^^^^^
+The **Value** field gives the corresponding string value of that member
+of the enumeration.
+
+The Quick Add field
+*******************
+
+This field can be used to facilitate creating the enumeration Name-Value pairs. 
+Enter the string value in this field and press the 'wand'. The string will be
+added as an enumeration **Value** with a **Name** of PACKAGE\_ENUM\_VALUE.
+
 
 Example 7 – Adding an enumeration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1210,29 +1328,26 @@ enumeration type ‘Sign’ as shown in Figure :num:`fig-foo-extra`.
 Then it is necessary to specify the enumeration itself. Use the **Add
 Enum** button from the toolbar or Edit menu.
 
-The **Name** field is used to declare the name of the enumeration, in
-this case Sign. Note that when generating code Deviser will append an
-‘\_t’ to this name.
+The **Name** filed is Sign (which corresponds to the **Element** field in 
+the attribute table). Figure :num:`fig-enum-sign` shows that we have specified 
+that the enumeration sign has three
+possible values: ‘positive’, ‘negative’ and ‘neutral. Note we used the 
+**Quick Add** field to enter 'neutral' which resulted in the enumeration
+FOO\_SIGN\_NEUTRAL.
 
-The table is used to specify the individual allowed values of the
-enumeration.
-
-The **Name** field is the enumeration value that will appear in the
-enumeration itself.
-
-The **Value** field gives the corresponding string value of that member
-of the enumeration.
-
-Here (Figure :num:`fig-enum-sign`) we have specified that the enumeration sign has three
-possible values: ‘positive’, ‘negative’ and ‘neutral. Note the names
-used reflect the individual values and the package in which they
-originate. It is not necessary to add a default or “unknown” value –
+It is not necessary to add 
+a default or “unknown” value –
 Deviser will do this when generating code.
 
+
 .. _fig-enum-sign:
-.. figure:: ../screenshots/deviser-enum-sign.png
+.. figure:: ../screenshots/deviser-enum-sign-2.png
 
      Defining the Sign enumeration.
+
+.. raw:: latex
+
+  \clearpage
 
 Mappings
 --------
@@ -1256,13 +1371,17 @@ originate in the ‘qual’ package, so this information is added. Note on
 this sheet only the **Package** column can be edited. The **Name**
 column is populated by the tool.
 
-Results
--------
+.. raw:: latex
+
+  \clearpage
+
+Overview of a defined package
+------------------------------
 
 Select ‘Version’ from the tree in the panel on the left hand side. Now
 that all the classes have been defined these are listed here (see Figure
 :num:`fig-full-decsr`) and the ordering can be adjusted. The order will dictate the order
-of the relevant section in the TeX documents.
+of the relevant sections in the TeX documents.
 
 .. _fig-full-decsr:
 .. figure:: ../screenshots/deviser-full-decsr.png
@@ -1277,21 +1396,23 @@ using Deviser Edit or with any XML Editor. The full description of the
 Imaginary Foo Package used in the Examples can be seen in Appendix A or
 is available in the deviser/samples directory.
 
+.. raw:: latex
+
+  \clearpage
+
 Validating the description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-NOTE TO LUCIAN: We have not yet finished implementing all the
-validation. The plan is to provide a list here of all the possible
-errors and warnings that might be reported.
 
 There are two further options on the Edit menu that have not yet been
 discussed.
 
+The Validate Description option
+*******************************
+ 
 **Validate Description** runs a series of internal checks on the
-information provided and prompts the user to fill in any required
-fields.
-
-A pop-up window (Figure :num:`fig-validation`) will appear with either an error message or
+information provided and produces a list of Errors and Warnings.
+When invoked a pop-up window (Figure :num:`fig-validation`) will appear with 
+either a list of errors and/or warnings or
 a confirmation that everything is consistent. The Copy button can be
 used to copy the contents of the report to the clipboard and thus makes
 them available for pasting elsewhere.
@@ -1301,7 +1422,17 @@ them available for pasting elsewhere.
 
      Validating the package description
 
+
+
+:ref:`validation` gives a list of the errors and warnings that may be issued 
+by Deviser Edit with references to teh relevant sections in teh main text. 
+
+The **Fix Errors** option
+**************************
+
 **Fix Errors** provides a direct way of validating and then correcting
-any inconsistencies. It is advisable to use **Validate Description**
+any inconsistencies. Deviser Edit will run the validation checks and then 
+automatically correct any issues, where this is possible. 
+It is advisable to use **Validate Description**
 following **Fix Errors** as some errors cannot be automatically fixed.
 

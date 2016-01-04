@@ -19,6 +19,7 @@ Contents:
    appendix_b_types
    appendix_c_adding_type
    appendix_d_licensing
+   appendix_e_validation
    
    references
 
