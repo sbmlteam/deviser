@@ -31,7 +31,7 @@ definition is then used by Deviser to generate either code or TeX files.
 Samples of definitions output by Deviser Edit are included in the samples 
 directory within the Deviser distribution and the full text of the XML definition 
 created by
-the examples used in this manual is given in Appendix A. Note it is not 
+the examples used in this manual is given in :ref:`descrip`. Note it is not 
 necessary to use Deviser Edit to produce this XML definition; the 
 definition can be produced by hand but should match the format used
 in the samples provided.
@@ -274,6 +274,8 @@ The fields requested are:
   The location of the Python library files. This is
   necessary to build and test the Python binding of libSBML.
 
+.. _add-types:
+
 User Defined Types
 ~~~~~~~~~~~~~~~~~~
 
@@ -285,12 +287,9 @@ User Defined Types
 
     The ‘User Defined Types’ sheet; adding information about other data types.
 
-.. todo::
-    Work out cross doc referencing and put in ref below
-
 In order to generate usable code Deviser needs to know about the possible data
 types that may be used. SBML uses a number of predefined types and these
-are all supported by Deviser (see section ...). However it is possible for
+are all supported by Deviser (see section :ref:`typefield`). However it is possible for
 other SBML L3 packages to introduce types. In order to facilitate the use of 
 these 'unsupported' types the names can be entered here. This will add the 
 new type to the dropdown list of Types available when entering attribute 

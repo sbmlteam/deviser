@@ -1,6 +1,6 @@
 .. _validation:
 
-Appendix E: Validation
+Appendix D: Validation
 ======================
 
 List validation rules

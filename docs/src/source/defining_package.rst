@@ -391,6 +391,9 @@ the rare cases where this Name is not an exact match with the name that
 will appear in the XML the ‘XML name’ field can be used to override the 
 Name supplied.
 
+
+.. _typefield:
+
 The **Type** field
 ******************
 
@@ -424,7 +427,7 @@ and additionally Deviser Edit uses:
     array, enum, element, lo\_element, inline\_lo\_element.
 
 
-\Appendix B gives the lists the types with their corresponding
+:ref:`datatypes` lists the SBML types with their corresponding
 C++ data type. The additional types accepted by Deviser are explained in
 detail in the sections below.
 
@@ -447,7 +450,7 @@ shown below:
                     is a placenolder for the name of the attribute
 
 Deviser Edit provides the ability to add types to the drop-down list which will 
-facilitate using types that are not supported. :ref:`add-types` provides
+facilitate using types that are not supported. Section :ref:`add-types` provides
 information on how to use this facility. 
 
 Attribute/child element type ‘array’
@@ -1393,7 +1396,7 @@ that is used by other code to generate UML, TeX and libSBML code.
 
 Note this underlying XML file can be saved at any point and reopened
 using Deviser Edit or with any XML Editor. The full description of the
-Imaginary Foo Package used in the Examples can be seen in Appendix A or
+Imaginary Foo Package used in the Examples can be seen in :ref:`descrip` or
 is available in the deviser/samples directory.
 
 .. raw:: latex

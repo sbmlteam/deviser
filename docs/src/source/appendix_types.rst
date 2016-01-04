@@ -1,3 +1,4 @@
+.. _datatypes:
 
 Appendix B: Data Types
 =======================

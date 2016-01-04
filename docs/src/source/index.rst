@@ -17,7 +17,6 @@ Contents:
    defining_multiple_versions
    appendix_xml_example
    appendix_types
-   appendix_adding_type
    appendix_licensing
    appendix_validation
 

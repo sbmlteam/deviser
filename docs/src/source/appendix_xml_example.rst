@@ -1,3 +1,4 @@
+.. _descrip:
 
 Appendix A: Example package description
 ========================================
