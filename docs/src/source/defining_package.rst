@@ -39,21 +39,24 @@ been entered.
    package.
 
 
+.. _pkg-name:
 
-The **Name** field
-~~~~~~~~~~~~~~~~~~
+The Package **Name** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Name** field is the short name that will be used as a prefix for
-the package e.g. ‘foo’.
+the package e.g. ‘foo’. This is a required field.
 
-The **Full Name** field
-~~~~~~~~~~~~~~~~~~~~~~~
+.. _pkg-fullname:
+
+The Package **Full Name** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Full Name** field is the name that will be used to refer to the
-package in documentation e.g. ‘Imaginary Package Foo’.
+package in documentation e.g. ‘Imaginary Package Foo’. This is a required field.
 
-The **required** checkbox
-~~~~~~~~~~~~~~~~~~~~~~~~~
+The Package **required** checkbox
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **required** checkbox is used to indicate whether the package may
 change the mathematical interpretation of the core model and corresponds
@@ -66,31 +69,39 @@ to the required attribute on the <sbml> element declaring this package
          xmlns:foo=http://www.sbml.org/sbml/level3/version1/foo/version1
          level="3" version="1" foo:required="true">
 
+.. _pkg-number:
 
-The **Number** field
-~~~~~~~~~~~~~~~~~~~~~
+The Package **Number** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Number** field is the starting point for the enumeration of the
-typecodes for this package. Pressing the information button will pop-up
-with information regarding the Number and Offset values used by existing
-L3 packages (Figure :num:`fig-offsets`).
+typecodes for this package. This is a required field. 
 
-The **Offset** field
-~~~~~~~~~~~~~~~~~~~~~
+Pressing the information button will pop-up
+with information regarding the Number and Offset values used by existing
+L3 packages (Figure :num:`fig-offsets`). 
+
+.. _pkg-offset:
+
+The Package **Offset** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Offset** field is the number added to the validation rules given
 in the specification to allow this to be identified uniquely in code.
+This is a required field.
+
+
 Pressing the information button will pop-up with information regarding
 the Number and Offset values used by existing L3 packages 
-x(Figure :num:`fig-offsets`).
+(Figure :num:`fig-offsets`).
 
 .. _fig-offsets:
 .. figure:: ../screenshots/deviser-numbers-offsets-1.png
 
     The Numbers and Offsets information box
 
-The **requires additional code** checkbox
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The Package **requires additional code** checkbox
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
    This sub-section needs work
@@ -251,15 +262,15 @@ conventions.
 
 Fields that are madatory will remain red until populated.
 
-The **Name** field
-******************
+The Class **Name** field
+*************************
 
 The **Name** field is the name of the class that will be used by the
 code generation (see XML ElementName below). This field is required and
 must be populated.
 
-The **BaseClass** field
-***********************
+The Class **BaseClass** field
+******************************
 
 The **BaseClass** field gives a base class if this class derives from a
 base. Clicking the wand will populate the field with ‘SBase’, as this is
@@ -270,9 +281,10 @@ code for reading and writing to and from an XML document. Therefore, leaving
 the field empty 
 implies that the base class is SBase.
 
+.. _typecode:
 
-The **TypeCode** checkbox and field
-***********************************
+The Class **TypeCode** checkbox and field
+******************************************
 
 The **TypeCode** is a value that will be used in an enumeration of
 the types for this package.  This is used in code to distinguish between
@@ -288,8 +300,8 @@ mandatory. The user must enter a value. Note that using the 'wand' will populate
 field with the default typecode
 SBML\_PACKAGE\_CLASS as above. 
 
-The **XML ElementName** field
-*******************************
+The Class **XML ElementName** field
+************************************
 
 The **XML ElementName** is an optional field that can be used to specify
 the name of the element as it will appear in the XML output. This
@@ -302,8 +314,10 @@ class ‘KineticLaw’ within our package 'foo' and indicate that code should
 generate a class named FooKineticLaw but that text and the XML output
 should use ‘kineticLaw’ as the name of the element.
 
-The **hasListOf** checkbox
-***************************
+.. _listofbox:
+
+The Class **hasListOf** checkbox
+*********************************
 
 The **hasListOf** checkbox is used to indicate whether the element has a
 parent ListOf class. In SBML it is common for elements ‘bar’ to occur
@@ -316,8 +330,13 @@ When the **hasListOf** checkbox is selected further information is required
 and several additional fields appear. These are detailed
 in :ref:`a later section<listof>`.
 
-The **isBaseClass** checkbox
-****************************
+Note leaving this box unchecked means that the corresponding ListOf class
+has not been defined and any further references to such a ListOf class are invalid.
+
+.. _isbase:
+
+The Class **isBaseClass** checkbox
+***********************************
 
 The **isBaseClass** checkbox is used to indicate that the class being
 defined is in fact a base class for other classes within the
@@ -328,8 +347,8 @@ and an additional table appears. The information required is detailed
 in the :ref:`instantiations section<instants>`.
 
 
-The **requires additional code** checkbox
-******************************************
+The Class **requires additional code** checkbox
+************************************************
 
 .. todo::
    Sort out additional code text
@@ -371,8 +390,8 @@ elements** table for a class as shown in Figure :num:`fig-add-class`.
 These fields are identical to those in the **ListOf attributes** table 
 that appears when the **hasListOf** checkbox is checked.
 
-The **Required** checkbox
-**************************
+The attribute/element **Required** checkbox
+*******************************************
 
 The **Required** field indicates whether the attribute or child element
 is mandatory in terms of the SBML definition. 
@@ -383,8 +402,8 @@ both. As yet Deviser does not deal with this situation. We recommend
 that if you need to facilitate this situation you mark both attributes
 as ‘unrequired’ and adjust the generated code accordingly.
 
-The **Name** field
-******************
+The attribute/element **Name** field
+*************************************
 
 The **Name** field gives the name of the attribute or child element. In
 the rare cases where this Name is not an exact match with the name that
@@ -394,8 +413,8 @@ Name supplied.
 
 .. _typefield:
 
-The **Type** field
-******************
+The attribute/element **Type** field
+*************************************
 
 The **Type** field gives the type of the attribute or child.  This is a 
 drop-down list giving the types that are supported by Deviser.
@@ -682,8 +701,10 @@ multiple instances of the same child element but that these do not occur
 within a specified ListOf element. :ref:`Table 1<table1>` gives examples of the
 expected XML and the functions produced.
 
-The **Element** field
-*********************
+.. _elementfield:
+
+The attribute/element **Element** field
+***************************************
 
 
 The **Element** field provides additional information depending on the
@@ -728,8 +749,8 @@ defined in L3 core or other available L3 package code. Deviser Edit will
 prompt users for this information in the section on `Mappings`_.
 
 
-The **isBaseClass** field
-**************************
+The attribute/element **isBaseClass** field
+********************************************
 
 The **isBaseClass** field indicates that the child element is a base
 class and not instantiated directly. This is a situation that will not
@@ -756,8 +777,8 @@ instead of getting a ‘createCSGNode()’ function, you would get create
 functions for all the instantiations of the base class:
 createCSGTransformation(); createCSGPrimitive() etc.
 
-The **XML Name** field
-***********************
+The attribute/element **XML Name** field
+****************************************
 
 The **XML name** field can be used to specify the name of the element as
 it will appear in the XML output where this may differ from the Name
@@ -778,29 +799,29 @@ Adding further ListOf information
 
 When the **hasListOf** checkbox is selected four other fields appear.
 
-The **ListOfClassName** field
-*******************************
+The listof **ListOfClassName** field
+*************************************
 
 The **ListOfClassName** is the name used in code for the class
 representing the ListOf object. It need only be populated if the
 default of ‘ListOfBars’ is inappropriate.
 
-The **XML ListOfName** field
-*******************************
+The listof **XML ListOfName** field
+*************************************
 
 The **XML ListOfName** field is the XML name for the list of objects. It
 only needs to be populated if there is a difference in name between XML
 and code. It will default to ‘listOfBars’ where ‘Bar’ is the class name.
 
-The **Minimum number of children** field
-*****************************************
+The listof **Minimum number of children** field
+************************************************
 
 The **Minimum number of children** field is used to indicate the minimum
 number of child objects of type Bar a ListOfBars expects. Currently in
 SBML L3 ListOf elements cannot be empty so this will default to '1'.
 
-The **Maximum number of children** field
-*****************************************
+The listof **Maximum number of children** field
+************************************************
 
 The **Maximum number of children** field is used to indicate the maximum
 number of child objects a ListOf expects. Leaving this blank implies
@@ -836,25 +857,31 @@ inherit from this class need be listed; it may be that the classes
 listed are themselves base classes for further classes. These should be
 listed as the Instantiations on the relevant base class description.
 
-The **XML Name** field
-***********************
+.. _inst-name:
 
-The **XML name** field specifies the XML name of the object.
+The instantiations **XML Name** field
+**************************************
 
-The **Element** field
-***********************
+The **XML name** field specifies the XML name of the object. This is a required
+field and must have a value.
+
+.. _inst-element:
+
+The instantiations **Element** field
+*************************************
 
 The **Element** field specifies a class that will be derived from this
-base class.
+base class. This is a required field and should be the name of a Class defined
+within the package.
 
-The **Min No. Children** field
-*******************************
+The instantiations **Min No. Children** field
+**********************************************
 
 The **Min No. Children** field is used to specify a minimum number of
 children that this element may have.
 
-The **Min No. Children** field
-*******************************
+The instantiations **Max No. Children** field
+**********************************************
 
 The **Max No. Children** field is used to specify the maximum number of
 children.
@@ -1125,15 +1152,15 @@ Select ‘Add Plugin’ from the toolbar or the ‘Edit’ menu.
 
      The ‘Plugin’ sheet.
 
-The **ExtensionPoint** field
-****************************
+The Plugin **ExtensionPoint** field
+************************************
 
 The **ExtensionPoint** field is used to specify the name of the element
 that is being extended. This will be the name of the class as used by
 libSBML.
 
-The **element from core** checkbox
-***********************************
+The Plugin **element from core** checkbox
+******************************************
 
 The **element from core** checkbox is used to specify whether the object
 being extended originates in SBML Core or another Level 3 package. It is checked 
@@ -1141,15 +1168,15 @@ by default as to date the majority of SBML L3 packages have only extended
 elements from SBML core. Unchecking the box reveals the **Package** and 
 **TypeCode** fields discussed below.
 
-The **hasAttributes** checkbox
-******************************
+The Plugin **hasAttributes** checkbox
+**************************************
 
 The **hasAttributes** checkbox should be ticked if the package is going
 to extend an object with attributes rather than (or as well as)
 elements.
 
-The **requires additional code** checkbox
-******************************************
+The Plugin **requires additional code** checkbox
+*************************************************
 
 .. todo::
     Update additional code stuff
@@ -1161,8 +1188,8 @@ additional code’ box reveals further boxes that can be used to specify
 the location of the additional code files. Deviser will incorporate this
 code ‘as-is’.
 
-The Defined Classes and Child Classes boxes
-********************************************
+The Plugin **Defined Classes** and **Child Classes** boxes
+***********************************************************
 
 The sheet for adding a plugin lists the classes that have already been
 specified (**Defined Classes**) and are ‘available’ to extend an object.
@@ -1173,15 +1200,18 @@ been added as extensions for the given extension point. This will impact the
 order in which Deviser deals with plugins and thus will affect typecode 
 enumerations and the order in which plugin objects are documented.
 
-The **Package** field
-*********************
+Adding other package information
+********************************
+
+The plugin **Package** field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In cases where the **ExtensionPoint** does not originate in SBML L3 Core 
 Deviser needs to know in which L3 Package the class does originate.
 
 
-The **TypeCode** field
-**********************
+The plugin **TypeCode** field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In cases where the **ExtensionPoint** does not originate in SBML L3 Core 
 Deviser also needs to know the TypeCode that libSBML has used for the 
@@ -1284,30 +1314,34 @@ Here we describe how to fully specify the enumeration.
 General enum information
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Name field
-***************
+The Enum **Name** field
+***********************
 
 The **Name** field is used to declare the name of the enumeration, in
 this case Sign. Note that when generating code Deviser will append an
 ‘\_t’ to this name if it does not already have a name of the format Name\_t.
 
-The enumeration table
-**********************
+.. _enum_name:
+
+The Enum **Name/Value** table
+******************************
 The table is used to specify the individual allowed values of the
 enumeration.
 
-The **Name** field
-^^^^^^^^^^^^^^^^^^^
+The enum table **Name** field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The **Name** field is the enumeration value that will appear in the
 enumeration itself.
 
-The **Value** field
-^^^^^^^^^^^^^^^^^^^
+The enum table **Value** field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The **Value** field gives the corresponding string value of that member
 of the enumeration.
 
-The Quick Add field
-*******************
+Each entry must have both a **Name** and a **Value**.
+
+The Enum Quick Add field
+************************
 
 This field can be used to facilitate creating the enumeration Name-Value pairs. 
 Enter the string value in this field and press the 'wand'. The string will be
@@ -1409,8 +1443,8 @@ Validating the description
 There are two further options on the Edit menu that have not yet been
 discussed.
 
-The Validate Description option
-*******************************
+The **Validate Description** option
+************************************
  
 **Validate Description** runs a series of internal checks on the
 information provided and produces a list of Errors and Warnings.
