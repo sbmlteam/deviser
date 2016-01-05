@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="Foo" fullname="Foo" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+      <elements>
+        <element name="Apple" typeCode="SBML_FOO_APPLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="2" abstract="false"/>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ListOfApples"/>
+          </references>
+        </plugin>
+      </plugins>
+    </pkgVersion>
+  </versions>
+</package>

@@ -363,6 +363,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'listOfName')
             lo_class_name = \
                 self.get_loclass_name_value(self, node, 'listOfClassName')
+            min_lo_children = self.get_int_value(self, node, 'minNumListOfChildren')
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
             add_defs = self.get_add_code_value(self, node, 'additionalDefs')
 
@@ -390,6 +391,7 @@ class ParseXML():
                             'elementName': xml_element_name,
                             'lo_elementName': xml_lo_element_name,
                             'lo_class_name': lo_class_name,
+                            'min_lo_children': min_lo_children,
                             'num_versions': self.num_versions,
                             'version': pkg_version
                             })
@@ -498,7 +500,9 @@ class ParseXML():
                                            'listOfName': element['elementName'],
                                            'listOfClassName':
                                                element['lo_class_name'],
-                                           'xml_name': element['elementName']}))
+                                           'xml_name': element['elementName'],
+                                           'min_lo_children':
+                                               element['min_lo_children']}))
                 self.sbml_elements.append(element)
 
     def get_plugins_for_version(self, pkg_node):

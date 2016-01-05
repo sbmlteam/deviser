@@ -129,8 +129,16 @@ def main():
     name = 'test_sidrefs'
     test_case = 'validation'
     fail += run_test(name, test_case)
-
+    
     name = 'test_sidrefs'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
+    name = 'test_lists'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'test_lists'
     test_case = 'body'
     fail += run_test(name, test_case)
 

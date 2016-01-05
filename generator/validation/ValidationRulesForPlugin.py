@@ -524,6 +524,12 @@ class ValidationRulesForPlugin():
     # might not be lo elements
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
+        unusual_min = False
+        # check whether have unusual minimums
+        for i in range(0, number):
+            if 'min_lo_children' in self.opt_child_lo_elem[i] and \
+                            self.opt_child_lo_elem[i]['min_lo_children'] != 1:
+                unusual_min = True
         if number > 1:
             obj = 'objects'
             pred = 'these'
@@ -544,13 +550,24 @@ class ValidationRulesForPlugin():
         text = 'The {0} sub{1} on {2} {3} object is optional, but if ' \
                'present, {4} container {1} must not be empty.'\
             .format(elements, obj, self.indef, self.formatted_name, pred)
+        if unusual_min:
+            for i in range(0, number):
+                num = strFunctions.replace_digits(str(
+                    self.opt_child_lo_elem[i]['min_lo_children'])).lower()
+                name = strFunctions.get_element_name(self.opt_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.'.format(name, num,
+                                             self.opt_child_lo_elem[i]['name'])
         ref = 'SBML Level~3 Specification for {0} Version~1, {1}.'\
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
+        if unusual_min:
+            tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name, )
+        else:
+            tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})

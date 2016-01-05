@@ -150,11 +150,22 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
         self.write_to_do('explain {0}'.format(lo_name))
 
+        number = ''
+        if 'min_lo_children' not in sbml_class:
+            number = 'one'
+        elif sbml_class['min_lo_children'] == 1:
+            number = 'one'
+        else:
+            number = strFunctions.replace_digits(str(
+                sbml_class['min_lo_children'])).lower()
+
+
         self.write_line('The \\{0} object derives from the \\class{1}SBase{2}'
                         ' and inherits the core attributes and subobjects '
                         'from that class.  It contains '
-                        'one or more objects of type \\{3}.'
-                        .format(lo_name, self.start_b, self.end_b, classname))
+                        '{4} or more objects of type \\{3}.'
+                        .format(lo_name, self.start_b, self.end_b, classname,
+                                number))
         self.skip_line()
 
         written = False
