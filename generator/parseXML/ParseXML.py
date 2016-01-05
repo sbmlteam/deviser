@@ -176,6 +176,15 @@ class ParseXML():
                 return None
         return add_code
 
+    @staticmethod
+    def get_lo_min_children(self, node):
+        name = 'minNumListOfChildren'
+        temp = node.getAttributeNode(name)
+        if temp is None:
+            return 1
+        return self.to_int(temp.nodeValue)
+
+
     #####################################################################
 
     # Functions for looking up elements
@@ -363,7 +372,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'listOfName')
             lo_class_name = \
                 self.get_loclass_name_value(self, node, 'listOfClassName')
-            min_lo_children = self.get_int_value(self, node, 'minNumListOfChildren')
+            min_lo_children = self.get_lo_min_children(self, node)
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
             add_defs = self.get_add_code_value(self, node, 'additionalDefs')
 
