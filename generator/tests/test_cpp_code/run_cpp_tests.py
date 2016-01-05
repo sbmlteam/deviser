@@ -505,6 +505,26 @@ def main():
     test_case = 'sidref with multiple targets '
     fail += run_valid_test(name, class_name, test_case)
 
+    name = 'test_sidrefs_1'
+    class_name = 'RefsSBMLError'
+    test_case = 'sidref with multiple targets - diff spacing'
+    fail += run_valid_test(name, class_name, test_case)
+
+    name = 'test_sidrefs_2'
+    class_name = 'RefsSBMLError'
+    test_case = 'sidref with multiple targets - diff spacing'
+    fail += run_valid_test(name, class_name, test_case)
+
+    name = 'test_sidrefs_3'
+    class_name = 'RefsSBMLError'
+    test_case = 'sidref with multiple targets - diff spacing'
+    fail += run_valid_test(name, class_name, test_case)
+
+    name = 'test_sidrefs_4'
+    class_name = 'RefsSBMLError'
+    test_case = 'sidref with multiple targets - diff spacing'
+    fail += run_valid_test(name, class_name, test_case)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

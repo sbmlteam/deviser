@@ -133,8 +133,11 @@ def get_indefinite(name):
 
 
 def standard_element_name(name):
+    name = remove_spaces(name)
     length = len(name)
     if name.endswith('*'):
+        temp = name[0:length-1]
+    elif name.endswith(','):
         temp = name[0:length-1]
     elif name.endswith('_t'):
         temp = name[0:length-2]
@@ -192,14 +195,14 @@ def get_sid_refs(refs):
     else:
         ret_string = ''
         ret_type = ''
-        str = refs.split(', ')
-        length = len(str)
+        str_refs = refs.split(',')
+        length = len(str_refs)
         if length > 0:
-            ret_string = upper_first(str[0])
-            ret_type = upper_first(str[0])
+            ret_string = upper_first(str_refs[0])
+            ret_type = upper_first(str_refs[0])
             for i in range(1, length):
-                ret_string += ' or \{0}'.format(upper_first(str[i]))
-                ret_type += 'Or{0}'.format(upper_first(str[i]))
+                ret_string += ' or \{0}'.format(upper_first(str_refs[i]))
+                ret_type += 'Or{0}'.format(upper_first(str_refs[i]))
         return [ret_string, ret_type]
 
 
