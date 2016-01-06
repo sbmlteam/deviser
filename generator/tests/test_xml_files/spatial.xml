@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="Spatial" fullname="Spatial Processes" number="300" offset="1200000" version="1" required="false">
   <versions>
-    <pkgVersion>
+    <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
         <element name="DomainType" typeCode="SBML_SPATIAL_DOMAINTYPE" hasListOf="true" hasChildren="false" hasMath="false" baseClass="SBase" abstract="false">
           <attributes>
