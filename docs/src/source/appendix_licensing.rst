@@ -1,5 +1,6 @@
 
-Appendix C
-==========
+Appendix D: Licensing the code produced
+=======================================
 
-Licensing
+.. todo:: 
+   paraphrase fom emails

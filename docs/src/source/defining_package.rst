@@ -140,7 +140,7 @@ Fill in the core level and version and the package version numbers. These
 default to **Core level** '3' and **Core version** '1' as SBML L3V1 is the only official 
 SBML Level 3 version at the time of writing. The package version (**Pkg Version**)
 defaults to '1'. Using Deviser to specify more than one version of a package
-is discussed in :ref:`multiple-versions`.
+is discussed in :ref:`mult-vers`.
 
 
 .. _fig-version:
@@ -1443,6 +1443,8 @@ Validating the description
 There are two further options on the Edit menu that have not yet been
 discussed.
 
+.. _validate:
+
 The **Validate Description** option
 ************************************
  
@@ -1472,4 +1474,38 @@ any inconsistencies. Deviser Edit will run the validation checks and then
 automatically correct any issues, where this is possible. 
 It is advisable to use **Validate Description**
 following **Fix Errors** as some errors cannot be automatically fixed.
+
+.. _mult-vers:
+
+Defining multiple versions of a package
+---------------------------------------
+
+Deviser code generation neatly handles multiple versions of a package.
+
+.. todo::
+    Note on latex
+
+Each version must be specified completely. Using the **Add Version** button
+from the menu or toolbar will create a second version that can be populated
+in the same way as described in this manual.
+
+Since new versions of a package are likely to resemble existing versions the
+entire version can be duplicated by right-clicking on the Version header in the
+tree view on the left panel and selecting **Duplicate** (see Figure :num:`deviser-util1`).  
+
+.. _deviser-util1:
+.. figure:: ../screenshots/deviser-util1.png
+
+   Duplicating a version of a package.
+ 
+This creates a complete copy of the previous package version and gives it the
+next package version number (see Figure :num:`fig-foo-v2`). The individual 
+objects can then be edited or removed as necessary and any additional objects
+added.
+
+.. _fig-foo-v2:
+.. figure:: ../screenshots/deviser-foo-v2.png
+
+   A second version of the 'foo' package duplicated from Version 1. Note how 
+   the classes listed reflect Version 1.
 

@@ -74,6 +74,8 @@ available:
 
 5. Create and view a UML diagram.
 
+.. _prereq:
+
 Prerequisites
 -------------
 
@@ -171,6 +173,8 @@ Useful links
 7. MiKTEX:
    http://miktex.org/
 
+.. _setup:
+
 Setting up the Deviser Edit tool
 --------------------------------
 
@@ -185,6 +189,8 @@ Edit->Edit Preferences (Preferences on Mac OSX)
 
 and choosing either the **Deviser Settings** or **User Defined Types** tab. 
 Settings used here will be saved and persist between sessions.
+
+.. _settings:
 
 Deviser Settings
 ~~~~~~~~~~~~~~~~~

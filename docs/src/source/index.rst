@@ -14,7 +14,6 @@ Contents:
    getting_started
    defining_package
    using_deviser
-   defining_multiple_versions
    appendix_xml_example
    appendix_types
    appendix_validation
