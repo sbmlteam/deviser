@@ -44,7 +44,7 @@ class ValidationRulesGeneral():
     """Class for creating the general validation rules"""
 
     def __init__(self, spec_name, number, package, pkg_ref, level, version,
-                 pkg_version):
+                 pkg_version, reqd_status):
         # members from object
         self.fullname = spec_name
         self.number = number
@@ -52,6 +52,10 @@ class ValidationRulesGeneral():
         self.package = package.lower()
         self.pkg_ref = pkg_ref
         self.up_package = strFunctions.upper_first(self.package)
+        if reqd_status:
+            self.reqd_status = 'true'
+        else:
+            self.reqd_status = 'false'
 
         self.full_pkg_command = \
             '\\{0}Package'.format(strFunctions.texify(self.fullname))
@@ -245,13 +249,13 @@ class ValidationRulesGeneral():
         text = 'The value of attribute {0} on the \\class{1}SBML{2} object ' \
                'must be set to \\val{1}{3}{2}.' \
             .format(strFunctions.wrap_token('required', self.package),
-                    self.start_b, self.end_b, 'false')
+                    self.start_b, self.end_b, self.reqd_status)
         ref = '{0} {1}.'\
             .format(self.pkg_ref,
                     strFunctions.wrap_section('xml-namespace', False))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'The {0}:required attribute must be \'FIX ME\''.format(self.package)
+        short = 'The {0}:required attribute must be \'{1}\''.format(self.package, self.reqd_status)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMustHaveValue'.format(self.up_package)
         return dict({'number': self.number, 'text': text,

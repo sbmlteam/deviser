@@ -525,6 +525,11 @@ def main():
     test_case = 'sidref with multiple targets - diff spacing'
     fail += run_valid_test(name, class_name, test_case)
 
+    name = 'test_lists'
+    class_name = 'FooSBMLError'
+    test_case = 'error enumeration '
+    fail += run_valid_test(name, class_name, test_case)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

@@ -61,6 +61,10 @@ class BaseTexFile(BaseFile.BaseFile):
         self.level = object_desc['base_level']
         self.version = object_desc['base_version']
         self.pkg_version = object_desc['pkg_version']
+        if object_desc['required']:
+            self.reqd_status = 'true'
+        else:
+            self.reqd_status = 'false'
 
         self.prim_class = []
 

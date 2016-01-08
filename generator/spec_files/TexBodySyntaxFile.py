@@ -312,6 +312,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         intro = re.sub('PACKAGENAME', self.full_pkg_command, intro)
         intro = re.sub('LEVELNUM', str(self.level), intro)
         intro = re.sub('VERSIONNUM', str(self.version), intro)
+        intro = re.sub('REQUIRED', self.reqd_status, intro)
         return intro
 
     # Write namespace section

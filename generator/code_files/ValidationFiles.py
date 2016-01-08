@@ -94,7 +94,7 @@ class ValidationFiles():
         rules = ValidationRulesGeneral\
             .ValidationRulesGeneral(self.fullname, number, self.package,
                                     self.pkg_ref, self.level, self.version,
-                                    self.pkg_version)
+                                    self.pkg_version, self.reqd_status)
         rules.determine_rules()
         self.class_rules += rules.rules
         number = self.offset + 20200

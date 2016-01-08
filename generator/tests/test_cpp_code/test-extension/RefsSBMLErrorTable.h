@@ -128,7 +128,7 @@ static const packageErrorTableEntry refsErrorTable[] =
 
   // 120103
   { RefsAttributeRequiredMustHaveValue,
-    "The refs:required attribute must be 'FIX ME'",
+    "The refs:required attribute must be 'false'",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of attribute 'refs:required' on the <sbml> object must be set to "

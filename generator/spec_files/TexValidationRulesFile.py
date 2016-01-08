@@ -65,6 +65,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.pkg_ref = 'SBML Level~{0} Package specification for {1}, ' \
                        'Version~{2}'.format(self.level,
                                            self.fullname, self.pkg_version)
+        self.reqd_status = object_desc['required']
 
     ########################################################################
 
@@ -252,7 +253,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         rules = ValidationRulesGeneral.ValidationRulesGeneral(
             self.fullname, self.offset,
             self.package, self.pkg_ref, self.level, self.version,
-            self.pkg_version)
+            self.pkg_version, self.reqd_status)
         rules.determine_rules()
         self.write_general_rules(rules.rules)
         self.write_identifier_rules(rules.rules)

@@ -127,11 +127,11 @@ static const packageErrorTableEntry fooErrorTable[] =
 
   // 120103
   { FooAttributeRequiredMustHaveValue,
-    "The foo:required attribute must be 'false'",
+    "The foo:required attribute must be 'true'",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of attribute 'foo:required' on the <sbml> object must be set to "
-    "'false'.",
+    "'true'.",
     { "L3V1 Foo V1 Section"
     }
   },
@@ -414,7 +414,7 @@ static const packageErrorTableEntry fooErrorTable[] =
 
   // 120804
   { FooPlateLOElementChildren,
-    "Number of children in ListOf elements allowed on <Plate>.",
+    "Number of children in ListOf elements allowed on <plate>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The <listOfApples> subobject on a <plate> object is optional, but if "

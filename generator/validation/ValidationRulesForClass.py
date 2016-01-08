@@ -254,6 +254,7 @@ class ValidationRulesForClass():
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package, self.name)
+            short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
         else:
             lo_name = strFunctions.plural(lo_child['element'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -268,7 +269,7 @@ class ValidationRulesForClass():
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                         self.name, lo_name)
-        short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
+            short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -287,6 +288,7 @@ class ValidationRulesForClass():
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
+            short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
         else:
             loname = strFunctions.get_element_name(lo_child)
             lo_name = strFunctions.plural(lo_child['element'])
@@ -300,7 +302,7 @@ class ValidationRulesForClass():
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
                                                   lo_name)
-        short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
+            short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -423,7 +425,7 @@ class ValidationRulesForClass():
         lib_sev = 'LIBSBML_SEV_ERROR'
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
-            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            short = 'Number of children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
             tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name)
         else:
             short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)

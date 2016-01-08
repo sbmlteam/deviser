@@ -128,7 +128,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020103
   { QualAttributeRequiredMustHaveValue,
-    "The qual:required attribute must be 'FIX ME'",
+    "The qual:required attribute must be 'false'",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of attribute 'qual:required' on the <sbml> object must be set to "
@@ -379,7 +379,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020407
   { QualTransitionLOInputsAllowedElements,
-    "Core elements allowed on <transition>.",
+    "Core elements allowed on <listOfInputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
@@ -391,7 +391,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020408
   { QualTransitionLOOutputsAllowedElements,
-    "Core elements allowed on <transition>.",
+    "Core elements allowed on <listOfOutputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
@@ -414,7 +414,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020410
   { QualTransitionLOFunctionTermsAllowedElements,
-    "Core elements allowed on <transition>.",
+    "Core elements allowed on <listOfFunctionTerms>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
@@ -426,7 +426,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020411
   { QualTransitionLOInputsAllowedCoreAttributes,
-    "Core attributes allowed on <transition>.",
+    "Core attributes allowed on <listOfInputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfInputs> object may have the optional SBML Level~3 Core attributes "
@@ -438,7 +438,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020412
   { QualTransitionLOOutputsAllowedCoreAttributes,
-    "Core attributes allowed on <transition>.",
+    "Core attributes allowed on <listOfOutputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfOutputs> object may have the optional SBML Level~3 Core "
@@ -450,7 +450,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020413
   { QualTransitionLOFunctionTermsAllowedCoreAttributes,
-    "Core attributes allowed on <transition>.",
+    "Core attributes allowed on <listOfFunctionTerms>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfFunctionTerms> object may have the optional SBML Level~3 Core "
