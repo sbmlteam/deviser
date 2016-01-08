@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------ -->
 
 
-from util import strFunctions, global_variables
+from util import strFunctions, query
 
 
 class ValidationRulesForClass():
@@ -71,6 +71,7 @@ class ValidationRulesForClass():
         self.opt_child_lo_elem = []
 
         self.parse_attributes(self, object_desc['attribs'])
+        self.parse_elements(self, object_desc['attribs'], object_desc['root'])
         self.rules = []
         self.tc = 'TBC'
 
@@ -113,6 +114,11 @@ class ValidationRulesForClass():
             self.number += 1
             rule = \
                 self.write_core_subobject_rule(self, self.opt_child_lo_elem[i])
+            self.add_rule(rule)
+
+        if len(self.reqd_child_lo_elem) > 0:
+            self.number += 1
+            rule = self.write_reqd_lo_rule()
             self.add_rule(rule)
 
         for i in range(0, len(self.reqd_child_lo_elem)):
@@ -368,9 +374,23 @@ class ValidationRulesForClass():
     # might not be lo elements
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
+        unusual_min = False
+        no_min = 0
+        # check whether have unusual minimums
+        for i in range(0, number):
+            if 'min_lo_children' in self.opt_child_lo_elem[i]:
+                min_no = self.opt_child_lo_elem[i]['min_lo_children']
+                if min_no == 0:
+                    unusual_min = True
+                    no_min += 1
+                elif min_no > 1:
+                    unusual_min = True
+        if no_min == number:
+            return None
         if number > 1:
             obj = 'objects'
             pred = 'these'
+            verb = 'are'
             i = 0
             elements = '{0}'.format(strFunctions.get_element_name(
                 self.opt_child_lo_elem[i]))
@@ -382,19 +402,87 @@ class ValidationRulesForClass():
         else:
             obj = 'object'
             pred = 'this'
+            verb = 'is'
             elements = '{0}'.format(strFunctions.get_element_name(
                 self.opt_child_lo_elem[0]))
 
-        text = 'The {0} sub{1} on {2} {3} object is optional, but if ' \
+        text = 'The {0} sub{1} on {2} {3} object {5} optional, but if ' \
                'present, {4} container {1} must not be empty.'\
-            .format(elements, obj, self.indef, self.formatted_name, pred)
+            .format(elements, obj, self.indef, self.formatted_name, pred, verb)
+        if unusual_min:
+            for i in range(0, number):
+                num = strFunctions.replace_digits(str(
+                    self.opt_child_lo_elem[i]['min_lo_children'])).lower()
+                name = strFunctions.get_element_name(self.opt_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.'.format(name, num,
+                                             self.opt_child_lo_elem[i]['name'])
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
+        if unusual_min:
+            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name)
+        else:
+            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    def write_reqd_lo_rule(self):
+        number = len(self.reqd_child_lo_elem)
+        unusual_min = False
+        no_min = 0
+        # check whether have unusual minimums
+        for i in range(0, number):
+            if 'min_lo_children' in self.reqd_child_lo_elem[i]:
+                min_no = self.reqd_child_lo_elem[i]['min_lo_children']
+                if min_no == 0:
+                    unusual_min = True
+                    no_min += 1
+                elif min_no > 1:
+                    unusual_min = True
+        if no_min == number:
+            return None
+        if number > 1:
+            obj = 'objects'
+            i = 0
+            elements = '{0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[i]))
+            for i in range(1, number-1):
+                elements += ', {0}'.format(strFunctions.get_element_name(
+                    self.reqd_child_lo_elem[i]))
+            elements += ' and {0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[i+1]))
+        else:
+            obj = 'object'
+            elements = '{0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[0]))
+
+        text = 'The {0} sub{1} on {2} {3} object must not be empty.'\
+            .format(elements, obj, self.indef, self.formatted_name)
+        if unusual_min:
+            for i in range(0, number):
+                num = strFunctions.replace_digits(str(
+                    self.reqd_child_lo_elem[i]['min_lo_children'])).lower()
+                name = strFunctions.get_element_name(self.reqd_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.'.format(name, num,
+                                             self.reqd_child_lo_elem[i]['name'])
+        ref = '{0}, {1}.'\
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+        sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        if unusual_min:
+            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            tc = '{0}{1}LOReqdElementChildren'.format(self.up_package, self.name )
+        else:
+            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            tc = '{0}{1}EmptyReqdLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -500,32 +588,35 @@ class ValidationRulesForClass():
     @staticmethod
     def parse_attributes(self, attributes):
         for i in range(0, len(attributes)):
-            if attributes[i]['type'] == 'element':
-                if attributes[i]['reqd'] is True:
-                    # hack for render
-                    if attributes[i]['element'] == 'RelAbsVector':
-                        self.reqd_att.append(attributes[i])
-                    else:
-                        self.reqd_elem.append(attributes[i])
-                else:
-                    # hack for render
-                    if attributes[i]['element'] == 'RelAbsVector':
-                        self.opt_att.append(attributes[i])
-                    else:
-                        self.opt_elem.append(attributes[i])
-            elif attributes[i]['type'] == 'lo_element' \
-                    or attributes[i]['type'] == 'inline_lo_element':
-                if attributes[i]['reqd'] is True:
-                    self.reqd_child_lo_elem.append(attributes[i])
-                    self.reqd_elem.append(attributes[i])
-                else:
-                    self.opt_elem.append(attributes[i])
-                    self.opt_child_lo_elem.append(attributes[i])
-            else:
+            if not self.is_element(attributes[i]['type']):
                 if attributes[i]['reqd'] is True:
                     self.reqd_att.append(attributes[i])
                 else:
                     self.opt_att.append(attributes[i])
+
+    # divide attributes into elements/attributes required and optional
+    @staticmethod
+    def parse_elements(self, attributes, elements):
+        for i in range(0, len(attributes)):
+            if self.is_element(attributes[i]['type']):
+                # hack for render
+                if attributes[i]['element'] == 'RelAbsVector':
+                    if attributes[i]['reqd'] is True:
+                        self.reqd_att.append(attributes[i])
+                    else:
+                        self.opt_att.append(attributes[i])
+                else:
+                    element = query.get_class(attributes[i]['element'], elements)
+                    if element:
+                        attributes[i]['min_lo_children'] = element['min_lo_children']
+                    if attributes[i]['reqd'] is True:
+                        if attributes[i]['type'] != 'element':
+                            self.reqd_child_lo_elem.append(attributes[i])
+                        self.reqd_elem.append(attributes[i])
+                    else:
+                        self.opt_elem.append(attributes[i])
+                        if attributes[i]['type'] != 'element':
+                            self.opt_child_lo_elem.append(attributes[i])
 
     ########################################################################
 
@@ -549,3 +640,15 @@ class ValidationRulesForClass():
             if num_values > 1:
                 values += ' or \'{0}\''.format(this_enum['values'][i+1]['value'])
             return values
+
+    #########################################################################
+    @staticmethod
+    def is_element(att_type):
+        element = False
+        if att_type == 'element':
+            element = True
+        elif att_type == 'lo_element':
+            element = True
+        elif att_type == 'inline_lo_element':
+            element = True
+        return element

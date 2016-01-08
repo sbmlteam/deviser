@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="Foo" fullname="Foo" number="100" offset="100000" version="1" required="false">
   <versions>
-    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+    <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
         <element name="Apple" typeCode="SBML_FOO_APPLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="2" abstract="false"/>
+        <element name="Pear" typeCode="SBML_FOO_PEAR" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" abstract="false"/>
+        <element name="Bowl" typeCode="SBML_FOO_BOWL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="pear" required="false" type="lo_element" element="Pear" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Plate" typeCode="SBML_FOO_PLATE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="apple" required="false" type="lo_element" element="Apple" abstract="false"/>
+            <attribute name="banana" required="true" type="lo_element" element="Banana" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Banana" typeCode="SBML_FOO_BANANA" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" abstract="false"/>
       </elements>
       <plugins>
         <plugin extensionPoint="Model">
           <references>
             <reference name="ListOfApples"/>
+          </references>
+        </plugin>
+        <plugin extensionPoint="Compartment">
+          <references>
+            <reference name="ListOfPears"/>
+          </references>
+        </plugin>
+        <plugin extensionPoint="Species">
+          <references>
+            <reference name="ListOfBananas"/>
           </references>
         </plugin>
       </plugins>

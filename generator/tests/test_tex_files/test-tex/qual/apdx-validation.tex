@@ -231,7 +231,7 @@ SBML Level~3 Package specification for Qualitative Models, Version~1,
 \sec{transition-class}.)}
 
 \validRule{qual-20406}{The \ListOfInputs and \ListOfOutputs subobjects
-on a \Transition object is optional, but if present, these container
+on a \Transition object are optional, but if present, these container
 objects must not be empty. (Reference: SBML Level~3 Package
 specification for Qualitative Models, Version~1,
 \sec{transition-class}.)}
@@ -248,25 +248,30 @@ object may only contain \Output objects. (Reference: SBML Level~3
 Package specification for Qualitative Models, Version~1,
 \sec{transition-class}.)}
 
-\validRule{qual-20409}{Apart from the general notes and annotations
+\validRule{qual-20409}{The \ListOfFunctionTerms subobject on a
+\Transition object must not be empty. (Reference: SBML Level~3 Package
+specification for Qualitative Models, Version~1,
+\sec{transition-class}.)}
+
+\validRule{qual-20410}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfFunctionTerms
 container object may only contain \FunctionTerm objects. (Reference:
 SBML Level~3 Package specification for Qualitative Models, Version~1,
 \sec{transition-class}.)}
 
-\validRule{qual-20410}{A \ListOfInputs object may have the optional SBML
+\validRule{qual-20411}{A \ListOfInputs object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on a
 \ListOfInputs object. (Reference: SBML Level~3 Package specification for
 Qualitative Models, Version~1, \sec{transition-class}.)}
 
-\validRule{qual-20411}{A \ListOfOutputs object may have the optional
+\validRule{qual-20412}{A \ListOfOutputs object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
 other attributes from the SBML Level 3 Core namespaces are permitted on
 a \ListOfOutputs object. (Reference: SBML Level~3 Package specification
 for Qualitative Models, Version~1, \sec{transition-class}.)}
 
-\validRule{qual-20412}{A \ListOfFunctionTerms object may have the
+\validRule{qual-20413}{A \ListOfFunctionTerms object may have the
 optional SBML Level~3 Core attributes \token{metaid} and
 \token{sboTerm}. No other attributes from the SBML Level 3 Core
 namespaces are permitted on a \ListOfFunctionTerms object. (Reference:

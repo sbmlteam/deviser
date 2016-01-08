@@ -129,16 +129,168 @@ attributes from the SBML Level 3 Core namespaces are permitted on a
 Foo, Version~1, \sec{model-class}.)}
 
 
+\subsubsection*{Rules for extended \class{Compartment} object}
+
+\validRule{foo-20301}{A \Compartment object may contain one and only one
+instance of the \ListOfPears element. No other elements from the SBML
+Level 3 Foo namespaces are permitted on a \Compartment object.
+(Reference: SBML Level~3 Package specification for Foo, Version~1,
+\sec{compartment-class}.)}
+
+\validRule{foo-20302}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a ListOfPears container object
+may only contain \Pear objects. (Reference: SBML Level~3 Package
+specification for Foo, Version~1, \sec{compartment-class}.)}
+
+\validRule{foo-20303}{A \ListOfPears object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ListOfPears object. (Reference: SBML Level~3 Package specification for
+Foo, Version~1, \sec{compartment-class}.)}
+
+
+\subsubsection*{Rules for extended \class{Species} object}
+
+\validRule{foo-20401}{A \Species object may contain one and only one
+instance of the \ListOfBananas element. No other elements from the SBML
+Level 3 Foo namespaces are permitted on a \Species object. (Reference:
+SBML Level~3 Package specification for Foo, Version~1,
+\sec{species-class}.)}
+
+\validRule{foo-20402}{The \ListOfBananas subobject on a \Species object
+is optional, but if present, this container object must not be empty.
+(Reference: SBML Level~3 Specification for Foo Version~1,
+\sec{species-class}.)}
+
+\validRule{foo-20403}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a ListOfBananas container
+object may only contain \Banana objects. (Reference: SBML Level~3
+Package specification for Foo, Version~1, \sec{species-class}.)}
+
+\validRule{foo-20404}{A \ListOfBananas object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ListOfBananas object. (Reference: SBML Level~3 Package specification
+for Foo, Version~1, \sec{species-class}.)}
+
+
 \subsubsection*{Rules for \class{Apple} object}
 
-\validRule{foo-20301}{An \Apple object may have the optional SBML
+\validRule{foo-20501}{An \Apple object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on an
 \Apple. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
-\validRule{foo-20302}{An \Apple object may have the optional SBML
+\validRule{foo-20502}{An \Apple object may have the optional SBML
 Level~3 Core subobjects for notes and annotations. No other elements
 from the SBML Level 3 Core namespaces are permitted on an \Apple.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+
+\subsubsection*{Rules for \class{Pear} object}
+
+\validRule{foo-20601}{A \Pear object may have the optional SBML Level~3
+Core attributes \token{metaid} and \token{sboTerm}. No other attributes
+from the SBML Level 3 Core namespaces are permitted on a \Pear.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20602}{A \Pear object may have the optional SBML Level~3
+Core subobjects for notes and annotations. No other elements from the
+SBML Level 3 Core namespaces are permitted on a \Pear. (Reference: SBML
+Level~3 Version~1 Core, Section~3.2.)}
+
+
+\subsubsection*{Rules for \class{Bowl} object}
+
+\validRule{foo-20701}{A \Bowl object may have the optional SBML Level~3
+Core attributes \token{metaid} and \token{sboTerm}. No other attributes
+from the SBML Level 3 Core namespaces are permitted on a \Bowl.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20702}{A \Bowl object may have the optional SBML Level~3
+Core subobjects for notes and annotations. No other elements from the
+SBML Level 3 Core namespaces are permitted on a \Bowl. (Reference: SBML
+Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20703}{A \Bowl object may contain one and only one
+instance of the \ListOfPears element. No other elements from the SBML
+Level 3 Foo namespaces are permitted on a \Bowl object. (Reference: SBML
+Level~3 Package specification for Foo, Version~1, \sec{bowl-class}.)}
+
+\validRule{foo-20704}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a \ListOfPears container
+object may only contain \Pear objects. (Reference: SBML Level~3 Package
+specification for Foo, Version~1, \sec{bowl-class}.)}
+
+\validRule{foo-20705}{A \ListOfPears object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ListOfPears object. (Reference: SBML Level~3 Package specification for
+Foo, Version~1, \sec{bowl-class}.)}
+
+
+\subsubsection*{Rules for \class{Plate} object}
+
+\validRule{foo-20801}{A \Plate object may have the optional SBML Level~3
+Core attributes \token{metaid} and \token{sboTerm}. No other attributes
+from the SBML Level 3 Core namespaces are permitted on a \Plate.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20802}{A \Plate object may have the optional SBML Level~3
+Core subobjects for notes and annotations. No other elements from the
+SBML Level 3 Core namespaces are permitted on a \Plate. (Reference: SBML
+Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20803}{A \Plate object must contain one and only one
+instance of the \ListOfBananas element, and may contain one and only one
+instance of the \ListOfApples element. No other elements from the SBML
+Level 3 Foo namespaces are permitted on a \Plate object. (Reference:
+SBML Level~3 Package specification for Foo, Version~1,
+\sec{plate-class}.)}
+
+\validRule{foo-20804}{The \ListOfApples subobject on a \Plate object is
+optional, but if present, this container object must not be empty.The
+\ListOfApples must contain at least two instances of the \apple object.
+(Reference: SBML Level~3 Package specification for Foo, Version~1,
+\sec{plate-class}.)}
+
+\validRule{foo-20805}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a \ListOfApples container
+object may only contain \Apple objects. (Reference: SBML Level~3 Package
+specification for Foo, Version~1, \sec{plate-class}.)}
+
+\validRule{foo-20806}{The \ListOfBananas subobject on a \Plate object
+must not be empty. (Reference: SBML Level~3 Package specification for
+Foo, Version~1, \sec{plate-class}.)}
+
+\validRule{foo-20807}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a \ListOfBananas container
+object may only contain \Banana objects. (Reference: SBML Level~3
+Package specification for Foo, Version~1, \sec{plate-class}.)}
+
+\validRule{foo-20808}{A \ListOfApples object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ListOfApples object. (Reference: SBML Level~3 Package specification for
+Foo, Version~1, \sec{plate-class}.)}
+
+\validRule{foo-20809}{A \ListOfBananas object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ListOfBananas object. (Reference: SBML Level~3 Package specification
+for Foo, Version~1, \sec{plate-class}.)}
+
+
+\subsubsection*{Rules for \class{Banana} object}
+
+\validRule{foo-20901}{A \Banana object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\Banana. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{foo-20902}{A \Banana object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \Banana.
 (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 

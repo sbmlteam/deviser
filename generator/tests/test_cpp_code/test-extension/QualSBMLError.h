@@ -78,10 +78,11 @@ typedef enum
 , QualTransitionEmptyLOElements                               = 3020406
 , QualTransitionLOInputsAllowedElements                       = 3020407
 , QualTransitionLOOutputsAllowedElements                      = 3020408
-, QualTransitionLOFunctionTermsAllowedElements                = 3020409
-, QualTransitionLOInputsAllowedCoreAttributes                 = 3020410
-, QualTransitionLOOutputsAllowedCoreAttributes                = 3020411
-, QualTransitionLOFunctionTermsAllowedCoreAttributes          = 3020412
+, QualTransitionEmptyReqdLOElements                           = 3020409
+, QualTransitionLOFunctionTermsAllowedElements                = 3020410
+, QualTransitionLOInputsAllowedCoreAttributes                 = 3020411
+, QualTransitionLOOutputsAllowedCoreAttributes                = 3020412
+, QualTransitionLOFunctionTermsAllowedCoreAttributes          = 3020413
 , QualInputAllowedCoreAttributes                              = 3020501
 , QualInputAllowedCoreElements                                = 3020502
 , QualInputAllowedAttributes                                  = 3020503

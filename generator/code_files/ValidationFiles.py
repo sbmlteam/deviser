@@ -71,6 +71,7 @@ class ValidationFiles():
         self.pkg_ref = '{0} Level~{1} Package specification for {2}, ' \
                        'Version~{3}'.format(self.cap_language, self.level,
                                            self.fullname, self.pkg_version)
+        self.reqd_status = lib_object['required']
 
         self.error_file = None
         self.class_rules = []

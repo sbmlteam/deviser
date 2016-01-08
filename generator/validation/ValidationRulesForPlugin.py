@@ -525,11 +525,18 @@ class ValidationRulesForPlugin():
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
         unusual_min = False
+        no_min = 0
         # check whether have unusual minimums
         for i in range(0, number):
-            if 'min_lo_children' in self.opt_child_lo_elem[i] and \
-                            self.opt_child_lo_elem[i]['min_lo_children'] != 1:
-                unusual_min = True
+            if 'min_lo_children' in self.opt_child_lo_elem[i]:
+                min_no = self.opt_child_lo_elem[i]['min_lo_children']
+                if min_no == 0:
+                    unusual_min = True
+                    no_min += 1
+                elif min_no > 1:
+                    unusual_min = True
+        if no_min == number:
+            return None
         if number > 1:
             obj = 'objects'
             pred = 'these'
@@ -562,11 +569,12 @@ class ValidationRulesForPlugin():
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
+            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.name)
             tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name, )
         else:
+            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.name)
             tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,

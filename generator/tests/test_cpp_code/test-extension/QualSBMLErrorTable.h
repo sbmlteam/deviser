@@ -372,7 +372,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The <listOfInputs> and <listOfOutputs> subobjects on a <transition> object "
-    "is optional, but if present, these container objects must not be empty.",
+    "are optional, but if present, these container objects must not be empty.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -402,6 +402,17 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020409
+  { QualTransitionEmptyReqdLOElements,
+    "No Empty ListOf elements allowed on <transition>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The <listOfFunctionTerms> subobject on a <transition> object must not be "
+    "empty.",
+    { "L3V1 Qual V1 Section"
+    }
+  },
+
+  // 3020410
   { QualTransitionLOFunctionTermsAllowedElements,
     "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -413,7 +424,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     }
   },
 
-  // 3020410
+  // 3020411
   { QualTransitionLOInputsAllowedCoreAttributes,
     "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -425,7 +436,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     }
   },
 
-  // 3020411
+  // 3020412
   { QualTransitionLOOutputsAllowedCoreAttributes,
     "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -437,7 +448,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     }
   },
 
-  // 3020412
+  // 3020413
   { QualTransitionLOFunctionTermsAllowedCoreAttributes,
     "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
