@@ -130,15 +130,15 @@ class ListOfQueryFunctions():
         else:
             return_string = 'in the {0} within this ' \
                             '{1}'.format(strFunctions.
-                                        cap_list_of_name(self.child_name),
-                                        self.class_name)
+                                         cap_list_of_name(self.child_name),
+                                         self.class_name)
 
         # useful variables
         virtual = True if self.is_list_of else False
         # create comment parts
         title_line = 'Get {0} {1} from the {2}.'.format(self.indef_name,
-                                                     self.object_child_name,
-                                                     self.object_name)
+                                                        self.object_child_name,
+                                                        self.object_name)
         params = []
         if not self.is_cpp_api:
             params.append('@param {0}, the {1} structure to search.'
@@ -161,7 +161,7 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_get{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         arguments.append('unsigned int n')
         if is_const:
             return_type = 'const {0}*'.format(self.object_child_name)
@@ -226,8 +226,8 @@ class ListOfQueryFunctions():
         else:
             return_string = 'in the {0} within this ' \
                             '{1}'.format(strFunctions.
-                                        cap_list_of_name(self.child_name),
-                                        self.class_name)
+                                         cap_list_of_name(self.child_name),
+                                         self.class_name)
         # create comment
         title_line = 'Get {0} {1} from the {2} based on its identifier.'\
             .format(self.indef_name, self.object_child_name, self.object_name)
@@ -257,7 +257,8 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_getById'.format(self.class_name) if self.is_list_of \
                 else '{0}_get{1}ById'.format(self.class_name, used_c_name)
-            arguments = ['{0}* {1}'.format(self.object_name, self.abbrev_parent),
+            arguments = ['{0}* {1}'.format(self.object_name,
+                                           self.abbrev_parent),
                          'const char *sid']
         if is_const:
             return_type = 'const {0}*'.format(self.object_child_name)
@@ -382,8 +383,9 @@ class ListOfQueryFunctions():
             arguments = ['const std::string& sid']
         else:
             function = '{0}_get{1}By{2}'.format(self.class_name,
-                                             used_c_name, element)
-            arguments = ['{0}* {1}'.format(self.object_name, self.abbrev_parent),
+                                                used_c_name, element)
+            arguments = ['{0}* {1}'.format(self.object_name,
+                                           self.abbrev_parent),
                          'const char *sid']
         if const:
             return_type = 'const {0}*'.format(self.object_child_name)
@@ -405,8 +407,8 @@ class ListOfQueryFunctions():
         elif not const and self.is_cpp_api and self.is_list_of:
             implementation = ['return const_cast<{0}*>(static_cast<const {1}'
                               '&>(*this).getBy{2}(sid))'.format(self.child_name,
-                                                               self.class_name,
-                                                               element)]
+                                                                self.class_name,
+                                                                element)]
         else:
             implementation = ['return ({0} != NULL && '
                               'sid != NULL) ? {0}->get{1}By{2}'
@@ -451,8 +453,9 @@ class ListOfQueryFunctions():
         close_b = '}'
         # create comment
         title_line = 'Used by {0}::get() to lookup {1} {2} ' \
-                     'based on its {3}.'.format(self.class_name, self.indef_name,
-                                               self.child_name, element)
+                     'based on its {3}.'.format(self.class_name,
+                                                self.indef_name,
+                                                self.child_name, element)
         params = []
         return_lines = []
         additional = []
@@ -521,10 +524,10 @@ class ListOfQueryFunctions():
                 function = '{0}_remove'.format(self.class_name)
             else:
                 function = '{0}_remove{1}'.format(self.class_name,
-                                                used_c_name)
+                                                  used_c_name)
 
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         arguments.append('unsigned int n')
         return_type = '{0}*'.format(self.object_child_name)
 
@@ -611,9 +614,9 @@ class ListOfQueryFunctions():
                 function = '{0}_removeById'.format(self.class_name)
             else:
                 function = '{0}_remove{1}ById'.format(self.class_name,
-                                                    used_c_name)
+                                                      used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
             arguments.append('const char* sid')
         return_type = '{0}*'.format(self.object_child_name)
 
@@ -694,14 +697,14 @@ class ListOfQueryFunctions():
         return_lines = ['@copydetails doc_returns_success_code',
                         '@li @{0}constant{1}{2}, '
                         'OperationReturnValues_t{3}'.format(self.language,
-                                                           self.open_br,
-                                                           success,
-                                                           self.close_br),
+                                                            self.open_br,
+                                                            success,
+                                                            self.close_br),
                         '@li @{0}constant{1}{2},'
                         ' OperationReturnValues_t{3}'.format(self.language,
-                                                            self.open_br,
-                                                            failed,
-                                                            self.close_br)]
+                                                             self.open_br,
+                                                             failed,
+                                                             self.close_br)]
         additional = []
         if self.is_cpp_api:
             additional.append('@copydetails doc_note_object_is_copied')
@@ -716,9 +719,9 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_add{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         arguments.append('const {0}* {1}'.format(self.object_child_name,
-                                               self.abbrev_child))
+                                                 self.abbrev_child))
         return_type = 'int'
         member = ''
         if not self.is_list_of:
@@ -844,14 +847,14 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_create{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         return_type = '{0}*'.format(child)
 
         if self.is_cpp_api and not is_concrete:
             pack_up = self.package.upper()
             pack_low = self.package.lower()
             implementation = ['{0}* {1} = NULL'.format(self.child_name,
-                                                     self.abbrev_child)]
+                                                       self.abbrev_child)]
             code = [self.create_code_block('line', implementation)]
 
             if self.class_object['num_versions'] > 1:
@@ -861,11 +864,11 @@ class ListOfQueryFunctions():
             else:
                 line = '{0}_CREATE_NS({1}ns, ' \
                        'get{2}Namespaces())'.format(pack_up, pack_low,
-                                                   global_variables.prefix)
+                                                    global_variables.prefix)
             implementation = [line,
                               '{0} = new {1}({2}ns)'.format(self.abbrev_child,
-                                                         self.child_name,
-                                                         pack_low),
+                                                            self.child_name,
+                                                            pack_low),
                               'delete {0}ns'.format(pack_low),
                               'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
@@ -884,7 +887,7 @@ class ListOfQueryFunctions():
             pack_up = self.package.upper()
             pack_low = self.package.lower()
             implementation = ['{0}* {1} = NULL'.format(child,
-                                                     abbrev_child)]
+                                                       abbrev_child)]
             code = [self.create_code_block('line', implementation)]
             if self.class_object['num_versions'] > 1:
                 line = '{0}_CREATE_NS_WITH_VERSION({1}ns, get{2}Namespaces(), ' \
@@ -893,11 +896,11 @@ class ListOfQueryFunctions():
             else:
                 line = '{0}_CREATE_NS({1}ns, ' \
                        'get{2}Namespaces())'.format(pack_up, pack_low,
-                                                   global_variables.prefix)
+                                                    global_variables.prefix)
             implementation = [line,
                               '{0} = new {1}({2}ns)'.format(abbrev_child,
-                                                         child,
-                                                         pack_low),
+                                                            child,
+                                                            pack_low),
                               'delete {0}ns'.format(pack_low),
                               'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
@@ -938,14 +941,15 @@ class ListOfQueryFunctions():
     def write_get_num_element_function(self):
         # create comment parts
         title_line = 'Get the number of {0} objects in ' \
-                     'this {1}.'.format(self.object_child_name, self.object_name)
+                     'this {1}.'.format(self.object_child_name,
+                                        self.object_name)
         params = []
         if not self.is_cpp_api:
             params.append('@param {0}, the {1} structure to query.'
                           .format(self.abbrev_parent, self.object_name))
         return_lines = ['@return the number of {0} objects in '
                         'this {1}.'.format(self.object_child_name,
-                                          self.object_name)]
+                                           self.object_name)]
         additional = []
 
         # create the function declaration
@@ -956,7 +960,7 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_getNum{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         return_type = 'unsigned int'
 
         if self.is_cpp_api and self.is_list_of:
@@ -996,16 +1000,17 @@ class ListOfQueryFunctions():
         # create comment parts
         params = []
         if self.is_cpp_api:
-            title_line = 'Returns the {0} from this {1}.'.format(loname,
-                                                               self.object_name)
+            title_line = 'Returns the {0} from this {1}.' \
+                         ''.format(loname, self.object_name)
             return_lines = ['@return the {0} '
                             'from this {1}.'.format(loname, self.object_name)]
         else:
             title_line = 'Returns a ListOf_t* containing {0} objects ' \
                          'from this {1}.'.format(self.object_child_name,
-                                                self.object_name)
-            params.append('@param {0} the {1} structure whose \"{2}\" is sought.'
-                          .format(self.abbrev_parent, self.object_name, loname))
+                                                 self.object_name)
+            params.append('@param {0} the {1} structure whose \"{2}\" is sought'
+                          '.'.format(self.abbrev_parent, self.object_name,
+                                     loname))
             return_lines = ['@return the \"{0}\" from this {1} as a '
                             'ListOf_t *.'.format(loname, self.object_name)]
         additional = []
@@ -1022,7 +1027,7 @@ class ListOfQueryFunctions():
         else:
             function = '{0}_get{1}'.format(self.class_name, name_used)
             arguments = ['{0}* {1}'.format(self.object_name,
-                                         self.abbrev_parent)]
+                                           self.abbrev_parent)]
             if global_variables.is_package:
                 return_type = 'ListOf_t*'
             else:

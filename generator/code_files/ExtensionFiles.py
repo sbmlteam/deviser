@@ -106,7 +106,7 @@ class ExtensionFiles():
             class_object = self.package['plugins'][num]
             up_package = strFunctions.upper_first(self.package['name'])
             class_object['name'] = '{0}{1}Plugin'.format(up_package,
-                                                       class_object['sbase'])
+                                                         class_object['sbase'])
             class_object['is_plugin'] = True
             class_object['is_list_of'] = False
             class_object['hasListOf'] = False
@@ -142,7 +142,7 @@ class ExtensionFiles():
                          'lo_extension': [],
                          'sbase': '{0}Document'.format(up_language),
                          'name': '{0}{1}DocumentPlugin'.format(up_package,
-                                                             up_language),
+                                                               up_language),
                          'is_plugin': True,
                          'is_list_of': False,
                          'hasListOf': False,

@@ -152,7 +152,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                         base_file = '{0}/{1}'.format(self.language, base)
                     else:
                         base_file = '{0}/extension/{1}'.format(self.language,
-                                                             base)
+                                                               base)
                 else:
                     base_file = '{0}/packages/{1}/{0}/{2}'.format(self.language,
                                                                   pkg, base)
@@ -181,7 +181,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                     include_lines += ['<{0}/packages/{1}/{0}/{2}'
                                       '.h>'.format(self.language, pkg, child)]
                 else:
-                    include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
+                    include_lines += ['<{0}/{1}.h>'.format(self.language,
+                                                           child)]
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']

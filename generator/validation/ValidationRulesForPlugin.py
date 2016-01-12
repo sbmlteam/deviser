@@ -210,11 +210,11 @@ class ValidationRulesForPlugin():
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attribute {0} values allowed on <{1}>.'.format(attribute['name'],
-                                                              self.lower_name)
+        short = 'Attribute {0} values allowed on <{1}>.' \
+                ''.format(attribute['name'], self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, self.name, att_name,
-                                     rule_type)
+                                         rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -231,7 +231,8 @@ class ValidationRulesForPlugin():
                         strFunctions.wrap_token('sboTerm'), self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
-            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package, self.name)
+            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
+                                                      self.name)
         else:
             lo_name = strFunctions.plural(lo_child['name'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -244,7 +245,7 @@ class ValidationRulesForPlugin():
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
-                                                        self.name, lo_name)
+                                                           self.name, lo_name)
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
@@ -282,7 +283,7 @@ class ValidationRulesForPlugin():
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
-                                                  lo_name)
+                                                     lo_name)
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
@@ -564,17 +565,19 @@ class ValidationRulesForPlugin():
                 name = strFunctions.get_element_name(self.opt_child_lo_elem[i])
                 text += 'The {0} must contain at least {1} instances of the ' \
                         '\{2} object.'.format(name, num,
-                                             self.opt_child_lo_elem[i]['name'])
+                                              self.opt_child_lo_elem[i]['name'])
         ref = 'SBML Level~3 Specification for {0} Version~1, {1}.'\
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
-            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.name)
+            short = 'No children in ListOf elements allowed on <{0}>.' \
+                    ''.format(self.name)
             tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name, )
         else:
-            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.name)
+            short = 'No Empty ListOf elements allowed on <{0}>.' \
+                    ''.format(self.name)
             tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,

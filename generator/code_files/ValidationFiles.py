@@ -70,7 +70,7 @@ class ValidationFiles():
         self.pkg_version = lib_object['pkg_version']
         self.pkg_ref = '{0} Level~{1} Package specification for {2}, ' \
                        'Version~{3}'.format(self.cap_language, self.level,
-                                           self.fullname, self.pkg_version)
+                                            self.fullname, self.pkg_version)
         self.reqd_status = lib_object['required']
 
         self.error_file = None
@@ -196,7 +196,7 @@ class ValidationFiles():
     def write_error_header(self):
         class_desc = ({})
         class_desc['name'] = '{0}{1}Error'.format(self.up_package,
-                                                self.cap_language)
+                                                  self.cap_language)
         class_desc['attribs'] = []
         self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
         if self.verbose:
@@ -207,7 +207,7 @@ class ValidationFiles():
     def write_error_table_header(self):
         class_desc = ({})
         class_desc['name'] = '{0}{1}ErrorTable'.format(self.up_package,
-                                                     self.cap_language)
+                                                       self.cap_language)
         class_desc['attribs'] = []
         self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
         if self.verbose:
@@ -242,18 +242,20 @@ class ValidationFiles():
         self.error_file.write_defn_end()
 
     def write_table_entry(self, rule):
+        format_rule = self.format_text(rule['text'])
         self.error_file.up_indent()
         self.error_file.write_line('// {0}'.format(rule['number']))
         self.error_file.write_line('{0}  {1},'.format(self.open_br,
-                                                    rule['typecode']))
+                                                      rule['typecode']))
         self.error_file.up_indent()
         self.error_file.write_line('\"{0}\",'.format(rule['short']))
         self.error_file.write_line('{0}_CAT_GENERAL_'
                                    'CONSISTENCY,'.format(self.cap_lib))
         self.error_file.write_line('{0},'.format(rule['lib_sev']))
-        self.error_file.write_line_no_indent('\"{0}\",'.format(self.format_text(rule['text'])))
+        self.error_file.write_line_no_indent('\"{0}\",'
+                                             ''.format(format_rule))
         self.error_file.write_line('{0}  \"{1}\"'.format(self.open_br,
-                                                       rule['lib_ref']))
+                                                         rule['lib_ref']))
         self.error_file.write_line('{0}'.format(self.close_br))
         self.error_file.down_indent()
         self.error_file.write_line('},')
@@ -295,7 +297,6 @@ class ValidationFiles():
             i += 1
 
         return return_string
-
 
     def analyse_string(self, i, text_string, length):
         state = dict({'is_uri': False,
@@ -349,14 +350,14 @@ class ValidationFiles():
 
         return state
 
-
-    def is_package(self, i, text_string, length):
+    @staticmethod
+    def is_package(i, text_string, length):
         is_package = False
         word = ''
-        while (i < length-1):
+        while i < length-1:
             letter = text_string[i]
             if letter == ' ' or letter == ',' or letter == '.':
-                break;
+                break
             else:
                 word += letter
                 i += 1
@@ -367,11 +368,11 @@ class ValidationFiles():
             is_package = True
         return [is_package, len_word]
 
-
-    def replace_name(self, i, text_string, length):
+    @staticmethod
+    def replace_name(i, text_string, length):
         in_name = True
         return_name_rep = ''
-        while (in_name and i < length):
+        while in_name and i < length:
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
@@ -389,11 +390,11 @@ class ValidationFiles():
             continue
         return [i-1, return_name_rep]
 
-
-    def replace_uri(self, i, text_string, length):
+    @staticmethod
+    def replace_uri(i, text_string, length):
         in_uri = True
         return_uri_rep = ''
-        while (in_uri and i < length):
+        while in_uri and i < length:
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
@@ -410,11 +411,11 @@ class ValidationFiles():
             continue
         return [i-1, return_uri_rep]
 
-
-    def replace_token(self, i, text_string, length):
+    @staticmethod
+    def replace_token(i, text_string, length):
         in_token = True
         return_token_rep = ''
-        while (in_token and i < length):
+        while in_token and i < length:
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
@@ -434,11 +435,11 @@ class ValidationFiles():
             continue
         return [i-1, return_token_rep]
 
-
-    def replace_class(self, i, text_string, length):
+    @staticmethod
+    def replace_class(i, text_string, length):
         in_class = True
         return_class_rep = ''
-        while (in_class and i < length):
+        while in_class and i < length:
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
@@ -459,11 +460,11 @@ class ValidationFiles():
             return_class_rep = '<sbml>'
         return [i-1, return_class_rep]
 
-
-    def replace_type(self, i, text_string, length):
+    @staticmethod
+    def replace_type(i, text_string, length):
         in_type = True
         return_type_rep = ''
-        while (in_type and i < length):
+        while in_type and i < length:
             letter = text_string[i]
             if i != length-1:
                 next_letter = text_string[i+1]
@@ -481,11 +482,9 @@ class ValidationFiles():
             continue
         return [i-1, return_type_rep]
 
-
     def replace_package(self, i, pkg_length):
         return_token_rep = '{0} Package'.format(self.fullname)
         return [i+pkg_length-1, return_token_rep]
-
 
     #########################################################################
 

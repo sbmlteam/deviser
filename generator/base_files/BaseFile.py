@@ -86,7 +86,7 @@ class BaseFile:
         # but it needs to know that it can resolve them
         self.class_name = ''
         self.package = ''
-        self.class_object = []
+        self.class_object = dict()
 
     ########################################################################
 
@@ -455,9 +455,9 @@ class BaseFile:
         else:
             self.write_comment_line('@sbmlbrief{0}{1}{2} TODO:'
                                     '{3}'.format(self.open_br,
-                                                self.package.lower(),
-                                                self.close_br,
-                                                self.brief_description))
+                                                 self.package.lower(),
+                                                 self.close_br,
+                                                 self.brief_description))
 
     @staticmethod
     def is_excluded(filename):

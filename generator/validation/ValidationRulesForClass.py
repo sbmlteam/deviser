@@ -204,9 +204,9 @@ class ValidationRulesForClass():
                    'may only take on the allowed values of {3} defined ' \
                    'in SBML; that is the value must be one of the ' \
                    'following: {4}.'.format(name, self.indef,
-                                           self.formatted_name,
-                                           strFunctions.wrap_enum(enum_name),
-                                           enum_values)
+                                            self.formatted_name,
+                                            strFunctions.wrap_enum(enum_name),
+                                            enum_values)
             rule_type = '{0}Enum'.format(attribute['element'])
         elif att_type == 'array':
             text = 'The value of the attribute {0} of {1} {2} object must ' \
@@ -235,7 +235,7 @@ class ValidationRulesForClass():
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, self.name, att_name,
-                                     rule_type)
+                                         rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -253,7 +253,8 @@ class ValidationRulesForClass():
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package, self.name)
+            tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
+                                                      self.name)
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
         else:
             lo_name = strFunctions.plural(lo_child['element'])
@@ -268,7 +269,7 @@ class ValidationRulesForClass():
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
-                                                        self.name, lo_name)
+                                                           self.name, lo_name)
             short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
@@ -301,7 +302,7 @@ class ValidationRulesForClass():
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
-                                                  lo_name)
+                                                     lo_name)
             short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
@@ -418,17 +419,19 @@ class ValidationRulesForClass():
                 name = strFunctions.get_element_name(self.opt_child_lo_elem[i])
                 text += 'The {0} must contain at least {1} instances of the ' \
                         '\{2} object.'.format(name, num,
-                                             self.opt_child_lo_elem[i]['name'])
+                                              self.opt_child_lo_elem[i]['name'])
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
-            short = 'Number of children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            short = 'Number of children in ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
             tc = '{0}{1}LOElementChildren'.format(self.up_package, self.name)
         else:
-            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
+            short = 'No Empty ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
             tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
@@ -472,19 +475,23 @@ class ValidationRulesForClass():
                     self.reqd_child_lo_elem[i]['min_lo_children'])).lower()
                 name = strFunctions.get_element_name(self.reqd_child_lo_elem[i])
                 text += 'The {0} must contain at least {1} instances of the ' \
-                        '\{2} object.'.format(name, num,
-                                             self.reqd_child_lo_elem[i]['name'])
+                        '\{2} object.' \
+                        ''.format(name, num,
+                                  self.reqd_child_lo_elem[i]['name'])
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
-            short = 'No children in ListOf elements allowed on <{0}>.'.format(self.lower_name)
-            tc = '{0}{1}LOReqdElementChildren'.format(self.up_package, self.name )
+            short = 'No children in ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
+            tc = '{0}{1}LOReqdElementChildren'.format(self.up_package,
+                                                      self.name)
         else:
-            short = 'No Empty ListOf elements allowed on <{0}>.'.format(self.lower_name)
-            tc = '{0}{1}EmptyReqdLOElements'.format(self.up_package, self.name, )
+            short = 'No Empty ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
+            tc = '{0}{1}EmptyReqdLOElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -608,9 +615,11 @@ class ValidationRulesForClass():
                     else:
                         self.opt_att.append(attributes[i])
                 else:
-                    element = query.get_class(attributes[i]['element'], elements)
+                    element = query.get_class(attributes[i]['element'],
+                                              elements)
                     if element:
-                        attributes[i]['min_lo_children'] = element['min_lo_children']
+                        attributes[i]['min_lo_children'] \
+                            = element['min_lo_children']
                     if attributes[i]['reqd'] is True:
                         if attributes[i]['type'] != 'element':
                             self.reqd_child_lo_elem.append(attributes[i])
@@ -640,7 +649,8 @@ class ValidationRulesForClass():
             for i in range(1, num_values-1):
                 values += ', \'{0}\''.format(this_enum['values'][i]['value'])
             if num_values > 1:
-                values += ' or \'{0}\''.format(this_enum['values'][i+1]['value'])
+                values += ' or \'{0}\'' \
+                          ''.format(this_enum['values'][i+1]['value'])
             return values
 
     #########################################################################

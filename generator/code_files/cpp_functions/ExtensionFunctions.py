@@ -101,7 +101,7 @@ class ExtensionFunctions():
         title_line = 'Returns a string representing the {0} XML namespace of ' \
                      'this {0} Level&nbsp;3 package.'.format(self.cap_language)
         params = ['@param {0}Level, the level of {1}'.format(self.language,
-                                                           self.cap_language),
+                                                             self.cap_language),
                   '@param {0}Version the version of '
                   '{1}'.format(self.language, self.cap_language),
                   '@param pkgVersion the version of this package']
@@ -126,13 +126,15 @@ class ExtensionFunctions():
 
         # create the function implementation
         if self.num_versions == 1:
-            bottom_if = self.create_code_block('if', ['pkgVersion == 1',
-                                                      'return getXmlnsL3V1V1()'])
+            bottom_if = self.create_code_block('if',
+                                               ['pkgVersion == 1',
+                                                'return getXmlnsL3V1V1()'])
         else:
-            bottom_if = self.create_code_block('if_else', ['pkgVersion == 1',
-                                                      'return getXmlnsL3V1V1()',
-                                                      'else',
-                                                      'return getXmlnsL3V1V2()'])
+            bottom_if = self.create_code_block('if_else',
+                                               ['pkgVersion == 1',
+                                                'return getXmlnsL3V1V1()',
+                                                'else',
+                                                'return getXmlnsL3V1V2()'])
         middle_if = self.create_code_block('if', ['{0} == 1'.format(vers),
                                                   bottom_if])
         code = [self.create_code_block('if', ['{0} == 3'.format(level),
@@ -187,6 +189,7 @@ class ExtensionFunctions():
 
         # create the function implementation
         write_else = False
+        value = 0
         if other == 'Level':
             value = 3
         elif other == 'Version':
@@ -203,7 +206,8 @@ class ExtensionFunctions():
                     self.create_code_block('line', ['return 0'])]
 
         else:
-            implementation = ['uri == getXmlnsL3V1V1()', 'return {0}'.format(value)]
+            implementation = ['uri == getXmlnsL3V1V1()',
+                              'return {0}'.format(value)]
             code = [dict({'code_type': 'if', 'code': implementation}),
                     self.create_code_block('line', ['return 0'])]
 
@@ -244,16 +248,22 @@ class ExtensionFunctions():
                       'code': ['{0}PkgNamespaces* pkgns = '
                                'NULL'.format(self.up_package)]})]
         if self.num_versions == 1:
-            code .append(self.create_code_block('if', ['uri == getXmlnsL3V1V1()',
-                                              'pkgns = new {0}PkgNamespaces'
-                                              '(3, 1, 1)'.format(self.up_package)]))
+            code .append(self.create_code_block('if',
+                                                ['uri == getXmlnsL3V1V1()',
+                                                 'pkgns = new {0}PkgNamespaces'
+                                                 '(3, 1, 1)'
+                                                 ''.format(self.up_package)]))
         else:
-            code .append(self.create_code_block('else_if', ['uri == getXmlnsL3V1V1()',
-                                              'pkgns = new {0}PkgNamespaces'
-                                              '(3, 1, 1)'
-                                              ''.format(self.up_package),
-                                              'else if', 'uri == getXmlnsL3V1V2()',
-                                              'pkgns = new {0}PkgNamespaces(3, 1, 2)'.format(self.up_package)]))
+            code .append(self.create_code_block('else_if',
+                                                ['uri == getXmlnsL3V1V1()',
+                                                 'pkgns = new {0}PkgNamespaces'
+                                                 '(3, 1, 1)'
+                                                 ''.format(self.up_package),
+                                                 'else if',
+                                                 'uri == getXmlnsL3V1V2()',
+                                                 'pkgns = new {0}'
+                                                 'PkgNamespaces(3, 1, 2)'
+                                                 ''.format(self.up_package)]))
 
         code.append(self.create_code_block('line', ['return pkgns']))
 
@@ -278,11 +288,13 @@ class ExtensionFunctions():
                      'code.'.format(self.package)
         params = ['@param typeCode a libSBML type code defined by the libSBML '
                   'extension implementing support for the SBML '
-                  'Level&nbsp;3 &ldquo;{0}&rdquo; package.'.format(self.package)]
+                  'Level&nbsp;3 &ldquo;{0}&rdquo; package.'
+                  ''.format(self.package)]
         return_lines = ['@return a text string representing the type code '
                         'given by @p typeCode.  If the type code is '
                         'unrecognized for this implementation of the '
-                        'libSBML &ldquo;{0}&rdquo; package, the string returned '
+                        'libSBML &ldquo;{0}&rdquo; package, the string '
+                        'returned '
                         'will be <code>"(Unknown SBML {1} Type)"'
                         '</code>.'.format(self.package, self.up_package)]
         additional = []
@@ -295,7 +307,8 @@ class ExtensionFunctions():
         # create the function implementation
         n = len(self.elements)
         implementation = ['int min = {0}'.format(self.elements[0]['typecode']),
-                          'int max = {0}'.format(self.elements[n-1]['typecode'])]
+                          'int max = {0}'
+                          ''.format(self.elements[n-1]['typecode'])]
         code = [dict({'code_type': 'line', 'code': implementation}),
                 self.create_code_block('if', ['typeCode < min || '
                                               'typeCode > max',
@@ -334,7 +347,7 @@ class ExtensionFunctions():
                   'index of the error.']
         return_lines = ['@return packageErrorTableEntry object in the '
                         '{0}{1}ErrorTable.'.format(self.up_package,
-                                                 self.cap_language)]
+                                                   self.cap_language)]
         additional = []
 
         # create the function declaration
@@ -411,7 +424,7 @@ class ExtensionFunctions():
         return_lines = ['@return unsigned int representing the offset '
                         'for errors in the '
                         '{0}{1}ErrorTable.'.format(self.up_package,
-                                                 self.cap_language)]
+                                                   self.cap_language)]
         additional = []
 
         # create the function declaration
@@ -472,8 +485,6 @@ class ExtensionFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
-
-
 
     ########################################################################
 

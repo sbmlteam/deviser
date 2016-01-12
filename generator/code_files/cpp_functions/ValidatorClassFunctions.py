@@ -503,9 +503,9 @@ class ValidatorClassFunctions():
         return_type = 'bool'
         arguments = ['const {0}& x'.format(name)]
         line = ['v.m{0}Constraints->m{1}.applyTo(m, x)'.format(self.up_package,
-                                                             name),
-                'return !v.m{0}Constraints->m{1}.empty()'.format(self.up_package,
-                                                               name)]
+                                                               name),
+                'return !v.m{0}Constraints->m{1}.empty()'
+                ''.format(self.up_package, name)]
         code = [self.create_code_block('line', line)]
 
         # return the parts

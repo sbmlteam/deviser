@@ -150,7 +150,6 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
         self.write_to_do('explain {0}'.format(lo_name))
 
-        number = ''
         if 'min_lo_children' not in sbml_class:
             number = 'one'
         elif sbml_class['min_lo_children'] == 1:
@@ -158,7 +157,6 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         else:
             number = strFunctions.replace_digits(str(
                 sbml_class['min_lo_children'])).lower()
-
 
         self.write_line('The \\{0} object derives from the \\class{1}SBase{2}'
                         ' and inherits the core attributes and subobjects '
@@ -383,8 +381,10 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
         self.write_figure('enum', enum['texname'])
         self.skip_line()
-        self.write_line('The \\primtype{0}{1}{2} is an emueration of values used '
-                        'to ... '.format(self.start_b, enum['texname'], self.end_b))
+        self.write_line('The \\primtype{0}{1}{2} is an emueration of values '
+                        'used '
+                        'to ... '.format(self.start_b, enum['texname'],
+                                         self.end_b))
         self.write_to_do('Explain use of {0}'.format(enum['texname']))
         self.write_line('The possible values are {0}.'
                         .format(self.list_values(enum)))
@@ -392,16 +392,20 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
 
     def list_values(self, enum):
         num_values = len(enum['values'])
-        listed = '\\const{0}{1}{2}'.format(self.start_b,
-                                        enum['values'][0]['value'].replace("_", "\_"),
-                                        self.end_b)
+        listed = '\\const{0}{1}{2}' \
+                 ''.format(self.start_b,
+                           enum['values'][0]['value'].replace("_", "\_"),
+                           self.end_b)
         for i in range(1, num_values-1):
-            enum_value = ', \\const{0}{1}{2}'.format(self.start_b,
-                                                 enum['values'][i]['value'].replace("_", "\_"),
-                                                 self.end_b)
+            replaced_value = enum['values'][i]['value'].replace("_", "\_")
+            enum_value = ', \\const{0}{1}{2}' \
+                         ''.format(self.start_b,
+                                   replaced_value,
+                                   self.end_b)
             listed += enum_value
         listed += ' and \\const{0}{1}{2}'\
-            .format(self.start_b, enum['values'][num_values-1]['value'].replace("_", "\_"),
+            .format(self.start_b,
+                    enum['values'][num_values-1]['value'].replace("_", "\_"),
                     self.end_b)
         return listed
 
@@ -446,9 +450,11 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
             caption = 'the \\{0}Package'.format(self.upper_package)
             imagewidth = 'width=0.9\\textwidth'
 
-            current = global_variables.currend_dir + '/figures/' + figname + '.pdf'
-            if os.path.exists(current) == False or os.path.getsize(current) == 0:
-              extension = '.png'
+            current = global_variables.current_dir + '/figures/'
+            current += figname
+            current += '.pdf'
+            if not os.path.exists(current) or os.path.getsize(current) == 0:
+                extension = '.png'
 
         elif fig_type == 'enum':
             figname = '{0}_type_enum_{1}_uml'.format(self.package,
@@ -457,16 +463,15 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                       ''.format(name, self.upper_package)
         elif fig_type == 'extended':
             figname = '{0}_extended_{1}_uml'.format(self.package,
-                                                     name.lower())
+                                                    name.lower())
             caption = 'the extended \\{0} class for the \\{1}Package' \
                       ''.format(name, self.upper_package)
 
         else:
             figname = '{0}_{1}_uml'.format(self.package,
-                                                     name.lower())
+                                           name.lower())
             caption = 'the \\{0} class for the \\{1}Package' \
                       ''.format(name, self.upper_package)
-
 
         if not global_variables.figures_present:
             self.write_comment_line('\\begin{figure}[ht!]')
@@ -475,7 +480,8 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
                                     '{1}figures/{2}{3}{4}\\\\'
                                     ''.format(imagewidth, self.open_br, figname,
                                               extension, self.close_br))
-            self.write_comment_line('  \\caption{0}A UML representation of {1}. '
+            self.write_comment_line('  \\caption{0}A UML representation of '
+                                    '{1}. '
                                     'See \\ref{0}conventions{2} for '
                                     'conventions related to this figure.  {2}'
                                     ''.format(self.open_br, caption,
@@ -488,13 +494,15 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
             self.write_line('\\begin{figure}[ht!]')
             self.write_line('  \\centering')
             self.write_line('  \\includegraphics[{0}]{1}figures/'
-                            '{2}{3}{4}\\\\'.format(imagewidth, self.open_br, figname,
-                                                    extension, self.close_br))
+                            '{2}{3}{4}\\\\'.format(imagewidth, self.open_br,
+                                                   figname,
+                                                   extension, self.close_br))
             self.write_line('  \\caption{0}A UML representation of {1}. '
                             'See \\ref{0}conventions{2} for '
                             'conventions related to this figure.  {2}'
                             ''.format(self.open_br, caption, self.close_br))
-            self.write_line('  \\label{0}fig:{1}{2}'.format(self.open_br, figname,
+            self.write_line('  \\label{0}fig:{1}{2}'.format(self.open_br,
+                                                            figname,
                                                             self.close_br))
             self.write_line('\\end{figure}')
         self.skip_line()

@@ -56,7 +56,7 @@ class ValidatorHeaderFile(BaseCppFile.BaseCppFile):
             self.name = '{0}Validator'.format(self.up_package)
         elif filetype == 'consistency':
             self.name = '{0}{1}ConsistencyValidator'.format(self.up_package,
-                                                          self.valid_type)
+                                                            self.valid_type)
             self.baseClass = '{0}Validator'.format(self.up_package)
             if valid_type == '':
                 self.category = 'LIB{0}_CAT_GENERAL_' \

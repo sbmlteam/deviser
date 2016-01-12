@@ -99,13 +99,14 @@ class ExtensionInitFunctions():
                                                 '(getXmlnsL3V1V1())'])]
         implementation = ['{0}ExtensionPoint {1}docExtPoint(\"core\", '
                           '{2}_DOCUMENT)'.format(self.std_base,
-                                                self.language,
-                                                self.cap_language)]
+                                                 self.language,
+                                                 self.cap_language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             tc = query.get_typecode_format(name, self.language)
             implementation.append('{0}ExtensionPoint {1}ExtPoint(\"core\", '
-                                  '{2})'.format(self.std_base, name.lower(), tc))
+                                  '{2})'.format(self.std_base, name.lower(),
+                                                tc))
         code.append(self.create_code_block('line', implementation))
         implementation = ['{0}PluginCreator<{1}{2}DocumentPlugin, '
                           '{1}Extension> {3}docPluginCreator({3}docExtPoint, '
@@ -122,17 +123,18 @@ class ExtensionInitFunctions():
         code.append(self.create_code_block('line', implementation))
         implementation = ['{0}Extension.add{1}PluginCreator('
                           '&{2}docPluginCreator)'.format(self.package,
-                                                        self.std_base,
-                                                        self.language)]
+                                                         self.std_base,
+                                                         self.language)]
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             implementation.append('{0}Extension.add{1}PluginCreator('
                                   '&{2}PluginCreator)'.format(self.package,
-                                                             self.std_base,
-                                                             name.lower()))
+                                                              self.std_base,
+                                                              name.lower()))
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block('line',
-                                           ['int result = {0}ExtensionRegistry::'
+                                           ['int result = '
+                                            '{0}ExtensionRegistry::'
                                             'getInstance().addExtension(&{1}'
                                             'Extension'
                                             ')'.format(self.cap_language,

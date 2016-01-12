@@ -355,21 +355,15 @@ class GlobalQueryFunctions():
                     self.create_code_block('if',
                                            ['parent == NULL',
                                             'return {0}'.format(invalid)])]
-            # implementation =[]
-            # for i in range(0, len(self.child_elements)):
-            #     name = self.child_elements[i]['memberName']
-            #     implementation.append('ADD_FILTERED_POINTER(ret, sublist, {0},'
-            #                           'filter)'.format(name))
-            # code.append(self.create_code_block('line', implementation))
             ret = global_variables.ret_success
             for i in range(0, len(self.child_lo_elements)):
                 name = self.child_lo_elements[i]['memberName']
                 loname = strFunctions.\
                     upper_first(self.child_lo_elements[i]['name'])
                 code.append(self.create_code_block('line',
-                                                   ['ret = {0}.appendFrom(plug->'
-                                                    'get{1}())'.format(name,
-                                                                      loname)]))
+                                                   ['ret = {0}.appendFrom'
+                                                    '(plug->get{1}())'
+                                                    ''.format(name, loname)]))
                 code.append(
                     self.create_code_block('if',
                                            ['ret != {0}'.format(ret),

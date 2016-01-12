@@ -51,8 +51,8 @@ figures_present = False
 global deviser_file
 deviser_file = ''
 
-global currend_dir
-currend_dir = os.getcwd()
+global current_dir
+current_dir = os.getcwd()
 
 global language
 language = 'sbml'

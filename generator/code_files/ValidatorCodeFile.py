@@ -54,10 +54,10 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
             self.name = '{0}Validator'.format(self.up_package)
         elif filetype == 'constraints':
             self.name = '{0}{1}ConsistencyConstraints'.format(self.up_package,
-                                                            self.valid_type)
+                                                              self.valid_type)
         elif filetype == 'consistency':
             self.name = '{0}{1}ConsistencyValidator'.format(self.up_package,
-                                                          self.valid_type)
+                                                            self.valid_type)
             self.baseClass = '{0}Validator'.format(self.up_package)
         elif filetype == 'declared':
             self.name = '{0}{1}ConsistencyConstraints' \
@@ -147,7 +147,8 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_line_verbatim('#include <{0}/validator/VConstraint'
                                  '.h>'.format(self.language))
         self.skip_line()
-        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}{3}Error'
+        self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}{3}'
+                                 'Error'
                                  '.h>'.format(self.language, self.package,
                                               self.up_package,
                                               self.cap_language))
@@ -282,7 +283,8 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
         self.write_comments(['-------------------------------------------',
                              'ValidatorConstraints',
                              '-------------------------------------------'])
-        self.write_line('struct {0}ValidatorConstraints'.format(self.up_package))
+        self.write_line('struct {0}ValidatorConstraints'
+                        ''.format(self.up_package))
         self.write_line('{')
         self.up_indent()
         self.skip_line()
@@ -310,8 +312,9 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
     # function to write spaced sets of data
     def write_constraint_set_member(self, class_name):
         constraint = 'ConstraintSet<{0}>'.format(class_name)
-        self.write_spaced_line('{0:{width}} m{1};'.format(constraint, class_name,
-                                                        width=45))
+        self.write_spaced_line('{0:{width}} m{1};'.format(constraint,
+                                                          class_name,
+                                                          width=45))
     ########################################################################
 
     # Write the validator class
@@ -330,8 +333,8 @@ class ValidatorCodeFile(BaseCppFile.BaseCppFile):
                              'ValidatingVisitor',
                              '-------------------------------------------'])
         self.skip_line()
-        self.write_line('class {0}: public {1}Visitor'.format(name,
-                                                            self.cap_language))
+        self.write_line('class {0}: public {1}Visitor'
+                        ''.format(name, self.cap_language))
         self.write_line('{')
         self.write_line('public:')
         self.up_indent()

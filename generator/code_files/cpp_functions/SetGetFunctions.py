@@ -255,7 +255,7 @@ class SetGetFunctions():
         if self.is_cpp_api:
             implementation = ['static const std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],
-                                                    attribute['memberName']),
+                                                     attribute['memberName']),
                               'return code_str']
         else:
             implementation = ['return {0}_toString({1}->get{2}()'
@@ -291,7 +291,7 @@ class SetGetFunctions():
         params = ['@param outArray {0} array that will be used to return the '
                   'value of the \"{1}\" attribute of this '
                   '{2}.'.format(attribute['attTypeCode'], attribute['name'],
-                               self.class_name)]
+                                self.class_name)]
         return_lines = []
         additional = ['@note the value of the \"{0}\" attribute of this '
                       '{1} is returned in the argument '
@@ -478,14 +478,14 @@ class SetGetFunctions():
             elif attribute['attType'] == 'enum' or attribute['isArray']:
                 implementation = ['return ({0} != '
                                   '{1})'.format(attribute['memberName'],
-                                               attribute['default'])]
+                                                attribute['default'])]
             elif query.has_is_set_member(attribute):
                 implementation = ['return '
                                   'mIsSet{0}'.format(attribute['capAttName'])]
             elif attribute['type'] == 'element':
                 implementation = ['return ({0} != '
                                   '{1})'.format(attribute['memberName'],
-                                               attribute['default'])]
+                                                attribute['default'])]
             else:
                 implementation = ['']
         else:
@@ -494,7 +494,7 @@ class SetGetFunctions():
             else:
                 use_name = 'static_cast<const ' \
                            '{0}*>({1})'.format(self.class_name,
-                                             self.abbrev_parent)
+                                               self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? static_cast<int>({0}->is'
                               'Set{1}()) : 0'.format(use_name,
                                                      attribute['capAttName'])]
@@ -562,13 +562,13 @@ class SetGetFunctions():
         return_lines.append('@li @{0}constant{1}{2}, '
                             'OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.success, self.close_br))
+                                          self.success, self.close_br))
 
         return_lines.append('@li @{0}constant '
                             '{1}{2},'
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.invalid_att, self.close_br))
+                                          self.invalid_att, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -609,7 +609,7 @@ class SetGetFunctions():
             else:
                 use_name = 'static_cast<' \
                            '{0}*>({1})'.format(self.class_name,
-                                             self.abbrev_parent)
+                                               self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
                               'LIB{3}'
                               '_INVALID_OBJECT'.format(use_name,
@@ -661,12 +661,12 @@ class SetGetFunctions():
         return_lines.append('@li @{0}constant{1}{2}, '
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.success, self.close_br))
+                                          self.success, self.close_br))
         return_lines.append('@li @{0}constant '
                             '{1}{2},'
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.invalid_att, self.close_br))
+                                          self.invalid_att, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -691,12 +691,12 @@ class SetGetFunctions():
                               '0'.format(attribute['element'],
                                          attribute['name']),
                               '{0} = {1}'.format(attribute['memberName'],
-                                               attribute['default']),
+                                                 attribute['default']),
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}_fromString'
                               '({2}.c_str())'.format(attribute['memberName'],
-                                                    attribute['element'],
-                                                    attribute['name']),
+                                                     attribute['element'],
+                                                     attribute['name']),
                               'return {0}'.format(self.success)]
             code = [dict({'code_type': 'if_else', 'code': implementation})]
         else:
@@ -739,15 +739,15 @@ class SetGetFunctions():
         return_lines = ["@copydetails doc_returns_success_code",
                         '@li @{0}constant{1}{2}, '
                         'OperationReturnValues_t{3}'.format(self.language,
-                                                           self.open_br,
-                                                           self.success,
-                                                           self.close_br),
+                                                            self.open_br,
+                                                            self.success,
+                                                            self.close_br),
                         '@li @{0}constant '
                         '{1}{2},'
                         ' OperationReturnValues_t{3}'.format(self.language,
-                                                            self.open_br,
-                                                            self.invalid_att,
-                                                            self.close_br)]
+                                                             self.open_br,
+                                                             self.invalid_att,
+                                                             self.close_br)]
 
         additional = []
 
@@ -801,7 +801,7 @@ class SetGetFunctions():
             .format(attribute['name'], self.object_name)
 
         params = ['@param {0} the {1} structure.'.format(self.abbrev_parent,
-                                                       self.object_name),
+                                                         self.object_name),
                   '@param {0} pointer value of the \"{0}\" '
                   'attribute to be set.'.format(attribute['name']),
                   '@param arrayLength int value for the length of '
@@ -811,15 +811,15 @@ class SetGetFunctions():
         return_lines = ["@copydetails doc_returns_success_code",
                         '@li @{0}constant{1}{2}, '
                         'OperationReturnValues_t{3}'.format(self.language,
-                                                           self.open_br,
-                                                           self.success,
-                                                           self.close_br),
+                                                            self.open_br,
+                                                            self.success,
+                                                            self.close_br),
                         '@li @{0}constant '
                         '{1}{2},'
                         ' OperationReturnValues_t{3}'.format(self.language,
-                                                            self.open_br,
-                                                            self.invalid_att,
-                                                            self.close_br)]
+                                                             self.open_br,
+                                                             self.invalid_att,
+                                                             self.close_br)]
 
         additional = []
 
@@ -828,7 +828,7 @@ class SetGetFunctions():
         return_type = 'int'
         arguments = ['{0}* {1}'.format(self.object_name, self.abbrev_parent),
                      '{0} {1}'.format(attribute['attTypeCode'],
-                                    attribute['name']),
+                                      attribute['name']),
                      'int arrayLength']
         implementation = ['return ({0} != NULL) ? {0}->set{1}({2}, '
                           'arrayLength)'
@@ -883,11 +883,11 @@ class SetGetFunctions():
         return_lines.append('@li @{0}constant{1}{2}, '
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.success, self.close_br))
+                                          self.success, self.close_br))
         return_lines.append('@li @{0}constant{1}{2},'
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
-                                         self.failed, self.close_br))
+                                          self.failed, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -912,7 +912,7 @@ class SetGetFunctions():
             else:
                 use_name = 'static_cast<' \
                            '{0}*>({1})'.format(self.class_name,
-                                             self.abbrev_parent)
+                                               self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIB{2}'
                               '_INVALID_OBJECT'.format(use_name,
                                                        attribute['capAttName'],
@@ -982,7 +982,7 @@ class SetGetFunctions():
         else:
             function = '{0}_create{1}'.format(self.class_name, name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         return_type = '{0}'.format(att_type)
 
         code = []
@@ -1001,8 +1001,8 @@ class SetGetFunctions():
                               '({2}ns)'.format(member, att_name, low_pack)]
             code.append(self.create_code_block('line', implementation))
             if attribute['children_overwrite']:
-                line = ['{0}->setElementName(\"{1}\")'.format(member,
-                                                            attribute['name'])]
+                line = ['{0}->setElementName(\"{1}\")'
+                        ''.format(member, attribute['name'])]
                 code.append(self.create_code_block('line', line))
             if self.is_plugin:
                 line = ['{0}->set{1}(this->get{1}'
@@ -1020,7 +1020,7 @@ class SetGetFunctions():
             code = [self.create_code_block('if', implementation)]
             implementation = ['return ({0})({1}->'
                               'create{2}())'.format(att_type,
-                                                   self.abbrev_parent, name)]
+                                                    self.abbrev_parent, name)]
             code.append(self.create_code_block('line', implementation))
 
         # return the parts
@@ -1068,7 +1068,7 @@ class SetGetFunctions():
         else:
             function = '{0}_create{1}'.format(self.class_name, name)
             arguments.append('{0}* {1}'.format(self.object_name,
-                                             self.abbrev_parent))
+                                               self.abbrev_parent))
         return_type = '{0}'.format(att_type)
 
         up_pack = self.package.upper()
@@ -1091,7 +1091,7 @@ class SetGetFunctions():
             code.append((self.create_code_block('line',
                                                 ['return static_cast<{0}*>'
                                                  '({1})'.format(att_name,
-                                                               member)])))
+                                                                member)])))
         else:
             implementation = ['return ({0} != NULL) ? {0}->create{1}() : '
                               'NULL'.format(self.abbrev_parent,
@@ -1129,7 +1129,7 @@ class SetGetFunctions():
 
         if attribute['attType'] == 'enum':
             line = ['return {0}->get{1}()'.format(self.abbrev_parent,
-                                                attribute['capAttName'])]
+                                                  attribute['capAttName'])]
         elif attribute['attType'] == 'integer' \
                 or attribute['attType'] == 'unsigned integer':
             line = ['return ({0} != NULL) ? {0}->get{1}() : '
@@ -1145,16 +1145,16 @@ class SetGetFunctions():
                     '0'.format(self.abbrev_parent,
                                attribute['capAttName'])]
         elif attribute['type'] == 'element':
-            line = ['return ({0})({1}->get{2}())'.format(attribute['CType'],
-                                                      self.abbrev_parent,
-                                                      attribute['capAttName'])]
+            line = ['return ({0})({1}->get{2}())'
+                    ''.format(attribute['CType'], self.abbrev_parent,
+                              attribute['capAttName'])]
         else:
             if not self.is_list_of:
                 use_name = self.abbrev_parent
             else:
                 use_name = 'static_cast<const ' \
                            '{0}*>({1})'.format(self.class_name,
-                                             self.abbrev_parent)
+                                               self.abbrev_parent)
             line = ['return {0}->get{1}().empty() ? NULL : safe_strdup({0}'
                     '->get{1}().c_str())'.format(use_name,
                                                  attribute['capAttName'])]
@@ -1204,7 +1204,7 @@ class SetGetFunctions():
             implementation = ['{0}_isValid({1}) == '
                               '0'.format(attribute['element'], name),
                               '{0} = {1}'.format(member,
-                                               attribute['default']),
+                                                 attribute['default']),
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
@@ -1293,15 +1293,17 @@ class SetGetFunctions():
     def write_set_att_with_member(self, attribute, in_version):
         if in_version:
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                               attribute['name']),
-                              'mIsSet{0} = true'.format(attribute['capAttName']),
+                                                 attribute['name']),
+                              'mIsSet{0} = true'
+                              ''.format(attribute['capAttName']),
                               'return {0}'.format(self.success)]
         else:
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                               attribute['name']),
+                                                 attribute['name']),
                               'mIsSet{0} = '
                               'false'.format(attribute['capAttName']),
-                              'return {0}'.format(global_variables.ret_att_unex)]
+                              'return {0}'
+                              ''.format(global_variables.ret_att_unex)]
         return implementation
 
     def unset_cpp_attribute(self, attribute):
@@ -1315,12 +1317,12 @@ class SetGetFunctions():
                     dict({'code_type': 'if_else', 'code': implementation2})]
         elif attribute['attType'] == 'enum':
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                               attribute['default']),
+                                                 attribute['default']),
                               'return {0}'.format(self.success)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         elif query.has_is_set_member(attribute):
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                               attribute['default']),
+                                                 attribute['default']),
                               'mIsSet{0} = '
                               'false'.format(attribute['capAttName'])]
             implementation2 = ['isSet{0}() == '

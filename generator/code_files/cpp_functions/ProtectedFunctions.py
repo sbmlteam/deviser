@@ -117,7 +117,8 @@ class ProtectedFunctions():
             self.false = '@c false'
 
         if global_variables.is_package:
-            self.error = 'logPackageError(\"{0}\", '.format(self.package.lower())
+            self.error = 'logPackageError(\"{0}\", ' \
+                         ''.format(self.package.lower())
             self.error_args = 'getPackageVersion(), getLevel(), getVersion()'
             self.given_args = 'pkgVersion, level, version'
         else:
@@ -171,7 +172,7 @@ class ProtectedFunctions():
                 code = [self.create_code_block('line',
                                                ['{0}* obj = '
                                                 '{1}'.format(self.std_base,
-                                                            base_create)])]
+                                                             base_create)])]
                 if self.is_plugin:
                     lines = ['const std::string& name = '
                              'stream.peek().getName()',
@@ -341,7 +342,8 @@ class ProtectedFunctions():
             abbrev = strFunctions.abbrev_name(name)
             implementation = ['name == '
                               '\"{0}\"'.format(strFunctions.lower_first(name)),
-                              '{0} new{1}({2})'.format(name, abbrev.upper(), ns),
+                              '{0} new{1}({2})'.format(name, abbrev.upper(),
+                                                       ns),
                               'set{0}(&new{1})'.format(name, abbrev.upper()),
                               'object = get{0}()'.format(name)]
         return implementation
@@ -369,7 +371,7 @@ class ProtectedFunctions():
         implementation = ['name == \"{0}\"'.format(name),
                           nested_if,
                           '{0} = new {1}({2})'.format(element['memberName'],
-                                                   function, ns),
+                                                      function, ns),
                           'obj = {0}'.format(element['memberName'])]
         return [self.create_code_block('if', implementation)]
 
@@ -397,7 +399,7 @@ class ProtectedFunctions():
     def get_concrete_block(element, name, ns):
         implementation = ['name == \"{0}\"'.format(element['name']),
                           '{0} = new {1}({2})'.format(name, element['element'],
-                                                   ns),
+                                                      ns),
                           'obj = {0}'.format(name)]
         return implementation
 
@@ -411,7 +413,7 @@ class ProtectedFunctions():
         implementation.append(nested_if)
         implementation.append('{0} = new {1}'
                               '({2})'.format(name,
-                                            element, ns))
+                                             element, ns))
         if over_write:
             implementation.append('{0}->setElementName'
                                   '(name)'.format(name))
@@ -476,7 +478,8 @@ class ProtectedFunctions():
                     if self.version_attributes[i][j]['isArray']:
                         continue
                     name = self.version_attributes[i][j]['name']
-                    implementation.append('attributes.add(\"{0}\")'.format(name))
+                    implementation.append('attributes.add(\"{0}\")'
+                                          ''.format(name))
                 if i < len(self.version_attributes) - 1:
                     implementation.append('else')
             code.append(self.create_code_block('if_else', implementation))
@@ -930,8 +933,8 @@ class ProtectedFunctions():
     def get_error_from_list_of_read(self):
         plural = strFunctions.plural(self.class_name)
         error = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
-                                                       self.parent_class,
-                                                       plural)
+                                                          self.parent_class,
+                                                          plural)
         if not global_variables.running_tests \
                 and error not in global_variables.error_list:
             error = '{0}Unknown'.format(self.package)
@@ -939,13 +942,13 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                 self.given_args),
+                                                    self.given_args),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
                 'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                 self.given_args)]
+                                                    self.given_args)]
         if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
@@ -962,11 +965,12 @@ class ProtectedFunctions():
         if self.is_plugin:
             class_name = strFunctions.get_class_from_plugin(
                 self.class_name, self.package)
-            core_err = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+            core_err = '{0}{1}AllowedAttributes'.format(self.package,
+                                                        class_name)
         else:
             class_name = self.class_name
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
-                                                          class_name)
+                                                            class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
             if core_err not in global_variables.error_list:
@@ -978,13 +982,13 @@ class ProtectedFunctions():
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
                 'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                 self.given_args),
+                                                    self.given_args),
                 'else if', 'log->getError(n)->getErrorId() == '
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
                 'log->{0}{1}, {2}, details)'.format(self.error, core_err,
-                                                 self.given_args)]
+                                                    self.given_args)]
         if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
@@ -1055,10 +1059,10 @@ class ProtectedFunctions():
             line = ['!{0}'.format(set_name),
                     'std::string message = \"{0} attribute \'{1}\' is '
                     'missing from the <{2}> element.\"'.format(self.package,
-                                                              name,
-                                                              self.class_name),
+                                                               name,
+                                                               self.class_name),
                     'log->{0}{1}, {2}, message)'.format(self.error, error,
-                                                     self.given_args)]
+                                                        self.given_args)]
             code.append(self.create_code_block('if', line))
 
     def write_sid_read(self, index, code, attributes):
@@ -1069,7 +1073,7 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
         line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
-                                                                    member)]
+                                                                      member)]
         code.append(self.create_code_block('line', line))
 
         if att_type == 'SId':
@@ -1091,7 +1095,8 @@ class ProtectedFunctions():
                  'false'.format(self.cap_language, member)]
         if self.is_plugin:
             line.append('log->{0}InvalidIdSyntax, {1}, '
-                        '{2})'.format(self.error, self.given_args, invalid_line))
+                        '{2})'.format(self.error, self.given_args,
+                                      invalid_line))
         else:
             line.append('logError(InvalidIdSyntax, level, version, '
                         '{0})'.format(invalid_line))
@@ -1130,7 +1135,7 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
         line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
-                                                                    member)]
+                                                                      member)]
         code.append(self.create_code_block('line', line))
 
         line = ['{0}.empty() == true'.format(member)]
@@ -1175,10 +1180,10 @@ class ProtectedFunctions():
 
         # sort error names to be used
         error = '{0}{1}{2}MustBe{3}Enum'.format(self.package, self.class_name,
-                                            strFunctions.upper_first(name),
-                                            element)
+                                                strFunctions.upper_first(name),
+                                                element)
         att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                   self.class_name)
+                                                     self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1195,7 +1200,8 @@ class ProtectedFunctions():
 
         line = ['{0}_isValid({1}) == 0'.format(element, member),
                 self.create_code_block('line',
-                                       ['std::string msg = \"The {0} on the <{1}'
+                                       ['std::string msg = \"The {0} on the '
+                                        '<{1}'
                                         '> \"'.format(name, self.class_name)]),
                 if_id,
                 self.create_code_block('line',
@@ -1249,9 +1255,9 @@ class ProtectedFunctions():
 
         # sort error names to be used
         error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
-                                        up_name, num_type)
+                                            up_name, num_type)
         att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                   self.class_name)
+                                                     self.class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1259,8 +1265,8 @@ class ProtectedFunctions():
                 att_error = '{0}Unknown'.format(self.package)
         line = ['numErrs = log->getNumErrors()',
                 '{0} = attributes.readInto(\"{1}\", {2})'.format(set_name,
-                                                              name,
-                                                              member)]
+                                                                 name,
+                                                                 member)]
         code.append(self.create_code_block('line', line))
 
         line = ['log->getNumErrors() == numErrs + 1 && '
@@ -1270,7 +1276,7 @@ class ProtectedFunctions():
                 'from the <{2}> element must be an '
                 'integer.\"'.format(self.package, name, self.class_name),
                 'log->{0}{1}, {2}, message)'.format(self.error, error,
-                                                 self.given_args)]
+                                                    self.given_args)]
         if reqd:
             if self.is_plugin:
                 class_name = strFunctions.get_class_from_plugin(
@@ -1280,9 +1286,9 @@ class ProtectedFunctions():
             line += ['else',
                      'std::string message = \"{0} attribute \'{1}\' is missing '
                      'from the <{2}> element.\"'.format(self.package, name,
-                                                       class_name),
+                                                        class_name),
                      'log->{0}{1}, {2}, message)'.format(self.error, att_error,
-                                                      self.given_args)]
+                                                         self.given_args)]
 
             if_error = self.create_code_block('if_else', line)
         else:

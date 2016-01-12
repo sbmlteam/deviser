@@ -249,7 +249,7 @@ class GeneralFunctions():
         else:
             line = '@{0}constant{1}{2}, {3}{4}' \
                    'TypeCode_t{5}'.format(self.language, '{', self.typecode,
-                                         self.cap_language, self.package, '}')
+                                          self.cap_language, self.package, '}')
         additional.append(line)
         additional.append(' ')
         additional.append('@copydetails doc_warning_typecodes_not_unique')
@@ -297,10 +297,9 @@ class GeneralFunctions():
                         'objects contained in this '
                         '{1}:'.format(self.cap_language, self.object_name)]
         additional = []
-        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}'.format(self.language, '{',
-                                                          self.typecode,
-                                                          self.cap_language,
-                                                          self.package, '}')
+        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}' \
+               ''.format(self.language, '{', self.typecode, self.cap_language,
+                         self.package, '}')
         additional.append(line)
         additional.append(' ')
         additional.append('@copydetails doc_warning_typecodes_not_unique')
@@ -676,7 +675,7 @@ class GeneralFunctions():
         # create the function implementation
         if self.base_class:
             line = '{0}::set{1}(d)'.format(self.base_class,
-                                         global_variables.document_class)
+                                           global_variables.document_class)
             implementation = [line]
             code = [dict({'code_type': 'line', 'code': implementation})]
         else:
@@ -747,7 +746,8 @@ class GeneralFunctions():
                                         'writeAttributes(stream)'])]
         nested_for = self.create_code_block(
             'for', ['int i = 0; i < m{0}Length; ++i'.format(name),
-                    'stream << ({0}){1}[i] << \" \"'.format(array_type, member)])
+                    'stream << ({0}){1}[i] << \" \"'
+                    ''.format(array_type, member)])
         implementation = ['isSet{0}()'.format(name), nested_for]
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block(
@@ -983,7 +983,8 @@ class GeneralFunctions():
 
         # create comment parts
         title_line = 'Predicate indicating whether \'comp\' flattening has ' \
-                     'been implemented for the {0} package.'.format(self.package)
+                     'been implemented for the {0} package.' \
+                     ''.format(self.package)
         params = []
         return_lines = []
         additional = []

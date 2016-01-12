@@ -142,7 +142,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             self.write_line('  EXTENSION_CREATE_NS_WITH_VERSION('
                             '{0}PkgNamespaces, variable, '
                             '{1}ns, version);'.format(self.up_package,
-                                                     self.language))
+                                                      self.language))
             self.write_line('#endif')
             self.skip_line()
         self.write_line_verbatim('#include <vector>')
@@ -322,7 +322,8 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                                                     self.cap_language))
 
         for plugin in self.plugins:
-            self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}{3}'
+            self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
+                                     '{3}'
                                      'Plugin.h>'.format(self.language,
                                                         self.package,
                                                         self.up_package,

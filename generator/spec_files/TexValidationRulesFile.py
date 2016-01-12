@@ -41,10 +41,10 @@ import os
 import re
 
 from base_files import BaseTexFile
-from util import strFunctions
 from validation import ValidationRulesForClass
 from validation import ValidationRulesForPlugin
 from validation import ValidationRulesGeneral
+
 
 class TexValidationRulesFile(BaseTexFile.BaseTexFile):
     """Class for the validation appendix in LaTeX"""
@@ -64,7 +64,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
 
         self.pkg_ref = 'SBML Level~{0} Package specification for {1}, ' \
                        'Version~{2}'.format(self.level,
-                                           self.fullname, self.pkg_version)
+                                            self.fullname, self.pkg_version)
         self.reqd_status = object_desc['required']
 
     ########################################################################
@@ -93,71 +93,6 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
                                 ref, self.end_b))
 
     ####################################################################
-    # Write general rules
-    # def write_general_rules(self):
-    #     self.write_line('\subsubsection*{General rules about this package}')
-    #     self.skip_line()
-    #     text = 'To conform to the {0} specification for SBML Level~{1} ' \
-    #            'Version~{2}, an SBML document must declare the use of the ' \
-    #            'following XML Namespace: \\uri{3}http://www.sbml.org/sbml/' \
-    #            'level{1}/version{2}/{4}/version{5}{6}.'\
-    #         .format(self.full_pkg_command, self.level, self.version,
-    #                 self.start_b, self.package, self.pkg_version, self.end_b)
-    #     ref = '{} {}.'\
-    #         .format(self.pkg_ref,
-    #                 strFunctions.wrap_section('xml-namespace', False))
-    #     rule = {'severity': 'ERROR', 'number': 10101+self.offset,
-    #             'text': text, 'reference': ref}
-    #     self.write_rule(rule)
-    #     self.skip_line()
-    #     text = 'Wherever they appear in an SBML document, elements and ' \
-    #            'attributes from the {} package must be declared either ' \
-    #            'implicitly or explicitly to be in the XML namespace ' \
-    #            '\\uri{}http://www.sbml.org/sbml/level{}/version{}' \
-    #            '/{}/version{}{}.'\
-    #         .format(self.full_pkg_command, self.start_b, self.level,
-    #                 self.version, self.package, self.pkg_version, self.end_b)
-    #     # same ref
-    #     rule = {'severity': 'ERROR', 'number': 10102+self.offset,
-    #             'text': text, 'reference': ref}
-    #     self.write_rule(rule)
-    #     self.skip_line()
-
-    # Write general rules
-    def write_extended_sbml_rules(self):
-        self.write_line('\subsubsection*{Rules for the '
-                        'extended \\class{SBML} class}')
-        self.skip_line()
-        text = 'In all SBML documents using the \\{0}Package, the ' \
-               '\\class{1}SBML{2} object must have the {3} attribute.'\
-            .format(strFunctions.upper_first(self.package), self.start_b,
-                    self.end_b,
-                    strFunctions.wrap_token('required', self.package))
-        ref = 'SBML Level~3 Version~1 Core, Section~4.1.2.'
-        rule = {'severity': 'ERROR', 'number': 20101 + self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
-        text = 'The value of attribute {0} on the \\class{1}SBML{2} object ' \
-               'must be of data type \\primtype{1}boolean{2}.' \
-            .format(strFunctions.wrap_token('required', self.package),
-                    self.start_b, self.end_b)
-        ref = 'SBML Level~3 Version~1 Core, Section~4.1.2.'
-        rule = {'severity': 'ERROR', 'number': 20102 + self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
-        text = 'The value of attribute {0} on the \\class{1}SBML{2} object ' \
-               'must be set to \\val{1}{3}{2}.' \
-            .format(strFunctions.wrap_token('required', self.package),
-                    self.start_b, self.end_b, 'false')
-        ref = '{0} {1}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('xml-namespace', False))
-        rule = {'severity': 'ERROR', 'number': 20103 + self.offset,
-                'text': text, 'reference': ref}
-        self.write_rule(rule)
-        self.skip_line()
 
     def write_general_rules(self, rules):
         self.write_line('\subsubsection*{General rules about this package}')

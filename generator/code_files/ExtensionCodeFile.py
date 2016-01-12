@@ -96,36 +96,41 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
     def write_general_includes(self):
 
         self.write_line_verbatim('#include <{0}/extension/{1}'
-                        'ExtensionRegister.h>'.format(self.language,
-                                                      self.cap_language))
+                                 'ExtensionRegister.h>'
+                                 ''.format(self.language,
+                                           self.cap_language))
         self.write_line_verbatim('#include <{0}/extension/{1}'
-                        'ExtensionRegistry.h>'.format(self.language,
-                                                      self.cap_language))
+                                 'ExtensionRegistry.h>'
+                                 ''.format(self.language,
+                                           self.cap_language))
         self.write_line_verbatim('#include <{0}/extension/{1}'
-                        'PluginCreator.h>'.format(self.language,
-                                                  self.std_base))
+                                 'PluginCreator.h>'.format(self.language,
+                                                           self.std_base))
         self.write_line_verbatim('#include <{0}/extension/{1}'
-                        'DocumentPlugin.h>'.format(self.language,
-                                                   self.cap_language))
+                                 'DocumentPlugin.h>'
+                                 ''.format(self.language,
+                                           self.cap_language))
         self.skip_line()
         self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
-                        'Extension.h>'.format(self.language, self.package,
-                                              self.up_package))
+                                 'Extension.h>'.format(self.language,
+                                                       self.package,
+                                                       self.up_package))
         self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
-                        '{3}DocumentPlugin.h>'.format(self.language,
-                                                     self.package,
-                                                     self.up_package,
-                                                     self.cap_language))
+                                 '{3}DocumentPlugin.h>'
+                                 ''.format(self.language, self.package,
+                                           self.up_package, self.cap_language))
         self.write_line_verbatim('#include <{0}/packages/{1}/validator/{2}'
-                        '{3}ErrorTable.h>'.format(self.language, self.package,
-                                                 self.up_package,
-                                                 self.cap_language))
+                                 '{3}ErrorTable.h>'
+                                 ''.format(self.language, self.package,
+                                           self.up_package,
+                                           self.cap_language))
         for i in range(0, len(self.plugins)):
             self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
-                            '{3}Plugin.h>'.format(self.language,
-                                                 self.package,
-                                                 self.up_package,
-                                                 self.plugins[i]['sbase']))
+                                     '{3}Plugin.h>'
+                                     ''.format(self.language,
+                                               self.package,
+                                               self.up_package,
+                                               self.plugins[i]['sbase']))
 
         self.skip_line(2)
         self.write_line('using namespace std;')
@@ -213,7 +218,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
             code = ext_functions.write_has_multiple_versions()
             self.write_function_implementation(code, True)
 
-   ########################################################################
+    ########################################################################
 
     # write the init function
     def write_init_function(self):
@@ -241,7 +246,8 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         self.close_comment()
         self.write_line('static {0}ExtensionRegister<{1}Extension> '
                         '{2}ExtensionRegistry;'.format(self.cap_language,
-                                                      up_package, self.package))
+                                                       up_package,
+                                                       self.package))
         self.skip_line()
         self.write_line('static')
         self.write_line('const char* {0}_{1}_TYPECODE_STRINGS[] ='
@@ -263,7 +269,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         self.close_comment()
         self.write_line('template class LIB{0}_EXTERN {0}ExtensionNamespaces<'
                         '{1}Extension>;'.format(self.cap_language,
-                                               up_package))
+                                                up_package))
         self.skip_line()
 
     ########################################################################

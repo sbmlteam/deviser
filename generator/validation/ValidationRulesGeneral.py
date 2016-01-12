@@ -237,7 +237,8 @@ class ValidationRulesGeneral():
         ref = 'SBML Level~3 Version~1 Core, Section~4.1.2.'
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'The {0}:required attribute must be Boolean'.format(self.package)
+        short = 'The {0}:required attribute must be Boolean' \
+                ''.format(self.package)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMustBeBoolean'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
@@ -255,7 +256,8 @@ class ValidationRulesGeneral():
                     strFunctions.wrap_section('xml-namespace', False))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'The {0}:required attribute must be \'{1}\''.format(self.package, self.reqd_status)
+        short = 'The {0}:required attribute must be \'{1}\'' \
+                ''.format(self.package, self.reqd_status)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}AttributeRequiredMustHaveValue'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
