@@ -287,7 +287,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 plural = strFunctions.plural_no_prefix(attributes[i]['element'])
                 attributes[i]['attType'] = 'lo_element'
                 attributes[i]['attTypeCode'] = name
-                attributes[i]['CType'] = name + '_t'
+                attributes[i]['CType'] = 'ListOf_t'
                 attributes[i]['memberName'] = 'm' + plural
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'

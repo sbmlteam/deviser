@@ -530,6 +530,41 @@ def main():
     test_case = 'error enumeration '
     fail += run_valid_test(name, class_name, test_case)
 
+    name = 'nasty_lists'
+    num = 0
+    class_name = 'Child'
+    list_of = ''
+    test_case = 'non uniform listOf name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'nasty_lists'
+    num = 2
+    class_name = 'Parent'
+    list_of = ''
+    test_case = 'non uniform listOf name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'nasty_lists_alt1'
+    num = 2
+    class_name = 'Parent'
+    list_of = ''
+    test_case = 'non uniform listOf name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'nasty_lists_alt2'
+    num = 2
+    class_name = 'Parent'
+    list_of = ''
+    test_case = 'non uniform listOf name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'nasty_lists_alt3'
+    num = 2
+    class_name = 'Parent'
+    list_of = ''
+    test_case = 'non uniform listOf name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

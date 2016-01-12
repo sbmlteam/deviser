@@ -95,10 +95,22 @@ def plural(name):
         returned_word = name
     elif name.endswith('nformation'):
         returned_word = name
+    elif name.endswith('hild'):
+        returned_word = name + 'ren'
     elif name.endswith('x'):
         returned_word = name[0:len(name)-1] + 'es'
     else:
         returned_word = name + 's'
+    return returned_word
+
+
+def singular(name):
+    returned_word = name
+    length = len(name)
+    if name.endswith('s'):
+        returned_word = name[0:length-1]
+    elif name.endswith('hildren'):
+        returned_word = name[0:length-3]
     return returned_word
 
 
@@ -135,14 +147,18 @@ def get_indefinite(name):
 def standard_element_name(name):
     name = remove_spaces(name)
     length = len(name)
+    temp = name
+    # dont want * , _t at end
     if name.endswith('*'):
         temp = name[0:length-1]
     elif name.endswith(','):
         temp = name[0:length-1]
     elif name.endswith('_t'):
         temp = name[0:length-2]
-    else:
-        temp = name
+    returned_word = temp
+    # also dont want ListOf
+    if returned_word.startswith('ListOf') or returned_word.startswith('listOf'):
+        temp = singular(returned_word[6:length])
     return upper_first(temp)
 
 

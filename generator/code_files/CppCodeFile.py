@@ -95,10 +95,12 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.skip_line()
 
     def write_general_includes(self):
+        lo_name = ''
         if self.has_parent_list_of:
-            lo_name = strFunctions.list_of_name(self.class_name)
-        else:
-            lo_name = ''
+            if 'lo_class_name' in self.class_object:
+                lo_name = self.class_object['lo_class_name']
+            if len(lo_name) == 0:
+                lo_name = strFunctions.list_of_name(self.class_name)
         if global_variables.is_package:
             folder = self.language if not self.is_plugin else 'extension'
             self.write_line_verbatim('#include <{0}/packages/{1}/{2}/{3}'

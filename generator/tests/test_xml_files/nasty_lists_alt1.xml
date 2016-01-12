@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="nasty" fullname="nasty lists" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="Child" typeCode="SBML_NASTY_CHILD" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" listOfName="listOfChildren" listOfClassName="ListOfChildren"/>
+        <element name="Sprog" typeCode="SBML_NASTY_SPROG" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
+        <element name="Parent" typeCode="SBML_NASTY_PARENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="child" required="false" type="lo_element" element="ListOfChildren" abstract="false"/>
+            <attribute name="sprog" required="false" type="lo_element" element="ListOfSprogs" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="Parent"/>
+          </references>
+        </plugin>
+      </plugins>
+    </pkgVersion>
+  </versions>
+</package>
