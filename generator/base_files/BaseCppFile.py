@@ -387,6 +387,12 @@ class BaseCppFile(BaseFile.BaseFile):
                         .format(self.library_name.upper()))
         self.skip_line(2)
 
+    def write_cppns_use(self):
+        self.skip_line(2)
+        self.write_line('{0}_CPP_NAMESPACE_USE'
+                        .format(self.library_name.upper()))
+        self.skip_line(2)
+
     # functions c declaration
     def write_cdecl_begin(self):
         self.skip_line(2)
@@ -624,7 +630,11 @@ class BaseCppFile(BaseFile.BaseFile):
             self.write_brief_header(code['title_line'])
             function_name = code['function']
             if self.is_cpp_api:
-                function_name = code['object_name'] + '::' + code['function']
+                if not code['object_name']:
+                    function_name = code['function']
+                else:
+                    function_name = code['object_name'] + '::' \
+                                    + code['function']
             if 'args_no_defaults' in code:
                 arguments = code['args_no_defaults']
             else:

@@ -551,6 +551,12 @@ def main():
     test_case = 'non uniform listOf name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'lo_children'
+    num = 1
+    class_name = 'ContainerX'
+    list_of = ''
+    test_case = 'variants of lo child elements and differing api/xml names'
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
