@@ -7,8 +7,8 @@
         <element name="Sprog" typeCode="SBML_NASTY_SPROG" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
         <element name="Parent" typeCode="SBML_NASTY_PARENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
-            <attribute name="child" required="false" type="lo_element" element="ListOfChildren" abstract="false"/>
-            <attribute name="sprog" required="false" type="lo_element" element="ListOfSprogs" abstract="false"/>
+            <attribute name="child" required="false" type="lo_element" element="Child" abstract="false"/>
+            <attribute name="sprog" required="false" type="lo_element" element="Sprog" abstract="false"/>
           </attributes>
         </element>
       </elements>

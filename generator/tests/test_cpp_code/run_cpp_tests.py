@@ -551,19 +551,6 @@ def main():
     test_case = 'non uniform listOf name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
-    name = 'nasty_lists_alt2'
-    num = 2
-    class_name = 'Parent'
-    list_of = ''
-    test_case = 'non uniform listOf name'
-    fail += run_test(name, num, class_name, test_case, list_of)
-
-    name = 'nasty_lists_alt3'
-    num = 2
-    class_name = 'Parent'
-    list_of = ''
-    test_case = 'non uniform listOf name'
-    fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
