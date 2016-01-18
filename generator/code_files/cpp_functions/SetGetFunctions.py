@@ -1002,7 +1002,7 @@ class SetGetFunctions():
             code.append(self.create_code_block('line', implementation))
             if attribute['children_overwrite']:
                 line = ['{0}->setElementName(\"{1}\")'
-                        ''.format(member, attribute['name'])]
+                        ''.format(member, attribute['xml_name'])]
                 code.append(self.create_code_block('line', line))
             if self.is_plugin:
                 line = ['{0}->set{1}(this->get{1}'

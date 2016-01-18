@@ -59,8 +59,12 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   , mIsSetNum (false)
   , mStr ("")
   , mKind (KIND_INVALID)
+  , mOther (NULL)
+  , mOther1 (NULL)
+  , mOther2 (NULL)
 {
   setSBMLNamespacesAndOwn(new XPkgNamespaces(level, version, pkgVersion));
+  connectToChild();
 }
 
 
@@ -76,8 +80,12 @@ Fred::Fred(XPkgNamespaces *xns)
   , mIsSetNum (false)
   , mStr ("")
   , mKind (KIND_INVALID)
+  , mOther (NULL)
+  , mOther1 (NULL)
+  , mOther2 (NULL)
 {
   setElementNamespace(xns->getURI());
+  connectToChild();
   loadPlugins(xns);
 }
 
@@ -94,7 +102,26 @@ Fred::Fred(const Fred& orig)
   , mIsSetNum ( orig.mIsSetNum )
   , mStr ( orig.mStr )
   , mKind ( orig.mKind )
+  , mOther ( NULL )
+  , mOther1 ( NULL )
+  , mOther2 ( NULL )
 {
+  if (orig.mOther != NULL)
+  {
+    mOther = orig.mOther->clone();
+  }
+
+  if (orig.mOther1 != NULL)
+  {
+    mOther1 = orig.mOther1->clone();
+  }
+
+  if (orig.mOther2 != NULL)
+  {
+    mOther2 = orig.mOther2->clone();
+  }
+
+  connectToChild();
 }
 
 
@@ -114,6 +141,37 @@ Fred::operator=(const Fred& rhs)
     mIsSetNum = rhs.mIsSetNum;
     mStr = rhs.mStr;
     mKind = rhs.mKind;
+    delete mOther;
+    if (rhs.mOther != NULL)
+    {
+      mOther = rhs.mOther->clone();
+    }
+    else
+    {
+      mOther = NULL;
+    }
+
+    delete mOther1;
+    if (rhs.mOther1 != NULL)
+    {
+      mOther1 = rhs.mOther1->clone();
+    }
+    else
+    {
+      mOther1 = NULL;
+    }
+
+    delete mOther2;
+    if (rhs.mOther2 != NULL)
+    {
+      mOther2 = rhs.mOther2->clone();
+    }
+    else
+    {
+      mOther2 = NULL;
+    }
+
+    connectToChild();
   }
 
   return *this;
@@ -135,6 +193,12 @@ Fred::clone() const
  */
 Fred::~Fred()
 {
+  delete mOther;
+  mOther = NULL;
+  delete mOther1;
+  mOther1 = NULL;
+  delete mOther2;
+  mOther2 = NULL;
 }
 
 
@@ -422,6 +486,297 @@ Fred::unsetKind()
 
 
 /*
+ * Returns the value of the "other" element of this Fred.
+ */
+const Other*
+Fred::getOther() const
+{
+  return mOther;
+}
+
+
+/*
+ * Returns the value of the "other" element of this Fred.
+ */
+Other*
+Fred::getOther()
+{
+  return mOther;
+}
+
+
+/*
+ * Returns the value of the "other1" element of this Fred.
+ */
+const Other*
+Fred::getOther1() const
+{
+  return mOther1;
+}
+
+
+/*
+ * Returns the value of the "other1" element of this Fred.
+ */
+Other*
+Fred::getOther1()
+{
+  return mOther1;
+}
+
+
+/*
+ * Returns the value of the "other2" element of this Fred.
+ */
+const Other*
+Fred::getOther2() const
+{
+  return mOther2;
+}
+
+
+/*
+ * Returns the value of the "other2" element of this Fred.
+ */
+Other*
+Fred::getOther2()
+{
+  return mOther2;
+}
+
+
+/*
+ * Predicate returning @c true if this Fred's "other" element is set.
+ */
+bool
+Fred::isSetOther() const
+{
+  return (mOther != NULL);
+}
+
+
+/*
+ * Predicate returning @c true if this Fred's "other1" element is set.
+ */
+bool
+Fred::isSetOther1() const
+{
+  return (mOther1 != NULL);
+}
+
+
+/*
+ * Predicate returning @c true if this Fred's "other2" element is set.
+ */
+bool
+Fred::isSetOther2() const
+{
+  return (mOther2 != NULL);
+}
+
+
+/*
+ * Sets the value of the "other" element of this Fred.
+ */
+int
+Fred::setOther(const Other* other)
+{
+  if (mOther == other)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (other == NULL)
+  {
+    delete mOther;
+    mOther = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mOther;
+    mOther = (other != NULL) ? other->clone() : NULL;
+    if (mOther != NULL)
+    {
+      mOther->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "other1" element of this Fred.
+ */
+int
+Fred::setOther1(const Other* other1)
+{
+  if (mOther1 == other1)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (other1 == NULL)
+  {
+    delete mOther1;
+    mOther1 = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mOther1;
+    mOther1 = (other1 != NULL) ? other1->clone() : NULL;
+    if (mOther1 != NULL)
+    {
+      mOther1->setElementName("other1");
+      mOther1->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "other2" element of this Fred.
+ */
+int
+Fred::setOther2(const Other* other2)
+{
+  if (mOther2 == other2)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (other2 == NULL)
+  {
+    delete mOther2;
+    mOther2 = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mOther2;
+    mOther2 = (other2 != NULL) ? other2->clone() : NULL;
+    if (mOther2 != NULL)
+    {
+      mOther2->setElementName("other2");
+      mOther2->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Creates a new Other object, adds it to this Fred object and returns the
+ * Other object created.
+ */
+Other*
+Fred::createOther()
+{
+  if (mOther != NULL)
+  {
+    delete mOther;
+  }
+
+  X_CREATE_NS(xns, getSBMLNamespaces());
+  mOther = new Other(xns);
+
+  delete xns;
+
+  connectToChild();
+
+  return mOther;
+}
+
+
+/*
+ * Creates a new Other object, adds it to this Fred object and returns the
+ * Other object created.
+ */
+Other*
+Fred::createOther1()
+{
+  if (mOther1 != NULL)
+  {
+    delete mOther1;
+  }
+
+  X_CREATE_NS(xns, getSBMLNamespaces());
+  mOther1 = new Other(xns);
+
+  mOther1->setElementName("other1");
+
+  delete xns;
+
+  connectToChild();
+
+  return mOther1;
+}
+
+
+/*
+ * Creates a new Other object, adds it to this Fred object and returns the
+ * Other object created.
+ */
+Other*
+Fred::createOther2()
+{
+  if (mOther2 != NULL)
+  {
+    delete mOther2;
+  }
+
+  X_CREATE_NS(xns, getSBMLNamespaces());
+  mOther2 = new Other(xns);
+
+  mOther2->setElementName("myOther");
+
+  delete xns;
+
+  connectToChild();
+
+  return mOther2;
+}
+
+
+/*
+ * Unsets the value of the "other" element of this Fred.
+ */
+int
+Fred::unsetOther()
+{
+  delete mOther;
+  mOther = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "other1" element of this Fred.
+ */
+int
+Fred::unsetOther1()
+{
+  delete mOther1;
+  mOther1 = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "other2" element of this Fred.
+ */
+int
+Fred::unsetOther2()
+{
+  delete mOther2;
+  mOther2 = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
  * Returns the XML element name of this Fred object.
  */
 const std::string&
@@ -465,6 +820,19 @@ Fred::hasRequiredAttributes() const
 }
 
 
+/*
+ * Predicate returning @c true if all the required elements for this Fred
+ * object have been set.
+ */
+bool
+Fred::hasRequiredElements() const
+{
+  bool allPresent = true;
+
+  return allPresent;
+}
+
+
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -475,6 +843,21 @@ void
 Fred::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
+
+  if (isSetOther() == true)
+  {
+    mOther->write(stream);
+  }
+
+  if (isSetOther1() == true)
+  {
+    mOther1->write(stream);
+  }
+
+  if (isSetOther2() == true)
+  {
+    mOther2->write(stream);
+  }
 
   SBase::writeExtensionElements(stream);
 }
@@ -491,7 +874,25 @@ Fred::writeElements(XMLOutputStream& stream) const
 bool
 Fred::accept(SBMLVisitor& v) const
 {
-  return v.visit(*this);
+  v.visit(*this);
+
+  if (mOther != NULL)
+  {
+    mOther->accept(v);
+  }
+
+  if (mOther1 != NULL)
+  {
+    mOther1->accept(v);
+  }
+
+  if (mOther2 != NULL)
+  {
+    mOther2->accept(v);
+  }
+
+  v.leave(*this);
+  return true;
 }
 
 /** @endcond */
@@ -507,6 +908,51 @@ void
 Fred::setSBMLDocument(SBMLDocument* d)
 {
   SBase::setSBMLDocument(d);
+
+  if (mOther != NULL)
+  {
+    mOther->setSBMLDocument(d);
+  }
+
+  if (mOther1 != NULL)
+  {
+    mOther1->setSBMLDocument(d);
+  }
+
+  if (mOther2 != NULL)
+  {
+    mOther2->setSBMLDocument(d);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Connects to child elements
+ */
+void
+Fred::connectToChild()
+{
+  SBase::connectToChild();
+
+  if (mOther != NULL)
+  {
+    mOther->connectToParent(this);
+  }
+
+  if (mOther1 != NULL)
+  {
+    mOther1->connectToParent(this);
+  }
+
+  if (mOther2 != NULL)
+  {
+    mOther2->connectToParent(this);
+  }
 }
 
 /** @endcond */
@@ -524,6 +970,223 @@ Fred::enablePackageInternal(const std::string& pkgURI,
                             bool flag)
 {
   SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
+
+  if (isSetOther())
+  {
+    mOther->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
+
+  if (isSetOther1())
+  {
+    mOther1->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
+
+  if (isSetOther2())
+  {
+    mOther2->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
+}
+
+/** @endcond */
+
+
+/*
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ */
+SBase*
+Fred::getElementBySId(const std::string& id)
+{
+  if (id.empty())
+  {
+    return NULL;
+  }
+
+  SBase* obj = NULL;
+
+  if (mOther != NULL)
+  {
+    if (mOther->getId() == id)
+    {
+      return mOther;
+    }
+
+    obj = mOther->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mOther1 != NULL)
+  {
+    if (mOther1->getId() == id)
+    {
+      return mOther1;
+    }
+
+    obj = mOther1->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mOther2 != NULL)
+  {
+    if (mOther2->getId() == id)
+    {
+      return mOther2;
+    }
+
+    obj = mOther2->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  return obj;
+}
+
+
+/*
+ * Returns the first child element that has the given @p metaid, or @c NULL if
+ * no such object is found.
+ */
+SBase*
+Fred::getElementByMetaId(const std::string& metaid)
+{
+  if (metaid.empty())
+  {
+    return NULL;
+  }
+
+  SBase* obj = NULL;
+
+  if (mOther != NULL)
+  {
+    if (mOther->getMetaId() == metaid)
+    {
+      return mOther;
+    }
+
+    obj = mOther->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mOther1 != NULL)
+  {
+    if (mOther1->getMetaId() == metaid)
+    {
+      return mOther1;
+    }
+
+    obj = mOther1->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mOther2 != NULL)
+  {
+    if (mOther2->getMetaId() == metaid)
+    {
+      return mOther2;
+    }
+
+    obj = mOther2->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  return obj;
+}
+
+
+/*
+ * Returns a List of all child SBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+Fred::getAllElements(ElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+
+  ADD_FILTERED_POINTER(ret, sublist, mOther, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mOther1, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mOther2, filter);
+
+
+  ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
+
+  return ret;
+}
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SBase*
+Fred::createObject(XMLInputStream& stream)
+{
+  SBase* obj = NULL;
+
+  const std::string& name = stream.peek().getName();
+
+  X_CREATE_NS(xns, getSBMLNamespaces());
+
+  if (name == "other")
+  {
+    if (mOther != NULL)
+    {
+      getErrorLog()->logPackageError("x", XFredAllowedElements,
+        getPackageVersion(), getLevel(), getVersion());
+    }
+
+    mOther = new Other(xns);
+    obj = mOther;
+  }
+  else if (name == "other1")
+  {
+    if (mOther1 != NULL)
+    {
+      getErrorLog()->logPackageError("x", XFredAllowedElements,
+        getPackageVersion(), getLevel(), getVersion());
+    }
+
+    mOther1 = new Other(xns);
+    mOther1->setElementName(name);
+    obj = mOther1;
+  }
+  else if (name == "other2")
+  {
+    if (mOther2 != NULL)
+    {
+      getErrorLog()->logPackageError("x", XFredAllowedElements,
+        getPackageVersion(), getLevel(), getVersion());
+    }
+
+    mOther2 = new Other(xns);
+    mOther2->setElementName(name);
+    obj = mOther2;
+  }
+
+  delete xns;
+
+  connectToChild();
+
+  return obj;
 }
 
 /** @endcond */
@@ -1052,6 +1715,204 @@ Fred_unsetKind(Fred_t * f)
 
 
 /*
+ * Returns the value of the "other" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther(const Fred_t * f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->getOther());
+}
+
+
+/*
+ * Returns the value of the "other1" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther1(const Fred_t * f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->getOther1());
+}
+
+
+/*
+ * Returns the value of the "other2" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther2(const Fred_t * f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->getOther2());
+}
+
+
+/*
+ * Predicate returning @c 1 if this Fred_t's "other" element is set.
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther(const Fred_t * f)
+{
+  return (f != NULL) ? static_cast<int>(f->isSetOther()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this Fred_t's "other1" element is set.
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther1(const Fred_t * f)
+{
+  return (f != NULL) ? static_cast<int>(f->isSetOther1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this Fred_t's "other2" element is set.
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther2(const Fred_t * f)
+{
+  return (f != NULL) ? static_cast<int>(f->isSetOther2()) : 0;
+}
+
+
+/*
+ * Sets the value of the "other" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther(Fred_t * f, const Other_t* other)
+{
+  return (f != NULL) ? f->setOther(other) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "other1" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther1(Fred_t * f, const Other_t* other1)
+{
+  return (f != NULL) ? f->setOther1(other1) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "other2" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther2(Fred_t * f, const Other_t* other2)
+{
+  return (f != NULL) ? f->setOther2(other2) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther(Fred_t* f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->createOther());
+}
+
+
+/*
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther1(Fred_t* f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->createOther1());
+}
+
+
+/*
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther2(Fred_t* f)
+{
+  if (f == NULL)
+  {
+    return NULL;
+  }
+
+  return (Other_t*)(f->createOther2());
+}
+
+
+/*
+ * Unsets the value of the "other" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther(Fred_t * f)
+{
+  return (f != NULL) ? f->unsetOther() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "other1" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther1(Fred_t * f)
+{
+  return (f != NULL) ? f->unsetOther1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "other2" element of this Fred_t.
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther2(Fred_t * f)
+{
+  return (f != NULL) ? f->unsetOther2() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Predicate returning @c 1 if all the required attributes for this Fred_t
  * object have been set.
  */
@@ -1060,6 +1921,18 @@ int
 Fred_hasRequiredAttributes(const Fred_t * f)
 {
   return (f != NULL) ? static_cast<int>(f->hasRequiredAttributes()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if all the required elements for this Fred_t object
+ * have been set.
+ */
+LIBSBML_EXTERN
+int
+Fred_hasRequiredElements(const Fred_t * f)
+{
+  return (f != NULL) ? static_cast<int>(f->hasRequiredElements()) : 0;
 }
 
 

@@ -52,6 +52,9 @@
 
 #include <sbml/SBase.h>
 #include <sbml/packages/x/extension/XExtension.h>
+#include <sbml/packages/x/sbml/Other.h>
+#include <sbml/packages/x/sbml/Other.h>
+#include <sbml/packages/x/sbml/Other.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -70,6 +73,9 @@ protected:
   bool mIsSetNum;
   std::string mStr;
   Kind_t mKind;
+  Other* mOther;
+  Other* mOther1;
+  Other* mOther2;
 
   /** @endcond */
 
@@ -364,6 +370,177 @@ public:
 
 
   /**
+   * Returns the value of the "other" element of this Fred.
+   *
+   * @return the value of the "other" element of this Fred as a Other*.
+   */
+  const Other* getOther() const;
+
+
+  /**
+   * Returns the value of the "other" element of this Fred.
+   *
+   * @return the value of the "other" element of this Fred as a Other*.
+   */
+  Other* getOther();
+
+
+  /**
+   * Returns the value of the "other1" element of this Fred.
+   *
+   * @return the value of the "other1" element of this Fred as a Other*.
+   */
+  const Other* getOther1() const;
+
+
+  /**
+   * Returns the value of the "other1" element of this Fred.
+   *
+   * @return the value of the "other1" element of this Fred as a Other*.
+   */
+  Other* getOther1();
+
+
+  /**
+   * Returns the value of the "other2" element of this Fred.
+   *
+   * @return the value of the "other2" element of this Fred as a Other*.
+   */
+  const Other* getOther2() const;
+
+
+  /**
+   * Returns the value of the "other2" element of this Fred.
+   *
+   * @return the value of the "other2" element of this Fred as a Other*.
+   */
+  Other* getOther2();
+
+
+  /**
+   * Predicate returning @c true if this Fred's "other" element is set.
+   *
+   * @return @c true if this Fred's "other" element has been set, otherwise @c
+   * false is returned.
+   */
+  bool isSetOther() const;
+
+
+  /**
+   * Predicate returning @c true if this Fred's "other1" element is set.
+   *
+   * @return @c true if this Fred's "other1" element has been set, otherwise @c
+   * false is returned.
+   */
+  bool isSetOther1() const;
+
+
+  /**
+   * Predicate returning @c true if this Fred's "other2" element is set.
+   *
+   * @return @c true if this Fred's "other2" element has been set, otherwise @c
+   * false is returned.
+   */
+  bool isSetOther2() const;
+
+
+  /**
+   * Sets the value of the "other" element of this Fred.
+   *
+   * @param other Other* value of the "other" element to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setOther(const Other* other);
+
+
+  /**
+   * Sets the value of the "other1" element of this Fred.
+   *
+   * @param other1 Other* value of the "other1" element to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setOther1(const Other* other1);
+
+
+  /**
+   * Sets the value of the "other2" element of this Fred.
+   *
+   * @param other2 Other* value of the "other2" element to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setOther2(const Other* other2);
+
+
+  /**
+   * Creates a new Other object, adds it to this Fred object and returns the
+   * Other object created.
+   *
+   * @return a new Other object instance.
+   */
+  Other* createOther();
+
+
+  /**
+   * Creates a new Other object, adds it to this Fred object and returns the
+   * Other object created.
+   *
+   * @return a new Other object instance.
+   */
+  Other* createOther1();
+
+
+  /**
+   * Creates a new Other object, adds it to this Fred object and returns the
+   * Other object created.
+   *
+   * @return a new Other object instance.
+   */
+  Other* createOther2();
+
+
+  /**
+   * Unsets the value of the "other" element of this Fred.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetOther();
+
+
+  /**
+   * Unsets the value of the "other1" element of this Fred.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetOther1();
+
+
+  /**
+   * Unsets the value of the "other2" element of this Fred.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetOther2();
+
+
+  /**
    * Returns the XML element name of this Fred object.
    *
    * For Fred, the XML element name is always @c "fred".
@@ -405,6 +582,19 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
+  /**
+   * Predicate returning @c true if all the required elements for this Fred
+   * object have been set.
+   *
+   * @return @c true to indicate that all the required elements of this Fred
+   * have been set, otherwise @c false is returned.
+   *
+   *
+   * @note The required elements for the Fred object are:
+   */
+  virtual bool hasRequiredElements() const;
+
+
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -442,6 +632,17 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
+   * Connects to child elements
+   */
+  virtual void connectToChild();
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
    * Enables/disables the given package with this element
    */
   virtual void enablePackageInternal(const std::string& pkgURI,
@@ -451,7 +652,55 @@ public:
   /** @endcond */
 
 
+  /**
+   * Returns the first child element that has the given @p id in the model-wide
+   * SId namespace, or @c NULL if no such object is found.
+   *
+   * @param id a string representing the id attribute of the object to
+   * retrieve.
+   *
+   * @return a pointer to the SBase element with the given @p id.
+   */
+  virtual SBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns the first child element that has the given @p metaid, or @c NULL
+   * if no such object is found.
+   *
+   * @param metaid a string representing the metaid attribute of the object to
+   * retrieve.
+   *
+   * @return a pointer to the SBase element with the given @p metaid.
+   */
+  virtual SBase* getElementByMetaId(const std::string& metaid);
+
+
+  /**
+   * Returns a List of all child SBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * filter, an ElementFilter that may impose restrictions on the objects to be
+   * retrieved.
+   *
+   * @return a List* pointer of pointers to all SBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(ElementFilter * filter = NULL);
+
+
 protected:
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Creates a new object from the next XMLToken on the XMLInputStream
+   */
+  virtual SBase* createObject(XMLInputStream& stream);
+
+  /** @endcond */
+
 
 
   /** @cond doxygenLibsbmlInternal */
@@ -916,6 +1165,240 @@ Fred_unsetKind(Fred_t * f);
 
 
 /**
+ * Returns the value of the "other" element of this Fred_t.
+ *
+ * @param f the Fred_t structure whose other is sought.
+ *
+ * @return the value of the "other" element of this Fred_t as a Other*.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther(const Fred_t * f);
+
+
+/**
+ * Returns the value of the "other1" element of this Fred_t.
+ *
+ * @param f the Fred_t structure whose other1 is sought.
+ *
+ * @return the value of the "other1" element of this Fred_t as a Other*.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther1(const Fred_t * f);
+
+
+/**
+ * Returns the value of the "other2" element of this Fred_t.
+ *
+ * @param f the Fred_t structure whose other2 is sought.
+ *
+ * @return the value of the "other2" element of this Fred_t as a Other*.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+const Other_t*
+Fred_getOther2(const Fred_t * f);
+
+
+/**
+ * Predicate returning @c 1 if this Fred_t's "other" element is set.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @return @c 1 if this Fred_t's "other" element has been set, otherwise @c 0
+ * is returned.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther(const Fred_t * f);
+
+
+/**
+ * Predicate returning @c 1 if this Fred_t's "other1" element is set.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @return @c 1 if this Fred_t's "other1" element has been set, otherwise @c 0
+ * is returned.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther1(const Fred_t * f);
+
+
+/**
+ * Predicate returning @c 1 if this Fred_t's "other2" element is set.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @return @c 1 if this Fred_t's "other2" element has been set, otherwise @c 0
+ * is returned.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_isSetOther2(const Fred_t * f);
+
+
+/**
+ * Sets the value of the "other" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @param other Other_t* value of the "other" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther(Fred_t * f, const Other_t* other);
+
+
+/**
+ * Sets the value of the "other1" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @param other1 Other_t* value of the "other1" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther1(Fred_t * f, const Other_t* other1);
+
+
+/**
+ * Sets the value of the "other2" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @param other2 Other_t* value of the "other2" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_setOther2(Fred_t * f, const Other_t* other2);
+
+
+/**
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ *
+ * @param f, the Fred_t structure to which the Other_t should be added.
+ *
+ * @return a new Other_t object instance.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther(Fred_t* f);
+
+
+/**
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ *
+ * @param f, the Fred_t structure to which the Other_t should be added.
+ *
+ * @return a new Other_t object instance.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther1(Fred_t* f);
+
+
+/**
+ * Creates a new Other_t object, adds it to this Fred_t object and returns the
+ * Other_t object created.
+ *
+ * @param f, the Fred_t structure to which the Other_t should be added.
+ *
+ * @return a new Other_t object instance.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+Other_t*
+Fred_createOther2(Fred_t* f);
+
+
+/**
+ * Unsets the value of the "other" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther(Fred_t * f);
+
+
+/**
+ * Unsets the value of the "other1" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther1(Fred_t * f);
+
+
+/**
+ * Unsets the value of the "other2" element of this Fred_t.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_unsetOther2(Fred_t * f);
+
+
+/**
  * Predicate returning @c 1 if all the required attributes for this Fred_t
  * object have been set.
  *
@@ -934,6 +1417,25 @@ Fred_unsetKind(Fred_t * f);
 LIBSBML_EXTERN
 int
 Fred_hasRequiredAttributes(const Fred_t * f);
+
+
+/**
+ * Predicate returning @c 1 if all the required elements for this Fred_t object
+ * have been set.
+ *
+ * @param f the Fred_t structure.
+ *
+ * @return @c 1 to indicate that all the required elements of this Fred_t have
+ * been set, otherwise @c 0 is returned.
+ *
+ *
+ * @note The required elements for the Fred_t object are:
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_hasRequiredElements(const Fred_t * f);
 
 
 

@@ -10,8 +10,12 @@
             <attribute name="num" required="true" type="integer" xmlName="myNumber" abstract="false"/>
             <attribute name="str" required="false" type="string" xmlName="myString" abstract="false"/>
             <attribute name="kind" required="false" type="enum" element="Kind" xmlName="myEnum" abstract="false"/>
+            <attribute name="other" required="false" type="element" element="Other" abstract="false"/>
+            <attribute name="other1" required="false" type="element" element="Other" abstract="false"/>
+            <attribute name="other2" required="false" type="element" element="Other" xmlName="myOther" abstract="false"/>
           </attributes>
         </element>
+        <element name="Other" typeCode="SBML_X_OTHER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
       </elements>
       <enums>
         <enum name="Kind">
