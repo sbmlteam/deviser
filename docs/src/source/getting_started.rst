@@ -195,9 +195,6 @@ Settings used here will be saved and persist between sessions.
 Deviser Settings
 ~~~~~~~~~~~~~~~~~
 
-.. todo::
-    Replace screenshot
-
 .. _fig-preferences:
 .. figure:: ../screenshots/deviser-preferences.png
 
@@ -285,9 +282,6 @@ The fields requested are:
 User Defined Types
 ~~~~~~~~~~~~~~~~~~
 
-.. todo::
-    Replace screenshot
-
 .. _fig-user-types:
 .. figure:: ../screenshots/deviser-add-type.png
 
@@ -317,3 +311,8 @@ compilation.
 
     Code generated for an attribute named 'P' of user defined type 'PType'.
 
+Misc
+~~~~~
+
+.. todo:
+    add section on colour selection

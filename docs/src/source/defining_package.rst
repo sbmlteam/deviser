@@ -253,9 +253,6 @@ Select ‘Add Class’ from the toolbar or the ‘Edit’ menu.
 
      The ‘Class’ sheet
 
-.. todo::
-   Update figure :num:`fig-add-class`
-
 NOTE: Using the ‘wand’ button will populate the adjacent field with the
 value of the field that conforms most closely to SBML and libSBML
 conventions.
@@ -510,9 +507,6 @@ SampledField class. Note
 it also includes an attribute to record the length of the array. This proved
 useful when using this sort of construct.
 
-.. todo::
-   Replace figure :num:`fig-array-sampledfield`
-
 .. _fig-array-sampledfield:
 .. figure:: ../screenshots/deviser-array-sampledfield.png
 
@@ -556,9 +550,6 @@ following field values:
 
 The enumeration is declared fully by adding an
 enumeration to the package description (see `Add enum information`_).
-
-.. todo::
-   Remove array from this figure :num:`fig-array-enum`
 
 .. _fig-array-enum:
 .. figure:: ../screenshots/deviser-array-enum.png
@@ -930,8 +921,6 @@ Example 1 - Adding a class with no containing ListOf
 
 Here we define the KineticLaw class for our imaginary package ‘foo’.
 
-.. todo::
-   Update figure
 
 .. _fig-foo-kl:
 .. figure:: ../screenshots/deviser-foo-kl.png
@@ -1033,9 +1022,6 @@ Example 3 – Adding a base class and derived classes
 Here we define a class that will be used as a base class for others (see
 Figure :num:`fig-foo-rule`).
 
-.. todo::
-   Update figure 
-
 .. _fig-foo-rule:
 .. figure:: ../screenshots/deviser-foo-rule.png
 
@@ -1052,9 +1038,6 @@ Here we have specified that the ListOfFooRules may contain objects of
 type Assignment or Algebraic. We specify Algebraic as a new class in
 Figure :num:`fig-foo-algebraic` and Assignment in Figure :num:`fig-foo-assignment`.
 
-.. todo::
-   Update figure 
-
 
 .. _fig-foo-algebraic:
 .. figure:: ../screenshots/deviser-foo-algebraic.png
@@ -1063,8 +1046,6 @@ Figure :num:`fig-foo-algebraic` and Assignment in Figure :num:`fig-foo-assignmen
 
 Note that we have changed the BaseClass field to FooRule.
 
-.. todo::
-   Update figure 
 
 .. _fig-foo-assignment:
 .. figure:: ../screenshots/deviser-foo-assignment.png
@@ -1272,10 +1253,6 @@ we specify that the Model will have a required boolean attribute
 ‘useFoo’ from the foo package (Figure :num:`fig-plugin-model`). Note that it is not necessary
 to specify child elements that originate in the package being defined
 as these that have already been listed as **Child classes**.
-
-.. todo::
-   Change figure :num:`fig-plugin-model`
-
 
 .. _fig-plugin-model:
 .. figure:: ../screenshots/deviser-plugin-model.png
