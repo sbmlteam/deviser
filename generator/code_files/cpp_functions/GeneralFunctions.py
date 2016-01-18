@@ -355,7 +355,7 @@ class GeneralFunctions():
                            ' are:'.format(self.object_name)]
         for i in range(0, len(self.attributes)):
             if self.attributes[i]['reqd']:
-                att_name = self.attributes[i]['name']
+                att_name = self.attributes[i]['xml_name']
                 additional.append('@li \"{0}\"'.format(att_name))
 
         # create the function declaration

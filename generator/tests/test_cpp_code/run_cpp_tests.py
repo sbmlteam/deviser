@@ -558,6 +558,13 @@ def main():
     test_case = 'variants of lo child elements and differing api/xml names'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'xml_names'
+    num = 0
+    class_name = 'Fred'
+    list_of = ''
+    test_case = 'attribute xml names differ'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

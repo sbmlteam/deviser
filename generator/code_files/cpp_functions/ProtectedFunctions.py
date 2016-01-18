@@ -465,7 +465,7 @@ class ProtectedFunctions():
             for i in range(0, len(self.attributes)):
                 if self.attributes[i]['isArray']:
                     continue
-                name = self.attributes[i]['name']
+                name = self.attributes[i]['xml_name']
                 implementation = ['attributes.add(\"{0}\")'.format(name)]
                 code.append(dict({'code_type': 'line', 'code': implementation}))
         else:
@@ -997,7 +997,7 @@ class ProtectedFunctions():
     def write_write_att(self, attributes, index, code):
         if attributes[index]['isArray']:
             return
-        name = attributes[index]['name']
+        name = attributes[index]['xml_name']
         cap_name = attributes[index]['capAttName']
         member = attributes[index]['memberName']
         att_type = attributes[index]['attType']
@@ -1015,7 +1015,7 @@ class ProtectedFunctions():
         attribute = attributes[index]
         if attribute['isArray']:
             return
-        name = attribute['name']
+        name = attribute['xml_name']
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
@@ -1043,9 +1043,9 @@ class ProtectedFunctions():
 
     def write_bool_read(self, index, code, attributes):
         attribute = attributes[index]
-        name = attribute['name']
+        name = attribute['xml_name']
         member = attribute['memberName']
-        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(name))
+        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(attribute['name']))
         line = ['{0} = attributes.readInto(\"{1}\", '
                 '{2})'.format(set_name, name, member)]
         code.append(self.create_code_block('line', line))
@@ -1067,7 +1067,7 @@ class ProtectedFunctions():
 
     def write_sid_read(self, index, code, attributes):
         attribute = attributes[index]
-        name = attribute['name']
+        name = attribute['xml_name']
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
@@ -1130,7 +1130,7 @@ class ProtectedFunctions():
 
     def write_string_read(self, index, code, attributes):
         attribute = attributes[index]
-        name = attribute['name']
+        name = attribute['xml_name']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
@@ -1173,7 +1173,7 @@ class ProtectedFunctions():
 
     def write_enum_read(self, index, code, attributes):
         attribute = attributes[index]
-        name = attribute['name']
+        name = attribute['xml_name']
         element = attribute['element']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
@@ -1239,10 +1239,10 @@ class ProtectedFunctions():
 
     def write_number_read(self, index, code, att_type, attributes):
         attribute = attributes[index]
-        name = attribute['name']
+        name = attribute['xml_name']
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']
-        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(name))
+        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(attribute['name']))
         reqd = attribute['reqd']
         if att_type == 'int':
             num_type = 'Integer'
