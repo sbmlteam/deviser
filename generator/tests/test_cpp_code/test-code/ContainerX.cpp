@@ -162,6 +162,26 @@ ContainerX::getFred(unsigned int n) const
 
 
 /*
+ * Get a Fred from the ContainerX based on its identifier.
+ */
+Fred*
+ContainerX::getFred(const std::string& sid)
+{
+  return mFreds.get(sid);
+}
+
+
+/*
+ * Get a Fred from the ContainerX based on its identifier.
+ */
+const Fred*
+ContainerX::getFred(const std::string& sid) const
+{
+  return mFreds.get(sid);
+}
+
+
+/*
  * Adds a copy of the given Fred to this ContainerX.
  */
 int
@@ -187,6 +207,10 @@ ContainerX::addFred(const Fred* f)
     SBase*>(f)) == false)
   {
     return LIBSBML_NAMESPACES_MISMATCH;
+  }
+  else if (f->isSetId() && (mFreds.get(f->getId())) != NULL)
+  {
+    return LIBSBML_DUPLICATE_OBJECT_ID;
   }
   else
   {
@@ -241,6 +265,17 @@ Fred*
 ContainerX::removeFred(unsigned int n)
 {
   return mFreds.remove(n);
+}
+
+
+/*
+ * Removes the Fred from this ContainerX based on its identifier and returns a
+ * pointer to it.
+ */
+Fred*
+ContainerX::removeFred(const std::string& sid)
+{
+  return mFreds.remove(sid);
 }
 
 
@@ -553,6 +588,17 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n)
 
 
 /*
+ * Get a Fred_t from the ContainerX_t based on its identifier.
+ */
+LIBSBML_EXTERN
+const Fred_t*
+ContainerX_getFredById(ContainerX_t* cx, const char *sid)
+{
+  return (cx != NULL && sid != NULL) ? cx->getFred(sid) : NULL;
+}
+
+
+/*
  * Adds a copy of the given Fred_t to this ContainerX_t.
  */
 LIBSBML_EXTERN
@@ -594,6 +640,18 @@ Fred_t*
 ContainerX_removeFred(ContainerX_t* cx, unsigned int n)
 {
   return (cx != NULL) ? cx->removeFred(n) : NULL;
+}
+
+
+/*
+ * Removes the Fred_t from this ContainerX_t based on its identifier and
+ * returns a pointer to it.
+ */
+LIBSBML_EXTERN
+Fred_t*
+ContainerX_removeFredById(ContainerX_t* cx, const char* sid)
+{
+  return (cx != NULL && sid != NULL) ? cx->removeFred(sid) : NULL;
 }
 
 

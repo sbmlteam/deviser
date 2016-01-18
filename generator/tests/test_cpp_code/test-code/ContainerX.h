@@ -179,6 +179,34 @@ public:
 
 
   /**
+   * Get a Fred from the ContainerX based on its identifier.
+   *
+   * @param sid a string representing the identifier of the Fred to retrieve.
+   *
+   * @return the Fred in the ListOfFreds within this ContainerX with the given
+   * id or NULL if no such Fred exists.
+   *
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   */
+  Fred* getFred(const std::string& sid);
+
+
+  /**
+   * Get a Fred from the ContainerX based on its identifier.
+   *
+   * @param sid a string representing the identifier of the Fred to retrieve.
+   *
+   * @return the Fred in the ListOfFreds within this ContainerX with the given
+   * id or NULL if no such Fred exists.
+   *
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   */
+  const Fred* getFred(const std::string& sid) const;
+
+
+  /**
    * Adds a copy of the given Fred to this ContainerX.
    *
    * @param f, the Fred object to add.
@@ -226,6 +254,21 @@ public:
    * it.
    */
   Fred* removeFred(unsigned int n);
+
+
+  /**
+   * Removes the Fred from this ContainerX based on its identifier and returns
+   * a pointer to it.
+   *
+   * @param sid, a string representing the identifier of the Fred to remove.
+   *
+   * @return the Fred in this ContainerX based on the identifier or NULL if no
+   * such Fred exists.
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
+   */
+  Fred* removeFred(const std::string& sid);
 
 
   /**
@@ -487,6 +530,23 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n);
 
 
 /**
+ * Get a Fred_t from the ContainerX_t based on its identifier.
+ *
+ * @param cx, the ContainerX_t structure to search.
+ *
+ * @param sid a string representing the identifier of the Fred_t to retrieve.
+ *
+ * @return the Fred_t in the ListOfFreds within this ContainerX with the given
+ * id or NULL if no such Fred_t exists.
+ *
+ * @memberof ContainerX_t
+ */
+LIBSBML_EXTERN
+const Fred_t*
+ContainerX_getFredById(ContainerX_t* cx, const char *sid);
+
+
+/**
  * Adds a copy of the given Fred_t to this ContainerX_t.
  *
  * @param cx, the ContainerX_t structure to which the Fred_t should be added.
@@ -547,6 +607,24 @@ ContainerX_createFred(ContainerX_t* cx);
 LIBSBML_EXTERN
 Fred_t*
 ContainerX_removeFred(ContainerX_t* cx, unsigned int n);
+
+
+/**
+ * Removes the Fred_t from this ContainerX_t based on its identifier and
+ * returns a pointer to it.
+ *
+ * @param cx, the ContainerX_t structure to search.
+ *
+ * @param sid, a string representing the identifier of the Fred_t to remove.
+ *
+ * @return the Fred_t in this ContainerX_t based on the identifier or NULL if
+ * no such Fred_t exists.
+ *
+ * @memberof ContainerX_t
+ */
+LIBSBML_EXTERN
+Fred_t*
+ContainerX_removeFredById(ContainerX_t* cx, const char* sid);
 
 
 /**

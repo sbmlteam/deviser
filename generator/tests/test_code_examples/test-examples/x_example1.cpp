@@ -66,6 +66,8 @@ main(int argc, char** argv)
 
   Fred* f = cx->createFred();
 
+  f->setId("FIXME");
+
   writeSBML(document, "x_example1.xml");
   delete document;
 
