@@ -52,22 +52,24 @@ main(int argc, char** argv)
     return 1;
   }
 
-  SBMLNamespaces sbmlns(3,1,"x",1);
+  SBMLNamespaces sbmlns(3, 1, "x", 1);
 
   SBMLDocument *document = new SBMLDocument(&sbmlns);
 
   document->setPackageRequired("x", false);
 
-  Model* model=document->createModel();
+  Model* model = document->createModel();
 
-  XModelPlugin* mplugin
-    = static_cast<XModelPlugin*>(model->getPlugin("x"));
-  ContainerX * cont = mplugin->createContainerX();
+  XModelPlugin* mplugin = static_cast<XModelPlugin*>(model->getPlugin("x"));
 
-  Fred * fred = cont->createFred();
+  ContainerX* cx = mplugin->createContainerX();
 
-  writeSBML(document,"x_example1.xml");
+  Fred* f = cx->createFred();
+
+  writeSBML(document, "x_example1.xml");
   delete document;
 
   return 0;
 }
+
+

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="x" fullname="a" number="100" offset="100000" version="1" required="false">
   <versions>
-    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+    <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
         <element name="Fred" typeCode="SBML_X_FRED" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
         <element name="ContainerX" typeCode="SBML_X_CONTAINERX" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">

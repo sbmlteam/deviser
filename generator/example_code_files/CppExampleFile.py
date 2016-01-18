@@ -54,6 +54,12 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
                                          None)
         self.package = strFunctions.lower_first(pkg_object['name'])
         self.package_up = strFunctions.upper_first(pkg_object['name'])
+        self.reqd = 'true'
+        if not pkg_object['required']:
+            self.reqd = 'false'
+
+        self.object_tree = query.create_object_tree(pkg_object)
+
     ########################################################################
     # Write parts of the file
     def write_includes(self):
@@ -67,8 +73,34 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
                                                     self.package_up))
 
     def write_function(self):
-        implementation = ['i am a line']
-        code = [dict({'code_type': 'line', 'code': implementation})]
+        implementation = ['argc != 2',
+                          'std::cout << \"Usage: '
+                          '{0}_example1\\n\"'.format(self.package),
+                          'return 1']
+        code = [self.create_code_block('if', implementation)]
+        code.append(self.create_code_block('line',
+                                           ['SBMLNamespaces sbmlns(3, 1, '
+                                            '\"{0}\", 1)'
+                                            ''.format(self.package)]))
+        code.append(self.create_code_block('line',
+                                           ['SBMLDocument *document = new '
+                                            'SBMLDocument(&sbmlns)']))
+        code.append(self.create_code_block('line',
+                                           ['document->setPackageRequired'
+                                            '(\"{0}\", {1})'
+                                            ''.format(self.package,
+                                                      self.reqd)]))
+        for i in range(0, len(self.object_tree)):
+            self.write_code_for_plugin(i, code)
+
+        code.append(self.create_code_block('line',
+                                           ['writeSBML(document, \"{0}_'
+                                            'example1'
+                                            '.xml\")'.format(self.package),
+                                            'delete document']))
+        code.append(self.create_code_block('line',
+                                           ['return 0']))
+
 
         return dict({'title_line': self.name,
                      'params': ['int argc', 'char** argv'],
@@ -82,7 +114,74 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
                      'object_name': None,
                      'implementation': code})
 
+    def write_code_for_plugin(self, i, code):
+        parent = self.object_tree[i]['base']
+        parent_name = strFunctions.lower_first(parent)
+        abbrev = strFunctions.abbrev_name(parent)
+        plugin_class = '{0}{1}Plugin'.format(self.package_up, parent)
+        plugin_name = '{0}plugin'.format(abbrev)
 
+        code.append(self.create_code_block('line',
+                                           ['{0}* {1} = document->create{0}()'
+                                            ''.format(parent, parent_name)]))
+
+        code.append(self.create_code_block('line',
+                                           ['{0}* {1} =  static_cast<{0}*>'
+                                            '({2}->getPlugin(\"{3}\"))'
+                                            ''.format(plugin_class, plugin_name,
+                                                      parent_name,
+                                                      self.package)]))
+        for j in range(0, len(self.object_tree[i]['children'])):
+            self.write_code_for_children(plugin_name,
+                                         self.object_tree[i]['children'][j],
+                                         code)
+
+    def write_code_for_children(self, parent, child, code):
+        abbrev = strFunctions.abbrev_name(child['name'])
+        if child['name'] == 'math':
+            code.append(self.create_code_block('line',
+                                               ['ASTNode* math = SBML_parse'
+                                                'L3Formula(\"TBC\")',
+                                                '{0}->setMath(math)'
+                                                ''.format(parent)]))
+        else:
+            code.append(self.create_code_block('line',
+                                               ['{0}* {1} = {2}->create{0}()'
+                                                ''.format(child['name'], abbrev,
+                                                          parent)]))
+        if 'attribs' in child:
+            self.write_code_for_reqd_attributes(abbrev, child, code)
+        for i in range(0, len(child['children'])):
+            self.write_code_for_children(abbrev, child['children'][i], code)
+
+    def write_code_for_reqd_attributes(self, abbrev, child, code):
+        implementation = []
+        for i in range(0, len(child['attribs'])):
+            attrib = child['attribs'][i]
+            att_type = attrib['type']
+            if att_type == 'element' or att_type == 'lo_element':
+                continue
+            name = strFunctions.upper_first(attrib['name'])
+            if query.is_number(att_type):
+                value = 'FIXME'
+            elif attrib['type'] == 'bool':
+                value = 'false'
+            else:
+                value = '\"FIXME\"'
+            implementation.append('{0}->set{1}({2})'.format(abbrev, name, value))
+        if implementation:
+            code.append(self.create_code_block('line',
+                                               implementation))
+
+
+
+
+
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code
 
     ########################################################################
 
@@ -94,3 +193,4 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
         self.write_cppns_use()
         code = self.write_function()
         self.write_function_implementation(code)
+

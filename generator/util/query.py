@@ -266,7 +266,7 @@ def get_static_extension_attribs(num_versions):
     return attribs
 
 
-# get enumeration values
+# get an enumeration of the typecodes of the elements
 def get_typecode_enum(elements):
     value = []
     strvalue = []
@@ -359,3 +359,57 @@ def get_other_element_children(this_object, element):
         if child['lo_attribs'][i]['type'] == 'element':
             other_children.append(child['lo_attribs'][i]['element'])
     return other_children
+
+# get the child elements of the class name
+def get_children(name, root):
+    child = get_class(name, root)
+    if not child and name == 'ASTNode':
+        return dict({'name': 'math', 'children': []})
+    children = []
+    num_attribs = len(child['attribs'])
+    if (has_children(child['attribs'])):
+        for i in range(0, num_attribs):
+            att_type = child['attribs'][i]['type']
+            if att_type != 'element' and att_type != 'lo_element':
+                continue
+            else:
+                grandchildren = get_children(child['attribs'][i]['element'], root)
+                children.append(grandchildren)
+    reqd_attribs = []
+    for i in range(0, num_attribs):
+        attrib = child['attribs'][i]
+        if attrib['reqd']:
+            reqd_attribs.append(attrib)
+
+    return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
+
+
+# create a tree structure with each plugin listing its direct children
+# and each class listing its direct children
+def create_object_tree(pkg_object):
+    tree = []
+    root = None
+    for i in range(0, len(pkg_object['plugins'])):
+        plugin = pkg_object['plugins'][i]
+        children = []
+        if len(plugin['extension']) > 0:
+            root = plugin['extension'][0]['root']
+        for j in range(0, len(plugin['extension'])):
+            children.append(get_children(plugin['extension'][j]['name'], root))
+        if not root and len(plugin['lo_extension']) > 0:
+            root = plugin['lo_extension'][0]['root']
+        for j in range(0, len(plugin['lo_extension'])):
+            children.append(get_children(plugin['lo_extension'][j]['name'], root))
+        branch = dict({'base': plugin['sbase'],
+                       'ext': 'core',
+                       'children': children})
+        tree.append(branch)
+    return tree
+
+
+#return true if the attribute type given represents a number
+def is_number(att_type):
+    number = False
+    if att_type == 'double' or att_type == 'uint' or att_type == 'int':
+        number = True
+    return number
