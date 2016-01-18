@@ -67,8 +67,8 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   std::string mId;
-  bool mBool;
-  bool mIsSetBool;
+  bool mBol;
+  bool mIsSetBol;
   int mNum;
   bool mIsSetNum;
   std::string mStr;
@@ -157,11 +157,11 @@ public:
 
 
   /**
-   * Returns the value of the "bool" attribute of this Fred.
+   * Returns the value of the "bol" attribute of this Fred.
    *
-   * @return the value of the "bool" attribute of this Fred as a boolean.
+   * @return the value of the "bol" attribute of this Fred as a boolean.
    */
-  bool getBool() const;
+  bool getBol() const;
 
 
   /**
@@ -206,12 +206,12 @@ public:
 
 
   /**
-   * Predicate returning @c true if this Fred's "bool" attribute is set.
+   * Predicate returning @c true if this Fred's "bol" attribute is set.
    *
-   * @return @c true if this Fred's "bool" attribute has been set, otherwise @c
+   * @return @c true if this Fred's "bol" attribute has been set, otherwise @c
    * false is returned.
    */
-  bool isSetBool() const;
+  bool isSetBol() const;
 
 
   /**
@@ -255,16 +255,16 @@ public:
 
 
   /**
-   * Sets the value of the "bool" attribute of this Fred.
+   * Sets the value of the "bol" attribute of this Fred.
    *
-   * @param bool bool value of the "bool" attribute to be set.
+   * @param bol bool value of the "bol" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setBool(bool bool);
+  int setBol(bool bol);
 
 
   /**
@@ -330,13 +330,13 @@ public:
 
 
   /**
-   * Unsets the value of the "bool" attribute of this Fred.
+   * Unsets the value of the "bol" attribute of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetBool();
+  int unsetBol();
 
 
   /**
@@ -831,17 +831,17 @@ Fred_getId(const Fred_t * f);
 
 
 /**
- * Returns the value of the "bool" attribute of this Fred_t.
+ * Returns the value of the "bol" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose bool is sought.
+ * @param f the Fred_t structure whose bol is sought.
  *
- * @return the value of the "bool" attribute of this Fred_t as a boolean.
+ * @return the value of the "bol" attribute of this Fred_t as a boolean.
  *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
 int
-Fred_getBool(const Fred_t * f);
+Fred_getBol(const Fred_t * f);
 
 
 /**
@@ -917,18 +917,18 @@ Fred_isSetId(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "bool" attribute is set.
+ * Predicate returning @c 1 if this Fred_t's "bol" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "bool" attribute has been set, otherwise @c 0
+ * @return @c 1 if this Fred_t's "bol" attribute has been set, otherwise @c 0
  * is returned.
  *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
 int
-Fred_isSetBool(const Fred_t * f);
+Fred_isSetBol(const Fred_t * f);
 
 
 /**
@@ -995,11 +995,11 @@ Fred_setId(Fred_t * f, const char * id);
 
 
 /**
- * Sets the value of the "bool" attribute of this Fred_t.
+ * Sets the value of the "bol" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param bool int value of the "bool" attribute to be set.
+ * @param bol int value of the "bol" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1009,7 +1009,7 @@ Fred_setId(Fred_t * f, const char * id);
  */
 LIBSBML_EXTERN
 int
-Fred_setBool(Fred_t * f, int bool);
+Fred_setBol(Fred_t * f, int bol);
 
 
 /**
@@ -1101,7 +1101,7 @@ Fred_unsetId(Fred_t * f);
 
 
 /**
- * Unsets the value of the "bool" attribute of this Fred_t.
+ * Unsets the value of the "bol" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1113,7 +1113,7 @@ Fred_unsetId(Fred_t * f);
  */
 LIBSBML_EXTERN
 int
-Fred_unsetBool(Fred_t * f);
+Fred_unsetBol(Fred_t * f);
 
 
 /**

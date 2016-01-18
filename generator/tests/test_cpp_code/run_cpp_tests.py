@@ -565,6 +565,13 @@ def main():
     test_case = 'attribute xml names differ'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'xml_names'
+    num = 1
+    class_name = 'Other'
+    list_of = ''
+    test_case = 'element xml names differ'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

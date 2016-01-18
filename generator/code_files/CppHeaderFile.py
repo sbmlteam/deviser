@@ -71,7 +71,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                             .format(self.library_name.upper(),
                                     class_name))
         self.write_line('{')
-        if len(attributes) > 0:
+        if len(attributes) > 0 or self.overwrites_children:
             self.write_line('protected:')
             self.up_indent()
             self.write_doxygen_start()

@@ -53,8 +53,8 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   : SBase(level, version)
   , mId ("")
-  , mBool (false)
-  , mIsSetBool (false)
+  , mBol (false)
+  , mIsSetBol (false)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
@@ -74,8 +74,8 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
 Fred::Fred(XPkgNamespaces *xns)
   : SBase(xns)
   , mId ("")
-  , mBool (false)
-  , mIsSetBool (false)
+  , mBol (false)
+  , mIsSetBol (false)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
@@ -96,8 +96,8 @@ Fred::Fred(XPkgNamespaces *xns)
 Fred::Fred(const Fred& orig)
   : SBase( orig )
   , mId ( orig.mId )
-  , mBool ( orig.mBool )
-  , mIsSetBool ( orig.mIsSetBool )
+  , mBol ( orig.mBol )
+  , mIsSetBol ( orig.mIsSetBol )
   , mNum ( orig.mNum )
   , mIsSetNum ( orig.mIsSetNum )
   , mStr ( orig.mStr )
@@ -135,8 +135,8 @@ Fred::operator=(const Fred& rhs)
   {
     SBase::operator=(rhs);
     mId = rhs.mId;
-    mBool = rhs.mBool;
-    mIsSetBool = rhs.mIsSetBool;
+    mBol = rhs.mBol;
+    mIsSetBol = rhs.mIsSetBol;
     mNum = rhs.mNum;
     mIsSetNum = rhs.mIsSetNum;
     mStr = rhs.mStr;
@@ -213,12 +213,12 @@ Fred::getId() const
 
 
 /*
- * Returns the value of the "bool" attribute of this Fred.
+ * Returns the value of the "bol" attribute of this Fred.
  */
 bool
-Fred::getBool() const
+Fred::getBol() const
 {
-  return mBool;
+  return mBol;
 }
 
 
@@ -274,12 +274,12 @@ Fred::isSetId() const
 
 
 /*
- * Predicate returning @c true if this Fred's "bool" attribute is set.
+ * Predicate returning @c true if this Fred's "bol" attribute is set.
  */
 bool
-Fred::isSetBool() const
+Fred::isSetBol() const
 {
-  return mIsSetBool;
+  return mIsSetBol;
 }
 
 
@@ -324,13 +324,13 @@ Fred::setId(const std::string& id)
 
 
 /*
- * Sets the value of the "bool" attribute of this Fred.
+ * Sets the value of the "bol" attribute of this Fred.
  */
 int
-Fred::setBool(bool bool)
+Fred::setBol(bool bol)
 {
-  mBool = bool;
-  mIsSetBool = true;
+  mBol = bol;
+  mIsSetBol = true;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -416,15 +416,15 @@ Fred::unsetId()
 
 
 /*
- * Unsets the value of the "bool" attribute of this Fred.
+ * Unsets the value of the "bol" attribute of this Fred.
  */
 int
-Fred::unsetBool()
+Fred::unsetBol()
 {
-  mBool = false;
-  mIsSetBool = false;
+  mBol = false;
+  mIsSetBol = false;
 
-  if (isSetBool() == false)
+  if (isSetBol() == false)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
@@ -1169,7 +1169,7 @@ Fred::createObject(XMLInputStream& stream)
     mOther1->setElementName(name);
     obj = mOther1;
   }
-  else if (name == "other2")
+  else if (name == "myOther")
   {
     if (mOther2 != NULL)
     {
@@ -1285,7 +1285,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
   // myBoolean bool (use = "optional" )
   // 
 
-  mIsSetBool = attributes.readInto("myBoolean", mBool);
+  mIsSetBol = attributes.readInto("myBoolean", mBol);
 
   // 
   // myNumber int (use = "required" )
@@ -1382,9 +1382,9 @@ Fred::writeAttributes(XMLOutputStream& stream) const
     stream.writeAttribute("identifier", getPrefix(), mId);
   }
 
-  if (isSetBool() == true)
+  if (isSetBol() == true)
   {
-    stream.writeAttribute("myBoolean", getPrefix(), mBool);
+    stream.writeAttribute("myBoolean", getPrefix(), mBol);
   }
 
   if (isSetNum() == true)
@@ -1474,13 +1474,13 @@ Fred_getId(const Fred_t * f)
 
 
 /*
- * Returns the value of the "bool" attribute of this Fred_t.
+ * Returns the value of the "bol" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
-Fred_getBool(const Fred_t * f)
+Fred_getBol(const Fred_t * f)
 {
-  return (f != NULL) ? static_cast<int>(f->getBool()) : 0;
+  return (f != NULL) ? static_cast<int>(f->getBol()) : 0;
 }
 
 
@@ -1550,13 +1550,13 @@ Fred_isSetId(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "bool" attribute is set.
+ * Predicate returning @c 1 if this Fred_t's "bol" attribute is set.
  */
 LIBSBML_EXTERN
 int
-Fred_isSetBool(const Fred_t * f)
+Fred_isSetBol(const Fred_t * f)
 {
-  return (f != NULL) ? static_cast<int>(f->isSetBool()) : 0;
+  return (f != NULL) ? static_cast<int>(f->isSetBol()) : 0;
 }
 
 
@@ -1605,13 +1605,13 @@ Fred_setId(Fred_t * f, const char * id)
 
 
 /*
- * Sets the value of the "bool" attribute of this Fred_t.
+ * Sets the value of the "bol" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
-Fred_setBool(Fred_t * f, int bool)
+Fred_setBol(Fred_t * f, int bol)
 {
-  return (f != NULL) ? f->setBool(bool) : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->setBol(bol) : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -1671,13 +1671,13 @@ Fred_unsetId(Fred_t * f)
 
 
 /*
- * Unsets the value of the "bool" attribute of this Fred_t.
+ * Unsets the value of the "bol" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
-Fred_unsetBool(Fred_t * f)
+Fred_unsetBol(Fred_t * f)
 {
-  return (f != NULL) ? f->unsetBool() : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->unsetBol() : LIBSBML_INVALID_OBJECT;
 }
 
 

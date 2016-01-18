@@ -237,7 +237,7 @@ class ProtectedFunctions():
                             continue
                         overwrite = element['children_overwrite']
                         name = element['memberName']
-                        loname = element['name'] if overwrite \
+                        loname = element['xml_name'] if overwrite \
                             else strFunctions.lower_first(element['element'])
                         implementation += self.get_obj_block(name, loname,
                                                              error_line,

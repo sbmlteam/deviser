@@ -217,14 +217,13 @@ def has_attribute(element, attribute):
 def overwrites_name(root, name):
     if root is None:
         return False
+    overwrites = False
     for element in root['baseElements']:
         for attrib in element['attribs']:
             if attrib['element'] == name:
-                if strFunctions.compare_no_case(name, attrib['xml_name']):
-                    return False
-                else:
-                    return True
-    return False
+                if not strFunctions.compare_no_case(name, attrib['xml_name']):
+                    overwrites = True
+    return overwrites
 
 
 def get_static_extension_attribs(num_versions):
