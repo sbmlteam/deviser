@@ -2,7 +2,7 @@
 
 import os
 
-from example_code_files import CppExampleFile
+from code_files import CppExampleFile
 from parseXML import ParseXML
 from util import strFunctions
 
