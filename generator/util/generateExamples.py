@@ -41,7 +41,7 @@ import sys
 
 from parseXML import ParseXML
 from util import global_variables
-from example_code_files import CppExampleFile
+from code_files import CppExampleFile
 
 
 def generate_example_for(filename, overwrite=True):
