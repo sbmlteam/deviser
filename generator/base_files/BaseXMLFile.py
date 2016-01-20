@@ -109,6 +109,8 @@ class BaseXMLFile(BaseFile.BaseFile):
         else:
             ext = self.pkg
 
+        if name == 'math':
+            return self.create_math_element()
         if ext != 'core':
             name = '{0}:{1}'.format(self.pkg, name)
 
@@ -129,6 +131,10 @@ class BaseXMLFile(BaseFile.BaseFile):
             element.appendChild(subelement)
         return element
 
+    def create_math_element(self):
+        element = self.doc.createElement('{0}'.format('math'))
+        element.setAttribute('xmlns', 'http://www.w3.org/1998/Math/MathML')
+        return element
 
     ######################################################################
 

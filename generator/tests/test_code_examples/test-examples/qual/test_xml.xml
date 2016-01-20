@@ -14,7 +14,7 @@
                 </qual:listOfOutputs>
                 <qual:listOfFunctionTerms>
                     <qual:functionTerm qual:resultLevel="0">
-                        <qual:math/>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML"/>
                     </qual:functionTerm>
                 </qual:listOfFunctionTerms>
             </qual:transition>
