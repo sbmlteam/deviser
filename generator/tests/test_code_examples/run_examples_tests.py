@@ -52,7 +52,7 @@ def compare_examples(pkg):
     return compare_files(correct_file, temp_file)
 
 def compare_xml(pkg):
-    correct_file = '.\\test-examples\\test_xml.xml'
+    correct_file = '.\\test-examples\\{0}\\test_xml.xml'.format(pkg)
     temp_file = '.\\temp\\test_xml.xml'
     return compare_files(correct_file, temp_file)
 
@@ -100,6 +100,9 @@ def main():
     fail += run_test(name)
 
     name = 'lo_children'
+    fail += run_xml_test(name)
+
+    name = 'base_class'
     fail += run_xml_test(name)
 
     # write summary

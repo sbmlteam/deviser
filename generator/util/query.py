@@ -401,24 +401,28 @@ def get_children(name, root, reqd_only):
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
 # insert a listOfParent into the tree
-def insert_list_of(children, child_name, root):
-    original = children
+def insert_list_of(original, child_name, root):
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
     lo_attribs = []
     for att in child['lo_attribs']:
         lo_attribs.append(att)
     lo_children = []
-    for element in original:
-        lo_children.append(element)
-    new_child = []
-    new_child.append(dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs}))
+    if isinstance(original, list):
+        for element in original:
+            lo_children.append(element)
+        new_child = []
+        new_child.append(dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs}))
+    else:
+        lo_children.append(original)
+        new_child = dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs})
     return new_child
 
 
 
 # create a tree structure with each plugin listing its direct children
 # and each class listing its direct children
+# if reqd_only is false it will add the listOf elements as well
 def create_object_tree(pkg_object, reqd_only = True):
     tree = []
     root = None
@@ -433,8 +437,11 @@ def create_object_tree(pkg_object, reqd_only = True):
         if not root and len(plugin['lo_extension']) > 0:
             root = plugin['lo_extension'][0]['root']
         for j in range(0, len(plugin['lo_extension'])):
-            children.append(get_children(plugin['lo_extension'][j]['name'],
-                                         root, reqd_only))
+            grandchildren = get_children(plugin['lo_extension'][j]['name'],
+                                         root, reqd_only)
+            if not reqd_only:
+                grandchildren = insert_list_of(grandchildren, plugin['lo_extension'][j]['name'], root)
+            children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
                        'children': children})

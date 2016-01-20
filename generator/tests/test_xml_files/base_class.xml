@@ -8,7 +8,7 @@
             <attribute name="id" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="classTwo" typeCode="SBML_TEST_CLASSTWO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
+        <element name="classTwo" typeCode="SBML_TEST_CLASSTWO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false"/>
         <element name="ClassThree" typeCode="SBML_TEST_CLASSTHREE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
             <attribute name="number" required="true" type="enum" element="enum" abstract="false"/>
@@ -18,6 +18,14 @@
           </attributes>
         </element>
       </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ListOfclassTwos"/>
+            <reference name="MyBase"/>
+          </references>
+        </plugin>
+      </plugins>
       <enums>
         <enum name="enum">
           <enumValues>
