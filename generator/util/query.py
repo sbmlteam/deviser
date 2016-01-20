@@ -374,15 +374,11 @@ def get_children(name, root, reqd_only):
                                              root, reqd_only)
                 children.append(grandchildren)
             elif att_type == 'lo_element':
+                grandchildren = get_children(child['attribs'][i]['element'],
+                                             root, reqd_only)
                 if not reqd_only:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only)
-                    children.append(grandchildren)
-                    children = insert_list_of(children, child['attribs'][i]['element'], root)
-                else:
-                    grandchildren = get_children(child['attribs'][i]['element'],
-                                                 root, reqd_only)
-                    children.append(grandchildren)
+                    grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+                children.append(grandchildren)
             elif att_type == 'inline_lo_element':
                 grandchildren = get_children(child['attribs'][i]['element'],
                                              root, reqd_only)

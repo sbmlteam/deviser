@@ -105,6 +105,12 @@ def main():
     name = 'base_class'
     fail += run_xml_test(name)
 
+    name = 'groups'
+    fail += run_xml_test(name)
+
+    name = 'qual'
+    fail += run_xml_test(name)
+
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
     return fail

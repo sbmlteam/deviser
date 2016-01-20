@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml level="3" qual:required="false" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
+    <model>
+        <qual:listOfQualitativeSpecies>
+            <qual:qualitativeSpecies qual:compartment="someString" qual:constant="someString" qual:id="someString" qual:initialLevel="0" qual:maxLevel="0" qual:name="someString"/>
+        </qual:listOfQualitativeSpecies>
+        <qual:listOfTransitions>
+            <qual:transition qual:id="someString" qual:name="someString">
+                <qual:listOfInputs>
+                    <qual:input qual:id="someString" qual:name="someString" qual:qualitativeSpecies="someString" qual:sign="someString" qual:thresholdLevel="0" qual:transitionEffect="someString"/>
+                </qual:listOfInputs>
+                <qual:listOfOutputs>
+                    <qual:output qual:id="someString" qual:name="someString" qual:outputLevel="0" qual:qualitativeSpecies="someString" qual:transitionEffect="someString"/>
+                </qual:listOfOutputs>
+                <qual:listOfFunctionTerms>
+                    <qual:functionTerm qual:resultLevel="0">
+                        <qual:math/>
+                    </qual:functionTerm>
+                </qual:listOfFunctionTerms>
+            </qual:transition>
+        </qual:listOfTransitions>
+    </model>
+</sbml>
+
