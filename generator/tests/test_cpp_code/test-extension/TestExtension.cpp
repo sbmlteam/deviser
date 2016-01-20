@@ -38,6 +38,7 @@
 #include <sbml/packages/test/extension/TestExtension.h>
 #include <sbml/packages/test/extension/TestSBMLDocumentPlugin.h>
 #include <sbml/packages/test/validator/TestSBMLErrorTable.h>
+#include <sbml/packages/test/extension/TestModelPlugin.h>
 
 
 using namespace std;
@@ -378,11 +379,15 @@ TestExtension::init()
   packageURIs.push_back(getXmlnsL3V1V1());
 
   SBaseExtensionPoint sbmldocExtPoint("core", SBML_DOCUMENT);
+  SBaseExtensionPoint modelExtPoint("core", SBML_MODEL);
 
   SBasePluginCreator<TestSBMLDocumentPlugin, TestExtension>
     sbmldocPluginCreator(sbmldocExtPoint, packageURIs);
+  SBasePluginCreator<TestModelPlugin, TestExtension>
+    modelPluginCreator(modelExtPoint, packageURIs);
 
   testExtension.addSBasePluginCreator(&sbmldocPluginCreator);
+  testExtension.addSBasePluginCreator(&modelPluginCreator);
 
   int result =
     SBMLExtensionRegistry::getInstance().addExtension(&testExtension);
