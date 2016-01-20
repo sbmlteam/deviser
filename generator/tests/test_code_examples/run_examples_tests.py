@@ -3,6 +3,7 @@
 import os
 
 from code_files import CppExampleFile
+from validation import ValidationXMLFiles
 from parseXML import ParseXML
 from util import strFunctions
 
@@ -28,6 +29,16 @@ def generate_example(filename):
     return ob['name']
 
 
+def generate_xml(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
+    all_files.write_file()
+    os.chdir('../.')
+    return ob['name']
+
+
 #############################################################################
 # Specific compare functions
 
@@ -40,6 +51,12 @@ def compare_examples(pkg):
     temp_file = '.\\temp\\{0}_example1.cpp'.format(pkg)
     return compare_files(correct_file, temp_file)
 
+def compare_xml(pkg):
+    correct_file = '.\\test-examples\\test_xml.xml'
+    temp_file = '.\\temp\\test_xml.xml'
+    return compare_files(correct_file, temp_file)
+
+
 
 #############################################################################
 # Specific test functions
@@ -49,6 +66,13 @@ def run_test(name):
     filename = test_functions.set_up_test(name, 'Examples')
     pkg = generate_example(filename)
     fail = compare_examples(pkg)
+    print('')
+    return fail
+
+def run_xml_test(name):
+    filename = test_functions.set_up_test(name, 'Examples')
+    pkg = generate_xml(filename)
+    fail = compare_xml(pkg)
     print('')
     return fail
 
@@ -72,9 +96,11 @@ def main():
     name = 'qual'
     fail += run_test(name)
 
-    # run the individual tests
     name = 'lo_children'
     fail += run_test(name)
+
+    name = 'lo_children'
+    fail += run_xml_test(name)
 
     # write summary
     test_functions.report('examples', fail, fails, not_tested)

@@ -360,7 +360,7 @@ def get_other_element_children(this_object, element):
     return other_children
 
 # get the child elements of the class name
-def get_children(name, root):
+def get_children(name, root, reqd_only):
     child = get_class(name, root)
     if not child and name == 'ASTNode':
         return dict({'name': 'math', 'children': []})
@@ -369,23 +369,57 @@ def get_children(name, root):
     if (has_children(child['attribs'])):
         for i in range(0, num_attribs):
             att_type = child['attribs'][i]['type']
-            if att_type != 'element' and att_type != 'lo_element':
-                continue
-            else:
-                grandchildren = get_children(child['attribs'][i]['element'], root)
+            if att_type == 'element':
+                grandchildren = get_children(child['attribs'][i]['element'],
+                                             root, reqd_only)
                 children.append(grandchildren)
+            elif att_type == 'lo_element':
+                if not reqd_only:
+                    grandchildren = get_children(child['attribs'][i]['element'],
+                                                 root, reqd_only)
+                    children.append(grandchildren)
+                    children = insert_list_of(children, child['attribs'][i]['element'], root)
+                else:
+                    grandchildren = get_children(child['attribs'][i]['element'],
+                                                 root, reqd_only)
+                    children.append(grandchildren)
+            elif att_type == 'inline_lo_element':
+                grandchildren = get_children(child['attribs'][i]['element'],
+                                             root, reqd_only)
+                children.append(grandchildren)
+            else:
+                continue
     reqd_attribs = []
     for i in range(0, num_attribs):
         attrib = child['attribs'][i]
-        if attrib['reqd']:
+        if reqd_only:
+            if attrib['reqd']:
+                reqd_attribs.append(attrib)
+        else:
             reqd_attribs.append(attrib)
 
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
+# insert a listOfParent into the tree
+def insert_list_of(children, child_name, root):
+    original = children
+    child = get_class(child_name, root)
+    lo_name = strFunctions.list_of_name(child['name'])
+    lo_attribs = []
+    for att in child['lo_attribs']:
+        lo_attribs.append(att)
+    lo_children = []
+    for element in original:
+        lo_children.append(element)
+    new_child = []
+    new_child.append(dict({'name': lo_name, 'children': lo_children, 'attribs': lo_attribs}))
+    return new_child
+
+
 
 # create a tree structure with each plugin listing its direct children
 # and each class listing its direct children
-def create_object_tree(pkg_object):
+def create_object_tree(pkg_object, reqd_only = True):
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
@@ -394,11 +428,13 @@ def create_object_tree(pkg_object):
         if len(plugin['extension']) > 0:
             root = plugin['extension'][0]['root']
         for j in range(0, len(plugin['extension'])):
-            children.append(get_children(plugin['extension'][j]['name'], root))
+            children.append(get_children(plugin['extension'][j]['name'],
+                                         root, reqd_only))
         if not root and len(plugin['lo_extension']) > 0:
             root = plugin['lo_extension'][0]['root']
         for j in range(0, len(plugin['lo_extension'])):
-            children.append(get_children(plugin['lo_extension'][j]['name'], root))
+            children.append(get_children(plugin['lo_extension'][j]['name'],
+                                         root, reqd_only))
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
                        'children': children})
@@ -412,3 +448,11 @@ def is_number(att_type):
     if att_type == 'double' or att_type == 'uint' or att_type == 'int':
         number = True
     return number
+
+#return true if the attribute type given represents an element
+def is_element(att_type):
+    element = False
+    if att_type == 'element' or att_type == 'lo_element' or \
+                    att_type == 'inline_lo_element':
+        element = True
+    return element
