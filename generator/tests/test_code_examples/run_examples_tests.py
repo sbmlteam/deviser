@@ -34,7 +34,7 @@ def generate_xml(filename):
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
-    all_files.write_file()
+    all_files.write_file('test_xml')
     os.chdir('../.')
     return ob['name']
 

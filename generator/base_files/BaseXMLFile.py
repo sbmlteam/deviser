@@ -65,8 +65,8 @@ class BaseXMLFile(BaseFile.BaseFile):
     #########################################################################
     # main writing function
 
-    def write_xml(self, tree):
-        self.create_document()
+    def write_xml(self, tree, error_code=None):
+        self.create_document(error_code)
         for i in range(0, len(tree)):
             element = self.create_top_object(tree[0])
             self.doc.documentElement.appendChild(element)
@@ -78,14 +78,18 @@ class BaseXMLFile(BaseFile.BaseFile):
     ########################################################################
     # create elements of the document
 
-    def create_document(self):
+    def create_document(self, error_code=None):
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
         top_element = self.doc.documentElement
         top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
         top_element.setAttributeNS(self.corens, 'level', '3')
         top_element.setAttributeNS(self.corens, 'version', '1')
-        top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
-                                   self.pkgns)
+        if error_code and error_code == 'incorrect_ns':
+            top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                                       'http://www.sbml.org/sbml/level3/version1')
+        else:
+            top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                                       self.pkgns)
         top_element.setAttributeNS(self.pkgns, '{0}:required'.format(self.pkg),
                                    self.reqd)
 

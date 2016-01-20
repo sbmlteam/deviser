@@ -68,7 +68,7 @@ def generate_xml_for(filename, overwrite=True):
 
 def generate_example_xml(ob):
     ex = ValidationXMLFiles.ValidationXMLFiles(ob)
-    ex.write_file()
+    ex.write_all_files()
 
 
 
