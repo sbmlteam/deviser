@@ -58,6 +58,8 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.comment_start = '<!--'
         self.comment_end = '-->'
 
+        self.start_id = 1
+
         self.impl = getDOMImplementation()
 
         self.doc = None
@@ -84,14 +86,38 @@ class BaseXMLFile(BaseFile.BaseFile):
         top_element.setAttributeNS(self.corens, 'xmlns', self.corens)
         top_element.setAttributeNS(self.corens, 'level', '3')
         top_element.setAttributeNS(self.corens, 'version', '1')
-        if error_code and error_code == 'incorrect_ns':
-            top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
-                                       'http://www.sbml.org/sbml/level3/version1')
+        if error_code:
+            if error_code == 'incorrect_ns':
+                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                                           'http://incorrect')
+            elif error_code != 'missing_ns':
+                top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
+                                           self.pkgns)
         else:
             top_element.setAttributeNS(self.pkgns, 'xmlns:{0}'.format(self.pkg),
                                        self.pkgns)
-        top_element.setAttributeNS(self.pkgns, '{0}:required'.format(self.pkg),
-                                   self.reqd)
+        if error_code:
+            if error_code == 'incorrect_value_reqd':
+                reqd = 'true'
+                if self.reqd == 'true':
+                    reqd = 'false'
+                top_element.setAttributeNS(self.pkgns,
+                                           '{0}:required'.format(self.pkg),
+                                           reqd)
+            elif error_code == 'incorrect_type_reqd':
+                top_element.setAttributeNS(self.pkgns,
+                                           '{0}:required'.format(self.pkg),
+                                           '-3.4')
+            elif error_code != 'missing_reqd':
+                top_element.setAttributeNS(self.pkgns,
+                                           '{0}:required'.format(self.pkg),
+                                           self.reqd)
+        else:
+            top_element.setAttributeNS(self.pkgns,
+                                       '{0}:required'.format(self.pkg),
+                                       self.reqd)
+
+
 
     def create_top_object(self, tree):
         name = strFunctions.lower_first(tree['base'])
@@ -151,6 +177,11 @@ class BaseXMLFile(BaseFile.BaseFile):
             value = 'false'
         elif query.is_number(att_type):
             value = '0'
+        elif att_type == 'SId':
+            value = 'id_{0}'.format(self.start_id)
+            self.start_id += 1
+        elif att_type == 'enum':
+            value = query.get_first_enum_value(attribute)
         else:
             value = 'someString'
         return value

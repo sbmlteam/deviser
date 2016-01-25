@@ -279,7 +279,7 @@ class ValidatorClassFunctions():
             lines = ['unsigned int n=0; n < numErrors; ++n',
                      'logFailure(*d->getError(n))']
             code.append(self.create_code_block('for', lines))
-            lines = ['numErrors += validate(*d)', 'delete d',
+            lines = ['numErrors = validate(*d)', 'delete d',
                      'return numErrors']
             code.append(self.create_code_block('line', lines))
 

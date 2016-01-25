@@ -310,6 +310,17 @@ def get_default_enum_value(attribute):
     return default
 
 
+def get_first_enum_value(attribute):
+    value = ''
+    name = attribute['element']
+    enums = attribute['root']['enums']
+    for i in range(0, len(enums)):
+        if name == enums[i]['name']:
+            value = enums[i]['values'][0]['value']
+            break
+    return value
+
+
 def get_prefix(name):
     prefix = ''
     first = True

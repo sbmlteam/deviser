@@ -84,19 +84,18 @@ class ValidationXMLFiles():
         xml.write_xml(subtree)
         xml.close_file()
 
-    def write_ns_fail_file(self, filename, code):
+    def write_toplevel_fail_file(self, filename, code):
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
         xml.write_xml(self.tree, code)
         xml.close_file()
-
 
     ###########################################################################
     def write_all_files(self):
         self.determine_rules()
         self.write_file('test_xml')
         number = 1
-        for i in range(0, 2) : #len(self.class_rules)):
+        for i in range(0, len(self.class_rules)):
             self.write_appropriate_test_cases(self.class_rules[i])
             # if self.rule_needs_tests(rule):
             #     filename = 'aaa-fail-01-{0}'.format(number)
@@ -139,17 +138,15 @@ class ValidationXMLFiles():
             return
         number = 1
         # write a passing test
-        filename = '{0}-pass-01-{1}'.format(rule['number'], self.get_number(number))
+        filename = '{0}-pass-00-{1}'.format(rule['number'], self.get_number(number))
         self.write_file(filename)
 
         # write failing tests
         for i in range(0, len(tests)):
             filename = '{0}-fail-01-{1}'.format(rule['number'], self.get_number(number))
             subtree = self.tree
-            if tests[i] == 'missing_ns':
-                self.write_ns_fail_file(filename, tests[i])
-            elif tests[i] == 'incorrect_ns':
-                self.write_ns_fail_file(filename, tests[i])
+            if self.is_toplevel_fail(tests[i]):
+                self.write_toplevel_fail_file(filename, tests[i])
             number += 1
 
     ########################################################################
@@ -169,5 +166,18 @@ class ValidationXMLFiles():
             test_needed = None
         elif tc.endswith('NSUndeclared'):
             test_needed = ['missing_ns', 'incorrect_ns']
+        elif tc.endswith('AttributeRequiredMissing'):
+            test_needed = ['missing_reqd']
+        elif tc.endswith('AttributeRequiredMustBeBoolean'):
+            test_needed = ['incorrect_type_reqd']
+        elif tc.endswith('AttributeRequiredMustHaveValue'):
+            test_needed = ['incorrect_value_reqd']
         return test_needed
 
+    def is_toplevel_fail(self, code):
+        toplevel_codes = ['missing_ns', 'incorrect_ns', 'missing_reqd',
+                          'incorrect_type_reqd', 'incorrect_value_reqd']
+        if code in toplevel_codes:
+            return True
+        else:
+            return False

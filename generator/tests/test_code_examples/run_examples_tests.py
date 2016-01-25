@@ -39,6 +39,19 @@ def generate_xml(filename):
     return ob['name']
 
 
+def generate_xml_fails(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if not os.path.exists(ob['name']):
+        os.mkdir(ob['name'])
+    os.chdir('./{0}'.format(ob['name']))
+    all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
+    all_files.write_all_files()
+    os.chdir('../../.')
+    return ob['name']
+
+
 #############################################################################
 # Specific compare functions
 
@@ -55,6 +68,19 @@ def compare_xml(pkg):
     correct_file = '.\\test-examples\\{0}\\test_xml.xml'.format(pkg)
     temp_file = '.\\temp\\test_xml.xml'
     return compare_files(correct_file, temp_file)
+
+
+def compare_xml_fails(pkg):
+    fail = 0
+    correct_file_dir = '.\\test-examples\\{0}'.format(pkg)
+    temp_file_dir = '.\\temp\{0}'.format(pkg)
+    for f in os.listdir(temp_file_dir):
+        if f.endswith('xml'):
+            correct_file = '{0}\\{1}'.format(correct_file_dir, f)
+            temp_file = '{0}\\{1}'.format(temp_file_dir, f)
+            fail += compare_files(correct_file, temp_file)
+    return fail
+
 
 
 
@@ -75,6 +101,14 @@ def run_xml_test(name):
     fail = compare_xml(pkg)
     print('')
     return fail
+
+def run_xml_fail_tests(name):
+    filename = test_functions.set_up_test(name, 'Examples')
+    pkg = generate_xml_fails(filename)
+    fail = compare_xml_fails(pkg)
+    print('')
+    return fail
+
 
 
 #########################################################################
@@ -104,6 +138,9 @@ def main():
 
     name = 'base_class'
     fail += run_xml_test(name)
+
+    name = 'base_class'
+    fail += run_xml_fail_tests(name)
 
     name = 'groups'
     fail += run_xml_test(name)

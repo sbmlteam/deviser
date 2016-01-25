@@ -1008,7 +1008,7 @@ SpatialValidator::validate(const std::string& filename)
     logFailure(*d->getError(n));
   }
 
-  numErrors += validate(*d);
+  numErrors = validate(*d);
   delete d;
   return numErrors;
 }
