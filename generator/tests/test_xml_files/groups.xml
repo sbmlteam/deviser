@@ -3,17 +3,17 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="Group" typeCode="SBML_GROUPS_GROUP" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false" elementName="group" listOfName="listOfGroups" listOfClassName="ListOfGroups">
+        <element name="Group" typeCode="SBML_GROUPS_GROUP" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="group" listOfName="listOfGroups" listOfClassName="ListOfGroups">
           <attributes>
             <attribute name="kind" required="true" type="enum" element="GroupKind" abstract="false"/>
             <attribute name="listOfMembers" required="false" type="lo_element" element="Member" abstract="false"/>
-            <attribute name="id" required="false" type="string" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="Member" typeCode="SBML_GROUPS_MEMBER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" baseClass="SBase" abstract="false" elementName="member" listOfName="listOfMembers" listOfClassName="ListOfMembers">
+        <element name="Member" typeCode="SBML_GROUPS_MEMBER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="member" listOfName="listOfMembers" listOfClassName="ListOfMembers">
           <attributes>
-            <attribute name="id" required="false" type="string" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="idRef" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="metaIdRef" required="false" type="IDREF" abstract="false"/>

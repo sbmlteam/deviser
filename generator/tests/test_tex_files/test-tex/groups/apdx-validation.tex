@@ -163,25 +163,21 @@ be one of the following: 'classification', 'partonomy' or 'collection'.
 (Reference: SBML Level~3 Package specification for Groups, Version~1,
 \sec{group-class}.)}
 
-\validRule{groups-20306}{The attribute \token{groups:\-id} on a \Group
+\validRule{groups-20306}{The attribute \token{groups:\-name} on a \Group
 must have a value of data type \token{string}. (Reference: SBML Level~3
 Package specification for Groups, Version~1, \sec{group-class}.)}
 
-\validRule{groups-20307}{The attribute \token{groups:\-name} on a \Group
-must have a value of data type \token{string}. (Reference: SBML Level~3
-Package specification for Groups, Version~1, \sec{group-class}.)}
-
-\validRule{groups-20308}{The \ListOfMembers subobject on a \Group object
+\validRule{groups-20307}{The \ListOfMembers subobject on a \Group object
 is optional, but if present, this container object must not be empty.
 (Reference: SBML Level~3 Package specification for Groups, Version~1,
 \sec{group-class}.)}
 
-\validRule{groups-20309}{Apart from the general notes and annotations
+\validRule{groups-20308}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfMembers container
 object may only contain \Member objects. (Reference: SBML Level~3
 Package specification for Groups, Version~1, \sec{group-class}.)}
 
-\validRule{groups-20310}{A \ListOfMembers object may have the optional
+\validRule{groups-20309}{A \ListOfMembers object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
 other attributes from the SBML Level 3 Core namespaces are permitted on
 a \ListOfMembers object. (Reference: SBML Level~3 Package specification
@@ -207,22 +203,18 @@ attributes from the SBML Level 3 Groups namespaces are permitted on a
 \Member object. (Reference: SBML Level~3 Package specification for
 Groups, Version~1, \sec{member-class}.)}
 
-\validRule{groups-20404}{The attribute \token{groups:\-id} on a \Member
-must have a value of data type \token{string}. (Reference: SBML Level~3
-Package specification for Groups, Version~1, \sec{member-class}.)}
-
-\validRule{groups-20405}{The attribute \token{groups:\-name} on a
+\validRule{groups-20404}{The attribute \token{groups:\-name} on a
 \Member must have a value of data type \token{string}. (Reference: SBML
 Level~3 Package specification for Groups, Version~1,
 \sec{member-class}.)}
 
-\validRule{groups-20406}{The value of the attribute
+\validRule{groups-20405}{The value of the attribute
 \token{groups:\-idRef} of a \Member object must be the identifier of an
 existing \SBase object defined in the enclosing \Model object.
 (Reference: SBML Level~3 Package specification for Groups, Version~1,
 \sec{member-class}.)}
 
-\validRule{groups-20407}{The attribute \token{groups:\-metaIdRef} on a
+\validRule{groups-20406}{The attribute \token{groups:\-metaIdRef} on a
 \Member must have a value of data type \token{string}. (Reference: SBML
 Level~3 Package specification for Groups, Version~1,
 \sec{member-class}.)}
