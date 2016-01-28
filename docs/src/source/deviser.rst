@@ -10,7 +10,8 @@ Contents:
 
 .. toctree::
    :maxdepth: 6
-   
+
+   background   
    getting_started
    defining_package
    using_deviser
