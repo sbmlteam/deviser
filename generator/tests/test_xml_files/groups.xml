@@ -16,7 +16,7 @@
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="idRef" required="false" type="SIdRef" element="SBase" abstract="false"/>
-            <attribute name="metaIdRef" required="false" type="IDREF" abstract="false"/>
+            <attribute name="metaIdRef" required="false" type="IDREF" element="SBase" abstract="false"/>
           </attributes>
         </element>
       </elements>

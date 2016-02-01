@@ -145,6 +145,9 @@ def main():
     name = 'groups'
     fail += run_xml_test(name)
 
+    name = 'groups'
+    fail += run_xml_fail_tests(name)
+
     name = 'qual'
     fail += run_xml_test(name)
 
