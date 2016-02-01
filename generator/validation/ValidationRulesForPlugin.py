@@ -251,7 +251,9 @@ class ValidationRulesForPlugin():
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': True, 'object': self.name,
+                     'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # write core subobjects rule
     @staticmethod
@@ -265,6 +267,7 @@ class ValidationRulesForPlugin():
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
             tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
+            lo = False
         else:
             if 'type' in lo_child:
                 loname = strFunctions.get_element_name(lo_child)
@@ -290,7 +293,8 @@ class ValidationRulesForPlugin():
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
-                     'plugin': True, 'object': self.name, 'lo_object': ['aaa']})
+                     'plugin': True, 'object': self.name,
+                     'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     @staticmethod
     def write_package_attribute_rule(self):
@@ -355,7 +359,7 @@ class ValidationRulesForPlugin():
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
-                     'plugin': True, 'object': self.name, 'lo_object': [],
+                     'plugin': True, 'object': self.name, 'lo': False,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # functions for listOf child elements

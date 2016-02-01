@@ -81,7 +81,7 @@ class ValidationXMLFiles():
         xml.close_file()
 
 
-    def write_fail_file(self, filename, subtree):
+    def write_specific_file(self, filename, subtree):
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
         xml.write_xml(subtree)
@@ -100,10 +100,6 @@ class ValidationXMLFiles():
         number = 1
         for i in range(0, len(self.class_rules)):
             self.write_appropriate_test_cases(self.class_rules[i])
-            # if self.rule_needs_tests(rule):
-            #     filename = 'aaa-fail-01-{0}'.format(number)
-            #     subtree = self.tree
-            #     self.write_fail_file(filename, subtree)
 
     ###########################################################################
 
@@ -136,16 +132,24 @@ class ValidationXMLFiles():
         #     number += 100
 
     def write_appropriate_test_cases(self, rule):
-        tests = self.get_tests(rule)
-        if not tests:
+        [tests, passes] = self.get_tests(rule)
+        if len(tests) == 0 and len(passes) == 0:
             return
         number = 1
         # write a passing test
         filename = '{0}-pass-00-{1}'.format(rule['number'],
                                             self.get_number(number))
         self.write_file(filename)
+        number += 1
+        for i in range(0, len(passes)):
+            filename = '{0}-pass-00-{1}'.format(rule['number'],
+                                                self.get_number(number))
+            subtree = self.create_appropriate_tree(passes[i], rule['plugin'])
+            self.write_specific_file(filename, subtree)
+            number += 1
 
         # write failing tests
+        number = 1
         for i in range(0, len(tests)):
             filename = '{0}-fail-01-{1}'.format(rule['number'],
                                                 self.get_number(number))
@@ -153,20 +157,15 @@ class ValidationXMLFiles():
             if self.is_toplevel_fail(tests[i]['name']):
                 self.write_toplevel_fail_file(filename, tests[i]['name'])
             else:
-                self.write_fail_file(filename, subtree)
+                self.write_specific_file(filename, subtree)
             number += 1
 
     ########################################################################
-    # helper functions
 
-    def get_number(self, number):
-        if number < 10:
-            str_num = '0{0}'.format(number)
-        else:
-            str_num = '{0}'.format(number)
-        return str_num
+    # function to work out what tests are needed for each rule
 
     def get_tests(self, rule):
+        passes = []
         tc = rule['typecode']
         test_needed = []
         if tc.endswith('Unknown'):
@@ -181,24 +180,107 @@ class ValidationXMLFiles():
         elif tc.endswith('AttributeRequiredMustHaveValue'):
             test_needed = [dict({'name': 'incorrect_value_reqd'})]
         elif tc.endswith('EmptyLOElements'):
-            loname = rule['lo_object'][0]['listOfClassName']
-            test_needed = [dict({'name': 'empty_lo', 'object': rule['object'],
-                                 'lo_child': loname})]
-            for i in range(1, len(rule['lo_object'])):
-                loname = rule['lo_object'][i]['listOfClassName']
+            for element in rule['lo_object']:
+                loname = element['listOfClassName']
                 test_needed.append(dict({'name': 'empty_lo', 'object': rule['object'],
                                  'lo_child': loname}))
         elif tc.endswith('AllowedElements'):
-            if len(rule['lo_object']) == 0:
-                for i in range(0, len(rule['opt'])):
-                    if rule['opt'][i]['isListOf']:
-                        name = rule['opt'][i]['listOfClassName']
+            if not rule['lo']:
+                for element in rule['opt']:
+                    if element['isListOf']:
+                        name = element['listOfClassName']
                     else:
-                        name = rule['opt'][i]['name']
+                        name = element['name']
                     test_needed.append(dict({'name': 'add_element',
                                              'object': rule['object'],
                                              'child': name}))
-        return test_needed
+                for element in rule['reqd']:
+                    if element['isListOf']:
+                        name = element['listOfClassName']
+                    else:
+                        name = element['name']
+                    test_needed.append(dict({'name': 'remove_element',
+                                             'object': rule['object'],
+                                             'child': name}))
+        elif tc.endswith('AllowedCoreElements'):
+            for element in rule['opt']:
+                if element['isListOf']:
+                    name = element['listOfClassName']
+                else:
+                    name = element['name']
+                test_needed.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name}))
+                passes.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'annotation'}))
+                passes.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'notes'}))
+            for element in rule['reqd']:
+                if element['isListOf']:
+                    name = element['listOfClassName']
+                else:
+                    name = element['name']
+                test_needed.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name}))
+                passes.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'annotation'}))
+                passes.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'notes'}))
+        elif tc.endswith('AllowedCoreAttributes'):
+            for element in rule['opt']:
+                if element['isListOf']:
+                    name = element['listOfClassName']
+                else:
+                    name = element['name']
+                test_needed.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name}))
+                passes.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'metaid'}))
+                passes.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'sboTerm'}))
+            for element in rule['reqd']:
+                if element['isListOf']:
+                    name = element['listOfClassName']
+                else:
+                    name = element['name']
+                test_needed.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name}))
+                passes.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'metaid'}))
+                passes.append(dict({'name': 'add_core_attribute',
+                                         'object': rule['object'],
+                                         'child': name,
+                                         'type': 'sboTerm'}))
+        return [test_needed, passes]
+
+
+    ########################################################################
+    # helper functions
+
+    def get_number(self, number):
+        if number < 10:
+            str_num = '0{0}'.format(number)
+        else:
+            str_num = '{0}'.format(number)
+        return str_num
+
 
     def is_toplevel_fail(self, code):
         toplevel_codes = ['missing_ns', 'incorrect_ns', 'missing_reqd',
@@ -214,29 +296,65 @@ class ValidationXMLFiles():
             subtree = self.remove_element(test['object'], test['lo_child'], plugin)
         elif test['name'] == 'add_element':
             subtree = self.duplicate_element(test['object'], test['child'], plugin)
+        elif test['name'] == 'add_core_element':
+            elem = 'model' if 'type' not in test else test['type']
+            subtree = self.add_element(test['object'], test['child'], elem, 'core', plugin)
+        elif test['name'] == 'add_core_attribute':
+            attrib = 'name' if 'type' not in test else test['type']
+            subtree = self.add_attrib(test['object'], test['child'], attrib, 'core', plugin)
         elif test['name'] == 'remove_empty':
             subtree = self.remove_element(test['object'], test['child'], plugin)
         return subtree
 
-    def remove_element(self, object, name, plugin):
+    def remove_element(self, parent, name, plugin):
         subtree = copy.deepcopy(self.tree)
         if plugin:
             for i in range(0, len(subtree)):
-                if subtree[i]['base'] == object:
+                if subtree[i]['base'] == parent:
                     break
             for j in range(0, len(subtree[i]['children'])):
                 if subtree[i]['children'][j]['name'] == name:
                     subtree[i]['children'][j]['children'] = []
         return subtree
 
-    def duplicate_element(self, object, name, plugin):
+    def duplicate_element(self, parent, name, plugin):
         subtree = copy.deepcopy(self.tree)
         if plugin:
             for i in range(0, len(subtree)):
-                if subtree[i]['base'] == object:
+                if subtree[i]['base'] == parent:
                     break
             for j in range(0, len(subtree[i]['children'])):
                 if subtree[i]['children'][j]['name'] == name:
                     subtree[i]['children'].append(subtree[i]['children'][j])
         return subtree
 
+    def add_element(self, parent, child, new_obj, ext, plugin):
+        subtree = copy.deepcopy(self.tree)
+        if plugin:
+            for i in range(0, len(subtree)):
+                if subtree[i]['base'] == parent:
+                    break
+            for j in range(0, len(subtree[i]['children'])):
+                if subtree[i]['children'][j]['name'] == child:
+                    subtree[i]['children'][j]['children'].append(self.make_object(new_obj, ext))
+        return subtree
+
+    def add_attrib(self, parent, child, new_obj, ext, plugin):
+        subtree = copy.deepcopy(self.tree)
+        if plugin:
+            for i in range(0, len(subtree)):
+                if subtree[i]['base'] == parent:
+                    break
+            for j in range(0, len(subtree[i]['children'])):
+                if subtree[i]['children'][j]['name'] == child:
+                    subtree[i]['children'][j]['attribs'].append(self.make_attrib(new_obj, ext))
+        return subtree
+
+    def make_object(self, new_obj, ext):
+        return dict({'name': new_obj, 'ext': 'core', 'children': [], 'attribs': []})
+
+    def make_attrib(self, new_obj, ext):
+        att_type = 'ID'
+        if new_obj == 'sboTerm':
+            att_type = 'SBO'
+        return dict({'xml_name': new_obj, 'ext': 'core', 'type': att_type})

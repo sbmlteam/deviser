@@ -182,21 +182,25 @@ class BaseXMLFile(BaseFile.BaseFile):
             self.start_id += 1
         elif att_type == 'enum':
             value = query.get_first_enum_value(attribute)
+        elif att_type == 'SBO':
+            value = 'SBO:0000001'
         else:
             value = 'someString'
         return value
 
     def get_attributes(self, attributes, pkg):
         attrib_list = []
-        for i in range(0, len(attributes)):
-            att_type = attributes[i]['type']
+        for attrib in attributes:
+            att_type = attrib['type']
             if query.is_element(att_type):
                 continue
+            if 'ext' in attrib:
+                pkg = attrib['ext']
             if pkg == 'core':
-                name = attributes[i]['xml_name']
+                name = attrib['xml_name']
             else:
-                name = '{0}:{1}'.format(pkg, attributes[i]['xml_name'])
-            value = self.get_sensible_value(attributes[i])
+                name = '{0}:{1}'.format(pkg, attrib['xml_name'])
+            value = self.get_sensible_value(attrib)
             attrib_dict = dict({'name': name, 'value': value})
             attrib_list.append(attrib_dict)
         return attrib_list
