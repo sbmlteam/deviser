@@ -301,7 +301,7 @@ class ValidationRulesForClass():
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
-            tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
+            tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
             short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)

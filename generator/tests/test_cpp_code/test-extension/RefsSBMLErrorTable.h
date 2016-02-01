@@ -162,7 +162,7 @@ static const packageErrorTableEntry refsErrorTable[] =
   },
 
   // 120203
-  { RefsModelLOThingCsAllowedElements,
+  { RefsModelLOThingCsAllowedCoreElements,
     "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,

@@ -282,7 +282,7 @@ class ValidationRulesForPlugin():
             ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(self.name))
             sev = 'ERROR'
-            tc = '{0}{1}LO{2}AllowedElements'.format(self.up_package, self.name,
+            tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
@@ -585,8 +585,3 @@ class ValidationRulesForPlugin():
             values += ' or \"{0}\"'.format(this_enum['values'][i+1]['value'])
             return values
 
-    ##########################################################################
-
-    # functions to create test information for generating xml files
-    def parse_elements(self, elements):
-        return['ListOfGroups']

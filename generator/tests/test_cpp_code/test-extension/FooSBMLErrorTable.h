@@ -161,7 +161,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120203
-  { FooModelLOApplesAllowedElements,
+  { FooModelLOApplesAllowedCoreElements,
     "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -197,7 +197,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120302
-  { FooCompartmentLOPearsAllowedElements,
+  { FooCompartmentLOPearsAllowedCoreElements,
     "Core elements allowed on <compartment>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -244,7 +244,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120403
-  { FooSpeciesLOBananasAllowedElements,
+  { FooSpeciesLOBananasAllowedCoreElements,
     "Core elements allowed on <species>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -352,7 +352,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120704
-  { FooBowlLOPearsAllowedElements,
+  { FooBowlLOPearsAllowedCoreElements,
     "Core elements allowed on <listOfPears>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -425,7 +425,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120805
-  { FooPlateLOApplesAllowedElements,
+  { FooPlateLOApplesAllowedCoreElements,
     "Core elements allowed on <listOfApples>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -447,7 +447,7 @@ static const packageErrorTableEntry fooErrorTable[] =
   },
 
   // 120807
-  { FooPlateLOBananasAllowedElements,
+  { FooPlateLOBananasAllowedCoreElements,
     "Core elements allowed on <listOfBananas>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,

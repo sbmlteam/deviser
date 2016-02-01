@@ -58,8 +58,8 @@ typedef enum
 , QualAttributeRequiredMustHaveValue                          = 3020103
 , QualModelAllowedElements                                    = 3020201
 , QualModelEmptyLOElements                                    = 3020202
-, QualModelLOQualitativeSpeciesAllowedElements                = 3020203
-, QualModelLOTransitionsAllowedElements                       = 3020204
+, QualModelLOQualitativeSpeciesAllowedCoreElements            = 3020203
+, QualModelLOTransitionsAllowedCoreElements                   = 3020204
 , QualModelLOQualitativeSpeciesAllowedCoreAttributes          = 3020205
 , QualModelLOTransitionsAllowedCoreAttributes                 = 3020206
 , QualQualitativeSpeciesAllowedCoreAttributes                 = 3020301
@@ -76,10 +76,10 @@ typedef enum
 , QualTransitionAllowedElements                               = 3020404
 , QualTransitionNameMustBeString                              = 3020405
 , QualTransitionEmptyLOElements                               = 3020406
-, QualTransitionLOInputsAllowedElements                       = 3020407
-, QualTransitionLOOutputsAllowedElements                      = 3020408
+, QualTransitionLOInputsAllowedCoreElements                   = 3020407
+, QualTransitionLOOutputsAllowedCoreElements                  = 3020408
 , QualTransitionEmptyReqdLOElements                           = 3020409
-, QualTransitionLOFunctionTermsAllowedElements                = 3020410
+, QualTransitionLOFunctionTermsAllowedCoreElements            = 3020410
 , QualTransitionLOInputsAllowedCoreAttributes                 = 3020411
 , QualTransitionLOOutputsAllowedCoreAttributes                = 3020412
 , QualTransitionLOFunctionTermsAllowedCoreAttributes          = 3020413

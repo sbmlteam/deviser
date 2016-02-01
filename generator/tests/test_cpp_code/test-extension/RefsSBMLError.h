@@ -58,7 +58,7 @@ typedef enum
 , RefsAttributeRequiredMustHaveValue                          = 120103
 , RefsModelAllowedElements                                    = 120201
 , RefsModelEmptyLOElements                                    = 120202
-, RefsModelLOThingCsAllowedElements                           = 120203
+, RefsModelLOThingCsAllowedCoreElements                       = 120203
 , RefsModelLOThingCsAllowedCoreAttributes                     = 120204
 , RefsThingAAllowedCoreAttributes                             = 120301
 , RefsThingAAllowedCoreElements                               = 120302

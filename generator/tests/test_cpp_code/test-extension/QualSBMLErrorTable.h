@@ -163,7 +163,7 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020203
-  { QualModelLOQualitativeSpeciesAllowedElements,
+  { QualModelLOQualitativeSpeciesAllowedCoreElements,
     "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -175,7 +175,7 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020204
-  { QualModelLOTransitionsAllowedElements,
+  { QualModelLOTransitionsAllowedCoreElements,
     "Core elements allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -378,7 +378,7 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020407
-  { QualTransitionLOInputsAllowedElements,
+  { QualTransitionLOInputsAllowedCoreElements,
     "Core elements allowed on <listOfInputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -390,7 +390,7 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020408
-  { QualTransitionLOOutputsAllowedElements,
+  { QualTransitionLOOutputsAllowedCoreElements,
     "Core elements allowed on <listOfOutputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -413,7 +413,7 @@ static const packageErrorTableEntry qualErrorTable[] =
   },
 
   // 3020410
-  { QualTransitionLOFunctionTermsAllowedElements,
+  { QualTransitionLOFunctionTermsAllowedCoreElements,
     "Core elements allowed on <listOfFunctionTerms>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
