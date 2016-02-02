@@ -256,6 +256,7 @@ class ValidationRulesForClass():
             tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
                                                       self.name)
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
+            lo = False
         else:
             lo_name = strFunctions.plural(lo_child['element'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -270,11 +271,14 @@ class ValidationRulesForClass():
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
+            lo = True
             short = 'Core attributes allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name, 'lo': lo,
+                     'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # write core subobjects rule
     @staticmethod
@@ -596,6 +600,12 @@ class ValidationRulesForClass():
     # divide attributes into elements/attributes required and optional
     @staticmethod
     def parse_attributes(self, attributes):
+        # check that the attributes have a texname field
+        # this halts generating xml files even though it is not
+        # necessary for them
+        for attrib in attributes:
+            if 'texname' not in attrib:
+                attrib['texname'] = ''
         for i in range(0, len(attributes)):
             if not self.is_element(attributes[i]['type']):
                 if attributes[i]['reqd'] is True:

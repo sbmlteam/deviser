@@ -233,6 +233,7 @@ class ValidationRulesForPlugin():
             sev = 'ERROR'
             tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
                                                       self.name)
+            lo = False
         else:
             lo_name = strFunctions.plural(lo_child['name'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
@@ -246,13 +247,14 @@ class ValidationRulesForPlugin():
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
+            lo = True
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
-                     'plugin': True, 'object': self.name,
+                     'plugin': True, 'object': self.name, 'lo': lo,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # write core subobjects rule
@@ -287,13 +289,14 @@ class ValidationRulesForPlugin():
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
+            lo = True
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
-                     'plugin': True, 'object': self.name,
+                     'plugin': True, 'object': self.name, 'lo': lo,
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     @staticmethod
