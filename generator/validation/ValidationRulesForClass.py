@@ -326,6 +326,7 @@ class ValidationRulesForClass():
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
+            lo = False
         else:
             loname = strFunctions.get_element_name(lo_child)
             lo_name = strFunctions.plural(lo_child['element'])
@@ -340,11 +341,14 @@ class ValidationRulesForClass():
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
+            lo = True
             short = 'Core elements allowed on <listOf{0}>.'.format(lo_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name, 'lo': lo,
+                     'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     @staticmethod
     def write_package_attribute_rule(self):
@@ -376,7 +380,9 @@ class ValidationRulesForClass():
         tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name, 'lo': False,
+                     'reqd': self.reqd_att, 'opt': self.opt_att})
 
     @staticmethod
     def write_package_object_rule(self):
@@ -408,7 +414,9 @@ class ValidationRulesForClass():
         tc = '{0}{1}AllowedElements'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name,
+                     'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # functions for listOf child elements
     # might not be lo elements
@@ -416,9 +424,17 @@ class ValidationRulesForClass():
         child_class = query.get_class(child['element'], child['root'])
         if len(child_class['lo_attribs']) == 0:
             return
+        # if these are all elements we dont need this
+        num = len(child_class['lo_attribs'])
+        count = 0
+        for attrib in child_class['lo_attribs']:
+            if self.is_element(attrib['type']):
+                count += 1
+        if count == num:
+            return
         attributes = []
         formatted_name = '\\' + child_class['lo_class_name']
-        name = child_class['lo_class_name']
+        name = child_class['name']
         child_reqd = []
         child_opt = []
         for attrib in child_class['lo_attribs']:
@@ -427,8 +443,9 @@ class ValidationRulesForClass():
                 child_reqd.append(attrib)
             else:
                 child_opt.append(attrib)
-        lo_info.append(dict({'formatted_name': formatted_name, 'name': name,
-                        'attributes': attributes}))
+        lo_info.append(dict({'formatted_name': formatted_name,
+                             'name': child_class['lo_class_name'],
+                             'attributes': attributes}))
 
         reqd = self.parse_required(self, child_reqd)
         opt = self.parse_optional(self, child_opt)
@@ -448,7 +465,8 @@ class ValidationRulesForClass():
                 .format(self.indef_u, formatted_name,
                         reqd, opt, no_other_statement)
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(name))
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section(child_class['lo_class_name']))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
@@ -456,7 +474,10 @@ class ValidationRulesForClass():
         tc = '{0}LO{1}AllowedAttributes'.format(self.up_package, name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name, 'lo': True,
+                     'reqd': child_reqd, 'opt': child_opt,
+                     'lo_object': lo_info[0]['name']})
 
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
@@ -518,7 +539,9 @@ class ValidationRulesForClass():
             tc = '{0}{1}EmptyLOElements'.format(self.up_package, self.name, )
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name,
+                     'lo_object': self.opt_child_lo_elem})
 
     def write_reqd_lo_rule(self):
         number = len(self.reqd_child_lo_elem)
@@ -585,6 +608,9 @@ class ValidationRulesForClass():
     # parse the required attribute sentence
     @staticmethod
     def parse_required(self, attributes):
+        for attrib in attributes:
+            if 'texname' not in attrib:
+                attrib['texname'] = attrib['name']
         num = len(attributes)
         if num == 0:
             return ''
@@ -610,6 +636,9 @@ class ValidationRulesForClass():
     # parse the optional attribute sentence
     @staticmethod
     def parse_optional(self, attributes):
+        for attrib in attributes:
+            if 'texname' not in attrib:
+                attrib['texname'] = attrib['name']
         num = len(attributes)
         if num == 0:
             return ''
@@ -684,7 +713,7 @@ class ValidationRulesForClass():
         # necessary for them
         for attrib in attributes:
             if 'texname' not in attrib:
-                attrib['texname'] = ''
+                attrib['texname'] = attrib['name']
         for i in range(0, len(attributes)):
             if not self.is_element(attributes[i]['type']):
                 if attributes[i]['reqd'] is True:
@@ -709,6 +738,8 @@ class ValidationRulesForClass():
                     if element:
                         attributes[i]['min_lo_children'] \
                             = element['min_lo_children']
+                        attributes[i]['listOfClassName'] = element['lo_class_name']
+                        attributes[i]['isListOf'] = element['hasListOf']
                     if attributes[i]['reqd'] is True:
                         if attributes[i]['type'] != 'element':
                             self.reqd_child_lo_elem.append(attributes[i])

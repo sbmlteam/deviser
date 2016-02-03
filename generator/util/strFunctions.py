@@ -224,10 +224,15 @@ def get_sid_refs(refs):
 
 def get_element_name(attribute):
     if 'type' in attribute:
+        name = ''
+        if 'texname' in attribute:
+            name = attribute['texname']
+        if len(name) == 0:
+            name = attribute['name']
         if attribute['type'] == 'lo_element':
-            return '\{0}'.format(cap_list_of_name(attribute['texname']))
+            return '\{0}'.format(cap_list_of_name(name))
         elif attribute['type'] == 'inline_lo_element':
-            return '\{0}'.format(cap_list_of_name(attribute['texname']))
+            return '\{0}'.format(cap_list_of_name(name))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'

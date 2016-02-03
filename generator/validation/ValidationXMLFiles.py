@@ -190,56 +190,67 @@ class ValidationXMLFiles():
                 test_needed.append(dict({'name': 'empty_lo', 'object': rule['object'],
                                  'lo_child': loname}))
         elif tc.endswith('AllowedElements'):
-            # need to sort this if not a lo
-            if not rule['lo']:
-                for element in rule['opt']:
-                    if element['isListOf']:
-                        name = element['listOfClassName']
-                    else:
-                        name = element['name']
-                    test_needed.append(dict({'name': 'add_element',
-                                             'object': rule['object'],
-                                             'child': name}))
-                for element in rule['reqd']:
-                    if element['isListOf']:
-                        name = element['listOfClassName']
-                    else:
-                        name = element['name']
-                    test_needed.append(dict({'name': 'remove_element',
-                                             'object': rule['object'],
-                                             'child': name}))
-        elif tc.endswith('AllowedCoreElements'):
             for element in rule['opt']:
                 if element['isListOf']:
                     name = element['listOfClassName']
                 else:
                     name = element['name']
-                test_needed.append(dict({'name': 'add_core_element',
+                test_needed.append(dict({'name': 'add_element',
                                          'object': rule['object'],
                                          'child': name}))
-                passes.append(dict({'name': 'add_core_element',
-                                         'object': rule['object'],
-                                         'child': name,
-                                         'type': 'annotation'}))
-                passes.append(dict({'name': 'add_core_element',
-                                         'object': rule['object'],
-                                         'child': name,
-                                         'type': 'notes'}))
             for element in rule['reqd']:
                 if element['isListOf']:
                     name = element['listOfClassName']
                 else:
                     name = element['name']
-                test_needed.append(dict({'name': 'add_core_element',
+                test_needed.append(dict({'name': 'remove_element',
                                          'object': rule['object'],
                                          'child': name}))
+        elif tc.endswith('AllowedCoreElements'):
+            if self.is_lo_rule(rule):
+                for element in rule['opt']:
+                    if element['isListOf']:
+                        name = element['listOfClassName']
+                    else:
+                        name = element['name']
+                    test_needed.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name}))
+                    passes.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name,
+                                             'type': 'annotation'}))
+                    passes.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name,
+                                             'type': 'notes'}))
+                for element in rule['reqd']:
+                    if element['isListOf']:
+                        name = element['listOfClassName']
+                    else:
+                        name = element['name']
+                    test_needed.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name}))
+                    passes.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name,
+                                             'type': 'annotation'}))
+                    passes.append(dict({'name': 'add_core_element',
+                                             'object': rule['object'],
+                                             'child': name,
+                                             'type': 'notes'}))
+            else:
+                test_needed.append(dict({'name': 'add_core_element',
+                                         'object': rule['object'],
+                                         'child': rule['object']}))
                 passes.append(dict({'name': 'add_core_element',
                                          'object': rule['object'],
-                                         'child': name,
+                                         'child': rule['object'],
                                          'type': 'annotation'}))
                 passes.append(dict({'name': 'add_core_element',
                                          'object': rule['object'],
-                                         'child': name,
+                                         'child': rule['object'],
                                          'type': 'notes'}))
         elif tc.endswith('AllowedCoreAttributes'):
             if self.is_lo_rule(rule):
@@ -281,6 +292,40 @@ class ValidationXMLFiles():
                                          'object': rule['object'],
                                          'child': rule['object'],
                                          'type': 'sboTerm'}))
+        elif tc.endswith('AllowedAttributes'):
+            if self.is_lo_rule(rule):
+                test_needed.append(dict({'name': 'add_pkg_attribute',
+                                         'object': rule['object'],
+                                         'child': rule['lo_object']}))
+                for attribute in rule['opt']:
+                    name = attribute['name']
+                    passes.append(dict({'name': 'remove_attribute',
+                                        'object': rule['object'],
+                                        'child': rule['lo_object'],
+                                        'attrib': name}))
+                for attribute in rule['reqd']:
+                    name = attribute['name']
+                    test_needed.append(dict({'name': 'remove_attribute',
+                                             'object': rule['object'],
+                                             'child': rule['lo_object'],
+                                             'attrib': name}))
+
+            else:
+                test_needed.append(dict({'name': 'add_pkg_attribute',
+                                         'object': rule['object'],
+                                         'child': rule['object']}))
+                for attribute in rule['opt']:
+                    name = attribute['name']
+                    passes.append(dict({'name': 'remove_attribute',
+                                        'object': rule['object'],
+                                        'child': rule['object'],
+                                        'attrib': name}))
+                for attribute in rule['reqd']:
+                    name = attribute['name']
+                    test_needed.append(dict({'name': 'remove_attribute',
+                                             'object': rule['object'],
+                                             'child': rule['object'],
+                                             'attrib': name}))
         return [test_needed, passes]
 
 
@@ -329,25 +374,38 @@ class ValidationXMLFiles():
             subtree = self.remove_element(test['object'], test['lo_child'], plugin)
         elif test['name'] == 'add_element':
             subtree = self.duplicate_element(test['object'], test['child'], plugin)
+        elif test['name'] == 'add_pkg_element':
+            elem = 'model' if 'type' not in test else test['type']
+            subtree = self.add_element(test['object'], test['child'], elem, self.package, plugin)
         elif test['name'] == 'add_core_element':
             elem = 'model' if 'type' not in test else test['type']
             subtree = self.add_element(test['object'], test['child'], elem, 'core', plugin)
         elif test['name'] == 'add_core_attribute':
-            attrib = 'name' if 'type' not in test else test['type']
+            attrib = 'foo' if 'type' not in test else test['type']
             subtree = self.add_attrib(test['object'], test['child'], attrib, 'core', plugin)
+        elif test['name'] == 'add_pkg_attribute':
+            attrib = 'foo' if 'type' not in test else test['type']
+            subtree = self.add_attrib(test['object'], test['child'], attrib, self.package, plugin)
+        elif test['name'] == 'remove_attribute':
+            subtree = self.remove_attrib(test['object'], test['child'], test['attrib'], self.package, plugin)
         elif test['name'] == 'remove_empty':
             subtree = self.remove_element(test['object'], test['child'], plugin)
         return subtree
 
-    def remove_element(self, parent, name, plugin):
+    def remove_element(self, parent, child, plugin):
         subtree = copy.deepcopy(self.tree)
         if plugin:
-            match = self.match_child_from_plugin(subtree, name, parent)
-            if match:
-                match['children'] = []
+            match = self.match_child_from_plugin(subtree, child, parent)
+            match['children'] = []
+        else:
+            for plug_obj in subtree:
+                match = self.match_child(plug_obj, child)
+                if match:
+                    match['children'] = []
+                    break
         return subtree
 
-    def duplicate_element(self, parent, name, plugin):
+    def duplicate_element(self, parent, child, plugin):
         # sort for nesting
         subtree = copy.deepcopy(self.tree)
         if plugin:
@@ -355,8 +413,9 @@ class ValidationXMLFiles():
                 if subtree[i]['base'] == parent:
                     break
             for j in range(0, len(subtree[i]['children'])):
-                if subtree[i]['children'][j]['name'] == name:
+                if subtree[i]['children'][j]['name'] == child:
                     subtree[i]['children'].append(subtree[i]['children'][j])
+
         return subtree
 
     def add_element(self, parent, child, new_obj, ext, plugin):
@@ -365,6 +424,12 @@ class ValidationXMLFiles():
             match = self.match_child_from_plugin(subtree, child, parent)
             if match:
                 match['children'].append(self.make_object(new_obj, ext))
+        else:
+            for plug_obj in subtree:
+                match = self.match_child(plug_obj, child)
+                if match:
+                    match['children'].append(self.make_object(new_obj, ext))
+                    break
         return subtree
 
     def add_attrib(self, parent, child, new_obj, ext, plugin):
@@ -381,14 +446,31 @@ class ValidationXMLFiles():
                     break
         return subtree
 
+    def remove_attrib(self, parent, child, att, ext, plugin):
+        subtree = copy.deepcopy(self.tree)
+        if plugin:
+            match = self.match_child_from_plugin(subtree, child, parent)
+            if match:
+                match['attribs'].append(self.make_attrib(att, ext))
+        else:
+            for plug_obj in subtree:
+                match = self.match_child(plug_obj, child)
+                if match:
+                    for attrib in match['attribs']:
+                        if attrib['name'] == att:
+                            match['attribs'].remove(attrib)
+                            break
+                    break
+        return subtree
+
     def make_object(self, new_obj, ext):
-        return dict({'name': new_obj, 'ext': 'core', 'children': [], 'attribs': []})
+        return dict({'name': new_obj, 'ext': ext, 'children': [], 'attribs': []})
 
     def make_attrib(self, new_obj, ext):
         att_type = 'ID'
         if new_obj == 'sboTerm':
             att_type = 'SBO'
-        return dict({'xml_name': new_obj, 'ext': 'core', 'type': att_type})
+        return dict({'xml_name': new_obj, 'ext': ext, 'type': att_type})
 
     def match_child(self, parent, child):
         match = None
