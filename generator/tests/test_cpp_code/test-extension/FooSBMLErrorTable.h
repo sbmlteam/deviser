@@ -63,8 +63,9 @@ static const packageErrorTableEntry fooErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "To conform to the Foo Package specification for SBML Level~3 Version~1, an "
-    "SBML document must declare the use of the following XML Namespace: "
-    "'http://www.sbml.org/sbml/level3/version1/foo/version1'.",
+    "SBML document must declare "
+    "'http://www.sbml.org/sbml/level3/version1/foo/version1' as the "
+    "XMLNamespaceto use for elements of this package.",
     { "L3V1 Foo V1 Section 3.1"
     }
   },
@@ -75,8 +76,9 @@ static const packageErrorTableEntry fooErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
-    "Foo Package must be declared either implicitly or explicitly to be in the "
-    "XML namespace 'http://www.sbml.org/sbml/level3/version1/foo/version1'.",
+    "Foo Package must use the "
+    "'http://www.sbml.org/sbml/level3/version1/foo/version1' namespace, "
+    "declaring so either explicitly or implicitly.",
     { "L3V1 Foo V1 Section 3.1"
     }
   },
@@ -166,7 +168,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfApples container object may only contain <apple> "
+    "SBML objects, a <listOfApples> container object may only contain <apple> "
     "objects.",
     { "L3V1 Foo V1 Section"
     }
@@ -202,7 +204,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfPears container object may only contain <pear> "
+    "SBML objects, a <listOfPears> container object may only contain <pear> "
     "objects.",
     { "L3V1 Foo V1 Section"
     }
@@ -249,7 +251,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfBananas container object may only contain <banana> "
+    "SBML objects, a <listOfBananas> container object may only contain <banana> "
     "objects.",
     { "L3V1 Foo V1 Section"
     }

@@ -281,7 +281,7 @@ class ValidationRulesForPlugin():
                 element = lo_child['name']
                 lo_name = strFunctions.plural(element)
             text = 'Apart from the general notes and annotations subobjects ' \
-                   'permitted on all SBML objects, a {0} container object ' \
+                   'permitted on all SBML objects, a \{0} container object ' \
                    'may only contain \{1} objects.'\
                 .format(loname, element)
             ref = '{0}, {1}.'\

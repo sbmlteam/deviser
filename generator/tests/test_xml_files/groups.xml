@@ -18,6 +18,10 @@
             <attribute name="idRef" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="metaIdRef" required="false" type="IDREF" element="SBase" abstract="false"/>
           </attributes>
+          <listOfAttributes>
+            <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
+            <listOfAttribute name="name" required="false" type="string" abstract="false"/>
+          </listOfAttributes>
         </element>
       </elements>
       <plugins>

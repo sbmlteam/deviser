@@ -138,9 +138,10 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_ns_rule(self):
         text = 'To conform to the {0} specification for SBML Level~{1} ' \
-               'Version~{2}, an SBML document must declare the use of the ' \
-               'following XML Namespace: \\uri{3}http://www.sbml.org/sbml/' \
-               'level{1}/version{2}/{4}/version{5}{6}.'\
+               'Version~{2}, an SBML document must declare ' \
+               '\\uri{3}http://www.sbml.org/sbml/' \
+               'level{1}/version{2}/{4}/version{5}{6} as the XMLNamespace' \
+               'to use for elements of this package.'\
             .format(self.full_pkg_command, self.level, self.version,
                     self.start_b, self.package, self.pkg_version, self.end_b)
         ref = '{0} {1}.'\
@@ -159,10 +160,10 @@ class ValidationRulesGeneral():
     @staticmethod
     def write_element_not_ns_rule(self):
         text = 'Wherever they appear in an SBML document, elements and ' \
-               'attributes from the {0} must be declared either ' \
-               'implicitly or explicitly to be in the XML namespace ' \
+               'attributes from the {0} must use the ' \
                '\\uri{1}http://www.sbml.org/sbml/level{2}/version{3}' \
-               '/{4}/version{5}{6}.'\
+               '/{4}/version{5}{6} namespace, declaring so either explicitly ' \
+               'or implicitly.'\
             .format(self.full_pkg_command, self.start_b, self.level,
                     self.version, self.package, self.pkg_version, self.end_b)
         ref = '{0} {1}.'\

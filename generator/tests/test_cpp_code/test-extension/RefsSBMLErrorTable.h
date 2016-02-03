@@ -63,8 +63,9 @@ static const packageErrorTableEntry refsErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "To conform to the SID References Package specification for SBML Level~3 "
-    "Version~1, an SBML document must declare the use of the following XML "
-    "Namespace: 'http://www.sbml.org/sbml/level3/version1/refs/version1'.",
+    "Version~1, an SBML document must declare "
+    "'http://www.sbml.org/sbml/level3/version1/refs/version1' as the "
+    "XMLNamespaceto use for elements of this package.",
     { "L3V1 Refs V1 Section 3.1"
     }
   },
@@ -75,9 +76,9 @@ static const packageErrorTableEntry refsErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
-    "SID References Package must be declared either implicitly or explicitly to "
-    "be in the XML namespace "
-    "'http://www.sbml.org/sbml/level3/version1/refs/version1'.",
+    "SID References Package must use the "
+    "'http://www.sbml.org/sbml/level3/version1/refs/version1' namespace, "
+    "declaring so either explicitly or implicitly.",
     { "L3V1 Refs V1 Section 3.1"
     }
   },
@@ -167,7 +168,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfThingCs container object may only contain <thingC> "
+    "SBML objects, a <listOfThingCs> container object may only contain <thingC> "
     "objects.",
     { "L3V1 Refs V1 Section"
     }

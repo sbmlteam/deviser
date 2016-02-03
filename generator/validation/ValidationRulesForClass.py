@@ -141,6 +141,31 @@ class ValidationRulesForClass():
                                                self.reqd_child_lo_elem[i])
             self.add_rule(rule)
 
+        lo_info = []
+        for child in self.reqd_child_lo_elem:
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(child, lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
+
+        lo_info = []
+        for child in self.opt_child_lo_elem:
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(child, lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
+
+
     def add_rule(self, rule):
         if rule is not None:
             self.rules.append(rule)
@@ -154,7 +179,13 @@ class ValidationRulesForClass():
 
     # write rule about attribute type
     @staticmethod
-    def write_attribute_type_rule(self, attribute):
+    def write_attribute_type_rule(self, attribute, lo=None):
+        if lo:
+            formatted_name = lo['formatted_name']
+            refname = lo['name']
+        else:
+            formatted_name = self.formatted_name
+            refname = self.name
         att_type = attribute['type']
         att_name = strFunctions.upper_first(attribute['name'])
         name = strFunctions.wrap_token(attribute['texname'], self.package)
@@ -170,29 +201,29 @@ class ValidationRulesForClass():
             text = 'The value of the attribute {0} of {1} {2} object must be ' \
                    'the identifier of an existing \{3} object defined in the ' \
                    'enclosing \Model object.'\
-                .format(name, self.indef, self.formatted_name, ref_name)
+                .format(name, self.indef, formatted_name, ref_name)
             rule_type = ref_type
         elif att_type == 'string' or att_type == 'IDREF':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
-                .format(name, self.indef, self.formatted_name,
+                .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('string'))
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
-                .format(name, self.indef, self.formatted_name,
+                .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('integer'))
             rule_type = 'Integer' if att_type == 'int' else 'UnInteger'
         elif att_type == 'double':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
-                .format(name, self.indef, self.formatted_name,
+                .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('double'))
             rule_type = 'Double'
         elif att_type == 'boolean' or att_type == 'bool':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
-                .format(name, self.indef, self.formatted_name,
+                .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('boolean'))
             rule_type = 'Boolean'
         elif att_type == 'enum':
@@ -204,14 +235,14 @@ class ValidationRulesForClass():
                    'may only take on the allowed values of {3} defined ' \
                    'in SBML; that is the value must be one of the ' \
                    'following: {4}.'.format(name, self.indef,
-                                            self.formatted_name,
+                                            formatted_name,
                                             strFunctions.wrap_enum(enum_name),
                                             enum_values)
             rule_type = '{0}Enum'.format(attribute['element'])
         elif att_type == 'array':
             text = 'The value of the attribute {0} of {1} {2} object must ' \
                    'be an array of values of type {3}.'\
-                .format(name, self.indef, self.formatted_name,
+                .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token(attribute['element']))
         elif att_type == 'element' and attribute['element'] == 'RelAbsVector':
             text = 'The value of the attribute {0} of {1} {2} object must ' \
@@ -220,7 +251,7 @@ class ValidationRulesForClass():
                    'followed by an optional relative number followed ' \
                    'by a \\% sign. Adding spaces between the ' \
                    'coordinates is encouraged, but not required.'\
-                .format(name, self.indef, self.formatted_name)
+                .format(name, self.indef, formatted_name)
         else:
             text = 'FIXME: Encountered an unknown attribute type {0} in ' \
                    'ValidationRulesForClass'\
@@ -229,7 +260,7 @@ class ValidationRulesForClass():
 #                global_variables.return_codes['unknown type used']
 
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+            .format(self.pkg_ref, strFunctions.wrap_section(refname))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
@@ -265,8 +296,9 @@ class ValidationRulesForClass():
                 .format(strFunctions.get_element_name(lo_child),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
+            sec_name = 'listof' + lo_name.lower()
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+                .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
@@ -301,8 +333,9 @@ class ValidationRulesForClass():
                    'permitted on all SBML objects, a {0} container object ' \
                    'may only contain \{1} objects.'\
                 .format(loname, lo_child['element'])
+            sec_name = 'listof' + lo_name.lower()
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+                .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
             sev = 'ERROR'
             lib_sev = 'LIBSBML_SEV_ERROR'
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
@@ -379,6 +412,52 @@ class ValidationRulesForClass():
 
     # functions for listOf child elements
     # might not be lo elements
+    def write_lochild_attribute_rule(self, child, lo_info):
+        child_class = query.get_class(child['element'], child['root'])
+        if len(child_class['lo_attribs']) == 0:
+            return
+        attributes = []
+        formatted_name = '\\' + child_class['lo_class_name']
+        name = child_class['lo_class_name']
+        child_reqd = []
+        child_opt = []
+        for attrib in child_class['lo_attribs']:
+            attributes.append(attrib)
+            if attrib['reqd']:
+                child_reqd.append(attrib)
+            else:
+                child_opt.append(attrib)
+        lo_info.append(dict({'formatted_name': formatted_name, 'name': name,
+                        'attributes': attributes}))
+
+        reqd = self.parse_required(self, child_reqd)
+        opt = self.parse_optional(self, child_opt)
+        no_other_statement = 'No other attributes from the SBML Level 3 {0} ' \
+                             'namespaces are permitted on {1} {2} object. '\
+            .format(self.fullname, self.indef, formatted_name)
+        if len(opt) == 0 and len(reqd) > 0:
+            text = '{0} {1} object must have {2}. {3}'\
+                .format(self.indef_u, formatted_name,
+                        reqd, no_other_statement)
+        elif len(reqd) == 0 and len(opt) > 0:
+            text = '{0} {1} object may have {2}. {3}'\
+                .format(self.indef_u, formatted_name,
+                        opt, no_other_statement)
+        else:
+            text = '{0} {1} object must have {2}, and may have {3}. {4}'\
+                .format(self.indef_u, formatted_name,
+                        reqd, opt, no_other_statement)
+        ref = '{0}, {1}.'\
+            .format(self.pkg_ref, strFunctions.wrap_section(name))
+        sev = 'ERROR'
+        lib_sev = 'LIBSBML_SEV_ERROR'
+        short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}LO{1}AllowedAttributes'.format(self.up_package, name)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
         unusual_min = False

@@ -65,17 +65,17 @@ in the \SIDReferencesPackage namespace.
 
 \validRule{refs-10101}{To conform to the \SIDReferencesPackage
 specification for SBML Level~3 Version~1, an SBML document must declare
-the use of the following XML Namespace:
-\uri{http://www.sbml.org/sbml/level3/version1/refs/version1}.
-(Reference: SBML Level~3 Package specification for SID References,
-Version~1 \sec{xml-namespace}.)}
+\uri{http://www.sbml.org/sbml/level3/version1/refs/version1} as the
+XMLNamespaceto use for elements of this package. (Reference: SBML
+Level~3 Package specification for SID References, Version~1
+\sec{xml-namespace}.)}
 
 \validRule{refs-10102}{Wherever they appear in an SBML document,
-elements and attributes from the \SIDReferencesPackage must be declared
-either implicitly or explicitly to be in the XML namespace
-\uri{http://www.sbml.org/sbml/level3/version1/refs/version1}.
-(Reference: SBML Level~3 Package specification for SID References,
-Version~1 \sec{xml-namespace}.)}
+elements and attributes from the \SIDReferencesPackage must use the
+\uri{http://www.sbml.org/sbml/level3/version1/refs/version1} namespace,
+declaring so either explicitly or implicitly. (Reference: SBML Level~3
+Package specification for SID References, Version~1
+\sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
@@ -121,7 +121,7 @@ is optional, but if present, this container object must not be empty.
 \sec{model-class}.)}
 
 \validRule{refs-20203}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfThingCs container
+subobjects permitted on all SBML objects, a \ListOfThingCs container
 object may only contain \ThingC objects. (Reference: SBML Level~3
 Package specification for SID References, Version~1,
 \sec{model-class}.)}

@@ -65,17 +65,17 @@ in the \QualitativeModelsPackage namespace.
 
 \validRule{qual-10101}{To conform to the \QualitativeModelsPackage
 specification for SBML Level~3 Version~1, an SBML document must declare
-the use of the following XML Namespace:
-\uri{http://www.sbml.org/sbml/level3/version1/qual/version1}.
-(Reference: SBML Level~3 Package specification for Qualitative Models,
-Version~1 \sec{xml-namespace}.)}
+\uri{http://www.sbml.org/sbml/level3/version1/qual/version1} as the
+XMLNamespaceto use for elements of this package. (Reference: SBML
+Level~3 Package specification for Qualitative Models, Version~1
+\sec{xml-namespace}.)}
 
 \validRule{qual-10102}{Wherever they appear in an SBML document,
-elements and attributes from the \QualitativeModelsPackage must be
-declared either implicitly or explicitly to be in the XML namespace
-\uri{http://www.sbml.org/sbml/level3/version1/qual/version1}.
-(Reference: SBML Level~3 Package specification for Qualitative Models,
-Version~1 \sec{xml-namespace}.)}
+elements and attributes from the \QualitativeModelsPackage must use the
+\uri{http://www.sbml.org/sbml/level3/version1/qual/version1} namespace,
+declaring so either explicitly or implicitly. (Reference: SBML Level~3
+Package specification for Qualitative Models, Version~1
+\sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
@@ -123,13 +123,13 @@ Level~3 Specification for Qualitative Models Version~1,
 \sec{model-class}.)}
 
 \validRule{qual-20203}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfQualitativeSpecies
+subobjects permitted on all SBML objects, a \ListOfQualitativeSpecies
 container object may only contain \QualitativeSpecies objects.
 (Reference: SBML Level~3 Package specification for Qualitative Models,
 Version~1, \sec{model-class}.)}
 
 \validRule{qual-20204}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfTransitions container
+subobjects permitted on all SBML objects, a \ListOfTransitions container
 object may only contain \Transition objects. (Reference: SBML Level~3
 Package specification for Qualitative Models, Version~1,
 \sec{model-class}.)}
@@ -240,13 +240,13 @@ specification for Qualitative Models, Version~1,
 subobjects permitted on all SBML objects, a \ListOfInputs container
 object may only contain \Input objects. (Reference: SBML Level~3 Package
 specification for Qualitative Models, Version~1,
-\sec{transition-class}.)}
+\sec{listofinputs-class}.)}
 
 \validRule{qual-20408}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfOutputs container
 object may only contain \Output objects. (Reference: SBML Level~3
 Package specification for Qualitative Models, Version~1,
-\sec{transition-class}.)}
+\sec{listofoutputs-class}.)}
 
 \validRule{qual-20409}{The \ListOfFunctionTerms subobject on a
 \Transition object must not be empty. (Reference: SBML Level~3 Package
@@ -257,26 +257,26 @@ specification for Qualitative Models, Version~1,
 subobjects permitted on all SBML objects, a \ListOfFunctionTerms
 container object may only contain \FunctionTerm objects. (Reference:
 SBML Level~3 Package specification for Qualitative Models, Version~1,
-\sec{transition-class}.)}
+\sec{listoffunctionterms-class}.)}
 
 \validRule{qual-20411}{A \ListOfInputs object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on a
 \ListOfInputs object. (Reference: SBML Level~3 Package specification for
-Qualitative Models, Version~1, \sec{transition-class}.)}
+Qualitative Models, Version~1, \sec{listofinputs-class}.)}
 
 \validRule{qual-20412}{A \ListOfOutputs object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
 other attributes from the SBML Level 3 Core namespaces are permitted on
 a \ListOfOutputs object. (Reference: SBML Level~3 Package specification
-for Qualitative Models, Version~1, \sec{transition-class}.)}
+for Qualitative Models, Version~1, \sec{listofoutputs-class}.)}
 
 \validRule{qual-20413}{A \ListOfFunctionTerms object may have the
 optional SBML Level~3 Core attributes \token{metaid} and
 \token{sboTerm}. No other attributes from the SBML Level 3 Core
 namespaces are permitted on a \ListOfFunctionTerms object. (Reference:
 SBML Level~3 Package specification for Qualitative Models, Version~1,
-\sec{transition-class}.)}
+\sec{listoffunctionterms-class}.)}
 
 
 \subsubsection*{Rules for \class{Input} object}

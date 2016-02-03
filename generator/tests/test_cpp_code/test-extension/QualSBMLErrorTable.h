@@ -63,8 +63,9 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "To conform to the Qualitative Models Package specification for SBML "
-    "Level~3 Version~1, an SBML document must declare the use of the following "
-    "XML Namespace: 'http://www.sbml.org/sbml/level3/version1/qual/version1'.",
+    "Level~3 Version~1, an SBML document must declare "
+    "'http://www.sbml.org/sbml/level3/version1/qual/version1' as the "
+    "XMLNamespaceto use for elements of this package.",
     { "L3V1 Qual V1 Section 3.1"
     }
   },
@@ -75,9 +76,9 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
-    "Qualitative Models Package must be declared either implicitly or "
-    "explicitly to be in the XML namespace "
-    "'http://www.sbml.org/sbml/level3/version1/qual/version1'.",
+    "Qualitative Models Package must use the "
+    "'http://www.sbml.org/sbml/level3/version1/qual/version1' namespace, "
+    "declaring so either explicitly or implicitly.",
     { "L3V1 Qual V1 Section 3.1"
     }
   },
@@ -168,8 +169,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfQualitativeSpecies container object may only contain "
-    "<qualitativeSpecies> objects.",
+    "SBML objects, a <listOfQualitativeSpecies> container object may only "
+    "contain <qualitativeSpecies> objects.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -180,7 +181,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a ListOfTransitions container object may only contain "
+    "SBML objects, a <listOfTransitions> container object may only contain "
     "<transition> objects.",
     { "L3V1 Qual V1 Section"
     }

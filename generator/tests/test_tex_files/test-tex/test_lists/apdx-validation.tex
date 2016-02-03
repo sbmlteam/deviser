@@ -62,18 +62,16 @@ explanation everywhere we refer to an attribute or element in the
 \subsubsection*{General rules about this package}
 
 \validRule{foo-10101}{To conform to the \FooPackage specification for
-SBML Level~3 Version~1, an SBML document must declare the use of the
-following XML Namespace:
-\uri{http://www.sbml.org/sbml/level3/version1/foo/version1}. (Reference:
-SBML Level~3 Package specification for Foo, Version~1
-\sec{xml-namespace}.)}
+SBML Level~3 Version~1, an SBML document must declare
+\uri{http://www.sbml.org/sbml/level3/version1/foo/version1} as the
+XMLNamespaceto use for elements of this package. (Reference: SBML
+Level~3 Package specification for Foo, Version~1 \sec{xml-namespace}.)}
 
 \validRule{foo-10102}{Wherever they appear in an SBML document, elements
-and attributes from the \FooPackage must be declared either implicitly
-or explicitly to be in the XML namespace
-\uri{http://www.sbml.org/sbml/level3/version1/foo/version1}. (Reference:
-SBML Level~3 Package specification for Foo, Version~1
-\sec{xml-namespace}.)}
+and attributes from the \FooPackage must use the
+\uri{http://www.sbml.org/sbml/level3/version1/foo/version1} namespace,
+declaring so either explicitly or implicitly. (Reference: SBML Level~3
+Package specification for Foo, Version~1 \sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
@@ -118,7 +116,7 @@ optional, but if present, this container object must not be empty.The
 \sec{model-class}.)}
 
 \validRule{foo-20203}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfApples container
+subobjects permitted on all SBML objects, a \ListOfApples container
 object may only contain \Apple objects. (Reference: SBML Level~3 Package
 specification for Foo, Version~1, \sec{model-class}.)}
 
@@ -138,8 +136,8 @@ Level 3 Foo namespaces are permitted on a \Compartment object.
 \sec{compartment-class}.)}
 
 \validRule{foo-20302}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfPears container object
-may only contain \Pear objects. (Reference: SBML Level~3 Package
+subobjects permitted on all SBML objects, a \ListOfPears container
+object may only contain \Pear objects. (Reference: SBML Level~3 Package
 specification for Foo, Version~1, \sec{compartment-class}.)}
 
 \validRule{foo-20303}{A \ListOfPears object may have the optional SBML
@@ -163,7 +161,7 @@ is optional, but if present, this container object must not be empty.
 \sec{species-class}.)}
 
 \validRule{foo-20403}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a ListOfBananas container
+subobjects permitted on all SBML objects, a \ListOfBananas container
 object may only contain \Banana objects. (Reference: SBML Level~3
 Package specification for Foo, Version~1, \sec{species-class}.)}
 
@@ -220,13 +218,13 @@ Level~3 Package specification for Foo, Version~1, \sec{bowl-class}.)}
 \validRule{foo-20704}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfPears container
 object may only contain \Pear objects. (Reference: SBML Level~3 Package
-specification for Foo, Version~1, \sec{bowl-class}.)}
+specification for Foo, Version~1, \sec{listofpears-class}.)}
 
 \validRule{foo-20705}{A \ListOfPears object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on a
 \ListOfPears object. (Reference: SBML Level~3 Package specification for
-Foo, Version~1, \sec{bowl-class}.)}
+Foo, Version~1, \sec{listofpears-class}.)}
 
 
 \subsubsection*{Rules for \class{Plate} object}
@@ -257,7 +255,7 @@ optional, but if present, this container object must not be empty.The
 \validRule{foo-20805}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfApples container
 object may only contain \Apple objects. (Reference: SBML Level~3 Package
-specification for Foo, Version~1, \sec{plate-class}.)}
+specification for Foo, Version~1, \sec{listofapples-class}.)}
 
 \validRule{foo-20806}{The \ListOfBananas subobject on a \Plate object
 must not be empty. (Reference: SBML Level~3 Package specification for
@@ -266,19 +264,19 @@ Foo, Version~1, \sec{plate-class}.)}
 \validRule{foo-20807}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfBananas container
 object may only contain \Banana objects. (Reference: SBML Level~3
-Package specification for Foo, Version~1, \sec{plate-class}.)}
+Package specification for Foo, Version~1, \sec{listofbananas-class}.)}
 
 \validRule{foo-20808}{A \ListOfApples object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on a
 \ListOfApples object. (Reference: SBML Level~3 Package specification for
-Foo, Version~1, \sec{plate-class}.)}
+Foo, Version~1, \sec{listofapples-class}.)}
 
 \validRule{foo-20809}{A \ListOfBananas object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
 attributes from the SBML Level 3 Core namespaces are permitted on a
 \ListOfBananas object. (Reference: SBML Level~3 Package specification
-for Foo, Version~1, \sec{plate-class}.)}
+for Foo, Version~1, \sec{listofbananas-class}.)}
 
 
 \subsubsection*{Rules for \class{Banana} object}
