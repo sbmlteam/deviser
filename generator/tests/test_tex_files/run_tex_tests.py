@@ -17,31 +17,40 @@ not_tested = []
 # Specific generation functions
 
 
-def generate_validator(filename):
+def generate_validator(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
+    if not os.path.isdir(name):
+        os.mkdir(name)
+    os.chdir(name)
     all_files = TexValidationRulesFile.TexValidationRulesFile(ob)
     all_files.write_file()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 
-def generate_macros(filename):
+def generate_macros(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
+    if not os.path.isdir(name):
+        os.mkdir(name)
+    os.chdir(name)
     all_files = TexMacrosFile.TexMacrosFile(ob)
     all_files.write_file()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 
-def generate_body(filename):
+def generate_body(filename, name):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
+    if not os.path.isdir(name):
+        os.mkdir(name)
+    os.chdir(name)
     all_files = TexBodySyntaxFile.TexBodySyntaxFile(ob)
     all_files.write_file()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 
 #############################################################################
@@ -54,19 +63,19 @@ def compare_files(correct_file, temp_file):
 
 def compare_validation(name):
     correct_file = '.\\test-tex\\{0}\\apdx-validation.tex'.format(name)
-    temp_file = '.\\temp\\apdx-validation.tex'.format(name)
+    temp_file = '.\\temp\\{0}\\apdx-validation.tex'.format(name)
     return compare_files(correct_file, temp_file)
 
 
 def compare_macros(name):
     correct_file = '.\\test-tex\\{0}\\macros.tex'.format(name)
-    temp_file = '.\\temp\\macros.tex'.format(name)
+    temp_file = '.\\temp\\{0}\\macros.tex'.format(name)
     return compare_files(correct_file, temp_file)
 
 
 def compare_body(name):
     correct_file = '.\\test-tex\\{0}\\body.tex'.format(name)
-    temp_file = '.\\temp\\body.tex'.format(name)
+    temp_file = '.\\temp\\{0}\\body.tex'.format(name)
     return compare_files(correct_file, temp_file)
 
 
@@ -78,13 +87,13 @@ def run_test(name, test_type):
     filename = test_functions.set_up_test(name, 'Tex', test_type)
     fail = 0
     if test_type == 'validation':
-        generate_validator(filename)
+        generate_validator(filename, name)
         fail = compare_validation(name)
     elif test_type == 'macros':
-        generate_macros(filename)
+        generate_macros(filename, name)
         fail = compare_macros(name)
     elif test_type == 'body':
-        generate_body(filename)
+        generate_body(filename, name)
         fail = compare_body(name)
     print('')
     return fail
@@ -118,30 +127,30 @@ def main():
     test_case = 'validation'
     fail += run_test(name, test_case)
 
-    # name = 'groups'
-    # test_case = 'body'
-    # fail += run_test(name, test_case)
-    #
-    # name = 'unknown_type'
-    # test_case = 'validation'
-    # fail += run_test(name, test_case)
-    #
-    # name = 'test_sidrefs'
-    # test_case = 'validation'
-    # fail += run_test(name, test_case)
-    #
-    # name = 'test_sidrefs'
-    # test_case = 'body'
-    # fail += run_test(name, test_case)
-    #
-    # name = 'test_lists'
-    # test_case = 'validation'
-    # fail += run_test(name, test_case)
-    #
-    # name = 'test_lists'
-    # test_case = 'body'
-    # fail += run_test(name, test_case)
-    #
+    name = 'groups'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
+    name = 'unknown_type'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'test_sidrefs'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'test_sidrefs'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
+    name = 'test_lists'
+    test_case = 'validation'
+    fail += run_test(name, test_case)
+
+    name = 'test_lists'
+    test_case = 'body'
+    fail += run_test(name, test_case)
+
     # write summary
     test_functions.report('TEX', fail, fails, not_tested)
     return fail
