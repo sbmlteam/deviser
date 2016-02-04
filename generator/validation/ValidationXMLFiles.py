@@ -120,17 +120,17 @@ class ValidationXMLFiles():
             self.class_rules += rules.rules
             number += 100
         # number = self.offset + 20300 ##############################################################################
-        # for i in range(0, len(self.sbml_classes)):
-        #     # hack for render
-        #     if self.sbml_classes[i]['name'] == 'RelAbsVector':
-        #         continue
-        #     rules = ValidationRulesForClass\
-        #         .ValidationRulesForClass(self.sbml_classes[i],
-        #                                  self.fullname, number, self.package,
-        #                                  self.pkg_ref)
-        #     rules.determine_rules()
-        #     self.class_rules += rules.rules
-        #     number += 100
+        for i in range(0, len(self.sbml_classes)):
+            # hack for render
+            if self.sbml_classes[i]['name'] == 'RelAbsVector':
+                continue
+            rules = ValidationRulesForClass\
+                .ValidationRulesForClass(self.sbml_classes[i],
+                                         self.fullname, number, self.package,
+                                         self.pkg_ref)
+            rules.determine_rules()
+            self.class_rules += rules.rules
+            number += 100
 
     def write_appropriate_test_cases(self, rule):
         [tests, passes] = self.get_tests(rule)
@@ -195,7 +195,7 @@ class ValidationXMLFiles():
                     name = element['listOfClassName']
                 else:
                     name = element['name']
-                test_needed.append(dict({'name': 'add_element',
+                test_needed.append(dict({'name': 'duplicate_element',
                                          'object': rule['object'],
                                          'child': name}))
             for element in rule['reqd']:
@@ -371,43 +371,42 @@ class ValidationXMLFiles():
     def create_appropriate_tree(self, test, plugin=False):
         subtree = []
         if test['name'] == 'empty_lo':
-            subtree = self.remove_element(test['object'], test['lo_child'], plugin)
-        elif test['name'] == 'add_element':
+            subtree = self.remove_element(test['object'], test['lo_child'])
+        elif test['name'] == 'duplicate_element':
             subtree = self.duplicate_element(test['object'], test['child'], plugin)
+#            subtree = self.add_element(test['object'], test['object'], test['child'], self.package)
         elif test['name'] == 'add_pkg_element':
             elem = 'model' if 'type' not in test else test['type']
-            subtree = self.add_element(test['object'], test['child'], elem, self.package, plugin)
+            subtree = self.add_element(test['object'], test['child'], elem, self.package)
         elif test['name'] == 'add_core_element':
             elem = 'model' if 'type' not in test else test['type']
-            subtree = self.add_element(test['object'], test['child'], elem, 'core', plugin)
+            subtree = self.add_element(test['object'], test['child'], elem, 'core')
         elif test['name'] == 'add_core_attribute':
             attrib = 'foo' if 'type' not in test else test['type']
-            subtree = self.add_attrib(test['object'], test['child'], attrib, 'core', plugin)
+            subtree = self.add_attrib(test['object'], test['child'], attrib, 'core')
         elif test['name'] == 'add_pkg_attribute':
             attrib = 'foo' if 'type' not in test else test['type']
-            subtree = self.add_attrib(test['object'], test['child'], attrib, self.package, plugin)
+            subtree = self.add_attrib(test['object'], test['child'], attrib, self.package)
         elif test['name'] == 'remove_attribute':
-            subtree = self.remove_attrib(test['object'], test['child'], test['attrib'], self.package, plugin)
+            subtree = self.remove_attrib(test['object'], test['child'], test['attrib'])
         elif test['name'] == 'remove_empty':
-            subtree = self.remove_element(test['object'], test['child'], plugin)
+            subtree = self.remove_element(test['object'], test['child'])
         return subtree
 
-    def remove_element(self, parent, child, plugin):
+    def remove_element(self, parent, child):
         subtree = copy.deepcopy(self.tree)
-        if plugin:
-            match = self.match_child_from_plugin(subtree, child, parent)
+        match = self.match_child(subtree, parent, child)
+        if match:
             match['children'] = []
-        else:
-            for plug_obj in subtree:
-                match = self.match_child(plug_obj, child)
-                if match:
-                    match['children'] = []
-                    break
         return subtree
 
     def duplicate_element(self, parent, child, plugin):
         # sort for nesting
         subtree = copy.deepcopy(self.tree)
+        match = self.match_child(subtree, parent, child)
+        match_parent = self.match_parent(subtree, parent, child)
+#        if match and match_parent:
+#            match_parent['children'].append(match)
         if plugin:
             for i in range(0, len(subtree)):
                 if subtree[i]['base'] == parent:
@@ -418,48 +417,27 @@ class ValidationXMLFiles():
 
         return subtree
 
-    def add_element(self, parent, child, new_obj, ext, plugin):
+    def add_element(self, parent, child, new_obj, ext):
         subtree = copy.deepcopy(self.tree)
-        if plugin:
-            match = self.match_child_from_plugin(subtree, child, parent)
-            if match:
-                match['children'].append(self.make_object(new_obj, ext))
-        else:
-            for plug_obj in subtree:
-                match = self.match_child(plug_obj, child)
-                if match:
-                    match['children'].append(self.make_object(new_obj, ext))
-                    break
+        match = self.match_child(subtree, parent, child)
+        if match:
+            match['children'].append(self.make_object(new_obj, ext))
         return subtree
 
-    def add_attrib(self, parent, child, new_obj, ext, plugin):
+    def add_attrib(self, parent, child, new_obj, ext):
         subtree = copy.deepcopy(self.tree)
-        if plugin:
-            match = self.match_child_from_plugin(subtree, child, parent)
-            if match:
-                match['attribs'].append(self.make_attrib(new_obj, ext))
-        else:
-            for plug_obj in subtree:
-                match = self.match_child(plug_obj, child)
-                if match:
-                    match['attribs'].append(self.make_attrib(new_obj, ext))
-                    break
+        match = self.match_child(subtree, parent, child)
+        if match:
+            match['attribs'].append(self.make_attrib(new_obj, ext))
         return subtree
 
-    def remove_attrib(self, parent, child, att, ext, plugin):
+    def remove_attrib(self, parent, child, att):
         subtree = copy.deepcopy(self.tree)
-        if plugin:
-            match = self.match_child_from_plugin(subtree, child, parent)
-            if match:
-                match['attribs'].append(self.make_attrib(att, ext))
-        else:
-            for plug_obj in subtree:
-                match = self.match_child(plug_obj, child)
-                if match:
-                    for attrib in match['attribs']:
-                        if attrib['name'] == att:
-                            match['attribs'].remove(attrib)
-                            break
+        match = self.match_child(subtree, parent, child)
+        if match:
+            for attrib in match['attribs']:
+                if attrib['name'] == att:
+                    match['attribs'].remove(attrib)
                     break
         return subtree
 
@@ -472,21 +450,41 @@ class ValidationXMLFiles():
             att_type = 'SBO'
         return dict({'xml_name': new_obj, 'ext': ext, 'type': att_type})
 
-    def match_child(self, parent, child):
+    def find_match(self, tree, child):
         match = None
-        if 'name' in parent and parent['name'] == child:
-            return parent
-        for i in range(0, len(parent['children'])):
-            match = self.match_child(parent['children'][i], child)
+        if 'name' in tree and tree['name'] == child:
+            return tree
+        for i in range(0, len(tree['children'])):
+            match = self.find_match(tree['children'][i], child)
             if match:
                 return match
         return match
 
-    def match_child_from_plugin(self, parent, child, parent_name):
+    def find_match_from_plugin(self, tree, parent, child):
         match = None
-        for i in range(0, len(parent)):
-            if parent[i]['base'] == parent_name:
+        for i in range(0, len(tree)):
+            if tree[i]['base'] == parent:
                 break
-        match = self.match_child(parent[i], child)
+        match = self.find_match(tree[i], child)
+        return match
+
+    def match_child(self, tree, parent, child):
+        match = None
+        if not tree:
+            return match
+        if 'base' in tree[0]:
+            match = self.find_match_from_plugin(tree, parent, child)
+        else:
+            match = self.find_match(tree, child)
+        return match
+
+    def match_parent(self, tree, parent, child):
+        match = None
+        if not tree:
+            return match
+        if 'base' in tree[0]:
+            match = self.find_match_from_plugin(tree, child, parent)
+        else:
+            match = self.find_match(tree, child)
         return match
 
