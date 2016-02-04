@@ -183,9 +183,11 @@ class ValidationRulesForClass():
         if lo:
             formatted_name = lo['formatted_name']
             refname = lo['name']
+            abbrev = strFunctions.abbrev_lo_name(refname)
         else:
             formatted_name = self.formatted_name
             refname = self.name
+            abbrev = self.name
         att_type = attribute['type']
         att_name = strFunctions.upper_first(attribute['name'])
         name = strFunctions.wrap_token(attribute['texname'], self.package)
@@ -265,11 +267,13 @@ class ValidationRulesForClass():
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, self.name, att_name,
+        tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, abbrev, att_name,
                                          rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'object': refname, 'attrib': att_name,
+                     'attrib_type': att_type})
 
     @staticmethod
     # write core attribute rule

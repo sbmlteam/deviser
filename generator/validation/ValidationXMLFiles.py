@@ -145,7 +145,7 @@ class ValidationXMLFiles():
         for i in range(0, len(passes)):
             filename = '{0}-pass-00-{1}'.format(rule['number'],
                                                 self.get_number(number))
-            subtree = self.create_appropriate_tree(passes[i], rule['plugin'])
+            subtree = self.create_appropriate_tree(passes[i])
             self.write_specific_file(filename, subtree)
             number += 1
 
@@ -154,10 +154,7 @@ class ValidationXMLFiles():
         for i in range(0, len(tests)):
             filename = '{0}-fail-01-{1}'.format(rule['number'],
                                                 self.get_number(number))
-            if 'plugin' in rule:
-                subtree = self.create_appropriate_tree(tests[i], rule['plugin'])
-            else:
-                subtree = self.create_appropriate_tree(tests[i])
+            subtree = self.create_appropriate_tree(tests[i])
 
             if self.is_toplevel_fail(tests[i]['name']):
                 self.write_toplevel_fail_file(filename, tests[i]['name'])
@@ -326,6 +323,15 @@ class ValidationXMLFiles():
                                              'object': rule['object'],
                                              'child': rule['object'],
                                              'attrib': name}))
+        elif self.is_attribute_type_rule(tc):
+            test_needed.append(dict({'name': 'replace_attribute',
+                                     'object': rule['object'],
+                                     'child': rule['object'],
+                                     'attrib': strFunctions.lower_first(rule['attrib']),
+                                     'att_type': rule['attrib_type']}))
+        else:
+            print(tc)
+
         return [test_needed, passes]
 
 
@@ -350,6 +356,13 @@ class ValidationXMLFiles():
             return False
 
     @staticmethod
+    def is_attribute_type_rule(code):
+        if 'MustBe' in code:
+            return True
+        else:
+            return False
+
+    @staticmethod
     def is_lo_rule(rule):
         is_lo = False
         if 'lo' in rule:
@@ -368,13 +381,12 @@ class ValidationXMLFiles():
 
     # functions that manipulate the tree
 
-    def create_appropriate_tree(self, test, plugin=False):
+    def create_appropriate_tree(self, test):
         subtree = []
         if test['name'] == 'empty_lo':
             subtree = self.remove_element(test['object'], test['lo_child'])
         elif test['name'] == 'duplicate_element':
-            subtree = self.duplicate_element(test['object'], test['child'], plugin)
-#            subtree = self.add_element(test['object'], test['object'], test['child'], self.package)
+            subtree = self.duplicate_element(test['object'], test['child'])
         elif test['name'] == 'add_pkg_element':
             elem = 'model' if 'type' not in test else test['type']
             subtree = self.add_element(test['object'], test['child'], elem, self.package)
@@ -391,6 +403,8 @@ class ValidationXMLFiles():
             subtree = self.remove_attrib(test['object'], test['child'], test['attrib'])
         elif test['name'] == 'remove_empty':
             subtree = self.remove_element(test['object'], test['child'])
+        elif test['name'] == 'replace_attribute':
+            subtree = self.replace_attribute_type(test['object'], test['child'], test['attrib'], test['att_type'])
         return subtree
 
     def remove_element(self, parent, child):
@@ -400,21 +414,13 @@ class ValidationXMLFiles():
             match['children'] = []
         return subtree
 
-    def duplicate_element(self, parent, child, plugin):
+    def duplicate_element(self, parent, child):
         # sort for nesting
         subtree = copy.deepcopy(self.tree)
         match = self.match_child(subtree, parent, child)
-        match_parent = self.match_parent(subtree, parent, child)
-#        if match and match_parent:
-#            match_parent['children'].append(match)
-        if plugin:
-            for i in range(0, len(subtree)):
-                if subtree[i]['base'] == parent:
-                    break
-            for j in range(0, len(subtree[i]['children'])):
-                if subtree[i]['children'][j]['name'] == child:
-                    subtree[i]['children'].append(subtree[i]['children'][j])
-
+        match_parent = self.match_child(subtree, parent, parent)
+        if match and match_parent:
+            match_parent['children'].append(match)
         return subtree
 
     def add_element(self, parent, child, new_obj, ext):
@@ -441,6 +447,24 @@ class ValidationXMLFiles():
                     break
         return subtree
 
+    def replace_attribute_type(self, parent, child, att, att_type):
+        subtree = copy.deepcopy(self.tree)
+        match = self.match_child(subtree, parent, child)
+        if match:
+            for attrib in match['attribs']:
+                if attrib['name'] == att:
+                    attrib['type'] = self.get_differing_type(att_type)
+                    break
+        return subtree
+
+    def get_differing_type(self, att_type):
+        string_types = ['enum', 'IDREF', 'ID', 'SId', 'SIdRef'
+                          'UnitSId', 'UnitSIdRef', 'string']
+        if att_type in string_types:
+            return 'double'
+        else:
+            return 'string'
+
     def make_object(self, new_obj, ext):
         return dict({'name': new_obj, 'ext': ext, 'children': [], 'attribs': []})
 
@@ -465,7 +489,10 @@ class ValidationXMLFiles():
         for i in range(0, len(tree)):
             if tree[i]['base'] == parent:
                 break
-        match = self.find_match(tree[i], child)
+        if tree[i]['base'] == child:
+            match = tree[i]
+        else:
+            match = self.find_match(tree[i], child)
         return match
 
     def match_child(self, tree, parent, child):
@@ -483,8 +510,8 @@ class ValidationXMLFiles():
         if not tree:
             return match
         if 'base' in tree[0]:
-            match = self.find_match_from_plugin(tree, child, parent)
+            match = self.find_match_from_plugin(tree, parent, parent)
         else:
-            match = self.find_match(tree, child)
+            match = self.find_match(tree, parent)
         return match
 
