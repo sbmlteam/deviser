@@ -23,9 +23,12 @@ def generate_example(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
+    if not os.path.exists(ob['name']):
+        os.mkdir(ob['name'])
+    os.chdir('./{0}'.format(ob['name']))
     all_files = CppExampleFile.CppExampleFile(ob)
     all_files.write_file()
-    os.chdir('../.')
+    os.chdir('../../.')
     return ob['name']
 
 
@@ -33,9 +36,12 @@ def generate_xml(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
+    if not os.path.exists(ob['name']):
+        os.mkdir(ob['name'])
+    os.chdir('./{0}'.format(ob['name']))
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
     all_files.write_file('test_xml')
-    os.chdir('../.')
+    os.chdir('../../.')
     return ob['name']
 
 
@@ -60,20 +66,20 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 def compare_examples(pkg):
-    correct_file = '.\\test-examples\\{0}_example1.cpp'.format(pkg)
-    temp_file = '.\\temp\\{0}_example1.cpp'.format(pkg)
+    correct_file = '.\\test-examples\\{0}\\{0}_example1.cpp'.format(pkg)
+    temp_file = '.\\temp\\{0}\\{0}_example1.cpp'.format(pkg)
     return compare_files(correct_file, temp_file)
 
 def compare_xml(pkg):
     correct_file = '.\\test-examples\\{0}\\test_xml.xml'.format(pkg)
-    temp_file = '.\\temp\\test_xml.xml'
+    temp_file = '.\\temp\\{0}\\test_xml.xml'.format(pkg)
     return compare_files(correct_file, temp_file)
 
 
 def compare_xml_fails(pkg):
     fail = 0
     correct_file_dir = '.\\test-examples\\{0}'.format(pkg)
-    temp_file_dir = '.\\temp\{0}'.format(pkg)
+    temp_file_dir = '.\\temp\\{0}'.format(pkg)
     for f in os.listdir(temp_file_dir):
         if f.endswith('xml'):
             correct_file = '{0}\\{1}'.format(correct_file_dir, f)
