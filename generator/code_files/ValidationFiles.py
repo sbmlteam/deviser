@@ -75,7 +75,11 @@ class ValidationFiles():
 
         self.error_file = None
         self.class_rules = []
-        self.create_rule_structure()
+        if len(global_variables.error_list) == 0:
+            self.create_rule_structure()
+            global_variables.class_rules = self.class_rules
+        else:
+            self.class_rules = global_variables.class_rules
 
         self.open_br = '{'
         self.close_br = '}'
@@ -122,7 +126,8 @@ class ValidationFiles():
         if len(global_variables.error_list) > 0:
             return
         for rule in self.class_rules:
-            global_variables.error_list.append(rule['typecode'])
+            if rule['typecode'] not in global_variables.error_list:
+                global_variables.error_list.append(rule['typecode'])
 
     ##########################################################################
 
@@ -234,8 +239,11 @@ class ValidationFiles():
                                    '{0}ErrorTable[] '
                                    '='.format(self.package.lower()))
         self.error_file.write_line('{')
+        done = []
         for rule in self.class_rules:
-            self.write_table_entry(rule)
+            if rule['typecode'] not in done:
+                self.write_table_entry(rule)
+                done.append(rule['typecode'])
         self.error_file.write_line('};')
         self.error_file.write_doxygen_end()
         self.error_file.write_cppns_end()
@@ -498,9 +506,12 @@ class ValidationFiles():
         self.error_file.write_line('typedef enum')
         self.error_file.write_line('{')
         first = True
+        done = []
         for rule in self.class_rules:
-            self.write_rule(rule['typecode'], rule['number'], first)
-            first = False
+            if rule['typecode'] not in done:
+                self.write_rule(rule['typecode'], rule['number'], first)
+                first = False
+                done.append(rule['typecode'])
         self.error_file.file_out.write('} ')
         self.error_file.file_out.write('{0}{1}'
                                        'ErrorCode_t'

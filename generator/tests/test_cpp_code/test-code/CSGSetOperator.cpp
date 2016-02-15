@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2015 jointly by the following organizations:
+ * Copyright (C) 2013-2016 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -1055,8 +1055,9 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementA) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute complementA='" +
-        mComplementA + "' does not conform to the syntax.");
+      logError(SpatialCSGSetOperatorComplementAMustBeSId, level, version, "The "
+        "attribute complementA='" + mComplementA + "' does not conform to the "
+          "syntax.");
     }
   }
 
@@ -1074,8 +1075,9 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementB) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute complementB='" +
-        mComplementB + "' does not conform to the syntax.");
+      logError(SpatialCSGSetOperatorComplementBMustBeSId, level, version, "The "
+        "attribute complementB='" + mComplementB + "' does not conform to the "
+          "syntax.");
     }
   }
 }

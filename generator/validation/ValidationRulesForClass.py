@@ -475,7 +475,7 @@ class ValidationRulesForClass():
         lib_sev = 'LIBSBML_SEV_ERROR'
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = '{0}LO{1}AllowedAttributes'.format(self.up_package, name)
+        tc = '{0}LO{1}AllowedAttributes'.format(self.up_package, strFunctions.plural(name))
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,

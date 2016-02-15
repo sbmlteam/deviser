@@ -422,6 +422,13 @@ def main():
     test_case = 'validator'
     fail += run_valid_test(name, class_name, test_case, False)
 
+    name = 'groups'
+    num = 1
+    class_name = 'Member'
+    list_of = 'ListOfMembers'
+    test_case = 'list of with attribute'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     name = 'test_vers'
     num = 0
     class_name = 'ClassOne'

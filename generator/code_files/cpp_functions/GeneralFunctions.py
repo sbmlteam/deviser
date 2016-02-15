@@ -101,6 +101,11 @@ class GeneralFunctions():
         self.num_children = class_object['num_children']
         self.std_base = class_object['std_base']
 
+        self.required = 'false'
+        if 'is_doc_plugin' in class_object:
+            if class_object['reqd']:
+                self.required = 'true'
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -1077,11 +1082,7 @@ class GeneralFunctions():
         # sort error names to be used
         error = '{0}AttributeRequiredMustBeBoolean'.format(self.package)
         req_error = '{0}AttributeRequiredMissing'.format(self.package)
-        if not global_variables.running_tests:
-            if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
-            if req_error not in global_variables.error_list:
-                req_error = '{0}Unknown'.format(self.package)
+        value_error = '{0}AttributeRequiredMustHaveValue'.format(self.package)
         # create comment parts
         title_line = 'Reads the {0} attributes in the top-level ' \
                      'element.'.format(self.package)
@@ -1120,11 +1121,18 @@ class GeneralFunctions():
                           'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
                           'getVersion())'.format(self.package.lower(),
-                                                 req_error),
+                                                 req_error)
                           ]
         nested_if = self.create_code_block('if_else', implementation)
+        implementation = ['mRequired != {0}'.format(self.required),
+                          'log->logPackageError(\"{0}\", {1}, '
+                          'getPackageVersion(), getLevel(), '
+                          'getVersion())'.format(self.package.lower(),
+                                                 value_error)
+                          ]
+        second_nested_if = self.create_code_block('if', implementation)
         implementation = ['assigned == false', nested_if,
-                          'else', 'mIsSetRequired = true']
+                          'else', 'mIsSetRequired = true', second_nested_if]
         code.append(self.create_code_block('if_else', implementation))
 
         # return the parts

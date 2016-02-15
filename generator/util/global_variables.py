@@ -39,8 +39,11 @@
 
 import os
 
+
 global error_list
 error_list = []
+global class_rules
+class_rules = []
 
 global running_tests
 running_tests = False
@@ -212,3 +215,10 @@ def reset():
                 True, '', '')
     global error_list
     error_list = []
+    global class_rules
+    class_rules = []
+
+
+def populate_error_list(lib_object):
+    from code_files import ValidationFiles
+    ValidationFiles.ValidationFiles(lib_object)

@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2015 jointly by the following organizations:
+ * Copyright (C) 2013-2016 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -369,6 +369,40 @@ protected:
    * Creates a new MyLoTest in this ListOfMyLoTests
    */
   virtual SBase* createObject(XMLInputStream& stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Adds the expected attributes for this element
+   */
+  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Reads the expected attributes into the member data variables
+   */
+  virtual void readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Writes the attributes to the stream
+   */
+  virtual void writeAttributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 

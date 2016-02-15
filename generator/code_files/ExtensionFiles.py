@@ -152,7 +152,8 @@ class ExtensionFiles():
                          'sid_refs': [],
                          'unit_sid_refs': [],
                          'hasMath': False,
-                         'is_doc_plugin': True})
+                         'is_doc_plugin': True,
+                         'reqd': self.package['required']})
         return doc_plug
 
     @staticmethod

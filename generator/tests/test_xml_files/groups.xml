@@ -5,10 +5,10 @@
       <elements>
         <element name="Group" typeCode="SBML_GROUPS_GROUP" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="group" listOfName="listOfGroups" listOfClassName="ListOfGroups">
           <attributes>
-            <attribute name="kind" required="true" type="enum" element="GroupKind" abstract="false"/>
-            <attribute name="listOfMembers" required="false" type="lo_element" element="Member" abstract="false"/>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="kind" required="true" type="enum" element="GroupKind" abstract="false"/>
+            <attribute name="listOfMembers" required="false" type="lo_element" element="Member" abstract="false"/>
           </attributes>
         </element>
         <element name="Member" typeCode="SBML_GROUPS_MEMBER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="member" listOfName="listOfMembers" listOfClassName="ListOfMembers">

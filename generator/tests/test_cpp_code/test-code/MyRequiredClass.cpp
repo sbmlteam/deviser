@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2015 jointly by the following organizations:
+ * Copyright (C) 2013-2016 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -1626,7 +1626,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
         "conform to the syntax.");
     }
   }
@@ -1809,8 +1809,8 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute unit='" + mUnit
-        + "' does not conform to the syntax.");
+      logError(TestMyRequiredClassUnitMustBeUnitSId, level, version, "The "
+        "attribute unit='" + mUnit + "' does not conform to the syntax.");
     }
   }
   else
@@ -1835,8 +1835,8 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute ref1='" + mRef1
-        + "' does not conform to the syntax.");
+      logError(TestMyRequiredClassRef1MustBeSId, level, version, "The attribute "
+        "ref1='" + mRef1 + "' does not conform to the syntax.");
     }
   }
   else
@@ -1861,8 +1861,8 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute ref2='" + mRef2
-        + "' does not conform to the syntax.");
+      logError(TestMyRequiredClassRef2MustBeSId, level, version, "The attribute "
+        "ref2='" + mRef2 + "' does not conform to the syntax.");
     }
   }
   else
@@ -1887,8 +1887,8 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The attribute refUnit='" +
-        mRefUnit + "' does not conform to the syntax.");
+      logError(TestMyRequiredClassRefUnitMustBeUnitSId, level, version, "The "
+        "attribute refUnit='" + mRefUnit + "' does not conform to the syntax.");
     }
   }
   else
@@ -1913,7 +1913,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mCorrectId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mCorrectId + "' "
+      logError(TestIdSyntaxRule, level, version, "The id '" + mCorrectId + "' "
         "does not conform to the syntax.");
     }
   }
@@ -2086,6 +2086,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     if (mMetaidref1.empty() == true)
     {
       logEmptyString(mMetaidref1, level, version, "<MyRequiredClass>");
+    }
+    else if (SyntaxChecker::isValidXMLID(mMetaidref1) == false)
+    {
+      logError(TestMyRequiredClassMetaidref1MustBeID, level, version, "The "
+        "attribute metaidref1='" + mMetaidref1 + "' does not conform to the "
+          "syntax.");
     }
   }
   else

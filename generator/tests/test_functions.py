@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import shutil
 from util import global_variables
 
 
@@ -16,6 +17,7 @@ function_table = {'binding': 'run_bindings_tests',
 def set_path_to_tests(dirname):
     global path_to_tests
     path_to_tests = dirname
+    remove_temp()
     set_running_tests()
 
 
@@ -130,3 +132,11 @@ def report(name, fail, fails, not_tested):
         print('No fails reported.')
     print('****************************************************************')
     print('')
+
+
+def remove_temp():
+    if not os.path.isdir('temp'):
+        os.mkdir('temp')
+    else:
+        shutil.rmtree('temp')
+        os.mkdir('temp')

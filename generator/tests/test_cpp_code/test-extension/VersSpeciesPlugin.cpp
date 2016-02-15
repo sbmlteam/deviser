@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2015 jointly by the following organizations:
+ * Copyright (C) 2013-2016 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -1227,9 +1227,10 @@ VersSpeciesPlugin::readV1Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v1) == false)
     {
-      log->logPackageError("vers", InvalidIdSyntax, pkgVersion, level, version,
-        "The attribute species_att_v1='" + mSpecies_att_v1 + "' does not conform "
-          "to the syntax.");
+      log->logPackageError("vers",
+        VersVersSpeciesPluginSpecies_att_v1MustBeSId, pkgVersion, level, version,
+          "The attribute species_att_v1='" + mSpecies_att_v1 + "' does not conform "
+            "to the syntax.");
     }
   }
 
@@ -1283,9 +1284,10 @@ VersSpeciesPlugin::readV2Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
     {
-      log->logPackageError("vers", InvalidIdSyntax, pkgVersion, level, version,
-        "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
-          "to the syntax.");
+      log->logPackageError("vers",
+        VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
+          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
+            "to the syntax.");
     }
   }
 }

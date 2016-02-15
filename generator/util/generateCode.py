@@ -90,6 +90,7 @@ def generate_package_code(name, language, overwrite, ob):
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
+    global_variables.populate_error_list(ob)
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
     generate_cmake_files(name, ob)

@@ -281,7 +281,7 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSEDMLSId(mId) == false)
     {
-      logError(InvalidIdSyntax, level, version, "The id '" + mId + "' does not "
+      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
         "conform to the syntax.");
     }
   }

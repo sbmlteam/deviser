@@ -439,9 +439,7 @@ class ProtectedFunctions():
 
     # function to write addExpectedAttributes
     def write_add_expected_attributes(self):
-        if self.is_list_of:
-            return
-        elif self.has_std_base and len(self.attributes) == 0:
+        if self.has_std_base and len(self.attributes) == 0:
             return
         # create comment parts
         title_line = 'Adds the expected attributes for this element'
@@ -498,9 +496,7 @@ class ProtectedFunctions():
 
     # function to write readAttributes
     def write_read_attributes(self):
-        if self.is_list_of:
-            return
-        elif self.has_std_base and len(self.attributes) == 0:
+        if self.has_std_base and len(self.attributes) == 0:
             return
 
         # create comment
@@ -527,7 +523,7 @@ class ProtectedFunctions():
                            'getErrorLog()'.format(self.cap_language)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         # only do this if has a list of
-        if self.has_list_of:
+        if not self.is_list_of and self.has_list_of:
             line = self.get_error_from_list_of_read()
             code.append(self.create_code_block('if', line))
 
@@ -563,7 +559,7 @@ class ProtectedFunctions():
 
     # function to write individual version reads
     def write_read_version_attributes(self, version):
-        if self.is_list_of or not self.has_multiple_versions:
+        if not self.has_multiple_versions:
             return
         elif self.has_std_base and len(self.attributes) == 0:
             return
@@ -677,9 +673,7 @@ class ProtectedFunctions():
 
     # function to write writeAttributes
     def write_write_attributes(self):
-        if self.is_list_of:
-            return
-        elif self.has_std_base and len(self.attributes) == 0:
+        if self.has_std_base and len(self.attributes) == 0:
             return
 
         # create comment
@@ -1026,7 +1020,8 @@ class ProtectedFunctions():
         code.append(self.create_code_block('comment', implementation))
 
         if att_type == 'SId' or att_type == 'SIdRef' \
-                or att_type == 'UnitSId' or att_type == 'UnitSIdRef':
+                or att_type == 'UnitSId' or att_type == 'UnitSIdRef'\
+                or att_type == 'ID' or att_type == 'IDREF':
             self.write_sid_read(index, code, attributes)
         elif att_type == 'enum':
             self.write_enum_read(index, code, attributes)
@@ -1076,13 +1071,26 @@ class ProtectedFunctions():
                                                                       member)]
         code.append(self.create_code_block('line', line))
 
+        check_function = 'isValid{0}SId'.format(self.cap_language)
+        if att_type == 'ID' or att_type == 'IDREF':
+            check_function = 'isValidXMLID'
         if att_type == 'SId':
             invalid_line = '\"The id \'\" + {0} + \"\' does not conform to ' \
                            'the syntax.\"'.format(member)
+            error = '{0}IdSyntaxRule'.format(self.package)
         else:
             invalid_line = '\"The attribute {0}=\'\" + {1} + ' \
                            '\"\' does not conform to the ' \
                            'syntax."'.format(name, member)
+            # want type without ref
+            if att_type.endswith('Ref') or att_type.endswith('REF'):
+                length = len(att_type)
+                type_wanted = att_type[0:length-3]
+            else:
+                type_wanted = att_type
+            error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
+                                                strFunctions.upper_first(name),
+                                                type_wanted)
         line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:
             line.append('logEmptyString({0}, level, version, pkgVersion, '
@@ -1091,15 +1099,15 @@ class ProtectedFunctions():
             line.append('logEmptyString({0}, level, version, '
                         '\"<{1}>\")'.format(member, self.class_name))
         line += ['else if',
-                 'SyntaxChecker::isValid{0}SId({1}) == '
-                 'false'.format(self.cap_language, member)]
+                 'SyntaxChecker::{0}({1}) == '
+                 'false'.format(check_function, member)]
         if self.is_plugin:
-            line.append('log->{0}InvalidIdSyntax, {1}, '
+            line.append('log->{0}{3}, {1}, '
                         '{2})'.format(self.error, self.given_args,
-                                      invalid_line))
+                                      invalid_line, error))
         else:
-            line.append('logError(InvalidIdSyntax, level, version, '
-                        '{0})'.format(invalid_line))
+            line.append('logError({1}, level, version, '
+                        '{0})'.format(invalid_line, error))
         first_if = self.create_code_block('else_if', line)
 
         line = 'assigned == true'

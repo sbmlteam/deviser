@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2015 jointly by the following organizations:
+ * Copyright (C) 2013-2016 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -380,6 +380,106 @@ ListOfMyLoTests::createObject(XMLInputStream& stream)
 
   delete testns;
   return object;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds the expected attributes for this element
+ */
+void
+ListOfMyLoTests::addExpectedAttributes(ExpectedAttributes& attributes)
+{
+  ListOf::addExpectedAttributes(attributes);
+
+  attributes.add("id");
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Reads the expected attributes into the member data variables
+ */
+void
+ListOfMyLoTests::readAttributes(const XMLAttributes& attributes,
+                                const ExpectedAttributes& expectedAttributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+  unsigned int numErrs;
+  bool assigned = false;
+  SBMLErrorLog* log = getErrorLog();
+
+  ListOf::readAttributes(attributes, expectedAttributes);
+  numErrs = log->getNumErrors();
+
+  for (int n = numErrs-1; n >= 0; n--)
+  {
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownPackageAttribute);
+      log->logPackageError("test", TestListOfMyLoTestsAllowedAttributes,
+        pkgVersion, level, version, details);
+    }
+    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownCoreAttribute);
+      log->logPackageError("test", TestListOfMyLoTestsAllowedCoreAttributes,
+        pkgVersion, level, version, details);
+    }
+  }
+
+  // 
+  // id SId (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("id", mId);
+
+  if (assigned == true)
+  {
+    if (mId.empty() == true)
+    {
+      logEmptyString(mId, level, version, "<ListOfMyLoTests>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+    {
+      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Writes the attributes to the stream
+ */
+void
+ListOfMyLoTests::writeAttributes(XMLOutputStream& stream) const
+{
+  ListOf::writeAttributes(stream);
+
+  if (isSetId() == true)
+  {
+    stream.writeAttribute("id", getPrefix(), mId);
+  }
+
+  SBase::writeExtensionAttributes(stream);
 }
 
 /** @endcond */
