@@ -41,7 +41,11 @@
 
 import sys
 
-from util import generateLatex, generateCode, global_variables
+try:
+    from util import generateLatex, generateCode, global_variables
+except:
+    from util import global_variables
+    global_variables.code_returned = global_variables.return_codes['unknown error - please report']
 #from legacy import run
 
 
@@ -96,5 +100,12 @@ def main(args):
     return global_variables.code_returned
   
 if __name__ == '__main__':
-    main(sys.argv)
-    exit(global_variables.code_returned)
+    if global_variables.code_returned == \
+            global_variables.return_codes['success']:
+        try:
+            main(sys.argv)
+            sys.exit(global_variables.code_returned)
+        except:
+            sys.exit(global_variables.code_returned)
+    else:
+        sys.exit(global_variables.code_returned)
