@@ -169,11 +169,13 @@ class ParseXML():
     def get_add_code_value(self, node, name):
         add_code = self.get_value(node, name)
         if add_code is not None:
-            temp = self.temp_dir + '//' + add_code
-            if os.path.exists(temp):
-                add_code = os.path.abspath(temp)
-            else:
-                return None
+            # do we have the full path or not
+            if not os.path.exists(add_code):
+                temp = self.temp_dir + '//' + add_code
+                if os.path.exists(temp):
+                    add_code = os.path.abspath(temp)
+                else:
+                    return None
         return add_code
 
     @staticmethod

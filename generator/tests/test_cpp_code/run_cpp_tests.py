@@ -429,6 +429,12 @@ def main():
     test_case = 'list of with attribute'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'groups'
+    num = 0
+    class_name = 'GroupsModelPlugin'
+    test_case = 'plugin with additional code'
+    fail += run_plug_test(name, class_name, test_case, num)
+
     name = 'test_vers'
     num = 0
     class_name = 'ClassOne'
