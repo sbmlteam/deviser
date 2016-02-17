@@ -265,7 +265,7 @@ class ValidationRulesForClass():
             .format(self.pkg_ref, strFunctions.wrap_section(refname))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
+        short = '{0} attribute must be {1}.'.format(att_name, rule_type)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, abbrev, att_name,
                                          rule_type)
@@ -473,9 +473,10 @@ class ValidationRulesForClass():
                     strFunctions.wrap_section(child_class['lo_class_name']))
         sev = 'ERROR'
         lib_sev = 'LIBSBML_SEV_ERROR'
-        short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
+        short = 'Attributes allowed on <{0}>.'.format(strFunctions.lower_first(child_class['lo_class_name']))
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = '{0}LO{1}AllowedAttributes'.format(self.up_package, strFunctions.plural(name))
+        tc = '{0}{1}LO{2}AllowedAttributes'.format(self.up_package, self.name,
+                                                   strFunctions.plural(name))
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,

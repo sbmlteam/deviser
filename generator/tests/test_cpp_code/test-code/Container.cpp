@@ -387,6 +387,11 @@ Container::getElementBySId(const std::string& id)
 
   SBase* obj = NULL;
 
+  if (mMyLoTests.getId() == id)
+  {
+    return &mMyLoTests;
+  }
+
   obj = mMyLoTests.getElementBySId(id);
 
   if (obj != NULL)

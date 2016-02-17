@@ -67,8 +67,8 @@ class ProtectedFunctions():
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
         self.parent_class = ''
-        if 'parent' in class_object:
-            self.parent_class = class_object['parent']
+        if not self.is_plugin:
+            self.parent_class = query.get_parent_class(class_object)
 
         self.attributes = class_object['class_attributes']
         self.all_attributes = class_object['attribs']
@@ -926,12 +926,20 @@ class ProtectedFunctions():
 
     def get_error_from_list_of_read(self):
         plural = strFunctions.plural(self.class_name)
-        error = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
+        c_err = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
                                                           self.parent_class,
                                                           plural)
-        if not global_variables.running_tests \
-                and error not in global_variables.error_list:
-            error = '{0}Unknown'.format(self.package)
+        error = '{0}{1}LO{2}AllowedAttributes'.format(self.package,
+                                                      self.parent_class,
+                                                      plural)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{0}{1}AllowedAttributes'.format(self.package,
+                                                         self.class_name)
+                if error not in global_variables.error_list:
+                    error = '{0}Unknown'.format(self.package)
+            if c_err not in global_variables.error_list:
+                c_err = '{0}Unknown'.format(self.package)
         line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownPackageAttribute)',
@@ -941,7 +949,7 @@ class ProtectedFunctions():
                            'UnknownCoreAttribute',
                 'const std::string details = log->getError(n)->getMessage()',
                 'log->remove(UnknownCoreAttribute)',
-                'log->{0}{1}, {2}, details)'.format(self.error, error,
+                'log->{0}{1}, {2}, details)'.format(self.error, c_err,
                                                     self.given_args)]
         if_err = self.create_code_block('else_if', line)
 
@@ -962,7 +970,11 @@ class ProtectedFunctions():
             core_err = '{0}{1}AllowedAttributes'.format(self.package,
                                                         class_name)
         else:
-            class_name = self.class_name
+            if self.is_list_of:
+                class_name = '{0}LO{1}'.format(self.parent_class,
+                                               self.class_name[6:])
+            else:
+                class_name = self.class_name
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)

@@ -296,7 +296,7 @@ static const packageErrorTableEntry refsErrorTable[] =
 
   // 120504
   { RefsThingCThingMustBeThingAOrThingB,
-    "Attributes allowed on <thingC>.",
+    "Thing attribute must be ThingAOrThingB.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'refs:thing' of a <thingC> object must be the "

@@ -95,6 +95,10 @@ def has_children_not_math(attributes):
 
 # return the class with the matching name from the root object
 def get_class(name, root_object):
+    if name.startswith('listOf') or name.startswith('ListOf'):
+        name = strFunctions.singular(name[6:])
+    else:
+        name = strFunctions.upper_first(name)
     if root_object is None:
         return None
     elif root_object['baseElements'] is None:
@@ -103,6 +107,27 @@ def get_class(name, root_object):
         for i in range(0, len(root_object['baseElements'])):
             if name == root_object['baseElements'][i]['name']:
                 return root_object['baseElements'][i]
+
+
+
+# return the parent class of this class
+# if it is not given we assume it is a child of a plugin
+# and get the base of the plugin
+def get_parent_class(class_object):
+    if 'parent' in class_object:
+        return class_object['parent']
+    else:
+        name = class_object['name']
+        plugins = class_object['root']['plugins']
+        for plugin in plugins:
+            base = plugin['sbase']
+            for extension in plugin['lo_extension']:
+                if extension['name'] == name:
+                    return base
+            for extension in plugin['extension']:
+                if extension['name'] == name:
+                    return base
+        return ''
 
 
 # return a list of the actual concrete classes
@@ -208,6 +233,19 @@ def has_attribute(element, attribute):
     else:
         for i in range(0, len(element['attribs'])):
             if attribute == element['attribs'][i]['name']:
+                return True
+    return False
+
+
+# return True if the listOf class for element has the attribute specified
+def has_lo_attribute(element, attribute):
+    if element is None:
+        return False
+    elif element['lo_attribs'] is None:
+        return False
+    else:
+        for attrib in element['lo_attribs']:
+            if attribute == attrib['name']:
                 return True
     return False
 

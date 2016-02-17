@@ -520,14 +520,14 @@ ListOfMembers::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
-      log->logPackageError("groups", GroupsListOfMembersAllowedAttributes,
+      log->logPackageError("groups", GroupsGroupLOMembersAllowedAttributes,
         pkgVersion, level, version, details);
     }
     else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logPackageError("groups", GroupsListOfMembersAllowedCoreAttributes,
+      log->logPackageError("groups", GroupsGroupLOMembersAllowedCoreAttributes,
         pkgVersion, level, version, details);
     }
   }

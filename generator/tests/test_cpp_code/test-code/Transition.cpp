@@ -1192,15 +1192,16 @@ Transition::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("qual", QualLOTransitionsAllowedCoreAttributes,
+        log->logPackageError("qual", QualModelLOTransitionsAllowedAttributes,
           pkgVersion, level, version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("qual", QualLOTransitionsAllowedCoreAttributes,
-          pkgVersion, level, version, details);
+        log->logPackageError("qual",
+          QualModelLOTransitionsAllowedCoreAttributes, pkgVersion, level,
+            version, details);
       }
     }
   }

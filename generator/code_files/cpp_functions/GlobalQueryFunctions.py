@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, global_variables
+from util import strFunctions, global_variables, query
 
 
 class GlobalQueryFunctions():
@@ -140,9 +140,14 @@ class GlobalQueryFunctions():
                                                     'SId(id)'.format(name),
                                                     if_code]))
 
-            for i in range(0, len(self.child_lo_elements)):
+            for child in self.child_lo_elements:
+                if query.has_lo_attribute(query.get_class(child['name'], child['root']), 'id'):
+                    line = ['{0}.getId() == id'.format(child['memberName']),
+                            'return &{0}'.format(child['memberName'])]
+                    code.append(self.create_code_block('if', line))
+
                 line = [' obj = {0}.getElementBySId('
-                        'id)'.format(self.child_lo_elements[i]['memberName'])]
+                        'id)'.format(child['memberName'])]
                 code.append(self.create_code_block('line', line))
                 code.append(if_code)
 
