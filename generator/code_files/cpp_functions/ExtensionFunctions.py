@@ -100,11 +100,11 @@ class ExtensionFunctions():
         # create comment parts
         title_line = 'Returns a string representing the {0} XML namespace of ' \
                      'this {0} Level&nbsp;3 package.'.format(self.cap_language)
-        params = ['@param {0}Level, the level of {1}'.format(self.language,
+        params = ['@param {0}Level, the level of {1}.'.format(self.language,
                                                              self.cap_language),
                   '@param {0}Version the version of '
-                  '{1}'.format(self.language, self.cap_language),
-                  '@param pkgVersion the version of this package']
+                  '{1}.'.format(self.language, self.cap_language),
+                  '@param pkgVersion the version of this package.']
         return_lines = ['@return a string representing the name of '
                         'this package (\"{0}\").'.format(self.package)]
         additional = ['The namespace URI constructed by this method '
@@ -176,7 +176,7 @@ class ExtensionFunctions():
         title_line = 'Returns the {0} for the given URI  of this ' \
                      'package.'.format(title_name)
         params = ['@param uri the string of the URI that represents one '
-                  'of the versions of the \"{0}\" package'.format(self.package)]
+                  'of the versions of the \"{0}\" package.'.format(self.package)]
         return_lines = ['@return the {0} for the given URI of this '
                         'package, or @c 0 if the given URI is '
                         'invalid.'.format(ret_name)]
@@ -230,7 +230,7 @@ class ExtensionFunctions():
         title_line = 'Returns a  {0}PkgNamespaces ' \
                      'object.'.format(self.up_package)
         params = ['@param uri the string of the URI that represents one '
-                  'of the versions of the \"{0}\" package'.format(self.package)]
+                  'of the versions of the \"{0}\" package.'.format(self.package)]
         return_lines = ['@return {0}PkgNamespaces object corresponding to '
                         'the given URI of this '
                         'package, or @c NULL if the given URI is not '
@@ -456,7 +456,7 @@ class ExtensionFunctions():
         # create comment parts
         title_line = 'Returns true if the package has multiple versions.'
         params = []
-        return_lines = ['@return true if multiple versions, false otherwise']
+        return_lines = ['@return true if multiple versions, false otherwise.']
         additional = []
 
         # create the function declaration

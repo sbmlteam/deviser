@@ -69,7 +69,7 @@ class ValidatorClassFunctions():
             title_line = 'Creates a new {0} object for the given category of ' \
                          'validation.'.format(self.class_name)
             params = ['@param category code indicating the type of validation '
-                      'that this validator will perform']
+                      'that this validator will perform.']
         return_lines = []
         additional = []
 
@@ -231,7 +231,7 @@ class ValidatorClassFunctions():
             title_line = 'Validates the {0} located at the given ' \
                          'filename'.format(global_variables.document_class)
             params = ['@param filename, the path to the file to be read '
-                      'and validated']
+                      'and validated.']
         return_lines = [' @return the number of validation failures that '
                         'occurred.  The objects describing the actual failures '
                         'can be retrieved using getFailures().']

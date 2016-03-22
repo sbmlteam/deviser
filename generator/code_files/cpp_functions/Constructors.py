@@ -107,14 +107,14 @@ class Constructors():
             title_line += ' and @ p version values.'
 
         params = ['@param level an unsigned int, the {0} Level to '
-                  'assign to this {1}'.format(self.cap_language,
+                  'assign to this {1}.'.format(self.cap_language,
                                              self.object_name),
                   '@param version an unsigned int, the {0} Version to '
-                  'assign to this {1}'.format(self.cap_language,
+                  'assign to this {1}.'.format(self.cap_language,
                                              self.object_name)]
         if global_variables.is_package:
             params.append('@param pkgVersion an unsigned int, the {0} {1} '
-                          'Version to assign to this {2}'
+                          'Version to assign to this {2}.'
                           .format(self.cap_language, self.package,
                                   self.object_name))
 
@@ -232,10 +232,10 @@ class Constructors():
 
         params = []
         if global_variables.is_package:
-            params.append('@param {0}ns the {1}PkgNamespaces object'
+            params.append('@param {0}ns the {1}PkgNamespaces object.'
                           .format(self.package.lower(), self.package))
         else:
-            params.append('@param {0}ns the {1}Namespaces object'
+            params.append('@param {0}ns the {1}Namespaces object.'
                           .format(self.language, global_variables.prefix))
 
         return_lines = ['@throws {0}Constructor'
@@ -362,10 +362,10 @@ class Constructors():
         # create doc string header
         title_line = 'Creates a new {0} using the given uri, prefix and ' \
                      'package namespace.'.format(ob_name)
-        params = ['@param uri a string, representing the uri of the package',
-                  '@param prefix a string, the prefix to be used',
+        params = ['@param uri a string, representing the uri of the package.',
+                  '@param prefix a string, the prefix to be used.',
                   '@param {0}ns, a pointer to the {1}PkgNamespaces object to '
-                  'be used'.format(package, up_package)]
+                  'be used.'.format(package, up_package)]
 
         return_lines = []
         additional = ''
@@ -458,8 +458,8 @@ class Constructors():
             return
         # create doc string header
         title_line = 'Assignment operator for {0}.'.format(self.object_name)
-        params = ['@param rhs; the {0} object whose values are to be used '
-                  'as the basis of the assignment'.format(self.object_name)]
+        params = ['@param rhs the {0} object whose values are to be used '
+                  'as the basis of the assignment.'.format(self.object_name)]
         return_lines = []
         additional = []
         function = 'operator='.format(self.object_name)
@@ -506,7 +506,7 @@ class Constructors():
             .format(self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}; the {1} structure'
+            params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, self.object_name))
         return_lines = ['@return a (deep) copy of this {0} object.'.format(
             self.object_name)]
@@ -555,7 +555,7 @@ class Constructors():
             title_line = 'Frees this {0} object.'.format(self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}; the {1} structure'
+            params.append('@param {0} the {1} structure.'
                           .format(abbrev_object, self.object_name))
         return_lines = []
         additional = []

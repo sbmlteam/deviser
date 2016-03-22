@@ -327,7 +327,7 @@ class GlobalQueryFunctions():
 
         # create comment parts
         title_line = 'Append items from model (used in comp flattening)'
-        params = ['@param model a pointer to a model object']
+        params = ['@param model a pointer to a model object.']
         return_lines = ['']
         additional = []
 
