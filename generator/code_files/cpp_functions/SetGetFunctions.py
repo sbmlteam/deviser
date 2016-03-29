@@ -967,7 +967,7 @@ class SetGetFunctions():
                      'created.'.format(att_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure '
+            params.append('@param {0} the {1} structure '
                           'to which the {2} should be '
                           'added.'.format(self.abbrev_parent, self.object_name,
                                           att_name))
@@ -1053,7 +1053,7 @@ class SetGetFunctions():
                      'created.'.format(att_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure '
+            params.append('@param {0} the {1} structure '
                           'to which the {2} should be '
                           'added.'.format(self.abbrev_parent, self.object_name,
                                           att_name))

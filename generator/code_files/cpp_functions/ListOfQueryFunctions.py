@@ -141,9 +141,9 @@ class ListOfQueryFunctions():
                                                         self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to search.'
+            params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param n, an unsigned int representing the index '
+        params.append('@param n an unsigned int representing the index '
                       'of the {0} to retrieve.'.format(self.object_child_name))
         return_lines = ['@return the nth {0} {1}.'.format(
             self.object_child_name, return_string)]
@@ -233,7 +233,7 @@ class ListOfQueryFunctions():
             .format(self.indef_name, self.object_child_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to search.'
+            params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid a string representing the identifier '
                       'of the {0} to retrieve.'.format(self.object_child_name))
@@ -361,7 +361,7 @@ class ListOfQueryFunctions():
                                          element)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to search.'
+            params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid a string representing the {0} attribute '
                       'of the {1} object to '
@@ -499,9 +499,9 @@ class ListOfQueryFunctions():
                                              self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to search.'
+            params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param n, an unsigned int representing the index of '
+        params.append('@param n an unsigned int representing the index of '
                       'the {0} to remove.'.format(self.object_child_name))
         return_lines = ['@return a pointer to the nth {0} in this {1}.'.format(
             self.object_child_name, self.object_name)]
@@ -589,9 +589,9 @@ class ListOfQueryFunctions():
                                                        self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to search.'
+            params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param sid, a string representing the identifier of '
+        params.append('@param sid a string representing the identifier of '
                       'the {0} to remove.'.format(self.object_child_name))
         return_lines = ['@return the {0} in this {1} based on the identifier '
                         'or NULL if no such {0} '
@@ -686,11 +686,11 @@ class ListOfQueryFunctions():
             self.object_child_name, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to which the {2} '
+            params.append('@param {0} the {1} structure to which the {2} '
                           'should be added.'.format(self.abbrev_parent,
                                                     self.object_name,
                                                     self.object_child_name))
-        params.append('@param {0}, the {1} object to '
+        params.append('@param {0} the {1} object to '
                       'add.'.format(self.abbrev_child, self.object_child_name))
         success = global_variables.ret_success
         failed = global_variables.ret_failed
@@ -828,7 +828,7 @@ class ListOfQueryFunctions():
                      'created.'.format(child, self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure '
+            params.append('@param {0} the {1} structure '
                           'to which the {2} should be '
                           'added.'.format(self.abbrev_parent, self.object_name,
                                           child))
@@ -945,7 +945,7 @@ class ListOfQueryFunctions():
                                         self.object_name)
         params = []
         if not self.is_cpp_api:
-            params.append('@param {0}, the {1} structure to query.'
+            params.append('@param {0} the {1} structure to query.'
                           .format(self.abbrev_parent, self.object_name))
         return_lines = ['@return the number of {0} objects in '
                         'this {1}.'.format(self.object_child_name,

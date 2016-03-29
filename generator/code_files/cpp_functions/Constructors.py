@@ -364,7 +364,7 @@ class Constructors():
                      'package namespace.'.format(ob_name)
         params = ['@param uri a string, representing the uri of the package.',
                   '@param prefix a string, the prefix to be used.',
-                  '@param {0}ns, a pointer to the {1}PkgNamespaces object to '
+                  '@param {0}ns a pointer to the {1}PkgNamespaces object to '
                   'be used.'.format(package, up_package)]
 
         return_lines = []
@@ -406,7 +406,7 @@ class Constructors():
             return
         # create doc string header
         title_line = 'Copy constructor for {0}.'.format(self.object_name)
-        params = ['@param orig; the {0} instance to copy.'.format(
+        params = ['@param orig the {0} instance to copy.'.format(
             self.object_name)]
         return_lines = []
         additional = []

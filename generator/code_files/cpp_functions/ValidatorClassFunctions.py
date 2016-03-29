@@ -230,7 +230,7 @@ class ValidatorClassFunctions():
         else:
             title_line = 'Validates the {0} located at the given ' \
                          'filename'.format(global_variables.document_class)
-            params = ['@param filename, the path to the file to be read '
+            params = ['@param filename the path to the file to be read '
                       'and validated.']
         return_lines = [' @return the number of validation failures that '
                         'occurred.  The objects describing the actual failures '

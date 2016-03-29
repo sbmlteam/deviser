@@ -100,7 +100,7 @@ class ExtensionFunctions():
         # create comment parts
         title_line = 'Returns a string representing the {0} XML namespace of ' \
                      'this {0} Level&nbsp;3 package.'.format(self.cap_language)
-        params = ['@param {0}Level, the level of {1}.'.format(self.language,
+        params = ['@param {0}Level the level of {1}.'.format(self.language,
                                                              self.cap_language),
                   '@param {0}Version the version of '
                   '{1}.'.format(self.language, self.cap_language),
