@@ -160,7 +160,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setUnit(const std::string& unit);
@@ -424,7 +424,7 @@ Unit_isSetUnit(const Unit_t * u);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Unit_t
  */

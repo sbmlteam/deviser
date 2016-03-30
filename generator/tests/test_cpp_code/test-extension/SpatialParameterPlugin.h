@@ -245,7 +245,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setSpatialSymbolReference(const SpatialSymbolReference*
@@ -261,7 +261,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setAdvectionCoefficient(const AdvectionCoefficient*
@@ -277,7 +277,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setBoundaryCondition(const BoundaryCondition* boundaryCondition);
@@ -292,7 +292,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setDiffusionCoefficient(const DiffusionCoefficient*

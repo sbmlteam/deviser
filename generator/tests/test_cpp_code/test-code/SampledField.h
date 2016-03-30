@@ -359,7 +359,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setId(const std::string& id);
@@ -372,7 +372,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setDataType(const DataKind_t dataType);
@@ -385,7 +385,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setDataType(const std::string& dataType);
@@ -398,7 +398,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setNumSamples1(int numSamples1);
@@ -411,7 +411,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setNumSamples2(int numSamples2);
@@ -424,7 +424,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setNumSamples3(int numSamples3);
@@ -438,7 +438,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setInterpolationType(const InterpolationKind_t interpolationType);
@@ -452,7 +452,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setInterpolationType(const std::string& interpolationType);
@@ -466,7 +466,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setCompression(const CompressionKind_t compression);
@@ -479,7 +479,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setCompression(const std::string& compression);
@@ -495,7 +495,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setSamples(int* inArray, int arrayLength);
@@ -508,7 +508,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setSamplesLength(int samplesLength);
@@ -1205,7 +1205,7 @@ SampledField_isSetSamplesLength(const SampledField_t * sf);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1223,7 +1223,7 @@ SampledField_setId(SampledField_t * sf, const char * id);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1241,7 +1241,7 @@ SampledField_setDataType(SampledField_t * sf, DataKind_t dataType);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1259,7 +1259,7 @@ SampledField_setDataTypeAsString(SampledField_t * sf, const char * dataType);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1277,7 +1277,7 @@ SampledField_setNumSamples1(SampledField_t * sf, int numSamples1);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1295,7 +1295,7 @@ SampledField_setNumSamples2(SampledField_t * sf, int numSamples2);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1314,7 +1314,7 @@ SampledField_setNumSamples3(SampledField_t * sf, int numSamples3);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1334,7 +1334,7 @@ SampledField_setInterpolationType(SampledField_t * sf,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1354,7 +1354,7 @@ SampledField_setInterpolationTypeAsString(SampledField_t * sf,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1373,7 +1373,7 @@ SampledField_setCompression(SampledField_t * sf,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1395,7 +1395,7 @@ SampledField_setCompressionAsString(SampledField_t * sf,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1413,7 +1413,7 @@ SampledField_setSamples(SampledField_t* sf, int* samples, int arrayLength);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */

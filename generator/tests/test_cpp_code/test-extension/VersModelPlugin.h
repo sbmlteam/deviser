@@ -159,7 +159,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setVersion(unsigned int version);
@@ -172,7 +172,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setVersion2(unsigned int version2);
@@ -233,7 +233,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setClassOne(const ClassOne* classOne);

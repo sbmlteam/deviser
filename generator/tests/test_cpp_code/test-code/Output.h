@@ -248,7 +248,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setId(const std::string& id);
@@ -262,7 +262,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setQualitativeSpecies(const std::string& qualitativeSpecies);
@@ -276,7 +276,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setTransitionEffect(const TransitionOutputEffect_t transitionEffect);
@@ -290,7 +290,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setTransitionEffect(const std::string& transitionEffect);
@@ -303,7 +303,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setName(const std::string& name);
@@ -316,7 +316,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setOutputLevel(int outputLevel);
@@ -759,7 +759,7 @@ Output_isSetOutputLevel(const Output_t * o);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
@@ -778,7 +778,7 @@ Output_setId(Output_t * o, const char * id);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
@@ -797,7 +797,7 @@ Output_setQualitativeSpecies(Output_t * o, const char * qualitativeSpecies);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
@@ -817,7 +817,7 @@ Output_setTransitionEffect(Output_t * o,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
@@ -836,7 +836,7 @@ Output_setTransitionEffectAsString(Output_t * o,
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
@@ -854,7 +854,7 @@ Output_setName(Output_t * o, const char * name);
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant {LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof Output_t
  */
