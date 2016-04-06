@@ -384,7 +384,8 @@ class BaseFile:
             self.write_comment_line('@author SBMLTeam')
         else:
             self.write_comment_line('@author DEVISER')
-        if self.library_name == 'Libsbml' and self.extension != 'xml':
+        if self.library_name == 'Libsbml' and (self.extension != 'xml'
+                                               and self.extension != 'rng'):
             self.write_libsbml_licence()
         if self.is_header and not self.is_excluded(self.name):
             if self.name.endswith('Extension'):

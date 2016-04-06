@@ -46,14 +46,17 @@ from util import strFunctions, query
 class BaseXMLFile(BaseFile.BaseFile):
     """Common base class for all interface files"""
 
-    def __init__(self, name, package, reqd):
-        BaseFile.BaseFile.__init__(self, name, 'xml')
+    def __init__(self, name, package, reqd, ext='xml'):
+        BaseFile.BaseFile.__init__(self, name, ext)
 
         self.pkg = package
         self.corens = 'http://www.sbml.org/sbml/level3/version1/core'
         self.pkgns = 'http://www.sbml.org/sbml/level3/version1/{0}/version1' \
                      ''.format(self.pkg)
         self.reqd = reqd
+
+        self.rngns = 'http://relaxng.org/ns/structure/1.0'
+        self.xmlschema = 'http://www.w3.org/2001/XMLSchema-datatypes'
 
         self.comment_start = '<!--'
         self.comment_end = '-->'
@@ -79,6 +82,14 @@ class BaseXMLFile(BaseFile.BaseFile):
 
     ########################################################################
     # create elements of the document
+
+    def create_rng_document(self):
+        self.doc = self.impl.createDocument(self.rngns, 'grammar', None)
+        top_element = self.doc.documentElement
+        top_element.setAttributeNS(self.rngns, 'xmlns', self.rngns)
+        top_element.setAttributeNS(self.rngns, 'ns', self.pkgns)
+        top_element.setAttributeNS(self.rngns, 'datatypeLibrary', self.xmlschema)
+
 
     def create_document(self, error_code=None):
         self.doc = self.impl.createDocument(self.corens, 'sbml', None)
