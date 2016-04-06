@@ -131,7 +131,7 @@ public:
   /**
    * Copy constructor for TestExtension.
    *
-   * @param orig; the TestExtension instance to copy.
+   * @param orig the TestExtension instance to copy.
    */
   TestExtension(const TestExtension& orig);
 
@@ -139,8 +139,8 @@ public:
   /**
    * Assignment operator for TestExtension.
    *
-   * @param rhs; the TestExtension object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the TestExtension object whose values are to be used as the
+   * basis of the assignment.
    */
   TestExtension& operator=(const TestExtension& rhs);
 
@@ -171,11 +171,11 @@ public:
    * Returns a string representing the SBML XML namespace of this SBML
    * Level&nbsp;3 package.
    *
-   * @param sbmlLevel, the level of SBML
+   * @param sbmlLevel the level of SBML.
    *
-   * @param sbmlVersion the version of SBML
+   * @param sbmlVersion the version of SBML.
    *
-   * @param pkgVersion the version of this package
+   * @param pkgVersion the version of this package.
    *
    * @return a string representing the name of this package ("test").
    *
@@ -194,7 +194,7 @@ public:
    * Returns the SBML Level for the given URI of this package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package
+   * the "test" package.
    *
    * @return the SBML Level for the given URI of this package, or @c 0 if the
    * given URI is invalid.
@@ -207,7 +207,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package
+   * the "test" package.
    *
    * @return the SBML Version within the SBML Level for the given URI of this
    * package, or @c 0 if the given URI is invalid.
@@ -220,7 +220,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package
+   * the "test" package.
    *
    * @return the version of the SBML Level&nbsp;3 package for the given URI of
    * this package, or @c 0 if the given URI is invalid.
@@ -232,7 +232,7 @@ public:
    * Returns a TestPkgNamespaces object.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "test" package
+   * the "test" package.
    *
    * @return TestPkgNamespaces object corresponding to the given URI of this
    * package, or @c NULL if the given URI is not defined in the "test" package.

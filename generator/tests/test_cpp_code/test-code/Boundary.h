@@ -76,13 +76,13 @@ public:
    * Creates a new Boundary using the given SBML Level, Version and
    * &ldquo;spatial&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Boundary
+   * @param level an unsigned int, the SBML Level to assign to this Boundary.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * Boundary
+   * Boundary.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this Boundary
+   * this Boundary.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +99,7 @@ public:
   /**
    * Creates a new Boundary using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +113,7 @@ public:
   /**
    * Copy constructor for Boundary.
    *
-   * @param orig; the Boundary instance to copy.
+   * @param orig the Boundary instance to copy.
    */
   Boundary(const Boundary& orig);
 
@@ -121,8 +121,8 @@ public:
   /**
    * Assignment operator for Boundary.
    *
-   * @param rhs; the Boundary object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the Boundary object whose values are to be used as the basis of
+   * the assignment.
    */
   Boundary& operator=(const Boundary& rhs);
 
@@ -387,13 +387,13 @@ BEGIN_C_DECLS
  * Creates a new Boundary_t using the given SBML Level, Version and
  * &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Boundary_t
+ * @param level an unsigned int, the SBML Level to assign to this Boundary_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * Boundary_t
+ * Boundary_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this Boundary_t
+ * this Boundary_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -414,7 +414,7 @@ Boundary_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Boundary_t object.
  *
- * @param b; the Boundary_t structure
+ * @param b the Boundary_t structure.
  *
  * @return a (deep) copy of this Boundary_t object.
  *
@@ -428,7 +428,7 @@ Boundary_clone(const Boundary_t* b);
 /**
  * Frees this Boundary_t object.
  *
- * @param b; the Boundary_t structure
+ * @param b the Boundary_t structure.
  *
  * @memberof Boundary_t
  */

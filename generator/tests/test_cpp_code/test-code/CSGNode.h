@@ -82,12 +82,13 @@ public:
    * Creates a new CSGNode using the given SBML Level, Version and
    * &ldquo;spatial&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this CSGNode
+   * @param level an unsigned int, the SBML Level to assign to this CSGNode.
    *
-   * @param version an unsigned int, the SBML Version to assign to this CSGNode
+   * @param version an unsigned int, the SBML Version to assign to this
+   * CSGNode.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGNode
+   * this CSGNode.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -104,7 +105,7 @@ public:
   /**
    * Creates a new CSGNode using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -118,7 +119,7 @@ public:
   /**
    * Copy constructor for CSGNode.
    *
-   * @param orig; the CSGNode instance to copy.
+   * @param orig the CSGNode instance to copy.
    */
   CSGNode(const CSGNode& orig);
 
@@ -126,8 +127,8 @@ public:
   /**
    * Assignment operator for CSGNode.
    *
-   * @param rhs; the CSGNode object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the CSGNode object whose values are to be used as the basis of
+   * the assignment.
    */
   CSGNode& operator=(const CSGNode& rhs);
 
@@ -419,12 +420,13 @@ BEGIN_C_DECLS
  * Creates a new CSGPrimitive (CSGNode_t) using the given SBML Level, Version
  * and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -449,12 +451,13 @@ CSGNode_createCSGPrimitive(
  * Creates a new CSGTranslation (CSGNode_t) using the given SBML Level, Version
  * and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -479,12 +482,13 @@ CSGNode_createCSGTranslation(
  * Creates a new CSGRotation (CSGNode_t) using the given SBML Level, Version
  * and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -509,12 +513,13 @@ CSGNode_createCSGRotation(
  * Creates a new CSGScale (CSGNode_t) using the given SBML Level, Version and
  * &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -539,12 +544,13 @@ CSGNode_createCSGScale(
  * Creates a new CSGHomogeneousTransformation (CSGNode_t) using the given SBML
  * Level, Version and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -569,12 +575,13 @@ CSGNode_createCSGHomogeneousTransformation(
  * Creates a new CSGPseudoPrimitive (CSGNode_t) using the given SBML Level,
  * Version and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -599,12 +606,13 @@ CSGNode_createCSGPseudoPrimitive(
  * Creates a new CSGSetOperator (CSGNode_t) using the given SBML Level, Version
  * and &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this CSGNode_t
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t
+ * this CSGNode_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -628,7 +636,7 @@ CSGNode_createCSGSetOperator(
 /**
  * Creates and returns a deep copy of this CSGNode_t object.
  *
- * @param csgn; the CSGNode_t structure
+ * @param csgn the CSGNode_t structure.
  *
  * @return a (deep) copy of this CSGNode_t object.
  *
@@ -642,7 +650,7 @@ CSGNode_clone(const CSGNode_t* csgn);
 /**
  * Frees this CSGNode_t object.
  *
- * @param csgn; the CSGNode_t structure
+ * @param csgn the CSGNode_t structure.
  *
  * @memberof CSGNode_t
  */

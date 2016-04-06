@@ -85,12 +85,12 @@ public:
    * Creates a new Fred using the given SBML Level, Version and &ldquo;x&rdquo;
    * package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Fred
+   * @param level an unsigned int, the SBML Level to assign to this Fred.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Fred
+   * @param version an unsigned int, the SBML Version to assign to this Fred.
    *
    * @param pkgVersion an unsigned int, the SBML X Version to assign to this
-   * Fred
+   * Fred.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -106,7 +106,7 @@ public:
   /**
    * Creates a new Fred using the given XPkgNamespaces object.
    *
-   * @param xns the XPkgNamespaces object
+   * @param xns the XPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -120,7 +120,7 @@ public:
   /**
    * Copy constructor for Fred.
    *
-   * @param orig; the Fred instance to copy.
+   * @param orig the Fred instance to copy.
    */
   Fred(const Fred& orig);
 
@@ -128,8 +128,8 @@ public:
   /**
    * Assignment operator for Fred.
    *
-   * @param rhs; the Fred object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Fred object whose values are to be used as the basis of the
+   * assignment.
    */
   Fred& operator=(const Fred& rhs);
 
@@ -767,12 +767,12 @@ BEGIN_C_DECLS
  * Creates a new Fred_t using the given SBML Level, Version and &ldquo;x&rdquo;
  * package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Fred_t
+ * @param level an unsigned int, the SBML Level to assign to this Fred_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Fred_t
+ * @param version an unsigned int, the SBML Version to assign to this Fred_t.
  *
  * @param pkgVersion an unsigned int, the SBML X Version to assign to this
- * Fred_t
+ * Fred_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -792,7 +792,7 @@ Fred_create(unsigned int level = XExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Fred_t object.
  *
- * @param f; the Fred_t structure
+ * @param f the Fred_t structure.
  *
  * @return a (deep) copy of this Fred_t object.
  *
@@ -806,7 +806,7 @@ Fred_clone(const Fred_t* f);
 /**
  * Frees this Fred_t object.
  *
- * @param f; the Fred_t structure
+ * @param f the Fred_t structure.
  *
  * @memberof Fred_t
  */
@@ -1309,7 +1309,7 @@ Fred_setOther2(Fred_t * f, const Other_t* other2);
  * Creates a new Other_t object, adds it to this Fred_t object and returns the
  * Other_t object created.
  *
- * @param f, the Fred_t structure to which the Other_t should be added.
+ * @param f the Fred_t structure to which the Other_t should be added.
  *
  * @return a new Other_t object instance.
  *
@@ -1324,7 +1324,7 @@ Fred_createOther(Fred_t* f);
  * Creates a new Other_t object, adds it to this Fred_t object and returns the
  * Other_t object created.
  *
- * @param f, the Fred_t structure to which the Other_t should be added.
+ * @param f the Fred_t structure to which the Other_t should be added.
  *
  * @return a new Other_t object instance.
  *
@@ -1339,7 +1339,7 @@ Fred_createOther1(Fred_t* f);
  * Creates a new Other_t object, adds it to this Fred_t object and returns the
  * Other_t object created.
  *
- * @param f, the Fred_t structure to which the Other_t should be added.
+ * @param f the Fred_t structure to which the Other_t should be added.
  *
  * @return a new Other_t object instance.
  *

@@ -68,13 +68,13 @@ public:
    * and &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfAnalyticVolumes
+   * ListOfAnalyticVolumes.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfAnalyticVolumes
+   * ListOfAnalyticVolumes.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this ListOfAnalyticVolumes
+   * this ListOfAnalyticVolumes.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -94,7 +94,7 @@ public:
    * Creates a new ListOfAnalyticVolumes using the given SpatialPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -108,7 +108,7 @@ public:
   /**
    * Copy constructor for ListOfAnalyticVolumes.
    *
-   * @param orig; the ListOfAnalyticVolumes instance to copy.
+   * @param orig the ListOfAnalyticVolumes instance to copy.
    */
   ListOfAnalyticVolumes(const ListOfAnalyticVolumes& orig);
 
@@ -116,8 +116,8 @@ public:
   /**
    * Assignment operator for ListOfAnalyticVolumes.
    *
-   * @param rhs; the ListOfAnalyticVolumes object whose values are to be used
-   * as the basis of the assignment
+   * @param rhs the ListOfAnalyticVolumes object whose values are to be used as
+   * the basis of the assignment.
    */
   ListOfAnalyticVolumes& operator=(const ListOfAnalyticVolumes& rhs);
 
@@ -139,7 +139,7 @@ public:
   /**
    * Get an AnalyticVolume from the ListOfAnalyticVolumes.
    *
-   * @param n, an unsigned int representing the index of the AnalyticVolume to
+   * @param n an unsigned int representing the index of the AnalyticVolume to
    * retrieve.
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes.
@@ -152,7 +152,7 @@ public:
   /**
    * Get an AnalyticVolume from the ListOfAnalyticVolumes.
    *
-   * @param n, an unsigned int representing the index of the AnalyticVolume to
+   * @param n an unsigned int representing the index of the AnalyticVolume to
    * retrieve.
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes.
@@ -196,7 +196,7 @@ public:
    * Removes the nth AnalyticVolume from this ListOfAnalyticVolumes and returns
    * a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the AnalyticVolume to
+   * @param n an unsigned int representing the index of the AnalyticVolume to
    * remove.
    *
    * @return a pointer to the nth AnalyticVolume in this ListOfAnalyticVolumes.
@@ -213,7 +213,7 @@ public:
    * Removes the AnalyticVolume from this ListOfAnalyticVolumes based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the AnalyticVolume to
+   * @param sid a string representing the identifier of the AnalyticVolume to
    * remove.
    *
    * @return the AnalyticVolume in this ListOfAnalyticVolumes based on the
@@ -228,7 +228,7 @@ public:
   /**
    * Adds a copy of the given AnalyticVolume to this ListOfAnalyticVolumes.
    *
-   * @param av, the AnalyticVolume object to add.
+   * @param av the AnalyticVolume object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -385,9 +385,9 @@ BEGIN_C_DECLS
 /**
  * Get an AnalyticVolume_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the AnalyticVolume_t to
+ * @param n an unsigned int representing the index of the AnalyticVolume_t to
  * retrieve.
  *
  * @return the nth AnalyticVolume_t in this ListOf_t.
@@ -402,7 +402,7 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
 /**
  * Get an AnalyticVolume_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the AnalyticVolume_t to
  * retrieve.
@@ -421,9 +421,9 @@ ListOfAnalyticVolumes_getById(ListOf_t* lo, const char *sid);
  * Removes the nth AnalyticVolume_t from this ListOf_t and returns a pointer to
  * it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the AnalyticVolume_t to
+ * @param n an unsigned int representing the index of the AnalyticVolume_t to
  * remove.
  *
  * @return a pointer to the nth AnalyticVolume_t in this ListOf_t.
@@ -439,9 +439,9 @@ ListOfAnalyticVolumes_remove(ListOf_t* lo, unsigned int n);
  * Removes the AnalyticVolume_t from this ListOf_t based on its identifier and
  * returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the AnalyticVolume_t to
+ * @param sid a string representing the identifier of the AnalyticVolume_t to
  * remove.
  *
  * @return the AnalyticVolume_t in this ListOf_t based on the identifier or

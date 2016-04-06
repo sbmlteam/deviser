@@ -68,13 +68,13 @@ public:
    * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfOutputs
+   * ListOfOutputs.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfOutputs
+   * ListOfOutputs.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * ListOfOutputs
+   * ListOfOutputs.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -91,7 +91,7 @@ public:
   /**
    * Creates a new ListOfOutputs using the given QualPkgNamespaces object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -105,7 +105,7 @@ public:
   /**
    * Copy constructor for ListOfOutputs.
    *
-   * @param orig; the ListOfOutputs instance to copy.
+   * @param orig the ListOfOutputs instance to copy.
    */
   ListOfOutputs(const ListOfOutputs& orig);
 
@@ -113,8 +113,8 @@ public:
   /**
    * Assignment operator for ListOfOutputs.
    *
-   * @param rhs; the ListOfOutputs object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the ListOfOutputs object whose values are to be used as the
+   * basis of the assignment.
    */
   ListOfOutputs& operator=(const ListOfOutputs& rhs);
 
@@ -136,8 +136,7 @@ public:
   /**
    * Get an Output from the ListOfOutputs.
    *
-   * @param n, an unsigned int representing the index of the Output to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in this ListOfOutputs.
    *
@@ -149,8 +148,7 @@ public:
   /**
    * Get an Output from the ListOfOutputs.
    *
-   * @param n, an unsigned int representing the index of the Output to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in this ListOfOutputs.
    *
@@ -189,7 +187,7 @@ public:
    * Removes the nth Output from this ListOfOutputs and returns a pointer to
    * it.
    *
-   * @param n, an unsigned int representing the index of the Output to remove.
+   * @param n an unsigned int representing the index of the Output to remove.
    *
    * @return a pointer to the nth Output in this ListOfOutputs.
    *
@@ -205,7 +203,7 @@ public:
    * Removes the Output from this ListOfOutputs based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Output to remove.
+   * @param sid a string representing the identifier of the Output to remove.
    *
    * @return the Output in this ListOfOutputs based on the identifier or NULL
    * if no such Output exists.
@@ -219,7 +217,7 @@ public:
   /**
    * Adds a copy of the given Output to this ListOfOutputs.
    *
-   * @param o, the Output object to add.
+   * @param o the Output object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -373,10 +371,9 @@ BEGIN_C_DECLS
 /**
  * Get an Output_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Output_t to
- * retrieve.
+ * @param n an unsigned int representing the index of the Output_t to retrieve.
  *
  * @return the nth Output_t in this ListOf_t.
  *
@@ -390,7 +387,7 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
 /**
  * Get an Output_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the Output_t to retrieve.
  *
@@ -407,9 +404,9 @@ ListOfOutputs_getById(ListOf_t* lo, const char *sid);
 /**
  * Removes the nth Output_t from this ListOf_t and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Output_t to remove.
+ * @param n an unsigned int representing the index of the Output_t to remove.
  *
  * @return a pointer to the nth Output_t in this ListOf_t.
  *
@@ -424,9 +421,9 @@ ListOfOutputs_remove(ListOf_t* lo, unsigned int n);
  * Removes the Output_t from this ListOf_t based on its identifier and returns
  * a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the Output_t to remove.
+ * @param sid a string representing the identifier of the Output_t to remove.
  *
  * @return the Output_t in this ListOf_t based on the identifier or NULL if no
  * such Output_t exists.

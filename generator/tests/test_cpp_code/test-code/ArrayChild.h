@@ -75,13 +75,13 @@ public:
    * Creates a new ArrayChild using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this ArrayChild
+   * @param level an unsigned int, the SBML Level to assign to this ArrayChild.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ArrayChild
+   * ArrayChild.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ArrayChild
+   * ArrayChild.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -98,7 +98,7 @@ public:
   /**
    * Creates a new ArrayChild using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -112,7 +112,7 @@ public:
   /**
    * Copy constructor for ArrayChild.
    *
-   * @param orig; the ArrayChild instance to copy.
+   * @param orig the ArrayChild instance to copy.
    */
   ArrayChild(const ArrayChild& orig);
 
@@ -120,8 +120,8 @@ public:
   /**
    * Assignment operator for ArrayChild.
    *
-   * @param rhs; the ArrayChild object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the ArrayChild object whose values are to be used as the basis
+   * of the assignment.
    */
   ArrayChild& operator=(const ArrayChild& rhs);
 
@@ -492,13 +492,13 @@ BEGIN_C_DECLS
  * Creates a new ArrayChild_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this ArrayChild_t
+ * @param level an unsigned int, the SBML Level to assign to this ArrayChild_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ArrayChild_t
+ * ArrayChild_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * ArrayChild_t
+ * ArrayChild_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -519,7 +519,7 @@ ArrayChild_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this ArrayChild_t object.
  *
- * @param ac; the ArrayChild_t structure
+ * @param ac the ArrayChild_t structure.
  *
  * @return a (deep) copy of this ArrayChild_t object.
  *
@@ -533,7 +533,7 @@ ArrayChild_clone(const ArrayChild_t* ac);
 /**
  * Frees this ArrayChild_t object.
  *
- * @param ac; the ArrayChild_t structure
+ * @param ac the ArrayChild_t structure.
  *
  * @memberof ArrayChild_t
  */
@@ -645,7 +645,7 @@ ArrayChild_setUnit(ArrayChild_t * ac, const Unit_t* unit);
  * Creates a new Unit_t object, adds it to this ArrayChild_t object and returns
  * the Unit_t object created.
  *
- * @param ac, the ArrayChild_t structure to which the Unit_t should be added.
+ * @param ac the ArrayChild_t structure to which the Unit_t should be added.
  *
  * @return a new Unit_t object instance.
  *

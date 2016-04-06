@@ -61,11 +61,11 @@ public:
    * Creates a new SpatialSBMLDocumentPlugin using the given uri, prefix and
    * package namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param spatialns, a pointer to the SpatialPkgNamespaces object to be used
+   * @param spatialns a pointer to the SpatialPkgNamespaces object to be used.
    */
   SpatialSBMLDocumentPlugin(const std::string& uri,
                             const std::string& prefix,
@@ -75,7 +75,7 @@ public:
   /**
    * Copy constructor for SpatialSBMLDocumentPlugin.
    *
-   * @param orig; the SpatialSBMLDocumentPlugin instance to copy.
+   * @param orig the SpatialSBMLDocumentPlugin instance to copy.
    */
   SpatialSBMLDocumentPlugin(const SpatialSBMLDocumentPlugin& orig);
 
@@ -83,8 +83,8 @@ public:
   /**
    * Assignment operator for SpatialSBMLDocumentPlugin.
    *
-   * @param rhs; the SpatialSBMLDocumentPlugin object whose values are to be
-   * used as the basis of the assignment
+   * @param rhs the SpatialSBMLDocumentPlugin object whose values are to be
+   * used as the basis of the assignment.
    */
   SpatialSBMLDocumentPlugin& operator=(const SpatialSBMLDocumentPlugin& rhs);
 

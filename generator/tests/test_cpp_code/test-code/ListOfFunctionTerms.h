@@ -76,13 +76,13 @@ public:
    * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfFunctionTerms
+   * ListOfFunctionTerms.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfFunctionTerms
+   * ListOfFunctionTerms.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * ListOfFunctionTerms
+   * ListOfFunctionTerms.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -101,7 +101,7 @@ public:
    * Creates a new ListOfFunctionTerms using the given QualPkgNamespaces
    * object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -115,7 +115,7 @@ public:
   /**
    * Copy constructor for ListOfFunctionTerms.
    *
-   * @param orig; the ListOfFunctionTerms instance to copy.
+   * @param orig the ListOfFunctionTerms instance to copy.
    */
   ListOfFunctionTerms(const ListOfFunctionTerms& orig);
 
@@ -123,8 +123,8 @@ public:
   /**
    * Assignment operator for ListOfFunctionTerms.
    *
-   * @param rhs; the ListOfFunctionTerms object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the ListOfFunctionTerms object whose values are to be used as
+   * the basis of the assignment.
    */
   ListOfFunctionTerms& operator=(const ListOfFunctionTerms& rhs);
 
@@ -209,7 +209,7 @@ public:
   /**
    * Get a FunctionTerm from the ListOfFunctionTerms.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
    * @return the nth FunctionTerm in this ListOfFunctionTerms.
@@ -222,7 +222,7 @@ public:
   /**
    * Get a FunctionTerm from the ListOfFunctionTerms.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
    * @return the nth FunctionTerm in this ListOfFunctionTerms.
@@ -264,7 +264,7 @@ public:
    * Removes the nth FunctionTerm from this ListOfFunctionTerms and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * remove.
    *
    * @return a pointer to the nth FunctionTerm in this ListOfFunctionTerms.
@@ -281,7 +281,7 @@ public:
    * Removes the FunctionTerm from this ListOfFunctionTerms based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the FunctionTerm to
+   * @param sid a string representing the identifier of the FunctionTerm to
    * remove.
    *
    * @return the FunctionTerm in this ListOfFunctionTerms based on the
@@ -296,7 +296,7 @@ public:
   /**
    * Adds a copy of the given FunctionTerm to this ListOfFunctionTerms.
    *
-   * @param ft, the FunctionTerm object to add.
+   * @param ft the FunctionTerm object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -499,9 +499,9 @@ BEGIN_C_DECLS
 /**
  * Get a FunctionTerm_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the FunctionTerm_t to
+ * @param n an unsigned int representing the index of the FunctionTerm_t to
  * retrieve.
  *
  * @return the nth FunctionTerm_t in this ListOf_t.
@@ -516,7 +516,7 @@ ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n);
 /**
  * Get a FunctionTerm_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the FunctionTerm_t to
  * retrieve.
@@ -535,9 +535,9 @@ ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid);
  * Removes the nth FunctionTerm_t from this ListOf_t and returns a pointer to
  * it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the FunctionTerm_t to
+ * @param n an unsigned int representing the index of the FunctionTerm_t to
  * remove.
  *
  * @return a pointer to the nth FunctionTerm_t in this ListOf_t.
@@ -553,9 +553,9 @@ ListOfFunctionTerms_remove(ListOf_t* lo, unsigned int n);
  * Removes the FunctionTerm_t from this ListOf_t based on its identifier and
  * returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the FunctionTerm_t to
+ * @param sid a string representing the identifier of the FunctionTerm_t to
  * remove.
  *
  * @return the FunctionTerm_t in this ListOf_t based on the identifier or NULL

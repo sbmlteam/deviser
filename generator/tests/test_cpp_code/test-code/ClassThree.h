@@ -76,13 +76,13 @@ public:
    * Creates a new ClassThree using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this ClassThree
+   * @param level an unsigned int, the SBML Level to assign to this ClassThree.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ClassThree
+   * ClassThree.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ClassThree
+   * ClassThree.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +99,7 @@ public:
   /**
    * Creates a new ClassThree using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +113,7 @@ public:
   /**
    * Copy constructor for ClassThree.
    *
-   * @param orig; the ClassThree instance to copy.
+   * @param orig the ClassThree instance to copy.
    */
   ClassThree(const ClassThree& orig);
 
@@ -121,8 +121,8 @@ public:
   /**
    * Assignment operator for ClassThree.
    *
-   * @param rhs; the ClassThree object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the ClassThree object whose values are to be used as the basis
+   * of the assignment.
    */
   ClassThree& operator=(const ClassThree& rhs);
 
@@ -549,13 +549,13 @@ BEGIN_C_DECLS
  * Creates a new ClassThree_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this ClassThree_t
+ * @param level an unsigned int, the SBML Level to assign to this ClassThree_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ClassThree_t
+ * ClassThree_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * ClassThree_t
+ * ClassThree_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -576,7 +576,7 @@ ClassThree_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this ClassThree_t object.
  *
- * @param ct; the ClassThree_t structure
+ * @param ct the ClassThree_t structure.
  *
  * @return a (deep) copy of this ClassThree_t object.
  *
@@ -590,7 +590,7 @@ ClassThree_clone(const ClassThree_t* ct);
 /**
  * Frees this ClassThree_t object.
  *
- * @param ct; the ClassThree_t structure
+ * @param ct the ClassThree_t structure.
  *
  * @memberof ClassThree_t
  */

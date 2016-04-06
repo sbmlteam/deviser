@@ -73,12 +73,12 @@ public:
    * Creates a new Other using the given SBML Level, Version and
    * &ldquo;x&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Other
+   * @param level an unsigned int, the SBML Level to assign to this Other.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Other
+   * @param version an unsigned int, the SBML Version to assign to this Other.
    *
    * @param pkgVersion an unsigned int, the SBML X Version to assign to this
-   * Other
+   * Other.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -94,7 +94,7 @@ public:
   /**
    * Creates a new Other using the given XPkgNamespaces object.
    *
-   * @param xns the XPkgNamespaces object
+   * @param xns the XPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -108,7 +108,7 @@ public:
   /**
    * Copy constructor for Other.
    *
-   * @param orig; the Other instance to copy.
+   * @param orig the Other instance to copy.
    */
   Other(const Other& orig);
 
@@ -116,8 +116,8 @@ public:
   /**
    * Assignment operator for Other.
    *
-   * @param rhs; the Other object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Other object whose values are to be used as the basis of
+   * the assignment.
    */
   Other& operator=(const Other& rhs);
 
@@ -253,12 +253,12 @@ BEGIN_C_DECLS
  * Creates a new Other_t using the given SBML Level, Version and
  * &ldquo;x&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Other_t
+ * @param level an unsigned int, the SBML Level to assign to this Other_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Other_t
+ * @param version an unsigned int, the SBML Version to assign to this Other_t.
  *
  * @param pkgVersion an unsigned int, the SBML X Version to assign to this
- * Other_t
+ * Other_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -278,7 +278,7 @@ Other_create(unsigned int level = XExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Other_t object.
  *
- * @param o; the Other_t structure
+ * @param o the Other_t structure.
  *
  * @return a (deep) copy of this Other_t object.
  *
@@ -292,7 +292,7 @@ Other_clone(const Other_t* o);
 /**
  * Frees this Other_t object.
  *
- * @param o; the Other_t structure
+ * @param o the Other_t structure.
  *
  * @memberof Other_t
  */

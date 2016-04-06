@@ -77,13 +77,13 @@ public:
    * Creates a new ClassOne using the given SBML Level, Version and
    * &ldquo;vers&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this ClassOne
+   * @param level an unsigned int, the SBML Level to assign to this ClassOne.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ClassOne
+   * ClassOne.
    *
    * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
-   * ClassOne
+   * ClassOne.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -100,7 +100,7 @@ public:
   /**
    * Creates a new ClassOne using the given VersPkgNamespaces object.
    *
-   * @param versns the VersPkgNamespaces object
+   * @param versns the VersPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -114,7 +114,7 @@ public:
   /**
    * Copy constructor for ClassOne.
    *
-   * @param orig; the ClassOne instance to copy.
+   * @param orig the ClassOne instance to copy.
    */
   ClassOne(const ClassOne& orig);
 
@@ -122,8 +122,8 @@ public:
   /**
    * Assignment operator for ClassOne.
    *
-   * @param rhs; the ClassOne object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the ClassOne object whose values are to be used as the basis of
+   * the assignment.
    */
   ClassOne& operator=(const ClassOne& rhs);
 
@@ -460,13 +460,13 @@ BEGIN_C_DECLS
  * Creates a new ClassOne_t using the given SBML Level, Version and
  * &ldquo;vers&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this ClassOne_t
+ * @param level an unsigned int, the SBML Level to assign to this ClassOne_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ClassOne_t
+ * ClassOne_t.
  *
  * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
- * ClassOne_t
+ * ClassOne_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -487,7 +487,7 @@ ClassOne_create(unsigned int level = VersExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this ClassOne_t object.
  *
- * @param co; the ClassOne_t structure
+ * @param co the ClassOne_t structure.
  *
  * @return a (deep) copy of this ClassOne_t object.
  *
@@ -501,7 +501,7 @@ ClassOne_clone(const ClassOne_t* co);
 /**
  * Frees this ClassOne_t object.
  *
- * @param co; the ClassOne_t structure
+ * @param co the ClassOne_t structure.
  *
  * @memberof ClassOne_t
  */

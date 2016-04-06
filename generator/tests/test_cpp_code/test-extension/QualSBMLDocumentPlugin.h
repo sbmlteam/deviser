@@ -61,11 +61,11 @@ public:
    * Creates a new QualSBMLDocumentPlugin using the given uri, prefix and
    * package namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param qualns, a pointer to the QualPkgNamespaces object to be used
+   * @param qualns a pointer to the QualPkgNamespaces object to be used.
    */
   QualSBMLDocumentPlugin(const std::string& uri,
                          const std::string& prefix,
@@ -75,7 +75,7 @@ public:
   /**
    * Copy constructor for QualSBMLDocumentPlugin.
    *
-   * @param orig; the QualSBMLDocumentPlugin instance to copy.
+   * @param orig the QualSBMLDocumentPlugin instance to copy.
    */
   QualSBMLDocumentPlugin(const QualSBMLDocumentPlugin& orig);
 
@@ -83,8 +83,8 @@ public:
   /**
    * Assignment operator for QualSBMLDocumentPlugin.
    *
-   * @param rhs; the QualSBMLDocumentPlugin object whose values are to be used
-   * as the basis of the assignment
+   * @param rhs the QualSBMLDocumentPlugin object whose values are to be used
+   * as the basis of the assignment.
    */
   QualSBMLDocumentPlugin& operator=(const QualSBMLDocumentPlugin& rhs);
 

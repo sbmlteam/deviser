@@ -78,12 +78,12 @@ public:
    * Creates a new Output using the given SBML Level, Version and
    * &ldquo;qual&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Output
+   * @param level an unsigned int, the SBML Level to assign to this Output.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Output
+   * @param version an unsigned int, the SBML Version to assign to this Output.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * Output
+   * Output.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +99,7 @@ public:
   /**
    * Creates a new Output using the given QualPkgNamespaces object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +113,7 @@ public:
   /**
    * Copy constructor for Output.
    *
-   * @param orig; the Output instance to copy.
+   * @param orig the Output instance to copy.
    */
   Output(const Output& orig);
 
@@ -121,8 +121,8 @@ public:
   /**
    * Assignment operator for Output.
    *
-   * @param rhs; the Output object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Output object whose values are to be used as the basis of
+   * the assignment.
    */
   Output& operator=(const Output& rhs);
 
@@ -534,12 +534,12 @@ BEGIN_C_DECLS
  * Creates a new Output_t using the given SBML Level, Version and
  * &ldquo;qual&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Output_t
+ * @param level an unsigned int, the SBML Level to assign to this Output_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Output_t
+ * @param version an unsigned int, the SBML Version to assign to this Output_t.
  *
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
- * Output_t
+ * Output_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -560,7 +560,7 @@ Output_create(unsigned int level = QualExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Output_t object.
  *
- * @param o; the Output_t structure
+ * @param o the Output_t structure.
  *
  * @return a (deep) copy of this Output_t object.
  *
@@ -574,7 +574,7 @@ Output_clone(const Output_t* o);
 /**
  * Frees this Output_t object.
  *
- * @param o; the Output_t structure
+ * @param o the Output_t structure.
  *
  * @memberof Output_t
  */

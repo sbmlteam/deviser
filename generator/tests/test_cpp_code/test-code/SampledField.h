@@ -86,13 +86,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * SampledField
+   * SampledField.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * SampledField
+   * SampledField.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this SampledField
+   * this SampledField.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -109,7 +109,7 @@ public:
   /**
    * Creates a new SampledField using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -123,7 +123,7 @@ public:
   /**
    * Copy constructor for SampledField.
    *
-   * @param orig; the SampledField instance to copy.
+   * @param orig the SampledField instance to copy.
    */
   SampledField(const SampledField& orig);
 
@@ -131,8 +131,8 @@ public:
   /**
    * Assignment operator for SampledField.
    *
-   * @param rhs; the SampledField object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the SampledField object whose values are to be used as the
+   * basis of the assignment.
    */
   SampledField& operator=(const SampledField& rhs);
 
@@ -835,13 +835,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * SampledField_t
+ * SampledField_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * SampledField_t
+ * SampledField_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this SampledField_t
+ * this SampledField_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -863,7 +863,7 @@ SampledField_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this SampledField_t object.
  *
- * @param sf; the SampledField_t structure
+ * @param sf the SampledField_t structure.
  *
  * @return a (deep) copy of this SampledField_t object.
  *
@@ -877,7 +877,7 @@ SampledField_clone(const SampledField_t* sf);
 /**
  * Frees this SampledField_t object.
  *
- * @param sf; the SampledField_t structure
+ * @param sf the SampledField_t structure.
  *
  * @memberof SampledField_t
  */

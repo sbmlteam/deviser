@@ -68,13 +68,13 @@ public:
    * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfTransitions
+   * ListOfTransitions.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfTransitions
+   * ListOfTransitions.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * ListOfTransitions
+   * ListOfTransitions.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -91,7 +91,7 @@ public:
   /**
    * Creates a new ListOfTransitions using the given QualPkgNamespaces object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -105,7 +105,7 @@ public:
   /**
    * Copy constructor for ListOfTransitions.
    *
-   * @param orig; the ListOfTransitions instance to copy.
+   * @param orig the ListOfTransitions instance to copy.
    */
   ListOfTransitions(const ListOfTransitions& orig);
 
@@ -113,8 +113,8 @@ public:
   /**
    * Assignment operator for ListOfTransitions.
    *
-   * @param rhs; the ListOfTransitions object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the ListOfTransitions object whose values are to be used as the
+   * basis of the assignment.
    */
   ListOfTransitions& operator=(const ListOfTransitions& rhs);
 
@@ -136,7 +136,7 @@ public:
   /**
    * Get a Transition from the ListOfTransitions.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
    * @return the nth Transition in this ListOfTransitions.
@@ -149,7 +149,7 @@ public:
   /**
    * Get a Transition from the ListOfTransitions.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
    * @return the nth Transition in this ListOfTransitions.
@@ -191,7 +191,7 @@ public:
    * Removes the nth Transition from this ListOfTransitions and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * remove.
    *
    * @return a pointer to the nth Transition in this ListOfTransitions.
@@ -208,7 +208,7 @@ public:
    * Removes the Transition from this ListOfTransitions based on its identifier
    * and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Transition to
+   * @param sid a string representing the identifier of the Transition to
    * remove.
    *
    * @return the Transition in this ListOfTransitions based on the identifier
@@ -223,7 +223,7 @@ public:
   /**
    * Adds a copy of the given Transition to this ListOfTransitions.
    *
-   * @param t, the Transition object to add.
+   * @param t the Transition object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -353,9 +353,9 @@ BEGIN_C_DECLS
 /**
  * Get a Transition_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Transition_t to
+ * @param n an unsigned int representing the index of the Transition_t to
  * retrieve.
  *
  * @return the nth Transition_t in this ListOf_t.
@@ -370,7 +370,7 @@ ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
 /**
  * Get a Transition_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the Transition_t to
  * retrieve.
@@ -388,9 +388,9 @@ ListOfTransitions_getById(ListOf_t* lo, const char *sid);
 /**
  * Removes the nth Transition_t from this ListOf_t and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Transition_t to
+ * @param n an unsigned int representing the index of the Transition_t to
  * remove.
  *
  * @return a pointer to the nth Transition_t in this ListOf_t.
@@ -406,9 +406,9 @@ ListOfTransitions_remove(ListOf_t* lo, unsigned int n);
  * Removes the Transition_t from this ListOf_t based on its identifier and
  * returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the Transition_t to
+ * @param sid a string representing the identifier of the Transition_t to
  * remove.
  *
  * @return the Transition_t in this ListOf_t based on the identifier or NULL if

@@ -77,13 +77,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ParametricGeometry
+   * ParametricGeometry.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ParametricGeometry
+   * ParametricGeometry.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this ParametricGeometry
+   * this ParametricGeometry.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -102,7 +102,7 @@ public:
    * Creates a new ParametricGeometry using the given SpatialPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -116,7 +116,7 @@ public:
   /**
    * Copy constructor for ParametricGeometry.
    *
-   * @param orig; the ParametricGeometry instance to copy.
+   * @param orig the ParametricGeometry instance to copy.
    */
   ParametricGeometry(const ParametricGeometry& orig);
 
@@ -124,8 +124,8 @@ public:
   /**
    * Assignment operator for ParametricGeometry.
    *
-   * @param rhs; the ParametricGeometry object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the ParametricGeometry object whose values are to be used as
+   * the basis of the assignment.
    */
   ParametricGeometry& operator=(const ParametricGeometry& rhs);
 
@@ -227,8 +227,8 @@ public:
   /**
    * Get a ParametricObject from the ParametricGeometry.
    *
-   * @param n, an unsigned int representing the index of the ParametricObject
-   * to retrieve.
+   * @param n an unsigned int representing the index of the ParametricObject to
+   * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
    * this ParametricGeometry.
@@ -241,8 +241,8 @@ public:
   /**
    * Get a ParametricObject from the ParametricGeometry.
    *
-   * @param n, an unsigned int representing the index of the ParametricObject
-   * to retrieve.
+   * @param n an unsigned int representing the index of the ParametricObject to
+   * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
    * this ParametricGeometry.
@@ -316,7 +316,7 @@ public:
   /**
    * Adds a copy of the given ParametricObject to this ParametricGeometry.
    *
-   * @param po, the ParametricObject object to add.
+   * @param po the ParametricObject object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -352,8 +352,8 @@ public:
    * Removes the nth ParametricObject from this ParametricGeometry and returns
    * a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the ParametricObject
-   * to remove.
+   * @param n an unsigned int representing the index of the ParametricObject to
+   * remove.
    *
    * @return a pointer to the nth ParametricObject in this ParametricGeometry.
    *
@@ -369,8 +369,8 @@ public:
    * Removes the ParametricObject from this ParametricGeometry based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the ParametricObject
-   * to remove.
+   * @param sid a string representing the identifier of the ParametricObject to
+   * remove.
    *
    * @return the ParametricObject in this ParametricGeometry based on the
    * identifier or NULL if no such ParametricObject exists.
@@ -608,13 +608,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * ParametricGeometry_t
+ * ParametricGeometry_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ParametricGeometry_t
+ * ParametricGeometry_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this ParametricGeometry_t
+ * this ParametricGeometry_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -638,7 +638,7 @@ ParametricGeometry_create(
 /**
  * Creates and returns a deep copy of this ParametricGeometry_t object.
  *
- * @param pg; the ParametricGeometry_t structure
+ * @param pg the ParametricGeometry_t structure.
  *
  * @return a (deep) copy of this ParametricGeometry_t object.
  *
@@ -652,7 +652,7 @@ ParametricGeometry_clone(const ParametricGeometry_t* pg);
 /**
  * Frees this ParametricGeometry_t object.
  *
- * @param pg; the ParametricGeometry_t structure
+ * @param pg the ParametricGeometry_t structure.
  *
  * @memberof ParametricGeometry_t
  */
@@ -717,7 +717,7 @@ ParametricGeometry_setSpatialPoints(ParametricGeometry_t * pg,
  * Creates a new SpatialPoints_t object, adds it to this ParametricGeometry_t
  * object and returns the SpatialPoints_t object created.
  *
- * @param pg, the ParametricGeometry_t structure to which the SpatialPoints_t
+ * @param pg the ParametricGeometry_t structure to which the SpatialPoints_t
  * should be added.
  *
  * @return a new SpatialPoints_t object instance.
@@ -766,10 +766,10 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg);
 /**
  * Get a ParametricObject_t from the ParametricGeometry_t.
  *
- * @param pg, the ParametricGeometry_t structure to search.
+ * @param pg the ParametricGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the ParametricObject_t
- * to retrieve.
+ * @param n an unsigned int representing the index of the ParametricObject_t to
+ * retrieve.
  *
  * @return the nth ParametricObject_t in the ListOfParametricObjects within
  * this ParametricGeometry.
@@ -786,7 +786,7 @@ ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
  * Get a ParametricObject_t from the ParametricGeometry_t based on its
  * identifier.
  *
- * @param pg, the ParametricGeometry_t structure to search.
+ * @param pg the ParametricGeometry_t structure to search.
  *
  * @param sid a string representing the identifier of the ParametricObject_t to
  * retrieve.
@@ -807,7 +807,7 @@ ParametricGeometry_getParametricObjectById(ParametricGeometry_t* pg,
  * Get a ParametricObject_t from the ParametricGeometry_t based on the
  * DomainType to which it refers.
  *
- * @param pg, the ParametricGeometry_t structure to search.
+ * @param pg the ParametricGeometry_t structure to search.
  *
  * @param sid a string representing the domainType attribute of the
  * ParametricObject_t object to retrieve.
@@ -826,10 +826,10 @@ ParametricGeometry_getParametricObjectByDomainType(ParametricGeometry_t* pg,
 /**
  * Adds a copy of the given ParametricObject_t to this ParametricGeometry_t.
  *
- * @param pg, the ParametricGeometry_t structure to which the
- * ParametricObject_t should be added.
+ * @param pg the ParametricGeometry_t structure to which the ParametricObject_t
+ * should be added.
  *
- * @param po, the ParametricObject_t object to add.
+ * @param po the ParametricObject_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -846,7 +846,7 @@ ParametricGeometry_addParametricObject(ParametricGeometry_t* pg,
 /**
  * Get the number of ParametricObject_t objects in this ParametricGeometry_t.
  *
- * @param pg, the ParametricGeometry_t structure to query.
+ * @param pg the ParametricGeometry_t structure to query.
  *
  * @return the number of ParametricObject_t objects in this
  * ParametricGeometry_t.
@@ -863,8 +863,8 @@ ParametricGeometry_getNumParametricObjects(ParametricGeometry_t* pg);
  * ParametricGeometry_t object and returns the ParametricObject_t object
  * created.
  *
- * @param pg, the ParametricGeometry_t structure to which the
- * ParametricObject_t should be added.
+ * @param pg the ParametricGeometry_t structure to which the ParametricObject_t
+ * should be added.
  *
  * @return a new ParametricObject_t object instance.
  *
@@ -879,10 +879,10 @@ ParametricGeometry_createParametricObject(ParametricGeometry_t* pg);
  * Removes the nth ParametricObject_t from this ParametricGeometry_t and
  * returns a pointer to it.
  *
- * @param pg, the ParametricGeometry_t structure to search.
+ * @param pg the ParametricGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the ParametricObject_t
- * to remove.
+ * @param n an unsigned int representing the index of the ParametricObject_t to
+ * remove.
  *
  * @return a pointer to the nth ParametricObject_t in this
  * ParametricGeometry_t.
@@ -899,10 +899,10 @@ ParametricGeometry_removeParametricObject(ParametricGeometry_t* pg,
  * Removes the ParametricObject_t from this ParametricGeometry_t based on its
  * identifier and returns a pointer to it.
  *
- * @param pg, the ParametricGeometry_t structure to search.
+ * @param pg the ParametricGeometry_t structure to search.
  *
- * @param sid, a string representing the identifier of the ParametricObject_t
- * to remove.
+ * @param sid a string representing the identifier of the ParametricObject_t to
+ * remove.
  *
  * @return the ParametricObject_t in this ParametricGeometry_t based on the
  * identifier or NULL if no such ParametricObject_t exists.

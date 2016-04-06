@@ -73,13 +73,14 @@ public:
    * Creates a new UnknownType using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this UnknownType
+   * @param level an unsigned int, the SBML Level to assign to this
+   * UnknownType.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * UnknownType
+   * UnknownType.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * UnknownType
+   * UnknownType.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -96,7 +97,7 @@ public:
   /**
    * Creates a new UnknownType using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -110,7 +111,7 @@ public:
   /**
    * Copy constructor for UnknownType.
    *
-   * @param orig; the UnknownType instance to copy.
+   * @param orig the UnknownType instance to copy.
    */
   UnknownType(const UnknownType& orig);
 
@@ -118,8 +119,8 @@ public:
   /**
    * Assignment operator for UnknownType.
    *
-   * @param rhs; the UnknownType object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the UnknownType object whose values are to be used as the basis
+   * of the assignment.
    */
   UnknownType& operator=(const UnknownType& rhs);
 
@@ -333,13 +334,14 @@ BEGIN_C_DECLS
  * Creates a new UnknownType_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this UnknownType_t
+ * @param level an unsigned int, the SBML Level to assign to this
+ * UnknownType_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * UnknownType_t
+ * UnknownType_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * UnknownType_t
+ * UnknownType_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -360,7 +362,7 @@ UnknownType_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this UnknownType_t object.
  *
- * @param ut; the UnknownType_t structure
+ * @param ut the UnknownType_t structure.
  *
  * @return a (deep) copy of this UnknownType_t object.
  *
@@ -374,7 +376,7 @@ UnknownType_clone(const UnknownType_t* ut);
 /**
  * Frees this UnknownType_t object.
  *
- * @param ut; the UnknownType_t structure
+ * @param ut the UnknownType_t structure.
  *
  * @memberof UnknownType_t
  */

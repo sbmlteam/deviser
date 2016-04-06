@@ -68,11 +68,11 @@ public:
    * Creates a new SpatialCompartmentPlugin using the given uri, prefix and
    * package namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param spatialns, a pointer to the SpatialPkgNamespaces object to be used
+   * @param spatialns a pointer to the SpatialPkgNamespaces object to be used.
    */
   SpatialCompartmentPlugin(const std::string& uri,
                            const std::string& prefix,
@@ -82,7 +82,7 @@ public:
   /**
    * Copy constructor for SpatialCompartmentPlugin.
    *
-   * @param orig; the SpatialCompartmentPlugin instance to copy.
+   * @param orig the SpatialCompartmentPlugin instance to copy.
    */
   SpatialCompartmentPlugin(const SpatialCompartmentPlugin& orig);
 
@@ -90,8 +90,8 @@ public:
   /**
    * Assignment operator for SpatialCompartmentPlugin.
    *
-   * @param rhs; the SpatialCompartmentPlugin object whose values are to be
-   * used as the basis of the assignment
+   * @param rhs the SpatialCompartmentPlugin object whose values are to be used
+   * as the basis of the assignment.
    */
   SpatialCompartmentPlugin& operator=(const SpatialCompartmentPlugin& rhs);
 
@@ -300,7 +300,7 @@ public:
   /**
    * Append items from model (used in comp flattening)
    *
-   * @param model a pointer to a model object
+   * @param model a pointer to a model object.
    *
    */
   int appendFrom(const Model* model);

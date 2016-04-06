@@ -79,13 +79,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * SpatialPoints
+   * SpatialPoints.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * SpatialPoints
+   * SpatialPoints.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this SpatialPoints
+   * this SpatialPoints.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -102,7 +102,7 @@ public:
   /**
    * Creates a new SpatialPoints using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -116,7 +116,7 @@ public:
   /**
    * Copy constructor for SpatialPoints.
    *
-   * @param orig; the SpatialPoints instance to copy.
+   * @param orig the SpatialPoints instance to copy.
    */
   SpatialPoints(const SpatialPoints& orig);
 
@@ -124,8 +124,8 @@ public:
   /**
    * Assignment operator for SpatialPoints.
    *
-   * @param rhs; the SpatialPoints object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the SpatialPoints object whose values are to be used as the
+   * basis of the assignment.
    */
   SpatialPoints& operator=(const SpatialPoints& rhs);
 
@@ -585,13 +585,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * SpatialPoints_t
+ * SpatialPoints_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * SpatialPoints_t
+ * SpatialPoints_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this SpatialPoints_t
+ * this SpatialPoints_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -613,7 +613,7 @@ SpatialPoints_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this SpatialPoints_t object.
  *
- * @param sp; the SpatialPoints_t structure
+ * @param sp the SpatialPoints_t structure.
  *
  * @return a (deep) copy of this SpatialPoints_t object.
  *
@@ -627,7 +627,7 @@ SpatialPoints_clone(const SpatialPoints_t* sp);
 /**
  * Frees this SpatialPoints_t object.
  *
- * @param sp; the SpatialPoints_t structure
+ * @param sp the SpatialPoints_t structure.
  *
  * @memberof SpatialPoints_t
  */

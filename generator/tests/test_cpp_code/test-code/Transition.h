@@ -80,13 +80,13 @@ public:
    * Creates a new Transition using the given SBML Level, Version and
    * &ldquo;qual&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Transition
+   * @param level an unsigned int, the SBML Level to assign to this Transition.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * Transition
+   * Transition.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * Transition
+   * Transition.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -103,7 +103,7 @@ public:
   /**
    * Creates a new Transition using the given QualPkgNamespaces object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -117,7 +117,7 @@ public:
   /**
    * Copy constructor for Transition.
    *
-   * @param orig; the Transition instance to copy.
+   * @param orig the Transition instance to copy.
    */
   Transition(const Transition& orig);
 
@@ -125,8 +125,8 @@ public:
   /**
    * Assignment operator for Transition.
    *
-   * @param rhs; the Transition object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the Transition object whose values are to be used as the basis
+   * of the assignment.
    */
   Transition& operator=(const Transition& rhs);
 
@@ -244,7 +244,7 @@ public:
   /**
    * Get an Input from the Transition.
    *
-   * @param n, an unsigned int representing the index of the Input to retrieve.
+   * @param n an unsigned int representing the index of the Input to retrieve.
    *
    * @return the nth Input in the ListOfInputs within this Transition.
    *
@@ -256,7 +256,7 @@ public:
   /**
    * Get an Input from the Transition.
    *
-   * @param n, an unsigned int representing the index of the Input to retrieve.
+   * @param n an unsigned int representing the index of the Input to retrieve.
    *
    * @return the nth Input in the ListOfInputs within this Transition.
    *
@@ -322,7 +322,7 @@ public:
   /**
    * Adds a copy of the given Input to this Transition.
    *
-   * @param i, the Input object to add.
+   * @param i the Input object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -357,7 +357,7 @@ public:
   /**
    * Removes the nth Input from this Transition and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Input to remove.
+   * @param n an unsigned int representing the index of the Input to remove.
    *
    * @return a pointer to the nth Input in this Transition.
    *
@@ -373,7 +373,7 @@ public:
    * Removes the Input from this Transition based on its identifier and returns
    * a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Input to remove.
+   * @param sid a string representing the identifier of the Input to remove.
    *
    * @return the Input in this Transition based on the identifier or NULL if no
    * such Input exists.
@@ -403,8 +403,7 @@ public:
   /**
    * Get an Output from the Transition.
    *
-   * @param n, an unsigned int representing the index of the Output to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in the ListOfOutputs within this Transition.
    *
@@ -416,8 +415,7 @@ public:
   /**
    * Get an Output from the Transition.
    *
-   * @param n, an unsigned int representing the index of the Output to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in the ListOfOutputs within this Transition.
    *
@@ -483,7 +481,7 @@ public:
   /**
    * Adds a copy of the given Output to this Transition.
    *
-   * @param o, the Output object to add.
+   * @param o the Output object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -518,7 +516,7 @@ public:
   /**
    * Removes the nth Output from this Transition and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Output to remove.
+   * @param n an unsigned int representing the index of the Output to remove.
    *
    * @return a pointer to the nth Output in this Transition.
    *
@@ -534,7 +532,7 @@ public:
    * Removes the Output from this Transition based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Output to remove.
+   * @param sid a string representing the identifier of the Output to remove.
    *
    * @return the Output in this Transition based on the identifier or NULL if
    * no such Output exists.
@@ -564,7 +562,7 @@ public:
   /**
    * Get a FunctionTerm from the Transition.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
@@ -578,7 +576,7 @@ public:
   /**
    * Get a FunctionTerm from the Transition.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
@@ -592,7 +590,7 @@ public:
   /**
    * Adds a copy of the given FunctionTerm to this Transition.
    *
-   * @param ft, the FunctionTerm object to add.
+   * @param ft the FunctionTerm object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -628,7 +626,7 @@ public:
    * Removes the nth FunctionTerm from this Transition and returns a pointer to
    * it.
    *
-   * @param n, an unsigned int representing the index of the FunctionTerm to
+   * @param n an unsigned int representing the index of the FunctionTerm to
    * remove.
    *
    * @return a pointer to the nth FunctionTerm in this Transition.
@@ -928,13 +926,13 @@ BEGIN_C_DECLS
  * Creates a new Transition_t using the given SBML Level, Version and
  * &ldquo;qual&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Transition_t
+ * @param level an unsigned int, the SBML Level to assign to this Transition_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * Transition_t
+ * Transition_t.
  *
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
- * Transition_t
+ * Transition_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -955,7 +953,7 @@ Transition_create(unsigned int level = QualExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Transition_t object.
  *
- * @param t; the Transition_t structure
+ * @param t the Transition_t structure.
  *
  * @return a (deep) copy of this Transition_t object.
  *
@@ -969,7 +967,7 @@ Transition_clone(const Transition_t* t);
 /**
  * Frees this Transition_t object.
  *
- * @param t; the Transition_t structure
+ * @param t the Transition_t structure.
  *
  * @memberof Transition_t
  */
@@ -1123,9 +1121,9 @@ Transition_getListOfInputs(Transition_t* t);
 /**
  * Get an Input_t from the Transition_t.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Input_t to retrieve.
+ * @param n an unsigned int representing the index of the Input_t to retrieve.
  *
  * @return the nth Input_t in the ListOfInputs within this Transition.
  *
@@ -1139,7 +1137,7 @@ Transition_getInput(Transition_t* t, unsigned int n);
 /**
  * Get an Input_t from the Transition_t based on its identifier.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
  * @param sid a string representing the identifier of the Input_t to retrieve.
  *
@@ -1157,7 +1155,7 @@ Transition_getInputById(Transition_t* t, const char *sid);
  * Get an Input_t from the Transition_t based on the QualitativeSpecies to
  * which it refers.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
  * @param sid a string representing the qualitativeSpecies attribute of the
  * Input_t object to retrieve.
@@ -1175,9 +1173,9 @@ Transition_getInputByQualitativeSpecies(Transition_t* t, const char *sid);
 /**
  * Adds a copy of the given Input_t to this Transition_t.
  *
- * @param t, the Transition_t structure to which the Input_t should be added.
+ * @param t the Transition_t structure to which the Input_t should be added.
  *
- * @param i, the Input_t object to add.
+ * @param i the Input_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1193,7 +1191,7 @@ Transition_addInput(Transition_t* t, const Input_t* i);
 /**
  * Get the number of Input_t objects in this Transition_t.
  *
- * @param t, the Transition_t structure to query.
+ * @param t the Transition_t structure to query.
  *
  * @return the number of Input_t objects in this Transition_t.
  *
@@ -1208,7 +1206,7 @@ Transition_getNumInputs(Transition_t* t);
  * Creates a new Input_t object, adds it to this Transition_t object and
  * returns the Input_t object created.
  *
- * @param t, the Transition_t structure to which the Input_t should be added.
+ * @param t the Transition_t structure to which the Input_t should be added.
  *
  * @return a new Input_t object instance.
  *
@@ -1222,9 +1220,9 @@ Transition_createInput(Transition_t* t);
 /**
  * Removes the nth Input_t from this Transition_t and returns a pointer to it.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Input_t to remove.
+ * @param n an unsigned int representing the index of the Input_t to remove.
  *
  * @return a pointer to the nth Input_t in this Transition_t.
  *
@@ -1239,9 +1237,9 @@ Transition_removeInput(Transition_t* t, unsigned int n);
  * Removes the Input_t from this Transition_t based on its identifier and
  * returns a pointer to it.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param sid, a string representing the identifier of the Input_t to remove.
+ * @param sid a string representing the identifier of the Input_t to remove.
  *
  * @return the Input_t in this Transition_t based on the identifier or NULL if
  * no such Input_t exists.
@@ -1270,10 +1268,9 @@ Transition_getListOfOutputs(Transition_t* t);
 /**
  * Get an Output_t from the Transition_t.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Output_t to
- * retrieve.
+ * @param n an unsigned int representing the index of the Output_t to retrieve.
  *
  * @return the nth Output_t in the ListOfOutputs within this Transition.
  *
@@ -1287,7 +1284,7 @@ Transition_getOutput(Transition_t* t, unsigned int n);
 /**
  * Get an Output_t from the Transition_t based on its identifier.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
  * @param sid a string representing the identifier of the Output_t to retrieve.
  *
@@ -1305,7 +1302,7 @@ Transition_getOutputById(Transition_t* t, const char *sid);
  * Get an Output_t from the Transition_t based on the QualitativeSpecies to
  * which it refers.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
  * @param sid a string representing the qualitativeSpecies attribute of the
  * Output_t object to retrieve.
@@ -1323,9 +1320,9 @@ Transition_getOutputByQualitativeSpecies(Transition_t* t, const char *sid);
 /**
  * Adds a copy of the given Output_t to this Transition_t.
  *
- * @param t, the Transition_t structure to which the Output_t should be added.
+ * @param t the Transition_t structure to which the Output_t should be added.
  *
- * @param o, the Output_t object to add.
+ * @param o the Output_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1341,7 +1338,7 @@ Transition_addOutput(Transition_t* t, const Output_t* o);
 /**
  * Get the number of Output_t objects in this Transition_t.
  *
- * @param t, the Transition_t structure to query.
+ * @param t the Transition_t structure to query.
  *
  * @return the number of Output_t objects in this Transition_t.
  *
@@ -1356,7 +1353,7 @@ Transition_getNumOutputs(Transition_t* t);
  * Creates a new Output_t object, adds it to this Transition_t object and
  * returns the Output_t object created.
  *
- * @param t, the Transition_t structure to which the Output_t should be added.
+ * @param t the Transition_t structure to which the Output_t should be added.
  *
  * @return a new Output_t object instance.
  *
@@ -1370,9 +1367,9 @@ Transition_createOutput(Transition_t* t);
 /**
  * Removes the nth Output_t from this Transition_t and returns a pointer to it.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Output_t to remove.
+ * @param n an unsigned int representing the index of the Output_t to remove.
  *
  * @return a pointer to the nth Output_t in this Transition_t.
  *
@@ -1387,9 +1384,9 @@ Transition_removeOutput(Transition_t* t, unsigned int n);
  * Removes the Output_t from this Transition_t based on its identifier and
  * returns a pointer to it.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param sid, a string representing the identifier of the Output_t to remove.
+ * @param sid a string representing the identifier of the Output_t to remove.
  *
  * @return the Output_t in this Transition_t based on the identifier or NULL if
  * no such Output_t exists.
@@ -1419,9 +1416,9 @@ Transition_getListOfFunctionTerms(Transition_t* t);
 /**
  * Get a FunctionTerm_t from the Transition_t.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the FunctionTerm_t to
+ * @param n an unsigned int representing the index of the FunctionTerm_t to
  * retrieve.
  *
  * @return the nth FunctionTerm_t in the ListOfFunctionTerms within this
@@ -1437,10 +1434,10 @@ Transition_getFunctionTerm(Transition_t* t, unsigned int n);
 /**
  * Adds a copy of the given FunctionTerm_t to this Transition_t.
  *
- * @param t, the Transition_t structure to which the FunctionTerm_t should be
+ * @param t the Transition_t structure to which the FunctionTerm_t should be
  * added.
  *
- * @param ft, the FunctionTerm_t object to add.
+ * @param ft the FunctionTerm_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1456,7 +1453,7 @@ Transition_addFunctionTerm(Transition_t* t, const FunctionTerm_t* ft);
 /**
  * Get the number of FunctionTerm_t objects in this Transition_t.
  *
- * @param t, the Transition_t structure to query.
+ * @param t the Transition_t structure to query.
  *
  * @return the number of FunctionTerm_t objects in this Transition_t.
  *
@@ -1471,7 +1468,7 @@ Transition_getNumFunctionTerms(Transition_t* t);
  * Creates a new FunctionTerm_t object, adds it to this Transition_t object and
  * returns the FunctionTerm_t object created.
  *
- * @param t, the Transition_t structure to which the FunctionTerm_t should be
+ * @param t the Transition_t structure to which the FunctionTerm_t should be
  * added.
  *
  * @return a new FunctionTerm_t object instance.
@@ -1487,9 +1484,9 @@ Transition_createFunctionTerm(Transition_t* t);
  * Removes the nth FunctionTerm_t from this Transition_t and returns a pointer
  * to it.
  *
- * @param t, the Transition_t structure to search.
+ * @param t the Transition_t structure to search.
  *
- * @param n, an unsigned int representing the index of the FunctionTerm_t to
+ * @param n an unsigned int representing the index of the FunctionTerm_t to
  * remove.
  *
  * @return a pointer to the nth FunctionTerm_t in this Transition_t.
@@ -1556,7 +1553,7 @@ Transition_setDefaultTerm(Transition_t * t,
  * Creates a new DefaultTerm_t object, adds it to this Transition_t object and
  * returns the DefaultTerm_t object created.
  *
- * @param t, the Transition_t structure to which the DefaultTerm_t should be
+ * @param t the Transition_t structure to which the DefaultTerm_t should be
  * added.
  *
  * @return a new DefaultTerm_t object instance.

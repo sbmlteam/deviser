@@ -68,13 +68,13 @@ public:
    * Version and &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfCoordinateComponents
+   * ListOfCoordinateComponents.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfCoordinateComponents
+   * ListOfCoordinateComponents.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this ListOfCoordinateComponents
+   * this ListOfCoordinateComponents.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -95,7 +95,7 @@ public:
    * Creates a new ListOfCoordinateComponents using the given
    * SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -109,7 +109,7 @@ public:
   /**
    * Copy constructor for ListOfCoordinateComponents.
    *
-   * @param orig; the ListOfCoordinateComponents instance to copy.
+   * @param orig the ListOfCoordinateComponents instance to copy.
    */
   ListOfCoordinateComponents(const ListOfCoordinateComponents& orig);
 
@@ -117,8 +117,8 @@ public:
   /**
    * Assignment operator for ListOfCoordinateComponents.
    *
-   * @param rhs; the ListOfCoordinateComponents object whose values are to be
-   * used as the basis of the assignment
+   * @param rhs the ListOfCoordinateComponents object whose values are to be
+   * used as the basis of the assignment.
    */
   ListOfCoordinateComponents& operator=(const ListOfCoordinateComponents& rhs);
 
@@ -140,8 +140,8 @@ public:
   /**
    * Get a CoordinateComponent from the ListOfCoordinateComponents.
    *
-   * @param n, an unsigned int representing the index of the
-   * CoordinateComponent to retrieve.
+   * @param n an unsigned int representing the index of the CoordinateComponent
+   * to retrieve.
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
    *
@@ -153,8 +153,8 @@ public:
   /**
    * Get a CoordinateComponent from the ListOfCoordinateComponents.
    *
-   * @param n, an unsigned int representing the index of the
-   * CoordinateComponent to retrieve.
+   * @param n an unsigned int representing the index of the CoordinateComponent
+   * to retrieve.
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
    *
@@ -197,8 +197,8 @@ public:
    * Removes the nth CoordinateComponent from this ListOfCoordinateComponents
    * and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the
-   * CoordinateComponent to remove.
+   * @param n an unsigned int representing the index of the CoordinateComponent
+   * to remove.
    *
    * @return a pointer to the nth CoordinateComponent in this
    * ListOfCoordinateComponents.
@@ -215,8 +215,8 @@ public:
    * Removes the CoordinateComponent from this ListOfCoordinateComponents based
    * on its identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the
-   * CoordinateComponent to remove.
+   * @param sid a string representing the identifier of the CoordinateComponent
+   * to remove.
    *
    * @return the CoordinateComponent in this ListOfCoordinateComponents based
    * on the identifier or NULL if no such CoordinateComponent exists.
@@ -231,7 +231,7 @@ public:
    * Adds a copy of the given CoordinateComponent to this
    * ListOfCoordinateComponents.
    *
-   * @param cc, the CoordinateComponent object to add.
+   * @param cc the CoordinateComponent object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -364,10 +364,10 @@ BEGIN_C_DECLS
 /**
  * Get a CoordinateComponent_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the
- * CoordinateComponent_t to retrieve.
+ * @param n an unsigned int representing the index of the CoordinateComponent_t
+ * to retrieve.
  *
  * @return the nth CoordinateComponent_t in this ListOf_t.
  *
@@ -382,7 +382,7 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
 /**
  * Get a CoordinateComponent_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the CoordinateComponent_t
  * to retrieve.
@@ -401,10 +401,10 @@ ListOfCoordinateComponents_getById(ListOf_t* lo, const char *sid);
  * Removes the nth CoordinateComponent_t from this ListOf_t and returns a
  * pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the
- * CoordinateComponent_t to remove.
+ * @param n an unsigned int representing the index of the CoordinateComponent_t
+ * to remove.
  *
  * @return a pointer to the nth CoordinateComponent_t in this ListOf_t.
  *
@@ -419,10 +419,10 @@ ListOfCoordinateComponents_remove(ListOf_t* lo, unsigned int n);
  * Removes the CoordinateComponent_t from this ListOf_t based on its identifier
  * and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the
- * CoordinateComponent_t to remove.
+ * @param sid a string representing the identifier of the CoordinateComponent_t
+ * to remove.
  *
  * @return the CoordinateComponent_t in this ListOf_t based on the identifier
  * or NULL if no such CoordinateComponent_t exists.

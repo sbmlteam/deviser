@@ -66,13 +66,13 @@ public:
    * Creates a new ClassTwo using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this ClassTwo
+   * @param level an unsigned int, the SBML Level to assign to this ClassTwo.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ClassTwo
+   * ClassTwo.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ClassTwo
+   * ClassTwo.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -89,7 +89,7 @@ public:
   /**
    * Creates a new ClassTwo using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -103,7 +103,7 @@ public:
   /**
    * Copy constructor for ClassTwo.
    *
-   * @param orig; the ClassTwo instance to copy.
+   * @param orig the ClassTwo instance to copy.
    */
   ClassTwo(const ClassTwo& orig);
 
@@ -111,8 +111,8 @@ public:
   /**
    * Assignment operator for ClassTwo.
    *
-   * @param rhs; the ClassTwo object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the ClassTwo object whose values are to be used as the basis of
+   * the assignment.
    */
   ClassTwo& operator=(const ClassTwo& rhs);
 
@@ -237,13 +237,13 @@ BEGIN_C_DECLS
  * Creates a new ClassTwo_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this ClassTwo_t
+ * @param level an unsigned int, the SBML Level to assign to this ClassTwo_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ClassTwo_t
+ * ClassTwo_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * ClassTwo_t
+ * ClassTwo_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -264,7 +264,7 @@ ClassTwo_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this ClassTwo_t object.
  *
- * @param ct; the ClassTwo_t structure
+ * @param ct the ClassTwo_t structure.
  *
  * @return a (deep) copy of this ClassTwo_t object.
  *
@@ -278,7 +278,7 @@ ClassTwo_clone(const ClassTwo_t* ct);
 /**
  * Frees this ClassTwo_t object.
  *
- * @param ct; the ClassTwo_t structure
+ * @param ct the ClassTwo_t structure.
  *
  * @memberof ClassTwo_t
  */

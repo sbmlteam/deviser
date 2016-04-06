@@ -76,13 +76,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfCSGNodes
+   * ListOfCSGNodes.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfCSGNodes
+   * ListOfCSGNodes.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this ListOfCSGNodes
+   * this ListOfCSGNodes.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +99,7 @@ public:
   /**
    * Creates a new ListOfCSGNodes using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +113,7 @@ public:
   /**
    * Copy constructor for ListOfCSGNodes.
    *
-   * @param orig; the ListOfCSGNodes instance to copy.
+   * @param orig the ListOfCSGNodes instance to copy.
    */
   ListOfCSGNodes(const ListOfCSGNodes& orig);
 
@@ -121,8 +121,8 @@ public:
   /**
    * Assignment operator for ListOfCSGNodes.
    *
-   * @param rhs; the ListOfCSGNodes object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the ListOfCSGNodes object whose values are to be used as the
+   * basis of the assignment.
    */
   ListOfCSGNodes& operator=(const ListOfCSGNodes& rhs);
 
@@ -144,7 +144,7 @@ public:
   /**
    * Get a CSGNode from the ListOfCSGNodes.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to
+   * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
    * @return the nth CSGNode in this ListOfCSGNodes.
@@ -157,7 +157,7 @@ public:
   /**
    * Get a CSGNode from the ListOfCSGNodes.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to
+   * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
    * @return the nth CSGNode in this ListOfCSGNodes.
@@ -199,7 +199,7 @@ public:
    * Removes the nth CSGNode from this ListOfCSGNodes and returns a pointer to
    * it.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to remove.
+   * @param n an unsigned int representing the index of the CSGNode to remove.
    *
    * @return a pointer to the nth CSGNode in this ListOfCSGNodes.
    *
@@ -215,7 +215,7 @@ public:
    * Removes the CSGNode from this ListOfCSGNodes based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the CSGNode to remove.
+   * @param sid a string representing the identifier of the CSGNode to remove.
    *
    * @return the CSGNode in this ListOfCSGNodes based on the identifier or NULL
    * if no such CSGNode exists.
@@ -229,7 +229,7 @@ public:
   /**
    * Adds a copy of the given CSGNode to this ListOfCSGNodes.
    *
-   * @param csgn, the CSGNode object to add.
+   * @param csgn the CSGNode object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -436,9 +436,9 @@ BEGIN_C_DECLS
 /**
  * Get a CSGNode_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the CSGNode_t to
+ * @param n an unsigned int representing the index of the CSGNode_t to
  * retrieve.
  *
  * @return the nth CSGNode_t in this ListOf_t.
@@ -453,7 +453,7 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
 /**
  * Get a CSGNode_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the CSGNode_t to
  * retrieve.
@@ -471,9 +471,9 @@ ListOfCSGNodes_getById(ListOf_t* lo, const char *sid);
 /**
  * Removes the nth CSGNode_t from this ListOf_t and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the CSGNode_t to remove.
+ * @param n an unsigned int representing the index of the CSGNode_t to remove.
  *
  * @return a pointer to the nth CSGNode_t in this ListOf_t.
  *
@@ -488,9 +488,9 @@ ListOfCSGNodes_remove(ListOf_t* lo, unsigned int n);
  * Removes the CSGNode_t from this ListOf_t based on its identifier and returns
  * a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the CSGNode_t to remove.
+ * @param sid a string representing the identifier of the CSGNode_t to remove.
  *
  * @return the CSGNode_t in this ListOf_t based on the identifier or NULL if no
  * such CSGNode_t exists.

@@ -564,8 +564,7 @@ class SetGetFunctions():
                             't{3}'.format(self.language, self.open_br,
                                           self.success, self.close_br))
 
-        return_lines.append('@li @{0}constant '
-                            '{1}{2},'
+        return_lines.append('@li @{0}constant{1}{2},'
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
                                           self.invalid_att, self.close_br))
@@ -662,8 +661,7 @@ class SetGetFunctions():
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
                                           self.success, self.close_br))
-        return_lines.append('@li @{0}constant '
-                            '{1}{2},'
+        return_lines.append('@li @{0}constant{1}{2},'
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
                                           self.invalid_att, self.close_br))
@@ -742,8 +740,7 @@ class SetGetFunctions():
                                                             self.open_br,
                                                             self.success,
                                                             self.close_br),
-                        '@li @{0}constant '
-                        '{1}{2},'
+                        '@li @{0}constant{1}{2},'
                         ' OperationReturnValues_t{3}'.format(self.language,
                                                              self.open_br,
                                                              self.invalid_att,
@@ -814,8 +811,7 @@ class SetGetFunctions():
                                                             self.open_br,
                                                             self.success,
                                                             self.close_br),
-                        '@li @{0}constant '
-                        '{1}{2},'
+                        '@li @{0}constant{1}{2},'
                         ' OperationReturnValues_t{3}'.format(self.language,
                                                              self.open_br,
                                                              self.invalid_att,

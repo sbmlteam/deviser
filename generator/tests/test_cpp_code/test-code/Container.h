@@ -74,13 +74,13 @@ public:
    * Creates a new Container using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Container
+   * @param level an unsigned int, the SBML Level to assign to this Container.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * Container
+   * Container.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * Container
+   * Container.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -97,7 +97,7 @@ public:
   /**
    * Creates a new Container using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -111,7 +111,7 @@ public:
   /**
    * Copy constructor for Container.
    *
-   * @param orig; the Container instance to copy.
+   * @param orig the Container instance to copy.
    */
   Container(const Container& orig);
 
@@ -119,8 +119,8 @@ public:
   /**
    * Assignment operator for Container.
    *
-   * @param rhs; the Container object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the Container object whose values are to be used as the basis
+   * of the assignment.
    */
   Container& operator=(const Container& rhs);
 
@@ -158,7 +158,7 @@ public:
   /**
    * Get a MyLoTest from the Container.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
+   * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
    * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
@@ -171,7 +171,7 @@ public:
   /**
    * Get a MyLoTest from the Container.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
+   * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
    * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
@@ -184,7 +184,7 @@ public:
   /**
    * Adds a copy of the given MyLoTest to this Container.
    *
-   * @param mlt, the MyLoTest object to add.
+   * @param mlt the MyLoTest object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -219,8 +219,7 @@ public:
   /**
    * Removes the nth MyLoTest from this Container and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
-   * remove.
+   * @param n an unsigned int representing the index of the MyLoTest to remove.
    *
    * @return a pointer to the nth MyLoTest in this Container.
    *
@@ -410,13 +409,13 @@ BEGIN_C_DECLS
  * Creates a new Container_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Container_t
+ * @param level an unsigned int, the SBML Level to assign to this Container_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * Container_t
+ * Container_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * Container_t
+ * Container_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -437,7 +436,7 @@ Container_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Container_t object.
  *
- * @param c; the Container_t structure
+ * @param c the Container_t structure.
  *
  * @return a (deep) copy of this Container_t object.
  *
@@ -451,7 +450,7 @@ Container_clone(const Container_t* c);
 /**
  * Frees this Container_t object.
  *
- * @param c; the Container_t structure
+ * @param c the Container_t structure.
  *
  * @memberof Container_t
  */
@@ -477,9 +476,9 @@ Container_getListOfMyLoTests(Container_t* c);
 /**
  * Get a MyLoTest_t from the Container_t.
  *
- * @param c, the Container_t structure to search.
+ * @param c the Container_t structure to search.
  *
- * @param n, an unsigned int representing the index of the MyLoTest_t to
+ * @param n an unsigned int representing the index of the MyLoTest_t to
  * retrieve.
  *
  * @return the nth MyLoTest_t in the ListOfMyLoTests within this Container.
@@ -494,9 +493,9 @@ Container_getMyLoTest(Container_t* c, unsigned int n);
 /**
  * Adds a copy of the given MyLoTest_t to this Container_t.
  *
- * @param c, the Container_t structure to which the MyLoTest_t should be added.
+ * @param c the Container_t structure to which the MyLoTest_t should be added.
  *
- * @param mlt, the MyLoTest_t object to add.
+ * @param mlt the MyLoTest_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -512,7 +511,7 @@ Container_addMyLoTest(Container_t* c, const MyLoTest_t* mlt);
 /**
  * Get the number of MyLoTest_t objects in this Container_t.
  *
- * @param c, the Container_t structure to query.
+ * @param c the Container_t structure to query.
  *
  * @return the number of MyLoTest_t objects in this Container_t.
  *
@@ -527,7 +526,7 @@ Container_getNumMyLoTests(Container_t* c);
  * Creates a new MyLoTest_t object, adds it to this Container_t object and
  * returns the MyLoTest_t object created.
  *
- * @param c, the Container_t structure to which the MyLoTest_t should be added.
+ * @param c the Container_t structure to which the MyLoTest_t should be added.
  *
  * @return a new MyLoTest_t object instance.
  *
@@ -542,10 +541,9 @@ Container_createMyLoTest(Container_t* c);
  * Removes the nth MyLoTest_t from this Container_t and returns a pointer to
  * it.
  *
- * @param c, the Container_t structure to search.
+ * @param c the Container_t structure to search.
  *
- * @param n, an unsigned int representing the index of the MyLoTest_t to
- * remove.
+ * @param n an unsigned int representing the index of the MyLoTest_t to remove.
  *
  * @return a pointer to the nth MyLoTest_t in this Container_t.
  *

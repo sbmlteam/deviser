@@ -76,13 +76,14 @@ public:
    * Creates a new Uncertainty using the given SBML Level, Version and
    * &ldquo;distrib&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Uncertainty
+   * @param level an unsigned int, the SBML Level to assign to this
+   * Uncertainty.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * Uncertainty
+   * Uncertainty.
    *
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
-   * this Uncertainty
+   * this Uncertainty.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +100,7 @@ public:
   /**
    * Creates a new Uncertainty using the given DistribPkgNamespaces object.
    *
-   * @param distribns the DistribPkgNamespaces object
+   * @param distribns the DistribPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +114,7 @@ public:
   /**
    * Copy constructor for Uncertainty.
    *
-   * @param orig; the Uncertainty instance to copy.
+   * @param orig the Uncertainty instance to copy.
    */
   Uncertainty(const Uncertainty& orig);
 
@@ -121,8 +122,8 @@ public:
   /**
    * Assignment operator for Uncertainty.
    *
-   * @param rhs; the Uncertainty object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the Uncertainty object whose values are to be used as the basis
+   * of the assignment.
    */
   Uncertainty& operator=(const Uncertainty& rhs);
 
@@ -461,13 +462,14 @@ BEGIN_C_DECLS
  * Creates a new Uncertainty_t using the given SBML Level, Version and
  * &ldquo;distrib&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Uncertainty_t
+ * @param level an unsigned int, the SBML Level to assign to this
+ * Uncertainty_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * Uncertainty_t
+ * Uncertainty_t.
  *
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
- * this Uncertainty_t
+ * this Uncertainty_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -489,7 +491,7 @@ Uncertainty_create(unsigned int level = DistribExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Uncertainty_t object.
  *
- * @param u; the Uncertainty_t structure
+ * @param u the Uncertainty_t structure.
  *
  * @return a (deep) copy of this Uncertainty_t object.
  *
@@ -503,7 +505,7 @@ Uncertainty_clone(const Uncertainty_t* u);
 /**
  * Frees this Uncertainty_t object.
  *
- * @param u; the Uncertainty_t structure
+ * @param u the Uncertainty_t structure.
  *
  * @memberof Uncertainty_t
  */

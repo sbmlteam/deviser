@@ -68,13 +68,13 @@ public:
    * &ldquo;test&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfClassTwos
+   * ListOfClassTwos.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfClassTwos
+   * ListOfClassTwos.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ListOfClassTwos
+   * ListOfClassTwos.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -91,7 +91,7 @@ public:
   /**
    * Creates a new ListOfClassTwos using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -105,7 +105,7 @@ public:
   /**
    * Copy constructor for ListOfClassTwos.
    *
-   * @param orig; the ListOfClassTwos instance to copy.
+   * @param orig the ListOfClassTwos instance to copy.
    */
   ListOfClassTwos(const ListOfClassTwos& orig);
 
@@ -113,8 +113,8 @@ public:
   /**
    * Assignment operator for ListOfClassTwos.
    *
-   * @param rhs; the ListOfClassTwos object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the ListOfClassTwos object whose values are to be used as the
+   * basis of the assignment.
    */
   ListOfClassTwos& operator=(const ListOfClassTwos& rhs);
 
@@ -136,7 +136,7 @@ public:
   /**
    * Get a ClassTwo from the ListOfClassTwos.
    *
-   * @param n, an unsigned int representing the index of the ClassTwo to
+   * @param n an unsigned int representing the index of the ClassTwo to
    * retrieve.
    *
    * @return the nth ClassTwo in this ListOfClassTwos.
@@ -149,7 +149,7 @@ public:
   /**
    * Get a ClassTwo from the ListOfClassTwos.
    *
-   * @param n, an unsigned int representing the index of the ClassTwo to
+   * @param n an unsigned int representing the index of the ClassTwo to
    * retrieve.
    *
    * @return the nth ClassTwo in this ListOfClassTwos.
@@ -191,8 +191,7 @@ public:
    * Removes the nth ClassTwo from this ListOfClassTwos and returns a pointer
    * to it.
    *
-   * @param n, an unsigned int representing the index of the ClassTwo to
-   * remove.
+   * @param n an unsigned int representing the index of the ClassTwo to remove.
    *
    * @return a pointer to the nth ClassTwo in this ListOfClassTwos.
    *
@@ -208,8 +207,7 @@ public:
    * Removes the ClassTwo from this ListOfClassTwos based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the ClassTwo to
-   * remove.
+   * @param sid a string representing the identifier of the ClassTwo to remove.
    *
    * @return the ClassTwo in this ListOfClassTwos based on the identifier or
    * NULL if no such ClassTwo exists.
@@ -223,7 +221,7 @@ public:
   /**
    * Adds a copy of the given ClassTwo to this ListOfClassTwos.
    *
-   * @param ct, the ClassTwo object to add.
+   * @param ct the ClassTwo object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -352,9 +350,9 @@ BEGIN_C_DECLS
 /**
  * Get a ClassTwo_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the ClassTwo_t to
+ * @param n an unsigned int representing the index of the ClassTwo_t to
  * retrieve.
  *
  * @return the nth ClassTwo_t in this ListOf_t.
@@ -369,7 +367,7 @@ ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n);
 /**
  * Get a ClassTwo_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the ClassTwo_t to
  * retrieve.
@@ -387,10 +385,9 @@ ListOfClassTwos_getById(ListOf_t* lo, const char *sid);
 /**
  * Removes the nth ClassTwo_t from this ListOf_t and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the ClassTwo_t to
- * remove.
+ * @param n an unsigned int representing the index of the ClassTwo_t to remove.
  *
  * @return a pointer to the nth ClassTwo_t in this ListOf_t.
  *
@@ -405,10 +402,9 @@ ListOfClassTwos_remove(ListOf_t* lo, unsigned int n);
  * Removes the ClassTwo_t from this ListOf_t based on its identifier and
  * returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the ClassTwo_t to
- * remove.
+ * @param sid a string representing the identifier of the ClassTwo_t to remove.
  *
  * @return the ClassTwo_t in this ListOf_t based on the identifier or NULL if
  * no such ClassTwo_t exists.

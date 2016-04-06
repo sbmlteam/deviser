@@ -76,12 +76,12 @@ public:
    * Creates a new Parent using the given SBML Level, Version and
    * &ldquo;nasty&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Parent
+   * @param level an unsigned int, the SBML Level to assign to this Parent.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Parent
+   * @param version an unsigned int, the SBML Version to assign to this Parent.
    *
    * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to
-   * this Parent
+   * this Parent.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -97,7 +97,7 @@ public:
   /**
    * Creates a new Parent using the given NastyPkgNamespaces object.
    *
-   * @param nastyns the NastyPkgNamespaces object
+   * @param nastyns the NastyPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -111,7 +111,7 @@ public:
   /**
    * Copy constructor for Parent.
    *
-   * @param orig; the Parent instance to copy.
+   * @param orig the Parent instance to copy.
    */
   Parent(const Parent& orig);
 
@@ -119,8 +119,8 @@ public:
   /**
    * Assignment operator for Parent.
    *
-   * @param rhs; the Parent object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Parent object whose values are to be used as the basis of
+   * the assignment.
    */
   Parent& operator=(const Parent& rhs);
 
@@ -158,7 +158,7 @@ public:
   /**
    * Get a Child from the Parent.
    *
-   * @param n, an unsigned int representing the index of the Child to retrieve.
+   * @param n an unsigned int representing the index of the Child to retrieve.
    *
    * @return the nth Child in the ListOfChildren within this Parent.
    *
@@ -170,7 +170,7 @@ public:
   /**
    * Get a Child from the Parent.
    *
-   * @param n, an unsigned int representing the index of the Child to retrieve.
+   * @param n an unsigned int representing the index of the Child to retrieve.
    *
    * @return the nth Child in the ListOfChildren within this Parent.
    *
@@ -182,7 +182,7 @@ public:
   /**
    * Adds a copy of the given Child to this Parent.
    *
-   * @param c, the Child object to add.
+   * @param c the Child object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -217,7 +217,7 @@ public:
   /**
    * Removes the nth Child from this Parent and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Child to remove.
+   * @param n an unsigned int representing the index of the Child to remove.
    *
    * @return a pointer to the nth Child in this Parent.
    *
@@ -248,7 +248,7 @@ public:
   /**
    * Get a Sprog from the Parent.
    *
-   * @param n, an unsigned int representing the index of the Sprog to retrieve.
+   * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent.
    *
@@ -260,7 +260,7 @@ public:
   /**
    * Get a Sprog from the Parent.
    *
-   * @param n, an unsigned int representing the index of the Sprog to retrieve.
+   * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent.
    *
@@ -272,7 +272,7 @@ public:
   /**
    * Adds a copy of the given Sprog to this Parent.
    *
-   * @param s, the Sprog object to add.
+   * @param s the Sprog object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -307,7 +307,7 @@ public:
   /**
    * Removes the nth Sprog from this Parent and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Sprog to remove.
+   * @param n an unsigned int representing the index of the Sprog to remove.
    *
    * @return a pointer to the nth Sprog in this Parent.
    *
@@ -497,12 +497,12 @@ BEGIN_C_DECLS
  * Creates a new Parent_t using the given SBML Level, Version and
  * &ldquo;nasty&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Parent_t
+ * @param level an unsigned int, the SBML Level to assign to this Parent_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Parent_t
+ * @param version an unsigned int, the SBML Version to assign to this Parent_t.
  *
  * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to this
- * Parent_t
+ * Parent_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -523,7 +523,7 @@ Parent_create(unsigned int level = NastyExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Parent_t object.
  *
- * @param p; the Parent_t structure
+ * @param p the Parent_t structure.
  *
  * @return a (deep) copy of this Parent_t object.
  *
@@ -537,7 +537,7 @@ Parent_clone(const Parent_t* p);
 /**
  * Frees this Parent_t object.
  *
- * @param p; the Parent_t structure
+ * @param p the Parent_t structure.
  *
  * @memberof Parent_t
  */
@@ -563,9 +563,9 @@ Parent_getListOfChildren(Parent_t* p);
 /**
  * Get a Child_t from the Parent_t.
  *
- * @param p, the Parent_t structure to search.
+ * @param p the Parent_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Child_t to retrieve.
+ * @param n an unsigned int representing the index of the Child_t to retrieve.
  *
  * @return the nth Child_t in the ListOfChildren within this Parent.
  *
@@ -579,9 +579,9 @@ Parent_getChild(Parent_t* p, unsigned int n);
 /**
  * Adds a copy of the given Child_t to this Parent_t.
  *
- * @param p, the Parent_t structure to which the Child_t should be added.
+ * @param p the Parent_t structure to which the Child_t should be added.
  *
- * @param c, the Child_t object to add.
+ * @param c the Child_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -597,7 +597,7 @@ Parent_addChild(Parent_t* p, const Child_t* c);
 /**
  * Get the number of Child_t objects in this Parent_t.
  *
- * @param p, the Parent_t structure to query.
+ * @param p the Parent_t structure to query.
  *
  * @return the number of Child_t objects in this Parent_t.
  *
@@ -612,7 +612,7 @@ Parent_getNumChildren(Parent_t* p);
  * Creates a new Child_t object, adds it to this Parent_t object and returns
  * the Child_t object created.
  *
- * @param p, the Parent_t structure to which the Child_t should be added.
+ * @param p the Parent_t structure to which the Child_t should be added.
  *
  * @return a new Child_t object instance.
  *
@@ -626,9 +626,9 @@ Parent_createChild(Parent_t* p);
 /**
  * Removes the nth Child_t from this Parent_t and returns a pointer to it.
  *
- * @param p, the Parent_t structure to search.
+ * @param p the Parent_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Child_t to remove.
+ * @param n an unsigned int representing the index of the Child_t to remove.
  *
  * @return a pointer to the nth Child_t in this Parent_t.
  *
@@ -656,9 +656,9 @@ Parent_getListOfSprogs(Parent_t* p);
 /**
  * Get a Sprog_t from the Parent_t.
  *
- * @param p, the Parent_t structure to search.
+ * @param p the Parent_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Sprog_t to retrieve.
+ * @param n an unsigned int representing the index of the Sprog_t to retrieve.
  *
  * @return the nth Sprog_t in the ListOfSprogs within this Parent.
  *
@@ -672,9 +672,9 @@ Parent_getSprog(Parent_t* p, unsigned int n);
 /**
  * Adds a copy of the given Sprog_t to this Parent_t.
  *
- * @param p, the Parent_t structure to which the Sprog_t should be added.
+ * @param p the Parent_t structure to which the Sprog_t should be added.
  *
- * @param s, the Sprog_t object to add.
+ * @param s the Sprog_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -690,7 +690,7 @@ Parent_addSprog(Parent_t* p, const Sprog_t* s);
 /**
  * Get the number of Sprog_t objects in this Parent_t.
  *
- * @param p, the Parent_t structure to query.
+ * @param p the Parent_t structure to query.
  *
  * @return the number of Sprog_t objects in this Parent_t.
  *
@@ -705,7 +705,7 @@ Parent_getNumSprogs(Parent_t* p);
  * Creates a new Sprog_t object, adds it to this Parent_t object and returns
  * the Sprog_t object created.
  *
- * @param p, the Parent_t structure to which the Sprog_t should be added.
+ * @param p the Parent_t structure to which the Sprog_t should be added.
  *
  * @return a new Sprog_t object instance.
  *
@@ -719,9 +719,9 @@ Parent_createSprog(Parent_t* p);
 /**
  * Removes the nth Sprog_t from this Parent_t and returns a pointer to it.
  *
- * @param p, the Parent_t structure to search.
+ * @param p the Parent_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Sprog_t to remove.
+ * @param n an unsigned int representing the index of the Sprog_t to remove.
  *
  * @return a pointer to the nth Sprog_t in this Parent_t.
  *

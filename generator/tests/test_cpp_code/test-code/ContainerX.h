@@ -74,13 +74,13 @@ public:
    * Creates a new ContainerX using the given SBML Level, Version and
    * &ldquo;x&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this ContainerX
+   * @param level an unsigned int, the SBML Level to assign to this ContainerX.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ContainerX
+   * ContainerX.
    *
    * @param pkgVersion an unsigned int, the SBML X Version to assign to this
-   * ContainerX
+   * ContainerX.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -96,7 +96,7 @@ public:
   /**
    * Creates a new ContainerX using the given XPkgNamespaces object.
    *
-   * @param xns the XPkgNamespaces object
+   * @param xns the XPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -110,7 +110,7 @@ public:
   /**
    * Copy constructor for ContainerX.
    *
-   * @param orig; the ContainerX instance to copy.
+   * @param orig the ContainerX instance to copy.
    */
   ContainerX(const ContainerX& orig);
 
@@ -118,8 +118,8 @@ public:
   /**
    * Assignment operator for ContainerX.
    *
-   * @param rhs; the ContainerX object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the ContainerX object whose values are to be used as the basis
+   * of the assignment.
    */
   ContainerX& operator=(const ContainerX& rhs);
 
@@ -157,7 +157,7 @@ public:
   /**
    * Get a Fred from the ContainerX.
    *
-   * @param n, an unsigned int representing the index of the Fred to retrieve.
+   * @param n an unsigned int representing the index of the Fred to retrieve.
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX.
    *
@@ -169,7 +169,7 @@ public:
   /**
    * Get a Fred from the ContainerX.
    *
-   * @param n, an unsigned int representing the index of the Fred to retrieve.
+   * @param n an unsigned int representing the index of the Fred to retrieve.
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX.
    *
@@ -209,7 +209,7 @@ public:
   /**
    * Adds a copy of the given Fred to this ContainerX.
    *
-   * @param f, the Fred object to add.
+   * @param f the Fred object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -244,7 +244,7 @@ public:
   /**
    * Removes the nth Fred from this ContainerX and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Fred to remove.
+   * @param n an unsigned int representing the index of the Fred to remove.
    *
    * @return a pointer to the nth Fred in this ContainerX.
    *
@@ -260,7 +260,7 @@ public:
    * Removes the Fred from this ContainerX based on its identifier and returns
    * a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Fred to remove.
+   * @param sid a string representing the identifier of the Fred to remove.
    *
    * @return the Fred in this ContainerX based on the identifier or NULL if no
    * such Fred exists.
@@ -449,13 +449,13 @@ BEGIN_C_DECLS
  * Creates a new ContainerX_t using the given SBML Level, Version and
  * &ldquo;x&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this ContainerX_t
+ * @param level an unsigned int, the SBML Level to assign to this ContainerX_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * ContainerX_t
+ * ContainerX_t.
  *
  * @param pkgVersion an unsigned int, the SBML X Version to assign to this
- * ContainerX_t
+ * ContainerX_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -476,7 +476,7 @@ ContainerX_create(unsigned int level = XExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this ContainerX_t object.
  *
- * @param cx; the ContainerX_t structure
+ * @param cx the ContainerX_t structure.
  *
  * @return a (deep) copy of this ContainerX_t object.
  *
@@ -490,7 +490,7 @@ ContainerX_clone(const ContainerX_t* cx);
 /**
  * Frees this ContainerX_t object.
  *
- * @param cx; the ContainerX_t structure
+ * @param cx the ContainerX_t structure.
  *
  * @memberof ContainerX_t
  */
@@ -516,9 +516,9 @@ ContainerX_getListOfFreds(ContainerX_t* cx);
 /**
  * Get a Fred_t from the ContainerX_t.
  *
- * @param cx, the ContainerX_t structure to search.
+ * @param cx the ContainerX_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Fred_t to retrieve.
+ * @param n an unsigned int representing the index of the Fred_t to retrieve.
  *
  * @return the nth Fred_t in the ListOfFreds within this ContainerX.
  *
@@ -532,7 +532,7 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n);
 /**
  * Get a Fred_t from the ContainerX_t based on its identifier.
  *
- * @param cx, the ContainerX_t structure to search.
+ * @param cx the ContainerX_t structure to search.
  *
  * @param sid a string representing the identifier of the Fred_t to retrieve.
  *
@@ -549,9 +549,9 @@ ContainerX_getFredById(ContainerX_t* cx, const char *sid);
 /**
  * Adds a copy of the given Fred_t to this ContainerX_t.
  *
- * @param cx, the ContainerX_t structure to which the Fred_t should be added.
+ * @param cx the ContainerX_t structure to which the Fred_t should be added.
  *
- * @param f, the Fred_t object to add.
+ * @param f the Fred_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -567,7 +567,7 @@ ContainerX_addFred(ContainerX_t* cx, const Fred_t* f);
 /**
  * Get the number of Fred_t objects in this ContainerX_t.
  *
- * @param cx, the ContainerX_t structure to query.
+ * @param cx the ContainerX_t structure to query.
  *
  * @return the number of Fred_t objects in this ContainerX_t.
  *
@@ -582,7 +582,7 @@ ContainerX_getNumFreds(ContainerX_t* cx);
  * Creates a new Fred_t object, adds it to this ContainerX_t object and returns
  * the Fred_t object created.
  *
- * @param cx, the ContainerX_t structure to which the Fred_t should be added.
+ * @param cx the ContainerX_t structure to which the Fred_t should be added.
  *
  * @return a new Fred_t object instance.
  *
@@ -596,9 +596,9 @@ ContainerX_createFred(ContainerX_t* cx);
 /**
  * Removes the nth Fred_t from this ContainerX_t and returns a pointer to it.
  *
- * @param cx, the ContainerX_t structure to search.
+ * @param cx the ContainerX_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Fred_t to remove.
+ * @param n an unsigned int representing the index of the Fred_t to remove.
  *
  * @return a pointer to the nth Fred_t in this ContainerX_t.
  *
@@ -613,9 +613,9 @@ ContainerX_removeFred(ContainerX_t* cx, unsigned int n);
  * Removes the Fred_t from this ContainerX_t based on its identifier and
  * returns a pointer to it.
  *
- * @param cx, the ContainerX_t structure to search.
+ * @param cx the ContainerX_t structure to search.
  *
- * @param sid, a string representing the identifier of the Fred_t to remove.
+ * @param sid a string representing the identifier of the Fred_t to remove.
  *
  * @return the Fred_t in this ContainerX_t based on the identifier or NULL if
  * no such Fred_t exists.

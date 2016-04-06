@@ -94,13 +94,14 @@ public:
    * Creates a new MyTestClass using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this MyTestClass
+   * @param level an unsigned int, the SBML Level to assign to this
+   * MyTestClass.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * MyTestClass
+   * MyTestClass.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * MyTestClass
+   * MyTestClass.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -117,7 +118,7 @@ public:
   /**
    * Creates a new MyTestClass using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -131,7 +132,7 @@ public:
   /**
    * Copy constructor for MyTestClass.
    *
-   * @param orig; the MyTestClass instance to copy.
+   * @param orig the MyTestClass instance to copy.
    */
   MyTestClass(const MyTestClass& orig);
 
@@ -139,8 +140,8 @@ public:
   /**
    * Assignment operator for MyTestClass.
    *
-   * @param rhs; the MyTestClass object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the MyTestClass object whose values are to be used as the basis
+   * of the assignment.
    */
   MyTestClass& operator=(const MyTestClass& rhs);
 
@@ -976,13 +977,14 @@ BEGIN_C_DECLS
  * Creates a new MyTestClass_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this MyTestClass_t
+ * @param level an unsigned int, the SBML Level to assign to this
+ * MyTestClass_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * MyTestClass_t
+ * MyTestClass_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * MyTestClass_t
+ * MyTestClass_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -1003,7 +1005,7 @@ MyTestClass_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this MyTestClass_t object.
  *
- * @param mtc; the MyTestClass_t structure
+ * @param mtc the MyTestClass_t structure.
  *
  * @return a (deep) copy of this MyTestClass_t object.
  *
@@ -1017,7 +1019,7 @@ MyTestClass_clone(const MyTestClass_t* mtc);
 /**
  * Frees this MyTestClass_t object.
  *
- * @param mtc; the MyTestClass_t structure
+ * @param mtc the MyTestClass_t structure.
  *
  * @memberof MyTestClass_t
  */

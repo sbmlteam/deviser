@@ -44,10 +44,11 @@ public:
    * Creates a new MySEDClass using the given SEDML Level and @ p version
    * values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this MySEDClass
+   * @param level an unsigned int, the SEDML Level to assign to this
+   * MySEDClass.
    *
    * @param version an unsigned int, the SEDML Version to assign to this
-   * MySEDClass
+   * MySEDClass.
    *
    * @throws SEDMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -62,7 +63,7 @@ public:
   /**
    * Creates a new MySEDClass using the given SedNamespaces object @p sedmlns.
    *
-   * @param sedmlns the SedNamespaces object
+   * @param sedmlns the SedNamespaces object.
    *
    * @throws SEDMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -76,7 +77,7 @@ public:
   /**
    * Copy constructor for MySEDClass.
    *
-   * @param orig; the MySEDClass instance to copy.
+   * @param orig the MySEDClass instance to copy.
    */
   MySEDClass(const MySEDClass& orig);
 
@@ -84,8 +85,8 @@ public:
   /**
    * Assignment operator for MySEDClass.
    *
-   * @param rhs; the MySEDClass object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the MySEDClass object whose values are to be used as the basis
+   * of the assignment.
    */
   MySEDClass& operator=(const MySEDClass& rhs);
 
@@ -128,7 +129,7 @@ public:
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant {LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
   int setId(const std::string& id);
@@ -284,10 +285,11 @@ BEGIN_C_DECLS
  * Creates a new MySEDClass_t using the given SEDML Level and @ p version
  * values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this MySEDClass_t
+ * @param level an unsigned int, the SEDML Level to assign to this
+ * MySEDClass_t.
  *
  * @param version an unsigned int, the SEDML Version to assign to this
- * MySEDClass_t
+ * MySEDClass_t.
  *
  * @throws SEDMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -305,7 +307,7 @@ MySEDClass_create(unsigned int level, unsigned int version);
 /**
  * Creates and returns a deep copy of this MySEDClass_t object.
  *
- * @param msedc; the MySEDClass_t structure
+ * @param msedc the MySEDClass_t structure.
  *
  * @return a (deep) copy of this MySEDClass_t object.
  *
@@ -319,7 +321,7 @@ MySEDClass_clone(const MySEDClass_t* msedc);
 /**
  * Frees this MySEDClass_t object.
  *
- * @param msedc; the MySEDClass_t structure
+ * @param msedc the MySEDClass_t structure.
  *
  * @memberof MySEDClass_t
  */
@@ -367,7 +369,7 @@ MySEDClass_isSetId(const MySEDClass_t * msedc);
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant {LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
  *
  * @memberof MySEDClass_t

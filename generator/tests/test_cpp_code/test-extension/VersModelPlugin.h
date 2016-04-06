@@ -72,11 +72,11 @@ public:
    * Creates a new VersModelPlugin using the given uri, prefix and package
    * namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param versns, a pointer to the VersPkgNamespaces object to be used
+   * @param versns a pointer to the VersPkgNamespaces object to be used.
    */
   VersModelPlugin(const std::string& uri,
                   const std::string& prefix,
@@ -86,7 +86,7 @@ public:
   /**
    * Copy constructor for VersModelPlugin.
    *
-   * @param orig; the VersModelPlugin instance to copy.
+   * @param orig the VersModelPlugin instance to copy.
    */
   VersModelPlugin(const VersModelPlugin& orig);
 
@@ -94,8 +94,8 @@ public:
   /**
    * Assignment operator for VersModelPlugin.
    *
-   * @param rhs; the VersModelPlugin object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the VersModelPlugin object whose values are to be used as the
+   * basis of the assignment.
    */
   VersModelPlugin& operator=(const VersModelPlugin& rhs);
 
@@ -395,7 +395,7 @@ public:
   /**
    * Append items from model (used in comp flattening)
    *
-   * @param model a pointer to a model object
+   * @param model a pointer to a model object.
    *
    */
   int appendFrom(const Model* model);

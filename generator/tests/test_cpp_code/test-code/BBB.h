@@ -75,12 +75,12 @@ public:
    * Creates a new BBB using the given SBML Level, Version and
    * &ldquo;vers&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this BBB
+   * @param level an unsigned int, the SBML Level to assign to this BBB.
    *
-   * @param version an unsigned int, the SBML Version to assign to this BBB
+   * @param version an unsigned int, the SBML Version to assign to this BBB.
    *
    * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
-   * BBB
+   * BBB.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -96,7 +96,7 @@ public:
   /**
    * Creates a new BBB using the given VersPkgNamespaces object.
    *
-   * @param versns the VersPkgNamespaces object
+   * @param versns the VersPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -110,7 +110,7 @@ public:
   /**
    * Copy constructor for BBB.
    *
-   * @param orig; the BBB instance to copy.
+   * @param orig the BBB instance to copy.
    */
   BBB(const BBB& orig);
 
@@ -118,8 +118,8 @@ public:
   /**
    * Assignment operator for BBB.
    *
-   * @param rhs; the BBB object whose values are to be used as the basis of the
-   * assignment
+   * @param rhs the BBB object whose values are to be used as the basis of the
+   * assignment.
    */
   BBB& operator=(const BBB& rhs);
 
@@ -197,7 +197,7 @@ public:
   /**
    * Get an Another from the BBB.
    *
-   * @param n, an unsigned int representing the index of the Another to
+   * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this BBB.
@@ -210,7 +210,7 @@ public:
   /**
    * Get an Another from the BBB.
    *
-   * @param n, an unsigned int representing the index of the Another to
+   * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this BBB.
@@ -253,7 +253,7 @@ public:
   /**
    * Adds a copy of the given Another to this BBB.
    *
-   * @param a, the Another object to add.
+   * @param a the Another object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -288,7 +288,7 @@ public:
   /**
    * Removes the nth Another from this BBB and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Another to remove.
+   * @param n an unsigned int representing the index of the Another to remove.
    *
    * @return a pointer to the nth Another in this BBB.
    *
@@ -304,7 +304,7 @@ public:
    * Removes the Another from this BBB based on its identifier and returns a
    * pointer to it.
    *
-   * @param sid, a string representing the identifier of the Another to remove.
+   * @param sid a string representing the identifier of the Another to remove.
    *
    * @return the Another in this BBB based on the identifier or NULL if no such
    * Another exists.
@@ -585,12 +585,12 @@ BEGIN_C_DECLS
  * Creates a new BBB_t using the given SBML Level, Version and
  * &ldquo;vers&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this BBB_t
+ * @param level an unsigned int, the SBML Level to assign to this BBB_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this BBB_t
+ * @param version an unsigned int, the SBML Version to assign to this BBB_t.
  *
  * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
- * BBB_t
+ * BBB_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -611,7 +611,7 @@ BBB_create(unsigned int level = VersExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this BBB_t object.
  *
- * @param bbb; the BBB_t structure
+ * @param bbb the BBB_t structure.
  *
  * @return a (deep) copy of this BBB_t object.
  *
@@ -625,7 +625,7 @@ BBB_clone(const BBB_t* bbb);
 /**
  * Frees this BBB_t object.
  *
- * @param bbb; the BBB_t structure
+ * @param bbb the BBB_t structure.
  *
  * @memberof BBB_t
  */
@@ -715,9 +715,9 @@ BBB_getListOfAnothers(BBB_t* bbb);
 /**
  * Get an Another_t from the BBB_t.
  *
- * @param bbb, the BBB_t structure to search.
+ * @param bbb the BBB_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Another_t to
+ * @param n an unsigned int representing the index of the Another_t to
  * retrieve.
  *
  * @return the nth Another_t in the ListOfAnothers within this BBB.
@@ -732,7 +732,7 @@ BBB_getAnother(BBB_t* bbb, unsigned int n);
 /**
  * Get an Another_t from the BBB_t based on its identifier.
  *
- * @param bbb, the BBB_t structure to search.
+ * @param bbb the BBB_t structure to search.
  *
  * @param sid a string representing the identifier of the Another_t to
  * retrieve.
@@ -750,9 +750,9 @@ BBB_getAnotherById(BBB_t* bbb, const char *sid);
 /**
  * Adds a copy of the given Another_t to this BBB_t.
  *
- * @param bbb, the BBB_t structure to which the Another_t should be added.
+ * @param bbb the BBB_t structure to which the Another_t should be added.
  *
- * @param a, the Another_t object to add.
+ * @param a the Another_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -768,7 +768,7 @@ BBB_addAnother(BBB_t* bbb, const Another_t* a);
 /**
  * Get the number of Another_t objects in this BBB_t.
  *
- * @param bbb, the BBB_t structure to query.
+ * @param bbb the BBB_t structure to query.
  *
  * @return the number of Another_t objects in this BBB_t.
  *
@@ -783,7 +783,7 @@ BBB_getNumAnothers(BBB_t* bbb);
  * Creates a new Another_t object, adds it to this BBB_t object and returns the
  * Another_t object created.
  *
- * @param bbb, the BBB_t structure to which the Another_t should be added.
+ * @param bbb the BBB_t structure to which the Another_t should be added.
  *
  * @return a new Another_t object instance.
  *
@@ -797,9 +797,9 @@ BBB_createAnother(BBB_t* bbb);
 /**
  * Removes the nth Another_t from this BBB_t and returns a pointer to it.
  *
- * @param bbb, the BBB_t structure to search.
+ * @param bbb the BBB_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Another_t to remove.
+ * @param n an unsigned int representing the index of the Another_t to remove.
  *
  * @return a pointer to the nth Another_t in this BBB_t.
  *
@@ -814,9 +814,9 @@ BBB_removeAnother(BBB_t* bbb, unsigned int n);
  * Removes the Another_t from this BBB_t based on its identifier and returns a
  * pointer to it.
  *
- * @param bbb, the BBB_t structure to search.
+ * @param bbb the BBB_t structure to search.
  *
- * @param sid, a string representing the identifier of the Another_t to remove.
+ * @param sid a string representing the identifier of the Another_t to remove.
  *
  * @return the Another_t in this BBB_t based on the identifier or NULL if no
  * such Another_t exists.

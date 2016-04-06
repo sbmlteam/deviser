@@ -76,11 +76,11 @@ public:
    * Creates a new VersSpeciesPlugin using the given uri, prefix and package
    * namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param versns, a pointer to the VersPkgNamespaces object to be used
+   * @param versns a pointer to the VersPkgNamespaces object to be used.
    */
   VersSpeciesPlugin(const std::string& uri,
                     const std::string& prefix,
@@ -90,7 +90,7 @@ public:
   /**
    * Copy constructor for VersSpeciesPlugin.
    *
-   * @param orig; the VersSpeciesPlugin instance to copy.
+   * @param orig the VersSpeciesPlugin instance to copy.
    */
   VersSpeciesPlugin(const VersSpeciesPlugin& orig);
 
@@ -98,8 +98,8 @@ public:
   /**
    * Assignment operator for VersSpeciesPlugin.
    *
-   * @param rhs; the VersSpeciesPlugin object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the VersSpeciesPlugin object whose values are to be used as the
+   * basis of the assignment.
    */
   VersSpeciesPlugin& operator=(const VersSpeciesPlugin& rhs);
 
@@ -395,7 +395,7 @@ public:
   /**
    * Get an Another from the VersSpeciesPlugin.
    *
-   * @param n, an unsigned int representing the index of the Another to
+   * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
@@ -409,7 +409,7 @@ public:
   /**
    * Get an Another from the VersSpeciesPlugin.
    *
-   * @param n, an unsigned int representing the index of the Another to
+   * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
@@ -453,7 +453,7 @@ public:
   /**
    * Adds a copy of the given Another to this VersSpeciesPlugin.
    *
-   * @param a, the Another object to add.
+   * @param a the Another object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -489,7 +489,7 @@ public:
    * Removes the nth Another from this VersSpeciesPlugin and returns a pointer
    * to it.
    *
-   * @param n, an unsigned int representing the index of the Another to remove.
+   * @param n an unsigned int representing the index of the Another to remove.
    *
    * @return a pointer to the nth Another in this VersSpeciesPlugin.
    *
@@ -505,7 +505,7 @@ public:
    * Removes the Another from this VersSpeciesPlugin based on its identifier
    * and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Another to remove.
+   * @param sid a string representing the identifier of the Another to remove.
    *
    * @return the Another in this VersSpeciesPlugin based on the identifier or
    * NULL if no such Another exists.
@@ -653,7 +653,7 @@ public:
   /**
    * Append items from model (used in comp flattening)
    *
-   * @param model a pointer to a model object
+   * @param model a pointer to a model object.
    *
    */
   int appendFrom(const Model* model);

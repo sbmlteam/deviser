@@ -79,13 +79,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * AnalyticVolume
+   * AnalyticVolume.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * AnalyticVolume
+   * AnalyticVolume.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this AnalyticVolume
+   * this AnalyticVolume.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -102,7 +102,7 @@ public:
   /**
    * Creates a new AnalyticVolume using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -116,7 +116,7 @@ public:
   /**
    * Copy constructor for AnalyticVolume.
    *
-   * @param orig; the AnalyticVolume instance to copy.
+   * @param orig the AnalyticVolume instance to copy.
    */
   AnalyticVolume(const AnalyticVolume& orig);
 
@@ -124,8 +124,8 @@ public:
   /**
    * Assignment operator for AnalyticVolume.
    *
-   * @param rhs; the AnalyticVolume object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the AnalyticVolume object whose values are to be used as the
+   * basis of the assignment.
    */
   AnalyticVolume& operator=(const AnalyticVolume& rhs);
 
@@ -587,13 +587,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * AnalyticVolume_t
+ * AnalyticVolume_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * AnalyticVolume_t
+ * AnalyticVolume_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this AnalyticVolume_t
+ * this AnalyticVolume_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -615,7 +615,7 @@ AnalyticVolume_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this AnalyticVolume_t object.
  *
- * @param av; the AnalyticVolume_t structure
+ * @param av the AnalyticVolume_t structure.
  *
  * @return a (deep) copy of this AnalyticVolume_t object.
  *
@@ -629,7 +629,7 @@ AnalyticVolume_clone(const AnalyticVolume_t* av);
 /**
  * Frees this AnalyticVolume_t object.
  *
- * @param av; the AnalyticVolume_t structure
+ * @param av the AnalyticVolume_t structure.
  *
  * @memberof AnalyticVolume_t
  */

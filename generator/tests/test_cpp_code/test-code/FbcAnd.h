@@ -74,12 +74,12 @@ public:
    * Creates a new FbcAnd using the given SBML Level, Version and
    * &ldquo;fbc&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this FbcAnd
+   * @param level an unsigned int, the SBML Level to assign to this FbcAnd.
    *
-   * @param version an unsigned int, the SBML Version to assign to this FbcAnd
+   * @param version an unsigned int, the SBML Version to assign to this FbcAnd.
    *
    * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
-   * FbcAnd
+   * FbcAnd.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -95,7 +95,7 @@ public:
   /**
    * Creates a new FbcAnd using the given FbcPkgNamespaces object.
    *
-   * @param fbcns the FbcPkgNamespaces object
+   * @param fbcns the FbcPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -109,7 +109,7 @@ public:
   /**
    * Copy constructor for FbcAnd.
    *
-   * @param orig; the FbcAnd instance to copy.
+   * @param orig the FbcAnd instance to copy.
    */
   FbcAnd(const FbcAnd& orig);
 
@@ -117,8 +117,8 @@ public:
   /**
    * Assignment operator for FbcAnd.
    *
-   * @param rhs; the FbcAnd object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the FbcAnd object whose values are to be used as the basis of
+   * the assignment.
    */
   FbcAnd& operator=(const FbcAnd& rhs);
 
@@ -156,7 +156,7 @@ public:
   /**
    * Get an Association from the FbcAnd.
    *
-   * @param n, an unsigned int representing the index of the Association to
+   * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd.
@@ -169,7 +169,7 @@ public:
   /**
    * Get an Association from the FbcAnd.
    *
-   * @param n, an unsigned int representing the index of the Association to
+   * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd.
@@ -182,7 +182,7 @@ public:
   /**
    * Adds a copy of the given Association to this FbcAnd.
    *
-   * @param a, the Association object to add.
+   * @param a the Association object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -239,7 +239,7 @@ public:
   /**
    * Removes the nth Association from this FbcAnd and returns a pointer to it.
    *
-   * @param n, an unsigned int representing the index of the Association to
+   * @param n an unsigned int representing the index of the Association to
    * remove.
    *
    * @return a pointer to the nth Association in this FbcAnd.
@@ -521,12 +521,12 @@ BEGIN_C_DECLS
  * Creates a new FbcAnd_t using the given SBML Level, Version and
  * &ldquo;fbc&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this FbcAnd_t
+ * @param level an unsigned int, the SBML Level to assign to this FbcAnd_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this FbcAnd_t
+ * @param version an unsigned int, the SBML Version to assign to this FbcAnd_t.
  *
  * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
- * FbcAnd_t
+ * FbcAnd_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -547,7 +547,7 @@ FbcAnd_create(unsigned int level = FbcExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this FbcAnd_t object.
  *
- * @param fa; the FbcAnd_t structure
+ * @param fa the FbcAnd_t structure.
  *
  * @return a (deep) copy of this FbcAnd_t object.
  *
@@ -561,7 +561,7 @@ FbcAnd_clone(const FbcAnd_t* fa);
 /**
  * Frees this FbcAnd_t object.
  *
- * @param fa; the FbcAnd_t structure
+ * @param fa the FbcAnd_t structure.
  *
  * @memberof FbcAnd_t
  */
@@ -587,9 +587,9 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
 /**
  * Get an Association_t from the FbcAnd_t.
  *
- * @param fa, the FbcAnd_t structure to search.
+ * @param fa the FbcAnd_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Association_t to
+ * @param n an unsigned int representing the index of the Association_t to
  * retrieve.
  *
  * @return the nth Association_t in the ListOfAssociations within this FbcAnd.
@@ -604,10 +604,9 @@ FbcAnd_getAssociation(FbcAnd_t* fa, unsigned int n);
 /**
  * Adds a copy of the given Association_t to this FbcAnd_t.
  *
- * @param fa, the FbcAnd_t structure to which the Association_t should be
- * added.
+ * @param fa the FbcAnd_t structure to which the Association_t should be added.
  *
- * @param a, the Association_t object to add.
+ * @param a the Association_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -623,7 +622,7 @@ FbcAnd_addAssociation(FbcAnd_t* fa, const Association_t* a);
 /**
  * Get the number of Association_t objects in this FbcAnd_t.
  *
- * @param fa, the FbcAnd_t structure to query.
+ * @param fa the FbcAnd_t structure to query.
  *
  * @return the number of Association_t objects in this FbcAnd_t.
  *
@@ -638,7 +637,7 @@ FbcAnd_getNumAssociations(FbcAnd_t* fa);
  * Creates a new FbcAnd_t object, adds it to this FbcAnd_t object and returns
  * the FbcAnd_t object created.
  *
- * @param fa, the FbcAnd_t structure to which the FbcAnd_t should be added.
+ * @param fa the FbcAnd_t structure to which the FbcAnd_t should be added.
  *
  * @return a new FbcAnd_t object instance.
  *
@@ -653,7 +652,7 @@ FbcAnd_createAnd(FbcAnd_t* fa);
  * Creates a new FbcOr_t object, adds it to this FbcAnd_t object and returns
  * the FbcOr_t object created.
  *
- * @param fa, the FbcAnd_t structure to which the FbcOr_t should be added.
+ * @param fa the FbcAnd_t structure to which the FbcOr_t should be added.
  *
  * @return a new FbcOr_t object instance.
  *
@@ -668,7 +667,7 @@ FbcAnd_createOr(FbcAnd_t* fa);
  * Creates a new GeneProductRef_t object, adds it to this FbcAnd_t object and
  * returns the GeneProductRef_t object created.
  *
- * @param fa, the FbcAnd_t structure to which the GeneProductRef_t should be
+ * @param fa the FbcAnd_t structure to which the GeneProductRef_t should be
  * added.
  *
  * @return a new GeneProductRef_t object instance.
@@ -684,9 +683,9 @@ FbcAnd_createGeneProductRef(FbcAnd_t* fa);
  * Removes the nth Association_t from this FbcAnd_t and returns a pointer to
  * it.
  *
- * @param fa, the FbcAnd_t structure to search.
+ * @param fa the FbcAnd_t structure to search.
  *
- * @param n, an unsigned int representing the index of the Association_t to
+ * @param n an unsigned int representing the index of the Association_t to
  * remove.
  *
  * @return a pointer to the nth Association_t in this FbcAnd_t.

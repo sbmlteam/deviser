@@ -76,12 +76,12 @@ public:
    * Creates a new Member using the given SBML Level, Version and
    * &ldquo;groups&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Member
+   * @param level an unsigned int, the SBML Level to assign to this Member.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Member
+   * @param version an unsigned int, the SBML Version to assign to this Member.
    *
    * @param pkgVersion an unsigned int, the SBML Groups Version to assign to
-   * this Member
+   * this Member.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -98,7 +98,7 @@ public:
   /**
    * Creates a new Member using the given GroupsPkgNamespaces object.
    *
-   * @param groupsns the GroupsPkgNamespaces object
+   * @param groupsns the GroupsPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -112,7 +112,7 @@ public:
   /**
    * Copy constructor for Member.
    *
-   * @param orig; the Member instance to copy.
+   * @param orig the Member instance to copy.
    */
   Member(const Member& orig);
 
@@ -120,8 +120,8 @@ public:
   /**
    * Assignment operator for Member.
    *
-   * @param rhs; the Member object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Member object whose values are to be used as the basis of
+   * the assignment.
    */
   Member& operator=(const Member& rhs);
 
@@ -461,12 +461,12 @@ BEGIN_C_DECLS
  * Creates a new Member_t using the given SBML Level, Version and
  * &ldquo;groups&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Member_t
+ * @param level an unsigned int, the SBML Level to assign to this Member_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Member_t
+ * @param version an unsigned int, the SBML Version to assign to this Member_t.
  *
  * @param pkgVersion an unsigned int, the SBML Groups Version to assign to this
- * Member_t
+ * Member_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -487,7 +487,7 @@ Member_create(unsigned int level = GroupsExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Member_t object.
  *
- * @param m; the Member_t structure
+ * @param m the Member_t structure.
  *
  * @return a (deep) copy of this Member_t object.
  *
@@ -501,7 +501,7 @@ Member_clone(const Member_t* m);
 /**
  * Frees this Member_t object.
  *
- * @param m; the Member_t structure
+ * @param m the Member_t structure.
  *
  * @memberof Member_t
  */

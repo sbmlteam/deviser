@@ -80,13 +80,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * CSGTransformation
+   * CSGTransformation.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CSGTransformation
+   * CSGTransformation.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGTransformation
+   * this CSGTransformation.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -105,7 +105,7 @@ public:
    * Creates a new CSGTransformation using the given SpatialPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -119,7 +119,7 @@ public:
   /**
    * Copy constructor for CSGTransformation.
    *
-   * @param orig; the CSGTransformation instance to copy.
+   * @param orig the CSGTransformation instance to copy.
    */
   CSGTransformation(const CSGTransformation& orig);
 
@@ -127,8 +127,8 @@ public:
   /**
    * Assignment operator for CSGTransformation.
    *
-   * @param rhs; the CSGTransformation object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the CSGTransformation object whose values are to be used as the
+   * basis of the assignment.
    */
   CSGTransformation& operator=(const CSGTransformation& rhs);
 
@@ -529,13 +529,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t
+ * CSGTransformation_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t
+ * CSGTransformation_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t
+ * this CSGTransformation_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -559,7 +559,7 @@ CSGTransformation_create(
 /**
  * Creates and returns a deep copy of this CSGTransformation_t object.
  *
- * @param csgt; the CSGTransformation_t structure
+ * @param csgt the CSGTransformation_t structure.
  *
  * @return a (deep) copy of this CSGTransformation_t object.
  *
@@ -573,7 +573,7 @@ CSGTransformation_clone(const CSGTransformation_t* csgt);
 /**
  * Frees this CSGTransformation_t object.
  *
- * @param csgt; the CSGTransformation_t structure
+ * @param csgt the CSGTransformation_t structure.
  *
  * @memberof CSGTransformation_t
  */
@@ -636,7 +636,7 @@ CSGTransformation_setCsgNode(CSGTransformation_t * csgt,
  * Creates a new CSGPrimitive_t object, adds it to this CSGTransformation_t
  * object and returns the CSGPrimitive_t object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the CSGPrimitive_t
+ * @param csgt the CSGTransformation_t structure to which the CSGPrimitive_t
  * should be added.
  *
  * @return a new CSGPrimitive_t object instance.
@@ -652,7 +652,7 @@ CSGTransformation_createCSGPrimitive(CSGTransformation_t* csgt);
  * Creates a new CSGTranslation_t object, adds it to this CSGTransformation_t
  * object and returns the CSGTranslation_t object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the CSGTranslation_t
+ * @param csgt the CSGTransformation_t structure to which the CSGTranslation_t
  * should be added.
  *
  * @return a new CSGTranslation_t object instance.
@@ -668,7 +668,7 @@ CSGTransformation_createCSGTranslation(CSGTransformation_t* csgt);
  * Creates a new CSGRotation_t object, adds it to this CSGTransformation_t
  * object and returns the CSGRotation_t object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the CSGRotation_t
+ * @param csgt the CSGTransformation_t structure to which the CSGRotation_t
  * should be added.
  *
  * @return a new CSGRotation_t object instance.
@@ -684,8 +684,8 @@ CSGTransformation_createCSGRotation(CSGTransformation_t* csgt);
  * Creates a new CSGScale_t object, adds it to this CSGTransformation_t object
  * and returns the CSGScale_t object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the CSGScale_t
- * should be added.
+ * @param csgt the CSGTransformation_t structure to which the CSGScale_t should
+ * be added.
  *
  * @return a new CSGScale_t object instance.
  *
@@ -701,7 +701,7 @@ CSGTransformation_createCSGScale(CSGTransformation_t* csgt);
  * CSGTransformation_t object and returns the CSGHomogeneousTransformation_t
  * object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the
+ * @param csgt the CSGTransformation_t structure to which the
  * CSGHomogeneousTransformation_t should be added.
  *
  * @return a new CSGHomogeneousTransformation_t object instance.
@@ -719,7 +719,7 @@ CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t*
  * CSGTransformation_t object and returns the CSGPseudoPrimitive_t object
  * created.
  *
- * @param csgt, the CSGTransformation_t structure to which the
+ * @param csgt the CSGTransformation_t structure to which the
  * CSGPseudoPrimitive_t should be added.
  *
  * @return a new CSGPseudoPrimitive_t object instance.
@@ -735,7 +735,7 @@ CSGTransformation_createCSGPseudoPrimitive(CSGTransformation_t* csgt);
  * Creates a new CSGSetOperator_t object, adds it to this CSGTransformation_t
  * object and returns the CSGSetOperator_t object created.
  *
- * @param csgt, the CSGTransformation_t structure to which the CSGSetOperator_t
+ * @param csgt the CSGTransformation_t structure to which the CSGSetOperator_t
  * should be added.
  *
  * @return a new CSGSetOperator_t object instance.

@@ -80,13 +80,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * CoordinateComponent
+   * CoordinateComponent.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CoordinateComponent
+   * CoordinateComponent.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CoordinateComponent
+   * this CoordinateComponent.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -105,7 +105,7 @@ public:
    * Creates a new CoordinateComponent using the given SpatialPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -119,7 +119,7 @@ public:
   /**
    * Copy constructor for CoordinateComponent.
    *
-   * @param orig; the CoordinateComponent instance to copy.
+   * @param orig the CoordinateComponent instance to copy.
    */
   CoordinateComponent(const CoordinateComponent& orig);
 
@@ -127,8 +127,8 @@ public:
   /**
    * Assignment operator for CoordinateComponent.
    *
-   * @param rhs; the CoordinateComponent object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the CoordinateComponent object whose values are to be used as
+   * the basis of the assignment.
    */
   CoordinateComponent& operator=(const CoordinateComponent& rhs);
 
@@ -657,13 +657,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * CoordinateComponent_t
+ * CoordinateComponent_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CoordinateComponent_t
+ * CoordinateComponent_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CoordinateComponent_t
+ * this CoordinateComponent_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -687,7 +687,7 @@ CoordinateComponent_create(
 /**
  * Creates and returns a deep copy of this CoordinateComponent_t object.
  *
- * @param cc; the CoordinateComponent_t structure
+ * @param cc the CoordinateComponent_t structure.
  *
  * @return a (deep) copy of this CoordinateComponent_t object.
  *
@@ -701,7 +701,7 @@ CoordinateComponent_clone(const CoordinateComponent_t* cc);
 /**
  * Frees this CoordinateComponent_t object.
  *
- * @param cc; the CoordinateComponent_t structure
+ * @param cc the CoordinateComponent_t structure.
  *
  * @memberof CoordinateComponent_t
  */
@@ -1046,8 +1046,8 @@ CoordinateComponent_setBoundaryMax(CoordinateComponent_t * cc,
  * Creates a new Boundary_t object, adds it to this CoordinateComponent_t
  * object and returns the Boundary_t object created.
  *
- * @param cc, the CoordinateComponent_t structure to which the Boundary_t
- * should be added.
+ * @param cc the CoordinateComponent_t structure to which the Boundary_t should
+ * be added.
  *
  * @return a new Boundary_t object instance.
  *
@@ -1062,8 +1062,8 @@ CoordinateComponent_createBoundaryMin(CoordinateComponent_t* cc);
  * Creates a new Boundary_t object, adds it to this CoordinateComponent_t
  * object and returns the Boundary_t object created.
  *
- * @param cc, the CoordinateComponent_t structure to which the Boundary_t
- * should be added.
+ * @param cc the CoordinateComponent_t structure to which the Boundary_t should
+ * be added.
  *
  * @return a new Boundary_t object instance.
  *

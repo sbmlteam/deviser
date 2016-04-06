@@ -103,13 +103,13 @@ public:
    * &ldquo;test&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * MyRequiredClass
+   * MyRequiredClass.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * MyRequiredClass
+   * MyRequiredClass.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * MyRequiredClass
+   * MyRequiredClass.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -126,7 +126,7 @@ public:
   /**
    * Creates a new MyRequiredClass using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -140,7 +140,7 @@ public:
   /**
    * Copy constructor for MyRequiredClass.
    *
-   * @param orig; the MyRequiredClass instance to copy.
+   * @param orig the MyRequiredClass instance to copy.
    */
   MyRequiredClass(const MyRequiredClass& orig);
 
@@ -148,8 +148,8 @@ public:
   /**
    * Assignment operator for MyRequiredClass.
    *
-   * @param rhs; the MyRequiredClass object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the MyRequiredClass object whose values are to be used as the
+   * basis of the assignment.
    */
   MyRequiredClass& operator=(const MyRequiredClass& rhs);
 
@@ -1191,13 +1191,13 @@ BEGIN_C_DECLS
  * &ldquo;test&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * MyRequiredClass_t
+ * MyRequiredClass_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * MyRequiredClass_t
+ * MyRequiredClass_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * MyRequiredClass_t
+ * MyRequiredClass_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -1219,7 +1219,7 @@ MyRequiredClass_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this MyRequiredClass_t object.
  *
- * @param mrc; the MyRequiredClass_t structure
+ * @param mrc the MyRequiredClass_t structure.
  *
  * @return a (deep) copy of this MyRequiredClass_t object.
  *
@@ -1233,7 +1233,7 @@ MyRequiredClass_clone(const MyRequiredClass_t* mrc);
 /**
  * Frees this MyRequiredClass_t object.
  *
- * @param mrc; the MyRequiredClass_t structure
+ * @param mrc the MyRequiredClass_t structure.
  *
  * @memberof MyRequiredClass_t
  */

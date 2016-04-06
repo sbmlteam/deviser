@@ -78,13 +78,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * CSGSetOperator
+   * CSGSetOperator.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CSGSetOperator
+   * CSGSetOperator.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGSetOperator
+   * this CSGSetOperator.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -101,7 +101,7 @@ public:
   /**
    * Creates a new CSGSetOperator using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -115,7 +115,7 @@ public:
   /**
    * Copy constructor for CSGSetOperator.
    *
-   * @param orig; the CSGSetOperator instance to copy.
+   * @param orig the CSGSetOperator instance to copy.
    */
   CSGSetOperator(const CSGSetOperator& orig);
 
@@ -123,8 +123,8 @@ public:
   /**
    * Assignment operator for CSGSetOperator.
    *
-   * @param rhs; the CSGSetOperator object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the CSGSetOperator object whose values are to be used as the
+   * basis of the assignment.
    */
   CSGSetOperator& operator=(const CSGSetOperator& rhs);
 
@@ -314,7 +314,7 @@ public:
   /**
    * Get a CSGNode from the CSGSetOperator.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to
+   * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
    * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator.
@@ -327,7 +327,7 @@ public:
   /**
    * Get a CSGNode from the CSGSetOperator.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to
+   * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
    * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator.
@@ -370,7 +370,7 @@ public:
   /**
    * Adds a copy of the given CSGNode to this CSGSetOperator.
    *
-   * @param csgn, the CSGNode object to add.
+   * @param csgn the CSGNode object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -473,7 +473,7 @@ public:
    * Removes the nth CSGNode from this CSGSetOperator and returns a pointer to
    * it.
    *
-   * @param n, an unsigned int representing the index of the CSGNode to remove.
+   * @param n an unsigned int representing the index of the CSGNode to remove.
    *
    * @return a pointer to the nth CSGNode in this CSGSetOperator.
    *
@@ -489,7 +489,7 @@ public:
    * Removes the CSGNode from this CSGSetOperator based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the CSGNode to remove.
+   * @param sid a string representing the identifier of the CSGNode to remove.
    *
    * @return the CSGNode in this CSGSetOperator based on the identifier or NULL
    * if no such CSGNode exists.
@@ -734,13 +734,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * CSGSetOperator_t
+ * CSGSetOperator_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CSGSetOperator_t
+ * CSGSetOperator_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGSetOperator_t
+ * this CSGSetOperator_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -762,7 +762,7 @@ CSGSetOperator_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this CSGSetOperator_t object.
  *
- * @param csgso; the CSGSetOperator_t structure
+ * @param csgso the CSGSetOperator_t structure.
  *
  * @return a (deep) copy of this CSGSetOperator_t object.
  *
@@ -776,7 +776,7 @@ CSGSetOperator_clone(const CSGSetOperator_t* csgso);
 /**
  * Frees this CSGSetOperator_t object.
  *
- * @param csgso; the CSGSetOperator_t structure
+ * @param csgso the CSGSetOperator_t structure.
  *
  * @memberof CSGSetOperator_t
  */
@@ -1039,9 +1039,9 @@ CSGSetOperator_getListOfCSGNodes(CSGSetOperator_t* csgso);
 /**
  * Get a CSGNode_t from the CSGSetOperator_t.
  *
- * @param csgso, the CSGSetOperator_t structure to search.
+ * @param csgso the CSGSetOperator_t structure to search.
  *
- * @param n, an unsigned int representing the index of the CSGNode_t to
+ * @param n an unsigned int representing the index of the CSGNode_t to
  * retrieve.
  *
  * @return the nth CSGNode_t in the ListOfCSGNodes within this CSGSetOperator.
@@ -1056,7 +1056,7 @@ CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n);
 /**
  * Get a CSGNode_t from the CSGSetOperator_t based on its identifier.
  *
- * @param csgso, the CSGSetOperator_t structure to search.
+ * @param csgso the CSGSetOperator_t structure to search.
  *
  * @param sid a string representing the identifier of the CSGNode_t to
  * retrieve.
@@ -1074,10 +1074,10 @@ CSGSetOperator_getCSGNodeById(CSGSetOperator_t* csgso, const char *sid);
 /**
  * Adds a copy of the given CSGNode_t to this CSGSetOperator_t.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGNode_t should
- * be added.
+ * @param csgso the CSGSetOperator_t structure to which the CSGNode_t should be
+ * added.
  *
- * @param csgn, the CSGNode_t object to add.
+ * @param csgn the CSGNode_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1093,7 +1093,7 @@ CSGSetOperator_addCSGNode(CSGSetOperator_t* csgso, const CSGNode_t* csgn);
 /**
  * Get the number of CSGNode_t objects in this CSGSetOperator_t.
  *
- * @param csgso, the CSGSetOperator_t structure to query.
+ * @param csgso the CSGSetOperator_t structure to query.
  *
  * @return the number of CSGNode_t objects in this CSGSetOperator_t.
  *
@@ -1108,7 +1108,7 @@ CSGSetOperator_getNumCSGNodes(CSGSetOperator_t* csgso);
  * Creates a new CSGPrimitive_t object, adds it to this CSGSetOperator_t object
  * and returns the CSGPrimitive_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGPrimitive_t
+ * @param csgso the CSGSetOperator_t structure to which the CSGPrimitive_t
  * should be added.
  *
  * @return a new CSGPrimitive_t object instance.
@@ -1124,7 +1124,7 @@ CSGSetOperator_createCSGPrimitive(CSGSetOperator_t* csgso);
  * Creates a new CSGTranslation_t object, adds it to this CSGSetOperator_t
  * object and returns the CSGTranslation_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGTranslation_t
+ * @param csgso the CSGSetOperator_t structure to which the CSGTranslation_t
  * should be added.
  *
  * @return a new CSGTranslation_t object instance.
@@ -1140,7 +1140,7 @@ CSGSetOperator_createCSGTranslation(CSGSetOperator_t* csgso);
  * Creates a new CSGRotation_t object, adds it to this CSGSetOperator_t object
  * and returns the CSGRotation_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGRotation_t
+ * @param csgso the CSGSetOperator_t structure to which the CSGRotation_t
  * should be added.
  *
  * @return a new CSGRotation_t object instance.
@@ -1156,7 +1156,7 @@ CSGSetOperator_createCSGRotation(CSGSetOperator_t* csgso);
  * Creates a new CSGScale_t object, adds it to this CSGSetOperator_t object and
  * returns the CSGScale_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGScale_t should
+ * @param csgso the CSGSetOperator_t structure to which the CSGScale_t should
  * be added.
  *
  * @return a new CSGScale_t object instance.
@@ -1173,7 +1173,7 @@ CSGSetOperator_createCSGScale(CSGSetOperator_t* csgso);
  * CSGSetOperator_t object and returns the CSGHomogeneousTransformation_t
  * object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the
+ * @param csgso the CSGSetOperator_t structure to which the
  * CSGHomogeneousTransformation_t should be added.
  *
  * @return a new CSGHomogeneousTransformation_t object instance.
@@ -1189,7 +1189,7 @@ CSGSetOperator_createCSGHomogeneousTransformation(CSGSetOperator_t* csgso);
  * Creates a new CSGPseudoPrimitive_t object, adds it to this CSGSetOperator_t
  * object and returns the CSGPseudoPrimitive_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the
+ * @param csgso the CSGSetOperator_t structure to which the
  * CSGPseudoPrimitive_t should be added.
  *
  * @return a new CSGPseudoPrimitive_t object instance.
@@ -1205,7 +1205,7 @@ CSGSetOperator_createCSGPseudoPrimitive(CSGSetOperator_t* csgso);
  * Creates a new CSGSetOperator_t object, adds it to this CSGSetOperator_t
  * object and returns the CSGSetOperator_t object created.
  *
- * @param csgso, the CSGSetOperator_t structure to which the CSGSetOperator_t
+ * @param csgso the CSGSetOperator_t structure to which the CSGSetOperator_t
  * should be added.
  *
  * @return a new CSGSetOperator_t object instance.
@@ -1221,9 +1221,9 @@ CSGSetOperator_createCSGSetOperator(CSGSetOperator_t* csgso);
  * Removes the nth CSGNode_t from this CSGSetOperator_t and returns a pointer
  * to it.
  *
- * @param csgso, the CSGSetOperator_t structure to search.
+ * @param csgso the CSGSetOperator_t structure to search.
  *
- * @param n, an unsigned int representing the index of the CSGNode_t to remove.
+ * @param n an unsigned int representing the index of the CSGNode_t to remove.
  *
  * @return a pointer to the nth CSGNode_t in this CSGSetOperator_t.
  *
@@ -1238,9 +1238,9 @@ CSGSetOperator_removeCSGNode(CSGSetOperator_t* csgso, unsigned int n);
  * Removes the CSGNode_t from this CSGSetOperator_t based on its identifier and
  * returns a pointer to it.
  *
- * @param csgso, the CSGSetOperator_t structure to search.
+ * @param csgso the CSGSetOperator_t structure to search.
  *
- * @param sid, a string representing the identifier of the CSGNode_t to remove.
+ * @param sid a string representing the identifier of the CSGNode_t to remove.
  *
  * @return the CSGNode_t in this CSGSetOperator_t based on the identifier or
  * NULL if no such CSGNode_t exists.

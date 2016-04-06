@@ -73,12 +73,12 @@ public:
    * Creates a new Unit using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Unit
+   * @param level an unsigned int, the SBML Level to assign to this Unit.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Unit
+   * @param version an unsigned int, the SBML Version to assign to this Unit.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * Unit
+   * Unit.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -94,7 +94,7 @@ public:
   /**
    * Creates a new Unit using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -108,7 +108,7 @@ public:
   /**
    * Copy constructor for Unit.
    *
-   * @param orig; the Unit instance to copy.
+   * @param orig the Unit instance to copy.
    */
   Unit(const Unit& orig);
 
@@ -116,8 +116,8 @@ public:
   /**
    * Assignment operator for Unit.
    *
-   * @param rhs; the Unit object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Unit object whose values are to be used as the basis of the
+   * assignment.
    */
   Unit& operator=(const Unit& rhs);
 
@@ -336,12 +336,12 @@ BEGIN_C_DECLS
  * Creates a new Unit_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Unit_t
+ * @param level an unsigned int, the SBML Level to assign to this Unit_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Unit_t
+ * @param version an unsigned int, the SBML Version to assign to this Unit_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * Unit_t
+ * Unit_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -362,7 +362,7 @@ Unit_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Unit_t object.
  *
- * @param u; the Unit_t structure
+ * @param u the Unit_t structure.
  *
  * @return a (deep) copy of this Unit_t object.
  *
@@ -376,7 +376,7 @@ Unit_clone(const Unit_t* u);
 /**
  * Frees this Unit_t object.
  *
- * @param u; the Unit_t structure
+ * @param u the Unit_t structure.
  *
  * @memberof Unit_t
  */

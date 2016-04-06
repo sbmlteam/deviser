@@ -66,13 +66,13 @@ public:
    * Creates a new MyLoTest using the given SBML Level, Version and
    * &ldquo;test&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this MyLoTest
+   * @param level an unsigned int, the SBML Level to assign to this MyLoTest.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * MyLoTest
+   * MyLoTest.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * MyLoTest
+   * MyLoTest.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -89,7 +89,7 @@ public:
   /**
    * Creates a new MyLoTest using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -103,7 +103,7 @@ public:
   /**
    * Copy constructor for MyLoTest.
    *
-   * @param orig; the MyLoTest instance to copy.
+   * @param orig the MyLoTest instance to copy.
    */
   MyLoTest(const MyLoTest& orig);
 
@@ -111,8 +111,8 @@ public:
   /**
    * Assignment operator for MyLoTest.
    *
-   * @param rhs; the MyLoTest object whose values are to be used as the basis
-   * of the assignment
+   * @param rhs the MyLoTest object whose values are to be used as the basis of
+   * the assignment.
    */
   MyLoTest& operator=(const MyLoTest& rhs);
 
@@ -237,13 +237,13 @@ BEGIN_C_DECLS
  * Creates a new MyLoTest_t using the given SBML Level, Version and
  * &ldquo;test&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this MyLoTest_t
+ * @param level an unsigned int, the SBML Level to assign to this MyLoTest_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * MyLoTest_t
+ * MyLoTest_t.
  *
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * MyLoTest_t
+ * MyLoTest_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -264,7 +264,7 @@ MyLoTest_create(unsigned int level = TestExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this MyLoTest_t object.
  *
- * @param mlt; the MyLoTest_t structure
+ * @param mlt the MyLoTest_t structure.
  *
  * @return a (deep) copy of this MyLoTest_t object.
  *
@@ -278,7 +278,7 @@ MyLoTest_clone(const MyLoTest_t* mlt);
 /**
  * Frees this MyLoTest_t object.
  *
- * @param mlt; the MyLoTest_t structure
+ * @param mlt the MyLoTest_t structure.
  *
  * @memberof MyLoTest_t
  */

@@ -76,13 +76,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * SampledFieldGeometry
+   * SampledFieldGeometry.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * SampledFieldGeometry
+   * SampledFieldGeometry.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this SampledFieldGeometry
+   * this SampledFieldGeometry.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -102,7 +102,7 @@ public:
    * Creates a new SampledFieldGeometry using the given SpatialPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -116,7 +116,7 @@ public:
   /**
    * Copy constructor for SampledFieldGeometry.
    *
-   * @param orig; the SampledFieldGeometry instance to copy.
+   * @param orig the SampledFieldGeometry instance to copy.
    */
   SampledFieldGeometry(const SampledFieldGeometry& orig);
 
@@ -124,8 +124,8 @@ public:
   /**
    * Assignment operator for SampledFieldGeometry.
    *
-   * @param rhs; the SampledFieldGeometry object whose values are to be used as
-   * the basis of the assignment
+   * @param rhs the SampledFieldGeometry object whose values are to be used as
+   * the basis of the assignment.
    */
   SampledFieldGeometry& operator=(const SampledFieldGeometry& rhs);
 
@@ -209,7 +209,7 @@ public:
   /**
    * Get a SampledVolume from the SampledFieldGeometry.
    *
-   * @param n, an unsigned int representing the index of the SampledVolume to
+   * @param n an unsigned int representing the index of the SampledVolume to
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
@@ -223,7 +223,7 @@ public:
   /**
    * Get a SampledVolume from the SampledFieldGeometry.
    *
-   * @param n, an unsigned int representing the index of the SampledVolume to
+   * @param n an unsigned int representing the index of the SampledVolume to
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
@@ -296,7 +296,7 @@ public:
   /**
    * Adds a copy of the given SampledVolume to this SampledFieldGeometry.
    *
-   * @param sv, the SampledVolume object to add.
+   * @param sv the SampledVolume object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -332,7 +332,7 @@ public:
    * Removes the nth SampledVolume from this SampledFieldGeometry and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the SampledVolume to
+   * @param n an unsigned int representing the index of the SampledVolume to
    * remove.
    *
    * @return a pointer to the nth SampledVolume in this SampledFieldGeometry.
@@ -349,7 +349,7 @@ public:
    * Removes the SampledVolume from this SampledFieldGeometry based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the SampledVolume to
+   * @param sid a string representing the identifier of the SampledVolume to
    * remove.
    *
    * @return the SampledVolume in this SampledFieldGeometry based on the
@@ -596,13 +596,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * SampledFieldGeometry_t
+ * SampledFieldGeometry_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * SampledFieldGeometry_t
+ * SampledFieldGeometry_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this SampledFieldGeometry_t
+ * this SampledFieldGeometry_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -626,7 +626,7 @@ SampledFieldGeometry_create(
 /**
  * Creates and returns a deep copy of this SampledFieldGeometry_t object.
  *
- * @param sfg; the SampledFieldGeometry_t structure
+ * @param sfg the SampledFieldGeometry_t structure.
  *
  * @return a (deep) copy of this SampledFieldGeometry_t object.
  *
@@ -640,7 +640,7 @@ SampledFieldGeometry_clone(const SampledFieldGeometry_t* sfg);
 /**
  * Frees this SampledFieldGeometry_t object.
  *
- * @param sfg; the SampledFieldGeometry_t structure
+ * @param sfg the SampledFieldGeometry_t structure.
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -740,9 +740,9 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
 /**
  * Get a SampledVolume_t from the SampledFieldGeometry_t.
  *
- * @param sfg, the SampledFieldGeometry_t structure to search.
+ * @param sfg the SampledFieldGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the SampledVolume_t to
+ * @param n an unsigned int representing the index of the SampledVolume_t to
  * retrieve.
  *
  * @return the nth SampledVolume_t in the ListOfSampledVolumes within this
@@ -760,7 +760,7 @@ SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
  * Get a SampledVolume_t from the SampledFieldGeometry_t based on its
  * identifier.
  *
- * @param sfg, the SampledFieldGeometry_t structure to search.
+ * @param sfg the SampledFieldGeometry_t structure to search.
  *
  * @param sid a string representing the identifier of the SampledVolume_t to
  * retrieve.
@@ -781,7 +781,7 @@ SampledFieldGeometry_getSampledVolumeById(SampledFieldGeometry_t* sfg,
  * Get a SampledVolume_t from the SampledFieldGeometry_t based on the
  * DomainType to which it refers.
  *
- * @param sfg, the SampledFieldGeometry_t structure to search.
+ * @param sfg the SampledFieldGeometry_t structure to search.
  *
  * @param sid a string representing the domainType attribute of the
  * SampledVolume_t object to retrieve.
@@ -800,10 +800,10 @@ SampledFieldGeometry_getSampledVolumeByDomainType(SampledFieldGeometry_t* sfg,
 /**
  * Adds a copy of the given SampledVolume_t to this SampledFieldGeometry_t.
  *
- * @param sfg, the SampledFieldGeometry_t structure to which the
- * SampledVolume_t should be added.
+ * @param sfg the SampledFieldGeometry_t structure to which the SampledVolume_t
+ * should be added.
  *
- * @param sv, the SampledVolume_t object to add.
+ * @param sv the SampledVolume_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -820,7 +820,7 @@ SampledFieldGeometry_addSampledVolume(SampledFieldGeometry_t* sfg,
 /**
  * Get the number of SampledVolume_t objects in this SampledFieldGeometry_t.
  *
- * @param sfg, the SampledFieldGeometry_t structure to query.
+ * @param sfg the SampledFieldGeometry_t structure to query.
  *
  * @return the number of SampledVolume_t objects in this
  * SampledFieldGeometry_t.
@@ -836,8 +836,8 @@ SampledFieldGeometry_getNumSampledVolumes(SampledFieldGeometry_t* sfg);
  * Creates a new SampledVolume_t object, adds it to this SampledFieldGeometry_t
  * object and returns the SampledVolume_t object created.
  *
- * @param sfg, the SampledFieldGeometry_t structure to which the
- * SampledVolume_t should be added.
+ * @param sfg the SampledFieldGeometry_t structure to which the SampledVolume_t
+ * should be added.
  *
  * @return a new SampledVolume_t object instance.
  *
@@ -852,9 +852,9 @@ SampledFieldGeometry_createSampledVolume(SampledFieldGeometry_t* sfg);
  * Removes the nth SampledVolume_t from this SampledFieldGeometry_t and returns
  * a pointer to it.
  *
- * @param sfg, the SampledFieldGeometry_t structure to search.
+ * @param sfg the SampledFieldGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the SampledVolume_t to
+ * @param n an unsigned int representing the index of the SampledVolume_t to
  * remove.
  *
  * @return a pointer to the nth SampledVolume_t in this SampledFieldGeometry_t.
@@ -871,9 +871,9 @@ SampledFieldGeometry_removeSampledVolume(SampledFieldGeometry_t* sfg,
  * Removes the SampledVolume_t from this SampledFieldGeometry_t based on its
  * identifier and returns a pointer to it.
  *
- * @param sfg, the SampledFieldGeometry_t structure to search.
+ * @param sfg the SampledFieldGeometry_t structure to search.
  *
- * @param sid, a string representing the identifier of the SampledVolume_t to
+ * @param sid a string representing the identifier of the SampledVolume_t to
  * remove.
  *
  * @return the SampledVolume_t in this SampledFieldGeometry_t based on the

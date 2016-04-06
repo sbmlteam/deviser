@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="a" fullname="b" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+      <elements>
+        <element name="AA" typeCode="SBML_A_AA" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="ss" required="false" type="SIdRef" element="Compartment" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

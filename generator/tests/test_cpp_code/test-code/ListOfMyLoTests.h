@@ -75,13 +75,13 @@ public:
    * &ldquo;test&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * ListOfMyLoTests
+   * ListOfMyLoTests.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * ListOfMyLoTests
+   * ListOfMyLoTests.
    *
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * ListOfMyLoTests
+   * ListOfMyLoTests.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -98,7 +98,7 @@ public:
   /**
    * Creates a new ListOfMyLoTests using the given TestPkgNamespaces object.
    *
-   * @param testns the TestPkgNamespaces object
+   * @param testns the TestPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -112,7 +112,7 @@ public:
   /**
    * Copy constructor for ListOfMyLoTests.
    *
-   * @param orig; the ListOfMyLoTests instance to copy.
+   * @param orig the ListOfMyLoTests instance to copy.
    */
   ListOfMyLoTests(const ListOfMyLoTests& orig);
 
@@ -120,8 +120,8 @@ public:
   /**
    * Assignment operator for ListOfMyLoTests.
    *
-   * @param rhs; the ListOfMyLoTests object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the ListOfMyLoTests object whose values are to be used as the
+   * basis of the assignment.
    */
   ListOfMyLoTests& operator=(const ListOfMyLoTests& rhs);
 
@@ -185,7 +185,7 @@ public:
   /**
    * Get a MyLoTest from the ListOfMyLoTests.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
+   * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
    * @return the nth MyLoTest in this ListOfMyLoTests.
@@ -198,7 +198,7 @@ public:
   /**
    * Get a MyLoTest from the ListOfMyLoTests.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
+   * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
    * @return the nth MyLoTest in this ListOfMyLoTests.
@@ -240,8 +240,7 @@ public:
    * Removes the nth MyLoTest from this ListOfMyLoTests and returns a pointer
    * to it.
    *
-   * @param n, an unsigned int representing the index of the MyLoTest to
-   * remove.
+   * @param n an unsigned int representing the index of the MyLoTest to remove.
    *
    * @return a pointer to the nth MyLoTest in this ListOfMyLoTests.
    *
@@ -257,8 +256,7 @@ public:
    * Removes the MyLoTest from this ListOfMyLoTests based on its identifier and
    * returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the MyLoTest to
-   * remove.
+   * @param sid a string representing the identifier of the MyLoTest to remove.
    *
    * @return the MyLoTest in this ListOfMyLoTests based on the identifier or
    * NULL if no such MyLoTest exists.
@@ -272,7 +270,7 @@ public:
   /**
    * Adds a copy of the given MyLoTest to this ListOfMyLoTests.
    *
-   * @param mlt, the MyLoTest object to add.
+   * @param mlt the MyLoTest object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -512,9 +510,9 @@ ListOfMyLoTests_unsetId(ListOf_t * lo);
 /**
  * Get a MyLoTest_t from the ListOf_t.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the MyLoTest_t to
+ * @param n an unsigned int representing the index of the MyLoTest_t to
  * retrieve.
  *
  * @return the nth MyLoTest_t in this ListOf_t.
@@ -529,7 +527,7 @@ ListOfMyLoTests_getMyLoTest(ListOf_t* lo, unsigned int n);
 /**
  * Get a MyLoTest_t from the ListOf_t based on its identifier.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
  * @param sid a string representing the identifier of the MyLoTest_t to
  * retrieve.
@@ -547,10 +545,9 @@ ListOfMyLoTests_getById(ListOf_t* lo, const char *sid);
 /**
  * Removes the nth MyLoTest_t from this ListOf_t and returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param n, an unsigned int representing the index of the MyLoTest_t to
- * remove.
+ * @param n an unsigned int representing the index of the MyLoTest_t to remove.
  *
  * @return a pointer to the nth MyLoTest_t in this ListOf_t.
  *
@@ -565,10 +562,9 @@ ListOfMyLoTests_remove(ListOf_t* lo, unsigned int n);
  * Removes the MyLoTest_t from this ListOf_t based on its identifier and
  * returns a pointer to it.
  *
- * @param lo, the ListOf_t structure to search.
+ * @param lo the ListOf_t structure to search.
  *
- * @param sid, a string representing the identifier of the MyLoTest_t to
- * remove.
+ * @param sid a string representing the identifier of the MyLoTest_t to remove.
  *
  * @return the MyLoTest_t in this ListOf_t based on the identifier or NULL if
  * no such MyLoTest_t exists.

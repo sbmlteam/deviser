@@ -77,13 +77,13 @@ public:
    * &ldquo;spatial&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * MixedGeometry
+   * MixedGeometry.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * MixedGeometry
+   * MixedGeometry.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this MixedGeometry
+   * this MixedGeometry.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -100,7 +100,7 @@ public:
   /**
    * Creates a new MixedGeometry using the given SpatialPkgNamespaces object.
    *
-   * @param spatialns the SpatialPkgNamespaces object
+   * @param spatialns the SpatialPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -114,7 +114,7 @@ public:
   /**
    * Copy constructor for MixedGeometry.
    *
-   * @param orig; the MixedGeometry instance to copy.
+   * @param orig the MixedGeometry instance to copy.
    */
   MixedGeometry(const MixedGeometry& orig);
 
@@ -122,8 +122,8 @@ public:
   /**
    * Assignment operator for MixedGeometry.
    *
-   * @param rhs; the MixedGeometry object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the MixedGeometry object whose values are to be used as the
+   * basis of the assignment.
    */
   MixedGeometry& operator=(const MixedGeometry& rhs);
 
@@ -161,7 +161,7 @@ public:
   /**
    * Get a GeometryDefinition from the MixedGeometry.
    *
-   * @param n, an unsigned int representing the index of the GeometryDefinition
+   * @param n an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
@@ -175,7 +175,7 @@ public:
   /**
    * Get a GeometryDefinition from the MixedGeometry.
    *
-   * @param n, an unsigned int representing the index of the GeometryDefinition
+   * @param n an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
@@ -222,7 +222,7 @@ public:
   /**
    * Adds a copy of the given GeometryDefinition to this MixedGeometry.
    *
-   * @param gd, the GeometryDefinition object to add.
+   * @param gd the GeometryDefinition object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -302,7 +302,7 @@ public:
    * Removes the nth GeometryDefinition from this MixedGeometry and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the GeometryDefinition
+   * @param n an unsigned int representing the index of the GeometryDefinition
    * to remove.
    *
    * @return a pointer to the nth GeometryDefinition in this MixedGeometry.
@@ -319,7 +319,7 @@ public:
    * Removes the GeometryDefinition from this MixedGeometry based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the GeometryDefinition
+   * @param sid a string representing the identifier of the GeometryDefinition
    * to remove.
    *
    * @return the GeometryDefinition in this MixedGeometry based on the
@@ -350,7 +350,7 @@ public:
   /**
    * Get an OrdinalMapping from the MixedGeometry.
    *
-   * @param n, an unsigned int representing the index of the OrdinalMapping to
+   * @param n an unsigned int representing the index of the OrdinalMapping to
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
@@ -364,7 +364,7 @@ public:
   /**
    * Get an OrdinalMapping from the MixedGeometry.
    *
-   * @param n, an unsigned int representing the index of the OrdinalMapping to
+   * @param n an unsigned int representing the index of the OrdinalMapping to
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
@@ -406,7 +406,7 @@ public:
   /**
    * Adds a copy of the given OrdinalMapping to this MixedGeometry.
    *
-   * @param om, the OrdinalMapping object to add.
+   * @param om the OrdinalMapping object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -442,7 +442,7 @@ public:
    * Removes the nth OrdinalMapping from this MixedGeometry and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the OrdinalMapping to
+   * @param n an unsigned int representing the index of the OrdinalMapping to
    * remove.
    *
    * @return a pointer to the nth OrdinalMapping in this MixedGeometry.
@@ -681,13 +681,13 @@ BEGIN_C_DECLS
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * MixedGeometry_t
+ * MixedGeometry_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * MixedGeometry_t
+ * MixedGeometry_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this MixedGeometry_t
+ * this MixedGeometry_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -709,7 +709,7 @@ MixedGeometry_create(unsigned int level = SpatialExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this MixedGeometry_t object.
  *
- * @param mg; the MixedGeometry_t structure
+ * @param mg the MixedGeometry_t structure.
  *
  * @return a (deep) copy of this MixedGeometry_t object.
  *
@@ -723,7 +723,7 @@ MixedGeometry_clone(const MixedGeometry_t* mg);
 /**
  * Frees this MixedGeometry_t object.
  *
- * @param mg; the MixedGeometry_t structure
+ * @param mg the MixedGeometry_t structure.
  *
  * @memberof MixedGeometry_t
  */
@@ -752,9 +752,9 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg);
 /**
  * Get a GeometryDefinition_t from the MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the GeometryDefinition_t
+ * @param n an unsigned int representing the index of the GeometryDefinition_t
  * to retrieve.
  *
  * @return the nth GeometryDefinition_t in the ListOfGeometryDefinitions within
@@ -770,7 +770,7 @@ MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
 /**
  * Get a GeometryDefinition_t from the MixedGeometry_t based on its identifier.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
  * @param sid a string representing the identifier of the GeometryDefinition_t
  * to retrieve.
@@ -789,10 +789,10 @@ MixedGeometry_getGeometryDefinitionById(MixedGeometry_t* mg, const char *sid);
 /**
  * Adds a copy of the given GeometryDefinition_t to this MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to which the GeometryDefinition_t
+ * @param mg the MixedGeometry_t structure to which the GeometryDefinition_t
  * should be added.
  *
- * @param gd, the GeometryDefinition_t object to add.
+ * @param gd the GeometryDefinition_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -809,7 +809,7 @@ MixedGeometry_addGeometryDefinition(MixedGeometry_t* mg,
 /**
  * Get the number of GeometryDefinition_t objects in this MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to query.
+ * @param mg the MixedGeometry_t structure to query.
  *
  * @return the number of GeometryDefinition_t objects in this MixedGeometry_t.
  *
@@ -824,7 +824,7 @@ MixedGeometry_getNumGeometryDefinitions(MixedGeometry_t* mg);
  * Creates a new AnalyticGeometry_t object, adds it to this MixedGeometry_t
  * object and returns the AnalyticGeometry_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the AnalyticGeometry_t
+ * @param mg the MixedGeometry_t structure to which the AnalyticGeometry_t
  * should be added.
  *
  * @return a new AnalyticGeometry_t object instance.
@@ -840,7 +840,7 @@ MixedGeometry_createAnalyticGeometry(MixedGeometry_t* mg);
  * Creates a new SampledFieldGeometry_t object, adds it to this MixedGeometry_t
  * object and returns the SampledFieldGeometry_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the SampledFieldGeometry_t
+ * @param mg the MixedGeometry_t structure to which the SampledFieldGeometry_t
  * should be added.
  *
  * @return a new SampledFieldGeometry_t object instance.
@@ -856,7 +856,7 @@ MixedGeometry_createSampledFieldGeometry(MixedGeometry_t* mg);
  * Creates a new CSGeometry_t object, adds it to this MixedGeometry_t object
  * and returns the CSGeometry_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the CSGeometry_t should be
+ * @param mg the MixedGeometry_t structure to which the CSGeometry_t should be
  * added.
  *
  * @return a new CSGeometry_t object instance.
@@ -872,7 +872,7 @@ MixedGeometry_createCSGeometry(MixedGeometry_t* mg);
  * Creates a new ParametricGeometry_t object, adds it to this MixedGeometry_t
  * object and returns the ParametricGeometry_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the ParametricGeometry_t
+ * @param mg the MixedGeometry_t structure to which the ParametricGeometry_t
  * should be added.
  *
  * @return a new ParametricGeometry_t object instance.
@@ -888,7 +888,7 @@ MixedGeometry_createParametricGeometry(MixedGeometry_t* mg);
  * Creates a new MixedGeometry_t object, adds it to this MixedGeometry_t object
  * and returns the MixedGeometry_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the MixedGeometry_t should
+ * @param mg the MixedGeometry_t structure to which the MixedGeometry_t should
  * be added.
  *
  * @return a new MixedGeometry_t object instance.
@@ -904,9 +904,9 @@ MixedGeometry_createMixedGeometry(MixedGeometry_t* mg);
  * Removes the nth GeometryDefinition_t from this MixedGeometry_t and returns a
  * pointer to it.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the GeometryDefinition_t
+ * @param n an unsigned int representing the index of the GeometryDefinition_t
  * to remove.
  *
  * @return a pointer to the nth GeometryDefinition_t in this MixedGeometry_t.
@@ -922,9 +922,9 @@ MixedGeometry_removeGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
  * Removes the GeometryDefinition_t from this MixedGeometry_t based on its
  * identifier and returns a pointer to it.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
- * @param sid, a string representing the identifier of the GeometryDefinition_t
+ * @param sid a string representing the identifier of the GeometryDefinition_t
  * to remove.
  *
  * @return the GeometryDefinition_t in this MixedGeometry_t based on the
@@ -958,9 +958,9 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg);
 /**
  * Get an OrdinalMapping_t from the MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the OrdinalMapping_t to
+ * @param n an unsigned int representing the index of the OrdinalMapping_t to
  * retrieve.
  *
  * @return the nth OrdinalMapping_t in the ListOfOrdinalMappings within this
@@ -977,7 +977,7 @@ MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n);
  * Get an OrdinalMapping_t from the MixedGeometry_t based on the
  * GeometryDefinition to which it refers.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
  * @param sid a string representing the geometryDefinition attribute of the
  * OrdinalMapping_t object to retrieve.
@@ -997,10 +997,10 @@ MixedGeometry_getOrdinalMappingByGeometryDefinition(MixedGeometry_t* mg,
 /**
  * Adds a copy of the given OrdinalMapping_t to this MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to which the OrdinalMapping_t
- * should be added.
+ * @param mg the MixedGeometry_t structure to which the OrdinalMapping_t should
+ * be added.
  *
- * @param om, the OrdinalMapping_t object to add.
+ * @param om the OrdinalMapping_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1017,7 +1017,7 @@ MixedGeometry_addOrdinalMapping(MixedGeometry_t* mg,
 /**
  * Get the number of OrdinalMapping_t objects in this MixedGeometry_t.
  *
- * @param mg, the MixedGeometry_t structure to query.
+ * @param mg the MixedGeometry_t structure to query.
  *
  * @return the number of OrdinalMapping_t objects in this MixedGeometry_t.
  *
@@ -1032,8 +1032,8 @@ MixedGeometry_getNumOrdinalMappings(MixedGeometry_t* mg);
  * Creates a new OrdinalMapping_t object, adds it to this MixedGeometry_t
  * object and returns the OrdinalMapping_t object created.
  *
- * @param mg, the MixedGeometry_t structure to which the OrdinalMapping_t
- * should be added.
+ * @param mg the MixedGeometry_t structure to which the OrdinalMapping_t should
+ * be added.
  *
  * @return a new OrdinalMapping_t object instance.
  *
@@ -1048,9 +1048,9 @@ MixedGeometry_createOrdinalMapping(MixedGeometry_t* mg);
  * Removes the nth OrdinalMapping_t from this MixedGeometry_t and returns a
  * pointer to it.
  *
- * @param mg, the MixedGeometry_t structure to search.
+ * @param mg the MixedGeometry_t structure to search.
  *
- * @param n, an unsigned int representing the index of the OrdinalMapping_t to
+ * @param n an unsigned int representing the index of the OrdinalMapping_t to
  * remove.
  *
  * @return a pointer to the nth OrdinalMapping_t in this MixedGeometry_t.

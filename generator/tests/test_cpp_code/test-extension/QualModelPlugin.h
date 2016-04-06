@@ -72,11 +72,11 @@ public:
    * Creates a new QualModelPlugin using the given uri, prefix and package
    * namespace.
    *
-   * @param uri a string, representing the uri of the package
+   * @param uri a string, representing the uri of the package.
    *
-   * @param prefix a string, the prefix to be used
+   * @param prefix a string, the prefix to be used.
    *
-   * @param qualns, a pointer to the QualPkgNamespaces object to be used
+   * @param qualns a pointer to the QualPkgNamespaces object to be used.
    */
   QualModelPlugin(const std::string& uri,
                   const std::string& prefix,
@@ -86,7 +86,7 @@ public:
   /**
    * Copy constructor for QualModelPlugin.
    *
-   * @param orig; the QualModelPlugin instance to copy.
+   * @param orig the QualModelPlugin instance to copy.
    */
   QualModelPlugin(const QualModelPlugin& orig);
 
@@ -94,8 +94,8 @@ public:
   /**
    * Assignment operator for QualModelPlugin.
    *
-   * @param rhs; the QualModelPlugin object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the QualModelPlugin object whose values are to be used as the
+   * basis of the assignment.
    */
   QualModelPlugin& operator=(const QualModelPlugin& rhs);
 
@@ -133,7 +133,7 @@ public:
   /**
    * Get a QualitativeSpecies from the QualModelPlugin.
    *
-   * @param n, an unsigned int representing the index of the QualitativeSpecies
+   * @param n an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
@@ -147,7 +147,7 @@ public:
   /**
    * Get a QualitativeSpecies from the QualModelPlugin.
    *
-   * @param n, an unsigned int representing the index of the QualitativeSpecies
+   * @param n an unsigned int representing the index of the QualitativeSpecies
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
@@ -222,7 +222,7 @@ public:
   /**
    * Adds a copy of the given QualitativeSpecies to this QualModelPlugin.
    *
-   * @param qs, the QualitativeSpecies object to add.
+   * @param qs the QualitativeSpecies object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -258,7 +258,7 @@ public:
    * Removes the nth QualitativeSpecies from this QualModelPlugin and returns a
    * pointer to it.
    *
-   * @param n, an unsigned int representing the index of the QualitativeSpecies
+   * @param n an unsigned int representing the index of the QualitativeSpecies
    * to remove.
    *
    * @return a pointer to the nth QualitativeSpecies in this QualModelPlugin.
@@ -275,7 +275,7 @@ public:
    * Removes the QualitativeSpecies from this QualModelPlugin based on its
    * identifier and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the QualitativeSpecies
+   * @param sid a string representing the identifier of the QualitativeSpecies
    * to remove.
    *
    * @return the QualitativeSpecies in this QualModelPlugin based on the
@@ -306,7 +306,7 @@ public:
   /**
    * Get a Transition from the QualModelPlugin.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
@@ -320,7 +320,7 @@ public:
   /**
    * Get a Transition from the QualModelPlugin.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
@@ -364,7 +364,7 @@ public:
   /**
    * Adds a copy of the given Transition to this QualModelPlugin.
    *
-   * @param t, the Transition object to add.
+   * @param t the Transition object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -400,7 +400,7 @@ public:
    * Removes the nth Transition from this QualModelPlugin and returns a pointer
    * to it.
    *
-   * @param n, an unsigned int representing the index of the Transition to
+   * @param n an unsigned int representing the index of the Transition to
    * remove.
    *
    * @return a pointer to the nth Transition in this QualModelPlugin.
@@ -417,7 +417,7 @@ public:
    * Removes the Transition from this QualModelPlugin based on its identifier
    * and returns a pointer to it.
    *
-   * @param sid, a string representing the identifier of the Transition to
+   * @param sid a string representing the identifier of the Transition to
    * remove.
    *
    * @return the Transition in this QualModelPlugin based on the identifier or
@@ -553,7 +553,7 @@ public:
   /**
    * Append items from model (used in comp flattening)
    *
-   * @param model a pointer to a model object
+   * @param model a pointer to a model object.
    *
    */
   int appendFrom(const Model* model);

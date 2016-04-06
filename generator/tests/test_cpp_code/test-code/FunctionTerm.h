@@ -76,13 +76,13 @@ public:
    * &ldquo;qual&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * FunctionTerm
+   * FunctionTerm.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * FunctionTerm
+   * FunctionTerm.
    *
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * FunctionTerm
+   * FunctionTerm.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -99,7 +99,7 @@ public:
   /**
    * Creates a new FunctionTerm using the given QualPkgNamespaces object.
    *
-   * @param qualns the QualPkgNamespaces object
+   * @param qualns the QualPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -113,7 +113,7 @@ public:
   /**
    * Copy constructor for FunctionTerm.
    *
-   * @param orig; the FunctionTerm instance to copy.
+   * @param orig the FunctionTerm instance to copy.
    */
   FunctionTerm(const FunctionTerm& orig);
 
@@ -121,8 +121,8 @@ public:
   /**
    * Assignment operator for FunctionTerm.
    *
-   * @param rhs; the FunctionTerm object whose values are to be used as the
-   * basis of the assignment
+   * @param rhs the FunctionTerm object whose values are to be used as the
+   * basis of the assignment.
    */
   FunctionTerm& operator=(const FunctionTerm& rhs);
 
@@ -432,13 +432,13 @@ BEGIN_C_DECLS
  * &ldquo;qual&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * FunctionTerm_t
+ * FunctionTerm_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * FunctionTerm_t
+ * FunctionTerm_t.
  *
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
- * FunctionTerm_t
+ * FunctionTerm_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -459,7 +459,7 @@ FunctionTerm_create(unsigned int level = QualExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this FunctionTerm_t object.
  *
- * @param ft; the FunctionTerm_t structure
+ * @param ft the FunctionTerm_t structure.
  *
  * @return a (deep) copy of this FunctionTerm_t object.
  *
@@ -473,7 +473,7 @@ FunctionTerm_clone(const FunctionTerm_t* ft);
 /**
  * Frees this FunctionTerm_t object.
  *
- * @param ft; the FunctionTerm_t structure
+ * @param ft the FunctionTerm_t structure.
  *
  * @memberof FunctionTerm_t
  */

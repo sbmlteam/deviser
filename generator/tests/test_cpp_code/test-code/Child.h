@@ -66,12 +66,12 @@ public:
    * Creates a new Child using the given SBML Level, Version and
    * &ldquo;nasty&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Child
+   * @param level an unsigned int, the SBML Level to assign to this Child.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Child
+   * @param version an unsigned int, the SBML Version to assign to this Child.
    *
    * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to
-   * this Child
+   * this Child.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -87,7 +87,7 @@ public:
   /**
    * Creates a new Child using the given NastyPkgNamespaces object.
    *
-   * @param nastyns the NastyPkgNamespaces object
+   * @param nastyns the NastyPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -101,7 +101,7 @@ public:
   /**
    * Copy constructor for Child.
    *
-   * @param orig; the Child instance to copy.
+   * @param orig the Child instance to copy.
    */
   Child(const Child& orig);
 
@@ -109,8 +109,8 @@ public:
   /**
    * Assignment operator for Child.
    *
-   * @param rhs; the Child object whose values are to be used as the basis of
-   * the assignment
+   * @param rhs the Child object whose values are to be used as the basis of
+   * the assignment.
    */
   Child& operator=(const Child& rhs);
 
@@ -235,12 +235,12 @@ BEGIN_C_DECLS
  * Creates a new Child_t using the given SBML Level, Version and
  * &ldquo;nasty&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Child_t
+ * @param level an unsigned int, the SBML Level to assign to this Child_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Child_t
+ * @param version an unsigned int, the SBML Version to assign to this Child_t.
  *
  * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to this
- * Child_t
+ * Child_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -261,7 +261,7 @@ Child_create(unsigned int level = NastyExtension::getDefaultLevel(),
 /**
  * Creates and returns a deep copy of this Child_t object.
  *
- * @param c; the Child_t structure
+ * @param c the Child_t structure.
  *
  * @return a (deep) copy of this Child_t object.
  *
@@ -275,7 +275,7 @@ Child_clone(const Child_t* c);
 /**
  * Frees this Child_t object.
  *
- * @param c; the Child_t structure
+ * @param c the Child_t structure.
  *
  * @memberof Child_t
  */
