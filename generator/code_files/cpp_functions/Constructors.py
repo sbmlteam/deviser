@@ -118,14 +118,7 @@ class Constructors():
                           .format(self.cap_language, self.package,
                                   self.object_name))
 
-        return_lines = ['@throws {0}Constructor'
-                        'Exception'.format(self.cap_language),
-                        'Thrown if the given @p level and @p version '
-                        'combination, or this kind of {0} object, are either '
-                        'invalid or mismatched with respect to the parent '
-                        '{1} object.'.format(self.cap_language,
-                                             global_variables.document_class),
-                        '@copydetails doc_note_setting_lv']
+        return_lines = ['@copydetails doc_note_setting_lv']
         additional = ''
 
         # create the function declaration
@@ -238,14 +231,7 @@ class Constructors():
             params.append('@param {0}ns the {1}Namespaces object.'
                           .format(self.language, global_variables.prefix))
 
-        return_lines = ['@throws {0}Constructor'
-                        'Exception'.format(self.cap_language),
-                        'Thrown if the given @p level and @p version '
-                        'combination, or this kind of {0} object, are either '
-                        'invalid or mismatched with respect to the parent '
-                        '{1} object.'.format(self.cap_language,
-                                            global_variables.document_class),
-                        '@copydetails doc_note_setting_lv']
+        return_lines = ['@copydetails doc_note_setting_lv']
         additional = ''
 
         # create the function declaration
