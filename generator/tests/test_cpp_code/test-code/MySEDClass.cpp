@@ -252,18 +252,11 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownPackageAttribute);
-      log->logError(TestMySEDClassAllowedAttributes, level, version, details);
-    }
-    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logError(TestMySEDClassAllowedCoreAttributes, level, version,
-        details);
+      log->logError(TestMySEDClassAllowedAttributes, level, version, details);
     }
   }
 

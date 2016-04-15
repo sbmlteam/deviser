@@ -80,6 +80,10 @@ def list_of_name(name):
     return prefix + 'ListOf' + plural_no_prefix(name)
 
 
+def lower_list_of_name_no_prefix(name):
+    return 'listOf' + plural_no_prefix(upper_first(name))
+
+
 def cap_list_of_name(name):
     name = upper_first(name)
     return list_of_name(name)
@@ -117,13 +121,13 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name):
+def remove_prefix(name, in_concrete=False):
     prefix_to_remove = ''
     if global_variables.prefix == 'SBML':
         # we might want to remove the name of the package
-        if global_variables.is_package \
+        if not in_concrete and global_variables.is_package \
                 and global_variables.package_prefix != '':
-            prefix_to_remove = global_variables.package_prefix
+           prefix_to_remove = global_variables.package_prefix
     else:
         prefix_to_remove = global_variables.prefix
     length = len(prefix_to_remove)
@@ -300,3 +304,27 @@ def get_class_from_plugin(plugin, package):
     length = len(plugin)
     name = plugin[num:length-6]
     return name
+
+def prefix_name(name):
+    if name.startswith(global_variables.prefix):
+        return name
+    else:
+        return '{0}{1}'.format(global_variables.prefix, name)
+
+
+# Prefix names - if we are working with another library we want class
+# prefixed but element names to stay untouched
+def prefix_classes(working_class):
+    existing_name = working_class['name']
+    working_class['name'] = prefix_name(existing_name)
+    working_class['elementName'] = lower_first(existing_name)
+    for attrib in working_class['attribs']:
+        if attrib['type'] == 'lo_element' or attrib['type'] == 'element' or \
+                        attrib['type'] == 'inline_lo_element':
+            attrib['element'] = prefix_name(attrib['element'])
+        if 'concrete' in attrib:
+            for conc in attrib['concrete']:
+                conc['element'] = prefix_name(conc['element'])
+        # if 'concrete' in attrib and len(attrib['concrete']) > 0:
+        #     for conc in attrib['concrete']:
+        #         conc['element'] = prefix_name(conc['element'])

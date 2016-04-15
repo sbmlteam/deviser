@@ -56,7 +56,7 @@ class BaseClassFiles():
 
     def write_files(self):
         self.write_header()
-#        self.write_code()
+        self.write_code()
 
     def write_header(self):
         base_descrip = self.create_base_description()
@@ -68,11 +68,14 @@ class BaseClassFiles():
         self.copy_file_contents(fileout, 'SBase.h')
         fileout.close_file()
 
-    def write_code(self, class_desc):
-        fileout = CppCodeFile.CppCodeFile(class_desc)
+    def write_code(self):
+        base_descrip = self.create_base_description()
+        fileout = CppCodeFile.CppCodeFile(base_descrip, False)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
-        fileout.write_file()
+        fileout.add_file_header()
+        fileout.skip_line(2)
+        self.copy_file_contents(fileout, 'SBase.cpp')
         fileout.close_file()
 
     def create_base_description(self):

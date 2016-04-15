@@ -333,15 +333,20 @@ class ProtectedFunctions():
 
     @staticmethod
     def write_create_object_class(name, ns, create=False):
+        xmlname = strFunctions.lower_first(name)
+        if not global_variables.is_package:
+            temp = strFunctions.remove_prefix(name)
+            xmlname = strFunctions.lower_first(temp)
+
         if not create:
             implementation = ['name == '
-                              '\"{0}\"'.format(strFunctions.lower_first(name)),
+                              '\"{0}\"'.format(xmlname),
                               'object = new {0}({1})'.format(name, ns),
                               'appendAndOwn(object)']
         else:
             abbrev = strFunctions.abbrev_name(name)
             implementation = ['name == '
-                              '\"{0}\"'.format(strFunctions.lower_first(name)),
+                              '\"{0}\"'.format(xmlname),
                               '{0} new{1}({2})'.format(name, abbrev.upper(),
                                                        ns),
                               'set{0}(&new{1})'.format(name, abbrev.upper()),
@@ -940,18 +945,26 @@ class ProtectedFunctions():
                     error = '{0}Unknown'.format(self.package)
             if c_err not in global_variables.error_list:
                 c_err = '{0}Unknown'.format(self.package)
-        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownPackageAttribute)',
-                'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                    self.given_args),
-                'else if', 'log->getError(n)->getErrorId() == '
-                           'UnknownCoreAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownCoreAttribute)',
-                'log->{0}{1}, {2}, details)'.format(self.error, c_err,
-                                                    self.given_args)]
-        if_err = self.create_code_block('else_if', line)
+        if global_variables.is_package:
+            line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownPackageAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                                                        self.given_args),
+                    'else if', 'log->getError(n)->getErrorId() == '
+                               'UnknownCoreAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownCoreAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, c_err,
+                                                        self.given_args)]
+            if_err = self.create_code_block('else_if', line)
+        else:
+            line = ['log->getError(n)->getErrorId() == UnknownCoreAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownCoreAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                                                        self.given_args)]
+            if_err = self.create_code_block('if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         for_loop = self.create_code_block('for', line)
@@ -983,19 +996,27 @@ class ProtectedFunctions():
                 core_err = '{0}Unknown'.format(self.package)
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
+        if global_variables.is_package:
+            line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownPackageAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                                                        self.given_args),
+                    'else if', 'log->getError(n)->getErrorId() == '
+                               'UnknownCoreAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownCoreAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, core_err,
+                                                        self.given_args)]
+            if_err = self.create_code_block('else_if', line)
+        else:
+            line = ['log->getError(n)->getErrorId() == UnknownCoreAttribute',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(UnknownCoreAttribute)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                                                        self.given_args)]
+            if_err = self.create_code_block('if', line)
 
-        line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownPackageAttribute)',
-                'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                    self.given_args),
-                'else if', 'log->getError(n)->getErrorId() == '
-                           'UnknownCoreAttribute',
-                'const std::string details = log->getError(n)->getMessage()',
-                'log->remove(UnknownCoreAttribute)',
-                'log->{0}{1}, {2}, details)'.format(self.error, core_err,
-                                                    self.given_args)]
-        if_err = self.create_code_block('else_if', line)
 
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         return line

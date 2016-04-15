@@ -41,10 +41,10 @@ import sys
 import os
 
 from parseXML import ParseXML
-from code_files import ExtensionFiles, CppFiles, ValidationFiles
+from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
-from util import global_variables
+from util import global_variables, strFunctions
 
 directories = []
 
@@ -65,14 +65,15 @@ def generate_code_for(filename, overwrite=True):
             global_variables.return_codes['success']:
         name = ob['name'.lower()]
         language = global_variables.language
-        try:
-            if global_variables.is_package:
-                generate_package_code(name, language, overwrite, ob)
-            else:
-                generate_other_library_code(name, language, overwrite, ob)
-        except:
-            global_variables.code_returned \
-                = global_variables.return_codes['unknown error - please report']
+        # REMEMBER TO REMOVE
+        # try:
+        if global_variables.is_package:
+            generate_package_code(name, language, overwrite, ob)
+        else:
+            generate_other_library_code(name, language, overwrite, ob)
+        # except:
+        #     global_variables.code_returned \
+        #         = global_variables.return_codes['unknown error - please report']
 
 
 def generate_other_library_code(name, language, overwrite, ob):
@@ -213,6 +214,7 @@ def generate_code_files(name, ob):
 def generate_other_library_code_files(name, ob):
     this_dir = os.getcwd()
     language = global_variables.language
+    prefix = global_variables.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
     os.chdir(main_dir)
     # working_class = ob['baseElements'][10]
@@ -220,10 +222,12 @@ def generate_other_library_code_files(name, ob):
     # all_files.write_files()
 
     for working_class in ob['baseElements']:
+        strFunctions.prefix_classes(working_class)
+    for working_class in ob['baseElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
-    # base_files = BaseClassFiles.BaseClassFiles(name, True)
-    # base_files.write_files()
+    base_files = BaseClassFiles.BaseClassFiles(prefix, True)
+    base_files.write_files()
     os.chdir(this_dir)
 
 

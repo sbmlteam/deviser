@@ -126,8 +126,13 @@ class BaseCppFile(BaseFile.BaseFile):
         # information about the base class
         self.baseClass = class_object['baseClass']
         if self.language != 'sbml':
-            if self.std_base != self.baseClass:
+            if not self.is_list_of:
+                base = '{0}Base'.format(global_variables.prefix)
+            else:
+                base = '{0}ListOf'.format(global_variables.prefix)
+            if base != self.baseClass:
                 self.has_std_base = False
+
         elif not self.is_list_of and not self.is_plugin \
                 and self.baseClass != 'SBase':
             self.has_std_base = False

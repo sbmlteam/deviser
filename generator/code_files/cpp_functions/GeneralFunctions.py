@@ -74,6 +74,8 @@ class GeneralFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        self.element_name = ''
+        self.override_name = False
         if 'elementName' in class_object and not is_list_of:
             self.element_name = class_object['elementName']
             if self.element_name == '':
@@ -82,9 +84,14 @@ class GeneralFunctions():
                 self.override_name = not \
                     strFunctions.compare_no_case(self.element_name,
                                                  self.class_name)
-        else:
-            self.element_name = ''
-            self.override_name = False
+        if not global_variables.is_package:
+            self.override_name = True
+            if is_list_of:
+                self.element_name = \
+                    strFunctions.lower_list_of_name_no_prefix(class_object['elementName'])
+            else:
+                self.element_name = class_object['elementName']
+
 
         self.typecode = class_object['typecode']
         self.attributes = class_object['class_attributes']
@@ -261,7 +268,8 @@ class GeneralFunctions():
         if not self.is_list_of:
             additional.append(' ')
             additional.append('@see getElementName()')
-            additional.append('@see getPackageName()')
+            if global_variables.is_package:
+                additional.append('@see getPackageName()')
 
         # create function declaration
         function = 'getTypeCode'
@@ -310,7 +318,8 @@ class GeneralFunctions():
         additional.append('@copydetails doc_warning_typecodes_not_unique')
         additional.append(' ')
         additional.append('@see getElementName()')
-        additional.append('@see getPackageName()')
+        if global_variables.is_package:
+            additional.append('@see getPackageName()')
 
         # create function declaration
         function = 'getItemTypeCode'

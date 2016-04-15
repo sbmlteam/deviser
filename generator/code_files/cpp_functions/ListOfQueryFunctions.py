@@ -67,7 +67,10 @@ class ListOfQueryFunctions():
             self.object_child_name = self.child_name
         else:
             if is_list_of:
-                self.object_name = 'ListOf_t'
+                if global_variables.is_package:
+                    self.object_name = 'ListOf_t'
+                else:
+                    self.object_name = strFunctions.prefix_name('ListOf_t')
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
@@ -97,6 +100,10 @@ class ListOfQueryFunctions():
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
+        self.ideq = 'IdEq'
+        if not global_variables.is_package:
+            self.ideq = strFunctions.prefix_name('IdEq')
+
 
         # status
         if self.is_cpp_api:
@@ -150,7 +157,7 @@ class ListOfQueryFunctions():
         additional = []
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{0}()'.format(self.plural)]
+                else ['@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural))]
 
         # create the function declaration
         arguments = []
@@ -171,9 +178,12 @@ class ListOfQueryFunctions():
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
+                list_type = 'ListOf'
+                if not global_variables.is_package:
+                    list_type = strFunctions.prefix_name('ListOf')
                 const = 'const ' if is_const else ''
-                implementation = ['return static_cast<{0}{1}*>(ListOf::'
-                                  'get(n))'.format(const, self.child_name)]
+                implementation = ['return static_cast<{0}{1}*>({2}::'
+                                  'get(n))'.format(const, self.child_name, list_type)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
                 implementation = ['return {0}.get'
@@ -186,10 +196,10 @@ class ListOfQueryFunctions():
                                   '(n))'.format(const, self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
-                line = ['lo == NULL', 'return NULL']
+                line = ['{0} == NULL'.format(self.abbrev_parent), 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return static_cast <{0}*>(lo)->get'
-                        '(n)'.format(self.class_name)]
+                line = ['return static_cast <{0}*>({1})->get'
+                        '(n)'.format(self.class_name, self.abbrev_parent)]
                 code.append(self.create_code_block('line', line))
             else:
                 line = ['return ({0} != NULL) ? {0}->get{1}(n) : '
@@ -247,7 +257,7 @@ class ListOfQueryFunctions():
             else:
                 additional.append('@see get{0}(unsigned int '
                                   'n)'.format(used_cpp_name))
-                additional.append('@see getNum{0}()'.format(self.plural))
+                additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
 
         # create function declaration
         if self.is_cpp_api:
@@ -299,7 +309,8 @@ class ListOfQueryFunctions():
             implementation = ['vector<{0}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq<{0}>(sid))'.format(self.object_child_name),
+                              '{1}<{0}>(sid))'.format(self.object_child_name,
+                                                      self.ideq),
                               'return (result == mItems.end()) ? 0 : '
                               'static_cast  <const {0}*> '
                               '(*result)'.format(self.object_child_name)]
@@ -318,10 +329,11 @@ class ListOfQueryFunctions():
 
     def c_list_write_get_element_by_id(self):
         code = []
-        line = ['lo == NULL', 'return NULL']
+        line = ['{0} == NULL'.format(self.abbrev_parent), 'return NULL']
         code.append(self.create_code_block('if', line))
-        implementation = ['return (sid != NULL) ? static_cast <{0}*>(lo)'
-                          '->get(sid) : NULL'.format(self.class_name)]
+        implementation = ['return (sid != NULL) ? static_cast <{0}*>({1})'
+                          '->get(sid) : NULL'.format(self.class_name,
+                                                     self.abbrev_parent)]
         code.append(self.create_code_block('line', implementation))
         return code
 
@@ -396,7 +408,7 @@ class ListOfQueryFunctions():
             implementation = ['vector<{0}*>::const_iterator '
                               'result'.format(self.std_base),
                               'result = find_if(mItems.begin(), mItems.end(), '
-                              'IdEq{0}(sid))'.format(up_name),
+                              '{1}{0}(sid))'.format(up_name, self.ideq),
                               'return (result == mItems.end()) ? 0 : '
                               'static_cast  <const {0}*> '
                               '(*result)'.format(self.object_child_name)]
@@ -440,7 +452,8 @@ class ListOfQueryFunctions():
             element = sid_ref['capAttName']
         else:
             element = sid_ref['element']
-        eq_name = 'IdEq{0}'.format(strFunctions.abbrev_name(element).upper())
+        eq_name = '{1}{0}'.format(strFunctions.abbrev_name(element).upper(),
+                                  self.ideq)
         match = [element]
         if match in self.used_sidrefs:
             return
@@ -508,7 +521,7 @@ class ListOfQueryFunctions():
         additional = []
         if self.is_cpp_api:
             additional = ['@see size()'] if self.is_list_of \
-                else ['@see getNum{0}'.format(self.plural)]
+                else ['@see getNum{0}'.format(strFunctions.remove_prefix(self.plural))]
             additional.append(' ')
             additional.append('@note the caller owns the returned object and '
                               'is responsible for deleting it.')
@@ -534,8 +547,12 @@ class ListOfQueryFunctions():
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
-                implementation = ['return static_cast<{0}*>(ListOf::'
-                                  'remove(n))'.format(self.object_child_name)]
+                list_type = 'ListOf'
+                if not global_variables.is_package:
+                    list_type = strFunctions.prefix_name('ListOf')
+                implementation = ['return static_cast<{0}*>({1}::'
+                                  'remove(n))'.format(self.object_child_name,
+                                                      list_type)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
                 member = self.class_object['memberName']
@@ -547,10 +564,10 @@ class ListOfQueryFunctions():
                                   '(n))'.format(self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
-                line = ['lo == NULL', 'return NULL']
+                line = ['{0} == NULL'.format(self.abbrev_parent), 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return static_cast <{0}*>(lo)->remove'
-                        '(n)'.format(self.class_name)]
+                line = ['return static_cast <{0}*>({1})->remove'
+                        '(n)'.format(self.class_name, self.abbrev_parent)]
                 code.append(self.create_code_block('line', line))
             else:
                 line = ['return ({0} != NULL) ? '
@@ -623,20 +640,21 @@ class ListOfQueryFunctions():
         code = []
         if not self.is_header:
             if self.status == 'cpp_list':
-                implementation = ['{0}* item = NULL'.format(self.std_base),
+               implementation = ['{0}* item = NULL'.format(self.std_base),
                                   'vector<{0}*>::iterator '
                                   'result'.format(self.std_base)]
-                code = [self.create_code_block('line', implementation),
-                        self.create_code_block('line',
-                                               ['result = find_if('
-                                                'mItems.begin(), '
-                                                'mItems.end(), IdEq<{0}>(sid)'
+               code = [self.create_code_block('line', implementation),
+                       self.create_code_block('line',
+                                              ['result = find_if('
+                                               'mItems.begin(), '
+                                               'mItems.end(), {1}<{0}>(sid)'
                                                 ')'.format(self.
-                                                           object_child_name)])]
-                implementation = ['result != mItems.end()', 'item = *result',
+                                                           object_child_name,
+                                                           self.ideq)])]
+               implementation = ['result != mItems.end()', 'item = *result',
                                   'mItems.erase(result)']
-                code.append(self.create_code_block('if', implementation))
-                code.append(
+               code.append(self.create_code_block('if', implementation))
+               code.append(
                     self.create_code_block(
                         'line',
                         ['return static_cast <{0}*> '
@@ -651,10 +669,11 @@ class ListOfQueryFunctions():
                                   '(sid))'.format(self.child_name, name)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'c_list':
-                line = ['lo == NULL', 'return NULL']
+                line = ['{0} == NULL'.format(self.abbrev_parent), 'return NULL']
                 code = [self.create_code_block('if', line)]
-                line = ['return (sid != NULL) ? static_cast <{0}*>(lo)->remove'
-                        '(sid) : NULL'.format(self.class_name)]
+                line = ['return (sid != NULL) ? static_cast <{0}*>({1})->remove'
+                        '(sid) : NULL'.format(self.class_name,
+                                              self.abbrev_parent)]
                 code.append(self.create_code_block('line', line))
             else:
                 line = ['return ({0} != NULL && sid != NULL) ? '
@@ -709,7 +728,8 @@ class ListOfQueryFunctions():
         if self.is_cpp_api:
             additional.append('@copydetails doc_note_object_is_copied')
             additional.append(' ')
-            additional.append('@see create{0}()'.format(self.object_child_name))
+            additional.append('@see create{0}()'
+                              ''.format(strFunctions.remove_prefix(self.object_child_name)))
         # create the function declaration
         arguments = []
         used_c_name = strFunctions.remove_prefix(self.child_name)
@@ -836,9 +856,10 @@ class ListOfQueryFunctions():
                         'instance.'.format(child)]
         additional = []
         if self.is_cpp_api:
-            additional.append('@see add{0}(const {0}* {1})'
-                              .format(self.object_child_name,
-                                      self.abbrev_child))
+            additional.append('@see add{0}(const {2}* {1})'
+                              .format(strFunctions.remove_prefix(self.object_child_name),
+                                      self.abbrev_child,
+                                      self.object_child_name))
         # create the function declaration
         arguments = []
         used_c_name = strFunctions.remove_prefix(child_name)

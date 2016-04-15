@@ -45,7 +45,7 @@ from util import query, strFunctions, global_variables
 class CppCodeFile(BaseCppFile.BaseCppFile):
     """Class for all Cpp Code files"""
 
-    def __init__(self, class_object):
+    def __init__(self, class_object, represents_class=True):
 
         self.brief_description = \
             'Implementation  of the {0} class.'.format(class_object['name'])
@@ -53,7 +53,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                          class_object['attribs'])
 
         # members from object
-        self.expand_class(class_object)
+        if represents_class:
+            self.expand_class(class_object)
     ########################################################################
 
     # Functions for writing the class
@@ -136,9 +137,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         write_validators = False
         write_math = False
 
-        if len(self.child_lo_elements) > 0:
+        if len(self.child_lo_elements) > 0 and global_variables.is_package:
             write_element_filter = True
-        else:
+        elif global_variables.is_package:
             for element in self.child_elements:
                 if 'concrete' in element:
                     write_element_filter = True
@@ -202,10 +203,14 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(concrete_classes) > 0:
             self.skip_line()
         for element in concrete_classes:
-            self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
-                                     '.h>'.format(self.language,
-                                                  self.package.lower(),
-                                                  element))
+            if global_variables.is_package:
+                self.write_line_verbatim('#include <{0}/packages/{1}/{0}/{2}'
+                                         '.h>'.format(self.language,
+                                                      self.package.lower(),
+                                                      element))
+            else:
+                self.write_line_verbatim('#include <{0}/{1}.h>'
+                                         ''.format(self.language, element))
         self.skip_line(2)
         self.write_line('using namespace std;')
         self.skip_line()

@@ -40,7 +40,7 @@
 import copy
 from . import CppHeaderFile
 from . import CppCodeFile
-from util import strFunctions, query
+from util import strFunctions, query, global_variables
 
 
 class CppFiles():
@@ -90,7 +90,10 @@ class CppFiles():
         descrip['is_list_of'] = True
         descrip['attribs'] = self.class_object['lo_attribs']
         descrip['child_base_class'] = self.class_object['baseClass']
-        descrip['baseClass'] = 'ListOf'
+        if global_variables.is_package:
+            descrip['baseClass'] = 'ListOf'
+        else:
+            descrip['baseClass'] = strFunctions.prefix_name('ListOf')
         descrip['list_of_name'] = lo_name
         descrip['lo_child'] = self.class_object['name']
         descrip['name'] = lo_name

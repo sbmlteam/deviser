@@ -167,7 +167,6 @@ public:
    * @copydetails doc_warning_typecodes_not_unique
    *
    * @see getElementName()
-   * @see getPackageName()
    */
   virtual int getTypeCode() const;
 

@@ -186,6 +186,22 @@ class ParseXML():
             return 1
         return self.to_int(temp.nodeValue)
 
+    @staticmethod
+    def get_typecode(self, node):
+        name = 'typeCode'
+        temp = node.getAttributeNode(name)
+        if temp is None:
+            return None
+        temptype = temp.nodeValue
+        if not global_variables.is_package:
+            if temptype.startswith('SBML_'):
+                typecode = temptype[5:]
+            else:
+                typecode = temptype
+        else:
+            typecode = temptype
+        return typecode
+
     #####################################################################
 
     # Functions for looking up elements
@@ -358,7 +374,7 @@ class ParseXML():
             base_class = self.get_value(node, 'baseClass')
             if not base_class:
                 base_class = 'SBase'
-            type_code = self.get_value(node, 'typeCode')
+            type_code = self.get_typecode(self, node)
             if not type_code:
                 self.report_error(global_variables
                                   .return_codes['missing required information'],
