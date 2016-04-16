@@ -1417,11 +1417,11 @@ public:
    * Removes this object from its parent.
    *
    * If the parent was storing this object as a pointer, it is deleted.  If
-   * not, it is simply cleared (as in ListOf objects).  This is a pure
+   * not, it is simply cleared (as in SedListOf objects).  This is a pure
    * virtual method, as every SedBase element has different parents, and
    * therefore different methods of removing itself.  Will fail (and not
    * delete itself) if it has no parent object.  This function is designed to
-   * be overridden, but for all objects whose parent is of the class ListOf,
+   * be overridden, but for all objects whose parent is of the class SedListOf,
    * the default implementation will work.
    *
    * @copydetails doc_returns_success_code
@@ -1720,11 +1720,11 @@ protected:
 
 
   /**
-   * Checks that an Sed ListOf element is populated.  
+   * Checks that an Sed SedListOf element is populated.  
    * If a listOf element has been declared with no elements, 
    * an error is logged.
    */
-  void checkListOfPopulated(SedBase* object);
+  void checkSedListOfPopulated(SedBase* object);
 
   /**
    * Checks that the given default namespace in the given element is valid.
@@ -1925,7 +1925,7 @@ SedBase_getParentSedObject (SedBase_t *sb);
  * This function allows any structure to determine its exact
  * location/function within a model. For example a
  * StoichiometryMath_t structure has ancestors of type SpeciesReference_t,
- * ListOf_t(Products/Reactants), Reaction_t, ListOfReactions_t and Model_t;
+ * SedListOf_t(Products/Reactants), Reaction_t, SedListOfReactions_t and Model_t;
  * any of which can be accessed via this function.
  *
  * @param sb the SedBase_t structure

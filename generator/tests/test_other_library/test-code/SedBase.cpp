@@ -1951,7 +1951,7 @@ SedBase::read (XMLInputStream& stream)
 
         if ( !stream.isGood() ) break;
 
-        checkListOfPopulated(object);
+        checkSedListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
                    || readAnnotation(stream)
@@ -2461,12 +2461,12 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
 
 /** @cond doxygenLibsedmlInternal */
 /*
-  * Checks that an Sed ListOf element has been populated.
+  * Checks that an Sed SedListOf element has been populated.
   * If a listOf element has been declared with no elements,
   * an error is logged.
   */
 void
-SedBase::checkListOfPopulated(SedBase* object)
+SedBase::checkSedListOfPopulated(SedBase* object)
 {
     // for now log the empty list
   if (object->getTypeCode() == SEDML_LIST_OF)

@@ -50,38 +50,53 @@ class BaseClassFiles():
 
     def __init__(self, name, verbose=False):
         # members from object
-        self.name = strFunctions.upper_first(name)
+        self.class_prefix = strFunctions.upper_first(name)
 
         self.verbose = verbose
 
     def write_files(self):
-        self.write_header()
-        self.write_code()
+        self.write_all_files('SBase')
+        self.write_all_files('ListOf')
+        self.write_all_files('ConstructorException')
+        self.write_all_files('Reader')
+        self.write_all_files('Writer')
+        self.write_all_files('ErrorLog')
 
-    def write_header(self):
-        base_descrip = self.create_base_description()
+    def write_all_files(self, name):
+        self.write_header(name)
+        self.write_code(name)
+
+    def write_header(self, name):
+        base_descrip = self.create_base_description(name)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
+        filein = '{0}.h'.format(name)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
         fileout.skip_line(2)
-        self.copy_file_contents(fileout, 'SBase.h')
+        self.copy_file_contents(fileout, filein)
         fileout.close_file()
 
-    def write_code(self):
-        base_descrip = self.create_base_description()
+    def write_code(self, name):
+        base_descrip = self.create_base_description(name)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
+        filein = '{0}.cpp'.format(name)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
         fileout.skip_line(2)
-        self.copy_file_contents(fileout, 'SBase.cpp')
+        self.copy_file_contents(fileout, filein)
         fileout.close_file()
 
-    def create_base_description(self):
-        decsr = dict({'name': '{0}Base'.format(self.name),
-                      'attribs': None})
-        return decsr
+    def create_base_description(self, name):
+        descr = None
+        if name == 'SBase':
+            descr = dict({'name': '{0}Base'.format(self.class_prefix),
+                          'attribs': None})
+        else:
+            descr = dict({'name': '{0}{1}'.format(self.class_prefix, name),
+                          'attribs': None})
+        return descr
 
     def copy_file_contents(self, fileout, infilename):
         filename = '{0}{1}templates{1}{2}'.format(os.path.dirname(__file__),
@@ -104,10 +119,15 @@ class BaseClassFiles():
     def adjust_line(line):
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
+        line = re.sub('CAT_SBML',
+                      'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_',
                       '{0}_'.format(global_variables.language.upper()), line)
+        line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
+        line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
         line = re.sub('sbml', global_variables.language, line)
         line = re.sub('SBML', global_variables.prefix, line)
+        line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
         return line
 
     @staticmethod

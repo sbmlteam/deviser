@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1" ignorePackageVersion="true">
+      <elements>
+        <element name="Model" typeCode="SBML_SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="language" required="false" type="string" abstract="false"/>
+            <attribute name="source" required="true" type="string" abstract="false"/>
+            <attribute name="change" required="false" type="lo_element" element="Change" abstract="true"/>
+          </attributes>
+        </element>
+        <element name="Change" typeCode="SBML_SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="true">
+          <concretes>
+            <concrete name="addXML" element="AddXML"/>
+          </concretes>
+        </element>
+        <element name="AddXML" typeCode="SBML_SEDML_ADDXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
+          <attributes>
+            <attribute name="newXML" required="true" type="element" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+    </pkgVersion>
+  </versions>
+</package>

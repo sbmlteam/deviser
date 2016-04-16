@@ -73,15 +73,25 @@ def run_test(name, num, class_name, test_case, list_of):
     return fail
 
 
-def run_templates(name, class_name, test_case):
+def run_templates(name, class_name, test_case, list_of):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_templates(filename)
     fail = compare_code_headers(class_name)
     fail += compare_code_impl(class_name)
-    # if len(list_of) > 0:
-    #     class_name = list_of
-    #     fail += compare_code_headers(class_name)
-    #     fail += compare_code_impl(class_name)
+    fail += compare_code_headers(list_of)
+    fail += compare_code_impl(list_of)
+    print('')
+    return fail
+
+def test_other_templates():
+    fail = compare_code_headers('SedConstructorException')
+    fail += compare_code_impl('SedConstructorException')
+    fail += compare_code_headers('SedReader')
+    fail += compare_code_impl('SedReader')
+    fail += compare_code_headers('SedWriter')
+    fail += compare_code_impl('SedWriter')
+    fail += compare_code_headers('SedErrorLog')
+    fail += compare_code_impl('SedErrorLog')
     print('')
     return fail
 
@@ -108,11 +118,11 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
-    num = 0
     class_name = 'SedBase'
-    list_of = ''
+    list_of = 'SedListOf'
     test_case = 'templates'
-    fail += run_templates(name, class_name, test_case)
+    fail += run_templates(name, class_name, test_case, list_of)
+    fail += test_other_templates()
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
