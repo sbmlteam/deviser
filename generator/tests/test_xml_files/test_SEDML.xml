@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false">
-  <language name="SedML" prefix="Sed" documentClass="SedDocument" baseClass="SedBase" libraryName="LibSEDML" isPackage="False"/>
+  <language name="SedML" prefix="Sed" documentClass="SedDocument" baseClass="SedBase" libraryName="LibSEDML" isPackage="False">
+    <versions>
+      <version level="1" version="1" namespace="http://sed-ml.org/"/>
+    </versions>
+  </language>
   <versions>
-    <pkgVersion level="3" version="1" pkg_version="1">
+    <pkgVersion level="1" version="1" pkg_version="1">
       <elements>
         <element name="Model" typeCode="SBML_SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>

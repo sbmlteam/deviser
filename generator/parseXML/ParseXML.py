@@ -565,6 +565,15 @@ class ParseXML():
             if occurs_as_child:
                 elem['parent'] = parent
 
+    def get_version_information(self, node):
+        level = self.get_int_value(self, node, 'level')
+        version = self.get_int_value(self, node, 'version')
+        namespace = self.get_value(node, 'namespace')
+        return dict({'level': level,
+                     'version': version,
+                     'namespace': namespace})
+
+
     def read_language_element(self, node):
         language = self.get_value(node, 'name')
         base_class = self.get_value(node, 'baseClass')
@@ -577,13 +586,19 @@ class ParseXML():
         else:
             is_package = True
 
+        versions = node.getElementsByTagName('versions')
+        specification = []
+        if versions:
+            for version in versions[0].getElementsByTagName('version'):
+                specification.append(self.get_version_information(version))
+
         # some sanity checking
         if not language or language == '':
             language = 'sbml'
         # set the globals
         global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
-                                     is_package, pkg_prefix)
+                                     is_package, pkg_prefix, '', specification)
 
     #####################################################################
 

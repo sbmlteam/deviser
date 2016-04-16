@@ -92,6 +92,8 @@ def test_other_templates():
     fail += compare_code_impl('SedWriter')
     fail += compare_code_headers('SedErrorLog')
     fail += compare_code_impl('SedErrorLog')
+    fail += compare_code_headers('SedNamespaces')
+    fail += compare_code_impl('SedNamespaces')
     print('')
     return fail
 

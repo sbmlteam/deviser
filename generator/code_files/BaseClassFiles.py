@@ -61,6 +61,7 @@ class BaseClassFiles():
         self.write_all_files('Reader')
         self.write_all_files('Writer')
         self.write_all_files('ErrorLog')
+        self.write_all_files('Namespaces')
 
     def write_all_files(self, name):
         self.write_header(name)
@@ -128,6 +129,7 @@ class BaseClassFiles():
         line = re.sub('sbml', global_variables.language, line)
         line = re.sub('SBML', global_variables.prefix, line)
         line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
+        line = re.sub('SPEC_NAMESPACE', '\"{0}\"'.format(global_variables.namespaces[0]['namespace']), line)
         return line
 
     @staticmethod

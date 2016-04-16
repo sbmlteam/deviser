@@ -1,13 +1,7 @@
-/**
- * @file SedBase.cpp
- * @brief Implementation of the SedBase class.
- * @author DEVISER
- */
-
-
 #include <sstream>
 #include <vector>
 
+<verbatim>
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
 #include <sbml/xml/XMLOutputStream.h>
@@ -16,24 +10,25 @@
 #include <sbml/xml/XMLNode.h>
 
 #include <sbml/util/util.h>
+</verbatim>
 
-#include <sedml/SedError.h>
-#include <sedml/SedErrorLog.h>
-#include <sedml/SedDocument.h>
-#include <sedml/SedListOf.h>
-#include <sedml/SedBase.h>
+#include <sbml/SBMLError.h>
+#include <sbml/SBMLErrorLog.h>
+#include <sbml/SBMLDocument.h>
+#include <sbml/ListOf.h>
+#include <sbml/SBase.h>
 
 
 /** @cond doxygenIgnored */
 using namespace std;
 /** @endcond */
 
-LIBSEDML_CPP_NAMESPACE_BEGIN
+LIBSBML_CPP_NAMESPACE_BEGIN
 
 #ifdef __cplusplus
 
-SedBase*
-SedBase::getElementBySId(const std::string& id)
+SBase*
+SBase::getElementBySId(const std::string& id)
 {
   if (id.empty()) return NULL;
 
@@ -41,8 +36,8 @@ SedBase::getElementBySId(const std::string& id)
 }
 
 
-SedBase*
-SedBase::getElementByMetaId(const std::string& metaid)
+SBase*
+SBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;
 
@@ -50,101 +45,101 @@ SedBase::getElementByMetaId(const std::string& metaid)
 }
 
 List*
-SedBase::getAllElements()
+SBase::getAllElements()
 {
   return NULL;
 }
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Creates a new SedBase object with the given level and version.
- * Only subclasses may create SedBase objects.
+ * Creates a new SBase object with the given level and version.
+ * Only subclasses may create SBase objects.
  */
-SedBase::SedBase (unsigned int level, unsigned int version) 
+SBase::SBase (unsigned int level, unsigned int version) 
  : mMetaId ("")
  , mNotes(NULL)
  , mAnnotation( NULL )
- , mSed      ( NULL )
- , mSedNamespaces (NULL)
+ , mSBML      ( NULL )
+ , mSBMLNamespaces (NULL)
  , mUserData(NULL)
  , mLine      ( 0 )
  , mColumn    ( 0 )
- , mParentSedObject (NULL)
+ , mParentSBMLObject (NULL)
   , mHasBeenDeleted(false)
  , mURI("")
 {
-  mSedNamespaces = new SedNamespaces(level, version);
+  mSBMLNamespaces = new SBMLNamespaces(level, version);
 
   //
-  // Sets the XMLNS URI of corresponding Sed Level/Version to
+  // Sets the XMLNS URI of corresponding SBML Level/Version to
   // the element namespace (mURI) of this object.
   //
   //
-  setElementNamespace(mSedNamespaces->getURI());
+  setElementNamespace(mSBMLNamespaces->getURI());
 }
 
 
 
 /*
- * Creates a new SedBase object with the given SedNamespaces.
- * Only subclasses may create SedBase objects.
+ * Creates a new SBase object with the given SBMLNamespaces.
+ * Only subclasses may create SBase objects.
  */
-SedBase::SedBase (SedNamespaces *sedmlns) 
+SBase::SBase (SBMLNamespaces *sbmlns) 
  : mMetaId("")
  , mNotes(NULL)
  , mAnnotation( NULL )
- , mSed      ( NULL )
- , mSedNamespaces (NULL)
+ , mSBML      ( NULL )
+ , mSBMLNamespaces (NULL)
  , mUserData(NULL)
  , mLine      ( 0 )
  , mColumn    ( 0 )
- , mParentSedObject (NULL)
+ , mParentSBMLObject (NULL)
   , mHasBeenDeleted(false)
  , mURI("")
 {
-  if (!sedmlns)
+  if (!sbmlns)
   {
-    std::string err("SedBase::SedBase(SedNamespaces*) : SedNamespaces is null");
-    throw SedConstructorException(err);
+    std::string err("SBase::SBase(SBMLNamespaces*) : SBMLNamespaces is null");
+    throw SBMLConstructorException(err);
   }
-  mSedNamespaces = sedmlns->clone();
+  mSBMLNamespaces = sbmlns->clone();
 
-  setElementNamespace(static_cast<SedNamespaces>(*mSedNamespaces).getURI());
+  setElementNamespace(static_cast<SBMLNamespaces>(*mSBMLNamespaces).getURI());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Copy constructor. Creates a copy of this SedBase object.
+ * Copy constructor. Creates a copy of this SBase object.
  */
-SedBase::SedBase(const SedBase& orig)
+SBase::SBase(const SBase& orig)
   : mMetaId (orig.mMetaId)
   , mNotes (NULL)
   , mAnnotation (NULL)
-  , mSed (NULL)
-  , mSedNamespaces(NULL)
+  , mSBML (NULL)
+  , mSBMLNamespaces(NULL)
   , mUserData(orig.mUserData)
   , mLine(orig.mLine)
   , mColumn(orig.mColumn)
-  , mParentSedObject(NULL)
+  , mParentSBMLObject(NULL)
   , mURI(orig.mURI)
 {
   if(orig.mNotes != NULL)
-    this->mNotes = new XMLNode(*const_cast<SedBase&>(orig).getNotes());
+    this->mNotes = new XMLNode(*const_cast<SBase&>(orig).getNotes());
   else
     this->mNotes = NULL;
 
   if(orig.mAnnotation != NULL)
-    this->mAnnotation = new XMLNode(*const_cast<SedBase&>(orig).mAnnotation);
+    this->mAnnotation = new XMLNode(*const_cast<SBase&>(orig).mAnnotation);
   else
     this->mAnnotation = NULL;
 
-  if(orig.getSedNamespaces() != NULL)
-    this->mSedNamespaces =
-    new SedNamespaces(*const_cast<SedBase&>(orig).getSedNamespaces());
+  if(orig.getSBMLNamespaces() != NULL)
+    this->mSBMLNamespaces =
+    new SBMLNamespaces(*const_cast<SBase&>(orig).getSBMLNamespaces());
   else
-    this->mSedNamespaces = NULL;
+    this->mSBMLNamespaces = NULL;
 
   this->mHasBeenDeleted = false;
 }
@@ -152,19 +147,19 @@ SedBase::SedBase(const SedBase& orig)
 
 
 /*
- * Destroy this SedBase object.
+ * Destroy this SBase object.
  */
-SedBase::~SedBase ()
+SBase::~SBase ()
 {
   if (mNotes != NULL)       delete mNotes;
   if (mAnnotation != NULL)  delete mAnnotation;
-  if (mSedNamespaces != NULL)  delete mSedNamespaces;
+  if (mSBMLNamespaces != NULL)  delete mSBMLNamespaces;
 }
 
 /*
  * Assignment operator
  */
-SedBase& SedBase::operator=(const SedBase& rhs)
+SBase& SBase::operator=(const SBase& rhs)
 {
   if(&rhs!=this)
   {
@@ -173,30 +168,30 @@ SedBase& SedBase::operator=(const SedBase& rhs)
     delete this->mNotes;
 
     if(rhs.mNotes != NULL)
-      this->mNotes = new XMLNode(*const_cast<SedBase&>(rhs).getNotes());
+      this->mNotes = new XMLNode(*const_cast<SBase&>(rhs).getNotes());
     else
       this->mNotes = NULL;
 
     delete this->mAnnotation;
 
     if(rhs.mAnnotation != NULL)
-      this->mAnnotation = new XMLNode(*const_cast<SedBase&>(rhs).mAnnotation);
+      this->mAnnotation = new XMLNode(*const_cast<SBase&>(rhs).mAnnotation);
     else
       this->mAnnotation = NULL;
 
-    this->mSed       = rhs.mSed;
+    this->mSBML       = rhs.mSBML;
     this->mLine       = rhs.mLine;
     this->mColumn     = rhs.mColumn;
-    this->mParentSedObject = rhs.mParentSedObject;
+    this->mParentSBMLObject = rhs.mParentSBMLObject;
     this->mUserData   = rhs.mUserData;
 
-    delete this->mSedNamespaces;
+    delete this->mSBMLNamespaces;
 
-    if(rhs.mSedNamespaces != NULL)
-      this->mSedNamespaces =
-      new SedNamespaces(*const_cast<SedBase&>(rhs).mSedNamespaces);
+    if(rhs.mSBMLNamespaces != NULL)
+      this->mSBMLNamespaces =
+      new SBMLNamespaces(*const_cast<SBase&>(rhs).mSBMLNamespaces);
     else
-      this->mSedNamespaces = NULL;
+      this->mSBMLNamespaces = NULL;
 
 
     this->mURI = rhs.mURI;
@@ -207,105 +202,105 @@ SedBase& SedBase::operator=(const SedBase& rhs)
 
 
 /*
- * @return the metaid of this Sed object.
+ * @return the metaid of this SBML object.
  */
 const string&
-SedBase::getMetaId () const
+SBase::getMetaId () const
 {
   return mMetaId;
 }
 
 
 /*
- * @return the metaid of this Sed object.
+ * @return the metaid of this SBML object.
  */
 string&
-SedBase::getMetaId ()
+SBase::getMetaId ()
 {
   return mMetaId;
 }
 
 
 /*
- * @return the notes of this Sed object.
+ * @return the notes of this SBML object.
  */
 XMLNode*
-SedBase::getNotes()
+SBase::getNotes()
 {
   return mNotes;
 }
 
 
 XMLNode*
-SedBase::getNotes() const
+SBase::getNotes() const
 {
   return mNotes;
 }
 
 
 /*
- * @return the notes of this Sed object by string.
+ * @return the notes of this SBML object by string.
  */
 std::string
-SedBase::getNotesString()
+SBase::getNotesString()
 {
   return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 std::string
-SedBase::getNotesString() const
+SBase::getNotesString() const
 {
   return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 /*
- * @return the annotation of this Sed object.
+ * @return the annotation of this SBML object.
  */
 XMLNode*
-SedBase::getAnnotation ()
+SBase::getAnnotation ()
 {
   return mAnnotation;
 }
 
 
 XMLNode*
-SedBase::getAnnotation () const
+SBase::getAnnotation () const
 {
-  return const_cast<SedBase *>(this)->getAnnotation();
+  return const_cast<SBase *>(this)->getAnnotation();
 }
 
 
 /*
- * @return the annotation of this Sed object by string.
+ * @return the annotation of this SBML object by string.
  */
 std::string
-SedBase::getAnnotationString ()
+SBase::getAnnotationString ()
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
 }
 
 
 std::string
-SedBase::getAnnotationString () const
+SBase::getAnnotationString () const
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
 }
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 std::string
-SedBase::getURI() const
+SBase::getURI() const
 {
-  const SedDocument* doc = getSedDocument();
+  const SBMLDocument* doc = getSBMLDocument();
 
   if (doc == NULL)
     return getElementNamespace();
 
-  SedNamespaces* sedmlns = doc->getSedNamespaces();
+  SBMLNamespaces* sbmlns = doc->getSBMLNamespaces();
 
-  if (sedmlns == NULL)
+  if (sbmlns == NULL)
     return getElementNamespace();
 
   return getElementNamespace();
@@ -314,32 +309,32 @@ SedBase::getURI() const
 
 
 void *
-SedBase::getUserData() const
+SBase::getUserData() const
 {
   return this->mUserData;
 }
 
 
 int
-SedBase::setUserData(void *userData)
+SBase::setUserData(void *userData)
 {
   this->mUserData = userData;
   if (userData == NULL && mUserData == NULL)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else if (mUserData != NULL)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSEDML_OPERATION_FAILED;
+    return LIBSBML_OPERATION_FAILED;
   }
 }
 
 bool
-SedBase::isSetUserData() const
+SBase::isSetUserData() const
 {
   if (mUserData != NULL)
   {
@@ -352,51 +347,51 @@ SedBase::isSetUserData() const
 }
 
 int
-SedBase::unsetUserData()
+SBase::unsetUserData()
 {
   this->mUserData = NULL;
   if (mUserData == NULL)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSEDML_OPERATION_FAILED;
+    return LIBSBML_OPERATION_FAILED;
   }
 }
 
 /*
- * @return the Namespaces associated with this Sed object
+ * @return the Namespaces associated with this SBML object
  */
 XMLNamespaces*
-SedBase::getNamespaces() const
+SBase::getNamespaces() const
 {
-  if (mSed != NULL)
-    return mSed->getSedNamespaces()->getNamespaces();
+  if (mSBML != NULL)
+    return mSBML->getSBMLNamespaces()->getNamespaces();
   else
-    return mSedNamespaces->getNamespaces();
+    return mSBMLNamespaces->getNamespaces();
 }
 
 
 /*
- * @return the parent SedDocument of this Sed object.
+ * @return the parent SBMLDocument of this SBML object.
  */
-const SedDocument*
-SedBase::getSedDocument () const
+const SBMLDocument*
+SBase::getSBMLDocument () const
 {
-  if (mSed != NULL)
+  if (mSBML != NULL)
   {
     // if the doc object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mSed->getHasBeenDeleted())
+      if (mSBML->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mSed;
+        return mSBML;
       }
     }
     catch ( ... )
@@ -405,28 +400,28 @@ SedBase::getSedDocument () const
     }
   }
 
-  return mSed;
+  return mSBML;
 }
 
 /*
- * @return the parent SedDocument of this Sed object.
+ * @return the parent SBMLDocument of this SBML object.
  */
-SedDocument*
-SedBase::getSedDocument ()
+SBMLDocument*
+SBase::getSBMLDocument ()
 {
-  if (mSed != NULL)
+  if (mSBML != NULL)
   {
     // if the doc object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mSed->getHasBeenDeleted())
+      if (mSBML->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mSed;
+        return mSBML;
       }
     }
     catch ( ... )
@@ -434,24 +429,24 @@ SedBase::getSedDocument ()
       return NULL;
     }
   }
-  return mSed;
+  return mSBML;
 }
-SedBase*
-SedBase::getParentSedObject ()
+SBase*
+SBase::getParentSBMLObject ()
 {
-  if (mParentSedObject != NULL)
+  if (mParentSBMLObject != NULL)
   {
     // if the parent object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mParentSedObject->getHasBeenDeleted())
+      if (mParentSBMLObject->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mParentSedObject;
+        return mParentSBMLObject;
       }
     }
     catch ( ... )
@@ -460,25 +455,25 @@ SedBase::getParentSedObject ()
     }
   }
 
-  return mParentSedObject;
+  return mParentSBMLObject;
 }
 
-const SedBase*
-SedBase::getParentSedObject () const
+const SBase*
+SBase::getParentSBMLObject () const
 {
-  if (mParentSedObject != NULL)
+  if (mParentSBMLObject != NULL)
   {
     // if the parent object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mParentSedObject->getHasBeenDeleted())
+      if (mParentSBMLObject->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mParentSedObject;
+        return mParentSBMLObject;
       }
     }
     catch ( ... )
@@ -487,91 +482,91 @@ SedBase::getParentSedObject () const
     }
   }
 
-  return mParentSedObject;
+  return mParentSBMLObject;
 }
 
 
 /*
- * @return the line number of this Sed object.
+ * @return the line number of this SBML object.
  */
 unsigned int
-SedBase::getLine () const
+SBase::getLine () const
 {
   return mLine;
 }
 
 
 /*
- * @return the column number of this Sed object.
+ * @return the column number of this SBML object.
  */
 unsigned int
-SedBase::getColumn () const
+SBase::getColumn () const
 {
   return mColumn;
 }
 
 
 /*
- * @return true if the metaid of this Sed object is set, false
+ * @return true if the metaid of this SBML object is set, false
  * otherwise.
  */
 bool
-SedBase::isSetMetaId () const
+SBase::isSetMetaId () const
 {
   return (mMetaId.empty() == false);
 }
 
 
 /*
- * @return true if the notes of this Sed object is set, false
+ * @return true if the notes of this SBML object is set, false
  * otherwise.
  */
 bool
-SedBase::isSetNotes () const
+SBase::isSetNotes () const
 {
   return (mNotes != NULL);
 }
 
 
 /*
- * @return true if the annotation of this Sed object is set,
+ * @return true if the annotation of this SBML object is set,
  * false otherwise.
  */
 bool
-SedBase::isSetAnnotation () const
+SBase::isSetAnnotation () const
 {
   return (mAnnotation != NULL);
 }
 
 
 /*
- * Sets the metaid field of the given Sed object to a copy of metaid.
+ * Sets the metaid field of the given SBML object to a copy of metaid.
  */
 int
-SedBase::setMetaId (const std::string& metaid)
+SBase::setMetaId (const std::string& metaid)
 {
   if (metaid.empty())
   {
     mMetaId.erase();
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else if (!(SyntaxChecker::isValidXMLID(metaid)))
   {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
     mMetaId = metaid;
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the annotation of this Sed object to a copy of annotation.
+ * Sets the annotation of this SBML object to a copy of annotation.
  */
 int
-SedBase::setAnnotation (const XMLNode* annotation)
+SBase::setAnnotation (const XMLNode* annotation)
 {
   if (annotation == NULL)
   {
@@ -586,30 +581,30 @@ SedBase::setAnnotation (const XMLNode* annotation)
     mAnnotation = annotation->clone();
   }
 
-  return LIBSEDML_OPERATION_SUCCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 /*
- * Sets the annotation (by string) of this Sed object to a copy of annotation.
+ * Sets the annotation (by string) of this SBML object to a copy of annotation.
  */
 int
-SedBase::setAnnotation (const std::string& annotation)
+SBase::setAnnotation (const std::string& annotation)
 {
   
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   
   if(annotation.empty())
   {
     unsetAnnotation();
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   
   XMLNode* annt_xmln;
   
   // you might not have a document !!
-  if (getSedDocument() != NULL)
+  if (getSBMLDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -632,13 +627,13 @@ SedBase::setAnnotation (const std::string& annotation)
  * adding additional information.
  */
 int
-SedBase::appendAnnotation (const XMLNode* annotation)
+SBase::appendAnnotation (const XMLNode* annotation)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   unsigned int duplicates = 0;
 
   if(annotation == NULL)
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
 
   XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
@@ -692,7 +687,7 @@ SedBase::appendAnnotation (const XMLNode* annotation)
 
     if (duplicates > 0)
     {
-      success = LIBSEDML_DUPLICATE_ANNOTATION_NS;
+      success = LIBSBML_DUPLICATE_ANNOTATION_NS;
     }
     else
     {
@@ -719,13 +714,13 @@ SedBase::appendAnnotation (const XMLNode* annotation)
  * adding additional information.
  */
 int
-SedBase::appendAnnotation (const std::string& annotation)
+SBase::appendAnnotation (const std::string& annotation)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getSedDocument() != NULL)
+  if (getSBMLDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -744,14 +739,14 @@ SedBase::appendAnnotation (const std::string& annotation)
 
 
 int
-SedBase::removeTopLevelAnnotationElement(const std::string elementName,
+SBase::removeTopLevelAnnotationElement(const std::string elementName,
     const std::string elementURI)
 {
 
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   if (mAnnotation == NULL)
   {
-    success = LIBSEDML_OPERATION_SUCCESS;
+    success = LIBSBML_OPERATION_SUCCESS;
     return success;
   }
 
@@ -759,7 +754,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
   if (index < 0)
   {
     // the annotation does not have a child of this name
-    success = LIBSEDML_ANNOTATION_NAME_NOT_FOUND;
+    success = LIBSBML_ANNOTATION_NAME_NOT_FOUND;
     return success;
   }
   else
@@ -773,7 +768,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
       if (prefix.empty() == false
         && elementURI != child.getNamespaceURI(prefix))
       {
-        success = LIBSEDML_ANNOTATION_NS_NOT_FOUND;
+        success = LIBSBML_ANNOTATION_NS_NOT_FOUND;
         return success;
       }
       else
@@ -792,7 +787,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
 
         if (match == false)
         {
-          success = LIBSEDML_ANNOTATION_NS_NOT_FOUND;
+          success = LIBSBML_ANNOTATION_NS_NOT_FOUND;
           return success;
         }
       }
@@ -810,7 +805,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
     // check success
     if (mAnnotation == NULL || mAnnotation->getIndex(elementName) < 0)
     {
-      success = LIBSEDML_OPERATION_SUCCESS;
+      success = LIBSBML_OPERATION_SUCCESS;
     }
   }
 
@@ -819,15 +814,15 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
 
 
 int
-SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
+SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   XMLNode * replacement = NULL;
   if (annotation->getName() == "annotation")
   {
     if (annotation->getNumChildren() != 1)
     {
-      success = LIBSEDML_INVALID_OBJECT;
+      success = LIBSBML_INVALID_OBJECT;
       return success;
     }
     else
@@ -841,7 +836,7 @@ SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
   }
 
   success = removeTopLevelAnnotationElement(replacement->getName());
-  if (success == LIBSEDML_OPERATION_SUCCESS)
+  if (success == LIBSBML_OPERATION_SUCCESS)
   {
     success = appendAnnotation(annotation);
   }
@@ -853,13 +848,13 @@ SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 
 
 int
-SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
+SBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getSedDocument() != NULL)
+  if (getSBMLDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -879,20 +874,20 @@ SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 
 
 /*
- * Sets the notes of this Sed object to a copy of notes.
+ * Sets the notes of this SBML object to a copy of notes.
  */
 int
-SedBase::setNotes(const XMLNode* notes)
+SBase::setNotes(const XMLNode* notes)
 {
   if (mNotes == notes)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else if (notes == NULL)
   {
     delete mNotes;
     mNotes = NULL;
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
 
   delete mNotes;
@@ -921,14 +916,14 @@ SedBase::setNotes(const XMLNode* notes)
       {
         if (mNotes->addChild(notes->getChild(i)) < 0)
         {
-          return LIBSEDML_OPERATION_FAILED;
+          return LIBSBML_OPERATION_FAILED;
         }
       }
     }
     else
     {
       if (mNotes->addChild(*notes) < 0)
-        return LIBSEDML_OPERATION_FAILED;
+        return LIBSBML_OPERATION_FAILED;
     }
   }
 
@@ -936,20 +931,20 @@ SedBase::setNotes(const XMLNode* notes)
     {
       delete mNotes;
       mNotes = NULL;
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
     }
 
-  return LIBSEDML_OPERATION_SUCCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 
 }
 
 /*
- * Sets the notes (by std::string) of this Sed object to a copy of notes.
+ * Sets the notes (by std::string) of this SBML object to a copy of notes.
  */
 int
 SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   
   if (notes.empty())
   {
@@ -960,9 +955,9 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
     XMLNode* notes_xmln;
 
     // you might not have a document !!
-    if (getSedDocument() != NULL)
+    if (getSBMLDocument() != NULL)
     {
-      XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
@@ -1013,17 +1008,17 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
  * adding additional information.
  */
 int
-SedBase::appendNotes(const XMLNode* notes)
+SBase::appendNotes(const XMLNode* notes)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   if(notes == NULL)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
 
   const string&  name = notes->getName();
 
-  // The content of notes in Sed can consist only of the following
+  // The content of notes in SBML can consist only of the following
   // possibilities:
   //
   //  1. A complete XHTML document (minus the XML and DOCTYPE
@@ -1086,7 +1081,7 @@ SedBase::appendNotes(const XMLNode* notes)
     else
     {
       // the given notes is empty
-      return LIBSEDML_OPERATION_SUCCESS;
+      return LIBSBML_OPERATION_SUCCESS;
     }
   }
   else
@@ -1105,7 +1100,7 @@ SedBase::appendNotes(const XMLNode* notes)
       else
       {
         // the given notes is empty
-        return LIBSEDML_OPERATION_SUCCESS;
+        return LIBSBML_OPERATION_SUCCESS;
       }
     }
     else
@@ -1145,7 +1140,7 @@ SedBase::appendNotes(const XMLNode* notes)
         )
        )
     {
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
     }
   }
 
@@ -1169,7 +1164,7 @@ SedBase::appendNotes(const XMLNode* notes)
 
     if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, NULL))
     {
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
     }
   }
 
@@ -1203,7 +1198,7 @@ SedBase::appendNotes(const XMLNode* notes)
           )
          )
       {
-        return LIBSEDML_INVALID_OBJECT;
+        return LIBSBML_INVALID_OBJECT;
       }
       curNotesType = _ANotesHTML;
     }
@@ -1244,7 +1239,7 @@ SedBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
           if (curBody.addChild(addedBody.getChild(i)) < 0 )
-            return LIBSEDML_OPERATION_FAILED;
+            return LIBSBML_OPERATION_FAILED;
         }
       }
       else if ((addedNotesType == _ANotesBody)
@@ -1256,10 +1251,10 @@ SedBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0 )
-            return LIBSEDML_OPERATION_FAILED;
+            return LIBSBML_OPERATION_FAILED;
         }
       }
-      success = LIBSEDML_OPERATION_SUCCESS;
+      success = LIBSBML_OPERATION_SUCCESS;
     }
     else if (curNotesType == _ANotesBody)
     {
@@ -1278,7 +1273,7 @@ SedBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
-          return LIBSEDML_OPERATION_FAILED;
+          return LIBSBML_OPERATION_FAILED;
       }
       else if ((addedNotesType == _ANotesBody) || (addedNotesType == _ANotesAny))
       {
@@ -1290,10 +1285,10 @@ SedBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0)
-            return LIBSEDML_OPERATION_FAILED;
+            return LIBSBML_OPERATION_FAILED;
         }
       }
-      success = LIBSEDML_OPERATION_SUCCESS;
+      success = LIBSBML_OPERATION_SUCCESS;
     }
     else if (curNotesType == _ANotesAny)
     {
@@ -1311,7 +1306,7 @@ SedBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
-          return LIBSEDML_OPERATION_FAILED;
+          return LIBSBML_OPERATION_FAILED;
       }
       else if (addedNotesType == _ANotesBody)
       {
@@ -1326,7 +1321,7 @@ SedBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedBody) < 0)
-          return LIBSEDML_OPERATION_FAILED;
+          return LIBSBML_OPERATION_FAILED;
       }
       else if (addedNotesType == _ANotesAny)
       {
@@ -1336,10 +1331,10 @@ SedBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curNotes.addChild(addedNotes.getChild(i)) < 0)
-            return LIBSEDML_OPERATION_FAILED;
+            return LIBSBML_OPERATION_FAILED;
         }
       }
-      success = LIBSEDML_OPERATION_SUCCESS;
+      success = LIBSBML_OPERATION_SUCCESS;
     }
   }
   else // if (mNotes == NULL)
@@ -1357,19 +1352,19 @@ SedBase::appendNotes(const XMLNode* notes)
  * adding additional information.
  */
 int
-SedBase::appendNotes(const std::string& notes)
+SBase::appendNotes(const std::string& notes)
 {
-  int success = LIBSEDML_OPERATION_FAILED;
+  int success = LIBSBML_OPERATION_FAILED;
   if (notes.empty())
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
 
   XMLNode* notes_xmln;
   // you might not have a document !!
-  if (getSedDocument() != NULL)
+  if (getSBMLDocument() != NULL)
   {
-      XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
@@ -1386,43 +1381,43 @@ SedBase::appendNotes(const std::string& notes)
 }
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Sets the parent SedDocument of this Sed object.
+ * Sets the parent SBMLDocument of this SBML object.
  */
 void
-SedBase::setSedDocument (SedDocument* d)
+SBase::setSBMLDocument (SBMLDocument* d)
 {
-  mSed = d;
+  mSBML = d;
 }
 
 
 /*
-  * Sets the parent Sed object of this Sed object.
+  * Sets the parent SBML object of this SBML object.
   *
-  * @param sb the Sed object to use
+  * @param sb the SBML object to use
   */
 void
-SedBase::connectToParent (SedBase* parent)
+SBase::connectToParent (SBase* parent)
 {
-  mParentSedObject = parent;
-  if (mParentSedObject)
+  mParentSBMLObject = parent;
+  if (mParentSBMLObject)
   {
 #if 0
-    cout << "[DEBUG] connectToParent " << this << " (parent) " << SedTypeCode_toString(parent->getTypeCode(),"core")
-         << " " << parent->getSedDocument() << endl;
+    cout << "[DEBUG] connectToParent " << this << " (parent) " << SBMLTypeCode_toString(parent->getTypeCode(),"core")
+         << " " << parent->getSBMLDocument() << endl;
 #endif
-    setSedDocument(mParentSedObject->getSedDocument());
+    setSBMLDocument(mParentSBMLObject->getSBMLDocument());
   }
   else
   {
-    setSedDocument(NULL);
+    setSBMLDocument(NULL);
   }
 }
 
 
 /*
- * Sets this Sed object to child Sed objects (if any).
+ * Sets this SBML object to child SBML objects (if any).
  * (Creates a child-parent relationship by the parent)
  *
  * Subclasses must override this function if they define
@@ -1431,22 +1426,22 @@ SedBase::connectToParent (SedBase* parent)
  * constructors, copy constructors and assignment operators.
  */
 void
-SedBase::connectToChild()
+SBase::connectToChild()
 {
 }
 /** @endcond */
 
-SedBase*
-SedBase::getAncestorOfType(int type)
+SBase*
+SBase::getAncestorOfType(int type)
 {
-  if (type == SEDML_DOCUMENT)
-    return getSedDocument();
+  if (type == SBML_DOCUMENT)
+    return getSBMLDocument();
 
-  SedBase *child;
-  SedBase *parent = getParentSedObject();
+  SBase *child;
+  SBase *parent = getParentSBMLObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == SEDML_DOCUMENT )
+          !( parent->getTypeCode() == SBML_DOCUMENT )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1454,7 +1449,7 @@ SedBase::getAncestorOfType(int type)
     else
     {
       child = parent;
-      parent = child->getParentSedObject();
+      parent = child->getParentSBMLObject();
     }
   }
 
@@ -1464,17 +1459,17 @@ SedBase::getAncestorOfType(int type)
 }
 
 
-const SedBase*
-SedBase::getAncestorOfType(int type) const
+const SBase*
+SBase::getAncestorOfType(int type) const
 {
-  if (type == SEDML_DOCUMENT)
-    return getSedDocument();
+  if (type == SBML_DOCUMENT)
+    return getSBMLDocument();
 
-  const SedBase *child;
-  const SedBase *parent = getParentSedObject();
+  const SBase *child;
+  const SBase *parent = getParentSBMLObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == SEDML_DOCUMENT )
+          !( parent->getTypeCode() == SBML_DOCUMENT )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1482,7 +1477,7 @@ SedBase::getAncestorOfType(int type) const
     else
     {
       child = parent;
-      parent = child->getParentSedObject();
+      parent = child->getParentSBMLObject();
     }
   }
 
@@ -1493,63 +1488,63 @@ SedBase::getAncestorOfType(int type) const
 
 
 /*
- * Sets the namespaces relevant of this Sed object.
+ * Sets the namespaces relevant of this SBML object.
  *
  * @param xmlns the namespaces to set
  */
 int
-SedBase::setNamespaces(XMLNamespaces* xmlns)
+SBase::setNamespaces(XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
   {
-    mSedNamespaces->setNamespaces(NULL);
-    return LIBSEDML_OPERATION_SUCCESS;
+    mSBMLNamespaces->setNamespaces(NULL);
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    mSedNamespaces->setNamespaces(xmlns);
-    return LIBSEDML_OPERATION_SUCCESS;
+    mSBMLNamespaces->setNamespaces(xmlns);
+    return LIBSBML_OPERATION_SUCCESS;
   }
 }
 
 
 
 /*
- * Unsets the metaid of this Sed object.
+ * Unsets the metaid of this SBML object.
  */
 int
-SedBase::unsetMetaId ()
+SBase::unsetMetaId ()
 {
   mMetaId.erase();
 
   if (mMetaId.empty())
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSEDML_OPERATION_FAILED;
+    return LIBSBML_OPERATION_FAILED;
   }
 }
 
 
 /*
- * Unsets the notes of this Sed object.
+ * Unsets the notes of this SBML object.
  */
 int
-SedBase::unsetNotes ()
+SBase::unsetNotes ()
 {
   delete mNotes;
   mNotes = NULL;
-  return LIBSEDML_OPERATION_SUCCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
 /*
- * Unsets the annotation of this Sed object.
+ * Unsets the annotation of this SBML object.
  */
 int
-SedBase::unsetAnnotation ()
+SBase::unsetAnnotation ()
 {
   XMLNode* empty = NULL;
   return setAnnotation(empty);
@@ -1557,56 +1552,56 @@ SedBase::unsetAnnotation ()
 
 
 /*
- * @return the Sed level of this Sed object.
+ * @return the SBML level of this SBML object.
  */
 unsigned int
-SedBase::getLevel () const
+SBase::getLevel () const
 {
-  if (mSed != NULL)
-    return mSed->getLevel();
-  else if (mSedNamespaces != NULL)
-    return mSedNamespaces->getLevel();
+  if (mSBML != NULL)
+    return mSBML->getLevel();
+  else if (mSBMLNamespaces != NULL)
+    return mSBMLNamespaces->getLevel();
   else
-    return SEDML_DEFAULT_LEVEL;
+    return SBML_DEFAULT_LEVEL;
 }
 
 
 /*
- * @return the Sed version of this Sed object.
+ * @return the SBML version of this SBML object.
  */
 unsigned int
-SedBase::getVersion () const
+SBase::getVersion () const
 {
-  if (mSed != NULL)
-    return mSed->getVersion();
-  else if (mSedNamespaces != NULL)
-    return mSedNamespaces->getVersion();
+  if (mSBML != NULL)
+    return mSBML->getVersion();
+  else if (mSBMLNamespaces != NULL)
+    return mSBMLNamespaces->getVersion();
   else
-    return SEDML_DEFAULT_VERSION;
+    return SBML_DEFAULT_VERSION;
 }
 
 
 /*
- * @return the typecode (int) of this Sed object or SEDML_UNKNOWN
+ * @return the typecode (int) of this SBML object or SBML_UNKNOWN
  * (default).
  *
- * This method MAY return the typecode of this Sed object or it MAY
- * return SEDML_UNKNOWN.  That is, subclasses of SedBase are not required to
+ * This method MAY return the typecode of this SBML object or it MAY
+ * return SBML_UNKNOWN.  That is, subclasses of SBase are not required to
  * implement this method to return a typecode.  This method is meant
- * primarily for the LibSed C interface where class and subclass
+ * primarily for the LibSBML C interface where class and subclass
  * information is not readily available.
  *
  * @see getElementName()
  */
 int
-SedBase::getTypeCode () const
+SBase::getTypeCode () const
 {
-  return SEDML_UNKNOWN;
+  return SBML_UNKNOWN;
 }
 
 
 bool
-SedBase::hasValidLevelVersionNamespaceCombination()
+SBase::hasValidLevelVersionNamespaceCombination()
 {
   int typecode = getTypeCode();
   XMLNamespaces *xmlns = getNamespaces();
@@ -1614,63 +1609,63 @@ SedBase::hasValidLevelVersionNamespaceCombination()
   return hasValidLevelVersionNamespaceCombination(typecode, xmlns);
 }
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 bool
-SedBase::matchesSedNamespaces(const SedBase * sb)
+SBase::matchesSBMLNamespaces(const SBase * sb)
 {
-  bool match = matchesCoreSedNamespace(sb);
+  bool match = matchesCoreSBMLNamespace(sb);
 
   return match;
 }
 
 bool
-SedBase::matchesSedNamespaces(const SedBase * sb) const
+SBase::matchesSBMLNamespaces(const SBase * sb) const
 {
-  bool match = matchesCoreSedNamespace(sb);
-
-  return match;
-}
-
-
-bool
-SedBase::matchesRequiredSedNamespacesForAddition(const SedBase * sb)
-{
-  // if core does not match forget it
-  bool match = matchesCoreSedNamespace(sb);
+  bool match = matchesCoreSBMLNamespace(sb);
 
   return match;
 }
 
 
 bool
-SedBase::matchesRequiredSedNamespacesForAddition(const SedBase * sb) const
+SBase::matchesRequiredSBMLNamespacesForAddition(const SBase * sb)
 {
   // if core does not match forget it
-  bool match = matchesCoreSedNamespace(sb);
+  bool match = matchesCoreSBMLNamespace(sb);
 
   return match;
 }
 
 
 bool
-SedBase::matchesCoreSedNamespace(const SedBase * sb)
+SBase::matchesRequiredSBMLNamespacesForAddition(const SBase * sb) const
+{
+  // if core does not match forget it
+  bool match = matchesCoreSBMLNamespace(sb);
+
+  return match;
+}
+
+
+bool
+SBase::matchesCoreSBMLNamespace(const SBase * sb)
 {
   bool match = false;
 
-  SedNamespaces *sedmlns = getSedNamespaces();
-  SedNamespaces *sedmlns_rhs = sb->getSedNamespaces();
+  SBMLNamespaces *sbmlns = getSBMLNamespaces();
+  SBMLNamespaces *sbmlns_rhs = sb->getSBMLNamespaces();
 
-  if (sedmlns->getLevel() != sedmlns_rhs->getLevel())
+  if (sbmlns->getLevel() != sbmlns_rhs->getLevel())
     return match;
 
-  if (sedmlns->getVersion() != sedmlns_rhs->getVersion())
+  if (sbmlns->getVersion() != sbmlns_rhs->getVersion())
     return match;
 
-  std::string coreNs = SedNamespaces::getSedNamespaceURI(
-                       sedmlns->getLevel(), sedmlns->getVersion());
+  std::string coreNs = SBMLNamespaces::getSBMLNamespaceURI(
+                       sbmlns->getLevel(), sbmlns->getVersion());
 
-  if (sedmlns->getNamespaces()->containsUri(coreNs)
-    && sedmlns_rhs->getNamespaces()->containsUri(coreNs))
+  if (sbmlns->getNamespaces()->containsUri(coreNs)
+    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
@@ -1680,24 +1675,24 @@ SedBase::matchesCoreSedNamespace(const SedBase * sb)
 
 
 bool
-SedBase::matchesCoreSedNamespace(const SedBase * sb) const
+SBase::matchesCoreSBMLNamespace(const SBase * sb) const
 {
   bool match = false;
 
-  SedNamespaces *sedmlns = getSedNamespaces();
-  SedNamespaces *sedmlns_rhs = sb->getSedNamespaces();
+  SBMLNamespaces *sbmlns = getSBMLNamespaces();
+  SBMLNamespaces *sbmlns_rhs = sb->getSBMLNamespaces();
 
-  if (sedmlns->getLevel() != sedmlns_rhs->getLevel())
+  if (sbmlns->getLevel() != sbmlns_rhs->getLevel())
     return match;
 
-  if (sedmlns->getVersion() != sedmlns_rhs->getVersion())
+  if (sbmlns->getVersion() != sbmlns_rhs->getVersion())
     return match;
 
-  std::string coreNs = SedNamespaces::getSedNamespaceURI(
-                       sedmlns->getLevel(), sedmlns->getVersion());
+  std::string coreNs = SBMLNamespaces::getSBMLNamespaceURI(
+                       sbmlns->getLevel(), sbmlns->getVersion());
 
-  if (sedmlns->getNamespaces()->containsUri(coreNs)
-    && sedmlns_rhs->getNamespaces()->containsUri(coreNs))
+  if (sbmlns->getNamespaces()->containsUri(coreNs)
+    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
@@ -1707,40 +1702,40 @@ SedBase::matchesCoreSedNamespace(const SedBase * sb) const
 
 
 bool
-SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
+SBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
 {
 
 
   //
   // (TODO) Currently, the following check code works only for
-  //        elements in Sed core.
+  //        elements in SBML core.
   //        This function may need to be extented for other elements
   //        defined in each package extension.
   //
 
   bool valid = true;
-  bool sedmlDeclared = false;
+  bool sbmlDeclared = false;
   std::string declaredURI("");
 
   if (xmlns != NULL)
   {
     int numNS = 0;
 
-    if (xmlns->hasURI(SEDML_XMLNS_L1V1))
+    if (xmlns->hasURI(SBML_XMLNS_L1V1))
     {
-      // checks different Sed XMLNamespaces
+      // checks different SBML XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
-      declaredURI.assign(SEDML_XMLNS_L1V1);
+      declaredURI.assign(SBML_XMLNS_L1V1);
     }
 
-    // checks if the Sed Namespace is explicitly defined.
+    // checks if the SBML Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() &&
                       xmlns->getURI(i) == declaredURI)
       {
-        sedmlDeclared = true;
+        sbmlDeclared = true;
         break;
 
       }
@@ -1750,55 +1745,55 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
   return valid;
 }
 
-/* sets the Sednamespaces - internal use only*/
+/* sets the SBMLnamespaces - internal use only*/
 int
-SedBase::setSedNamespaces(SedNamespaces * sedmlns)
+SBase::setSBMLNamespaces(SBMLNamespaces * sbmlns)
 {
-  if (sedmlns == NULL)
-    return LIBSEDML_INVALID_OBJECT;
+  if (sbmlns == NULL)
+    return LIBSBML_INVALID_OBJECT;
 
-  SedNamespaces* sedmlnsClone = (sedmlns) ? sedmlns->clone() : 0;
-  setSedNamespacesAndOwn(sedmlnsClone);
+  SBMLNamespaces* sbmlnsClone = (sbmlns) ? sbmlns->clone() : 0;
+  setSBMLNamespacesAndOwn(sbmlnsClone);
 
-  return LIBSEDML_OPERATION_SUCCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 /*
- * sets the Sednamespaces - only for internal use in the
- * constructors of SedBase subclasses in extension packages.
+ * sets the SBMLnamespaces - only for internal use in the
+ * constructors of SBase subclasses in extension packages.
  */
 void
-SedBase::setSedNamespacesAndOwn(SedNamespaces * sedmlns)
+SBase::setSBMLNamespacesAndOwn(SBMLNamespaces * sbmlns)
 {
-  delete mSedNamespaces;
-  mSedNamespaces = sedmlns;
+  delete mSBMLNamespaces;
+  mSBMLNamespaces = sbmlns;
 
-  if(sedmlns != NULL)
-    setElementNamespace(sedmlns->getURI());
+  if(sbmlns != NULL)
+    setElementNamespace(sbmlns->getURI());
 }
 
 
-/* gets the Sednamespaces - internal use only*/
-SedNamespaces *
-SedBase::getSedNamespaces() const
+/* gets the SBMLnamespaces - internal use only*/
+SBMLNamespaces *
+SBase::getSBMLNamespaces() const
 {
-  if (mSed != NULL)
-    return mSed->mSedNamespaces;
+  if (mSBML != NULL)
+    return mSBML->mSBMLNamespaces;
   
-  // initialize Sed namespace if need be
-  if (mSedNamespaces == NULL)
-    const_cast<SedBase*>(this)->mSedNamespaces = new SedNamespaces();
-  return mSedNamespaces;  
+  // initialize SBML namespace if need be
+  if (mSBMLNamespaces == NULL)
+    const_cast<SBase*>(this)->mSBMLNamespaces = new SBMLNamespaces();
+  return mSBMLNamespaces;  
 }
 /** @endcond */
 
 
 
 /*
- * @return the partial Sed that describes this Sed object.
+ * @return the partial SBML that describes this SBML object.
  */
 char*
-SedBase::toSed ()
+SBase::toSBML ()
 {
   ostringstream    os;
   XMLOutputStream  stream(os, "UTF-8", false);
@@ -1809,36 +1804,36 @@ SedBase::toSed ()
 }
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Reads (initializes) this Sed object by reading from XMLInputStream.
+ * Reads (initializes) this SBML object by reading from XMLInputStream.
  */
 void
-SedBase::read (XMLInputStream& stream)
+SBase::read (XMLInputStream& stream)
 {
   if ( !stream.peek().isStart() ) return;
 
   const XMLToken  element  = stream.next();
   int             position =  0;
 
-  setSedBaseFields( element );
+  setSBaseFields( element );
 
   ExpectedAttributes expectedAttributes;
   addExpectedAttributes(expectedAttributes);
   readAttributes( element.getAttributes(), expectedAttributes );
 
   /* if we are reading a document pass the
-   * Sed Namespace information to the input stream object
+   * SBML Namespace information to the input stream object
    * thus the MathML reader can find out what level/version
-   * of Sed it is parsing
+   * of SBML it is parsing
    */
-  if (element.getName() == "sedml")
+  if (element.getName() == "sbml")
   {
-    stream.setSedNamespaces(this->getSedNamespaces());
-    // need to check that any prefix on the sedmlns also occurs on element
-    // remembering the horrible situation where the sedmlns might be declared
+    stream.setSBMLNamespaces(this->getSBMLNamespaces());
+    // need to check that any prefix on the sbmlns also occurs on element
+    // remembering the horrible situation where the sbmlns might be declared
     // with more than one prefix
-    XMLNamespaces * xmlns = this->getSedNamespaces()->getNamespaces();
+    XMLNamespaces * xmlns = this->getSBMLNamespaces()->getNamespaces();
     if (xmlns != NULL)
     {
       int i = xmlns->getIndexByPrefix(element.getPrefix());
@@ -1848,7 +1843,7 @@ SedBase::read (XMLInputStream& stream)
         bool error = false;
         if (i > -1)
         {
-          if (xmlns->getURI(i) != this->getSedNamespaces()->getURI())
+          if (xmlns->getURI(i) != this->getSBMLNamespaces()->getURI())
           {
             error = true;
           }
@@ -1867,8 +1862,8 @@ SedBase::read (XMLInputStream& stream)
                              this->getErrorLog()->getError(n)->getErrorId();
           if (errorId == MissingOrInconsistentLevel
             || errorId == MissingOrInconsistentVersion
-            || errorId == InvalidSedLevelVersion
-            || errorId == InvalidNamespaceOnSed)
+            || errorId == InvalidSBMLLevelVersion
+            || errorId == InvalidNamespaceOnSBML)
           {
             errorLoggedAlready = true;
           }
@@ -1878,11 +1873,11 @@ SedBase::read (XMLInputStream& stream)
         {
           static ostringstream errMsg;
           errMsg.str("");
-          errMsg << "The prefix for the <sedml> element does not match "
-            << "the prefix for the Sed namespace.  This means that "
-            << "the <sedml> element in not in the SedNamespace."<< endl;
+          errMsg << "The prefix for the <sbml> element does not match "
+            << "the prefix for the SBML namespace.  This means that "
+            << "the <sbml> element in not in the SBMLNamespace."<< endl;
 
-          logError(InvalidNamespaceOnSed,
+          logError(InvalidNamespaceOnSBML,
                     getLevel(), getVersion(), errMsg.str());
         }
       }
@@ -1893,9 +1888,9 @@ SedBase::read (XMLInputStream& stream)
   {
     //
     // checks if the given default namespace (if any) is a valid
-    // Sed namespace
+    // SBML namespace
     //
-    checkDefaultNamespace(mSedNamespaces->getNamespaces(), element.getName());
+    checkDefaultNamespace(mSBMLNamespaces->getNamespaces(), element.getName());
     if (!element.getPrefix().empty())
     {
       XMLNamespaces * prefixedNS = new XMLNamespaces();
@@ -1933,20 +1928,20 @@ SedBase::read (XMLInputStream& stream)
     {
       const std::string nextName = next.getName();
 
-      SedBase * object = createObject(stream);
+      SBase * object = createObject(stream);
 
       if (object != NULL)
       {
         checkOrderAndLogError(object, position);
         position = object->getElementPosition();
 
-        object->connectToParent(static_cast <SedBase*>(this));
+        object->connectToParent(static_cast <SBase*>(this));
 
         object->read(stream);
 
         if ( !stream.isGood() ) break;
 
-        checkSedListOfPopulated(object);
+        checkListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
                    || readAnnotation(stream)
@@ -1966,16 +1961,16 @@ SedBase::read (XMLInputStream& stream)
 
 
 void
-SedBase::setElementText(const std::string &text)
+SBase::setElementText(const std::string &text)
 {
 }
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Writes (serializes) this Sed object by writing it to XMLOutputStream.
+ * Writes (serializes) this SBML object by writing it to XMLOutputStream.
  */
 void
-SedBase::write (XMLOutputStream& stream) const
+SBase::write (XMLOutputStream& stream) const
 {
   stream.startElement( getElementName(), getPrefix() );
 
@@ -1989,14 +1984,14 @@ SedBase::write (XMLOutputStream& stream) const
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Subclasses should override this method to write out their contained
- * Sed objects as XML elements.  Be sure to call your parents
+ * SBML objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void
-SedBase::writeElements (XMLOutputStream& stream) const
+SBase::writeElements (XMLOutputStream& stream) const
 {
   if ( mNotes != NULL ) stream << *mNotes;
 
@@ -2004,17 +1999,17 @@ SedBase::writeElements (XMLOutputStream& stream) const
 }
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Subclasses should override this method to create, store, and then
- * return an Sed object corresponding to the next XMLToken in the
+ * return an SBML object corresponding to the next XMLToken in the
  * XMLInputStream.
  *
- * @return the Sed object corresponding to next XMLToken in the
+ * @return the SBML object corresponding to next XMLToken in the
  * XMLInputStream or @c NULL if the token was not recognized.
  */
-SedBase*
-SedBase::createObject (XMLInputStream& stream)
+SBase*
+SBase::createObject (XMLInputStream& stream)
 {
   return NULL;
 }
@@ -2023,7 +2018,7 @@ SedBase::createObject (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Subclasses should override this method to read (and store) XHTML,
  * MathML, etc. directly from the XMLInputStream.
@@ -2031,7 +2026,7 @@ SedBase::createObject (XMLInputStream& stream)
  * @return true if the subclass read from the stream, false otherwise.
  */
 bool
-SedBase::readOtherXML (XMLInputStream& stream)
+SBase::readOtherXML (XMLInputStream& stream)
 {
   bool read = false;
   return read;
@@ -2039,12 +2034,12 @@ SedBase::readOtherXML (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * @return true if read an <annotation> element from the stream
  */
 bool
-SedBase::readAnnotation (XMLInputStream& stream)
+SBase::readAnnotation (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2055,7 +2050,7 @@ SedBase::readAnnotation (XMLInputStream& stream)
 
     if (mAnnotation != NULL)
     {
-      string msg = "An Sed <" + getElementName() + "> element ";
+      string msg = "An SBML <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
       logError(MultipleAnnotations, getLevel(), getVersion(), msg);
     }
@@ -2071,12 +2066,12 @@ SedBase::readAnnotation (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * @return true if read a <notes> element from the stream
  */
 bool
-SedBase::readNotes (XMLInputStream& stream)
+SBase::readNotes (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2096,7 +2091,7 @@ SedBase::readNotes (XMLInputStream& stream)
 
     //
     // checks if the given default namespace (if any) is a valid
-    // Sed namespace
+    // SBML namespace
     //
     const XMLNamespaces &xmlns = mNotes->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
@@ -2108,41 +2103,41 @@ SedBase::readNotes (XMLInputStream& stream)
 }
 
 bool
-SedBase::getHasBeenDeleted() const
+SBase::getHasBeenDeleted() const
 {
   return mHasBeenDeleted;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
  */
 int
-SedBase::getElementPosition () const
+SBase::getElementPosition () const
 {
   return -1;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
-SedErrorLog*
-SedBase::getErrorLog ()
+/** @cond doxygenLibsbmlInternal */
+SBMLErrorLog*
+SBase::getErrorLog ()
 {
-  return (mSed != NULL) ? mSed->getErrorLog() : NULL;
+  return (mSBML != NULL) ? mSBML->getErrorLog() : NULL;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SedBase::logUnknownAttribute( const string& attribute,
+SBase::logUnknownAttribute( const string& attribute,
                             const unsigned int level,
                             const unsigned int version,
                             const string& element,
@@ -2151,14 +2146,14 @@ SedBase::logUnknownAttribute( const string& attribute,
   ostringstream msg;
 
     msg << "Attribute '" << attribute << "' is not part of the "
-        << "definition of an Sed Level " << level
+        << "definition of an SBML Level " << level
         << " Version " << version << " <" << element << "> element.";
 
-  if (mSed)
+  if (mSBML)
   {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SedDocument attached.
+  // no SBMLDocument attached.
   //
         getErrorLog()->logError(AllowedAttributes, level,
           version, msg.str(), getLine(), getColumn());
@@ -2167,12 +2162,12 @@ SedBase::logUnknownAttribute( const string& attribute,
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SedBase::logUnknownElement( const string& element,
+SBase::logUnknownElement( const string& element,
         const unsigned int level,
         const unsigned int version )
 {
@@ -2181,9 +2176,9 @@ SedBase::logUnknownElement( const string& element,
     ostringstream msg;
 
     msg << "Element '" << element << "' is not part of the definition of "
-        << "Sed Level " << level << " Version " << version << ".";
+        << "SBML Level " << level << " Version " << version << ".";
 
-    if (mSed != NULL)
+    if (mSBML != NULL)
     {
       getErrorLog()->logError(UnrecognizedElement,
             level, version, msg.str(), getLine(), getColumn());
@@ -2194,12 +2189,12 @@ SedBase::logUnknownElement( const string& element,
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SedBase::logEmptyString( const string& attribute,
+SBase::logEmptyString( const string& attribute,
                        const unsigned int level,
                        const unsigned int version,
                        const string& element )
@@ -2212,16 +2207,16 @@ SedBase::logEmptyString( const string& attribute,
 
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SedDocument attached.
+  // no SBMLDocument attached.
   //
-  if (mSed != NULL)
+  if (mSBML != NULL)
     getErrorLog()->logError(NotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Convenience method for easily logging problems from within method
  * implementations.
@@ -2229,22 +2224,22 @@ SedBase::logEmptyString( const string& attribute,
  * This is essentially a short form of getErrorLog()->logError(...)
  */
 void
-SedBase::logError (  unsigned int       id
+SBase::logError (  unsigned int       id
                  , const unsigned int level
                  , const unsigned int version
                  , const std::string& details )
 {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SedDocument attached.
+  // no SBMLDocument attached.
   //
-  if ( SedBase::getErrorLog() != NULL && mSed != NULL)
+  if ( SBase::getErrorLog() != NULL && mSBML != NULL)
     getErrorLog()->logError(id, getLevel(), getVersion(), details, getLine(), getColumn());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /**
  * Subclasses should override this method to get the list of
  * expected attributes.
@@ -2252,7 +2247,7 @@ SedBase::logError (  unsigned int       id
  * function.
  */
 void
-SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
+SBase::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   //
   // metaid: ID { use="optional" }  (L2v1 ->)
@@ -2267,7 +2262,7 @@ SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
  * parents implementation of this method as well.
  */
 void
-SedBase::readAttributes (const XMLAttributes& attributes,
+SBase::readAttributes (const XMLAttributes& attributes,
                        const ExpectedAttributes& expectedAttributes)
 {
   const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
@@ -2299,10 +2294,10 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     //
     // Checks if there are attributes of unknown package extensions
     //
-    // if we happen to be on the sedml element (document) then
+    // if we happen to be on the sbml element (document) then
     // getPrefix() and mURI have not been set and just return defaults
     // thus a prefix does not appear to come from the right place !!!
-    if (!prefix.empty() && getElementName() == "sedml")
+    if (!prefix.empty() && getElementName() == "sbml")
     {
       if (!expectedAttributes.hasAttribute(name))
       {
@@ -2320,7 +2315,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
-                     SedTypeCode_toString(getTypeCode());
+                     SBMLTypeCode_toString(getTypeCode());
     }
 
     if (isSetMetaId())
@@ -2334,18 +2329,18 @@ SedBase::readAttributes (const XMLAttributes& attributes,
 }
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Returns the prefix of this element.
  */
 std::string
-SedBase::getPrefix() const
+SBase::getPrefix() const
 {
   std::string prefix = "";
 
   XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
-  if(xmlns && mSed && !mSed->isEnabledDefaultNS(uri))
+  if(xmlns && mSBML && !mSBML->isEnabledDefaultNS(uri))
   {
     prefix = xmlns->getPrefix(uri);
   }
@@ -2358,7 +2353,7 @@ SedBase::getPrefix() const
  * Returns the prefix of this element.
  */
 std::string
-SedBase::getSedPrefix() const
+SBase::getSBMLPrefix() const
 {
   std::string prefix = "";
 
@@ -2369,7 +2364,7 @@ SedBase::getSedPrefix() const
   for (int i = 0; i < xmlns->getNumNamespaces(); i++)
   {
     string uri = xmlns->getURI(i);
-    if (SedNamespaces::isSedNamespace(uri))
+    if (SBMLNamespaces::isSBMLNamespace(uri))
       return xmlns->getPrefix(i);
   }
 
@@ -2379,20 +2374,20 @@ SedBase::getSedPrefix() const
 /*
  * Returns the root element of this element.
  *
- * @note The root element may not be an SedDocument element. For example,
+ * @note The root element may not be an SBMLDocument element. For example,
  * this element is the root element if this element doesn't have a parent
- * Sed object (i.e. mParentSedObject is NULL)
+ * SBML object (i.e. mParentSBMLObject is NULL)
  */
-SedBase*
-SedBase::getRootElement()
+SBase*
+SBase::getRootElement()
 {
-  if (mSed)
+  if (mSBML)
   {
-    return mSed;
+    return mSBML;
   }
-  else if (mParentSedObject)
+  else if (mParentSBMLObject)
   {
-    return mParentSedObject->getRootElement();
+    return mParentSBMLObject->getRootElement();
   }
   else
   {
@@ -2407,12 +2402,12 @@ SedBase::getRootElement()
  * of this method as well.
  */
 void
-SedBase::writeAttributes (XMLOutputStream& stream) const
+SBase::writeAttributes (XMLOutputStream& stream) const
 {
-  string sedmlPrefix    = getSedPrefix();
+  string sbmlPrefix    = getSBMLPrefix();
   if ( !mMetaId.empty() )
   {
-    stream.writeAttribute("metaid", sedmlPrefix, mMetaId);
+    stream.writeAttribute("metaid", sbmlPrefix, mMetaId);
   }
 
 }
@@ -2426,7 +2421,7 @@ SedBase::writeAttributes (XMLOutputStream& stream) const
  *
  */
 void
-SedBase::writeXMLNS (XMLOutputStream& stream) const
+SBase::writeXMLNS (XMLOutputStream& stream) const
 {
   // do nothing.
 }
@@ -2434,19 +2429,19 @@ SedBase::writeXMLNS (XMLOutputStream& stream) const
 
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
- * Checks that Sed element has been read in the proper order.  If object
+ * Checks that SBML element has been read in the proper order.  If object
  * is not in the expected position, an error is logged.
  */
 void
-SedBase::checkOrderAndLogError (SedBase* object, int expected)
+SBase::checkOrderAndLogError (SBase* object, int expected)
 {
   int actual = object->getElementPosition();
 
   if (actual != -1 && actual < expected)
   {
-    SedErrorCode_t error = IncorrectOrderInModel;
+    SBMLErrorCode_t error = IncorrectOrderInModel;
 
       logError(error, getLevel(), getVersion());
   }
@@ -2454,21 +2449,21 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
-  * Checks that an Sed SedListOf element has been populated.
+  * Checks that an SBML ListOf element has been populated.
   * If a listOf element has been declared with no elements,
   * an error is logged.
   */
 void
-SedBase::checkSedListOfPopulated(SedBase* object)
+SBase::checkListOfPopulated(SBase* object)
 {
     // for now log the empty list
-  if (object->getTypeCode() == SEDML_LIST_OF)
+  if (object->getTypeCode() == SBML_LIST_OF)
   {
-    if (static_cast <SedListOf*> (object)->size() == 0)
+    if (static_cast <ListOf*> (object)->size() == 0)
     {
-      SedErrorCode_t error = EmptyListElement;
+      SBMLErrorCode_t error = EmptyListElement;
       ostringstream errMsg;
       errMsg << object->getElementName() << " cannot be empty.";
 
@@ -2478,33 +2473,33 @@ SedBase::checkSedListOfPopulated(SedBase* object)
 }
 /** @endcond */
 
-//This assumes that the parent of the object is of the type SedListOf.  If this is not the case, it will need to be overridden.
-int SedBase::removeFromParentAndDelete()
+//This assumes that the parent of the object is of the type ListOf.  If this is not the case, it will need to be overridden.
+int SBase::removeFromParentAndDelete()
 {
-  SedBase* parent = getParentSedObject();
+  SBase* parent = getParentSBMLObject();
 
-  if (parent==NULL) return LIBSEDML_OPERATION_FAILED;
+  if (parent==NULL) return LIBSBML_OPERATION_FAILED;
   
-  SedListOf* parentList = static_cast<SedListOf*>(parent);
+  ListOf* parentList = static_cast<ListOf*>(parent);
   
-  if (parentList == NULL) return LIBSEDML_OPERATION_FAILED;
+  if (parentList == NULL) return LIBSBML_OPERATION_FAILED;
   
   for (unsigned int i=0; i<parentList->size(); i++) 
   {
-    SedBase* sibling = parentList->get(i);
+    SBase* sibling = parentList->get(i);
     if (sibling == this) 
     {
       parentList->remove(i);
       delete this;
-      return LIBSEDML_OPERATION_SUCCESS;
+      return LIBSBML_OPERATION_SUCCESS;
     }
   }
-  return LIBSEDML_OPERATION_FAILED;
+  return LIBSBML_OPERATION_FAILED;
 }
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 const std::string
-SedBase::checkMathMLNamespace(const XMLToken elem)
+SBase::checkMathMLNamespace(const XMLToken elem)
 {
   std::string prefix = "";
   unsigned int match = 0;
@@ -2523,16 +2518,16 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    if( mSed->getNamespaces() != NULL)
+    if( mSBML->getNamespaces() != NULL)
     /* check for implicit declaration */
     {
-      for (n = 0; n < mSed->getNamespaces()->getLength(); n++)
+      for (n = 0; n < mSBML->getNamespaces()->getLength(); n++)
       {
-        if (!strcmp(mSed->getNamespaces()->getURI(n).c_str(),
+        if (!strcmp(mSBML->getNamespaces()->getURI(n).c_str(),
                     "http://www.w3.org/1998/Math/MathML"))
         {
           match = 1;
-          prefix = mSed->getNamespaces()->getPrefix(n);
+          prefix = mSBML->getNamespaces()->getPrefix(n);
           break;
         }
       }
@@ -2548,15 +2543,15 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 void
-SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
+SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
                              const std::string& elementName,
                              const std::string& prefix)
 {
   //
   // checks if the given default namespace (if any) is a valid
-  // Sed namespace
+  // SBML namespace
   //
   if (xmlns == NULL || xmlns->getLength() == 0)
     return;
@@ -2565,10 +2560,10 @@ SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   if (defaultURI.empty() || mURI == defaultURI)
     return;
 
-  // if this element (SedBase derived) has notes or annotation elements,
-  // it is ok for them to be in the Sed namespace!
-  if ( SedNamespaces::isSedNamespace(defaultURI)
-       && !SedNamespaces::isSedNamespace(mURI)
+  // if this element (SBase derived) has notes or annotation elements,
+  // it is ok for them to be in the SBML namespace!
+  if ( SBMLNamespaces::isSBMLNamespace(defaultURI)
+       && !SBMLNamespaces::isSBMLNamespace(mURI)
        && (elementName == "notes" || elementName == "annotation"))
     return;
 
@@ -2582,11 +2577,11 @@ SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
 }
 
 /*
-  * Checks the annotation does not declare an sedml namespace.
-  * If the annotation declares an sedml namespace an error is logged.
+  * Checks the annotation does not declare an sbml namespace.
+  * If the annotation declares an sbml namespace an error is logged.
   */
 void
-SedBase::checkAnnotation()
+SBase::checkAnnotation()
 {
   unsigned int nNodes = 0;
   unsigned int match = 0;
@@ -2598,7 +2593,7 @@ SedBase::checkAnnotation()
 
   //
   // checks if the given default namespace (if any) is a valid
-  // Sed namespace
+  // SBML namespace
   //
   const XMLNamespaces &xmlns = mAnnotation->getNamespaces();
   checkDefaultNamespace(&xmlns,"annotation");
@@ -2633,7 +2628,7 @@ SedBase::checkAnnotation()
       if (find(uri_list.begin(), uri_list.end(), uri)
                                                != uri_list.end())
       {
-        string msg = "An Sed <" + getElementName() + "> element ";
+        string msg = "An SBML <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
         logError(DuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
@@ -2648,12 +2643,12 @@ SedBase::checkAnnotation()
     if (topLevel.getNamespaces().getLength() == 0)
     {
       // not on actual element - is it explicit ??
-      if(mSed != NULL && mSed->getNamespaces() != NULL)
+      if(mSBML != NULL && mSBML->getNamespaces() != NULL)
       /* check for implicit declaration */
       {
-        for (n = 0; n < mSed->getNamespaces()->getLength(); n++)
+        for (n = 0; n < mSBML->getNamespaces()->getLength(); n++)
         {
-          if (!strcmp(mSed->getNamespaces()->getPrefix(n).c_str(),
+          if (!strcmp(mSBML->getNamespaces()->getPrefix(n).c_str(),
                         prefix.c_str()))
           {
             implicitNSdecl = true;
@@ -2668,24 +2663,24 @@ SedBase::checkAnnotation()
         logError(MissingAnnotationNamespace);
       }
     }
-    // cannot declare sedml namespace
+    // cannot declare sbml namespace
     while(!match && n < topLevel.getNamespaces().getLength())
     {
       match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(),
-                                          "http://sed-ml.org/");
+                                          SPEC_NAMESPACE);
       n++;
     }
-    string msg = "An Sed <" + getElementName() + "> element ";
+    string msg = "An SBML <" + getElementName() + "> element ";
     if (match > 0)
     {
       msg += "uses a restricted namespace on an element in its child <annotation>.";
-      logError(SedNamespaceInAnnotation, getLevel(), getVersion(), msg);
+      logError(SBMLNamespaceInAnnotation, getLevel(), getVersion(), msg);
       break;
     }
 
     if (implicitNSdecl && prefix.empty())
     {
-      msg += "assumes the sedml namespace on an element in its child <annotation>.";
+      msg += "assumes the sbml namespace on an element in its child <annotation>.";
       logError(MissingAnnotationNamespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
@@ -2694,14 +2689,14 @@ SedBase::checkAnnotation()
 /** @endcond */
 
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Checks that the XHTML is valid.
  * If the xhtml does not conform to the specification of valid xhtml within
- * an sedml document, an error is logged.
+ * an sbml document, an error is logged.
  */
 void
-SedBase::checkXHTML(const XMLNode * xhtml)
+SBase::checkXHTML(const XMLNode * xhtml)
 {
   if (xhtml == NULL) return;
 
@@ -2747,7 +2742,7 @@ SedBase::checkXHTML(const XMLNode * xhtml)
     }
   }
 
-  XMLNamespaces* toplevelNS = (mSed) ? mSed->getNamespaces() : NULL;
+  XMLNamespaces* toplevelNS = (mSBML) ? mSBML->getNamespaces() : NULL;
 
   /*
   * namespace declaration is variable
@@ -2803,58 +2798,58 @@ SedBase::checkXHTML(const XMLNode * xhtml)
   }
 }
 /** @endcond */
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /* default for components that have no required attributes */
 bool
-SedBase::hasRequiredAttributes() const
+SBase::hasRequiredAttributes() const
 {
   return true;
 }
 
 /* default for components that have no required elements */
 bool
-SedBase::hasRequiredElements() const
+SBase::hasRequiredElements() const
 {
   return true;
 }
 
 int
-SedBase::checkCompatibility(const SedBase * object) const
+SBase::checkCompatibility(const SBase * object) const
 {
   if (object == NULL)
   {
-    return LIBSEDML_OPERATION_FAILED;
+    return LIBSBML_OPERATION_FAILED;
   }
   else if (!(object->hasRequiredAttributes()) || !(object->hasRequiredElements()))
   {
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
   }
   else if (getLevel() != object->getLevel())
   {
-    return LIBSEDML_LEVEL_MISMATCH;
+    return LIBSBML_LEVEL_MISMATCH;
   }
   else if (getVersion() != object->getVersion())
   {
-    return LIBSEDML_VERSION_MISMATCH;
+    return LIBSBML_VERSION_MISMATCH;
   }
-  else if (this->matchesRequiredSedNamespacesForAddition(object) == false)
+  else if (this->matchesRequiredSBMLNamespacesForAddition(object) == false)
   {
-    return LIBSEDML_NAMESPACES_MISMATCH;
+    return LIBSBML_NAMESPACES_MISMATCH;
   }
   else
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSBML_OPERATION_SUCCESS;
   }
 }
 
 void
-SedBase::removeDuplicateAnnotations()
+SBase::removeDuplicateAnnotations()
 {
   bool resetNecessary = false;
   XMLNamespaces xmlns = XMLNamespaces();
-  xmlns.add("http://www.sedml.org/libsedml/annotation", "");
+  xmlns.add("http://www.sbml.org/libsbml/annotation", "");
   XMLTriple triple = XMLTriple("duplicateTopLevelElements",
-    "http://www.sedml.org/libsedml/annotation", "");
+    "http://www.sbml.org/libsbml/annotation", "");
   XMLAttributes att = XMLAttributes();
   XMLToken token = XMLToken(triple, att, xmlns);
   XMLNode * newNode = NULL;
@@ -2909,13 +2904,13 @@ SedBase::removeDuplicateAnnotations()
 }
 /** @endcond */
 
-/** @cond doxygenLibsedmlInternal */
+/** @cond doxygenLibsbmlInternal */
 /*
  * Stores the location (line and column) and any XML namespaces (for
- * roundtripping) declared on this Sed (XML) element.
+ * roundtripping) declared on this SBML (XML) element.
  */
 void
-SedBase::setSedBaseFields (const XMLToken& element)
+SBase::setSBaseFields (const XMLToken& element)
 {
   mLine   = element.getLine  ();
   mColumn = element.getColumn();
@@ -2936,18 +2931,18 @@ SedBase::setSedBaseFields (const XMLToken& element)
  * Sets the XML namespace to which this element belongs to.
  */
 int
-SedBase::setElementNamespace(const std::string &uri)
+SBase::setElementNamespace(const std::string &uri)
 {
   mURI = uri;
 
-  return LIBSEDML_OPERATION_SUCCESS;
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 /*
  * Gets the XML namespace to which this element belongs to.
  */
 const std::string&
-SedBase::getElementNamespace() const
+SBase::getElementNamespace() const
 {
   return mURI;
 }
@@ -2955,148 +2950,148 @@ SedBase::getElementNamespace() const
 
 #endif /* __cplusplus */
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 const char *
-SedBase_getMetaId (SedBase_t *sb)
+SBase_getMetaId (SBase_t *sb)
 {
   return (sb != NULL && sb->isSetMetaId()) ? sb->getMetaId().c_str() : NULL;
 }
 
 
-LIBSEDML_EXTERN
-const SedDocument_t *
-SedBase_getSedDocument (SedBase_t *sb)
+LIBSBML_EXTERN
+const SBMLDocument_t *
+SBase_getSBMLDocument (SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getSedDocument() : NULL;
+  return (sb != NULL) ? sb->getSBMLDocument() : NULL;
 }
 
 
-LIBSEDML_EXTERN
-const SedBase_t *
-SedBase_getParentSedObject (SedBase_t *sb)
+LIBSBML_EXTERN
+const SBase_t *
+SBase_getParentSBMLObject (SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getParentSedObject() : NULL;
+  return (sb != NULL) ? sb->getParentSBMLObject() : NULL;
 }
 
 
-LIBSEDML_EXTERN
-const SedBase_t *
-SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName)
+LIBSBML_EXTERN
+const SBase_t *
+SBase_getAncestorOfType (SBase_t *sb, int type, const char* pkgName)
 {
   return (sb != NULL) ? sb->getAncestorOfType(type, pkgName) : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 unsigned int
-SedBase_getLevel (const SedBase_t *sb)
+SBase_getLevel (const SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getLevel() : SEDML_INT_MAX;
+  return (sb != NULL) ? sb->getLevel() : SBML_INT_MAX;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 unsigned int
-SedBase_getVersion (const SedBase_t *sb)
+SBase_getVersion (const SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getVersion() : SEDML_INT_MAX;
+  return (sb != NULL) ? sb->getVersion() : SBML_INT_MAX;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 XMLNode_t *
-SedBase_getNotes (SedBase_t *sb)
+SBase_getNotes (SBase_t *sb)
 {
   return (sb != NULL) ? sb->getNotes() : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 char*
-SedBase_getNotesString (SedBase_t *sb)
+SBase_getNotesString (SBase_t *sb)
 {
   return (sb != NULL && sb->isSetNotes()) ?
     safe_strdup(sb->getNotesString().c_str()) : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 XMLNode_t *
-SedBase_getAnnotation (SedBase_t *sb)
+SBase_getAnnotation (SBase_t *sb)
 {
   return (sb != NULL) ? sb->getAnnotation() : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 char*
-SedBase_getAnnotationString (SedBase_t *sb)
+SBase_getAnnotationString (SBase_t *sb)
 {
   return (sb != NULL && sb->isSetAnnotation()) ?
     safe_strdup(sb->getAnnotationString().c_str()) : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_isSetMetaId (const SedBase_t *sb)
+SBase_isSetMetaId (const SBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetMetaId() ) : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_isSetNotes (const SedBase_t *sb)
+SBase_isSetNotes (const SBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetNotes() ) : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_isSetAnnotation (const SedBase_t *sb)
+SBase_isSetAnnotation (const SBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetAnnotation() ) : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setMetaId (SedBase_t *sb, const char *metaid)
+SBase_setMetaId (SBase_t *sb, const char *metaid)
 {
   if (sb != NULL)
     return (metaid == NULL) ? sb->unsetMetaId() : sb->setMetaId(metaid);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setNamespaces (SedBase_t *sb, XMLNamespaces_t *xmlns)
+SBase_setNamespaces (SBase_t *sb, XMLNamespaces_t *xmlns)
 {
   if (sb != NULL)
     return sb->setNamespaces(xmlns);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setNotes (SedBase_t *sb, XMLNode_t *notes)
+SBase_setNotes (SBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
     return sb->setNotes(notes);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setNotesString (SedBase_t *sb, const char *notes)
+SBase_setNotesString (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
@@ -3110,13 +3105,13 @@ SedBase_setNotesString (SedBase_t *sb, const char *notes)
     }
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setNotesStringAddMarkup (SedBase_t *sb, const char *notes)
+SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
@@ -3130,51 +3125,51 @@ SedBase_setNotesStringAddMarkup (SedBase_t *sb, const char *notes)
     }
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_appendNotes (SedBase_t *sb, XMLNode_t *notes)
+SBase_appendNotes (SBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
     return sb->appendNotes(notes);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_appendNotesString (SedBase_t *sb, const char *notes)
+SBase_appendNotesString (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
     if (notes != NULL)
       return sb->appendNotes(notes);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setAnnotation (SedBase_t *sb, XMLNode_t *annotation)
+SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
     return sb->setAnnotation(annotation);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setAnnotationString (SedBase_t *sb, const char *annotation)
+SBase_setAnnotationString (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
@@ -3188,55 +3183,55 @@ SedBase_setAnnotationString (SedBase_t *sb, const char *annotation)
     }
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_appendAnnotation (SedBase_t *sb, XMLNode_t *annotation)
+SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
     return sb->appendAnnotation(annotation);
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_appendAnnotationString (SedBase_t *sb, const char *annotation)
+SBase_appendAnnotationString (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->appendAnnotation(annotation);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_removeTopLevelAnnotationElement (SedBase_t *sb, const char *name)
+SBase_removeTopLevelAnnotationElement (SBase_t *sb, const char *name)
 {
   if (sb != NULL)
   {
     if (name != NULL)
       return sb->removeTopLevelAnnotationElement(name);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
+SBase_removeTopLevelAnnotationElementWithURI (SBase_t *sb, const char *name,
                                               const char *uri)
 {
   if (sb != NULL)
@@ -3244,164 +3239,164 @@ SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
     if (name != NULL && uri != NULL)
       return sb->removeTopLevelAnnotationElement(name, uri);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_replaceTopLevelAnnotationElement (SedBase_t *sb, XMLNode_t *annotation)
+SBase_replaceTopLevelAnnotationElement (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->replaceTopLevelAnnotationElement(annotation);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_replaceTopLevelAnnotationElementString (SedBase_t *sb, const char *annotation)
+SBase_replaceTopLevelAnnotationElementString (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->replaceTopLevelAnnotationElement(annotation);
     else
-      return LIBSEDML_INVALID_OBJECT;
+      return LIBSBML_INVALID_OBJECT;
   }
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_unsetMetaId (SedBase_t *sb)
+SBase_unsetMetaId (SBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetMetaId();
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_unsetNotes (SedBase_t *sb)
+SBase_unsetNotes (SBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetNotes();
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_unsetAnnotation (SedBase_t *sb)
+SBase_unsetAnnotation (SBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetAnnotation();
   else
-    return LIBSEDML_INVALID_OBJECT;
+    return LIBSBML_INVALID_OBJECT;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 const char *
-SedBase_getElementName (const SedBase_t *sb)
+SBase_getElementName (const SBase_t *sb)
 {
   return (sb != NULL && !(sb->getElementName().empty())) ?
     sb->getElementName().c_str() : NULL;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 unsigned int
-SedBase_getLine (const SedBase_t *sb)
+SBase_getLine (const SBase_t *sb)
 {
   return (sb != NULL) ? sb->getLine() : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 unsigned int
-SedBase_getColumn (const SedBase_t *sb)
+SBase_getColumn (const SBase_t *sb)
 {
   return (sb != NULL) ? sb->getColumn() : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_hasValidLevelVersionNamespaceCombination(SedBase_t *sb)
+SBase_hasValidLevelVersionNamespaceCombination(SBase_t *sb)
 {
   return (sb != NULL) ?
     static_cast <int> (sb->hasValidLevelVersionNamespaceCombination()) : 0;
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_setUserData(SedBase_t* sb, void *userData)
+SBase_setUserData(SBase_t* sb, void *userData)
 {
-  if (sb == NULL) return LIBSEDML_INVALID_OBJECT;
+  if (sb == NULL) return LIBSBML_INVALID_OBJECT;
   return sb->setUserData(userData);
 }
 
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 void *
-SedBase_getUserData(const SedBase_t* sb)
+SBase_getUserData(const SBase_t* sb)
 {
   if (sb == NULL) return NULL;
   return sb->getUserData();
 }
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_isSetUserData(const SedBase_t* sb)
+SBase_isSetUserData(const SBase_t* sb)
 {
   if (sb == NULL) return 0;
   return static_cast <int>(sb->isSetUserData());
 }
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 int
-SedBase_unsetUserData(SedBase_t* sb)
+SBase_unsetUserData(SBase_t* sb)
 {
-  if (sb == NULL) return LIBSEDML_INVALID_OBJECT;
+  if (sb == NULL) return LIBSBML_INVALID_OBJECT;
   return sb->unsetUserData();
 }
 
-LIBSEDML_EXTERN
-SedBase_t*
-SedBase_getElementBySId(SedBase_t* sb, const char* id)
+LIBSBML_EXTERN
+SBase_t*
+SBase_getElementBySId(SBase_t* sb, const char* id)
 {
   if (sb == NULL) return NULL;
   return sb->getElementBySId(id);
 }
 
-LIBSEDML_EXTERN
-SedBase_t*
-SedBase_getElementByMetaId(SedBase_t* sb, const char* metaid)
+LIBSBML_EXTERN
+SBase_t*
+SBase_getElementByMetaId(SBase_t* sb, const char* metaid)
 {
   if (sb == NULL) return NULL;
   return sb->getElementByMetaId(metaid);
 }
 
-LIBSEDML_EXTERN
+LIBSBML_EXTERN
 List_t*
-SedBase_getAllElements(SedBase_t* sb)
+SBase_getAllElements(SBase_t* sb)
 {
   if (sb == NULL) return NULL;
   return sb->getAllElements();
@@ -3409,4 +3404,4 @@ SedBase_getAllElements(SedBase_t* sb)
 
 /** @endcond */
 
-LIBSEDML_CPP_NAMESPACE_END
+LIBSBML_CPP_NAMESPACE_END

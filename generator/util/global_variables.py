@@ -119,15 +119,23 @@ global ret_dup_id
 global ret_att_unex
 #ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
+global namespaces
 
 def set_global_fullname(fullname):
     global package_full_name
     package_full_name = fullname
 
 
-def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname=''):
+def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname='',
+                specifications=[]):
     global language
     language = lang
+
+    global namespaces
+    if len(specifications) > 0:
+        namespaces = specifications
+    else:
+        namespaces[0]['namespaces'] = 'not defined'
 
     if base:
         global baseClass

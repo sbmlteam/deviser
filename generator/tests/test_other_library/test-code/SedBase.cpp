@@ -1724,19 +1724,14 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
 
   if (xmlns != NULL)
   {
-    //
-    // checks defined Sed XMLNamespace
-    // returns false if different Sed XMLNamespaces
-    // (e.g. SEDML_XMLNS_L2V1 and SEDML_XMLNS_L2V3) are defined.
-    //
     int numNS = 0;
 
-    if (xmlns->hasURI(SEDML_XMLNS_L1))
+    if (xmlns->hasURI(SEDML_XMLNS_L1V1))
     {
       // checks different Sed XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
-      declaredURI.assign(SEDML_XMLNS_L1);
+      declaredURI.assign(SEDML_XMLNS_L1V1);
     }
 
     // checks if the Sed Namespace is explicitly defined.
