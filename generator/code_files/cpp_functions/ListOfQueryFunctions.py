@@ -76,7 +76,7 @@ class ListOfQueryFunctions():
             self.object_child_name = self.child_name + '_t'
         self.std_base = class_object['std_base']
         self.concretes = []
-        if 'concretes' in class_object:
+        if 'concretes' in class_object and len(class_object['concretes']) > 0:
             self.concretes = class_object['concretes']
         elif 'concrete' in class_object:
             self.concretes = query.get_concretes(class_object['root'],

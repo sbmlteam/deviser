@@ -13,6 +13,7 @@
 
 #include <sbml/xml/XMLNamespaces.h>
 #include <sedml/common/common.h>
+#include <sedml/common/sedmlfwd.h>
 
 #ifdef __cplusplus
 namespace LIBSEDML_CPP_NAMESPACE 

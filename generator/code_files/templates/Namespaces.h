@@ -5,6 +5,7 @@
 #include <sbml/xml/XMLNamespaces.h>
 </verbatim>
 #include <sbml/common/common.h>
+#include <sbml/common/sbmlfwd.h>
 
 #ifdef __cplusplus
 namespace LIBSBML_CPP_NAMESPACE 

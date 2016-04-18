@@ -679,7 +679,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  virtual int setAnnotation (const XMLNode* annotation);
+  virtual int setAnnotation (XMLNode* annotation);
 
 
   /**
@@ -1513,6 +1513,8 @@ public:
 
 protected:
 
+  bool getHasBeenDeleted() const;
+
   /** 
    * When overridden allows SBase elements to use the text included in between
    * the elements tags. The default implementation does nothing.
@@ -1721,6 +1723,11 @@ protected:
 
 
   /**
+   * Checks that the math ml ns has been declared
+   */
+  const std::string checkMathMLNamespace(const XMLToken elem);
+
+   /**
    * Sets the XML namespace to which this element belongs to.
    * For example, all elements that belong to SBML Level 3 Version 1 Core
    * must set the namespace to <code>"http://www.sbml.org/sbml/level3/version1/core"</code>; 
@@ -1902,7 +1909,6 @@ SBase_getParentSBMLObject (SBase_t *sb);
  *
  * @param sb the SBase_t structure
  * @param type the typecode (int) of the structure to be returned
- * @param pkgName the name of the package that defines the @param type
  *
  * @return the ancestor SBase_t structure of this SBML structure with
  * the corresponding typecode (int), NULL if there is no ancestor of
@@ -1912,7 +1918,7 @@ SBase_getParentSBMLObject (SBase_t *sb);
  */
 LIBSBML_EXTERN
 const SBase_t *
-SBase_getAncestorOfType (SBase_t *sb, int type, const char* pkgName);
+SBase_getAncestorOfType (SBase_t *sb, int type);
 
 /**
  * Returns the line number on which the given structure first appears in the

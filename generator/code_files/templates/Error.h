@@ -26,6 +26,8 @@ typedef enum
 , DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
 , SBMLNamespaceInAnnotation             = 10403 /*!< The SBML XML namespace cannot be used in an Annotation object. */
 , MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML object. */
+, AnnotationNotElement                  = 10405
+, InvalidMathElement                    = 10501
 , NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
 , NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
 , NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
@@ -36,7 +38,11 @@ typedef enum
 , MissingOrInconsistentVersion          = 20103 /*!< Missing or inconsistent value for the 'version' attribute. */
 , LevelPositiveInteger                  = 20105 /*!< The 'level' attribute must have a positive integer value. */
 , VersionPositiveInteger                = 20106 /*!< The 'version' attribute must have a positive integer value. */
-, AllowedAttributesOnSBML               = 20108 /*!< Invalid attribute found on the SBML container element. */
+, InvalidSBMLLevelVersion               = 20107
+, AllowedAttributes                     = 20108 /*!< Invalid attribute found on the Sed container element. */
+, InvalidMetaidSyntax                   = 20109
+, IncorrectOrderInModel                 = 20110
+, EmptyListElement                      = 20111
 , SBMLCodesUpperBound                   = 99999 /*!< Upper boundary of libSBML-specific diagnostic codes. */
 } SBMLErrorCode_t;
 

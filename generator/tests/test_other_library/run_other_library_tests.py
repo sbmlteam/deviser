@@ -21,8 +21,9 @@ not_tested = []
 def generate_new_cpp_header(filename, num):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
     working_class = ob['baseElements'][num]
-    strFunctions.prefix_classes(working_class)
     os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()

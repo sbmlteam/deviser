@@ -685,7 +685,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  virtual int setAnnotation (const XMLNode* annotation);
+  virtual int setAnnotation (XMLNode* annotation);
 
 
   /**
@@ -1519,6 +1519,8 @@ public:
 
 protected:
 
+  bool getHasBeenDeleted() const;
+
   /** 
    * When overridden allows SedBase elements to use the text included in between
    * the elements tags. The default implementation does nothing.
@@ -1727,6 +1729,11 @@ protected:
 
 
   /**
+   * Checks that the math ml ns has been declared
+   */
+  const std::string checkMathMLNamespace(const XMLToken elem);
+
+   /**
    * Sets the XML namespace to which this element belongs to.
    * For example, all elements that belong to Sed Level 3 Version 1 Core
    * must set the namespace to <code>"http://www.sedml.org/sedml/level3/version1/core"</code>; 
@@ -1908,7 +1915,6 @@ SedBase_getParentSedObject (SedBase_t *sb);
  *
  * @param sb the SedBase_t structure
  * @param type the typecode (int) of the structure to be returned
- * @param pkgName the name of the package that defines the @param type
  *
  * @return the ancestor SedBase_t structure of this Sed structure with
  * the corresponding typecode (int), NULL if there is no ancestor of
@@ -1918,7 +1924,7 @@ SedBase_getParentSedObject (SedBase_t *sb);
  */
 LIBSEDML_EXTERN
 const SedBase_t *
-SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName);
+SedBase_getAncestorOfType (SedBase_t *sb, int type);
 
 /**
  * Returns the line number on which the given structure first appears in the

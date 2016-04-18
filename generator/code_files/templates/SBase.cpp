@@ -222,7 +222,7 @@ SBase::getNotes()
 }
 
 
-XMLNode*
+const XMLNode*
 SBase::getNotes() const
 {
   return mNotes;
@@ -256,7 +256,7 @@ SBase::getAnnotation ()
 }
 
 
-XMLNode*
+const XMLNode*
 SBase::getAnnotation () const
 {
   return const_cast<SBase *>(this)->getAnnotation();
@@ -956,39 +956,40 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
       notes_xmln = XMLNode::convertStringToXMLNode(notes);
     }
 
-      if (notes_xmln != NULL)
+    if (notes_xmln != NULL)
+    {
+      if (addXHTMLMarkup == true)
+      {
+        if (notes_xmln->getNumChildren() == 0
+            && notes_xmln->isStart() == false
+            && notes_xmln->isEnd() == false
+            && notes_xmln->isText() == true)
         {
-          if (addXHTMLMarkup == true)
-            {
-                  if (notes_xmln->getNumChildren() == 0
-                      && notes_xmln->isStart() == false
-                      && notes_xmln->isEnd() == false
-                      && notes_xmln->isText() == true)
-                    {
-                      //create a parent node of xhtml type p
-                      XMLAttributes blank_att = XMLAttributes();
-                      XMLTriple triple = XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
-                      XMLNamespaces xmlns = XMLNamespaces();
-                      xmlns.add("http://www.w3.org/1999/xhtml", "");
-                      XMLNode *xmlnode = new XMLNode(XMLToken(triple, blank_att, xmlns));
+          //create a parent node of xhtml type p
+          XMLAttributes blank_att = XMLAttributes();
+          XMLTriple triple = XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
+          XMLNamespaces xmlns = XMLNamespaces();
+          xmlns.add("http://www.w3.org/1999/xhtml", "");
+          XMLNode *xmlnode = new XMLNode(XMLToken(triple, blank_att, xmlns));
 
-                      // create a text node from the text given
-                      xmlnode->addChild(*notes_xmln);
-                      success = setNotes(xmlnode);
-                      delete xmlnode;
-                    }
-                  else
-                    {
-                      success = setNotes(notes_xmln);
-                    }
-          }
-          else
-            {
-              success = setNotes(notes_xmln);
-            }
-
-          delete notes_xmln;
+          // create a text node from the text given
+          xmlnode->addChild(*notes_xmln);
+          success = setNotes(xmlnode);
+          delete xmlnode;
         }
+        else
+        {
+          success = setNotes(notes_xmln);
+        }
+      }
+      else
+      {
+        success = setNotes(notes_xmln);
+      }
+
+      delete notes_xmln;
+    }
+  }
   return success;
 }
 
@@ -1820,7 +1821,7 @@ SBase::read (XMLInputStream& stream)
    */
   if (element.getName() == "sbml")
   {
-    stream.setSBMLNamespaces(this->getSBMLNamespaces());
+ //   stream.setSBMLNamespaces(this->getSBMLNamespaces());
     // need to check that any prefix on the sbmlns also occurs on element
     // remembering the horrible situation where the sbmlns might be declared
     // with more than one prefix
@@ -2306,7 +2307,7 @@ SBase::readAttributes (const XMLAttributes& attributes,
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
-                     SBMLTypeCode_toString(getTypeCode());
+                     SBMLTypeCode_toString(getTypeCode()));
     }
 
     if (isSetMetaId())
@@ -2701,13 +2702,6 @@ SBase::checkXHTML(const XMLNode * xhtml)
     errorDOC  = NotesContainsDOCTYPE;
     errorELEM = InvalidNotesContent;
   }
-  else if (name == "message")
-  {
-    errorNS   = ConstraintNotInXHTMLNamespace;
-    errorXML  = ConstraintContainsXMLDecl;
-    errorDOC  = ConstraintContainsDOCTYPE;
-    errorELEM = InvalidConstraintContent;
-  }
   else                                  // We shouldn't ever get to this point.
   {
     logError(UnknownError);
@@ -2833,66 +2827,6 @@ SBase::checkCompatibility(const SBase * object) const
   }
 }
 
-void
-SBase::removeDuplicateAnnotations()
-{
-  bool resetNecessary = false;
-  XMLNamespaces xmlns = XMLNamespaces();
-  xmlns.add("http://www.sbml.org/libsbml/annotation", "");
-  XMLTriple triple = XMLTriple("duplicateTopLevelElements",
-    "http://www.sbml.org/libsbml/annotation", "");
-  XMLAttributes att = XMLAttributes();
-  XMLToken token = XMLToken(triple, att, xmlns);
-  XMLNode * newNode = NULL;
-  if (isSetAnnotation())
-  {
-    //make a copy to work with
-    XMLNode * newAnnotation = mAnnotation->clone();
-
-    unsigned int numChildren = newAnnotation->getNumChildren();
-    if (numChildren == 1)
-      return;
-
-    bool duplicate = false;
-    for (unsigned int i = 0; i < numChildren; i++)
-    {
-      duplicate = false;
-      std::string name = newAnnotation->getChild(i).getName();
-      for (unsigned int j = numChildren-1; j > i; j--)
-      {
-        if (name == newAnnotation->getChild(j).getName())
-        {
-          resetNecessary = true;
-          duplicate = true;
-          if (newNode == NULL)
-          {
-            // need to  create the new node
-            newNode = new XMLNode(token);
-          }
-          XMLNode* transfer = newAnnotation->removeChild(j);
-          newNode->addChild(*transfer);
-          delete transfer;
-        }
-      }
-      if (duplicate)
-      {
-        XMLNode* transfer = newAnnotation->removeChild(i);
-        newNode->addChild(*transfer);
-        delete transfer;
-      }
-      numChildren = newAnnotation->getNumChildren();
-    }
-    if (resetNecessary)
-    {
-      newAnnotation->addChild(*(newNode));
-      setAnnotation(newAnnotation);
-    }
-    delete newNode;
-    delete newAnnotation;
-  }
-
-
-}
 /** @endcond */
 
 /** @cond doxygenLibsbmlInternal */
@@ -2967,9 +2901,9 @@ SBase_getParentSBMLObject (SBase_t *sb)
 
 LIBSBML_EXTERN
 const SBase_t *
-SBase_getAncestorOfType (SBase_t *sb, int type, const char* pkgName)
+SBase_getAncestorOfType (SBase_t *sb, int type)
 {
-  return (sb != NULL) ? sb->getAncestorOfType(type, pkgName) : NULL;
+  return (sb != NULL) ? sb->getAncestorOfType(type) : NULL;
 }
 
 
@@ -3367,14 +3301,6 @@ SBase_unsetUserData(SBase_t* sb)
 {
   if (sb == NULL) return LIBSBML_INVALID_OBJECT;
   return sb->unsetUserData();
-}
-
-LIBSBML_EXTERN
-SBase_t*
-SBase_getElementBySId(SBase_t* sb, const char* id)
-{
-  if (sb == NULL) return NULL;
-  return sb->getElementBySId(id);
 }
 
 LIBSBML_EXTERN

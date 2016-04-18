@@ -140,8 +140,7 @@ def get_concretes(root_object, concrete_list):
 
 # add the non-abstract class to the list
 def add_concrete_to_list(root, concrete, mylist):
-    classname = strFunctions.remove_prefix(concrete['element'], True)
-    current = get_class(classname, root)
+    current = get_class(concrete['element'], root)
     if current is not None:
         if current['abstract'] is False:
             concrete['type_code'] = current['typecode']
