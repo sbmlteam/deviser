@@ -86,6 +86,30 @@ public:
 
 
   /**
+   * Returns the first child element it can find with a specific "id"
+   * attribute value, or @c NULL if no such object is found.
+   *
+   * @param id string representing the "id" attribute value of the
+   * object to find.
+   *
+   * @return pointer to the first element found with the given identifier.
+   */
+  virtual SBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns the first child element it can find with a specific "id"
+   * attribute value, or @c NULL if no such object is found.
+   *
+   * @param id string representing the "id" attribute value of the
+   * object to find.
+   *
+   * @return pointer to the first element found with the given identifier.
+   */
+  virtual const SBase* getElementBySId(const std::string& metaid) const;
+
+
+  /**
    * Returns the first child element it can find with a specific "metaid"
    * attribute value, or @c NULL if no such object is found.
    *
@@ -141,6 +165,23 @@ public:
    */
   std::string& getMetaId ();
 
+  
+  /*
+   * @return the id of this SBML object.
+   *
+   * @note The fact that the value of attribute "id" is defined on the
+   * SBMLBase parent class object is a convenience provided by libSBML, and
+   * <b>does not strictly follow SBML specifications</b>.  This libSBML
+   * implementation of SBMLBase allows client applications to use more
+   * generalized code in some situations (for instance, when manipulating
+   * objects that are all known to have identifiers), but beware that not
+   * all SBML object classes provide an "id" attribute.  LibSBML will allow
+   * the identifier to be set, but it will not read nor write "id"
+   * attributes for objects that do not possess them according to the SBML
+   * specification for the Level and Version in use.
+   *
+   */
+  virtual const std::string& getId() const;
 
   /**
    * Returns the content of the "notes" subelement of this object as
@@ -544,6 +585,17 @@ public:
    * @see setMetaId(const std::string& metaid)
    */
   bool isSetMetaId () const;
+
+
+  /**
+   * Predicate returning @c true if this object's "id" attribute is set.
+   *
+   * @return @c true if the "id" attribute of this SBML object is
+   * set, @c false otherwise.
+   *
+   * @see getId()
+   */
+  virtual bool isSetId() const;
 
   /**
    * Predicate returning @c true if this
@@ -1791,6 +1843,7 @@ protected:
   SBase* mParentSBMLObject;
   bool mHasBeenDeleted;
 
+  std::string mEmptyString;
 
   //
   // namespace to which this SBase object belongs.

@@ -243,6 +243,28 @@ SedListOf::get (unsigned int n)
 
 
 SedBase*
+SedListOf::getElementBySId(const std::string& id)
+{
+  if (id.empty()) return NULL;
+  
+  for (unsigned int i = 0; i < size(); i++)
+  {
+    SedBase* obj = get(i);
+    if (obj->getId() == id)
+    {
+      return obj;
+    }
+    
+    obj = obj->getElementBySId(id);
+    
+    if (obj != NULL) return obj;
+  }
+
+  return NULL;
+}
+
+
+SedBase*
 SedListOf::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;

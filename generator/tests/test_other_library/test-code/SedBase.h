@@ -92,6 +92,30 @@ public:
 
 
   /**
+   * Returns the first child element it can find with a specific "id"
+   * attribute value, or @c NULL if no such object is found.
+   *
+   * @param id string representing the "id" attribute value of the
+   * object to find.
+   *
+   * @return pointer to the first element found with the given identifier.
+   */
+  virtual SedBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns the first child element it can find with a specific "id"
+   * attribute value, or @c NULL if no such object is found.
+   *
+   * @param id string representing the "id" attribute value of the
+   * object to find.
+   *
+   * @return pointer to the first element found with the given identifier.
+   */
+  virtual const SedBase* getElementBySId(const std::string& metaid) const;
+
+
+  /**
    * Returns the first child element it can find with a specific "metaid"
    * attribute value, or @c NULL if no such object is found.
    *
@@ -147,6 +171,23 @@ public:
    */
   std::string& getMetaId ();
 
+  
+  /*
+   * @return the id of this Sed object.
+   *
+   * @note The fact that the value of attribute "id" is defined on the
+   * SedBase parent class object is a convenience provided by libSed, and
+   * <b>does not strictly follow Sed specifications</b>.  This libSed
+   * implementation of SedBase allows client applications to use more
+   * generalized code in some situations (for instance, when manipulating
+   * objects that are all known to have identifiers), but beware that not
+   * all Sed object classes provide an "id" attribute.  LibSed will allow
+   * the identifier to be set, but it will not read nor write "id"
+   * attributes for objects that do not possess them according to the Sed
+   * specification for the Level and Version in use.
+   *
+   */
+  virtual const std::string& getId() const;
 
   /**
    * Returns the content of the "notes" subelement of this object as
@@ -550,6 +591,17 @@ public:
    * @see setMetaId(const std::string& metaid)
    */
   bool isSetMetaId () const;
+
+
+  /**
+   * Predicate returning @c true if this object's "id" attribute is set.
+   *
+   * @return @c true if the "id" attribute of this Sed object is
+   * set, @c false otherwise.
+   *
+   * @see getId()
+   */
+  virtual bool isSetId() const;
 
   /**
    * Predicate returning @c true if this
@@ -1797,6 +1849,7 @@ protected:
   SedBase* mParentSedObject;
   bool mHasBeenDeleted;
 
+  std::string mEmptyString;
 
   //
   // namespace to which this SedBase object belongs.

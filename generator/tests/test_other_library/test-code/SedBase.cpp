@@ -33,6 +33,15 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 #ifdef __cplusplus
 
 SedBase*
+SedBase::getElementBySId(const std::string& id)
+{
+  if (id.empty()) return NULL;
+
+  return NULL;
+}
+
+
+SedBase*
 SedBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;
@@ -62,6 +71,7 @@ SedBase::SedBase (unsigned int level, unsigned int version)
  , mColumn    ( 0 )
  , mParentSedObject (NULL)
   , mHasBeenDeleted(false)
+  , mEmptyString("")
  , mURI("")
 {
   mSedNamespaces = new SedNamespaces(level, version);
@@ -91,6 +101,7 @@ SedBase::SedBase (SedNamespaces *sedmlns)
  , mColumn    ( 0 )
  , mParentSedObject (NULL)
   , mHasBeenDeleted(false)
+  , mEmptyString("")
  , mURI("")
 {
   if (!sedmlns)
@@ -214,6 +225,13 @@ string&
 SedBase::getMetaId ()
 {
   return mMetaId;
+}
+
+
+const string&
+SedBase::getId() const
+{
+  return mEmptyString;
 }
 
 
@@ -510,6 +528,13 @@ bool
 SedBase::isSetMetaId () const
 {
   return (mMetaId.empty() == false);
+}
+
+
+bool
+SedBase::isSetId() const
+{
+  return (getId().empty() == false);
 }
 
 

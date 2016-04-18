@@ -28,6 +28,15 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 #ifdef __cplusplus
 
 SBase*
+SBase::getElementBySId(const std::string& id)
+{
+  if (id.empty()) return NULL;
+
+  return NULL;
+}
+
+
+SBase*
 SBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;
@@ -57,6 +66,7 @@ SBase::SBase (unsigned int level, unsigned int version)
  , mColumn    ( 0 )
  , mParentSBMLObject (NULL)
   , mHasBeenDeleted(false)
+  , mEmptyString("")
  , mURI("")
 {
   mSBMLNamespaces = new SBMLNamespaces(level, version);
@@ -86,6 +96,7 @@ SBase::SBase (SBMLNamespaces *sbmlns)
  , mColumn    ( 0 )
  , mParentSBMLObject (NULL)
   , mHasBeenDeleted(false)
+  , mEmptyString("")
  , mURI("")
 {
   if (!sbmlns)
@@ -209,6 +220,13 @@ string&
 SBase::getMetaId ()
 {
   return mMetaId;
+}
+
+
+const string&
+SBase::getId() const
+{
+  return mEmptyString;
 }
 
 
@@ -505,6 +523,13 @@ bool
 SBase::isSetMetaId () const
 {
   return (mMetaId.empty() == false);
+}
+
+
+bool
+SedBase::isSetId() const
+{
+  return (getId().empty() == false);
 }
 
 
