@@ -241,21 +241,6 @@ public:
 
 
   /**
-   * Returns the first child element found that has the given identifier.
-   *
-   * This method searches this SedListOf's list of items for Sed objects based
-   * on their "id" attribute value in the model-wide <code>SId</code>
-   * identifier namespace.
-   *
-   * @param id string representing the id of the object to find.
-   *
-   * @return the first element found with the given @p id, or @c NULL if no
-   * such object is found.
-   */
-  virtual SedBase* getElementBySId(const std::string& id);
-
-
-  /**
    * Returns the first child element found with the given meta-identifier.
    *
    * @param metaid string representing the "metaid" attribute of the object
@@ -275,7 +260,7 @@ public:
    *
    * @return a List of pointers to all child objects.
    */
-  virtual List* getAllElements(ElementFilter* filter=NULL);
+  virtual List* getAllElements();
 
 
   /**

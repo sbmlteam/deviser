@@ -28,15 +28,6 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 #ifdef __cplusplus
 
 SBase*
-SBase::getElementBySId(const std::string& id)
-{
-  if (id.empty()) return NULL;
-
-  return NULL;
-}
-
-
-SBase*
 SBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;

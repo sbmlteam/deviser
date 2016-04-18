@@ -33,15 +33,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 #ifdef __cplusplus
 
 SedBase*
-SedBase::getElementBySId(const std::string& id)
-{
-  if (id.empty()) return NULL;
-
-  return NULL;
-}
-
-
-SedBase*
 SedBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;

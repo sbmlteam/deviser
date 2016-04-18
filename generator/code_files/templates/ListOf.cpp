@@ -236,28 +236,6 @@ ListOf::get (unsigned int n)
 
 
 SBase*
-ListOf::getElementBySId(const std::string& id)
-{
-  if (id.empty()) return NULL;
-  
-  for (unsigned int i = 0; i < size(); i++)
-  {
-    SBase* obj = get(i);
-    
-    if (obj->isSetId() && obj->getId() == id)
-    {
-      return obj;
-    }
-    
-    obj = obj->getElementBySId(id);
-    
-    if (obj != NULL) return obj;
-  }
-
-  return NULL;
-}
-
-SBase*
 ListOf::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;

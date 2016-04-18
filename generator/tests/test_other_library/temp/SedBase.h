@@ -92,28 +92,6 @@ public:
 
 
   /**
-   * Returns the first child element found that has the given @p id in the
-   * model-wide @c SId namespace, or @c NULL if no such object is found.
-   *
-   * @param id string representing the "id" attribute value of the object
-   * to find.
-   *
-   * @return pointer to the first element found with the given identifier.
-   */
-  virtual SedBase* getElementBySId(const std::string& id);
-  
-  /**
-   * Returns the first child element found that has the given @p id in the
-   * model-wide @c SId namespace, or @c NULL if no such object is found.
-   *
-   * @param id string representing the "id" attribute value of the object
-   * to find.
-   *
-   * @return pointer to the first element found with the given identifier.
-   */
-  virtual const SedBase* getElementBySId(const std::string& id) const;
-  
-  /**
    * Returns the first child element it can find with a specific "metaid"
    * attribute value, or @c NULL if no such object is found.
    *
