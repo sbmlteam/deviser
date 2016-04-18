@@ -3,7 +3,9 @@
 
 <verbatim>
 #include <sbml/xml/XMLNamespaces.h>
+#include <sbml/util/List.h>
 </verbatim>
+
 #include <sbml/common/common.h>
 #include <sbml/common/sbmlfwd.h>
 

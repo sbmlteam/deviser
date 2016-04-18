@@ -557,7 +557,7 @@ SBase::setMetaId (const std::string& metaid)
  * Sets the annotation of this SBML object to a copy of annotation.
  */
 int
-SBase::setAnnotation (const XMLNode* annotation)
+SBase::setAnnotation (XMLNode* annotation)
 {
   if (annotation == NULL)
   {

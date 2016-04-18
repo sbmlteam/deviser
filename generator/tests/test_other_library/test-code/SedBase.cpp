@@ -562,7 +562,7 @@ SedBase::setMetaId (const std::string& metaid)
  * Sets the annotation of this Sed object to a copy of annotation.
  */
 int
-SedBase::setAnnotation (const XMLNode* annotation)
+SedBase::setAnnotation (XMLNode* annotation)
 {
   if (annotation == NULL)
   {
