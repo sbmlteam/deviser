@@ -135,7 +135,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname='',
     if len(specifications) > 0:
         namespaces = specifications
     else:
-        namespaces[0]['namespaces'] = 'not defined'
+    namespaces = []
 
     if base:
         global baseClass
