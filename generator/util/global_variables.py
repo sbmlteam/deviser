@@ -132,6 +132,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname='',
     language = lang
 
     global namespaces
+    namespaces = []
     if len(specifications) > 0:
         namespaces = specifications
     else:

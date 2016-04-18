@@ -62,6 +62,7 @@ class BaseClassFiles():
         self.write_all_files('Writer')
         self.write_all_files('ErrorLog')
         self.write_all_files('Namespaces')
+        self.write_all_files('Error')
 
     def write_all_files(self, name):
         self.write_header(name)
@@ -90,7 +91,6 @@ class BaseClassFiles():
         fileout.close_file()
 
     def create_base_description(self, name):
-        descr = None
         if name == 'SBase':
             descr = dict({'name': '{0}Base'.format(self.class_prefix),
                           'attribs': None})
@@ -111,6 +111,8 @@ class BaseClassFiles():
             line = lines[i]
             if line.startswith('<verbatim>'):
                 i = self.print_block(fileout, lines, i)
+            elif line.startswith('<sbml>'):
+                i = self.print_sbml_block(fileout, lines, i)
             else:
                 line = self.adjust_line(line)
                 fileout.copy_line_verbatim(line)
@@ -137,6 +139,18 @@ class BaseClassFiles():
         i += 1
         line = lines[i]
         while not line.startswith('</verbatim>'):
+            fileout.copy_line_verbatim(line)
+            i += 1
+            line = lines[i]
+        i += 1
+        return i
+
+    @staticmethod
+    def print_sbml_block(fileout, lines, i):
+        i += 1
+        line = lines[i]
+        while not line.startswith('</sbml>'):
+            line = re.sub('LIBREPLACE', global_variables.library_name.upper(), line)
             fileout.copy_line_verbatim(line)
             i += 1
             line = lines[i]
