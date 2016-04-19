@@ -100,6 +100,10 @@ class ProtectedFunctions():
                     query.get_version_attributes(self.all_attributes, i+1))
         self.is_header = class_object['is_header']
 
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -774,7 +778,8 @@ class ProtectedFunctions():
     # function to write writeXMLNS
     def write_write_xmlns(self):
         if not self.is_list_of:
-            return
+            if not self.document:
+                return
 
         # create comment parts
         title_line = 'Writes the namespace for the {0} package'\

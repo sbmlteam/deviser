@@ -105,7 +105,7 @@ class SetGetFunctions():
     # Functions for writing get functions
 
     # function to write get functions
-    def write_get(self, is_attribute, index, const=True):
+    def write_get(self, is_attribute, index, const=True, virtual=False):
         if not self.is_cpp_api and not const:
             return
         if is_attribute:
@@ -204,7 +204,7 @@ class SetGetFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': const,
-                     'virtual': False,
+                     'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
 

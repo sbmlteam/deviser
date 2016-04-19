@@ -224,6 +224,8 @@ def generate_other_library_code_files(name, ob):
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
     for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
     base_files = BaseClassFiles.BaseClassFiles(prefix, True)

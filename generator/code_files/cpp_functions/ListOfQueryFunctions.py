@@ -959,12 +959,22 @@ class ListOfQueryFunctions():
     # Functions for writing get num element functions
 
     # function to write get num
-    def write_get_num_element_function(self):
+    def write_get_num_element_function(self, parameter=None):
         # create comment parts
-        title_line = 'Get the number of {0} objects in ' \
-                     'this {1}.'.format(self.object_child_name,
-                                        self.object_name)
+        if parameter:
+            title_line = 'Get the number of {0} objects in ' \
+                         'this {1} with the given {2}' \
+                         '.'.format(self.object_child_name,
+                                    self.object_name,
+                                    parameter['name'])
+        else:
+            title_line = 'Get the number of {0} objects in ' \
+                         'this {1}.'.format(self.object_child_name,
+                                            self.object_name)
         params = []
+        if parameter:
+            params.append('@param {0} the {0} of the {1} to return.'
+                          ''.format(parameter['name'], self.object_child_name))
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure to query.'
                           .format(self.abbrev_parent, self.object_name))
@@ -975,6 +985,8 @@ class ListOfQueryFunctions():
 
         # create the function declaration
         arguments = []
+        if parameter:
+            arguments.append('{0} {1}'.format(parameter['type'], parameter['name']))
         used_c_name = strFunctions.remove_prefix(self.plural)
         if self.is_cpp_api:
             function = 'getNum{0}'.format(used_c_name)

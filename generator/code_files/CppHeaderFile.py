@@ -91,6 +91,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_concrete_functions()
         self.write_general_functions()
         self.write_functions_to_retrieve()
+        if self.document:
+            self.write_document_error_log_functions()
         self.down_indent()
         self.write_line('protected:')
         self.skip_line()
@@ -205,6 +207,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             else:
                 include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
 
+        # if we are the document class for another library
+        if not global_variables.is_package and self.document:
+            include_lines += ['<{0}/{1}ErrorLog.h>'.format(self.language, global_variables.prefix)]
+
         # write them out
         for line in include_lines:
             self.write_line_verbatim('#include {0}'.format(line))
@@ -229,6 +235,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 names_written.append(name)
         if self.overwrites_children:
             self.write_line('std::string mElementName;')
+        if self.document:
+            self.write_line('{0}ErrorLog mErrorLog;'.format(global_variables.prefix))
 
     ########################################################################
 
@@ -444,6 +452,75 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if self.is_plugin:
             code = gen_functions.write_append_from()
             self.write_function_declaration(code, True)
+
+    ########################################################################
+
+    # Functions for writing the attribute manipulation functions
+    # these are for attributes and elements that occur as a single child
+
+    # function to write additional functions on a document for another library
+    def write_document_error_log_functions(self):
+
+        attrib_functions = SetGetFunctions.\
+            SetGetFunctions(self.language, self.is_cpp_api,
+                            self.is_list_of, self.class_object)
+        num_elements = len(self.child_elements)
+        # add error log and ns to child elements
+        element = dict({'name': 'Namespaces',
+                        'isArray': False,
+                        'attTypeCode': 'XMLNamespaces',
+                        'capAttName': 'Namespaces',
+                        'attType': 'element',
+                        'memberName': 'm{0}Namespaces'.format(global_variables.prefix)})
+
+        errelement = dict({'name': '{0}ErrorLog'.format(global_variables.prefix),
+                           'isArray': False,
+                           'attTypeCode': '{0}ErrorLog*'.format(global_variables.prefix),
+                           'capAttName': 'ErrorLog',
+                           'attType': 'element',
+                           'memberName': 'mErrorLog'})
+
+        self.child_elements.append(element)
+        self.child_elements.append(errelement)
+
+        code = attrib_functions.write_get(False, num_elements, True, True)
+        self.write_function_declaration(code)
+
+        code = attrib_functions.write_get(False, num_elements, False, True)
+        self.write_function_declaration(code)
+
+        code = attrib_functions.write_get(False, num_elements+1, True)
+        self.write_function_declaration(code)
+
+        code = attrib_functions.write_get(False, num_elements+1, False)
+        self.write_function_declaration(code)
+
+        self.child_elements.remove(errelement)
+        self.child_elements.remove(element)
+
+        # preserve existing values
+        existing = dict()
+        self.class_object['element'] = '{0}Error'.format(global_variables.prefix)
+        self.class_object['parent'] = dict({'name': '{0}Document'.format(global_variables.prefix)})
+        self.class_object['memberName'] = 'mErrorLog'
+        lo_functions = ListOfQueryFunctions\
+            .ListOfQueryFunctions(self.language, self.is_cpp_api,
+                                  self.is_list_of,
+                                  self.class_object)
+
+        code = lo_functions.write_get_element_by_index(is_const=False)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_get_element_by_index(is_const=True)
+        self.write_function_declaration(code)
+
+        code = lo_functions.write_get_num_element_function()
+        self.write_function_declaration(code)
+
+        parameter = dict({'name': 'severity',
+                          'type': 'unsigned int'})
+        code = lo_functions.write_get_num_element_function(parameter)
+        self.write_function_declaration(code)
 
     ########################################################################
 

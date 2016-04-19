@@ -24,6 +24,8 @@ def generate_new_cpp_header(filename, num):
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
     working_class = ob['baseElements'][num]
+    if working_class['name'] == global_variables.document_class:
+        working_class['document'] = True
     os.chdir('./temp')
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
@@ -116,10 +118,17 @@ def main():
 
     # run the individual tests
     name = 'test_sedml'
-    num = 0
+    num = 1
     class_name = 'SedModel'
     list_of = 'SedListOfModels'
     test_case = 'model'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 0
+    class_name = 'SedDocument'
+    list_of = 'SedListOfModels'
+    test_case = 'document'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'

@@ -188,6 +188,10 @@ class BaseCppFile(BaseFile.BaseFile):
 
         self.class_attributes = query.separate_attributes(self.attributes)
 
+        # document class for other libraries
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
         # add info back to the class_object so we can pass it on
         self.class_object['package'] = self.package
         self.class_object['class_attributes'] = self.class_attributes
@@ -203,6 +207,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_object['has_non_std_chilren'] = self.has_non_std_children
         self.class_object['num_non_std_children'] = self.num_non_std_children
         self.class_object['is_header'] = self.is_header
+        self.class_object['document'] = self.document
 
     ########################################################################
 
@@ -360,7 +365,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 if attribute['type'] == 'inline_lo_element':
                     capname = strFunctions.upper_first(name)
                     attrib_class = query.get_class(capname, attribute['root'])
-                    if 'concrete' in attrib_class:
+                    if attrib_class and 'concrete' in attrib_class:
                         attribute['concrete'] = attrib_class['concrete']
                 elements.append(attribute)
                 listed_elements.append(name)
