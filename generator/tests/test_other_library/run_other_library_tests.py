@@ -127,7 +127,7 @@ def main():
     name = 'test_sedml'
     num = 0
     class_name = 'SedDocument'
-    list_of = 'SedListOfModels'
+    list_of = ''
     test_case = 'document'
     fail += run_test(name, num, class_name, test_case, list_of)
 
