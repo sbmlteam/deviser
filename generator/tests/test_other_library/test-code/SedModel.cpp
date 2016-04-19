@@ -651,7 +651,7 @@ SedModel::readAttributes(const XMLAttributes& attributes,
   unsigned int version = getVersion();
   unsigned int numErrs;
   bool assigned = false;
-  SEDMLErrorLog* log = getErrorLog();
+  SedErrorLog* log = getErrorLog();
 
   if (static_cast<SedListOfModels*>(getParentSEDMLObject())->size() < 2)
   {

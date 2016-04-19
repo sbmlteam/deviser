@@ -333,7 +333,7 @@ ListOfClassTwos::writeXMLNS(XMLOutputStream& stream) const
 
   if (prefix.empty())
   {
-    XMLNamespaces* thisxmlns = getNamespaces();
+    const XMLNamespaces* thisxmlns = getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(TestExtension::getXmlnsL3V1V1()))
     {
       xmlns.add(TestExtension::getXmlnsL3V1V1(), prefix);

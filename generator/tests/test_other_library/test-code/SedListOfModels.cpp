@@ -216,9 +216,7 @@ SedListOfModels::createModel()
 
   try
   {
-    SEDML_CREATE_NS(sedmlns, getSedNamespaces());
-    sm = new SedModel(sedmlns);
-    delete sedmlns;
+    sm = new SedModel(getSedNamespaces());
   }
   catch (...)
   {
@@ -305,10 +303,10 @@ SedListOfModels::writeXMLNS(XMLOutputStream& stream) const
 
   if (prefix.empty())
   {
-    XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(SedmlExtension::getXmlnsL3V1V1()))
+    const XMLNamespaces* thisxmlns = getNamespaces();
+    if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
     {
-      xmlns.add(SedmlExtension::getXmlnsL3V1V1(), prefix);
+      xmlns.add(SEDML_XMLNS_L1V1, prefix);
     }
   }
 

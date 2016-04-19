@@ -71,6 +71,10 @@ class SetGetFunctions():
         else:
             self.has_multiple_versions = False
 
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -190,7 +194,10 @@ class SetGetFunctions():
 
         # create the function implementation
         if self.is_cpp_api:
-            implementation = ['return {0}'.format(attribute['memberName'])]
+            if not self.document:
+                implementation = ['return {0}'.format(attribute['memberName'])]
+            else:
+                implementation = self.write_get_for_doc_functions(attribute)
             code = [self.create_code_block('line', implementation)]
         else:
             code = self.get_c_attribute(attribute)
@@ -207,6 +214,18 @@ class SetGetFunctions():
                      'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    # function to write the correct get for doc elements in other libraries
+    def write_get_for_doc_functions(self, attribute):
+        if attribute['memberName'] == 'mErrorLog':
+            implementation = ['return &{0}'.format(attribute['memberName'])]
+        elif attribute['name'] == 'Namespaces':
+            implementation = ['return {0}->getNamespaces()'
+                              ''.format(attribute['memberName'])]
+        else:
+            implementation = ['return {0}'.format(attribute['memberName'])]
+
+        return implementation
 
     # function to write get functions
     def write_get_string_for_enum(self, is_attribute, index):

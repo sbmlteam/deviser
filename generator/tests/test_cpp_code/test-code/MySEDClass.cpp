@@ -245,7 +245,7 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
   unsigned int version = getVersion();
   unsigned int numErrs;
   bool assigned = false;
-  SEDMLErrorLog* log = getErrorLog();
+  SedErrorLog* log = getErrorLog();
 
   SedBase::readAttributes(attributes, expectedAttributes);
   numErrs = log->getNumErrors();

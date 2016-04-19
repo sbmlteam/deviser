@@ -68,6 +68,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_concrete_functions()
         self.write_general_functions()
         self.write_functions_to_retrieve()
+        if self.document:
+            self.write_document_error_log_functions()
         self.write_protected_functions()
         if self.add_impl is not None and not self.is_list_of:
             self.copy_additional_file(self.add_impl)
@@ -447,6 +449,73 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if self.is_plugin:
             code = gen_functions.write_append_from()
             self.write_function_implementation(code, True)
+    ########################################################################
+
+    # Functions for writing the attribute manipulation functions
+    # these are for attributes and elements that occur as a single child
+
+    # function to write additional functions on a document for another library
+    def write_document_error_log_functions(self):
+
+        attrib_functions = SetGetFunctions.\
+            SetGetFunctions(self.language, self.is_cpp_api,
+                            self.is_list_of, self.class_object)
+        num_elements = len(self.child_elements)
+        # add error log and ns to child elements
+        element = dict({'name': 'Namespaces',
+                        'isArray': False,
+                        'capAttName': 'Namespaces',
+                        'attType': 'element',
+                        'memberName': 'm{0}Namespaces'.format(global_variables.prefix)})
+
+        errelement = dict({'name': '{0}ErrorLog'.format(global_variables.prefix),
+                           'isArray': False,
+                           'attTypeCode': '{0}ErrorLog*'.format(global_variables.prefix),
+                           'capAttName': 'ErrorLog',
+                           'attType': 'element',
+                           'memberName': 'mErrorLog'})
+
+        self.child_elements.append(element)
+        self.child_elements.append(errelement)
+
+        code = attrib_functions.write_get(False, num_elements, True, True)
+        self.write_function_implementation(code)
+
+        code = attrib_functions.write_get(False, num_elements, False, True)
+        self.write_function_implementation(code)
+
+        code = attrib_functions.write_get(False, num_elements+1, True)
+        self.write_function_implementation(code)
+
+        code = attrib_functions.write_get(False, num_elements+1, False)
+        self.write_function_implementation(code)
+
+        self.child_elements.remove(errelement)
+        self.child_elements.remove(element)
+
+        # preserve existing values
+        existing = dict()
+        self.class_object['element'] = '{0}Error'.format(global_variables.prefix)
+        self.class_object['parent'] = dict({'name': '{0}Document'.format(global_variables.prefix)})
+        self.class_object['memberName'] = 'mErrorLog'
+        lo_functions = ListOfQueryFunctions\
+            .ListOfQueryFunctions(self.language, self.is_cpp_api,
+                                  self.is_list_of,
+                                  self.class_object)
+
+        code = lo_functions.write_get_element_by_index(is_const=False)
+        self.write_function_implementation(code)
+
+        code = lo_functions.write_get_element_by_index(is_const=True)
+        self.write_function_implementation(code)
+
+        code = lo_functions.write_get_num_element_function()
+        self.write_function_implementation(code)
+
+        parameter = dict({'name': 'severity',
+                          'type': 'unsigned int'})
+        code = lo_functions.write_get_num_element_function(parameter)
+        self.write_function_implementation(code)
 
     ########################################################################
 

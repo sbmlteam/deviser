@@ -373,6 +373,16 @@ SBase::unsetUserData()
  * @return the Namespaces associated with this SBML object
  */
 XMLNamespaces*
+SBase::getNamespaces()
+{
+  if (mSBML != NULL)
+    return mSBML->getSBMLNamespaces()->getNamespaces();
+  else
+    return mSBMLNamespaces->getNamespaces();
+}
+
+
+const XMLNamespaces*
 SBase::getNamespaces() const
 {
   if (mSBML != NULL)
@@ -2355,7 +2365,7 @@ SBase::getPrefix() const
 {
   std::string prefix = "";
 
-  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
   if(xmlns && mSBML && !mSBML->isEnabledDefaultNS(uri))
   {
@@ -2374,7 +2384,7 @@ SBase::getSBMLPrefix() const
 {
   std::string prefix = "";
 
-  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   if (xmlns == NULL)
     return getPrefix();
 

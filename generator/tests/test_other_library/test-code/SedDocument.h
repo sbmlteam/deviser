@@ -337,9 +337,9 @@ public:
   /**
    * Returns the XML element name of this SedDocument object.
    *
-   * For SedDocument, the XML element name is always @c "sedDocument".
+   * For SedDocument, the XML element name is always @c "sedML".
    *
-   * @return the name of this element, i.e. @c "sedDocument".
+   * @return the name of this element, i.e. @c "sedML".
    */
   virtual const std::string& getElementName() const;
 
@@ -448,18 +448,18 @@ public:
    * Returns the value of the "Namespaces" element of this SedDocument.
    *
    * @return the value of the "Namespaces" element of this SedDocument as a
-   * XMLNamespaces.
+   * XMLNamespaces*.
    */
-  virtual const XMLNamespaces getNamespaces() const;
+  virtual const XMLNamespaces* getNamespaces() const;
 
 
   /**
    * Returns the value of the "Namespaces" element of this SedDocument.
    *
    * @return the value of the "Namespaces" element of this SedDocument as a
-   * XMLNamespaces.
+   * XMLNamespaces*.
    */
-  virtual XMLNamespaces getNamespaces();
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**

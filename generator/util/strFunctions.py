@@ -317,7 +317,8 @@ def prefix_name(name):
 def prefix_classes(working_class):
     existing_name = working_class['name']
     working_class['name'] = prefix_name(existing_name)
-    working_class['elementName'] = lower_first(existing_name)
+    if 'elementName' not in working_class or len(working_class['elementName']) == 0:
+        working_class['elementName'] = lower_first(existing_name)
     for attrib in working_class['attribs']:
         if attrib['type'] == 'lo_element' or attrib['type'] == 'element' or \
                         attrib['type'] == 'inline_lo_element':

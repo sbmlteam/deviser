@@ -113,6 +113,10 @@ class GeneralFunctions():
             if class_object['reqd']:
                 self.required = 'true'
 
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
+
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
             self.struct_name = self.object_child_name
@@ -567,7 +571,7 @@ class GeneralFunctions():
                         att['pluralName'].startswith('csg'):
                     name = 'CSG' + att['pluralName'][3:]
                 else:
-                    name = strFunctions.upper_first(att['pluralName'])
+                    name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
             implementation = ['getNum{0}() > '
                               '0'.format(name),
                               '{0}.write(stream)'.format(att['memberName'])]

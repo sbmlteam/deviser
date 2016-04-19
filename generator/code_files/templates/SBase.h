@@ -383,7 +383,24 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual XMLNamespaces* getNamespaces() const ;
+  virtual const XMLNamespaces* getNamespaces() const ;
+
+
+  /**
+   * Returns a list of the XML Namespaces declared on the SBML document
+   * owning this object.
+   *
+   * The SBMLNamespaces object encapsulates SBML Level/Version/namespaces
+   * information.  It is used to communicate the SBML Level, Version, and (in
+   * Level&nbsp;3) packages used in addition to SBML Level&nbsp;3 Core.
+   *
+   * @return the XML Namespaces associated with this SBML object, or @c NULL
+   * in certain very usual circumstances where a namespace is not set.
+   *
+   * @see getLevel()
+   * @see getVersion()
+   */
+  virtual XMLNamespaces* getNamespaces();
 
 
   /**

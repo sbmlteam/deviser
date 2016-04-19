@@ -378,6 +378,16 @@ SedBase::unsetUserData()
  * @return the Namespaces associated with this Sed object
  */
 XMLNamespaces*
+SedBase::getNamespaces()
+{
+  if (mSed != NULL)
+    return mSed->getSedNamespaces()->getNamespaces();
+  else
+    return mSedNamespaces->getNamespaces();
+}
+
+
+const XMLNamespaces*
 SedBase::getNamespaces() const
 {
   if (mSed != NULL)
@@ -2360,7 +2370,7 @@ SedBase::getPrefix() const
 {
   std::string prefix = "";
 
-  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
   if(xmlns && mSed && !mSed->isEnabledDefaultNS(uri))
   {
@@ -2379,7 +2389,7 @@ SedBase::getSedPrefix() const
 {
   std::string prefix = "";
 
-  XMLNamespaces *xmlns = getNamespaces();
+  const XMLNamespaces *xmlns = getNamespaces();
   if (xmlns == NULL)
     return getPrefix();
 

@@ -82,6 +82,10 @@ class ListOfQueryFunctions():
             self.concretes = query.get_concretes(class_object['root'],
                                                  class_object['concrete'])
 
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
+
         self.has_id = True
         if not self.is_list_of:
             self.has_id = query.has_attribute(
@@ -186,8 +190,18 @@ class ListOfQueryFunctions():
                                   'get(n))'.format(const, self.child_name, list_type)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
-                implementation = ['return {0}.get'
-                                  '(n)'.format(self.class_object['memberName'])]
+                if not self.document:
+                    implementation = ['return {0}.get'
+                                      '(n)'.format(self.class_object['memberName'])]
+                else:
+                    if not is_const:
+                        implementation = ['return const_cast<{1}Error*>({0}.getError'
+                                          '(n))'.format(self.class_object['memberName'],
+                                                        global_variables.prefix)]
+                    else:
+                        implementation = ['return {0}.getError'
+                                          '(n)'.format(self.class_object['memberName'])]
+
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 const = 'const ' if is_const else ''
@@ -886,12 +900,19 @@ class ListOfQueryFunctions():
                 line = '{0}_CREATE_NS({1}ns, ' \
                        'get{2}Namespaces())'.format(pack_up, pack_low,
                                                     global_variables.prefix)
-            implementation = [line,
-                              '{0} = new {1}({2}ns)'.format(self.abbrev_child,
-                                                            self.child_name,
-                                                            pack_low),
-                              'delete {0}ns'.format(pack_low),
-                              'catch', '...', '']
+            if global_variables.is_package:
+                implementation = [line,
+                                  '{0} = new {1}({2}ns)'.format(self.abbrev_child,
+                                                                self.child_name,
+                                                                pack_low),
+                                  'delete {0}ns'.format(pack_low),
+                                  'catch', '...', '']
+            else:
+                implementation = ['{0} = new {1}(get{2}Namespaces())'
+                                  ''.format(self.abbrev_child,
+                                            self.child_name,
+                                            global_variables.prefix),
+                                  'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
             implementation = ['{0} != NULL'.format(self.abbrev_child)]
             if self.is_list_of:
@@ -999,8 +1020,18 @@ class ListOfQueryFunctions():
         if self.is_cpp_api and self.is_list_of:
             implementation = ['return size()']
         elif self.is_cpp_api and not self.is_list_of:
-            implementation = ['return {0}.'
-                              'size()'.format(self.class_object['memberName'])]
+            if not self.document:
+                implementation = ['return {0}.'
+                                  'size()'.format(self.class_object['memberName'])]
+            elif parameter:
+                implementation = ['return getErrorLog()->'
+                                  'getNumFailsWith{0}({1})'
+                                  ''.format(strFunctions.upper_first(parameter['name']),
+                                            parameter['name'])]
+            else:
+                implementation = ['return {0}.'
+                                  'getNumErrors()'.format(self.class_object['memberName'])]
+
         else:
             implementation = ['return ({0} != NULL) ? {0}->getNum{1}() : '
                               '{2}_INT_MAX'.format(self.abbrev_parent,

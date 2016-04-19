@@ -8,6 +8,13 @@
   <versions>
     <pkgVersion level="1" version="1" pkg_version="1">
       <elements>
+        <element name="SedDocument" typeCode="SEDML_DOCUMENT" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="sedML">
+          <attributes>
+            <attribute name="level" required="true" type="int" abstract="false"/>
+            <attribute name="version" required="true" type="int" abstract="false"/>
+            <attribute name="model" required="false" type="lo_element" element="SedModel" abstract="false"/>
+          </attributes>
+        </element>
         <element name="Model" typeCode="SBML_SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>

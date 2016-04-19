@@ -468,7 +468,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         # add error log and ns to child elements
         element = dict({'name': 'Namespaces',
                         'isArray': False,
-                        'attTypeCode': 'XMLNamespaces',
+                        'attTypeCode': 'XMLNamespaces*',
                         'capAttName': 'Namespaces',
                         'attType': 'element',
                         'memberName': 'm{0}Namespaces'.format(global_variables.prefix)})

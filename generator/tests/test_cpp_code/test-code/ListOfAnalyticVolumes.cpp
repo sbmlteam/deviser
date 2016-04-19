@@ -380,7 +380,7 @@ ListOfAnalyticVolumes::writeXMLNS(XMLOutputStream& stream) const
 
   if (prefix.empty())
   {
-    XMLNamespaces* thisxmlns = getNamespaces();
+    const XMLNamespaces* thisxmlns = getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(SpatialExtension::getXmlnsL3V1V1()))
     {
       xmlns.add(SpatialExtension::getXmlnsL3V1V1(), prefix);

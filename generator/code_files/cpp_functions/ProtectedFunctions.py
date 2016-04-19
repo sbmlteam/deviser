@@ -529,7 +529,7 @@ class ProtectedFunctions():
         implementation += ['unsigned int numErrs',
                            'bool assigned = false',
                            '{0}ErrorLog* log = '
-                           'getErrorLog()'.format(self.cap_language)]
+                           'getErrorLog()'.format(global_variables.prefix)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         # only do this if has a list of
         if not self.is_list_of and self.has_list_of:
@@ -797,13 +797,19 @@ class ProtectedFunctions():
         implementation = ['XMLNamespaces xmlns',
                           'std::string prefix = getPrefix()']
         code = [dict({'code_type': 'line', 'code': implementation})]
-        implementation = ['thisxmlns && thisxmlns->hasURI({0}Extension::'
-                          'getXmlnsL3V1V1())'.format(self.package),
-                          'xmlns.add({0}Extension::getXmlnsL3V1V1(), '
-                          'prefix)'.format(self.package)]
+        if global_variables.is_package:
+            implementation = ['thisxmlns && thisxmlns->hasURI({0}Extension::'
+                              'getXmlnsL3V1V1())'.format(self.package),
+                              'xmlns.add({0}Extension::getXmlnsL3V1V1(), '
+                              'prefix)'.format(self.package)]
+        else:
+            implementation = ['thisxmlns && thisxmlns->hasURI({0}_XMLNS_L1V1)'.format(global_variables.language.upper()),
+                              'xmlns.add({0}_XMLNS_L1V1, '
+                              'prefix)'.format(global_variables.language.upper())]
+
         nested_if = self.create_code_block('if', implementation)
         implementation = ['prefix.empty()',
-                          'XMLNamespaces* thisxmlns = getNamespaces()',
+                          'const XMLNamespaces* thisxmlns = getNamespaces()',
                           nested_if]
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line', ['stream << xmlns']))

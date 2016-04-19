@@ -75,6 +75,10 @@ class Constructors():
         self.is_doc_plugin = False
         if 'is_doc_plugin' in class_object:
             self.is_doc_plugin = class_object['is_doc_plugin']
+        self.document = False
+        if 'document' in class_object:
+            self.document = class_object['document']
+
 
     ########################################################################
 
@@ -182,6 +186,10 @@ class Constructors():
                 implementation = ['set{0}NamespacesAndOwn(new {0}Namespaces('
                                   'level, '
                                   'version))'.format(global_variables.prefix)]
+                if self.document:
+                    implementation.append('setLevel(level)')
+                    implementation.append('setVersion(version)')
+                    implementation.append('set{0}Document(this)'.format(global_variables.prefix))
                 if self.has_children:
                     implementation.append('connectToChild()')
             else:
@@ -282,6 +290,11 @@ class Constructors():
 #        if global_variables.is_package:
         implementation = ['setElementNamespace({0}'
                           '->getURI())'.format(ns)]
+        if self.document:
+            implementation.append('setLevel({0}->getLevel())'.format(ns))
+            implementation.append('setVersion({0}->getVersion())'.format(ns))
+            implementation.append('set{0}Document(this)'.format(global_variables.prefix))
+
         if self.has_children:
             implementation.append('connectToChild()')
         if global_variables.is_package and not self.is_list_of:
@@ -431,6 +444,9 @@ class Constructors():
                               '{0} = orig.{0}->{1}()'.format(member,
                                                              clone)]
             code.append(self.create_code_block('if', implementation))
+        if self.document:
+            implementation = ['set{0}Document(this)'.format(global_variables.prefix)]
+            code.append(dict({'code_type': 'line', 'code': implementation}))
         if self.has_children:
             implementation = ['connectToChild()']
             code.append(dict({'code_type': 'line', 'code': implementation}))
@@ -482,6 +498,9 @@ class Constructors():
         implementation = args
         if self.has_children:
             implementation.append('connectToChild()')
+        if self.document:
+            implementation.append('set{0}Document(this)'.format(global_variables.prefix))
+
         implementation2 = ['return *this']
         code = [dict({'code_type': 'if', 'code': implementation}),
                 dict({'code_type': 'line', 'code': implementation2})]
