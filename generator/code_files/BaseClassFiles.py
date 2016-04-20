@@ -43,6 +43,7 @@ import os
 from . import CppHeaderFile
 from . import CppCodeFile
 from util import strFunctions, global_variables
+from base_files import BaseCMakeFile
 
 
 class BaseClassFiles():
@@ -71,6 +72,9 @@ class BaseClassFiles():
         self.write_code('lib-version', True)
         self.write_header('operationReturnValues', True)
         self.write_code('operationReturnValues', True)
+        self.write_cmake('lib-version.h')
+        self.write_cmake('lib-config-common.h')
+        self.write_cmake('lib-namespace.h')
 
     def write_all_files(self, name):
         self.write_header(name)
@@ -91,6 +95,17 @@ class BaseClassFiles():
         base_descrip = self.create_base_description(name, common)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
         filein = '{0}.cpp'.format(name)
+        if self.verbose:
+            print('Writing file {0}'.format(fileout.filename))
+        fileout.add_file_header()
+        fileout.skip_line(2)
+        self.copy_file_contents(fileout, filein)
+        fileout.close_file()
+
+    def write_cmake(self, name):
+        out_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+        fileout = BaseCMakeFile.BaseCMakeFile(out_name)
+        filein = '{0}.cmake'.format(name)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()

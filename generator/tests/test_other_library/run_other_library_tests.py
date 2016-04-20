@@ -2,7 +2,7 @@
 
 import os
 
-from code_files import CppFiles, BaseClassFiles, ValidationFiles
+from code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
 from parseXML import ParseXML
 from util import strFunctions, global_variables
 
@@ -59,6 +59,16 @@ def generate_validator(filename):
     valid.write_error_table_header()
     os.chdir('../.')
 
+def generate_forward(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    os.chdir('./temp')
+    ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
+    ext.write_files()
+    os.chdir('../.')
+
 #############################################################################
 # Specific compare functions
 
@@ -76,6 +86,12 @@ def compare_code_headers(class_name):
 def compare_code_impl(class_name):
     correct_file = '.\\test-code\\{0}.cpp'.format(class_name)
     temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+    return compare_files(correct_file, temp_file)
+
+
+def compare_code_cmake(class_name):
+    correct_file = '.\\test-code\\{0}.cmake'.format(class_name)
+    temp_file = '.\\temp\\{0}.cmake'.format(class_name)
     return compare_files(correct_file, temp_file)
 
 
@@ -130,6 +146,9 @@ def test_common_templates(name, class_name, test_case):
     fail += compare_code_impl('libsedml-version')
     fail += compare_code_headers('operationReturnValues')
     fail += compare_code_impl('operationReturnValues')
+    fail += compare_code_cmake('libsedml-version.h')
+    fail += compare_code_cmake('libsedml-config-common.h')
+    fail += compare_code_cmake('libsedml-namespace.h')
     print('')
     return fail
 
@@ -139,6 +158,14 @@ def run_validator(name, class_name, test_case):
     fail = compare_code_headers(class_name)
     print('')
     return fail
+
+def run_forward(name, class_name, test_case):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_forward(filename)
+    fail = compare_code_headers(class_name)
+    print('')
+    return fail
+
 
 
 #########################################################################
@@ -185,6 +212,11 @@ def main():
     class_name = 'SedBase'
     test_case = 'common'
     fail += test_common_templates(name, class_name, test_case)
+
+    name = 'test_sedml'
+    class_name = 'sedmlfwd'
+    test_case = 'forward declarations'
+    fail += run_forward(name, class_name, test_case)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

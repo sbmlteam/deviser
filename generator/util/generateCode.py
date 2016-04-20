@@ -227,13 +227,16 @@ def generate_other_library_code_files(name, ob):
         all_files.write_files()
     base_files = BaseClassFiles.BaseClassFiles(prefix, True)
     base_files.write_files()
+    os.chdir(this_dir)
     os.chdir(common_dir)
     base_files.write_common_files()
-    cmake = CMakeFiles.CMakeFiles(ob, common_dir, True)
-    cmake.write_common_files()
+    ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
+    ext.write_files()
+    os.chdir(this_dir)
     os.chdir(main_dir)
     valid = ValidationFiles.ValidationFiles(ob, True)
     valid.write_error_table_header()
+    os.chdir(this_dir)
 
     os.chdir(this_dir)
 

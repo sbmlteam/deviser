@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from . cpp_functions import *
-from util import query, strFunctions
+from util import query, strFunctions, global_variables
 
 
 class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
@@ -68,7 +68,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.baseClass = '{0}Extension'.format(self.cap_language)
         self.class_name = self.name
 
-        self.elements = package['elements']
+        self.elements = package['baseElements']
         self.number = package['number']
         self.enums = package['enums']
         self.offset = package['offset']
@@ -361,7 +361,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line('#     define CLASS_OR_STRUCT struct')
         self.write_line('#endif  /* __cplusplus */')
 
-    def write_classes(self):
+    def write_classes(self, elements=None):
+        if not elements:
+            elements = self.elements
         width = query.get_max_length(self.elements, 'name')
         for element in self.elements:
             self.write_spaced_line('typedef CLASS_OR_STRUCT {0:{width}} '
@@ -370,6 +372,16 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_end_class_or_struct(self):
         self.write_line('#undef CLASS_OR_STRUCT')
+
+    # function to add base elements from another library
+    def get_all_elements(self):
+        elements = self.elements
+        names = ['Base', 'ListOf', 'Reader', 'Writer', 'Namespaces', 'Error']
+        for name in names:
+            prefixed_name = '{0}{1}'.format(global_variables.prefix, name)
+            new_element = dict({'name': prefixed_name})
+            elements.append(new_element)
+        return elements
 
     ########################################################################
 
@@ -420,7 +432,11 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         self.write_docs_fwd()
         self.write_class_or_struct()
         self.write_cppns_begin()
-        self.write_classes()
+        if global_variables.is_package:
+            self.write_classes()
+        else:
+            all_elements = self.get_all_elements()
+            self.write_classes(all_elements)
         self.write_cppns_end()
         self.write_end_class_or_struct()
         self.write_defn_end()
