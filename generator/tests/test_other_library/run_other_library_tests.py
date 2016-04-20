@@ -40,6 +40,15 @@ def generate_templates(filename):
     base_files.write_files()
     os.chdir('../.')
 
+def generate_common_templates(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    prefix = global_variables.prefix
+    os.chdir('./temp')
+    base_files = BaseClassFiles.BaseClassFiles(prefix, True)
+    base_files.write_common_files()
+    os.chdir('../.')
+
 def generate_validator(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -112,6 +121,18 @@ def test_other_templates():
     print('')
     return fail
 
+def test_common_templates(name, class_name, test_case):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_common_templates(filename)
+    fail = compare_code_headers('common')
+    fail += compare_code_headers('extern')
+    fail += compare_code_headers('libsedml-config')
+    fail += compare_code_impl('libsedml-version')
+    fail += compare_code_headers('operationReturnValues')
+    fail += compare_code_impl('operationReturnValues')
+    print('')
+    return fail
+
 def run_validator(name, class_name, test_case):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_validator(filename)
@@ -159,6 +180,11 @@ def main():
     class_name = 'SedErrorTable'
     test_case = 'document'
     fail += run_validator(name, class_name, test_case)
+
+    name = 'test_sedml'
+    class_name = 'SedBase'
+    test_case = 'common'
+    fail += test_common_templates(name, class_name, test_case)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

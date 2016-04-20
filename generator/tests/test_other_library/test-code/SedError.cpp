@@ -96,7 +96,7 @@ std::string SedError::stringForSeverity(unsigned int code) const
  * by its enum value.
  *
  * A similar table for severity strings is currently unnecessary because
- * libSed never returns anything more than the XMLSeverityCode_t values.
+ * libSEDML never returns anything more than the XMLSeverityCode_t values.
  */
 static struct sedmlCategoryString {
   unsigned int catCode;
@@ -183,7 +183,7 @@ SedError::SedError (  const unsigned int errorId
     }
 
     // The rest of this block massages the results to account for how some
-    // internal bookkeeping is done in libSed 3, and also to provide
+    // internal bookkeeping is done in libSEDML 3, and also to provide
     // additional info in the messages.
 
     mCategory     = sedmlErrorTable[index].category;

@@ -270,11 +270,11 @@ BEGIN_C_DECLS
  * Creates a new SedNamespaces_t structure corresponding to the given Sed
  * @p level and @p version.
  *
- * SedNamespaces_t structures are used in libSed to communicate Sed Level
+ * SedNamespaces_t structures are used in libSEDML to communicate Sed Level
  * and Version data between constructors and other methods.  The
  * SedNamespaces_t structure class tracks 3-tuples (triples) consisting of
  * Sed Level, Version, and the corresponding Sed XML namespace.  Most
- * constructors for Sed structures in libSed take a SedNamespaces_t structure
+ * constructors for Sed structures in libSEDML take a SedNamespaces_t structure
  * as an argument, thereby allowing the constructor to produce the proper
  * combination of attributes and other internal data structures for the
  * given Sed Level and Version.
@@ -387,7 +387,7 @@ SedNamespaces_addNamespaces(SedNamespaces_t *sedmlns,
 
 /**
  * Returns an array of Sed Namespaces supported by this version of 
- * LibSed. 
+ * LibSEDML. 
  *
  * @param length an integer holding the length of the array
  * @return an array of Sed namespaces, or @c NULL if length is @c NULL. The array 

@@ -56,13 +56,13 @@ SedReader::~SedReader ()
  * If the filename ends with @em .zip, only the first file in the archive will
  * be read if the zip archive contains two or more files.
  *
- * To read a gzip/zip file, underlying libSed needs to be linked with zlib
- * at compile time. Also, underlying libSed needs to be linked with bzip2 
+ * To read a gzip/zip file, underlying libSEDML needs to be linked with zlib
+ * at compile time. Also, underlying libSEDML needs to be linked with bzip2 
  * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSed is not linked with the corresponding 
+ * file name is given and underlying libSEDML is not linked with the corresponding 
  * required library.
  * SedReader::hasZlib() and SedReader::hasBzip2() can be used to check 
- * whether libSed is linked with each library.
+ * whether libSEDML is linked with each library.
  * 
  * @return a pointer to the SedDocument read.
  */
@@ -117,9 +117,9 @@ SedReader::readSedMLFromString (const std::string& xml)
 
 /*
  * Predicate returning @c true if
- * libSed is linked with zlib.
+ * libSEDML is linked with zlib.
  *
- * @return @c true if libSed is linked with zlib, @c false otherwise.
+ * @return @c true if libSEDML is linked with zlib, @c false otherwise.
  */
 bool 
 SedReader::hasZlib() 
@@ -130,9 +130,9 @@ SedReader::hasZlib()
 
 /*
  * Predicate returning @c true if
- * libSed is linked with bzip2.
+ * libSEDML is linked with bzip2.
  *
- * @return @c true if libSed is linked with bzip2, @c false otherwise.
+ * @return @c true if libSEDML is linked with bzip2, @c false otherwise.
  */
 bool 
 SedReader::hasBzip2() 

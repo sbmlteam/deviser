@@ -22,7 +22,7 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-  UnknownError                          = 10000 /*!< Encountered unknown internal libSed error. */
+  UnknownError                          = 10000 /*!< Encountered unknown internal libSEDML error. */
 , NotUTF8                               = 10101 /*!< File does not use UTF-8 encoding. */
 , UnrecognizedElement                   = 10102 /*!< Encountered unrecognized element. */
 , NotSchemaConformant                   = 10103 /*!< Document does not conform to the Sed XML schema. */
@@ -48,7 +48,7 @@ typedef enum
 , InvalidMetaidSyntax                   = 20109
 , IncorrectOrderInModel                 = 20110
 , EmptyListElement                      = 20111
-, SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSed-specific diagnostic codes. */
+, SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;
 
 
@@ -88,9 +88,9 @@ typedef enum
      * and Level&nbsp;3 Version&nbsp;1 specifications. */
 
   , LIBSEDML_CAT_INTERNAL_CONSISTENCY
-    /*!< Category of errors that can occur while validating libSed's
+    /*!< Category of errors that can occur while validating libSEDML's
      * internal representation of Sed constructs. (These are tests
-     * performed by libSed and do not have equivalent Sed validation
+     * performed by libSEDML and do not have equivalent Sed validation
      * rules.)  */
 
 } SedErrorCategory_t;
@@ -127,7 +127,7 @@ typedef enum
     /*!< The XML content is invalid for some
      * levels/versions of Sed, and while it
      * may be valid in others, it is something
-     * that is best avoided anyway.  LibSed
+     * that is best avoided anyway.  LibSEDML
      * will issue warnings in those cases it
      * can recognize. */
 
@@ -154,7 +154,7 @@ public:
    * Creates a new SedError to report that something occurred during Sed
    * processing.
    *
-   * When a libSed operation on Sed content results in a warning, error
+   * When a libSEDML operation on Sed content results in a warning, error
    * or other diagnostic, the issue is reported as an SedError object.
    * SedError objects have identification numbers to indicate the nature
    * of the exception.  @if clike These numbers are drawn from
@@ -188,7 +188,7 @@ public:
    * passed in the argument @p details to this constructor.  In addition,
    * all the predefined error identifiers have associated values for the
    * @p severity and @p category codes, and these fields are filled-in using
-   * the libSed defaults for each different error identifier. @endif@~
+   * the libSEDML defaults for each different error identifier. @endif@~
    *
    * If the error identifier @p errorId is a number greater than 99999, the
    * SedError class assumes the error was generated from another part of
@@ -218,7 +218,7 @@ public:
    * there are additional constants defined for <a class="el"
    * href="#SedErrorSeverity_t">standard severity</a> and <a class="el"
    * href="#SedErrorCategory_t">standard category</a> codes, and every predefined
-   * error in libSed has an associated value for severity and category taken
+   * error in libSEDML has an associated value for severity and category taken
    * from these predefined sets.  These constants have symbol names
    * prefixed with <code>LIBSEDML_SEV_</code> and <code>LIBSEDML_CAT_</code>,
    * respectively.  If the value of @p errorId is one of the standard error

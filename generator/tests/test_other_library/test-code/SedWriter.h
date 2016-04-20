@@ -34,7 +34,7 @@ public:
   /**
    * Creates a new SedWriter.
    *
-   * The libSed SedWriter objects offer methods for writing Sed in
+   * The libSEDML SedWriter objects offer methods for writing Sed in
    * XML form to files and text strings.
    */
   SedWriter  ();
@@ -56,14 +56,14 @@ public:
    * at the beginning of the XML document:
    * @verbatim
  <!-- Created by <program name> version <program version>
- on yyyy-MM-dd HH:mm with libSed version <libsedml version>. -->
+ on yyyy-MM-dd HH:mm with libSEDML version <libsedml version>. -->
  @endverbatim
    *
    * If the program name and version are not set at some point before
    * calling the writeSedML() methods, no such comment is written out.
    *
    * @param name the name of this program (where "this program" refers to
-   * program in which libSed is embedded, not libSed itself!)
+   * program in which libSEDML is embedded, not libSEDML itself!)
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -83,14 +83,14 @@ public:
    * at the beginning of the document:
    * @verbatim
  <!-- Created by <program name> version <program version>
- on yyyy-MM-dd HH:mm with libSed version <libsedml version>. -->
+ on yyyy-MM-dd HH:mm with libSEDML version <libsedml version>. -->
  @endverbatim
    *
    * If the program version and name are not set at some point before
    * calling the writeSedML() methods, no such comment is written out.
    *
    * @param version the version of this program (where "this program"
-   * refers to program in which libSed is embedded, not libSed itself!)
+   * refers to program in which libSEDML is embedded, not libSEDML itself!)
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -214,16 +214,16 @@ public:
   
 
   /**
-   * Predicate returning @c true if this copy of libSed has been linked
+   * Predicate returning @c true if this copy of libSEDML has been linked
    * with the <em>zlib</em> library.
    *
-   * LibSed supports reading and writing files compressed with either
-   * bzip2 or zip/gzip compression.  The facility depends on libSed having
+   * LibSEDML supports reading and writing files compressed with either
+   * bzip2 or zip/gzip compression.  The facility depends on libSEDML having
    * been compiled with the necessary support libraries.  This method
    * allows a calling program to inquire whether that is the case for the
-   * copy of libSed it is using.
+   * copy of libSEDML it is using.
    *
-   * @return @c true if libSed is linked with zlib, @c false otherwise.
+   * @return @c true if libSEDML is linked with zlib, @c false otherwise.
    *
    * @copydetails doc_note_static_methods
    *
@@ -233,16 +233,16 @@ public:
 
 
   /**
-   * Predicate returning @c true if this copy of libSed has been linked
+   * Predicate returning @c true if this copy of libSEDML has been linked
    * with the <em>bzip2</em> library.
    *
-   * LibSed supports reading and writing files compressed with either
-   * bzip2 or zip/gzip compression.  The facility depends on libSed having
+   * LibSEDML supports reading and writing files compressed with either
+   * bzip2 or zip/gzip compression.  The facility depends on libSEDML having
    * been compiled with the necessary support libraries.  This method
    * allows a calling program to inquire whether that is the case for the
-   * copy of libSed it is using.
+   * copy of libSEDML it is using.
    *
-   * @return @c true if libSed is linked with bzip2, @c false otherwise.
+   * @return @c true if libSEDML is linked with bzip2, @c false otherwise.
    *
    * @copydetails doc_note_static_methods
    *
@@ -313,7 +313,7 @@ SedWriter_free (SedWriter_t *sw);
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libSed version <libsedml version>. -->
+ *   on yyyy-MM-dd HH:mm with libSEDML version <libsedml version>. -->
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -331,7 +331,7 @@ SedWriter_setProgramName (SedWriter_t *sw, const char *name);
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libSed version <libsedml version>. -->
+ *   on yyyy-MM-dd HH:mm with libSEDML version <libsedml version>. -->
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -357,17 +357,17 @@ SedWriter_setProgramVersion (SedWriter_t *sw, const char *version);
  * or @em test.zip. Also, the filename in the archive will be @em test.sedml if the
  * given filename is @em test.sedml.zip.
  *
- * @note To write a gzip/zip file, libSed needs to be configured and
+ * @note To write a gzip/zip file, libSEDML needs to be configured and
  * linked with the <a target="_blank" href="http://www.zlib.net/">zlib</a> library at
  * compile time.  It also needs to be linked with the <a target="_blank"
  * href="">bzip2</a> library to write files in @em bzip2 format.  (Both
- * of these are the default configurations for libSed.)  Errors about
+ * of these are the default configurations for libSEDML.)  Errors about
  * unreadable files will be logged and this method will return @c false
- * if a compressed filename is given and libSed was @em not linked with
+ * if a compressed filename is given and libSEDML was @em not linked with
  * the corresponding required library.
  *
  * @note SedWriter_hasZlib() and SedWriter_hasBzip2() can be used to
- * check whether libSed has been linked with each library.
+ * check whether libSEDML has been linked with each library.
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
@@ -393,12 +393,12 @@ SedWriter_writeSedML ( SedWriter_t         *sw,
  * or @em test.zip. Also, the filename in the archive will be @em test.sedml if the
  * given filename is @em test.sedml.zip.
  *
- * @note To create a gzip/zip file, libSed needs to be linked with zlib at 
- * compile time. Also, libSed needs to be linked with bzip2 to create a bzip2 file.
+ * @note To create a gzip/zip file, libSEDML needs to be linked with zlib at 
+ * compile time. Also, libSEDML needs to be linked with bzip2 to create a bzip2 file.
  * File unwritable error will be logged and @c zero will be returned if a compressed 
- * file name is given and libSed is not linked with the required library.
+ * file name is given and libSEDML is not linked with the required library.
  * SedWriter_hasZlib() and SedWriter_hasBzip2() can be used to check whether
- * libSed was linked with the library at compile time.
+ * libSEDML was linked with the library at compile time.
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
@@ -429,7 +429,7 @@ SedWriter_writeSedMLToString (SedWriter_t *sw, const SedDocument_t *d);
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * libSed is linked with zlib at compile time.
+ * libSEDML is linked with zlib at compile time.
  *
  * @return @c non-zero if zlib is linked, @c zero otherwise.
  *
@@ -442,7 +442,7 @@ SedWriter_hasZlib ();
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * libSed is linked with bzip2 at compile time.
+ * libSEDML is linked with bzip2 at compile time.
  *
  * @return @c non-zero if bzip2 is linked, @c zero otherwise.
  *
@@ -473,7 +473,7 @@ SedWriter_hasBzip2 ();
  * open the file, and (b) using a filename that indicates a compressed Sed
  * file (i.e., a filename ending in <code>&quot;.zip&quot;</code> or
  * similar) when the compression functionality has not been enabled in
- * the underlying copy of libSed.
+ * the underlying copy of libSEDML.
  *
  * @see SedWriter::hasZlib()
  * @see SedWriter::hasBzip2()
@@ -534,7 +534,7 @@ writeSedMLToString (const SedDocument_t *d);
  * open the file, and (b) using a filename that indicates a compressed Sed
  * file (i.e., a filename ending in <code>&quot;.zip&quot;</code> or
  * similar) when the compression functionality has not been enabled in
- * the underlying copy of libSed.
+ * the underlying copy of libSEDML.
  *
  * @if clike @warning Note that the string is owned by the caller and
  * should be freed (with the normal string <code>free()</code> C++

@@ -216,6 +216,7 @@ def generate_other_library_code_files(name, ob):
     language = global_variables.language
     prefix = global_variables.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
+    common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
     os.chdir(main_dir)
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
@@ -226,6 +227,11 @@ def generate_other_library_code_files(name, ob):
         all_files.write_files()
     base_files = BaseClassFiles.BaseClassFiles(prefix, True)
     base_files.write_files()
+    os.chdir(common_dir)
+    base_files.write_common_files()
+    cmake = CMakeFiles.CMakeFiles(ob, common_dir, True)
+    cmake.write_common_files()
+    os.chdir(main_dir)
     valid = ValidationFiles.ValidationFiles(ob, True)
     valid.write_error_table_header()
 
@@ -273,7 +279,8 @@ def populate_other_library_directories(name, lang):
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
-                   '{0}{1}src{1}{2}'.format(name, sep, lang)]
+                   '{0}{1}src{1}{2}'.format(name, sep, lang),
+                   '{0}{1}src{1}{2}{1}common'.format(name, sep, lang)]
 
 
 def create_dir_structure(pkgname, lang, overwrite):

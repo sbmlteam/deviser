@@ -1620,7 +1620,7 @@ SedBase::getVersion () const
  * This method MAY return the typecode of this Sed object or it MAY
  * return SEDML_UNKNOWN.  That is, subclasses of SedBase are not required to
  * implement this method to return a typecode.  This method is meant
- * primarily for the LibSed C interface where class and subclass
+ * primarily for the LibSEDML C interface where class and subclass
  * information is not readily available.
  *
  * @see getElementName()

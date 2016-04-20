@@ -297,7 +297,7 @@ public:
    * Removes all items in this SedListOf object and deletes its properties too.
    *
    * This performs a call to clear() with an argument of @c true (thus removing
-   * all the child objects in the list), followed by calls to various libSed
+   * all the child objects in the list), followed by calls to various libSEDML
    * <code>unset<em>Foo</em></code> methods to delete everything else: CVTerm
    * objects, model history objects, etc.
    *
@@ -362,7 +362,7 @@ public:
 
 
   /**
-   * Returns the libSed type code for this object, namely,
+   * Returns the libSEDML type code for this object, namely,
    * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    * 
    * @copydetails doc_what_are_typecodes

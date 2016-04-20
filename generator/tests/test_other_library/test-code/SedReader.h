@@ -33,7 +33,7 @@ public:
   /**
    * Creates a new SedReader object and returns it.
    *
-   * The libSed SedReader object offers methods for reading Sed in
+   * The libSEDML SedReader object offers methods for reading Sed in
    * XML form from files and text strings.
    */
   SedReader ();
@@ -89,10 +89,10 @@ public:
 
 
   /**
-   * Static method; returns @c true if this copy of libSed supports
+   * Static method; returns @c true if this copy of libSEDML supports
    * <i>gzip</I> and <i>zip</i> format compression.
    *
-   * @return @c true if libSed has been linked with the <i>zlib</i>
+   * @return @c true if libSEDML has been linked with the <i>zlib</i>
    * library, @c false otherwise.
    *
    * @see @if clike hasBzip2() @else SedReader::hasBzip2()@endif@~
@@ -101,10 +101,10 @@ public:
 
 
   /**
-   * Static method; returns @c true if this copy of libSed supports
+   * Static method; returns @c true if this copy of libSEDML supports
    * <i>bzip2</i> format compression.
    *
-   * @return @c true if libSed is linked with the <i>bzip2</i>
+   * @return @c true if libSEDML is linked with the <i>bzip2</i>
    * libraries, @c false otherwise.
    *
    * @see @if clike hasZlib() @else SedReader::hasZlib()@endif@~
@@ -217,14 +217,14 @@ SedReader_readSedMLFromString (SedReader_t *sr, const char *xml);
 
 
 /**
- * Returns @c true if the underlying libSed supports @em gzip and @em zlib
+ * Returns @c true if the underlying libSEDML supports @em gzip and @em zlib
  * format compression.
  *
- * This predicate tests whether the underlying copy of the libSed library
+ * This predicate tests whether the underlying copy of the libSEDML library
  * has been linked with the necessary libraries to support @em zlib
  * compression.
  *
- * @return @c non-zero if libSed is linked with zlib, @c zero otherwise.
+ * @return @c non-zero if libSEDML is linked with zlib, @c zero otherwise.
  *
  * @if conly
  * @memberof SedReader_t
@@ -236,14 +236,14 @@ SedReader_hasZlib ();
 
 
 /**
- * Returns @c true if the underlying libSed supports @em bzip2 format
+ * Returns @c true if the underlying libSEDML supports @em bzip2 format
  * compression.
  *
- * This predicate tests whether the underlying copy of the libSed library
+ * This predicate tests whether the underlying copy of the libSEDML library
  * has been linked with the necessary libraries to support @em bzip2
  * compression.
  *
- * @return @c non-zero if libSed is linked with bzip2, @c zero otherwise.
+ * @return @c non-zero if libSEDML is linked with bzip2, @c zero otherwise.
  *
  * @if conly
  * @memberof SedReader_t

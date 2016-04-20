@@ -64,12 +64,20 @@ class BaseClassFiles():
         self.write_all_files('Namespaces')
         self.write_all_files('Error')
 
+    def write_common_files(self):
+        self.write_header('common', True)
+        self.write_header('extern', True)
+        self.write_header('lib-config', True)
+        self.write_code('lib-version', True)
+        self.write_header('operationReturnValues', True)
+        self.write_code('operationReturnValues', True)
+
     def write_all_files(self, name):
         self.write_header(name)
         self.write_code(name)
 
-    def write_header(self, name):
-        base_descrip = self.create_base_description(name)
+    def write_header(self, name, common=False):
+        base_descrip = self.create_base_description(name, common)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
         filein = '{0}.h'.format(name)
         if self.verbose:
@@ -79,8 +87,8 @@ class BaseClassFiles():
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
 
-    def write_code(self, name):
-        base_descrip = self.create_base_description(name)
+    def write_code(self, name, common=False):
+        base_descrip = self.create_base_description(name, common)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
         filein = '{0}.cpp'.format(name)
         if self.verbose:
@@ -90,13 +98,22 @@ class BaseClassFiles():
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
 
-    def create_base_description(self, name):
-        if name == 'SBase':
-            descr = dict({'name': '{0}Base'.format(self.class_prefix),
+    def create_base_description(self, name, common=False):
+        if common:
+            if name.startswith('lib'):
+                used_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+            else:
+                used_name = name
+
+            descr = dict({'name': '{0}'.format(used_name),
                           'attribs': None})
         else:
-            descr = dict({'name': '{0}{1}'.format(self.class_prefix, name),
-                          'attribs': None})
+            if name == 'SBase':
+                descr = dict({'name': '{0}Base'.format(self.class_prefix),
+                              'attribs': None})
+            else:
+                descr = dict({'name': '{0}{1}'.format(self.class_prefix, name),
+                              'attribs': None})
         return descr
 
     def copy_file_contents(self, fileout, infilename):
@@ -122,6 +139,8 @@ class BaseClassFiles():
     def adjust_line(line):
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
+        line = re.sub('LibSBML', 'Lib{0}'.format(global_variables.language.upper()), line)
+        line = re.sub('libSBML', 'lib{0}'.format(global_variables.language.upper()), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_',

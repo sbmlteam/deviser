@@ -176,12 +176,12 @@ public:
    * @return the id of this Sed object.
    *
    * @note The fact that the value of attribute "id" is defined on the
-   * SedBase parent class object is a convenience provided by libSed, and
-   * <b>does not strictly follow Sed specifications</b>.  This libSed
+   * SedBase parent class object is a convenience provided by libSEDML, and
+   * <b>does not strictly follow Sed specifications</b>.  This libSEDML
    * implementation of SedBase allows client applications to use more
    * generalized code in some situations (for instance, when manipulating
    * objects that are all known to have identifiers), but beware that not
-   * all Sed object classes provide an "id" attribute.  LibSed will allow
+   * all Sed object classes provide an "id" attribute.  LibSEDML will allow
    * the identifier to be set, but it will not read nor write "id"
    * attributes for objects that do not possess them according to the Sed
    * specification for the Level and Version in use.
@@ -194,7 +194,7 @@ public:
    * a tree of XMLNode objects.
    *
    * The "notes" element content returned by this method will be in XML
-   * form, but libSed does not provide an object model specifically for
+   * form, but libSEDML does not provide an object model specifically for
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
@@ -220,7 +220,7 @@ public:
    * a tree of XMLNode objects.
    *
    * The "notes" element content returned by this method will be in XML
-   * form, but libSed does not provide an object model specifically for
+   * form, but libSEDML does not provide an object model specifically for
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
@@ -293,7 +293,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * The annotations returned by this method will be in XML form.  LibSed
+   * The annotations returned by this method will be in XML form.  LibSEDML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
    * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
@@ -316,7 +316,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * The annotations returned by this method will be in XML form.  LibSed
+   * The annotations returned by this method will be in XML form.  LibSEDML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
    * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
@@ -470,24 +470,24 @@ public:
   /**
    * Returns the first ancestor object that has the given Sed type code.
    *
-   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * @if clike LibSEDML attaches an identifying code to every kind of Sed
    * object.  These are known as <em>Sed type codes</em>.  The set of
    * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   * SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * SEDML_. @endif@if java LibSEDML attaches an identifying code to every
    * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSed, the type codes are defined as
+   * the Java language interface for libSEDML, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsedmlConstants}.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if python LibSed attaches an identifying
+   * characters @c SEDML_. @endif@if python LibSEDML attaches an identifying
    * code to every kind of Sed object.  These are known as <em>Sed type
-   * codes</em>.  In the Python language interface for libSed, the type
+   * codes</em>.  In the Python language interface for libSEDML, the type
    * codes are defined as static integer constants in the interface class
    * @link libsedml@endlink.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if csharp LibSed attaches an identifying
+   * characters @c SEDML_. @endif@if csharp LibSEDML attaches an identifying
    * code to every kind of Sed object.  These are known as <em>Sed type
-   * codes</em>.  In the C# language interface for libSed, the type codes
+   * codes</em>.  In the C# language interface for libSEDML, the type codes
    * are defined as static integer constants in the interface class @link
    * libsedmlcs.libsedml libsedml@endlink.  The names of the type codes all begin with
    * the characters @c SEDML_. @endif@~
@@ -508,24 +508,24 @@ public:
   /**
    * Returns the first ancestor object that has the given Sed type code.
    *
-   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * @if clike LibSEDML attaches an identifying code to every kind of Sed
    * object.  These are known as <em>Sed type codes</em>.  The set of
    * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   * SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * SEDML_. @endif@if java LibSEDML attaches an identifying code to every
    * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSed, the type codes are defined as
+   * the Java language interface for libSEDML, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsedmlConstants}.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if python LibSed attaches an identifying
+   * characters @c SEDML_. @endif@if python LibSEDML attaches an identifying
    * code to every kind of Sed object.  These are known as <em>Sed type
-   * codes</em>.  In the Python language interface for libSed, the type
+   * codes</em>.  In the Python language interface for libSEDML, the type
    * codes are defined as static integer constants in the interface class
    * @link libsedml@endlink.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if csharp LibSed attaches an identifying
+   * characters @c SEDML_. @endif@if csharp LibSEDML attaches an identifying
    * code to every kind of Sed object.  These are known as <em>Sed type
-   * codes</em>.  In the C# language interface for libSed, the type codes
+   * codes</em>.  In the C# language interface for libSEDML, the type codes
    * are defined as static integer constants in the interface class @link
    * libsedmlcs.libsedml libsedml@endlink.  The names of the type codes all begin with
    * the characters @c SEDML_. @endif@~
@@ -560,8 +560,8 @@ public:
    * and consequently may not be able to establish the real line number.
    * The latter limitation is simply that different parsers seem to have
    * their own accuracy limitations, and out of all the parsers supported
-   * by libSed, none have been 100% accurate in all situations. (At this
-   * time, libSed supports the use of <a target="_blank"
+   * by libSEDML, none have been 100% accurate in all situations. (At this
+   * time, libSEDML supports the use of <a target="_blank"
    * href="http://xmlsoft.org">libxml2</a>, <a target="_blank"
    * href="http://expat.sourceforge.net/">Expat</a> and <a target="_blank"
    * href="http://xerces.apache.org/xerces-c/">Xerces</a>.)
@@ -587,8 +587,8 @@ public:
    * and consequently may not be able to establish the real column number.
    * The latter limitation is simply that different parsers seem to have
    * their own accuracy limitations, and out of all the parsers supported
-   * by libSed, none have been 100% accurate in all situations. (At this
-   * time, libSed supports the use of <a target="_blank"
+   * by libSEDML, none have been 100% accurate in all situations. (At this
+   * time, libSEDML supports the use of <a target="_blank"
    * href="http://xmlsoft.org">libxml2</a>, <a target="_blank"
    * href="http://expat.sourceforge.net/">Expat</a> and <a target="_blank"
    * href="http://xerces.apache.org/xerces-c/">Xerces</a>.)
@@ -635,7 +635,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -992,7 +992,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -1038,7 +1038,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -1088,7 +1088,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -1133,7 +1133,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -1249,7 +1249,7 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSed provides the static
+   * verify the formatting of "notes" content, libSEDML provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
    * href="http://sedml.org/Documents/Specifications">Sed specification
@@ -1331,7 +1331,7 @@ public:
 
 
   /**
-   * Returns the libSed type code for this object.
+   * Returns the libSEDML type code for this object.
    *
    * @copydetails doc_what_are_typecodes
    *
@@ -1380,7 +1380,7 @@ public:
    *
    * @warning <span class="warning">This is primarily provided for testing
    * and debugging purposes.  It may be removed in a future version of
-   * libSed.</span>
+   * libSEDML.</span>
    */
   char* toSed();
 
@@ -1665,9 +1665,9 @@ protected:
 
   /**
    * The Sed XML Schema is written such that the order of child elements
-   * is significant.  LibSed can read elements out of order.  If you
+   * is significant.  LibSEDML can read elements out of order.  If you
    * override this method to indicate the ordinal position of element with
-   * respect to its siblings, libSed will log an error if the element is
+   * respect to its siblings, libSEDML will log an error if the element is
    * read out of order.
    *
    * @return the ordinal position of the element with respect to its
@@ -2438,15 +2438,15 @@ SedBase_getVersion (const SedBase_t *sb);
 
 
 /**
- * Returns the libSed type code for this structure.
+ * Returns the libSEDML type code for this structure.
  *
  * This method MAY return the typecode of this Sed structure or it MAY
  * return SEDML_UNKNOWN.  That is, subclasses of SedBase are not required to
  * implement this method to return a typecode.  This method is meant
- * primarily for the LibSed C interface where class and subclass
+ * primarily for the LibSEDML C interface where class and subclass
  * information is not readily available.
  *
- * @note In libSed 5, the type of return value has been changed from
+ * @note In libSEDML 5, the type of return value has been changed from
  * typecode (int) to int. The return value is one of enum values defined for
  * each package. For example, return values will be one of typecode (int) if
  * this structure is defined in Sed core package, return values will be one of

@@ -94,14 +94,14 @@ SedWriter::setProgramVersion (const std::string& version)
  * or @em test.zip. Also, the filename in the archive will be @em test.sedml if the
  * given filename is @em test.sedml.zip.
  *
- * @note To create a gzip/zip file, underlying libSed needs to be linked with zlib at 
- * compile time. Also, underlying libSed needs to be linked with bzip2 to create a 
+ * @note To create a gzip/zip file, underlying libSEDML needs to be linked with zlib at 
+ * compile time. Also, underlying libSEDML needs to be linked with bzip2 to create a 
  * bzip2 file.
  * File unwritable error will be logged and @c false will be returned if a compressed 
- * file name is given and underlying libSed is not linked with the corresponding 
+ * file name is given and underlying libSEDML is not linked with the corresponding 
  * required library.
  * SedWriter::hasZlib() and SedWriter::hasBzip2() can be used to check whether
- * underlying libSed is linked with the library.
+ * underlying libSEDML is linked with the library.
  *
  * @return true on success and false if the filename could not be opened
  * for writing.
@@ -162,21 +162,21 @@ SedWriter::writeSedML (const SedDocument* d, const std::string& filename)
   }
   catch ( ZlibNotLinked& )
   {
-    // libSed is not linked with zlib.
+    // libSEDML is not linked with zlib.
     XMLErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a gzip/zip file is not enabled because "
-        << "underlying libSed is not linked with zlib."; 
+        << "underlying libSEDML is not linked with zlib."; 
     log->add(XMLError( XMLFileUnwritable, oss.str(), 0, 0) );
     return false;
   } 
   catch ( Bzip2NotLinked& )
   {
-    // libSed is not linked with bzip2.
+    // libSEDML is not linked with bzip2.
     XMLErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a bzip2 file is not enabled because "
-        << "underlying libSed is not linked with bzip2."; 
+        << "underlying libSEDML is not linked with bzip2."; 
     log->add(XMLError( XMLFileUnwritable, oss.str(), 0, 0) );
     return false;
   } 
@@ -277,9 +277,9 @@ SedWriter::writeSedMLToFile (const SedDocument* d, const std::string& filename)
 
 /*
  * Predicate returning @c true if
- * underlying libSed is linked with zlib.
+ * underlying libSEDML is linked with zlib.
  *
- * @return @c true if libSed is linked with zlib, @c false otherwise.
+ * @return @c true if libSEDML is linked with zlib, @c false otherwise.
  */
 bool 
 SedWriter::hasZlib() 
@@ -290,9 +290,9 @@ SedWriter::hasZlib()
 
 /*
  * Predicate returning @c true if
- * underlying libSed is linked with bzip2.
+ * underlying libSEDML is linked with bzip2.
  *
- * @return @c true if libSed is linked with bzip2, @c false otherwise.
+ * @return @c true if libSEDML is linked with bzip2, @c false otherwise.
  */
 bool 
 SedWriter::hasBzip2() 
