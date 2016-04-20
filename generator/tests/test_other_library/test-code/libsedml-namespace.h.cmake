@@ -1,10 +1,8 @@
-#################################################
- # @file libsedml-namespace.h.cmake
- # @brief Base file
- # @author DEVISER
- #
-
-
+/**
+ * @file    libsedml-namespace.h
+ * @brief   Defines C++ namespace of libSEDML
+ */
+ 
 
 #ifndef LIBSEDML_NAMESPACE_H
 #define LIBSEDML_NAMESPACE_H 1

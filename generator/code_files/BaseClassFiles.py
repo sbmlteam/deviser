@@ -108,8 +108,6 @@ class BaseClassFiles():
         filein = '{0}.cmake'.format(name)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
-        fileout.add_file_header()
-        fileout.skip_line(2)
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
 

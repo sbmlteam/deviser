@@ -12,6 +12,10 @@
 #ifndef LIBSEDML_OPERATION_RETURN_VALUES_H
 #define LIBSEDML_OPERATION_RETURN_VALUES_H
 
+#include <sedml/common/libsedml-namespace.h>
+#include <sedml/common/extern.h>
+
+
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 BEGIN_C_DECLS

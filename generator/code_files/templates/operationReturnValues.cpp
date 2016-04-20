@@ -144,7 +144,7 @@ LIBSBML_EXTERN
 const char *
 OperationReturnValue_toString (int returnValue)
 {
-  int length = sizeof(SBML_OPERATION_RETURN_VALUES_INDICES)/sizeof(OperationReturnValues_t);
+  int length = sizeof(SBML_OPERATION_RETURN_VALUES_INDICES)/sizeof(SBMLOperationReturnValues_t);
   for (int i = 0; i < length; ++i)
   {
     if (SBML_OPERATION_RETURN_VALUES_INDICES[i] == returnValue)

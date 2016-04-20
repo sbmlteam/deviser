@@ -1,3 +1,9 @@
+/**
+ * @file    libsbml-version.h
+ * @brief   Define libSBML version numbers for access from client software.
+ *
+ */
+
 
 #ifndef LIBSBML_VERSION_H
 #define LIBSBML_VERSION_H 

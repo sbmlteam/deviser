@@ -1,3 +1,8 @@
+/**
+ * @file    libsbml-namespace.h
+ * @brief   Defines C++ namespace of libSBML
+ */
+ 
 
 #ifndef LIBSBML_NAMESPACE_H
 #define LIBSBML_NAMESPACE_H 1

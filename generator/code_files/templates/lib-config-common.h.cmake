@@ -1,4 +1,7 @@
-
+/**
+ * @file    libsbml-config-common.h.cmake
+ * @brief   Configuration variables 
+ */
 
 /* Define to 1 if you have the <check.h> header file. */
 #cmakedefine HAVE_CHECK_H 1

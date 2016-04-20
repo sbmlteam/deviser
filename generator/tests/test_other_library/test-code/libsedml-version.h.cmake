@@ -1,9 +1,8 @@
-#################################################
- # @file libsedml-version.h.cmake
- # @brief Base file
- # @author DEVISER
- #
-
+/**
+ * @file    libsedml-version.h
+ * @brief   Define libSEDML version numbers for access from client software.
+ *
+ */
 
 
 #ifndef LIBSEDML_VERSION_H

@@ -2,6 +2,10 @@
 #ifndef LIBSBML_OPERATION_RETURN_VALUES_H
 #define LIBSBML_OPERATION_RETURN_VALUES_H
 
+#include <sbml/common/libsbml-namespace.h>
+#include <sbml/common/extern.h>
+
+
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 BEGIN_C_DECLS
