@@ -79,6 +79,6 @@ static const int SBML_INT_MIN = -2147483647 - 1;
 #include <sbml/util/memory.h>
 #include <sbml/util/util.h>
 </verbatim>
-#include <sbml/common/operationReturnValues.h>
+#include <sbml/common/SBMLOperationReturnValues.h>
 
 #endif  /* LIBSBML_COMMON_H */

@@ -1,13 +1,13 @@
 /**
- * @file operationReturnValues.cpp
- * @brief Implementation of the operationReturnValues class.
+ * @file SedOperationReturnValues.cpp
+ * @brief Implementation of the SedOperationReturnValues class.
  * @author DEVISER
  */
 
 
 
 #include <stdlib.h>
-#include <sedml/common/operationReturnValues.h>
+#include <sedml/common/SedOperationReturnValues.h>
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
@@ -149,7 +149,7 @@ static const char* SEDML_OPERATION_RETURN_VALUES_STRINGS[] =
 
 LIBSEDML_EXTERN
 const char *
-OperationReturnValue_toString (int returnValue)
+SedOperationReturnValue_toString (int returnValue)
 {
   int length = sizeof(SEDML_OPERATION_RETURN_VALUES_INDICES)/sizeof(SedOperationReturnValues_t);
   for (int i = 0; i < length; ++i)

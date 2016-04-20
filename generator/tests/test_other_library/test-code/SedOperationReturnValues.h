@@ -1,10 +1,10 @@
 /**
- * @file operationReturnValues.h
- * @brief Definition of the operationReturnValues class.
+ * @file SedOperationReturnValues.h
+ * @brief Definition of the SedOperationReturnValues class.
  * @author DEVISER
  *
  * @class 
- * @sbmlbrief{} TODO:Definition of the operationReturnValues class.
+ * @sbmlbrief{} TODO:Definition of the SedOperationReturnValues class.
  */
 
 
@@ -159,7 +159,7 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char *
-OperationReturnValue_toString (int returnValue);
+SedOperationReturnValue_toString (int returnValue);
 
 END_C_DECLS
 

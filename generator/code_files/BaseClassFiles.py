@@ -70,11 +70,10 @@ class BaseClassFiles():
         self.write_header('extern', True)
         self.write_header('lib-config', True)
         self.write_code('lib-version', True)
-        self.write_header('operationReturnValues', True)
-        self.write_code('operationReturnValues', True)
         self.write_cmake('lib-version.h')
         self.write_cmake('lib-config-common.h')
         self.write_cmake('lib-namespace.h')
+        self.write_all_files('OperationReturnValues')
 
     def write_all_files(self, name):
         self.write_header(name)

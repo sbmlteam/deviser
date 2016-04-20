@@ -87,6 +87,6 @@ static const int SEDML_INT_MIN = -2147483647 - 1;
 #include <sedml/common/extern.h>
 #include <sbml/util/memory.h>
 #include <sbml/util/util.h>
-#include <sedml/common/operationReturnValues.h>
+#include <sedml/common/SedOperationReturnValues.h>
 
 #endif  /* LIBSEDML_COMMON_H */

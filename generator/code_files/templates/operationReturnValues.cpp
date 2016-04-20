@@ -1,6 +1,6 @@
 
 #include <stdlib.h>
-#include <sbml/common/operationReturnValues.h>
+#include <sbml/common/SBMLOperationReturnValues.h>
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
@@ -142,7 +142,7 @@ static const char* SBML_OPERATION_RETURN_VALUES_STRINGS[] =
 
 LIBSBML_EXTERN
 const char *
-OperationReturnValue_toString (int returnValue)
+SBMLOperationReturnValue_toString (int returnValue)
 {
   int length = sizeof(SBML_OPERATION_RETURN_VALUES_INDICES)/sizeof(SBMLOperationReturnValues_t);
   for (int i = 0; i < length; ++i)

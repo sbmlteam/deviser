@@ -149,7 +149,7 @@ typedef enum
  */
 LIBSBML_EXTERN
 const char *
-OperationReturnValue_toString (int returnValue);
+SBMLOperationReturnValue_toString (int returnValue);
 
 END_C_DECLS
 
