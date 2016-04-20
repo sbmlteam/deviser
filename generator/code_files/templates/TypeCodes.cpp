@@ -8,6 +8,9 @@ static
 const char* SBML_TYPE_CODE_STRINGS[] =
 {
     "(Unknown SBML Type)"
+  , "SBMLDocument"
+<insert_type_strings/>
+  , "ListOf"
 };
 
 

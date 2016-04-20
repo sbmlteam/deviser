@@ -64,6 +64,7 @@ public:
 
 
 
+<add_visit_classes_header/>
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -95,6 +96,7 @@ public:
    *
    */
   virtual void leave (const ListOf &x, int type);
+<add_leave_classes_header/>
 };
 
 LIBSBML_CPP_NAMESPACE_END

@@ -36,7 +36,7 @@ def generate_templates(filename):
     ob = parser.parse_deviser_xml()
     prefix = global_variables.prefix
     os.chdir('./temp')
-    base_files = BaseClassFiles.BaseClassFiles(prefix, True)
+    base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
     os.chdir('../.')
 
@@ -45,7 +45,7 @@ def generate_common_templates(filename):
     ob = parser.parse_deviser_xml()
     prefix = global_variables.prefix
     os.chdir('./temp')
-    base_files = BaseClassFiles.BaseClassFiles(prefix, True)
+    base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_common_files()
     os.chdir('../.')
 

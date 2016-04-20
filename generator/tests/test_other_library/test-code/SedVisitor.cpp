@@ -39,6 +39,36 @@ SedVisitor::visit (const SedBase& sb)
 }
 
 
+/*
+ * Visit the SedModel
+ */
+bool
+SedVisitor::visit(const SedModel& x)
+{
+  visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedChange
+ */
+bool
+SedVisitor::visit(const SedChange& x)
+{
+  visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedAddXML
+ */
+bool
+SedVisitor::visit(const SedAddXML& x)
+{
+  visit(static_cast<const SedBase&>(x));
+}
+
+
 void
 SedVisitor::leave (const SedDocument& x)
 {
@@ -55,6 +85,35 @@ void
 SedVisitor::leave (const SedListOf& x, int type)
 {
 }
+
+
+/*
+ * Leave the SedModel
+ */
+void
+SedVisitor::leave(const SedModel& x)
+{
+}
+
+
+/*
+ * Leave the SedChange
+ */
+void
+SedVisitor::leave(const SedChange& x)
+{
+}
+
+
+/*
+ * Leave the SedAddXML
+ */
+void
+SedVisitor::leave(const SedAddXML& x)
+{
+}
+
+
 
 #endif /* __cplusplus */
 

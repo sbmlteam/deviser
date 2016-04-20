@@ -33,7 +33,9 @@ typedef enum
 {
     SEDML_UNKNOWN                    =  0
   , SEDML_DOCUMENT
-
+  , SEDML_MODEL
+  , SEDML_CHANGE
+  , SEDML_ADDXML
   , SEDML_LIST_OF
 } SedTypeCode_t;
 

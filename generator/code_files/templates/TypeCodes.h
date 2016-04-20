@@ -23,7 +23,7 @@ typedef enum
 {
     SBML_UNKNOWN                    =  0
   , SBML_DOCUMENT
-
+<insert_type_codes/>
   , SBML_LIST_OF
 } SBMLTypeCode_t;
 

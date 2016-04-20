@@ -17,6 +17,9 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 
+#include <sedml/SedModel.h>
+#include <sedml/SedChange.h>
+#include <sedml/SedAddXML.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>

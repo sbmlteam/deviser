@@ -15,6 +15,11 @@ static
 const char* SEDML_TYPE_CODE_STRINGS[] =
 {
     "(Unknown Sed Type)"
+  , "SedDocument"
+  , "Model"
+  , "Change"
+  , "AddXML"
+  , "SedListOf"
 };
 
 

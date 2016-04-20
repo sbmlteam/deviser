@@ -32,6 +32,7 @@ SBMLVisitor::visit (const SBase& sb)
 }
 
 
+<add_visit_classes_code/>
 void
 SBMLVisitor::leave (const SBMLDocument& x)
 {
@@ -48,6 +49,7 @@ void
 SBMLVisitor::leave (const ListOf& x, int type)
 {
 }
+<add_leave_classes_code/>
 
 #endif /* __cplusplus */
 

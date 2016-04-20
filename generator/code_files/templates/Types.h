@@ -10,6 +10,7 @@
 #include <sbml/SBase.h>
 #include <sbml/ListOf.h>
 
+<insert_class_includes/>
 
 #include <sbml/SBMLReader.h>
 #include <sbml/SBMLWriter.h>

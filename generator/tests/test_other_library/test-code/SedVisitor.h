@@ -74,6 +74,36 @@ public:
 
 
 
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedModel &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedChange &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedAddXML &x);
+
+
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -105,6 +135,36 @@ public:
    *
    */
   virtual void leave (const SedListOf &x, int type);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedModel &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedChange &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedAddXML &x);
 };
 
 LIBSEDML_CPP_NAMESPACE_END
