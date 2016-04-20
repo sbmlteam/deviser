@@ -217,10 +217,6 @@ def generate_other_library_code_files(name, ob):
     prefix = global_variables.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
     os.chdir(main_dir)
-    # working_class = ob['baseElements'][10]
-    # all_files = CppFiles.CppFiles(working_class, True)
-    # all_files.write_files()
-
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
     for working_class in ob['baseElements']:
@@ -230,6 +226,9 @@ def generate_other_library_code_files(name, ob):
         all_files.write_files()
     base_files = BaseClassFiles.BaseClassFiles(prefix, True)
     base_files.write_files()
+    valid = ValidationFiles.ValidationFiles(ob, True)
+    valid.write_error_table_header()
+
     os.chdir(this_dir)
 
 

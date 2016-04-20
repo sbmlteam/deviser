@@ -132,6 +132,7 @@ class BaseClassFiles():
         line = re.sub('SBML', global_variables.prefix, line)
         line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
         line = re.sub('SPEC_NAMESPACE', '\"{0}\"'.format(global_variables.namespaces[0]['namespace']), line)
+        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.lower()), line)
         return line
 
     @staticmethod

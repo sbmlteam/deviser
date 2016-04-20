@@ -2,7 +2,7 @@
 
 import os
 
-from code_files import CppFiles, BaseClassFiles
+from code_files import CppFiles, BaseClassFiles, ValidationFiles
 from parseXML import ParseXML
 from util import strFunctions, global_variables
 
@@ -38,6 +38,16 @@ def generate_templates(filename):
     os.chdir('./temp')
     base_files = BaseClassFiles.BaseClassFiles(prefix, True)
     base_files.write_files()
+    os.chdir('../.')
+
+def generate_validator(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    os.chdir('./temp')
+    valid = ValidationFiles.ValidationFiles(ob, True)
+    valid.write_error_table_header()
     os.chdir('../.')
 
 #############################################################################
@@ -102,6 +112,13 @@ def test_other_templates():
     print('')
     return fail
 
+def run_validator(name, class_name, test_case):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_validator(filename)
+    fail = compare_code_headers(class_name)
+    print('')
+    return fail
+
 
 #########################################################################
 # Main function
@@ -137,6 +154,11 @@ def main():
     test_case = 'templates'
     fail += run_templates(name, class_name, test_case, list_of)
     fail += test_other_templates()
+
+    name = 'test_sedml'
+    class_name = 'SedErrorTable'
+    test_case = 'document'
+    fail += run_validator(name, class_name, test_case)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

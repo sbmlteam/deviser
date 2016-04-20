@@ -31,7 +31,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /** 
  * Helper function for SedError().  Takes an index, Sed level and version,
  * and returns the appropriate field for the severity code out of the
-   errorTable entry.
+   sedmlErrorTable entry.
  */
 static const unsigned int
 getSeverityForEntry(unsigned int index,
@@ -44,12 +44,12 @@ getSeverityForEntry(unsigned int index,
     {
     case 1:
     default:
-      return errorTable[index].l1v1_severity;
+      return sedmlErrorTable[index].l1v1_severity;
     }
   }
   else
   {
-    return errorTable[index].l1v1_severity;
+    return sedmlErrorTable[index].l1v1_severity;
   }
 }
 
@@ -153,12 +153,12 @@ SedError::SedError (  const unsigned int errorId
   else if ( mErrorId > XMLErrorCodesUpperBound
             && mErrorId < SedCodesUpperBound )
   {
-    unsigned int tableSize = sizeof(errorTable)/sizeof(errorTable[0]);
+    unsigned int tableSize = sizeof(sedmlErrorTable)/sizeof(sedmlErrorTable[0]);
     unsigned int index = 0;
 
     for ( unsigned int i = 0; i < tableSize; i++ )
     {
-      if ( mErrorId == errorTable[i].code )
+      if ( mErrorId == sedmlErrorTable[i].code )
       {
         index = i;
         break;
@@ -186,8 +186,8 @@ SedError::SedError (  const unsigned int errorId
     // internal bookkeeping is done in libSed 3, and also to provide
     // additional info in the messages.
 
-    mCategory     = errorTable[index].category;
-    mShortMessage = errorTable[index].shortMessage;
+    mCategory     = sedmlErrorTable[index].category;
+    mShortMessage = sedmlErrorTable[index].shortMessage;
 
     ostringstream newMsg;
     mSeverity = getSeverityForEntry(index, level, version);
@@ -199,7 +199,7 @@ SedError::SedError (  const unsigned int errorId
     {
       mErrorId  = NotSchemaConformant;
       mSeverity = LIBSEDML_SEV_ERROR;
-      newMsg << errorTable[3].message << " "; // FIXME
+      newMsg << sedmlErrorTable[3].message << " "; // FIXME
     }
     else if (mSeverity == LIBSEDML_SEV_GENERAL_WARNING)
     {
@@ -213,14 +213,14 @@ SedError::SedError (  const unsigned int errorId
 
     // Finish updating the (full) error message.
 
-    if (!((string)errorTable[index].message).empty()) {
-      newMsg << errorTable[index].message << endl;
+    if (!((string)sedmlErrorTable[index].message).empty()) {
+      newMsg << sedmlErrorTable[index].message << endl;
     }
 
     // look for individual references
     // if the code for this error does not yet exist skip
 
-    if (errorTable[index].reference.ref_l1v1 != NULL)
+    if (sedmlErrorTable[index].reference.ref_l1v1 != NULL)
     {
 
       std::string ref;
@@ -232,7 +232,7 @@ SedError::SedError (  const unsigned int errorId
         {
         case 1:
         default:
-          ref = errorTable[index].reference.ref_l1v1;
+          ref = sedmlErrorTable[index].reference.ref_l1v1;
         break;
         }
        break;

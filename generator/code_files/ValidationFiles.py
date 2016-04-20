@@ -211,13 +211,19 @@ class ValidationFiles():
 
     def write_error_table_header(self):
         class_desc = ({})
-        class_desc['name'] = '{0}{1}ErrorTable'.format(self.up_package,
-                                                       self.cap_language)
+        if global_variables.is_package:
+            class_desc['name'] = '{0}{1}ErrorTable'.format(self.up_package,
+                                                           self.cap_language)
+        else:
+            class_desc['name'] = '{0}ErrorTable'.format(global_variables.prefix)
         class_desc['attribs'] = []
         self.error_file = CppHeaderFile.CppHeaderFile(class_desc, False)
         if self.verbose:
             print('Writing file {0}'.format(self.error_file.filename))
-        self.write_error_table_file()
+        if global_variables.is_package:
+            self.write_error_table_file()
+        else:
+            self.write_error_table_other_file()
         self.error_file.close_file()
 
     #########################################################################
@@ -238,6 +244,48 @@ class ValidationFiles():
         self.error_file.write_line('static const packageErrorTableEntry '
                                    '{0}ErrorTable[] '
                                    '='.format(self.package.lower()))
+        self.error_file.write_line('{')
+        done = []
+        for rule in self.class_rules:
+            if rule['typecode'] not in done:
+                self.write_table_entry(rule)
+                done.append(rule['typecode'])
+        self.error_file.write_line('};')
+        self.error_file.write_doxygen_end()
+        self.error_file.write_cppns_end()
+        self.error_file.write_defn_end()
+
+    def write_error_table_other_file(self):
+        BaseCppFile.BaseCppFile.write_file(self.error_file)
+        self.error_file.write_defn_begin()
+        self.error_file.write_line_verbatim('#include <{0}/{1}Error'
+                                            '.h>'.format(self.language,
+                                                         global_variables.prefix))
+        self.error_file.skip_line()
+        self.error_file.write_line('typedef struct {')
+        self.error_file.up_indent()
+        self.error_file.write_line('const char * ref_l1v1;')
+        self.error_file.down_indent()
+        self.error_file.write_line('} referenceEntry;')
+        self.error_file.skip_line()
+        self.error_file.skip_line()
+        self.error_file.write_line('typedef struct {')
+        self.error_file.up_indent()
+        self.error_file.write_line('unsigned int code;')
+        self.error_file.write_line('const char * shortMessage;')
+        self.error_file.write_line('unsigned int category;')
+        self.error_file.write_line('unsigned int l1v1_severity;')
+        self.error_file.write_line('const char * message;')
+        self.error_file.write_line('referenceEntry reference;')
+        self.error_file.down_indent()
+        self.error_file.write_line('{0} {1}ErrorTableEntry;'.format('}', self.language))
+        self.error_file.skip_line()
+
+        self.error_file.write_cppns_begin()
+        self.error_file.write_doxygen_start()
+        self.error_file.write_line('static const {0}ErrorTableEntry '
+                                   '{0}ErrorTable[] '
+                                   '='.format(global_variables.language.lower()))
         self.error_file.write_line('{')
         done = []
         for rule in self.class_rules:
