@@ -64,6 +64,9 @@ class BaseClassFiles():
         self.write_all_files('ErrorLog')
         self.write_all_files('Namespaces')
         self.write_all_files('Error')
+        self.write_all_files('Visitor')
+        self.write_all_files('TypeCodes')
+        self.write_header('Types')
 
     def write_common_files(self):
         self.write_header('common', True)
@@ -155,6 +158,7 @@ class BaseClassFiles():
         line = re.sub('libSBML', 'lib{0}'.format(global_variables.language.upper()), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
+        line = re.sub('CAP_SBML', '{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_',
                       '{0}_'.format(global_variables.language.upper()), line)
         line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)

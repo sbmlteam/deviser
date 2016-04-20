@@ -134,6 +134,11 @@ def test_other_templates():
     fail += compare_code_impl('SedNamespaces')
     fail += compare_code_headers('SedError')
     fail += compare_code_impl('SedError')
+    fail += compare_code_headers('SedTypes')
+    fail += compare_code_headers('SedTypeCodes')
+    fail += compare_code_impl('SedTypeCodes')
+    fail += compare_code_headers('SedVisitor')
+    fail += compare_code_impl('SedVisitor')
     print('')
     return fail
 
