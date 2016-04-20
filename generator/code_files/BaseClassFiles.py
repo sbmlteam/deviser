@@ -49,9 +49,11 @@ from base_files import BaseCMakeFile
 class BaseClassFiles():
     """Class for all Base files"""
 
-    def __init__(self, name, verbose=False):
+    def __init__(self, name, elements, verbose=False):
         # members from object
         self.class_prefix = strFunctions.upper_first(name)
+
+        self.elements = elements
 
         self.verbose = verbose
 
@@ -145,6 +147,27 @@ class BaseClassFiles():
                 i = self.print_block(fileout, lines, i)
             elif line.startswith('<sbml>'):
                 i = self.print_sbml_block(fileout, lines, i)
+            elif line.startswith('<insert_class_includes/>'):
+                self.print_includes(fileout)
+                i += 1
+            elif line.startswith('<insert_type_codes/>'):
+                self.print_typecodes(fileout)
+                i += 1
+            elif line.startswith('<insert_type_strings/>'):
+                self.print_typecode_strings(fileout)
+                i += 1
+            elif line.startswith('<add_visit_classes_header/>'):
+                self.print_visit_header(fileout)
+                i += 1
+            elif line.startswith('<add_leave_classes_header/>'):
+                self.print_leave_header(fileout)
+                i += 1
+            elif line.startswith('<add_visit_classes_code/>'):
+                self.print_visit_code(fileout)
+                i += 1
+            elif line.startswith('<add_leave_classes_code/>'):
+                self.print_leave_code(fileout)
+                i += 1
             else:
                 line = self.adjust_line(line)
                 fileout.copy_line_verbatim(line)
@@ -158,7 +181,6 @@ class BaseClassFiles():
         line = re.sub('libSBML', 'lib{0}'.format(global_variables.language.upper()), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('CAP_SBML', '{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_',
                       '{0}_'.format(global_variables.language.upper()), line)
         line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
@@ -192,3 +214,118 @@ class BaseClassFiles():
             line = lines[i]
         i += 1
         return i
+
+    def print_includes(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                fileout.copy_line_verbatim('#include <{0}/{1}.h>\n'
+                                           ''.format(global_variables.language,
+                                                     name))
+
+    def print_typecodes(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = element['typecode']
+                fileout.copy_line_verbatim('  , {0}\n'
+                                           ''.format(name))
+
+    def print_typecode_strings(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = element['name']
+                fileout.copy_line_verbatim('  , \"{0}\"\n'
+                                           ''.format(name))
+
+    def print_visit_header(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                self.write_visit_header(fileout, name)
+                fileout.skip_line(2)
+
+    def write_visit_header(self, fileout, name):
+        fileout.open_comment()
+        fileout.write_comment_line('Interface method for using the '
+                                   '<a target=\"_blank\" ')
+        fileout.write_comment_line('href=\"http://en.wikipedia.org/wiki/'
+                                   'Design_pattern_(computer_science)\"'
+                                   '><i>Visitor')
+        fileout.write_comment_line(self.adjust_line('Pattern</i></a> to '
+                                                    'perform operations on '
+                                                    'SBase objects.'))
+        fileout.write_blank_comment_line()
+        fileout.write_comment_line(self.adjust_line('@param x the '
+                                                    'SBase object to visit.'))
+        fileout.close_comment()
+        fileout.write_line('virtual bool visit (const {0} &x);'.format(name))
+
+    def print_leave_header(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                fileout.skip_line(2)
+                self.write_leave_header(fileout, name)
+
+    def write_leave_header(self, fileout, name):
+        fileout.open_comment()
+        fileout.write_comment_line('Interface method for using the '
+                                   '<a target=\"_blank\" ')
+        fileout.write_comment_line('href=\"http://en.wikipedia.org/wiki/'
+                                   'Design_pattern_(computer_science)\"'
+                                   '><i>Visitor')
+        fileout.write_comment_line(self.adjust_line('Pattern</i></a> to '
+                                                    'perform operations on '
+                                                    'SBase objects.'))
+        fileout.write_blank_comment_line()
+        fileout.write_comment_line(self.adjust_line('@param x the '
+                                                    'SBase object to leave.'))
+        fileout.close_comment()
+        fileout.write_line('virtual void leave (const {0} &x);'.format(name))
+
+    def print_visit_code(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                self.write_visit_code(fileout, name)
+
+    def write_visit_code(self, fileout, name):
+        code = dict({'title_line': 'Visit the {0}'.format(name),
+                     'params': ['const {0}& x'.format(name)],
+                     'return_lines': [],
+                     'additional': [],
+                     'function': 'visit',
+                     'return_type': 'bool',
+                     'arguments': ['const {0}& x'.format(name)],
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': '{0}Visitor'.format(global_variables.prefix),
+                     'implementation': [self.create_code_block('line', [self.adjust_line('visit(static_cast<const SBase&>(x))')])]})
+        fileout.write_function_implementation(code)
+
+    def print_leave_code(self, fileout):
+        fileout.skip_line(2)
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                self.write_leave_code(fileout, name)
+
+    def write_leave_code(self, fileout, name):
+        code = dict({'title_line': 'Leave the {0}'.format(name),
+                     'params': ['const {0}& x'.format(name)],
+                     'return_lines': [],
+                     'additional': [],
+                     'function': 'leave',
+                     'return_type': 'void',
+                     'arguments': ['const {0}& x'.format(name)],
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': '{0}Visitor'.format(global_variables.prefix),
+                     'implementation': [self.create_code_block('blank', [])]})
+        fileout.write_function_implementation(code)
+
+    @staticmethod
+    def create_code_block(code_type, lines):
+        code = dict({'code_type': code_type, 'code': lines})
+        return code
+
