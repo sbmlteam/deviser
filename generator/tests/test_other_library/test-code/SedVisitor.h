@@ -30,6 +30,9 @@ class SedBase;
 class SedDocument;
 class SedListOf;
 
+class SedModel;
+class SedChange;
+class SedAddXML;
 
 
 class SedVisitor

@@ -230,7 +230,7 @@ def main():
     name = 'test_sedml'
     num = 3
     class_name = 'SedAddXML'
-    list_of = 'SedListOfModels'
+    list_of = ''
     test_case = 'model'
     fail += run_test(name, num, class_name, test_case, list_of)
 

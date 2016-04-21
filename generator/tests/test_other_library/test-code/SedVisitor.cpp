@@ -45,7 +45,7 @@ SedVisitor::visit (const SedBase& sb)
 bool
 SedVisitor::visit(const SedModel& x)
 {
-  visit(static_cast<const SedBase&>(x));
+  return visit(static_cast<const SedBase&>(x));
 }
 
 
@@ -55,7 +55,7 @@ SedVisitor::visit(const SedModel& x)
 bool
 SedVisitor::visit(const SedChange& x)
 {
-  visit(static_cast<const SedBase&>(x));
+  return visit(static_cast<const SedBase&>(x));
 }
 
 
@@ -65,7 +65,7 @@ SedVisitor::visit(const SedChange& x)
 bool
 SedVisitor::visit(const SedAddXML& x)
 {
-  visit(static_cast<const SedBase&>(x));
+  return visit(static_cast<const SedBase&>(x));
 }
 
 

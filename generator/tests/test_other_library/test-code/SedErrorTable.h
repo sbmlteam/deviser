@@ -182,6 +182,17 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  //10804
+  {
+    InvalidNotesContent,
+    "Invalid notes content",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "Invalid contents in a <notes> element. ",
+    {""
+    }
+  },
+
   //10805
   {
     OnlyOneNotesElementAllowed,
@@ -245,35 +256,43 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20101
-  { SedmlAttributeRequiredMissing,
-    "Required sedml:required attribute on <sbml>",
+  // 10303
+  { InvalidMetaidSyntax,
+    "Invalid SId syntax",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "In all SBML documents using the Package, the <sbml> object must have the "
-    "'sedml:required' attribute.",
+    "The value of a 'sedml:metaid' must conform to the syntax of the XML Type "
+    "ID",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20101
+  { InvalidNamespaceOnSed,
+    "Invalid namespace",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "Invalid namespace declared.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20102
-  { SedmlAttributeRequiredMustBeBoolean,
-    "The sedml:required attribute must be Boolean",
+  { AllowedAttributes,
+    "Allowed attributes",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of attribute 'sedml:required' on the <sbml> object must be of "
-    "data type 'boolean'.",
+    "Allowed attributes",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20103
-  { SedmlAttributeRequiredMustHaveValue,
-    "The sedml:required attribute must be 'false'",
+  { EmptyListElement,
+    "No empty listOf",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of attribute 'sedml:required' on the <sbml> object must be set "
-    "to 'false'.",
+    "No empty lists",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -564,30 +583,27 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
    * Boundary marker.  Application-specific codes should begin at 100000.
    * ----------------------------------------------------------------------- */
 
+  //99994
+  {
+    UnknownCoreAttribute,
+    "Unknown attribute",
+    LIBSEDML_CAT_INTERNAL,
+    LIBSEDML_SEV_ERROR,
+    "An unknown attribute has been found.", 
+    {""
+    }
+   },
+
   //99999
   {
     SedCodesUpperBound,
     "Upper boundary of libSEDML-specific diagnostic codes",
     LIBSEDML_CAT_INTERNAL,
     LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
-    LIBSEDML_SEV_NOT_APPLICABLE,
     "Application-specific codes should begin at 100000.", 
-    {"",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     ""}
+    {""
     }
+   }
 };
 
 LIBSEDML_CPP_NAMESPACE_END

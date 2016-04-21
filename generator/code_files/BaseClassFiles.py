@@ -176,6 +176,9 @@ class BaseClassFiles():
             elif line.startswith('<add_specific_error_table/>'):
                 self.print_error_table(fileout)
                 i += 1
+            elif line.startswith('<add_visitor_forwards/>'):
+                self.print_visitor_forwards(fileout)
+                i += 1
             else:
                 line = self.adjust_line(line)
                 fileout.copy_line_verbatim(line)
@@ -194,6 +197,7 @@ class BaseClassFiles():
         line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
         line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
         line = re.sub('sbml', global_variables.language, line)
+        line = re.sub('SBMLSBML', '{0}{1}'.format(strFunctions.upper_first(global_variables.language), global_variables.prefix), line)
         line = re.sub('SBML', global_variables.prefix, line)
         line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
         line = re.sub('SPEC_NAMESPACE', '\"{0}\"'.format(global_variables.namespaces[0]['namespace']), line)
@@ -308,7 +312,7 @@ class BaseClassFiles():
                      'constant': False,
                      'virtual': False,
                      'object_name': '{0}Visitor'.format(global_variables.prefix),
-                     'implementation': [self.create_code_block('line', [self.adjust_line('visit(static_cast<const SBase&>(x))')])]})
+                     'implementation': [self.create_code_block('line', [self.adjust_line('return visit(static_cast<const SBase&>(x))')])]})
         fileout.write_function_implementation(code)
 
     def print_leave_code(self, fileout):
@@ -331,6 +335,13 @@ class BaseClassFiles():
                      'object_name': '{0}Visitor'.format(global_variables.prefix),
                      'implementation': [self.create_code_block('blank', [])]})
         fileout.write_function_implementation(code)
+
+    def print_visitor_forwards(self, fileout):
+        for element in self.elements:
+            if not element['name'].endswith('Document'):
+                name = strFunctions.prefix_name(element['name'])
+                fileout.write_line('class {0};'.format(name))
+
 
     @staticmethod
     def create_code_block(code_type, lines):

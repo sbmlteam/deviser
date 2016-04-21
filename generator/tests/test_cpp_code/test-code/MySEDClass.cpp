@@ -272,7 +272,7 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
     {
       logEmptyString(mId, level, version, "<MySEDClass>");
     }
-    else if (SyntaxChecker::isValidSEDMLSId(mId) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
         "conform to the syntax.");

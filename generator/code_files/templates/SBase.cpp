@@ -1887,9 +1887,9 @@ SBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == MissingOrInconsistentLevel
-            || errorId == MissingOrInconsistentVersion
-            || errorId == InvalidSBMLLevelVersion
+          if (errorId == SBMLSBMLDocumentAllowedAttributes
+            || errorId == SBMLSBMLDocumentLevelMustBeInteger
+            || errorId == SBMLSBMLDocumentVersionMustBeInteger
             || errorId == InvalidNamespaceOnSBML)
           {
             errorLoggedAlready = true;
@@ -2367,7 +2367,7 @@ SBase::getPrefix() const
 
   const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
-  if(xmlns && mSBML && !mSBML->isEnabledDefaultNS(uri))
+  if(xmlns && mSBML)
   {
     prefix = xmlns->getPrefix(uri);
   }
@@ -2454,26 +2454,6 @@ SBase::writeXMLNS (XMLOutputStream& stream) const
 }
 /** @endcond */
 
-
-
-/** @cond doxygenLibsbmlInternal */
-/*
- * Checks that SBML element has been read in the proper order.  If object
- * is not in the expected position, an error is logged.
- */
-void
-SBase::checkOrderAndLogError (SBase* object, int expected)
-{
-  int actual = object->getElementPosition();
-
-  if (actual != -1 && actual < expected)
-  {
-    SBMLErrorCode_t error = IncorrectOrderInModel;
-
-      logError(error, getLevel(), getVersion());
-  }
-}
-/** @endcond */
 
 
 /** @cond doxygenLibsbmlInternal */
@@ -2739,7 +2719,7 @@ SBase::checkXHTML(const XMLNode * xhtml)
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(UnknownError);
+    logError(SBMLUnknownError);
     return;
   }
 

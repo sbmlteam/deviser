@@ -292,12 +292,17 @@ class ProtectedFunctions():
                      'implementation': code})
 
     def write_create_object_lo(self, upkg, ns):
-        implementation = ['const std::string& name = '
-                          'stream.peek().getName()',
-                          '{0}* object = NULL'.format(self.std_base),
-                          '{0}_CREATE_NS({1}, '
-                          'get{2}Namespaces'
-                          '())'.format(upkg, ns, global_variables.prefix)]
+        if global_variables.is_package:
+            implementation = ['const std::string& name = '
+                              'stream.peek().getName()',
+                              '{0}* object = NULL'.format(self.std_base),
+                              '{0}_CREATE_NS({1}, '
+                              'get{2}Namespaces'
+                              '())'.format(upkg, ns, global_variables.prefix)]
+        else:
+            implementation = ['const std::string& name = '
+                              'stream.peek().getName()',
+                              '{0}* object = NULL'.format(self.std_base)]
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -307,20 +312,30 @@ class ProtectedFunctions():
                 self.write_create_object_class(
                     self.concretes[i]['element'], ns)
             code.append(self.create_code_block('if', implementation))
-        code.append(self.create_code_block('line',
-                                           ['delete {0}'.format(ns),
-                                            'return object']))
+        if global_variables.is_package:
+            code.append(self.create_code_block('line',
+                                               ['delete {0}'.format(ns),
+                                                'return object']))
+        else:
+            code.append(self.create_code_block('line',
+                                               ['return object']))
         return code
 
     def write_create_object_anomalous_lo(self, upkg, ns):
         # the unusual case where a list of have a child element
         # is not of the same type as the list of
-        implementation = ['const std::string& name = '
-                          'stream.peek().getName()',
-                          '{0}* object = NULL'.format(self.std_base),
-                          '{0}_CREATE_NS({1}, '
-                          'get{2}Namespaces'
-                          '())'.format(upkg, ns, global_variables.prefix)]
+        if global_variables.is_package:
+            implementation = ['const std::string& name = '
+                              'stream.peek().getName()',
+                              '{0}* object = NULL'.format(self.std_base),
+                              '{0}_CREATE_NS({1}, '
+                              'get{2}Namespaces'
+                              '())'.format(upkg, ns, global_variables.prefix)]
+        else:
+            implementation = ['const std::string& name = '
+                              'stream.peek().getName()',
+                              '{0}* object = NULL'.format(self.std_base)]
+
         code = [dict({'code_type': 'line', 'code': implementation})]
         implementation = self.write_create_object_class(self.child_name,
                                                         ns)
@@ -330,13 +345,22 @@ class ProtectedFunctions():
                 self.write_create_object_class(
                     self.child_elements[i]['element'], ns, True)
             code.append(self.create_code_block('if', implementation))
-        code.append(self.create_code_block('line',
-                                           ['delete {0}'.format(ns),
-                                            'return object']))
+        if global_variables.is_package:
+            code.append(self.create_code_block('line',
+                                               ['delete {0}'.format(ns),
+                                                'return object']))
+        else:
+            code.append(self.create_code_block('line',
+                                               ['return object']))
+
         return code
 
     @staticmethod
     def write_create_object_class(name, ns, create=False):
+        if global_variables.is_package:
+            use_ns = ns
+        else:
+            use_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
         xmlname = strFunctions.lower_first(name)
         if not global_variables.is_package:
             temp = strFunctions.remove_prefix(name)
@@ -345,14 +369,14 @@ class ProtectedFunctions():
         if not create:
             implementation = ['name == '
                               '\"{0}\"'.format(xmlname),
-                              'object = new {0}({1})'.format(name, ns),
+                              'object = new {0}({1})'.format(name, use_ns),
                               'appendAndOwn(object)']
         else:
             abbrev = strFunctions.abbrev_name(name)
             implementation = ['name == '
                               '\"{0}\"'.format(xmlname),
                               '{0} new{1}({2})'.format(name, abbrev.upper(),
-                                                       ns),
+                                                       use_ns),
                               'set{0}(&new{1})'.format(name, abbrev.upper()),
                               'object = get{0}()'.format(name)]
         return implementation
@@ -984,10 +1008,16 @@ class ProtectedFunctions():
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         for_loop = self.create_code_block('for', line)
 
-        line = ['static_cast<{0}*>(getParent{1}Object())->size() '
-                '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
-                             self.cap_language),
-                'numErrs = log->getNumErrors()', for_loop]
+        if global_variables.is_package:
+            line = ['static_cast<{0}*>(getParent{1}Object())->size() '
+                    '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
+                                 self.cap_language),
+                    'numErrs = log->getNumErrors()', for_loop]
+        else:
+            line = ['static_cast<{0}*>(getParent{1}Object())->size() '
+                    '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
+                                 global_variables.prefix),
+                    'numErrs = log->getNumErrors()', for_loop]
 
         return line
 
@@ -1126,7 +1156,7 @@ class ProtectedFunctions():
                                                                       member)]
         code.append(self.create_code_block('line', line))
 
-        check_function = 'isValid{0}SId'.format(self.cap_language)
+        check_function = 'isValidSBMLSId'.format(self.cap_language)
         if att_type == 'ID' or att_type == 'IDREF':
             check_function = 'isValidXMLID'
         if att_type == 'SId':

@@ -939,12 +939,19 @@ class ListOfQueryFunctions():
                 line = '{0}_CREATE_NS({1}ns, ' \
                        'get{2}Namespaces())'.format(pack_up, pack_low,
                                                     global_variables.prefix)
-            implementation = [line,
-                              '{0} = new {1}({2}ns)'.format(abbrev_child,
-                                                            child,
-                                                            pack_low),
-                              'delete {0}ns'.format(pack_low),
-                              'catch', '...', '']
+            if global_variables.is_package:
+                implementation = [line,
+                                  '{0} = new {1}({2}ns)'.format(abbrev_child,
+                                                                child,
+                                                                pack_low),
+                                  'delete {0}ns'.format(pack_low),
+                                  'catch', '...', '']
+            else:
+                implementation = ['{0} = new {1}(get{2}Namespaces())'
+                                  ''.format(abbrev_child,
+                                            child,
+                                            global_variables.prefix),
+                                  'catch', '...', '']
             code.append(self.create_code_block('try', implementation))
             implementation = ['{0} != NULL'.format(abbrev_child)]
             if self.is_list_of:

@@ -1892,9 +1892,9 @@ SedBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == MissingOrInconsistentLevel
-            || errorId == MissingOrInconsistentVersion
-            || errorId == InvalidSedLevelVersion
+          if (errorId == SedmlSedDocumentAllowedAttributes
+            || errorId == SedmlSedDocumentLevelMustBeInteger
+            || errorId == SedmlSedDocumentVersionMustBeInteger
             || errorId == InvalidNamespaceOnSed)
           {
             errorLoggedAlready = true;
@@ -2372,7 +2372,7 @@ SedBase::getPrefix() const
 
   const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
-  if(xmlns && mSed && !mSed->isEnabledDefaultNS(uri))
+  if(xmlns && mSed)
   {
     prefix = xmlns->getPrefix(uri);
   }
@@ -2459,26 +2459,6 @@ SedBase::writeXMLNS (XMLOutputStream& stream) const
 }
 /** @endcond */
 
-
-
-/** @cond doxygenLibsedmlInternal */
-/*
- * Checks that Sed element has been read in the proper order.  If object
- * is not in the expected position, an error is logged.
- */
-void
-SedBase::checkOrderAndLogError (SedBase* object, int expected)
-{
-  int actual = object->getElementPosition();
-
-  if (actual != -1 && actual < expected)
-  {
-    SedErrorCode_t error = IncorrectOrderInModel;
-
-      logError(error, getLevel(), getVersion());
-  }
-}
-/** @endcond */
 
 
 /** @cond doxygenLibsedmlInternal */
@@ -2744,7 +2724,7 @@ SedBase::checkXHTML(const XMLNode * xhtml)
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(UnknownError);
+    logError(SedUnknownError);
     return;
   }
 

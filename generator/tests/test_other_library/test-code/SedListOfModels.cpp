@@ -274,15 +274,13 @@ SedListOfModels::createObject(XMLInputStream& stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;
-  SEDML_CREATE_NS(sedmlns, getSedNamespaces());
 
   if (name == "model")
   {
-    object = new SedModel(sedmlns);
+    object = new SedModel(getSedNamespaces());
     appendAndOwn(object);
   }
 
-  delete sedmlns;
   return object;
 }
 

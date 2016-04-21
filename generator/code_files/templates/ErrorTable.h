@@ -175,6 +175,17 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
     }
   },
 
+  //10804
+  {
+    InvalidNotesContent,
+    "Invalid notes content",
+    LIBSBML_CAT_SBML,
+    LIBSBML_SEV_ERROR,
+    "Invalid contents in a <notes> element. ",
+    {""
+    }
+  },
+
   //10805
   {
     OnlyOneNotesElementAllowed,
@@ -195,30 +206,27 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
    * Boundary marker.  Application-specific codes should begin at 100000.
    * ----------------------------------------------------------------------- */
 
+  //99994
+  {
+    UnknownCoreAttribute,
+    "Unknown attribute",
+    LIBSBML_CAT_INTERNAL,
+    LIBSBML_SEV_ERROR,
+    "An unknown attribute has been found.", 
+    {""
+    }
+   },
+
   //99999
   {
     SBMLCodesUpperBound,
     "Upper boundary of libSBML-specific diagnostic codes",
     LIBSBML_CAT_INTERNAL,
     LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
-    LIBSBML_SEV_NOT_APPLICABLE,
     "Application-specific codes should begin at 100000.", 
-    {"",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     ""}
+    {""
     }
+   }
 };
 
 LIBSBML_CPP_NAMESPACE_END

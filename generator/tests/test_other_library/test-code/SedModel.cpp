@@ -404,9 +404,7 @@ SedModel::createAddXML()
 
   try
   {
-    SEDML_CREATE_NS(sedmlns, getSedNamespaces());
-    saxml = new SedAddXML(sedmlns);
-    delete sedmlns;
+    saxml = new SedAddXML(getSedNamespaces());
   }
   catch (...)
   {
@@ -653,7 +651,7 @@ SedModel::readAttributes(const XMLAttributes& attributes,
   bool assigned = false;
   SedErrorLog* log = getErrorLog();
 
-  if (static_cast<SedListOfModels*>(getParentSEDMLObject())->size() < 2)
+  if (static_cast<SedListOfModels*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -693,7 +691,7 @@ SedModel::readAttributes(const XMLAttributes& attributes,
     {
       logEmptyString(mId, level, version, "<SedModel>");
     }
-    else if (SyntaxChecker::isValidSEDMLSId(mId) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       logError(SedmlIdSyntaxRule, level, version, "The id '" + mId + "' does "
         "not conform to the syntax.");

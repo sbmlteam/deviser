@@ -160,7 +160,7 @@ SBMLError::SBMLError (  const unsigned int errorId
       }
     }
 
-    if ( index == 0 && mErrorId != UnknownError )
+    if ( index == 0 && mErrorId != SBMLUnknownError )
     {
       // The id is in the range of error numbers that are supposed to be in
       // the SBML layer, but it's NOT in our table. This is an internal error.

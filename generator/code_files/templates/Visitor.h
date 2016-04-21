@@ -20,6 +20,7 @@ class SBase;
 class SBMLDocument;
 class ListOf;
 
+<add_visitor_forwards/>
 
 
 class SBMLVisitor

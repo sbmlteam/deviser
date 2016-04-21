@@ -97,17 +97,36 @@ class ValidationRulesGeneral():
         rule = self.write_id_syntax_rule(self)
         self.add_rule(rule)
 
-        self.number = self.offset + 20101
-        rule = self.write_reqd_rule(self)
-        self.add_rule(rule)
+        if global_variables.is_package:
+            self.number = self.offset + 20101
+            rule = self.write_reqd_rule(self)
+            self.add_rule(rule)
 
-        self.number += 1
-        rule = self.write_reqd_bool_rule(self)
-        self.add_rule(rule)
+            self.number += 1
+            rule = self.write_reqd_bool_rule(self)
+            self.add_rule(rule)
 
-        self.number += 1
-        rule = self.write_reqd_value_rule(self)
-        self.add_rule(rule)
+            self.number += 1
+            rule = self.write_reqd_value_rule(self)
+            self.add_rule(rule)
+        else:
+            self.number += 1
+            rule = self.write_metaid_syntax_rule(self)
+            self.add_rule(rule)
+
+            self.number = self.offset + 20101
+            rule = self.write_valid_ns_rule(self)
+            self.add_rule(rule)
+
+            self.number += 1
+            rule = self.write_allowed_attributes_rule(self)
+            self.add_rule(rule)
+
+            self.number += 1
+            rule = self.write_empty_list_rule(self)
+            self.add_rule(rule)
+
+
 
     def add_rule(self, rule):
         if rule is not None:
@@ -264,3 +283,66 @@ class ValidationRulesGeneral():
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    @staticmethod
+    def write_metaid_syntax_rule(self):
+        text = 'The value of a {0} must conform to the syntax of ' \
+               'the XML Type ID'\
+            .format(strFunctions.wrap_token('metaid', self.package))
+        ref = '{0} {1}.'\
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section('primitive-types', False))
+        sev = 'ERROR'
+        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        short = 'Invalid SId syntax'.format(self.up_package)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = 'InvalidMetaidSyntax'.format(self.up_package)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    @staticmethod
+    def write_valid_ns_rule(self):
+        text = 'Invalid namespace declared.'
+        ref = '{0} {1}.'\
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section('primitive-types', False))
+        sev = 'ERROR'
+        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        short = 'Invalid namespace'.format(self.up_package)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = 'InvalidNamespaceOn{0}'.format(global_variables.prefix)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    @staticmethod
+    def write_allowed_attributes_rule(self):
+        text = 'Allowed attributes'
+        ref = '{0} {1}.'\
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section('primitive-types', False))
+        sev = 'ERROR'
+        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        short = 'Allowed attributes'.format(self.up_package)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = 'AllowedAttributes'.format(self.up_package)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
+    @staticmethod
+    def write_empty_list_rule(self):
+        text = 'No empty lists'
+        ref = '{0} {1}.'\
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section('primitive-types', False))
+        sev = 'ERROR'
+        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        short = 'No empty listOf'.format(self.up_package)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = 'EmptyListElement'.format(self.up_package)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+
