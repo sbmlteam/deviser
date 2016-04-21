@@ -233,7 +233,7 @@ class BaseClassFiles():
     def print_typecode_strings(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = element['name']
+                name = strFunctions.remove_prefix(element['name'])
                 fileout.copy_line_verbatim('  , \"{0}\"\n'
                                            ''.format(name))
 

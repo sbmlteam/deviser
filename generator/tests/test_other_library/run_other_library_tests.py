@@ -35,6 +35,8 @@ def generate_templates(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     prefix = global_variables.prefix
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
     os.chdir('./temp')
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
