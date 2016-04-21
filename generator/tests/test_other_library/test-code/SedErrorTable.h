@@ -553,7 +553,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Elements allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object must contain one and only one instance of the Sed "
+    "A <sedAddXML> object must contain one and only one instance of the XMLNode "
     "element. No other elements from the SBML Level 3 SEDML namespaces are "
     "permitted on a <sedAddXML> object. ",
     { "L3V1 Sedml V1 Section"

@@ -308,6 +308,8 @@ def get_class_from_plugin(plugin, package):
 def prefix_name(name):
     if name.startswith(global_variables.prefix):
         return name
+    elif name == 'XMLNode':
+        return name
     else:
         return '{0}{1}'.format(global_variables.prefix, name)
 
@@ -317,6 +319,8 @@ def prefix_name(name):
 def prefix_classes(working_class):
     existing_name = working_class['name']
     working_class['name'] = prefix_name(existing_name)
+    if working_class['baseClass'] != global_variables.baseClass:
+        working_class['baseClass'] = prefix_name(working_class['baseClass'])
     if 'elementName' not in working_class or len(working_class['elementName']) == 0:
         working_class['elementName'] = lower_first(existing_name)
     for attrib in working_class['attribs']:

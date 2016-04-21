@@ -52,6 +52,7 @@
 
 #include <sbml/SBase.h>
 #include <sbml/packages/qual/extension/QualExtension.h>
+#include <sbml/math/ASTNode.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN

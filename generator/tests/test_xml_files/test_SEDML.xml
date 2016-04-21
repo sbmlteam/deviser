@@ -31,7 +31,7 @@
         </element>
         <element name="AddXML" typeCode="SEDML_ADDXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
           <attributes>
-            <attribute name="newXML" required="true" type="element" abstract="false"/>
+            <attribute name="newXML" required="true" type="element" abstract="false" element="XMLNode*"/>
           </attributes>
         </element>
       </elements>

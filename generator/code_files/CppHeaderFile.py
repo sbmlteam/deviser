@@ -185,6 +185,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                 else:
                     include_lines += ['<{0}/{1}.h>'.format(self.language,
                                                            child)]
+            else:
+                if child == 'ASTNode':
+                    include_lines += ['<sbml/math/ASTNode.h>']
+                elif child == 'XMLNode':
+                    include_lines += ['<sbml/xml/XMLNode.h>']
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
@@ -210,6 +215,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         # if we are the document class for another library
         if not global_variables.is_package and self.document:
             include_lines += ['<{0}/{1}ErrorLog.h>'.format(self.language, global_variables.prefix)]
+
 
         # write them out
         for line in include_lines:

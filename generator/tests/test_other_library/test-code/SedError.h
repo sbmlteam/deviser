@@ -67,6 +67,7 @@ typedef enum
 , SedmlSedAddXMLAllowedCoreAttributes      = 20501
 , SedmlSedAddXMLAllowedCoreElements      = 20502
 , SedmlSedAddXMLAllowedElements      = 20503
+, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the Sed Core namespace. */
 , SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;
 

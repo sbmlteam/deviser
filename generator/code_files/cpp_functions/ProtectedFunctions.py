@@ -657,10 +657,14 @@ class ProtectedFunctions():
                         'const XMLToken& token = stream.next()',
                         'stream.skipText()',
                         'delete {0}'.format(member),
-                        'XMLNode* xml = new XMLNode(stream)',
-                        '{0} = new {1}(xml)'.format(member, element['element']),
-                        'stream.skipPastEnd(token)',
-                        'delete xml', 'read = true']
+                        'XMLNode* xml = new XMLNode(stream)']
+                if element['element'] == 'XMLNode':
+                    line.append('{0} = new {1}(*(static_cast<XMLToken*>(xml)))'.format(member, element['element']))
+                else:
+                    line.append('{0} = new {1}(xml)'.format(member, element['element']))
+                line.append('stream.skipPastEnd(token)')
+                line.append('delete xml')
+                line.append('read = true')
                 code.append(self.create_code_block('if', line))
         line = ['{0}::readOtherXML(stream)'.format(self.base_class),
                 'read = true']
@@ -1003,10 +1007,17 @@ class ProtectedFunctions():
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
-            if core_err not in global_variables.error_list:
-                core_err = '{0}Unknown'.format(self.package)
-            if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+            if global_variables.is_package:
+                if core_err not in global_variables.error_list:
+                    core_err = '{0}Unknown'.format(self.package)
+                if error not in global_variables.error_list:
+                    error = '{0}Unknown'.format(self.package)
+            else:
+                if core_err not in global_variables.error_list:
+                    core_err = '{0}UnknownError'.format(global_variables.prefix)
+                if error not in global_variables.error_list:
+                    error = '{0}UnknownError'.format(global_variables.prefix)
+
         if global_variables.is_package:
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                     'const std::string details = log->getError(n)->getMessage()',

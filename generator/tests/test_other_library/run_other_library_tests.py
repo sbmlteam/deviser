@@ -227,6 +227,13 @@ def main():
     test_case = 'forward declarations'
     fail += run_forward(name, class_name, test_case)
 
+    name = 'test_sedml'
+    num = 3
+    class_name = 'SedAddXML'
+    list_of = 'SedListOfModels'
+    test_case = 'model'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
 

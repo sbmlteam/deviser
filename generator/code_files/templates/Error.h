@@ -32,6 +32,7 @@ typedef enum
 , NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
 , OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML object. */
 <add_specific_errors/>
+, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SBML Core namespace. */
 , SBMLCodesUpperBound                   = 99999 /*!< Upper boundary of libSBML-specific diagnostic codes. */
 } SBMLErrorCode_t;
 
