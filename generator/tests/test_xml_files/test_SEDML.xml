@@ -12,7 +12,7 @@
           <attributes>
             <attribute name="level" required="true" type="int" abstract="false"/>
             <attribute name="version" required="true" type="int" abstract="false"/>
-            <attribute name="model" required="false" type="lo_element" element="SedModel" abstract="false"/>
+            <attribute name="model" required="false" type="lo_element" element="Model" abstract="false"/>
           </attributes>
         </element>
         <element name="Model" typeCode="SBML_SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">

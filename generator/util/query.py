@@ -256,9 +256,10 @@ def overwrites_name(root, name):
     if root is None:
         return False
     overwrites = False
+    unprefixed_name = strFunctions.remove_prefix(name)
     for element in root['baseElements']:
         for attrib in element['attribs']:
-            if attrib['element'] == name:
+            if attrib['element'] == unprefixed_name:
                 if not strFunctions.compare_no_case(name, attrib['xml_name']):
                     overwrites = True
     return overwrites

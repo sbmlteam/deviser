@@ -662,8 +662,8 @@ SedModel::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSedModelsAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlSedDocumentLOSedModelsAllowedAttributes, level,
+          version, details);
       }
     }
   }
