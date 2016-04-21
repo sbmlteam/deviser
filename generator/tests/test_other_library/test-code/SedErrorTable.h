@@ -8,9 +8,12 @@
 #ifndef SedErrorTable_H__
 #define SedErrorTable_H__
 
-
 #include <sedml/SedError.h>
 
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
+
+/** @cond doxygenLibsedmlInternal */
 typedef struct {
   const char * ref_l1v1;
 } referenceEntry;
@@ -26,52 +29,201 @@ typedef struct {
 } sedmlErrorTableEntry;
 
 
-
-LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
 static const sedmlErrorTableEntry sedmlErrorTable[] =
 {
-  // 110100
-  { SedmlUnknown,
-    "Unknown error from Sedml",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Unknown error from Sedml",
-    { ""
+  // 10000
+  { SedUnknownError, 
+    "Encountered unknown internal libSEDML error",
+    LIBSEDML_CAT_INTERNAL, 
+    LIBSEDML_SEV_FATAL,
+    "Unrecognized error encountered by libSEDML",
+    {"",
     }
   },
 
-  // 110101
+  //10001
+  {
+    NotUTF8,
+    "File does not use UTF-8 encoding",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "An Sed XML file must use UTF-8 as the character encoding. More "
+    "precisely, the 'encoding' attribute of the XML declaration at the "
+    "beginning of the XML data stream cannot have a value other than "
+    "'UTF-8'. An example valid declaration is "
+    "'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'.",
+    {""
+    }
+  },
+
+  //10002
+  {
+    UnrecognizedElement,
+    "Encountered unrecognized element",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "An Sed XML document must not contain undefined elements or attributes "
+    "in the Sed namespace. Documents containing unknown elements or "
+    "attributes placed in the Sed namespace do not conform to the Sed "
+    "specification.",  
+    {""
+    }
+  },
+
+  //10003
+  {
+    NotSchemaConformant,
+    "Document does not conform to the Sed XML schema",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "An Sed XML document must conform to the XML Schema for the corresponding "
+    "Sed Level, Version and Release. The XML Schema for Sed defines the "
+    "basic Sed object structure, the data types used by those objects, and the "
+    "order in which the objects may appear in an Sed document.",
+    {""
+    }
+  },
+
+  //10201
+  {
+    InvalidMathElement,
+    "Invalid MathML",
+    LIBSEDML_CAT_MATHML_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "All MathML content in Sed must appear within a <math> element, and the "
+    "<math> element must be either explicitly or implicitly in the XML "
+    "namespace \"http://www.w3.org/1998/Math/MathML\".",
+    {""
+    }
+  },
+
+  //10401
+  {
+    MissingAnnotationNamespace,
+    "Missing declaration of the XML namespace for the annotation",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "Every top-level element within an annotation element must "
+    "have a namespace declared.",
+    {""
+    }
+  },
+
+  //10402
+  {
+    DuplicateAnnotationNamespaces,
+    "Multiple annotations using the same XML namespace",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "There cannot be more than one top-level element using a "
+    "given namespace inside a given annotation element. ", 
+    {""
+    }
+  },
+
+  //10403
+  {
+    SedNamespaceInAnnotation,
+    "The Sed XML namespace cannot be used in an Annotation object",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "Top-level elements within an annotation element cannot use any Sed "
+    "namespace, whether explicitly or implicitly (by failing "
+    "to declare any namespace).",
+    {""
+    }
+  },
+
+  //10404
+  {
+    MultipleAnnotations,
+    "Only one Annotation object is permitted under a given Sed object",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "A given Sed object may contain at most one <annotation> element.",
+    {""
+    }
+  },
+
+  //10801
+  {
+    NotesNotInXHTMLNamespace,
+    "Notes must be placed in the XHTML XML namespace",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "The contents of the <notes> element must be explicitly placed in the "
+    "XHTML XML namespace.", 
+    {""
+    }
+  },
+
+  //10802
+  {
+    NotesContainsXMLDecl,
+    "XML declarations are not permitted in Notes objects",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "The contents of the <notes> element must not contain an XML declaration "
+    "(i.e., a string of the form \"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\" "
+    "or similar).",
+    {""
+    }
+  },
+
+  //10803
+  {
+    NotesContainsDOCTYPE,
+    "XML DOCTYPE elements are not permitted in Notes objects",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "The contents of the <notes> element must not contain an XML DOCTYPE "
+    "declaration (i.e., a string beginning with the characters \"<!DOCTYPE\". ",
+    {""
+    }
+  },
+
+  //10805
+  {
+    OnlyOneNotesElementAllowed,
+    "Only one Notes subobject is permitted on a given Sed object",
+    LIBSEDML_CAT_SEDML,
+    LIBSEDML_SEV_ERROR,
+    "A given Sed object may contain at most one <notes> element. ",
+    {""
+    }
+  },
+
+  /* --------------------------------------------------------------------------
+   * Boundary marker.  Sed specific errors.
+   * ----------------------------------------------------------------------- */
+
+  // 10101
   { SedmlNSUndeclared,
     "The Sedml namespace is not correctly declared.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "To conform to the SEDML Package specification for SBML Level~1 Version~1, "
-    "an SBML document must declare "
+    "To conform to the Package specification for SBML Level~1 Version~1, an "
+    "SBML document must declare "
     "'http://www.sbml.org/sbml/level1/version1/sedml/version1' as the "
     "XMLNamespaceto use for elements of this package.",
     { "L3V1 Sedml V1 Section 3.1"
     }
   },
 
-  // 110102
+  // 10102
   { SedmlElementNotInNs,
     "Element not in Sedml namespace",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
-    "SEDML Package must use the "
+    "Package must use the "
     "'http://www.sbml.org/sbml/level1/version1/sedml/version1' namespace, "
     "declaring so either explicitly or implicitly.",
     { "L3V1 Sedml V1 Section 3.1"
     }
   },
 
-  // 110301
+  // 10301
   { SedmlDuplicateComponentId,
     "Duplicate 'id' attribute value",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -82,7 +234,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 110302
+  // 10302
   { SedmlIdSyntaxRule,
     "Invalid SId syntax",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -93,18 +245,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120101
+  // 20101
   { SedmlAttributeRequiredMissing,
     "Required sedml:required attribute on <sbml>",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "In all SBML documents using the SEDML Package, the <sbml> object must have "
-    "the 'sedml:required' attribute.",
+    "In all SBML documents using the Package, the <sbml> object must have the "
+    "'sedml:required' attribute.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
-  // 120102
+  // 20102
   { SedmlAttributeRequiredMustBeBoolean,
     "The sedml:required attribute must be Boolean",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -115,7 +267,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120103
+  // 20103
   { SedmlAttributeRequiredMustHaveValue,
     "The sedml:required attribute must be 'false'",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -126,7 +278,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120201
+  // 20201
   { SedmlSedDocumentAllowedCoreAttributes,
     "Core attributes allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -138,7 +290,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120202
+  // 20202
   { SedmlSedDocumentAllowedCoreElements,
     "Core elements allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -150,7 +302,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120203
+  // 20203
   { SedmlSedDocumentAllowedAttributes,
     "Attributes allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -162,7 +314,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120204
+  // 20204
   { SedmlSedDocumentAllowedElements,
     "Elements allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -174,7 +326,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120205
+  // 20205
   { SedmlSedDocumentLevelMustBeInteger,
     "Level attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -185,7 +337,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120206
+  // 20206
   { SedmlSedDocumentVersionMustBeInteger,
     "Version attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -196,7 +348,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120207
+  // 20207
   { SedmlSedDocumentEmptyLOElements,
     "No Empty ListOf elements allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -207,7 +359,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120208
+  // 20208
   { SedmlSedDocumentLOSedModelsAllowedCoreElements,
     "Core elements allowed on <listOfSedModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -219,7 +371,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120209
+  // 20209
   { SedmlSedDocumentLOSedModelsAllowedCoreAttributes,
     "Core attributes allowed on <listOfSedModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -231,7 +383,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120301
+  // 20301
   { SedmlSedModelAllowedCoreAttributes,
     "Core attributes allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -243,7 +395,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120302
+  // 20302
   { SedmlSedModelAllowedCoreElements,
     "Core elements allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -255,7 +407,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120303
+  // 20303
   { SedmlSedModelAllowedAttributes,
     "Attributes allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -268,7 +420,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120304
+  // 20304
   { SedmlSedModelAllowedElements,
     "Elements allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -280,7 +432,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120305
+  // 20305
   { SedmlSedModelSourceMustBeString,
     "Source attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -291,7 +443,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120306
+  // 20306
   { SedmlSedModelNameMustBeString,
     "Name attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -302,7 +454,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120307
+  // 20307
   { SedmlSedModelLanguageMustBeString,
     "Language attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -313,7 +465,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120308
+  // 20308
   { SedmlSedModelEmptyLOElements,
     "No Empty ListOf elements allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -324,7 +476,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120309
+  // 20309
   { SedmlSedModelLOSedChangesAllowedCoreElements,
     "Core elements allowed on <listOfSedChanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -336,7 +488,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120310
+  // 20310
   { SedmlSedModelLOSedChangesAllowedCoreAttributes,
     "Core attributes allowed on <listOfSedChanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -348,7 +500,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120401
+  // 20401
   { SedmlSedChangeAllowedCoreAttributes,
     "Core attributes allowed on <sedChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -360,7 +512,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120402
+  // 20402
   { SedmlSedChangeAllowedCoreElements,
     "Core elements allowed on <sedChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -372,7 +524,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120501
+  // 20501
   { SedmlSedAddXMLAllowedCoreAttributes,
     "Core attributes allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -384,7 +536,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120502
+  // 20502
   { SedmlSedAddXMLAllowedCoreElements,
     "Core elements allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -396,7 +548,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 120503
+  // 20503
   { SedmlSedAddXMLAllowedElements,
     "Elements allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -408,17 +560,40 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  /* --------------------------------------------------------------------------
+   * Boundary marker.  Application-specific codes should begin at 100000.
+   * ----------------------------------------------------------------------- */
+
+  //99999
+  {
+    SedCodesUpperBound,
+    "Upper boundary of libSEDML-specific diagnostic codes",
+    LIBSEDML_CAT_INTERNAL,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    LIBSEDML_SEV_NOT_APPLICABLE,
+    "Application-specific codes should begin at 100000.", 
+    {"",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""}
+    }
 };
 
+LIBSEDML_CPP_NAMESPACE_END
 /** @endcond */
 
 
 
-LIBSEDML_CPP_NAMESPACE_END
-
-
-
-
 #endif /* !SedErrorTable_H__ */
-
 

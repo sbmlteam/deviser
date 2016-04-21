@@ -42,6 +42,7 @@ import os
 
 from . import CppHeaderFile
 from . import CppCodeFile
+from . import ValidationFiles
 from util import strFunctions, global_variables
 from base_files import BaseCMakeFile
 
@@ -69,6 +70,7 @@ class BaseClassFiles():
         self.write_all_files('Visitor')
         self.write_all_files('TypeCodes')
         self.write_header('Types')
+        self.write_header('ErrorTable')
 
     def write_common_files(self):
         self.write_header('common', True)
@@ -167,6 +169,12 @@ class BaseClassFiles():
                 i += 1
             elif line.startswith('<add_leave_classes_code/>'):
                 self.print_leave_code(fileout)
+                i += 1
+            elif line.startswith('<add_specific_errors/>'):
+                self.print_error_enum(fileout)
+                i += 1
+            elif line.startswith('<add_specific_error_table/>'):
+                self.print_error_table(fileout)
                 i += 1
             else:
                 line = self.adjust_line(line)
@@ -329,3 +337,28 @@ class BaseClassFiles():
         code = dict({'code_type': code_type, 'code': lines})
         return code
 
+    def print_error_enum(self, fileout):
+        for error in global_variables.class_rules:
+            name = error['typecode']
+            if not name.endswith('Unknown'):
+                fileout.copy_line_verbatim(', {0}      = {1}\n'
+                                           ''.format(name, error['number']))
+
+    def print_error_table(self, fileout):
+        # create a dummy object so we can use the validation files code
+        lib_object = dict({'name': '',
+                           'offset': 0,
+                           'baseElements': None,
+                           'plugins': None,
+                           'fullname': '',
+                           'base_level': 1,
+                           'base_version': 1,
+                           'pkg_version': 1,
+                           'required': True,
+                           'enums': None})
+        valid = ValidationFiles.ValidationFiles(lib_object, True)
+        valid.set_error_file(fileout)
+        for error in global_variables.class_rules:
+            name = error['typecode']
+            if not name.endswith('Unknown'):
+                valid.write_table_entry(error)

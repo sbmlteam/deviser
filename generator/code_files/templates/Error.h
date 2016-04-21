@@ -17,32 +17,21 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-  UnknownError                          = 10000 /*!< Encountered unknown internal libSBML error. */
-, NotUTF8                               = 10101 /*!< File does not use UTF-8 encoding. */
-, UnrecognizedElement                   = 10102 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10103 /*!< Document does not conform to the SBML XML schema. */
-, DuplicateComponentId                  = 10301 /*!< Duplicate 'id' attribute value. */
+  SBMLUnknownError                      = 10000 /*!< Encountered unknown internal libSBML error. */
+, NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
+, UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
+, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML XML schema. */
+, InvalidMathElement                    = 10201
 , MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
 , DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
 , SBMLNamespaceInAnnotation             = 10403 /*!< The SBML XML namespace cannot be used in an Annotation object. */
 , MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML object. */
 , AnnotationNotElement                  = 10405
-, InvalidMathElement                    = 10501
 , NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
 , NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
 , NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
-, InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
 , OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML object. */
-, InvalidNamespaceOnSBML                = 20101 /*!< Invalid XML namespace for the SBML container element. */
-, MissingOrInconsistentLevel            = 20102 /*!< Missing or inconsistent value for the 'level' attribute. */
-, MissingOrInconsistentVersion          = 20103 /*!< Missing or inconsistent value for the 'version' attribute. */
-, LevelPositiveInteger                  = 20105 /*!< The 'level' attribute must have a positive integer value. */
-, VersionPositiveInteger                = 20106 /*!< The 'version' attribute must have a positive integer value. */
-, InvalidSBMLLevelVersion               = 20107
-, AllowedAttributes                     = 20108 /*!< Invalid attribute found on the Sed container element. */
-, InvalidMetaidSyntax                   = 20109
-, IncorrectOrderInModel                 = 20110
-, EmptyListElement                      = 20111
+<add_specific_errors/>
 , SBMLCodesUpperBound                   = 99999 /*!< Upper boundary of libSBML-specific diagnostic codes. */
 } SBMLErrorCode_t;
 

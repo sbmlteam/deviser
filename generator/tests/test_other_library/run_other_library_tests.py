@@ -37,6 +37,7 @@ def generate_templates(filename):
     prefix = global_variables.prefix
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    ValidationFiles.ValidationFiles(ob, True)
     os.chdir('./temp')
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
@@ -141,6 +142,7 @@ def test_other_templates():
     fail += compare_code_impl('SedTypeCodes')
     fail += compare_code_headers('SedVisitor')
     fail += compare_code_impl('SedVisitor')
+    fail += compare_code_headers('SedErrorTable')
     print('')
     return fail
 
@@ -210,10 +212,10 @@ def main():
     fail += run_templates(name, class_name, test_case, list_of)
     fail += test_other_templates()
 
-    name = 'test_sedml'
-    class_name = 'SedErrorTable'
-    test_case = 'document'
-    fail += run_validator(name, class_name, test_case)
+    # name = 'test_sedml'
+    # class_name = 'SedErrorTable'
+    # test_case = 'document'
+    # fail += run_validator(name, class_name, test_case)
 
     name = 'test_sedml'
     class_name = 'SedBase'

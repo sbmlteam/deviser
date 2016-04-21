@@ -88,20 +88,31 @@ class ValidationFiles():
 
     ##########################################################################
 
+    def set_error_file(self, fileout):
+        self.error_file = fileout
+
+    ##########################################################################
+
     # initial populating lists
     def create_rule_structure(self):
         tex_file = BaseTexFile.BaseTexFile('', '', self.lib_object)
         tex_file.sort_class_names(self.sbml_classes)
         tex_file.sort_attribute_names(self.sbml_classes)
         tex_file.sort_enum_names(self.enums)
-        number = self.offset
+        if global_variables.is_package:
+            number = self.offset
+        else:
+            number = 0
         rules = ValidationRulesGeneral\
             .ValidationRulesGeneral(self.fullname, number, self.package,
                                     self.pkg_ref, self.level, self.version,
                                     self.pkg_version, self.reqd_status)
         rules.determine_rules()
         self.class_rules += rules.rules
-        number = self.offset + 20200
+        if global_variables.is_package:
+            number = self.offset + 20200
+        else:
+            number = 20200
         for i in range(0, len(self.plugins)):
             rules = ValidationRulesForPlugin.ValidationRulesForPlugin(
                 self.plugins[i], self.fullname, number,

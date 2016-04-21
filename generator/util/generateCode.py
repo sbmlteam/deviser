@@ -220,6 +220,8 @@ def generate_other_library_code_files(name, ob):
     os.chdir(main_dir)
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
+    # this populates the error structures
+    valid = ValidationFiles.ValidationFiles(ob, True)
     for working_class in ob['baseElements']:
         if working_class['name'] == global_variables.document_class:
             working_class['document'] = True
@@ -232,12 +234,6 @@ def generate_other_library_code_files(name, ob):
     base_files.write_common_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
-    os.chdir(this_dir)
-    os.chdir(main_dir)
-    valid = ValidationFiles.ValidationFiles(ob, True)
-    valid.write_error_table_header()
-    os.chdir(this_dir)
-
     os.chdir(this_dir)
 
 
