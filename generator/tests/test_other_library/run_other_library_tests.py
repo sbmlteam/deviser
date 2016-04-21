@@ -97,6 +97,11 @@ def compare_code_cmake(class_name):
     temp_file = '.\\temp\\{0}.cmake'.format(class_name)
     return compare_files(correct_file, temp_file)
 
+def compare_code_txt(class_name):
+    correct_file = '.\\test-code\\{0}.txt'.format(class_name)
+    temp_file = '.\\temp\\{0}.txt'.format(class_name)
+    return compare_files(correct_file, temp_file)
+
 
 #############################################################################
 # Specific test functions
@@ -143,6 +148,7 @@ def test_other_templates():
     fail += compare_code_headers('SedVisitor')
     fail += compare_code_impl('SedVisitor')
     fail += compare_code_headers('SedErrorTable')
+    fail += compare_code_txt('CMakeLists')
     print('')
     return fail
 

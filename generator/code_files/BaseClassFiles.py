@@ -44,7 +44,7 @@ from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
 from util import strFunctions, global_variables
-from base_files import BaseCMakeFile
+from base_files import BaseFile, BaseCMakeFile
 
 
 class BaseClassFiles():
@@ -71,6 +71,7 @@ class BaseClassFiles():
         self.write_all_files('TypeCodes')
         self.write_header('Types')
         self.write_header('ErrorTable')
+        self.write_cmake_file()
 
     def write_common_files(self):
         self.write_header('common', True)
@@ -373,3 +374,12 @@ class BaseClassFiles():
             name = error['typecode']
             if not name.endswith('Unknown'):
                 valid.write_table_entry(error)
+
+    def write_cmake_file(self):
+        fileout = BaseFile.BaseFile('CMakeLists', 'txt')
+        filein = 'CMakeLists.txt'
+        if self.verbose:
+            print('Writing file {0}'.format(fileout.filename))
+        self.copy_file_contents(fileout, filein)
+        fileout.close_file()
+
