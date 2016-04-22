@@ -659,19 +659,23 @@ class ProtectedFunctions():
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
+                nested_if = []
                 line = ['stream.get{0}Namespaces() == '
                         'NULL'.format(global_variables.prefix),
                         'stream.set{0}Namespaces(new '
                         '{0}Namespaces(getLevel(), '
                         'getVersion()))'.format(global_variables.prefix)]
-                nested_if = self.create_code_block('if', line)
+                if global_variables.is_package:
+                    nested_if = self.create_code_block('if', line)
                 implementation = ['name == \"math\"',
                                   'const XMLToken elem = stream.peek()',
                                   'const std::string prefix = '
-                                  'checkMathMLNamespace(elem)',
-                                  nested_if, 'delete mMath',
-                                  'mMath = readMathML(stream, prefix)',
-                                  'read = true']
+                                  'checkMathMLNamespace(elem)']
+                if len(nested_if) > 0:
+                    implementation.append(nested_if)
+                implementation.append('delete mMath')
+                implementation.append('mMath = readMathML(stream, prefix)')
+                implementation.append('read = true')
                 code.append(self.create_code_block('if', implementation))
             elif 'is_ml' in element and element['is_ml']:
                 member = element['memberName']
@@ -1168,7 +1172,12 @@ class ProtectedFunctions():
                            '\"\' does not conform to the ' \
                            'syntax."'.format(name, member)
             # want type without ref
-            if att_type.endswith('Ref') or att_type.endswith('REF'):
+            if att_type == 'SIdRef':
+                if 'element' not in attribute or len(attribute['element']) == 0:
+                    type_wanted = 'SId'
+                else:
+                    type_wanted = attribute['element']
+            elif att_type.endswith('Ref') or att_type.endswith('REF'):
                 length = len(att_type)
                 type_wanted = att_type[0:length-3]
             else:
