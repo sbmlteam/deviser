@@ -623,8 +623,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <sedSetValue> object may contain one and only one instance of the "
-    "SedASTNode element. No other elements from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedSetValue> object. ",
+    "ASTNode element. No other elements from the SBML Level 3 SEDML namespaces "
+    "are permitted on a <sedSetValue> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },

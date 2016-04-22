@@ -308,7 +308,7 @@ def get_class_from_plugin(plugin, package):
 def prefix_name(name):
     if name.startswith(global_variables.prefix):
         return name
-    elif name == 'XMLNode':
+    elif name == 'XMLNode' or name == 'ASTNode':
         return name
     else:
         return '{0}{1}'.format(global_variables.prefix, name)

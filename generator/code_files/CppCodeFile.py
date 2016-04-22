@@ -199,8 +199,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                                  self.package))
 
         if write_math:
-            self.write_line_verbatim('#include <{0}/math/MathML'
-                                     '.h>'.format(self.language))
+            self.write_line_verbatim('#include <sbml/math/MathML.h>')
 
         if len(concrete_classes) > 0:
             self.skip_line()

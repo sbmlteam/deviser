@@ -1,0 +1,1103 @@
+/**
+ * @file SedSetValue.cpp
+ * @brief Implementation of the SedSetValue class.
+ * @author DEVISER
+ */
+#include <sedml/SedSetValue.h>
+#include <sedml/SedListOfSetValues.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/math/MathML.h>
+
+
+using namespace std;
+
+
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
+
+
+
+
+#ifdef __cplusplus
+
+
+/*
+ * Creates a new SedSetValue using the given SEDML Level and @ p version
+ * values.
+ */
+SedSetValue::SedSetValue(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mModelReference ("")
+  , mSymbol ("")
+  , mTarget ("")
+  , mRange ("")
+  , mMath (NULL)
+{
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  connectToChild();
+}
+
+
+/*
+ * Creates a new SedSetValue using the given SedNamespaces object @p sedmlns.
+ */
+SedSetValue::SedSetValue(SedNamespaces *sedmlns)
+  : SedBase(sedmlns)
+  , mModelReference ("")
+  , mSymbol ("")
+  , mTarget ("")
+  , mRange ("")
+  , mMath (NULL)
+{
+  setElementNamespace(sedmlns->getURI());
+  connectToChild();
+}
+
+
+/*
+ * Copy constructor for SedSetValue.
+ */
+SedSetValue::SedSetValue(const SedSetValue& orig)
+  : SedBase( orig )
+  , mModelReference ( orig.mModelReference )
+  , mSymbol ( orig.mSymbol )
+  , mTarget ( orig.mTarget )
+  , mRange ( orig.mRange )
+  , mMath ( NULL )
+{
+  if (orig.mMath != NULL)
+  {
+    mMath = orig.mMath->deepCopy();
+  }
+
+  connectToChild();
+}
+
+
+/*
+ * Assignment operator for SedSetValue.
+ */
+SedSetValue&
+SedSetValue::operator=(const SedSetValue& rhs)
+{
+  if (&rhs != this)
+  {
+    SedBase::operator=(rhs);
+    mModelReference = rhs.mModelReference;
+    mSymbol = rhs.mSymbol;
+    mTarget = rhs.mTarget;
+    mRange = rhs.mRange;
+    delete mMath;
+    if (rhs.mMath != NULL)
+    {
+      mMath = rhs.mMath->deepCopy();
+    }
+    else
+    {
+      mMath = NULL;
+    }
+
+    connectToChild();
+  }
+
+  return *this;
+}
+
+
+/*
+ * Creates and returns a deep copy of this SedSetValue object.
+ */
+SedSetValue*
+SedSetValue::clone() const
+{
+  return new SedSetValue(*this);
+}
+
+
+/*
+ * Destructor for SedSetValue.
+ */
+SedSetValue::~SedSetValue()
+{
+  delete mMath;
+  mMath = NULL;
+}
+
+
+/*
+ * Returns the value of the "modelReference" attribute of this SedSetValue.
+ */
+const std::string&
+SedSetValue::getModelReference() const
+{
+  return mModelReference;
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedSetValue.
+ */
+const std::string&
+SedSetValue::getSymbol() const
+{
+  return mSymbol;
+}
+
+
+/*
+ * Returns the value of the "target" attribute of this SedSetValue.
+ */
+const std::string&
+SedSetValue::getTarget() const
+{
+  return mTarget;
+}
+
+
+/*
+ * Returns the value of the "range" attribute of this SedSetValue.
+ */
+const std::string&
+SedSetValue::getRange() const
+{
+  return mRange;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSetValue's "modelReference" attribute
+ * is set.
+ */
+bool
+SedSetValue::isSetModelReference() const
+{
+  return (mModelReference.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSetValue's "symbol" attribute is set.
+ */
+bool
+SedSetValue::isSetSymbol() const
+{
+  return (mSymbol.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSetValue's "target" attribute is set.
+ */
+bool
+SedSetValue::isSetTarget() const
+{
+  return (mTarget.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSetValue's "range" attribute is set.
+ */
+bool
+SedSetValue::isSetRange() const
+{
+  return (mRange.empty() == false);
+}
+
+
+/*
+ * Sets the value of the "modelReference" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setModelReference(const std::string& modelReference)
+{
+  if (!(SyntaxChecker::isValidInternalSId(modelReference)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mModelReference = modelReference;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "symbol" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setSymbol(const std::string& symbol)
+{
+  mSymbol = symbol;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "target" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setTarget(const std::string& target)
+{
+  mTarget = target;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "range" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setRange(const std::string& range)
+{
+  if (!(SyntaxChecker::isValidInternalSId(range)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mRange = range;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Unsets the value of the "modelReference" attribute of this SedSetValue.
+ */
+int
+SedSetValue::unsetModelReference()
+{
+  mModelReference.erase();
+
+  if (mModelReference.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "symbol" attribute of this SedSetValue.
+ */
+int
+SedSetValue::unsetSymbol()
+{
+  mSymbol.erase();
+
+  if (mSymbol.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "target" attribute of this SedSetValue.
+ */
+int
+SedSetValue::unsetTarget()
+{
+  mTarget.erase();
+
+  if (mTarget.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "range" attribute of this SedSetValue.
+ */
+int
+SedSetValue::unsetRange()
+{
+  mRange.erase();
+
+  if (mRange.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Returns the value of the "math" element of this SedSetValue.
+ */
+const ASTNode*
+SedSetValue::getMath() const
+{
+  return mMath;
+}
+
+
+/*
+ * Returns the value of the "math" element of this SedSetValue.
+ */
+ASTNode*
+SedSetValue::getMath()
+{
+  return mMath;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSetValue's "math" element is set.
+ */
+bool
+SedSetValue::isSetMath() const
+{
+  return (mMath != NULL);
+}
+
+
+/*
+ * Sets the value of the "math" element of this SedSetValue.
+ */
+int
+SedSetValue::setMath(const ASTNode* math)
+{
+  if (mMath == math)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (math == NULL)
+  {
+    delete mMath;
+    mMath = NULL;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (!(math->isWellFormedASTNode()))
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else
+  {
+    delete mMath;
+    mMath = (math != NULL) ? math->deepCopy() : NULL;
+    if (mMath != NULL)
+    {
+      mMath->setParentSEDMLObject(this);
+    }
+
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Unsets the value of the "math" element of this SedSetValue.
+ */
+int
+SedSetValue::unsetMath()
+{
+  delete mMath;
+  mMath = NULL;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * @copydoc doc_renamesidref_common
+ */
+void
+SedSetValue::renameSIdRefs(const std::string& oldid, const std::string& newid)
+{
+  if (isSetModelReference() && mModelReference == oldid)
+  {
+    setModelReference(newid);
+  }
+
+  if (isSetRange() && mRange == oldid)
+  {
+    setRange(newid);
+  }
+
+  if (isSetMath())
+  {
+    mMath->renameSIdRefs(oldid, newid);
+  }
+}
+
+
+/*
+ * Returns the XML element name of this SedSetValue object.
+ */
+const std::string&
+SedSetValue::getElementName() const
+{
+  static const string name = "setValue";
+  return name;
+}
+
+
+/*
+ * Returns the libSEDML type code for this SedSetValue object.
+ */
+int
+SedSetValue::getTypeCode() const
+{
+  return SEDML_TASK_SETVALUE;
+}
+
+
+/*
+ * Predicate returning @c true if all the required attributes for this
+ * SedSetValue object have been set.
+ */
+bool
+SedSetValue::hasRequiredAttributes() const
+{
+  bool allPresent = true;
+
+  if (isSetModelReference() == false)
+  {
+    allPresent = false;
+  }
+
+  return allPresent;
+}
+
+
+/*
+ * Predicate returning @c true if all the required elements for this
+ * SedSetValue object have been set.
+ */
+bool
+SedSetValue::hasRequiredElements() const
+{
+  bool allPresent = true;
+
+  return allPresent;
+}
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Write any contained elements
+ */
+void
+SedSetValue::writeElements(XMLOutputStream& stream) const
+{
+  SedBase::writeElements(stream);
+
+  if (isSetMath() == true)
+  {
+    writeMathML(getMath(), stream, getSedNamespaces());
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Accepts the given SedVisitor
+ */
+bool
+SedSetValue::accept(SedVisitor& v) const
+{
+  return false;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the parent SedDocument
+ */
+void
+SedSetValue::setSedDocument(SedDocument* d)
+{
+  SedBase::setSedDocument(d);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Connects to child elements
+ */
+void
+SedSetValue::connectToChild()
+{
+  SedBase::connectToChild();
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds the expected attributes for this element
+ */
+void
+SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
+{
+  SedBase::addExpectedAttributes(attributes);
+
+  attributes.add("modelReference");
+
+  attributes.add("symbol");
+
+  attributes.add("target");
+
+  attributes.add("range");
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Reads the expected attributes into the member data variables
+ */
+void
+SedSetValue::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  unsigned int numErrs;
+  bool assigned = false;
+  SedErrorLog* log = getErrorLog();
+
+  if (static_cast<SedListOfSetValues*>(getParentSedObject())->size() < 2)
+  {
+    numErrs = log->getNumErrors();
+    for (int n = numErrs-1; n >= 0; n--)
+    {
+      if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownCoreAttribute);
+        log->logError(SedmlLOSedSetValuesAllowedAttributes, level, version,
+          details);
+      }
+    }
+  }
+
+  SedBase::readAttributes(attributes, expectedAttributes);
+  numErrs = log->getNumErrors();
+
+  for (int n = numErrs-1; n >= 0; n--)
+  {
+    if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownCoreAttribute);
+      log->logError(SedmlSedSetValueAllowedAttributes, level, version,
+        details);
+    }
+  }
+
+  // 
+  // modelReference SIdRef (use = "required" )
+  // 
+
+  assigned = attributes.readInto("modelReference", mModelReference);
+
+  if (assigned == true)
+  {
+    if (mModelReference.empty() == true)
+    {
+      logEmptyString(mModelReference, level, version, "<SedSetValue>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
+    {
+      logError(SedmlSedSetValueModelReferenceMustBeSId, level, version, "The "
+        "attribute modelReference='" + mModelReference + "' does not conform to "
+          "the syntax.");
+    }
+  }
+  else
+  {
+    std::string message = "Sedml attribute 'modelReference' is missing from the "
+      "<SedSetValue> element.";
+    log->logError(SedmlSedSetValueAllowedAttributes, level, version, message);
+  }
+
+  // 
+  // symbol string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("symbol", mSymbol);
+
+  if (assigned == true)
+  {
+    if (mSymbol.empty() == true)
+    {
+      logEmptyString(mSymbol, level, version, "<SedSetValue>");
+    }
+  }
+
+  // 
+  // target string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("target", mTarget);
+
+  if (assigned == true)
+  {
+    if (mTarget.empty() == true)
+    {
+      logEmptyString(mTarget, level, version, "<SedSetValue>");
+    }
+  }
+
+  // 
+  // range SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("range", mRange);
+
+  if (assigned == true)
+  {
+    if (mRange.empty() == true)
+    {
+      logEmptyString(mRange, level, version, "<SedSetValue>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
+    {
+      logError(SedmlSedSetValueRangeMustBeSId, level, version, "The attribute "
+        "range='" + mRange + "' does not conform to the syntax.");
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Reads other XML such as math/notes etc.
+ */
+bool
+SedSetValue::readOtherXML(XMLInputStream& stream)
+{
+  bool read = false;
+  const string& name = stream.peek().getName();
+
+  if (name == "math")
+  {
+    const XMLToken elem = stream.peek();
+    const std::string prefix = checkMathMLNamespace(elem);
+    if (stream.getSedNamespaces() == NULL)
+    {
+      stream.setSedNamespaces(new SedNamespaces(getLevel(), getVersion()));
+    }
+
+    delete mMath;
+    mMath = readMathML(stream, prefix);
+    read = true;
+  }
+
+  if (SedBase::readOtherXML(stream))
+  {
+    read = true;
+  }
+
+  return read;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Writes the attributes to the stream
+ */
+void
+SedSetValue::writeAttributes(XMLOutputStream& stream) const
+{
+  SedBase::writeAttributes(stream);
+
+  if (isSetModelReference() == true)
+  {
+    stream.writeAttribute("modelReference", getPrefix(), mModelReference);
+  }
+
+  if (isSetSymbol() == true)
+  {
+    stream.writeAttribute("symbol", getPrefix(), mSymbol);
+  }
+
+  if (isSetTarget() == true)
+  {
+    stream.writeAttribute("target", getPrefix(), mTarget);
+  }
+
+  if (isSetRange() == true)
+  {
+    stream.writeAttribute("range", getPrefix(), mRange);
+  }
+}
+
+/** @endcond */
+
+
+
+
+#endif /* __cplusplus */
+
+
+/*
+ * Creates a new SedSetValue_t using the given SEDML Level and @ p version
+ * values.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t *
+SedSetValue_create(unsigned int level, unsigned int version)
+{
+  return new SedSetValue(level, version);
+}
+
+
+/*
+ * Creates and returns a deep copy of this SedSetValue_t object.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSetValue_clone(const SedSetValue_t* ssv)
+{
+  if (ssv != NULL)
+  {
+    return static_cast<SedSetValue_t*>(ssv->clone());
+  }
+  else
+  {
+    return NULL;
+  }
+}
+
+
+/*
+ * Frees this SedSetValue_t object.
+ */
+LIBSEDML_EXTERN
+void
+SedSetValue_free(SedSetValue_t* ssv)
+{
+  if (ssv != NULL)
+  {
+    delete ssv;
+  }
+}
+
+
+/*
+ * Returns the value of the "modelReference" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+const char *
+SedSetValue_getModelReference(const SedSetValue_t * ssv)
+{
+  if (ssv == NULL)
+  {
+    return NULL;
+  }
+
+  return ssv->getModelReference().empty() ? NULL :
+    safe_strdup(ssv->getModelReference().c_str());
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+const char *
+SedSetValue_getSymbol(const SedSetValue_t * ssv)
+{
+  if (ssv == NULL)
+  {
+    return NULL;
+  }
+
+  return ssv->getSymbol().empty() ? NULL :
+    safe_strdup(ssv->getSymbol().c_str());
+}
+
+
+/*
+ * Returns the value of the "target" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+const char *
+SedSetValue_getTarget(const SedSetValue_t * ssv)
+{
+  if (ssv == NULL)
+  {
+    return NULL;
+  }
+
+  return ssv->getTarget().empty() ? NULL :
+    safe_strdup(ssv->getTarget().c_str());
+}
+
+
+/*
+ * Returns the value of the "range" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+const char *
+SedSetValue_getRange(const SedSetValue_t * ssv)
+{
+  if (ssv == NULL)
+  {
+    return NULL;
+  }
+
+  return ssv->getRange().empty() ? NULL : safe_strdup(ssv->getRange().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSetValue_t's "modelReference" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_isSetModelReference(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetModelReference()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSetValue_t's "symbol" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_isSetSymbol(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetSymbol()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSetValue_t's "target" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_isSetTarget(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetTarget()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSetValue_t's "range" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_isSetRange(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetRange()) : 0;
+}
+
+
+/*
+ * Sets the value of the "modelReference" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_setModelReference(SedSetValue_t * ssv,
+                              const char * modelReference)
+{
+  return (ssv != NULL) ? ssv->setModelReference(modelReference) :
+    LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "symbol" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_setSymbol(SedSetValue_t * ssv, const char * symbol)
+{
+  return (ssv != NULL) ? ssv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "target" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_setTarget(SedSetValue_t * ssv, const char * target)
+{
+  return (ssv != NULL) ? ssv->setTarget(target) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "range" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_setRange(SedSetValue_t * ssv, const char * range)
+{
+  return (ssv != NULL) ? ssv->setRange(range) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "modelReference" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_unsetModelReference(SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? ssv->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "symbol" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_unsetSymbol(SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? ssv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "target" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_unsetTarget(SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? ssv->unsetTarget() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "range" attribute of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_unsetRange(SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? ssv->unsetRange() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "math" element of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+const ASTNode_t*
+SedSetValue_getMath(const SedSetValue_t * ssv)
+{
+  if (ssv == NULL)
+  {
+    return NULL;
+  }
+
+  return (ASTNode_t*)(ssv->getMath());
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSetValue_t's "math" element is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_isSetMath(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetMath()) : 0;
+}
+
+
+/*
+ * Sets the value of the "math" element of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_setMath(SedSetValue_t * ssv, const ASTNode_t* math)
+{
+  return (ssv != NULL) ? ssv->setMath(math) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "math" element of this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_unsetMath(SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? ssv->unsetMath() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Predicate returning @c 1 if all the required attributes for this
+ * SedSetValue_t object have been set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_hasRequiredAttributes(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredAttributes()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if all the required elements for this SedSetValue_t
+ * object have been set.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_hasRequiredElements(const SedSetValue_t * ssv)
+{
+  return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredElements()) : 0;
+}
+
+
+
+
+LIBSEDML_CPP_NAMESPACE_END
+
+

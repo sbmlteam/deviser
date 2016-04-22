@@ -218,11 +218,6 @@ def main():
     fail += run_templates(name, class_name, test_case, list_of)
     fail += test_other_templates()
 
-    # name = 'test_sedml'
-    # class_name = 'SedErrorTable'
-    # test_case = 'document'
-    # fail += run_validator(name, class_name, test_case)
-
     name = 'test_sedml'
     class_name = 'SedBase'
     test_case = 'common'
@@ -237,7 +232,14 @@ def main():
     num = 3
     class_name = 'SedAddXML'
     list_of = ''
-    test_case = 'model'
+    test_case = 'xmlnode used'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 4
+    class_name = 'SedSetValue'
+    list_of = ''
+    test_case = 'astnode used'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
