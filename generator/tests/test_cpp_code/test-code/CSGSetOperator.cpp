@@ -1055,8 +1055,8 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementA) == false)
     {
-      logError(SpatialCSGSetOperatorComplementAMustBeSId, level, version, "The "
-        "attribute complementA='" + mComplementA + "' does not conform to the "
+      logError(SpatialCSGSetOperatorComplementAMustBeCSGNode, level, version,
+        "The attribute complementA='" + mComplementA + "' does not conform to the "
           "syntax.");
     }
   }
@@ -1075,8 +1075,8 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementB) == false)
     {
-      logError(SpatialCSGSetOperatorComplementBMustBeSId, level, version, "The "
-        "attribute complementB='" + mComplementB + "' does not conform to the "
+      logError(SpatialCSGSetOperatorComplementBMustBeCSGNode, level, version,
+        "The attribute complementB='" + mComplementB + "' does not conform to the "
           "syntax.");
     }
   }

@@ -829,8 +829,8 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mDomainType) == false)
     {
-      logError(SpatialAnalyticVolumeDomainTypeMustBeSId, level, version, "The "
-        "attribute domainType='" + mDomainType + "' does not conform to the "
+      logError(SpatialAnalyticVolumeDomainTypeMustBeDomainType, level, version,
+        "The attribute domainType='" + mDomainType + "' does not conform to the "
           "syntax.");
     }
   }

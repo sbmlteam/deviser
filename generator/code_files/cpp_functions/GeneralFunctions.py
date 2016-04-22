@@ -549,8 +549,11 @@ class GeneralFunctions():
         for i in range(0, len(self.child_elements)):
             att = self.child_elements[i]
             if att['element'] == 'ASTNode':
-                line = ['writeMathML(getMath(), stream, get{0}'
-                        'Namespaces())'.format(global_variables.prefix)]
+                if global_variables.is_package:
+                    line = ['writeMathML(getMath(), stream, get{0}'
+                            'Namespaces())'.format(global_variables.prefix)]
+                else:
+                    line = ['writeMathML(getMath(), stream, NULL)']
             elif att['element'] == 'XMLNode':
                 line = ['stream.startElement(\"{0}\")'.format(att['name']),
                         'stream << *{0}'.format(att['memberName']),

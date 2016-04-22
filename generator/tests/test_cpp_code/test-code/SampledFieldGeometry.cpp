@@ -709,9 +709,9 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mSampledField) == false)
     {
-      logError(SpatialSampledFieldGeometrySampledFieldMustBeSId, level,
-        version, "The attribute sampledField='" + mSampledField + "' does not "
-          "conform to the syntax.");
+      logError(SpatialSampledFieldGeometrySampledFieldMustBeSampledField,
+        level, version, "The attribute sampledField='" + mSampledField + "' does "
+          "not conform to the syntax.");
     }
   }
   else

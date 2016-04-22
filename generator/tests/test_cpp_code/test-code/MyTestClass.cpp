@@ -1404,7 +1404,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      logError(TestMyTestClassRef1MustBeSId, level, version, "The attribute "
+      logError(TestMyTestClassRef1MustBeThing1, level, version, "The attribute "
         "ref1='" + mRef1 + "' does not conform to the syntax.");
     }
   }
@@ -1423,7 +1423,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      logError(TestMyTestClassRef2MustBeSId, level, version, "The attribute "
+      logError(TestMyTestClassRef2MustBeThing2, level, version, "The attribute "
         "ref2='" + mRef2 + "' does not conform to the syntax.");
     }
   }

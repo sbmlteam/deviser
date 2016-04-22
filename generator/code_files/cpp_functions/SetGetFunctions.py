@@ -1260,7 +1260,8 @@ class SetGetFunctions():
                     line = ['{0} != NULL'.format(member),
                             '{0}->setParent{1}Object'
                             '(this)'.format(member, self.cap_language)]
-                    nested_if = self.create_code_block('if', line)
+                    if global_variables.is_package:
+                        nested_if = self.create_code_block('if', line)
                 elif not attribute['is_ml']:
                     line = ['{0} != NULL'.format(member)]
                     if attribute['children_overwrite']:

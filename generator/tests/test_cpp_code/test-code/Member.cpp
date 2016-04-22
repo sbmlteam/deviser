@@ -577,7 +577,7 @@ Member::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mIdRef) == false)
     {
-      logError(GroupsMemberIdRefMustBeSId, level, version, "The attribute "
+      logError(GroupsMemberIdRefMustBeSBase, level, version, "The attribute "
         "idRef='" + mIdRef + "' does not conform to the syntax.");
     }
   }

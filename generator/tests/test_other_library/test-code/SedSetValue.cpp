@@ -393,11 +393,6 @@ SedSetValue::setMath(const ASTNode* math)
   {
     delete mMath;
     mMath = (math != NULL) ? math->deepCopy() : NULL;
-    if (mMath != NULL)
-    {
-      mMath->setParentSEDMLObject(this);
-    }
-
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
@@ -503,7 +498,7 @@ SedSetValue::writeElements(XMLOutputStream& stream) const
 
   if (isSetMath() == true)
   {
-    writeMathML(getMath(), stream, getSedNamespaces());
+    writeMathML(getMath(), stream, NULL);
   }
 }
 
@@ -637,7 +632,7 @@ SedSetValue::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
     {
-      logError(SedmlSedSetValueModelReferenceMustBeSId, level, version, "The "
+      logError(SedmlSedSetValueModelReferenceMustBeModel, level, version, "The "
         "attribute modelReference='" + mModelReference + "' does not conform to "
           "the syntax.");
     }
@@ -691,7 +686,7 @@ SedSetValue::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
     {
-      logError(SedmlSedSetValueRangeMustBeSId, level, version, "The attribute "
+      logError(SedmlSedSetValueRangeMustBeRange, level, version, "The attribute "
         "range='" + mRange + "' does not conform to the syntax.");
     }
   }
@@ -716,11 +711,6 @@ SedSetValue::readOtherXML(XMLInputStream& stream)
   {
     const XMLToken elem = stream.peek();
     const std::string prefix = checkMathMLNamespace(elem);
-    if (stream.getSedNamespaces() == NULL)
-    {
-      stream.setSedNamespaces(new SedNamespaces(getLevel(), getVersion()));
-    }
-
     delete mMath;
     mMath = readMathML(stream, prefix);
     read = true;
