@@ -32,6 +32,7 @@ typedef CLASS_OR_STRUCT SedDocument   SedDocument_t;
 typedef CLASS_OR_STRUCT SedModel      SedModel_t;
 typedef CLASS_OR_STRUCT SedChange     SedChange_t;
 typedef CLASS_OR_STRUCT SedAddXML     SedAddXML_t;
+typedef CLASS_OR_STRUCT SedSetValue   SedSetValue_t;
 typedef CLASS_OR_STRUCT SedBase       SedBase_t;
 typedef CLASS_OR_STRUCT SedListOf     SedListOf_t;
 typedef CLASS_OR_STRUCT SedReader     SedReader_t;

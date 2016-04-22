@@ -33,6 +33,7 @@ class SedListOf;
 class SedModel;
 class SedChange;
 class SedAddXML;
+class SedSetValue;
 
 
 class SedVisitor
@@ -107,6 +108,16 @@ virtual bool visit (const SedChange &x);
 virtual bool visit (const SedAddXML &x);
 
 
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedSetValue &x);
+
+
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -168,6 +179,16 @@ virtual void leave (const SedChange &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedAddXML &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedSetValue &x);
 };
 
 LIBSEDML_CPP_NAMESPACE_END

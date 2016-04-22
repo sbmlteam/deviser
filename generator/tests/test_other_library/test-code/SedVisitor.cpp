@@ -69,6 +69,16 @@ SedVisitor::visit(const SedAddXML& x)
 }
 
 
+/*
+ * Visit the SedSetValue
+ */
+bool
+SedVisitor::visit(const SedSetValue& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
 void
 SedVisitor::leave (const SedDocument& x)
 {
@@ -110,6 +120,15 @@ SedVisitor::leave(const SedChange& x)
  */
 void
 SedVisitor::leave(const SedAddXML& x)
+{
+}
+
+
+/*
+ * Leave the SedSetValue
+ */
+void
+SedVisitor::leave(const SedSetValue& x)
 {
 }
 

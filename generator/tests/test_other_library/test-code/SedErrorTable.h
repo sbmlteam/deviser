@@ -579,6 +579,102 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 20601
+  { SedmlSedSetValueAllowedCoreAttributes,
+    "Core attributes allowed on <sedSetValue>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedSetValue> object may have the optional SBML Level~3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <sedSetValue>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20602
+  { SedmlSedSetValueAllowedCoreElements,
+    "Core elements allowed on <sedSetValue>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedSetValue> object may have the optional SBML Level~3 Core subobjects "
+    "for notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on a <sedSetValue>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20603
+  { SedmlSedSetValueAllowedAttributes,
+    "Attributes allowed on <sedSetValue>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedSetValue> object must have the required attribute "
+    "'sedml:modelReference', and may have the optional attributes "
+    "'sedml:symbol', 'sedml:target' and 'sedml:range'. No other attributes from "
+    "the SBML Level 3 SEDML namespaces are permitted on a <sedSetValue> object. "
+    "",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20604
+  { SedmlSedSetValueAllowedElements,
+    "Elements allowed on <sedSetValue>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedSetValue> object may contain one and only one instance of the "
+    "SedASTNode element. No other elements from the SBML Level 3 SEDML "
+    "namespaces are permitted on a <sedSetValue> object. ",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20605
+  { SedmlSedSetValueModelReferenceMustBeModel,
+    "ModelReference attribute must be Model.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:modelReference' of a <sedSetValue> "
+    "object must be the identifier of an existing <model> object defined in the "
+    "enclosing <model> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20606
+  { SedmlSedSetValueSymbolMustBeString,
+    "Symbol attribute must be String.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:symbol' on a <sedSetValue> must have a value of data "
+    "type 'string'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20607
+  { SedmlSedSetValueTargetMustBeString,
+    "Target attribute must be String.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:target' on a <sedSetValue> must have a value of data "
+    "type 'string'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20608
+  { SedmlSedSetValueRangeMustBeRange,
+    "Range attribute must be Range.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:range' of a <sedSetValue> object must be "
+    "the identifier of an existing <range> object defined in the enclosing "
+    "<model> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   /* --------------------------------------------------------------------------
    * Boundary marker.  Application-specific codes should begin at 100000.
    * ----------------------------------------------------------------------- */

@@ -36,6 +36,7 @@ typedef enum
   , SEDML_MODEL
   , SEDML_CHANGE
   , SEDML_ADDXML
+  , SEDML_TASK_SETVALUE
   , SEDML_LIST_OF
 } SedTypeCode_t;
 

@@ -19,6 +19,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "Model"
   , "Change"
   , "AddXML"
+  , "SetValue"
   , "SedListOf"
 };
 
