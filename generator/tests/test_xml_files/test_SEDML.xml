@@ -34,6 +34,15 @@
             <attribute name="newXML" required="true" type="element" abstract="false" element="XMLNode*"/>
           </attributes>
         </element>
+        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="false" hasMath="true" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="setValue" listOfName="listOfChanges" listOfClassName="ListOfTaskChanges">
+          <attributes>
+            <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
+            <attribute name="symbol" required="false" type="string" abstract="false"/>
+            <attribute name="target" required="false" type="string" abstract="false"/>
+            <attribute name="range" required="false" type="SIdRef" element="Range" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
     </pkgVersion>
   </versions>

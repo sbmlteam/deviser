@@ -259,7 +259,7 @@ def overwrites_name(root, name):
     unprefixed_name = strFunctions.remove_prefix(name)
     for element in root['baseElements']:
         for attrib in element['attribs']:
-            if attrib['element'] == unprefixed_name:
+            if attrib['element'] == unprefixed_name and attrib['type'] != 'SIdRef':
                 if not strFunctions.compare_no_case(name, attrib['xml_name']):
                     overwrites = True
     return overwrites
