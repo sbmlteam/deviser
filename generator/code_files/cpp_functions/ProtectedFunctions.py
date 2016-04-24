@@ -1152,9 +1152,11 @@ class ProtectedFunctions():
     def write_sid_read(self, index, code, attributes):
         attribute = attributes[index]
         name = attribute['xml_name']
+        given_name = attribute['name']
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
+
 
         line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                       member)]
@@ -1183,7 +1185,7 @@ class ProtectedFunctions():
             else:
                 type_wanted = att_type
             error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
-                                                strFunctions.upper_first(name),
+                                                strFunctions.upper_first(given_name),
                                                 type_wanted)
         line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:

@@ -246,7 +246,14 @@ def main():
     num = 5
     class_name = 'SedDataGenerator'
     list_of = ''
-    test_case = 'astnode used'
+    test_case = 'astnode in getElementBySId bug'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 6
+    class_name = 'SedRepeatedTask'
+    list_of = ''
+    test_case = 'attribute with different xml name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
