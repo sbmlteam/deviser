@@ -128,6 +128,9 @@ class GlobalQueryFunctions():
             if_block = ['obj != NULL', 'return obj']
             if_code = self.create_code_block('if', if_block)
             for i in range(0, len(self.child_elements)):
+                element_type = self.child_elements[i]['element']
+                if element_type == 'ASTNode' or element_type == 'XMLNode':
+                    continue
                 name = self.child_elements[i]['memberName']
                 middle_if = self.create_code_block('if',
                                                    ['{0}->getId() == '

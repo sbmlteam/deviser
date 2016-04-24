@@ -242,6 +242,13 @@ def main():
     test_case = 'astnode used'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_sedml'
+    num = 5
+    class_name = 'SedDataGenerator'
+    list_of = ''
+    test_case = 'astnode used'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
 
