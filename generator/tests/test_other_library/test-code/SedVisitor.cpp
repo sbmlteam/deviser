@@ -79,6 +79,36 @@ SedVisitor::visit(const SedSetValue& x)
 }
 
 
+/*
+ * Visit the SedDataGenerator
+ */
+bool
+SedVisitor::visit(const SedDataGenerator& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedRepeatedTask
+ */
+bool
+SedVisitor::visit(const SedRepeatedTask& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedSimulation
+ */
+bool
+SedVisitor::visit(const SedSimulation& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
 void
 SedVisitor::leave (const SedDocument& x)
 {
@@ -129,6 +159,33 @@ SedVisitor::leave(const SedAddXML& x)
  */
 void
 SedVisitor::leave(const SedSetValue& x)
+{
+}
+
+
+/*
+ * Leave the SedDataGenerator
+ */
+void
+SedVisitor::leave(const SedDataGenerator& x)
+{
+}
+
+
+/*
+ * Leave the SedRepeatedTask
+ */
+void
+SedVisitor::leave(const SedRepeatedTask& x)
+{
+}
+
+
+/*
+ * Leave the SedSimulation
+ */
+void
+SedVisitor::leave(const SedSimulation& x)
 {
 }
 

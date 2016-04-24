@@ -43,6 +43,36 @@
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
         </element>
+        <element name="DataGenerator" typeCode="SEDML_DATAGENERATOR" hasListOf="true" hasChildren="true" hasMath="true" baseClass="SedBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
+            <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="RepeatedTask" typeCode="SEDML_TASK_REPEATEDTASK" hasListOf="false" hasChildren="true" hasMath="false" baseClass="Task" abstract="false">
+          <attributes>
+            <attribute name="rangeId" required="false" type="SIdRef" element="Range" xmlName="range" abstract="false"/>
+            <attribute name="resetModel" required="false" type="bool" abstract="false"/>
+<!--            <attribute name="range" required="false" type="lo_element" element="Range" abstract="true"/>
+            <attribute name="taskChange" required="false" type="lo_element" element="SetValue" abstract="false"/>
+            <attribute name="subTask" required="false" type="lo_element" element="SubTask" abstract="false"/>
+-->          </attributes>
+        </element>
+        <element name="Simulation" typeCode="SEDML_SIMULATION" hasListOf="true" hasChildren="true" hasMath="false" baseClass="SedBase" abstract="true">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
+          </attributes>
+          <concretes>
+            <concrete name="uniformTimeCourse" element="UniformTimeCourse"/>
+            <concrete name="oneStep" element="OneStep"/>
+            <concrete name="steadyState" element="SteadyState"/>
+          </concretes>
+        </element>
       </elements>
     </pkgVersion>
   </versions>

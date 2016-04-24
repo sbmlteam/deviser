@@ -21,6 +21,9 @@
 #include <sedml/SedChange.h>
 #include <sedml/SedAddXML.h>
 #include <sedml/SedSetValue.h>
+#include <sedml/SedDataGenerator.h>
+#include <sedml/SedRepeatedTask.h>
+#include <sedml/SedSimulation.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>

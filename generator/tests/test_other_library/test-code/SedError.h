@@ -77,6 +77,26 @@ typedef enum
 , SedmlSedSetValueSymbolMustBeString      = 20606
 , SedmlSedSetValueTargetMustBeString      = 20607
 , SedmlSedSetValueRangeMustBeRange      = 20608
+, SedmlSedDataGeneratorAllowedCoreAttributes      = 20701
+, SedmlSedDataGeneratorAllowedCoreElements      = 20702
+, SedmlSedDataGeneratorAllowedAttributes      = 20703
+, SedmlSedDataGeneratorAllowedElements      = 20704
+, SedmlSedDataGeneratorNameMustBeString      = 20705
+, SedmlSedDataGeneratorEmptyLOElements      = 20706
+, SedmlSedDataGeneratorLOSedVariablesAllowedCoreElements      = 20707
+, SedmlSedDataGeneratorLOSedParametersAllowedCoreElements      = 20708
+, SedmlSedDataGeneratorLOSedVariablesAllowedCoreAttributes      = 20709
+, SedmlSedDataGeneratorLOSedParametersAllowedCoreAttributes      = 20710
+, SedmlSedRepeatedTaskAllowedCoreAttributes      = 20801
+, SedmlSedRepeatedTaskAllowedCoreElements      = 20802
+, SedmlSedRepeatedTaskAllowedAttributes      = 20803
+, SedmlSedRepeatedTaskRangeIdMustBeRange      = 20804
+, SedmlSedRepeatedTaskResetModelMustBeBoolean      = 20805
+, SedmlSedSimulationAllowedCoreAttributes      = 20901
+, SedmlSedSimulationAllowedCoreElements      = 20902
+, SedmlSedSimulationAllowedAttributes      = 20903
+, SedmlSedSimulationAllowedElements      = 20904
+, SedmlSedSimulationNameMustBeString      = 20905
 , UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the Sed Core namespace. */
 , SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;

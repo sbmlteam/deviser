@@ -164,8 +164,13 @@ class BaseFile:
                         lines.append(temp)
                         temp = ''
                     else:
+                        rollback = True
                         if in_quotes:
-                            if words[i-1].startswith('\"'):
+                            if words[i-1] == '",':
+                                #special case for validation rule messages
+                                rollback = False
+                                newline = temp
+                            elif words[i-1].startswith('\"'):
                                 # do not add the quotes as we are throwing
                                 # the word away
                                 in_quotes = False
@@ -181,7 +186,8 @@ class BaseFile:
                         lines.append(newline)
                         newline = ''
                         temp = ''
-                        i -= 1
+                        if rollback:
+                            i -= 1
             else:
                 if in_quotes or not quotes_closed:
                     newline += ' \"'

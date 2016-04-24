@@ -20,6 +20,9 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "Change"
   , "AddXML"
   , "SetValue"
+  , "DataGenerator"
+  , "RepeatedTask"
+  , "Simulation"
   , "SedListOf"
 };
 
