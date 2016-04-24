@@ -426,7 +426,7 @@ class ValidationRulesForClass():
     # might not be lo elements
     def write_lochild_attribute_rule(self, child, lo_info):
         child_class = query.get_class(child['element'], child['root'])
-        if len(child_class['lo_attribs']) == 0:
+        if not child_class or len(child_class['lo_attribs']) == 0:
             return
         # if these are all elements we dont need this
         num = len(child_class['lo_attribs'])
