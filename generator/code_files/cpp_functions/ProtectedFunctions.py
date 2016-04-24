@@ -192,7 +192,7 @@ class ProtectedFunctions():
                     line = ['const std::string& targetPrefix = (xmlns.hasURI'
                             '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
                     code.append(self.create_code_block('line', line))
-                if len(self.child_elements) != self.num_non_std_children:
+                if global_variables.is_package and len(self.child_elements) != self.num_non_std_children:
                     line = ['{0}_CREATE_NS({1}, '
                             'get{2}Namespaces'
                             '())'.format(upkg, ns, global_variables.prefix)]
@@ -226,11 +226,18 @@ class ProtectedFunctions():
                         code.append(self.create_code_block('if',
                                                            implementation))
                     else:
-                        implementation = ['prefix == targetPrefix']
-                        implementation += self.get_element_block(element,
-                                                                 error_line, ns)
-                        code.append(self.create_code_block('if',
-                                                           implementation))
+                        if global_variables.is_package:
+                            implementation = ['prefix == targetPrefix']
+                            implementation += self.get_element_block(element,
+                                                                     error_line, ns)
+                            code.append(self.create_code_block('if',
+                                                               implementation))
+                        else:
+                            implementation = self.get_element_block(element,
+                                                                     error_line, ns)
+                            code.append(self.create_code_block('if',
+                                                               implementation))
+
                 else:
                     implementation = []
                     i = 0
@@ -242,7 +249,7 @@ class ProtectedFunctions():
                         overwrite = element['children_overwrite']
                         name = element['memberName']
                         loname = element['xml_name'] if overwrite \
-                            else strFunctions.lower_first(element['element'])
+                            else strFunctions.lower_first(strFunctions.remove_prefix(element['element']))
                         implementation += self.get_obj_block(name, loname,
                                                              error_line,
                                                              overwrite,
@@ -271,7 +278,7 @@ class ProtectedFunctions():
                                                            ['prefix == '
                                                             'targetPrefix',
                                                             plugin_imp]))
-                if len(self.child_elements) != self.num_non_std_children:
+                if global_variables.is_package and len(self.child_elements) != self.num_non_std_children:
                     code.append(self.create_code_block('line',
                                                        ['delete '
                                                         '{0}'.format(ns)]))
@@ -396,17 +403,23 @@ class ProtectedFunctions():
 
     def get_element_block(self, element, error_line, ns):
         name = element['name']
-        function = element['capAttName']
+        function = strFunctions.upper_first(element['element'])
 
         nested_if = self.create_code_block('if',
-                                           ['isSet{0}()'.format(function),
+                                           ['isSet{0}()'.format(element['capAttName']),
                                             error_line])
+        used_ns = ns
+        if not global_variables.is_package:
+            used_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
         implementation = ['name == \"{0}\"'.format(name),
                           nested_if,
                           '{0} = new {1}({2})'.format(element['memberName'],
-                                                      function, ns),
+                                                      function, used_ns),
                           'obj = {0}'.format(element['memberName'])]
-        return [self.create_code_block('if', implementation)]
+        if global_variables.is_package:
+            return [self.create_code_block('if', implementation)]
+        else:
+            return implementation
 
     def get_plugin_lo_block(self, element, error_line):
         name = element['memberName']
@@ -438,6 +451,9 @@ class ProtectedFunctions():
 
     def get_obj_block(self, name, loname, error_line, over_write, element, ns):
         implementation = []
+        used_ns = ns
+        if not global_variables.is_package:
+            used_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
         nested_if = self.create_code_block('if',
                                            ['{0} '
                                             '!= NULL'.format(name),
@@ -446,7 +462,7 @@ class ProtectedFunctions():
         implementation.append(nested_if)
         implementation.append('{0} = new {1}'
                               '({2})'.format(name,
-                                             element, ns))
+                                             element, used_ns))
         if over_write:
             implementation.append('{0}->setElementName'
                                   '(name)'.format(name))

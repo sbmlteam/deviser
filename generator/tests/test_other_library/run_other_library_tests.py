@@ -256,6 +256,13 @@ def main():
     test_case = 'attribute with different xml name'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_sedml'
+    num = 7
+    class_name = 'SedSimulation'
+    list_of = ''
+    test_case = 'child element'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
 

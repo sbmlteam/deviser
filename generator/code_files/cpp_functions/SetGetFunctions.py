@@ -1008,12 +1008,15 @@ class SetGetFunctions():
             implementation = ['{0} != NULL'.format(member),
                               'delete {0}'.format(member)]
             code = [self.create_code_block('if', implementation)]
-            implementation = ['{0}_CREATE_NS({1}ns, '
-                              'get{2}Namespaces'
-                              '())'.format(up_pack, low_pack,
-                                           global_variables.prefix),
-                              '{0} = new {1}'
-                              '({2}ns)'.format(member, att_name, low_pack)]
+            if global_variables.is_package:
+                implementation = ['{0}_CREATE_NS({1}ns, '
+                                  'get{2}Namespaces'
+                                  '())'.format(up_pack, low_pack,
+                                               global_variables.prefix),
+                                  '{0} = new {1}'
+                                  '({2}ns)'.format(member, att_name, low_pack)]
+            else:
+                implementation = ['{0} = new {1}(get{2}Namespaces())'.format(member, att_name, global_variables.prefix)]
             code.append(self.create_code_block('line', implementation))
             if attribute['children_overwrite']:
                 line = ['{0}->setElementName(\"{1}\")'
@@ -1023,9 +1026,10 @@ class SetGetFunctions():
                 line = ['{0}->set{1}(this->get{1}'
                         '())'.format(member, global_variables.document_class)]
                 code.append(self.create_code_block('line', line))
-            code.append(self.create_code_block('line',
-                                               ['delete {0}'
-                                                'ns'.format(low_pack)]))
+            if global_variables.is_package:
+                code.append(self.create_code_block('line',
+                                                   ['delete {0}'
+                                                    'ns'.format(low_pack)]))
             code.append(self.create_code_block('line', ['connectToChild()']))
             code.append((self.create_code_block('line',
                                                 ['return {0}'.format(member)])))
@@ -1092,16 +1096,21 @@ class SetGetFunctions():
             implementation = ['{0} != NULL'.format(member),
                               'delete {0}'.format(member)]
             code = [self.create_code_block('if', implementation)]
-            implementation = ['{0}_CREATE_NS({1}ns, '
-                              'get{2}Namespaces'
-                              '())'.format(up_pack, low_pack,
-                                           global_variables.prefix),
-                              '{0} = new {1}'
-                              '({2}ns)'.format(member, att_name, low_pack)]
+            if global_variables.is_package:
+                implementation = ['{0}_CREATE_NS({1}ns, '
+                                  'get{2}Namespaces'
+                                  '())'.format(up_pack, low_pack,
+                                               global_variables.prefix),
+                                  '{0} = new {1}'
+                                  '({2}ns)'.format(member, att_name, low_pack)]
+            else:
+                implementation = ['{0} = new {1}(get{2}Namespaces())'.format(member, att_name, global_variables.prefix)]
+
             code.append(self.create_code_block('line', implementation))
-            code.append(self.create_code_block('line',
-                                               ['delete {0}'
-                                                'ns'.format(low_pack)]))
+            if global_variables.is_package:
+                code.append(self.create_code_block('line',
+                                                   ['delete {0}'
+                                                    'ns'.format(low_pack)]))
             code.append(self.create_code_block('line', ['connectToChild()']))
             code.append((self.create_code_block('line',
                                                 ['return static_cast<{0}*>'

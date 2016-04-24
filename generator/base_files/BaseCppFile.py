@@ -288,7 +288,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['CType'] = attributes[i]['element']+'_t*'
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
-                if strFunctions.compare_no_case(el_name, at_name):
+                if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):
                     attributes[i]['children_overwrite'] = False
                 else:
                     attributes[i]['children_overwrite'] = True
