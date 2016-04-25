@@ -90,7 +90,7 @@ SedVectorRange::~SedVectorRange()
 /*
  * Returns the value of the "value" attribute of this SedVectorRange.
  */
-std::vector<double>&
+const std::vector<double>&
 SedVectorRange::getValue() const
 {
   return mValue;

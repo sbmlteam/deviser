@@ -178,7 +178,7 @@ class SetGetFunctions():
                 else:
                     return_type = attribute['attTypeCode']
             elif attribute['attType'] == 'vector':
-                return_type = attribute['attTypeCode'] + '&'
+                return_type = 'const {0}&'.format(attribute['attTypeCode'])
             else:
                 return_type = attribute['attTypeCode']
         else:

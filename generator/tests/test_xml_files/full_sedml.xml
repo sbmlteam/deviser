@@ -209,7 +209,7 @@
         </element>
         <element name="VectorRange" typeCode="SEDML_RANGE_VECTORRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="vectorRange">
           <attributes>
-            <attribute name="value" required="false" type="std::vector&lt;double&gt;" abstract="false"/>
+            <attribute name="value" required="false" type="vector" element="double" abstract="false"/>
           </attributes>
         </element>
         <element name="FunctionalRange" typeCode="SEDML_RANGE_FUNCTIONALRANGE" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="functionalRange">

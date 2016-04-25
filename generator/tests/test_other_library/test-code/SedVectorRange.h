@@ -113,7 +113,7 @@ public:
    * @return the value of the "value" attribute of this SedVectorRange as a
    * vector.
    */
-  std::vector<double>& getValue() const;
+  const std::vector<double>& getValue() const;
 
 
   /**
