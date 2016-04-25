@@ -277,6 +277,17 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
+   * Creates a new object from the next XMLToken on the XMLInputStream
+   */
+  virtual SedBase* createObject(XMLInputStream& stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
    * Adds the expected attributes for this element
    */
   virtual void addExpectedAttributes(ExpectedAttributes& attributes);

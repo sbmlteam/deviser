@@ -118,7 +118,7 @@ class SetGetFunctions():
             else:
                 return
             # dont write a get for c
-            if not self.is_cpp_api and attribute['isArray']:
+            if not self.is_cpp_api and (attribute['isArray'] or attribute['isVector']):
                 return
         else:
             if index < len(self.child_elements):
@@ -177,6 +177,8 @@ class SetGetFunctions():
                     return_type = 'const ' + attribute['attTypeCode']
                 else:
                     return_type = attribute['attTypeCode']
+            elif attribute['attType'] == 'vector':
+                return_type = attribute['attTypeCode'] + '&'
             else:
                 return_type = attribute['attTypeCode']
         else:
@@ -452,6 +454,8 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
+        if not self.is_cpp_api and ('isVector' in attribute and attribute['isVector']):
+            return
         if is_attribute:
             ob_type = 'attribute'
         else:
@@ -477,7 +481,10 @@ class SetGetFunctions():
 
         # create the function declaration
         if self.is_cpp_api:
-            function = 'isSet{0}'.format(attribute['capAttName'])
+            if 'isVector' in attribute and attribute['isVector']:
+                function = 'has{0}'.format(strFunctions.plural(attribute['capAttName']))
+            else:
+                function = 'isSet{0}'.format(attribute['capAttName'])
             return_type = 'bool'
         else:
             function = '{0}_isSet{1}'.format(self.class_name,
@@ -505,6 +512,10 @@ class SetGetFunctions():
                 implementation = ['return ({0} != '
                                   '{1})'.format(attribute['memberName'],
                                                 attribute['default'])]
+            elif 'isVector' in attribute and attribute['isVector']:
+                implementation = ['return {0}.size() '
+                                  '> 0'.format(attribute['memberName'])]
+
             else:
                 implementation = ['']
         else:
@@ -517,6 +528,55 @@ class SetGetFunctions():
             implementation = ['return ({0} != NULL) ? static_cast<int>({0}->is'
                               'Set{1}()) : 0'.format(use_name,
                                                      attribute['capAttName'])]
+
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': True,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function for writing getNum for a vector type attribute
+    def write_get_num_for_vector(self, is_attribute, index):
+        if not self.is_cpp_api:
+            return
+        if is_attribute:
+            if index < len(self.attributes):
+                attribute = self.attributes[index]
+            else:
+                return
+        else:
+            return
+        if not attribute['isVector']:
+            return
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Return the number of elements in this {0}\'s \"{1}\" attribute.' \
+            .format(self.object_name, attribute['name'])
+
+        return_lines.append('@return the number of elements in the {0}\'s \"{1}\" attribute.'
+                            .format(self.object_name,
+                                    attribute['name']))
+
+        # create the function declaration
+        function = 'getNum{0}'.format(strFunctions.plural(attribute['capAttName']))
+        return_type = 'unsigned int'
+
+        arguments = []
+
+        # create the function implementation
+        implementation = ['return (unsigned int)({0}.size())'.format(
+            attribute['memberName'])]
 
         code = [dict({'code_type': 'line', 'code': implementation})]
 
@@ -561,6 +621,8 @@ class SetGetFunctions():
         if self.is_cpp_api:
             att_type = attribute['attTypeCode']
         else:
+            if 'isVector' in attribute and attribute['isVector']:
+                return
             att_type = attribute['CType']
 
         # create comment parts
@@ -599,13 +661,18 @@ class SetGetFunctions():
 
         arguments = []
         if self.is_cpp_api:
-            arguments.append('{0} {1}'
-                             .format(('const ' + attribute['attTypeCode']
-                                      if (attribute['attType'] == 'string' or
-                                          attribute['attType'] == 'enum' or
-                                          attribute['attType'] == 'element')
-                                      else attribute['attTypeCode']),
-                                     attribute['name']))
+            if 'isVector' in attribute and attribute['isVector']:
+                arguments.append('const {0}& {1}'
+                                 .format(attribute['attTypeCode'],
+                                         attribute['name']))
+            else:
+                arguments.append('{0} {1}'
+                                 .format(('const ' + attribute['attTypeCode']
+                                          if (attribute['attType'] == 'string' or
+                                              attribute['attType'] == 'enum' or
+                                              attribute['attType'] == 'element')
+                                          else attribute['attTypeCode']),
+                                         attribute['name']))
         else:
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
@@ -866,6 +933,64 @@ class SetGetFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
+    # function to write set functions
+    def write_add_element_for_vector(self, is_attribute, index):
+        if not self.is_cpp_api:
+            return
+        if is_attribute and index < len(self.attributes):
+            attribute = self.attributes[index]
+        else:
+            return
+        if not ('isVector' in attribute and attribute['isVector']):
+            return
+        att_type = attribute['element']
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Adds another value to the \"{0}\" attribute of this {1}.' \
+            .format(attribute['name'], self.object_name)
+
+        params.append('@param {0} {1} of the \"{0}\" attribute to be added.'
+                      .format(attribute['name'], att_type))
+
+        return_lines.append("@copydetails doc_returns_success_code")
+        return_lines.append('@li @{0}constant{1}{2}, '
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.success, self.close_br))
+        return_lines.append('@li @{0}constant{1}{2},'
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.invalid_att, self.close_br))
+
+        # create the function declaration
+        function = 'add{0}'.format(attribute['capAttName'])
+        return_type = 'int'
+
+        arguments = []
+        arguments.append('{0} {1}'.format(att_type,
+                                          attribute['name']))
+
+        implementation = ['{0}.push_back({1})'.format(attribute['memberName'], attribute['name']),
+                          'return {0}'.format(self.success)]
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    #########################################################################
     # function to write unset functions
     def write_unset(self, is_attribute, index):
         if is_attribute:
@@ -883,6 +1008,13 @@ class SetGetFunctions():
         else:
             ob_type = 'element'
 
+        if 'isVector' in attribute and attribute['isVector']:
+            code = self.write_clear(attribute)
+        else:
+            code = self.write_unset_general(attribute, ob_type)
+        return code
+
+    def write_unset_general(self, attribute, ob_type):
         # create comment parts
         params = []
         return_lines = []
@@ -933,6 +1065,50 @@ class SetGetFunctions():
                                                        attribute['capAttName'],
                                                        self.cap_language)]
             code = [self.create_code_block('line', implementation)]
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+
+    def write_clear(self, attribute):
+        if not self.is_cpp_api:
+            return None
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Clears the \"{0}\" element of this {1}.' \
+            .format(attribute['name'], self.object_name)
+
+        return_lines.append('@copydetails doc_returns_success_code')
+        return_lines.append('@li @{0}constant{1}{2}, '
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.success, self.close_br))
+        return_lines.append('@li @{0}constant{1}{2},'
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.failed, self.close_br))
+
+        # create the function declaration
+        function = 'clear{0}'.format(strFunctions.plural(attribute['capAttName']))
+        return_type = 'int'
+
+        arguments = []
+
+        # create the function implementation
+        implementation = ['{0}.clear()'.format(attribute['memberName']),
+                          'return {0}'.format(self.success)]
+        code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -1249,6 +1425,10 @@ class SetGetFunctions():
                                                                      atts)
                     code.append(self.create_code_block('if_else',
                                                        implementation))
+        elif 'isVector' in attribute and attribute['isVector']:
+            implementation = ['{0} = {1}'.format(member, name),
+                              'return {0}'.format(self.success)]
+            code = [self.create_code_block('line', implementation)]
         elif attribute['type'] == 'element':
             if not self.is_plugin:
                 clone = 'clone'

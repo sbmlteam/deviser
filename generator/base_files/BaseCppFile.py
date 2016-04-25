@@ -199,6 +199,7 @@ class BaseCppFile(BaseFile.BaseFile):
         self.class_object['child_elements'] = self.child_elements
         self.class_object['concretes'] = self.concretes
         self.class_object['has_array'] = query.has_array(self.class_attributes)
+        self.class_object['has_vector'] = query.has_vector(self.class_attributes)
         self.class_object['has_math'] = self.has_math
         self.class_object['has_children'] = self.has_children
         self.class_object['has_only_math'] = self.has_only_math
@@ -222,6 +223,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 strFunctions.plural(attributes[i]['name'])
             attributes[i]['isEnum'] = False
             attributes[i]['isArray'] = False
+            attributes[i]['isVector'] = False
             attributes[i]['children_overwrite'] = False
             att_type = attributes[i]['type']
             if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'IDREF':
@@ -307,6 +309,15 @@ class BaseCppFile(BaseFile.BaseFile):
                     strFunctions.lower_first(attributes[i]['element'])
                 attributes[i]['attType'] = 'array'
                 attributes[i]['attTypeCode'] = attributes[i]['element'] + '*'
+                attributes[i]['CType'] = attributes[i]['attTypeCode']
+                attributes[i]['isNumber'] = False
+                attributes[i]['default'] = 'NULL'
+            elif att_type == 'vector':
+                attributes[i]['isVector'] = True
+                attributes[i]['element'] = \
+                    strFunctions.lower_first(attributes[i]['element'])
+                attributes[i]['attType'] = 'vector'
+                attributes[i]['attTypeCode'] = 'std::vector<{0}>'.format(attributes[i]['element'])
                 attributes[i]['CType'] = attributes[i]['attTypeCode']
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'

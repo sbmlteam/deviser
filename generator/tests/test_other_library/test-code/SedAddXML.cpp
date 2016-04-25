@@ -295,6 +295,25 @@ SedAddXML::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedAddXML::createObject(XMLInputStream& stream)
+{
+  SedBase* obj = SedChange::createObject(stream);
+
+  connectToChild();
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

@@ -914,6 +914,53 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 21001
+  { SedmlSedVectorRangeAllowedCoreAttributes,
+    "Core attributes allowed on <sedVectorRange>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedVectorRange> object may have the optional SBML Level~3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <sedVectorRange>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 21002
+  { SedmlSedVectorRangeAllowedCoreElements,
+    "Core elements allowed on <sedVectorRange>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedVectorRange> object may have the optional SBML Level~3 Core "
+    "subobjects for notes and annotations. No other elements from the SBML "
+    "Level 3 Core namespaces are permitted on a <sedVectorRange>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 21003
+  { SedmlSedVectorRangeAllowedAttributes,
+    "Attributes allowed on <sedVectorRange>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <sedVectorRange> object may have the optional attribute 'sedml:value'. "
+    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
+    "on a <sedVectorRange> object. ",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 21004
+  { SedmlSedVectorRangeValueMustBeString,
+    "Value attribute must be String.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "FIXME: Encountered an unknown attribute type vector in "
+    "ValidationRulesForClass",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   /* --------------------------------------------------------------------------
    * Boundary marker.  Application-specific codes should begin at 100000.
    * ----------------------------------------------------------------------- */

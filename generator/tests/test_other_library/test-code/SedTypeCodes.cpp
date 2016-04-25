@@ -23,6 +23,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "DataGenerator"
   , "RepeatedTask"
   , "Simulation"
+  , "VectorRange"
   , "SedListOf"
 };
 

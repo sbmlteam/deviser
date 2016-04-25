@@ -37,6 +37,7 @@ class SedSetValue;
 class SedDataGenerator;
 class SedRepeatedTask;
 class SedSimulation;
+class SedVectorRange;
 
 
 class SedVisitor
@@ -151,6 +152,16 @@ virtual bool visit (const SedRepeatedTask &x);
 virtual bool visit (const SedSimulation &x);
 
 
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedVectorRange &x);
+
+
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -252,6 +263,16 @@ virtual void leave (const SedRepeatedTask &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedSimulation &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedVectorRange &x);
 };
 
 LIBSEDML_CPP_NAMESPACE_END

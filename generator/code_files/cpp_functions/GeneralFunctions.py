@@ -585,6 +585,11 @@ class GeneralFunctions():
                               'code': ['{0}::writeExtension'
                                        'Elements'
                                        '(stream)'.format(self.std_base)]}))
+        # look and see if we have a vector attribute which would need
+        # to be written here
+        for attrib in self.attributes:
+            if 'isVector' in attrib and attrib['isVector']:
+                code.append(self.write_write_vector(attrib))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -597,6 +602,20 @@ class GeneralFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def write_write_vector(self, attrib):
+        implementation = ['std::vector<{0}>::const_iterator it = {1}.begin(); '
+                          'it != {1}.end(); ++it'.format(attrib['element'], attrib['memberName']),
+                          'stream.startElement(\"{0}\")'.format(attrib['name']),
+                          'stream.setAutoIndent(false)',
+                          'stream << \" \" << *it << \"  \"',
+                          'stream.endElement(\"{0}\")'.format(attrib['name']),
+                          'stream.setAutoIndent(true)']
+        nested_for = self.create_code_block('for', implementation)
+        implementation = ['has{0}()'.format(strFunctions.plural(attrib['capAttName'])),
+                          nested_for]
+        code = self.create_code_block('if', implementation)
+        return code
 
     # function to write accept
     def write_accept(self):

@@ -657,6 +657,10 @@ class Constructors():
                                                       attrib['memberName'],
                                                       parameters))
                 sep = ','
+            elif 'isVector' in attrib and attrib['isVector']:
+                constructor_args.append('{0} {1} '
+                                        '()'.format(sep, attrib['memberName']))
+                sep = ','
             else:
                 constructor_args.append('{0} {1} '
                                         '({2})'.format(sep, attrib['memberName'],

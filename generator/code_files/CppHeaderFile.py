@@ -142,9 +142,16 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def write_general_includes(self):
         pkg = self.package.lower()
         include_lines = []
+        skip = False
         if not self.is_plugin:
             self.write_line_verbatim('#include <string>')
+            skip = True
+        if self.class_object['has_vector']:
+            self.write_line_verbatim('#include <vector>')
+            skip = True
+        if skip:
             self.skip_line(2)
+
         # write the base class header
         if self.baseClass:
             base = self.baseClass
@@ -303,11 +310,17 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             code = attrib_functions.write_is_set(True, i)
             self.write_function_declaration(code)
 
+            code = attrib_functions.write_get_num_for_vector(True, i)
+            self.write_function_declaration(code)
+
         for i in range(0, num_attributes):
             code = attrib_functions.write_set(True, i)
             self.write_function_declaration(code)
 
             code = attrib_functions.write_set_string_for_enum(True, i)
+            self.write_function_declaration(code)
+
+            code = attrib_functions.write_add_element_for_vector(True, i)
             self.write_function_declaration(code)
 
         for i in range(0, num_attributes):

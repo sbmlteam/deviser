@@ -263,6 +263,13 @@ def main():
     test_case = 'child element'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'test_sedml'
+    num = 8
+    class_name = 'SedVectorRange'
+    list_of = ''
+    test_case = 'deal with vectors'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
 

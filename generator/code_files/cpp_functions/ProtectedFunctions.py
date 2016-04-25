@@ -138,8 +138,9 @@ class ProtectedFunctions():
     def write_create_object(self):
         num_children = self.num_children - self.num_non_std_children
         # if not list of only write if has children other than node based
-        if not self.is_list_of and num_children == 0:
-            return
+        if self.has_std_base:
+            if not self.is_list_of and num_children == 0:
+                return
 
         # create comment parts
         if self.is_list_of:
@@ -187,7 +188,8 @@ class ProtectedFunctions():
                 else:
                     lines = ['const std::string& name '
                              '= stream.peek().getName()']
-                code.append(self.create_code_block('line', lines))
+                if num_children > 0:
+                    code.append(self.create_code_block('line', lines))
                 if self.is_plugin:
                     line = ['const std::string& targetPrefix = (xmlns.hasURI'
                             '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
@@ -209,7 +211,10 @@ class ProtectedFunctions():
                         error = '{0}Unknown'.format(self.package)
                 error_line = 'getErrorLog()->{0}{1}, ' \
                              '{2})'.format(self.error, error, self.error_args)
-                if num_children == 1:
+                if num_children == 0:
+                    # do nothing we are calling a base class
+                    implementation = []
+                elif num_children == 1:
                     element = self.find_single_element()
                     if element['abstract'] and \
                             not element['attType'] == 'lo_element':
@@ -653,8 +658,14 @@ class ProtectedFunctions():
     # function to write read other xml
     def write_read_other_xml(self):
         # only needed for cpp list of class
-        if self.is_list_of or self.num_non_std_children == 0:
-            return
+        has_vector = query.has_vector(self.attributes)
+        if not has_vector:
+            if self.is_list_of or self.num_non_std_children == 0:
+                return
+        else:
+            for attrib in self.attributes:
+                if attrib['isVector']:
+                    vector_attribute = attrib
         # create comment
         title_line = 'Reads other XML such as math/notes etc.'
         params = []
@@ -667,9 +678,29 @@ class ProtectedFunctions():
         arguments = ['XMLInputStream& stream']
 
         # create the function implementation
-        implementation = ['bool read = false',
-                          'const string& name = stream.peek().getName()']
+        if has_vector:
+            implementation = ['bool read = false']
+        else:
+            implementation = ['bool read = false',
+                              'const string& name = stream.peek().getName()']
         code = [dict({'code_type': 'line', 'code': implementation})]
+
+        if has_vector:
+            implementation = ['!text.fail()', '{0}.push_back(value)'.format(vector_attribute['memberName'])]
+            if_block = self.create_code_block('if', implementation)
+            implementation = ['stream.isGood() && stream.peek().isText()',
+                              'text << stream.next().getCharacters()']
+            nested_while = self.create_code_block('while', implementation)
+            implementation = ['stream.peek().getName() == \"{0}\"'
+                              ''.format(vector_attribute['name']),
+                              'stream.next()', 'stringstream text',
+                              nested_while, 'double value', 'text >> value',
+                              if_block, 'stream.next()', 'read = true']
+            code.append(self.create_code_block('while', implementation))
+            if len(self.child_elements) > 0:
+                implementation = ['const string& name = stream.peek().getName()']
+                code.append(self.create_code_block('line', implementation))
+
 
         # math is unique - assume others are XMLNode based
         for i in range(0, len(self.child_elements)):
@@ -1096,6 +1127,8 @@ class ProtectedFunctions():
     def write_write_att(self, attributes, index, code):
         if attributes[index]['isArray']:
             return
+        elif attributes[index]['isVector']:
+            return
         name = attributes[index]['xml_name']
         cap_name = attributes[index]['capAttName']
         member = attributes[index]['memberName']
@@ -1113,6 +1146,8 @@ class ProtectedFunctions():
     def write_read_att(self, attributes, index, code):
         attribute = attributes[index]
         if attribute['isArray']:
+            return
+        if attribute['isVector']:
             return
         name = attribute['xml_name']
         att_type = attribute['type']

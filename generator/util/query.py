@@ -210,6 +210,13 @@ def has_array(attributes):
     return False
 
 
+# return True is any of the attributes are of type vector
+def has_vector(attributes):
+    if any(attribute['type'] == 'vector' for attribute in attributes):
+        return True
+    return False
+
+
 # return True is the attribute is saved as a string
 def is_string(attribute):
     if attribute['attType'] == 'string':

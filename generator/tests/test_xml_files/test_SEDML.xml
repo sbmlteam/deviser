@@ -70,6 +70,11 @@
             <concrete name="steadyState" element="SteadyState"/>
           </concretes>
         </element>
+        <element name="VectorRange" typeCode="SEDML_RANGE_VECTORRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="vectorRange">
+          <attributes>
+            <attribute name="value" required="false" type="vector" element="double" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
     </pkgVersion>
   </versions>

@@ -24,6 +24,7 @@
 #include <sedml/SedDataGenerator.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedSimulation.h>
+#include <sedml/SedVectorRange.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>

@@ -109,6 +109,16 @@ SedVisitor::visit(const SedSimulation& x)
 }
 
 
+/*
+ * Visit the SedVectorRange
+ */
+bool
+SedVisitor::visit(const SedVectorRange& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
 void
 SedVisitor::leave (const SedDocument& x)
 {
@@ -186,6 +196,15 @@ SedVisitor::leave(const SedRepeatedTask& x)
  */
 void
 SedVisitor::leave(const SedSimulation& x)
+{
+}
+
+
+/*
+ * Leave the SedVectorRange
+ */
+void
+SedVisitor::leave(const SedVectorRange& x)
 {
 }
 

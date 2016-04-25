@@ -36,6 +36,7 @@ typedef CLASS_OR_STRUCT SedSetValue      SedSetValue_t;
 typedef CLASS_OR_STRUCT SedDataGenerator SedDataGenerator_t;
 typedef CLASS_OR_STRUCT SedRepeatedTask  SedRepeatedTask_t;
 typedef CLASS_OR_STRUCT SedSimulation    SedSimulation_t;
+typedef CLASS_OR_STRUCT SedVectorRange   SedVectorRange_t;
 typedef CLASS_OR_STRUCT SedBase          SedBase_t;
 typedef CLASS_OR_STRUCT SedListOf        SedListOf_t;
 typedef CLASS_OR_STRUCT SedReader        SedReader_t;

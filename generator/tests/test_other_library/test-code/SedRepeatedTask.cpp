@@ -303,6 +303,25 @@ SedRepeatedTask::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedRepeatedTask::createObject(XMLInputStream& stream)
+{
+  SedBase* obj = SedTask::createObject(stream);
+
+  connectToChild();
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

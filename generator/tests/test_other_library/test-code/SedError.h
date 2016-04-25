@@ -97,6 +97,10 @@ typedef enum
 , SedmlSedSimulationAllowedAttributes      = 20903
 , SedmlSedSimulationAllowedElements      = 20904
 , SedmlSedSimulationNameMustBeString      = 20905
+, SedmlSedVectorRangeAllowedCoreAttributes      = 21001
+, SedmlSedVectorRangeAllowedCoreElements      = 21002
+, SedmlSedVectorRangeAllowedAttributes      = 21003
+, SedmlSedVectorRangeValueMustBeString      = 21004
 , UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the Sed Core namespace. */
 , SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;
