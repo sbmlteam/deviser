@@ -82,7 +82,9 @@ def generate_other_library_code(name, language, overwrite, ob):
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
+    global_variables.populate_error_list(ob)
     generate_other_library_code_files(name, ob)
+#    generate_bindings_files(name, ob)
 
 
 def generate_package_code(name, language, overwrite, ob):
@@ -217,6 +219,7 @@ def generate_other_library_code_files(name, ob):
     prefix = global_variables.prefix
     main_dir = '{0}{1}src{1}{2}'.format(name, os.sep, language)
     common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
+    binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
     os.chdir(main_dir)
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
@@ -278,6 +281,16 @@ def populate_other_library_directories(name, lang):
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
+                   '{0}{1}src{1}bindings'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}csharp'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}java'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}javascript'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}perl'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}php'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}python'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}r'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}ruby'.format(name, sep),
+                   '{0}{1}src{1}bindings{1}swig'.format(name, sep),
                    '{0}{1}src{1}{2}'.format(name, sep, lang),
                    '{0}{1}src{1}{2}{1}common'.format(name, sep, lang)]
 

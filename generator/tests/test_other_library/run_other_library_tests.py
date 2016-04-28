@@ -3,6 +3,7 @@
 import os
 
 from code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
+from bindings_files import BindingsFiles
 from parseXML import ParseXML
 from util import strFunctions, global_variables
 
@@ -52,16 +53,6 @@ def generate_common_templates(filename):
     base_files.write_common_files()
     os.chdir('../.')
 
-def generate_validator(filename):
-    parser = ParseXML.ParseXML(filename)
-    ob = parser.parse_deviser_xml()
-    for wc in ob['baseElements']:
-        strFunctions.prefix_classes(wc)
-    os.chdir('./temp')
-    valid = ValidationFiles.ValidationFiles(ob, True)
-    valid.write_error_table_header()
-    os.chdir('../.')
-
 def generate_forward(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -70,6 +61,20 @@ def generate_forward(filename):
     os.chdir('./temp')
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
+    os.chdir('../.')
+
+def generate_binding(filename, binding):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if os.path.isdir(binding):
+        os.chdir(binding)
+    else:
+        os.makedirs(binding)
+        os.chdir(binding)
+    all_files = BindingsFiles.BindingFiles(ob, binding, True)
+    all_files.write_swig_library_files()
+    os.chdir('../.')
     os.chdir('../.')
 
 #############################################################################
@@ -101,6 +106,12 @@ def compare_code_txt(class_name):
     correct_file = '.\\test-code\\{0}.txt'.format(class_name)
     temp_file = '.\\temp\\{0}.txt'.format(class_name)
     return compare_files(correct_file, temp_file)
+
+def compare_binding_headers(class_name, binding):
+    correct_file = '.\\test-code\\{0}\\{1}.h'.format(binding, class_name)
+    temp_file = '.\\temp\\{0}\\{1}.h'.format(binding, class_name)
+    return compare_files(correct_file, temp_file)
+
 
 
 #############################################################################
@@ -167,13 +178,6 @@ def test_common_templates(name, class_name, test_case):
     print('')
     return fail
 
-def run_validator(name, class_name, test_case):
-    filename = test_functions.set_up_test(name, class_name, test_case)
-    generate_validator(filename)
-    fail = compare_code_headers(class_name)
-    print('')
-    return fail
-
 def run_forward(name, class_name, test_case):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_forward(filename)
@@ -181,6 +185,12 @@ def run_forward(name, class_name, test_case):
     print('')
     return fail
 
+def test_bindings(name, class_name, test_case, binding):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_binding(filename, binding)
+    fail = compare_binding_headers(class_name, binding)
+    print('')
+    return fail
 
 
 #########################################################################
@@ -269,6 +279,12 @@ def main():
     list_of = ''
     test_case = 'deal with vectors'
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    class_name = 'libsedml'
+    test_case = 'swig dir'
+    binding = 'swig'
+    fail += test_bindings(name, class_name, test_case, binding)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

@@ -476,4 +476,7 @@ class BaseFile:
             if filename.endswith(excluded_files[i]):
                 excluded = True
             i += 1
+        if not excluded:
+            if filename == global_variables.library_name.lower():
+                excluded = True
         return excluded

@@ -101,6 +101,39 @@ class NativeSwigFile():
 
     #########################################################################
 
+    def write_swig_library_header_code(self):
+        self.fileout.skip_line(2)
+        self.fileout.write_line('#include <{0}/common/lib{0}-version.h>'
+                                ''.format(self.language.lower()))
+        self.fileout.write_line('#include <{0}/common/{1}OperationReturnValues'
+                                '.h>'.format(self.language.lower(),
+                                             global_variables.prefix))
+        self.fileout.skip_line()
+        self.fileout.write_line('#include <{0}/{1}Types.h>'
+                                ''.format(self.language.lower(),
+                                          global_variables.prefix))
+        self.fileout.skip_line()
+        self.fileout.write_line('#include \"ListWrapper.h\"')
+        self.fileout.skip_line()
+        self.fileout.write_line('#include <sbml/math/MathML.h>')
+        self.fileout.write_line('#include <sbml/math/ASTNode.h>')
+        self.fileout.skip_line()
+        self.fileout.write_line('#include <sbml/xml/XMLAttributes.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLConstructorException.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLNamespaces.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLToken.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLNode.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLTriple.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLOutputStream.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLInputStream.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLError.h>')
+        self.fileout.write_line('#include <sbml/xml/XMLErrorLog.h>')
+        self.fileout.skip_line()
+
+
+    def write_swig_library_interface_code(self):
+        self.fileout.skip_line(2)
+    ########################################################################
     # Function used
     
     def write_includes(self, sep):
@@ -137,15 +170,26 @@ class NativeSwigFile():
     # Write file
 
     def write_file(self):
-        self.fileout.write_file()
-        if self.is_header:
-            self.write_swig_header_code()
+        if global_variables.is_package:
+            self.fileout.write_file()
+            if self.is_header:
+                self.write_swig_header_code()
+            else:
+                self.write_swig_interface_code()
         else:
-            self.write_swig_interface_code()
+            self.write_library_file()
 
     def close_file(self):
         if self.fileout:
             self.fileout.close_file()
+
+    def write_library_file(self):
+        self.fileout.write_file()
+        if self.is_header:
+            self.write_swig_library_header_code()
+        else:
+            self.write_swig_library_interface_code()
+
 
     @staticmethod
     def create_code_block(code_type, lines):
