@@ -367,7 +367,8 @@ SedSimulation::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedSimulation::writeElements(XMLOutputStream& stream) const
+SedSimulation::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeElements(stream);
 
@@ -474,7 +475,8 @@ SedSimulation::getElementBySId(const std::string& id)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedSimulation::createObject(XMLInputStream& stream)
+SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   SedBase* obj = NULL;
 
@@ -484,7 +486,7 @@ SedSimulation::createObject(XMLInputStream& stream)
   {
     if (isSetAlgorithm())
     {
-      getErrorLog()->logError(SedmlSedSimulationAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -507,7 +509,8 @@ SedSimulation::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedSimulation::addExpectedAttributes(ExpectedAttributes& attributes)
+SedSimulation::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -526,8 +529,11 @@ SedSimulation::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedSimulation::readAttributes(const XMLAttributes& attributes,
-                              const ExpectedAttributes& expectedAttributes)
+SedSimulation::readAttributes(
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                XMLAttributes& attributes,
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -544,7 +550,7 @@ SedSimulation::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSedSimulationsAllowedAttributes, level, version,
+        log->logError(SedmlLOSimulationsAllowedAttributes, level, version,
           details);
       }
     }
@@ -615,7 +621,8 @@ SedSimulation::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-SedSimulation::writeAttributes(XMLOutputStream& stream) const
+SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeAttributes(stream);
 

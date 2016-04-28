@@ -261,7 +261,8 @@ SedRepeatedTask::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedRepeatedTask::writeElements(XMLOutputStream& stream) const
+SedRepeatedTask::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedTask::writeElements(stream);
 }
@@ -306,7 +307,8 @@ SedRepeatedTask::setSedDocument(SedDocument* d)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedRepeatedTask::createObject(XMLInputStream& stream)
+SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   SedBase* obj = SedTask::createObject(stream);
 
@@ -325,7 +327,8 @@ SedRepeatedTask::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
+SedRepeatedTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedTask::addExpectedAttributes(attributes);
 
@@ -344,8 +347,11 @@ SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedRepeatedTask::readAttributes(const XMLAttributes& attributes,
-                                const ExpectedAttributes& expectedAttributes)
+SedRepeatedTask::readAttributes(
+                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                  XMLAttributes& attributes,
+                                const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                  ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -403,7 +409,8 @@ SedRepeatedTask::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-SedRepeatedTask::writeAttributes(XMLOutputStream& stream) const
+SedRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  XMLOutputStream& stream) const
 {
   SedTask::writeAttributes(stream);
 

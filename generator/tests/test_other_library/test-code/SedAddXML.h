@@ -24,6 +24,7 @@
 
 #include <sedml/SedChange.h>
 #include <sbml/xml/XMLNode.h>
+#include <sbml/common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -35,7 +36,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  XMLNode* mNewXML;
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* mNewXML;
 
   /** @endcond */
 
@@ -108,17 +109,19 @@ public:
   /**
    * Returns the value of the "newXML" element of this SedAddXML.
    *
-   * @return the value of the "newXML" element of this SedAddXML as a XMLNode*.
+   * @return the value of the "newXML" element of this SedAddXML as a
+   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*.
    */
-  const XMLNode* getNewXML() const;
+  const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* getNewXML() const;
 
 
   /**
    * Returns the value of the "newXML" element of this SedAddXML.
    *
-   * @return the value of the "newXML" element of this SedAddXML as a XMLNode*.
+   * @return the value of the "newXML" element of this SedAddXML as a
+   * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*.
    */
-  XMLNode* getNewXML();
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* getNewXML();
 
 
   /**
@@ -133,14 +136,15 @@ public:
   /**
    * Sets the value of the "newXML" element of this SedAddXML.
    *
-   * @param newXML XMLNode* value of the "newXML" element to be set.
+   * @param newXML LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* value of the
+   * "newXML" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setNewXML(const XMLNode* newXML);
+  int setNewXML(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* newXML);
 
 
   /**
@@ -212,7 +216,8 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements(XMLOutputStream& stream) const;
+  virtual void writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 
@@ -258,7 +263,8 @@ protected:
   /**
    * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual SedBase* createObject(XMLInputStream& stream);
+  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
 
   /** @endcond */
 
@@ -269,7 +275,8 @@ protected:
   /**
    * Adds the expected attributes for this element
    */
-  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
+  virtual void addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+    ExpectedAttributes& attributes);
 
   /** @endcond */
 
@@ -280,8 +287,11 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readAttributes(const XMLAttributes& attributes,
-                              const ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes(
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                XMLAttributes& attributes,
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                ExpectedAttributes& expectedAttributes);
 
   /** @endcond */
 
@@ -292,7 +302,8 @@ protected:
   /**
    * Reads other XML such as math/notes etc.
    */
-  virtual bool readOtherXML(XMLInputStream& stream);
+  virtual bool readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
 
   /** @endcond */
 
@@ -303,7 +314,8 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeAttributes(XMLOutputStream& stream) const;
+  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 
@@ -388,12 +400,13 @@ SedAddXML_free(SedAddXML_t* saxml);
  *
  * @param saxml the SedAddXML_t structure whose newXML is sought.
  *
- * @return the value of the "newXML" element of this SedAddXML_t as a XMLNode*.
+ * @return the value of the "newXML" element of this SedAddXML_t as a
+ * LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*.
  *
  * @memberof SedAddXML_t
  */
 LIBSEDML_EXTERN
-const XMLNode_t*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t*
 SedAddXML_getNewXML(const SedAddXML_t * saxml);
 
 
@@ -417,7 +430,8 @@ SedAddXML_isSetNewXML(const SedAddXML_t * saxml);
  *
  * @param saxml the SedAddXML_t structure.
  *
- * @param newXML XMLNode_t* value of the "newXML" element to be set.
+ * @param newXML LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t* value of the
+ * "newXML" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -428,7 +442,8 @@ SedAddXML_isSetNewXML(const SedAddXML_t * saxml);
  */
 LIBSEDML_EXTERN
 int
-SedAddXML_setNewXML(SedAddXML_t * saxml, const XMLNode_t* newXML);
+SedAddXML_setNewXML(SedAddXML_t * saxml,
+                    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t* newXML);
 
 
 /**

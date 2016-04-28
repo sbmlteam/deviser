@@ -176,7 +176,8 @@ MySEDClass::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-MySEDClass::writeElements(XMLOutputStream& stream) const
+MySEDClass::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeElements(stream);
 }
@@ -221,7 +222,8 @@ MySEDClass::setSedDocument(SedDocument* d)
  * Adds the expected attributes for this element
  */
 void
-MySEDClass::addExpectedAttributes(ExpectedAttributes& attributes)
+MySEDClass::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -238,8 +240,11 @@ MySEDClass::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-MySEDClass::readAttributes(const XMLAttributes& attributes,
-                           const ExpectedAttributes& expectedAttributes)
+MySEDClass::readAttributes(
+                           const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
+                             attributes,
+                           const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                             ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -290,7 +295,8 @@ MySEDClass::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-MySEDClass::writeAttributes(XMLOutputStream& stream) const
+MySEDClass::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeAttributes(stream);
 

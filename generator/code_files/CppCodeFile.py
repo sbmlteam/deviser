@@ -467,9 +467,12 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                             self.is_list_of, self.class_object)
         num_elements = len(self.child_elements)
         # add error log and ns to child elements
+        att_tc = 'XMLNamespaces*'
+        if not global_variables.is_package:
+            att_tc = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*'
         element = dict({'name': 'Namespaces',
                         'isArray': False,
-                        'attTypeCode': 'XMLNamespaces*',
+                        'attTypeCode': att_tc,
                         'capAttName': 'Namespaces',
                         'attType': 'element',
                         'memberName': 'm{0}Namespaces'.format(global_variables.prefix)})

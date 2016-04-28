@@ -283,11 +283,19 @@ class BaseCppFile(BaseFile.BaseFile):
                 at_name = attributes[i]['name']
                 attributes[i]['attType'] = 'element'
                 if attributes[i]['name'] == 'math':
-                    attributes[i]['attTypeCode'] = 'ASTNode*'
-                    attributes[i]['CType'] = 'ASTNode_t*'
+                    if global_variables.is_package:
+                        attributes[i]['attTypeCode'] = 'ASTNode*'
+                        attributes[i]['CType'] = 'ASTNode_t*'
+                    else:
+                        attributes[i]['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*'
+                        attributes[i]['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*'
                 else:
                     attributes[i]['attTypeCode'] = attributes[i]['element']+'*'
                     attributes[i]['CType'] = attributes[i]['element']+'_t*'
+                if attributes[i]['attTypeCode'] == 'XMLNode*' and not global_variables.is_package:
+                    attributes[i]['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(attributes[i]['element'])
+                    attributes[i]['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(attributes[i]['element'])
+
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
                 if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):

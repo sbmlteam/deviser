@@ -108,7 +108,7 @@ SedAddXML::~SedAddXML()
 /*
  * Returns the value of the "newXML" element of this SedAddXML.
  */
-const XMLNode*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*
 SedAddXML::getNewXML() const
 {
   return mNewXML;
@@ -118,7 +118,7 @@ SedAddXML::getNewXML() const
 /*
  * Returns the value of the "newXML" element of this SedAddXML.
  */
-XMLNode*
+LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*
 SedAddXML::getNewXML()
 {
   return mNewXML;
@@ -139,7 +139,7 @@ SedAddXML::isSetNewXML() const
  * Sets the value of the "newXML" element of this SedAddXML.
  */
 int
-SedAddXML::setNewXML(const XMLNode* newXML)
+SedAddXML::setNewXML(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* newXML)
 {
   if (mNewXML == newXML)
   {
@@ -231,7 +231,8 @@ SedAddXML::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedAddXML::writeElements(XMLOutputStream& stream) const
+SedAddXML::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedChange::writeElements(stream);
 
@@ -298,7 +299,7 @@ SedAddXML::connectToChild()
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedAddXML::createObject(XMLInputStream& stream)
+SedAddXML::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   SedBase* obj = SedChange::createObject(stream);
 
@@ -317,7 +318,8 @@ SedAddXML::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedAddXML::addExpectedAttributes(ExpectedAttributes& attributes)
+SedAddXML::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedChange::addExpectedAttributes(attributes);
 }
@@ -332,8 +334,11 @@ SedAddXML::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedAddXML::readAttributes(const XMLAttributes& attributes,
-                          const ExpectedAttributes& expectedAttributes)
+SedAddXML::readAttributes(
+                          const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
+                            attributes,
+                          const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                            ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -365,18 +370,20 @@ SedAddXML::readAttributes(const XMLAttributes& attributes,
  * Reads other XML such as math/notes etc.
  */
 bool
-SedAddXML::readOtherXML(XMLInputStream& stream)
+SedAddXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   bool read = false;
   const string& name = stream.peek().getName();
 
   if (name == "newXML")
   {
-    const XMLToken& token = stream.next();
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& token = stream.next();
     stream.skipText();
     delete mNewXML;
-    XMLNode* xml = new XMLNode(stream);
-    mNewXML = new XMLNode(*(static_cast<XMLToken*>(xml)));
+    LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* xml = new
+      LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(stream);
+    mNewXML = new LIBSBML_CPP_NAMESPACE_QUALIFIER
+      XMLNode(*(static_cast<LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken*>(xml)));
     stream.skipPastEnd(token);
     delete xml;
     read = true;
@@ -400,7 +407,8 @@ SedAddXML::readOtherXML(XMLInputStream& stream)
  * Writes the attributes to the stream
  */
 void
-SedAddXML::writeAttributes(XMLOutputStream& stream) const
+SedAddXML::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedChange::writeAttributes(stream);
 }
@@ -461,7 +469,7 @@ SedAddXML_free(SedAddXML_t* saxml)
  * Returns the value of the "newXML" element of this SedAddXML_t.
  */
 LIBSEDML_EXTERN
-const XMLNode_t*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t*
 SedAddXML_getNewXML(const SedAddXML_t * saxml)
 {
   if (saxml == NULL)
@@ -469,7 +477,7 @@ SedAddXML_getNewXML(const SedAddXML_t * saxml)
     return NULL;
   }
 
-  return (XMLNode_t*)(saxml->getNewXML());
+  return (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t*)(saxml->getNewXML());
 }
 
 
@@ -489,7 +497,8 @@ SedAddXML_isSetNewXML(const SedAddXML_t * saxml)
  */
 LIBSEDML_EXTERN
 int
-SedAddXML_setNewXML(SedAddXML_t * saxml, const XMLNode_t* newXML)
+SedAddXML_setNewXML(SedAddXML_t * saxml,
+                    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode_t* newXML)
 {
   return (saxml != NULL) ? saxml->setNewXML(newXML) : LIBSEDML_INVALID_OBJECT;
 }

@@ -156,7 +156,12 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'createObject'
         return_type = '{0}*'.format(self.std_base)
-        arguments = ['XMLInputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLInputStream& stream']
+            xmlns = 'XMLNamespaces'
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
+            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
         code = []
@@ -181,8 +186,8 @@ class ProtectedFunctions():
                 if self.is_plugin:
                     lines = ['const std::string& name = '
                              'stream.peek().getName()',
-                             'const XMLNamespaces& xmlns = '
-                             'stream.peek().getNamespaces()',
+                             'const {0}& xmlns = '
+                             'stream.peek().getNamespaces()'.format(xmlns),
                              'const std::string& prefix '
                              '= stream.peek().getPrefix()']
                 else:
@@ -205,10 +210,13 @@ class ProtectedFunctions():
                 else:
                     class_name = self.class_name
                 # sort error names to be used
-                error = '{0}{1}AllowedElements'.format(self.package, class_name)
+                name_in_error = class_name
+                if not self.document:
+                    name_in_error = strFunctions.remove_prefix(class_name)
+                error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
                 if not global_variables.running_tests:
                     if error not in global_variables.error_list:
-                        error = '{0}Unknown'.format(self.package)
+                        error = '{0}UnknownError'.format(self.package)
                 error_line = 'getErrorLog()->{0}{1}, ' \
                              '{2})'.format(self.error, error, self.error_args)
                 if num_children == 0:
@@ -504,7 +512,10 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'addExpectedAttributes'
         return_type = 'void'
-        arguments = ['ExpectedAttributes& attributes']
+        if global_variables.is_package:
+            arguments = ['ExpectedAttributes& attributes']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes']
 
         # create the function implementation
         if self.base_class:
@@ -563,8 +574,12 @@ class ProtectedFunctions():
         # create function declaration
         function = 'readAttributes'
         return_type = 'void'
-        arguments = ['const XMLAttributes& attributes',
-                     'const ExpectedAttributes& expectedAttributes']
+        if global_variables.is_package:
+            arguments = ['const XMLAttributes& attributes',
+                         'const ExpectedAttributes& expectedAttributes']
+        else:
+            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
+                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
 
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
@@ -628,7 +643,10 @@ class ProtectedFunctions():
         # create function declaration
         function = 'readV{0}Attributes'.format(version)
         return_type = 'void'
-        arguments = ['const XMLAttributes& attributes']
+        if global_variables.is_package:
+            arguments = ['const XMLAttributes& attributes']
+        else:
+            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes']
 
         # create the function implementation
         implementation = ['unsigned int level = getLevel()',
@@ -675,7 +693,10 @@ class ProtectedFunctions():
         # create function declaration
         function = 'readOtherXML'
         return_type = 'bool'
-        arguments = ['XMLInputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLInputStream& stream']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream']
 
         # create the function implementation
         if has_vector:
@@ -703,6 +724,12 @@ class ProtectedFunctions():
 
 
         # math is unique - assume others are XMLNode based
+        if global_variables.is_package:
+            token = 'XMLToken'
+            node = 'XMLNode'
+        else:
+            token = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken'
+            node = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode'
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             if element['element'] == 'ASTNode':
@@ -715,7 +742,7 @@ class ProtectedFunctions():
                 if global_variables.is_package:
                     nested_if = self.create_code_block('if', line)
                 implementation = ['name == \"math\"',
-                                  'const XMLToken elem = stream.peek()',
+                                  'const {0} elem = stream.peek()'.format(token),
                                   'const std::string prefix = '
                                   'checkMathMLNamespace(elem)']
                 if len(nested_if) > 0:
@@ -729,12 +756,12 @@ class ProtectedFunctions():
                 name = element['capAttName'] if element['name'] == 'uncertML' \
                     else element['name']
                 line = ['name == \"{0}\"'.format(name),
-                        'const XMLToken& token = stream.next()',
+                        'const {0}& token = stream.next()'.format(token),
                         'stream.skipText()',
                         'delete {0}'.format(member),
-                        'XMLNode* xml = new XMLNode(stream)']
+                        '{0}* xml = new {0}(stream)'.format(node)]
                 if element['element'] == 'XMLNode':
-                    line.append('{0} = new {1}(*(static_cast<XMLToken*>(xml)))'.format(member, element['element']))
+                    line.append('{0} = new {1}(*(static_cast<{2}*>(xml)))'.format(member, node, token))
                 else:
                     line.append('{0} = new {1}(xml)'.format(member, element['element']))
                 line.append('stream.skipPastEnd(token)')
@@ -773,7 +800,10 @@ class ProtectedFunctions():
         # create function declaration
         function = 'writeAttributes'
         return_type = 'void'
-        arguments = ['XMLOutputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLOutputStream& stream']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         if self.base_class:
@@ -830,7 +860,10 @@ class ProtectedFunctions():
         # create function declaration
         function = 'writeV{0}Attributes'.format(version)
         return_type = 'void'
-        arguments = ['XMLOutputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLOutputStream& stream']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         code = []
@@ -870,10 +903,15 @@ class ProtectedFunctions():
         # create the function declaration
         function = 'writeXMLNS'
         return_type = 'void'
-        arguments = ['XMLOutputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLOutputStream& stream']
+            xmlns = 'XMLNamespaces'
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
+            xmlns = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces'
 
         # create the function implementation
-        implementation = ['XMLNamespaces xmlns',
+        implementation = ['{0} xmlns'.format(xmlns),
                           'std::string prefix = getPrefix()']
         code = [dict({'code_type': 'line', 'code': implementation})]
         if global_variables.is_package:
@@ -888,7 +926,7 @@ class ProtectedFunctions():
 
         nested_if = self.create_code_block('if', implementation)
         implementation = ['prefix.empty()',
-                          'const XMLNamespaces* thisxmlns = getNamespaces()',
+                          'const {0}* thisxmlns = getNamespaces()'.format(xmlns),
                           nested_if]
         code.append(self.create_code_block('if', implementation))
         code.append(self.create_code_block('line', ['stream << xmlns']))
@@ -1020,7 +1058,8 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def get_error_from_list_of_read(self):
-        plural = strFunctions.plural(self.class_name)
+        name_in_error = strFunctions.remove_prefix(self.class_name)
+        plural = strFunctions.plural(name_in_error)
         c_err = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
                                                           self.parent_class,
                                                           plural)
@@ -1030,9 +1069,9 @@ class ProtectedFunctions():
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                         self.class_name)
+                                                         name_in_error)
                 if error not in global_variables.error_list:
-                    error = '{0}Unknown'.format(self.package)
+                    error = '{0}UnknownError'.format(self.package)
             if c_err not in global_variables.error_list:
                 c_err = '{0}Unknown'.format(self.package)
         if global_variables.is_package:

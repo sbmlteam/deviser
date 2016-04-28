@@ -230,7 +230,7 @@ SedDataGenerator::unsetName()
 /*
  * Returns the value of the "math" element of this SedDataGenerator.
  */
-const ASTNode*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*
 SedDataGenerator::getMath() const
 {
   return mMath;
@@ -240,7 +240,7 @@ SedDataGenerator::getMath() const
 /*
  * Returns the value of the "math" element of this SedDataGenerator.
  */
-ASTNode*
+LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*
 SedDataGenerator::getMath()
 {
   return mMath;
@@ -262,7 +262,7 @@ SedDataGenerator::isSetMath() const
  * Sets the value of the "math" element of this SedDataGenerator.
  */
 int
-SedDataGenerator::setMath(const ASTNode* math)
+SedDataGenerator::setMath(const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode* math)
 {
   if (mMath == math)
   {
@@ -616,7 +616,8 @@ SedDataGenerator::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedDataGenerator::writeElements(XMLOutputStream& stream) const
+SedDataGenerator::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
 
@@ -731,7 +732,8 @@ SedDataGenerator::getElementBySId(const std::string& id)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedDataGenerator::createObject(XMLInputStream& stream)
+SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   SedBase* obj = NULL;
 
@@ -741,7 +743,7 @@ SedDataGenerator::createObject(XMLInputStream& stream)
   {
     if (mVariables.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDataGeneratorAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -751,7 +753,7 @@ SedDataGenerator::createObject(XMLInputStream& stream)
   {
     if (mParameters.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDataGeneratorAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -773,7 +775,8 @@ SedDataGenerator::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedDataGenerator::addExpectedAttributes(ExpectedAttributes& attributes)
+SedDataGenerator::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -792,8 +795,11 @@ SedDataGenerator::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedDataGenerator::readAttributes(const XMLAttributes& attributes,
-                                 const ExpectedAttributes& expectedAttributes)
+SedDataGenerator::readAttributes(
+                                 const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                   XMLAttributes& attributes,
+                                 const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                   ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -810,8 +816,8 @@ SedDataGenerator::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSedDataGeneratorsAllowedAttributes, level,
-          version, details);
+        log->logError(SedmlLODataGeneratorsAllowedAttributes, level, version,
+          details);
       }
     }
   }
@@ -881,14 +887,15 @@ SedDataGenerator::readAttributes(const XMLAttributes& attributes,
  * Reads other XML such as math/notes etc.
  */
 bool
-SedDataGenerator::readOtherXML(XMLInputStream& stream)
+SedDataGenerator::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   bool read = false;
   const string& name = stream.peek().getName();
 
   if (name == "math")
   {
-    const XMLToken elem = stream.peek();
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken elem = stream.peek();
     const std::string prefix = checkMathMLNamespace(elem);
     delete mMath;
     mMath = readMathML(stream, prefix);
@@ -913,7 +920,8 @@ SedDataGenerator::readOtherXML(XMLInputStream& stream)
  * Writes the attributes to the stream
  */
 void
-SedDataGenerator::writeAttributes(XMLOutputStream& stream) const
+SedDataGenerator::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1083,7 +1091,7 @@ SedDataGenerator_unsetName(SedDataGenerator_t * sdg)
  * Returns the value of the "math" element of this SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
-const ASTNode_t*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*
 SedDataGenerator_getMath(const SedDataGenerator_t * sdg)
 {
   if (sdg == NULL)
@@ -1091,7 +1099,7 @@ SedDataGenerator_getMath(const SedDataGenerator_t * sdg)
     return NULL;
   }
 
-  return (ASTNode_t*)(sdg->getMath());
+  return (LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*)(sdg->getMath());
 }
 
 
@@ -1111,7 +1119,8 @@ SedDataGenerator_isSetMath(const SedDataGenerator_t * sdg)
  */
 LIBSEDML_EXTERN
 int
-SedDataGenerator_setMath(SedDataGenerator_t * sdg, const ASTNode_t* math)
+SedDataGenerator_setMath(SedDataGenerator_t * sdg,
+                         const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t* math)
 {
   return (sdg != NULL) ? sdg->setMath(math) : LIBSEDML_INVALID_OBJECT;
 }

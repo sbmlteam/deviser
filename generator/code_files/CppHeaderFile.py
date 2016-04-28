@@ -223,6 +223,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         if not global_variables.is_package and self.document:
             include_lines += ['<{0}/{1}ErrorLog.h>'.format(self.language, global_variables.prefix)]
 
+        # if we another library we need the libsbml ns qualifier
+        if not global_variables.is_package:
+            include_lines += ['<sbml/common/libsbml-namespace.h>']
+
 
         # write them out
         for line in include_lines:
@@ -485,9 +489,12 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                             self.is_list_of, self.class_object)
         num_elements = len(self.child_elements)
         # add error log and ns to child elements
+        att_tc = 'XMLNamespaces*'
+        if not global_variables.is_package:
+            att_tc = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*'
         element = dict({'name': 'Namespaces',
                         'isArray': False,
-                        'attTypeCode': 'XMLNamespaces*',
+                        'attTypeCode': att_tc,
                         'capAttName': 'Namespaces',
                         'attType': 'element',
                         'memberName': 'm{0}Namespaces'.format(global_variables.prefix)})

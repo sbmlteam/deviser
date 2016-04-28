@@ -493,7 +493,8 @@ SedModel::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedModel::writeElements(XMLOutputStream& stream) const
+SedModel::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeElements(stream);
 
@@ -587,7 +588,7 @@ SedModel::getElementBySId(const std::string& id)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedModel::createObject(XMLInputStream& stream)
+SedModel::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   SedBase* obj = NULL;
 
@@ -597,7 +598,7 @@ SedModel::createObject(XMLInputStream& stream)
   {
     if (mChanges.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedModelAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlModelAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -619,7 +620,8 @@ SedModel::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedModel::addExpectedAttributes(ExpectedAttributes& attributes)
+SedModel::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -642,8 +644,11 @@ SedModel::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedModel::readAttributes(const XMLAttributes& attributes,
-                         const ExpectedAttributes& expectedAttributes)
+SedModel::readAttributes(
+                         const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes&
+                           attributes,
+                         const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                           ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -660,7 +665,7 @@ SedModel::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlSedDocumentLOSedModelsAllowedAttributes, level,
+        log->logError(SedmlSedDocumentLOModelsAllowedAttributes, level,
           version, details);
       }
     }
@@ -763,7 +768,8 @@ SedModel::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-SedModel::writeAttributes(XMLOutputStream& stream) const
+SedModel::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeAttributes(stream);
 

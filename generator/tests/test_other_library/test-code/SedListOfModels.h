@@ -24,6 +24,7 @@
 
 #include <sedml/SedListOf.h>
 #include <sedml/SedModel.h>
+#include <sbml/common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -270,7 +271,8 @@ protected:
   /**
    * Creates a new SedModel in this SedListOfModels
    */
-  virtual SedBase* createObject(XMLInputStream& stream);
+  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
 
   /** @endcond */
 
@@ -281,7 +283,8 @@ protected:
   /**
    * Writes the namespace for the Sedml package
    */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
+  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 

@@ -537,7 +537,10 @@ class GeneralFunctions():
         # create the function declaration
         function = 'writeElements'
         return_type = 'void'
-        arguments = ['XMLOutputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLOutputStream& stream']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         base = self.base_class
@@ -766,7 +769,10 @@ class GeneralFunctions():
         # create the function declaration
         function = 'write'
         return_type = 'void'
-        arguments = ['XMLOutputStream& stream']
+        if global_variables.is_package:
+            arguments = ['XMLOutputStream& stream']
+        else:
+            arguments = ['LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream']
 
         # create the function implementation
         # find the array attribute
@@ -1126,8 +1132,12 @@ class GeneralFunctions():
         additional = []
 
         # create the function declaration
-        arguments = ['const XMLAttributes& attributes',
-                     'const ExpectedAttributes& expectedAttributes']
+        if global_variables.is_package:
+            arguments = ['const XMLAttributes& attributes',
+                         'const ExpectedAttributes& expectedAttributes']
+        else:
+            arguments = ['const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes',
+                         'const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& expectedAttributes']
         function = 'readAttributes'
         return_type = 'void'
 
@@ -1137,11 +1147,15 @@ class GeneralFunctions():
                           '3'.format(global_variables.document_class),
                           'return']
         code = [dict({'code_type': 'if', 'code': implementation})]
+        if global_variables.is_package:
+            triple = 'XMLTriple'
+        else:
+            triple = 'LIBSBML_CPP_NAMESPACE_QUALIFIER XMLTriple'
         implementation = ['{0}ErrorLog* log = getErrorLog'
                           '()'.format(self.cap_language),
                           'unsigned int numErrs = log->getNumErrors()',
-                          'XMLTriple tripleReqd(\"required\", mURI, '
-                          'getPrefix())',
+                          '{0} tripleReqd(\"required\", mURI, '
+                          'getPrefix())'.format(triple),
                           'bool assigned = attributes.readInto(tripleReqd, '
                           'mRequired)']
         code.append(self.create_code_block('line', implementation))

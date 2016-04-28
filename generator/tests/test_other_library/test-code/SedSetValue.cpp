@@ -342,7 +342,7 @@ SedSetValue::unsetRange()
 /*
  * Returns the value of the "math" element of this SedSetValue.
  */
-const ASTNode*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*
 SedSetValue::getMath() const
 {
   return mMath;
@@ -352,7 +352,7 @@ SedSetValue::getMath() const
 /*
  * Returns the value of the "math" element of this SedSetValue.
  */
-ASTNode*
+LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*
 SedSetValue::getMath()
 {
   return mMath;
@@ -373,7 +373,7 @@ SedSetValue::isSetMath() const
  * Sets the value of the "math" element of this SedSetValue.
  */
 int
-SedSetValue::setMath(const ASTNode* math)
+SedSetValue::setMath(const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode* math)
 {
   if (mMath == math)
   {
@@ -492,7 +492,8 @@ SedSetValue::hasRequiredElements() const
  * Write any contained elements
  */
 void
-SedSetValue::writeElements(XMLOutputStream& stream) const
+SedSetValue::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeElements(stream);
 
@@ -557,7 +558,8 @@ SedSetValue::connectToChild()
  * Adds the expected attributes for this element
  */
 void
-SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
+SedSetValue::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
 
@@ -580,8 +582,11 @@ SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedSetValue::readAttributes(const XMLAttributes& attributes,
-                            const ExpectedAttributes& expectedAttributes)
+SedSetValue::readAttributes(
+                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                              XMLAttributes& attributes,
+                            const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                              ExpectedAttributes& expectedAttributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -598,7 +603,7 @@ SedSetValue::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSedSetValuesAllowedAttributes, level, version,
+        log->logError(SedmlLOSetValuesAllowedAttributes, level, version,
           details);
       }
     }
@@ -702,14 +707,15 @@ SedSetValue::readAttributes(const XMLAttributes& attributes,
  * Reads other XML such as math/notes etc.
  */
 bool
-SedSetValue::readOtherXML(XMLInputStream& stream)
+SedSetValue::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   bool read = false;
   const string& name = stream.peek().getName();
 
   if (name == "math")
   {
-    const XMLToken elem = stream.peek();
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken elem = stream.peek();
     const std::string prefix = checkMathMLNamespace(elem);
     delete mMath;
     mMath = readMathML(stream, prefix);
@@ -734,7 +740,8 @@ SedSetValue::readOtherXML(XMLInputStream& stream)
  * Writes the attributes to the stream
  */
 void
-SedSetValue::writeAttributes(XMLOutputStream& stream) const
+SedSetValue::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   SedBase::writeAttributes(stream);
 
@@ -1017,7 +1024,7 @@ SedSetValue_unsetRange(SedSetValue_t * ssv)
  * Returns the value of the "math" element of this SedSetValue_t.
  */
 LIBSEDML_EXTERN
-const ASTNode_t*
+const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*
 SedSetValue_getMath(const SedSetValue_t * ssv)
 {
   if (ssv == NULL)
@@ -1025,7 +1032,7 @@ SedSetValue_getMath(const SedSetValue_t * ssv)
     return NULL;
   }
 
-  return (ASTNode_t*)(ssv->getMath());
+  return (LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t*)(ssv->getMath());
 }
 
 
@@ -1045,7 +1052,8 @@ SedSetValue_isSetMath(const SedSetValue_t * ssv)
  */
 LIBSEDML_EXTERN
 int
-SedSetValue_setMath(SedSetValue_t * ssv, const ASTNode_t* math)
+SedSetValue_setMath(SedSetValue_t * ssv,
+                    const LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode_t* math)
 {
   return (ssv != NULL) ? ssv->setMath(math) : LIBSEDML_INVALID_OBJECT;
 }

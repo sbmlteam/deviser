@@ -270,7 +270,8 @@ SedListOfModels::getItemTypeCode() const
  * Creates a new SedModel in this SedListOfModels
  */
 SedBase*
-SedListOfModels::createObject(XMLInputStream& stream)
+SedListOfModels::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;
@@ -294,14 +295,16 @@ SedListOfModels::createObject(XMLInputStream& stream)
  * Writes the namespace for the Sedml package
  */
 void
-SedListOfModels::writeXMLNS(XMLOutputStream& stream) const
+SedListOfModels::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
-  XMLNamespaces xmlns;
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
   std::string prefix = getPrefix();
 
   if (prefix.empty())
   {
-    const XMLNamespaces* thisxmlns = getNamespaces();
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
+      getNamespaces();
     if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
     {
       xmlns.add(SEDML_XMLNS_L1V1, prefix);
