@@ -2,7 +2,7 @@
 
 import os
 
-from tests import test_functions
+import test_functions
 
 ##############################################################################
 # Set up variables

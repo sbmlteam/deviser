@@ -2,6 +2,8 @@
 
 import os
 import shutil
+import sys 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 from util import global_variables
 
 
@@ -95,11 +97,11 @@ def run_tests(test_name, name, fails):
     module = '{0}.{1}.main()'.format(test_name, function_table[name])
     # I have a circular dependency in my imports if I declare these globally
     # see http://stackoverflow.com/questions/9252543/importerror-cannot-import-name-x
-    from tests import test_binding_code
-    from tests import test_cmake_code
-    from tests import test_cpp_code
-    from tests import test_exit_codes
-    from tests import test_tex_files
+    import test_binding_code
+    import test_cmake_code
+    import test_cpp_code
+    import test_exit_codes
+    import test_tex_files
     fail = eval(module)
     if fail > 0:
         ret = 1

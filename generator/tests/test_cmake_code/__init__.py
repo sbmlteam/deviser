@@ -37,4 +37,4 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from . import run_cmake_tests
+import run_cmake_tests

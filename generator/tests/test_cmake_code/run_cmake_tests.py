@@ -5,7 +5,10 @@ import os
 from cmake_files import CMakeFiles
 from parseXML import ParseXML
 
-from tests import test_functions
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+import test_functions
+
 
 ##############################################################################
 # Set up variables
