@@ -25,7 +25,7 @@
         </element>
       </elements>
       <plugins>
-        <plugin extensionPoint="Model" additionalDecls="C:/Development/git/deviser/generator/tests/test_xml_files/groups_modelplugin.h.txt" additionalDefs="C:/Development/git/deviser/generator/tests/test_xml_files/groups_modelplugin.cpp.txt">
+        <plugin extensionPoint="Model" additionalDecls="./groups_modelplugin.h.txt" additionalDefs="./groups_modelplugin.cpp.txt">
           <references>
             <reference name="ListOfGroups"/>
           </references>
