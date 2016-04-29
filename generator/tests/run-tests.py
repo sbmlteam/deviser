@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-
+import sys
 import test_functions
 
 ##############################################################################
@@ -30,7 +30,7 @@ def run_test(name, test_type):
 def main():
     test_functions.set_running_tests()
     global this_dir
-    this_dir = os.getcwd()
+    this_dir = os.path.dirname(os.path.abspath(__file__))
     global total_fail
 
     run_test('binding', 'code')
