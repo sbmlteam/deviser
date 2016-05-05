@@ -592,8 +592,7 @@ SedSimulation::readAttributes(
   {
     std::string message = "Sedml attribute 'id' is missing from the "
       "<SedSimulation> element.";
-    log->logError(SedmlSedSimulationAllowedAttributes, level, version,
-      message);
+    log->logError(SedmlSimulationAllowedAttributes, level, version, message);
   }
 
   // 

@@ -706,7 +706,7 @@ SedModel::readAttributes(
   {
     std::string message = "Sedml attribute 'id' is missing from the <SedModel> "
       "element.";
-    log->logError(SedmlSedModelAllowedAttributes, level, version, message);
+    log->logError(SedmlModelAllowedAttributes, level, version, message);
   }
 
   // 
@@ -754,7 +754,7 @@ SedModel::readAttributes(
   {
     std::string message = "Sedml attribute 'source' is missing from the "
       "<SedModel> element.";
-    log->logError(SedmlSedModelAllowedAttributes, level, version, message);
+    log->logError(SedmlModelAllowedAttributes, level, version, message);
   }
 }
 

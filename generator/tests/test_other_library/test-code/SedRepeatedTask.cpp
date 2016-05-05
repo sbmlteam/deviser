@@ -387,7 +387,7 @@ SedRepeatedTask::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mRangeId) == false)
     {
-      logError(SedmlSedRepeatedTaskRangeIdMustBeRange, level, version, "The "
+      logError(SedmlRepeatedTaskRangeIdMustBeRange, level, version, "The "
         "attribute range='" + mRangeId + "' does not conform to the syntax.");
     }
   }

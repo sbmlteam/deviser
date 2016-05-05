@@ -637,7 +637,7 @@ SedSetValue::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
     {
-      logError(SedmlSedSetValueModelReferenceMustBeModel, level, version, "The "
+      logError(SedmlSetValueModelReferenceMustBeModel, level, version, "The "
         "attribute modelReference='" + mModelReference + "' does not conform to "
           "the syntax.");
     }
@@ -646,7 +646,7 @@ SedSetValue::readAttributes(
   {
     std::string message = "Sedml attribute 'modelReference' is missing from the "
       "<SedSetValue> element.";
-    log->logError(SedmlSedSetValueAllowedAttributes, level, version, message);
+    log->logError(SedmlSetValueAllowedAttributes, level, version, message);
   }
 
   // 
@@ -691,7 +691,7 @@ SedSetValue::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
     {
-      logError(SedmlSedSetValueRangeMustBeRange, level, version, "The attribute "
+      logError(SedmlSetValueRangeMustBeRange, level, version, "The attribute "
         "range='" + mRange + "' does not conform to the syntax.");
     }
   }

@@ -133,7 +133,7 @@ def remove_prefix(name, in_concrete=False):
     length = len(prefix_to_remove)
     if length == 0:
         return name
-    if name.startswith(prefix_to_remove):
+    if name.startswith(prefix_to_remove) and not name.endswith('Document'):
         newname = name[length:]
     else:
         newname = name

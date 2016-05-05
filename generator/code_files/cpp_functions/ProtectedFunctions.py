@@ -1225,7 +1225,8 @@ class ProtectedFunctions():
         code.append(self.create_code_block('line', line))
 
         # sort error names to be used
-        error = '{0}{1}AllowedAttributes'.format(self.package, self.class_name)
+        class_name = strFunctions.remove_prefix(self.class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1248,6 +1249,7 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
 
+        class_name = strFunctions.remove_prefix(self.class_name)
         line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                       member)]
         code.append(self.create_code_block('line', line))
@@ -1274,7 +1276,7 @@ class ProtectedFunctions():
                 type_wanted = att_type[0:length-3]
             else:
                 type_wanted = att_type
-            error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
+            error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
                                                 strFunctions.upper_first(given_name),
                                                 type_wanted)
         line = ['{0}.empty() == true'.format(member)]
@@ -1301,7 +1303,7 @@ class ProtectedFunctions():
             class_name = strFunctions.get_class_from_plugin(
                 self.class_name, self.package)
         else:
-            class_name = self.class_name
+            class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
@@ -1345,7 +1347,7 @@ class ProtectedFunctions():
             class_name = strFunctions.get_class_from_plugin(
                 self.class_name, self.package)
         else:
-            class_name = self.class_name
+            class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
         if not global_variables.running_tests:
@@ -1373,11 +1375,12 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
         # sort error names to be used
-        error = '{0}{1}{2}MustBe{3}Enum'.format(self.package, self.class_name,
+        class_name = strFunctions.remove_prefix(self.class_name)
+        error = '{0}{1}{2}MustBe{3}Enum'.format(self.package, class_name,
                                                 strFunctions.upper_first(name),
                                                 element)
         att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                     self.class_name)
+                                                     class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1448,10 +1451,11 @@ class ProtectedFunctions():
             num_type = 'FIX ME'
 
         # sort error names to be used
-        error = '{0}{1}{2}MustBe{3}'.format(self.package, self.class_name,
+        class_name = strFunctions.remove_prefix(self.class_name)
+        error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
                                             up_name, num_type)
         att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                     self.class_name)
+                                                     class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)

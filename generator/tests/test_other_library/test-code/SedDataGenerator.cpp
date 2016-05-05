@@ -858,7 +858,7 @@ SedDataGenerator::readAttributes(
   {
     std::string message = "Sedml attribute 'id' is missing from the "
       "<SedDataGenerator> element.";
-    log->logError(SedmlSedDataGeneratorAllowedAttributes, level, version,
+    log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
       message);
   }
 
