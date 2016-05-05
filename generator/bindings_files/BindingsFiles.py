@@ -43,6 +43,7 @@ from . import DowncastNamespaceFile
 from . import DowncastPackagesFile
 from . import DowncastPluginsFile
 from . import NativeSwigFile
+from . import BaseBindingsFiles
 
 
 class BindingFiles():
@@ -145,13 +146,15 @@ class BindingFiles():
         ext.close_file()
 
     def write_swig_library_files(self):
-        name = '{0}'.format(global_variables.library_name.lower())
-        ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
-                                            self.plugins, is_header=True)
-        if self.verbose and ext.fileout:
-            print('Writing file {0}'.format(ext.fileout.filename))
-        ext.write_file()
-        ext.close_file()
+        base_files = BaseBindingsFiles.BaseBindingsFiles(self.elements, True)
+        base_files.write_files()
+        # name = '{0}'.format(global_variables.library_name.lower())
+        # ext = NativeSwigFile.NativeSwigFile(name, self.package, self.elements,
+        #                                     self.plugins, is_header=True)
+        # if self.verbose and ext.fileout:
+        #     print('Writing file {0}'.format(ext.fileout.filename))
+        # ext.write_file()
+        # ext.close_file()
 
     ########################################################################
 
