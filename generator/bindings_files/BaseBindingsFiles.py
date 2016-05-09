@@ -172,11 +172,23 @@ class BaseBindingsFiles():
             elif line.startswith('<insert_class_includes/>'):
                 self.print_includes(fileout)
                 i += 1
+            elif line.startswith('<dependencies>'):
+                self.print_dependency_includes(fileout, lines[i+1])
+                i += 3
+            elif line.startswith('<insert_derived_types/>'):
+                self.print_derived_types(fileout)
+                i += 1
             elif line.startswith('<insert_derived_types/>'):
                 self.print_derived_types(fileout)
                 i += 1
             elif line.startswith('<insert_derived_listof_types/>'):
                 self.print_derived_listof_types(fileout)
+                i += 1
+            elif line.startswith('<library_dependencies/>'):
+                self.print_dependency_library(fileout)
+                i += 1
+            elif line.startswith('<include_library_dependencies/>'):
+                self.print_dependency_library(fileout, True)
                 i += 1
             elif line.startswith('<insert>'):
                 self.print_for_all_classes(fileout, lines[i+1])
@@ -297,3 +309,42 @@ class BaseBindingsFiles():
                     fileout.copy_line_verbatim('{0}({1})\n'.format(declaration,
                                                                    loname))
 
+    def print_dependency_includes(self, fileout, header):
+        if header.startswith('header'):
+            include = '#'
+        else:
+            include = '%'
+        lines = []
+        for depend in global_variables.dependency:
+            lang = depend['prefix'].lower()
+            lines.append('{0}include <{1}/common/extern.h>\n'.format(include, lang))
+            lines.append('{0}include <{1}/common/lib{1}-namespace.h>\n'
+                         ''.format(include, lang))
+            lines.append('{0}include <{1}/common/lib{1}-version.h>\n'
+                         ''.format(include, lang))
+            lines.append('{0}include <{1}/common/{2}OperationReturnValues.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+            lines.append('\n')
+            lines.append('{0}include <{1}/{2}Namespaces.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+            lines.append('{0}include <{1}/{2}TypeCodes.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+            lines.append('{0}include <{1}/{2}Types.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+            lines.append('{0}include <{1}/{2}Error.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+            lines.append('{0}include <{1}/{2}ErrorLog.h>\n'
+                         ''.format(include, lang, depend['prefix']))
+        for line in lines:
+            fileout.copy_line_verbatim(line)
+
+    def print_dependency_library(self, fileout, include=False):
+        for depend in global_variables.dependency:
+            lib = depend['library'].upper()
+            if include:
+                fileout.copy_line_verbatim('include_directories'
+                                           '(BEFORE ${1}{0}_INCLUDE_DIR{2})'
+                                           '\n'.format(lib, '{', '}'))
+            else:
+                fileout.copy_line_verbatim('         -I${1}{0}_INCLUDE_DIR{2}/'
+                                           '\n'.format(lib, '{', '}'))
