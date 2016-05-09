@@ -73,6 +73,7 @@ add_custom_command(
          -I${CMAKE_CURRENT_BINARY_DIR}/../../
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
          -I${CMAKE_CURRENT_SOURCE_DIR}
+<library_dependencies/>
 <verbatim>
          -I${LIBSBML_INCLUDE_DIR}/
 </verbatim>
@@ -113,6 +114,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 <verbatim>
 include_directories(${LIBSBML_INCLUDE_DIR})
 </verbatim>
+<include_library_dependencies/>
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSBML_STATIC)

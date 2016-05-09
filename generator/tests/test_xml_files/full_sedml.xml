@@ -4,6 +4,9 @@
     <versions>
       <version level="1" version="1" namespace="http://sed-ml.org/"/>
     </versions>
+    <dependencies>
+      <dependency library_name="libnuml" prefix="NUML"/>
+    </dependencies>
   </language>
   <versions>
     <pkgVersion level="1" version="1" pkg_version="1">

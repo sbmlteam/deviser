@@ -34,3 +34,15 @@
 #include <sbml/xml/XMLOutputStream.h>
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
+
+#include <numl/common/extern.h>
+#include <numl/common/libnuml-namespace.h>
+#include <numl/common/libnuml-version.h>
+#include <numl/common/NUMLOperationReturnValues.h>
+
+#include <numl/NUMLNamespaces.h>
+#include <numl/NUMLTypeCodes.h>
+#include <numl/NUMLTypes.h>
+#include <numl/NUMLError.h>
+#include <numl/NUMLErrorLog.h>
+

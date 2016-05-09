@@ -335,3 +335,7 @@ typedef std::vector<SBMLError> SBMLErrorStdVector;
 %include <sbml/SBMLNamespaces.h>
 
 <insert_class_includes/>
+
+<dependencies>
+interface
+</dependencies>

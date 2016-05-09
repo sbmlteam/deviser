@@ -29,3 +29,8 @@
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
 </verbatim>
+
+<dependencies>
+header
+</dependencies>
+

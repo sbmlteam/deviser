@@ -127,7 +127,7 @@ def set_global_fullname(fullname):
 
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname='',
-                specifications=[]):
+                specifications=[], depend=[]):
     global language
     language = lang
 
@@ -137,6 +137,11 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix, fullname='',
         namespaces = specifications
     else:
         namespaces.append(dict({'namespace': 'not defined'}))
+
+    global dependency
+    dependency = []
+    if len(specifications) > 0:
+        dependency = depend
 
     if base:
         global baseClass
