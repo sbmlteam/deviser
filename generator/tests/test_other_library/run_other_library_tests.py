@@ -73,7 +73,7 @@ def generate_binding(filename, binding):
         os.makedirs(binding)
         os.chdir(binding)
     all_files = BindingsFiles.BindingFiles(ob, binding, True)
-    all_files.write_swig_library_files()
+    all_files.write_files()
     os.chdir('../.')
     os.chdir('../.')
 
@@ -120,6 +120,11 @@ def compare_binding_impl(class_name, binding):
 def compare_binding_interface(class_name, binding):
     correct_file = '.\\test-code\\{0}\\{1}.i'.format(binding, class_name)
     temp_file = '.\\temp\\{0}\\{1}.i'.format(binding, class_name)
+    return compare_files(correct_file, temp_file)
+
+def compare_binding_file(class_name, binding):
+    correct_file = '.\\test-code\\{0}\\{1}'.format(binding, class_name)
+    temp_file = '.\\temp\\{0}\\{1}'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -196,13 +201,22 @@ def run_forward(name, class_name, test_case):
 def test_bindings(name, class_name, test_case, binding):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_binding(filename, binding)
-    fail = compare_binding_headers('ListWrapper', binding)
-    fail += compare_binding_headers('OStream', binding)
-    fail += compare_binding_impl('OStream', binding)
-    fail += compare_binding_interface('std_set', binding)
-    fail += compare_binding_headers('libsedml', binding)
-    fail += compare_binding_interface('libsedml', binding)
-    fail += compare_binding_interface('ASTNodes', binding)
+    fail = 0
+    if binding == 'swig':
+        fail += compare_binding_headers('ListWrapper', binding)
+        fail += compare_binding_headers('OStream', binding)
+        fail += compare_binding_impl('OStream', binding)
+        fail += compare_binding_interface('std_set', binding)
+        fail += compare_binding_headers('libsedml', binding)
+        fail += compare_binding_interface('libsedml', binding)
+        fail += compare_binding_interface('ASTNodes', binding)
+    elif binding == 'csharp':
+        fail += compare_binding_impl('local', binding)
+        fail += compare_binding_interface('local', binding)
+        fail += compare_binding_interface('libsedml', binding)
+        fail += compare_binding_file('CMakeLists.txt', binding)
+        fail += compare_binding_file('compile-native-files.cmake', binding)
+        fail += compare_binding_file('AssemblyInfo.cs.in', binding)
     print('')
     return fail
 
@@ -221,83 +235,89 @@ def main():
     fail = 0
 
     # run the individual tests
-    # name = 'test_sedml'
-    # num = 1
-    # class_name = 'SedModel'
-    # list_of = 'SedListOfModels'
-    # test_case = 'model'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 0
-    # class_name = 'SedDocument'
-    # list_of = ''
-    # test_case = 'document'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # class_name = 'SedBase'
-    # list_of = 'SedListOf'
-    # test_case = 'templates'
-    # fail += run_templates(name, class_name, test_case, list_of)
-    # fail += test_other_templates()
-    #
-    # name = 'test_sedml'
-    # class_name = 'SedBase'
-    # test_case = 'common'
-    # fail += test_common_templates(name, class_name, test_case)
-    #
-    # name = 'test_sedml'
-    # class_name = 'sedmlfwd'
-    # test_case = 'forward declarations'
-    # fail += run_forward(name, class_name, test_case)
-    #
-    # name = 'test_sedml'
-    # num = 3
-    # class_name = 'SedAddXML'
-    # list_of = ''
-    # test_case = 'xmlnode used'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 4
-    # class_name = 'SedSetValue'
-    # list_of = ''
-    # test_case = 'astnode used'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 5
-    # class_name = 'SedDataGenerator'
-    # list_of = ''
-    # test_case = 'astnode in getElementBySId bug'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 6
-    # class_name = 'SedRepeatedTask'
-    # list_of = ''
-    # test_case = 'attribute with different xml name'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 7
-    # class_name = 'SedSimulation'
-    # list_of = ''
-    # test_case = 'child element'
-    # fail += run_test(name, num, class_name, test_case, list_of)
-    #
-    # name = 'test_sedml'
-    # num = 8
-    # class_name = 'SedVectorRange'
-    # list_of = ''
-    # test_case = 'deal with vectors'
-    # fail += run_test(name, num, class_name, test_case, list_of)
+    name = 'test_sedml'
+    num = 1
+    class_name = 'SedModel'
+    list_of = 'SedListOfModels'
+    test_case = 'model'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 0
+    class_name = 'SedDocument'
+    list_of = ''
+    test_case = 'document'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    class_name = 'SedBase'
+    list_of = 'SedListOf'
+    test_case = 'templates'
+    fail += run_templates(name, class_name, test_case, list_of)
+    fail += test_other_templates()
+
+    name = 'test_sedml'
+    class_name = 'SedBase'
+    test_case = 'common'
+    fail += test_common_templates(name, class_name, test_case)
+
+    name = 'test_sedml'
+    class_name = 'sedmlfwd'
+    test_case = 'forward declarations'
+    fail += run_forward(name, class_name, test_case)
+
+    name = 'test_sedml'
+    num = 3
+    class_name = 'SedAddXML'
+    list_of = ''
+    test_case = 'xmlnode used'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 4
+    class_name = 'SedSetValue'
+    list_of = ''
+    test_case = 'astnode used'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 5
+    class_name = 'SedDataGenerator'
+    list_of = ''
+    test_case = 'astnode in getElementBySId bug'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 6
+    class_name = 'SedRepeatedTask'
+    list_of = ''
+    test_case = 'attribute with different xml name'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 7
+    class_name = 'SedSimulation'
+    list_of = ''
+    test_case = 'child element'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 8
+    class_name = 'SedVectorRange'
+    list_of = ''
+    test_case = 'deal with vectors'
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     class_name = 'libsedml'
     test_case = 'swig dir'
     binding = 'swig'
+    fail += test_bindings(name, class_name, test_case, binding)
+
+    name = 'test_sedml'
+    class_name = 'libsedml'
+    test_case = 'csharp dir'
+    binding = 'csharp'
     fail += test_bindings(name, class_name, test_case, binding)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)

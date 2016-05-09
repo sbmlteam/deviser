@@ -84,7 +84,7 @@ def generate_other_library_code(name, language, overwrite, ob):
         return False
     global_variables.populate_error_list(ob)
     generate_other_library_code_files(name, ob)
-#    generate_bindings_files(name, ob)
+    generate_bindings_files_for_other(name, ob)
 
 
 def generate_package_code(name, language, overwrite, ob):
@@ -162,6 +162,64 @@ def generate_bindings_files(name, ob):
 
     os.chdir(swig_dir)
     bind = BindingsFiles.BindingFiles(ob, 'swig', True)
+    bind.write_files()
+    os.chdir(this_dir)
+
+
+def generate_bindings_files_for_other(name, ob):
+    this_dir = os.getcwd()
+    csharp_dir = '{0}{1}src{1}bindings{1}csharp'.format(name, os.sep)
+    java_dir = '{0}{1}src{1}bindings{1}java'.format(name, os.sep)
+    javascript_dir = '{0}{1}src{1}bindings{1}javascript'.format(name, os.sep)
+    perl_dir = '{0}{1}src{1}bindings{1}perl'.format(name, os.sep)
+    php_dir = '{0}{1}src{1}bindings{1}php'.format(name, os.sep)
+    python_dir = '{0}{1}src{1}bindings{1}python'.format(name, os.sep)
+    r_dir = '{0}{1}src{1}bindings{1}r'.format(name, os.sep)
+    ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
+    swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
+
+    # os.chdir(java_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'java', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(javascript_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(perl_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'perl', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(php_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'php', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(python_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'python', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(r_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'r', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+    #
+    # os.chdir(ruby_dir)
+    # bind = BindingsFiles.BindingFiles(ob, 'ruby', True)
+    # bind.write_files()
+    # os.chdir(this_dir)
+
+    os.chdir(swig_dir)
+    bind = BindingsFiles.BindingFiles(ob, 'swig', True)
+    bind.write_swig_library_files()
+    os.chdir(this_dir)
+
+    os.chdir(csharp_dir)
+    bind = BindingsFiles.BindingFiles(ob, 'csharp', True)
     bind.write_files()
     os.chdir(this_dir)
 
