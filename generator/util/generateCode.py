@@ -85,6 +85,7 @@ def generate_other_library_code(name, language, overwrite, ob):
     global_variables.populate_error_list(ob)
     generate_other_library_code_files(name, ob)
     generate_bindings_files_for_other(name, ob)
+    generate_cmake_files_for_other(name, ob)
 
 
 def generate_package_code(name, language, overwrite, ob):
@@ -105,6 +106,15 @@ def generate_cmake_files(name, ob):
 
     bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
     bind.write_files()
+    os.chdir(this_dir)
+
+
+def generate_cmake_files_for_other(name, ob):
+    os.chdir('{0}'.format(name))
+    this_dir = os.getcwd()
+
+    bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    bind.write_other_library_files()
     os.chdir(this_dir)
 
 

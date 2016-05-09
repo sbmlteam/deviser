@@ -3,6 +3,7 @@
 import os
 
 from code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
+from cmake_files import CMakeFiles
 from bindings_files import BindingsFiles
 from parseXML import ParseXML
 from util import strFunctions, global_variables
@@ -74,6 +75,21 @@ def generate_binding(filename, binding):
         os.chdir(binding)
     all_files = BindingsFiles.BindingFiles(ob, binding, True)
     all_files.write_files()
+    os.chdir('../.')
+    os.chdir('../.')
+
+def generate_cmake(filename, binding):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if os.path.isdir(binding):
+        os.chdir(binding)
+    else:
+        os.makedirs(binding)
+        os.chdir(binding)
+    this_dir = os.getcwd()
+    bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    bind.write_other_library_files()
     os.chdir('../.')
     os.chdir('../.')
 
@@ -172,7 +188,6 @@ def test_other_templates():
     fail += compare_code_headers('SedVisitor')
     fail += compare_code_impl('SedVisitor')
     fail += compare_code_headers('SedErrorTable')
-    fail += compare_code_txt('CMakeLists')
     print('')
     return fail
 

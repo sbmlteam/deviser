@@ -95,3 +95,6 @@ class CMakeFiles():
         os.chdir('src/{0}/packages'.format(self.language))
         self.write_register_files()
         os.chdir(self.this_dir)
+
+    def write_other_library_files(self):
+        os.chdir(self.this_dir)
