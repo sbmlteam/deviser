@@ -44,15 +44,16 @@ from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
 from util import strFunctions, global_variables
-from base_files import BaseFile, BaseCMakeFile
+from base_files import BaseFile, BaseCMakeFile, BaseTemplateFile
 
 
-class BaseClassFiles():
+class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     """Class for all Base files"""
 
     def __init__(self, name, elements, verbose=False):
         # members from object
-        self.class_prefix = strFunctions.upper_first(name)
+        # self.class_prefix = strFunctions.upper_first(name)
+        BaseTemplateFile.BaseTemplateFile.__init__(self, name, 'code_files')
 
         self.elements = elements
 
@@ -71,7 +72,6 @@ class BaseClassFiles():
         self.write_all_files('TypeCodes')
         self.write_header('Types')
         self.write_header('ErrorTable')
-        self.write_cmake_file()
 
     def write_common_files(self):
         self.write_header('common', True)
@@ -117,116 +117,6 @@ class BaseClassFiles():
             print('Writing file {0}'.format(fileout.filename))
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
-
-    def create_base_description(self, name, common=False):
-        if common:
-            if name.startswith('lib'):
-                used_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
-            else:
-                used_name = name
-
-            descr = dict({'name': '{0}'.format(used_name),
-                          'attribs': None})
-        else:
-            if name == 'SBase':
-                descr = dict({'name': '{0}Base'.format(self.class_prefix),
-                              'attribs': None})
-            else:
-                descr = dict({'name': '{0}{1}'.format(self.class_prefix, name),
-                              'attribs': None})
-        return descr
-
-    def copy_file_contents(self, fileout, infilename):
-        filename = '{0}{1}templates{1}{2}'.format(os.path.dirname(__file__),
-                                                  os.sep, infilename)
-        infile = open(filename, 'r')
-        lines = infile.readlines()
-        infile.close()
-        num_lines = len(lines)
-        i = 0
-        while i < num_lines:
-            line = lines[i]
-            if line.startswith('<verbatim>'):
-                i = self.print_block(fileout, lines, i)
-            elif line.startswith('<sbml>'):
-                i = self.print_sbml_block(fileout, lines, i)
-            elif line.startswith('<insert_class_includes/>'):
-                self.print_includes(fileout)
-                i += 1
-            elif line.startswith('<insert_type_codes/>'):
-                self.print_typecodes(fileout)
-                i += 1
-            elif line.startswith('<insert_type_strings/>'):
-                self.print_typecode_strings(fileout)
-                i += 1
-            elif line.startswith('<add_visit_classes_header/>'):
-                self.print_visit_header(fileout)
-                i += 1
-            elif line.startswith('<add_leave_classes_header/>'):
-                self.print_leave_header(fileout)
-                i += 1
-            elif line.startswith('<add_visit_classes_code/>'):
-                self.print_visit_code(fileout)
-                i += 1
-            elif line.startswith('<add_leave_classes_code/>'):
-                self.print_leave_code(fileout)
-                i += 1
-            elif line.startswith('<add_specific_errors/>'):
-                self.print_error_enum(fileout)
-                i += 1
-            elif line.startswith('<add_specific_error_table/>'):
-                self.print_error_table(fileout)
-                i += 1
-            elif line.startswith('<add_visitor_forwards/>'):
-                self.print_visitor_forwards(fileout)
-                i += 1
-            else:
-                line = self.adjust_line(line)
-                fileout.copy_line_verbatim(line)
-                i += 1
-
-    @staticmethod
-    def adjust_line(line):
-        line = re.sub('SBase', global_variables.std_base, line)
-        line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
-        line = re.sub('LibSBML', 'Lib{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('libSBML', 'lib{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('CAT_SBML',
-                      'CAT_{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('SBML_',
-                      '{0}_'.format(global_variables.language.upper()), line)
-        line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
-        line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
-        line = re.sub('sbml', global_variables.language, line)
-        line = re.sub('SBMLSBML', '{0}{1}'.format(strFunctions.upper_first(global_variables.language), global_variables.prefix), line)
-        line = re.sub('SBML', global_variables.prefix, line)
-        line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
-        line = re.sub('SPEC_NAMESPACE', '\"{0}\"'.format(global_variables.namespaces[0]['namespace']), line)
-        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.lower()), line)
-        return line
-
-    @staticmethod
-    def print_block(fileout, lines, i):
-        i += 1
-        line = lines[i]
-        while not line.startswith('</verbatim>'):
-            fileout.copy_line_verbatim(line)
-            i += 1
-            line = lines[i]
-        i += 1
-        return i
-
-    @staticmethod
-    def print_sbml_block(fileout, lines, i):
-        i += 1
-        line = lines[i]
-        while not line.startswith('</sbml>'):
-            line = re.sub('LIBREPLACE', global_variables.library_name.upper(), line)
-            fileout.copy_line_verbatim(line)
-            i += 1
-            line = lines[i]
-        i += 1
-        return i
 
     def print_includes(self, fileout):
         for element in self.elements:
@@ -374,12 +264,3 @@ class BaseClassFiles():
             name = error['typecode']
             if not name.endswith('Unknown'):
                 valid.write_table_entry(error)
-
-    def write_cmake_file(self):
-        fileout = BaseFile.BaseFile('CMakeLists', 'txt')
-        filein = 'CMakeLists.txt'
-        if self.verbose:
-            print('Writing file {0}'.format(fileout.filename))
-        self.copy_file_contents(fileout, filein)
-        fileout.close_file()
-

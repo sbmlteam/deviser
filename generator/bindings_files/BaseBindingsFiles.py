@@ -40,18 +40,21 @@
 import re
 import os
 
-from base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile
+from base_files import BaseInterfaceFile, BaseFile, BaseCMakeFile, BaseTemplateFile
 from code_files import CppHeaderFile
 from code_files import CppCodeFile
 from util import strFunctions, global_variables
 
 
-class BaseBindingsFiles():
+class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
     """Class for all Base files"""
 
     def __init__(self, elements, binding, verbose=False):
         # members from object
 
+        BaseTemplateFile.BaseTemplateFile.__init__(self,
+                                                   global_variables.prefix,
+                                                   'bindings_files')
         self.elements = elements
         self.binding = binding
 
@@ -85,7 +88,7 @@ class BaseBindingsFiles():
     def write_header(self, name):
         base_descrip = self.create_base_description(name)
         fileout = CppHeaderFile.CppHeaderFile(base_descrip, False)
-        filein = '{1}/{0}.h'.format(name, self.binding)
+        filein = '{1}{2}{0}.h'.format(name, self.binding, os.sep)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
@@ -99,7 +102,7 @@ class BaseBindingsFiles():
         else:
             filename = name
         fileout = BaseInterfaceFile.BaseInterfaceFile(filename)
-        filein = '{1}/{0}.i'.format(name, self.binding)
+        filein = '{1}{2}{0}.i'.format(name, self.binding, os.sep)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
@@ -110,7 +113,7 @@ class BaseBindingsFiles():
     def write_code(self, name):
         base_descrip = self.create_base_description(name)
         fileout = CppCodeFile.CppCodeFile(base_descrip, False)
-        filein = '{1}/{0}.cpp'.format(name, self.binding)
+        filein = '{1}{2}{0}.cpp'.format(name, self.binding, os.sep)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         fileout.add_file_header()
@@ -120,14 +123,14 @@ class BaseBindingsFiles():
 
     def write_cmake_files(self):
         fileout = BaseFile.BaseFile('CMakeLists', 'txt')
-        filein = '{0}/CMakeLists.txt'.format(self.binding)
+        filein = '{0}{1}CMakeLists.txt'.format(self.binding, os.sep)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
         if self.binding == 'csharp':
             fileout = BaseCMakeFile.BaseCMakeFile('compile-native-files')
-            filein = '{0}/native.cmake'.format(self.binding)
+            filein = '{0}{1}native.cmake'.format(self.binding, os.sep)
             if self.verbose:
                 print('Writing file {0}'.format(fileout.filename))
             fileout.add_file_header()
@@ -139,125 +142,13 @@ class BaseBindingsFiles():
         if not self.binding == 'csharp':
             return
         fileout = BaseFile.BaseFile('AssemblyInfo.cs', 'in')
-        filein = '{0}/assembly.in'.format(self.binding)
+        filein = '{0}{1}assembly.in'.format(self.binding, os.sep)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
         self.copy_file_contents(fileout, filein)
         fileout.close_file()
 
-
-    def create_base_description(self, name):
-        if name == 'lib':
-            filename = global_variables.library_name.lower()
-            descr = dict({'name': filename,
-                          'attribs': None})
-        else:
-            descr = dict({'name': name, 'attribs': None})
-        return descr
-
-    def copy_file_contents(self, fileout, infilename):
-        filename = '{0}{1}templates{1}{2}'.format(os.path.dirname(__file__),
-                                                  os.sep, infilename)
-        infile = open(filename, 'r')
-        lines = infile.readlines()
-        infile.close()
-        num_lines = len(lines)
-        i = 0
-        while i < num_lines:
-            line = lines[i]
-            if line.startswith('<verbatim>'):
-                i = self.print_block(fileout, lines, i)
-            elif line.startswith('<sbml>'):
-                i = self.print_sbml_block(fileout, lines, i)
-            elif line.startswith('<insert_class_includes/>'):
-                self.print_includes(fileout)
-                i += 1
-            elif line.startswith('<dependencies>'):
-                self.print_dependency_includes(fileout, lines[i+1])
-                i += 3
-            elif line.startswith('<insert_derived_types/>'):
-                self.print_derived_types(fileout)
-                i += 1
-            elif line.startswith('<insert_derived_types/>'):
-                self.print_derived_types(fileout)
-                i += 1
-            elif line.startswith('<insert_derived_listof_types/>'):
-                self.print_derived_listof_types(fileout)
-                i += 1
-            elif line.startswith('<library_dependencies/>'):
-                self.print_dependency_library(fileout)
-                i += 1
-            elif line.startswith('<include_library_dependencies/>'):
-                self.print_dependency_library(fileout, True)
-                i += 1
-            elif line.startswith('<insert>'):
-                self.print_for_all_classes(fileout, lines[i+1])
-                i += 3
-            elif line.startswith('<insert listonly>'):
-                self.print_for_all_classes(fileout, lines[i+1], False, True)
-                i += 3
-            else:
-                line = self.adjust_line(line)
-                fileout.copy_line_verbatim(line)
-                i += 1
-
-    @staticmethod
-    def adjust_line(line):
-        line = re.sub('SBase', global_variables.std_base, line)
-        line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
-        line = re.sub('LibSBML', 'Lib{0}'
-                                 ''.format(global_variables.language.upper()),
-                      line)
-        line = re.sub('libSBML', 'lib{0}'
-                                 ''.format(global_variables.language.upper()),
-                      line)
-        line = re.sub('CAT_SBML',
-                      'CAT_{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('SBML_',
-                      '{0}_'.format(global_variables.language.upper()), line)
-        line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix),
-                      line)
-        line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix),
-                      line)
-        line = re.sub('sbml', global_variables.language, line)
-        line = re.sub('SBMLSBML', '{0}{1}'.format(strFunctions.upper_first(global_variables.language), global_variables.prefix), line)
-        line = re.sub('SBML', global_variables.prefix, line)
-        line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
-        line = re.sub('SPEC_NAMESPACE', '\"{0}\"'
-                                        ''.format(global_variables.namespaces[0]['namespace']), line)
-        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.lower()), line)
-        return line
-
-    @staticmethod
-    def print_block(fileout, lines, i):
-        i += 1
-        line = lines[i]
-        while not line.startswith('</verbatim>'):
-            fileout.copy_line_verbatim(line)
-            i += 1
-            line = lines[i]
-        i += 1
-        return i
-
-    @staticmethod
-    def print_sbml_block(fileout, lines, i):
-        i += 1
-        line = lines[i]
-        while not line.startswith('</sbml>'):
-            line = re.sub('LIBREPLACE', global_variables.library_name.upper(),
-                          line)
-            fileout.copy_line_verbatim(line)
-            i += 1
-            line = lines[i]
-        i += 1
-        return i
-
-
-    @staticmethod
-    def create_code_block(code_type, lines):
-        code = dict({'code_type': code_type, 'code': lines})
-        return code
-
+    ###########################################################
     def print_includes(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
