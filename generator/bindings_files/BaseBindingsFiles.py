@@ -213,8 +213,15 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
                          ''.format(include, lang))
             lines.append('{0}include <{1}/common/lib{1}-version.h>\n'
                          ''.format(include, lang))
-            lines.append('{0}include <{1}/common/{2}OperationReturnValues.h>\n'
-                         ''.format(include, lang, depend['prefix']))
+            # hack for NUML
+            if depend['prefix'] == 'NUML':
+                lines.append('{0}include <{1}/common/'
+                             'operationReturnValues.h>\n'
+                             ''.format(include, lang))
+            else:
+                lines.append('{0}include <{1}/common/{2}'
+                             'OperationReturnValues.h>\n'
+                             ''.format(include, lang, depend['prefix']))
             lines.append('\n')
             lines.append('{0}include <{1}/{2}Namespaces.h>\n'
                          ''.format(include, lang, depend['prefix']))

@@ -621,13 +621,6 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 %typemap(cstype) LocalParameter* ListOfLocalParameters::remove  "Parameter"
 %csmethodmodifiers ListOfLocalParameters::remove(unsigned int n)  "public new"
 
-%define COVARIANT_RTYPE_LISTOF_GET_REMOVE(_CNAME_)
-%typemap(cstype) _CNAME_* SedListOf ## _CNAME_ ## s::get  "_CNAME_"
-%csmethodmodifiers SedListOf ## _CNAME_ ## s::get(unsigned int n)  "public new"
-%typemap(cstype) _CNAME_* SedListOf ## _CNAME_ ## s::remove  "_CNAME_"
-%csmethodmodifiers SedListOf ## _CNAME_ ## s::remove(unsigned int n)  "public new"
-%enddef
-
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfModels)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfChanges)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSetValues)

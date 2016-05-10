@@ -668,13 +668,13 @@ endif()
 #
 # create library
 # 
-add_subdirectory(sbml)
+add_subdirectory(src/sbml)
 
 ##############################################################################
 #
 # create language bindings
 # 
-add_subdirectory(bindings)
+add_subdirectory(src/bindings)
 
 
 

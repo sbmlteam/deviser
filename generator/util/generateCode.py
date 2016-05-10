@@ -101,6 +101,9 @@ def generate_global_files():
     fileout = BaseFile.BaseFile('README', 'md')
     readme.copy_file_contents(fileout, 'README.md')
     fileout.close_file()
+    lic = BaseFile.BaseFile('LICENSE', 'txt')
+    lic.write_line_verbatim('LICENSE\n')
+    lic.close_file()
 
 
 def generate_package_code(name, language, overwrite, ob):

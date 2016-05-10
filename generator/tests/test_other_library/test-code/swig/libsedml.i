@@ -337,7 +337,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <numl/common/extern.h>
 %include <numl/common/libnuml-namespace.h>
 %include <numl/common/libnuml-version.h>
-%include <numl/common/NUMLOperationReturnValues.h>
+%include <numl/common/operationReturnValues.h>
 
 %include <numl/NUMLNamespaces.h>
 %include <numl/NUMLTypeCodes.h>
