@@ -215,8 +215,7 @@ ListOfOutputs::addOutput(const Output* o)
   }
   else
   {
-    append(o);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(o);
   }
 }
 

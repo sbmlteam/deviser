@@ -217,8 +217,7 @@ ListOfClassTwos::addClassTwo(const ClassTwo* ct)
   }
   else
   {
-    append(ct);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(ct);
   }
 }
 

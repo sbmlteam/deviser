@@ -338,8 +338,7 @@ ListOfFunctionTerms::addFunctionTerm(const FunctionTerm* ft)
   }
   else
   {
-    append(ft);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(ft);
   }
 }
 

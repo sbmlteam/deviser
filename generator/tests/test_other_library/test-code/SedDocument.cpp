@@ -313,8 +313,7 @@ SedDocument::addModel(const SedModel* sm)
   }
   else
   {
-    mModels.append(sm);
-    return LIBSEDML_OPERATION_SUCCESS;
+    return mModels.append(sm);
   }
 }
 

@@ -627,8 +627,7 @@ VersSpeciesPlugin::addAnother(const Another* a)
   }
   else
   {
-    mAnothers.append(a);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mAnothers.append(a);
   }
 }
 

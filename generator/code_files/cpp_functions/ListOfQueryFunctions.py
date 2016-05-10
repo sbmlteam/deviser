@@ -760,11 +760,9 @@ class ListOfQueryFunctions():
         member = ''
         if not self.is_list_of:
             member = self.class_object['memberName']
-            else_lines = ['{0}.append({1})'.format(member, self.abbrev_child),
-                          'return {0}'.format(global_variables.ret_success)]
+            else_lines = ['return {0}.append({1})'.format(member, self.abbrev_child)]
         else:
-            else_lines = ['append({0})'.format(self.abbrev_child),
-                          'return {0}'.format(global_variables.ret_success)]
+            else_lines = ['return append({0})'.format(self.abbrev_child)]
         this_object = query.get_class(self.object_child_name,
                                       self.class_object['root'])
         if self.is_cpp_api:

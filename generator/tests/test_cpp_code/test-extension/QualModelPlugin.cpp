@@ -226,8 +226,7 @@ QualModelPlugin::addQualitativeSpecies(const QualitativeSpecies* qs)
   }
   else
   {
-    mQualitativeSpecies.append(qs);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mQualitativeSpecies.append(qs);
   }
 }
 
@@ -388,8 +387,7 @@ QualModelPlugin::addTransition(const Transition* t)
   }
   else
   {
-    mTransitions.append(t);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mTransitions.append(t);
   }
 }
 

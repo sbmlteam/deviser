@@ -189,8 +189,7 @@ SedListOfModels::addModel(const SedModel* sm)
   }
   else
   {
-    append(sm);
-    return LIBSEDML_OPERATION_SUCCESS;
+    return append(sm);
   }
 }
 

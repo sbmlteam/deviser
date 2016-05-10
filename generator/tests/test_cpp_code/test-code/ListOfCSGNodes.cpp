@@ -225,8 +225,7 @@ ListOfCSGNodes::addCSGNode(const CSGNode* csgn)
   }
   else
   {
-    append(csgn);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(csgn);
   }
 }
 

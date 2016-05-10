@@ -303,8 +303,7 @@ SampledFieldGeometry::addSampledVolume(const SampledVolume* sv)
   }
   else
   {
-    mSampledVolumes.append(sv);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mSampledVolumes.append(sv);
   }
 }
 

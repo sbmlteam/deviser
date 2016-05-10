@@ -227,8 +227,7 @@ ListOfCoordinateComponents::addCoordinateComponent(const CoordinateComponent*
   }
   else
   {
-    append(cc);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(cc);
   }
 }
 

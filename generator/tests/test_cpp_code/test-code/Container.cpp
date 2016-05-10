@@ -190,8 +190,7 @@ Container::addMyLoTest(const MyLoTest* mlt)
   }
   else
   {
-    mMyLoTests.append(mlt);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mMyLoTests.append(mlt);
   }
 }
 

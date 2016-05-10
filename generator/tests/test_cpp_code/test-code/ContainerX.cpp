@@ -214,8 +214,7 @@ ContainerX::addFred(const Fred* f)
   }
   else
   {
-    mFreds.append(f);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mFreds.append(f);
   }
 }
 

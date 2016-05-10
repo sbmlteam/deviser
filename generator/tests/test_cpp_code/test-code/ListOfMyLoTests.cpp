@@ -270,8 +270,7 @@ ListOfMyLoTests::addMyLoTest(const MyLoTest* mlt)
   }
   else
   {
-    append(mlt);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(mlt);
   }
 }
 

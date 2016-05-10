@@ -194,8 +194,7 @@ FbcAnd::addAssociation(const Association* a)
   }
   else
   {
-    mAssociations.append(a);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mAssociations.append(a);
   }
 }
 

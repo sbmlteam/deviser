@@ -225,8 +225,7 @@ MixedGeometry::addGeometryDefinition(const GeometryDefinition* gd)
   }
   else
   {
-    mGeometryDefinitions.append(gd);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mGeometryDefinitions.append(gd);
   }
 }
 
@@ -495,8 +494,7 @@ MixedGeometry::addOrdinalMapping(const OrdinalMapping* om)
   }
   else
   {
-    mOrdinalMappings.append(om);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mOrdinalMappings.append(om);
   }
 }
 

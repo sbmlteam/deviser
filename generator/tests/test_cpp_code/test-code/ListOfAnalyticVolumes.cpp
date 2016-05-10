@@ -222,8 +222,7 @@ ListOfAnalyticVolumes::addAnalyticVolume(const AnalyticVolume* av)
   }
   else
   {
-    append(av);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(av);
   }
 }
 

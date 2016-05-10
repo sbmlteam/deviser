@@ -194,8 +194,7 @@ Parent::addChild(const Child* c)
   }
   else
   {
-    mChildren.append(c);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mChildren.append(c);
   }
 }
 
@@ -317,8 +316,7 @@ Parent::addSprog(const Sprog* s)
   }
   else
   {
-    mSprogs.append(s);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mSprogs.append(s);
   }
 }
 

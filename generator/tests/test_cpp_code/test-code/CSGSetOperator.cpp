@@ -432,8 +432,7 @@ CSGSetOperator::addCSGNode(const CSGNode* csgn)
   }
   else
   {
-    mCSGNodes.append(csgn);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mCSGNodes.append(csgn);
   }
 }
 

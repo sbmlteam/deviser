@@ -377,8 +377,7 @@ SedModel::addChange(const SedChange* sc)
   }
   else
   {
-    mChanges.append(sc);
-    return LIBSEDML_OPERATION_SUCCESS;
+    return mChanges.append(sc);
   }
 }
 

@@ -355,8 +355,7 @@ ParametricGeometry::addParametricObject(const ParametricObject* po)
   }
   else
   {
-    mParametricObjects.append(po);
-    return LIBSBML_OPERATION_SUCCESS;
+    return mParametricObjects.append(po);
   }
 }
 

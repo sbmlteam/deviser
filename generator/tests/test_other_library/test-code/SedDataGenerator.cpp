@@ -368,8 +368,7 @@ SedDataGenerator::addVariable(const SedVariable* sv)
   }
   else
   {
-    mVariables.append(sv);
-    return LIBSEDML_OPERATION_SUCCESS;
+    return mVariables.append(sv);
   }
 }
 
@@ -490,8 +489,7 @@ SedDataGenerator::addParameter(const SedParameter* sp)
   }
   else
   {
-    mParameters.append(sp);
-    return LIBSEDML_OPERATION_SUCCESS;
+    return mParameters.append(sp);
   }
 }
 

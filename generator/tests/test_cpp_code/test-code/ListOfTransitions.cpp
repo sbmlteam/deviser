@@ -217,8 +217,7 @@ ListOfTransitions::addTransition(const Transition* t)
   }
   else
   {
-    append(t);
-    return LIBSBML_OPERATION_SUCCESS;
+    return append(t);
   }
 }
 
