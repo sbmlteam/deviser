@@ -229,7 +229,7 @@ def get_return_code(index):
 
 def reset():
     set_globals('sbml', 'SBase', 'SBMLDocument', 'SBML', 'Libsbml',
-                True)
+                True, '')
     global error_list
     error_list = []
     global class_rules
