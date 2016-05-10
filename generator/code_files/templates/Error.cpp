@@ -26,7 +26,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 /** 
  * Helper function for SBMLError().  Takes an index, SBML level and version,
  * and returns the appropriate field for the severity code out of the
-   LANGUAGEErrorTable entry.
+   language_ErrorTable entry.
  */
 static const unsigned int
 getSeverityForEntry(unsigned int index,
@@ -39,12 +39,12 @@ getSeverityForEntry(unsigned int index,
     {
     case 1:
     default:
-      return LANGUAGEErrorTable[index].l1v1_severity;
+      return language_ErrorTable[index].l1v1_severity;
     }
   }
   else
   {
-    return LANGUAGEErrorTable[index].l1v1_severity;
+    return language_ErrorTable[index].l1v1_severity;
   }
 }
 
@@ -148,12 +148,12 @@ SBMLError::SBMLError (  const unsigned int errorId
   else if ( mErrorId > XMLErrorCodesUpperBound
             && mErrorId < SBMLCodesUpperBound )
   {
-    unsigned int tableSize = sizeof(LANGUAGEErrorTable)/sizeof(LANGUAGEErrorTable[0]);
+    unsigned int tableSize = sizeof(language_ErrorTable)/sizeof(language_ErrorTable[0]);
     unsigned int index = 0;
 
     for ( unsigned int i = 0; i < tableSize; i++ )
     {
-      if ( mErrorId == LANGUAGEErrorTable[i].code )
+      if ( mErrorId == language_ErrorTable[i].code )
       {
         index = i;
         break;
@@ -181,8 +181,8 @@ SBMLError::SBMLError (  const unsigned int errorId
     // internal bookkeeping is done in libSBML 3, and also to provide
     // additional info in the messages.
 
-    mCategory     = LANGUAGEErrorTable[index].category;
-    mShortMessage = LANGUAGEErrorTable[index].shortMessage;
+    mCategory     = language_ErrorTable[index].category;
+    mShortMessage = language_ErrorTable[index].shortMessage;
 
     ostringstream newMsg;
     mSeverity = getSeverityForEntry(index, level, version);
@@ -194,7 +194,7 @@ SBMLError::SBMLError (  const unsigned int errorId
     {
       mErrorId  = NotSchemaConformant;
       mSeverity = LIBSBML_SEV_ERROR;
-      newMsg << LANGUAGEErrorTable[3].message << " "; // FIXME
+      newMsg << language_ErrorTable[3].message << " "; // FIXME
     }
     else if (mSeverity == LIBSBML_SEV_GENERAL_WARNING)
     {
@@ -208,14 +208,14 @@ SBMLError::SBMLError (  const unsigned int errorId
 
     // Finish updating the (full) error message.
 
-    if (!((string)LANGUAGEErrorTable[index].message).empty()) {
-      newMsg << LANGUAGEErrorTable[index].message << endl;
+    if (!((string)language_ErrorTable[index].message).empty()) {
+      newMsg << language_ErrorTable[index].message << endl;
     }
 
     // look for individual references
     // if the code for this error does not yet exist skip
 
-    if (LANGUAGEErrorTable[index].reference.ref_l1v1 != NULL)
+    if (language_ErrorTable[index].reference.ref_l1v1 != NULL)
     {
 
       std::string ref;
@@ -227,7 +227,7 @@ SBMLError::SBMLError (  const unsigned int errorId
         {
         case 1:
         default:
-          ref = LANGUAGEErrorTable[index].reference.ref_l1v1;
+          ref = language_ErrorTable[index].reference.ref_l1v1;
         break;
         }
        break;

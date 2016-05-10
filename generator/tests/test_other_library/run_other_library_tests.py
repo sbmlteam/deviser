@@ -88,6 +88,11 @@ def generate_cmake(filename, binding):
         os.makedirs(binding)
         os.chdir(binding)
     this_dir = os.getcwd()
+    os.mkdir('src')
+    os.chdir('src')
+    os.mkdir('bindings')
+    os.mkdir('{0}'.format(global_variables.language))
+    os.chdir(this_dir)
     bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
     bind.write_other_library_files()
     os.chdir('../.')
@@ -141,6 +146,15 @@ def compare_binding_interface(class_name, binding):
 def compare_binding_file(class_name, binding):
     correct_file = '.\\test-code\\{0}\\{1}'.format(binding, class_name)
     temp_file = '.\\temp\\{0}\\{1}'.format(binding, class_name)
+    return compare_files(correct_file, temp_file)
+
+def compare_cmake_file(this_dir):
+    if this_dir == 'top-level':
+        correct_file = '.\\test-code\\cmake\\CMakeLists.txt'
+        temp_file = '.\\temp\\cmake\\CMakeLists.txt'
+    else:
+        correct_file = '.\\test-code\\cmake\\{0}\\CMakeLists.txt'.format(this_dir)
+        temp_file = '.\\temp\\cmake\\{0}\\CMakeLists.txt'.format(this_dir)
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -232,6 +246,17 @@ def test_bindings(name, class_name, test_case, binding):
         fail += compare_binding_file('CMakeLists.txt', binding)
         fail += compare_binding_file('compile-native-files.cmake', binding)
         fail += compare_binding_file('AssemblyInfo.cs.in', binding)
+    print('')
+    return fail
+
+def test_cmake(name, class_name, test_case, binding):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_cmake(filename, binding)
+    fail = 0
+    fail += compare_cmake_file('top-level')
+    fail += compare_cmake_file('src')
+    fail += compare_cmake_file('src/bindings')
+    fail += compare_cmake_file('src/{0}'.format(global_variables.language))
     print('')
     return fail
 
@@ -334,6 +359,12 @@ def main():
     test_case = 'csharp dir'
     binding = 'csharp'
     fail += test_bindings(name, class_name, test_case, binding)
+
+    name = 'test_sedml'
+    class_name = 'libsedml'
+    test_case = 'cmake'
+    binding = 'cmake'
+    fail += test_cmake(name, class_name, test_case, binding)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

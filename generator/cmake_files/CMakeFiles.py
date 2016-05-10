@@ -42,6 +42,7 @@ import os
 from util import global_variables
 from . import PackageFile
 from . import RegisterFile
+from . import BaseCMakeFiles
 
 
 class CMakeFiles():
@@ -98,3 +99,5 @@ class CMakeFiles():
 
     def write_other_library_files(self):
         os.chdir(self.this_dir)
+        cmake = BaseCMakeFiles.BaseCMakeFiles(self.verbose)
+        cmake.write_files()

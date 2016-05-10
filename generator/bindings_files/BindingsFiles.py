@@ -194,6 +194,5 @@ class BindingFiles():
             self.write_downcast_packages()
             self.write_downcast_plugins()
             self.write_local()
-            self.write_cmake_file()
         else:
             self.write_swig_files()

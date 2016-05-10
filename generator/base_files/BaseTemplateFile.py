@@ -151,6 +151,18 @@ class BaseTemplateFile:
             elif line.startswith('<insert listonly>'):
                 self.print_for_all_classes(fileout, lines[i+1], False, True)
                 i += 3
+            elif line.startswith('<find_library_dependencies/>'):
+                self.print_find_dependency_library(fileout)
+                i += 1
+            elif line.startswith('<static_library_dependencies/>'):
+                self.print_static_dependency_library(fileout)
+                i += 1
+            elif line.startswith('<library_config/>'):
+                self.print_dependency_library_config(fileout)
+                i += 1
+            elif line.startswith('<include_dependency_directories/>'):
+                self.print_include_dependency(fileout)
+                i += 1
             else:
                 line = self.adjust_line(line)
                 fileout.copy_line_verbatim(line)
@@ -173,7 +185,8 @@ class BaseTemplateFile:
         line = re.sub('SBML', global_variables.prefix, line)
         line = re.sub('ListOf', '{0}ListOf'.format(global_variables.prefix), line)
         line = re.sub('SPEC_NAMESPACE', '\"{0}\"'.format(global_variables.namespaces[0]['namespace']), line)
-        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.lower()), line)
+        line = re.sub('language_', '{0}'.format(global_variables.language.lower()), line)
+        line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.upper()), line)
         return line
 
     @staticmethod
@@ -191,8 +204,14 @@ class BaseTemplateFile:
     def print_sbml_block(fileout, lines, i):
         i += 1
         line = lines[i]
+        other_libs = ''
+        for depend in global_variables.dependency:
+            lib_up = depend['library'].upper()
+            other_libs = other_libs + '${0}{1}_LIBRARY{2}'.format('{', lib_up, '}')
+
         while not line.startswith('</sbml>'):
             line = re.sub('LIBREPLACE', global_variables.library_name.upper(), line)
+            line = re.sub('OTHER_LIBS', other_libs, line)
             fileout.copy_line_verbatim(line)
             i += 1
             line = lines[i]
