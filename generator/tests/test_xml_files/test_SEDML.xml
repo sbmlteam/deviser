@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false">
   <language name="SedML" prefix="Sed" documentClass="SedDocument" baseClass="SedBase" libraryName="LibSEDML" isPackage="False">
+    <library_version major="1" minor="0" revision="0"/>
     <versions>
       <version level="1" version="1" namespace="http://sed-ml.org/"/>
     </versions>

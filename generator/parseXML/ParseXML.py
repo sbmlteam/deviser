@@ -604,14 +604,29 @@ class ParseXML():
             for depend in dependencies[0].getElementsByTagName('dependency'):
                 dependency.append(self.get_dependency_information(depend))
 
+        library = node.getElementsByTagName('library_version')
+        if library:
+            major = self.get_int_value(self, library[0], 'major')
+            minor = self.get_int_value(self, library[0], 'minor')
+            rev = self.get_int_value(self, library[0], 'revision')
+        else:
+            major = 0
+            minor = 0
+            rev = 0
+
+        library_version = dict({'major': major,
+                                'minor': minor,
+                                'revision': rev})
+
+
         # some sanity checking
         if not language or language == '':
             language = 'sbml'
         # set the globals
         global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
-                                     is_package, pkg_prefix, '', specification,
-                                     dependency)
+                                     is_package, pkg_prefix, specification,
+                                     dependency, library_version)
 
     #####################################################################
 

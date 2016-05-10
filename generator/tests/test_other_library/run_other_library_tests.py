@@ -6,7 +6,7 @@ from code_files import CppFiles, BaseClassFiles, ValidationFiles, ExtensionFiles
 from cmake_files import CMakeFiles
 from bindings_files import BindingsFiles
 from parseXML import ParseXML
-from util import strFunctions, global_variables
+from util import strFunctions, global_variables, generateCode
 
 from tests import test_functions
 
@@ -98,6 +98,13 @@ def generate_cmake(filename, binding):
     os.chdir('../.')
     os.chdir('../.')
 
+def generate_global(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    generateCode.generate_global_files()
+    os.chdir('../.')
+
 #############################################################################
 # Specific compare functions
 
@@ -123,9 +130,9 @@ def compare_code_cmake(class_name):
     temp_file = '.\\temp\\{0}.cmake'.format(class_name)
     return compare_files(correct_file, temp_file)
 
-def compare_code_txt(class_name):
-    correct_file = '.\\test-code\\{0}.txt'.format(class_name)
-    temp_file = '.\\temp\\{0}.txt'.format(class_name)
+def compare_code_txt(class_name, ext='txt'):
+    correct_file = '.\\test-code\\{0}.{1}'.format(class_name, ext)
+    temp_file = '.\\temp\\{0}.{1}'.format(class_name, ext)
     return compare_files(correct_file, temp_file)
 
 def compare_binding_headers(class_name, binding):
@@ -260,6 +267,15 @@ def test_cmake(name, class_name, test_case, binding):
     print('')
     return fail
 
+def test_global(name, class_name, test_case):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_global(filename)
+    fail = 0
+    fail += compare_code_txt('VERSION')
+    fail += compare_code_txt('README', 'md')
+    print('')
+    return fail
+
 
 #########################################################################
 # Main function
@@ -365,6 +381,11 @@ def main():
     test_case = 'cmake'
     binding = 'cmake'
     fail += test_cmake(name, class_name, test_case, binding)
+
+    name = 'test_sedml'
+    class_name = 'libsedml'
+    test_case = 'global files'
+    fail += test_global(name, class_name, test_case)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

@@ -44,6 +44,7 @@ from parseXML import ParseXML
 from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
+from base_files import BaseFile, BaseTemplateFile
 from util import global_variables, strFunctions
 
 directories = []
@@ -86,6 +87,20 @@ def generate_other_library_code(name, language, overwrite, ob):
     generate_other_library_code_files(name, ob)
     generate_bindings_files_for_other(name, ob)
     generate_cmake_files_for_other(name, ob)
+    generate_global_files()
+
+
+def generate_global_files():
+    version = BaseFile.BaseFile('VERSION', 'txt')
+    major = global_variables.library_version['major']
+    minor = global_variables.library_version['minor']
+    rev = global_variables.library_version['revision']
+    version.write_line_verbatim('{0}.{1}.{2}\n'.format(major, minor, rev))
+    version.close_file()
+    readme = BaseTemplateFile.BaseTemplateFile('README.md', 'util')
+    fileout = BaseFile.BaseFile('README', 'md')
+    readme.copy_file_contents(fileout, 'README.md')
+    fileout.close_file()
 
 
 def generate_package_code(name, language, overwrite, ob):
