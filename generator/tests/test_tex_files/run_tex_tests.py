@@ -2,11 +2,13 @@
 
 import os
 
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+
 from spec_files import TexValidationRulesFile, TexMacrosFile, TexBodySyntaxFile
 from parseXML import ParseXML
 
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 import test_functions
 
 
@@ -110,7 +112,7 @@ def run_test(name, test_type):
 def main():
 
     # set up the enivornment
-    this_dir = os.getcwd()
+    this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)

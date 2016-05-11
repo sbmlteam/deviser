@@ -3,6 +3,7 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 from bindings_files import BindingsFiles
 from parseXML import ParseXML
@@ -172,7 +173,7 @@ def run_swig_test(name, binding, ext):
 def main():
 
     # set up the enivornment
-    this_dir = os.getcwd()
+    this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)

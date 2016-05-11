@@ -54,6 +54,7 @@ class ParseXML():
         if not os.path.isfile(filename):
             global_variables.code_returned = \
                 global_variables.return_codes['failed to read file']
+            print('{0} not found'.format(filename))
 
         if global_variables.code_returned == \
                 global_variables.return_codes['success']:

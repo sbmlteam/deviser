@@ -2,12 +2,13 @@
 
 import os
 
-from util import global_variables
-import deviser
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 import test_functions
 
+from util import global_variables
+import deviser
 
 ##############################################################################
 # Set up variables
@@ -56,7 +57,7 @@ def run_deviser_test(name, flag, expected_return):
 def main():
 
     # set up the enivornment
-    this_dir = os.getcwd()
+    this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)

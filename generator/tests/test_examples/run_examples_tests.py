@@ -2,6 +2,10 @@
 
 import os
 
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+
 from code_files import CppExampleFile
 from validation import ValidationXMLFiles
 from parseXML import ParseXML
@@ -124,7 +128,7 @@ def run_xml_fail_tests(name):
 def main():
 
     # set up the enivornment
-    this_dir = os.getcwd()
+    this_dir = os.path.dirname(os.path.abspath(__file__))
 
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
