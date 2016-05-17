@@ -156,6 +156,13 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
                 fileout.copy_line_verbatim('%include <{0}/{1}.h>\n'
                                            ''.format(global_variables.language,
                                                      name))
+                if element['hasListOf']: 
+                    loname = strFunctions.prefix_name(
+                      strFunctions.list_of_name(element['name']))
+                    fileout.copy_line_verbatim('%include <{0}/{1}.h>\n'
+                                           ''.format(global_variables.language,
+                                                     loname))
+
 
     def print_derived_types(self, fileout):
         libname = global_variables.library_name.lower()
