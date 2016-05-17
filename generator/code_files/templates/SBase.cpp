@@ -44,6 +44,24 @@ SBase::getElementByMetaId(const std::string& metaid)
   return NULL;
 }
 
+const SBase*
+SBase::getElementBySId(const std::string& id) const 
+{
+  if (id.empty()) return NULL;
+
+  return NULL;
+}
+
+
+const SBase*
+SBase::getElementByMetaId(const std::string& metaid) const 
+{
+  if (metaid.empty()) return NULL;
+
+  return NULL;
+}
+
+
 List*
 SBase::getAllElements()
 {
@@ -1959,7 +1977,7 @@ SBase::read (XMLInputStream& stream)
 
       if (object != NULL)
       {
-        checkOrderAndLogError(object, position);
+        //checkOrderAndLogError(object, position);
         position = object->getElementPosition();
 
         object->connectToParent(static_cast <SBase*>(this));

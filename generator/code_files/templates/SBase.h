@@ -1759,7 +1759,7 @@ protected:
    *
    * If @p object is not in the expected position, an error is logged.
    */
-  void checkOrderAndLogError (SBase* object, int expected);
+  //void checkOrderAndLogError (SBase* object, int expected);
 
 
   /**
