@@ -260,7 +260,7 @@ LIBSEDML_CPP_NAMESPACE_USE
 
 %extend SedBase
 {
-	ListWrapper<SBase>* getListOfAllElements()
+	ListWrapper<SedBase>* getListOfAllElements()
 	{
 		List* list = $self->getAllElements();
 		return new ListWrapper<SedBase>(list);
@@ -326,12 +326,17 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedNamespaces.h>
 
 %include <sedml/SedModel.h>
+%include <sedml/SedListOfModels.h>
 %include <sedml/SedChange.h>
+%include <sedml/SedListOfChanges.h>
 %include <sedml/SedAddXML.h>
 %include <sedml/SedSetValue.h>
+%include <sedml/SedListOfSetValues.h>
 %include <sedml/SedDataGenerator.h>
+%include <sedml/SedListOfDataGenerators.h>
 %include <sedml/SedRepeatedTask.h>
 %include <sedml/SedSimulation.h>
+%include <sedml/SedListOfSimulations.h>
 %include <sedml/SedVectorRange.h>
 
 %include <numl/common/extern.h>

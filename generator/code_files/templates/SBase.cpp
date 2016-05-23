@@ -36,14 +36,6 @@ SBase::getElementBySId(const std::string& id)
 }
 
 
-SBase*
-SBase::getElementByMetaId(const std::string& metaid)
-{
-  if (metaid.empty()) return NULL;
-
-  return NULL;
-}
-
 const SBase*
 SBase::getElementBySId(const std::string& id) const 
 {
@@ -52,6 +44,14 @@ SBase::getElementBySId(const std::string& id) const
   return NULL;
 }
 
+
+SBase*
+SBase::getElementByMetaId(const std::string& metaid)
+{
+  if (metaid.empty()) return NULL;
+
+  return NULL;
+}
 
 const SBase*
 SBase::getElementByMetaId(const std::string& metaid) const 
@@ -1977,7 +1977,6 @@ SBase::read (XMLInputStream& stream)
 
       if (object != NULL)
       {
-        //checkOrderAndLogError(object, position);
         position = object->getElementPosition();
 
         object->connectToParent(static_cast <SBase*>(this));

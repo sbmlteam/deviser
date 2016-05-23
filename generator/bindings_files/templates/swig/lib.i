@@ -263,10 +263,9 @@ LIBSBML_CPP_NAMESPACE_USE
 
 %extend SBase
 {
-	ListWrapper<SBase>* 
-<verbatim>
-  getListOfAllElements()
-</verbatim>
+<replace_only_sbase>
+	ListWrapper<SBase>* getListOfAllElements()
+</replace_only_sbase>
 	{
 		List* list = $self->getAllElements();
 		return new ListWrapper<SBase>(list);

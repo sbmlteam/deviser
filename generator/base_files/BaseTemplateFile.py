@@ -94,6 +94,8 @@ class BaseTemplateFile:
                 i = self.print_block(fileout, lines, i)
             elif line.startswith('<sbml>'):
                 i = self.print_sbml_block(fileout, lines, i)
+            elif line.startswith('<replace_only_sbase>'):
+                i = self.print_sbase_block(fileout, lines, i)
             elif line.startswith('<insert_class_includes/>'):
                 self.print_includes(fileout)
                 i += 1
@@ -212,6 +214,18 @@ class BaseTemplateFile:
         while not line.startswith('</sbml>'):
             line = re.sub('LIBREPLACE', global_variables.library_name.upper(), line)
             line = re.sub('OTHER_LIBS', other_libs, line)
+            fileout.copy_line_verbatim(line)
+            i += 1
+            line = lines[i]
+        i += 1
+        return i
+
+    @staticmethod
+    def print_sbase_block(fileout, lines, i):
+        i += 1
+        line = lines[i]
+        while not line.startswith('</replace_only_sbase>'):
+            line = re.sub('SBase', global_variables.std_base, line)
             fileout.copy_line_verbatim(line)
             i += 1
             line = lines[i]

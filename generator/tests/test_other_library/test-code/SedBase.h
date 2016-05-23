@@ -1761,14 +1761,6 @@ protected:
 
 
   /**
-   * Checks that the Sed element appears in the expected order.
-   *
-   * If @p object is not in the expected position, an error is logged.
-   */
-  void checkOrderAndLogError (SedBase* object, int expected);
-
-
-  /**
    * Checks that an Sed SedListOf element is populated.  
    * If a listOf element has been declared with no elements, 
    * an error is logged.

@@ -1755,14 +1755,6 @@ protected:
 
 
   /**
-   * Checks that the SBML element appears in the expected order.
-   *
-   * If @p object is not in the expected position, an error is logged.
-   */
-  //void checkOrderAndLogError (SBase* object, int expected);
-
-
-  /**
    * Checks that an SBML ListOf element is populated.  
    * If a listOf element has been declared with no elements, 
    * an error is logged.

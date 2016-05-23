@@ -41,6 +41,15 @@ SedBase::getElementBySId(const std::string& id)
 }
 
 
+const SedBase*
+SedBase::getElementBySId(const std::string& id) const 
+{
+  if (id.empty()) return NULL;
+
+  return NULL;
+}
+
+
 SedBase*
 SedBase::getElementByMetaId(const std::string& metaid)
 {
@@ -48,6 +57,15 @@ SedBase::getElementByMetaId(const std::string& metaid)
 
   return NULL;
 }
+
+const SedBase*
+SedBase::getElementByMetaId(const std::string& metaid) const 
+{
+  if (metaid.empty()) return NULL;
+
+  return NULL;
+}
+
 
 List*
 SedBase::getAllElements()
@@ -1964,7 +1982,6 @@ SedBase::read (XMLInputStream& stream)
 
       if (object != NULL)
       {
-        checkOrderAndLogError(object, position);
         position = object->getElementPosition();
 
         object->connectToParent(static_cast <SedBase*>(this));
