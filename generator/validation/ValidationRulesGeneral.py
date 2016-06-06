@@ -126,8 +126,6 @@ class ValidationRulesGeneral():
             rule = self.write_empty_list_rule(self)
             self.add_rule(rule)
 
-
-
     def add_rule(self, rule):
         if rule is not None:
             self.rules.append(rule)
@@ -201,9 +199,10 @@ class ValidationRulesGeneral():
     def write_id_rule(self):
         text = '(Extends validation rule \\#10301 in the \\sbmlthreecore ' \
                'specification. TO DO list scope of ids)'
-        ref = '{0} {1}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('primitive-types', False))
+        ref = 'SBML Level~3 Version~1 Core, Section~3.1.7.'
+        # ref = '{0} {1}.'\
+        #     .format(self.pkg_ref,
+        #             strFunctions.wrap_section('primitive-types', False))
         sev = 'ERROR'
         lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
         short = 'Duplicate \'id\' attribute value'
@@ -219,9 +218,10 @@ class ValidationRulesGeneral():
                'the \\class{1}SBML{2} data type \\primtype{1}SId{2}'\
             .format(strFunctions.wrap_token('id', self.package),
                     self.start_b, self.end_b)
-        ref = '{0} {1}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('primitive-types', False))
+        ref = 'SBML Level~3 Version~1 Core, Section~3.1.7.'
+        # ref = '{0} {1}.'\
+        #     .format(self.pkg_ref,
+        #             strFunctions.wrap_section('primitive-types', False))
         sev = 'ERROR'
         lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
         short = 'Invalid SId syntax'.format(self.up_package)
@@ -289,9 +289,10 @@ class ValidationRulesGeneral():
         text = 'The value of a {0} must conform to the syntax of ' \
                'the XML Type ID'\
             .format(strFunctions.wrap_token('metaid', self.package))
-        ref = '{0} {1}.'\
-            .format(self.pkg_ref,
-                    strFunctions.wrap_section('primitive-types', False))
+        ref = 'SBML Level~3 Version~1 Core, Section~3.1.6.'
+        # ref = '{0} {1}.'\
+        #     .format(self.pkg_ref,
+        #             strFunctions.wrap_section('primitive-types', False))
         sev = 'ERROR'
         lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
         short = 'Invalid SId syntax'.format(self.up_package)
