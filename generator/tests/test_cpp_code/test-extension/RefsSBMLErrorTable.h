@@ -62,8 +62,8 @@ static const packageErrorTableEntry refsErrorTable[] =
     "The Refs namespace is not correctly declared.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "To conform to the SID References Package specification for SBML Level~3 "
-    "Version~1, an SBML document must declare "
+    "To conform to the SID References Package specification for SBML Level 3 "
+    "Version 1, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/refs/version1' as the "
     "XMLNamespace to use for elements of this package.",
     { "L3V1 Refs V1 Section 3.1"
@@ -179,7 +179,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfThingCs> object may have the optional SBML Level~3 Core "
+    "A <listOfThingCs> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfThingCs> object.",
     { "L3V1 Refs V1 Section"
@@ -191,7 +191,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core attributes allowed on <thingA>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingA> object may have the optional SBML Level~3 Core attributes "
+    "A <thingA> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <thingA>.",
     { "L3V1 Refs V1 Section"
@@ -203,7 +203,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core elements allowed on <thingA>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingA> object may have the optional SBML Level~3 Core subobjects for "
+    "A <thingA> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <thingA>.",
     { "L3V1 Refs V1 Section"
@@ -227,7 +227,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core attributes allowed on <thingB>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingB> object may have the optional SBML Level~3 Core attributes "
+    "A <thingB> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <thingB>.",
     { "L3V1 Refs V1 Section"
@@ -239,7 +239,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core elements allowed on <thingB>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingB> object may have the optional SBML Level~3 Core subobjects for "
+    "A <thingB> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <thingB>.",
     { "L3V1 Refs V1 Section"
@@ -263,7 +263,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core attributes allowed on <thingC>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingC> object may have the optional SBML Level~3 Core attributes "
+    "A <thingC> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <thingC>.",
     { "L3V1 Refs V1 Section"
@@ -275,7 +275,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "Core elements allowed on <thingC>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <thingC> object may have the optional SBML Level~3 Core subobjects for "
+    "A <thingC> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <thingC>.",
     { "L3V1 Refs V1 Section"

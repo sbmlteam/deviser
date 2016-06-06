@@ -359,6 +359,8 @@ class ValidationFiles():
                 else:
                     [i, ret_str] = self.replace_name(i, text_string, length)
                 return_string += ret_str
+            elif letter == '~':
+                return_string += ' '
             else:
                 return_string += letter
             i += 1

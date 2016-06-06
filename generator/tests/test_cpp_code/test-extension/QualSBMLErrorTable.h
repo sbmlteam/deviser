@@ -62,8 +62,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     "The Qual namespace is not correctly declared.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "To conform to the Qualitative Models Package specification for SBML "
-    "Level~3 Version~1, an SBML document must declare "
+    "To conform to the Qualitative Models Package specification for SBML Level "
+    "3 Version 1, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/qual/version1' as the "
     "XMLNamespace to use for elements of this package.",
     { "L3V1 Qual V1 Section 3.1"
@@ -192,7 +192,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfQualitativeSpecies> object may have the optional SBML Level~3 "
+    "A <listOfQualitativeSpecies> object may have the optional SBML Level 3 "
     "Core attributes 'metaid' and 'sboTerm'. No other attributes from the SBML "
     "Level 3 Core namespaces are permitted on a <listOfQualitativeSpecies> "
     "object.",
@@ -205,7 +205,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfTransitions> object may have the optional SBML Level~3 Core "
+    "A <listOfTransitions> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfTransitions> object.",
     { "L3V1 Qual V1 Section"
@@ -217,7 +217,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <qualitativeSpecies> object may have the optional SBML Level~3 Core "
+    "A <qualitativeSpecies> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <qualitativeSpecies>.",
     { "L3V1 Qual V1 Section"
@@ -229,7 +229,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <qualitativeSpecies>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <qualitativeSpecies> object may have the optional SBML Level~3 Core "
+    "A <qualitativeSpecies> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on a <qualitativeSpecies>.",
     { "L3V1 Qual V1 Section"
@@ -311,7 +311,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <transition> object may have the optional SBML Level~3 Core attributes "
+    "A <transition> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <transition>.",
     { "L3V1 Qual V1 Section"
@@ -323,7 +323,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <transition>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <transition> object may have the optional SBML Level~3 Core subobjects "
+    "A <transition> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <transition>.",
     { "L3V1 Qual V1 Section"
@@ -430,7 +430,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <listOfInputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfInputs> object may have the optional SBML Level~3 Core attributes "
+    "A <listOfInputs> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <listOfInputs> object.",
     { "L3V1 Qual V1 Section"
@@ -442,7 +442,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <listOfOutputs>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfOutputs> object may have the optional SBML Level~3 Core "
+    "A <listOfOutputs> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfOutputs> object.",
     { "L3V1 Qual V1 Section"
@@ -454,7 +454,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <listOfFunctionTerms>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfFunctionTerms> object may have the optional SBML Level~3 Core "
+    "A <listOfFunctionTerms> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfFunctionTerms> object.",
     { "L3V1 Qual V1 Section"
@@ -466,7 +466,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <input> object may have the optional SBML Level~3 Core attributes "
+    "An <input> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on an <input>.",
     { "L3V1 Qual V1 Section"
@@ -478,7 +478,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <input>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <input> object may have the optional SBML Level~3 Core subobjects for "
+    "An <input> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on an <input>.",
     { "L3V1 Qual V1 Section"
@@ -565,7 +565,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <output> object may have the optional SBML Level~3 Core attributes "
+    "An <output> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on an <output>.",
     { "L3V1 Qual V1 Section"
@@ -577,7 +577,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <output>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <output> object may have the optional SBML Level~3 Core subobjects for "
+    "An <output> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on an <output>.",
     { "L3V1 Qual V1 Section"
@@ -651,7 +651,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <defaultTerm> object may have the optional SBML Level~3 Core attributes "
+    "A <defaultTerm> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <defaultTerm>.",
     { "L3V1 Qual V1 Section"
@@ -663,7 +663,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <defaultTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <defaultTerm> object may have the optional SBML Level~3 Core subobjects "
+    "A <defaultTerm> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <defaultTerm>.",
     { "L3V1 Qual V1 Section"
@@ -698,7 +698,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core attributes allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <functionTerm> object may have the optional SBML Level~3 Core attributes "
+    "A <functionTerm> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <functionTerm>.",
     { "L3V1 Qual V1 Section"
@@ -710,7 +710,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "Core elements allowed on <functionTerm>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <functionTerm> object may have the optional SBML Level~3 Core subobjects "
+    "A <functionTerm> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <functionTerm>.",
     { "L3V1 Qual V1 Section"

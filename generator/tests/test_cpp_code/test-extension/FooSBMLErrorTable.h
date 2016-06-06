@@ -62,7 +62,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "The Foo namespace is not correctly declared.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "To conform to the Foo Package specification for SBML Level~3 Version~1, an "
+    "To conform to the Foo Package specification for SBML Level 3 Version 1, an "
     "SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/foo/version1' as the "
     "XMLNamespace to use for elements of this package.",
@@ -179,7 +179,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <model>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfApples> object may have the optional SBML Level~3 Core attributes "
+    "A <listOfApples> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <listOfApples> object.",
     { "L3V1 Foo V1 Section"
@@ -215,7 +215,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <compartment>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfPears> object may have the optional SBML Level~3 Core attributes "
+    "A <listOfPears> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <listOfPears> object.",
     { "L3V1 Foo V1 Section"
@@ -262,7 +262,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <species>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfBananas> object may have the optional SBML Level~3 Core "
+    "A <listOfBananas> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfBananas> object.",
     { "L3V1 Foo V1 Section"
@@ -274,7 +274,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <apple>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <apple> object may have the optional SBML Level~3 Core attributes "
+    "An <apple> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on an <apple>.",
     { "L3V1 Foo V1 Section"
@@ -286,7 +286,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core elements allowed on <apple>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <apple> object may have the optional SBML Level~3 Core subobjects for "
+    "An <apple> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on an <apple>.",
     { "L3V1 Foo V1 Section"
@@ -298,7 +298,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <pear>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <pear> object may have the optional SBML Level~3 Core attributes "
+    "A <pear> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <pear>.",
     { "L3V1 Foo V1 Section"
@@ -310,7 +310,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core elements allowed on <pear>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <pear> object may have the optional SBML Level~3 Core subobjects for "
+    "A <pear> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <pear>.",
     { "L3V1 Foo V1 Section"
@@ -322,7 +322,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <bowl>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <bowl> object may have the optional SBML Level~3 Core attributes "
+    "A <bowl> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <bowl>.",
     { "L3V1 Foo V1 Section"
@@ -334,7 +334,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core elements allowed on <bowl>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <bowl> object may have the optional SBML Level~3 Core subobjects for "
+    "A <bowl> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <bowl>.",
     { "L3V1 Foo V1 Section"
@@ -370,7 +370,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <listOfPears>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfPears> object may have the optional SBML Level~3 Core attributes "
+    "A <listOfPears> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <listOfPears> object.",
     { "L3V1 Foo V1 Section"
@@ -382,7 +382,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <plate>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <plate> object may have the optional SBML Level~3 Core attributes "
+    "A <plate> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <plate>.",
     { "L3V1 Foo V1 Section"
@@ -394,7 +394,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core elements allowed on <plate>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <plate> object may have the optional SBML Level~3 Core subobjects for "
+    "A <plate> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <plate>.",
     { "L3V1 Foo V1 Section"
@@ -465,7 +465,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <listOfApples>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfApples> object may have the optional SBML Level~3 Core attributes "
+    "A <listOfApples> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <listOfApples> object.",
     { "L3V1 Foo V1 Section"
@@ -477,7 +477,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <listOfBananas>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <listOfBananas> object may have the optional SBML Level~3 Core "
+    "A <listOfBananas> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfBananas> object.",
     { "L3V1 Foo V1 Section"
@@ -489,7 +489,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core attributes allowed on <banana>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <banana> object may have the optional SBML Level~3 Core attributes "
+    "A <banana> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <banana>.",
     { "L3V1 Foo V1 Section"
@@ -501,7 +501,7 @@ static const packageErrorTableEntry fooErrorTable[] =
     "Core elements allowed on <banana>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "A <banana> object may have the optional SBML Level~3 Core subobjects for "
+    "A <banana> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <banana>.",
     { "L3V1 Foo V1 Section"

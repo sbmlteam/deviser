@@ -241,7 +241,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "The Sedml namespace is not correctly declared.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "To conform to the Package specification for SBML Level~1 Version~1, an "
+    "To conform to the Package specification for SBML Level 1 Version 1, an "
     "SBML document must declare "
     "'http://www.sbml.org/sbml/level1/version1/sedml/version1' as the "
     "XMLNamespace to use for elements of this package.",
@@ -330,7 +330,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level~3 Core attributes "
+    "A <sedDocument> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <sedDocument>.",
     { "L3V1 Sedml V1 Section"
@@ -342,7 +342,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedDocument>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level~3 Core subobjects "
+    "A <sedDocument> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <sedDocument>.",
     { "L3V1 Sedml V1 Section"
@@ -423,7 +423,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <listOfSedModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedListOfModels> object may have the optional SBML Level~3 Core "
+    "A <sedListOfModels> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedListOfModels> object.",
     { "L3V1 Sedml V1 Section"
@@ -435,7 +435,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedModel> object may have the optional SBML Level~3 Core attributes "
+    "A <sedModel> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <sedModel>.",
     { "L3V1 Sedml V1 Section"
@@ -447,7 +447,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedModel>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedModel> object may have the optional SBML Level~3 Core subobjects for "
+    "A <sedModel> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <sedModel>.",
     { "L3V1 Sedml V1 Section"
@@ -540,7 +540,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <listOfSedChanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedListOfChanges> object may have the optional SBML Level~3 Core "
+    "A <sedListOfChanges> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedListOfChanges> object.",
     { "L3V1 Sedml V1 Section"
@@ -552,7 +552,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedChange> object may have the optional SBML Level~3 Core attributes "
+    "A <sedChange> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <sedChange>.",
     { "L3V1 Sedml V1 Section"
@@ -564,7 +564,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedChange> object may have the optional SBML Level~3 Core subobjects "
+    "A <sedChange> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <sedChange>.",
     { "L3V1 Sedml V1 Section"
@@ -576,7 +576,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object may have the optional SBML Level~3 Core attributes "
+    "A <sedAddXML> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <sedAddXML>.",
     { "L3V1 Sedml V1 Section"
@@ -588,7 +588,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedAddXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object may have the optional SBML Level~3 Core subobjects "
+    "A <sedAddXML> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <sedAddXML>.",
     { "L3V1 Sedml V1 Section"
@@ -612,7 +612,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedSetValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object may have the optional SBML Level~3 Core attributes "
+    "A <sedSetValue> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <sedSetValue>.",
     { "L3V1 Sedml V1 Section"
@@ -624,7 +624,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedSetValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object may have the optional SBML Level~3 Core subobjects "
+    "A <sedSetValue> object may have the optional SBML Level 3 Core subobjects "
     "for notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <sedSetValue>.",
     { "L3V1 Sedml V1 Section"
@@ -708,7 +708,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedDataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object may have the optional SBML Level~3 Core "
+    "A <sedDataGenerator> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedDataGenerator>.",
     { "L3V1 Sedml V1 Section"
@@ -720,7 +720,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedDataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object may have the optional SBML Level~3 Core "
+    "A <sedDataGenerator> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on a <sedDataGenerator>.",
     { "L3V1 Sedml V1 Section"
@@ -805,7 +805,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <listOfSedVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedListOfVariables> object may have the optional SBML Level~3 Core "
+    "A <sedListOfVariables> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedListOfVariables> object.",
     { "L3V1 Sedml V1 Section"
@@ -817,7 +817,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <listOfSedParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedListOfParameters> object may have the optional SBML Level~3 Core "
+    "A <sedListOfParameters> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedListOfParameters> object.",
     { "L3V1 Sedml V1 Section"
@@ -829,7 +829,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedRepeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedRepeatedTask> object may have the optional SBML Level~3 Core "
+    "A <sedRepeatedTask> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedRepeatedTask>.",
     { "L3V1 Sedml V1 Section"
@@ -841,7 +841,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedRepeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedRepeatedTask> object may have the optional SBML Level~3 Core "
+    "A <sedRepeatedTask> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on a <sedRepeatedTask>.",
     { "L3V1 Sedml V1 Section"
@@ -888,7 +888,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedSimulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object may have the optional SBML Level~3 Core "
+    "A <sedSimulation> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedSimulation>.",
     { "L3V1 Sedml V1 Section"
@@ -900,7 +900,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedSimulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object may have the optional SBML Level~3 Core "
+    "A <sedSimulation> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on a <sedSimulation>.",
     { "L3V1 Sedml V1 Section"
@@ -947,7 +947,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core attributes allowed on <sedVectorRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedVectorRange> object may have the optional SBML Level~3 Core "
+    "A <sedVectorRange> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <sedVectorRange>.",
     { "L3V1 Sedml V1 Section"
@@ -959,7 +959,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Core elements allowed on <sedVectorRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedVectorRange> object may have the optional SBML Level~3 Core "
+    "A <sedVectorRange> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on a <sedVectorRange>.",
     { "L3V1 Sedml V1 Section"
