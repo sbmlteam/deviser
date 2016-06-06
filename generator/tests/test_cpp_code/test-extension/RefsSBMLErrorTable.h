@@ -65,7 +65,7 @@ static const packageErrorTableEntry refsErrorTable[] =
     "To conform to the SID References Package specification for SBML Level~3 "
     "Version~1, an SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/refs/version1' as the "
-    "XMLNamespaceto use for elements of this package.",
+    "XMLNamespace to use for elements of this package.",
     { "L3V1 Refs V1 Section 3.1"
     }
   },

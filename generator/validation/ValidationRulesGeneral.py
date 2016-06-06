@@ -159,7 +159,7 @@ class ValidationRulesGeneral():
         text = 'To conform to the {0} specification for SBML Level~{1} ' \
                'Version~{2}, an SBML document must declare ' \
                '\\uri{3}http://www.sbml.org/sbml/' \
-               'level{1}/version{2}/{4}/version{5}{6} as the XMLNamespace' \
+               'level{1}/version{2}/{4}/version{5}{6} as the XMLNamespace ' \
                'to use for elements of this package.'\
             .format(self.full_pkg_command, self.level, self.version,
                     self.start_b, self.package, self.pkg_version, self.end_b)
