@@ -589,6 +589,13 @@ def main():
     test_case = 'element xml names differ'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'add_copyright'
+    num = 0
+    class_name = 'Copyright'
+    list_of = ''
+    test_case = 'additional copyright'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

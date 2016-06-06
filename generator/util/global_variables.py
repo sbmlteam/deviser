@@ -123,13 +123,21 @@ global namespaces
 global dependency
 global library_version
 
+global custom_copyright
+custom_copyright = ''
+
+
+def set_custom_copyright(copyright):
+    global custom_copyright
+    custom_copyright = copyright
+
 def set_global_fullname(fullname):
     global package_full_name
     package_full_name = fullname
 
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
-                specifications=[], depend=[], library_vers=[]):
+                specifications=[], depend=[], library_vers=[], copyright=''):
     global language
     language = lang
 
@@ -149,6 +157,9 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     library_version = []
     if library_vers:
         library_version = library_vers
+
+    global custom_copyright
+    custom_copyright = copyright
 
     if base:
         global baseClass

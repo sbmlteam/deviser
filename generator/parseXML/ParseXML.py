@@ -574,7 +574,6 @@ class ParseXML():
                      'version': version,
                      'namespace': namespace})
 
-
     def get_dependency_information(self, node):
         library = self.get_value(node, 'library_name')
         prefix = self.get_value(node, 'prefix')
@@ -588,6 +587,7 @@ class ParseXML():
         prefix = self.get_value(node, 'prefix')
         library_name = self.get_value(node, 'libraryName')
         pkg_prefix = self.get_value(node, 'pkg_prefix')
+
         if node.getAttributeNode('isPackage'):
             is_package = self.get_bool_value(self, node, 'isPackage')
         else:
@@ -618,7 +618,6 @@ class ParseXML():
         library_version = dict({'major': major,
                                 'minor': minor,
                                 'revision': rev})
-
 
         # some sanity checking
         if not language or language == '':
@@ -656,6 +655,9 @@ class ParseXML():
         fullname = self.get_value(self.dom.documentElement, 'fullname')
         required = self.get_bool_value(self, self.dom.documentElement, 
                                        'required')
+        custom_copyright = self.get_add_code_value(self,
+                                                   self.dom.documentElement,
+                                                   'customCopyright')
 
         # setup global variables
         languages = self.dom.getElementsByTagName('language')
@@ -668,6 +670,7 @@ class ParseXML():
             global_variables.reset()
 
         global_variables.set_global_fullname(fullname)
+        global_variables.set_custom_copyright(custom_copyright)
 
         # get package information
         sbml_level = 3

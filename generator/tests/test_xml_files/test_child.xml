@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="test" fullname="testChild" number="100" offset="10000000" version="1" required="false">
+<package name="test" fullname="testChild" number="100" offset="10000000" version="1" required="false" customCopyright="copyright.txt">
   <language name="SedML" prefix="Sed" documentClass="SedDocument" baseClass="SedBase" libraryName="LibSEDML" isPackage="False"/>
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">

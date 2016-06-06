@@ -167,7 +167,7 @@ class BaseFile:
                         rollback = True
                         if in_quotes:
                             if words[i-1] == '",':
-                                #special case for validation rule messages
+                                # special case for validation rule messages
                                 rollback = False
                                 newline = temp
                             elif words[i-1].startswith('\"'):
@@ -335,10 +335,56 @@ class BaseFile:
     def write_file(self):
         self.add_file_header()
 
-    def write_libsbml_licence(self):
+    def write_licence(self):
         self.write_blank_comment_line()
         self.write_comment_line('<!-----------------------------------------'
                                 '---------------------------------')
+        # copyright can be any of teh following:
+        # libsbml copyright
+        # libsbml copyright plus custom copyright
+        # custom copyright
+        if global_variables.library_name == 'Libsbml':
+            # we are writing code for libsbml include the copyright
+            self.write_libsbml_copyright()
+            if global_variables.custom_copyright \
+                    and len(global_variables.custom_copyright) > 0:
+                # we have a custom copyright as well
+                # add it
+                self.write_blank_comment_line()
+                self.write_custom_copyright()
+        else:
+            # we are writing code for something else
+            if not global_variables.custom_copyright \
+                    or len(global_variables.custom_copyright) == 0:
+                # no copyright given so write the libsbml one
+                self.write_libsbml_copyright()
+            else:
+                self.write_custom_copyright()
+
+        self.write_gpl_licence()
+        self.write_comment_line('--------------------------------------------'
+                                '---------------------------- -->')
+
+    def write_gpl_licence(self):
+        self.write_blank_comment_line()
+        self.write_comment_line('This library is free software; you can '
+                                'redistribute it and/or modify it under the '
+                                'terms of the GNU Lesser General Public '
+                                'License as published by the Free Software '
+                                'Foundation.  A copy of the license agreement'
+                                ' is provided in the file named "LICENSE.txt"'
+                                ' included with this software distribution '
+                                'and also available online as http://sbml.org'
+                                '/software/libsbml/license.html')
+
+    def write_custom_copyright(self):
+        filename = global_variables.custom_copyright
+        in_file = open(filename, 'r')
+        for line in in_file:
+            self.write_comment_line('{0}'.format(line))
+        in_file.close()
+
+    def write_libsbml_copyright(self):
         self.write_comment_line('This file is part of libSBML.  Please visit '
                                 'http://sbml.org for more information about '
                                 'SBML, and the latest version of libSBML.')
@@ -369,18 +415,6 @@ class BaseFile:
                                 'Pasadena, CA, USA')
         self.write_comment_line('    2. Japan Science and Technology Agency, '
                                 'Japan')
-        self.write_blank_comment_line()
-        self.write_comment_line('This library is free software; you can '
-                                'redistribute it and/or modify it under the '
-                                'terms of the GNU Lesser General Public '
-                                'License as published by the Free Software '
-                                'Foundation.  A copy of the license agreement'
-                                ' is provided in the file named "LICENSE.txt"'
-                                ' included with this software distribution '
-                                'and also available online as http://sbml.org'
-                                '/software/libsbml/license.html')
-        self.write_comment_line('--------------------------------------------'
-                                '---------------------------- -->')
 
     def add_file_header(self):
         self.open_comment()
@@ -390,9 +424,8 @@ class BaseFile:
             self.write_comment_line('@author SBMLTeam')
         else:
             self.write_comment_line('@author DEVISER')
-        if self.library_name == 'Libsbml' and (self.extension != 'xml'
-                                               and self.extension != 'rng'):
-            self.write_libsbml_licence()
+        if self.extension != 'xml' and self.extension != 'rng':
+            self.write_licence()
         if self.is_header and not self.is_excluded(self.name):
             if self.name.endswith('Extension'):
                 self.write_class_comments(True, False, False)
