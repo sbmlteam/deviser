@@ -55,6 +55,7 @@ MyLoTest::MyLoTest(unsigned int level,
                    unsigned int version,
                    unsigned int pkgVersion)
   : SBase(level, version)
+  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -65,6 +66,7 @@ MyLoTest::MyLoTest(unsigned int level,
  */
 MyLoTest::MyLoTest(TestPkgNamespaces *testns)
   : SBase(testns)
+  , mId ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -76,6 +78,7 @@ MyLoTest::MyLoTest(TestPkgNamespaces *testns)
  */
 MyLoTest::MyLoTest(const MyLoTest& orig)
   : SBase( orig )
+  , mId ( orig.mId )
 {
 }
 
@@ -89,6 +92,7 @@ MyLoTest::operator=(const MyLoTest& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
+    mId = rhs.mId;
   }
 
   return *this;
@@ -114,6 +118,55 @@ MyLoTest::~MyLoTest()
 
 
 /*
+ * Returns the value of the "id" attribute of this MyLoTest.
+ */
+const std::string&
+MyLoTest::getId() const
+{
+  return mId;
+}
+
+
+/*
+ * Predicate returning @c true if this MyLoTest's "id" attribute is set.
+ */
+bool
+MyLoTest::isSetId() const
+{
+  return (mId.empty() == false);
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this MyLoTest.
+ */
+int
+MyLoTest::setId(const std::string& id)
+{
+  return SyntaxChecker::checkAndSetSId(id, mId);
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this MyLoTest.
+ */
+int
+MyLoTest::unsetId()
+{
+  mId.erase();
+
+  if (mId.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * Returns the XML element name of this MyLoTest object.
  */
 const std::string&
@@ -131,6 +184,19 @@ int
 MyLoTest::getTypeCode() const
 {
   return TEST_LO_TEST;
+}
+
+
+/*
+ * Predicate returning @c true if all the required attributes for this MyLoTest
+ * object have been set.
+ */
+bool
+MyLoTest::hasRequiredAttributes() const
+{
+  bool allPresent = true;
+
+  return allPresent;
 }
 
 
@@ -199,6 +265,129 @@ MyLoTest::enablePackageInternal(const std::string& pkgURI,
 
 
 
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds the expected attributes for this element
+ */
+void
+MyLoTest::addExpectedAttributes(ExpectedAttributes& attributes)
+{
+  SBase::addExpectedAttributes(attributes);
+
+  attributes.add("id");
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Reads the expected attributes into the member data variables
+ */
+void
+MyLoTest::readAttributes(const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+  unsigned int numErrs;
+  bool assigned = false;
+  SBMLErrorLog* log = getErrorLog();
+
+  if (static_cast<ListOfMyLoTests*>(getParentSBMLObject())->size() < 2)
+  {
+    numErrs = log->getNumErrors();
+    for (int n = numErrs-1; n >= 0; n--)
+    {
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownPackageAttribute);
+        log->logPackageError("test", TestContainerLOMyLoTestsAllowedAttributes,
+          pkgVersion, level, version, details);
+      }
+      else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownCoreAttribute);
+        log->logPackageError("test",
+          TestContainerLOMyLoTestsAllowedCoreAttributes, pkgVersion, level,
+            version, details);
+      }
+    }
+  }
+
+  SBase::readAttributes(attributes, expectedAttributes);
+  numErrs = log->getNumErrors();
+
+  for (int n = numErrs-1; n >= 0; n--)
+  {
+    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownPackageAttribute);
+      log->logPackageError("test", TestMyLoTestAllowedAttributes, pkgVersion,
+        level, version, details);
+    }
+    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(UnknownCoreAttribute);
+      log->logPackageError("test", TestMyLoTestAllowedCoreAttributes,
+        pkgVersion, level, version, details);
+    }
+  }
+
+  // 
+  // id SId (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("id", mId);
+
+  if (assigned == true)
+  {
+    if (mId.empty() == true)
+    {
+      logEmptyString(mId, level, version, "<MyLoTest>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+    {
+      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
+        "conform to the syntax.");
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Writes the attributes to the stream
+ */
+void
+MyLoTest::writeAttributes(XMLOutputStream& stream) const
+{
+  SBase::writeAttributes(stream);
+
+  if (isSetId() == true)
+  {
+    stream.writeAttribute("id", getPrefix(), mId);
+  }
+
+  SBase::writeExtensionAttributes(stream);
+}
+
+/** @endcond */
+
+
+
 
 #endif /* __cplusplus */
 
@@ -246,6 +435,67 @@ MyLoTest_free(MyLoTest_t* mlt)
   {
     delete mlt;
   }
+}
+
+
+/*
+ * Returns the value of the "id" attribute of this MyLoTest_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyLoTest_getId(const MyLoTest_t * mlt)
+{
+  if (mlt == NULL)
+  {
+    return NULL;
+  }
+
+  return mlt->getId().empty() ? NULL : safe_strdup(mlt->getId().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 if this MyLoTest_t's "id" attribute is set.
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_isSetId(const MyLoTest_t * mlt)
+{
+  return (mlt != NULL) ? static_cast<int>(mlt->isSetId()) : 0;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this MyLoTest_t.
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_setId(MyLoTest_t * mlt, const char * id)
+{
+  return (mlt != NULL) ? mlt->setId(id) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this MyLoTest_t.
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_unsetId(MyLoTest_t * mlt)
+{
+  return (mlt != NULL) ? mlt->unsetId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Predicate returning @c 1 if all the required attributes for this MyLoTest_t
+ * object have been set.
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_hasRequiredAttributes(const MyLoTest_t * mlt)
+{
+  return (mlt != NULL) ? static_cast<int>(mlt->hasRequiredAttributes()) : 0;
 }
 
 

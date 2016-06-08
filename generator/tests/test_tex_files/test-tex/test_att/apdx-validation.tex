@@ -1,0 +1,464 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Validation of SBML documents}
+\label{apdx-validation}
+
+\subsection{Validation and consistency rules}
+\label{validation-rules}
+
+This section summarizes all the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBML Level~3 Version~1 model that
+uses the estAttributesPackage. We use the same conventions as are used
+in the SBML Level~3 Version~1 Core specification document. In
+particular, there are different degrees of rule strictness. Formally,
+the differences are expressed in the statement of a rule: either a rule
+states that a condition \emph{must} be true, or a rule states that it
+\emph{should} be true. Rules of the former kind are strict SBML
+validation rules---a model encoded in SBML must conform to all of them
+in order to be considered valid. Rules of the latter kind are
+consistency rules. To help highlight these differences, we use the
+following three symbols next to the rule numbers:
+
+\begin{description}
+
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+\emph{requirement} for SBML conformance. If a model does not follow this
+rule, it does not conform to the estAttributesPackage specification.
+(Mnemonic intention behind the choice of symbol: ``This must be
+checked.'')
+
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+\emph{recommendation} for model consistency. If a model does not follow
+this rule, it is not considered strictly invalid as far as the
+estAttributesPackage specification is concerned; however, it indicates
+that the model contains a physical or conceptual inconsistency.
+(Mnemonic intention behind the choice of symbol: ``This is a cause for
+warning.'')
+
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+recommendation for good modeling practice. This rule is not strictly a
+matter of SBML encoding, but the recommendation comes from logical
+reasoning. As in the previous case, if a model does not follow this
+rule, it is not strictly considered an invalid SBML encoding. (Mnemonic
+intention behind the choice of symbol: ``You're a star if you heed
+this.'')
+
+\end{description}
+
+The validation rules listed in the following subsections are all stated
+or implied in the rest of this specification document. They are
+enumerated here for convenience. Unless explicitly stated, all
+validation rules concern objects and attributes specifically defined in
+the estAttributesPackage package.
+
+For \notice convenience and brevity, we use the shorthand
+``\token{test:\-x}'' to stand for an attribute or element name \token{x}
+in the namespace for the estAttributesPackage package, using the
+namespace prefix \token{test}. In reality, the prefix string may be
+different from the literal ``\token{test}'' used here (and indeed, it
+can be any valid XML namespace prefix that the modeler or software
+chooses). We use ``\token{test:\-x}'' because it is shorter than to
+write a full explanation everywhere we refer to an attribute or element
+in the estAttributesPackage namespace.
+
+\subsubsection*{General rules about this package}
+
+\validRule{test-10101}{To conform to the \testAttributesPackage
+specification for SBML Level~3 Version~1, an SBML document must declare
+\uri{http://www.sbml.org/sbml/level3/version1/test/version1} as the
+XMLNamespace to use for elements of this package. (Reference: SBML
+Level~3 Package specification for testAttributes, Version~1
+\sec{xml-namespace}.)}
+
+\validRule{test-10102}{Wherever they appear in an SBML document,
+elements and attributes from the \testAttributesPackage must use the
+\uri{http://www.sbml.org/sbml/level3/version1/test/version1} namespace,
+declaring so either explicitly or implicitly. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1
+\sec{xml-namespace}.)}
+
+\subsubsection*{General rules about identifiers}
+
+\validRule{test-10301}{(Extends validation rule \#10301 in the
+\sbmlthreecore specification. TO DO list scope of ids) (Reference: SBML
+Level~3 Version~1 Core, Section~3.1.7.)}
+
+\validRule{test-10302}{The value of a \token{test:\-id} must conform to
+the syntax of the \class{SBML} data type \primtype{SId} (Reference: SBML
+Level~3 Version~1 Core, Section~3.1.7.)}
+
+\TODO{ANY LIST OF ELEMENTS THAT HAVE ATTRIBUTES}
+
+\subsubsection*{Rules for the extended \class{SBML} class}
+
+\validRule{test-20101}{In all SBML documents using the
+\testAttributesPackage, the \class{SBML} object must have the
+\token{test:\-required} attribute. (Reference: SBML Level~3 Version~1
+Core, Section~4.1.2.)}
+
+\validRule{test-20102}{The value of attribute \token{test:\-required} on
+the \class{SBML} object must be of data type \primtype{boolean}.
+(Reference: SBML Level~3 Version~1 Core, Section~4.1.2.)}
+
+\validRule{test-20103}{The value of attribute \token{test:\-required} on
+the \class{SBML} object must be set to \val{false}. (Reference: SBML
+Level~3 Package specification for testAttributes, Version~1
+\sec{xml-namespace}.)}
+
+\subsubsection*{Rules for extended \class{Species} object}
+
+\validRule{test-20201}{A \Species object may have the optional
+attributes \token{test:\-charge} and \token{test:\-chemicalFormula}. No
+other attributes from the SBML Level 3 testAttributes namespaces are
+permitted on a \Species object. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1, \sec{species-class}.)}
+
+\validRule{test-20202}{The attribute \token{test:\-charge} on a \Species
+must have a value of data type \token{integer}. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{species-class}.)}
+
+\validRule{test-20203}{The attribute \token{test:\-chemicalFormula} on a
+\Species must have a value of data type \token{string}. (Reference: SBML
+Level~3 Package specification for testAttributes, Version~1,
+\sec{species-class}.)}
+
+
+\subsubsection*{Rules for \class{MyTestClass} object}
+
+\validRule{test-20301}{A \MyTestClass object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\MyTestClass. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20302}{A \MyTestClass object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \MyTestClass.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20303}{A \MyTestClass object may have the optional
+attributes \token{test:\-id}, \token{test:\-name}, \token{test:\-num},
+\token{test:\-numTwo}, \token{test:\-numThree}, \token{test:\-numOne},
+\token{test:\-true}, \token{test:\-false}, \token{test:\-unit},
+\token{test:\-refOne}, \token{test:\-refTwo}, \token{test:\-refUnit},
+\token{test:\-correctId}, \token{test:\-idRef}, \token{test:\-idrefOne}
+and \token{test:\-idrefTwo}. No other attributes from the SBML Level 3
+testAttributes namespaces are permitted on a \MyTestClass object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{mytestclass-class}.)}
+
+\validRule{test-20304}{The attribute \token{test:\-name} on a
+\MyTestClass must have a value of data type \token{string}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20305}{The attribute \token{test:\-num} on a
+\MyTestClass must have a value of data type \token{integer}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20306}{The attribute \token{test:\-numTwo} on a
+\MyTestClass must have a value of data type \token{integer}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20307}{The attribute \token{test:\-numThree} on a
+\MyTestClass must have a value of data type \token{integer}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20308}{The attribute \token{test:\-numOne} on a
+\MyTestClass must have a value of data type \token{double}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20309}{The attribute \token{test:\-true} on a
+\MyTestClass must have a value of data type \token{boolean}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20310}{The attribute \token{test:\-false} on a
+\MyTestClass must have a value of data type \token{boolean}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20311}{The value of the attribute \token{test:\-unit} on
+a \MyTestClass must have a taken from the following: the identifier of a
+\UnitDefinition object in the enclosing \Model, or one of the base units
+in SBML. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{mytestclass-class}.)}
+
+\validRule{test-20312}{The value of the attribute \token{test:\-refOne}
+of a \MyTestClass object must be the identifier of an existing \Thing1
+object defined in the enclosing \Model object. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20313}{The value of the attribute \token{test:\-refTwo}
+of a \MyTestClass object must be the identifier of an existing \Thing2
+object defined in the enclosing \Model object. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20314}{The value of the attribute \token{test:\-refUnit}
+on a \MyTestClass must have a taken from the following: the identifier
+of a \UnitDefinition object in the enclosing \Model, or one of the base
+units in SBML. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{mytestclass-class}.)}
+
+\validRule{test-20315}{The attribute \token{test:\-idRef} on a
+\MyTestClass must have a value of data type \token{string}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20316}{The attribute \token{test:\-idrefOne} on a
+\MyTestClass must have a value of data type \token{string}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+\validRule{test-20317}{The attribute \token{test:\-idrefTwo} on a
+\MyTestClass must have a value of data type \token{string}. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{mytestclass-class}.)}
+
+
+\subsubsection*{Rules for \class{Unit} object}
+
+\validRule{test-20401}{An \Unit object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on an
+\Unit. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20402}{An \Unit object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on an \Unit.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20403}{An \Unit object may have the optional attribute
+\token{test:\-unit}. No other attributes from the SBML Level 3
+testAttributes namespaces are permitted on an \Unit object. (Reference:
+SBML Level~3 Package specification for testAttributes, Version~1,
+\sec{unit-class}.)}
+
+\validRule{test-20404}{The value of the attribute \token{test:\-unit} on
+an \Unit must have a taken from the following: the identifier of a
+\UnitDefinition object in the enclosing \Model, or one of the base units
+in SBML. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{unit-class}.)}
+
+
+\subsubsection*{Rules for \class{MyLoTest} object}
+
+\validRule{test-20501}{A \MyLoTest object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\MyLoTest. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20502}{A \MyLoTest object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \MyLoTest.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20503}{A \MyLoTest object may have the optional
+attribute \token{test:\-id}. No other attributes from the SBML Level 3
+testAttributes namespaces are permitted on a \MyLoTest object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{mylotest-class}.)}
+
+
+\subsubsection*{Rules for \class{MyRequiredClass} object}
+
+\validRule{test-20601}{A \MyRequiredClass object may have the optional
+SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
+other attributes from the SBML Level 3 Core namespaces are permitted on
+a \MyRequiredClass. (Reference: SBML Level~3 Version~1 Core,
+Section~3.2.)}
+
+\validRule{test-20602}{A \MyRequiredClass object may have the optional
+SBML Level~3 Core subobjects for notes and annotations. No other
+elements from the SBML Level 3 Core namespaces are permitted on a
+\MyRequiredClass. (Reference: SBML Level~3 Version~1 Core,
+Section~3.2.)}
+
+\validRule{test-20603}{A \MyRequiredClass object must have the required
+attributes \token{test:\-id}, \token{test:\-name}, \token{test:\-num},
+\token{test:\-numTwo}, \token{test:\-numThree}, \token{test:\-numOne},
+\token{test:\-true}, \token{test:\-false}, \token{test:\-unit},
+\token{test:\-refOne}, \token{test:\-refTwo}, \token{test:\-refUnit},
+\token{test:\-correctId}, \token{test:\-posint},
+\token{test:\-posintTwo}, \token{test:\-posintOne},
+\token{test:\-metaid}, \token{test:\-metaidOne}, \token{test:\-numFour}
+and \token{test:\-metaidrefOne}. No other attributes from the SBML Level
+3 testAttributes namespaces are permitted on a \MyRequiredClass object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20604}{The attribute \token{test:\-name} on a
+\MyRequiredClass must have a value of data type \token{string}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20605}{The attribute \token{test:\-num} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20606}{The attribute \token{test:\-numTwo} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20607}{The attribute \token{test:\-numThree} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20608}{The attribute \token{test:\-numOne} on a
+\MyRequiredClass must have a value of data type \token{double}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20609}{The attribute \token{test:\-true} on a
+\MyRequiredClass must have a value of data type \token{boolean}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20610}{The attribute \token{test:\-false} on a
+\MyRequiredClass must have a value of data type \token{boolean}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20611}{The value of the attribute \token{test:\-unit} on
+a \MyRequiredClass must have a taken from the following: the identifier
+of a \UnitDefinition object in the enclosing \Model, or one of the base
+units in SBML. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20612}{The value of the attribute \token{test:\-refOne}
+of a \MyRequiredClass object must be the identifier of an existing
+\Thing1 object defined in the enclosing \Model object. (Reference: SBML
+Level~3 Package specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20613}{The value of the attribute \token{test:\-refTwo}
+of a \MyRequiredClass object must be the identifier of an existing
+\Thing2 object defined in the enclosing \Model object. (Reference: SBML
+Level~3 Package specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20614}{The value of the attribute \token{test:\-refUnit}
+on a \MyRequiredClass must have a taken from the following: the
+identifier of a \UnitDefinition object in the enclosing \Model, or one
+of the base units in SBML. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20615}{The attribute \token{test:\-posint} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20616}{The attribute \token{test:\-posintTwo} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20617}{The attribute \token{test:\-posintOne} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20618}{The attribute \token{test:\-metaid} on a
+\MyRequiredClass must have a value of data type \token{string}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20619}{The attribute \token{test:\-metaidOne} on a
+\MyRequiredClass must have a value of data type \token{string}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20620}{The attribute \token{test:\-numFour} on a
+\MyRequiredClass must have a value of data type \token{integer}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20621}{The attribute \token{test:\-metaidrefOne} on a
+\MyRequiredClass must have a value of data type \token{string}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+
+\subsubsection*{Rules for \class{ArrayChild} object}
+
+\validRule{test-20701}{An \ArrayChild object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on an
+\ArrayChild. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20702}{An \ArrayChild object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on an \ArrayChild.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20703}{An \ArrayChild object may have the optional
+attribute \token{test:\-number}. No other attributes from the SBML Level
+3 testAttributes namespaces are permitted on an \ArrayChild object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{arraychild-class}.)}
+
+\validRule{test-20704}{An \ArrayChild object may contain one and only
+one instance of the Unit element. No other elements from the SBML Level
+3 testAttributes namespaces are permitted on an \ArrayChild object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{arraychild-class}.)}
+
+\validRule{test-20705}{The value of the attribute \token{test:\-number}
+of an \ArrayChild object must be an array of values of type
+\token{Double}. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{arraychild-class}.)}
+
+
+\subsubsection*{Rules for \class{Container} object}
+
+\validRule{test-20801}{A \Container object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\Container. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20802}{A \Container object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \Container.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20803}{A \Container object may contain one and only one
+instance of the \ListOfMyLoTests element. No other elements from the
+SBML Level 3 testAttributes namespaces are permitted on a \Container
+object. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{container-class}.)}
+
+\validRule{test-20804}{The \ListOfMyLoTests subobject on a \Container
+object is optional, but if present, this container object must not be
+empty. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{container-class}.)}
+
+\validRule{test-20805}{Apart from the general notes and annotations
+subobjects permitted on all SBML objects, a \ListOfMyLoTests container
+object may only contain \MyLoTest objects. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{listofmylotests-class}.)}
+
+\validRule{test-20806}{A \ListOfMyLoTests object may have the optional
+SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
+other attributes from the SBML Level 3 Core namespaces are permitted on
+a \ListOfMyLoTests object. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1,
+\sec{listofmylotests-class}.)}
+
+\validRule{test-20807}{A \ListOfMyLoTests object may have the optional
+attribute \token{test:\-id}. No other attributes from the SBML Level 3
+testAttributes namespaces are permitted on a \ListOfMyLoTests object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{listofmylotests-class}.)}
+
+

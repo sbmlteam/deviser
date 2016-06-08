@@ -228,6 +228,14 @@ class ValidationRulesForClass():
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('boolean'))
             rule_type = 'Boolean'
+        elif att_type == 'UnitSId' or att_type == 'UnitSIdRef':
+            text = 'The value of the attribute {0} on {1} {2} must have a ' \
+                   'taken from the following: the identifier of a ' \
+                   '\UnitDefinition object in the enclosing \Model, or one ' \
+                   'of the base units in SBML.'.format(name,
+                                                       self.indef,
+                                                       formatted_name)
+            rule_type = 'Unit'
         elif att_type == 'enum':
             enum_name = strFunctions.texify(attribute['element'])
             enums = attribute['parent']['root']['enums']
@@ -437,6 +445,8 @@ class ValidationRulesForClass():
         if count == num:
             return
         attributes = []
+        if len(child_class['lo_class_name']) == 0:
+            child_class['lo_class_name'] = strFunctions.list_of_name(child_class['name'])
         formatted_name = '\\' + child_class['lo_class_name']
         name = child_class['name']
         child_reqd = []

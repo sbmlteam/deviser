@@ -182,6 +182,36 @@ public:
 
 
   /**
+   * Get a MyLoTest from the Container based on its identifier.
+   *
+   * @param sid a string representing the identifier of the MyLoTest to
+   * retrieve.
+   *
+   * @return the MyLoTest in the ListOfMyLoTests within this Container with the
+   * given id or NULL if no such MyLoTest exists.
+   *
+   * @see getMyLoTest(unsigned int n)
+   * @see getNumMyLoTests()
+   */
+  MyLoTest* getMyLoTest(const std::string& sid);
+
+
+  /**
+   * Get a MyLoTest from the Container based on its identifier.
+   *
+   * @param sid a string representing the identifier of the MyLoTest to
+   * retrieve.
+   *
+   * @return the MyLoTest in the ListOfMyLoTests within this Container with the
+   * given id or NULL if no such MyLoTest exists.
+   *
+   * @see getMyLoTest(unsigned int n)
+   * @see getNumMyLoTests()
+   */
+  const MyLoTest* getMyLoTest(const std::string& sid) const;
+
+
+  /**
    * Adds a copy of the given MyLoTest to this Container.
    *
    * @param mlt the MyLoTest object to add.
@@ -229,6 +259,21 @@ public:
    * it.
    */
   MyLoTest* removeMyLoTest(unsigned int n);
+
+
+  /**
+   * Removes the MyLoTest from this Container based on its identifier and
+   * returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the MyLoTest to remove.
+   *
+   * @return the MyLoTest in this Container based on the identifier or NULL if
+   * no such MyLoTest exists.
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
+   */
+  MyLoTest* removeMyLoTest(const std::string& sid);
 
 
   /**
@@ -491,6 +536,24 @@ Container_getMyLoTest(Container_t* c, unsigned int n);
 
 
 /**
+ * Get a MyLoTest_t from the Container_t based on its identifier.
+ *
+ * @param c the Container_t structure to search.
+ *
+ * @param sid a string representing the identifier of the MyLoTest_t to
+ * retrieve.
+ *
+ * @return the MyLoTest_t in the ListOfMyLoTests within this Container with the
+ * given id or NULL if no such MyLoTest_t exists.
+ *
+ * @memberof Container_t
+ */
+LIBSBML_EXTERN
+const MyLoTest_t*
+Container_getMyLoTestById(Container_t* c, const char *sid);
+
+
+/**
  * Adds a copy of the given MyLoTest_t to this Container_t.
  *
  * @param c the Container_t structure to which the MyLoTest_t should be added.
@@ -552,6 +615,24 @@ Container_createMyLoTest(Container_t* c);
 LIBSBML_EXTERN
 MyLoTest_t*
 Container_removeMyLoTest(Container_t* c, unsigned int n);
+
+
+/**
+ * Removes the MyLoTest_t from this Container_t based on its identifier and
+ * returns a pointer to it.
+ *
+ * @param c the Container_t structure to search.
+ *
+ * @param sid a string representing the identifier of the MyLoTest_t to remove.
+ *
+ * @return the MyLoTest_t in this Container_t based on the identifier or NULL
+ * if no such MyLoTest_t exists.
+ *
+ * @memberof Container_t
+ */
+LIBSBML_EXTERN
+MyLoTest_t*
+Container_removeMyLoTestById(Container_t* c, const char* sid);
 
 
 /**

@@ -162,6 +162,26 @@ Container::getMyLoTest(unsigned int n) const
 
 
 /*
+ * Get a MyLoTest from the Container based on its identifier.
+ */
+MyLoTest*
+Container::getMyLoTest(const std::string& sid)
+{
+  return mMyLoTests.get(sid);
+}
+
+
+/*
+ * Get a MyLoTest from the Container based on its identifier.
+ */
+const MyLoTest*
+Container::getMyLoTest(const std::string& sid) const
+{
+  return mMyLoTests.get(sid);
+}
+
+
+/*
  * Adds a copy of the given MyLoTest to this Container.
  */
 int
@@ -187,6 +207,10 @@ Container::addMyLoTest(const MyLoTest* mlt)
     SBase*>(mlt)) == false)
   {
     return LIBSBML_NAMESPACES_MISMATCH;
+  }
+  else if (mlt->isSetId() && (mMyLoTests.get(mlt->getId())) != NULL)
+  {
+    return LIBSBML_DUPLICATE_OBJECT_ID;
   }
   else
   {
@@ -240,6 +264,17 @@ MyLoTest*
 Container::removeMyLoTest(unsigned int n)
 {
   return mMyLoTests.remove(n);
+}
+
+
+/*
+ * Removes the MyLoTest from this Container based on its identifier and returns
+ * a pointer to it.
+ */
+MyLoTest*
+Container::removeMyLoTest(const std::string& sid)
+{
+  return mMyLoTests.remove(sid);
 }
 
 
@@ -557,6 +592,17 @@ Container_getMyLoTest(Container_t* c, unsigned int n)
 
 
 /*
+ * Get a MyLoTest_t from the Container_t based on its identifier.
+ */
+LIBSBML_EXTERN
+const MyLoTest_t*
+Container_getMyLoTestById(Container_t* c, const char *sid)
+{
+  return (c != NULL && sid != NULL) ? c->getMyLoTest(sid) : NULL;
+}
+
+
+/*
  * Adds a copy of the given MyLoTest_t to this Container_t.
  */
 LIBSBML_EXTERN
@@ -599,6 +645,18 @@ MyLoTest_t*
 Container_removeMyLoTest(Container_t* c, unsigned int n)
 {
   return (c != NULL) ? c->removeMyLoTest(n) : NULL;
+}
+
+
+/*
+ * Removes the MyLoTest_t from this Container_t based on its identifier and
+ * returns a pointer to it.
+ */
+LIBSBML_EXTERN
+MyLoTest_t*
+Container_removeMyLoTestById(Container_t* c, const char* sid)
+{
+  return (c != NULL && sid != NULL) ? c->removeMyLoTest(sid) : NULL;
 }
 
 

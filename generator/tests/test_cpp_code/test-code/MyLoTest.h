@@ -59,6 +59,13 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 class LIBSBML_EXTERN MyLoTest : public SBase
 {
+protected:
+
+  /** @cond doxygenLibsbmlInternal */
+
+  std::string mId;
+
+  /** @endcond */
 
 public:
 
@@ -132,6 +139,46 @@ public:
 
 
   /**
+   * Returns the value of the "id" attribute of this MyLoTest.
+   *
+   * @return the value of the "id" attribute of this MyLoTest as a string.
+   */
+  const std::string& getId() const;
+
+
+  /**
+   * Predicate returning @c true if this MyLoTest's "id" attribute is set.
+   *
+   * @return @c true if this MyLoTest's "id" attribute has been set, otherwise
+   * @c false is returned.
+   */
+  bool isSetId() const;
+
+
+  /**
+   * Sets the value of the "id" attribute of this MyLoTest.
+   *
+   * @param id std::string& value of the "id" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setId(const std::string& id);
+
+
+  /**
+   * Unsets the value of the "id" attribute of this MyLoTest.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetId();
+
+
+  /**
    * Returns the XML element name of this MyLoTest object.
    *
    * For MyLoTest, the XML element name is always @c "myLoTest".
@@ -156,6 +203,19 @@ public:
    * @see getPackageName()
    */
   virtual int getTypeCode() const;
+
+
+  /**
+   * Predicate returning @c true if all the required attributes for this
+   * MyLoTest object have been set.
+   *
+   * @return @c true to indicate that all the required attributes of this
+   * MyLoTest have been set, otherwise @c false is returned.
+   *
+   *
+   * @note The required attributes for the MyLoTest object are:
+   */
+  virtual bool hasRequiredAttributes() const;
 
 
 
@@ -205,6 +265,40 @@ public:
 
 
 protected:
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Adds the expected attributes for this element
+   */
+  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Reads the expected attributes into the member data variables
+   */
+  virtual void readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Writes the attributes to the stream
+   */
+  virtual void writeAttributes(XMLOutputStream& stream) const;
+
+  /** @endcond */
+
 
 };
 
@@ -285,6 +379,89 @@ MyLoTest_clone(const MyLoTest_t* mlt);
 LIBSBML_EXTERN
 void
 MyLoTest_free(MyLoTest_t* mlt);
+
+
+/**
+ * Returns the value of the "id" attribute of this MyLoTest_t.
+ *
+ * @param mlt the MyLoTest_t structure whose id is sought.
+ *
+ * @return the value of the "id" attribute of this MyLoTest_t as a pointer to a
+ * string.
+ *
+ * @memberof MyLoTest_t
+ */
+LIBSBML_EXTERN
+const char *
+MyLoTest_getId(const MyLoTest_t * mlt);
+
+
+/**
+ * Predicate returning @c 1 if this MyLoTest_t's "id" attribute is set.
+ *
+ * @param mlt the MyLoTest_t structure.
+ *
+ * @return @c 1 if this MyLoTest_t's "id" attribute has been set, otherwise @c
+ * 0 is returned.
+ *
+ * @memberof MyLoTest_t
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_isSetId(const MyLoTest_t * mlt);
+
+
+/**
+ * Sets the value of the "id" attribute of this MyLoTest_t.
+ *
+ * @param mlt the MyLoTest_t structure.
+ *
+ * @param id const char * value of the "id" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyLoTest_t
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_setId(MyLoTest_t * mlt, const char * id);
+
+
+/**
+ * Unsets the value of the "id" attribute of this MyLoTest_t.
+ *
+ * @param mlt the MyLoTest_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyLoTest_t
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_unsetId(MyLoTest_t * mlt);
+
+
+/**
+ * Predicate returning @c 1 if all the required attributes for this MyLoTest_t
+ * object have been set.
+ *
+ * @param mlt the MyLoTest_t structure.
+ *
+ * @return @c 1 to indicate that all the required attributes of this MyLoTest_t
+ * have been set, otherwise @c 0 is returned.
+ *
+ *
+ * @note The required attributes for the MyLoTest_t object are:
+ *
+ * @memberof MyLoTest_t
+ */
+LIBSBML_EXTERN
+int
+MyLoTest_hasRequiredAttributes(const MyLoTest_t * mlt);
 
 
 

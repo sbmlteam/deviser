@@ -121,40 +121,45 @@ def main():
     fail = 0
 
     # run the individual tests
-    name = 'qual'
+    # name = 'qual'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'groups'
+    # test_case = 'macros'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'groups'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'groups'
+    # test_case = 'body'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'unknown_type'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'test_sidrefs'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'test_sidrefs'
+    # test_case = 'body'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'test_lists'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
+    #
+    # name = 'test_lists'
+    # test_case = 'body'
+    # fail += run_test(name, test_case)
+
+    # run the individual tests
+    name = 'test_att'
     test_case = 'validation'
-    fail += run_test(name, test_case)
-
-    name = 'groups'
-    test_case = 'macros'
-    fail += run_test(name, test_case)
-
-    name = 'groups'
-    test_case = 'validation'
-    fail += run_test(name, test_case)
-
-    name = 'groups'
-    test_case = 'body'
-    fail += run_test(name, test_case)
-
-    name = 'unknown_type'
-    test_case = 'validation'
-    fail += run_test(name, test_case)
-
-    name = 'test_sidrefs'
-    test_case = 'validation'
-    fail += run_test(name, test_case)
-
-    name = 'test_sidrefs'
-    test_case = 'body'
-    fail += run_test(name, test_case)
-
-    name = 'test_lists'
-    test_case = 'validation'
-    fail += run_test(name, test_case)
-
-    name = 'test_lists'
-    test_case = 'body'
     fail += run_test(name, test_case)
 
     # write summary

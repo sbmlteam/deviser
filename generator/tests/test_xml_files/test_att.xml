@@ -29,7 +29,10 @@
           </attributes>
         </element>
         <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
-          <listOfAttributes>
+          <attributes>
+            <attribute name="id" required="false" type="Sid" abstract="false"/>
+            </attributes>
+            <listOfAttributes>
             <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
           </listOfAttributes>
         </element>
@@ -69,6 +72,14 @@
           </attributes>
         </element>
       </elements>
+      <plugins>
+         <plugin extensionPoint="Species">
+          <attributes>
+            <attribute name="charge" required="false" type="integer" abstract="false"/>
+            <attribute name="chemicalFormula" required="false" type="string" abstract="false"/>
+          </attributes>
+        </plugin>
+      </plugins>
     </pkgVersion>
   </versions>
 </package>
