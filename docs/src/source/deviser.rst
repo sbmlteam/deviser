@@ -19,9 +19,7 @@ Contents:
    appendix_types
    appendix_validation
    appendix_licensing
+   references
 
 
-References
-==========
-* :ref:`search`
 

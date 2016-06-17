@@ -2,18 +2,18 @@
 Defining an SBML Level 3 Package
 ================================
 
-SBML Level 3 is the most recent specification of SBML. It is a modular
-language, with a core comprising a complete format that stands alone .
+SBML Level 3 is a modular
+language, with a core comprising a complete format that stands alone.
 Level 3 packages may be added to this core to provide additional,
-optional features. Deviser provides a way of defining the package that
-can then be used by generation code to create code for libSBML and text
+optional features. Deviser provides a unique way of defining the package that
+facilitates the creation code for libSBML and text
 for specifications.
 
 It is necessary to define the structure of the SBML Level 3 package
 before invoking other functionality available within Deviser. A series
 of sheets guide you through the process in what we hope is an intuitive
 manner. For the purpose of this manual we will work step by step through
-creating an imaginary package ‘Foo’. Note the completed file is
+creating an imaginary package, ‘Foo’. Note the completed file is
 available as part of the Deviser code in the ‘samples’ folder and can be
 opened using the Deviser Edit tool.
 
@@ -45,7 +45,7 @@ The Package **Name** field
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Name** field is the short name that will be used as a prefix for
-the package e.g. ‘foo’. This is a required field.
+the package, e.g., ‘foo’. This is a required field.
 
 .. _pkg-fullname:
 
@@ -53,13 +53,13 @@ The Package **Full Name** field
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **Full Name** field is the name that will be used to refer to the
-package in documentation e.g. ‘Imaginary Package Foo’. This is a required field.
+package in documentation, e.g., ‘Imaginary Package Foo’. This is a required field.
 
 The Package **required** checkbox
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **required** checkbox is used to indicate whether the package may
-change the mathematical interpretation of the core model and corresponds
+change the mathematical interpretation of the core model ([SBML_L3]_) and corresponds
 to the required attribute on the <sbml> element declaring this package
 (see below).
 
@@ -70,35 +70,6 @@ to the required attribute on the <sbml> element declaring this package
          level="3" version="1" foo:required="true">
 
 .. _pkg-number:
-
-The Package **Number** field
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The **Number** field is the starting point for the enumeration of the
-typecodes for this package. This is a required field. 
-
-Pressing the information button will pop-up
-with information regarding the Number and Offset values used by existing
-L3 packages (Figure :num:`fig-offsets`). 
-
-.. _pkg-offset:
-
-The Package **Offset** field
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The **Offset** field is the number added to the validation rules given
-in the specification to allow this to be identified uniquely in code.
-This is a required field.
-
-
-Pressing the information button will pop-up with information regarding
-the Number and Offset values used by existing L3 packages 
-(Figure :num:`fig-offsets`).
-
-.. _fig-offsets:
-.. figure:: ../screenshots/deviser-numbers-offsets-1.png
-
-    The Numbers and Offsets information box
 
 The Package **requires additional code** checkbox
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,6 +98,36 @@ The Package **requires additional code** checkbox
     .. todo::
       Check above statement is correct
 
+
+The Package **Number** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The **Number** field is the starting point for the enumeration of the
+typecodes for this package. This is a required field. 
+
+Clicking the information button will generate a pop-up window
+with information regarding the Number and Offset values used by existing
+L3 packages (Figure :num:`fig-offsets`). 
+
+.. _pkg-offset:
+
+The Package **Offset** field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The **Offset** field is the number added to the validation rules given
+in the specification to allow this to be identified uniquely in code.
+This is a required field.
+
+
+Clicking the information button will generate a pop-up window with information regarding
+the Number and Offset values used by existing L3 packages 
+(Figure :num:`fig-offsets`).
+
+.. _fig-offsets:
+.. figure:: ../screenshots/deviser-numbers-offsets-1.png
+
+    The Numbers and Offsets information box.
+
 .. raw:: latex
 
   \clearpage
@@ -136,7 +137,7 @@ Add the version number
 
 Highlight ‘Version’ in the tree on the left hand side.
 
-Fill in the core level and version and the package version numbers. These
+Fill in the core level and version and package version numbers. These
 default to **Core level** '3' and **Core version** '1' as SBML L3V1 is the only official 
 SBML Level 3 version at the time of writing. The package version (**Pkg Version**)
 defaults to '1'. Using Deviser to specify more than one version of a package
@@ -146,19 +147,17 @@ is discussed in :ref:`mult-vers`.
 .. _fig-version:
 .. figure:: ../screenshots/deviser-version.png
 
-    The ‘Version’ sheet
+    The ‘Version’ sheet.
 
-Note once classes have been specified they will be listed on this sheet
-(see Figure :num:`fig-full-decsr`) and the order in which they are listed 
-can be changed.
-This order dictates the order in which the generation code processes the
-classes. This can be useful in ensuring documentation is written out in
-a specific order.
+Once classes have been specified they will appear on this sheet 
+(see Figure :num:`fig-full-decsr`).  The order in which they're listed 
+dictates the order in which the generation code processes the classes.  
+This list can be rearranged, which is helpful in ensuring documentation 
+is written in a specific sequence.
 
-The tree in the left hand panel shows the aspects of the package that
+The tree in the left-hand panel shows the aspects of the package that
 can now be added i.e. Classes, Plugins and Enums. The Mappings sheet
-will be automatically populated when the description is complete. We
-shall work through the different forms.
+will be automatically populated when the description is complete.
 
 .. raw:: latex
 
