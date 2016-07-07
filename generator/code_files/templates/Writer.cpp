@@ -79,17 +79,12 @@ SBMLWriter::setProgramVersion (const std::string& version)
 
 
 /*
- * Writes the given SBML document to filename.
+ * Writes the given SBMLDocument to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
  * compressed by @em zip or @em bzip2, respectively. Otherwise, the fill will be
  * uncompressed.
- * If the filename ends with @em .zip, a filename that will be added to the
- * zip archive file will end with @em .xml or @em .sbml. For example, the filename
- * in the zip archive will be @em test.xml if the given filename is @em test.xml.zip
- * or @em test.zip. Also, the filename in the archive will be @em test.sbml if the
- * given filename is @em test.sbml.zip.
  *
  * @note To create a gzip/zip file, underlying libSBML needs to be linked with zlib at 
  * compile time. Also, underlying libSBML needs to be linked with bzip2 to create a 
@@ -196,7 +191,7 @@ SBMLWriter::writeSBML (const SBMLDocument* d, const std::string& filename)
 
 
 /*
- * Writes the given SBML document to the output stream.
+ * Writes the given SBMLDocument to the output stream.
  *
  * @return true on success and false if one of the underlying parser
  * components fail (rare).
@@ -228,7 +223,7 @@ SBMLWriter::writeSBML (const SBMLDocument* d, std::ostream& stream)
 
 /** @cond doxygenLibsbmlInternal */
 /*
- * Writes the given SBML document to an in-memory string and returns a
+ * Writes the given SBMLDocument to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *

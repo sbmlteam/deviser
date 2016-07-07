@@ -24,7 +24,7 @@ public:
   /**
    * Creates a new SBMLWriter.
    *
-   * The libSBML SBMLWriter objects offer methods for writing SBML in
+   * The libSBML SBMLWriter objects offer methods for writing SBML_Lang in
    * XML form to files and text strings.
    */
   SBMLWriter  ();
@@ -91,13 +91,13 @@ public:
 
 
   /**
-   * Writes the given SBML document to filename.
+   * Writes the given SBMLDocument to filename.
    *
    * @htmlinclude assuming-compressed-file.html
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
-   * @param filename the name or full pathname of the file where the SBML
+   * @param filename the name or full pathname of the file where the SBML_Lang
    * is to be written. 
    *
    * @return @c true on success and @c false if the filename could not be
@@ -112,11 +112,11 @@ public:
 
 
   /**
-   * Writes the given SBML document to the output stream.
+   * Writes the given SBMLDocument to the output stream.
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
-   * @param stream the stream object where the SBML is to be written.
+   * @param stream the stream object where the SBML_Lang is to be written.
    *
    * @return @c true on success and @c false if one of the underlying
    * parser components fail (rare).
@@ -130,13 +130,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Writes the given SBML document to an in-memory string and returns a
+   * Writes the given SBMLDocument to an in-memory string and returns a
    * pointer to it.
    *
    * The string is owned by the caller and should be freed (with @c free())
    * when no longer needed.
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
@@ -149,13 +149,13 @@ public:
   /** @endcond */
 
   /**
-   * Writes the given SBML document to filename.
+   * Writes the given SBMLDocument to filename.
    *
    * @htmlinclude assuming-compressed-file.html
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
-   * @param filename the name or full pathname of the file where the SBML
+   * @param filename the name or full pathname of the file where the SBML_Lang
    * is to be written. 
    *
    * @return @c true on success and @c false if the filename could not be
@@ -170,13 +170,13 @@ public:
 
 
   /**
-   * Writes the given SBML document to an in-memory string and returns a
+   * Writes the given SBMLDocument to an in-memory string and returns a
    * pointer to it.
    *
    * The string is owned by the caller and should be freed (with @c free())
    * when no longer needed.
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
@@ -188,9 +188,9 @@ public:
 
 #ifndef SWIG
   /**
-   * Writes the given SBML document to an in-memory string and returns it.
+   * Writes the given SBMLDocument to an in-memory string and returns it.
    *
-   * @param d the SBML document to be written
+   * @param d the SBMLDocument to be written
    *
    * @return the string on success or an empty string, 
    *         if one of the underlying parser
@@ -252,9 +252,9 @@ public:
 #ifndef SWIG
 
 /**
- * Writes the given SBML document to an in-memory string that is returned.
+ * Writes the given SBMLDocument to an in-memory string that is returned.
  *
- * @param d the SBML document to be written
+ * @param d the SBMLDocument to be written
  *
  * @return the string on success or an empty string, 
  *         if one of the underlying parser
@@ -333,7 +333,7 @@ int
 SBMLWriter_setProgramVersion (SBMLWriter_t *sw, const char *version);
 
 /**
- * Writes the given SBML document to filename.
+ * Writes the given SBMLDocument to filename.
  *
  * @htmlinclude assuming-compressed-file.html
  *
@@ -371,17 +371,12 @@ SBMLWriter_writeSBML ( SBMLWriter_t         *sw,
                        const char           *filename );
 
 /**
- * Writes the given SBML document to filename.
+ * Writes the given SBMLDocument to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
  * compressed by @em zip or @em bzip2, respectively. Otherwise, the fill will be
  * uncompressed.
- * If the filename ends with @em .zip, a filename that will be added to the
- * zip archive file will end with @em .xml or @em .sbml. For example, the filename
- * in the zip archive will be @em test.xml if the given filename is @em test.xml.zip
- * or @em test.zip. Also, the filename in the archive will be @em test.sbml if the
- * given filename is @em test.sbml.zip.
  *
  * @note To create a gzip/zip file, libSBML needs to be linked with zlib at 
  * compile time. Also, libSBML needs to be linked with bzip2 to create a bzip2 file.
@@ -403,7 +398,7 @@ SBMLWriter_writeSBMLToFile ( SBMLWriter_t         *sw,
 
 
 /**
- * Writes the given SBML document to an in-memory string and returns a
+ * Writes the given SBMLDocument to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *
@@ -446,7 +441,7 @@ SBMLWriter_hasBzip2 ();
 
 
 /**
- * Writes the given SBML document @p d to the file named by @p filename.
+ * Writes the given SBMLDocument @p d to the file named by @p filename.
  * This convenience function is functionally equivalent to:
  *
  *   SBMLWriter_writeSBML(SBMLWriter_create(), d, filename);
@@ -460,7 +455,7 @@ SBMLWriter_hasBzip2 ();
  *
  * @return @c 1 on success and @c 0 (zero) if @p filename could not be
  * written.  Some possible reasons for failure include (a) being unable to
- * open the file, and (b) using a filename that indicates a compressed SBML
+ * open the file, and (b) using a filename that indicates a compressed SBML_Lang
  * file (i.e., a filename ending in <code>&quot;.zip&quot;</code> or
  * similar) when the compression functionality has not been enabled in
  * the underlying copy of libSBML.
@@ -478,7 +473,7 @@ writeSBML (const SBMLDocument_t *d, const char *filename);
 
 
 /**
- * Writes the given SBML document @p d to an in-memory string and returns a
+ * Writes the given SBMLDocument @p d to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.  This convenience function is
  * functionally equivalent to:
@@ -505,7 +500,7 @@ writeSBMLToString (const SBMLDocument_t *d);
 
 
 /**
- * Writes the given SBML document @p d to the file @p filename.
+ * Writes the given SBMLDocument @p d to the file @p filename.
  * This convenience function is functionally equivalent to:
  *
  *   SBMLWriter_writeSBMLToFile(SBMLWriter_create(), d, filename);
