@@ -413,7 +413,7 @@ struct SetParentSedObject : public unary_function<SedBase*, void>
 /** @cond doxygenLibsedmlInternal */
 
 /*
- * Sets the parent SedDocument of this Sed object.
+ * Sets the parent SedDocument of this SEDML object.
  */
 void
 SedListOf::setSedDocument (SedDocument* d)
@@ -424,7 +424,7 @@ SedListOf::setSedDocument (SedDocument* d)
 
 
 /*
- * Sets this Sed object to child Sed objects (if any).
+ * Sets this SEDML object to child SEDML objects (if any).
  * (Creates a child-parent relationship by the parent)
   */
 void
@@ -438,7 +438,7 @@ SedListOf::connectToChild()
 
 
 /*
- * @return the typecode (int) of this Sed object or SEDML_UNKNOWN
+ * @return the typecode (int) of this SEDML object or SEDML_UNKNOWN
  * (default).
  */
 int
@@ -449,7 +449,7 @@ SedListOf::getTypeCode () const
 
 
 /*
- * @return the typecode (int) of Sed objects contained in this SedListOf or
+ * @return the typecode (int) of SEDML objects contained in this SedListOf or
  * SEDML_UNKNOWN (default).
  */
 int
@@ -486,7 +486,7 @@ struct Write : public unary_function<SedBase*, void>
 /** @cond doxygenLibsedmlInternal */
 /*
  * Subclasses should override this method to write out their contained
- * Sed objects as XML elements.  Be sure to call your parents
+ * SEDML objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void

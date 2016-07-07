@@ -378,7 +378,7 @@ struct SetParentSBMLObject : public unary_function<SBase*, void>
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the parent SBMLDocument of this SBML object.
+ * Sets the parent SBMLDocument of this SBML_Lang object.
  */
 void
 ListOf::setSBMLDocument (SBMLDocument* d)
@@ -389,7 +389,7 @@ ListOf::setSBMLDocument (SBMLDocument* d)
 
 
 /*
- * Sets this SBML object to child SBML objects (if any).
+ * Sets this SBML_Lang object to child SBML_Lang objects (if any).
  * (Creates a child-parent relationship by the parent)
   */
 void
@@ -403,7 +403,7 @@ ListOf::connectToChild()
 
 
 /*
- * @return the typecode (int) of this SBML object or SBML_UNKNOWN
+ * @return the typecode (int) of this SBML_Lang object or SBML_UNKNOWN
  * (default).
  */
 int
@@ -414,7 +414,7 @@ ListOf::getTypeCode () const
 
 
 /*
- * @return the typecode (int) of SBML objects contained in this ListOf or
+ * @return the typecode (int) of SBML_Lang objects contained in this ListOf or
  * SBML_UNKNOWN (default).
  */
 int
@@ -451,7 +451,7 @@ struct Write : public unary_function<SBase*, void>
 /** @cond doxygenLibsbmlInternal */
 /*
  * Subclasses should override this method to write out their contained
- * SBML objects as XML elements.  Be sure to call your parents
+ * SBML_Lang objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void

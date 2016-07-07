@@ -100,7 +100,7 @@ SedErrorLog::~SedErrorLog ()
 
 
 /*
- * See SedError for a list of Sed error codes and XMLError
+ * See SedError for a list of SEDML error codes and XMLError
  * for a list of system and XML-level error codes.
  */
 void

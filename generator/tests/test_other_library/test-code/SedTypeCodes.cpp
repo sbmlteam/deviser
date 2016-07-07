@@ -42,7 +42,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 static
 const char* SEDML_TYPE_CODE_STRINGS[] =
 {
-    "(Unknown Sed Type)"
+    "(Unknown SEDML Type)"
   , "SedDocument"
   , "Model"
   , "Change"

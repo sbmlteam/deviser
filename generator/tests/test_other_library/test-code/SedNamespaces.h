@@ -70,11 +70,11 @@ class LIBSEDML_EXTERN SedNamespaces
 public:
 
   /**
-   * Creates a new SedNamespaces object corresponding to the given Sed
+   * Creates a new SedNamespaces object corresponding to the given SEDML
    * @p level and @p version.
    *
-   * @param level the Sed level
-   * @param version the Sed version
+   * @param level the SEDML level
+   * @param version the SEDML version
    * 
    */
   SedNamespaces(unsigned int level = SEDML_DEFAULT_LEVEL, 
@@ -110,14 +110,14 @@ public:
 
 
   /**
-   * Returns a string representing the Sed XML namespace for the 
-   * given @p level and @p version of Sed.
+   * Returns a string representing the SEDML XML namespace for the 
+   * given @p level and @p version of SEDML.
    *
-   * @param level the Sed level
-   * @param version the Sed version
+   * @param level the SEDML level
+   * @param version the SEDML version
    *
-   * @return a string representing the Sed namespace that reflects the
-   * Sed Level and Version specified.
+   * @return a string representing the SEDML namespace that reflects the
+   * SEDML Level and Version specified.
    */
   static std::string getSedNamespaceURI(unsigned int level,
                                          unsigned int version);
@@ -127,7 +127,7 @@ public:
    * Returns a list of all supported SedNamespaces in this version of 
    * libsedml. 
    * 
-   * @return a list with supported Sed namespaces. 
+   * @return a list with supported SEDML namespaces. 
    */
   static const List* getSupportedNamespaces();
 
@@ -144,43 +144,43 @@ public:
 
 
   /**
-   * Returns a string representing the Sed XML namespace of this
+   * Returns a string representing the SEDML XML namespace of this
    * object.
    *
-   * @return a string representing the Sed namespace that reflects the
-   * Sed Level and Version of this object.
+   * @return a string representing the SEDML namespace that reflects the
+   * SEDML Level and Version of this object.
    */
   virtual std::string getURI() const;
 
 
   /**
-   * Get the Sed Level of this SedNamespaces object.
+   * Get the SEDML Level of this SedNamespaces object.
    *
-   * @return the Sed Level of this SedNamespaces object.
+   * @return the SEDML Level of this SedNamespaces object.
    */
   unsigned int getLevel();
 
 
   /**
-   * Get the Sed Level of this SedNamespaces object.
+   * Get the SEDML Level of this SedNamespaces object.
    *
-   * @return the Sed Level of this SedNamespaces object.
+   * @return the SEDML Level of this SedNamespaces object.
    */
   unsigned int getLevel() const;
 
 
   /**
-   * Get the Sed Version of this SedNamespaces object.
+   * Get the SEDML Version of this SedNamespaces object.
    *
-   * @return the Sed Version of this SedNamespaces object.
+   * @return the SEDML Version of this SedNamespaces object.
    */
   unsigned int getVersion();
 
 
   /**
-   * Get the Sed Version of this SedNamespaces object.
+   * Get the SEDML Version of this SedNamespaces object.
    *
-   * @return the Sed Version of this SedNamespaces object.
+   * @return the SEDML Version of this SedNamespaces object.
    */
   unsigned int getVersion() const;
 
@@ -244,12 +244,12 @@ public:
 
 
   /**
-   * Predicate returning @c true if the given URL is one of Sed XML
+   * Predicate returning @c true if the given URL is one of SEDML XML
    * namespaces.
    *
    * @param uri the URI of namespace
    *
-   * @return @c true if the "uri" is one of Sed namespaces, @c false otherwise.
+   * @return @c true if the "uri" is one of SEDML namespaces, @c false otherwise.
    */
   static bool isSedNamespace(const std::string& uri);
 
@@ -295,26 +295,26 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 /**
- * Creates a new SedNamespaces_t structure corresponding to the given Sed
+ * Creates a new SedNamespaces_t structure corresponding to the given SEDML
  * @p level and @p version.
  *
- * SedNamespaces_t structures are used in libSEDML to communicate Sed Level
+ * SedNamespaces_t structures are used in libSEDML to communicate SEDML Level
  * and Version data between constructors and other methods.  The
  * SedNamespaces_t structure class tracks 3-tuples (triples) consisting of
- * Sed Level, Version, and the corresponding Sed XML namespace.  Most
- * constructors for Sed structures in libSEDML take a SedNamespaces_t structure
+ * SEDML Level, Version, and the corresponding SEDML XML namespace.  Most
+ * constructors for SEDML structures in libSEDML take a SedNamespaces_t structure
  * as an argument, thereby allowing the constructor to produce the proper
  * combination of attributes and other internal data structures for the
- * given Sed Level and Version.
+ * given SEDML Level and Version.
  *
- * The plural name "SedNamespaces" is not a mistake, because in Sed
+ * The plural name "SedNamespaces" is not a mistake, because in SEDML
  * Level&nbsp;3, structures may have extensions added by Level&nbsp;3
  * packages used by a given model; however, until the introduction of
- * Sed Level&nbsp;3, the SedNamespaces_t structure only records one Sed
+ * SEDML Level&nbsp;3, the SedNamespaces_t structure only records one SEDML
  * Level/Version/namespace combination at a time.
  *
- * @param level the Sed level
- * @param version the Sed version
+ * @param level the SEDML level
+ * @param version the SEDML version
  *
  * @return SedNamespaces_t structure created
  *
@@ -340,11 +340,11 @@ SedNamespaces_free (SedNamespaces_t *ns);
 
 
 /**
- * Get the Sed Level of this SedNamespaces_t structure.
+ * Get the SEDML Level of this SedNamespaces_t structure.
  *
  * @param sedmlns the SedNamespaces_t structure to query
  *
- * @return the Sed Level of this SedNamespaces_t structure.
+ * @return the SEDML Level of this SedNamespaces_t structure.
  *
  * @memberof SedNamespaces_t
  */
@@ -354,11 +354,11 @@ SedNamespaces_getLevel(SedNamespaces_t *sedmlns);
 
 
 /**
- * Get the Sed Version of this SedNamespaces_t structure.
+ * Get the SEDML Version of this SedNamespaces_t structure.
  *
  * @param sedmlns the SedNamespaces_t structure to query
  *
- * @return the Sed Version of this SedNamespaces_t structure.
+ * @return the SEDML Version of this SedNamespaces_t structure.
  *
  * @memberof SedNamespaces_t
  */
@@ -368,7 +368,7 @@ SedNamespaces_getVersion(SedNamespaces_t *sedmlns);
 
 
 /**
- * Get the Sed Version of this SedNamespaces_t structure.
+ * Get the SEDML Version of this SedNamespaces_t structure.
  *
  * @param sedmlns the SedNamespaces_t structure to query
  *
@@ -382,14 +382,14 @@ SedNamespaces_getNamespaces(SedNamespaces_t *sedmlns);
 
 
 /**
- * Returns a string representing the Sed XML namespace for the 
- * given @p level and @p version of Sed.
+ * Returns a string representing the SEDML XML namespace for the 
+ * given @p level and @p version of SEDML.
  *
- * @param level the Sed level
- * @param version the Sed version
+ * @param level the SEDML level
+ * @param version the SEDML version
  *
- * @return a string representing the Sed namespace that reflects the
- * Sed Level and Version specified.
+ * @return a string representing the SEDML namespace that reflects the
+ * SEDML Level and Version specified.
  *
  * @memberof SedNamespaces_t
  */
@@ -414,11 +414,11 @@ SedNamespaces_addNamespaces(SedNamespaces_t *sedmlns,
 
 
 /**
- * Returns an array of Sed Namespaces supported by this version of 
+ * Returns an array of SEDML Namespaces supported by this version of 
  * LibSEDML. 
  *
  * @param length an integer holding the length of the array
- * @return an array of Sed namespaces, or @c NULL if length is @c NULL. The array 
+ * @return an array of SEDML namespaces, or @c NULL if length is @c NULL. The array 
  *         has to be freed by the caller.
  *
  * @memberof SedNamespaces_t

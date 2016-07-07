@@ -1,7 +1,40 @@
+/**
+ * @file CaBase.cpp
+ * @brief Implementation of the CaBase class.
+ * @author DEVISER
+ *
+ * <!--------------------------------------------------------------------------
+ * This file is part of libSBML. Please visit http://sbml.org for more
+ * information about SBML, and the latest version of libSBML.
+ *
+ * Copyright (C) 2013-2016 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ * 3. University of Heidelberg, Heidelberg, Germany
+ *
+ * Copyright (C) 2009-2013 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ *
+ * Copyright (C) 2006-2008 by the California Institute of Technology,
+ * Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. Japan Science and Technology Agency, Japan
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation. A copy of the license agreement is provided in the
+ * file named "LICENSE.txt" included with this software distribution and also
+ * available online as http://sbml.org/software/libsbml/license.html
+ * ------------------------------------------------------------------------ -->
+ */
+
+
 #include <sstream>
 #include <vector>
 
-<verbatim>
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
 #include <sbml/xml/XMLOutputStream.h>
@@ -10,25 +43,24 @@
 #include <sbml/xml/XMLNode.h>
 
 #include <sbml/util/util.h>
-</verbatim>
 
-#include <sbml/SBMLError.h>
-#include <sbml/SBMLErrorLog.h>
-#include <sbml/SBMLDocument.h>
-#include <sbml/ListOf.h>
-#include <sbml/SBase.h>
+#include <omex/CaError.h>
+#include <omex/CaErrorLog.h>
+#include <omex/CaDocument.h>
+#include <omex/CaListOf.h>
+#include <omex/CaBase.h>
 
 
 /** @cond doxygenIgnored */
 using namespace std;
 /** @endcond */
 
-LIBSBML_CPP_NAMESPACE_BEGIN
+LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 #ifdef __cplusplus
 
-SBase*
-SBase::getElementBySId(const std::string& id)
+CaBase*
+CaBase::getElementBySId(const std::string& id)
 {
   if (id.empty()) return NULL;
 
@@ -36,8 +68,8 @@ SBase::getElementBySId(const std::string& id)
 }
 
 
-const SBase*
-SBase::getElementBySId(const std::string& id) const 
+const CaBase*
+CaBase::getElementBySId(const std::string& id) const 
 {
   if (id.empty()) return NULL;
 
@@ -45,16 +77,16 @@ SBase::getElementBySId(const std::string& id) const
 }
 
 
-SBase*
-SBase::getElementByMetaId(const std::string& metaid)
+CaBase*
+CaBase::getElementByMetaId(const std::string& metaid)
 {
   if (metaid.empty()) return NULL;
 
   return NULL;
 }
 
-const SBase*
-SBase::getElementByMetaId(const std::string& metaid) const 
+const CaBase*
+CaBase::getElementByMetaId(const std::string& metaid) const 
 {
   if (metaid.empty()) return NULL;
 
@@ -63,103 +95,103 @@ SBase::getElementByMetaId(const std::string& metaid) const
 
 
 List*
-SBase::getAllElements()
+CaBase::getAllElements()
 {
   return NULL;
 }
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
- * Creates a new SBase object with the given level and version.
- * Only subclasses may create SBase objects.
+ * Creates a new CaBase object with the given level and version.
+ * Only subclasses may create CaBase objects.
  */
-SBase::SBase (unsigned int level, unsigned int version) 
+CaBase::CaBase (unsigned int level, unsigned int version) 
  : mMetaId ("")
  , mNotes(NULL)
  , mAnnotation( NULL )
- , mSBML      ( NULL )
- , mSBMLNamespaces (NULL)
+ , mCa      ( NULL )
+ , mCaNamespaces (NULL)
  , mUserData(NULL)
  , mLine      ( 0 )
  , mColumn    ( 0 )
- , mParentSBMLObject (NULL)
+ , mParentCaObject (NULL)
   , mHasBeenDeleted(false)
   , mEmptyString("")
  , mURI("")
 {
-  mSBMLNamespaces = new SBMLNamespaces(level, version);
+  mCaNamespaces = new CaNamespaces(level, version);
 
   //
-  // Sets the XMLNS URI of corresponding SBML_Lang Level/Version to
+  // Sets the XMLNS URI of corresponding OMEX Level/Version to
   // the element namespace (mURI) of this object.
   //
   //
-  setElementNamespace(mSBMLNamespaces->getURI());
+  setElementNamespace(mCaNamespaces->getURI());
 }
 
 
 
 /*
- * Creates a new SBase object with the given SBMLNamespaces.
- * Only subclasses may create SBase objects.
+ * Creates a new CaBase object with the given CaNamespaces.
+ * Only subclasses may create CaBase objects.
  */
-SBase::SBase (SBMLNamespaces *sbmlns) 
+CaBase::CaBase (CaNamespaces *omexns) 
  : mMetaId("")
  , mNotes(NULL)
  , mAnnotation( NULL )
- , mSBML      ( NULL )
- , mSBMLNamespaces (NULL)
+ , mCa      ( NULL )
+ , mCaNamespaces (NULL)
  , mUserData(NULL)
  , mLine      ( 0 )
  , mColumn    ( 0 )
- , mParentSBMLObject (NULL)
+ , mParentCaObject (NULL)
   , mHasBeenDeleted(false)
   , mEmptyString("")
  , mURI("")
 {
-  if (!sbmlns)
+  if (!omexns)
   {
-    std::string err("SBase::SBase(SBMLNamespaces*) : SBMLNamespaces is null");
-    throw SBMLConstructorException(err);
+    std::string err("CaBase::CaBase(CaNamespaces*) : CaNamespaces is null");
+    throw CaConstructorException(err);
   }
-  mSBMLNamespaces = sbmlns->clone();
+  mCaNamespaces = omexns->clone();
 
-  setElementNamespace(static_cast<SBMLNamespaces>(*mSBMLNamespaces).getURI());
+  setElementNamespace(static_cast<CaNamespaces>(*mCaNamespaces).getURI());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
- * Copy constructor. Creates a copy of this SBase object.
+ * Copy constructor. Creates a copy of this CaBase object.
  */
-SBase::SBase(const SBase& orig)
+CaBase::CaBase(const CaBase& orig)
   : mMetaId (orig.mMetaId)
   , mNotes (NULL)
   , mAnnotation (NULL)
-  , mSBML (NULL)
-  , mSBMLNamespaces(NULL)
+  , mCa (NULL)
+  , mCaNamespaces(NULL)
   , mUserData(orig.mUserData)
   , mLine(orig.mLine)
   , mColumn(orig.mColumn)
-  , mParentSBMLObject(NULL)
+  , mParentCaObject(NULL)
   , mURI(orig.mURI)
 {
   if(orig.mNotes != NULL)
-    this->mNotes = new XMLNode(*const_cast<SBase&>(orig).getNotes());
+    this->mNotes = new XMLNode(*const_cast<CaBase&>(orig).getNotes());
   else
     this->mNotes = NULL;
 
   if(orig.mAnnotation != NULL)
-    this->mAnnotation = new XMLNode(*const_cast<SBase&>(orig).mAnnotation);
+    this->mAnnotation = new XMLNode(*const_cast<CaBase&>(orig).mAnnotation);
   else
     this->mAnnotation = NULL;
 
-  if(orig.getSBMLNamespaces() != NULL)
-    this->mSBMLNamespaces =
-    new SBMLNamespaces(*const_cast<SBase&>(orig).getSBMLNamespaces());
+  if(orig.getCaNamespaces() != NULL)
+    this->mCaNamespaces =
+    new CaNamespaces(*const_cast<CaBase&>(orig).getCaNamespaces());
   else
-    this->mSBMLNamespaces = NULL;
+    this->mCaNamespaces = NULL;
 
   this->mHasBeenDeleted = false;
 }
@@ -167,19 +199,19 @@ SBase::SBase(const SBase& orig)
 
 
 /*
- * Destroy this SBase object.
+ * Destroy this CaBase object.
  */
-SBase::~SBase ()
+CaBase::~CaBase ()
 {
   if (mNotes != NULL)       delete mNotes;
   if (mAnnotation != NULL)  delete mAnnotation;
-  if (mSBMLNamespaces != NULL)  delete mSBMLNamespaces;
+  if (mCaNamespaces != NULL)  delete mCaNamespaces;
 }
 
 /*
  * Assignment operator
  */
-SBase& SBase::operator=(const SBase& rhs)
+CaBase& CaBase::operator=(const CaBase& rhs)
 {
   if(&rhs!=this)
   {
@@ -188,30 +220,30 @@ SBase& SBase::operator=(const SBase& rhs)
     delete this->mNotes;
 
     if(rhs.mNotes != NULL)
-      this->mNotes = new XMLNode(*const_cast<SBase&>(rhs).getNotes());
+      this->mNotes = new XMLNode(*const_cast<CaBase&>(rhs).getNotes());
     else
       this->mNotes = NULL;
 
     delete this->mAnnotation;
 
     if(rhs.mAnnotation != NULL)
-      this->mAnnotation = new XMLNode(*const_cast<SBase&>(rhs).mAnnotation);
+      this->mAnnotation = new XMLNode(*const_cast<CaBase&>(rhs).mAnnotation);
     else
       this->mAnnotation = NULL;
 
-    this->mSBML       = rhs.mSBML;
+    this->mCa       = rhs.mCa;
     this->mLine       = rhs.mLine;
     this->mColumn     = rhs.mColumn;
-    this->mParentSBMLObject = rhs.mParentSBMLObject;
+    this->mParentCaObject = rhs.mParentCaObject;
     this->mUserData   = rhs.mUserData;
 
-    delete this->mSBMLNamespaces;
+    delete this->mCaNamespaces;
 
-    if(rhs.mSBMLNamespaces != NULL)
-      this->mSBMLNamespaces =
-      new SBMLNamespaces(*const_cast<SBase&>(rhs).mSBMLNamespaces);
+    if(rhs.mCaNamespaces != NULL)
+      this->mCaNamespaces =
+      new CaNamespaces(*const_cast<CaBase&>(rhs).mCaNamespaces);
     else
-      this->mSBMLNamespaces = NULL;
+      this->mCaNamespaces = NULL;
 
 
     this->mURI = rhs.mURI;
@@ -222,112 +254,112 @@ SBase& SBase::operator=(const SBase& rhs)
 
 
 /*
- * @return the metaid of this SBML_Lang object.
+ * @return the metaid of this OMEX object.
  */
 const string&
-SBase::getMetaId () const
+CaBase::getMetaId () const
 {
   return mMetaId;
 }
 
 
 /*
- * @return the metaid of this SBML_Lang object.
+ * @return the metaid of this OMEX object.
  */
 string&
-SBase::getMetaId ()
+CaBase::getMetaId ()
 {
   return mMetaId;
 }
 
 
 const string&
-SBase::getId() const
+CaBase::getId() const
 {
   return mEmptyString;
 }
 
 
 /*
- * @return the notes of this SBML_Lang object.
+ * @return the notes of this OMEX object.
  */
 XMLNode*
-SBase::getNotes()
+CaBase::getNotes()
 {
   return mNotes;
 }
 
 
 const XMLNode*
-SBase::getNotes() const
+CaBase::getNotes() const
 {
   return mNotes;
 }
 
 
 /*
- * @return the notes of this SBML_Lang object by string.
+ * @return the notes of this OMEX object by string.
  */
 std::string
-SBase::getNotesString()
+CaBase::getNotesString()
 {
   return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 std::string
-SBase::getNotesString() const
+CaBase::getNotesString() const
 {
   return XMLNode::convertXMLNodeToString(mNotes);
 }
 
 
 /*
- * @return the annotation of this SBML_Lang object.
+ * @return the annotation of this OMEX object.
  */
 XMLNode*
-SBase::getAnnotation ()
+CaBase::getAnnotation ()
 {
   return mAnnotation;
 }
 
 
 const XMLNode*
-SBase::getAnnotation () const
+CaBase::getAnnotation () const
 {
-  return const_cast<SBase *>(this)->getAnnotation();
+  return const_cast<CaBase *>(this)->getAnnotation();
 }
 
 
 /*
- * @return the annotation of this SBML_Lang object by string.
+ * @return the annotation of this OMEX object by string.
  */
 std::string
-SBase::getAnnotationString ()
+CaBase::getAnnotationString ()
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
 }
 
 
 std::string
-SBase::getAnnotationString () const
+CaBase::getAnnotationString () const
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
 }
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 std::string
-SBase::getURI() const
+CaBase::getURI() const
 {
-  const SBMLDocument* doc = getSBMLDocument();
+  const CaDocument* doc = getCaDocument();
 
   if (doc == NULL)
     return getElementNamespace();
 
-  SBMLNamespaces* sbmlns = doc->getSBMLNamespaces();
+  CaNamespaces* omexns = doc->getCaNamespaces();
 
-  if (sbmlns == NULL)
+  if (omexns == NULL)
     return getElementNamespace();
 
   return getElementNamespace();
@@ -336,32 +368,32 @@ SBase::getURI() const
 
 
 void *
-SBase::getUserData() const
+CaBase::getUserData() const
 {
   return this->mUserData;
 }
 
 
 int
-SBase::setUserData(void *userData)
+CaBase::setUserData(void *userData)
 {
   this->mUserData = userData;
   if (userData == NULL && mUserData == NULL)
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else if (mUserData != NULL)
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSBML_OPERATION_FAILED;
+    return LIBCOMBINE_OPERATION_FAILED;
   }
 }
 
 bool
-SBase::isSetUserData() const
+CaBase::isSetUserData() const
 {
   if (mUserData != NULL)
   {
@@ -374,61 +406,61 @@ SBase::isSetUserData() const
 }
 
 int
-SBase::unsetUserData()
+CaBase::unsetUserData()
 {
   this->mUserData = NULL;
   if (mUserData == NULL)
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSBML_OPERATION_FAILED;
+    return LIBCOMBINE_OPERATION_FAILED;
   }
 }
 
 /*
- * @return the Namespaces associated with this SBML_Lang object
+ * @return the Namespaces associated with this OMEX object
  */
 XMLNamespaces*
-SBase::getNamespaces()
+CaBase::getNamespaces()
 {
-  if (mSBML != NULL)
-    return mSBML->getSBMLNamespaces()->getNamespaces();
+  if (mCa != NULL)
+    return mCa->getCaNamespaces()->getNamespaces();
   else
-    return mSBMLNamespaces->getNamespaces();
+    return mCaNamespaces->getNamespaces();
 }
 
 
 const XMLNamespaces*
-SBase::getNamespaces() const
+CaBase::getNamespaces() const
 {
-  if (mSBML != NULL)
-    return mSBML->getSBMLNamespaces()->getNamespaces();
+  if (mCa != NULL)
+    return mCa->getCaNamespaces()->getNamespaces();
   else
-    return mSBMLNamespaces->getNamespaces();
+    return mCaNamespaces->getNamespaces();
 }
 
 
 /*
- * @return the parent SBMLDocument of this SBML_Lang object.
+ * @return the parent CaDocument of this OMEX object.
  */
-const SBMLDocument*
-SBase::getSBMLDocument () const
+const CaDocument*
+CaBase::getCaDocument () const
 {
-  if (mSBML != NULL)
+  if (mCa != NULL)
   {
     // if the doc object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mSBML->getHasBeenDeleted())
+      if (mCa->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mSBML;
+        return mCa;
       }
     }
     catch ( ... )
@@ -437,28 +469,28 @@ SBase::getSBMLDocument () const
     }
   }
 
-  return mSBML;
+  return mCa;
 }
 
 /*
- * @return the parent SBMLDocument of this SBML_Lang object.
+ * @return the parent CaDocument of this OMEX object.
  */
-SBMLDocument*
-SBase::getSBMLDocument ()
+CaDocument*
+CaBase::getCaDocument ()
 {
-  if (mSBML != NULL)
+  if (mCa != NULL)
   {
     // if the doc object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mSBML->getHasBeenDeleted())
+      if (mCa->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mSBML;
+        return mCa;
       }
     }
     catch ( ... )
@@ -466,24 +498,24 @@ SBase::getSBMLDocument ()
       return NULL;
     }
   }
-  return mSBML;
+  return mCa;
 }
-SBase*
-SBase::getParentSBMLObject ()
+CaBase*
+CaBase::getParentCaObject ()
 {
-  if (mParentSBMLObject != NULL)
+  if (mParentCaObject != NULL)
   {
     // if the parent object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mParentSBMLObject->getHasBeenDeleted())
+      if (mParentCaObject->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mParentSBMLObject;
+        return mParentCaObject;
       }
     }
     catch ( ... )
@@ -492,25 +524,25 @@ SBase::getParentSBMLObject ()
     }
   }
 
-  return mParentSBMLObject;
+  return mParentCaObject;
 }
 
-const SBase*
-SBase::getParentSBMLObject () const
+const CaBase*
+CaBase::getParentCaObject () const
 {
-  if (mParentSBMLObject != NULL)
+  if (mParentCaObject != NULL)
   {
     // if the parent object has been deleted the pointer is
     // still valid but points to nothing
     try
     {
-      if (mParentSBMLObject->getHasBeenDeleted())
+      if (mParentCaObject->getHasBeenDeleted())
       {
         return NULL;
       }
       else
       {
-        return mParentSBMLObject;
+        return mParentCaObject;
       }
     }
     catch ( ... )
@@ -519,36 +551,36 @@ SBase::getParentSBMLObject () const
     }
   }
 
-  return mParentSBMLObject;
+  return mParentCaObject;
 }
 
 
 /*
- * @return the line number of this SBML_Lang object.
+ * @return the line number of this OMEX object.
  */
 unsigned int
-SBase::getLine () const
+CaBase::getLine () const
 {
   return mLine;
 }
 
 
 /*
- * @return the column number of this SBML_Lang object.
+ * @return the column number of this OMEX object.
  */
 unsigned int
-SBase::getColumn () const
+CaBase::getColumn () const
 {
   return mColumn;
 }
 
 
 /*
- * @return true if the metaid of this SBML_Lang object is set, false
+ * @return true if the metaid of this OMEX object is set, false
  * otherwise.
  */
 bool
-SBase::isSetMetaId () const
+CaBase::isSetMetaId () const
 {
   return (mMetaId.empty() == false);
 }
@@ -562,55 +594,55 @@ SedBase::isSetId() const
 
 
 /*
- * @return true if the notes of this SBML_Lang object is set, false
+ * @return true if the notes of this OMEX object is set, false
  * otherwise.
  */
 bool
-SBase::isSetNotes () const
+CaBase::isSetNotes () const
 {
   return (mNotes != NULL);
 }
 
 
 /*
- * @return true if the annotation of this SBML_Lang object is set,
+ * @return true if the annotation of this OMEX object is set,
  * false otherwise.
  */
 bool
-SBase::isSetAnnotation () const
+CaBase::isSetAnnotation () const
 {
   return (mAnnotation != NULL);
 }
 
 
 /*
- * Sets the metaid field of the given SBML_Lang object to a copy of metaid.
+ * Sets the metaid field of the given OMEX object to a copy of metaid.
  */
 int
-SBase::setMetaId (const std::string& metaid)
+CaBase::setMetaId (const std::string& metaid)
 {
   if (metaid.empty())
   {
     mMetaId.erase();
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else if (!(SyntaxChecker::isValidXMLID(metaid)))
   {
-    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+    return LIBCOMBINE_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
     mMetaId = metaid;
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the annotation of this SBML_Lang object to a copy of annotation.
+ * Sets the annotation of this OMEX object to a copy of annotation.
  */
 int
-SBase::setAnnotation (XMLNode* annotation)
+CaBase::setAnnotation (XMLNode* annotation)
 {
   if (annotation == NULL)
   {
@@ -625,30 +657,30 @@ SBase::setAnnotation (XMLNode* annotation)
     mAnnotation = annotation->clone();
   }
 
-  return LIBSBML_OPERATION_SUCCESS;
+  return LIBCOMBINE_OPERATION_SUCCESS;
 }
 
 /*
- * Sets the annotation (by string) of this SBML_Lang object to a copy of annotation.
+ * Sets the annotation (by string) of this OMEX object to a copy of annotation.
  */
 int
-SBase::setAnnotation (const std::string& annotation)
+CaBase::setAnnotation (const std::string& annotation)
 {
   
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   
   if(annotation.empty())
   {
     unsetAnnotation();
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   
   XMLNode* annt_xmln;
   
   // you might not have a document !!
-  if (getSBMLDocument() != NULL)
+  if (getCaDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -671,13 +703,13 @@ SBase::setAnnotation (const std::string& annotation)
  * adding additional information.
  */
 int
-SBase::appendAnnotation (const XMLNode* annotation)
+CaBase::appendAnnotation (const XMLNode* annotation)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   unsigned int duplicates = 0;
 
   if(annotation == NULL)
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
 
   XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
@@ -731,7 +763,7 @@ SBase::appendAnnotation (const XMLNode* annotation)
 
     if (duplicates > 0)
     {
-      success = LIBSBML_DUPLICATE_ANNOTATION_NS;
+      success = LIBCOMBINE_DUPLICATE_ANNOTATION_NS;
     }
     else
     {
@@ -758,13 +790,13 @@ SBase::appendAnnotation (const XMLNode* annotation)
  * adding additional information.
  */
 int
-SBase::appendAnnotation (const std::string& annotation)
+CaBase::appendAnnotation (const std::string& annotation)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getSBMLDocument() != NULL)
+  if (getCaDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -783,14 +815,14 @@ SBase::appendAnnotation (const std::string& annotation)
 
 
 int
-SBase::removeTopLevelAnnotationElement(const std::string elementName,
+CaBase::removeTopLevelAnnotationElement(const std::string elementName,
     const std::string elementURI)
 {
 
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   if (mAnnotation == NULL)
   {
-    success = LIBSBML_OPERATION_SUCCESS;
+    success = LIBCOMBINE_OPERATION_SUCCESS;
     return success;
   }
 
@@ -798,7 +830,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
   if (index < 0)
   {
     // the annotation does not have a child of this name
-    success = LIBSBML_ANNOTATION_NAME_NOT_FOUND;
+    success = LIBCOMBINE_ANNOTATION_NAME_NOT_FOUND;
     return success;
   }
   else
@@ -812,7 +844,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
       if (prefix.empty() == false
         && elementURI != child.getNamespaceURI(prefix))
       {
-        success = LIBSBML_ANNOTATION_NS_NOT_FOUND;
+        success = LIBCOMBINE_ANNOTATION_NS_NOT_FOUND;
         return success;
       }
       else
@@ -831,7 +863,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
 
         if (match == false)
         {
-          success = LIBSBML_ANNOTATION_NS_NOT_FOUND;
+          success = LIBCOMBINE_ANNOTATION_NS_NOT_FOUND;
           return success;
         }
       }
@@ -849,7 +881,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
     // check success
     if (mAnnotation == NULL || mAnnotation->getIndex(elementName) < 0)
     {
-      success = LIBSBML_OPERATION_SUCCESS;
+      success = LIBCOMBINE_OPERATION_SUCCESS;
     }
   }
 
@@ -858,15 +890,15 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
 
 
 int
-SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
+CaBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   XMLNode * replacement = NULL;
   if (annotation->getName() == "annotation")
   {
     if (annotation->getNumChildren() != 1)
     {
-      success = LIBSBML_INVALID_OBJECT;
+      success = LIBCOMBINE_INVALID_OBJECT;
       return success;
     }
     else
@@ -880,7 +912,7 @@ SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
   }
 
   success = removeTopLevelAnnotationElement(replacement->getName());
-  if (success == LIBSBML_OPERATION_SUCCESS)
+  if (success == LIBCOMBINE_OPERATION_SUCCESS)
   {
     success = appendAnnotation(annotation);
   }
@@ -892,13 +924,13 @@ SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 
 
 int
-SBase::replaceTopLevelAnnotationElement(const std::string& annotation)
+CaBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getSBMLDocument() != NULL)
+  if (getCaDocument() != NULL)
   {
-    XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -918,20 +950,20 @@ SBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 
 
 /*
- * Sets the notes of this SBML_Lang object to a copy of notes.
+ * Sets the notes of this OMEX object to a copy of notes.
  */
 int
-SBase::setNotes(const XMLNode* notes)
+CaBase::setNotes(const XMLNode* notes)
 {
   if (mNotes == notes)
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else if (notes == NULL)
   {
     delete mNotes;
     mNotes = NULL;
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 
   delete mNotes;
@@ -960,14 +992,14 @@ SBase::setNotes(const XMLNode* notes)
       {
         if (mNotes->addChild(notes->getChild(i)) < 0)
         {
-          return LIBSBML_OPERATION_FAILED;
+          return LIBCOMBINE_OPERATION_FAILED;
         }
       }
     }
     else
     {
       if (mNotes->addChild(*notes) < 0)
-        return LIBSBML_OPERATION_FAILED;
+        return LIBCOMBINE_OPERATION_FAILED;
     }
   }
 
@@ -975,20 +1007,20 @@ SBase::setNotes(const XMLNode* notes)
     {
       delete mNotes;
       mNotes = NULL;
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
     }
 
-  return LIBSBML_OPERATION_SUCCESS;
+  return LIBCOMBINE_OPERATION_SUCCESS;
 
 }
 
 /*
- * Sets the notes (by std::string) of this SBML_Lang object to a copy of notes.
+ * Sets the notes (by std::string) of this OMEX object to a copy of notes.
  */
 int
 SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   
   if (notes.empty())
   {
@@ -999,9 +1031,9 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
     XMLNode* notes_xmln;
 
     // you might not have a document !!
-    if (getSBMLDocument() != NULL)
+    if (getCaDocument() != NULL)
     {
-      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
@@ -1053,17 +1085,17 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
  * adding additional information.
  */
 int
-SBase::appendNotes(const XMLNode* notes)
+CaBase::appendNotes(const XMLNode* notes)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   if(notes == NULL)
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 
   const string&  name = notes->getName();
 
-  // The content of notes in SBML_Lang can consist only of the following
+  // The content of notes in OMEX can consist only of the following
   // possibilities:
   //
   //  1. A complete XHTML document (minus the XML and DOCTYPE
@@ -1126,7 +1158,7 @@ SBase::appendNotes(const XMLNode* notes)
     else
     {
       // the given notes is empty
-      return LIBSBML_OPERATION_SUCCESS;
+      return LIBCOMBINE_OPERATION_SUCCESS;
     }
   }
   else
@@ -1145,7 +1177,7 @@ SBase::appendNotes(const XMLNode* notes)
       else
       {
         // the given notes is empty
-        return LIBSBML_OPERATION_SUCCESS;
+        return LIBCOMBINE_OPERATION_SUCCESS;
       }
     }
     else
@@ -1185,7 +1217,7 @@ SBase::appendNotes(const XMLNode* notes)
         )
        )
     {
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
     }
   }
 
@@ -1209,7 +1241,7 @@ SBase::appendNotes(const XMLNode* notes)
 
     if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, NULL))
     {
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
     }
   }
 
@@ -1243,7 +1275,7 @@ SBase::appendNotes(const XMLNode* notes)
           )
          )
       {
-        return LIBSBML_INVALID_OBJECT;
+        return LIBCOMBINE_INVALID_OBJECT;
       }
       curNotesType = _ANotesHTML;
     }
@@ -1284,7 +1316,7 @@ SBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
           if (curBody.addChild(addedBody.getChild(i)) < 0 )
-            return LIBSBML_OPERATION_FAILED;
+            return LIBCOMBINE_OPERATION_FAILED;
         }
       }
       else if ((addedNotesType == _ANotesBody)
@@ -1296,10 +1328,10 @@ SBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0 )
-            return LIBSBML_OPERATION_FAILED;
+            return LIBCOMBINE_OPERATION_FAILED;
         }
       }
-      success = LIBSBML_OPERATION_SUCCESS;
+      success = LIBCOMBINE_OPERATION_SUCCESS;
     }
     else if (curNotesType == _ANotesBody)
     {
@@ -1318,7 +1350,7 @@ SBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
-          return LIBSBML_OPERATION_FAILED;
+          return LIBCOMBINE_OPERATION_FAILED;
       }
       else if ((addedNotesType == _ANotesBody) || (addedNotesType == _ANotesAny))
       {
@@ -1330,10 +1362,10 @@ SBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0)
-            return LIBSBML_OPERATION_FAILED;
+            return LIBCOMBINE_OPERATION_FAILED;
         }
       }
-      success = LIBSBML_OPERATION_SUCCESS;
+      success = LIBCOMBINE_OPERATION_SUCCESS;
     }
     else if (curNotesType == _ANotesAny)
     {
@@ -1351,7 +1383,7 @@ SBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
-          return LIBSBML_OPERATION_FAILED;
+          return LIBCOMBINE_OPERATION_FAILED;
       }
       else if (addedNotesType == _ANotesBody)
       {
@@ -1366,7 +1398,7 @@ SBase::appendNotes(const XMLNode* notes)
 
         curNotes.removeChildren();
         if (curNotes.addChild(addedBody) < 0)
-          return LIBSBML_OPERATION_FAILED;
+          return LIBCOMBINE_OPERATION_FAILED;
       }
       else if (addedNotesType == _ANotesAny)
       {
@@ -1376,10 +1408,10 @@ SBase::appendNotes(const XMLNode* notes)
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curNotes.addChild(addedNotes.getChild(i)) < 0)
-            return LIBSBML_OPERATION_FAILED;
+            return LIBCOMBINE_OPERATION_FAILED;
         }
       }
-      success = LIBSBML_OPERATION_SUCCESS;
+      success = LIBCOMBINE_OPERATION_SUCCESS;
     }
   }
   else // if (mNotes == NULL)
@@ -1397,19 +1429,19 @@ SBase::appendNotes(const XMLNode* notes)
  * adding additional information.
  */
 int
-SBase::appendNotes(const std::string& notes)
+CaBase::appendNotes(const std::string& notes)
 {
-  int success = LIBSBML_OPERATION_FAILED;
+  int success = LIBCOMBINE_OPERATION_FAILED;
   if (notes.empty())
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 
   XMLNode* notes_xmln;
   // you might not have a document !!
-  if (getSBMLDocument() != NULL)
+  if (getCaDocument() != NULL)
   {
-      XMLNamespaces* xmlns = getSBMLDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
@@ -1426,43 +1458,43 @@ SBase::appendNotes(const std::string& notes)
 }
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
- * Sets the parent SBMLDocument of this SBML_Lang object.
+ * Sets the parent CaDocument of this OMEX object.
  */
 void
-SBase::setSBMLDocument (SBMLDocument* d)
+CaBase::setCaDocument (CaDocument* d)
 {
-  mSBML = d;
+  mCa = d;
 }
 
 
 /*
-  * Sets the parent SBML_Lang object of this SBML_Lang object.
+  * Sets the parent OMEX object of this OMEX object.
   *
-  * @param sb the SBML_Lang object to use
+  * @param sb the OMEX object to use
   */
 void
-SBase::connectToParent (SBase* parent)
+CaBase::connectToParent (CaBase* parent)
 {
-  mParentSBMLObject = parent;
-  if (mParentSBMLObject)
+  mParentCaObject = parent;
+  if (mParentCaObject)
   {
 #if 0
-    cout << "[DEBUG] connectToParent " << this << " (parent) " << SBMLTypeCode_toString(parent->getTypeCode(),"core")
-         << " " << parent->getSBMLDocument() << endl;
+    cout << "[DEBUG] connectToParent " << this << " (parent) " << CaTypeCode_toString(parent->getTypeCode(),"core")
+         << " " << parent->getCaDocument() << endl;
 #endif
-    setSBMLDocument(mParentSBMLObject->getSBMLDocument());
+    setCaDocument(mParentCaObject->getCaDocument());
   }
   else
   {
-    setSBMLDocument(NULL);
+    setCaDocument(NULL);
   }
 }
 
 
 /*
- * Sets this SBML_Lang object to child SBML_Lang objects (if any).
+ * Sets this OMEX object to child OMEX objects (if any).
  * (Creates a child-parent relationship by the parent)
  *
  * Subclasses must override this function if they define
@@ -1471,22 +1503,22 @@ SBase::connectToParent (SBase* parent)
  * constructors, copy constructors and assignment operators.
  */
 void
-SBase::connectToChild()
+CaBase::connectToChild()
 {
 }
 /** @endcond */
 
-SBase*
-SBase::getAncestorOfType(int type)
+CaBase*
+CaBase::getAncestorOfType(int type)
 {
-  if (type == SBML_DOCUMENT)
-    return getSBMLDocument();
+  if (type == OMEX_DOCUMENT)
+    return getCaDocument();
 
-  SBase *child;
-  SBase *parent = getParentSBMLObject();
+  CaBase *child;
+  CaBase *parent = getParentCaObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == SBML_DOCUMENT )
+          !( parent->getTypeCode() == OMEX_DOCUMENT )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1494,7 +1526,7 @@ SBase::getAncestorOfType(int type)
     else
     {
       child = parent;
-      parent = child->getParentSBMLObject();
+      parent = child->getParentCaObject();
     }
   }
 
@@ -1504,17 +1536,17 @@ SBase::getAncestorOfType(int type)
 }
 
 
-const SBase*
-SBase::getAncestorOfType(int type) const
+const CaBase*
+CaBase::getAncestorOfType(int type) const
 {
-  if (type == SBML_DOCUMENT)
-    return getSBMLDocument();
+  if (type == OMEX_DOCUMENT)
+    return getCaDocument();
 
-  const SBase *child;
-  const SBase *parent = getParentSBMLObject();
+  const CaBase *child;
+  const CaBase *parent = getParentCaObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == SBML_DOCUMENT )
+          !( parent->getTypeCode() == OMEX_DOCUMENT )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1522,7 +1554,7 @@ SBase::getAncestorOfType(int type) const
     else
     {
       child = parent;
-      parent = child->getParentSBMLObject();
+      parent = child->getParentCaObject();
     }
   }
 
@@ -1533,63 +1565,63 @@ SBase::getAncestorOfType(int type) const
 
 
 /*
- * Sets the namespaces relevant of this SBML_Lang object.
+ * Sets the namespaces relevant of this OMEX object.
  *
  * @param xmlns the namespaces to set
  */
 int
-SBase::setNamespaces(XMLNamespaces* xmlns)
+CaBase::setNamespaces(XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
   {
-    mSBMLNamespaces->setNamespaces(NULL);
-    return LIBSBML_OPERATION_SUCCESS;
+    mCaNamespaces->setNamespaces(NULL);
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else
   {
-    mSBMLNamespaces->setNamespaces(xmlns);
-    return LIBSBML_OPERATION_SUCCESS;
+    mCaNamespaces->setNamespaces(xmlns);
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 }
 
 
 
 /*
- * Unsets the metaid of this SBML_Lang object.
+ * Unsets the metaid of this OMEX object.
  */
 int
-SBase::unsetMetaId ()
+CaBase::unsetMetaId ()
 {
   mMetaId.erase();
 
   if (mMetaId.empty())
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
   else
   {
-    return LIBSBML_OPERATION_FAILED;
+    return LIBCOMBINE_OPERATION_FAILED;
   }
 }
 
 
 /*
- * Unsets the notes of this SBML_Lang object.
+ * Unsets the notes of this OMEX object.
  */
 int
-SBase::unsetNotes ()
+CaBase::unsetNotes ()
 {
   delete mNotes;
   mNotes = NULL;
-  return LIBSBML_OPERATION_SUCCESS;
+  return LIBCOMBINE_OPERATION_SUCCESS;
 }
 
 
 /*
- * Unsets the annotation of this SBML_Lang object.
+ * Unsets the annotation of this OMEX object.
  */
 int
-SBase::unsetAnnotation ()
+CaBase::unsetAnnotation ()
 {
   XMLNode* empty = NULL;
   return setAnnotation(empty);
@@ -1597,56 +1629,56 @@ SBase::unsetAnnotation ()
 
 
 /*
- * @return the SBML_Lang level of this SBML_Lang object.
+ * @return the OMEX level of this OMEX object.
  */
 unsigned int
-SBase::getLevel () const
+CaBase::getLevel () const
 {
-  if (mSBML != NULL)
-    return mSBML->getLevel();
-  else if (mSBMLNamespaces != NULL)
-    return mSBMLNamespaces->getLevel();
+  if (mCa != NULL)
+    return mCa->getLevel();
+  else if (mCaNamespaces != NULL)
+    return mCaNamespaces->getLevel();
   else
-    return SBML_DEFAULT_LEVEL;
+    return OMEX_DEFAULT_LEVEL;
 }
 
 
 /*
- * @return the SBML_Lang version of this SBML_Lang object.
+ * @return the OMEX version of this OMEX object.
  */
 unsigned int
-SBase::getVersion () const
+CaBase::getVersion () const
 {
-  if (mSBML != NULL)
-    return mSBML->getVersion();
-  else if (mSBMLNamespaces != NULL)
-    return mSBMLNamespaces->getVersion();
+  if (mCa != NULL)
+    return mCa->getVersion();
+  else if (mCaNamespaces != NULL)
+    return mCaNamespaces->getVersion();
   else
-    return SBML_DEFAULT_VERSION;
+    return OMEX_DEFAULT_VERSION;
 }
 
 
 /*
- * @return the typecode (int) of this SBML_Lang object or SBML_UNKNOWN
+ * @return the typecode (int) of this OMEX object or OMEX_UNKNOWN
  * (default).
  *
- * This method MAY return the typecode of this SBML_Lang object or it MAY
- * return SBML_UNKNOWN.  That is, subclasses of SBase are not required to
+ * This method MAY return the typecode of this OMEX object or it MAY
+ * return OMEX_UNKNOWN.  That is, subclasses of CaBase are not required to
  * implement this method to return a typecode.  This method is meant
- * primarily for the LibSBML C interface where class and subclass
+ * primarily for the LibCombine C interface where class and subclass
  * information is not readily available.
  *
  * @see getElementName()
  */
 int
-SBase::getTypeCode () const
+CaBase::getTypeCode () const
 {
-  return SBML_UNKNOWN;
+  return OMEX_UNKNOWN;
 }
 
 
 bool
-SBase::hasValidLevelVersionNamespaceCombination()
+CaBase::hasValidLevelVersionNamespaceCombination()
 {
   int typecode = getTypeCode();
   XMLNamespaces *xmlns = getNamespaces();
@@ -1654,63 +1686,63 @@ SBase::hasValidLevelVersionNamespaceCombination()
   return hasValidLevelVersionNamespaceCombination(typecode, xmlns);
 }
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 bool
-SBase::matchesSBMLNamespaces(const SBase * sb)
+CaBase::matchesCaNamespaces(const CaBase * sb)
 {
-  bool match = matchesCoreSBMLNamespace(sb);
+  bool match = matchesCoreCaNamespace(sb);
 
   return match;
 }
 
 bool
-SBase::matchesSBMLNamespaces(const SBase * sb) const
+CaBase::matchesCaNamespaces(const CaBase * sb) const
 {
-  bool match = matchesCoreSBMLNamespace(sb);
-
-  return match;
-}
-
-
-bool
-SBase::matchesRequiredSBMLNamespacesForAddition(const SBase * sb)
-{
-  // if core does not match forget it
-  bool match = matchesCoreSBMLNamespace(sb);
+  bool match = matchesCoreCaNamespace(sb);
 
   return match;
 }
 
 
 bool
-SBase::matchesRequiredSBMLNamespacesForAddition(const SBase * sb) const
+CaBase::matchesRequiredCaNamespacesForAddition(const CaBase * sb)
 {
   // if core does not match forget it
-  bool match = matchesCoreSBMLNamespace(sb);
+  bool match = matchesCoreCaNamespace(sb);
 
   return match;
 }
 
 
 bool
-SBase::matchesCoreSBMLNamespace(const SBase * sb)
+CaBase::matchesRequiredCaNamespacesForAddition(const CaBase * sb) const
+{
+  // if core does not match forget it
+  bool match = matchesCoreCaNamespace(sb);
+
+  return match;
+}
+
+
+bool
+CaBase::matchesCoreCaNamespace(const CaBase * sb)
 {
   bool match = false;
 
-  SBMLNamespaces *sbmlns = getSBMLNamespaces();
-  SBMLNamespaces *sbmlns_rhs = sb->getSBMLNamespaces();
+  CaNamespaces *omexns = getCaNamespaces();
+  CaNamespaces *omexns_rhs = sb->getCaNamespaces();
 
-  if (sbmlns->getLevel() != sbmlns_rhs->getLevel())
+  if (omexns->getLevel() != omexns_rhs->getLevel())
     return match;
 
-  if (sbmlns->getVersion() != sbmlns_rhs->getVersion())
+  if (omexns->getVersion() != omexns_rhs->getVersion())
     return match;
 
-  std::string coreNs = SBMLNamespaces::getSBMLNamespaceURI(
-                       sbmlns->getLevel(), sbmlns->getVersion());
+  std::string coreNs = CaNamespaces::getCaNamespaceURI(
+                       omexns->getLevel(), omexns->getVersion());
 
-  if (sbmlns->getNamespaces()->containsUri(coreNs)
-    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
+  if (omexns->getNamespaces()->containsUri(coreNs)
+    && omexns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
@@ -1720,24 +1752,24 @@ SBase::matchesCoreSBMLNamespace(const SBase * sb)
 
 
 bool
-SBase::matchesCoreSBMLNamespace(const SBase * sb) const
+CaBase::matchesCoreCaNamespace(const CaBase * sb) const
 {
   bool match = false;
 
-  SBMLNamespaces *sbmlns = getSBMLNamespaces();
-  SBMLNamespaces *sbmlns_rhs = sb->getSBMLNamespaces();
+  CaNamespaces *omexns = getCaNamespaces();
+  CaNamespaces *omexns_rhs = sb->getCaNamespaces();
 
-  if (sbmlns->getLevel() != sbmlns_rhs->getLevel())
+  if (omexns->getLevel() != omexns_rhs->getLevel())
     return match;
 
-  if (sbmlns->getVersion() != sbmlns_rhs->getVersion())
+  if (omexns->getVersion() != omexns_rhs->getVersion())
     return match;
 
-  std::string coreNs = SBMLNamespaces::getSBMLNamespaceURI(
-                       sbmlns->getLevel(), sbmlns->getVersion());
+  std::string coreNs = CaNamespaces::getCaNamespaceURI(
+                       omexns->getLevel(), omexns->getVersion());
 
-  if (sbmlns->getNamespaces()->containsUri(coreNs)
-    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
+  if (omexns->getNamespaces()->containsUri(coreNs)
+    && omexns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
@@ -1747,40 +1779,40 @@ SBase::matchesCoreSBMLNamespace(const SBase * sb) const
 
 
 bool
-SBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
+CaBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
 {
 
 
   //
   // (TODO) Currently, the following check code works only for
-  //        elements in SBML_Lang core.
+  //        elements in OMEX core.
   //        This function may need to be extented for other elements
   //        defined in each package extension.
   //
 
   bool valid = true;
-  bool sbmlDeclared = false;
+  bool omexDeclared = false;
   std::string declaredURI("");
 
   if (xmlns != NULL)
   {
     int numNS = 0;
 
-    if (xmlns->hasURI(SBML_XMLNS_L1V1))
+    if (xmlns->hasURI(OMEX_XMLNS_L1V1))
     {
-      // checks different SBML_Lang XMLNamespaces
+      // checks different OMEX XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
-      declaredURI.assign(SBML_XMLNS_L1V1);
+      declaredURI.assign(OMEX_XMLNS_L1V1);
     }
 
-    // checks if the SBML_Lang Namespace is explicitly defined.
+    // checks if the OMEX Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() &&
                       xmlns->getURI(i) == declaredURI)
       {
-        sbmlDeclared = true;
+        omexDeclared = true;
         break;
 
       }
@@ -1790,55 +1822,55 @@ SBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xml
   return valid;
 }
 
-/* sets the SBMLnamespaces - internal use only*/
+/* sets the Canamespaces - internal use only*/
 int
-SBase::setSBMLNamespaces(SBMLNamespaces * sbmlns)
+CaBase::setCaNamespaces(CaNamespaces * omexns)
 {
-  if (sbmlns == NULL)
-    return LIBSBML_INVALID_OBJECT;
+  if (omexns == NULL)
+    return LIBCOMBINE_INVALID_OBJECT;
 
-  SBMLNamespaces* sbmlnsClone = (sbmlns) ? sbmlns->clone() : 0;
-  setSBMLNamespacesAndOwn(sbmlnsClone);
+  CaNamespaces* omexnsClone = (omexns) ? omexns->clone() : 0;
+  setCaNamespacesAndOwn(omexnsClone);
 
-  return LIBSBML_OPERATION_SUCCESS;
+  return LIBCOMBINE_OPERATION_SUCCESS;
 }
 
 /*
- * sets the SBMLnamespaces - only for internal use in the
- * constructors of SBase subclasses in extension packages.
+ * sets the Canamespaces - only for internal use in the
+ * constructors of CaBase subclasses in extension packages.
  */
 void
-SBase::setSBMLNamespacesAndOwn(SBMLNamespaces * sbmlns)
+CaBase::setCaNamespacesAndOwn(CaNamespaces * omexns)
 {
-  delete mSBMLNamespaces;
-  mSBMLNamespaces = sbmlns;
+  delete mCaNamespaces;
+  mCaNamespaces = omexns;
 
-  if(sbmlns != NULL)
-    setElementNamespace(sbmlns->getURI());
+  if(omexns != NULL)
+    setElementNamespace(omexns->getURI());
 }
 
 
-/* gets the SBMLnamespaces - internal use only*/
-SBMLNamespaces *
-SBase::getSBMLNamespaces() const
+/* gets the Canamespaces - internal use only*/
+CaNamespaces *
+CaBase::getCaNamespaces() const
 {
-  if (mSBML != NULL)
-    return mSBML->mSBMLNamespaces;
+  if (mCa != NULL)
+    return mCa->mCaNamespaces;
   
-  // initialize SBML_Lang namespace if need be
-  if (mSBMLNamespaces == NULL)
-    const_cast<SBase*>(this)->mSBMLNamespaces = new SBMLNamespaces();
-  return mSBMLNamespaces;  
+  // initialize OMEX namespace if need be
+  if (mCaNamespaces == NULL)
+    const_cast<CaBase*>(this)->mCaNamespaces = new CaNamespaces();
+  return mCaNamespaces;  
 }
 /** @endcond */
 
 
 
 /*
- * @return the partial SBML_Lang that describes this SBML_Lang object.
+ * @return the partial OMEX that describes this OMEX object.
  */
 char*
-SBase::toSBML ()
+CaBase::toCa ()
 {
   ostringstream    os;
   XMLOutputStream  stream(os, "UTF-8", false);
@@ -1849,36 +1881,36 @@ SBase::toSBML ()
 }
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
- * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.
+ * Reads (initializes) this OMEX object by reading from XMLInputStream.
  */
 void
-SBase::read (XMLInputStream& stream)
+CaBase::read (XMLInputStream& stream)
 {
   if ( !stream.peek().isStart() ) return;
 
   const XMLToken  element  = stream.next();
   int             position =  0;
 
-  setSBaseFields( element );
+  setCaBaseFields( element );
 
   ExpectedAttributes expectedAttributes;
   addExpectedAttributes(expectedAttributes);
   readAttributes( element.getAttributes(), expectedAttributes );
 
   /* if we are reading a document pass the
-   * SBML_Lang Namespace information to the input stream object
+   * OMEX Namespace information to the input stream object
    * thus the MathML reader can find out what level/version
-   * of SBML_Lang it is parsing
+   * of OMEX it is parsing
    */
-  if (element.getName() == "sbml")
+  if (element.getName() == "omex")
   {
- //   stream.setSBMLNamespaces(this->getSBMLNamespaces());
-    // need to check that any prefix on the sbmlns also occurs on element
-    // remembering the horrible situation where the sbmlns might be declared
+ //   stream.setCaNamespaces(this->getCaNamespaces());
+    // need to check that any prefix on the omexns also occurs on element
+    // remembering the horrible situation where the omexns might be declared
     // with more than one prefix
-    XMLNamespaces * xmlns = this->getSBMLNamespaces()->getNamespaces();
+    XMLNamespaces * xmlns = this->getCaNamespaces()->getNamespaces();
     if (xmlns != NULL)
     {
       int i = xmlns->getIndexByPrefix(element.getPrefix());
@@ -1888,7 +1920,7 @@ SBase::read (XMLInputStream& stream)
         bool error = false;
         if (i > -1)
         {
-          if (xmlns->getURI(i) != this->getSBMLNamespaces()->getURI())
+          if (xmlns->getURI(i) != this->getCaNamespaces()->getURI())
           {
             error = true;
           }
@@ -1905,10 +1937,10 @@ SBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == SBMLSBMLDocumentAllowedAttributes
-            || errorId == SBMLSBMLDocumentLevelMustBeInteger
-            || errorId == SBMLSBMLDocumentVersionMustBeInteger
-            || errorId == InvalidNamespaceOnSBML)
+          if (errorId == OmexCaDocumentAllowedAttributes
+            || errorId == OmexCaDocumentLevelMustBeInteger
+            || errorId == OmexCaDocumentVersionMustBeInteger
+            || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;
           }
@@ -1918,11 +1950,11 @@ SBase::read (XMLInputStream& stream)
         {
           static ostringstream errMsg;
           errMsg.str("");
-          errMsg << "The prefix for the <sbml> element does not match "
-            << "the prefix for the SBML_Lang namespace.  This means that "
-            << "the <sbml> element in not in the SBMLNamespace."<< endl;
+          errMsg << "The prefix for the <omex> element does not match "
+            << "the prefix for the OMEX namespace.  This means that "
+            << "the <omex> element in not in the CaNamespace."<< endl;
 
-          logError(InvalidNamespaceOnSBML,
+          logError(InvalidNamespaceOnCa,
                     getLevel(), getVersion(), errMsg.str());
         }
       }
@@ -1933,9 +1965,9 @@ SBase::read (XMLInputStream& stream)
   {
     //
     // checks if the given default namespace (if any) is a valid
-    // SBML_Lang namespace
+    // OMEX namespace
     //
-    checkDefaultNamespace(mSBMLNamespaces->getNamespaces(), element.getName());
+    checkDefaultNamespace(mCaNamespaces->getNamespaces(), element.getName());
     if (!element.getPrefix().empty())
     {
       XMLNamespaces * prefixedNS = new XMLNamespaces();
@@ -1973,19 +2005,19 @@ SBase::read (XMLInputStream& stream)
     {
       const std::string nextName = next.getName();
 
-      SBase * object = createObject(stream);
+      CaBase * object = createObject(stream);
 
       if (object != NULL)
       {
         position = object->getElementPosition();
 
-        object->connectToParent(static_cast <SBase*>(this));
+        object->connectToParent(static_cast <CaBase*>(this));
 
         object->read(stream);
 
         if ( !stream.isGood() ) break;
 
-        checkListOfPopulated(object);
+        checkCaListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
                    || readAnnotation(stream)
@@ -2005,16 +2037,16 @@ SBase::read (XMLInputStream& stream)
 
 
 void
-SBase::setElementText(const std::string &text)
+CaBase::setElementText(const std::string &text)
 {
 }
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
- * Writes (serializes) this SBML_Lang object by writing it to XMLOutputStream.
+ * Writes (serializes) this OMEX object by writing it to XMLOutputStream.
  */
 void
-SBase::write (XMLOutputStream& stream) const
+CaBase::write (XMLOutputStream& stream) const
 {
   stream.startElement( getElementName(), getPrefix() );
 
@@ -2028,14 +2060,14 @@ SBase::write (XMLOutputStream& stream) const
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Subclasses should override this method to write out their contained
- * SBML_Lang objects as XML elements.  Be sure to call your parents
+ * OMEX objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void
-SBase::writeElements (XMLOutputStream& stream) const
+CaBase::writeElements (XMLOutputStream& stream) const
 {
   if ( mNotes != NULL ) stream << *mNotes;
 
@@ -2043,17 +2075,17 @@ SBase::writeElements (XMLOutputStream& stream) const
 }
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Subclasses should override this method to create, store, and then
- * return an SBML_Lang object corresponding to the next XMLToken in the
+ * return an OMEX object corresponding to the next XMLToken in the
  * XMLInputStream.
  *
- * @return the SBML_Lang object corresponding to next XMLToken in the
+ * @return the OMEX object corresponding to next XMLToken in the
  * XMLInputStream or @c NULL if the token was not recognized.
  */
-SBase*
-SBase::createObject (XMLInputStream& stream)
+CaBase*
+CaBase::createObject (XMLInputStream& stream)
 {
   return NULL;
 }
@@ -2062,7 +2094,7 @@ SBase::createObject (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Subclasses should override this method to read (and store) XHTML,
  * MathML, etc. directly from the XMLInputStream.
@@ -2070,7 +2102,7 @@ SBase::createObject (XMLInputStream& stream)
  * @return true if the subclass read from the stream, false otherwise.
  */
 bool
-SBase::readOtherXML (XMLInputStream& stream)
+CaBase::readOtherXML (XMLInputStream& stream)
 {
   bool read = false;
   return read;
@@ -2078,12 +2110,12 @@ SBase::readOtherXML (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * @return true if read an <annotation> element from the stream
  */
 bool
-SBase::readAnnotation (XMLInputStream& stream)
+CaBase::readAnnotation (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2094,7 +2126,7 @@ SBase::readAnnotation (XMLInputStream& stream)
 
     if (mAnnotation != NULL)
     {
-      string msg = "An SBML_Lang <" + getElementName() + "> element ";
+      string msg = "An OMEX <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
       logError(MultipleAnnotations, getLevel(), getVersion(), msg);
     }
@@ -2110,12 +2142,12 @@ SBase::readAnnotation (XMLInputStream& stream)
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * @return true if read a <notes> element from the stream
  */
 bool
-SBase::readNotes (XMLInputStream& stream)
+CaBase::readNotes (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2135,7 +2167,7 @@ SBase::readNotes (XMLInputStream& stream)
 
     //
     // checks if the given default namespace (if any) is a valid
-    // SBML_Lang namespace
+    // OMEX namespace
     //
     const XMLNamespaces &xmlns = mNotes->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
@@ -2147,41 +2179,41 @@ SBase::readNotes (XMLInputStream& stream)
 }
 
 bool
-SBase::getHasBeenDeleted() const
+CaBase::getHasBeenDeleted() const
 {
   return mHasBeenDeleted;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
  */
 int
-SBase::getElementPosition () const
+CaBase::getElementPosition () const
 {
   return -1;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
-SBMLErrorLog*
-SBase::getErrorLog ()
+/** @cond doxygenLibomexInternal */
+CaErrorLog*
+CaBase::getErrorLog ()
 {
-  return (mSBML != NULL) ? mSBML->getErrorLog() : NULL;
+  return (mCa != NULL) ? mCa->getErrorLog() : NULL;
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SBase::logUnknownAttribute( const string& attribute,
+CaBase::logUnknownAttribute( const string& attribute,
                             const unsigned int level,
                             const unsigned int version,
                             const string& element,
@@ -2190,14 +2222,14 @@ SBase::logUnknownAttribute( const string& attribute,
   ostringstream msg;
 
     msg << "Attribute '" << attribute << "' is not part of the "
-        << "definition of an SBML_Lang Level " << level
+        << "definition of an OMEX Level " << level
         << " Version " << version << " <" << element << "> element.";
 
-  if (mSBML)
+  if (mCa)
   {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SBMLDocument attached.
+  // no CaDocument attached.
   //
         getErrorLog()->logError(AllowedAttributes, level,
           version, msg.str(), getLine(), getColumn());
@@ -2206,12 +2238,12 @@ SBase::logUnknownAttribute( const string& attribute,
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SBase::logUnknownElement( const string& element,
+CaBase::logUnknownElement( const string& element,
         const unsigned int level,
         const unsigned int version )
 {
@@ -2220,9 +2252,9 @@ SBase::logUnknownElement( const string& element,
     ostringstream msg;
 
     msg << "Element '" << element << "' is not part of the definition of "
-        << "SBML_Lang Level " << level << " Version " << version << ".";
+        << "OMEX Level " << level << " Version " << version << ".";
 
-    if (mSBML != NULL)
+    if (mCa != NULL)
     {
       getErrorLog()->logError(UnrecognizedElement,
             level, version, msg.str(), getLine(), getColumn());
@@ -2233,12 +2265,12 @@ SBase::logUnknownElement( const string& element,
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Helper to log a common type of error.
  */
 void
-SBase::logEmptyString( const string& attribute,
+CaBase::logEmptyString( const string& attribute,
                        const unsigned int level,
                        const unsigned int version,
                        const string& element )
@@ -2251,16 +2283,16 @@ SBase::logEmptyString( const string& attribute,
 
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SBMLDocument attached.
+  // no CaDocument attached.
   //
-  if (mSBML != NULL)
+  if (mCa != NULL)
     getErrorLog()->logError(NotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Convenience method for easily logging problems from within method
  * implementations.
@@ -2268,22 +2300,22 @@ SBase::logEmptyString( const string& attribute,
  * This is essentially a short form of getErrorLog()->logError(...)
  */
 void
-SBase::logError (  unsigned int       id
+CaBase::logError (  unsigned int       id
                  , const unsigned int level
                  , const unsigned int version
                  , const std::string& details )
 {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no SBMLDocument attached.
+  // no CaDocument attached.
   //
-  if ( SBase::getErrorLog() != NULL && mSBML != NULL)
+  if ( CaBase::getErrorLog() != NULL && mCa != NULL)
     getErrorLog()->logError(id, getLevel(), getVersion(), details, getLine(), getColumn());
 }
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /**
  * Subclasses should override this method to get the list of
  * expected attributes.
@@ -2291,7 +2323,7 @@ SBase::logError (  unsigned int       id
  * function.
  */
 void
-SBase::addExpectedAttributes(ExpectedAttributes& attributes)
+CaBase::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   //
   // metaid: ID { use="optional" }  (L2v1 ->)
@@ -2306,7 +2338,7 @@ SBase::addExpectedAttributes(ExpectedAttributes& attributes)
  * parents implementation of this method as well.
  */
 void
-SBase::readAttributes (const XMLAttributes& attributes,
+CaBase::readAttributes (const XMLAttributes& attributes,
                        const ExpectedAttributes& expectedAttributes)
 {
   const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
@@ -2338,10 +2370,10 @@ SBase::readAttributes (const XMLAttributes& attributes,
     //
     // Checks if there are attributes of unknown package extensions
     //
-    // if we happen to be on the sbml element (document) then
+    // if we happen to be on the omex element (document) then
     // getPrefix() and mURI have not been set and just return defaults
     // thus a prefix does not appear to come from the right place !!!
-    if (!prefix.empty() && getElementName() == "sbml")
+    if (!prefix.empty() && getElementName() == "omex")
     {
       if (!expectedAttributes.hasAttribute(name))
       {
@@ -2359,7 +2391,7 @@ SBase::readAttributes (const XMLAttributes& attributes,
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
-                     SBMLTypeCode_toString(getTypeCode()));
+                     CaTypeCode_toString(getTypeCode()));
     }
 
     if (isSetMetaId())
@@ -2373,18 +2405,18 @@ SBase::readAttributes (const XMLAttributes& attributes,
 }
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Returns the prefix of this element.
  */
 std::string
-SBase::getPrefix() const
+CaBase::getPrefix() const
 {
   std::string prefix = "";
 
   const XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
-  if(xmlns && mSBML)
+  if(xmlns && mCa)
   {
     prefix = xmlns->getPrefix(uri);
   }
@@ -2397,7 +2429,7 @@ SBase::getPrefix() const
  * Returns the prefix of this element.
  */
 std::string
-SBase::getSBMLPrefix() const
+CaBase::getCaPrefix() const
 {
   std::string prefix = "";
 
@@ -2408,7 +2440,7 @@ SBase::getSBMLPrefix() const
   for (int i = 0; i < xmlns->getNumNamespaces(); i++)
   {
     string uri = xmlns->getURI(i);
-    if (SBMLNamespaces::isSBMLNamespace(uri))
+    if (CaNamespaces::isCaNamespace(uri))
       return xmlns->getPrefix(i);
   }
 
@@ -2418,20 +2450,20 @@ SBase::getSBMLPrefix() const
 /*
  * Returns the root element of this element.
  *
- * @note The root element may not be an SBMLDocument element. For example,
+ * @note The root element may not be an CaDocument element. For example,
  * this element is the root element if this element doesn't have a parent
- * SBML_Lang object (i.e. mParentSBMLObject is NULL)
+ * OMEX object (i.e. mParentCaObject is NULL)
  */
-SBase*
-SBase::getRootElement()
+CaBase*
+CaBase::getRootElement()
 {
-  if (mSBML)
+  if (mCa)
   {
-    return mSBML;
+    return mCa;
   }
-  else if (mParentSBMLObject)
+  else if (mParentCaObject)
   {
-    return mParentSBMLObject->getRootElement();
+    return mParentCaObject->getRootElement();
   }
   else
   {
@@ -2446,12 +2478,12 @@ SBase::getRootElement()
  * of this method as well.
  */
 void
-SBase::writeAttributes (XMLOutputStream& stream) const
+CaBase::writeAttributes (XMLOutputStream& stream) const
 {
-  string sbmlPrefix    = getSBMLPrefix();
+  string omexPrefix    = getCaPrefix();
   if ( !mMetaId.empty() )
   {
-    stream.writeAttribute("metaid", sbmlPrefix, mMetaId);
+    stream.writeAttribute("metaid", omexPrefix, mMetaId);
   }
 
 }
@@ -2465,7 +2497,7 @@ SBase::writeAttributes (XMLOutputStream& stream) const
  *
  */
 void
-SBase::writeXMLNS (XMLOutputStream& stream) const
+CaBase::writeXMLNS (XMLOutputStream& stream) const
 {
   // do nothing.
 }
@@ -2473,21 +2505,21 @@ SBase::writeXMLNS (XMLOutputStream& stream) const
 
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
-  * Checks that an SBML_Lang ListOf element has been populated.
+  * Checks that an OMEX CaListOf element has been populated.
   * If a listOf element has been declared with no elements,
   * an error is logged.
   */
 void
-SBase::checkListOfPopulated(SBase* object)
+CaBase::checkCaListOfPopulated(CaBase* object)
 {
     // for now log the empty list
-  if (object->getTypeCode() == SBML_LIST_OF)
+  if (object->getTypeCode() == OMEX_LIST_OF)
   {
-    if (static_cast <ListOf*> (object)->size() == 0)
+    if (static_cast <CaListOf*> (object)->size() == 0)
     {
-      SBMLErrorCode_t error = EmptyListElement;
+      CaErrorCode_t error = EmptyListElement;
       ostringstream errMsg;
       errMsg << object->getElementName() << " cannot be empty.";
 
@@ -2497,33 +2529,33 @@ SBase::checkListOfPopulated(SBase* object)
 }
 /** @endcond */
 
-//This assumes that the parent of the object is of the type ListOf.  If this is not the case, it will need to be overridden.
-int SBase::removeFromParentAndDelete()
+//This assumes that the parent of the object is of the type CaListOf.  If this is not the case, it will need to be overridden.
+int CaBase::removeFromParentAndDelete()
 {
-  SBase* parent = getParentSBMLObject();
+  CaBase* parent = getParentCaObject();
 
-  if (parent==NULL) return LIBSBML_OPERATION_FAILED;
+  if (parent==NULL) return LIBCOMBINE_OPERATION_FAILED;
   
-  ListOf* parentList = static_cast<ListOf*>(parent);
+  CaListOf* parentList = static_cast<CaListOf*>(parent);
   
-  if (parentList == NULL) return LIBSBML_OPERATION_FAILED;
+  if (parentList == NULL) return LIBCOMBINE_OPERATION_FAILED;
   
   for (unsigned int i=0; i<parentList->size(); i++) 
   {
-    SBase* sibling = parentList->get(i);
+    CaBase* sibling = parentList->get(i);
     if (sibling == this) 
     {
       parentList->remove(i);
       delete this;
-      return LIBSBML_OPERATION_SUCCESS;
+      return LIBCOMBINE_OPERATION_SUCCESS;
     }
   }
-  return LIBSBML_OPERATION_FAILED;
+  return LIBCOMBINE_OPERATION_FAILED;
 }
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 const std::string
-SBase::checkMathMLNamespace(const XMLToken elem)
+CaBase::checkMathMLNamespace(const XMLToken elem)
 {
   std::string prefix = "";
   unsigned int match = 0;
@@ -2542,16 +2574,16 @@ SBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    if( mSBML->getNamespaces() != NULL)
+    if( mCa->getNamespaces() != NULL)
     /* check for implicit declaration */
     {
-      for (n = 0; n < mSBML->getNamespaces()->getLength(); n++)
+      for (n = 0; n < mCa->getNamespaces()->getLength(); n++)
       {
-        if (!strcmp(mSBML->getNamespaces()->getURI(n).c_str(),
+        if (!strcmp(mCa->getNamespaces()->getURI(n).c_str(),
                     "http://www.w3.org/1998/Math/MathML"))
         {
           match = 1;
-          prefix = mSBML->getNamespaces()->getPrefix(n);
+          prefix = mCa->getNamespaces()->getPrefix(n);
           break;
         }
       }
@@ -2567,15 +2599,15 @@ SBase::checkMathMLNamespace(const XMLToken elem)
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 void
-SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
+CaBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
                              const std::string& elementName,
                              const std::string& prefix)
 {
   //
   // checks if the given default namespace (if any) is a valid
-  // SBML_Lang namespace
+  // OMEX namespace
   //
   if (xmlns == NULL || xmlns->getLength() == 0)
     return;
@@ -2584,10 +2616,10 @@ SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   if (defaultURI.empty() || mURI == defaultURI)
     return;
 
-  // if this element (SBase derived) has notes or annotation elements,
-  // it is ok for them to be in the SBML_Lang namespace!
-  if ( SBMLNamespaces::isSBMLNamespace(defaultURI)
-       && !SBMLNamespaces::isSBMLNamespace(mURI)
+  // if this element (CaBase derived) has notes or annotation elements,
+  // it is ok for them to be in the OMEX namespace!
+  if ( CaNamespaces::isCaNamespace(defaultURI)
+       && !CaNamespaces::isCaNamespace(mURI)
        && (elementName == "notes" || elementName == "annotation"))
     return;
 
@@ -2601,11 +2633,11 @@ SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
 }
 
 /*
-  * Checks the annotation does not declare an sbml namespace.
-  * If the annotation declares an sbml namespace an error is logged.
+  * Checks the annotation does not declare an omex namespace.
+  * If the annotation declares an omex namespace an error is logged.
   */
 void
-SBase::checkAnnotation()
+CaBase::checkAnnotation()
 {
   unsigned int nNodes = 0;
   unsigned int match = 0;
@@ -2617,7 +2649,7 @@ SBase::checkAnnotation()
 
   //
   // checks if the given default namespace (if any) is a valid
-  // SBML_Lang namespace
+  // OMEX namespace
   //
   const XMLNamespaces &xmlns = mAnnotation->getNamespaces();
   checkDefaultNamespace(&xmlns,"annotation");
@@ -2652,7 +2684,7 @@ SBase::checkAnnotation()
       if (find(uri_list.begin(), uri_list.end(), uri)
                                                != uri_list.end())
       {
-        string msg = "An SBML_Lang <" + getElementName() + "> element ";
+        string msg = "An OMEX <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
         logError(DuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
@@ -2667,12 +2699,12 @@ SBase::checkAnnotation()
     if (topLevel.getNamespaces().getLength() == 0)
     {
       // not on actual element - is it explicit ??
-      if(mSBML != NULL && mSBML->getNamespaces() != NULL)
+      if(mCa != NULL && mCa->getNamespaces() != NULL)
       /* check for implicit declaration */
       {
-        for (n = 0; n < mSBML->getNamespaces()->getLength(); n++)
+        for (n = 0; n < mCa->getNamespaces()->getLength(); n++)
         {
-          if (!strcmp(mSBML->getNamespaces()->getPrefix(n).c_str(),
+          if (!strcmp(mCa->getNamespaces()->getPrefix(n).c_str(),
                         prefix.c_str()))
           {
             implicitNSdecl = true;
@@ -2687,24 +2719,24 @@ SBase::checkAnnotation()
         logError(MissingAnnotationNamespace);
       }
     }
-    // cannot declare sbml namespace
+    // cannot declare omex namespace
     while(!match && n < topLevel.getNamespaces().getLength())
     {
       match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(),
-                                          SPEC_NAMESPACE);
+                                          "http://identifiers.org/combine.specifications/omex-manifest");
       n++;
     }
-    string msg = "An SBML_Lang <" + getElementName() + "> element ";
+    string msg = "An OMEX <" + getElementName() + "> element ";
     if (match > 0)
     {
       msg += "uses a restricted namespace on an element in its child <annotation>.";
-      logError(SBMLNamespaceInAnnotation, getLevel(), getVersion(), msg);
+      logError(CaNamespaceInAnnotation, getLevel(), getVersion(), msg);
       break;
     }
 
     if (implicitNSdecl && prefix.empty())
     {
-      msg += "assumes the sbml namespace on an element in its child <annotation>.";
+      msg += "assumes the omex namespace on an element in its child <annotation>.";
       logError(MissingAnnotationNamespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
@@ -2713,14 +2745,14 @@ SBase::checkAnnotation()
 /** @endcond */
 
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Checks that the XHTML is valid.
  * If the xhtml does not conform to the specification of valid xhtml within
- * an sbml document, an error is logged.
+ * an omex document, an error is logged.
  */
 void
-SBase::checkXHTML(const XMLNode * xhtml)
+CaBase::checkXHTML(const XMLNode * xhtml)
 {
   if (xhtml == NULL) return;
 
@@ -2736,7 +2768,7 @@ SBase::checkXHTML(const XMLNode * xhtml)
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(SBMLUnknownError);
+    logError(CaUnknownError);
     return;
   }
 
@@ -2759,7 +2791,7 @@ SBase::checkXHTML(const XMLNode * xhtml)
     }
   }
 
-  XMLNamespaces* toplevelNS = (mSBML) ? mSBML->getNamespaces() : NULL;
+  XMLNamespaces* toplevelNS = (mCa) ? mCa->getNamespaces() : NULL;
 
   /*
   * namespace declaration is variable
@@ -2815,59 +2847,59 @@ SBase::checkXHTML(const XMLNode * xhtml)
   }
 }
 /** @endcond */
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /* default for components that have no required attributes */
 bool
-SBase::hasRequiredAttributes() const
+CaBase::hasRequiredAttributes() const
 {
   return true;
 }
 
 /* default for components that have no required elements */
 bool
-SBase::hasRequiredElements() const
+CaBase::hasRequiredElements() const
 {
   return true;
 }
 
 int
-SBase::checkCompatibility(const SBase * object) const
+CaBase::checkCompatibility(const CaBase * object) const
 {
   if (object == NULL)
   {
-    return LIBSBML_OPERATION_FAILED;
+    return LIBCOMBINE_OPERATION_FAILED;
   }
   else if (!(object->hasRequiredAttributes()) || !(object->hasRequiredElements()))
   {
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
   }
   else if (getLevel() != object->getLevel())
   {
-    return LIBSBML_LEVEL_MISMATCH;
+    return LIBCOMBINE_LEVEL_MISMATCH;
   }
   else if (getVersion() != object->getVersion())
   {
-    return LIBSBML_VERSION_MISMATCH;
+    return LIBCOMBINE_VERSION_MISMATCH;
   }
-  else if (this->matchesRequiredSBMLNamespacesForAddition(object) == false)
+  else if (this->matchesRequiredCaNamespacesForAddition(object) == false)
   {
-    return LIBSBML_NAMESPACES_MISMATCH;
+    return LIBCOMBINE_NAMESPACES_MISMATCH;
   }
   else
   {
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBCOMBINE_OPERATION_SUCCESS;
   }
 }
 
 /** @endcond */
 
-/** @cond doxygenLibsbmlInternal */
+/** @cond doxygenLibomexInternal */
 /*
  * Stores the location (line and column) and any XML namespaces (for
- * roundtripping) declared on this SBML_Lang (XML) element.
+ * roundtripping) declared on this OMEX (XML) element.
  */
 void
-SBase::setSBaseFields (const XMLToken& element)
+CaBase::setCaBaseFields (const XMLToken& element)
 {
   mLine   = element.getLine  ();
   mColumn = element.getColumn();
@@ -2888,18 +2920,18 @@ SBase::setSBaseFields (const XMLToken& element)
  * Sets the XML namespace to which this element belongs to.
  */
 int
-SBase::setElementNamespace(const std::string &uri)
+CaBase::setElementNamespace(const std::string &uri)
 {
   mURI = uri;
 
-  return LIBSBML_OPERATION_SUCCESS;
+  return LIBCOMBINE_OPERATION_SUCCESS;
 }
 
 /*
  * Gets the XML namespace to which this element belongs to.
  */
 const std::string&
-SBase::getElementNamespace() const
+CaBase::getElementNamespace() const
 {
   return mURI;
 }
@@ -2907,148 +2939,148 @@ SBase::getElementNamespace() const
 
 #endif /* __cplusplus */
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 const char *
-SBase_getMetaId (SBase_t *sb)
+CaBase_getMetaId (CaBase_t *sb)
 {
   return (sb != NULL && sb->isSetMetaId()) ? sb->getMetaId().c_str() : NULL;
 }
 
 
-LIBSBML_EXTERN
-const SBMLDocument_t *
-SBase_getSBMLDocument (SBase_t *sb)
+LIBCOMBINE_EXTERN
+const CaDocument_t *
+CaBase_getCaDocument (CaBase_t *sb)
 {
-  return (sb != NULL) ? sb->getSBMLDocument() : NULL;
+  return (sb != NULL) ? sb->getCaDocument() : NULL;
 }
 
 
-LIBSBML_EXTERN
-const SBase_t *
-SBase_getParentSBMLObject (SBase_t *sb)
+LIBCOMBINE_EXTERN
+const CaBase_t *
+CaBase_getParentCaObject (CaBase_t *sb)
 {
-  return (sb != NULL) ? sb->getParentSBMLObject() : NULL;
+  return (sb != NULL) ? sb->getParentCaObject() : NULL;
 }
 
 
-LIBSBML_EXTERN
-const SBase_t *
-SBase_getAncestorOfType (SBase_t *sb, int type)
+LIBCOMBINE_EXTERN
+const CaBase_t *
+CaBase_getAncestorOfType (CaBase_t *sb, int type)
 {
   return (sb != NULL) ? sb->getAncestorOfType(type) : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 unsigned int
-SBase_getLevel (const SBase_t *sb)
+CaBase_getLevel (const CaBase_t *sb)
 {
-  return (sb != NULL) ? sb->getLevel() : SBML_INT_MAX;
+  return (sb != NULL) ? sb->getLevel() : OMEX_INT_MAX;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 unsigned int
-SBase_getVersion (const SBase_t *sb)
+CaBase_getVersion (const CaBase_t *sb)
 {
-  return (sb != NULL) ? sb->getVersion() : SBML_INT_MAX;
+  return (sb != NULL) ? sb->getVersion() : OMEX_INT_MAX;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 XMLNode_t *
-SBase_getNotes (SBase_t *sb)
+CaBase_getNotes (CaBase_t *sb)
 {
   return (sb != NULL) ? sb->getNotes() : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 char*
-SBase_getNotesString (SBase_t *sb)
+CaBase_getNotesString (CaBase_t *sb)
 {
   return (sb != NULL && sb->isSetNotes()) ?
     safe_strdup(sb->getNotesString().c_str()) : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 XMLNode_t *
-SBase_getAnnotation (SBase_t *sb)
+CaBase_getAnnotation (CaBase_t *sb)
 {
   return (sb != NULL) ? sb->getAnnotation() : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 char*
-SBase_getAnnotationString (SBase_t *sb)
+CaBase_getAnnotationString (CaBase_t *sb)
 {
   return (sb != NULL && sb->isSetAnnotation()) ?
     safe_strdup(sb->getAnnotationString().c_str()) : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_isSetMetaId (const SBase_t *sb)
+CaBase_isSetMetaId (const CaBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetMetaId() ) : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_isSetNotes (const SBase_t *sb)
+CaBase_isSetNotes (const CaBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetNotes() ) : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_isSetAnnotation (const SBase_t *sb)
+CaBase_isSetAnnotation (const CaBase_t *sb)
 {
   return (sb != NULL) ? static_cast<int>( sb->isSetAnnotation() ) : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setMetaId (SBase_t *sb, const char *metaid)
+CaBase_setMetaId (CaBase_t *sb, const char *metaid)
 {
   if (sb != NULL)
     return (metaid == NULL) ? sb->unsetMetaId() : sb->setMetaId(metaid);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setNamespaces (SBase_t *sb, XMLNamespaces_t *xmlns)
+CaBase_setNamespaces (CaBase_t *sb, XMLNamespaces_t *xmlns)
 {
   if (sb != NULL)
     return sb->setNamespaces(xmlns);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setNotes (SBase_t *sb, XMLNode_t *notes)
+CaBase_setNotes (CaBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
     return sb->setNotes(notes);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setNotesString (SBase_t *sb, const char *notes)
+CaBase_setNotesString (CaBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
@@ -3062,13 +3094,13 @@ SBase_setNotesString (SBase_t *sb, const char *notes)
     }
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes)
+CaBase_setNotesStringAddMarkup (CaBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
@@ -3082,51 +3114,51 @@ SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes)
     }
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_appendNotes (SBase_t *sb, XMLNode_t *notes)
+CaBase_appendNotes (CaBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
     return sb->appendNotes(notes);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_appendNotesString (SBase_t *sb, const char *notes)
+CaBase_appendNotesString (CaBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
     if (notes != NULL)
       return sb->appendNotes(notes);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation)
+CaBase_setAnnotation (CaBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
     return sb->setAnnotation(annotation);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setAnnotationString (SBase_t *sb, const char *annotation)
+CaBase_setAnnotationString (CaBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
@@ -3140,55 +3172,55 @@ SBase_setAnnotationString (SBase_t *sb, const char *annotation)
     }
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation)
+CaBase_appendAnnotation (CaBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
     return sb->appendAnnotation(annotation);
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_appendAnnotationString (SBase_t *sb, const char *annotation)
+CaBase_appendAnnotationString (CaBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->appendAnnotation(annotation);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_removeTopLevelAnnotationElement (SBase_t *sb, const char *name)
+CaBase_removeTopLevelAnnotationElement (CaBase_t *sb, const char *name)
 {
   if (sb != NULL)
   {
     if (name != NULL)
       return sb->removeTopLevelAnnotationElement(name);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_removeTopLevelAnnotationElementWithURI (SBase_t *sb, const char *name,
+CaBase_removeTopLevelAnnotationElementWithURI (CaBase_t *sb, const char *name,
                                               const char *uri)
 {
   if (sb != NULL)
@@ -3196,156 +3228,156 @@ SBase_removeTopLevelAnnotationElementWithURI (SBase_t *sb, const char *name,
     if (name != NULL && uri != NULL)
       return sb->removeTopLevelAnnotationElement(name, uri);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_replaceTopLevelAnnotationElement (SBase_t *sb, XMLNode_t *annotation)
+CaBase_replaceTopLevelAnnotationElement (CaBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->replaceTopLevelAnnotationElement(annotation);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_replaceTopLevelAnnotationElementString (SBase_t *sb, const char *annotation)
+CaBase_replaceTopLevelAnnotationElementString (CaBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
       return sb->replaceTopLevelAnnotationElement(annotation);
     else
-      return LIBSBML_INVALID_OBJECT;
+      return LIBCOMBINE_INVALID_OBJECT;
   }
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_unsetMetaId (SBase_t *sb)
+CaBase_unsetMetaId (CaBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetMetaId();
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_unsetNotes (SBase_t *sb)
+CaBase_unsetNotes (CaBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetNotes();
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_unsetAnnotation (SBase_t *sb)
+CaBase_unsetAnnotation (CaBase_t *sb)
 {
   if (sb != NULL)
     return sb->unsetAnnotation();
   else
-    return LIBSBML_INVALID_OBJECT;
+    return LIBCOMBINE_INVALID_OBJECT;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 const char *
-SBase_getElementName (const SBase_t *sb)
+CaBase_getElementName (const CaBase_t *sb)
 {
   return (sb != NULL && !(sb->getElementName().empty())) ?
     sb->getElementName().c_str() : NULL;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 unsigned int
-SBase_getLine (const SBase_t *sb)
+CaBase_getLine (const CaBase_t *sb)
 {
   return (sb != NULL) ? sb->getLine() : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 unsigned int
-SBase_getColumn (const SBase_t *sb)
+CaBase_getColumn (const CaBase_t *sb)
 {
   return (sb != NULL) ? sb->getColumn() : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_hasValidLevelVersionNamespaceCombination(SBase_t *sb)
+CaBase_hasValidLevelVersionNamespaceCombination(CaBase_t *sb)
 {
   return (sb != NULL) ?
     static_cast <int> (sb->hasValidLevelVersionNamespaceCombination()) : 0;
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_setUserData(SBase_t* sb, void *userData)
+CaBase_setUserData(CaBase_t* sb, void *userData)
 {
-  if (sb == NULL) return LIBSBML_INVALID_OBJECT;
+  if (sb == NULL) return LIBCOMBINE_INVALID_OBJECT;
   return sb->setUserData(userData);
 }
 
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 void *
-SBase_getUserData(const SBase_t* sb)
+CaBase_getUserData(const CaBase_t* sb)
 {
   if (sb == NULL) return NULL;
   return sb->getUserData();
 }
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_isSetUserData(const SBase_t* sb)
+CaBase_isSetUserData(const CaBase_t* sb)
 {
   if (sb == NULL) return 0;
   return static_cast <int>(sb->isSetUserData());
 }
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 int
-SBase_unsetUserData(SBase_t* sb)
+CaBase_unsetUserData(CaBase_t* sb)
 {
-  if (sb == NULL) return LIBSBML_INVALID_OBJECT;
+  if (sb == NULL) return LIBCOMBINE_INVALID_OBJECT;
   return sb->unsetUserData();
 }
 
-LIBSBML_EXTERN
-SBase_t*
-SBase_getElementByMetaId(SBase_t* sb, const char* metaid)
+LIBCOMBINE_EXTERN
+CaBase_t*
+CaBase_getElementByMetaId(CaBase_t* sb, const char* metaid)
 {
   if (sb == NULL) return NULL;
   return sb->getElementByMetaId(metaid);
 }
 
-LIBSBML_EXTERN
+LIBCOMBINE_EXTERN
 List_t*
-SBase_getAllElements(SBase_t* sb)
+CaBase_getAllElements(CaBase_t* sb)
 {
   if (sb == NULL) return NULL;
   return sb->getAllElements();
@@ -3353,4 +3385,4 @@ SBase_getAllElements(SBase_t* sb)
 
 /** @endcond */
 
-LIBSBML_CPP_NAMESPACE_END
+LIBCOMBINE_CPP_NAMESPACE_END

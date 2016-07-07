@@ -7,7 +7,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 static
 const char* SBML_TYPE_CODE_STRINGS[] =
 {
-    "(Unknown SBML Type)"
+    "(Unknown SBML_Lang Type)"
   , "SBMLDocument"
 <insert_type_strings/>
   , "ListOf"

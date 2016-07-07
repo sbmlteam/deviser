@@ -46,10 +46,10 @@ public:
   /**
    * Creates a new ListOf object.
    *
-   * @param level the SBML Level; if not assigned, defaults to the
+   * @param level the SBML_Lang Level; if not assigned, defaults to the
    * value of SBML_DEFAULT_LEVEL.
    *
-   * @param version the Version within the SBML Level; if not assigned,
+   * @param version the Version within the SBML_Lang Level; if not assigned,
    * defaults to the value of SBML_DEFAULT_VERSION.
    */
   ListOf (unsigned int level   = SBML_DEFAULT_LEVEL,
@@ -59,7 +59,7 @@ public:
   /**
    * Creates a new ListOf with a given SBMLNamespaces object.
    *
-   * @param sbmlns the set of SBML namespaces that this ListOf should
+   * @param sbmlns the set of SBML_Lang namespaces that this ListOf should
    * contain.
    */
   ListOf (SBMLNamespaces* sbmlns);
@@ -323,7 +323,7 @@ public:
 
   /** @cond doxygenLibsbmlInternal */
   /**
-   * Sets the parent SBMLDocument of this SBML object.
+   * Sets the parent SBMLDocument of this SBML_Lang object.
    *
    * @param d the SBMLDocument that should become the parent of this
    * ListOf.
@@ -334,7 +334,7 @@ public:
 
   /** @cond doxygenLibsbmlInternal */
   /**
-   * Sets this SBML object to child SBML objects (if any).
+   * Sets this SBML_Lang object to child SBML_Lang objects (if any).
    * (Creates a child-parent relationship by the parent)
    *
    * Subclasses must override this function if they define
@@ -357,12 +357,12 @@ public:
    * 
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SBML type code for this object:
+   * @return the SBML_Lang type code for this object:
    * @sbmlconstant{SBML_LIST_OF, SBMLTypeCode_t} (default).
    *
    * @note The various ListOf classes mostly differ from each other in what they
    * contain.  Hence, one must call getItemTypeCode() to fully determine the
-   * class of this SBML object.
+   * class of this SBML_Lang object.
    *
    * @see getItemTypeCode()
    * @see getElementName()
@@ -374,11 +374,11 @@ public:
    * Get the type code of the objects contained in this ListOf.
    *
    * Classes that inherit from the ListOf class should override this method
-   * to return the SBML type code for the objects contained in this ListOf.
+   * to return the SBML_Lang type code for the objects contained in this ListOf.
    * If they do not, this method will return
    * @sbmlconstant{SBML_UNKNOWN, SBMLTypeCode_t}
    *
-   * @return The ListOf base class contains no SBML objects, and therefore
+   * @return The ListOf base class contains no SBML_Lang objects, and therefore
    * this method returns @sbmlconstant{SBML_UNKNOWN, SBMLTypeCode_t}.
    *
    * @see getElementName()
@@ -399,7 +399,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
   /**
    * Subclasses should override this method to write out their contained
-   * SBML objects as XML elements.  Be sure to call your parents
+   * SBML_Lang objects as XML elements.  Be sure to call your parents
    * implementation of this method as well.
    */
   virtual void writeElements (XMLOutputStream& stream) const;
@@ -461,10 +461,10 @@ BEGIN_C_DECLS
 /**
  * Creates a new instance of a ListOf_t structure.
  *
- * @param level an unsigned int, the SBML Level to assign to this
+ * @param level an unsigned int, the SBML_Lang Level to assign to this
  * ListOf_t structure.
  *
- * @param version an unsigned int, the SBML Version to assign to this
+ * @param version an unsigned int, the SBML_Lang Version to assign to this
  * ListOf_t structure.
  *
  * @return a pointer to the newly-created ListOf_t structure.

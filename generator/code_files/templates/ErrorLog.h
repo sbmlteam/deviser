@@ -133,9 +133,9 @@ public:
    *
    * @param errorId an unsigned int, the identification number of the error.
    *
-   * @param level an unsigned int, the SBML Level
+   * @param level an unsigned int, the SBML_Lang Level
    *
-   * @param version an unsigned int, the SBML Level's Version
+   * @param version an unsigned int, the SBML_Lang Level's Version
    * 
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SBMLError,

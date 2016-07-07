@@ -13,27 +13,27 @@ BEGIN_C_DECLS
 
 /**
  * @enum SBMLErrorCode_t
- * Codes for all SBML-level errors and warnings from the core specification.
+ * Codes for all SBML_Lang-level errors and warnings from the core specification.
  */
 typedef enum
 {
   SBMLUnknownError                      = 10000 /*!< Encountered unknown internal libSBML error. */
 , NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
 , UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML XML schema. */
+, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML_Lang XML schema. */
 , InvalidMathElement                    = 10201
 , MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
 , DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
-, SBMLNamespaceInAnnotation             = 10403 /*!< The SBML XML namespace cannot be used in an Annotation object. */
-, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML object. */
+, SBMLNamespaceInAnnotation             = 10403 /*!< The SBML_Lang XML namespace cannot be used in an Annotation object. */
+, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML_Lang object. */
 , AnnotationNotElement                  = 10405
 , NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
 , NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
 , NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
 , InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
-, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML object. */
+, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML_Lang object. */
 <add_specific_errors/>
-, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SBML Core namespace. */
+, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SBML_Lang Core namespace. */
 , SBMLCodesUpperBound                   = 99999 /*!< Upper boundary of libSBML-specific diagnostic codes. */
 } SBMLErrorCode_t;
 
@@ -45,7 +45,7 @@ typedef enum
  * Note that these are distinct from XMLError's category codes.  User
  * programs receiving an SBMLError object can use this distinction to
  * check whether the error represents a low-level XML problem or an
- * SBML problem.
+ * SBML_Lang problem.
  *
  * @see #XMLErrorCategory_t
  */
@@ -58,10 +58,10 @@ typedef enum
 </sbml>
 
     LIBSBML_CAT_SBML = (LIBSBML_CAT_XML + 1)
-    /*!< General SBML error  not falling into another category below. */
+    /*!< General SBML_Lang error  not falling into another category below. */
 
   , LIBSBML_CAT_GENERAL_CONSISTENCY
-    /*!< Category of errors that can occur while validating general SBML
+    /*!< Category of errors that can occur while validating general SBML_Lang
      * constructs. */
 
   , LIBSBML_CAT_IDENTIFIER_CONSISTENCY
@@ -70,15 +70,15 @@ typedef enum
 
   , LIBSBML_CAT_MATHML_CONSISTENCY
     /*!< Category of errors that can occur while validating MathML formulas
-     * in a model.  With respect to the SBML specification, these concern
+     * in a model.  With respect to the SBML_Lang specification, these concern
      * failures in applying the validation rules numbered 102xx in the
      * Level&nbsp;2 Versions&nbsp;2&ndash;4
      * and Level&nbsp;3 Version&nbsp;1 specifications. */
 
   , LIBSBML_CAT_INTERNAL_CONSISTENCY
     /*!< Category of errors that can occur while validating libSBML's
-     * internal representation of SBML constructs. (These are tests
-     * performed by libSBML and do not have equivalent SBML validation
+     * internal representation of SBML_Lang constructs. (These are tests
+     * performed by libSBML and do not have equivalent SBML_Lang validation
      * rules.)  */
 
 } SBMLErrorCategory_t;
@@ -110,12 +110,12 @@ typedef enum
 
     LIBSBML_SEV_SCHEMA_ERROR    = (LIBSBML_SEV_FATAL + 1)
     /*!< The XML content does not conform to
-     * the relevant version of the SBML XML
-     * Schema.  The content is not valid SBML. */
+     * the relevant version of the SBML_Lang XML
+     * Schema.  The content is not valid SBML_Lang. */
 
   , LIBSBML_SEV_GENERAL_WARNING
     /*!< The XML content is invalid for some
-     * levels/versions of SBML, and while it
+     * levels/versions of SBML_Lang, and while it
      * may be valid in others, it is something
      * that is best avoided anyway.  LibSBML
      * will issue warnings in those cases it
@@ -124,7 +124,7 @@ typedef enum
   , LIBSBML_SEV_NOT_APPLICABLE
     /*!< This error code is only a placeholder
      * for errors that have relevance to some
-     * versions of SBML but not others. */
+     * versions of SBML_Lang but not others. */
 
   /** @endcond **/
 } SBMLErrorSeverity_t;
@@ -141,10 +141,10 @@ class LIBSBML_EXTERN SBMLError : public XMLError
 public:
 
   /**
-   * Creates a new SBMLError to report that something occurred during SBML
+   * Creates a new SBMLError to report that something occurred during SBML_Lang
    * processing.
    *
-   * When a libSBML operation on SBML content results in a warning, error
+   * When a libSBML operation on SBML_Lang content results in a warning, error
    * or other diagnostic, the issue is reported as an SBMLError object.
    * SBMLError objects have identification numbers to indicate the nature
    * of the exception.  @if clike These numbers are drawn from
@@ -162,7 +162,7 @@ public:
    * @p errorId to this constructor @em can be (but does not have to be) a
    * value from this @if clike enumeration. If it @em is a value
    * from <a class="el" href="#SBMLErrorCode_t">SBMLErrorCode_t</a>, the
-   * SBMLError class assumes the error is a low-level system or SBML layer
+   * SBMLError class assumes the error is a low-level system or SBML_Lang layer
    * error and <em>prepends</em> a built-in, predefined error message to
    * any string passed in the argument @p details to this constructor.  In
    * addition, all <a class="el"
@@ -173,7 +173,7 @@ public:
    * href="#SBMLErrorCategory_t">SBMLErrorCategory_t</a>,
    * respectively. @else set of constants.  If it @em
    * is one of the predefined error identifiers, the SBMLError class
-   * assumes the error is a low-level system or SBML layer error and
+   * assumes the error is a low-level system or SBML_Lang layer error and
    * <em>prepends</em> a built-in, predefined error message to any string
    * passed in the argument @p details to this constructor.  In addition,
    * all the predefined error identifiers have associated values for the
@@ -214,18 +214,18 @@ public:
    * respectively.  If the value of @p errorId is one of the standard error
    * codes, callers do not need to fill in @p severity and @p category in a
    * call to this constructor.  Conversely, if @p errorId is not an existing
-   * SBML-level error code, callers can use other values for @p severity and
+   * SBML_Lang-level error code, callers can use other values for @p severity and
    * @p category. @endif@~
    *
    * Please see the top of the documentation for SBMLError for a longer
    * discussion of the possible error codes, their meanings, and their
-   * applicability to different combinations of Level+Version of SBML.
+   * applicability to different combinations of Level+Version of SBML_Lang.
    *
    * @param errorId an unsigned int, the identification number of the error.
    *
-   * @param level the SBML Level of the SBML model
+   * @param level the SBML_Lang Level of the SBML_Lang model
    *
-   * @param version the SBML Version within the Level of the SBML model
+   * @param version the SBML_Lang Version within the Level of the SBML_Lang model
    *
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SBMLError,

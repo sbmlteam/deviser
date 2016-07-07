@@ -34,11 +34,11 @@ class LIBSBML_EXTERN SBMLNamespaces
 public:
 
   /**
-   * Creates a new SBMLNamespaces object corresponding to the given SBML
+   * Creates a new SBMLNamespaces object corresponding to the given SBML_Lang
    * @p level and @p version.
    *
-   * @param level the SBML level
-   * @param version the SBML version
+   * @param level the SBML_Lang level
+   * @param version the SBML_Lang version
    * 
    */
   SBMLNamespaces(unsigned int level = SBML_DEFAULT_LEVEL, 
@@ -74,14 +74,14 @@ public:
 
 
   /**
-   * Returns a string representing the SBML XML namespace for the 
-   * given @p level and @p version of SBML.
+   * Returns a string representing the SBML_Lang XML namespace for the 
+   * given @p level and @p version of SBML_Lang.
    *
-   * @param level the SBML level
-   * @param version the SBML version
+   * @param level the SBML_Lang level
+   * @param version the SBML_Lang version
    *
-   * @return a string representing the SBML namespace that reflects the
-   * SBML Level and Version specified.
+   * @return a string representing the SBML_Lang namespace that reflects the
+   * SBML_Lang Level and Version specified.
    */
   static std::string getSBMLNamespaceURI(unsigned int level,
                                          unsigned int version);
@@ -91,7 +91,7 @@ public:
    * Returns a list of all supported SBMLNamespaces in this version of 
    * libsbml. 
    * 
-   * @return a list with supported SBML namespaces. 
+   * @return a list with supported SBML_Lang namespaces. 
    */
   static const List* getSupportedNamespaces();
 
@@ -108,43 +108,43 @@ public:
 
 
   /**
-   * Returns a string representing the SBML XML namespace of this
+   * Returns a string representing the SBML_Lang XML namespace of this
    * object.
    *
-   * @return a string representing the SBML namespace that reflects the
-   * SBML Level and Version of this object.
+   * @return a string representing the SBML_Lang namespace that reflects the
+   * SBML_Lang Level and Version of this object.
    */
   virtual std::string getURI() const;
 
 
   /**
-   * Get the SBML Level of this SBMLNamespaces object.
+   * Get the SBML_Lang Level of this SBMLNamespaces object.
    *
-   * @return the SBML Level of this SBMLNamespaces object.
+   * @return the SBML_Lang Level of this SBMLNamespaces object.
    */
   unsigned int getLevel();
 
 
   /**
-   * Get the SBML Level of this SBMLNamespaces object.
+   * Get the SBML_Lang Level of this SBMLNamespaces object.
    *
-   * @return the SBML Level of this SBMLNamespaces object.
+   * @return the SBML_Lang Level of this SBMLNamespaces object.
    */
   unsigned int getLevel() const;
 
 
   /**
-   * Get the SBML Version of this SBMLNamespaces object.
+   * Get the SBML_Lang Version of this SBMLNamespaces object.
    *
-   * @return the SBML Version of this SBMLNamespaces object.
+   * @return the SBML_Lang Version of this SBMLNamespaces object.
    */
   unsigned int getVersion();
 
 
   /**
-   * Get the SBML Version of this SBMLNamespaces object.
+   * Get the SBML_Lang Version of this SBMLNamespaces object.
    *
-   * @return the SBML Version of this SBMLNamespaces object.
+   * @return the SBML_Lang Version of this SBMLNamespaces object.
    */
   unsigned int getVersion() const;
 
@@ -208,12 +208,12 @@ public:
 
 
   /**
-   * Predicate returning @c true if the given URL is one of SBML XML
+   * Predicate returning @c true if the given URL is one of SBML_Lang XML
    * namespaces.
    *
    * @param uri the URI of namespace
    *
-   * @return @c true if the "uri" is one of SBML namespaces, @c false otherwise.
+   * @return @c true if the "uri" is one of SBML_Lang namespaces, @c false otherwise.
    */
   static bool isSBMLNamespace(const std::string& uri);
 
@@ -259,26 +259,26 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 /**
- * Creates a new SBMLNamespaces_t structure corresponding to the given SBML
+ * Creates a new SBMLNamespaces_t structure corresponding to the given SBML_Lang
  * @p level and @p version.
  *
- * SBMLNamespaces_t structures are used in libSBML to communicate SBML Level
+ * SBMLNamespaces_t structures are used in libSBML to communicate SBML_Lang Level
  * and Version data between constructors and other methods.  The
  * SBMLNamespaces_t structure class tracks 3-tuples (triples) consisting of
- * SBML Level, Version, and the corresponding SBML XML namespace.  Most
- * constructors for SBML structures in libSBML take a SBMLNamespaces_t structure
+ * SBML_Lang Level, Version, and the corresponding SBML_Lang XML namespace.  Most
+ * constructors for SBML_Lang structures in libSBML take a SBMLNamespaces_t structure
  * as an argument, thereby allowing the constructor to produce the proper
  * combination of attributes and other internal data structures for the
- * given SBML Level and Version.
+ * given SBML_Lang Level and Version.
  *
- * The plural name "SBMLNamespaces" is not a mistake, because in SBML
+ * The plural name "SBMLNamespaces" is not a mistake, because in SBML_Lang
  * Level&nbsp;3, structures may have extensions added by Level&nbsp;3
  * packages used by a given model; however, until the introduction of
- * SBML Level&nbsp;3, the SBMLNamespaces_t structure only records one SBML
+ * SBML_Lang Level&nbsp;3, the SBMLNamespaces_t structure only records one SBML_Lang
  * Level/Version/namespace combination at a time.
  *
- * @param level the SBML level
- * @param version the SBML version
+ * @param level the SBML_Lang level
+ * @param version the SBML_Lang version
  *
  * @return SBMLNamespaces_t structure created
  *
@@ -304,11 +304,11 @@ SBMLNamespaces_free (SBMLNamespaces_t *ns);
 
 
 /**
- * Get the SBML Level of this SBMLNamespaces_t structure.
+ * Get the SBML_Lang Level of this SBMLNamespaces_t structure.
  *
  * @param sbmlns the SBMLNamespaces_t structure to query
  *
- * @return the SBML Level of this SBMLNamespaces_t structure.
+ * @return the SBML_Lang Level of this SBMLNamespaces_t structure.
  *
  * @memberof SBMLNamespaces_t
  */
@@ -318,11 +318,11 @@ SBMLNamespaces_getLevel(SBMLNamespaces_t *sbmlns);
 
 
 /**
- * Get the SBML Version of this SBMLNamespaces_t structure.
+ * Get the SBML_Lang Version of this SBMLNamespaces_t structure.
  *
  * @param sbmlns the SBMLNamespaces_t structure to query
  *
- * @return the SBML Version of this SBMLNamespaces_t structure.
+ * @return the SBML_Lang Version of this SBMLNamespaces_t structure.
  *
  * @memberof SBMLNamespaces_t
  */
@@ -332,7 +332,7 @@ SBMLNamespaces_getVersion(SBMLNamespaces_t *sbmlns);
 
 
 /**
- * Get the SBML Version of this SBMLNamespaces_t structure.
+ * Get the SBML_Lang Version of this SBMLNamespaces_t structure.
  *
  * @param sbmlns the SBMLNamespaces_t structure to query
  *
@@ -346,14 +346,14 @@ SBMLNamespaces_getNamespaces(SBMLNamespaces_t *sbmlns);
 
 
 /**
- * Returns a string representing the SBML XML namespace for the 
- * given @p level and @p version of SBML.
+ * Returns a string representing the SBML_Lang XML namespace for the 
+ * given @p level and @p version of SBML_Lang.
  *
- * @param level the SBML level
- * @param version the SBML version
+ * @param level the SBML_Lang level
+ * @param version the SBML_Lang version
  *
- * @return a string representing the SBML namespace that reflects the
- * SBML Level and Version specified.
+ * @return a string representing the SBML_Lang namespace that reflects the
+ * SBML_Lang Level and Version specified.
  *
  * @memberof SBMLNamespaces_t
  */
@@ -378,11 +378,11 @@ SBMLNamespaces_addNamespaces(SBMLNamespaces_t *sbmlns,
 
 
 /**
- * Returns an array of SBML Namespaces supported by this version of 
+ * Returns an array of SBML_Lang Namespaces supported by this version of 
  * LibSBML. 
  *
  * @param length an integer holding the length of the array
- * @return an array of SBML namespaces, or @c NULL if length is @c NULL. The array 
+ * @return an array of SBML_Lang namespaces, or @c NULL if length is @c NULL. The array 
  *         has to be freed by the caller.
  *
  * @memberof SBMLNamespaces_t

@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygenLibsedmlInternal **/
 /** 
- * Helper function for SedError().  Takes an index, Sed level and version,
+ * Helper function for SedError().  Takes an index, SEDML level and version,
  * and returns the appropriate field for the severity code out of the
    sedmlErrorTable entry.
  */
@@ -131,9 +131,9 @@ static struct sedmlCategoryString {
   const char * catString;
 } sedmlCategoryStringTable[] = 
 {
-  { LIBSEDML_CAT_SEDML,                   "General Sed conformance"    },
-  { LIBSEDML_CAT_GENERAL_CONSISTENCY,	"Sed component consistency"  },
-  { LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,	"Sed identifier consistency" },
+  { LIBSEDML_CAT_SEDML,                   "General SEDML conformance"    },
+  { LIBSEDML_CAT_GENERAL_CONSISTENCY,	"SEDML component consistency"  },
+  { LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,	"SEDML identifier consistency" },
   { LIBSEDML_CAT_MATHML_CONSISTENCY,     "MathML consistency"          },
   { LIBSEDML_CAT_INTERNAL_CONSISTENCY,   "Internal consistency"        }
 };
@@ -196,7 +196,7 @@ SedError::SedError (  const unsigned int errorId
     if ( index == 0 && mErrorId != SedUnknownError )
     {
       // The id is in the range of error numbers that are supposed to be in
-      // the Sed layer, but it's NOT in our table. This is an internal error.
+      // the SEDML layer, but it's NOT in our table. This is an internal error.
       // Unfortunately, we don't have an error log or anywhere to report it
       // except the measure of last resort: the standard error output.
     
@@ -233,10 +233,10 @@ SedError::SedError (  const unsigned int errorId
     {
 
       mSeverity = LIBSEDML_SEV_WARNING;
-      newMsg << "[Although Sed Level " << level
+      newMsg << "[Although SEDML Level " << level
              << " Version " << version << " does not explicitly define the "
              << "following as an error, other Levels and/or Versions "
-             << "of Sed do.] " << endl;
+             << "of SEDML do.] " << endl;
     }
 
     // Finish updating the (full) error message.
@@ -291,7 +291,7 @@ SedError::SedError (  const unsigned int errorId
   }
 
 
-   // It's not an error code in the Sed layer, so assume the caller has
+   // It's not an error code in the SEDML layer, so assume the caller has
   // filled in all the relevant additional data.  (If they didn't, the
   // following merely assigns the defaults.)
   mMessage        = details;

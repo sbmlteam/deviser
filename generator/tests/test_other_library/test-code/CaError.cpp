@@ -1,15 +1,47 @@
+/**
+ * @file CaError.cpp
+ * @brief Implementation of the CaError class.
+ * @author DEVISER
+ *
+ * <!--------------------------------------------------------------------------
+ * This file is part of libSBML. Please visit http://sbml.org for more
+ * information about SBML, and the latest version of libSBML.
+ *
+ * Copyright (C) 2013-2016 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ * 3. University of Heidelberg, Heidelberg, Germany
+ *
+ * Copyright (C) 2009-2013 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ *
+ * Copyright (C) 2006-2008 by the California Institute of Technology,
+ * Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. Japan Science and Technology Agency, Japan
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation. A copy of the license agreement is provided in the
+ * file named "LICENSE.txt" included with this software distribution and also
+ * available online as http://sbml.org/software/libsbml/license.html
+ * ------------------------------------------------------------------------ -->
+ */
+
+
 
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
-<verbatim>
 #include <sbml/xml/XMLError.h>
-</verbatim>
 
-#include <sbml/SBMLError.h>
-#include <sbml/SBMLErrorTable.h>
+#include <omex/CaError.h>
+#include <omex/CaErrorTable.h>
 
 
 /** @cond doxygenIgnored */
@@ -18,15 +50,15 @@ using namespace std;
 
 /** @endcond */
 
-LIBSBML_CPP_NAMESPACE_BEGIN
+LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 #ifdef __cplusplus
 
-/** @cond doxygenLibsbmlInternal **/
+/** @cond doxygenLibomexInternal **/
 /** 
- * Helper function for SBMLError().  Takes an index, SBML_Lang level and version,
+ * Helper function for CaError().  Takes an index, OMEX level and version,
  * and returns the appropriate field for the severity code out of the
-   language_ErrorTable entry.
+   omexErrorTable entry.
  */
 static const unsigned int
 getSeverityForEntry(unsigned int index,
@@ -39,12 +71,12 @@ getSeverityForEntry(unsigned int index,
     {
     case 1:
     default:
-      return language_ErrorTable[index].l1v1_severity;
+      return omexErrorTable[index].l1v1_severity;
     }
   }
   else
   {
-    return language_ErrorTable[index].l1v1_severity;
+    return omexErrorTable[index].l1v1_severity;
   }
 }
 
@@ -52,13 +84,13 @@ getSeverityForEntry(unsigned int index,
 /*
  * @return the severity as a string for the given @n code.
  */
-std::string SBMLError::stringForSeverity(unsigned int code) const
+std::string CaError::stringForSeverity(unsigned int code) const
 {
   /* it should never happen that an error ends up with a severity
    * that is not in the XMLSeverity_t enumeration
    * but just in case:
    */
-  if (code < LIBSBML_SEV_SCHEMA_ERROR)
+  if (code < LIBCOMBINE_SEV_SCHEMA_ERROR)
   {
     return XMLError::stringForSeverity(code);
   }
@@ -66,15 +98,15 @@ std::string SBMLError::stringForSeverity(unsigned int code) const
   {
     switch (code)
     {
-      case LIBSBML_SEV_SCHEMA_ERROR:
+      case LIBCOMBINE_SEV_SCHEMA_ERROR:
         return "Schema error";
         break;
 
-      case LIBSBML_SEV_GENERAL_WARNING:
+      case LIBCOMBINE_SEV_GENERAL_WARNING:
         return "General warning";
         break;
 
-      case LIBSBML_SEV_NOT_APPLICABLE:
+      case LIBCOMBINE_SEV_NOT_APPLICABLE:
         return "Not applicable";
         break;
 
@@ -86,38 +118,38 @@ std::string SBMLError::stringForSeverity(unsigned int code) const
 }
 
 /*
- * Table of strings corresponding to the values from SBMLErrorCategory_t.
+ * Table of strings corresponding to the values from CaErrorCategory_t.
  * The enumeration starts at a number higher than 0, so each entry is keyed
  * by its enum value.
  *
  * A similar table for severity strings is currently unnecessary because
- * libSBML never returns anything more than the XMLSeverityCode_t values.
+ * libCombine never returns anything more than the XMLSeverityCode_t values.
  */
-static struct sbmlCategoryString {
+static struct omexCategoryString {
   unsigned int catCode;
   const char * catString;
-} sbmlCategoryStringTable[] = 
+} omexCategoryStringTable[] = 
 {
-  { LIBSBML_CAT_SBML,                   "General SBML_Lang conformance"    },
-  { LIBSBML_CAT_GENERAL_CONSISTENCY,	"SBML_Lang component consistency"  },
-  { LIBSBML_CAT_IDENTIFIER_CONSISTENCY,	"SBML_Lang identifier consistency" },
-  { LIBSBML_CAT_MATHML_CONSISTENCY,     "MathML consistency"          },
-  { LIBSBML_CAT_INTERNAL_CONSISTENCY,   "Internal consistency"        }
+  { LIBCOMBINE_CAT_OMEX,                   "General OMEX conformance"    },
+  { LIBCOMBINE_CAT_GENERAL_CONSISTENCY,	"OMEX component consistency"  },
+  { LIBCOMBINE_CAT_IDENTIFIER_CONSISTENCY,	"OMEX identifier consistency" },
+  { LIBCOMBINE_CAT_MATHML_CONSISTENCY,     "MathML consistency"          },
+  { LIBCOMBINE_CAT_INTERNAL_CONSISTENCY,   "Internal consistency"        }
 };
 
-static unsigned int sbmlCategoryStringTableSize
-  = sizeof(sbmlCategoryStringTable)/sizeof(sbmlCategoryStringTable[0]);
+static unsigned int omexCategoryStringTableSize
+  = sizeof(omexCategoryStringTable)/sizeof(omexCategoryStringTable[0]);
 
 /*
  * @return the category as a string for the given @n code.
  */
-std::string SBMLError::stringForCategory(unsigned int code) const
+std::string CaError::stringForCategory(unsigned int code) const
 {
-  if ( code >= LIBSBML_CAT_SBML )
+  if ( code >= LIBCOMBINE_CAT_OMEX )
   {
-    for ( unsigned int i = 0; i < sbmlCategoryStringTableSize; i++ )
-      if ( sbmlCategoryStringTable[i].catCode == code )
-        return sbmlCategoryStringTable[i].catString;
+    for ( unsigned int i = 0; i < omexCategoryStringTableSize; i++ )
+      if ( omexCategoryStringTable[i].catCode == code )
+        return omexCategoryStringTable[i].catString;
   }
 
   return XMLError::stringForCategory(code);
@@ -125,7 +157,7 @@ std::string SBMLError::stringForCategory(unsigned int code) const
 /** @endcond **/
 
 
-SBMLError::SBMLError (  const unsigned int errorId
+CaError::CaError (  const unsigned int errorId
                       , const unsigned int level
                       , const unsigned int version 
                       , const std::string& details
@@ -146,24 +178,24 @@ SBMLError::SBMLError (  const unsigned int errorId
     return;
   }
   else if ( mErrorId > XMLErrorCodesUpperBound
-            && mErrorId < SBMLCodesUpperBound )
+            && mErrorId < CaCodesUpperBound )
   {
-    unsigned int tableSize = sizeof(language_ErrorTable)/sizeof(language_ErrorTable[0]);
+    unsigned int tableSize = sizeof(omexErrorTable)/sizeof(omexErrorTable[0]);
     unsigned int index = 0;
 
     for ( unsigned int i = 0; i < tableSize; i++ )
     {
-      if ( mErrorId == language_ErrorTable[i].code )
+      if ( mErrorId == omexErrorTable[i].code )
       {
         index = i;
         break;
       }
     }
 
-    if ( index == 0 && mErrorId != SBMLUnknownError )
+    if ( index == 0 && mErrorId != CaUnknownError )
     {
       // The id is in the range of error numbers that are supposed to be in
-      // the SBML_Lang layer, but it's NOT in our table. This is an internal error.
+      // the OMEX layer, but it's NOT in our table. This is an internal error.
       // Unfortunately, we don't have an error log or anywhere to report it
       // except the measure of last resort: the standard error output.
     
@@ -178,44 +210,44 @@ SBMLError::SBMLError (  const unsigned int errorId
     }
 
     // The rest of this block massages the results to account for how some
-    // internal bookkeeping is done in libSBML 3, and also to provide
+    // internal bookkeeping is done in libCombine 3, and also to provide
     // additional info in the messages.
 
-    mCategory     = language_ErrorTable[index].category;
-    mShortMessage = language_ErrorTable[index].shortMessage;
+    mCategory     = omexErrorTable[index].category;
+    mShortMessage = omexErrorTable[index].shortMessage;
 
     ostringstream newMsg;
     mSeverity = getSeverityForEntry(index, level, version);
 
     if (mValidError == false)
-      mSeverity = LIBSBML_SEV_WARNING;
+      mSeverity = LIBCOMBINE_SEV_WARNING;
 
-    if (mSeverity == LIBSBML_SEV_SCHEMA_ERROR)
+    if (mSeverity == LIBCOMBINE_SEV_SCHEMA_ERROR)
     {
       mErrorId  = NotSchemaConformant;
-      mSeverity = LIBSBML_SEV_ERROR;
-      newMsg << language_ErrorTable[3].message << " "; // FIXME
+      mSeverity = LIBCOMBINE_SEV_ERROR;
+      newMsg << omexErrorTable[3].message << " "; // FIXME
     }
-    else if (mSeverity == LIBSBML_SEV_GENERAL_WARNING)
+    else if (mSeverity == LIBCOMBINE_SEV_GENERAL_WARNING)
     {
 
-      mSeverity = LIBSBML_SEV_WARNING;
-      newMsg << "[Although SBML_Lang Level " << level
+      mSeverity = LIBCOMBINE_SEV_WARNING;
+      newMsg << "[Although OMEX Level " << level
              << " Version " << version << " does not explicitly define the "
              << "following as an error, other Levels and/or Versions "
-             << "of SBML_Lang do.] " << endl;
+             << "of OMEX do.] " << endl;
     }
 
     // Finish updating the (full) error message.
 
-    if (!((string)language_ErrorTable[index].message).empty()) {
-      newMsg << language_ErrorTable[index].message << endl;
+    if (!((string)omexErrorTable[index].message).empty()) {
+      newMsg << omexErrorTable[index].message << endl;
     }
 
     // look for individual references
     // if the code for this error does not yet exist skip
 
-    if (language_ErrorTable[index].reference.ref_l1v1 != NULL)
+    if (omexErrorTable[index].reference.ref_l1v1 != NULL)
     {
 
       std::string ref;
@@ -227,7 +259,7 @@ SBMLError::SBMLError (  const unsigned int errorId
         {
         case 1:
         default:
-          ref = language_ErrorTable[index].reference.ref_l1v1;
+          ref = omexErrorTable[index].reference.ref_l1v1;
         break;
         }
        break;
@@ -258,7 +290,7 @@ SBMLError::SBMLError (  const unsigned int errorId
   }
 
 
-   // It's not an error code in the SBML_Lang layer, so assume the caller has
+   // It's not an error code in the OMEX layer, so assume the caller has
   // filled in all the relevant additional data.  (If they didn't, the
   // following merely assigns the defaults.)
   mMessage        = details;
@@ -272,41 +304,41 @@ SBMLError::SBMLError (  const unsigned int errorId
 /*
  * Copy Constructor
  */
-SBMLError::SBMLError(const SBMLError& orig) :
+CaError::CaError(const CaError& orig) :
  XMLError(orig)
 {
 }
 
 
  /*
- * Destroys this SBMLError.
+ * Destroys this CaError.
  */
-SBMLError::~SBMLError ()
+CaError::~CaError ()
 {
 }
 
 
-/** @cond doxygenLibsbmlInternal **/
+/** @cond doxygenLibomexInternal **/
 /*
  * clone function
  */
-SBMLError* 
-SBMLError::clone() const
+CaError* 
+CaError::clone() const
 {
-  return new SBMLError(*this);
+  return new CaError(*this);
 }
 /** @endcond **/
 
 
-/** @cond doxygenLibsbmlInternal **/
+/** @cond doxygenLibomexInternal **/
 /*
- * Outputs this SBMLError to stream in the following format (and followed by
+ * Outputs this CaError to stream in the following format (and followed by
  * a newline):
  *
  *   line: (error_id [severity]) message
  */
 void
-SBMLError::print(ostream& s) const
+CaError::print(ostream& s) const
 {
     s << "line " << getLine() << ": ("
       << setfill('0') << setw(5) << getErrorId()
@@ -318,5 +350,5 @@ SBMLError::print(ostream& s) const
 
 #endif /* __cplusplus */
 
-LIBSBML_CPP_NAMESPACE_END
+LIBCOMBINE_CPP_NAMESPACE_END
 

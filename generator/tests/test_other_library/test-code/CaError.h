@@ -1,28 +1,27 @@
 /**
- * @file SedError.h
- * @brief Definition of the SedError class.
+ * @file CaError.h
+ * @brief Definition of the CaError class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
- * This file is part of libSEDML. Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on
- * github: https://github.com/fbergmann/libSEDML/
- * 
-
- * Copyright (c) 2013-2016, Frank T. Bergmann
- * All rights reserved.
- * 
-
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
-
- * 1. Redistributions of source code must retain the above copyright notice,
- * this
- * list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
+ * This file is part of libSBML. Please visit http://sbml.org for more
+ * information about SBML, and the latest version of libSBML.
+ *
+ * Copyright (C) 2013-2016 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ * 3. University of Heidelberg, Heidelberg, Germany
+ *
+ * Copyright (C) 2009-2013 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ *
+ * Copyright (C) 2006-2008 by the California Institute of Technology,
+ * Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. Japan Science and Technology Agency, Japan
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -33,38 +32,38 @@
  */
 
 
-#ifndef SedError_h
-#define SedError_h
+#ifndef CaError_h
+#define CaError_h
 
-#include <sedml/common/extern.h>
+#include <omex/common/extern.h>
 #include <sbml/xml/XMLError.h>
-#include <sedml/SedNamespaces.h>
+#include <omex/CaNamespaces.h>
 
 
-LIBSEDML_CPP_NAMESPACE_BEGIN
+LIBCOMBINE_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 /**
- * @enum SedErrorCode_t
- * Codes for all SEDML-level errors and warnings from the core specification.
+ * @enum CaErrorCode_t
+ * Codes for all OMEX-level errors and warnings from the core specification.
  */
 typedef enum
 {
-  SedUnknownError                      = 10000 /*!< Encountered unknown internal libSEDML error. */
+  CaUnknownError                      = 10000 /*!< Encountered unknown internal libCombine error. */
 , NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
 , UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SEDML XML schema. */
+, NotSchemaConformant                   = 10003 /*!< Document does not conform to the OMEX XML schema. */
 , InvalidMathElement                    = 10201
 , MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
 , DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
-, SedNamespaceInAnnotation             = 10403 /*!< The SEDML XML namespace cannot be used in an Annotation object. */
-, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SEDML object. */
+, CaNamespaceInAnnotation             = 10403 /*!< The OMEX XML namespace cannot be used in an Annotation object. */
+, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given OMEX object. */
 , AnnotationNotElement                  = 10405
 , NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
 , NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
 , NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
 , InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
-, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SEDML object. */
+, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given OMEX object. */
 , SedmlNSUndeclared      = 10101
 , SedmlElementNotInNs      = 10102
 , SedmlDuplicateComponentId      = 10301
@@ -129,198 +128,198 @@ typedef enum
 , SedmlSedVectorRangeAllowedCoreElements      = 21002
 , SedmlSedVectorRangeAllowedAttributes      = 21003
 , SedmlSedVectorRangeValueMustBeString      = 21004
-, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SEDML Core namespace. */
-, SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
-} SedErrorCode_t;
+, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
+, CaCodesUpperBound                   = 99999 /*!< Upper boundary of libCombine-specific diagnostic codes. */
+} CaErrorCode_t;
 
 
 /**
- * @enum SedErrorCategory_t
- * Category codes for SedError diagnostics.
+ * @enum CaErrorCategory_t
+ * Category codes for CaError diagnostics.
  *
  * Note that these are distinct from XMLError's category codes.  User
- * programs receiving an SedError object can use this distinction to
+ * programs receiving an CaError object can use this distinction to
  * check whether the error represents a low-level XML problem or an
- * SEDML problem.
+ * OMEX problem.
  *
  * @see #XMLErrorCategory_t
  */
 typedef enum
 {
-    LIBSEDML_CAT_INTERNAL = LIBSBML_CAT_INTERNAL,
-    LIBSEDML_CAT_SYSTEM = LIBSBML_CAT_SYSTEM,
-    LIBSEDML_CAT_XML = LIBSBML_CAT_XML,
+    LIBCOMBINE_CAT_INTERNAL = LIBSBML_CAT_INTERNAL,
+    LIBCOMBINE_CAT_SYSTEM = LIBSBML_CAT_SYSTEM,
+    LIBCOMBINE_CAT_XML = LIBSBML_CAT_XML,
 
-    LIBSEDML_CAT_SEDML = (LIBSEDML_CAT_XML + 1)
-    /*!< General SEDML error  not falling into another category below. */
+    LIBCOMBINE_CAT_OMEX = (LIBCOMBINE_CAT_XML + 1)
+    /*!< General OMEX error  not falling into another category below. */
 
-  , LIBSEDML_CAT_GENERAL_CONSISTENCY
-    /*!< Category of errors that can occur while validating general SEDML
+  , LIBCOMBINE_CAT_GENERAL_CONSISTENCY
+    /*!< Category of errors that can occur while validating general OMEX
      * constructs. */
 
-  , LIBSEDML_CAT_IDENTIFIER_CONSISTENCY
+  , LIBCOMBINE_CAT_IDENTIFIER_CONSISTENCY
     /*!< Category of errors that can occur while validating symbol
      * identifiers in a model. */
 
-  , LIBSEDML_CAT_MATHML_CONSISTENCY
+  , LIBCOMBINE_CAT_MATHML_CONSISTENCY
     /*!< Category of errors that can occur while validating MathML formulas
-     * in a model.  With respect to the SEDML specification, these concern
+     * in a model.  With respect to the OMEX specification, these concern
      * failures in applying the validation rules numbered 102xx in the
      * Level&nbsp;2 Versions&nbsp;2&ndash;4
      * and Level&nbsp;3 Version&nbsp;1 specifications. */
 
-  , LIBSEDML_CAT_INTERNAL_CONSISTENCY
-    /*!< Category of errors that can occur while validating libSEDML's
-     * internal representation of SEDML constructs. (These are tests
-     * performed by libSEDML and do not have equivalent SEDML validation
+  , LIBCOMBINE_CAT_INTERNAL_CONSISTENCY
+    /*!< Category of errors that can occur while validating libCombine's
+     * internal representation of OMEX constructs. (These are tests
+     * performed by libCombine and do not have equivalent OMEX validation
      * rules.)  */
 
-} SedErrorCategory_t;
+} CaErrorCategory_t;
 
 
 /**
- * @enum SedErrorSeverity_t
- * Severity codes for SedError diagnostics.
+ * @enum CaErrorSeverity_t
+ * Severity codes for CaError diagnostics.
  *
  * The only publicly-reported values of this type are the four from #XMLErrorSeverity_t.
  * All other values are used internally only, with translation of those
- * codes done in SedError.cpp
+ * codes done in CaError.cpp
  *
  * @see XMLErrorSeverity_t
  */
 typedef enum
 {
-  /** @cond doxygenLibsedmlInternal **/
+  /** @cond doxygenLibomexInternal **/
 
-  /* The following are used internally in SedErrorTable, but publicly,
+  /* The following are used internally in CaErrorTable, but publicly,
    * we only report one of the 4 XMLError_Severity values.  Translation
-   * of the codes is done in SedError.cpp.
+   * of the codes is done in CaError.cpp.
    */
-    LIBSEDML_SEV_WARNING = LIBSBML_SEV_WARNING,
-    LIBSEDML_SEV_ERROR = LIBSBML_SEV_ERROR,
-    LIBSEDML_SEV_FATAL = LIBSBML_SEV_FATAL,
+    LIBCOMBINE_SEV_WARNING = LIBSBML_SEV_WARNING,
+    LIBCOMBINE_SEV_ERROR = LIBSBML_SEV_ERROR,
+    LIBCOMBINE_SEV_FATAL = LIBSBML_SEV_FATAL,
 
-    LIBSEDML_SEV_SCHEMA_ERROR    = (LIBSEDML_SEV_FATAL + 1)
+    LIBCOMBINE_SEV_SCHEMA_ERROR    = (LIBCOMBINE_SEV_FATAL + 1)
     /*!< The XML content does not conform to
-     * the relevant version of the SEDML XML
-     * Schema.  The content is not valid SEDML. */
+     * the relevant version of the OMEX XML
+     * Schema.  The content is not valid OMEX. */
 
-  , LIBSEDML_SEV_GENERAL_WARNING
+  , LIBCOMBINE_SEV_GENERAL_WARNING
     /*!< The XML content is invalid for some
-     * levels/versions of SEDML, and while it
+     * levels/versions of OMEX, and while it
      * may be valid in others, it is something
-     * that is best avoided anyway.  LibSEDML
+     * that is best avoided anyway.  LibCombine
      * will issue warnings in those cases it
      * can recognize. */
 
-  , LIBSEDML_SEV_NOT_APPLICABLE
+  , LIBCOMBINE_SEV_NOT_APPLICABLE
     /*!< This error code is only a placeholder
      * for errors that have relevance to some
-     * versions of SEDML but not others. */
+     * versions of OMEX but not others. */
 
   /** @endcond **/
-} SedErrorSeverity_t;
+} CaErrorSeverity_t;
 
 END_C_DECLS
-LIBSEDML_CPP_NAMESPACE_END
+LIBCOMBINE_CPP_NAMESPACE_END
 
 #ifdef __cplusplus
 
-LIBSEDML_CPP_NAMESPACE_BEGIN
+LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
-class LIBSEDML_EXTERN SedError : public XMLError
+class LIBCOMBINE_EXTERN CaError : public XMLError
 {
 public:
 
   /**
-   * Creates a new SedError to report that something occurred during SEDML
+   * Creates a new CaError to report that something occurred during OMEX
    * processing.
    *
-   * When a libSEDML operation on SEDML content results in a warning, error
-   * or other diagnostic, the issue is reported as an SedError object.
-   * SedError objects have identification numbers to indicate the nature
+   * When a libCombine operation on OMEX content results in a warning, error
+   * or other diagnostic, the issue is reported as an CaError object.
+   * CaError objects have identification numbers to indicate the nature
    * of the exception.  @if clike These numbers are drawn from
    * the enumeration <a class="el"
-   * href="#SedErrorCode_t">
-   * SedErrorCode_t</a>.  @endif@if java These numbers are
+   * href="#CaErrorCode_t">
+   * CaErrorCode_t</a>.  @endif@if java These numbers are
    * defined as unsigned integer constants in the file
-   * "libsedmlConstants.html".  See the <a class="el"
-   * href="#SedErrorCode_t">top of this documentation page</a> for a table
+   * "libomexConstants.html".  See the <a class="el"
+   * href="#CaErrorCode_t">top of this documentation page</a> for a table
    * listing the possible values and their meanings. @endif@if python These
    * numbers are defined as unsigned integer constants in the interface
-   * class @link libsedml libsedml@endlink.  See the <a class="el"
-   * href="#SedErrorCode_t">top of this documentation page</a> for a table
+   * class @link libomex libomex@endlink.  See the <a class="el"
+   * href="#CaErrorCode_t">top of this documentation page</a> for a table
    * listing the possible values and their meanings. @endif@~ The argument
    * @p errorId to this constructor @em can be (but does not have to be) a
    * value from this @if clike enumeration. If it @em is a value
-   * from <a class="el" href="#SedErrorCode_t">SedErrorCode_t</a>, the
-   * SedError class assumes the error is a low-level system or SEDML layer
+   * from <a class="el" href="#CaErrorCode_t">CaErrorCode_t</a>, the
+   * CaError class assumes the error is a low-level system or OMEX layer
    * error and <em>prepends</em> a built-in, predefined error message to
    * any string passed in the argument @p details to this constructor.  In
    * addition, all <a class="el"
-   * href="#SedErrorCode_t">SedErrorCode_t</a> errors have associated
+   * href="#CaErrorCode_t">CaErrorCode_t</a> errors have associated
    * values for the @p severity and @p category codes, and these fields are
    * filled-in as well from the enumerations <a class="el"
-   * href="#SedErrorSeverity_t">SedErrorSeverity_t</a> and <a class="el"
-   * href="#SedErrorCategory_t">SedErrorCategory_t</a>,
+   * href="#CaErrorSeverity_t">CaErrorSeverity_t</a> and <a class="el"
+   * href="#CaErrorCategory_t">CaErrorCategory_t</a>,
    * respectively. @else set of constants.  If it @em
-   * is one of the predefined error identifiers, the SedError class
-   * assumes the error is a low-level system or SEDML layer error and
+   * is one of the predefined error identifiers, the CaError class
+   * assumes the error is a low-level system or OMEX layer error and
    * <em>prepends</em> a built-in, predefined error message to any string
    * passed in the argument @p details to this constructor.  In addition,
    * all the predefined error identifiers have associated values for the
    * @p severity and @p category codes, and these fields are filled-in using
-   * the libSEDML defaults for each different error identifier. @endif@~
+   * the libCombine defaults for each different error identifier. @endif@~
    *
    * If the error identifier @p errorId is a number greater than 99999, the
-   * SedError class assumes the error was generated from another part of
+   * CaError class assumes the error was generated from another part of
    * the software and does not do additional filling in of values beyond
-   * the default in the constructor itself.  This allows SedError to serve
+   * the default in the constructor itself.  This allows CaError to serve
    * as a base class for other errors, such as for user-defined validation
    * rules (see Validator).  Callers should fill in all the parameters with
    * suitable values if generating errors with codes greater than 99999 to
-   * make maximum use of the SedError facilities.
+   * make maximum use of the CaError facilities.
    *
    * @if clike As mentioned above, there are two other
    * enumerations, <a class="el"
-   * href="#SedErrorSeverity_t">SedErrorSeverity_t</a> and <a class="el"
-   * href="#SedErrorCategory_t">SedErrorCategory_t</a>, used for indicating
-   * the severity and category of error for the predefined SedError codes.
+   * href="#CaErrorSeverity_t">CaErrorSeverity_t</a> and <a class="el"
+   * href="#CaErrorCategory_t">CaErrorCategory_t</a>, used for indicating
+   * the severity and category of error for the predefined CaError codes.
    * The values passed in @p severity and @p category override the defaults
    * assigned based on the error code.  If the value of @p errorId is a
-   * value from <a class="el" href="#SedErrorCode_t">SedErrorCode_t</a>,
+   * value from <a class="el" href="#CaErrorCode_t">CaErrorCode_t</a>,
    * callers do not need to fill in @p severity and @p category.
    * Conversely, if @p errorId is not a value from <a class="el"
-   * href="#SedErrorCode_t">SedErrorCode_t</a>, callers can use other
+   * href="#CaErrorCode_t">CaErrorCode_t</a>, callers can use other
    * values (not just those from <a class="el"
-   * href="#SedErrorSeverity_t">SedErrorSeverity_t</a> and <a class="el"
-   * href="#SedErrorCategory_t">SedErrorCategory_t</a>, but their own
+   * href="#CaErrorSeverity_t">CaErrorSeverity_t</a> and <a class="el"
+   * href="#CaErrorCategory_t">CaErrorCategory_t</a>, but their own
    * special values) for @p severity and
    * @p category. @else As mentioned above,
    * there are additional constants defined for <a class="el"
-   * href="#SedErrorSeverity_t">standard severity</a> and <a class="el"
-   * href="#SedErrorCategory_t">standard category</a> codes, and every predefined
-   * error in libSEDML has an associated value for severity and category taken
+   * href="#CaErrorSeverity_t">standard severity</a> and <a class="el"
+   * href="#CaErrorCategory_t">standard category</a> codes, and every predefined
+   * error in libCombine has an associated value for severity and category taken
    * from these predefined sets.  These constants have symbol names
-   * prefixed with <code>LIBSEDML_SEV_</code> and <code>LIBSEDML_CAT_</code>,
+   * prefixed with <code>LIBCOMBINE_SEV_</code> and <code>LIBCOMBINE_CAT_</code>,
    * respectively.  If the value of @p errorId is one of the standard error
    * codes, callers do not need to fill in @p severity and @p category in a
    * call to this constructor.  Conversely, if @p errorId is not an existing
-   * SEDML-level error code, callers can use other values for @p severity and
+   * OMEX-level error code, callers can use other values for @p severity and
    * @p category. @endif@~
    *
-   * Please see the top of the documentation for SedError for a longer
+   * Please see the top of the documentation for CaError for a longer
    * discussion of the possible error codes, their meanings, and their
-   * applicability to different combinations of Level+Version of SEDML.
+   * applicability to different combinations of Level+Version of OMEX.
    *
    * @param errorId an unsigned int, the identification number of the error.
    *
-   * @param level the SEDML Level of the SEDML model
+   * @param level the OMEX Level of the OMEX model
    *
-   * @param version the SEDML Version within the Level of the SEDML model
+   * @param version the OMEX Version within the Level of the OMEX model
    *
    * @param details a string containing additional details about the error.
-   * If the error code in @p errorId is one that is recognized by SedError,
+   * If the error code in @p errorId is one that is recognized by CaError,
    * the given message is @em appended to a predefined message associated
    * with the given code.  If the error code is not recognized, the message
    * is stored as-is as the text of the error.
@@ -334,43 +333,43 @@ public:
    * @param category an integer indicating the category to which the error
    * belongs.
    */
-  SedError
+  CaError
   (
      const unsigned int errorId  = 0
-   , const unsigned int level    = SEDML_DEFAULT_LEVEL
-   , const unsigned int version  = SEDML_DEFAULT_VERSION
+   , const unsigned int level    = OMEX_DEFAULT_LEVEL
+   , const unsigned int version  = OMEX_DEFAULT_VERSION
    , const std::string& details  = ""
    , const unsigned int line     = 0
    , const unsigned int column   = 0
-   , const unsigned int severity = LIBSEDML_SEV_ERROR
-   , const unsigned int category = LIBSEDML_CAT_SEDML
+   , const unsigned int severity = LIBCOMBINE_SEV_ERROR
+   , const unsigned int category = LIBCOMBINE_CAT_OMEX
   );
 
 
   /**
-   * Copy constructor; creates a copy of this SedError.
+   * Copy constructor; creates a copy of this CaError.
    */
-  SedError(const SedError& orig);
+  CaError(const CaError& orig);
 
   /**
-   * Destroys this SedError.
+   * Destroys this CaError.
    */
-  virtual ~SedError();
+  virtual ~CaError();
 
 
 #ifndef SWIG
 
-  /** @cond doxygenLibsedmlInternal **/
+  /** @cond doxygenLibomexInternal **/
 
   /**
-   * Creates and returns a deep copy of this SedError object.
+   * Creates and returns a deep copy of this CaError object.
    *
-   * @return the (deep) copy of this SedError object.
+   * @return the (deep) copy of this CaError object.
    */
-  virtual SedError* clone() const;
+  virtual CaError* clone() const;
 
   /**
-   * Outputs this SedError to stream in the following format (and followed
+   * Outputs this CaError to stream in the following format (and followed
    * by a newline):
    *
    *   line: (error id) message
@@ -384,7 +383,7 @@ public:
 #endif  /* !SWIG */
 
 protected:
-  /** @cond doxygenLibsedmlInternal **/
+  /** @cond doxygenLibomexInternal **/
 
   virtual std::string stringForSeverity(unsigned int code) const;
   virtual std::string stringForCategory(unsigned int code) const;
@@ -392,7 +391,7 @@ protected:
   /** @endcond **/
 };
 
-LIBSEDML_CPP_NAMESPACE_END
+LIBCOMBINE_CPP_NAMESPACE_END
 
 #endif  /* __cplusplus */
-#endif /* SedError_h */
+#endif /* CaError_h */

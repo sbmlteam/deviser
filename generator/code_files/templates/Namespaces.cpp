@@ -252,7 +252,7 @@ SBMLNamespaces::removeNamespace(const std::string &uri)
 
 /*
  * Predicate returning @c true if the given
- * URL is one of SBML XML namespaces.
+ * URL is one of SBML_Lang XML namespaces.
  */
 bool 
 SBMLNamespaces::isSBMLNamespace(const std::string& uri)
@@ -281,7 +281,7 @@ SBMLNamespaces::isValidCombination()
       declaredURI.assign(SBML_XMLNS_L1V1);
     }
 
-    // checks if the SBML Namespace is explicitly defined.
+    // checks if the SBML_Lang Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() && 

@@ -40,7 +40,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
     "File does not use UTF-8 encoding",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "An SBML XML file must use UTF-8 as the character encoding. More "
+    "An SBML_Lang XML file must use UTF-8 as the character encoding. More "
     "precisely, the 'encoding' attribute of the XML declaration at the "
     "beginning of the XML data stream cannot have a value other than "
     "'UTF-8'. An example valid declaration is "
@@ -55,9 +55,9 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
     "Encountered unrecognized element",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "An SBML XML document must not contain undefined elements or attributes "
-    "in the SBML namespace. Documents containing unknown elements or "
-    "attributes placed in the SBML namespace do not conform to the SBML "
+    "An SBML_Lang XML document must not contain undefined elements or attributes "
+    "in the SBML_Lang namespace. Documents containing unknown elements or "
+    "attributes placed in the SBML_Lang namespace do not conform to the SBML_Lang "
     "specification.",  
     {""
     }
@@ -66,13 +66,13 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
   //10003
   {
     NotSchemaConformant,
-    "Document does not conform to the SBML XML schema",
+    "Document does not conform to the SBML_Lang XML schema",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "An SBML XML document must conform to the XML Schema for the corresponding "
-    "SBML Level, Version and Release. The XML Schema for SBML defines the "
-    "basic SBML object structure, the data types used by those objects, and the "
-    "order in which the objects may appear in an SBML document.",
+    "An SBML_Lang XML document must conform to the XML Schema for the corresponding "
+    "SBML_Lang Level, Version and Release. The XML Schema for SBML_Lang defines the "
+    "basic SBML_Lang object structure, the data types used by those objects, and the "
+    "order in which the objects may appear in an SBML_Lang document.",
     {""
     }
   },
@@ -83,7 +83,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
     "Invalid MathML",
     LIBSBML_CAT_MATHML_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "All MathML content in SBML must appear within a <math> element, and the "
+    "All MathML content in SBML_Lang must appear within a <math> element, and the "
     "<math> element must be either explicitly or implicitly in the XML "
     "namespace \"http://www.w3.org/1998/Math/MathML\".",
     {""
@@ -117,10 +117,10 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
   //10403
   {
     SBMLNamespaceInAnnotation,
-    "The SBML XML namespace cannot be used in an Annotation object",
+    "The SBML_Lang XML namespace cannot be used in an Annotation object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "Top-level elements within an annotation element cannot use any SBML "
+    "Top-level elements within an annotation element cannot use any SBML_Lang "
     "namespace, whether explicitly or implicitly (by failing "
     "to declare any namespace).",
     {""
@@ -130,10 +130,10 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
   //10404
   {
     MultipleAnnotations,
-    "Only one Annotation object is permitted under a given SBML object",
+    "Only one Annotation object is permitted under a given SBML_Lang object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "A given SBML object may contain at most one <annotation> element.",
+    "A given SBML_Lang object may contain at most one <annotation> element.",
     {""
     }
   },
@@ -189,16 +189,16 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
   //10805
   {
     OnlyOneNotesElementAllowed,
-    "Only one Notes subobject is permitted on a given SBML object",
+    "Only one Notes subobject is permitted on a given SBML_Lang object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
-    "A given SBML object may contain at most one <notes> element. ",
+    "A given SBML_Lang object may contain at most one <notes> element. ",
     {""
     }
   },
 
   /* --------------------------------------------------------------------------
-   * Boundary marker.  SBML specific errors.
+   * Boundary marker.  SBML_Lang specific errors.
    * ----------------------------------------------------------------------- */
 
 <add_specific_error_table/>    
