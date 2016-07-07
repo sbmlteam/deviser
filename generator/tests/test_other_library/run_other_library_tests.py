@@ -193,37 +193,37 @@ def run_templates(name, class_name, test_case, list_of):
     print('')
     return fail
 
-def test_other_templates():
-    fail = compare_code_headers('SedConstructorException')
-    fail += compare_code_impl('SedConstructorException')
-    fail += compare_code_headers('SedReader')
-    fail += compare_code_impl('SedReader')
-    fail += compare_code_headers('SedWriter')
-    fail += compare_code_impl('SedWriter')
-    fail += compare_code_headers('SedErrorLog')
-    fail += compare_code_impl('SedErrorLog')
-    fail += compare_code_headers('SedNamespaces')
-    fail += compare_code_impl('SedNamespaces')
-    fail += compare_code_headers('SedError')
-    fail += compare_code_impl('SedError')
-    fail += compare_code_headers('SedTypes')
-    fail += compare_code_headers('SedTypeCodes')
-    fail += compare_code_impl('SedTypeCodes')
-    fail += compare_code_headers('SedVisitor')
-    fail += compare_code_impl('SedVisitor')
-    fail += compare_code_headers('SedErrorTable')
+def test_other_templates(prefix):
+    fail = compare_code_headers('{0}ConstructorException'.format(prefix))
+    fail += compare_code_impl('{0}ConstructorException'.format(prefix))
+    fail += compare_code_headers('{0}Reader'.format(prefix))
+    fail += compare_code_impl('{0}Reader'.format(prefix))
+    fail += compare_code_headers('{0}Writer'.format(prefix))
+    fail += compare_code_impl('{0}Writer'.format(prefix))
+    fail += compare_code_headers('{0}ErrorLog'.format(prefix))
+    fail += compare_code_impl('{0}ErrorLog'.format(prefix))
+    fail += compare_code_headers('{0}Namespaces'.format(prefix))
+    fail += compare_code_impl('{0}Namespaces'.format(prefix))
+    fail += compare_code_headers('{0}Error'.format(prefix))
+    fail += compare_code_impl('{0}Error'.format(prefix))
+    fail += compare_code_headers('{0}Types'.format(prefix))
+    fail += compare_code_headers('{0}TypeCodes'.format(prefix))
+    fail += compare_code_impl('{0}TypeCodes'.format(prefix))
+    fail += compare_code_headers('{0}Visitor'.format(prefix))
+    fail += compare_code_impl('{0}Visitor'.format(prefix))
+    fail += compare_code_headers('{0}ErrorTable'.format(prefix))
     print('')
     return fail
 
-def test_common_templates(name, class_name, test_case):
+def test_common_templates(name, class_name, test_case, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_common_templates(filename)
     fail = compare_code_headers('common')
     fail += compare_code_headers('extern')
     fail += compare_code_headers('libsedml-config')
     fail += compare_code_impl('libsedml-version')
-    fail += compare_code_headers('SedOperationReturnValues')
-    fail += compare_code_impl('SedOperationReturnValues')
+    fail += compare_code_headers('{0}OperationReturnValues'.format(prefix))
+    fail += compare_code_impl('{0}OperationReturnValues'.format(prefix))
     fail += compare_code_cmake('libsedml-version.h')
     fail += compare_code_cmake('libsedml-config-common.h')
     fail += compare_code_cmake('libsedml-namespace.h')
@@ -313,12 +313,12 @@ def main():
     list_of = 'SedListOf'
     test_case = 'templates'
     fail += run_templates(name, class_name, test_case, list_of)
-    fail += test_other_templates()
+    fail += test_other_templates('Sed')
 
     name = 'test_sedml'
     class_name = 'SedBase'
     test_case = 'common'
-    fail += test_common_templates(name, class_name, test_case)
+    fail += test_common_templates(name, class_name, test_case, 'Sed')
 
     name = 'test_sedml'
     class_name = 'sedmlfwd'
@@ -390,8 +390,16 @@ def main():
     test_case = 'global files'
     fail += test_global(name, class_name, test_case)
 
+    name = 'combine-archive'
+    class_name = 'CaBase'
+    list_of = 'CaListOf'
+    test_case = 'templates'
+    fail += run_templates(name, class_name, test_case, list_of)
+    fail += test_other_templates('Ca')
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
+
 
 if __name__ == '__main__':
     main()

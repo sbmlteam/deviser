@@ -174,14 +174,21 @@ class BaseTemplateFile:
     def adjust_line(line):
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
-        line = re.sub('LibSBML', 'Lib{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('libSBML', 'lib{0}'.format(global_variables.language.upper()), line)
+        line = re.sub('LibSBML', strFunctions.upper_first(global_variables.library_name), line)
+        line = re.sub('libSBML', strFunctions.lower_first(global_variables.library_name), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
+        line = re.sub('SBML_Lang',
+                      '{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_',
                       '{0}_'.format(global_variables.language.upper()), line)
-        line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
-        line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
+        # hack for SedML
+        if global_variables.prefix == 'Sed':
+            line = re.sub('readSBML', 'read{0}ML'.format(global_variables.prefix), line)
+            line = re.sub('writeSBML', 'write{0}ML'.format(global_variables.prefix), line)
+        else:
+            line = re.sub('readSBML', 'read{0}'.format(global_variables.language.upper()), line)
+            line = re.sub('writeSBML', 'write{0}'.format(global_variables.language.upper()), line)
         line = re.sub('sbml', global_variables.language, line)
         line = re.sub('SBMLSBML', '{0}{1}'.format(strFunctions.upper_first(global_variables.language), global_variables.prefix), line)
         line = re.sub('SBML', global_variables.prefix, line)

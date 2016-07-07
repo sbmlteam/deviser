@@ -25,7 +25,7 @@ public:
   /**
    * Creates a new SBMLReader object and returns it.
    *
-   * The libSBML SBMLReader object offers methods for reading SBML in
+   * The libSBML SBMLReader object offers methods for reading SBML_Lang in
    * XML form from files and text strings.
    */
   SBMLReader ();
@@ -43,7 +43,7 @@ public:
    *
    * @param filename the name or full pathname of the file to be read.
    *
-   * @return a pointer to the SBMLDocument object created from the SBML
+   * @return a pointer to the SBMLDocument object created from the SBML_Lang
    * content in @p filename.
    *
    * @see readSBMLFromString(@if java String@endif)
