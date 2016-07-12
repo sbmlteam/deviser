@@ -1595,9 +1595,9 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  bool matchesCoreSedNamespace(const SBase * sb);
+  bool matchesCoreSBMLNamespace(const SBase * sb);
 
-  bool matchesCoreSedNamespace(const SBase * sb) const;
+  bool matchesCoreSBMLNamespace(const SBase * sb) const;
 
   /**
    * Creates a new SBase object with the given SBML_Lang level, version.

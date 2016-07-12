@@ -236,50 +236,50 @@ static const omexErrorTableEntry omexErrorTable[] =
    * ----------------------------------------------------------------------- */
 
   // 10101
-  { SedmlNSUndeclared,
-    "The Sedml namespace is not correctly declared.",
+  { CombineNSUndeclared,
+    "The Combine namespace is not correctly declared.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "To conform to the Package specification for SBML Level 1 Version 1, an "
+    LIBOMEX_SEV_ERROR,
+    "To conform to the Package specification for SBML Level 3 Version 1, an "
     "SBML document must declare "
-    "'http://www.sbml.org/sbml/level1/version1/sedml/version1' as the "
+    "'http://www.sbml.org/sbml/level3/version1/combine/version1' as the "
     "XMLNamespace to use for elements of this package.",
-    { "L3V1 Sedml V1 Section 3.1"
+    { "L3V1 Combine V1 Section 3.1"
     }
   },
 
   // 10102
-  { SedmlElementNotInNs,
-    "Element not in Sedml namespace",
+  { CombineElementNotInNs,
+    "Element not in Combine namespace",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
+    LIBOMEX_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
     "Package must use the "
-    "'http://www.sbml.org/sbml/level1/version1/sedml/version1' namespace, "
+    "'http://www.sbml.org/sbml/level3/version1/combine/version1' namespace, "
     "declaring so either explicitly or implicitly.",
-    { "L3V1 Sedml V1 Section 3.1"
+    { "L3V1 Combine V1 Section 3.1"
     }
   },
 
   // 10301
-  { SedmlDuplicateComponentId,
+  { CombineDuplicateComponentId,
     "Duplicate 'id' attribute value",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
+    LIBOMEX_SEV_ERROR,
     "(Extends validation rule #10301 in the SBML Level 3 Core specification. TO "
     "DO list scope of ids)",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 10302
-  { SedmlIdSyntaxRule,
+  { CombineIdSyntaxRule,
     "Invalid SId syntax",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The value of a 'sedml:id' must conform to the syntax of the <sbml> data "
+    LIBOMEX_SEV_ERROR,
+    "The value of a 'combine:id' must conform to the syntax of the <sbml> data "
     "type 'SId'",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
@@ -287,20 +287,20 @@ static const omexErrorTableEntry omexErrorTable[] =
   { InvalidMetaidSyntax,
     "Invalid SId syntax",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The value of a 'sedml:metaid' must conform to the syntax of the XML Type "
+    LIBOMEX_SEV_ERROR,
+    "The value of a 'combine:metaid' must conform to the syntax of the XML Type "
     "ID",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20101
-  { InvalidNamespaceOnSed,
+  { InvalidNamespaceOnCa,
     "Invalid namespace",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
+    LIBOMEX_SEV_ERROR,
     "Invalid namespace declared.",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
@@ -308,9 +308,9 @@ static const omexErrorTableEntry omexErrorTable[] =
   { AllowedAttributes,
     "Allowed attributes",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
+    LIBOMEX_SEV_ERROR,
     "Allowed attributes",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
@@ -318,673 +318,139 @@ static const omexErrorTableEntry omexErrorTable[] =
   { EmptyListElement,
     "No empty listOf",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
+    LIBOMEX_SEV_ERROR,
     "No empty lists",
-    { "L3V1 Sedml V1 Section"
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20201
-  { SedmlSedDocumentAllowedCoreAttributes,
-    "Core attributes allowed on <sedDocument>.",
+  { CombineContentAllowedCoreAttributes,
+    "Core attributes allowed on <content>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level 3 Core attributes "
+    LIBOMEX_SEV_ERROR,
+    "A <content> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedDocument>.",
-    { "L3V1 Sedml V1 Section"
+    "namespaces are permitted on a <content>.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20202
-  { SedmlSedDocumentAllowedCoreElements,
-    "Core elements allowed on <sedDocument>.",
+  { CombineContentAllowedCoreElements,
+    "Core elements allowed on <content>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedDocument>.",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "A <content> object may have the optional SBML Level 3 Core subobjects for "
+    "notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on a <content>.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20203
-  { SedmlSedDocumentAllowedAttributes,
-    "Attributes allowed on <sedDocument>.",
+  { CombineContentAllowedAttributes,
+    "Attributes allowed on <content>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object must have the required attributes 'sedml:level' and "
-    "'sedml:version'. No other attributes from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedDocument> object. ",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "A <content> object must have the required attributes 'combine:location' "
+    "and 'combine:format', and may have the optional attribute "
+    "'combine:master'. No other attributes from the SBML Level 3 Combine "
+    "Archive namespaces are permitted on a <content> object. ",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20204
-  { SedmlSedDocumentAllowedElements,
-    "Elements allowed on <sedDocument>.",
+  { CombineContentLocationMustBeString,
+    "Location attribute must be String.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may contain one and only one instance of the "
-    "<sedListOfModels> element. No other elements from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedDocument> object. ",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "The attribute 'combine:location' on a <content> must have a value of data "
+    "type 'string'.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20205
-  { SedmlSedDocumentLevelMustBeInteger,
-    "Level attribute must be Integer.",
+  { CombineContentFormatMustBeString,
+    "Format attribute must be String.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:level' on a <sedDocument> must have a value of data "
-    "type 'integer'.",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "The attribute 'combine:format' on a <content> must have a value of data "
+    "type 'string'.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20206
-  { SedmlSedDocumentVersionMustBeInteger,
-    "Version attribute must be Integer.",
+  { CombineContentMasterMustBeBoolean,
+    "Master attribute must be Boolean.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:version' on a <sedDocument> must have a value of data "
-    "type 'integer'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20207
-  { SedmlSedDocumentEmptyLOElements,
-    "No Empty ListOf elements allowed on <sedDocument>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The <sedListOfModels> subobject on a <sedDocument> object is optional, but "
-    "if present, this container object must not be empty.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20208
-  { SedmlSedDocumentLOSedModelsAllowedCoreElements,
-    "Core elements allowed on <listOfSedModels>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <sedListOfModels> container object may only contain "
-    "<sedModel> objects.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20209
-  { SedmlSedDocumentLOSedModelsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfSedModels>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedListOfModels> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedListOfModels> object.",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "The attribute 'combine:master' on a <content> must have a value of data "
+    "type 'boolean'.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20301
-  { SedmlSedModelAllowedCoreAttributes,
-    "Core attributes allowed on <sedModel>.",
+  { CombineOmexManifestAllowedCoreAttributes,
+    "Core attributes allowed on <omexManifest>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedModel> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedModel>.",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "An <omexManifest> object may have the optional SBML Level 3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on an <omexManifest>.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20302
-  { SedmlSedModelAllowedCoreElements,
-    "Core elements allowed on <sedModel>.",
+  { CombineOmexManifestAllowedCoreElements,
+    "Core elements allowed on <omexManifest>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedModel> object may have the optional SBML Level 3 Core subobjects for "
-    "notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedModel>.",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "An <omexManifest> object may have the optional SBML Level 3 Core "
+    "subobjects for notes and annotations. No other elements from the SBML "
+    "Level 3 Core namespaces are permitted on an <omexManifest>.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20303
-  { SedmlSedModelAllowedAttributes,
-    "Attributes allowed on <sedModel>.",
+  { CombineOmexManifestAllowedElements,
+    "Elements allowed on <omexManifest>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedModel> object must have the required attributes 'sedml:id' and "
-    "'sedml:source', and may have the optional attributes 'sedml:name' and "
-    "'sedml:language'. No other attributes from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedModel> object. ",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "An <omexManifest> object may contain one and only one instance of the "
+    "<listOfContents> element. No other elements from the SBML Level 3 Combine "
+    "Archive namespaces are permitted on an <omexManifest> object. ",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20304
-  { SedmlSedModelAllowedElements,
-    "Elements allowed on <sedModel>.",
+  { CombineOmexManifestLOContentsAllowedCoreElements,
+    "Core elements allowed on <listOfContents>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedModel> object may contain one and only one instance of the "
-    "<sedListOfChanges> element. No other elements from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedModel> object. ",
-    { "L3V1 Sedml V1 Section"
+    LIBOMEX_SEV_ERROR,
+    "Apart from the general notes and annotations subobjects permitted on all "
+    "SBML objects, a <listOfContents> container object may only contain "
+    "<content> objects.",
+    { "L3V1 Combine V1 Section"
     }
   },
 
   // 20305
-  { SedmlSedModelSourceMustBeString,
-    "Source attribute must be String.",
+  { CombineOmexManifestLOContentsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfContents>.",
     LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:source' on a <sedModel> must have a value of data "
-    "type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20306
-  { SedmlSedModelNameMustBeString,
-    "Name attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:name' on a <sedModel> must have a value of data type "
-    "'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20307
-  { SedmlSedModelLanguageMustBeString,
-    "Language attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:language' on a <sedModel> must have a value of data "
-    "type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20308
-  { SedmlSedModelEmptyLOElements,
-    "No Empty ListOf elements allowed on <sedModel>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The <sedListOfChanges> subobject on a <sedModel> object is optional, but "
-    "if present, this container object must not be empty.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20309
-  { SedmlSedModelLOSedChangesAllowedCoreElements,
-    "Core elements allowed on <listOfSedChanges>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <sedListOfChanges> container object may only contain "
-    "<sedChange> objects.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20310
-  { SedmlSedModelLOSedChangesAllowedCoreAttributes,
-    "Core attributes allowed on <listOfSedChanges>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedListOfChanges> object may have the optional SBML Level 3 Core "
+    LIBOMEX_SEV_ERROR,
+    "A <listOfContents> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedListOfChanges> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20401
-  { SedmlSedChangeAllowedCoreAttributes,
-    "Core attributes allowed on <sedChange>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedChange> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedChange>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20402
-  { SedmlSedChangeAllowedCoreElements,
-    "Core elements allowed on <sedChange>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedChange> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedChange>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20501
-  { SedmlSedAddXMLAllowedCoreAttributes,
-    "Core attributes allowed on <sedAddXML>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedAddXML>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20502
-  { SedmlSedAddXMLAllowedCoreElements,
-    "Core elements allowed on <sedAddXML>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedAddXML>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20503
-  { SedmlSedAddXMLAllowedElements,
-    "Elements allowed on <sedAddXML>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedAddXML> object must contain one and only one instance of the XMLNode "
-    "element. No other elements from the SBML Level 3 SEDML namespaces are "
-    "permitted on a <sedAddXML> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20601
-  { SedmlSedSetValueAllowedCoreAttributes,
-    "Core attributes allowed on <sedSetValue>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedSetValue>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20602
-  { SedmlSedSetValueAllowedCoreElements,
-    "Core elements allowed on <sedSetValue>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedSetValue>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20603
-  { SedmlSedSetValueAllowedAttributes,
-    "Attributes allowed on <sedSetValue>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object must have the required attribute "
-    "'sedml:modelReference', and may have the optional attributes "
-    "'sedml:symbol', 'sedml:target' and 'sedml:range'. No other attributes from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <sedSetValue> object. "
-    "",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20604
-  { SedmlSedSetValueAllowedElements,
-    "Elements allowed on <sedSetValue>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSetValue> object may contain one and only one instance of the "
-    "ASTNode element. No other elements from the SBML Level 3 SEDML namespaces "
-    "are permitted on a <sedSetValue> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20605
-  { SedmlSedSetValueModelReferenceMustBeModel,
-    "ModelReference attribute must be Model.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:modelReference' of a <sedSetValue> "
-    "object must be the identifier of an existing <model> object defined in the "
-    "enclosing <model> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20606
-  { SedmlSedSetValueSymbolMustBeString,
-    "Symbol attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:symbol' on a <sedSetValue> must have a value of data "
-    "type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20607
-  { SedmlSedSetValueTargetMustBeString,
-    "Target attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:target' on a <sedSetValue> must have a value of data "
-    "type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20608
-  { SedmlSedSetValueRangeMustBeRange,
-    "Range attribute must be Range.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:range' of a <sedSetValue> object must be "
-    "the identifier of an existing <range> object defined in the enclosing "
-    "<model> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20701
-  { SedmlSedDataGeneratorAllowedCoreAttributes,
-    "Core attributes allowed on <sedDataGenerator>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedDataGenerator>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20702
-  { SedmlSedDataGeneratorAllowedCoreElements,
-    "Core elements allowed on <sedDataGenerator>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object may have the optional SBML Level 3 Core "
-    "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <sedDataGenerator>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20703
-  { SedmlSedDataGeneratorAllowedAttributes,
-    "Attributes allowed on <sedDataGenerator>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object must have the required attribute 'sedml:id', "
-    "and may have the optional attribute 'sedml:name'. No other attributes from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <sedDataGenerator> "
-    "object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20704
-  { SedmlSedDataGeneratorAllowedElements,
-    "Elements allowed on <sedDataGenerator>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedDataGenerator> object may contain one and only one instance of each "
-    "of the <sedListOfVariables,> <sedListOfParameters> and ASTNode elements. "
-    "No other elements from the SBML Level 3 SEDML namespaces are permitted on "
-    "a <sedDataGenerator> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20705
-  { SedmlSedDataGeneratorNameMustBeString,
-    "Name attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:name' on a <sedDataGenerator> must have a value of "
-    "data type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20706
-  { SedmlSedDataGeneratorEmptyLOElements,
-    "No Empty ListOf elements allowed on <sedDataGenerator>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The <sedListOfVariables> and <sedListOfParameters> subobjects on a "
-    "<sedDataGenerator> object are optional, but if present, these container "
-    "objects must not be empty.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20707
-  { SedmlSedDataGeneratorLOSedVariablesAllowedCoreElements,
-    "Core elements allowed on <listOfSedVariables>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <sedListOfVariables> container object may only contain "
-    "<sedVariable> objects.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20708
-  { SedmlSedDataGeneratorLOSedParametersAllowedCoreElements,
-    "Core elements allowed on <listOfSedParameters>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <sedListOfParameters> container object may only contain "
-    "<sedParameter> objects.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20709
-  { SedmlSedDataGeneratorLOSedVariablesAllowedCoreAttributes,
-    "Core attributes allowed on <listOfSedVariables>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedListOfVariables> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedListOfVariables> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20710
-  { SedmlSedDataGeneratorLOSedParametersAllowedCoreAttributes,
-    "Core attributes allowed on <listOfSedParameters>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedListOfParameters> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedListOfParameters> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20801
-  { SedmlSedRepeatedTaskAllowedCoreAttributes,
-    "Core attributes allowed on <sedRepeatedTask>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedRepeatedTask> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedRepeatedTask>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20802
-  { SedmlSedRepeatedTaskAllowedCoreElements,
-    "Core elements allowed on <sedRepeatedTask>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedRepeatedTask> object may have the optional SBML Level 3 Core "
-    "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <sedRepeatedTask>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20803
-  { SedmlSedRepeatedTaskAllowedAttributes,
-    "Attributes allowed on <sedRepeatedTask>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedRepeatedTask> object may have the optional attributes "
-    "'sedml:rangeId' and 'sedml:resetModel'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <sedRepeatedTask> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20804
-  { SedmlSedRepeatedTaskRangeIdMustBeRange,
-    "RangeId attribute must be Range.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:rangeId' of a <sedRepeatedTask> object "
-    "must be the identifier of an existing <range> object defined in the "
-    "enclosing <model> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20805
-  { SedmlSedRepeatedTaskResetModelMustBeBoolean,
-    "ResetModel attribute must be Boolean.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:resetModel' on a <sedRepeatedTask> must have a value "
-    "of data type 'boolean'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20901
-  { SedmlSedSimulationAllowedCoreAttributes,
-    "Core attributes allowed on <sedSimulation>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedSimulation>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20902
-  { SedmlSedSimulationAllowedCoreElements,
-    "Core elements allowed on <sedSimulation>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object may have the optional SBML Level 3 Core "
-    "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <sedSimulation>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20903
-  { SedmlSedSimulationAllowedAttributes,
-    "Attributes allowed on <sedSimulation>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object must have the required attribute 'sedml:id', and "
-    "may have the optional attribute 'sedml:name'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <sedSimulation> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20904
-  { SedmlSedSimulationAllowedElements,
-    "Elements allowed on <sedSimulation>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedSimulation> object may contain one and only one instance of the "
-    "SedAlgorithm element. No other elements from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedSimulation> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 20905
-  { SedmlSedSimulationNameMustBeString,
-    "Name attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:name' on a <sedSimulation> must have a value of data "
-    "type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 21001
-  { SedmlSedVectorRangeAllowedCoreAttributes,
-    "Core attributes allowed on <sedVectorRange>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedVectorRange> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <sedVectorRange>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 21002
-  { SedmlSedVectorRangeAllowedCoreElements,
-    "Core elements allowed on <sedVectorRange>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedVectorRange> object may have the optional SBML Level 3 Core "
-    "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <sedVectorRange>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 21003
-  { SedmlSedVectorRangeAllowedAttributes,
-    "Attributes allowed on <sedVectorRange>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <sedVectorRange> object may have the optional attribute 'sedml:value'. "
-    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
-    "on a <sedVectorRange> object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 21004
-  { SedmlSedVectorRangeValueMustBeString,
-    "Value attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "FIXME: Encountered an unknown attribute type vector in "
-    "ValidationRulesForClass",
-    { "L3V1 Sedml V1 Section"
+    "3 Core namespaces are permitted on a <listOfContents> object.",
+    { "L3V1 Combine V1 Section"
     }
   },
 

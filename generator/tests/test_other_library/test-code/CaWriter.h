@@ -51,7 +51,7 @@
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
-class CaDocument;
+class CaOmexManifest;
 
 
 class LIBCOMBINE_EXTERN CaWriter
@@ -75,7 +75,7 @@ public:
 
   /**
    * Sets the name of this program, i.e., the program that is about to
-   * write out the CaDocument.
+   * write out the CaOmexManifest.
    *
    * If the program name and version are set (see
    * CaWriter::setProgramVersion(@if java String@endif)), the
@@ -102,7 +102,7 @@ public:
 
   /**
    * Sets the version of this program, i.e., the program that is about to
-   * write out the CaDocument.
+   * write out the CaOmexManifest.
    *
    * If the program version and name are set (see
    * CaWriter::setProgramName(@if java String@endif)), the
@@ -128,11 +128,11 @@ public:
 
 
   /**
-   * Writes the given CaDocument to filename.
+   * Writes the given CaOmexManifest to filename.
    *
    * @htmlinclude assuming-compressed-file.html
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @param filename the name or full pathname of the file where the OMEX
    * is to be written. 
@@ -145,13 +145,13 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeOMEX (const CaDocument* d, const std::string& filename);
+  bool writeOMEX (const CaOmexManifest* d, const std::string& filename);
 
 
   /**
-   * Writes the given CaDocument to the output stream.
+   * Writes the given CaOmexManifest to the output stream.
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @param stream the stream object where the OMEX is to be written.
    *
@@ -161,19 +161,19 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeOMEX (const CaDocument* d, std::ostream& stream);
+  bool writeOMEX (const CaOmexManifest* d, std::ostream& stream);
 
 
   /** @cond doxygenLibomexInternal */
 
   /**
-   * Writes the given CaDocument to an in-memory string and returns a
+   * Writes the given CaOmexManifest to an in-memory string and returns a
    * pointer to it.
    *
    * The string is owned by the caller and should be freed (with @c free())
    * when no longer needed.
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
@@ -181,16 +181,16 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  char* writeToString (const CaDocument* d);
+  char* writeToString (const CaOmexManifest* d);
 
   /** @endcond */
 
   /**
-   * Writes the given CaDocument to filename.
+   * Writes the given CaOmexManifest to filename.
    *
    * @htmlinclude assuming-compressed-file.html
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @param filename the name or full pathname of the file where the OMEX
    * is to be written. 
@@ -203,17 +203,17 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeOMEXToFile (const CaDocument* d, const std::string& filename);
+  bool writeOMEXToFile (const CaOmexManifest* d, const std::string& filename);
 
 
   /**
-   * Writes the given CaDocument to an in-memory string and returns a
+   * Writes the given CaOmexManifest to an in-memory string and returns a
    * pointer to it.
    *
    * The string is owned by the caller and should be freed (with @c free())
    * when no longer needed.
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
@@ -221,13 +221,13 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  char* writeOMEXToString (const CaDocument* d);
+  char* writeOMEXToString (const CaOmexManifest* d);
 
 #ifndef SWIG
   /**
-   * Writes the given CaDocument to an in-memory string and returns it.
+   * Writes the given CaOmexManifest to an in-memory string and returns it.
    *
-   * @param d the CaDocument to be written
+   * @param d the CaOmexManifest to be written
    *
    * @return the string on success or an empty string, 
    *         if one of the underlying parser
@@ -236,7 +236,7 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  std::string writeOMEXToStdString(const CaDocument* d);
+  std::string writeOMEXToStdString(const CaOmexManifest* d);
 #endif
   
 
@@ -289,9 +289,9 @@ public:
 #ifndef SWIG
 
 /**
- * Writes the given CaDocument to an in-memory string that is returned.
+ * Writes the given CaOmexManifest to an in-memory string that is returned.
  *
- * @param d the CaDocument to be written
+ * @param d the CaOmexManifest to be written
  *
  * @return the string on success or an empty string, 
  *         if one of the underlying parser
@@ -299,7 +299,7 @@ public:
  * 
  */
 LIBCOMBINE_EXTERN
-std::string writeOMEXToStdString(const CaDocument* d);
+std::string writeOMEXToStdString(const CaOmexManifest* d);
 
 #endif
 
@@ -335,7 +335,7 @@ CaWriter_free (CaWriter_t *sw);
 
 /**
  * Sets the name of this program. i.\ e.\ the one about to write out the
- * CaDocument.  If the program name and version are set
+ * CaOmexManifest.  If the program name and version are set
  * (setProgramVersion()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -353,7 +353,7 @@ CaWriter_setProgramName (CaWriter_t *sw, const char *name);
 
 /**
  * Sets the version of this program. i.\ e.\ the one about to write out the
- * CaDocument.  If the program version and name are set
+ * CaOmexManifest.  If the program version and name are set
  * (setProgramName()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -370,7 +370,7 @@ int
 CaWriter_setProgramVersion (CaWriter_t *sw, const char *version);
 
 /**
- * Writes the given CaDocument to filename.
+ * Writes the given CaOmexManifest to filename.
  *
  * @htmlinclude assuming-compressed-file.html
  *
@@ -404,11 +404,11 @@ CaWriter_setProgramVersion (CaWriter_t *sw, const char *version);
 LIBCOMBINE_EXTERN
 int
 CaWriter_writeOMEX ( CaWriter_t         *sw,
-                       const CaDocument_t *d,
+                       const CaOmexManifest_t *d,
                        const char           *filename );
 
 /**
- * Writes the given CaDocument to filename.
+ * Writes the given CaOmexManifest to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
@@ -430,12 +430,12 @@ CaWriter_writeOMEX ( CaWriter_t         *sw,
 LIBCOMBINE_EXTERN
 int
 CaWriter_writeOMEXToFile ( CaWriter_t         *sw,
-                       const CaDocument_t *d,
+                       const CaOmexManifest_t *d,
                        const char           *filename );
 
 
 /**
- * Writes the given CaDocument to an in-memory string and returns a
+ * Writes the given CaOmexManifest to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *
@@ -446,7 +446,7 @@ CaWriter_writeOMEXToFile ( CaWriter_t         *sw,
  */
 LIBCOMBINE_EXTERN
 char *
-CaWriter_writeOMEXToString (CaWriter_t *sw, const CaDocument_t *d);
+CaWriter_writeOMEXToString (CaWriter_t *sw, const CaOmexManifest_t *d);
 
 
 /**
@@ -478,14 +478,14 @@ CaWriter_hasBzip2 ();
 
 
 /**
- * Writes the given CaDocument @p d to the file named by @p filename.
+ * Writes the given CaOmexManifest @p d to the file named by @p filename.
  * This convenience function is functionally equivalent to:
  *
  *   CaWriter_writeOMEX(CaWriter_create(), d, filename);
  *
  * @htmlinclude assuming-compressed-file.html
  *
- * @param d the CaDocument object to be written out in XML format
+ * @param d the CaOmexManifest object to be written out in XML format
  * 
  * @param filename a string giving the path to a file where the XML
  * content is to be written.
@@ -506,11 +506,11 @@ CaWriter_hasBzip2 ();
  */
 LIBCOMBINE_EXTERN
 int
-writeOMEX (const CaDocument_t *d, const char *filename);
+writeOMEX (const CaOmexManifest_t *d, const char *filename);
 
 
 /**
- * Writes the given CaDocument @p d to an in-memory string and returns a
+ * Writes the given CaOmexManifest @p d to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.  This convenience function is
  * functionally equivalent to:
@@ -519,7 +519,7 @@ writeOMEX (const CaDocument_t *d, const char *filename);
  *
  * but does not require the caller to create an CaWriter object first.
  *
- * @param d an CaDocument object to be written out in XML format
+ * @param d an CaOmexManifest object to be written out in XML format
  *
  * @return the string on success and @c NULL if one of the underlying parser
  * components fail.
@@ -533,11 +533,11 @@ writeOMEX (const CaDocument_t *d, const char *filename);
  */
 LIBCOMBINE_EXTERN
 char *
-writeOMEXToString (const CaDocument_t *d);
+writeOMEXToString (const CaOmexManifest_t *d);
 
 
 /**
- * Writes the given CaDocument @p d to the file @p filename.
+ * Writes the given CaOmexManifest @p d to the file @p filename.
  * This convenience function is functionally equivalent to:
  *
  *   CaWriter_writeOMEXToFile(CaWriter_create(), d, filename);
@@ -546,7 +546,7 @@ writeOMEXToString (const CaDocument_t *d);
  *
  * @htmlinclude assuming-compressed-file.html
  * 
- * @param d an CaDocument object to be written out in XML format
+ * @param d an CaOmexManifest object to be written out in XML format
  *
  * @param filename a string giving the path to a file where the XML
  * content is to be written.
@@ -571,7 +571,7 @@ writeOMEXToString (const CaDocument_t *d);
  */
 LIBCOMBINE_EXTERN
 int
-writeOMEXToFile (const CaDocument_t *d, const char *filename);
+writeOMEXToFile (const CaOmexManifest_t *d, const char *filename);
 
 
 END_C_DECLS

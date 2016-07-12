@@ -42,7 +42,7 @@
 
 #include <omex/CaError.h>
 #include <omex/CaErrorLog.h>
-#include <omex/CaDocument.h>
+#include <omex/CaOmexManifest.h>
 #include <omex/CaWriter.h>
 
 #include <sbml/compress/CompressCommon.h>
@@ -76,7 +76,7 @@ CaWriter::~CaWriter ()
 
 /*
  * Sets the name of this program. i.\ e.\ the one about to write out the
- * CaDocument.  If the program name and version are set
+ * CaOmexManifest.  If the program name and version are set
  * (setProgramVersion()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -93,7 +93,7 @@ CaWriter::setProgramName (const std::string& name)
 
 /*
  * Sets the version of this program. i.\ e.\ the one about to write out the
- * CaDocument.  If the program version and name are set
+ * CaOmexManifest.  If the program version and name are set
  * (setProgramName()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -109,7 +109,7 @@ CaWriter::setProgramVersion (const std::string& version)
 
 
 /*
- * Writes the given CaDocument to filename.
+ * Writes the given CaOmexManifest to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
@@ -129,7 +129,7 @@ CaWriter::setProgramVersion (const std::string& version)
  * for writing.
  */
 bool
-CaWriter::writeOMEX (const CaDocument* d, const std::string& filename)
+CaWriter::writeOMEX (const CaOmexManifest* d, const std::string& filename)
 {
   std::ostream* stream = NULL;
 
@@ -185,7 +185,7 @@ CaWriter::writeOMEX (const CaDocument* d, const std::string& filename)
   catch ( ZlibNotLinked& )
   {
     // libCombine is not linked with zlib.
-    XMLErrorLog *log = (const_cast<CaDocument *>(d))->getErrorLog();
+    XMLErrorLog *log = (const_cast<CaOmexManifest *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a gzip/zip file is not enabled because "
         << "underlying libCombine is not linked with zlib."; 
@@ -195,7 +195,7 @@ CaWriter::writeOMEX (const CaDocument* d, const std::string& filename)
   catch ( Bzip2NotLinked& )
   {
     // libCombine is not linked with bzip2.
-    XMLErrorLog *log = (const_cast<CaDocument *>(d))->getErrorLog();
+    XMLErrorLog *log = (const_cast<CaOmexManifest *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a bzip2 file is not enabled because "
         << "underlying libCombine is not linked with bzip2."; 
@@ -206,7 +206,7 @@ CaWriter::writeOMEX (const CaDocument* d, const std::string& filename)
 
   if ( stream == NULL || stream->fail() || stream->bad())
   {
-    CaErrorLog *log = (const_cast<CaDocument *>(d))->getErrorLog();
+    CaErrorLog *log = (const_cast<CaOmexManifest *>(d))->getErrorLog();
     log->logError(XMLFileUnwritable);
     delete stream;
     return false;
@@ -221,13 +221,13 @@ CaWriter::writeOMEX (const CaDocument* d, const std::string& filename)
 
 
 /*
- * Writes the given CaDocument to the output stream.
+ * Writes the given CaOmexManifest to the output stream.
  *
  * @return true on success and false if one of the underlying parser
  * components fail (rare).
  */
 bool
-CaWriter::writeOMEX (const CaDocument* d, std::ostream& stream)
+CaWriter::writeOMEX (const CaOmexManifest* d, std::ostream& stream)
 {
   bool result = false;
 
@@ -243,7 +243,7 @@ CaWriter::writeOMEX (const CaDocument* d, std::ostream& stream)
   }
   catch (ios_base::failure&)
   {
-    CaErrorLog *log = (const_cast<CaDocument *>(d))->getErrorLog();
+    CaErrorLog *log = (const_cast<CaOmexManifest *>(d))->getErrorLog();
     log->logError(XMLFileOperationError);
   }
 
@@ -253,7 +253,7 @@ CaWriter::writeOMEX (const CaDocument* d, std::ostream& stream)
 
 /** @cond doxygenLibomexInternal */
 /*
- * Writes the given CaDocument to an in-memory string and returns a
+ * Writes the given CaOmexManifest to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *
@@ -262,7 +262,7 @@ CaWriter::writeOMEX (const CaDocument* d, std::ostream& stream)
  */
 LIBCOMBINE_EXTERN
 char*
-CaWriter::writeToString (const CaDocument* d)
+CaWriter::writeToString (const CaOmexManifest* d)
 {
   ostringstream stream;
   writeOMEX(d, stream);
@@ -271,7 +271,7 @@ CaWriter::writeToString (const CaDocument* d)
 }
 
 std::string 
-CaWriter::writeOMEXToStdString(const CaDocument* d)
+CaWriter::writeOMEXToStdString(const CaOmexManifest* d)
 {
   if (d == NULL) return "";
   
@@ -282,7 +282,7 @@ CaWriter::writeOMEXToStdString(const CaDocument* d)
 
 LIBCOMBINE_EXTERN
 char*
-CaWriter::writeOMEXToString (const CaDocument* d)
+CaWriter::writeOMEXToString (const CaOmexManifest* d)
 {
   return writeToString(d);
 }
@@ -291,7 +291,7 @@ CaWriter::writeOMEXToString (const CaDocument* d)
 
 LIBCOMBINE_EXTERN
 bool
-CaWriter::writeOMEXToFile (const CaDocument* d, const std::string& filename)
+CaWriter::writeOMEXToFile (const CaOmexManifest* d, const std::string& filename)
 {
   return writeOMEX(d, filename);
 }
@@ -367,7 +367,7 @@ CaWriter_setProgramVersion (CaWriter_t *sw, const char *version)
 LIBCOMBINE_EXTERN
 int
 CaWriter_writeOMEX ( CaWriter_t         *sw,
-                       const CaDocument_t *d,
+                       const CaOmexManifest_t *d,
                        const char           *filename )
 {
   if (sw == NULL || d == NULL) 
@@ -381,7 +381,7 @@ CaWriter_writeOMEX ( CaWriter_t         *sw,
 LIBCOMBINE_EXTERN
 int
 CaWriter_writeOMEXToFile ( CaWriter_t         *sw,
-                       const CaDocument_t *d,
+                       const CaOmexManifest_t *d,
                        const char           *filename )
 {
   if (sw == NULL || d == NULL) 
@@ -394,7 +394,7 @@ CaWriter_writeOMEXToFile ( CaWriter_t         *sw,
 
 LIBCOMBINE_EXTERN
 char *
-CaWriter_writeOMEXToString (CaWriter_t *sw, const CaDocument_t *d)
+CaWriter_writeOMEXToString (CaWriter_t *sw, const CaOmexManifest_t *d)
 {
   if (sw == NULL || d == NULL) 
     return 0;
@@ -421,7 +421,7 @@ CaWriter_hasBzip2 ()
 
 LIBCOMBINE_EXTERN
 int
-writeOMEX (const CaDocument_t *d, const char *filename)
+writeOMEX (const CaOmexManifest_t *d, const char *filename)
 {
   CaWriter sw;
   if (d == NULL || filename == NULL)
@@ -433,7 +433,7 @@ writeOMEX (const CaDocument_t *d, const char *filename)
 
 LIBCOMBINE_EXTERN
 int
-writeOMEXToFile (const CaDocument_t *d, const char *filename)
+writeOMEXToFile (const CaOmexManifest_t *d, const char *filename)
 {
   CaWriter sw;
   if (d == NULL || filename == NULL)
@@ -445,7 +445,7 @@ writeOMEXToFile (const CaDocument_t *d, const char *filename)
 
 LIBCOMBINE_EXTERN
 char *
-writeOMEXToString (const CaDocument_t *d)
+writeOMEXToString (const CaOmexManifest_t *d)
 {
   CaWriter sw;
   if (d == NULL)
@@ -455,7 +455,7 @@ writeOMEXToString (const CaDocument_t *d)
 }
 
 LIBCOMBINE_EXTERN
-std::string writeOMEXToStdString(const CaDocument* d)
+std::string writeOMEXToStdString(const CaOmexManifest* d)
 {
   CaWriter sw;
   if (d == NULL)

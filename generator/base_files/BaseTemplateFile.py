@@ -185,6 +185,7 @@ class BaseTemplateFile:
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname[3:]), line)
         else:
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname), line)
+        line = re.sub('SBMLDocument', global_variables.document_class, line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_Lang',

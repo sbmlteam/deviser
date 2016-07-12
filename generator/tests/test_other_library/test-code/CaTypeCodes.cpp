@@ -42,7 +42,6 @@ static
 const char* OMEX_TYPE_CODE_STRINGS[] =
 {
     "(Unknown OMEX Type)"
-  , "CaDocument"
   , "Content"
   , "OmexManifest"
   , "CaListOf"
@@ -55,7 +54,7 @@ CaTypeCode_toString (int tc)
 {
   int max = OMEX_LIST_OF;
 
-  if (tc < OMEX_DOCUMENT || tc > max)
+  if (tc < OMEX_UNKNOWN + 1 || tc > max)
   {
     tc = OMEX_UNKNOWN;
   }

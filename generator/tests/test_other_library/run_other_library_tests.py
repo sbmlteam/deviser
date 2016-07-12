@@ -42,6 +42,7 @@ def generate_templates(filename):
     prefix = global_variables.prefix
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    global_variables.populate_error_list(ob)
     ValidationFiles.ValidationFiles(ob, True)
     os.chdir('./temp')
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
@@ -51,6 +52,9 @@ def generate_templates(filename):
 def generate_common_templates(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    global_variables.populate_error_list(ob)
     prefix = global_variables.prefix
     os.chdir('./temp')
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
@@ -62,6 +66,7 @@ def generate_forward(filename):
     ob = parser.parse_deviser_xml()
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    global_variables.populate_error_list(ob)
     os.chdir('./temp')
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
@@ -394,17 +399,7 @@ def main():
     test_case = 'global files'
     fail += test_global(name, class_name, test_case)
 
-    name = 'combine-archive'
-    class_name = 'CaBase'
-    list_of = 'CaListOf'
-    test_case = 'templates'
-    fail += run_templates(name, class_name, test_case, list_of)
-    fail += test_other_templates('Ca')
-
-    name = 'combine-archive'
-    class_name = 'CaBase'
-    test_case = 'common'
-    fail += test_common_templates(name, class_name, test_case, 'Ca', 'combine')
+    global_variables.reset()
 
     name = 'combine-archive'
     num = 0
@@ -412,6 +407,19 @@ def main():
     list_of = ''
     test_case = 'check includes'
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'combine-archive'
+    class_name = 'CaBase'
+    list_of = 'CaListOf'
+    test_case = 'templates'
+    fail += run_templates(name, class_name, test_case, list_of)
+    fail += test_other_templates('Ca')
+
+
+    name = 'combine-archive'
+    class_name = 'CaBase'
+    test_case = 'common'
+    fail += test_common_templates(name, class_name, test_case, 'Ca', 'combine')
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

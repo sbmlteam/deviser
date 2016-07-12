@@ -387,14 +387,14 @@ CaListOf::size () const
 
 
 /**
- * Used by CaListOf::setCaDocument().
+ * Used by CaListOf::setCaOmexManifest().
  */
-struct SetCaDocument : public unary_function<CaBase*, void>
+struct SetCaOmexManifest : public unary_function<CaBase*, void>
 {
-  CaDocument* d;
+  CaOmexManifest* d;
 
-  SetCaDocument (CaDocument* d) : d(d) { }
-  void operator() (CaBase* sbase) { sbase->setCaDocument(d); }
+  SetCaOmexManifest (CaOmexManifest* d) : d(d) { }
+  void operator() (CaBase* sbase) { sbase->setCaOmexManifest(d); }
 };
 
 
@@ -412,13 +412,13 @@ struct SetParentCaObject : public unary_function<CaBase*, void>
 /** @cond doxygenLibomexInternal */
 
 /*
- * Sets the parent CaDocument of this OMEX object.
+ * Sets the parent CaOmexManifest of this OMEX object.
  */
 void
-CaListOf::setCaDocument (CaDocument* d)
+CaListOf::setCaOmexManifest (CaOmexManifest* d)
 {
-  CaBase::setCaDocument(d);
-  for_each( mItems.begin(), mItems.end(), SetCaDocument(d) );
+  CaBase::setCaOmexManifest(d);
+  for_each( mItems.begin(), mItems.end(), SetCaOmexManifest(d) );
 }
 
 

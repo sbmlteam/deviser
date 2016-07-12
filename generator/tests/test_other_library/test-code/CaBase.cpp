@@ -46,7 +46,7 @@
 
 #include <omex/CaError.h>
 #include <omex/CaErrorLog.h>
-#include <omex/CaDocument.h>
+#include <omex/CaOmexManifest.h>
 #include <omex/CaListOf.h>
 #include <omex/CaBase.h>
 
@@ -352,7 +352,7 @@ CaBase::getAnnotationString () const
 std::string
 CaBase::getURI() const
 {
-  const CaDocument* doc = getCaDocument();
+  const CaOmexManifest* doc = getCaOmexManifest();
 
   if (doc == NULL)
     return getElementNamespace();
@@ -443,10 +443,10 @@ CaBase::getNamespaces() const
 
 
 /*
- * @return the parent CaDocument of this OMEX object.
+ * @return the parent CaOmexManifest of this OMEX object.
  */
-const CaDocument*
-CaBase::getCaDocument () const
+const CaOmexManifest*
+CaBase::getCaOmexManifest () const
 {
   if (mCa != NULL)
   {
@@ -473,10 +473,10 @@ CaBase::getCaDocument () const
 }
 
 /*
- * @return the parent CaDocument of this OMEX object.
+ * @return the parent CaOmexManifest of this OMEX object.
  */
-CaDocument*
-CaBase::getCaDocument ()
+CaOmexManifest*
+CaBase::getCaOmexManifest ()
 {
   if (mCa != NULL)
   {
@@ -587,7 +587,7 @@ CaBase::isSetMetaId () const
 
 
 bool
-SedBase::isSetId() const
+CaBase::isSetId() const
 {
   return (getId().empty() == false);
 }
@@ -678,9 +678,9 @@ CaBase::setAnnotation (const std::string& annotation)
   XMLNode* annt_xmln;
   
   // you might not have a document !!
-  if (getCaDocument() != NULL)
+  if (getCaOmexManifest() != NULL)
   {
-    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaOmexManifest()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -794,9 +794,9 @@ CaBase::appendAnnotation (const std::string& annotation)
 {
   int success = LIBCOMBINE_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getCaDocument() != NULL)
+  if (getCaOmexManifest() != NULL)
   {
-    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaOmexManifest()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -928,9 +928,9 @@ CaBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 {
   int success = LIBCOMBINE_OPERATION_FAILED;
   XMLNode* annt_xmln;
-  if (getCaDocument() != NULL)
+  if (getCaOmexManifest() != NULL)
   {
-    XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
+    XMLNamespaces* xmlns = getCaOmexManifest()->getNamespaces();
     annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
   }
   else
@@ -1018,7 +1018,7 @@ CaBase::setNotes(const XMLNode* notes)
  * Sets the notes (by std::string) of this OMEX object to a copy of notes.
  */
 int
-SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
+CaBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 {
   int success = LIBCOMBINE_OPERATION_FAILED;
   
@@ -1031,9 +1031,9 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
     XMLNode* notes_xmln;
 
     // you might not have a document !!
-    if (getCaDocument() != NULL)
+    if (getCaOmexManifest() != NULL)
     {
-      XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getCaOmexManifest()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
@@ -1439,9 +1439,9 @@ CaBase::appendNotes(const std::string& notes)
 
   XMLNode* notes_xmln;
   // you might not have a document !!
-  if (getCaDocument() != NULL)
+  if (getCaOmexManifest() != NULL)
   {
-      XMLNamespaces* xmlns = getCaDocument()->getNamespaces();
+      XMLNamespaces* xmlns = getCaOmexManifest()->getNamespaces();
       notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
@@ -1460,10 +1460,10 @@ CaBase::appendNotes(const std::string& notes)
 
 /** @cond doxygenLibomexInternal */
 /*
- * Sets the parent CaDocument of this OMEX object.
+ * Sets the parent CaOmexManifest of this OMEX object.
  */
 void
-CaBase::setCaDocument (CaDocument* d)
+CaBase::setCaOmexManifest (CaOmexManifest* d)
 {
   mCa = d;
 }
@@ -1482,13 +1482,13 @@ CaBase::connectToParent (CaBase* parent)
   {
 #if 0
     cout << "[DEBUG] connectToParent " << this << " (parent) " << CaTypeCode_toString(parent->getTypeCode(),"core")
-         << " " << parent->getCaDocument() << endl;
+         << " " << parent->getCaOmexManifest() << endl;
 #endif
-    setCaDocument(mParentCaObject->getCaDocument());
+    setCaOmexManifest(mParentCaObject->getCaOmexManifest());
   }
   else
   {
-    setCaDocument(NULL);
+    setCaOmexManifest(NULL);
   }
 }
 
@@ -1512,7 +1512,7 @@ CaBase*
 CaBase::getAncestorOfType(int type)
 {
   if (type == OMEX_DOCUMENT)
-    return getCaDocument();
+    return getCaOmexManifest();
 
   CaBase *child;
   CaBase *parent = getParentCaObject();
@@ -1540,7 +1540,7 @@ const CaBase*
 CaBase::getAncestorOfType(int type) const
 {
   if (type == OMEX_DOCUMENT)
-    return getCaDocument();
+    return getCaOmexManifest();
 
   const CaBase *child;
   const CaBase *parent = getParentCaObject();
@@ -1937,9 +1937,9 @@ CaBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == OmexCaDocumentAllowedAttributes
-            || errorId == OmexCaDocumentLevelMustBeInteger
-            || errorId == OmexCaDocumentVersionMustBeInteger
+          if (errorId == CombineOmexManifestAllowedCoreAttributes
+            || errorId == CombineOmexManifestVersionMustBeInteger
+            || errorId == CombineOmexManifestLevelMustBeInteger
             || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;
@@ -2229,7 +2229,7 @@ CaBase::logUnknownAttribute( const string& attribute,
   {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no CaDocument attached.
+  // no CaOmexManifest attached.
   //
         getErrorLog()->logError(AllowedAttributes, level,
           version, msg.str(), getLine(), getColumn());
@@ -2283,7 +2283,7 @@ CaBase::logEmptyString( const string& attribute,
 
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no CaDocument attached.
+  // no CaOmexManifest attached.
   //
   if (mCa != NULL)
     getErrorLog()->logError(NotSchemaConformant,
@@ -2307,7 +2307,7 @@ CaBase::logError (  unsigned int       id
 {
   //
   // (TODO) Needs to be fixed so that error can be added when
-  // no CaDocument attached.
+  // no CaOmexManifest attached.
   //
   if ( CaBase::getErrorLog() != NULL && mCa != NULL)
     getErrorLog()->logError(id, getLevel(), getVersion(), details, getLine(), getColumn());
@@ -2450,7 +2450,7 @@ CaBase::getCaPrefix() const
 /*
  * Returns the root element of this element.
  *
- * @note The root element may not be an CaDocument element. For example,
+ * @note The root element may not be an CaOmexManifest element. For example,
  * this element is the root element if this element doesn't have a parent
  * OMEX object (i.e. mParentCaObject is NULL)
  */
@@ -2948,10 +2948,10 @@ CaBase_getMetaId (CaBase_t *sb)
 
 
 LIBCOMBINE_EXTERN
-const CaDocument_t *
-CaBase_getCaDocument (CaBase_t *sb)
+const CaOmexManifest_t *
+CaBase_getCaOmexManifest (CaBase_t *sb)
 {
-  return (sb != NULL) ? sb->getCaDocument() : NULL;
+  return (sb != NULL) ? sb->getCaOmexManifest() : NULL;
 }
 
 

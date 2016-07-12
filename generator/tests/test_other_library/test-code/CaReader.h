@@ -50,7 +50,7 @@
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
-class CaDocument;
+class CaOmexManifest;
 
 
 class LIBCOMBINE_EXTERN CaReader
@@ -78,14 +78,14 @@ public:
    *
    * @param filename the name or full pathname of the file to be read.
    *
-   * @return a pointer to the CaDocument object created from the OMEX
+   * @return a pointer to the CaOmexManifest object created from the OMEX
    * content in @p filename.
    *
    * @see readOMEXFromString(@if java String@endif)
    * @see CaError
-   * @see CaDocument
+   * @see CaOmexManifest
    */
-  CaDocument* readOMEX (const std::string& filename);
+  CaOmexManifest* readOMEX (const std::string& filename);
 
 
   /**
@@ -94,25 +94,25 @@ public:
    *
    * @param filename the name or full pathname of the file to be read.
    *
-   * @return a pointer to the CaDocument object created from the Ca
+   * @return a pointer to the CaOmexManifest object created from the Ca
    * content in @p filename.
    *
    * @see readOMEXFromString(@if java String@endif)
    * @see CaError
-   * @see CaDocument
+   * @see CaOmexManifest
    */
-  CaDocument* readOMEXFromFile (const std::string& filename);
+  CaOmexManifest* readOMEXFromFile (const std::string& filename);
 
 
   /**
    * @param xml a string containing a full Ca model
    *
-   * @return a pointer to the CaDocument created from the Ca content,
+   * @return a pointer to the CaOmexManifest created from the Ca content,
    * or a null pointer if @p xml is null.
    *
    * @see CaReader::readOMEX(@if java String@endif)
    */
-  CaDocument* readOMEXFromString (const std::string& xml);
+  CaOmexManifest* readOMEXFromString (const std::string& xml);
 
 
   /**
@@ -144,7 +144,7 @@ protected:
   /**
    * Used by readOMEX() and readOMEXFromString().
    */
-  CaDocument* readInternal (const char* content, bool isFile = true);
+  CaOmexManifest* readInternal (const char* content, bool isFile = true);
 
   /** @endcond */
 };
@@ -195,7 +195,7 @@ CaReader_free (CaReader_t *sr);
  * @param filename a string giving the path to a file where the XML
  * content is to be found.
  *
- * @return a pointer to the CaDocument structure created from the Ca
+ * @return a pointer to the CaOmexManifest structure created from the Ca
  * content read from @p filename.
  *
  * @if conly
@@ -203,7 +203,7 @@ CaReader_free (CaReader_t *sr);
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEX (CaReader_t *sr, const char *filename);
 
 
@@ -215,7 +215,7 @@ CaReader_readOMEX (CaReader_t *sr, const char *filename);
  * @param filename a string giving the path to a file where the XML
  * content is to be found.
  *
- * @return a pointer to the CaDocument structure created from the Ca
+ * @return a pointer to the CaOmexManifest structure created from the Ca
  * content read from @p filename.
  *
  * @if conly
@@ -223,7 +223,7 @@ CaReader_readOMEX (CaReader_t *sr, const char *filename);
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEXFromFile (CaReader_t *sr, const char *filename);
 
 
@@ -232,14 +232,14 @@ CaReader_readOMEXFromFile (CaReader_t *sr, const char *filename);
  *
  * @param xml the input xml string.
  *
- * @return a pointer to the CaDocument read.
+ * @return a pointer to the CaOmexManifest read.
  *
  * @if conly
  * @memberof CaReader_t
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEXFromString (CaReader_t *sr, const char *xml);
 
 
@@ -289,14 +289,14 @@ CaReader_hasBzip2 ();
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEX (const char *filename);
 
 
 /**
  * @param filename the name or full pathname of the file to be read.
  *
- * @return a pointer to the CaDocument structure created from the Ca
+ * @return a pointer to the CaOmexManifest structure created from the Ca
  * content in @p filename.
  *
  * @if conly
@@ -304,14 +304,14 @@ readOMEX (const char *filename);
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEXFromFile (const char *filename);
 
 
 /**
  * @param xml a string containing a full Ca model
  *
- * @return a pointer to the CaDocument structure created from the Ca
+ * @return a pointer to the CaOmexManifest structure created from the Ca
  * content in @p xml.
  *
  * @if conly
@@ -319,7 +319,7 @@ readOMEXFromFile (const char *filename);
  * @endif
  */
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEXFromString (const char *xml);
 
 

@@ -38,7 +38,7 @@
 
 #include <omex/CaErrorLog.h>
 #include <omex/CaVisitor.h>
-#include <omex/CaDocument.h>
+#include <omex/CaOmexManifest.h>
 #include <omex/CaError.h>
 #include <omex/CaReader.h>
 
@@ -91,9 +91,9 @@ CaReader::~CaReader ()
  * CaReader::hasZlib() and CaReader::hasBzip2() can be used to check 
  * whether libCombine is linked with each library.
  * 
- * @return a pointer to the CaDocument read.
+ * @return a pointer to the CaOmexManifest read.
  */
-CaDocument*
+CaOmexManifest*
 CaReader::readOMEX (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
@@ -103,7 +103,7 @@ CaReader::readOMEX (const std::string& filename)
 /*
  * Reads an Ca document from the given filename.
  */
-CaDocument*
+CaOmexManifest*
 CaReader::readOMEXFromFile (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
@@ -123,9 +123,9 @@ CaReader::readOMEXFromFile (const std::string& filename)
  * the method documentation for readOMEX(filename) for example error
  * checking code.
  *
- * @return a pointer to the CaDocument read.
+ * @return a pointer to the CaOmexManifest read.
  */
-CaDocument*
+CaOmexManifest*
 CaReader::readOMEXFromString (const std::string& xml)
 {
   const static string dummy_xml ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");  
@@ -205,10 +205,10 @@ isCriticalError(const unsigned int errorId)
 /*
  * Used by readOMEX() and readOMEXFromString().
  */
-CaDocument*
+CaOmexManifest*
 CaReader::readInternal (const char* content, bool isFile)
 {
-  CaDocument* d = new CaDocument();
+  CaOmexManifest* d = new CaOmexManifest();
 
   if (isFile && content != NULL && (util_file_exists(content) == false))
   {
@@ -301,7 +301,7 @@ CaReader_free (CaReader_t *sr)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEX (CaReader_t *sr, const char *filename)
 {
   if (sr != NULL)
@@ -312,7 +312,7 @@ CaReader_readOMEX (CaReader_t *sr, const char *filename)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEXFromFile (CaReader_t *sr, const char *filename)
 {
   if (sr != NULL)
@@ -323,7 +323,7 @@ CaReader_readOMEXFromFile (CaReader_t *sr, const char *filename)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 CaReader_readOMEXFromString (CaReader_t *sr, const char *xml)
 {
   if (sr != NULL)
@@ -351,7 +351,7 @@ CaReader_hasBzip2 (void)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEX (const char *filename)
 {
   CaReader sr;
@@ -360,7 +360,7 @@ readOMEX (const char *filename)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEXFromFile (const char *filename)
 {
   CaReader sr;
@@ -369,7 +369,7 @@ readOMEXFromFile (const char *filename)
 
 
 LIBCOMBINE_EXTERN
-CaDocument_t *
+CaOmexManifest_t *
 readOMEXFromString (const char *xml)
 {
   CaReader sr;

@@ -59,7 +59,6 @@ BEGIN_C_DECLS
 typedef enum
 {
     OMEX_UNKNOWN                    =  0
-  , OMEX_DOCUMENT
   , LIB_COMBINE_CONTENT
   , LIB_COMBINE_OMEXMANIFEST
   , OMEX_LIST_OF

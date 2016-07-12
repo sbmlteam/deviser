@@ -62,7 +62,7 @@ SedTypeCode_toString (int tc)
 {
   int max = SEDML_LIST_OF;
 
-  if (tc < SEDML_DOCUMENT || tc > max)
+  if (tc < SEDML_UNKNOWN + 1 || tc > max)
   {
     tc = SEDML_UNKNOWN;
   }

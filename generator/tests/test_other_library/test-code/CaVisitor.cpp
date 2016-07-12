@@ -46,7 +46,7 @@ CaVisitor::~CaVisitor ()
 
 
 void
-CaVisitor::visit (const CaDocument& x)
+CaVisitor::visit (const CaOmexManifest& x)
 {
   visit( static_cast<const CaBase&>(x) );
 }
@@ -87,7 +87,7 @@ CaVisitor::visit(const CaOmexManifest& x)
 
 
 void
-CaVisitor::leave (const CaDocument& x)
+CaVisitor::leave (const CaOmexManifest& x)
 {
 }
 

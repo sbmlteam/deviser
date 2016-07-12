@@ -73,9 +73,7 @@ def abbrev_name(element):
 def abbrev_lo_name(loname):
     return 'LO' + loname[6:]
 
-def list_of_name(name):
     prefix = ''
-    if not global_variables.is_package:
         prefix = global_variables.prefix
     return prefix + 'ListOf' + plural_no_prefix(name)
 
@@ -87,6 +85,11 @@ def lower_list_of_name_no_prefix(name):
 def cap_list_of_name(name):
     name = upper_first(name)
     return list_of_name(name)
+
+
+def cap_list_of_name_no_prefix(name):
+    name = upper_first(name)
+    return list_of_name(name, False)
 
 
 def plural_no_prefix(name):
@@ -240,6 +243,33 @@ def get_element_name(attribute):
             return '\{0}'.format(cap_list_of_name(name))
         elif attribute['type'] == 'inline_lo_element':
             return '\{0}'.format(cap_list_of_name(name))
+        elif attribute['type'] == 'element':
+            if attribute['element'] == 'ASTNode*':
+                return 'MathML math'
+            else:
+                return attribute['element']
+        else:
+            return 'FIX_ME'
+    elif 'isListOf' in attribute:
+        if attribute['isListOf']:
+            return '\{0}'.format(cap_list_of_name(attribute['name']))
+        else:
+            return '\{0}'.format(upper_first(attribute['name']))
+    else:
+        return 'FIX ME'
+
+
+def get_element_name_no_prefix(attribute):
+    if 'type' in attribute:
+        name = ''
+        if 'texname' in attribute:
+            name = attribute['texname']
+        if len(name) == 0:
+            name = attribute['name']
+        if attribute['type'] == 'lo_element':
+            return '\{0}'.format(cap_list_of_name_no_prefix(name))
+        elif attribute['type'] == 'inline_lo_element':
+            return '\{0}'.format(cap_list_of_name_no_prefix(name))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'

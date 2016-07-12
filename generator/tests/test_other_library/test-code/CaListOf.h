@@ -360,12 +360,12 @@ public:
 
   /** @cond doxygenLibomexInternal */
   /**
-   * Sets the parent CaDocument of this OMEX object.
+   * Sets the parent CaOmexManifest of this OMEX object.
    *
-   * @param d the CaDocument that should become the parent of this
+   * @param d the CaOmexManifest that should become the parent of this
    * CaListOf.
    */
-  virtual void setCaDocument (CaDocument* d);
+  virtual void setCaOmexManifest (CaOmexManifest* d);
   /** @endcond */
 
 
@@ -380,7 +380,7 @@ public:
    * constructor, copy constructor and assignment operator.
    *
    * @if cpp
-   * @see setCaDocument()
+   * @see setCaOmexManifest()
    * @see enablePackageInternal()
    * @endif
    */

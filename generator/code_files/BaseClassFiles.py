@@ -135,16 +135,16 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     def print_typecodes(self, fileout):
         for element in self.elements:
-            if not element['name'].endswith('Document'):
-                name = element['typecode']
-                fileout.copy_line_verbatim('  , {0}\n'
+          #  if not element['name'].endswith('Document'):
+            name = element['typecode']
+            fileout.copy_line_verbatim('  , {0}\n'
                                            ''.format(name))
 
     def print_typecode_strings(self, fileout):
         for element in self.elements:
-            if not element['name'].endswith('Document'):
-                name = strFunctions.remove_prefix(element['name'])
-                fileout.copy_line_verbatim('  , \"{0}\"\n'
+        #   if not element['name'].endswith('Document'):
+            name = strFunctions.remove_prefix(element['name'])
+            fileout.copy_line_verbatim('  , \"{0}\"\n'
                                            ''.format(name))
 
     def print_visit_header(self, fileout):

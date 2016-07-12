@@ -54,7 +54,7 @@ LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 class CaBase;
 
-class CaDocument;
+class CaOmexManifest;
 class CaListOf;
 
 class CaContent;
@@ -73,11 +73,11 @@ public:
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
-   * Pattern</i></a> to perform operations on CaDocument objects.
+   * Pattern</i></a> to perform operations on CaOmexManifest objects.
    *
-   * @param x the CaDocument object to visit.
+   * @param x the CaOmexManifest object to visit.
    */
-  virtual void visit (const CaDocument &x);
+  virtual void visit (const CaOmexManifest &x);
 
 
   /**
@@ -126,11 +126,11 @@ virtual bool visit (const CaOmexManifest &x);
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
-   * Pattern</i></a> to perform operations on CaDocument objects.
+   * Pattern</i></a> to perform operations on CaOmexManifest objects.
    *
-   * @param x the CaDocument object to visit.
+   * @param x the CaOmexManifest object to visit.
    */
-  virtual void leave (const CaDocument &x);
+  virtual void leave (const CaOmexManifest &x);
 
 
   /**
