@@ -73,7 +73,9 @@ def abbrev_name(element):
 def abbrev_lo_name(loname):
     return 'LO' + loname[6:]
 
+def list_of_name(name, addPrefix=True):
     prefix = ''
+    if addPrefix and not global_variables.is_package:
         prefix = global_variables.prefix
     return prefix + 'ListOf' + plural_no_prefix(name)
 

@@ -555,7 +555,7 @@ SBase::isSetMetaId () const
 
 
 bool
-SedBase::isSetId() const
+SBase::isSetId() const
 {
   return (getId().empty() == false);
 }
@@ -986,7 +986,7 @@ SBase::setNotes(const XMLNode* notes)
  * Sets the notes (by std::string) of this SBML_Lang object to a copy of notes.
  */
 int
-SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
+SBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 {
   int success = LIBSBML_OPERATION_FAILED;
   

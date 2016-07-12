@@ -76,7 +76,7 @@ LIBSBML_CPP_NAMESPACE_END
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 class CaVisitor;
-class CaDocument;
+class CaOmexManifest;
 
 
 class LIBCOMBINE_EXTERN CaBase
@@ -437,31 +437,31 @@ public:
 
 
   /**
-   * Returns the CaDocument object containing this object instance.
+   * Returns the CaOmexManifest object containing this object instance.
    *
-   * This method allows the caller to obtain the CaDocument for the
+   * This method allows the caller to obtain the CaOmexManifest for the
    * current object.
    * 
-   * @return the parent CaDocument object of this OMEX object.
+   * @return the parent CaOmexManifest object of this OMEX object.
    *
    * @see getParentCaObject()
    * @see getModel()
    */
-  const CaDocument* getCaDocument () const;
+  const CaOmexManifest* getCaOmexManifest () const;
 
 
   /**
-   * Returns the CaDocument object containing this object instance.
+   * Returns the CaOmexManifest object containing this object instance.
    *
-   * This method allows the caller to obtain the CaDocument for the
+   * This method allows the caller to obtain the CaOmexManifest for the
    * current object.
    * 
-   * @return the parent CaDocument object of this OMEX object.
+   * @return the parent CaOmexManifest object of this OMEX object.
    *
    * @see getParentCaObject()
    * @see getModel()
    */
-  CaDocument* getCaDocument ();
+  CaOmexManifest* getCaOmexManifest ();
 
 
   /**
@@ -473,7 +473,7 @@ public:
    * 
    * @return the parent OMEX object of this OMEX object.
    *
-   * @see getCaDocument()
+   * @see getCaOmexManifest()
    * @see getModel()
    */
   CaBase* getParentCaObject();
@@ -488,7 +488,7 @@ public:
    * 
    * @return the parent OMEX object of this OMEX object.
    *
-   * @see getCaDocument()
+   * @see getCaOmexManifest()
    * @see getModel()
    */
   const CaBase* getParentCaObject() const;
@@ -1191,16 +1191,16 @@ public:
 
   /** @cond doxygenLibomexInternal */
   /**
-   * Sets the parent CaDocument of this OMEX object.
+   * Sets the parent CaOmexManifest of this OMEX object.
    *
-   * @param d the CaDocument object to use
+   * @param d the CaOmexManifest object to use
    *
    * @see connectToChild()
    * @if clike
    * @see enablePackageInternal()
    * @endif@~
    */
-  virtual void setCaDocument (CaDocument* d);
+  virtual void setCaOmexManifest (CaOmexManifest* d);
   /** @endcond */
 
 
@@ -1228,7 +1228,7 @@ public:
    * constructor, copy constructor, assignment operator.
    *
    * @if clike
-   * @see setCaDocument()
+   * @see setCaOmexManifest()
    * @see enablePackageInternal()
    * @endif@~
    */
@@ -1333,7 +1333,7 @@ public:
 
 
   /**
-   * Returns the OMEX Level of the CaDocument object containing @em this
+   * Returns the OMEX Level of the CaOmexManifest object containing @em this
    * object.
    * 
    * @return the OMEX level of this OMEX object.
@@ -1346,7 +1346,7 @@ public:
 
 
   /**
-   * Returns the Version within the OMEX Level of the CaDocument object
+   * Returns the Version within the OMEX Level of the CaOmexManifest object
    * containing @em this object.
    * 
    * @return the OMEX version of this OMEX object.
@@ -1628,9 +1628,9 @@ protected:
 
   /** @cond doxygenLibomexInternal */
 
-  bool matchesCoreSedNamespace(const CaBase * sb);
+  bool matchesCoreCaNamespace(const CaBase * sb);
 
-  bool matchesCoreSedNamespace(const CaBase * sb) const;
+  bool matchesCoreCaNamespace(const CaBase * sb) const;
 
   /**
    * Creates a new CaBase object with the given OMEX level, version.
@@ -1859,7 +1859,7 @@ protected:
   /**
    * Returns the root element of the node tree to which this element is connected.
    *
-   * @note The root element may not be an CaDocument element. For example,
+   * @note The root element may not be an CaOmexManifest element. For example,
    * this element is the root element if this element doesn't have a parent
    * OMEX object (i.e. mParentCaObject is NULL)
    *
@@ -1874,7 +1874,7 @@ protected:
   std::string     mMetaId;
   XMLNode*        mNotes;
   XMLNode*        mAnnotation;
-  CaDocument*   mCa;
+  CaOmexManifest*   mCa;
   CaNamespaces* mCaNamespaces;
   void*           mUserData;
 
@@ -1963,18 +1963,18 @@ CaBase_getMetaId (CaBase_t *sb);
 
 
 /**
- * Returns the parent CaDocument_t structure of the given CaBase_t
+ * Returns the parent CaOmexManifest_t structure of the given CaBase_t
  * structure.
  *
  * @param sb the CaBase_t structure
  *
- * @return the parent CaDocument of this OMEX structure.
+ * @return the parent CaOmexManifest of this OMEX structure.
  *
  * @memberof CaBase_t
  */
 LIBCOMBINE_EXTERN
-const CaDocument_t *
-CaBase_getCaDocument (CaBase_t *sb);
+const CaOmexManifest_t *
+CaBase_getCaOmexManifest (CaBase_t *sb);
 
 
 /**
@@ -2165,7 +2165,7 @@ CaBase_isSetAnnotation (const CaBase_t *sb);
  * The string @p metaid is copied.  The value of @p metaid must be an
  * identifier conforming to the syntax defined by the XML 1.0 data type
  * ID.  Among other things, this type requires that a value is unique
- * among all the values of type XML ID in an CaDocument_t.  Although OMEX
+ * among all the values of type XML ID in an CaOmexManifest_t.  Although OMEX
  * only uses XML ID for the "metaid" attribute, callers should be careful
  * if they use XML ID's in XML portions of a model that are not defined
  * by OMEX, such as in the application-specific content of the
