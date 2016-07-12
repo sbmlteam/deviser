@@ -289,7 +289,7 @@ CaContent::getElementName() const
 
 
 /*
- * Returns the LIBCOMBINE type code for this CaContent object.
+ * Returns the libCombine type code for this CaContent object.
  */
 int
 CaContent::getTypeCode() const
@@ -356,7 +356,7 @@ CaContent::accept(CaVisitor& v) const
 /** @cond doxygenlibCombineInternal */
 
 /*
- * Sets the parent OmexManifest
+ * Sets the parent CaOmexManifest
  */
 void
 CaContent::setCaOmexManifest(CaOmexManifest* d)
@@ -417,7 +417,7 @@ CaContent::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(CombineContentAllowedAttributes, level, version,
+        log->logError(CombineLOContentsAllowedAttributes, level, version,
           details);
       }
     }
@@ -432,7 +432,8 @@ CaContent::readAttributes(
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownCoreAttribute);
-      log->logError(CaUnknownError, level, version, details);
+      log->logError(CombineCaContentAllowedAttributes, level, version,
+        details);
     }
   }
 

@@ -696,11 +696,9 @@ class SetGetFunctions():
                            '{0}*>({1})'.format(self.class_name,
                                                self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
-                              'LIB{3}'
-                              '_INVALID_OBJECT'.format(use_name,
-                                                       attribute['capAttName'],
-                                                       attribute['name'],
-                                                       self.cap_language)]
+                              '{3}'.format(use_name, attribute['capAttName'],
+                                           attribute['name'],
+                                           self.invalid_obj)]
             code = [self.create_code_block('line', implementation)]
 
         # return the parts
@@ -1060,10 +1058,9 @@ class SetGetFunctions():
                 use_name = 'static_cast<' \
                            '{0}*>({1})'.format(self.class_name,
                                                self.abbrev_parent)
-            implementation = ['return ({0} != NULL) ? {0}->unset{1}() : LIB{2}'
-                              '_INVALID_OBJECT'.format(use_name,
-                                                       attribute['capAttName'],
-                                                       self.cap_language)]
+            implementation = ['return ({0} != NULL) ? {0}->unset{1}() : {2}'
+                              ''.format(use_name,  attribute['capAttName'],
+                                        self.invalid_obj)]
             code = [self.create_code_block('line', implementation)]
         # return the parts
         return dict({'title_line': title_line,

@@ -268,7 +268,7 @@ public:
 
 
   /**
-   * Returns the libOMEX type code for this CaContent object.
+   * Returns the libCombine type code for this CaContent object.
    *
    * @copydetails doc_what_are_typecodes
    *

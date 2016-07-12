@@ -252,8 +252,12 @@ class GeneralFunctions():
             return
 
         # create comment
-        title_line = 'Returns the lib{0} type code for this {1} object.'\
-            .format(self.cap_language, self.object_name)
+        lib = global_variables.library_name;
+        if self.cap_language == 'SBML' or self.cap_language == 'SEDML':
+            lib = 'lib{0}'.format(self.cap_language)
+        
+        title_line = 'Returns the {0} type code for this {1} object.'\
+            .format(lib, self.object_name)
         params = ['@copydetails doc_what_are_typecodes']
         return_lines = ['@return the {0} type code for this '
                         'object:'.format(self.cap_language)]
