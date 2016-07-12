@@ -167,13 +167,16 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         global std_base
         std_base = base
 
-    if doc:
-        global document_class
-        document_class = doc
-
     if prfix:
         global prefix
         prefix = prfix
+
+    if doc:
+        global document_class
+        document_class = doc
+        if not doc.startswith(prefix):
+            document_class = '{0}{1}'.format(prefix, doc)
+
 
     if pkg_prefix:
         global package_prefix
@@ -217,6 +220,8 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
 
     global ret_att_unex
     ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
+
+
 
 
 def get_return_code(index):

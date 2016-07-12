@@ -82,7 +82,7 @@ public:
    * @throws OMEXConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
    * OMEX object, are either invalid or mismatched with respect to the parent
-   * OmexManifest object.
+   * CaOmexManifest object.
    * @copydetails doc_note_setting_lv
    */
   CaContent(unsigned int level = OMEX_DEFAULT_LEVEL,
@@ -97,7 +97,7 @@ public:
    * @throws OMEXConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
    * OMEX object, are either invalid or mismatched with respect to the parent
-   * OmexManifest object.
+   * CaOmexManifest object.
    * @copydetails doc_note_setting_lv
    */
   CaContent(CaNamespaces *omexns);
@@ -325,7 +325,7 @@ public:
   /** @cond doxygenlibCombineInternal */
 
   /**
-   * Sets the parent OmexManifest
+   * Sets the parent CaOmexManifest
    */
   virtual void setCaOmexManifest(CaOmexManifest* d);
 
@@ -411,7 +411,7 @@ BEGIN_C_DECLS
  * @throws OMEXConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
  * OMEX object, are either invalid or mismatched with respect to the parent
- * OmexManifest object.
+ * CaOmexManifest object.
  * @copydetails doc_note_setting_lv
  *
  * @memberof CaContent_t
