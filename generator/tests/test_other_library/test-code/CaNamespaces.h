@@ -42,7 +42,7 @@
 #include <sbml/util/List.h>
 
 #include <omex/common/common.h>
-#include <omex/common/omexfwd.h>
+#include <omex/common/combinefwd.h>
 
 #ifdef __cplusplus
 namespace LIBCOMBINE_CPP_NAMESPACE 
@@ -124,7 +124,7 @@ public:
   
   /**
    * Returns a list of all supported CaNamespaces in this version of 
-   * libomex. 
+   * libcombine. 
    * 
    * @return a list with supported OMEX namespaces. 
    */

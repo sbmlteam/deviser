@@ -1,6 +1,6 @@
 /**
- * @file CaTypes.h
- * @brief Definition of the CaTypes class.
+ * @file libcombine-version.cpp
+ * @brief Implementation of the libcombine-version class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -33,22 +33,35 @@
 
 
 
-#ifndef CaTypes_h
-#define CaTypes_h
+#include "omex/common/libcombine-version.h"
+#include <string.h>
 
 
-#include <omex/common/combinefwd.h>
+LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
-#include <omex/CaDocument.h>
-
-#include <omex/CaBase.h>
-#include <omex/CaListOf.h>
-
-#include <omex/CaContent.h>
-#include <omex/CaOmexManifest.h>
-
-#include <omex/CaReader.h>
-#include <omex/CaWriter.h>
+LIBCOMBINE_EXTERN
+int 
+getLibCombineVersion() 
+{ 
+  return LIBCOMBINE_VERSION; 
+}
 
 
-#endif  /* CaTypes_h */
+LIBCOMBINE_EXTERN
+const char* 
+getLibCombineDottedVersion() 
+{ 
+  return LIBCOMBINE_DOTTED_VERSION;
+}
+
+
+LIBCOMBINE_EXTERN
+const char* 
+getLibCombineVersionString() 
+{ 
+  return LIBCOMBINE_VERSION_STRING;
+}
+
+LIBCOMBINE_CPP_NAMESPACE_END
+
+

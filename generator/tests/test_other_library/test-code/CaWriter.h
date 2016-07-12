@@ -40,7 +40,7 @@
 
 
 #include <omex/common/extern.h>
-#include <omex/common/omexfwd.h>
+#include <omex/common/combinefwd.h>
 
 
 #ifdef __cplusplus
@@ -83,7 +83,7 @@ public:
    * at the beginning of the XML document:
    * @verbatim
  <!-- Created by <program name> version <program version>
- on yyyy-MM-dd HH:mm with libCombine version <libomex version>. -->
+ on yyyy-MM-dd HH:mm with libCombine version <libcombine version>. -->
  @endverbatim
    *
    * If the program name and version are not set at some point before
@@ -110,7 +110,7 @@ public:
    * at the beginning of the document:
    * @verbatim
  <!-- Created by <program name> version <program version>
- on yyyy-MM-dd HH:mm with libCombine version <libomex version>. -->
+ on yyyy-MM-dd HH:mm with libCombine version <libcombine version>. -->
  @endverbatim
    *
    * If the program version and name are not set at some point before
@@ -340,7 +340,7 @@ CaWriter_free (CaWriter_t *sw);
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libCombine version <libomex version>. -->
+ *   on yyyy-MM-dd HH:mm with libCombine version <libcombine version>. -->
  *
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -358,7 +358,7 @@ CaWriter_setProgramName (CaWriter_t *sw, const char *name);
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libCombine version <libomex version>. -->
+ *   on yyyy-MM-dd HH:mm with libCombine version <libcombine version>. -->
  *
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}

@@ -243,11 +243,11 @@ public:
    * href="#CaErrorCode_t">
    * CaErrorCode_t</a>.  @endif@if java These numbers are
    * defined as unsigned integer constants in the file
-   * "libomexConstants.html".  See the <a class="el"
+   * "libcombineConstants.html".  See the <a class="el"
    * href="#CaErrorCode_t">top of this documentation page</a> for a table
    * listing the possible values and their meanings. @endif@if python These
    * numbers are defined as unsigned integer constants in the interface
-   * class @link libomex libomex@endlink.  See the <a class="el"
+   * class @link libcombine libcombine@endlink.  See the <a class="el"
    * href="#CaErrorCode_t">top of this documentation page</a> for a table
    * listing the possible values and their meanings. @endif@~ The argument
    * @p errorId to this constructor @em can be (but does not have to be) a

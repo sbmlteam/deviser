@@ -58,7 +58,10 @@ class BaseTemplateFile:
     def create_base_description(self, name, common=False):
         if common:
             if name.startswith('lib'):
-                used_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+                if global_variables.library_name.lower().startswith('lib'):
+                    used_name = '{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+                else:
+                    used_name = 'lib{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
             else:
                 used_name = name
 
@@ -172,10 +175,16 @@ class BaseTemplateFile:
 
     @staticmethod
     def adjust_line(line):
+        lowerlibname = global_variables.library_name.lower()
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
         line = re.sub('LibSBML', strFunctions.upper_first(global_variables.library_name), line)
         line = re.sub('libSBML', strFunctions.lower_first(global_variables.library_name), line)
+        line = re.sub('libsbml', lowerlibname, line)
+        if lowerlibname.startswith('lib'):
+            line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname[3:]), line)
+        else:
+            line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_Lang',

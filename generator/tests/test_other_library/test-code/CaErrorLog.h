@@ -106,9 +106,9 @@ public:
    * #CaErrorSeverity_t @endif@if java @param severity a
    * value from the set of <code>LIBCOMBINE_SEV_</code> constants defined by
    * the interface class <code><a
-   * href="libomexConstants.html">libomexConstants</a></code> @endif@if python @param severity a
+   * href="libcombineConstants.html">libcombineConstants</a></code> @endif@if python @param severity a
    * value from the set of <code>LIBCOMBINE_SEV_</code> constants defined by
-   * the interface class @link libomex libomex@endlink. @endif@~
+   * the interface class @link libcombine libcombine@endlink. @endif@~
    *
    * @return a count of the number of errors with the given severity code.
    *
@@ -125,9 +125,9 @@ public:
    * #CaErrorSeverity_t @endif@if java @param severity a
    * value from the set of <code>LIBCOMBINE_SEV_</code> constants defined by
    * the interface class <code><a
-   * href="libomexConstants.html">libomexConstants</a></code> @endif@if python @param severity a
+   * href="libcombineConstants.html">libcombineConstants</a></code> @endif@if python @param severity a
    * value from the set of <code>LIBCOMBINE_SEV_</code> constants defined by
-   * the interface class @link libomex libomex@endlink. @endif@~
+   * the interface class @link libcombine libcombine@endlink. @endif@~
    *
    * @return a count of the number of errors with the given severity code.
    *

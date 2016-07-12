@@ -1,6 +1,6 @@
 /**
- * @file CaTypes.h
- * @brief Definition of the CaTypes class.
+ * @file libcombine-config.h
+ * @brief Definition of the libcombine-config class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -29,26 +29,22 @@
  * file named "LICENSE.txt" included with this software distribution and also
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
+ *
+ * @class 
+ * @sbmlbrief{} TODO:Definition of the libcombine-config class.
  */
 
 
 
-#ifndef CaTypes_h
-#define CaTypes_h
+#ifndef LIBCOMBINE_CONFIG_H
+#define LIBCOMBINE_CONFIG_H 1
+
+#include <omex/common/libcombine-namespace.h>
+
+#include <omex/common/libcombine-config-common.h>
+
+#include <omex/common/libcombine-version.h>
 
 
-#include <omex/common/combinefwd.h>
+#endif  /* LIBCOMBINE_CONFIG_H */
 
-#include <omex/CaDocument.h>
-
-#include <omex/CaBase.h>
-#include <omex/CaListOf.h>
-
-#include <omex/CaContent.h>
-#include <omex/CaOmexManifest.h>
-
-#include <omex/CaReader.h>
-#include <omex/CaWriter.h>
-
-
-#endif  /* CaTypes_h */

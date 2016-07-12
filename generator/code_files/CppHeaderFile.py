@@ -131,8 +131,13 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_line_verbatim('#include <{0}/common/'
                                  'extern.h>'.format(self.language))
         if not self.is_plugin:
-            self.write_line_verbatim('#include <{0}/common/{0}fwd.'
-                                     'h>'.format(self.language))
+            libname = global_variables.library_name.lower()
+            if libname.startswith(('lib')):
+                commonfwd = '{0}fwd'.format(libname[3:])
+            else:
+                commonfwd = '{0}fwd'.format(libname)
+            self.write_line_verbatim('#include <{0}/common/{1}.'
+                                     'h>'.format(self.language, commonfwd))
             if global_variables.is_package:
                 self.write_line_verbatim('#include <{0}/packages/{1}/common/'
                                          '{1}fwd.'

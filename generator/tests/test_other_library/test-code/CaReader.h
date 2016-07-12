@@ -40,7 +40,7 @@
 
 
 #include <omex/common/extern.h>
-#include <omex/common/omexfwd.h>
+#include <omex/common/combinefwd.h>
 #include <sbml/util/util.h>
 
 #ifdef __cplusplus

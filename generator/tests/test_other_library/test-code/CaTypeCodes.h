@@ -40,7 +40,7 @@
 #define CaTypeCodes_h
 
 
-#include <omex/common/libomex-config.h>
+#include <omex/common/libcombine-config.h>
 #include <omex/common/extern.h>
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
@@ -80,17 +80,17 @@ typedef enum
  * other languages, the set of type codes is stored in an enumeration; in
  * the Java language interface for libCombine, the type codes are defined as
  * static integer constants in the interface class {@link
- * libomexConstants}.  The names of the type codes all begin with the
+ * libcombineConstants}.  The names of the type codes all begin with the
  * characters @c OMEX_. @endif@if python LibCombine attaches an identifying
  * code to every kind of OMEX object.  These are known as <em>OMEX type
  * codes</em>.  In the Python language interface for libCombine, the type
  * codes are defined as static integer constants in the interface class
- * @link libomex@endlink.  The names of the type codes all begin with the
+ * @link libcombine@endlink.  The names of the type codes all begin with the
  * characters @c OMEX_. @endif@if csharp LibCombine attaches an identifying
  * code to every kind of OMEX object.  These are known as <em>OMEX type
  * codes</em>.  In the C# language interface for libCombine, the type codes
  * are defined as static integer constants in the interface class @link
- * libomex@endlink.  The names of the type codes all begin with
+ * libcombine@endlink.  The names of the type codes all begin with
  * the characters @c OMEX_. @endif@~
  *
  * @return a human readable name for the given

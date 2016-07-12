@@ -40,8 +40,8 @@
 
 
 #include <omex/common/extern.h>
-#include <omex/common/libomex-namespace.h>
-#include <omex/common/omexfwd.h>
+#include <omex/common/libcombine-namespace.h>
+#include <omex/common/combinefwd.h>
 #include <omex/CaTypeCodes.h>
 #include <omex/CaNamespaces.h>
 #include <omex/CaConstructorException.h>
@@ -506,17 +506,17 @@ public:
    * other languages, the set of type codes is stored in an enumeration; in
    * the Java language interface for libCombine, the type codes are defined as
    * static integer constants in the interface class {@link
-   * libomexConstants}.  The names of the type codes all begin with the
+   * libcombineConstants}.  The names of the type codes all begin with the
    * characters @c OMEX_. @endif@if python LibCombine attaches an identifying
    * code to every kind of OMEX object.  These are known as <em>OMEX type
    * codes</em>.  In the Python language interface for libCombine, the type
    * codes are defined as static integer constants in the interface class
-   * @link libomex@endlink.  The names of the type codes all begin with the
+   * @link libcombine@endlink.  The names of the type codes all begin with the
    * characters @c OMEX_. @endif@if csharp LibCombine attaches an identifying
    * code to every kind of OMEX object.  These are known as <em>OMEX type
    * codes</em>.  In the C# language interface for libCombine, the type codes
    * are defined as static integer constants in the interface class @link
-   * libomexcs.libomex libomex@endlink.  The names of the type codes all begin with
+   * libcombinecs.libcombine libcombine@endlink.  The names of the type codes all begin with
    * the characters @c OMEX_. @endif@~
    *
    * This method searches the tree of objects that are parents of this
@@ -544,17 +544,17 @@ public:
    * other languages, the set of type codes is stored in an enumeration; in
    * the Java language interface for libCombine, the type codes are defined as
    * static integer constants in the interface class {@link
-   * libomexConstants}.  The names of the type codes all begin with the
+   * libcombineConstants}.  The names of the type codes all begin with the
    * characters @c OMEX_. @endif@if python LibCombine attaches an identifying
    * code to every kind of OMEX object.  These are known as <em>OMEX type
    * codes</em>.  In the Python language interface for libCombine, the type
    * codes are defined as static integer constants in the interface class
-   * @link libomex@endlink.  The names of the type codes all begin with the
+   * @link libcombine@endlink.  The names of the type codes all begin with the
    * characters @c OMEX_. @endif@if csharp LibCombine attaches an identifying
    * code to every kind of OMEX object.  These are known as <em>OMEX type
    * codes</em>.  In the C# language interface for libCombine, the type codes
    * are defined as static integer constants in the interface class @link
-   * libomexcs.libomex libomex@endlink.  The names of the type codes all begin with
+   * libcombinecs.libcombine libcombine@endlink.  The names of the type codes all begin with
    * the characters @c OMEX_. @endif@~
    *
    * This method searches the tree of objects that are parents of this

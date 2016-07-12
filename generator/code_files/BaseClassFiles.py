@@ -110,7 +110,14 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.close_file()
 
     def write_cmake(self, name):
-        out_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
+        if name.startswith('lib'):
+            if global_variables.library_name.lower().startswith('lib'):
+                out_name = '{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+            else:
+                out_name = 'lib{0}-{1}'.format(global_variables.library_name.lower(), name[4:])
+        else:
+            out_name = name
+#        out_name = 'lib{0}-{1}'.format(global_variables.language, name[4:])
         fileout = BaseCMakeFile.BaseCMakeFile(out_name)
         filein = '{0}.cmake'.format(name)
         if self.verbose:

@@ -116,9 +116,13 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 
-def compare_code_headers(class_name):
-    correct_file = '.\\test-code\\{0}.h'.format(class_name)
-    temp_file = '.\\temp\\{0}.h'.format(class_name)
+def compare_code_headers(class_name, lib=None):
+    if not lib:
+        correct_file = '.\\test-code\\{0}.h'.format(class_name)
+        temp_file = '.\\temp\\{0}.h'.format(class_name)
+    else:
+        correct_file = '.\\test-code\\{1}\\{0}.h'.format(class_name, lib)
+        temp_file = '.\\temp\\{0}.h'.format(class_name)
     return compare_files(correct_file, temp_file)
 
 
@@ -215,18 +219,18 @@ def test_other_templates(prefix):
     print('')
     return fail
 
-def test_common_templates(name, class_name, test_case, prefix):
+def test_common_templates(name, class_name, test_case, prefix, lib):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_common_templates(filename)
-    fail = compare_code_headers('common')
-    fail += compare_code_headers('extern')
-    fail += compare_code_headers('libsedml-config')
-    fail += compare_code_impl('libsedml-version')
+    fail = compare_code_headers('common', lib)
+    fail += compare_code_headers('extern', lib)
+    fail += compare_code_headers('lib{0}-config'.format(lib))
+    fail += compare_code_impl('lib{0}-version'.format(lib))
     fail += compare_code_headers('{0}OperationReturnValues'.format(prefix))
     fail += compare_code_impl('{0}OperationReturnValues'.format(prefix))
-    fail += compare_code_cmake('libsedml-version.h')
-    fail += compare_code_cmake('libsedml-config-common.h')
-    fail += compare_code_cmake('libsedml-namespace.h')
+    fail += compare_code_cmake('lib{0}-version.h'.format(lib))
+    fail += compare_code_cmake('lib{0}-config-common.h'.format(lib))
+    fail += compare_code_cmake('lib{0}-namespace.h'.format(lib))
     print('')
     return fail
 
@@ -318,7 +322,7 @@ def main():
     name = 'test_sedml'
     class_name = 'SedBase'
     test_case = 'common'
-    fail += test_common_templates(name, class_name, test_case, 'Sed')
+    fail += test_common_templates(name, class_name, test_case, 'Sed', 'sedml')
 
     name = 'test_sedml'
     class_name = 'sedmlfwd'
@@ -396,6 +400,18 @@ def main():
     test_case = 'templates'
     fail += run_templates(name, class_name, test_case, list_of)
     fail += test_other_templates('Ca')
+
+    name = 'combine-archive'
+    class_name = 'CaBase'
+    test_case = 'common'
+    fail += test_common_templates(name, class_name, test_case, 'Ca', 'combine')
+
+    name = 'combine-archive'
+    num = 0
+    class_name = 'CaContent'
+    list_of = ''
+    test_case = 'check includes'
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail

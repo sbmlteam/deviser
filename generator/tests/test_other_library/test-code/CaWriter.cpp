@@ -81,7 +81,7 @@ CaWriter::~CaWriter ()
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libomex version <libomex version>. -->
+ *   on yyyy-MM-dd HH:mm with libcombine version <libcombine version>. -->
  */
 int
 CaWriter::setProgramName (const std::string& name)
@@ -98,7 +98,7 @@ CaWriter::setProgramName (const std::string& name)
  * consumption, will be written at the beginning of the document:
  *
  *   <!-- Created by <program name> version <program version>
- *   on yyyy-MM-dd HH:mm with libomex version <libomex version>. -->
+ *   on yyyy-MM-dd HH:mm with libcombine version <libcombine version>. -->
  */
 int
 CaWriter::setProgramVersion (const std::string& version)

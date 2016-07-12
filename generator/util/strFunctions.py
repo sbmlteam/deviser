@@ -310,6 +310,8 @@ def prefix_name(name):
         return name
     elif name == 'XMLNode' or name == 'ASTNode':
         return name
+    elif name == 'SBase':
+        return '{0}Base'.format(global_variables.prefix)
     else:
         return '{0}{1}'.format(global_variables.prefix, name)
 

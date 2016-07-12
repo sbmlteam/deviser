@@ -55,6 +55,7 @@
 #include <sbml/packages/x/sbml/Other.h>
 #include <sbml/packages/x/sbml/Other.h>
 #include <sbml/packages/x/sbml/Other.h>
+#include <sbml/packages/x/sbml/ListOfOtherLOs.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -76,6 +77,7 @@ protected:
   Other* mOther;
   Other* mOther1;
   Other* mOther2;
+  ListOfOtherLOs mOtherLOs;
 
   /** @endcond */
 
@@ -538,6 +540,98 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetOther2();
+
+
+  /**
+   * Returns the ListOfOtherLOs from this Fred.
+   *
+   * @return the ListOfOtherLOs from this Fred.
+   */
+  const ListOfOtherLOs* getListOfOtherLOs() const;
+
+
+  /**
+   * Returns the ListOfOtherLOs from this Fred.
+   *
+   * @return the ListOfOtherLOs from this Fred.
+   */
+  ListOfOtherLOs* getListOfOtherLOs();
+
+
+  /**
+   * Get an OtherLO from the Fred.
+   *
+   * @param n an unsigned int representing the index of the OtherLO to
+   * retrieve.
+   *
+   * @return the nth OtherLO in the ListOfOtherLOs within this Fred.
+   *
+   * @see getNumOtherLOs()
+   */
+  OtherLO* getOtherLO(unsigned int n);
+
+
+  /**
+   * Get an OtherLO from the Fred.
+   *
+   * @param n an unsigned int representing the index of the OtherLO to
+   * retrieve.
+   *
+   * @return the nth OtherLO in the ListOfOtherLOs within this Fred.
+   *
+   * @see getNumOtherLOs()
+   */
+  const OtherLO* getOtherLO(unsigned int n) const;
+
+
+  /**
+   * Adds a copy of the given OtherLO to this Fred.
+   *
+   * @param olo the OtherLO object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createOtherLO()
+   */
+  int addOtherLO(const OtherLO* olo);
+
+
+  /**
+   * Get the number of OtherLO objects in this Fred.
+   *
+   * @return the number of OtherLO objects in this Fred.
+   */
+  unsigned int getNumOtherLOs() const;
+
+
+  /**
+   * Creates a new OtherLO object, adds it to this Fred object and returns the
+   * OtherLO object created.
+   *
+   * @return a new OtherLO object instance.
+   *
+   * @see addOtherLO(const OtherLO* olo)
+   */
+  OtherLO* createOtherLO();
+
+
+  /**
+   * Removes the nth OtherLO from this Fred and returns a pointer to it.
+   *
+   * @param n an unsigned int representing the index of the OtherLO to remove.
+   *
+   * @return a pointer to the nth OtherLO in this Fred.
+   *
+   * @see getNumOtherLOs
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
+   */
+  OtherLO* removeOtherLO(unsigned int n);
 
 
   /**
@@ -1396,6 +1490,100 @@ Fred_unsetOther1(Fred_t * f);
 LIBSBML_EXTERN
 int
 Fred_unsetOther2(Fred_t * f);
+
+
+/**
+ * Returns a ListOf_t* containing OtherLO_t objects from this Fred_t.
+ *
+ * @param f the Fred_t structure whose "ListOfOtherLOs" is sought.
+ *
+ * @return the "ListOfOtherLOs" from this Fred_t as a ListOf_t *.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+ListOf_t*
+Fred_getListOfOtherLOs(Fred_t* f);
+
+
+/**
+ * Get an OtherLO_t from the Fred_t.
+ *
+ * @param f the Fred_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the OtherLO_t to
+ * retrieve.
+ *
+ * @return the nth OtherLO_t in the ListOfOtherLOs within this Fred.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+const OtherLO_t*
+Fred_getOtherLO(Fred_t* f, unsigned int n);
+
+
+/**
+ * Adds a copy of the given OtherLO_t to this Fred_t.
+ *
+ * @param f the Fred_t structure to which the OtherLO_t should be added.
+ *
+ * @param olo the OtherLO_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+int
+Fred_addOtherLO(Fred_t* f, const OtherLO_t* olo);
+
+
+/**
+ * Get the number of OtherLO_t objects in this Fred_t.
+ *
+ * @param f the Fred_t structure to query.
+ *
+ * @return the number of OtherLO_t objects in this Fred_t.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+unsigned int
+Fred_getNumOtherLOs(Fred_t* f);
+
+
+/**
+ * Creates a new OtherLO_t object, adds it to this Fred_t object and returns
+ * the OtherLO_t object created.
+ *
+ * @param f the Fred_t structure to which the OtherLO_t should be added.
+ *
+ * @return a new OtherLO_t object instance.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+OtherLO_t*
+Fred_createOtherLO(Fred_t* f);
+
+
+/**
+ * Removes the nth OtherLO_t from this Fred_t and returns a pointer to it.
+ *
+ * @param f the Fred_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the OtherLO_t to remove.
+ *
+ * @return a pointer to the nth OtherLO_t in this Fred_t.
+ *
+ * @memberof Fred_t
+ */
+LIBSBML_EXTERN
+OtherLO_t*
+Fred_removeOtherLO(Fred_t* f, unsigned int n);
 
 
 /**
