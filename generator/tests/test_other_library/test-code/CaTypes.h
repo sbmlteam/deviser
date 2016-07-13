@@ -39,8 +39,6 @@
 
 #include <omex/common/combinefwd.h>
 
-#include <omex/CaOmexManifest.h>
-
 #include <omex/CaBase.h>
 #include <omex/CaListOf.h>
 

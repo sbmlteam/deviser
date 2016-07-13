@@ -127,11 +127,10 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     def print_includes(self, fileout):
         for element in self.elements:
-            if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                fileout.copy_line_verbatim('#include <{0}/{1}.h>\n'
-                                           ''.format(global_variables.language,
-                                                     name))
+            name = strFunctions.prefix_name(element['name'])
+            fileout.copy_line_verbatim('#include <{0}/{1}.h>\n'
+                                       ''.format(global_variables.language,
+                                                 name))
 
     def print_typecodes(self, fileout):
         for element in self.elements:

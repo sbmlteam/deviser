@@ -40,11 +40,10 @@
 
 #include <sedml/common/sedmlfwd.h>
 
-#include <sedml/SedDocument.h>
-
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 
+#include <sedml/SedDocument.h>
 #include <sedml/SedModel.h>
 #include <sedml/SedChange.h>
 #include <sedml/SedAddXML.h>
