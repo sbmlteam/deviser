@@ -80,8 +80,8 @@ typedef enum
 , SedmlSedDocumentLevelMustBeInteger      = 20205
 , SedmlSedDocumentVersionMustBeInteger      = 20206
 , SedmlSedDocumentEmptyLOElements      = 20207
-, SedmlSedDocumentLOSedModelsAllowedCoreElements      = 20208
-, SedmlSedDocumentLOSedModelsAllowedCoreAttributes      = 20209
+, SedmlSedDocumentLOModelsAllowedCoreElements      = 20208
+, SedmlSedDocumentLOModelsAllowedCoreAttributes      = 20209
 , SedmlSedModelAllowedCoreAttributes      = 20301
 , SedmlSedModelAllowedCoreElements      = 20302
 , SedmlSedModelAllowedAttributes      = 20303
@@ -90,8 +90,8 @@ typedef enum
 , SedmlSedModelNameMustBeString      = 20306
 , SedmlSedModelLanguageMustBeString      = 20307
 , SedmlSedModelEmptyLOElements      = 20308
-, SedmlSedModelLOSedChangesAllowedCoreElements      = 20309
-, SedmlSedModelLOSedChangesAllowedCoreAttributes      = 20310
+, SedmlSedModelLOChangesAllowedCoreElements      = 20309
+, SedmlSedModelLOChangesAllowedCoreAttributes      = 20310
 , SedmlSedChangeAllowedCoreAttributes      = 20401
 , SedmlSedChangeAllowedCoreElements      = 20402
 , SedmlSedAddXMLAllowedCoreAttributes      = 20501
@@ -111,10 +111,10 @@ typedef enum
 , SedmlSedDataGeneratorAllowedElements      = 20704
 , SedmlSedDataGeneratorNameMustBeString      = 20705
 , SedmlSedDataGeneratorEmptyLOElements      = 20706
-, SedmlSedDataGeneratorLOSedVariablesAllowedCoreElements      = 20707
-, SedmlSedDataGeneratorLOSedParametersAllowedCoreElements      = 20708
-, SedmlSedDataGeneratorLOSedVariablesAllowedCoreAttributes      = 20709
-, SedmlSedDataGeneratorLOSedParametersAllowedCoreAttributes      = 20710
+, SedmlSedDataGeneratorLOVariablesAllowedCoreElements      = 20707
+, SedmlSedDataGeneratorLOParametersAllowedCoreElements      = 20708
+, SedmlSedDataGeneratorLOVariablesAllowedCoreAttributes      = 20709
+, SedmlSedDataGeneratorLOParametersAllowedCoreAttributes      = 20710
 , SedmlSedRepeatedTaskAllowedCoreAttributes      = 20801
 , SedmlSedRepeatedTaskAllowedCoreElements      = 20802
 , SedmlSedRepeatedTaskAllowedAttributes      = 20803

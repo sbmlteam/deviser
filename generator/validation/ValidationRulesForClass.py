@@ -306,7 +306,7 @@ class ValidationRulesForClass():
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
                    'SBML Level 3 Core namespaces are permitted on a {0} object.'\
-                .format(strFunctions.get_element_name(lo_child),
+                .format(strFunctions.get_element_name(lo_child, False),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
             sec_name = 'listof' + lo_name.lower()
@@ -686,17 +686,17 @@ class ValidationRulesForClass():
             return ''
         elif num == 1:
             return 'one and only one instance of the {0} element'\
-                .format(strFunctions.get_element_name(attributes[0]))
+                .format(strFunctions.get_element_name(attributes[0], False))
         else:
             required_statement = 'one and only one instance of each of the {0}'\
-                .format(strFunctions.get_element_name(attributes[0]))
+                .format(strFunctions.get_element_name(attributes[0], False))
             i = 1
             while i < num - 1:
                 required_statement += ', {0}'\
-                    .format(strFunctions.get_element_name(attributes[i]))
+                    .format(strFunctions.get_element_name(attributes[i], False))
                 i += 1
             required_statement += ' and \{0} elements'\
-                .format(strFunctions.get_element_name(attributes[i]))
+                .format(strFunctions.get_element_name(attributes[i], False))
             return required_statement
 
     # parse the optional attribute sentence
@@ -707,17 +707,17 @@ class ValidationRulesForClass():
             return ''
         elif num == 1:
             return 'one and only one instance of the {0} element' \
-                .format(strFunctions.get_element_name(attributes[0]))
+                .format(strFunctions.get_element_name(attributes[0], False))
         else:
             optional_statement = 'one and only one instance of each of the {0}' \
-                .format(strFunctions.get_element_name(attributes[0]))
+                .format(strFunctions.get_element_name(attributes[0], False))
             i = 1
             while i < num - 1:
                 optional_statement += ', {0}' \
-                    .format(strFunctions.get_element_name(attributes[i]))
+                    .format(strFunctions.get_element_name(attributes[i], False))
                 i += 1
             optional_statement += ' and {0} elements'\
-                .format(strFunctions.get_element_name(attributes[i]))
+                .format(strFunctions.get_element_name(attributes[i], False))
             return optional_statement
 
     ########################################################################

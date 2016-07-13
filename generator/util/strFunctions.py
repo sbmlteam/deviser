@@ -84,9 +84,9 @@ def lower_list_of_name_no_prefix(name):
     return 'listOf' + plural_no_prefix(upper_first(name))
 
 
-def cap_list_of_name(name):
+def cap_list_of_name(name, addPrefix=True):
     name = upper_first(name)
-    return list_of_name(name)
+    return list_of_name(name, addPrefix)
 
 
 def cap_list_of_name_no_prefix(name):
@@ -234,17 +234,17 @@ def get_sid_refs(refs):
         return [ret_string, ret_type]
 
 
-def get_element_name(attribute):
+def get_element_name(attribute, addPrefix=True):
     if 'type' in attribute:
         name = ''
         if 'texname' in attribute:
             name = attribute['texname']
         if len(name) == 0:
-            name = attribute['name']
+            name = remove_prefix(attribute['name'])
         if attribute['type'] == 'lo_element':
-            return '\{0}'.format(cap_list_of_name(name))
+            return '\{0}'.format(cap_list_of_name(name, addPrefix))
         elif attribute['type'] == 'inline_lo_element':
-            return '\{0}'.format(cap_list_of_name(name))
+            return '\{0}'.format(cap_list_of_name(name, addPrefix))
         elif attribute['type'] == 'element':
             if attribute['element'] == 'ASTNode*':
                 return 'MathML math'
@@ -254,9 +254,9 @@ def get_element_name(attribute):
             return 'FIX_ME'
     elif 'isListOf' in attribute:
         if attribute['isListOf']:
-            return '\{0}'.format(cap_list_of_name(attribute['name']))
+            return '\{0}'.format(cap_list_of_name(remove_prefix(attribute['name'])))
         else:
-            return '\{0}'.format(upper_first(attribute['name']))
+            return '\{0}'.format(upper_first(remove_prefix(attribute['name'])))
     else:
         return 'FIX ME'
 

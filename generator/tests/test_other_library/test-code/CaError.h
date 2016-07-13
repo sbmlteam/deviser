@@ -81,8 +81,8 @@ typedef enum
 , CombineCaOmexManifestAllowedCoreAttributes      = 20301
 , CombineCaOmexManifestAllowedCoreElements      = 20302
 , CombineCaOmexManifestAllowedElements      = 20303
-, CombineCaOmexManifestLOCaContentsAllowedCoreElements      = 20304
-, CombineCaOmexManifestLOCaContentsAllowedCoreAttributes      = 20305
+, CombineCaOmexManifestLOContentsAllowedCoreElements      = 20304
+, CombineCaOmexManifestLOContentsAllowedCoreAttributes      = 20305
 , UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
 , CaCodesUpperBound                   = 99999 /*!< Upper boundary of libCombine-specific diagnostic codes. */
 } CaErrorCode_t;
