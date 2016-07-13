@@ -209,7 +209,7 @@ class ValidationRulesForPlugin():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attribute {0} values allowed on <{1}>.' \
                 ''.format(attribute['name'], self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
@@ -248,7 +248,7 @@ class ValidationRulesForPlugin():
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
             lo = True
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
@@ -290,7 +290,7 @@ class ValidationRulesForPlugin():
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
             lo = True
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         return dict({'number': self.number, 'text': text,
@@ -323,7 +323,7 @@ class ValidationRulesForPlugin():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
@@ -355,7 +355,7 @@ class ValidationRulesForPlugin():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}AllowedElements'.format(self.up_package, self.name)
@@ -413,7 +413,7 @@ class ValidationRulesForPlugin():
         ref = 'SBML Level~3 Specification for {0} Version~1, {1}.'\
             .format(self.fullname, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
             short = 'No children in ListOf elements allowed on <{0}>.' \

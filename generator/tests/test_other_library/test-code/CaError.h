@@ -83,8 +83,6 @@ typedef enum
 , CombineCaOmexManifestAllowedElements      = 20303
 , CombineCaOmexManifestLOCaContentsAllowedCoreElements      = 20304
 , CombineCaOmexManifestLOCaContentsAllowedCoreAttributes      = 20305
-, CombineOmexManifestLevelMustBeInteger = 20306
-, CombineOmexManifestVersionMustBeInteger
 , UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
 , CaCodesUpperBound                   = 99999 /*!< Upper boundary of libCombine-specific diagnostic codes. */
 } CaErrorCode_t;

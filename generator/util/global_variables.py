@@ -69,6 +69,8 @@ global prefix
 prefix = 'SBML'
 global library_name
 library_name = 'Libsbml'
+global up_full_lib
+up_full_lib = 'LIBSBML'
 global is_package
 is_package = True
 global package_prefix
@@ -187,6 +189,12 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         library_name = lib
     else:
         library_name = 'Lib' + language
+
+    global up_full_lib
+    if not library_name.upper().startswith('LIB'):
+        up_full_lib = 'LIB{0}'.format(library_name.upper())
+    else:
+        up_full_lib = library_name.upper()
 
     global is_package
     is_package = is_pack

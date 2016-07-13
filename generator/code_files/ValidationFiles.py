@@ -317,7 +317,7 @@ class ValidationFiles():
         self.error_file.up_indent()
         self.error_file.write_line('\"{0}\",'.format(rule['short']))
         self.error_file.write_line('{0}_CAT_GENERAL_'
-                                   'CONSISTENCY,'.format(self.cap_lib))
+                                   'CONSISTENCY,'.format(global_variables.up_full_lib))
         self.error_file.write_line('{0},'.format(rule['lib_sev']))
         self.error_file.write_line_no_indent('\"{0}\",'
                                              ''.format(format_rule))

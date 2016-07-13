@@ -272,7 +272,7 @@ class ValidationRulesForClass():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(refname))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = '{0} attribute must be {1}.'.format(att_name, rule_type)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, abbrev, att_name,
@@ -295,7 +295,7 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token('sboTerm'), self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
-            lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
             tc = '{0}{1}AllowedCoreAttributes'.format(self.up_package,
                                                       self.name)
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
@@ -312,7 +312,7 @@ class ValidationRulesForClass():
             ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
             sev = 'ERROR'
-            lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
             lo = True
@@ -335,7 +335,7 @@ class ValidationRulesForClass():
                 .format(self.indef_u, self.formatted_name, self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
             sev = 'ERROR'
-            lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
             tc = '{0}{1}AllowedCoreElements'.format(self.up_package, self.name)
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
             lo = False
@@ -350,7 +350,7 @@ class ValidationRulesForClass():
             ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
             sev = 'ERROR'
-            lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+            lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
             lo = True
@@ -386,7 +386,7 @@ class ValidationRulesForClass():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
@@ -420,7 +420,7 @@ class ValidationRulesForClass():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Elements allowed on <{0}>.'.format(self.lower_name)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}AllowedElements'.format(self.up_package, self.name)
@@ -482,7 +482,7 @@ class ValidationRulesForClass():
             .format(self.pkg_ref,
                     strFunctions.wrap_section(child_class['lo_class_name']))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attributes allowed on <{0}>.'.format(strFunctions.lower_first(child_class['lo_class_name']))
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}LO{2}AllowedAttributes'.format(self.up_package, self.name,
@@ -542,7 +542,7 @@ class ValidationRulesForClass():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
             short = 'Number of children in ListOf elements allowed on <{0}>.' \
@@ -602,7 +602,7 @@ class ValidationRulesForClass():
         ref = '{0}, {1}.'\
             .format(self.pkg_ref, strFunctions.wrap_section(self.name))
         sev = 'ERROR'
-        lib_sev = 'LIB{0}_SEV_ERROR'.format(global_variables.language.upper())
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         if unusual_min:
             short = 'No children in ListOf elements allowed on <{0}>.' \
