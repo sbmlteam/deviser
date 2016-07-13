@@ -72,26 +72,6 @@ protected:
 public:
 
   /**
-   * Creates a new CaOmexManifest using the given OMEX Level and @ p version
-   * values.
-   *
-   * @param level an unsigned int, the OMEX Level to assign to this
-   * CaOmexManifest.
-   *
-   * @param version an unsigned int, the OMEX Version to assign to this
-   * CaOmexManifest.
-   *
-   * @throws OMEXConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * OMEX object, are either invalid or mismatched with respect to the parent
-   * CaOmexManifest object.
-   * @copydetails doc_note_setting_lv
-   */
-  CaOmexManifest(unsigned int level = OMEX_DEFAULT_LEVEL,
-                 unsigned int version = OMEX_DEFAULT_VERSION);
-
-
-  /**
    * Creates a new CaOmexManifest using the given CaNamespaces object @p
    * omexns.
    *

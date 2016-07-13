@@ -453,14 +453,9 @@ CaOmexManifest::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   const std::string& name = stream.peek().getName();
 
-   if (name == "listOfContents")
-   {
-	   if (mContents.size() != 0)
-	   {
-		   logError(CombineOmexManifestAllowedElements);
-	   }
-	   obj = &mContents;
-   }
+  obj = mContents.createObject(stream);
+
+  connectToChild();
 
   return obj;
 }

@@ -48,20 +48,6 @@ LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CaContent using the given OMEX Level and @ p version values.
- */
-CaContent::CaContent(unsigned int level, unsigned int version)
-  : CaBase(level, version)
-  , mLocation ("")
-  , mFormat ("")
-  , mMaster (false)
-  , mIsSetMaster (false)
-{
-  setCaNamespacesAndOwn(new CaNamespaces(level, version));
-}
-
-
-/*
  * Creates a new CaContent using the given CaNamespaces object @p omexns.
  */
 CaContent::CaContent(CaNamespaces *omexns)
