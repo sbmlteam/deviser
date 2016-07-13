@@ -238,8 +238,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 10101
   { CombineNSUndeclared,
     "The Combine namespace is not correctly declared.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "To conform to the Package specification for SBML Level 3 Version 1, an "
     "SBML document must declare "
     "'http://www.sbml.org/sbml/level3/version1/combine/version1' as the "
@@ -251,8 +251,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 10102
   { CombineElementNotInNs,
     "Element not in Combine namespace",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
     "Package must use the "
     "'http://www.sbml.org/sbml/level3/version1/combine/version1' namespace, "
@@ -264,8 +264,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 10301
   { CombineDuplicateComponentId,
     "Duplicate 'id' attribute value",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "(Extends validation rule #10301 in the SBML Level 3 Core specification. TO "
     "DO list scope of ids)",
     { "L3V1 Combine V1 Section"
@@ -275,8 +275,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 10302
   { CombineIdSyntaxRule,
     "Invalid SId syntax",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "The value of a 'combine:id' must conform to the syntax of the <sbml> data "
     "type 'SId'",
     { "L3V1 Combine V1 Section"
@@ -286,8 +286,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 10303
   { InvalidMetaidSyntax,
     "Invalid SId syntax",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "The value of a 'combine:metaid' must conform to the syntax of the XML Type "
     "ID",
     { "L3V1 Combine V1 Section"
@@ -297,8 +297,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 20101
   { InvalidNamespaceOnCa,
     "Invalid namespace",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "Invalid namespace declared.",
     { "L3V1 Combine V1 Section"
     }
@@ -307,8 +307,8 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 20102
   { AllowedAttributes,
     "Allowed attributes",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "Allowed attributes",
     { "L3V1 Combine V1 Section"
     }
@@ -317,18 +317,18 @@ static const omexErrorTableEntry omexErrorTable[] =
   // 20103
   { EmptyListElement,
     "No empty listOf",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "No empty lists",
     { "L3V1 Combine V1 Section"
     }
   },
 
   // 20201
-  { CombineContentAllowedCoreAttributes,
+  { CombineCaContentAllowedCoreAttributes,
     "Core attributes allowed on <content>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "A <content> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
     "namespaces are permitted on a <content>.",
@@ -337,10 +337,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20202
-  { CombineContentAllowedCoreElements,
+  { CombineCaContentAllowedCoreElements,
     "Core elements allowed on <content>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "A <content> object may have the optional SBML Level 3 Core subobjects for "
     "notes and annotations. No other elements from the SBML Level 3 Core "
     "namespaces are permitted on a <content>.",
@@ -349,10 +349,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20203
-  { CombineContentAllowedAttributes,
+  { CombineCaContentAllowedAttributes,
     "Attributes allowed on <content>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "A <content> object must have the required attributes 'combine:location' "
     "and 'combine:format', and may have the optional attribute "
     "'combine:master'. No other attributes from the SBML Level 3 Combine "
@@ -362,10 +362,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20204
-  { CombineContentLocationMustBeString,
+  { CombineCaContentLocationMustBeString,
     "Location attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:location' on a <content> must have a value of data "
     "type 'string'.",
     { "L3V1 Combine V1 Section"
@@ -373,10 +373,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20205
-  { CombineContentFormatMustBeString,
+  { CombineCaContentFormatMustBeString,
     "Format attribute must be String.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:format' on a <content> must have a value of data "
     "type 'string'.",
     { "L3V1 Combine V1 Section"
@@ -384,10 +384,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20206
-  { CombineContentMasterMustBeBoolean,
+  { CombineCaContentMasterMustBeBoolean,
     "Master attribute must be Boolean.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:master' on a <content> must have a value of data "
     "type 'boolean'.",
     { "L3V1 Combine V1 Section"
@@ -395,10 +395,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20301
-  { CombineOmexManifestAllowedCoreAttributes,
+  { CombineCaOmexManifestAllowedCoreAttributes,
     "Core attributes allowed on <omexManifest>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "An <omexManifest> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on an <omexManifest>.",
@@ -407,10 +407,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20302
-  { CombineOmexManifestAllowedCoreElements,
+  { CombineCaOmexManifestAllowedCoreElements,
     "Core elements allowed on <omexManifest>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "An <omexManifest> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
     "Level 3 Core namespaces are permitted on an <omexManifest>.",
@@ -419,10 +419,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20303
-  { CombineOmexManifestAllowedElements,
+  { CombineCaOmexManifestAllowedElements,
     "Elements allowed on <omexManifest>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "An <omexManifest> object may contain one and only one instance of the "
     "<listOfContents> element. No other elements from the SBML Level 3 Combine "
     "Archive namespaces are permitted on an <omexManifest> object. ",
@@ -431,10 +431,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20304
-  { CombineOmexManifestLOContentsAllowedCoreElements,
+  { CombineCaOmexManifestLOContentsAllowedCoreElements,
     "Core elements allowed on <listOfContents>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
     "SBML objects, a <listOfContents> container object may only contain "
     "<content> objects.",
@@ -443,10 +443,10 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20305
-  { CombineOmexManifestLOContentsAllowedCoreAttributes,
+  { CombineCaOmexManifestLOContentsAllowedCoreAttributes,
     "Core attributes allowed on <listOfContents>.",
-    LIBOMEX_CAT_GENERAL_CONSISTENCY,
-    LIBOMEX_SEV_ERROR,
+    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
+    LIBCOMBINE_SEV_ERROR,
     "A <listOfContents> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfContents> object.",
