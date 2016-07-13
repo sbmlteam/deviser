@@ -242,8 +242,9 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
                                                 self.is_cpp_api,
                                                 self.class_object)
         if self.is_cpp_api and not self.is_plugin:
-            code = constructor.write_level_version_constructor()
-            self.write_function_implementation(code)
+            if global_variables.has_level_version:
+                code = constructor.write_level_version_constructor()
+                self.write_function_implementation(code)
 
             code = constructor.write_namespace_constructor()
             self.write_function_implementation(code)
@@ -505,7 +506,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         # preserve existing values
         existing = dict()
         self.class_object['element'] = '{0}Error'.format(global_variables.prefix)
-        self.class_object['parent'] = dict({'name': '{0}Document'.format(global_variables.prefix)})
+        self.class_object['parent'] = dict({'name': '{0}'.format(global_variables.document_class)})
         self.class_object['memberName'] = 'mErrorLog'
         lo_functions = ListOfQueryFunctions\
             .ListOfQueryFunctions(self.language, self.is_cpp_api,

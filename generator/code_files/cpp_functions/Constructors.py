@@ -80,6 +80,7 @@ class Constructors():
             self.document = class_object['document']
 
 
+
     ########################################################################
 
     # Functions for writing constructors
@@ -291,9 +292,10 @@ class Constructors():
         implementation = ['setElementNamespace({0}'
                           '->getURI())'.format(ns)]
         if self.document:
-            implementation.append('setLevel({0}->getLevel())'.format(ns))
-            implementation.append('setVersion({0}->getVersion())'.format(ns))
-            implementation.append('set{0}Document(this)'.format(global_variables.prefix))
+            if global_variables.has_level_version:
+                implementation.append('setLevel({0}->getLevel())'.format(ns))
+                implementation.append('setVersion({0}->getVersion())'.format(ns))
+            implementation.append('set{0}(this)'.format(global_variables.document_class))
 
         if self.has_children:
             implementation.append('connectToChild()')
@@ -445,7 +447,7 @@ class Constructors():
                                                              clone)]
             code.append(self.create_code_block('if', implementation))
         if self.document:
-            implementation = ['set{0}Document(this)'.format(global_variables.prefix)]
+            implementation = ['set{0}(this)'.format(global_variables.document_class)]
             code.append(dict({'code_type': 'line', 'code': implementation}))
         if self.has_children:
             implementation = ['connectToChild()']
@@ -499,7 +501,7 @@ class Constructors():
         if self.has_children:
             implementation.append('connectToChild()')
         if self.document:
-            implementation.append('set{0}Document(this)'.format(global_variables.prefix))
+            implementation.append('set{0}(this)'.format(global_variables.document_class))
 
         implementation2 = ['return *this']
         code = [dict({'code_type': 'if', 'code': implementation}),

@@ -77,6 +77,8 @@ global package_prefix
 package_prefix = ''
 global package_full_name
 package_full_name = ''
+global has_level_version
+has_level_version = True
 
 global return_codes
 return_codes= dict({'success': 0,
@@ -144,15 +146,18 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     language = lang
 
     global namespaces
+    global has_level_version
     namespaces = []
     if len(specifications) > 0:
         namespaces = specifications
+        if not 'level' in namespaces[0] or not namespaces[0]['level']:
+            has_level_version = False
     else:
         namespaces.append(dict({'namespace': 'not defined'}))
 
     global dependency
     dependency = []
-    if len(specifications) > 0:
+    if len(depend) > 0:
         dependency = depend
 
     global library_version
