@@ -1511,14 +1511,14 @@ CaBase::connectToChild()
 CaBase*
 CaBase::getAncestorOfType(int type)
 {
-  if (type == OMEX_DOCUMENT)
+  if (type == LIB_COMBINE_OMEXMANIFEST)
     return getCaOmexManifest();
 
   CaBase *child;
   CaBase *parent = getParentCaObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == OMEX_DOCUMENT )
+          !( parent->getTypeCode() == LIB_COMBINE_OMEXMANIFEST )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1539,14 +1539,14 @@ CaBase::getAncestorOfType(int type)
 const CaBase*
 CaBase::getAncestorOfType(int type) const
 {
-  if (type == OMEX_DOCUMENT)
+  if (type == LIB_COMBINE_OMEXMANIFEST)
     return getCaOmexManifest();
 
   const CaBase *child;
   const CaBase *parent = getParentCaObject();
 
   while ( parent != NULL &&
-          !( parent->getTypeCode() == OMEX_DOCUMENT )
+          !( parent->getTypeCode() == LIB_COMBINE_OMEXMANIFEST )
         )
   {
     if (parent->getTypeCode() == type)
@@ -1937,7 +1937,7 @@ CaBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if ( errorId == CombineCaOmexManifestAllowedAttributes
+          if ( errorId == CombineCaOmexManifestAllowedCoreAttributes
             || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;

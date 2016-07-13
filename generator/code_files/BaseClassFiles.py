@@ -279,10 +279,10 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         if not doc:
             docname = 'Document'
         else:
-            docname = doc['name']
+            docname = strFunctions.prefix_name(doc['name'])
         libname = strFunctions.get_library_suffix(global_variables.library_name)
         fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
-                                   'Attributes\n'.format(libname, docname))
+                                   'CoreAttributes\n'.format(libname, docname))
         level = False
         version = False
         if doc and 'attribs' in doc:
