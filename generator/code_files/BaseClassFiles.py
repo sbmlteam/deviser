@@ -149,9 +149,10 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     def print_visit_header(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                self.write_visit_header(fileout, name)
-                fileout.skip_line(2)
+                if not 'document' in element or not element['document']:
+                    name = strFunctions.prefix_name(element['name'])
+                    self.write_visit_header(fileout, name)
+                    fileout.skip_line(2)
 
     def write_visit_header(self, fileout, name):
         fileout.open_comment()
@@ -172,9 +173,10 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     def print_leave_header(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                fileout.skip_line(2)
-                self.write_leave_header(fileout, name)
+                if not 'document' in element or not element['document']:
+                    name = strFunctions.prefix_name(element['name'])
+                    fileout.skip_line(2)
+                    self.write_leave_header(fileout, name)
 
     def write_leave_header(self, fileout, name):
         fileout.open_comment()

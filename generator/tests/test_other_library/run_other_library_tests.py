@@ -28,6 +28,9 @@ def generate_new_cpp_header(filename, num):
     ob = parser.parse_deviser_xml()
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     working_class = ob['baseElements'][num]
     if working_class['name'] == global_variables.document_class:
         working_class['document'] = True
@@ -42,6 +45,9 @@ def generate_templates(filename):
     prefix = global_variables.prefix
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     global_variables.populate_error_list(ob)
     ValidationFiles.ValidationFiles(ob, True)
     os.chdir('./temp')
@@ -54,6 +60,9 @@ def generate_common_templates(filename):
     ob = parser.parse_deviser_xml()
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     global_variables.populate_error_list(ob)
     prefix = global_variables.prefix
     os.chdir('./temp')
@@ -66,6 +75,9 @@ def generate_forward(filename):
     ob = parser.parse_deviser_xml()
     for wc in ob['baseElements']:
         strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     global_variables.populate_error_list(ob)
     os.chdir('./temp')
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)

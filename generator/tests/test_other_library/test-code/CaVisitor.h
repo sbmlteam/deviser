@@ -113,16 +113,6 @@ public:
 virtual bool visit (const CaContent &x);
 
 
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on CaBase objects.
- *
- * @param x the CaBase object to visit.
- */
-virtual bool visit (const CaOmexManifest &x);
-
-
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -164,16 +154,6 @@ virtual bool visit (const CaOmexManifest &x);
  * @param x the CaBase object to leave.
  */
 virtual void leave (const CaContent &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on CaBase objects.
- *
- * @param x the CaBase object to leave.
- */
-virtual void leave (const CaOmexManifest &x);
 };
 
 LIBCOMBINE_CPP_NAMESPACE_END
