@@ -58,10 +58,10 @@ class ValidationRulesForClass():
         self.start_b = '{'
         self.end_b = '}'
 
-        self.formatted_name = '\{0}'.format(object_desc['name'])
-        self.indef = strFunctions.get_indefinite(object_desc['name'])
+        self.lower_name = strFunctions.lower_first(strFunctions.remove_prefix(self.name))
+        self.formatted_name = '\{0}'.format(strFunctions.remove_prefix(self.name))
+        self.indef = strFunctions.get_indefinite(self.lower_name)
         self.indef_u = strFunctions.upper_first(self.indef)
-        self.lower_name = strFunctions.lower_first(self.name)
 
         self.reqd_att = []
         self.opt_att = []
@@ -301,7 +301,8 @@ class ValidationRulesForClass():
             short = 'Core attributes allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            lo_name = strFunctions.plural(lo_child['element'])
+            temp = strFunctions.remove_prefix(lo_child['element'])
+            lo_name = strFunctions.plural(temp)
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
                    'SBML Level 3 Core namespaces are permitted on a {0} object.'\
@@ -340,12 +341,13 @@ class ValidationRulesForClass():
             short = 'Core elements allowed on <{0}>.'.format(self.lower_name)
             lo = False
         else:
-            loname = strFunctions.get_element_name(lo_child)
-            lo_name = strFunctions.plural(lo_child['element'])
+            loname = strFunctions.get_element_name_no_prefix(lo_child)
+            temp = strFunctions.remove_prefix(lo_child['element'])
+            lo_name = strFunctions.plural(temp)
             text = 'Apart from the general notes and annotations subobjects ' \
                    'permitted on all SBML objects, a {0} container object ' \
                    'may only contain \{1} objects.'\
-                .format(loname, lo_child['element'])
+                .format(loname, temp)
             sec_name = 'listof' + lo_name.lower()
             ref = '{0}, {1}.'\
                 .format(self.pkg_ref, strFunctions.wrap_section(sec_name))
