@@ -1905,10 +1905,7 @@ SBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == SBMLSBMLDocumentAllowedAttributes
-            || errorId == SBMLSBMLDocumentLevelMustBeInteger
-            || errorId == SBMLSBMLDocumentVersionMustBeInteger
-            || errorId == InvalidNamespaceOnSBML)
+<insert_document_errors/>
           {
             errorLoggedAlready = true;
           }

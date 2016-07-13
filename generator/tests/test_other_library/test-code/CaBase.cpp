@@ -1937,9 +1937,7 @@ CaBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == CombineOmexManifestAllowedCoreAttributes
-            || errorId == CombineOmexManifestVersionMustBeInteger
-            || errorId == CombineOmexManifestLevelMustBeInteger
+          if ( errorId == CombineCaOmexManifestAllowedAttributes
             || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;

@@ -126,6 +126,9 @@ class BaseTemplateFile:
             elif line.startswith('<add_specific_error_table/>'):
                 self.print_error_table(fileout)
                 i += 1
+            elif line.startswith('<insert_document_errors/>'):
+                self.print_document_errors(fileout)
+                i += 1
             elif line.startswith('<add_visitor_forwards/>'):
                 self.print_visitor_forwards(fileout)
                 i += 1

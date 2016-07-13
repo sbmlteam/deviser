@@ -174,6 +174,13 @@ def standard_element_name(name):
     return upper_first(temp)
 
 
+def get_library_suffix(name):
+    ret_name = name.lower();
+    if ret_name.startswith('lib'):
+        ret_name = ret_name[3:]
+    return upper_first(ret_name)
+
+
 def wrap_token(name, pkg=''):
     """ returns the name wrapped as a token
        e.g. \token{'id'} or \token{'comp:\-id'} """

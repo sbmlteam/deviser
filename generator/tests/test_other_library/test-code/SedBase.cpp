@@ -1938,7 +1938,7 @@ SedBase::read (XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == SedmlSedDocumentAllowedAttributes
+          if ( errorId == SedmlSedDocumentAllowedAttributes
             || errorId == SedmlSedDocumentLevelMustBeInteger
             || errorId == SedmlSedDocumentVersionMustBeInteger
             || errorId == InvalidNamespaceOnSed)

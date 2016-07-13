@@ -43,7 +43,7 @@ import os
 from . import CppHeaderFile
 from . import CppCodeFile
 from . import ValidationFiles
-from util import strFunctions, global_variables
+from util import strFunctions, global_variables, query
 from base_files import BaseFile, BaseCMakeFile, BaseTemplateFile
 
 
@@ -271,3 +271,34 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
             name = error['typecode']
             if not name.endswith('Unknown'):
                 valid.write_table_entry(error)
+
+    def print_document_errors(self, fileout):
+        root = {'baseElements': self.elements}
+        doc = query.get_class(global_variables.document_class, root)
+        if not doc:
+            docname = 'Document'
+        else:
+            docname = doc['name']
+        libname = strFunctions.get_library_suffix(global_variables.library_name)
+        fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
+                                   'Attributes\n'.format(libname, docname))
+        level = False
+        version = False
+        if doc and 'attribs' in doc:
+            for a in doc['attribs']:
+                if a['name'] == 'level':
+                    level = True
+                elif a['name'] == 'version':
+                    version = True
+        if level:
+            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+                                       'LevelMustBeInteger\n'
+                                       ''.format(libname, docname))
+        if version:
+            fileout.copy_line_verbatim('            || errorId == {0}{1}'
+                                       'VersionMustBeInteger\n'
+                                       ''.format(libname, docname))
+        fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
+                                   'On{0})\n'.format(global_variables.prefix))
+
+
