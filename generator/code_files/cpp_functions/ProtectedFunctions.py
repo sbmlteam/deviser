@@ -1091,7 +1091,7 @@ class ProtectedFunctions():
             line = ['log->getError(n)->getErrorId() == UnknownCoreAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(UnknownCoreAttribute)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                    'log->{0}{1}, {2}, details)'.format(self.error, c_err,
                                                         self.given_args)]
             if_err = self.create_code_block('if', line)
 
@@ -1349,7 +1349,7 @@ class ProtectedFunctions():
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
-        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+        error = '{0}{1}AllowedAttributes'.format(self.package, strFunctions.prefix_name(class_name))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)

@@ -114,20 +114,39 @@ def get_class(name, root_object):
 # if it is not given we assume it is a child of a plugin
 # and get the base of the plugin
 def get_parent_class(class_object):
+    parent = ''
+    name = class_object['name']
+    found = False
     if 'parent' in class_object:
-        return class_object['parent']
+        parent = class_object['parent']
     else:
-        name = class_object['name']
         plugins = class_object['root']['plugins']
         for plugin in plugins:
             base = plugin['sbase']
             for extension in plugin['lo_extension']:
                 if extension['name'] == name:
-                    return base
-            for extension in plugin['extension']:
-                if extension['name'] == name:
-                    return base
-        return ''
+                    parent = base
+                    found = True
+                    break
+            if not found:
+                for extension in plugin['extension']:
+                    if extension['name'] == name:
+                        parent = base
+                        found = True
+                        break
+            if found:
+                break
+    if not found and len(parent) == 0:
+        for element in class_object['root']['baseElements']:
+            if element['name'] != name:
+                for attrib in element['attribs']:
+                    if attrib['element'] == name:
+                        parent = element['name']
+                        found = True
+                        break
+            if found:
+                break
+    return parent
 
 
 # return a list of the actual concrete classes

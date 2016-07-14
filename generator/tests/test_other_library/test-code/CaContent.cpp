@@ -403,8 +403,8 @@ CaContent::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(CombineLOContentsAllowedAttributes, level, version,
-          details);
+        log->logError(CombineCaOmexManifestLOContentsAllowedCoreAttributes,
+          level, version, details);
       }
     }
   }
@@ -440,7 +440,7 @@ CaContent::readAttributes(
   {
     std::string message = "Combine attribute 'location' is missing from the "
       "<CaContent> element.";
-    log->logError(CombineContentAllowedAttributes, level, version, message);
+    log->logError(CombineCaContentAllowedAttributes, level, version, message);
   }
 
   // 
@@ -460,7 +460,7 @@ CaContent::readAttributes(
   {
     std::string message = "Combine attribute 'format' is missing from the "
       "<CaContent> element.";
-    log->logError(CombineContentAllowedAttributes, level, version, message);
+    log->logError(CombineCaContentAllowedAttributes, level, version, message);
   }
 
   // 
