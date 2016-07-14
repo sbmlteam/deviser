@@ -76,16 +76,6 @@ CaVisitor::visit(const CaContent& x)
 }
 
 
-/*
- * Visit the CaOmexManifest
- */
-bool
-CaVisitor::visit(const CaOmexManifest& x)
-{
-  return visit(static_cast<const CaBase&>(x));
-}
-
-
 void
 CaVisitor::leave (const CaOmexManifest& x)
 {
@@ -109,15 +99,6 @@ CaVisitor::leave (const CaListOf& x, int type)
  */
 void
 CaVisitor::leave(const CaContent& x)
-{
-}
-
-
-/*
- * Leave the CaOmexManifest
- */
-void
-CaVisitor::leave(const CaOmexManifest& x)
 {
 }
 

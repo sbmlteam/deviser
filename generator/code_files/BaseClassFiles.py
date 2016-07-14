@@ -197,8 +197,9 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
     def print_visit_code(self, fileout):
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                self.write_visit_code(fileout, name)
+                if not 'document' in element or not element['document']:
+                    name = strFunctions.prefix_name(element['name'])
+                    self.write_visit_code(fileout, name)
 
     def write_visit_code(self, fileout, name):
         code = dict({'title_line': 'Visit the {0}'.format(name),
@@ -218,8 +219,9 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         fileout.skip_line(2)
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                self.write_leave_code(fileout, name)
+                if not 'document' in element or not element['document']:
+                    name = strFunctions.prefix_name(element['name'])
+                    self.write_leave_code(fileout, name)
 
     def write_leave_code(self, fileout, name):
         code = dict({'title_line': 'Leave the {0}'.format(name),
