@@ -631,7 +631,7 @@ SedSetValue::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSetValuesAllowedAttributes, level, version,
+        log->logError(SedmlLOSetValuesAllowedCoreAttributes, level, version,
           details);
       }
     }

@@ -692,7 +692,7 @@ SedModel::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlSedDocumentLOModelsAllowedAttributes, level,
+        log->logError(SedmlSedDocumentLOModelsAllowedCoreAttributes, level,
           version, details);
       }
     }
@@ -781,7 +781,7 @@ SedModel::readAttributes(
   {
     std::string message = "Sedml attribute 'source' is missing from the "
       "<SedModel> element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message);
+    log->logError(SedmlSedModelAllowedAttributes, level, version, message);
   }
 }
 

@@ -578,7 +578,7 @@ SedSimulation::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logError(SedmlLOSimulationsAllowedAttributes, level, version,
+        log->logError(SedmlLOSimulationsAllowedCoreAttributes, level, version,
           details);
       }
     }
