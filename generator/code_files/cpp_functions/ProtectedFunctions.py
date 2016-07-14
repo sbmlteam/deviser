@@ -1349,7 +1349,11 @@ class ProtectedFunctions():
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
-        error = '{0}{1}AllowedAttributes'.format(self.package, strFunctions.prefix_name(class_name))
+        if not global_variables.is_package:
+            use_name = strFunctions.prefix_name(class_name)
+        else:
+            use_name = class_name
+        error = '{0}{1}AllowedAttributes'.format(self.package, use_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
