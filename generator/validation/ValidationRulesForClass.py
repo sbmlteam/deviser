@@ -231,7 +231,7 @@ class ValidationRulesForClass():
         elif att_type == 'UnitSId' or att_type == 'UnitSIdRef':
             text = 'The value of the attribute {0} on {1} {2} must have a ' \
                    'taken from the following: the identifier of a ' \
-                   '\UnitDefinition object in the enclosing \Model, or one ' \
+                   '\\UnitDefinition object in the enclosing \Model, or one ' \
                    'of the base units in SBML.'.format(name,
                                                        self.indef,
                                                        formatted_name)
