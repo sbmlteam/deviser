@@ -442,6 +442,12 @@ def main():
 
     name = 'combine-archive'
     class_name = 'libcombine'
+    test_case = 'csharp dir'
+    binding = 'csharp'
+    fail += test_bindings(name, class_name, test_case, binding, 'combine')
+
+    name = 'combine-archive'
+    class_name = 'libcombine'
     test_case = 'cmake'
     binding = 'cmake'
     fail += test_cmake(name, class_name, test_case, binding, 'combine')
