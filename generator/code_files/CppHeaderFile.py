@@ -268,9 +268,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                 self.is_cpp_api,
                                                 self.class_object)
         if self.is_cpp_api and not self.is_plugin:
-            if global_variables.has_level_version:
-                code = constructor.write_level_version_constructor()
-                self.write_function_declaration(code)
+            code = constructor.write_level_version_constructor()
+            self.write_function_declaration(code)
 
             code = constructor.write_namespace_constructor()
             self.write_function_declaration(code)

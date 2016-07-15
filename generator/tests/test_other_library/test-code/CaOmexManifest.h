@@ -72,6 +72,12 @@ protected:
 public:
 
   /**
+   * Creates a new CaOmexManifest instance.
+   */
+  CaOmexManifest();
+
+
+  /**
    * Creates a new CaOmexManifest using the given CaNamespaces object @p
    * omexns.
    *
@@ -445,26 +451,13 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CaOmexManifest_t using the given OMEX Level and @ p version
- * values.
- *
- * @param level an unsigned int, the OMEX Level to assign to this
- * CaOmexManifest_t.
- *
- * @param version an unsigned int, the OMEX Version to assign to this
- * CaOmexManifest_t.
- *
- * @throws OMEXConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * OMEX object, are either invalid or mismatched with respect to the parent
- * CaOmexManifest object.
- * @copydetails doc_note_setting_lv
+ * Creates a new CaOmexManifest_t instance.
  *
  * @memberof CaOmexManifest_t
  */
 LIBCOMBINE_EXTERN
 CaOmexManifest_t *
-CaOmexManifest_create(unsigned int level, unsigned int version);
+CaOmexManifest_create();
 
 
 /**

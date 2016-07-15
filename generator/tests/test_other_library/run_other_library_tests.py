@@ -416,7 +416,7 @@ def main():
     name = 'combine-archive'
     num = 0
     class_name = 'CaContent'
-    list_of = ''
+    list_of = 'CaListOfContents'
     test_case = 'check includes'
     fail += run_test(name, num, class_name, test_case, list_of)
 

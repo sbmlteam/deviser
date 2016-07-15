@@ -72,6 +72,12 @@ protected:
 public:
 
   /**
+   * Creates a new CaContent instance.
+   */
+  CaContent();
+
+
+  /**
    * Creates a new CaContent using the given CaNamespaces object @p omexns.
    *
    * @param omexns the CaNamespaces object.
@@ -383,24 +389,13 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CaContent_t using the given OMEX Level and @ p version values.
- *
- * @param level an unsigned int, the OMEX Level to assign to this CaContent_t.
- *
- * @param version an unsigned int, the OMEX Version to assign to this
- * CaContent_t.
- *
- * @throws OMEXConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * OMEX object, are either invalid or mismatched with respect to the parent
- * CaOmexManifest object.
- * @copydetails doc_note_setting_lv
+ * Creates a new CaContent_t instance.
  *
  * @memberof CaContent_t
  */
 LIBCOMBINE_EXTERN
 CaContent_t *
-CaContent_create(unsigned int level, unsigned int version);
+CaContent_create();
 
 
 /**

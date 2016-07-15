@@ -87,6 +87,9 @@ class Constructors():
 
     # function to write level version constructor
     def write_level_version_constructor(self, index=0):
+        # I want to write the equivalent constructor but without level and version
+        if not global_variables.has_level_version:
+            return self.write_class_constructor(index)
         if (len(self.concretes) == 0 and index == 0) or index == -1:
             ob_name = self.object_name
             create = 'create'
@@ -211,6 +214,67 @@ class Constructors():
                      'object_name': self.object_name,
                      'implementation': code,
                      'args_no_defaults': arguments_no_defaults,
+                     'constructor_args': constructor_args})
+
+    # function to write level version constructor
+    def write_class_constructor(self, index=0):
+        if (len(self.concretes) == 0 and index == 0) or index == -1:
+            ob_name = self.object_name
+            create = 'create'
+        elif self.is_cpp_api:
+            ob_name = self.object_name
+            create = 'create'
+        else:
+            if index == 0:
+                return
+            else:
+                i = index - 1
+            ob_name = '{0} ({1})'.format(self.concretes[i]['element'],
+                                       self.object_name)
+            create = 'create{0}'.format(self.concretes[i]['element'])
+        # create doc string header
+        title_line = 'Creates a new {0} instance.'.format(ob_name)
+
+        params = []
+        return_lines = []
+        additional = ''
+
+        # create the function declaration
+        if self.is_cpp_api:
+            function = self.class_name
+            return_type = ''
+        else:
+            function = '{0}_{1}'.format(self.class_name, create)
+            return_type = '{0} *'.format(self.object_name)
+
+        arguments = []
+
+        # create the function implementation
+        constructor_args = self.write_constructor_args(None)
+        if self.is_cpp_api:
+            implementation = []
+            if self.document:
+                implementation.append('set{0}(this)'.format(self.class_name))
+
+            if self.has_children:
+                implementation.append('connectToChild()')
+        else:
+            implementation = ['return new {0}()'.format(self.class_name)]
+
+        code = [dict({'code_type': 'line', 'code': implementation})]
+
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': False,
+                     'object_name': self.object_name,
+                     'implementation': code,
+                     'args_no_defaults': [],
                      'constructor_args': constructor_args})
 
     # function to write namespace constructor
@@ -631,11 +695,15 @@ class Constructors():
 
     def write_constructor_args(self, ns):
         if ns is None:
-            constructor_args = [': {0}(level, version)'.format(self.base_class)]
-            if global_variables.is_package:
-                parameters = 'level, version, pkgVersion'
+            if global_variables.has_level_version:
+                constructor_args = [': {0}(level, version)'.format(self.base_class)]
+                if global_variables.is_package:
+                    parameters = 'level, version, pkgVersion'
+                else:
+                    parameters = 'level, version'
             else:
-                parameters = 'level, version'
+                constructor_args = [': {0}(1, 1)'.format(self.base_class)]
+                parameters = '1, 1'
         elif ns is not None and self.is_plugin:
             constructor_args = [': {0}(uri, prefix, '
                                 '{1})'.format(self.base_class, ns)]

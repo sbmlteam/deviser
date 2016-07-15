@@ -48,6 +48,19 @@ LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 
 /*
+ * Creates a new CaContent instance.
+ */
+CaContent::CaContent()
+  : CaBase(1, 1)
+  , mLocation ("")
+  , mFormat ("")
+  , mMaster (false)
+  , mIsSetMaster (false)
+{
+}
+
+
+/*
  * Creates a new CaContent using the given CaNamespaces object @p omexns.
  */
 CaContent::CaContent(CaNamespaces *omexns)
@@ -510,13 +523,13 @@ CaContent::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new CaContent_t using the given OMEX Level and @ p version values.
+ * Creates a new CaContent_t instance.
  */
 LIBCOMBINE_EXTERN
 CaContent_t *
-CaContent_create(unsigned int level, unsigned int version)
+CaContent_create()
 {
-  return new CaContent(level, version);
+  return new CaContent();
 }
 
 
