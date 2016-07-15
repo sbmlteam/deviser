@@ -446,6 +446,12 @@ def main():
     binding = 'swig'
     fail += test_bindings(name, class_name, test_case, binding, 'combine')
 
+    name = 'combine-archive'
+    class_name = 'libcombine'
+    test_case = 'csharp dir'
+    binding = 'csharp'
+    fail += test_bindings(name, class_name, test_case, binding, 'combine')
+
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
 
