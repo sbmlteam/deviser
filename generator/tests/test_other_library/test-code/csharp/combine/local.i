@@ -197,12 +197,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     {
     case (int) libcombine.LIB_COMBINE_OMEXMANIFEST:
       return new CaOmexManifest(cPtr, owner);
- 
+
     case (int) libcombine.LIB_COMBINE_CONTENT:
       return new CaContent(cPtr, owner);
-
-    case (int) libcombine.LIB_COMBINE_OMEXMANIFEST:
-      return new CaOmexManifest(cPtr, owner);
 
     case (int) libcombine.OMEX_LIST_OF:
       String name = sb.getElementName();

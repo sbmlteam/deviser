@@ -168,13 +168,14 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
         libname = global_variables.library_name.lower()
         for element in self.elements:
             if not element['name'].endswith('Document'):
-                name = strFunctions.prefix_name(element['name'])
-                fileout.copy_line_verbatim('    case (int) {0}.{1}:'
-                                           '\n'.format(libname,
-                                                       element['typecode']))
-                fileout.copy_line_verbatim('      return new {0}(cPtr, owner)'
-                                           ';\n'.format(name))
-                fileout.skip_line()
+                if not 'document' in element or not element['document']:
+                    name = strFunctions.prefix_name(element['name'])
+                    fileout.copy_line_verbatim('    case (int) {0}.{1}:'
+                                               '\n'.format(libname,
+                                                           element['typecode']))
+                    fileout.copy_line_verbatim('      return new {0}(cPtr, owner)'
+                                               ';\n'.format(name))
+                    fileout.skip_line()
 
     def print_derived_listof_types(self, fileout):
         for element in self.elements:

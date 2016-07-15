@@ -163,8 +163,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     {
     case (int) libsbml.SBML_DOCUMENT:
       return new SBMLDocument(cPtr, owner);
- 
-<insert_derived_types/>           
+
+<insert_derived_types/>
     case (int) libsbml.SBML_LIST_OF:
       String name = sb.getElementName();
       if(name == "listOf")

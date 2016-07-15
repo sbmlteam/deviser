@@ -198,7 +198,7 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     {
     case (int) libsedml.SEDML_DOCUMENT:
       return new SedDocument(cPtr, owner);
- 
+
     case (int) libsedml.SEDML_MODEL:
       return new SedModel(cPtr, owner);
 

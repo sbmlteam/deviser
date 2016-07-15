@@ -87,6 +87,11 @@ def generate_forward(filename):
 def generate_binding(filename, binding):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     os.chdir('./temp')
     if os.path.isdir(binding):
         os.chdir(binding)
@@ -101,6 +106,11 @@ def generate_binding(filename, binding):
 def generate_cmake(filename, binding):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     os.chdir('./temp')
     if os.path.isdir(binding):
         os.chdir(binding)
@@ -121,6 +131,11 @@ def generate_cmake(filename, binding):
 def generate_global(filename):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
     os.chdir('./temp')
     generateCode.generate_global_files()
     os.chdir('../.')
@@ -302,19 +317,11 @@ def test_global(name, class_name, test_case):
 
 
 #########################################################################
-# Main function
+# Main functions
 
-def main():
+def testSedML(fail):
+    global_variables.reset()
 
-    # set up the enivornment
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    (path_to_tests, other) = os.path.split(this_dir)
-    test_functions.set_path_to_tests(path_to_tests)
-    if not os.path.isdir('temp'):
-        os.mkdir('temp')
-    fail = 0
-
-    # run the individual tests
     name = 'test_sedml'
     num = 1
     class_name = 'SedModel'
@@ -411,6 +418,9 @@ def main():
     test_case = 'global files'
     fail += test_global(name, class_name, test_case)
 
+    return fail
+
+def testCombine(fail):
     global_variables.reset()
 
     name = 'combine-archive'
@@ -457,6 +467,22 @@ def main():
     test_case = 'cmake'
     binding = 'cmake'
     fail += test_cmake(name, class_name, test_case, binding, 'combine')
+
+    return fail
+
+
+def main():
+
+    # set up the enivornment
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    (path_to_tests, other) = os.path.split(this_dir)
+    test_functions.set_path_to_tests(path_to_tests)
+    if not os.path.isdir('temp'):
+        os.mkdir('temp')
+    fail = 0
+
+    fail = testSedML(fail)
+    fail = testCombine(fail)
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
