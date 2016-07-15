@@ -70,7 +70,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10001
   {
-    NotUTF8,
+    CaNotUTF8,
     "File does not use UTF-8 encoding",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -85,7 +85,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10002
   {
-    UnrecognizedElement,
+    CaUnrecognizedElement,
     "Encountered unrecognized element",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -99,7 +99,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10003
   {
-    NotSchemaConformant,
+    CaNotSchemaConformant,
     "Document does not conform to the OMEX XML schema",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -113,7 +113,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10201
   {
-    InvalidMathElement,
+    CaInvalidMathElement,
     "Invalid MathML",
     LIBCOMBINE_CAT_MATHML_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -126,7 +126,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10401
   {
-    MissingAnnotationNamespace,
+    CaMissingAnnotationNamespace,
     "Missing declaration of the XML namespace for the annotation",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -138,7 +138,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10402
   {
-    DuplicateAnnotationNamespaces,
+    CaDuplicateAnnotationNamespaces,
     "Multiple annotations using the same XML namespace",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -163,7 +163,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10404
   {
-    MultipleAnnotations,
+    CaMultipleAnnotations,
     "Only one Annotation object is permitted under a given OMEX object",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -174,7 +174,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10801
   {
-    NotesNotInXHTMLNamespace,
+    CaNotesNotInXHTMLNamespace,
     "Notes must be placed in the XHTML XML namespace",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -186,7 +186,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10802
   {
-    NotesContainsXMLDecl,
+    CaNotesContainsXMLDecl,
     "XML declarations are not permitted in Notes objects",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -199,7 +199,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10803
   {
-    NotesContainsDOCTYPE,
+    CaNotesContainsDOCTYPE,
     "XML DOCTYPE elements are not permitted in Notes objects",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -211,7 +211,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10804
   {
-    InvalidNotesContent,
+    CaInvalidNotesContent,
     "Invalid notes content",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -222,7 +222,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //10805
   {
-    OnlyOneNotesElementAllowed,
+    CaOnlyOneNotesElementAllowed,
     "Only one Notes subobject is permitted on a given OMEX object",
     LIBCOMBINE_CAT_OMEX,
     LIBCOMBINE_SEV_ERROR,
@@ -284,7 +284,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 10303
-  { InvalidMetaidSyntax,
+  { CaInvalidMetaidSyntax,
     "Invalid SId syntax",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -315,7 +315,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20103
-  { EmptyListElement,
+  { CaEmptyListElement,
     "No empty listOf",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -460,7 +460,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   //99994
   {
-    UnknownCoreAttribute,
+    CaUnknownCoreAttribute,
     "Unknown attribute",
     LIBCOMBINE_CAT_INTERNAL,
     LIBCOMBINE_SEV_ERROR,

@@ -50,28 +50,28 @@ BEGIN_C_DECLS
 typedef enum
 {
   CaUnknownError                      = 10000 /*!< Encountered unknown internal libCombine error. */
-, NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
-, UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10003 /*!< Document does not conform to the OMEX XML schema. */
-, InvalidMathElement                    = 10201
-, MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
-, DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
+, CaNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
+, CaUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
+, CaNotSchemaConformant                   = 10003 /*!< Document does not conform to the OMEX XML schema. */
+, CaInvalidMathElement                    = 10201
+, CaMissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
+, CaDuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
 , CaNamespaceInAnnotation             = 10403 /*!< The OMEX XML namespace cannot be used in an Annotation object. */
-, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given OMEX object. */
-, AnnotationNotElement                  = 10405
-, NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
-, NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
-, NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
-, InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
-, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given OMEX object. */
+, CaMultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given OMEX object. */
+, CaAnnotationNotElement                  = 10405
+, CaNotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
+, CaNotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
+, CaNotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
+, CaInvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
+, CaOnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given OMEX object. */
 , CombineNSUndeclared      = 10101
 , CombineElementNotInNs      = 10102
 , CombineDuplicateComponentId      = 10301
 , CombineIdSyntaxRule      = 10302
-, InvalidMetaidSyntax      = 10303
+, CaInvalidMetaidSyntax      = 10303
 , InvalidNamespaceOnCa      = 20101
 , AllowedAttributes      = 20102
-, EmptyListElement      = 20103
+, CaEmptyListElement      = 20103
 , CombineCaContentAllowedCoreAttributes      = 20201
 , CombineCaContentAllowedCoreElements      = 20202
 , CombineCaContentAllowedAttributes      = 20203
@@ -83,7 +83,7 @@ typedef enum
 , CombineCaOmexManifestAllowedElements      = 20303
 , CombineCaOmexManifestLOContentsAllowedCoreElements      = 20304
 , CombineCaOmexManifestLOContentsAllowedCoreAttributes      = 20305
-, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
+, CaUnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
 , CaCodesUpperBound                   = 99999 /*!< Upper boundary of libCombine-specific diagnostic codes. */
 } CaErrorCode_t;
 

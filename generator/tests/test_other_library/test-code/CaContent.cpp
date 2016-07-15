@@ -412,10 +412,10 @@ CaContent::readAttributes(
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      if (log->getError(n)->getErrorId() == CaUnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
-        log->remove(UnknownCoreAttribute);
+        log->remove(CaUnknownCoreAttribute);
         log->logError(CombineCaOmexManifestLOContentsAllowedCoreAttributes,
           level, version, details);
       }
@@ -427,10 +427,10 @@ CaContent::readAttributes(
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    if (log->getError(n)->getErrorId() == CaUnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
+      log->remove(CaUnknownCoreAttribute);
       log->logError(CombineCaContentAllowedAttributes, level, version,
         details);
     }

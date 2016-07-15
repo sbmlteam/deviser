@@ -51,28 +51,28 @@ BEGIN_C_DECLS
 typedef enum
 {
   SedUnknownError                      = 10000 /*!< Encountered unknown internal libSEDML error. */
-, NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
-, UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SEDML XML schema. */
-, InvalidMathElement                    = 10201
-, MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
-, DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
+, SedNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
+, SedUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
+, SedNotSchemaConformant                   = 10003 /*!< Document does not conform to the SEDML XML schema. */
+, SedInvalidMathElement                    = 10201
+, SedMissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
+, SedDuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
 , SedNamespaceInAnnotation             = 10403 /*!< The SEDML XML namespace cannot be used in an Annotation object. */
-, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SEDML object. */
-, AnnotationNotElement                  = 10405
-, NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
-, NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
-, NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
-, InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
-, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SEDML object. */
+, SedMultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SEDML object. */
+, SedAnnotationNotElement                  = 10405
+, SedNotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
+, SedNotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
+, SedNotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
+, SedInvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
+, SedOnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SEDML object. */
 , SedmlNSUndeclared      = 10101
 , SedmlElementNotInNs      = 10102
 , SedmlDuplicateComponentId      = 10301
 , SedmlIdSyntaxRule      = 10302
-, InvalidMetaidSyntax      = 10303
+, SedInvalidMetaidSyntax      = 10303
 , InvalidNamespaceOnSed      = 20101
 , AllowedAttributes      = 20102
-, EmptyListElement      = 20103
+, SedEmptyListElement      = 20103
 , SedmlSedDocumentAllowedCoreAttributes      = 20201
 , SedmlSedDocumentAllowedCoreElements      = 20202
 , SedmlSedDocumentAllowedAttributes      = 20203
@@ -129,7 +129,7 @@ typedef enum
 , SedmlSedVectorRangeAllowedCoreElements      = 21002
 , SedmlSedVectorRangeAllowedAttributes      = 21003
 , SedmlSedVectorRangeValueMustBeString      = 21004
-, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SEDML Core namespace. */
+, SedUnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SEDML Core namespace. */
 , SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;
 

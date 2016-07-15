@@ -2126,7 +2126,7 @@ CaBase::readAnnotation (XMLInputStream& stream)
     {
       string msg = "An OMEX <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
-      logError(MultipleAnnotations, getLevel(), getVersion(), msg);
+      logError(CaMultipleAnnotations, getLevel(), getVersion(), msg);
     }
 
     delete mAnnotation;
@@ -2157,7 +2157,7 @@ CaBase::readNotes (XMLInputStream& stream)
 
     if (mNotes != NULL)
     {
-      logError(OnlyOneNotesElementAllowed, getLevel(), getVersion());
+      logError(CaOnlyOneNotesElementAllowed, getLevel(), getVersion());
     }
 
     delete mNotes;
@@ -2229,7 +2229,7 @@ CaBase::logUnknownAttribute( const string& attribute,
   // (TODO) Needs to be fixed so that error can be added when
   // no CaOmexManifest attached.
   //
-        getErrorLog()->logError(AllowedAttributes, level,
+        getErrorLog()->logError(CaUnknownCoreAttribute, level,
           version, msg.str(), getLine(), getColumn());
   }
 }
@@ -2254,7 +2254,7 @@ CaBase::logUnknownElement( const string& element,
 
     if (mCa != NULL)
     {
-      getErrorLog()->logError(UnrecognizedElement,
+      getErrorLog()->logError(CaUnrecognizedElement,
             level, version, msg.str(), getLine(), getColumn());
     }
   
@@ -2284,7 +2284,7 @@ CaBase::logEmptyString( const string& attribute,
   // no CaOmexManifest attached.
   //
   if (mCa != NULL)
-    getErrorLog()->logError(NotSchemaConformant,
+    getErrorLog()->logError(CaNotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
@@ -2396,7 +2396,7 @@ CaBase::readAttributes (const XMLAttributes& attributes,
     {
       if (!SyntaxChecker::isValidXMLID(mMetaId))
       {
-        logError(InvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
+        logError(CaInvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
       }
   }
 
@@ -2517,7 +2517,7 @@ CaBase::checkCaListOfPopulated(CaBase* object)
   {
     if (static_cast <CaListOf*> (object)->size() == 0)
     {
-      CaErrorCode_t error = EmptyListElement;
+      CaErrorCode_t error = CaEmptyListElement;
       ostringstream errMsg;
       errMsg << object->getElementName() << " cannot be empty.";
 
@@ -2589,7 +2589,7 @@ CaBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    logError(InvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
+    logError(CaInvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
   }
 
   return prefix;
@@ -2626,7 +2626,7 @@ CaBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
          << "> element is an invalid namespace." << endl;
 
-  logError(NotSchemaConformant, getLevel(), getVersion(), errMsg.str());
+  logError(CaNotSchemaConformant, getLevel(), getVersion(), errMsg.str());
 
 }
 
@@ -2659,7 +2659,7 @@ CaBase::checkAnnotation()
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
     {
-      logError(AnnotationNotElement, getLevel(), getVersion());
+      logError(CaAnnotationNotElement, getLevel(), getVersion());
       nNodes++;
       continue;
     }
@@ -2684,7 +2684,7 @@ CaBase::checkAnnotation()
       {
         string msg = "An OMEX <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
-        logError(DuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
+        logError(CaDuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
       uri_list.push_back(uri);
     }
@@ -2714,7 +2714,7 @@ CaBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(MissingAnnotationNamespace);
+        logError(CaMissingAnnotationNamespace);
       }
     }
     // cannot declare omex namespace
@@ -2735,7 +2735,7 @@ CaBase::checkAnnotation()
     if (implicitNSdecl && prefix.empty())
     {
       msg += "assumes the omex namespace on an element in its child <annotation>.";
-      logError(MissingAnnotationNamespace, getLevel(), getVersion(), msg);
+      logError(CaMissingAnnotationNamespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
   }
@@ -2759,10 +2759,10 @@ CaBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = NotesNotInXHTMLNamespace;
-    errorXML  = NotesContainsXMLDecl;
-    errorDOC  = NotesContainsDOCTYPE;
-    errorELEM = InvalidNotesContent;
+    errorNS   = CaNotesNotInXHTMLNamespace;
+    errorXML  = CaNotesContainsXMLDecl;
+    errorDOC  = CaNotesContainsDOCTYPE;
+    errorELEM = CaInvalidNotesContent;
   }
   else                                  // We shouldn't ever get to this point.
   {

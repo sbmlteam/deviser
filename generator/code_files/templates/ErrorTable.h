@@ -36,7 +36,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10001
   {
-    NotUTF8,
+    SBMLNotUTF8,
     "File does not use UTF-8 encoding",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -51,7 +51,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10002
   {
-    UnrecognizedElement,
+    SBMLUnrecognizedElement,
     "Encountered unrecognized element",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -65,7 +65,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10003
   {
-    NotSchemaConformant,
+    SBMLNotSchemaConformant,
     "Document does not conform to the SBML_Lang XML schema",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -79,7 +79,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10201
   {
-    InvalidMathElement,
+    SBMLInvalidMathElement,
     "Invalid MathML",
     LIBSBML_CAT_MATHML_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -92,7 +92,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10401
   {
-    MissingAnnotationNamespace,
+    SBMLMissingAnnotationNamespace,
     "Missing declaration of the XML namespace for the annotation",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -104,7 +104,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10402
   {
-    DuplicateAnnotationNamespaces,
+    SBMLDuplicateAnnotationNamespaces,
     "Multiple annotations using the same XML namespace",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -129,7 +129,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10404
   {
-    MultipleAnnotations,
+    SBMLMultipleAnnotations,
     "Only one Annotation object is permitted under a given SBML_Lang object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -140,7 +140,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10801
   {
-    NotesNotInXHTMLNamespace,
+    SBMLNotesNotInXHTMLNamespace,
     "Notes must be placed in the XHTML XML namespace",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -152,7 +152,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10802
   {
-    NotesContainsXMLDecl,
+    SBMLNotesContainsXMLDecl,
     "XML declarations are not permitted in Notes objects",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -165,7 +165,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10803
   {
-    NotesContainsDOCTYPE,
+    SBMLNotesContainsDOCTYPE,
     "XML DOCTYPE elements are not permitted in Notes objects",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -177,7 +177,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10804
   {
-    InvalidNotesContent,
+    SBMLInvalidNotesContent,
     "Invalid notes content",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -188,7 +188,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10805
   {
-    OnlyOneNotesElementAllowed,
+    SBMLOnlyOneNotesElementAllowed,
     "Only one Notes subobject is permitted on a given SBML_Lang object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -208,7 +208,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //99994
   {
-    UnknownCoreAttribute,
+    SBMLUnknownCoreAttribute,
     "Unknown attribute",
     LIBSBML_CAT_INTERNAL,
     LIBSBML_SEV_ERROR,

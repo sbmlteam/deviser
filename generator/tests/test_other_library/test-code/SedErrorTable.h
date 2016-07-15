@@ -71,7 +71,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10001
   {
-    NotUTF8,
+    SedNotUTF8,
     "File does not use UTF-8 encoding",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -86,7 +86,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10002
   {
-    UnrecognizedElement,
+    SedUnrecognizedElement,
     "Encountered unrecognized element",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -100,7 +100,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10003
   {
-    NotSchemaConformant,
+    SedNotSchemaConformant,
     "Document does not conform to the SEDML XML schema",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -114,7 +114,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10201
   {
-    InvalidMathElement,
+    SedInvalidMathElement,
     "Invalid MathML",
     LIBSEDML_CAT_MATHML_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -127,7 +127,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10401
   {
-    MissingAnnotationNamespace,
+    SedMissingAnnotationNamespace,
     "Missing declaration of the XML namespace for the annotation",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -139,7 +139,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10402
   {
-    DuplicateAnnotationNamespaces,
+    SedDuplicateAnnotationNamespaces,
     "Multiple annotations using the same XML namespace",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -164,7 +164,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10404
   {
-    MultipleAnnotations,
+    SedMultipleAnnotations,
     "Only one Annotation object is permitted under a given SEDML object",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -175,7 +175,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10801
   {
-    NotesNotInXHTMLNamespace,
+    SedNotesNotInXHTMLNamespace,
     "Notes must be placed in the XHTML XML namespace",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -187,7 +187,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10802
   {
-    NotesContainsXMLDecl,
+    SedNotesContainsXMLDecl,
     "XML declarations are not permitted in Notes objects",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -200,7 +200,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10803
   {
-    NotesContainsDOCTYPE,
+    SedNotesContainsDOCTYPE,
     "XML DOCTYPE elements are not permitted in Notes objects",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -212,7 +212,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10804
   {
-    InvalidNotesContent,
+    SedInvalidNotesContent,
     "Invalid notes content",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -223,7 +223,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //10805
   {
-    OnlyOneNotesElementAllowed,
+    SedOnlyOneNotesElementAllowed,
     "Only one Notes subobject is permitted on a given SEDML object",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -285,7 +285,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 10303
-  { InvalidMetaidSyntax,
+  { SedInvalidMetaidSyntax,
     "Invalid SId syntax",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -316,7 +316,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20103
-  { EmptyListElement,
+  { SedEmptyListElement,
     "No empty listOf",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -993,7 +993,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   //99994
   {
-    UnknownCoreAttribute,
+    SedUnknownCoreAttribute,
     "Unknown attribute",
     LIBSEDML_CAT_INTERNAL,
     LIBSEDML_SEV_ERROR,

@@ -192,7 +192,7 @@ SBMLError::SBMLError (  const unsigned int errorId
 
     if (mSeverity == LIBSBML_SEV_SCHEMA_ERROR)
     {
-      mErrorId  = NotSchemaConformant;
+      mErrorId  = SBMLNotSchemaConformant;
       mSeverity = LIBSBML_SEV_ERROR;
       newMsg << language_ErrorTable[3].message << " "; // FIXME
     }

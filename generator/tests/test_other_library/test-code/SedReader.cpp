@@ -222,7 +222,7 @@ SedReader::readInternal (const char* content, bool isFile)
     if (stream.peek().isStart() && stream.peek().getName() != "sedml")
     {
       // the root element ought to be an sedml element. 
-      d->getErrorLog()->logError(NotSchemaConformant);
+      d->getErrorLog()->logError(SedNotSchemaConformant);
 	  return d;
     }
 	
@@ -265,7 +265,7 @@ SedReader::readInternal (const char* content, bool isFile)
       }
       else if (strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
       {
-        d->getErrorLog()->logError(NotUTF8);
+        d->getErrorLog()->logError(SedNotUTF8);
       }
 
       if (stream.getVersion() == "")

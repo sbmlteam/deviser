@@ -297,7 +297,7 @@ class ValidationRulesGeneral():
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Invalid SId syntax'.format(self.up_package)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = 'InvalidMetaidSyntax'.format(self.up_package)
+        tc = '{0}InvalidMetaidSyntax'.format(global_variables.prefix)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
@@ -342,7 +342,7 @@ class ValidationRulesGeneral():
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'No empty listOf'.format(self.up_package)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
-        tc = 'EmptyListElement'.format(self.up_package)
+        tc = '{0}EmptyListElement'.format(global_variables.prefix)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})

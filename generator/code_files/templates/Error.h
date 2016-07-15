@@ -18,22 +18,22 @@ BEGIN_C_DECLS
 typedef enum
 {
   SBMLUnknownError                      = 10000 /*!< Encountered unknown internal libSBML error. */
-, NotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
-, UnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
-, NotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML_Lang XML schema. */
-, InvalidMathElement                    = 10201
-, MissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
-, DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
+, SBMLNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
+, SBMLUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
+, SBMLNotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML_Lang XML schema. */
+, SBMLInvalidMathElement                    = 10201
+, SBMLMissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
+, SBMLDuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
 , SBMLNamespaceInAnnotation             = 10403 /*!< The SBML_Lang XML namespace cannot be used in an Annotation object. */
-, MultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML_Lang object. */
-, AnnotationNotElement                  = 10405
-, NotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
-, NotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
-, NotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
-, InvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
-, OnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML_Lang object. */
+, SBMLMultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML_Lang object. */
+, SBMLAnnotationNotElement                  = 10405
+, SBMLNotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
+, SBMLNotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
+, SBMLNotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */
+, SBMLInvalidNotesContent                   = 10804 /*!< Invalid notes content found. */
+, SBMLOnlyOneNotesElementAllowed            = 10805 /*!< Only one Notes subobject is permitted on a given SBML_Lang object. */
 <add_specific_errors/>
-, UnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SBML_Lang Core namespace. */
+, SBMLUnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SBML_Lang Core namespace. */
 , SBMLCodesUpperBound                   = 99999 /*!< Upper boundary of libSBML-specific diagnostic codes. */
 } SBMLErrorCode_t;
 

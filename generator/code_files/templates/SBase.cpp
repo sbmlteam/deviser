@@ -2093,7 +2093,7 @@ SBase::readAnnotation (XMLInputStream& stream)
     {
       string msg = "An SBML_Lang <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
-      logError(MultipleAnnotations, getLevel(), getVersion(), msg);
+      logError(SBMLMultipleAnnotations, getLevel(), getVersion(), msg);
     }
 
     delete mAnnotation;
@@ -2124,7 +2124,7 @@ SBase::readNotes (XMLInputStream& stream)
 
     if (mNotes != NULL)
     {
-      logError(OnlyOneNotesElementAllowed, getLevel(), getVersion());
+      logError(SBMLOnlyOneNotesElementAllowed, getLevel(), getVersion());
     }
 
     delete mNotes;
@@ -2196,7 +2196,7 @@ SBase::logUnknownAttribute( const string& attribute,
   // (TODO) Needs to be fixed so that error can be added when
   // no SBMLDocument attached.
   //
-        getErrorLog()->logError(AllowedAttributes, level,
+        getErrorLog()->logError(SBMLUnknownCoreAttribute, level,
           version, msg.str(), getLine(), getColumn());
   }
 }
@@ -2221,7 +2221,7 @@ SBase::logUnknownElement( const string& element,
 
     if (mSBML != NULL)
     {
-      getErrorLog()->logError(UnrecognizedElement,
+      getErrorLog()->logError(SBMLUnrecognizedElement,
             level, version, msg.str(), getLine(), getColumn());
     }
   
@@ -2251,7 +2251,7 @@ SBase::logEmptyString( const string& attribute,
   // no SBMLDocument attached.
   //
   if (mSBML != NULL)
-    getErrorLog()->logError(NotSchemaConformant,
+    getErrorLog()->logError(SBMLNotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
@@ -2363,7 +2363,7 @@ SBase::readAttributes (const XMLAttributes& attributes,
     {
       if (!SyntaxChecker::isValidXMLID(mMetaId))
       {
-        logError(InvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
+        logError(SBMLInvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
       }
   }
 
@@ -2484,7 +2484,7 @@ SBase::checkListOfPopulated(SBase* object)
   {
     if (static_cast <ListOf*> (object)->size() == 0)
     {
-      SBMLErrorCode_t error = EmptyListElement;
+      SBMLErrorCode_t error = SBMLEmptyListElement;
       ostringstream errMsg;
       errMsg << object->getElementName() << " cannot be empty.";
 
@@ -2556,7 +2556,7 @@ SBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    logError(InvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
+    logError(SBMLInvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
   }
 
   return prefix;
@@ -2593,7 +2593,7 @@ SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
          << "> element is an invalid namespace." << endl;
 
-  logError(NotSchemaConformant, getLevel(), getVersion(), errMsg.str());
+  logError(SBMLNotSchemaConformant, getLevel(), getVersion(), errMsg.str());
 
 }
 
@@ -2626,7 +2626,7 @@ SBase::checkAnnotation()
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
     {
-      logError(AnnotationNotElement, getLevel(), getVersion());
+      logError(SBMLAnnotationNotElement, getLevel(), getVersion());
       nNodes++;
       continue;
     }
@@ -2651,7 +2651,7 @@ SBase::checkAnnotation()
       {
         string msg = "An SBML_Lang <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
-        logError(DuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
+        logError(SBMLDuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
       uri_list.push_back(uri);
     }
@@ -2681,7 +2681,7 @@ SBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(MissingAnnotationNamespace);
+        logError(SBMLMissingAnnotationNamespace);
       }
     }
     // cannot declare sbml namespace
@@ -2702,7 +2702,7 @@ SBase::checkAnnotation()
     if (implicitNSdecl && prefix.empty())
     {
       msg += "assumes the sbml namespace on an element in its child <annotation>.";
-      logError(MissingAnnotationNamespace, getLevel(), getVersion(), msg);
+      logError(SBMLMissingAnnotationNamespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
   }
@@ -2726,10 +2726,10 @@ SBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = NotesNotInXHTMLNamespace;
-    errorXML  = NotesContainsXMLDecl;
-    errorDOC  = NotesContainsDOCTYPE;
-    errorELEM = InvalidNotesContent;
+    errorNS   = SBMLNotesNotInXHTMLNamespace;
+    errorXML  = SBMLNotesContainsXMLDecl;
+    errorDOC  = SBMLNotesContainsDOCTYPE;
+    errorELEM = SBMLInvalidNotesContent;
   }
   else                                  // We shouldn't ever get to this point.
   {

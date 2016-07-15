@@ -688,10 +688,10 @@ SedModel::readAttributes(
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
     {
-      if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
-        log->remove(UnknownCoreAttribute);
+        log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlSedDocumentLOModelsAllowedCoreAttributes, level,
           version, details);
       }
@@ -703,10 +703,10 @@ SedModel::readAttributes(
 
   for (int n = numErrs-1; n >= 0; n--)
   {
-    if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
     {
       const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
+      log->remove(SedUnknownCoreAttribute);
       log->logError(SedmlSedModelAllowedAttributes, level, version, details);
     }
   }

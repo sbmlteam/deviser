@@ -224,7 +224,7 @@ CaError::CaError (  const unsigned int errorId
 
     if (mSeverity == LIBCOMBINE_SEV_SCHEMA_ERROR)
     {
-      mErrorId  = NotSchemaConformant;
+      mErrorId  = CaNotSchemaConformant;
       mSeverity = LIBCOMBINE_SEV_ERROR;
       newMsg << omexErrorTable[3].message << " "; // FIXME
     }

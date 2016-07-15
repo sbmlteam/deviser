@@ -221,7 +221,7 @@ CaReader::readInternal (const char* content, bool isFile)
     if (stream.peek().isStart() && stream.peek().getName() != "omex")
     {
       // the root element ought to be an omex element. 
-      d->getErrorLog()->logError(NotSchemaConformant);
+      d->getErrorLog()->logError(CaNotSchemaConformant);
 	  return d;
     }
 	
@@ -264,7 +264,7 @@ CaReader::readInternal (const char* content, bool isFile)
       }
       else if (strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
       {
-        d->getErrorLog()->logError(NotUTF8);
+        d->getErrorLog()->logError(CaNotUTF8);
       }
 
       if (stream.getVersion() == "")

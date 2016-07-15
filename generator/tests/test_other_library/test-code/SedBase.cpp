@@ -2129,7 +2129,7 @@ SedBase::readAnnotation (XMLInputStream& stream)
     {
       string msg = "An SEDML <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
-      logError(MultipleAnnotations, getLevel(), getVersion(), msg);
+      logError(SedMultipleAnnotations, getLevel(), getVersion(), msg);
     }
 
     delete mAnnotation;
@@ -2160,7 +2160,7 @@ SedBase::readNotes (XMLInputStream& stream)
 
     if (mNotes != NULL)
     {
-      logError(OnlyOneNotesElementAllowed, getLevel(), getVersion());
+      logError(SedOnlyOneNotesElementAllowed, getLevel(), getVersion());
     }
 
     delete mNotes;
@@ -2232,7 +2232,7 @@ SedBase::logUnknownAttribute( const string& attribute,
   // (TODO) Needs to be fixed so that error can be added when
   // no SedDocument attached.
   //
-        getErrorLog()->logError(AllowedAttributes, level,
+        getErrorLog()->logError(SedUnknownCoreAttribute, level,
           version, msg.str(), getLine(), getColumn());
   }
 }
@@ -2257,7 +2257,7 @@ SedBase::logUnknownElement( const string& element,
 
     if (mSed != NULL)
     {
-      getErrorLog()->logError(UnrecognizedElement,
+      getErrorLog()->logError(SedUnrecognizedElement,
             level, version, msg.str(), getLine(), getColumn());
     }
   
@@ -2287,7 +2287,7 @@ SedBase::logEmptyString( const string& attribute,
   // no SedDocument attached.
   //
   if (mSed != NULL)
-    getErrorLog()->logError(NotSchemaConformant,
+    getErrorLog()->logError(SedNotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
@@ -2399,7 +2399,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     {
       if (!SyntaxChecker::isValidXMLID(mMetaId))
       {
-        logError(InvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
+        logError(SedInvalidMetaidSyntax, getLevel(), getVersion(), "The metaid '" + mMetaId + "' does not conform to the syntax.");
       }
   }
 
@@ -2520,7 +2520,7 @@ SedBase::checkSedListOfPopulated(SedBase* object)
   {
     if (static_cast <SedListOf*> (object)->size() == 0)
     {
-      SedErrorCode_t error = EmptyListElement;
+      SedErrorCode_t error = SedEmptyListElement;
       ostringstream errMsg;
       errMsg << object->getElementName() << " cannot be empty.";
 
@@ -2592,7 +2592,7 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    logError(InvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
+    logError(SedInvalidMathElement, getLevel(), getVersion(), "The MathML namespace 'http://www.w3.org/1998/Math/MathML' was not found.");
   }
 
   return prefix;
@@ -2629,7 +2629,7 @@ SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
          << "> element is an invalid namespace." << endl;
 
-  logError(NotSchemaConformant, getLevel(), getVersion(), errMsg.str());
+  logError(SedNotSchemaConformant, getLevel(), getVersion(), errMsg.str());
 
 }
 
@@ -2662,7 +2662,7 @@ SedBase::checkAnnotation()
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
     {
-      logError(AnnotationNotElement, getLevel(), getVersion());
+      logError(SedAnnotationNotElement, getLevel(), getVersion());
       nNodes++;
       continue;
     }
@@ -2687,7 +2687,7 @@ SedBase::checkAnnotation()
       {
         string msg = "An SEDML <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
-        logError(DuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
+        logError(SedDuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
       uri_list.push_back(uri);
     }
@@ -2717,7 +2717,7 @@ SedBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(MissingAnnotationNamespace);
+        logError(SedMissingAnnotationNamespace);
       }
     }
     // cannot declare sedml namespace
@@ -2738,7 +2738,7 @@ SedBase::checkAnnotation()
     if (implicitNSdecl && prefix.empty())
     {
       msg += "assumes the sedml namespace on an element in its child <annotation>.";
-      logError(MissingAnnotationNamespace, getLevel(), getVersion(), msg);
+      logError(SedMissingAnnotationNamespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
   }
@@ -2762,10 +2762,10 @@ SedBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = NotesNotInXHTMLNamespace;
-    errorXML  = NotesContainsXMLDecl;
-    errorDOC  = NotesContainsDOCTYPE;
-    errorELEM = InvalidNotesContent;
+    errorNS   = SedNotesNotInXHTMLNamespace;
+    errorXML  = SedNotesContainsXMLDecl;
+    errorDOC  = SedNotesContainsDOCTYPE;
+    errorELEM = SedInvalidNotesContent;
   }
   else                                  // We shouldn't ever get to this point.
   {

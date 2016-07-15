@@ -225,7 +225,7 @@ SedError::SedError (  const unsigned int errorId
 
     if (mSeverity == LIBSEDML_SEV_SCHEMA_ERROR)
     {
-      mErrorId  = NotSchemaConformant;
+      mErrorId  = SedNotSchemaConformant;
       mSeverity = LIBSEDML_SEV_ERROR;
       newMsg << sedmlErrorTable[3].message << " "; // FIXME
     }
