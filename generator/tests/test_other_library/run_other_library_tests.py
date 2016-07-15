@@ -159,23 +159,23 @@ def compare_code_txt(class_name, ext='txt'):
     temp_file = '.\\temp\\{0}.{1}'.format(class_name, ext)
     return compare_files(correct_file, temp_file)
 
-def compare_binding_headers(class_name, binding):
-    correct_file = '.\\test-code\\{0}\\{1}.h'.format(binding, class_name)
+def compare_binding_headers(class_name, binding, prefix):
+    correct_file = '.\\test-code\\{0}\\{2}\\{1}.h'.format(binding, class_name, prefix)
     temp_file = '.\\temp\\{0}\\{1}.h'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
-def compare_binding_impl(class_name, binding):
-    correct_file = '.\\test-code\\{0}\\{1}.cpp'.format(binding, class_name)
+def compare_binding_impl(class_name, binding, prefix):
+    correct_file = '.\\test-code\\{0}\\{2}\\{1}.cpp'.format(binding, class_name, prefix)
     temp_file = '.\\temp\\{0}\\{1}.cpp'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
-def compare_binding_interface(class_name, binding):
-    correct_file = '.\\test-code\\{0}\\{1}.i'.format(binding, class_name)
+def compare_binding_interface(class_name, binding, prefix):
+    correct_file = '.\\test-code\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix)
     temp_file = '.\\temp\\{0}\\{1}.i'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
-def compare_binding_file(class_name, binding):
-    correct_file = '.\\test-code\\{0}\\{1}'.format(binding, class_name)
+def compare_binding_file(class_name, binding, prefix):
+    correct_file = '.\\test-code\\{0}\\{2}\\{1}'.format(binding, class_name, prefix)
     temp_file = '.\\temp\\{0}\\{1}'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
@@ -258,25 +258,25 @@ def run_forward(name, class_name, test_case):
     print('')
     return fail
 
-def test_bindings(name, class_name, test_case, binding):
+def test_bindings(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_binding(filename, binding)
     fail = 0
     if binding == 'swig':
-        fail += compare_binding_headers('ListWrapper', binding)
-        fail += compare_binding_headers('OStream', binding)
-        fail += compare_binding_impl('OStream', binding)
-        fail += compare_binding_interface('std_set', binding)
-        fail += compare_binding_headers('libsedml', binding)
-        fail += compare_binding_interface('libsedml', binding)
-        fail += compare_binding_interface('ASTNodes', binding)
+        fail += compare_binding_headers('ListWrapper', binding, prefix)
+        fail += compare_binding_headers('OStream', binding, prefix)
+        fail += compare_binding_impl('OStream', binding, prefix)
+        fail += compare_binding_interface('std_set', binding, prefix)
+        fail += compare_binding_headers('lib{0}'.format(prefix), binding, prefix)
+        fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
+        fail += compare_binding_interface('ASTNodes', binding, prefix)
     elif binding == 'csharp':
-        fail += compare_binding_impl('local', binding)
-        fail += compare_binding_interface('local', binding)
-        fail += compare_binding_interface('libsedml', binding)
-        fail += compare_binding_file('CMakeLists.txt', binding)
-        fail += compare_binding_file('compile-native-files.cmake', binding)
-        fail += compare_binding_file('AssemblyInfo.cs.in', binding)
+        fail += compare_binding_impl('local', binding, prefix)
+        fail += compare_binding_interface('local', binding, prefix)
+        fail += compare_binding_interface('lib{0}'.format(prefix), binding, prefix)
+        fail += compare_binding_file('CMakeLists.txt', binding, prefix)
+        fail += compare_binding_file('compile-native-files.cmake', binding, prefix)
+        fail += compare_binding_file('AssemblyInfo.cs.in', binding, prefix)
     print('')
     return fail
 
@@ -392,13 +392,13 @@ def main():
     class_name = 'libsedml'
     test_case = 'swig dir'
     binding = 'swig'
-    fail += test_bindings(name, class_name, test_case, binding)
+    fail += test_bindings(name, class_name, test_case, binding, 'sedml')
 
     name = 'test_sedml'
     class_name = 'libsedml'
     test_case = 'csharp dir'
     binding = 'csharp'
-    fail += test_bindings(name, class_name, test_case, binding)
+    fail += test_bindings(name, class_name, test_case, binding, 'sedml')
 
     name = 'test_sedml'
     class_name = 'libsedml'
@@ -439,6 +439,12 @@ def main():
     list_of = ''
     test_case = 'document'
     fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'combine-archive'
+    class_name = 'libcombine'
+    test_case = 'swig dir'
+    binding = 'swig'
+    fail += test_bindings(name, class_name, test_case, binding, 'combine')
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
