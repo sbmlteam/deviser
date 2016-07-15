@@ -142,3 +142,11 @@ def remove_temp():
     else:
         shutil.rmtree('temp')
         os.mkdir('temp')
+
+
+def create_dir(newdir):
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    else:
+        shutil.rmtree(newdir)
+        os.mkdir(newdir)

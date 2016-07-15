@@ -108,10 +108,10 @@ def generate_cmake(filename, binding):
         os.makedirs(binding)
         os.chdir(binding)
     this_dir = os.getcwd()
-    os.mkdir('src')
+    test_functions.create_dir('src')
     os.chdir('src')
-    os.mkdir('bindings')
-    os.mkdir('{0}'.format(global_variables.language))
+    test_functions.create_dir('bindings')
+    test_functions.create_dir('{0}'.format(global_variables.language))
     os.chdir(this_dir)
     bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
     bind.write_other_library_files()
@@ -179,12 +179,12 @@ def compare_binding_file(class_name, binding, prefix):
     temp_file = '.\\temp\\{0}\\{1}'.format(binding, class_name)
     return compare_files(correct_file, temp_file)
 
-def compare_cmake_file(this_dir):
-    if this_dir == 'top-level':
-        correct_file = '.\\test-code\\cmake\\CMakeLists.txt'
+def compare_cmake_file(this_dir, prefix):
+    if this_dir == prefix:
+        correct_file = '.\\test-code\\cmake\\{0}\\CMakeLists.txt'.format(prefix)
         temp_file = '.\\temp\\cmake\\CMakeLists.txt'
     else:
-        correct_file = '.\\test-code\\cmake\\{0}\\CMakeLists.txt'.format(this_dir)
+        correct_file = '.\\test-code\\cmake\\{1}\\{0}\\CMakeLists.txt'.format(this_dir, prefix)
         temp_file = '.\\temp\\cmake\\{0}\\CMakeLists.txt'.format(this_dir)
     return compare_files(correct_file, temp_file)
 
@@ -280,14 +280,14 @@ def test_bindings(name, class_name, test_case, binding, prefix):
     print('')
     return fail
 
-def test_cmake(name, class_name, test_case, binding):
+def test_cmake(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_cmake(filename, binding)
     fail = 0
-    fail += compare_cmake_file('top-level')
-    fail += compare_cmake_file('src')
-    fail += compare_cmake_file('src/bindings')
-    fail += compare_cmake_file('src/{0}'.format(global_variables.language))
+    fail += compare_cmake_file('{0}'.format(prefix), prefix)
+    fail += compare_cmake_file('src'.format(prefix), prefix)
+    fail += compare_cmake_file('src\\bindings'.format(prefix), prefix)
+    fail += compare_cmake_file('src\\{0}'.format(global_variables.language, prefix), prefix)
     print('')
     return fail
 
@@ -404,7 +404,7 @@ def main():
     class_name = 'libsedml'
     test_case = 'cmake'
     binding = 'cmake'
-    fail += test_cmake(name, class_name, test_case, binding)
+    fail += test_cmake(name, class_name, test_case, binding, 'sedml')
 
     name = 'test_sedml'
     class_name = 'libsedml'
@@ -442,15 +442,9 @@ def main():
 
     name = 'combine-archive'
     class_name = 'libcombine'
-    test_case = 'swig dir'
-    binding = 'swig'
-    fail += test_bindings(name, class_name, test_case, binding, 'combine')
-
-    name = 'combine-archive'
-    class_name = 'libcombine'
-    test_case = 'csharp dir'
-    binding = 'csharp'
-    fail += test_bindings(name, class_name, test_case, binding, 'combine')
+    test_case = 'cmake'
+    binding = 'cmake'
+    fail += test_cmake(name, class_name, test_case, binding, 'combine')
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
