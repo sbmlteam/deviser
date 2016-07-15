@@ -703,7 +703,7 @@ class Constructors():
                     parameters = 'level, version'
             else:
                 constructor_args = [': {0}(1, 1)'.format(self.base_class)]
-                parameters = '1, 1'
+                parameters = ''
         elif ns is not None and self.is_plugin:
             constructor_args = [': {0}(uri, prefix, '
                                 '{1})'.format(self.base_class, ns)]

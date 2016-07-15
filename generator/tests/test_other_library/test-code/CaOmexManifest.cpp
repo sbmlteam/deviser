@@ -51,7 +51,7 @@ LIBCOMBINE_CPP_NAMESPACE_BEGIN
  */
 CaOmexManifest::CaOmexManifest()
   : CaBase(1, 1)
-  , mContents (1, 1)
+  , mContents ()
 {
   setCaOmexManifest(this);
   connectToChild();
