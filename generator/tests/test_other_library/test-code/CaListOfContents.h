@@ -289,11 +289,10 @@ protected:
   virtual CaBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     stream);
 
-  friend class CaOmexManifest;
-
   /** @endcond */
 
 
+  friend class CaOmexManifest;
 
   /** @cond doxygenlibCombineInternal */
 

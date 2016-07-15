@@ -109,13 +109,27 @@ def get_class(name, root_object):
                 return root_object['baseElements'][i]
 
 
+def is_inline_child(class_object):
+    inline_child = False
+    parent = get_parent_class(class_object)
+    if len(parent) > 0:
+        parent_class = get_class(parent, class_object['root'])
+        if parent_class and 'attribs' in parent_class:
+            for attrib in parent_class['attribs']:
+                if attrib['element'] == class_object['lo_child']:
+                    if attrib['type'] == 'inline_lo_element':
+                        inline_child = True
+    return [inline_child, parent]
 
 # return the parent class of this class
 # if it is not given we assume it is a child of a plugin
 # and get the base of the plugin
 def get_parent_class(class_object):
     parent = ''
-    name = class_object['name']
+    if class_object['is_list_of']:
+        name = class_object['lo_child']
+    else:
+        name = class_object['name']
     found = False
     if 'parent' in class_object:
         parent = class_object['parent']
