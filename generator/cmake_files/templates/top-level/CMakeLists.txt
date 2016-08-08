@@ -395,13 +395,13 @@ if(UNIX OR CYGWIN)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
     set( MISC_PREFIX "share/libsbml/" )
-    set(LIBSBML_LIBRARY sbml)
+    set(LIBSBML_LIBRARY nonlibsbml)
 else()
     set( MISC_PREFIX "" )
     set(PATH_SEP "\\")
     set(FILE_SEP ";")
     if(MINGW)
-        set(LIBSBML_LIBRARY sbml)
+        set(LIBSBML_LIBRARY nonlibsbml)
     else()
         set(LIBSBML_LIBRARY libsbml)
     endif()
@@ -589,7 +589,7 @@ endif()
 
 ###############################################################################
 #
-# Initialize LANGUAGE sources
+# Initialize LIBSBML sources
 #
 set(LIBSBML_SOURCES)
 
@@ -668,6 +668,7 @@ endif()
 #
 # create library
 # 
+<omex_hack>
 add_subdirectory(src/sbml)
 
 ##############################################################################
@@ -675,6 +676,7 @@ add_subdirectory(src/sbml)
 # create language bindings
 # 
 add_subdirectory(src/bindings)
+</omex_hack>
 
 
 
@@ -725,12 +727,12 @@ libSBML version ${PACKAGE_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at
-   https://github.com/fbergmann/libSBML/
 
    Please report problems using the issue tracker at
-   https://github.com/fbergmann/libSBML/issues
 
-   To contact the developers directly, email fbergman@caltech.edu
+<verbatim>
+   To contact the developers directly, email sbml-team@caltech.edu
+</verbatim>
 
    Configured on host '${HOSTNAME}'
      host type                     = ${CMAKE_SYSTEM_NAME}

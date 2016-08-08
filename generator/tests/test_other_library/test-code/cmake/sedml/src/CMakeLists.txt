@@ -95,10 +95,6 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/sedml/common/libsedml-namespace.h"
 )
 
-configure_file (
-  "${CMAKE_CURRENT_SOURCE_DIR}/sedml/common/libsedml-package.h.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/sedml/common/libsedml-package.h"
-)
   
 ###############################################################################
 #

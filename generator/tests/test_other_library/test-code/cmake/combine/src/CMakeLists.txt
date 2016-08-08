@@ -95,10 +95,6 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/omex/common/libcombine-namespace.h"
 )
 
-configure_file (
-  "${CMAKE_CURRENT_SOURCE_DIR}/omex/common/libcombine-package.h.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/omex/common/libcombine-package.h"
-)
   
 ###############################################################################
 #

@@ -609,7 +609,7 @@ endif()
 
 ###############################################################################
 #
-# Initialize SEDML sources
+# Initialize LIBSEDML sources
 #
 set(LIBSEDML_SOURCES)
 
@@ -745,12 +745,10 @@ libSEDML version ${PACKAGE_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at
-   https://github.com/fbergmann/libSEDML/
 
    Please report problems using the issue tracker at
-   https://github.com/fbergmann/libSEDML/issues
 
-   To contact the developers directly, email fbergman@caltech.edu
+   To contact the developers directly, email sbml-team@caltech.edu
 
    Configured on host '${HOSTNAME}'
      host type                     = ${CMAKE_SYSTEM_NAME}

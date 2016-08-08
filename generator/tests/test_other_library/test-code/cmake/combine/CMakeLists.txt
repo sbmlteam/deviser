@@ -386,13 +386,13 @@ if(UNIX OR CYGWIN)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
     set( MISC_PREFIX "share/libcombine/" )
-    set(LIBCOMBINE_LIBRARY omex)
+    set(LIBCOMBINE_LIBRARY combine)
 else()
     set( MISC_PREFIX "" )
     set(PATH_SEP "\\")
     set(FILE_SEP ";")
     if(MINGW)
-        set(LIBCOMBINE_LIBRARY omex)
+        set(LIBCOMBINE_LIBRARY combine)
     else()
         set(LIBCOMBINE_LIBRARY libcombine)
     endif()
@@ -577,7 +577,7 @@ endif()
 
 ###############################################################################
 #
-# Initialize OMEX sources
+# Initialize LIBCOMBINE sources
 #
 set(LIBCOMBINE_SOURCES)
 
@@ -656,14 +656,7 @@ endif()
 #
 # create library
 # 
-add_subdirectory(src/omex)
-
-##############################################################################
-#
-# create language bindings
-# 
-add_subdirectory(src/bindings)
-
+add_subdirectory(src)
 
 
 ###############################################################################
@@ -713,12 +706,10 @@ libCombine version ${PACKAGE_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at
-   https://github.com/fbergmann/libCombine/
 
    Please report problems using the issue tracker at
-   https://github.com/fbergmann/libCombine/issues
 
-   To contact the developers directly, email fbergman@caltech.edu
+   To contact the developers directly, email sbml-team@caltech.edu
 
    Configured on host '${HOSTNAME}'
      host type                     = ${CMAKE_SYSTEM_NAME}

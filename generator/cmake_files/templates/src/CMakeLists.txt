@@ -95,10 +95,12 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/sbml/common/libsbml-namespace.h"
 )
 
+<if_package>
 configure_file (
   "${CMAKE_CURRENT_SOURCE_DIR}/sbml/common/libsbml-package.h.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/sbml/common/libsbml-package.h"
 )
+</if_package>
   
 ###############################################################################
 #
