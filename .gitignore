@@ -58,3 +58,4 @@ target/
 
 #mine
 testOutput/
+.idea/
