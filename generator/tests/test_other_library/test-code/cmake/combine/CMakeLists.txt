@@ -656,7 +656,15 @@ endif()
 #
 # create library
 # 
-add_subdirectory(src)
+add_subdirectory(src/omex)
+
+##############################################################################
+#
+# create language bindings
+# 
+add_subdirectory(src/bindings)
+
+
 
 
 ###############################################################################

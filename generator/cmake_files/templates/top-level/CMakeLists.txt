@@ -668,7 +668,6 @@ endif()
 #
 # create library
 # 
-<omex_hack>
 add_subdirectory(src/sbml)
 
 ##############################################################################
@@ -676,7 +675,7 @@ add_subdirectory(src/sbml)
 # create language bindings
 # 
 add_subdirectory(src/bindings)
-</omex_hack>
+
 
 
 
