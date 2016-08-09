@@ -1634,9 +1634,7 @@ CaBase::unsetAnnotation ()
 unsigned int
 CaBase::getLevel () const
 {
-  if (mCa != NULL)
-    return mCa->getLevel();
-  else if (mCaNamespaces != NULL)
+  if (mCaNamespaces != NULL)
     return mCaNamespaces->getLevel();
   else
     return OMEX_DEFAULT_LEVEL;
@@ -1649,9 +1647,7 @@ CaBase::getLevel () const
 unsigned int
 CaBase::getVersion () const
 {
-  if (mCa != NULL)
-    return mCa->getVersion();
-  else if (mCaNamespaces != NULL)
+  if (mCaNamespaces != NULL)
     return mCaNamespaces->getVersion();
   else
     return OMEX_DEFAULT_VERSION;

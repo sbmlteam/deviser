@@ -287,9 +287,9 @@ CaOmexManifest::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   CaBase::writeElements(stream);
 
-  if (getNumContents() > 0)
+  for (unsigned int i = 0; i < getNumContents(); i++)
   {
-    mContents.write(stream);
+    getContent(i)->write(stream);
   }
 }
 

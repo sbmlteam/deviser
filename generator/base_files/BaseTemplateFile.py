@@ -202,6 +202,7 @@ class BaseTemplateFile:
                                            strFunctions.remove_prefix(global_variables.document_class).upper())
         line = re.sub('SBML_DOCUMENT', doctype, line)
         line = re.sub('SBMLDocument', global_variables.document_class, line)
+        line = re.sub('toplevelname', strFunctions.lower_first(global_variables.top_level_element_name), line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_Lang',
@@ -258,9 +259,7 @@ class BaseTemplateFile:
         length = len(line)
         block = line[4:length-2]
         end_block = '</if_{0}>'.format(block)
-        writeLines = True
-        if block == 'package' and not global_variables.is_package:
-            writeLines = False
+        writeLines = self.write_lines(block)
         i += 1
         line = lines[i]
         while not line.startswith(end_block):
@@ -269,8 +268,20 @@ class BaseTemplateFile:
                 fileout.copy_line_verbatim(line)
             i += 1
             line = lines[i]
+            if line.startswith('<else>'):
+                writeLines = not writeLines
+                i += 1
+                line = lines[i]
         i += 1
         return i
+
+    @staticmethod
+    def write_lines(block):
+        if block == 'package' and not global_variables.is_package:
+            return False
+        if block == 'has_level_version' and not global_variables.has_level_version:
+            return False
+        return True
 
     @staticmethod
     def print_omex_hack(fileout, lines, i):

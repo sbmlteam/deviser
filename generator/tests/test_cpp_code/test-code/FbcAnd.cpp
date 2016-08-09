@@ -364,9 +364,9 @@ FbcAnd::writeElements(XMLOutputStream& stream) const
 {
   Association::writeElements(stream);
 
-  if (getNumAssociations() > 0)
+  for (unsigned int i = 0; i < getNumAssociations(); i++)
   {
-    mAssociations.write(stream);
+    getAssociation(i)->write(stream);
   }
 
   SBase::writeExtensionElements(stream);

@@ -79,6 +79,8 @@ global package_full_name
 package_full_name = ''
 global has_level_version
 has_level_version = True
+global top_level_element_name
+top_level_element_name = 'sbml'
 
 global return_codes
 return_codes= dict({'success': 0,
@@ -180,7 +182,13 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
 
     if doc:
         global document_class
+        global top_level_element_name
         document_class = doc
+        # this is a bit of a hack as sedml and combine archive vary
+        if doc.endswith('Document'):
+            top_level_element_name = language
+        else:
+            top_level_element_name = doc
         if not doc.startswith(prefix):
             document_class = '{0}{1}'.format(prefix, doc)
 

@@ -582,11 +582,17 @@ class GeneralFunctions():
                     name = 'CSG' + att['pluralName'][3:]
                 else:
                     name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
-            implementation = ['getNum{0}() > '
-                              '0'.format(name),
-                              '{0}.write(stream)'.format(att['memberName'])]
-            code.append(dict({'code_type': 'if',
-                              'code': implementation}))
+            if att['type'] == 'inline_lo_element':
+                implementation = ['unsigned int i = 0; i < getNum{0}(); i++'.format(name),
+                                  'get{0}(i)->write(stream)'.format(strFunctions.singular(name))]
+                code.append(dict({'code_type': 'for',
+                                  'code': implementation}))
+            else:
+                implementation = ['getNum{0}() > '
+                                  '0'.format(name),
+                                  '{0}.write(stream)'.format(att['memberName'])]
+                code.append(dict({'code_type': 'if',
+                                  'code': implementation}))
         if not self.is_plugin and global_variables.is_package:
             code.append(dict({'code_type': 'line',
                               'code': ['{0}::writeExtension'

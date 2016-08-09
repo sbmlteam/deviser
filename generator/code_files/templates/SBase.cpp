@@ -1602,9 +1602,13 @@ SBase::unsetAnnotation ()
 unsigned int
 SBase::getLevel () const
 {
+<if_has_level_version>
   if (mSBML != NULL)
     return mSBML->getLevel();
   else if (mSBMLNamespaces != NULL)
+<else>
+  if (mSBMLNamespaces != NULL)
+</if_has_level_version>
     return mSBMLNamespaces->getLevel();
   else
     return SBML_DEFAULT_LEVEL;
@@ -1617,9 +1621,13 @@ SBase::getLevel () const
 unsigned int
 SBase::getVersion () const
 {
+<if_has_level_version>
   if (mSBML != NULL)
     return mSBML->getVersion();
   else if (mSBMLNamespaces != NULL)
+<else>
+  if (mSBMLNamespaces != NULL)
+</if_has_level_version>
     return mSBMLNamespaces->getVersion();
   else
     return SBML_DEFAULT_VERSION;

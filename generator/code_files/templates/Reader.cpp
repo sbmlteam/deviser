@@ -188,7 +188,7 @@ SBMLReader::readInternal (const char* content, bool isFile)
   {
     XMLInputStream stream(content, isFile, "", d->getErrorLog());
 
-    if (stream.peek().isStart() && stream.peek().getName() != "sbml")
+    if (stream.peek().isStart() && stream.peek().getName() != "toplevelname")
     {
       // the root element ought to be an sbml element. 
       d->getErrorLog()->logError(SBMLNotSchemaConformant);
