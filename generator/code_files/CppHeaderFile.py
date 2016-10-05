@@ -90,6 +90,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_child_lo_element_functions()
         self.write_concrete_functions()
         self.write_general_functions()
+        self.write_generic_attribute_functions()
         self.write_functions_to_retrieve()
         if self.document:
             self.write_document_error_log_functions()
@@ -387,6 +388,92 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         for i in range(0, num_elements):
             code = attrib_functions.write_unset(False, i)
             self.write_function_declaration(code)
+
+    ########################################################################
+
+    # Functions for writing the generic attribute manipulation functions
+    # these are for attributes and elements that occur as a single child
+
+    # function to write the get/set/isSet/unset functions for attributes
+    def write_generic_attribute_functions(self):
+        attrib_functions = GenericAttributeFunctions.GenericAttributeFunctions(self.language,
+                                                                               self.is_cpp_api,
+                                                                               self.is_list_of,
+                                                                               self.class_object)
+        attributes = query.sort_attributes(self.class_attributes)
+        bool_atts = attributes['bool_atts']
+        int_atts = attributes['int_atts']
+        double_atts = attributes['double_atts']
+        uint_atts = attributes['uint_atts']
+        string_atts = attributes['string_atts']
+
+        if len(bool_atts) > 0:
+            code = attrib_functions.write_get(bool_atts, 'bool')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(int_atts) > 0:
+            code = attrib_functions.write_get(int_atts, 'int')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(double_atts) > 0:
+            code = attrib_functions.write_get(double_atts, 'double')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(uint_atts) > 0:
+            code = attrib_functions.write_get(uint_atts, 'unsigned int')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(string_atts) > 0:
+            code = attrib_functions.write_get(string_atts, 'std::string')
+            self.write_function_declaration(code, exclude=True)
+
+        code = attrib_functions.write_is_set(query.get_unique_attributes(self.class_attributes))
+        self.write_function_declaration(code, exclude=True)
+
+        if len(bool_atts) > 0:
+            code = attrib_functions.write_set(bool_atts, 'bool')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(int_atts) > 0:
+            code = attrib_functions.write_set(int_atts, 'int')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(double_atts) > 0:
+            code = attrib_functions.write_set(double_atts, 'double')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(uint_atts) > 0:
+            code = attrib_functions.write_set(uint_atts, 'unsigned int')
+            self.write_function_declaration(code, exclude=True)
+
+        if len(string_atts) > 0:
+            code = attrib_functions.write_set(string_atts, 'const std::string&')
+            self.write_function_declaration(code, exclude=True)
+
+        code = attrib_functions.write_unset(query.get_unique_attributes(self.class_attributes))
+        self.write_function_declaration(code, exclude=True)
+
+        # for i in range(0, num_attributes):
+        #     code = attrib_functions.write_is_set(True, i)
+        #     self.write_function_declaration(code)
+        #
+        #     code = attrib_functions.write_get_num_for_vector(True, i)
+        #     self.write_function_declaration(code)
+        #
+        # for i in range(0, num_attributes):
+        #     code = attrib_functions.write_set(True, i)
+        #     self.write_function_declaration(code)
+        #
+        #     code = attrib_functions.write_set_string_for_enum(True, i)
+        #     self.write_function_declaration(code)
+        #
+        #     code = attrib_functions.write_add_element_for_vector(True, i)
+        #     self.write_function_declaration(code)
+        #
+        # for i in range(0, num_attributes):
+        #     code = attrib_functions.write_unset(True, i)
+        #     self.write_function_declaration(code)
+
 
     ########################################################################
 

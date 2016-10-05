@@ -530,6 +530,118 @@ SedDocument::connectToChild()
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedDocument::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "level")
+  {
+    value = getLevel();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "version")
+  {
+    value = getVersion();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Predicate returning @c true if this SedDocument's attribute "attributeName"
+ * is set.
+ */
+bool
+SedDocument::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedBase::isSetAttribute(attributeName);
+
+  if (attributeName == "level")
+  {
+    value = isSetLevel();
+  }
+  else if (attributeName == "version")
+  {
+    value = isSetVersion();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedDocument::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "level")
+  {
+    return_value = setLevel(value);
+  }
+  else if (attributeName == "version")
+  {
+    return_value = setVersion(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedBase::unsetAttribute(attributeName);
+
+  if (attributeName == "level")
+  {
+    value = unsetLevel();
+  }
+  else if (attributeName == "version")
+  {
+    value = unsetVersion();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

@@ -583,6 +583,154 @@ SedModel::connectToChild()
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedModel::getAttribute(const std::string& attributeName,
+                       std::string& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "language")
+  {
+    value = getLanguage();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "source")
+  {
+    value = getSource();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Predicate returning @c true if this SedModel's attribute "attributeName" is
+ * set.
+ */
+bool
+SedModel::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedBase::isSetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = isSetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = isSetName();
+  }
+  else if (attributeName == "language")
+  {
+    value = isSetLanguage();
+  }
+  else if (attributeName == "source")
+  {
+    value = isSetSource();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedModel::setAttribute(const std::string& attributeName,
+                       const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "language")
+  {
+    return_value = setLanguage(value);
+  }
+  else if (attributeName == "source")
+  {
+    return_value = setSource(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedBase::unsetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = unsetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = unsetName();
+  }
+  else if (attributeName == "language")
+  {
+    value = unsetLanguage();
+  }
+  else if (attributeName == "source")
+  {
+    value = unsetSource();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

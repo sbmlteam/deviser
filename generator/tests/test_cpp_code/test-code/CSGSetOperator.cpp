@@ -832,6 +832,128 @@ CSGSetOperator::enablePackageInternal(const std::string& pkgURI,
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
+                             std::string& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "complementA")
+  {
+    value = getComplementA();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "complementB")
+  {
+    value = getComplementB();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Predicate returning @c true if this CSGSetOperator's attribute
+ * "attributeName" is set.
+ */
+bool
+CSGSetOperator::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "operationType")
+  {
+    value = isSetOperationType();
+  }
+  else if (attributeName == "complementA")
+  {
+    value = isSetComplementA();
+  }
+  else if (attributeName == "complementB")
+  {
+    value = isSetComplementB();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CSGSetOperator::setAttribute(const std::string& attributeName,
+                             const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "complementA")
+  {
+    return_value = setComplementA(value);
+  }
+  else if (attributeName == "complementB")
+  {
+    return_value = setComplementB(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "operationType")
+  {
+    value = unsetOperationType();
+  }
+  else if (attributeName == "complementA")
+  {
+    value = unsetComplementA();
+  }
+  else if (attributeName == "complementB")
+  {
+    value = unsetComplementB();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

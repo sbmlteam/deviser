@@ -332,6 +332,162 @@ SedRepeatedTask::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              bool& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "resetModel")
+  {
+    value = getResetModel();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              std::string& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "rangeId")
+  {
+    value = getRangeId();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Predicate returning @c true if this SedRepeatedTask's attribute
+ * "attributeName" is set.
+ */
+bool
+SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedBase::isSetAttribute(attributeName);
+
+  if (attributeName == "rangeId")
+  {
+    value = isSetRangeId();
+  }
+  else if (attributeName == "resetModel")
+  {
+    value = isSetResetModel();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "resetModel")
+  {
+    return_value = setResetModel(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedRepeatedTask::setAttribute(const std::string& attributeName,
+                              const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "rangeId")
+  {
+    return_value = setRangeId(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedBase::unsetAttribute(attributeName);
+
+  if (attributeName == "rangeId")
+  {
+    value = unsetRangeId();
+  }
+  else if (attributeName == "resetModel")
+  {
+    value = unsetResetModel();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*

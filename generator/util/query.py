@@ -549,3 +549,29 @@ def is_element(att_type):
                     att_type == 'inline_lo_element':
         element = True
     return element
+
+# create a list of attribute types and names for use with generic attribute functions
+def sort_attributes(all_attributes):
+    double_atts = []
+    uint_atts = []
+    int_atts = []
+    bool_atts = []
+    string_atts = []
+    attributes = get_unique_attributes(all_attributes)
+    for attrib in attributes:
+        att_type = attrib['attType']
+        if att_type == 'double':
+            double_atts.append(attrib)
+        elif att_type == 'boolean':
+            bool_atts.append(attrib)
+        elif att_type == 'unsigned integer':
+            uint_atts.append(attrib)
+        elif att_type == 'integer':
+            int_atts.append(attrib)
+        elif att_type == 'string':
+            string_atts.append(attrib)
+    return dict({'double_atts': double_atts,
+                 'bool_atts': bool_atts,
+                 'uint_atts': uint_atts,
+                 'int_atts': int_atts,
+                 'string_atts': string_atts})

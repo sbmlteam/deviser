@@ -583,6 +583,154 @@ SedSetValue::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedSetValue::getAttribute(const std::string& attributeName,
+                          std::string& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "modelReference")
+  {
+    value = getModelReference();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "symbol")
+  {
+    value = getSymbol();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "target")
+  {
+    value = getTarget();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "range")
+  {
+    value = getRange();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Predicate returning @c true if this SedSetValue's attribute "attributeName"
+ * is set.
+ */
+bool
+SedSetValue::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedBase::isSetAttribute(attributeName);
+
+  if (attributeName == "modelReference")
+  {
+    value = isSetModelReference();
+  }
+  else if (attributeName == "symbol")
+  {
+    value = isSetSymbol();
+  }
+  else if (attributeName == "target")
+  {
+    value = isSetTarget();
+  }
+  else if (attributeName == "range")
+  {
+    value = isSetRange();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SedSetValue::setAttribute(const std::string& attributeName,
+                          const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "modelReference")
+  {
+    return_value = setModelReference(value);
+  }
+  else if (attributeName == "symbol")
+  {
+    return_value = setSymbol(value);
+  }
+  else if (attributeName == "target")
+  {
+    return_value = setTarget(value);
+  }
+  else if (attributeName == "range")
+  {
+    return_value = setRange(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedBase::unsetAttribute(attributeName);
+
+  if (attributeName == "modelReference")
+  {
+    value = unsetModelReference();
+  }
+  else if (attributeName == "symbol")
+  {
+    value = unsetSymbol();
+  }
+  else if (attributeName == "target")
+  {
+    value = unsetTarget();
+  }
+  else if (attributeName == "range")
+  {
+    value = unsetRange();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

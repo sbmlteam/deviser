@@ -509,6 +509,120 @@ VersModelPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
+                              unsigned int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "version")
+  {
+    value = getVersion();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "version2")
+  {
+    value = getVersion2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Predicate returning @c true if this VersModelPlugin's attribute
+ * "attributeName" is set.
+ */
+bool
+VersModelPlugin::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "version")
+  {
+    value = isSetVersion();
+  }
+  else if (attributeName == "version2")
+  {
+    value = isSetVersion2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+VersModelPlugin::setAttribute(const std::string& attributeName,
+                              unsigned int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "version")
+  {
+    return_value = setVersion(value);
+  }
+  else if (attributeName == "version2")
+  {
+    return_value = setVersion2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "version")
+  {
+    value = unsetVersion();
+  }
+  else if (attributeName == "version2")
+  {
+    value = unsetVersion2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

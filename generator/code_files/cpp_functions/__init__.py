@@ -42,6 +42,7 @@ from . import Constructors
 from . import ExtensionFunctions
 from . import ExtensionInitFunctions
 from . import GeneralFunctions
+from . import GenericAttributeFunctions
 from . import GlobalQueryFunctions
 from . import ListOfQueryFunctions
 from . import ProtectedFunctions

@@ -1165,6 +1165,525 @@ MyTestClass::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "true")
+  {
+    value = getTrue();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "false")
+  {
+    value = getFalse();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "num3")
+  {
+    value = getNum3();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName,
+                          double& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "num1")
+  {
+    value = getNum1();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName,
+                          unsigned int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "num")
+  {
+    value = getNum();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "num2")
+  {
+    value = getNum2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName,
+                          std::string& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "unit")
+  {
+    value = getUnit();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref1")
+  {
+    value = getRef1();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref2")
+  {
+    value = getRef2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "refUnit")
+  {
+    value = getRefUnit();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "correctId")
+  {
+    value = getCorrectId();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idRef")
+  {
+    value = getIdRef();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idref1")
+  {
+    value = getIdref1();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idref2")
+  {
+    value = getIdref2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Predicate returning @c true if this MyTestClass's attribute "attributeName"
+ * is set.
+ */
+bool
+MyTestClass::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = isSetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = isSetName();
+  }
+  else if (attributeName == "num")
+  {
+    value = isSetNum();
+  }
+  else if (attributeName == "num2")
+  {
+    value = isSetNum2();
+  }
+  else if (attributeName == "num3")
+  {
+    value = isSetNum3();
+  }
+  else if (attributeName == "num1")
+  {
+    value = isSetNum1();
+  }
+  else if (attributeName == "true")
+  {
+    value = isSetTrue();
+  }
+  else if (attributeName == "false")
+  {
+    value = isSetFalse();
+  }
+  else if (attributeName == "unit")
+  {
+    value = isSetUnit();
+  }
+  else if (attributeName == "ref1")
+  {
+    value = isSetRef1();
+  }
+  else if (attributeName == "ref2")
+  {
+    value = isSetRef2();
+  }
+  else if (attributeName == "refUnit")
+  {
+    value = isSetRefUnit();
+  }
+  else if (attributeName == "correctId")
+  {
+    value = isSetCorrectId();
+  }
+  else if (attributeName == "idRef")
+  {
+    value = isSetIdRef();
+  }
+  else if (attributeName == "idref1")
+  {
+    value = isSetIdref1();
+  }
+  else if (attributeName == "idref2")
+  {
+    value = isSetIdref2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "true")
+  {
+    return_value = setTrue(value);
+  }
+  else if (attributeName == "false")
+  {
+    return_value = setFalse(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "num3")
+  {
+    return_value = setNum3(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "num1")
+  {
+    return_value = setNum1(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName,
+                          unsigned int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "num")
+  {
+    return_value = setNum(value);
+  }
+  else if (attributeName == "num2")
+  {
+    return_value = setNum2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName,
+                          const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "unit")
+  {
+    return_value = setUnit(value);
+  }
+  else if (attributeName == "ref1")
+  {
+    return_value = setRef1(value);
+  }
+  else if (attributeName == "ref2")
+  {
+    return_value = setRef2(value);
+  }
+  else if (attributeName == "refUnit")
+  {
+    return_value = setRefUnit(value);
+  }
+  else if (attributeName == "correctId")
+  {
+    return_value = setCorrectId(value);
+  }
+  else if (attributeName == "idRef")
+  {
+    return_value = setIdRef(value);
+  }
+  else if (attributeName == "idref1")
+  {
+    return_value = setIdref1(value);
+  }
+  else if (attributeName == "idref2")
+  {
+    return_value = setIdref2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this MyTestClass.
+ */
+int
+MyTestClass::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = unsetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = unsetName();
+  }
+  else if (attributeName == "num")
+  {
+    value = unsetNum();
+  }
+  else if (attributeName == "num2")
+  {
+    value = unsetNum2();
+  }
+  else if (attributeName == "num3")
+  {
+    value = unsetNum3();
+  }
+  else if (attributeName == "num1")
+  {
+    value = unsetNum1();
+  }
+  else if (attributeName == "true")
+  {
+    value = unsetTrue();
+  }
+  else if (attributeName == "false")
+  {
+    value = unsetFalse();
+  }
+  else if (attributeName == "unit")
+  {
+    value = unsetUnit();
+  }
+  else if (attributeName == "ref1")
+  {
+    value = unsetRef1();
+  }
+  else if (attributeName == "ref2")
+  {
+    value = unsetRef2();
+  }
+  else if (attributeName == "refUnit")
+  {
+    value = unsetRefUnit();
+  }
+  else if (attributeName == "correctId")
+  {
+    value = unsetCorrectId();
+  }
+  else if (attributeName == "idRef")
+  {
+    value = unsetIdRef();
+  }
+  else if (attributeName == "idref1")
+  {
+    value = unsetIdref1();
+  }
+  else if (attributeName == "idref2")
+  {
+    value = unsetIdref2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

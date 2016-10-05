@@ -370,6 +370,178 @@ CaContent::setCaOmexManifest(CaOmexManifest* d)
 /** @cond doxygenlibCombineInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CaContent::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBCOMBINE_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "master")
+  {
+    value = getMaster();
+    return_value = LIBCOMBINE_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CaContent::getAttribute(const std::string& attributeName,
+                        std::string& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBCOMBINE_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "location")
+  {
+    value = getLocation();
+    return_value = LIBCOMBINE_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "format")
+  {
+    value = getFormat();
+    return_value = LIBCOMBINE_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Predicate returning @c true if this CaContent's attribute "attributeName" is
+ * set.
+ */
+bool
+CaContent::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = CaBase::isSetAttribute(attributeName);
+
+  if (attributeName == "location")
+  {
+    value = isSetLocation();
+  }
+  else if (attributeName == "format")
+  {
+    value = isSetFormat();
+  }
+  else if (attributeName == "master")
+  {
+    value = isSetMaster();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CaContent::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  if (attributeName == "master")
+  {
+    return_value = setMaster(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+CaContent::setAttribute(const std::string& attributeName,
+                        const std::string& value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  if (attributeName == "location")
+  {
+    return_value = setLocation(value);
+  }
+  else if (attributeName == "format")
+  {
+    return_value = setFormat(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::unsetAttribute(const std::string& attributeName)
+{
+  int value = CaBase::unsetAttribute(attributeName);
+
+  if (attributeName == "location")
+  {
+    value = unsetLocation();
+  }
+  else if (attributeName == "format")
+  {
+    value = unsetFormat();
+  }
+  else if (attributeName == "master")
+  {
+    value = unsetMaster();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

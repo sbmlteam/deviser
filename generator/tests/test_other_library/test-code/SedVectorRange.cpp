@@ -276,6 +276,51 @@ SedVectorRange::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Predicate returning @c true if this SedVectorRange's attribute
+ * "attributeName" is set.
+ */
+bool
+SedVectorRange::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedBase::isSetAttribute(attributeName);
+
+  if (attributeName == "value")
+  {
+    value = isSetValue();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedBase::unsetAttribute(attributeName);
+
+  if (attributeName == "value")
+  {
+    value = unsetValue();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*

@@ -561,6 +561,75 @@ ClassThree::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Predicate returning @c true if this ClassThree's attribute "attributeName"
+ * is set.
+ */
+bool
+ClassThree::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "number")
+  {
+    value = isSetNumber();
+  }
+  else if (attributeName == "name")
+  {
+    value = isSetName();
+  }
+  else if (attributeName == "badName")
+  {
+    value = isSetBadName();
+  }
+  else if (attributeName == "otherNum")
+  {
+    value = isSetOtherNum();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this ClassThree.
+ */
+int
+ClassThree::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "number")
+  {
+    value = unsetNumber();
+  }
+  else if (attributeName == "name")
+  {
+    value = unsetName();
+  }
+  else if (attributeName == "badName")
+  {
+    value = unsetBadName();
+  }
+  else if (attributeName == "otherNum")
+  {
+    value = unsetOtherNum();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

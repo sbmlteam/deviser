@@ -601,6 +601,13 @@ def main():
     test_case = 'additional copyright'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'core'
+    num = 0
+    class_name = 'Compartment'
+    list_of = ''
+    test_case = 'new attribute'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

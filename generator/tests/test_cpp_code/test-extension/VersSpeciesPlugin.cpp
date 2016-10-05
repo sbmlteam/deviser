@@ -873,6 +873,137 @@ VersSpeciesPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                std::string& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "species_att_v1")
+  {
+    value = getSpecies_att_v1();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    value = getString_plugin_att();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    value = getSpecies_att_v2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Predicate returning @c true if this VersSpeciesPlugin's attribute
+ * "attributeName" is set.
+ */
+bool
+VersSpeciesPlugin::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "species_att_v1")
+  {
+    value = isSetSpecies_att_v1();
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    value = isSetString_plugin_att();
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    value = isSetSpecies_att_v2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName,
+                                const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "species_att_v1")
+  {
+    return_value = setSpecies_att_v1(value);
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    return_value = setString_plugin_att(value);
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    return_value = setSpecies_att_v2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "species_att_v1")
+  {
+    value = unsetSpecies_att_v1();
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    value = unsetString_plugin_att();
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    value = unsetSpecies_att_v2();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

@@ -912,6 +912,244 @@ SampledField::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SampledField::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "numSamples1")
+  {
+    value = getNumSamples1();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "numSamples2")
+  {
+    value = getNumSamples2();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "numSamples3")
+  {
+    value = getNumSamples3();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "samplesLength")
+  {
+    value = getSamplesLength();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SampledField::getAttribute(const std::string& attributeName,
+                           std::string& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Predicate returning @c true if this SampledField's attribute "attributeName"
+ * is set.
+ */
+bool
+SampledField::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SBase::isSetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = isSetId();
+  }
+  else if (attributeName == "dataType")
+  {
+    value = isSetDataType();
+  }
+  else if (attributeName == "numSamples1")
+  {
+    value = isSetNumSamples1();
+  }
+  else if (attributeName == "numSamples2")
+  {
+    value = isSetNumSamples2();
+  }
+  else if (attributeName == "numSamples3")
+  {
+    value = isSetNumSamples3();
+  }
+  else if (attributeName == "interpolationType")
+  {
+    value = isSetInterpolationType();
+  }
+  else if (attributeName == "compression")
+  {
+    value = isSetCompression();
+  }
+  else if (attributeName == "samples")
+  {
+    value = isSetSamples();
+  }
+  else if (attributeName == "samplesLength")
+  {
+    value = isSetSamplesLength();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SampledField::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "numSamples1")
+  {
+    return_value = setNumSamples1(value);
+  }
+  else if (attributeName == "numSamples2")
+  {
+    return_value = setNumSamples2(value);
+  }
+  else if (attributeName == "numSamples3")
+  {
+    return_value = setNumSamples3(value);
+  }
+  else if (attributeName == "samplesLength")
+  {
+    return_value = setSamplesLength(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Compartment.
+ */
+int
+SampledField::setAttribute(const std::string& attributeName,
+                           const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SampledField.
+ */
+int
+SampledField::unsetAttribute(const std::string& attributeName)
+{
+  int value = SBase::unsetAttribute(attributeName);
+
+  if (attributeName == "id")
+  {
+    value = unsetId();
+  }
+  else if (attributeName == "dataType")
+  {
+    value = unsetDataType();
+  }
+  else if (attributeName == "numSamples1")
+  {
+    value = unsetNumSamples1();
+  }
+  else if (attributeName == "numSamples2")
+  {
+    value = unsetNumSamples2();
+  }
+  else if (attributeName == "numSamples3")
+  {
+    value = unsetNumSamples3();
+  }
+  else if (attributeName == "interpolationType")
+  {
+    value = unsetInterpolationType();
+  }
+  else if (attributeName == "compression")
+  {
+    value = unsetCompression();
+  }
+  else if (attributeName == "samples")
+  {
+    value = unsetSamples();
+  }
+  else if (attributeName == "samplesLength")
+  {
+    value = unsetSamplesLength();
+  }
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void
