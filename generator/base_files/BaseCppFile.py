@@ -652,13 +652,16 @@ class BaseCppFile(BaseFile.BaseFile):
                 self.skip_line(2)
 
     # Function for writing a function implementation
-    def write_function_implementation(self, code, exclude=False):
+    def write_function_implementation(self, code, exclude=False, test=False):
         if code is not None:
             if exclude:
                 self.write_doxygen_start()
-            self.write_brief_header(code['title_line'])
-            function_name = code['function']
-            if self.is_cpp_api:
+            if not test:
+                self.write_brief_header(code['title_line'])
+                function_name = code['function']
+            else:
+                function_name = 'START_TEST '
+            if self.is_cpp_api and not test:
                 if not code['object_name']:
                     function_name = code['function']
                 else:
@@ -682,6 +685,9 @@ class BaseCppFile(BaseFile.BaseFile):
             if exclude:
                 self.write_doxygen_end()
                 self.skip_line()
+            elif test:
+                self.write_line_verbatim('END_TEST')
+                self.skip_line(2)
             else:
                 self.skip_line(2)
 

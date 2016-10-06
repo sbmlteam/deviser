@@ -480,6 +480,7 @@ public:
    *
    *
    * @note The required attributes for the Compartment object are:
+   * @li "constant"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1293,6 +1294,7 @@ Compartment_unsetCompartmentType(Compartment_t * c);
  *
  *
  * @note The required attributes for the Compartment_t object are:
+ * @li "constant"
  *
  * @memberof Compartment_t
  */

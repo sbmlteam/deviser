@@ -589,6 +589,11 @@ Compartment::hasRequiredAttributes() const
 {
   bool allPresent = true;
 
+  if (isSetConstant() == false)
+  {
+    allPresent = false;
+  }
+
   return allPresent;
 }
 
@@ -1022,8 +1027,8 @@ Compartment::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SBMLUnknownCoreAttribute);
-        log->logError(CoreLOCompartmentsAllowedCoreAttributes, level, version,
-          details);
+        log->logError(CoreModelLOCompartmentsAllowedCoreAttributes, level,
+          version, details);
       }
     }
   }
@@ -1121,10 +1126,17 @@ Compartment::readAttributes(
   }
 
   // 
-  // constant bool (use = "optional" )
+  // constant bool (use = "required" )
   // 
 
   mIsSetConstant = attributes.readInto("constant", mConstant);
+
+  if (!mIsSetConstant)
+  {
+    std::string message = "Core attribute 'constant' is missing from the "
+      "<Compartment> element.";
+    log->logError(CoreCompartmentAllowedAttributes, level, version, message);
+  }
 
   // 
   // outside SIdRef (use = "optional" )
