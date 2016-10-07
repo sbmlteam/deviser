@@ -1523,7 +1523,7 @@ MyRequiredClass::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::getAttribute(const std::string& attributeName,
@@ -1557,7 +1557,7 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::getAttribute(const std::string& attributeName,
@@ -1591,7 +1591,7 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::getAttribute(const std::string& attributeName,
@@ -1620,7 +1620,7 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::getAttribute(const std::string& attributeName,
@@ -1669,7 +1669,7 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::getAttribute(const std::string& attributeName,
@@ -1842,7 +1842,7 @@ MyRequiredClass::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::setAttribute(const std::string& attributeName, bool value)
@@ -1868,7 +1868,7 @@ MyRequiredClass::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::setAttribute(const std::string& attributeName, int value)
@@ -1894,7 +1894,7 @@ MyRequiredClass::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::setAttribute(const std::string& attributeName, double value)
@@ -1916,7 +1916,7 @@ MyRequiredClass::setAttribute(const std::string& attributeName, double value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::setAttribute(const std::string& attributeName,
@@ -1955,7 +1955,7 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
  */
 int
 MyRequiredClass::setAttribute(const std::string& attributeName,

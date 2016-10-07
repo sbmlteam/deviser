@@ -481,7 +481,7 @@ BBB::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this BBB.
  */
 int
 BBB::getAttribute(const std::string& attributeName, std::string& value) const
@@ -531,7 +531,7 @@ BBB::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this BBB.
  */
 int
 BBB::setAttribute(const std::string& attributeName, const std::string& value)

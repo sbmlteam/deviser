@@ -504,7 +504,7 @@ class BaseCppFile(BaseFile.BaseFile):
             for n in range(1, num_arguments-1):
                 line = line + arguments[n] + ', '
             if is_cpp and is_const:
-                line = line + arguments[num_arguments-1] + '); const'
+                line = line + arguments[num_arguments-1] + ') const;'
             else:
                 line = line + arguments[num_arguments-1] + ');'
             # look at length and adjust

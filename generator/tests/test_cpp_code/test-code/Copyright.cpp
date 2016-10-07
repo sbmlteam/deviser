@@ -275,7 +275,7 @@ Copyright::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Copyright.
  */
 int
 Copyright::getAttribute(const std::string& attributeName,
@@ -327,7 +327,7 @@ Copyright::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Copyright.
  */
 int
 Copyright::setAttribute(const std::string& attributeName,

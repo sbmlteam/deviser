@@ -238,7 +238,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MySEDClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -275,7 +275,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MySEDClass.
    *
    * @param attributeName, the name of the attribute to set.
    *

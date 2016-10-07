@@ -451,7 +451,7 @@ Uncertainty::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Uncertainty.
  */
 int
 Uncertainty::getAttribute(const std::string& attributeName,
@@ -512,7 +512,7 @@ Uncertainty::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Uncertainty.
  */
 int
 Uncertainty::setAttribute(const std::string& attributeName,

@@ -305,7 +305,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -315,8 +315,8 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int getAttribute(const std::string& attributeName, bool& value);
-    const
+  virtual int getAttribute(const std::string& attributeName, bool& value)
+    const;
 
   /** @endcond */
 
@@ -325,7 +325,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -362,7 +362,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -381,7 +381,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
    *
    * @param attributeName, the name of the attribute to set.
    *

@@ -534,7 +534,7 @@ SedDocument::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SedDocument.
  */
 int
 SedDocument::getAttribute(const std::string& attributeName, int& value) const
@@ -594,7 +594,7 @@ SedDocument::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SedDocument.
  */
 int
 SedDocument::setAttribute(const std::string& attributeName, int value)

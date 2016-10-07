@@ -836,7 +836,7 @@ CSGSetOperator::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
  */
 int
 CSGSetOperator::getAttribute(const std::string& attributeName,
@@ -901,7 +901,7 @@ CSGSetOperator::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
  */
 int
 CSGSetOperator::setAttribute(const std::string& attributeName,

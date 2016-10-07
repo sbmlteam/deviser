@@ -513,7 +513,7 @@ VersModelPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
  */
 int
 VersModelPlugin::getAttribute(const std::string& attributeName,
@@ -574,7 +574,7 @@ VersModelPlugin::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
  */
 int
 VersModelPlugin::setAttribute(const std::string& attributeName,

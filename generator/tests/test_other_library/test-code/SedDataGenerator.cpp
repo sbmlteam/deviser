@@ -723,7 +723,7 @@ SedDataGenerator::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SedDataGenerator.
  */
 int
 SedDataGenerator::getAttribute(const std::string& attributeName,
@@ -784,7 +784,7 @@ SedDataGenerator::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SedDataGenerator.
  */
 int
 SedDataGenerator::setAttribute(const std::string& attributeName,

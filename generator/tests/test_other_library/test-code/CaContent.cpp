@@ -370,7 +370,7 @@ CaContent::setCaOmexManifest(CaOmexManifest* d)
 /** @cond doxygenlibCombineInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this CaContent.
  */
 int
 CaContent::getAttribute(const std::string& attributeName, bool& value) const
@@ -398,7 +398,7 @@ CaContent::getAttribute(const std::string& attributeName, bool& value) const
 /** @cond doxygenlibCombineInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this CaContent.
  */
 int
 CaContent::getAttribute(const std::string& attributeName,
@@ -463,7 +463,7 @@ CaContent::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenlibCombineInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this CaContent.
  */
 int
 CaContent::setAttribute(const std::string& attributeName, bool value)
@@ -485,7 +485,7 @@ CaContent::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenlibCombineInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this CaContent.
  */
 int
 CaContent::setAttribute(const std::string& attributeName,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="Core" fullname="aaa" number="100" offset="100000" version="1" required="false">
-  <language name="SBML" baseClass="SBase" documentClass="SBMLDocument" prefix="SBML" libraryName="Libsbml" isPackage="false">
+  <language name="SBML" baseClass="SBase" documentClass="SBMLDocument" prefix="SBML" libraryName="LibSBML" isPackage="false">
     <library_version major="1" minor="0" revision="0"/>
     <language_versions>
       <version level="1" version="1" namespace="http://sed-ml.org/"/>

@@ -268,7 +268,7 @@ MyBase::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyBase.
  */
 int
 MyBase::getAttribute(const std::string& attributeName,
@@ -320,7 +320,7 @@ MyBase::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyBase.
  */
 int
 MyBase::setAttribute(const std::string& attributeName,

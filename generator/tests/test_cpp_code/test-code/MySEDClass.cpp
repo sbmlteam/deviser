@@ -234,7 +234,7 @@ MySEDClass::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MySEDClass.
  */
 int
 MySEDClass::getAttribute(const std::string& attributeName,
@@ -286,7 +286,7 @@ MySEDClass::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MySEDClass.
  */
 int
 MySEDClass::setAttribute(const std::string& attributeName,

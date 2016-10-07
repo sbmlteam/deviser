@@ -914,7 +914,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -924,8 +924,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int getAttribute(const std::string& attributeName, bool& value);
-    const
+  virtual int getAttribute(const std::string& attributeName, bool& value)
+    const;
 
   /** @endcond */
 
@@ -934,7 +934,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -944,7 +944,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int getAttribute(const std::string& attributeName, int& value); const
+  virtual int getAttribute(const std::string& attributeName, int& value) const;
 
   /** @endcond */
 
@@ -953,7 +953,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -973,7 +973,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -993,7 +993,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -1030,7 +1030,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -1049,7 +1049,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -1068,7 +1068,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -1087,7 +1087,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -1107,7 +1107,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyTestClass.
    *
    * @param attributeName, the name of the attribute to set.
    *

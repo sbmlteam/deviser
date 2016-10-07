@@ -599,7 +599,7 @@ Compartment::hasRequiredAttributes() const
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Write any contained elements
@@ -615,7 +615,7 @@ Compartment::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Accepts the given SBMLVisitor
@@ -630,7 +630,7 @@ Compartment::accept(SBMLVisitor& v) const
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Sets the parent SBMLDocument
@@ -645,7 +645,7 @@ Compartment::setSBMLDocument(SBMLDocument* d)
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Gets the value of the "attributeName" attribute of this Compartment.
@@ -673,7 +673,7 @@ Compartment::getAttribute(const std::string& attributeName, bool& value) const
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Gets the value of the "attributeName" attribute of this Compartment.
@@ -707,7 +707,7 @@ Compartment::getAttribute(const std::string& attributeName,
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Gets the value of the "attributeName" attribute of this Compartment.
@@ -736,7 +736,7 @@ Compartment::getAttribute(const std::string& attributeName,
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Gets the value of the "attributeName" attribute of this Compartment.
@@ -775,7 +775,7 @@ Compartment::getAttribute(const std::string& attributeName,
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Predicate returning @c true if this Compartment's attribute "attributeName"
@@ -822,7 +822,7 @@ Compartment::isSetAttribute(const std::string& attributeName) const
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Sets the value of the "attributeName" attribute of this Compartment.
@@ -844,7 +844,7 @@ Compartment::setAttribute(const std::string& attributeName, bool value)
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Sets the value of the "attributeName" attribute of this Compartment.
@@ -870,7 +870,7 @@ Compartment::setAttribute(const std::string& attributeName, double value)
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Sets the value of the "attributeName" attribute of this Compartment.
@@ -893,7 +893,7 @@ Compartment::setAttribute(const std::string& attributeName,
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Sets the value of the "attributeName" attribute of this Compartment.
@@ -924,7 +924,7 @@ Compartment::setAttribute(const std::string& attributeName,
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Unsets the value of the "attributeName" attribute of this Compartment.
@@ -970,7 +970,7 @@ Compartment::unsetAttribute(const std::string& attributeName)
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Adds the expected attributes for this element
@@ -1000,7 +1000,7 @@ Compartment::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Reads the expected attributes into the member data variables
@@ -1182,7 +1182,7 @@ Compartment::readAttributes(
 
 
 
-/** @cond doxygenLibSBMLInternal */
+/** @cond doxygenLibsbmlInternal */
 
 /*
  * Writes the attributes to the stream

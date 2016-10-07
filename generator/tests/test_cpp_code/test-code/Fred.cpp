@@ -1134,7 +1134,7 @@ Fred::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::getAttribute(const std::string& attributeName, bool& value) const
@@ -1162,7 +1162,7 @@ Fred::getAttribute(const std::string& attributeName, bool& value) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::getAttribute(const std::string& attributeName, int& value) const
@@ -1190,7 +1190,7 @@ Fred::getAttribute(const std::string& attributeName, int& value) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::getAttribute(const std::string& attributeName, std::string& value) const
@@ -1261,7 +1261,7 @@ Fred::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::setAttribute(const std::string& attributeName, bool value)
@@ -1283,7 +1283,7 @@ Fred::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::setAttribute(const std::string& attributeName, int value)
@@ -1305,7 +1305,7 @@ Fred::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Fred.
  */
 int
 Fred::setAttribute(const std::string& attributeName, const std::string& value)

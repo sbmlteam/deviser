@@ -268,7 +268,7 @@ MyLoTest::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this MyLoTest.
  */
 int
 MyLoTest::getAttribute(const std::string& attributeName,
@@ -320,7 +320,7 @@ MyLoTest::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this MyLoTest.
  */
 int
 MyLoTest::setAttribute(const std::string& attributeName,

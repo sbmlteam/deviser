@@ -44,13 +44,17 @@ class GenericAttributeFunctions():
     """Class for all functions for set/get/isset/unset"""
 
     def __init__(self, language, is_cpp_api, is_list_of, class_object, writing_test=False):
+        self.is_cpp_api = is_cpp_api
+        self.is_list_of = is_list_of
+        if class_object['name'].startswith('SBML'):
+            self.class_name = class_object['name'][4:]
+        else:
+            self.class_name = class_object['name']
+
         if not writing_test:
             self.language = language
             self.cap_language = language.upper()
             self.package = class_object['package']
-            self.class_name = class_object['name']
-            self.is_cpp_api = is_cpp_api
-            self.is_list_of = is_list_of
             if is_list_of:
                 self.child_name = class_object['lo_child']
             else:
@@ -98,10 +102,6 @@ class GenericAttributeFunctions():
             if 'is_plugin' in class_object:
                 self.is_plugin = class_object['is_plugin']
 
-        self.class_name = class_object['name']
-        self.is_cpp_api = is_cpp_api
-        self.is_list_of = is_list_of
-
         self.open_br = '{'
         self.close_br = '}'
 
@@ -126,8 +126,8 @@ class GenericAttributeFunctions():
         params = []
         return_lines = []
         additional = []
-        title_line = 'Gets the value of the "attributeName" attribute of this Compartment.' \
-            .format(self.true, self.object_name)
+        title_line = 'Gets the value of the "attributeName" attribute of this {0}.' \
+            .format(self.class_name)
         params.append('@param attributeName, the name of the attribute to retrieve.')
         params.append('@param value, the address of the value to record.')
 
@@ -203,12 +203,12 @@ class GenericAttributeFunctions():
         additional = []
         title_line = 'Predicate returning {0} if ' \
                      'this {1}\'s attribute \"attributeName\" is set.' \
-            .format(self.true, self.object_name)
+            .format(self.true, self.class_name)
         params.append('@param attributeName, the name of the attribute to query.')
 
         return_lines.append('@return {0} if this {1}\'s attribute \"attributeName\" has been '
                             'set, otherwise {2} is returned.'
-                            .format(self.true, self.object_name, self.false))
+                            .format(self.true, self.class_name, self.false))
 
         # create the function declaration
         function = 'isSetAttribute'
@@ -266,8 +266,8 @@ class GenericAttributeFunctions():
         params = []
         return_lines = []
         additional = []
-        title_line = 'Sets the value of the "attributeName" attribute of this Compartment.' \
-            .format(self.true, self.object_name)
+        title_line = 'Sets the value of the "attributeName" attribute of this {0}.' \
+            .format(self.class_name)
         params.append('@param attributeName, the name of the attribute to set.')
         params.append('@param value, the value of the attribute to set.')
 
@@ -337,7 +337,7 @@ class GenericAttributeFunctions():
         params = []
         return_lines = []
         additional = []
-        title_line = ' Unsets the value of the "attributeName" attribute of this {0}.'.format(self.object_name)
+        title_line = ' Unsets the value of the "attributeName" attribute of this {0}.'.format(self.class_name)
         params.append('@param attributeName, the name of the attribute to query.')
 
         return_lines.append('@copydetails doc_returns_success_code')
@@ -424,12 +424,12 @@ class GenericAttributeFunctions():
         initial = ''
         if att_type == 'bool':
             initial = 'true'
-        elif att_type == 'int' or att_type == 'uint':
+        elif att_type == 'int' or att_type == 'unsigned int':
             initial = '2'
         elif att_type == 'double':
             initial = '3.6'
-        elif att_type == 'string':
-            initial = 'std::string'
+        elif att_type == 'std::string':
+            initial = '\"string\"'
         if att_type == 'double':
             equals = 'util_isEqual(value, initialValue)'
             equals1 = 'util_isEqual(obj->get{0}(), initialValue)'.format(attrib['capAttName'])

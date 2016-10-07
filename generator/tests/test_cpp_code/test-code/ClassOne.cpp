@@ -414,7 +414,7 @@ ClassOne::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this ClassOne.
  */
 int
 ClassOne::getAttribute(const std::string& attributeName, bool& value) const
@@ -447,7 +447,7 @@ ClassOne::getAttribute(const std::string& attributeName, bool& value) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this ClassOne.
  */
 int
 ClassOne::getAttribute(const std::string& attributeName,
@@ -507,7 +507,7 @@ ClassOne::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this ClassOne.
  */
 int
 ClassOne::setAttribute(const std::string& attributeName, bool value)
@@ -533,7 +533,7 @@ ClassOne::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this ClassOne.
  */
 int
 ClassOne::setAttribute(const std::string& attributeName,

@@ -468,7 +468,7 @@ SedSimulation::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SedSimulation.
  */
 int
 SedSimulation::getAttribute(const std::string& attributeName,
@@ -529,7 +529,7 @@ SedSimulation::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SedSimulation.
  */
 int
 SedSimulation::setAttribute(const std::string& attributeName,

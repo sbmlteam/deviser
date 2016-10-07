@@ -266,7 +266,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Compartment.
+   * Gets the value of the "attributeName" attribute of this MyBase.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -303,7 +303,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Compartment.
+   * Sets the value of the "attributeName" attribute of this MyBase.
    *
    * @param attributeName, the name of the attribute to set.
    *

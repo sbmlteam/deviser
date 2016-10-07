@@ -645,7 +645,7 @@ AnalyticVolume::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
 AnalyticVolume::getAttribute(const std::string& attributeName,
@@ -674,7 +674,7 @@ AnalyticVolume::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
 AnalyticVolume::getAttribute(const std::string& attributeName,
@@ -743,7 +743,7 @@ AnalyticVolume::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
 AnalyticVolume::setAttribute(const std::string& attributeName, int value)
@@ -765,7 +765,7 @@ AnalyticVolume::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
 AnalyticVolume::setAttribute(const std::string& attributeName,

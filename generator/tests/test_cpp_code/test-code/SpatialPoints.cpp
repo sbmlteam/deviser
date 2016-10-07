@@ -626,7 +626,7 @@ SpatialPoints::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SpatialPoints.
  */
 int
 SpatialPoints::getAttribute(const std::string& attributeName,
@@ -655,7 +655,7 @@ SpatialPoints::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SpatialPoints.
  */
 int
 SpatialPoints::getAttribute(const std::string& attributeName,
@@ -723,7 +723,7 @@ SpatialPoints::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SpatialPoints.
  */
 int
 SpatialPoints::setAttribute(const std::string& attributeName, int value)
@@ -745,7 +745,7 @@ SpatialPoints::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SpatialPoints.
  */
 int
 SpatialPoints::setAttribute(const std::string& attributeName,

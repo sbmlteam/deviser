@@ -775,7 +775,7 @@ CoordinateComponent::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this CoordinateComponent.
  */
 int
 CoordinateComponent::getAttribute(const std::string& attributeName,
@@ -840,7 +840,7 @@ CoordinateComponent::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this CoordinateComponent.
  */
 int
 CoordinateComponent::setAttribute(const std::string& attributeName,

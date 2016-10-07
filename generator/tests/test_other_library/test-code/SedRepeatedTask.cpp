@@ -332,7 +332,7 @@ SedRepeatedTask::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
  */
 int
 SedRepeatedTask::getAttribute(const std::string& attributeName,
@@ -361,7 +361,7 @@ SedRepeatedTask::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
  */
 int
 SedRepeatedTask::getAttribute(const std::string& attributeName,
@@ -417,7 +417,7 @@ SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
  */
 int
 SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
@@ -439,7 +439,7 @@ SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
  */
 int
 SedRepeatedTask::setAttribute(const std::string& attributeName,

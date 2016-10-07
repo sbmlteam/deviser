@@ -877,7 +877,7 @@ VersSpeciesPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
  */
 int
 VersSpeciesPlugin::getAttribute(const std::string& attributeName,
@@ -947,7 +947,7 @@ VersSpeciesPlugin::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
  */
 int
 VersSpeciesPlugin::setAttribute(const std::string& attributeName,

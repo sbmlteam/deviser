@@ -982,7 +982,7 @@ Transition::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Transition.
  */
 int
 Transition::getAttribute(const std::string& attributeName,
@@ -1043,7 +1043,7 @@ Transition::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Transition.
  */
 int
 Transition::setAttribute(const std::string& attributeName,

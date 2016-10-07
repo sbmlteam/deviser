@@ -60,7 +60,7 @@ class LIBSBML_EXTERN Compartment : public SBase
 {
 protected:
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   double mSize;
   bool mIsSetSize;
@@ -486,7 +486,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Write any contained elements
@@ -498,7 +498,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Accepts the given SBMLVisitor
@@ -509,7 +509,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Sets the parent SBMLDocument
@@ -520,7 +520,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Gets the value of the "attributeName" attribute of this Compartment.
@@ -533,14 +533,14 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int getAttribute(const std::string& attributeName, bool& value);
-    const
+  virtual int getAttribute(const std::string& attributeName, bool& value)
+    const;
 
   /** @endcond */
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Gets the value of the "attributeName" attribute of this Compartment.
@@ -560,7 +560,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Gets the value of the "attributeName" attribute of this Compartment.
@@ -580,7 +580,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Gets the value of the "attributeName" attribute of this Compartment.
@@ -600,7 +600,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Predicate returning @c true if this Compartment's attribute
@@ -617,7 +617,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Sets the value of the "attributeName" attribute of this Compartment.
@@ -636,7 +636,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Sets the value of the "attributeName" attribute of this Compartment.
@@ -655,7 +655,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Sets the value of the "attributeName" attribute of this Compartment.
@@ -675,7 +675,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Sets the value of the "attributeName" attribute of this Compartment.
@@ -695,7 +695,7 @@ public:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Unsets the value of the "attributeName" attribute of this Compartment.
@@ -714,7 +714,7 @@ public:
 protected:
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Adds the expected attributes for this element
@@ -726,7 +726,7 @@ protected:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Reads the expected attributes into the member data variables
@@ -741,7 +741,7 @@ protected:
 
 
 
-  /** @cond doxygenLibSBMLInternal */
+  /** @cond doxygenLibsbmlInternal */
 
   /**
    * Writes the attributes to the stream

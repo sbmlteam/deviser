@@ -554,7 +554,7 @@ Output::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Output.
  */
 int
 Output::getAttribute(const std::string& attributeName, int& value) const
@@ -582,7 +582,7 @@ Output::getAttribute(const std::string& attributeName, int& value) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Output.
  */
 int
 Output::getAttribute(const std::string& attributeName,
@@ -660,7 +660,7 @@ Output::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Output.
  */
 int
 Output::setAttribute(const std::string& attributeName, int value)
@@ -682,7 +682,7 @@ Output::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Output.
  */
 int
 Output::setAttribute(const std::string& attributeName,

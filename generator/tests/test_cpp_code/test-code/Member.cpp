@@ -450,7 +450,7 @@ Member::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this Member.
  */
 int
 Member::getAttribute(const std::string& attributeName,
@@ -529,7 +529,7 @@ Member::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this Member.
  */
 int
 Member::setAttribute(const std::string& attributeName,

@@ -247,7 +247,8 @@ SpatialReactionPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Compartment.
+ * Gets the value of the "attributeName" attribute of this
+ * SpatialReactionPlugin.
  */
 int
 SpatialReactionPlugin::getAttribute(const std::string& attributeName,
@@ -299,7 +300,8 @@ SpatialReactionPlugin::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this Compartment.
+ * Sets the value of the "attributeName" attribute of this
+ * SpatialReactionPlugin.
  */
 int
 SpatialReactionPlugin::setAttribute(const std::string& attributeName,
