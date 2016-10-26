@@ -345,6 +345,254 @@ CaOmexManifest::connectToChild()
 /** @endcond */
 
 
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             bool& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             int& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             double& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             unsigned int& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             std::string& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::getAttribute(const std::string& attributeName,
+                             const char* value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Predicate returning @c true if this CaOmexManifest's attribute
+ * "attributeName" is set.
+ */
+bool
+CaOmexManifest::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = CaBase::isSetAttribute(attributeName);
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName,
+                             unsigned int value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName,
+                             const std::string& value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::setAttribute(const std::string& attributeName,
+                             const char* value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this CaOmexManifest.
+ */
+int
+CaOmexManifest::unsetAttribute(const std::string& attributeName)
+{
+  int value = CaBase::unsetAttribute(attributeName);
+
+  return value;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

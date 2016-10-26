@@ -401,6 +401,58 @@ CaContent::getAttribute(const std::string& attributeName, bool& value) const
  * Gets the value of the "attributeName" attribute of this CaContent.
  */
 int
+CaContent::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::getAttribute(const std::string& attributeName, double& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::getAttribute(const std::string& attributeName,
+                        unsigned int& value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaContent.
+ */
+int
 CaContent::getAttribute(const std::string& attributeName,
                         std::string& value) const
 {
@@ -419,6 +471,40 @@ CaContent::getAttribute(const std::string& attributeName,
   else if (attributeName == "format")
   {
     value = getFormat();
+    return_value = LIBCOMBINE_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::getAttribute(const std::string& attributeName,
+                        const char* value) const
+{
+  int return_value = CaBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBCOMBINE_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "location")
+  {
+    value = getLocation().c_str();
+    return_value = LIBCOMBINE_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "format")
+  {
+    value = getFormat().c_str();
     return_value = LIBCOMBINE_OPERATION_SUCCESS;
   }
 
@@ -488,8 +574,85 @@ CaContent::setAttribute(const std::string& attributeName, bool value)
  * Sets the value of the "attributeName" attribute of this CaContent.
  */
 int
+CaContent::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::setAttribute(const std::string& attributeName, unsigned int value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaContent.
+ */
+int
 CaContent::setAttribute(const std::string& attributeName,
                         const std::string& value)
+{
+  int return_value = CaBase::setAttribute(attributeName, value);
+
+  if (attributeName == "location")
+  {
+    return_value = setLocation(value);
+  }
+  else if (attributeName == "format")
+  {
+    return_value = setFormat(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CaContent.
+ */
+int
+CaContent::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = CaBase::setAttribute(attributeName, value);
 

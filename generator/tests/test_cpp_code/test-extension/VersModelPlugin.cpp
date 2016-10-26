@@ -517,9 +517,63 @@ VersModelPlugin::enablePackageInternal(const std::string& pkgURI,
  */
 int
 VersModelPlugin::getAttribute(const std::string& attributeName,
+                              bool& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
+                              int& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
+                              double& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
                               unsigned int& value) const
 {
-  int return_value = SBase::getAttribute(attributeName, value);
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
 
   if (return_value == LIBSBML_OPERATION_SUCCESS)
   {
@@ -547,13 +601,49 @@ VersModelPlugin::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
+                              std::string& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::getAttribute(const std::string& attributeName,
+                              const char* value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate returning @c true if this VersModelPlugin's attribute
  * "attributeName" is set.
  */
 bool
 VersModelPlugin::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SBase::isSetAttribute(attributeName);
+  bool value = SBasePlugin::isSetAttribute(attributeName);
 
   if (attributeName == "version")
   {
@@ -577,10 +667,61 @@ VersModelPlugin::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this VersModelPlugin.
  */
 int
+VersModelPlugin::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
 VersModelPlugin::setAttribute(const std::string& attributeName,
                               unsigned int value)
 {
-  int return_value = SBase::setAttribute(attributeName, value);
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
 
   if (attributeName == "version")
   {
@@ -601,12 +742,48 @@ VersModelPlugin::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::setAttribute(const std::string& attributeName,
+                              const std::string& value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersModelPlugin.
+ */
+int
+VersModelPlugin::setAttribute(const std::string& attributeName,
+                              const char* value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Unsets the value of the "attributeName" attribute of this VersModelPlugin.
  */
 int
 VersModelPlugin::unsetAttribute(const std::string& attributeName)
 {
-  int value = SBase::unsetAttribute(attributeName);
+  int value = SBasePlugin::unsetAttribute(attributeName);
 
   if (attributeName == "version")
   {

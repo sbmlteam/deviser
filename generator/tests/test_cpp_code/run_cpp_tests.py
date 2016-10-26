@@ -608,6 +608,13 @@ def main():
     test_case = 'new attribute'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'core'
+    num = 14
+    class_name = 'ModifierSpeciesReference'
+    list_of = ''
+    test_case = 'new attribute'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

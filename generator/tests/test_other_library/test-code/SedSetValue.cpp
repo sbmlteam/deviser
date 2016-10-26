@@ -586,6 +586,76 @@ SedSetValue::connectToChild()
  * Gets the value of the "attributeName" attribute of this SedSetValue.
  */
 int
+SedSetValue::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::getAttribute(const std::string& attributeName,
+                          double& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::getAttribute(const std::string& attributeName,
+                          unsigned int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
 SedSetValue::getAttribute(const std::string& attributeName,
                           std::string& value) const
 {
@@ -614,6 +684,50 @@ SedSetValue::getAttribute(const std::string& attributeName,
   else if (attributeName == "range")
   {
     value = getRange();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::getAttribute(const std::string& attributeName,
+                          const char* value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "modelReference")
+  {
+    value = getModelReference().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "symbol")
+  {
+    value = getSymbol().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "target")
+  {
+    value = getTarget().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "range")
+  {
+    value = getRange().c_str();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -665,8 +779,111 @@ SedSetValue::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this SedSetValue.
  */
 int
+SedSetValue::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setAttribute(const std::string& attributeName,
+                          unsigned int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
 SedSetValue::setAttribute(const std::string& attributeName,
                           const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "modelReference")
+  {
+    return_value = setModelReference(value);
+  }
+  else if (attributeName == "symbol")
+  {
+    return_value = setSymbol(value);
+  }
+  else if (attributeName == "target")
+  {
+    return_value = setTarget(value);
+  }
+  else if (attributeName == "range")
+  {
+    return_value = setRange(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedSetValue.
+ */
+int
+SedSetValue::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 

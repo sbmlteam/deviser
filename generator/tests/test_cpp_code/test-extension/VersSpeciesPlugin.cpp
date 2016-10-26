@@ -881,9 +881,81 @@ VersSpeciesPlugin::enablePackageInternal(const std::string& pkgURI,
  */
 int
 VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                bool& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                int& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                double& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                unsigned int& value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
                                 std::string& value) const
 {
-  int return_value = SBase::getAttribute(attributeName, value);
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
 
   if (return_value == LIBSBML_OPERATION_SUCCESS)
   {
@@ -916,13 +988,52 @@ VersSpeciesPlugin::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::getAttribute(const std::string& attributeName,
+                                const char* value) const
+{
+  int return_value = SBasePlugin::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "species_att_v1")
+  {
+    value = getSpecies_att_v1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    value = getString_plugin_att().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    value = getSpecies_att_v2().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate returning @c true if this VersSpeciesPlugin's attribute
  * "attributeName" is set.
  */
 bool
 VersSpeciesPlugin::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SBase::isSetAttribute(attributeName);
+  bool value = SBasePlugin::isSetAttribute(attributeName);
 
   if (attributeName == "species_att_v1")
   {
@@ -950,10 +1061,111 @@ VersSpeciesPlugin::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
  */
 int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName,
+                                double value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName,
+                                unsigned int value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
 VersSpeciesPlugin::setAttribute(const std::string& attributeName,
                                 const std::string& value)
 {
-  int return_value = SBase::setAttribute(attributeName, value);
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
+
+  if (attributeName == "species_att_v1")
+  {
+    return_value = setSpecies_att_v1(value);
+  }
+  else if (attributeName == "string_plugin_att")
+  {
+    return_value = setString_plugin_att(value);
+  }
+  else if (attributeName == "species_att_v2")
+  {
+    return_value = setSpecies_att_v2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
+ */
+int
+VersSpeciesPlugin::setAttribute(const std::string& attributeName,
+                                const char* value)
+{
+  int return_value = SBasePlugin::setAttribute(attributeName, value);
 
   if (attributeName == "species_att_v1")
   {
@@ -983,7 +1195,7 @@ VersSpeciesPlugin::setAttribute(const std::string& attributeName,
 int
 VersSpeciesPlugin::unsetAttribute(const std::string& attributeName)
 {
-  int value = SBase::unsetAttribute(attributeName);
+  int value = SBasePlugin::unsetAttribute(attributeName);
 
   if (attributeName == "species_att_v1")
   {

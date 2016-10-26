@@ -649,6 +649,24 @@ AnalyticVolume::enablePackageInternal(const std::string& pkgURI,
  */
 int
 AnalyticVolume::getAttribute(const std::string& attributeName,
+                             bool& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::getAttribute(const std::string& attributeName,
                              int& value) const
 {
   int return_value = SBase::getAttribute(attributeName, value);
@@ -663,6 +681,42 @@ AnalyticVolume::getAttribute(const std::string& attributeName,
     value = getOrdinal();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::getAttribute(const std::string& attributeName,
+                             double& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::getAttribute(const std::string& attributeName,
+                             unsigned int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
 
   return return_value;
 }
@@ -695,6 +749,40 @@ AnalyticVolume::getAttribute(const std::string& attributeName,
   else if (attributeName == "domainType")
   {
     value = getDomainType();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::getAttribute(const std::string& attributeName,
+                             const char* value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "domainType")
+  {
+    value = getDomainType().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -746,6 +834,23 @@ AnalyticVolume::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
+AnalyticVolume::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
 AnalyticVolume::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
@@ -768,8 +873,70 @@ AnalyticVolume::setAttribute(const std::string& attributeName, int value)
  * Sets the value of the "attributeName" attribute of this AnalyticVolume.
  */
 int
+AnalyticVolume::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::setAttribute(const std::string& attributeName,
+                             unsigned int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
 AnalyticVolume::setAttribute(const std::string& attributeName,
                              const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "domainType")
+  {
+    return_value = setDomainType(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this AnalyticVolume.
+ */
+int
+AnalyticVolume::setAttribute(const std::string& attributeName,
+                             const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

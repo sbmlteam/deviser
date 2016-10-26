@@ -492,6 +492,90 @@ public:
 
 
 
+
+  #ifndef SWIG
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Gets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to retrieve.
+   *
+   * @param value, the address of the value to record.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int getAttribute(const std::string& attributeName, bool& value)
+    const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Gets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to retrieve.
+   *
+   * @param value, the address of the value to record.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int getAttribute(const std::string& attributeName, int& value) const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Gets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to retrieve.
+   *
+   * @param value, the address of the value to record.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int getAttribute(const std::string& attributeName,
+                           double& value) const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Gets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to retrieve.
+   *
+   * @param value, the address of the value to record.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int getAttribute(const std::string& attributeName,
+                           unsigned int& value) const;
+
+  /** @endcond */
+
+
+
   /** @cond doxygenLibSEDMLInternal */
 
   /**
@@ -507,6 +591,26 @@ public:
    */
   virtual int getAttribute(const std::string& attributeName,
                            std::string& value) const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Gets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to retrieve.
+   *
+   * @param value, the address of the value to record.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int getAttribute(const std::string& attributeName,
+                           const char* value) const;
 
   /** @endcond */
 
@@ -542,8 +646,105 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
+  virtual int setAttribute(const std::string& attributeName, bool value);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to set.
+   *
+   * @param value, the value of the attribute to set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int setAttribute(const std::string& attributeName, int value);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to set.
+   *
+   * @param value, the value of the attribute to set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int setAttribute(const std::string& attributeName, double value);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to set.
+   *
+   * @param value, the value of the attribute to set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int setAttribute(const std::string& attributeName,
+                           unsigned int value);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to set.
+   *
+   * @param value, the value of the attribute to set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
   virtual int setAttribute(const std::string& attributeName,
                            const std::string& value);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the value of the "attributeName" attribute of this SedModel.
+   *
+   * @param attributeName, the name of the attribute to set.
+   *
+   * @param value, the value of the attribute to set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int setAttribute(const std::string& attributeName, const char*
+    value);
 
   /** @endcond */
 
@@ -563,6 +764,11 @@ public:
   virtual int unsetAttribute(const std::string& attributeName);
 
   /** @endcond */
+
+
+
+
+  #endif /* !SWIG */
 
 
   /**

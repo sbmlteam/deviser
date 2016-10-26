@@ -840,9 +840,81 @@ CSGSetOperator::enablePackageInternal(const std::string& pkgURI,
  */
 int
 CSGSetOperator::getAttribute(const std::string& attributeName,
+                             bool& value) const
+{
+  int return_value = CSGNode::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
+                             int& value) const
+{
+  int return_value = CSGNode::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
+                             double& value) const
+{
+  int return_value = CSGNode::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
+                             unsigned int& value) const
+{
+  int return_value = CSGNode::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
                              std::string& value) const
 {
-  int return_value = SBase::getAttribute(attributeName, value);
+  int return_value = CSGNode::getAttribute(attributeName, value);
 
   if (return_value == LIBSBML_OPERATION_SUCCESS)
   {
@@ -870,13 +942,47 @@ CSGSetOperator::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::getAttribute(const std::string& attributeName,
+                             const char* value) const
+{
+  int return_value = CSGNode::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "complementA")
+  {
+    value = getComplementA().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "complementB")
+  {
+    value = getComplementB().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate returning @c true if this CSGSetOperator's attribute
  * "attributeName" is set.
  */
 bool
 CSGSetOperator::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SBase::isSetAttribute(attributeName);
+  bool value = CSGNode::isSetAttribute(attributeName);
 
   if (attributeName == "operationType")
   {
@@ -904,10 +1010,106 @@ CSGSetOperator::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this CSGSetOperator.
  */
 int
+CSGSetOperator::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = CSGNode::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = CSGNode::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = CSGNode::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::setAttribute(const std::string& attributeName,
+                             unsigned int value)
+{
+  int return_value = CSGNode::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
 CSGSetOperator::setAttribute(const std::string& attributeName,
                              const std::string& value)
 {
-  int return_value = SBase::setAttribute(attributeName, value);
+  int return_value = CSGNode::setAttribute(attributeName, value);
+
+  if (attributeName == "complementA")
+  {
+    return_value = setComplementA(value);
+  }
+  else if (attributeName == "complementB")
+  {
+    return_value = setComplementB(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this CSGSetOperator.
+ */
+int
+CSGSetOperator::setAttribute(const std::string& attributeName,
+                             const char* value)
+{
+  int return_value = CSGNode::setAttribute(attributeName, value);
 
   if (attributeName == "complementA")
   {
@@ -933,7 +1135,7 @@ CSGSetOperator::setAttribute(const std::string& attributeName,
 int
 CSGSetOperator::unsetAttribute(const std::string& attributeName)
 {
-  int value = SBase::unsetAttribute(attributeName);
+  int value = CSGNode::unsetAttribute(attributeName);
 
   if (attributeName == "operationType")
   {

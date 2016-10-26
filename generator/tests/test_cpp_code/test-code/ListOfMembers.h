@@ -418,6 +418,16 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
+
+
+  #ifndef SWIG
+
+
+
+
+  #endif /* !SWIG */
+
+
 protected:
 
 

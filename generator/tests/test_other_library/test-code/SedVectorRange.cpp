@@ -276,13 +276,121 @@ SedVectorRange::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             bool& value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             int& value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             double& value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             unsigned int& value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             std::string& value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::getAttribute(const std::string& attributeName,
+                             const char* value) const
+{
+  int return_value = SedRange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Predicate returning @c true if this SedVectorRange's attribute
  * "attributeName" is set.
  */
 bool
 SedVectorRange::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SedBase::isSetAttribute(attributeName);
+  bool value = SedRange::isSetAttribute(attributeName);
 
   if (attributeName == "value")
   {
@@ -299,12 +407,117 @@ SedVectorRange::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName,
+                             unsigned int value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName,
+                             const std::string& value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedVectorRange.
+ */
+int
+SedVectorRange::setAttribute(const std::string& attributeName,
+                             const char* value)
+{
+  int return_value = SedRange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Unsets the value of the "attributeName" attribute of this SedVectorRange.
  */
 int
 SedVectorRange::unsetAttribute(const std::string& attributeName)
 {
-  int value = SedBase::unsetAttribute(attributeName);
+  int value = SedRange::unsetAttribute(attributeName);
 
   if (attributeName == "value")
   {

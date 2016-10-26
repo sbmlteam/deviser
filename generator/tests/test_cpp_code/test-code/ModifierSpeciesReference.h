@@ -1,7 +1,7 @@
 /**
- * @file Unit.h
- * @brief Definition of the Unit class.
- * @author SBMLTeam
+ * @file ModifierSpeciesReference.h
+ * @brief Definition of the ModifierSpeciesReference class.
+ * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML. Please visit http://sbml.org for more
@@ -30,18 +30,17 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class Unit
- * @sbmlbrief{test} TODO:Definition of the Unit class.
+ * @class ModifierSpeciesReference
+ * @sbmlbrief{core} TODO:Definition of the ModifierSpeciesReference class.
  */
 
 
-#ifndef Unit_H__
-#define Unit_H__
+#ifndef ModifierSpeciesReference_H__
+#define ModifierSpeciesReference_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/test/common/testfwd.h>
 
 
 #ifdef __cplusplus
@@ -50,51 +49,34 @@
 #include <string>
 
 
-#include <sbml/SBase.h>
-#include <sbml/packages/test/extension/TestExtension.h>
+#include <sbml/SimpleSpeciesReference.h>
+#include <sbml/common/libsbml-namespace.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN Unit : public SBase
+class LIBSBML_EXTERN ModifierSpeciesReference : public SimpleSpeciesReference
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  std::string mUnit;
+  std::string mElementName;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new Unit using the given SBML Level, Version and
-   * &ldquo;test&rdquo; package version.
+   * Creates a new ModifierSpeciesReference using the given SBML Level and @ p
+   * version values.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Unit.
+   * @param level an unsigned int, the SBML Level to assign to this
+   * ModifierSpeciesReference.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Unit.
-   *
-   * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
-   * Unit.
-   *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
-   */
-  Unit(unsigned int level = TestExtension::getDefaultLevel(),
-       unsigned int version = TestExtension::getDefaultVersion(),
-       unsigned int pkgVersion = TestExtension::getDefaultPackageVersion());
-
-
-  /**
-   * Creates a new Unit using the given TestPkgNamespaces object.
-   *
-   * @param testns the TestPkgNamespaces object.
+   * @param version an unsigned int, the SBML Version to assign to this
+   * ModifierSpeciesReference.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -102,123 +84,102 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  Unit(TestPkgNamespaces *testns);
+  ModifierSpeciesReference(unsigned int level = SBML_DEFAULT_LEVEL,
+                           unsigned int version = SBML_DEFAULT_VERSION);
 
 
   /**
-   * Copy constructor for Unit.
+   * Creates a new ModifierSpeciesReference using the given SBMLNamespaces
+   * object @p sbmlns.
    *
-   * @param orig the Unit instance to copy.
+   * @param sbmlns the SBMLNamespaces object.
+   *
+   * @throws SBMLConstructorException
+   * Thrown if the given @p level and @p version combination, or this kind of
+   * SBML object, are either invalid or mismatched with respect to the parent
+   * SBMLDocument object.
+   * @copydetails doc_note_setting_lv
    */
-  Unit(const Unit& orig);
+  ModifierSpeciesReference(SBMLNamespaces *sbmlns);
 
 
   /**
-   * Assignment operator for Unit.
+   * Copy constructor for ModifierSpeciesReference.
    *
-   * @param rhs the Unit object whose values are to be used as the basis of the
-   * assignment.
+   * @param orig the ModifierSpeciesReference instance to copy.
    */
-  Unit& operator=(const Unit& rhs);
+  ModifierSpeciesReference(const ModifierSpeciesReference& orig);
 
 
   /**
-   * Creates and returns a deep copy of this Unit object.
+   * Assignment operator for ModifierSpeciesReference.
    *
-   * @return a (deep) copy of this Unit object.
+   * @param rhs the ModifierSpeciesReference object whose values are to be used
+   * as the basis of the assignment.
    */
-  virtual Unit* clone() const;
+  ModifierSpeciesReference& operator=(const ModifierSpeciesReference& rhs);
 
 
   /**
-   * Destructor for Unit.
+   * Creates and returns a deep copy of this ModifierSpeciesReference object.
+   *
+   * @return a (deep) copy of this ModifierSpeciesReference object.
    */
-  virtual ~Unit();
+  virtual ModifierSpeciesReference* clone() const;
 
 
   /**
-   * Returns the value of the "unit" attribute of this Unit.
-   *
-   * @return the value of the "unit" attribute of this Unit as a string.
+   * Destructor for ModifierSpeciesReference.
    */
-  const std::string& getUnit() const;
+  virtual ~ModifierSpeciesReference();
 
 
   /**
-   * Predicate returning @c true if this Unit's "unit" attribute is set.
+   * Returns the XML element name of this ModifierSpeciesReference object.
    *
-   * @return @c true if this Unit's "unit" attribute has been set, otherwise @c
-   * false is returned.
-   */
-  bool isSetUnit() const;
-
-
-  /**
-   * Sets the value of the "unit" attribute of this Unit.
+   * For ModifierSpeciesReference, the XML element name is always @c "".
    *
-   * @param unit std::string& value of the "unit" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setUnit(const std::string& unit);
-
-
-  /**
-   * Unsets the value of the "unit" attribute of this Unit.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  int unsetUnit();
-
-
-  /**
-   * @copydoc doc_renamesidref_common
-   */
-  virtual void renameSIdRefs(const std::string& oldid,
-                             const std::string& newid);
-
-
-  /**
-   * Returns the XML element name of this Unit object.
-   *
-   * For Unit, the XML element name is always @c "unit".
-   *
-   * @return the name of this element, i.e. @c "unit".
+   * @return the name of this element, i.e. @c "".
    */
   virtual const std::string& getElementName() const;
 
 
+
+  /** @cond doxygenLibsbmlInternal */
+
   /**
-   * Returns the libSBML type code for this Unit object.
+   * Sets the XML name of this ModifierSpeciesReference object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
+
+
+  /**
+   * Returns the libSBML type code for this ModifierSpeciesReference object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{SBML_TEST_UNIT, SBMLTestTypeCode_t}
+   * @sbmlconstant{CORE_MODIFIERSPECIESREFERENCE, SBMLCoreTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
    * @see getElementName()
-   * @see getPackageName()
    */
   virtual int getTypeCode() const;
 
 
   /**
-   * Predicate returning @c true if all the required attributes for this Unit
-   * object have been set.
+   * Predicate returning @c true if all the required attributes for this
+   * ModifierSpeciesReference object have been set.
    *
-   * @return @c true to indicate that all the required attributes of this Unit
-   * have been set, otherwise @c false is returned.
+   * @return @c true to indicate that all the required attributes of this
+   * ModifierSpeciesReference have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the Unit object are:
+   * @note The required attributes for the ModifierSpeciesReference object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -229,7 +190,8 @@ public:
   /**
    * Write any contained elements
    */
-  virtual void writeElements(XMLOutputStream& stream) const;
+  virtual void writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 
@@ -257,19 +219,6 @@ public:
 
 
 
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Enables/disables the given package with this element
-   */
-  virtual void enablePackageInternal(const std::string& pkgURI,
-                                     const std::string& pkgPrefix,
-                                     bool flag);
-
-  /** @endcond */
-
-
-
 
   #ifndef SWIG
 
@@ -278,7 +227,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -298,7 +248,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -317,7 +268,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -337,7 +289,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -357,7 +310,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -377,7 +331,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Unit.
+   * Gets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -397,13 +352,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this Unit's attribute "attributeName" is
-   * set.
+   * Predicate returning @c true if this ModifierSpeciesReference's attribute
+   * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this Unit's attribute "attributeName" has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this ModifierSpeciesReference's attribute
+   * "attributeName" has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -414,7 +369,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -433,7 +389,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -452,7 +409,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -471,7 +429,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -491,7 +450,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -511,7 +471,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Unit.
+   * Sets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -531,7 +492,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this Unit.
+   * Unsets the value of the "attributeName" attribute of this
+   * ModifierSpeciesReference.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -555,9 +517,22 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   /**
+   * Creates a new object from the next XMLToken on the XMLInputStream
+   */
+  virtual SBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
    * Adds the expected attributes for this element
    */
-  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
+  virtual void addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+    ExpectedAttributes& attributes);
 
   /** @endcond */
 
@@ -568,8 +543,11 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readAttributes(const XMLAttributes& attributes,
-                              const ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes(
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                XMLAttributes& attributes,
+                              const LIBSBML_CPP_NAMESPACE_QUALIFIER
+                                ExpectedAttributes& expectedAttributes);
 
   /** @endcond */
 
@@ -580,7 +558,8 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeAttributes(XMLOutputStream& stream) const;
+  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 
@@ -613,15 +592,14 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new Unit_t using the given SBML Level, Version and
- * &ldquo;test&rdquo; package version.
+ * Creates a new ModifierSpeciesReference_t using the given SBML Level and @ p
+ * version values.
  *
- * @param level an unsigned int, the SBML Level to assign to this Unit_t.
+ * @param level an unsigned int, the SBML Level to assign to this
+ * ModifierSpeciesReference_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Unit_t.
- *
- * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
- * Unit_t.
+ * @param version an unsigned int, the SBML Version to assign to this
+ * ModifierSpeciesReference_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -629,123 +607,57 @@ BEGIN_C_DECLS
  * SBMLDocument object.
  * @copydetails doc_note_setting_lv
  *
- * @memberof Unit_t
+ * @memberof ModifierSpeciesReference_t
  */
 LIBSBML_EXTERN
-Unit_t *
-Unit_create(unsigned int level = TestExtension::getDefaultLevel(),
-            unsigned int version = TestExtension::getDefaultVersion(),
-            unsigned int pkgVersion =
-              TestExtension::getDefaultPackageVersion());
+ModifierSpeciesReference_t *
+ModifierSpeciesReference_create(unsigned int level, unsigned int version);
 
 
 /**
- * Creates and returns a deep copy of this Unit_t object.
+ * Creates and returns a deep copy of this ModifierSpeciesReference_t object.
  *
- * @param u the Unit_t structure.
+ * @param msr the ModifierSpeciesReference_t structure.
  *
- * @return a (deep) copy of this Unit_t object.
+ * @return a (deep) copy of this ModifierSpeciesReference_t object.
  *
- * @memberof Unit_t
+ * @memberof ModifierSpeciesReference_t
  */
 LIBSBML_EXTERN
-Unit_t*
-Unit_clone(const Unit_t* u);
+ModifierSpeciesReference_t*
+ModifierSpeciesReference_clone(const ModifierSpeciesReference_t* msr);
 
 
 /**
- * Frees this Unit_t object.
+ * Frees this ModifierSpeciesReference_t object.
  *
- * @param u the Unit_t structure.
+ * @param msr the ModifierSpeciesReference_t structure.
  *
- * @memberof Unit_t
+ * @memberof ModifierSpeciesReference_t
  */
 LIBSBML_EXTERN
 void
-Unit_free(Unit_t* u);
+ModifierSpeciesReference_free(ModifierSpeciesReference_t* msr);
 
 
 /**
- * Returns the value of the "unit" attribute of this Unit_t.
+ * Predicate returning @c 1 if all the required attributes for this
+ * ModifierSpeciesReference_t object have been set.
  *
- * @param u the Unit_t structure whose unit is sought.
+ * @param msr the ModifierSpeciesReference_t structure.
  *
- * @return the value of the "unit" attribute of this Unit_t as a pointer to a
- * string.
+ * @return @c 1 to indicate that all the required attributes of this
+ * ModifierSpeciesReference_t have been set, otherwise @c 0 is returned.
  *
- * @memberof Unit_t
- */
-LIBSBML_EXTERN
-const char *
-Unit_getUnit(const Unit_t * u);
-
-
-/**
- * Predicate returning @c 1 if this Unit_t's "unit" attribute is set.
  *
- * @param u the Unit_t structure.
+ * @note The required attributes for the ModifierSpeciesReference_t object are:
  *
- * @return @c 1 if this Unit_t's "unit" attribute has been set, otherwise @c 0
- * is returned.
- *
- * @memberof Unit_t
+ * @memberof ModifierSpeciesReference_t
  */
 LIBSBML_EXTERN
 int
-Unit_isSetUnit(const Unit_t * u);
-
-
-/**
- * Sets the value of the "unit" attribute of this Unit_t.
- *
- * @param u the Unit_t structure.
- *
- * @param unit const char * value of the "unit" attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- *
- * @memberof Unit_t
- */
-LIBSBML_EXTERN
-int
-Unit_setUnit(Unit_t * u, const char * unit);
-
-
-/**
- * Unsets the value of the "unit" attribute of this Unit_t.
- *
- * @param u the Unit_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
- *
- * @memberof Unit_t
- */
-LIBSBML_EXTERN
-int
-Unit_unsetUnit(Unit_t * u);
-
-
-/**
- * Predicate returning @c 1 if all the required attributes for this Unit_t
- * object have been set.
- *
- * @param u the Unit_t structure.
- *
- * @return @c 1 to indicate that all the required attributes of this Unit_t
- * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Unit_t object are:
- *
- * @memberof Unit_t
- */
-LIBSBML_EXTERN
-int
-Unit_hasRequiredAttributes(const Unit_t * u);
+ModifierSpeciesReference_hasRequiredAttributes(const ModifierSpeciesReference_t
+  * msr);
 
 
 
@@ -765,6 +677,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !Unit_H__ */
+#endif /* !ModifierSpeciesReference_H__ */
 
 

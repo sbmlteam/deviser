@@ -50,7 +50,7 @@ class GenericAttributeFunctions():
             self.class_name = class_object['name'][4:]
         else:
             self.class_name = class_object['name']
-
+        self.base_class = class_object['baseClass']
         if not writing_test:
             self.language = language
             self.cap_language = language.upper()
@@ -119,8 +119,6 @@ class GenericAttributeFunctions():
             return
         elif self.is_list_of:
             return
-        elif attributes is None or len(attributes) == 0:
-            return
 
         # create comment parts
         params = []
@@ -145,10 +143,16 @@ class GenericAttributeFunctions():
         function = 'getAttribute'
         return_type = 'int'
 
-        arguments = ['const std::string& attributeName', '{0}& value'.format(att_type)]
+
+        arg1 = '{0}& value'.format(att_type)
+        end_get = '()'
+        if att_type == 'const char*':
+            arg1 = '{0} value'.format(att_type)
+            end_get = '().c_str()'
+        arguments = ['const std::string& attributeName', arg1]
 
         # create the function implementation
-        first_line = ['int return_value = {0}::getAttribute(attributeName, value)'.format(global_variables.baseClass)]
+        first_line = ['int return_value = {0}::getAttribute(attributeName, value)'.format(self.base_class)]
         first_if = ['return_value == {0}'.format(global_variables.ret_success), 'return return_value']
         last_line = ['return return_value']
         first = True
@@ -159,17 +163,22 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('attributeName == \"{0}\"'.format(attrib['name']))
-            lines = ['value = get{0}()'.format(attrib['capAttName']),
+            lines = ['value = get{0}{1}'.format(attrib['capAttName'],end_get),
                      'return_value = {0}'.format(global_variables.ret_success)]
             block.append(self.create_code_block('line', lines))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
             else:
                 if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                self.create_code_block('if', first_if),
-                if_block,
-                self.create_code_block('line', last_line)]
+        code = []
+        if len(attributes) == 0:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('if', first_if),
+                    if_block,
+                    self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -194,8 +203,6 @@ class GenericAttributeFunctions():
             return
         elif self.is_list_of:
             return
-        elif attributes is None or len(attributes) == 0:
-            return
 
         # create comment parts
         params = []
@@ -217,7 +224,7 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& attributeName']
 
         # create the function implementation
-        first_line = ['bool value = {0}::isSetAttribute(attributeName)'.format(global_variables.baseClass)]
+        first_line = ['bool value = {0}::isSetAttribute(attributeName)'.format(self.base_class)]
         last_line = ['return value']
         first = True
         block = []
@@ -232,9 +239,14 @@ class GenericAttributeFunctions():
                 if_block = self.create_code_block('else_if', block)
             else:
                 if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+        code = []
+        if len(attributes) == 0:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -258,8 +270,6 @@ class GenericAttributeFunctions():
         if not self.is_cpp_api:
             return
         elif self.is_list_of:
-            return
-        elif attributes is None or len(attributes) == 0:
             return
 
         # create comment parts
@@ -288,7 +298,7 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& attributeName', '{0} value'.format(att_type)]
 
         # create the function implementation
-        first_line = ['int return_value = {0}::setAttribute(attributeName, value)'.format(global_variables.baseClass)]
+        first_line = ['int return_value = {0}::setAttribute(attributeName, value)'.format(self.base_class)]
         last_line = ['return return_value']
         first = True
         block = []
@@ -303,9 +313,13 @@ class GenericAttributeFunctions():
                 if_block = self.create_code_block('else_if', block)
             else:
                 if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+        if len(attributes) == 0:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -329,8 +343,6 @@ class GenericAttributeFunctions():
         if not self.is_cpp_api:
             return
         elif self.is_list_of:
-            return
-        elif attributes is None or len(attributes) == 0:
             return
 
         # create comment parts
@@ -358,7 +370,7 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& attributeName']
 
         # create the function implementation
-        first_line = ['int value = {0}::unsetAttribute(attributeName)'.format(global_variables.baseClass)]
+        first_line = ['int value = {0}::unsetAttribute(attributeName)'.format(self.base_class)]
         last_line = ['return value']
         first = True
         block = []
@@ -373,9 +385,14 @@ class GenericAttributeFunctions():
                 if_block = self.create_code_block('else_if', block)
             else:
                 if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+        code = []
+        if len(attributes) == 0:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -424,22 +441,24 @@ class GenericAttributeFunctions():
         initial = ''
         if att_type == 'bool':
             initial = 'true'
+            default = 'value == {0}'.format(initial)
         elif att_type == 'int' or att_type == 'unsigned int':
             initial = '2'
+            default = 'value == SBML_INT_MAX'
         elif att_type == 'double':
             initial = '3.6'
+            default = 'util_isNaN(value)'
         elif att_type == 'std::string':
             initial = '\"string\"'
+            default = 'value.empty()'
         if att_type == 'double':
             equals = 'util_isEqual(value, initialValue)'
             equals1 = 'util_isEqual(obj->get{0}(), initialValue)'.format(attrib['capAttName'])
             equals2 = 'util_isEqual(otherValue, initialValue)'
-            default = 'util_isEqual(value, {0})'.format(initial)
         else:
             equals = 'value == initialValue'
             equals1 = 'obj->get{0}() == initialValue'.format(attrib['capAttName'])
             equals2 = 'otherValue == initialValue'
-            default = 'value == {0}'.format(initial)
 
         # create the function implementation
         implementation = ['{0} *obj = new {0}(3,1)'.format(self.class_name),

@@ -371,6 +371,16 @@ public:
   virtual int getItemTypeCode() const;
 
 
+
+
+  #ifndef SWIG
+
+
+
+
+  #endif /* !SWIG */
+
+
 protected:
 
 

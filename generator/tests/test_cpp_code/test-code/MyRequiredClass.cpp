@@ -1743,6 +1743,80 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::getAttribute(const std::string& attributeName,
+                              const char* value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "unit")
+  {
+    value = getUnit().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref1")
+  {
+    value = getRef1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref2")
+  {
+    value = getRef2().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "refUnit")
+  {
+    value = getRefUnit().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "correctId")
+  {
+    value = getCorrectId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "metaid")
+  {
+    value = getMetaid().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "metaid1")
+  {
+    value = getMetaid1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "metaidref1")
+  {
+    value = getMetaidref1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate returning @c true if this MyRequiredClass's attribute
  * "attributeName" is set.
  */
@@ -1960,6 +2034,65 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
 int
 MyRequiredClass::setAttribute(const std::string& attributeName,
                               const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "unit")
+  {
+    return_value = setUnit(value);
+  }
+  else if (attributeName == "ref1")
+  {
+    return_value = setRef1(value);
+  }
+  else if (attributeName == "ref2")
+  {
+    return_value = setRef2(value);
+  }
+  else if (attributeName == "refUnit")
+  {
+    return_value = setRefUnit(value);
+  }
+  else if (attributeName == "correctId")
+  {
+    return_value = setCorrectId(value);
+  }
+  else if (attributeName == "metaid")
+  {
+    return_value = setMetaid(value);
+  }
+  else if (attributeName == "metaid1")
+  {
+    return_value = setMetaid1(value);
+  }
+  else if (attributeName == "metaidref1")
+  {
+    return_value = setMetaidref1(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setAttribute(const std::string& attributeName,
+                              const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

@@ -1363,6 +1363,80 @@ MyTestClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this MyTestClass.
+ */
+int
+MyTestClass::getAttribute(const std::string& attributeName,
+                          const char* value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "unit")
+  {
+    value = getUnit().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref1")
+  {
+    value = getRef1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "ref2")
+  {
+    value = getRef2().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "refUnit")
+  {
+    value = getRefUnit().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "correctId")
+  {
+    value = getCorrectId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idRef")
+  {
+    value = getIdRef().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idref1")
+  {
+    value = getIdref1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "idref2")
+  {
+    value = getIdref2().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate returning @c true if this MyTestClass's attribute "attributeName"
  * is set.
  */
@@ -1548,6 +1622,64 @@ MyTestClass::setAttribute(const std::string& attributeName,
 int
 MyTestClass::setAttribute(const std::string& attributeName,
                           const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "unit")
+  {
+    return_value = setUnit(value);
+  }
+  else if (attributeName == "ref1")
+  {
+    return_value = setRef1(value);
+  }
+  else if (attributeName == "ref2")
+  {
+    return_value = setRef2(value);
+  }
+  else if (attributeName == "refUnit")
+  {
+    return_value = setRefUnit(value);
+  }
+  else if (attributeName == "correctId")
+  {
+    return_value = setCorrectId(value);
+  }
+  else if (attributeName == "idRef")
+  {
+    return_value = setIdRef(value);
+  }
+  else if (attributeName == "idref1")
+  {
+    return_value = setIdref1(value);
+  }
+  else if (attributeName == "idref2")
+  {
+    return_value = setIdref2(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this MyTestClass.
+ */
+int
+MyTestClass::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

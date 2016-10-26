@@ -408,6 +408,16 @@ public:
   /** @endcond */
 
 
+
+
+  #ifndef SWIG
+
+
+
+
+  #endif /* !SWIG */
+
+
   /**
    * Returns the first child element that has the given @p id in the model-wide
    * SId namespace, or @c NULL if no such object is found.

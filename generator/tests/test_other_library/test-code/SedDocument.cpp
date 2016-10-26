@@ -537,6 +537,23 @@ SedDocument::connectToChild()
  * Gets the value of the "attributeName" attribute of this SedDocument.
  */
 int
+SedDocument::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
 SedDocument::getAttribute(const std::string& attributeName, int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -556,6 +573,78 @@ SedDocument::getAttribute(const std::string& attributeName, int& value) const
     value = getVersion();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::getAttribute(const std::string& attributeName,
+                          double& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::getAttribute(const std::string& attributeName,
+                          unsigned int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::getAttribute(const std::string& attributeName,
+                          std::string& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::getAttribute(const std::string& attributeName,
+                          const char* value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
 
   return return_value;
 }
@@ -597,6 +686,23 @@ SedDocument::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this SedDocument.
  */
 int
+SedDocument::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
 SedDocument::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -609,6 +715,76 @@ SedDocument::setAttribute(const std::string& attributeName, int value)
   {
     return_value = setVersion(value);
   }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::setAttribute(const std::string& attributeName,
+                          unsigned int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::setAttribute(const std::string& attributeName,
+                          const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedDocument.
+ */
+int
+SedDocument::setAttribute(const std::string& attributeName, const char* value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
 
   return return_value;
 }

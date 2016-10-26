@@ -338,7 +338,7 @@ int
 SedRepeatedTask::getAttribute(const std::string& attributeName,
                               bool& value) const
 {
-  int return_value = SedBase::getAttribute(attributeName, value);
+  int return_value = SedTask::getAttribute(attributeName, value);
 
   if (return_value == LIBSEDML_OPERATION_SUCCESS)
   {
@@ -365,9 +365,63 @@ SedRepeatedTask::getAttribute(const std::string& attributeName,
  */
 int
 SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              int& value) const
+{
+  int return_value = SedTask::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              double& value) const
+{
+  int return_value = SedTask::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              unsigned int& value) const
+{
+  int return_value = SedTask::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
                               std::string& value) const
 {
-  int return_value = SedBase::getAttribute(attributeName, value);
+  int return_value = SedTask::getAttribute(attributeName, value);
 
   if (return_value == LIBSEDML_OPERATION_SUCCESS)
   {
@@ -390,13 +444,42 @@ SedRepeatedTask::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::getAttribute(const std::string& attributeName,
+                              const char* value) const
+{
+  int return_value = SedTask::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "rangeId")
+  {
+    value = getRangeId().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Predicate returning @c true if this SedRepeatedTask's attribute
  * "attributeName" is set.
  */
 bool
 SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SedBase::isSetAttribute(attributeName);
+  bool value = SedTask::isSetAttribute(attributeName);
 
   if (attributeName == "rangeId")
   {
@@ -422,7 +505,7 @@ SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
 int
 SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
 {
-  int return_value = SedBase::setAttribute(attributeName, value);
+  int return_value = SedTask::setAttribute(attributeName, value);
 
   if (attributeName == "resetModel")
   {
@@ -442,10 +525,85 @@ SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
  * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
  */
 int
+SedRepeatedTask::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedTask::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedTask::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::setAttribute(const std::string& attributeName,
+                              unsigned int value)
+{
+  int return_value = SedTask::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
 SedRepeatedTask::setAttribute(const std::string& attributeName,
                               const std::string& value)
 {
-  int return_value = SedBase::setAttribute(attributeName, value);
+  int return_value = SedTask::setAttribute(attributeName, value);
+
+  if (attributeName == "rangeId")
+  {
+    return_value = setRangeId(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::setAttribute(const std::string& attributeName,
+                              const char* value)
+{
+  int return_value = SedTask::setAttribute(attributeName, value);
 
   if (attributeName == "rangeId")
   {
@@ -467,7 +625,7 @@ SedRepeatedTask::setAttribute(const std::string& attributeName,
 int
 SedRepeatedTask::unsetAttribute(const std::string& attributeName)
 {
-  int value = SedBase::unsetAttribute(attributeName);
+  int value = SedTask::unsetAttribute(attributeName);
 
   if (attributeName == "rangeId")
   {

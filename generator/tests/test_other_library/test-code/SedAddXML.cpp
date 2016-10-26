@@ -324,6 +324,249 @@ SedAddXML::connectToChild()
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName, double& value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName,
+                        unsigned int& value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName,
+                        std::string& value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::getAttribute(const std::string& attributeName,
+                        const char* value) const
+{
+  int return_value = SedChange::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Predicate returning @c true if this SedAddXML's attribute "attributeName" is
+ * set.
+ */
+bool
+SedAddXML::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = SedChange::isSetAttribute(attributeName);
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName, unsigned int value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName,
+                        const std::string& value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::setAttribute(const std::string& attributeName, const char* value)
+{
+  int return_value = SedChange::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Unsets the value of the "attributeName" attribute of this SedAddXML.
+ */
+int
+SedAddXML::unsetAttribute(const std::string& attributeName)
+{
+  int value = SedChange::unsetAttribute(attributeName);
+
+  return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*

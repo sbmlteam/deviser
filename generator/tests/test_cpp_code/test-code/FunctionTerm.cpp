@@ -438,6 +438,59 @@ FunctionTerm::enablePackageInternal(const std::string& pkgURI,
  */
 int
 FunctionTerm::getAttribute(const std::string& attributeName,
+                           bool& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::getAttribute(const std::string& attributeName,
+                           double& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::getAttribute(const std::string& attributeName,
                            unsigned int& value) const
 {
   int return_value = SBase::getAttribute(attributeName, value);
@@ -452,6 +505,42 @@ FunctionTerm::getAttribute(const std::string& attributeName,
     value = getResultLevel();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::getAttribute(const std::string& attributeName,
+                           std::string& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::getAttribute(const std::string& attributeName,
+                           const char* value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
 
   return return_value;
 }
@@ -489,6 +578,57 @@ FunctionTerm::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this FunctionTerm.
  */
 int
+FunctionTerm::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
 FunctionTerm::setAttribute(const std::string& attributeName,
                            unsigned int value)
 {
@@ -498,6 +638,42 @@ FunctionTerm::setAttribute(const std::string& attributeName,
   {
     return_value = setResultLevel(value);
   }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::setAttribute(const std::string& attributeName,
+                           const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this FunctionTerm.
+ */
+int
+FunctionTerm::setAttribute(const std::string& attributeName,
+                           const char* value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
 
   return return_value;
 }

@@ -383,48 +383,44 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         uint_atts = attributes['uint_atts']
         string_atts = attributes['string_atts']
 
-        if len(bool_atts) > 0:
-            code = attrib_functions.write_get(bool_atts, 'bool')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_get(bool_atts, 'bool')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(int_atts) > 0:
-            code = attrib_functions.write_get(int_atts, 'int')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_get(int_atts, 'int')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(double_atts) > 0:
-            code = attrib_functions.write_get(double_atts, 'double')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_get(double_atts, 'double')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(uint_atts) > 0:
-            code = attrib_functions.write_get(uint_atts, 'unsigned int')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_get(uint_atts, 'unsigned int')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(string_atts) > 0:
-            code = attrib_functions.write_get(string_atts, 'std::string')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_get(string_atts, 'std::string')
+        self.write_function_implementation(code, exclude=True)
+
+        code = attrib_functions.write_get(string_atts, 'const char*')
+        self.write_function_implementation(code, exclude=True)
 
         code = attrib_functions.write_is_set(query.get_unique_attributes(self.class_attributes))
         self.write_function_implementation(code, exclude=True)
 
-        if len(bool_atts) > 0:
-            code = attrib_functions.write_set(bool_atts, 'bool')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_set(bool_atts, 'bool')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(int_atts) > 0:
-            code = attrib_functions.write_set(int_atts, 'int')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_set(int_atts, 'int')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(double_atts) > 0:
-            code = attrib_functions.write_set(double_atts, 'double')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_set(double_atts, 'double')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(uint_atts) > 0:
-            code = attrib_functions.write_set(uint_atts, 'unsigned int')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_set(uint_atts, 'unsigned int')
+        self.write_function_implementation(code, exclude=True)
 
-        if len(string_atts) > 0:
-            code = attrib_functions.write_set(string_atts, 'const std::string&')
-            self.write_function_implementation(code, exclude=True)
+        code = attrib_functions.write_set(string_atts, 'const std::string&')
+        self.write_function_implementation(code, exclude=True)
+
+        code = attrib_functions.write_set(string_atts, 'const char*')
+        self.write_function_implementation(code, exclude=True)
 
         code = attrib_functions.write_unset(query.get_unique_attributes(self.class_attributes))
         self.write_function_implementation(code, exclude=True)

@@ -590,6 +590,75 @@ SedModel::connectToChild()
  * Gets the value of the "attributeName" attribute of this SedModel.
  */
 int
+SedModel::getAttribute(const std::string& attributeName, bool& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::getAttribute(const std::string& attributeName, int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::getAttribute(const std::string& attributeName, double& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::getAttribute(const std::string& attributeName,
+                       unsigned int& value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedModel.
+ */
+int
 SedModel::getAttribute(const std::string& attributeName,
                        std::string& value) const
 {
@@ -618,6 +687,50 @@ SedModel::getAttribute(const std::string& attributeName,
   else if (attributeName == "source")
   {
     value = getSource();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::getAttribute(const std::string& attributeName,
+                       const char* value) const
+{
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "language")
+  {
+    value = getLanguage().c_str();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "source")
+  {
+    value = getSource().c_str();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -669,8 +782,110 @@ SedModel::isSetAttribute(const std::string& attributeName) const
  * Sets the value of the "attributeName" attribute of this SedModel.
  */
 int
+SedModel::setAttribute(const std::string& attributeName, bool value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::setAttribute(const std::string& attributeName, int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::setAttribute(const std::string& attributeName, unsigned int value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedModel.
+ */
+int
 SedModel::setAttribute(const std::string& attributeName,
                        const std::string& value)
+{
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "language")
+  {
+    return_value = setLanguage(value);
+  }
+  else if (attributeName == "source")
+  {
+    return_value = setSource(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this SedModel.
+ */
+int
+SedModel::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 

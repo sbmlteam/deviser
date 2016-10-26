@@ -1193,6 +1193,41 @@ Fred::getAttribute(const std::string& attributeName, int& value) const
  * Gets the value of the "attributeName" attribute of this Fred.
  */
 int
+Fred::getAttribute(const std::string& attributeName, double& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Fred.
+ */
+int
+Fred::getAttribute(const std::string& attributeName,
+                   unsigned int& value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Fred.
+ */
+int
 Fred::getAttribute(const std::string& attributeName, std::string& value) const
 {
   int return_value = SBase::getAttribute(attributeName, value);
@@ -1210,6 +1245,39 @@ Fred::getAttribute(const std::string& attributeName, std::string& value) const
   else if (attributeName == "str")
   {
     value = getStr();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Gets the value of the "attributeName" attribute of this Fred.
+ */
+int
+Fred::getAttribute(const std::string& attributeName, const char* value) const
+{
+  int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "id")
+  {
+    value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "str")
+  {
+    value = getStr().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1308,7 +1376,67 @@ Fred::setAttribute(const std::string& attributeName, int value)
  * Sets the value of the "attributeName" attribute of this Fred.
  */
 int
+Fred::setAttribute(const std::string& attributeName, double value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Fred.
+ */
+int
+Fred::setAttribute(const std::string& attributeName, unsigned int value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Fred.
+ */
+int
 Fred::setAttribute(const std::string& attributeName, const std::string& value)
+{
+  int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "str")
+  {
+    return_value = setStr(value);
+  }
+
+  return return_value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the value of the "attributeName" attribute of this Fred.
+ */
+int
+Fred::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

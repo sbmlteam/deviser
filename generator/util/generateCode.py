@@ -83,8 +83,8 @@ def generate_other_library_code(name, language, overwrite, ob):
         print('Either delete what directory structure is there or')
         print('re run with overwrite=True')
         return False
-    for working_class in ob['baseElements']:
-        strFunctions.prefix_classes(working_class)
+    # for working_class in ob['baseElements']:
+    #     strFunctions.prefix_classes(working_class)
     generate_other_library_code_files(name, ob)
     generate_bindings_files_for_other(name, ob)
     generate_cmake_files_for_other(name, ob)

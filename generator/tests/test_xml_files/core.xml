@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="Core" fullname="aaa" number="100" offset="100000" version="1" required="false">
-  <language name="SBML" baseClass="SBase" documentClass="SBMLDocument" prefix="SBML" libraryName="Libsbml" isPackage="false">
+  <language name="" baseClass="SBase" documentClass="SBMLDocument" prefix="" libraryName="Libsbml" isPackage="false">
     <library_version major="1" minor="0" revision="0"/>
     <language_versions>
       <version level="1" version="1" namespace="http://sed-ml.org/"/>
@@ -36,7 +36,7 @@
             <attribute name="multiplier" required="true" type="double" abstract="false"/>
             <attribute name="scale" required="true" type="int" abstract="false"/>
             <attribute name="exponent" required="true" type="double" abstract="false"/>
-            <attribute name="offset" required="false" type="integer" abstract="false"/>
+            <attribute name="offset" required="false" type="double" abstract="false"/>
           </attributes>
         </element>
         <element name="Species" typeCode="SBML_CORE_SPECIES" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
@@ -190,6 +190,10 @@
             <attribute name="event" required="false" type="lo_element" element="Event" abstract="false"/>
             <attribute name="rule" required="false" type="lo_element" element="Rule" abstract="true"/>
           </attributes>
+        </element>
+        <element name="CompartmentType" typeCode="SBML_CORE_COMP" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
+        </element>
+        <element name="SpeciesType" typeCode="SBML_CORE_ST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
         </element>
       </elements>
     </pkgVersion>
