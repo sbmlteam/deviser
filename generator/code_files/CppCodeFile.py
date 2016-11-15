@@ -425,6 +425,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = attrib_functions.write_unset(query.get_unique_attributes(self.class_attributes))
         self.write_function_implementation(code, exclude=True)
 
+        code = attrib_functions.write_create_object()
+        self.write_function_implementation(code, exclude=True)
     ########################################################################
 
     # Functions for writing general functions

@@ -70,7 +70,8 @@ class GenericAttributeFunctions():
                 self.object_child_name = self.child_name + '_t'
 
             self.attributes = class_object['class_attributes']
-            self.child_elements = class_object['child_elements']
+            self.elements = query.get_child_elements(class_object['child_elements'], class_object['child_lo_elements'])
+
             if 'num_versions' in class_object and class_object['num_versions'] > 1:
                 self.has_multiple_versions = True
             else:
@@ -393,6 +394,73 @@ class GenericAttributeFunctions():
             code = [self.create_code_block('line', first_line),
                     if_block,
                     self.create_code_block('line', last_line)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    ########################################################################
+
+    # Functions for writing creat object functions
+
+    # function to write create functions
+    def write_create_object(self):
+        if not self.is_cpp_api:
+            return
+        elif self.is_list_of:
+            return
+
+        if len(self.elements) == 0:
+            return
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Creates and returns an new "elementName" object in this {0}.' \
+            .format(self.class_name)
+        params.append('@param objectName, the name of the element to create.')
+
+        return_lines.append('pointer to the object created.')
+
+        # create the function declaration
+        function = 'createObject'
+        return_type = 'SBase*'
+
+
+        arguments = ['const std::string& elementName']
+
+        code = []
+        # create the function implementation
+        first_line = ['{0}* obj = NULL'.format(self.base_class)]
+        last_line = ['return obj']
+        first = True
+        block = []
+        if_block = []
+
+        for elem in self.elements:
+            if not first:
+                block.append('else if')
+            else:
+                first = False
+            block.append('elementName == \"{0}\"'.format(elem))
+            block.append('return create{0}()'.format(strFunctions.upper_first(elem)))
+            if len(block) > 2:
+                if_block = self.create_code_block('else_if', block)
+            else:
+                if_block = self.create_code_block('if', block)
+        code = [self.create_code_block('line', first_line),
+                if_block,
+                self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,

@@ -593,6 +593,28 @@ CaOmexManifest::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this CaOmexManifest.
+ */
+SBase*
+CaOmexManifest::createObject(const std::string& elementName)
+{
+  CaBase* obj = NULL;
+
+  if (elementName == "content")
+  {
+    return createContent();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

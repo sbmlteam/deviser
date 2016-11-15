@@ -1035,6 +1035,32 @@ SedDataGenerator::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this SedDataGenerator.
+ */
+SBase*
+SedDataGenerator::createObject(const std::string& elementName)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "variable")
+  {
+    return createVariable();
+  }
+  else if (elementName == "parameter")
+  {
+    return createParameter();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

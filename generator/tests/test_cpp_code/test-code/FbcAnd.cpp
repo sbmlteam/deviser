@@ -691,6 +691,28 @@ FbcAnd::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this FbcAnd.
+ */
+SBase*
+FbcAnd::createObject(const std::string& elementName)
+{
+  Association* obj = NULL;
+
+  if (elementName == "association")
+  {
+    return createAssociation();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

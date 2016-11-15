@@ -486,6 +486,17 @@ def get_children(name, root, reqd_only):
 
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
+# get a list of names of child elements
+def get_child_elements(elements, lo_elements):
+    child_elements = []
+    for elem in elements:
+        if elem['element'] != 'ASTNode' and elem['element'] != 'XMLNode':
+            child_elements.append(strFunctions.remove_prefix(elem['name']))
+    for elem in lo_elements:
+        if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
+            child_elements.append(strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])))
+    return child_elements
+
 # insert a listOfParent into the tree
 def insert_list_of(original, child_name, root):
     child = get_class(child_name, root)

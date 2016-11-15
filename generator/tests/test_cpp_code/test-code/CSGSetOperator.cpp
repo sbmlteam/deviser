@@ -1156,6 +1156,28 @@ CSGSetOperator::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this CSGSetOperator.
+ */
+SBase*
+CSGSetOperator::createObject(const std::string& elementName)
+{
+  CSGNode* obj = NULL;
+
+  if (elementName == "csgNode")
+  {
+    return createCsgNode();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

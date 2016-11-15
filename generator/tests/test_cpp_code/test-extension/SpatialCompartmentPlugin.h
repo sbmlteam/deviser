@@ -546,6 +546,22 @@ public:
 
 
 
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Creates and returns an new "elementName" object in this
+   * SpatialCompartmentPlugin.
+   *
+   * @param objectName, the name of the element to create.
+   *
+   * pointer to the object created.
+   */
+  virtual SBase* createObject(const std::string& elementName);
+
+  /** @endcond */
+
+
+
 
   #endif /* !SWIG */
 

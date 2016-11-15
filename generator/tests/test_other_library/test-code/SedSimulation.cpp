@@ -780,6 +780,28 @@ SedSimulation::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this SedSimulation.
+ */
+SBase*
+SedSimulation::createObject(const std::string& elementName)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "algorithm")
+  {
+    return createAlgorithm();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

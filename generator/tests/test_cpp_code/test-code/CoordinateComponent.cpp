@@ -1098,6 +1098,32 @@ CoordinateComponent::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this CoordinateComponent.
+ */
+SBase*
+CoordinateComponent::createObject(const std::string& elementName)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "boundaryMin")
+  {
+    return createBoundaryMin();
+  }
+  else if (elementName == "boundaryMax")
+  {
+    return createBoundaryMax();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

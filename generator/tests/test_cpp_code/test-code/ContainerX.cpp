@@ -651,6 +651,28 @@ ContainerX::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this ContainerX.
+ */
+SBase*
+ContainerX::createObject(const std::string& elementName)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "fred")
+  {
+    return createFred();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

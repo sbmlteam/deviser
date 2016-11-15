@@ -837,6 +837,32 @@ ParametricGeometry::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this ParametricGeometry.
+ */
+SBase*
+ParametricGeometry::createObject(const std::string& elementName)
+{
+  GeometryDefinition* obj = NULL;
+
+  if (elementName == "spatialPoints")
+  {
+    return createSpatialPoints();
+  }
+  else if (elementName == "parametricObject")
+  {
+    return createParametricObject();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

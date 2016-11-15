@@ -764,6 +764,28 @@ Uncertainty::unsetAttribute(const std::string& attributeName)
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Creates and returns an new "elementName" object in this Uncertainty.
+ */
+SBase*
+Uncertainty::createObject(const std::string& elementName)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "uncertML")
+  {
+    return createUncertML();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

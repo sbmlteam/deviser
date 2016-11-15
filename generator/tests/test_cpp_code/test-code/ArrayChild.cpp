@@ -746,6 +746,28 @@ ArrayChild::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this ArrayChild.
+ */
+SBase*
+ArrayChild::createObject(const std::string& elementName)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "unit")
+  {
+    return createUnit();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

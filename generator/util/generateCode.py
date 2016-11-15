@@ -308,6 +308,7 @@ def generate_other_library_code_files(name, ob):
     common_dir = '{0}{1}src{1}{2}{1}common'.format(name, os.sep, language)
     binding_dir = '{0}{1}src{1}bindings'.format(name, os.sep)
     os.chdir(main_dir)
+# take these lines out to write without prefix
     for working_class in ob['baseElements']:
         strFunctions.prefix_classes(working_class)
     # this populates the error structures

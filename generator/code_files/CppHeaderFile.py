@@ -450,6 +450,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = attrib_functions.write_unset(query.get_unique_attributes(self.class_attributes))
         self.write_function_declaration(code, exclude=True)
 
+        code = attrib_functions.write_create_object()
+        self.write_function_declaration(code, exclude=True)
+
         self.write_swig_end()
 
     ########################################################################

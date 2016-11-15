@@ -1493,6 +1493,40 @@ Fred::unsetAttribute(const std::string& attributeName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this Fred.
+ */
+SBase*
+Fred::createObject(const std::string& elementName)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "other")
+  {
+    return createOther();
+  }
+  else if (elementName == "other1")
+  {
+    return createOther1();
+  }
+  else if (elementName == "other2")
+  {
+    return createOther2();
+  }
+  else if (elementName == "otherLO")
+  {
+    return createOtherLO();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.
