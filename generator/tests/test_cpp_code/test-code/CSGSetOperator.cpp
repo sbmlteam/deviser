@@ -921,7 +921,12 @@ CSGSetOperator::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "complementA")
+  if (attributeName == "operationType")
+  {
+    value = getOperationTypeAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "complementA")
   {
     value = getComplementA();
     return_value = LIBSBML_OPERATION_SUCCESS;
@@ -955,7 +960,12 @@ CSGSetOperator::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "complementA")
+  if (attributeName == "operationType")
+  {
+    value = getOperationTypeAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "complementA")
   {
     value = getComplementA().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
@@ -1084,7 +1094,11 @@ CSGSetOperator::setAttribute(const std::string& attributeName,
 {
   int return_value = CSGNode::setAttribute(attributeName, value);
 
-  if (attributeName == "complementA")
+  if (attributeName == "operationType")
+  {
+    return_value = setOperationType(value);
+  }
+  else if (attributeName == "complementA")
   {
     return_value = setComplementA(value);
   }
@@ -1111,7 +1125,11 @@ CSGSetOperator::setAttribute(const std::string& attributeName,
 {
   int return_value = CSGNode::setAttribute(attributeName, value);
 
-  if (attributeName == "complementA")
+  if (attributeName == "operationType")
+  {
+    return_value = setOperationType(value);
+  }
+  else if (attributeName == "complementA")
   {
     return_value = setComplementA(value);
   }

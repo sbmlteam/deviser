@@ -657,6 +657,11 @@ Output::getAttribute(const std::string& attributeName,
     value = getQualitativeSpecies();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "transitionEffect")
+  {
+    value = getTransitionEffectAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
   else if (attributeName == "name")
   {
     value = getName();
@@ -694,6 +699,11 @@ Output::getAttribute(const std::string& attributeName,
   else if (attributeName == "qualitativeSpecies")
   {
     value = getQualitativeSpecies().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "transitionEffect")
+  {
+    value = getTransitionEffectAsString().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "name")
@@ -840,6 +850,10 @@ Output::setAttribute(const std::string& attributeName,
   {
     return_value = setQualitativeSpecies(value);
   }
+  else if (attributeName == "transitionEffect")
+  {
+    return_value = setTransitionEffect(value);
+  }
   else if (attributeName == "name")
   {
     return_value = setName(value);
@@ -869,6 +883,10 @@ Output::setAttribute(const std::string& attributeName, const char* value)
   else if (attributeName == "qualitativeSpecies")
   {
     return_value = setQualitativeSpecies(value);
+  }
+  else if (attributeName == "transitionEffect")
+  {
+    return_value = setTransitionEffect(value);
   }
   else if (attributeName == "name")
   {

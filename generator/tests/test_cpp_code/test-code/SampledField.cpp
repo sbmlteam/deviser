@@ -1027,6 +1027,21 @@ SampledField::getAttribute(const std::string& attributeName,
     value = getId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "dataType")
+  {
+    value = getDataTypeAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "interpolationType")
+  {
+    value = getInterpolationTypeAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "compression")
+  {
+    value = getCompressionAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -1054,6 +1069,21 @@ SampledField::getAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "dataType")
+  {
+    value = getDataTypeAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "interpolationType")
+  {
+    value = getInterpolationTypeAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "compression")
+  {
+    value = getCompressionAsString().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1220,6 +1250,18 @@ SampledField::setAttribute(const std::string& attributeName,
   {
     return_value = setId(value);
   }
+  else if (attributeName == "dataType")
+  {
+    return_value = setDataType(value);
+  }
+  else if (attributeName == "interpolationType")
+  {
+    return_value = setInterpolationType(value);
+  }
+  else if (attributeName == "compression")
+  {
+    return_value = setCompression(value);
+  }
 
   return return_value;
 }
@@ -1242,6 +1284,18 @@ SampledField::setAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     return_value = setId(value);
+  }
+  else if (attributeName == "dataType")
+  {
+    return_value = setDataType(value);
+  }
+  else if (attributeName == "interpolationType")
+  {
+    return_value = setInterpolationType(value);
+  }
+  else if (attributeName == "compression")
+  {
+    return_value = setCompression(value);
   }
 
   return return_value;

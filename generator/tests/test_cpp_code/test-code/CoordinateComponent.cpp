@@ -865,6 +865,11 @@ CoordinateComponent::getAttribute(const std::string& attributeName,
     value = getId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "type")
+  {
+    value = getTypeAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
   else if (attributeName == "unit")
   {
     value = getUnit();
@@ -897,6 +902,11 @@ CoordinateComponent::getAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "type")
+  {
+    value = getTypeAsString().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "unit")
@@ -1029,6 +1039,10 @@ CoordinateComponent::setAttribute(const std::string& attributeName,
   {
     return_value = setId(value);
   }
+  else if (attributeName == "type")
+  {
+    return_value = setType(value);
+  }
   else if (attributeName == "unit")
   {
     return_value = setUnit(value);
@@ -1055,6 +1069,10 @@ CoordinateComponent::setAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     return_value = setId(value);
+  }
+  else if (attributeName == "type")
+  {
+    return_value = setType(value);
   }
   else if (attributeName == "unit")
   {

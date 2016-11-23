@@ -164,8 +164,12 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('attributeName == \"{0}\"'.format(attrib['name']))
-            lines = ['value = get{0}{1}'.format(attrib['capAttName'],end_get),
-                     'return_value = {0}'.format(global_variables.ret_success)]
+            if attrib['attType'] == 'enum':
+                lines = ['value = get{0}AsString{1}'.format(attrib['capAttName'],end_get),
+                         'return_value = {0}'.format(global_variables.ret_success)]
+            else:
+                lines = ['value = get{0}{1}'.format(attrib['capAttName'],end_get),
+                         'return_value = {0}'.format(global_variables.ret_success)]
             block.append(self.create_code_block('line', lines))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)

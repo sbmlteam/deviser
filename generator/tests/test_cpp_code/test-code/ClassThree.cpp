@@ -639,6 +639,32 @@ ClassThree::getAttribute(const std::string& attributeName,
 {
   int return_value = SBase::getAttribute(attributeName, value);
 
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "number")
+  {
+    value = getNumberAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getNameAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "badName")
+  {
+    value = getBadNameAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "otherNum")
+  {
+    value = getOtherNumAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -656,6 +682,32 @@ ClassThree::getAttribute(const std::string& attributeName,
                          const char* value) const
 {
   int return_value = SBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSBML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "number")
+  {
+    value = getNumberAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getNameAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "badName")
+  {
+    value = getBadNameAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "otherNum")
+  {
+    value = getOtherNumAsString().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -778,6 +830,23 @@ ClassThree::setAttribute(const std::string& attributeName,
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
+  if (attributeName == "number")
+  {
+    return_value = setNumber(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "badName")
+  {
+    return_value = setBadName(value);
+  }
+  else if (attributeName == "otherNum")
+  {
+    return_value = setOtherNum(value);
+  }
+
   return return_value;
 }
 
@@ -794,6 +863,23 @@ int
 ClassThree::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
+
+  if (attributeName == "number")
+  {
+    return_value = setNumber(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "badName")
+  {
+    return_value = setBadName(value);
+  }
+  else if (attributeName == "otherNum")
+  {
+    return_value = setOtherNum(value);
+  }
 
   return return_value;
 }

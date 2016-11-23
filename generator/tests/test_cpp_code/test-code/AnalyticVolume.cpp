@@ -746,6 +746,11 @@ AnalyticVolume::getAttribute(const std::string& attributeName,
     value = getId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "functionType")
+  {
+    value = getFunctionTypeAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
   else if (attributeName == "domainType")
   {
     value = getDomainType();
@@ -778,6 +783,11 @@ AnalyticVolume::getAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     value = getId().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "functionType")
+  {
+    value = getFunctionTypeAsString().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "domainType")
@@ -917,6 +927,10 @@ AnalyticVolume::setAttribute(const std::string& attributeName,
   {
     return_value = setId(value);
   }
+  else if (attributeName == "functionType")
+  {
+    return_value = setFunctionType(value);
+  }
   else if (attributeName == "domainType")
   {
     return_value = setDomainType(value);
@@ -943,6 +957,10 @@ AnalyticVolume::setAttribute(const std::string& attributeName,
   if (attributeName == "id")
   {
     return_value = setId(value);
+  }
+  else if (attributeName == "functionType")
+  {
+    return_value = setFunctionType(value);
   }
   else if (attributeName == "domainType")
   {

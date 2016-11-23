@@ -579,7 +579,7 @@ def sort_attributes(all_attributes):
             uint_atts.append(attrib)
         elif att_type == 'integer':
             int_atts.append(attrib)
-        elif att_type == 'string':
+        elif att_type == 'string' or att_type == 'enum':
             string_atts.append(attrib)
     return dict({'double_atts': double_atts,
                  'bool_atts': bool_atts,

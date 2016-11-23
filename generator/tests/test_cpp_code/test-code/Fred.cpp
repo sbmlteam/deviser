@@ -1247,6 +1247,11 @@ Fred::getAttribute(const std::string& attributeName, std::string& value) const
     value = getStr();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "kind")
+  {
+    value = getKindAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -1278,6 +1283,11 @@ Fred::getAttribute(const std::string& attributeName, const char* value) const
   else if (attributeName == "str")
   {
     value = getStr().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "kind")
+  {
+    value = getKindAsString().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1422,6 +1432,10 @@ Fred::setAttribute(const std::string& attributeName, const std::string& value)
   {
     return_value = setStr(value);
   }
+  else if (attributeName == "kind")
+  {
+    return_value = setKind(value);
+  }
 
   return return_value;
 }
@@ -1447,6 +1461,10 @@ Fred::setAttribute(const std::string& attributeName, const char* value)
   else if (attributeName == "str")
   {
     return_value = setStr(value);
+  }
+  else if (attributeName == "kind")
+  {
+    return_value = setKind(value);
   }
 
   return return_value;
