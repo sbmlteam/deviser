@@ -205,6 +205,8 @@ class SetGetFunctions():
             code = self.get_c_attribute(attribute)
 
         # return the parts
+        if (attribute['name'] == 'id' or attribute['name'] == 'name'):
+            virtual = True
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -532,6 +534,9 @@ class SetGetFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts
+        virtual = False
+        if (attribute['name'] == 'id' or attribute['name'] == 'name'):
+            virtual = True
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -540,7 +545,7 @@ class SetGetFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': True,
-                     'virtual': False,
+                     'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
 
@@ -702,6 +707,9 @@ class SetGetFunctions():
             code = [self.create_code_block('line', implementation)]
 
         # return the parts
+        virtual = False
+        if (attribute['name'] == 'id' or attribute['name'] == 'name'):
+            virtual = True
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -710,7 +718,7 @@ class SetGetFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': False,
-                     'virtual': False,
+                     'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
 
@@ -1063,6 +1071,9 @@ class SetGetFunctions():
                                         self.invalid_obj)]
             code = [self.create_code_block('line', implementation)]
         # return the parts
+        virtual = False
+        if (attribute['name'] == 'id' or attribute['name'] == 'name'):
+            virtual = True
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -1071,7 +1082,7 @@ class SetGetFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': False,
-                     'virtual': False,
+                     'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
 

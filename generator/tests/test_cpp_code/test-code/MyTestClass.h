@@ -63,8 +63,6 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  std::string mId;
-  std::string mName;
   unsigned int mNum;
   bool mIsSetNum;
   unsigned int mNum2;
@@ -165,7 +163,7 @@ public:
    *
    * @return the value of the "id" attribute of this MyTestClass as a string.
    */
-  const std::string& getId() const;
+  virtual const std::string& getId() const;
 
 
   /**
@@ -173,7 +171,7 @@ public:
    *
    * @return the value of the "name" attribute of this MyTestClass as a string.
    */
-  const std::string& getName() const;
+  virtual const std::string& getName() const;
 
 
   /**
@@ -304,7 +302,7 @@ public:
    * @return @c true if this MyTestClass's "id" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetId() const;
+  virtual bool isSetId() const;
 
 
   /**
@@ -313,7 +311,7 @@ public:
    * @return @c true if this MyTestClass's "name" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetName() const;
+  virtual bool isSetName() const;
 
 
   /**
@@ -458,7 +456,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setId(const std::string& id);
+  virtual int setId(const std::string& id);
 
 
   /**
@@ -471,7 +469,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setName(const std::string& name);
+  virtual int setName(const std::string& name);
 
 
   /**
@@ -664,7 +662,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetId();
+  virtual int unsetId();
 
 
   /**
@@ -674,7 +672,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetName();
+  virtual int unsetName();
 
 
   /**

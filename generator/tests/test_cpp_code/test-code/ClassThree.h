@@ -64,7 +64,6 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   Enum_t mNumber;
-  Fred_t mName;
   Fred_t mBadName;
   Enum_t mOtherNum;
 
@@ -164,7 +163,7 @@ public:
    *
    * @return the value of the "name" attribute of this ClassThree as a Fred_t.
    */
-  Fred_t getName() const;
+  virtual Fred_t getName() const;
 
 
   /**
@@ -227,7 +226,7 @@ public:
    * @return @c true if this ClassThree's "name" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetName() const;
+  virtual bool isSetName() const;
 
 
   /**
@@ -286,7 +285,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setName(const Fred_t name);
+  virtual int setName(const Fred_t name);
 
 
   /**
@@ -371,7 +370,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetName();
+  virtual int unsetName();
 
 
   /**

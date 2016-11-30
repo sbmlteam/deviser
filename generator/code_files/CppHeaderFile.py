@@ -242,7 +242,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # function to write the data members
     def write_data_members(self, attributes):
-        names_written = []
+        names_written = ['mId', 'mName']
         for i in range(0, len(attributes)):
             name = attributes[i]['memberName']
             return_type = attributes[i]['attTypeCode']

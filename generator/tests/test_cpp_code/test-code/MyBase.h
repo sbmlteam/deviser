@@ -63,7 +63,6 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  std::string mId;
 
   /** @endcond */
 
@@ -141,7 +140,7 @@ public:
    *
    * @return the value of the "id" attribute of this MyBase as a string.
    */
-  const std::string& getId() const;
+  virtual const std::string& getId() const;
 
 
   /**
@@ -150,7 +149,7 @@ public:
    * @return @c true if this MyBase's "id" attribute has been set, otherwise @c
    * false is returned.
    */
-  bool isSetId() const;
+  virtual bool isSetId() const;
 
 
   /**
@@ -163,7 +162,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setId(const std::string& id);
+  virtual int setId(const std::string& id);
 
 
   /**
@@ -173,7 +172,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetId();
+  virtual int unsetId();
 
 
   /**
