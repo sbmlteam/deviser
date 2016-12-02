@@ -161,6 +161,9 @@ def main():
     name = 'qual'
     fail += run_xml_test(name)
 
+    name = 'spatial'
+    fail += run_xml_test(name)
+
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
     return fail

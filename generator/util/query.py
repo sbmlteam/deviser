@@ -450,7 +450,7 @@ def get_other_element_children(this_object, element):
     return other_children
 
 # get the child elements of the class name
-def get_children(name, root, reqd_only):
+def get_children(name, root, reqd_only, xml_name=''):
     child = get_class(name, root)
     if not child and name == 'ASTNode':
         return dict({'name': 'math', 'children': []})
@@ -461,14 +461,17 @@ def get_children(name, root, reqd_only):
             att_type = child['attribs'][i]['type']
             if att_type == 'element':
                 grandchildren = get_children(child['attribs'][i]['element'],
-                                             root, reqd_only)
+                                             root, reqd_only, child['attribs'][i]['xml_name'])
                 children.append(grandchildren)
             elif att_type == 'lo_element':
-                grandchildren = get_children(child['attribs'][i]['element'],
-                                             root, reqd_only)
-                if not reqd_only:
-                    grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
-                children.append(grandchildren)
+                if 'concrete' in child['attribs'][i] and len(child['attribs'][i]['concrete']) > 0:
+                    continue;
+                else:
+                    grandchildren = get_children(child['attribs'][i]['element'],
+                                                 root, reqd_only)
+                    if not reqd_only:
+                        grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+                    children.append(grandchildren)
             elif att_type == 'inline_lo_element':
                 grandchildren = get_children(child['attribs'][i]['element'],
                                              root, reqd_only)
@@ -484,6 +487,8 @@ def get_children(name, root, reqd_only):
         else:
             reqd_attribs.append(attrib)
 
+    if len(xml_name) > 0:
+        name = xml_name
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
 # get a list of names of child elements
@@ -541,7 +546,8 @@ def create_object_tree(pkg_object, reqd_only = True):
             children.append(grandchildren)
         branch = dict({'base': plugin['sbase'],
                        'ext': 'core',
-                       'children': children})
+                       'children': children,
+                       'attribs': plugin['attribs']})
         tree.append(branch)
     return tree
 

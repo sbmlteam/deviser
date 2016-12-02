@@ -66,17 +66,30 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.impl = getDOMImplementation()
 
         self.doc = None
+        self.model_element = None
 
     #########################################################################
     # main writing function
 
     def write_xml(self, tree, error_code=None):
         self.create_document(error_code)
-        for i in range(0, len(tree)):
-            element = self.create_top_object(tree[0])
+        num_plugins = len(tree)
+        model_index = self.get_model_index(tree, num_plugins)
+        if model_index == num_plugins:
+            # need to sort this
+            print('create model')
+        else:
+            element = self.create_top_object(tree[model_index])
             self.doc.documentElement.appendChild(element)
+
+        for i in range(0, num_plugins):
+            if i == model_index:
+                continue;
+            element = self.create_listof_object(tree[i])
+            if element:
+                self.doc.documentElement.childNodes[0].appendChild(element)
         str_xml = self.doc.toprettyxml(indent='    ', encoding='UTF-8')
-        lines = str_xml.split('\n')
+        lines = str_xml.decode('utf-8').split('\n')
         for line in lines:
             self.write_line_verbatim(line)
 
@@ -137,6 +150,16 @@ class BaseXMLFile(BaseFile.BaseFile):
         return element
 
 
+    def create_listof_object(self, tree):
+        name = strFunctions.lower_list_of_name_no_prefix(tree['base'])
+        if name == 'listOfReactions':
+            return None
+        lo_element = self.doc.createElement('{0}'.format(name))
+        element = self.create_object(tree)
+        lo_element.appendChild(element)
+        return lo_element
+
+
     def create_object(self, parent):
         if 'base' in parent:
             name = strFunctions.lower_first(parent['base'])
@@ -156,8 +179,18 @@ class BaseXMLFile(BaseFile.BaseFile):
             name = '{0}:{1}'.format(self.pkg, name)
 
         attribs = []
-        if 'attribs' in parent:
-            attribs = self.get_attributes(parent['attribs'], ext)
+        if 'attribs' in parent and len(parent['attribs']) > 0:
+            attrib = self.get_attributes(parent['attribs'], self.pkg)
+            if attrib and len(attrib) > 0:
+                attribs = attrib
+        if ext == 'core':
+            attrib = self.get_core_attributes(name)
+            if attrib and len(attrib) > 0:
+                if len(attribs) > 0:
+                    for att in attrib:
+                        attribs.append(att)
+                else:
+                    attribs = attrib
 
         return self.create_element(name, attribs, parent)
 
@@ -184,7 +217,7 @@ class BaseXMLFile(BaseFile.BaseFile):
     def get_sensible_value(self, attribute):
         value = ''
         att_type = attribute['type']
-        if att_type == 'boolean':
+        if att_type == 'boolean' or att_type == 'bool':
             value = 'false'
         elif query.is_number(att_type):
             value = '0'
@@ -205,6 +238,8 @@ class BaseXMLFile(BaseFile.BaseFile):
             att_type = attrib['type']
             if query.is_element(att_type):
                 continue
+            elif att_type == 'array' or att_type == 'vector':
+                continue
             if 'ext' in attrib:
                 pkg = attrib['ext']
             if pkg == 'core':
@@ -215,3 +250,66 @@ class BaseXMLFile(BaseFile.BaseFile):
             attrib_dict = dict({'name': name, 'value': value})
             attrib_list.append(attrib_dict)
         return attrib_list
+
+    def get_core_attributes(self, object):
+        attrib_list = []
+        attrib = dict()
+        if object == 'compartment':
+            name = 'id'
+            attrib['type'] = 'SId'
+            value = 'compartment'
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'constant'
+            attrib['type'] = 'boolean'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+        elif object == 'parameter':
+            name = 'id'
+            attrib['type'] = 'SId'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'constant'
+            attrib['type'] = 'boolean'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+        elif object == 'species':
+            name = 'id'
+            attrib['type'] = 'SId'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'constant'
+            attrib['type'] = 'boolean'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'boundaryCondition'
+            attrib['type'] = 'boolean'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'hasOnlySubstanceUnits'
+            attrib['type'] = 'boolean'
+            value = self.get_sensible_value(attrib)
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+            name = 'compartment'
+            attrib['type'] = 'SId'
+            value = 'compartment'
+            attrib_dict = dict({'name': name, 'value': value})
+            attrib_list.append(attrib_dict)
+        return attrib_list
+
+##################################################################################
+
+# helper functions
+
+    def get_model_index(self, tree, num):
+        for i in range(0, num):
+            if tree[i]['base'] == 'Model' and tree[i]['ext'] == 'core':
+                return i
+        return num
