@@ -1159,6 +1159,13 @@ class ProtectedFunctions():
                     'log->remove(UnknownCoreAttribute)',
                     'log->{0}{1}, {2}, details)'.format(self.error, core_err,
                                                         self.given_args)]
+            if self.is_plugin:
+                line += ['else if', 'log->getError(n)->getErrorId() == '
+                            'NotSchemaConformant',
+                    'const std::string details = log->getError(n)->getMessage()',
+                    'log->remove(NotSchemaConformant)',
+                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                                                        self.given_args)]
             if_err = self.create_code_block('else_if', line)
         else:
             line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error),
@@ -1251,6 +1258,7 @@ class ProtectedFunctions():
                 error = '{0}Unknown'.format(self.package)
         line = ['log->getNumErrors() == numErrs + 1 && log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
+                'log->{0}{1}, {2})'.format(self.error, error_bool, self.given_args)]
         if attribute['reqd']:
             line += ['else',
                      'std::string message = \"{0} attribute \'{1}\' is '
