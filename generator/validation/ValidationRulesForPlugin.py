@@ -217,7 +217,9 @@ class ValidationRulesForPlugin():
                                          rule_type)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'plugin': True, 'object': self.name, 'lo': False,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'attrib': attribute['name'], 'attrib_type': att_type})
 
     @staticmethod
     # write core attribute rule
@@ -329,7 +331,9 @@ class ValidationRulesForPlugin():
         tc = '{0}{1}AllowedAttributes'.format(self.up_package, self.name)
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
-                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': True, 'object': self.name, 'lo': False,
+                     'reqd': self.reqd_att, 'opt': self.opt_att})
 
     @staticmethod
     def write_package_object_rule(self):

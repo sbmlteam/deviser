@@ -188,7 +188,7 @@ class ValidationXMLFiles():
                                  'lo_child': loname}))
         elif tc.endswith('AllowedElements'):
             for element in rule['opt']:
-                if element['isListOf']:
+                if 'isListOf' in element and element['isListOf']:
                     name = element['listOfClassName']
                 else:
                     name = element['name']
@@ -196,7 +196,7 @@ class ValidationXMLFiles():
                                          'object': rule['object'],
                                          'child': name}))
             for element in rule['reqd']:
-                if element['isListOf']:
+                if 'isListOf' in element and element['isListOf']:
                     name = element['listOfClassName']
                 else:
                     name = element['name']
