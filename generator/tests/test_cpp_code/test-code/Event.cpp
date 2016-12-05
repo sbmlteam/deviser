@@ -1442,14 +1442,25 @@ Event::readAttributes(
   // useValuesFromTriggerTime bool (use = "required" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetUseValuesFromTriggerTime =
     attributes.readInto("useValuesFromTriggerTime", mUseValuesFromTriggerTime);
 
-  if (!mIsSetUseValuesFromTriggerTime)
+  if (mIsSetUseValuesFromTriggerTime == false)
   {
-    std::string message = "Core attribute 'useValuesFromTriggerTime' is missing "
-      "from the <Event> element.";
-    log->logError(CoreEventAllowedAttributes, level, version, message);
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(CoreEventUseValuesFromTriggerTimeMustBeBoolean, level,
+        version);
+    }
+    else
+    {
+      std::string message = "Core attribute 'useValuesFromTriggerTime' is "
+        "missing from the <Event> element.";
+      log->logError(CoreEventAllowedAttributes, level, version, message);
+    }
   }
 
   // 

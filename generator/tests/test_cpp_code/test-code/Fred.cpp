@@ -1870,7 +1870,19 @@ Fred::readAttributes(const XMLAttributes& attributes,
   // myBoolean bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetBol = attributes.readInto("myBoolean", mBol);
+
+  if (mIsSetBol == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("x", XFredBolMustBeBoolean, pkgVersion, level,
+        version);
+    }
+  }
 
   // 
   // myNumber int (use = "required" )

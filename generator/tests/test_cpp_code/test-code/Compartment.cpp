@@ -1232,13 +1232,23 @@ Compartment::readAttributes(
   // constant bool (use = "required" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetConstant = attributes.readInto("constant", mConstant);
 
-  if (!mIsSetConstant)
+  if (mIsSetConstant == false)
   {
-    std::string message = "Core attribute 'constant' is missing from the "
-      "<Compartment> element.";
-    log->logError(CoreCompartmentAllowedAttributes, level, version, message);
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(CoreCompartmentConstantMustBeBoolean, level, version);
+    }
+    else
+    {
+      std::string message = "Core attribute 'constant' is missing from the "
+        "<Compartment> element.";
+      log->logError(CoreCompartmentAllowedAttributes, level, version, message);
+    }
   }
 
   // 

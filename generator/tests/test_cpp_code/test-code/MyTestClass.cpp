@@ -2014,13 +2014,37 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // true bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetTrue = attributes.readInto("true", mTrue);
+
+  if (mIsSetTrue == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("test", TestMyTestClassTrueMustBeBoolean,
+        pkgVersion, level, version);
+    }
+  }
 
   // 
   // false bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetFalse = attributes.readInto("false", mFalse);
+
+  if (mIsSetFalse == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("test", TestMyTestClassFalseMustBeBoolean,
+        pkgVersion, level, version);
+    }
+  }
 
   // 
   // unit UnitSId (use = "optional" )

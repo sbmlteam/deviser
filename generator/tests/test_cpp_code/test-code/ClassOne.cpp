@@ -861,7 +861,19 @@ ClassOne::readV1Attributes(const XMLAttributes& attributes)
   // att1 bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
+
+  if (mIsSetAtt1 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("vers", VersClassOneAtt1MustBeBoolean, pkgVersion,
+        level, version);
+    }
+  }
 }
 
 /** @endcond */
@@ -913,7 +925,19 @@ ClassOne::readV2Attributes(const XMLAttributes& attributes)
   // att2 bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetAtt2 = attributes.readInto("att2", mAtt2);
+
+  if (mIsSetAtt2 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("vers", VersClassOneAtt2MustBeBoolean, pkgVersion,
+        level, version);
+    }
+  }
 }
 
 /** @endcond */

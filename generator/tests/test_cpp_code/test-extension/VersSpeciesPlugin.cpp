@@ -1553,6 +1553,13 @@ VersSpeciesPlugin::readAttributes(const XMLAttributes& attributes,
       log->logPackageError("vers", VersSpeciesAllowedAttributes, pkgVersion,
         level, version, details);
     }
+    else if (log->getError(n)->getErrorId() == NotSchemaConformant)
+    {
+      const std::string details = log->getError(n)->getMessage();
+      log->remove(NotSchemaConformant);
+      log->logPackageError("vers", VersSpeciesAllowedAttributes, pkgVersion,
+        level, version, details);
+    }
   }
 
   if (pkgVersion == 1)

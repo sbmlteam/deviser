@@ -2493,28 +2493,50 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // true bool (use = "required" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetTrue = attributes.readInto("true", mTrue);
 
-  if (!mIsSetTrue)
+  if (mIsSetTrue == false)
   {
-    std::string message = "Test attribute 'true' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("test", TestMyRequiredClassTrueMustBeBoolean,
+        pkgVersion, level, version);
+    }
+    else
+    {
+      std::string message = "Test attribute 'true' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
   }
 
   // 
   // false bool (use = "required" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetFalse = attributes.readInto("false", mFalse);
 
-  if (!mIsSetFalse)
+  if (mIsSetFalse == false)
   {
-    std::string message = "Test attribute 'false' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("test", TestMyRequiredClassFalseMustBeBoolean,
+        pkgVersion, level, version);
+    }
+    else
+    {
+      std::string message = "Test attribute 'false' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message);
+    }
   }
 
   // 

@@ -1229,25 +1229,42 @@ class ProtectedFunctions():
         name = attribute['xml_name']
         member = attribute['memberName']
         set_name = 'mIsSet{0}'.format(strFunctions.upper_first(attribute['name']))
-        line = ['{0} = attributes.readInto(\"{1}\", '
+        line = ['numErrs = log->getNumErrors()',
+                '{0} = attributes.readInto(\"{1}\", '
                 '{2})'.format(set_name, name, member)]
         code.append(self.create_code_block('line', line))
 
         # sort error names to be used
-        class_name = strFunctions.remove_prefix(self.class_name)
-        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+        if self.is_plugin:
+            class_name = strFunctions.get_class_from_plugin(
+                self.class_name, self.package)
+            error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+            error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
+                                                         strFunctions.upper_first(attribute['name']))
+        else:
+            class_name = strFunctions.remove_prefix(self.class_name)
+            error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+            error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
+                                                         strFunctions.upper_first(attribute['name']))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
+        line = ['log->getNumErrors() == numErrs + 1 && log->contains(XMLAttributeTypeMismatch)',
+                'log->remove(XMLAttributeTypeMismatch)',
         if attribute['reqd']:
-            line = ['!{0}'.format(set_name),
-                    'std::string message = \"{0} attribute \'{1}\' is '
-                    'missing from the <{2}> element.\"'.format(self.package,
-                                                               name,
-                                                               self.class_name),
-                    'log->{0}{1}, {2}, message)'.format(self.error, error,
-                                                        self.given_args)]
-            code.append(self.create_code_block('if', line))
+            line += ['else',
+                     'std::string message = \"{0} attribute \'{1}\' is '
+                     'missing from the <{2}> element.\"'.format(self.package,
+                                                                name,
+                                                                self.class_name),
+                     'log->{0}{1}, {2}, message)'.format(self.error, error,
+                                                         self.given_args)]
+            nested_if = self.create_code_block('if_else', line)
+        else:
+            nested_if = self.create_code_block('if', line)
+
+        line = ['{0} == false'.format(set_name), nested_if]
+        code.append(self.create_code_block('if', line))
 
     def write_sid_read(self, index, code, attributes):
         attribute = attributes[index]
