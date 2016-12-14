@@ -1246,6 +1246,73 @@ VersSpeciesPlugin::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this VersSpeciesPlugin.
+ */
+unsigned int
+VersSpeciesPlugin::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "classOne")
+  {
+    if (isSetClassOne())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "classTwo")
+  {
+    if (isSetClassTwo())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "another")
+  {
+    return getNumAnothers();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this VersSpeciesPlugin.
+ */
+SBase*
+VersSpeciesPlugin::getObject(const std::string& elementName,
+                             unsigned int index)
+{
+  SBasePlugin* obj = NULL;
+
+  if (elementName == "classOne")
+  {
+    return getClassOne();
+  }
+  else if (elementName == "classTwo")
+  {
+    return getClassTwo();
+  }
+  else if (elementName == "another")
+  {
+    return getAnother(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

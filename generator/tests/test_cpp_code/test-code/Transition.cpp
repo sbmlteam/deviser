@@ -1320,6 +1320,66 @@ Transition::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this Transition.
+ */
+unsigned int
+Transition::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "input")
+  {
+    return getNumInputs();
+  }
+  else if (elementName == "output")
+  {
+    return getNumOutputs();
+  }
+  else if (elementName == "functionTerm")
+  {
+    return getNumFunctionTerms();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this Transition.
+ */
+SBase*
+Transition::getObject(const std::string& elementName, unsigned int index)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "input")
+  {
+    return getInput(index);
+  }
+  else if (elementName == "output")
+  {
+    return getOutput(index);
+  }
+  else if (elementName == "functionTerm")
+  {
+    return getFunctionTerm(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

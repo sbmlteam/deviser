@@ -654,6 +654,51 @@ GroupsModelPlugin::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this GroupsModelPlugin.
+ */
+unsigned int
+GroupsModelPlugin::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "group")
+  {
+    return getNumGroups();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this GroupsModelPlugin.
+ */
+SBase*
+GroupsModelPlugin::getObject(const std::string& elementName,
+                             unsigned int index)
+{
+  SBasePlugin* obj = NULL;
+
+  if (elementName == "group")
+  {
+    return getGroup(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

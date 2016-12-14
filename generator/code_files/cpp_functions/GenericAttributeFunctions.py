@@ -71,6 +71,8 @@ class GenericAttributeFunctions():
 
             self.attributes = class_object['class_attributes']
             self.elements = query.get_child_elements(class_object['child_elements'], class_object['child_lo_elements'])
+            self.single_elements = query.get_child_elements(class_object['child_elements'], [])
+            self.lo_elements = query.get_child_elements([], class_object['child_lo_elements'])
 
             if 'num_versions' in class_object and class_object['num_versions'] > 1:
                 self.has_multiple_versions = True
@@ -414,7 +416,7 @@ class GenericAttributeFunctions():
 
     ########################################################################
 
-    # Functions for writing creat object functions
+    # Functions for writing create object functions
 
     # function to write create functions
     def write_create_object(self):
@@ -432,9 +434,9 @@ class GenericAttributeFunctions():
         additional = []
         title_line = 'Creates and returns an new "elementName" object in this {0}.' \
             .format(self.class_name)
-        params.append('@param objectName, the name of the element to create.')
+        params.append('@param elementName, the name of the element to create.')
 
-        return_lines.append('pointer to the object created.')
+        return_lines.append('pointer to the element created.')
 
         # create the function declaration
         function = 'createObject'
@@ -458,6 +460,143 @@ class GenericAttributeFunctions():
                 first = False
             block.append('elementName == \"{0}\"'.format(elem))
             block.append('return create{0}()'.format(strFunctions.upper_first(elem)))
+            if len(block) > 2:
+                if_block = self.create_code_block('else_if', block)
+            else:
+                if_block = self.create_code_block('if', block)
+        code = [self.create_code_block('line', first_line),
+                if_block,
+                self.create_code_block('line', last_line)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write get num objects functions
+    def write_get_num_objects(self):
+        if not self.is_cpp_api:
+            return
+        elif self.is_list_of:
+            return
+
+        if len(self.elements) == 0:
+            return
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Returns the number of \"elementName" in this {0}.' \
+            .format(self.class_name)
+        params.append('@param elementName, the name of the element to get number of.')
+
+        return_lines.append('unsigned int number of elements.')
+
+        # create the function declaration
+        function = 'getNumObjects'
+        return_type = 'unsigned int'
+
+
+        arguments = ['const std::string& elementName']
+
+        code = []
+        # create the function implementation
+        first_line = ['unsigned int n = 0']
+        last_line = ['return n']
+        first = True
+        block = []
+        if_block = []
+
+        for elem in self.elements:
+            if not first:
+                block.append('else if')
+            else:
+                first = False
+            block.append('elementName == \"{0}\"'.format(elem))
+            if elem in self.lo_elements:
+                name = strFunctions.plural(strFunctions.upper_first(elem))
+                block.append('return getNum{0}()'.format(name))
+            else:
+                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem)),
+                             'return 1']
+                nested_if_block = self.create_code_block('if', nested_if)
+                block.append(nested_if_block)
+            if len(block) > 2:
+                if_block = self.create_code_block('else_if', block)
+            else:
+                if_block = self.create_code_block('if', block)
+        code = [self.create_code_block('line', first_line),
+                if_block,
+                self.create_code_block('line', last_line)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write getobjects functions
+    def write_get_object(self):
+        if not self.is_cpp_api:
+            return
+        elif self.is_list_of:
+            return
+
+        if len(self.elements) == 0:
+            return
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Returns the nth object of \"objectName" in this {0}.' \
+            .format(self.class_name)
+        params.append('@param elementName, the name of the element to get number of.')
+        params.append('@param index, unsigned int teh index of teh object to retrieve.')
+
+        return_lines.append('pointer to the object.')
+
+        # create the function declaration
+        function = 'getObject'
+        return_type = 'SBase*'
+
+        arguments = ['const std::string& elementName', 'unsigned int index']
+
+        code = []
+        # create the function implementation
+        first_line = ['{0}* obj = NULL'.format(self.base_class)]
+        last_line = ['return obj']
+        first = True
+        block = []
+        if_block = []
+
+        for elem in self.elements:
+            if not first:
+                block.append('else if')
+            else:
+                first = False
+            block.append('elementName == \"{0}\"'.format(elem))
+            if elem in self.single_elements:
+                block.append('return get{0}()'.format(strFunctions.upper_first(elem)))
+            else:
+                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem)))
+
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
             else:

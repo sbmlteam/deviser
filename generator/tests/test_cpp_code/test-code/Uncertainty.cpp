@@ -786,6 +786,53 @@ Uncertainty::createObject(const std::string& elementName)
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Returns the number of "elementName" in this Uncertainty.
+ */
+unsigned int
+Uncertainty::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "uncertML")
+  {
+    if (isSetUncertML())
+    {
+      return 1;
+    }
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this Uncertainty.
+ */
+SBase*
+Uncertainty::getObject(const std::string& elementName, unsigned int index)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "uncertML")
+  {
+    return getUncertML();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void

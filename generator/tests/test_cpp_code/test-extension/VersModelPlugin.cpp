@@ -822,6 +822,53 @@ VersModelPlugin::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this VersModelPlugin.
+ */
+unsigned int
+VersModelPlugin::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "classOne")
+  {
+    if (isSetClassOne())
+    {
+      return 1;
+    }
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this VersModelPlugin.
+ */
+SBase*
+VersModelPlugin::getObject(const std::string& elementName, unsigned int index)
+{
+  SBasePlugin* obj = NULL;
+
+  if (elementName == "classOne")
+  {
+    return getClassOne();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

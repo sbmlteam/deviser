@@ -1239,6 +1239,83 @@ Event::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this Event.
+ */
+unsigned int
+Event::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "trigger")
+  {
+    if (isSetTrigger())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "priority")
+  {
+    if (isSetPriority())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "delay")
+  {
+    if (isSetDelay())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "eventAssignment")
+  {
+    return getNumEventAssignments();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this Event.
+ */
+SBase*
+Event::getObject(const std::string& elementName, unsigned int index)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "trigger")
+  {
+    return getTrigger();
+  }
+  else if (elementName == "priority")
+  {
+    return getPriority();
+  }
+  else if (elementName == "delay")
+  {
+    return getDelay();
+  }
+  else if (elementName == "eventAssignment")
+  {
+    return getEventAssignment(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

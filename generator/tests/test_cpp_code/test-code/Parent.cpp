@@ -780,6 +780,58 @@ Parent::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this Parent.
+ */
+unsigned int
+Parent::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "child")
+  {
+    return getNumChildren();
+  }
+  else if (elementName == "sprog")
+  {
+    return getNumSprogs();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this Parent.
+ */
+SBase*
+Parent::getObject(const std::string& elementName, unsigned int index)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "child")
+  {
+    return getChild(index);
+  }
+  else if (elementName == "sprog")
+  {
+    return getSprog(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

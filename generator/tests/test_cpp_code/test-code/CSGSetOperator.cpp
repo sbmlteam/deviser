@@ -1196,6 +1196,50 @@ CSGSetOperator::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this CSGSetOperator.
+ */
+unsigned int
+CSGSetOperator::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "csgNode")
+  {
+    return getNumCsgNodes();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this CSGSetOperator.
+ */
+SBase*
+CSGSetOperator::getObject(const std::string& elementName, unsigned int index)
+{
+  CSGNode* obj = NULL;
+
+  if (elementName == "csgNode")
+  {
+    return getCsgNode(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

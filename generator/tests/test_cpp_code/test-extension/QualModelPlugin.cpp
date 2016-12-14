@@ -857,6 +857,58 @@ QualModelPlugin::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this QualModelPlugin.
+ */
+unsigned int
+QualModelPlugin::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "qualitativeSpecies")
+  {
+    return getNumQualitativeSpecies();
+  }
+  else if (elementName == "transition")
+  {
+    return getNumTransitions();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this QualModelPlugin.
+ */
+SBase*
+QualModelPlugin::getObject(const std::string& elementName, unsigned int index)
+{
+  SBasePlugin* obj = NULL;
+
+  if (elementName == "qualitativeSpecies")
+  {
+    return getQualitativeSpecies(index);
+  }
+  else if (elementName == "transition")
+  {
+    return getTransition(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

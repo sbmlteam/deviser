@@ -1545,6 +1545,83 @@ Fred::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the number of "elementName" in this Fred.
+ */
+unsigned int
+Fred::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "other")
+  {
+    if (isSetOther())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "other1")
+  {
+    if (isSetOther1())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "other2")
+  {
+    if (isSetOther2())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "otherLO")
+  {
+    return getNumOtherLOs();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Returns the nth object of "objectName" in this Fred.
+ */
+SBase*
+Fred::getObject(const std::string& elementName, unsigned int index)
+{
+  SBase* obj = NULL;
+
+  if (elementName == "other")
+  {
+    return getOther();
+  }
+  else if (elementName == "other1")
+  {
+    return getOther1();
+  }
+  else if (elementName == "other2")
+  {
+    return getOther2();
+  }
+  else if (elementName == "otherLO")
+  {
+    return getOtherLO(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.
