@@ -104,14 +104,20 @@ class BaseTexFile(BaseFile.BaseFile):
             for i in range(0, len(classes)):
                 attribs = classes[i]['attribs']
                 for j in range(0, len(attribs)):
-                    name = attribs[j]['name']
+                    if attribs[j]['type'] == 'lo_element' or attribs[j]['type'] == 'element':
+                        name = attribs[j]['element']
+                    else:
+                        name = attribs[j]['name']
                     texname = strFunctions.texify(name)
                     attribs[j]['texname'] = texname
             for i in range(0, len(classes)):
                 if 'lo_attribs' in classes[i]:
                     lo_attribs = classes[i]['lo_attribs']
                     for j in range(0, len(lo_attribs)):
-                        name = lo_attribs[j]['name']
+                        if attribs[j]['type'] == 'lo_element' or attribs[j]['type'] == 'element':
+                            name = attribs[j]['element']
+                        else:
+                            name = attribs[j]['name']
                         texname = strFunctions.texify(name)
                         lo_attribs[j]['texname'] = texname
 

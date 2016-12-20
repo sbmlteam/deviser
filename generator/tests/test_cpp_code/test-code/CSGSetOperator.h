@@ -448,17 +448,6 @@ public:
 
 
   /**
-   * Creates a new CSGPseudoPrimitive object, adds it to this CSGSetOperator
-   * object and returns the CSGPseudoPrimitive object created.
-   *
-   * @return a new CSGPseudoPrimitive object instance.
-   *
-   * @see addCSGNode(const CSGNode* csgn)
-   */
-  CSGPseudoPrimitive* createCSGPseudoPrimitive();
-
-
-  /**
    * Creates a new CSGSetOperator object, adds it to this CSGSetOperator object
    * and returns the CSGSetOperator object created.
    *
@@ -1510,22 +1499,6 @@ CSGSetOperator_createCSGScale(CSGSetOperator_t* csgso);
 LIBSBML_EXTERN
 CSGHomogeneousTransformation_t*
 CSGSetOperator_createCSGHomogeneousTransformation(CSGSetOperator_t* csgso);
-
-
-/**
- * Creates a new CSGPseudoPrimitive_t object, adds it to this CSGSetOperator_t
- * object and returns the CSGPseudoPrimitive_t object created.
- *
- * @param csgso the CSGSetOperator_t structure to which the
- * CSGPseudoPrimitive_t should be added.
- *
- * @return a new CSGPseudoPrimitive_t object instance.
- *
- * @memberof CSGSetOperator_t
- */
-LIBSBML_EXTERN
-CSGPseudoPrimitive_t*
-CSGSetOperator_createCSGPseudoPrimitive(CSGSetOperator_t* csgso);
 
 
 /**

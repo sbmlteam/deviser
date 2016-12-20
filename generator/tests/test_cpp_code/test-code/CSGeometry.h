@@ -1,6 +1,6 @@
 /**
- * @file CSGTransformation.h
- * @brief Definition of the CSGTransformation class.
+ * @file CSGeometry.h
+ * @brief Definition of the CSGeometry class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,13 +30,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class CSGTransformation
- * @sbmlbrief{spatial} TODO:Definition of the CSGTransformation class.
+ * @class CSGeometry
+ * @sbmlbrief{spatial} TODO:Definition of the CSGeometry class.
  */
 
 
-#ifndef CSGTransformation_H__
-#define CSGTransformation_H__
+#ifndef CSGeometry_H__
+#define CSGeometry_H__
 
 
 #include <sbml/common/extern.h>
@@ -50,43 +50,37 @@
 #include <string>
 
 
-#include <sbml/packages/spatial/sbml/CSGNode.h>
+#include <sbml/packages/spatial/sbml/GeometryDefinition.h>
 #include <sbml/packages/spatial/extension/SpatialExtension.h>
-#include <sbml/packages/spatial/sbml/CSGNode.h>
+#include <sbml/packages/spatial/sbml/ListOfCSGObjects.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class CSGTranslation;
-class CSGRotation;
-class CSGScale;
-class CSGHomogeneousTransformation;
-
-class LIBSBML_EXTERN CSGTransformation : public CSGNode
+class LIBSBML_EXTERN CSGeometry : public GeometryDefinition
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  CSGNode* mCsgNode;
+  ListOfCSGObjects mCSGObjects;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new CSGTransformation using the given SBML Level, Version and
+   * Creates a new CSGeometry using the given SBML Level, Version and
    * &ldquo;spatial&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this
-   * CSGTransformation.
+   * @param level an unsigned int, the SBML Level to assign to this CSGeometry.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CSGTransformation.
+   * CSGeometry.
    *
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGTransformation.
+   * this CSGeometry.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -94,16 +88,14 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(unsigned int level = SpatialExtension::getDefaultLevel(),
-                    unsigned int version =
-                      SpatialExtension::getDefaultVersion(),
-                    unsigned int pkgVersion =
-                      SpatialExtension::getDefaultPackageVersion());
+  CSGeometry(unsigned int level = SpatialExtension::getDefaultLevel(),
+             unsigned int version = SpatialExtension::getDefaultVersion(),
+             unsigned int pkgVersion =
+               SpatialExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new CSGTransformation using the given SpatialPkgNamespaces
-   * object.
+   * Creates a new CSGeometry using the given SpatialPkgNamespaces object.
    *
    * @param spatialns the SpatialPkgNamespaces object.
    *
@@ -113,205 +105,224 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(SpatialPkgNamespaces *spatialns);
+  CSGeometry(SpatialPkgNamespaces *spatialns);
 
 
   /**
-   * Copy constructor for CSGTransformation.
+   * Copy constructor for CSGeometry.
    *
-   * @param orig the CSGTransformation instance to copy.
+   * @param orig the CSGeometry instance to copy.
    */
-  CSGTransformation(const CSGTransformation& orig);
+  CSGeometry(const CSGeometry& orig);
 
 
   /**
-   * Assignment operator for CSGTransformation.
+   * Assignment operator for CSGeometry.
    *
-   * @param rhs the CSGTransformation object whose values are to be used as the
-   * basis of the assignment.
+   * @param rhs the CSGeometry object whose values are to be used as the basis
+   * of the assignment.
    */
-  CSGTransformation& operator=(const CSGTransformation& rhs);
+  CSGeometry& operator=(const CSGeometry& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this CSGTransformation object.
+   * Creates and returns a deep copy of this CSGeometry object.
    *
-   * @return a (deep) copy of this CSGTransformation object.
+   * @return a (deep) copy of this CSGeometry object.
    */
-  virtual CSGTransformation* clone() const;
+  virtual CSGeometry* clone() const;
 
 
   /**
-   * Destructor for CSGTransformation.
+   * Destructor for CSGeometry.
    */
-  virtual ~CSGTransformation();
+  virtual ~CSGeometry();
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the ListOfCSGObjects from this CSGeometry.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the ListOfCSGObjects from this CSGeometry.
    */
-  const CSGNode* getCsgNode() const;
+  const ListOfCSGObjects* getListOfCSGObjects() const;
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the ListOfCSGObjects from this CSGeometry.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the ListOfCSGObjects from this CSGeometry.
    */
-  CSGNode* getCsgNode();
+  ListOfCSGObjects* getListOfCSGObjects();
 
 
   /**
-   * Predicate returning @c true if this CSGTransformation's "csgNode" element
-   * is set.
+   * Get a CSGObject from the CSGeometry.
    *
-   * @return @c true if this CSGTransformation's "csgNode" element has been
-   * set, otherwise @c false is returned.
+   * @param n an unsigned int representing the index of the CSGObject to
+   * retrieve.
+   *
+   * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry.
+   *
+   * @see getNumCSGObjects()
    */
-  bool isSetCsgNode() const;
+  CSGObject* getCSGObject(unsigned int n);
 
 
   /**
-   * Sets the value of the "csgNode" element of this CSGTransformation.
+   * Get a CSGObject from the CSGeometry.
    *
-   * @param csgNode CSGNode* value of the "csgNode" element to be set.
+   * @param n an unsigned int representing the index of the CSGObject to
+   * retrieve.
    *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry.
+   *
+   * @see getNumCSGObjects()
    */
-  int setCsgNode(const CSGNode* csgNode);
+  const CSGObject* getCSGObject(unsigned int n) const;
 
 
   /**
-   * Creates a new CSGPrimitive object, adds it to this CSGTransformation
-   * object and returns the CSGPrimitive object created.
+   * Get a CSGObject from the CSGeometry based on its identifier.
    *
-   * @return a new CSGPrimitive object instance.
+   * @param sid a string representing the identifier of the CSGObject to
+   * retrieve.
+   *
+   * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
+   * the given id or NULL if no such CSGObject exists.
+   *
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
    */
-  CSGPrimitive* createCSGPrimitive();
+  CSGObject* getCSGObject(const std::string& sid);
 
 
   /**
-   * Creates a new CSGTranslation object, adds it to this CSGTransformation
-   * object and returns the CSGTranslation object created.
+   * Get a CSGObject from the CSGeometry based on its identifier.
    *
-   * @return a new CSGTranslation object instance.
+   * @param sid a string representing the identifier of the CSGObject to
+   * retrieve.
+   *
+   * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
+   * the given id or NULL if no such CSGObject exists.
+   *
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
    */
-  CSGTranslation* createCSGTranslation();
+  const CSGObject* getCSGObject(const std::string& sid) const;
 
 
   /**
-   * Creates a new CSGRotation object, adds it to this CSGTransformation object
-   * and returns the CSGRotation object created.
+   * Get a CSGObject from the CSGeometry based on the DomainType to which it
+   * refers.
    *
-   * @return a new CSGRotation object instance.
+   * @param sid a string representing the domainType attribute of the CSGObject
+   * object to retrieve.
+   *
+   * @return the first CSGObject in this CSGeometry based on the given
+   * domainType attribute or NULL if no such CSGObject exists.
    */
-  CSGRotation* createCSGRotation();
+  const CSGObject* getCSGObjectByDomainType(const std::string& sid) const;
 
 
   /**
-   * Creates a new CSGScale object, adds it to this CSGTransformation object
-   * and returns the CSGScale object created.
+   * Get a CSGObject from the CSGeometry based on the DomainType to which it
+   * refers.
    *
-   * @return a new CSGScale object instance.
+   * @param sid a string representing the domainType attribute of the CSGObject
+   * object to retrieve.
+   *
+   * @return the first CSGObject in this CSGeometry based on the given
+   * domainType attribute or NULL if no such CSGObject exists.
    */
-  CSGScale* createCSGScale();
+  CSGObject* getCSGObjectByDomainType(const std::string& sid);
 
 
   /**
-   * Creates a new CSGHomogeneousTransformation object, adds it to this
-   * CSGTransformation object and returns the CSGHomogeneousTransformation
-   * object created.
+   * Adds a copy of the given CSGObject to this CSGeometry.
    *
-   * @return a new CSGHomogeneousTransformation object instance.
-   */
-  CSGHomogeneousTransformation* createCSGHomogeneousTransformation();
-
-
-  /**
-   * Creates a new CSGSetOperator object, adds it to this CSGTransformation
-   * object and returns the CSGSetOperator object created.
-   *
-   * @return a new CSGSetOperator object instance.
-   */
-  CSGSetOperator* createCSGSetOperator();
-
-
-  /**
-   * Unsets the value of the "csgNode" element of this CSGTransformation.
+   * @param csgo the CSGObject object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createCSGObject()
    */
-  int unsetCsgNode();
+  int addCSGObject(const CSGObject* csgo);
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGTranslation
+   * Get the number of CSGObject objects in this CSGeometry.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGTranslation, @c false otherwise
+   * @return the number of CSGObject objects in this CSGeometry.
    */
-  virtual bool isCSGTranslation() const;
+  unsigned int getNumCSGObjects() const;
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGRotation
+   * Creates a new CSGObject object, adds it to this CSGeometry object and
+   * returns the CSGObject object created.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGRotation, @c false otherwise
+   * @return a new CSGObject object instance.
+   *
+   * @see addCSGObject(const CSGObject* csgo)
    */
-  virtual bool isCSGRotation() const;
+  CSGObject* createCSGObject();
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGScale
+   * Removes the nth CSGObject from this CSGeometry and returns a pointer to
+   * it.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type CSGScale,
-   * @c false otherwise
+   * @param n an unsigned int representing the index of the CSGObject to
+   * remove.
+   *
+   * @return a pointer to the nth CSGObject in this CSGeometry.
+   *
+   * @see getNumCSGObjects
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
    */
-  virtual bool isCSGScale() const;
+  CSGObject* removeCSGObject(unsigned int n);
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGHomogeneousTransformation
+   * Removes the CSGObject from this CSGeometry based on its identifier and
+   * returns a pointer to it.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGHomogeneousTransformation, @c false otherwise
+   * @param sid a string representing the identifier of the CSGObject to
+   * remove.
+   *
+   * @return the CSGObject in this CSGeometry based on the identifier or NULL
+   * if no such CSGObject exists.
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
    */
-  virtual bool isCSGHomogeneousTransformation() const;
+  CSGObject* removeCSGObject(const std::string& sid);
 
 
   /**
-   * Returns the XML element name of this CSGTransformation object.
+   * Returns the XML element name of this CSGeometry object.
    *
-   * For CSGTransformation, the XML element name is always @c
-   * "csgTransformation".
+   * For CSGeometry, the XML element name is always @c "csgeometry".
    *
-   * @return the name of this element, i.e. @c "csgTransformation".
+   * @return the name of this element, i.e. @c "csgeometry".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this CSGTransformation object.
+   * Returns the libSBML type code for this CSGeometry object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{SBML_SPATIAL_CSGTRANSFORMATION, SBMLSpatialTypeCode_t}
+   * @sbmlconstant{SBML_SPATIAL_CSGEOMETRY, SBMLSpatialTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -323,26 +334,26 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * CSGTransformation object have been set.
+   * CSGeometry object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * CSGeometry have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the CSGTransformation object are:
+   * @note The required attributes for the CSGeometry object are:
    */
   virtual bool hasRequiredAttributes() const;
 
 
   /**
    * Predicate returning @c true if all the required elements for this
-   * CSGTransformation object have been set.
+   * CSGeometry object have been set.
    *
    * @return @c true to indicate that all the required elements of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * CSGeometry have been set, otherwise @c false is returned.
    *
    *
-   * @note The required elements for the CSGTransformation object are:
+   * @note The required elements for the CSGeometry object are:
    */
   virtual bool hasRequiredElements() const;
 
@@ -413,7 +424,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -433,7 +444,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -452,7 +463,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -472,7 +483,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -492,7 +503,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -512,7 +523,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -532,13 +543,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this CSGTransformation's attribute
-   * "attributeName" is set.
+   * Predicate returning @c true if this CSGeometry's attribute "attributeName"
+   * is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this CSGTransformation's attribute "attributeName" has
-   * been set, otherwise @c false is returned.
+   * @return @c true if this CSGeometry's attribute "attributeName" has been
+   * set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -549,7 +560,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -568,7 +579,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -587,7 +598,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -606,7 +617,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -626,7 +637,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -646,7 +657,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -666,8 +677,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this
-   * CSGTransformation.
+   * Unsets the value of the "attributeName" attribute of this CSGeometry.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -684,7 +694,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Creates and returns an new "elementName" object in this CSGTransformation.
+   * Creates and returns an new "elementName" object in this CSGeometry.
    *
    * @param elementName, the name of the element to create.
    *
@@ -699,7 +709,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the number of "elementName" in this CSGTransformation.
+   * Returns the number of "elementName" in this CSGeometry.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -714,7 +724,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the nth object of "objectName" in this CSGTransformation.
+   * Returns the nth object of "objectName" in this CSGeometry.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -844,17 +854,16 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGTransformation_t using the given SBML Level, Version and
+ * Creates a new CSGeometry_t using the given SBML Level, Version and
  * &ldquo;spatial&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t.
+ * @param level an unsigned int, the SBML Level to assign to this CSGeometry_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t.
+ * CSGeometry_t.
  *
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t.
+ * this CSGeometry_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -862,309 +871,232 @@ BEGIN_C_DECLS
  * SBMLDocument object.
  * @copydetails doc_note_setting_lv
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_create(
-                         unsigned int level =
-                           SpatialExtension::getDefaultLevel(),
-                         unsigned int version =
-                           SpatialExtension::getDefaultVersion(),
-                         unsigned int pkgVersion =
-                           SpatialExtension::getDefaultPackageVersion());
+CSGeometry_t *
+CSGeometry_create(unsigned int level = SpatialExtension::getDefaultLevel(),
+                  unsigned int version = SpatialExtension::getDefaultVersion(),
+                  unsigned int pkgVersion =
+                    SpatialExtension::getDefaultPackageVersion());
 
 
 /**
- * Creates and returns a deep copy of this CSGTransformation_t object.
+ * Creates and returns a deep copy of this CSGeometry_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure.
  *
- * @return a (deep) copy of this CSGTransformation_t object.
+ * @return a (deep) copy of this CSGeometry_t object.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t*
-CSGTransformation_clone(const CSGTransformation_t* csgt);
+CSGeometry_t*
+CSGeometry_clone(const CSGeometry_t* csg);
 
 
 /**
- * Frees this CSGTransformation_t object.
+ * Frees this CSGeometry_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
 void
-CSGTransformation_free(CSGTransformation_t* csgt);
+CSGeometry_free(CSGeometry_t* csg);
 
 
 /**
- * Returns the value of the "csgNode" element of this CSGTransformation_t.
+ * Returns a ListOf_t* containing CSGObject_t objects from this CSGeometry_t.
  *
- * @param csgt the CSGTransformation_t structure whose csgNode is sought.
+ * @param csg the CSGeometry_t structure whose "ListOfCSGObjects" is sought.
  *
- * @return the value of the "csgNode" element of this CSGTransformation_t as a
- * CSGNode*.
+ * @return the "ListOfCSGObjects" from this CSGeometry_t as a ListOf_t *.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
-CSGTransformation_getCsgNode(const CSGTransformation_t * csgt);
+ListOf_t*
+CSGeometry_getListOfCSGObjects(CSGeometry_t* csg);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
- * set.
+ * Get a CSGObject_t from the CSGeometry_t.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to search.
  *
- * @return @c 1 if this CSGTransformation_t's "csgNode" element has been set,
- * otherwise @c 0 is returned.
+ * @param n an unsigned int representing the index of the CSGObject_t to
+ * retrieve.
  *
- * @memberof CSGTransformation_t
+ * @return the nth CSGObject_t in the ListOfCSGObjects within this CSGeometry.
+ *
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isSetCsgNode(const CSGTransformation_t * csgt);
+const CSGObject_t*
+CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n);
 
 
 /**
- * Sets the value of the "csgNode" element of this CSGTransformation_t.
+ * Get a CSGObject_t from the CSGeometry_t based on its identifier.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to search.
  *
- * @param csgNode CSGNode_t* value of the "csgNode" element to be set.
+ * @param sid a string representing the identifier of the CSGObject_t to
+ * retrieve.
  *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @return the CSGObject_t in the ListOfCSGObjects within this CSGeometry with
+ * the given id or NULL if no such CSGObject_t exists.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_setCsgNode(CSGTransformation_t * csgt,
-                             const CSGNode_t* csgNode);
+const CSGObject_t*
+CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid);
 
 
 /**
- * Creates a new CSGPrimitive_t object, adds it to this CSGTransformation_t
- * object and returns the CSGPrimitive_t object created.
+ * Get a CSGObject_t from the CSGeometry_t based on the DomainType to which it
+ * refers.
  *
- * @param csgt the CSGTransformation_t structure to which the CSGPrimitive_t
- * should be added.
+ * @param csg the CSGeometry_t structure to search.
  *
- * @return a new CSGPrimitive_t object instance.
+ * @param sid a string representing the domainType attribute of the CSGObject_t
+ * object to retrieve.
  *
- * @memberof CSGTransformation_t
+ * @return the first CSGObject_t in this CSGeometry_t based on the given
+ * domainType attribute or NULL if no such CSGObject_t exists.
+ *
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-CSGPrimitive_t*
-CSGTransformation_createCSGPrimitive(CSGTransformation_t* csgt);
+const CSGObject_t*
+CSGeometry_getCSGObjectByDomainType(CSGeometry_t* csg, const char *sid);
 
 
 /**
- * Creates a new CSGTranslation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGTranslation_t object created.
+ * Adds a copy of the given CSGObject_t to this CSGeometry_t.
  *
- * @param csgt the CSGTransformation_t structure to which the CSGTranslation_t
- * should be added.
+ * @param csg the CSGeometry_t structure to which the CSGObject_t should be
+ * added.
  *
- * @return a new CSGTranslation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTranslation_t*
-CSGTransformation_createCSGTranslation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGRotation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGRotation_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGRotation_t
- * should be added.
- *
- * @return a new CSGRotation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGRotation_t*
-CSGTransformation_createCSGRotation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGScale_t object, adds it to this CSGTransformation_t object
- * and returns the CSGScale_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGScale_t should
- * be added.
- *
- * @return a new CSGScale_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGScale_t*
-CSGTransformation_createCSGScale(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGHomogeneousTransformation_t object, adds it to this
- * CSGTransformation_t object and returns the CSGHomogeneousTransformation_t
- * object created.
- *
- * @param csgt the CSGTransformation_t structure to which the
- * CSGHomogeneousTransformation_t should be added.
- *
- * @return a new CSGHomogeneousTransformation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGHomogeneousTransformation_t*
-CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t*
-  csgt);
-
-
-/**
- * Creates a new CSGSetOperator_t object, adds it to this CSGTransformation_t
- * object and returns the CSGSetOperator_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGSetOperator_t
- * should be added.
- *
- * @return a new CSGSetOperator_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGSetOperator_t*
-CSGTransformation_createCSGSetOperator(CSGTransformation_t* csgt);
-
-
-/**
- * Unsets the value of the "csgNode" element of this CSGTransformation_t.
- *
- * @param csgt the CSGTransformation_t structure.
+ * @param csgo the CSGObject_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_unsetCsgNode(CSGTransformation_t * csgt);
+CSGeometry_addCSGObject(CSGeometry_t* csg, const CSGObject_t* csgo);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGTranslation_t
+ * Get the number of CSGObject_t objects in this CSGeometry_t.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to query.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGTranslation_t, @c 0
- * otherwise
+ * @return the number of CSGObject_t objects in this CSGeometry_t.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGTranslation(const CSGTransformation_t * csgt);
+unsigned int
+CSGeometry_getNumCSGObjects(CSGeometry_t* csg);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGRotation_t
+ * Creates a new CSGObject_t object, adds it to this CSGeometry_t object and
+ * returns the CSGObject_t object created.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to which the CSGObject_t should be
+ * added.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGRotation_t, @c 0
- * otherwise
+ * @return a new CSGObject_t object instance.
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGRotation(const CSGTransformation_t * csgt);
+CSGObject_t*
+CSGeometry_createCSGObject(CSGeometry_t* csg);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type CSGScale_t
+ * Removes the nth CSGObject_t from this CSGeometry_t and returns a pointer to
+ * it.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to search.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGScale_t, @c 0
- * otherwise
+ * @param n an unsigned int representing the index of the CSGObject_t to
+ * remove.
  *
- * @memberof CSGTransformation_t
+ * @return a pointer to the nth CSGObject_t in this CSGeometry_t.
+ *
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGScale(const CSGTransformation_t * csgt);
+CSGObject_t*
+CSGeometry_removeCSGObject(CSGeometry_t* csg, unsigned int n);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t
+ * Removes the CSGObject_t from this CSGeometry_t based on its identifier and
+ * returns a pointer to it.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure to search.
  *
- * @return @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t, @c 0 otherwise
+ * @param sid a string representing the identifier of the CSGObject_t to
+ * remove.
  *
- * @memberof CSGTransformation_t
+ * @return the CSGObject_t in this CSGeometry_t based on the identifier or NULL
+ * if no such CSGObject_t exists.
+ *
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
-  csgt);
+CSGObject_t*
+CSGeometry_removeCSGObjectById(CSGeometry_t* csg, const char* sid);
 
 
 /**
  * Predicate returning @c 1 if all the required attributes for this
- * CSGTransformation_t object have been set.
+ * CSGeometry_t object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure.
  *
  * @return @c 1 to indicate that all the required attributes of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * CSGeometry_t have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required attributes for the CSGTransformation_t object are:
+ * @note The required attributes for the CSGeometry_t object are:
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt);
+CSGeometry_hasRequiredAttributes(const CSGeometry_t * csg);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
- * CSGTransformation_t object have been set.
+ * Predicate returning @c 1 if all the required elements for this CSGeometry_t
+ * object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param csg the CSGeometry_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 to indicate that all the required elements of this CSGeometry_t
+ * have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required elements for the CSGTransformation_t object are:
+ * @note The required elements for the CSGeometry_t object are:
  *
- * @memberof CSGTransformation_t
+ * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredElements(const CSGTransformation_t * csgt);
+CSGeometry_hasRequiredElements(const CSGeometry_t * csg);
 
 
 
@@ -1184,6 +1116,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !CSGTransformation_H__ */
+#endif /* !CSGeometry_H__ */
 
 

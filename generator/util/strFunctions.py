@@ -209,15 +209,18 @@ def wrap_type(name, element, hack=False):
         return 'of type \\primtype{' + name + '}'
 
 
-def wrap_section(name, add_class=True):
+def wrap_section(name, add_class=True, add_extended=False):
     if add_class:
-        return '\\sec{' + make_class(name) + '}'
+        return '\\sec{' + make_class(name, add_extended) + '}'
     else:
         return '\\sec{' + name + '}'
 
 
-def make_class(name):
-    return name.lower() + '-class'
+def make_class(name, add_extended=False):
+    if add_extended:
+        return 'extended-' + name.lower() + '-class'
+    else:
+        return name.lower() + '-class'
 
 
 def wrap_enum(name):

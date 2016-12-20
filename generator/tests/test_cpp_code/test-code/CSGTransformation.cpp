@@ -39,7 +39,6 @@
 #include <sbml/packages/spatial/sbml/CSGScale.h>
 #include <sbml/packages/spatial/sbml/CSGHomogeneousTransformation.h>
 #include <sbml/packages/spatial/sbml/CSGPrimitive.h>
-#include <sbml/packages/spatial/sbml/CSGPseudoPrimitive.h>
 #include <sbml/packages/spatial/sbml/CSGSetOperator.h>
 
 
@@ -320,29 +319,6 @@ CSGTransformation::createCSGHomogeneousTransformation()
   connectToChild();
 
   return static_cast<CSGHomogeneousTransformation*>(mCsgNode);
-}
-
-
-/*
- * Creates a new CSGPseudoPrimitive object, adds it to this CSGTransformation
- * object and returns the CSGPseudoPrimitive object created.
- */
-CSGPseudoPrimitive*
-CSGTransformation::createCSGPseudoPrimitive()
-{
-  if (mCsgNode != NULL)
-  {
-    delete mCsgNode;
-  }
-
-  SPATIAL_CREATE_NS(spatialns, getSBMLNamespaces());
-  mCsgNode = new CSGPseudoPrimitive(spatialns);
-
-  delete spatialns;
-
-  connectToChild();
-
-  return static_cast<CSGPseudoPrimitive*>(mCsgNode);
 }
 
 
@@ -1021,11 +997,6 @@ CSGTransformation::createObject(XMLInputStream& stream)
     mCsgNode = new CSGHomogeneousTransformation(spatialns);
     obj = mCsgNode;
   }
-  else if (name == "csgPseudoPrimitive")
-  {
-    mCsgNode = new CSGPseudoPrimitive(spatialns);
-    obj = mCsgNode;
-  }
   else if (name == "csgSetOperator")
   {
     mCsgNode = new CSGSetOperator(spatialns);
@@ -1267,19 +1238,6 @@ CSGHomogeneousTransformation_t*
 CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t* csgt)
 {
   return (csgt != NULL) ? csgt->createCSGHomogeneousTransformation() : NULL;
-}
-
-
-/*
- * Creates a new CSGPseudoPrimitive_t object, adds it to this
- * CSGTransformation_t object and returns the CSGPseudoPrimitive_t object
- * created.
- */
-LIBSBML_EXTERN
-CSGPseudoPrimitive_t*
-CSGTransformation_createCSGPseudoPrimitive(CSGTransformation_t* csgt)
-{
-  return (csgt != NULL) ? csgt->createCSGPseudoPrimitive() : NULL;
 }
 
 

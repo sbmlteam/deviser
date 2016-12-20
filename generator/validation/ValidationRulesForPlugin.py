@@ -207,7 +207,7 @@ class ValidationRulesForPlugin():
                 .format(att_type)
 
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attribute {0} values allowed on <{1}>.' \
@@ -245,7 +245,7 @@ class ValidationRulesForPlugin():
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
@@ -287,7 +287,7 @@ class ValidationRulesForPlugin():
                    'may only contain \{1} objects.'\
                 .format(loname, element)
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
@@ -323,7 +323,7 @@ class ValidationRulesForPlugin():
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
@@ -357,7 +357,7 @@ class ValidationRulesForPlugin():
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Elements allowed on <{0}>.'.format(self.lower_name)
@@ -415,7 +415,7 @@ class ValidationRulesForPlugin():
                         '\{2} object.'.format(name, num,
                                               self.opt_child_lo_elem[i]['name'])
         ref = 'SBML Level~3 Specification for {0} Version~1, {1}.'\
-            .format(self.fullname, strFunctions.wrap_section(self.name))
+            .format(self.fullname, strFunctions.wrap_section(self.name, True, True))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)

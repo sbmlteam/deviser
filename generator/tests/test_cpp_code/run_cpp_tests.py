@@ -328,6 +328,13 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
+    num = 15
+    class_name = 'CSGeometry'
+    list_of = ''
+    test_case = 'abstract'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
     num = 17
     class_name = 'CSGNode'
     list_of = 'ListOfCSGNodes'
@@ -335,7 +342,7 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
-    num = 35
+    num = 33
     class_name = 'SpatialPoints'
     list_of = ''
     test_case = 'array type'
@@ -384,14 +391,14 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
-    num = 33
+    num = 31
     class_name = 'MixedGeometry'
     list_of = ''
     test_case = 'class with math child'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
-    num = 26
+    num = 25
     class_name = 'CSGSetOperator'
     list_of = ''
     test_case = 'contains list of that has abstracts that are abstract'
