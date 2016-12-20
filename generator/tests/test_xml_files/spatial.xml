@@ -183,11 +183,11 @@
         </element>
         <element name="CSGHomogeneousTransformation" typeCode="SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGTransformation" abstract="false" elementName="csgHomogeneousTransformation">
           <attributes>
-            <attribute name="forwardTransformation" required="true" type="element" element="TransformationComponents" abstract="false"/>
-            <attribute name="reverseTransformation" required="true" type="element" element="TransformationComponents" abstract="false"/>
+            <attribute name="forwardTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
+            <attribute name="reverseTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
           </attributes>
         </element>
-        <element name="TransformationComponents" typeCode="SBML_SPATIAL_TRANSFORMATIONCOMPONENTS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="TransformationComponent" typeCode="SBML_SPATIAL_TRANSFORMATIONCOMPONENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="components" required="true" type="array" element="double" abstract="false"/>
             <attribute name="componentsLength" required="true" type="int" abstract="false"/>
@@ -196,11 +196,6 @@
         <element name="CSGPrimitive" typeCode="SBML_SPATIAL_CSGPRIMITIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgPrimitive">
           <attributes>
             <attribute name="primitiveType" required="true" type="enum" element="PrimitiveKind" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="CSGPseudoPrimitive" typeCode="SBML_SPATIAL_CSGPSEUDOPRIMITIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgPseudoPrimitive">
-          <attributes>
-            <attribute name="csgObjectRef" required="true" type="SIdRef" element="CSGObject" abstract="false"/>
           </attributes>
         </element>
         <element name="CSGSetOperator" typeCode="SBML_SPATIAL_CSGSETOPERATOR" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgSetOperator">
@@ -248,11 +243,6 @@
             <attribute name="adjacentDomains" required="false" type="lo_element" element="AdjacentDomains" abstract="false"/>
             <attribute name="geometryDefinition" required="false" type="lo_element" element="GeometryDefinition" abstract="true"/>
             <attribute name="sampledField" required="false" type="lo_element" element="SampledField" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="CoordinateReference" typeCode="SBML_SPATIAL_COORDINATEREFERENCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
-          <attributes>
-            <attribute name="coordinate" required="true" type="enum" element="CoordinateKind" abstract="false"/>
           </attributes>
         </element>
         <element name="MixedGeometry" typeCode="SBML_SPATIAL_MIXEDGEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="GeometryDefinition" abstract="false">
@@ -368,7 +358,6 @@
             <enumValue name="SPATIAL_PRIMITIVEKIND_CONE" value="cone"/>
             <enumValue name="SPATIAL_PRIMITIVEKIND_CIRCLE" value="circle"/>
             <enumValue name="SPATIAL_PRIMITIVEKIND_SQUARE" value="square"/>
-            <enumValue name="SPATIAL_PRIMITIVEKIND_RIGHTTRIANGLE" value="rightTriangle"/>
           </enumValues>
         </enum>
         <enum name="DataKind">
