@@ -410,7 +410,7 @@ permitted on a \CoordinateComponent object. (Reference: SBML Level~3
 Package specification for Spatial Processes, Version~1,
 \sec{coordinatecomponent-class}.)}
 
-\validRule{spatial-21404}{A \CoordinateComponent object must contain two
+\validRule{spatial-21404}{A \CoordinateComponent object must contain one
 and only one instance of each of the Boundary and \Boundary elements. No
 other elements from the SBML Level 3 Spatial Processes namespaces are
 permitted on a \CoordinateComponent object. (Reference: SBML Level~3
@@ -1025,10 +1025,11 @@ permitted on a \CSGHomogeneousTransformation. (Reference: SBML Level~3
 Version~1 Core, Section~3.2.)}
 
 \validRule{spatial-22903}{A \CSGHomogeneousTransformation object must
-contain two child \TransformationComponent elements, one with the name 'forwardTransformation' and the other with the name 'reverseTransformation'. No
-other elements from the SBML Level 3 Spatial Processes namespaces are
-permitted on a \CSGHomogeneousTransformation object. (Reference: SBML
-Level~3 Package specification for Spatial Processes, Version~1,
+contain one and only one instance of each of the TransformationComponent
+and \TransformationComponent elements. No other elements from the SBML
+Level 3 Spatial Processes namespaces are permitted on a
+\CSGHomogeneousTransformation object. (Reference: SBML Level~3 Package
+specification for Spatial Processes, Version~1,
 \sec{csghomogeneoustransformation-class}.)}
 
 
@@ -1117,7 +1118,7 @@ Spatial Processes namespaces are permitted on a \CSGSetOperator object.
 Version~1, \sec{csgsetoperator-class}.)}
 
 \validRule{spatial-23204}{A \CSGSetOperator object may contain one and
-only one instance of the \ListOfCsgNodes element. No other elements from
+only one instance of the \ListOfCSGNodes element. No other elements from
 the SBML Level 3 Spatial Processes namespaces are permitted on a
 \CSGSetOperator object. (Reference: SBML Level~3 Package specification
 for Spatial Processes, Version~1, \sec{csgsetoperator-class}.)}
@@ -1143,15 +1144,15 @@ identifier of an existing \CSGNode object defined in the enclosing
 Spatial Processes, Version~1, \sec{csgsetoperator-class}.)}
 
 \validRule{spatial-23208}{Apart from the general notes and annotations
-subobjects permitted on all SBML objects, a \ListOfCsgNodes container
+subobjects permitted on all SBML objects, a \ListOfCSGNodes container
 object may only contain \CSGNode objects. (Reference: SBML Level~3
 Package specification for Spatial Processes, Version~1,
 \sec{listofcsgnodes-class}.)}
 
-\validRule{spatial-23209}{A \ListOfCsgNodes object may have the optional
+\validRule{spatial-23209}{A \ListOfCSGNodes object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
 other attributes from the SBML Level 3 Core namespaces are permitted on
-a \ListOfCsgNodes object. (Reference: SBML Level~3 Package specification
+a \ListOfCSGNodes object. (Reference: SBML Level~3 Package specification
 for Spatial Processes, Version~1, \sec{listofcsgnodes-class}.)}
 
 
@@ -1312,7 +1313,7 @@ Spatial Processes, Version~1, \sec{boundarycondition-class}.)}
 the syntax of SBML data type \primtype{boundaryConditionKind} and may
 only take on the allowed values of \primtype{boundaryConditionKind}
 defined in SBML; that is, the value must be one of the following:
-'Robin\_valueCoefficient', 'Robin\_inwardNormalGradientCoefficient',
+'Robin_valueCoefficient', 'Robin_inwardNormalGradientCoefficient',
 'Robin_sum', 'Neumann' or 'Dirichlet'. (Reference: SBML Level~3 Package
 specification for Spatial Processes, Version~1,
 \sec{boundarycondition-class}.)}
