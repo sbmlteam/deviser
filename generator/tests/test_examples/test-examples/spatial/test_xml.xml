@@ -21,20 +21,52 @@
             <spatial:listOfAdjacentDomains>
                 <spatial:adjacentDomains spatial:domain1="someString" spatial:domain2="someString" spatial:id="id_7"/>
             </spatial:listOfAdjacentDomains>
+            <spatial:listOfGeometryDefinitions>
+                <spatial:analyticGeometry spatial:id="id_8" spatial:isActive="false">
+                    <spatial:listOfAnalyticVolumes>
+                        <spatial:analyticVolume spatial:domainType="someString" spatial:functionType="layered" spatial:id="id_9" spatial:ordinal="0">
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"/>
+                        </spatial:analyticVolume>
+                    </spatial:listOfAnalyticVolumes>
+                </spatial:analyticGeometry>
+                <spatial:sampledFieldGeometry spatial:id="id_10" spatial:isActive="false" spatial:sampledField="someString">
+                    <spatial:listOfSampledVolumes>
+                        <spatial:sampledVolume spatial:domainType="someString" spatial:id="id_11" spatial:maxValue="0" spatial:minValue="0" spatial:sampledValue="0"/>
+                    </spatial:listOfSampledVolumes>
+                </spatial:sampledFieldGeometry>
+                <spatial:csGeometry spatial:id="id_12" spatial:isActive="false">
+                    <spatial:listOfCSGObjects>
+                        <spatial:csgObject spatial:domainType="someString" spatial:id="id_13" spatial:ordinal="0">
+                            <spatial:csgNode spatial:id="id_14"/>
+                        </spatial:csgObject>
+                    </spatial:listOfCSGObjects>
+                </spatial:csGeometry>
+                <spatial:parametricGeometry spatial:id="id_15" spatial:isActive="false">
+                    <spatial:spatialPoints spatial:arrayDataLength="0" spatial:compression="uncompressed" spatial:dataType="double" spatial:id="id_16"/>
+                    <spatial:listOfParametricObjects>
+                        <spatial:parametricObject spatial:compression="uncompressed" spatial:dataType="double" spatial:domainType="someString" spatial:id="id_17" spatial:pointIndexLength="0" spatial:polygonType="triangle"/>
+                    </spatial:listOfParametricObjects>
+                </spatial:parametricGeometry>
+                <spatial:mixedGeometry spatial:id="id_18" spatial:isActive="false">
+                    <spatial:listOfOrdinalMappings>
+                        <spatial:ordinalMapping spatial:geometryDefinition="someString" spatial:ordinal="0"/>
+                    </spatial:listOfOrdinalMappings>
+                </spatial:mixedGeometry>
+            </spatial:listOfGeometryDefinitions>
             <spatial:listOfSampledFields>
-                <spatial:sampledField spatial:compression="uncompressed" spatial:dataType="double" spatial:id="id_8" spatial:interpolationType="nearestNeighbor" spatial:numSamples1="0" spatial:numSamples2="0" spatial:numSamples3="0" spatial:samplesLength="0"/>
+                <spatial:sampledField spatial:compression="uncompressed" spatial:dataType="double" spatial:id="id_19" spatial:interpolationType="nearestNeighbor" spatial:numSamples1="0" spatial:numSamples2="0" spatial:numSamples3="0" spatial:samplesLength="0"/>
             </spatial:listOfSampledFields>
         </spatial:geometry>
         <listOfCompartments>
             <compartment constant="false" id="compartment">
-                <spatial:compartmentMapping spatial:domainType="someString" spatial:id="id_9" spatial:unitSize="0"/>
+                <spatial:compartmentMapping spatial:domainType="someString" spatial:id="id_20" spatial:unitSize="0"/>
             </compartment>
         </listOfCompartments>
         <listOfSpecies>
-            <species boundaryCondition="false" compartment="compartment" constant="false" hasOnlySubstanceUnits="false" id="id_10" spatial:isSpatial="false"/>
+            <species boundaryCondition="false" compartment="compartment" constant="false" hasOnlySubstanceUnits="false" id="id_21" spatial:isSpatial="false"/>
         </listOfSpecies>
         <listOfParameters>
-            <parameter constant="false" id="id_11">
+            <parameter constant="false" id="id_22">
                 <spatial:spatialSymbolReference spatial:spatialRef="someString"/>
                 <spatial:advectionCoefficient spatial:coordinate="cartesianX" spatial:variable="someString"/>
                 <spatial:boundaryCondition spatial:boundaryDomainType="someString" spatial:coordinateBoundary="someString" spatial:type="Robin_valueCoefficient" spatial:variable="someString"/>

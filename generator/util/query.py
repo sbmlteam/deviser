@@ -449,8 +449,20 @@ def get_other_element_children(this_object, element):
             other_children.append(child['lo_attribs'][i]['element'])
     return other_children
 
+# get children that are concrete instanstaitions
+def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
+    children = []
+    for j in range(0, len(concretes)):
+        grandchildren = get_children(concretes[j]['element'],
+                                     root, reqd_only, '', base_attributes)
+        children.append(grandchildren)
+    if not reqd_only:
+        children = insert_list_of(children, name, root)
+    return children
+
+
 # get the child elements of the class name
-def get_children(name, root, reqd_only, xml_name=''):
+def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     child = get_class(name, root)
     if not child and name == 'ASTNode':
         return dict({'name': 'math', 'children': []})
@@ -464,8 +476,25 @@ def get_children(name, root, reqd_only, xml_name=''):
                                              root, reqd_only, child['attribs'][i]['xml_name'])
                 children.append(grandchildren)
             elif att_type == 'lo_element':
-                if 'concrete' in child['attribs'][i] and len(child['attribs'][i]['concrete']) > 0:
-                    continue;
+                if 'concrete' in child['attribs'][i]:
+                    num = len(child['attribs'][i]['concrete'])
+                    if num == 0:
+                        continue
+                    elif name == 'MixedGeometry' and num > 0:
+                        continue;
+                    else:
+                        base = get_class(child['attribs'][i]['element'], root)
+                        grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
+                                                         root, reqd_only, base['attribs'], child['attribs'][i]['element'])
+#                        for j in range(0, num):
+#                            grandchildren = get_concrete_children(child['attribs'][i]['concrete'],
+#                                                         root, reqd_only, '', base['attribs'])
+#                            grandchildren = get_children(child['attribs'][i]['concrete'][j]['element'],
+#                                                         root, reqd_only, '', base['attribs'])
+                        children.append(grandchildren[0])
+#                        if not reqd_only:
+#                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+
                 else:
                     grandchildren = get_children(child['attribs'][i]['element'],
                                                  root, reqd_only)
@@ -478,6 +507,7 @@ def get_children(name, root, reqd_only, xml_name=''):
                 children.append(grandchildren)
             else:
                 continue
+    # need attributes from base class
     reqd_attribs = []
     for i in range(0, num_attribs):
         attrib = child['attribs'][i]
@@ -487,6 +517,13 @@ def get_children(name, root, reqd_only, xml_name=''):
         else:
             reqd_attribs.append(attrib)
 
+    for i in range(0, len(base_attribs)):
+        attrib = base_attribs[i]
+        if reqd_only:
+            if attrib['reqd']:
+                reqd_attribs.append(attrib)
+        else:
+            reqd_attribs.append(attrib)
     if len(xml_name) > 0:
         name = xml_name
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
