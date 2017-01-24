@@ -391,6 +391,13 @@ def main():
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'spatial'
+    num = 5
+    class_name = 'GeometryDefinition'
+    list_of = 'ListOfGeometryDefinitions'
+    test_case = 'class with math child'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'spatial'
     num = 31
     class_name = 'MixedGeometry'
     list_of = ''
