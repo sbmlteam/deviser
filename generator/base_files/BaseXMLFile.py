@@ -61,7 +61,8 @@ class BaseXMLFile(BaseFile.BaseFile):
         self.comment_start = '<!--'
         self.comment_end = '-->'
 
-        self.start_id = 1
+        self.start_id = [dict({'name': 'id',
+                              'number': 1})]
 
         self.impl = getDOMImplementation()
 
@@ -222,8 +223,9 @@ class BaseXMLFile(BaseFile.BaseFile):
         elif query.is_number(att_type):
             value = '0'
         elif att_type == 'SId':
-            value = 'id_{0}'.format(self.start_id)
-            self.start_id += 1
+            value = self.get_id(attribute)
+        elif att_type == 'SIdRef':
+            value = self.get_id_ref(attribute)
         elif att_type == 'enum':
             value = query.get_first_enum_value(attribute)
         elif att_type == 'SBO':
@@ -307,6 +309,47 @@ class BaseXMLFile(BaseFile.BaseFile):
 ##################################################################################
 
 # helper functions
+
+    def get_id(self, attrib):
+        if 'parent' in attrib:
+            name = strFunctions.lower_first(attrib['parent']['name'])
+        else:
+            name = 'id'
+        [found, index] = self.match_id_name(name)
+        if not found:
+            number = 1
+            self.start_id.append(dict({'name': name, 'number': number}))
+        else:
+            number = self.start_id[index]['number'] + 1
+            self.start_id[index]['number'] = number
+        value = '{0}_{1}'.format(name, number)
+        return value
+
+    def get_id_ref(self, attrib):
+        name = attrib['name']
+        [found, index] = self.match_id_name(name)
+        if found:
+            number = self.start_id[index]['number']
+        elif 'element' in attrib and len(attrib['element']) > 0:
+            name = strFunctions.lower_first(attrib['element'])
+            [found, index] = self.match_id_name(name)
+            if found:
+                number = self.start_id[index]['number']
+            else:
+                name = 'failed_match'
+                number = 1
+        else:
+            name = 'failed_match'
+            number = 1
+        value = '{0}_{1}'.format(name, number)
+        return value
+
+    def match_id_name(self, name):
+        for i in range(0,len(self.start_id)):
+            if self.start_id[i]['name'] == name:
+                return[True, i]
+        return [False, -1]
+
 
     def get_model_index(self, tree, num):
         for i in range(0, num):

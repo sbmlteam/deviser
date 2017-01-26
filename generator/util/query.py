@@ -453,6 +453,8 @@ def get_other_element_children(this_object, element):
 def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
     children = []
     for j in range(0, len(concretes)):
+        if concretes[j]['element'] == 'CSGeometry':
+            continue;
         grandchildren = get_children(concretes[j]['element'],
                                      root, reqd_only, '', base_attributes)
         children.append(grandchildren)

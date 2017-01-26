@@ -97,10 +97,12 @@ class ValidationXMLFiles():
     def write_all_files(self):
         self.determine_rules()
         self.write_file('test_xml')
-        number = 1
-        for i in range(0, len(self.class_rules)):
-            self.write_appropriate_test_cases(self.class_rules[i])
 
+        # for i in range(0, len(self.class_rules)):
+        #     self.write_appropriate_test_cases(self.class_rules[i])
+
+        for i in range(24, 50):
+             self.write_appropriate_test_cases(self.class_rules[i])
     ###########################################################################
 
     def determine_rules(self):
@@ -190,6 +192,8 @@ class ValidationXMLFiles():
             for element in rule['opt']:
                 if 'isListOf' in element and element['isListOf']:
                     name = element['listOfClassName']
+                    if len(name) == 0:
+                        name = strFunctions.cap_list_of_name_no_prefix(element['name'])
                 else:
                     name = element['name']
                 test_needed.append(dict({'name': 'duplicate_element',
@@ -486,13 +490,21 @@ class ValidationXMLFiles():
 
     def find_match_from_plugin(self, tree, parent, child):
         match = None
+        found = False
         for i in range(0, len(tree)):
             if tree[i]['base'] == parent:
+                found = True
                 break
-        if tree[i]['base'] == child:
-            match = tree[i]
+        if found:
+            if tree[i]['base'] == child:
+                match = tree[i]
+            else:
+                match = self.find_match(tree[i], child)
         else:
-            match = self.find_match(tree[i], child)
+            for i in range(0, len(tree)):
+                match = self.find_match(tree[i], child)
+                if match:
+                    break;
         return match
 
     def match_child(self, tree, parent, child):
