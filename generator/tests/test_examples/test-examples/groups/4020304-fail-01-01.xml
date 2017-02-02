@@ -2,12 +2,12 @@
 <sbml groups:required="false" level="3" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:groups="http://www.sbml.org/sbml/level3/version1/groups/version1">
     <model>
         <groups:listOfGroups>
-            <groups:group groups:id="id_1" groups:kind="classification" groups:name="someString">
+            <groups:group groups:id="group_1" groups:kind="classification" groups:name="someString">
                 <groups:listOfMembers groups:id="id_2" groups:name="someString">
-                    <groups:member groups:id="id_3" groups:idRef="someString" groups:metaIdRef="someString" groups:name="someString"/>
+                    <groups:member groups:id="member_1" groups:idRef="failed_match_1" groups:metaIdRef="someString" groups:name="someString"/>
                 </groups:listOfMembers>
-                <groups:listOfMembers groups:id="id_4" groups:name="someString">
-                    <groups:member groups:id="id_5" groups:idRef="someString" groups:metaIdRef="someString" groups:name="someString"/>
+                <groups:listOfMembers groups:id="id_3" groups:name="someString">
+                    <groups:member groups:id="member_2" groups:idRef="failed_match_1" groups:metaIdRef="someString" groups:name="someString"/>
                 </groups:listOfMembers>
             </groups:group>
         </groups:listOfGroups>

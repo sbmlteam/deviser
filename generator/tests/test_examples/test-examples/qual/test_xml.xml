@@ -2,15 +2,15 @@
 <sbml level="3" qual:required="false" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
     <model>
         <qual:listOfQualitativeSpecies>
-            <qual:qualitativeSpecies qual:compartment="someString" qual:constant="false" qual:id="id_1" qual:initialLevel="0" qual:maxLevel="0" qual:name="someString"/>
+            <qual:qualitativeSpecies qual:compartment="failed_match_1" qual:constant="false" qual:id="qualitativeSpecies_1" qual:initialLevel="0" qual:maxLevel="0" qual:name="someString"/>
         </qual:listOfQualitativeSpecies>
         <qual:listOfTransitions>
-            <qual:transition qual:id="id_2" qual:name="someString">
+            <qual:transition qual:id="transition_1" qual:name="someString">
                 <qual:listOfInputs>
-                    <qual:input qual:id="id_3" qual:name="someString" qual:qualitativeSpecies="someString" qual:sign="positive" qual:thresholdLevel="0" qual:transitionEffect="none"/>
+                    <qual:input qual:id="input_1" qual:name="someString" qual:qualitativeSpecies="qualitativeSpecies_1" qual:sign="positive" qual:thresholdLevel="0" qual:transitionEffect="none"/>
                 </qual:listOfInputs>
                 <qual:listOfOutputs>
-                    <qual:output qual:id="id_4" qual:name="someString" qual:outputLevel="0" qual:qualitativeSpecies="someString" qual:transitionEffect="production"/>
+                    <qual:output qual:id="output_1" qual:name="someString" qual:outputLevel="0" qual:qualitativeSpecies="qualitativeSpecies_1" qual:transitionEffect="production"/>
                 </qual:listOfOutputs>
                 <qual:listOfFunctionTerms>
                     <qual:functionTerm qual:resultLevel="0">

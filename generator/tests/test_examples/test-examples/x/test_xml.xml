@@ -3,7 +3,7 @@
     <model>
         <x:containerX>
             <x:listOfFreds>
-                <x:fred x:id="id_1"/>
+                <x:fred x:id="fred_1"/>
             </x:listOfFreds>
         </x:containerX>
     </model>

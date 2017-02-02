@@ -98,11 +98,11 @@ class ValidationXMLFiles():
         self.determine_rules()
         self.write_file('test_xml')
 
-        # for i in range(0, len(self.class_rules)):
-        #     self.write_appropriate_test_cases(self.class_rules[i])
+        for i in range(0, len(self.class_rules)):
+            self.write_appropriate_test_cases(self.class_rules[i])
 
-        for i in range(24, 50):
-             self.write_appropriate_test_cases(self.class_rules[i])
+        #for i in range(24, 25):
+        #     self.write_appropriate_test_cases(self.class_rules[i])
     ###########################################################################
 
     def determine_rules(self):
@@ -190,30 +190,19 @@ class ValidationXMLFiles():
                                  'lo_child': loname}))
         elif tc.endswith('AllowedElements'):
             for element in rule['opt']:
-                if 'isListOf' in element and element['isListOf']:
-                    name = element['listOfClassName']
-                    if len(name) == 0:
-                        name = strFunctions.cap_list_of_name_no_prefix(element['name'])
-                else:
-                    name = element['name']
+                name = self.get_name(element)
                 test_needed.append(dict({'name': 'duplicate_element',
                                          'object': rule['object'],
                                          'child': name}))
             for element in rule['reqd']:
-                if 'isListOf' in element and element['isListOf']:
-                    name = element['listOfClassName']
-                else:
-                    name = element['name']
+                name = self.get_name(element)
                 test_needed.append(dict({'name': 'remove_element',
                                          'object': rule['object'],
                                          'child': name}))
         elif tc.endswith('AllowedCoreElements'):
             if self.is_lo_rule(rule):
                 for element in rule['opt']:
-                    if element['isListOf']:
-                        name = element['listOfClassName']
-                    else:
-                        name = element['name']
+                    name = self.get_name(element)
                     test_needed.append(dict({'name': 'add_core_element',
                                              'object': rule['object'],
                                              'child': name}))
@@ -226,10 +215,7 @@ class ValidationXMLFiles():
                                              'child': name,
                                              'type': 'notes'}))
                 for element in rule['reqd']:
-                    if element['isListOf']:
-                        name = element['listOfClassName']
-                    else:
-                        name = element['name']
+                    name = self.get_name(element)
                     test_needed.append(dict({'name': 'add_core_element',
                                              'object': rule['object'],
                                              'child': name}))
@@ -375,8 +361,12 @@ class ValidationXMLFiles():
 
     @staticmethod
     def get_name(element):
-        if element['isListOf']:
-            name = element['listOfClassName']
+        name = ''
+        if 'isListOf' in element and element['isListOf']:
+            if 'listOfClassName' in element:
+                name = element['listOfClassName']
+            if len(name) == 0:
+                name = strFunctions.cap_list_of_name_no_prefix(element['name'])
         else:
             name = element['name']
         return name
@@ -482,6 +472,18 @@ class ValidationXMLFiles():
         match = None
         if 'name' in tree and tree['name'] == child:
             return tree
+        # hack for boundary
+        if child == 'Boundary' and 'name' in tree and tree['name'] == 'boundaryMin':
+            return tree
+        elif child == "GeometryDefinition" and 'name' in tree and tree['name'] == "AnalyticGeometry":
+            return tree
+        match = self.look_in_children(tree, child)
+        if match:
+            return match
+        return match
+
+    def look_in_children(self, tree, child):
+        match = None
         for i in range(0, len(tree['children'])):
             match = self.find_match(tree['children'][i], child)
             if match:
@@ -527,3 +529,10 @@ class ValidationXMLFiles():
             match = self.find_match(tree, parent)
         return match
 
+#############################################################################################
+
+    # for testing
+    def write_test_files(self, start, finish):
+        self.determine_rules()
+        for i in range(start, finish):
+             self.write_appropriate_test_cases(self.class_rules[i])

@@ -61,6 +61,17 @@ def generate_xml_fails(filename):
     os.chdir('../../.')
     return ob['name']
 
+def generate_some_xml_fails(filename, start, stop):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if not os.path.exists(ob['name']):
+        os.mkdir(ob['name'])
+    os.chdir('./{0}'.format(ob['name']))
+    all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
+    all_files.write_test_files(start, stop)
+    os.chdir('../../.')
+    return ob['name']
 
 #############################################################################
 # Specific compare functions
@@ -119,7 +130,12 @@ def run_xml_fail_tests(name):
     print('')
     return fail
 
-
+def run_specific_xml_fail_tests(name, start, stop):
+    filename = test_functions.set_up_test(name, 'Examples')
+    pkg = generate_some_xml_fails(filename, start, stop)
+    fail = compare_xml_fails(pkg)
+    print('')
+    return fail
 
 #########################################################################
 # Main function
@@ -164,6 +180,23 @@ def main():
     name = 'spatial'
     fail += run_xml_test(name)
 
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 8, 13)
+
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 15, 19)
+
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 22, 26)
+
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 32, 36)
+
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 41, 45)
+
+    # name = 'spatial'
+#    fail += run_specific_xml_fail_tests(name, 41, 42)
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
     return fail
