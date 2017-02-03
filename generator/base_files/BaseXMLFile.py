@@ -230,6 +230,10 @@ class BaseXMLFile(BaseFile.BaseFile):
             value = query.get_first_enum_value(attribute)
         elif att_type == 'SBO':
             value = 'SBO:0000001'
+        elif att_type == 'UnitSId':
+            value = 'dimensionless'
+        elif att_type == 'UnitSIdRef':
+            value = 'dimensionless'
         else:
             value = 'someString'
         return value

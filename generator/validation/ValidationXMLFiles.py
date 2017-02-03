@@ -199,6 +199,9 @@ class ValidationXMLFiles():
                 test_needed.append(dict({'name': 'remove_element',
                                          'object': rule['object'],
                                          'child': name}))
+                test_needed.append(dict({'name': 'duplicate_element',
+                                         'object': rule['object'],
+                                         'child': name}))
         elif tc.endswith('AllowedCoreElements'):
             if self.is_lo_rule(rule):
                 for element in rule['opt']:
@@ -320,8 +323,9 @@ class ValidationXMLFiles():
                                      'attrib': strFunctions.lower_first(rule['attrib']),
                                      'att_type': rule['attrib_type']}))
         else:
-            print(tc)
+            print(tc + ' not done')
 
+        print(tc + 'done')
         return [test_needed, passes]
 
 
@@ -378,7 +382,7 @@ class ValidationXMLFiles():
     def create_appropriate_tree(self, test):
         subtree = []
         if test['name'] == 'empty_lo':
-            subtree = self.remove_element(test['object'], test['lo_child'])
+            subtree = self.remove_element_from_child(test['object'], test['lo_child'])
         elif test['name'] == 'duplicate_element':
             subtree = self.duplicate_element(test['object'], test['child'])
         elif test['name'] == 'add_pkg_element':
@@ -395,18 +399,44 @@ class ValidationXMLFiles():
             subtree = self.add_attrib(test['object'], test['child'], attrib, self.package)
         elif test['name'] == 'remove_attribute':
             subtree = self.remove_attrib(test['object'], test['child'], test['attrib'])
-        elif test['name'] == 'remove_empty':
+        elif test['name'] == 'remove_element':
             subtree = self.remove_element(test['object'], test['child'])
         elif test['name'] == 'replace_attribute':
             subtree = self.replace_attribute_type(test['object'], test['child'], test['attrib'], test['att_type'])
         return subtree
 
-    def remove_element(self, parent, child):
+    def remove_element_from_child(self, parent, child):
         subtree = copy.deepcopy(self.tree)
         match = self.match_child(subtree, parent, child)
         if match:
             match['children'] = []
         return subtree
+
+
+    def remove_element(self, parent, child):
+        subtree = copy.deepcopy(self.tree)
+        match = self.match_child(subtree, parent, child)
+        match_parent = self.match_parent(subtree, parent, child)
+        if match and match_parent:
+            num_children = len(match_parent['children'])
+            for index in range(0, num_children):
+                if match == match_parent['children'][index]:
+                    break
+            if index < num_children:
+                cp_parent = copy.deepcopy(match_parent)
+                match_parent['children'] = []
+                for i in range(0, num_children):
+                    if i != index:
+                        match_parent['children'].append(cp_parent['children'][i])
+        return subtree
+
+    def remove_child(self, parent, index):
+        cp_tree = copy.deepcopy(parent)
+        cp_tree['children'] = []
+        for i in range(0, len(parent['children'])):
+            if i != index:
+                cp_tree['children'].append(parent['children'][i])
+        return cp_tree
 
     def duplicate_element(self, parent, child):
         # sort for nesting
@@ -473,7 +503,7 @@ class ValidationXMLFiles():
         if 'name' in tree and tree['name'] == child:
             return tree
         # hack for boundary
-        if child == 'Boundary' and 'name' in tree and tree['name'] == 'boundaryMin':
+        if child == 'Boundary' and 'name' in tree and (tree['name'] == 'boundaryMin' or tree['name'] == 'boundaryMax'):
             return tree
         elif child == "GeometryDefinition" and 'name' in tree and tree['name'] == "AnalyticGeometry":
             return tree

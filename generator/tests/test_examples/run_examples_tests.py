@@ -153,50 +153,57 @@ def main():
     fail = 0
 
     # run the individual tests
-    name = 'qual'
-    fail += run_test(name)
-
-    name = 'lo_children'
-    fail += run_test(name)
-
-    name = 'lo_children'
-    fail += run_xml_test(name)
-
-    name = 'base_class'
-    fail += run_xml_test(name)
-
-    name = 'base_class'
-    fail += run_xml_fail_tests(name)
-
-    name = 'groups'
-    fail += run_xml_test(name)
-
-    name = 'groups'
-    fail += run_xml_fail_tests(name)
-
-    name = 'qual'
-    fail += run_xml_test(name)
-
-    name = 'spatial'
-    fail += run_xml_test(name)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 8, 13)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 15, 19)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 22, 26)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 32, 36)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 41, 45)
-
+    # name = 'qual'
+    # fail += run_test(name)
+    #
+    # name = 'lo_children'
+    # fail += run_test(name)
+    #
+    # name = 'lo_children'
+    # fail += run_xml_test(name)
+    #
+    # name = 'base_class'
+    # fail += run_xml_test(name)
+    #
+    # name = 'base_class'
+    # fail += run_xml_fail_tests(name)
+    #
+    # name = 'groups'
+    # fail += run_xml_test(name)
+    #
+    # name = 'groups'
+    # fail += run_xml_fail_tests(name)
+    #
+    # name = 'qual'
+    # fail += run_xml_test(name)
+    #
     # name = 'spatial'
-#    fail += run_specific_xml_fail_tests(name, 41, 42)
+    # fail += run_xml_test(name)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 8, 13)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 15, 19)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 22, 26)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 32, 36)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 41, 45)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 53, 54)
+
+
+
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 35, 36)
+
+
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
     return fail
