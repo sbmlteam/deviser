@@ -314,9 +314,11 @@ class BaseXMLFile(BaseFile.BaseFile):
 
 # helper functions
 
-    def get_id(self, attrib):
+    def get_id(self, attrib, use_name=None):
         if 'parent' in attrib:
             name = strFunctions.lower_first(attrib['parent']['name'])
+        elif use_name:
+            name = use_name
         else:
             name = 'id'
         [found, index] = self.match_id_name(name)
@@ -340,10 +342,8 @@ class BaseXMLFile(BaseFile.BaseFile):
             if found:
                 number = self.start_id[index]['number']
             else:
-                name = 'failed_match'
                 number = 1
         else:
-            name = 'failed_match'
             number = 1
         value = '{0}_{1}'.format(name, number)
         return value

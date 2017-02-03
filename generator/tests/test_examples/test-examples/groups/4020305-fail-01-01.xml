@@ -4,7 +4,7 @@
         <groups:listOfGroups>
             <groups:group groups:id="group_1" groups:kind="0" groups:name="someString">
                 <groups:listOfMembers groups:id="id_2" groups:name="someString">
-                    <groups:member groups:id="member_1" groups:idRef="failed_match_1" groups:metaIdRef="someString" groups:name="someString"/>
+                    <groups:member groups:id="member_1" groups:idRef="sBase_1" groups:metaIdRef="someString" groups:name="someString"/>
                 </groups:listOfMembers>
             </groups:group>
         </groups:listOfGroups>

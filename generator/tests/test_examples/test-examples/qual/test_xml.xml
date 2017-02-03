@@ -2,7 +2,7 @@
 <sbml level="3" qual:required="false" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
     <model>
         <qual:listOfQualitativeSpecies>
-            <qual:qualitativeSpecies qual:compartment="failed_match_1" qual:constant="false" qual:id="qualitativeSpecies_1" qual:initialLevel="0" qual:maxLevel="0" qual:name="someString"/>
+            <qual:qualitativeSpecies qual:compartment="compartment_1" qual:constant="false" qual:id="qualitativeSpecies_1" qual:initialLevel="0" qual:maxLevel="0" qual:name="someString"/>
         </qual:listOfQualitativeSpecies>
         <qual:listOfTransitions>
             <qual:transition qual:id="transition_1" qual:name="someString">
