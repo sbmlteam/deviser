@@ -201,6 +201,9 @@ def main():
     name = 'spatial'
     fail += run_specific_xml_fail_tests(name, 60, 61)
 
+    name = 'spatial'
+    fail += run_specific_xml_fail_tests(name, 65, 66)
+
 
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
