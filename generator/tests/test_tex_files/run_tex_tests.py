@@ -161,9 +161,9 @@ def main():
     test_case = 'validation'
     fail += run_test(name, test_case)
 
-    name = 'spatial'
-    test_case = 'validation'
-    fail += run_test(name, test_case)
+    # name = 'spatial'
+    # test_case = 'validation'
+    # fail += run_test(name, test_case)
 
     name = 'spatial'
     test_case = 'body'
