@@ -428,6 +428,12 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         code = attrib_functions.write_create_object()
         self.write_function_implementation(code, exclude=True)
 
+        code = attrib_functions.write_add_object()
+        self.write_function_implementation(code, exclude=True)
+
+        code = attrib_functions.write_remove_object()
+        self.write_function_implementation(code, exclude=True)
+
         code = attrib_functions.write_get_num_objects()
         self.write_function_implementation(code, exclude=True)
 

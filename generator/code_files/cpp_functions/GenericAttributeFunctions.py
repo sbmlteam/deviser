@@ -416,7 +416,7 @@ class GenericAttributeFunctions():
 
     ########################################################################
 
-    # Functions for writing create object functions
+    # Functions for manipulating object functions
 
     # function to write create functions
     def write_create_object(self):
@@ -436,10 +436,10 @@ class GenericAttributeFunctions():
             .format(self.class_name)
         params.append('@param elementName, the name of the element to create.')
 
-        return_lines.append('pointer to the element created.')
+        return_lines.append('@return pointer to the element created.')
 
         # create the function declaration
-        function = 'createObject'
+        function = 'createChildObject'
         return_type = 'SBase*'
 
 
@@ -481,6 +481,146 @@ class GenericAttributeFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
+    # function to write add functions
+    def write_add_object(self):
+        if not self.is_cpp_api:
+            return
+        elif self.is_list_of:
+            return
+
+        if len(self.elements) == 0:
+            return
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Adds a new "elementName" object to this {0}.' \
+            .format(self.class_name)
+        params.append('@param elementName, the name of the element to create.')
+        params.append('@param element, pointer to the element to be added.')
+
+        return_lines.append('@copydetails doc_returns_success_code')
+        return_lines.append('@li @{0}constant{1}{2}, '
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.success, self.close_br))
+        return_lines.append('@li @{0}constant{1}{2},'
+                            ' OperationReturnValues_'
+                            't{3}'.format(self.language, self.open_br,
+                                          self.failed, self.close_br))
+
+
+        # create the function declaration
+        function = 'addChildObject'
+        return_type = 'int'
+
+        arguments = ['const std::string& elementName', 'const {0}* element'.format(self.base_class)]
+
+        code = []
+        # create the function implementation
+#        first_line = ['{0}* obj = NULL'.format(self.base_class)]
+        last_line = ['return LIBSBML_OPERATION_FAILED']
+        first = True
+        block = []
+        if_block = []
+
+        for elem in self.elements:
+            if not first:
+                block.append('else if')
+            else:
+                first = False
+            block.append('elementName == \"{0}\" && element->getTypeCode() == SBML_{1}'.format(elem, elem.upper()))
+            if elem not in self.single_elements:
+                block.append('return add{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem)))
+            else:
+                block.append('return set{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem)))
+
+            if len(block) > 2:
+                if_block = self.create_code_block('else_if', block)
+            else:
+                if_block = self.create_code_block('if', block)
+        code = [if_block,
+                self.create_code_block('line', last_line)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
+    # function to write remove functions
+    def write_remove_object(self):
+        if not self.is_cpp_api:
+            return
+        elif self.is_list_of:
+            return
+
+        if len(self.elements) == 0:
+            return
+
+        # create comment parts
+        params = []
+        return_lines = []
+        additional = []
+        title_line = 'Removes and returns the new "elementName" object with the given id in this {0}.' \
+            .format(self.class_name)
+        params.append('@param elementName, the name of the element to remove.')
+        params.append('@param id, the id of the element to remove.')
+
+        return_lines.append('@return pointer to the element removed.')
+
+        # create the function declaration
+        function = 'removeChildObject'
+        return_type = 'SBase*'
+
+        arguments = ['const std::string& elementName', 'const std::string& id']
+
+        code = []
+        # create the function implementation
+        last_line = ['return NULL']
+        first = True
+        block = []
+        if_block = []
+
+        for elem in self.elements:
+            if not first:
+                block.append('else if')
+            else:
+                first = False
+            block.append('elementName == \"{0}\"'.format(elem))
+            if elem not in self.single_elements:
+                block.append('return remove{0}(id)'.format(strFunctions.upper_first(elem)))
+            else:
+                block.append('{0} * obj = get{0}'.format(strFunctions.upper_first(elem)))
+                block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem)))
+            if len(block) > 2:
+                if_block = self.create_code_block('else_if', block)
+            else:
+                if_block = self.create_code_block('if', block)
+        code = [if_block,
+                self.create_code_block('line', last_line)]
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
     # function to write get num objects functions
     def write_get_num_objects(self):
         if not self.is_cpp_api:
@@ -499,7 +639,7 @@ class GenericAttributeFunctions():
             .format(self.class_name)
         params.append('@param elementName, the name of the element to get number of.')
 
-        return_lines.append('unsigned int number of elements.')
+        return_lines.append('@return unsigned int number of elements.')
 
         # create the function declaration
         function = 'getNumObjects'
@@ -570,7 +710,7 @@ class GenericAttributeFunctions():
         params.append('@param elementName, the name of the element to get number of.')
         params.append('@param index, unsigned int teh index of teh object to retrieve.')
 
-        return_lines.append('pointer to the object.')
+        return_lines.append('@return pointer to the object.')
 
         # create the function declaration
         function = 'getObject'
