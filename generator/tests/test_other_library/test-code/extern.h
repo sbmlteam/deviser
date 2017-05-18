@@ -4,25 +4,24 @@
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
- * This file is part of libSEDML. Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on
- * github: https://github.com/fbergmann/libSEDML/
- * 
-
- * Copyright (c) 2013-2016, Frank T. Bergmann
- * All rights reserved.
- * 
-
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
-
- * 1. Redistributions of source code must retain the above copyright notice,
- * this
- * list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
+ * This file is part of libSBML. Please visit http://sbml.org for more
+ * information about SBML, and the latest version of libSBML.
+ *
+ * Copyright (C) 2013-2017 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ * 3. University of Heidelberg, Heidelberg, Germany
+ *
+ * Copyright (C) 2009-2013 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ *
+ * Copyright (C) 2006-2008 by the California Institute of Technology,
+ * Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. Japan Science and Technology Agency, Japan
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -37,34 +36,34 @@
 
 
 
-#ifndef LIBSEDML_EXTERN_H
-#define LIBSEDML_EXTERN_H
+#ifndef LIBCOMBINE_EXTERN_H
+#define LIBCOMBINE_EXTERN_H
 
-#include <sedml/common/libsedml-namespace.h>
+#include <omex/common/libcombine-namespace.h>
 
 #if ( defined(WIN32) && !defined(CYGWIN) && !defined(__MINGW32__))
 
-#if ( ! defined LIBSEDML_STATIC )
+#if ( ! defined LIBCOMBINE_STATIC )
 /**
  * The following ifdef block is the standard way of creating macros which
  * make exporting from a DLL simpler. All files within this DLL are
- * compiled with the LIBSEDML_EXPORTS symbol defined on the command line.
+ * compiled with the LIBCOMBINE_EXPORTS symbol defined on the command line.
  * This symbol should not be defined on any project that uses this
  * DLL. This way any other project whose source files include this file see
- * LIBSEDML_EXTERN functions as being imported from a DLL, wheras this DLL
+ * LIBCOMBINE_EXTERN functions as being imported from a DLL, wheras this DLL
  * sees symbols defined with this macro as being exported.
  *
- * (From Andrew Finney's sbwdefs.h, with "SBW" replaced by "LIBSEDML" :)
+ * (From Andrew Finney's sbwdefs.h, with "SBW" replaced by "LIBCOMBINE" :)
  */
-#if defined(LIBSEDML_EXPORTS)
-#  define LIBSEDML_EXTERN __declspec(dllexport)
+#if defined(LIBCOMBINE_EXPORTS)
+#  define LIBCOMBINE_EXTERN __declspec(dllexport)
 #else
-#  define LIBSEDML_EXTERN __declspec(dllimport)
+#  define LIBCOMBINE_EXTERN __declspec(dllimport)
 #endif
 
 #else
-#  define LIBSEDML_EXTERN
-#endif  /* LIBSEDML_STATIC */
+#  define LIBCOMBINE_EXTERN
+#endif  /* LIBCOMBINE_STATIC */
 
 /**
  * Disable MSVC++ warning C4800: 'const int' : forcing value to bool 'true'
@@ -90,14 +89,14 @@
 #else
 
 /**
- * LIBSEDML_EXTERN is used under Windows to simplify exporting functions
+ * LIBCOMBINE_EXTERN is used under Windows to simplify exporting functions
  * from a DLL.  When compiling under Windows, all files within this DLL are
- * compiled with the LIBSEDML_EXPORTS symbol defined on the command line.
+ * compiled with the LIBCOMBINE_EXPORTS symbol defined on the command line.
  * This in turn causes extern.h to define a different version of
- * LIBSEDML_EXTERN that is appropriate for exporting functions to client
+ * LIBCOMBINE_EXTERN that is appropriate for exporting functions to client
  * code that uses the DLL.
  */
-#define LIBSEDML_EXTERN
+#define LIBCOMBINE_EXTERN
 
 #endif  /* WIN32 */
 
@@ -113,5 +112,5 @@
 #endif
 
 
-#endif  /** LIBSEDML_EXTERN_H **/
+#endif  /** LIBCOMBINE_EXTERN_H **/
 

@@ -738,7 +738,18 @@ SedRepeatedTask::readAttributes(
   // resetModel bool (use = "optional" )
   // 
 
+  numErrs = log->getNumErrors();
   mIsSetResetModel = attributes.readInto("resetModel", mResetModel);
+
+  if (mIsSetResetModel == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(SedmlRepeatedTaskResetModelMustBeBoolean, level, version);
+    }
+  }
 }
 
 /** @endcond */

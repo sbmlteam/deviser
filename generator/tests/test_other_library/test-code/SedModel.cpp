@@ -968,6 +968,50 @@ SedModel::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedModel.
+ */
+unsigned int
+SedModel::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "change")
+  {
+    return getNumChanges();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedModel.
+ */
+SBase*
+SedModel::getObject(const std::string& elementName, unsigned int index)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "change")
+  {
+    return getChange(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.

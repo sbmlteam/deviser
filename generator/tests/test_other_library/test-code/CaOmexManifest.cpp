@@ -7,7 +7,7 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2013-2016 jointly by the following organizations:
+ * Copyright (C) 2013-2017 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
  * 3. University of Heidelberg, Heidelberg, Germany
@@ -607,6 +607,50 @@ CaOmexManifest::createObject(const std::string& elementName)
   if (elementName == "content")
   {
     return createContent();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Returns the number of "elementName" in this CaOmexManifest.
+ */
+unsigned int
+CaOmexManifest::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "content")
+  {
+    return getNumContents();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenlibCombineInternal */
+
+/*
+ * Returns the nth object of "objectName" in this CaOmexManifest.
+ */
+SBase*
+CaOmexManifest::getObject(const std::string& elementName, unsigned int index)
+{
+  CaBase* obj = NULL;
+
+  if (elementName == "content")
+  {
+    return getContent(index);
   }
 
   return obj;

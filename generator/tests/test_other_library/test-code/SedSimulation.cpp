@@ -802,6 +802,53 @@ SedSimulation::createObject(const std::string& elementName)
 /** @endcond */
 
 
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedSimulation.
+ */
+unsigned int
+SedSimulation::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "algorithm")
+  {
+    if (isSetAlgorithm())
+    {
+      return 1;
+    }
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedSimulation.
+ */
+SBase*
+SedSimulation::getObject(const std::string& elementName, unsigned int index)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "algorithm")
+  {
+    return getAlgorithm();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
 /*
  * Returns the first child element that has the given @p id in the model-wide
  * SId namespace, or @c NULL if no such object is found.
