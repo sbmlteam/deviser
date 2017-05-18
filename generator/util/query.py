@@ -545,6 +545,8 @@ def get_child_elements(elements, lo_elements):
 def insert_list_of(original, child_name, root):
     child = get_class(child_name, root)
     lo_name = strFunctions.list_of_name(child['name'])
+    if 'lo_elementName' in child and len(child['lo_elementName']) > 0:
+        lo_name = child['lo_elementName']
     lo_attribs = []
     for att in child['lo_attribs']:
         lo_attribs.append(att)
@@ -568,6 +570,7 @@ def create_object_tree(pkg_object, reqd_only = True):
     tree = []
     root = None
     for i in range(0, len(pkg_object['plugins'])):
+        branch = None
         plugin = pkg_object['plugins'][i]
         children = []
         if len(plugin['extension']) > 0:
@@ -579,7 +582,7 @@ def create_object_tree(pkg_object, reqd_only = True):
             root = plugin['lo_extension'][0]['root']
         for j in range(0, len(plugin['lo_extension'])):
             grandchildren = get_children(plugin['lo_extension'][j]['name'],
-                                         root, reqd_only)
+                                         root, reqd_only, plugin['lo_extension'][j]['xml_name'])
             if not reqd_only:
                 grandchildren = insert_list_of(grandchildren, plugin['lo_extension'][j]['name'], root)
             children.append(grandchildren)

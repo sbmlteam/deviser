@@ -719,6 +719,10 @@ class ParseXML():
                 for attr in elem['attribs']:
                     attr['parent'] = elem
                     attr['root'] = package
+            if 'lo_attribs' in elem:
+                for attr in elem['lo_attribs']:
+                    attr['parent'] = elem
+                    attr['root'] = package
 
         for elem in package['baseElements']:
             elem['root'] = package
@@ -728,6 +732,18 @@ class ParseXML():
                     attr['root'] = package
             if 'concrete' in elem:
                 for attr in elem['concrete']:
+                    attr['parent'] = elem
+                    attr['root'] = package
+            if 'lo_attribs' in elem:
+                for attr in elem['lo_attribs']:
+                    attr['parent'] = elem
+                    attr['root'] = package
+
+
+        for elem in package['plugins']:
+            elem['root'] = package
+            if 'attribs' in elem:
+                for attr in elem['attribs']:
                     attr['parent'] = elem
                     attr['root'] = package
 

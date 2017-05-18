@@ -72,19 +72,21 @@ class BaseXMLFile(BaseFile.BaseFile):
     #########################################################################
     # main writing function
 
-    def write_xml(self, tree, error_code=None):
+    def write_xml(self, tree, error_code=None, plugin_no=-1):
         self.create_document(error_code)
         num_plugins = len(tree)
         model_index = self.get_model_index(tree, num_plugins)
         if model_index == num_plugins:
             # need to sort this
-            print('create model')
+            print('we have hit somewhere I dont think we should be')
         else:
             element = self.create_top_object(tree[model_index])
             self.doc.documentElement.appendChild(element)
 
         for i in range(0, num_plugins):
             if i == model_index:
+                continue;
+            elif plugin_no > -1 and i != plugin_no:
                 continue;
             element = self.create_listof_object(tree[i])
             if element:
@@ -153,7 +155,8 @@ class BaseXMLFile(BaseFile.BaseFile):
 
     def create_listof_object(self, tree):
         name = strFunctions.lower_list_of_name_no_prefix(tree['base'])
-        if name == 'listOfReactions':
+        if name == 'listOfReactions' or name == 'listOfSimpleSpeciesReferences' or name == 'listOfSpeciesReferences'\
+                or name == 'listOfInSpeciesTypeBonds' or name == 'listOfOutwardBindingSites':
             return None
         lo_element = self.doc.createElement('{0}'.format(name))
         element = self.create_object(tree)

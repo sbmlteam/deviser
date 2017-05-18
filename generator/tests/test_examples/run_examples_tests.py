@@ -61,7 +61,7 @@ def generate_xml_fails(filename):
     os.chdir('../../.')
     return ob['name']
 
-def generate_some_xml_fails(filename, start, stop):
+def generate_some_xml_fails(filename, start, stop, number=-1):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
     os.chdir('./temp')
@@ -69,6 +69,8 @@ def generate_some_xml_fails(filename, start, stop):
         os.mkdir(ob['name'])
     os.chdir('./{0}'.format(ob['name']))
     all_files = ValidationXMLFiles.ValidationXMLFiles(ob)
+    if number > -1:
+        all_files.set_num_components(number)
     all_files.write_test_files(start, stop)
     os.chdir('../../.')
     return ob['name']
@@ -130,9 +132,9 @@ def run_xml_fail_tests(name):
     print('')
     return fail
 
-def run_specific_xml_fail_tests(name, start, stop):
+def run_specific_xml_fail_tests(name, start, stop, number=-1):
     filename = test_functions.set_up_test(name, 'Examples')
-    pkg = generate_some_xml_fails(filename, start, stop)
+    pkg = generate_some_xml_fails(filename, start, stop, number)
     fail = compare_xml_fails(pkg)
     print('')
     return fail
@@ -153,58 +155,60 @@ def main():
     fail = 0
 
     # run the individual tests
-    name = 'qual'
-    fail += run_test(name)
-
-    name = 'lo_children'
-    fail += run_test(name)
-
-    name = 'lo_children'
-    fail += run_xml_test(name)
-
-    name = 'base_class'
-    fail += run_xml_test(name)
-
-    name = 'base_class'
-    fail += run_xml_fail_tests(name)
-
+    # name = 'qual'
+    # fail += run_test(name)
+    #
+    # name = 'lo_children'
+    # fail += run_test(name)
+    #
+    # name = 'lo_children'
+    # fail += run_xml_test(name)
+    #
+    # name = 'base_class'
+    # fail += run_xml_test(name)
+    #
+    # name = 'base_class'
+    # fail += run_xml_fail_tests(name)
+    #
     name = 'groups'
     fail += run_xml_test(name)
 
-    name = 'groups'
-    fail += run_xml_fail_tests(name)
-
-    name = 'qual'
-    fail += run_xml_test(name)
-
-    name = 'spatial'
-    fail += run_xml_test(name)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 8, 13)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 15, 19)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 22, 26)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 32, 36)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 41, 45)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 53, 54)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 60, 61)
-
-    name = 'spatial'
-    fail += run_specific_xml_fail_tests(name, 65, 66)
-
-
+    # name = 'groups'
+    # fail += run_xml_fail_tests(name)
+    #
+    # name = 'qual'
+    # fail += run_xml_test(name)
+    #
+    # name = 'spatial'
+    # fail += run_xml_test(name)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 8, 13)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 15, 19)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 22, 26)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 32, 36)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 41, 45)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 53, 54)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 60, 61)
+    #
+    # name = 'spatial'
+    # fail += run_specific_xml_fail_tests(name, 65, 66)
+    #
+    # name = 'multi'
+    # fail += run_specific_xml_fail_tests(name, 1, 2, 0)
+    #
     # write summary
     test_functions.report('examples', fail, fails, not_tested)
     return fail

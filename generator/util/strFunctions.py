@@ -113,7 +113,7 @@ def plural(name):
     elif name.endswith('hild'):
         returned_word = name + 'ren'
     elif name.endswith('x'):
-        returned_word = name[0:len(name)-1] + 'es'
+        returned_word = name[0:len(name)] + 'es'
     else:
         returned_word = name + 's'
     return returned_word

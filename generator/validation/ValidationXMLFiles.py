@@ -72,25 +72,31 @@ class ValidationXMLFiles():
 
         self.class_rules = []
 
+        self.num_to_write = -1
+
     ##########################################################################
+
+    def set_num_components(self, number):
+        self.num_to_write = number
+
 
     def write_file(self, filename):
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
-        xml.write_xml(self.tree)
+        xml.write_xml(self.tree, None, self.num_to_write )
         xml.close_file()
 
 
     def write_specific_file(self, filename, subtree):
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
-        xml.write_xml(subtree)
+        xml.write_xml(subtree, None, self.num_to_write )
         xml.close_file()
 
     def write_toplevel_fail_file(self, filename, code):
         xml = BaseXMLFile.BaseXMLFile(filename, self.package,
                                       self.reqd)
-        xml.write_xml(self.tree, code)
+        xml.write_xml(self.tree, code, self.num_to_write )
         xml.close_file()
 
     ###########################################################################
@@ -325,7 +331,7 @@ class ValidationXMLFiles():
         else:
             print(tc + ' not done')
 
-        print(tc + 'done')
+        print(tc + ' done ' + str(rule['number']))
         return [test_needed, passes]
 
 
