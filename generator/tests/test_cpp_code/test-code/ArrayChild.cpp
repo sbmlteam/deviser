@@ -753,7 +753,7 @@ ArrayChild::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this ArrayChild.
  */
 SBase*
-ArrayChild::createObject(const std::string& elementName)
+ArrayChild::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -763,6 +763,50 @@ ArrayChild::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this ArrayChild.
+ */
+int
+ArrayChild::addChildObject(const std::string& elementName,
+                           const SBase* element)
+{
+  if (elementName == "unit" && element->getTypeCode() == SBML_UNIT)
+  {
+    return setUnit((const Unit*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * ArrayChild.
+ */
+SBase*
+ArrayChild::removeChildObject(const std::string& elementName,
+                              const std::string& id)
+{
+  if (elementName == "unit")
+  {
+    Unit * obj = getUnit;
+    if (unsetUnit() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

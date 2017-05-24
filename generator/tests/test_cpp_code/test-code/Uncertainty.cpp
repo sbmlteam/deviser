@@ -767,7 +767,7 @@ Uncertainty::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Uncertainty.
  */
 SBase*
-Uncertainty::createObject(const std::string& elementName)
+Uncertainty::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -777,6 +777,50 @@ Uncertainty::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Uncertainty.
+ */
+int
+Uncertainty::addChildObject(const std::string& elementName,
+                            const SBase* element)
+{
+  if (elementName == "uncertML" && element->getTypeCode() == SBML_UNCERTML)
+  {
+    return setUncertML((const UncertML*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Uncertainty.
+ */
+SBase*
+Uncertainty::removeChildObject(const std::string& elementName,
+                               const std::string& id)
+{
+  if (elementName == "uncertML")
+  {
+    UncertML * obj = getUncertML;
+    if (unsetUncertML() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

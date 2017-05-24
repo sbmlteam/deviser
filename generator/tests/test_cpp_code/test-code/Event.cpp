@@ -1212,7 +1212,7 @@ Event::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Event.
  */
 SBase*
-Event::createObject(const std::string& elementName)
+Event::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -1234,6 +1234,77 @@ Event::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Event.
+ */
+int
+Event::addChildObject(const std::string& elementName, const SBase* element)
+{
+  if (elementName == "trigger" && element->getTypeCode() == SBML_TRIGGER)
+  {
+    return setTrigger((const Trigger*)(element));
+  }
+  else if (elementName == "priority" && element->getTypeCode() ==
+    SBML_PRIORITY)
+  {
+    return setPriority((const Priority*)(element));
+  }
+  else if (elementName == "delay" && element->getTypeCode() == SBML_DELAY)
+  {
+    return setDelay((const Delay*)(element));
+  }
+  else if (elementName == "eventAssignment" && element->getTypeCode() ==
+    SBML_EVENTASSIGNMENT)
+  {
+    return addEventAssignment((const EventAssignment*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Event.
+ */
+SBase*
+Event::removeChildObject(const std::string& elementName,
+                         const std::string& id)
+{
+  if (elementName == "trigger")
+  {
+    Trigger * obj = getTrigger;
+    if (unsetTrigger() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "priority")
+  {
+    Priority * obj = getPriority;
+    if (unsetPriority() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "delay")
+  {
+    Delay * obj = getDelay;
+    if (unsetDelay() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "eventAssignment")
+  {
+    return removeEventAssignment(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

@@ -1099,7 +1099,7 @@ SpatialParameterPlugin::unsetAttribute(const std::string& attributeName)
  * SpatialParameterPlugin.
  */
 SBase*
-SpatialParameterPlugin::createObject(const std::string& elementName)
+SpatialParameterPlugin::createChildObject(const std::string& elementName)
 {
   SBasePlugin* obj = NULL;
 
@@ -1121,6 +1121,81 @@ SpatialParameterPlugin::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this SpatialParameterPlugin.
+ */
+int
+SpatialParameterPlugin::addChildObject(const std::string& elementName,
+                                       const SBasePlugin* element)
+{
+  if (elementName == "spatialSymbolReference" && element->getTypeCode() ==
+    SBML_SPATIALSYMBOLREFERENCE)
+  {
+    return setSpatialSymbolReference((const SpatialSymbolReference*)(element));
+  }
+  else if (elementName == "advectionCoefficient" && element->getTypeCode() ==
+    SBML_ADVECTIONCOEFFICIENT)
+  {
+    return setAdvectionCoefficient((const AdvectionCoefficient*)(element));
+  }
+  else if (elementName == "boundaryCondition" && element->getTypeCode() ==
+    SBML_BOUNDARYCONDITION)
+  {
+    return setBoundaryCondition((const BoundaryCondition*)(element));
+  }
+  else if (elementName == "diffusionCoefficient" && element->getTypeCode() ==
+    SBML_DIFFUSIONCOEFFICIENT)
+  {
+    return setDiffusionCoefficient((const DiffusionCoefficient*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SpatialParameterPlugin.
+ */
+SBase*
+SpatialParameterPlugin::removeChildObject(const std::string& elementName,
+                                          const std::string& id)
+{
+  if (elementName == "spatialSymbolReference")
+  {
+    SpatialSymbolReference * obj = getSpatialSymbolReference;
+    if (unsetSpatialSymbolReference() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "advectionCoefficient")
+  {
+    AdvectionCoefficient * obj = getAdvectionCoefficient;
+    if (unsetAdvectionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "boundaryCondition")
+  {
+    BoundaryCondition * obj = getBoundaryCondition;
+    if (unsetBoundaryCondition() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "diffusionCoefficient")
+  {
+    DiffusionCoefficient * obj = getDiffusionCoefficient;
+    if (unsetDiffusionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

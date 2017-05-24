@@ -698,7 +698,7 @@ FbcAnd::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this FbcAnd.
  */
 SBase*
-FbcAnd::createObject(const std::string& elementName)
+FbcAnd::createChildObject(const std::string& elementName)
 {
   Association* obj = NULL;
 
@@ -708,6 +708,50 @@ FbcAnd::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this FbcAnd.
+ */
+int
+FbcAnd::addChildObject(const std::string& elementName,
+                       const Association* element)
+{
+  if (elementName == "association" && element->getTypeCode() ==
+    SBML_ASSOCIATION)
+  {
+    return addAssociation((const Association*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * FbcAnd.
+ */
+SBase*
+FbcAnd::removeChildObject(const std::string& elementName,
+                          const std::string& id)
+{
+  if (elementName == "association")
+  {
+    return removeAssociation(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

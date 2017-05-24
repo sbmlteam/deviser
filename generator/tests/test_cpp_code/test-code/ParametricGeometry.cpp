@@ -844,7 +844,7 @@ ParametricGeometry::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this ParametricGeometry.
  */
 SBase*
-ParametricGeometry::createObject(const std::string& elementName)
+ParametricGeometry::createChildObject(const std::string& elementName)
 {
   GeometryDefinition* obj = NULL;
 
@@ -858,6 +858,60 @@ ParametricGeometry::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this ParametricGeometry.
+ */
+int
+ParametricGeometry::addChildObject(const std::string& elementName,
+                                   const GeometryDefinition* element)
+{
+  if (elementName == "spatialPoints" && element->getTypeCode() ==
+    SBML_SPATIALPOINTS)
+  {
+    return setSpatialPoints((const SpatialPoints*)(element));
+  }
+  else if (elementName == "parametricObject" && element->getTypeCode() ==
+    SBML_PARAMETRICOBJECT)
+  {
+    return addParametricObject((const ParametricObject*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * ParametricGeometry.
+ */
+SBase*
+ParametricGeometry::removeChildObject(const std::string& elementName,
+                                      const std::string& id)
+{
+  if (elementName == "spatialPoints")
+  {
+    SpatialPoints * obj = getSpatialPoints;
+    if (unsetSpatialPoints() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "parametricObject")
+  {
+    return removeParametricObject(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

@@ -657,7 +657,7 @@ Container::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Container.
  */
 SBase*
-Container::createObject(const std::string& elementName)
+Container::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -667,6 +667,49 @@ Container::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Container.
+ */
+int
+Container::addChildObject(const std::string& elementName,
+                          const SBase* element)
+{
+  if (elementName == "myLoTest" && element->getTypeCode() == SBML_MYLOTEST)
+  {
+    return addMyLoTest((const MyLoTest*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Container.
+ */
+SBase*
+Container::removeChildObject(const std::string& elementName,
+                             const std::string& id)
+{
+  if (elementName == "myLoTest")
+  {
+    return removeMyLoTest(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

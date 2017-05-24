@@ -1518,7 +1518,7 @@ Fred::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Fred.
  */
 SBase*
-Fred::createObject(const std::string& elementName)
+Fred::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -1540,6 +1540,74 @@ Fred::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Fred.
+ */
+int
+Fred::addChildObject(const std::string& elementName, const SBase* element)
+{
+  if (elementName == "other" && element->getTypeCode() == SBML_OTHER)
+  {
+    return setOther((const Other*)(element));
+  }
+  else if (elementName == "other1" && element->getTypeCode() == SBML_OTHER1)
+  {
+    return setOther1((const Other1*)(element));
+  }
+  else if (elementName == "other2" && element->getTypeCode() == SBML_OTHER2)
+  {
+    return setOther2((const Other2*)(element));
+  }
+  else if (elementName == "otherLO" && element->getTypeCode() == SBML_OTHERLO)
+  {
+    return addOtherLO((const OtherLO*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Fred.
+ */
+SBase*
+Fred::removeChildObject(const std::string& elementName, const std::string& id)
+{
+  if (elementName == "other")
+  {
+    Other * obj = getOther;
+    if (unsetOther() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "other1")
+  {
+    Other1 * obj = getOther1;
+    if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "other2")
+  {
+    Other2 * obj = getOther2;
+    if (unsetOther2() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "otherLO")
+  {
+    return removeOtherLO(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

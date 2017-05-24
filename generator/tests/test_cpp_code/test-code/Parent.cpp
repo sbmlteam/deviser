@@ -761,7 +761,7 @@ Parent::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Parent.
  */
 SBase*
-Parent::createObject(const std::string& elementName)
+Parent::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -775,6 +775,56 @@ Parent::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Parent.
+ */
+int
+Parent::addChildObject(const std::string& elementName, const SBase* element)
+{
+  if (elementName == "child" && element->getTypeCode() == SBML_CHILD)
+  {
+    return addChild((const Child*)(element));
+  }
+  else if (elementName == "sprog" && element->getTypeCode() == SBML_SPROG)
+  {
+    return addSprog((const Sprog*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Parent.
+ */
+SBase*
+Parent::removeChildObject(const std::string& elementName,
+                          const std::string& id)
+{
+  if (elementName == "child")
+  {
+    return removeChild(id);
+  }
+  else if (elementName == "sprog")
+  {
+    return removeSprog(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

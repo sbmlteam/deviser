@@ -698,7 +698,7 @@ CSGeometry::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this CSGeometry.
  */
 SBase*
-CSGeometry::createObject(const std::string& elementName)
+CSGeometry::createChildObject(const std::string& elementName)
 {
   GeometryDefinition* obj = NULL;
 
@@ -708,6 +708,49 @@ CSGeometry::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this CSGeometry.
+ */
+int
+CSGeometry::addChildObject(const std::string& elementName,
+                           const GeometryDefinition* element)
+{
+  if (elementName == "csgObject" && element->getTypeCode() == SBML_CSGOBJECT)
+  {
+    return addCsgObject((const CsgObject*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * CSGeometry.
+ */
+SBase*
+CSGeometry::removeChildObject(const std::string& elementName,
+                              const std::string& id)
+{
+  if (elementName == "csgObject")
+  {
+    return removeCsgObject(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

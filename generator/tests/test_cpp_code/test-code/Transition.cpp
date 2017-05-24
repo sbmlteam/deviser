@@ -1297,7 +1297,7 @@ Transition::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this Transition.
  */
 SBase*
-Transition::createObject(const std::string& elementName)
+Transition::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -1315,6 +1315,66 @@ Transition::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this Transition.
+ */
+int
+Transition::addChildObject(const std::string& elementName,
+                           const SBase* element)
+{
+  if (elementName == "input" && element->getTypeCode() == SBML_INPUT)
+  {
+    return addInput((const Input*)(element));
+  }
+  else if (elementName == "output" && element->getTypeCode() == SBML_OUTPUT)
+  {
+    return addOutput((const Output*)(element));
+  }
+  else if (elementName == "functionTerm" && element->getTypeCode() ==
+    SBML_FUNCTIONTERM)
+  {
+    return addFunctionTerm((const FunctionTerm*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * Transition.
+ */
+SBase*
+Transition::removeChildObject(const std::string& elementName,
+                              const std::string& id)
+{
+  if (elementName == "input")
+  {
+    return removeInput(id);
+  }
+  else if (elementName == "output")
+  {
+    return removeOutput(id);
+  }
+  else if (elementName == "functionTerm")
+  {
+    return removeFunctionTerm(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

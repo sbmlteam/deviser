@@ -658,7 +658,7 @@ ContainerX::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this ContainerX.
  */
 SBase*
-ContainerX::createObject(const std::string& elementName)
+ContainerX::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -668,6 +668,49 @@ ContainerX::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this ContainerX.
+ */
+int
+ContainerX::addChildObject(const std::string& elementName,
+                           const SBase* element)
+{
+  if (elementName == "fred" && element->getTypeCode() == SBML_FRED)
+  {
+    return addFred((const Fred*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * ContainerX.
+ */
+SBase*
+ContainerX::removeChildObject(const std::string& elementName,
+                              const std::string& id)
+{
+  if (elementName == "fred")
+  {
+    return removeFred(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

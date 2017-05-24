@@ -838,7 +838,7 @@ QualModelPlugin::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this QualModelPlugin.
  */
 SBase*
-QualModelPlugin::createObject(const std::string& elementName)
+QualModelPlugin::createChildObject(const std::string& elementName)
 {
   SBasePlugin* obj = NULL;
 
@@ -852,6 +852,59 @@ QualModelPlugin::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this QualModelPlugin.
+ */
+int
+QualModelPlugin::addChildObject(const std::string& elementName,
+                                const SBasePlugin* element)
+{
+  if (elementName == "qualitativeSpecies" && element->getTypeCode() ==
+    SBML_QUALITATIVESPECIES)
+  {
+    return addQualitativeSpecies((const QualitativeSpecies*)(element));
+  }
+  else if (elementName == "transition" && element->getTypeCode() ==
+    SBML_TRANSITION)
+  {
+    return addTransition((const Transition*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * QualModelPlugin.
+ */
+SBase*
+QualModelPlugin::removeChildObject(const std::string& elementName,
+                                   const std::string& id)
+{
+  if (elementName == "qualitativeSpecies")
+  {
+    return removeQualitativeSpecies(id);
+  }
+  else if (elementName == "transition")
+  {
+    return removeTransition(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

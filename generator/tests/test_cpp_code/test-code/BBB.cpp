@@ -764,7 +764,7 @@ BBB::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this BBB.
  */
 SBase*
-BBB::createObject(const std::string& elementName)
+BBB::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -774,6 +774,47 @@ BBB::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this BBB.
+ */
+int
+BBB::addChildObject(const std::string& elementName, const SBase* element)
+{
+  if (elementName == "another" && element->getTypeCode() == SBML_ANOTHER)
+  {
+    return addAnother((const Another*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * BBB.
+ */
+SBase*
+BBB::removeChildObject(const std::string& elementName, const std::string& id)
+{
+  if (elementName == "another")
+  {
+    return removeAnother(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

@@ -811,7 +811,7 @@ CSGTransformation::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this CSGTransformation.
  */
 SBase*
-CSGTransformation::createObject(const std::string& elementName)
+CSGTransformation::createChildObject(const std::string& elementName)
 {
   CSGNode* obj = NULL;
 
@@ -821,6 +821,50 @@ CSGTransformation::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this CSGTransformation.
+ */
+int
+CSGTransformation::addChildObject(const std::string& elementName,
+                                  const CSGNode* element)
+{
+  if (elementName == "csgNode" && element->getTypeCode() == SBML_CSGNODE)
+  {
+    return setCsgNode((const CsgNode*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * CSGTransformation.
+ */
+SBase*
+CSGTransformation::removeChildObject(const std::string& elementName,
+                                     const std::string& id)
+{
+  if (elementName == "csgNode")
+  {
+    CsgNode * obj = getCsgNode;
+    if (unsetCsgNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

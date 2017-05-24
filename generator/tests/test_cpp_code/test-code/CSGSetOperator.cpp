@@ -1152,7 +1152,7 @@ CSGSetOperator::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this CSGSetOperator.
  */
 SBase*
-CSGSetOperator::createObject(const std::string& elementName)
+CSGSetOperator::createChildObject(const std::string& elementName)
 {
   CSGNode* obj = NULL;
 
@@ -1162,6 +1162,49 @@ CSGSetOperator::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this CSGSetOperator.
+ */
+int
+CSGSetOperator::addChildObject(const std::string& elementName,
+                               const CSGNode* element)
+{
+  if (elementName == "csgNode" && element->getTypeCode() == SBML_CSGNODE)
+  {
+    return addCsgNode((const CsgNode*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * CSGSetOperator.
+ */
+SBase*
+CSGSetOperator::removeChildObject(const std::string& elementName,
+                                  const std::string& id)
+{
+  if (elementName == "csgNode")
+  {
+    return removeCsgNode(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

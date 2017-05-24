@@ -639,7 +639,7 @@ GroupsModelPlugin::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this GroupsModelPlugin.
  */
 SBase*
-GroupsModelPlugin::createObject(const std::string& elementName)
+GroupsModelPlugin::createChildObject(const std::string& elementName)
 {
   SBasePlugin* obj = NULL;
 
@@ -649,6 +649,49 @@ GroupsModelPlugin::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this GroupsModelPlugin.
+ */
+int
+GroupsModelPlugin::addChildObject(const std::string& elementName,
+                                  const SBasePlugin* element)
+{
+  if (elementName == "group" && element->getTypeCode() == SBML_GROUP)
+  {
+    return addGroup((const Group*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * GroupsModelPlugin.
+ */
+SBase*
+GroupsModelPlugin::removeChildObject(const std::string& elementName,
+                                     const std::string& id)
+{
+  if (elementName == "group")
+  {
+    return removeGroup(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

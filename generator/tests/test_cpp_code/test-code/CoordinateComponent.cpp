@@ -1123,7 +1123,7 @@ CoordinateComponent::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this CoordinateComponent.
  */
 SBase*
-CoordinateComponent::createObject(const std::string& elementName)
+CoordinateComponent::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
@@ -1137,6 +1137,61 @@ CoordinateComponent::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this CoordinateComponent.
+ */
+int
+CoordinateComponent::addChildObject(const std::string& elementName,
+                                    const SBase* element)
+{
+  if (elementName == "boundaryMin" && element->getTypeCode() ==
+    SBML_BOUNDARYMIN)
+  {
+    return setBoundaryMin((const BoundaryMin*)(element));
+  }
+  else if (elementName == "boundaryMax" && element->getTypeCode() ==
+    SBML_BOUNDARYMAX)
+  {
+    return setBoundaryMax((const BoundaryMax*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * CoordinateComponent.
+ */
+SBase*
+CoordinateComponent::removeChildObject(const std::string& elementName,
+                                       const std::string& id)
+{
+  if (elementName == "boundaryMin")
+  {
+    BoundaryMin * obj = getBoundaryMin;
+    if (unsetBoundaryMin() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "boundaryMax")
+  {
+    BoundaryMax * obj = getBoundaryMax;
+    if (unsetBoundaryMax() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

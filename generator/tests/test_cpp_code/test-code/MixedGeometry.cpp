@@ -958,7 +958,7 @@ MixedGeometry::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this MixedGeometry.
  */
 SBase*
-MixedGeometry::createObject(const std::string& elementName)
+MixedGeometry::createChildObject(const std::string& elementName)
 {
   GeometryDefinition* obj = NULL;
 
@@ -972,6 +972,59 @@ MixedGeometry::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this MixedGeometry.
+ */
+int
+MixedGeometry::addChildObject(const std::string& elementName,
+                              const GeometryDefinition* element)
+{
+  if (elementName == "geometryDefinition" && element->getTypeCode() ==
+    SBML_GEOMETRYDEFINITION)
+  {
+    return addGeometryDefinition((const GeometryDefinition*)(element));
+  }
+  else if (elementName == "ordinalMapping" && element->getTypeCode() ==
+    SBML_ORDINALMAPPING)
+  {
+    return addOrdinalMapping((const OrdinalMapping*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * MixedGeometry.
+ */
+SBase*
+MixedGeometry::removeChildObject(const std::string& elementName,
+                                 const std::string& id)
+{
+  if (elementName == "geometryDefinition")
+  {
+    return removeGeometryDefinition(id);
+  }
+  else if (elementName == "ordinalMapping")
+  {
+    return removeOrdinalMapping(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

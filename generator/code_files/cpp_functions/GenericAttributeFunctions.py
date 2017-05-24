@@ -596,15 +596,23 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('elementName == \"{0}\"'.format(elem))
+            single = True
             if elem not in self.single_elements:
+                single = False
                 block.append('return remove{0}(id)'.format(strFunctions.upper_first(elem)))
             else:
                 block.append('{0} * obj = get{0}'.format(strFunctions.upper_first(elem)))
                 block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem)))
-            if len(block) > 2:
-                if_block = self.create_code_block('else_if', block)
+            if single:
+                if len(block) > 3:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
             else:
-                if_block = self.create_code_block('if', block)
+                if len(block) > 2:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
         code = [if_block,
                 self.create_code_block('line', last_line)]
 

@@ -639,7 +639,7 @@ SpatialCompartmentPlugin::unsetAttribute(const std::string& attributeName)
  * SpatialCompartmentPlugin.
  */
 SBase*
-SpatialCompartmentPlugin::createObject(const std::string& elementName)
+SpatialCompartmentPlugin::createChildObject(const std::string& elementName)
 {
   SBasePlugin* obj = NULL;
 
@@ -649,6 +649,51 @@ SpatialCompartmentPlugin::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this SpatialCompartmentPlugin.
+ */
+int
+SpatialCompartmentPlugin::addChildObject(const std::string& elementName,
+                                         const SBasePlugin* element)
+{
+  if (elementName == "compartmentMapping" && element->getTypeCode() ==
+    SBML_COMPARTMENTMAPPING)
+  {
+    return setCompartmentMapping((const CompartmentMapping*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SpatialCompartmentPlugin.
+ */
+SBase*
+SpatialCompartmentPlugin::removeChildObject(const std::string& elementName,
+                                            const std::string& id)
+{
+  if (elementName == "compartmentMapping")
+  {
+    CompartmentMapping * obj = getCompartmentMapping;
+    if (unsetCompartmentMapping() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */

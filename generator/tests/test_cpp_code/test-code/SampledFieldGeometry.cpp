@@ -843,7 +843,7 @@ SampledFieldGeometry::unsetAttribute(const std::string& attributeName)
  * SampledFieldGeometry.
  */
 SBase*
-SampledFieldGeometry::createObject(const std::string& elementName)
+SampledFieldGeometry::createChildObject(const std::string& elementName)
 {
   GeometryDefinition* obj = NULL;
 
@@ -853,6 +853,50 @@ SampledFieldGeometry::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this SampledFieldGeometry.
+ */
+int
+SampledFieldGeometry::addChildObject(const std::string& elementName,
+                                     const GeometryDefinition* element)
+{
+  if (elementName == "sampledVolume" && element->getTypeCode() ==
+    SBML_SAMPLEDVOLUME)
+  {
+    return addSampledVolume((const SampledVolume*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SampledFieldGeometry.
+ */
+SBase*
+SampledFieldGeometry::removeChildObject(const std::string& elementName,
+                                        const std::string& id)
+{
+  if (elementName == "sampledVolume")
+  {
+    return removeSampledVolume(id);
+  }
+
+  return NULL;
 }
 
 /** @endcond */

@@ -807,7 +807,7 @@ VersModelPlugin::unsetAttribute(const std::string& attributeName)
  * Creates and returns an new "elementName" object in this VersModelPlugin.
  */
 SBase*
-VersModelPlugin::createObject(const std::string& elementName)
+VersModelPlugin::createChildObject(const std::string& elementName)
 {
   SBasePlugin* obj = NULL;
 
@@ -817,6 +817,50 @@ VersModelPlugin::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Adds a new "elementName" object to this VersModelPlugin.
+ */
+int
+VersModelPlugin::addChildObject(const std::string& elementName,
+                                const SBasePlugin* element)
+{
+  if (elementName == "classOne" && element->getTypeCode() == SBML_CLASSONE)
+  {
+    return setClassOne((const ClassOne*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * VersModelPlugin.
+ */
+SBase*
+VersModelPlugin::removeChildObject(const std::string& elementName,
+                                   const std::string& id)
+{
+  if (elementName == "classOne")
+  {
+    ClassOne * obj = getClassOne;
+    if (unsetClassOne() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+
+  return NULL;
 }
 
 /** @endcond */
