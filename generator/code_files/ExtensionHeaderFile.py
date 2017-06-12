@@ -365,6 +365,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_classes(self, elements=None):
         if not elements:
             elements = self.elements
+        for plugin in self.plugins:
+            obj = dict({'name': '{0}{1}Plugin'.format(self.up_package, plugin['sbase'])})
+            elements.append(obj)
         width = query.get_max_length(elements, 'name')
         for element in elements:
             self.write_spaced_line('typedef CLASS_OR_STRUCT {0:{width}} '

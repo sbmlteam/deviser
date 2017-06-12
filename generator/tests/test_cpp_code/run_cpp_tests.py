@@ -636,6 +636,28 @@ def main():
     test_case = 'new element functions'
     fail += run_test(name, num, class_name, test_case, list_of)
 
+    name = 'arrays'
+    class_name = 'ArraysExtensionTypes'
+    test_case = 'the types '
+    fail += run_ext_test(name, class_name, test_case, 1)
+
+    name = 'arrays'
+    class_name = 'ArraysExtension'
+    test_case = 'basic extension file'
+    fail += run_ext_test(name, class_name, test_case, 0)
+
+    name = 'arrays'
+    num = 1
+    class_name = 'Index'
+    list_of = 'ListOfIndices'
+    test_case = 'list of with attribute'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'arrays'
+    class_name = 'ArraysValidator'
+    test_case = 'validator'
+    fail += run_valid_test(name, class_name, test_case, False)
+
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

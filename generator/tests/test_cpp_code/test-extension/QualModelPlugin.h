@@ -954,6 +954,341 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns a ListOf_t* containing QualitativeSpecies_t objects from this
+ * QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure whose "ListOfQualitativeSpecies"
+ * is sought.
+ *
+ * @return the "ListOfQualitativeSpecies" from this QualModelPlugin_t as a
+ * ListOf_t *.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+ListOf_t*
+QualModelPlugin_getListOfQualitativeSpecies(QualModelPlugin_t* qmp);
+
+
+/**
+ * Get a QualitativeSpecies_t from the QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the QualitativeSpecies_t
+ * to retrieve.
+ *
+ * @return the nth QualitativeSpecies_t in the ListOfQualitativeSpecies within
+ * this QualModelPlugin.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+const QualitativeSpecies_t*
+QualModelPlugin_getQualitativeSpecies(QualModelPlugin_t* qmp, unsigned int n);
+
+
+/**
+ * Get a QualitativeSpecies_t from the QualModelPlugin_t based on its
+ * identifier.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the QualitativeSpecies_t
+ * to retrieve.
+ *
+ * @return the QualitativeSpecies_t in the ListOfQualitativeSpecies within this
+ * QualModelPlugin with the given id or NULL if no such QualitativeSpecies_t
+ * exists.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+const QualitativeSpecies_t*
+QualModelPlugin_getQualitativeSpeciesById(QualModelPlugin_t* qmp,
+                                          const char *sid);
+
+
+/**
+ * Get a QualitativeSpecies_t from the QualModelPlugin_t based on the
+ * Compartment to which it refers.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param sid a string representing the compartment attribute of the
+ * QualitativeSpecies_t object to retrieve.
+ *
+ * @return the first QualitativeSpecies_t in this QualModelPlugin_t based on
+ * the given compartment attribute or NULL if no such QualitativeSpecies_t
+ * exists.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+const QualitativeSpecies_t*
+QualModelPlugin_getQualitativeSpeciesByCompartment(QualModelPlugin_t* qmp,
+                                                   const char *sid);
+
+
+/**
+ * Adds a copy of the given QualitativeSpecies_t to this QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to which the QualitativeSpecies_t
+ * should be added.
+ *
+ * @param qs the QualitativeSpecies_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+QualModelPlugin_addQualitativeSpecies(QualModelPlugin_t* qmp,
+                                      const QualitativeSpecies_t* qs);
+
+
+/**
+ * Get the number of QualitativeSpecies_t objects in this QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to query.
+ *
+ * @return the number of QualitativeSpecies_t objects in this
+ * QualModelPlugin_t.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+QualModelPlugin_getNumQualitativeSpecies(QualModelPlugin_t* qmp);
+
+
+/**
+ * Creates a new QualitativeSpecies_t object, adds it to this QualModelPlugin_t
+ * object and returns the QualitativeSpecies_t object created.
+ *
+ * @param qmp the QualModelPlugin_t structure to which the QualitativeSpecies_t
+ * should be added.
+ *
+ * @return a new QualitativeSpecies_t object instance.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+QualitativeSpecies_t*
+QualModelPlugin_createQualitativeSpecies(QualModelPlugin_t* qmp);
+
+
+/**
+ * Removes the nth QualitativeSpecies_t from this QualModelPlugin_t and returns
+ * a pointer to it.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the QualitativeSpecies_t
+ * to remove.
+ *
+ * @return a pointer to the nth QualitativeSpecies_t in this QualModelPlugin_t.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+QualitativeSpecies_t*
+QualModelPlugin_removeQualitativeSpecies(QualModelPlugin_t* qmp,
+                                         unsigned int n);
+
+
+/**
+ * Removes the QualitativeSpecies_t from this QualModelPlugin_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the QualitativeSpecies_t
+ * to remove.
+ *
+ * @return the QualitativeSpecies_t in this QualModelPlugin_t based on the
+ * identifier or NULL if no such QualitativeSpecies_t exists.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+QualitativeSpecies_t*
+QualModelPlugin_removeQualitativeSpeciesById(QualModelPlugin_t* qmp,
+                                             const char* sid);
+
+
+/**
+ * Returns a ListOf_t* containing Transition_t objects from this
+ * QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure whose "ListOfTransitions" is
+ * sought.
+ *
+ * @return the "ListOfTransitions" from this QualModelPlugin_t as a ListOf_t *.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+ListOf_t*
+QualModelPlugin_getListOfTransitions(QualModelPlugin_t* qmp);
+
+
+/**
+ * Get a Transition_t from the QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the Transition_t to
+ * retrieve.
+ *
+ * @return the nth Transition_t in the ListOfTransitions within this
+ * QualModelPlugin.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+const Transition_t*
+QualModelPlugin_getTransition(QualModelPlugin_t* qmp, unsigned int n);
+
+
+/**
+ * Get a Transition_t from the QualModelPlugin_t based on its identifier.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the Transition_t to
+ * retrieve.
+ *
+ * @return the Transition_t in the ListOfTransitions within this
+ * QualModelPlugin with the given id or NULL if no such Transition_t exists.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+const Transition_t*
+QualModelPlugin_getTransitionById(QualModelPlugin_t* qmp, const char *sid);
+
+
+/**
+ * Adds a copy of the given Transition_t to this QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to which the Transition_t should
+ * be added.
+ *
+ * @param t the Transition_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+QualModelPlugin_addTransition(QualModelPlugin_t* qmp, const Transition_t* t);
+
+
+/**
+ * Get the number of Transition_t objects in this QualModelPlugin_t.
+ *
+ * @param qmp the QualModelPlugin_t structure to query.
+ *
+ * @return the number of Transition_t objects in this QualModelPlugin_t.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+QualModelPlugin_getNumTransitions(QualModelPlugin_t* qmp);
+
+
+/**
+ * Creates a new Transition_t object, adds it to this QualModelPlugin_t object
+ * and returns the Transition_t object created.
+ *
+ * @param qmp the QualModelPlugin_t structure to which the Transition_t should
+ * be added.
+ *
+ * @return a new Transition_t object instance.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+Transition_t*
+QualModelPlugin_createTransition(QualModelPlugin_t* qmp);
+
+
+/**
+ * Removes the nth Transition_t from this QualModelPlugin_t and returns a
+ * pointer to it.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the Transition_t to
+ * remove.
+ *
+ * @return a pointer to the nth Transition_t in this QualModelPlugin_t.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+Transition_t*
+QualModelPlugin_removeTransition(QualModelPlugin_t* qmp, unsigned int n);
+
+
+/**
+ * Removes the Transition_t from this QualModelPlugin_t based on its identifier
+ * and returns a pointer to it.
+ *
+ * @param qmp the QualModelPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the Transition_t to
+ * remove.
+ *
+ * @return the Transition_t in this QualModelPlugin_t based on the identifier
+ * or NULL if no such Transition_t exists.
+ *
+ * @memberof QualModelPlugin_t
+ */
+LIBSBML_EXTERN
+Transition_t*
+QualModelPlugin_removeTransitionById(QualModelPlugin_t* qmp, const char* sid);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !QualModelPlugin_H__ */
 
 

@@ -1133,6 +1133,173 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns a ListOf_t* containing Another_t objects from this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose "ListOfAnothers" is
+ * sought.
+ *
+ * @return the "ListOfAnothers" from this VersSpeciesPlugin_t as a ListOf_t *.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+ListOf_t*
+VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp);
+
+
+/**
+ * Get an Another_t from the VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the Another_t to
+ * retrieve.
+ *
+ * @return the nth Another_t in the ListOfAnothers within this
+ * VersSpeciesPlugin.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+const Another_t*
+VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
+
+
+/**
+ * Get an Another_t from the VersSpeciesPlugin_t based on its identifier.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the Another_t to
+ * retrieve.
+ *
+ * @return the Another_t in the ListOfAnothers within this VersSpeciesPlugin
+ * with the given id or NULL if no such Another_t exists.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+const Another_t*
+VersSpeciesPlugin_getAnotherById(VersSpeciesPlugin_t* vsp, const char *sid);
+
+
+/**
+ * Adds a copy of the given Another_t to this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to which the Another_t should
+ * be added.
+ *
+ * @param a the Another_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_addAnother(VersSpeciesPlugin_t* vsp, const Another_t* a);
+
+
+/**
+ * Get the number of Another_t objects in this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to query.
+ *
+ * @return the number of Another_t objects in this VersSpeciesPlugin_t.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+VersSpeciesPlugin_getNumAnothers(VersSpeciesPlugin_t* vsp);
+
+
+/**
+ * Creates a new Another_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the Another_t object created.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to which the Another_t should
+ * be added.
+ *
+ * @return a new Another_t object instance.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_createAnother(VersSpeciesPlugin_t* vsp);
+
+
+/**
+ * Removes the nth Another_t from this VersSpeciesPlugin_t and returns a
+ * pointer to it.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the Another_t to remove.
+ *
+ * @return a pointer to the nth Another_t in this VersSpeciesPlugin_t.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_removeAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
+
+
+/**
+ * Removes the Another_t from this VersSpeciesPlugin_t based on its identifier
+ * and returns a pointer to it.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to search.
+ *
+ * @param sid a string representing the identifier of the Another_t to remove.
+ *
+ * @return the Another_t in this VersSpeciesPlugin_t based on the identifier or
+ * NULL if no such Another_t exists.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_removeAnotherById(VersSpeciesPlugin_t* vsp,
+                                    const char* sid);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !VersSpeciesPlugin_H__ */
 
 

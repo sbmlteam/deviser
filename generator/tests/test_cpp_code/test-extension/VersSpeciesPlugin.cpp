@@ -1876,6 +1876,98 @@ VersSpeciesPlugin::writeV2Attributes(XMLOutputStream& stream) const
 #endif /* __cplusplus */
 
 
+/*
+ * Returns a ListOf_t* containing Another_t objects from this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+ListOf_t*
+VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp)
+{
+  return (vsp != NULL) ? vsp->getListOfAnothers() : NULL;
+}
+
+
+/*
+ * Get an Another_t from the VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+const Another_t*
+VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n)
+{
+  return (vsp != NULL) ? vsp->getAnother(n) : NULL;
+}
+
+
+/*
+ * Get an Another_t from the VersSpeciesPlugin_t based on its identifier.
+ */
+LIBSBML_EXTERN
+const Another_t*
+VersSpeciesPlugin_getAnotherById(VersSpeciesPlugin_t* vsp, const char *sid)
+{
+  return (vsp != NULL && sid != NULL) ? vsp->getAnother(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given Another_t to this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_addAnother(VersSpeciesPlugin_t* vsp, const Another_t* a)
+{
+  return (vsp != NULL) ? vsp->addAnother(a) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of Another_t objects in this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+VersSpeciesPlugin_getNumAnothers(VersSpeciesPlugin_t* vsp)
+{
+  return (vsp != NULL) ? vsp->getNumAnothers() : SBML_INT_MAX;
+}
+
+
+/*
+ * Creates a new Another_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the Another_t object created.
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_createAnother(VersSpeciesPlugin_t* vsp)
+{
+  return (vsp != NULL) ? vsp->createAnother() : NULL;
+}
+
+
+/*
+ * Removes the nth Another_t from this VersSpeciesPlugin_t and returns a
+ * pointer to it.
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_removeAnother(VersSpeciesPlugin_t* vsp, unsigned int n)
+{
+  return (vsp != NULL) ? vsp->removeAnother(n) : NULL;
+}
+
+
+/*
+ * Removes the Another_t from this VersSpeciesPlugin_t based on its identifier
+ * and returns a pointer to it.
+ */
+LIBSBML_EXTERN
+Another_t*
+VersSpeciesPlugin_removeAnotherById(VersSpeciesPlugin_t* vsp, const char* sid)
+{
+  return (vsp != NULL && sid != NULL) ? vsp->removeAnother(sid) : NULL;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END
