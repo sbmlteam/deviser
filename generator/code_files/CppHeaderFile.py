@@ -107,7 +107,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_c_header(self):
         self.is_cpp_api = False
-        if not self.is_list_of:
+        if self.is_plugin:
+            self.write_child_lo_element_functions()
+        elif not self.is_list_of:
             self.write_constructors()
             self.write_attribute_functions()
             self.write_child_element_functions()
@@ -864,6 +866,14 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_cppns_end()
         self.write_cpp_end()
         if not self.is_plugin:
+            self.write_swig_begin()
+            self.write_cppns_begin()
+            self.write_cdecl_begin()
+            self.write_c_header()
+            self.write_cdecl_end()
+            self.write_cppns_end()
+            self.write_swig_end()
+        elif not self.is_doc_plugin and len(self.child_lo_elements) > 0:
             self.write_swig_begin()
             self.write_cppns_begin()
             self.write_cdecl_begin()
