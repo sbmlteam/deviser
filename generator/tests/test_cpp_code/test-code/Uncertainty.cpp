@@ -792,7 +792,7 @@ int
 Uncertainty::addChildObject(const std::string& elementName,
                             const SBase* element)
 {
-  if (elementName == "uncertML" && element->getTypeCode() == SBML_UNCERTML)
+  if (elementName == "uncertML" && element->getTypeCode() == TO_DO)
   {
     return setUncertML((const UncertML*)(element));
   }
@@ -816,7 +816,7 @@ Uncertainty::removeChildObject(const std::string& elementName,
 {
   if (elementName == "uncertML")
   {
-    UncertML * obj = getUncertML;
+    UncertML * obj = getUncertML();
     if (unsetUncertML() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 

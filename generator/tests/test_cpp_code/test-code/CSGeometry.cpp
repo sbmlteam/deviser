@@ -704,7 +704,7 @@ CSGeometry::createChildObject(const std::string& elementName)
 
   if (elementName == "csgObject")
   {
-    return createCsgObject();
+    return createCSGObject();
   }
 
   return obj;
@@ -721,11 +721,12 @@ CSGeometry::createChildObject(const std::string& elementName)
  */
 int
 CSGeometry::addChildObject(const std::string& elementName,
-                           const GeometryDefinition* element)
+                           const SBase* element)
 {
-  if (elementName == "csgObject" && element->getTypeCode() == SBML_CSGOBJECT)
+  if (elementName == "csgObject" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGOBJECT)
   {
-    return addCsgObject((const CsgObject*)(element));
+    return addCSGObject((const CSGObject*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -747,7 +748,7 @@ CSGeometry::removeChildObject(const std::string& elementName,
 {
   if (elementName == "csgObject")
   {
-    return removeCsgObject(id);
+    return removeCSGObject(id);
   }
 
   return NULL;
@@ -769,7 +770,7 @@ CSGeometry::getNumObjects(const std::string& elementName)
 
   if (elementName == "csgObject")
   {
-    return getNumCsgObjects();
+    return getNumCSGObjects();
   }
 
   return n;
@@ -787,11 +788,11 @@ CSGeometry::getNumObjects(const std::string& elementName)
 SBase*
 CSGeometry::getObject(const std::string& elementName, unsigned int index)
 {
-  GeometryDefinition* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "csgObject")
   {
-    return getCsgObject(index);
+    return getCSGObject(index);
   }
 
   return obj;

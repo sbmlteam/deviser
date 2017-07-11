@@ -44,7 +44,14 @@ from util import global_variables
 def upper_first(word):
     if len(word) == 0:
         return word
-    returned_word = word[0].upper() + word[1:len(word)]
+    # hack for spatial CSGFoo classes
+    if word.startswith('csg') or word.startswith('csG'):
+        if word == 'csgeometry' or word == 'csGeometry':
+            returned_word = 'CSGeometry'
+        else:
+            returned_word = 'CSG' + word[3:len(word)]
+    else:
+        returned_word = word[0].upper() + word[1:len(word)]
     return returned_word
 
 

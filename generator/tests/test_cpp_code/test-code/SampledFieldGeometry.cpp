@@ -866,10 +866,10 @@ SampledFieldGeometry::createChildObject(const std::string& elementName)
  */
 int
 SampledFieldGeometry::addChildObject(const std::string& elementName,
-                                     const GeometryDefinition* element)
+                                     const SBase* element)
 {
   if (elementName == "sampledVolume" && element->getTypeCode() ==
-    SBML_SAMPLEDVOLUME)
+    SBML_SPATIAL_SAMPLEDVOLUME)
   {
     return addSampledVolume((const SampledVolume*)(element));
   }
@@ -934,7 +934,7 @@ SBase*
 SampledFieldGeometry::getObject(const std::string& elementName,
                                 unsigned int index)
 {
-  GeometryDefinition* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "sampledVolume")
   {

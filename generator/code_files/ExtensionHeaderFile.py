@@ -364,7 +364,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_classes(self, elements=None):
         if not elements:
-            elements = self.elements
+            elements = self.elements.copy()
         for plugin in self.plugins:
             obj = dict({'name': '{0}{1}Plugin'.format(self.up_package, plugin['sbase'])})
             elements.append(obj)

@@ -799,7 +799,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int addChildObject(const std::string& elementName,
-                             const GeometryDefinition* element);
+                             const SBase* element);
 
   /** @endcond */
 

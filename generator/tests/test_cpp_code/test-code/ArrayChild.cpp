@@ -778,7 +778,7 @@ int
 ArrayChild::addChildObject(const std::string& elementName,
                            const SBase* element)
 {
-  if (elementName == "unit" && element->getTypeCode() == SBML_UNIT)
+  if (elementName == "unit" && element->getTypeCode() == SBML_TEST_UNIT)
   {
     return setUnit((const Unit*)(element));
   }
@@ -802,7 +802,7 @@ ArrayChild::removeChildObject(const std::string& elementName,
 {
   if (elementName == "unit")
   {
-    Unit * obj = getUnit;
+    Unit * obj = getUnit();
     if (unsetUnit() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 

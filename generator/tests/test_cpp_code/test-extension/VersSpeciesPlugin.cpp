@@ -421,6 +421,7 @@ VersSpeciesPlugin::setClassOne(const ClassOne* classOne)
   {
     delete mClassOne;
     mClassOne = static_cast<ClassOne*>(classOne->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -456,6 +457,7 @@ VersSpeciesPlugin::setClassTwo(const ClassTwo* classTwo)
   {
     delete mClassTwo;
     mClassTwo = static_cast<ClassTwo*>(classTwo->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -1225,7 +1227,7 @@ VersSpeciesPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 VersSpeciesPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "classOne")
   {
@@ -1254,18 +1256,17 @@ VersSpeciesPlugin::createChildObject(const std::string& elementName)
  */
 int
 VersSpeciesPlugin::addChildObject(const std::string& elementName,
-                                  const SBasePlugin* element)
+                                  const SBase* element)
 {
-  if (elementName == "classOne" && element->getTypeCode() == SBML_CLASSONE)
+  if (elementName == "classOne" && element->getTypeCode() == CLASS_ONE)
   {
     return setClassOne((const ClassOne*)(element));
   }
-  else if (elementName == "classTwo" && element->getTypeCode() ==
-    SBML_CLASSTWO)
+  else if (elementName == "classTwo" && element->getTypeCode() == CLASS_TWO)
   {
     return setClassTwo((const ClassTwo*)(element));
   }
-  else if (elementName == "another" && element->getTypeCode() == SBML_ANOTHER)
+  else if (elementName == "another" && element->getTypeCode() == CLASS_A)
   {
     return addAnother((const Another*)(element));
   }
@@ -1289,12 +1290,12 @@ VersSpeciesPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "classOne")
   {
-    ClassOne * obj = getClassOne;
+    ClassOne * obj = getClassOne();
     if (unsetClassOne() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "classTwo")
   {
-    ClassTwo * obj = getClassTwo;
+    ClassTwo * obj = getClassTwo();
     if (unsetClassTwo() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "another")
@@ -1354,7 +1355,7 @@ SBase*
 VersSpeciesPlugin::getObject(const std::string& elementName,
                              unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "classOne")
   {

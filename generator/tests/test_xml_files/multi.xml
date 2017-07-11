@@ -70,7 +70,6 @@
             <listOfAttribute name="subListOfSpeciesFeatures" required="false" type="element" element="SubListOfSpeciesFeatures" abstract="false"/>
           </listOfAttributes>
         </element>
-        
         <element name="SpeciesFeatureValue" typeCode="SBML_MULTI_SPECIES_FEATURE_VALUE" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="value" required="true" type="SIdRef" element="PossibleSpeciesFeatureValue" abstract="false"/>

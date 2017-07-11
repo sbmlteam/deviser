@@ -683,7 +683,7 @@ int
 ContainerX::addChildObject(const std::string& elementName,
                            const SBase* element)
 {
-  if (elementName == "fred" && element->getTypeCode() == SBML_FRED)
+  if (elementName == "fred" && element->getTypeCode() == SBML_X_FRED)
   {
     return addFred((const Fred*)(element));
   }

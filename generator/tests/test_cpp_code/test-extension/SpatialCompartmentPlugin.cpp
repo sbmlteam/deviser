@@ -191,6 +191,7 @@ SpatialCompartmentPlugin::setCompartmentMapping(const CompartmentMapping*
     delete mCompartmentMapping;
     mCompartmentMapping =
       static_cast<CompartmentMapping*>(compartmentMapping->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -641,7 +642,7 @@ SpatialCompartmentPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 SpatialCompartmentPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "compartmentMapping")
   {
@@ -662,10 +663,10 @@ SpatialCompartmentPlugin::createChildObject(const std::string& elementName)
  */
 int
 SpatialCompartmentPlugin::addChildObject(const std::string& elementName,
-                                         const SBasePlugin* element)
+                                         const SBase* element)
 {
   if (elementName == "compartmentMapping" && element->getTypeCode() ==
-    SBML_COMPARTMENTMAPPING)
+    SBML_SPATIAL_COMPARTMENTMAPPING)
   {
     return setCompartmentMapping((const CompartmentMapping*)(element));
   }
@@ -689,7 +690,7 @@ SpatialCompartmentPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "compartmentMapping")
   {
-    CompartmentMapping * obj = getCompartmentMapping;
+    CompartmentMapping * obj = getCompartmentMapping();
     if (unsetCompartmentMapping() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
@@ -734,7 +735,7 @@ SBase*
 SpatialCompartmentPlugin::getObject(const std::string& elementName,
                                     unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "compartmentMapping")
   {

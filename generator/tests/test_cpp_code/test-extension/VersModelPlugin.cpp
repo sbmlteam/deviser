@@ -324,6 +324,7 @@ VersModelPlugin::setClassOne(const ClassOne* classOne)
   {
     delete mClassOne;
     mClassOne = static_cast<ClassOne*>(classOne->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -809,7 +810,7 @@ VersModelPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 VersModelPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "classOne")
   {
@@ -830,9 +831,9 @@ VersModelPlugin::createChildObject(const std::string& elementName)
  */
 int
 VersModelPlugin::addChildObject(const std::string& elementName,
-                                const SBasePlugin* element)
+                                const SBase* element)
 {
-  if (elementName == "classOne" && element->getTypeCode() == SBML_CLASSONE)
+  if (elementName == "classOne" && element->getTypeCode() == CLASS_ONE)
   {
     return setClassOne((const ClassOne*)(element));
   }
@@ -856,7 +857,7 @@ VersModelPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "classOne")
   {
-    ClassOne * obj = getClassOne;
+    ClassOne * obj = getClassOne();
     if (unsetClassOne() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
@@ -900,7 +901,7 @@ VersModelPlugin::getNumObjects(const std::string& elementName)
 SBase*
 VersModelPlugin::getObject(const std::string& elementName, unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "classOne")
   {

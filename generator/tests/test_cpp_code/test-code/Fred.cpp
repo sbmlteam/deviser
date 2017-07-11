@@ -1554,19 +1554,20 @@ Fred::createChildObject(const std::string& elementName)
 int
 Fred::addChildObject(const std::string& elementName, const SBase* element)
 {
-  if (elementName == "other" && element->getTypeCode() == SBML_OTHER)
+  if (elementName == "other" && element->getTypeCode() == SBML_X_OTHER)
   {
     return setOther((const Other*)(element));
   }
-  else if (elementName == "other1" && element->getTypeCode() == SBML_OTHER1)
+  else if (elementName == "other1" && element->getTypeCode() == SBML_X_OTHER)
   {
     return setOther1((const Other1*)(element));
   }
-  else if (elementName == "other2" && element->getTypeCode() == SBML_OTHER2)
+  else if (elementName == "other2" && element->getTypeCode() == SBML_X_OTHER)
   {
     return setOther2((const Other2*)(element));
   }
-  else if (elementName == "otherLO" && element->getTypeCode() == SBML_OTHERLO)
+  else if (elementName == "otherLO" && element->getTypeCode() ==
+    SBML_X_OTHERLO)
   {
     return addOtherLO((const OtherLO*)(element));
   }
@@ -1589,17 +1590,17 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
 {
   if (elementName == "other")
   {
-    Other * obj = getOther;
+    Other * obj = getOther();
     if (unsetOther() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "other1")
   {
-    Other1 * obj = getOther1;
+    Other1 * obj = getOther1();
     if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "other2")
   {
-    Other2 * obj = getOther2;
+    Other2 * obj = getOther2();
     if (unsetOther2() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "otherLO")

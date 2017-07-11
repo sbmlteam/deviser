@@ -69,7 +69,7 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  CSGNode* mCsgNode;
+  CSGNode* mCSGNode;
 
   /** @endcond */
 
@@ -153,7 +153,7 @@ public:
    * @return the value of the "csgNode" element of this CSGTransformation as a
    * CSGNode*.
    */
-  const CSGNode* getCsgNode() const;
+  const CSGNode* getCSGNode() const;
 
 
   /**
@@ -162,7 +162,7 @@ public:
    * @return the value of the "csgNode" element of this CSGTransformation as a
    * CSGNode*.
    */
-  CSGNode* getCsgNode();
+  CSGNode* getCSGNode();
 
 
   /**
@@ -172,7 +172,7 @@ public:
    * @return @c true if this CSGTransformation's "csgNode" element has been
    * set, otherwise @c false is returned.
    */
-  bool isSetCsgNode() const;
+  bool isSetCSGNode() const;
 
 
   /**
@@ -185,7 +185,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setCsgNode(const CSGNode* csgNode);
+  int setCSGNode(const CSGNode* csgNode);
 
 
   /**
@@ -250,7 +250,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetCsgNode();
+  int unsetCSGNode();
 
 
   /**
@@ -710,7 +710,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int addChildObject(const std::string& elementName,
-                             const CSGNode* element);
+                             const SBase* element);
 
   /** @endcond */
 
@@ -952,7 +952,7 @@ CSGTransformation_free(CSGTransformation_t* csgt);
  */
 LIBSBML_EXTERN
 const CSGNode_t*
-CSGTransformation_getCsgNode(const CSGTransformation_t * csgt);
+CSGTransformation_getCSGNode(const CSGTransformation_t * csgt);
 
 
 /**
@@ -968,7 +968,7 @@ CSGTransformation_getCsgNode(const CSGTransformation_t * csgt);
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_isSetCsgNode(const CSGTransformation_t * csgt);
+CSGTransformation_isSetCSGNode(const CSGTransformation_t * csgt);
 
 
 /**
@@ -986,7 +986,7 @@ CSGTransformation_isSetCsgNode(const CSGTransformation_t * csgt);
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_setCsgNode(CSGTransformation_t * csgt,
+CSGTransformation_setCSGNode(CSGTransformation_t * csgt,
                              const CSGNode_t* csgNode);
 
 
@@ -1101,7 +1101,7 @@ CSGTransformation_createCSGSetOperator(CSGTransformation_t* csgt);
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_unsetCsgNode(CSGTransformation_t * csgt);
+CSGTransformation_unsetCSGNode(CSGTransformation_t * csgt);
 
 
 /**

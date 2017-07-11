@@ -1158,7 +1158,7 @@ CSGSetOperator::createChildObject(const std::string& elementName)
 
   if (elementName == "csgNode")
   {
-    return createCsgNode();
+    return createCSGNode();
   }
 
   return obj;
@@ -1175,11 +1175,12 @@ CSGSetOperator::createChildObject(const std::string& elementName)
  */
 int
 CSGSetOperator::addChildObject(const std::string& elementName,
-                               const CSGNode* element)
+                               const SBase* element)
 {
-  if (elementName == "csgNode" && element->getTypeCode() == SBML_CSGNODE)
+  if (elementName == "csgNode" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGNODE)
   {
-    return addCsgNode((const CsgNode*)(element));
+    return addCSGNode((const CSGNode*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1201,7 +1202,7 @@ CSGSetOperator::removeChildObject(const std::string& elementName,
 {
   if (elementName == "csgNode")
   {
-    return removeCsgNode(id);
+    return removeCSGNode(id);
   }
 
   return NULL;
@@ -1223,7 +1224,7 @@ CSGSetOperator::getNumObjects(const std::string& elementName)
 
   if (elementName == "csgNode")
   {
-    return getNumCsgNodes();
+    return getNumCSGNodes();
   }
 
   return n;
@@ -1241,11 +1242,11 @@ CSGSetOperator::getNumObjects(const std::string& elementName)
 SBase*
 CSGSetOperator::getObject(const std::string& elementName, unsigned int index)
 {
-  CSGNode* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "csgNode")
   {
-    return getCsgNode(index);
+    return getCSGNode(index);
   }
 
   return obj;

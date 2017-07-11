@@ -346,6 +346,7 @@ SpatialParameterPlugin::setSpatialSymbolReference(const SpatialSymbolReference*
     delete mSpatialSymbolReference;
     mSpatialSymbolReference =
       static_cast<SpatialSymbolReference*>(spatialSymbolReference->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -384,6 +385,7 @@ SpatialParameterPlugin::setAdvectionCoefficient(const AdvectionCoefficient*
     delete mAdvectionCoefficient;
     mAdvectionCoefficient =
       static_cast<AdvectionCoefficient*>(advectionCoefficient->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -422,6 +424,7 @@ SpatialParameterPlugin::setBoundaryCondition(const BoundaryCondition*
     delete mBoundaryCondition;
     mBoundaryCondition =
       static_cast<BoundaryCondition*>(boundaryCondition->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -460,6 +463,7 @@ SpatialParameterPlugin::setDiffusionCoefficient(const DiffusionCoefficient*
     delete mDiffusionCoefficient;
     mDiffusionCoefficient =
       static_cast<DiffusionCoefficient*>(diffusionCoefficient->clone());
+    connectToChild();
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -1101,7 +1105,7 @@ SpatialParameterPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 SpatialParameterPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "spatialSymbolReference")
   {
@@ -1134,25 +1138,25 @@ SpatialParameterPlugin::createChildObject(const std::string& elementName)
  */
 int
 SpatialParameterPlugin::addChildObject(const std::string& elementName,
-                                       const SBasePlugin* element)
+                                       const SBase* element)
 {
   if (elementName == "spatialSymbolReference" && element->getTypeCode() ==
-    SBML_SPATIALSYMBOLREFERENCE)
+    SBML_SPATIAL_SPATIALSYMBOLREFERENCE)
   {
     return setSpatialSymbolReference((const SpatialSymbolReference*)(element));
   }
   else if (elementName == "advectionCoefficient" && element->getTypeCode() ==
-    SBML_ADVECTIONCOEFFICIENT)
+    SBML_SPATIAL_ADVECTIONCOEFFICIENT)
   {
     return setAdvectionCoefficient((const AdvectionCoefficient*)(element));
   }
   else if (elementName == "boundaryCondition" && element->getTypeCode() ==
-    SBML_BOUNDARYCONDITION)
+    SBML_SPATIAL_BOUNDARYCONDITION)
   {
     return setBoundaryCondition((const BoundaryCondition*)(element));
   }
   else if (elementName == "diffusionCoefficient" && element->getTypeCode() ==
-    SBML_DIFFUSIONCOEFFICIENT)
+    SBML_SPATIAL_DIFFUSIONCOEFFICIENT)
   {
     return setDiffusionCoefficient((const DiffusionCoefficient*)(element));
   }
@@ -1176,22 +1180,22 @@ SpatialParameterPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "spatialSymbolReference")
   {
-    SpatialSymbolReference * obj = getSpatialSymbolReference;
+    SpatialSymbolReference * obj = getSpatialSymbolReference();
     if (unsetSpatialSymbolReference() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "advectionCoefficient")
   {
-    AdvectionCoefficient * obj = getAdvectionCoefficient;
+    AdvectionCoefficient * obj = getAdvectionCoefficient();
     if (unsetAdvectionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "boundaryCondition")
   {
-    BoundaryCondition * obj = getBoundaryCondition;
+    BoundaryCondition * obj = getBoundaryCondition();
     if (unsetBoundaryCondition() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "diffusionCoefficient")
   {
-    DiffusionCoefficient * obj = getDiffusionCoefficient;
+    DiffusionCoefficient * obj = getDiffusionCoefficient();
     if (unsetDiffusionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
@@ -1257,7 +1261,7 @@ SBase*
 SpatialParameterPlugin::getObject(const std::string& elementName,
                                   unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "spatialSymbolReference")
   {

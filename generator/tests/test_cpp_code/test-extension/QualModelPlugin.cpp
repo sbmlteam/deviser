@@ -840,7 +840,7 @@ QualModelPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 QualModelPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "qualitativeSpecies")
   {
@@ -865,15 +865,15 @@ QualModelPlugin::createChildObject(const std::string& elementName)
  */
 int
 QualModelPlugin::addChildObject(const std::string& elementName,
-                                const SBasePlugin* element)
+                                const SBase* element)
 {
   if (elementName == "qualitativeSpecies" && element->getTypeCode() ==
-    SBML_QUALITATIVESPECIES)
+    SBML_QUAL_QUALITATIVE_SPECIES)
   {
     return addQualitativeSpecies((const QualitativeSpecies*)(element));
   }
   else if (elementName == "transition" && element->getTypeCode() ==
-    SBML_TRANSITION)
+    SBML_QUAL_TRANSITION)
   {
     return addTransition((const Transition*)(element));
   }
@@ -945,7 +945,7 @@ QualModelPlugin::getNumObjects(const std::string& elementName)
 SBase*
 QualModelPlugin::getObject(const std::string& elementName, unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "qualitativeSpecies")
   {

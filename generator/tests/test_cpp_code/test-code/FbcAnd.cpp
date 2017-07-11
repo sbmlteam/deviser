@@ -720,11 +720,10 @@ FbcAnd::createChildObject(const std::string& elementName)
  * Adds a new "elementName" object to this FbcAnd.
  */
 int
-FbcAnd::addChildObject(const std::string& elementName,
-                       const Association* element)
+FbcAnd::addChildObject(const std::string& elementName, const SBase* element)
 {
   if (elementName == "association" && element->getTypeCode() ==
-    SBML_ASSOCIATION)
+    SBML_FBC_ASSOCIATION)
   {
     return addAssociation((const Association*)(element));
   }
@@ -788,7 +787,7 @@ FbcAnd::getNumObjects(const std::string& elementName)
 SBase*
 FbcAnd::getObject(const std::string& elementName, unsigned int index)
 {
-  Association* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "association")
   {

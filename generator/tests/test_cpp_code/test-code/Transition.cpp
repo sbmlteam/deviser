@@ -1330,16 +1330,17 @@ int
 Transition::addChildObject(const std::string& elementName,
                            const SBase* element)
 {
-  if (elementName == "input" && element->getTypeCode() == SBML_INPUT)
+  if (elementName == "input" && element->getTypeCode() == SBML_QUAL_INPUT)
   {
     return addInput((const Input*)(element));
   }
-  else if (elementName == "output" && element->getTypeCode() == SBML_OUTPUT)
+  else if (elementName == "output" && element->getTypeCode() ==
+    SBML_QUAL_OUTPUT)
   {
     return addOutput((const Output*)(element));
   }
   else if (elementName == "functionTerm" && element->getTypeCode() ==
-    SBML_FUNCTIONTERM)
+    SBML_QUAL_FUNCTION_TERM)
   {
     return addFunctionTerm((const FunctionTerm*)(element));
   }

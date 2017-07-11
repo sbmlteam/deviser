@@ -985,15 +985,15 @@ MixedGeometry::createChildObject(const std::string& elementName)
  */
 int
 MixedGeometry::addChildObject(const std::string& elementName,
-                              const GeometryDefinition* element)
+                              const SBase* element)
 {
   if (elementName == "geometryDefinition" && element->getTypeCode() ==
-    SBML_GEOMETRYDEFINITION)
+    SBML_SPATIAL_GEOMETRYDEFINITION)
   {
     return addGeometryDefinition((const GeometryDefinition*)(element));
   }
   else if (elementName == "ordinalMapping" && element->getTypeCode() ==
-    SBML_ORDINALMAPPING)
+    SBML_SPATIAL_ORDINALMAPPING)
   {
     return addOrdinalMapping((const OrdinalMapping*)(element));
   }
@@ -1065,7 +1065,7 @@ MixedGeometry::getNumObjects(const std::string& elementName)
 SBase*
 MixedGeometry::getObject(const std::string& elementName, unsigned int index)
 {
-  GeometryDefinition* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "geometryDefinition")
   {

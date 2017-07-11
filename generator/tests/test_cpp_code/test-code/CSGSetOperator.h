@@ -912,7 +912,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int addChildObject(const std::string& elementName,
-                             const CSGNode* element);
+                             const SBase* element);
 
   /** @endcond */
 

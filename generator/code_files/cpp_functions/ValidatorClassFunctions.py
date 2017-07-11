@@ -253,8 +253,8 @@ class ValidatorClassFunctions():
             lines = ['m != NULL',
                      '{0}ValidatingVisitor vv(*this, '
                      '*m)'.format(self.up_package),
-                     'const {0}ModelPlugin* plugin = static_cast<const '
-                     '{0}ModelPlugin*>(m->getPlugin(\"{1}\")'
+                     'const {0}SBMLDocumentPlugin* plugin = static_cast<const '
+                     '{0}SBMLDocumentPlugin*>(d.getPlugin(\"{1}\")'
                      ')'.format(self.up_package, self.package),
                      nested_if]
             code.append(self.create_code_block('if', lines))

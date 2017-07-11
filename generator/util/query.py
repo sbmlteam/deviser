@@ -99,6 +99,9 @@ def get_class(name, root_object):
         name = strFunctions.singular(name[6:])
     else:
         name = strFunctions.upper_first(name)
+    # hack for spatial boundaryMin
+    if name.startswith('BoundaryM'):
+        name = 'Boundary'
     if root_object is None:
         return None
     elif root_object['baseElements'] is None:
@@ -531,14 +534,23 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     return dict({'name': name, 'children': children, 'attribs': reqd_attribs})
 
 # get a list of names of child elements
-def get_child_elements(elements, lo_elements):
+def get_child_elements(elements, lo_elements, root=None):
     child_elements = []
+    typecode = 'TO_DO'
     for elem in elements:
         if elem['element'] != 'ASTNode' and elem['element'] != 'XMLNode':
-            child_elements.append(strFunctions.remove_prefix(elem['name']))
+            if root:
+                thisclass = get_class(elem['name'], root)
+                if thisclass and 'typecode' in thisclass:
+                    typecode = thisclass['typecode']
+            child_elements.append(dict({'name': strFunctions.remove_prefix(elem['name']), 'typecode': typecode}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
-            child_elements.append(strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])))
+            if root:
+                thisclass = get_class(strFunctions.lower_first(elem['element']), root)
+                if thisclass and 'typecode' in thisclass:
+                    typecode = thisclass['typecode']
+            child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])), 'typecode': typecode}))
     return child_elements
 
 # insert a listOfParent into the tree

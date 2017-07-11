@@ -667,7 +667,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int addChildObject(const std::string& elementName,
-                             const Association* element);
+                             const SBase* element);
 
   /** @endcond */
 

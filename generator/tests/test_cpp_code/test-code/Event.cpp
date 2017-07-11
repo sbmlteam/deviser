@@ -1248,21 +1248,21 @@ Event::createChildObject(const std::string& elementName)
 int
 Event::addChildObject(const std::string& elementName, const SBase* element)
 {
-  if (elementName == "trigger" && element->getTypeCode() == SBML_TRIGGER)
+  if (elementName == "trigger" && element->getTypeCode() == CORE_TRIGGER)
   {
     return setTrigger((const Trigger*)(element));
   }
   else if (elementName == "priority" && element->getTypeCode() ==
-    SBML_PRIORITY)
+    CORE_PRIORITY)
   {
     return setPriority((const Priority*)(element));
   }
-  else if (elementName == "delay" && element->getTypeCode() == SBML_DELAY)
+  else if (elementName == "delay" && element->getTypeCode() == CORE_DELAY)
   {
     return setDelay((const Delay*)(element));
   }
   else if (elementName == "eventAssignment" && element->getTypeCode() ==
-    SBML_EVENTASSIGNMENT)
+    CORE_EVENTASSIGNMENT)
   {
     return addEventAssignment((const EventAssignment*)(element));
   }
@@ -1286,17 +1286,17 @@ Event::removeChildObject(const std::string& elementName,
 {
   if (elementName == "trigger")
   {
-    Trigger * obj = getTrigger;
+    Trigger * obj = getTrigger();
     if (unsetTrigger() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "priority")
   {
-    Priority * obj = getPriority;
+    Priority * obj = getPriority();
     if (unsetPriority() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "delay")
   {
-    Delay * obj = getDelay;
+    Delay * obj = getDelay();
     if (unsetDelay() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "eventAssignment")

@@ -641,7 +641,7 @@ GroupsModelPlugin::unsetAttribute(const std::string& attributeName)
 SBase*
 GroupsModelPlugin::createChildObject(const std::string& elementName)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "group")
   {
@@ -662,9 +662,9 @@ GroupsModelPlugin::createChildObject(const std::string& elementName)
  */
 int
 GroupsModelPlugin::addChildObject(const std::string& elementName,
-                                  const SBasePlugin* element)
+                                  const SBase* element)
 {
-  if (elementName == "group" && element->getTypeCode() == SBML_GROUP)
+  if (elementName == "group" && element->getTypeCode() == SBML_GROUPS_GROUP)
   {
     return addGroup((const Group*)(element));
   }
@@ -729,7 +729,7 @@ SBase*
 GroupsModelPlugin::getObject(const std::string& elementName,
                              unsigned int index)
 {
-  SBasePlugin* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "group")
   {

@@ -789,11 +789,12 @@ Parent::createChildObject(const std::string& elementName)
 int
 Parent::addChildObject(const std::string& elementName, const SBase* element)
 {
-  if (elementName == "child" && element->getTypeCode() == SBML_CHILD)
+  if (elementName == "child" && element->getTypeCode() == SBML_NASTY_CHILD)
   {
     return addChild((const Child*)(element));
   }
-  else if (elementName == "sprog" && element->getTypeCode() == SBML_SPROG)
+  else if (elementName == "sprog" && element->getTypeCode() ==
+    SBML_NASTY_SPROG)
   {
     return addSprog((const Sprog*)(element));
   }

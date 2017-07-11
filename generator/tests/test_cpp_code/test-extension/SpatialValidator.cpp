@@ -936,8 +936,8 @@ SpatialValidator::validate(const SBMLDocument& d)
   if (m != NULL)
   {
     SpatialValidatingVisitor vv(*this, *m);
-    const SpatialModelPlugin* plugin = static_cast<const
-      SpatialModelPlugin*>(m->getPlugin("spatial"));
+    const SpatialSBMLDocumentPlugin* plugin = static_cast<const
+      SpatialSBMLDocumentPlugin*>(d.getPlugin("spatial"));
     if (plugin != NULL)
     {
       plugin->accept(vv);

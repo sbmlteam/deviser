@@ -682,7 +682,7 @@ int
 Container::addChildObject(const std::string& elementName,
                           const SBase* element)
 {
-  if (elementName == "myLoTest" && element->getTypeCode() == SBML_MYLOTEST)
+  if (elementName == "myLoTest" && element->getTypeCode() == TEST_LO_TEST)
   {
     return addMyLoTest((const MyLoTest*)(element));
   }

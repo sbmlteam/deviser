@@ -871,15 +871,15 @@ ParametricGeometry::createChildObject(const std::string& elementName)
  */
 int
 ParametricGeometry::addChildObject(const std::string& elementName,
-                                   const GeometryDefinition* element)
+                                   const SBase* element)
 {
   if (elementName == "spatialPoints" && element->getTypeCode() ==
-    SBML_SPATIALPOINTS)
+    SBML_SPATIAL_SPATIALPOINTS)
   {
     return setSpatialPoints((const SpatialPoints*)(element));
   }
   else if (elementName == "parametricObject" && element->getTypeCode() ==
-    SBML_PARAMETRICOBJECT)
+    SBML_SPATIAL_PARAMETRICOBJECT)
   {
     return addParametricObject((const ParametricObject*)(element));
   }
@@ -903,7 +903,7 @@ ParametricGeometry::removeChildObject(const std::string& elementName,
 {
   if (elementName == "spatialPoints")
   {
-    SpatialPoints * obj = getSpatialPoints;
+    SpatialPoints * obj = getSpatialPoints();
     if (unsetSpatialPoints() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "parametricObject")
@@ -956,7 +956,7 @@ SBase*
 ParametricGeometry::getObject(const std::string& elementName,
                               unsigned int index)
 {
-  GeometryDefinition* obj = NULL;
+  SBase* obj = NULL;
 
   if (elementName == "spatialPoints")
   {

@@ -1497,6 +1497,7 @@ class SetGetFunctions():
                                   'clone())'.format(member,
                                                     attribute['attTypeCode'],
                                                     name),
+                                  'connectToChild()',
                                   'return {0}'.format(self.success)]
                 code = [self.create_code_block('else_if', implementation)]
         else:

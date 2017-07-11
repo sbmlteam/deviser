@@ -788,7 +788,7 @@ BBB::createChildObject(const std::string& elementName)
 int
 BBB::addChildObject(const std::string& elementName, const SBase* element)
 {
-  if (elementName == "another" && element->getTypeCode() == SBML_ANOTHER)
+  if (elementName == "another" && element->getTypeCode() == CLASS_A)
   {
     return addAnother((const Another*)(element));
   }
