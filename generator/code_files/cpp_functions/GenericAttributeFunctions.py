@@ -70,9 +70,13 @@ class GenericAttributeFunctions():
                 self.object_child_name = self.child_name + '_t'
 
             self.attributes = class_object['class_attributes']
-            self.elements = query.get_child_elements(class_object['child_elements'], class_object['child_lo_elements'])
-            self.single_elements = query.get_child_elements(class_object['child_elements'], [])
-            self.lo_elements = query.get_child_elements([], class_object['child_lo_elements'])
+            classroot = None
+            if 'root' in class_object:
+                classroot = class_object['root']
+            self.elements = query.get_child_elements(class_object['child_elements'], class_object['child_lo_elements'],
+                                                     classroot)
+            self.single_elements = query.get_child_elements(class_object['child_elements'], [], classroot)
+            self.lo_elements = query.get_child_elements([], class_object['child_lo_elements'], classroot)
 
             if 'num_versions' in class_object and class_object['num_versions'] > 1:
                 self.has_multiple_versions = True
@@ -440,14 +444,18 @@ class GenericAttributeFunctions():
 
         # create the function declaration
         function = 'createChildObject'
-        return_type = 'SBase*'
-
+#        if self.is_plugin:
+        return_type = '{0}*'.format(global_variables.baseClass)
 
         arguments = ['const std::string& elementName']
 
         code = []
         # create the function implementation
-        first_line = ['{0}* obj = NULL'.format(self.base_class)]
+        if self.is_plugin:
+            first_line = ['{0}* obj = NULL'.format(global_variables.baseClass)]
+        else:
+            first_line = ['{0}* obj = NULL'.format(self.base_class)]
+
         last_line = ['return obj']
         first = True
         block = []
@@ -458,8 +466,8 @@ class GenericAttributeFunctions():
                 block.append('else if')
             else:
                 first = False
-            block.append('elementName == \"{0}\"'.format(elem))
-            block.append('return create{0}()'.format(strFunctions.upper_first(elem)))
+            block.append('elementName == \"{0}\"'.format(elem['name']))
+            block.append('return create{0}()'.format(strFunctions.upper_first(elem['name'])))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
             else:
@@ -515,11 +523,10 @@ class GenericAttributeFunctions():
         function = 'addChildObject'
         return_type = 'int'
 
-        arguments = ['const std::string& elementName', 'const {0}* element'.format(self.base_class)]
+        arguments = ['const std::string& elementName', 'const {0}* element'.format(global_variables.baseClass)]
 
         code = []
         # create the function implementation
-#        first_line = ['{0}* obj = NULL'.format(self.base_class)]
         last_line = ['return LIBSBML_OPERATION_FAILED']
         first = True
         block = []
@@ -530,11 +537,11 @@ class GenericAttributeFunctions():
                 block.append('else if')
             else:
                 first = False
-            block.append('elementName == \"{0}\" && element->getTypeCode() == SBML_{1}'.format(elem, elem.upper()))
+            block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elem['name'], elem['typecode']))
             if elem not in self.single_elements:
-                block.append('return add{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem)))
+                block.append('return add{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem['name'])))
             else:
-                block.append('return set{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem)))
+                block.append('return set{0}((const {0}*)(element))'.format(strFunctions.upper_first(elem['name'])))
 
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
@@ -579,7 +586,7 @@ class GenericAttributeFunctions():
 
         # create the function declaration
         function = 'removeChildObject'
-        return_type = 'SBase*'
+        return_type = '{0}*'.format(global_variables.baseClass)
 
         arguments = ['const std::string& elementName', 'const std::string& id']
 
@@ -595,14 +602,14 @@ class GenericAttributeFunctions():
                 block.append('else if')
             else:
                 first = False
-            block.append('elementName == \"{0}\"'.format(elem))
+            block.append('elementName == \"{0}\"'.format(elem['name']))
             single = True
             if elem not in self.single_elements:
                 single = False
-                block.append('return remove{0}(id)'.format(strFunctions.upper_first(elem)))
+                block.append('return remove{0}(id)'.format(strFunctions.upper_first(elem['name'])))
             else:
-                block.append('{0} * obj = get{0}'.format(strFunctions.upper_first(elem)))
-                block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem)))
+                block.append('{0} * obj = get{0}()'.format(strFunctions.upper_first(elem['name'])))
+                block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem['name'])))
             if single:
                 if len(block) > 3:
                     if_block = self.create_code_block('else_if', block)
@@ -669,12 +676,12 @@ class GenericAttributeFunctions():
                 block.append('else if')
             else:
                 first = False
-            block.append('elementName == \"{0}\"'.format(elem))
+            block.append('elementName == \"{0}\"'.format(elem['name']))
             if elem in self.lo_elements:
-                name = strFunctions.plural(strFunctions.upper_first(elem))
+                name = strFunctions.plural(strFunctions.upper_first(elem['name']))
                 block.append('return getNum{0}()'.format(name))
             else:
-                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem)),
+                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem['name'])),
                              'return 1']
                 nested_if_block = self.create_code_block('if', nested_if)
                 block.append(nested_if_block)
@@ -722,13 +729,13 @@ class GenericAttributeFunctions():
 
         # create the function declaration
         function = 'getObject'
-        return_type = 'SBase*'
+        return_type = '{0}*'.format(global_variables.baseClass)
 
         arguments = ['const std::string& elementName', 'unsigned int index']
 
         code = []
         # create the function implementation
-        first_line = ['{0}* obj = NULL'.format(self.base_class)]
+        first_line = ['{0}* obj = NULL'.format(global_variables.baseClass)]
         last_line = ['return obj']
         first = True
         block = []
@@ -739,11 +746,11 @@ class GenericAttributeFunctions():
                 block.append('else if')
             else:
                 first = False
-            block.append('elementName == \"{0}\"'.format(elem))
+            block.append('elementName == \"{0}\"'.format(elem['name']))
             if elem in self.single_elements:
-                block.append('return get{0}()'.format(strFunctions.upper_first(elem)))
+                block.append('return get{0}()'.format(strFunctions.upper_first(elem['name'])))
             else:
-                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem)))
+                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem['name'])))
 
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
