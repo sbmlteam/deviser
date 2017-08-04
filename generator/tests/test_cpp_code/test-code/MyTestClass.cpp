@@ -1911,8 +1911,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      log->logPackageError("test", TestIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2060,8 +2061,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      logError(TestMyTestClassUnitMustBeUnitSId, level, version, "The attribute "
-        "unit='" + mUnit + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassUnitMustBeUnitSId,
+        pkgVersion, level, version, "The attribute unit='" + mUnit + "' does not "
+          "conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2079,8 +2081,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      logError(TestMyTestClassRef1MustBeThing1, level, version, "The attribute "
-        "ref1='" + mRef1 + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassRef1MustBeThing1, pkgVersion,
+        level, version, "The attribute ref1='" + mRef1 + "' does not conform to "
+          "the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2098,8 +2101,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      logError(TestMyTestClassRef2MustBeThing2, level, version, "The attribute "
-        "ref2='" + mRef2 + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassRef2MustBeThing2, pkgVersion,
+        level, version, "The attribute ref2='" + mRef2 + "' does not conform to "
+          "the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2117,8 +2121,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
-      logError(TestMyTestClassRefUnitMustBeUnitSId, level, version, "The "
-        "attribute refUnit='" + mRefUnit + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassRefUnitMustBeUnitSId,
+        pkgVersion, level, version, "The attribute refUnit='" + mRefUnit + "' "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2136,8 +2141,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mCorrectId) == false)
     {
-      logError(TestIdSyntaxRule, level, version, "The id '" + mCorrectId + "' "
-        "does not conform to the syntax.");
+      log->logPackageError("test", TestIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mCorrectId +
+          "',which does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2155,8 +2161,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdRef) == false)
     {
-      logError(TestMyTestClassIdRefMustBeID, level, version, "The attribute "
-        "idRef='" + mIdRef + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassIdRefMustBeID, pkgVersion,
+        level, version, "The attribute idRef='" + mIdRef + "' does not conform to "
+          "the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2174,8 +2181,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdref1) == false)
     {
-      logError(TestMyTestClassIdref1MustBeID, level, version, "The attribute "
-        "idref1='" + mIdref1 + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassIdref1MustBeID, pkgVersion,
+        level, version, "The attribute idref1='" + mIdref1 + "' does not conform "
+          "to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -2193,8 +2201,9 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdref2) == false)
     {
-      logError(TestMyTestClassIdref2MustBeID, level, version, "The attribute "
-        "idref2='" + mIdref2 + "' does not conform to the syntax.");
+      log->logPackageError("test", TestMyTestClassIdref2MustBeID, pkgVersion,
+        level, version, "The attribute idref2='" + mIdref2 + "' does not conform "
+          "to the syntax.", getLine(), getColumn());
     }
   }
 }

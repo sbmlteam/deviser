@@ -1077,8 +1077,9 @@ BBB::readV1Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(VersIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
@@ -1123,8 +1124,9 @@ BBB::readV2Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(VersIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else

@@ -1126,9 +1126,10 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mSampledField) == false)
     {
-      logError(SpatialSampledFieldGeometrySampledFieldMustBeSampledField,
-        level, version, "The attribute sampledField='" + mSampledField + "' does "
-          "not conform to the syntax.");
+      log->logPackageError("spatial",
+        SpatialSampledFieldGeometrySampledFieldMustBeSampledField, pkgVersion,
+          level, version, "The attribute sampledField='" + mSampledField + "' does "
+            "not conform to the syntax.", getLine(), getColumn());
     }
   }
   else

@@ -1739,7 +1739,7 @@ VersSpeciesPlugin::readV1Attributes(const XMLAttributes& attributes)
       log->logPackageError("vers",
         VersVersSpeciesPluginSpecies_att_v1MustBeSId, pkgVersion, level, version,
           "The attribute species_att_v1='" + mSpecies_att_v1 + "' does not conform "
-            "to the syntax.");
+            "to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -1796,7 +1796,7 @@ VersSpeciesPlugin::readV2Attributes(const XMLAttributes& attributes)
       log->logPackageError("vers",
         VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
           "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
-            "to the syntax.");
+            "to the syntax.", getLine(), getColumn());
     }
   }
 }

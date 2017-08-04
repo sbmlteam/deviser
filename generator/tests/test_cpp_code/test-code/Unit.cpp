@@ -632,8 +632,9 @@ Unit::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      logError(TestUnitUnitMustBeUnitSId, level, version, "The attribute "
-        "unit='" + mUnit + "' does not conform to the syntax.");
+      log->logPackageError("test", TestUnitUnitMustBeUnitSId, pkgVersion,
+        level, version, "The attribute unit='" + mUnit + "' does not conform to "
+          "the syntax.", getLine(), getColumn());
     }
   }
 }

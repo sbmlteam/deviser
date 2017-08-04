@@ -1037,8 +1037,9 @@ Output::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(QualIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      log->logPackageError("qual", QualIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -1056,9 +1057,10 @@ Output::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mQualitativeSpecies) == false)
     {
-      logError(QualOutputQualitativeSpeciesMustBeQualitativeSpecies, level,
-        version, "The attribute qualitativeSpecies='" + mQualitativeSpecies + "' "
-          "does not conform to the syntax.");
+      log->logPackageError("qual",
+        QualOutputQualitativeSpeciesMustBeQualitativeSpecies, pkgVersion, level,
+          version, "The attribute qualitativeSpecies='" + mQualitativeSpecies + "' "
+            "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else

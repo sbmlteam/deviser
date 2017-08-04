@@ -47,6 +47,11 @@ using namespace std;
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
+
+
+#ifdef __cplusplus
+
+
 // -------------------------------------------
 // Apply<T>
 // -------------------------------------------
@@ -972,6 +977,11 @@ SpatialValidator::validate(const std::string& filename)
   delete d;
   return numErrors;
 }
+
+
+
+
+#endif /* __cplusplus */
 
 
 

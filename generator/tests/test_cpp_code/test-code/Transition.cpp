@@ -1701,8 +1701,9 @@ Transition::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(QualIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      log->logPackageError("qual", QualIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
 

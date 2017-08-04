@@ -580,8 +580,9 @@ MySEDClass::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(TestIdSyntaxRule, level, version, "The id '" + mId + "' does not "
-        "conform to the syntax.");
+      logError(TestIdSyntaxRule, level, version, "The id on the <" +
+        getElementName() + "> is '" + mId + "',which does not conform to the "
+          "syntax.");
     }
   }
 }

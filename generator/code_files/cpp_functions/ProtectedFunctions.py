@@ -1292,7 +1292,8 @@ class ProtectedFunctions():
         if att_type == 'ID' or att_type == 'IDREF':
             check_function = 'isValidXMLID'
         if att_type == 'SId':
-            invalid_line = '\"The id \'\" + {0} + \"\' does not conform to ' \
+            invalid_line = '\"The id on the <\" + getElementName() + \"> is \'\" + {0} + \"\',' \
+                           'which does not conform to ' \
                            'the syntax.\"'.format(member)
             error = '{0}IdSyntaxRule'.format(self.package)
         else:
@@ -1323,9 +1324,9 @@ class ProtectedFunctions():
         line += ['else if',
                  'SyntaxChecker::{0}({1}) == '
                  'false'.format(check_function, member)]
-        if self.is_plugin:
+        if self.is_plugin or global_variables.is_package:
             line.append('log->{0}{3}, {1}, '
-                        '{2})'.format(self.error, self.given_args,
+                        '{2}, getLine(), getColumn())'.format(self.error, self.given_args,
                                       invalid_line, error))
         else:
             line.append('logError({1}, level, version, '
