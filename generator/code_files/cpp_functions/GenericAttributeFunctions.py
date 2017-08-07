@@ -391,7 +391,10 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('attributeName == \"{0}\"'.format(attrib['name']))
-            block.append('value = unset{0}()'.format(attrib['capAttName']))
+            if attrib['attType'] == 'vector':
+                block.append('value = clear{0}()'.format(attrib['capAttName']))
+            else:
+                block.append('value = unset{0}()'.format(attrib['capAttName']))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
             else:

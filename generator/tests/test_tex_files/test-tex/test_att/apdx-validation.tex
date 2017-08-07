@@ -289,11 +289,14 @@ attributes \token{test:\-id}, \token{test:\-name}, \token{test:\-num},
 \token{test:\-correctId}, \token{test:\-posint},
 \token{test:\-posintTwo}, \token{test:\-posintOne},
 \token{test:\-metaid}, \token{test:\-metaidOne}, \token{test:\-numFour},
-\token{test:\-metaidrefOne} and \token{test:\-notmetaid}. No other
-attributes from the SBML Level 3 testAttributes namespaces are permitted
-on a \MyRequiredClass object. (Reference: SBML Level~3 Package
-specification for testAttributes, Version~1,
-\sec{myrequiredclass-class}.)}
+\token{test:\-metaidrefOne} and \token{test:\-notmetaid}, and may have
+the optional attributes \token{test:\-vectorDouble},
+\token{test:\-vectorDoubleOne}, \token{test:\-vectorInt},
+\token{test:\-vectorIntOne}, \token{test:\-arrayD} and
+\token{test:\-arrayInt}. No other attributes from the SBML Level 3
+testAttributes namespaces are permitted on a \MyRequiredClass object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20604}{The attribute \token{test:\-name} on a
 \MyRequiredClass must have a value of data type \token{string}.
@@ -394,6 +397,41 @@ Version~1, \sec{myrequiredclass-class}.)}
 \MyRequiredClass must have a value of XML data type \token{ID}.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20623}{The value of the attribute
+\token{test:\-vectorDouble} of a \MyRequiredClass object must be an
+vector of values of type \token{double}. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20624}{The value of the attribute
+\token{test:\-vectorDoubleOne} of a \MyRequiredClass object must be an
+vector of values of type \token{double}. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20625}{The value of the attribute
+\token{test:\-vectorInt} of a \MyRequiredClass object must be an vector
+of values of type \token{int}. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20626}{The value of the attribute
+\token{test:\-vectorIntOne} of a \MyRequiredClass object must be an
+vector of values of type \token{integer}. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
+
+\validRule{test-20627}{The value of the attribute \token{test:\-arrayD}
+of a \MyRequiredClass object must be an array of values of type
+\token{double}. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20628}{The value of the attribute
+\token{test:\-arrayInt} of a \MyRequiredClass object must be an array of
+values of type \token{integer}. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
 
 
 \subsubsection*{Rules for \class{ArrayChild} object}

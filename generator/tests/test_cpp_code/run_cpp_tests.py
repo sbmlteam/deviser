@@ -665,11 +665,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'spatial'
-        num = 9
-        class_name = 'SampledField'
+        name = 'test_att'
+        num = 3
+        class_name = 'MyRequiredClass'
         list_of = ''
-        test_case = 'additional code files'
+        test_case = 'all types attributes required'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

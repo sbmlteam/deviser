@@ -260,6 +260,12 @@ class ValidationRulesForClass():
                    'be an array of values of type {3}.'\
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token(array_type))
+        elif att_type == 'vector':
+            array_type = strFunctions.lower_first(attribute['element'])
+            text = 'The value of the attribute {0} of {1} {2} object must ' \
+                   'be an vector of values of type {3}.'\
+                .format(name, self.indef, formatted_name,
+                        strFunctions.wrap_token(array_type))
         elif att_type == 'element' and attribute['element'] == 'RelAbsVector':
             text = 'The value of the attribute {0} of {1} {2} object must ' \
                    'conform to the syntax of SBML data type \\RelAbsVector ' \

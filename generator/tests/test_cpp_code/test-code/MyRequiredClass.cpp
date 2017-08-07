@@ -85,6 +85,12 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
   , mIsSetNum4 (false)
   , mMetaidref1 ("")
   , mNotmetaid ("")
+  , mVectorDouble ()
+  , mVectorDouble1 ()
+  , mVectorInt ()
+  , mVectorInt1 ()
+  , mArrayD (NULL)
+  , mArrayInt (NULL)
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -126,6 +132,12 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   , mIsSetNum4 (false)
   , mMetaidref1 ("")
   , mNotmetaid ("")
+  , mVectorDouble ()
+  , mVectorDouble1 ()
+  , mVectorInt ()
+  , mVectorInt1 ()
+  , mArrayD (NULL)
+  , mArrayInt (NULL)
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -168,7 +180,17 @@ MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   , mIsSetNum4 ( orig.mIsSetNum4 )
   , mMetaidref1 ( orig.mMetaidref1 )
   , mNotmetaid ( orig.mNotmetaid )
+  , mVectorDouble ( orig.mVectorDouble )
+  , mVectorDouble1 ( orig.mVectorDouble1 )
+  , mVectorInt ( orig.mVectorInt )
+  , mVectorInt1 ( orig.mVectorInt1 )
+  , mArrayD ( NULL )
+  , mArrayInt ( NULL )
 {
+  setArrayD(orig.mArrayD, orig.mArrayDLength);
+
+  setArrayInt(orig.mArrayInt, orig.mArrayIntLength);
+
 }
 
 
@@ -212,6 +234,14 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
     mIsSetNum4 = rhs.mIsSetNum4;
     mMetaidref1 = rhs.mMetaidref1;
     mNotmetaid = rhs.mNotmetaid;
+    mVectorDouble = rhs.mVectorDouble;
+    mVectorDouble1 = rhs.mVectorDouble1;
+    mVectorInt = rhs.mVectorInt;
+    mVectorInt1 = rhs.mVectorInt1;
+    mArrayD = NULL;
+    setArrayD(rhs.mArrayD, rhs.mArrayDLength);
+    mArrayInt = NULL;
+    setArrayInt(rhs.mArrayInt, rhs.mArrayIntLength);
   }
 
   return *this;
@@ -233,6 +263,19 @@ MyRequiredClass::clone() const
  */
 MyRequiredClass::~MyRequiredClass()
 {
+  if (mArrayD != NULL)
+  {
+    delete [] mArrayD;
+  }
+
+  mArrayD = NULL;
+
+  if (mArrayInt != NULL)
+  {
+    delete [] mArrayInt;
+  }
+
+  mArrayInt = NULL;
 }
 
 
@@ -443,6 +486,76 @@ const std::string&
 MyRequiredClass::getNotmetaid() const
 {
   return mNotmetaid;
+}
+
+
+/*
+ * Returns the value of the "vectorDouble" attribute of this MyRequiredClass.
+ */
+const std::vector<double>&
+MyRequiredClass::getVectorDouble() const
+{
+  return mVectorDouble;
+}
+
+
+/*
+ * Returns the value of the "vectorDouble1" attribute of this MyRequiredClass.
+ */
+const std::vector<double>&
+MyRequiredClass::getVectorDouble1() const
+{
+  return mVectorDouble1;
+}
+
+
+/*
+ * Returns the value of the "vectorInt" attribute of this MyRequiredClass.
+ */
+const std::vector<int>&
+MyRequiredClass::getVectorInt() const
+{
+  return mVectorInt;
+}
+
+
+/*
+ * Returns the value of the "vectorInt1" attribute of this MyRequiredClass.
+ */
+const std::vector<int>&
+MyRequiredClass::getVectorInt1() const
+{
+  return mVectorInt1;
+}
+
+
+/*
+ * Returns the value of the "arrayD" attribute of this MyRequiredClass.
+ */
+void
+MyRequiredClass::getArrayD(double* outArray) const
+{
+  if (outArray == NULL || mArrayD == NULL)
+  {
+    return;
+  }
+
+  memcpy(outArray, mArrayD, sizeof(double)*mArrayDLength);
+}
+
+
+/*
+ * Returns the value of the "arrayInt" attribute of this MyRequiredClass.
+ */
+void
+MyRequiredClass::getArrayInt(int* outArray) const
+{
+  if (outArray == NULL || mArrayInt == NULL)
+  {
+    return;
+  }
+
+  memcpy(outArray, mArrayInt, sizeof(int)*mArrayIntLength);
 }
 
 
@@ -673,6 +786,116 @@ bool
 MyRequiredClass::isSetNotmetaid() const
 {
   return (mNotmetaid.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "vectorDouble"
+ * attribute is set.
+ */
+bool
+MyRequiredClass::hasVectorDoubles() const
+{
+  return mVectorDouble.size() > 0;
+}
+
+
+/*
+ * Return the number of elements in this MyRequiredClass's "vectorDouble"
+ * attribute.
+ */
+unsigned int
+MyRequiredClass::getNumVectorDoubles() const
+{
+  return (unsigned int)(mVectorDouble.size());
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "vectorDouble1"
+ * attribute is set.
+ */
+bool
+MyRequiredClass::hasVectorDouble1s() const
+{
+  return mVectorDouble1.size() > 0;
+}
+
+
+/*
+ * Return the number of elements in this MyRequiredClass's "vectorDouble1"
+ * attribute.
+ */
+unsigned int
+MyRequiredClass::getNumVectorDouble1s() const
+{
+  return (unsigned int)(mVectorDouble1.size());
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "vectorInt" attribute
+ * is set.
+ */
+bool
+MyRequiredClass::hasVectorInts() const
+{
+  return mVectorInt.size() > 0;
+}
+
+
+/*
+ * Return the number of elements in this MyRequiredClass's "vectorInt"
+ * attribute.
+ */
+unsigned int
+MyRequiredClass::getNumVectorInts() const
+{
+  return (unsigned int)(mVectorInt.size());
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "vectorInt1" attribute
+ * is set.
+ */
+bool
+MyRequiredClass::hasVectorInt1s() const
+{
+  return mVectorInt1.size() > 0;
+}
+
+
+/*
+ * Return the number of elements in this MyRequiredClass's "vectorInt1"
+ * attribute.
+ */
+unsigned int
+MyRequiredClass::getNumVectorInt1s() const
+{
+  return (unsigned int)(mVectorInt1.size());
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "arrayD" attribute is
+ * set.
+ */
+bool
+MyRequiredClass::isSetArrayD() const
+{
+  return (mArrayD != NULL);
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "arrayInt" attribute
+ * is set.
+ */
+bool
+MyRequiredClass::isSetArrayInt() const
+{
+  return (mArrayInt != NULL);
 }
 
 
@@ -939,6 +1162,144 @@ int
 MyRequiredClass::setNotmetaid(const std::string& notmetaid)
 {
   mNotmetaid = notmetaid;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "vectorDouble" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setVectorDouble(const std::vector<double>& vectorDouble)
+{
+  mVectorDouble = vectorDouble;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Adds another value to the "vectorDouble" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::addVectorDouble(double vectorDouble)
+{
+  mVectorDouble.push_back(vectorDouble);
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "vectorDouble1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setVectorDouble1(const std::vector<double>& vectorDouble1)
+{
+  mVectorDouble1 = vectorDouble1;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Adds another value to the "vectorDouble1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::addVectorDouble1(double vectorDouble1)
+{
+  mVectorDouble1.push_back(vectorDouble1);
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "vectorInt" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setVectorInt(const std::vector<int>& vectorInt)
+{
+  mVectorInt = vectorInt;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Adds another value to the "vectorInt" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::addVectorInt(int vectorInt)
+{
+  mVectorInt.push_back(vectorInt);
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "vectorInt1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setVectorInt1(const std::vector<int>& vectorInt1)
+{
+  mVectorInt1 = vectorInt1;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Adds another value to the "vectorInt1" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::addVectorInt1(int vectorInt1)
+{
+  mVectorInt1.push_back(vectorInt1);
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "arrayD" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setArrayD(double* inArray, int arrayLength)
+{
+  if (inArray == NULL)
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+
+  if (mArrayD != NULL)
+  {
+    delete[] mArrayD;
+  }
+
+  mArrayD = new double[arrayLength];
+  memcpy(mArrayD, inArray, sizeof(double)*arrayLength);
+  mIsSetArrayDLength = true;
+  mArrayDLength = arrayLength;
+
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "arrayInt" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setArrayInt(int* inArray, int arrayLength)
+{
+  if (inArray == NULL)
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+
+  if (mArrayInt != NULL)
+  {
+    delete[] mArrayInt;
+  }
+
+  mArrayInt = new int[arrayLength];
+  memcpy(mArrayInt, inArray, sizeof(int)*arrayLength);
+  mIsSetArrayIntLength = true;
+  mArrayIntLength = arrayLength;
+
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1353,6 +1714,84 @@ MyRequiredClass::unsetNotmetaid()
 
 
 /*
+ * Clears the "vectorDouble" element of this MyRequiredClass.
+ */
+int
+MyRequiredClass::clearVectorDoubles()
+{
+  mVectorDouble.clear();
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Clears the "vectorDouble1" element of this MyRequiredClass.
+ */
+int
+MyRequiredClass::clearVectorDouble1s()
+{
+  mVectorDouble1.clear();
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Clears the "vectorInt" element of this MyRequiredClass.
+ */
+int
+MyRequiredClass::clearVectorInts()
+{
+  mVectorInt.clear();
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Clears the "vectorInt1" element of this MyRequiredClass.
+ */
+int
+MyRequiredClass::clearVectorInt1s()
+{
+  mVectorInt1.clear();
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "arrayD" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetArrayD()
+{
+  if (mArrayD != NULL)
+  {
+    delete[] mArrayD;
+  }
+
+  mArrayD = NULL;
+
+  return unsetArrayDLength();
+}
+
+
+/*
+ * Unsets the value of the "arrayInt" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetArrayInt()
+{
+  if (mArrayInt != NULL)
+  {
+    delete[] mArrayInt;
+  }
+
+  mArrayInt = NULL;
+
+  return unsetArrayIntLength();
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -1527,6 +1966,58 @@ MyRequiredClass::writeElements(XMLOutputStream& stream) const
   SBase::writeElements(stream);
 
   SBase::writeExtensionElements(stream);
+
+  if (hasVectorDoubles())
+  {
+    for (std::vector<double>::const_iterator it = mVectorDouble.begin(); it !=
+      mVectorDouble.end(); ++it)
+    {
+      stream.startElement("vectorDouble");
+      stream.setAutoIndent(false);
+      stream << " " << *it << " ";
+      stream.endElement("vectorDouble");
+      stream.setAutoIndent(true);
+    }
+  }
+
+  if (hasVectorDouble1s())
+  {
+    for (std::vector<double>::const_iterator it = mVectorDouble1.begin(); it !=
+      mVectorDouble1.end(); ++it)
+    {
+      stream.startElement("vectorDouble1");
+      stream.setAutoIndent(false);
+      stream << " " << *it << " ";
+      stream.endElement("vectorDouble1");
+      stream.setAutoIndent(true);
+    }
+  }
+
+  if (hasVectorInts())
+  {
+    for (std::vector<int>::const_iterator it = mVectorInt.begin(); it !=
+      mVectorInt.end(); ++it)
+    {
+      stream.startElement("vectorInt");
+      stream.setAutoIndent(false);
+      stream << " " << *it << " ";
+      stream.endElement("vectorInt");
+      stream.setAutoIndent(true);
+    }
+  }
+
+  if (hasVectorInt1s())
+  {
+    for (std::vector<int>::const_iterator it = mVectorInt1.begin(); it !=
+      mVectorInt1.end(); ++it)
+    {
+      stream.startElement("vectorInt1");
+      stream.setAutoIndent(false);
+      stream << " " << *it << " ";
+      stream.endElement("vectorInt1");
+      stream.setAutoIndent(true);
+    }
+  }
 }
 
 /** @endcond */
@@ -1557,6 +2048,32 @@ void
 MyRequiredClass::setSBMLDocument(SBMLDocument* d)
 {
   SBase::setSBMLDocument(d);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * used to write arrays
+ */
+void
+MyRequiredClass::write(XMLOutputStream& stream) const
+{
+  stream.startElement(getElementName(), getPrefix());
+  writeAttributes(stream);
+
+  if (isSetArrayInt())
+  {
+    for (int i = 0; i < mArrayIntLength; ++i)
+    {
+      stream << (long)mArrayInt[i] << " ";
+    }
+  }
+
+  stream.endElement(getElementName(), getPrefix());
 }
 
 /** @endcond */
@@ -1979,6 +2496,30 @@ MyRequiredClass::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetNotmetaid();
   }
+  else if (attributeName == "vectorDouble")
+  {
+    value = isSetVectorDouble();
+  }
+  else if (attributeName == "vectorDouble1")
+  {
+    value = isSetVectorDouble1();
+  }
+  else if (attributeName == "vectorInt")
+  {
+    value = isSetVectorInt();
+  }
+  else if (attributeName == "vectorInt1")
+  {
+    value = isSetVectorInt1();
+  }
+  else if (attributeName == "arrayD")
+  {
+    value = isSetArrayD();
+  }
+  else if (attributeName == "arrayInt")
+  {
+    value = isSetArrayInt();
+  }
 
   return value;
 }
@@ -2320,6 +2861,30 @@ MyRequiredClass::unsetAttribute(const std::string& attributeName)
   {
     value = unsetNotmetaid();
   }
+  else if (attributeName == "vectorDouble")
+  {
+    value = clearVectorDouble();
+  }
+  else if (attributeName == "vectorDouble1")
+  {
+    value = clearVectorDouble1();
+  }
+  else if (attributeName == "vectorInt")
+  {
+    value = clearVectorInt();
+  }
+  else if (attributeName == "vectorInt1")
+  {
+    value = clearVectorInt1();
+  }
+  else if (attributeName == "arrayD")
+  {
+    value = unsetArrayD();
+  }
+  else if (attributeName == "arrayInt")
+  {
+    value = unsetArrayInt();
+  }
 
   return value;
 }
@@ -2379,6 +2944,14 @@ MyRequiredClass::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("metaidref1");
 
   attributes.add("notmetaid");
+
+  attributes.add("vectorDouble");
+
+  attributes.add("vectorDouble1");
+
+  attributes.add("vectorInt");
+
+  attributes.add("vectorInt1");
 }
 
 /** @endcond */
@@ -2987,6 +3560,108 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Reads other XML such as math/notes etc.
+ */
+bool
+MyRequiredClass::readOtherXML(XMLInputStream& stream)
+{
+  bool read = false;
+
+  while (stream.peek().getName() == "vectorDouble")
+  {
+    stream.next();
+    stringstream text;
+    while (stream.isGood() && stream.peek().isText())
+    {
+      text << stream.next().getCharacters();
+    }
+
+    double value;
+    text >> value;
+    if (!text.fail())
+    {
+      mVectorDouble.push_back(value);
+    }
+
+    stream.next();
+    read = true;
+  }
+
+  while (stream.peek().getName() == "vectorDouble1")
+  {
+    stream.next();
+    stringstream text;
+    while (stream.isGood() && stream.peek().isText())
+    {
+      text << stream.next().getCharacters();
+    }
+
+    double value;
+    text >> value;
+    if (!text.fail())
+    {
+      mVectorDouble1.push_back(value);
+    }
+
+    stream.next();
+    read = true;
+  }
+
+  while (stream.peek().getName() == "vectorInt")
+  {
+    stream.next();
+    stringstream text;
+    while (stream.isGood() && stream.peek().isText())
+    {
+      text << stream.next().getCharacters();
+    }
+
+    int value;
+    text >> value;
+    if (!text.fail())
+    {
+      mVectorInt.push_back(value);
+    }
+
+    stream.next();
+    read = true;
+  }
+
+  while (stream.peek().getName() == "vectorInt1")
+  {
+    stream.next();
+    stringstream text;
+    while (stream.isGood() && stream.peek().isText())
+    {
+      text << stream.next().getCharacters();
+    }
+
+    int value;
+    text >> value;
+    if (!text.fail())
+    {
+      mVectorInt1.push_back(value);
+    }
+
+    stream.next();
+    read = true;
+  }
+
+  if (SBase::readOtherXML(stream))
+  {
+    read = true;
+  }
+
+  return read;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Writes the attributes to the stream
  */
 void
@@ -3100,6 +3775,42 @@ MyRequiredClass::writeAttributes(XMLOutputStream& stream) const
   }
 
   SBase::writeExtensionAttributes(stream);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Writes the array data as a text element
+ */
+void
+MyRequiredClass::setElementText(const std::string& text)
+{
+  stringstream strStream(text);
+  int val;
+  vector<int> valuesVector;
+
+  while (strStream >> val)
+  {
+    valuesVector.push_back(val);
+  }
+
+  unsigned int length = (unsigned int)valuesVector.size();
+
+  if (length > 0)
+  {
+    int* data = new int[length];
+    for (unsigned int i = 0; i < length; ++i)
+    {
+      data[i] = valuesVector.at(i);
+    }
+
+    setArrayInt(data, length);
+    delete[] data;
+  }
 }
 
 /** @endcond */
@@ -3699,6 +4410,30 @@ MyRequiredClass_isSetNotmetaid(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Predicate returning @c 1 if this MyRequiredClass_t's "arrayD" attribute is
+ * set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetArrayD(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetArrayD()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this MyRequiredClass_t's "arrayInt" attribute is
+ * set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetArrayInt(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetArrayInt()) : 0;
+}
+
+
+/*
  * Sets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -3932,6 +4667,34 @@ MyRequiredClass_setNotmetaid(MyRequiredClass_t * mrc, const char * notmetaid)
 
 
 /*
+ * Sets the value of the "arrayD" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setArrayD(MyRequiredClass_t* mrc,
+                          double* arrayD,
+                          int arrayLength)
+{
+  return (mrc != NULL) ? mrc->setArrayD(arrayD, arrayLength) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "arrayInt" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setArrayInt(MyRequiredClass_t* mrc,
+                            int* arrayInt,
+                            int arrayLength)
+{
+  return (mrc != NULL) ? mrc->setArrayInt(arrayInt, arrayLength) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -4159,6 +4922,28 @@ int
 MyRequiredClass_unsetNotmetaid(MyRequiredClass_t * mrc)
 {
   return (mrc != NULL) ? mrc->unsetNotmetaid() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "arrayD" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetArrayD(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetArrayD() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "arrayInt" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetArrayInt(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetArrayInt() : LIBSBML_INVALID_OBJECT;
 }
 
 

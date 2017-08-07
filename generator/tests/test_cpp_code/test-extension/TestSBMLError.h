@@ -105,6 +105,12 @@ typedef enum
 , TestMyRequiredClassNum4MustBeInteger                        = 10020620
 , TestMyRequiredClassMetaidref1MustBeString                   = 10020621
 , TestMyRequiredClassNotmetaidMustBeString                    = 10020622
+, TestMyRequiredClassVectorDoubleMustBeString                 = 10020623
+, TestMyRequiredClassVectorDouble1MustBeString                = 10020624
+, TestMyRequiredClassVectorIntMustBeString                    = 10020625
+, TestMyRequiredClassVectorInt1MustBeString                   = 10020626
+, TestMyRequiredClassArrayDMustBeString                       = 10020627
+, TestMyRequiredClassArrayIntMustBeString                     = 10020628
 , TestArrayChildAllowedCoreAttributes                         = 10020701
 , TestArrayChildAllowedCoreElements                           = 10020702
 , TestArrayChildAllowedAttributes                             = 10020703

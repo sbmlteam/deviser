@@ -707,20 +707,26 @@ class ProtectedFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         if has_vector:
-            implementation = ['!text.fail()', '{0}.push_back(value)'.format(vector_attribute['memberName'])]
-            if_block = self.create_code_block('if', implementation)
-            implementation = ['stream.isGood() && stream.peek().isText()',
-                              'text << stream.next().getCharacters()']
-            nested_while = self.create_code_block('while', implementation)
-            implementation = ['stream.peek().getName() == \"{0}\"'
-                              ''.format(vector_attribute['name']),
-                              'stream.next()', 'stringstream text',
-                              nested_while, 'double value', 'text >> value',
-                              if_block, 'stream.next()', 'read = true']
-            code.append(self.create_code_block('while', implementation))
-            if len(self.child_elements) > 0:
-                implementation = ['const string& name = stream.peek().getName()']
-                code.append(self.create_code_block('line', implementation))
+            for i in range(0,len(self.attributes)):
+                attrib = self.attributes[i]
+                if attrib['isVector']:
+                    vector_attribute = attrib
+                else:
+                    continue;
+                implementation = ['!text.fail()', '{0}.push_back(value)'.format(vector_attribute['memberName'])]
+                if_block = self.create_code_block('if', implementation)
+                implementation = ['stream.isGood() && stream.peek().isText()',
+                                  'text << stream.next().getCharacters()']
+                nested_while = self.create_code_block('while', implementation)
+                implementation = ['stream.peek().getName() == \"{0}\"'
+                                  ''.format(vector_attribute['name']),
+                                  'stream.next()', 'stringstream text',
+                                  nested_while, '{0} value'.format(vector_attribute['element']), 'text >> value',
+                                  if_block, 'stream.next()', 'read = true']
+                code.append(self.create_code_block('while', implementation))
+                if len(self.child_elements) > 0:
+                    implementation = ['const string& name = stream.peek().getName()']
+                    code.append(self.create_code_block('line', implementation))
 
 
         # math is unique - assume others are XMLNode based

@@ -48,6 +48,7 @@
 
 
 #include <string>
+#include <vector>
 
 
 #include <sbml/SBase.h>
@@ -92,6 +93,12 @@ protected:
   bool mIsSetNum4;
   std::string mMetaidref1;
   std::string mNotmetaid;
+  std::vector<double> mVectorDouble;
+  std::vector<double> mVectorDouble1;
+  std::vector<int> mVectorInt;
+  std::vector<int> mVectorInt1;
+  double* mArrayD;
+  int* mArrayInt;
 
   /** @endcond */
 
@@ -357,6 +364,67 @@ public:
 
 
   /**
+   * Returns the value of the "vectorDouble" attribute of this MyRequiredClass.
+   *
+   * @return the value of the "vectorDouble" attribute of this MyRequiredClass
+   * as a vector.
+   */
+  const std::vector<double>& getVectorDouble() const;
+
+
+  /**
+   * Returns the value of the "vectorDouble1" attribute of this
+   * MyRequiredClass.
+   *
+   * @return the value of the "vectorDouble1" attribute of this MyRequiredClass
+   * as a vector.
+   */
+  const std::vector<double>& getVectorDouble1() const;
+
+
+  /**
+   * Returns the value of the "vectorInt" attribute of this MyRequiredClass.
+   *
+   * @return the value of the "vectorInt" attribute of this MyRequiredClass as
+   * a vector.
+   */
+  const std::vector<int>& getVectorInt() const;
+
+
+  /**
+   * Returns the value of the "vectorInt1" attribute of this MyRequiredClass.
+   *
+   * @return the value of the "vectorInt1" attribute of this MyRequiredClass as
+   * a vector.
+   */
+  const std::vector<int>& getVectorInt1() const;
+
+
+  /**
+   * Returns the value of the "arrayD" attribute of this MyRequiredClass.
+   *
+   * @param outArray double* array that will be used to return the value of the
+   * "arrayD" attribute of this MyRequiredClass.
+   *
+   * @note the value of the "arrayD" attribute of this MyRequiredClass is
+   * returned in the argument array.
+   */
+  void getArrayD(double* outArray) const;
+
+
+  /**
+   * Returns the value of the "arrayInt" attribute of this MyRequiredClass.
+   *
+   * @param outArray int* array that will be used to return the value of the
+   * "arrayInt" attribute of this MyRequiredClass.
+   *
+   * @note the value of the "arrayInt" attribute of this MyRequiredClass is
+   * returned in the argument array.
+   */
+  void getArrayInt(int* outArray) const;
+
+
+  /**
    * Predicate returning @c true if this MyRequiredClass's "id" attribute is
    * set.
    *
@@ -564,6 +632,106 @@ public:
    * set, otherwise @c false is returned.
    */
   bool isSetNotmetaid() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "vectorDouble"
+   * attribute is set.
+   *
+   * @return @c true if this MyRequiredClass's "vectorDouble" attribute has
+   * been set, otherwise @c false is returned.
+   */
+  bool hasVectorDoubles() const;
+
+
+  /**
+   * Return the number of elements in this MyRequiredClass's "vectorDouble"
+   * attribute.
+   *
+   * @return the number of elements in the MyRequiredClass's "vectorDouble"
+   * attribute.
+   */
+  unsigned int getNumVectorDoubles() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "vectorDouble1"
+   * attribute is set.
+   *
+   * @return @c true if this MyRequiredClass's "vectorDouble1" attribute has
+   * been set, otherwise @c false is returned.
+   */
+  bool hasVectorDouble1s() const;
+
+
+  /**
+   * Return the number of elements in this MyRequiredClass's "vectorDouble1"
+   * attribute.
+   *
+   * @return the number of elements in the MyRequiredClass's "vectorDouble1"
+   * attribute.
+   */
+  unsigned int getNumVectorDouble1s() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "vectorInt"
+   * attribute is set.
+   *
+   * @return @c true if this MyRequiredClass's "vectorInt" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool hasVectorInts() const;
+
+
+  /**
+   * Return the number of elements in this MyRequiredClass's "vectorInt"
+   * attribute.
+   *
+   * @return the number of elements in the MyRequiredClass's "vectorInt"
+   * attribute.
+   */
+  unsigned int getNumVectorInts() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "vectorInt1"
+   * attribute is set.
+   *
+   * @return @c true if this MyRequiredClass's "vectorInt1" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool hasVectorInt1s() const;
+
+
+  /**
+   * Return the number of elements in this MyRequiredClass's "vectorInt1"
+   * attribute.
+   *
+   * @return the number of elements in the MyRequiredClass's "vectorInt1"
+   * attribute.
+   */
+  unsigned int getNumVectorInt1s() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "arrayD" attribute
+   * is set.
+   *
+   * @return @c true if this MyRequiredClass's "arrayD" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetArrayD() const;
+
+
+  /**
+   * Predicate returning @c true if this MyRequiredClass's "arrayInt" attribute
+   * is set.
+   *
+   * @return @c true if this MyRequiredClass's "arrayInt" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetArrayInt() const;
 
 
   /**
@@ -843,6 +1011,148 @@ public:
 
 
   /**
+   * Sets the value of the "vectorDouble" attribute of this MyRequiredClass.
+   *
+   * @param vectorDouble std::vector<double> value of the "vectorDouble"
+   * attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setVectorDouble(const std::vector<double>& vectorDouble);
+
+
+  /**
+   * Adds another value to the "vectorDouble" attribute of this
+   * MyRequiredClass.
+   *
+   * @param vectorDouble double of the "vectorDouble" attribute to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int addVectorDouble(double vectorDouble);
+
+
+  /**
+   * Sets the value of the "vectorDouble1" attribute of this MyRequiredClass.
+   *
+   * @param vectorDouble1 std::vector<double> value of the "vectorDouble1"
+   * attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setVectorDouble1(const std::vector<double>& vectorDouble1);
+
+
+  /**
+   * Adds another value to the "vectorDouble1" attribute of this
+   * MyRequiredClass.
+   *
+   * @param vectorDouble1 double of the "vectorDouble1" attribute to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int addVectorDouble1(double vectorDouble1);
+
+
+  /**
+   * Sets the value of the "vectorInt" attribute of this MyRequiredClass.
+   *
+   * @param vectorInt std::vector<int> value of the "vectorInt" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setVectorInt(const std::vector<int>& vectorInt);
+
+
+  /**
+   * Adds another value to the "vectorInt" attribute of this MyRequiredClass.
+   *
+   * @param vectorInt int of the "vectorInt" attribute to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int addVectorInt(int vectorInt);
+
+
+  /**
+   * Sets the value of the "vectorInt1" attribute of this MyRequiredClass.
+   *
+   * @param vectorInt1 std::vector<int> value of the "vectorInt1" attribute to
+   * be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setVectorInt1(const std::vector<int>& vectorInt1);
+
+
+  /**
+   * Adds another value to the "vectorInt1" attribute of this MyRequiredClass.
+   *
+   * @param vectorInt1 int of the "vectorInt1" attribute to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int addVectorInt1(int vectorInt1);
+
+
+  /**
+   * Sets the value of the "arrayD" attribute of this MyRequiredClass.
+   *
+   * @param inArray double* array value of the "arrayD" attribute to be set.
+   *
+   * @param arrayLength int value for the length of the "arrayD" attribute to
+   * be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setArrayD(double* inArray, int arrayLength);
+
+
+  /**
+   * Sets the value of the "arrayInt" attribute of this MyRequiredClass.
+   *
+   * @param inArray int* array value of the "arrayInt" attribute to be set.
+   *
+   * @param arrayLength int value for the length of the "arrayInt" attribute to
+   * be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setArrayInt(int* inArray, int arrayLength);
+
+
+  /**
    * Unsets the value of the "id" attribute of this MyRequiredClass.
    *
    * @copydetails doc_returns_success_code
@@ -1053,6 +1363,66 @@ public:
 
 
   /**
+   * Clears the "vectorDouble" element of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int clearVectorDoubles();
+
+
+  /**
+   * Clears the "vectorDouble1" element of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int clearVectorDouble1s();
+
+
+  /**
+   * Clears the "vectorInt" element of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int clearVectorInts();
+
+
+  /**
+   * Clears the "vectorInt1" element of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int clearVectorInt1s();
+
+
+  /**
+   * Unsets the value of the "arrayD" attribute of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetArrayD();
+
+
+  /**
+   * Unsets the value of the "arrayInt" attribute of this MyRequiredClass.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetArrayInt();
+
+
+  /**
    * @copydoc doc_renamesidref_common
    */
   virtual void renameSIdRefs(const std::string& oldid,
@@ -1149,6 +1519,17 @@ public:
    * Sets the parent SBMLDocument
    */
   virtual void setSBMLDocument(SBMLDocument* d);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * used to write arrays
+   */
+  virtual void write(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -1475,9 +1856,31 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   /**
+   * Reads other XML such as math/notes etc.
+   */
+  virtual bool readOtherXML(XMLInputStream& stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
    * Writes the attributes to the stream
    */
   virtual void writeAttributes(XMLOutputStream& stream) const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Writes the array data as a text element
+   */
+  virtual void setElementText(const std::string& text);
 
   /** @endcond */
 
@@ -2215,6 +2618,38 @@ MyRequiredClass_isSetNotmetaid(const MyRequiredClass_t * mrc);
 
 
 /**
+ * Predicate returning @c 1 if this MyRequiredClass_t's "arrayD" attribute is
+ * set.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @return @c 1 if this MyRequiredClass_t's "arrayD" attribute has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetArrayD(const MyRequiredClass_t * mrc);
+
+
+/**
+ * Predicate returning @c 1 if this MyRequiredClass_t's "arrayInt" attribute is
+ * set.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @return @c 1 if this MyRequiredClass_t's "arrayInt" attribute has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetArrayInt(const MyRequiredClass_t * mrc);
+
+
+/**
  * Sets the value of the "id" attribute of this MyRequiredClass_t.
  *
  * @param mrc the MyRequiredClass_t structure.
@@ -2595,6 +3030,52 @@ MyRequiredClass_setNotmetaid(MyRequiredClass_t * mrc, const char * notmetaid);
 
 
 /**
+ * Sets the value of the "arrayD" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @param arrayD pointer value of the "arrayD" attribute to be set.
+ *
+ * @param arrayLength int value for the length of the "arrayD" attribute to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setArrayD(MyRequiredClass_t* mrc,
+                          double* arrayD,
+                          int arrayLength);
+
+
+/**
+ * Sets the value of the "arrayInt" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @param arrayInt pointer value of the "arrayInt" attribute to be set.
+ *
+ * @param arrayLength int value for the length of the "arrayInt" attribute to
+ * be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setArrayInt(MyRequiredClass_t* mrc,
+                            int* arrayInt,
+                            int arrayLength);
+
+
+/**
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  *
  * @param mrc the MyRequiredClass_t structure.
@@ -2928,6 +3409,38 @@ MyRequiredClass_unsetMetaidref1(MyRequiredClass_t * mrc);
 LIBSBML_EXTERN
 int
 MyRequiredClass_unsetNotmetaid(MyRequiredClass_t * mrc);
+
+
+/**
+ * Unsets the value of the "arrayD" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetArrayD(MyRequiredClass_t * mrc);
+
+
+/**
+ * Unsets the value of the "arrayInt" attribute of this MyRequiredClass_t.
+ *
+ * @param mrc the MyRequiredClass_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ *
+ * @memberof MyRequiredClass_t
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetArrayInt(MyRequiredClass_t * mrc);
 
 
 /**

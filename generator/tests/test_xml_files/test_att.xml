@@ -59,6 +59,12 @@
             <attribute name="num4" required="true" type="integer" abstract="false"/>
             <attribute name="metaidref1" required="true" type="idref" abstract="false"/>
             <attribute name="notmetaid" required="true" type="ID" abstract="false"/>
+            <attribute name="vectorDouble" required="false" type="vector" element="double" abstract="false"/>
+            <attribute name="vectorDouble1" required="false" type="vector" element="Double" abstract="false"/>
+            <attribute name="vectorInt" required="false" type="vector" element="Int" abstract="false"/>
+            <attribute name="vectorInt1" required="false" type="vector" element="integer" abstract="false"/>
+            <attribute name="arrayD" required="false" type="array" element="double" abstract="false"/>
+            <attribute name="arrayInt" required="false" type="array" element="Integer" abstract="false"/>
           </attributes>
         </element>
         <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">

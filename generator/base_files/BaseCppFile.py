@@ -325,8 +325,11 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['default'] = 'NULL'
             elif att_type == 'vector':
                 attributes[i]['isVector'] = True
-                attributes[i]['element'] = \
-                    strFunctions.lower_first(attributes[i]['element'])
+                if attributes[i]['element'] == 'Integer' or attributes[i]['element'] == 'integer':
+                    attributes[i]['element'] = 'int'
+                else:
+                    attributes[i]['element'] = \
+                        strFunctions.lower_first(attributes[i]['element'])
                 attributes[i]['attType'] = 'vector'
                 attributes[i]['attTypeCode'] = 'std::vector<{0}>'.format(attributes[i]['element'])
                 attributes[i]['CType'] = attributes[i]['attTypeCode']

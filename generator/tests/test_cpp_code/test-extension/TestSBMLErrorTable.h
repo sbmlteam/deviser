@@ -487,9 +487,11 @@ static const packageErrorTableEntry testErrorTable[] =
     "'test:true', 'test:false', 'test:unit', 'test:refOne', 'test:refTwo', "
     "'test:refUnit', 'test:correctId', 'test:posint', 'test:posintTwo', "
     "'test:posintOne', 'test:metaid', 'test:metaidOne', 'test:numFour', "
-    "'test:metaidrefOne' and 'test:notmetaid'. No other attributes from the "
-    "SBML Level 3 testAttributes namespaces are permitted on a "
-    "<myRequiredClass> object. ",
+    "'test:metaidrefOne' and 'test:notmetaid', and may have the optional "
+    "attributes 'test:vectorDouble', 'test:vectorDoubleOne', 'test:vectorInt', "
+    "'test:vectorIntOne', 'test:arrayD' and 'test:arrayInt'. No other "
+    "attributes from the SBML Level 3 testAttributes namespaces are permitted "
+    "on a <myRequiredClass> object. ",
     { "L3V1 Test V1 Section"
     }
   },
@@ -703,6 +705,72 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_SEV_ERROR,
     "The attribute 'test:notmetaid' on a <myRequiredClass> must have a value of "
     "XML data type 'ID'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020623
+  { TestMyRequiredClassVectorDoubleMustBeString,
+    "VectorDouble attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:vectorDouble' of a <myRequiredClass> "
+    "object must be an vector of values of type 'double'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020624
+  { TestMyRequiredClassVectorDouble1MustBeString,
+    "VectorDouble1 attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:vectorDoubleOne' of a <myRequiredClass> "
+    "object must be an vector of values of type 'double'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020625
+  { TestMyRequiredClassVectorIntMustBeString,
+    "VectorInt attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:vectorInt' of a <myRequiredClass> object "
+    "must be an vector of values of type 'int'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020626
+  { TestMyRequiredClassVectorInt1MustBeString,
+    "VectorInt1 attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:vectorIntOne' of a <myRequiredClass> "
+    "object must be an vector of values of type 'integer'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020627
+  { TestMyRequiredClassArrayDMustBeString,
+    "ArrayD attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:arrayD' of a <myRequiredClass> object "
+    "must be an array of values of type 'double'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020628
+  { TestMyRequiredClassArrayIntMustBeString,
+    "ArrayInt attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'test:arrayInt' of a <myRequiredClass> object "
+    "must be an array of values of type 'integer'.",
     { "L3V1 Test V1 Section"
     }
   },
