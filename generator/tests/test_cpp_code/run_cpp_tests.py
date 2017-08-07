@@ -665,11 +665,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'lo_children_full'
-        num = 1
-        class_name = 'ContainerY'
+        name = 'test_att'
+        num = 3
+        class_name = 'MyRequiredClass'
         list_of = ''
-        test_case = 'variants of lo child elements and differing api/xml names'
+        test_case = 'all types attributes required'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

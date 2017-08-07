@@ -205,11 +205,16 @@ class ValidationRulesForClass():
                    'enclosing \Model object.'\
                 .format(name, self.indef, formatted_name, ref_name)
             rule_type = ref_type
-        elif att_type == 'string' or att_type == 'IDREF':
+        elif att_type == 'string':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('string'))
+        elif att_type == 'ID' or att_type == 'IDREF':
+            text = 'The attribute {0} on {1} {2} must have a value of XML data ' \
+                   'type {3}.'\
+                .format(name, self.indef, formatted_name,
+                        strFunctions.wrap_token('ID'))
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\

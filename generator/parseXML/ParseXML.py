@@ -257,7 +257,7 @@ class ParseXML():
         elif name == 'idref':
             return 'IDREF'
         elif name == 'id':
-            return 'string'
+            return 'ID'
         elif name == 'uint' or name == 'string' or name == 'double' \
                 or name == 'enum' or name == 'element' or name == 'lo_element':
             return name

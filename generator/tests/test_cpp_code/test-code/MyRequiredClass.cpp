@@ -2845,7 +2845,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // metaid string (use = "required" )
+  // metaid ID (use = "required" )
   // 
 
   assigned = attributes.readInto("metaid", mMetaid);
@@ -2855,6 +2855,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     if (mMetaid.empty() == true)
     {
       logEmptyString(mMetaid, level, version, "<MyRequiredClass>");
+    }
+    else if (SyntaxChecker::isValidXMLID(mMetaid) == false)
+    {
+      log->logPackageError("test", TestMyRequiredClassMetaidMustBeID,
+        pkgVersion, level, version, "The attribute metaid='" + mMetaid + "' does "
+          "not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
@@ -2866,7 +2872,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // metaid1 string (use = "required" )
+  // metaid1 ID (use = "required" )
   // 
 
   assigned = attributes.readInto("metaid1", mMetaid1);
@@ -2876,6 +2882,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     if (mMetaid1.empty() == true)
     {
       logEmptyString(mMetaid1, level, version, "<MyRequiredClass>");
+    }
+    else if (SyntaxChecker::isValidXMLID(mMetaid1) == false)
+    {
+      log->logPackageError("test", TestMyRequiredClassMetaid1MustBeID,
+        pkgVersion, level, version, "The attribute metaid1='" + mMetaid1 + "' "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
@@ -2941,7 +2953,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // notmetaid string (use = "required" )
+  // notmetaid ID (use = "required" )
   // 
 
   assigned = attributes.readInto("notmetaid", mNotmetaid);
@@ -2951,6 +2963,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     if (mNotmetaid.empty() == true)
     {
       logEmptyString(mNotmetaid, level, version, "<MyRequiredClass>");
+    }
+    else if (SyntaxChecker::isValidXMLID(mNotmetaid) == false)
+    {
+      log->logPackageError("test", TestMyRequiredClassNotmetaidMustBeID,
+        pkgVersion, level, version, "The attribute notmetaid='" + mNotmetaid + "' "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else

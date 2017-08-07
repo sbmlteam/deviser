@@ -208,17 +208,17 @@ units in SBML. (Reference: SBML Level~3 Package specification for
 testAttributes, Version~1, \sec{mytestclass-class}.)}
 
 \validRule{test-20315}{The attribute \token{test:\-idRef} on a
-\MyTestClass must have a value of data type \token{string}. (Reference:
+\MyTestClass must have a value of XML data type \token{ID}. (Reference:
 SBML Level~3 Package specification for testAttributes, Version~1,
 \sec{mytestclass-class}.)}
 
 \validRule{test-20316}{The attribute \token{test:\-idrefOne} on a
-\MyTestClass must have a value of data type \token{string}. (Reference:
+\MyTestClass must have a value of XML data type \token{ID}. (Reference:
 SBML Level~3 Package specification for testAttributes, Version~1,
 \sec{mytestclass-class}.)}
 
 \validRule{test-20317}{The attribute \token{test:\-idrefTwo} on a
-\MyTestClass must have a value of data type \token{string}. (Reference:
+\MyTestClass must have a value of XML data type \token{ID}. (Reference:
 SBML Level~3 Package specification for testAttributes, Version~1,
 \sec{mytestclass-class}.)}
 
@@ -288,11 +288,12 @@ attributes \token{test:\-id}, \token{test:\-name}, \token{test:\-num},
 \token{test:\-refOne}, \token{test:\-refTwo}, \token{test:\-refUnit},
 \token{test:\-correctId}, \token{test:\-posint},
 \token{test:\-posintTwo}, \token{test:\-posintOne},
-\token{test:\-metaid}, \token{test:\-metaidOne}, \token{test:\-numFour}
-and \token{test:\-metaidrefOne}. No other attributes from the SBML Level
-3 testAttributes namespaces are permitted on a \MyRequiredClass object.
-(Reference: SBML Level~3 Package specification for testAttributes,
-Version~1, \sec{myrequiredclass-class}.)}
+\token{test:\-metaid}, \token{test:\-metaidOne}, \token{test:\-numFour},
+\token{test:\-metaidrefOne} and \token{test:\-notmetaid}. No other
+attributes from the SBML Level 3 testAttributes namespaces are permitted
+on a \MyRequiredClass object. (Reference: SBML Level~3 Package
+specification for testAttributes, Version~1,
+\sec{myrequiredclass-class}.)}
 
 \validRule{test-20604}{The attribute \token{test:\-name} on a
 \MyRequiredClass must have a value of data type \token{string}.
@@ -370,12 +371,12 @@ Version~1, \sec{myrequiredclass-class}.)}
 Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20618}{The attribute \token{test:\-metaid} on a
-\MyRequiredClass must have a value of data type \token{string}.
+\MyRequiredClass must have a value of XML data type \token{ID}.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20619}{The attribute \token{test:\-metaidOne} on a
-\MyRequiredClass must have a value of data type \token{string}.
+\MyRequiredClass must have a value of XML data type \token{ID}.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
 
@@ -385,7 +386,12 @@ Version~1, \sec{myrequiredclass-class}.)}
 Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20621}{The attribute \token{test:\-metaidrefOne} on a
-\MyRequiredClass must have a value of data type \token{string}.
+\MyRequiredClass must have a value of XML data type \token{ID}.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{myrequiredclass-class}.)}
+
+\validRule{test-20622}{The attribute \token{test:\-notmetaid} on a
+\MyRequiredClass must have a value of XML data type \token{ID}.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
 

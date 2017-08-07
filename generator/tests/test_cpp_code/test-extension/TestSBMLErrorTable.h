@@ -341,8 +341,8 @@ static const packageErrorTableEntry testErrorTable[] =
     "IdRef attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idRef' on a <myTestClass> must have a value of data "
-    "type 'string'.",
+    "The attribute 'test:idRef' on a <myTestClass> must have a value of XML "
+    "data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -352,8 +352,8 @@ static const packageErrorTableEntry testErrorTable[] =
     "Idref1 attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idrefOne' on a <myTestClass> must have a value of data "
-    "type 'string'.",
+    "The attribute 'test:idrefOne' on a <myTestClass> must have a value of XML "
+    "data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -363,8 +363,8 @@ static const packageErrorTableEntry testErrorTable[] =
     "Idref2 attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idrefTwo' on a <myTestClass> must have a value of data "
-    "type 'string'.",
+    "The attribute 'test:idrefTwo' on a <myTestClass> must have a value of XML "
+    "data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -658,7 +658,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaid' on a <myRequiredClass> must have a value of "
-    "data type 'string'.",
+    "XML data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -669,7 +669,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaidOne' on a <myRequiredClass> must have a value of "
-    "data type 'string'.",
+    "XML data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -691,7 +691,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaidrefOne' on a <myRequiredClass> must have a value "
-    "of data type 'string'.",
+    "of XML data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -702,7 +702,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:notmetaid' on a <myRequiredClass> must have a value of "
-    "data type 'string'.",
+    "XML data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
   },
