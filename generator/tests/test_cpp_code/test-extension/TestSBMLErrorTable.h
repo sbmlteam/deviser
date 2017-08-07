@@ -486,9 +486,10 @@ static const packageErrorTableEntry testErrorTable[] =
     "'test:name', 'test:num', 'test:numTwo', 'test:numThree', 'test:numOne', "
     "'test:true', 'test:false', 'test:unit', 'test:refOne', 'test:refTwo', "
     "'test:refUnit', 'test:correctId', 'test:posint', 'test:posintTwo', "
-    "'test:posintOne', 'test:metaid', 'test:metaidOne', 'test:numFour' and "
-    "'test:metaidrefOne'. No other attributes from the SBML Level 3 "
-    "testAttributes namespaces are permitted on a <myRequiredClass> object. ",
+    "'test:posintOne', 'test:metaid', 'test:metaidOne', 'test:numFour', "
+    "'test:metaidrefOne' and 'test:notmetaid'. No other attributes from the "
+    "SBML Level 3 testAttributes namespaces are permitted on a "
+    "<myRequiredClass> object. ",
     { "L3V1 Test V1 Section"
     }
   },
@@ -691,6 +692,17 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaidrefOne' on a <myRequiredClass> must have a value "
     "of data type 'string'.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020622
+  { TestMyRequiredClassNotmetaidMustBeString,
+    "Notmetaid attribute must be String.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The attribute 'test:notmetaid' on a <myRequiredClass> must have a value of "
+    "data type 'string'.",
     { "L3V1 Test V1 Section"
     }
   },

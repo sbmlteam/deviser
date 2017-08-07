@@ -58,6 +58,7 @@
             <attribute name="metaid1" required="true" type="Id" abstract="false"/>
             <attribute name="num4" required="true" type="integer" abstract="false"/>
             <attribute name="metaidref1" required="true" type="idref" abstract="false"/>
+            <attribute name="notmetaid" required="true" type="ID" abstract="false"/>
           </attributes>
         </element>
         <element name="ArrayChild" typeCode="SBML_TEST_ARRAYCHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="arrayChild">

@@ -339,7 +339,7 @@ class BaseFile:
         self.write_blank_comment_line()
         self.write_comment_line('<!-----------------------------------------'
                                 '---------------------------------')
-        # copyright can be any of teh following:
+        # copyright can be any of the following:
         # libsbml copyright
         # libsbml copyright plus custom copyright
         # custom copyright

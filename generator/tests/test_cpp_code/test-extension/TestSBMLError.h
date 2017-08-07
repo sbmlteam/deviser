@@ -104,6 +104,7 @@ typedef enum
 , TestMyRequiredClassMetaid1MustBeString                      = 10020619
 , TestMyRequiredClassNum4MustBeInteger                        = 10020620
 , TestMyRequiredClassMetaidref1MustBeString                   = 10020621
+, TestMyRequiredClassNotmetaidMustBeString                    = 10020622
 , TestArrayChildAllowedCoreAttributes                         = 10020701
 , TestArrayChildAllowedCoreElements                           = 10020702
 , TestArrayChildAllowedAttributes                             = 10020703

@@ -665,10 +665,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'qual'
-        class_name = 'QualValidator'
-        test_case = 'validator'
-        fail += run_valid_test(name, class_name, test_case, False)
+        name = 'lo_children_full'
+        num = 1
+        class_name = 'ContainerY'
+        list_of = ''
+        test_case = 'variants of lo child elements and differing api/xml names'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
     test_functions.report('CPP', fail, fails, not_tested)

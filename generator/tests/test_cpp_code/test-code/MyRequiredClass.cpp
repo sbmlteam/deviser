@@ -84,6 +84,7 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
   , mMetaidref1 ("")
+  , mNotmetaid ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -124,6 +125,7 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
   , mMetaidref1 ("")
+  , mNotmetaid ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -165,6 +167,7 @@ MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   , mNum4 ( orig.mNum4 )
   , mIsSetNum4 ( orig.mIsSetNum4 )
   , mMetaidref1 ( orig.mMetaidref1 )
+  , mNotmetaid ( orig.mNotmetaid )
 {
 }
 
@@ -208,6 +211,7 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
     mNum4 = rhs.mNum4;
     mIsSetNum4 = rhs.mIsSetNum4;
     mMetaidref1 = rhs.mMetaidref1;
+    mNotmetaid = rhs.mNotmetaid;
   }
 
   return *this;
@@ -433,6 +437,16 @@ MyRequiredClass::getMetaidref1() const
 
 
 /*
+ * Returns the value of the "notmetaid" attribute of this MyRequiredClass.
+ */
+const std::string&
+MyRequiredClass::getNotmetaid() const
+{
+  return mNotmetaid;
+}
+
+
+/*
  * Predicate returning @c true if this MyRequiredClass's "id" attribute is set.
  */
 bool
@@ -648,6 +662,17 @@ bool
 MyRequiredClass::isSetMetaidref1() const
 {
   return (mMetaidref1.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this MyRequiredClass's "notmetaid" attribute
+ * is set.
+ */
+bool
+MyRequiredClass::isSetNotmetaid() const
+{
+  return (mNotmetaid.empty() == false);
 }
 
 
@@ -903,6 +928,17 @@ int
 MyRequiredClass::setMetaidref1(const std::string& metaidref1)
 {
   mMetaidref1 = metaidref1;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "notmetaid" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::setNotmetaid(const std::string& notmetaid)
+{
+  mNotmetaid = notmetaid;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1298,6 +1334,25 @@ MyRequiredClass::unsetMetaidref1()
 
 
 /*
+ * Unsets the value of the "notmetaid" attribute of this MyRequiredClass.
+ */
+int
+MyRequiredClass::unsetNotmetaid()
+{
+  mNotmetaid.erase();
+
+  if (mNotmetaid.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -1447,6 +1502,11 @@ MyRequiredClass::hasRequiredAttributes() const
   }
 
   if (isSetMetaidref1() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetNotmetaid() == false)
   {
     allPresent = false;
   }
@@ -1732,6 +1792,11 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
     value = getMetaidref1();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "notmetaid")
+  {
+    value = getNotmetaid();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -1804,6 +1869,11 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
   else if (attributeName == "metaidref1")
   {
     value = getMetaidref1().c_str();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "notmetaid")
+  {
+    value = getNotmetaid().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1904,6 +1974,10 @@ MyRequiredClass::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "metaidref1")
   {
     value = isSetMetaidref1();
+  }
+  else if (attributeName == "notmetaid")
+  {
+    value = isSetNotmetaid();
   }
 
   return value;
@@ -2077,6 +2151,10 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
   {
     return_value = setMetaidref1(value);
   }
+  else if (attributeName == "notmetaid")
+  {
+    return_value = setNotmetaid(value);
+  }
 
   return return_value;
 }
@@ -2135,6 +2213,10 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
   else if (attributeName == "metaidref1")
   {
     return_value = setMetaidref1(value);
+  }
+  else if (attributeName == "notmetaid")
+  {
+    return_value = setNotmetaid(value);
   }
 
   return return_value;
@@ -2234,6 +2316,10 @@ MyRequiredClass::unsetAttribute(const std::string& attributeName)
   {
     value = unsetMetaidref1();
   }
+  else if (attributeName == "notmetaid")
+  {
+    value = unsetNotmetaid();
+  }
 
   return value;
 }
@@ -2291,6 +2377,8 @@ MyRequiredClass::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("num4");
 
   attributes.add("metaidref1");
+
+  attributes.add("notmetaid");
 }
 
 /** @endcond */
@@ -2851,6 +2939,27 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
       pkgVersion, level, version, message);
   }
+
+  // 
+  // notmetaid string (use = "required" )
+  // 
+
+  assigned = attributes.readInto("notmetaid", mNotmetaid);
+
+  if (assigned == true)
+  {
+    if (mNotmetaid.empty() == true)
+    {
+      logEmptyString(mNotmetaid, level, version, "<MyRequiredClass>");
+    }
+  }
+  else
+  {
+    std::string message = "Test attribute 'notmetaid' is missing from the "
+      "<MyRequiredClass> element.";
+    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+      pkgVersion, level, version, message);
+  }
 }
 
 /** @endcond */
@@ -2965,6 +3074,11 @@ MyRequiredClass::writeAttributes(XMLOutputStream& stream) const
   if (isSetMetaidref1() == true)
   {
     stream.writeAttribute("metaidref1", getPrefix(), mMetaidref1);
+  }
+
+  if (isSetNotmetaid() == true)
+  {
+    stream.writeAttribute("notmetaid", getPrefix(), mNotmetaid);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -3300,6 +3414,23 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Returns the value of the "notmetaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+const char *
+MyRequiredClass_getNotmetaid(const MyRequiredClass_t * mrc)
+{
+  if (mrc == NULL)
+  {
+    return NULL;
+  }
+
+  return mrc->getNotmetaid().empty() ? NULL :
+    safe_strdup(mrc->getNotmetaid().c_str());
+}
+
+
+/*
  * Predicate returning @c 1 if this MyRequiredClass_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
@@ -3538,6 +3669,18 @@ MyRequiredClass_isSetMetaidref1(const MyRequiredClass_t * mrc)
 
 
 /*
+ * Predicate returning @c 1 if this MyRequiredClass_t's "notmetaid" attribute
+ * is set.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_isSetNotmetaid(const MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetNotmetaid()) : 0;
+}
+
+
+/*
  * Sets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -3760,6 +3903,17 @@ MyRequiredClass_setMetaidref1(MyRequiredClass_t * mrc,
 
 
 /*
+ * Sets the value of the "notmetaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_setNotmetaid(MyRequiredClass_t * mrc, const char * notmetaid)
+{
+  return (mrc != NULL) ? mrc->setNotmetaid(notmetaid) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
@@ -3976,6 +4130,17 @@ int
 MyRequiredClass_unsetMetaidref1(MyRequiredClass_t * mrc)
 {
   return (mrc != NULL) ? mrc->unsetMetaidref1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "notmetaid" attribute of this MyRequiredClass_t.
+ */
+LIBSBML_EXTERN
+int
+MyRequiredClass_unsetNotmetaid(MyRequiredClass_t * mrc)
+{
+  return (mrc != NULL) ? mrc->unsetNotmetaid() : LIBSBML_INVALID_OBJECT;
 }
 
 
