@@ -12,7 +12,7 @@
         <element name="Domain" typeCode="SBML_SPATIAL_DOMAIN" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
-            <attribute name="domainType" required="true" type="SIdRef" abstract="false"/>
+            <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false"/>
             <attribute name="interiorPoint" required="false" type="lo_element" element="InteriorPoint" abstract="false"/>
           </attributes>
         </element>
@@ -80,7 +80,7 @@
             <attribute name="numSamples3" required="false" type="int" abstract="false"/>
             <attribute name="interpolationType" required="true" type="enum" element="InterpolationKind" abstract="false"/>
             <attribute name="compression" required="true" type="enum" element="CompressionKind" abstract="false"/>
-            <attribute name="samples" required="true" type="array" element="int" abstract="false"/>
+            <attribute name="samples" required="true" type="array" element="integer" abstract="false"/>
             <attribute name="samplesLength" required="true" type="int" abstract="false"/>
           </attributes>
         </element>
@@ -118,7 +118,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="polygonType" required="true" type="enum" element="PolygonKind" abstract="false"/>
             <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false"/>
-            <attribute name="pointIndex" required="true" type="array" element="int" abstract="false"/>
+            <attribute name="pointIndex" required="true" type="array" element="integer" abstract="false"/>
             <attribute name="pointIndexLength" required="true" type="int" abstract="false"/>
             <attribute name="compression" required="true" type="enum" element="CompressionKind" abstract="false"/>
             <attribute name="dataType" required="false" type="enum" element="DataKind" abstract="false"/>

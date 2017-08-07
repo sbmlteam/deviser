@@ -313,8 +313,11 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['default'] = 'NULL'
             elif att_type == 'array':
                 attributes[i]['isArray'] = True
-                attributes[i]['element'] = \
-                    strFunctions.lower_first(attributes[i]['element'])
+                if attributes[i]['element'] == 'Integer' or attributes[i]['element'] == 'integer':
+                    attributes[i]['element'] = 'int'
+                else:
+                    attributes[i]['element'] = \
+                        strFunctions.lower_first(attributes[i]['element'])
                 attributes[i]['attType'] = 'array'
                 attributes[i]['attTypeCode'] = attributes[i]['element'] + '*'
                 attributes[i]['CType'] = attributes[i]['attTypeCode']

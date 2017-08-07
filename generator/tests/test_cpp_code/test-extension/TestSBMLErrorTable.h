@@ -761,7 +761,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:number' of an <arrayChild> object must be "
-    "an array of values of type 'Double'.",
+    "an array of values of type 'double'.",
     { "L3V1 Test V1 Section"
     }
   },

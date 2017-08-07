@@ -165,6 +165,11 @@ class ValidationRulesForPlugin():
                    'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('string'))
+        elif att_type == 'ID' or att_type == 'IDREF':
+            text = 'The attribute {0} on {1} {2} must have a value of XML data ' \
+                   'type {3}.'\
+                .format(name, self.indef, self.formatted_name,
+                        strFunctions.wrap_token('ID'))
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
@@ -183,6 +188,14 @@ class ValidationRulesForPlugin():
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('boolean'))
             rule_type = 'Boolean'
+        elif att_type == 'UnitSId' or att_type == 'UnitSIdRef':
+            text = 'The value of the attribute {0} on {1} {2} must have a ' \
+                   'taken from the following: the identifier of a ' \
+                   '\\UnitDefinition object in the enclosing \Model, or one ' \
+                   'of the base units in SBML.'.format(name,
+                                                       self.indef,
+                                                       formatted_name)
+            rule_type = 'Unit'
         elif att_type == 'enum':
             enum_name = attribute['element']
             enums = attribute['parent']['root']['enums']
@@ -197,10 +210,11 @@ class ValidationRulesForPlugin():
                                            enum_values)
             rule_type = '{0}Enum'.format(attribute['element'])
         elif att_type == 'array':
+            array_type = strFunctions.lower_first(attribute['element'])
             text = 'The value of the attribute {0} of {1} {2} object must ' \
                    'be an array of values of type {3}.'\
                 .format(name, self.indef, self.formatted_name,
-                        strFunctions.wrap_token(attribute['element']))
+                        strFunctions.wrap_token(array_type))
         else:
             text = 'FIX ME: Encountered an unknown attribute type {0} in ' \
                    'ValidationRulesForClass:write_attribute_type_rule'\

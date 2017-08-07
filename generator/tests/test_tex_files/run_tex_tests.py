@@ -171,7 +171,7 @@ def main():
         test_case = 'body'
         fail += run_test(name, test_case)
     else:
-        name = 'test_att'
+        name = 'spatial'
         test_case = 'validation'
         fail += run_test(name, test_case)
 
