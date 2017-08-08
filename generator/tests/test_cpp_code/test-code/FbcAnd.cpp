@@ -702,9 +702,17 @@ FbcAnd::createChildObject(const std::string& elementName)
 {
   Association* obj = NULL;
 
-  if (elementName == "association")
+  if (elementName == "and")
   {
-    return createAssociation();
+    return createAnd();
+  }
+  else if (elementName == "or")
+  {
+    return createOr();
+  }
+  else if (elementName == "geneProductRef")
+  {
+    return createGeneProductRef();
   }
 
   return obj;

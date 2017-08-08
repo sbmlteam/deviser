@@ -962,9 +962,25 @@ MixedGeometry::createChildObject(const std::string& elementName)
 {
   GeometryDefinition* obj = NULL;
 
-  if (elementName == "geometryDefinition")
+  if (elementName == "analyticGeometry")
   {
-    return createGeometryDefinition();
+    return createAnalyticGeometry();
+  }
+  else if (elementName == "sampledFieldGeometry")
+  {
+    return createSampledFieldGeometry();
+  }
+  else if (elementName == "csGeometry")
+  {
+    return createCSGeometry();
+  }
+  else if (elementName == "parametricGeometry")
+  {
+    return createParametricGeometry();
+  }
+  else if (elementName == "mixedGeometry")
+  {
+    return createMixedGeometry();
   }
   else if (elementName == "ordinalMapping")
   {

@@ -1156,9 +1156,21 @@ CSGSetOperator::createChildObject(const std::string& elementName)
 {
   CSGNode* obj = NULL;
 
-  if (elementName == "csgNode")
+  if (elementName == "csgPrimitive")
   {
-    return createCSGNode();
+    return createCSGPrimitive();
+  }
+  else if (elementName == "csgTransformation")
+  {
+    return createCSGTransformation();
+  }
+  else if (elementName == "csgPseudoPrimitive")
+  {
+    return createCSGPseudoPrimitive();
+  }
+  else if (elementName == "csgSetOperator")
+  {
+    return createCSGSetOperator();
   }
 
   return obj;

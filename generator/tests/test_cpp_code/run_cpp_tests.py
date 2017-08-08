@@ -327,6 +327,11 @@ def main():
         test_case = 'class with other child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'distrib'
+        class_name = 'DistribSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
+
         name = 'spatial'
         num = 7
         class_name = 'CoordinateComponent'
@@ -346,6 +351,13 @@ def main():
         class_name = 'CSGNode'
         list_of = 'ListOfCSGNodes'
         test_case = 'abstract'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'spatial'
+        num = 16
+        class_name = 'CSGObject'
+        list_of = ''
+        test_case = 'abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'spatial'
@@ -643,6 +655,19 @@ def main():
         test_case = 'new element functions'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 2
+        class_name = 'Distribution'
+        list_of = ''
+        test_case = 'abstract class with multiple abstract children'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'new_distrib'
+        num = 0
+        class_name = 'DrawFromDistribution'
+        list_of = ''
+        test_case = 'abstract class with multiple abstract children'
+        fail += run_test(name, num, class_name, test_case, list_of)
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -665,14 +690,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'test_att'
-        num = 3
-        class_name = 'MyRequiredClass'
+        name = 'new_distrib'
+        num = 0
+        class_name = 'DrawFromDistribution'
         list_of = ''
-        test_case = 'all types attributes required'
+        test_case = 'abstract class with multiple abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
-
-
 
 
     test_functions.report('CPP', fail, fails, not_tested)

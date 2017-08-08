@@ -465,16 +465,29 @@ class GenericAttributeFunctions():
         if_block = []
 
         for elem in self.elements:
-            if not first:
-                block.append('else if')
+            if elem['concrete']:
+                for conc in elem['concrete']:
+                    if not first:
+                        block.append('else if')
+                    else:
+                        first = False
+                    block.append('elementName == \"{0}\"'.format(conc['name']))
+                    block.append('return create{0}()'.format(strFunctions.upper_first(conc['name'])))
+                    if len(block) > 2:
+                        if_block = self.create_code_block('else_if', block)
+                    else:
+                        if_block = self.create_code_block('if', block)
             else:
-                first = False
-            block.append('elementName == \"{0}\"'.format(elem['name']))
-            block.append('return create{0}()'.format(strFunctions.upper_first(elem['name'])))
-            if len(block) > 2:
-                if_block = self.create_code_block('else_if', block)
-            else:
-                if_block = self.create_code_block('if', block)
+                if not first:
+                    block.append('else if')
+                else:
+                    first = False
+                block.append('elementName == \"{0}\"'.format(elem['name']))
+                block.append('return create{0}()'.format(strFunctions.upper_first(elem['name'])))
+                if len(block) > 2:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
         code = [self.create_code_block('line', first_line),
                 if_block,
                 self.create_code_block('line', last_line)]

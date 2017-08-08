@@ -63,8 +63,8 @@ typedef enum
 , TestMyTestClassAllowedCoreElements                          = 10020302
 , TestMyTestClassAllowedAttributes                            = 10020303
 , TestMyTestClassNameMustBeString                             = 10020304
-, TestMyTestClassNumMustBeUnInteger                           = 10020305
-, TestMyTestClassNum2MustBeUnInteger                          = 10020306
+, TestMyTestClassNumMustBeNonNegativeInteger                  = 10020305
+, TestMyTestClassNum2MustBeNonNegativeInteger                 = 10020306
 , TestMyTestClassNum3MustBeInteger                            = 10020307
 , TestMyTestClassNum1MustBeDouble                             = 10020308
 , TestMyTestClassTrueMustBeBoolean                            = 10020309
@@ -87,8 +87,8 @@ typedef enum
 , TestMyRequiredClassAllowedCoreElements                      = 10020602
 , TestMyRequiredClassAllowedAttributes                        = 10020603
 , TestMyRequiredClassNameMustBeString                         = 10020604
-, TestMyRequiredClassNumMustBeUnInteger                       = 10020605
-, TestMyRequiredClassNum2MustBeUnInteger                      = 10020606
+, TestMyRequiredClassNumMustBeNonNegativeInteger              = 10020605
+, TestMyRequiredClassNum2MustBeNonNegativeInteger             = 10020606
 , TestMyRequiredClassNum3MustBeInteger                        = 10020607
 , TestMyRequiredClassNum1MustBeDouble                         = 10020608
 , TestMyRequiredClassTrueMustBeBoolean                        = 10020609
@@ -97,9 +97,9 @@ typedef enum
 , TestMyRequiredClassRef1MustBeThing1                         = 10020612
 , TestMyRequiredClassRef2MustBeThing2                         = 10020613
 , TestMyRequiredClassRefUnitMustBeUnit                        = 10020614
-, TestMyRequiredClassPosintMustBeUnInteger                    = 10020615
-, TestMyRequiredClassPosint2MustBeUnInteger                   = 10020616
-, TestMyRequiredClassPosint1MustBeUnInteger                   = 10020617
+, TestMyRequiredClassPosintMustBeNonNegativeInteger           = 10020615
+, TestMyRequiredClassPosint2MustBeNonNegativeInteger          = 10020616
+, TestMyRequiredClassPosint1MustBeNonNegativeInteger          = 10020617
 , TestMyRequiredClassMetaidMustBeString                       = 10020618
 , TestMyRequiredClassMetaid1MustBeString                      = 10020619
 , TestMyRequiredClassNum4MustBeInteger                        = 10020620

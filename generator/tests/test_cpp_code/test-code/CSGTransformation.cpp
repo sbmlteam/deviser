@@ -815,9 +815,29 @@ CSGTransformation::createChildObject(const std::string& elementName)
 {
   CSGNode* obj = NULL;
 
-  if (elementName == "csgNode")
+  if (elementName == "csgPrimitive")
   {
-    return createCSGNode();
+    return createCSGPrimitive();
+  }
+  else if (elementName == "csgTranslation")
+  {
+    return createCSGTranslation();
+  }
+  else if (elementName == "csgRotation")
+  {
+    return createCSGRotation();
+  }
+  else if (elementName == "csgScale")
+  {
+    return createCSGScale();
+  }
+  else if (elementName == "csgHomogeneousTransformation")
+  {
+    return createCSGHomogeneousTransformation();
+  }
+  else if (elementName == "csgSetOperator")
+  {
+    return createCSGSetOperator();
   }
 
   return obj;

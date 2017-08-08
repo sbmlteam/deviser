@@ -68,8 +68,8 @@ typedef enum
 , QualQualitativeSpeciesCompartmentMustBeCompartment          = 3020304
 , QualQualitativeSpeciesConstantMustBeBoolean                 = 3020305
 , QualQualitativeSpeciesNameMustBeString                      = 3020306
-, QualQualitativeSpeciesInitialLevelMustBeUnInteger           = 3020307
-, QualQualitativeSpeciesMaxLevelMustBeUnInteger               = 3020308
+, QualQualitativeSpeciesInitialLevelMustBeNonNegativeInteger  = 3020307
+, QualQualitativeSpeciesMaxLevelMustBeNonNegativeInteger      = 3020308
 , QualTransitionAllowedCoreAttributes                         = 3020401
 , QualTransitionAllowedCoreElements                           = 3020402
 , QualTransitionAllowedAttributes                             = 3020403
@@ -90,7 +90,7 @@ typedef enum
 , QualInputNameMustBeString                                   = 3020505
 , QualInputSignMustBeSignEnum                                 = 3020506
 , QualInputTransitionEffectMustBeTransitionInputEffectEnum    = 3020507
-, QualInputThresholdLevelMustBeUnInteger                      = 3020508
+, QualInputThresholdLevelMustBeNonNegativeInteger             = 3020508
 , QualOutputAllowedCoreAttributes                             = 3020601
 , QualOutputAllowedCoreElements                               = 3020602
 , QualOutputAllowedAttributes                                 = 3020603
@@ -101,12 +101,12 @@ typedef enum
 , QualDefaultTermAllowedCoreAttributes                        = 3020701
 , QualDefaultTermAllowedCoreElements                          = 3020702
 , QualDefaultTermAllowedAttributes                            = 3020703
-, QualDefaultTermResultLevelMustBeUnInteger                   = 3020704
+, QualDefaultTermResultLevelMustBeNonNegativeInteger          = 3020704
 , QualFunctionTermAllowedCoreAttributes                       = 3020801
 , QualFunctionTermAllowedCoreElements                         = 3020802
 , QualFunctionTermAllowedAttributes                           = 3020803
 , QualFunctionTermAllowedElements                             = 3020804
-, QualFunctionTermResultLevelMustBeUnInteger                  = 3020805
+, QualFunctionTermResultLevelMustBeNonNegativeInteger         = 3020805
 } QualSBMLErrorCode_t;
 
 

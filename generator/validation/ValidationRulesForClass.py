@@ -220,7 +220,7 @@ class ValidationRulesForClass():
                    'type {3}.'\
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('integer'))
-            rule_type = 'Integer' if att_type == 'int' else 'UnInteger'
+            rule_type = 'Integer' if att_type == 'int' else 'NonNegativeInteger'
         elif att_type == 'double':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\

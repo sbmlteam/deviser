@@ -543,14 +543,25 @@ def get_child_elements(elements, lo_elements, root=None):
                 thisclass = get_class(elem['name'], root)
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
-            child_elements.append(dict({'name': strFunctions.remove_prefix(elem['name']), 'typecode': typecode}))
+            if 'concrete' in elem:
+                conc = elem['concrete']
+                concs = get_concretes(root, conc)
+            else:
+                concs = None
+            child_elements.append(dict({'name': strFunctions.remove_prefix(elem['name']), 'typecode': typecode,
+                                        'concrete': concs}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
             if root:
                 thisclass = get_class(strFunctions.lower_first(elem['element']), root)
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
-            child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])), 'typecode': typecode}))
+            if 'concrete' in elem:
+                concs = elem['concrete']
+            else:
+                concs = None
+            child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])),
+                                        'typecode': typecode, 'concrete': concs}))
     return child_elements
 
 # insert a listOfParent into the tree

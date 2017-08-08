@@ -223,8 +223,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020305
-  { TestMyTestClassNumMustBeUnInteger,
-    "Num attribute must be UnInteger.",
+  { TestMyTestClassNumMustBeNonNegativeInteger,
+    "Num attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myTestClass> must have a value of data type "
@@ -234,8 +234,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020306
-  { TestMyTestClassNum2MustBeUnInteger,
-    "Num2 attribute must be UnInteger.",
+  { TestMyTestClassNum2MustBeNonNegativeInteger,
+    "Num2 attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myTestClass> must have a value of data "
@@ -508,8 +508,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020605
-  { TestMyRequiredClassNumMustBeUnInteger,
-    "Num attribute must be UnInteger.",
+  { TestMyRequiredClassNumMustBeNonNegativeInteger,
+    "Num attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myRequiredClass> must have a value of data "
@@ -519,8 +519,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020606
-  { TestMyRequiredClassNum2MustBeUnInteger,
-    "Num2 attribute must be UnInteger.",
+  { TestMyRequiredClassNum2MustBeNonNegativeInteger,
+    "Num2 attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myRequiredClass> must have a value of "
@@ -622,8 +622,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020615
-  { TestMyRequiredClassPosintMustBeUnInteger,
-    "Posint attribute must be UnInteger.",
+  { TestMyRequiredClassPosintMustBeNonNegativeInteger,
+    "Posint attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posint' on a <myRequiredClass> must have a value of "
@@ -633,8 +633,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020616
-  { TestMyRequiredClassPosint2MustBeUnInteger,
-    "Posint2 attribute must be UnInteger.",
+  { TestMyRequiredClassPosint2MustBeNonNegativeInteger,
+    "Posint2 attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintTwo' on a <myRequiredClass> must have a value of "
@@ -644,8 +644,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020617
-  { TestMyRequiredClassPosint1MustBeUnInteger,
-    "Posint1 attribute must be UnInteger.",
+  { TestMyRequiredClassPosint1MustBeNonNegativeInteger,
+    "Posint1 attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintOne' on a <myRequiredClass> must have a value of "
