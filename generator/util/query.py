@@ -99,9 +99,6 @@ def get_class(name, root_object):
         name = strFunctions.singular(name[6:])
     else:
         name = strFunctions.upper_first(name)
-    # hack for spatial boundaryMin
-    if name.startswith('BoundaryM'):
-        name = 'Boundary'
     if root_object is None:
         return None
     elif root_object['baseElements'] is None:
@@ -540,7 +537,7 @@ def get_child_elements(elements, lo_elements, root=None):
     for elem in elements:
         if elem['element'] != 'ASTNode' and elem['element'] != 'XMLNode':
             if root:
-                thisclass = get_class(elem['name'], root)
+                thisclass = get_class(elem['element'], root)
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
             if 'concrete' in elem:
@@ -549,7 +546,7 @@ def get_child_elements(elements, lo_elements, root=None):
             else:
                 concs = None
             child_elements.append(dict({'name': strFunctions.remove_prefix(elem['name']), 'typecode': typecode,
-                                        'concrete': concs}))
+                                        'concrete': concs, 'element': elem['element']}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
             if root:
@@ -561,7 +558,7 @@ def get_child_elements(elements, lo_elements, root=None):
             else:
                 concs = None
             child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])),
-                                        'typecode': typecode, 'concrete': concs}))
+                                        'typecode': typecode, 'concrete': concs, 'element': elem['element']}))
     return child_elements
 
 # insert a listOfParent into the tree

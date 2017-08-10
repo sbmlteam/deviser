@@ -1155,12 +1155,12 @@ CoordinateComponent::addChildObject(const std::string& elementName,
   if (elementName == "boundaryMin" && element->getTypeCode() ==
     SBML_SPATIAL_BOUNDARY)
   {
-    return setBoundaryMin((const BoundaryMin*)(element));
+    return setBoundaryMin((const Boundary*)(element));
   }
   else if (elementName == "boundaryMax" && element->getTypeCode() ==
     SBML_SPATIAL_BOUNDARY)
   {
-    return setBoundaryMax((const BoundaryMax*)(element));
+    return setBoundaryMax((const Boundary*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1182,12 +1182,12 @@ CoordinateComponent::removeChildObject(const std::string& elementName,
 {
   if (elementName == "boundaryMin")
   {
-    BoundaryMin * obj = getBoundaryMin();
+    Boundary * obj = getBoundaryMin();
     if (unsetBoundaryMin() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "boundaryMax")
   {
-    BoundaryMax * obj = getBoundaryMax();
+    Boundary * obj = getBoundaryMax();
     if (unsetBoundaryMax() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 

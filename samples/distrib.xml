@@ -6,7 +6,7 @@
         <element name="DrawFromDistribution" typeCode="SBML_DISTRIB_DRAWFROMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="drawFromDistribution">
           <attributes>
             <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false"/>
-            <attribute name="distribution" required="false" type="element" element="Distribution" abstract="false"/>
+            <attribute name="distribution" required="false" type="element" element="Distribution" abstract="true"/>
           </attributes>
         </element>
         <element name="DistribInput" typeCode="SBML_DISTRIB_DISTRIBINPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="distribInput" listOfName="listOfDistribInputs" listOfClassName="ListOfDistribInputs">
@@ -16,7 +16,13 @@
             <attribute name="index" required="false" type="non-negative int" abstract="false"/>
           </attributes>
         </element>
-        <element name="Distribution" typeCode="SBML_DISTRIB_DISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true" elementName="distribution"/>
+        <element name="Distribution" typeCode="SBML_DISTRIB_DISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true" elementName="distribution">
+          <concretes>
+            <concrete name="univariateDistribution" element="UnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="multivariateDistribution" element="MultivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="externalDistribution" element="ExternalDistribution" minNumChildren="0" maxNumChildren="0"/>
+          </concretes>
+        </element>
         <element name="UnivariateDistribution" typeCode="SBML_DISTRIB_UNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="true">
           <concretes>
             <concrete name="continuousUnivariateDistribution" element="ContinuousUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
@@ -261,7 +267,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="UncertStatisticSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="uncertStatisticSpan" listOfName="listOfUncertStatisticSpans" listOfClassName="ListOfUncertStatisticSpans">
+        <element name="UncertStatisticSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="uncertStatisticSpan" listOfName="listOfUncertStatisticSpans" listOfClassName="ListOfUncertStatisticSpans">
           <attributes>
             <attribute name="varLower" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="valueLower" required="false" type="double" abstract="false"/>

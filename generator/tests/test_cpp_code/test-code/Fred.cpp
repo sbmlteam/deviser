@@ -1560,11 +1560,11 @@ Fred::addChildObject(const std::string& elementName, const SBase* element)
   }
   else if (elementName == "other1" && element->getTypeCode() == SBML_X_OTHER)
   {
-    return setOther1((const Other1*)(element));
+    return setOther1((const Other*)(element));
   }
   else if (elementName == "other2" && element->getTypeCode() == SBML_X_OTHER)
   {
-    return setOther2((const Other2*)(element));
+    return setOther2((const Other*)(element));
   }
   else if (elementName == "otherLO" && element->getTypeCode() ==
     SBML_X_OTHERLO)
@@ -1595,12 +1595,12 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
   }
   else if (elementName == "other1")
   {
-    Other1 * obj = getOther1();
+    Other * obj = getOther1();
     if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "other2")
   {
-    Other2 * obj = getOther2();
+    Other * obj = getOther2();
     if (unsetOther2() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "otherLO")
