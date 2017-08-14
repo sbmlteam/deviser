@@ -110,6 +110,9 @@ class ProtectedFunctions():
         else:
             self.struct_name = self.object_name
         self.plural = strFunctions.plural(self.child_name)
+        self.lo_name = ''
+        if 'lo_class_name' in class_object and class_object['lo_class_name'] != '':
+            self.lo_name = class_object['lo_class_name'][6:]
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
@@ -240,14 +243,20 @@ class ProtectedFunctions():
                                                            implementation))
                     else:
                         if global_variables.is_package:
-                            implementation = ['prefix == targetPrefix']
-                            implementation += self.get_element_block(element,
-                                                                     error_line, ns)
-                            code.append(self.create_code_block('if',
-                                                               implementation))
+                            if self.is_plugin:
+                                implementation = ['prefix == targetPrefix']
+                                implementation += self.get_element_block(element,
+                                                                         error_line, ns)
+                                code.append(self.create_code_block('if',
+                                                                   implementation))
+                            else:
+                                implementation = self.get_element_block(element,
+                                                                         error_line, ns, False)
+                                code.append(self.create_code_block('if',
+                                                                   implementation))
                         else:
                             implementation = self.get_element_block(element,
-                                                                     error_line, ns)
+                                                                     error_line, ns, False)
                             code.append(self.create_code_block('if',
                                                                implementation))
 
@@ -414,7 +423,7 @@ class ProtectedFunctions():
                           nested_if, line]
         return implementation
 
-    def get_element_block(self, element, error_line, ns):
+    def get_element_block(self, element, error_line, ns, nest=True):
         name = element['name']
         function = strFunctions.upper_first(element['element'])
 
@@ -429,7 +438,7 @@ class ProtectedFunctions():
                           '{0} = new {1}({2})'.format(element['memberName'],
                                                       function, used_ns),
                           'obj = {0}'.format(element['memberName'])]
-        if global_variables.is_package:
+        if global_variables.is_package and nest:
             return [self.create_code_block('if', implementation)]
         else:
             return implementation
@@ -1065,7 +1074,10 @@ class ProtectedFunctions():
 
     def get_error_from_list_of_read(self):
         name_in_error = strFunctions.remove_prefix(self.class_name)
-        plural = strFunctions.plural(name_in_error)
+        if self.lo_name == '':
+            plural = strFunctions.plural(name_in_error)
+        else:
+            plural = self.lo_name
         c_err = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
                                                           self.parent_class,
                                                           plural)
@@ -1110,8 +1122,12 @@ class ProtectedFunctions():
         for_loop = self.create_code_block('for', line)
 
         if global_variables.is_package:
+            if self.lo_name == '':
+                use_name = strFunctions.cap_list_of_name(self.class_name)
+            else:
+                use_name = strFunctions.cap_list_of_name(self.lo_name)
             line = ['static_cast<{0}*>(getParent{1}Object())->size() '
-                    '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
+                    '< 2'.format(use_name,
                                  self.cap_language),
                     'numErrs = log->getNumErrors()', for_loop]
         else:

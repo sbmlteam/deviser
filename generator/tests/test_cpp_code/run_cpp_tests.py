@@ -676,6 +676,20 @@ def main():
         test_case = 'abstract class with multiple abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 15
+        class_name = 'BernoulliDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'new_distrib'
+        num = 14
+        class_name = 'Category'
+        list_of = 'ListOfCategories'
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -698,11 +712,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'test_att'
-        num = 5
-        class_name = 'Container'
+        name = 'new_distrib'
+        num = 14
+        class_name = 'Category'
         list_of = ''
-        test_case = 'a listOf child that uses listOfFoo as the name'
+        test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

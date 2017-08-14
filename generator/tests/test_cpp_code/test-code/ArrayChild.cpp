@@ -957,19 +957,16 @@ ArrayChild::createObject(XMLInputStream& stream)
 
   TEST_CREATE_NS(testns, getSBMLNamespaces());
 
-  if (prefix == targetPrefix)
+  if (name == "unit")
   {
-    if (name == "unit")
+    if (isSetUnit())
     {
-      if (isSetUnit())
-      {
-        getErrorLog()->logPackageError("test", TestArrayChildAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
-      }
-
-      mUnit = new Unit(testns);
-      obj = mUnit;
+      getErrorLog()->logPackageError("test", TestArrayChildAllowedElements,
+        getPackageVersion(), getLevel(), getVersion());
     }
+
+    mUnit = new Unit(testns);
+    obj = mUnit;
   }
 
   delete testns;
