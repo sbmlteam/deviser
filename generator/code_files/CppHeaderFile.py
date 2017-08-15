@@ -195,37 +195,50 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             child = self.child_elements[i]['element']
             if child != 'ASTNode' and child != 'XMLNode':
                 if global_variables.is_package:
-                    include_lines += ['<{0}/packages/{1}/{0}/{2}'
-                                      '.h>'.format(self.language, pkg, child)]
+                    include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
                 else:
-                    include_lines += ['<{0}/{1}.h>'.format(self.language,
-                                                           child)]
+                    include_string = '<{0}/{1}.h>'.format(self.language, child)
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
             else:
                 if child == 'ASTNode':
-                    include_lines += ['<sbml/math/ASTNode.h>']
+                    include_string = '<sbml/math/ASTNode.h>'
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
                 elif child == 'XMLNode':
-                    include_lines += ['<sbml/xml/XMLNode.h>']
+                    include_string = '<sbml/xml/XMLNode.h>'
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
 
         for i in range(0, len(self.child_lo_elements)):
             child = self.child_lo_elements[i]['attTypeCode']
             if global_variables.is_package:
-                include_lines += ['<{0}/packages/{1}/{0}/{2}'
-                                  '.h>'.format(self.language, pkg, child)]
+                include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                if include_string not in include_lines:
+                    include_lines += [include_string]
             else:
-                include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
+                include_string = '<{0}/{1}.h>'.format(self.language, child)
+                if include_string not in include_lines:
+                    include_lines += [include_string]
             if self.is_plugin:
                 child = self.child_lo_elements[i]['element']
-                include_lines += ['<{0}/packages/{1}/{0}/{2}'
-                                  '.h>'.format(self.language, pkg, child)]
+                include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                if include_string not in include_lines:
+                    include_lines += [include_string]
 
         # if we are a list of we need the header of our child object
         if self.is_list_of:
             child = self.list_of_child
             if global_variables.is_package:
-                include_lines += ['<{0}/packages/{1}/{0}/{2}'
-                                  '.h>'.format(self.language, pkg, child)]
+                include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                if include_string not in include_lines:
+                    include_lines += [include_string]
             else:
-                include_lines += ['<{0}/{1}.h>'.format(self.language, child)]
+                include_string = '<{0}/{1}.h>'.format(self.language, child)
+                if include_string not in include_lines:
+                    include_lines += [include_string]
 
         # if we are the document class for another library
         if not global_variables.is_package and self.document:

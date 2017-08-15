@@ -53,7 +53,6 @@
 #include <sbml/SBase.h>
 #include <sbml/packages/spatial/extension/SpatialExtension.h>
 #include <sbml/packages/spatial/sbml/Boundary.h>
-#include <sbml/packages/spatial/sbml/Boundary.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN

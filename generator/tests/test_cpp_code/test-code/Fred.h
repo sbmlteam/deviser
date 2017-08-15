@@ -53,8 +53,6 @@
 #include <sbml/SBase.h>
 #include <sbml/packages/x/extension/XExtension.h>
 #include <sbml/packages/x/sbml/Other.h>
-#include <sbml/packages/x/sbml/Other.h>
-#include <sbml/packages/x/sbml/Other.h>
 #include <sbml/packages/x/sbml/ListOfOtherLOs.h>
 
 

@@ -1,6 +1,6 @@
 /**
- * @file CSGTransformation.h
- * @brief Definition of the CSGTransformation class.
+ * @file CategoricalDistribution.h
+ * @brief Definition of the CategoricalDistribution class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,18 +30,18 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class CSGTransformation
- * @sbmlbrief{spatial} TODO:Definition of the CSGTransformation class.
+ * @class CategoricalDistribution
+ * @sbmlbrief{distrib} TODO:Definition of the CategoricalDistribution class.
  */
 
 
-#ifndef CSGTransformation_H__
-#define CSGTransformation_H__
+#ifndef CategoricalDistribution_H__
+#define CategoricalDistribution_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/spatial/common/spatialfwd.h>
+#include <sbml/packages/distrib/common/distribfwd.h>
 
 
 #ifdef __cplusplus
@@ -50,42 +50,39 @@
 #include <string>
 
 
-#include <sbml/packages/spatial/sbml/CSGNode.h>
-#include <sbml/packages/spatial/extension/SpatialExtension.h>
+#include <sbml/packages/distrib/sbml/CategoricalUnivariateDistribution.h>
+#include <sbml/packages/distrib/extension/DistribExtension.h>
+#include <sbml/packages/distrib/sbml/ListOfCategories.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class CSGTranslation;
-class CSGRotation;
-class CSGScale;
-class CSGHomogeneousTransformation;
-
-class LIBSBML_EXTERN CSGTransformation : public CSGNode
+class LIBSBML_EXTERN CategoricalDistribution : public
+  CategoricalUnivariateDistribution
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  CSGNode* mCSGNode;
+  ListOfCategories mCategorys;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new CSGTransformation using the given SBML Level, Version and
-   * &ldquo;spatial&rdquo; package version.
+   * Creates a new CategoricalDistribution using the given SBML Level, Version
+   * and &ldquo;distrib&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * CSGTransformation.
+   * CategoricalDistribution.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CSGTransformation.
+   * CategoricalDistribution.
    *
-   * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGTransformation.
+   * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+   * this CategoricalDistribution.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -93,18 +90,20 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(unsigned int level = SpatialExtension::getDefaultLevel(),
-                    unsigned int version =
-                      SpatialExtension::getDefaultVersion(),
-                    unsigned int pkgVersion =
-                      SpatialExtension::getDefaultPackageVersion());
+  CategoricalDistribution(
+                          unsigned int level =
+                            DistribExtension::getDefaultLevel(),
+                          unsigned int version =
+                            DistribExtension::getDefaultVersion(),
+                          unsigned int pkgVersion =
+                            DistribExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new CSGTransformation using the given SpatialPkgNamespaces
+   * Creates a new CategoricalDistribution using the given DistribPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object.
+   * @param distribns the DistribPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -112,205 +111,154 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(SpatialPkgNamespaces *spatialns);
+  CategoricalDistribution(DistribPkgNamespaces *distribns);
 
 
   /**
-   * Copy constructor for CSGTransformation.
+   * Copy constructor for CategoricalDistribution.
    *
-   * @param orig the CSGTransformation instance to copy.
+   * @param orig the CategoricalDistribution instance to copy.
    */
-  CSGTransformation(const CSGTransformation& orig);
+  CategoricalDistribution(const CategoricalDistribution& orig);
 
 
   /**
-   * Assignment operator for CSGTransformation.
+   * Assignment operator for CategoricalDistribution.
    *
-   * @param rhs the CSGTransformation object whose values are to be used as the
-   * basis of the assignment.
+   * @param rhs the CategoricalDistribution object whose values are to be used
+   * as the basis of the assignment.
    */
-  CSGTransformation& operator=(const CSGTransformation& rhs);
+  CategoricalDistribution& operator=(const CategoricalDistribution& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this CSGTransformation object.
+   * Creates and returns a deep copy of this CategoricalDistribution object.
    *
-   * @return a (deep) copy of this CSGTransformation object.
+   * @return a (deep) copy of this CategoricalDistribution object.
    */
-  virtual CSGTransformation* clone() const;
+  virtual CategoricalDistribution* clone() const;
 
 
   /**
-   * Destructor for CSGTransformation.
+   * Destructor for CategoricalDistribution.
    */
-  virtual ~CSGTransformation();
+  virtual ~CategoricalDistribution();
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the ListOfCategories from this CategoricalDistribution.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the ListOfCategories from this CategoricalDistribution.
    */
-  const CSGNode* getCSGNode() const;
+  const ListOfCategories* getListOfCategories() const;
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the ListOfCategories from this CategoricalDistribution.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the ListOfCategories from this CategoricalDistribution.
    */
-  CSGNode* getCSGNode();
+  ListOfCategories* getListOfCategories();
 
 
   /**
-   * Predicate returning @c true if this CSGTransformation's "csgNode" element
-   * is set.
+   * Get a Category from the CategoricalDistribution.
    *
-   * @return @c true if this CSGTransformation's "csgNode" element has been
-   * set, otherwise @c false is returned.
+   * @param n an unsigned int representing the index of the Category to
+   * retrieve.
+   *
+   * @return the nth Category in the ListOfCategories within this
+   * CategoricalDistribution.
+   *
+   * @see getNumCategorys()
    */
-  bool isSetCSGNode() const;
+  Category* getCategory(unsigned int n);
 
 
   /**
-   * Sets the value of the "csgNode" element of this CSGTransformation.
+   * Get a Category from the CategoricalDistribution.
    *
-   * @param csgNode CSGNode* value of the "csgNode" element to be set.
+   * @param n an unsigned int representing the index of the Category to
+   * retrieve.
    *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   * @return the nth Category in the ListOfCategories within this
+   * CategoricalDistribution.
+   *
+   * @see getNumCategorys()
    */
-  int setCSGNode(const CSGNode* csgNode);
+  const Category* getCategory(unsigned int n) const;
 
 
   /**
-   * Creates a new CSGPrimitive object, adds it to this CSGTransformation
-   * object and returns the CSGPrimitive object created.
+   * Adds a copy of the given Category to this CategoricalDistribution.
    *
-   * @return a new CSGPrimitive object instance.
-   */
-  CSGPrimitive* createCSGPrimitive();
-
-
-  /**
-   * Creates a new CSGTranslation object, adds it to this CSGTransformation
-   * object and returns the CSGTranslation object created.
-   *
-   * @return a new CSGTranslation object instance.
-   */
-  CSGTranslation* createCSGTranslation();
-
-
-  /**
-   * Creates a new CSGRotation object, adds it to this CSGTransformation object
-   * and returns the CSGRotation object created.
-   *
-   * @return a new CSGRotation object instance.
-   */
-  CSGRotation* createCSGRotation();
-
-
-  /**
-   * Creates a new CSGScale object, adds it to this CSGTransformation object
-   * and returns the CSGScale object created.
-   *
-   * @return a new CSGScale object instance.
-   */
-  CSGScale* createCSGScale();
-
-
-  /**
-   * Creates a new CSGHomogeneousTransformation object, adds it to this
-   * CSGTransformation object and returns the CSGHomogeneousTransformation
-   * object created.
-   *
-   * @return a new CSGHomogeneousTransformation object instance.
-   */
-  CSGHomogeneousTransformation* createCSGHomogeneousTransformation();
-
-
-  /**
-   * Creates a new CSGSetOperator object, adds it to this CSGTransformation
-   * object and returns the CSGSetOperator object created.
-   *
-   * @return a new CSGSetOperator object instance.
-   */
-  CSGSetOperator* createCSGSetOperator();
-
-
-  /**
-   * Unsets the value of the "csgNode" element of this CSGTransformation.
+   * @param c the Category object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createCategory()
    */
-  int unsetCSGNode();
+  int addCategory(const Category* c);
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGTranslation
+   * Get the number of Category objects in this CategoricalDistribution.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGTranslation, @c false otherwise
+   * @return the number of Category objects in this CategoricalDistribution.
    */
-  virtual bool isCSGTranslation() const;
+  unsigned int getNumCategorys() const;
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGRotation
+   * Creates a new Category object, adds it to this CategoricalDistribution
+   * object and returns the Category object created.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGRotation, @c false otherwise
+   * @return a new Category object instance.
+   *
+   * @see addCategory(const Category* c)
    */
-  virtual bool isCSGRotation() const;
+  Category* createCategory();
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGScale
+   * Removes the nth Category from this CategoricalDistribution and returns a
+   * pointer to it.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type CSGScale,
-   * @c false otherwise
+   * @param n an unsigned int representing the index of the Category to remove.
+   *
+   * @return a pointer to the nth Category in this CategoricalDistribution.
+   *
+   * @see getNumCategorys
+   *
+   * @note the caller owns the returned object and is responsible for deleting
+   * it.
    */
-  virtual bool isCSGScale() const;
+  Category* removeCategory(unsigned int n);
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGHomogeneousTransformation
+   * Returns the XML element name of this CategoricalDistribution object.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGHomogeneousTransformation, @c false otherwise
-   */
-  virtual bool isCSGHomogeneousTransformation() const;
-
-
-  /**
-   * Returns the XML element name of this CSGTransformation object.
+   * For CategoricalDistribution, the XML element name is always @c
+   * "categoricalDistribution".
    *
-   * For CSGTransformation, the XML element name is always @c
-   * "csgTransformation".
-   *
-   * @return the name of this element, i.e. @c "csgTransformation".
+   * @return the name of this element, i.e. @c "categoricalDistribution".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this CSGTransformation object.
+   * Returns the libSBML type code for this CategoricalDistribution object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{SBML_SPATIAL_CSGTRANSFORMATION, SBMLSpatialTypeCode_t}
+   * @sbmlconstant{SBML_DISTRIB_CATEGORICALDISTRIBUTION, SBMLDistribTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -322,26 +270,27 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * CSGTransformation object have been set.
+   * CategoricalDistribution object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * CategoricalDistribution have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the CSGTransformation object are:
+   * @note The required attributes for the CategoricalDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
 
   /**
    * Predicate returning @c true if all the required elements for this
-   * CSGTransformation object have been set.
+   * CategoricalDistribution object have been set.
    *
    * @return @c true to indicate that all the required elements of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * CategoricalDistribution have been set, otherwise @c false is returned.
    *
    *
-   * @note The required elements for the CSGTransformation object are:
+   * @note The required elements for the CategoricalDistribution object are:
+   * @li "category"
    */
   virtual bool hasRequiredElements() const;
 
@@ -412,7 +361,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -432,7 +382,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -451,7 +402,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -471,7 +423,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -491,7 +444,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -511,7 +465,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -531,13 +486,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this CSGTransformation's attribute
+   * Predicate returning @c true if this CategoricalDistribution's attribute
    * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this CSGTransformation's attribute "attributeName" has
-   * been set, otherwise @c false is returned.
+   * @return @c true if this CategoricalDistribution's attribute
+   * "attributeName" has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -548,7 +503,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -567,7 +523,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -586,7 +543,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -605,7 +563,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -625,7 +584,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -645,7 +605,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -666,7 +627,7 @@ public:
 
   /**
    * Unsets the value of the "attributeName" attribute of this
-   * CSGTransformation.
+   * CategoricalDistribution.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -683,7 +644,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Creates and returns an new "elementName" object in this CSGTransformation.
+   * Creates and returns an new "elementName" object in this
+   * CategoricalDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -698,7 +660,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Adds a new "elementName" object to this CSGTransformation.
+   * Adds a new "elementName" object to this CategoricalDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -719,7 +681,7 @@ public:
 
   /**
    * Removes and returns the new "elementName" object with the given id in this
-   * CSGTransformation.
+   * CategoricalDistribution.
    *
    * @param elementName, the name of the element to remove.
    *
@@ -737,7 +699,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the number of "elementName" in this CSGTransformation.
+   * Returns the number of "elementName" in this CategoricalDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -752,7 +714,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the nth object of "objectName" in this CSGTransformation.
+   * Returns the nth object of "objectName" in this CategoricalDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -882,17 +844,17 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGTransformation_t using the given SBML Level, Version and
- * &ldquo;spatial&rdquo; package version.
+ * Creates a new CategoricalDistribution_t using the given SBML Level, Version
+ * and &ldquo;distrib&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t.
+ * CategoricalDistribution_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t.
+ * CategoricalDistribution_t.
  *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t.
+ * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+ * this CategoricalDistribution_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -900,309 +862,188 @@ BEGIN_C_DECLS
  * SBMLDocument object.
  * @copydetails doc_note_setting_lv
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_create(
-                         unsigned int level =
-                           SpatialExtension::getDefaultLevel(),
-                         unsigned int version =
-                           SpatialExtension::getDefaultVersion(),
-                         unsigned int pkgVersion =
-                           SpatialExtension::getDefaultPackageVersion());
+CategoricalDistribution_t *
+CategoricalDistribution_create(
+                               unsigned int level =
+                                 DistribExtension::getDefaultLevel(),
+                               unsigned int version =
+                                 DistribExtension::getDefaultVersion(),
+                               unsigned int pkgVersion =
+                                 DistribExtension::getDefaultPackageVersion());
 
 
 /**
- * Creates and returns a deep copy of this CSGTransformation_t object.
+ * Creates and returns a deep copy of this CategoricalDistribution_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure.
  *
- * @return a (deep) copy of this CSGTransformation_t object.
+ * @return a (deep) copy of this CategoricalDistribution_t object.
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t*
-CSGTransformation_clone(const CSGTransformation_t* csgt);
+CategoricalDistribution_t*
+CategoricalDistribution_clone(const CategoricalDistribution_t* cd);
 
 
 /**
- * Frees this CSGTransformation_t object.
+ * Frees this CategoricalDistribution_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure.
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
 void
-CSGTransformation_free(CSGTransformation_t* csgt);
+CategoricalDistribution_free(CategoricalDistribution_t* cd);
 
 
 /**
- * Returns the value of the "csgNode" element of this CSGTransformation_t.
+ * Returns a ListOf_t* containing Category_t objects from this
+ * CategoricalDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure whose csgNode is sought.
+ * @param cd the CategoricalDistribution_t structure whose "ListOfCategories" is
+ * sought.
  *
- * @return the value of the "csgNode" element of this CSGTransformation_t as a
- * CSGNode*.
+ * @return the "ListOfCategories" from this CategoricalDistribution_t as a
+ * ListOf_t *.
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
-CSGTransformation_getCSGNode(const CSGTransformation_t * csgt);
+ListOf_t*
+CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
- * set.
+ * Get a Category_t from the CategoricalDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure to search.
  *
- * @return @c 1 if this CSGTransformation_t's "csgNode" element has been set,
- * otherwise @c 0 is returned.
+ * @param n an unsigned int representing the index of the Category_t to
+ * retrieve.
  *
- * @memberof CSGTransformation_t
+ * @return the nth Category_t in the ListOfCategories within this
+ * CategoricalDistribution.
+ *
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isSetCSGNode(const CSGTransformation_t * csgt);
+const Category_t*
+CategoricalDistribution_getCategory(CategoricalDistribution_t* cd,
+                                    unsigned int n);
 
 
 /**
- * Sets the value of the "csgNode" element of this CSGTransformation_t.
+ * Adds a copy of the given Category_t to this CategoricalDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure.
- *
- * @param csgNode CSGNode_t* value of the "csgNode" element to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-int
-CSGTransformation_setCSGNode(CSGTransformation_t * csgt,
-                             const CSGNode_t* csgNode);
-
-
-/**
- * Creates a new CSGPrimitive_t object, adds it to this CSGTransformation_t
- * object and returns the CSGPrimitive_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGPrimitive_t
+ * @param cd the CategoricalDistribution_t structure to which the Category_t
  * should be added.
  *
- * @return a new CSGPrimitive_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGPrimitive_t*
-CSGTransformation_createCSGPrimitive(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGTranslation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGTranslation_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGTranslation_t
- * should be added.
- *
- * @return a new CSGTranslation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTranslation_t*
-CSGTransformation_createCSGTranslation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGRotation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGRotation_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGRotation_t
- * should be added.
- *
- * @return a new CSGRotation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGRotation_t*
-CSGTransformation_createCSGRotation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGScale_t object, adds it to this CSGTransformation_t object
- * and returns the CSGScale_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGScale_t should
- * be added.
- *
- * @return a new CSGScale_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGScale_t*
-CSGTransformation_createCSGScale(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGHomogeneousTransformation_t object, adds it to this
- * CSGTransformation_t object and returns the CSGHomogeneousTransformation_t
- * object created.
- *
- * @param csgt the CSGTransformation_t structure to which the
- * CSGHomogeneousTransformation_t should be added.
- *
- * @return a new CSGHomogeneousTransformation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGHomogeneousTransformation_t*
-CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t*
-  csgt);
-
-
-/**
- * Creates a new CSGSetOperator_t object, adds it to this CSGTransformation_t
- * object and returns the CSGSetOperator_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGSetOperator_t
- * should be added.
- *
- * @return a new CSGSetOperator_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGSetOperator_t*
-CSGTransformation_createCSGSetOperator(CSGTransformation_t* csgt);
-
-
-/**
- * Unsets the value of the "csgNode" element of this CSGTransformation_t.
- *
- * @param csgt the CSGTransformation_t structure.
+ * @param c the Category_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_unsetCSGNode(CSGTransformation_t * csgt);
+CategoricalDistribution_addCategory(CategoricalDistribution_t* cd,
+                                    const Category_t* c);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGTranslation_t
+ * Get the number of Category_t objects in this CategoricalDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure to query.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGTranslation_t, @c 0
- * otherwise
+ * @return the number of Category_t objects in this CategoricalDistribution_t.
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGTranslation(const CSGTransformation_t * csgt);
+unsigned int
+CategoricalDistribution_getNumCategorys(CategoricalDistribution_t* cd);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGRotation_t
+ * Creates a new Category_t object, adds it to this CategoricalDistribution_t
+ * object and returns the Category_t object created.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure to which the Category_t
+ * should be added.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGRotation_t, @c 0
- * otherwise
+ * @return a new Category_t object instance.
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGRotation(const CSGTransformation_t * csgt);
+Category_t*
+CategoricalDistribution_createCategory(CategoricalDistribution_t* cd);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type CSGScale_t
+ * Removes the nth Category_t from this CategoricalDistribution_t and returns a
+ * pointer to it.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure to search.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGScale_t, @c 0
- * otherwise
+ * @param n an unsigned int representing the index of the Category_t to remove.
  *
- * @memberof CSGTransformation_t
+ * @return a pointer to the nth Category_t in this CategoricalDistribution_t.
+ *
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-int
-CSGTransformation_isCSGScale(const CSGTransformation_t * csgt);
-
-
-/**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t
- *
- * @param csgt the CSGTransformation_t structure.
- *
- * @return @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t, @c 0 otherwise
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-int
-CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
-  csgt);
+Category_t*
+CategoricalDistribution_removeCategory(CategoricalDistribution_t* cd,
+                                       unsigned int n);
 
 
 /**
  * Predicate returning @c 1 if all the required attributes for this
- * CSGTransformation_t object have been set.
+ * CategoricalDistribution_t object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure.
  *
  * @return @c 1 to indicate that all the required attributes of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * CategoricalDistribution_t have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required attributes for the CSGTransformation_t object are:
+ * @note The required attributes for the CategoricalDistribution_t object are:
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt);
+CategoricalDistribution_hasRequiredAttributes(const CategoricalDistribution_t *
+  cd);
 
 
 /**
  * Predicate returning @c 1 if all the required elements for this
- * CSGTransformation_t object have been set.
+ * CategoricalDistribution_t object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param cd the CategoricalDistribution_t structure.
  *
  * @return @c 1 to indicate that all the required elements of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * CategoricalDistribution_t have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required elements for the CSGTransformation_t object are:
+ * @note The required elements for the CategoricalDistribution_t object are:
+ * @li "category"
  *
- * @memberof CSGTransformation_t
+ * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredElements(const CSGTransformation_t * csgt);
+CategoricalDistribution_hasRequiredElements(const CategoricalDistribution_t *
+  cd);
 
 
 
@@ -1222,6 +1063,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !CSGTransformation_H__ */
+#endif /* !CategoricalDistribution_H__ */
 
 

@@ -1,6 +1,6 @@
 /**
- * @file CSGTransformation.h
- * @brief Definition of the CSGTransformation class.
+ * @file BetaDistribution.h
+ * @brief Definition of the BetaDistribution class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,18 +30,18 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class CSGTransformation
- * @sbmlbrief{spatial} TODO:Definition of the CSGTransformation class.
+ * @class BetaDistribution
+ * @sbmlbrief{distrib} TODO:Definition of the BetaDistribution class.
  */
 
 
-#ifndef CSGTransformation_H__
-#define CSGTransformation_H__
+#ifndef BetaDistribution_H__
+#define BetaDistribution_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/spatial/common/spatialfwd.h>
+#include <sbml/packages/distrib/common/distribfwd.h>
 
 
 #ifdef __cplusplus
@@ -50,42 +50,39 @@
 #include <string>
 
 
-#include <sbml/packages/spatial/sbml/CSGNode.h>
-#include <sbml/packages/spatial/extension/SpatialExtension.h>
+#include <sbml/packages/distrib/sbml/ContinuousUnivariateDistribution.h>
+#include <sbml/packages/distrib/extension/DistribExtension.h>
+#include <sbml/packages/distrib/sbml/UncertValue.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class CSGTranslation;
-class CSGRotation;
-class CSGScale;
-class CSGHomogeneousTransformation;
-
-class LIBSBML_EXTERN CSGTransformation : public CSGNode
+class LIBSBML_EXTERN BetaDistribution : public ContinuousUnivariateDistribution
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  CSGNode* mCSGNode;
+  UncertValue* mAlpha;
+  UncertValue* mBeta;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new CSGTransformation using the given SBML Level, Version and
-   * &ldquo;spatial&rdquo; package version.
+   * Creates a new BetaDistribution using the given SBML Level, Version and
+   * &ldquo;distrib&rdquo; package version.
    *
    * @param level an unsigned int, the SBML Level to assign to this
-   * CSGTransformation.
+   * BetaDistribution.
    *
    * @param version an unsigned int, the SBML Version to assign to this
-   * CSGTransformation.
+   * BetaDistribution.
    *
-   * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
-   * this CSGTransformation.
+   * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+   * this BetaDistribution.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -93,18 +90,18 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(unsigned int level = SpatialExtension::getDefaultLevel(),
-                    unsigned int version =
-                      SpatialExtension::getDefaultVersion(),
-                    unsigned int pkgVersion =
-                      SpatialExtension::getDefaultPackageVersion());
+  BetaDistribution(unsigned int level = DistribExtension::getDefaultLevel(),
+                   unsigned int version =
+                     DistribExtension::getDefaultVersion(),
+                   unsigned int pkgVersion =
+                     DistribExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new CSGTransformation using the given SpatialPkgNamespaces
+   * Creates a new BetaDistribution using the given DistribPkgNamespaces
    * object.
    *
-   * @param spatialns the SpatialPkgNamespaces object.
+   * @param distribns the DistribPkgNamespaces object.
    *
    * @throws SBMLConstructorException
    * Thrown if the given @p level and @p version combination, or this kind of
@@ -112,205 +109,179 @@ public:
    * SBMLDocument object.
    * @copydetails doc_note_setting_lv
    */
-  CSGTransformation(SpatialPkgNamespaces *spatialns);
+  BetaDistribution(DistribPkgNamespaces *distribns);
 
 
   /**
-   * Copy constructor for CSGTransformation.
+   * Copy constructor for BetaDistribution.
    *
-   * @param orig the CSGTransformation instance to copy.
+   * @param orig the BetaDistribution instance to copy.
    */
-  CSGTransformation(const CSGTransformation& orig);
+  BetaDistribution(const BetaDistribution& orig);
 
 
   /**
-   * Assignment operator for CSGTransformation.
+   * Assignment operator for BetaDistribution.
    *
-   * @param rhs the CSGTransformation object whose values are to be used as the
+   * @param rhs the BetaDistribution object whose values are to be used as the
    * basis of the assignment.
    */
-  CSGTransformation& operator=(const CSGTransformation& rhs);
+  BetaDistribution& operator=(const BetaDistribution& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this CSGTransformation object.
+   * Creates and returns a deep copy of this BetaDistribution object.
    *
-   * @return a (deep) copy of this CSGTransformation object.
+   * @return a (deep) copy of this BetaDistribution object.
    */
-  virtual CSGTransformation* clone() const;
+  virtual BetaDistribution* clone() const;
 
 
   /**
-   * Destructor for CSGTransformation.
+   * Destructor for BetaDistribution.
    */
-  virtual ~CSGTransformation();
+  virtual ~BetaDistribution();
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the value of the "alpha" element of this BetaDistribution.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the value of the "alpha" element of this BetaDistribution as a
+   * UncertValue*.
    */
-  const CSGNode* getCSGNode() const;
+  const UncertValue* getAlpha() const;
 
 
   /**
-   * Returns the value of the "csgNode" element of this CSGTransformation.
+   * Returns the value of the "alpha" element of this BetaDistribution.
    *
-   * @return the value of the "csgNode" element of this CSGTransformation as a
-   * CSGNode*.
+   * @return the value of the "alpha" element of this BetaDistribution as a
+   * UncertValue*.
    */
-  CSGNode* getCSGNode();
+  UncertValue* getAlpha();
 
 
   /**
-   * Predicate returning @c true if this CSGTransformation's "csgNode" element
-   * is set.
+   * Returns the value of the "beta" element of this BetaDistribution.
    *
-   * @return @c true if this CSGTransformation's "csgNode" element has been
-   * set, otherwise @c false is returned.
+   * @return the value of the "beta" element of this BetaDistribution as a
+   * UncertValue*.
    */
-  bool isSetCSGNode() const;
+  const UncertValue* getBeta() const;
 
 
   /**
-   * Sets the value of the "csgNode" element of this CSGTransformation.
+   * Returns the value of the "beta" element of this BetaDistribution.
    *
-   * @param csgNode CSGNode* value of the "csgNode" element to be set.
+   * @return the value of the "beta" element of this BetaDistribution as a
+   * UncertValue*.
+   */
+  UncertValue* getBeta();
+
+
+  /**
+   * Predicate returning @c true if this BetaDistribution's "alpha" element is
+   * set.
+   *
+   * @return @c true if this BetaDistribution's "alpha" element has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetAlpha() const;
+
+
+  /**
+   * Predicate returning @c true if this BetaDistribution's "beta" element is
+   * set.
+   *
+   * @return @c true if this BetaDistribution's "beta" element has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetBeta() const;
+
+
+  /**
+   * Sets the value of the "alpha" element of this BetaDistribution.
+   *
+   * @param alpha UncertValue* value of the "alpha" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setCSGNode(const CSGNode* csgNode);
+  int setAlpha(const UncertValue* alpha);
 
 
   /**
-   * Creates a new CSGPrimitive object, adds it to this CSGTransformation
-   * object and returns the CSGPrimitive object created.
+   * Sets the value of the "beta" element of this BetaDistribution.
    *
-   * @return a new CSGPrimitive object instance.
-   */
-  CSGPrimitive* createCSGPrimitive();
-
-
-  /**
-   * Creates a new CSGTranslation object, adds it to this CSGTransformation
-   * object and returns the CSGTranslation object created.
+   * @param beta UncertValue* value of the "beta" element to be set.
    *
-   * @return a new CSGTranslation object instance.
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
    */
-  CSGTranslation* createCSGTranslation();
+  int setBeta(const UncertValue* beta);
 
 
   /**
-   * Creates a new CSGRotation object, adds it to this CSGTransformation object
-   * and returns the CSGRotation object created.
+   * Creates a new UncertValue object, adds it to this BetaDistribution object
+   * and returns the UncertValue object created.
    *
-   * @return a new CSGRotation object instance.
+   * @return a new UncertValue object instance.
    */
-  CSGRotation* createCSGRotation();
+  UncertValue* createAlpha();
 
 
   /**
-   * Creates a new CSGScale object, adds it to this CSGTransformation object
-   * and returns the CSGScale object created.
+   * Creates a new UncertValue object, adds it to this BetaDistribution object
+   * and returns the UncertValue object created.
    *
-   * @return a new CSGScale object instance.
+   * @return a new UncertValue object instance.
    */
-  CSGScale* createCSGScale();
+  UncertValue* createBeta();
 
 
   /**
-   * Creates a new CSGHomogeneousTransformation object, adds it to this
-   * CSGTransformation object and returns the CSGHomogeneousTransformation
-   * object created.
-   *
-   * @return a new CSGHomogeneousTransformation object instance.
-   */
-  CSGHomogeneousTransformation* createCSGHomogeneousTransformation();
-
-
-  /**
-   * Creates a new CSGSetOperator object, adds it to this CSGTransformation
-   * object and returns the CSGSetOperator object created.
-   *
-   * @return a new CSGSetOperator object instance.
-   */
-  CSGSetOperator* createCSGSetOperator();
-
-
-  /**
-   * Unsets the value of the "csgNode" element of this CSGTransformation.
+   * Unsets the value of the "alpha" element of this BetaDistribution.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetCSGNode();
+  int unsetAlpha();
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGTranslation
+   * Unsets the value of the "beta" element of this BetaDistribution.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGTranslation, @c false otherwise
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual bool isCSGTranslation() const;
+  int unsetBeta();
 
 
   /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGRotation
+   * Returns the XML element name of this BetaDistribution object.
    *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGRotation, @c false otherwise
-   */
-  virtual bool isCSGRotation() const;
-
-
-  /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGScale
+   * For BetaDistribution, the XML element name is always @c
+   * "betaDistribution".
    *
-   * @return @c true if this abstract "CSGTransformation" is of type CSGScale,
-   * @c false otherwise
-   */
-  virtual bool isCSGScale() const;
-
-
-  /**
-   * Predicate returning @c true if this abstract "CSGTransformation" is of
-   * type CSGHomogeneousTransformation
-   *
-   * @return @c true if this abstract "CSGTransformation" is of type
-   * CSGHomogeneousTransformation, @c false otherwise
-   */
-  virtual bool isCSGHomogeneousTransformation() const;
-
-
-  /**
-   * Returns the XML element name of this CSGTransformation object.
-   *
-   * For CSGTransformation, the XML element name is always @c
-   * "csgTransformation".
-   *
-   * @return the name of this element, i.e. @c "csgTransformation".
+   * @return the name of this element, i.e. @c "betaDistribution".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this CSGTransformation object.
+   * Returns the libSBML type code for this BetaDistribution object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{SBML_SPATIAL_CSGTRANSFORMATION, SBMLSpatialTypeCode_t}
+   * @sbmlconstant{SBML_DISTRIB_BETADISTRIBUTION, SBMLDistribTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -322,26 +293,28 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * CSGTransformation object have been set.
+   * BetaDistribution object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * BetaDistribution have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the CSGTransformation object are:
+   * @note The required attributes for the BetaDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
 
   /**
    * Predicate returning @c true if all the required elements for this
-   * CSGTransformation object have been set.
+   * BetaDistribution object have been set.
    *
    * @return @c true to indicate that all the required elements of this
-   * CSGTransformation have been set, otherwise @c false is returned.
+   * BetaDistribution have been set, otherwise @c false is returned.
    *
    *
-   * @note The required elements for the CSGTransformation object are:
+   * @note The required elements for the BetaDistribution object are:
+   * @li "alpha"
+   * @li "beta"
    */
   virtual bool hasRequiredElements() const;
 
@@ -412,7 +385,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -432,7 +405,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -451,7 +424,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -471,7 +444,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -491,7 +464,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -511,7 +484,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CSGTransformation.
+   * Gets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -531,12 +504,12 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this CSGTransformation's attribute
+   * Predicate returning @c true if this BetaDistribution's attribute
    * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this CSGTransformation's attribute "attributeName" has
+   * @return @c true if this BetaDistribution's attribute "attributeName" has
    * been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
@@ -548,7 +521,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -567,7 +540,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -586,7 +559,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -605,7 +578,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -625,7 +598,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -645,7 +618,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CSGTransformation.
+   * Sets the value of the "attributeName" attribute of this BetaDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -666,7 +639,7 @@ public:
 
   /**
    * Unsets the value of the "attributeName" attribute of this
-   * CSGTransformation.
+   * BetaDistribution.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -683,7 +656,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Creates and returns an new "elementName" object in this CSGTransformation.
+   * Creates and returns an new "elementName" object in this BetaDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -698,7 +671,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Adds a new "elementName" object to this CSGTransformation.
+   * Adds a new "elementName" object to this BetaDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -719,7 +692,7 @@ public:
 
   /**
    * Removes and returns the new "elementName" object with the given id in this
-   * CSGTransformation.
+   * BetaDistribution.
    *
    * @param elementName, the name of the element to remove.
    *
@@ -737,7 +710,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the number of "elementName" in this CSGTransformation.
+   * Returns the number of "elementName" in this BetaDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -752,7 +725,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the nth object of "objectName" in this CSGTransformation.
+   * Returns the nth object of "objectName" in this BetaDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -882,17 +855,17 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGTransformation_t using the given SBML Level, Version and
- * &ldquo;spatial&rdquo; package version.
+ * Creates a new BetaDistribution_t using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
- * CSGTransformation_t.
+ * BetaDistribution_t.
  *
  * @param version an unsigned int, the SBML Version to assign to this
- * CSGTransformation_t.
+ * BetaDistribution_t.
  *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGTransformation_t.
+ * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+ * this BetaDistribution_t.
  *
  * @throws SBMLConstructorException
  * Thrown if the given @p level and @p version combination, or this kind of
@@ -900,309 +873,245 @@ BEGIN_C_DECLS
  * SBMLDocument object.
  * @copydetails doc_note_setting_lv
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t *
-CSGTransformation_create(
-                         unsigned int level =
-                           SpatialExtension::getDefaultLevel(),
-                         unsigned int version =
-                           SpatialExtension::getDefaultVersion(),
-                         unsigned int pkgVersion =
-                           SpatialExtension::getDefaultPackageVersion());
+BetaDistribution_t *
+BetaDistribution_create(
+                        unsigned int level =
+                          DistribExtension::getDefaultLevel(),
+                        unsigned int version =
+                          DistribExtension::getDefaultVersion(),
+                        unsigned int pkgVersion =
+                          DistribExtension::getDefaultPackageVersion());
 
 
 /**
- * Creates and returns a deep copy of this CSGTransformation_t object.
+ * Creates and returns a deep copy of this BetaDistribution_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
- * @return a (deep) copy of this CSGTransformation_t object.
+ * @return a (deep) copy of this BetaDistribution_t object.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-CSGTransformation_t*
-CSGTransformation_clone(const CSGTransformation_t* csgt);
+BetaDistribution_t*
+BetaDistribution_clone(const BetaDistribution_t* bd);
 
 
 /**
- * Frees this CSGTransformation_t object.
+ * Frees this BetaDistribution_t object.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 void
-CSGTransformation_free(CSGTransformation_t* csgt);
+BetaDistribution_free(BetaDistribution_t* bd);
 
 
 /**
- * Returns the value of the "csgNode" element of this CSGTransformation_t.
+ * Returns the value of the "alpha" element of this BetaDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure whose csgNode is sought.
+ * @param bd the BetaDistribution_t structure whose alpha is sought.
  *
- * @return the value of the "csgNode" element of this CSGTransformation_t as a
- * CSGNode*.
+ * @return the value of the "alpha" element of this BetaDistribution_t as a
+ * UncertValue*.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
-CSGTransformation_getCSGNode(const CSGTransformation_t * csgt);
+const UncertValue_t*
+BetaDistribution_getAlpha(const BetaDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
+ * Returns the value of the "beta" element of this BetaDistribution_t.
+ *
+ * @param bd the BetaDistribution_t structure whose beta is sought.
+ *
+ * @return the value of the "beta" element of this BetaDistribution_t as a
+ * UncertValue*.
+ *
+ * @memberof BetaDistribution_t
+ */
+LIBSBML_EXTERN
+const UncertValue_t*
+BetaDistribution_getBeta(const BetaDistribution_t * bd);
+
+
+/**
+ * Predicate returning @c 1 if this BetaDistribution_t's "alpha" element is
  * set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
- * @return @c 1 if this CSGTransformation_t's "csgNode" element has been set,
+ * @return @c 1 if this BetaDistribution_t's "alpha" element has been set,
  * otherwise @c 0 is returned.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_isSetCSGNode(const CSGTransformation_t * csgt);
+BetaDistribution_isSetAlpha(const BetaDistribution_t * bd);
 
 
 /**
- * Sets the value of the "csgNode" element of this CSGTransformation_t.
+ * Predicate returning @c 1 if this BetaDistribution_t's "beta" element is set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
- * @param csgNode CSGNode_t* value of the "csgNode" element to be set.
+ * @return @c 1 if this BetaDistribution_t's "beta" element has been set,
+ * otherwise @c 0 is returned.
+ *
+ * @memberof BetaDistribution_t
+ */
+LIBSBML_EXTERN
+int
+BetaDistribution_isSetBeta(const BetaDistribution_t * bd);
+
+
+/**
+ * Sets the value of the "alpha" element of this BetaDistribution_t.
+ *
+ * @param bd the BetaDistribution_t structure.
+ *
+ * @param alpha UncertValue_t* value of the "alpha" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_setCSGNode(CSGTransformation_t * csgt,
-                             const CSGNode_t* csgNode);
+BetaDistribution_setAlpha(BetaDistribution_t * bd,
+                          const UncertValue_t* alpha);
 
 
 /**
- * Creates a new CSGPrimitive_t object, adds it to this CSGTransformation_t
- * object and returns the CSGPrimitive_t object created.
+ * Sets the value of the "beta" element of this BetaDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure to which the CSGPrimitive_t
- * should be added.
+ * @param bd the BetaDistribution_t structure.
  *
- * @return a new CSGPrimitive_t object instance.
+ * @param beta UncertValue_t* value of the "beta" element to be set.
  *
- * @memberof CSGTransformation_t
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-CSGPrimitive_t*
-CSGTransformation_createCSGPrimitive(CSGTransformation_t* csgt);
+int
+BetaDistribution_setBeta(BetaDistribution_t * bd, const UncertValue_t* beta);
 
 
 /**
- * Creates a new CSGTranslation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGTranslation_t object created.
+ * Creates a new UncertValue_t object, adds it to this BetaDistribution_t
+ * object and returns the UncertValue_t object created.
  *
- * @param csgt the CSGTransformation_t structure to which the CSGTranslation_t
- * should be added.
- *
- * @return a new CSGTranslation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGTranslation_t*
-CSGTransformation_createCSGTranslation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGRotation_t object, adds it to this CSGTransformation_t
- * object and returns the CSGRotation_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGRotation_t
- * should be added.
- *
- * @return a new CSGRotation_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGRotation_t*
-CSGTransformation_createCSGRotation(CSGTransformation_t* csgt);
-
-
-/**
- * Creates a new CSGScale_t object, adds it to this CSGTransformation_t object
- * and returns the CSGScale_t object created.
- *
- * @param csgt the CSGTransformation_t structure to which the CSGScale_t should
+ * @param bd the BetaDistribution_t structure to which the UncertValue_t should
  * be added.
  *
- * @return a new CSGScale_t object instance.
+ * @return a new UncertValue_t object instance.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-CSGScale_t*
-CSGTransformation_createCSGScale(CSGTransformation_t* csgt);
+UncertValue_t*
+BetaDistribution_createAlpha(BetaDistribution_t* bd);
 
 
 /**
- * Creates a new CSGHomogeneousTransformation_t object, adds it to this
- * CSGTransformation_t object and returns the CSGHomogeneousTransformation_t
- * object created.
+ * Creates a new UncertValue_t object, adds it to this BetaDistribution_t
+ * object and returns the UncertValue_t object created.
  *
- * @param csgt the CSGTransformation_t structure to which the
- * CSGHomogeneousTransformation_t should be added.
+ * @param bd the BetaDistribution_t structure to which the UncertValue_t should
+ * be added.
  *
- * @return a new CSGHomogeneousTransformation_t object instance.
+ * @return a new UncertValue_t object instance.
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
-CSGHomogeneousTransformation_t*
-CSGTransformation_createCSGHomogeneousTransformation(CSGTransformation_t*
-  csgt);
+UncertValue_t*
+BetaDistribution_createBeta(BetaDistribution_t* bd);
 
 
 /**
- * Creates a new CSGSetOperator_t object, adds it to this CSGTransformation_t
- * object and returns the CSGSetOperator_t object created.
+ * Unsets the value of the "alpha" element of this BetaDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure to which the CSGSetOperator_t
- * should be added.
- *
- * @return a new CSGSetOperator_t object instance.
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-CSGSetOperator_t*
-CSGTransformation_createCSGSetOperator(CSGTransformation_t* csgt);
-
-
-/**
- * Unsets the value of the "csgNode" element of this CSGTransformation_t.
- *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_unsetCSGNode(CSGTransformation_t * csgt);
+BetaDistribution_unsetAlpha(BetaDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGTranslation_t
+ * Unsets the value of the "beta" element of this BetaDistribution_t.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
- * @return @c 1 if this CSGTransformation_t is of type CSGTranslation_t, @c 0
- * otherwise
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_isCSGTranslation(const CSGTransformation_t * csgt);
-
-
-/**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGRotation_t
- *
- * @param csgt the CSGTransformation_t structure.
- *
- * @return @c 1 if this CSGTransformation_t is of type CSGRotation_t, @c 0
- * otherwise
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-int
-CSGTransformation_isCSGRotation(const CSGTransformation_t * csgt);
-
-
-/**
- * Predicate returning @c 1 if this CSGTransformation_t is of type CSGScale_t
- *
- * @param csgt the CSGTransformation_t structure.
- *
- * @return @c 1 if this CSGTransformation_t is of type CSGScale_t, @c 0
- * otherwise
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-int
-CSGTransformation_isCSGScale(const CSGTransformation_t * csgt);
-
-
-/**
- * Predicate returning @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t
- *
- * @param csgt the CSGTransformation_t structure.
- *
- * @return @c 1 if this CSGTransformation_t is of type
- * CSGHomogeneousTransformation_t, @c 0 otherwise
- *
- * @memberof CSGTransformation_t
- */
-LIBSBML_EXTERN
-int
-CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
-  csgt);
+BetaDistribution_unsetBeta(BetaDistribution_t * bd);
 
 
 /**
  * Predicate returning @c 1 if all the required attributes for this
- * CSGTransformation_t object have been set.
+ * BetaDistribution_t object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
  * @return @c 1 to indicate that all the required attributes of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * BetaDistribution_t have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required attributes for the CSGTransformation_t object are:
+ * @note The required attributes for the BetaDistribution_t object are:
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt);
+BetaDistribution_hasRequiredAttributes(const BetaDistribution_t * bd);
 
 
 /**
  * Predicate returning @c 1 if all the required elements for this
- * CSGTransformation_t object have been set.
+ * BetaDistribution_t object have been set.
  *
- * @param csgt the CSGTransformation_t structure.
+ * @param bd the BetaDistribution_t structure.
  *
  * @return @c 1 to indicate that all the required elements of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * BetaDistribution_t have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required elements for the CSGTransformation_t object are:
+ * @note The required elements for the BetaDistribution_t object are:
+ * @li "alpha"
+ * @li "beta"
  *
- * @memberof CSGTransformation_t
+ * @memberof BetaDistribution_t
  */
 LIBSBML_EXTERN
 int
-CSGTransformation_hasRequiredElements(const CSGTransformation_t * csgt);
+BetaDistribution_hasRequiredElements(const BetaDistribution_t * bd);
 
 
 
@@ -1222,6 +1131,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !CSGTransformation_H__ */
+#endif /* !BetaDistribution_H__ */
 
 

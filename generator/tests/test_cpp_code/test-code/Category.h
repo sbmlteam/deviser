@@ -53,7 +53,6 @@
 #include <sbml/SBase.h>
 #include <sbml/packages/distrib/extension/DistribExtension.h>
 #include <sbml/packages/distrib/sbml/UncertValue.h>
-#include <sbml/packages/distrib/sbml/UncertValue.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN

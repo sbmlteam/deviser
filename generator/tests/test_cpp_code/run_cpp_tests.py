@@ -690,6 +690,13 @@ def main():
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 16
+        class_name = 'BetaDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -713,8 +720,8 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'new_distrib'
-        num = 14
-        class_name = 'Category'
+        num = 16
+        class_name = 'BetaDistribution'
         list_of = ''
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)

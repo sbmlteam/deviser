@@ -54,7 +54,6 @@
 #include <sbml/packages/distrib/sbml/UnivariateDistribution.h>
 #include <sbml/packages/distrib/extension/DistribExtension.h>
 #include <sbml/packages/distrib/sbml/UncertBound.h>
-#include <sbml/packages/distrib/sbml/UncertBound.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
