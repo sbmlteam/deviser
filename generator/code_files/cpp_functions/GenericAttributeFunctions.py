@@ -549,20 +549,37 @@ class GenericAttributeFunctions():
         if_block = []
 
         for elem in self.elements:
-            if not first:
-                block.append('else if')
+            if elem['concrete']:
+                for conc in elem['concrete']:
+                    if not first:
+                        block.append('else if')
+                    else:
+                        first = False
+                    elemName = elem['name']
+                    if not elem['element'] or elem['element'] == elemName:
+                        elemElem = elemName
+                    else:
+                        elemElem = elem['element']
+                    block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(conc['name'], conc['typecode']))
+                    if elem not in self.single_elements:
+                        block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                    else:
+                        block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
             else:
-                first = False
-            elemName = elem['name']
-            if not elem['element'] or elem['element'] == elemName:
-                elemElem = elemName
-            else:
-                elemElem = elem['element']
-            block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elemName, elem['typecode']))
-            if elem not in self.single_elements:
-                block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
-            else:
-                block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                if not first:
+                    block.append('else if')
+                else:
+                    first = False
+                elemName = elem['name']
+                if not elem['element'] or elem['element'] == elemName:
+                    elemElem = elemName
+                else:
+                    elemElem = elem['element']
+                block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elemName, elem['typecode']))
+                if elem not in self.single_elements:
+                    block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                else:
+                    block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
 
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
@@ -619,23 +636,43 @@ class GenericAttributeFunctions():
         if_block = []
 
         for elem in self.elements:
-            if not first:
-                block.append('else if')
+            if elem['concrete']:
+                for conc in elem['concrete']:
+                    if not first:
+                        block.append('else if')
+                    else:
+                        first = False
+                    elemName = elem['name']
+                    if not elem['element'] or elem['element'] == elemName:
+                        elemElem = elemName
+                    else:
+                        elemElem = elem['element']
+                    block.append('elementName == \"{0}\"'.format(conc['name']))
+                    single = True
+                    if elem not in self.single_elements:
+                        single = False
+                        block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                    else:
+                        block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
+                        block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
             else:
-                first = False
-            elemName = elem['name']
-            if not elem['element'] or elem['element'] == elemName:
-                elemElem = elemName
-            else:
-                elemElem = elem['element']
-            block.append('elementName == \"{0}\"'.format(elem['name']))
-            single = True
-            if elem not in self.single_elements:
-                single = False
-                block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
-            else:
-                block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
-                block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
+                if not first:
+                    block.append('else if')
+                else:
+                    first = False
+                elemName = elem['name']
+                if not elem['element'] or elem['element'] == elemName:
+                    elemElem = elemName
+                else:
+                    elemElem = elem['element']
+                block.append('elementName == \"{0}\"'.format(elem['name']))
+                single = True
+                if elem not in self.single_elements:
+                    single = False
+                    block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                else:
+                    block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
+                    block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
             if single:
                 if len(block) > 3:
                     if_block = self.create_code_block('else_if', block)

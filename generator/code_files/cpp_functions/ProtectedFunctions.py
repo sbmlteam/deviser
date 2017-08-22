@@ -1048,10 +1048,10 @@ class ProtectedFunctions():
         # create the function implementation
         implementation = ['unsigned int tc = item->getTypeCode()']
         code = [dict({'code_type': 'line', 'code': implementation})]
-        tc = self.concretes[0]['type_code']
+        tc = self.concretes[0]['typecode']
         implementation = 'return ((tc == {0})'.format(tc)
         for i in range(1, len(self.concretes)):
-            tc = self.concretes[i]['type_code']
+            tc = self.concretes[i]['typecode']
             implementation += ' || (tc == {0})'.format(tc)
         implementation += ')'
         code.append(self.create_code_block('line', [implementation]))

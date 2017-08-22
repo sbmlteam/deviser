@@ -199,7 +199,7 @@ def run_constraints_test(name, class_name, test_case):
 
 def main():
 
-    runall = True
+    runall = False
     # set up the enivornment
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
@@ -720,10 +720,10 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'new_distrib'
-        num = 16
-        class_name = 'BetaDistribution'
+        num = 0
+        class_name = 'DrawFromDistribution'
         list_of = ''
-        test_case = 'concrete class'
+        test_case = 'abstract class with multiple abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

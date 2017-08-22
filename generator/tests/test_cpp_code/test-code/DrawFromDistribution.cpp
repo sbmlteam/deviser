@@ -1117,8 +1117,53 @@ int
 DrawFromDistribution::addChildObject(const std::string& elementName,
                                      const SBase* element)
 {
-  if (elementName == "distribution" && element->getTypeCode() ==
-    SBML_DISTRIB_DISTRIBUTION)
+  if (elementName == "betaDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BETADISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "cauchyDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_CAUCHYDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "logisticDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_LOGISTICDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "normalDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_NORMALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "binomialDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BINOMIALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "geometricDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_GEOMETRICLDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "bernoulliDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BERNOULLIDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "categoricalDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_CATEGORICALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "multivariateDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_MULTIVARIATEDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "externalDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_EXTERNALDISTRIBUTION)
   {
     return setDistribution((const Distribution*)(element));
   }
@@ -1145,7 +1190,52 @@ SBase*
 DrawFromDistribution::removeChildObject(const std::string& elementName,
                                         const std::string& id)
 {
-  if (elementName == "distribution")
+  if (elementName == "betaDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "cauchyDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "logisticDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "normalDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "binomialDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "geometricDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "bernoulliDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "categoricalDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "multivariateDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "externalDistribution")
   {
     Distribution * obj = getDistribution();
     if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
