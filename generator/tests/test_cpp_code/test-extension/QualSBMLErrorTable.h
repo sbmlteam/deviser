@@ -290,7 +290,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:initialLevel' on a <qualitativeSpecies> must have a "
-    "value of data type 'integer'.",
+    "value of data type 'integer', and must be non negative.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -301,7 +301,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:maxLevel' on a <qualitativeSpecies> must have a value "
-    "of data type 'integer'.",
+    "of data type 'integer', and must be non negative.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -555,7 +555,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:thresholdLevel' on an <input> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -688,7 +688,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:resultLevel' on a <defaultTerm> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Qual V1 Section"
     }
   },
@@ -747,7 +747,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:resultLevel' on a <functionTerm> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Qual V1 Section"
     }
   },

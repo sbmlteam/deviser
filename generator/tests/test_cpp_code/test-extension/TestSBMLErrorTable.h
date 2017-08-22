@@ -228,7 +228,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myTestClass> must have a value of data type "
-    "'integer'.",
+    "'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -239,7 +239,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myTestClass> must have a value of data "
-    "type 'integer'.",
+    "type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -289,8 +289,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020311
-  { TestMyTestClassUnitMustBeUnit,
-    "Unit attribute must be Unit.",
+  { TestMyTestClassUnitMustBeUnitSId,
+    "Unit attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on a <myTestClass> must have a "
@@ -325,8 +325,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020314
-  { TestMyTestClassRefUnitMustBeUnit,
-    "RefUnit attribute must be Unit.",
+  { TestMyTestClassRefUnitMustBeUnitSId,
+    "RefUnit attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refUnit' on a <myTestClass> must have a "
@@ -406,8 +406,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020404
-  { TestUnitUnitMustBeUnit,
-    "Unit attribute must be Unit.",
+  { TestUnitUnitMustBeUnitSId,
+    "Unit attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on an <unit> must have a taken from "
@@ -513,7 +513,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myRequiredClass> must have a value of data "
-    "type 'integer'.",
+    "type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -524,7 +524,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myRequiredClass> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -574,8 +574,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020611
-  { TestMyRequiredClassUnitMustBeUnit,
-    "Unit attribute must be Unit.",
+  { TestMyRequiredClassUnitMustBeUnitSId,
+    "Unit attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on a <myRequiredClass> must have a "
@@ -610,8 +610,8 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020614
-  { TestMyRequiredClassRefUnitMustBeUnit,
-    "RefUnit attribute must be Unit.",
+  { TestMyRequiredClassRefUnitMustBeUnitSId,
+    "RefUnit attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refUnit' on a <myRequiredClass> must have "
@@ -627,7 +627,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posint' on a <myRequiredClass> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -638,7 +638,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintTwo' on a <myRequiredClass> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -649,7 +649,7 @@ static const packageErrorTableEntry testErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintOne' on a <myRequiredClass> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Test V1 Section"
     }
   },

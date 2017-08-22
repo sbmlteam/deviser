@@ -289,7 +289,7 @@ static const packageErrorTableEntry distribErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:index' on a <distribInput> must have a value of "
-    "data type 'integer'.",
+    "data type 'integer', and must be non negative.",
     { "L3V1 Distrib V1 Section"
     }
   },
