@@ -554,7 +554,8 @@ def get_child_elements(elements, lo_elements, root=None):
                 if thisclass and 'typecode' in thisclass:
                     typecode = thisclass['typecode']
             if 'concrete' in elem:
-                concs = elem['concrete']
+                conc = elem['concrete']
+                concs = get_concretes(root, conc)
             else:
                 concs = None
             child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])),

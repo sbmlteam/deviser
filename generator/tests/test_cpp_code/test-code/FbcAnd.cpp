@@ -730,8 +730,16 @@ FbcAnd::createChildObject(const std::string& elementName)
 int
 FbcAnd::addChildObject(const std::string& elementName, const SBase* element)
 {
-  if (elementName == "association" && element->getTypeCode() ==
-    SBML_FBC_ASSOCIATION)
+  if (elementName == "and" && element->getTypeCode() == SBML_FBC_AND)
+  {
+    return addAssociation((const Association*)(element));
+  }
+  else if (elementName == "or" && element->getTypeCode() == SBML_FBC_OR)
+  {
+    return addAssociation((const Association*)(element));
+  }
+  else if (elementName == "geneProductRef" && element->getTypeCode() ==
+    SBML_FBC_GENEPRODUCTREF)
   {
     return addAssociation((const Association*)(element));
   }
@@ -753,7 +761,15 @@ SBase*
 FbcAnd::removeChildObject(const std::string& elementName,
                           const std::string& id)
 {
-  if (elementName == "association")
+  if (elementName == "and")
+  {
+    return removeAssociation(id);
+  }
+  else if (elementName == "or")
+  {
+    return removeAssociation(id);
+  }
+  else if (elementName == "geneProductRef")
   {
     return removeAssociation(id);
   }

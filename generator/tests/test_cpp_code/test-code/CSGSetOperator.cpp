@@ -1160,13 +1160,21 @@ CSGSetOperator::createChildObject(const std::string& elementName)
   {
     return createCSGPrimitive();
   }
-  else if (elementName == "csgTransformation")
+  else if (elementName == "csgTranslation")
   {
-    return createCSGTransformation();
+    return createCSGTranslation();
   }
-  else if (elementName == "csgPseudoPrimitive")
+  else if (elementName == "csgRotation")
   {
-    return createCSGPseudoPrimitive();
+    return createCSGRotation();
+  }
+  else if (elementName == "csgScale")
+  {
+    return createCSGScale();
+  }
+  else if (elementName == "csgHomogeneousTransformation")
+  {
+    return createCSGHomogeneousTransformation();
   }
   else if (elementName == "csgSetOperator")
   {
@@ -1189,8 +1197,33 @@ int
 CSGSetOperator::addChildObject(const std::string& elementName,
                                const SBase* element)
 {
-  if (elementName == "csgNode" && element->getTypeCode() ==
-    SBML_SPATIAL_CSGNODE)
+  if (elementName == "csgPrimitive" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGPRIMITIVE)
+  {
+    return addCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgTranslation" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGTRANSLATION)
+  {
+    return addCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgRotation" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGROTATION)
+  {
+    return addCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgScale" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGSCALE)
+  {
+    return addCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgHomogeneousTransformation" &&
+    element->getTypeCode() == SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION)
+  {
+    return addCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgSetOperator" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGSETOPERATOR)
   {
     return addCSGNode((const CSGNode*)(element));
   }
@@ -1212,7 +1245,27 @@ SBase*
 CSGSetOperator::removeChildObject(const std::string& elementName,
                                   const std::string& id)
 {
-  if (elementName == "csgNode")
+  if (elementName == "csgPrimitive")
+  {
+    return removeCSGNode(id);
+  }
+  else if (elementName == "csgTranslation")
+  {
+    return removeCSGNode(id);
+  }
+  else if (elementName == "csgRotation")
+  {
+    return removeCSGNode(id);
+  }
+  else if (elementName == "csgScale")
+  {
+    return removeCSGNode(id);
+  }
+  else if (elementName == "csgHomogeneousTransformation")
+  {
+    return removeCSGNode(id);
+  }
+  else if (elementName == "csgSetOperator")
   {
     return removeCSGNode(id);
   }

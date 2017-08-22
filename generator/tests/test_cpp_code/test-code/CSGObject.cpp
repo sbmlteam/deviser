@@ -1100,8 +1100,33 @@ int
 CSGObject::addChildObject(const std::string& elementName,
                           const SBase* element)
 {
-  if (elementName == "csgNode" && element->getTypeCode() ==
-    SBML_SPATIAL_CSGNODE)
+  if (elementName == "csgPrimitive" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGPRIMITIVE)
+  {
+    return setCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgTranslation" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGTRANSLATION)
+  {
+    return setCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgRotation" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGROTATION)
+  {
+    return setCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgScale" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGSCALE)
+  {
+    return setCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgHomogeneousTransformation" &&
+    element->getTypeCode() == SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION)
+  {
+    return setCSGNode((const CSGNode*)(element));
+  }
+  else if (elementName == "csgSetOperator" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGSETOPERATOR)
   {
     return setCSGNode((const CSGNode*)(element));
   }
@@ -1123,7 +1148,32 @@ SBase*
 CSGObject::removeChildObject(const std::string& elementName,
                              const std::string& id)
 {
-  if (elementName == "csgNode")
+  if (elementName == "csgPrimitive")
+  {
+    CSGNode * obj = getCSGNode();
+    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "csgTranslation")
+  {
+    CSGNode * obj = getCSGNode();
+    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "csgRotation")
+  {
+    CSGNode * obj = getCSGNode();
+    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "csgScale")
+  {
+    CSGNode * obj = getCSGNode();
+    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "csgHomogeneousTransformation")
+  {
+    CSGNode * obj = getCSGNode();
+    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "csgSetOperator")
   {
     CSGNode * obj = getCSGNode();
     if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;

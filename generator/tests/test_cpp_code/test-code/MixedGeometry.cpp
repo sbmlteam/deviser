@@ -1003,8 +1003,28 @@ int
 MixedGeometry::addChildObject(const std::string& elementName,
                               const SBase* element)
 {
-  if (elementName == "geometryDefinition" && element->getTypeCode() ==
-    SBML_SPATIAL_GEOMETRYDEFINITION)
+  if (elementName == "analyticGeometry" && element->getTypeCode() ==
+    SBML_SPATIAL_ANALYTICGEOMETRY)
+  {
+    return addGeometryDefinition((const GeometryDefinition*)(element));
+  }
+  else if (elementName == "sampledFieldGeometry" && element->getTypeCode() ==
+    SBML_SPATIAL_SAMPLEDFIELDGEOMETRY)
+  {
+    return addGeometryDefinition((const GeometryDefinition*)(element));
+  }
+  else if (elementName == "csGeometry" && element->getTypeCode() ==
+    SBML_SPATIAL_CSGEOMETRY)
+  {
+    return addGeometryDefinition((const GeometryDefinition*)(element));
+  }
+  else if (elementName == "parametricGeometry" && element->getTypeCode() ==
+    SBML_SPATIAL_PARAMETRICGEOMETRY)
+  {
+    return addGeometryDefinition((const GeometryDefinition*)(element));
+  }
+  else if (elementName == "mixedGeometry" && element->getTypeCode() ==
+    SBML_SPATIAL_MIXEDGEOMETRY)
   {
     return addGeometryDefinition((const GeometryDefinition*)(element));
   }
@@ -1031,7 +1051,23 @@ SBase*
 MixedGeometry::removeChildObject(const std::string& elementName,
                                  const std::string& id)
 {
-  if (elementName == "geometryDefinition")
+  if (elementName == "analyticGeometry")
+  {
+    return removeGeometryDefinition(id);
+  }
+  else if (elementName == "sampledFieldGeometry")
+  {
+    return removeGeometryDefinition(id);
+  }
+  else if (elementName == "csGeometry")
+  {
+    return removeGeometryDefinition(id);
+  }
+  else if (elementName == "parametricGeometry")
+  {
+    return removeGeometryDefinition(id);
+  }
+  else if (elementName == "mixedGeometry")
   {
     return removeGeometryDefinition(id);
   }
