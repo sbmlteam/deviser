@@ -267,7 +267,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="UncertStatisticSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="uncertStatisticSpan" listOfName="listOfUncertStatisticSpans" listOfClassName="ListOfUncertStatisticSpans">
+        <element name="UncertStatisticSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="uncertStatisticSpan" listOfName="listOfUncertStatisticSpans" listOfClassName="ListOfUncertStatisticSpans">
           <attributes>
             <attribute name="varLower" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="valueLower" required="false" type="double" abstract="false"/>
