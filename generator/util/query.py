@@ -305,7 +305,7 @@ def overwrites_name(root, name):
     return overwrites
 
 
-def get_static_extension_attribs(num_versions):
+def get_static_extension_attribs(num_versions, core_level, core_version):
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
@@ -317,13 +317,13 @@ def get_static_extension_attribs(num_versions):
                 'capAttName': 'DefaultLevel',
                 'attTypeCode': 'unsigned int',
                 'attType': 'unsigned integer',
-                'memberName': 3})
+                'memberName': core_level})
     attribs.append(att)
     att = dict({'name': 'defaultVersion',
                 'capAttName': 'DefaultVersion',
                 'attTypeCode': 'unsigned int',
                 'attType': 'unsigned integer',
-                'memberName': 1})
+                'memberName': core_version})
     attribs.append(att)
     att = dict({'name': 'defaultPackageVersion',
                 'capAttName': 'DefaultPackageVersion',
@@ -332,7 +332,7 @@ def get_static_extension_attribs(num_versions):
                 'memberName': 1})
     attribs.append(att)
     for i in range(0, num_versions):
-        name = 'xmlnsL3V1V{0}'.format(i+1)
+        name = 'xmlnsL{1}V{2}V{0}'.format(i+1, core_level, core_version)
         cap_name = strFunctions.upper_first(name)
         att = dict({'name': name,
                     'capAttName': cap_name,

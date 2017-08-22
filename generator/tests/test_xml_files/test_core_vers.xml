@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="Corevers" fullname="coreversions" number="100" offset="10000000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="2" pkg_version="1">
+      <elements>
+        <element name="ClassOneTwo" typeCode="SBML_COREVERS_CLASSONETWO" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="att1" required="false" type="bool" abstract="false"/>
+          </attributes>
+        </element>
+        
+        
+      </elements>
+      <plugins>
+        <plugin extensionPoint="Model">
+          <references>
+            <reference name="ClassOne"/>
+          </references>
+          <attributes>
+            <attribute name="version" required="false" type="unsigned int" abstract="false"/>
+          </attributes>
+        </plugin>
+        
+      </plugins>
+      
+    </pkgVersion>
+  </versions>
+</package>

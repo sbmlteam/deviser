@@ -44,13 +44,16 @@ from util import strFunctions, query
 class ExtensionInitFunctions():
     """Class for extension functions"""
 
-    def __init__(self, language, package, base, enums, plugins):
+    def __init__(self, language, package, base, enums, plugins, core_level=3, core_version=1):
         self.language = language
         self.package = package
         self.std_base = base
 
         self.enums = enums
         self.plugins = plugins
+
+        self.core_level = core_level
+        self.core_version = core_version
 
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
@@ -96,7 +99,7 @@ class ExtensionInitFunctions():
                 self.create_code_block('line', ['std::vector<std::string> '
                                                 'packageURIs',
                                                 'packageURIs.push_back'
-                                                '(getXmlnsL3V1V1())'])]
+                                                '(getXmlnsL{0}V{1}V1())'.format(self.core_level, self.core_version)])]
         implementation = ['{0}ExtensionPoint {1}docExtPoint(\"core\", '
                           '{2}_DOCUMENT)'.format(self.std_base,
                                                  self.language,

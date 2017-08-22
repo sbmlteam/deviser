@@ -78,6 +78,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         if 'num_versions' in package:
             self.num_versions = package['num_versions']
 
+        self.core_level = package['base_level']
+        self.core_version = package['base_version']
+
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
         self.class_object['name'] = self.name
@@ -175,11 +178,13 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # function to write the static get functions
     def write_attribute_functions(self):
         self.class_object['class_attributes'] \
-            = query.get_static_extension_attribs(self.num_versions)
+            = query.get_static_extension_attribs(self.num_versions, self.core_level, self.core_version)
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
                                                            self.is_cpp_api,
                                                            self.is_list_of,
-                                                           self.class_object)
+                                                           self.class_object,
+                                                           self.core_level,
+                                                           self.core_version)
         num_attributes = len(self.class_object['class_attributes'])
         for i in range(0, num_attributes):
             code = attrib_functions.write_static_extension_get(i)
@@ -193,7 +198,10 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         ext_functions = ExtensionFunctions.ExtensionFunctions(self.language,
                                                               self.package,
                                                               self.elements,
-                                                              self.offset)
+                                                              self.offset,
+                                                              self.num_versions,
+                                                              self.core_level,
+                                                              self.core_version)
 
         code = ext_functions.write_get_name()
         self.write_function_declaration(code)
@@ -237,7 +245,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             ExtensionInitFunctions.ExtensionInitFunctions(self.language,
                                                           self.package,
                                                           self.std_base,
-                                                          [], [])
+                                                          [], [],
+                                                          self.core_level,
+                                                          self.core_version)
         code = init_functions.write_init_function()
         self.write_function_declaration(code, True)
 
