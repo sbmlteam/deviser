@@ -217,9 +217,10 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token('ID'))
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
-                   'type {3}.'\
+                   'type {3}{4}'\
                 .format(name, self.indef, formatted_name,
-                        strFunctions.wrap_token('integer'))
+                        strFunctions.wrap_token('integer'),
+                        '.' if att_type == 'int' else ', and must be non negative.')
             rule_type = 'Integer' if att_type == 'int' else 'NonNegativeInteger'
         elif att_type == 'double':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
@@ -240,7 +241,7 @@ class ValidationRulesForClass():
                    'of the base units in SBML.'.format(name,
                                                        self.indef,
                                                        formatted_name)
-            rule_type = 'Unit'
+            rule_type = 'UnitSId'
         elif att_type == 'enum':
             enum_name = strFunctions.texify(attribute['element'])
             enums = attribute['parent']['root']['enums']
