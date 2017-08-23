@@ -94,10 +94,10 @@ class ProtectedFunctions():
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
             self.version_attributes.append(
-                query.get_version_attributes(self.all_attributes, 1))
+                query.get_version_attributes(self.all_attributes, 0))
             for i in range(1, class_object['num_versions']):
                 self.version_attributes.append(
-                    query.get_version_attributes(self.all_attributes, i+1))
+                    query.get_version_attributes(self.all_attributes, i))
         self.is_header = class_object['is_header']
 
         self.document = False

@@ -43,7 +43,7 @@ from util import strFunctions, query, global_variables
 class SetGetFunctions():
     """Class for all functions for set/get/isset/unset"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object, core_level=3, core_version=1):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[]):
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -70,8 +70,8 @@ class SetGetFunctions():
             self.has_multiple_versions = True
         else:
             self.has_multiple_versions = False
-        self.core_level = core_level
-        self.core_version = core_version
+        self.lv_info = lv_info
+#        self.core_version = core_version
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
@@ -371,7 +371,7 @@ class SetGetFunctions():
                        'package definition'.format(self.cap_language)
         elif name.startswith('xmlnsL'):
             title_name = 'XML namespace URI of the {0} Level&nbsp;{1} ' \
-                         'package'.format(self.cap_language, self.core_level)
+                         'package'.format(self.cap_language, self.lv_info[-1]['core_level'])
             ret_name = 'XML namespace'
         else:
             title_name = ''
@@ -414,12 +414,9 @@ class SetGetFunctions():
                 value = '{0}'.format(self.package)
             else:
                 name = 'xmlns'
-                if attribute['name'].endswith('1'):
-                    value = 'http://www.{0}.org/{0}/level{2}/version{3}/{1}/' \
-                            'version1'.format(self.language, self.package, self.core_level, self.core_version)
-                else:
-                    value = 'http://www.{0}.org/{0}/level{2}/version{3}/{1}/' \
-                            'version2'.format(self.language, self.package, self.core_level, self.core_version)
+                value = 'http://www.{0}.org/{0}/level{2}/version{3}/{1}/' \
+                        'version{4}'.format(self.language, self.package, attribute['memberName'][1],
+                                            attribute['memberName'][2], attribute['memberName'][0])
 
             implementation = ['static const std::string {0} '
                               '= \"{1}\"'.format(name, value),

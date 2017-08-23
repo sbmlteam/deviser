@@ -71,6 +71,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
 
         self.core_level = package['base_level']
         self.core_version = package['base_version']
+        self.lv_info = package['lv_info']
 
         # create a class object so we can just reuse code
         self.class_object['package'] = self.package
@@ -166,13 +167,12 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
     # function to write the static get functions
     def write_attribute_functions(self):
         self.class_object['class_attributes'] \
-            = query.get_static_extension_attribs(self.num_versions, self.core_level, self.core_version)
+            = query.get_static_extension_attribs(self.num_versions, self.lv_info)
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
                                                            self.is_cpp_api,
                                                            self.is_list_of,
                                                            self.class_object,
-                                                           self.core_level,
-                                                           self.core_version)
+                                                           self.lv_info)
         num_attributes = len(self.class_object['class_attributes'])
         for i in range(0, num_attributes):
             code = attrib_functions.write_static_extension_get(i, True, False)
@@ -188,8 +188,8 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                               self.elements,
                                                               self.offset,
                                                               self.num_versions,
-                                                              self.core_level,
-                                                              self.core_version)
+                                                              self.lv_info[0]['core_level'],
+                                                              self.lv_info[0]['core_version'])
 
         code = ext_functions.write_get_name()
         self.write_function_implementation(code)
@@ -235,8 +235,8 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                           self.std_base,
                                                           self.enums,
                                                           self.plugins,
-                                                          self.core_level,
-                                                          self.core_version)
+                                                          self.lv_info[0]['core_level'],
+                                                          self.lv_info[0]['core_version'])
         code = init_functions.write_init_function(False)
         self.write_function_implementation(code, True)
 

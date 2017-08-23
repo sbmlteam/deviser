@@ -297,11 +297,11 @@ class ParseXML():
         return concrete_list
 
     @staticmethod
-    def get_attribute_description(self, node, pkg_version):
+    def get_attribute_description(self, node, version_count):
         version_info = []
         for i in range(0, self.num_versions):
             version_info.append(False)
-        version_info[pkg_version-1] = True
+        version_info[version_count] = True
         attr_name = self.get_value(node, 'name')
         if not attr_name:
             self.report_error(global_variables
@@ -333,7 +333,7 @@ class ParseXML():
                                'abstract': attr_abstract,
                                'xml_name': attr_xml_name,
                                'num_versions': self.num_versions,
-                               'version': pkg_version,
+                               'version': version_count,
                                'version_info': version_info
                                })
         if attr_abstract:
@@ -342,7 +342,7 @@ class ParseXML():
         return attribute_dict
 
     @staticmethod
-    def get_element_description(self, node, pkg_version):
+    def get_element_description(self, node, version_count):
         element_name = self.get_element_class_name(self, node)
         if not element_name:
             self.report_error(global_variables
@@ -351,7 +351,7 @@ class ParseXML():
         element = None
         # check whether we have an element with this
         # name in a different version
-        if pkg_version > 1:
+        if version_count > 0:
             element = query.get_matching_element('name', element_name,
                                                  self.sbml_elements)
             # for existing in self.sbml_elements:
@@ -361,13 +361,13 @@ class ParseXML():
         if element:
             for attr in node.getElementsByTagName('attribute'):
                 element['attribs'].append(
-                    self.get_attribute_description(self, attr, pkg_version))
+                    self.get_attribute_description(self, attr, version_count))
 
             for attr in node.getElementsByTagName('listOfAttribute'):
                 element['lo_attribs'].append(
-                    self.get_attribute_description(self, attr, pkg_version))
+                    self.get_attribute_description(self, attr, version_count))
             element['num_versions'] = self.num_versions
-            element['version'] = pkg_version
+            element['version'] = version_count
 
             return None
 
@@ -397,12 +397,12 @@ class ParseXML():
             attributes = []
             for attr in node.getElementsByTagName('attribute'):
                 attributes.append(self.get_attribute_description(self, attr,
-                                                                 pkg_version))
+                                                                 version_count))
 
             lo_attributes = []
             for attr in node.getElementsByTagName('listOfAttribute'):
                 lo_attributes.append(
-                    self.get_attribute_description(self, attr, pkg_version))
+                    self.get_attribute_description(self, attr, version_count))
 
             # construct element
             element = dict({'name': element_name,
@@ -420,7 +420,7 @@ class ParseXML():
                             'lo_class_name': lo_class_name,
                             'min_lo_children': min_lo_children,
                             'num_versions': self.num_versions,
-                            'version': pkg_version
+                            'version': version_count
                             })
             if add_decls is not None:
                 element['addDecls'] = add_decls
@@ -434,12 +434,12 @@ class ParseXML():
             return element
 
     @staticmethod
-    def get_plugin_description(self, node, pkg_version):
+    def get_plugin_description(self, node, version_count):
         ext_point = self.get_value(node, 'extensionPoint')
         plugin = None
         # check whether we have an element with this
         # name in a different version
-        if pkg_version > 1:
+        if version_count > 0:
             plugin = query.get_matching_element('sbase', ext_point,
                                                 self.plugins)
         if plugin:
@@ -458,9 +458,9 @@ class ParseXML():
 
             for attr in node.getElementsByTagName('attribute'):
                 plugin['attribs'].append(
-                    self.get_attribute_description(self, attr, pkg_version))
+                    self.get_attribute_description(self, attr, version_count))
             plugin['num_versions'] = self.num_versions
-            plugin['version'] = pkg_version
+            plugin['version'] = version_count
 
             return None
 
@@ -490,7 +490,7 @@ class ParseXML():
             # read additional attributes
             for attr in node.getElementsByTagName('attribute'):
                 attributes.append(self.get_attribute_description(self, attr,
-                                                                 pkg_version))
+                                                                 version_count))
             plugin_dict = dict({'sbase': ext_point,
                                 'extension': plug_elements,
                                 'attribs': attributes,
@@ -509,7 +509,7 @@ class ParseXML():
             return plugin_dict
 
     def get_elements_for_version(self, pkg_node):
-        pkg_version = self.get_int_value(self, pkg_node, 'pkg_version')
+#        version_count = self.get_int_value(self, pkg_node, 'version_count')
 
         # read concrete versions of abstract classes and fill dictionary
         for node in pkg_node.getElementsByTagName('element'):
@@ -519,7 +519,7 @@ class ParseXML():
 
         # read element
         for node in pkg_node.getElementsByTagName('element'):
-            element = self.get_element_description(self, node, pkg_version)
+            element = self.get_element_description(self, node, self.version_count)
             if element:
                 self.elements.append(dict({'name': element['name'],
                                            'typecode': element['typecode'],
@@ -533,10 +533,10 @@ class ParseXML():
                 self.sbml_elements.append(element)
 
     def get_plugins_for_version(self, pkg_node):
-        pkg_version = self.get_int_value(self, pkg_node, 'pkg_version')
+#        version_count = self.get_int_value(self, pkg_node, 'version_count')
 
         for node in pkg_node.getElementsByTagName('plugin'):
-            plugin = self.get_plugin_description(self, node, pkg_version)
+            plugin = self.get_plugin_description(self, node, self.version_count)
             if plugin:
                 self.plugins.append(plugin)
 
@@ -677,12 +677,17 @@ class ParseXML():
         sbml_version = 1
         pkg_version = 1
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
+        self.version_count = 0
 
+        lv_info = []
         for node in self.dom.getElementsByTagName('pkgVersion'):
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
+            pkg_version = self.get_int_value(self, node, 'pkg_version')
             self.get_elements_for_version(node)
             self.get_plugins_for_version(node)
+            lv_info.append(dict({'core_level': sbml_level, 'core_version': sbml_version, 'pkg_version': pkg_version}))
+            self.version_count = self.version_count+1
 
         names_listed = []
         for node in self.dom.getElementsByTagName('enum'):
@@ -709,7 +714,8 @@ class ParseXML():
                         'base_version': sbml_version,
                         'pkg_version': pkg_version,
                         'required': required,
-                        'num_versions': self.num_versions
+                        'num_versions': self.num_versions,
+                        'lv_info': lv_info
                         })
 
         # link elements

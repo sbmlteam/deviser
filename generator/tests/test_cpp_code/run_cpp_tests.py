@@ -724,12 +724,15 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'test_core_vers'
-        class_name = 'CoreversExtension'
-        test_case = 'core version extension file'
+        name = 'test_core_vers_pkg'
+        class_name = 'CoreversPkgExtension'
+        test_case = 'core version and package version not 1 extension file'
+#        fail += run_ext_test(name, class_name, test_case, 0)
+
+        name = 'test_vers'
+        class_name = 'VersExtension'
+        test_case = 'multi version extension file'
         fail += run_ext_test(name, class_name, test_case, 0)
-
-
 
 
 

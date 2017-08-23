@@ -94,7 +94,7 @@ VersExtension::getDefaultVersion()
 unsigned int
 VersExtension::getDefaultPackageVersion()
 {
-  return 1;
+  return 2;
 }
 
 

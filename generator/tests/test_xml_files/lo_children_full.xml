@@ -8,7 +8,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="ContainerX" typeCode="SBML_X_CONTAINERX" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="ContainerY" typeCode="SBML_X_CONTAINERX" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
             <attribute name="fred" required="false" type="lo_element" element="Fred" abstract="false"/>
             <attribute name="george" required="false" type="lo_element" element="Fred" abstract="false"/>

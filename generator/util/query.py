@@ -305,7 +305,7 @@ def overwrites_name(root, name):
     return overwrites
 
 
-def get_static_extension_attribs(num_versions, core_level, core_version):
+def get_static_extension_attribs(num_versions, lv_info):
     attribs = []
     att = dict({'name': 'packageName',
                 'capAttName': 'PackageName',
@@ -317,28 +317,29 @@ def get_static_extension_attribs(num_versions, core_level, core_version):
                 'capAttName': 'DefaultLevel',
                 'attTypeCode': 'unsigned int',
                 'attType': 'unsigned integer',
-                'memberName': core_level})
+                'memberName': lv_info[-1]['core_level']})
     attribs.append(att)
     att = dict({'name': 'defaultVersion',
                 'capAttName': 'DefaultVersion',
                 'attTypeCode': 'unsigned int',
                 'attType': 'unsigned integer',
-                'memberName': core_version})
+                'memberName': lv_info[-1]['core_version']})
     attribs.append(att)
     att = dict({'name': 'defaultPackageVersion',
                 'capAttName': 'DefaultPackageVersion',
                 'attTypeCode': 'unsigned int',
                 'attType': 'unsigned integer',
-                'memberName': 1})
+                'memberName': lv_info[-1]['pkg_version']})
     attribs.append(att)
     for i in range(0, num_versions):
-        name = 'xmlnsL{1}V{2}V{0}'.format(i+1, core_level, core_version)
+        this_lv = lv_info[i]
+        name = 'xmlnsL{1}V{2}V{0}'.format(this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version'])
         cap_name = strFunctions.upper_first(name)
         att = dict({'name': name,
                     'capAttName': cap_name,
                     'attTypeCode': 'std::string&',
                     'attType': 'string',
-                    'memberName': 'fix this'})
+                    'memberName': [this_lv['pkg_version'], this_lv['core_level'], this_lv['core_version']]})
         attribs.append(att)
 
     return attribs
