@@ -78,9 +78,6 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         if 'num_versions' in package:
             self.num_versions = package['num_versions']
 
-#        self.core_level = package['base_level']
-        self.core_version = package['base_version']
-
         self.lv_info = package['lv_info']
 
         # create a class object so we can just reuse code
@@ -201,8 +198,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                                                               self.elements,
                                                               self.offset,
                                                               self.num_versions,
-                                                              self.lv_info[0]['core_level'],
-                                                              self.lv_info[0]['core_version'])
+                                                              self.lv_info)
 
         code = ext_functions.write_get_name()
         self.write_function_declaration(code)
@@ -247,8 +243,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                                                           self.package,
                                                           self.std_base,
                                                           [], [],
-                                                          self.lv_info[0]['core_level'],
-                                                          self.lv_info[0]['core_version'])
+                                                          self.lv_info)
         code = init_functions.write_init_function()
         self.write_function_declaration(code, True)
 
@@ -297,7 +292,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                                                           self.package,
                                                           self.std_base,
                                                           self.enums,
-                                                          [])
+                                                          [], self.lv_info)
 #        code = init_functions.write_init_function()
 #        self.write_function_declaration(code, True)
         self.is_cpp_api = False

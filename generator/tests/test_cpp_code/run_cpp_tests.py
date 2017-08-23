@@ -702,6 +702,11 @@ def main():
         test_case = 'core version extension file'
         fail += run_ext_test(name, class_name, test_case, 0)
 
+        name = 'test_core_vers_pkg'
+        class_name = 'CoreversPkgExtension'
+        test_case = 'core version and package version not 1 extension file'
+        fail += run_ext_test(name, class_name, test_case, 0)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -727,11 +732,6 @@ def main():
         name = 'test_core_vers_pkg'
         class_name = 'CoreversPkgExtension'
         test_case = 'core version and package version not 1 extension file'
-#        fail += run_ext_test(name, class_name, test_case, 0)
-
-        name = 'test_vers'
-        class_name = 'VersExtension'
-        test_case = 'multi version extension file'
         fail += run_ext_test(name, class_name, test_case, 0)
 
 

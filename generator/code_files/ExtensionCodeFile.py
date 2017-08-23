@@ -188,8 +188,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                               self.elements,
                                                               self.offset,
                                                               self.num_versions,
-                                                              self.lv_info[0]['core_level'],
-                                                              self.lv_info[0]['core_version'])
+                                                              self.lv_info)
 
         code = ext_functions.write_get_name()
         self.write_function_implementation(code)
@@ -235,8 +234,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                           self.std_base,
                                                           self.enums,
                                                           self.plugins,
-                                                          self.lv_info[0]['core_level'],
-                                                          self.lv_info[0]['core_version'])
+                                                          self.lv_info)
         code = init_functions.write_init_function(False)
         self.write_function_implementation(code, True)
 
@@ -301,7 +299,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
                                                           self.package,
                                                           self.std_base,
                                                           self.enums,
-                                                          [])
+                                                          [], self.lv_info)
         self.is_cpp_api = False
         for i in range(0, len(self.enums)):
             name = query.get_typecode_format(self.enums[i]['name'],
