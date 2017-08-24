@@ -128,22 +128,17 @@ class ExtensionFunctions():
         return_type = 'const std::string&'
 
         # create the function implementation
-        if self.num_versions == 1:
+        code = []
+        for i in  range(0, self.num_versions):
+            level_val = self.lv_info[i]['core_level']
+            version = self.lv_info[i]['core_version']
+            pkg_version = self.lv_info[i]['pkg_version']
             bottom_if = self.create_code_block('if',
-                                               ['pkgVersion == {0}'.format(self.lv_info[0]['pkg_version']),
-                                                'return getXmlnsL{0}V{1}V{2}()'.format(self.lv_info[0]['core_level'],
-                                                                                       self.lv_info[0]['core_version'],
-                                                                                       self.lv_info[0]['pkg_version'])])
-        else:
-            bottom_if = self.create_code_block('if_else',
-                                               ['pkgVersion == 1',
-                                                'return getXmlnsL3V1V1()',
-                                                'else',
-                                                'return getXmlnsL3V1V2()'])
-        middle_if = self.create_code_block('if', ['{0} == {1}'.format(vers, self.lv_info[0]['core_version']),
-                                                  bottom_if])
-        code = [self.create_code_block('if', ['{0} == {1}'.format(level, self.lv_info[0]['core_level']),
-                                              middle_if])]
+                                               ['pkgVersion == {0}'.format(pkg_version),
+                                                'return getXmlnsL{0}V{1}V{2}()'.format(level_val, version, pkg_version)])
+            middle_if = self.create_code_block('if', ['{0} == {1}'.format(vers, version), bottom_if])
+
+            code.append(self.create_code_block('if', ['{0} == {1}'.format(level, level_val), middle_if]))
         implementation = ['static std::string empty = \"\"', 'return empty']
         code.append(self.create_code_block('line', implementation))
         # return the parts
@@ -193,30 +188,21 @@ class ExtensionFunctions():
         return_type = 'unsigned int'
 
         # create the function implementation
-        write_else = False
-        value = 0
-        if other == 'Level':
-            value = self.lv_info[0]['core_level']
-        elif other == 'Version':
-            value = self.lv_info[0]['core_version']
-        elif self.num_versions == 1:
-            value = self.lv_info[0]['pkg_version']
-        else:
-            write_else = True
+        code = []
+        for i in range(0,self.num_versions):
+            if other == 'Level':
+                value = self.lv_info[i]['core_level']
+            elif other == 'Version':
+                value = self.lv_info[i]['core_version']
+            else:
+                value = self.lv_info[i]['pkg_version']
 
-        if write_else:
-            implementation = ['uri == getXmlnsL3V1V1()', 'return 1', 'else if',
-                              'uri == getXmlnsL3V1V2()', 'return 2']
-            code = [dict({'code_type': 'else_if', 'code': implementation}),
-                    self.create_code_block('line', ['return 0'])]
-
-        else:
-            implementation = ['uri == getXmlnsL{0}V{1}V{2}()'.format(self.lv_info[0]['core_level'],
-                                                                     self.lv_info[0]['core_version'],
-                                                                     self.lv_info[0]['pkg_version']),
+            implementation = ['uri == getXmlnsL{0}V{1}V{2}()'.format(self.lv_info[i]['core_level'],
+                                                                     self.lv_info[i]['core_version'],
+                                                                     self.lv_info[i]['pkg_version']),
                               'return {0}'.format(value)]
-            code = [dict({'code_type': 'if', 'code': implementation}),
-                    self.create_code_block('line', ['return 0'])]
+            code.append(self.create_code_block('if', implementation))
+        code.append(self.create_code_block('line', ['return 0']))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -254,28 +240,16 @@ class ExtensionFunctions():
         code = [dict({'code_type': 'line',
                       'code': ['{0}PkgNamespaces* pkgns = '
                                'NULL'.format(self.up_package)]})]
-        if self.num_versions == 1:
+
+        for i in  range(0, self.num_versions):
+            level_val = self.lv_info[i]['core_level']
+            version = self.lv_info[i]['core_version']
+            pkg_version = self.lv_info[i]['pkg_version']
             code .append(self.create_code_block('if',
-                                                ['uri == getXmlnsL{0}V{1}V{2}()'.format(self.lv_info[0]['core_level'],
-                                                                                        self.lv_info[0]['core_version'],
-                                                                                        self.lv_info[0]['pkg_version']),
+                                                ['uri == getXmlnsL{0}V{1}V{2}()'.format(level_val, version, pkg_version),
                                                  'pkgns = new {0}PkgNamespaces'
                                                  '({1}, {2}, {3})'
-                                                 ''.format(self.up_package, self.lv_info[0]['core_level'],
-                                                           self.lv_info[0]['core_version'],
-                                                           self.lv_info[0]['pkg_version'])]))
-        else:
-            code .append(self.create_code_block('else_if',
-                                                ['uri == getXmlnsL3V1V1()',
-                                                 'pkgns = new {0}PkgNamespaces'
-                                                 '(3, 1, 1)'
-                                                 ''.format(self.up_package),
-                                                 'else if',
-                                                 'uri == getXmlnsL3V1V2()',
-                                                 'pkgns = new {0}'
-                                                 'PkgNamespaces(3, 1, 2)'
-                                                 ''.format(self.up_package)]))
-
+                                                 ''.format(self.up_package, level_val, version, pkg_version)]))
         code.append(self.create_code_block('line', ['return pkgns']))
 
         # return the parts

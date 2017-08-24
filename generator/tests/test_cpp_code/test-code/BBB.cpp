@@ -981,13 +981,16 @@ BBB::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
-  unsigned int pkgVersion = getPackageVersion();
+  unsigned int level = getLevel();
+  unsigned int coreVersion = getVersion();
+  unsigned int pkgVersion = getPackageVersion;
 
-  if (pkgVersion == 1)
+  if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     attributes.add("id");
   }
-  else
+
+  if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     attributes.add("id");
   }
@@ -1034,13 +1037,14 @@ BBB::readAttributes(const XMLAttributes& attributes,
     }
   }
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readV1Attributes(attributes);
+    readL3V1V1Attributes;
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readV2Attributes(attributes);
+    readL3V1V2Attributes;
   }
 }
 
@@ -1054,7 +1058,7 @@ BBB::readAttributes(const XMLAttributes& attributes,
  * Reads the expected attributes into the member data variables
  */
 void
-BBB::readV1Attributes(const XMLAttributes& attributes)
+BBB::readL3V1V1Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1101,7 +1105,7 @@ BBB::readV1Attributes(const XMLAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-BBB::readV2Attributes(const XMLAttributes& attributes)
+BBB::readL3V1V2Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1152,15 +1156,18 @@ BBB::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    writeV1Attributes(stream);
+    writeL3V1V1Attributes(stream);
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    writeV2Attributes(stream);
+    writeL3V1V2Attributes(stream);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -1176,7 +1183,7 @@ BBB::writeAttributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-BBB::writeV1Attributes(XMLOutputStream& stream) const
+BBB::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
   if (isSetId() == true)
   {
@@ -1194,7 +1201,7 @@ BBB::writeV1Attributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-BBB::writeV2Attributes(XMLOutputStream& stream) const
+BBB::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
   if (isSetId() == true)
   {

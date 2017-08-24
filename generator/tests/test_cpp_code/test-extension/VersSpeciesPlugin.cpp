@@ -1631,14 +1631,17 @@ VersSpeciesPlugin::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBasePlugin::addExpectedAttributes(attributes);
 
-  unsigned int pkgVersion = getPackageVersion();
+  unsigned int level = getLevel();
+  unsigned int coreVersion = getVersion();
+  unsigned int pkgVersion = getPackageVersion;
 
-  if (pkgVersion == 1)
+  if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     attributes.add("species_att_v1");
     attributes.add("string_plugin_att");
   }
-  else
+
+  if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     attributes.add("species_att_v2");
   }
@@ -1692,13 +1695,14 @@ VersSpeciesPlugin::readAttributes(const XMLAttributes& attributes,
     }
   }
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readV1Attributes(attributes);
+    readL3V1V1Attributes;
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readV2Attributes(attributes);
+    readL3V1V2Attributes;
   }
 }
 
@@ -1712,7 +1716,49 @@ VersSpeciesPlugin::readAttributes(const XMLAttributes& attributes,
  * Reads the expected attributes into the member data variables
  */
 void
-VersSpeciesPlugin::readV1Attributes(const XMLAttributes& attributes)
+VersSpeciesPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
+
+  // 
+  // species_att_v2 SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("species_att_v2", mSpecies_att_v2);
+
+  if (assigned == true)
+  {
+    if (mSpecies_att_v2.empty() == true)
+    {
+      logEmptyString(mSpecies_att_v2, level, version, pkgVersion,
+        "<VersSpeciesPlugin>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
+    {
+      log->logPackageError("vers",
+        VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
+          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
+            "to the syntax.", getLine(), getColumn());
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Reads the expected attributes into the member data variables
+ */
+void
+VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1766,48 +1812,6 @@ VersSpeciesPlugin::readV1Attributes(const XMLAttributes& attributes)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Reads the expected attributes into the member data variables
- */
-void
-VersSpeciesPlugin::readV2Attributes(const XMLAttributes& attributes)
-{
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  bool assigned = false;
-  unsigned int pkgVersion = getPackageVersion();
-  SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
-
-  // 
-  // species_att_v2 SIdRef (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("species_att_v2", mSpecies_att_v2);
-
-  if (assigned == true)
-  {
-    if (mSpecies_att_v2.empty() == true)
-    {
-      logEmptyString(mSpecies_att_v2, level, version, pkgVersion,
-        "<VersSpeciesPlugin>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
-    {
-      log->logPackageError("vers",
-        VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
-          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
-            "to the syntax.", getLine(), getColumn());
-    }
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Writes the attributes to the stream
  */
 void
@@ -1815,15 +1819,18 @@ VersSpeciesPlugin::writeAttributes(XMLOutputStream& stream) const
 {
   SBasePlugin::writeAttributes(stream);
 
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    writeV1Attributes(stream);
+    writeL3V1V1Attributes(stream);
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    writeV2Attributes(stream);
+    writeL3V1V2Attributes(stream);
   }
 }
 
@@ -1837,7 +1844,25 @@ VersSpeciesPlugin::writeAttributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-VersSpeciesPlugin::writeV1Attributes(XMLOutputStream& stream) const
+VersSpeciesPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
+{
+  if (isSetSpecies_att_v2() == true)
+  {
+    stream.writeAttribute("species_att_v2", getPrefix(), mSpecies_att_v2);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Writes the attributes to the stream
+ */
+void
+VersSpeciesPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
   if (isSetSpecies_att_v1() == true)
   {
@@ -1848,24 +1873,6 @@ VersSpeciesPlugin::writeV1Attributes(XMLOutputStream& stream) const
   {
     stream.writeAttribute("string_plugin_att", getPrefix(),
       mString_plugin_att);
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the attributes to the stream
- */
-void
-VersSpeciesPlugin::writeV2Attributes(XMLOutputStream& stream) const
-{
-  if (isSetSpecies_att_v2() == true)
-  {
-    stream.writeAttribute("species_att_v2", getPrefix(), mSpecies_att_v2);
   }
 }
 

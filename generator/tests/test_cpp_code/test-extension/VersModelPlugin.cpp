@@ -183,9 +183,11 @@ VersModelPlugin::isSetVersion2() const
 int
 VersModelPlugin::setVersion(unsigned int version)
 {
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
     mVersion = version;
     mIsSetVersion = true;
@@ -206,19 +208,21 @@ VersModelPlugin::setVersion(unsigned int version)
 int
 VersModelPlugin::setVersion2(unsigned int version2)
 {
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
-  {
-    mVersion2 = version2;
-    mIsSetVersion2 = false;
-    return LIBSBML_UNEXPECTED_ATTRIBUTE;
-  }
-  else
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
     mVersion2 = version2;
     mIsSetVersion2 = true;
     return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    mVersion2 = version2;
+    mIsSetVersion2 = false;
+    return LIBSBML_UNEXPECTED_ATTRIBUTE;
   }
 }
 
@@ -1088,13 +1092,16 @@ VersModelPlugin::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBasePlugin::addExpectedAttributes(attributes);
 
-  unsigned int pkgVersion = getPackageVersion();
+  unsigned int level = getLevel();
+  unsigned int coreVersion = getVersion();
+  unsigned int pkgVersion = getPackageVersion;
 
-  if (pkgVersion == 1)
+  if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     attributes.add("version");
   }
-  else
+
+  if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     attributes.add("version2");
   }
@@ -1148,53 +1155,14 @@ VersModelPlugin::readAttributes(const XMLAttributes& attributes,
     }
   }
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readV1Attributes(attributes);
+    readL3V1V1Attributes;
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readV2Attributes(attributes);
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Reads the expected attributes into the member data variables
- */
-void
-VersModelPlugin::readV1Attributes(const XMLAttributes& attributes)
-{
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  bool assigned = false;
-  unsigned int pkgVersion = getPackageVersion();
-  SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
-
-  // 
-  // version uint (use = "optional" )
-  // 
-
-  numErrs = log->getNumErrors();
-  mIsSetVersion = attributes.readInto("version", mVersion);
-
-  if ( mIsSetVersion == false)
-  {
-    if (log->getNumErrors() == numErrs + 1 &&
-      log->contains(XMLAttributeTypeMismatch))
-    {
-      log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Vers attribute 'version' from the "
-        "<VersModelPlugin> element must be an integer.";
-      log->logPackageError("vers", VersVersModelPluginVersionMustBeUnInteger,
-        pkgVersion, level, version, message);
-    }
+    readL3V1V2Attributes;
   }
 }
 
@@ -1208,7 +1176,7 @@ VersModelPlugin::readV1Attributes(const XMLAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-VersModelPlugin::readV2Attributes(const XMLAttributes& attributes)
+VersModelPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1245,6 +1213,46 @@ VersModelPlugin::readV2Attributes(const XMLAttributes& attributes)
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Reads the expected attributes into the member data variables
+ */
+void
+VersModelPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
+
+  // 
+  // version uint (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetVersion = attributes.readInto("version", mVersion);
+
+  if ( mIsSetVersion == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Vers attribute 'version' from the "
+        "<VersModelPlugin> element must be an integer.";
+      log->logPackageError("vers", VersVersModelPluginVersionMustBeUnInteger,
+        pkgVersion, level, version, message);
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Writes the attributes to the stream
  */
 void
@@ -1252,33 +1260,18 @@ VersModelPlugin::writeAttributes(XMLOutputStream& stream) const
 {
   SBasePlugin::writeAttributes(stream);
 
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    writeV1Attributes(stream);
+    writeL3V1V1Attributes(stream);
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    writeV2Attributes(stream);
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the attributes to the stream
- */
-void
-VersModelPlugin::writeV1Attributes(XMLOutputStream& stream) const
-{
-  if (isSetVersion() == true)
-  {
-    stream.writeAttribute("version", getPrefix(), mVersion);
+    writeL3V1V2Attributes(stream);
   }
 }
 
@@ -1292,11 +1285,29 @@ VersModelPlugin::writeV1Attributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-VersModelPlugin::writeV2Attributes(XMLOutputStream& stream) const
+VersModelPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
   if (isSetVersion2() == true)
   {
     stream.writeAttribute("version2", getPrefix(), mVersion2);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Writes the attributes to the stream
+ */
+void
+VersModelPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
+{
+  if (isSetVersion() == true)
+  {
+    stream.writeAttribute("version", getPrefix(), mVersion);
   }
 }
 

@@ -66,12 +66,16 @@ class SetGetFunctions():
 
         self.attributes = class_object['class_attributes']
         self.child_elements = class_object['child_elements']
+        self.version_attributes = []
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
+            for i in range(0, class_object['num_versions']):
+                self.version_attributes.append(
+                    query.get_version_attributes(class_object['attribs'], i))
         else:
             self.has_multiple_versions = False
+
         self.lv_info = lv_info
-#        self.core_version = core_version
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
@@ -1370,14 +1374,32 @@ class SetGetFunctions():
     def set_cpp_attribute(self, attribute):
         member = attribute['memberName']
         name = attribute['name']
-        if 'version_info' in attribute and False in attribute['version_info']:
-            code = [self.create_code_block('line',
-                                           ['unsigned int pkgVersion = '
-                                            'getPackageVersion()'])]
-            deal_with_versions = True
-        else:
-            code = []
+        code = []
+        if self.has_multiple_versions:
             deal_with_versions = False
+            for i in range(0,len(self.version_attributes)):
+                match = False
+                j = 0
+                while not match and j < len(self.version_attributes[i]):
+                    if name == self.version_attributes[i][j]['name']:
+                        match = True
+                    j = j+1
+                if not match:
+                    deal_with_versions = True
+                    break
+
+            # if 'version_info' in attribute and False in attribute['version_info']:
+            #     code = [self.create_code_block('line',
+            #                                    ['unsigned int pkgVersion = '
+            #                                     'getPackageVersion()'])]
+            #     deal_with_versions = True
+        else:
+            deal_with_versions = False
+
+        if deal_with_versions:
+            implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
+                              'unsigned int pkgVersion = getPackageVersion()']
+            code.append(self.create_code_block('line', implementation))
 
         if attribute['type'] == 'SId':
             if self.language == 'sbml':
@@ -1386,14 +1408,20 @@ class SetGetFunctions():
             else:
                 implementation = ['{0} = {1}'.format(member, name),
                                   'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'line', 'code': implementation})]
+            else:
+                code.append([dict({'code_type': 'line', 'code': ['sort id version']})])
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({0})'
                               ')'.format(name),
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'if_else', 'code': implementation})]
+            else:
+                code = [dict({'code_type': 'line', 'code': ['sort idref version']})]
         elif attribute['type'] == 'UnitSId' \
                 or attribute['type'] == 'UnitSIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalUnitSId({0})'
@@ -1401,11 +1429,17 @@ class SetGetFunctions():
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'if_else', 'code': implementation})]
+            else:
+                code = [dict({'code_type': 'line', 'code': ['sort unit version']})]
         elif attribute['type'] == 'string' or attribute['type'] == 'IDREF' or attribute['type'] == 'ID':
             implementation = ['{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'line', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'line', 'code': implementation})]
+            else:
+                code = [dict({'code_type': 'line', 'code': ['sort string version']})]
         elif attribute['type'] == 'enum':
             implementation = ['{0}_isValid({1}) == '
                               '0'.format(attribute['element'], name),
@@ -1414,90 +1448,110 @@ class SetGetFunctions():
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'if_else', 'code': implementation})]
+            else:
+                code = [dict({'code_type': 'line', 'code': ['sort enum version']})]
         elif query.has_is_set_member(attribute):
             if not deal_with_versions:
                 implementation = self.write_set_att_with_member(attribute, True)
                 code.append(self.create_code_block('line', implementation))
             else:
-                if attribute['num_versions'] == 2:
-                    implementation = ['pkgVersion == 1']
-                    atts = attribute['version_info'][0]
-                    implementation += self.write_set_att_with_member(attribute,
-                                                                     atts)
-                    implementation.append('else')
-                    atts = attribute['version_info'][1]
-                    implementation += self.write_set_att_with_member(attribute,
-                                                                     atts)
-                    code.append(self.create_code_block('if_else',
-                                                       implementation))
+                # assume one out of two for now
+                lv_needed = []
+                for i in range(0, len(self.version_attributes)):
+                    for att in self.version_attributes[i]:
+                        if name == att['name']:
+                            lv_needed.append(i)
+                if len(lv_needed) > 1:
+                    using_and = True
+                else:
+                    using_and = False
+                for lv in lv_needed:
+                    level = self.lv_info[lv]['core_level']
+                    vers = self.lv_info[lv]['core_version']
+                    pkg = self.lv_info[lv]['pkg_version']
+                    line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                if not using_and:
+                    implementation = [line]
+
+                implementation = implementation + \
+                                 self.write_set_att_with_member(attribute, True) + ['else'] + \
+                                 self.write_set_att_with_member(attribute, False)
+                code.append(self.create_code_block('if_else', implementation))
         elif 'isVector' in attribute and attribute['isVector']:
             implementation = ['{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
-            code = [self.create_code_block('line', implementation)]
-        elif attribute['type'] == 'element':
-            if not self.is_plugin:
-                clone = 'clone'
-                nested_if = []
-                implementation = ['{0} == {1}'.format(member, name),
-                                  'return {0}'.format(self.success),
-                                  'else if',
-                                  '{0} == NULL'.format(name),
-                                  'delete {0}'.format(member),
-                                  '{0} = NULL'.format(member),
-                                  'return {0}'.format(self.success)]
-                if attribute['element'] == 'ASTNode':
-                    clone = 'deepCopy'
-                    implementation.append('else if')
-                    implementation.append('!({0}->isWellFormedASTNode()'
-                                          ')'.format(name))
-                    implementation.append('return {0}'.format(self.invalid_obj))
-                    line = ['{0} != NULL'.format(member),
-                            '{0}->setParent{1}Object'
-                            '(this)'.format(member, self.cap_language)]
-                    if global_variables.is_package:
-                        nested_if = self.create_code_block('if', line)
-                elif not attribute['is_ml']:
-                    line = ['{0} != NULL'.format(member)]
-                    if attribute['children_overwrite']:
-                        line.append('{0}->setElementName'
-                                    '(\"{1}\")'.format(member, name))
-                    line.append('{0}->connectToParent(this)'.format(member))
-                    nested_if = self.create_code_block('if', line)
-                implementation.append('else')
-                implementation.append('delete {0}'.format(member))
-                implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
-                                      ': NULL'.format(member, name, clone))
-                if len(nested_if) > 0:
-                    implementation.append(nested_if)
-                implementation.append('return {0}'.format(self.success))
-                code = [self.create_code_block('else_if', implementation)]
+            if not deal_with_versions:
+                code = [self.create_code_block('line', implementation)]
             else:
-                implementation = ['{0} == NULL'.format(name),
-                                  'return {0}'.format(self.failed),
-                                  'else if', '{0}->hasRequiredElements() '
-                                             '== false'.format(name),
-                                  'return {0}'.format(self.invalid_obj),
-                                  'else if',
-                                  'getLevel() != {0}->getLevel()'.format(name),
-                                  'return '
-                                  '{0}'.format(global_variables.ret_level_mis),
-                                  'else if', 'getVersion() != {0}->'
-                                             'getVersion()'.format(name),
-                                  'return '
-                                  '{0}'.format(global_variables.ret_vers_mis),
-                                  'else if', 'getPackageVersion() != {0}->'
-                                             'getPackageVersion()'.format(name),
-                                  'return '
-                                  '{0}'.format(global_variables.ret_pkgv_mis),
-                                  'else', 'delete {0}'.format(member),
-                                  '{0} = static_cast<{1}>({2}->'
-                                  'clone())'.format(member,
-                                                    attribute['attTypeCode'],
-                                                    name),
-                                  'connectToChild()',
-                                  'return {0}'.format(self.success)]
-                code = [self.create_code_block('else_if', implementation)]
+                code = [dict({'code_type': 'line', 'code': ['sort vector version']})]
+        elif attribute['type'] == 'element':
+            if not deal_with_versions:
+                if not self.is_plugin:
+                    clone = 'clone'
+                    nested_if = []
+                    implementation = ['{0} == {1}'.format(member, name),
+                                      'return {0}'.format(self.success),
+                                      'else if',
+                                      '{0} == NULL'.format(name),
+                                      'delete {0}'.format(member),
+                                      '{0} = NULL'.format(member),
+                                      'return {0}'.format(self.success)]
+                    if attribute['element'] == 'ASTNode':
+                        clone = 'deepCopy'
+                        implementation.append('else if')
+                        implementation.append('!({0}->isWellFormedASTNode()'
+                                              ')'.format(name))
+                        implementation.append('return {0}'.format(self.invalid_obj))
+                        line = ['{0} != NULL'.format(member),
+                                '{0}->setParent{1}Object'
+                                '(this)'.format(member, self.cap_language)]
+                        if global_variables.is_package:
+                            nested_if = self.create_code_block('if', line)
+                    elif not attribute['is_ml']:
+                        line = ['{0} != NULL'.format(member)]
+                        if attribute['children_overwrite']:
+                            line.append('{0}->setElementName'
+                                        '(\"{1}\")'.format(member, name))
+                        line.append('{0}->connectToParent(this)'.format(member))
+                        nested_if = self.create_code_block('if', line)
+                    implementation.append('else')
+                    implementation.append('delete {0}'.format(member))
+                    implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
+                                          ': NULL'.format(member, name, clone))
+                    if len(nested_if) > 0:
+                        implementation.append(nested_if)
+                    implementation.append('return {0}'.format(self.success))
+                    code = [self.create_code_block('else_if', implementation)]
+                else:
+                    implementation = ['{0} == NULL'.format(name),
+                                      'return {0}'.format(self.failed),
+                                      'else if', '{0}->hasRequiredElements() '
+                                                 '== false'.format(name),
+                                      'return {0}'.format(self.invalid_obj),
+                                      'else if',
+                                      'getLevel() != {0}->getLevel()'.format(name),
+                                      'return '
+                                      '{0}'.format(global_variables.ret_level_mis),
+                                      'else if', 'getVersion() != {0}->'
+                                                 'getVersion()'.format(name),
+                                      'return '
+                                      '{0}'.format(global_variables.ret_vers_mis),
+                                      'else if', 'getPackageVersion() != {0}->'
+                                                 'getPackageVersion()'.format(name),
+                                      'return '
+                                      '{0}'.format(global_variables.ret_pkgv_mis),
+                                      'else', 'delete {0}'.format(member),
+                                      '{0} = static_cast<{1}>({2}->'
+                                      'clone())'.format(member,
+                                                        attribute['attTypeCode'],
+                                                        name),
+                                      'connectToChild()',
+                                      'return {0}'.format(self.success)]
+                    code = [self.create_code_block('else_if', implementation)]
+            else:
+                code = [dict({'code_type': 'line', 'code': ['sort element version']})]
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code

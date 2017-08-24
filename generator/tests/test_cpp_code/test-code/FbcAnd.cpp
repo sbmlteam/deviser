@@ -932,12 +932,15 @@ FbcAnd::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   Association::addExpectedAttributes(attributes);
 
-  unsigned int pkgVersion = getPackageVersion();
+  unsigned int level = getLevel();
+  unsigned int coreVersion = getVersion();
+  unsigned int pkgVersion = getPackageVersion;
 
-  if (pkgVersion == 1)
+  if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
   }
-  else
+
+  if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
   }
 }
@@ -983,13 +986,14 @@ FbcAnd::readAttributes(const XMLAttributes& attributes,
     }
   }
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readV1Attributes(attributes);
+    readL3V1V1Attributes;
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readV2Attributes(attributes);
+    readL3V1V2Attributes;
   }
 }
 
@@ -1003,7 +1007,7 @@ FbcAnd::readAttributes(const XMLAttributes& attributes,
  * Reads the expected attributes into the member data variables
  */
 void
-FbcAnd::readV1Attributes(const XMLAttributes& attributes)
+FbcAnd::readL3V1V1Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1023,7 +1027,7 @@ FbcAnd::readV1Attributes(const XMLAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-FbcAnd::readV2Attributes(const XMLAttributes& attributes)
+FbcAnd::readL3V1V2Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -1047,15 +1051,18 @@ FbcAnd::writeAttributes(XMLOutputStream& stream) const
 {
   Association::writeAttributes(stream);
 
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    writeV1Attributes(stream);
+    writeL3V1V1Attributes(stream);
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    writeV2Attributes(stream);
+    writeL3V1V2Attributes(stream);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -1071,7 +1078,7 @@ FbcAnd::writeAttributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-FbcAnd::writeV1Attributes(XMLOutputStream& stream) const
+FbcAnd::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
 }
 
@@ -1085,7 +1092,7 @@ FbcAnd::writeV1Attributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-FbcAnd::writeV2Attributes(XMLOutputStream& stream) const
+FbcAnd::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
 }
 

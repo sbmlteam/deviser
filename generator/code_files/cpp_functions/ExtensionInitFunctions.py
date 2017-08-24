@@ -53,6 +53,7 @@ class ExtensionInitFunctions():
         self.plugins = plugins
 
         self.lv_info = lv_info
+        self.num_versions = len(lv_info)
 
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
@@ -95,12 +96,13 @@ class ExtensionInitFunctions():
                                                 ''.format(self.up_package,
                                                           self.package)]),
                 self.create_code_block('blank', []),
-                self.create_code_block('line', ['std::vector<std::string> '
-                                                'packageURIs',
-                                                'packageURIs.push_back'
-                                                '(getXmlnsL{0}V{1}V{2}())'.format(self.lv_info[0]['core_level'],
-                                                                                  self.lv_info[0]['core_version'],
-                                                                                  self.lv_info[0]['pkg_version'])])]
+                self.create_code_block('line', ['std::vector<std::string> packageURIs'])]
+        for i in range(0, self.num_versions):
+            level_val = self.lv_info[i]['core_level']
+            version = self.lv_info[i]['core_version']
+            pkg_version = self.lv_info[i]['pkg_version']
+            code .append(self.create_code_block('line', ['packageURIs.push_back(getXmlnsL{0}V{1}V{2}())'
+                                                         ''.format(level_val, version, pkg_version)]))
         implementation = ['{0}ExtensionPoint {1}docExtPoint(\"core\", '
                           '{2}_DOCUMENT)'.format(self.std_base,
                                                  self.language,

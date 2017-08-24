@@ -375,6 +375,7 @@ CoreversExtension::init()
 
 
   std::vector<std::string> packageURIs;
+
   packageURIs.push_back(getXmlnsL3V2V1());
 
   SBaseExtensionPoint sbmldocExtPoint("core", SBML_DOCUMENT);

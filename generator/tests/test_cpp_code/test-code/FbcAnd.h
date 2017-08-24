@@ -807,7 +807,7 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readV1Attributes(const XMLAttributes& attributes);
+  virtual void readL3V1V1Attributes(const XMLAttributes& attributes);
 
   /** @endcond */
 
@@ -818,7 +818,7 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  virtual void readV2Attributes(const XMLAttributes& attributes);
+  virtual void readL3V1V2Attributes(const XMLAttributes& attributes);
 
   /** @endcond */
 
@@ -840,7 +840,7 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeV1Attributes(XMLOutputStream& stream) const;
+  virtual void writeL3V1V1Attributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -851,7 +851,7 @@ protected:
   /**
    * Writes the attributes to the stream
    */
-  virtual void writeV2Attributes(XMLOutputStream& stream) const;
+  virtual void writeL3V1V2Attributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 

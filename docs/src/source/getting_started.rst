@@ -351,7 +351,7 @@ The resulting code will not compile and will need to be manually adjusted.
 
 .. raw:: latex
 
-\clearpage
+  \clearpage
 
 Misc
 ~~~~~

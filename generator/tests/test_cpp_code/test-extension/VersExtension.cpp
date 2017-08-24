@@ -226,7 +226,14 @@ VersExtension::getURI(unsigned int sbmlLevel,
       {
         return getXmlnsL3V1V1();
       }
-      else
+    }
+  }
+
+  if (sbmlLevel == 3)
+  {
+    if (sbmlVersion == 1)
+    {
+      if (pkgVersion == 2)
       {
         return getXmlnsL3V1V2();
       }
@@ -249,6 +256,11 @@ VersExtension::getLevel(const std::string& uri) const
     return 3;
   }
 
+  if (uri == getXmlnsL3V1V2())
+  {
+    return 3;
+  }
+
   return 0;
 }
 
@@ -260,6 +272,11 @@ unsigned int
 VersExtension::getVersion(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
+  {
+    return 1;
+  }
+
+  if (uri == getXmlnsL3V1V2())
   {
     return 1;
   }
@@ -279,7 +296,8 @@ VersExtension::getPackageVersion(const std::string& uri) const
   {
     return 1;
   }
-  else if (uri == getXmlnsL3V1V2())
+
+  if (uri == getXmlnsL3V1V2())
   {
     return 2;
   }
@@ -300,7 +318,8 @@ VersExtension::getSBMLExtensionNamespaces(const std::string& uri) const
   {
     pkgns = new VersPkgNamespaces(3, 1, 1);
   }
-  else if (uri == getXmlnsL3V1V2())
+
+  if (uri == getXmlnsL3V1V2())
   {
     pkgns = new VersPkgNamespaces(3, 1, 2);
   }
@@ -420,7 +439,10 @@ VersExtension::init()
 
 
   std::vector<std::string> packageURIs;
+
   packageURIs.push_back(getXmlnsL3V1V1());
+
+  packageURIs.push_back(getXmlnsL3V1V2());
 
   SBaseExtensionPoint sbmldocExtPoint("core", SBML_DOCUMENT);
   SBaseExtensionPoint modelExtPoint("core", SBML_MODEL);

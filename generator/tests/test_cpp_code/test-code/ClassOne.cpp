@@ -208,9 +208,11 @@ ClassOne::setId(const std::string& id)
 int
 ClassOne::setAtt1(bool att1)
 {
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
     mAtt1 = att1;
     mIsSetAtt1 = true;
@@ -231,19 +233,21 @@ ClassOne::setAtt1(bool att1)
 int
 ClassOne::setAtt2(bool att2)
 {
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
-  {
-    mAtt2 = att2;
-    mIsSetAtt2 = false;
-    return LIBSBML_UNEXPECTED_ATTRIBUTE;
-  }
-  else
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
     mAtt2 = att2;
     mIsSetAtt2 = true;
     return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    mAtt2 = att2;
+    mIsSetAtt2 = false;
+    return LIBSBML_UNEXPECTED_ATTRIBUTE;
   }
 }
 
@@ -747,14 +751,17 @@ ClassOne::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SBase::addExpectedAttributes(attributes);
 
-  unsigned int pkgVersion = getPackageVersion();
+  unsigned int level = getLevel();
+  unsigned int coreVersion = getVersion();
+  unsigned int pkgVersion = getPackageVersion;
 
-  if (pkgVersion == 1)
+  if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     attributes.add("id");
     attributes.add("att1");
   }
-  else
+
+  if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     attributes.add("id");
     attributes.add("att2");
@@ -802,78 +809,14 @@ ClassOne::readAttributes(const XMLAttributes& attributes,
     }
   }
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readV1Attributes(attributes);
-  }
-  else
-  {
-    readV2Attributes(attributes);
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Reads the expected attributes into the member data variables
- */
-void
-ClassOne::readV1Attributes(const XMLAttributes& attributes)
-{
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  bool assigned = false;
-  unsigned int pkgVersion = getPackageVersion();
-  SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
-
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<ClassOne>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
-        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
-          "does not conform to the syntax.", getLine(), getColumn());
-    }
-  }
-  else
-  {
-    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
-      "element.";
-    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-      level, version, message);
+    readL3V1V1Attributes;
   }
 
-  // 
-  // att1 bool (use = "optional" )
-  // 
-
-  numErrs = log->getNumErrors();
-  mIsSetAtt1 = attributes.readInto("att1", mAtt1);
-
-  if (mIsSetAtt1 == false)
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
-      log->contains(XMLAttributeTypeMismatch))
-    {
-      log->remove(XMLAttributeTypeMismatch);
-      log->logPackageError("vers", VersClassOneAtt1MustBeBoolean, pkgVersion,
-        level, version);
-    }
+    readL3V1V2Attributes;
   }
 }
 
@@ -887,7 +830,7 @@ ClassOne::readV1Attributes(const XMLAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-ClassOne::readV2Attributes(const XMLAttributes& attributes)
+ClassOne::readL3V1V1Attributes(const XMLAttributes& attributes)
 {
   unsigned int level = getLevel();
   unsigned int version = getVersion();
@@ -949,6 +892,71 @@ ClassOne::readV2Attributes(const XMLAttributes& attributes)
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Reads the expected attributes into the member data variables
+ */
+void
+ClassOne::readL3V1V2Attributes(const XMLAttributes& attributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
+
+  // 
+  // id SId (use = "required" )
+  // 
+
+  assigned = attributes.readInto("id", mId);
+
+  if (assigned == true)
+  {
+    if (mId.empty() == true)
+    {
+      logEmptyString(mId, level, version, "<ClassOne>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+    {
+      log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
+        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
+          "does not conform to the syntax.", getLine(), getColumn());
+    }
+  }
+  else
+  {
+    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
+      "element.";
+    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
+      level, version, message);
+  }
+
+  // 
+  // att1 bool (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetAtt1 = attributes.readInto("att1", mAtt1);
+
+  if (mIsSetAtt1 == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logPackageError("vers", VersClassOneAtt1MustBeBoolean, pkgVersion,
+        level, version);
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Writes the attributes to the stream
  */
 void
@@ -956,15 +964,18 @@ ClassOne::writeAttributes(XMLOutputStream& stream) const
 {
   SBase::writeAttributes(stream);
 
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (pkgVersion == 1)
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    writeV1Attributes(stream);
+    writeL3V1V1Attributes(stream);
   }
-  else
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    writeV2Attributes(stream);
+    writeL3V1V2Attributes(stream);
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -980,16 +991,16 @@ ClassOne::writeAttributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-ClassOne::writeV1Attributes(XMLOutputStream& stream) const
+ClassOne::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
   if (isSetId() == true)
   {
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  if (isSetAtt1() == true)
+  if (isSetAtt2() == true)
   {
-    stream.writeAttribute("att1", getPrefix(), mAtt1);
+    stream.writeAttribute("att2", getPrefix(), mAtt2);
   }
 }
 
@@ -1003,16 +1014,16 @@ ClassOne::writeV1Attributes(XMLOutputStream& stream) const
  * Writes the attributes to the stream
  */
 void
-ClassOne::writeV2Attributes(XMLOutputStream& stream) const
+ClassOne::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
   if (isSetId() == true)
   {
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  if (isSetAtt2() == true)
+  if (isSetAtt1() == true)
   {
-    stream.writeAttribute("att2", getPrefix(), mAtt2);
+    stream.writeAttribute("att1", getPrefix(), mAtt1);
   }
 }
 

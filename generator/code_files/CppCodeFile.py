@@ -55,6 +55,10 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         # members from object
         if represents_class:
             self.expand_class(class_object)
+
+        self.lv_info = []
+        if 'root' in class_object and 'lv_info' in class_object['root']:
+            self.lv_info = class_object['root']['lv_info']
     ########################################################################
 
     # Functions for writing the class
@@ -283,7 +287,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         attrib_functions = SetGetFunctions.SetGetFunctions(self.language,
                                                            self.is_cpp_api,
                                                            self.is_list_of,
-                                                           self.class_object)
+                                                           self.class_object,
+                                                           self.lv_info)
         num_attributes = len(self.class_attributes)
         for i in range(0, num_attributes):
             code = attrib_functions.write_get(True, i)
@@ -627,7 +632,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
             ProtectedFunctions.ProtectedFunctions(self.language,
                                                   self.is_cpp_api,
                                                   self.is_list_of,
-                                                  self.class_object)
+                                                  self.class_object,
+                                                  self.lv_info)
         exclude = True
         code = protect_functions.write_create_object()
         self.write_function_implementation(code, exclude)
@@ -640,7 +646,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if 'num_versions' in self.class_object \
                 and self.class_object['num_versions'] > 1:
             for i in range(0, self.class_object['num_versions']):
-                code = protect_functions.write_read_version_attributes(i+1)
+                code = protect_functions.write_read_version_attributes(i)
                 self.write_function_implementation(code, exclude)
 
         code = protect_functions.write_read_other_xml()
@@ -651,7 +657,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if 'num_versions' in self.class_object \
                 and self.class_object['num_versions'] > 1:
             for i in range(0, self.class_object['num_versions']):
-                code = protect_functions.write_write_version_attributes(i+1)
+                code = protect_functions.write_write_version_attributes(i)
                 self.write_function_implementation(code, exclude)
 
         code = protect_functions.write_write_xmlns()

@@ -43,7 +43,7 @@ from util import strFunctions, query, global_variables
 class ProtectedFunctions():
     """Class for all protected functions"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[]):
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -93,9 +93,7 @@ class ProtectedFunctions():
         self.version_attributes = []
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
-            self.version_attributes.append(
-                query.get_version_attributes(self.all_attributes, 0))
-            for i in range(1, class_object['num_versions']):
+            for i in range(0, class_object['num_versions']):
                 self.version_attributes.append(
                     query.get_version_attributes(self.all_attributes, i))
         self.is_header = class_object['is_header']
@@ -103,6 +101,8 @@ class ProtectedFunctions():
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
+
+        self.lv_info = lv_info
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
@@ -542,19 +542,21 @@ class ProtectedFunctions():
                 code.append(dict({'code_type': 'line', 'code': implementation}))
         else:
             code.append(self.create_code_block('line',
-                                               ['unsigned int pkgVersion = '
-                                                'getPackageVersion()']))
-            implementation = ['pkgVersion == 1']
-            for i in range(0, len(self.version_attributes)):
+                                               ['unsigned int level = getLevel()',
+                                                'unsigned int coreVersion = getVersion()',
+                                                'unsigned int pkgVersion = getPackageVersion']))
+            for i in range(0, len(self.lv_info)):
+                level_val = self.lv_info[i]['core_level']
+                version = self.lv_info[i]['core_version']
+                pkg_version = self.lv_info[i]['pkg_version']
+
+                implementation = ['level == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version)]
                 for j in range(0, len(self.version_attributes[i])):
                     if self.version_attributes[i][j]['isArray']:
                         continue
                     name = self.version_attributes[i][j]['name']
-                    implementation.append('attributes.add(\"{0}\")'
-                                          ''.format(name))
-                if i < len(self.version_attributes) - 1:
-                    implementation.append('else')
-            code.append(self.create_code_block('if_else', implementation))
+                    implementation.append('attributes.add(\"{0}\")'.format(name))
+                code.append(self.create_code_block('if', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -618,9 +620,14 @@ class ProtectedFunctions():
             for i in range(0, len(self.attributes)):
                 self.write_read_att(self.attributes, i, code)
         else:
-            implementation = ['pkgVersion == 1', 'readV1Attributes(attributes)',
-                              'else', 'readV2Attributes(attributes)']
-            code.append(self.create_code_block('if_else', implementation))
+            for i in range(0, len(self.lv_info)):
+                level_val = self.lv_info[i]['core_level']
+                version = self.lv_info[i]['core_version']
+                pkg_version = self.lv_info[i]['pkg_version']
+
+                implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
+                                  'readL{0}V{1}V{2}Attributes'.format(level_val, version, pkg_version)]
+                code.append(self.create_code_block('if', implementation))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -650,7 +657,10 @@ class ProtectedFunctions():
         additional = []
 
         # create function declaration
-        function = 'readV{0}Attributes'.format(version)
+        level_val = self.lv_info[version]['core_level']
+        version_val = self.lv_info[version]['core_version']
+        pkg_version = self.lv_info[version]['pkg_version']
+        function = 'readL{0}V{1}V{2}Attributes'.format(level_val, version_val, pkg_version)
         return_type = 'void'
         if global_variables.is_package:
             arguments = ['const XMLAttributes& attributes']
@@ -832,12 +842,20 @@ class ProtectedFunctions():
             for i in range(0, len(self.attributes)):
                 self.write_write_att(self.attributes, i, code)
         else:
-            code.append(self.create_code_block('line',
-                                               ['unsigned int pkgVersion = '
-                                                'getPackageVersion()']))
-            implementation = ['pkgVersion == 1', 'writeV1Attributes(stream)',
-                              'else', 'writeV2Attributes(stream)']
-            code.append(self.create_code_block('if_else', implementation))
+            implementation = ['unsigned int level = getLevel()',
+                              'unsigned int version = getVersion()']
+            if global_variables.is_package:
+                implementation += ['unsigned int pkgVersion = getPackageVersion()']
+            code.append(self.create_code_block('line', implementation))
+            for i in range(0, len(self.lv_info)):
+                level_val = self.lv_info[i]['core_level']
+                version = self.lv_info[i]['core_version']
+                pkg_version = self.lv_info[i]['pkg_version']
+
+                implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
+                                  'writeL{0}V{1}V{2}Attributes(stream)'.format(level_val, version, pkg_version)]
+                code.append(self.create_code_block('if', implementation))
+
 
         if global_variables.is_package and not self.is_plugin and \
                 self.base_class:
@@ -873,7 +891,10 @@ class ProtectedFunctions():
         additional = []
 
         # create function declaration
-        function = 'writeV{0}Attributes'.format(version)
+        level_val = self.lv_info[version]['core_level']
+        version_val = self.lv_info[version]['core_version']
+        pkg_version = self.lv_info[version]['pkg_version']
+        function = 'writeL{0}V{1}V{2}Attributes'.format(level_val, version_val, pkg_version)
         return_type = 'void'
         if global_variables.is_package:
             arguments = ['XMLOutputStream& stream']
