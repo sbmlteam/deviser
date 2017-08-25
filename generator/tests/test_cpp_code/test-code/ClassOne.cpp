@@ -867,19 +867,19 @@ ClassOne::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
 
   // 
-  // att2 bool (use = "optional" )
+  // att1 bool (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetAtt2 = attributes.readInto("att2", mAtt2);
+  mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
-  if (mIsSetAtt2 == false)
+  if (mIsSetAtt1 == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      log->logPackageError("vers", VersClassOneAtt2MustBeBoolean, pkgVersion,
+      log->logPackageError("vers", VersClassOneAtt1MustBeBoolean, pkgVersion,
         level, version);
     }
   }
@@ -932,19 +932,19 @@ ClassOne::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
 
   // 
-  // att1 bool (use = "optional" )
+  // att2 bool (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetAtt1 = attributes.readInto("att1", mAtt1);
+  mIsSetAtt2 = attributes.readInto("att2", mAtt2);
 
-  if (mIsSetAtt1 == false)
+  if (mIsSetAtt2 == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      log->logPackageError("vers", VersClassOneAtt1MustBeBoolean, pkgVersion,
+      log->logPackageError("vers", VersClassOneAtt2MustBeBoolean, pkgVersion,
         level, version);
     }
   }
@@ -998,9 +998,9 @@ ClassOne::writeL3V1V1Attributes(XMLOutputStream& stream) const
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  if (isSetAtt2() == true)
+  if (isSetAtt1() == true)
   {
-    stream.writeAttribute("att2", getPrefix(), mAtt2);
+    stream.writeAttribute("att1", getPrefix(), mAtt1);
   }
 }
 
@@ -1021,9 +1021,9 @@ ClassOne::writeL3V1V2Attributes(XMLOutputStream& stream) const
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  if (isSetAtt1() == true)
+  if (isSetAtt2() == true)
   {
-    stream.writeAttribute("att1", getPrefix(), mAtt1);
+    stream.writeAttribute("att2", getPrefix(), mAtt2);
   }
 }
 

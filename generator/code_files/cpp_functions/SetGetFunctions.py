@@ -67,6 +67,7 @@ class SetGetFunctions():
         self.attributes = class_object['class_attributes']
         self.child_elements = class_object['child_elements']
         self.version_attributes = []
+        self.version_elements = []
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
             for i in range(0, class_object['num_versions']):
@@ -374,8 +375,8 @@ class SetGetFunctions():
             ret_name = 'default version number of the {0} Level&nbsp;3 ' \
                        'package definition'.format(self.cap_language)
         elif name.startswith('xmlnsL'):
-            title_name = 'XML namespace URI of the {0} Level&nbsp;{1} ' \
-                         'package'.format(self.cap_language, self.lv_info[-1]['core_level'])
+            title_name = 'XML namespace URI of the {0} Level&nbsp;3 ' \
+                         'package'.format(self.cap_language)
             ret_name = 'XML namespace'
         else:
             title_name = ''
@@ -779,6 +780,9 @@ class SetGetFunctions():
             arguments.append('const char * {0}'.format(attribute['name']))
 
         if self.is_cpp_api:
+            code = []
+            name = attribute['name']
+            [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
             implementation = ['{0}_isValidString({1}.c_str()) == '
                               '0'.format(attribute['element'],
                                          attribute['name']),
@@ -790,7 +794,13 @@ class SetGetFunctions():
                                                      attribute['element'],
                                                      attribute['name']),
                               'return {0}'.format(self.success)]
-            code = [dict({'code_type': 'if_else', 'code': implementation})]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'if_else', 'code': implementation})]
+            else:
+                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
+
         else:
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): '
                               '{3}'.format(self.abbrev_parent,
@@ -1374,32 +1384,13 @@ class SetGetFunctions():
     def set_cpp_attribute(self, attribute):
         member = attribute['memberName']
         name = attribute['name']
-        code = []
-        if self.has_multiple_versions:
+        #TODO deal with plugins
+        if self.is_plugin and attribute['attType'] == 'element':
             deal_with_versions = False
-            for i in range(0,len(self.version_attributes)):
-                match = False
-                j = 0
-                while not match and j < len(self.version_attributes[i]):
-                    if name == self.version_attributes[i][j]['name']:
-                        match = True
-                    j = j+1
-                if not match:
-                    deal_with_versions = True
-                    break
-
-            # if 'version_info' in attribute and False in attribute['version_info']:
-            #     code = [self.create_code_block('line',
-            #                                    ['unsigned int pkgVersion = '
-            #                                     'getPackageVersion()'])]
-            #     deal_with_versions = True
+            code =[]
+            topif = []
         else:
-            deal_with_versions = False
-
-        if deal_with_versions:
-            implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
-                              'unsigned int pkgVersion = getPackageVersion()']
-            code.append(self.create_code_block('line', implementation))
+            [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
 
         if attribute['type'] == 'SId':
             if self.language == 'sbml':
@@ -1411,7 +1402,9 @@ class SetGetFunctions():
             if not deal_with_versions:
                 code = [dict({'code_type': 'line', 'code': implementation})]
             else:
-                code.append([dict({'code_type': 'line', 'code': ['sort id version']})])
+                implementation = topif + implementation + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'SIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalSId({0})'
                               ')'.format(name),
@@ -1421,7 +1414,9 @@ class SetGetFunctions():
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort idref version']})]
+                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'UnitSId' \
                 or attribute['type'] == 'UnitSIdRef':
             implementation = ['!(SyntaxChecker::isValidInternalUnitSId({0})'
@@ -1432,14 +1427,18 @@ class SetGetFunctions():
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort unit version']})]
+                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'string' or attribute['type'] == 'IDREF' or attribute['type'] == 'ID':
             implementation = ['{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'line', 'code': implementation})]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort string version']})]
+                implementation = topif + implementation + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'enum':
             implementation = ['{0}_isValid({1}) == '
                               '0'.format(attribute['element'], name),
@@ -1451,31 +1450,15 @@ class SetGetFunctions():
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort enum version']})]
+                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif query.has_is_set_member(attribute):
             if not deal_with_versions:
                 implementation = self.write_set_att_with_member(attribute, True)
                 code.append(self.create_code_block('line', implementation))
             else:
-                # assume one out of two for now
-                lv_needed = []
-                for i in range(0, len(self.version_attributes)):
-                    for att in self.version_attributes[i]:
-                        if name == att['name']:
-                            lv_needed.append(i)
-                if len(lv_needed) > 1:
-                    using_and = True
-                else:
-                    using_and = False
-                for lv in lv_needed:
-                    level = self.lv_info[lv]['core_level']
-                    vers = self.lv_info[lv]['core_version']
-                    pkg = self.lv_info[lv]['pkg_version']
-                    line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
-                if not using_and:
-                    implementation = [line]
-
-                implementation = implementation + \
+                implementation = topif + \
                                  self.write_set_att_with_member(attribute, True) + ['else'] + \
                                  self.write_set_att_with_member(attribute, False)
                 code.append(self.create_code_block('if_else', implementation))
@@ -1485,7 +1468,9 @@ class SetGetFunctions():
             if not deal_with_versions:
                 code = [self.create_code_block('line', implementation)]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort vector version']})]
+                implementation = topif + implementation + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'element':
             if not deal_with_versions:
                 if not self.is_plugin:
@@ -1555,6 +1540,55 @@ class SetGetFunctions():
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code
+
+    def get_multiple_version_info(self, name):
+        code = []
+        topif = []
+        if self.has_multiple_versions:
+            deal_with_versions = False
+            for i in range(0,len(self.version_attributes)):
+                match = False
+                j = 0
+                while not match and j < len(self.version_attributes[i]):
+                    if name == self.version_attributes[i][j]['name']:
+                        match = True
+                    j = j+1
+                if not match:
+                    deal_with_versions = True
+                    break
+
+        else:
+            deal_with_versions = False
+
+        if deal_with_versions:
+            implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
+                              'unsigned int pkgVersion = getPackageVersion()']
+            code.append(self.create_code_block('line', implementation))
+
+            lv_needed = []
+            for i in range(0, len(self.version_attributes)):
+                for att in self.version_attributes[i]:
+                    if name == att['name']:
+                        lv_needed.append(i)
+
+            if len(lv_needed) > 1:
+                line = ''
+                for lv in lv_needed:
+                    level = self.lv_info[lv]['core_level']
+                    vers = self.lv_info[lv]['core_version']
+                    pkg = self.lv_info[lv]['pkg_version']
+                    this_line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                    line = line + '({0}) || '.format(this_line)
+                length = len(line)
+                line = line[0:length-4]
+            else:
+                level = self.lv_info[lv_needed[0]]['core_level']
+                vers = self.lv_info[lv_needed[0]]['core_version']
+                pkg = self.lv_info[lv_needed[0]]['pkg_version']
+                line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+            topif = [line]
+        return[deal_with_versions, code, topif]
+
 
     def write_set_att_with_member(self, attribute, in_version):
         if in_version:

@@ -676,8 +676,8 @@ class ProtectedFunctions():
                           'unsigned int numErrs']
         code = [dict({'code_type': 'line', 'code': implementation})]
 
-        for i in range(0, len(self.version_attributes[version-1])):
-            self.write_read_att(self.version_attributes[version-1], i, code)
+        for i in range(0, len(self.version_attributes[version])):
+            self.write_read_att(self.version_attributes[version], i, code)
 
         # return the parts
         return dict({'title_line': title_line,
@@ -903,8 +903,8 @@ class ProtectedFunctions():
 
         # create the function implementation
         code = []
-        for i in range(0, len(self.version_attributes[version-1])):
-            self.write_write_att(self.version_attributes[version-1], i, code)
+        for i in range(0, len(self.version_attributes[version])):
+            self.write_write_att(self.version_attributes[version], i, code)
 
         # return the parts
         return dict({'title_line': title_line,

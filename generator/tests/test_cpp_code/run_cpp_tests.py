@@ -746,7 +746,7 @@ def main():
         class_name = 'ClassOne'
         list_of = ''
         test_case = 'multiple versions'
-        fail += run_test(name, num, class_name, test_case, list_of)
+#        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_core_vers_multipkg'
         num = 0
@@ -762,6 +762,11 @@ def main():
         test_case = 'unit sid ref'
 #        fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'test_vers'
+        num = 0
+        class_name = 'VersModelPlugin'
+        test_case = 'versions of plugins - attributes'
+        fail += run_plug_test(name, class_name, test_case, num)
 
 
 

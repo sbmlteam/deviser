@@ -1186,21 +1186,21 @@ VersModelPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
   unsigned int numErrs;
 
   // 
-  // version2 uint (use = "optional" )
+  // version uint (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetVersion2 = attributes.readInto("version2", mVersion2);
+  mIsSetVersion = attributes.readInto("version", mVersion);
 
-  if ( mIsSetVersion2 == false)
+  if ( mIsSetVersion == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Vers attribute 'version2' from the "
+      std::string message = "Vers attribute 'version' from the "
         "<VersModelPlugin> element must be an integer.";
-      log->logPackageError("vers", VersVersModelPluginVersion2MustBeUnInteger,
+      log->logPackageError("vers", VersVersModelPluginVersionMustBeUnInteger,
         pkgVersion, level, version, message);
     }
   }
@@ -1226,21 +1226,21 @@ VersModelPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
   unsigned int numErrs;
 
   // 
-  // version uint (use = "optional" )
+  // version2 uint (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetVersion = attributes.readInto("version", mVersion);
+  mIsSetVersion2 = attributes.readInto("version2", mVersion2);
 
-  if ( mIsSetVersion == false)
+  if ( mIsSetVersion2 == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Vers attribute 'version' from the "
+      std::string message = "Vers attribute 'version2' from the "
         "<VersModelPlugin> element must be an integer.";
-      log->logPackageError("vers", VersVersModelPluginVersionMustBeUnInteger,
+      log->logPackageError("vers", VersVersModelPluginVersion2MustBeUnInteger,
         pkgVersion, level, version, message);
     }
   }
@@ -1287,9 +1287,9 @@ VersModelPlugin::writeAttributes(XMLOutputStream& stream) const
 void
 VersModelPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
-  if (isSetVersion2() == true)
+  if (isSetVersion() == true)
   {
-    stream.writeAttribute("version2", getPrefix(), mVersion2);
+    stream.writeAttribute("version", getPrefix(), mVersion);
   }
 }
 
@@ -1305,9 +1305,9 @@ VersModelPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 void
 VersModelPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
-  if (isSetVersion() == true)
+  if (isSetVersion2() == true)
   {
-    stream.writeAttribute("version", getPrefix(), mVersion);
+    stream.writeAttribute("version2", getPrefix(), mVersion2);
   }
 }
 

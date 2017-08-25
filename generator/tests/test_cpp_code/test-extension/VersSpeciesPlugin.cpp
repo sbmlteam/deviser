@@ -227,14 +227,25 @@ VersSpeciesPlugin::isSetSpecies_att_v2() const
 int
 VersSpeciesPlugin::setSpecies_att_v1(const std::string& species_att_v1)
 {
-  if (!(SyntaxChecker::isValidInternalSId(species_att_v1)))
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+
+  if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+    if (!(SyntaxChecker::isValidInternalSId(species_att_v1)))
+    {
+      return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+    }
+    else
+    {
+      mSpecies_att_v1 = species_att_v1;
+      return LIBSBML_OPERATION_SUCCESS;
+    }
   }
   else
   {
-    mSpecies_att_v1 = species_att_v1;
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBSBML_UNEXPECTED_ATTRIBUTE;
   }
 }
 
@@ -246,8 +257,19 @@ VersSpeciesPlugin::setSpecies_att_v1(const std::string& species_att_v1)
 int
 VersSpeciesPlugin::setString_plugin_att(const std::string& string_plugin_att)
 {
-  mString_plugin_att = string_plugin_att;
-  return LIBSBML_OPERATION_SUCCESS;
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+
+  if (level == 3 && version == 1 && pkgVersion == 1)
+  {
+    mString_plugin_att = string_plugin_att;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_UNEXPECTED_ATTRIBUTE;
+  }
 }
 
 
@@ -257,14 +279,25 @@ VersSpeciesPlugin::setString_plugin_att(const std::string& string_plugin_att)
 int
 VersSpeciesPlugin::setSpecies_att_v2(const std::string& species_att_v2)
 {
-  if (!(SyntaxChecker::isValidInternalSId(species_att_v2)))
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+
+  if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+    if (!(SyntaxChecker::isValidInternalSId(species_att_v2)))
+    {
+      return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+    }
+    else
+    {
+      mSpecies_att_v2 = species_att_v2;
+      return LIBSBML_OPERATION_SUCCESS;
+    }
   }
   else
   {
-    mSpecies_att_v2 = species_att_v2;
-    return LIBSBML_OPERATION_SUCCESS;
+    return LIBSBML_UNEXPECTED_ATTRIBUTE;
   }
 }
 
@@ -1726,48 +1759,6 @@ VersSpeciesPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
   unsigned int numErrs;
 
   // 
-  // species_att_v2 SIdRef (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("species_att_v2", mSpecies_att_v2);
-
-  if (assigned == true)
-  {
-    if (mSpecies_att_v2.empty() == true)
-    {
-      logEmptyString(mSpecies_att_v2, level, version, pkgVersion,
-        "<VersSpeciesPlugin>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
-    {
-      log->logPackageError("vers",
-        VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
-          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
-            "to the syntax.", getLine(), getColumn());
-    }
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Reads the expected attributes into the member data variables
- */
-void
-VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
-{
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  bool assigned = false;
-  unsigned int pkgVersion = getPackageVersion();
-  SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
-
-  // 
   // species_att_v1 SIdRef (use = "optional" )
   // 
 
@@ -1801,6 +1792,48 @@ VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
     {
       logEmptyString(mString_plugin_att, level, version, pkgVersion,
         "<VersSpeciesPlugin>");
+    }
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Reads the expected attributes into the member data variables
+ */
+void
+VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
+{
+  unsigned int level = getLevel();
+  unsigned int version = getVersion();
+  bool assigned = false;
+  unsigned int pkgVersion = getPackageVersion();
+  SBMLErrorLog* log = getErrorLog();
+  unsigned int numErrs;
+
+  // 
+  // species_att_v2 SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("species_att_v2", mSpecies_att_v2);
+
+  if (assigned == true)
+  {
+    if (mSpecies_att_v2.empty() == true)
+    {
+      logEmptyString(mSpecies_att_v2, level, version, pkgVersion,
+        "<VersSpeciesPlugin>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
+    {
+      log->logPackageError("vers",
+        VersVersSpeciesPluginSpecies_att_v2MustBeSId, pkgVersion, level, version,
+          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
+            "to the syntax.", getLine(), getColumn());
     }
   }
 }
@@ -1846,9 +1879,15 @@ VersSpeciesPlugin::writeAttributes(XMLOutputStream& stream) const
 void
 VersSpeciesPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
-  if (isSetSpecies_att_v2() == true)
+  if (isSetSpecies_att_v1() == true)
   {
-    stream.writeAttribute("species_att_v2", getPrefix(), mSpecies_att_v2);
+    stream.writeAttribute("species_att_v1", getPrefix(), mSpecies_att_v1);
+  }
+
+  if (isSetString_plugin_att() == true)
+  {
+    stream.writeAttribute("string_plugin_att", getPrefix(),
+      mString_plugin_att);
   }
 }
 
@@ -1864,15 +1903,9 @@ VersSpeciesPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 void
 VersSpeciesPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
 {
-  if (isSetSpecies_att_v1() == true)
+  if (isSetSpecies_att_v2() == true)
   {
-    stream.writeAttribute("species_att_v1", getPrefix(), mSpecies_att_v1);
-  }
-
-  if (isSetString_plugin_att() == true)
-  {
-    stream.writeAttribute("string_plugin_att", getPrefix(),
-      mString_plugin_att);
+    stream.writeAttribute("species_att_v2", getPrefix(), mSpecies_att_v2);
   }
 }
 
