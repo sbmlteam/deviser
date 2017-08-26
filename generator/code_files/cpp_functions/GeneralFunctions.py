@@ -37,13 +37,13 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, global_variables
+from util import strFunctions, global_variables, query
 
 
 class GeneralFunctions():
     """Class for general functions"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[]):
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -113,6 +113,16 @@ class GeneralFunctions():
             if class_object['reqd']:
                 self.required = 'true'
 
+        self.version_attributes = []
+        if 'num_versions' in class_object and class_object['num_versions'] > 1:
+            self.has_multiple_versions = True
+            for i in range(0, class_object['num_versions']):
+                self.version_attributes.append(
+                    query.get_version_attributes(class_object['attribs'], i))
+        else:
+            self.has_multiple_versions = False
+
+        self.lv_info = lv_info
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
@@ -403,14 +413,50 @@ class GeneralFunctions():
             code = [dict({'code_type': 'line',
                           'code': ['bool all'
                                    'Present = {0}'.format(all_present)]})]
-            for i in range(0, len(self.attributes)):
-                att = self.attributes[i]
-                if att['reqd']:
-                    implementation = ['isSet{0}() == '
-                                      'false'.format(att['capAttName']),
-                                      'allPresent = false']
-                    code.append(dict({'code_type': 'if',
-                                      'code': implementation}))
+            if self.has_multiple_versions:
+                [reqd_atts, reqd_versions] = self.get_multiple_version_info()
+                if len(reqd_versions) > 0:
+                    implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
+                                      'unsigned int pkgVersion = getPackageVersion()']
+                    code.append(self.create_code_block('line', implementation))
+
+                for att in reqd_atts:
+                    implementation = ['isSet{0}() == false'.format(att), 'allPresent = false']
+                    code.append(dict({'code_type': 'if', 'code': implementation}))
+
+                for att in reqd_versions:
+                    lv_needed = []
+                    for i in range(0, len(att['versions'])):
+                        if att['versions'][i]:
+                            lv_needed.append(i)
+                    if len(lv_needed) > 1:
+                        line = ''
+                        for lv in lv_needed:
+                            level = self.lv_info[lv]['core_level']
+                            vers = self.lv_info[lv]['core_version']
+                            pkg = self.lv_info[lv]['pkg_version']
+                            this_line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                            line = line + '({0}) || '.format(this_line)
+                        length = len(line)
+                        line = line[0:length-4]
+                    else:
+                        level = self.lv_info[lv_needed[0]]['core_level']
+                        vers = self.lv_info[lv_needed[0]]['core_version']
+                        pkg = self.lv_info[lv_needed[0]]['pkg_version']
+                        line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                    implementation = ['isSet{0}() == false'.format(att['cap']), 'allPresent = false']
+                    nested_if = dict({'code_type': 'if', 'code': implementation})
+                    code.append(dict({'code_type': 'if', 'code': [line, nested_if]}))
+
+            else:
+                for i in range(0, len(self.attributes)):
+                    att = self.attributes[i]
+                    if att['reqd']:
+                        implementation = ['isSet{0}() == '
+                                          'false'.format(att['capAttName']),
+                                          'allPresent = false']
+                        code.append(dict({'code_type': 'if',
+                                          'code': implementation}))
             code.append(dict({'code_type': 'line',
                               'code': ['return allPresent']}))
         else:
@@ -430,6 +476,38 @@ class GeneralFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def get_multiple_version_info(self):
+        num_versions = len(self.version_attributes)
+        reqd_atts = []
+        required_attributes = []
+        for attribute in self.attributes:
+            name = attribute['name']
+            reqd_version = []
+            for i in range(0, num_versions):
+                reqd_version.append(self.get_reqd_in_version(i, name))
+            if True in reqd_version:
+                if False in reqd_version:
+                    # sometimes required sometimes not
+                    required_attributes.append(dict({'name': name, 'versions': reqd_version, 'cap': attribute['capAttName']}))
+                else:
+                    # always requiresd
+                    reqd_atts.append(attribute['capAttName'])
+        return [reqd_atts, required_attributes]
+
+    def get_reqd_in_version(self, i, name):
+        match = False
+        j = 0
+        while not match and j < len(self.version_attributes[i]):
+            att = self.version_attributes[i][j]
+            if att['name'] == name:
+                match = True
+                break
+            j = j + 1
+        if not match:
+            return False
+        else:
+            return self.version_attributes[i][j]['reqd']
 
     # function to write hasRequiredElements
     def write_has_required_elements(self):

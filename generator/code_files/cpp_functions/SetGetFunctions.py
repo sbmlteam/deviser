@@ -67,7 +67,6 @@ class SetGetFunctions():
         self.attributes = class_object['class_attributes']
         self.child_elements = class_object['child_elements']
         self.version_attributes = []
-        self.version_elements = []
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
             for i in range(0, class_object['num_versions']):

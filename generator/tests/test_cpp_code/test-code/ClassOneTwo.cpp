@@ -734,15 +734,26 @@ bool
 ClassOneTwo::hasRequiredAttributes() const
 {
   bool allPresent = true;
-need lv info
-  if (isSetId() == false)
+
+  unsigned int level = getLevel;
+  unsigned int version = getVersion();
+  unsigned int pkgVersion = getPackageVersion();
+
+  if ((level == 3 && version == 1 && pkgVersion == 2) || (level == 3 && version
+    == 2 && pkgVersion == 1) || (level == 3 && version == 2 && pkgVersion == 2))
   {
-    allPresent = false;
+    if (isSetId() == false)
+    {
+      allPresent = false;
+    }
   }
 
-  if (isSetAttEnum() == false)
+  if (level == 4 && version == 1 && pkgVersion == 1)
   {
-    allPresent = false;
+    if (isSetAttEnum() == false)
+    {
+      allPresent = false;
+    }
   }
 
   return allPresent;

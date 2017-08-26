@@ -719,6 +719,11 @@ def main():
         test_case = 'multiple core version and package version not 1 extension file'
         fail += run_ext_test(name, class_name, test_case, 0)
 
+        name = 'test_core_vers_multipkg'
+        num = 0
+        class_name = 'CoreversMultiPkgModelPlugin'
+        test_case = 'versions of plugins - elements'
+        fail += run_plug_test(name, class_name, test_case, num)
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -753,7 +758,7 @@ def main():
         class_name = 'ClassOneTwo'
         list_of = ''
         test_case = 'core version and package version not 1 '
-#        fail += run_test(name, num, class_name, test_case, list_of)
+        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'test_att'
         num = 1
@@ -766,7 +771,7 @@ def main():
         num = 0
         class_name = 'VersModelPlugin'
         test_case = 'versions of plugins - attributes'
-        fail += run_plug_test(name, class_name, test_case, num)
+#        fail += run_plug_test(name, class_name, test_case, num)
 
 
 

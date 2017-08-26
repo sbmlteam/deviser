@@ -68,7 +68,7 @@
             <reference name="ClassOneTwo"/>
           </references>
           <attributes>
-            <attribute name="attPlug2" required="false" type="unsigned int" abstract="false"/>
+            <attribute name="attPlug2" required="true" type="unsigned int" abstract="false"/>
           </attributes>
         </plugin>
       </plugins>
@@ -94,6 +94,7 @@
         <plugin extensionPoint="Model">
           <references>
             <reference name="ClassOneTwo"/>
+            <reference name="ClassMulti"/>
           </references>
           <attributes>
             <attribute name="attPlug2" required="false" type="unsigned int" abstract="false"/>

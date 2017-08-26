@@ -455,7 +455,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         gen_functions = GeneralFunctions.GeneralFunctions(self.language,
                                                           self.is_cpp_api,
                                                           self.is_list_of,
-                                                          self.class_object)
+                                                          self.class_object,
+                                                          self.lv_info)
         code = gen_functions.write_rename_sidrefs()
         self.write_function_implementation(code)
 
