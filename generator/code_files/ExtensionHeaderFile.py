@@ -40,7 +40,8 @@
 from base_files import BaseCppFile
 from . cpp_functions import *
 from util import query, strFunctions, global_variables
-
+# used for list deepcopy
+import copy
 
 class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     """Class for all Extension Header files"""
@@ -370,7 +371,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     def write_classes(self, elements=None):
         if not elements:
-            elements = self.elements.copy()
+            elements = copy.deepcopy(self.elements)
         for plugin in self.plugins:
             obj = dict({'name': '{0}{1}Plugin'.format(self.up_package, plugin['sbase'])})
             elements.append(obj)

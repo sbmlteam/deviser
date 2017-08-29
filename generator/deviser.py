@@ -98,14 +98,15 @@ def main(args):
             print(main.__doc__)
 
     return global_variables.code_returned
-  
+
 if __name__ == '__main__':
     if global_variables.code_returned == \
             global_variables.return_codes['success']:
         try:
             main(sys.argv)
             sys.exit(global_variables.code_returned)
-        except:
+        except Exception as ex:
+            print('\nAn exception was raised while running deviser: \"{}\"'.format(ex))
             sys.exit(global_variables.code_returned)
     else:
         sys.exit(global_variables.code_returned)
