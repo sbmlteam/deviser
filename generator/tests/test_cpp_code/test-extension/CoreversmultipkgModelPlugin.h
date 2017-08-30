@@ -47,6 +47,7 @@
 
 #include <sbml/extension/SBasePlugin.h>
 #include <sbml/packages/coreversmultipkg/sbml/ClassOneTwo.h>
+#include <sbml/packages/coreversmultipkg/sbml/ClassMult.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -63,6 +64,7 @@ protected:
   unsigned int mAttPlug2;
   bool mIsSetAttPlug2;
   ClassOneTwo* mClassOneTwo;
+  ClassMult* mClassMult;
 
   /** @endcond */
 
@@ -229,6 +231,26 @@ public:
 
 
   /**
+   * Returns the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin.
+   *
+   * @return the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin as a ClassMult*.
+   */
+  const ClassMult* getClassMult() const;
+
+
+  /**
+   * Returns the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin.
+   *
+   * @return the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin as a ClassMult*.
+   */
+  ClassMult* getClassMult();
+
+
+  /**
    * Predicate returning @c true if this CoreversmultipkgModelPlugin's
    * "classOneTwo" element is set.
    *
@@ -236,6 +258,16 @@ public:
    * element has been set, otherwise @c false is returned.
    */
   bool isSetClassOneTwo() const;
+
+
+  /**
+   * Predicate returning @c true if this CoreversmultipkgModelPlugin's
+   * "classMult" element is set.
+   *
+   * @return @c true if this CoreversmultipkgModelPlugin's "classMult" element
+   * has been set, otherwise @c false is returned.
+   */
+  bool isSetClassMult() const;
 
 
   /**
@@ -254,6 +286,20 @@ public:
 
 
   /**
+   * Sets the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin.
+   *
+   * @param classMult ClassMult* value of the "classMult" element to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setClassMult(const ClassMult* classMult);
+
+
+  /**
    * Creates a new ClassOneTwo object, adds it to this
    * CoreversmultipkgModelPlugin object and returns the ClassOneTwo object
    * created.
@@ -261,6 +307,16 @@ public:
    * @return a new ClassOneTwo object instance.
    */
   ClassOneTwo* createClassOneTwo();
+
+
+  /**
+   * Creates a new ClassMult object, adds it to this
+   * CoreversmultipkgModelPlugin object and returns the ClassMult object
+   * created.
+   *
+   * @return a new ClassMult object instance.
+   */
+  ClassMult* createClassMult();
 
 
   /**
@@ -272,6 +328,17 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetClassOneTwo();
+
+
+  /**
+   * Unsets the value of the "classMult" element of this
+   * CoreversmultipkgModelPlugin.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetClassMult();
 
 
   /**

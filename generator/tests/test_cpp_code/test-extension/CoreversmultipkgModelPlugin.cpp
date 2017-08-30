@@ -64,6 +64,7 @@ CoreversmultipkgModelPlugin::CoreversmultipkgModelPlugin(
   , mAttPlug2 (SBML_INT_MAX)
   , mIsSetAttPlug2 (false)
   , mClassOneTwo (NULL)
+  , mClassMult (NULL)
 {
   connectToChild();
 }
@@ -80,10 +81,16 @@ CoreversmultipkgModelPlugin::CoreversmultipkgModelPlugin(const
   , mAttPlug2 ( orig.mAttPlug2 )
   , mIsSetAttPlug2 ( orig.mIsSetAttPlug2 )
   , mClassOneTwo ( NULL )
+  , mClassMult ( NULL )
 {
   if (orig.mClassOneTwo != NULL)
   {
     mClassOneTwo = orig.mClassOneTwo->clone();
+  }
+
+  if (orig.mClassMult != NULL)
+  {
+    mClassMult = orig.mClassMult->clone();
   }
 
   connectToChild();
@@ -113,6 +120,16 @@ CoreversmultipkgModelPlugin::operator=(const CoreversmultipkgModelPlugin& rhs)
       mClassOneTwo = NULL;
     }
 
+    delete mClassMult;
+    if (rhs.mClassMult != NULL)
+    {
+      mClassMult = rhs.mClassMult->clone();
+    }
+    else
+    {
+      mClassMult = NULL;
+    }
+
     connectToChild();
   }
 
@@ -137,6 +154,8 @@ CoreversmultipkgModelPlugin::~CoreversmultipkgModelPlugin()
 {
   delete mClassOneTwo;
   mClassOneTwo = NULL;
+  delete mClassMult;
+  mClassMult = NULL;
 }
 
 
@@ -302,6 +321,28 @@ CoreversmultipkgModelPlugin::getClassOneTwo()
 
 
 /*
+ * Returns the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin.
+ */
+const ClassMult*
+CoreversmultipkgModelPlugin::getClassMult() const
+{
+  return mClassMult;
+}
+
+
+/*
+ * Returns the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin.
+ */
+ClassMult*
+CoreversmultipkgModelPlugin::getClassMult()
+{
+  return mClassMult;
+}
+
+
+/*
  * Predicate returning @c true if this CoreversmultipkgModelPlugin's
  * "classOneTwo" element is set.
  */
@@ -309,6 +350,17 @@ bool
 CoreversmultipkgModelPlugin::isSetClassOneTwo() const
 {
   return (mClassOneTwo != NULL);
+}
+
+
+/*
+ * Predicate returning @c true if this CoreversmultipkgModelPlugin's
+ * "classMult" element is set.
+ */
+bool
+CoreversmultipkgModelPlugin::isSetClassMult() const
+{
+  return (mClassMult != NULL);
 }
 
 
@@ -350,6 +402,43 @@ CoreversmultipkgModelPlugin::setClassOneTwo(const ClassOneTwo* classOneTwo)
 
 
 /*
+ * Sets the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin.
+ */
+int
+CoreversmultipkgModelPlugin::setClassMult(const ClassMult* classMult)
+{
+  if (classMult == NULL)
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+  else if (classMult->hasRequiredElements() == false)
+  {
+    return LIBSBML_INVALID_OBJECT;
+  }
+  else if (getLevel() != classMult->getLevel())
+  {
+    return LIBSBML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != classMult->getVersion())
+  {
+    return LIBSBML_VERSION_MISMATCH;
+  }
+  else if (getPackageVersion() != classMult->getPackageVersion())
+  {
+    return LIBSBML_PKG_VERSION_MISMATCH;
+  }
+  else
+  {
+    delete mClassMult;
+    mClassMult = static_cast<ClassMult*>(classMult->clone());
+    connectToChild();
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
  * Creates a new ClassOneTwo object, adds it to this
  * CoreversmultipkgModelPlugin object and returns the ClassOneTwo object
  * created.
@@ -376,6 +465,31 @@ CoreversmultipkgModelPlugin::createClassOneTwo()
 
 
 /*
+ * Creates a new ClassMult object, adds it to this CoreversmultipkgModelPlugin
+ * object and returns the ClassMult object created.
+ */
+ClassMult*
+CoreversmultipkgModelPlugin::createClassMult()
+{
+  if (mClassMult != NULL)
+  {
+    delete mClassMult;
+  }
+
+  COREVERSMULTIPKG_CREATE_NS(coreversmultipkgns, getSBMLNamespaces());
+  mClassMult = new ClassMult(coreversmultipkgns);
+
+  mClassMult->setSBMLDocument(this->getSBMLDocument());
+
+  delete coreversmultipkgns;
+
+  connectToChild();
+
+  return mClassMult;
+}
+
+
+/*
  * Unsets the value of the "classOneTwo" element of this
  * CoreversmultipkgModelPlugin.
  */
@@ -384,6 +498,19 @@ CoreversmultipkgModelPlugin::unsetClassOneTwo()
 {
   delete mClassOneTwo;
   mClassOneTwo = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin.
+ */
+int
+CoreversmultipkgModelPlugin::unsetClassMult()
+{
+  delete mClassMult;
+  mClassMult = NULL;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -421,7 +548,7 @@ bool
 CoreversmultipkgModelPlugin::hasRequiredElements() const
 {
   bool allPresent = true;
-need lv info
+
   return allPresent;
 }
 
@@ -438,6 +565,11 @@ CoreversmultipkgModelPlugin::writeElements(XMLOutputStream& stream) const
   if (isSetClassOneTwo() == true)
   {
     mClassOneTwo->write(stream);
+  }
+
+  if (isSetClassMult() == true)
+  {
+    mClassMult->write(stream);
   }
 }
 
@@ -462,6 +594,11 @@ CoreversmultipkgModelPlugin::accept(SBMLVisitor& v) const
     mClassOneTwo->accept(v);
   }
 
+  if (mClassMult != NULL)
+  {
+    mClassMult->accept(v);
+  }
+
   return true;
 }
 
@@ -482,6 +619,11 @@ CoreversmultipkgModelPlugin::setSBMLDocument(SBMLDocument* d)
   if (mClassOneTwo != NULL)
   {
     mClassOneTwo->setSBMLDocument(d);
+  }
+
+  if (mClassMult != NULL)
+  {
+    mClassMult->setSBMLDocument(d);
   }
 }
 
@@ -518,6 +660,11 @@ CoreversmultipkgModelPlugin::connectToParent(SBase* base)
   {
     mClassOneTwo->connectToParent(base);
   }
+
+  if (mClassMult != NULL)
+  {
+    mClassMult->connectToParent(base);
+  }
 }
 
 /** @endcond */
@@ -538,6 +685,11 @@ CoreversmultipkgModelPlugin::enablePackageInternal(const std::string& pkgURI,
   if (isSetClassOneTwo())
   {
     mClassOneTwo->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
+
+  if (isSetClassMult())
+  {
+    mClassMult->enablePackageInternal(pkgURI, pkgPrefix, flag);
   }
 }
 
@@ -868,6 +1020,10 @@ CoreversmultipkgModelPlugin::createChildObject(const std::string& elementName)
   {
     return createClassOneTwo();
   }
+  else if (elementName == "classMult")
+  {
+    return createClassMult();
+  }
 
   return obj;
 }
@@ -889,6 +1045,11 @@ CoreversmultipkgModelPlugin::addChildObject(const std::string& elementName,
     SBML_COREVERS_CLASSONETWO)
   {
     return setClassOneTwo((const ClassOneTwo*)(element));
+  }
+  else if (elementName == "classMult" && element->getTypeCode() ==
+    SBML_COREVERS_CLASSONETWO)
+  {
+    return setClassMult((const ClassMult*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -912,6 +1073,11 @@ CoreversmultipkgModelPlugin::removeChildObject(const std::string& elementName,
   {
     ClassOneTwo * obj = getClassOneTwo();
     if (unsetClassOneTwo() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "classMult")
+  {
+    ClassMult * obj = getClassMult();
+    if (unsetClassMult() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
   return NULL;
@@ -938,6 +1104,13 @@ CoreversmultipkgModelPlugin::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
+  else if (elementName == "classMult")
+  {
+    if (isSetClassMult())
+    {
+      return 1;
+    }
+  }
 
   return n;
 }
@@ -960,6 +1133,10 @@ CoreversmultipkgModelPlugin::getObject(const std::string& elementName,
   if (elementName == "classOneTwo")
   {
     return getClassOneTwo();
+  }
+  else if (elementName == "classMult")
+  {
+    return getClassMult();
   }
 
   return obj;
@@ -990,6 +1167,20 @@ CoreversmultipkgModelPlugin::getElementBySId(const std::string& id)
     }
 
     obj = mClassOneTwo->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mClassMult != NULL)
+  {
+    if (mClassMult->getId() == id)
+    {
+      return mClassMult;
+    }
+
+    obj = mClassMult->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
@@ -1028,6 +1219,20 @@ CoreversmultipkgModelPlugin::getElementByMetaId(const std::string& metaid)
     }
   }
 
+  if (mClassMult != NULL)
+  {
+    if (mClassMult->getMetaId() == metaid)
+    {
+      return mClassMult;
+    }
+
+    obj = mClassMult->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
   return obj;
 }
 
@@ -1043,6 +1248,7 @@ CoreversmultipkgModelPlugin::getAllElements(ElementFilter* filter)
   List* sublist = NULL;
 
   ADD_FILTERED_POINTER(ret, sublist, mClassOneTwo, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mClassMult, filter);
 
 
   return ret;
@@ -1110,7 +1316,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOneTwo")
     {
-      if (isSetClassOneTwo())
+      if (mClassOneTwo != NULL)
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
@@ -1119,6 +1325,18 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
 
       mClassOneTwo = new ClassOneTwo(coreversmultipkgns);
       obj = mClassOneTwo;
+    }
+    else if (name == "classMult")
+    {
+      if (mClassMult != NULL)
+      {
+        getErrorLog()->logPackageError("coreversmultipkg",
+          CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
+            getVersion());
+      }
+
+      mClassMult = new ClassMult(coreversmultipkgns);
+      obj = mClassMult;
     }
   }
 
