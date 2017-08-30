@@ -797,8 +797,9 @@ FunctionTerm::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Qual attribute 'resultLevel' from the "
         "<FunctionTerm> element must be an integer.";
-      log->logPackageError("qual", QualFunctionTermResultLevelMustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("qual",
+        QualFunctionTermResultLevelMustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {

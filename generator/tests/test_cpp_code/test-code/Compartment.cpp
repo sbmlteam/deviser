@@ -1223,8 +1223,8 @@ Compartment::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Core attribute 'spatialDimensions' from the "
         "<Compartment> element must be an integer.";
-      log->logError(CoreCompartmentSpatialDimensionsMustBeUnInteger, level,
-        version, message);
+      log->logError(CoreCompartmentSpatialDimensionsMustBeNonNegativeInteger,
+        level, version, message);
     }
   }
 

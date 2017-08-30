@@ -1260,8 +1260,9 @@ Category::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Distrib attribute 'rank' from the <Category> "
         "element must be an integer.";
-      log->logPackageError("distrib", DistribCategoryRankMustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("distrib",
+        DistribCategoryRankMustBeNonNegativeInteger, pkgVersion, level, version,
+          message);
     }
   }
 }

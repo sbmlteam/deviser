@@ -1946,7 +1946,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestMyTestClassNumMustBeUnInteger,
+      log->logPackageError("test", TestMyTestClassNumMustBeNonNegativeInteger,
         pkgVersion, level, version, message);
     }
   }
@@ -1966,7 +1966,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num2' from the <MyTestClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestMyTestClassNum2MustBeUnInteger,
+      log->logPackageError("test", TestMyTestClassNum2MustBeNonNegativeInteger,
         pkgVersion, level, version, message);
     }
   }

@@ -1496,7 +1496,7 @@ CoreversmultipkgModelPlugin::readL3V1V2Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlugMustBeUnInteger,
+        CoreversmultipkgCoreversmultipkgModelPluginAttPlugMustBeNonNegativeInteger,
           pkgVersion, level, version, message);
     }
   }
@@ -1538,7 +1538,7 @@ CoreversmultipkgModelPlugin::readL3V2V1Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeUnInteger,
+        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
           pkgVersion, level, version, message);
     }
   }
@@ -1580,7 +1580,7 @@ CoreversmultipkgModelPlugin::readL3V2V2Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeUnInteger,
+        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
           pkgVersion, level, version, message);
     }
     else
@@ -1630,7 +1630,7 @@ CoreversmultipkgModelPlugin::readL4V1V1Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeUnInteger,
+        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
           pkgVersion, level, version, message);
     }
   }

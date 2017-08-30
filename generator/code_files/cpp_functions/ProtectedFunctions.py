@@ -1535,7 +1535,7 @@ class ProtectedFunctions():
         # sort error names to be used
         class_name = strFunctions.remove_prefix(self.class_name)
         error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-                                            up_name, num_type)
+                                            up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
         att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                      class_name)
         if not global_variables.running_tests:

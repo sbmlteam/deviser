@@ -3058,8 +3058,9 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num' from the <MyRequiredClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestMyRequiredClassNumMustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("test",
+        TestMyRequiredClassNumMustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
@@ -3085,8 +3086,9 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'num2' from the <MyRequiredClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestMyRequiredClassNum2MustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("test",
+        TestMyRequiredClassNum2MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
@@ -3351,8 +3353,9 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'posint' from the <MyRequiredClass> "
         "element must be an integer.";
-      log->logPackageError("test", TestMyRequiredClassPosintMustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("test",
+        TestMyRequiredClassPosintMustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
@@ -3378,8 +3381,9 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'posint2' from the "
         "<MyRequiredClass> element must be an integer.";
-      log->logPackageError("test", TestMyRequiredClassPosint2MustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("test",
+        TestMyRequiredClassPosint2MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
@@ -3405,8 +3409,9 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Test attribute 'posint1' from the "
         "<MyRequiredClass> element must be an integer.";
-      log->logPackageError("test", TestMyRequiredClassPosint1MustBeUnInteger,
-        pkgVersion, level, version, message);
+      log->logPackageError("test",
+        TestMyRequiredClassPosint1MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
