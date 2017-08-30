@@ -241,7 +241,7 @@ public:
    *
    * @return the number of Category objects in this ListOfCategories.
    */
-  unsigned int getNumCategorys() const;
+  unsigned int getNumCategories() const;
 
 
   /**

@@ -227,7 +227,7 @@ ListOfCategories::addCategory(const Category* c)
  * Get the number of Category objects in this ListOfCategories.
  */
 unsigned int
-ListOfCategories::getNumCategorys() const
+ListOfCategories::getNumCategories() const
 {
   return size();
 }
