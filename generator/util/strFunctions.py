@@ -121,6 +121,8 @@ def plural(name):
         returned_word = name + 'ren'
     elif name.endswith('x'):
         returned_word = name[0:len(name)] + 'es'
+    elif name.endswith('y'):
+        returned_word = name[0:len(name)-1] + 'ies'
     else:
         returned_word = name + 's'
     return returned_word
