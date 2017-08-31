@@ -952,9 +952,9 @@ class ProtectedFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
         if global_variables.is_package:
             implementation = ['thisxmlns && thisxmlns->hasURI({0}Extension::'
-                              'getXmlnsL3V1V1())'.format(self.package),
-                              'xmlns.add({0}Extension::getXmlnsL3V1V1(), '
-                              'prefix)'.format(self.package)]
+                              'getXmlnsL{1}V{2}V{3}())'.format(self.package, self.lv_info[0]['core_level'], self.lv_info[0]['core_version'], self.lv_info[0]['pkg_version']),
+                              'xmlns.add({0}Extension::getXmlnsL{1}V{2}V{3}(), '
+                              'prefix)'.format(self.package, self.lv_info[0]['core_level'], self.lv_info[0]['core_version'], self.lv_info[0]['pkg_version'])]
         else:
             implementation = ['thisxmlns && thisxmlns->hasURI({0}_XMLNS_L1V1)'.format(global_variables.language.upper()),
                               'xmlns.add({0}_XMLNS_L1V1, '
