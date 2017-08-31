@@ -763,15 +763,33 @@ FbcAnd::removeChildObject(const std::string& elementName,
 {
   if (elementName == "and")
   {
-    return removeAssociation(id);
+    for (unsigned int i = 0; i < getNumAssociations(); i++)
+    {
+      if (getAssociation(i)->getId() == id)
+      {
+        return removeAssociation(i);
+      }
+    }
   }
   else if (elementName == "or")
   {
-    return removeAssociation(id);
+    for (unsigned int i = 0; i < getNumAssociations(); i++)
+    {
+      if (getAssociation(i)->getId() == id)
+      {
+        return removeAssociation(i);
+      }
+    }
   }
   else if (elementName == "geneProductRef")
   {
-    return removeAssociation(id);
+    for (unsigned int i = 0; i < getNumAssociations(); i++)
+    {
+      if (getAssociation(i)->getId() == id)
+      {
+        return removeAssociation(i);
+      }
+    }
   }
 
   return NULL;

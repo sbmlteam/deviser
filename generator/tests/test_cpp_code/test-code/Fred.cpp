@@ -1605,7 +1605,13 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
   }
   else if (elementName == "otherLO")
   {
-    return removeOtherLO(id);
+    for (unsigned int i = 0; i < getNumOtherLOs(); i++)
+    {
+      if (getOtherLO(i)->getId() == id)
+      {
+        return removeOtherLO(i);
+      }
+    }
   }
 
   return NULL;

@@ -1372,7 +1372,13 @@ Transition::removeChildObject(const std::string& elementName,
   }
   else if (elementName == "functionTerm")
   {
-    return removeFunctionTerm(id);
+    for (unsigned int i = 0; i < getNumFunctionTerms(); i++)
+    {
+      if (getFunctionTerm(i)->getId() == id)
+      {
+        return removeFunctionTerm(i);
+      }
+    }
   }
 
   return NULL;

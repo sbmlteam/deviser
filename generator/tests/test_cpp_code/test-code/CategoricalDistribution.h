@@ -65,7 +65,7 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  ListOfCategories mCategorys;
+  ListOfCategories mCategories;
 
   /** @endcond */
 
@@ -170,7 +170,7 @@ public:
    * @return the nth Category in the ListOfCategories within this
    * CategoricalDistribution.
    *
-   * @see getNumCategorys()
+   * @see getNumCategories()
    */
   Category* getCategory(unsigned int n);
 
@@ -184,7 +184,7 @@ public:
    * @return the nth Category in the ListOfCategories within this
    * CategoricalDistribution.
    *
-   * @see getNumCategorys()
+   * @see getNumCategories()
    */
   const Category* getCategory(unsigned int n) const;
 
@@ -210,7 +210,7 @@ public:
    *
    * @return the number of Category objects in this CategoricalDistribution.
    */
-  unsigned int getNumCategorys() const;
+  unsigned int getNumCategories() const;
 
 
   /**
@@ -232,7 +232,7 @@ public:
    *
    * @return a pointer to the nth Category in this CategoricalDistribution.
    *
-   * @see getNumCategorys
+   * @see getNumCategories
    *
    * @note the caller owns the returned object and is responsible for deleting
    * it.
@@ -905,8 +905,8 @@ CategoricalDistribution_free(CategoricalDistribution_t* cd);
  * Returns a ListOf_t* containing Category_t objects from this
  * CategoricalDistribution_t.
  *
- * @param cd the CategoricalDistribution_t structure whose "ListOfCategories" is
- * sought.
+ * @param cd the CategoricalDistribution_t structure whose "ListOfCategories"
+ * is sought.
  *
  * @return the "ListOfCategories" from this CategoricalDistribution_t as a
  * ListOf_t *.
@@ -968,7 +968,7 @@ CategoricalDistribution_addCategory(CategoricalDistribution_t* cd,
  */
 LIBSBML_EXTERN
 unsigned int
-CategoricalDistribution_getNumCategorys(CategoricalDistribution_t* cd);
+CategoricalDistribution_getNumCategories(CategoricalDistribution_t* cd);
 
 
 /**

@@ -55,7 +55,7 @@ CategoricalDistribution::CategoricalDistribution(unsigned int level,
                                                  unsigned int version,
                                                  unsigned int pkgVersion)
   : CategoricalUnivariateDistribution(level, version)
-  , mCategorys (level, version, pkgVersion)
+  , mCategories (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,
     pkgVersion));
@@ -70,7 +70,7 @@ CategoricalDistribution::CategoricalDistribution(unsigned int level,
 CategoricalDistribution::CategoricalDistribution(DistribPkgNamespaces
   *distribns)
   : CategoricalUnivariateDistribution(distribns)
-  , mCategorys (distribns)
+  , mCategories (distribns)
 {
   setElementNamespace(distribns->getURI());
   connectToChild();
@@ -84,7 +84,7 @@ CategoricalDistribution::CategoricalDistribution(DistribPkgNamespaces
 CategoricalDistribution::CategoricalDistribution(const CategoricalDistribution&
   orig)
   : CategoricalUnivariateDistribution( orig )
-  , mCategorys ( orig.mCategorys )
+  , mCategories ( orig.mCategories )
 {
   connectToChild();
 }
@@ -99,7 +99,7 @@ CategoricalDistribution::operator=(const CategoricalDistribution& rhs)
   if (&rhs != this)
   {
     CategoricalUnivariateDistribution::operator=(rhs);
-    mCategorys = rhs.mCategorys;
+    mCategories = rhs.mCategories;
     connectToChild();
   }
 
@@ -131,7 +131,7 @@ CategoricalDistribution::~CategoricalDistribution()
 const ListOfCategories*
 CategoricalDistribution::getListOfCategories() const
 {
-  return &mCategorys;
+  return &mCategories;
 }
 
 
@@ -141,7 +141,7 @@ CategoricalDistribution::getListOfCategories() const
 ListOfCategories*
 CategoricalDistribution::getListOfCategories()
 {
-  return &mCategorys;
+  return &mCategories;
 }
 
 
@@ -151,7 +151,7 @@ CategoricalDistribution::getListOfCategories()
 Category*
 CategoricalDistribution::getCategory(unsigned int n)
 {
-  return mCategorys.get(n);
+  return mCategories.get(n);
 }
 
 
@@ -161,7 +161,7 @@ CategoricalDistribution::getCategory(unsigned int n)
 const Category*
 CategoricalDistribution::getCategory(unsigned int n) const
 {
-  return mCategorys.get(n);
+  return mCategories.get(n);
 }
 
 
@@ -194,7 +194,7 @@ CategoricalDistribution::addCategory(const Category* c)
   }
   else
   {
-    return mCategorys.append(c);
+    return mCategories.append(c);
   }
 }
 
@@ -203,9 +203,9 @@ CategoricalDistribution::addCategory(const Category* c)
  * Get the number of Category objects in this CategoricalDistribution.
  */
 unsigned int
-CategoricalDistribution::getNumCategorys() const
+CategoricalDistribution::getNumCategories() const
 {
-  return mCategorys.size();
+  return mCategories.size();
 }
 
 
@@ -230,7 +230,7 @@ CategoricalDistribution::createCategory()
 
   if (c != NULL)
   {
-    mCategorys.appendAndOwn(c);
+    mCategories.appendAndOwn(c);
   }
 
   return c;
@@ -244,7 +244,7 @@ CategoricalDistribution::createCategory()
 Category*
 CategoricalDistribution::removeCategory(unsigned int n)
 {
-  return mCategorys.remove(n);
+  return mCategories.remove(n);
 }
 
 
@@ -291,7 +291,7 @@ CategoricalDistribution::hasRequiredElements() const
 {
   bool allPresent = CategoricalUnivariateDistribution::hasRequiredElements();
 
-  if (getNumCategorys() == 0)
+  if (getNumCategories() == 0)
   {
     allPresent = false;
   }
@@ -311,9 +311,9 @@ CategoricalDistribution::writeElements(XMLOutputStream& stream) const
 {
   CategoricalUnivariateDistribution::writeElements(stream);
 
-  if (getNumCategorys() > 0)
+  if (getNumCategories() > 0)
   {
-    mCategorys.write(stream);
+    mCategories.write(stream);
   }
 
   SBase::writeExtensionElements(stream);
@@ -333,7 +333,7 @@ CategoricalDistribution::accept(SBMLVisitor& v) const
 {
   v.visit(*this);
 
-  mCategorys.accept(v);
+  mCategories.accept(v);
 
   v.leave(*this);
   return true;
@@ -353,7 +353,7 @@ CategoricalDistribution::setSBMLDocument(SBMLDocument* d)
 {
   CategoricalUnivariateDistribution::setSBMLDocument(d);
 
-  mCategorys.setSBMLDocument(d);
+  mCategories.setSBMLDocument(d);
 }
 
 /** @endcond */
@@ -370,7 +370,7 @@ CategoricalDistribution::connectToChild()
 {
   CategoricalUnivariateDistribution::connectToChild();
 
-  mCategorys.connectToParent(this);
+  mCategories.connectToParent(this);
 }
 
 /** @endcond */
@@ -390,7 +390,7 @@ CategoricalDistribution::enablePackageInternal(const std::string& pkgURI,
   CategoricalUnivariateDistribution::enablePackageInternal(pkgURI, pkgPrefix,
     flag);
 
-  mCategorys.enablePackageInternal(pkgURI, pkgPrefix, flag);
+  mCategories.enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */
@@ -731,7 +731,13 @@ CategoricalDistribution::removeChildObject(const std::string& elementName,
 {
   if (elementName == "category")
   {
-    return removeCategory(id);
+    for (unsigned int i = 0; i < getNumCategories(); i++)
+    {
+      if (getCategory(i)->getId() == id)
+      {
+        return removeCategory(i);
+      }
+    }
   }
 
   return NULL;
@@ -753,7 +759,7 @@ CategoricalDistribution::getNumObjects(const std::string& elementName)
 
   if (elementName == "category")
   {
-    return getNumCategorys();
+    return getNumCategories();
   }
 
   return n;
@@ -799,7 +805,7 @@ CategoricalDistribution::getElementBySId(const std::string& id)
 
   SBase* obj = NULL;
 
-  obj = mCategorys.getElementBySId(id);
+  obj = mCategories.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -824,12 +830,12 @@ CategoricalDistribution::getElementByMetaId(const std::string& metaid)
 
   SBase* obj = NULL;
 
-  if (mCategorys.getMetaId() == metaid)
+  if (mCategories.getMetaId() == metaid)
   {
-    return &mCategorys;
+    return &mCategories;
   }
 
-  obj = mCategorys.getElementByMetaId(metaid);
+  obj = mCategories.getElementByMetaId(metaid);
 
   if (obj != NULL)
   {
@@ -851,7 +857,7 @@ CategoricalDistribution::getAllElements(ElementFilter* filter)
   List* sublist = NULL;
 
 
-  ADD_FILTERED_LIST(ret, sublist, mCategorys, filter);
+  ADD_FILTERED_LIST(ret, sublist, mCategories, filter);
 
   ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
 
@@ -872,16 +878,16 @@ CategoricalDistribution::createObject(XMLInputStream& stream)
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfCategorys")
+  if (name == "listOfCategories")
   {
-    if (mCategorys.size() != 0)
+    if (mCategories.size() != 0)
     {
       getErrorLog()->logPackageError("distrib",
         DistribCategoricalDistributionAllowedElements, getPackageVersion(),
           getLevel(), getVersion());
     }
 
-    obj = &mCategorys;
+    obj = &mCategories;
   }
 
   connectToChild();
@@ -935,8 +941,9 @@ CategoricalDistribution::readAttributes(const XMLAttributes& attributes,
     {
       const std::string details = log->getError(n)->getMessage();
       log->remove(UnknownPackageAttribute);
-      log->logPackageError("distrib", DistribUnknown, pkgVersion, level,
-        version, details);
+      log->logPackageError("distrib",
+        DistribCategoricalDistributionAllowedAttributes, pkgVersion, level,
+          version, details);
     }
     else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
     {
@@ -1061,9 +1068,9 @@ CategoricalDistribution_addCategory(CategoricalDistribution_t* cd,
  */
 LIBSBML_EXTERN
 unsigned int
-CategoricalDistribution_getNumCategorys(CategoricalDistribution_t* cd)
+CategoricalDistribution_getNumCategories(CategoricalDistribution_t* cd)
 {
-  return (cd != NULL) ? cd->getNumCategorys() : SBML_INT_MAX;
+  return (cd != NULL) ? cd->getNumCategories() : SBML_INT_MAX;
 }
 
 

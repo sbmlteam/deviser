@@ -1073,7 +1073,13 @@ MixedGeometry::removeChildObject(const std::string& elementName,
   }
   else if (elementName == "ordinalMapping")
   {
-    return removeOrdinalMapping(id);
+    for (unsigned int i = 0; i < getNumOrdinalMappings(); i++)
+    {
+      if (getOrdinalMapping(i)->getId() == id)
+      {
+        return removeOrdinalMapping(i);
+      }
+    }
   }
 
   return NULL;

@@ -334,9 +334,9 @@ ListOfCategories::writeXMLNS(XMLOutputStream& stream) const
   if (prefix.empty())
   {
     const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(DistribExtension::getXmlnsL3V1V1()))
+    if (thisxmlns && thisxmlns->hasURI(DistribExtension::getXmlnsL3V2V1()))
     {
-      xmlns.add(DistribExtension::getXmlnsL3V1V1(), prefix);
+      xmlns.add(DistribExtension::getXmlnsL3V2V1(), prefix);
     }
   }
 

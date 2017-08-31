@@ -1301,7 +1301,13 @@ Event::removeChildObject(const std::string& elementName,
   }
   else if (elementName == "eventAssignment")
   {
-    return removeEventAssignment(id);
+    for (unsigned int i = 0; i < getNumEventAssignments(); i++)
+    {
+      if (getEventAssignment(i)->getId() == id)
+      {
+        return removeEventAssignment(i);
+      }
+    }
   }
 
   return NULL;

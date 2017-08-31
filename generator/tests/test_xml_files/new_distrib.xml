@@ -5,7 +5,7 @@
       <elements>
         <element name="DrawFromDistribution" typeCode="SBML_DISTRIB_DRAWFROMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="drawFromDistribution">
           <attributes>
-            <attribute name="distribInputs" required="false" type="lo_element" element="DistribInput" abstract="false"/>
+            <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false"/>
             <attribute name="distribution" required="false" type="element" element="Distribution" abstract="true"/>
           </attributes>
         </element>
@@ -78,13 +78,13 @@
         <element name="ExternalDistribution" typeCode="SBML_DISTRIB_EXTERNALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="false" elementName="externalDistribution">
           <attributes>
             <attribute name="definitionURL" required="true" type="string" abstract="false"/>
-            <attribute name="listOfExternalParameters" required="false" type="element" element="ListOfExternalParameters" abstract="false"/>
+            <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
           </attributes>
         </element>
         <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="UncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
           <attributes>
             <attribute name="definitionURL" required="true" type="string" abstract="false"/>
-            <attribute name="listOfExternalParameters" required="false" type="element" element="ListOfExternalParameters" abstract="false"/>
+            <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
           </attributes>
         </element>
         <element name="NormalDistribution" typeCode="SBML_DISTRIB_NORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="normalDistribution">
@@ -96,7 +96,7 @@
         </element>
         <element name="CategoricalDistribution" typeCode="SBML_DISTRIB_CATEGORICALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CategoricalUnivariateDistribution" abstract="false" elementName="categoricalDistribution">
           <attributes>
-            <attribute name="listOfCategories" required="true" type="element" element="ListOfCategories" abstract="false"/>
+            <attribute name="category" required="true" type="lo_element" element="Category" abstract="false"/>
           </attributes>
         </element>
         <element name="Category" typeCode="SBML_DISTRIB_CATEGORY" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="category" listOfName="listOfCategories" listOfClassName="ListOfCategories">

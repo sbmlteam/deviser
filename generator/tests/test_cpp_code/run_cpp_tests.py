@@ -200,7 +200,6 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-    # set up the enivornment
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -691,6 +690,13 @@ def main():
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'new_distrib'
+        num = 13
+        class_name = 'CategoricalDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'new_distrib'
         num = 16
         class_name = 'BetaDistribution'
         list_of = ''
@@ -746,32 +752,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'test_vers'
-        num = 0
-        class_name = 'ClassOne'
+        name = 'new_distrib'
+        num = 13
+        class_name = 'CategoricalDistribution'
         list_of = ''
-        test_case = 'multiple versions'
-#        fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'test_core_vers_multipkg'
-        num = 0
-        class_name = 'ClassOneTwo'
-        list_of = ''
-        test_case = 'core version and package version not 1 '
+        test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'test_att'
-        num = 1
-        class_name = 'Unit'
-        list_of = ''
-        test_case = 'unit sid ref'
-#        fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'test_vers'
-        num = 0
-        class_name = 'VersModelPlugin'
-        test_case = 'versions of plugins - attributes'
-#        fail += run_plug_test(name, class_name, test_case, num)
 
 
 

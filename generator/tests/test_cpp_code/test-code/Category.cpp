@@ -1210,16 +1210,17 @@ Category::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("distrib", DistribLOCategoriesAllowedAttributes,
-          pkgVersion, level, version, details);
+        log->logPackageError("distrib",
+          DistribCategoricalDistributionLOCategoriesAllowedAttributes,
+            pkgVersion, level, version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("distrib",
-          DistribLOCategoriesAllowedCoreAttributes, pkgVersion, level, version,
-            details);
+          DistribCategoricalDistributionLOCategoriesAllowedCoreAttributes,
+            pkgVersion, level, version, details);
       }
     }
   }

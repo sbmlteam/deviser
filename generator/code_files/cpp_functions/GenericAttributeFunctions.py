@@ -70,13 +70,13 @@ class GenericAttributeFunctions():
                 self.object_child_name = self.child_name + '_t'
 
             self.attributes = class_object['class_attributes']
-            classroot = None
+            self.classroot = None
             if 'root' in class_object:
-                classroot = class_object['root']
+                self.classroot = class_object['root']
             self.elements = query.get_child_elements(class_object['child_elements'], class_object['child_lo_elements'],
-                                                     classroot)
-            self.single_elements = query.get_child_elements(class_object['child_elements'], [], classroot)
-            self.lo_elements = query.get_child_elements([], class_object['child_lo_elements'], classroot)
+                                                     self.classroot)
+            self.single_elements = query.get_child_elements(class_object['child_elements'], [], self.classroot)
+            self.lo_elements = query.get_child_elements([], class_object['child_lo_elements'], self.classroot)
 
             if 'num_versions' in class_object and class_object['num_versions'] > 1:
                 self.has_multiple_versions = True
@@ -650,8 +650,20 @@ class GenericAttributeFunctions():
                     block.append('elementName == \"{0}\"'.format(conc['name']))
                     single = True
                     if elem not in self.single_elements:
+                        thisClass = query.get_class(elemElem, self.classroot)
                         single = False
-                        block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                        hasid = False
+                        for att in thisClass['attribs']:
+                            if att['name'] == 'id':
+                                hasid = True
+                        if hasid:
+                            block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                        else:
+                            nested_if = self.create_code_block('if', ['get{0}(i)->getId() == id'.format(strFunctions.upper_first(elemName)),
+                                                                      'return remove{0}(i)'.format(strFunctions.upper_first(elemName))])
+                            nested_for = self.create_code_block('for', ['unsigned int i = 0; i < getNum{0}(); i++'
+                                                                        ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
+                            block.append(nested_for)
                     else:
                         block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
                         block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
@@ -668,8 +680,20 @@ class GenericAttributeFunctions():
                 block.append('elementName == \"{0}\"'.format(elem['name']))
                 single = True
                 if elem not in self.single_elements:
+                    thisClass = query.get_class(elemElem, self.classroot)
                     single = False
-                    block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                    hasid = False
+                    for att in thisClass['attribs']:
+                        if att['name'] == 'id':
+                            hasid = True
+                    if hasid:
+                        block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                    else:
+                        nested_if = self.create_code_block('if', ['get{0}(i)->getId() == id'.format(strFunctions.upper_first(elemName)),
+                                                                  'return remove{0}(i)'.format(strFunctions.upper_first(elemName))])
+                        nested_for = self.create_code_block('for', ['unsigned int i = 0; i < getNum{0}(); i++'
+                                                                    ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
+                        block.append(nested_for)
                 else:
                     block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
                     block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))

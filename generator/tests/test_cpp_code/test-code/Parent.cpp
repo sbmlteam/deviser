@@ -818,11 +818,23 @@ Parent::removeChildObject(const std::string& elementName,
 {
   if (elementName == "child")
   {
-    return removeChild(id);
+    for (unsigned int i = 0; i < getNumChildren(); i++)
+    {
+      if (getChild(i)->getId() == id)
+      {
+        return removeChild(i);
+      }
+    }
   }
   else if (elementName == "sprog")
   {
-    return removeSprog(id);
+    for (unsigned int i = 0; i < getNumSprogs(); i++)
+    {
+      if (getSprog(i)->getId() == id)
+      {
+        return removeSprog(i);
+      }
+    }
   }
 
   return NULL;
