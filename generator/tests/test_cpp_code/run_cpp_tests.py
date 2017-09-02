@@ -703,6 +703,20 @@ def main():
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 23
+        class_name = 'ExponentialDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'new_distrib'
+        num = 17
+        class_name = 'BinomialDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         name = 'test_core_vers'
         class_name = 'CoreversExtension'
         test_case = 'core version extension file'
@@ -752,14 +766,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
+
         name = 'new_distrib'
-        num = 13
-        class_name = 'CategoricalDistribution'
+        num = 0
+        class_name = 'DrawFromDistribution'
         list_of = ''
-        test_case = 'concrete class'
+        test_case = 'abstract class with multiple abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
-
-
 
 
     test_functions.report('CPP', fail, fails, not_tested)

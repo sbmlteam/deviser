@@ -178,128 +178,7 @@ class ProtectedFunctions():
                 else:
                     code = self.write_create_object_anomalous_lo(upkg, ns)
             else:
-                base_create = 'NULL'
-                if not self.has_std_base:
-                    base_create = '{0}::createObject' \
-                                  '(stream)'.format(self.base_class)
-                code = [self.create_code_block('line',
-                                               ['{0}* obj = '
-                                                '{1}'.format(self.std_base,
-                                                             base_create)])]
-                if self.is_plugin:
-                    lines = ['const std::string& name = '
-                             'stream.peek().getName()',
-                             'const {0}& xmlns = '
-                             'stream.peek().getNamespaces()'.format(xmlns),
-                             'const std::string& prefix '
-                             '= stream.peek().getPrefix()']
-                else:
-                    lines = ['const std::string& name '
-                             '= stream.peek().getName()']
-                if num_children > 0:
-                    code.append(self.create_code_block('line', lines))
-                if self.is_plugin:
-                    line = ['const std::string& targetPrefix = (xmlns.hasURI'
-                            '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
-                    code.append(self.create_code_block('line', line))
-                if global_variables.is_package and len(self.child_elements) != self.num_non_std_children:
-                    line = ['{0}_CREATE_NS({1}, '
-                            'get{2}Namespaces'
-                            '())'.format(upkg, ns, global_variables.prefix)]
-                    code.append(self.create_code_block('line', line))
-                if self.is_plugin:
-                    class_name = strFunctions.get_class_from_plugin(
-                        self.class_name, self.package)
-                else:
-                    class_name = self.class_name
-                # sort error names to be used
-                name_in_error = class_name
-                if not self.document:
-                    name_in_error = strFunctions.remove_prefix(class_name)
-                error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
-                if not global_variables.running_tests:
-                    if error not in global_variables.error_list:
-                        error = '{0}UnknownError'.format(self.package)
-                error_line = 'getErrorLog()->{0}{1}, ' \
-                             '{2})'.format(self.error, error, self.error_args)
-                if num_children == 0:
-                    # do nothing we are calling a base class
-                    implementation = []
-                elif num_children == 1:
-                    element = self.find_single_element()
-                    if element['abstract'] and \
-                            not element['attType'] == 'lo_element':
-                        implementation = self.get_abstract_block(element, ns)
-                        code.append(self.create_code_block('else_if',
-                                                           implementation))
-                    elif element['type'] == 'inline_lo_element':
-                        implementation = ['obj = {0}.createObject(stream'
-                                          ')'.format(element['memberName'])]
-                        code.append(self.create_code_block('line',
-                                                           implementation))
-                    elif element['attType'] == 'lo_element':
-                        implementation = self.get_lo_block(element, error_line)
-                        code.append(self.create_code_block('if',
-                                                           implementation))
-                    else:
-                        if global_variables.is_package:
-                            if self.is_plugin:
-                                implementation = ['prefix == targetPrefix']
-                                implementation += self.get_element_block(element,
-                                                                         error_line, ns)
-                                code.append(self.create_code_block('if',
-                                                                   implementation))
-                            else:
-                                implementation = self.get_element_block(element,
-                                                                         error_line, ns, False)
-                                code.append(self.create_code_block('if',
-                                                                   implementation))
-                        else:
-                            implementation = self.get_element_block(element,
-                                                                     error_line, ns, False)
-                            code.append(self.create_code_block('if',
-                                                               implementation))
-
-                else:
-                    implementation = []
-                    i = 0
-                    children_dealt_with = 0
-                    for i in range(0, len(self.child_elements)):
-                        element = self.child_elements[i]
-                        if 'is_ml' in element and element['is_ml']:
-                            continue
-                        overwrite = element['children_overwrite']
-                        name = element['memberName']
-                        loname = element['xml_name'] if overwrite \
-                            else strFunctions.lower_first(strFunctions.remove_prefix(element['element']))
-                        implementation += self.get_obj_block(name, loname,
-                                                             error_line,
-                                                             overwrite,
-                                                             element['element'],
-                                                             ns)
-                        children_dealt_with += 1
-                        if i < num_children - 1:
-                            implementation.append('else if')
-                    for j in range(i, i + len(self.child_lo_elements)):
-                        element = self.child_lo_elements[j-i]
-                        if self.is_plugin:
-                            implementation += \
-                                self.get_plugin_lo_block(element, error_line)
-                        else:
-                            implementation += self.get_lo_block(element,
-                                                                error_line)
-                        if j < num_children - children_dealt_with - 1:
-                            implementation.append('else if')
-                    if not self.is_plugin:
-                        code.append(self.create_code_block('else_if',
-                                                           implementation))
-                    else:
-                        plugin_imp = self.create_code_block('else_if',
-                                                            implementation)
-                        code.append(self.create_code_block('if',
-                                                           ['prefix == '
-                                                            'targetPrefix',
-                                                            plugin_imp]))
+                code = self.write_create_object_element(num_children, upkg, ns, xmlns)
                 if global_variables.is_package and len(self.child_elements) != self.num_non_std_children:
                     code.append(self.create_code_block('line',
                                                        ['delete '
@@ -307,7 +186,7 @@ class ProtectedFunctions():
                 code.append(self.create_code_block('line',
                                                    ['connectToChild()']))
                 code.append(self.create_code_block('line', ['return obj']))
-        # return the parts
+      # return the parts
         return dict({'title_line': title_line,
                      'params': params,
                      'return_lines': return_lines,
@@ -319,6 +198,135 @@ class ProtectedFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def write_create_object_element(self, num_children, upkg, ns, xmlns):
+        base_create = 'NULL'
+        if not self.has_std_base:
+            base_create = '{0}::createObject' \
+                          '(stream)'.format(self.base_class)
+        code = [self.create_code_block('line',
+                                       ['{0}* obj = {1}'.format(self.std_base, base_create)])]
+        self.add_ns_code(num_children, upkg, ns, xmlns, code)
+        if self.is_plugin:
+            class_name = strFunctions.get_class_from_plugin(
+                self.class_name, self.package)
+        else:
+            class_name = self.class_name
+        # sort error names to be used
+        name_in_error = class_name
+        if not self.document:
+            name_in_error = strFunctions.remove_prefix(class_name)
+        error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
+        if not global_variables.running_tests:
+            if error not in global_variables.error_list:
+                error = '{0}UnknownError'.format(self.package)
+        error_line = 'getErrorLog()->{0}{1}, ' \
+                     '{2})'.format(self.error, error, self.error_args)
+        if num_children == 0:
+            # do nothing we are calling a base class
+            implementation = []
+        else:
+            implementation = []
+            i = 0
+            children_dealt_with = 0
+            else_if = False
+            for i in range(0, len(self.child_elements)):
+                code_added = False
+                element = self.child_elements[i]
+                if 'is_ml' in element and element['is_ml']:
+                    continue
+                code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
+                children_dealt_with += 1
+                if not code_added and i < num_children - 1:
+                    implementation.append('else if')
+                    else_if = True
+            for j in range(i, i + len(self.child_lo_elements)):
+                code_added = False
+                element = self.child_lo_elements[j-i]
+                if self.is_plugin:
+                    implementation += \
+                        self.get_plugin_lo_block(element, error_line)
+                else:
+                    code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
+                if not code_added and j < num_children - children_dealt_with - 1:
+                    implementation.append('else if')
+                    else_if = True
+            if not self.is_plugin:
+                if num_children == 1:
+                    if not code_added:
+                        code.append(self.create_code_block('if',
+                                                           implementation))
+                else:
+                    if not code_added:
+                        if else_if:
+                            code.append(self.create_code_block('else_if',
+                                                               implementation))
+                        else:
+                            code.append(self.create_code_block('if',
+                                                               implementation))
+            else:
+                if num_children == 1:
+                    plugin_imp = self.create_code_block('if',
+                                                        implementation)
+                else:
+                    plugin_imp = self.create_code_block('else_if',
+                                                        implementation)
+                code.append(self.create_code_block('if',
+                                                   ['prefix == '
+                                                    'targetPrefix',
+                                                    plugin_imp]))
+        return code
+
+    def get_element_implementation(self, element, implementation, code, ns, error_line, else_if=False):
+        code_added = False
+        if element['abstract'] and \
+                not element['attType'] == 'lo_element':
+            this_implement = self.get_abstract_block(element, ns, error_line)
+            code.append(self.create_code_block('else_if',
+                                               this_implement))
+            code_added = True
+        elif element['type'] == 'inline_lo_element':
+            this_implement = ['obj = {0}.createObject(stream'
+                              ')'.format(element['memberName'])]
+            code.append(self.create_code_block('line',
+                                               this_implement))
+            code_added = True
+        elif element['attType'] == 'lo_element':
+            implementation += self.get_lo_block(element, error_line)
+        else:
+            overwrite = element['children_overwrite']
+            name = element['memberName']
+            loname = element['xml_name'] if overwrite \
+                else strFunctions.lower_first(strFunctions.remove_prefix(element['element']))
+            implementation += self.get_obj_block(name, loname,
+                                                 error_line,
+                                                 overwrite,
+                                                 element['element'],
+                                                 ns)
+        return code_added
+
+    def add_ns_code(self, num_children, upkg, ns, xmlns, code):
+        if self.is_plugin:
+            lines = ['const std::string& name = '
+                     'stream.peek().getName()',
+                     'const {0}& xmlns = '
+                     'stream.peek().getNamespaces()'.format(xmlns),
+                     'const std::string& prefix '
+                     '= stream.peek().getPrefix()']
+        else:
+            lines = ['const std::string& name '
+                     '= stream.peek().getName()']
+        if num_children > 0:
+            code.append(self.create_code_block('line', lines))
+        if self.is_plugin:
+            line = ['const std::string& targetPrefix = (xmlns.hasURI'
+                    '(mURI)) ? xmlns.getPrefix(mURI) : mPrefix']
+            code.append(self.create_code_block('line', line))
+        if global_variables.is_package and len(self.child_elements) != self.num_non_std_children:
+            line = ['{0}_CREATE_NS({1}, '
+                    'get{2}Namespaces'
+                    '())'.format(upkg, ns, global_variables.prefix)]
+            code.append(self.create_code_block('line', line))
 
     def write_create_object_lo(self, upkg, ns):
         if global_variables.is_package:
@@ -423,26 +431,6 @@ class ProtectedFunctions():
                           nested_if, line]
         return implementation
 
-    def get_element_block(self, element, error_line, ns, nest=True):
-        name = element['name']
-        function = strFunctions.upper_first(element['element'])
-
-        nested_if = self.create_code_block('if',
-                                           ['isSet{0}()'.format(element['capAttName']),
-                                            error_line])
-        used_ns = ns
-        if not global_variables.is_package:
-            used_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
-        implementation = ['name == \"{0}\"'.format(name),
-                          nested_if,
-                          '{0} = new {1}({2})'.format(element['memberName'],
-                                                      function, used_ns),
-                          'obj = {0}'.format(element['memberName'])]
-        if global_variables.is_package and nest:
-            return [self.create_code_block('if', implementation)]
-        else:
-            return implementation
-
     def get_plugin_lo_block(self, element, error_line):
         name = element['memberName']
         implementation = self.get_lo_block(element, error_line)
@@ -453,34 +441,35 @@ class ProtectedFunctions():
         implementation.append(second_if)
         return implementation
 
-    def get_abstract_block(self, element, ns):
+    def get_abstract_block(self, element, ns, error_line):
         name = element['memberName']
         concretes = query.get_concretes(element['root'], element['concrete'])
         num_concs = len(concretes)
-        implementation = self.get_concrete_block(concretes[0], name, ns)
+        implementation = self.get_concrete_block(concretes[0], name, ns, error_line, element['capAttName'])
         for i in range(1, num_concs):
             implementation.append('else if')
-            implementation += self.get_concrete_block(concretes[i], name, ns)
+            implementation += self.get_concrete_block(concretes[i], name, ns, error_line, element['capAttName'])
         return implementation
 
-    @staticmethod
-    def get_concrete_block(element, name, ns):
-        implementation = ['name == \"{0}\"'.format(element['name']),
-                          '{0} = new {1}({2})'.format(name, element['element'],
-                                                      ns),
-                          'obj = {0}'.format(name)]
+    def get_concrete_block(self, element, name, ns, error_line, membername):
+        implementation = self.get_obj_block(name, element['name'], error_line, False, element['element'], ns, membername)
         return implementation
 
-    def get_obj_block(self, name, loname, error_line, over_write, element, ns):
+    def get_obj_block(self, name, xmlname, error_line, over_write, element, ns, concrete_name=''):
         implementation = []
         used_ns = ns
         if not global_variables.is_package:
             used_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
+        if len(concrete_name) > 0:
+            name_to_use = concrete_name
+        else:
+            name_to_use = element
+            if element.lower() != xmlname.lower():
+                name_to_use = strFunctions.upper_first(xmlname)
         nested_if = self.create_code_block('if',
-                                           ['{0} '
-                                            '!= NULL'.format(name),
+                                           ['isSet{0}()'.format(name_to_use),
                                             error_line])
-        implementation.append('name == \"{0}\"'.format(loname))
+        implementation.append('name == \"{0}\"'.format(xmlname))
         implementation.append(nested_if)
         implementation.append('{0} = new {1}'
                               '({2})'.format(name,
@@ -490,19 +479,6 @@ class ProtectedFunctions():
                                   '(name)'.format(name))
         implementation.append('obj = {0}'.format(name))
         return implementation
-
-    def find_single_element(self):
-        element = None
-        for i in range(0, len(self.child_elements)):
-            element = self.child_elements[i]
-            if 'is_ml' in element and element['is_ml']:
-                element = None
-                continue
-            else:
-                break
-        if element is None:
-            element = self.child_lo_elements[0]
-        return element
 
     ########################################################################
 
