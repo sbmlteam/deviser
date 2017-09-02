@@ -39,6 +39,7 @@
           <concretes>
             <concrete name="betaDistribution" element="BetaDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="cauchyDistribution" element="CauchyDistribution" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="exponentialDistribution" element="ExponentialDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="logisticDistribution" element="LogisticDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="normalDistribution" element="NormalDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
@@ -150,6 +151,11 @@
           <attributes>
             <attribute name="correlation" required="false" type="element" element="UncertValue" abstract="false"/>
             <attribute name="externalParameters" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="ExponentialDistribution" typeCode="SBML_DISTRIB_EXPONENTIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="exponentialDistribution">
+          <attributes>
+            <attribute name="rate" required="true" type="element" element="UncertValue" abstract="false"/>
           </attributes>
         </element>
       </elements>

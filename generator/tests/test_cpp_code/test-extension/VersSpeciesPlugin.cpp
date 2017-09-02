@@ -1607,7 +1607,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOne")
     {
-      if (mClassOne != NULL)
+      if (isSetClassOne())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
           getPackageVersion(), getLevel(), getVersion());
@@ -1618,7 +1618,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "classTwo")
     {
-      if (mClassTwo != NULL)
+      if (isSetClassTwo())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
           getPackageVersion(), getLevel(), getVersion());

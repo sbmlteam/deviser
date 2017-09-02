@@ -1475,7 +1475,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "trigger")
   {
-    if (mTrigger != NULL)
+    if (isSetTrigger())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion());
@@ -1486,7 +1486,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "priority")
   {
-    if (mPriority != NULL)
+    if (isSetPriority())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion());
@@ -1497,7 +1497,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "delay")
   {
-    if (mDelay != NULL)
+    if (isSetDelay())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion());

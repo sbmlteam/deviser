@@ -898,6 +898,7 @@ BernoulliDistribution::createObject(XMLInputStream& stream)
     }
 
     mProb = new UncertValue(distribns);
+    mProb->setElementName(name);
     obj = mProb;
   }
 

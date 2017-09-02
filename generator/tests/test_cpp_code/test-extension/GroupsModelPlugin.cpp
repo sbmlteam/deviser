@@ -876,15 +876,22 @@ GroupsModelPlugin::createObject(XMLInputStream& stream)
   const std::string& targetPrefix = (xmlns.hasURI(mURI)) ?
     xmlns.getPrefix(mURI) : mPrefix;
 
-  if (name == "listOfGroups")
+  if (prefix == targetPrefix)
   {
-    if (mGroups.size() != 0)
+    if (name == "listOfGroups")
     {
-      getErrorLog()->logPackageError("groups", GroupsModelAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
-    }
+      if (mGroups.size() != 0)
+      {
+        getErrorLog()->logPackageError("groups", GroupsModelAllowedElements,
+          getPackageVersion(), getLevel(), getVersion());
+      }
 
-    obj = &mGroups;
+      obj = &mGroups;
+      if (targetPrefix.empty())
+      {
+        mGroups.getSBMLDocument()->enableDefaultNS(mURI, true);
+      }
+    }
   }
 
   connectToChild();

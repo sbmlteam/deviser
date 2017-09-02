@@ -1875,7 +1875,7 @@ Fred::createObject(XMLInputStream& stream)
 
   if (name == "other")
   {
-    if (mOther != NULL)
+    if (isSetOther())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
@@ -1886,7 +1886,7 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "other1")
   {
-    if (mOther1 != NULL)
+    if (isSetOther1())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
@@ -1898,7 +1898,7 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "myOther")
   {
-    if (mOther2 != NULL)
+    if (isSetMyOther())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion());

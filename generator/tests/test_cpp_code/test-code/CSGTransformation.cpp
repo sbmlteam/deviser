@@ -1089,31 +1089,73 @@ CSGTransformation::createObject(XMLInputStream& stream)
 
   if (name == "csgPrimitive")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGPrimitive(spatialns);
     obj = mCSGNode;
   }
   else if (name == "csgTranslation")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGTranslation(spatialns);
     obj = mCSGNode;
   }
   else if (name == "csgRotation")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGRotation(spatialns);
     obj = mCSGNode;
   }
   else if (name == "csgScale")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGScale(spatialns);
     obj = mCSGNode;
   }
   else if (name == "csgHomogeneousTransformation")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGHomogeneousTransformation(spatialns);
     obj = mCSGNode;
   }
   else if (name == "csgSetOperator")
   {
+    if (isSetCSGNode())
+    {
+      getErrorLog()->logPackageError("spatial",
+        SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
     mCSGNode = new CSGSetOperator(spatialns);
     obj = mCSGNode;
   }

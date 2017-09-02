@@ -1385,7 +1385,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
 
   if (name == "boundaryMin")
   {
-    if (mBoundaryMin != NULL)
+    if (isSetBoundaryMin())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),
@@ -1398,7 +1398,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
   }
   else if (name == "boundaryMax")
   {
-    if (mBoundaryMax != NULL)
+    if (isSetBoundaryMax())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),

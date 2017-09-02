@@ -59,6 +59,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 class BetaDistribution;
 class CauchyDistribution;
+class ExponentialDistribution;
 class LogisticDistribution;
 class NormalDistribution;
 class BinomialDistribution;
@@ -161,6 +162,16 @@ public:
    * CauchyDistribution, @c false otherwise
    */
   virtual bool isCauchyDistribution() const;
+
+
+  /**
+   * Predicate returning @c true if this abstract "Distribution" is of type
+   * ExponentialDistribution
+   *
+   * @return @c true if this abstract "Distribution" is of type
+   * ExponentialDistribution, @c false otherwise
+   */
+  virtual bool isExponentialDistribution() const;
 
 
   /**
@@ -690,6 +701,38 @@ Distribution_createCauchyDistribution(
 
 
 /**
+ * Creates a new ExponentialDistribution (Distribution_t) using the given SBML
+ * Level, Version and &ldquo;distrib&rdquo; package version.
+ *
+ * @param level an unsigned int, the SBML Level to assign to this
+ * Distribution_t.
+ *
+ * @param version an unsigned int, the SBML Version to assign to this
+ * Distribution_t.
+ *
+ * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+ * this Distribution_t.
+ *
+ * @throws SBMLConstructorException
+ * Thrown if the given @p level and @p version combination, or this kind of
+ * SBML object, are either invalid or mismatched with respect to the parent
+ * SBMLDocument object.
+ * @copydetails doc_note_setting_lv
+ *
+ * @memberof Distribution_t
+ */
+LIBSBML_EXTERN
+Distribution_t *
+Distribution_createExponentialDistribution(
+                                           unsigned int level =
+                                             DistribExtension::getDefaultLevel(),
+                                           unsigned int version =
+                                             DistribExtension::getDefaultVersion(),
+                                           unsigned int pkgVersion =
+                                             DistribExtension::getDefaultPackageVersion());
+
+
+/**
  * Creates a new LogisticDistribution (Distribution_t) using the given SBML
  * Level, Version and &ldquo;distrib&rdquo; package version.
  *
@@ -1001,6 +1044,22 @@ Distribution_isBetaDistribution(const Distribution_t * d);
 LIBSBML_EXTERN
 int
 Distribution_isCauchyDistribution(const Distribution_t * d);
+
+
+/**
+ * Predicate returning @c 1 if this Distribution_t is of type
+ * ExponentialDistribution_t
+ *
+ * @param d the Distribution_t structure.
+ *
+ * @return @c 1 if this Distribution_t is of type ExponentialDistribution_t, @c
+ * 0 otherwise
+ *
+ * @memberof Distribution_t
+ */
+LIBSBML_EXTERN
+int
+Distribution_isExponentialDistribution(const Distribution_t * d);
 
 
 /**

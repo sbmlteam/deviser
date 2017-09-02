@@ -1134,7 +1134,7 @@ Category::createObject(XMLInputStream& stream)
 
   if (name == "probability")
   {
-    if (mProbability != NULL)
+    if (isSetProbability())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
@@ -1146,7 +1146,7 @@ Category::createObject(XMLInputStream& stream)
   }
   else if (name == "value")
   {
-    if (mValue != NULL)
+    if (isSetValue())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
         getPackageVersion(), getLevel(), getVersion());

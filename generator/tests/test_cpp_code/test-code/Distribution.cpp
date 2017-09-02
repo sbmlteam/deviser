@@ -35,6 +35,7 @@
 
 #include <sbml/packages/distrib/sbml/BetaDistribution.h>
 #include <sbml/packages/distrib/sbml/CauchyDistribution.h>
+#include <sbml/packages/distrib/sbml/ExponentialDistribution.h>
 #include <sbml/packages/distrib/sbml/LogisticDistribution.h>
 #include <sbml/packages/distrib/sbml/NormalDistribution.h>
 #include <sbml/packages/distrib/sbml/BinomialDistribution.h>
@@ -143,6 +144,17 @@ bool
 Distribution::isCauchyDistribution() const
 {
   return dynamic_cast<const CauchyDistribution*>(this) != NULL;
+}
+
+
+/*
+ * Predicate returning @c true if this abstract "Distribution" is of type
+ * ExponentialDistribution
+ */
+bool
+Distribution::isExponentialDistribution() const
+{
+  return dynamic_cast<const ExponentialDistribution*>(this) != NULL;
 }
 
 
@@ -600,6 +612,20 @@ Distribution_createCauchyDistribution(unsigned int level,
 
 
 /*
+ * Creates a new ExponentialDistribution (Distribution_t) using the given SBML
+ * Level, Version and &ldquo;distrib&rdquo; package version.
+ */
+LIBSBML_EXTERN
+Distribution_t *
+Distribution_createExponentialDistribution(unsigned int level,
+                                           unsigned int version,
+                                           unsigned int pkgVersion)
+{
+  return new ExponentialDistribution(level, version, pkgVersion);
+}
+
+
+/*
  * Creates a new LogisticDistribution (Distribution_t) using the given SBML
  * Level, Version and &ldquo;distrib&rdquo; package version.
  */
@@ -764,6 +790,18 @@ int
 Distribution_isCauchyDistribution(const Distribution_t * d)
 {
   return (d != NULL) ? static_cast<int>(d->isCauchyDistribution()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this Distribution_t is of type
+ * ExponentialDistribution_t
+ */
+LIBSBML_EXTERN
+int
+Distribution_isExponentialDistribution(const Distribution_t * d)
+{
+  return (d != NULL) ? static_cast<int>(d->isExponentialDistribution()) : 0;
 }
 
 

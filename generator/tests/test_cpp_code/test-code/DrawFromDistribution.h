@@ -210,6 +210,16 @@ public:
 
 
   /**
+   * Creates a new ExponentialDistribution object, adds it to this
+   * DrawFromDistribution object and returns the ExponentialDistribution object
+   * created.
+   *
+   * @return a new ExponentialDistribution object instance.
+   */
+  ExponentialDistribution* createExponentialDistribution();
+
+
+  /**
    * Creates a new LogisticDistribution object, adds it to this
    * DrawFromDistribution object and returns the LogisticDistribution object
    * created.
@@ -1142,6 +1152,24 @@ DrawFromDistribution_createBetaDistribution(DrawFromDistribution_t* dfd);
 LIBSBML_EXTERN
 CauchyDistribution_t*
 DrawFromDistribution_createCauchyDistribution(DrawFromDistribution_t* dfd);
+
+
+/**
+ * Creates a new ExponentialDistribution_t object, adds it to this
+ * DrawFromDistribution_t object and returns the ExponentialDistribution_t
+ * object created.
+ *
+ * @param dfd the DrawFromDistribution_t structure to which the
+ * ExponentialDistribution_t should be added.
+ *
+ * @return a new ExponentialDistribution_t object instance.
+ *
+ * @memberof DrawFromDistribution_t
+ */
+LIBSBML_EXTERN
+ExponentialDistribution_t*
+DrawFromDistribution_createExponentialDistribution(DrawFromDistribution_t*
+  dfd);
 
 
 /**

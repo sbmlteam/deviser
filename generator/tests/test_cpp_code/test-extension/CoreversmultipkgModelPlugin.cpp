@@ -1316,7 +1316,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOneTwo")
     {
-      if (mClassOneTwo != NULL)
+      if (isSetClassOneTwo())
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
@@ -1328,7 +1328,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "classMult")
     {
-      if (mClassMult != NULL)
+      if (isSetClassMult())
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),

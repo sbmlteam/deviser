@@ -1074,7 +1074,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
 
   if (name == "alpha")
   {
-    if (mAlpha != NULL)
+    if (isSetAlpha())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),
@@ -1087,7 +1087,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
   }
   else if (name == "beta")
   {
-    if (mBeta != NULL)
+    if (isSetBeta())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),

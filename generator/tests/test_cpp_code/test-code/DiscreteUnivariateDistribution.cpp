@@ -1138,7 +1138,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
 
   if (name == "truncationLowerBound")
   {
-    if (mTruncationLowerBound != NULL)
+    if (isSetTruncationLowerBound())
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,
@@ -1151,7 +1151,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
   }
   else if (name == "truncationUpperBound")
   {
-    if (mTruncationUpperBound != NULL)
+    if (isSetTruncationUpperBound())
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,

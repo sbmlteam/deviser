@@ -36,6 +36,7 @@
 
 #include <sbml/packages/distrib/sbml/BetaDistribution.h>
 #include <sbml/packages/distrib/sbml/CauchyDistribution.h>
+#include <sbml/packages/distrib/sbml/ExponentialDistribution.h>
 #include <sbml/packages/distrib/sbml/LogisticDistribution.h>
 #include <sbml/packages/distrib/sbml/NormalDistribution.h>
 #include <sbml/packages/distrib/sbml/BinomialDistribution.h>
@@ -261,6 +262,30 @@ DrawFromDistribution::createCauchyDistribution()
   connectToChild();
 
   return static_cast<CauchyDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new ExponentialDistribution object, adds it to this
+ * DrawFromDistribution object and returns the ExponentialDistribution object
+ * created.
+ */
+ExponentialDistribution*
+DrawFromDistribution::createExponentialDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new ExponentialDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<ExponentialDistribution*>(mDistribution);
 }
 
 
@@ -1064,6 +1089,10 @@ DrawFromDistribution::createChildObject(const std::string& elementName)
   {
     return createCauchyDistribution();
   }
+  else if (elementName == "exponentialDistribution")
+  {
+    return createExponentialDistribution();
+  }
   else if (elementName == "logisticDistribution")
   {
     return createLogisticDistribution();
@@ -1124,6 +1153,11 @@ DrawFromDistribution::addChildObject(const std::string& elementName,
   }
   else if (elementName == "cauchyDistribution" && element->getTypeCode() ==
     SBML_DISTRIB_CAUCHYDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "exponentialDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_EXPONENTIALDISTRIBUTION)
   {
     return setDistribution((const Distribution*)(element));
   }
@@ -1196,6 +1230,11 @@ DrawFromDistribution::removeChildObject(const std::string& elementName,
     if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "cauchyDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "exponentialDistribution")
   {
     Distribution * obj = getDistribution();
     if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
@@ -1425,19 +1464,140 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
 
   DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
 
-  if (name == "distribution")
+  if (name == "betaDistribution")
   {
-    if (mDistribution != NULL)
+    if (isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
           getLevel(), getVersion());
     }
 
-    mDistribution = new Distribution(distribns);
+    mDistribution = new BetaDistribution(distribns);
     obj = mDistribution;
   }
-  else if (name == "listOfDistribInputs")
+  else if (name == "cauchyDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new CauchyDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "exponentialDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new ExponentialDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "logisticDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new LogisticDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "normalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new NormalDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "binomialDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new BinomialDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "geometricDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new GeometricDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "bernoulliDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new BernoulliDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "categoricalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new CategoricalDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "multivariateDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new MultivariateDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "externalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribDrawFromDistributionAllowedElements, getPackageVersion(),
+          getLevel(), getVersion());
+    }
+
+    mDistribution = new ExternalDistribution(distribns);
+    obj = mDistribution;
+  }
+
+  if (name == "listOfDistribInputs")
   {
     if (mDistribInputs.size() != 0)
     {
@@ -1575,6 +1735,19 @@ CauchyDistribution_t*
 DrawFromDistribution_createCauchyDistribution(DrawFromDistribution_t* dfd)
 {
   return (dfd != NULL) ? dfd->createCauchyDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new ExponentialDistribution_t object, adds it to this
+ * DrawFromDistribution_t object and returns the ExponentialDistribution_t
+ * object created.
+ */
+LIBSBML_EXTERN
+ExponentialDistribution_t*
+DrawFromDistribution_createExponentialDistribution(DrawFromDistribution_t* dfd)
+{
+  return (dfd != NULL) ? dfd->createExponentialDistribution() : NULL;
 }
 
 
