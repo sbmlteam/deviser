@@ -58,8 +58,8 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  unsigned int mVersion;
-  bool mIsSetVersion;
+  unsigned int mVersion1;
+  bool mIsSetVersion1;
   unsigned int mVersion2;
   bool mIsSetVersion2;
   ClassOne* mClassOne;
@@ -115,12 +115,12 @@ public:
 
 
   /**
-   * Returns the value of the "version" attribute of this VersModelPlugin.
+   * Returns the value of the "version1" attribute of this VersModelPlugin.
    *
-   * @return the value of the "version" attribute of this VersModelPlugin as a
+   * @return the value of the "version1" attribute of this VersModelPlugin as a
    * unsigned integer.
    */
-  unsigned int getVersion() const;
+  unsigned int getVersion1() const;
 
 
   /**
@@ -133,13 +133,13 @@ public:
 
 
   /**
-   * Predicate returning @c true if this VersModelPlugin's "version" attribute
+   * Predicate returning @c true if this VersModelPlugin's "version1" attribute
    * is set.
    *
-   * @return @c true if this VersModelPlugin's "version" attribute has been
+   * @return @c true if this VersModelPlugin's "version1" attribute has been
    * set, otherwise @c false is returned.
    */
-  bool isSetVersion() const;
+  bool isSetVersion1() const;
 
 
   /**
@@ -153,16 +153,16 @@ public:
 
 
   /**
-   * Sets the value of the "version" attribute of this VersModelPlugin.
+   * Sets the value of the "version1" attribute of this VersModelPlugin.
    *
-   * @param version unsigned int value of the "version" attribute to be set.
+   * @param version1 unsigned int value of the "version1" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setVersion(unsigned int version);
+  int setVersion1(unsigned int version1);
 
 
   /**
@@ -179,13 +179,13 @@ public:
 
 
   /**
-   * Unsets the value of the "version" attribute of this VersModelPlugin.
+   * Unsets the value of the "version1" attribute of this VersModelPlugin.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetVersion();
+  int unsetVersion1();
 
 
   /**

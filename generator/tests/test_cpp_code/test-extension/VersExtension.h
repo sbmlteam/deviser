@@ -388,11 +388,11 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  */
 typedef enum
 {
-  CLASS_ONE       =   100  /*!<ClassOne */
-, CLASS_A         =   101  /*!<Another */
-, CLASS_B         =   102  /*!<BBB */
-, CLASS_TWO       =   103  /*!<ClassTwo */
-, CLASS_THREE     =   104  /*!<ClassThree */
+  CLASS_ONE       =  1400  /*!<ClassOne */
+, CLASS_A         =  1401  /*!<Another */
+, CLASS_B         =  1402  /*!<BBB */
+, CLASS_TWO       =  1403  /*!<ClassTwo */
+, CLASS_THREE     =  1404  /*!<ClassThree */
 } SBMLVersTypeCode_t;
 
 

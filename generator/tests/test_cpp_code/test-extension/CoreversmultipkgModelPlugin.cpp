@@ -210,11 +210,11 @@ CoreversmultipkgModelPlugin::isSetAttPlug2() const
 int
 CoreversmultipkgModelPlugin::setAttPlug(unsigned int attPlug)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 2)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     mAttPlug = attPlug;
     mIsSetAttPlug = true;
@@ -236,12 +236,13 @@ CoreversmultipkgModelPlugin::setAttPlug(unsigned int attPlug)
 int
 CoreversmultipkgModelPlugin::setAttPlug2(unsigned int attPlug2)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if ((level == 3 && version == 2 && pkgVersion == 1) || (level == 3 && version
-    == 2 && pkgVersion == 2) || (level == 4 && version == 1 && pkgVersion == 1))
+  if ((coreLevel == 3 && coreVersion == 2 && pkgVersion == 1) || (coreLevel ==
+    3 && coreVersion == 2 && pkgVersion == 2) || (coreLevel == 4 && coreVersion
+      == 1 && pkgVersion == 1))
   {
     mAttPlug2 = attPlug2;
     mIsSetAttPlug2 = true;
@@ -1364,7 +1365,7 @@ CoreversmultipkgModelPlugin::addExpectedAttributes(ExpectedAttributes&
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
@@ -1441,22 +1442,22 @@ CoreversmultipkgModelPlugin::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 
   if (level == 3 && version == 2 && pkgVersion == 1)
   {
-    readL3V2V1Attributes;
+    readL3V2V1Attributes(attributes);
   }
 
   if (level == 3 && version == 2 && pkgVersion == 2)
   {
-    readL3V2V2Attributes;
+    readL3V2V2Attributes(attributes);
   }
 
   if (level == 4 && version == 1 && pkgVersion == 1)
   {
-    readL4V1V1Attributes;
+    readL4V1V1Attributes(attributes);
   }
 }
 

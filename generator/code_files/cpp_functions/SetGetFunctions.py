@@ -1560,7 +1560,7 @@ class SetGetFunctions():
             deal_with_versions = False
 
         if deal_with_versions:
-            implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
+            implementation = ['unsigned int coreLevel = getLevel()', 'unsigned int coreVersion = getVersion()',
                               'unsigned int pkgVersion = getPackageVersion()']
             code.append(self.create_code_block('line', implementation))
 
@@ -1576,7 +1576,7 @@ class SetGetFunctions():
                     level = self.lv_info[lv]['core_level']
                     vers = self.lv_info[lv]['core_version']
                     pkg = self.lv_info[lv]['pkg_version']
-                    this_line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                    this_line = 'coreLevel == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level, vers, pkg)
                     line = line + '({0}) || '.format(this_line)
                 length = len(line)
                 line = line[0:length-4]
@@ -1584,7 +1584,7 @@ class SetGetFunctions():
                 level = self.lv_info[lv_needed[0]]['core_level']
                 vers = self.lv_info[lv_needed[0]]['core_version']
                 pkg = self.lv_info[lv_needed[0]]['pkg_version']
-                line = 'level == {0} && version == {1} && pkgVersion == {2}'.format(level, vers, pkg)
+                line = 'coreLevel == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level, vers, pkg)
             topif = [line]
         return[deal_with_versions, code, topif]
 

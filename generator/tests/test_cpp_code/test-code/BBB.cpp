@@ -983,7 +983,7 @@ BBB::addExpectedAttributes(ExpectedAttributes& attributes)
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
@@ -1039,12 +1039,12 @@ BBB::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readL3V1V1Attributes;
+    readL3V1V1Attributes(attributes);
   }
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 }
 

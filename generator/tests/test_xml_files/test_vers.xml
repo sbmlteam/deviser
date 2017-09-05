@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="Vers" fullname="Versioning" number="100" offset="10000000" version="1" required="false">
+<package name="Vers" fullname="Versioning" number="1400" offset="10000000" version="1" required="false">
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
@@ -27,7 +27,7 @@
             <reference name="ClassOne"/>
           </references>
           <attributes>
-            <attribute name="version" required="false" type="unsigned int" abstract="false"/>
+            <attribute name="version1" required="false" type="unsigned int" abstract="false"/>
           </attributes>
         </plugin>
         <plugin extensionPoint="Species">

@@ -341,12 +341,13 @@ ClassOneTwo::isSetAttEnum() const
 int
 ClassOneTwo::setId(const std::string& id)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if ((level == 3 && version == 1 && pkgVersion == 2) || (level == 3 && version
-    == 2 && pkgVersion == 1) || (level == 3 && version == 2 && pkgVersion == 2))
+  if ((coreLevel == 3 && coreVersion == 1 && pkgVersion == 2) || (coreLevel ==
+    3 && coreVersion == 2 && pkgVersion == 1) || (coreLevel == 3 && coreVersion
+      == 2 && pkgVersion == 2))
   {
     return SyntaxChecker::checkAndSetSId(id, mId);
   }
@@ -375,11 +376,11 @@ ClassOneTwo::setAtt1(bool att1)
 int
 ClassOneTwo::setAttStr(const std::string& attStr)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 2)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     mAttStr = attStr;
     return LIBSBML_OPERATION_SUCCESS;
@@ -397,12 +398,12 @@ ClassOneTwo::setAttStr(const std::string& attStr)
 int
 ClassOneTwo::setAttInt(int attInt)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if ((level == 3 && version == 1 && pkgVersion == 2) || (level == 3 && version
-    == 2 && pkgVersion == 2))
+  if ((coreLevel == 3 && coreVersion == 1 && pkgVersion == 2) || (coreLevel ==
+    3 && coreVersion == 2 && pkgVersion == 2))
   {
     mAttInt = attInt;
     mIsSetAttInt = true;
@@ -423,12 +424,13 @@ ClassOneTwo::setAttInt(int attInt)
 int
 ClassOneTwo::setAtt2(bool att2)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if ((level == 3 && version == 2 && pkgVersion == 1) || (level == 3 && version
-    == 2 && pkgVersion == 2) || (level == 4 && version == 1 && pkgVersion == 1))
+  if ((coreLevel == 3 && coreVersion == 2 && pkgVersion == 1) || (coreLevel ==
+    3 && coreVersion == 2 && pkgVersion == 2) || (coreLevel == 4 && coreVersion
+      == 1 && pkgVersion == 1))
   {
     mAtt2 = att2;
     mIsSetAtt2 = true;
@@ -449,11 +451,11 @@ ClassOneTwo::setAtt2(bool att2)
 int
 ClassOneTwo::setAttDbl(double attDbl)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 2 && pkgVersion == 1)
+  if (coreLevel == 3 && coreVersion == 2 && pkgVersion == 1)
   {
     mAttDbl = attDbl;
     mIsSetAttDbl = true;
@@ -474,11 +476,11 @@ ClassOneTwo::setAttDbl(double attDbl)
 int
 ClassOneTwo::setAttUnit(const std::string& attUnit)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 4 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 4 && coreVersion == 1 && pkgVersion == 1)
   {
     if (!(SyntaxChecker::isValidInternalUnitSId(attUnit)))
     {
@@ -503,11 +505,11 @@ ClassOneTwo::setAttUnit(const std::string& attUnit)
 int
 ClassOneTwo::setAttEnum(const AbcType_t attEnum)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 4 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 4 && coreVersion == 1 && pkgVersion == 1)
   {
     if (AbcType_isValid(attEnum) == 0)
     {
@@ -533,11 +535,11 @@ ClassOneTwo::setAttEnum(const AbcType_t attEnum)
 int
 ClassOneTwo::setAttEnum(const std::string& attEnum)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 4 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 4 && coreVersion == 1 && pkgVersion == 1)
   {
     if (AbcType_isValidString(attEnum.c_str()) == 0)
     {
@@ -1291,7 +1293,7 @@ ClassOneTwo::addExpectedAttributes(ExpectedAttributes& attributes)
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 2)
   {
@@ -1371,22 +1373,22 @@ ClassOneTwo::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 
   if (level == 3 && version == 2 && pkgVersion == 1)
   {
-    readL3V2V1Attributes;
+    readL3V2V1Attributes(attributes);
   }
 
   if (level == 3 && version == 2 && pkgVersion == 2)
   {
-    readL3V2V2Attributes;
+    readL3V2V2Attributes(attributes);
   }
 
   if (level == 4 && version == 1 && pkgVersion == 1)
   {
-    readL4V1V1Attributes;
+    readL4V1V1Attributes(attributes);
   }
 }
 

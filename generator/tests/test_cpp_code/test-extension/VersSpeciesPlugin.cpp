@@ -227,11 +227,11 @@ VersSpeciesPlugin::isSetSpecies_att_v2() const
 int
 VersSpeciesPlugin::setSpecies_att_v1(const std::string& species_att_v1)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     if (!(SyntaxChecker::isValidInternalSId(species_att_v1)))
     {
@@ -257,11 +257,11 @@ VersSpeciesPlugin::setSpecies_att_v1(const std::string& species_att_v1)
 int
 VersSpeciesPlugin::setString_plugin_att(const std::string& string_plugin_att)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     mString_plugin_att = string_plugin_att;
     return LIBSBML_OPERATION_SUCCESS;
@@ -279,11 +279,11 @@ VersSpeciesPlugin::setString_plugin_att(const std::string& string_plugin_att)
 int
 VersSpeciesPlugin::setSpecies_att_v2(const std::string& species_att_v2)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 2)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     if (!(SyntaxChecker::isValidInternalSId(species_att_v2)))
     {
@@ -1666,7 +1666,7 @@ VersSpeciesPlugin::addExpectedAttributes(ExpectedAttributes& attributes)
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
@@ -1730,12 +1730,12 @@ VersSpeciesPlugin::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readL3V1V1Attributes;
+    readL3V1V1Attributes(attributes);
   }
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 }
 

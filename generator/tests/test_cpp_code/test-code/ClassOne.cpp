@@ -208,11 +208,11 @@ ClassOne::setId(const std::string& id)
 int
 ClassOne::setAtt1(bool att1)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     mAtt1 = att1;
     mIsSetAtt1 = true;
@@ -233,11 +233,11 @@ ClassOne::setAtt1(bool att1)
 int
 ClassOne::setAtt2(bool att2)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 2)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     mAtt2 = att2;
     mIsSetAtt2 = true;
@@ -753,7 +753,7 @@ ClassOne::addExpectedAttributes(ExpectedAttributes& attributes)
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
@@ -811,12 +811,12 @@ ClassOne::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readL3V1V1Attributes;
+    readL3V1V1Attributes(attributes);
   }
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 }
 

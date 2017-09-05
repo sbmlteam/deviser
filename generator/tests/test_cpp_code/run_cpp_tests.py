@@ -200,6 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
+#    runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -773,13 +774,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
+        name = 'test_vers'
+        num = 0
+        class_name = 'VersModelPlugin'
+        test_case = 'versions of plugins - attributes'
+        fail += run_plug_test(name, class_name, test_case, num)
 
-        name = 'test_att'
-        num = 4
-        class_name = 'ArrayChild'
-        list_of = ''
-        test_case = 'child elements and arrays'
-        fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

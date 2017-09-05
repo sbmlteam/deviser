@@ -536,7 +536,7 @@ class ProtectedFunctions():
             code.append(self.create_code_block('line',
                                                ['unsigned int level = getLevel()',
                                                 'unsigned int coreVersion = getVersion()',
-                                                'unsigned int pkgVersion = getPackageVersion']))
+                                                'unsigned int pkgVersion = getPackageVersion()']))
             for i in range(0, len(self.lv_info)):
                 level_val = self.lv_info[i]['core_level']
                 version = self.lv_info[i]['core_version']
@@ -618,7 +618,7 @@ class ProtectedFunctions():
                 pkg_version = self.lv_info[i]['pkg_version']
 
                 implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
-                                  'readL{0}V{1}V{2}Attributes'.format(level_val, version, pkg_version)]
+                                  'readL{0}V{1}V{2}Attributes(attributes)'.format(level_val, version, pkg_version)]
                 code.append(self.create_code_block('if', implementation))
 
         # return the parts

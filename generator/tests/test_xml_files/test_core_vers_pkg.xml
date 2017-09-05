@@ -16,7 +16,7 @@
             <reference name="ClassOne"/>
           </references>
           <attributes>
-            <attribute name="version" required="false" type="unsigned int" abstract="false"/>
+            <attribute name="version1" required="false" type="unsigned int" abstract="false"/>
           </attributes>
         </plugin>
       </plugins>

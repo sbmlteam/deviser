@@ -55,8 +55,8 @@ VersModelPlugin::VersModelPlugin(const std::string& uri,
                                  const std::string& prefix,
                                  VersPkgNamespaces* versns)
   : SBasePlugin(uri, prefix, versns)
-  , mVersion (SBML_INT_MAX)
-  , mIsSetVersion (false)
+  , mVersion1 (SBML_INT_MAX)
+  , mIsSetVersion1 (false)
   , mVersion2 (SBML_INT_MAX)
   , mIsSetVersion2 (false)
   , mClassOne (NULL)
@@ -70,8 +70,8 @@ VersModelPlugin::VersModelPlugin(const std::string& uri,
  */
 VersModelPlugin::VersModelPlugin(const VersModelPlugin& orig)
   : SBasePlugin( orig )
-  , mVersion ( orig.mVersion )
-  , mIsSetVersion ( orig.mIsSetVersion )
+  , mVersion1 ( orig.mVersion1 )
+  , mIsSetVersion1 ( orig.mIsSetVersion1 )
   , mVersion2 ( orig.mVersion2 )
   , mIsSetVersion2 ( orig.mIsSetVersion2 )
   , mClassOne ( NULL )
@@ -94,8 +94,8 @@ VersModelPlugin::operator=(const VersModelPlugin& rhs)
   if (&rhs != this)
   {
     SBasePlugin::operator=(rhs);
-    mVersion = rhs.mVersion;
-    mIsSetVersion = rhs.mIsSetVersion;
+    mVersion1 = rhs.mVersion1;
+    mIsSetVersion1 = rhs.mIsSetVersion1;
     mVersion2 = rhs.mVersion2;
     mIsSetVersion2 = rhs.mIsSetVersion2;
     delete mClassOne;
@@ -136,12 +136,12 @@ VersModelPlugin::~VersModelPlugin()
 
 
 /*
- * Returns the value of the "version" attribute of this VersModelPlugin.
+ * Returns the value of the "version1" attribute of this VersModelPlugin.
  */
 unsigned int
-VersModelPlugin::getVersion() const
+VersModelPlugin::getVersion1() const
 {
-  return mVersion;
+  return mVersion1;
 }
 
 
@@ -156,13 +156,13 @@ VersModelPlugin::getVersion2() const
 
 
 /*
- * Predicate returning @c true if this VersModelPlugin's "version" attribute is
- * set.
+ * Predicate returning @c true if this VersModelPlugin's "version1" attribute
+ * is set.
  */
 bool
-VersModelPlugin::isSetVersion() const
+VersModelPlugin::isSetVersion1() const
 {
-  return mIsSetVersion;
+  return mIsSetVersion1;
 }
 
 
@@ -178,25 +178,25 @@ VersModelPlugin::isSetVersion2() const
 
 
 /*
- * Sets the value of the "version" attribute of this VersModelPlugin.
+ * Sets the value of the "version1" attribute of this VersModelPlugin.
  */
 int
-VersModelPlugin::setVersion(unsigned int version)
+VersModelPlugin::setVersion1(unsigned int version1)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 1)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 1)
   {
-    mVersion = version;
-    mIsSetVersion = true;
+    mVersion1 = version1;
+    mIsSetVersion1 = true;
     return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    mVersion = version;
-    mIsSetVersion = false;
+    mVersion1 = version1;
+    mIsSetVersion1 = false;
     return LIBSBML_UNEXPECTED_ATTRIBUTE;
   }
 }
@@ -208,11 +208,11 @@ VersModelPlugin::setVersion(unsigned int version)
 int
 VersModelPlugin::setVersion2(unsigned int version2)
 {
-  unsigned int level = getLevel;
-  unsigned int version = getVersion();
+  unsigned int coreLevel = getLevel();
+  unsigned int coreVersion = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 
-  if (level == 3 && version == 1 && pkgVersion == 2)
+  if (coreLevel == 3 && coreVersion == 1 && pkgVersion == 2)
   {
     mVersion2 = version2;
     mIsSetVersion2 = true;
@@ -228,15 +228,15 @@ VersModelPlugin::setVersion2(unsigned int version2)
 
 
 /*
- * Unsets the value of the "version" attribute of this VersModelPlugin.
+ * Unsets the value of the "version1" attribute of this VersModelPlugin.
  */
 int
-VersModelPlugin::unsetVersion()
+VersModelPlugin::unsetVersion1()
 {
-  mVersion = SBML_INT_MAX;
-  mIsSetVersion = false;
+  mVersion1 = SBML_INT_MAX;
+  mIsSetVersion1 = false;
 
-  if (isSetVersion() == false)
+  if (isSetVersion1() == false)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
@@ -585,9 +585,9 @@ VersModelPlugin::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "version")
+  if (attributeName == "version1")
   {
-    value = getVersion();
+    value = getVersion1();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "version2")
@@ -650,9 +650,9 @@ VersModelPlugin::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SBasePlugin::isSetAttribute(attributeName);
 
-  if (attributeName == "version")
+  if (attributeName == "version1")
   {
-    value = isSetVersion();
+    value = isSetVersion1();
   }
   else if (attributeName == "version2")
   {
@@ -728,9 +728,9 @@ VersModelPlugin::setAttribute(const std::string& attributeName,
 {
   int return_value = SBasePlugin::setAttribute(attributeName, value);
 
-  if (attributeName == "version")
+  if (attributeName == "version1")
   {
-    return_value = setVersion(value);
+    return_value = setVersion1(value);
   }
   else if (attributeName == "version2")
   {
@@ -790,9 +790,9 @@ VersModelPlugin::unsetAttribute(const std::string& attributeName)
 {
   int value = SBasePlugin::unsetAttribute(attributeName);
 
-  if (attributeName == "version")
+  if (attributeName == "version1")
   {
-    value = unsetVersion();
+    value = unsetVersion1();
   }
   else if (attributeName == "version2")
   {
@@ -1094,11 +1094,11 @@ VersModelPlugin::addExpectedAttributes(ExpectedAttributes& attributes)
 
   unsigned int level = getLevel();
   unsigned int coreVersion = getVersion();
-  unsigned int pkgVersion = getPackageVersion;
+  unsigned int pkgVersion = getPackageVersion();
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
-    attributes.add("version");
+    attributes.add("version1");
   }
 
   if (level == 3 && coreVersion == 1 && pkgVersion == 2)
@@ -1157,12 +1157,12 @@ VersModelPlugin::readAttributes(const XMLAttributes& attributes,
 
   if (level == 3 && version == 1 && pkgVersion == 1)
   {
-    readL3V1V1Attributes;
+    readL3V1V1Attributes(attributes);
   }
 
   if (level == 3 && version == 1 && pkgVersion == 2)
   {
-    readL3V1V2Attributes;
+    readL3V1V2Attributes(attributes);
   }
 }
 
@@ -1186,22 +1186,22 @@ VersModelPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
   unsigned int numErrs;
 
   // 
-  // version uint (use = "optional" )
+  // version1 uint (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetVersion = attributes.readInto("version", mVersion);
+  mIsSetVersion1 = attributes.readInto("version1", mVersion1);
 
-  if ( mIsSetVersion == false)
+  if ( mIsSetVersion1 == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Vers attribute 'version' from the "
+      std::string message = "Vers attribute 'version1' from the "
         "<VersModelPlugin> element must be an integer.";
       log->logPackageError("vers",
-        VersVersModelPluginVersionMustBeNonNegativeInteger, pkgVersion, level,
+        VersVersModelPluginVersion1MustBeNonNegativeInteger, pkgVersion, level,
           version, message);
     }
   }
@@ -1289,9 +1289,9 @@ VersModelPlugin::writeAttributes(XMLOutputStream& stream) const
 void
 VersModelPlugin::writeL3V1V1Attributes(XMLOutputStream& stream) const
 {
-  if (isSetVersion() == true)
+  if (isSetVersion1() == true)
   {
-    stream.writeAttribute("version", getPrefix(), mVersion);
+    stream.writeAttribute("version1", getPrefix(), mVersion1);
   }
 }
 
