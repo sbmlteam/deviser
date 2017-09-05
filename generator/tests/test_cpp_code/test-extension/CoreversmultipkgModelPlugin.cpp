@@ -1497,8 +1497,8 @@ CoreversmultipkgModelPlugin::readL3V1V2Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlugMustBeNonNegativeInteger,
-          pkgVersion, level, version, message);
+        CoreversmultipkgModelAttPlugMustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
   }
 }
@@ -1539,8 +1539,8 @@ CoreversmultipkgModelPlugin::readL3V2V1Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
-          pkgVersion, level, version, message);
+        CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
   }
 }
@@ -1581,16 +1581,16 @@ CoreversmultipkgModelPlugin::readL3V2V2Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
-          pkgVersion, level, version, message);
+        CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
     else
     {
       std::string message = "Coreversmultipkg attribute 'attPlug2' is missing "
         "from the <Model> element.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAllowedAttributes, pkgVersion,
-          level, version, message);
+        CoreversmultipkgModelAllowedAttributes, pkgVersion, level, version,
+          message);
     }
   }
 }
@@ -1631,8 +1631,8 @@ CoreversmultipkgModelPlugin::readL4V1V1Attributes(const XMLAttributes&
       std::string message = "Coreversmultipkg attribute 'attPlug2' from the "
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
-        CoreversmultipkgCoreversmultipkgModelPluginAttPlug2MustBeNonNegativeInteger,
-          pkgVersion, level, version, message);
+        CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
+          version, message);
     }
   }
 }

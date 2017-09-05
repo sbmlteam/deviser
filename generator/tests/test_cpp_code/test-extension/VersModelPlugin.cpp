@@ -1200,9 +1200,8 @@ VersModelPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Vers attribute 'version1' from the "
         "<VersModelPlugin> element must be an integer.";
-      log->logPackageError("vers",
-        VersVersModelPluginVersion1MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+      log->logPackageError("vers", VersModelVersion1MustBeNonNegativeInteger,
+        pkgVersion, level, version, message);
     }
   }
 }
@@ -1241,9 +1240,8 @@ VersModelPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Vers attribute 'version2' from the "
         "<VersModelPlugin> element must be an integer.";
-      log->logPackageError("vers",
-        VersVersModelPluginVersion2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+      log->logPackageError("vers", VersModelVersion2MustBeNonNegativeInteger,
+        pkgVersion, level, version, message);
     }
   }
 }

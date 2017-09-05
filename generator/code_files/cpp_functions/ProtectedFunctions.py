@@ -51,8 +51,11 @@ class ProtectedFunctions():
         self.is_cpp_api = is_cpp_api
         self.is_list_of = is_list_of
         self.is_plugin = False
+        self.base = ''
         if 'is_plugin' in class_object:
             self.is_plugin = class_object['is_plugin']
+            if 'sbase' in class_object:
+                self.base = class_object['sbase']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -1277,17 +1280,18 @@ class ProtectedFunctions():
         code.append(self.create_code_block('line', line))
 
         # sort error names to be used
-        if self.is_plugin:
-            class_name = strFunctions.get_class_from_plugin(
-                self.class_name, self.package)
-            error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-            error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
-                                                         strFunctions.upper_first(attribute['name']))
-        else:
-            class_name = strFunctions.remove_prefix(self.class_name)
-            error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-            error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
-                                                         strFunctions.upper_first(attribute['name']))
+        [error_bool, error] = self.sort_error_names(strFunctions.upper_first(attribute['name']), 'Boolean')
+        # if self.is_plugin:
+        #     class_name = strFunctions.get_class_from_plugin(
+        #         self.class_name, self.package)
+        #     error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+        #     error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
+        #                                                  strFunctions.upper_first(attribute['name']))
+        # else:
+        #     class_name = strFunctions.remove_prefix(self.class_name)
+        #     error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
+        #     error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
+        #                                                  strFunctions.upper_first(attribute['name']))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1419,6 +1423,7 @@ class ProtectedFunctions():
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
+#        [error, att_error] = self.sort_error_names()
         if not global_variables.is_package:
             use_name = strFunctions.prefix_name(class_name)
         else:
@@ -1449,12 +1454,7 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
 
         # sort error names to be used
-        class_name = strFunctions.remove_prefix(self.class_name)
-        error = '{0}{1}{2}MustBe{3}Enum'.format(self.package, class_name,
-                                                strFunctions.upper_first(name),
-                                                element)
-        att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                     class_name)
+        [error, att_error] = self.sort_error_names(strFunctions.upper_first(name),'{0}Enum'.format(element))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1525,11 +1525,19 @@ class ProtectedFunctions():
             num_type = 'FIX ME'
 
         # sort error names to be used
-        class_name = strFunctions.remove_prefix(self.class_name)
-        error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-                                            up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
-        att_error = '{0}{1}AllowedAttributes'.format(self.package,
-                                                     class_name)
+        [error, att_error] = self.sort_error_names(up_name, num_type)
+        # if self.is_plugin:
+        #     class_name = self.base
+        #     error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
+        #                                         up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
+        #     att_error = '{0}{1}AllowedAttributes'.format(self.package,
+        #                                                  class_name)
+        # else:
+        #     class_name = strFunctions.remove_prefix(self.class_name)
+        #     error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
+        #                                         up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
+        #     att_error = '{0}{1}AllowedAttributes'.format(self.package,
+        #                                                  class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1575,3 +1583,18 @@ class ProtectedFunctions():
     def create_code_block(code_type, lines):
         code = dict({'code_type': code_type, 'code': lines})
         return code
+
+    def sort_error_names(self, up_name, num_type):
+        if self.is_plugin:
+            class_name = self.base
+            error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
+                                                up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
+            att_error = '{0}{1}AllowedAttributes'.format(self.package,
+                                                         class_name)
+        else:
+            class_name = strFunctions.remove_prefix(self.class_name)
+            error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
+                                                up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
+            att_error = '{0}{1}AllowedAttributes'.format(self.package,
+                                                         class_name)
+        return [error, att_error]
