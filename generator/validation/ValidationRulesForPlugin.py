@@ -172,10 +172,11 @@ class ValidationRulesForPlugin():
                         strFunctions.wrap_token('ID'))
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
-                   'type {3}.'\
+                   'type {3}{4}'\
                 .format(name, self.indef, self.formatted_name,
-                        strFunctions.wrap_token('integer'))
-            rule_type = 'Integer' if att_type == 'int' else 'UnInteger'
+                        strFunctions.wrap_token('integer'),
+                        '.' if att_type == 'int' else ', and must be non negative.')
+            rule_type = 'Integer' if att_type == 'int' else 'NonNegativeInteger'
         elif att_type == 'double':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
