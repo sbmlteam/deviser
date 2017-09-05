@@ -32,6 +32,19 @@
  */
 #include <sbml/packages/distrib/sbml/Uncertainty.h>
 #include <sbml/packages/distrib/validator/DistribSBMLError.h>
+#include <sbml/util/ElementFilter.h>
+
+#include <sbml/packages/distrib/sbml/BetaDistribution.h>
+#include <sbml/packages/distrib/sbml/CauchyDistribution.h>
+#include <sbml/packages/distrib/sbml/ExponentialDistribution.h>
+#include <sbml/packages/distrib/sbml/LogisticDistribution.h>
+#include <sbml/packages/distrib/sbml/NormalDistribution.h>
+#include <sbml/packages/distrib/sbml/BinomialDistribution.h>
+#include <sbml/packages/distrib/sbml/GeometricDistribution.h>
+#include <sbml/packages/distrib/sbml/BernoulliDistribution.h>
+#include <sbml/packages/distrib/sbml/CategoricalDistribution.h>
+#include <sbml/packages/distrib/sbml/MultivariateDistribution.h>
+#include <sbml/packages/distrib/sbml/ExternalDistribution.h>
 
 
 using namespace std;
@@ -54,9 +67,8 @@ Uncertainty::Uncertainty(unsigned int level,
                          unsigned int version,
                          unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
-  , mName ("")
-  , mUncertML (NULL)
+  , mUncertStatistics (NULL)
+  , mDistribution (NULL)
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,
     pkgVersion));
@@ -69,9 +81,8 @@ Uncertainty::Uncertainty(unsigned int level,
  */
 Uncertainty::Uncertainty(DistribPkgNamespaces *distribns)
   : SBase(distribns)
-  , mId ("")
-  , mName ("")
-  , mUncertML (NULL)
+  , mUncertStatistics (NULL)
+  , mDistribution (NULL)
 {
   setElementNamespace(distribns->getURI());
   connectToChild();
@@ -84,13 +95,17 @@ Uncertainty::Uncertainty(DistribPkgNamespaces *distribns)
  */
 Uncertainty::Uncertainty(const Uncertainty& orig)
   : SBase( orig )
-  , mId ( orig.mId )
-  , mName ( orig.mName )
-  , mUncertML ( NULL )
+  , mUncertStatistics ( NULL )
+  , mDistribution ( NULL )
 {
-  if (orig.mUncertML != NULL)
+  if (orig.mUncertStatistics != NULL)
   {
-    mUncertML = orig.mUncertML->clone();
+    mUncertStatistics = orig.mUncertStatistics->clone();
+  }
+
+  if (orig.mDistribution != NULL)
+  {
+    mDistribution = orig.mDistribution->clone();
   }
 
   connectToChild();
@@ -106,16 +121,24 @@ Uncertainty::operator=(const Uncertainty& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
-    mName = rhs.mName;
-    delete mUncertML;
-    if (rhs.mUncertML != NULL)
+    delete mUncertStatistics;
+    if (rhs.mUncertStatistics != NULL)
     {
-      mUncertML = rhs.mUncertML->clone();
+      mUncertStatistics = rhs.mUncertStatistics->clone();
     }
     else
     {
-      mUncertML = NULL;
+      mUncertStatistics = NULL;
+    }
+
+    delete mDistribution;
+    if (rhs.mDistribution != NULL)
+    {
+      mDistribution = rhs.mDistribution->clone();
+    }
+    else
+    {
+      mDistribution = NULL;
     }
 
     connectToChild();
@@ -140,173 +163,432 @@ Uncertainty::clone() const
  */
 Uncertainty::~Uncertainty()
 {
-  delete mUncertML;
-  mUncertML = NULL;
+  delete mUncertStatistics;
+  mUncertStatistics = NULL;
+  delete mDistribution;
+  mDistribution = NULL;
 }
 
 
 /*
- * Returns the value of the "id" attribute of this Uncertainty.
+ * Returns the value of the "uncertStatistics" element of this Uncertainty.
  */
-const std::string&
-Uncertainty::getId() const
+const UncertStatistics*
+Uncertainty::getUncertStatistics() const
 {
-  return mId;
+  return mUncertStatistics;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this Uncertainty.
+ * Returns the value of the "uncertStatistics" element of this Uncertainty.
  */
-const std::string&
-Uncertainty::getName() const
+UncertStatistics*
+Uncertainty::getUncertStatistics()
 {
-  return mName;
+  return mUncertStatistics;
 }
 
 
 /*
- * Predicate returning @c true if this Uncertainty's "id" attribute is set.
+ * Returns the value of the "distribution" element of this Uncertainty.
+ */
+const Distribution*
+Uncertainty::getDistribution() const
+{
+  return mDistribution;
+}
+
+
+/*
+ * Returns the value of the "distribution" element of this Uncertainty.
+ */
+Distribution*
+Uncertainty::getDistribution()
+{
+  return mDistribution;
+}
+
+
+/*
+ * Predicate returning @c true if this Uncertainty's "uncertStatistics" element
+ * is set.
  */
 bool
-Uncertainty::isSetId() const
+Uncertainty::isSetUncertStatistics() const
 {
-  return (mId.empty() == false);
+  return (mUncertStatistics != NULL);
 }
 
 
 /*
- * Predicate returning @c true if this Uncertainty's "name" attribute is set.
+ * Predicate returning @c true if this Uncertainty's "distribution" element is
+ * set.
  */
 bool
-Uncertainty::isSetName() const
+Uncertainty::isSetDistribution() const
 {
-  return (mName.empty() == false);
+  return (mDistribution != NULL);
 }
 
 
 /*
- * Sets the value of the "id" attribute of this Uncertainty.
+ * Sets the value of the "uncertStatistics" element of this Uncertainty.
  */
 int
-Uncertainty::setId(const std::string& id)
+Uncertainty::setUncertStatistics(const UncertStatistics* uncertStatistics)
 {
-  return SyntaxChecker::checkAndSetSId(id, mId);
+  if (mUncertStatistics == uncertStatistics)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (uncertStatistics == NULL)
+  {
+    delete mUncertStatistics;
+    mUncertStatistics = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mUncertStatistics;
+    mUncertStatistics = (uncertStatistics != NULL) ? uncertStatistics->clone()
+      : NULL;
+    if (mUncertStatistics != NULL)
+    {
+      mUncertStatistics->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
 /*
- * Sets the value of the "name" attribute of this Uncertainty.
+ * Sets the value of the "distribution" element of this Uncertainty.
  */
 int
-Uncertainty::setName(const std::string& name)
+Uncertainty::setDistribution(const Distribution* distribution)
 {
-  mName = name;
+  if (mDistribution == distribution)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (distribution == NULL)
+  {
+    delete mDistribution;
+    mDistribution = NULL;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    delete mDistribution;
+    mDistribution = (distribution != NULL) ? distribution->clone() : NULL;
+    if (mDistribution != NULL)
+    {
+      mDistribution->connectToParent(this);
+    }
+
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Creates a new UncertStatistics object, adds it to this Uncertainty object
+ * and returns the UncertStatistics object created.
+ */
+UncertStatistics*
+Uncertainty::createUncertStatistics()
+{
+  if (mUncertStatistics != NULL)
+  {
+    delete mUncertStatistics;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mUncertStatistics = new UncertStatistics(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return mUncertStatistics;
+}
+
+
+/*
+ * Creates a new BetaDistribution object, adds it to this Uncertainty object
+ * and returns the BetaDistribution object created.
+ */
+BetaDistribution*
+Uncertainty::createBetaDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new BetaDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<BetaDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new CauchyDistribution object, adds it to this Uncertainty object
+ * and returns the CauchyDistribution object created.
+ */
+CauchyDistribution*
+Uncertainty::createCauchyDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new CauchyDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<CauchyDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new ExponentialDistribution object, adds it to this Uncertainty
+ * object and returns the ExponentialDistribution object created.
+ */
+ExponentialDistribution*
+Uncertainty::createExponentialDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new ExponentialDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<ExponentialDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new LogisticDistribution object, adds it to this Uncertainty
+ * object and returns the LogisticDistribution object created.
+ */
+LogisticDistribution*
+Uncertainty::createLogisticDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new LogisticDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<LogisticDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new NormalDistribution object, adds it to this Uncertainty object
+ * and returns the NormalDistribution object created.
+ */
+NormalDistribution*
+Uncertainty::createNormalDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new NormalDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<NormalDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new BinomialDistribution object, adds it to this Uncertainty
+ * object and returns the BinomialDistribution object created.
+ */
+BinomialDistribution*
+Uncertainty::createBinomialDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new BinomialDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<BinomialDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new GeometricDistribution object, adds it to this Uncertainty
+ * object and returns the GeometricDistribution object created.
+ */
+GeometricDistribution*
+Uncertainty::createGeometricDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new GeometricDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<GeometricDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new BernoulliDistribution object, adds it to this Uncertainty
+ * object and returns the BernoulliDistribution object created.
+ */
+BernoulliDistribution*
+Uncertainty::createBernoulliDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new BernoulliDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<BernoulliDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new CategoricalDistribution object, adds it to this Uncertainty
+ * object and returns the CategoricalDistribution object created.
+ */
+CategoricalDistribution*
+Uncertainty::createCategoricalDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new CategoricalDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<CategoricalDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new MultivariateDistribution object, adds it to this Uncertainty
+ * object and returns the MultivariateDistribution object created.
+ */
+MultivariateDistribution*
+Uncertainty::createMultivariateDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new MultivariateDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<MultivariateDistribution*>(mDistribution);
+}
+
+
+/*
+ * Creates a new ExternalDistribution object, adds it to this Uncertainty
+ * object and returns the ExternalDistribution object created.
+ */
+ExternalDistribution*
+Uncertainty::createExternalDistribution()
+{
+  if (mDistribution != NULL)
+  {
+    delete mDistribution;
+  }
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+  mDistribution = new ExternalDistribution(distribns);
+
+  delete distribns;
+
+  connectToChild();
+
+  return static_cast<ExternalDistribution*>(mDistribution);
+}
+
+
+/*
+ * Unsets the value of the "uncertStatistics" element of this Uncertainty.
+ */
+int
+Uncertainty::unsetUncertStatistics()
+{
+  delete mUncertStatistics;
+  mUncertStatistics = NULL;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
 
 /*
- * Unsets the value of the "id" attribute of this Uncertainty.
+ * Unsets the value of the "distribution" element of this Uncertainty.
  */
 int
-Uncertainty::unsetId()
+Uncertainty::unsetDistribution()
 {
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSBML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this Uncertainty.
- */
-int
-Uncertainty::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSBML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Returns the value of the "uncertML" element of this Uncertainty.
- */
-const UncertMLNode*
-Uncertainty::getUncertML() const
-{
-  return mUncertML;
-}
-
-
-/*
- * Returns the value of the "uncertML" element of this Uncertainty.
- */
-UncertMLNode*
-Uncertainty::getUncertML()
-{
-  return mUncertML;
-}
-
-
-/*
- * Predicate returning @c true if this Uncertainty's "uncertML" element is set.
- */
-bool
-Uncertainty::isSetUncertML() const
-{
-  return (mUncertML != NULL);
-}
-
-
-/*
- * Sets the value of the "uncertML" element of this Uncertainty.
- */
-int
-Uncertainty::setUncertML(const UncertMLNode* uncertML)
-{
-  if (mUncertML == uncertML)
-  {
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (uncertML == NULL)
-  {
-    delete mUncertML;
-    mUncertML = NULL;
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    delete mUncertML;
-    mUncertML = (uncertML != NULL) ? uncertML->clone() : NULL;
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Unsets the value of the "uncertML" element of this Uncertainty.
- */
-int
-Uncertainty::unsetUncertML()
-{
-  delete mUncertML;
-  mUncertML = NULL;
+  delete mDistribution;
+  mDistribution = NULL;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -333,19 +615,6 @@ Uncertainty::getTypeCode() const
 
 
 /*
- * Predicate returning @c true if all the required attributes for this
- * Uncertainty object have been set.
- */
-bool
-Uncertainty::hasRequiredAttributes() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
-/*
  * Predicate returning @c true if all the required elements for this
  * Uncertainty object have been set.
  */
@@ -353,11 +622,6 @@ bool
 Uncertainty::hasRequiredElements() const
 {
   bool allPresent = true;
-
-  if (isSetUncertML() == false)
-  {
-    allPresent = false;
-  }
 
   return allPresent;
 }
@@ -374,9 +638,14 @@ Uncertainty::writeElements(XMLOutputStream& stream) const
 {
   SBase::writeElements(stream);
 
-  if (isSetUncertML() == true)
+  if (isSetUncertStatistics() == true)
   {
-    mUncertML->write(stream);
+    mUncertStatistics->write(stream);
+  }
+
+  if (isSetDistribution() == true)
+  {
+    mDistribution->write(stream);
   }
 
   SBase::writeExtensionElements(stream);
@@ -394,7 +663,20 @@ Uncertainty::writeElements(XMLOutputStream& stream) const
 bool
 Uncertainty::accept(SBMLVisitor& v) const
 {
-  return v.visit(*this);
+  v.visit(*this);
+
+  if (mUncertStatistics != NULL)
+  {
+    mUncertStatistics->accept(v);
+  }
+
+  if (mDistribution != NULL)
+  {
+    mDistribution->accept(v);
+  }
+
+  v.leave(*this);
+  return true;
 }
 
 /** @endcond */
@@ -410,6 +692,16 @@ void
 Uncertainty::setSBMLDocument(SBMLDocument* d)
 {
   SBase::setSBMLDocument(d);
+
+  if (mUncertStatistics != NULL)
+  {
+    mUncertStatistics->setSBMLDocument(d);
+  }
+
+  if (mDistribution != NULL)
+  {
+    mDistribution->setSBMLDocument(d);
+  }
 }
 
 /** @endcond */
@@ -425,6 +717,16 @@ void
 Uncertainty::connectToChild()
 {
   SBase::connectToChild();
+
+  if (mUncertStatistics != NULL)
+  {
+    mUncertStatistics->connectToParent(this);
+  }
+
+  if (mDistribution != NULL)
+  {
+    mDistribution->connectToParent(this);
+  }
 }
 
 /** @endcond */
@@ -442,6 +744,16 @@ Uncertainty::enablePackageInternal(const std::string& pkgURI,
                                    bool flag)
 {
   SBase::enablePackageInternal(pkgURI, pkgPrefix, flag);
+
+  if (isSetUncertStatistics())
+  {
+    mUncertStatistics->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
+
+  if (isSetDistribution())
+  {
+    mDistribution->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
 }
 
 /** @endcond */
@@ -529,22 +841,6 @@ Uncertainty::getAttribute(const std::string& attributeName,
 {
   int return_value = SBase::getAttribute(attributeName, value);
 
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -563,22 +859,6 @@ Uncertainty::getAttribute(const std::string& attributeName,
 {
   int return_value = SBase::getAttribute(attributeName, value);
 
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -596,15 +876,6 @@ bool
 Uncertainty::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SBase::isSetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
 
   return value;
 }
@@ -693,15 +964,6 @@ Uncertainty::setAttribute(const std::string& attributeName,
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
   return return_value;
 }
 
@@ -718,15 +980,6 @@ int
 Uncertainty::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
-
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
 
   return return_value;
 }
@@ -745,15 +998,6 @@ Uncertainty::unsetAttribute(const std::string& attributeName)
 {
   int value = SBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
-
   return value;
 }
 
@@ -771,9 +1015,53 @@ Uncertainty::createChildObject(const std::string& elementName)
 {
   SBase* obj = NULL;
 
-  if (elementName == "uncertML")
+  if (elementName == "uncertStatistics")
   {
-    return createUncertML();
+    return createUncertStatistics();
+  }
+  else if (elementName == "betaDistribution")
+  {
+    return createBetaDistribution();
+  }
+  else if (elementName == "cauchyDistribution")
+  {
+    return createCauchyDistribution();
+  }
+  else if (elementName == "exponentialDistribution")
+  {
+    return createExponentialDistribution();
+  }
+  else if (elementName == "logisticDistribution")
+  {
+    return createLogisticDistribution();
+  }
+  else if (elementName == "normalDistribution")
+  {
+    return createNormalDistribution();
+  }
+  else if (elementName == "binomialDistribution")
+  {
+    return createBinomialDistribution();
+  }
+  else if (elementName == "geometricDistribution")
+  {
+    return createGeometricDistribution();
+  }
+  else if (elementName == "bernoulliDistribution")
+  {
+    return createBernoulliDistribution();
+  }
+  else if (elementName == "categoricalDistribution")
+  {
+    return createCategoricalDistribution();
+  }
+  else if (elementName == "multivariateDistribution")
+  {
+    return createMultivariateDistribution();
+  }
+  else if (elementName == "externalDistribution")
+  {
+    return createExternalDistribution();
   }
 
   return obj;
@@ -792,9 +1080,65 @@ int
 Uncertainty::addChildObject(const std::string& elementName,
                             const SBase* element)
 {
-  if (elementName == "uncertML" && element->getTypeCode() == TO_DO)
+  if (elementName == "uncertStatistics" && element->getTypeCode() ==
+    SBML_DISTRIB_UNCERTSTATISTICS)
   {
-    return setUncertML((const UncertMLNode*)(element));
+    return setUncertStatistics((const UncertStatistics*)(element));
+  }
+  else if (elementName == "betaDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BETADISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "cauchyDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_CAUCHYDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "exponentialDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_EXPONENTIALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "logisticDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_LOGISTICDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "normalDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_NORMALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "binomialDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BINOMIALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "geometricDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_GEOMETRICLDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "bernoulliDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_BERNOULLIDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "categoricalDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_CATEGORICALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "multivariateDistribution" && element->getTypeCode()
+    == SBML_DISTRIB_MULTIVARIATEDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
+  }
+  else if (elementName == "externalDistribution" && element->getTypeCode() ==
+    SBML_DISTRIB_EXTERNALDISTRIBUTION)
+  {
+    return setDistribution((const Distribution*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -814,10 +1158,65 @@ SBase*
 Uncertainty::removeChildObject(const std::string& elementName,
                                const std::string& id)
 {
-  if (elementName == "uncertML")
+  if (elementName == "uncertStatistics")
   {
-    UncertMLNode * obj = getUncertML();
-    if (unsetUncertML() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertStatistics * obj = getUncertStatistics();
+    if (unsetUncertStatistics() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "betaDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "cauchyDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "exponentialDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "logisticDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "normalDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "binomialDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "geometricDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "bernoulliDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "categoricalDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "multivariateDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "externalDistribution")
+  {
+    Distribution * obj = getDistribution();
+    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
   return NULL;
@@ -837,9 +1236,16 @@ Uncertainty::getNumObjects(const std::string& elementName)
 {
   unsigned int n = 0;
 
-  if (elementName == "uncertML")
+  if (elementName == "uncertStatistics")
   {
-    if (isSetUncertML())
+    if (isSetUncertStatistics())
+    {
+      return 1;
+    }
+  }
+  else if (elementName == "distribution")
+  {
+    if (isSetDistribution())
     {
       return 1;
     }
@@ -862,9 +1268,13 @@ Uncertainty::getObject(const std::string& elementName, unsigned int index)
 {
   SBase* obj = NULL;
 
-  if (elementName == "uncertML")
+  if (elementName == "uncertStatistics")
   {
-    return getUncertML();
+    return getUncertStatistics();
+  }
+  else if (elementName == "distribution")
+  {
+    return getDistribution();
   }
 
   return obj;
@@ -873,158 +1283,283 @@ Uncertainty::getObject(const std::string& elementName, unsigned int index)
 /** @endcond */
 
 
-
-/** @cond doxygenLibsbmlInternal */
-
 /*
- * Adds the expected attributes for this element
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
  */
-void
-Uncertainty::addExpectedAttributes(ExpectedAttributes& attributes)
+SBase*
+Uncertainty::getElementBySId(const std::string& id)
 {
-  SBase::addExpectedAttributes(attributes);
+  if (id.empty())
+  {
+    return NULL;
+  }
 
-  attributes.add("id");
+  SBase* obj = NULL;
 
-  attributes.add("name");
+  if (mUncertStatistics != NULL)
+  {
+    if (mUncertStatistics->getId() == id)
+    {
+      return mUncertStatistics;
+    }
+
+    obj = mUncertStatistics->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mDistribution != NULL)
+  {
+    if (mDistribution->getId() == id)
+    {
+      return mDistribution;
+    }
+
+    obj = mDistribution->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  return obj;
 }
 
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
 
 /*
- * Reads the expected attributes into the member data variables
+ * Returns the first child element that has the given @p metaid, or @c NULL if
+ * no such object is found.
  */
-void
-Uncertainty::readAttributes(const XMLAttributes& attributes,
-                            const ExpectedAttributes& expectedAttributes)
+SBase*
+Uncertainty::getElementByMetaId(const std::string& metaid)
 {
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  unsigned int pkgVersion = getPackageVersion();
-  unsigned int numErrs;
-  bool assigned = false;
-  SBMLErrorLog* log = getErrorLog();
-
-  SBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
-
-  for (int n = numErrs-1; n >= 0; n--)
+  if (metaid.empty())
   {
-    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    return NULL;
+  }
+
+  SBase* obj = NULL;
+
+  if (mUncertStatistics != NULL)
+  {
+    if (mUncertStatistics->getMetaId() == metaid)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownPackageAttribute);
-      log->logPackageError("distrib", DistribUncertaintyAllowedAttributes,
-        pkgVersion, level, version, details);
+      return mUncertStatistics;
     }
-    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+
+    obj = mUncertStatistics->getElementByMetaId(metaid);
+    if (obj != NULL)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
-      log->logPackageError("distrib", DistribUncertaintyAllowedCoreAttributes,
-        pkgVersion, level, version, details);
+      return obj;
     }
   }
 
-  // 
-  // id SId (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
+  if (mDistribution != NULL)
   {
-    if (mId.empty() == true)
+    if (mDistribution->getMetaId() == metaid)
     {
-      logEmptyString(mId, level, version, "<Uncertainty>");
+      return mDistribution;
     }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+
+    obj = mDistribution->getElementByMetaId(metaid);
+    if (obj != NULL)
     {
-      log->logPackageError("distrib", DistribIdSyntaxRule, pkgVersion, level,
-        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
-          "does not conform to the syntax.", getLine(), getColumn());
+      return obj;
     }
   }
 
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<Uncertainty>");
-    }
-  }
+  return obj;
 }
 
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
 
 /*
- * Reads other XML such as math/notes etc.
+ * Returns a List of all child SBase objects, including those nested to an
+ * arbitrary depth.
  */
-bool
-Uncertainty::readOtherXML(XMLInputStream& stream)
+List*
+Uncertainty::getAllElements(ElementFilter* filter)
 {
-  bool read = false;
-  const string& name = stream.peek().getName();
+  List* ret = new List();
+  List* sublist = NULL;
 
-  if (name == "UncertML")
-  {
-    const XMLToken& token = stream.next();
-    stream.skipText();
-    delete mUncertML;
-    XMLNode* xml = new XMLNode(stream);
-    mUncertML = new UncertMLNode(xml);
-    stream.skipPastEnd(token);
-    delete xml;
-    read = true;
-  }
+  ADD_FILTERED_POINTER(ret, sublist, mUncertStatistics, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mDistribution, filter);
 
-  if (SBase::readOtherXML(stream))
-  {
-    read = true;
-  }
 
-  return read;
+  ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
+
+  return ret;
 }
 
-/** @endcond */
-
 
 
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Writes the attributes to the stream
+ * Creates a new object from the next XMLToken on the XMLInputStream
  */
-void
-Uncertainty::writeAttributes(XMLOutputStream& stream) const
+SBase*
+Uncertainty::createObject(XMLInputStream& stream)
 {
-  SBase::writeAttributes(stream);
+  SBase* obj = NULL;
 
-  if (isSetId() == true)
+  const std::string& name = stream.peek().getName();
+
+  DISTRIB_CREATE_NS(distribns, getSBMLNamespaces());
+
+  if (name == "betaDistribution")
   {
-    stream.writeAttribute("id", getPrefix(), mId);
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new BetaDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "cauchyDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new CauchyDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "exponentialDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new ExponentialDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "logisticDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new LogisticDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "normalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new NormalDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "binomialDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new BinomialDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "geometricDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new GeometricDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "bernoulliDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new BernoulliDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "categoricalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new CategoricalDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "multivariateDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new MultivariateDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "externalDistribution")
+  {
+    if (isSetDistribution())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mDistribution = new ExternalDistribution(distribns);
+    obj = mDistribution;
+  }
+  else if (name == "uncertStatistics")
+  {
+    if (isSetUncertStatistics())
+    {
+      getErrorLog()->logPackageError("distrib",
+        DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
+          getVersion());
+    }
+
+    mUncertStatistics = new UncertStatistics(distribns);
+    obj = mUncertStatistics;
   }
 
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
+  delete distribns;
 
-  SBase::writeExtensionAttributes(stream);
+  connectToChild();
+
+  return obj;
 }
 
 /** @endcond */
@@ -1082,161 +1617,258 @@ Uncertainty_free(Uncertainty_t* u)
 
 
 /*
- * Returns the value of the "id" attribute of this Uncertainty_t.
+ * Returns the value of the "uncertStatistics" element of this Uncertainty_t.
  */
 LIBSBML_EXTERN
-const char *
-Uncertainty_getId(const Uncertainty_t * u)
+const UncertStatistics_t*
+Uncertainty_getUncertStatistics(const Uncertainty_t * u)
 {
   if (u == NULL)
   {
     return NULL;
   }
 
-  return u->getId().empty() ? NULL : safe_strdup(u->getId().c_str());
+  return (UncertStatistics_t*)(u->getUncertStatistics());
 }
 
 
 /*
- * Returns the value of the "name" attribute of this Uncertainty_t.
+ * Returns the value of the "distribution" element of this Uncertainty_t.
  */
 LIBSBML_EXTERN
-const char *
-Uncertainty_getName(const Uncertainty_t * u)
+const Distribution_t*
+Uncertainty_getDistribution(const Uncertainty_t * u)
 {
   if (u == NULL)
   {
     return NULL;
   }
 
-  return u->getName().empty() ? NULL : safe_strdup(u->getName().c_str());
+  return (Distribution_t*)(u->getDistribution());
 }
 
 
 /*
- * Predicate returning @c 1 if this Uncertainty_t's "id" attribute is set.
+ * Predicate returning @c 1 if this Uncertainty_t's "uncertStatistics" element
+ * is set.
  */
 LIBSBML_EXTERN
 int
-Uncertainty_isSetId(const Uncertainty_t * u)
+Uncertainty_isSetUncertStatistics(const Uncertainty_t * u)
 {
-  return (u != NULL) ? static_cast<int>(u->isSetId()) : 0;
+  return (u != NULL) ? static_cast<int>(u->isSetUncertStatistics()) : 0;
 }
 
 
 /*
- * Predicate returning @c 1 if this Uncertainty_t's "name" attribute is set.
+ * Predicate returning @c 1 if this Uncertainty_t's "distribution" element is
+ * set.
  */
 LIBSBML_EXTERN
 int
-Uncertainty_isSetName(const Uncertainty_t * u)
+Uncertainty_isSetDistribution(const Uncertainty_t * u)
 {
-  return (u != NULL) ? static_cast<int>(u->isSetName()) : 0;
+  return (u != NULL) ? static_cast<int>(u->isSetDistribution()) : 0;
 }
 
 
 /*
- * Sets the value of the "id" attribute of this Uncertainty_t.
+ * Sets the value of the "uncertStatistics" element of this Uncertainty_t.
  */
 LIBSBML_EXTERN
 int
-Uncertainty_setId(Uncertainty_t * u, const char * id)
+Uncertainty_setUncertStatistics(Uncertainty_t * u,
+                                const UncertStatistics_t* uncertStatistics)
 {
-  return (u != NULL) ? u->setId(id) : LIBSBML_INVALID_OBJECT;
+  return (u != NULL) ? u->setUncertStatistics(uncertStatistics) :
+    LIBSBML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "name" attribute of this Uncertainty_t.
+ * Sets the value of the "distribution" element of this Uncertainty_t.
  */
 LIBSBML_EXTERN
 int
-Uncertainty_setName(Uncertainty_t * u, const char * name)
+Uncertainty_setDistribution(Uncertainty_t * u,
+                            const Distribution_t* distribution)
 {
-  return (u != NULL) ? u->setName(name) : LIBSBML_INVALID_OBJECT;
+  return (u != NULL) ? u->setDistribution(distribution) :
+    LIBSBML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "id" attribute of this Uncertainty_t.
+ * Creates a new UncertStatistics_t object, adds it to this Uncertainty_t
+ * object and returns the UncertStatistics_t object created.
  */
 LIBSBML_EXTERN
-int
-Uncertainty_unsetId(Uncertainty_t * u)
-{
-  return (u != NULL) ? u->unsetId() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this Uncertainty_t.
- */
-LIBSBML_EXTERN
-int
-Uncertainty_unsetName(Uncertainty_t * u)
-{
-  return (u != NULL) ? u->unsetName() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Returns the value of the "uncertML" element of this Uncertainty_t.
- */
-LIBSBML_EXTERN
-const UncertMLNode_t*
-Uncertainty_getUncertML(const Uncertainty_t * u)
+UncertStatistics_t*
+Uncertainty_createUncertStatistics(Uncertainty_t* u)
 {
   if (u == NULL)
   {
     return NULL;
   }
 
-  return (UncertMLNode_t*)(u->getUncertML());
+  return (UncertStatistics_t*)(u->createUncertStatistics());
 }
 
 
 /*
- * Predicate returning @c 1 if this Uncertainty_t's "uncertML" element is set.
+ * Creates a new BetaDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BetaDistribution_t object created.
  */
 LIBSBML_EXTERN
-int
-Uncertainty_isSetUncertML(const Uncertainty_t * u)
+BetaDistribution_t*
+Uncertainty_createBetaDistribution(Uncertainty_t* u)
 {
-  return (u != NULL) ? static_cast<int>(u->isSetUncertML()) : 0;
+  return (u != NULL) ? u->createBetaDistribution() : NULL;
 }
 
 
 /*
- * Sets the value of the "uncertML" element of this Uncertainty_t.
+ * Creates a new CauchyDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the CauchyDistribution_t object created.
  */
 LIBSBML_EXTERN
-int
-Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* uncertML)
+CauchyDistribution_t*
+Uncertainty_createCauchyDistribution(Uncertainty_t* u)
 {
-  return (u != NULL) ? u->setUncertML(uncertML) : LIBSBML_INVALID_OBJECT;
+  return (u != NULL) ? u->createCauchyDistribution() : NULL;
 }
 
 
 /*
- * Unsets the value of the "uncertML" element of this Uncertainty_t.
+ * Creates a new ExponentialDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the ExponentialDistribution_t object
+ * created.
  */
 LIBSBML_EXTERN
-int
-Uncertainty_unsetUncertML(Uncertainty_t * u)
+ExponentialDistribution_t*
+Uncertainty_createExponentialDistribution(Uncertainty_t* u)
 {
-  return (u != NULL) ? u->unsetUncertML() : LIBSBML_INVALID_OBJECT;
+  return (u != NULL) ? u->createExponentialDistribution() : NULL;
 }
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
- * Uncertainty_t object have been set.
+ * Creates a new LogisticDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the LogisticDistribution_t object created.
+ */
+LIBSBML_EXTERN
+LogisticDistribution_t*
+Uncertainty_createLogisticDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createLogisticDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new NormalDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the NormalDistribution_t object created.
+ */
+LIBSBML_EXTERN
+NormalDistribution_t*
+Uncertainty_createNormalDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createNormalDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new BinomialDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BinomialDistribution_t object created.
+ */
+LIBSBML_EXTERN
+BinomialDistribution_t*
+Uncertainty_createBinomialDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createBinomialDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new GeometricDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the GeometricDistribution_t object created.
+ */
+LIBSBML_EXTERN
+GeometricDistribution_t*
+Uncertainty_createGeometricDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createGeometricDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new BernoulliDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BernoulliDistribution_t object created.
+ */
+LIBSBML_EXTERN
+BernoulliDistribution_t*
+Uncertainty_createBernoulliDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createBernoulliDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new CategoricalDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the CategoricalDistribution_t object
+ * created.
+ */
+LIBSBML_EXTERN
+CategoricalDistribution_t*
+Uncertainty_createCategoricalDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createCategoricalDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new MultivariateDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the MultivariateDistribution_t object
+ * created.
+ */
+LIBSBML_EXTERN
+MultivariateDistribution_t*
+Uncertainty_createMultivariateDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createMultivariateDistribution() : NULL;
+}
+
+
+/*
+ * Creates a new ExternalDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the ExternalDistribution_t object created.
+ */
+LIBSBML_EXTERN
+ExternalDistribution_t*
+Uncertainty_createExternalDistribution(Uncertainty_t* u)
+{
+  return (u != NULL) ? u->createExternalDistribution() : NULL;
+}
+
+
+/*
+ * Unsets the value of the "uncertStatistics" element of this Uncertainty_t.
  */
 LIBSBML_EXTERN
 int
-Uncertainty_hasRequiredAttributes(const Uncertainty_t * u)
+Uncertainty_unsetUncertStatistics(Uncertainty_t * u)
 {
-  return (u != NULL) ? static_cast<int>(u->hasRequiredAttributes()) : 0;
+  return (u != NULL) ? u->unsetUncertStatistics() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "distribution" element of this Uncertainty_t.
+ */
+LIBSBML_EXTERN
+int
+Uncertainty_unsetDistribution(Uncertainty_t * u)
+{
+  return (u != NULL) ? u->unsetDistribution() : LIBSBML_INVALID_OBJECT;
 }
 
 

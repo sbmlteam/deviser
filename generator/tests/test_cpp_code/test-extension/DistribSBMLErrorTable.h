@@ -156,7 +156,7 @@ static const packageErrorTableEntry distribErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <sBase> object may contain one and only one instance of the "
-    "<uncertainty> element. No other elements from the SBML Level 3 "
+    "<uncertaintyOld> element. No other elements from the SBML Level 3 "
     "Distributions namespaces are permitted on a <sBase> object. ",
     { "L3V1 Distrib V1 Section"
     }
@@ -306,60 +306,60 @@ static const packageErrorTableEntry distribErrorTable[] =
   },
 
   // 5020601
-  { DistribUncertaintyAllowedCoreAttributes,
-    "Core attributes allowed on <uncertainty>.",
+  { DistribUncertaintyOldAllowedCoreAttributes,
+    "Core attributes allowed on <uncertaintyOld>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <uncertainty> object may have the optional SBML Level 3 Core attributes "
-    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on an <uncertainty>.",
+    "An <uncertaintyOld> object may have the optional SBML Level 3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on an <uncertaintyOld>.",
     { "L3V1 Distrib V1 Section"
     }
   },
 
   // 5020602
-  { DistribUncertaintyAllowedCoreElements,
-    "Core elements allowed on <uncertainty>.",
+  { DistribUncertaintyOldAllowedCoreElements,
+    "Core elements allowed on <uncertaintyOld>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <uncertainty> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on an <uncertainty>.",
+    "An <uncertaintyOld> object may have the optional SBML Level 3 Core "
+    "subobjects for notes and annotations. No other elements from the SBML "
+    "Level 3 Core namespaces are permitted on an <uncertaintyOld>.",
     { "L3V1 Distrib V1 Section"
     }
   },
 
   // 5020603
-  { DistribUncertaintyAllowedAttributes,
-    "Attributes allowed on <uncertainty>.",
+  { DistribUncertaintyOldAllowedAttributes,
+    "Attributes allowed on <uncertaintyOld>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <uncertainty> object may have the optional attributes 'distrib:id' and "
-    "'distrib:name'. No other attributes from the SBML Level 3 Distributions "
-    "namespaces are permitted on an <uncertainty> object. ",
+    "An <uncertaintyOld> object may have the optional attributes 'distrib:id' "
+    "and 'distrib:name'. No other attributes from the SBML Level 3 "
+    "Distributions namespaces are permitted on an <uncertaintyOld> object. ",
     { "L3V1 Distrib V1 Section"
     }
   },
 
   // 5020604
-  { DistribUncertaintyAllowedElements,
-    "Elements allowed on <uncertainty>.",
+  { DistribUncertaintyOldAllowedElements,
+    "Elements allowed on <uncertaintyOld>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "An <uncertainty> object must contain one and only one instance of the "
+    "An <uncertaintyOld> object must contain one and only one instance of the "
     "UncertMLNode element. No other elements from the SBML Level 3 "
-    "Distributions namespaces are permitted on an <uncertainty> object. ",
+    "Distributions namespaces are permitted on an <uncertaintyOld> object. ",
     { "L3V1 Distrib V1 Section"
     }
   },
 
   // 5020605
-  { DistribUncertaintyNameMustBeString,
+  { DistribUncertaintyOldNameMustBeString,
     "Name attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'distrib:name' on an <uncertainty> must have a value of data "
-    "type 'string'.",
+    "The attribute 'distrib:name' on an <uncertaintyOld> must have a value of "
+    "data type 'string'.",
     { "L3V1 Distrib V1 Section"
     }
   },

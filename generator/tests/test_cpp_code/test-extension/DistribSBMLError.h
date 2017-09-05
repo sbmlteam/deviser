@@ -70,11 +70,11 @@ typedef enum
 , DistribDistribInputIdMustBeString                           = 5020504
 , DistribDistribInputIndexMustBeNonNegativeInteger            = 5020505
 , DistribDistribInputNameMustBeString                         = 5020506
-, DistribUncertaintyAllowedCoreAttributes                     = 5020601
-, DistribUncertaintyAllowedCoreElements                       = 5020602
-, DistribUncertaintyAllowedAttributes                         = 5020603
-, DistribUncertaintyAllowedElements                           = 5020604
-, DistribUncertaintyNameMustBeString                          = 5020605
+, DistribUncertaintyOldAllowedCoreAttributes                  = 5020601
+, DistribUncertaintyOldAllowedCoreElements                    = 5020602
+, DistribUncertaintyOldAllowedAttributes                      = 5020603
+, DistribUncertaintyOldAllowedElements                        = 5020604
+, DistribUncertaintyOldNameMustBeString                       = 5020605
 } DistribSBMLErrorCode_t;
 
 

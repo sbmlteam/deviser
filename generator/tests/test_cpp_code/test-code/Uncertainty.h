@@ -52,7 +52,8 @@
 
 #include <sbml/SBase.h>
 #include <sbml/packages/distrib/extension/DistribExtension.h>
-#include <sbml/packages/distrib/sbml/UncertMLNode.h>
+#include <sbml/packages/distrib/sbml/UncertStatistics.h>
+#include <sbml/packages/distrib/sbml/Distribution.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -64,7 +65,8 @@ protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  UncertMLNode* mUncertML;
+  UncertStatistics* mUncertStatistics;
+  Distribution* mDistribution;
 
   /** @endcond */
 
@@ -141,134 +143,215 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this Uncertainty.
+   * Returns the value of the "uncertStatistics" element of this Uncertainty.
    *
-   * @return the value of the "id" attribute of this Uncertainty as a string.
+   * @return the value of the "uncertStatistics" element of this Uncertainty as
+   * a UncertStatistics*.
    */
-  virtual const std::string& getId() const;
+  const UncertStatistics* getUncertStatistics() const;
 
 
   /**
-   * Returns the value of the "name" attribute of this Uncertainty.
+   * Returns the value of the "uncertStatistics" element of this Uncertainty.
    *
-   * @return the value of the "name" attribute of this Uncertainty as a string.
+   * @return the value of the "uncertStatistics" element of this Uncertainty as
+   * a UncertStatistics*.
    */
-  virtual const std::string& getName() const;
+  UncertStatistics* getUncertStatistics();
 
 
   /**
-   * Predicate returning @c true if this Uncertainty's "id" attribute is set.
+   * Returns the value of the "distribution" element of this Uncertainty.
    *
-   * @return @c true if this Uncertainty's "id" attribute has been set,
+   * @return the value of the "distribution" element of this Uncertainty as a
+   * Distribution*.
+   */
+  const Distribution* getDistribution() const;
+
+
+  /**
+   * Returns the value of the "distribution" element of this Uncertainty.
+   *
+   * @return the value of the "distribution" element of this Uncertainty as a
+   * Distribution*.
+   */
+  Distribution* getDistribution();
+
+
+  /**
+   * Predicate returning @c true if this Uncertainty's "uncertStatistics"
+   * element is set.
+   *
+   * @return @c true if this Uncertainty's "uncertStatistics" element has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetUncertStatistics() const;
+
+
+  /**
+   * Predicate returning @c true if this Uncertainty's "distribution" element
+   * is set.
+   *
+   * @return @c true if this Uncertainty's "distribution" element has been set,
    * otherwise @c false is returned.
    */
-  virtual bool isSetId() const;
+  bool isSetDistribution() const;
 
 
   /**
-   * Predicate returning @c true if this Uncertainty's "name" attribute is set.
+   * Sets the value of the "uncertStatistics" element of this Uncertainty.
    *
-   * @return @c true if this Uncertainty's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this Uncertainty.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
+   * @param uncertStatistics UncertStatistics* value of the "uncertStatistics"
+   * element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  virtual int setId(const std::string& id);
+  int setUncertStatistics(const UncertStatistics* uncertStatistics);
 
 
   /**
-   * Sets the value of the "name" attribute of this Uncertainty.
+   * Sets the value of the "distribution" element of this Uncertainty.
    *
-   * @param name std::string& value of the "name" attribute to be set.
+   * @param distribution Distribution* value of the "distribution" element to
+   * be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  virtual int setName(const std::string& name);
+  int setDistribution(const Distribution* distribution);
 
 
   /**
-   * Unsets the value of the "id" attribute of this Uncertainty.
+   * Creates a new UncertStatistics object, adds it to this Uncertainty object
+   * and returns the UncertStatistics object created.
+   *
+   * @return a new UncertStatistics object instance.
+   */
+  UncertStatistics* createUncertStatistics();
+
+
+  /**
+   * Creates a new BetaDistribution object, adds it to this Uncertainty object
+   * and returns the BetaDistribution object created.
+   *
+   * @return a new BetaDistribution object instance.
+   */
+  BetaDistribution* createBetaDistribution();
+
+
+  /**
+   * Creates a new CauchyDistribution object, adds it to this Uncertainty
+   * object and returns the CauchyDistribution object created.
+   *
+   * @return a new CauchyDistribution object instance.
+   */
+  CauchyDistribution* createCauchyDistribution();
+
+
+  /**
+   * Creates a new ExponentialDistribution object, adds it to this Uncertainty
+   * object and returns the ExponentialDistribution object created.
+   *
+   * @return a new ExponentialDistribution object instance.
+   */
+  ExponentialDistribution* createExponentialDistribution();
+
+
+  /**
+   * Creates a new LogisticDistribution object, adds it to this Uncertainty
+   * object and returns the LogisticDistribution object created.
+   *
+   * @return a new LogisticDistribution object instance.
+   */
+  LogisticDistribution* createLogisticDistribution();
+
+
+  /**
+   * Creates a new NormalDistribution object, adds it to this Uncertainty
+   * object and returns the NormalDistribution object created.
+   *
+   * @return a new NormalDistribution object instance.
+   */
+  NormalDistribution* createNormalDistribution();
+
+
+  /**
+   * Creates a new BinomialDistribution object, adds it to this Uncertainty
+   * object and returns the BinomialDistribution object created.
+   *
+   * @return a new BinomialDistribution object instance.
+   */
+  BinomialDistribution* createBinomialDistribution();
+
+
+  /**
+   * Creates a new GeometricDistribution object, adds it to this Uncertainty
+   * object and returns the GeometricDistribution object created.
+   *
+   * @return a new GeometricDistribution object instance.
+   */
+  GeometricDistribution* createGeometricDistribution();
+
+
+  /**
+   * Creates a new BernoulliDistribution object, adds it to this Uncertainty
+   * object and returns the BernoulliDistribution object created.
+   *
+   * @return a new BernoulliDistribution object instance.
+   */
+  BernoulliDistribution* createBernoulliDistribution();
+
+
+  /**
+   * Creates a new CategoricalDistribution object, adds it to this Uncertainty
+   * object and returns the CategoricalDistribution object created.
+   *
+   * @return a new CategoricalDistribution object instance.
+   */
+  CategoricalDistribution* createCategoricalDistribution();
+
+
+  /**
+   * Creates a new MultivariateDistribution object, adds it to this Uncertainty
+   * object and returns the MultivariateDistribution object created.
+   *
+   * @return a new MultivariateDistribution object instance.
+   */
+  MultivariateDistribution* createMultivariateDistribution();
+
+
+  /**
+   * Creates a new ExternalDistribution object, adds it to this Uncertainty
+   * object and returns the ExternalDistribution object created.
+   *
+   * @return a new ExternalDistribution object instance.
+   */
+  ExternalDistribution* createExternalDistribution();
+
+
+  /**
+   * Unsets the value of the "uncertStatistics" element of this Uncertainty.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int unsetId();
+  int unsetUncertStatistics();
 
 
   /**
-   * Unsets the value of the "name" attribute of this Uncertainty.
+   * Unsets the value of the "distribution" element of this Uncertainty.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  virtual int unsetName();
-
-
-  /**
-   * Returns the value of the "uncertML" element of this Uncertainty.
-   *
-   * @return the value of the "uncertML" element of this Uncertainty as a
-   * UncertMLNode*.
-   */
-  const UncertMLNode* getUncertML() const;
-
-
-  /**
-   * Returns the value of the "uncertML" element of this Uncertainty.
-   *
-   * @return the value of the "uncertML" element of this Uncertainty as a
-   * UncertMLNode*.
-   */
-  UncertMLNode* getUncertML();
-
-
-  /**
-   * Predicate returning @c true if this Uncertainty's "uncertML" element is
-   * set.
-   *
-   * @return @c true if this Uncertainty's "uncertML" element has been set,
-   * otherwise @c false is returned.
-   */
-  bool isSetUncertML() const;
-
-
-  /**
-   * Sets the value of the "uncertML" element of this Uncertainty.
-   *
-   * @param uncertML UncertMLNode* value of the "uncertML" element to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setUncertML(const UncertMLNode* uncertML);
-
-
-  /**
-   * Unsets the value of the "uncertML" element of this Uncertainty.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  int unsetUncertML();
+  int unsetDistribution();
 
 
   /**
@@ -299,19 +382,6 @@ public:
 
 
   /**
-   * Predicate returning @c true if all the required attributes for this
-   * Uncertainty object have been set.
-   *
-   * @return @c true to indicate that all the required attributes of this
-   * Uncertainty have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Uncertainty object are:
-   */
-  virtual bool hasRequiredAttributes() const;
-
-
-  /**
    * Predicate returning @c true if all the required elements for this
    * Uncertainty object have been set.
    *
@@ -320,7 +390,6 @@ public:
    *
    *
    * @note The required elements for the Uncertainty object are:
-   * @li "uncertML"
    */
   virtual bool hasRequiredElements() const;
 
@@ -748,49 +817,52 @@ public:
   #endif /* !SWIG */
 
 
+  /**
+   * Returns the first child element that has the given @p id in the model-wide
+   * SId namespace, or @c NULL if no such object is found.
+   *
+   * @param id a string representing the id attribute of the object to
+   * retrieve.
+   *
+   * @return a pointer to the SBase element with the given @p id.
+   */
+  virtual SBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns the first child element that has the given @p metaid, or @c NULL
+   * if no such object is found.
+   *
+   * @param metaid a string representing the metaid attribute of the object to
+   * retrieve.
+   *
+   * @return a pointer to the SBase element with the given @p metaid.
+   */
+  virtual SBase* getElementByMetaId(const std::string& metaid);
+
+
+  /**
+   * Returns a List of all child SBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * filter, an ElementFilter that may impose restrictions on the objects to be
+   * retrieved.
+   *
+   * @return a List* pointer of pointers to all SBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(ElementFilter * filter = NULL);
+
+
 protected:
 
 
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Adds the expected attributes for this element
+   * Creates a new object from the next XMLToken on the XMLInputStream
    */
-  virtual void addExpectedAttributes(ExpectedAttributes& attributes);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Reads the expected attributes into the member data variables
-   */
-  virtual void readAttributes(const XMLAttributes& attributes,
-                              const ExpectedAttributes& expectedAttributes);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Reads other XML such as math/notes etc.
-   */
-  virtual bool readOtherXML(XMLInputStream& stream);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  virtual void writeAttributes(XMLOutputStream& stream) const;
+  virtual SBase* createObject(XMLInputStream& stream);
 
   /** @endcond */
 
@@ -879,71 +951,74 @@ Uncertainty_free(Uncertainty_t* u);
 
 
 /**
- * Returns the value of the "id" attribute of this Uncertainty_t.
+ * Returns the value of the "uncertStatistics" element of this Uncertainty_t.
  *
- * @param u the Uncertainty_t structure whose id is sought.
+ * @param u the Uncertainty_t structure whose uncertStatistics is sought.
  *
- * @return the value of the "id" attribute of this Uncertainty_t as a pointer
- * to a string.
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-const char *
-Uncertainty_getId(const Uncertainty_t * u);
-
-
-/**
- * Returns the value of the "name" attribute of this Uncertainty_t.
- *
- * @param u the Uncertainty_t structure whose name is sought.
- *
- * @return the value of the "name" attribute of this Uncertainty_t as a pointer
- * to a string.
+ * @return the value of the "uncertStatistics" element of this Uncertainty_t as
+ * a UncertStatistics*.
  *
  * @memberof Uncertainty_t
  */
 LIBSBML_EXTERN
-const char *
-Uncertainty_getName(const Uncertainty_t * u);
+const UncertStatistics_t*
+Uncertainty_getUncertStatistics(const Uncertainty_t * u);
 
 
 /**
- * Predicate returning @c 1 if this Uncertainty_t's "id" attribute is set.
+ * Returns the value of the "distribution" element of this Uncertainty_t.
+ *
+ * @param u the Uncertainty_t structure whose distribution is sought.
+ *
+ * @return the value of the "distribution" element of this Uncertainty_t as a
+ * Distribution*.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+const Distribution_t*
+Uncertainty_getDistribution(const Uncertainty_t * u);
+
+
+/**
+ * Predicate returning @c 1 if this Uncertainty_t's "uncertStatistics" element
+ * is set.
  *
  * @param u the Uncertainty_t structure.
  *
- * @return @c 1 if this Uncertainty_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 if this Uncertainty_t's "uncertStatistics" element has been
+ * set, otherwise @c 0 is returned.
  *
  * @memberof Uncertainty_t
  */
 LIBSBML_EXTERN
 int
-Uncertainty_isSetId(const Uncertainty_t * u);
+Uncertainty_isSetUncertStatistics(const Uncertainty_t * u);
 
 
 /**
- * Predicate returning @c 1 if this Uncertainty_t's "name" attribute is set.
+ * Predicate returning @c 1 if this Uncertainty_t's "distribution" element is
+ * set.
  *
  * @param u the Uncertainty_t structure.
  *
- * @return @c 1 if this Uncertainty_t's "name" attribute has been set,
+ * @return @c 1 if this Uncertainty_t's "distribution" element has been set,
  * otherwise @c 0 is returned.
  *
  * @memberof Uncertainty_t
  */
 LIBSBML_EXTERN
 int
-Uncertainty_isSetName(const Uncertainty_t * u);
+Uncertainty_isSetDistribution(const Uncertainty_t * u);
 
 
 /**
- * Sets the value of the "id" attribute of this Uncertainty_t.
+ * Sets the value of the "uncertStatistics" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
- * @param id const char * value of the "id" attribute to be set.
+ * @param uncertStatistics UncertStatistics_t* value of the "uncertStatistics"
+ * element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -953,15 +1028,17 @@ Uncertainty_isSetName(const Uncertainty_t * u);
  */
 LIBSBML_EXTERN
 int
-Uncertainty_setId(Uncertainty_t * u, const char * id);
+Uncertainty_setUncertStatistics(Uncertainty_t * u,
+                                const UncertStatistics_t* uncertStatistics);
 
 
 /**
- * Sets the value of the "name" attribute of this Uncertainty_t.
+ * Sets the value of the "distribution" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
- * @param name const char * value of the "name" attribute to be set.
+ * @param distribution Distribution_t* value of the "distribution" element to
+ * be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -971,11 +1048,207 @@ Uncertainty_setId(Uncertainty_t * u, const char * id);
  */
 LIBSBML_EXTERN
 int
-Uncertainty_setName(Uncertainty_t * u, const char * name);
+Uncertainty_setDistribution(Uncertainty_t * u,
+                            const Distribution_t* distribution);
 
 
 /**
- * Unsets the value of the "id" attribute of this Uncertainty_t.
+ * Creates a new UncertStatistics_t object, adds it to this Uncertainty_t
+ * object and returns the UncertStatistics_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the UncertStatistics_t should
+ * be added.
+ *
+ * @return a new UncertStatistics_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+UncertStatistics_t*
+Uncertainty_createUncertStatistics(Uncertainty_t* u);
+
+
+/**
+ * Creates a new BetaDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BetaDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the BetaDistribution_t should
+ * be added.
+ *
+ * @return a new BetaDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+BetaDistribution_t*
+Uncertainty_createBetaDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new CauchyDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the CauchyDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the CauchyDistribution_t
+ * should be added.
+ *
+ * @return a new CauchyDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+CauchyDistribution_t*
+Uncertainty_createCauchyDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new ExponentialDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the ExponentialDistribution_t object
+ * created.
+ *
+ * @param u the Uncertainty_t structure to which the ExponentialDistribution_t
+ * should be added.
+ *
+ * @return a new ExponentialDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+ExponentialDistribution_t*
+Uncertainty_createExponentialDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new LogisticDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the LogisticDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the LogisticDistribution_t
+ * should be added.
+ *
+ * @return a new LogisticDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+LogisticDistribution_t*
+Uncertainty_createLogisticDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new NormalDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the NormalDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the NormalDistribution_t
+ * should be added.
+ *
+ * @return a new NormalDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+NormalDistribution_t*
+Uncertainty_createNormalDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new BinomialDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BinomialDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the BinomialDistribution_t
+ * should be added.
+ *
+ * @return a new BinomialDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+BinomialDistribution_t*
+Uncertainty_createBinomialDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new GeometricDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the GeometricDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the GeometricDistribution_t
+ * should be added.
+ *
+ * @return a new GeometricDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+GeometricDistribution_t*
+Uncertainty_createGeometricDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new BernoulliDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the BernoulliDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the BernoulliDistribution_t
+ * should be added.
+ *
+ * @return a new BernoulliDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+BernoulliDistribution_t*
+Uncertainty_createBernoulliDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new CategoricalDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the CategoricalDistribution_t object
+ * created.
+ *
+ * @param u the Uncertainty_t structure to which the CategoricalDistribution_t
+ * should be added.
+ *
+ * @return a new CategoricalDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+CategoricalDistribution_t*
+Uncertainty_createCategoricalDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new MultivariateDistribution_t object, adds it to this
+ * Uncertainty_t object and returns the MultivariateDistribution_t object
+ * created.
+ *
+ * @param u the Uncertainty_t structure to which the MultivariateDistribution_t
+ * should be added.
+ *
+ * @return a new MultivariateDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+MultivariateDistribution_t*
+Uncertainty_createMultivariateDistribution(Uncertainty_t* u);
+
+
+/**
+ * Creates a new ExternalDistribution_t object, adds it to this Uncertainty_t
+ * object and returns the ExternalDistribution_t object created.
+ *
+ * @param u the Uncertainty_t structure to which the ExternalDistribution_t
+ * should be added.
+ *
+ * @return a new ExternalDistribution_t object instance.
+ *
+ * @memberof Uncertainty_t
+ */
+LIBSBML_EXTERN
+ExternalDistribution_t*
+Uncertainty_createExternalDistribution(Uncertainty_t* u);
+
+
+/**
+ * Unsets the value of the "uncertStatistics" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
@@ -987,11 +1260,11 @@ Uncertainty_setName(Uncertainty_t * u, const char * name);
  */
 LIBSBML_EXTERN
 int
-Uncertainty_unsetId(Uncertainty_t * u);
+Uncertainty_unsetUncertStatistics(Uncertainty_t * u);
 
 
 /**
- * Unsets the value of the "name" attribute of this Uncertainty_t.
+ * Unsets the value of the "distribution" element of this Uncertainty_t.
  *
  * @param u the Uncertainty_t structure.
  *
@@ -1003,90 +1276,7 @@ Uncertainty_unsetId(Uncertainty_t * u);
  */
 LIBSBML_EXTERN
 int
-Uncertainty_unsetName(Uncertainty_t * u);
-
-
-/**
- * Returns the value of the "uncertML" element of this Uncertainty_t.
- *
- * @param u the Uncertainty_t structure whose uncertML is sought.
- *
- * @return the value of the "uncertML" element of this Uncertainty_t as a
- * UncertMLNode*.
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-const UncertMLNode_t*
-Uncertainty_getUncertML(const Uncertainty_t * u);
-
-
-/**
- * Predicate returning @c 1 if this Uncertainty_t's "uncertML" element is set.
- *
- * @param u the Uncertainty_t structure.
- *
- * @return @c 1 if this Uncertainty_t's "uncertML" element has been set,
- * otherwise @c 0 is returned.
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-int
-Uncertainty_isSetUncertML(const Uncertainty_t * u);
-
-
-/**
- * Sets the value of the "uncertML" element of this Uncertainty_t.
- *
- * @param u the Uncertainty_t structure.
- *
- * @param uncertML UncertMLNode_t* value of the "uncertML" element to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-int
-Uncertainty_setUncertML(Uncertainty_t * u, const UncertMLNode_t* uncertML);
-
-
-/**
- * Unsets the value of the "uncertML" element of this Uncertainty_t.
- *
- * @param u the Uncertainty_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-int
-Uncertainty_unsetUncertML(Uncertainty_t * u);
-
-
-/**
- * Predicate returning @c 1 if all the required attributes for this
- * Uncertainty_t object have been set.
- *
- * @param u the Uncertainty_t structure.
- *
- * @return @c 1 to indicate that all the required attributes of this
- * Uncertainty_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Uncertainty_t object are:
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-int
-Uncertainty_hasRequiredAttributes(const Uncertainty_t * u);
+Uncertainty_unsetDistribution(Uncertainty_t * u);
 
 
 /**
@@ -1100,7 +1290,6 @@ Uncertainty_hasRequiredAttributes(const Uncertainty_t * u);
  *
  *
  * @note The required elements for the Uncertainty_t object are:
- * @li "uncertML"
  *
  * @memberof Uncertainty_t
  */

@@ -144,7 +144,7 @@
         <element name="Uncertainty" typeCode="SBML_DISTRIB_UNCERTAINTY" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
             <attribute name="uncertStatistics" required="false" type="element" element="UncertStatistics" abstract="false"/>
-            <attribute name="distribution" required="false" type="element" element="Distribution" abstract="false"/>
+            <attribute name="distribution" required="false" type="element" element="Distribution" abstract="true"/>
           </attributes>
         </element>
         <element name="UncertStatistics" typeCode="SBML_DISTRIB_UNCERTSTATISTICS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">

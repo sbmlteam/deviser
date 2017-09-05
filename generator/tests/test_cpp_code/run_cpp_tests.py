@@ -321,7 +321,7 @@ def main():
 
         name = 'distrib'
         num = 2
-        class_name = 'Uncertainty'
+        class_name = 'UncertaintyOld'
         list_of = ''
         test_case = 'class with other child'
         fail += run_test(name, num, class_name, test_case, list_of)
@@ -717,6 +717,13 @@ def main():
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 21
+        class_name = 'Uncertainty'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         name = 'test_core_vers'
         class_name = 'CoreversExtension'
         test_case = 'core version extension file'
@@ -767,13 +774,12 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
 
-        name = 'new_distrib'
-        num = 0
-        class_name = 'DrawFromDistribution'
+        name = 'test_att'
+        num = 4
+        class_name = 'ArrayChild'
         list_of = ''
-        test_case = 'abstract class with multiple abstract children'
+        test_case = 'child elements and arrays'
         fail += run_test(name, num, class_name, test_case, list_of)
-
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

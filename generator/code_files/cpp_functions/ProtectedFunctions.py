@@ -237,9 +237,12 @@ class ProtectedFunctions():
                     continue
                 code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
                 children_dealt_with += 1
-                if not code_added and i < num_children - 1:
-                    implementation.append('else if')
-                    else_if = True
+                if not code_added:
+                    if i < num_children - 1:
+                        implementation.append('else if')
+                        else_if = True
+                else:
+                    implementation = []
             for j in range(i, i + len(self.child_lo_elements)):
                 code_added = False
                 element = self.child_lo_elements[j-i]
@@ -248,9 +251,12 @@ class ProtectedFunctions():
                         self.get_plugin_lo_block(element, error_line)
                 else:
                     code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
-                if not code_added and j < num_children - children_dealt_with - 1:
-                    implementation.append('else if')
-                    else_if = True
+                if not code_added:
+                    if j < num_children - children_dealt_with - 1:
+                        implementation.append('else if')
+                        else_if = True
+                else:
+                    implementation = []
             if not self.is_plugin:
                 if num_children == 1:
                     if not code_added:
@@ -277,17 +283,27 @@ class ProtectedFunctions():
                                                     plugin_imp]))
         return code
 
-    def get_element_implementation(self, element, implementation, code, ns, error_line, else_if=False):
+    def get_element_implementation(self, element, implementation, code, ns, error_line):
         code_added = False
         if element['abstract'] and \
                 not element['attType'] == 'lo_element':
             this_implement = self.get_abstract_block(element, ns, error_line)
+            no_lines = len(implementation)
+            if no_lines > 0:
+                this_implement.append('else if')
+                for i in range(0, no_lines-1):
+                    this_implement.append(implementation[i])
             code.append(self.create_code_block('else_if',
                                                this_implement))
             code_added = True
         elif element['type'] == 'inline_lo_element':
             this_implement = ['obj = {0}.createObject(stream'
                               ')'.format(element['memberName'])]
+            no_lines = len(implementation)
+            if no_lines > 0:
+                this_implement.append('else if')
+                for i in range(0, no_lines-1):
+                    this_implement.append(implementation[i])
             code.append(self.create_code_block('line',
                                                this_implement))
             code_added = True
