@@ -416,7 +416,7 @@ class GeneralFunctions():
             if self.has_multiple_versions:
                 [reqd_atts, reqd_versions] = self.get_multiple_version_info()
                 if len(reqd_versions) > 0:
-                    implementation = ['unsigned int level = getLevel', 'unsigned int version = getVersion()',
+                    implementation = ['unsigned int level = getLevel()', 'unsigned int version = getVersion()',
                                       'unsigned int pkgVersion = getPackageVersion()']
                     code.append(self.create_code_block('line', implementation))
 
