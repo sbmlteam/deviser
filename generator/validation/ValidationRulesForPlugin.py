@@ -151,7 +151,8 @@ class ValidationRulesForPlugin():
         if att_type == 'SId':
             return
         elif att_type == 'SIdRef':
-            ref_name = strFunctions.upper_first(attribute['name'])
+            [ref_name, ref_type] = \
+                strFunctions.get_sid_refs(attribute['element'])
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
@@ -159,7 +160,7 @@ class ValidationRulesForPlugin():
                    'the identifier of an existing \{3} object defined in the ' \
                    'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
-            rule_type = ref_name
+            rule_type = ref_type
         elif att_type == 'string':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}.'\
@@ -225,8 +226,7 @@ class ValidationRulesForPlugin():
             .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        short = 'Attribute {0} values allowed on <{1}>.' \
-                ''.format(attribute['name'], self.lower_name)
+        short = '{0} attribute must be {1}.'.format(att_name, rule_type)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, self.name, att_name,
                                          rule_type)

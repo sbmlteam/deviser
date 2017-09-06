@@ -152,7 +152,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020202
   { TestSpeciesChargeMustBeInteger,
-    "Attribute charge values allowed on <species>.",
+    "Charge attribute must be Integer.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:charge' on a <species> must have a value of data type "
@@ -163,7 +163,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020203
   { TestSpeciesChemicalFormulaMustBeString,
-    "Attribute chemicalFormula values allowed on <species>.",
+    "ChemicalFormula attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:chemicalFormula' on a <species> must have a value of "

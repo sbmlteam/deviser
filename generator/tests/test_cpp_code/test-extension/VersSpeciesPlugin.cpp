@@ -1772,10 +1772,10 @@ VersSpeciesPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v1) == false)
     {
-      log->logPackageError("vers",
-        VersSpeciesSpecies_att_v1MustBeSpecies_att_v1, pkgVersion, level, version,
-          "The attribute species_att_v1='" + mSpecies_att_v1 + "' does not conform "
-            "to the syntax.", getLine(), getColumn());
+      log->logPackageError("vers", VersSpeciesSpecies_att_v1MustBeClassOne,
+        pkgVersion, level, version, "The attribute species_att_v1='" +
+          mSpecies_att_v1 + "' does not conform to the syntax.", getLine(), "
+            "getColumn());
     }
   }
 
@@ -1828,10 +1828,10 @@ VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v2) == false)
     {
-      log->logPackageError("vers",
-        VersSpeciesSpecies_att_v2MustBeSpecies_att_v2, pkgVersion, level, version,
-          "The attribute species_att_v2='" + mSpecies_att_v2 + "' does not conform "
-            "to the syntax.", getLine(), getColumn());
+      log->logPackageError("vers", VersSpeciesSpecies_att_v2MustBeAnother,
+        pkgVersion, level, version, "The attribute species_att_v2='" +
+          mSpecies_att_v2 + "' does not conform to the syntax.", getLine(), "
+            "getColumn());
     }
   }
 }
