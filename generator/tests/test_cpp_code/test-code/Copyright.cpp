@@ -61,7 +61,6 @@ Copyright::Copyright(unsigned int level,
                      unsigned int version,
                      unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -72,7 +71,6 @@ Copyright::Copyright(unsigned int level,
  */
 Copyright::Copyright(TestPkgNamespaces *testns)
   : SBase(testns)
-  , mId ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -84,7 +82,6 @@ Copyright::Copyright(TestPkgNamespaces *testns)
  */
 Copyright::Copyright(const Copyright& orig)
   : SBase( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -98,7 +95,6 @@ Copyright::operator=(const Copyright& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

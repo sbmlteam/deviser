@@ -36,7 +36,7 @@
             <reference name="ListOfAnothers"/>
           </references>
           <attributes>
-            <attribute name="species_att_v1" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="species_att_v1" required="false" type="SIdRef" abstract="false" element="ClassOne"/>
             <attribute name="string_plugin_att" required="false" type="string" abstract="false"/>
           </attributes>
         </plugin>
@@ -96,7 +96,7 @@
             <reference name="ListOfAnothers"/>
           </references>
           <attributes>
-            <attribute name="species_att_v2" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="species_att_v2" required="false" type="SIdRef" abstract="false" element="Another"/>
           </attributes>
         </plugin>
         <plugin extensionPoint="Reaction">

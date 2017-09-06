@@ -54,8 +54,6 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
                                  unsigned int version,
                                  unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
-  , mName ("")
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mNum2 (SBML_INT_MAX)
@@ -101,8 +99,6 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
  */
 MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   : SBase(testns)
-  , mId ("")
-  , mName ("")
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mNum2 (SBML_INT_MAX)
@@ -149,8 +145,6 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
  */
 MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   : SBase( orig )
-  , mId ( orig.mId )
-  , mName ( orig.mName )
   , mNum ( orig.mNum )
   , mIsSetNum ( orig.mIsSetNum )
   , mNum2 ( orig.mNum2 )
@@ -203,8 +197,6 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
-    mName = rhs.mName;
     mNum = rhs.mNum;
     mIsSetNum = rhs.mIsSetNum;
     mNum2 = rhs.mNum2;

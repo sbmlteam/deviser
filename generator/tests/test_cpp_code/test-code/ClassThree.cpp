@@ -55,7 +55,6 @@ ClassThree::ClassThree(unsigned int level,
                        unsigned int pkgVersion)
   : SBase(level, version)
   , mNumber (ENUM_INVALID)
-  , mName (FRED_INVALID)
   , mBadName (FRED_INVALID)
   , mOtherNum (ENUM_INVALID)
 {
@@ -69,7 +68,6 @@ ClassThree::ClassThree(unsigned int level,
 ClassThree::ClassThree(TestPkgNamespaces *testns)
   : SBase(testns)
   , mNumber (ENUM_INVALID)
-  , mName (FRED_INVALID)
   , mBadName (FRED_INVALID)
   , mOtherNum (ENUM_INVALID)
 {
@@ -84,7 +82,6 @@ ClassThree::ClassThree(TestPkgNamespaces *testns)
 ClassThree::ClassThree(const ClassThree& orig)
   : SBase( orig )
   , mNumber ( orig.mNumber )
-  , mName ( orig.mName )
   , mBadName ( orig.mBadName )
   , mOtherNum ( orig.mOtherNum )
 {
@@ -101,7 +98,6 @@ ClassThree::operator=(const ClassThree& rhs)
   {
     SBase::operator=(rhs);
     mNumber = rhs.mNumber;
-    mName = rhs.mName;
     mBadName = rhs.mBadName;
     mOtherNum = rhs.mOtherNum;
   }

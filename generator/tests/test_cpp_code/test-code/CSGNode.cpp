@@ -62,7 +62,6 @@ CSGNode::CSGNode(unsigned int level,
                  unsigned int version,
                  unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -74,7 +73,6 @@ CSGNode::CSGNode(unsigned int level,
  */
 CSGNode::CSGNode(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
 {
   setElementNamespace(spatialns->getURI());
   loadPlugins(spatialns);
@@ -86,7 +84,6 @@ CSGNode::CSGNode(SpatialPkgNamespaces *spatialns)
  */
 CSGNode::CSGNode(const CSGNode& orig)
   : SBase( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -100,7 +97,6 @@ CSGNode::operator=(const CSGNode& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

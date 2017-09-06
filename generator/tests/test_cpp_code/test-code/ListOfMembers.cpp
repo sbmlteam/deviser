@@ -54,8 +54,6 @@ ListOfMembers::ListOfMembers(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion)
   : ListOf(level, version)
-  , mId ("")
-  , mName ("")
 {
   setSBMLNamespacesAndOwn(new GroupsPkgNamespaces(level, version, pkgVersion));
 }
@@ -66,8 +64,6 @@ ListOfMembers::ListOfMembers(unsigned int level,
  */
 ListOfMembers::ListOfMembers(GroupsPkgNamespaces *groupsns)
   : ListOf(groupsns)
-  , mId ("")
-  , mName ("")
 {
   setElementNamespace(groupsns->getURI());
 }
@@ -78,8 +74,6 @@ ListOfMembers::ListOfMembers(GroupsPkgNamespaces *groupsns)
  */
 ListOfMembers::ListOfMembers(const ListOfMembers& orig)
   : ListOf( orig )
-  , mId ( orig.mId )
-  , mName ( orig.mName )
 {
 }
 
@@ -93,8 +87,6 @@ ListOfMembers::operator=(const ListOfMembers& rhs)
   if (&rhs != this)
   {
     ListOf::operator=(rhs);
-    mId = rhs.mId;
-    mName = rhs.mName;
   }
 
   return *this;

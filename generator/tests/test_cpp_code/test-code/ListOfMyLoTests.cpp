@@ -54,7 +54,6 @@ ListOfMyLoTests::ListOfMyLoTests(unsigned int level,
                                  unsigned int version,
                                  unsigned int pkgVersion)
   : ListOf(level, version)
-  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -65,7 +64,6 @@ ListOfMyLoTests::ListOfMyLoTests(unsigned int level,
  */
 ListOfMyLoTests::ListOfMyLoTests(TestPkgNamespaces *testns)
   : ListOf(testns)
-  , mId ("")
 {
   setElementNamespace(testns->getURI());
 }
@@ -76,7 +74,6 @@ ListOfMyLoTests::ListOfMyLoTests(TestPkgNamespaces *testns)
  */
 ListOfMyLoTests::ListOfMyLoTests(const ListOfMyLoTests& orig)
   : ListOf( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -90,7 +87,6 @@ ListOfMyLoTests::operator=(const ListOfMyLoTests& rhs)
   if (&rhs != this)
   {
     ListOf::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

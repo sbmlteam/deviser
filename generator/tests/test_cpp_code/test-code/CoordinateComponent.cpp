@@ -55,7 +55,6 @@ CoordinateComponent::CoordinateComponent(unsigned int level,
                                          unsigned int version,
                                          unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mType (COORDINATE_KIND_INVALID)
   , mUnit ("")
   , mBoundaryMin (NULL)
@@ -73,7 +72,6 @@ CoordinateComponent::CoordinateComponent(unsigned int level,
  */
 CoordinateComponent::CoordinateComponent(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mType (COORDINATE_KIND_INVALID)
   , mUnit ("")
   , mBoundaryMin (NULL)
@@ -90,7 +88,6 @@ CoordinateComponent::CoordinateComponent(SpatialPkgNamespaces *spatialns)
  */
 CoordinateComponent::CoordinateComponent(const CoordinateComponent& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mType ( orig.mType )
   , mUnit ( orig.mUnit )
   , mBoundaryMin ( NULL )
@@ -119,7 +116,6 @@ CoordinateComponent::operator=(const CoordinateComponent& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mType = rhs.mType;
     mUnit = rhs.mUnit;
     delete mBoundaryMin;

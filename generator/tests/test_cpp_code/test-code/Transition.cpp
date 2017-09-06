@@ -56,8 +56,6 @@ Transition::Transition(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
-  , mName ("")
   , mInputs (level, version, pkgVersion)
   , mOutputs (level, version, pkgVersion)
   , mFunctionTerms (level, version, pkgVersion)
@@ -72,8 +70,6 @@ Transition::Transition(unsigned int level,
  */
 Transition::Transition(QualPkgNamespaces *qualns)
   : SBase(qualns)
-  , mId ("")
-  , mName ("")
   , mInputs (qualns)
   , mOutputs (qualns)
   , mFunctionTerms (qualns)
@@ -89,8 +85,6 @@ Transition::Transition(QualPkgNamespaces *qualns)
  */
 Transition::Transition(const Transition& orig)
   : SBase( orig )
-  , mId ( orig.mId )
-  , mName ( orig.mName )
   , mInputs ( orig.mInputs )
   , mOutputs ( orig.mOutputs )
   , mFunctionTerms ( orig.mFunctionTerms )
@@ -108,8 +102,6 @@ Transition::operator=(const Transition& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
-    mName = rhs.mName;
     mInputs = rhs.mInputs;
     mOutputs = rhs.mOutputs;
     mFunctionTerms = rhs.mFunctionTerms;

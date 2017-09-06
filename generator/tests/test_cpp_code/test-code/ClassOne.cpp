@@ -54,7 +54,6 @@ ClassOne::ClassOne(unsigned int level,
                    unsigned int version,
                    unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mAtt1 (false)
   , mIsSetAtt1 (false)
   , mAtt2 (false)
@@ -69,7 +68,6 @@ ClassOne::ClassOne(unsigned int level,
  */
 ClassOne::ClassOne(VersPkgNamespaces *versns)
   : SBase(versns)
-  , mId ("")
   , mAtt1 (false)
   , mIsSetAtt1 (false)
   , mAtt2 (false)
@@ -85,7 +83,6 @@ ClassOne::ClassOne(VersPkgNamespaces *versns)
  */
 ClassOne::ClassOne(const ClassOne& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mAtt1 ( orig.mAtt1 )
   , mIsSetAtt1 ( orig.mIsSetAtt1 )
   , mAtt2 ( orig.mAtt2 )
@@ -103,7 +100,6 @@ ClassOne::operator=(const ClassOne& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mAtt1 = rhs.mAtt1;
     mIsSetAtt1 = rhs.mIsSetAtt1;
     mAtt2 = rhs.mAtt2;

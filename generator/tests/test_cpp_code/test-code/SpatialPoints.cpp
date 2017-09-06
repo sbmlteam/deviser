@@ -54,7 +54,6 @@ SpatialPoints::SpatialPoints(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mCompression (COMPRESSION_KIND_INVALID)
   , mArrayData (NULL)
   , mArrayDataLength (SBML_INT_MAX)
@@ -71,7 +70,6 @@ SpatialPoints::SpatialPoints(unsigned int level,
  */
 SpatialPoints::SpatialPoints(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mCompression (COMPRESSION_KIND_INVALID)
   , mArrayData (NULL)
   , mArrayDataLength (SBML_INT_MAX)
@@ -88,7 +86,6 @@ SpatialPoints::SpatialPoints(SpatialPkgNamespaces *spatialns)
  */
 SpatialPoints::SpatialPoints(const SpatialPoints& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mCompression ( orig.mCompression )
   , mArrayData ( NULL )
   , mArrayDataLength ( orig.mArrayDataLength )
@@ -109,7 +106,6 @@ SpatialPoints::operator=(const SpatialPoints& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mCompression = rhs.mCompression;
     mArrayData = NULL;
     setArrayData(rhs.mArrayData, rhs.mArrayDataLength);

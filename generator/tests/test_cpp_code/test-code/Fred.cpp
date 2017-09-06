@@ -53,7 +53,6 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  */
 Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mBol (false)
   , mIsSetBol (false)
   , mNum (SBML_INT_MAX)
@@ -75,7 +74,6 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
  */
 Fred::Fred(XPkgNamespaces *xns)
   : SBase(xns)
-  , mId ("")
   , mBol (false)
   , mIsSetBol (false)
   , mNum (SBML_INT_MAX)
@@ -98,7 +96,6 @@ Fred::Fred(XPkgNamespaces *xns)
  */
 Fred::Fred(const Fred& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mBol ( orig.mBol )
   , mIsSetBol ( orig.mIsSetBol )
   , mNum ( orig.mNum )
@@ -138,7 +135,6 @@ Fred::operator=(const Fred& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mBol = rhs.mBol;
     mIsSetBol = rhs.mIsSetBol;
     mNum = rhs.mNum;

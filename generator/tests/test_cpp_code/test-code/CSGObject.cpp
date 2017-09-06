@@ -63,7 +63,6 @@ CSGObject::CSGObject(unsigned int level,
                      unsigned int version,
                      unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mDomainType ("")
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
@@ -80,7 +79,6 @@ CSGObject::CSGObject(unsigned int level,
  */
 CSGObject::CSGObject(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mDomainType ("")
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
@@ -97,7 +95,6 @@ CSGObject::CSGObject(SpatialPkgNamespaces *spatialns)
  */
 CSGObject::CSGObject(const CSGObject& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mDomainType ( orig.mDomainType )
   , mOrdinal ( orig.mOrdinal )
   , mIsSetOrdinal ( orig.mIsSetOrdinal )
@@ -121,7 +118,6 @@ CSGObject::operator=(const CSGObject& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mDomainType = rhs.mDomainType;
     mOrdinal = rhs.mOrdinal;
     mIsSetOrdinal = rhs.mIsSetOrdinal;

@@ -54,7 +54,6 @@ ClassOneTwo::ClassOneTwo(unsigned int level,
                          unsigned int version,
                          unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mAtt1 (false)
   , mIsSetAtt1 (false)
   , mAttStr ("")
@@ -78,7 +77,6 @@ ClassOneTwo::ClassOneTwo(unsigned int level,
  */
 ClassOneTwo::ClassOneTwo(CoreversmultipkgPkgNamespaces *coreversmultipkgns)
   : SBase(coreversmultipkgns)
-  , mId ("")
   , mAtt1 (false)
   , mIsSetAtt1 (false)
   , mAttStr ("")
@@ -101,7 +99,6 @@ ClassOneTwo::ClassOneTwo(CoreversmultipkgPkgNamespaces *coreversmultipkgns)
  */
 ClassOneTwo::ClassOneTwo(const ClassOneTwo& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mAtt1 ( orig.mAtt1 )
   , mIsSetAtt1 ( orig.mIsSetAtt1 )
   , mAttStr ( orig.mAttStr )
@@ -126,7 +123,6 @@ ClassOneTwo::operator=(const ClassOneTwo& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mAtt1 = rhs.mAtt1;
     mIsSetAtt1 = rhs.mIsSetAtt1;
     mAttStr = rhs.mAttStr;

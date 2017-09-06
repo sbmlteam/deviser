@@ -55,7 +55,6 @@ MyLoTest::MyLoTest(unsigned int level,
                    unsigned int version,
                    unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -66,7 +65,6 @@ MyLoTest::MyLoTest(unsigned int level,
  */
 MyLoTest::MyLoTest(TestPkgNamespaces *testns)
   : SBase(testns)
-  , mId ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -78,7 +76,6 @@ MyLoTest::MyLoTest(TestPkgNamespaces *testns)
  */
 MyLoTest::MyLoTest(const MyLoTest& orig)
   : SBase( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -92,7 +89,6 @@ MyLoTest::operator=(const MyLoTest& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

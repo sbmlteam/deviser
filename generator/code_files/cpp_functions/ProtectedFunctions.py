@@ -667,8 +667,15 @@ class ProtectedFunctions():
                           'unsigned int version = getVersion()',
                           'bool assigned = false',
                           'unsigned int pkgVersion = getPackageVersion()',
-                          'SBMLErrorLog* log = getErrorLog()',
-                          'unsigned int numErrs']
+                          'SBMLErrorLog* log = getErrorLog()']
+        need_num_errs = False
+        for i in range(0, len(self.version_attributes[version])):
+            att_type = self.version_attributes[version][i]['type']
+            if att_type == 'bool' or att_type == 'int' or att_type == 'uint' or att_type == 'double':
+                need_num_errs = True
+                break
+        if need_num_errs:
+            implementation.append('unsigned int numErrs')
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         for i in range(0, len(self.version_attributes[version])):
@@ -1281,17 +1288,6 @@ class ProtectedFunctions():
 
         # sort error names to be used
         [error_bool, error] = self.sort_error_names(strFunctions.upper_first(attribute['name']), 'Boolean')
-        # if self.is_plugin:
-        #     class_name = strFunctions.get_class_from_plugin(
-        #         self.class_name, self.package)
-        #     error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-        #     error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
-        #                                                  strFunctions.upper_first(attribute['name']))
-        # else:
-        #     class_name = strFunctions.remove_prefix(self.class_name)
-        #     error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-        #     error_bool = '{0}{1}{2}MustBeBoolean'.format(self.package, class_name,
-        #                                                  strFunctions.upper_first(attribute['name']))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
@@ -1423,7 +1419,6 @@ class ProtectedFunctions():
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
-#        [error, att_error] = self.sort_error_names()
         if not global_variables.is_package:
             use_name = strFunctions.prefix_name(class_name)
         else:
@@ -1526,18 +1521,6 @@ class ProtectedFunctions():
 
         # sort error names to be used
         [error, att_error] = self.sort_error_names(up_name, num_type)
-        # if self.is_plugin:
-        #     class_name = self.base
-        #     error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-        #                                         up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
-        #     att_error = '{0}{1}AllowedAttributes'.format(self.package,
-        #                                                  class_name)
-        # else:
-        #     class_name = strFunctions.remove_prefix(self.class_name)
-        #     error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-        #                                         up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
-        #     att_error = '{0}{1}AllowedAttributes'.format(self.package,
-        #                                                  class_name)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)

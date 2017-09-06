@@ -54,7 +54,6 @@ MyBase::MyBase(unsigned int level,
                unsigned int version,
                unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -65,7 +64,6 @@ MyBase::MyBase(unsigned int level,
  */
 MyBase::MyBase(TestPkgNamespaces *testns)
   : SBase(testns)
-  , mId ("")
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -77,7 +75,6 @@ MyBase::MyBase(TestPkgNamespaces *testns)
  */
 MyBase::MyBase(const MyBase& orig)
   : SBase( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -91,7 +88,6 @@ MyBase::operator=(const MyBase& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

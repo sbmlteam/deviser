@@ -54,7 +54,6 @@ Boundary::Boundary(unsigned int level,
                    unsigned int version,
                    unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mValue (util_NaN())
   , mIsSetValue (false)
   , mElementName("boundary")
@@ -69,7 +68,6 @@ Boundary::Boundary(unsigned int level,
  */
 Boundary::Boundary(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mValue (util_NaN())
   , mIsSetValue (false)
   , mElementName("boundary")
@@ -84,7 +82,6 @@ Boundary::Boundary(SpatialPkgNamespaces *spatialns)
  */
 Boundary::Boundary(const Boundary& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mValue ( orig.mValue )
   , mIsSetValue ( orig.mIsSetValue )
   , mElementName ( orig.mElementName )
@@ -101,7 +98,6 @@ Boundary::operator=(const Boundary& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mValue = rhs.mValue;
     mIsSetValue = rhs.mIsSetValue;
     mElementName = rhs.mElementName;

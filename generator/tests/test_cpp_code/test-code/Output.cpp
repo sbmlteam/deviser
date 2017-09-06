@@ -55,10 +55,8 @@ Output::Output(unsigned int level,
                unsigned int version,
                unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mQualitativeSpecies ("")
   , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
-  , mName ("")
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
 {
@@ -71,10 +69,8 @@ Output::Output(unsigned int level,
  */
 Output::Output(QualPkgNamespaces *qualns)
   : SBase(qualns)
-  , mId ("")
   , mQualitativeSpecies ("")
   , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
-  , mName ("")
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
 {
@@ -88,10 +84,8 @@ Output::Output(QualPkgNamespaces *qualns)
  */
 Output::Output(const Output& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mQualitativeSpecies ( orig.mQualitativeSpecies )
   , mTransitionEffect ( orig.mTransitionEffect )
-  , mName ( orig.mName )
   , mOutputLevel ( orig.mOutputLevel )
   , mIsSetOutputLevel ( orig.mIsSetOutputLevel )
 {
@@ -107,10 +101,8 @@ Output::operator=(const Output& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mQualitativeSpecies = rhs.mQualitativeSpecies;
     mTransitionEffect = rhs.mTransitionEffect;
-    mName = rhs.mName;
     mOutputLevel = rhs.mOutputLevel;
     mIsSetOutputLevel = rhs.mIsSetOutputLevel;
   }

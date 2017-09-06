@@ -1032,7 +1032,6 @@ FbcAnd::readL3V1V1Attributes(const XMLAttributes& attributes)
   bool assigned = false;
   unsigned int pkgVersion = getPackageVersion();
   SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
 }
 
 /** @endcond */
@@ -1052,7 +1051,6 @@ FbcAnd::readL3V1V2Attributes(const XMLAttributes& attributes)
   bool assigned = false;
   unsigned int pkgVersion = getPackageVersion();
   SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
 }
 
 /** @endcond */

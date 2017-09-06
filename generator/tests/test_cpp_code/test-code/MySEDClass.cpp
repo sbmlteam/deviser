@@ -39,7 +39,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 MySEDClass::MySEDClass(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mId ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -50,7 +49,6 @@ MySEDClass::MySEDClass(unsigned int level, unsigned int version)
  */
 MySEDClass::MySEDClass(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mId ("")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -61,7 +59,6 @@ MySEDClass::MySEDClass(SedNamespaces *sedmlns)
  */
 MySEDClass::MySEDClass(const MySEDClass& orig)
   : SedBase( orig )
-  , mId ( orig.mId )
 {
 }
 
@@ -75,7 +72,6 @@ MySEDClass::operator=(const MySEDClass& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mId = rhs.mId;
   }
 
   return *this;

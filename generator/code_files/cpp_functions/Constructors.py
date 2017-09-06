@@ -721,7 +721,9 @@ class Constructors():
         else:
             sep = ','
         for attrib in self.attributes:
-            if attrib['attType'] == 'lo_element':
+            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+                continue
+            elif attrib['attType'] == 'lo_element':
                 constructor_args.append('{0} {1} '
                                         '({2})'.format(sep,
                                                       attrib['memberName'],
@@ -753,7 +755,9 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
-            if attrib['isArray']:
+            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+                continue
+            elif attrib['isArray']:
                 constructor_args.append('{0} {1} ( NULL )'
                                         .format(sep, attrib['memberName']))
                 sep = ','
@@ -782,7 +786,9 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
-            if attrib['isArray']:
+            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+                continue
+            elif attrib['isArray']:
                 member = attrib['memberName']
                 length = strFunctions.upper_first(attrib['name'])
                 constructor_args.append('{0} = NULL'.format(member))

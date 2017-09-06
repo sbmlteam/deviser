@@ -55,7 +55,6 @@ SampledField::SampledField(unsigned int level,
                            unsigned int version,
                            unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mDataType (DATA_KIND_INVALID)
   , mNumSamples1 (SBML_INT_MAX)
   , mIsSetNumSamples1 (false)
@@ -79,7 +78,6 @@ SampledField::SampledField(unsigned int level,
  */
 SampledField::SampledField(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mDataType (DATA_KIND_INVALID)
   , mNumSamples1 (SBML_INT_MAX)
   , mIsSetNumSamples1 (false)
@@ -103,7 +101,6 @@ SampledField::SampledField(SpatialPkgNamespaces *spatialns)
  */
 SampledField::SampledField(const SampledField& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mDataType ( orig.mDataType )
   , mNumSamples1 ( orig.mNumSamples1 )
   , mIsSetNumSamples1 ( orig.mIsSetNumSamples1 )
@@ -131,7 +128,6 @@ SampledField::operator=(const SampledField& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mDataType = rhs.mDataType;
     mNumSamples1 = rhs.mNumSamples1;
     mIsSetNumSamples1 = rhs.mIsSetNumSamples1;

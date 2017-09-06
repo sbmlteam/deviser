@@ -54,8 +54,6 @@ UncertaintyOld::UncertaintyOld(unsigned int level,
                                unsigned int version,
                                unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
-  , mName ("")
   , mUncertML (NULL)
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,
@@ -69,8 +67,6 @@ UncertaintyOld::UncertaintyOld(unsigned int level,
  */
 UncertaintyOld::UncertaintyOld(DistribPkgNamespaces *distribns)
   : SBase(distribns)
-  , mId ("")
-  , mName ("")
   , mUncertML (NULL)
 {
   setElementNamespace(distribns->getURI());
@@ -84,8 +80,6 @@ UncertaintyOld::UncertaintyOld(DistribPkgNamespaces *distribns)
  */
 UncertaintyOld::UncertaintyOld(const UncertaintyOld& orig)
   : SBase( orig )
-  , mId ( orig.mId )
-  , mName ( orig.mName )
   , mUncertML ( NULL )
 {
   if (orig.mUncertML != NULL)
@@ -106,8 +100,6 @@ UncertaintyOld::operator=(const UncertaintyOld& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
-    mName = rhs.mName;
     delete mUncertML;
     if (rhs.mUncertML != NULL)
     {

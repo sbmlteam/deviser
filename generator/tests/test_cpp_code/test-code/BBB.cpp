@@ -53,7 +53,6 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  */
 BBB::BBB(unsigned int level, unsigned int version, unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mAnothers (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new VersPkgNamespaces(level, version, pkgVersion));
@@ -66,7 +65,6 @@ BBB::BBB(unsigned int level, unsigned int version, unsigned int pkgVersion)
  */
 BBB::BBB(VersPkgNamespaces *versns)
   : SBase(versns)
-  , mId ("")
   , mAnothers (versns)
 {
   setElementNamespace(versns->getURI());
@@ -80,7 +78,6 @@ BBB::BBB(VersPkgNamespaces *versns)
  */
 BBB::BBB(const BBB& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mAnothers ( orig.mAnothers )
 {
   connectToChild();
@@ -96,7 +93,6 @@ BBB::operator=(const BBB& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mAnothers = rhs.mAnothers;
     connectToChild();
   }
@@ -1065,7 +1061,6 @@ BBB::readL3V1V1Attributes(const XMLAttributes& attributes)
   bool assigned = false;
   unsigned int pkgVersion = getPackageVersion();
   SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
 
   // 
   // id SId (use = "required" )
@@ -1112,7 +1107,6 @@ BBB::readL3V1V2Attributes(const XMLAttributes& attributes)
   bool assigned = false;
   unsigned int pkgVersion = getPackageVersion();
   SBMLErrorLog* log = getErrorLog();
-  unsigned int numErrs;
 
   // 
   // id SId (use = "required" )

@@ -61,7 +61,6 @@ GeometryDefinition::GeometryDefinition(unsigned int level,
                                        unsigned int version,
                                        unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mIsActive (false)
   , mIsSetIsActive (false)
 {
@@ -76,7 +75,6 @@ GeometryDefinition::GeometryDefinition(unsigned int level,
  */
 GeometryDefinition::GeometryDefinition(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mIsActive (false)
   , mIsSetIsActive (false)
 {
@@ -90,7 +88,6 @@ GeometryDefinition::GeometryDefinition(SpatialPkgNamespaces *spatialns)
  */
 GeometryDefinition::GeometryDefinition(const GeometryDefinition& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mIsActive ( orig.mIsActive )
   , mIsSetIsActive ( orig.mIsSetIsActive )
 {
@@ -106,7 +103,6 @@ GeometryDefinition::operator=(const GeometryDefinition& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mIsActive = rhs.mIsActive;
     mIsSetIsActive = rhs.mIsSetIsActive;
   }

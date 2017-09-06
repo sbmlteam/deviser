@@ -56,7 +56,6 @@ AnalyticVolume::AnalyticVolume(unsigned int level,
                                unsigned int version,
                                unsigned int pkgVersion)
   : SBase(level, version)
-  , mId ("")
   , mFunctionType (FUNCTION_KIND_INVALID)
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
@@ -74,7 +73,6 @@ AnalyticVolume::AnalyticVolume(unsigned int level,
  */
 AnalyticVolume::AnalyticVolume(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mId ("")
   , mFunctionType (FUNCTION_KIND_INVALID)
   , mOrdinal (SBML_INT_MAX)
   , mIsSetOrdinal (false)
@@ -92,7 +90,6 @@ AnalyticVolume::AnalyticVolume(SpatialPkgNamespaces *spatialns)
  */
 AnalyticVolume::AnalyticVolume(const AnalyticVolume& orig)
   : SBase( orig )
-  , mId ( orig.mId )
   , mFunctionType ( orig.mFunctionType )
   , mOrdinal ( orig.mOrdinal )
   , mIsSetOrdinal ( orig.mIsSetOrdinal )
@@ -117,7 +114,6 @@ AnalyticVolume::operator=(const AnalyticVolume& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
-    mId = rhs.mId;
     mFunctionType = rhs.mFunctionType;
     mOrdinal = rhs.mOrdinal;
     mIsSetOrdinal = rhs.mIsSetOrdinal;
