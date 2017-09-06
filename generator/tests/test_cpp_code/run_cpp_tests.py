@@ -779,7 +779,13 @@ def main():
         num = 1
         class_name = 'VersSpeciesPlugin'
         test_case = 'versions of plugins - elements'
-        fail += run_plug_test(name, class_name, test_case, num)
+#        fail += run_plug_test(name, class_name, test_case, num)
+
+        name = 'test_att'
+        class_name = 'TestSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

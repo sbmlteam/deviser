@@ -1774,8 +1774,8 @@ VersSpeciesPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("vers", VersSpeciesSpecies_att_v1MustBeClassOne,
         pkgVersion, level, version, "The attribute species_att_v1='" +
-          mSpecies_att_v1 + "' does not conform to the syntax.", getLine(), "
-            "getColumn());
+          mSpecies_att_v1 + "' does not conform to the syntax.", getLine(),
+            getColumn());
     }
   }
 
@@ -1830,8 +1830,8 @@ VersSpeciesPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("vers", VersSpeciesSpecies_att_v2MustBeAnother,
         pkgVersion, level, version, "The attribute species_att_v2='" +
-          mSpecies_att_v2 + "' does not conform to the syntax.", getLine(), "
-            "getColumn());
+          mSpecies_att_v2 + "' does not conform to the syntax.", getLine(),
+            getColumn());
     }
   }
 }

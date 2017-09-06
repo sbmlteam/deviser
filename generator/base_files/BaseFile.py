@@ -141,6 +141,8 @@ class BaseFile:
                 else:
                     if words[i].endswith('\"'):
                         in_quotes = False
+                    elif words[i].endswith('\",') and not quotes_closed:
+                        in_quotes = False
                 if len(temp) > 0:
                     temp = temp + ' ' + words[i]
                 else:
@@ -152,6 +154,8 @@ class BaseFile:
                 i += 1
                 if len(temp) <= max_length:
                     if temp.endswith('\"'):
+                        quotes_closed = True
+                    elif temp.endswith('\",'):
                         quotes_closed = True
                     newline = temp
                 else:

@@ -1423,8 +1423,8 @@ ClassOneTwo::readL3V1V2Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("coreversmultipkg", CoreversmultipkgIdSyntaxRule,
         pkgVersion, level, version, "The id on the <" + getElementName() + "> is "
-          "'" + mId + "',which does not conform to the syntax.", getLine(), "
-            "getColumn());
+          "'" + mId + "',which does not conform to the syntax.", getLine(),
+            getColumn());
     }
   }
   else
@@ -1526,8 +1526,8 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("coreversmultipkg", CoreversmultipkgIdSyntaxRule,
         pkgVersion, level, version, "The id on the <" + getElementName() + "> is "
-          "'" + mId + "',which does not conform to the syntax.", getLine(), "
-            "getColumn());
+          "'" + mId + "',which does not conform to the syntax.", getLine(),
+            getColumn());
     }
   }
   else
@@ -1634,8 +1634,8 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("coreversmultipkg", CoreversmultipkgIdSyntaxRule,
         pkgVersion, level, version, "The id on the <" + getElementName() + "> is "
-          "'" + mId + "',which does not conform to the syntax.", getLine(), "
-            "getColumn());
+          "'" + mId + "',which does not conform to the syntax.", getLine(),
+            getColumn());
     }
   }
   else

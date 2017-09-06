@@ -1589,8 +1589,8 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     {
       log->logPackageError("spatial",
         SpatialCoordinateComponentUnitMustBeUnitSId, pkgVersion, level, version,
-          "The attribute unit='" + mUnit + "' does not conform to the syntax.", "
-            "getLine(), getColumn());
+          "The attribute unit='" + mUnit + "' does not conform to the syntax.",
+            getLine(), getColumn());
     }
   }
 }
