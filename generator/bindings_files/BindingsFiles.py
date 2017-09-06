@@ -57,6 +57,7 @@ class BindingFiles():
         self.language = global_variables.language
         self.elements = pkg_object['baseElements']
         self.plugins = pkg_object['plugins']
+        self.lv_info = pkg_object['lv_info']
 
     #########################################################################
     # package files
@@ -79,7 +80,8 @@ class BindingFiles():
         name = 'local-downcast-namespaces-{0}'.format(self.package)
         ext = DowncastNamespaceFile.DowncastNamespaceFile(name,
                                                           self.package,
-                                                          self.binding)
+                                                          self.binding,
+                                                          self.lv_info)
         if self.verbose:
             print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()

@@ -44,12 +44,13 @@ from util import strFunctions, global_variables
 class DowncastNamespaceFile():
     """Class for downcast namespace files"""
 
-    def __init__(self, name, package, binding):
+    def __init__(self, name, package, binding, lv_info):
 
         self.binding = binding
         self.package = package.lower()
         self.cap_package = self.package.upper()
         self.up_package = strFunctions.upper_first(self.package)
+        self.lv_info = lv_info
 
         if binding == 'csharp' or binding == 'java':
             self.fileout = BaseInterfaceFile.BaseInterfaceFile(name)
@@ -75,13 +76,24 @@ class DowncastNamespaceFile():
         self.fileout.write_line('%{')
         self.fileout.up_indent()
         self.fileout.write_line('if (ns.hasURI({0}Extension.'
-                                'getXmlnsL3V1V1()))'.format(self.up_package))
+                                'getXmlnsL{1}V{2}V{3}()))'.format(self.up_package, self.lv_info[0]['core_level'],
+                                                                  self.lv_info[0]['core_version'], self.lv_info[0]['pkg_version']))
         self.fileout.write_line('{')
         self.fileout.up_indent()
         self.fileout.write_line('return new {0}PkgNamespaces(cPtr, '
                                 'owner);'.format(self.up_package))
         self.fileout.down_indent()
         self.fileout.write_line('}')
+        for i in range(1,len(self.lv_info)):
+            self.fileout.write_line('else if (ns.hasURI({0}Extension.'
+                                    'getXmlnsL{1}V{2}V{3}()))'.format(self.up_package, self.lv_info[i]['core_level'],
+                                                                      self.lv_info[i]['core_version'], self.lv_info[i]['pkg_version']))
+            self.fileout.write_line('{')
+            self.fileout.up_indent()
+            self.fileout.write_line('return new {0}PkgNamespaces(cPtr, '
+                                    'owner);'.format(self.up_package))
+            self.fileout.down_indent()
+            self.fileout.write_line('}')
         self.fileout.down_indent()
         self.fileout.write_line('%}')
         self.fileout.write_line('#endif /* USE_{0} */'.format(self.cap_package))

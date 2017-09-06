@@ -111,6 +111,8 @@ def compare_ext_headers(class_name):
 def run_ns_test(name, binding, ext):
     filename = test_functions.set_up_test(name, 'downcast-ns', binding)
     generate_bindings_downcast_ns(filename, binding)
+    if name == 'test_vers':
+        name = 'vers'
     fail = compare_code('local-downcast-namespaces-{0}'.format(name),
                         binding, ext)
     print('')
@@ -120,6 +122,8 @@ def run_ns_test(name, binding, ext):
 def run_test(name, binding, ext):
     filename = test_functions.set_up_test(name, 'downcast-ext', binding)
     generate_bindings_downcast_ext(filename, binding)
+    if name == 'test_vers':
+        name = 'vers'
     fail = compare_code('local-downcast-extension-{0}'.format(name),
                         binding, ext)
     print('')
@@ -129,6 +133,8 @@ def run_test(name, binding, ext):
 def run_pkgs_test(name, binding, ext):
     filename = test_functions.set_up_test(name, 'downcast-packages', binding)
     generate_bindings_downcast_pkgs(filename, binding, False)
+    if name == 'test_vers':
+        name = 'vers'
     if binding == 'csharp' or binding == 'java':
         this_name = 'local-packages-{0}'.format(name)
     else:
@@ -181,126 +187,143 @@ def main():
         os.mkdir('temp')
     fail = 0
 
-    # run the individual tests
-    name = 'spatial'
-    test_case = 'csharp'
-    ext = 'i'
-    fail += run_test(name, test_case, ext)
+    runall = True
+#    runall = False
+    if runall:
+        # run the individual tests
+        name = 'spatial'
+        test_case = 'csharp'
+        ext = 'i'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'java'
-    ext = 'i'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'java'
+        ext = 'i'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'javascript'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'javascript'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'perl'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'perl'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'php'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'php'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'python'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'python'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'r'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'r'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'ruby'
-    ext = 'cpp'
-    fail += run_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'ruby'
+        ext = 'cpp'
+        fail += run_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'csharp'
-    ext = 'i'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'csharp'
+        ext = 'i'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'java'
-    ext = 'i'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'java'
+        ext = 'i'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'javascript'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'javascript'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'perl'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'perl'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'php'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'php'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'python'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'python'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'r'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'r'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'ruby'
-    ext = 'cpp'
-    fail += run_ns_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'ruby'
+        ext = 'cpp'
+        fail += run_ns_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'javascript'
-    ext = 'cpp'
-    fail += run_pkgs_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'javascript'
+        ext = 'cpp'
+        fail += run_pkgs_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'ruby'
-    ext = 'cpp'
-    fail += run_plugin_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'ruby'
+        ext = 'cpp'
+        fail += run_plugin_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'java'
-    ext = 'i'
-    fail += run_pkgs_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'java'
+        ext = 'i'
+        fail += run_pkgs_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'csharp'
-    ext = 'i'
-    fail += run_local_test(name, test_case, ext, False)
+        name = 'spatial'
+        test_case = 'csharp'
+        ext = 'i'
+        fail += run_local_test(name, test_case, ext, False)
 
-    name = 'spatial'
-    test_case = 'php'
-    ext = 'i'
-    fail += run_local_test(name, test_case, ext, True)
+        name = 'spatial'
+        test_case = 'php'
+        ext = 'i'
+        fail += run_local_test(name, test_case, ext, True)
 
-    name = 'spatial'
-    test_case = 'swig'
-    ext = 'i'
-    fail += run_swig_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'swig'
+        ext = 'i'
+        fail += run_swig_test(name, test_case, ext)
 
-    name = 'spatial'
-    test_case = 'swig'
-    ext = 'h'
-    fail += run_swig_test(name, test_case, ext)
+        name = 'spatial'
+        test_case = 'swig'
+        ext = 'h'
+        fail += run_swig_test(name, test_case, ext)
 
-    name = 'qual'
-    test_case = 'javascript'
-    ext = 'cpp'
-    fail += run_plugin_test(name, test_case, ext)
+        name = 'qual'
+        test_case = 'javascript'
+        ext = 'cpp'
+        fail += run_plugin_test(name, test_case, ext)
+
+        name = 'test_vers'
+        test_case = 'java'
+        ext = 'i'
+        fail += run_test(name, test_case, ext)
+        fail += run_ns_test(name, test_case, ext)
+        fail += run_pkgs_test(name, test_case, ext)
+    else:
+        name = 'test_vers'
+        test_case = 'java'
+        ext = 'i'
+#        fail += run_test(name, test_case, ext)
+        fail += run_ns_test(name, test_case, ext)
+#        fail += run_pkgs_test(name, test_case, ext)
 
     test_functions.report('BINDINGS', fail, fails, not_tested)
     return fail
