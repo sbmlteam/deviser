@@ -525,7 +525,7 @@ CoreversmultipkgModelPlugin::hasRequiredAttributes() const
 {
   bool allPresent = true;
 
-  unsigned int level = getLevel;
+  unsigned int level = getLevel();
   unsigned int version = getVersion();
   unsigned int pkgVersion = getPackageVersion();
 

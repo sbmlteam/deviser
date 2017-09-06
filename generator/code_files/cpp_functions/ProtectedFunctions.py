@@ -1346,9 +1346,11 @@ class ProtectedFunctions():
                 type_wanted = att_type[0:length-3]
             else:
                 type_wanted = att_type
-            error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-                                                strFunctions.upper_first(given_name),
+            [error, not_used] = self.sort_error_names(strFunctions.upper_first(given_name),
                                                 type_wanted)
+            # error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
+            #                                     strFunctions.upper_first(given_name),
+            #                                     type_wanted)
         line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:
             line.append('logEmptyString({0}, level, version, pkgVersion, '
