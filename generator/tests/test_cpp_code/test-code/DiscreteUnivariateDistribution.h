@@ -339,10 +339,6 @@ public:
    * @return @c true to indicate that all the required attributes of this
    * DiscreteUnivariateDistribution have been set, otherwise @c false is
    * returned.
-   *
-   *
-   * @note The required attributes for the DiscreteUnivariateDistribution
-   * object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1202,10 +1198,6 @@ DiscreteUnivariateDistribution_isGeometricDistribution(const
  *
  * @return @c 1 to indicate that all the required attributes of this
  * DiscreteUnivariateDistribution_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the DiscreteUnivariateDistribution_t
- * object are:
  *
  * @memberof DiscreteUnivariateDistribution_t
  */

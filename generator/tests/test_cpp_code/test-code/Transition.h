@@ -725,9 +725,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * Transition have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Transition object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1945,9 +1942,6 @@ Transition_unsetDefaultTerm(Transition_t * t);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * Transition_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Transition_t object are:
  *
  * @memberof Transition_t
  */

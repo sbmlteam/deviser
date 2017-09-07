@@ -409,9 +409,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * ParametricGeometry have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the ParametricGeometry object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1293,9 +1290,6 @@ ParametricGeometry_removeParametricObjectById(ParametricGeometry_t* pg,
  *
  * @return @c 1 to indicate that all the required attributes of this
  * ParametricGeometry_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the ParametricGeometry_t object are:
  *
  * @memberof ParametricGeometry_t
  */

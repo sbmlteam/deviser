@@ -482,9 +482,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * MixedGeometry have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the MixedGeometry object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1426,9 +1423,6 @@ MixedGeometry_removeOrdinalMapping(MixedGeometry_t* mg, unsigned int n);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * MixedGeometry_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the MixedGeometry_t object are:
  *
  * @memberof MixedGeometry_t
  */

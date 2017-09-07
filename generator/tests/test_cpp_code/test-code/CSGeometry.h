@@ -332,9 +332,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * CSGeometry have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the CSGeometry object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1098,9 +1095,6 @@ CSGeometry_removeCSGObjectById(CSGeometry_t* csg, const char* sid);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * CSGeometry_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the CSGeometry_t object are:
  *
  * @memberof CSGeometry_t
  */

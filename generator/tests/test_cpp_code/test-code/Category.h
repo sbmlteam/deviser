@@ -330,9 +330,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * Category have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Category object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1170,9 +1167,6 @@ Category_unsetValue(Category_t * c);
  *
  * @return @c 1 to indicate that all the required attributes of this Category_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Category_t object are:
  *
  * @memberof Category_t
  */

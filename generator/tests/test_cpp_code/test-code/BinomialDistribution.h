@@ -303,9 +303,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * BinomialDistribution have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the BinomialDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1112,9 +1109,6 @@ BinomialDistribution_unsetProbabilityOfSuccess(BinomialDistribution_t * bd);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * BinomialDistribution_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the BinomialDistribution_t object are:
  *
  * @memberof BinomialDistribution_t
  */

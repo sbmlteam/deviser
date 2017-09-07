@@ -302,9 +302,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * UncertaintyOld have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the UncertaintyOld object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1076,9 +1073,6 @@ UncertaintyOld_unsetUncertML(UncertaintyOld_t * uo);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * UncertaintyOld_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the UncertaintyOld_t object are:
  *
  * @memberof UncertaintyOld_t
  */

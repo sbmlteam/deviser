@@ -268,9 +268,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * CategoricalDistribution have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the CategoricalDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1003,9 +1000,6 @@ CategoricalDistribution_removeCategory(CategoricalDistribution_t* cd,
  *
  * @return @c 1 to indicate that all the required attributes of this
  * CategoricalDistribution_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the CategoricalDistribution_t object are:
  *
  * @memberof CategoricalDistribution_t
  */

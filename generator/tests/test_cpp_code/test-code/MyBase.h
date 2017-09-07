@@ -202,9 +202,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * MyBase have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the MyBase object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -719,9 +716,6 @@ MyBase_unsetId(MyBase_t * mb);
  *
  * @return @c 1 to indicate that all the required attributes of this MyBase_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the MyBase_t object are:
  *
  * @memberof MyBase_t
  */

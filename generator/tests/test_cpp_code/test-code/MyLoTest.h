@@ -204,9 +204,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * MyLoTest have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the MyLoTest object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -722,9 +719,6 @@ MyLoTest_unsetId(MyLoTest_t * mlt);
  *
  * @return @c 1 to indicate that all the required attributes of this MyLoTest_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the MyLoTest_t object are:
  *
  * @memberof MyLoTest_t
  */

@@ -270,9 +270,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * CSGNode have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the CSGNode object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1012,9 +1009,6 @@ CSGNode_isCSGSetOperator(const CSGNode_t * csgn);
  *
  * @return @c 1 to indicate that all the required attributes of this CSGNode_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the CSGNode_t object are:
  *
  * @memberof CSGNode_t
  */

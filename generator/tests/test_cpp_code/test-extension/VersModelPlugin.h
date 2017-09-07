@@ -264,9 +264,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * VersModelPlugin have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the VersModelPlugin object are:
    */
   virtual bool hasRequiredAttributes() const;
 

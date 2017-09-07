@@ -403,9 +403,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * ListOfMembers have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the ListOfMembers object are:
    */
   virtual bool hasRequiredAttributes() const;
 

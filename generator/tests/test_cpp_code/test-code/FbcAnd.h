@@ -279,9 +279,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * FbcAnd have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the FbcAnd object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1061,9 +1058,6 @@ FbcAnd_removeAssociation(FbcAnd_t* fa, unsigned int n);
  *
  * @return @c 1 to indicate that all the required attributes of this FbcAnd_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the FbcAnd_t object are:
  *
  * @memberof FbcAnd_t
  */

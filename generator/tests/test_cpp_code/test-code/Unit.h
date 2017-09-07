@@ -210,9 +210,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this Unit
    * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Unit object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -727,9 +724,6 @@ Unit_unsetUnit(Unit_t * u);
  *
  * @return @c 1 to indicate that all the required attributes of this Unit_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Unit_t object are:
  *
  * @memberof Unit_t
  */

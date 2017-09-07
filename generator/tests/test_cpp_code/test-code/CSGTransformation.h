@@ -320,9 +320,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * CSGTransformation have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the CSGTransformation object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1165,9 +1162,6 @@ CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
  *
  * @return @c 1 to indicate that all the required attributes of this
  * CSGTransformation_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the CSGTransformation_t object are:
  *
  * @memberof CSGTransformation_t
  */

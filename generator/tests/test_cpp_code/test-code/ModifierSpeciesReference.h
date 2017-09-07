@@ -169,9 +169,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * ModifierSpeciesReference have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the ModifierSpeciesReference object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -636,9 +633,6 @@ ModifierSpeciesReference_free(ModifierSpeciesReference_t* msr);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * ModifierSpeciesReference_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the ModifierSpeciesReference_t object are:
  *
  * @memberof ModifierSpeciesReference_t
  */

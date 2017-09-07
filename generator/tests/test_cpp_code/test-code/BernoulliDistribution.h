@@ -232,9 +232,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * BernoulliDistribution have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the BernoulliDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -945,9 +942,6 @@ BernoulliDistribution_unsetProb(BernoulliDistribution_t * bd);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * BernoulliDistribution_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the BernoulliDistribution_t object are:
  *
  * @memberof BernoulliDistribution_t
  */

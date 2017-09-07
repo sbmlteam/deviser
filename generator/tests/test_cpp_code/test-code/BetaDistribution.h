@@ -291,9 +291,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * BetaDistribution have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the BetaDistribution object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -1073,9 +1070,6 @@ BetaDistribution_unsetBeta(BetaDistribution_t * bd);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * BetaDistribution_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the BetaDistribution_t object are:
  *
  * @memberof BetaDistribution_t
  */

@@ -211,9 +211,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * Copyright have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Copyright object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -729,9 +726,6 @@ Copyright_unsetId(Copyright_t * c);
  *
  * @return @c 1 to indicate that all the required attributes of this
  * Copyright_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Copyright_t object are:
  *
  * @memberof Copyright_t
  */
