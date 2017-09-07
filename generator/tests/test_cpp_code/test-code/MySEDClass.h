@@ -65,11 +65,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * MySEDClass.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MySEDClass(unsigned int level = SEDML_DEFAULT_LEVEL,
              unsigned int version = SEDML_DEFAULT_VERSION);
@@ -80,11 +76,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MySEDClass(SedNamespaces *sedmlns);
 
@@ -591,11 +583,7 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SEDML Version to assign to this
  * MySEDClass_t.
  *
- * @throws SEDMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SEDML object, are either invalid or mismatched with respect to the parent
- * SedDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof MySEDClass_t
  */
@@ -646,12 +634,13 @@ MySEDClass_getId(const MySEDClass_t * msedc);
 
 
 /**
- * Predicate returning @c 1 if this MySEDClass_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MySEDClass_t's "id" attribute is
+ * set.
  *
  * @param msedc the MySEDClass_t structure.
  *
- * @return @c 1 if this MySEDClass_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this MySEDClass_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MySEDClass_t
  */

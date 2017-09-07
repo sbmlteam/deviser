@@ -2177,7 +2177,8 @@ ClassOneTwo_getAttEnumAsString(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "id" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2188,7 +2189,8 @@ ClassOneTwo_isSetId(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "att1" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "att1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2199,7 +2201,8 @@ ClassOneTwo_isSetAtt1(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "attStr" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attStr" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2210,7 +2213,8 @@ ClassOneTwo_isSetAttStr(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "attInt" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attInt" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2221,7 +2225,8 @@ ClassOneTwo_isSetAttInt(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "att2" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "att2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2232,7 +2237,8 @@ ClassOneTwo_isSetAtt2(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "attDbl" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attDbl" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2243,7 +2249,8 @@ ClassOneTwo_isSetAttDbl(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "attUnit" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attUnit" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2254,7 +2261,8 @@ ClassOneTwo_isSetAttUnit(const ClassOneTwo_t * cot)
 
 
 /*
- * Predicate returning @c 1 if this ClassOneTwo_t's "attEnum" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attEnum" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

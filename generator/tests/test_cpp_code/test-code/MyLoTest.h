@@ -80,11 +80,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * MyLoTest.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyLoTest(unsigned int level = TestExtension::getDefaultLevel(),
            unsigned int version = TestExtension::getDefaultVersion(),
@@ -95,13 +91,11 @@ public:
   /**
    * Creates a new MyLoTest using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyLoTest(TestPkgNamespaces *testns);
 
@@ -618,11 +612,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * MyLoTest_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof MyLoTest_t
  */
@@ -676,12 +666,12 @@ MyLoTest_getId(const MyLoTest_t * mlt);
 
 
 /**
- * Predicate returning @c 1 if this MyLoTest_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyLoTest_t's "id" attribute is set.
  *
  * @param mlt the MyLoTest_t structure.
  *
- * @return @c 1 if this MyLoTest_t's "id" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this MyLoTest_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyLoTest_t
  */

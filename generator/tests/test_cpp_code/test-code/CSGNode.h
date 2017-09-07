@@ -87,11 +87,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this CSGNode.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGNode(unsigned int level = SpatialExtension::getDefaultLevel(),
           unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -102,13 +98,11 @@ public:
   /**
    * Creates a new CSGNode using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGNode(SpatialPkgNamespaces *spatialns);
 
@@ -684,11 +678,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -715,11 +705,7 @@ CSGNode_createCSGPrimitive(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -746,11 +732,7 @@ CSGNode_createCSGTranslation(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -777,11 +759,7 @@ CSGNode_createCSGRotation(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -808,11 +786,7 @@ CSGNode_createCSGScale(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -839,11 +813,7 @@ CSGNode_createCSGHomogeneousTransformation(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGNode_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGNode_t
  */
@@ -900,12 +870,12 @@ CSGNode_getId(const CSGNode_t * csgn);
 
 
 /**
- * Predicate returning @c 1 if this CSGNode_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this CSGNode_t's "id" attribute is set.
  *
  * @param csgn the CSGNode_t structure.
  *
- * @return @c 1 if this CSGNode_t's "id" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this CSGNode_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof CSGNode_t
  */

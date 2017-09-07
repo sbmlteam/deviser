@@ -81,11 +81,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Groups Version to assign to
    * this Member.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Member(unsigned int level = GroupsExtension::getDefaultLevel(),
          unsigned int version = GroupsExtension::getDefaultVersion(),
@@ -96,13 +92,11 @@ public:
   /**
    * Creates a new Member using the given GroupsPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param groupsns the GroupsPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Member(GroupsPkgNamespaces *groupsns);
 
@@ -339,9 +333,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * Member have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the Member object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -746,11 +737,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Groups Version to assign to this
  * Member_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Member_t
  */
@@ -849,12 +836,12 @@ Member_getMetaIdRef(const Member_t * m);
 
 
 /**
- * Predicate returning @c 1 if this Member_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Member_t's "id" attribute is set.
  *
  * @param m the Member_t structure.
  *
- * @return @c 1 if this Member_t's "id" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Member_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */
@@ -864,12 +851,12 @@ Member_isSetId(const Member_t * m);
 
 
 /**
- * Predicate returning @c 1 if this Member_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this Member_t's "name" attribute is set.
  *
  * @param m the Member_t structure.
  *
- * @return @c 1 if this Member_t's "name" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Member_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */
@@ -879,12 +866,12 @@ Member_isSetName(const Member_t * m);
 
 
 /**
- * Predicate returning @c 1 if this Member_t's "idRef" attribute is set.
+ * Predicate returning @c 1 (true) if this Member_t's "idRef" attribute is set.
  *
  * @param m the Member_t structure.
  *
- * @return @c 1 if this Member_t's "idRef" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Member_t's "idRef" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */
@@ -894,12 +881,13 @@ Member_isSetIdRef(const Member_t * m);
 
 
 /**
- * Predicate returning @c 1 if this Member_t's "metaIdRef" attribute is set.
+ * Predicate returning @c 1 (true) if this Member_t's "metaIdRef" attribute is
+ * set.
  *
  * @param m the Member_t structure.
  *
- * @return @c 1 if this Member_t's "metaIdRef" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Member_t's "metaIdRef" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */
@@ -1052,9 +1040,6 @@ Member_unsetMetaIdRef(Member_t * m);
  *
  * @return @c 1 to indicate that all the required attributes of this Member_t
  * have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Member_t object are:
  *
  * @memberof Member_t
  */

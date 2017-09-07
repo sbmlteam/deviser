@@ -737,7 +737,7 @@ MyLoTest_getId(const MyLoTest_t * mlt)
 
 
 /*
- * Predicate returning @c 1 if this MyLoTest_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyLoTest_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

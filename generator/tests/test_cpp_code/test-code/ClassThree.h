@@ -83,11 +83,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * ClassThree.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ClassThree(unsigned int level = TestExtension::getDefaultLevel(),
              unsigned int version = TestExtension::getDefaultVersion(),
@@ -98,13 +94,11 @@ public:
   /**
    * Creates a new ClassThree using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ClassThree(TestPkgNamespaces *testns);
 
@@ -836,11 +830,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * ClassThree_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ClassThree_t
  */
@@ -998,12 +988,13 @@ ClassThree_getOtherNumAsString(const ClassThree_t * ct);
 
 
 /**
- * Predicate returning @c 1 if this ClassThree_t's "number" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "number" attribute is
+ * set.
  *
  * @param ct the ClassThree_t structure.
  *
- * @return @c 1 if this ClassThree_t's "number" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassThree_t's "number" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassThree_t
  */
@@ -1013,12 +1004,13 @@ ClassThree_isSetNumber(const ClassThree_t * ct);
 
 
 /**
- * Predicate returning @c 1 if this ClassThree_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "name" attribute is
+ * set.
  *
  * @param ct the ClassThree_t structure.
  *
- * @return @c 1 if this ClassThree_t's "name" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this ClassThree_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassThree_t
  */
@@ -1028,12 +1020,13 @@ ClassThree_isSetName(const ClassThree_t * ct);
 
 
 /**
- * Predicate returning @c 1 if this ClassThree_t's "badName" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "badName" attribute
+ * is set.
  *
  * @param ct the ClassThree_t structure.
  *
- * @return @c 1 if this ClassThree_t's "badName" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassThree_t's "badName" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassThree_t
  */
@@ -1043,12 +1036,13 @@ ClassThree_isSetBadName(const ClassThree_t * ct);
 
 
 /**
- * Predicate returning @c 1 if this ClassThree_t's "otherNum" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "otherNum" attribute
+ * is set.
  *
  * @param ct the ClassThree_t structure.
  *
- * @return @c 1 if this ClassThree_t's "otherNum" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassThree_t's "otherNum" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof ClassThree_t
  */

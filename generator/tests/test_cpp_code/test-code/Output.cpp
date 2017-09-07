@@ -1326,7 +1326,7 @@ Output_getOutputLevel(const Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if this Output_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1337,8 +1337,8 @@ Output_isSetId(const Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if this Output_t's "qualitativeSpecies" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this Output_t's "qualitativeSpecies"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1349,8 +1349,8 @@ Output_isSetQualitativeSpecies(const Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if this Output_t's "transitionEffect" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Output_t's "transitionEffect"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1361,7 +1361,7 @@ Output_isSetTransitionEffect(const Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if this Output_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "name" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1372,7 +1372,8 @@ Output_isSetName(const Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if this Output_t's "outputLevel" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "outputLevel" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

@@ -1314,8 +1314,8 @@ CSGTransformation_getCSGNode(const CSGTransformation_t * csgt)
 
 
 /*
- * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
- * set.
+ * Predicate returning @c 1 (true) if this CSGTransformation_t's "csgNode"
+ * element is set.
  */
 LIBSBML_EXTERN
 int

@@ -81,11 +81,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
    * BBB.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BBB(unsigned int level = VersExtension::getDefaultLevel(),
       unsigned int version = VersExtension::getDefaultVersion(),
@@ -95,13 +91,11 @@ public:
   /**
    * Creates a new BBB using the given VersPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param versns the VersPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BBB(VersPkgNamespaces *versns);
 
@@ -957,11 +951,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Vers Version to assign to this
  * BBB_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof BBB_t
  */
@@ -1015,12 +1005,12 @@ BBB_getId(const BBB_t * bbb);
 
 
 /**
- * Predicate returning @c 1 if this BBB_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this BBB_t's "id" attribute is set.
  *
  * @param bbb the BBB_t structure.
  *
- * @return @c 1 if this BBB_t's "id" attribute has been set, otherwise @c 0 is
- * returned.
+ * @return @c 1 (true) if this BBB_t's "id" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof BBB_t
  */

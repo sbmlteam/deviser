@@ -1272,7 +1272,7 @@ BBB_getId(const BBB_t * bbb)
 
 
 /*
- * Predicate returning @c 1 if this BBB_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this BBB_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

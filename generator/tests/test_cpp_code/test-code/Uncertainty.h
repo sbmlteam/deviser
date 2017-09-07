@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this Uncertainty.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Uncertainty(unsigned int level = DistribExtension::getDefaultLevel(),
               unsigned int version = DistribExtension::getDefaultVersion(),
@@ -100,13 +96,11 @@ public:
   /**
    * Creates a new Uncertainty using the given DistribPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Uncertainty(DistribPkgNamespaces *distribns);
 
@@ -907,11 +901,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Uncertainty_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Uncertainty_t
  */
@@ -981,13 +971,13 @@ Uncertainty_getDistribution(const Uncertainty_t * u);
 
 
 /**
- * Predicate returning @c 1 if this Uncertainty_t's "uncertStatistics" element
- * is set.
+ * Predicate returning @c 1 (true) if this Uncertainty_t's "uncertStatistics"
+ * element is set.
  *
  * @param u the Uncertainty_t structure.
  *
- * @return @c 1 if this Uncertainty_t's "uncertStatistics" element has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Uncertainty_t's "uncertStatistics" element has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Uncertainty_t
  */
@@ -997,13 +987,13 @@ Uncertainty_isSetUncertStatistics(const Uncertainty_t * u);
 
 
 /**
- * Predicate returning @c 1 if this Uncertainty_t's "distribution" element is
- * set.
+ * Predicate returning @c 1 (true) if this Uncertainty_t's "distribution"
+ * element is set.
  *
  * @param u the Uncertainty_t structure.
  *
- * @return @c 1 if this Uncertainty_t's "distribution" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Uncertainty_t's "distribution" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof Uncertainty_t
  */

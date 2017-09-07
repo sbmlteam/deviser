@@ -89,11 +89,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this GeometryDefinition.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   GeometryDefinition(unsigned int level = SpatialExtension::getDefaultLevel(),
                      unsigned int version =
@@ -106,13 +102,11 @@ public:
    * Creates a new GeometryDefinition using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   GeometryDefinition(SpatialPkgNamespaces *spatialns);
 
@@ -740,11 +734,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this GeometryDefinition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof GeometryDefinition_t
  */
@@ -772,11 +762,7 @@ GeometryDefinition_createAnalyticGeometry(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this GeometryDefinition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof GeometryDefinition_t
  */
@@ -804,11 +790,7 @@ GeometryDefinition_createSampledFieldGeometry(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this GeometryDefinition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof GeometryDefinition_t
  */
@@ -836,11 +818,7 @@ GeometryDefinition_createCSGeometry(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this GeometryDefinition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof GeometryDefinition_t
  */
@@ -868,11 +846,7 @@ GeometryDefinition_createParametricGeometry(
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this GeometryDefinition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof GeometryDefinition_t
  */
@@ -944,13 +918,13 @@ GeometryDefinition_getIsActive(const GeometryDefinition_t * gd);
 
 
 /**
- * Predicate returning @c 1 if this GeometryDefinition_t's "id" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this GeometryDefinition_t's "id"
+ * attribute is set.
  *
  * @param gd the GeometryDefinition_t structure.
  *
- * @return @c 1 if this GeometryDefinition_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this GeometryDefinition_t's "id" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof GeometryDefinition_t
  */
@@ -960,13 +934,13 @@ GeometryDefinition_isSetId(const GeometryDefinition_t * gd);
 
 
 /**
- * Predicate returning @c 1 if this GeometryDefinition_t's "isActive" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this GeometryDefinition_t's "isActive"
+ * attribute is set.
  *
  * @param gd the GeometryDefinition_t structure.
  *
- * @return @c 1 if this GeometryDefinition_t's "isActive" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this GeometryDefinition_t's "isActive" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof GeometryDefinition_t
  */

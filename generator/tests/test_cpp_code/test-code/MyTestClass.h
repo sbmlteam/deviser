@@ -101,11 +101,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * MyTestClass.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyTestClass(unsigned int level = TestExtension::getDefaultLevel(),
               unsigned int version = TestExtension::getDefaultVersion(),
@@ -116,13 +112,11 @@ public:
   /**
    * Creates a new MyTestClass using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyTestClass(TestPkgNamespaces *testns);
 
@@ -1264,11 +1258,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * MyTestClass_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof MyTestClass_t
  */
@@ -1546,12 +1536,13 @@ MyTestClass_getIdref2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "id" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1561,12 +1552,13 @@ MyTestClass_isSetId(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "name" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "name" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1576,12 +1568,13 @@ MyTestClass_isSetName(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "num" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "num" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1591,12 +1584,13 @@ MyTestClass_isSetNum(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "num2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num2" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "num2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "num2" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1606,12 +1600,13 @@ MyTestClass_isSetNum2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "num3" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num3" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "num3" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "num3" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1621,12 +1616,13 @@ MyTestClass_isSetNum3(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "num1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num1" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "num1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "num1" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1636,12 +1632,13 @@ MyTestClass_isSetNum1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "true" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "true" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "true" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "true" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1651,12 +1648,13 @@ MyTestClass_isSetTrue(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "false" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "false" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "false" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "false" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1666,12 +1664,13 @@ MyTestClass_isSetFalse(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "unit" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "unit" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "unit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "unit" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1681,12 +1680,13 @@ MyTestClass_isSetUnit(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "ref1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "ref1" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "ref1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "ref1" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1696,12 +1696,13 @@ MyTestClass_isSetRef1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "ref2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "ref2" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "ref2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "ref2" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1711,12 +1712,13 @@ MyTestClass_isSetRef2(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "refUnit" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "refUnit" attribute
+ * is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "refUnit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "refUnit" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1726,13 +1728,13 @@ MyTestClass_isSetRefUnit(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "correctId" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "correctId"
+ * attribute is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "correctId" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "correctId" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1742,12 +1744,13 @@ MyTestClass_isSetCorrectId(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "idRef" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idRef" attribute is
+ * set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "idRef" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "idRef" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1757,12 +1760,13 @@ MyTestClass_isSetIdRef(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "idref1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idref1" attribute
+ * is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "idref1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "idref1" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */
@@ -1772,12 +1776,13 @@ MyTestClass_isSetIdref1(const MyTestClass_t * mtc);
 
 
 /**
- * Predicate returning @c 1 if this MyTestClass_t's "idref2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idref2" attribute
+ * is set.
  *
  * @param mtc the MyTestClass_t structure.
  *
- * @return @c 1 if this MyTestClass_t's "idref2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyTestClass_t's "idref2" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyTestClass_t
  */

@@ -86,11 +86,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this SpatialPoints.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SpatialPoints(unsigned int level = SpatialExtension::getDefaultLevel(),
                 unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -101,13 +97,11 @@ public:
   /**
    * Creates a new SpatialPoints using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SpatialPoints(SpatialPkgNamespaces *spatialns);
 
@@ -872,11 +866,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this SpatialPoints_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof SpatialPoints_t
  */
@@ -1007,12 +997,13 @@ SpatialPoints_getDataTypeAsString(const SpatialPoints_t * sp);
 
 
 /**
- * Predicate returning @c 1 if this SpatialPoints_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this SpatialPoints_t's "id" attribute is
+ * set.
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @return @c 1 if this SpatialPoints_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SpatialPoints_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SpatialPoints_t
  */
@@ -1022,13 +1013,13 @@ SpatialPoints_isSetId(const SpatialPoints_t * sp);
 
 
 /**
- * Predicate returning @c 1 if this SpatialPoints_t's "compression" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SpatialPoints_t's "compression"
+ * attribute is set.
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @return @c 1 if this SpatialPoints_t's "compression" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SpatialPoints_t's "compression" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SpatialPoints_t
  */
@@ -1038,13 +1029,13 @@ SpatialPoints_isSetCompression(const SpatialPoints_t * sp);
 
 
 /**
- * Predicate returning @c 1 if this SpatialPoints_t's "arrayData" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SpatialPoints_t's "arrayData"
+ * attribute is set.
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @return @c 1 if this SpatialPoints_t's "arrayData" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SpatialPoints_t's "arrayData" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SpatialPoints_t
  */
@@ -1054,13 +1045,13 @@ SpatialPoints_isSetArrayData(const SpatialPoints_t * sp);
 
 
 /**
- * Predicate returning @c 1 if this SpatialPoints_t's "arrayDataLength"
+ * Predicate returning @c 1 (true) if this SpatialPoints_t's "arrayDataLength"
  * attribute is set.
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @return @c 1 if this SpatialPoints_t's "arrayDataLength" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SpatialPoints_t's "arrayDataLength" attribute
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SpatialPoints_t
  */
@@ -1070,13 +1061,13 @@ SpatialPoints_isSetArrayDataLength(const SpatialPoints_t * sp);
 
 
 /**
- * Predicate returning @c 1 if this SpatialPoints_t's "dataType" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SpatialPoints_t's "dataType"
+ * attribute is set.
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @return @c 1 if this SpatialPoints_t's "dataType" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SpatialPoints_t's "dataType" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SpatialPoints_t
  */

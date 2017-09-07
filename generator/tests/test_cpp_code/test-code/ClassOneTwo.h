@@ -92,11 +92,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Coreversmultipkg Version to
    * assign to this ClassOneTwo.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ClassOneTwo(unsigned int level =
     CoreversmultipkgExtension::getDefaultLevel(),
@@ -110,13 +106,11 @@ public:
    * Creates a new ClassOneTwo using the given CoreversmultipkgPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param coreversmultipkgns the CoreversmultipkgPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ClassOneTwo(CoreversmultipkgPkgNamespaces *coreversmultipkgns);
 
@@ -1038,11 +1032,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Coreversmultipkg Version to
  * assign to this ClassOneTwo_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ClassOneTwo_t
  */
@@ -1219,12 +1209,13 @@ ClassOneTwo_getAttEnumAsString(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "id" attribute is
+ * set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1234,12 +1225,13 @@ ClassOneTwo_isSetId(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "att1" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "att1" attribute is
+ * set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "att1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "att1" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1249,12 +1241,13 @@ ClassOneTwo_isSetAtt1(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "attStr" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attStr" attribute
+ * is set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "attStr" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "attStr" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1264,12 +1257,13 @@ ClassOneTwo_isSetAttStr(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "attInt" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attInt" attribute
+ * is set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "attInt" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "attInt" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1279,12 +1273,13 @@ ClassOneTwo_isSetAttInt(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "att2" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "att2" attribute is
+ * set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "att2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "att2" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1294,12 +1289,13 @@ ClassOneTwo_isSetAtt2(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "attDbl" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attDbl" attribute
+ * is set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "attDbl" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "attDbl" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1309,12 +1305,13 @@ ClassOneTwo_isSetAttDbl(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "attUnit" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attUnit" attribute
+ * is set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "attUnit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "attUnit" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */
@@ -1324,12 +1321,13 @@ ClassOneTwo_isSetAttUnit(const ClassOneTwo_t * cot);
 
 
 /**
- * Predicate returning @c 1 if this ClassOneTwo_t's "attEnum" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOneTwo_t's "attEnum" attribute
+ * is set.
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @return @c 1 if this ClassOneTwo_t's "attEnum" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ClassOneTwo_t's "attEnum" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof ClassOneTwo_t
  */

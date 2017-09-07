@@ -78,11 +78,7 @@ public:
    * @param version an unsigned int, the SBML Version to assign to this
    * ModifierSpeciesReference.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ModifierSpeciesReference(unsigned int level = SBML_DEFAULT_LEVEL,
                            unsigned int version = SBML_DEFAULT_VERSION);
@@ -94,11 +90,7 @@ public:
    *
    * @param sbmlns the SBMLNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ModifierSpeciesReference(SBMLNamespaces *sbmlns);
 
@@ -601,11 +593,7 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SBML Version to assign to this
  * ModifierSpeciesReference_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ModifierSpeciesReference_t
  */

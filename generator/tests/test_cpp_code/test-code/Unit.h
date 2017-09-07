@@ -80,11 +80,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * Unit.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Unit(unsigned int level = TestExtension::getDefaultLevel(),
        unsigned int version = TestExtension::getDefaultVersion(),
@@ -94,13 +90,11 @@ public:
   /**
    * Creates a new Unit using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Unit(TestPkgNamespaces *testns);
 
@@ -623,11 +617,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * Unit_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Unit_t
  */
@@ -681,12 +671,12 @@ Unit_getUnit(const Unit_t * u);
 
 
 /**
- * Predicate returning @c 1 if this Unit_t's "unit" attribute is set.
+ * Predicate returning @c 1 (true) if this Unit_t's "unit" attribute is set.
  *
  * @param u the Unit_t structure.
  *
- * @return @c 1 if this Unit_t's "unit" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Unit_t's "unit" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Unit_t
  */

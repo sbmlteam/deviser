@@ -83,11 +83,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this UncertaintyOld.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   UncertaintyOld(unsigned int level = DistribExtension::getDefaultLevel(),
                  unsigned int version = DistribExtension::getDefaultVersion(),
@@ -98,13 +94,11 @@ public:
   /**
    * Creates a new UncertaintyOld using the given DistribPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   UncertaintyOld(DistribPkgNamespaces *distribns);
 
@@ -839,11 +833,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this UncertaintyOld_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof UncertaintyOld_t
  */
@@ -913,12 +903,13 @@ UncertaintyOld_getName(const UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 if this UncertaintyOld_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "id" attribute is
+ * set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 if this UncertaintyOld_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this UncertaintyOld_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof UncertaintyOld_t
  */
@@ -928,12 +919,13 @@ UncertaintyOld_isSetId(const UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 if this UncertaintyOld_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "name" attribute
+ * is set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 if this UncertaintyOld_t's "name" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this UncertaintyOld_t's "name" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof UncertaintyOld_t
  */
@@ -1026,13 +1018,13 @@ UncertaintyOld_getUncertML(const UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 if this UncertaintyOld_t's "uncertML" element is
- * set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "uncertML"
+ * element is set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 if this UncertaintyOld_t's "uncertML" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this UncertaintyOld_t's "uncertML" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof UncertaintyOld_t
  */

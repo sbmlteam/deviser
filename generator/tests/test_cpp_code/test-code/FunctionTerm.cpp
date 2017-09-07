@@ -936,8 +936,8 @@ FunctionTerm_getResultLevel(const FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 if this FunctionTerm_t's "resultLevel" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this FunctionTerm_t's "resultLevel"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -987,7 +987,8 @@ FunctionTerm_getMath(const FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 if this FunctionTerm_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this FunctionTerm_t's "math" element is
+ * set.
  */
 LIBSBML_EXTERN
 int

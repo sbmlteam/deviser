@@ -1688,8 +1688,8 @@ DrawFromDistribution_getDistribution(const DrawFromDistribution_t * dfd)
 
 
 /*
- * Predicate returning @c 1 if this DrawFromDistribution_t's "distribution"
- * element is set.
+ * Predicate returning @c 1 (true) if this DrawFromDistribution_t's
+ * "distribution" element is set.
  */
 LIBSBML_EXTERN
 int

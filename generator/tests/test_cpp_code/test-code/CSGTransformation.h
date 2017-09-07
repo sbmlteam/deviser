@@ -87,11 +87,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this CSGTransformation.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGTransformation(unsigned int level = SpatialExtension::getDefaultLevel(),
                     unsigned int version =
@@ -104,13 +100,11 @@ public:
    * Creates a new CSGTransformation using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGTransformation(SpatialPkgNamespaces *spatialns);
 
@@ -894,11 +888,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGTransformation_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGTransformation_t
  */
@@ -955,13 +945,13 @@ CSGTransformation_getCSGNode(const CSGTransformation_t * csgt);
 
 
 /**
- * Predicate returning @c 1 if this CSGTransformation_t's "csgNode" element is
- * set.
+ * Predicate returning @c 1 (true) if this CSGTransformation_t's "csgNode"
+ * element is set.
  *
  * @param csgt the CSGTransformation_t structure.
  *
- * @return @c 1 if this CSGTransformation_t's "csgNode" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CSGTransformation_t's "csgNode" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof CSGTransformation_t
  */

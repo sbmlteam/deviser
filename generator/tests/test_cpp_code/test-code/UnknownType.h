@@ -82,11 +82,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * UnknownType.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   UnknownType(unsigned int level = TestExtension::getDefaultLevel(),
               unsigned int version = TestExtension::getDefaultVersion(),
@@ -97,13 +93,11 @@ public:
   /**
    * Creates a new UnknownType using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   UnknownType(TestPkgNamespaces *testns);
 
@@ -623,11 +617,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * UnknownType_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof UnknownType_t
  */
@@ -681,13 +671,13 @@ UnknownType_getAttribue(const UnknownType_t * ut);
 
 
 /**
- * Predicate returning @c 1 if this UnknownType_t's "attribue" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this UnknownType_t's "attribue" attribute
+ * is set.
  *
  * @param ut the UnknownType_t structure.
  *
- * @return @c 1 if this UnknownType_t's "attribue" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this UnknownType_t's "attribue" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof UnknownType_t
  */

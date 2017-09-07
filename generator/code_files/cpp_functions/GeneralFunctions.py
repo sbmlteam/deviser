@@ -383,12 +383,17 @@ class GeneralFunctions():
                         'attributes of this {1} have been set, otherwise '
                         '{2} is returned.'.format(self.true, self.object_name,
                                                   self.false)]
-        additional = [' ', '@note The required attributes for the {0} object'
-                           ' are:'.format(self.object_name)]
+        reqd_atts_names = []
+        additional = []
         for i in range(0, len(self.attributes)):
             if self.attributes[i]['reqd']:
                 att_name = self.attributes[i]['xml_name']
-                additional.append('@li \"{0}\"'.format(att_name))
+                reqd_atts_names.append(att_name)
+        if len(reqd_atts_names) > 0:
+            additional = [' ', '@note The required attributes for the {0} object'
+                               ' are:'.format(self.object_name)]
+            for reqd_atts_name in reqd_atts_names:
+                additional.append('@li \"{0}\"'.format(reqd_atts_name))
 
         # create the function declaration
         if self.is_cpp_api:

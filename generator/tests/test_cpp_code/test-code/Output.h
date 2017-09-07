@@ -83,11 +83,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
    * Output.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Output(unsigned int level = QualExtension::getDefaultLevel(),
          unsigned int version = QualExtension::getDefaultVersion(),
@@ -97,13 +93,11 @@ public:
   /**
    * Creates a new Output using the given QualPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param qualns the QualPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Output(QualPkgNamespaces *qualns);
 
@@ -819,11 +813,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
  * Output_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Output_t
  */
@@ -952,12 +942,12 @@ Output_getOutputLevel(const Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if this Output_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "id" attribute is set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 if this Output_t's "id" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Output_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Output_t
  */
@@ -967,13 +957,13 @@ Output_isSetId(const Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if this Output_t's "qualitativeSpecies" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this Output_t's "qualitativeSpecies"
+ * attribute is set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 if this Output_t's "qualitativeSpecies" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Output_t's "qualitativeSpecies" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Output_t
  */
@@ -983,13 +973,13 @@ Output_isSetQualitativeSpecies(const Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if this Output_t's "transitionEffect" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Output_t's "transitionEffect"
+ * attribute is set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 if this Output_t's "transitionEffect" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Output_t's "transitionEffect" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof Output_t
  */
@@ -999,12 +989,12 @@ Output_isSetTransitionEffect(const Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if this Output_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "name" attribute is set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 if this Output_t's "name" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Output_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Output_t
  */
@@ -1014,12 +1004,13 @@ Output_isSetName(const Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if this Output_t's "outputLevel" attribute is set.
+ * Predicate returning @c 1 (true) if this Output_t's "outputLevel" attribute
+ * is set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 if this Output_t's "outputLevel" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Output_t's "outputLevel" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Output_t
  */

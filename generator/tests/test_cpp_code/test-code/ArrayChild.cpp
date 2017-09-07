@@ -1141,7 +1141,8 @@ ArrayChild_free(ArrayChild_t* ac)
 
 
 /*
- * Predicate returning @c 1 if this ArrayChild_t's "number" attribute is set.
+ * Predicate returning @c 1 (true) if this ArrayChild_t's "number" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1191,7 +1192,8 @@ ArrayChild_getUnit(const ArrayChild_t * ac)
 
 
 /*
- * Predicate returning @c 1 if this ArrayChild_t's "unit" element is set.
+ * Predicate returning @c 1 (true) if this ArrayChild_t's "unit" element is
+ * set.
  */
 LIBSBML_EXTERN
 int

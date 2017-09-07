@@ -93,11 +93,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this SampledField.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SampledField(unsigned int level = SpatialExtension::getDefaultLevel(),
                unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -108,13 +104,11 @@ public:
   /**
    * Creates a new SampledField using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SampledField(SpatialPkgNamespaces *spatialns);
 
@@ -1122,11 +1116,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this SampledField_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof SampledField_t
  */
@@ -1333,12 +1323,13 @@ SampledField_getSamplesLength(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "id" attribute is
+ * set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1348,13 +1339,13 @@ SampledField_isSetId(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "dataType" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "dataType"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "dataType" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "dataType" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1364,13 +1355,13 @@ SampledField_isSetDataType(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "numSamples1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples1"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "numSamples1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "numSamples1" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1380,13 +1371,13 @@ SampledField_isSetNumSamples1(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "numSamples2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples2"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "numSamples2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "numSamples2" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1396,13 +1387,13 @@ SampledField_isSetNumSamples2(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "numSamples3" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples3"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "numSamples3" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "numSamples3" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1412,13 +1403,13 @@ SampledField_isSetNumSamples3(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "interpolationType"
+ * Predicate returning @c 1 (true) if this SampledField_t's "interpolationType"
  * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "interpolationType" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "interpolationType" attribute
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1428,13 +1419,13 @@ SampledField_isSetInterpolationType(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "compression" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "compression"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "compression" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "compression" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1444,13 +1435,13 @@ SampledField_isSetCompression(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "samples" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "samples" attribute
+ * is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "samples" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "samples" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */
@@ -1460,13 +1451,13 @@ SampledField_isSetSamples(const SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if this SampledField_t's "samplesLength" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "samplesLength"
+ * attribute is set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 if this SampledField_t's "samplesLength" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledField_t's "samplesLength" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledField_t
  */

@@ -1649,8 +1649,8 @@ Uncertainty_getDistribution(const Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 if this Uncertainty_t's "uncertStatistics" element
- * is set.
+ * Predicate returning @c 1 (true) if this Uncertainty_t's "uncertStatistics"
+ * element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1661,8 +1661,8 @@ Uncertainty_isSetUncertStatistics(const Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 if this Uncertainty_t's "distribution" element is
- * set.
+ * Predicate returning @c 1 (true) if this Uncertainty_t's "distribution"
+ * element is set.
  */
 LIBSBML_EXTERN
 int

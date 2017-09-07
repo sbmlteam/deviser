@@ -76,11 +76,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this ListOfAnalyticVolumes.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfAnalyticVolumes(unsigned int level =
     SpatialExtension::getDefaultLevel(),
@@ -94,13 +90,11 @@ public:
    * Creates a new ListOfAnalyticVolumes using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfAnalyticVolumes(SpatialPkgNamespaces *spatialns);
 

@@ -1271,8 +1271,8 @@ ParametricGeometry_getSpatialPoints(const ParametricGeometry_t * pg)
 
 
 /*
- * Predicate returning @c 1 if this ParametricGeometry_t's "spatialPoints"
- * element is set.
+ * Predicate returning @c 1 (true) if this ParametricGeometry_t's
+ * "spatialPoints" element is set.
  */
 LIBSBML_EXTERN
 int

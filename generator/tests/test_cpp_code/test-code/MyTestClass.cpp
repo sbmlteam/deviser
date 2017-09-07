@@ -2582,7 +2582,8 @@ MyTestClass_getIdref2(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "id" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2593,7 +2594,8 @@ MyTestClass_isSetId(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "name" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2604,7 +2606,8 @@ MyTestClass_isSetName(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2615,7 +2618,8 @@ MyTestClass_isSetNum(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "num2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2626,7 +2630,8 @@ MyTestClass_isSetNum2(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "num3" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num3" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2637,7 +2642,8 @@ MyTestClass_isSetNum3(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "num1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "num1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2648,7 +2654,8 @@ MyTestClass_isSetNum1(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "true" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "true" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2659,7 +2666,8 @@ MyTestClass_isSetTrue(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "false" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "false" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2670,7 +2678,8 @@ MyTestClass_isSetFalse(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "unit" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "unit" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2681,7 +2690,8 @@ MyTestClass_isSetUnit(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "ref1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "ref1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2692,7 +2702,8 @@ MyTestClass_isSetRef1(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "ref2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "ref2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2703,7 +2714,8 @@ MyTestClass_isSetRef2(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "refUnit" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "refUnit" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2714,8 +2726,8 @@ MyTestClass_isSetRefUnit(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "correctId" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "correctId"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2726,7 +2738,8 @@ MyTestClass_isSetCorrectId(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "idRef" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idRef" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2737,7 +2750,8 @@ MyTestClass_isSetIdRef(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "idref1" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idref1" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2748,7 +2762,8 @@ MyTestClass_isSetIdref1(const MyTestClass_t * mtc)
 
 
 /*
- * Predicate returning @c 1 if this MyTestClass_t's "idref2" attribute is set.
+ * Predicate returning @c 1 (true) if this MyTestClass_t's "idref2" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

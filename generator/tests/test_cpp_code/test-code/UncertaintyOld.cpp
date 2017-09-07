@@ -1112,7 +1112,8 @@ UncertaintyOld_getName(const UncertaintyOld_t * uo)
 
 
 /*
- * Predicate returning @c 1 if this UncertaintyOld_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "id" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1123,7 +1124,8 @@ UncertaintyOld_isSetId(const UncertaintyOld_t * uo)
 
 
 /*
- * Predicate returning @c 1 if this UncertaintyOld_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "name" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1194,8 +1196,8 @@ UncertaintyOld_getUncertML(const UncertaintyOld_t * uo)
 
 
 /*
- * Predicate returning @c 1 if this UncertaintyOld_t's "uncertML" element is
- * set.
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "uncertML"
+ * element is set.
  */
 LIBSBML_EXTERN
 int

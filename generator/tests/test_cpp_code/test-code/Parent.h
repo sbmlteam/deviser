@@ -83,11 +83,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to
    * this Parent.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Parent(unsigned int level = NastyExtension::getDefaultLevel(),
          unsigned int version = NastyExtension::getDefaultVersion(),
@@ -97,13 +93,11 @@ public:
   /**
    * Creates a new Parent using the given NastyPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param nastyns the NastyPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Parent(NastyPkgNamespaces *nastyns);
 
@@ -870,11 +864,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Nasty Version to assign to this
  * Parent_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Parent_t
  */

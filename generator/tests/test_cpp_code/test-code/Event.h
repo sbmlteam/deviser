@@ -85,11 +85,7 @@ public:
    *
    * @param version an unsigned int, the SBML Version to assign to this Event.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Event(unsigned int level = SBML_DEFAULT_LEVEL,
         unsigned int version = SBML_DEFAULT_VERSION);
@@ -100,11 +96,7 @@ public:
    *
    * @param sbmlns the SBMLNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Event(SBMLNamespaces *sbmlns);
 
@@ -1090,11 +1082,7 @@ BEGIN_C_DECLS
  *
  * @param version an unsigned int, the SBML Version to assign to this Event_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Event_t
  */
@@ -1161,13 +1149,13 @@ Event_getTimeUnits(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if this Event_t's "useValuesFromTriggerTime"
+ * Predicate returning @c 1 (true) if this Event_t's "useValuesFromTriggerTime"
  * attribute is set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 if this Event_t's "useValuesFromTriggerTime" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Event_t's "useValuesFromTriggerTime" attribute
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Event_t
  */
@@ -1177,12 +1165,13 @@ Event_isSetUseValuesFromTriggerTime(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if this Event_t's "timeUnits" attribute is set.
+ * Predicate returning @c 1 (true) if this Event_t's "timeUnits" attribute is
+ * set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 if this Event_t's "timeUnits" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this Event_t's "timeUnits" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Event_t
  */
@@ -1304,12 +1293,12 @@ Event_getDelay(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if this Event_t's "trigger" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "trigger" element is set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 if this Event_t's "trigger" element has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Event_t's "trigger" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Event_t
  */
@@ -1319,12 +1308,12 @@ Event_isSetTrigger(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if this Event_t's "priority" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "priority" element is set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 if this Event_t's "priority" element has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Event_t's "priority" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Event_t
  */
@@ -1334,12 +1323,12 @@ Event_isSetPriority(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if this Event_t's "delay" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "delay" element is set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 if this Event_t's "delay" element has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Event_t's "delay" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Event_t
  */

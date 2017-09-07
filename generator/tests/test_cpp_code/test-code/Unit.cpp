@@ -730,7 +730,7 @@ Unit_getUnit(const Unit_t * u)
 
 
 /*
- * Predicate returning @c 1 if this Unit_t's "unit" attribute is set.
+ * Predicate returning @c 1 (true) if this Unit_t's "unit" attribute is set.
  */
 LIBSBML_EXTERN
 int

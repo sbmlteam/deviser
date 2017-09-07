@@ -86,11 +86,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this CoordinateComponent.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CoordinateComponent(unsigned int level = SpatialExtension::getDefaultLevel(),
                       unsigned int version =
@@ -103,13 +99,11 @@ public:
    * Creates a new CoordinateComponent using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CoordinateComponent(SpatialPkgNamespaces *spatialns);
 
@@ -1043,11 +1037,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CoordinateComponent_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CoordinateComponent_t
  */
@@ -1149,13 +1139,13 @@ CoordinateComponent_getUnit(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CoordinateComponent_t's "id" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "id"
+ * attribute is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @return @c 1 if this CoordinateComponent_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CoordinateComponent_t's "id" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof CoordinateComponent_t
  */
@@ -1165,13 +1155,13 @@ CoordinateComponent_isSetId(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CoordinateComponent_t's "type" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "type"
+ * attribute is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @return @c 1 if this CoordinateComponent_t's "type" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CoordinateComponent_t's "type" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CoordinateComponent_t
  */
@@ -1181,13 +1171,13 @@ CoordinateComponent_isSetType(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CoordinateComponent_t's "unit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "unit"
+ * attribute is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @return @c 1 if this CoordinateComponent_t's "unit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CoordinateComponent_t's "unit" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CoordinateComponent_t
  */
@@ -1351,13 +1341,13 @@ CoordinateComponent_getBoundaryMax(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMin"
- * element is set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's
+ * "boundaryMin" element is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @return @c 1 if this CoordinateComponent_t's "boundaryMin" element has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CoordinateComponent_t's "boundaryMin" element
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CoordinateComponent_t
  */
@@ -1367,13 +1357,13 @@ CoordinateComponent_isSetBoundaryMin(const CoordinateComponent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMax"
- * element is set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's
+ * "boundaryMax" element is set.
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @return @c 1 if this CoordinateComponent_t's "boundaryMax" element has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CoordinateComponent_t's "boundaryMax" element
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CoordinateComponent_t
  */

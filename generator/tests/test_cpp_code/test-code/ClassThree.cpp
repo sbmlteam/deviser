@@ -1327,7 +1327,8 @@ ClassThree_getOtherNumAsString(const ClassThree_t * ct)
 
 
 /*
- * Predicate returning @c 1 if this ClassThree_t's "number" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "number" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1338,7 +1339,8 @@ ClassThree_isSetNumber(const ClassThree_t * ct)
 
 
 /*
- * Predicate returning @c 1 if this ClassThree_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "name" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1349,7 +1351,8 @@ ClassThree_isSetName(const ClassThree_t * ct)
 
 
 /*
- * Predicate returning @c 1 if this ClassThree_t's "badName" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "badName" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1360,7 +1363,8 @@ ClassThree_isSetBadName(const ClassThree_t * ct)
 
 
 /*
- * Predicate returning @c 1 if this ClassThree_t's "otherNum" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassThree_t's "otherNum" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

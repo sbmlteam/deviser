@@ -1490,7 +1490,8 @@ Compartment_getCompartmentType(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "size" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "size" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1501,7 +1502,8 @@ Compartment_isSetSize(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "volume" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "volume" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1512,7 +1514,8 @@ Compartment_isSetVolume(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "units" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "units" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1523,7 +1526,7 @@ Compartment_isSetUnits(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "spatialDimensions"
+ * Predicate returning @c 1 (true) if this Compartment_t's "spatialDimensions"
  * attribute is set.
  */
 LIBSBML_EXTERN
@@ -1535,8 +1538,8 @@ Compartment_isSetSpatialDimensions(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "constant" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "constant" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1547,7 +1550,8 @@ Compartment_isSetConstant(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "outside" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "outside" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1558,8 +1562,8 @@ Compartment_isSetOutside(const Compartment_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Compartment_t's "compartmentType" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "compartmentType"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

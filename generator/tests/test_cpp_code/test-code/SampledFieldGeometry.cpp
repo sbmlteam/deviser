@@ -1237,8 +1237,8 @@ SampledFieldGeometry_getSampledField(const SampledFieldGeometry_t * sfg)
 
 
 /*
- * Predicate returning @c 1 if this SampledFieldGeometry_t's "sampledField"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SampledFieldGeometry_t's
+ * "sampledField" attribute is set.
  */
 LIBSBML_EXTERN
 int

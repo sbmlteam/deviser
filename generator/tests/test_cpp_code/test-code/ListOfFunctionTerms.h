@@ -84,11 +84,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
    * ListOfFunctionTerms.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfFunctionTerms(unsigned int level = QualExtension::getDefaultLevel(),
                       unsigned int version =
@@ -101,13 +97,11 @@ public:
    * Creates a new ListOfFunctionTerms using the given QualPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param qualns the QualPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfFunctionTerms(QualPkgNamespaces *qualns);
 

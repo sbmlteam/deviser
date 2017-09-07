@@ -1016,8 +1016,8 @@ GeometryDefinition_getIsActive(const GeometryDefinition_t * gd)
 
 
 /*
- * Predicate returning @c 1 if this GeometryDefinition_t's "id" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this GeometryDefinition_t's "id"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1028,8 +1028,8 @@ GeometryDefinition_isSetId(const GeometryDefinition_t * gd)
 
 
 /*
- * Predicate returning @c 1 if this GeometryDefinition_t's "isActive" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this GeometryDefinition_t's "isActive"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

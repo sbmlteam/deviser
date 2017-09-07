@@ -82,11 +82,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Groups Version to assign to
    * this ListOfMembers.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfMembers(unsigned int level = GroupsExtension::getDefaultLevel(),
                 unsigned int version = GroupsExtension::getDefaultVersion(),
@@ -97,13 +93,11 @@ public:
   /**
    * Creates a new ListOfMembers using the given GroupsPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param groupsns the GroupsPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfMembers(GroupsPkgNamespaces *groupsns);
 
@@ -542,12 +536,12 @@ ListOfMembers_getName(const ListOf_t * lo);
 
 
 /**
- * Predicate returning @c 1 if this ListOf_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this ListOf_t's "id" attribute is set.
  *
  * @param lo the ListOf_t structure.
  *
- * @return @c 1 if this ListOf_t's "id" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this ListOf_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */
@@ -557,12 +551,12 @@ ListOfMembers_isSetId(const ListOf_t * lo);
 
 
 /**
- * Predicate returning @c 1 if this ListOf_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this ListOf_t's "name" attribute is set.
  *
  * @param lo the ListOf_t structure.
  *
- * @return @c 1 if this ListOf_t's "name" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this ListOf_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */

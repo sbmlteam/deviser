@@ -82,11 +82,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML X Version to assign to this
    * ContainerX.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ContainerX(unsigned int level = XExtension::getDefaultLevel(),
              unsigned int version = XExtension::getDefaultVersion(),
@@ -96,13 +92,11 @@ public:
   /**
    * Creates a new ContainerX using the given XPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param xns the XPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ContainerX(XPkgNamespaces *xns);
 
@@ -823,11 +817,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML X Version to assign to this
  * ContainerX_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ContainerX_t
  */

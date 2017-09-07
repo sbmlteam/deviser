@@ -1058,8 +1058,8 @@ BernoulliDistribution_getProb(const BernoulliDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if this BernoulliDistribution_t's "prob" element is
- * set.
+ * Predicate returning @c 1 (true) if this BernoulliDistribution_t's "prob"
+ * element is set.
  */
 LIBSBML_EXTERN
 int

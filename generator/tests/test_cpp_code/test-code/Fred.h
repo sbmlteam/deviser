@@ -91,11 +91,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML X Version to assign to this
    * Fred.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Fred(unsigned int level = XExtension::getDefaultLevel(),
        unsigned int version = XExtension::getDefaultVersion(),
@@ -105,13 +101,11 @@ public:
   /**
    * Creates a new Fred using the given XPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param xns the XPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Fred(XPkgNamespaces *xns);
 
@@ -1231,11 +1225,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML X Version to assign to this
  * Fred_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Fred_t
  */
@@ -1359,12 +1349,12 @@ Fred_getKindAsString(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "id" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "id" attribute has been set, otherwise @c 0 is
- * returned.
+ * @return @c 1 (true) if this Fred_t's "id" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1374,12 +1364,12 @@ Fred_isSetId(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "bol" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "bol" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "bol" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "bol" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1389,12 +1379,12 @@ Fred_isSetBol(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "num" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "num" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "num" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1404,12 +1394,12 @@ Fred_isSetNum(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "str" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "str" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "str" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "str" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1419,12 +1409,12 @@ Fred_isSetStr(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "kind" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "kind" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "kind" attribute has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "kind" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1664,12 +1654,12 @@ Fred_getOther2(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "other" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other" element is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "other" element has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "other" element has been set, otherwise
+ * @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1679,12 +1669,12 @@ Fred_isSetOther(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "other1" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other1" element is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "other1" element has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "other1" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1694,12 +1684,12 @@ Fred_isSetOther1(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 if this Fred_t's "other2" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other2" element is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 if this Fred_t's "other2" element has been set, otherwise @c 0
- * is returned.
+ * @return @c 1 (true) if this Fred_t's "other2" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */

@@ -84,11 +84,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this ExponentialDistribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ExponentialDistribution(
                           unsigned int level =
@@ -103,13 +99,11 @@ public:
    * Creates a new ExponentialDistribution using the given DistribPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ExponentialDistribution(DistribPkgNamespaces *distribns);
 
@@ -821,11 +815,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this ExponentialDistribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ExponentialDistribution_t
  */
@@ -882,13 +872,13 @@ ExponentialDistribution_getRate(const ExponentialDistribution_t * ed);
 
 
 /**
- * Predicate returning @c 1 if this ExponentialDistribution_t's "rate" element
- * is set.
+ * Predicate returning @c 1 (true) if this ExponentialDistribution_t's "rate"
+ * element is set.
  *
  * @param ed the ExponentialDistribution_t structure.
  *
- * @return @c 1 if this ExponentialDistribution_t's "rate" element has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ExponentialDistribution_t's "rate" element has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof ExponentialDistribution_t
  */

@@ -532,7 +532,7 @@ ListOfMyLoTests_getId(const ListOf_t * lo)
 
 
 /*
- * Predicate returning @c 1 if this ListOf_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this ListOf_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

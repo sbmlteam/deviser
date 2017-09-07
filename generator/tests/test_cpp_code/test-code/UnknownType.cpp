@@ -665,8 +665,8 @@ UnknownType_getAttribue(const UnknownType_t * ut)
 
 
 /*
- * Predicate returning @c 1 if this UnknownType_t's "attribue" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this UnknownType_t's "attribue" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int

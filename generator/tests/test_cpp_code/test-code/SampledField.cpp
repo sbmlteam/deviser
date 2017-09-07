@@ -2144,7 +2144,8 @@ SampledField_getSamplesLength(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "id" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2155,8 +2156,8 @@ SampledField_isSetId(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "dataType" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "dataType"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2167,8 +2168,8 @@ SampledField_isSetDataType(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "numSamples1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples1"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2179,8 +2180,8 @@ SampledField_isSetNumSamples1(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "numSamples2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples2"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2191,8 +2192,8 @@ SampledField_isSetNumSamples2(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "numSamples3" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "numSamples3"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2203,7 +2204,7 @@ SampledField_isSetNumSamples3(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "interpolationType"
+ * Predicate returning @c 1 (true) if this SampledField_t's "interpolationType"
  * attribute is set.
  */
 LIBSBML_EXTERN
@@ -2215,8 +2216,8 @@ SampledField_isSetInterpolationType(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "compression" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "compression"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2227,8 +2228,8 @@ SampledField_isSetCompression(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "samples" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "samples" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -2239,8 +2240,8 @@ SampledField_isSetSamples(const SampledField_t * sf)
 
 
 /*
- * Predicate returning @c 1 if this SampledField_t's "samplesLength" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SampledField_t's "samplesLength"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

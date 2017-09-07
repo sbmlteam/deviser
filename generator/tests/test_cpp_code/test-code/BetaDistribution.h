@@ -84,11 +84,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this BetaDistribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BetaDistribution(unsigned int level = DistribExtension::getDefaultLevel(),
                    unsigned int version =
@@ -101,13 +97,11 @@ public:
    * Creates a new BetaDistribution using the given DistribPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BetaDistribution(DistribPkgNamespaces *distribns);
 
@@ -867,11 +861,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this BetaDistribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof BetaDistribution_t
  */
@@ -943,13 +933,13 @@ BetaDistribution_getBeta(const BetaDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if this BetaDistribution_t's "alpha" element is
- * set.
+ * Predicate returning @c 1 (true) if this BetaDistribution_t's "alpha" element
+ * is set.
  *
  * @param bd the BetaDistribution_t structure.
  *
- * @return @c 1 if this BetaDistribution_t's "alpha" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this BetaDistribution_t's "alpha" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof BetaDistribution_t
  */
@@ -959,12 +949,13 @@ BetaDistribution_isSetAlpha(const BetaDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if this BetaDistribution_t's "beta" element is set.
+ * Predicate returning @c 1 (true) if this BetaDistribution_t's "beta" element
+ * is set.
  *
  * @param bd the BetaDistribution_t structure.
  *
- * @return @c 1 if this BetaDistribution_t's "beta" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this BetaDistribution_t's "beta" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof BetaDistribution_t
  */

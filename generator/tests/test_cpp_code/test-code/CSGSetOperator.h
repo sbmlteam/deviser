@@ -86,11 +86,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this CSGSetOperator.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGSetOperator(unsigned int level = SpatialExtension::getDefaultLevel(),
                  unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -101,13 +97,11 @@ public:
   /**
    * Creates a new CSGSetOperator using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CSGSetOperator(SpatialPkgNamespaces *spatialns);
 
@@ -1097,11 +1091,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this CSGSetOperator_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof CSGSetOperator_t
  */
@@ -1201,13 +1191,13 @@ CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 if this CSGSetOperator_t's "operationType"
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "operationType"
  * attribute is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @return @c 1 if this CSGSetOperator_t's "operationType" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CSGSetOperator_t's "operationType" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CSGSetOperator_t
  */
@@ -1217,13 +1207,13 @@ CSGSetOperator_isSetOperationType(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 if this CSGSetOperator_t's "complementA" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "complementA"
+ * attribute is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @return @c 1 if this CSGSetOperator_t's "complementA" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CSGSetOperator_t's "complementA" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CSGSetOperator_t
  */
@@ -1233,13 +1223,13 @@ CSGSetOperator_isSetComplementA(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 if this CSGSetOperator_t's "complementB" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "complementB"
+ * attribute is set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @return @c 1 if this CSGSetOperator_t's "complementB" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CSGSetOperator_t's "complementB" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CSGSetOperator_t
  */

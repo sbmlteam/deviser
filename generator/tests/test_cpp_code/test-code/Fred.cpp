@@ -2285,7 +2285,7 @@ Fred_getKindAsString(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2296,7 +2296,7 @@ Fred_isSetId(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "bol" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "bol" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2307,7 +2307,7 @@ Fred_isSetBol(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "num" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2318,7 +2318,7 @@ Fred_isSetNum(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "str" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "str" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2329,7 +2329,7 @@ Fred_isSetStr(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "kind" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "kind" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2509,7 +2509,7 @@ Fred_getOther2(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "other" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -2520,7 +2520,7 @@ Fred_isSetOther(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "other1" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other1" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -2531,7 +2531,7 @@ Fred_isSetOther1(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if this Fred_t's "other2" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "other2" element is set.
  */
 LIBSBML_EXTERN
 int

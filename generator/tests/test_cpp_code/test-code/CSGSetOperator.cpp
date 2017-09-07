@@ -1720,7 +1720,7 @@ CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 if this CSGSetOperator_t's "operationType"
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "operationType"
  * attribute is set.
  */
 LIBSBML_EXTERN
@@ -1732,8 +1732,8 @@ CSGSetOperator_isSetOperationType(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 if this CSGSetOperator_t's "complementA" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "complementA"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1744,8 +1744,8 @@ CSGSetOperator_isSetComplementA(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 if this CSGSetOperator_t's "complementB" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this CSGSetOperator_t's "complementB"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

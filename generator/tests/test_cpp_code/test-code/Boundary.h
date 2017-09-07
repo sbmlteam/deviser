@@ -83,11 +83,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this Boundary.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Boundary(unsigned int level = SpatialExtension::getDefaultLevel(),
            unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -98,13 +94,11 @@ public:
   /**
    * Creates a new Boundary using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Boundary(SpatialPkgNamespaces *spatialns);
 
@@ -674,11 +668,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this Boundary_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Boundary_t
  */
@@ -746,12 +736,12 @@ Boundary_getValue(const Boundary_t * b);
 
 
 /**
- * Predicate returning @c 1 if this Boundary_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Boundary_t's "id" attribute is set.
  *
  * @param b the Boundary_t structure.
  *
- * @return @c 1 if this Boundary_t's "id" attribute has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Boundary_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Boundary_t
  */
@@ -761,12 +751,13 @@ Boundary_isSetId(const Boundary_t * b);
 
 
 /**
- * Predicate returning @c 1 if this Boundary_t's "value" attribute is set.
+ * Predicate returning @c 1 (true) if this Boundary_t's "value" attribute is
+ * set.
  *
  * @param b the Boundary_t structure.
  *
- * @return @c 1 if this Boundary_t's "value" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this Boundary_t's "value" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Boundary_t
  */

@@ -715,7 +715,7 @@ Copyright_getId(const Copyright_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Copyright_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Copyright_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

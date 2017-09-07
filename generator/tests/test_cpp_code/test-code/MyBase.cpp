@@ -708,7 +708,7 @@ MyBase_getId(const MyBase_t * mb)
 
 
 /*
- * Predicate returning @c 1 if this MyBase_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyBase_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

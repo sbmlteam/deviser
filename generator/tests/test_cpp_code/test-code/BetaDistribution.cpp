@@ -1269,8 +1269,8 @@ BetaDistribution_getBeta(const BetaDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if this BetaDistribution_t's "alpha" element is
- * set.
+ * Predicate returning @c 1 (true) if this BetaDistribution_t's "alpha" element
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1281,7 +1281,8 @@ BetaDistribution_isSetAlpha(const BetaDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if this BetaDistribution_t's "beta" element is set.
+ * Predicate returning @c 1 (true) if this BetaDistribution_t's "beta" element
+ * is set.
  */
 LIBSBML_EXTERN
 int

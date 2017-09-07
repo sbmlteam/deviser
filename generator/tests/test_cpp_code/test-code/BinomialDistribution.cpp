@@ -1301,8 +1301,8 @@ BinomialDistribution_getProbabilityOfSuccess(const BinomialDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if this BinomialDistribution_t's "numberOfTrials"
- * element is set.
+ * Predicate returning @c 1 (true) if this BinomialDistribution_t's
+ * "numberOfTrials" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1313,7 +1313,7 @@ BinomialDistribution_isSetNumberOfTrials(const BinomialDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if this BinomialDistribution_t's
+ * Predicate returning @c 1 (true) if this BinomialDistribution_t's
  * "probabilityOfSuccess" element is set.
  */
 LIBSBML_EXTERN

@@ -1745,7 +1745,7 @@ Event_getTimeUnits(const Event_t * e)
 
 
 /*
- * Predicate returning @c 1 if this Event_t's "useValuesFromTriggerTime"
+ * Predicate returning @c 1 (true) if this Event_t's "useValuesFromTriggerTime"
  * attribute is set.
  */
 LIBSBML_EXTERN
@@ -1758,7 +1758,8 @@ Event_isSetUseValuesFromTriggerTime(const Event_t * e)
 
 
 /*
- * Predicate returning @c 1 if this Event_t's "timeUnits" attribute is set.
+ * Predicate returning @c 1 (true) if this Event_t's "timeUnits" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1864,7 +1865,7 @@ Event_getDelay(const Event_t * e)
 
 
 /*
- * Predicate returning @c 1 if this Event_t's "trigger" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "trigger" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1875,7 +1876,7 @@ Event_isSetTrigger(const Event_t * e)
 
 
 /*
- * Predicate returning @c 1 if this Event_t's "priority" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "priority" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1886,7 +1887,7 @@ Event_isSetPriority(const Event_t * e)
 
 
 /*
- * Predicate returning @c 1 if this Event_t's "delay" element is set.
+ * Predicate returning @c 1 (true) if this Event_t's "delay" element is set.
  */
 LIBSBML_EXTERN
 int

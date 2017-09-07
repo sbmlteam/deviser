@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this DrawFromDistribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   DrawFromDistribution(unsigned int level =
     DistribExtension::getDefaultLevel(),
@@ -103,13 +99,11 @@ public:
    * Creates a new DrawFromDistribution using the given DistribPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   DrawFromDistribution(DistribPkgNamespaces *distribns);
 
@@ -1022,11 +1016,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this DrawFromDistribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof DrawFromDistribution_t
  */
@@ -1085,13 +1075,13 @@ DrawFromDistribution_getDistribution(const DrawFromDistribution_t * dfd);
 
 
 /**
- * Predicate returning @c 1 if this DrawFromDistribution_t's "distribution"
- * element is set.
+ * Predicate returning @c 1 (true) if this DrawFromDistribution_t's
+ * "distribution" element is set.
  *
  * @param dfd the DrawFromDistribution_t structure.
  *
- * @return @c 1 if this DrawFromDistribution_t's "distribution" element has
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this DrawFromDistribution_t's "distribution" element
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof DrawFromDistribution_t
  */

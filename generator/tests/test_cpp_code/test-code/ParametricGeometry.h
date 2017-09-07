@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this ParametricGeometry.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ParametricGeometry(unsigned int level = SpatialExtension::getDefaultLevel(),
                      unsigned int version =
@@ -102,13 +98,11 @@ public:
    * Creates a new ParametricGeometry using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ParametricGeometry(SpatialPkgNamespaces *spatialns);
 
@@ -996,11 +990,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this ParametricGeometry_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof ParametricGeometry_t
  */
@@ -1058,13 +1048,13 @@ ParametricGeometry_getSpatialPoints(const ParametricGeometry_t * pg);
 
 
 /**
- * Predicate returning @c 1 if this ParametricGeometry_t's "spatialPoints"
- * element is set.
+ * Predicate returning @c 1 (true) if this ParametricGeometry_t's
+ * "spatialPoints" element is set.
  *
  * @param pg the ParametricGeometry_t structure.
  *
- * @return @c 1 if this ParametricGeometry_t's "spatialPoints" element has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this ParametricGeometry_t's "spatialPoints" element
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof ParametricGeometry_t
  */

@@ -1059,8 +1059,8 @@ ExponentialDistribution_getRate(const ExponentialDistribution_t * ed)
 
 
 /*
- * Predicate returning @c 1 if this ExponentialDistribution_t's "rate" element
- * is set.
+ * Predicate returning @c 1 (true) if this ExponentialDistribution_t's "rate"
+ * element is set.
  */
 LIBSBML_EXTERN
 int

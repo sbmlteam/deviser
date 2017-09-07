@@ -117,11 +117,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
    * MyRequiredClass.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyRequiredClass(unsigned int level = TestExtension::getDefaultLevel(),
                   unsigned int version = TestExtension::getDefaultVersion(),
@@ -132,13 +128,11 @@ public:
   /**
    * Creates a new MyRequiredClass using the given TestPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param testns the TestPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   MyRequiredClass(TestPkgNamespaces *testns);
 
@@ -1925,11 +1919,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Test Version to assign to this
  * MyRequiredClass_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof MyRequiredClass_t
  */
@@ -2284,12 +2274,13 @@ MyRequiredClass_getNotmetaid(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "id" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2299,13 +2290,13 @@ MyRequiredClass_isSetId(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "name" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "name" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "name" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "name" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2315,12 +2306,13 @@ MyRequiredClass_isSetName(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "num" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "num" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2330,13 +2322,13 @@ MyRequiredClass_isSetNum(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "num2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num2" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "num2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "num2" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2346,13 +2338,13 @@ MyRequiredClass_isSetNum2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "num3" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num3" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "num3" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "num3" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2362,13 +2354,13 @@ MyRequiredClass_isSetNum3(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "num1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num1" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "num1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "num1" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2378,13 +2370,13 @@ MyRequiredClass_isSetNum1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "true" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "true" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "true" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "true" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2394,13 +2386,13 @@ MyRequiredClass_isSetTrue(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "false" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "false"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "false" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "false" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2410,13 +2402,13 @@ MyRequiredClass_isSetFalse(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "unit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "unit" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "unit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "unit" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2426,13 +2418,13 @@ MyRequiredClass_isSetUnit(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "ref1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "ref1" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "ref1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "ref1" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2442,13 +2434,13 @@ MyRequiredClass_isSetRef1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "ref2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "ref2" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "ref2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "ref2" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2458,13 +2450,13 @@ MyRequiredClass_isSetRef2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "refUnit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "refUnit"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "refUnit" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "refUnit" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2474,13 +2466,13 @@ MyRequiredClass_isSetRefUnit(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "correctId" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "correctId"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "correctId" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "correctId" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2490,13 +2482,13 @@ MyRequiredClass_isSetCorrectId(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "posint" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "posint" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2506,13 +2498,13 @@ MyRequiredClass_isSetPosint(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint2"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "posint2" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "posint2" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2522,13 +2514,13 @@ MyRequiredClass_isSetPosint2(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint1"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "posint1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "posint1" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2538,13 +2530,13 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaid" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "metaid" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "metaid" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2554,13 +2546,13 @@ MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaid1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid1"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "metaid1" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "metaid1" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2570,13 +2562,13 @@ MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "num4" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num4" attribute
+ * is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "num4" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "num4" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2586,13 +2578,13 @@ MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaidref1" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaidref1"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "metaidref1" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "metaidref1" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2602,13 +2594,13 @@ MyRequiredClass_isSetMetaidref1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "notmetaid" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "notmetaid"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "notmetaid" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "notmetaid" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2618,13 +2610,13 @@ MyRequiredClass_isSetNotmetaid(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "arrayD" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "arrayD"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "arrayD" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "arrayD" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
@@ -2634,13 +2626,13 @@ MyRequiredClass_isSetArrayD(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 if this MyRequiredClass_t's "arrayInt" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "arrayInt"
+ * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 if this MyRequiredClass_t's "arrayInt" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this MyRequiredClass_t's "arrayInt" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */

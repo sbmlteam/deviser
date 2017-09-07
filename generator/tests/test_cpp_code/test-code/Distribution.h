@@ -87,11 +87,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this Distribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Distribution(unsigned int level = DistribExtension::getDefaultLevel(),
                unsigned int version = DistribExtension::getDefaultVersion(),
@@ -102,13 +98,11 @@ public:
   /**
    * Creates a new Distribution using the given DistribPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Distribution(DistribPkgNamespaces *distribns);
 
@@ -649,11 +643,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -681,11 +671,7 @@ Distribution_createBetaDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -713,11 +699,7 @@ Distribution_createCauchyDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -745,11 +727,7 @@ Distribution_createExponentialDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -777,11 +755,7 @@ Distribution_createLogisticDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -809,11 +783,7 @@ Distribution_createNormalDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -841,11 +811,7 @@ Distribution_createBinomialDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -873,11 +839,7 @@ Distribution_createGeometricDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -905,11 +867,7 @@ Distribution_createBernoulliDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -937,11 +895,7 @@ Distribution_createCategoricalDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */
@@ -969,11 +923,7 @@ Distribution_createMultivariateDistribution(
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Distribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Distribution_t
  */

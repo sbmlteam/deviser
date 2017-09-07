@@ -86,11 +86,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
    * Transition.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Transition(unsigned int level = QualExtension::getDefaultLevel(),
              unsigned int version = QualExtension::getDefaultVersion(),
@@ -101,13 +97,11 @@ public:
   /**
    * Creates a new Transition using the given QualPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param qualns the QualPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Transition(QualPkgNamespaces *qualns);
 
@@ -1298,11 +1292,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
  * Transition_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Transition_t
  */
@@ -1371,12 +1361,13 @@ Transition_getName(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 if this Transition_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Transition_t's "id" attribute is
+ * set.
  *
  * @param t the Transition_t structure.
  *
- * @return @c 1 if this Transition_t's "id" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this Transition_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Transition_t
  */
@@ -1386,12 +1377,13 @@ Transition_isSetId(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 if this Transition_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this Transition_t's "name" attribute is
+ * set.
  *
  * @param t the Transition_t structure.
  *
- * @return @c 1 if this Transition_t's "name" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this Transition_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Transition_t
  */
@@ -1878,13 +1870,13 @@ Transition_getDefaultTerm(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 if this Transition_t's "defaultTerm" element is
- * set.
+ * Predicate returning @c 1 (true) if this Transition_t's "defaultTerm" element
+ * is set.
  *
  * @param t the Transition_t structure.
  *
- * @return @c 1 if this Transition_t's "defaultTerm" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Transition_t's "defaultTerm" element has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof Transition_t
  */

@@ -1356,7 +1356,8 @@ Category_getRank(const Category_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Category_t's "rank" attribute is set.
+ * Predicate returning @c 1 (true) if this Category_t's "rank" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1421,7 +1422,8 @@ Category_getValue(const Category_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Category_t's "probability" element is set.
+ * Predicate returning @c 1 (true) if this Category_t's "probability" element
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1432,7 +1434,7 @@ Category_isSetProbability(const Category_t * c)
 
 
 /*
- * Predicate returning @c 1 if this Category_t's "value" element is set.
+ * Predicate returning @c 1 (true) if this Category_t's "value" element is set.
  */
 LIBSBML_EXTERN
 int

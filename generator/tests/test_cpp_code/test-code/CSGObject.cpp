@@ -1699,7 +1699,7 @@ CSGObject_getOrdinal(const CSGObject_t * csgo)
 
 
 /*
- * Predicate returning @c 1 if this CSGObject_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this CSGObject_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1710,8 +1710,8 @@ CSGObject_isSetId(const CSGObject_t * csgo)
 
 
 /*
- * Predicate returning @c 1 if this CSGObject_t's "domainType" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CSGObject_t's "domainType" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -1722,7 +1722,8 @@ CSGObject_isSetDomainType(const CSGObject_t * csgo)
 
 
 /*
- * Predicate returning @c 1 if this CSGObject_t's "ordinal" attribute is set.
+ * Predicate returning @c 1 (true) if this CSGObject_t's "ordinal" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1816,7 +1817,8 @@ CSGObject_getCSGNode(const CSGObject_t * csgo)
 
 
 /*
- * Predicate returning @c 1 if this CSGObject_t's "csgNode" element is set.
+ * Predicate returning @c 1 (true) if this CSGObject_t's "csgNode" element is
+ * set.
  */
 LIBSBML_EXTERN
 int

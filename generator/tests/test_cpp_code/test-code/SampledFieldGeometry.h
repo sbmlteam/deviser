@@ -84,11 +84,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this SampledFieldGeometry.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SampledFieldGeometry(unsigned int level =
     SpatialExtension::getDefaultLevel(),
@@ -102,13 +98,11 @@ public:
    * Creates a new SampledFieldGeometry using the given SpatialPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SampledFieldGeometry(SpatialPkgNamespaces *spatialns);
 
@@ -984,11 +978,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this SampledFieldGeometry_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -1047,13 +1037,13 @@ SampledFieldGeometry_getSampledField(const SampledFieldGeometry_t * sfg);
 
 
 /**
- * Predicate returning @c 1 if this SampledFieldGeometry_t's "sampledField"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SampledFieldGeometry_t's
+ * "sampledField" attribute is set.
  *
  * @param sfg the SampledFieldGeometry_t structure.
  *
- * @return @c 1 if this SampledFieldGeometry_t's "sampledField" attribute has
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SampledFieldGeometry_t's "sampledField"
+ * attribute has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SampledFieldGeometry_t
  */

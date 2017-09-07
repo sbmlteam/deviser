@@ -4157,7 +4157,8 @@ MyRequiredClass_getNotmetaid(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "id" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4168,8 +4169,8 @@ MyRequiredClass_isSetId(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "name" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "name" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4180,7 +4181,8 @@ MyRequiredClass_isSetName(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4191,8 +4193,8 @@ MyRequiredClass_isSetNum(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "num2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num2" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4203,8 +4205,8 @@ MyRequiredClass_isSetNum2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "num3" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num3" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4215,8 +4217,8 @@ MyRequiredClass_isSetNum3(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "num1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num1" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4227,8 +4229,8 @@ MyRequiredClass_isSetNum1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "true" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "true" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4239,8 +4241,8 @@ MyRequiredClass_isSetTrue(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "false" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "false"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4251,8 +4253,8 @@ MyRequiredClass_isSetFalse(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "unit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "unit" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4263,8 +4265,8 @@ MyRequiredClass_isSetUnit(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "ref1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "ref1" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4275,8 +4277,8 @@ MyRequiredClass_isSetRef1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "ref2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "ref2" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4287,8 +4289,8 @@ MyRequiredClass_isSetRef2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "refUnit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "refUnit"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4299,8 +4301,8 @@ MyRequiredClass_isSetRefUnit(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "correctId" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "correctId"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4311,8 +4313,8 @@ MyRequiredClass_isSetCorrectId(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4323,8 +4325,8 @@ MyRequiredClass_isSetPosint(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint2" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint2"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4335,8 +4337,8 @@ MyRequiredClass_isSetPosint2(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "posint1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "posint1"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4347,8 +4349,8 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaid" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4359,8 +4361,8 @@ MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaid1" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid1"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4371,8 +4373,8 @@ MyRequiredClass_isSetMetaid1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "num4" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "num4" attribute
+ * is set.
  */
 LIBSBML_EXTERN
 int
@@ -4383,8 +4385,8 @@ MyRequiredClass_isSetNum4(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "metaidref1" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaidref1"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4395,8 +4397,8 @@ MyRequiredClass_isSetMetaidref1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "notmetaid" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "notmetaid"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4407,8 +4409,8 @@ MyRequiredClass_isSetNotmetaid(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "arrayD" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "arrayD"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -4419,8 +4421,8 @@ MyRequiredClass_isSetArrayD(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if this MyRequiredClass_t's "arrayInt" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "arrayInt"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int

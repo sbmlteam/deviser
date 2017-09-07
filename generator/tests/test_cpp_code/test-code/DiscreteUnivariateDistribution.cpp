@@ -1341,7 +1341,7 @@ DiscreteUnivariateDistribution_getTruncationUpperBound(const
 
 
 /*
- * Predicate returning @c 1 if this DiscreteUnivariateDistribution_t's
+ * Predicate returning @c 1 (true) if this DiscreteUnivariateDistribution_t's
  * "truncationLowerBound" element is set.
  */
 LIBSBML_EXTERN
@@ -1355,7 +1355,7 @@ DiscreteUnivariateDistribution_isSetTruncationLowerBound(const
 
 
 /*
- * Predicate returning @c 1 if this DiscreteUnivariateDistribution_t's
+ * Predicate returning @c 1 (true) if this DiscreteUnivariateDistribution_t's
  * "truncationUpperBound" element is set.
  */
 LIBSBML_EXTERN

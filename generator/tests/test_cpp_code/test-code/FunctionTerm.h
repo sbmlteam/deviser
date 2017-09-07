@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
    * FunctionTerm.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   FunctionTerm(unsigned int level = QualExtension::getDefaultLevel(),
                unsigned int version = QualExtension::getDefaultVersion(),
@@ -100,13 +96,11 @@ public:
   /**
    * Creates a new FunctionTerm using the given QualPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param qualns the QualPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   FunctionTerm(QualPkgNamespaces *qualns);
 
@@ -721,11 +715,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
  * FunctionTerm_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof FunctionTerm_t
  */
@@ -779,13 +769,13 @@ FunctionTerm_getResultLevel(const FunctionTerm_t * ft);
 
 
 /**
- * Predicate returning @c 1 if this FunctionTerm_t's "resultLevel" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this FunctionTerm_t's "resultLevel"
+ * attribute is set.
  *
  * @param ft the FunctionTerm_t structure.
  *
- * @return @c 1 if this FunctionTerm_t's "resultLevel" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this FunctionTerm_t's "resultLevel" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof FunctionTerm_t
  */
@@ -845,12 +835,13 @@ FunctionTerm_getMath(const FunctionTerm_t * ft);
 
 
 /**
- * Predicate returning @c 1 if this FunctionTerm_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this FunctionTerm_t's "math" element is
+ * set.
  *
  * @param ft the FunctionTerm_t structure.
  *
- * @return @c 1 if this FunctionTerm_t's "math" element has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this FunctionTerm_t's "math" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof FunctionTerm_t
  */

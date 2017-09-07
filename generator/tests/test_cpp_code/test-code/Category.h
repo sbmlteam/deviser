@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this Category.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Category(unsigned int level = DistribExtension::getDefaultLevel(),
            unsigned int version = DistribExtension::getDefaultVersion(),
@@ -100,13 +96,11 @@ public:
   /**
    * Creates a new Category using the given DistribPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Category(DistribPkgNamespaces *distribns);
 
@@ -903,11 +897,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this Category_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Category_t
  */
@@ -961,12 +951,13 @@ Category_getRank(const Category_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Category_t's "rank" attribute is set.
+ * Predicate returning @c 1 (true) if this Category_t's "rank" attribute is
+ * set.
  *
  * @param c the Category_t structure.
  *
- * @return @c 1 if this Category_t's "rank" attribute has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this Category_t's "rank" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Category_t
  */
@@ -1040,12 +1031,13 @@ Category_getValue(const Category_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Category_t's "probability" element is set.
+ * Predicate returning @c 1 (true) if this Category_t's "probability" element
+ * is set.
  *
  * @param c the Category_t structure.
  *
- * @return @c 1 if this Category_t's "probability" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Category_t's "probability" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Category_t
  */
@@ -1055,12 +1047,12 @@ Category_isSetProbability(const Category_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Category_t's "value" element is set.
+ * Predicate returning @c 1 (true) if this Category_t's "value" element is set.
  *
  * @param c the Category_t structure.
  *
- * @return @c 1 if this Category_t's "value" element has been set, otherwise @c
- * 0 is returned.
+ * @return @c 1 (true) if this Category_t's "value" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Category_t
  */

@@ -881,7 +881,7 @@ CSGNode_getId(const CSGNode_t * csgn)
 
 
 /*
- * Predicate returning @c 1 if this CSGNode_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this CSGNode_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int

@@ -1116,7 +1116,7 @@ ClassOne_getAtt2(const ClassOne_t * co)
 
 
 /*
- * Predicate returning @c 1 if this ClassOne_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOne_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1127,7 +1127,8 @@ ClassOne_isSetId(const ClassOne_t * co)
 
 
 /*
- * Predicate returning @c 1 if this ClassOne_t's "att1" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOne_t's "att1" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -1138,7 +1139,8 @@ ClassOne_isSetAtt1(const ClassOne_t * co)
 
 
 /*
- * Predicate returning @c 1 if this ClassOne_t's "att2" attribute is set.
+ * Predicate returning @c 1 (true) if this ClassOne_t's "att2" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int

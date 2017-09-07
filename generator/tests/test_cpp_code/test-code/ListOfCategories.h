@@ -76,11 +76,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this ListOfCategories.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfCategories(unsigned int level = DistribExtension::getDefaultLevel(),
                    unsigned int version =
@@ -93,13 +89,11 @@ public:
    * Creates a new ListOfCategories using the given DistribPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   ListOfCategories(DistribPkgNamespaces *distribns);
 

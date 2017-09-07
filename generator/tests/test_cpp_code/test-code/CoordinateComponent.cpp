@@ -1741,8 +1741,8 @@ CoordinateComponent_getUnit(const CoordinateComponent_t * cc)
 
 
 /*
- * Predicate returning @c 1 if this CoordinateComponent_t's "id" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "id"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1753,8 +1753,8 @@ CoordinateComponent_isSetId(const CoordinateComponent_t * cc)
 
 
 /*
- * Predicate returning @c 1 if this CoordinateComponent_t's "type" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "type"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1765,8 +1765,8 @@ CoordinateComponent_isSetType(const CoordinateComponent_t * cc)
 
 
 /*
- * Predicate returning @c 1 if this CoordinateComponent_t's "unit" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's "unit"
+ * attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -1889,8 +1889,8 @@ CoordinateComponent_getBoundaryMax(const CoordinateComponent_t * cc)
 
 
 /*
- * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMin"
- * element is set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's
+ * "boundaryMin" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1901,8 +1901,8 @@ CoordinateComponent_isSetBoundaryMin(const CoordinateComponent_t * cc)
 
 
 /*
- * Predicate returning @c 1 if this CoordinateComponent_t's "boundaryMax"
- * element is set.
+ * Predicate returning @c 1 (true) if this CoordinateComponent_t's
+ * "boundaryMax" element is set.
  */
 LIBSBML_EXTERN
 int

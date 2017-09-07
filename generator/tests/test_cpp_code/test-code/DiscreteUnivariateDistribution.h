@@ -89,11 +89,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this DiscreteUnivariateDistribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   DiscreteUnivariateDistribution(
                                  unsigned int level =
@@ -108,13 +104,11 @@ public:
    * Creates a new DiscreteUnivariateDistribution using the given
    * DistribPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   DiscreteUnivariateDistribution(DistribPkgNamespaces *distribns);
 
@@ -931,11 +925,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this DiscreteUnivariateDistribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1015,13 +1005,14 @@ DiscreteUnivariateDistribution_getTruncationUpperBound(const
 
 
 /**
- * Predicate returning @c 1 if this DiscreteUnivariateDistribution_t's
+ * Predicate returning @c 1 (true) if this DiscreteUnivariateDistribution_t's
  * "truncationLowerBound" element is set.
  *
  * @param dud the DiscreteUnivariateDistribution_t structure.
  *
- * @return @c 1 if this DiscreteUnivariateDistribution_t's
- * "truncationLowerBound" element has been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this DiscreteUnivariateDistribution_t's
+ * "truncationLowerBound" element has been set, otherwise @c 0 (false) is
+ * returned.
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1032,13 +1023,14 @@ DiscreteUnivariateDistribution_isSetTruncationLowerBound(const
 
 
 /**
- * Predicate returning @c 1 if this DiscreteUnivariateDistribution_t's
+ * Predicate returning @c 1 (true) if this DiscreteUnivariateDistribution_t's
  * "truncationUpperBound" element is set.
  *
  * @param dud the DiscreteUnivariateDistribution_t structure.
  *
- * @return @c 1 if this DiscreteUnivariateDistribution_t's
- * "truncationUpperBound" element has been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this DiscreteUnivariateDistribution_t's
+ * "truncationUpperBound" element has been set, otherwise @c 0 (false) is
+ * returned.
  *
  * @memberof DiscreteUnivariateDistribution_t
  */

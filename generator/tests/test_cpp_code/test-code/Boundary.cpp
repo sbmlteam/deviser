@@ -878,7 +878,7 @@ Boundary_getValue(const Boundary_t * b)
 
 
 /*
- * Predicate returning @c 1 if this Boundary_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Boundary_t's "id" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -889,7 +889,8 @@ Boundary_isSetId(const Boundary_t * b)
 
 
 /*
- * Predicate returning @c 1 if this Boundary_t's "value" attribute is set.
+ * Predicate returning @c 1 (true) if this Boundary_t's "value" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int

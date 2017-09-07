@@ -87,11 +87,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
    * this AnalyticVolume.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   AnalyticVolume(unsigned int level = SpatialExtension::getDefaultLevel(),
                  unsigned int version = SpatialExtension::getDefaultVersion(),
@@ -102,13 +98,11 @@ public:
   /**
    * Creates a new AnalyticVolume using the given SpatialPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param spatialns the SpatialPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   AnalyticVolume(SpatialPkgNamespaces *spatialns);
 
@@ -875,11 +869,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
  * this AnalyticVolume_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof AnalyticVolume_t
  */
@@ -994,12 +984,13 @@ AnalyticVolume_getDomainType(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 if this AnalyticVolume_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this AnalyticVolume_t's "id" attribute is
+ * set.
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @return @c 1 if this AnalyticVolume_t's "id" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this AnalyticVolume_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof AnalyticVolume_t
  */
@@ -1009,13 +1000,13 @@ AnalyticVolume_isSetId(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 if this AnalyticVolume_t's "functionType" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this AnalyticVolume_t's "functionType"
+ * attribute is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @return @c 1 if this AnalyticVolume_t's "functionType" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this AnalyticVolume_t's "functionType" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof AnalyticVolume_t
  */
@@ -1025,13 +1016,13 @@ AnalyticVolume_isSetFunctionType(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 if this AnalyticVolume_t's "ordinal" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this AnalyticVolume_t's "ordinal"
+ * attribute is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @return @c 1 if this AnalyticVolume_t's "ordinal" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this AnalyticVolume_t's "ordinal" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof AnalyticVolume_t
  */
@@ -1041,13 +1032,13 @@ AnalyticVolume_isSetOrdinal(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 if this AnalyticVolume_t's "domainType" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this AnalyticVolume_t's "domainType"
+ * attribute is set.
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @return @c 1 if this AnalyticVolume_t's "domainType" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this AnalyticVolume_t's "domainType" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof AnalyticVolume_t
  */
@@ -1230,12 +1221,13 @@ AnalyticVolume_getMath(const AnalyticVolume_t * av);
 
 
 /**
- * Predicate returning @c 1 if this AnalyticVolume_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this AnalyticVolume_t's "math" element is
+ * set.
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @return @c 1 if this AnalyticVolume_t's "math" element has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this AnalyticVolume_t's "math" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof AnalyticVolume_t
  */

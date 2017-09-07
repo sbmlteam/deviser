@@ -88,11 +88,7 @@ public:
    * @param version an unsigned int, the SBML Version to assign to this
    * Compartment.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Compartment(unsigned int level = SBML_DEFAULT_LEVEL,
               unsigned int version = SBML_DEFAULT_VERSION);
@@ -103,11 +99,7 @@ public:
    *
    * @param sbmlns the SBMLNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   Compartment(SBMLNamespaces *sbmlns);
 
@@ -877,11 +869,7 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SBML Version to assign to this
  * Compartment_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof Compartment_t
  */
@@ -1022,12 +1010,13 @@ Compartment_getCompartmentType(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "size" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "size" attribute is
+ * set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "size" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "size" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1037,12 +1026,13 @@ Compartment_isSetSize(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "volume" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "volume" attribute
+ * is set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "volume" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "volume" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1052,12 +1042,13 @@ Compartment_isSetVolume(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "units" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "units" attribute is
+ * set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "units" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "units" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1067,13 +1058,13 @@ Compartment_isSetUnits(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "spatialDimensions"
+ * Predicate returning @c 1 (true) if this Compartment_t's "spatialDimensions"
  * attribute is set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "spatialDimensions" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "spatialDimensions" attribute
+ * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1083,13 +1074,13 @@ Compartment_isSetSpatialDimensions(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "constant" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "constant" attribute
+ * is set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "constant" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "constant" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1099,12 +1090,13 @@ Compartment_isSetConstant(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "outside" attribute is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "outside" attribute
+ * is set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "outside" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "outside" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */
@@ -1114,13 +1106,13 @@ Compartment_isSetOutside(const Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if this Compartment_t's "compartmentType" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this Compartment_t's "compartmentType"
+ * attribute is set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 if this Compartment_t's "compartmentType" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this Compartment_t's "compartmentType" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Compartment_t
  */

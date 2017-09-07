@@ -85,11 +85,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
    * this BinomialDistribution.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BinomialDistribution(unsigned int level =
     DistribExtension::getDefaultLevel(),
@@ -103,13 +99,11 @@ public:
    * Creates a new BinomialDistribution using the given DistribPkgNamespaces
    * object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param distribns the DistribPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   BinomialDistribution(DistribPkgNamespaces *distribns);
 
@@ -892,11 +886,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
  * this BinomialDistribution_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof BinomialDistribution_t
  */
@@ -973,13 +963,13 @@ BinomialDistribution_getProbabilityOfSuccess(const BinomialDistribution_t *
 
 
 /**
- * Predicate returning @c 1 if this BinomialDistribution_t's "numberOfTrials"
- * element is set.
+ * Predicate returning @c 1 (true) if this BinomialDistribution_t's
+ * "numberOfTrials" element is set.
  *
  * @param bd the BinomialDistribution_t structure.
  *
- * @return @c 1 if this BinomialDistribution_t's "numberOfTrials" element has
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this BinomialDistribution_t's "numberOfTrials"
+ * element has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof BinomialDistribution_t
  */
@@ -989,13 +979,13 @@ BinomialDistribution_isSetNumberOfTrials(const BinomialDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if this BinomialDistribution_t's
+ * Predicate returning @c 1 (true) if this BinomialDistribution_t's
  * "probabilityOfSuccess" element is set.
  *
  * @param bd the BinomialDistribution_t structure.
  *
- * @return @c 1 if this BinomialDistribution_t's "probabilityOfSuccess" element
- * has been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this BinomialDistribution_t's "probabilityOfSuccess"
+ * element has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof BinomialDistribution_t
  */

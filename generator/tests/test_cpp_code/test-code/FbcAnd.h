@@ -81,11 +81,7 @@ public:
    * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
    * FbcAnd.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   FbcAnd(unsigned int level = FbcExtension::getDefaultLevel(),
          unsigned int version = FbcExtension::getDefaultVersion(),
@@ -95,13 +91,11 @@ public:
   /**
    * Creates a new FbcAnd using the given FbcPkgNamespaces object.
    *
+   * @copydetails doc_what_are_sbml_package_namespaces
+   *
    * @param fbcns the FbcPkgNamespaces object.
    *
-   * @throws SBMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SBML object, are either invalid or mismatched with respect to the parent
-   * SBMLDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   FbcAnd(FbcPkgNamespaces *fbcns);
 
@@ -894,11 +888,7 @@ BEGIN_C_DECLS
  * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
  * FbcAnd_t.
  *
- * @throws SBMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SBML object, are either invalid or mismatched with respect to the parent
- * SBMLDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
  *
  * @memberof FbcAnd_t
  */
