@@ -327,7 +327,7 @@ def main():
         test_case = 'class with other child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-        name = 'distrib'
+        name = 'new_distrib'
         class_name = 'DistribSBMLError'
         test_case = 'error enumeration '
         fail += run_valid_test(name, class_name, test_case)
