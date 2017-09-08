@@ -1288,9 +1288,6 @@ class ProtectedFunctions():
 
         # sort error names to be used
         [error_bool, error] = self.sort_error_names(strFunctions.upper_first(attribute['name']), 'Boolean')
-        if not global_variables.running_tests:
-            if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
         line = ['log->getNumErrors() == numErrs + 1 && log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
                 'log->{0}{1}, {2})'.format(self.error, error_bool, self.given_args)]
@@ -1348,9 +1345,6 @@ class ProtectedFunctions():
                 type_wanted = att_type
             [error, not_used] = self.sort_error_names(strFunctions.upper_first(given_name),
                                                 type_wanted)
-            # error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
-            #                                     strFunctions.upper_first(given_name),
-            #                                     type_wanted)
         line = ['{0}.empty() == true'.format(member)]
         if self.is_plugin:
             line.append('logEmptyString({0}, level, version, pkgVersion, '
@@ -1377,10 +1371,7 @@ class ProtectedFunctions():
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
         # sort error names to be used
-        error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-        if not global_variables.running_tests:
-            if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+        [not_used, error] = self.sort_error_names(strFunctions.upper_first(given_name), '')
 
         if status == 'optional':
             block = [line, first_if]
@@ -1425,10 +1416,7 @@ class ProtectedFunctions():
             use_name = strFunctions.prefix_name(class_name)
         else:
             use_name = class_name
-        error = '{0}{1}AllowedAttributes'.format(self.package, use_name)
-        if not global_variables.running_tests:
-            if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+        [not_used, error] = self.sort_error_names(use_name, '')
         if status == 'optional':
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
@@ -1585,4 +1573,8 @@ class ProtectedFunctions():
                                                 up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
             att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          class_name)
+        if not global_variables.running_tests and error not in global_variables.error_list:
+            error = '{0}Unknown'.format(self.package)
+        if not global_variables.running_tests and att_error not in global_variables.error_list:
+            att_error = '{0}Unknown'.format(self.package)
         return [error, att_error]
