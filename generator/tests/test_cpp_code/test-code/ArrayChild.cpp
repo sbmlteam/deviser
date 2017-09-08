@@ -965,6 +965,7 @@ ArrayChild::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mUnit;
     mUnit = new Unit(testns);
     obj = mUnit;
   }

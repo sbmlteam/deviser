@@ -1481,6 +1481,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         getVersion());
     }
 
+    delete mTrigger;
     mTrigger = new Trigger(getSBMLNamespaces());
     obj = mTrigger;
   }
@@ -1492,6 +1493,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         getVersion());
     }
 
+    delete mPriority;
     mPriority = new Priority(getSBMLNamespaces());
     obj = mPriority;
   }
@@ -1503,6 +1505,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         getVersion());
     }
 
+    delete mDelay;
     mDelay = new Delay(getSBMLNamespaces());
     obj = mDelay;
   }

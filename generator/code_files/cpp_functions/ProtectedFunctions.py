@@ -490,6 +490,7 @@ class ProtectedFunctions():
                                             error_line])
         implementation.append('name == \"{0}\"'.format(xmlname))
         implementation.append(nested_if)
+        implementation.append('delete {0}'.format(name))
         implementation.append('{0} = new {1}'
                               '({2})'.format(name,
                                              element, used_ns))

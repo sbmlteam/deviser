@@ -1096,6 +1096,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGPrimitive(spatialns);
     obj = mCSGNode;
   }
@@ -1108,6 +1109,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGTranslation(spatialns);
     obj = mCSGNode;
   }
@@ -1120,6 +1122,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGRotation(spatialns);
     obj = mCSGNode;
   }
@@ -1132,6 +1135,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGScale(spatialns);
     obj = mCSGNode;
   }
@@ -1144,6 +1148,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGHomogeneousTransformation(spatialns);
     obj = mCSGNode;
   }
@@ -1156,6 +1161,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mCSGNode;
     mCSGNode = new CSGSetOperator(spatialns);
     obj = mCSGNode;
   }

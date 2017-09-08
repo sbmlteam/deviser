@@ -1388,6 +1388,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mBoundaryMin;
     mBoundaryMin = new Boundary(spatialns);
     mBoundaryMin->setElementName(name);
     obj = mBoundaryMin;
@@ -1401,6 +1402,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mBoundaryMax;
     mBoundaryMax = new Boundary(spatialns);
     mBoundaryMax->setElementName(name);
     obj = mBoundaryMax;

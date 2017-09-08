@@ -898,6 +898,7 @@ ExponentialDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mRate;
     mRate = new UncertValue(distribns);
     mRate->setElementName(name);
     obj = mRate;

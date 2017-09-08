@@ -1419,6 +1419,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BetaDistribution(distribns);
     obj = mDistribution;
   }
@@ -1431,6 +1432,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new CauchyDistribution(distribns);
     obj = mDistribution;
   }
@@ -1443,6 +1445,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new ExponentialDistribution(distribns);
     obj = mDistribution;
   }
@@ -1455,6 +1458,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new LogisticDistribution(distribns);
     obj = mDistribution;
   }
@@ -1467,6 +1471,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new NormalDistribution(distribns);
     obj = mDistribution;
   }
@@ -1479,6 +1484,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BinomialDistribution(distribns);
     obj = mDistribution;
   }
@@ -1491,6 +1497,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new GeometricDistribution(distribns);
     obj = mDistribution;
   }
@@ -1503,6 +1510,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BernoulliDistribution(distribns);
     obj = mDistribution;
   }
@@ -1515,6 +1523,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new CategoricalDistribution(distribns);
     obj = mDistribution;
   }
@@ -1527,6 +1536,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new MultivariateDistribution(distribns);
     obj = mDistribution;
   }
@@ -1539,6 +1549,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new ExternalDistribution(distribns);
     obj = mDistribution;
   }
@@ -1551,6 +1562,7 @@ Uncertainty::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mUncertStatistics;
     mUncertStatistics = new UncertStatistics(distribns);
     obj = mUncertStatistics;
   }

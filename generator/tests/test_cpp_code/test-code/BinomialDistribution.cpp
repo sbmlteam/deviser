@@ -1109,6 +1109,7 @@ BinomialDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mNumberOfTrials;
     mNumberOfTrials = new UncertValue(distribns);
     mNumberOfTrials->setElementName(name);
     obj = mNumberOfTrials;
@@ -1122,6 +1123,7 @@ BinomialDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mProbabilityOfSuccess;
     mProbabilityOfSuccess = new UncertValue(distribns);
     mProbabilityOfSuccess->setElementName(name);
     obj = mProbabilityOfSuccess;

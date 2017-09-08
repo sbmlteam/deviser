@@ -1877,6 +1877,7 @@ Fred::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mOther;
     mOther = new Other(xns);
     obj = mOther;
   }
@@ -1888,6 +1889,7 @@ Fred::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mOther1;
     mOther1 = new Other(xns);
     mOther1->setElementName(name);
     obj = mOther1;
@@ -1900,6 +1902,7 @@ Fred::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mOther2;
     mOther2 = new Other(xns);
     mOther2->setElementName(name);
     obj = mOther2;

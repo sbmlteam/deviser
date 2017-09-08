@@ -1473,6 +1473,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BetaDistribution(distribns);
     obj = mDistribution;
   }
@@ -1485,6 +1486,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new CauchyDistribution(distribns);
     obj = mDistribution;
   }
@@ -1497,6 +1499,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new ExponentialDistribution(distribns);
     obj = mDistribution;
   }
@@ -1509,6 +1512,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new LogisticDistribution(distribns);
     obj = mDistribution;
   }
@@ -1521,6 +1525,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new NormalDistribution(distribns);
     obj = mDistribution;
   }
@@ -1533,6 +1538,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BinomialDistribution(distribns);
     obj = mDistribution;
   }
@@ -1545,6 +1551,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new GeometricDistribution(distribns);
     obj = mDistribution;
   }
@@ -1557,6 +1564,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new BernoulliDistribution(distribns);
     obj = mDistribution;
   }
@@ -1569,6 +1577,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new CategoricalDistribution(distribns);
     obj = mDistribution;
   }
@@ -1581,6 +1590,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new MultivariateDistribution(distribns);
     obj = mDistribution;
   }
@@ -1593,6 +1603,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mDistribution;
     mDistribution = new ExternalDistribution(distribns);
     obj = mDistribution;
   }

@@ -1140,6 +1140,7 @@ Category::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mProbability;
     mProbability = new UncertValue(distribns);
     mProbability->setElementName(name);
     obj = mProbability;
@@ -1152,6 +1153,7 @@ Category::createObject(XMLInputStream& stream)
         getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mValue;
     mValue = new UncertValue(distribns);
     mValue->setElementName(name);
     obj = mValue;

@@ -1145,6 +1145,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
           getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mTruncationLowerBound;
     mTruncationLowerBound = new UncertBound(distribns);
     mTruncationLowerBound->setElementName(name);
     obj = mTruncationLowerBound;
@@ -1158,6 +1159,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
           getPackageVersion(), getLevel(), getVersion());
     }
 
+    delete mTruncationUpperBound;
     mTruncationUpperBound = new UncertBound(distribns);
     mTruncationUpperBound->setElementName(name);
     obj = mTruncationUpperBound;

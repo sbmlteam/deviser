@@ -1081,6 +1081,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mAlpha;
     mAlpha = new UncertValue(distribns);
     mAlpha->setElementName(name);
     obj = mAlpha;
@@ -1094,6 +1095,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
           getVersion());
     }
 
+    delete mBeta;
     mBeta = new UncertValue(distribns);
     mBeta->setElementName(name);
     obj = mBeta;

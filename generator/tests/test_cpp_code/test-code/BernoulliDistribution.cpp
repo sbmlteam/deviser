@@ -897,6 +897,7 @@ BernoulliDistribution::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mProb;
     mProb = new UncertValue(distribns);
     mProb->setElementName(name);
     obj = mProb;

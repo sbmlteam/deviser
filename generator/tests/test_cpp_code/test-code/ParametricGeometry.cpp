@@ -1100,6 +1100,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
           getLevel(), getVersion());
     }
 
+    delete mSpatialPoints;
     mSpatialPoints = new SpatialPoints(spatialns);
     obj = mSpatialPoints;
   }
