@@ -522,6 +522,13 @@ def main():
         test_case = 'inline_lo_element'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'fbc_v2'
+        num = 7
+        class_name = 'Association'
+        list_of = 'ListOfAssociations'
+        test_case = 'lo_element with abstract children'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         name = 'test_child'
         num = 0
         class_name = 'MySEDClass'
@@ -781,13 +788,6 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'fbc_v2'
-        num = 7
-        class_name = 'Association'
-        list_of = 'ListOfAssociations'
-        test_case = 'lo_element with abstract children'
-        fail += run_test(name, num, class_name, test_case, list_of)
-
         name = 'fbc_v2'
         class_name = 'FbcSBMLError'
         test_case = 'error enumeration '
