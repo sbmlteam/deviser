@@ -132,6 +132,18 @@ global library_version
 global custom_copyright
 custom_copyright = ''
 
+global add_implementation
+add_implementation = []
+global add_declaration
+add_declaration = []
+
+def add_additional_implementation(filename):
+    global add_implementation
+    add_implementation.append(filename)
+
+def add_additional_declaration(filename):
+    global add_declaration
+    add_declaration.append(filename)
 
 def set_custom_copyright(copyright):
     global custom_copyright

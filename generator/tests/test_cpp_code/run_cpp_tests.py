@@ -200,7 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-#    runall = False
+    runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -771,6 +771,14 @@ def main():
         class_name = 'CoreversMultiPkgModelPlugin'
         test_case = 'versions of plugins - elements'
         fail += run_plug_test(name, class_name, test_case, num)
+
+        name = 'copy_add'
+        num = 0
+        class_name = 'Abc'
+        list_of = ''
+        test_case = 'class with additional code'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -793,12 +801,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'fbc_v2'
-        num = 1
-        class_name = 'Objective'
-        list_of = 'ListOfObjectives'
-        test_case = 'lo_element with attribute'
+        name = 'add_copyright'
+        num = 0
+        class_name = 'Copyright'
+        list_of = ''
+        test_case = 'additional copyright'
         fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
 

@@ -46,6 +46,7 @@ from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
 from base_files import BaseFile, BaseTemplateFile
 from util import global_variables, strFunctions
+import shutil
 
 directories = []
 
@@ -66,7 +67,7 @@ def generate_code_for(filename, overwrite=True):
             global_variables.return_codes['success']:
         name = ob['name'.lower()]
         language = global_variables.language
-        # REMEMBER TO REMOVE
+        # TO DO REMEMBER TO REMOVE
         # try:
         if global_variables.is_package:
             generate_package_code(name, language, overwrite, ob)
@@ -297,6 +298,11 @@ def generate_code_files(name, ob):
     for working_class in ob['baseElements']:
         all_files = CppFiles.CppFiles(working_class, True)
         all_files.write_files()
+    for add_file in global_variables.add_implementation:
+        shutil.copy(add_file, os.getcwd())
+    for add_file in global_variables.add_declaration:
+        shutil.copy(add_file, os.getcwd())
+
     os.chdir(this_dir)
 
 

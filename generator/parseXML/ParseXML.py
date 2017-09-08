@@ -658,6 +658,12 @@ class ParseXML():
         custom_copyright = self.get_add_code_value(self,
                                                    self.dom.documentElement,
                                                    'customCopyright')
+        add_declarations = self.get_add_code_value(self,
+                                                   self.dom.documentElement,
+                                                   'additionalDecls')
+        add_implementation = self.get_add_code_value(self,
+                                                     self.dom.documentElement,
+                                                     'additionalDefs')
 
         # setup global variables
         languages = self.dom.getElementsByTagName('language')
@@ -671,6 +677,8 @@ class ParseXML():
 
         global_variables.set_global_fullname(fullname)
         global_variables.set_custom_copyright(custom_copyright)
+        global_variables.add_additional_implementation(add_implementation)
+        global_variables.add_additional_declaration(add_declarations)
 
         # get package information
         sbml_level = 3
