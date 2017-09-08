@@ -1613,6 +1613,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
           getPackageVersion(), getLevel(), getVersion());
       }
 
+      delete mClassOne;
       mClassOne = new ClassOne(versns);
       obj = mClassOne;
     }
@@ -1624,6 +1625,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
           getPackageVersion(), getLevel(), getVersion());
       }
 
+      delete mClassTwo;
       mClassTwo = new ClassTwo(versns);
       obj = mClassTwo;
     }

@@ -1066,6 +1066,7 @@ VersModelPlugin::createObject(XMLInputStream& stream)
           getPackageVersion(), getLevel(), getVersion());
       }
 
+      delete mClassOne;
       mClassOne = new ClassOne(versns);
       obj = mClassOne;
     }

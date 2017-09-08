@@ -1522,6 +1522,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mSpatialSymbolReference;
       mSpatialSymbolReference = new SpatialSymbolReference(spatialns);
       obj = mSpatialSymbolReference;
     }
@@ -1534,6 +1535,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mAdvectionCoefficient;
       mAdvectionCoefficient = new AdvectionCoefficient(spatialns);
       obj = mAdvectionCoefficient;
     }
@@ -1546,6 +1548,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mBoundaryCondition;
       mBoundaryCondition = new BoundaryCondition(spatialns);
       obj = mBoundaryCondition;
     }
@@ -1558,6 +1561,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mDiffusionCoefficient;
       mDiffusionCoefficient = new DiffusionCoefficient(spatialns);
       obj = mDiffusionCoefficient;
     }

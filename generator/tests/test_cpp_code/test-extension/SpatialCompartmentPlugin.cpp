@@ -897,6 +897,7 @@ SpatialCompartmentPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mCompartmentMapping;
       mCompartmentMapping = new CompartmentMapping(spatialns);
       obj = mCompartmentMapping;
     }

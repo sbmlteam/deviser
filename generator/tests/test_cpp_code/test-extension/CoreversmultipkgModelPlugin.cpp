@@ -1324,6 +1324,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mClassOneTwo;
       mClassOneTwo = new ClassOneTwo(coreversmultipkgns);
       obj = mClassOneTwo;
     }
@@ -1336,6 +1337,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
             getVersion());
       }
 
+      delete mClassMult;
       mClassMult = new ClassMult(coreversmultipkgns);
       obj = mClassMult;
     }
