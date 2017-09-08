@@ -3,16 +3,17 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="Abc" typeCode="SBML_COPY_ABC" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Def" typeCode="SBML_COPY_ABC" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
             <attribute name="letter" required="false" type="string" abstract="false"/>
+            <attribute name="mess" required="false" type="element" element="XMLNode*" abstract="false"/>
           </attributes>
         </element>
       </elements>
       <plugins>
         <plugin extensionPoint="Model">
           <references>
-            <reference name="Abc"/>
+            <reference name="Def"/>
           </references>
         </plugin>
       </plugins>

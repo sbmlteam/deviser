@@ -200,7 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-    runall = False
+#    runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -674,6 +674,13 @@ def main():
         test_case = 'new element functions'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'core'
+        num = 11
+        class_name = 'Constraint'
+        list_of = ''
+        test_case = 'has XML Node child'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         name = 'new_distrib'
         num = 2
         class_name = 'Distribution'
@@ -779,6 +786,13 @@ def main():
         test_case = 'class with additional code'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'copy'
+        num = 0
+        class_name = 'Def'
+        list_of = ''
+        test_case = 'class with XMLNode'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -801,15 +815,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'add_copyright'
+        name = 'copy'
         num = 0
-        class_name = 'Copyright'
+        class_name = 'Def'
         list_of = ''
-        test_case = 'additional copyright'
+        test_case = 'class with additional code'
         fail += run_test(name, num, class_name, test_case, list_of)
-
-
-
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

@@ -509,6 +509,7 @@ class Constructors():
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             member = element['memberName']
+            clone = 'clone'
             if element['element'] == 'ASTNode':
                 clone = 'deepCopy'
             implementation = ['orig.{0} != NULL'.format(member),
@@ -559,6 +560,7 @@ class Constructors():
             element = self.child_elements[i]
             member = element['memberName']
             args += ['delete {0}'.format(member)]
+            clone = 'clone'
             if element['element'] == 'ASTNode':
                 clone = 'deepCopy'
             implementation = ['rhs.{0} != NULL'.format(member),
