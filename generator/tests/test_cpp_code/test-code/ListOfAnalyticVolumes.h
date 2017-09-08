@@ -396,7 +396,7 @@ BEGIN_C_DECLS
  *
  * @return the nth AnalyticVolume_t in this ListOf_t.
  *
- * @memberof AnalyticVolume_t
+ * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
 const AnalyticVolume_t*
@@ -414,7 +414,7 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
  * @return the AnalyticVolume_t in this ListOf_t with the given id or NULL if
  * no such AnalyticVolume_t exists.
  *
- * @memberof AnalyticVolume_t
+ * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
 const AnalyticVolume_t*
@@ -432,7 +432,7 @@ ListOfAnalyticVolumes_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth AnalyticVolume_t in this ListOf_t.
  *
- * @memberof AnalyticVolume_t
+ * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
 AnalyticVolume_t*
@@ -451,7 +451,7 @@ ListOfAnalyticVolumes_remove(ListOf_t* lo, unsigned int n);
  * @return the AnalyticVolume_t in this ListOf_t based on the identifier or
  * NULL if no such AnalyticVolume_t exists.
  *
- * @memberof AnalyticVolume_t
+ * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
 AnalyticVolume_t*

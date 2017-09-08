@@ -364,7 +364,7 @@ BEGIN_C_DECLS
  *
  * @return the nth Transition_t in this ListOf_t.
  *
- * @memberof Transition_t
+ * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
 const Transition_t*
@@ -382,7 +382,7 @@ ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
  * @return the Transition_t in this ListOf_t with the given id or NULL if no
  * such Transition_t exists.
  *
- * @memberof Transition_t
+ * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
 const Transition_t*
@@ -399,7 +399,7 @@ ListOfTransitions_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Transition_t in this ListOf_t.
  *
- * @memberof Transition_t
+ * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
 Transition_t*
@@ -418,7 +418,7 @@ ListOfTransitions_remove(ListOf_t* lo, unsigned int n);
  * @return the Transition_t in this ListOf_t based on the identifier or NULL if
  * no such Transition_t exists.
  *
- * @memberof Transition_t
+ * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
 Transition_t*

@@ -774,18 +774,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-
-        name = 'test_vers'
+        name = 'groups'
         num = 1
-        class_name = 'VersSpeciesPlugin'
-        test_case = 'versions of plugins - elements'
-#        fail += run_plug_test(name, class_name, test_case, num)
-
-        name = 'test_att'
-        class_name = 'TestSBMLError'
-        test_case = 'error enumeration '
-        fail += run_valid_test(name, class_name, test_case)
-
+        class_name = 'Member'
+        list_of = 'ListOfMembers'
+        test_case = 'list of with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

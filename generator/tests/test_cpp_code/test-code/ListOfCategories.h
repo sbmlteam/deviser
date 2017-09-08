@@ -364,7 +364,7 @@ BEGIN_C_DECLS
  *
  * @return the nth Category_t in this ListOf_t.
  *
- * @memberof Category_t
+ * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
 const Category_t*
@@ -382,7 +382,7 @@ ListOfCategories_getCategory(ListOf_t* lo, unsigned int n);
  * @return the Category_t in this ListOf_t with the given id or NULL if no such
  * Category_t exists.
  *
- * @memberof Category_t
+ * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
 const Category_t*
@@ -398,7 +398,7 @@ ListOfCategories_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Category_t in this ListOf_t.
  *
- * @memberof Category_t
+ * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
 Category_t*
@@ -416,7 +416,7 @@ ListOfCategories_remove(ListOf_t* lo, unsigned int n);
  * @return the Category_t in this ListOf_t based on the identifier or NULL if
  * no such Category_t exists.
  *
- * @memberof Category_t
+ * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
 Category_t*

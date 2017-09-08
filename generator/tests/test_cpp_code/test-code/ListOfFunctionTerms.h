@@ -510,7 +510,7 @@ BEGIN_C_DECLS
  *
  * @return the nth FunctionTerm_t in this ListOf_t.
  *
- * @memberof FunctionTerm_t
+ * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
 const FunctionTerm_t*
@@ -528,7 +528,7 @@ ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n);
  * @return the FunctionTerm_t in this ListOf_t with the given id or NULL if no
  * such FunctionTerm_t exists.
  *
- * @memberof FunctionTerm_t
+ * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
 const FunctionTerm_t*
@@ -546,7 +546,7 @@ ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth FunctionTerm_t in this ListOf_t.
  *
- * @memberof FunctionTerm_t
+ * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
 FunctionTerm_t*
@@ -565,7 +565,7 @@ ListOfFunctionTerms_remove(ListOf_t* lo, unsigned int n);
  * @return the FunctionTerm_t in this ListOf_t based on the identifier or NULL
  * if no such FunctionTerm_t exists.
  *
- * @memberof FunctionTerm_t
+ * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
 FunctionTerm_t*

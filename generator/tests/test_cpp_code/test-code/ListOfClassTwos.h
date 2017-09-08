@@ -361,7 +361,7 @@ BEGIN_C_DECLS
  *
  * @return the nth ClassTwo_t in this ListOf_t.
  *
- * @memberof ClassTwo_t
+ * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
 const ClassTwo_t*
@@ -379,7 +379,7 @@ ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n);
  * @return the ClassTwo_t in this ListOf_t with the given id or NULL if no such
  * ClassTwo_t exists.
  *
- * @memberof ClassTwo_t
+ * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
 const ClassTwo_t*
@@ -395,7 +395,7 @@ ListOfClassTwos_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth ClassTwo_t in this ListOf_t.
  *
- * @memberof ClassTwo_t
+ * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
 ClassTwo_t*
@@ -413,7 +413,7 @@ ListOfClassTwos_remove(ListOf_t* lo, unsigned int n);
  * @return the ClassTwo_t in this ListOf_t based on the identifier or NULL if
  * no such ClassTwo_t exists.
  *
- * @memberof ClassTwo_t
+ * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
 ClassTwo_t*

@@ -356,7 +356,7 @@ BEGIN_C_DECLS
  *
  * @return the nth Child_t in this ListOf_t.
  *
- * @memberof Child_t
+ * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
 const Child_t*
@@ -373,7 +373,7 @@ ListOfChildren_getChild(ListOf_t* lo, unsigned int n);
  * @return the Child_t in this ListOf_t with the given id or NULL if no such
  * Child_t exists.
  *
- * @memberof Child_t
+ * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
 const Child_t*
@@ -389,7 +389,7 @@ ListOfChildren_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Child_t in this ListOf_t.
  *
- * @memberof Child_t
+ * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
 Child_t*
@@ -407,7 +407,7 @@ ListOfChildren_remove(ListOf_t* lo, unsigned int n);
  * @return the Child_t in this ListOf_t based on the identifier or NULL if no
  * such Child_t exists.
  *
- * @memberof Child_t
+ * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
 Child_t*

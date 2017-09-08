@@ -381,7 +381,7 @@ BEGIN_C_DECLS
  *
  * @return the nth Output_t in this ListOf_t.
  *
- * @memberof Output_t
+ * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
 const Output_t*
@@ -398,7 +398,7 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
  * @return the Output_t in this ListOf_t with the given id or NULL if no such
  * Output_t exists.
  *
- * @memberof Output_t
+ * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
 const Output_t*
@@ -414,7 +414,7 @@ ListOfOutputs_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Output_t in this ListOf_t.
  *
- * @memberof Output_t
+ * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
 Output_t*
@@ -432,7 +432,7 @@ ListOfOutputs_remove(ListOf_t* lo, unsigned int n);
  * @return the Output_t in this ListOf_t based on the identifier or NULL if no
  * such Output_t exists.
  *
- * @memberof Output_t
+ * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
 Output_t*

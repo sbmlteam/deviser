@@ -435,7 +435,7 @@ BEGIN_C_DECLS
  *
  * @return the nth CSGNode_t in this ListOf_t.
  *
- * @memberof CSGNode_t
+ * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
 const CSGNode_t*
@@ -453,7 +453,7 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
  * @return the CSGNode_t in this ListOf_t with the given id or NULL if no such
  * CSGNode_t exists.
  *
- * @memberof CSGNode_t
+ * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
 const CSGNode_t*
@@ -469,7 +469,7 @@ ListOfCSGNodes_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth CSGNode_t in this ListOf_t.
  *
- * @memberof CSGNode_t
+ * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
 CSGNode_t*
@@ -487,7 +487,7 @@ ListOfCSGNodes_remove(ListOf_t* lo, unsigned int n);
  * @return the CSGNode_t in this ListOf_t based on the identifier or NULL if no
  * such CSGNode_t exists.
  *
- * @memberof CSGNode_t
+ * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
 CSGNode_t*

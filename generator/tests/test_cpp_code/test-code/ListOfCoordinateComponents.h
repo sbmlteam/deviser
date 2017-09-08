@@ -375,7 +375,7 @@ BEGIN_C_DECLS
  *
  * @return the nth CoordinateComponent_t in this ListOf_t.
  *
- * @memberof CoordinateComponent_t
+ * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
 const CoordinateComponent_t*
@@ -394,7 +394,7 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
  * @return the CoordinateComponent_t in this ListOf_t with the given id or NULL
  * if no such CoordinateComponent_t exists.
  *
- * @memberof CoordinateComponent_t
+ * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
 const CoordinateComponent_t*
@@ -412,7 +412,7 @@ ListOfCoordinateComponents_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth CoordinateComponent_t in this ListOf_t.
  *
- * @memberof CoordinateComponent_t
+ * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
 CoordinateComponent_t*
@@ -431,7 +431,7 @@ ListOfCoordinateComponents_remove(ListOf_t* lo, unsigned int n);
  * @return the CoordinateComponent_t in this ListOf_t based on the identifier
  * or NULL if no such CoordinateComponent_t exists.
  *
- * @memberof CoordinateComponent_t
+ * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
 CoordinateComponent_t*

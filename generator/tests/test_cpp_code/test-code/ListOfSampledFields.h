@@ -366,7 +366,7 @@ BEGIN_C_DECLS
  *
  * @return the nth SampledField_t in this ListOf_t.
  *
- * @memberof SampledField_t
+ * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
 const SampledField_t*
@@ -384,7 +384,7 @@ ListOfSampledFields_getSampledField(ListOf_t* lo, unsigned int n);
  * @return the SampledField_t in this ListOf_t with the given id or NULL if no
  * such SampledField_t exists.
  *
- * @memberof SampledField_t
+ * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
 const SampledField_t*
@@ -402,7 +402,7 @@ ListOfSampledFields_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth SampledField_t in this ListOf_t.
  *
- * @memberof SampledField_t
+ * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
 SampledField_t*
@@ -421,7 +421,7 @@ ListOfSampledFields_remove(ListOf_t* lo, unsigned int n);
  * @return the SampledField_t in this ListOf_t based on the identifier or NULL
  * if no such SampledField_t exists.
  *
- * @memberof SampledField_t
+ * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
 SampledField_t*

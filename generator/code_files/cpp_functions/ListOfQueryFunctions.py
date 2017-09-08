@@ -97,7 +97,7 @@ class ListOfQueryFunctions():
 
         # useful variables
         if not self.is_cpp_api and self.is_list_of:
-            self.struct_name = self.object_child_name
+            self.struct_name = self.class_name + '_t'
         else:
             self.struct_name = self.object_name
         self.plural = strFunctions.plural(self.child_name)

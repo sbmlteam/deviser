@@ -439,7 +439,7 @@ BEGIN_C_DECLS
  *
  * @return the nth GeometryDefinition_t in this ListOf_t.
  *
- * @memberof GeometryDefinition_t
+ * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
 const GeometryDefinition_t*
@@ -457,7 +457,7 @@ ListOfGeometryDefinitions_getGeometryDefinition(ListOf_t* lo, unsigned int n);
  * @return the GeometryDefinition_t in this ListOf_t with the given id or NULL
  * if no such GeometryDefinition_t exists.
  *
- * @memberof GeometryDefinition_t
+ * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
 const GeometryDefinition_t*
@@ -475,7 +475,7 @@ ListOfGeometryDefinitions_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth GeometryDefinition_t in this ListOf_t.
  *
- * @memberof GeometryDefinition_t
+ * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
 GeometryDefinition_t*
@@ -494,7 +494,7 @@ ListOfGeometryDefinitions_remove(ListOf_t* lo, unsigned int n);
  * @return the GeometryDefinition_t in this ListOf_t based on the identifier or
  * NULL if no such GeometryDefinition_t exists.
  *
- * @memberof GeometryDefinition_t
+ * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
 GeometryDefinition_t*
