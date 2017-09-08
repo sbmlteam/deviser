@@ -1578,6 +1578,9 @@ class ProtectedFunctions():
                                                          class_name)
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
+            if class_name.startswith('ListOf'):
+                temp = 'LO{0}'.format(class_name[6:])
+                class_name = temp
             error = '{0}{1}{2}MustBe{3}'.format(self.package, class_name,
                                                 up_name, 'NonNegativeInteger' if num_type=='UnInteger' else num_type)
             att_error = '{0}{1}AllowedAttributes'.format(self.package,

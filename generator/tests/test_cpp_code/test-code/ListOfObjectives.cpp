@@ -507,7 +507,7 @@ ListOfObjectives::readL3V1V1Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
       log->logPackageError("fbc",
-        FbcListOfObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
+        FbcLOObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
           version, "The attribute activeObjective='" + mActiveObjective + "' does "
             "not conform to the syntax.", getLine(), getColumn());
     }
@@ -547,7 +547,7 @@ ListOfObjectives::readL3V1V2Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
       log->logPackageError("fbc",
-        FbcListOfObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
+        FbcLOObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
           version, "The attribute activeObjective='" + mActiveObjective + "' does "
             "not conform to the syntax.", getLine(), getColumn());
     }

@@ -69,8 +69,10 @@ class ValidationRulesForClass():
         self.opt_elem = []
         self.reqd_child_lo_elem = []
         self.opt_child_lo_elem = []
+        self.lo_reqd_att = []
+        self.lo_opt_att = []
 
-        self.parse_attributes(self, object_desc['attribs'])
+        self.parse_attributes(self, object_desc['attribs'], object_desc['lo_attribs'])
         self.parse_elements(self, object_desc['attribs'], object_desc['root'])
         self.rules = []
         self.tc = 'TBC'
@@ -165,6 +167,29 @@ class ValidationRulesForClass():
                     rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
                     self.add_rule(rule)
 
+        lo_info = []
+        for i in range(0, len(self.lo_reqd_att)):
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(self.lo_reqd_att[i], lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
+
+        lo_info = []
+        for i in range(0, len(self.lo_opt_att)):
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(self.lo_opt_att[i], lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
 
     def add_rule(self, rule):
         if rule is not None:
@@ -737,7 +762,7 @@ class ValidationRulesForClass():
 
     # divide attributes into elements/attributes required and optional
     @staticmethod
-    def parse_attributes(self, attributes):
+    def parse_attributes(self, attributes, lo_attributes):
         # check that the attributes have a texname field
         # this halts generating xml files even though it is not
         # necessary for them
@@ -750,6 +775,15 @@ class ValidationRulesForClass():
                     self.reqd_att.append(attributes[i])
                 else:
                     self.opt_att.append(attributes[i])
+        for attrib in lo_attributes:
+            if 'texname' not in attrib:
+                attrib['texname'] = attrib['name']
+        for i in range(0, len(lo_attributes)):
+            if not self.is_element(lo_attributes[i]['type']):
+                if lo_attributes[i]['reqd'] is True:
+                    self.lo_reqd_att.append(lo_attributes[i])
+                else:
+                    self.lo_opt_att.append(lo_attributes[i])
 
     # divide attributes into elements/attributes required and optional
     @staticmethod

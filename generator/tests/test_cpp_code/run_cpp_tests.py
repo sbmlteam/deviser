@@ -529,6 +529,11 @@ def main():
         test_case = 'lo_element with abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'fbc_v2'
+        class_name = 'FbcSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
+
         name = 'test_child'
         num = 0
         class_name = 'MySEDClass'
@@ -789,9 +794,12 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'fbc_v2'
-        class_name = 'FbcSBMLError'
-        test_case = 'error enumeration '
-#        fail += run_valid_test(name, class_name, test_case)
+        num = 1
+        class_name = 'Objective'
+        list_of = 'ListOfObjectives'
+        test_case = 'lo_element with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
     test_functions.report('CPP', fail, fails, not_tested)
