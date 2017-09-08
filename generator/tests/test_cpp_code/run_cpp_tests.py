@@ -782,18 +782,11 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'fbc_v2'
-        num = 1
-        class_name = 'Objective'
-        list_of = 'ListOfObjectives'
-        test_case = 'lo_element with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'fbc_v2'
-        num = 8
+        num = 7
         class_name = 'Association'
         list_of = 'ListOfAssociations'
         test_case = 'lo_element with abstract children'
-#        fail += run_test(name, num, class_name, test_case, list_of)
+        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'fbc_v2'
         class_name = 'FbcSBMLError'
