@@ -881,7 +881,7 @@ class ProtectedFunctions():
 
     # function to write individual version writeAttributes
     def write_write_version_attributes(self, version):
-        if self.is_list_of or not self.has_multiple_versions:
+        if not self.has_multiple_versions:
             return
         elif self.has_std_base and len(self.attributes) == 0:
             return

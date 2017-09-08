@@ -509,6 +509,13 @@ def main():
         fail += run_ext_test(name, class_name, test_case, 0)
 
         name = 'fbc_v2'
+        num = 1
+        class_name = 'Objective'
+        list_of = 'ListOfObjectives'
+        test_case = 'lo_element with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'fbc_v2'
         num = 5
         class_name = 'FbcAnd'
         list_of = ''
@@ -774,12 +781,25 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
+        name = 'fbc_v2'
         num = 1
-        class_name = 'Member'
-        list_of = 'ListOfMembers'
-        test_case = 'list of with attribute'
+        class_name = 'Objective'
+        list_of = 'ListOfObjectives'
+        test_case = 'lo_element with attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'fbc_v2'
+        num = 8
+        class_name = 'Association'
+        list_of = 'ListOfAssociations'
+        test_case = 'lo_element with abstract children'
+#        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'fbc_v2'
+        class_name = 'FbcSBMLError'
+        test_case = 'error enumeration '
+#        fail += run_valid_test(name, class_name, test_case)
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

@@ -18,7 +18,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="FbcType" abstract="false"/>
-            <attribute name="fluxObjectives" required="true" type="lo_element" element="FluxObjective" abstract="false"/>
+            <attribute name="fluxObjectives" required="false" type="lo_element" element="FluxObjective" abstract="false"/>
           </attributes>
           <listOfAttributes>
             <listOfAttribute name="activeObjective" required="false" type="SIdRef" element="Objective" abstract="false"/>
@@ -80,7 +80,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="FbcType" abstract="false"/>
-            <attribute name="fluxObjectives" required="true" type="lo_element" element="FluxObjective" abstract="false"/>
+            <attribute name="fluxObjectives" required="false" type="lo_element" element="FluxObjective" abstract="false"/>
           </attributes>
           <listOfAttributes>
             <listOfAttribute name="activeObjective" required="false" type="SIdRef" element="Objective" abstract="false"/>
