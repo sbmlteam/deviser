@@ -366,7 +366,7 @@ ListOfCoordinateComponents::writeXMLNS(XMLOutputStream& stream) const
  * Get a CoordinateComponent_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const CoordinateComponent_t*
+CoordinateComponent_t*
 ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
                                                   unsigned int n)
 {
@@ -383,7 +383,7 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
  * Get a CoordinateComponent_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const CoordinateComponent_t*
+CoordinateComponent_t*
 ListOfCoordinateComponents_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

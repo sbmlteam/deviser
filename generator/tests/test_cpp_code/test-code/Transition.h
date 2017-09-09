@@ -1483,7 +1483,7 @@ Transition_getListOfInputs(Transition_t* t);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInput(Transition_t* t, unsigned int n);
 
 
@@ -1500,7 +1500,7 @@ Transition_getInput(Transition_t* t, unsigned int n);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInputById(Transition_t* t, const char *sid);
 
 
@@ -1519,7 +1519,7 @@ Transition_getInputById(Transition_t* t, const char *sid);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInputByQualitativeSpecies(Transition_t* t, const char *sid);
 
 
@@ -1630,7 +1630,7 @@ Transition_getListOfOutputs(Transition_t* t);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutput(Transition_t* t, unsigned int n);
 
 
@@ -1647,7 +1647,7 @@ Transition_getOutput(Transition_t* t, unsigned int n);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutputById(Transition_t* t, const char *sid);
 
 
@@ -1666,7 +1666,7 @@ Transition_getOutputById(Transition_t* t, const char *sid);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutputByQualitativeSpecies(Transition_t* t, const char *sid);
 
 
@@ -1780,7 +1780,7 @@ Transition_getListOfFunctionTerms(Transition_t* t);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 Transition_getFunctionTerm(Transition_t* t, unsigned int n);
 
 

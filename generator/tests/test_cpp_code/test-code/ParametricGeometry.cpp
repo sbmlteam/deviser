@@ -1341,7 +1341,7 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg)
  * Get a ParametricObject_t from the ParametricGeometry_t.
  */
 LIBSBML_EXTERN
-const ParametricObject_t*
+ParametricObject_t*
 ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
                                        unsigned int n)
 {
@@ -1354,7 +1354,7 @@ ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
  * identifier.
  */
 LIBSBML_EXTERN
-const ParametricObject_t*
+ParametricObject_t*
 ParametricGeometry_getParametricObjectById(ParametricGeometry_t* pg,
                                            const char *sid)
 {
@@ -1367,7 +1367,7 @@ ParametricGeometry_getParametricObjectById(ParametricGeometry_t* pg,
  * DomainType to which it refers.
  */
 LIBSBML_EXTERN
-const ParametricObject_t*
+ParametricObject_t*
 ParametricGeometry_getParametricObjectByDomainType(ParametricGeometry_t* pg,
                                                    const char *sid)
 {

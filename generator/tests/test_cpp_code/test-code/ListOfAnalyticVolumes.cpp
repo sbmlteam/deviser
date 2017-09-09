@@ -401,7 +401,7 @@ ListOfAnalyticVolumes::writeXMLNS(XMLOutputStream& stream) const
  * Get an AnalyticVolume_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const AnalyticVolume_t*
+AnalyticVolume_t*
 ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -417,7 +417,7 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n)
  * Get an AnalyticVolume_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const AnalyticVolume_t*
+AnalyticVolume_t*
 ListOfAnalyticVolumes_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

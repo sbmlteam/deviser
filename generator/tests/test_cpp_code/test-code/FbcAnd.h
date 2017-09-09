@@ -950,7 +950,7 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
  * @memberof FbcAnd_t
  */
 LIBSBML_EXTERN
-const Association_t*
+Association_t*
 FbcAnd_getAssociation(FbcAnd_t* fa, unsigned int n);
 
 

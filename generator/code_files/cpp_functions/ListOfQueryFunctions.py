@@ -132,8 +132,8 @@ class ListOfQueryFunctions():
 
     # function to write get by index from a listOf
     def write_get_element_by_index(self, is_const):
-        # c api does not need a non constant version
-        if not self.is_cpp_api and not is_const:
+        # c api does not need a constant version
+        if not self.is_cpp_api and is_const:
             return
 
         if self.is_list_of:
@@ -234,8 +234,8 @@ class ListOfQueryFunctions():
 
     # function to write get by id from a listOf
     def write_get_element_by_id(self, is_const):
-        # c api does not need a non constant version
-        if not self.is_cpp_api and not is_const:
+        # c api does not need a constant version
+        if not self.is_cpp_api and is_const:
             return
         elif not self.has_id:
             return
@@ -361,8 +361,8 @@ class ListOfQueryFunctions():
 
     # function to write get by sidref from a listOf
     def write_get_element_by_sidref(self, sid_ref, const):
-        # c api does not need a non constant version
-        if not self.is_cpp_api and not const:
+        # c api does not need a constant version
+        if not self.is_cpp_api and const:
             return
 
         # useful variables

@@ -2676,7 +2676,7 @@ Fred_getListOfOtherLOs(Fred_t* f)
  * Get an OtherLO_t from the Fred_t.
  */
 LIBSBML_EXTERN
-const OtherLO_t*
+OtherLO_t*
 Fred_getOtherLO(Fred_t* f, unsigned int n)
 {
   return (f != NULL) ? f->getOtherLO(n) : NULL;

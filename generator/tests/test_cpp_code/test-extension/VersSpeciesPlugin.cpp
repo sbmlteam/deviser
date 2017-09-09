@@ -1933,7 +1933,7 @@ VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp)
  * Get an Another_t from the VersSpeciesPlugin_t.
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n)
 {
   return (vsp != NULL) ? vsp->getAnother(n) : NULL;
@@ -1944,7 +1944,7 @@ VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n)
  * Get an Another_t from the VersSpeciesPlugin_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 VersSpeciesPlugin_getAnotherById(VersSpeciesPlugin_t* vsp, const char *sid)
 {
   return (vsp != NULL && sid != NULL) ? vsp->getAnother(sid) : NULL;

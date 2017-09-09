@@ -998,7 +998,7 @@ QualModelPlugin_getListOfQualitativeSpecies(QualModelPlugin_t* qmp);
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
-const QualitativeSpecies_t*
+QualitativeSpecies_t*
 QualModelPlugin_getQualitativeSpecies(QualModelPlugin_t* qmp, unsigned int n);
 
 
@@ -1018,7 +1018,7 @@ QualModelPlugin_getQualitativeSpecies(QualModelPlugin_t* qmp, unsigned int n);
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
-const QualitativeSpecies_t*
+QualitativeSpecies_t*
 QualModelPlugin_getQualitativeSpeciesById(QualModelPlugin_t* qmp,
                                           const char *sid);
 
@@ -1039,7 +1039,7 @@ QualModelPlugin_getQualitativeSpeciesById(QualModelPlugin_t* qmp,
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
-const QualitativeSpecies_t*
+QualitativeSpecies_t*
 QualModelPlugin_getQualitativeSpeciesByCompartment(QualModelPlugin_t* qmp,
                                                    const char *sid);
 
@@ -1164,7 +1164,7 @@ QualModelPlugin_getListOfTransitions(QualModelPlugin_t* qmp);
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
-const Transition_t*
+Transition_t*
 QualModelPlugin_getTransition(QualModelPlugin_t* qmp, unsigned int n);
 
 
@@ -1182,7 +1182,7 @@ QualModelPlugin_getTransition(QualModelPlugin_t* qmp, unsigned int n);
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
-const Transition_t*
+Transition_t*
 QualModelPlugin_getTransitionById(QualModelPlugin_t* qmp, const char *sid);
 
 

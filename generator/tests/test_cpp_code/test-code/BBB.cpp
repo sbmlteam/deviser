@@ -1319,7 +1319,7 @@ BBB_getListOfAnothers(BBB_t* bbb)
  * Get an Another_t from the BBB_t.
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 BBB_getAnother(BBB_t* bbb, unsigned int n)
 {
   return (bbb != NULL) ? bbb->getAnother(n) : NULL;
@@ -1330,7 +1330,7 @@ BBB_getAnother(BBB_t* bbb, unsigned int n)
  * Get an Another_t from the BBB_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 BBB_getAnotherById(BBB_t* bbb, const char *sid)
 {
   return (bbb != NULL && sid != NULL) ? bbb->getAnother(sid) : NULL;

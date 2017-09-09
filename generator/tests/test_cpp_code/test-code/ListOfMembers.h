@@ -642,7 +642,7 @@ ListOfMembers_unsetName(ListOf_t * lo);
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
-const Member_t*
+Member_t*
 ListOfMembers_getMember(ListOf_t* lo, unsigned int n);
 
 
@@ -659,7 +659,7 @@ ListOfMembers_getMember(ListOf_t* lo, unsigned int n);
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
-const Member_t*
+Member_t*
 ListOfMembers_getById(ListOf_t* lo, const char *sid);
 
 

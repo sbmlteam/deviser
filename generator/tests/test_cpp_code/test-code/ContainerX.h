@@ -881,7 +881,7 @@ ContainerX_getListOfFreds(ContainerX_t* cx);
  * @memberof ContainerX_t
  */
 LIBSBML_EXTERN
-const Fred_t*
+Fred_t*
 ContainerX_getFred(ContainerX_t* cx, unsigned int n);
 
 
@@ -898,7 +898,7 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n);
  * @memberof ContainerX_t
  */
 LIBSBML_EXTERN
-const Fred_t*
+Fred_t*
 ContainerX_getFredById(ContainerX_t* cx, const char *sid);
 
 

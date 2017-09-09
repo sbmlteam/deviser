@@ -1420,7 +1420,7 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg)
  * Get a GeometryDefinition_t from the MixedGeometry_t.
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n)
 {
   return (mg != NULL) ? mg->getGeometryDefinition(n) : NULL;
@@ -1431,7 +1431,7 @@ MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n)
  * Get a GeometryDefinition_t from the MixedGeometry_t based on its identifier.
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 MixedGeometry_getGeometryDefinitionById(MixedGeometry_t* mg, const char *sid)
 {
   return (mg != NULL && sid != NULL) ? mg->getGeometryDefinition(sid) : NULL;
@@ -1563,7 +1563,7 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg)
  * Get an OrdinalMapping_t from the MixedGeometry_t.
  */
 LIBSBML_EXTERN
-const OrdinalMapping_t*
+OrdinalMapping_t*
 MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n)
 {
   return (mg != NULL) ? mg->getOrdinalMapping(n) : NULL;
@@ -1575,7 +1575,7 @@ MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n)
  * GeometryDefinition to which it refers.
  */
 LIBSBML_EXTERN
-const OrdinalMapping_t*
+OrdinalMapping_t*
 MixedGeometry_getOrdinalMappingByGeometryDefinition(MixedGeometry_t* mg,
                                                     const char *sid)
 {

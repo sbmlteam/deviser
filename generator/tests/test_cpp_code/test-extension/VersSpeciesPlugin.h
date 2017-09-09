@@ -1173,7 +1173,7 @@ VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp);
  * @memberof VersSpeciesPlugin_t
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
 
 
@@ -1191,7 +1191,7 @@ VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
  * @memberof VersSpeciesPlugin_t
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 VersSpeciesPlugin_getAnotherById(VersSpeciesPlugin_t* vsp, const char *sid);
 
 

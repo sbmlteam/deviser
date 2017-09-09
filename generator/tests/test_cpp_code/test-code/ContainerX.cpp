@@ -932,7 +932,7 @@ ContainerX_getListOfFreds(ContainerX_t* cx)
  * Get a Fred_t from the ContainerX_t.
  */
 LIBSBML_EXTERN
-const Fred_t*
+Fred_t*
 ContainerX_getFred(ContainerX_t* cx, unsigned int n)
 {
   return (cx != NULL) ? cx->getFred(n) : NULL;
@@ -943,7 +943,7 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n)
  * Get a Fred_t from the ContainerX_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Fred_t*
+Fred_t*
 ContainerX_getFredById(ContainerX_t* cx, const char *sid)
 {
   return (cx != NULL && sid != NULL) ? cx->getFred(sid) : NULL;

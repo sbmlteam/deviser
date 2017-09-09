@@ -1872,7 +1872,7 @@ Fred_getListOfOtherLOs(Fred_t* f);
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
-const OtherLO_t*
+OtherLO_t*
 Fred_getOtherLO(Fred_t* f, unsigned int n);
 
 

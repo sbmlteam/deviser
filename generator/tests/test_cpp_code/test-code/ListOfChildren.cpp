@@ -352,7 +352,7 @@ ListOfChildren::writeXMLNS(XMLOutputStream& stream) const
  * Get a Child_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 ListOfChildren_getChild(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -368,7 +368,7 @@ ListOfChildren_getChild(ListOf_t* lo, unsigned int n)
  * Get a Child_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 ListOfChildren_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

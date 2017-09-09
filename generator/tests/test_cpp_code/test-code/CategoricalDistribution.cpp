@@ -1043,7 +1043,7 @@ CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd)
  * Get a Category_t from the CategoricalDistribution_t.
  */
 LIBSBML_EXTERN
-const Category_t*
+Category_t*
 CategoricalDistribution_getCategory(CategoricalDistribution_t* cd,
                                     unsigned int n)
 {

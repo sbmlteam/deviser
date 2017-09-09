@@ -2032,7 +2032,7 @@ Event_getSBMLListOfEventAssignments(Event_t* e)
  * Get an EventAssignment_t from the Event_t.
  */
 LIBSBML_EXTERN
-const EventAssignment_t*
+EventAssignment_t*
 Event_getEventAssignment(Event_t* e, unsigned int n)
 {
   return (e != NULL) ? e->getEventAssignment(n) : NULL;
@@ -2044,7 +2044,7 @@ Event_getEventAssignment(Event_t* e, unsigned int n)
  * refers.
  */
 LIBSBML_EXTERN
-const EventAssignment_t*
+EventAssignment_t*
 Event_getEventAssignmentByVariable(Event_t* e, const char *sid)
 {
   return (e != NULL && sid != NULL) ? e->getEventAssignmentByVariable(sid) :

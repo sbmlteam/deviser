@@ -828,7 +828,7 @@ GroupsModelPlugin_getListOfGroups(GroupsModelPlugin_t* gmp);
  * @memberof GroupsModelPlugin_t
  */
 LIBSBML_EXTERN
-const Group_t*
+Group_t*
 GroupsModelPlugin_getGroup(GroupsModelPlugin_t* gmp, unsigned int n);
 
 
@@ -845,7 +845,7 @@ GroupsModelPlugin_getGroup(GroupsModelPlugin_t* gmp, unsigned int n);
  * @memberof GroupsModelPlugin_t
  */
 LIBSBML_EXTERN
-const Group_t*
+Group_t*
 GroupsModelPlugin_getGroupById(GroupsModelPlugin_t* gmp, const char *sid);
 
 

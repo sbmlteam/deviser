@@ -1916,7 +1916,7 @@ Transition_getListOfInputs(Transition_t* t)
  * Get an Input_t from the Transition_t.
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInput(Transition_t* t, unsigned int n)
 {
   return (t != NULL) ? t->getInput(n) : NULL;
@@ -1927,7 +1927,7 @@ Transition_getInput(Transition_t* t, unsigned int n)
  * Get an Input_t from the Transition_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInputById(Transition_t* t, const char *sid)
 {
   return (t != NULL && sid != NULL) ? t->getInput(sid) : NULL;
@@ -1939,7 +1939,7 @@ Transition_getInputById(Transition_t* t, const char *sid)
  * which it refers.
  */
 LIBSBML_EXTERN
-const Input_t*
+Input_t*
 Transition_getInputByQualitativeSpecies(Transition_t* t, const char *sid)
 {
   return (t != NULL && sid != NULL) ? t->getInputByQualitativeSpecies(sid) :
@@ -2019,7 +2019,7 @@ Transition_getListOfOutputs(Transition_t* t)
  * Get an Output_t from the Transition_t.
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutput(Transition_t* t, unsigned int n)
 {
   return (t != NULL) ? t->getOutput(n) : NULL;
@@ -2030,7 +2030,7 @@ Transition_getOutput(Transition_t* t, unsigned int n)
  * Get an Output_t from the Transition_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutputById(Transition_t* t, const char *sid)
 {
   return (t != NULL && sid != NULL) ? t->getOutput(sid) : NULL;
@@ -2042,7 +2042,7 @@ Transition_getOutputById(Transition_t* t, const char *sid)
  * which it refers.
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 Transition_getOutputByQualitativeSpecies(Transition_t* t, const char *sid)
 {
   return (t != NULL && sid != NULL) ? t->getOutputByQualitativeSpecies(sid) :
@@ -2123,7 +2123,7 @@ Transition_getListOfFunctionTerms(Transition_t* t)
  * Get a FunctionTerm_t from the Transition_t.
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 Transition_getFunctionTerm(Transition_t* t, unsigned int n)
 {
   return (t != NULL) ? t->getFunctionTerm(n) : NULL;

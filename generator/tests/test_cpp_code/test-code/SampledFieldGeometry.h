@@ -1121,7 +1121,7 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
-const SampledVolume_t*
+SampledVolume_t*
 SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
                                       unsigned int n);
 
@@ -1142,7 +1142,7 @@ SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
-const SampledVolume_t*
+SampledVolume_t*
 SampledFieldGeometry_getSampledVolumeById(SampledFieldGeometry_t* sfg,
                                           const char *sid);
 
@@ -1162,7 +1162,7 @@ SampledFieldGeometry_getSampledVolumeById(SampledFieldGeometry_t* sfg,
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
-const SampledVolume_t*
+SampledVolume_t*
 SampledFieldGeometry_getSampledVolumeByDomainType(SampledFieldGeometry_t* sfg,
                                                   const char *sid);
 

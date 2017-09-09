@@ -960,7 +960,7 @@ CSGeometry_getListOfCSGObjects(CSGeometry_t* csg);
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n);
 
 
@@ -978,7 +978,7 @@ CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n);
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid);
 
 
@@ -997,7 +997,7 @@ CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid);
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObjectByDomainType(CSGeometry_t* csg, const char *sid);
 
 

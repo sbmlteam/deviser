@@ -1116,7 +1116,7 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg);
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
 
 
@@ -1135,7 +1135,7 @@ MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 MixedGeometry_getGeometryDefinitionById(MixedGeometry_t* mg, const char *sid);
 
 
@@ -1322,7 +1322,7 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg);
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
-const OrdinalMapping_t*
+OrdinalMapping_t*
 MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n);
 
 
@@ -1342,7 +1342,7 @@ MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n);
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
-const OrdinalMapping_t*
+OrdinalMapping_t*
 MixedGeometry_getOrdinalMappingByGeometryDefinition(MixedGeometry_t* mg,
                                                     const char *sid);
 

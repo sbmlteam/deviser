@@ -513,7 +513,7 @@ BEGIN_C_DECLS
  * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n);
 
 
@@ -531,7 +531,7 @@ ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n);
  * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid);
 
 

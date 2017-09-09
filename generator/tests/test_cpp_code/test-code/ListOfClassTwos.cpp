@@ -354,7 +354,7 @@ ListOfClassTwos::writeXMLNS(XMLOutputStream& stream) const
  * Get a ClassTwo_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const ClassTwo_t*
+ClassTwo_t*
 ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -370,7 +370,7 @@ ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n)
  * Get a ClassTwo_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const ClassTwo_t*
+ClassTwo_t*
 ListOfClassTwos_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

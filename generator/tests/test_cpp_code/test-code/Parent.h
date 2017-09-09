@@ -928,7 +928,7 @@ Parent_getListOfChildren(Parent_t* p);
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 Parent_getChild(Parent_t* p, unsigned int n);
 
 
@@ -1021,7 +1021,7 @@ Parent_getListOfSprogs(Parent_t* p);
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
-const Sprog_t*
+Sprog_t*
 Parent_getSprog(Parent_t* p, unsigned int n);
 
 

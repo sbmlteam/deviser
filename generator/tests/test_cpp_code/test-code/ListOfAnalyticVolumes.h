@@ -399,7 +399,7 @@ BEGIN_C_DECLS
  * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
-const AnalyticVolume_t*
+AnalyticVolume_t*
 ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
 
 
@@ -417,7 +417,7 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
  * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
-const AnalyticVolume_t*
+AnalyticVolume_t*
 ListOfAnalyticVolumes_getById(ListOf_t* lo, const char *sid);
 
 

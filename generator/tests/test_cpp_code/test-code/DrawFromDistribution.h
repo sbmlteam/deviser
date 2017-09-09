@@ -1348,7 +1348,7 @@ DrawFromDistribution_getListOfDistribInputs(DrawFromDistribution_t* dfd);
  * @memberof DrawFromDistribution_t
  */
 LIBSBML_EXTERN
-const DistribInput_t*
+DistribInput_t*
 DrawFromDistribution_getDistribInput(DrawFromDistribution_t* dfd,
                                      unsigned int n);
 
@@ -1369,7 +1369,7 @@ DrawFromDistribution_getDistribInput(DrawFromDistribution_t* dfd,
  * @memberof DrawFromDistribution_t
  */
 LIBSBML_EXTERN
-const DistribInput_t*
+DistribInput_t*
 DrawFromDistribution_getDistribInputById(DrawFromDistribution_t* dfd,
                                          const char *sid);
 

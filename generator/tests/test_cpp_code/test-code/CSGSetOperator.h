@@ -1394,7 +1394,7 @@ CSGSetOperator_getListOfCSGNodes(CSGSetOperator_t* csgso);
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n);
 
 
@@ -1412,7 +1412,7 @@ CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n);
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 CSGSetOperator_getCSGNodeById(CSGSetOperator_t* csgso, const char *sid);
 
 

@@ -887,7 +887,7 @@ Container_getListOfMyLoTests(Container_t* c);
  * @memberof Container_t
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 Container_getMyLoTest(Container_t* c, unsigned int n);
 
 
@@ -905,7 +905,7 @@ Container_getMyLoTest(Container_t* c, unsigned int n);
  * @memberof Container_t
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 Container_getMyLoTestById(Container_t* c, const char *sid);
 
 

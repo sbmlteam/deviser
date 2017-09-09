@@ -407,7 +407,7 @@ BEGIN_C_DECLS
  * @memberof ListOfAssociations_t
  */
 LIBSBML_EXTERN
-const Association_t*
+Association_t*
 ListOfAssociations_getAssociation(ListOf_t* lo, unsigned int n);
 
 
@@ -425,7 +425,7 @@ ListOfAssociations_getAssociation(ListOf_t* lo, unsigned int n);
  * @memberof ListOfAssociations_t
  */
 LIBSBML_EXTERN
-const Association_t*
+Association_t*
 ListOfAssociations_getById(ListOf_t* lo, const char *sid);
 
 

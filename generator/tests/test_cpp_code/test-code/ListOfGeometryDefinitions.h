@@ -442,7 +442,7 @@ BEGIN_C_DECLS
  * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 ListOfGeometryDefinitions_getGeometryDefinition(ListOf_t* lo, unsigned int n);
 
 
@@ -460,7 +460,7 @@ ListOfGeometryDefinitions_getGeometryDefinition(ListOf_t* lo, unsigned int n);
  * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
-const GeometryDefinition_t*
+GeometryDefinition_t*
 ListOfGeometryDefinitions_getById(ListOf_t* lo, const char *sid);
 
 

@@ -438,7 +438,7 @@ BEGIN_C_DECLS
  * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
 
 
@@ -456,7 +456,7 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
  * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 ListOfCSGNodes_getById(ListOf_t* lo, const char *sid);
 
 

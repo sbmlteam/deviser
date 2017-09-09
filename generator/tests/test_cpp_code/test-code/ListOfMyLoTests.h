@@ -520,7 +520,7 @@ ListOfMyLoTests_unsetId(ListOf_t * lo);
  * @memberof ListOfMyLoTests_t
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 ListOfMyLoTests_getMyLoTest(ListOf_t* lo, unsigned int n);
 
 
@@ -538,7 +538,7 @@ ListOfMyLoTests_getMyLoTest(ListOf_t* lo, unsigned int n);
  * @memberof ListOfMyLoTests_t
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 ListOfMyLoTests_getById(ListOf_t* lo, const char *sid);
 
 

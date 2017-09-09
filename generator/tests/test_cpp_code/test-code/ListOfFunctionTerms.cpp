@@ -625,7 +625,7 @@ ListOfFunctionTerms::writeXMLNS(XMLOutputStream& stream) const
  * Get a FunctionTerm_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -641,7 +641,7 @@ ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n)
  * Get a FunctionTerm_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const FunctionTerm_t*
+FunctionTerm_t*
 ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

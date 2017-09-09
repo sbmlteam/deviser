@@ -367,7 +367,7 @@ BEGIN_C_DECLS
  * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
-const Transition_t*
+Transition_t*
 ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
 
 
@@ -385,7 +385,7 @@ ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
  * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
-const Transition_t*
+Transition_t*
 ListOfTransitions_getById(ListOf_t* lo, const char *sid);
 
 

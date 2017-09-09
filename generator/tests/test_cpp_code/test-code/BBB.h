@@ -1080,7 +1080,7 @@ BBB_getListOfAnothers(BBB_t* bbb);
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 BBB_getAnother(BBB_t* bbb, unsigned int n);
 
 
@@ -1098,7 +1098,7 @@ BBB_getAnother(BBB_t* bbb, unsigned int n);
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
-const Another_t*
+Another_t*
 BBB_getAnotherById(BBB_t* bbb, const char *sid);
 
 

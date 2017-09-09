@@ -1384,7 +1384,7 @@ Objective_getListOfFluxObjectives(Objective_t* o);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjective(Objective_t* o, unsigned int n);
 
 
@@ -1402,7 +1402,7 @@ Objective_getFluxObjective(Objective_t* o, unsigned int n);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjectiveById(Objective_t* o, const char *sid);
 
 
@@ -1421,7 +1421,7 @@ Objective_getFluxObjectiveById(Objective_t* o, const char *sid);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjectiveByReaction(Objective_t* o, const char *sid);
 
 

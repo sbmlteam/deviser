@@ -384,7 +384,7 @@ BEGIN_C_DECLS
  * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
 
 
@@ -401,7 +401,7 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
  * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 ListOfOutputs_getById(ListOf_t* lo, const char *sid);
 
 

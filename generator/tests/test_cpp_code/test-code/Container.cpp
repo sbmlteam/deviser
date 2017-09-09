@@ -936,7 +936,7 @@ Container_getListOfMyLoTests(Container_t* c)
  * Get a MyLoTest_t from the Container_t.
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 Container_getMyLoTest(Container_t* c, unsigned int n)
 {
   return (c != NULL) ? c->getMyLoTest(n) : NULL;
@@ -947,7 +947,7 @@ Container_getMyLoTest(Container_t* c, unsigned int n)
  * Get a MyLoTest_t from the Container_t based on its identifier.
  */
 LIBSBML_EXTERN
-const MyLoTest_t*
+MyLoTest_t*
 Container_getMyLoTestById(Container_t* c, const char *sid)
 {
   return (c != NULL && sid != NULL) ? c->getMyLoTest(sid) : NULL;

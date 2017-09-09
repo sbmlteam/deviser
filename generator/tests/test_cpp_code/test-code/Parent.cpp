@@ -1097,7 +1097,7 @@ Parent_getListOfChildren(Parent_t* p)
  * Get a Child_t from the Parent_t.
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 Parent_getChild(Parent_t* p, unsigned int n)
 {
   return (p != NULL) ? p->getChild(n) : NULL;
@@ -1164,7 +1164,7 @@ Parent_getListOfSprogs(Parent_t* p)
  * Get a Sprog_t from the Parent_t.
  */
 LIBSBML_EXTERN
-const Sprog_t*
+Sprog_t*
 Parent_getSprog(Parent_t* p, unsigned int n)
 {
   return (p != NULL) ? p->getSprog(n) : NULL;

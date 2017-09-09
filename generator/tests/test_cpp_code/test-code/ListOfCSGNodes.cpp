@@ -558,7 +558,7 @@ ListOfCSGNodes::isValidTypeForList(SBase* item)
  * Get a CSGNode_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -574,7 +574,7 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n)
  * Get a CSGNode_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 ListOfCSGNodes_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

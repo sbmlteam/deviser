@@ -1048,7 +1048,7 @@ CSGeometry_getListOfCSGObjects(CSGeometry_t* csg)
  * Get a CSGObject_t from the CSGeometry_t.
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n)
 {
   return (csg != NULL) ? csg->getCSGObject(n) : NULL;
@@ -1059,7 +1059,7 @@ CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n)
  * Get a CSGObject_t from the CSGeometry_t based on its identifier.
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid)
 {
   return (csg != NULL && sid != NULL) ? csg->getCSGObject(sid) : NULL;
@@ -1071,7 +1071,7 @@ CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid)
  * refers.
  */
 LIBSBML_EXTERN
-const CSGObject_t*
+CSGObject_t*
 CSGeometry_getCSGObjectByDomainType(CSGeometry_t* csg, const char *sid)
 {
   return (csg != NULL && sid != NULL) ? csg->getCSGObjectByDomainType(sid) :

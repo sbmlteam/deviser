@@ -393,7 +393,7 @@ ListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
  * Get an Output_t from the ListOf_t.
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n)
 {
   if (lo == NULL)
@@ -409,7 +409,7 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n)
  * Get an Output_t from the ListOf_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Output_t*
+Output_t*
 ListOfOutputs_getById(ListOf_t* lo, const char *sid)
 {
   if (lo == NULL)

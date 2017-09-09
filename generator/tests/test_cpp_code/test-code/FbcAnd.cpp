@@ -1181,7 +1181,7 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa)
  * Get an Association_t from the FbcAnd_t.
  */
 LIBSBML_EXTERN
-const Association_t*
+Association_t*
 FbcAnd_getAssociation(FbcAnd_t* fa, unsigned int n)
 {
   return (fa != NULL) ? fa->getAssociation(n) : NULL;

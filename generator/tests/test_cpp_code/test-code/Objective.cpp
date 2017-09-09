@@ -1823,7 +1823,7 @@ Objective_getListOfFluxObjectives(Objective_t* o)
  * Get a FluxObjective_t from the Objective_t.
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjective(Objective_t* o, unsigned int n)
 {
   return (o != NULL) ? o->getFluxObjective(n) : NULL;
@@ -1834,7 +1834,7 @@ Objective_getFluxObjective(Objective_t* o, unsigned int n)
  * Get a FluxObjective_t from the Objective_t based on its identifier.
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjectiveById(Objective_t* o, const char *sid)
 {
   return (o != NULL && sid != NULL) ? o->getFluxObjective(sid) : NULL;
@@ -1846,7 +1846,7 @@ Objective_getFluxObjectiveById(Objective_t* o, const char *sid)
  * refers.
  */
 LIBSBML_EXTERN
-const FluxObjective_t*
+FluxObjective_t*
 Objective_getFluxObjectiveByReaction(Objective_t* o, const char *sid)
 {
   return (o != NULL && sid != NULL) ? o->getFluxObjectiveByReaction(sid) :

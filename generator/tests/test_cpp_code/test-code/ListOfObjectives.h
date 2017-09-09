@@ -575,7 +575,7 @@ ListOfObjectives_unsetActiveObjective(ListOf_t * lo);
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN
-const Objective_t*
+Objective_t*
 ListOfObjectives_getObjective(ListOf_t* lo, unsigned int n);
 
 
@@ -593,7 +593,7 @@ ListOfObjectives_getObjective(ListOf_t* lo, unsigned int n);
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN
-const Objective_t*
+Objective_t*
 ListOfObjectives_getById(ListOf_t* lo, const char *sid);
 
 

@@ -919,7 +919,7 @@ CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd);
  * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
-const Category_t*
+Category_t*
 CategoricalDistribution_getCategory(CategoricalDistribution_t* cd,
                                     unsigned int n);
 

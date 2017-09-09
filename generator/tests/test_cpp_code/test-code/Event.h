@@ -1512,7 +1512,7 @@ Event_getSBMLListOfEventAssignments(Event_t* e);
  * @memberof Event_t
  */
 LIBSBML_EXTERN
-const EventAssignment_t*
+EventAssignment_t*
 Event_getEventAssignment(Event_t* e, unsigned int n);
 
 
@@ -1531,7 +1531,7 @@ Event_getEventAssignment(Event_t* e, unsigned int n);
  * @memberof Event_t
  */
 LIBSBML_EXTERN
-const EventAssignment_t*
+EventAssignment_t*
 Event_getEventAssignmentByVariable(Event_t* e, const char *sid);
 
 

@@ -359,7 +359,7 @@ BEGIN_C_DECLS
  * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 ListOfChildren_getChild(ListOf_t* lo, unsigned int n);
 
 
@@ -376,7 +376,7 @@ ListOfChildren_getChild(ListOf_t* lo, unsigned int n);
  * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
-const Child_t*
+Child_t*
 ListOfChildren_getById(ListOf_t* lo, const char *sid);
 
 

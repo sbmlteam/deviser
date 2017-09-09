@@ -369,7 +369,7 @@ BEGIN_C_DECLS
  * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
-const SampledField_t*
+SampledField_t*
 ListOfSampledFields_getSampledField(ListOf_t* lo, unsigned int n);
 
 
@@ -387,7 +387,7 @@ ListOfSampledFields_getSampledField(ListOf_t* lo, unsigned int n);
  * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
-const SampledField_t*
+SampledField_t*
 ListOfSampledFields_getById(ListOf_t* lo, const char *sid);
 
 

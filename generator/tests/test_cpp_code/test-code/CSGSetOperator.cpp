@@ -1856,7 +1856,7 @@ CSGSetOperator_getListOfCSGNodes(CSGSetOperator_t* csgso)
  * Get a CSGNode_t from the CSGSetOperator_t.
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n)
 {
   return (csgso != NULL) ? csgso->getCSGNode(n) : NULL;
@@ -1867,7 +1867,7 @@ CSGSetOperator_getCSGNode(CSGSetOperator_t* csgso, unsigned int n)
  * Get a CSGNode_t from the CSGSetOperator_t based on its identifier.
  */
 LIBSBML_EXTERN
-const CSGNode_t*
+CSGNode_t*
 CSGSetOperator_getCSGNodeById(CSGSetOperator_t* csgso, const char *sid)
 {
   return (csgso != NULL && sid != NULL) ? csgso->getCSGNode(sid) : NULL;

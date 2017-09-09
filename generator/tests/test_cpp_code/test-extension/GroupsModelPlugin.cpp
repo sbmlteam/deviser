@@ -990,7 +990,7 @@ GroupsModelPlugin_getListOfGroups(GroupsModelPlugin_t* gmp)
  * Get a Group_t from the GroupsModelPlugin_t.
  */
 LIBSBML_EXTERN
-const Group_t*
+Group_t*
 GroupsModelPlugin_getGroup(GroupsModelPlugin_t* gmp, unsigned int n)
 {
   return (gmp != NULL) ? gmp->getGroup(n) : NULL;
@@ -1001,7 +1001,7 @@ GroupsModelPlugin_getGroup(GroupsModelPlugin_t* gmp, unsigned int n)
  * Get a Group_t from the GroupsModelPlugin_t based on its identifier.
  */
 LIBSBML_EXTERN
-const Group_t*
+Group_t*
 GroupsModelPlugin_getGroupById(GroupsModelPlugin_t* gmp, const char *sid)
 {
   return (gmp != NULL && sid != NULL) ? gmp->getGroup(sid) : NULL;

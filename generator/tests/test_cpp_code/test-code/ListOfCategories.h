@@ -367,7 +367,7 @@ BEGIN_C_DECLS
  * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
-const Category_t*
+Category_t*
 ListOfCategories_getCategory(ListOf_t* lo, unsigned int n);
 
 
@@ -385,7 +385,7 @@ ListOfCategories_getCategory(ListOf_t* lo, unsigned int n);
  * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
-const Category_t*
+Category_t*
 ListOfCategories_getById(ListOf_t* lo, const char *sid);
 
 
