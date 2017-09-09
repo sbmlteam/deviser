@@ -138,12 +138,14 @@ global add_declaration
 add_declaration = []
 
 def add_additional_implementation(filename):
-    global add_implementation
-    add_implementation.append(filename)
+    if filename is not None:
+        global add_implementation
+        add_implementation.append(filename)
 
 def add_additional_declaration(filename):
-    global add_declaration
-    add_declaration.append(filename)
+    if filename is not None:
+        global add_declaration
+        add_declaration.append(filename)
 
 def set_custom_copyright(copyright):
     global custom_copyright
@@ -283,6 +285,10 @@ def reset():
     error_list = []
     global class_rules
     class_rules = []
+    global add_implementation
+    add_implementation = []
+    global add_declaration
+    add_declaration = []
 
 
 def populate_error_list(lib_object):
