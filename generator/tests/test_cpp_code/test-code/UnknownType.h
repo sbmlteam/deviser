@@ -620,10 +620,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 UnknownType_t *
-UnknownType_create(unsigned int level = TestExtension::getDefaultLevel(),
-                   unsigned int version = TestExtension::getDefaultVersion(),
-                   unsigned int pkgVersion =
-                     TestExtension::getDefaultPackageVersion());
+UnknownType_create(unsigned int level,
+                   unsigned int version,
+                   unsigned int pkgVersion);
 
 
 /**

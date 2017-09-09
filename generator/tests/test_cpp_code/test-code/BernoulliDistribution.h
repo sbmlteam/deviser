@@ -817,13 +817,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 BernoulliDistribution_t *
-BernoulliDistribution_create(
-                             unsigned int level =
-                               DistribExtension::getDefaultLevel(),
-                             unsigned int version =
-                               DistribExtension::getDefaultVersion(),
-                             unsigned int pkgVersion =
-                               DistribExtension::getDefaultPackageVersion());
+BernoulliDistribution_create(unsigned int level,
+                             unsigned int version,
+                             unsigned int pkgVersion);
 
 
 /**

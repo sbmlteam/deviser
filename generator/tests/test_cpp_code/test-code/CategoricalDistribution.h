@@ -853,13 +853,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 CategoricalDistribution_t *
-CategoricalDistribution_create(
-                               unsigned int level =
-                                 DistribExtension::getDefaultLevel(),
-                               unsigned int version =
-                                 DistribExtension::getDefaultVersion(),
-                               unsigned int pkgVersion =
-                                 DistribExtension::getDefaultPackageVersion());
+CategoricalDistribution_create(unsigned int level,
+                               unsigned int version,
+                               unsigned int pkgVersion);
 
 
 /**

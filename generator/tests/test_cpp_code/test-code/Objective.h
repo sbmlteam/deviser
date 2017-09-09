@@ -1096,10 +1096,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Objective_t *
-Objective_create(unsigned int level = FbcExtension::getDefaultLevel(),
-                 unsigned int version = FbcExtension::getDefaultVersion(),
-                 unsigned int pkgVersion =
-                   FbcExtension::getDefaultPackageVersion());
+Objective_create(unsigned int level,
+                 unsigned int version,
+                 unsigned int pkgVersion);
 
 
 /**

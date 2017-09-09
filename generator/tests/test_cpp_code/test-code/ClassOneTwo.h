@@ -1038,13 +1038,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 ClassOneTwo_t *
-ClassOneTwo_create(
-                   unsigned int level =
-                     CoreversmultipkgExtension::getDefaultLevel(),
-                   unsigned int version =
-                     CoreversmultipkgExtension::getDefaultVersion(),
-                   unsigned int pkgVersion =
-                     CoreversmultipkgExtension::getDefaultPackageVersion());
+ClassOneTwo_create(unsigned int level,
+                   unsigned int version,
+                   unsigned int pkgVersion);
 
 
 /**

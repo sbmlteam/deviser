@@ -540,9 +540,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Other_t *
-Other_create(unsigned int level = XExtension::getDefaultLevel(),
-             unsigned int version = XExtension::getDefaultVersion(),
-             unsigned int pkgVersion = XExtension::getDefaultPackageVersion());
+Other_create(unsigned int level,
+             unsigned int version,
+             unsigned int pkgVersion);
 
 
 /**

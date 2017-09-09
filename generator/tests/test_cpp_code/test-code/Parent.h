@@ -870,10 +870,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Parent_t *
-Parent_create(unsigned int level = NastyExtension::getDefaultLevel(),
-              unsigned int version = NastyExtension::getDefaultVersion(),
-              unsigned int pkgVersion =
-                NastyExtension::getDefaultPackageVersion());
+Parent_create(unsigned int level,
+              unsigned int version,
+              unsigned int pkgVersion);
 
 
 /**

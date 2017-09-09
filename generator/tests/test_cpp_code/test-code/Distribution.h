@@ -649,13 +649,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createBetaDistribution(
-                                    unsigned int level =
-                                      DistribExtension::getDefaultLevel(),
-                                    unsigned int version =
-                                      DistribExtension::getDefaultVersion(),
-                                    unsigned int pkgVersion =
-                                      DistribExtension::getDefaultPackageVersion());
+Distribution_createBetaDistribution(unsigned int level,
+                                    unsigned int version,
+                                    unsigned int pkgVersion);
 
 
 /**
@@ -677,13 +673,9 @@ Distribution_createBetaDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createCauchyDistribution(
-                                      unsigned int level =
-                                        DistribExtension::getDefaultLevel(),
-                                      unsigned int version =
-                                        DistribExtension::getDefaultVersion(),
-                                      unsigned int pkgVersion =
-                                        DistribExtension::getDefaultPackageVersion());
+Distribution_createCauchyDistribution(unsigned int level,
+                                      unsigned int version,
+                                      unsigned int pkgVersion);
 
 
 /**
@@ -705,13 +697,9 @@ Distribution_createCauchyDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createExponentialDistribution(
-                                           unsigned int level =
-                                             DistribExtension::getDefaultLevel(),
-                                           unsigned int version =
-                                             DistribExtension::getDefaultVersion(),
-                                           unsigned int pkgVersion =
-                                             DistribExtension::getDefaultPackageVersion());
+Distribution_createExponentialDistribution(unsigned int level,
+                                           unsigned int version,
+                                           unsigned int pkgVersion);
 
 
 /**
@@ -733,13 +721,9 @@ Distribution_createExponentialDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createLogisticDistribution(
-                                        unsigned int level =
-                                          DistribExtension::getDefaultLevel(),
-                                        unsigned int version =
-                                          DistribExtension::getDefaultVersion(),
-                                        unsigned int pkgVersion =
-                                          DistribExtension::getDefaultPackageVersion());
+Distribution_createLogisticDistribution(unsigned int level,
+                                        unsigned int version,
+                                        unsigned int pkgVersion);
 
 
 /**
@@ -761,13 +745,9 @@ Distribution_createLogisticDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createNormalDistribution(
-                                      unsigned int level =
-                                        DistribExtension::getDefaultLevel(),
-                                      unsigned int version =
-                                        DistribExtension::getDefaultVersion(),
-                                      unsigned int pkgVersion =
-                                        DistribExtension::getDefaultPackageVersion());
+Distribution_createNormalDistribution(unsigned int level,
+                                      unsigned int version,
+                                      unsigned int pkgVersion);
 
 
 /**
@@ -789,13 +769,9 @@ Distribution_createNormalDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createBinomialDistribution(
-                                        unsigned int level =
-                                          DistribExtension::getDefaultLevel(),
-                                        unsigned int version =
-                                          DistribExtension::getDefaultVersion(),
-                                        unsigned int pkgVersion =
-                                          DistribExtension::getDefaultPackageVersion());
+Distribution_createBinomialDistribution(unsigned int level,
+                                        unsigned int version,
+                                        unsigned int pkgVersion);
 
 
 /**
@@ -817,13 +793,9 @@ Distribution_createBinomialDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createGeometricDistribution(
-                                         unsigned int level =
-                                           DistribExtension::getDefaultLevel(),
-                                         unsigned int version =
-                                           DistribExtension::getDefaultVersion(),
-                                         unsigned int pkgVersion =
-                                           DistribExtension::getDefaultPackageVersion());
+Distribution_createGeometricDistribution(unsigned int level,
+                                         unsigned int version,
+                                         unsigned int pkgVersion);
 
 
 /**
@@ -845,13 +817,9 @@ Distribution_createGeometricDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createBernoulliDistribution(
-                                         unsigned int level =
-                                           DistribExtension::getDefaultLevel(),
-                                         unsigned int version =
-                                           DistribExtension::getDefaultVersion(),
-                                         unsigned int pkgVersion =
-                                           DistribExtension::getDefaultPackageVersion());
+Distribution_createBernoulliDistribution(unsigned int level,
+                                         unsigned int version,
+                                         unsigned int pkgVersion);
 
 
 /**
@@ -873,13 +841,9 @@ Distribution_createBernoulliDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createCategoricalDistribution(
-                                           unsigned int level =
-                                             DistribExtension::getDefaultLevel(),
-                                           unsigned int version =
-                                             DistribExtension::getDefaultVersion(),
-                                           unsigned int pkgVersion =
-                                             DistribExtension::getDefaultPackageVersion());
+Distribution_createCategoricalDistribution(unsigned int level,
+                                           unsigned int version,
+                                           unsigned int pkgVersion);
 
 
 /**
@@ -901,13 +865,9 @@ Distribution_createCategoricalDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createMultivariateDistribution(
-                                            unsigned int level =
-                                              DistribExtension::getDefaultLevel(),
-                                            unsigned int version =
-                                              DistribExtension::getDefaultVersion(),
-                                            unsigned int pkgVersion =
-                                              DistribExtension::getDefaultPackageVersion());
+Distribution_createMultivariateDistribution(unsigned int level,
+                                            unsigned int version,
+                                            unsigned int pkgVersion);
 
 
 /**
@@ -929,13 +889,9 @@ Distribution_createMultivariateDistribution(
  */
 LIBSBML_EXTERN
 Distribution_t *
-Distribution_createExternalDistribution(
-                                        unsigned int level =
-                                          DistribExtension::getDefaultLevel(),
-                                        unsigned int version =
-                                          DistribExtension::getDefaultVersion(),
-                                        unsigned int pkgVersion =
-                                          DistribExtension::getDefaultPackageVersion());
+Distribution_createExternalDistribution(unsigned int level,
+                                        unsigned int version,
+                                        unsigned int pkgVersion);
 
 
 /**

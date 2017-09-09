@@ -637,10 +637,7 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Abc_t *
-Abc_create(unsigned int level = CopyExtension::getDefaultLevel(),
-           unsigned int version = CopyExtension::getDefaultVersion(),
-           unsigned int pkgVersion =
-             CopyExtension::getDefaultPackageVersion());
+Abc_create(unsigned int level, unsigned int version, unsigned int pkgVersion);
 
 
 /**

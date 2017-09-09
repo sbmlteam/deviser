@@ -1022,13 +1022,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 DrawFromDistribution_t *
-DrawFromDistribution_create(
-                            unsigned int level =
-                              DistribExtension::getDefaultLevel(),
-                            unsigned int version =
-                              DistribExtension::getDefaultVersion(),
-                            unsigned int pkgVersion =
-                              DistribExtension::getDefaultPackageVersion());
+DrawFromDistribution_create(unsigned int level,
+                            unsigned int version,
+                            unsigned int pkgVersion);
 
 
 /**

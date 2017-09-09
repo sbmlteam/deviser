@@ -740,13 +740,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 GeometryDefinition_t *
-GeometryDefinition_createAnalyticGeometry(
-                                          unsigned int level =
-                                            SpatialExtension::getDefaultLevel(),
-                                          unsigned int version =
-                                            SpatialExtension::getDefaultVersion(),
-                                          unsigned int pkgVersion =
-                                            SpatialExtension::getDefaultPackageVersion());
+GeometryDefinition_createAnalyticGeometry(unsigned int level,
+                                          unsigned int version,
+                                          unsigned int pkgVersion);
 
 
 /**
@@ -768,13 +764,9 @@ GeometryDefinition_createAnalyticGeometry(
  */
 LIBSBML_EXTERN
 GeometryDefinition_t *
-GeometryDefinition_createSampledFieldGeometry(
-                                              unsigned int level =
-                                                SpatialExtension::getDefaultLevel(),
-                                              unsigned int version =
-                                                SpatialExtension::getDefaultVersion(),
-                                              unsigned int pkgVersion =
-                                                SpatialExtension::getDefaultPackageVersion());
+GeometryDefinition_createSampledFieldGeometry(unsigned int level,
+                                              unsigned int version,
+                                              unsigned int pkgVersion);
 
 
 /**
@@ -796,13 +788,9 @@ GeometryDefinition_createSampledFieldGeometry(
  */
 LIBSBML_EXTERN
 GeometryDefinition_t *
-GeometryDefinition_createCSGeometry(
-                                    unsigned int level =
-                                      SpatialExtension::getDefaultLevel(),
-                                    unsigned int version =
-                                      SpatialExtension::getDefaultVersion(),
-                                    unsigned int pkgVersion =
-                                      SpatialExtension::getDefaultPackageVersion());
+GeometryDefinition_createCSGeometry(unsigned int level,
+                                    unsigned int version,
+                                    unsigned int pkgVersion);
 
 
 /**
@@ -824,13 +812,9 @@ GeometryDefinition_createCSGeometry(
  */
 LIBSBML_EXTERN
 GeometryDefinition_t *
-GeometryDefinition_createParametricGeometry(
-                                            unsigned int level =
-                                              SpatialExtension::getDefaultLevel(),
-                                            unsigned int version =
-                                              SpatialExtension::getDefaultVersion(),
-                                            unsigned int pkgVersion =
-                                              SpatialExtension::getDefaultPackageVersion());
+GeometryDefinition_createParametricGeometry(unsigned int level,
+                                            unsigned int version,
+                                            unsigned int pkgVersion);
 
 
 /**
@@ -852,13 +836,9 @@ GeometryDefinition_createParametricGeometry(
  */
 LIBSBML_EXTERN
 GeometryDefinition_t *
-GeometryDefinition_createMixedGeometry(
-                                       unsigned int level =
-                                         SpatialExtension::getDefaultLevel(),
-                                       unsigned int version =
-                                         SpatialExtension::getDefaultVersion(),
-                                       unsigned int pkgVersion =
-                                         SpatialExtension::getDefaultPackageVersion());
+GeometryDefinition_createMixedGeometry(unsigned int level,
+                                       unsigned int version,
+                                       unsigned int pkgVersion);
 
 
 /**

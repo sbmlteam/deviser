@@ -889,13 +889,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 BinomialDistribution_t *
-BinomialDistribution_create(
-                            unsigned int level =
-                              DistribExtension::getDefaultLevel(),
-                            unsigned int version =
-                              DistribExtension::getDefaultVersion(),
-                            unsigned int pkgVersion =
-                              DistribExtension::getDefaultPackageVersion());
+BinomialDistribution_create(unsigned int level,
+                            unsigned int version,
+                            unsigned int pkgVersion);
 
 
 /**

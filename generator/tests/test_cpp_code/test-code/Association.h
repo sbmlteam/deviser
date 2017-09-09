@@ -561,11 +561,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Association_t *
-Association_createFbcAnd(unsigned int level = FbcExtension::getDefaultLevel(),
-                         unsigned int version =
-                           FbcExtension::getDefaultVersion(),
-                         unsigned int pkgVersion =
-                           FbcExtension::getDefaultPackageVersion());
+Association_createFbcAnd(unsigned int level,
+                         unsigned int version,
+                         unsigned int pkgVersion);
 
 
 /**
@@ -587,11 +585,9 @@ Association_createFbcAnd(unsigned int level = FbcExtension::getDefaultLevel(),
  */
 LIBSBML_EXTERN
 Association_t *
-Association_createFbcOr(unsigned int level = FbcExtension::getDefaultLevel(),
-                        unsigned int version =
-                          FbcExtension::getDefaultVersion(),
-                        unsigned int pkgVersion =
-                          FbcExtension::getDefaultPackageVersion());
+Association_createFbcOr(unsigned int level,
+                        unsigned int version,
+                        unsigned int pkgVersion);
 
 
 /**
@@ -613,13 +609,9 @@ Association_createFbcOr(unsigned int level = FbcExtension::getDefaultLevel(),
  */
 LIBSBML_EXTERN
 Association_t *
-Association_createGeneProductRef(
-                                 unsigned int level =
-                                   FbcExtension::getDefaultLevel(),
-                                 unsigned int version =
-                                   FbcExtension::getDefaultVersion(),
-                                 unsigned int pkgVersion =
-                                   FbcExtension::getDefaultPackageVersion());
+Association_createGeneProductRef(unsigned int level,
+                                 unsigned int version,
+                                 unsigned int pkgVersion);
 
 
 /**

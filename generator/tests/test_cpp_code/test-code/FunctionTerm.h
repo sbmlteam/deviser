@@ -721,10 +721,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 FunctionTerm_t *
-FunctionTerm_create(unsigned int level = QualExtension::getDefaultLevel(),
-                    unsigned int version = QualExtension::getDefaultVersion(),
-                    unsigned int pkgVersion =
-                      QualExtension::getDefaultPackageVersion());
+FunctionTerm_create(unsigned int level,
+                    unsigned int version,
+                    unsigned int pkgVersion);
 
 
 /**

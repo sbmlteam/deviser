@@ -891,10 +891,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 FbcAnd_t *
-FbcAnd_create(unsigned int level = FbcExtension::getDefaultLevel(),
-              unsigned int version = FbcExtension::getDefaultVersion(),
-              unsigned int pkgVersion =
-                FbcExtension::getDefaultPackageVersion());
+FbcAnd_create(unsigned int level,
+              unsigned int version,
+              unsigned int pkgVersion);
 
 
 /**

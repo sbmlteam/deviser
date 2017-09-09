@@ -1295,10 +1295,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Transition_t *
-Transition_create(unsigned int level = QualExtension::getDefaultLevel(),
-                  unsigned int version = QualExtension::getDefaultVersion(),
-                  unsigned int pkgVersion =
-                    QualExtension::getDefaultPackageVersion());
+Transition_create(unsigned int level,
+                  unsigned int version,
+                  unsigned int pkgVersion);
 
 
 /**

@@ -1231,9 +1231,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Fred_t *
-Fred_create(unsigned int level = XExtension::getDefaultLevel(),
-            unsigned int version = XExtension::getDefaultVersion(),
-            unsigned int pkgVersion = XExtension::getDefaultPackageVersion());
+Fred_create(unsigned int level,
+            unsigned int version,
+            unsigned int pkgVersion);
 
 
 /**

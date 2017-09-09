@@ -828,10 +828,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Container_t *
-Container_create(unsigned int level = TestExtension::getDefaultLevel(),
-                 unsigned int version = TestExtension::getDefaultVersion(),
-                 unsigned int pkgVersion =
-                   TestExtension::getDefaultPackageVersion());
+Container_create(unsigned int level,
+                 unsigned int version,
+                 unsigned int pkgVersion);
 
 
 /**

@@ -681,13 +681,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGPrimitive(
-                           unsigned int level =
-                             SpatialExtension::getDefaultLevel(),
-                           unsigned int version =
-                             SpatialExtension::getDefaultVersion(),
-                           unsigned int pkgVersion =
-                             SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGPrimitive(unsigned int level,
+                           unsigned int version,
+                           unsigned int pkgVersion);
 
 
 /**
@@ -708,13 +704,9 @@ CSGNode_createCSGPrimitive(
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGTranslation(
-                             unsigned int level =
-                               SpatialExtension::getDefaultLevel(),
-                             unsigned int version =
-                               SpatialExtension::getDefaultVersion(),
-                             unsigned int pkgVersion =
-                               SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGTranslation(unsigned int level,
+                             unsigned int version,
+                             unsigned int pkgVersion);
 
 
 /**
@@ -735,13 +727,9 @@ CSGNode_createCSGTranslation(
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGRotation(
-                          unsigned int level =
-                            SpatialExtension::getDefaultLevel(),
-                          unsigned int version =
-                            SpatialExtension::getDefaultVersion(),
-                          unsigned int pkgVersion =
-                            SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGRotation(unsigned int level,
+                          unsigned int version,
+                          unsigned int pkgVersion);
 
 
 /**
@@ -762,13 +750,9 @@ CSGNode_createCSGRotation(
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGScale(
-                       unsigned int level =
-                         SpatialExtension::getDefaultLevel(),
-                       unsigned int version =
-                         SpatialExtension::getDefaultVersion(),
-                       unsigned int pkgVersion =
-                         SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGScale(unsigned int level,
+                       unsigned int version,
+                       unsigned int pkgVersion);
 
 
 /**
@@ -789,13 +773,9 @@ CSGNode_createCSGScale(
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGHomogeneousTransformation(
-                                           unsigned int level =
-                                             SpatialExtension::getDefaultLevel(),
-                                           unsigned int version =
-                                             SpatialExtension::getDefaultVersion(),
-                                           unsigned int pkgVersion =
-                                             SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGHomogeneousTransformation(unsigned int level,
+                                           unsigned int version,
+                                           unsigned int pkgVersion);
 
 
 /**
@@ -816,13 +796,9 @@ CSGNode_createCSGHomogeneousTransformation(
  */
 LIBSBML_EXTERN
 CSGNode_t *
-CSGNode_createCSGSetOperator(
-                             unsigned int level =
-                               SpatialExtension::getDefaultLevel(),
-                             unsigned int version =
-                               SpatialExtension::getDefaultVersion(),
-                             unsigned int pkgVersion =
-                               SpatialExtension::getDefaultPackageVersion());
+CSGNode_createCSGSetOperator(unsigned int level,
+                             unsigned int version,
+                             unsigned int pkgVersion);
 
 
 /**

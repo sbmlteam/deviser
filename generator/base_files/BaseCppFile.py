@@ -648,7 +648,14 @@ class BaseCppFile(BaseFile.BaseFile):
                                            code['constant'], code['virtual'],
                                            True)
             else:
-                self.write_function_header(code['function'], code['arguments'],
+                if self.is_cpp_api:
+                    arguments = code['arguments']
+                else:
+                    if 'args_no_defaults' in code:
+                        arguments = code['args_no_defaults']
+                    else:
+                        arguments = code['arguments']
+                self.write_function_header(code['function'], arguments,
                                            code['return_type'],
                                            code['constant'], code['virtual'])
             if exclude:

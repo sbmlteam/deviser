@@ -815,12 +815,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'copy'
-        num = 0
-        class_name = 'Def'
-        list_of = ''
-        test_case = 'class with additional code'
+        name = 'groups'
+        num = 1
+        class_name = 'Member'
+        list_of = 'ListOfMembers'
+        test_case = 'list of with attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

@@ -743,10 +743,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Member_t *
-Member_create(unsigned int level = GroupsExtension::getDefaultLevel(),
-              unsigned int version = GroupsExtension::getDefaultVersion(),
-              unsigned int pkgVersion =
-                GroupsExtension::getDefaultPackageVersion());
+Member_create(unsigned int level,
+              unsigned int version,
+              unsigned int pkgVersion);
 
 
 /**

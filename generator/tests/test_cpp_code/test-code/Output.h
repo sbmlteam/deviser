@@ -819,10 +819,9 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 Output_t *
-Output_create(unsigned int level = QualExtension::getDefaultLevel(),
-              unsigned int version = QualExtension::getDefaultVersion(),
-              unsigned int pkgVersion =
-                QualExtension::getDefaultPackageVersion());
+Output_create(unsigned int level,
+              unsigned int version,
+              unsigned int pkgVersion);
 
 
 /**

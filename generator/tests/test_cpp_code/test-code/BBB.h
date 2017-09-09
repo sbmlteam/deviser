@@ -957,10 +957,7 @@ BEGIN_C_DECLS
  */
 LIBSBML_EXTERN
 BBB_t *
-BBB_create(unsigned int level = VersExtension::getDefaultLevel(),
-           unsigned int version = VersExtension::getDefaultVersion(),
-           unsigned int pkgVersion =
-             VersExtension::getDefaultPackageVersion());
+BBB_create(unsigned int level, unsigned int version, unsigned int pkgVersion);
 
 
 /**
