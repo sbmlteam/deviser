@@ -7,7 +7,7 @@ The table lists the errors and warnings that may be produced by validating
 a package being defined within Deviser Edit.
 
 +--------------+---------------------+--------------------------------------------+
-| **Severity** | **Reference**       | **Message**                                |
+| **Severity** | **Reference**       | **Sample Message**                         |
 +==============+=====================+============================================+
 |  Error       | :ref:`pkg-name`     | Package: missing name attribute.           |
 +--------------+---------------------+--------------------------------------------+
@@ -56,6 +56,10 @@ a package being defined within Deviser Edit.
 |              |                     | has no element defined, this               | 
 |              |                     | is a required attribute.                   |
 +--------------+---------------------+--------------------------------------------+
+|  Error       |  :ref:`inst-name`   | In class 'FooRule' an instantiation        |
+|              |                     | has no XML name, this is a required        |
+|              |                     | attribute.                                 |
++--------------+---------------------+--------------------------------------------+
 |  Warning     | :ref:`isbase`       | Class 'foo_classname' is marked            |
 |              |                     | 'isBaseClass', but not used.               |
 +--------------+---------------------+--------------------------------------------+
@@ -66,6 +70,3 @@ a package being defined within Deviser Edit.
 
 Note: The error messages will be populated with the names of attributes/classes/types etc.
 as illustrated by the 'foo_xxx' placeholders above.
-
-.. todo::
-    Missing rules: XML Name for instantiations
