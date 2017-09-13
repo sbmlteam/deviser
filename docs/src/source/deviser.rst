@@ -6,8 +6,6 @@
 DEVISER
 ========
 
-Contents:
-
 .. toctree::
    :maxdepth: 6
 
