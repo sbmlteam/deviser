@@ -1,3 +1,4 @@
+.. _licensing:
 
 Appendix D: Licensing the code produced
 =======================================
