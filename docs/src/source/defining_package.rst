@@ -427,20 +427,17 @@ drop-down list giving the types that are supported by Deviser.
     (not element) but use ‘FIXME_Name’ as the type declaration
 
 
-.. todo::
-    Add ID if we decide
-
 The recognized types for an attribute are the datatypes allowed by SBML.
 These are:
 
     string, boolean, double, integer, unsigned integer, positive
     integer,
 
-    non-negative integer, IDREF, SId, SIdRef, UnitSId, UnitSIdRef
+    non-negative integer, ID, IDREF, SId, SIdRef, UnitSId, UnitSIdRef
 
 and additionally Deviser Edit uses:
 
-    array, enum, element, lo\_element, inline\_lo\_element.
+    array, enum, element, lo\_element, inline\_lo\_element, vector.
 
 
 :ref:`datatypes` lists the SBML types with their corresponding
@@ -691,6 +688,12 @@ potentially variable numbers of child elements. The
 multiple instances of the same child element but that these do not occur
 within a specified ListOf element. :ref:`Table 1<table1>` gives examples of the
 expected XML and the functions produced.
+
+Attribute/child element type ‘vector’
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+	add vector info
 
 .. _elementfield:
 

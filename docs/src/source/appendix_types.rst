@@ -3,7 +3,7 @@
 Appendix B: Data Types
 =======================
 
-The attribute types recognized by Deviser Edit and the corresponding C++ data
+The SBML attribute types recognized by Deviser Edit and the corresponding C++ data
 type.
 
 +-----------------------------------+-----------------------------------+
@@ -22,6 +22,8 @@ type.
 | positive integer                  | unsigned int                      |
 +-----------------------------------+-----------------------------------+
 | non-negative integer              | unsigned int                      |
++-----------------------------------+-----------------------------------+
+| ID                                | std::string                       |
 +-----------------------------------+-----------------------------------+
 | IDREF                             | std::string                       |
 +-----------------------------------+-----------------------------------+
