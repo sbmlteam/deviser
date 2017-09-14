@@ -17,6 +17,10 @@ a package being defined within Deviser Edit.
 +--------------+---------------------+--------------------------------------------+
 |  Warning     | :ref:`pkg-offset`   | Package: Offset should end with 00000.     |
 +--------------+---------------------+--------------------------------------------+
+|  Error       | :ref:`attributename`| The attribute 'foo_name' of 'foo_classname |
+|              |                     | uses a restricted name which               |
+|              |                     | will cause compilation issues.             | 
++--------------+---------------------+--------------------------------------------+
 |  Warning     | :ref:`elementfield` | The attribute 'foo_name' of 'foo_classname'|
 |              |                     | is of type SIdRef, but has no element set. | 
 |              |                     | This is needed for validation purposes.    |

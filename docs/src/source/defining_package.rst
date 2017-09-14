@@ -399,6 +399,8 @@ both. As yet Deviser does not deal with this situation. We recommend
 that if you need to facilitate this situation you mark both attributes
 as ‘unrequired’ and adjust the generated code accordingly.
 
+.. _attributename:
+
 The attribute/element **Name** field
 *************************************
 
@@ -407,6 +409,11 @@ the rare cases where this Name is not an exact match with the name that
 will appear in the XML the ‘XML name’ field can be used to override the 
 Name supplied.
 
+Note to avoid compilation issues with libSBML SBase objects the following 
+attribute/element names should not be used:
+
+	annotation, attribute, column, cvterms, level, line, metaid,
+	model, modelhistory, notes, packageversion, prefix, sboterm, uri, version
 
 .. _typefield:
 
