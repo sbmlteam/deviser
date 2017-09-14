@@ -84,9 +84,7 @@ additional code files.
 .. figure:: ../screenshots/deviser-add-code.png
 
    The ‘requires additional code’ check box.
-   
-.. todo::
-   Replace screenshot with clearer image (use mac !)
+
 
 Note this facility allows a user to include code for classes that are
 not defined in Deviser and perhaps do not follow the usual libSBML
@@ -613,15 +611,16 @@ of another class that is a child of the defining class.
        </listOfEventAssignments>
    </event>
 
+.. _fig-core-event:
+.. figure:: ../screenshots/deviser-core-event.png
 
+    Class with child elements of type 'element' and 'lo_element'
 
-.. todo::
-   Add deviser screenshot showing a class with a child element/lo\_element as in event sbml and correct figure ref below
 
 :ref:`SBML snippet 3 above<SBML-snippet-event>` shows an Event from SBML Level 3 Core
 which has a Trigger child element. The Deviser Edit entries in the Attributes 
 and child element table for the Event class are shown 
-in Figure TBC. 
+in Figure :num:`fig-core-event`. 
 
 :ref:`Table 1<table1>`
 gives examples of the expected XML and the functions produced for type 'element'.
@@ -982,9 +981,6 @@ Example 2 - Adding a class with a containing ListOf
 
 Here we specify the FooParameter class used by the FooKineticLaw that we
 specified in :ref:`Example 1<example1>`.
-
-.. todo::
-   Update figure
 
 .. _fig-foo-param:
 .. figure:: ../screenshots/deviser-foo-param.png
@@ -1471,10 +1467,10 @@ following **Fix Errors** as some errors cannot be automatically fixed.
 Defining multiple versions of a package
 ---------------------------------------
 
-Deviser code generation neatly handles multiple versions of a package.
+.. warning::
+   Latex generation does not, as yet, deal with multiple versions.
 
-.. todo::
-    Note on latex
+Deviser code generation neatly handles multiple versions of a package.
 
 Each version must be specified completely. Using the **Add Version** button
 from the menu or toolbar will create a second version that can be populated
