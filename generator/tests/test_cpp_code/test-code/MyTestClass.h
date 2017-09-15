@@ -458,10 +458,8 @@ public:
    *
    * @param name std::string& value of the "name" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    *
    * Calling this function with @p name = @c NULL or an empty string is
    * equivalent to calling unsetName().
@@ -618,10 +616,8 @@ public:
    *
    * @param idRef std::string& value of the "idRef" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setIdRef(const std::string& idRef);
 
@@ -631,10 +627,8 @@ public:
    *
    * @param idref1 std::string& value of the "idref1" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setIdref1(const std::string& idref1);
 
@@ -644,10 +638,8 @@ public:
    *
    * @param idref2 std::string& value of the "idref2" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setIdref2(const std::string& idref2);
 
@@ -1815,9 +1807,8 @@ MyTestClass_setId(MyTestClass_t * mtc, const char * id);
  *
  * @param name const char * value of the "name" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * Calling this function with @p name = @c NULL or an empty string is
  * equivalent to calling MyTestClass_unsetName().
@@ -2034,9 +2025,8 @@ MyTestClass_setCorrectId(MyTestClass_t * mtc, const char * correctId);
  *
  * @param idRef const char * value of the "idRef" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyTestClass_t
  */
@@ -2052,9 +2042,8 @@ MyTestClass_setIdRef(MyTestClass_t * mtc, const char * idRef);
  *
  * @param idref1 const char * value of the "idref1" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyTestClass_t
  */
@@ -2070,9 +2059,8 @@ MyTestClass_setIdref1(MyTestClass_t * mtc, const char * idref1);
  *
  * @param idref2 const char * value of the "idref2" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyTestClass_t
  */

@@ -334,10 +334,8 @@ public:
    *
    * @param attStr std::string& value of the "attStr" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    *
    * Calling this function with @p attStr = @c NULL or an empty string is
    * equivalent to calling unsetAttStr().
@@ -1377,9 +1375,8 @@ ClassOneTwo_setAtt1(ClassOneTwo_t * cot, int att1);
  *
  * @param attStr const char * value of the "attStr" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * Calling this function with @p attStr = @c NULL or an empty string is
  * equivalent to calling ClassOneTwo_unsetAttStr().

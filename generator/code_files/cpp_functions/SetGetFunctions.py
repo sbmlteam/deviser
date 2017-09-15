@@ -645,17 +645,24 @@ class SetGetFunctions():
         params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
                       .format(attribute['name'], att_type,
                               ob_type))
+        single_return = self.get_single_return(attribute)
+        if single_return:
+            return_lines.append("@copydetails doc_returns_one_success_code")
+            return_lines.append('@li @{0}constant{1}{2}, '
+                                'OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.success, self.close_br))
+        else:
+            return_lines.append("@copydetails doc_returns_success_code")
+            return_lines.append('@li @{0}constant{1}{2}, '
+                                'OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.success, self.close_br))
 
-        return_lines.append("@copydetails doc_returns_success_code")
-        return_lines.append('@li @{0}constant{1}{2}, '
-                            'OperationReturnValues_'
-                            't{3}'.format(self.language, self.open_br,
-                                          self.success, self.close_br))
-
-        return_lines.append('@li @{0}constant{1}{2},'
-                            ' OperationReturnValues_'
-                            't{3}'.format(self.language, self.open_br,
-                                          self.invalid_att, self.close_br))
+            return_lines.append('@li @{0}constant{1}{2},'
+                                ' OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.invalid_att, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -730,6 +737,25 @@ class SetGetFunctions():
                      'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    # function to distinquish between single return options
+    def get_single_return(self, attribute):
+        single_return = True
+        if attribute['type'] == 'SId':
+            single_return = False
+        elif attribute['type'] == 'SIdRef':
+            single_return = False
+        elif attribute['type'] == 'UnitSId' \
+                or attribute['type'] == 'UnitSIdRef':
+            single_return = False
+        elif attribute['type'] == 'enum':
+            single_return = False
+        elif query.has_is_set_member(attribute):
+            single_return = False
+        elif attribute['type'] == 'element':
+            single_return = False
+        return single_return
+
 
     # function to write set functions
     def write_set_string_for_enum(self, is_attribute, index):

@@ -278,10 +278,8 @@ public:
    *
    * @param str std::string& value of the "str" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    *
    * Calling this function with @p str = @c NULL or an empty string is
    * equivalent to calling unsetStr().
@@ -1490,9 +1488,8 @@ Fred_setNum(Fred_t * f, int num);
  *
  * @param str const char * value of the "str" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * Calling this function with @p str = @c NULL or an empty string is equivalent
  * to calling Fred_unsetStr().

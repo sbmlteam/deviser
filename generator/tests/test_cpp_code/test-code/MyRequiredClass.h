@@ -746,10 +746,8 @@ public:
    *
    * @param name std::string& value of the "name" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    *
    * Calling this function with @p name = @c NULL or an empty string is
    * equivalent to calling unsetName().
@@ -945,10 +943,8 @@ public:
    *
    * @param metaid std::string& value of the "metaid" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setMetaid(const std::string& metaid);
 
@@ -958,10 +954,8 @@ public:
    *
    * @param metaid1 std::string& value of the "metaid1" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setMetaid1(const std::string& metaid1);
 
@@ -985,10 +979,8 @@ public:
    * @param metaidref1 std::string& value of the "metaidref1" attribute to be
    * set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setMetaidref1(const std::string& metaidref1);
 
@@ -999,10 +991,8 @@ public:
    * @param notmetaid std::string& value of the "notmetaid" attribute to be
    * set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setNotmetaid(const std::string& notmetaid);
 
@@ -1013,10 +1003,8 @@ public:
    * @param vectorDouble std::vector<double> value of the "vectorDouble"
    * attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setVectorDouble(const std::vector<double>& vectorDouble);
 
@@ -1041,10 +1029,8 @@ public:
    * @param vectorDouble1 std::vector<double> value of the "vectorDouble1"
    * attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setVectorDouble1(const std::vector<double>& vectorDouble1);
 
@@ -1069,10 +1055,8 @@ public:
    * @param vectorInt std::vector<int> value of the "vectorInt" attribute to be
    * set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setVectorInt(const std::vector<int>& vectorInt);
 
@@ -1096,10 +1080,8 @@ public:
    * @param vectorInt1 std::vector<int> value of the "vectorInt1" attribute to
    * be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    */
   int setVectorInt1(const std::vector<int>& vectorInt1);
 
@@ -2667,9 +2649,8 @@ MyRequiredClass_setId(MyRequiredClass_t * mrc, const char * id);
  *
  * @param name const char * value of the "name" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * Calling this function with @p name = @c NULL or an empty string is
  * equivalent to calling MyRequiredClass_unsetName().
@@ -2940,9 +2921,8 @@ MyRequiredClass_setPosint1(MyRequiredClass_t * mrc, unsigned int posint1);
  *
  * @param metaid const char * value of the "metaid" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyRequiredClass_t
  */
@@ -2958,9 +2938,8 @@ MyRequiredClass_setMetaid(MyRequiredClass_t * mrc, const char * metaid);
  *
  * @param metaid1 const char * value of the "metaid1" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyRequiredClass_t
  */
@@ -2995,9 +2974,8 @@ MyRequiredClass_setNum4(MyRequiredClass_t * mrc, int num4);
  * @param metaidref1 const char * value of the "metaidref1" attribute to be
  * set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyRequiredClass_t
  */
@@ -3014,9 +2992,8 @@ MyRequiredClass_setMetaidref1(MyRequiredClass_t * mrc,
  *
  * @param notmetaid const char * value of the "notmetaid" attribute to be set.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
  * @memberof MyRequiredClass_t
  */

@@ -200,10 +200,8 @@ public:
    * @param string_plugin_att std::string& value of the "string_plugin_att"
    * attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
    *
    * Calling this function with @p string_plugin_att = @c NULL or an empty
    * string is equivalent to calling unsetString_plugin_att().
