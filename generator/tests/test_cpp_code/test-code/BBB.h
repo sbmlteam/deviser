@@ -199,7 +199,14 @@ public:
    *
    * @return the nth Another in the ListOfAnothers within this BBB.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* getAnother(unsigned int n);
 
@@ -212,7 +219,14 @@ public:
    *
    * @return the nth Another in the ListOfAnothers within this BBB.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   const Another* getAnother(unsigned int n) const;
 
@@ -226,8 +240,14 @@ public:
    * @return the Another in the ListOfAnothers within this BBB with the given
    * id or NULL if no such Another exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
    * @see getAnother(unsigned int n)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* getAnother(const std::string& sid);
 
@@ -241,8 +261,14 @@ public:
    * @return the Another in the ListOfAnothers within this BBB with the given
    * id or NULL if no such Another exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
    * @see getAnother(unsigned int n)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   const Another* getAnother(const std::string& sid) const;
 
@@ -259,6 +285,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   int addAnother(const Another* a);
 
@@ -267,6 +298,14 @@ public:
    * Get the number of Another objects in this BBB.
    *
    * @return the number of Another objects in this BBB.
+   *
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   unsigned int getNumAnothers() const;
 
@@ -277,7 +316,14 @@ public:
    *
    * @return a new Another object instance.
    *
-   * @see addAnother(const Another* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* createAnother();
 
@@ -289,10 +335,14 @@ public:
    *
    * @return a pointer to the nth Another in this BBB.
    *
-   * @see getNumAnothers
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
    */
   Another* removeAnother(unsigned int n);
 
@@ -306,8 +356,14 @@ public:
    * @return the Another in this BBB based on the identifier or NULL if no such
    * Another exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(unsigned int n)
    */
   Another* removeAnother(const std::string& sid);
 
@@ -1088,6 +1144,8 @@ BBB_getListOfAnothers(BBB_t* bbb);
  *
  * @return the nth Another_t in the ListOfAnothers within this BBB.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
@@ -1105,6 +1163,8 @@ BBB_getAnother(BBB_t* bbb, unsigned int n);
  *
  * @return the Another_t in the ListOfAnothers within this BBB with the given
  * id or NULL if no such Another_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof BBB_t
  */
@@ -1153,6 +1213,8 @@ BBB_getNumAnothers(BBB_t* bbb);
  *
  * @return a new Another_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
@@ -1168,6 +1230,8 @@ BBB_createAnother(BBB_t* bbb);
  * @param n an unsigned int representing the index of the Another_t to remove.
  *
  * @return a pointer to the nth Another_t in this BBB_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof BBB_t
  */
@@ -1186,6 +1250,8 @@ BBB_removeAnother(BBB_t* bbb, unsigned int n);
  *
  * @return the Another_t in this BBB_t based on the identifier or NULL if no
  * such Another_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof BBB_t
  */

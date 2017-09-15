@@ -137,7 +137,14 @@ public:
    *
    * @return the nth SampledField in this ListOfSampledFields.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual SampledField* get(unsigned int n);
 
@@ -150,7 +157,14 @@ public:
    *
    * @return the nth SampledField in this ListOfSampledFields.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const SampledField* get(unsigned int n) const;
 
@@ -164,7 +178,14 @@ public:
    * @return the SampledField in this ListOfSampledFields with the given id or
    * NULL if no such SampledField exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual SampledField* get(const std::string& sid);
 
@@ -178,7 +199,14 @@ public:
    * @return the SampledField in this ListOfSampledFields with the given id or
    * NULL if no such SampledField exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const SampledField* get(const std::string& sid) const;
 
@@ -192,10 +220,14 @@ public:
    *
    * @return a pointer to the nth SampledField in this ListOfSampledFields.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
    */
   virtual SampledField* remove(unsigned int n);
 
@@ -210,8 +242,14 @@ public:
    * @return the SampledField in this ListOfSampledFields based on the
    * identifier or NULL if no such SampledField exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(unsigned int n)
    */
   virtual SampledField* remove(const std::string& sid);
 
@@ -228,6 +266,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addSampledField(const SampledField* sf);
 
@@ -236,6 +279,14 @@ public:
    * Get the number of SampledField objects in this ListOfSampledFields.
    *
    * @return the number of SampledField objects in this ListOfSampledFields.
+   *
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see createSampledField()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumSampledFields() const;
 
@@ -246,7 +297,14 @@ public:
    *
    * @return a new SampledField object instance.
    *
-   * @see addSampledField(const SampledField* sf)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSampledField(const SampledField* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSampledFields()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   SampledField* createSampledField();
 
@@ -366,6 +424,8 @@ BEGIN_C_DECLS
  *
  * @return the nth SampledField_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
@@ -383,6 +443,8 @@ ListOfSampledFields_getSampledField(ListOf_t* lo, unsigned int n);
  *
  * @return the SampledField_t in this ListOf_t with the given id or NULL if no
  * such SampledField_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ListOfSampledFields_t
  */
@@ -402,6 +464,8 @@ ListOfSampledFields_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth SampledField_t in this ListOf_t.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ListOfSampledFields_t
  */
 LIBSBML_EXTERN
@@ -420,6 +484,8 @@ ListOfSampledFields_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the SampledField_t in this ListOf_t based on the identifier or NULL
  * if no such SampledField_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfSampledFields_t
  */

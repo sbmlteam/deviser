@@ -135,7 +135,14 @@ public:
    *
    * @return the nth ClassTwo in this ListOfClassTwos.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual ClassTwo* get(unsigned int n);
 
@@ -148,7 +155,14 @@ public:
    *
    * @return the nth ClassTwo in this ListOfClassTwos.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const ClassTwo* get(unsigned int n) const;
 
@@ -162,7 +176,14 @@ public:
    * @return the ClassTwo in this ListOfClassTwos with the given id or NULL if
    * no such ClassTwo exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual ClassTwo* get(const std::string& sid);
 
@@ -176,7 +197,14 @@ public:
    * @return the ClassTwo in this ListOfClassTwos with the given id or NULL if
    * no such ClassTwo exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const ClassTwo* get(const std::string& sid) const;
 
@@ -189,10 +217,14 @@ public:
    *
    * @return a pointer to the nth ClassTwo in this ListOfClassTwos.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
    */
   virtual ClassTwo* remove(unsigned int n);
 
@@ -206,8 +238,14 @@ public:
    * @return the ClassTwo in this ListOfClassTwos based on the identifier or
    * NULL if no such ClassTwo exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(unsigned int n)
    */
   virtual ClassTwo* remove(const std::string& sid);
 
@@ -224,6 +262,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addClassTwo(const ClassTwo* ct);
 
@@ -232,6 +275,14 @@ public:
    * Get the number of ClassTwo objects in this ListOfClassTwos.
    *
    * @return the number of ClassTwo objects in this ListOfClassTwos.
+   *
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see createClassTwo()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumClassTwos() const;
 
@@ -242,7 +293,14 @@ public:
    *
    * @return a new ClassTwo object instance.
    *
-   * @see addClassTwo(const ClassTwo* ct)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addClassTwo(const ClassTwo* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumClassTwos()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   ClassTwo* createClassTwo();
 
@@ -361,6 +419,8 @@ BEGIN_C_DECLS
  *
  * @return the nth ClassTwo_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
@@ -379,6 +439,8 @@ ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n);
  * @return the ClassTwo_t in this ListOf_t with the given id or NULL if no such
  * ClassTwo_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfClassTwos_t
  */
 LIBSBML_EXTERN
@@ -394,6 +456,8 @@ ListOfClassTwos_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the ClassTwo_t to remove.
  *
  * @return a pointer to the nth ClassTwo_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfClassTwos_t
  */
@@ -412,6 +476,8 @@ ListOfClassTwos_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the ClassTwo_t in this ListOf_t based on the identifier or NULL if
  * no such ClassTwo_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfClassTwos_t
  */

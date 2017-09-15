@@ -575,7 +575,14 @@ public:
    *
    * @return the nth OtherLO in the ListOfOtherLOs within this Fred.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOtherLO(const OtherLO* object)
+   * @see createOtherLO()
+   * @see getOtherLO(const std::string& sid)
    * @see getNumOtherLOs()
+   * @see removeOtherLO(const std::string& sid)
+   * @see removeOtherLO(unsigned int n)
    */
   OtherLO* getOtherLO(unsigned int n);
 
@@ -588,7 +595,14 @@ public:
    *
    * @return the nth OtherLO in the ListOfOtherLOs within this Fred.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOtherLO(const OtherLO* object)
+   * @see createOtherLO()
+   * @see getOtherLO(const std::string& sid)
    * @see getNumOtherLOs()
+   * @see removeOtherLO(const std::string& sid)
+   * @see removeOtherLO(unsigned int n)
    */
   const OtherLO* getOtherLO(unsigned int n) const;
 
@@ -605,6 +619,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createOtherLO()
+   * @see getOtherLO(const std::string& sid)
+   * @see getOtherLO(unsigned int n)
+   * @see getNumOtherLOs()
+   * @see removeOtherLO(const std::string& sid)
+   * @see removeOtherLO(unsigned int n)
    */
   int addOtherLO(const OtherLO* olo);
 
@@ -613,6 +632,14 @@ public:
    * Get the number of OtherLO objects in this Fred.
    *
    * @return the number of OtherLO objects in this Fred.
+   *
+   *
+   * @see addOtherLO(const OtherLO* object)
+   * @see createOtherLO()
+   * @see getOtherLO(const std::string& sid)
+   * @see getOtherLO(unsigned int n)
+   * @see removeOtherLO(const std::string& sid)
+   * @see removeOtherLO(unsigned int n)
    */
   unsigned int getNumOtherLOs() const;
 
@@ -623,7 +650,14 @@ public:
    *
    * @return a new OtherLO object instance.
    *
-   * @see addOtherLO(const OtherLO* olo)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOtherLO(const OtherLO* object)
+   * @see getOtherLO(const std::string& sid)
+   * @see getOtherLO(unsigned int n)
+   * @see getNumOtherLOs()
+   * @see removeOtherLO(const std::string& sid)
+   * @see removeOtherLO(unsigned int n)
    */
   OtherLO* createOtherLO();
 
@@ -635,10 +669,14 @@ public:
    *
    * @return a pointer to the nth OtherLO in this Fred.
    *
-   * @see getNumOtherLOs
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addOtherLO(const OtherLO* object)
+   * @see createOtherLO()
+   * @see getOtherLO(const std::string& sid)
+   * @see getOtherLO(unsigned int n)
+   * @see getNumOtherLOs()
+   * @see removeOtherLO(const std::string& sid)
    */
   OtherLO* removeOtherLO(unsigned int n);
 
@@ -1931,6 +1969,8 @@ Fred_getListOfOtherLOs(Fred_t* f);
  *
  * @return the nth OtherLO_t in the ListOfOtherLOs within this Fred.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
@@ -1978,6 +2018,8 @@ Fred_getNumOtherLOs(Fred_t* f);
  *
  * @return a new OtherLO_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
@@ -1993,6 +2035,8 @@ Fred_createOtherLO(Fred_t* f);
  * @param n an unsigned int representing the index of the OtherLO_t to remove.
  *
  * @return a pointer to the nth OtherLO_t in this Fred_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Fred_t
  */

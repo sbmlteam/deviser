@@ -134,7 +134,14 @@ public:
    *
    * @return the nth Child in this ListOfChildren.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(const std::string& sid)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Child* get(unsigned int n);
 
@@ -146,7 +153,14 @@ public:
    *
    * @return the nth Child in this ListOfChildren.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(const std::string& sid)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Child* get(unsigned int n) const;
 
@@ -159,7 +173,14 @@ public:
    * @return the Child in this ListOfChildren with the given id or NULL if no
    * such Child exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Child* get(const std::string& sid);
 
@@ -172,7 +193,14 @@ public:
    * @return the Child in this ListOfChildren with the given id or NULL if no
    * such Child exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Child* get(const std::string& sid) const;
 
@@ -185,10 +213,14 @@ public:
    *
    * @return a pointer to the nth Child in this ListOfChildren.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
    */
   virtual Child* remove(unsigned int n);
 
@@ -202,8 +234,14 @@ public:
    * @return the Child in this ListOfChildren based on the identifier or NULL
    * if no such Child exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(unsigned int n)
    */
   virtual Child* remove(const std::string& sid);
 
@@ -220,6 +258,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createChild()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addChild(const Child* c);
 
@@ -228,6 +271,14 @@ public:
    * Get the number of Child objects in this ListOfChildren.
    *
    * @return the number of Child objects in this ListOfChildren.
+   *
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumChildren() const;
 
@@ -238,7 +289,14 @@ public:
    *
    * @return a new Child object instance.
    *
-   * @see addChild(const Child* c)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumChildren()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Child* createChild();
 
@@ -356,6 +414,8 @@ BEGIN_C_DECLS
  *
  * @return the nth Child_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
@@ -373,6 +433,8 @@ ListOfChildren_getChild(ListOf_t* lo, unsigned int n);
  * @return the Child_t in this ListOf_t with the given id or NULL if no such
  * Child_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfChildren_t
  */
 LIBSBML_EXTERN
@@ -388,6 +450,8 @@ ListOfChildren_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the Child_t to remove.
  *
  * @return a pointer to the nth Child_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfChildren_t
  */
@@ -406,6 +470,8 @@ ListOfChildren_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Child_t in this ListOf_t based on the identifier or NULL if no
  * such Child_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfChildren_t
  */

@@ -319,7 +319,14 @@ public:
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
    * Objective.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
    * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   FluxObjective* getFluxObjective(unsigned int n);
 
@@ -333,7 +340,14 @@ public:
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
    * Objective.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
    * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   const FluxObjective* getFluxObjective(unsigned int n) const;
 
@@ -347,8 +361,14 @@ public:
    * @return the FluxObjective in the ListOfFluxObjectives within this
    * Objective with the given id or NULL if no such FluxObjective exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
    * @see getFluxObjective(unsigned int n)
    * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   FluxObjective* getFluxObjective(const std::string& sid);
 
@@ -362,8 +382,14 @@ public:
    * @return the FluxObjective in the ListOfFluxObjectives within this
    * Objective with the given id or NULL if no such FluxObjective exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
    * @see getFluxObjective(unsigned int n)
    * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   const FluxObjective* getFluxObjective(const std::string& sid) const;
 
@@ -411,6 +437,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
+   * @see getFluxObjective(unsigned int n)
+   * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   int addFluxObjective(const FluxObjective* fo);
 
@@ -419,6 +450,14 @@ public:
    * Get the number of FluxObjective objects in this Objective.
    *
    * @return the number of FluxObjective objects in this Objective.
+   *
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
+   * @see getFluxObjective(unsigned int n)
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   unsigned int getNumFluxObjectives() const;
 
@@ -429,7 +468,14 @@ public:
    *
    * @return a new FluxObjective object instance.
    *
-   * @see addFluxObjective(const FluxObjective* fo)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see getFluxObjective(const std::string& sid)
+   * @see getFluxObjective(unsigned int n)
+   * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
+   * @see removeFluxObjective(unsigned int n)
    */
   FluxObjective* createFluxObjective();
 
@@ -443,10 +489,14 @@ public:
    *
    * @return a pointer to the nth FluxObjective in this Objective.
    *
-   * @see getNumFluxObjectives
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
+   * @see getFluxObjective(unsigned int n)
+   * @see getNumFluxObjectives()
+   * @see removeFluxObjective(const std::string& sid)
    */
   FluxObjective* removeFluxObjective(unsigned int n);
 
@@ -461,8 +511,14 @@ public:
    * @return the FluxObjective in this Objective based on the identifier or
    * NULL if no such FluxObjective exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFluxObjective(const FluxObjective* object)
+   * @see createFluxObjective()
+   * @see getFluxObjective(const std::string& sid)
+   * @see getFluxObjective(unsigned int n)
+   * @see getNumFluxObjectives()
+   * @see removeFluxObjective(unsigned int n)
    */
   FluxObjective* removeFluxObjective(const std::string& sid);
 
@@ -1436,6 +1492,8 @@ Objective_getListOfFluxObjectives(Objective_t* o);
  * @return the nth FluxObjective_t in the ListOfFluxObjectives within this
  * Objective.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
@@ -1453,6 +1511,8 @@ Objective_getFluxObjective(Objective_t* o, unsigned int n);
  *
  * @return the FluxObjective_t in the ListOfFluxObjectives within this
  * Objective with the given id or NULL if no such FluxObjective_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Objective_t
  */
@@ -1524,6 +1584,8 @@ Objective_getNumFluxObjectives(Objective_t* o);
  *
  * @return a new FluxObjective_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
@@ -1541,6 +1603,8 @@ Objective_createFluxObjective(Objective_t* o);
  * remove.
  *
  * @return a pointer to the nth FluxObjective_t in this Objective_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Objective_t
  */
@@ -1560,6 +1624,8 @@ Objective_removeFluxObjective(Objective_t* o, unsigned int n);
  *
  * @return the FluxObjective_t in this Objective_t based on the identifier or
  * NULL if no such FluxObjective_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Objective_t
  */

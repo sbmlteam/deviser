@@ -142,7 +142,14 @@ public:
    *
    * @return the nth CSGNode in this ListOfCSGNodes.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual CSGNode* get(unsigned int n);
 
@@ -155,7 +162,14 @@ public:
    *
    * @return the nth CSGNode in this ListOfCSGNodes.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const CSGNode* get(unsigned int n) const;
 
@@ -169,7 +183,14 @@ public:
    * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
    * such CSGNode exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual CSGNode* get(const std::string& sid);
 
@@ -183,7 +204,14 @@ public:
    * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
    * such CSGNode exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const CSGNode* get(const std::string& sid) const;
 
@@ -196,10 +224,14 @@ public:
    *
    * @return a pointer to the nth CSGNode in this ListOfCSGNodes.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
    */
   virtual CSGNode* remove(unsigned int n);
 
@@ -213,8 +245,14 @@ public:
    * @return the CSGNode in this ListOfCSGNodes based on the identifier or NULL
    * if no such CSGNode exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(unsigned int n)
    */
   virtual CSGNode* remove(const std::string& sid);
 
@@ -231,6 +269,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addCSGNode(const CSGNode* csgn);
 
@@ -239,6 +282,14 @@ public:
    * Get the number of CSGNode objects in this ListOfCSGNodes.
    *
    * @return the number of CSGNode objects in this ListOfCSGNodes.
+   *
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see createCSGNode()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumCSGNodes() const;
 
@@ -249,7 +300,14 @@ public:
    *
    * @return a new CSGPrimitive object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGPrimitive* createCSGPrimitive();
 
@@ -260,7 +318,14 @@ public:
    *
    * @return a new CSGTranslation object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGTranslation* createCSGTranslation();
 
@@ -271,7 +336,14 @@ public:
    *
    * @return a new CSGRotation object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGRotation* createCSGRotation();
 
@@ -282,7 +354,14 @@ public:
    *
    * @return a new CSGScale object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGScale* createCSGScale();
 
@@ -294,7 +373,14 @@ public:
    *
    * @return a new CSGHomogeneousTransformation object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGHomogeneousTransformation* createCSGHomogeneousTransformation();
 
@@ -305,7 +391,14 @@ public:
    *
    * @return a new CSGSetOperator object instance.
    *
-   * @see addCSGNode(const CSGNode* csgn)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGNode(const CSGNode* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCSGNodes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGSetOperator* createCSGSetOperator();
 
@@ -435,6 +528,8 @@ BEGIN_C_DECLS
  *
  * @return the nth CSGNode_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
@@ -453,6 +548,8 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
  * @return the CSGNode_t in this ListOf_t with the given id or NULL if no such
  * CSGNode_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCSGNodes_t
  */
 LIBSBML_EXTERN
@@ -468,6 +565,8 @@ ListOfCSGNodes_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the CSGNode_t to remove.
  *
  * @return a pointer to the nth CSGNode_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCSGNodes_t
  */
@@ -486,6 +585,8 @@ ListOfCSGNodes_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the CSGNode_t in this ListOf_t based on the identifier or NULL if no
  * such CSGNode_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCSGNodes_t
  */

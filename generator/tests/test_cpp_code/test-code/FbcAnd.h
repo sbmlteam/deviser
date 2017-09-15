@@ -159,7 +159,14 @@ public:
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
    * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   Association* getAssociation(unsigned int n);
 
@@ -172,7 +179,14 @@ public:
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
    * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   const Association* getAssociation(unsigned int n) const;
 
@@ -189,6 +203,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   int addAssociation(const Association* a);
 
@@ -197,6 +216,14 @@ public:
    * Get the number of Association objects in this FbcAnd.
    *
    * @return the number of Association objects in this FbcAnd.
+   *
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   unsigned int getNumAssociations() const;
 
@@ -207,7 +234,14 @@ public:
    *
    * @return a new FbcAnd object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   FbcAnd* createAnd();
 
@@ -218,7 +252,14 @@ public:
    *
    * @return a new FbcOr object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   FbcOr* createOr();
 
@@ -229,7 +270,14 @@ public:
    *
    * @return a new GeneProductRef object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   GeneProductRef* createGeneProductRef();
 
@@ -242,10 +290,14 @@ public:
    *
    * @return a pointer to the nth Association in this FbcAnd.
    *
-   * @see getNumAssociations
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
    */
   Association* removeAssociation(unsigned int n);
 
@@ -956,6 +1008,8 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
  *
  * @return the nth Association_t in the ListOfAssociations within this FbcAnd.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof FbcAnd_t
  */
 LIBSBML_EXTERN
@@ -1003,6 +1057,8 @@ FbcAnd_getNumAssociations(FbcAnd_t* fa);
  *
  * @return a new FbcAnd_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof FbcAnd_t
  */
 LIBSBML_EXTERN
@@ -1017,6 +1073,8 @@ FbcAnd_createAnd(FbcAnd_t* fa);
  * @param fa the FbcAnd_t structure to which the FbcOr_t should be added.
  *
  * @return a new FbcOr_t object instance.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof FbcAnd_t
  */
@@ -1033,6 +1091,8 @@ FbcAnd_createOr(FbcAnd_t* fa);
  * added.
  *
  * @return a new GeneProductRef_t object instance.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof FbcAnd_t
  */
@@ -1051,6 +1111,8 @@ FbcAnd_createGeneProductRef(FbcAnd_t* fa);
  * remove.
  *
  * @return a pointer to the nth Association_t in this FbcAnd_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof FbcAnd_t
  */

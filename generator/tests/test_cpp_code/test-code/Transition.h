@@ -245,7 +245,14 @@ public:
    *
    * @return the nth Input in the ListOfInputs within this Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
    * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   Input* getInput(unsigned int n);
 
@@ -257,7 +264,14 @@ public:
    *
    * @return the nth Input in the ListOfInputs within this Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
    * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   const Input* getInput(unsigned int n) const;
 
@@ -270,8 +284,14 @@ public:
    * @return the Input in the ListOfInputs within this Transition with the
    * given id or NULL if no such Input exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
    * @see getInput(unsigned int n)
    * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   Input* getInput(const std::string& sid);
 
@@ -284,8 +304,14 @@ public:
    * @return the Input in the ListOfInputs within this Transition with the
    * given id or NULL if no such Input exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
    * @see getInput(unsigned int n)
    * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   const Input* getInput(const std::string& sid) const;
 
@@ -332,6 +358,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   int addInput(const Input* i);
 
@@ -340,6 +371,14 @@ public:
    * Get the number of Input objects in this Transition.
    *
    * @return the number of Input objects in this Transition.
+   *
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   unsigned int getNumInputs() const;
 
@@ -350,7 +389,14 @@ public:
    *
    * @return a new Input object instance.
    *
-   * @see addInput(const Input* i)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   Input* createInput();
 
@@ -362,10 +408,14 @@ public:
    *
    * @return a pointer to the nth Input in this Transition.
    *
-   * @see getNumInputs
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
    */
   Input* removeInput(unsigned int n);
 
@@ -379,8 +429,14 @@ public:
    * @return the Input in this Transition based on the identifier or NULL if no
    * such Input exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(unsigned int n)
    */
   Input* removeInput(const std::string& sid);
 
@@ -412,7 +468,14 @@ public:
    *
    * @return the nth Output in the ListOfOutputs within this Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
    * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   Output* getOutput(unsigned int n);
 
@@ -424,7 +487,14 @@ public:
    *
    * @return the nth Output in the ListOfOutputs within this Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
    * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   const Output* getOutput(unsigned int n) const;
 
@@ -437,8 +507,14 @@ public:
    * @return the Output in the ListOfOutputs within this Transition with the
    * given id or NULL if no such Output exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
    * @see getOutput(unsigned int n)
    * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   Output* getOutput(const std::string& sid);
 
@@ -451,8 +527,14 @@ public:
    * @return the Output in the ListOfOutputs within this Transition with the
    * given id or NULL if no such Output exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
    * @see getOutput(unsigned int n)
    * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   const Output* getOutput(const std::string& sid) const;
 
@@ -499,6 +581,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   int addOutput(const Output* o);
 
@@ -507,6 +594,14 @@ public:
    * Get the number of Output objects in this Transition.
    *
    * @return the number of Output objects in this Transition.
+   *
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   unsigned int getNumOutputs() const;
 
@@ -517,7 +612,14 @@ public:
    *
    * @return a new Output object instance.
    *
-   * @see addOutput(const Output* o)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   Output* createOutput();
 
@@ -529,10 +631,14 @@ public:
    *
    * @return a pointer to the nth Output in this Transition.
    *
-   * @see getNumOutputs
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
    */
   Output* removeOutput(unsigned int n);
 
@@ -546,8 +652,14 @@ public:
    * @return the Output in this Transition based on the identifier or NULL if
    * no such Output exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(unsigned int n)
    */
   Output* removeOutput(const std::string& sid);
 
@@ -581,7 +693,14 @@ public:
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
    * Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
    * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   FunctionTerm* getFunctionTerm(unsigned int n);
 
@@ -595,7 +714,14 @@ public:
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
    * Transition.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
    * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   const FunctionTerm* getFunctionTerm(unsigned int n) const;
 
@@ -612,6 +738,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   int addFunctionTerm(const FunctionTerm* ft);
 
@@ -620,6 +751,14 @@ public:
    * Get the number of FunctionTerm objects in this Transition.
    *
    * @return the number of FunctionTerm objects in this Transition.
+   *
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   unsigned int getNumFunctionTerms() const;
 
@@ -630,7 +769,14 @@ public:
    *
    * @return a new FunctionTerm object instance.
    *
-   * @see addFunctionTerm(const FunctionTerm* ft)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   FunctionTerm* createFunctionTerm();
 
@@ -644,10 +790,14 @@ public:
    *
    * @return a pointer to the nth FunctionTerm in this Transition.
    *
-   * @see getNumFunctionTerms
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
    */
   FunctionTerm* removeFunctionTerm(unsigned int n);
 
@@ -1517,6 +1667,8 @@ Transition_getListOfInputs(Transition_t* t);
  *
  * @return the nth Input_t in the ListOfInputs within this Transition.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1533,6 +1685,8 @@ Transition_getInput(Transition_t* t, unsigned int n);
  *
  * @return the Input_t in the ListOfInputs within this Transition with the
  * given id or NULL if no such Input_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1602,6 +1756,8 @@ Transition_getNumInputs(Transition_t* t);
  *
  * @return a new Input_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1617,6 +1773,8 @@ Transition_createInput(Transition_t* t);
  * @param n an unsigned int representing the index of the Input_t to remove.
  *
  * @return a pointer to the nth Input_t in this Transition_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1635,6 +1793,8 @@ Transition_removeInput(Transition_t* t, unsigned int n);
  *
  * @return the Input_t in this Transition_t based on the identifier or NULL if
  * no such Input_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1668,6 +1828,8 @@ Transition_getListOfOutputs(Transition_t* t);
  *
  * @return the nth Output_t in the ListOfOutputs within this Transition.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1684,6 +1846,8 @@ Transition_getOutput(Transition_t* t, unsigned int n);
  *
  * @return the Output_t in the ListOfOutputs within this Transition with the
  * given id or NULL if no such Output_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1753,6 +1917,8 @@ Transition_getNumOutputs(Transition_t* t);
  *
  * @return a new Output_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1768,6 +1934,8 @@ Transition_createOutput(Transition_t* t);
  * @param n an unsigned int representing the index of the Output_t to remove.
  *
  * @return a pointer to the nth Output_t in this Transition_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1786,6 +1954,8 @@ Transition_removeOutput(Transition_t* t, unsigned int n);
  *
  * @return the Output_t in this Transition_t based on the identifier or NULL if
  * no such Output_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1821,6 +1991,8 @@ Transition_getListOfFunctionTerms(Transition_t* t);
  *
  * @return the nth FunctionTerm_t in the ListOfFunctionTerms within this
  * Transition.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1871,6 +2043,8 @@ Transition_getNumFunctionTerms(Transition_t* t);
  *
  * @return a new FunctionTerm_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1888,6 +2062,8 @@ Transition_createFunctionTerm(Transition_t* t);
  * remove.
  *
  * @return a pointer to the nth FunctionTerm_t in this Transition_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */

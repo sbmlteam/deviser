@@ -159,7 +159,14 @@ public:
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
+   * @see getFred(const std::string& sid)
    * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   Fred* getFred(unsigned int n);
 
@@ -171,7 +178,14 @@ public:
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
+   * @see getFred(const std::string& sid)
    * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   const Fred* getFred(unsigned int n) const;
 
@@ -184,8 +198,14 @@ public:
    * @return the Fred in the ListOfFreds within this ContainerX with the given
    * id or NULL if no such Fred exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
    * @see getFred(unsigned int n)
    * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   Fred* getFred(const std::string& sid);
 
@@ -198,8 +218,14 @@ public:
    * @return the Fred in the ListOfFreds within this ContainerX with the given
    * id or NULL if no such Fred exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
    * @see getFred(unsigned int n)
    * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   const Fred* getFred(const std::string& sid) const;
 
@@ -216,6 +242,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createFred()
+   * @see getFred(const std::string& sid)
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   int addFred(const Fred* f);
 
@@ -224,6 +255,14 @@ public:
    * Get the number of Fred objects in this ContainerX.
    *
    * @return the number of Fred objects in this ContainerX.
+   *
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
+   * @see getFred(const std::string& sid)
+   * @see getFred(unsigned int n)
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   unsigned int getNumFreds() const;
 
@@ -234,7 +273,14 @@ public:
    *
    * @return a new Fred object instance.
    *
-   * @see addFred(const Fred* f)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see getFred(const std::string& sid)
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
+   * @see removeFred(unsigned int n)
    */
   Fred* createFred();
 
@@ -246,10 +292,14 @@ public:
    *
    * @return a pointer to the nth Fred in this ContainerX.
    *
-   * @see getNumFreds
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addFred(const Fred* object)
+   * @see createFred()
+   * @see getFred(const std::string& sid)
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   * @see removeFred(const std::string& sid)
    */
   Fred* removeFred(unsigned int n);
 
@@ -263,8 +313,14 @@ public:
    * @return the Fred in this ContainerX based on the identifier or NULL if no
    * such Fred exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFred(const Fred* object)
+   * @see createFred()
+   * @see getFred(const std::string& sid)
+   * @see getFred(unsigned int n)
+   * @see getNumFreds()
+   * @see removeFred(unsigned int n)
    */
   Fred* removeFred(const std::string& sid);
 
@@ -887,6 +943,8 @@ ContainerX_getListOfFreds(ContainerX_t* cx);
  *
  * @return the nth Fred_t in the ListOfFreds within this ContainerX.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ContainerX_t
  */
 LIBSBML_EXTERN
@@ -903,6 +961,8 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n);
  *
  * @return the Fred_t in the ListOfFreds within this ContainerX with the given
  * id or NULL if no such Fred_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ContainerX_t
  */
@@ -951,6 +1011,8 @@ ContainerX_getNumFreds(ContainerX_t* cx);
  *
  * @return a new Fred_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ContainerX_t
  */
 LIBSBML_EXTERN
@@ -966,6 +1028,8 @@ ContainerX_createFred(ContainerX_t* cx);
  * @param n an unsigned int representing the index of the Fred_t to remove.
  *
  * @return a pointer to the nth Fred_t in this ContainerX_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ContainerX_t
  */
@@ -984,6 +1048,8 @@ ContainerX_removeFred(ContainerX_t* cx, unsigned int n);
  *
  * @return the Fred_t in this ContainerX_t based on the identifier or NULL if
  * no such Fred_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ContainerX_t
  */

@@ -188,7 +188,14 @@ public:
    *
    * @return the nth Objective in this ListOfObjectives.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Objective* get(unsigned int n);
 
@@ -201,7 +208,14 @@ public:
    *
    * @return the nth Objective in this ListOfObjectives.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Objective* get(unsigned int n) const;
 
@@ -215,7 +229,14 @@ public:
    * @return the Objective in this ListOfObjectives with the given id or NULL
    * if no such Objective exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Objective* get(const std::string& sid);
 
@@ -229,7 +250,14 @@ public:
    * @return the Objective in this ListOfObjectives with the given id or NULL
    * if no such Objective exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Objective* get(const std::string& sid) const;
 
@@ -243,10 +271,14 @@ public:
    *
    * @return a pointer to the nth Objective in this ListOfObjectives.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
    */
   virtual Objective* remove(unsigned int n);
 
@@ -261,8 +293,14 @@ public:
    * @return the Objective in this ListOfObjectives based on the identifier or
    * NULL if no such Objective exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(unsigned int n)
    */
   virtual Objective* remove(const std::string& sid);
 
@@ -279,6 +317,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addObjective(const Objective* o);
 
@@ -287,6 +330,14 @@ public:
    * Get the number of Objective objects in this ListOfObjectives.
    *
    * @return the number of Objective objects in this ListOfObjectives.
+   *
+   *
+   * @see addObjective(const Objective* object)
+   * @see createObjective()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumObjectives() const;
 
@@ -297,7 +348,14 @@ public:
    *
    * @return a new Objective object instance.
    *
-   * @see addObjective(const Objective* o)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addObjective(const Objective* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumObjectives()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Objective* createObjective();
 
@@ -576,6 +634,8 @@ ListOfObjectives_unsetActiveObjective(ListOf_t * lo);
  *
  * @return the nth Objective_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN
@@ -594,6 +654,8 @@ ListOfObjectives_getObjective(ListOf_t* lo, unsigned int n);
  * @return the Objective_t in this ListOf_t with the given id or NULL if no
  * such Objective_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN
@@ -610,6 +672,8 @@ ListOfObjectives_getById(ListOf_t* lo, const char *sid);
  * remove.
  *
  * @return a pointer to the nth Objective_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfObjectives_t
  */
@@ -629,6 +693,8 @@ ListOfObjectives_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Objective_t in this ListOf_t based on the identifier or NULL if
  * no such Objective_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfObjectives_t
  */

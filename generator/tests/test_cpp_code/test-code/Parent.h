@@ -160,7 +160,14 @@ public:
    *
    * @return the nth Child in the ListOfChildren within this Parent.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see getChild(const std::string& sid)
    * @see getNumChildren()
+   * @see removeChild(const std::string& sid)
+   * @see removeChild(unsigned int n)
    */
   Child* getChild(unsigned int n);
 
@@ -172,7 +179,14 @@ public:
    *
    * @return the nth Child in the ListOfChildren within this Parent.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see getChild(const std::string& sid)
    * @see getNumChildren()
+   * @see removeChild(const std::string& sid)
+   * @see removeChild(unsigned int n)
    */
   const Child* getChild(unsigned int n) const;
 
@@ -189,6 +203,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createChild()
+   * @see getChild(const std::string& sid)
+   * @see getChild(unsigned int n)
+   * @see getNumChildren()
+   * @see removeChild(const std::string& sid)
+   * @see removeChild(unsigned int n)
    */
   int addChild(const Child* c);
 
@@ -197,6 +216,14 @@ public:
    * Get the number of Child objects in this Parent.
    *
    * @return the number of Child objects in this Parent.
+   *
+   *
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see getChild(const std::string& sid)
+   * @see getChild(unsigned int n)
+   * @see removeChild(const std::string& sid)
+   * @see removeChild(unsigned int n)
    */
   unsigned int getNumChildren() const;
 
@@ -207,7 +234,14 @@ public:
    *
    * @return a new Child object instance.
    *
-   * @see addChild(const Child* c)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addChild(const Child* object)
+   * @see getChild(const std::string& sid)
+   * @see getChild(unsigned int n)
+   * @see getNumChildren()
+   * @see removeChild(const std::string& sid)
+   * @see removeChild(unsigned int n)
    */
   Child* createChild();
 
@@ -219,10 +253,14 @@ public:
    *
    * @return a pointer to the nth Child in this Parent.
    *
-   * @see getNumChildren
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addChild(const Child* object)
+   * @see createChild()
+   * @see getChild(const std::string& sid)
+   * @see getChild(unsigned int n)
+   * @see getNumChildren()
+   * @see removeChild(const std::string& sid)
    */
   Child* removeChild(unsigned int n);
 
@@ -254,7 +292,14 @@ public:
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSprog(const Sprog* object)
+   * @see createSprog()
+   * @see getSprog(const std::string& sid)
    * @see getNumSprogs()
+   * @see removeSprog(const std::string& sid)
+   * @see removeSprog(unsigned int n)
    */
   Sprog* getSprog(unsigned int n);
 
@@ -266,7 +311,14 @@ public:
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSprog(const Sprog* object)
+   * @see createSprog()
+   * @see getSprog(const std::string& sid)
    * @see getNumSprogs()
+   * @see removeSprog(const std::string& sid)
+   * @see removeSprog(unsigned int n)
    */
   const Sprog* getSprog(unsigned int n) const;
 
@@ -283,6 +335,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createSprog()
+   * @see getSprog(const std::string& sid)
+   * @see getSprog(unsigned int n)
+   * @see getNumSprogs()
+   * @see removeSprog(const std::string& sid)
+   * @see removeSprog(unsigned int n)
    */
   int addSprog(const Sprog* s);
 
@@ -291,6 +348,14 @@ public:
    * Get the number of Sprog objects in this Parent.
    *
    * @return the number of Sprog objects in this Parent.
+   *
+   *
+   * @see addSprog(const Sprog* object)
+   * @see createSprog()
+   * @see getSprog(const std::string& sid)
+   * @see getSprog(unsigned int n)
+   * @see removeSprog(const std::string& sid)
+   * @see removeSprog(unsigned int n)
    */
   unsigned int getNumSprogs() const;
 
@@ -301,7 +366,14 @@ public:
    *
    * @return a new Sprog object instance.
    *
-   * @see addSprog(const Sprog* s)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSprog(const Sprog* object)
+   * @see getSprog(const std::string& sid)
+   * @see getSprog(unsigned int n)
+   * @see getNumSprogs()
+   * @see removeSprog(const std::string& sid)
+   * @see removeSprog(unsigned int n)
    */
   Sprog* createSprog();
 
@@ -313,10 +385,14 @@ public:
    *
    * @return a pointer to the nth Sprog in this Parent.
    *
-   * @see getNumSprogs
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addSprog(const Sprog* object)
+   * @see createSprog()
+   * @see getSprog(const std::string& sid)
+   * @see getSprog(unsigned int n)
+   * @see getNumSprogs()
+   * @see removeSprog(const std::string& sid)
    */
   Sprog* removeSprog(unsigned int n);
 
@@ -938,6 +1014,8 @@ Parent_getListOfChildren(Parent_t* p);
  *
  * @return the nth Child_t in the ListOfChildren within this Parent.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
@@ -985,6 +1063,8 @@ Parent_getNumChildren(Parent_t* p);
  *
  * @return a new Child_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
@@ -1000,6 +1080,8 @@ Parent_createChild(Parent_t* p);
  * @param n an unsigned int representing the index of the Child_t to remove.
  *
  * @return a pointer to the nth Child_t in this Parent_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Parent_t
  */
@@ -1032,6 +1114,8 @@ Parent_getListOfSprogs(Parent_t* p);
  * @param n an unsigned int representing the index of the Sprog_t to retrieve.
  *
  * @return the nth Sprog_t in the ListOfSprogs within this Parent.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Parent_t
  */
@@ -1080,6 +1164,8 @@ Parent_getNumSprogs(Parent_t* p);
  *
  * @return a new Sprog_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
@@ -1095,6 +1181,8 @@ Parent_createSprog(Parent_t* p);
  * @param n an unsigned int representing the index of the Sprog_t to remove.
  *
  * @return a pointer to the nth Sprog_t in this Parent_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Parent_t
  */

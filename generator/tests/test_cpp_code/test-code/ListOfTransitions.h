@@ -135,7 +135,14 @@ public:
    *
    * @return the nth Transition in this ListOfTransitions.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Transition* get(unsigned int n);
 
@@ -148,7 +155,14 @@ public:
    *
    * @return the nth Transition in this ListOfTransitions.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Transition* get(unsigned int n) const;
 
@@ -162,7 +176,14 @@ public:
    * @return the Transition in this ListOfTransitions with the given id or NULL
    * if no such Transition exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Transition* get(const std::string& sid);
 
@@ -176,7 +197,14 @@ public:
    * @return the Transition in this ListOfTransitions with the given id or NULL
    * if no such Transition exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Transition* get(const std::string& sid) const;
 
@@ -190,10 +218,14 @@ public:
    *
    * @return a pointer to the nth Transition in this ListOfTransitions.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
    */
   virtual Transition* remove(unsigned int n);
 
@@ -208,8 +240,14 @@ public:
    * @return the Transition in this ListOfTransitions based on the identifier
    * or NULL if no such Transition exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(unsigned int n)
    */
   virtual Transition* remove(const std::string& sid);
 
@@ -226,6 +264,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addTransition(const Transition* t);
 
@@ -234,6 +277,14 @@ public:
    * Get the number of Transition objects in this ListOfTransitions.
    *
    * @return the number of Transition objects in this ListOfTransitions.
+   *
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumTransitions() const;
 
@@ -244,7 +295,14 @@ public:
    *
    * @return a new Transition object instance.
    *
-   * @see addTransition(const Transition* t)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumTransitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Transition* createTransition();
 
@@ -364,6 +422,8 @@ BEGIN_C_DECLS
  *
  * @return the nth Transition_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
@@ -382,6 +442,8 @@ ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
  * @return the Transition_t in this ListOf_t with the given id or NULL if no
  * such Transition_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfTransitions_t
  */
 LIBSBML_EXTERN
@@ -398,6 +460,8 @@ ListOfTransitions_getById(ListOf_t* lo, const char *sid);
  * remove.
  *
  * @return a pointer to the nth Transition_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfTransitions_t
  */
@@ -417,6 +481,8 @@ ListOfTransitions_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Transition_t in this ListOf_t based on the identifier or NULL if
  * no such Transition_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfTransitions_t
  */

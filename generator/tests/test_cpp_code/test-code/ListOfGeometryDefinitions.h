@@ -145,7 +145,14 @@ public:
    *
    * @return the nth GeometryDefinition in this ListOfGeometryDefinitions.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual GeometryDefinition* get(unsigned int n);
 
@@ -158,7 +165,14 @@ public:
    *
    * @return the nth GeometryDefinition in this ListOfGeometryDefinitions.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const GeometryDefinition* get(unsigned int n) const;
 
@@ -173,7 +187,14 @@ public:
    * @return the GeometryDefinition in this ListOfGeometryDefinitions with the
    * given id or NULL if no such GeometryDefinition exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual GeometryDefinition* get(const std::string& sid);
 
@@ -188,7 +209,14 @@ public:
    * @return the GeometryDefinition in this ListOfGeometryDefinitions with the
    * given id or NULL if no such GeometryDefinition exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const GeometryDefinition* get(const std::string& sid) const;
 
@@ -203,10 +231,14 @@ public:
    * @return a pointer to the nth GeometryDefinition in this
    * ListOfGeometryDefinitions.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
    */
   virtual GeometryDefinition* remove(unsigned int n);
 
@@ -221,8 +253,14 @@ public:
    * @return the GeometryDefinition in this ListOfGeometryDefinitions based on
    * the identifier or NULL if no such GeometryDefinition exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(unsigned int n)
    */
   virtual GeometryDefinition* remove(const std::string& sid);
 
@@ -240,6 +278,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addGeometryDefinition(const GeometryDefinition* gd);
 
@@ -250,6 +293,14 @@ public:
    *
    * @return the number of GeometryDefinition objects in this
    * ListOfGeometryDefinitions.
+   *
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumGeometryDefinitions() const;
 
@@ -261,7 +312,14 @@ public:
    *
    * @return a new AnalyticGeometry object instance.
    *
-   * @see addGeometryDefinition(const GeometryDefinition* gd)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   AnalyticGeometry* createAnalyticGeometry();
 
@@ -273,7 +331,14 @@ public:
    *
    * @return a new SampledFieldGeometry object instance.
    *
-   * @see addGeometryDefinition(const GeometryDefinition* gd)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   SampledFieldGeometry* createSampledFieldGeometry();
 
@@ -284,7 +349,14 @@ public:
    *
    * @return a new CSGeometry object instance.
    *
-   * @see addGeometryDefinition(const GeometryDefinition* gd)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CSGeometry* createCSGeometry();
 
@@ -296,7 +368,14 @@ public:
    *
    * @return a new ParametricGeometry object instance.
    *
-   * @see addGeometryDefinition(const GeometryDefinition* gd)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   ParametricGeometry* createParametricGeometry();
 
@@ -308,7 +387,14 @@ public:
    *
    * @return a new MixedGeometry object instance.
    *
-   * @see addGeometryDefinition(const GeometryDefinition* gd)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   MixedGeometry* createMixedGeometry();
 
@@ -439,6 +525,8 @@ BEGIN_C_DECLS
  *
  * @return the nth GeometryDefinition_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
@@ -456,6 +544,8 @@ ListOfGeometryDefinitions_getGeometryDefinition(ListOf_t* lo, unsigned int n);
  *
  * @return the GeometryDefinition_t in this ListOf_t with the given id or NULL
  * if no such GeometryDefinition_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ListOfGeometryDefinitions_t
  */
@@ -475,6 +565,8 @@ ListOfGeometryDefinitions_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth GeometryDefinition_t in this ListOf_t.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ListOfGeometryDefinitions_t
  */
 LIBSBML_EXTERN
@@ -493,6 +585,8 @@ ListOfGeometryDefinitions_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the GeometryDefinition_t in this ListOf_t based on the identifier or
  * NULL if no such GeometryDefinition_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfGeometryDefinitions_t
  */

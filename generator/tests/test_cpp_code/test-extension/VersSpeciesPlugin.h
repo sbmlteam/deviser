@@ -406,7 +406,14 @@ public:
    * @return the nth Another in the ListOfAnothers within this
    * VersSpeciesPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* getAnother(unsigned int n);
 
@@ -420,7 +427,14 @@ public:
    * @return the nth Another in the ListOfAnothers within this
    * VersSpeciesPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   const Another* getAnother(unsigned int n) const;
 
@@ -434,8 +448,14 @@ public:
    * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
    * with the given id or NULL if no such Another exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
    * @see getAnother(unsigned int n)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* getAnother(const std::string& sid);
 
@@ -449,8 +469,14 @@ public:
    * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
    * with the given id or NULL if no such Another exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
    * @see getAnother(unsigned int n)
    * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   const Another* getAnother(const std::string& sid) const;
 
@@ -467,6 +493,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   int addAnother(const Another* a);
 
@@ -475,6 +506,14 @@ public:
    * Get the number of Another objects in this VersSpeciesPlugin.
    *
    * @return the number of Another objects in this VersSpeciesPlugin.
+   *
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   unsigned int getNumAnothers() const;
 
@@ -485,7 +524,14 @@ public:
    *
    * @return a new Another object instance.
    *
-   * @see addAnother(const Another* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
+   * @see removeAnother(unsigned int n)
    */
   Another* createAnother();
 
@@ -498,10 +544,14 @@ public:
    *
    * @return a pointer to the nth Another in this VersSpeciesPlugin.
    *
-   * @see getNumAnothers
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(const std::string& sid)
    */
   Another* removeAnother(unsigned int n);
 
@@ -515,8 +565,14 @@ public:
    * @return the Another in this VersSpeciesPlugin based on the identifier or
    * NULL if no such Another exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnother(const Another* object)
+   * @see createAnother()
+   * @see getAnother(const std::string& sid)
+   * @see getAnother(unsigned int n)
+   * @see getNumAnothers()
+   * @see removeAnother(unsigned int n)
    */
   Another* removeAnother(const std::string& sid);
 
@@ -1176,6 +1232,8 @@ VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp);
  * @return the nth Another_t in the ListOfAnothers within this
  * VersSpeciesPlugin.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof VersSpeciesPlugin_t
  */
 LIBSBML_EXTERN
@@ -1193,6 +1251,8 @@ VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
  *
  * @return the Another_t in the ListOfAnothers within this VersSpeciesPlugin
  * with the given id or NULL if no such Another_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */
@@ -1243,6 +1303,8 @@ VersSpeciesPlugin_getNumAnothers(VersSpeciesPlugin_t* vsp);
  *
  * @return a new Another_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof VersSpeciesPlugin_t
  */
 LIBSBML_EXTERN
@@ -1259,6 +1321,8 @@ VersSpeciesPlugin_createAnother(VersSpeciesPlugin_t* vsp);
  * @param n an unsigned int representing the index of the Another_t to remove.
  *
  * @return a pointer to the nth Another_t in this VersSpeciesPlugin_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */
@@ -1277,6 +1341,8 @@ VersSpeciesPlugin_removeAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
  *
  * @return the Another_t in this VersSpeciesPlugin_t based on the identifier or
  * NULL if no such Another_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */

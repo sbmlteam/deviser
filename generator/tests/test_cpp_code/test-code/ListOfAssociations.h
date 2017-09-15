@@ -139,7 +139,14 @@ public:
    *
    * @return the nth Association in this ListOfAssociations.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Association* get(unsigned int n);
 
@@ -152,7 +159,14 @@ public:
    *
    * @return the nth Association in this ListOfAssociations.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Association* get(unsigned int n) const;
 
@@ -166,7 +180,14 @@ public:
    * @return the Association in this ListOfAssociations with the given id or
    * NULL if no such Association exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Association* get(const std::string& sid);
 
@@ -180,7 +201,14 @@ public:
    * @return the Association in this ListOfAssociations with the given id or
    * NULL if no such Association exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Association* get(const std::string& sid) const;
 
@@ -194,10 +222,14 @@ public:
    *
    * @return a pointer to the nth Association in this ListOfAssociations.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
    */
   virtual Association* remove(unsigned int n);
 
@@ -212,8 +244,14 @@ public:
    * @return the Association in this ListOfAssociations based on the identifier
    * or NULL if no such Association exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(unsigned int n)
    */
   virtual Association* remove(const std::string& sid);
 
@@ -230,6 +268,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addAssociation(const Association* a);
 
@@ -238,6 +281,14 @@ public:
    * Get the number of Association objects in this ListOfAssociations.
    *
    * @return the number of Association objects in this ListOfAssociations.
+   *
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumAssociations() const;
 
@@ -248,7 +299,14 @@ public:
    *
    * @return a new FbcAnd object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   FbcAnd* createAnd();
 
@@ -259,7 +317,14 @@ public:
    *
    * @return a new FbcOr object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   FbcOr* createOr();
 
@@ -270,7 +335,14 @@ public:
    *
    * @return a new GeneProductRef object instance.
    *
-   * @see addAssociation(const Association* a)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAssociations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   GeneProductRef* createGeneProductRef();
 
@@ -404,6 +476,8 @@ BEGIN_C_DECLS
  *
  * @return the nth Association_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfAssociations_t
  */
 LIBSBML_EXTERN
@@ -421,6 +495,8 @@ ListOfAssociations_getAssociation(ListOf_t* lo, unsigned int n);
  *
  * @return the Association_t in this ListOf_t with the given id or NULL if no
  * such Association_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ListOfAssociations_t
  */
@@ -440,6 +516,8 @@ ListOfAssociations_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Association_t in this ListOf_t.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ListOfAssociations_t
  */
 LIBSBML_EXTERN
@@ -458,6 +536,8 @@ ListOfAssociations_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Association_t in this ListOf_t based on the identifier or NULL
  * if no such Association_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfAssociations_t
  */

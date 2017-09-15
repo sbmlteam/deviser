@@ -134,7 +134,14 @@ public:
    *
    * @return the nth Output in this ListOfOutputs.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Output* get(unsigned int n);
 
@@ -146,7 +153,14 @@ public:
    *
    * @return the nth Output in this ListOfOutputs.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Output* get(unsigned int n) const;
 
@@ -159,7 +173,14 @@ public:
    * @return the Output in this ListOfOutputs with the given id or NULL if no
    * such Output exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Output* get(const std::string& sid);
 
@@ -172,7 +193,14 @@ public:
    * @return the Output in this ListOfOutputs with the given id or NULL if no
    * such Output exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Output* get(const std::string& sid) const;
 
@@ -185,10 +213,14 @@ public:
    *
    * @return a pointer to the nth Output in this ListOfOutputs.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
    */
   virtual Output* remove(unsigned int n);
 
@@ -202,8 +234,14 @@ public:
    * @return the Output in this ListOfOutputs based on the identifier or NULL
    * if no such Output exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(unsigned int n)
    */
   virtual Output* remove(const std::string& sid);
 
@@ -220,6 +258,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addOutput(const Output* o);
 
@@ -228,6 +271,14 @@ public:
    * Get the number of Output objects in this ListOfOutputs.
    *
    * @return the number of Output objects in this ListOfOutputs.
+   *
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumOutputs() const;
 
@@ -238,7 +289,14 @@ public:
    *
    * @return a new Output object instance.
    *
-   * @see addOutput(const Output* o)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Output* createOutput();
 
@@ -385,6 +443,8 @@ BEGIN_C_DECLS
  *
  * @return the nth Output_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
@@ -402,6 +462,8 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
  * @return the Output_t in this ListOf_t with the given id or NULL if no such
  * Output_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfOutputs_t
  */
 LIBSBML_EXTERN
@@ -417,6 +479,8 @@ ListOfOutputs_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the Output_t to remove.
  *
  * @return a pointer to the nth Output_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfOutputs_t
  */
@@ -435,6 +499,8 @@ ListOfOutputs_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Output_t in this ListOf_t based on the identifier or NULL if no
  * such Output_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfOutputs_t
  */

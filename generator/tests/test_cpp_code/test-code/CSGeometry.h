@@ -161,7 +161,14 @@ public:
    *
    * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
    * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   CSGObject* getCSGObject(unsigned int n);
 
@@ -174,7 +181,14 @@ public:
    *
    * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
    * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   const CSGObject* getCSGObject(unsigned int n) const;
 
@@ -188,8 +202,14 @@ public:
    * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
    * the given id or NULL if no such CSGObject exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
    * @see getCSGObject(unsigned int n)
    * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   CSGObject* getCSGObject(const std::string& sid);
 
@@ -203,8 +223,14 @@ public:
    * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
    * the given id or NULL if no such CSGObject exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
    * @see getCSGObject(unsigned int n)
    * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   const CSGObject* getCSGObject(const std::string& sid) const;
 
@@ -251,6 +277,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   int addCSGObject(const CSGObject* csgo);
 
@@ -259,6 +290,14 @@ public:
    * Get the number of CSGObject objects in this CSGeometry.
    *
    * @return the number of CSGObject objects in this CSGeometry.
+   *
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
+   * @see getCSGObject(unsigned int n)
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   unsigned int getNumCSGObjects() const;
 
@@ -269,7 +308,14 @@ public:
    *
    * @return a new CSGObject object instance.
    *
-   * @see addCSGObject(const CSGObject* csgo)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see getCSGObject(const std::string& sid)
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
+   * @see removeCSGObject(unsigned int n)
    */
   CSGObject* createCSGObject();
 
@@ -283,10 +329,14 @@ public:
    *
    * @return a pointer to the nth CSGObject in this CSGeometry.
    *
-   * @see getNumCSGObjects
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
+   * @see removeCSGObject(const std::string& sid)
    */
   CSGObject* removeCSGObject(unsigned int n);
 
@@ -301,8 +351,14 @@ public:
    * @return the CSGObject in this CSGeometry based on the identifier or NULL
    * if no such CSGObject exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCSGObject(const CSGObject* object)
+   * @see createCSGObject()
+   * @see getCSGObject(const std::string& sid)
+   * @see getCSGObject(unsigned int n)
+   * @see getNumCSGObjects()
+   * @see removeCSGObject(unsigned int n)
    */
   CSGObject* removeCSGObject(const std::string& sid);
 
@@ -970,6 +1026,8 @@ CSGeometry_getListOfCSGObjects(CSGeometry_t* csg);
  *
  * @return the nth CSGObject_t in the ListOfCSGObjects within this CSGeometry.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
@@ -987,6 +1045,8 @@ CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n);
  *
  * @return the CSGObject_t in the ListOfCSGObjects within this CSGeometry with
  * the given id or NULL if no such CSGObject_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGeometry_t
  */
@@ -1058,6 +1118,8 @@ CSGeometry_getNumCSGObjects(CSGeometry_t* csg);
  *
  * @return a new CSGObject_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
@@ -1075,6 +1137,8 @@ CSGeometry_createCSGObject(CSGeometry_t* csg);
  * remove.
  *
  * @return a pointer to the nth CSGObject_t in this CSGeometry_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGeometry_t
  */
@@ -1094,6 +1158,8 @@ CSGeometry_removeCSGObject(CSGeometry_t* csg, unsigned int n);
  *
  * @return the CSGObject_t in this CSGeometry_t based on the identifier or NULL
  * if no such CSGObject_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGeometry_t
  */

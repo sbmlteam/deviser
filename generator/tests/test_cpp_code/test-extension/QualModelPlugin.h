@@ -143,7 +143,14 @@ public:
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
    * this QualModelPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
    * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   QualitativeSpecies* getQualitativeSpecies(unsigned int n);
 
@@ -157,7 +164,14 @@ public:
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
    * this QualModelPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
    * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   const QualitativeSpecies* getQualitativeSpecies(unsigned int n) const;
 
@@ -172,8 +186,14 @@ public:
    * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
    * @see getQualitativeSpecies(unsigned int n)
    * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   QualitativeSpecies* getQualitativeSpecies(const std::string& sid);
 
@@ -188,8 +208,14 @@ public:
    * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
    * @see getQualitativeSpecies(unsigned int n)
    * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   const QualitativeSpecies* getQualitativeSpecies(const std::string& sid)
     const;
@@ -239,6 +265,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   int addQualitativeSpecies(const QualitativeSpecies* qs);
 
@@ -247,6 +278,14 @@ public:
    * Get the number of QualitativeSpecies objects in this QualModelPlugin.
    *
    * @return the number of QualitativeSpecies objects in this QualModelPlugin.
+   *
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   unsigned int getNumQualitativeSpecies() const;
 
@@ -257,7 +296,14 @@ public:
    *
    * @return a new QualitativeSpecies object instance.
    *
-   * @see addQualitativeSpecies(const QualitativeSpecies* qs)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   QualitativeSpecies* createQualitativeSpecies();
 
@@ -271,10 +317,14 @@ public:
    *
    * @return a pointer to the nth QualitativeSpecies in this QualModelPlugin.
    *
-   * @see getNumQualitativeSpecies
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
    */
   QualitativeSpecies* removeQualitativeSpecies(unsigned int n);
 
@@ -289,8 +339,14 @@ public:
    * @return the QualitativeSpecies in this QualModelPlugin based on the
    * identifier or NULL if no such QualitativeSpecies exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   QualitativeSpecies* removeQualitativeSpecies(const std::string& sid);
 
@@ -324,7 +380,14 @@ public:
    * @return the nth Transition in the ListOfTransitions within this
    * QualModelPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
    * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   Transition* getTransition(unsigned int n);
 
@@ -338,7 +401,14 @@ public:
    * @return the nth Transition in the ListOfTransitions within this
    * QualModelPlugin.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
    * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   const Transition* getTransition(unsigned int n) const;
 
@@ -352,8 +422,14 @@ public:
    * @return the Transition in the ListOfTransitions within this
    * QualModelPlugin with the given id or NULL if no such Transition exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
    * @see getTransition(unsigned int n)
    * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   Transition* getTransition(const std::string& sid);
 
@@ -367,8 +443,14 @@ public:
    * @return the Transition in the ListOfTransitions within this
    * QualModelPlugin with the given id or NULL if no such Transition exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
    * @see getTransition(unsigned int n)
    * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   const Transition* getTransition(const std::string& sid) const;
 
@@ -385,6 +467,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   int addTransition(const Transition* t);
 
@@ -393,6 +480,14 @@ public:
    * Get the number of Transition objects in this QualModelPlugin.
    *
    * @return the number of Transition objects in this QualModelPlugin.
+   *
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   unsigned int getNumTransitions() const;
 
@@ -403,7 +498,14 @@ public:
    *
    * @return a new Transition object instance.
    *
-   * @see addTransition(const Transition* t)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   Transition* createTransition();
 
@@ -417,10 +519,14 @@ public:
    *
    * @return a pointer to the nth Transition in this QualModelPlugin.
    *
-   * @see getNumTransitions
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
    */
   Transition* removeTransition(unsigned int n);
 
@@ -435,8 +541,14 @@ public:
    * @return the Transition in this QualModelPlugin based on the identifier or
    * NULL if no such Transition exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(unsigned int n)
    */
   Transition* removeTransition(const std::string& sid);
 
@@ -1009,6 +1121,8 @@ QualModelPlugin_getListOfQualitativeSpecies(QualModelPlugin_t* qmp);
  * @return the nth QualitativeSpecies_t in the ListOfQualitativeSpecies within
  * this QualModelPlugin.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -1028,6 +1142,8 @@ QualModelPlugin_getQualitativeSpecies(QualModelPlugin_t* qmp, unsigned int n);
  * @return the QualitativeSpecies_t in the ListOfQualitativeSpecies within this
  * QualModelPlugin with the given id or NULL if no such QualitativeSpecies_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1104,6 +1220,8 @@ QualModelPlugin_getNumQualitativeSpecies(QualModelPlugin_t* qmp);
  *
  * @return a new QualitativeSpecies_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -1121,6 +1239,8 @@ QualModelPlugin_createQualitativeSpecies(QualModelPlugin_t* qmp);
  * to remove.
  *
  * @return a pointer to the nth QualitativeSpecies_t in this QualModelPlugin_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1141,6 +1261,8 @@ QualModelPlugin_removeQualitativeSpecies(QualModelPlugin_t* qmp,
  *
  * @return the QualitativeSpecies_t in this QualModelPlugin_t based on the
  * identifier or NULL if no such QualitativeSpecies_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1179,6 +1301,8 @@ QualModelPlugin_getListOfTransitions(QualModelPlugin_t* qmp);
  * @return the nth Transition_t in the ListOfTransitions within this
  * QualModelPlugin.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -1196,6 +1320,8 @@ QualModelPlugin_getTransition(QualModelPlugin_t* qmp, unsigned int n);
  *
  * @return the Transition_t in the ListOfTransitions within this
  * QualModelPlugin with the given id or NULL if no such Transition_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1246,6 +1372,8 @@ QualModelPlugin_getNumTransitions(QualModelPlugin_t* qmp);
  *
  * @return a new Transition_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -1263,6 +1391,8 @@ QualModelPlugin_createTransition(QualModelPlugin_t* qmp);
  * remove.
  *
  * @return a pointer to the nth Transition_t in this QualModelPlugin_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1282,6 +1412,8 @@ QualModelPlugin_removeTransition(QualModelPlugin_t* qmp, unsigned int n);
  *
  * @return the Transition_t in this QualModelPlugin_t based on the identifier
  * or NULL if no such Transition_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */

@@ -418,7 +418,14 @@ public:
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
    * this Event.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
    * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   EventAssignment* getEventAssignment(unsigned int n);
 
@@ -432,7 +439,14 @@ public:
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
    * this Event.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
    * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   const EventAssignment* getEventAssignment(unsigned int n) const;
 
@@ -480,6 +494,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   int addEventAssignment(const EventAssignment* ea);
 
@@ -488,6 +507,14 @@ public:
    * Get the number of EventAssignment objects in this Event.
    *
    * @return the number of EventAssignment objects in this Event.
+   *
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   unsigned int getNumEventAssignments() const;
 
@@ -498,7 +525,14 @@ public:
    *
    * @return a new EventAssignment object instance.
    *
-   * @see addEventAssignment(const EventAssignment* ea)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   EventAssignment* createEventAssignment();
 
@@ -512,10 +546,14 @@ public:
    *
    * @return a pointer to the nth EventAssignment in this Event.
    *
-   * @see getNumEventAssignments
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
    */
   EventAssignment* removeEventAssignment(unsigned int n);
 
@@ -1535,6 +1573,8 @@ Event_getSBMLListOfEventAssignments(Event_t* e);
  * @return the nth EventAssignment_t in the SBMLListOfEventAssignments within
  * this Event.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof Event_t
  */
 LIBSBML_EXTERN
@@ -1605,6 +1645,8 @@ Event_getNumEventAssignments(Event_t* e);
  *
  * @return a new EventAssignment_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Event_t
  */
 LIBSBML_EXTERN
@@ -1622,6 +1664,8 @@ Event_createEventAssignment(Event_t* e);
  * remove.
  *
  * @return a pointer to the nth EventAssignment_t in this Event_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Event_t
  */

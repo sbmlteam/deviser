@@ -223,7 +223,14 @@ public:
    *
    * @return the nth Member in this ListOfMembers.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(const std::string& sid)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Member* get(unsigned int n);
 
@@ -235,7 +242,14 @@ public:
    *
    * @return the nth Member in this ListOfMembers.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(const std::string& sid)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Member* get(unsigned int n) const;
 
@@ -248,7 +262,14 @@ public:
    * @return the Member in this ListOfMembers with the given id or NULL if no
    * such Member exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Member* get(const std::string& sid);
 
@@ -261,7 +282,14 @@ public:
    * @return the Member in this ListOfMembers with the given id or NULL if no
    * such Member exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Member* get(const std::string& sid) const;
 
@@ -274,10 +302,14 @@ public:
    *
    * @return a pointer to the nth Member in this ListOfMembers.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
    */
   virtual Member* remove(unsigned int n);
 
@@ -291,8 +323,14 @@ public:
    * @return the Member in this ListOfMembers based on the identifier or NULL
    * if no such Member exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(unsigned int n)
    */
   virtual Member* remove(const std::string& sid);
 
@@ -309,6 +347,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createMember()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addMember(const Member* m);
 
@@ -317,6 +360,14 @@ public:
    * Get the number of Member objects in this ListOfMembers.
    *
    * @return the number of Member objects in this ListOfMembers.
+   *
+   *
+   * @see addMember(const Member* object)
+   * @see createMember()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumMembers() const;
 
@@ -327,7 +378,14 @@ public:
    *
    * @return a new Member object instance.
    *
-   * @see addMember(const Member* m)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addMember(const Member* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMembers()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Member* createMember();
 
@@ -657,6 +715,8 @@ ListOfMembers_unsetName(ListOf_t * lo);
  *
  * @return the nth Member_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
@@ -674,6 +734,8 @@ ListOfMembers_getMember(ListOf_t* lo, unsigned int n);
  * @return the Member_t in this ListOf_t with the given id or NULL if no such
  * Member_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
@@ -689,6 +751,8 @@ ListOfMembers_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the Member_t to remove.
  *
  * @return a pointer to the nth Member_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfMembers_t
  */
@@ -707,6 +771,8 @@ ListOfMembers_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Member_t in this ListOf_t based on the identifier or NULL if no
  * such Member_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfMembers_t
  */

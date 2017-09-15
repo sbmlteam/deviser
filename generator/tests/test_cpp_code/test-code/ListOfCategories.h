@@ -137,7 +137,14 @@ public:
    *
    * @return the nth Category in this ListOfCategories.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Category* get(unsigned int n);
 
@@ -150,7 +157,14 @@ public:
    *
    * @return the nth Category in this ListOfCategories.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Category* get(unsigned int n) const;
 
@@ -164,7 +178,14 @@ public:
    * @return the Category in this ListOfCategories with the given id or NULL if
    * no such Category exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual Category* get(const std::string& sid);
 
@@ -178,7 +199,14 @@ public:
    * @return the Category in this ListOfCategories with the given id or NULL if
    * no such Category exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const Category* get(const std::string& sid) const;
 
@@ -191,10 +219,14 @@ public:
    *
    * @return a pointer to the nth Category in this ListOfCategories.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
    */
   virtual Category* remove(unsigned int n);
 
@@ -208,8 +240,14 @@ public:
    * @return the Category in this ListOfCategories based on the identifier or
    * NULL if no such Category exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(unsigned int n)
    */
   virtual Category* remove(const std::string& sid);
 
@@ -226,6 +264,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addCategory(const Category* c);
 
@@ -234,6 +277,14 @@ public:
    * Get the number of Category objects in this ListOfCategories.
    *
    * @return the number of Category objects in this ListOfCategories.
+   *
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumCategories() const;
 
@@ -244,7 +295,14 @@ public:
    *
    * @return a new Category object instance.
    *
-   * @see addCategory(const Category* c)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCategories()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   Category* createCategory();
 
@@ -364,6 +422,8 @@ BEGIN_C_DECLS
  *
  * @return the nth Category_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
@@ -382,6 +442,8 @@ ListOfCategories_getCategory(ListOf_t* lo, unsigned int n);
  * @return the Category_t in this ListOf_t with the given id or NULL if no such
  * Category_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCategories_t
  */
 LIBSBML_EXTERN
@@ -397,6 +459,8 @@ ListOfCategories_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the Category_t to remove.
  *
  * @return a pointer to the nth Category_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCategories_t
  */
@@ -415,6 +479,8 @@ ListOfCategories_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the Category_t in this ListOf_t based on the identifier or NULL if
  * no such Category_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCategories_t
  */

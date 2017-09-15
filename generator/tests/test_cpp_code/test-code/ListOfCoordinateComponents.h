@@ -139,7 +139,14 @@ public:
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual CoordinateComponent* get(unsigned int n);
 
@@ -152,7 +159,14 @@ public:
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const CoordinateComponent* get(unsigned int n) const;
 
@@ -167,7 +181,14 @@ public:
    * @return the CoordinateComponent in this ListOfCoordinateComponents with
    * the given id or NULL if no such CoordinateComponent exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual CoordinateComponent* get(const std::string& sid);
 
@@ -182,7 +203,14 @@ public:
    * @return the CoordinateComponent in this ListOfCoordinateComponents with
    * the given id or NULL if no such CoordinateComponent exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const CoordinateComponent* get(const std::string& sid) const;
 
@@ -197,10 +225,14 @@ public:
    * @return a pointer to the nth CoordinateComponent in this
    * ListOfCoordinateComponents.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
    */
   virtual CoordinateComponent* remove(unsigned int n);
 
@@ -215,8 +247,14 @@ public:
    * @return the CoordinateComponent in this ListOfCoordinateComponents based
    * on the identifier or NULL if no such CoordinateComponent exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(unsigned int n)
    */
   virtual CoordinateComponent* remove(const std::string& sid);
 
@@ -234,6 +272,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addCoordinateComponent(const CoordinateComponent* cc);
 
@@ -244,6 +287,14 @@ public:
    *
    * @return the number of CoordinateComponent objects in this
    * ListOfCoordinateComponents.
+   *
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see createCoordinateComponent()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumCoordinateComponents() const;
 
@@ -255,7 +306,14 @@ public:
    *
    * @return a new CoordinateComponent object instance.
    *
-   * @see addCoordinateComponent(const CoordinateComponent* cc)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCoordinateComponent(const CoordinateComponent* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumCoordinateComponents()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   CoordinateComponent* createCoordinateComponent();
 
@@ -375,6 +433,8 @@ BEGIN_C_DECLS
  *
  * @return the nth CoordinateComponent_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
@@ -394,6 +454,8 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
  * @return the CoordinateComponent_t in this ListOf_t with the given id or NULL
  * if no such CoordinateComponent_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfCoordinateComponents_t
  */
 LIBSBML_EXTERN
@@ -411,6 +473,8 @@ ListOfCoordinateComponents_getById(ListOf_t* lo, const char *sid);
  * to remove.
  *
  * @return a pointer to the nth CoordinateComponent_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCoordinateComponents_t
  */
@@ -430,6 +494,8 @@ ListOfCoordinateComponents_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the CoordinateComponent_t in this ListOf_t based on the identifier
  * or NULL if no such CoordinateComponent_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfCoordinateComponents_t
  */

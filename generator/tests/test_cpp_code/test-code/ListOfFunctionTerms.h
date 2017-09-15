@@ -208,7 +208,14 @@ public:
    *
    * @return the nth FunctionTerm in this ListOfFunctionTerms.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual FunctionTerm* get(unsigned int n);
 
@@ -221,7 +228,14 @@ public:
    *
    * @return the nth FunctionTerm in this ListOfFunctionTerms.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const FunctionTerm* get(unsigned int n) const;
 
@@ -235,7 +249,14 @@ public:
    * @return the FunctionTerm in this ListOfFunctionTerms with the given id or
    * NULL if no such FunctionTerm exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual FunctionTerm* get(const std::string& sid);
 
@@ -249,7 +270,14 @@ public:
    * @return the FunctionTerm in this ListOfFunctionTerms with the given id or
    * NULL if no such FunctionTerm exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const FunctionTerm* get(const std::string& sid) const;
 
@@ -263,10 +291,14 @@ public:
    *
    * @return a pointer to the nth FunctionTerm in this ListOfFunctionTerms.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
    */
   virtual FunctionTerm* remove(unsigned int n);
 
@@ -281,8 +313,14 @@ public:
    * @return the FunctionTerm in this ListOfFunctionTerms based on the
    * identifier or NULL if no such FunctionTerm exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(unsigned int n)
    */
   virtual FunctionTerm* remove(const std::string& sid);
 
@@ -299,6 +337,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addFunctionTerm(const FunctionTerm* ft);
 
@@ -307,6 +350,14 @@ public:
    * Get the number of FunctionTerm objects in this ListOfFunctionTerms.
    *
    * @return the number of FunctionTerm objects in this ListOfFunctionTerms.
+   *
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumFunctionTerms() const;
 
@@ -317,7 +368,14 @@ public:
    *
    * @return a new FunctionTerm object instance.
    *
-   * @see addFunctionTerm(const FunctionTerm* ft)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   FunctionTerm* createFunctionTerm();
 
@@ -510,6 +568,8 @@ BEGIN_C_DECLS
  *
  * @return the nth FunctionTerm_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
@@ -527,6 +587,8 @@ ListOfFunctionTerms_getFunctionTerm(ListOf_t* lo, unsigned int n);
  *
  * @return the FunctionTerm_t in this ListOf_t with the given id or NULL if no
  * such FunctionTerm_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ListOfFunctionTerms_t
  */
@@ -546,6 +608,8 @@ ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth FunctionTerm_t in this ListOf_t.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ListOfFunctionTerms_t
  */
 LIBSBML_EXTERN
@@ -564,6 +628,8 @@ ListOfFunctionTerms_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the FunctionTerm_t in this ListOf_t based on the identifier or NULL
  * if no such FunctionTerm_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfFunctionTerms_t
  */

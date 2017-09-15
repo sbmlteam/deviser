@@ -183,7 +183,14 @@ public:
    *
    * @return the nth MyLoTest in this ListOfMyLoTests.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual MyLoTest* get(unsigned int n);
 
@@ -196,7 +203,14 @@ public:
    *
    * @return the nth MyLoTest in this ListOfMyLoTests.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const MyLoTest* get(unsigned int n) const;
 
@@ -210,7 +224,14 @@ public:
    * @return the MyLoTest in this ListOfMyLoTests with the given id or NULL if
    * no such MyLoTest exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual MyLoTest* get(const std::string& sid);
 
@@ -224,7 +245,14 @@ public:
    * @return the MyLoTest in this ListOfMyLoTests with the given id or NULL if
    * no such MyLoTest exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const MyLoTest* get(const std::string& sid) const;
 
@@ -237,10 +265,14 @@ public:
    *
    * @return a pointer to the nth MyLoTest in this ListOfMyLoTests.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
    */
   virtual MyLoTest* remove(unsigned int n);
 
@@ -254,8 +286,14 @@ public:
    * @return the MyLoTest in this ListOfMyLoTests based on the identifier or
    * NULL if no such MyLoTest exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(unsigned int n)
    */
   virtual MyLoTest* remove(const std::string& sid);
 
@@ -272,6 +310,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addMyLoTest(const MyLoTest* mlt);
 
@@ -280,6 +323,14 @@ public:
    * Get the number of MyLoTest objects in this ListOfMyLoTests.
    *
    * @return the number of MyLoTest objects in this ListOfMyLoTests.
+   *
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see createMyLoTest()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumMyLoTests() const;
 
@@ -290,7 +341,14 @@ public:
    *
    * @return a new MyLoTest object instance.
    *
-   * @see addMyLoTest(const MyLoTest* mlt)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addMyLoTest(const MyLoTest* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumMyLoTests()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   MyLoTest* createMyLoTest();
 
@@ -521,6 +579,8 @@ ListOfMyLoTests_unsetId(ListOf_t * lo);
  *
  * @return the nth MyLoTest_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfMyLoTests_t
  */
 LIBSBML_EXTERN
@@ -539,6 +599,8 @@ ListOfMyLoTests_getMyLoTest(ListOf_t* lo, unsigned int n);
  * @return the MyLoTest_t in this ListOf_t with the given id or NULL if no such
  * MyLoTest_t exists.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfMyLoTests_t
  */
 LIBSBML_EXTERN
@@ -554,6 +616,8 @@ ListOfMyLoTests_getById(ListOf_t* lo, const char *sid);
  * @param n an unsigned int representing the index of the MyLoTest_t to remove.
  *
  * @return a pointer to the nth MyLoTest_t in this ListOf_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfMyLoTests_t
  */
@@ -572,6 +636,8 @@ ListOfMyLoTests_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the MyLoTest_t in this ListOf_t based on the identifier or NULL if
  * no such MyLoTest_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfMyLoTests_t
  */

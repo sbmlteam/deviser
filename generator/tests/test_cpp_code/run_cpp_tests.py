@@ -474,7 +474,7 @@ def main():
         name = 'groups'
         num = 0
         class_name = 'Group'
-        list_of = ''
+        list_of = 'ListOfGroups'
         test_case = 'list of with attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
 
@@ -825,7 +825,7 @@ def main():
         name = 'groups'
         num = 0
         class_name = 'Group'
-        list_of = ''
+        list_of = 'ListOfGroups'
         test_case = 'list of with attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
 

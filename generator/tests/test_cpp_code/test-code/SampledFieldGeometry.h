@@ -213,7 +213,14 @@ public:
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
    * SampledFieldGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
    * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   SampledVolume* getSampledVolume(unsigned int n);
 
@@ -227,7 +234,14 @@ public:
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
    * SampledFieldGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
    * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   const SampledVolume* getSampledVolume(unsigned int n) const;
 
@@ -242,8 +256,14 @@ public:
    * SampledFieldGeometry with the given id or NULL if no such SampledVolume
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
    * @see getSampledVolume(unsigned int n)
    * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   SampledVolume* getSampledVolume(const std::string& sid);
 
@@ -258,8 +278,14 @@ public:
    * SampledFieldGeometry with the given id or NULL if no such SampledVolume
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
    * @see getSampledVolume(unsigned int n)
    * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   const SampledVolume* getSampledVolume(const std::string& sid) const;
 
@@ -307,6 +333,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   int addSampledVolume(const SampledVolume* sv);
 
@@ -315,6 +346,14 @@ public:
    * Get the number of SampledVolume objects in this SampledFieldGeometry.
    *
    * @return the number of SampledVolume objects in this SampledFieldGeometry.
+   *
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   unsigned int getNumSampledVolumes() const;
 
@@ -325,7 +364,14 @@ public:
    *
    * @return a new SampledVolume object instance.
    *
-   * @see addSampledVolume(const SampledVolume* sv)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   SampledVolume* createSampledVolume();
 
@@ -339,10 +385,14 @@ public:
    *
    * @return a pointer to the nth SampledVolume in this SampledFieldGeometry.
    *
-   * @see getNumSampledVolumes
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
    */
   SampledVolume* removeSampledVolume(unsigned int n);
 
@@ -357,8 +407,14 @@ public:
    * @return the SampledVolume in this SampledFieldGeometry based on the
    * identifier or NULL if no such SampledVolume exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(unsigned int n)
    */
   SampledVolume* removeSampledVolume(const std::string& sid);
 
@@ -1132,6 +1188,8 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
  * @return the nth SampledVolume_t in the ListOfSampledVolumes within this
  * SampledFieldGeometry.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
@@ -1152,6 +1210,8 @@ SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
  * @return the SampledVolume_t in the ListOfSampledVolumes within this
  * SampledFieldGeometry with the given id or NULL if no such SampledVolume_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -1227,6 +1287,8 @@ SampledFieldGeometry_getNumSampledVolumes(SampledFieldGeometry_t* sfg);
  *
  * @return a new SampledVolume_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
@@ -1244,6 +1306,8 @@ SampledFieldGeometry_createSampledVolume(SampledFieldGeometry_t* sfg);
  * remove.
  *
  * @return a pointer to the nth SampledVolume_t in this SampledFieldGeometry_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -1264,6 +1328,8 @@ SampledFieldGeometry_removeSampledVolume(SampledFieldGeometry_t* sfg,
  *
  * @return the SampledVolume_t in this SampledFieldGeometry_t based on the
  * identifier or NULL if no such SampledVolume_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */

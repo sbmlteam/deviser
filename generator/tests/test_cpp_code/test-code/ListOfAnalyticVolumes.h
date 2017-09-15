@@ -138,7 +138,14 @@ public:
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual AnalyticVolume* get(unsigned int n);
 
@@ -151,7 +158,14 @@ public:
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const AnalyticVolume* get(unsigned int n) const;
 
@@ -166,7 +180,14 @@ public:
    * @return the AnalyticVolume in this ListOfAnalyticVolumes with the given id
    * or NULL if no such AnalyticVolume exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual AnalyticVolume* get(const std::string& sid);
 
@@ -181,7 +202,14 @@ public:
    * @return the AnalyticVolume in this ListOfAnalyticVolumes with the given id
    * or NULL if no such AnalyticVolume exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const AnalyticVolume* get(const std::string& sid) const;
 
@@ -195,10 +223,14 @@ public:
    *
    * @return a pointer to the nth AnalyticVolume in this ListOfAnalyticVolumes.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
    */
   virtual AnalyticVolume* remove(unsigned int n);
 
@@ -213,8 +245,14 @@ public:
    * @return the AnalyticVolume in this ListOfAnalyticVolumes based on the
    * identifier or NULL if no such AnalyticVolume exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(unsigned int n)
    */
   virtual AnalyticVolume* remove(const std::string& sid);
 
@@ -231,6 +269,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addAnalyticVolume(const AnalyticVolume* av);
 
@@ -240,6 +283,14 @@ public:
    *
    * @return the number of AnalyticVolume objects in this
    * ListOfAnalyticVolumes.
+   *
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see createAnalyticVolume()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumAnalyticVolumes() const;
 
@@ -250,7 +301,14 @@ public:
    *
    * @return a new AnalyticVolume object instance.
    *
-   * @see addAnalyticVolume(const AnalyticVolume* av)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAnalyticVolume(const AnalyticVolume* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumAnalyticVolumes()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   AnalyticVolume* createAnalyticVolume();
 
@@ -400,6 +458,8 @@ BEGIN_C_DECLS
  *
  * @return the nth AnalyticVolume_t in this ListOf_t.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
@@ -417,6 +477,8 @@ ListOfAnalyticVolumes_getAnalyticVolume(ListOf_t* lo, unsigned int n);
  *
  * @return the AnalyticVolume_t in this ListOf_t with the given id or NULL if
  * no such AnalyticVolume_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ListOfAnalyticVolumes_t
  */
@@ -436,6 +498,8 @@ ListOfAnalyticVolumes_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth AnalyticVolume_t in this ListOf_t.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ListOfAnalyticVolumes_t
  */
 LIBSBML_EXTERN
@@ -454,6 +518,8 @@ ListOfAnalyticVolumes_remove(ListOf_t* lo, unsigned int n);
  *
  * @return the AnalyticVolume_t in this ListOf_t based on the identifier or
  * NULL if no such AnalyticVolume_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ListOfAnalyticVolumes_t
  */

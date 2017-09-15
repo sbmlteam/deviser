@@ -333,7 +333,14 @@ public:
    * @return the nth DistribInput in the ListOfDistribInputs within this
    * DrawFromDistribution.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
    * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   DistribInput* getDistribInput(unsigned int n);
 
@@ -347,7 +354,14 @@ public:
    * @return the nth DistribInput in the ListOfDistribInputs within this
    * DrawFromDistribution.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
    * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   const DistribInput* getDistribInput(unsigned int n) const;
 
@@ -362,8 +376,14 @@ public:
    * DrawFromDistribution with the given id or NULL if no such DistribInput
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
    * @see getDistribInput(unsigned int n)
    * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   DistribInput* getDistribInput(const std::string& sid);
 
@@ -378,8 +398,14 @@ public:
    * DrawFromDistribution with the given id or NULL if no such DistribInput
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
    * @see getDistribInput(unsigned int n)
    * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   const DistribInput* getDistribInput(const std::string& sid) const;
 
@@ -396,6 +422,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
+   * @see getDistribInput(unsigned int n)
+   * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   int addDistribInput(const DistribInput* di);
 
@@ -404,6 +435,14 @@ public:
    * Get the number of DistribInput objects in this DrawFromDistribution.
    *
    * @return the number of DistribInput objects in this DrawFromDistribution.
+   *
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
+   * @see getDistribInput(unsigned int n)
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   unsigned int getNumDistribInputs() const;
 
@@ -414,7 +453,14 @@ public:
    *
    * @return a new DistribInput object instance.
    *
-   * @see addDistribInput(const DistribInput* di)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see getDistribInput(const std::string& sid)
+   * @see getDistribInput(unsigned int n)
+   * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
+   * @see removeDistribInput(unsigned int n)
    */
   DistribInput* createDistribInput();
 
@@ -428,10 +474,14 @@ public:
    *
    * @return a pointer to the nth DistribInput in this DrawFromDistribution.
    *
-   * @see getNumDistribInputs
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
+   * @see getDistribInput(unsigned int n)
+   * @see getNumDistribInputs()
+   * @see removeDistribInput(const std::string& sid)
    */
   DistribInput* removeDistribInput(unsigned int n);
 
@@ -446,8 +496,14 @@ public:
    * @return the DistribInput in this DrawFromDistribution based on the
    * identifier or NULL if no such DistribInput exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDistribInput(const DistribInput* object)
+   * @see createDistribInput()
+   * @see getDistribInput(const std::string& sid)
+   * @see getDistribInput(unsigned int n)
+   * @see getNumDistribInputs()
+   * @see removeDistribInput(unsigned int n)
    */
   DistribInput* removeDistribInput(const std::string& sid);
 
@@ -1353,6 +1409,8 @@ DrawFromDistribution_getListOfDistribInputs(DrawFromDistribution_t* dfd);
  * @return the nth DistribInput_t in the ListOfDistribInputs within this
  * DrawFromDistribution.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof DrawFromDistribution_t
  */
 LIBSBML_EXTERN
@@ -1373,6 +1431,8 @@ DrawFromDistribution_getDistribInput(DrawFromDistribution_t* dfd,
  * @return the DistribInput_t in the ListOfDistribInputs within this
  * DrawFromDistribution with the given id or NULL if no such DistribInput_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof DrawFromDistribution_t
  */
@@ -1425,6 +1485,8 @@ DrawFromDistribution_getNumDistribInputs(DrawFromDistribution_t* dfd);
  *
  * @return a new DistribInput_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof DrawFromDistribution_t
  */
 LIBSBML_EXTERN
@@ -1442,6 +1504,8 @@ DrawFromDistribution_createDistribInput(DrawFromDistribution_t* dfd);
  * remove.
  *
  * @return a pointer to the nth DistribInput_t in this DrawFromDistribution_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof DrawFromDistribution_t
  */
@@ -1462,6 +1526,8 @@ DrawFromDistribution_removeDistribInput(DrawFromDistribution_t* dfd,
  *
  * @return the DistribInput_t in this DrawFromDistribution_t based on the
  * identifier or NULL if no such DistribInput_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof DrawFromDistribution_t
  */

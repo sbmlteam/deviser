@@ -231,7 +231,14 @@ public:
    * @return the nth ParametricObject in the ListOfParametricObjects within
    * this ParametricGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
    * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   ParametricObject* getParametricObject(unsigned int n);
 
@@ -245,7 +252,14 @@ public:
    * @return the nth ParametricObject in the ListOfParametricObjects within
    * this ParametricGeometry.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
    * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   const ParametricObject* getParametricObject(unsigned int n) const;
 
@@ -261,8 +275,14 @@ public:
    * ParametricGeometry with the given id or NULL if no such ParametricObject
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
    * @see getParametricObject(unsigned int n)
    * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   ParametricObject* getParametricObject(const std::string& sid);
 
@@ -278,8 +298,14 @@ public:
    * ParametricGeometry with the given id or NULL if no such ParametricObject
    * exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
    * @see getParametricObject(unsigned int n)
    * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   const ParametricObject* getParametricObject(const std::string& sid) const;
 
@@ -327,6 +353,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   int addParametricObject(const ParametricObject* po);
 
@@ -335,6 +366,14 @@ public:
    * Get the number of ParametricObject objects in this ParametricGeometry.
    *
    * @return the number of ParametricObject objects in this ParametricGeometry.
+   *
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
+   * @see getParametricObject(unsigned int n)
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   unsigned int getNumParametricObjects() const;
 
@@ -345,7 +384,14 @@ public:
    *
    * @return a new ParametricObject object instance.
    *
-   * @see addParametricObject(const ParametricObject* po)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see getParametricObject(const std::string& sid)
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
+   * @see removeParametricObject(unsigned int n)
    */
   ParametricObject* createParametricObject();
 
@@ -359,10 +405,14 @@ public:
    *
    * @return a pointer to the nth ParametricObject in this ParametricGeometry.
    *
-   * @see getNumParametricObjects
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
+   * @see removeParametricObject(const std::string& sid)
    */
   ParametricObject* removeParametricObject(unsigned int n);
 
@@ -377,8 +427,14 @@ public:
    * @return the ParametricObject in this ParametricGeometry based on the
    * identifier or NULL if no such ParametricObject exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addParametricObject(const ParametricObject* object)
+   * @see createParametricObject()
+   * @see getParametricObject(const std::string& sid)
+   * @see getParametricObject(unsigned int n)
+   * @see getNumParametricObjects()
+   * @see removeParametricObject(unsigned int n)
    */
   ParametricObject* removeParametricObject(const std::string& sid);
 
@@ -1153,6 +1209,8 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg);
  * @return the nth ParametricObject_t in the ListOfParametricObjects within
  * this ParametricGeometry.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof ParametricGeometry_t
  */
 LIBSBML_EXTERN
@@ -1173,6 +1231,8 @@ ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
  * @return the ParametricObject_t in the ListOfParametricObjects within this
  * ParametricGeometry with the given id or NULL if no such ParametricObject_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ParametricGeometry_t
  */
@@ -1249,6 +1309,8 @@ ParametricGeometry_getNumParametricObjects(ParametricGeometry_t* pg);
  *
  * @return a new ParametricObject_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ParametricGeometry_t
  */
 LIBSBML_EXTERN
@@ -1267,6 +1329,8 @@ ParametricGeometry_createParametricObject(ParametricGeometry_t* pg);
  *
  * @return a pointer to the nth ParametricObject_t in this
  * ParametricGeometry_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ParametricGeometry_t
  */
@@ -1287,6 +1351,8 @@ ParametricGeometry_removeParametricObject(ParametricGeometry_t* pg,
  *
  * @return the ParametricObject_t in this ParametricGeometry_t based on the
  * identifier or NULL if no such ParametricObject_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ParametricGeometry_t
  */

@@ -168,7 +168,14 @@ public:
    * @return the nth Category in the ListOfCategories within this
    * CategoricalDistribution.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
    * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   Category* getCategory(unsigned int n);
 
@@ -182,7 +189,14 @@ public:
    * @return the nth Category in the ListOfCategories within this
    * CategoricalDistribution.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
    * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   const Category* getCategory(unsigned int n) const;
 
@@ -199,6 +213,11 @@ public:
    * @copydetails doc_note_object_is_copied
    *
    * @see createCategory()
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   int addCategory(const Category* c);
 
@@ -207,6 +226,14 @@ public:
    * Get the number of Category objects in this CategoricalDistribution.
    *
    * @return the number of Category objects in this CategoricalDistribution.
+   *
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   unsigned int getNumCategories() const;
 
@@ -217,7 +244,14 @@ public:
    *
    * @return a new Category object instance.
    *
-   * @see addCategory(const Category* c)
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   Category* createCategory();
 
@@ -230,10 +264,14 @@ public:
    *
    * @return a pointer to the nth Category in this CategoricalDistribution.
    *
-   * @see getNumCategories
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
    */
   Category* removeCategory(unsigned int n);
 
@@ -922,6 +960,8 @@ CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd);
  * @return the nth Category_t in the ListOfCategories within this
  * CategoricalDistribution.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
@@ -973,6 +1013,8 @@ CategoricalDistribution_getNumCategories(CategoricalDistribution_t* cd);
  *
  * @return a new Category_t object instance.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
@@ -989,6 +1031,8 @@ CategoricalDistribution_createCategory(CategoricalDistribution_t* cd);
  * @param n an unsigned int representing the index of the Category_t to remove.
  *
  * @return a pointer to the nth Category_t in this CategoricalDistribution_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CategoricalDistribution_t
  */
