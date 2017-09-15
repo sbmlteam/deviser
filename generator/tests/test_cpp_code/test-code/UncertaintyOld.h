@@ -194,6 +194,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p name = @c NULL is equivalent to calling
+   * unsetName().
    */
   virtual int setName(const std::string& name);
 
@@ -957,6 +960,9 @@ UncertaintyOld_setId(UncertaintyOld_t * uo, const char * id);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * Calling this function with @p name = @c NULL is equivalent to calling
+ * UncertaintyOld_unsetName().
  *
  * @memberof UncertaintyOld_t
  */

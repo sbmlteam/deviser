@@ -661,8 +661,11 @@ class SetGetFunctions():
         if self.is_cpp_api:
             function = 'set{0}'.format(attribute['capAttName'])
             return_type = 'int'
+            unsetfunc = 'unset{0}'.format(attribute['capAttName'])
         else:
             function = '{0}_set{1}'.format(self.class_name,
+                                           attribute['capAttName'])
+            unsetfunc = '{0}_unset{1}'.format(self.class_name,
                                            attribute['capAttName'])
             return_type = 'int'
 
@@ -691,6 +694,10 @@ class SetGetFunctions():
                 arguments.append('{0} {1}'
                                  .format(attribute['CType'],
                                          attribute['name']))
+
+        if attribute['type'] == 'string':
+            additional.append('Calling this function with @p {0} = @c NULL is equivalent to calling '
+                              '{1}().'.format(attribute['name'], unsetfunc))
 
         # create the function implementation
         if self.is_cpp_api:

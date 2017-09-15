@@ -204,6 +204,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p string_plugin_att = @c NULL is equivalent to
+   * calling unsetString_plugin_att().
    */
   int setString_plugin_att(const std::string& string_plugin_att);
 

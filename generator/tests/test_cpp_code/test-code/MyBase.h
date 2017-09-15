@@ -155,6 +155,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL is equivalent to calling
+   * unsetId().
    */
   virtual int setId(const std::string& id);
 
@@ -683,6 +686,9 @@ MyBase_isSetId(const MyBase_t * mb);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL is equivalent to calling
+ * MyBase_unsetId().
  *
  * @memberof MyBase_t
  */
