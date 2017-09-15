@@ -1,6 +1,6 @@
 /**
- * @file Objective.h
- * @brief Definition of the Objective class.
+ * @file Group.h
+ * @brief Definition of the Group class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,18 +30,18 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class Objective
- * @sbmlbrief{fbc} TODO:Definition of the Objective class.
+ * @class Group
+ * @sbmlbrief{groups} TODO:Definition of the Group class.
  */
 
 
-#ifndef Objective_H__
-#define Objective_H__
+#ifndef Group_H__
+#define Group_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/fbc/common/fbcfwd.h>
+#include <sbml/packages/groups/common/groupsfwd.h>
 
 
 #ifdef __cplusplus
@@ -51,151 +51,148 @@
 
 
 #include <sbml/SBase.h>
-#include <sbml/packages/fbc/extension/FbcExtension.h>
-#include <sbml/packages/fbc/sbml/ListOfFluxObjectives.h>
+#include <sbml/packages/groups/extension/GroupsExtension.h>
+#include <sbml/packages/groups/sbml/ListOfMembers.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN Objective : public SBase
+class LIBSBML_EXTERN Group : public SBase
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  FbcType_t mType;
-  ListOfFluxObjectives mFluxObjectives;
+  GroupKind_t mKind;
+  ListOfMembers mMembers;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new Objective using the given SBML Level, Version and
-   * &ldquo;fbc&rdquo; package version.
+   * Creates a new Group using the given SBML Level, Version and
+   * &ldquo;groups&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Objective.
+   * @param level an unsigned int, the SBML Level to assign to this Group.
    *
-   * @param version an unsigned int, the SBML Version to assign to this
-   * Objective.
+   * @param version an unsigned int, the SBML Version to assign to this Group.
    *
-   * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
-   * Objective.
+   * @param pkgVersion an unsigned int, the SBML Groups Version to assign to
+   * this Group.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  Objective(unsigned int level = FbcExtension::getDefaultLevel(),
-            unsigned int version = FbcExtension::getDefaultVersion(),
-            unsigned int pkgVersion =
-              FbcExtension::getDefaultPackageVersion());
+  Group(unsigned int level = GroupsExtension::getDefaultLevel(),
+        unsigned int version = GroupsExtension::getDefaultVersion(),
+        unsigned int pkgVersion = GroupsExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new Objective using the given FbcPkgNamespaces object.
+   * Creates a new Group using the given GroupsPkgNamespaces object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param fbcns the FbcPkgNamespaces object.
+   * @param groupsns the GroupsPkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  Objective(FbcPkgNamespaces *fbcns);
+  Group(GroupsPkgNamespaces *groupsns);
 
 
   /**
-   * Copy constructor for Objective.
+   * Copy constructor for Group.
    *
-   * @param orig the Objective instance to copy.
+   * @param orig the Group instance to copy.
    */
-  Objective(const Objective& orig);
+  Group(const Group& orig);
 
 
   /**
-   * Assignment operator for Objective.
+   * Assignment operator for Group.
    *
-   * @param rhs the Objective object whose values are to be used as the basis
-   * of the assignment.
+   * @param rhs the Group object whose values are to be used as the basis of
+   * the assignment.
    */
-  Objective& operator=(const Objective& rhs);
+  Group& operator=(const Group& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this Objective object.
+   * Creates and returns a deep copy of this Group object.
    *
-   * @return a (deep) copy of this Objective object.
+   * @return a (deep) copy of this Group object.
    */
-  virtual Objective* clone() const;
+  virtual Group* clone() const;
 
 
   /**
-   * Destructor for Objective.
+   * Destructor for Group.
    */
-  virtual ~Objective();
+  virtual ~Group();
 
 
   /**
-   * Returns the value of the "id" attribute of this Objective.
+   * Returns the value of the "id" attribute of this Group.
    *
-   * @return the value of the "id" attribute of this Objective as a string.
+   * @return the value of the "id" attribute of this Group as a string.
    */
   virtual const std::string& getId() const;
 
 
   /**
-   * Returns the value of the "name" attribute of this Objective.
+   * Returns the value of the "name" attribute of this Group.
    *
-   * @return the value of the "name" attribute of this Objective as a string.
+   * @return the value of the "name" attribute of this Group as a string.
    */
   virtual const std::string& getName() const;
 
 
   /**
-   * Returns the value of the "type" attribute of this Objective.
+   * Returns the value of the "kind" attribute of this Group.
    *
-   * @return the value of the "type" attribute of this Objective as a
-   * FbcType_t.
+   * @return the value of the "kind" attribute of this Group as a GroupKind_t.
    */
-  FbcType_t getType() const;
+  GroupKind_t getKind() const;
 
 
   /**
-   * Returns the value of the "type" attribute of this Objective.
+   * Returns the value of the "kind" attribute of this Group.
    *
-   * @return the value of the "type" attribute of this Objective as a string.
+   * @return the value of the "kind" attribute of this Group as a string.
    */
-  const std::string& getTypeAsString() const;
+  const std::string& getKindAsString() const;
 
 
   /**
-   * Predicate returning @c true if this Objective's "id" attribute is set.
+   * Predicate returning @c true if this Group's "id" attribute is set.
    *
-   * @return @c true if this Objective's "id" attribute has been set, otherwise
-   * @c false is returned.
+   * @return @c true if this Group's "id" attribute has been set, otherwise @c
+   * false is returned.
    */
   virtual bool isSetId() const;
 
 
   /**
-   * Predicate returning @c true if this Objective's "name" attribute is set.
+   * Predicate returning @c true if this Group's "name" attribute is set.
    *
-   * @return @c true if this Objective's "name" attribute has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this Group's "name" attribute has been set, otherwise
+   * @c false is returned.
    */
   virtual bool isSetName() const;
 
 
   /**
-   * Predicate returning @c true if this Objective's "type" attribute is set.
+   * Predicate returning @c true if this Group's "kind" attribute is set.
    *
-   * @return @c true if this Objective's "type" attribute has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this Group's "kind" attribute has been set, otherwise
+   * @c false is returned.
    */
-  bool isSetType() const;
+  bool isSetKind() const;
 
 
   /**
-   * Sets the value of the "id" attribute of this Objective.
+   * Sets the value of the "id" attribute of this Group.
    *
    * @param id std::string& value of the "id" attribute to be set.
    *
@@ -208,7 +205,7 @@ public:
 
 
   /**
-   * Sets the value of the "name" attribute of this Objective.
+   * Sets the value of the "name" attribute of this Group.
    *
    * @param name std::string& value of the "name" attribute to be set.
    *
@@ -221,33 +218,33 @@ public:
 
 
   /**
-   * Sets the value of the "type" attribute of this Objective.
+   * Sets the value of the "kind" attribute of this Group.
    *
-   * @param type FbcType_t value of the "type" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setType(const FbcType_t type);
-
-
-  /**
-   * Sets the value of the "type" attribute of this Objective.
-   *
-   * @param type std::string& of the "type" attribute to be set.
+   * @param kind GroupKind_t value of the "kind" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setType(const std::string& type);
+  int setKind(const GroupKind_t kind);
 
 
   /**
-   * Unsets the value of the "id" attribute of this Objective.
+   * Sets the value of the "kind" attribute of this Group.
+   *
+   * @param kind std::string& of the "kind" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setKind(const std::string& kind);
+
+
+  /**
+   * Unsets the value of the "id" attribute of this Group.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -257,7 +254,7 @@ public:
 
 
   /**
-   * Unsets the value of the "name" attribute of this Objective.
+   * Unsets the value of the "name" attribute of this Group.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -267,119 +264,110 @@ public:
 
 
   /**
-   * Unsets the value of the "type" attribute of this Objective.
+   * Unsets the value of the "kind" attribute of this Group.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int unsetType();
+  int unsetKind();
 
 
   /**
-   * Returns the ListOfFluxObjectives from this Objective.
+   * Returns the ListOfMembers from this Group.
    *
-   * @return the ListOfFluxObjectives from this Objective.
+   * @return the ListOfMembers from this Group.
    */
-  const ListOfFluxObjectives* getListOfFluxObjectives() const;
+  const ListOfMembers* getListOfMembers() const;
 
 
   /**
-   * Returns the ListOfFluxObjectives from this Objective.
+   * Returns the ListOfMembers from this Group.
    *
-   * @return the ListOfFluxObjectives from this Objective.
+   * @return the ListOfMembers from this Group.
    */
-  ListOfFluxObjectives* getListOfFluxObjectives();
+  ListOfMembers* getListOfMembers();
 
 
   /**
-   * Get a FluxObjective from the Objective.
+   * Get a Member from the Group.
    *
-   * @param n an unsigned int representing the index of the FluxObjective to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective.
+   * @return the nth Member in the ListOfMembers within this Group.
    *
-   * @see getNumFluxObjectives()
+   * @see getNumMembers()
    */
-  FluxObjective* getFluxObjective(unsigned int n);
+  Member* getMember(unsigned int n);
 
 
   /**
-   * Get a FluxObjective from the Objective.
+   * Get a Member from the Group.
    *
-   * @param n an unsigned int representing the index of the FluxObjective to
-   * retrieve.
+   * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective.
+   * @return the nth Member in the ListOfMembers within this Group.
    *
-   * @see getNumFluxObjectives()
+   * @see getNumMembers()
    */
-  const FluxObjective* getFluxObjective(unsigned int n) const;
+  const Member* getMember(unsigned int n) const;
 
 
   /**
-   * Get a FluxObjective from the Objective based on its identifier.
+   * Get a Member from the Group based on its identifier.
    *
-   * @param sid a string representing the identifier of the FluxObjective to
-   * retrieve.
+   * @param sid a string representing the identifier of the Member to retrieve.
    *
-   * @return the FluxObjective in the ListOfFluxObjectives within this
-   * Objective with the given id or NULL if no such FluxObjective exists.
+   * @return the Member in the ListOfMembers within this Group with the given
+   * id or NULL if no such Member exists.
    *
-   * @see getFluxObjective(unsigned int n)
-   * @see getNumFluxObjectives()
+   * @see getMember(unsigned int n)
+   * @see getNumMembers()
    */
-  FluxObjective* getFluxObjective(const std::string& sid);
+  Member* getMember(const std::string& sid);
 
 
   /**
-   * Get a FluxObjective from the Objective based on its identifier.
+   * Get a Member from the Group based on its identifier.
    *
-   * @param sid a string representing the identifier of the FluxObjective to
-   * retrieve.
+   * @param sid a string representing the identifier of the Member to retrieve.
    *
-   * @return the FluxObjective in the ListOfFluxObjectives within this
-   * Objective with the given id or NULL if no such FluxObjective exists.
+   * @return the Member in the ListOfMembers within this Group with the given
+   * id or NULL if no such Member exists.
    *
-   * @see getFluxObjective(unsigned int n)
-   * @see getNumFluxObjectives()
+   * @see getMember(unsigned int n)
+   * @see getNumMembers()
    */
-  const FluxObjective* getFluxObjective(const std::string& sid) const;
+  const Member* getMember(const std::string& sid) const;
 
 
   /**
-   * Get a FluxObjective from the Objective based on the Reaction to which it
-   * refers.
+   * Get a Member from the Group based on the IdRef to which it refers.
    *
-   * @param sid a string representing the reaction attribute of the
-   * FluxObjective object to retrieve.
+   * @param sid a string representing the idRef attribute of the Member object
+   * to retrieve.
    *
-   * @return the first FluxObjective in this Objective based on the given
-   * reaction attribute or NULL if no such FluxObjective exists.
+   * @return the first Member in this Group based on the given idRef attribute
+   * or NULL if no such Member exists.
    */
-  const FluxObjective* getFluxObjectiveByReaction(const std::string& sid)
-    const;
+  const Member* getMemberByIdRef(const std::string& sid) const;
 
 
   /**
-   * Get a FluxObjective from the Objective based on the Reaction to which it
-   * refers.
+   * Get a Member from the Group based on the IdRef to which it refers.
    *
-   * @param sid a string representing the reaction attribute of the
-   * FluxObjective object to retrieve.
+   * @param sid a string representing the idRef attribute of the Member object
+   * to retrieve.
    *
-   * @return the first FluxObjective in this Objective based on the given
-   * reaction attribute or NULL if no such FluxObjective exists.
+   * @return the first Member in this Group based on the given idRef attribute
+   * or NULL if no such Member exists.
    */
-  FluxObjective* getFluxObjectiveByReaction(const std::string& sid);
+  Member* getMemberByIdRef(const std::string& sid);
 
 
   /**
-   * Adds a copy of the given FluxObjective to this Objective.
+   * Adds a copy of the given Member to this Group.
    *
-   * @param fo the FluxObjective object to add.
+   * @param m the Member object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -387,81 +375,78 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createFluxObjective()
+   * @see createMember()
    */
-  int addFluxObjective(const FluxObjective* fo);
+  int addMember(const Member* m);
 
 
   /**
-   * Get the number of FluxObjective objects in this Objective.
+   * Get the number of Member objects in this Group.
    *
-   * @return the number of FluxObjective objects in this Objective.
+   * @return the number of Member objects in this Group.
    */
-  unsigned int getNumFluxObjectives() const;
+  unsigned int getNumMembers() const;
 
 
   /**
-   * Creates a new FluxObjective object, adds it to this Objective object and
-   * returns the FluxObjective object created.
+   * Creates a new Member object, adds it to this Group object and returns the
+   * Member object created.
    *
-   * @return a new FluxObjective object instance.
+   * @return a new Member object instance.
    *
-   * @see addFluxObjective(const FluxObjective* fo)
+   * @see addMember(const Member* m)
    */
-  FluxObjective* createFluxObjective();
+  Member* createMember();
 
 
   /**
-   * Removes the nth FluxObjective from this Objective and returns a pointer to
-   * it.
+   * Removes the nth Member from this Group and returns a pointer to it.
    *
-   * @param n an unsigned int representing the index of the FluxObjective to
-   * remove.
+   * @param n an unsigned int representing the index of the Member to remove.
    *
-   * @return a pointer to the nth FluxObjective in this Objective.
+   * @return a pointer to the nth Member in this Group.
    *
-   * @see getNumFluxObjectives
+   * @see getNumMembers
    *
    * @note the caller owns the returned object and is responsible for deleting
    * it.
    */
-  FluxObjective* removeFluxObjective(unsigned int n);
+  Member* removeMember(unsigned int n);
 
 
   /**
-   * Removes the FluxObjective from this Objective based on its identifier and
-   * returns a pointer to it.
+   * Removes the Member from this Group based on its identifier and returns a
+   * pointer to it.
    *
-   * @param sid a string representing the identifier of the FluxObjective to
-   * remove.
+   * @param sid a string representing the identifier of the Member to remove.
    *
-   * @return the FluxObjective in this Objective based on the identifier or
-   * NULL if no such FluxObjective exists.
+   * @return the Member in this Group based on the identifier or NULL if no
+   * such Member exists.
    *
    * @note the caller owns the returned object and is responsible for deleting
    * it.
    */
-  FluxObjective* removeFluxObjective(const std::string& sid);
+  Member* removeMember(const std::string& sid);
 
 
   /**
-   * Returns the XML element name of this Objective object.
+   * Returns the XML element name of this Group object.
    *
-   * For Objective, the XML element name is always @c "objective".
+   * For Group, the XML element name is always @c "group".
    *
-   * @return the name of this element, i.e. @c "objective".
+   * @return the name of this element, i.e. @c "group".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this Objective object.
+   * Returns the libSBML type code for this Group object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
    *
-   * @sbmlconstant{SBML_FBC_OBJECTIVE, SBMLFbcTypeCode_t}
+   * @sbmlconstant{SBML_GROUPS_GROUP, SBMLGroupsTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -472,29 +457,28 @@ public:
 
 
   /**
-   * Predicate returning @c true if all the required attributes for this
-   * Objective object have been set.
+   * Predicate returning @c true if all the required attributes for this Group
+   * object have been set.
    *
-   * @return @c true to indicate that all the required attributes of this
-   * Objective have been set, otherwise @c false is returned.
+   * @return @c true to indicate that all the required attributes of this Group
+   * have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the Objective object are:
-   * @li "id"
-   * @li "type"
+   * @note The required attributes for the Group object are:
+   * @li "kind"
    */
   virtual bool hasRequiredAttributes() const;
 
 
   /**
-   * Predicate returning @c true if all the required elements for this
-   * Objective object have been set.
+   * Predicate returning @c true if all the required elements for this Group
+   * object have been set.
    *
-   * @return @c true to indicate that all the required elements of this
-   * Objective have been set, otherwise @c false is returned.
+   * @return @c true to indicate that all the required elements of this Group
+   * have been set, otherwise @c false is returned.
    *
    *
-   * @note The required elements for the Objective object are:
+   * @note The required elements for the Group object are:
    */
   virtual bool hasRequiredElements() const;
 
@@ -565,7 +549,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -585,7 +569,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -604,7 +588,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -624,7 +608,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -644,7 +628,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -664,7 +648,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Objective.
+   * Gets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -684,13 +668,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this Objective's attribute "attributeName"
-   * is set.
+   * Predicate returning @c true if this Group's attribute "attributeName" is
+   * set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this Objective's attribute "attributeName" has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this Group's attribute "attributeName" has been set,
+   * otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -701,7 +685,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -720,7 +704,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -739,7 +723,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -758,7 +742,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -778,7 +762,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -798,7 +782,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Objective.
+   * Sets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -818,7 +802,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this Objective.
+   * Unsets the value of the "attributeName" attribute of this Group.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -835,7 +819,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Creates and returns an new "elementName" object in this Objective.
+   * Creates and returns an new "elementName" object in this Group.
    *
    * @param elementName, the name of the element to create.
    *
@@ -850,7 +834,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Adds a new "elementName" object to this Objective.
+   * Adds a new "elementName" object to this Group.
    *
    * @param elementName, the name of the element to create.
    *
@@ -871,7 +855,7 @@ public:
 
   /**
    * Removes and returns the new "elementName" object with the given id in this
-   * Objective.
+   * Group.
    *
    * @param elementName, the name of the element to remove.
    *
@@ -889,7 +873,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the number of "elementName" in this Objective.
+   * Returns the number of "elementName" in this Group.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -904,7 +888,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the nth object of "objectName" in this Objective.
+   * Returns the nth object of "objectName" in this Group.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -999,53 +983,9 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Reads the expected attributes into the member data variables
-   */
-  virtual void readL3V1V1Attributes(const XMLAttributes& attributes);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Reads the expected attributes into the member data variables
-   */
-  virtual void readL3V1V2Attributes(const XMLAttributes& attributes);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
    * Writes the attributes to the stream
    */
   virtual void writeAttributes(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  virtual void writeL3V1V1Attributes(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  virtual void writeL3V1V2Attributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 
@@ -1078,165 +1018,160 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new Objective_t using the given SBML Level, Version and
- * &ldquo;fbc&rdquo; package version.
+ * Creates a new Group_t using the given SBML Level, Version and
+ * &ldquo;groups&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Objective_t.
+ * @param level an unsigned int, the SBML Level to assign to this Group_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this
- * Objective_t.
+ * @param version an unsigned int, the SBML Version to assign to this Group_t.
  *
- * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
- * Objective_t.
+ * @param pkgVersion an unsigned int, the SBML Groups Version to assign to this
+ * Group_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-Objective_t *
-Objective_create(unsigned int level,
-                 unsigned int version,
-                 unsigned int pkgVersion);
+Group_t *
+Group_create(unsigned int level,
+             unsigned int version,
+             unsigned int pkgVersion);
 
 
 /**
- * Creates and returns a deep copy of this Objective_t object.
+ * Creates and returns a deep copy of this Group_t object.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @return a (deep) copy of this Objective_t object.
+ * @return a (deep) copy of this Group_t object.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-Objective_t*
-Objective_clone(const Objective_t* o);
+Group_t*
+Group_clone(const Group_t* g);
 
 
 /**
- * Frees this Objective_t object.
+ * Frees this Group_t object.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 void
-Objective_free(Objective_t* o);
+Group_free(Group_t* g);
 
 
 /**
- * Returns the value of the "id" attribute of this Objective_t.
+ * Returns the value of the "id" attribute of this Group_t.
  *
- * @param o the Objective_t structure whose id is sought.
+ * @param g the Group_t structure whose id is sought.
  *
- * @return the value of the "id" attribute of this Objective_t as a pointer to
- * a string.
+ * @return the value of the "id" attribute of this Group_t as a pointer to a
+ * string.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 const char *
-Objective_getId(const Objective_t * o);
+Group_getId(const Group_t * g);
 
 
 /**
- * Returns the value of the "name" attribute of this Objective_t.
+ * Returns the value of the "name" attribute of this Group_t.
  *
- * @param o the Objective_t structure whose name is sought.
+ * @param g the Group_t structure whose name is sought.
  *
- * @return the value of the "name" attribute of this Objective_t as a pointer
- * to a string.
+ * @return the value of the "name" attribute of this Group_t as a pointer to a
+ * string.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 const char *
-Objective_getName(const Objective_t * o);
+Group_getName(const Group_t * g);
 
 
 /**
- * Returns the value of the "type" attribute of this Objective_t.
+ * Returns the value of the "kind" attribute of this Group_t.
  *
- * @param o the Objective_t structure whose type is sought.
+ * @param g the Group_t structure whose kind is sought.
  *
- * @return the value of the "type" attribute of this Objective_t as a
- * FbcType_t.
+ * @return the value of the "kind" attribute of this Group_t as a GroupKind_t.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FbcType_t
-Objective_getType(const Objective_t * o);
+GroupKind_t
+Group_getKind(const Group_t * g);
 
 
 /**
- * Returns the value of the "type" attribute of this Objective_t.
+ * Returns the value of the "kind" attribute of this Group_t.
  *
- * @param o the Objective_t structure whose type is sought.
+ * @param g the Group_t structure whose kind is sought.
  *
- * @return the value of the "type" attribute of this Objective_t as a const
- * char *.
+ * @return the value of the "kind" attribute of this Group_t as a const char *.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 const char *
-Objective_getTypeAsString(const Objective_t * o);
+Group_getKindAsString(const Group_t * g);
 
 
 /**
- * Predicate returning @c 1 (true) if this Objective_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Group_t's "id" attribute is set.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @return @c 1 (true) if this Objective_t's "id" attribute has been set,
- * otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this Group_t's "id" attribute has been set, otherwise
+ * @c 0 (false) is returned.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_isSetId(const Objective_t * o);
+Group_isSetId(const Group_t * g);
 
 
 /**
- * Predicate returning @c 1 (true) if this Objective_t's "name" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Group_t's "name" attribute is set.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @return @c 1 (true) if this Objective_t's "name" attribute has been set,
+ * @return @c 1 (true) if this Group_t's "name" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_isSetName(const Objective_t * o);
+Group_isSetName(const Group_t * g);
 
 
 /**
- * Predicate returning @c 1 (true) if this Objective_t's "type" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this Group_t's "kind" attribute is set.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @return @c 1 (true) if this Objective_t's "type" attribute has been set,
+ * @return @c 1 (true) if this Group_t's "kind" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_isSetType(const Objective_t * o);
+Group_isSetKind(const Group_t * g);
 
 
 /**
- * Sets the value of the "id" attribute of this Objective_t.
+ * Sets the value of the "id" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
  * @param id const char * value of the "id" attribute to be set.
  *
@@ -1244,17 +1179,17 @@ Objective_isSetType(const Objective_t * o);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_setId(Objective_t * o, const char * id);
+Group_setId(Group_t * g, const char * id);
 
 
 /**
- * Sets the value of the "name" attribute of this Objective_t.
+ * Sets the value of the "name" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
  * @param name const char * value of the "name" attribute to be set.
  *
@@ -1262,290 +1197,279 @@ Objective_setId(Objective_t * o, const char * id);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_setName(Objective_t * o, const char * name);
+Group_setName(Group_t * g, const char * name);
 
 
 /**
- * Sets the value of the "type" attribute of this Objective_t.
+ * Sets the value of the "kind" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @param type FbcType_t value of the "type" attribute to be set.
+ * @param kind GroupKind_t value of the "kind" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_setType(Objective_t * o, FbcType_t type);
+Group_setKind(Group_t * g, GroupKind_t kind);
 
 
 /**
- * Sets the value of the "type" attribute of this Objective_t.
+ * Sets the value of the "kind" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @param type const char * of the "type" attribute to be set.
+ * @param kind const char * of the "kind" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_setTypeAsString(Objective_t * o, const char * type);
+Group_setKindAsString(Group_t * g, const char * kind);
 
 
 /**
- * Unsets the value of the "id" attribute of this Objective_t.
+ * Unsets the value of the "id" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_unsetId(Objective_t * o);
+Group_unsetId(Group_t * g);
 
 
 /**
- * Unsets the value of the "name" attribute of this Objective_t.
+ * Unsets the value of the "name" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_unsetName(Objective_t * o);
+Group_unsetName(Group_t * g);
 
 
 /**
- * Unsets the value of the "type" attribute of this Objective_t.
+ * Unsets the value of the "kind" attribute of this Group_t.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
  * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_unsetType(Objective_t * o);
+Group_unsetKind(Group_t * g);
 
 
 /**
- * Returns a ListOf_t* containing FluxObjective_t objects from this
- * Objective_t.
+ * Returns a ListOf_t* containing Member_t objects from this Group_t.
  *
- * @param o the Objective_t structure whose "ListOfFluxObjectives" is sought.
+ * @param g the Group_t structure whose "ListOfMembers" is sought.
  *
- * @return the "ListOfFluxObjectives" from this Objective_t as a ListOf_t *.
+ * @return the "ListOfMembers" from this Group_t as a ListOf_t *.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 ListOf_t*
-Objective_getListOfFluxObjectives(Objective_t* o);
+Group_getListOfMembers(Group_t* g);
 
 
 /**
- * Get a FluxObjective_t from the Objective_t.
+ * Get a Member_t from the Group_t.
  *
- * @param o the Objective_t structure to search.
+ * @param g the Group_t structure to search.
  *
- * @param n an unsigned int representing the index of the FluxObjective_t to
- * retrieve.
+ * @param n an unsigned int representing the index of the Member_t to retrieve.
  *
- * @return the nth FluxObjective_t in the ListOfFluxObjectives within this
- * Objective.
+ * @return the nth Member_t in the ListOfMembers within this Group.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_getFluxObjective(Objective_t* o, unsigned int n);
+Member_t*
+Group_getMember(Group_t* g, unsigned int n);
 
 
 /**
- * Get a FluxObjective_t from the Objective_t based on its identifier.
+ * Get a Member_t from the Group_t based on its identifier.
  *
- * @param o the Objective_t structure to search.
+ * @param g the Group_t structure to search.
  *
- * @param sid a string representing the identifier of the FluxObjective_t to
- * retrieve.
+ * @param sid a string representing the identifier of the Member_t to retrieve.
  *
- * @return the FluxObjective_t in the ListOfFluxObjectives within this
- * Objective with the given id or NULL if no such FluxObjective_t exists.
+ * @return the Member_t in the ListOfMembers within this Group with the given
+ * id or NULL if no such Member_t exists.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_getFluxObjectiveById(Objective_t* o, const char *sid);
+Member_t*
+Group_getMemberById(Group_t* g, const char *sid);
 
 
 /**
- * Get a FluxObjective_t from the Objective_t based on the Reaction to which it
- * refers.
+ * Get a Member_t from the Group_t based on the IdRef to which it refers.
  *
- * @param o the Objective_t structure to search.
+ * @param g the Group_t structure to search.
  *
- * @param sid a string representing the reaction attribute of the
- * FluxObjective_t object to retrieve.
+ * @param sid a string representing the idRef attribute of the Member_t object
+ * to retrieve.
  *
- * @return the first FluxObjective_t in this Objective_t based on the given
- * reaction attribute or NULL if no such FluxObjective_t exists.
+ * @return the first Member_t in this Group_t based on the given idRef
+ * attribute or NULL if no such Member_t exists.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_getFluxObjectiveByReaction(Objective_t* o, const char *sid);
+Member_t*
+Group_getMemberByIdRef(Group_t* g, const char *sid);
 
 
 /**
- * Adds a copy of the given FluxObjective_t to this Objective_t.
+ * Adds a copy of the given Member_t to this Group_t.
  *
- * @param o the Objective_t structure to which the FluxObjective_t should be
- * added.
+ * @param g the Group_t structure to which the Member_t should be added.
  *
- * @param fo the FluxObjective_t object to add.
+ * @param m the Member_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_addFluxObjective(Objective_t* o, const FluxObjective_t* fo);
+Group_addMember(Group_t* g, const Member_t* m);
 
 
 /**
- * Get the number of FluxObjective_t objects in this Objective_t.
+ * Get the number of Member_t objects in this Group_t.
  *
- * @param o the Objective_t structure to query.
+ * @param g the Group_t structure to query.
  *
- * @return the number of FluxObjective_t objects in this Objective_t.
+ * @return the number of Member_t objects in this Group_t.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 unsigned int
-Objective_getNumFluxObjectives(Objective_t* o);
+Group_getNumMembers(Group_t* g);
 
 
 /**
- * Creates a new FluxObjective_t object, adds it to this Objective_t object and
- * returns the FluxObjective_t object created.
+ * Creates a new Member_t object, adds it to this Group_t object and returns
+ * the Member_t object created.
  *
- * @param o the Objective_t structure to which the FluxObjective_t should be
- * added.
+ * @param g the Group_t structure to which the Member_t should be added.
  *
- * @return a new FluxObjective_t object instance.
+ * @return a new Member_t object instance.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_createFluxObjective(Objective_t* o);
+Member_t*
+Group_createMember(Group_t* g);
 
 
 /**
- * Removes the nth FluxObjective_t from this Objective_t and returns a pointer
- * to it.
+ * Removes the nth Member_t from this Group_t and returns a pointer to it.
  *
- * @param o the Objective_t structure to search.
+ * @param g the Group_t structure to search.
  *
- * @param n an unsigned int representing the index of the FluxObjective_t to
- * remove.
+ * @param n an unsigned int representing the index of the Member_t to remove.
  *
- * @return a pointer to the nth FluxObjective_t in this Objective_t.
+ * @return a pointer to the nth Member_t in this Group_t.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_removeFluxObjective(Objective_t* o, unsigned int n);
+Member_t*
+Group_removeMember(Group_t* g, unsigned int n);
 
 
 /**
- * Removes the FluxObjective_t from this Objective_t based on its identifier
- * and returns a pointer to it.
+ * Removes the Member_t from this Group_t based on its identifier and returns a
+ * pointer to it.
  *
- * @param o the Objective_t structure to search.
+ * @param g the Group_t structure to search.
  *
- * @param sid a string representing the identifier of the FluxObjective_t to
- * remove.
+ * @param sid a string representing the identifier of the Member_t to remove.
  *
- * @return the FluxObjective_t in this Objective_t based on the identifier or
- * NULL if no such FluxObjective_t exists.
+ * @return the Member_t in this Group_t based on the identifier or NULL if no
+ * such Member_t exists.
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
-FluxObjective_t*
-Objective_removeFluxObjectiveById(Objective_t* o, const char* sid);
+Member_t*
+Group_removeMemberById(Group_t* g, const char* sid);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Objective_t
+ * Predicate returning @c 1 if all the required attributes for this Group_t
  * object have been set.
  *
- * @param o the Objective_t structure.
+ * @param g the Group_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * Objective_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the Objective_t object are:
- * @li "id"
- * @li "type"
- *
- * @memberof Objective_t
- */
-LIBSBML_EXTERN
-int
-Objective_hasRequiredAttributes(const Objective_t * o);
-
-
-/**
- * Predicate returning @c 1 if all the required elements for this Objective_t
- * object have been set.
- *
- * @param o the Objective_t structure.
- *
- * @return @c 1 to indicate that all the required elements of this Objective_t
+ * @return @c 1 to indicate that all the required attributes of this Group_t
  * have been set, otherwise @c 0 is returned.
  *
  *
- * @note The required elements for the Objective_t object are:
+ * @note The required attributes for the Group_t object are:
+ * @li "kind"
  *
- * @memberof Objective_t
+ * @memberof Group_t
  */
 LIBSBML_EXTERN
 int
-Objective_hasRequiredElements(const Objective_t * o);
+Group_hasRequiredAttributes(const Group_t * g);
+
+
+/**
+ * Predicate returning @c 1 if all the required elements for this Group_t
+ * object have been set.
+ *
+ * @param g the Group_t structure.
+ *
+ * @return @c 1 to indicate that all the required elements of this Group_t have
+ * been set, otherwise @c 0 is returned.
+ *
+ *
+ * @note The required elements for the Group_t object are:
+ *
+ * @memberof Group_t
+ */
+LIBSBML_EXTERN
+int
+Group_hasRequiredElements(const Group_t * g);
 
 
 
@@ -1565,6 +1489,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !Objective_H__ */
+#endif /* !Group_H__ */
 
 

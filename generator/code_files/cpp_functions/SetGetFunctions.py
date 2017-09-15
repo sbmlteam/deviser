@@ -1043,15 +1043,22 @@ class SetGetFunctions():
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
 
-        return_lines.append('@copydetails doc_returns_success_code')
-        return_lines.append('@li @{0}constant{1}{2}, '
-                            ' OperationReturnValues_'
-                            't{3}'.format(self.language, self.open_br,
-                                          self.success, self.close_br))
-        return_lines.append('@li @{0}constant{1}{2},'
-                            ' OperationReturnValues_'
-                            't{3}'.format(self.language, self.open_br,
-                                          self.failed, self.close_br))
+        if 'isEnum' in attribute and attribute['isEnum']:
+            return_lines.append('@copydetails doc_returns_one_success_code')
+            return_lines.append('@li @{0}constant{1}{2}, '
+                                ' OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.success, self.close_br))
+        else:
+            return_lines.append('@copydetails doc_returns_success_code')
+            return_lines.append('@li @{0}constant{1}{2}, '
+                                ' OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.success, self.close_br))
+            return_lines.append('@li @{0}constant{1}{2},'
+                                ' OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              self.failed, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:

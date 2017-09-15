@@ -270,9 +270,8 @@ public:
   /**
    * Unsets the value of the "type" attribute of this CoordinateComponent.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetType();
 
@@ -1277,9 +1276,8 @@ CoordinateComponent_unsetId(CoordinateComponent_t * cc);
  *
  * @param cc the CoordinateComponent_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof CoordinateComponent_t
  */

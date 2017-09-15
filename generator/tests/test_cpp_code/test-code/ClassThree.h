@@ -350,9 +350,8 @@ public:
   /**
    * Unsets the value of the "number" attribute of this ClassThree.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetNumber();
 
@@ -360,9 +359,8 @@ public:
   /**
    * Unsets the value of the "name" attribute of this ClassThree.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int unsetName();
 
@@ -370,9 +368,8 @@ public:
   /**
    * Unsets the value of the "badName" attribute of this ClassThree.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetBadName();
 
@@ -380,9 +377,8 @@ public:
   /**
    * Unsets the value of the "otherNum" attribute of this ClassThree.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetOtherNum();
 
@@ -1199,9 +1195,8 @@ ClassThree_setOtherNumAsString(ClassThree_t * ct, const char * otherNum);
  *
  * @param ct the ClassThree_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof ClassThree_t
  */
@@ -1215,9 +1210,8 @@ ClassThree_unsetNumber(ClassThree_t * ct);
  *
  * @param ct the ClassThree_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof ClassThree_t
  */
@@ -1231,9 +1225,8 @@ ClassThree_unsetName(ClassThree_t * ct);
  *
  * @param ct the ClassThree_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof ClassThree_t
  */
@@ -1247,9 +1240,8 @@ ClassThree_unsetBadName(ClassThree_t * ct);
  *
  * @param ct the ClassThree_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof ClassThree_t
  */

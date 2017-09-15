@@ -304,9 +304,8 @@ public:
   /**
    * Unsets the value of the "functionType" attribute of this AnalyticVolume.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetFunctionType();
 
@@ -1160,9 +1159,8 @@ AnalyticVolume_unsetId(AnalyticVolume_t * av);
  *
  * @param av the AnalyticVolume_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof AnalyticVolume_t
  */

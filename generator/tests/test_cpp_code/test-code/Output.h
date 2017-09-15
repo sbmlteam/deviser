@@ -337,9 +337,8 @@ public:
   /**
    * Unsets the value of the "transitionEffect" attribute of this Output.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetTransitionEffect();
 
@@ -1168,9 +1167,8 @@ Output_unsetQualitativeSpecies(Output_t * o);
  *
  * @param o the Output_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof Output_t
  */

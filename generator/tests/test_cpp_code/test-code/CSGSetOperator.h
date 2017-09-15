@@ -262,9 +262,8 @@ public:
   /**
    * Unsets the value of the "operationType" attribute of this CSGSetOperator.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetOperationType();
 
@@ -1321,9 +1320,8 @@ CSGSetOperator_setComplementB(CSGSetOperator_t * csgso,
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof CSGSetOperator_t
  */

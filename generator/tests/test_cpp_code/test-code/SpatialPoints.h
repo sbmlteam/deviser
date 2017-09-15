@@ -361,9 +361,8 @@ public:
   /**
    * Unsets the value of the "compression" attribute of this SpatialPoints.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetCompression();
 
@@ -391,9 +390,8 @@ public:
   /**
    * Unsets the value of the "dataType" attribute of this SpatialPoints.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetDataType();
 
@@ -1231,9 +1229,8 @@ SpatialPoints_unsetId(SpatialPoints_t * sp);
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof SpatialPoints_t
  */
@@ -1279,9 +1276,8 @@ SpatialPoints_unsetArrayDataLength(SpatialPoints_t * sp);
  *
  * @param sp the SpatialPoints_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof SpatialPoints_t
  */

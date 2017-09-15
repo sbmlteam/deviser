@@ -520,9 +520,8 @@ public:
   /**
    * Unsets the value of the "dataType" attribute of this SampledField.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetDataType();
 
@@ -561,9 +560,8 @@ public:
    * Unsets the value of the "interpolationType" attribute of this
    * SampledField.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetInterpolationType();
 
@@ -571,9 +569,8 @@ public:
   /**
    * Unsets the value of the "compression" attribute of this SampledField.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetCompression();
 
@@ -1711,9 +1708,8 @@ SampledField_unsetId(SampledField_t * sf);
  *
  * @param sf the SampledField_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1776,9 +1772,8 @@ SampledField_unsetNumSamples3(SampledField_t * sf);
  *
  * @param sf the SampledField_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */
@@ -1792,9 +1787,8 @@ SampledField_unsetInterpolationType(SampledField_t * sf);
  *
  * @param sf the SampledField_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof SampledField_t
  */

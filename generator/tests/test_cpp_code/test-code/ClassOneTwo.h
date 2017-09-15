@@ -493,9 +493,8 @@ public:
   /**
    * Unsets the value of the "attEnum" attribute of this ClassOneTwo.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetAttEnum();
 
@@ -1611,9 +1610,8 @@ ClassOneTwo_unsetAttUnit(ClassOneTwo_t * cot);
  *
  * @param cot the ClassOneTwo_t structure.
  *
- * @copydetails doc_returns_success_code
+ * @copydetails doc_returns_one_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  *
  * @memberof ClassOneTwo_t
  */
