@@ -657,6 +657,7 @@ MySEDClass_isSetId(const MySEDClass_t * msedc);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof MySEDClass_t
  */
@@ -673,6 +674,7 @@ MySEDClass_setId(MySEDClass_t * msedc, const char * id);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof MySEDClass_t
  */

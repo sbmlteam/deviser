@@ -645,7 +645,7 @@ class SetGetFunctions():
         params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
                       .format(attribute['name'], att_type,
                               ob_type))
-        single_return = self.get_single_return(attribute)
+        single_return = self.get_single_return(attribute) if self.is_cpp_api else False
         if single_return:
             return_lines.append("@copydetails doc_returns_one_success_code")
             return_lines.append('@li @{0}constant{1}{2}, '
@@ -663,6 +663,11 @@ class SetGetFunctions():
                                 ' OperationReturnValues_'
                                 't{3}'.format(self.language, self.open_br,
                                               self.invalid_att, self.close_br))
+            if not self.is_cpp_api:
+                    return_lines.append('@li @{0}constant{1}{2},'
+                                        ' OperationReturnValues_'
+                                        't{3}'.format(self.language, self.open_br,
+                                                      global_variables.ret_invalid_obj, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -792,6 +797,11 @@ class SetGetFunctions():
                             ' OperationReturnValues_'
                             't{3}'.format(self.language, self.open_br,
                                           self.invalid_att, self.close_br))
+        if not self.is_cpp_api:
+            return_lines.append('@li @{0}constant{1}{2},'
+                                ' OperationReturnValues_'
+                                't{3}'.format(self.language, self.open_br,
+                                              global_variables.ret_invalid_obj, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -1077,11 +1087,22 @@ class SetGetFunctions():
                           .format(self.abbrev_parent, self.object_name))
 
         if 'isEnum' in attribute and attribute['isEnum']:
-            return_lines.append('@copydetails doc_returns_one_success_code')
-            return_lines.append('@li @{0}constant{1}{2}, '
-                                ' OperationReturnValues_'
-                                't{3}'.format(self.language, self.open_br,
-                                              self.success, self.close_br))
+            if self.is_cpp_api:
+                return_lines.append('@copydetails doc_returns_one_success_code')
+                return_lines.append('@li @{0}constant{1}{2}, '
+                                    ' OperationReturnValues_'
+                                    't{3}'.format(self.language, self.open_br,
+                                                  self.success, self.close_br))
+            else:
+                return_lines.append('@copydetails doc_returns_success_code')
+                return_lines.append('@li @{0}constant{1}{2}, '
+                                    ' OperationReturnValues_'
+                                    't{3}'.format(self.language, self.open_br,
+                                                  self.success, self.close_br))
+                return_lines.append('@li @{0}constant{1}{2},'
+                                    ' OperationReturnValues_'
+                                    't{3}'.format(self.language, self.open_br,
+                                                  global_variables.ret_invalid_obj, self.close_br))
         else:
             return_lines.append('@copydetails doc_returns_success_code')
             return_lines.append('@li @{0}constant{1}{2}, '
@@ -1092,6 +1113,11 @@ class SetGetFunctions():
                                 ' OperationReturnValues_'
                                 't{3}'.format(self.language, self.open_br,
                                               self.failed, self.close_br))
+            if not self.is_cpp_api:
+                return_lines.append('@li @{0}constant{1}{2},'
+                                    ' OperationReturnValues_'
+                                    't{3}'.format(self.language, self.open_br,
+                                                  global_variables.ret_invalid_obj, self.close_br))
 
         # create the function declaration
         if self.is_cpp_api:

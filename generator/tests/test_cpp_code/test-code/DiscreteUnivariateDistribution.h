@@ -1044,6 +1044,7 @@ DiscreteUnivariateDistribution_isSetTruncationUpperBound(const
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1068,6 +1069,7 @@ DiscreteUnivariateDistribution_setTruncationLowerBound(
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1125,6 +1127,7 @@ DiscreteUnivariateDistribution_createTruncationUpperBound(DiscreteUnivariateDist
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1143,6 +1146,7 @@ DiscreteUnivariateDistribution_unsetTruncationLowerBound(DiscreteUnivariateDistr
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
