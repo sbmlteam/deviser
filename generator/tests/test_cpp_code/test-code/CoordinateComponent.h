@@ -153,6 +153,10 @@ public:
    *
    * @return the value of the "type" attribute of this CoordinateComponent as a
    * CoordinateKind_t.
+   *
+   * @copydetails doc_coordinatecomponent_type
+   * @if clike The value is drawn from the enumeration @ref
+   * CoordinateKind_t@endif
    */
   CoordinateKind_t getType() const;
 
@@ -162,6 +166,8 @@ public:
    *
    * @return the value of the "type" attribute of this CoordinateComponent as a
    * string.
+   *
+   * @copydetails doc_coordinatecomponent_type
    */
   const std::string& getTypeAsString() const;
 
@@ -191,6 +197,8 @@ public:
    *
    * @return @c true if this CoordinateComponent's "type" attribute has been
    * set, otherwise @c false is returned.
+   *
+   * @copydetails doc_coordinatecomponent_type
    */
   bool isSetType() const;
 
@@ -221,12 +229,15 @@ public:
   /**
    * Sets the value of the "type" attribute of this CoordinateComponent.
    *
-   * @param type CoordinateKind_t value of the "type" attribute to be set.
+   * @param type @if clike CoordinateKind_t@else int@endif value of the "type"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_coordinatecomponent_type
    */
   int setType(const CoordinateKind_t type);
 
@@ -240,6 +251,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_coordinatecomponent_type
    */
   int setType(const std::string& type);
 
@@ -272,6 +285,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_coordinatecomponent_type
    */
   int unsetType();
 
@@ -1102,6 +1117,10 @@ CoordinateComponent_getId(const CoordinateComponent_t * cc);
  * @return the value of the "type" attribute of this CoordinateComponent_t as a
  * CoordinateKind_t.
  *
+ * @copydetails doc_coordinatecomponent_t_type
+ * @if clike The value is drawn from the enumeration @ref
+ * CoordinateKind_t@endif
+ *
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
@@ -1118,6 +1137,8 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  * const char *.
  *
  * @copydetails doc_returned_unowned_char
+ *
+ * @copydetails doc_coordinatecomponent_t_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1167,6 +1188,8 @@ CoordinateComponent_isSetId(const CoordinateComponent_t * cc);
  *
  * @return @c 1 (true) if this CoordinateComponent_t's "type" attribute has
  * been set, otherwise @c 0 (false) is returned.
+ *
+ * @copydetails doc_coordinatecomponent_t_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1222,6 +1245,8 @@ CoordinateComponent_setId(CoordinateComponent_t * cc, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_coordinatecomponent_t_type
+ *
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
@@ -1241,6 +1266,8 @@ CoordinateComponent_setType(CoordinateComponent_t * cc,
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_coordinatecomponent_t_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1294,6 +1321,8 @@ CoordinateComponent_unsetId(CoordinateComponent_t * cc);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_coordinatecomponent_t_type
  *
  * @memberof CoordinateComponent_t
  */

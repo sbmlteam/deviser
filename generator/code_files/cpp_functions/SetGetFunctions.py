@@ -201,6 +201,10 @@ class SetGetFunctions():
             if attribute['CType'] == 'const char *':
                 additional.append('@copydetails doc_returned_owned_char')
 
+        if 'isEnum' in attribute and attribute['isEnum']:
+            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append('@if clike The value is drawn from the enumeration @ref {0}@endif'.format(attribute['CType']))
+#            additional.append('The possible values returned by this method are:')
         # create the function implementation
         if self.is_cpp_api:
             if not self.document:
@@ -283,6 +287,9 @@ class SetGetFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
             additional.append('@copydetails doc_returned_unowned_char')
+            additional.append(' ')
+        if 'isEnum' in attribute and attribute['isEnum']:
+            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
         if self.is_cpp_api:
             implementation = ['static const std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],
@@ -503,6 +510,8 @@ class SetGetFunctions():
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
 
+        if 'isEnum' in attribute and attribute['isEnum']:
+            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
         # create the function implementation
         if self.is_cpp_api:
             if query.is_string(attribute):
@@ -645,9 +654,14 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
-                      .format(attribute['name'], att_type,
-                              ob_type))
+        if self.is_cpp_api and 'isEnum' in attribute and attribute['isEnum']:
+            params.append('@param {0} @if clike {1}@else int@endif value of the \"{0}\" {2} to be set.'
+                          .format(attribute['name'], att_type,
+                                  ob_type))
+        else:
+            params.append('@param {0} {1} value of the \"{0}\" {2} to be set.'
+                          .format(attribute['name'], att_type,
+                                  ob_type))
         single_return = self.get_single_return(attribute) if self.is_cpp_api else False
         if single_return:
             return_lines.append("@copydetails doc_returns_one_success_code")
@@ -672,6 +686,8 @@ class SetGetFunctions():
                                         't{3}'.format(self.language, self.open_br,
                                                       global_variables.ret_invalid_obj, self.close_br))
 
+        if 'isEnum' in attribute and attribute['isEnum']:
+            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
         # create the function declaration
         if self.is_cpp_api:
             function = 'set{0}'.format(attribute['capAttName'])
@@ -805,6 +821,8 @@ class SetGetFunctions():
                                 ' OperationReturnValues_'
                                 't{3}'.format(self.language, self.open_br,
                                               global_variables.ret_invalid_obj, self.close_br))
+
+        additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -1121,6 +1139,8 @@ class SetGetFunctions():
                                     ' OperationReturnValues_'
                                     't{3}'.format(self.language, self.open_br,
                                                   global_variables.ret_invalid_obj, self.close_br))
+        if 'isEnum' in attribute and attribute['isEnum']:
+            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
 
         # create the function declaration
         if self.is_cpp_api:

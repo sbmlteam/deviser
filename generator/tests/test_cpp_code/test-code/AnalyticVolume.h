@@ -152,6 +152,10 @@ public:
    *
    * @return the value of the "functionType" attribute of this AnalyticVolume
    * as a FunctionKind_t.
+   *
+   * @copydetails doc_analyticvolume_functionType
+   * @if clike The value is drawn from the enumeration @ref
+   * FunctionKind_t@endif
    */
   FunctionKind_t getFunctionType() const;
 
@@ -161,6 +165,8 @@ public:
    *
    * @return the value of the "functionType" attribute of this AnalyticVolume
    * as a string.
+   *
+   * @copydetails doc_analyticvolume_functionType
    */
   const std::string& getFunctionTypeAsString() const;
 
@@ -199,6 +205,8 @@ public:
    *
    * @return @c true if this AnalyticVolume's "functionType" attribute has been
    * set, otherwise @c false is returned.
+   *
+   * @copydetails doc_analyticvolume_functionType
    */
   bool isSetFunctionType() const;
 
@@ -239,13 +247,15 @@ public:
   /**
    * Sets the value of the "functionType" attribute of this AnalyticVolume.
    *
-   * @param functionType FunctionKind_t value of the "functionType" attribute
-   * to be set.
+   * @param functionType @if clike FunctionKind_t@else int@endif value of the
+   * "functionType" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_analyticvolume_functionType
    */
   int setFunctionType(const FunctionKind_t functionType);
 
@@ -260,6 +270,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_analyticvolume_functionType
    */
   int setFunctionType(const std::string& functionType);
 
@@ -306,6 +318,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_analyticvolume_functionType
    */
   int unsetFunctionType();
 
@@ -934,6 +948,9 @@ AnalyticVolume_getId(const AnalyticVolume_t * av);
  * @return the value of the "functionType" attribute of this AnalyticVolume_t
  * as a FunctionKind_t.
  *
+ * @copydetails doc_analyticvolume_t_functionType
+ * @if clike The value is drawn from the enumeration @ref FunctionKind_t@endif
+ *
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
@@ -950,6 +967,8 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  * as a const char *.
  *
  * @copydetails doc_returned_unowned_char
+ *
+ * @copydetails doc_analyticvolume_t_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1014,6 +1033,8 @@ AnalyticVolume_isSetId(const AnalyticVolume_t * av);
  *
  * @return @c 1 (true) if this AnalyticVolume_t's "functionType" attribute has
  * been set, otherwise @c 0 (false) is returned.
+ *
+ * @copydetails doc_analyticvolume_t_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1086,6 +1107,8 @@ AnalyticVolume_setId(AnalyticVolume_t * av, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_analyticvolume_t_functionType
+ *
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
@@ -1105,6 +1128,8 @@ AnalyticVolume_setFunctionType(AnalyticVolume_t * av,
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_analyticvolume_t_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1178,6 +1203,8 @@ AnalyticVolume_unsetId(AnalyticVolume_t * av);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_analyticvolume_t_functionType
  *
  * @memberof AnalyticVolume_t
  */

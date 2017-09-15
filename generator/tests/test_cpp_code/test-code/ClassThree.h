@@ -139,6 +139,9 @@ public:
    *
    * @return the value of the "number" attribute of this ClassThree as a
    * Enum_t.
+   *
+   * @copydetails doc_classthree_number
+   * @if clike The value is drawn from the enumeration @ref Enum_t@endif
    */
   Enum_t getNumber() const;
 
@@ -148,6 +151,8 @@ public:
    *
    * @return the value of the "number" attribute of this ClassThree as a
    * string.
+   *
+   * @copydetails doc_classthree_number
    */
   const std::string& getNumberAsString() const;
 
@@ -156,6 +161,9 @@ public:
    * Returns the value of the "name" attribute of this ClassThree.
    *
    * @return the value of the "name" attribute of this ClassThree as a Fred_t.
+   *
+   * @copydetails doc_classthree_name
+   * @if clike The value is drawn from the enumeration @ref Fred_t@endif
    */
   virtual Fred_t getName() const;
 
@@ -164,6 +172,8 @@ public:
    * Returns the value of the "name" attribute of this ClassThree.
    *
    * @return the value of the "name" attribute of this ClassThree as a string.
+   *
+   * @copydetails doc_classthree_name
    */
   const std::string& getNameAsString() const;
 
@@ -173,6 +183,9 @@ public:
    *
    * @return the value of the "badName" attribute of this ClassThree as a
    * Fred_t.
+   *
+   * @copydetails doc_classthree_badName
+   * @if clike The value is drawn from the enumeration @ref Fred_t@endif
    */
   Fred_t getBadName() const;
 
@@ -182,6 +195,8 @@ public:
    *
    * @return the value of the "badName" attribute of this ClassThree as a
    * string.
+   *
+   * @copydetails doc_classthree_badName
    */
   const std::string& getBadNameAsString() const;
 
@@ -191,6 +206,9 @@ public:
    *
    * @return the value of the "otherNum" attribute of this ClassThree as a
    * Enum_t.
+   *
+   * @copydetails doc_classthree_otherNum
+   * @if clike The value is drawn from the enumeration @ref Enum_t@endif
    */
   Enum_t getOtherNum() const;
 
@@ -200,6 +218,8 @@ public:
    *
    * @return the value of the "otherNum" attribute of this ClassThree as a
    * string.
+   *
+   * @copydetails doc_classthree_otherNum
    */
   const std::string& getOtherNumAsString() const;
 
@@ -210,6 +230,8 @@ public:
    *
    * @return @c true if this ClassThree's "number" attribute has been set,
    * otherwise @c false is returned.
+   *
+   * @copydetails doc_classthree_number
    */
   bool isSetNumber() const;
 
@@ -219,6 +241,8 @@ public:
    *
    * @return @c true if this ClassThree's "name" attribute has been set,
    * otherwise @c false is returned.
+   *
+   * @copydetails doc_classthree_name
    */
   virtual bool isSetName() const;
 
@@ -229,6 +253,8 @@ public:
    *
    * @return @c true if this ClassThree's "badName" attribute has been set,
    * otherwise @c false is returned.
+   *
+   * @copydetails doc_classthree_badName
    */
   bool isSetBadName() const;
 
@@ -239,6 +265,8 @@ public:
    *
    * @return @c true if this ClassThree's "otherNum" attribute has been set,
    * otherwise @c false is returned.
+   *
+   * @copydetails doc_classthree_otherNum
    */
   bool isSetOtherNum() const;
 
@@ -246,12 +274,15 @@ public:
   /**
    * Sets the value of the "number" attribute of this ClassThree.
    *
-   * @param number Enum_t value of the "number" attribute to be set.
+   * @param number @if clike Enum_t@else int@endif value of the "number"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_number
    */
   int setNumber(const Enum_t number);
 
@@ -265,6 +296,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_number
    */
   int setNumber(const std::string& number);
 
@@ -272,12 +305,15 @@ public:
   /**
    * Sets the value of the "name" attribute of this ClassThree.
    *
-   * @param name Fred_t value of the "name" attribute to be set.
+   * @param name @if clike Fred_t@else int@endif value of the "name" attribute
+   * to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_name
    */
   virtual int setName(const Fred_t name);
 
@@ -291,6 +327,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_name
    */
   int setName(const std::string& name);
 
@@ -298,12 +336,15 @@ public:
   /**
    * Sets the value of the "badName" attribute of this ClassThree.
    *
-   * @param badName Fred_t value of the "badName" attribute to be set.
+   * @param badName @if clike Fred_t@else int@endif value of the "badName"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_badName
    */
   int setBadName(const Fred_t badName);
 
@@ -317,6 +358,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_badName
    */
   int setBadName(const std::string& badName);
 
@@ -324,12 +367,15 @@ public:
   /**
    * Sets the value of the "otherNum" attribute of this ClassThree.
    *
-   * @param otherNum Enum_t value of the "otherNum" attribute to be set.
+   * @param otherNum @if clike Enum_t@else int@endif value of the "otherNum"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_otherNum
    */
   int setOtherNum(const Enum_t otherNum);
 
@@ -343,6 +389,8 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_otherNum
    */
   int setOtherNum(const std::string& otherNum);
 
@@ -352,6 +400,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_number
    */
   int unsetNumber();
 
@@ -361,6 +411,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_name
    */
   virtual int unsetName();
 
@@ -370,6 +422,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_badName
    */
   int unsetBadName();
 
@@ -379,6 +433,8 @@ public:
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_otherNum
    */
   int unsetOtherNum();
 
@@ -875,6 +931,9 @@ ClassThree_free(ClassThree_t* ct);
  * @return the value of the "number" attribute of this ClassThree_t as a
  * Enum_t.
  *
+ * @copydetails doc_classthree_t_number
+ * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -892,6 +951,8 @@ ClassThree_getNumber(const ClassThree_t * ct);
  *
  * @copydetails doc_returned_unowned_char
  *
+ * @copydetails doc_classthree_t_number
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -905,6 +966,9 @@ ClassThree_getNumberAsString(const ClassThree_t * ct);
  * @param ct the ClassThree_t structure whose name is sought.
  *
  * @return the value of the "name" attribute of this ClassThree_t as a Fred_t.
+ *
+ * @copydetails doc_classthree_t_name
+ * @if clike The value is drawn from the enumeration @ref Fred_t@endif
  *
  * @memberof ClassThree_t
  */
@@ -923,6 +987,8 @@ ClassThree_getName(const ClassThree_t * ct);
  *
  * @copydetails doc_returned_unowned_char
  *
+ * @copydetails doc_classthree_t_name
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -937,6 +1003,9 @@ ClassThree_getNameAsString(const ClassThree_t * ct);
  *
  * @return the value of the "badName" attribute of this ClassThree_t as a
  * Fred_t.
+ *
+ * @copydetails doc_classthree_t_badName
+ * @if clike The value is drawn from the enumeration @ref Fred_t@endif
  *
  * @memberof ClassThree_t
  */
@@ -955,6 +1024,8 @@ ClassThree_getBadName(const ClassThree_t * ct);
  *
  * @copydetails doc_returned_unowned_char
  *
+ * @copydetails doc_classthree_t_badName
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -969,6 +1040,9 @@ ClassThree_getBadNameAsString(const ClassThree_t * ct);
  *
  * @return the value of the "otherNum" attribute of this ClassThree_t as a
  * Enum_t.
+ *
+ * @copydetails doc_classthree_t_otherNum
+ * @if clike The value is drawn from the enumeration @ref Enum_t@endif
  *
  * @memberof ClassThree_t
  */
@@ -987,6 +1061,8 @@ ClassThree_getOtherNum(const ClassThree_t * ct);
  *
  * @copydetails doc_returned_unowned_char
  *
+ * @copydetails doc_classthree_t_otherNum
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1002,6 +1078,8 @@ ClassThree_getOtherNumAsString(const ClassThree_t * ct);
  *
  * @return @c 1 (true) if this ClassThree_t's "number" attribute has been set,
  * otherwise @c 0 (false) is returned.
+ *
+ * @copydetails doc_classthree_t_number
  *
  * @memberof ClassThree_t
  */
@@ -1019,6 +1097,8 @@ ClassThree_isSetNumber(const ClassThree_t * ct);
  * @return @c 1 (true) if this ClassThree_t's "name" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
+ * @copydetails doc_classthree_t_name
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1035,6 +1115,8 @@ ClassThree_isSetName(const ClassThree_t * ct);
  * @return @c 1 (true) if this ClassThree_t's "badName" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
+ * @copydetails doc_classthree_t_badName
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1050,6 +1132,8 @@ ClassThree_isSetBadName(const ClassThree_t * ct);
  *
  * @return @c 1 (true) if this ClassThree_t's "otherNum" attribute has been
  * set, otherwise @c 0 (false) is returned.
+ *
+ * @copydetails doc_classthree_t_otherNum
  *
  * @memberof ClassThree_t
  */
@@ -1070,6 +1154,8 @@ ClassThree_isSetOtherNum(const ClassThree_t * ct);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_number
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1088,6 +1174,8 @@ ClassThree_setNumber(ClassThree_t * ct, Enum_t number);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_t_number
  *
  * @memberof ClassThree_t
  */
@@ -1108,6 +1196,8 @@ ClassThree_setNumberAsString(ClassThree_t * ct, const char * number);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_name
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1126,6 +1216,8 @@ ClassThree_setName(ClassThree_t * ct, Fred_t name);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_t_name
  *
  * @memberof ClassThree_t
  */
@@ -1146,6 +1238,8 @@ ClassThree_setNameAsString(ClassThree_t * ct, const char * name);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_badName
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1164,6 +1258,8 @@ ClassThree_setBadName(ClassThree_t * ct, Fred_t badName);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_t_badName
  *
  * @memberof ClassThree_t
  */
@@ -1184,6 +1280,8 @@ ClassThree_setBadNameAsString(ClassThree_t * ct, const char * badName);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_otherNum
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1203,6 +1301,8 @@ ClassThree_setOtherNum(ClassThree_t * ct, Enum_t otherNum);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_otherNum
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1218,6 +1318,8 @@ ClassThree_setOtherNumAsString(ClassThree_t * ct, const char * otherNum);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_t_number
  *
  * @memberof ClassThree_t
  */
@@ -1235,6 +1337,8 @@ ClassThree_unsetNumber(ClassThree_t * ct);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_name
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1251,6 +1355,8 @@ ClassThree_unsetName(ClassThree_t * ct);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * @copydetails doc_classthree_t_badName
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -1266,6 +1372,8 @@ ClassThree_unsetBadName(ClassThree_t * ct);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_t_otherNum
  *
  * @memberof ClassThree_t
  */
