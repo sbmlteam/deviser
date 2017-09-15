@@ -164,8 +164,8 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * Calling this function with @p letter = @c NULL is equivalent to calling
-   * unsetLetter().
+   * Calling this function with @p letter = @c NULL or an empty string is
+   * equivalent to calling unsetLetter().
    */
   int setLetter(const std::string& letter);
 
@@ -710,8 +710,8 @@ Abc_isSetLetter(const Abc_t * a);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * Calling this function with @p letter = @c NULL is equivalent to calling
- * Abc_unsetLetter().
+ * Calling this function with @p letter = @c NULL or an empty string is
+ * equivalent to calling Abc_unsetLetter().
  *
  * @memberof Abc_t
  */

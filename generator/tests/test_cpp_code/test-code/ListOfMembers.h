@@ -192,8 +192,8 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * Calling this function with @p name = @c NULL is equivalent to calling
-   * unsetName().
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
    */
   virtual int setName(const std::string& name);
 
@@ -600,8 +600,8 @@ ListOfMembers_setId(ListOf_t * lo, const char * id);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * Calling this function with @p name = @c NULL is equivalent to calling
- * ListOfMembers_unsetName().
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling ListOfMembers_unsetName().
  *
  * @memberof ListOfMembers_t
  */

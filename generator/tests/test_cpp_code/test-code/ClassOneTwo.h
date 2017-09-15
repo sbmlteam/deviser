@@ -339,8 +339,8 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * Calling this function with @p attStr = @c NULL is equivalent to calling
-   * unsetAttStr().
+   * Calling this function with @p attStr = @c NULL or an empty string is
+   * equivalent to calling unsetAttStr().
    */
   int setAttStr(const std::string& attStr);
 
@@ -1381,8 +1381,8 @@ ClassOneTwo_setAtt1(ClassOneTwo_t * cot, int att1);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * Calling this function with @p attStr = @c NULL is equivalent to calling
- * ClassOneTwo_unsetAttStr().
+ * Calling this function with @p attStr = @c NULL or an empty string is
+ * equivalent to calling ClassOneTwo_unsetAttStr().
  *
  * @memberof ClassOneTwo_t
  */

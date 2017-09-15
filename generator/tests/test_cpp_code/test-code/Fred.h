@@ -283,8 +283,8 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * Calling this function with @p str = @c NULL is equivalent to calling
-   * unsetStr().
+   * Calling this function with @p str = @c NULL or an empty string is
+   * equivalent to calling unsetStr().
    */
   int setStr(const std::string& str);
 
@@ -1490,8 +1490,8 @@ Fred_setNum(Fred_t * f, int num);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * Calling this function with @p str = @c NULL is equivalent to calling
- * Fred_unsetStr().
+ * Calling this function with @p str = @c NULL or an empty string is equivalent
+ * to calling Fred_unsetStr().
  *
  * @memberof Fred_t
  */

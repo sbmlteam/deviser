@@ -696,7 +696,7 @@ class SetGetFunctions():
                                          attribute['name']))
 
         if attribute['type'] == 'string':
-            additional.append('Calling this function with @p {0} = @c NULL is equivalent to calling '
+            additional.append('Calling this function with @p {0} = @c NULL or an empty string is equivalent to calling '
                               '{1}().'.format(attribute['name'], unsetfunc))
 
         # create the function implementation

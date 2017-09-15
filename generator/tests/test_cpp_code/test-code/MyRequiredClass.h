@@ -751,8 +751,8 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * Calling this function with @p name = @c NULL is equivalent to calling
-   * unsetName().
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
    */
   virtual int setName(const std::string& name);
 
@@ -2671,8 +2671,8 @@ MyRequiredClass_setId(MyRequiredClass_t * mrc, const char * id);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  *
- * Calling this function with @p name = @c NULL is equivalent to calling
- * MyRequiredClass_unsetName().
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling MyRequiredClass_unsetName().
  *
  * @memberof MyRequiredClass_t
  */
