@@ -977,6 +977,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGObject_t
  */
 LIBSBML_EXTERN
@@ -992,6 +994,8 @@ CSGObject_create(unsigned int level,
  * @param csgo the CSGObject_t structure.
  *
  * @return a (deep) copy of this CSGObject_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGObject_t
  */
@@ -1020,6 +1024,8 @@ CSGObject_free(CSGObject_t* csgo);
  * @return the value of the "id" attribute of this CSGObject_t as a pointer to
  * a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof CSGObject_t
  */
 LIBSBML_EXTERN
@@ -1034,6 +1040,8 @@ CSGObject_getId(const CSGObject_t * csgo);
  *
  * @return the value of the "domainType" attribute of this CSGObject_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof CSGObject_t
  */

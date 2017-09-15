@@ -1039,6 +1039,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Group_t
  */
 LIBSBML_EXTERN
@@ -1054,6 +1056,8 @@ Group_create(unsigned int level,
  * @param g the Group_t structure.
  *
  * @return a (deep) copy of this Group_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Group_t
  */
@@ -1082,6 +1086,8 @@ Group_free(Group_t* g);
  * @return the value of the "id" attribute of this Group_t as a pointer to a
  * string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Group_t
  */
 LIBSBML_EXTERN
@@ -1096,6 +1102,8 @@ Group_getId(const Group_t * g);
  *
  * @return the value of the "name" attribute of this Group_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Group_t
  */
@@ -1124,6 +1132,8 @@ Group_getKind(const Group_t * g);
  * @param g the Group_t structure whose kind is sought.
  *
  * @return the value of the "kind" attribute of this Group_t as a const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof Group_t
  */

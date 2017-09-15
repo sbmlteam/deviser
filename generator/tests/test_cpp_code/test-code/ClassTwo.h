@@ -521,6 +521,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ClassTwo_t
  */
 LIBSBML_EXTERN
@@ -536,6 +538,8 @@ ClassTwo_create(unsigned int level,
  * @param ct the ClassTwo_t structure.
  *
  * @return a (deep) copy of this ClassTwo_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ClassTwo_t
  */

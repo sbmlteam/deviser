@@ -814,6 +814,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ExponentialDistribution_t
  */
 LIBSBML_EXTERN
@@ -829,6 +831,8 @@ ExponentialDistribution_create(unsigned int level,
  * @param ed the ExponentialDistribution_t structure.
  *
  * @return a (deep) copy of this ExponentialDistribution_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ExponentialDistribution_t
  */

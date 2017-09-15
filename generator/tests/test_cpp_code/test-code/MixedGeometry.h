@@ -1060,6 +1060,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
@@ -1075,6 +1077,8 @@ MixedGeometry_create(unsigned int level,
  * @param mg the MixedGeometry_t structure.
  *
  * @return a (deep) copy of this MixedGeometry_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MixedGeometry_t
  */

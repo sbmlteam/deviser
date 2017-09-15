@@ -614,6 +614,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof UnknownType_t
  */
 LIBSBML_EXTERN
@@ -629,6 +631,8 @@ UnknownType_create(unsigned int level,
  * @param ut the UnknownType_t structure.
  *
  * @return a (deep) copy of this UnknownType_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof UnknownType_t
  */

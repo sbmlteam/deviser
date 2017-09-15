@@ -871,6 +871,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
@@ -884,6 +886,8 @@ Compartment_create(unsigned int level, unsigned int version);
  * @param c the Compartment_t structure.
  *
  * @return a (deep) copy of this Compartment_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Compartment_t
  */
@@ -941,6 +945,8 @@ Compartment_getVolume(const Compartment_t * c);
  * @return the value of the "units" attribute of this Compartment_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
@@ -987,6 +993,8 @@ Compartment_getConstant(const Compartment_t * c);
  * @return the value of the "outside" attribute of this Compartment_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
@@ -1001,6 +1009,8 @@ Compartment_getOutside(const Compartment_t * c);
  *
  * @return the value of the "compartmentType" attribute of this Compartment_t
  * as a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Compartment_t
  */

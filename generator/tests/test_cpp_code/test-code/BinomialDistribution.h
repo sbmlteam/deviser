@@ -885,6 +885,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof BinomialDistribution_t
  */
 LIBSBML_EXTERN
@@ -900,6 +902,8 @@ BinomialDistribution_create(unsigned int level,
  * @param bd the BinomialDistribution_t structure.
  *
  * @return a (deep) copy of this BinomialDistribution_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof BinomialDistribution_t
  */

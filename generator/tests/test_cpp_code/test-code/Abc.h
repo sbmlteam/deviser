@@ -634,6 +634,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Abc_t
  */
 LIBSBML_EXTERN
@@ -647,6 +649,8 @@ Abc_create(unsigned int level, unsigned int version, unsigned int pkgVersion);
  * @param a the Abc_t structure.
  *
  * @return a (deep) copy of this Abc_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Abc_t
  */
@@ -674,6 +678,8 @@ Abc_free(Abc_t* a);
  *
  * @return the value of the "letter" attribute of this Abc_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Abc_t
  */

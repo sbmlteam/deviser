@@ -198,6 +198,8 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
+            if attribute['CType'] == 'const char *':
+                additional.append('@copydetails doc_returned_owned_char')
 
         # create the function implementation
         if self.is_cpp_api:
@@ -280,6 +282,7 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             arguments.append('const {0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
+            additional.append('@copydetails doc_returned_unowned_char')
         if self.is_cpp_api:
             implementation = ['static const std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],

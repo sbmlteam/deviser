@@ -592,6 +592,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ModifierSpeciesReference_t
  */
 LIBSBML_EXTERN
@@ -605,6 +607,8 @@ ModifierSpeciesReference_create(unsigned int level, unsigned int version);
  * @param msr the ModifierSpeciesReference_t structure.
  *
  * @return a (deep) copy of this ModifierSpeciesReference_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ModifierSpeciesReference_t
  */

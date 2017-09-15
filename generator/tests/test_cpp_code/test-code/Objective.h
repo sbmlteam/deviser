@@ -1100,6 +1100,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
@@ -1115,6 +1117,8 @@ Objective_create(unsigned int level,
  * @param o the Objective_t structure.
  *
  * @return a (deep) copy of this Objective_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Objective_t
  */
@@ -1143,6 +1147,8 @@ Objective_free(Objective_t* o);
  * @return the value of the "id" attribute of this Objective_t as a pointer to
  * a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
@@ -1157,6 +1163,8 @@ Objective_getId(const Objective_t * o);
  *
  * @return the value of the "name" attribute of this Objective_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Objective_t
  */
@@ -1187,6 +1195,8 @@ Objective_getType(const Objective_t * o);
  *
  * @return the value of the "type" attribute of this Objective_t as a const
  * char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof Objective_t
  */

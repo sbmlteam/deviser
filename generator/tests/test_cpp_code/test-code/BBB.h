@@ -957,6 +957,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
@@ -970,6 +972,8 @@ BBB_create(unsigned int level, unsigned int version, unsigned int pkgVersion);
  * @param bbb the BBB_t structure.
  *
  * @return a (deep) copy of this BBB_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof BBB_t
  */
@@ -997,6 +1001,8 @@ BBB_free(BBB_t* bbb);
  *
  * @return the value of the "id" attribute of this BBB_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof BBB_t
  */

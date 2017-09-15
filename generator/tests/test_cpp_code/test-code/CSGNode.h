@@ -677,6 +677,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
@@ -699,6 +701,8 @@ CSGNode_createCSGPrimitive(unsigned int level,
  * this CSGNode_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGNode_t
  */
@@ -723,6 +727,8 @@ CSGNode_createCSGTranslation(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
@@ -745,6 +751,8 @@ CSGNode_createCSGRotation(unsigned int level,
  * this CSGNode_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGNode_t
  */
@@ -769,6 +777,8 @@ CSGNode_createCSGScale(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
@@ -792,6 +802,8 @@ CSGNode_createCSGHomogeneousTransformation(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
@@ -807,6 +819,8 @@ CSGNode_createCSGSetOperator(unsigned int level,
  * @param csgn the CSGNode_t structure.
  *
  * @return a (deep) copy of this CSGNode_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGNode_t
  */
@@ -834,6 +848,8 @@ CSGNode_free(CSGNode_t* csgn);
  *
  * @return the value of the "id" attribute of this CSGNode_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof CSGNode_t
  */

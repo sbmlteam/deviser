@@ -1038,6 +1038,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
@@ -1053,6 +1055,8 @@ CoordinateComponent_create(unsigned int level,
  * @param cc the CoordinateComponent_t structure.
  *
  * @return a (deep) copy of this CoordinateComponent_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CoordinateComponent_t
  */
@@ -1080,6 +1084,8 @@ CoordinateComponent_free(CoordinateComponent_t* cc);
  *
  * @return the value of the "id" attribute of this CoordinateComponent_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof CoordinateComponent_t
  */
@@ -1111,6 +1117,8 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  * @return the value of the "type" attribute of this CoordinateComponent_t as a
  * const char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
@@ -1125,6 +1133,8 @@ CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc);
  *
  * @return the value of the "unit" attribute of this CoordinateComponent_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof CoordinateComponent_t
  */

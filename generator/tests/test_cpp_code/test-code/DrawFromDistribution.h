@@ -1022,6 +1022,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof DrawFromDistribution_t
  */
 LIBSBML_EXTERN
@@ -1037,6 +1039,8 @@ DrawFromDistribution_create(unsigned int level,
  * @param dfd the DrawFromDistribution_t structure.
  *
  * @return a (deep) copy of this DrawFromDistribution_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof DrawFromDistribution_t
  */

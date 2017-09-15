@@ -1312,6 +1312,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1327,6 +1329,8 @@ Transition_create(unsigned int level,
  * @param t the Transition_t structure.
  *
  * @return a (deep) copy of this Transition_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1355,6 +1359,8 @@ Transition_free(Transition_t* t);
  * @return the value of the "id" attribute of this Transition_t as a pointer to
  * a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1369,6 +1375,8 @@ Transition_getId(const Transition_t * t);
  *
  * @return the value of the "name" attribute of this Transition_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Transition_t
  */

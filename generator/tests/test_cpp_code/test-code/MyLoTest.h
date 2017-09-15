@@ -611,6 +611,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MyLoTest_t
  */
 LIBSBML_EXTERN
@@ -626,6 +628,8 @@ MyLoTest_create(unsigned int level,
  * @param mlt the MyLoTest_t structure.
  *
  * @return a (deep) copy of this MyLoTest_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MyLoTest_t
  */
@@ -653,6 +657,8 @@ MyLoTest_free(MyLoTest_t* mlt);
  *
  * @return the value of the "id" attribute of this MyLoTest_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyLoTest_t
  */

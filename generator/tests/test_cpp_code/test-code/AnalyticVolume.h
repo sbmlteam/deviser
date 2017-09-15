@@ -870,6 +870,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
@@ -885,6 +887,8 @@ AnalyticVolume_create(unsigned int level,
  * @param av the AnalyticVolume_t structure.
  *
  * @return a (deep) copy of this AnalyticVolume_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof AnalyticVolume_t
  */
@@ -912,6 +916,8 @@ AnalyticVolume_free(AnalyticVolume_t* av);
  *
  * @return the value of the "id" attribute of this AnalyticVolume_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof AnalyticVolume_t
  */
@@ -943,6 +949,8 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  * @return the value of the "functionType" attribute of this AnalyticVolume_t
  * as a const char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
@@ -972,6 +980,8 @@ AnalyticVolume_getOrdinal(const AnalyticVolume_t * av);
  *
  * @return the value of the "domainType" attribute of this AnalyticVolume_t as
  * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof AnalyticVolume_t
  */

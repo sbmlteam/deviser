@@ -905,6 +905,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGeometry_t
  */
 LIBSBML_EXTERN
@@ -920,6 +922,8 @@ CSGeometry_create(unsigned int level,
  * @param csg the CSGeometry_t structure.
  *
  * @return a (deep) copy of this CSGeometry_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGeometry_t
  */

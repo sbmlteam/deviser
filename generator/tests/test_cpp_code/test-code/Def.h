@@ -702,6 +702,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Def_t
  */
 LIBSBML_EXTERN
@@ -715,6 +717,8 @@ Def_create(unsigned int level, unsigned int version, unsigned int pkgVersion);
  * @param d the Def_t structure.
  *
  * @return a (deep) copy of this Def_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Def_t
  */
@@ -742,6 +746,8 @@ Def_free(Def_t* d);
  *
  * @return the value of the "letter" attribute of this Def_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Def_t
  */

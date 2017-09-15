@@ -1115,6 +1115,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
@@ -1130,6 +1132,8 @@ SampledField_create(unsigned int level,
  * @param sf the SampledField_t structure.
  *
  * @return a (deep) copy of this SampledField_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SampledField_t
  */
@@ -1157,6 +1161,8 @@ SampledField_free(SampledField_t* sf);
  *
  * @return the value of the "id" attribute of this SampledField_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof SampledField_t
  */
@@ -1187,6 +1193,8 @@ SampledField_getDataType(const SampledField_t * sf);
  *
  * @return the value of the "dataType" attribute of this SampledField_t as a
  * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof SampledField_t
  */
@@ -1265,6 +1273,8 @@ SampledField_getInterpolationType(const SampledField_t * sf);
  * @return the value of the "interpolationType" attribute of this
  * SampledField_t as a const char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
@@ -1294,6 +1304,8 @@ SampledField_getCompression(const SampledField_t * sf);
  *
  * @return the value of the "compression" attribute of this SampledField_t as a
  * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof SampledField_t
  */

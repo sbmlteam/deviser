@@ -736,6 +736,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
@@ -759,6 +761,8 @@ GeometryDefinition_createAnalyticGeometry(unsigned int level,
  * this GeometryDefinition_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof GeometryDefinition_t
  */
@@ -784,6 +788,8 @@ GeometryDefinition_createSampledFieldGeometry(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
@@ -807,6 +813,8 @@ GeometryDefinition_createCSGeometry(unsigned int level,
  * this GeometryDefinition_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof GeometryDefinition_t
  */
@@ -832,6 +840,8 @@ GeometryDefinition_createParametricGeometry(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
@@ -847,6 +857,8 @@ GeometryDefinition_createMixedGeometry(unsigned int level,
  * @param gd the GeometryDefinition_t structure.
  *
  * @return a (deep) copy of this GeometryDefinition_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof GeometryDefinition_t
  */
@@ -874,6 +886,8 @@ GeometryDefinition_free(GeometryDefinition_t* gd);
  *
  * @return the value of the "id" attribute of this GeometryDefinition_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof GeometryDefinition_t
  */

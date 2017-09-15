@@ -1252,6 +1252,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1267,6 +1269,8 @@ MyTestClass_create(unsigned int level,
  * @param mtc the MyTestClass_t structure.
  *
  * @return a (deep) copy of this MyTestClass_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MyTestClass_t
  */
@@ -1295,6 +1299,8 @@ MyTestClass_free(MyTestClass_t* mtc);
  * @return the value of the "id" attribute of this MyTestClass_t as a pointer
  * to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1309,6 +1315,8 @@ MyTestClass_getId(const MyTestClass_t * mtc);
  *
  * @return the value of the "name" attribute of this MyTestClass_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyTestClass_t
  */
@@ -1414,6 +1422,8 @@ MyTestClass_getFalse(const MyTestClass_t * mtc);
  * @return the value of the "unit" attribute of this MyTestClass_t as a pointer
  * to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1428,6 +1438,8 @@ MyTestClass_getUnit(const MyTestClass_t * mtc);
  *
  * @return the value of the "ref1" attribute of this MyTestClass_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyTestClass_t
  */
@@ -1444,6 +1456,8 @@ MyTestClass_getRef1(const MyTestClass_t * mtc);
  * @return the value of the "ref2" attribute of this MyTestClass_t as a pointer
  * to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1458,6 +1472,8 @@ MyTestClass_getRef2(const MyTestClass_t * mtc);
  *
  * @return the value of the "refUnit" attribute of this MyTestClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyTestClass_t
  */
@@ -1474,6 +1490,8 @@ MyTestClass_getRefUnit(const MyTestClass_t * mtc);
  * @return the value of the "correctId" attribute of this MyTestClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1488,6 +1506,8 @@ MyTestClass_getCorrectId(const MyTestClass_t * mtc);
  *
  * @return the value of the "idRef" attribute of this MyTestClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyTestClass_t
  */
@@ -1504,6 +1524,8 @@ MyTestClass_getIdRef(const MyTestClass_t * mtc);
  * @return the value of the "idref1" attribute of this MyTestClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -1518,6 +1540,8 @@ MyTestClass_getIdref1(const MyTestClass_t * mtc);
  *
  * @return the value of the "idref2" attribute of this MyTestClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyTestClass_t
  */

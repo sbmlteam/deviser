@@ -582,6 +582,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MySEDClass_t
  */
 LIBSEDML_EXTERN
@@ -595,6 +597,8 @@ MySEDClass_create(unsigned int level, unsigned int version);
  * @param msedc the MySEDClass_t structure.
  *
  * @return a (deep) copy of this MySEDClass_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MySEDClass_t
  */
@@ -622,6 +626,8 @@ MySEDClass_free(MySEDClass_t* msedc);
  *
  * @return the value of the "id" attribute of this MySEDClass_t as a pointer to
  * a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MySEDClass_t
  */

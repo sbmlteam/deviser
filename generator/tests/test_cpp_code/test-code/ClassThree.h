@@ -828,6 +828,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -843,6 +845,8 @@ ClassThree_create(unsigned int level,
  * @param ct the ClassThree_t structure.
  *
  * @return a (deep) copy of this ClassThree_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ClassThree_t
  */
@@ -886,6 +890,8 @@ ClassThree_getNumber(const ClassThree_t * ct);
  * @return the value of the "number" attribute of this ClassThree_t as a const
  * char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -914,6 +920,8 @@ ClassThree_getName(const ClassThree_t * ct);
  *
  * @return the value of the "name" attribute of this ClassThree_t as a const
  * char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof ClassThree_t
  */
@@ -945,6 +953,8 @@ ClassThree_getBadName(const ClassThree_t * ct);
  * @return the value of the "badName" attribute of this ClassThree_t as a const
  * char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
@@ -974,6 +984,8 @@ ClassThree_getOtherNum(const ClassThree_t * ct);
  *
  * @return the value of the "otherNum" attribute of this ClassThree_t as a
  * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof ClassThree_t
  */

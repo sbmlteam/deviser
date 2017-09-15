@@ -518,6 +518,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Child_t
  */
 LIBSBML_EXTERN
@@ -533,6 +535,8 @@ Child_create(unsigned int level,
  * @param c the Child_t structure.
  *
  * @return a (deep) copy of this Child_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Child_t
  */

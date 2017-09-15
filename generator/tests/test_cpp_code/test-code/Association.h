@@ -557,6 +557,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Association_t
  */
 LIBSBML_EXTERN
@@ -580,6 +582,8 @@ Association_createFbcAnd(unsigned int level,
  * Association_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Association_t
  */
@@ -605,6 +609,8 @@ Association_createFbcOr(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Association_t
  */
 LIBSBML_EXTERN
@@ -620,6 +626,8 @@ Association_createGeneProductRef(unsigned int level,
  * @param a the Association_t structure.
  *
  * @return a (deep) copy of this Association_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Association_t
  */

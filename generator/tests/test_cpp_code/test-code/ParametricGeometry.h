@@ -997,6 +997,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ParametricGeometry_t
  */
 LIBSBML_EXTERN
@@ -1012,6 +1014,8 @@ ParametricGeometry_create(unsigned int level,
  * @param pg the ParametricGeometry_t structure.
  *
  * @return a (deep) copy of this ParametricGeometry_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ParametricGeometry_t
  */

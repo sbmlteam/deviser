@@ -536,6 +536,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Other_t
  */
 LIBSBML_EXTERN
@@ -551,6 +553,8 @@ Other_create(unsigned int level,
  * @param o the Other_t structure.
  *
  * @return a (deep) copy of this Other_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Other_t
  */

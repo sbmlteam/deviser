@@ -896,6 +896,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Category_t
  */
 LIBSBML_EXTERN
@@ -911,6 +913,8 @@ Category_create(unsigned int level,
  * @param c the Category_t structure.
  *
  * @return a (deep) copy of this Category_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Category_t
  */

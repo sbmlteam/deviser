@@ -815,6 +815,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Output_t
  */
 LIBSBML_EXTERN
@@ -830,6 +832,8 @@ Output_create(unsigned int level,
  * @param o the Output_t structure.
  *
  * @return a (deep) copy of this Output_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Output_t
  */
@@ -858,6 +862,8 @@ Output_free(Output_t* o);
  * @return the value of the "id" attribute of this Output_t as a pointer to a
  * string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Output_t
  */
 LIBSBML_EXTERN
@@ -872,6 +878,8 @@ Output_getId(const Output_t * o);
  *
  * @return the value of the "qualitativeSpecies" attribute of this Output_t as
  * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Output_t
  */
@@ -903,6 +911,8 @@ Output_getTransitionEffect(const Output_t * o);
  * @return the value of the "transitionEffect" attribute of this Output_t as a
  * const char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof Output_t
  */
 LIBSBML_EXTERN
@@ -917,6 +927,8 @@ Output_getTransitionEffectAsString(const Output_t * o);
  *
  * @return the value of the "name" attribute of this Output_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Output_t
  */

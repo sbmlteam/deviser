@@ -136,7 +136,10 @@ class Constructors():
         #                 '{1} object.'.format(self.cap_language,
         #                                      global_variables.document_class),
         #                 '@copydetails doc_note_setting_lv']
-        additional = ''
+
+        additional = []
+        if not self.is_cpp_api:
+            additional.append('@copydetails doc_returned_owned_pointer')
 
         # create the function declaration
         if self.is_cpp_api:
@@ -612,6 +615,7 @@ class Constructors():
         if not self.is_cpp_api:
             arguments.append('const {0}* {1}'.format(self.object_name,
                                                    abbrev_object))
+            additional.append('@copydetails doc_returned_owned_pointer')
         # create the function implementation
         if self.is_cpp_api:
             implementation = ['return new {0}(*this)'.format(self.object_name)]

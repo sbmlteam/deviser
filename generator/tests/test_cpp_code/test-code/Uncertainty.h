@@ -903,6 +903,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Uncertainty_t
  */
 LIBSBML_EXTERN
@@ -918,6 +920,8 @@ Uncertainty_create(unsigned int level,
  * @param u the Uncertainty_t structure.
  *
  * @return a (deep) copy of this Uncertainty_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Uncertainty_t
  */

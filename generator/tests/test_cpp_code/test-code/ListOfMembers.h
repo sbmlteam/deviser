@@ -517,6 +517,8 @@ BEGIN_C_DECLS
  * @return the value of the "id" attribute of this ListOf_t as a pointer to a
  * string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
@@ -531,6 +533,8 @@ ListOfMembers_getId(const ListOf_t * lo);
  *
  * @return the value of the "name" attribute of this ListOf_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof ListOfMembers_t
  */

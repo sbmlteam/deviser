@@ -988,6 +988,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
@@ -1003,6 +1005,8 @@ SampledFieldGeometry_create(unsigned int level,
  * @param sfg the SampledFieldGeometry_t structure.
  *
  * @return a (deep) copy of this SampledFieldGeometry_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -1032,6 +1036,8 @@ SampledFieldGeometry_free(SampledFieldGeometry_t* sfg);
  *
  * @return the value of the "sampledField" attribute of this
  * SampledFieldGeometry_t as a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof SampledFieldGeometry_t
  */

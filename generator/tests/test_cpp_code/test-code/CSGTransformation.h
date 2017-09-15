@@ -887,6 +887,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGTransformation_t
  */
 LIBSBML_EXTERN
@@ -902,6 +904,8 @@ CSGTransformation_create(unsigned int level,
  * @param csgt the CSGTransformation_t structure.
  *
  * @return a (deep) copy of this CSGTransformation_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGTransformation_t
  */

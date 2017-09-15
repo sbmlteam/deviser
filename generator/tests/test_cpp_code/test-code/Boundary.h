@@ -670,6 +670,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Boundary_t
  */
 LIBSBML_EXTERN
@@ -685,6 +687,8 @@ Boundary_create(unsigned int level,
  * @param b the Boundary_t structure.
  *
  * @return a (deep) copy of this Boundary_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Boundary_t
  */
@@ -712,6 +716,8 @@ Boundary_free(Boundary_t* b);
  *
  * @return the value of the "id" attribute of this Boundary_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Boundary_t
  */

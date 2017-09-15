@@ -874,6 +874,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Parent_t
  */
 LIBSBML_EXTERN
@@ -889,6 +891,8 @@ Parent_create(unsigned int level,
  * @param p the Parent_t structure.
  *
  * @return a (deep) copy of this Parent_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Parent_t
  */

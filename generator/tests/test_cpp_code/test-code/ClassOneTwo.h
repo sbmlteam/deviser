@@ -1034,6 +1034,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
@@ -1049,6 +1051,8 @@ ClassOneTwo_create(unsigned int level,
  * @param cot the ClassOneTwo_t structure.
  *
  * @return a (deep) copy of this ClassOneTwo_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ClassOneTwo_t
  */
@@ -1076,6 +1080,8 @@ ClassOneTwo_free(ClassOneTwo_t* cot);
  *
  * @return the value of the "id" attribute of this ClassOneTwo_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof ClassOneTwo_t
  */
@@ -1106,6 +1112,8 @@ ClassOneTwo_getAtt1(const ClassOneTwo_t * cot);
  *
  * @return the value of the "attStr" attribute of this ClassOneTwo_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof ClassOneTwo_t
  */
@@ -1167,6 +1175,8 @@ ClassOneTwo_getAttDbl(const ClassOneTwo_t * cot);
  * @return the value of the "attUnit" attribute of this ClassOneTwo_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
@@ -1196,6 +1206,8 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot);
  *
  * @return the value of the "attEnum" attribute of this ClassOneTwo_t as a
  * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof ClassOneTwo_t
  */

@@ -738,6 +738,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Member_t
  */
 LIBSBML_EXTERN
@@ -753,6 +755,8 @@ Member_create(unsigned int level,
  * @param m the Member_t structure.
  *
  * @return a (deep) copy of this Member_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Member_t
  */
@@ -781,6 +785,8 @@ Member_free(Member_t* m);
  * @return the value of the "id" attribute of this Member_t as a pointer to a
  * string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Member_t
  */
 LIBSBML_EXTERN
@@ -795,6 +801,8 @@ Member_getId(const Member_t * m);
  *
  * @return the value of the "name" attribute of this Member_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Member_t
  */
@@ -811,6 +819,8 @@ Member_getName(const Member_t * m);
  * @return the value of the "idRef" attribute of this Member_t as a pointer to
  * a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Member_t
  */
 LIBSBML_EXTERN
@@ -825,6 +835,8 @@ Member_getIdRef(const Member_t * m);
  *
  * @return the value of the "metaIdRef" attribute of this Member_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Member_t
  */

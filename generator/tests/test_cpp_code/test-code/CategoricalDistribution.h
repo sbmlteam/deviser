@@ -853,6 +853,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
@@ -868,6 +870,8 @@ CategoricalDistribution_create(unsigned int level,
  * @param cd the CategoricalDistribution_t structure.
  *
  * @return a (deep) copy of this CategoricalDistribution_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CategoricalDistribution_t
  */

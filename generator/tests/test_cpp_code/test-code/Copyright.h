@@ -619,6 +619,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Copyright_t
  */
 LIBSBML_EXTERN
@@ -634,6 +636,8 @@ Copyright_create(unsigned int level,
  * @param c the Copyright_t structure.
  *
  * @return a (deep) copy of this Copyright_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Copyright_t
  */
@@ -661,6 +665,8 @@ Copyright_free(Copyright_t* c);
  *
  * @return the value of the "id" attribute of this Copyright_t as a pointer to
  * a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Copyright_t
  */

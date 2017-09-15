@@ -1092,6 +1092,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Event_t
  */
 LIBSBML_EXTERN
@@ -1105,6 +1107,8 @@ Event_create(unsigned int level, unsigned int version);
  * @param e the Event_t structure.
  *
  * @return a (deep) copy of this Event_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Event_t
  */
@@ -1148,6 +1152,8 @@ Event_getUseValuesFromTriggerTime(const Event_t * e);
  *
  * @return the value of the "timeUnits" attribute of this Event_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Event_t
  */

@@ -1231,6 +1231,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
@@ -1246,6 +1248,8 @@ Fred_create(unsigned int level,
  * @param f the Fred_t structure.
  *
  * @return a (deep) copy of this Fred_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Fred_t
  */
@@ -1273,6 +1277,8 @@ Fred_free(Fred_t* f);
  *
  * @return the value of the "id" attribute of this Fred_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof Fred_t
  */
@@ -1317,6 +1323,8 @@ Fred_getNum(const Fred_t * f);
  * @return the value of the "str" attribute of this Fred_t as a pointer to a
  * string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
@@ -1344,6 +1352,8 @@ Fred_getKind(const Fred_t * f);
  * @param f the Fred_t structure whose kind is sought.
  *
  * @return the value of the "kind" attribute of this Fred_t as a const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof Fred_t
  */

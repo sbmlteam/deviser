@@ -503,6 +503,8 @@ BEGIN_C_DECLS
  * @return the value of the "activeObjective" attribute of this ListOf_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN

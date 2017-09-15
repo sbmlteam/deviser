@@ -859,6 +859,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ArrayChild_t
  */
 LIBSBML_EXTERN
@@ -874,6 +876,8 @@ ArrayChild_create(unsigned int level,
  * @param ac the ArrayChild_t structure.
  *
  * @return a (deep) copy of this ArrayChild_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ArrayChild_t
  */

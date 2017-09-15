@@ -823,6 +823,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof ContainerX_t
  */
 LIBSBML_EXTERN
@@ -838,6 +840,8 @@ ContainerX_create(unsigned int level,
  * @param cx the ContainerX_t structure.
  *
  * @return a (deep) copy of this ContainerX_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof ContainerX_t
  */

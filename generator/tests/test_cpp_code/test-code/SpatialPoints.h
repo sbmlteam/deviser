@@ -866,6 +866,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof SpatialPoints_t
  */
 LIBSBML_EXTERN
@@ -881,6 +883,8 @@ SpatialPoints_create(unsigned int level,
  * @param sp the SpatialPoints_t structure.
  *
  * @return a (deep) copy of this SpatialPoints_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SpatialPoints_t
  */
@@ -908,6 +912,8 @@ SpatialPoints_free(SpatialPoints_t* sp);
  *
  * @return the value of the "id" attribute of this SpatialPoints_t as a pointer
  * to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof SpatialPoints_t
  */
@@ -938,6 +944,8 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  *
  * @return the value of the "compression" attribute of this SpatialPoints_t as
  * a const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof SpatialPoints_t
  */
@@ -984,6 +992,8 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  *
  * @return the value of the "dataType" attribute of this SpatialPoints_t as a
  * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @memberof SpatialPoints_t
  */

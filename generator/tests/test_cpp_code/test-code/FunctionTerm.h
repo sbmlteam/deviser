@@ -717,6 +717,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof FunctionTerm_t
  */
 LIBSBML_EXTERN
@@ -732,6 +734,8 @@ FunctionTerm_create(unsigned int level,
  * @param ft the FunctionTerm_t structure.
  *
  * @return a (deep) copy of this FunctionTerm_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof FunctionTerm_t
  */

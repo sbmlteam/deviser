@@ -645,6 +645,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -668,6 +670,8 @@ Distribution_createBetaDistribution(unsigned int level,
  * this Distribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */
@@ -693,6 +697,8 @@ Distribution_createCauchyDistribution(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -716,6 +722,8 @@ Distribution_createExponentialDistribution(unsigned int level,
  * this Distribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */
@@ -741,6 +749,8 @@ Distribution_createLogisticDistribution(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -764,6 +774,8 @@ Distribution_createNormalDistribution(unsigned int level,
  * this Distribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */
@@ -789,6 +801,8 @@ Distribution_createBinomialDistribution(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -812,6 +826,8 @@ Distribution_createGeometricDistribution(unsigned int level,
  * this Distribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */
@@ -837,6 +853,8 @@ Distribution_createBernoulliDistribution(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -860,6 +878,8 @@ Distribution_createCategoricalDistribution(unsigned int level,
  * this Distribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */
@@ -885,6 +905,8 @@ Distribution_createMultivariateDistribution(unsigned int level,
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Distribution_t
  */
 LIBSBML_EXTERN
@@ -900,6 +922,8 @@ Distribution_createExternalDistribution(unsigned int level,
  * @param d the Distribution_t structure.
  *
  * @return a (deep) copy of this Distribution_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Distribution_t
  */

@@ -609,6 +609,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MyBase_t
  */
 LIBSBML_EXTERN
@@ -624,6 +626,8 @@ MyBase_create(unsigned int level,
  * @param mb the MyBase_t structure.
  *
  * @return a (deep) copy of this MyBase_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MyBase_t
  */
@@ -651,6 +655,8 @@ MyBase_free(MyBase_t* mb);
  *
  * @return the value of the "id" attribute of this MyBase_t as a pointer to a
  * string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyBase_t
  */

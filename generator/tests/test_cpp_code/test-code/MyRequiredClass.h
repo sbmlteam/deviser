@@ -1906,6 +1906,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -1921,6 +1923,8 @@ MyRequiredClass_create(unsigned int level,
  * @param mrc the MyRequiredClass_t structure.
  *
  * @return a (deep) copy of this MyRequiredClass_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof MyRequiredClass_t
  */
@@ -1949,6 +1953,8 @@ MyRequiredClass_free(MyRequiredClass_t* mrc);
  * @return the value of the "id" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -1963,6 +1969,8 @@ MyRequiredClass_getId(const MyRequiredClass_t * mrc);
  *
  * @return the value of the "name" attribute of this MyRequiredClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyRequiredClass_t
  */
@@ -2069,6 +2077,8 @@ MyRequiredClass_getFalse(const MyRequiredClass_t * mrc);
  * @return the value of the "unit" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -2083,6 +2093,8 @@ MyRequiredClass_getUnit(const MyRequiredClass_t * mrc);
  *
  * @return the value of the "ref1" attribute of this MyRequiredClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyRequiredClass_t
  */
@@ -2099,6 +2111,8 @@ MyRequiredClass_getRef1(const MyRequiredClass_t * mrc);
  * @return the value of the "ref2" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -2114,6 +2128,8 @@ MyRequiredClass_getRef2(const MyRequiredClass_t * mrc);
  * @return the value of the "refUnit" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -2128,6 +2144,8 @@ MyRequiredClass_getRefUnit(const MyRequiredClass_t * mrc);
  *
  * @return the value of the "correctId" attribute of this MyRequiredClass_t as
  * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyRequiredClass_t
  */
@@ -2189,6 +2207,8 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc);
  * @return the value of the "metaid" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -2203,6 +2223,8 @@ MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc);
  *
  * @return the value of the "metaid1" attribute of this MyRequiredClass_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyRequiredClass_t
  */
@@ -2234,6 +2256,8 @@ MyRequiredClass_getNum4(const MyRequiredClass_t * mrc);
  * @return the value of the "metaidref1" attribute of this MyRequiredClass_t as
  * a pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
@@ -2248,6 +2272,8 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc);
  *
  * @return the value of the "notmetaid" attribute of this MyRequiredClass_t as
  * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof MyRequiredClass_t
  */

@@ -1096,6 +1096,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
@@ -1111,6 +1113,8 @@ CSGSetOperator_create(unsigned int level,
  * @param csgso the CSGSetOperator_t structure.
  *
  * @return a (deep) copy of this CSGSetOperator_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1154,6 +1158,8 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso);
  * @return the value of the "operationType" attribute of this CSGSetOperator_t
  * as a const char *.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
@@ -1169,6 +1175,8 @@ CSGSetOperator_getOperationTypeAsString(const CSGSetOperator_t * csgso);
  * @return the value of the "complementA" attribute of this CSGSetOperator_t as
  * a pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
@@ -1183,6 +1191,8 @@ CSGSetOperator_getComplementA(const CSGSetOperator_t * csgso);
  *
  * @return the value of the "complementB" attribute of this CSGSetOperator_t as
  * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof CSGSetOperator_t
  */

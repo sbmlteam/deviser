@@ -645,6 +645,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof Constraint_t
  */
 LIBSBML_EXTERN
@@ -658,6 +660,8 @@ Constraint_create(unsigned int level, unsigned int version);
  * @param c the Constraint_t structure.
  *
  * @return a (deep) copy of this Constraint_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof Constraint_t
  */

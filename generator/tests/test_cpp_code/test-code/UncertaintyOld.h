@@ -833,6 +833,8 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_note_setting_lv_pkg
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof UncertaintyOld_t
  */
 LIBSBML_EXTERN
@@ -848,6 +850,8 @@ UncertaintyOld_create(unsigned int level,
  * @param uo the UncertaintyOld_t structure.
  *
  * @return a (deep) copy of this UncertaintyOld_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof UncertaintyOld_t
  */
@@ -876,6 +880,8 @@ UncertaintyOld_free(UncertaintyOld_t* uo);
  * @return the value of the "id" attribute of this UncertaintyOld_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof UncertaintyOld_t
  */
 LIBSBML_EXTERN
@@ -890,6 +896,8 @@ UncertaintyOld_getId(const UncertaintyOld_t * uo);
  *
  * @return the value of the "name" attribute of this UncertaintyOld_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof UncertaintyOld_t
  */
