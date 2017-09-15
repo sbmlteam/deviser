@@ -206,6 +206,8 @@ public:
    * Returns the ListOfParametricObjects from this ParametricGeometry.
    *
    * @return the ListOfParametricObjects from this ParametricGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfParametricObjects* getListOfParametricObjects() const;
 
@@ -214,6 +216,8 @@ public:
    * Returns the ListOfParametricObjects from this ParametricGeometry.
    *
    * @return the ListOfParametricObjects from this ParametricGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfParametricObjects* getListOfParametricObjects();
 
@@ -1114,14 +1118,16 @@ ParametricGeometry_unsetSpatialPoints(ParametricGeometry_t * pg);
 
 
 /**
- * Returns a ListOf_t* containing ParametricObject_t objects from this
+ * Returns a ListOf_t * containing ParametricObject_t objects from this
  * ParametricGeometry_t.
  *
- * @param pg the ParametricGeometry_t structure whose "ListOfParametricObjects"
+ * @param pg the ParametricGeometry_t structure whose ListOfParametricObjects
  * is sought.
  *
- * @return the "ListOfParametricObjects" from this ParametricGeometry_t as a
+ * @return the ListOfParametricObjects from this ParametricGeometry_t as a
  * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ParametricGeometry_t
  */

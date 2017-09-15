@@ -308,6 +308,8 @@ public:
    * Returns the ListOfDistribInputs from this DrawFromDistribution.
    *
    * @return the ListOfDistribInputs from this DrawFromDistribution.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfDistribInputs* getListOfDistribInputs() const;
 
@@ -316,6 +318,8 @@ public:
    * Returns the ListOfDistribInputs from this DrawFromDistribution.
    *
    * @return the ListOfDistribInputs from this DrawFromDistribution.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfDistribInputs* getListOfDistribInputs();
 
@@ -1314,14 +1318,16 @@ DrawFromDistribution_unsetDistribution(DrawFromDistribution_t * dfd);
 
 
 /**
- * Returns a ListOf_t* containing DistribInput_t objects from this
+ * Returns a ListOf_t * containing DistribInput_t objects from this
  * DrawFromDistribution_t.
  *
- * @param dfd the DrawFromDistribution_t structure whose "ListOfDistribInputs"
- * is sought.
+ * @param dfd the DrawFromDistribution_t structure whose ListOfDistribInputs is
+ * sought.
  *
- * @return the "ListOfDistribInputs" from this DrawFromDistribution_t as a
+ * @return the ListOfDistribInputs from this DrawFromDistribution_t as a
  * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof DrawFromDistribution_t
  */

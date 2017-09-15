@@ -1028,7 +1028,7 @@ CategoricalDistribution_free(CategoricalDistribution_t* cd)
 
 
 /*
- * Returns a ListOf_t* containing Category_t objects from this
+ * Returns a ListOf_t * containing Category_t objects from this
  * CategoricalDistribution_t.
  */
 LIBSBML_EXTERN

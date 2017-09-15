@@ -188,6 +188,8 @@ public:
    * Returns the ListOfSampledVolumes from this SampledFieldGeometry.
    *
    * @return the ListOfSampledVolumes from this SampledFieldGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfSampledVolumes* getListOfSampledVolumes() const;
 
@@ -196,6 +198,8 @@ public:
    * Returns the ListOfSampledVolumes from this SampledFieldGeometry.
    *
    * @return the ListOfSampledVolumes from this SampledFieldGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfSampledVolumes* getListOfSampledVolumes();
 
@@ -1091,14 +1095,16 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg);
 
 
 /**
- * Returns a ListOf_t* containing SampledVolume_t objects from this
+ * Returns a ListOf_t * containing SampledVolume_t objects from this
  * SampledFieldGeometry_t.
  *
- * @param sfg the SampledFieldGeometry_t structure whose "ListOfSampledVolumes"
+ * @param sfg the SampledFieldGeometry_t structure whose ListOfSampledVolumes
  * is sought.
  *
- * @return the "ListOfSampledVolumes" from this SampledFieldGeometry_t as a
+ * @return the ListOfSampledVolumes from this SampledFieldGeometry_t as a
  * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */

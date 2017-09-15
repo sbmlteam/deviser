@@ -136,6 +136,8 @@ public:
    * Returns the ListOfFreds from this ContainerX.
    *
    * @return the ListOfFreds from this ContainerX.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfFreds* getListOfFreds() const;
 
@@ -144,6 +146,8 @@ public:
    * Returns the ListOfFreds from this ContainerX.
    *
    * @return the ListOfFreds from this ContainerX.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfFreds* getListOfFreds();
 
@@ -855,11 +859,13 @@ ContainerX_free(ContainerX_t* cx);
 
 
 /**
- * Returns a ListOf_t* containing Fred_t objects from this ContainerX_t.
+ * Returns a ListOf_t * containing Fred_t objects from this ContainerX_t.
  *
- * @param cx the ContainerX_t structure whose "ListOfFreds" is sought.
+ * @param cx the ContainerX_t structure whose ListOfFreds is sought.
  *
- * @return the "ListOfFreds" from this ContainerX_t as a ListOf_t *.
+ * @return the ListOfFreds from this ContainerX_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ContainerX_t
  */

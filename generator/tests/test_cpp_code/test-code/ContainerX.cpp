@@ -918,7 +918,7 @@ ContainerX_free(ContainerX_t* cx)
 
 
 /*
- * Returns a ListOf_t* containing Fred_t objects from this ContainerX_t.
+ * Returns a ListOf_t * containing Fred_t objects from this ContainerX_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

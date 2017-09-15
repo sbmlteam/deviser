@@ -383,6 +383,8 @@ public:
    * Returns the ListOfAnothers from this VersSpeciesPlugin.
    *
    * @return the ListOfAnothers from this VersSpeciesPlugin.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfAnothers* getListOfAnothers() const;
 
@@ -391,6 +393,8 @@ public:
    * Returns the ListOfAnothers from this VersSpeciesPlugin.
    *
    * @return the ListOfAnothers from this VersSpeciesPlugin.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfAnothers* getListOfAnothers();
 
@@ -1147,13 +1151,14 @@ BEGIN_C_DECLS
 
 
 /**
- * Returns a ListOf_t* containing Another_t objects from this
+ * Returns a ListOf_t * containing Another_t objects from this
  * VersSpeciesPlugin_t.
  *
- * @param vsp the VersSpeciesPlugin_t structure whose "ListOfAnothers" is
- * sought.
+ * @param vsp the VersSpeciesPlugin_t structure whose ListOfAnothers is sought.
  *
- * @return the "ListOfAnothers" from this VersSpeciesPlugin_t as a ListOf_t *.
+ * @return the ListOfAnothers from this VersSpeciesPlugin_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */

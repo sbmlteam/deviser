@@ -143,6 +143,8 @@ public:
    * Returns the ListOfCategories from this CategoricalDistribution.
    *
    * @return the ListOfCategories from this CategoricalDistribution.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfCategories* getListOfCategories() const;
 
@@ -151,6 +153,8 @@ public:
    * Returns the ListOfCategories from this CategoricalDistribution.
    *
    * @return the ListOfCategories from this CategoricalDistribution.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfCategories* getListOfCategories();
 
@@ -885,14 +889,16 @@ CategoricalDistribution_free(CategoricalDistribution_t* cd);
 
 
 /**
- * Returns a ListOf_t* containing Category_t objects from this
+ * Returns a ListOf_t * containing Category_t objects from this
  * CategoricalDistribution_t.
  *
- * @param cd the CategoricalDistribution_t structure whose "ListOfCategories"
- * is sought.
+ * @param cd the CategoricalDistribution_t structure whose ListOfCategories is
+ * sought.
  *
- * @return the "ListOfCategories" from this CategoricalDistribution_t as a
+ * @return the ListOfCategories from this CategoricalDistribution_t as a
  * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CategoricalDistribution_t
  */

@@ -137,6 +137,8 @@ public:
    * Returns the ListOfChildren from this Parent.
    *
    * @return the ListOfChildren from this Parent.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfChildren* getListOfChildren() const;
 
@@ -145,6 +147,8 @@ public:
    * Returns the ListOfChildren from this Parent.
    *
    * @return the ListOfChildren from this Parent.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfChildren* getListOfChildren();
 
@@ -227,6 +231,8 @@ public:
    * Returns the ListOfSprogs from this Parent.
    *
    * @return the ListOfSprogs from this Parent.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfSprogs* getListOfSprogs() const;
 
@@ -235,6 +241,8 @@ public:
    * Returns the ListOfSprogs from this Parent.
    *
    * @return the ListOfSprogs from this Parent.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfSprogs* getListOfSprogs();
 
@@ -902,11 +910,13 @@ Parent_free(Parent_t* p);
 
 
 /**
- * Returns a ListOf_t* containing Child_t objects from this Parent_t.
+ * Returns a ListOf_t * containing Child_t objects from this Parent_t.
  *
- * @param p the Parent_t structure whose "ListOfChildren" is sought.
+ * @param p the Parent_t structure whose ListOfChildren is sought.
  *
- * @return the "ListOfChildren" from this Parent_t as a ListOf_t *.
+ * @return the ListOfChildren from this Parent_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Parent_t
  */
@@ -995,11 +1005,13 @@ Parent_removeChild(Parent_t* p, unsigned int n);
 
 
 /**
- * Returns a ListOf_t* containing Sprog_t objects from this Parent_t.
+ * Returns a ListOf_t * containing Sprog_t objects from this Parent_t.
  *
- * @param p the Parent_t structure whose "ListOfSprogs" is sought.
+ * @param p the Parent_t structure whose ListOfSprogs is sought.
  *
- * @return the "ListOfSprogs" from this Parent_t as a ListOf_t *.
+ * @return the ListOfSprogs from this Parent_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Parent_t
  */

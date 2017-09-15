@@ -1808,7 +1808,7 @@ Objective_unsetType(Objective_t * o)
 
 
 /*
- * Returns a ListOf_t* containing FluxObjective_t objects from this
+ * Returns a ListOf_t * containing FluxObjective_t objects from this
  * Objective_t.
  */
 LIBSBML_EXTERN

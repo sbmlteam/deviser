@@ -175,6 +175,8 @@ public:
    * Returns the ListOfAnothers from this BBB.
    *
    * @return the ListOfAnothers from this BBB.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfAnothers* getListOfAnothers() const;
 
@@ -183,6 +185,8 @@ public:
    * Returns the ListOfAnothers from this BBB.
    *
    * @return the ListOfAnothers from this BBB.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfAnothers* getListOfAnothers();
 
@@ -1051,11 +1055,13 @@ BBB_unsetId(BBB_t * bbb);
 
 
 /**
- * Returns a ListOf_t* containing Another_t objects from this BBB_t.
+ * Returns a ListOf_t * containing Another_t objects from this BBB_t.
  *
- * @param bbb the BBB_t structure whose "ListOfAnothers" is sought.
+ * @param bbb the BBB_t structure whose ListOfAnothers is sought.
  *
- * @return the "ListOfAnothers" from this BBB_t as a ListOf_t *.
+ * @return the ListOfAnothers from this BBB_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof BBB_t
  */

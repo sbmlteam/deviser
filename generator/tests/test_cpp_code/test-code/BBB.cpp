@@ -1305,7 +1305,7 @@ BBB_unsetId(BBB_t * bbb)
 
 
 /*
- * Returns a ListOf_t* containing Another_t objects from this BBB_t.
+ * Returns a ListOf_t * containing Another_t objects from this BBB_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

@@ -1169,7 +1169,7 @@ QualModelPlugin::createObject(XMLInputStream& stream)
 
 
 /*
- * Returns a ListOf_t* containing QualitativeSpecies_t objects from this
+ * Returns a ListOf_t * containing QualitativeSpecies_t objects from this
  * QualModelPlugin_t.
  */
 LIBSBML_EXTERN
@@ -1282,7 +1282,7 @@ QualModelPlugin_removeQualitativeSpeciesById(QualModelPlugin_t* qmp,
 
 
 /*
- * Returns a ListOf_t* containing Transition_t objects from this
+ * Returns a ListOf_t * containing Transition_t objects from this
  * QualModelPlugin_t.
  */
 LIBSBML_EXTERN

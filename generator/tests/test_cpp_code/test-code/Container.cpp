@@ -922,7 +922,7 @@ Container_free(Container_t* c)
 
 
 /*
- * Returns a ListOf_t* containing MyLoTest_t objects from this Container_t.
+ * Returns a ListOf_t * containing MyLoTest_t objects from this Container_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

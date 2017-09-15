@@ -1275,7 +1275,7 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg)
 
 
 /*
- * Returns a ListOf_t* containing SampledVolume_t objects from this
+ * Returns a ListOf_t * containing SampledVolume_t objects from this
  * SampledFieldGeometry_t.
  */
 LIBSBML_EXTERN

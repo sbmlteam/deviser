@@ -2018,7 +2018,7 @@ Event_unsetDelay(Event_t * e)
 
 
 /*
- * Returns a ListOf_t* containing EventAssignment_t objects from this Event_t.
+ * Returns a ListOf_t * containing EventAssignment_t objects from this Event_t.
  */
 LIBSBML_EXTERN
 SBMLListOf_t*

@@ -292,6 +292,8 @@ public:
    * Returns the ListOfCSGNodes from this CSGSetOperator.
    *
    * @return the ListOfCSGNodes from this CSGSetOperator.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfCSGNodes* getListOfCSGNodes() const;
 
@@ -300,6 +302,8 @@ public:
    * Returns the ListOfCSGNodes from this CSGSetOperator.
    *
    * @return the ListOfCSGNodes from this CSGSetOperator.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfCSGNodes* getListOfCSGNodes();
 
@@ -1363,12 +1367,14 @@ CSGSetOperator_unsetComplementB(CSGSetOperator_t * csgso);
 
 
 /**
- * Returns a ListOf_t* containing CSGNode_t objects from this CSGSetOperator_t.
+ * Returns a ListOf_t * containing CSGNode_t objects from this
+ * CSGSetOperator_t.
  *
- * @param csgso the CSGSetOperator_t structure whose "ListOfCSGNodes" is
- * sought.
+ * @param csgso the CSGSetOperator_t structure whose ListOfCSGNodes is sought.
  *
- * @return the "ListOfCSGNodes" from this CSGSetOperator_t as a ListOf_t *.
+ * @return the ListOfCSGNodes from this CSGSetOperator_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */

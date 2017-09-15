@@ -1326,7 +1326,7 @@ ParametricGeometry_unsetSpatialPoints(ParametricGeometry_t * pg)
 
 
 /*
- * Returns a ListOf_t* containing ParametricObject_t objects from this
+ * Returns a ListOf_t * containing ParametricObject_t objects from this
  * ParametricGeometry_t.
  */
 LIBSBML_EXTERN

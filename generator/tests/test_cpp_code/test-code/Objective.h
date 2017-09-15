@@ -282,6 +282,8 @@ public:
    * Returns the ListOfFluxObjectives from this Objective.
    *
    * @return the ListOfFluxObjectives from this Objective.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfFluxObjectives* getListOfFluxObjectives() const;
 
@@ -290,6 +292,8 @@ public:
    * Returns the ListOfFluxObjectives from this Objective.
    *
    * @return the ListOfFluxObjectives from this Objective.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfFluxObjectives* getListOfFluxObjectives();
 
@@ -1363,12 +1367,14 @@ Objective_unsetType(Objective_t * o);
 
 
 /**
- * Returns a ListOf_t* containing FluxObjective_t objects from this
+ * Returns a ListOf_t * containing FluxObjective_t objects from this
  * Objective_t.
  *
- * @param o the Objective_t structure whose "ListOfFluxObjectives" is sought.
+ * @param o the Objective_t structure whose ListOfFluxObjectives is sought.
  *
- * @return the "ListOfFluxObjectives" from this Objective_t as a ListOf_t *.
+ * @return the ListOfFluxObjectives from this Objective_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Objective_t
  */

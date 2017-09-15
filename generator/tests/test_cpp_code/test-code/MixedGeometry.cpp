@@ -1405,7 +1405,7 @@ MixedGeometry_free(MixedGeometry_t* mg)
 
 
 /*
- * Returns a ListOf_t* containing GeometryDefinition_t objects from this
+ * Returns a ListOf_t * containing GeometryDefinition_t objects from this
  * MixedGeometry_t.
  */
 LIBSBML_EXTERN
@@ -1548,7 +1548,7 @@ MixedGeometry_removeGeometryDefinitionById(MixedGeometry_t* mg,
 
 
 /*
- * Returns a ListOf_t* containing OrdinalMapping_t objects from this
+ * Returns a ListOf_t * containing OrdinalMapping_t objects from this
  * MixedGeometry_t.
  */
 LIBSBML_EXTERN

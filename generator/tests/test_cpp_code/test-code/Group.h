@@ -279,6 +279,8 @@ public:
    * Returns the ListOfMembers from this Group.
    *
    * @return the ListOfMembers from this Group.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfMembers* getListOfMembers() const;
 
@@ -287,6 +289,8 @@ public:
    * Returns the ListOfMembers from this Group.
    *
    * @return the ListOfMembers from this Group.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfMembers* getListOfMembers();
 
@@ -1298,11 +1302,13 @@ Group_unsetKind(Group_t * g);
 
 
 /**
- * Returns a ListOf_t* containing Member_t objects from this Group_t.
+ * Returns a ListOf_t * containing Member_t objects from this Group_t.
  *
- * @param g the Group_t structure whose "ListOfMembers" is sought.
+ * @param g the Group_t structure whose ListOfMembers is sought.
  *
- * @return the "ListOfMembers" from this Group_t as a ListOf_t *.
+ * @return the ListOfMembers from this Group_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Group_t
  */

@@ -115,6 +115,8 @@ public:
    * Returns the ListOfGroups from this GroupsModelPlugin.
    *
    * @return the ListOfGroups from this GroupsModelPlugin.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfGroups* getListOfGroups() const;
 
@@ -123,6 +125,8 @@ public:
    * Returns the ListOfGroups from this GroupsModelPlugin.
    *
    * @return the ListOfGroups from this GroupsModelPlugin.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfGroups* getListOfGroups();
 
@@ -802,12 +806,14 @@ BEGIN_C_DECLS
 
 
 /**
- * Returns a ListOf_t* containing Group_t objects from this
+ * Returns a ListOf_t * containing Group_t objects from this
  * GroupsModelPlugin_t.
  *
- * @param gmp the GroupsModelPlugin_t structure whose "ListOfGroups" is sought.
+ * @param gmp the GroupsModelPlugin_t structure whose ListOfGroups is sought.
  *
- * @return the "ListOfGroups" from this GroupsModelPlugin_t as a ListOf_t *.
+ * @return the ListOfGroups from this GroupsModelPlugin_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof GroupsModelPlugin_t
  */

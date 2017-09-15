@@ -1918,7 +1918,7 @@ VersSpeciesPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
 
 
 /*
- * Returns a ListOf_t* containing Another_t objects from this
+ * Returns a ListOf_t * containing Another_t objects from this
  * VersSpeciesPlugin_t.
  */
 LIBSBML_EXTERN

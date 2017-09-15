@@ -2662,7 +2662,7 @@ Fred_unsetOther2(Fred_t * f)
 
 
 /*
- * Returns a ListOf_t* containing OtherLO_t objects from this Fred_t.
+ * Returns a ListOf_t * containing OtherLO_t objects from this Fred_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

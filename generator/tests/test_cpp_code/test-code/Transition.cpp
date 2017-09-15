@@ -1902,7 +1902,7 @@ Transition_unsetName(Transition_t * t)
 
 
 /*
- * Returns a ListOf_t* containing Input_t objects from this Transition_t.
+ * Returns a ListOf_t * containing Input_t objects from this Transition_t.
  */
 LIBSBML_EXTERN
 ListOf_t*
@@ -2005,7 +2005,7 @@ Transition_removeInputById(Transition_t* t, const char* sid)
 
 
 /*
- * Returns a ListOf_t* containing Output_t objects from this Transition_t.
+ * Returns a ListOf_t * containing Output_t objects from this Transition_t.
  */
 LIBSBML_EXTERN
 ListOf_t*
@@ -2108,7 +2108,7 @@ Transition_removeOutputById(Transition_t* t, const char* sid)
 
 
 /*
- * Returns a ListOf_t* containing FunctionTerm_t objects from this
+ * Returns a ListOf_t * containing FunctionTerm_t objects from this
  * Transition_t.
  */
 LIBSBML_EXTERN

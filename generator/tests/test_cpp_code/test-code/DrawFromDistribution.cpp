@@ -1880,7 +1880,7 @@ DrawFromDistribution_unsetDistribution(DrawFromDistribution_t * dfd)
 
 
 /*
- * Returns a ListOf_t* containing DistribInput_t objects from this
+ * Returns a ListOf_t * containing DistribInput_t objects from this
  * DrawFromDistribution_t.
  */
 LIBSBML_EXTERN

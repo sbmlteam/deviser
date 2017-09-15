@@ -1167,7 +1167,7 @@ FbcAnd_free(FbcAnd_t* fa)
 
 
 /*
- * Returns a ListOf_t* containing Association_t objects from this FbcAnd_t.
+ * Returns a ListOf_t * containing Association_t objects from this FbcAnd_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

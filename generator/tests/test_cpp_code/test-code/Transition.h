@@ -224,6 +224,8 @@ public:
    * Returns the ListOfInputs from this Transition.
    *
    * @return the ListOfInputs from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfInputs* getListOfInputs() const;
 
@@ -232,6 +234,8 @@ public:
    * Returns the ListOfInputs from this Transition.
    *
    * @return the ListOfInputs from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfInputs* getListOfInputs();
 
@@ -387,6 +391,8 @@ public:
    * Returns the ListOfOutputs from this Transition.
    *
    * @return the ListOfOutputs from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfOutputs* getListOfOutputs() const;
 
@@ -395,6 +401,8 @@ public:
    * Returns the ListOfOutputs from this Transition.
    *
    * @return the ListOfOutputs from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfOutputs* getListOfOutputs();
 
@@ -550,6 +558,8 @@ public:
    * Returns the ListOfFunctionTerms from this Transition.
    *
    * @return the ListOfFunctionTerms from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfFunctionTerms* getListOfFunctionTerms() const;
 
@@ -558,6 +568,8 @@ public:
    * Returns the ListOfFunctionTerms from this Transition.
    *
    * @return the ListOfFunctionTerms from this Transition.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfFunctionTerms* getListOfFunctionTerms();
 
@@ -1471,11 +1483,13 @@ Transition_unsetName(Transition_t * t);
 
 
 /**
- * Returns a ListOf_t* containing Input_t objects from this Transition_t.
+ * Returns a ListOf_t * containing Input_t objects from this Transition_t.
  *
- * @param t the Transition_t structure whose "ListOfInputs" is sought.
+ * @param t the Transition_t structure whose ListOfInputs is sought.
  *
- * @return the "ListOfInputs" from this Transition_t as a ListOf_t *.
+ * @return the ListOfInputs from this Transition_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1620,11 +1634,13 @@ Transition_removeInputById(Transition_t* t, const char* sid);
 
 
 /**
- * Returns a ListOf_t* containing Output_t objects from this Transition_t.
+ * Returns a ListOf_t * containing Output_t objects from this Transition_t.
  *
- * @param t the Transition_t structure whose "ListOfOutputs" is sought.
+ * @param t the Transition_t structure whose ListOfOutputs is sought.
  *
- * @return the "ListOfOutputs" from this Transition_t as a ListOf_t *.
+ * @return the ListOfOutputs from this Transition_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1769,12 +1785,14 @@ Transition_removeOutputById(Transition_t* t, const char* sid);
 
 
 /**
- * Returns a ListOf_t* containing FunctionTerm_t objects from this
+ * Returns a ListOf_t * containing FunctionTerm_t objects from this
  * Transition_t.
  *
- * @param t the Transition_t structure whose "ListOfFunctionTerms" is sought.
+ * @param t the Transition_t structure whose ListOfFunctionTerms is sought.
  *
- * @return the "ListOfFunctionTerms" from this Transition_t as a ListOf_t *.
+ * @return the ListOfFunctionTerms from this Transition_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */

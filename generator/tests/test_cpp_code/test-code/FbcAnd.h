@@ -135,6 +135,8 @@ public:
    * Returns the ListOfAssociations from this FbcAnd.
    *
    * @return the ListOfAssociations from this FbcAnd.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfAssociations* getListOfAssociations() const;
 
@@ -143,6 +145,8 @@ public:
    * Returns the ListOfAssociations from this FbcAnd.
    *
    * @return the ListOfAssociations from this FbcAnd.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfAssociations* getListOfAssociations();
 
@@ -923,11 +927,13 @@ FbcAnd_free(FbcAnd_t* fa);
 
 
 /**
- * Returns a ListOf_t* containing Association_t objects from this FbcAnd_t.
+ * Returns a ListOf_t * containing Association_t objects from this FbcAnd_t.
  *
- * @param fa the FbcAnd_t structure whose "ListOfAssociations" is sought.
+ * @param fa the FbcAnd_t structure whose ListOfAssociations is sought.
  *
- * @return the "ListOfAssociations" from this FbcAnd_t as a ListOf_t *.
+ * @return the ListOfAssociations from this FbcAnd_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof FbcAnd_t
  */

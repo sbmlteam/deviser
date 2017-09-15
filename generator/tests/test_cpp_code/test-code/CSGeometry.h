@@ -137,6 +137,8 @@ public:
    * Returns the ListOfCSGObjects from this CSGeometry.
    *
    * @return the ListOfCSGObjects from this CSGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfCSGObjects* getListOfCSGObjects() const;
 
@@ -145,6 +147,8 @@ public:
    * Returns the ListOfCSGObjects from this CSGeometry.
    *
    * @return the ListOfCSGObjects from this CSGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfCSGObjects* getListOfCSGObjects();
 
@@ -937,11 +941,13 @@ CSGeometry_free(CSGeometry_t* csg);
 
 
 /**
- * Returns a ListOf_t* containing CSGObject_t objects from this CSGeometry_t.
+ * Returns a ListOf_t * containing CSGObject_t objects from this CSGeometry_t.
  *
- * @param csg the CSGeometry_t structure whose "ListOfCSGObjects" is sought.
+ * @param csg the CSGeometry_t structure whose ListOfCSGObjects is sought.
  *
- * @return the "ListOfCSGObjects" from this CSGeometry_t as a ListOf_t *.
+ * @return the ListOfCSGObjects from this CSGeometry_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGeometry_t
  */

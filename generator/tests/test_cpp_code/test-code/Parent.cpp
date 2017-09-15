@@ -1083,7 +1083,7 @@ Parent_free(Parent_t* p)
 
 
 /*
- * Returns a ListOf_t* containing Child_t objects from this Parent_t.
+ * Returns a ListOf_t * containing Child_t objects from this Parent_t.
  */
 LIBSBML_EXTERN
 ListOf_t*
@@ -1150,7 +1150,7 @@ Parent_removeChild(Parent_t* p, unsigned int n)
 
 
 /*
- * Returns a ListOf_t* containing Sprog_t objects from this Parent_t.
+ * Returns a ListOf_t * containing Sprog_t objects from this Parent_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

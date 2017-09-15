@@ -1034,7 +1034,7 @@ CSGeometry_free(CSGeometry_t* csg)
 
 
 /*
- * Returns a ListOf_t* containing CSGObject_t objects from this CSGeometry_t.
+ * Returns a ListOf_t * containing CSGObject_t objects from this CSGeometry_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

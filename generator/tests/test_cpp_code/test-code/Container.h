@@ -137,6 +137,8 @@ public:
    * Returns the ListOfMyLoTests from this Container.
    *
    * @return the ListOfMyLoTests from this Container.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfMyLoTests* getListOfMyLoTests() const;
 
@@ -145,6 +147,8 @@ public:
    * Returns the ListOfMyLoTests from this Container.
    *
    * @return the ListOfMyLoTests from this Container.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfMyLoTests* getListOfMyLoTests();
 
@@ -860,11 +864,13 @@ Container_free(Container_t* c);
 
 
 /**
- * Returns a ListOf_t* containing MyLoTest_t objects from this Container_t.
+ * Returns a ListOf_t * containing MyLoTest_t objects from this Container_t.
  *
- * @param c the Container_t structure whose "ListOfMyLoTests" is sought.
+ * @param c the Container_t structure whose ListOfMyLoTests is sought.
  *
- * @return the "ListOfMyLoTests" from this Container_t as a ListOf_t *.
+ * @return the ListOfMyLoTests from this Container_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Container_t
  */

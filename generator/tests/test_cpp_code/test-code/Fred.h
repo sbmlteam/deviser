@@ -539,6 +539,8 @@ public:
    * Returns the ListOfOtherLOs from this Fred.
    *
    * @return the ListOfOtherLOs from this Fred.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfOtherLOs* getListOfOtherLOs() const;
 
@@ -547,6 +549,8 @@ public:
    * Returns the ListOfOtherLOs from this Fred.
    *
    * @return the ListOfOtherLOs from this Fred.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfOtherLOs* getListOfOtherLOs();
 
@@ -1850,11 +1854,13 @@ Fred_unsetOther2(Fred_t * f);
 
 
 /**
- * Returns a ListOf_t* containing OtherLO_t objects from this Fred_t.
+ * Returns a ListOf_t * containing OtherLO_t objects from this Fred_t.
  *
- * @param f the Fred_t structure whose "ListOfOtherLOs" is sought.
+ * @param f the Fred_t structure whose ListOfOtherLOs is sought.
  *
- * @return the "ListOfOtherLOs" from this Fred_t as a ListOf_t *.
+ * @return the ListOfOtherLOs from this Fred_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Fred_t
  */

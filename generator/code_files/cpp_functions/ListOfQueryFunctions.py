@@ -1077,15 +1077,15 @@ class ListOfQueryFunctions():
             return_lines = ['@return the {0} '
                             'from this {1}.'.format(loname, self.object_name)]
         else:
-            title_line = 'Returns a ListOf_t* containing {0} objects ' \
+            title_line = 'Returns a ListOf_t * containing {0} objects ' \
                          'from this {1}.'.format(self.object_child_name,
                                                  self.object_name)
-            params.append('@param {0} the {1} structure whose \"{2}\" is sought'
+            params.append('@param {0} the {1} structure whose {2} is sought'
                           '.'.format(self.abbrev_parent, self.object_name,
                                      loname))
-            return_lines = ['@return the \"{0}\" from this {1} as a '
+            return_lines = ['@return the {0} from this {1} as a '
                             'ListOf_t *.'.format(loname, self.object_name)]
-        additional = []
+        additional = ['@copydetails doc_returned_unowned_pointer']
 
         # create the function declaration
         name_used = strFunctions.remove_prefix(loname)

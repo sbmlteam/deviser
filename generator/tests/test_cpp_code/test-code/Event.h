@@ -393,6 +393,8 @@ public:
    * Returns the SBMLListOfEventAssignments from this Event.
    *
    * @return the SBMLListOfEventAssignments from this Event.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const SBMLListOfEventAssignments* getSBMLListOfEventAssignments() const;
 
@@ -401,6 +403,8 @@ public:
    * Returns the SBMLListOfEventAssignments from this Event.
    *
    * @return the SBMLListOfEventAssignments from this Event.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   SBMLListOfEventAssignments* getSBMLListOfEventAssignments();
 
@@ -1489,11 +1493,13 @@ Event_unsetDelay(Event_t * e);
 
 
 /**
- * Returns a ListOf_t* containing EventAssignment_t objects from this Event_t.
+ * Returns a ListOf_t * containing EventAssignment_t objects from this Event_t.
  *
- * @param e the Event_t structure whose "SBMLListOfEventAssignments" is sought.
+ * @param e the Event_t structure whose SBMLListOfEventAssignments is sought.
  *
- * @return the "SBMLListOfEventAssignments" from this Event_t as a ListOf_t *.
+ * @return the SBMLListOfEventAssignments from this Event_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Event_t
  */

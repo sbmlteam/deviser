@@ -1842,7 +1842,8 @@ CSGSetOperator_unsetComplementB(CSGSetOperator_t * csgso)
 
 
 /*
- * Returns a ListOf_t* containing CSGNode_t objects from this CSGSetOperator_t.
+ * Returns a ListOf_t * containing CSGNode_t objects from this
+ * CSGSetOperator_t.
  */
 LIBSBML_EXTERN
 ListOf_t*

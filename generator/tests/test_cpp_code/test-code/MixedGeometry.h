@@ -140,6 +140,8 @@ public:
    * Returns the ListOfGeometryDefinitions from this MixedGeometry.
    *
    * @return the ListOfGeometryDefinitions from this MixedGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfGeometryDefinitions* getListOfGeometryDefinitions() const;
 
@@ -148,6 +150,8 @@ public:
    * Returns the ListOfGeometryDefinitions from this MixedGeometry.
    *
    * @return the ListOfGeometryDefinitions from this MixedGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfGeometryDefinitions* getListOfGeometryDefinitions();
 
@@ -329,6 +333,8 @@ public:
    * Returns the ListOfOrdinalMappings from this MixedGeometry.
    *
    * @return the ListOfOrdinalMappings from this MixedGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ListOfOrdinalMappings* getListOfOrdinalMappings() const;
 
@@ -337,6 +343,8 @@ public:
    * Returns the ListOfOrdinalMappings from this MixedGeometry.
    *
    * @return the ListOfOrdinalMappings from this MixedGeometry.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ListOfOrdinalMappings* getListOfOrdinalMappings();
 
@@ -1088,14 +1096,16 @@ MixedGeometry_free(MixedGeometry_t* mg);
 
 
 /**
- * Returns a ListOf_t* containing GeometryDefinition_t objects from this
+ * Returns a ListOf_t * containing GeometryDefinition_t objects from this
  * MixedGeometry_t.
  *
- * @param mg the MixedGeometry_t structure whose "ListOfGeometryDefinitions" is
+ * @param mg the MixedGeometry_t structure whose ListOfGeometryDefinitions is
  * sought.
  *
- * @return the "ListOfGeometryDefinitions" from this MixedGeometry_t as a
+ * @return the ListOfGeometryDefinitions from this MixedGeometry_t as a
  * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1294,14 +1304,15 @@ MixedGeometry_removeGeometryDefinitionById(MixedGeometry_t* mg,
 
 
 /**
- * Returns a ListOf_t* containing OrdinalMapping_t objects from this
+ * Returns a ListOf_t * containing OrdinalMapping_t objects from this
  * MixedGeometry_t.
  *
- * @param mg the MixedGeometry_t structure whose "ListOfOrdinalMappings" is
+ * @param mg the MixedGeometry_t structure whose ListOfOrdinalMappings is
  * sought.
  *
- * @return the "ListOfOrdinalMappings" from this MixedGeometry_t as a ListOf_t
- * *.
+ * @return the ListOfOrdinalMappings from this MixedGeometry_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
