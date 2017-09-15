@@ -815,12 +815,10 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
-        num = 1
-        class_name = 'Member'
-        list_of = 'ListOfMembers'
-        test_case = 'list of with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        name = 'new_distrib'
+        class_name = 'DistribSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
 
 
     test_functions.report('CPP', fail, fails, not_tested)

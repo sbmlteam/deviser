@@ -225,10 +225,16 @@ class ValidationRulesForClass():
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
-            text = 'The value of the attribute {0} of {1} {2} object must be ' \
-                   'the identifier of an existing \{3} object defined in the ' \
-                   'enclosing \Model object.'\
-                .format(name, self.indef, formatted_name, ref_name)
+            if ref_name == 'SBase':
+                text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                       'the identifier of an existing object derived from the \SBase class and defined in the ' \
+                       'enclosing \Model object.'\
+                    .format(name, self.indef, formatted_name, ref_name)
+            else:
+                text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                       'the identifier of an existing \{3} object defined in the ' \
+                       'enclosing \Model object.'\
+                    .format(name, self.indef, formatted_name, ref_name)
             rule_type = ref_type
         elif att_type == 'string':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
