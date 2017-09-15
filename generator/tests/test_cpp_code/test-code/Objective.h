@@ -353,11 +353,13 @@ public:
    * Get a FluxObjective from the Objective based on the Reaction to which it
    * refers.
    *
-   * @param sid a string representing the reaction attribute of the
+   * @param sid a string representing the "reaction" attribute of the
    * FluxObjective object to retrieve.
    *
    * @return the first FluxObjective in this Objective based on the given
    * reaction attribute or NULL if no such FluxObjective exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const FluxObjective* getFluxObjectiveByReaction(const std::string& sid)
     const;
@@ -367,11 +369,13 @@ public:
    * Get a FluxObjective from the Objective based on the Reaction to which it
    * refers.
    *
-   * @param sid a string representing the reaction attribute of the
+   * @param sid a string representing the "reaction" attribute of the
    * FluxObjective object to retrieve.
    *
    * @return the first FluxObjective in this Objective based on the given
    * reaction attribute or NULL if no such FluxObjective exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   FluxObjective* getFluxObjectiveByReaction(const std::string& sid);
 
@@ -1409,11 +1413,13 @@ Objective_getFluxObjectiveById(Objective_t* o, const char *sid);
  *
  * @param o the Objective_t structure to search.
  *
- * @param sid a string representing the reaction attribute of the
+ * @param sid a string representing the "reaction" attribute of the
  * FluxObjective_t object to retrieve.
  *
  * @return the first FluxObjective_t in this Objective_t based on the given
  * reaction attribute or NULL if no such FluxObjective_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Objective_t
  */

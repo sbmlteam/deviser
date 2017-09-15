@@ -434,28 +434,32 @@ public:
 
 
   /**
-   * Get an EventAssignment from the Event based on the Variable to which it
+   * Get an EventAssignment from the Event based on the element to which it
    * refers.
    *
-   * @param sid a string representing the variable attribute of the
+   * @param sid a string representing the "variable" attribute of the
    * EventAssignment object to retrieve.
    *
    * @return the first EventAssignment in this Event based on the given
    * variable attribute or NULL if no such EventAssignment exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const EventAssignment* getEventAssignmentByVariable(const std::string& sid)
     const;
 
 
   /**
-   * Get an EventAssignment from the Event based on the Variable to which it
+   * Get an EventAssignment from the Event based on the element to which it
    * refers.
    *
-   * @param sid a string representing the variable attribute of the
+   * @param sid a string representing the "variable" attribute of the
    * EventAssignment object to retrieve.
    *
    * @return the first EventAssignment in this Event based on the given
    * variable attribute or NULL if no such EventAssignment exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   EventAssignment* getEventAssignmentByVariable(const std::string& sid);
 
@@ -1517,16 +1521,18 @@ Event_getEventAssignment(Event_t* e, unsigned int n);
 
 
 /**
- * Get an EventAssignment_t from the Event_t based on the Variable to which it
+ * Get an EventAssignment_t from the Event_t based on the element to which it
  * refers.
  *
  * @param e the Event_t structure to search.
  *
- * @param sid a string representing the variable attribute of the
+ * @param sid a string representing the "variable" attribute of the
  * EventAssignment_t object to retrieve.
  *
  * @return the first EventAssignment_t in this Event_t based on the given
  * variable attribute or NULL if no such EventAssignment_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Event_t
  */

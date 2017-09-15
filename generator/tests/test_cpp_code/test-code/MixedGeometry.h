@@ -373,11 +373,13 @@ public:
    * Get an OrdinalMapping from the MixedGeometry based on the
    * GeometryDefinition to which it refers.
    *
-   * @param sid a string representing the geometryDefinition attribute of the
+   * @param sid a string representing the "geometryDefinition" attribute of the
    * OrdinalMapping object to retrieve.
    *
    * @return the first OrdinalMapping in this MixedGeometry based on the given
    * geometryDefinition attribute or NULL if no such OrdinalMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const OrdinalMapping* getOrdinalMappingByGeometryDefinition(const
     std::string& sid) const;
@@ -387,11 +389,13 @@ public:
    * Get an OrdinalMapping from the MixedGeometry based on the
    * GeometryDefinition to which it refers.
    *
-   * @param sid a string representing the geometryDefinition attribute of the
+   * @param sid a string representing the "geometryDefinition" attribute of the
    * OrdinalMapping object to retrieve.
    *
    * @return the first OrdinalMapping in this MixedGeometry based on the given
    * geometryDefinition attribute or NULL if no such OrdinalMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   OrdinalMapping* getOrdinalMappingByGeometryDefinition(const std::string&
     sid);
@@ -1330,12 +1334,14 @@ MixedGeometry_getOrdinalMapping(MixedGeometry_t* mg, unsigned int n);
  *
  * @param mg the MixedGeometry_t structure to search.
  *
- * @param sid a string representing the geometryDefinition attribute of the
+ * @param sid a string representing the "geometryDefinition" attribute of the
  * OrdinalMapping_t object to retrieve.
  *
  * @return the first OrdinalMapping_t in this MixedGeometry_t based on the
  * given geometryDefinition attribute or NULL if no such OrdinalMapping_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */

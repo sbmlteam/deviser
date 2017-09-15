@@ -341,25 +341,29 @@ public:
 
 
   /**
-   * Get a Member from the Group based on the IdRef to which it refers.
+   * Get a Member from the Group based on the element to which it refers.
    *
-   * @param sid a string representing the idRef attribute of the Member object
-   * to retrieve.
+   * @param sid a string representing the "idRef" attribute of the Member
+   * object to retrieve.
    *
    * @return the first Member in this Group based on the given idRef attribute
    * or NULL if no such Member exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const Member* getMemberByIdRef(const std::string& sid) const;
 
 
   /**
-   * Get a Member from the Group based on the IdRef to which it refers.
+   * Get a Member from the Group based on the element to which it refers.
    *
-   * @param sid a string representing the idRef attribute of the Member object
-   * to retrieve.
+   * @param sid a string representing the "idRef" attribute of the Member
+   * object to retrieve.
    *
    * @return the first Member in this Group based on the given idRef attribute
    * or NULL if no such Member exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   Member* getMemberByIdRef(const std::string& sid);
 
@@ -1335,15 +1339,17 @@ Group_getMemberById(Group_t* g, const char *sid);
 
 
 /**
- * Get a Member_t from the Group_t based on the IdRef to which it refers.
+ * Get a Member_t from the Group_t based on the element to which it refers.
  *
  * @param g the Group_t structure to search.
  *
- * @param sid a string representing the idRef attribute of the Member_t object
- * to retrieve.
+ * @param sid a string representing the "idRef" attribute of the Member_t
+ * object to retrieve.
  *
  * @return the first Member_t in this Group_t based on the given idRef
  * attribute or NULL if no such Member_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Group_t
  */

@@ -264,11 +264,13 @@ public:
    * Get a SampledVolume from the SampledFieldGeometry based on the DomainType
    * to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * SampledVolume object to retrieve.
    *
    * @return the first SampledVolume in this SampledFieldGeometry based on the
    * given domainType attribute or NULL if no such SampledVolume exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const SampledVolume* getSampledVolumeByDomainType(const std::string& sid)
     const;
@@ -278,11 +280,13 @@ public:
    * Get a SampledVolume from the SampledFieldGeometry based on the DomainType
    * to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * SampledVolume object to retrieve.
    *
    * @return the first SampledVolume in this SampledFieldGeometry based on the
    * given domainType attribute or NULL if no such SampledVolume exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   SampledVolume* getSampledVolumeByDomainType(const std::string& sid);
 
@@ -1149,11 +1153,13 @@ SampledFieldGeometry_getSampledVolumeById(SampledFieldGeometry_t* sfg,
  *
  * @param sfg the SampledFieldGeometry_t structure to search.
  *
- * @param sid a string representing the domainType attribute of the
+ * @param sid a string representing the "domainType" attribute of the
  * SampledVolume_t object to retrieve.
  *
  * @return the first SampledVolume_t in this SampledFieldGeometry_t based on
  * the given domainType attribute or NULL if no such SampledVolume_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */

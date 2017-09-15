@@ -247,11 +247,13 @@ public:
    * Get an Output from the ListOfOutputs based on the QualitativeSpecies to
    * which it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Output object to retrieve.
    *
    * @return the first Output in this ListOfOutputs based on the given
    * qualitativeSpecies attribute or NULL if no such Output exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const Output* getByQualitativeSpecies(const std::string& sid) const;
 
@@ -260,11 +262,13 @@ public:
    * Get an Output from the ListOfOutputs based on the QualitativeSpecies to
    * which it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Output object to retrieve.
    *
    * @return the first Output in this ListOfOutputs based on the given
    * qualitativeSpecies attribute or NULL if no such Output exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   Output* getByQualitativeSpecies(const std::string& sid);
 

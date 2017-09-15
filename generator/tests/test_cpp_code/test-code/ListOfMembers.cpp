@@ -373,7 +373,7 @@ struct IdEqIR : public std::unary_function<SBase*, bool>
 
 
 /*
- * Get a Member from the ListOfMembers based on the IdRef to which it refers.
+ * Get a Member from the ListOfMembers based on the element to which it refers.
  */
 const Member*
 ListOfMembers::getByIdRef(const std::string& sid) const
@@ -385,7 +385,7 @@ ListOfMembers::getByIdRef(const std::string& sid) const
 
 
 /*
- * Get a Member from the ListOfMembers based on the IdRef to which it refers.
+ * Get a Member from the ListOfMembers based on the element to which it refers.
  */
 Member*
 ListOfMembers::getByIdRef(const std::string& sid)

@@ -366,7 +366,7 @@ Group::getMember(const std::string& sid) const
 
 
 /*
- * Get a Member from the Group based on the IdRef to which it refers.
+ * Get a Member from the Group based on the element to which it refers.
  */
 const Member*
 Group::getMemberByIdRef(const std::string& sid) const
@@ -376,7 +376,7 @@ Group::getMemberByIdRef(const std::string& sid) const
 
 
 /*
- * Get a Member from the Group based on the IdRef to which it refers.
+ * Get a Member from the Group based on the element to which it refers.
  */
 Member*
 Group::getMemberByIdRef(const std::string& sid)
@@ -1630,7 +1630,7 @@ Group_getMemberById(Group_t* g, const char *sid)
 
 
 /*
- * Get a Member_t from the Group_t based on the IdRef to which it refers.
+ * Get a Member_t from the Group_t based on the element to which it refers.
  */
 LIBSBML_EXTERN
 Member_t*

@@ -367,11 +367,7 @@ class ListOfQueryFunctions():
 
         # useful variables
         element = strFunctions.upper_first(sid_ref['name'])
-        # if 'capAttName' in sid_ref:
-        #     element = sid_ref['capAttName']
-        # else:
-        #     element = sid_ref['element']
-        # if sid_ref['name']
+        elemType = sid_ref['element'] if 'element' in sid_ref else 'element'
         att_name = sid_ref['name']
         match = [element, const]
         if match in self.used_sidrefs:
@@ -380,23 +376,30 @@ class ListOfQueryFunctions():
             self.used_sidrefs.append(match)
 
         # create comment
-        title_line = 'Get {0} {1} from the {2} based on the {3} to which ' \
-                     'it refers.'.format(self.indef_name,
-                                         self.object_child_name,
-                                         self.object_name,
-                                         element)
+        if elemType == 'SBase':
+            title_line = 'Get {0} {1} from the {2} based on the element to which ' \
+                         'it refers.'.format(self.indef_name,
+                                             self.object_child_name,
+                                             self.object_name,
+                                             element)
+        else:
+            title_line = 'Get {0} {1} from the {2} based on the {3} to which ' \
+                         'it refers.'.format(self.indef_name,
+                                             self.object_child_name,
+                                             self.object_name,
+                                             element)
         params = []
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure to search.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param sid a string representing the {0} attribute '
+        params.append('@param sid a string representing the \"{0}\" attribute '
                       'of the {1} object to '
                       'retrieve.'.format(att_name, self.object_child_name))
         return_lines = ['@return the first {0} in this {1} based on the '
                         'given {2} attribute or NULL if no such {0} exists.'
                         .format(self.object_child_name, self.object_name,
                                 att_name)]
-        additional = []
+        additional = ['@copydetails doc_returned_unowned_pointer']
 
         # create function declaration
         used_c_name = strFunctions.remove_prefix(self.child_name)

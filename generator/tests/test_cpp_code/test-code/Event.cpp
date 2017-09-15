@@ -616,7 +616,7 @@ Event::getEventAssignment(unsigned int n) const
 
 
 /*
- * Get an EventAssignment from the Event based on the Variable to which it
+ * Get an EventAssignment from the Event based on the element to which it
  * refers.
  */
 const EventAssignment*
@@ -627,7 +627,7 @@ Event::getEventAssignmentByVariable(const std::string& sid) const
 
 
 /*
- * Get an EventAssignment from the Event based on the Variable to which it
+ * Get an EventAssignment from the Event based on the element to which it
  * refers.
  */
 EventAssignment*
@@ -2040,7 +2040,7 @@ Event_getEventAssignment(Event_t* e, unsigned int n)
 
 
 /*
- * Get an EventAssignment_t from the Event_t based on the Variable to which it
+ * Get an EventAssignment_t from the Event_t based on the element to which it
  * refers.
  */
 LIBSBML_EXTERN

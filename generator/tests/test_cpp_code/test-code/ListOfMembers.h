@@ -332,25 +332,31 @@ public:
 
 
   /**
-   * Get a Member from the ListOfMembers based on the IdRef to which it refers.
+   * Get a Member from the ListOfMembers based on the element to which it
+   * refers.
    *
-   * @param sid a string representing the idRef attribute of the Member object
-   * to retrieve.
+   * @param sid a string representing the "idRef" attribute of the Member
+   * object to retrieve.
    *
    * @return the first Member in this ListOfMembers based on the given idRef
    * attribute or NULL if no such Member exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const Member* getByIdRef(const std::string& sid) const;
 
 
   /**
-   * Get a Member from the ListOfMembers based on the IdRef to which it refers.
+   * Get a Member from the ListOfMembers based on the element to which it
+   * refers.
    *
-   * @param sid a string representing the idRef attribute of the Member object
-   * to retrieve.
+   * @param sid a string representing the "idRef" attribute of the Member
+   * object to retrieve.
    *
    * @return the first Member in this ListOfMembers based on the given idRef
    * attribute or NULL if no such Member exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   Member* getByIdRef(const std::string& sid);
 

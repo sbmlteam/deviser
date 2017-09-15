@@ -195,11 +195,13 @@ public:
    * Get a QualitativeSpecies from the QualModelPlugin based on the Compartment
    * to which it refers.
    *
-   * @param sid a string representing the compartment attribute of the
+   * @param sid a string representing the "compartment" attribute of the
    * QualitativeSpecies object to retrieve.
    *
    * @return the first QualitativeSpecies in this QualModelPlugin based on the
    * given compartment attribute or NULL if no such QualitativeSpecies exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const QualitativeSpecies* getQualitativeSpeciesByCompartment(const
     std::string& sid) const;
@@ -209,11 +211,13 @@ public:
    * Get a QualitativeSpecies from the QualModelPlugin based on the Compartment
    * to which it refers.
    *
-   * @param sid a string representing the compartment attribute of the
+   * @param sid a string representing the "compartment" attribute of the
    * QualitativeSpecies object to retrieve.
    *
    * @return the first QualitativeSpecies in this QualModelPlugin based on the
    * given compartment attribute or NULL if no such QualitativeSpecies exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   QualitativeSpecies* getQualitativeSpeciesByCompartment(const std::string&
     sid);
@@ -1029,12 +1033,14 @@ QualModelPlugin_getQualitativeSpeciesById(QualModelPlugin_t* qmp,
  *
  * @param qmp the QualModelPlugin_t structure to search.
  *
- * @param sid a string representing the compartment attribute of the
+ * @param sid a string representing the "compartment" attribute of the
  * QualitativeSpecies_t object to retrieve.
  *
  * @return the first QualitativeSpecies_t in this QualModelPlugin_t based on
  * the given compartment attribute or NULL if no such QualitativeSpecies_t
  * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof QualModelPlugin_t
  */

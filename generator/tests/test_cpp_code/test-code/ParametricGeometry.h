@@ -284,11 +284,13 @@ public:
    * Get a ParametricObject from the ParametricGeometry based on the DomainType
    * to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * ParametricObject object to retrieve.
    *
    * @return the first ParametricObject in this ParametricGeometry based on the
    * given domainType attribute or NULL if no such ParametricObject exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const ParametricObject* getParametricObjectByDomainType(const std::string&
     sid) const;
@@ -298,11 +300,13 @@ public:
    * Get a ParametricObject from the ParametricGeometry based on the DomainType
    * to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * ParametricObject object to retrieve.
    *
    * @return the first ParametricObject in this ParametricGeometry based on the
    * given domainType attribute or NULL if no such ParametricObject exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   ParametricObject* getParametricObjectByDomainType(const std::string& sid);
 
@@ -1172,11 +1176,13 @@ ParametricGeometry_getParametricObjectById(ParametricGeometry_t* pg,
  *
  * @param pg the ParametricGeometry_t structure to search.
  *
- * @param sid a string representing the domainType attribute of the
+ * @param sid a string representing the "domainType" attribute of the
  * ParametricObject_t object to retrieve.
  *
  * @return the first ParametricObject_t in this ParametricGeometry_t based on
  * the given domainType attribute or NULL if no such ParametricObject_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ParametricGeometry_t
  */

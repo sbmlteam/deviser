@@ -259,11 +259,13 @@ public:
    * Get an AnalyticVolume from the ListOfAnalyticVolumes based on the
    * DomainType to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * AnalyticVolume object to retrieve.
    *
    * @return the first AnalyticVolume in this ListOfAnalyticVolumes based on
    * the given domainType attribute or NULL if no such AnalyticVolume exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const AnalyticVolume* getByDomainType(const std::string& sid) const;
 
@@ -272,11 +274,13 @@ public:
    * Get an AnalyticVolume from the ListOfAnalyticVolumes based on the
    * DomainType to which it refers.
    *
-   * @param sid a string representing the domainType attribute of the
+   * @param sid a string representing the "domainType" attribute of the
    * AnalyticVolume object to retrieve.
    *
    * @return the first AnalyticVolume in this ListOfAnalyticVolumes based on
    * the given domainType attribute or NULL if no such AnalyticVolume exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   AnalyticVolume* getByDomainType(const std::string& sid);
 

@@ -289,11 +289,13 @@ public:
    * Get an Input from the Transition based on the QualitativeSpecies to which
    * it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Input object to retrieve.
    *
    * @return the first Input in this Transition based on the given
    * qualitativeSpecies attribute or NULL if no such Input exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const Input* getInputByQualitativeSpecies(const std::string& sid) const;
 
@@ -302,11 +304,13 @@ public:
    * Get an Input from the Transition based on the QualitativeSpecies to which
    * it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Input object to retrieve.
    *
    * @return the first Input in this Transition based on the given
    * qualitativeSpecies attribute or NULL if no such Input exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   Input* getInputByQualitativeSpecies(const std::string& sid);
 
@@ -448,11 +452,13 @@ public:
    * Get an Output from the Transition based on the QualitativeSpecies to which
    * it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Output object to retrieve.
    *
    * @return the first Output in this Transition based on the given
    * qualitativeSpecies attribute or NULL if no such Output exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const Output* getOutputByQualitativeSpecies(const std::string& sid) const;
 
@@ -461,11 +467,13 @@ public:
    * Get an Output from the Transition based on the QualitativeSpecies to which
    * it refers.
    *
-   * @param sid a string representing the qualitativeSpecies attribute of the
+   * @param sid a string representing the "qualitativeSpecies" attribute of the
    * Output object to retrieve.
    *
    * @return the first Output in this Transition based on the given
    * qualitativeSpecies attribute or NULL if no such Output exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   Output* getOutputByQualitativeSpecies(const std::string& sid);
 
@@ -1509,11 +1517,13 @@ Transition_getInputById(Transition_t* t, const char *sid);
  *
  * @param t the Transition_t structure to search.
  *
- * @param sid a string representing the qualitativeSpecies attribute of the
+ * @param sid a string representing the "qualitativeSpecies" attribute of the
  * Input_t object to retrieve.
  *
  * @return the first Input_t in this Transition_t based on the given
  * qualitativeSpecies attribute or NULL if no such Input_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -1656,11 +1666,13 @@ Transition_getOutputById(Transition_t* t, const char *sid);
  *
  * @param t the Transition_t structure to search.
  *
- * @param sid a string representing the qualitativeSpecies attribute of the
+ * @param sid a string representing the "qualitativeSpecies" attribute of the
  * Output_t object to retrieve.
  *
  * @return the first Output_t in this Transition_t based on the given
  * qualitativeSpecies attribute or NULL if no such Output_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */

@@ -209,11 +209,13 @@ public:
    * Get a CSGObject from the CSGeometry based on the DomainType to which it
    * refers.
    *
-   * @param sid a string representing the domainType attribute of the CSGObject
-   * object to retrieve.
+   * @param sid a string representing the "domainType" attribute of the
+   * CSGObject object to retrieve.
    *
    * @return the first CSGObject in this CSGeometry based on the given
    * domainType attribute or NULL if no such CSGObject exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   const CSGObject* getCSGObjectByDomainType(const std::string& sid) const;
 
@@ -222,11 +224,13 @@ public:
    * Get a CSGObject from the CSGeometry based on the DomainType to which it
    * refers.
    *
-   * @param sid a string representing the domainType attribute of the CSGObject
-   * object to retrieve.
+   * @param sid a string representing the "domainType" attribute of the
+   * CSGObject object to retrieve.
    *
    * @return the first CSGObject in this CSGeometry based on the given
    * domainType attribute or NULL if no such CSGObject exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
    */
   CSGObject* getCSGObjectByDomainType(const std::string& sid);
 
@@ -987,11 +991,13 @@ CSGeometry_getCSGObjectById(CSGeometry_t* csg, const char *sid);
  *
  * @param csg the CSGeometry_t structure to search.
  *
- * @param sid a string representing the domainType attribute of the CSGObject_t
- * object to retrieve.
+ * @param sid a string representing the "domainType" attribute of the
+ * CSGObject_t object to retrieve.
  *
  * @return the first CSGObject_t in this CSGeometry_t based on the given
  * domainType attribute or NULL if no such CSGObject_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGeometry_t
  */
