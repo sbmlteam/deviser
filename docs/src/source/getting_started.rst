@@ -153,7 +153,8 @@ UML diagrams
 Deviser allows you to create and view very basic UML diagrams based on
 the classes specified. Since it uses the free yUML (http://yuml.me/) web
 service, you will be necessary to be connected to the internet to
-create UML diagrams.
+create UML diagrams. The Deviser Edit tool requires the OpenSSL library 
+(https://www.openssl.org/) to access yUML.
 
 Available bundles
 ~~~~~~~~~~~~~~~~~
@@ -167,7 +168,7 @@ Useful links
 ~~~~~~~~~~~~
 
 1. libSBML source code (latest release):
-   https://sourceforge.net/projects/sbml/files/libsbml/5.12.0/stable/libSBML-5.12.0-core-src.tar.gz/download
+   https://sourceforge.net/projects/sbml/files/libsbml/5.14.0/stable/libSBML-5.14.0-core-src.tar.gz/download
    **Note that there may be a later release available.**
 
 2. libSBML source code (latest code):
@@ -295,13 +296,9 @@ To integrate and compile the code with libSBML the fields requested are:
   SWIG is necessary for this. It is hoped in future to add a facility to 
   directly test the build using a Python interface.
 
-- **Python include dir**. 
-  The location of the Python include files, which are
-  necessary to build and test the Python binding of libSBML.
+.. todo::
+  Replace screenshot
 
-- **Python lib**. 
-  The location of the Python library files, which are
-  necessary to build and test the Python binding of libSBML.
 
 Figure :num:`fig-preferences` illustrates 
 a case

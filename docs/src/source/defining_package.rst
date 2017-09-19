@@ -698,8 +698,43 @@ expected XML and the functions produced.
 Attribute/child element type ‘vector’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-	add vector info
+The ‘vector’ type refers to an XML element that may contain text that
+represents a list of values of a particular type. This is similar 
+to the 'array' type but will use the C++ std::vector class as a type.
+
+This information would be defined in the ‘Class attributes and child
+elements’ section of the Class description as an entry with the 
+following field values:
+
+:Required: true/false as appropriate
+
+:Name: the name to be used by code to store and manipulate this information
+
+:Type: vector
+
+:Element: integer (the type of the data)
+
+
+
+The code generator produces the following code for an attribute of type 'vector':
+
+
+.. code-block:: C++
+
+   std::vector<[Type]>&  get[Name]     ()
+   bool                  has[Name]s    ()
+   unsigned int          getNum[Name]s ()
+   int                   set[Name]     (std::vector<[Type]>& value)
+   int                   add[Name]     ([Type] value)
+   int                   clear[Name]s  ()
+		
+         where 
+               [Type] 
+                      is a placeholder for the appropriate C++ type
+               [Name] 
+                      is a placeholder for the attribute name 
+                      given to the vector
+
 
 .. _elementfield:
 
