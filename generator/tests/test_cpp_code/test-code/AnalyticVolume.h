@@ -936,7 +936,7 @@ AnalyticVolume_free(AnalyticVolume_t* av);
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 AnalyticVolume_getId(const AnalyticVolume_t * av);
 
 
@@ -1005,7 +1005,7 @@ AnalyticVolume_getOrdinal(const AnalyticVolume_t * av);
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 AnalyticVolume_getDomainType(const AnalyticVolume_t * av);
 
 

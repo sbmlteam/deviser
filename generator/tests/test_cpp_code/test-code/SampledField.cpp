@@ -2004,7 +2004,7 @@ SampledField_free(SampledField_t* sf)
  * Returns the value of the "id" attribute of this SampledField_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getId(const SampledField_t * sf)
 {
   if (sf == NULL)

@@ -518,7 +518,7 @@ ListOfMyLoTests::writeXMLNS(XMLOutputStream& stream) const
  * Returns the value of the "id" attribute of this ListOf_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMyLoTests_getId(const ListOf_t * lo)
 {
   if (lo == NULL)

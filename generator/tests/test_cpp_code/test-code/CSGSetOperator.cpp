@@ -1689,7 +1689,7 @@ CSGSetOperator_getOperationTypeAsString(const CSGSetOperator_t * csgso)
  * Returns the value of the "complementA" attribute of this CSGSetOperator_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getComplementA(const CSGSetOperator_t * csgso)
 {
   if (csgso == NULL)
@@ -1706,7 +1706,7 @@ CSGSetOperator_getComplementA(const CSGSetOperator_t * csgso)
  * Returns the value of the "complementB" attribute of this CSGSetOperator_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso)
 {
   if (csgso == NULL)

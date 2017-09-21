@@ -892,7 +892,7 @@ GeometryDefinition_free(GeometryDefinition_t* gd);
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 GeometryDefinition_getId(const GeometryDefinition_t * gd);
 
 

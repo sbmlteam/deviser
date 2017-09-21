@@ -1340,7 +1340,7 @@ AnalyticVolume_free(AnalyticVolume_t* av)
  * Returns the value of the "id" attribute of this AnalyticVolume_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 AnalyticVolume_getId(const AnalyticVolume_t * av)
 {
   if (av == NULL)
@@ -1394,7 +1394,7 @@ AnalyticVolume_getOrdinal(const AnalyticVolume_t * av)
  * Returns the value of the "domainType" attribute of this AnalyticVolume_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 AnalyticVolume_getDomainType(const AnalyticVolume_t * av)
 {
   if (av == NULL)

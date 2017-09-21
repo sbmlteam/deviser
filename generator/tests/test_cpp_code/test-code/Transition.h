@@ -1514,7 +1514,7 @@ Transition_free(Transition_t* t);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Transition_getId(const Transition_t * t);
 
 
@@ -1531,7 +1531,7 @@ Transition_getId(const Transition_t * t);
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Transition_getName(const Transition_t * t);
 
 

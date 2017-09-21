@@ -858,7 +858,7 @@ Def_free(Def_t* d)
  * Returns the value of the "letter" attribute of this Def_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Def_getLetter(const Def_t * d)
 {
   if (d == NULL)

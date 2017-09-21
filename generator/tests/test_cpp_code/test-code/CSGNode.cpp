@@ -868,7 +868,7 @@ CSGNode_free(CSGNode_t* csgn)
  * Returns the value of the "id" attribute of this CSGNode_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGNode_getId(const CSGNode_t * csgn)
 {
   if (csgn == NULL)

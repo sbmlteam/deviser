@@ -881,7 +881,7 @@ Output_free(Output_t* o);
  * @memberof Output_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getId(const Output_t * o);
 
 
@@ -898,7 +898,7 @@ Output_getId(const Output_t * o);
  * @memberof Output_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getQualitativeSpecies(const Output_t * o);
 
 
@@ -953,7 +953,7 @@ Output_getTransitionEffectAsString(const Output_t * o);
  * @memberof Output_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getName(const Output_t * o);
 
 

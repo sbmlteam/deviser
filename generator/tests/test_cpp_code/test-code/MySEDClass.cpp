@@ -660,7 +660,7 @@ MySEDClass_free(MySEDClass_t* msedc)
  * Returns the value of the "id" attribute of this MySEDClass_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 MySEDClass_getId(const MySEDClass_t * msedc)
 {
   if (msedc == NULL)

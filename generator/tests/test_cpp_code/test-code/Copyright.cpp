@@ -702,7 +702,7 @@ Copyright_free(Copyright_t* c)
  * Returns the value of the "id" attribute of this Copyright_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Copyright_getId(const Copyright_t * c)
 {
   if (c == NULL)

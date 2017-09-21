@@ -885,7 +885,7 @@ UncertaintyOld_free(UncertaintyOld_t* uo);
  * @memberof UncertaintyOld_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 UncertaintyOld_getId(const UncertaintyOld_t * uo);
 
 
@@ -902,7 +902,7 @@ UncertaintyOld_getId(const UncertaintyOld_t * uo);
  * @memberof UncertaintyOld_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 UncertaintyOld_getName(const UncertaintyOld_t * uo);
 
 

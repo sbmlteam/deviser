@@ -1100,7 +1100,7 @@ ClassOneTwo_free(ClassOneTwo_t* cot);
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getId(const ClassOneTwo_t * cot);
 
 
@@ -1132,7 +1132,7 @@ ClassOneTwo_getAtt1(const ClassOneTwo_t * cot);
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttStr(const ClassOneTwo_t * cot);
 
 
@@ -1194,7 +1194,7 @@ ClassOneTwo_getAttDbl(const ClassOneTwo_t * cot);
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttUnit(const ClassOneTwo_t * cot);
 
 

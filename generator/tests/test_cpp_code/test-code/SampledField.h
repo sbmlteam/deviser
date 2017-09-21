@@ -1209,7 +1209,7 @@ SampledField_free(SampledField_t* sf);
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getId(const SampledField_t * sf);
 
 

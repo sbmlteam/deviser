@@ -1105,7 +1105,7 @@ CoordinateComponent_free(CoordinateComponent_t* cc);
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getId(const CoordinateComponent_t * cc);
 
 
@@ -1160,7 +1160,7 @@ CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc);
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getUnit(const CoordinateComponent_t * cc);
 
 

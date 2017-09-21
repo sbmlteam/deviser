@@ -661,7 +661,7 @@ MyBase_free(MyBase_t* mb);
  * @memberof MyBase_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyBase_getId(const MyBase_t * mb);
 
 

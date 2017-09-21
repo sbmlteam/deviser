@@ -1196,7 +1196,7 @@ Event_getUseValuesFromTriggerTime(const Event_t * e);
  * @memberof Event_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Event_getTimeUnits(const Event_t * e);
 
 

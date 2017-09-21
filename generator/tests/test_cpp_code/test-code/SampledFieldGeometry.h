@@ -1098,7 +1098,7 @@ SampledFieldGeometry_free(SampledFieldGeometry_t* sfg);
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledFieldGeometry_getSampledField(const SampledFieldGeometry_t * sfg);
 
 

@@ -514,7 +514,7 @@ BEGIN_C_DECLS
  * @memberof ListOfMyLoTests_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMyLoTests_getId(const ListOf_t * lo);
 
 

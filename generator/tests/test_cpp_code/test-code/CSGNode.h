@@ -854,7 +854,7 @@ CSGNode_free(CSGNode_t* csgn);
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGNode_getId(const CSGNode_t * csgn);
 
 

@@ -566,7 +566,7 @@ BEGIN_C_DECLS
  * @memberof ListOfObjectives_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfObjectives_getActiveObjective(const ListOf_t * lo);
 
 

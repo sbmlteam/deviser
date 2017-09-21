@@ -663,7 +663,7 @@ MyLoTest_free(MyLoTest_t* mlt);
  * @memberof MyLoTest_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyLoTest_getId(const MyLoTest_t * mlt);
 
 

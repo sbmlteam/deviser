@@ -624,7 +624,7 @@ ListOfMembers::writeXMLNS(XMLOutputStream& stream) const
  * Returns the value of the "id" attribute of this ListOf_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMembers_getId(const ListOf_t * lo)
 {
   if (lo == NULL)
@@ -641,7 +641,7 @@ ListOfMembers_getId(const ListOf_t * lo)
  * Returns the value of the "name" attribute of this ListOf_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMembers_getName(const ListOf_t * lo)
 {
   if (lo == NULL)

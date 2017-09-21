@@ -1431,7 +1431,7 @@ Group_free(Group_t* g)
  * Returns the value of the "id" attribute of this Group_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getId(const Group_t * g)
 {
   if (g == NULL)
@@ -1447,7 +1447,7 @@ Group_getId(const Group_t * g)
  * Returns the value of the "name" attribute of this Group_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getName(const Group_t * g)
 {
   if (g == NULL)

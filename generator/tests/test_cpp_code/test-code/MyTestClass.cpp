@@ -2355,7 +2355,7 @@ MyTestClass_free(MyTestClass_t* mtc)
  * Returns the value of the "id" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getId(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2371,7 +2371,7 @@ MyTestClass_getId(const MyTestClass_t * mtc)
  * Returns the value of the "name" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getName(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2453,7 +2453,7 @@ MyTestClass_getFalse(const MyTestClass_t * mtc)
  * Returns the value of the "unit" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getUnit(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2469,7 +2469,7 @@ MyTestClass_getUnit(const MyTestClass_t * mtc)
  * Returns the value of the "ref1" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRef1(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2485,7 +2485,7 @@ MyTestClass_getRef1(const MyTestClass_t * mtc)
  * Returns the value of the "ref2" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRef2(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2501,7 +2501,7 @@ MyTestClass_getRef2(const MyTestClass_t * mtc)
  * Returns the value of the "refUnit" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRefUnit(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2518,7 +2518,7 @@ MyTestClass_getRefUnit(const MyTestClass_t * mtc)
  * Returns the value of the "correctId" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getCorrectId(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2535,7 +2535,7 @@ MyTestClass_getCorrectId(const MyTestClass_t * mtc)
  * Returns the value of the "idRef" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdRef(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2551,7 +2551,7 @@ MyTestClass_getIdRef(const MyTestClass_t * mtc)
  * Returns the value of the "idref1" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdref1(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)
@@ -2568,7 +2568,7 @@ MyTestClass_getIdref1(const MyTestClass_t * mtc)
  * Returns the value of the "idref2" attribute of this MyTestClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdref2(const MyTestClass_t * mtc)
 {
   if (mtc == NULL)

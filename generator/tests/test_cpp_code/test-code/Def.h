@@ -752,7 +752,7 @@ Def_free(Def_t* d);
  * @memberof Def_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Def_getLetter(const Def_t * d);
 
 

@@ -950,7 +950,7 @@ Compartment_getVolume(const Compartment_t * c);
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getUnits(const Compartment_t * c);
 
 
@@ -998,7 +998,7 @@ Compartment_getConstant(const Compartment_t * c);
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getOutside(const Compartment_t * c);
 
 
@@ -1015,7 +1015,7 @@ Compartment_getOutside(const Compartment_t * c);
  * @memberof Compartment_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getCompartmentType(const Compartment_t * c);
 
 

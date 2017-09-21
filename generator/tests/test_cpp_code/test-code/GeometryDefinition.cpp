@@ -992,7 +992,7 @@ GeometryDefinition_free(GeometryDefinition_t* gd)
  * Returns the value of the "id" attribute of this GeometryDefinition_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 GeometryDefinition_getId(const GeometryDefinition_t * gd)
 {
   if (gd == NULL)

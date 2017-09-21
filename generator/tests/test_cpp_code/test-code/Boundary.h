@@ -722,7 +722,7 @@ Boundary_free(Boundary_t* b);
  * @memberof Boundary_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Boundary_getId(const Boundary_t * b);
 
 

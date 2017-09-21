@@ -671,7 +671,7 @@ Copyright_free(Copyright_t* c);
  * @memberof Copyright_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Copyright_getId(const Copyright_t * c);
 
 

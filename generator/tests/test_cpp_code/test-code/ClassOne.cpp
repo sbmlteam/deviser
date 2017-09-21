@@ -1081,7 +1081,7 @@ ClassOne_free(ClassOne_t* co)
  * Returns the value of the "id" attribute of this ClassOne_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOne_getId(const ClassOne_t * co)
 {
   if (co == NULL)

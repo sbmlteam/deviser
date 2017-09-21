@@ -1029,7 +1029,7 @@ CSGObject_free(CSGObject_t* csgo);
  * @memberof CSGObject_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGObject_getId(const CSGObject_t * csgo);
 
 
@@ -1046,7 +1046,7 @@ CSGObject_getId(const CSGObject_t * csgo);
  * @memberof CSGObject_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGObject_getDomainType(const CSGObject_t * csgo);
 
 

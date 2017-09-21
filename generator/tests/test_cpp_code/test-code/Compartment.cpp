@@ -1421,7 +1421,7 @@ Compartment_getVolume(const Compartment_t * c)
  * Returns the value of the "units" attribute of this Compartment_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getUnits(const Compartment_t * c)
 {
   if (c == NULL)
@@ -1460,7 +1460,7 @@ Compartment_getConstant(const Compartment_t * c)
  * Returns the value of the "outside" attribute of this Compartment_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getOutside(const Compartment_t * c)
 {
   if (c == NULL)
@@ -1476,7 +1476,7 @@ Compartment_getOutside(const Compartment_t * c)
  * Returns the value of the "compartmentType" attribute of this Compartment_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Compartment_getCompartmentType(const Compartment_t * c)
 {
   if (c == NULL)

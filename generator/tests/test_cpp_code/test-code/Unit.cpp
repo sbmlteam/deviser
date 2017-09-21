@@ -717,7 +717,7 @@ Unit_free(Unit_t* u)
  * Returns the value of the "unit" attribute of this Unit_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Unit_getUnit(const Unit_t * u)
 {
   if (u == NULL)

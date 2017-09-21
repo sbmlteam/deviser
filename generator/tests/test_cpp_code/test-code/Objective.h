@@ -1222,7 +1222,7 @@ Objective_free(Objective_t* o);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getId(const Objective_t * o);
 
 
@@ -1239,7 +1239,7 @@ Objective_getId(const Objective_t * o);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getName(const Objective_t * o);
 
 

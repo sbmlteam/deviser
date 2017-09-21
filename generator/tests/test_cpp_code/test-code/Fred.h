@@ -1335,7 +1335,7 @@ Fred_free(Fred_t* f);
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getId(const Fred_t * f);
 
 
@@ -1380,7 +1380,7 @@ Fred_getNum(const Fred_t * f);
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getStr(const Fred_t * f);
 
 

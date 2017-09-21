@@ -1161,7 +1161,7 @@ Group_free(Group_t* g);
  * @memberof Group_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getId(const Group_t * g);
 
 
@@ -1178,7 +1178,7 @@ Group_getId(const Group_t * g);
  * @memberof Group_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getName(const Group_t * g);
 
 

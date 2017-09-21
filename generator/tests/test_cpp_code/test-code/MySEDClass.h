@@ -632,7 +632,7 @@ MySEDClass_free(MySEDClass_t* msedc);
  * @memberof MySEDClass_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 MySEDClass_getId(const MySEDClass_t * msedc);
 
 

@@ -1958,7 +1958,7 @@ MyRequiredClass_free(MyRequiredClass_t* mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getId(const MyRequiredClass_t * mrc);
 
 
@@ -1975,7 +1975,7 @@ MyRequiredClass_getId(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getName(const MyRequiredClass_t * mrc);
 
 
@@ -2082,7 +2082,7 @@ MyRequiredClass_getFalse(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getUnit(const MyRequiredClass_t * mrc);
 
 
@@ -2099,7 +2099,7 @@ MyRequiredClass_getUnit(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRef1(const MyRequiredClass_t * mrc);
 
 
@@ -2116,7 +2116,7 @@ MyRequiredClass_getRef1(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRef2(const MyRequiredClass_t * mrc);
 
 
@@ -2133,7 +2133,7 @@ MyRequiredClass_getRef2(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRefUnit(const MyRequiredClass_t * mrc);
 
 
@@ -2150,7 +2150,7 @@ MyRequiredClass_getRefUnit(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getCorrectId(const MyRequiredClass_t * mrc);
 
 
@@ -2212,7 +2212,7 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc);
 
 
@@ -2229,7 +2229,7 @@ MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaid1(const MyRequiredClass_t * mrc);
 
 
@@ -2261,7 +2261,7 @@ MyRequiredClass_getNum4(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc);
 
 
@@ -2278,7 +2278,7 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc);
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getNotmetaid(const MyRequiredClass_t * mrc);
 
 

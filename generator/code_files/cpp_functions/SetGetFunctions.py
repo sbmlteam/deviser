@@ -192,7 +192,10 @@ class SetGetFunctions():
             if attribute['attType'] == 'element':
                 return_type = 'const {0}'.format(attribute['CType'])
             else:
-                return_type = '{0}'.format(attribute['CType'])
+                if attribute['CType'] == 'const char *':
+                    return_type = 'char *'
+                else:
+                    return_type = '{0}'.format(attribute['CType'])
 
         arguments = []
         if not self.is_cpp_api:

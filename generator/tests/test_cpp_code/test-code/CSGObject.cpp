@@ -1664,7 +1664,7 @@ CSGObject_free(CSGObject_t* csgo)
  * Returns the value of the "id" attribute of this CSGObject_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGObject_getId(const CSGObject_t * csgo)
 {
   if (csgo == NULL)
@@ -1680,7 +1680,7 @@ CSGObject_getId(const CSGObject_t * csgo)
  * Returns the value of the "domainType" attribute of this CSGObject_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGObject_getDomainType(const CSGObject_t * csgo)
 {
   if (csgo == NULL)

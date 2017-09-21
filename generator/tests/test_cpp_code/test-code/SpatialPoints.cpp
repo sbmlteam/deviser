@@ -1320,7 +1320,7 @@ SpatialPoints_free(SpatialPoints_t* sp)
  * Returns the value of the "id" attribute of this SpatialPoints_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 SpatialPoints_getId(const SpatialPoints_t * sp)
 {
   if (sp == NULL)

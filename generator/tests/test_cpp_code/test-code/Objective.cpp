@@ -1640,7 +1640,7 @@ Objective_free(Objective_t* o)
  * Returns the value of the "id" attribute of this Objective_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getId(const Objective_t * o)
 {
   if (o == NULL)
@@ -1656,7 +1656,7 @@ Objective_getId(const Objective_t * o)
  * Returns the value of the "name" attribute of this Objective_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getName(const Objective_t * o)
 {
   if (o == NULL)

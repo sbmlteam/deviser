@@ -660,7 +660,7 @@ ListOfObjectives::writeXMLNS(XMLOutputStream& stream) const
  * Returns the value of the "activeObjective" attribute of this ListOf_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfObjectives_getActiveObjective(const ListOf_t * lo)
 {
   if (lo == NULL)

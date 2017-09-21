@@ -684,7 +684,7 @@ Abc_free(Abc_t* a);
  * @memberof Abc_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Abc_getLetter(const Abc_t * a);
 
 

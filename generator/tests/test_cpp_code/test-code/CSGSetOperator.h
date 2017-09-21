@@ -1290,7 +1290,7 @@ CSGSetOperator_getOperationTypeAsString(const CSGSetOperator_t * csgso);
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getComplementA(const CSGSetOperator_t * csgso);
 
 
@@ -1307,7 +1307,7 @@ CSGSetOperator_getComplementA(const CSGSetOperator_t * csgso);
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso);
 
 

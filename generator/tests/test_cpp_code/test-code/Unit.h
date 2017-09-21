@@ -668,7 +668,7 @@ Unit_free(Unit_t* u);
  * @memberof Unit_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Unit_getUnit(const Unit_t * u);
 
 

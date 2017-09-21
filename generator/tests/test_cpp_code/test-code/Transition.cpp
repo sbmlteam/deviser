@@ -1805,7 +1805,7 @@ Transition_free(Transition_t* t)
  * Returns the value of the "id" attribute of this Transition_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Transition_getId(const Transition_t * t)
 {
   if (t == NULL)
@@ -1821,7 +1821,7 @@ Transition_getId(const Transition_t * t)
  * Returns the value of the "name" attribute of this Transition_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Transition_getName(const Transition_t * t)
 {
   if (t == NULL)

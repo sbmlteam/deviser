@@ -580,7 +580,7 @@ BEGIN_C_DECLS
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMembers_getId(const ListOf_t * lo);
 
 
@@ -597,7 +597,7 @@ ListOfMembers_getId(const ListOf_t * lo);
  * @memberof ListOfMembers_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ListOfMembers_getName(const ListOf_t * lo);
 
 

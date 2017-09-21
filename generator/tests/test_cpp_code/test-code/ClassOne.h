@@ -795,7 +795,7 @@ ClassOne_free(ClassOne_t* co);
  * @memberof ClassOne_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOne_getId(const ClassOne_t * co);
 
 

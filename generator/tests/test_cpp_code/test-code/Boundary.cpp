@@ -854,7 +854,7 @@ Boundary_free(Boundary_t* b)
  * Returns the value of the "id" attribute of this Boundary_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Boundary_getId(const Boundary_t * b)
 {
   if (b == NULL)

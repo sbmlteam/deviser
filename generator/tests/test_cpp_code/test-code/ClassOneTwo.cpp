@@ -2059,7 +2059,7 @@ ClassOneTwo_free(ClassOneTwo_t* cot)
  * Returns the value of the "id" attribute of this ClassOneTwo_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getId(const ClassOneTwo_t * cot)
 {
   if (cot == NULL)
@@ -2086,7 +2086,7 @@ ClassOneTwo_getAtt1(const ClassOneTwo_t * cot)
  * Returns the value of the "attStr" attribute of this ClassOneTwo_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttStr(const ClassOneTwo_t * cot)
 {
   if (cot == NULL)
@@ -2136,7 +2136,7 @@ ClassOneTwo_getAttDbl(const ClassOneTwo_t * cot)
  * Returns the value of the "attUnit" attribute of this ClassOneTwo_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttUnit(const ClassOneTwo_t * cot)
 {
   if (cot == NULL)

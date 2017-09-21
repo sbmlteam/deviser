@@ -3868,7 +3868,7 @@ MyRequiredClass_free(MyRequiredClass_t* mrc)
  * Returns the value of the "id" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getId(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -3884,7 +3884,7 @@ MyRequiredClass_getId(const MyRequiredClass_t * mrc)
  * Returns the value of the "name" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getName(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -3966,7 +3966,7 @@ MyRequiredClass_getFalse(const MyRequiredClass_t * mrc)
  * Returns the value of the "unit" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getUnit(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -3982,7 +3982,7 @@ MyRequiredClass_getUnit(const MyRequiredClass_t * mrc)
  * Returns the value of the "ref1" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRef1(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -3998,7 +3998,7 @@ MyRequiredClass_getRef1(const MyRequiredClass_t * mrc)
  * Returns the value of the "ref2" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRef2(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4014,7 +4014,7 @@ MyRequiredClass_getRef2(const MyRequiredClass_t * mrc)
  * Returns the value of the "refUnit" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getRefUnit(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4031,7 +4031,7 @@ MyRequiredClass_getRefUnit(const MyRequiredClass_t * mrc)
  * Returns the value of the "correctId" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getCorrectId(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4081,7 +4081,7 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc)
  * Returns the value of the "metaid" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4098,7 +4098,7 @@ MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc)
  * Returns the value of the "metaid1" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaid1(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4126,7 +4126,7 @@ MyRequiredClass_getNum4(const MyRequiredClass_t * mrc)
  * Returns the value of the "metaidref1" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
@@ -4143,7 +4143,7 @@ MyRequiredClass_getMetaidref1(const MyRequiredClass_t * mrc)
  * Returns the value of the "notmetaid" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyRequiredClass_getNotmetaid(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)

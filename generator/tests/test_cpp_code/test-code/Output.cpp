@@ -1242,7 +1242,7 @@ Output_free(Output_t* o)
  * Returns the value of the "id" attribute of this Output_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getId(const Output_t * o)
 {
   if (o == NULL)
@@ -1258,7 +1258,7 @@ Output_getId(const Output_t * o)
  * Returns the value of the "qualitativeSpecies" attribute of this Output_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getQualitativeSpecies(const Output_t * o)
 {
   if (o == NULL)
@@ -1302,7 +1302,7 @@ Output_getTransitionEffectAsString(const Output_t * o)
  * Returns the value of the "name" attribute of this Output_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getName(const Output_t * o)
 {
   if (o == NULL)

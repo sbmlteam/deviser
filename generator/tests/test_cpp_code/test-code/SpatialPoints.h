@@ -946,7 +946,7 @@ SpatialPoints_free(SpatialPoints_t* sp);
  * @memberof SpatialPoints_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SpatialPoints_getId(const SpatialPoints_t * sp);
 
 

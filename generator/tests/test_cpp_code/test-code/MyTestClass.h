@@ -1304,7 +1304,7 @@ MyTestClass_free(MyTestClass_t* mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getId(const MyTestClass_t * mtc);
 
 
@@ -1321,7 +1321,7 @@ MyTestClass_getId(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getName(const MyTestClass_t * mtc);
 
 
@@ -1427,7 +1427,7 @@ MyTestClass_getFalse(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getUnit(const MyTestClass_t * mtc);
 
 
@@ -1444,7 +1444,7 @@ MyTestClass_getUnit(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRef1(const MyTestClass_t * mtc);
 
 
@@ -1461,7 +1461,7 @@ MyTestClass_getRef1(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRef2(const MyTestClass_t * mtc);
 
 
@@ -1478,7 +1478,7 @@ MyTestClass_getRef2(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getRefUnit(const MyTestClass_t * mtc);
 
 
@@ -1495,7 +1495,7 @@ MyTestClass_getRefUnit(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getCorrectId(const MyTestClass_t * mtc);
 
 
@@ -1512,7 +1512,7 @@ MyTestClass_getCorrectId(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdRef(const MyTestClass_t * mtc);
 
 
@@ -1529,7 +1529,7 @@ MyTestClass_getIdRef(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdref1(const MyTestClass_t * mtc);
 
 
@@ -1546,7 +1546,7 @@ MyTestClass_getIdref1(const MyTestClass_t * mtc);
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyTestClass_getIdref2(const MyTestClass_t * mtc);
 
 

@@ -764,7 +764,7 @@ Abc_free(Abc_t* a)
  * Returns the value of the "letter" attribute of this Abc_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Abc_getLetter(const Abc_t * a)
 {
   if (a == NULL)

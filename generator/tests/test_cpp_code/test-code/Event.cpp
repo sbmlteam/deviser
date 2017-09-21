@@ -1734,7 +1734,7 @@ Event_getUseValuesFromTriggerTime(const Event_t * e)
  * Returns the value of the "timeUnits" attribute of this Event_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Event_getTimeUnits(const Event_t * e)
 {
   if (e == NULL)

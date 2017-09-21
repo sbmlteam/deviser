@@ -1063,7 +1063,7 @@ BBB_free(BBB_t* bbb);
  * @memberof BBB_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 BBB_getId(const BBB_t * bbb);
 
 

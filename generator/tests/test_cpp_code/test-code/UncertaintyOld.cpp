@@ -1083,7 +1083,7 @@ UncertaintyOld_free(UncertaintyOld_t* uo)
  * Returns the value of the "id" attribute of this UncertaintyOld_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 UncertaintyOld_getId(const UncertaintyOld_t * uo)
 {
   if (uo == NULL)
@@ -1099,7 +1099,7 @@ UncertaintyOld_getId(const UncertaintyOld_t * uo)
  * Returns the value of the "name" attribute of this UncertaintyOld_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 UncertaintyOld_getName(const UncertaintyOld_t * uo)
 {
   if (uo == NULL)

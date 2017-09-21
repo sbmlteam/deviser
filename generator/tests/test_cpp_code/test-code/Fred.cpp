@@ -2210,7 +2210,7 @@ Fred_free(Fred_t* f)
  * Returns the value of the "id" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getId(const Fred_t * f)
 {
   if (f == NULL)
@@ -2248,7 +2248,7 @@ Fred_getNum(const Fred_t * f)
  * Returns the value of the "str" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getStr(const Fred_t * f)
 {
   if (f == NULL)

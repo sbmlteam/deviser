@@ -790,7 +790,7 @@ Member_free(Member_t* m);
  * @memberof Member_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Member_getId(const Member_t * m);
 
 
@@ -807,7 +807,7 @@ Member_getId(const Member_t * m);
  * @memberof Member_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Member_getName(const Member_t * m);
 
 
@@ -824,7 +824,7 @@ Member_getName(const Member_t * m);
  * @memberof Member_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Member_getIdRef(const Member_t * m);
 
 
@@ -841,7 +841,7 @@ Member_getIdRef(const Member_t * m);
  * @memberof Member_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Member_getMetaIdRef(const Member_t * m);
 
 

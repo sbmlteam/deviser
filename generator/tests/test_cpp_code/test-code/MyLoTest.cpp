@@ -724,7 +724,7 @@ MyLoTest_free(MyLoTest_t* mlt)
  * Returns the value of the "id" attribute of this MyLoTest_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 MyLoTest_getId(const MyLoTest_t * mlt)
 {
   if (mlt == NULL)

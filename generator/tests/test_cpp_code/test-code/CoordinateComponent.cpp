@@ -1687,7 +1687,7 @@ CoordinateComponent_free(CoordinateComponent_t* cc)
  * Returns the value of the "id" attribute of this CoordinateComponent_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getId(const CoordinateComponent_t * cc)
 {
   if (cc == NULL)
@@ -1730,7 +1730,7 @@ CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc)
  * Returns the value of the "unit" attribute of this CoordinateComponent_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getUnit(const CoordinateComponent_t * cc)
 {
   if (cc == NULL)
