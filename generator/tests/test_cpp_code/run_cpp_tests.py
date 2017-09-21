@@ -484,6 +484,11 @@ def main():
         test_case = 'plugin with additional code'
         fail += run_plug_test(name, class_name, test_case, num)
 
+        name = 'groups'
+        class_name = 'GroupsExtension'
+        test_case = 'basic extension file'
+        fail += run_ext_test(name, class_name, test_case, 0)
+
         name = 'test_vers'
         num = 0
         class_name = 'ClassOne'
@@ -823,11 +828,9 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'groups'
-        num = 1
-        class_name = 'Member'
-        list_of = ''
-        test_case = 'list of with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        class_name = 'GroupsExtension'
+        test_case = 'basic extension file'
+        fail += run_ext_test(name, class_name, test_case, 0)
 
 
     test_functions.report('CPP', fail, fails, not_tested)

@@ -238,7 +238,7 @@ public:
    * the "coreversmultipkg" package.
    *
    * @return the SBML Level for the given URI of this package, or @c 0 if the
-   * given URI is invalid.
+   * given URI is invalid, or for a different package.
    */
   virtual unsigned int getLevel(const std::string& uri) const;
 
@@ -251,7 +251,7 @@ public:
    * the "coreversmultipkg" package.
    *
    * @return the SBML Version within the SBML Level for the given URI of this
-   * package, or @c 0 if the given URI is invalid.
+   * package, or @c 0 if the given URI is invalid, or for a different package.
    */
   virtual unsigned int getVersion(const std::string& uri) const;
 
@@ -264,7 +264,8 @@ public:
    * the "coreversmultipkg" package.
    *
    * @return the version of the SBML Level&nbsp;3 package for the given URI of
-   * this package, or @c 0 if the given URI is invalid.
+   * this package, or @c 0 if the given URI is invalid, or for a different
+   * package.
    */
   virtual unsigned int getPackageVersion(const std::string& uri) const;
 

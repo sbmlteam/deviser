@@ -179,7 +179,7 @@ class ExtensionFunctions():
                   'of the versions of the \"{0}\" package.'.format(self.package)]
         return_lines = ['@return the {0} for the given URI of this '
                         'package, or @c 0 if the given URI is '
-                        'invalid.'.format(ret_name)]
+                        'invalid, or for a different package.'.format(ret_name)]
         additional = []
 
         # create the function declaration
