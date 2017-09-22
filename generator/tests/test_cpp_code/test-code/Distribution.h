@@ -982,8 +982,8 @@ Distribution_isCauchyDistribution(const Distribution_t * d);
  *
  * @param d the Distribution_t structure.
  *
- * @return @c 1 if this Distribution_t is of type ExponentialDistribution_t, @c
- * 0 otherwise
+ * @return @c 1 if this Distribution_t is of type ExponentialDistribution_t,
+ * @c 0 otherwise
  *
  * @memberof Distribution_t
  */
@@ -1078,8 +1078,8 @@ Distribution_isBernoulliDistribution(const Distribution_t * d);
  *
  * @param d the Distribution_t structure.
  *
- * @return @c 1 if this Distribution_t is of type CategoricalDistribution_t, @c
- * 0 otherwise
+ * @return @c 1 if this Distribution_t is of type CategoricalDistribution_t,
+ * @c 0 otherwise
  *
  * @memberof Distribution_t
  */

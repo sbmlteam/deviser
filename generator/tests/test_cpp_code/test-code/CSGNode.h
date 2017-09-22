@@ -971,8 +971,8 @@ CSGNode_isCSGScale(const CSGNode_t * csgn);
  *
  * @param csgn the CSGNode_t structure.
  *
- * @return @c 1 if this CSGNode_t is of type CSGHomogeneousTransformation_t, @c
- * 0 otherwise
+ * @return @c 1 if this CSGNode_t is of type CSGHomogeneousTransformation_t,
+ * @c 0 otherwise
  *
  * @memberof CSGNode_t
  */

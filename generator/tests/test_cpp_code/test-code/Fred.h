@@ -233,8 +233,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "kind" attribute is set.
    *
-   * @return @c true if this Fred's "kind" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "kind" attribute has been set, otherwise
+   * @c false is returned.
    *
    * @copydetails doc_fred_kind
    */
@@ -436,8 +436,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "other1" element is set.
    *
-   * @return @c true if this Fred's "other1" element has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "other1" element has been set, otherwise
+   * @c false is returned.
    */
   bool isSetOther1() const;
 
@@ -445,8 +445,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "other2" element is set.
    *
-   * @return @c true if this Fred's "other2" element has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "other2" element has been set, otherwise
+   * @c false is returned.
    */
   bool isSetOther2() const;
 

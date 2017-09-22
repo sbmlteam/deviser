@@ -167,8 +167,8 @@ public:
   /**
    * Predicate returning @c true if this Member's "id" attribute is set.
    *
-   * @return @c true if this Member's "id" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Member's "id" attribute has been set, otherwise
+   * @c false is returned.
    */
   virtual bool isSetId() const;
 

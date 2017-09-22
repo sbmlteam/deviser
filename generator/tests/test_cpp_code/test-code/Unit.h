@@ -141,8 +141,8 @@ public:
   /**
    * Predicate returning @c true if this Unit's "unit" attribute is set.
    *
-   * @return @c true if this Unit's "unit" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Unit's "unit" attribute has been set, otherwise
+   * @c false is returned.
    */
   bool isSetUnit() const;
 

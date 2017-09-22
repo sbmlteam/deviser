@@ -193,6 +193,12 @@ class BaseFile:
                         if rollback:
                             i -= 1
             else:
+                # dont break between @c and true etc
+                # remove @c and go back a word
+                if words[i-1] == '@c':
+                    lenline = len(newline)
+                    newline = newline[0:lenline-3]
+                    i -= 1
                 if in_quotes or not quotes_closed:
                     newline += ' \"'
                     quotes_closed = True
