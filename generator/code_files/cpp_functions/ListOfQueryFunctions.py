@@ -756,6 +756,31 @@ class ListOfQueryFunctions():
                         ' OperationReturnValues_t{3}'.format(self.language,
                                                              self.open_br,
                                                              failed,
+                                                             self.close_br),
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
+                                                             self.open_br,
+                                                             global_variables.ret_invalid_obj,
+                                                             self.close_br),
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
+                                                             self.open_br,
+                                                             global_variables.ret_level_mis,
+                                                             self.close_br),
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
+                                                             self.open_br,
+                                                             global_variables.ret_vers_mis,
+                                                             self.close_br),
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
+                                                             self.open_br,
+                                                             global_variables.ret_pkgv_mis,
+                                                             self.close_br),
+                        '@li @{0}constant{1}{2},'
+                        ' OperationReturnValues_t{3}'.format(self.language,
+                                                             self.open_br,
+                                                             global_variables.ret_dup_id,
                                                              self.close_br)]
         additional = []
         if self.is_cpp_api:
@@ -1100,6 +1125,8 @@ class ListOfQueryFunctions():
             return_lines = ['@return the {0} from this {1} as a '
                             'ListOf_t *.'.format(loname, self.object_name)]
         additional = ['@copydetails doc_returned_unowned_pointer']
+        self.add_other_referenced_functions(additional, '', self.object_child_name)
+
 
         # create the function declaration
         name_used = strFunctions.remove_prefix(loname)

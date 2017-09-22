@@ -66,14 +66,21 @@ protected:
 public:
 
   /**
-   * Creates a new SpatialReactionPlugin using the given uri, prefix and
+   * Creates a new SpatialReactionPlugin using the given URI, prefix and
    * package namespace.
    *
-   * @param uri a string, representing the uri of the package.
+   * @param uri a string, representing the URI of the SBML Level&nbsp;3 package
+   * implemented by this libSBML package extension.
    *
-   * @param prefix a string, the prefix to be used.
+   * @param prefix a string, the XML namespace prefix being used for this
+   * package.
    *
-   * @param spatialns a pointer to the SpatialPkgNamespaces object to be used.
+   * @param spatialns a pointer to the namesspaces object
+   * (SpatialPkgNamespaces) for this package.
+   *
+   * @copydetails doc_what_are_xmlnamespaces
+   *
+   * @copydetails doc_what_are_sbmlnamespaces
    */
   SpatialReactionPlugin(const std::string& uri,
                         const std::string& prefix,

@@ -49,7 +49,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new GroupsModelPlugin using the given uri, prefix and package
+ * Creates a new GroupsModelPlugin using the given URI, prefix and package
  * namespace.
  */
 GroupsModelPlugin::GroupsModelPlugin(const std::string& uri,

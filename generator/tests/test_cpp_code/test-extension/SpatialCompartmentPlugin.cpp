@@ -48,7 +48,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SpatialCompartmentPlugin using the given uri, prefix and
+ * Creates a new SpatialCompartmentPlugin using the given URI, prefix and
  * package namespace.
  */
 SpatialCompartmentPlugin::SpatialCompartmentPlugin(const std::string& uri,

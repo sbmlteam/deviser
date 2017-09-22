@@ -137,6 +137,14 @@ public:
    * @return the ListOfAssociations from this FbcAnd.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   const ListOfAssociations* getListOfAssociations() const;
 
@@ -147,6 +155,14 @@ public:
    * @return the ListOfAssociations from this FbcAnd.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAssociation(const Association* object)
+   * @see createAssociation()
+   * @see getAssociation(const std::string& sid)
+   * @see getAssociation(unsigned int n)
+   * @see getNumAssociations()
+   * @see removeAssociation(const std::string& sid)
+   * @see removeAssociation(unsigned int n)
    */
   ListOfAssociations* getListOfAssociations();
 
@@ -199,6 +215,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -782,7 +803,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -794,7 +816,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -803,8 +826,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -991,6 +1014,14 @@ FbcAnd_free(FbcAnd_t* fa);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addAssociation_t(const Association_t* object)
+ * @see createAssociation_t()
+ * @see getAssociation_t(const std::string& sid)
+ * @see getAssociation_t(unsigned int n)
+ * @see getNumAssociations()
+ * @see removeAssociation_t(const std::string& sid)
+ * @see removeAssociation_t(unsigned int n)
+ *
  * @memberof FbcAnd_t
  */
 LIBSBML_EXTERN
@@ -1027,6 +1058,11 @@ FbcAnd_getAssociation(FbcAnd_t* fa, unsigned int n);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof FbcAnd_t
  */

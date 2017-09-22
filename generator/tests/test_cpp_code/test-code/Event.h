@@ -395,6 +395,14 @@ public:
    * @return the SBMLListOfEventAssignments from this Event.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   const SBMLListOfEventAssignments* getSBMLListOfEventAssignments() const;
 
@@ -405,6 +413,14 @@ public:
    * @return the SBMLListOfEventAssignments from this Event.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addEventAssignment(const EventAssignment* object)
+   * @see createEventAssignment()
+   * @see getEventAssignment(const std::string& sid)
+   * @see getEventAssignment(unsigned int n)
+   * @see getNumEventAssignments()
+   * @see removeEventAssignment(const std::string& sid)
+   * @see removeEventAssignment(unsigned int n)
    */
   SBMLListOfEventAssignments* getSBMLListOfEventAssignments();
 
@@ -490,6 +506,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -1036,7 +1057,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -1555,6 +1577,14 @@ Event_unsetDelay(Event_t * e);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addEventAssignment_t(const EventAssignment_t* object)
+ * @see createEventAssignment_t()
+ * @see getEventAssignment_t(const std::string& sid)
+ * @see getEventAssignment_t(unsigned int n)
+ * @see getNumEventAssignments()
+ * @see removeEventAssignment_t(const std::string& sid)
+ * @see removeEventAssignment_t(unsigned int n)
+ *
  * @memberof Event_t
  */
 LIBSBML_EXTERN
@@ -1614,6 +1644,11 @@ Event_getEventAssignmentByVariable(Event_t* e, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof Event_t
  */

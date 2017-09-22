@@ -69,14 +69,21 @@ protected:
 public:
 
   /**
-   * Creates a new QualModelPlugin using the given uri, prefix and package
+   * Creates a new QualModelPlugin using the given URI, prefix and package
    * namespace.
    *
-   * @param uri a string, representing the uri of the package.
+   * @param uri a string, representing the URI of the SBML Level&nbsp;3 package
+   * implemented by this libSBML package extension.
    *
-   * @param prefix a string, the prefix to be used.
+   * @param prefix a string, the XML namespace prefix being used for this
+   * package.
    *
-   * @param qualns a pointer to the QualPkgNamespaces object to be used.
+   * @param qualns a pointer to the namesspaces object (QualPkgNamespaces) for
+   * this package.
+   *
+   * @copydetails doc_what_are_xmlnamespaces
+   *
+   * @copydetails doc_what_are_sbmlnamespaces
    */
   QualModelPlugin(const std::string& uri,
                   const std::string& prefix,
@@ -120,6 +127,14 @@ public:
    * @return the ListOfQualitativeSpecies from this QualModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   const ListOfQualitativeSpecies* getListOfQualitativeSpecies() const;
 
@@ -130,6 +145,14 @@ public:
    * @return the ListOfQualitativeSpecies from this QualModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addQualitativeSpecies(const QualitativeSpecies* object)
+   * @see createQualitativeSpecies()
+   * @see getQualitativeSpecies(const std::string& sid)
+   * @see getQualitativeSpecies(unsigned int n)
+   * @see getNumQualitativeSpecies()
+   * @see removeQualitativeSpecies(const std::string& sid)
+   * @see removeQualitativeSpecies(unsigned int n)
    */
   ListOfQualitativeSpecies* getListOfQualitativeSpecies();
 
@@ -261,6 +284,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -357,6 +385,14 @@ public:
    * @return the ListOfTransitions from this QualModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   const ListOfTransitions* getListOfTransitions() const;
 
@@ -367,6 +403,14 @@ public:
    * @return the ListOfTransitions from this QualModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTransition(const Transition* object)
+   * @see createTransition()
+   * @see getTransition(const std::string& sid)
+   * @see getTransition(unsigned int n)
+   * @see getNumTransitions()
+   * @see removeTransition(const std::string& sid)
+   * @see removeTransition(unsigned int n)
    */
   ListOfTransitions* getListOfTransitions();
 
@@ -463,6 +507,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -1007,7 +1056,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -1019,7 +1069,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -1028,8 +1079,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -1102,6 +1153,14 @@ BEGIN_C_DECLS
  * ListOf_t *.
  *
  * @copydetails doc_returned_unowned_pointer
+ *
+ * @see addQualitativeSpecies_t(const QualitativeSpecies_t* object)
+ * @see createQualitativeSpecies_t()
+ * @see getQualitativeSpecies_t(const std::string& sid)
+ * @see getQualitativeSpecies_t(unsigned int n)
+ * @see getNumQualitativeSpecies()
+ * @see removeQualitativeSpecies_t(const std::string& sid)
+ * @see removeQualitativeSpecies_t(unsigned int n)
  *
  * @memberof QualModelPlugin_t
  */
@@ -1187,6 +1246,11 @@ QualModelPlugin_getQualitativeSpeciesByCompartment(QualModelPlugin_t* qmp,
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof QualModelPlugin_t
  */
@@ -1283,6 +1347,14 @@ QualModelPlugin_removeQualitativeSpeciesById(QualModelPlugin_t* qmp,
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addTransition_t(const Transition_t* object)
+ * @see createTransition_t()
+ * @see getTransition_t(const std::string& sid)
+ * @see getTransition_t(unsigned int n)
+ * @see getNumTransitions()
+ * @see removeTransition_t(const std::string& sid)
+ * @see removeTransition_t(unsigned int n)
+ *
  * @memberof QualModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -1341,6 +1413,11 @@ QualModelPlugin_getTransitionById(QualModelPlugin_t* qmp, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof QualModelPlugin_t
  */

@@ -48,7 +48,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SpatialParameterPlugin using the given uri, prefix and package
+ * Creates a new SpatialParameterPlugin using the given URI, prefix and package
  * namespace.
  */
 SpatialParameterPlugin::SpatialParameterPlugin(const std::string& uri,

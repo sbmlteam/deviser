@@ -66,14 +66,21 @@ protected:
 public:
 
   /**
-   * Creates a new GroupsModelPlugin using the given uri, prefix and package
+   * Creates a new GroupsModelPlugin using the given URI, prefix and package
    * namespace.
    *
-   * @param uri a string, representing the uri of the package.
+   * @param uri a string, representing the URI of the SBML Level&nbsp;3 package
+   * implemented by this libSBML package extension.
    *
-   * @param prefix a string, the prefix to be used.
+   * @param prefix a string, the XML namespace prefix being used for this
+   * package.
    *
-   * @param groupsns a pointer to the GroupsPkgNamespaces object to be used.
+   * @param groupsns a pointer to the namesspaces object (GroupsPkgNamespaces)
+   * for this package.
+   *
+   * @copydetails doc_what_are_xmlnamespaces
+   *
+   * @copydetails doc_what_are_sbmlnamespaces
    */
   GroupsModelPlugin(const std::string& uri,
                     const std::string& prefix,
@@ -117,6 +124,14 @@ public:
    * @return the ListOfGroups from this GroupsModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGroup(const Group* object)
+   * @see createGroup()
+   * @see getGroup(const std::string& sid)
+   * @see getGroup(unsigned int n)
+   * @see getNumGroups()
+   * @see removeGroup(const std::string& sid)
+   * @see removeGroup(unsigned int n)
    */
   const ListOfGroups* getListOfGroups() const;
 
@@ -127,6 +142,14 @@ public:
    * @return the ListOfGroups from this GroupsModelPlugin.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGroup(const Group* object)
+   * @see createGroup()
+   * @see getGroup(const std::string& sid)
+   * @see getGroup(unsigned int n)
+   * @see getNumGroups()
+   * @see removeGroup(const std::string& sid)
+   * @see removeGroup(unsigned int n)
    */
   ListOfGroups* getListOfGroups();
 
@@ -217,6 +240,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -760,7 +788,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -772,7 +801,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -781,8 +811,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -871,6 +901,14 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addGroup_t(const Group_t* object)
+ * @see createGroup_t()
+ * @see getGroup_t(const std::string& sid)
+ * @see getGroup_t(unsigned int n)
+ * @see getNumGroups()
+ * @see removeGroup_t(const std::string& sid)
+ * @see removeGroup_t(unsigned int n)
+ *
  * @memberof GroupsModelPlugin_t
  */
 LIBSBML_EXTERN
@@ -926,6 +964,11 @@ GroupsModelPlugin_getGroupById(GroupsModelPlugin_t* gmp, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof GroupsModelPlugin_t
  */

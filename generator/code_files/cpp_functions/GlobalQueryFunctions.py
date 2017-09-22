@@ -109,7 +109,7 @@ class GlobalQueryFunctions():
         params = ['@param id a string representing the id attribute '
                   'of the object to retrieve.']
         return_lines = ['@return  a pointer to the {0} element with the '
-                        'given @p id.'.format(self.std_base)]
+                        'given @p id. If no such object is found, this method returns @c NULL.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
@@ -191,7 +191,7 @@ class GlobalQueryFunctions():
         params = ['@param metaid a string representing the metaid attribute '
                   'of the object to retrieve.']
         return_lines = ['@return  a pointer to the {0} element with the '
-                        'given @p metaid.'.format(self.std_base)]
+                        'given @p metaid. If no such object is found this method returns @c NULL.'.format(self.std_base)]
         additional = []
 
         # create the function declaration
@@ -268,7 +268,7 @@ class GlobalQueryFunctions():
         # create comment parts
         title_line = 'Returns a List of all child {0} objects, including ' \
                      'those nested to an arbitrary depth.'.format(self.std_base)
-        params = ['filter, an ElementFilter that may impose restrictions on '
+        params = ['@param filter, an ElementFilter that may impose restrictions on '
                   'the objects to be retrieved.']
         return_lines = ['@return  a List* pointer of pointers to all '
                         '{0} child objects with any restriction '

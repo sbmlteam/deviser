@@ -190,6 +190,14 @@ public:
    * @return the ListOfSampledVolumes from this SampledFieldGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   const ListOfSampledVolumes* getListOfSampledVolumes() const;
 
@@ -200,6 +208,14 @@ public:
    * @return the ListOfSampledVolumes from this SampledFieldGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSampledVolume(const SampledVolume* object)
+   * @see createSampledVolume()
+   * @see getSampledVolume(const std::string& sid)
+   * @see getSampledVolume(unsigned int n)
+   * @see getNumSampledVolumes()
+   * @see removeSampledVolume(const std::string& sid)
+   * @see removeSampledVolume(unsigned int n)
    */
   ListOfSampledVolumes* getListOfSampledVolumes();
 
@@ -329,6 +345,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -925,7 +946,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -937,7 +959,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -946,8 +969,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -1170,6 +1193,14 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addSampledVolume_t(const SampledVolume_t* object)
+ * @see createSampledVolume_t()
+ * @see getSampledVolume_t(const std::string& sid)
+ * @see getSampledVolume_t(unsigned int n)
+ * @see getNumSampledVolumes()
+ * @see removeSampledVolume_t(const std::string& sid)
+ * @see removeSampledVolume_t(unsigned int n)
+ *
  * @memberof SampledFieldGeometry_t
  */
 LIBSBML_EXTERN
@@ -1254,6 +1285,11 @@ SampledFieldGeometry_getSampledVolumeByDomainType(SampledFieldGeometry_t* sfg,
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof SampledFieldGeometry_t
  */

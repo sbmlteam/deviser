@@ -48,7 +48,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CoreversmultipkgModelPlugin using the given uri, prefix and
+ * Creates a new CoreversmultipkgModelPlugin using the given URI, prefix and
  * package namespace.
  */
 CoreversmultipkgModelPlugin::CoreversmultipkgModelPlugin(

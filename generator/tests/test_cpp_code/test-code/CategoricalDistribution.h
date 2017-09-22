@@ -145,6 +145,14 @@ public:
    * @return the ListOfCategories from this CategoricalDistribution.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   const ListOfCategories* getListOfCategories() const;
 
@@ -155,6 +163,14 @@ public:
    * @return the ListOfCategories from this CategoricalDistribution.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addCategory(const Category* object)
+   * @see createCategory()
+   * @see getCategory(const std::string& sid)
+   * @see getCategory(unsigned int n)
+   * @see getNumCategories()
+   * @see removeCategory(const std::string& sid)
+   * @see removeCategory(unsigned int n)
    */
   ListOfCategories* getListOfCategories();
 
@@ -209,6 +225,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -772,7 +793,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -784,7 +806,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -793,8 +816,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -942,6 +965,14 @@ CategoricalDistribution_free(CategoricalDistribution_t* cd);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addCategory_t(const Category_t* object)
+ * @see createCategory_t()
+ * @see getCategory_t(const std::string& sid)
+ * @see getCategory_t(unsigned int n)
+ * @see getNumCategories()
+ * @see removeCategory_t(const std::string& sid)
+ * @see removeCategory_t(unsigned int n)
+ *
  * @memberof CategoricalDistribution_t
  */
 LIBSBML_EXTERN
@@ -981,6 +1012,11 @@ CategoricalDistribution_getCategory(CategoricalDistribution_t* cd,
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof CategoricalDistribution_t
  */

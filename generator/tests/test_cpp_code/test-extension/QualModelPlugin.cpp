@@ -49,7 +49,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new QualModelPlugin using the given uri, prefix and package
+ * Creates a new QualModelPlugin using the given URI, prefix and package
  * namespace.
  */
 QualModelPlugin::QualModelPlugin(const std::string& uri,

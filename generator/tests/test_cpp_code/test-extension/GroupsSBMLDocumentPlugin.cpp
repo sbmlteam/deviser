@@ -1,6 +1,6 @@
 /**
- * @file SpatialSBMLDocumentPlugin.cpp
- * @brief Implementation of the SpatialSBMLDocumentPlugin class.
+ * @file GroupsSBMLDocumentPlugin.cpp
+ * @brief Implementation of the GroupsSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,10 +30,10 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sbml/packages/spatial/extension/SpatialSBMLDocumentPlugin.h>
-#include <sbml/packages/spatial/validator/SpatialSBMLError.h>
-#include <sbml/packages/spatial/validator/SpatialConsistencyValidator.h>
-#include <sbml/packages/spatial/validator/SpatialIdentifierConsistencyValidator.h>
+#include <sbml/packages/groups/extension/GroupsSBMLDocumentPlugin.h>
+#include <sbml/packages/groups/validator/GroupsSBMLError.h>
+#include <sbml/packages/groups/validator/GroupsConsistencyValidator.h>
+#include <sbml/packages/groups/validator/GroupsIdentifierConsistencyValidator.h>
 
 
 using namespace std;
@@ -49,33 +49,33 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SpatialSBMLDocumentPlugin using the given URI, prefix and
+ * Creates a new GroupsSBMLDocumentPlugin using the given URI, prefix and
  * package namespace.
  */
-SpatialSBMLDocumentPlugin::SpatialSBMLDocumentPlugin(const std::string& uri,
-                                                     const std::string& prefix,
-                                                     SpatialPkgNamespaces*
-                                                       spatialns)
-  : SBMLDocumentPlugin(uri, prefix, spatialns)
+GroupsSBMLDocumentPlugin::GroupsSBMLDocumentPlugin(const std::string& uri,
+                                                   const std::string& prefix,
+                                                   GroupsPkgNamespaces*
+                                                     groupsns)
+  : SBMLDocumentPlugin(uri, prefix, groupsns)
 {
 }
 
 
 /*
- * Copy constructor for SpatialSBMLDocumentPlugin.
+ * Copy constructor for GroupsSBMLDocumentPlugin.
  */
-SpatialSBMLDocumentPlugin::SpatialSBMLDocumentPlugin(const
-  SpatialSBMLDocumentPlugin& orig)
+GroupsSBMLDocumentPlugin::GroupsSBMLDocumentPlugin(const
+  GroupsSBMLDocumentPlugin& orig)
   : SBMLDocumentPlugin( orig )
 {
 }
 
 
 /*
- * Assignment operator for SpatialSBMLDocumentPlugin.
+ * Assignment operator for GroupsSBMLDocumentPlugin.
  */
-SpatialSBMLDocumentPlugin&
-SpatialSBMLDocumentPlugin::operator=(const SpatialSBMLDocumentPlugin& rhs)
+GroupsSBMLDocumentPlugin&
+GroupsSBMLDocumentPlugin::operator=(const GroupsSBMLDocumentPlugin& rhs)
 {
   if (&rhs != this)
   {
@@ -87,19 +87,19 @@ SpatialSBMLDocumentPlugin::operator=(const SpatialSBMLDocumentPlugin& rhs)
 
 
 /*
- * Creates and returns a deep copy of this SpatialSBMLDocumentPlugin object.
+ * Creates and returns a deep copy of this GroupsSBMLDocumentPlugin object.
  */
-SpatialSBMLDocumentPlugin*
-SpatialSBMLDocumentPlugin::clone() const
+GroupsSBMLDocumentPlugin*
+GroupsSBMLDocumentPlugin::clone() const
 {
-  return new SpatialSBMLDocumentPlugin(*this);
+  return new GroupsSBMLDocumentPlugin(*this);
 }
 
 
 /*
- * Destructor for SpatialSBMLDocumentPlugin.
+ * Destructor for GroupsSBMLDocumentPlugin.
  */
-SpatialSBMLDocumentPlugin::~SpatialSBMLDocumentPlugin()
+GroupsSBMLDocumentPlugin::~GroupsSBMLDocumentPlugin()
 {
 }
 
@@ -111,7 +111,7 @@ SpatialSBMLDocumentPlugin::~SpatialSBMLDocumentPlugin()
  * Accepts the given SBMLVisitor
  */
 bool
-SpatialSBMLDocumentPlugin::accept(SBMLVisitor& v) const
+GroupsSBMLDocumentPlugin::accept(SBMLVisitor& v) const
 {
   const SBMLDocument* sbmld = static_cast<const
     SBMLDocument*>(this->getParentSBMLObject());
@@ -129,10 +129,10 @@ SpatialSBMLDocumentPlugin::accept(SBMLVisitor& v) const
 
 /*
  * Predicate indicating whether 'comp' flattening has been implemented for the
- * Spatial package.
+ * Groups package.
  */
 bool
-SpatialSBMLDocumentPlugin::isCompFlatteningImplemented() const
+GroupsSBMLDocumentPlugin::isCompFlatteningImplemented() const
 {
   return false;
 }
@@ -144,10 +144,10 @@ SpatialSBMLDocumentPlugin::isCompFlatteningImplemented() const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Calls check consistency for any relevant Spatial validators.
+ * Calls check consistency for any relevant Groups validators.
  */
 unsigned int
-SpatialSBMLDocumentPlugin::checkConsistency()
+GroupsSBMLDocumentPlugin::checkConsistency()
 {
   unsigned int nerrors = 0;
   unsigned int total_errors = 0;
@@ -159,8 +159,8 @@ SpatialSBMLDocumentPlugin::checkConsistency()
   bool id = ((applicableValidators & 0x01) ==0x01);
   bool core = ((applicableValidators & 0x02) ==0x02);
 
-  SpatialIdentifierConsistencyValidator id_validator;
-  SpatialConsistencyValidator core_validator;
+  GroupsIdentifierConsistencyValidator id_validator;
+  GroupsConsistencyValidator core_validator;
 
   if (id)
   {
@@ -202,12 +202,12 @@ SpatialSBMLDocumentPlugin::checkConsistency()
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Reads the Spatial attributes in the top-level element.
+ * Reads the Groups attributes in the top-level element.
  */
 void
-SpatialSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
-                                          const ExpectedAttributes&
-                                            expectedAttributes)
+GroupsSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
+                                         const ExpectedAttributes&
+                                           expectedAttributes)
 {
   if (getSBMLDocument() != NULL && getSBMLDocument()->getLevel() < 3)
   {
@@ -225,21 +225,21 @@ SpatialSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      log->logPackageError("spatial", SpatialAttributeRequiredMustBeBoolean,
+      log->logPackageError("groups", GroupsAttributeRequiredMustBeBoolean,
         getPackageVersion(), getLevel(), getVersion());
     }
     else
     {
-      log->logPackageError("spatial", SpatialAttributeRequiredMissing,
+      log->logPackageError("groups", GroupsAttributeRequiredMissing,
         getPackageVersion(), getLevel(), getVersion());
     }
   }
   else
   {
     mIsSetRequired = true;
-    if (mRequired != true)
+    if (mRequired != false)
     {
-      log->logPackageError("spatial", SpatialAttributeRequiredMustHaveValue,
+      log->logPackageError("groups", GroupsAttributeRequiredMustHaveValue,
         getPackageVersion(), getLevel(), getVersion());
     }
   }
@@ -253,11 +253,11 @@ SpatialSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        bool& value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       bool& value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -272,11 +272,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        int& value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       int& value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -291,11 +291,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        double& value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       double& value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -310,11 +310,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        unsigned int& value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       unsigned int& value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -329,11 +329,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        std::string& value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       std::string& value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -348,11 +348,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
-                                        const char* value) const
+GroupsSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
+                                       const char* value) const
 {
   int return_value = SBMLDocumentPlugin::getAttribute(attributeName, value);
 
@@ -366,11 +366,11 @@ SpatialSBMLDocumentPlugin::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Predicate returning @c true if this SpatialSBMLDocumentPlugin's attribute
+ * Predicate returning @c true if this GroupsSBMLDocumentPlugin's attribute
  * "attributeName" is set.
  */
 bool
-SpatialSBMLDocumentPlugin::isSetAttribute(const std::string& attributeName)
+GroupsSBMLDocumentPlugin::isSetAttribute(const std::string& attributeName)
   const
 {
   bool value = SBMLDocumentPlugin::isSetAttribute(attributeName);
@@ -386,11 +386,11 @@ SpatialSBMLDocumentPlugin::isSetAttribute(const std::string& attributeName)
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        bool value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       bool value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -405,11 +405,11 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        int value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       int value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -424,11 +424,11 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        double value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       double value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -443,11 +443,11 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        unsigned int value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       unsigned int value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -462,11 +462,11 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        const std::string& value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       const std::string& value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -481,11 +481,11 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
-                                        const char* value)
+GroupsSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
+                                       const char* value)
 {
   int return_value = SBMLDocumentPlugin::setAttribute(attributeName, value);
 
@@ -500,10 +500,10 @@ SpatialSBMLDocumentPlugin::setAttribute(const std::string& attributeName,
 
 /*
  * Unsets the value of the "attributeName" attribute of this
- * SpatialSBMLDocumentPlugin.
+ * GroupsSBMLDocumentPlugin.
  */
 int
-SpatialSBMLDocumentPlugin::unsetAttribute(const std::string& attributeName)
+GroupsSBMLDocumentPlugin::unsetAttribute(const std::string& attributeName)
 {
   int value = SBMLDocumentPlugin::unsetAttribute(attributeName);
 

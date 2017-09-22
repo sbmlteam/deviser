@@ -447,15 +447,16 @@ class Constructors():
         package = self.package.lower()
         up_package = strFunctions.upper_first(self.package)
         # create doc string header
-        title_line = 'Creates a new {0} using the given uri, prefix and ' \
+        title_line = 'Creates a new {0} using the given URI, prefix and ' \
                      'package namespace.'.format(ob_name)
-        params = ['@param uri a string, representing the uri of the package.',
-                  '@param prefix a string, the prefix to be used.',
-                  '@param {0}ns a pointer to the {1}PkgNamespaces object to '
-                  'be used.'.format(package, up_package)]
+        params = ['@param uri a string, representing the URI of the SBML Level&nbsp;3 package '
+                  'implemented by this libSBML package extension.',
+                  '@param prefix a string, the XML namespace prefix being used for this package.',
+                  '@param {0}ns a pointer to the namesspaces object ({1}PkgNamespaces) for this package.'.format(package, up_package)]
 
         return_lines = []
-        additional = ''
+        additional = ['@copydetails doc_what_are_xmlnamespaces', ' ',
+                      '@copydetails doc_what_are_sbmlnamespaces']
 
         # create the function declaration
         function = self.class_name

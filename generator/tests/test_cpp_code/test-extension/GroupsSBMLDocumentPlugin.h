@@ -1,6 +1,6 @@
 /**
- * @file QualSBMLDocumentPlugin.h
- * @brief Definition of the QualSBMLDocumentPlugin class.
+ * @file GroupsSBMLDocumentPlugin.h
+ * @brief Definition of the GroupsSBMLDocumentPlugin class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,13 +30,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class QualSBMLDocumentPlugin
- * @sbmlbrief{qual} Extension of SBMLDocument.
+ * @class GroupsSBMLDocumentPlugin
+ * @sbmlbrief{groups} Extension of SBMLDocument.
  */
 
 
-#ifndef QualSBMLDocumentPlugin_H__
-#define QualSBMLDocumentPlugin_H__
+#ifndef GroupsSBMLDocumentPlugin_H__
+#define GroupsSBMLDocumentPlugin_H__
 
 
 #include <sbml/common/extern.h>
@@ -46,19 +46,19 @@
 
 
 #include <sbml/extension/SBMLDocumentPlugin.h>
-#include <sbml/packages/qual/extension/QualExtension.h>
+#include <sbml/packages/groups/extension/GroupsExtension.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN QualSBMLDocumentPlugin : public SBMLDocumentPlugin
+class LIBSBML_EXTERN GroupsSBMLDocumentPlugin : public SBMLDocumentPlugin
 {
 
 public:
 
   /**
-   * Creates a new QualSBMLDocumentPlugin using the given URI, prefix and
+   * Creates a new GroupsSBMLDocumentPlugin using the given URI, prefix and
    * package namespace.
    *
    * @param uri a string, representing the URI of the SBML Level&nbsp;3 package
@@ -67,47 +67,47 @@ public:
    * @param prefix a string, the XML namespace prefix being used for this
    * package.
    *
-   * @param qualns a pointer to the namesspaces object (QualPkgNamespaces) for
-   * this package.
+   * @param groupsns a pointer to the namesspaces object (GroupsPkgNamespaces)
+   * for this package.
    *
    * @copydetails doc_what_are_xmlnamespaces
    *
    * @copydetails doc_what_are_sbmlnamespaces
    */
-  QualSBMLDocumentPlugin(const std::string& uri,
-                         const std::string& prefix,
-                         QualPkgNamespaces* qualns);
+  GroupsSBMLDocumentPlugin(const std::string& uri,
+                           const std::string& prefix,
+                           GroupsPkgNamespaces* groupsns);
 
 
   /**
-   * Copy constructor for QualSBMLDocumentPlugin.
+   * Copy constructor for GroupsSBMLDocumentPlugin.
    *
-   * @param orig the QualSBMLDocumentPlugin instance to copy.
+   * @param orig the GroupsSBMLDocumentPlugin instance to copy.
    */
-  QualSBMLDocumentPlugin(const QualSBMLDocumentPlugin& orig);
+  GroupsSBMLDocumentPlugin(const GroupsSBMLDocumentPlugin& orig);
 
 
   /**
-   * Assignment operator for QualSBMLDocumentPlugin.
+   * Assignment operator for GroupsSBMLDocumentPlugin.
    *
-   * @param rhs the QualSBMLDocumentPlugin object whose values are to be used
+   * @param rhs the GroupsSBMLDocumentPlugin object whose values are to be used
    * as the basis of the assignment.
    */
-  QualSBMLDocumentPlugin& operator=(const QualSBMLDocumentPlugin& rhs);
+  GroupsSBMLDocumentPlugin& operator=(const GroupsSBMLDocumentPlugin& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this QualSBMLDocumentPlugin object.
+   * Creates and returns a deep copy of this GroupsSBMLDocumentPlugin object.
    *
-   * @return a (deep) copy of this QualSBMLDocumentPlugin object.
+   * @return a (deep) copy of this GroupsSBMLDocumentPlugin object.
    */
-  virtual QualSBMLDocumentPlugin* clone() const;
+  virtual GroupsSBMLDocumentPlugin* clone() const;
 
 
   /**
-   * Destructor for QualSBMLDocumentPlugin.
+   * Destructor for GroupsSBMLDocumentPlugin.
    */
-  virtual ~QualSBMLDocumentPlugin();
+  virtual ~GroupsSBMLDocumentPlugin();
 
 
 
@@ -126,7 +126,7 @@ public:
 
   /**
    * Predicate indicating whether 'comp' flattening has been implemented for
-   * the Qual package.
+   * the Groups package.
    */
   virtual bool isCompFlatteningImplemented() const;
 
@@ -137,7 +137,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Calls check consistency for any relevant Qual validators.
+   * Calls check consistency for any relevant Groups validators.
    */
   virtual unsigned int checkConsistency();
 
@@ -153,7 +153,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Reads the Qual attributes in the top-level element.
+   * Reads the Groups attributes in the top-level element.
    */
   virtual void readAttributes(const XMLAttributes& attributes,
                               const ExpectedAttributes& expectedAttributes);
@@ -176,7 +176,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -197,7 +197,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -217,7 +217,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -238,7 +238,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -259,7 +259,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -280,7 +280,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -300,13 +300,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this QualSBMLDocumentPlugin's attribute
+   * Predicate returning @c true if this GroupsSBMLDocumentPlugin's attribute
    * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this QualSBMLDocumentPlugin's attribute "attributeName"
-   * has been set, otherwise @c false is returned.
+   * @return @c true if this GroupsSBMLDocumentPlugin's attribute
+   * "attributeName" has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -318,7 +318,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -338,7 +338,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -358,7 +358,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -378,7 +378,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -399,7 +399,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -420,7 +420,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -441,7 +441,7 @@ public:
 
   /**
    * Unsets the value of the "attributeName" attribute of this
-   * QualSBMLDocumentPlugin.
+   * GroupsSBMLDocumentPlugin.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -475,6 +475,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !QualSBMLDocumentPlugin_H__ */
+#endif /* !GroupsSBMLDocumentPlugin_H__ */
 
 

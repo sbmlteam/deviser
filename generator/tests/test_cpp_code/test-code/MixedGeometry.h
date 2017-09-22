@@ -142,6 +142,14 @@ public:
    * @return the ListOfGeometryDefinitions from this MixedGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see getGeometryDefinition(const std::string& sid)
+   * @see getGeometryDefinition(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see removeGeometryDefinition(const std::string& sid)
+   * @see removeGeometryDefinition(unsigned int n)
    */
   const ListOfGeometryDefinitions* getListOfGeometryDefinitions() const;
 
@@ -152,6 +160,14 @@ public:
    * @return the ListOfGeometryDefinitions from this MixedGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addGeometryDefinition(const GeometryDefinition* object)
+   * @see createGeometryDefinition()
+   * @see getGeometryDefinition(const std::string& sid)
+   * @see getGeometryDefinition(unsigned int n)
+   * @see getNumGeometryDefinitions()
+   * @see removeGeometryDefinition(const std::string& sid)
+   * @see removeGeometryDefinition(unsigned int n)
    */
   ListOfGeometryDefinitions* getListOfGeometryDefinitions();
 
@@ -251,6 +267,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -419,6 +440,14 @@ public:
    * @return the ListOfOrdinalMappings from this MixedGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOrdinalMapping(const OrdinalMapping* object)
+   * @see createOrdinalMapping()
+   * @see getOrdinalMapping(const std::string& sid)
+   * @see getOrdinalMapping(unsigned int n)
+   * @see getNumOrdinalMappings()
+   * @see removeOrdinalMapping(const std::string& sid)
+   * @see removeOrdinalMapping(unsigned int n)
    */
   const ListOfOrdinalMappings* getListOfOrdinalMappings() const;
 
@@ -429,6 +458,14 @@ public:
    * @return the ListOfOrdinalMappings from this MixedGeometry.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOrdinalMapping(const OrdinalMapping* object)
+   * @see createOrdinalMapping()
+   * @see getOrdinalMapping(const std::string& sid)
+   * @see getOrdinalMapping(unsigned int n)
+   * @see getNumOrdinalMappings()
+   * @see removeOrdinalMapping(const std::string& sid)
+   * @see removeOrdinalMapping(unsigned int n)
    */
   ListOfOrdinalMappings* getListOfOrdinalMappings();
 
@@ -515,6 +552,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -1063,7 +1105,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -1075,7 +1118,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -1084,8 +1128,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -1233,6 +1277,14 @@ MixedGeometry_free(MixedGeometry_t* mg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addGeometryDefinition_t(const GeometryDefinition_t* object)
+ * @see createGeometryDefinition_t()
+ * @see getGeometryDefinition_t(const std::string& sid)
+ * @see getGeometryDefinition_t(unsigned int n)
+ * @see getNumGeometryDefinitions()
+ * @see removeGeometryDefinition_t(const std::string& sid)
+ * @see removeGeometryDefinition_t(unsigned int n)
+ *
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
@@ -1292,6 +1344,11 @@ MixedGeometry_getGeometryDefinitionById(MixedGeometry_t* mg, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof MixedGeometry_t
  */
@@ -1458,6 +1515,14 @@ MixedGeometry_removeGeometryDefinitionById(MixedGeometry_t* mg,
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addOrdinalMapping_t(const OrdinalMapping_t* object)
+ * @see createOrdinalMapping_t()
+ * @see getOrdinalMapping_t(const std::string& sid)
+ * @see getOrdinalMapping_t(unsigned int n)
+ * @see getNumOrdinalMappings()
+ * @see removeOrdinalMapping_t(const std::string& sid)
+ * @see removeOrdinalMapping_t(unsigned int n)
+ *
  * @memberof MixedGeometry_t
  */
 LIBSBML_EXTERN
@@ -1519,6 +1584,11 @@ MixedGeometry_getOrdinalMappingByGeometryDefinition(MixedGeometry_t* mg,
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof MixedGeometry_t
  */

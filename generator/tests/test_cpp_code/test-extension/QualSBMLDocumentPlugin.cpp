@@ -49,7 +49,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new QualSBMLDocumentPlugin using the given uri, prefix and package
+ * Creates a new QualSBMLDocumentPlugin using the given URI, prefix and package
  * namespace.
  */
 QualSBMLDocumentPlugin::QualSBMLDocumentPlugin(const std::string& uri,

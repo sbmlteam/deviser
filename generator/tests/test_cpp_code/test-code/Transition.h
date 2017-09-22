@@ -224,6 +224,14 @@ public:
    * @return the ListOfInputs from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   const ListOfInputs* getListOfInputs() const;
 
@@ -234,6 +242,14 @@ public:
    * @return the ListOfInputs from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addInput(const Input* object)
+   * @see createInput()
+   * @see getInput(const std::string& sid)
+   * @see getInput(unsigned int n)
+   * @see getNumInputs()
+   * @see removeInput(const std::string& sid)
+   * @see removeInput(unsigned int n)
    */
   ListOfInputs* getListOfInputs();
 
@@ -354,6 +370,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -447,6 +468,14 @@ public:
    * @return the ListOfOutputs from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   const ListOfOutputs* getListOfOutputs() const;
 
@@ -457,6 +486,14 @@ public:
    * @return the ListOfOutputs from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const Output* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
    */
   ListOfOutputs* getListOfOutputs();
 
@@ -577,6 +614,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -670,6 +712,14 @@ public:
    * @return the ListOfFunctionTerms from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   const ListOfFunctionTerms* getListOfFunctionTerms() const;
 
@@ -680,6 +730,14 @@ public:
    * @return the ListOfFunctionTerms from this Transition.
    *
    * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addFunctionTerm(const FunctionTerm* object)
+   * @see createFunctionTerm()
+   * @see getFunctionTerm(const std::string& sid)
+   * @see getFunctionTerm(unsigned int n)
+   * @see getNumFunctionTerms()
+   * @see removeFunctionTerm(const std::string& sid)
+   * @see removeFunctionTerm(unsigned int n)
    */
   ListOfFunctionTerms* getListOfFunctionTerms();
 
@@ -734,6 +792,11 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -1344,7 +1407,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p id.
+   * @return a pointer to the SBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SBase* getElementBySId(const std::string& id);
 
@@ -1356,7 +1420,8 @@ public:
    * @param metaid a string representing the metaid attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SBase element with the given @p metaid.
+   * @return a pointer to the SBase element with the given @p metaid. If no
+   * such object is found this method returns @c NULL.
    */
   virtual SBase* getElementByMetaId(const std::string& metaid);
 
@@ -1365,8 +1430,8 @@ public:
    * Returns a List of all child SBase objects, including those nested to an
    * arbitrary depth.
    *
-   * filter, an ElementFilter that may impose restrictions on the objects to be
-   * retrieved.
+   * @param filter, an ElementFilter that may impose restrictions on the
+   * objects to be retrieved.
    *
    * @return a List* pointer of pointers to all SBase child objects with any
    * restriction imposed.
@@ -1651,6 +1716,14 @@ Transition_unsetName(Transition_t * t);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addInput_t(const Input_t* object)
+ * @see createInput_t()
+ * @see getInput_t(const std::string& sid)
+ * @see getInput_t(unsigned int n)
+ * @see getNumInputs()
+ * @see removeInput_t(const std::string& sid)
+ * @see removeInput_t(unsigned int n)
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1726,6 +1799,11 @@ Transition_getInputByQualitativeSpecies(Transition_t* t, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof Transition_t
  */
@@ -1812,6 +1890,14 @@ Transition_removeInputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addOutput_t(const Output_t* object)
+ * @see createOutput_t()
+ * @see getOutput_t(const std::string& sid)
+ * @see getOutput_t(unsigned int n)
+ * @see getNumOutputs()
+ * @see removeOutput_t(const std::string& sid)
+ * @see removeOutput_t(unsigned int n)
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -1887,6 +1973,11 @@ Transition_getOutputByQualitativeSpecies(Transition_t* t, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof Transition_t
  */
@@ -1974,6 +2065,14 @@ Transition_removeOutputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
+ * @see addFunctionTerm_t(const FunctionTerm_t* object)
+ * @see createFunctionTerm_t()
+ * @see getFunctionTerm_t(const std::string& sid)
+ * @see getFunctionTerm_t(unsigned int n)
+ * @see getNumFunctionTerms()
+ * @see removeFunctionTerm_t(const std::string& sid)
+ * @see removeFunctionTerm_t(unsigned int n)
+ *
  * @memberof Transition_t
  */
 LIBSBML_EXTERN
@@ -2012,6 +2111,11 @@ Transition_getFunctionTerm(Transition_t* t, unsigned int n);
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof Transition_t
  */

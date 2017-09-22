@@ -48,7 +48,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SpatialReactionPlugin using the given uri, prefix and package
+ * Creates a new SpatialReactionPlugin using the given URI, prefix and package
  * namespace.
  */
 SpatialReactionPlugin::SpatialReactionPlugin(const std::string& uri,

@@ -48,7 +48,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new VersModelPlugin using the given uri, prefix and package
+ * Creates a new VersModelPlugin using the given URI, prefix and package
  * namespace.
  */
 VersModelPlugin::VersModelPlugin(const std::string& uri,
