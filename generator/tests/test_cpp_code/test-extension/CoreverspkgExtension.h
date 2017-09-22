@@ -362,9 +362,25 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  *
  * @copydetails doc_additional_typecode_details
  */
+/**
+ * @enum SBMLCoreverspkgTypeCode_t
+ * @brief Enumeration of values permitted as the value of the "corevers"
+ * attribute on Sbml objects.
+ *
+ * @if conly
+ * @see Sbml_getCorevers()
+ * @see Sbml_setCorevers()
+ * @elseif java
+ * @see Sbml::getCorevers()
+ * @see Sbml::setCorevers(long)
+ * @else
+ * @see Sbml::getCorevers()
+ * @see Sbml::setCorevers()
+ * @endif
+ */
 typedef enum
 {
-  SBML_COREVERS_CLASSONETWO     =   100  /*!<ClassOneTwo */
+  SBML_COREVERS_CLASSONETWO     =   100  /*!< The sbml corevers is @c "ClassOneTwo". */
 } SBMLCoreverspkgTypeCode_t;
 
 

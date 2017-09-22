@@ -419,22 +419,67 @@ LIBSBML_CPP_NAMESPACE_BEGIN
  *
  * @copydetails doc_additional_typecode_details
  */
+/**
+ * @enum SBMLCoreversmultipkgTypeCode_t
+ * @brief Enumeration of values permitted as the value of the "corevers"
+ * attribute on Sbml objects.
+ *
+ * @if conly
+ * @see Sbml_getCorevers()
+ * @see Sbml_setCorevers()
+ * @elseif java
+ * @see Sbml::getCorevers()
+ * @see Sbml::setCorevers(long)
+ * @else
+ * @see Sbml::getCorevers()
+ * @see Sbml::setCorevers()
+ * @endif
+ */
 typedef enum
 {
-  SBML_COREVERS_CLASSONETWO     =   100  /*!<ClassOneTwo */
-, SBML_COREVERS_CLASSONETWO     =   101  /*!<ClassMult */
+  SBML_COREVERS_CLASSONETWO     =   100  /*!< The sbml corevers is @c "ClassOneTwo". */
+, SBML_COREVERS_CLASSONETWO     =   101  /*!< The sbml corevers is @c "ClassMult". */
 } SBMLCoreversmultipkgTypeCode_t;
 
 
+/**
+ * @enum AbcType_t
+ * @brief Enumeration of values permitted as the value of the "type" attribute
+ * on Objective objects.
+ *
+ * @if conly
+ * @see Objective_getType()
+ * @see Objective_setType()
+ * @elseif java
+ * @see Objective::getType()
+ * @see Objective::setType(long)
+ * @else
+ * @see Objective::getType()
+ * @see Objective::setType()
+ * @endif
+ */
 typedef enum
 {
-  OBJECTIVE_TYPE_MAXIMIZE       /*!<maximize */
-, OBJECTIVE_TYPE_MINIMIZE       /*!<minimize */
-, ABC_TYPE_INVALID              /*!<invalid AbcType */
+  OBJECTIVE_TYPE_MAXIMIZE       /*!< The objective type is @c "maximize". */
+, OBJECTIVE_TYPE_MINIMIZE       /*!< The objective type is @c "minimize". */
+, ABC_TYPE_INVALID              /*!< Invalid AbcType value. */
 } AbcType_t;
 
 
 /**
+ * Returns the string version of the provided #AbcType_t enumeration.
+ *
+ * @param at the #AbcType_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "maximize",
+ * "minimize",
+ * or @c NULL if the value is @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} or
+ * another invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Objective_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -442,6 +487,21 @@ AbcType_toString(AbcType_t at);
 
 
 /**
+ * Returns the #AbcType_t enumeration corresponding to the given string or
+ * @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} if there is no such match.
+ *
+ * @param code the string to convert to a #AbcType_t.
+ *
+ * @return the corresponding #AbcType_t or @sbmlconstant{ABC_TYPE_INVALID,
+ * AbcType_t} if no match is found.
+ *
+ * @note The matching is case-sensitive: "maximize" will return
+ * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}, but "Maximize" will
+ * return @sbmlconstant{ABC_TYPE_INVALID, AbcType_t}.
+ *
+ * @if conly
+ * @memberof Objective_t
+ * @endif
  */
 LIBSBML_EXTERN
 AbcType_t
@@ -449,6 +509,20 @@ AbcType_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #AbcType_t is valid.
+ *
+ * @param at the #AbcType_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #AbcType_t is
+ * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}, or
+ * @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{ABC_TYPE_INVALID,
+ * AbcType_t}).
+ *
+ * @if conly
+ * @memberof Objective_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -456,6 +530,22 @@ AbcType_isValid(AbcType_t at);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #AbcType_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "maximize", or
+ * "minimize";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "maximize" will return @c 1 (true),
+ * but "Maximize" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Objective_t
+ * @endif
  */
 LIBSBML_EXTERN
 int

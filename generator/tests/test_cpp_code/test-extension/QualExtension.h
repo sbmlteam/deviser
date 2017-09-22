@@ -369,17 +369,48 @@ typedef enum
 } SBMLQualTypeCode_t;
 
 
+/**
+ * @enum Sign_t
+ * @brief Enumeration of values permitted as the value of the "sign" attribute
+ * on Input objects.
+ *
+ * @if conly
+ * @see Input_getSign()
+ * @see Input_setSign()
+ * @elseif java
+ * @see Input::getSign()
+ * @see Input::setSign(long)
+ * @else
+ * @see Input::getSign()
+ * @see Input::setSign()
+ * @endif
+ */
 typedef enum
 {
-  INPUT_SIGN_POSITIVE       /*!<positive */
-, INPUT_SIGN_NEGATIVE       /*!<negative */
-, INPUT_SIGN_DUAL           /*!<dual */
-, INPUT_SIGN_UNKNOWN        /*!<unknown */
-, SIGN_INVALID              /*!<invalid Sign */
+  INPUT_SIGN_POSITIVE       /*!< The input sign is @c "positive". */
+, INPUT_SIGN_NEGATIVE       /*!< The input sign is @c "negative". */
+, INPUT_SIGN_DUAL           /*!< The input sign is @c "dual". */
+, INPUT_SIGN_UNKNOWN        /*!< The input sign is @c "unknown". */
+, SIGN_INVALID              /*!< Invalid Sign value. */
 } Sign_t;
 
 
 /**
+ * Returns the string version of the provided #Sign_t enumeration.
+ *
+ * @param s the #Sign_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "positive",
+ * "negative",
+ * "dual",
+ * "unknown",
+ * or @c NULL if the value is @sbmlconstant{SIGN_INVALID, Sign_t} or another
+ * invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -387,6 +418,21 @@ Sign_toString(Sign_t s);
 
 
 /**
+ * Returns the #Sign_t enumeration corresponding to the given string or
+ * @sbmlconstant{SIGN_INVALID, Sign_t} if there is no such match.
+ *
+ * @param code the string to convert to a #Sign_t.
+ *
+ * @return the corresponding #Sign_t or @sbmlconstant{SIGN_INVALID, Sign_t} if
+ * no match is found.
+ *
+ * @note The matching is case-sensitive: "positive" will return
+ * @sbmlconstant{INPUT_SIGN_POSITIVE, Sign_t}, but "Positive" will return
+ * @sbmlconstant{SIGN_INVALID, Sign_t}.
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 Sign_t
@@ -394,6 +440,21 @@ Sign_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Sign_t is valid.
+ *
+ * @param s the #Sign_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #Sign_t is
+ * @sbmlconstant{INPUT_SIGN_POSITIVE, Sign_t},
+ * @sbmlconstant{INPUT_SIGN_NEGATIVE, Sign_t},
+ * @sbmlconstant{INPUT_SIGN_DUAL, Sign_t}, or
+ * @sbmlconstant{INPUT_SIGN_UNKNOWN, Sign_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SIGN_INVALID, Sign_t}).
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -401,21 +462,69 @@ Sign_isValid(Sign_t s);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Sign_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "positive",
+ * "negative",
+ * "dual", or
+ * "unknown";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "positive" will return @c 1 (true),
+ * but "Positive" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
 Sign_isValidString(const char* code);
 
 
+/**
+ * @enum TransitionOutputEffect_t
+ * @brief Enumeration of values permitted as the value of the "transition"
+ * attribute on Output objects.
+ *
+ * @if conly
+ * @see Output_getTransition()
+ * @see Output_setTransition()
+ * @elseif java
+ * @see Output::getTransition()
+ * @see Output::setTransition(long)
+ * @else
+ * @see Output::getTransition()
+ * @see Output::setTransition()
+ * @endif
+ */
 typedef enum
 {
-  OUTPUT_TRANSITION_EFFECT_PRODUCTION             /*!<production */
-, OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL       /*!<assignmentLevel */
-, TRANSITION_OUTPUT_EFFECT_INVALID                /*!<invalid TransitionOutputEffect */
+  OUTPUT_TRANSITION_EFFECT_PRODUCTION             /*!< The output transition is @c "production". */
+, OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL       /*!< The output transition is @c "assignmentLevel". */
+, TRANSITION_OUTPUT_EFFECT_INVALID                /*!< Invalid TransitionOutputEffect value. */
 } TransitionOutputEffect_t;
 
 
 /**
+ * Returns the string version of the provided #TransitionOutputEffect_t
+ * enumeration.
+ *
+ * @param toe the #TransitionOutputEffect_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "production",
+ * "assignmentLevel",
+ * or @c NULL if the value is @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
+ * TransitionOutputEffect_t} or another invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Output_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -423,6 +532,24 @@ TransitionOutputEffect_toString(TransitionOutputEffect_t toe);
 
 
 /**
+ * Returns the #TransitionOutputEffect_t enumeration corresponding to the given
+ * string or @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
+ * TransitionOutputEffect_t} if there is no such match.
+ *
+ * @param code the string to convert to a #TransitionOutputEffect_t.
+ *
+ * @return the corresponding #TransitionOutputEffect_t or
+ * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t} if
+ * no match is found.
+ *
+ * @note The matching is case-sensitive: "production" will return
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
+ * TransitionOutputEffect_t}, but "Production" will return
+ * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t}.
+ *
+ * @if conly
+ * @memberof Output_t
+ * @endif
  */
 LIBSBML_EXTERN
 TransitionOutputEffect_t
@@ -430,6 +557,22 @@ TransitionOutputEffect_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #TransitionOutputEffect_t is valid.
+ *
+ * @param toe the #TransitionOutputEffect_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #TransitionOutputEffect_t is
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
+ * TransitionOutputEffect_t}, or
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
+ * TransitionOutputEffect_t};
+ * @c 0 (false) otherwise (including
+ * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t}).
+ *
+ * @if conly
+ * @memberof Output_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -437,21 +580,67 @@ TransitionOutputEffect_isValid(TransitionOutputEffect_t toe);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #TransitionOutputEffect_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "production", or
+ * "assignmentLevel";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "production" will return @c 1 (true),
+ * but "Production" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Output_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
 TransitionOutputEffect_isValidString(const char* code);
 
 
+/**
+ * @enum TransitionInputEffect_t
+ * @brief Enumeration of values permitted as the value of the "transition"
+ * attribute on Input objects.
+ *
+ * @if conly
+ * @see Input_getTransition()
+ * @see Input_setTransition()
+ * @elseif java
+ * @see Input::getTransition()
+ * @see Input::setTransition(long)
+ * @else
+ * @see Input::getTransition()
+ * @see Input::setTransition()
+ * @endif
+ */
 typedef enum
 {
-  INPUT_TRANSITION_EFFECT_NONE              /*!<none */
-, INPUT_TRANSITION_EFFECT_CONSUMPTION       /*!<consumption */
-, TRANSITION_INPUT_EFFECT_INVALID           /*!<invalid TransitionInputEffect */
+  INPUT_TRANSITION_EFFECT_NONE              /*!< The input transition is @c "none". */
+, INPUT_TRANSITION_EFFECT_CONSUMPTION       /*!< The input transition is @c "consumption". */
+, TRANSITION_INPUT_EFFECT_INVALID           /*!< Invalid TransitionInputEffect value. */
 } TransitionInputEffect_t;
 
 
 /**
+ * Returns the string version of the provided #TransitionInputEffect_t
+ * enumeration.
+ *
+ * @param tie the #TransitionInputEffect_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "none",
+ * "consumption",
+ * or @c NULL if the value is @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * TransitionInputEffect_t} or another invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -459,6 +648,24 @@ TransitionInputEffect_toString(TransitionInputEffect_t tie);
 
 
 /**
+ * Returns the #TransitionInputEffect_t enumeration corresponding to the given
+ * string or @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * TransitionInputEffect_t} if there is no such match.
+ *
+ * @param code the string to convert to a #TransitionInputEffect_t.
+ *
+ * @return the corresponding #TransitionInputEffect_t or
+ * @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID, TransitionInputEffect_t} if
+ * no match is found.
+ *
+ * @note The matching is case-sensitive: "none" will return
+ * @sbmlconstant{INPUT_TRANSITION_EFFECT_NONE, TransitionInputEffect_t}, but
+ * "None" will return @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * TransitionInputEffect_t}.
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 TransitionInputEffect_t
@@ -466,6 +673,20 @@ TransitionInputEffect_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #TransitionInputEffect_t is valid.
+ *
+ * @param tie the #TransitionInputEffect_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #TransitionInputEffect_t is
+ * @sbmlconstant{INPUT_TRANSITION_EFFECT_NONE, TransitionInputEffect_t}, or
+ * @sbmlconstant{INPUT_TRANSITION_EFFECT_CONSUMPTION, TransitionInputEffect_t};
+ * @c 0 (false) otherwise (including
+ * @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID, TransitionInputEffect_t}).
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -473,6 +694,22 @@ TransitionInputEffect_isValid(TransitionInputEffect_t tie);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #TransitionInputEffect_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "none", or
+ * "consumption";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "none" will return @c 1 (true), but
+ * "None" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Input_t
+ * @endif
  */
 LIBSBML_EXTERN
 int

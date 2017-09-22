@@ -485,6 +485,7 @@ const char* SBML_FBC_TYPE_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #FbcType_t enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -503,6 +504,8 @@ FbcType_toString(FbcType_t ft)
 
 
 /*
+ * Returns the #FbcType_t enumeration corresponding to the given string or
+ * @sbmlconstant{FBC_TYPE_INVALID, FbcType_t} if there is no such match.
  */
 LIBSBML_EXTERN
 FbcType_t
@@ -525,6 +528,8 @@ FbcType_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #FbcType_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -545,6 +550,8 @@ FbcType_isValid(FbcType_t ft)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #FbcType_t.
  */
 LIBSBML_EXTERN
 int

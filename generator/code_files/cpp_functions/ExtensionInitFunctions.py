@@ -55,6 +55,9 @@ class ExtensionInitFunctions():
         self.lv_info = lv_info
         self.num_versions = len(lv_info)
 
+        self.open_br = '{'
+        self.close_br = '}'
+
         # derived members
         self.up_package = strFunctions.upper_first(self.package)
         self.cap_language = language.upper()
@@ -162,15 +165,26 @@ class ExtensionInitFunctions():
 
     # Functions for enums
 
+    def get_class_name(self, value):
+        # value will be CLASS_ENUMTYPE_VALUE
+        parts = value.split('_')
+        classname = strFunctions.upper_first(parts[0].lower())
+        return classname
+
     def write_enum_to_string_function(self, index, values=None, str_name=''):
         enum = self.enums[index]
         name = enum['name']
         abbrev_name = strFunctions.abbrev_name(name)
+        classname = self.get_class_name(enum['values'][0]['name'])
         # create comment parts
-        title_line = ''
-        params = []
-        return_lines = []
-        additional = []
+        title_line = 'Returns the string version of the provided #{0}_t enumeration.'.format(name)
+        params = ['@param {0} the #{1}_t enumeration value to convert.'.format(abbrev_name, name)]
+        return_lines = ['@return A string corresponding to the given type:']
+        for enumVal in enum['values']:
+            return_lines.append('\"{0}\",'.format(enumVal['value']))
+        return_lines.append('or @c NULL if the value is @sbmlconstant{0}{1}, {2}_t{3} or '
+                            'another invalid enumeration value.'.format(self.open_br, values[-1], name, self.close_br))
+        additional = ['@if conly', '@memberof {0}_t'.format(classname), '@endif']
 
         # create the function declaration
         arguments = ['{0}_t {1}'.format(name, abbrev_name)]
@@ -205,11 +219,21 @@ class ExtensionInitFunctions():
     def write_enum_from_string_function(self, index, values=None, str_name=''):
         enum = self.enums[index]
         name = enum['name']
+        classname = self.get_class_name(enum['values'][0]['name'])
         # create comment parts
-        title_line = ''
-        params = []
-        return_lines = []
-        additional = []
+        title_line = 'Returns the #{2}_t enumeration corresponding to the given string or @sbmlconstant{0}{1}, {2}_t{3} ' \
+                     'if there is no such match.'.format(self.open_br, values[-1], name, self.close_br)
+        params = ['@param code the string to convert to a #{0}_t.'.format(name)]
+        return_lines = ['@return the corresponding #{2}_t or @sbmlconstant{0}{1}, {2}_t{3} '
+                        'if no match is found.'.format(self.open_br, values[-1], name, self.close_br)]
+        additional = ['@note The matching is case-sensitive: \"{4}\" will return @sbmlconstant{0}{1}, {2}_t{3}, '
+                      'but \"{5}\" will return @sbmlconstant{0}{6}, {2}_t{3}.'.format(self.open_br,
+                                                                                     enum['values'][0]['name'], name,
+                                                                                     self.close_br,
+                                                                                     enum['values'][0]['value'],
+                                                                                     strFunctions.upper_first(enum['values'][0]['value']),
+                                                                                     values[-1]),
+                      ' ', '@if conly', '@memberof {0}_t'.format(classname), '@endif']
 
         # create the function declaration
         arguments = ['const char* code']
@@ -249,12 +273,26 @@ class ExtensionInitFunctions():
     def write_is_valid_enum_function(self, index, values=None):
         enum = self.enums[index]
         name = enum['name']
+        classname = self.get_class_name(enum['values'][0]['name'])
         abbrev_name = strFunctions.abbrev_name(name)
         # create comment parts
-        title_line = ''
-        params = []
-        return_lines = []
-        additional = []
+        title_line = 'Predicate returning @c 1 (true) or @c 0 (false) depending on whether the given #{0}_t is valid.'.format(name)
+        params = ['@param {0} the #{1}_t enumeration to query.'.format(abbrev_name, name)]
+        return_lines = ['@return @c 1 (true) if the #{0}_t is'.format(name)]
+        num_vals = len(values)
+        last = num_vals-1 if num_vals > 0 else 0
+        penultimate = last-1 if last > 0 else 0
+        next_pen = penultimate-1 if penultimate > 0 else 0
+        for i in range(0, num_vals-1):
+            if i == penultimate:
+                return_lines.append('@sbmlconstant{0}{1}, {2}_t{3};'.format(self.open_br, values[i], name, self.close_br))
+            elif i == next_pen:
+                return_lines.append('@sbmlconstant{0}{1}, {2}_t{3}, or'.format(self.open_br, values[i], name, self.close_br))
+            else:
+                return_lines.append('@sbmlconstant{0}{1}, {2}_t{3},'.format(self.open_br, values[i], name, self.close_br))
+        return_lines.append('@c 0 (false) otherwise (including @sbmlconstant{0}{1}, {2}_t{3}).'.format(self.open_br, values[-1], name, self.close_br))
+
+        additional = ['@if conly', '@memberof {0}_t'.format(classname), '@endif']
 
         # create the function declaration
         arguments = ['{0}_t {1}'.format(name, abbrev_name)]
@@ -286,14 +324,29 @@ class ExtensionInitFunctions():
                      'object_name': name,
                      'implementation': code})
 
-    def write_is_valid_enum_string_function(self, index):
+    def write_is_valid_enum_string_function(self, index, values=None):
         enum = self.enums[index]
         name = enum['name']
+        classname = self.get_class_name(enum['values'][0]['name'])
         # create comment parts
-        title_line = ''
-        params = []
-        return_lines = []
-        additional = []
+        title_line = 'Predicate returning @c 1 (true) or @c 0 (false) depending on whether the given string is a valid #{0}_t.'.format(name)
+        params = ['@param code the string to query.']
+        return_lines = ['@return @c 1 (true) if the string is']
+        num_vals = len(enum['values'])
+        last = num_vals-1 if num_vals > 0 else 0
+        penultimate = last-1 if last > 0 else 0
+        for i in range(0, num_vals):
+            if i == last:
+                return_lines.append('\"{0}\";'.format(enum['values'][i]['value']))
+            elif i == penultimate:
+                return_lines.append('\"{0}\", or'.format(enum['values'][i]['value']))
+            else:
+                return_lines.append('\"{0}\",'.format(enum['values'][i]['value']))
+        return_lines.append('@c 0 (false) otherwise.')
+        additional = ['@note The matching is case-sensitive: \"{0}\" will return @c 1 (true), '
+                      'but \"{1}\" will return @c 0 (false).'.format(enum['values'][0]['value'],
+                                                                     strFunctions.upper_first(enum['values'][0]['value'])),
+                      ' ', '@if conly', '@memberof {0}_t'.format(classname), '@endif']
 
         # create the function declaration
         arguments = ['const char* code']

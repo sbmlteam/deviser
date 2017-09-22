@@ -1,6 +1,6 @@
 /**
- * @file VersExtension.h
- * @brief Definition of VersExtension.
+ * @file GroupsExtension.h
+ * @brief Definition of GroupsExtension.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,16 +30,16 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class VersExtension
- * @sbmlbrief{vers} Base extension class.
+ * @class GroupsExtension
+ * @sbmlbrief{groups} Base extension class.
  *
- * @class VersPkgNamespaces
- * @sbmlbrief{vers} SBMLNamespaces extension.
+ * @class GroupsPkgNamespaces
+ * @sbmlbrief{groups} SBMLNamespaces extension.
  */
 
 
-#ifndef VersExtension_H__
-#define VersExtension_H__
+#ifndef GroupsExtension_H__
+#define GroupsExtension_H__
 
 
 #include <sbml/common/extern.h>
@@ -53,14 +53,9 @@
 #include <sbml/extension/SBMLExtensionNamespaces.h>
 #include <sbml/extension/SBMLExtensionRegister.h>
 
-#ifndef VERS_CREATE_NS
-#define VERS_CREATE_NS(variable, sbmlns)\
-EXTENSION_CREATE_NS(VersPkgNamespaces, variable, sbmlns);
-#endif
-
-#ifndef VERS_CREATE_NS_WITH_VERSION
-#define VERS_CREATE_NS_WITH_VERSION(variable, sbmlns, version)\
-EXTENSION_CREATE_NS_WITH_VERSION(VersPkgNamespaces, variable, sbmlns, version);
+#ifndef GROUPS_CREATE_NS
+#define GROUPS_CREATE_NS(variable, sbmlns)\
+EXTENSION_CREATE_NS(GroupsPkgNamespaces, variable, sbmlns);
 #endif
 
 #include <vector>
@@ -69,7 +64,7 @@ EXTENSION_CREATE_NS_WITH_VERSION(VersPkgNamespaces, variable, sbmlns, version);
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN VersExtension : public SBMLExtension
+class LIBSBML_EXTERN GroupsExtension : public SBMLExtension
 {
 public:
 
@@ -128,57 +123,46 @@ public:
 
 
   /**
-   * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
-   * by this libSBML extension.
-   *
-   * @return the XML namespace, as a string.
-   *
-   * @copydetails doc_note_static_methods
+   * Creates a new GroupsExtension instance.
    */
-  static const std::string& getXmlnsL3V1V2();
+  GroupsExtension();
 
 
   /**
-   * Creates a new VersExtension instance.
+   * Copy constructor for GroupsExtension.
+   *
+   * @param orig the GroupsExtension instance to copy.
    */
-  VersExtension();
+  GroupsExtension(const GroupsExtension& orig);
 
 
   /**
-   * Copy constructor for VersExtension.
+   * Assignment operator for GroupsExtension.
    *
-   * @param orig the VersExtension instance to copy.
-   */
-  VersExtension(const VersExtension& orig);
-
-
-  /**
-   * Assignment operator for VersExtension.
-   *
-   * @param rhs the VersExtension object whose values are to be used as the
+   * @param rhs the GroupsExtension object whose values are to be used as the
    * basis of the assignment.
    */
-  VersExtension& operator=(const VersExtension& rhs);
+  GroupsExtension& operator=(const GroupsExtension& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this VersExtension object.
+   * Creates and returns a deep copy of this GroupsExtension object.
    *
-   * @return a (deep) copy of this VersExtension object.
+   * @return a (deep) copy of this GroupsExtension object.
    */
-  virtual VersExtension* clone() const;
+  virtual GroupsExtension* clone() const;
 
 
   /**
-   * Destructor for VersExtension.
+   * Destructor for GroupsExtension.
    */
-  virtual ~VersExtension();
+  virtual ~GroupsExtension();
 
 
   /**
-   * Returns the name of this SBML Level&nbsp;3 package ("vers").
+   * Returns the name of this SBML Level&nbsp;3 package ("groups").
    *
-   * @return a string representing the name of this package ("vers").
+   * @return a string representing the name of this package ("groups").
    */
   virtual const std::string& getName() const;
 
@@ -193,7 +177,7 @@ public:
    *
    * @param pkgVersion the version of this package.
    *
-   * @return a string representing the name of this package ("vers").
+   * @return a string representing the name of this package ("groups").
    *
    * The namespace URI constructed by this method corresponds to the
    * combination of the Level and Version of SBML, and the Version of the SBML
@@ -210,7 +194,7 @@ public:
    * Returns the SBML Level for the given URI of this package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "vers" package.
+   * the "groups" package.
    *
    * @return the SBML Level for the given URI of this package, or @c 0 if the
    * given URI is invalid, or for a different package.
@@ -223,7 +207,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "vers" package.
+   * the "groups" package.
    *
    * @return the SBML Version within the SBML Level for the given URI of this
    * package, or @c 0 if the given URI is invalid, or for a different package.
@@ -236,7 +220,7 @@ public:
    * package.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "vers" package.
+   * the "groups" package.
    *
    * @return the version of the SBML Level&nbsp;3 package for the given URI of
    * this package, or @c 0 if the given URI is invalid, or for a different
@@ -246,29 +230,31 @@ public:
 
 
   /**
-   * Returns a VersPkgNamespaces object.
+   * Returns a GroupsPkgNamespaces object.
    *
    * @param uri the string of the URI that represents one of the versions of
-   * the "vers" package.
+   * the "groups" package.
    *
-   * @return VersPkgNamespaces object corresponding to the given URI of this
-   * package, or @c NULL if the given URI is not defined in the "vers" package.
+   * @return GroupsPkgNamespaces object corresponding to the given URI of this
+   * package, or @c NULL if the given URI is not defined in the "groups"
+   * package.
    */
   virtual SBMLNamespaces* getSBMLExtensionNamespaces(const std::string& uri)
     const;
 
 
   /**
-   * Takes a type code of the &ldquo;vers&rdquo; package and returns a string
+   * Takes a type code of the &ldquo;groups&rdquo; package and returns a string
    * describing the code.
    *
    * @param typeCode a libSBML type code defined by the libSBML extension
-   * implementing support for the SBML Level&nbsp;3 &ldquo;vers&rdquo; package.
+   * implementing support for the SBML Level&nbsp;3 &ldquo;groups&rdquo;
+   * package.
    *
    * @return a text string representing the type code given by @p typeCode. If
    * the type code is unrecognized for this implementation of the libSBML
-   * &ldquo;vers&rdquo; package, the string returned will be <code>"(Unknown
-   * SBML Vers Type)"</code>.
+   * &ldquo;groups&rdquo; package, the string returned will be <code>"(Unknown
+   * SBML Groups Type)"</code>.
    */
   virtual const char* getStringFromTypeCode(int typeCode) const;
 
@@ -281,7 +267,7 @@ public:
    *
    * @param index an unsigned integer representing the index of the error.
    *
-   * @return packageErrorTableEntry object in the VersSBMLErrorTable.
+   * @return packageErrorTableEntry object in the GroupsSBMLErrorTable.
    */
   virtual packageErrorTableEntry getErrorTable(unsigned int index) const;
 
@@ -296,7 +282,7 @@ public:
    *
    * @param errorId an unsigned integer representing the errorId of the error.
    *
-   * @return unsigned int representing the index in the VersSBMLErrorTable
+   * @return unsigned int representing the index in the GroupsSBMLErrorTable
    * corresponding to the errorId given.
    */
   virtual unsigned int getErrorTableIndex(unsigned int errorId) const;
@@ -308,10 +294,10 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the offset for the errorId range for the "vers" package.
+   * Returns the offset for the errorId range for the "groups" package.
    *
    * @return unsigned int representing the offset for errors in the
-   * VersSBMLErrorTable.
+   * GroupsSBMLErrorTable.
    */
   virtual unsigned int getErrorIdOffset() const;
 
@@ -322,27 +308,14 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns true if the package has multiple versions.
-   *
-   * @return true if multiple versions, false otherwise.
-   */
-  virtual bool hasMultipleVersions() const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Initializes vers extension by creating an object of this class with the
+   * Initializes groups extension by creating an object of this class with the
    * required SBasePlugin derived objects and registering the object to the
    * SBMLExtensionRegistry class
    *
    * This function is automatically invoked when creatingthe following global
-   * object in VersExtension.cpp
+   * object in GroupsExtension.cpp
    *
-   * static SBMLExtensionRegister<VersExtension> versExtensionRegistry;
+   * static SBMLExtensionRegister<GroupsExtension> groupsExtensionRegistry;
    */
   static void init();
 
@@ -355,14 +328,14 @@ public:
  *
  * Required typedef definitions
  *
- * VersPkgNamespace is derived from SBMLNamespaces class and used when creating
- * an object of SBase derived classes defined in the vers package
+ * GroupsPkgNamespace is derived from SBMLNamespaces class and used when
+ * creating an object of SBase derived classes defined in the groups package
  *
- * SBMLExtensionNamespaces<VersExtension> must be instantiated in
- * VersExtension.cpp for DLL
+ * SBMLExtensionNamespaces<GroupsExtension> must be instantiated in
+ * GroupsExtension.cpp for DLL
  *
  */
-typedef SBMLExtensionNamespaces<VersExtension> VersPkgNamespaces;
+typedef SBMLExtensionNamespaces<GroupsExtension> GroupsPkgNamespaces;
 
 
 LIBSBML_CPP_NAMESPACE_END
@@ -379,148 +352,133 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 
 
 /**
- * @enum SBMLVersTypeCode_t
- * @brief SBMLVersTypeCode_t Enumeration of possible types in the libSBML
- * &ldquo;vers&rdquo; package implementation.
+ * @enum SBMLGroupsTypeCode_t
+ * @brief SBMLGroupsTypeCode_t Enumeration of possible types in the libSBML
+ * &ldquo;groups&rdquo; package implementation.
  *
  * @copydetails doc_what_are_typecodes
  *
  * @copydetails doc_additional_typecode_details
  */
+typedef enum
+{
+  SBML_GROUPS_GROUP      =   500  /*!<Group */
+, SBML_GROUPS_MEMBER     =   501  /*!<Member */
+} SBMLGroupsTypeCode_t;
+
+
 /**
- * @enum SBMLVersTypeCode_t
- * @brief Enumeration of values permitted as the value of the "one" attribute
- * on Class objects.
+ * @enum GroupKind_t
+ * @brief Enumeration of values permitted as the value of the "kind" attribute
+ * on Group objects.
  *
  * @if conly
- * @see Class_getOne()
- * @see Class_setOne()
+ * @see Group_getKind()
+ * @see Group_setKind()
  * @elseif java
- * @see Class::getOne()
- * @see Class::setOne(long)
+ * @see Group::getKind()
+ * @see Group::setKind(long)
  * @else
- * @see Class::getOne()
- * @see Class::setOne()
+ * @see Group::getKind()
+ * @see Group::setKind()
  * @endif
  */
 typedef enum
 {
-  CLASS_ONE       =  1400  /*!< The class one is @c "ClassOne". */
-, CLASS_A         =  1401  /*!< The class a is @c "Another". */
-, CLASS_B         =  1402  /*!< The class b is @c "BBB". */
-, CLASS_TWO       =  1403  /*!< The class two is @c "ClassTwo". */
-, CLASS_THREE     =  1404  /*!< The class three is @c "ClassThree". */
-} SBMLVersTypeCode_t;
+  GROUP_KIND_CLASSIFICATION       /*!< The group kind is @c "classification". */
+, GROUP_KIND_PARTONOMY            /*!< The group kind is @c "partonomy". */
+, GROUP_KIND_COLLECTION           /*!< The group kind is @c "collection". */
+, GROUP_KIND_INVALID              /*!< Invalid GroupKind value. */
+} GroupKind_t;
 
 
 /**
- * @enum FbcType_t
- * @brief Enumeration of values permitted as the value of the "type" attribute
- * on Objective objects.
+ * Returns the string version of the provided #GroupKind_t enumeration.
  *
- * @if conly
- * @see Objective_getType()
- * @see Objective_setType()
- * @elseif java
- * @see Objective::getType()
- * @see Objective::setType(long)
- * @else
- * @see Objective::getType()
- * @see Objective::setType()
- * @endif
- */
-typedef enum
-{
-  OBJECTIVE_TYPE_MAXIMIZE       /*!< The objective type is @c "maximize". */
-, OBJECTIVE_TYPE_MINIMIZE       /*!< The objective type is @c "minimize". */
-, FBC_TYPE_INVALID              /*!< Invalid FbcType value. */
-} FbcType_t;
-
-
-/**
- * Returns the string version of the provided #FbcType_t enumeration.
- *
- * @param ft the #FbcType_t enumeration value to convert.
+ * @param gk the #GroupKind_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
- * "maximize",
- * "minimize",
- * or @c NULL if the value is @sbmlconstant{FBC_TYPE_INVALID, FbcType_t} or
+ * "classification",
+ * "partonomy",
+ * "collection",
+ * or @c NULL if the value is @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t} or
  * another invalid enumeration value.
  *
  * @if conly
- * @memberof Objective_t
+ * @memberof Group_t
  * @endif
  */
 LIBSBML_EXTERN
 const char*
-FbcType_toString(FbcType_t ft);
+GroupKind_toString(GroupKind_t gk);
 
 
 /**
- * Returns the #FbcType_t enumeration corresponding to the given string or
- * @sbmlconstant{FBC_TYPE_INVALID, FbcType_t} if there is no such match.
+ * Returns the #GroupKind_t enumeration corresponding to the given string or
+ * @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t} if there is no such match.
  *
- * @param code the string to convert to a #FbcType_t.
+ * @param code the string to convert to a #GroupKind_t.
  *
- * @return the corresponding #FbcType_t or @sbmlconstant{FBC_TYPE_INVALID,
- * FbcType_t} if no match is found.
+ * @return the corresponding #GroupKind_t or @sbmlconstant{GROUP_KIND_INVALID,
+ * GroupKind_t} if no match is found.
  *
- * @note The matching is case-sensitive: "maximize" will return
- * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}, but "Maximize" will
- * return @sbmlconstant{FBC_TYPE_INVALID, FbcType_t}.
+ * @note The matching is case-sensitive: "classification" will return
+ * @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t}, but "Classification"
+ * will return @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t}.
  *
  * @if conly
- * @memberof Objective_t
+ * @memberof Group_t
  * @endif
  */
 LIBSBML_EXTERN
-FbcType_t
-FbcType_fromString(const char* code);
+GroupKind_t
+GroupKind_fromString(const char* code);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #FbcType_t is valid.
+ * given #GroupKind_t is valid.
  *
- * @param ft the #FbcType_t enumeration to query.
+ * @param gk the #GroupKind_t enumeration to query.
  *
- * @return @c 1 (true) if the #FbcType_t is
- * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}, or
- * @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, FbcType_t};
- * @c 0 (false) otherwise (including @sbmlconstant{FBC_TYPE_INVALID,
- * FbcType_t}).
+ * @return @c 1 (true) if the #GroupKind_t is
+ * @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t},
+ * @sbmlconstant{GROUP_KIND_PARTONOMY, GroupKind_t}, or
+ * @sbmlconstant{GROUP_KIND_COLLECTION, GroupKind_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{GROUP_KIND_INVALID,
+ * GroupKind_t}).
  *
  * @if conly
- * @memberof Objective_t
+ * @memberof Group_t
  * @endif
  */
 LIBSBML_EXTERN
 int
-FbcType_isValid(FbcType_t ft);
+GroupKind_isValid(GroupKind_t gk);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #FbcType_t.
+ * given string is a valid #GroupKind_t.
  *
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "maximize", or
- * "minimize";
+ * "classification",
+ * "partonomy", or
+ * "collection";
  * @c 0 (false) otherwise.
  *
- * @note The matching is case-sensitive: "maximize" will return @c 1 (true),
- * but "Maximize" will return @c 0 (false).
+ * @note The matching is case-sensitive: "classification" will return @c 1
+ * (true), but "Classification" will return @c 0 (false).
  *
  * @if conly
- * @memberof Objective_t
+ * @memberof Group_t
  * @endif
  */
 LIBSBML_EXTERN
 int
-FbcType_isValidString(const char* code);
+GroupKind_isValidString(const char* code);
 
 
 
@@ -530,6 +488,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !VersExtension_H__ */
+#endif /* !GroupsExtension_H__ */
 
 

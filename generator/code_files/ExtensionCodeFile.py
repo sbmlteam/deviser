@@ -316,7 +316,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
             self.write_function_implementation(code)
             code = init_functions.write_is_valid_enum_function(i, values[0])
             self.write_function_implementation(code)
-            code = init_functions.write_is_valid_enum_string_function(i)
+            code = init_functions.write_is_valid_enum_string_function(i, values[0])
             self.write_function_implementation(code)
 
     ########################################################################

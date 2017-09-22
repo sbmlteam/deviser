@@ -417,6 +417,7 @@ const char* SBML_SIGN_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #Sign_t enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -435,6 +436,8 @@ Sign_toString(Sign_t s)
 
 
 /*
+ * Returns the #Sign_t enumeration corresponding to the given string or
+ * @sbmlconstant{SIGN_INVALID, Sign_t} if there is no such match.
  */
 LIBSBML_EXTERN
 Sign_t
@@ -456,6 +459,8 @@ Sign_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Sign_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -476,6 +481,8 @@ Sign_isValid(Sign_t s)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Sign_t.
  */
 LIBSBML_EXTERN
 int
@@ -495,6 +502,8 @@ const char* SBML_TRANSITION_OUTPUT_EFFECT_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #TransitionOutputEffect_t
+ * enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -513,6 +522,9 @@ TransitionOutputEffect_toString(TransitionOutputEffect_t toe)
 
 
 /*
+ * Returns the #TransitionOutputEffect_t enumeration corresponding to the given
+ * string or @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
+ * TransitionOutputEffect_t} if there is no such match.
  */
 LIBSBML_EXTERN
 TransitionOutputEffect_t
@@ -535,6 +547,8 @@ TransitionOutputEffect_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #TransitionOutputEffect_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -555,6 +569,8 @@ TransitionOutputEffect_isValid(TransitionOutputEffect_t toe)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #TransitionOutputEffect_t.
  */
 LIBSBML_EXTERN
 int
@@ -575,6 +591,8 @@ const char* SBML_TRANSITION_INPUT_EFFECT_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #TransitionInputEffect_t
+ * enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -593,6 +611,9 @@ TransitionInputEffect_toString(TransitionInputEffect_t tie)
 
 
 /*
+ * Returns the #TransitionInputEffect_t enumeration corresponding to the given
+ * string or @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * TransitionInputEffect_t} if there is no such match.
  */
 LIBSBML_EXTERN
 TransitionInputEffect_t
@@ -615,6 +636,8 @@ TransitionInputEffect_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #TransitionInputEffect_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -635,6 +658,8 @@ TransitionInputEffect_isValid(TransitionInputEffect_t tie)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #TransitionInputEffect_t.
  */
 LIBSBML_EXTERN
 int

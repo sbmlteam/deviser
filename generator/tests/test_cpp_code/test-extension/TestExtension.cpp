@@ -412,6 +412,7 @@ const char* SBML_ENUM_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #Enum_t enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -430,6 +431,8 @@ Enum_toString(Enum_t e)
 
 
 /*
+ * Returns the #Enum_t enumeration corresponding to the given string or
+ * @sbmlconstant{ENUM_INVALID, Enum_t} if there is no such match.
  */
 LIBSBML_EXTERN
 Enum_t
@@ -451,6 +454,8 @@ Enum_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Enum_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -471,6 +476,8 @@ Enum_isValid(Enum_t e)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Enum_t.
  */
 LIBSBML_EXTERN
 int
@@ -490,6 +497,7 @@ const char* SBML_FRED_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #Fred_t enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -508,6 +516,8 @@ Fred_toString(Fred_t f)
 
 
 /*
+ * Returns the #Fred_t enumeration corresponding to the given string or
+ * @sbmlconstant{FRED_INVALID, Fred_t} if there is no such match.
  */
 LIBSBML_EXTERN
 Fred_t
@@ -529,6 +539,8 @@ Fred_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Fred_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -549,6 +561,8 @@ Fred_isValid(Fred_t f)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Fred_t.
  */
 LIBSBML_EXTERN
 int

@@ -302,13 +302,13 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             values = query.get_enum(self.enums[i])
             self.write_enum(name, 0, values[0], values[1], values[2]+5)
             self.skip_line(2)
-            code = init_functions.write_enum_to_string_function(i)
+            code = init_functions.write_enum_to_string_function(i, values[0])
             self.write_function_declaration(code)
-            code = init_functions.write_enum_from_string_function(i)
+            code = init_functions.write_enum_from_string_function(i, values[0])
             self.write_function_declaration(code)
-            code = init_functions.write_is_valid_enum_function(i)
+            code = init_functions.write_is_valid_enum_function(i, values[0])
             self.write_function_declaration(code)
-            code = init_functions.write_is_valid_enum_string_function(i)
+            code = init_functions.write_is_valid_enum_string_function(i, values[0])
             self.write_function_declaration(code)
 
     ########################################################################

@@ -774,21 +774,58 @@ class BaseCppFile(BaseFile.BaseFile):
         number = len(enum_val)
         if len(enum_str) != number:
             return
+        parts = enum_val[0].split('_')
+        writing_typecodes = False
+        if len(parts) > 1 and parts[1].lower() == self.package:
+            writing_typecodes = True
+        if not writing_typecodes:
+            self.write_enum_header(name, parts[0].lower(), parts[1].lower())
         self.write_line('typedef enum')
         self.write_line('{')
         self.file_out.write('  {0:{width}}'.format(enum_val[0], width=length))
         if enum_no != 0:
             self.file_out.write('= {0:{width}}'.format(enum_no, width=5))
             enum_no += 1
-        self.file_out.write('  /*!<{0} */\n'.format(enum_str[0]))
+        if writing_typecodes:
+            self.file_out.write('  /*!<{0} */\n'.format(enum_str[0]))
+        else:
+            self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.format(enum_str[0], parts[0].lower(), parts[1].lower()))
+
         for i in range(1, number):
+            parts = enum_val[i].split('_')
             self.file_out.write(', {0:{width}}'.format(enum_val[i],
                                                       width=length))
             if enum_no != 0:
                 self.file_out.write('= {0:{width}}'.format(enum_no, width=5))
                 enum_no += 1
-            self.file_out.write('  /*!<{0} */\n'.format(enum_str[i]))
+            if writing_typecodes:
+                self.file_out.write('  /*!<{0} */\n'.format(enum_str[i]))
+            else:
+                if parts[-1] == 'INVALID':
+                    self.file_out.write('  /*!< Invalid {0} value. */\n'.format(name[0:len(name)-2]))
+                else:
+                    self.file_out.write('  /*!< The {1} {2} is @c \"{0}\". */\n'.format(enum_str[i], parts[0].lower(), parts[1].lower()))
         self.write_line('{0} {1};'.format('}', name))
+
+    def write_enum_header(self, name, classname, typename):
+        classname = strFunctions.upper_first(classname)
+        up_typename = strFunctions.upper_first(typename)
+        self.open_comment()
+        self.write_comment_line('@enum {0}'.format(name))
+        self.write_comment_line('@brief Enumeration of values permitted as the value of the \"{0}\" attribute '
+                                'on {1} objects.'.format(typename, classname))
+        self.write_blank_comment_line()
+        self.write_comment_line('@if conly')
+        self.write_comment_line('@see {0}_get{1}()'.format(classname, up_typename))
+        self.write_comment_line('@see {0}_set{1}()'.format(classname, up_typename))
+        self.write_comment_line('@elseif java')
+        self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
+        self.write_comment_line('@see {0}::set{1}(long)'.format(classname, up_typename))
+        self.write_comment_line('@else')
+        self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
+        self.write_comment_line('@see {0}::set{1}()'.format(classname, up_typename))
+        self.write_comment_line('@endif')
+        self.close_comment()
 
     # Function to write the header about the typecode enumeration
     def write_enum_strings(self, name, enum_str):

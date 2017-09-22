@@ -570,6 +570,7 @@ const char* SBML_ABC_TYPE_STRINGS[] =
 
 
 /*
+ * Returns the string version of the provided #AbcType_t enumeration.
  */
 LIBSBML_EXTERN
 const char*
@@ -588,6 +589,8 @@ AbcType_toString(AbcType_t at)
 
 
 /*
+ * Returns the #AbcType_t enumeration corresponding to the given string or
+ * @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} if there is no such match.
  */
 LIBSBML_EXTERN
 AbcType_t
@@ -610,6 +613,8 @@ AbcType_fromString(const char* code)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #AbcType_t is valid.
  */
 LIBSBML_EXTERN
 int
@@ -630,6 +635,8 @@ AbcType_isValid(AbcType_t at)
 
 
 /*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #AbcType_t.
  */
 LIBSBML_EXTERN
 int

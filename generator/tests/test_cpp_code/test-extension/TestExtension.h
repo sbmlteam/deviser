@@ -366,15 +366,44 @@ typedef enum
 } SBMLTestTypeCode_t;
 
 
+/**
+ * @enum Enum_t
+ * @brief Enumeration of values permitted as the value of the "enum" attribute
+ * on Test objects.
+ *
+ * @if conly
+ * @see Test_getEnum()
+ * @see Test_setEnum()
+ * @elseif java
+ * @see Test::getEnum()
+ * @see Test::setEnum(long)
+ * @else
+ * @see Test::getEnum()
+ * @see Test::setEnum()
+ * @endif
+ */
 typedef enum
 {
-  TEST_ENUM_ONE       /*!<One */
-, TEST_ENUM_TWO       /*!<Two */
-, ENUM_INVALID        /*!<invalid Enum */
+  TEST_ENUM_ONE       /*!< The test enum is @c "One". */
+, TEST_ENUM_TWO       /*!< The test enum is @c "Two". */
+, ENUM_INVALID        /*!< Invalid Enum value. */
 } Enum_t;
 
 
 /**
+ * Returns the string version of the provided #Enum_t enumeration.
+ *
+ * @param e the #Enum_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "One",
+ * "Two",
+ * or @c NULL if the value is @sbmlconstant{ENUM_INVALID, Enum_t} or another
+ * invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -382,6 +411,21 @@ Enum_toString(Enum_t e);
 
 
 /**
+ * Returns the #Enum_t enumeration corresponding to the given string or
+ * @sbmlconstant{ENUM_INVALID, Enum_t} if there is no such match.
+ *
+ * @param code the string to convert to a #Enum_t.
+ *
+ * @return the corresponding #Enum_t or @sbmlconstant{ENUM_INVALID, Enum_t} if
+ * no match is found.
+ *
+ * @note The matching is case-sensitive: "One" will return
+ * @sbmlconstant{TEST_ENUM_ONE, Enum_t}, but "One" will return
+ * @sbmlconstant{ENUM_INVALID, Enum_t}.
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 Enum_t
@@ -389,6 +433,19 @@ Enum_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Enum_t is valid.
+ *
+ * @param e the #Enum_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #Enum_t is
+ * @sbmlconstant{TEST_ENUM_ONE, Enum_t}, or
+ * @sbmlconstant{TEST_ENUM_TWO, Enum_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{ENUM_INVALID, Enum_t}).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -396,21 +453,66 @@ Enum_isValid(Enum_t e);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Enum_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "One", or
+ * "Two";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "One" will return @c 1 (true), but
+ * "One" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
 Enum_isValidString(const char* code);
 
 
+/**
+ * @enum Fred_t
+ * @brief Enumeration of values permitted as the value of the "fred" attribute
+ * on Test objects.
+ *
+ * @if conly
+ * @see Test_getFred()
+ * @see Test_setFred()
+ * @elseif java
+ * @see Test::getFred()
+ * @see Test::setFred(long)
+ * @else
+ * @see Test::getFred()
+ * @see Test::setFred()
+ * @endif
+ */
 typedef enum
 {
-  TEST_FRED_T_TOM        /*!<tom */
-, TEST_FRED_T_DICK       /*!<dick */
-, FRED_INVALID           /*!<invalid Fred */
+  TEST_FRED_T_TOM        /*!< The test fred is @c "tom". */
+, TEST_FRED_T_DICK       /*!< The test fred is @c "dick". */
+, FRED_INVALID           /*!< Invalid Fred value. */
 } Fred_t;
 
 
 /**
+ * Returns the string version of the provided #Fred_t enumeration.
+ *
+ * @param f the #Fred_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "tom",
+ * "dick",
+ * or @c NULL if the value is @sbmlconstant{FRED_INVALID, Fred_t} or another
+ * invalid enumeration value.
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 const char*
@@ -418,6 +520,21 @@ Fred_toString(Fred_t f);
 
 
 /**
+ * Returns the #Fred_t enumeration corresponding to the given string or
+ * @sbmlconstant{FRED_INVALID, Fred_t} if there is no such match.
+ *
+ * @param code the string to convert to a #Fred_t.
+ *
+ * @return the corresponding #Fred_t or @sbmlconstant{FRED_INVALID, Fred_t} if
+ * no match is found.
+ *
+ * @note The matching is case-sensitive: "tom" will return
+ * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, but "Tom" will return
+ * @sbmlconstant{FRED_INVALID, Fred_t}.
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 Fred_t
@@ -425,6 +542,19 @@ Fred_fromString(const char* code);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #Fred_t is valid.
+ *
+ * @param f the #Fred_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #Fred_t is
+ * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, or
+ * @sbmlconstant{TEST_FRED_T_DICK, Fred_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{FRED_INVALID, Fred_t}).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
@@ -432,6 +562,22 @@ Fred_isValid(Fred_t f);
 
 
 /**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #Fred_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "tom", or
+ * "dick";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "tom" will return @c 1 (true), but
+ * "Tom" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
  */
 LIBSBML_EXTERN
 int
