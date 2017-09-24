@@ -16,7 +16,8 @@ import sys
 import os
 import shlex
 import sphinx_rtd_theme
-
+from sphinx.highlighting import PygmentsBridge
+from pygments.formatters.latex import LatexFormatter
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -208,16 +209,29 @@ htmlhelp_basename = 'Deviserdoc'
 
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
+'papersize': 'letterpaper',
 
 # The font size ('10pt', '11pt' or '12pt').
-'pointsize': '12pt',
+'pointsize': '11pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+# Use a nicer font, and load some other packages to tweak appearances.
+'preamble': r'''
+    \usepackage{charter}
+    \usepackage[defaultsans]{lato}
+    \usepackage{inconsolata}
+    \usepackage{microtype}
+    \usepackage[font={small,it}]{caption}
+''',
+
+# Load named colors
+'passoptionstopackages': r'\PassOptionsToPackage{svgnames}{xcolor}',
 
 # Latex figure (float) alignment
 'figure_align': 'ht',
+
+# Additional setup
+'sphinxsetup': 'VerbatimColor={named}{WhiteSmoke}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -247,6 +261,15 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_domain_indices = True
+
+# Make the font size in code blocks be smaller.
+# Solution from https://stackoverflow.com/a/9960329
+class CustomLatexFormatter(LatexFormatter):
+    def __init__(self, **options):
+        super(CustomLatexFormatter, self).__init__(**options)
+        self.verboptions = r"formatcom=\footnotesize"
+
+PygmentsBridge.latex_formatter = CustomLatexFormatter
 
 
 # -- Options for manual page output ---------------------------------------
