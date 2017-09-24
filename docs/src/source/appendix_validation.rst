@@ -6,6 +6,8 @@ Appendix C: Validation
 The table lists the errors and warnings that may be produced by validating
 a package being defined within Deviser Edit.
 
+.. tabularcolumns:: |p{0.65in}|p{2.5in}|p{2.85in}|
+
 +--------------+---------------------+--------------------------------------------+
 | **Severity** | **Reference**       | **Sample Message**                         |
 +==============+=====================+============================================+
