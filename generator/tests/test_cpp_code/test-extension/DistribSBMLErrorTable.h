@@ -499,7 +499,7 @@ static const packageErrorTableEntry distribErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'distrib:var' of an <uncertValue> object must "
-    "be the identifier of an existing object derived from the <SBase> class and "
+    "be the identifier of an existing object derived from the 'SBase' class and "
     "defined in the enclosing <model> object.",
     { "L3V1 Distrib V1 Section"
     }

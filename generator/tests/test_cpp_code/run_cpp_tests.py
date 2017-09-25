@@ -327,11 +327,6 @@ def main():
         test_case = 'class with other child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-        name = 'new_distrib'
-        class_name = 'DistribSBMLError'
-        test_case = 'error enumeration '
-        fail += run_valid_test(name, class_name, test_case)
-
         name = 'spatial'
         num = 7
         class_name = 'CoordinateComponent'
@@ -775,6 +770,11 @@ def main():
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        class_name = 'DistribSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
+
         name = 'test_core_vers'
         class_name = 'CoreversExtension'
         test_case = 'core version extension file'
@@ -839,17 +839,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
-        num = 0
-        class_name = 'GroupsModelPlugin'
-        test_case = 'basic plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
+        name = 'new_distrib'
+        class_name = 'DistribSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
 
-        name = 'groups'
-        num = 1
-        class_name = 'GroupsSBMLDocumentPlugin'
-        test_case = 'basic plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
 
 
     test_functions.report('CPP', fail, fails, not_tested)
