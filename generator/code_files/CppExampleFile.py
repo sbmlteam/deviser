@@ -138,6 +138,7 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
 
     def write_code_for_children(self, parent, child, code):
         abbrev = strFunctions.abbrev_name(child['name'])
+        childname = strFunctions.upper_first(child['name'])
         if child['name'] == 'math':
             code.append(self.create_code_block('line',
                                                ['ASTNode* math = SBML_parse'
@@ -147,7 +148,7 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
         else:
             code.append(self.create_code_block('line',
                                                ['{0}* {1} = {2}->create{0}()'
-                                                ''.format(child['name'], abbrev,
+                                                ''.format(childname, abbrev,
                                                           parent)]))
         if 'attribs' in child:
             self.write_code_for_reqd_attributes(abbrev, child, code)
@@ -174,8 +175,14 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
                                                implementation))
 
 
-
-
+    def add_disclaimer(self):
+        self.open_comment()
+        self.write_comment_line('****************************************************')
+        self.write_blank_comment_line()
+        self.write_comment_line('CODE HERE IS EXPERIMENTAL AND MAY REQUIRE ADJUSTMENT')
+        self.write_blank_comment_line()
+        self.write_comment_line('****************************************************')
+        self.close_comment()
 
 
     @staticmethod
@@ -191,6 +198,7 @@ class CppExampleFile(BaseCppFile.BaseCppFile):
         BaseCppFile.BaseCppFile.write_file(self)
         self.write_includes()
         self.write_cppns_use()
+        self.add_disclaimer()
         code = self.write_function()
         self.write_function_implementation(code)
 

@@ -43,7 +43,9 @@ from util import global_variables
 from . import PackageFile
 from . import RegisterFile
 from . import BaseCMakeFiles
-
+from . import CMakeListsFile
+from base_files import BaseCppFile
+from code_files import CppExampleFile
 
 class CMakeFiles():
     """Class for all cmake files"""
@@ -53,6 +55,7 @@ class CMakeFiles():
         self.this_dir = this_dir
 
         # # members from object
+        self.pkg_object = pkg_object
         self.package = pkg_object['name']
 
         self.language = global_variables.language
@@ -88,6 +91,25 @@ class CMakeFiles():
             print('Writing file {0}'.format(ext.fileout.filename))
         ext.write_file()
         ext.close_file()
+
+    def write_example_files(self):
+        name = '{0}-package'.format(self.package)
+        ext = PackageFile.PackageFile(name, self.package, False, True)
+        if self.verbose:
+            print('Writing file {0}'.format(ext.fileout.filename))
+        ext.write_example_file()
+        ext.close_file()
+        os.chdir('c++/{0}'.format(self.package))
+        txt = CMakeListsFile.CMakeListsFile('CMakeLists', self.package)
+        if self.verbose:
+            print('Writing file {0}'.format(txt.fileout.filename))
+        txt.write_file()
+        txt.close_file()
+        ex = CppExampleFile.CppExampleFile(self.pkg_object)
+        if self.verbose:
+            print('Writing file {0}'.format(ex.filename))
+        ex.write_file()
+        ex.close_file()
 
     ########################################################################
 

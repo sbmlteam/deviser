@@ -44,7 +44,7 @@ from util import strFunctions, global_variables
 class PackageFile():
     """Class for cmake package files"""
 
-    def __init__(self, name, package, src):
+    def __init__(self, name, package, src, examples=False):
 
         self.package = package.lower()
         self.src = src
@@ -55,8 +55,12 @@ class PackageFile():
             self.fileout.brief_description = 'Src CMake file for {0} ' \
                                              'package'.format(self.package)
         else:
-            self.fileout.brief_description = 'Top-level CMake file for {0} ' \
-                                             'package'.format(self.package)
+            if not examples:
+                self.fileout.brief_description = 'Top-level CMake file for {0} ' \
+                                                 'package'.format(self.package)
+            else:
+                self.fileout.brief_description = 'Examples CMake file for {0} ' \
+                                                 'package'.format(self.package)
 
         self.cap_package = self.package.upper()
         self.up_package = strFunctions.upper_first(self.package)
@@ -207,6 +211,17 @@ class PackageFile():
         self.fileout.skip_line()
         self.fileout.write_line('endif()')
         self.fileout.skip_line()
+
+    def write_example_file(self):
+        self.fileout.write_file()
+        self.fileout.skip_line()
+        self.fileout.write_line('if (ENABLE_{0})'.format(self.cap_package))
+        self.fileout.up_indent()
+        self.fileout.write_line('add_subdirectory(c++/{0})'.format(self.package))
+        self.fileout.down_indent()
+        self.fileout.write_line('endif()')
+        self.fileout.skip_line()
+
     ########################################################################
 
     # Write file

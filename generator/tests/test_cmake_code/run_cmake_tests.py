@@ -41,6 +41,19 @@ def generate_cmake_register_files(filename):
     all_files.write_register_files()
     os.chdir('../.')
 
+def generate_cmake_example_files(filename, name):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    os.chdir('./temp')
+    if not os.path.exists('examples'):
+        os.mkdir('examples')
+        os.mkdir('examples/c++')
+    os.mkdir('examples/c++/{0}'.format(name))
+    os.chdir('examples')
+    all_files = CMakeFiles.CMakeFiles(ob, os.getcwd(), True)
+    all_files.write_example_files()
+    os.chdir('../../../../.')
+
 
 #############################################################################
 # Specific compare functions
@@ -69,6 +82,19 @@ def compare_cmake_register(name, is_cxx=False):
         temp_file = '.\\temp\\{0}-register.cxx'.format(name)
     return compare_files(correct_file, temp_file)
 
+def compare_cmake_example(name, is_txt=False):
+    if is_txt and name=='spatial':
+        correct_file = '.\\test-cmake\\examples\\CMakeLists.txt'
+        temp_file = '.\\temp\\examples\\c++\\{0}\\CMakeLists.txt'.format(name)
+    else:
+        correct_file = '.\\test-cmake\\examples\\{0}-package.cmake'.format(name)
+        temp_file = '.\\temp\\examples\\{0}-package.cmake'.format(name)
+    return compare_files(correct_file, temp_file)
+
+def compare_examples(name):
+    correct_file = '.\\test-cmake\\examples\\c++\\{0}_example1.cpp'.format(name)
+    temp_file = '.\\temp\\examples\\c++\\{0}\\{0}_example1.cpp'.format(name)
+    return compare_files(correct_file, temp_file)
 
 #############################################################################
 # Specific test functions
@@ -92,6 +118,17 @@ def run_register_test(name):
     return fail
 
 
+def run_example_test(name):
+    filename = test_functions.set_up_test(name, 'CMake', 'example')
+    generate_cmake_example_files(filename, name)
+    fail = compare_cmake_example(name)
+    fail += compare_cmake_example(name, True)
+    fail += compare_examples(name)
+    print('')
+    return fail
+
+
+
 #########################################################################
 # Main function
 
@@ -113,6 +150,12 @@ def main():
 
     name = 'spatial'
     fail += run_register_test(name)
+
+    name = 'spatial'
+    fail += run_example_test(name)
+
+    name = 'groups'
+    fail += run_example_test(name)
 
     test_functions.report('CMAKE', fail, fails, not_tested)
     return fail

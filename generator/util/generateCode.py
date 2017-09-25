@@ -44,7 +44,7 @@ from parseXML import ParseXML
 from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
 from cmake_files import CMakeFiles
-from base_files import BaseFile, BaseTemplateFile
+from base_files import BaseFile, BaseTemplateFile, BaseTxtFile
 from util import global_variables, strFunctions
 import shutil
 
@@ -118,23 +118,28 @@ def generate_package_code(name, language, overwrite, ob):
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
     generate_cmake_files(name, ob)
+    generate_example_files(name, ob)
 
+def generate_example_files(name, ob):
+    this_dir = os.getcwd()
+    os.chdir('examples')
+    cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    cmake.write_example_files()
+    os.chdir(this_dir)
 
 def generate_cmake_files(name, ob):
     os.chdir('{0}'.format(name))
     this_dir = os.getcwd()
-
-    bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
-    bind.write_files()
+    cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    cmake.write_files()
     os.chdir(this_dir)
 
 
 def generate_cmake_files_for_other(name, ob):
     os.chdir('{0}'.format(name))
     this_dir = os.getcwd()
-
-    bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
-    bind.write_other_library_files()
+    cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
+    cmake.write_other_library_files()
     os.chdir(this_dir)
 
 
@@ -340,6 +345,8 @@ def populate_package_directories(name, lang):
     sep = os.sep
     directories = ['{0}'.format(name),
                    '{0}{1}examples'.format(name, sep),
+                   '{0}{1}examples{1}c++'.format(name, sep),
+                   '{0}{1}examples{1}c++{1}{0}'.format(name, sep),
                    '{0}{1}src'.format(name, sep),
                    '{0}{1}src{1}bindings'.format(name, sep),
                    '{0}{1}src{1}bindings{1}csharp'.format(name, sep),
