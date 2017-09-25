@@ -634,7 +634,7 @@ the :ref:`SBML Event<SBML-snippet-event>` shown the listOfEventAssignments is
 defined as a child of type 'lo\_element' (see Figure TBC). :ref:`Table 1<table1>` 
 details the corresponding XML output and functions generated.
 
-
+.. tabularcolumns:: |p{1.25in}|p{2.25in}|p{2.5in}|
 .. _table1:
 
    Table 1: The XML output and generated functions for each of the Deviser
@@ -748,7 +748,8 @@ describes how and when this field
 should be populated. Note the ‘name’ of an element or object refers to
 the ClassName of the appropriate object.
 
- .. _table2:
+.. tabularcolumns:: |l|p{5in}|
+.. _table2:
 
     Table 2: The expected entries in the 'Element' field depending on the 'Type'.
 

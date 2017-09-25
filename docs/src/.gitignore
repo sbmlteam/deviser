@@ -64,3 +64,8 @@ testOutput/
 *.txt
 headers.*
 
+# Emacs
+*~
+.\#*
+.git/COMMIT_EDITMSG
+/auto/
