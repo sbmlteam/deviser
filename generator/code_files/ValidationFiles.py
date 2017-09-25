@@ -448,18 +448,22 @@ class ValidationFiles():
             else:
                 next_letter = ' '
             if letter == '\\':
+                isSBase = False
                 # we dont want to lower the s of SBase
-                if next_letter == 'S':
+                if next_letter == 'S' or next_letter == 's':
                     test_str = text_string[i+1:i+7]
-                    if test_str == 'SBase ':
-                        return_name_rep += '<S'
-                    else:
-                        return_name_rep += '<{0}'.format(next_letter.lower())
+                    if test_str.lower() == 'sbase ':
+                        isSBase = True
+                if isSBase:
+                    return_name_rep += '\'S'
                 else:
                     return_name_rep += '<{0}'.format(next_letter.lower())
                 i += 1
             elif next_letter == ' ' or next_letter == '.':
-                return_name_rep += '{0}>'.format(letter)
+                if isSBase:
+                    return_name_rep += '{0}\''.format(letter)
+                else:
+                    return_name_rep += '{0}>'.format(letter)
                 in_name = False
             else:
                 return_name_rep += letter
