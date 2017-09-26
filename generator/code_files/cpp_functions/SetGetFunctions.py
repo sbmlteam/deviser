@@ -646,6 +646,10 @@ class SetGetFunctions():
             if 'isVector' in attribute and attribute['isVector']:
                 return
             att_type = attribute['CType']
+        can_be_invalid = True
+        if not self.is_cpp_api:
+            if attribute['type'] == 'string':
+                can_be_invalid = False
 
         # create comment parts
         params = []
@@ -679,10 +683,11 @@ class SetGetFunctions():
                                 't{3}'.format(self.language, self.open_br,
                                               self.success, self.close_br))
 
-            return_lines.append('@li @{0}constant{1}{2},'
-                                ' OperationReturnValues_'
-                                't{3}'.format(self.language, self.open_br,
-                                              self.invalid_att, self.close_br))
+            if can_be_invalid:
+                return_lines.append('@li @{0}constant{1}{2},'
+                                    ' OperationReturnValues_'
+                                    't{3}'.format(self.language, self.open_br,
+                                                  self.invalid_att, self.close_br))
             if not self.is_cpp_api:
                     return_lines.append('@li @{0}constant{1}{2},'
                                         ' OperationReturnValues_'
