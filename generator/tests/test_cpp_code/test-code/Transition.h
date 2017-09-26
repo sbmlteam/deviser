@@ -180,6 +180,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL or an empty string is
+   * equivalent to calling unsetId().
    */
   virtual int setId(const std::string& id);
 
@@ -1643,6 +1646,9 @@ Transition_isSetName(const Transition_t * t);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling Transition_unsetId().
  *
  * @memberof Transition_t
  */

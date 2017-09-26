@@ -729,7 +729,7 @@ class SetGetFunctions():
                                  .format(attribute['CType'],
                                          attribute['name']))
 
-        if attribute['type'] == 'string':
+        if attribute['type'] == 'string' or attribute['type'] == 'SId':
             additional.append('Calling this function with @p {0} = @c NULL or an empty string is equivalent to calling '
                               '{1}().'.format(attribute['name'], unsetfunc))
 

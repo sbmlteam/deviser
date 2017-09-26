@@ -207,6 +207,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL or an empty string is
+   * equivalent to calling unsetId().
    */
   virtual int setId(const std::string& id);
 
@@ -1298,6 +1301,9 @@ Group_isSetKind(const Group_t * g);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling Group_unsetId().
  *
  * @memberof Group_t
  */

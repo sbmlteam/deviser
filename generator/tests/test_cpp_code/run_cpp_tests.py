@@ -839,10 +839,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib'
-        class_name = 'DistribSBMLError'
-        test_case = 'error enumeration '
-        fail += run_valid_test(name, class_name, test_case)
+        name = 'groups'
+        num = 0
+        class_name = 'Group'
+        list_of = 'ListOfGroups'
+        test_case = 'list of with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
 
 

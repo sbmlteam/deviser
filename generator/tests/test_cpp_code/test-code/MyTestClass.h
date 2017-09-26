@@ -449,6 +449,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL or an empty string is
+   * equivalent to calling unsetId().
    */
   virtual int setId(const std::string& id);
 
@@ -607,6 +610,9 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p correctId = @c NULL or an empty string is
+   * equivalent to calling unsetCorrectId().
    */
   int setCorrectId(const std::string& correctId);
 
@@ -1818,6 +1824,9 @@ MyTestClass_isSetIdref2(const MyTestClass_t * mtc);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling MyTestClass_unsetId().
+ *
  * @memberof MyTestClass_t
  */
 LIBSBML_EXTERN
@@ -2048,6 +2057,9 @@ MyTestClass_setRefUnit(MyTestClass_t * mtc, const char * refUnit);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p correctId = @c NULL or an empty string is
+ * equivalent to calling MyTestClass_unsetCorrectId().
  *
  * @memberof MyTestClass_t
  */

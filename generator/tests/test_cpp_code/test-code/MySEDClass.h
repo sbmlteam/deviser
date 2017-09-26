@@ -138,6 +138,9 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL or an empty string is
+   * equivalent to calling unsetId().
    */
   virtual int setId(const std::string& id);
 
@@ -664,6 +667,9 @@ MySEDClass_isSetId(const MySEDClass_t * msedc);
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling MySEDClass_unsetId().
  *
  * @memberof MySEDClass_t
  */
