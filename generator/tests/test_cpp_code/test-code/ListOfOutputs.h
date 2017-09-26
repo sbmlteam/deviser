@@ -294,7 +294,7 @@ public:
    *
    * @return a new Output object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addOutput(const Output* object)
    * @see get(const std::string& sid)

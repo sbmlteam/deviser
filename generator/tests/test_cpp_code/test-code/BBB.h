@@ -340,7 +340,7 @@ public:
    *
    * @return a new Another object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAnother(const Another* object)
    * @see getAnother(const std::string& sid)
@@ -1255,7 +1255,7 @@ BBB_getNumAnothers(BBB_t* bbb);
  *
  * @return a new Another_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof BBB_t
  */

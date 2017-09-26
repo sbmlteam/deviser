@@ -294,7 +294,7 @@ public:
    *
    * @return a new Fred object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addFred(const Fred* object)
    * @see getFred(const std::string& sid)
@@ -1047,7 +1047,7 @@ ContainerX_getNumFreds(ContainerX_t* cx);
  *
  * @return a new Fred_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ContainerX_t
  */

@@ -280,7 +280,7 @@ public:
    *
    * @return a new Group object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGroup(const Group* object)
    * @see getGroup(const std::string& sid)
@@ -1000,7 +1000,7 @@ GroupsModelPlugin_getNumGroups(GroupsModelPlugin_t* gmp);
  *
  * @return a new Group_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof GroupsModelPlugin_t
  */

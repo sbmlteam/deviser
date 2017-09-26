@@ -373,7 +373,7 @@ public:
    *
    * @return a new FunctionTerm object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see get(const std::string& sid)

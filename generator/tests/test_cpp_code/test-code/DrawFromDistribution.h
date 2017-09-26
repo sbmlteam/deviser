@@ -474,7 +474,7 @@ public:
    *
    * @return a new DistribInput object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addDistribInput(const DistribInput* object)
    * @see getDistribInput(const std::string& sid)
@@ -1521,7 +1521,7 @@ DrawFromDistribution_getNumDistribInputs(DrawFromDistribution_t* dfd);
  *
  * @return a new DistribInput_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof DrawFromDistribution_t
  */

@@ -674,7 +674,7 @@ public:
    *
    * @return a new OtherLO object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addOtherLO(const OtherLO* object)
    * @see getOtherLO(const std::string& sid)
@@ -2059,7 +2059,7 @@ Fred_getNumOtherLOs(Fred_t* f);
  *
  * @return a new OtherLO_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Fred_t
  */

@@ -302,7 +302,7 @@ public:
    *
    * @return a new SampledField object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addSampledField(const SampledField* object)
    * @see get(const std::string& sid)

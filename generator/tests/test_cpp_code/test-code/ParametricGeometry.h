@@ -405,7 +405,7 @@ public:
    *
    * @return a new ParametricObject object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addParametricObject(const ParametricObject* object)
    * @see getParametricObject(const std::string& sid)
@@ -1345,7 +1345,7 @@ ParametricGeometry_getNumParametricObjects(ParametricGeometry_t* pg);
  *
  * @return a new ParametricObject_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof ParametricGeometry_t
  */

@@ -305,7 +305,7 @@ public:
    *
    * @return a new CSGPrimitive object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)
@@ -323,7 +323,7 @@ public:
    *
    * @return a new CSGTranslation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)
@@ -341,7 +341,7 @@ public:
    *
    * @return a new CSGRotation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)
@@ -359,7 +359,7 @@ public:
    *
    * @return a new CSGScale object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)
@@ -378,7 +378,7 @@ public:
    *
    * @return a new CSGHomogeneousTransformation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)
@@ -396,7 +396,7 @@ public:
    *
    * @return a new CSGSetOperator object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see get(const std::string& sid)

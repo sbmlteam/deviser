@@ -299,7 +299,7 @@ public:
    *
    * @return a new MyLoTest object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addMyLoTest(const MyLoTest* object)
    * @see getMyLoTest(const std::string& sid)
@@ -1054,7 +1054,7 @@ Container_getNumMyLoTests(Container_t* c);
  *
  * @return a new MyLoTest_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Container_t
  */

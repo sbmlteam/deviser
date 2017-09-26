@@ -909,7 +909,7 @@ class ListOfQueryFunctions():
         return_lines = ['@return a new {0} object '
                         'instance.'.format(child)]
         additional = []
-        additional.append('@copydetails doc_returned_owned_pointer')
+        additional.append('@copydetails doc_returned_unowned_pointer')
         if self.is_cpp_api:
             self.add_other_referenced_functions(additional, 'create', self.object_child_name)
         # create the function declaration

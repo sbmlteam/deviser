@@ -298,7 +298,7 @@ public:
    *
    * @return a new ClassTwo object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addClassTwo(const ClassTwo* object)
    * @see get(const std::string& sid)

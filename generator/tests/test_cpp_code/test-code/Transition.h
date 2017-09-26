@@ -413,7 +413,7 @@ public:
    *
    * @return a new Input object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addInput(const Input* object)
    * @see getInput(const std::string& sid)
@@ -657,7 +657,7 @@ public:
    *
    * @return a new Output object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addOutput(const Output* object)
    * @see getOutput(const std::string& sid)
@@ -835,7 +835,7 @@ public:
    *
    * @return a new FunctionTerm object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see getFunctionTerm(const std::string& sid)
@@ -1839,7 +1839,7 @@ Transition_getNumInputs(Transition_t* t);
  *
  * @return a new Input_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -2013,7 +2013,7 @@ Transition_getNumOutputs(Transition_t* t);
  *
  * @return a new Output_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */
@@ -2152,7 +2152,7 @@ Transition_getNumFunctionTerms(Transition_t* t);
  *
  * @return a new FunctionTerm_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Transition_t
  */

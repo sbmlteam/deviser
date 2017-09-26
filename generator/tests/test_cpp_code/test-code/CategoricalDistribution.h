@@ -265,7 +265,7 @@ public:
    *
    * @return a new Category object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCategory(const Category* object)
    * @see getCategory(const std::string& sid)
@@ -1049,7 +1049,7 @@ CategoricalDistribution_getNumCategories(CategoricalDistribution_t* cd);
  *
  * @return a new Category_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CategoricalDistribution_t
  */

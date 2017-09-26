@@ -255,7 +255,7 @@ public:
    *
    * @return a new Child object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addChild(const Child* object)
    * @see getChild(const std::string& sid)
@@ -408,7 +408,7 @@ public:
    *
    * @return a new Sprog object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addSprog(const Sprog* object)
    * @see getSprog(const std::string& sid)
@@ -1120,7 +1120,7 @@ Parent_getNumChildren(Parent_t* p);
  *
  * @return a new Child_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Parent_t
  */
@@ -1234,7 +1234,7 @@ Parent_getNumSprogs(Parent_t* p);
  *
  * @return a new Sprog_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Parent_t
  */

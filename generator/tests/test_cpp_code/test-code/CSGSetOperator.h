@@ -468,7 +468,7 @@ public:
    *
    * @return a new CSGPrimitive object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -486,7 +486,7 @@ public:
    *
    * @return a new CSGTranslation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -504,7 +504,7 @@ public:
    *
    * @return a new CSGRotation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -522,7 +522,7 @@ public:
    *
    * @return a new CSGScale object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -541,7 +541,7 @@ public:
    *
    * @return a new CSGHomogeneousTransformation object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -559,7 +559,7 @@ public:
    *
    * @return a new CSGSetOperator object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see getCSGNode(const std::string& sid)
@@ -1635,7 +1635,7 @@ CSGSetOperator_getNumCSGNodes(CSGSetOperator_t* csgso);
  *
  * @return a new CSGPrimitive_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1653,7 +1653,7 @@ CSGSetOperator_createCSGPrimitive(CSGSetOperator_t* csgso);
  *
  * @return a new CSGTranslation_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1671,7 +1671,7 @@ CSGSetOperator_createCSGTranslation(CSGSetOperator_t* csgso);
  *
  * @return a new CSGRotation_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1689,7 +1689,7 @@ CSGSetOperator_createCSGRotation(CSGSetOperator_t* csgso);
  *
  * @return a new CSGScale_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1708,7 +1708,7 @@ CSGSetOperator_createCSGScale(CSGSetOperator_t* csgso);
  *
  * @return a new CSGHomogeneousTransformation_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */
@@ -1726,7 +1726,7 @@ CSGSetOperator_createCSGHomogeneousTransformation(CSGSetOperator_t* csgso);
  *
  * @return a new CSGSetOperator_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGSetOperator_t
  */

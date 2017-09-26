@@ -307,7 +307,7 @@ public:
    *
    * @return a new AnalyticGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see getGeometryDefinition(const std::string& sid)
@@ -325,7 +325,7 @@ public:
    *
    * @return a new SampledFieldGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see getGeometryDefinition(const std::string& sid)
@@ -343,7 +343,7 @@ public:
    *
    * @return a new CSGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see getGeometryDefinition(const std::string& sid)
@@ -361,7 +361,7 @@ public:
    *
    * @return a new ParametricGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see getGeometryDefinition(const std::string& sid)
@@ -379,7 +379,7 @@ public:
    *
    * @return a new MixedGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see getGeometryDefinition(const std::string& sid)
@@ -592,7 +592,7 @@ public:
    *
    * @return a new OrdinalMapping object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addOrdinalMapping(const OrdinalMapping* object)
    * @see getOrdinalMapping(const std::string& sid)
@@ -1381,7 +1381,7 @@ MixedGeometry_getNumGeometryDefinitions(MixedGeometry_t* mg);
  *
  * @return a new AnalyticGeometry_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1399,7 +1399,7 @@ MixedGeometry_createAnalyticGeometry(MixedGeometry_t* mg);
  *
  * @return a new SampledFieldGeometry_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1417,7 +1417,7 @@ MixedGeometry_createSampledFieldGeometry(MixedGeometry_t* mg);
  *
  * @return a new CSGeometry_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1435,7 +1435,7 @@ MixedGeometry_createCSGeometry(MixedGeometry_t* mg);
  *
  * @return a new ParametricGeometry_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1453,7 +1453,7 @@ MixedGeometry_createParametricGeometry(MixedGeometry_t* mg);
  *
  * @return a new MixedGeometry_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1621,7 +1621,7 @@ MixedGeometry_getNumOrdinalMappings(MixedGeometry_t* mg);
  *
  * @return a new OrdinalMapping_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof MixedGeometry_t
  */

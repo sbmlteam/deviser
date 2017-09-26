@@ -480,7 +480,7 @@ public:
    *
    * @return a new Member object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addMember(const Member* object)
    * @see getMember(const std::string& sid)
@@ -1553,7 +1553,7 @@ Group_getNumMembers(Group_t* g);
  *
  * @return a new Member_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Group_t
  */

@@ -317,7 +317,7 @@ public:
    *
    * @return a new AnalyticGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see get(const std::string& sid)
@@ -336,7 +336,7 @@ public:
    *
    * @return a new SampledFieldGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see get(const std::string& sid)
@@ -354,7 +354,7 @@ public:
    *
    * @return a new CSGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see get(const std::string& sid)
@@ -373,7 +373,7 @@ public:
    *
    * @return a new ParametricGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see get(const std::string& sid)
@@ -392,7 +392,7 @@ public:
    *
    * @return a new MixedGeometry object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see get(const std::string& sid)

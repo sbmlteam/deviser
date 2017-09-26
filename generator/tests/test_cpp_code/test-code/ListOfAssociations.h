@@ -304,7 +304,7 @@ public:
    *
    * @return a new FbcAnd object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see get(const std::string& sid)
@@ -322,7 +322,7 @@ public:
    *
    * @return a new FbcOr object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see get(const std::string& sid)
@@ -340,7 +340,7 @@ public:
    *
    * @return a new GeneProductRef object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see get(const std::string& sid)

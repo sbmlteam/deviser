@@ -324,7 +324,7 @@ public:
    *
    * @return a new QualitativeSpecies object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addQualitativeSpecies(const QualitativeSpecies* object)
    * @see getQualitativeSpecies(const std::string& sid)
@@ -547,7 +547,7 @@ public:
    *
    * @return a new Transition object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see getTransition(const std::string& sid)
@@ -1284,7 +1284,7 @@ QualModelPlugin_getNumQualitativeSpecies(QualModelPlugin_t* qmp);
  *
  * @return a new QualitativeSpecies_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1449,7 +1449,7 @@ QualModelPlugin_getNumTransitions(QualModelPlugin_t* qmp);
  *
  * @return a new Transition_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof QualModelPlugin_t
  */

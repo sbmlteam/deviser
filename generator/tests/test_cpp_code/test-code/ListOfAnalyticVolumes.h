@@ -306,7 +306,7 @@ public:
    *
    * @return a new AnalyticVolume object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAnalyticVolume(const AnalyticVolume* object)
    * @see get(const std::string& sid)

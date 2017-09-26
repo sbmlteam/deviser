@@ -255,7 +255,7 @@ public:
    *
    * @return a new FbcAnd object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see getAssociation(const std::string& sid)
@@ -273,7 +273,7 @@ public:
    *
    * @return a new FbcOr object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see getAssociation(const std::string& sid)
@@ -291,7 +291,7 @@ public:
    *
    * @return a new GeneProductRef object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see getAssociation(const std::string& sid)
@@ -1093,7 +1093,7 @@ FbcAnd_getNumAssociations(FbcAnd_t* fa);
  *
  * @return a new FbcAnd_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof FbcAnd_t
  */
@@ -1110,7 +1110,7 @@ FbcAnd_createAnd(FbcAnd_t* fa);
  *
  * @return a new FbcOr_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof FbcAnd_t
  */
@@ -1128,7 +1128,7 @@ FbcAnd_createOr(FbcAnd_t* fa);
  *
  * @return a new GeneProductRef_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof FbcAnd_t
  */

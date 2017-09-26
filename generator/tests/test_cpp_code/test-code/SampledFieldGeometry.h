@@ -385,7 +385,7 @@ public:
    *
    * @return a new SampledVolume object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addSampledVolume(const SampledVolume* object)
    * @see getSampledVolume(const std::string& sid)
@@ -1323,7 +1323,7 @@ SampledFieldGeometry_getNumSampledVolumes(SampledFieldGeometry_t* sfg);
  *
  * @return a new SampledVolume_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */

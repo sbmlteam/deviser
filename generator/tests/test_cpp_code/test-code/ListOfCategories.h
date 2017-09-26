@@ -300,7 +300,7 @@ public:
    *
    * @return a new Category object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCategory(const Category* object)
    * @see get(const std::string& sid)

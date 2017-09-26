@@ -492,7 +492,7 @@ public:
    *
    * @return a new FluxObjective object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addFluxObjective(const FluxObjective* object)
    * @see getFluxObjective(const std::string& sid)
@@ -1625,7 +1625,7 @@ Objective_getNumFluxObjectives(Objective_t* o);
  *
  * @return a new FluxObjective_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Objective_t
  */

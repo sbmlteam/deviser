@@ -300,7 +300,7 @@ public:
    *
    * @return a new Transition object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see get(const std::string& sid)

@@ -546,7 +546,7 @@ public:
    *
    * @return a new EventAssignment object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addEventAssignment(const EventAssignment* object)
    * @see getEventAssignment(const std::string& sid)
@@ -1680,7 +1680,7 @@ Event_getNumEventAssignments(Event_t* e);
  *
  * @return a new EventAssignment_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof Event_t
  */

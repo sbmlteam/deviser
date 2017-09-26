@@ -329,7 +329,7 @@ public:
    *
    * @return a new CSGObject object instance.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addCSGObject(const CSGObject* object)
    * @see getCSGObject(const std::string& sid)
@@ -1154,7 +1154,7 @@ CSGeometry_getNumCSGObjects(CSGeometry_t* csg);
  *
  * @return a new CSGObject_t object instance.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof CSGeometry_t
  */
