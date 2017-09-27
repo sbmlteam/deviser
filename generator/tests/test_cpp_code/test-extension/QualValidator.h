@@ -30,8 +30,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class 
- * @sbmlbrief{qual} Entry point for &ldquo;qual&rdquo package validation.
+ * @class QualValidator
+ * @sbmlbrief{qual} Entry point for &ldquo;qual&rdquo; package validation.
  *
  * @htmlinclude not-sbml-warning.html
  *

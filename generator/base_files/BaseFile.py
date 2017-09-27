@@ -474,7 +474,7 @@ class BaseFile:
                                                        fullname,
                                                        self.package.lower())
         self.write_blank_comment_line()
-        self.write_comment_line('@class {0}'.format(self.class_name))
+        self.write_comment_line('@class {0}'.format(self.name))
         if extension:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class'
                                     '.'.format(self.open_br,
@@ -496,7 +496,7 @@ class BaseFile:
                                                   self.class_object['sbase']))
         elif validator:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Entry point for '
-                                    '&ldquo;{1}&rdquo package validation'
+                                    '&ldquo;{1}&rdquo; package validation'
                                     '.'.format(self.open_br,
                                                self.package.lower(),
                                                self.close_br))

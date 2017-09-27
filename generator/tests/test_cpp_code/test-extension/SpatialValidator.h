@@ -30,8 +30,9 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class 
- * @sbmlbrief{spatial} Entry point for &ldquo;spatial&rdquo package validation.
+ * @class SpatialValidator
+ * @sbmlbrief{spatial} Entry point for &ldquo;spatial&rdquo; package
+ * validation.
  *
  * @htmlinclude not-sbml-warning.html
  *
