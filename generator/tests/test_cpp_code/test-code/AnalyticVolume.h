@@ -448,19 +448,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * AnalyticVolume object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * AnalyticVolume have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the AnalyticVolume object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1340,25 +1327,6 @@ AnalyticVolume_unsetMath(AnalyticVolume_t * av);
 LIBSBML_EXTERN
 int
 AnalyticVolume_hasRequiredAttributes(const AnalyticVolume_t * av);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * AnalyticVolume_t object have been set.
- *
- * @param av the AnalyticVolume_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * AnalyticVolume_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the AnalyticVolume_t object are:
- *
- * @memberof AnalyticVolume_t
- */
-LIBSBML_EXTERN
-int
-AnalyticVolume_hasRequiredElements(const AnalyticVolume_t * av);
 
 
 

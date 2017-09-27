@@ -296,19 +296,6 @@ Def::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Def object
- * have been set.
- */
-bool
-Def::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -961,18 +948,6 @@ int
 Def_hasRequiredAttributes(const Def_t * d)
 {
   return (d != NULL) ? static_cast<int>(d->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this Def_t
- * object have been set.
- */
-LIBSBML_EXTERN
-int
-Def_hasRequiredElements(const Def_t * d)
-{
-  return (d != NULL) ? static_cast<int>(d->hasRequiredElements()) : 0;
 }
 
 

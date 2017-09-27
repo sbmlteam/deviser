@@ -390,19 +390,6 @@ public:
   int unsetDiffusionCoefficient();
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * SpatialParameterPlugin object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * SpatialParameterPlugin have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the SpatialParameterPlugin object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 

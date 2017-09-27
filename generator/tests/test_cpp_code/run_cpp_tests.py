@@ -850,10 +850,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'qual'
-        class_name = 'QualValidator'
-        test_case = 'validator'
-        fail += run_valid_test(name, class_name, test_case, False)
+        name = 'spatial'
+        num = 25
+        class_name = 'CSGSetOperator'
+        list_of = ''
+        test_case = 'contains list of that has abstracts that are abstract'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
     test_functions.report('CPP', fail, fails, not_tested)

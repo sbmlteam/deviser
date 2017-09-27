@@ -378,19 +378,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * Container object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * Container have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Container object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1100,25 +1087,6 @@ Container_removeMyLoTest(Container_t* c, unsigned int n);
 LIBSBML_EXTERN
 MyLoTest_t*
 Container_removeMyLoTestById(Container_t* c, const char* sid);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Container_t object have been set.
- *
- * @param c the Container_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Container_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Container_t object are:
- *
- * @memberof Container_t
- */
-LIBSBML_EXTERN
-int
-Container_hasRequiredElements(const Container_t * c);
 
 
 

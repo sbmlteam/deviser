@@ -346,19 +346,6 @@ ArrayChild::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this ArrayChild
- * object have been set.
- */
-bool
-ArrayChild::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1252,18 +1239,6 @@ int
 ArrayChild_hasRequiredAttributes(const ArrayChild_t * ac)
 {
   return (ac != NULL) ? static_cast<int>(ac->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * ArrayChild_t object have been set.
- */
-LIBSBML_EXTERN
-int
-ArrayChild_hasRequiredElements(const ArrayChild_t * ac)
-{
-  return (ac != NULL) ? static_cast<int>(ac->hasRequiredElements()) : 0;
 }
 
 

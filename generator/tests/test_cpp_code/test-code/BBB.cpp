@@ -365,19 +365,6 @@ BBB::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this BBB object
- * have been set.
- */
-bool
-BBB::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1403,18 +1390,6 @@ int
 BBB_hasRequiredAttributes(const BBB_t * bbb)
 {
   return (bbb != NULL) ? static_cast<int>(bbb->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this BBB_t
- * object have been set.
- */
-LIBSBML_EXTERN
-int
-BBB_hasRequiredElements(const BBB_t * bbb)
-{
-  return (bbb != NULL) ? static_cast<int>(bbb->hasRequiredElements()) : 0;
 }
 
 

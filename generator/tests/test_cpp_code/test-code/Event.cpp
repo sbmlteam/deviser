@@ -769,19 +769,6 @@ Event::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Event
- * object have been set.
- */
-bool
-Event::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -2107,18 +2094,6 @@ int
 Event_hasRequiredAttributes(const Event_t * e)
 {
   return (e != NULL) ? static_cast<int>(e->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Event_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Event_hasRequiredElements(const Event_t * e)
-{
-  return (e != NULL) ? static_cast<int>(e->hasRequiredElements()) : 0;
 }
 
 

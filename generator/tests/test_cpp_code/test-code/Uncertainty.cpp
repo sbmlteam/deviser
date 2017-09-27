@@ -614,19 +614,6 @@ Uncertainty::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * Uncertainty object have been set.
- */
-bool
-Uncertainty::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1881,18 +1868,6 @@ int
 Uncertainty_unsetDistribution(Uncertainty_t * u)
 {
   return (u != NULL) ? u->unsetDistribution() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Uncertainty_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Uncertainty_hasRequiredElements(const Uncertainty_t * u)
-{
-  return (u != NULL) ? static_cast<int>(u->hasRequiredElements()) : 0;
 }
 
 

@@ -265,19 +265,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this Def
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this Def
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Def object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -888,25 +875,6 @@ Def_unsetMess(Def_t * d);
 LIBSBML_EXTERN
 int
 Def_hasRequiredAttributes(const Def_t * d);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this Def_t
- * object have been set.
- *
- * @param d the Def_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this Def_t
- * have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Def_t object are:
- *
- * @memberof Def_t
- */
-LIBSBML_EXTERN
-int
-Def_hasRequiredElements(const Def_t * d);
 
 
 

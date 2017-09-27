@@ -390,19 +390,6 @@ Parent::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Parent
- * object have been set.
- */
-bool
-Parent::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1213,18 +1200,6 @@ Sprog_t*
 Parent_removeSprog(Parent_t* p, unsigned int n)
 {
   return (p != NULL) ? p->removeSprog(n) : NULL;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Parent_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Parent_hasRequiredElements(const Parent_t * p)
-{
-  return (p != NULL) ? static_cast<int>(p->hasRequiredElements()) : 0;
 }
 
 

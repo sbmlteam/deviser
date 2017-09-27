@@ -591,19 +591,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * Objective object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * Objective have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Objective object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1697,25 +1684,6 @@ Objective_removeFluxObjectiveById(Objective_t* o, const char* sid);
 LIBSBML_EXTERN
 int
 Objective_hasRequiredAttributes(const Objective_t * o);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Objective_t object have been set.
- *
- * @param o the Objective_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Objective_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Objective_t object are:
- *
- * @memberof Objective_t
- */
-LIBSBML_EXTERN
-int
-Objective_hasRequiredElements(const Objective_t * o);
 
 
 

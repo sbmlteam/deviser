@@ -573,19 +573,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this Group
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this Group
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Group object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1618,25 +1605,6 @@ Group_removeMemberById(Group_t* g, const char* sid);
 LIBSBML_EXTERN
 int
 Group_hasRequiredAttributes(const Group_t * g);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Group_t object have been set.
- *
- * @param g the Group_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Group_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Group_t object are:
- *
- * @memberof Group_t
- */
-LIBSBML_EXTERN
-int
-Group_hasRequiredElements(const Group_t * g);
 
 
 

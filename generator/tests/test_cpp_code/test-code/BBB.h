@@ -433,19 +433,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this BBB
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this BBB
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the BBB object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1320,25 +1307,6 @@ BBB_removeAnotherById(BBB_t* bbb, const char* sid);
 LIBSBML_EXTERN
 int
 BBB_hasRequiredAttributes(const BBB_t * bbb);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this BBB_t
- * object have been set.
- *
- * @param bbb the BBB_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this BBB_t
- * have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the BBB_t object are:
- *
- * @memberof BBB_t
- */
-LIBSBML_EXTERN
-int
-BBB_hasRequiredElements(const BBB_t * bbb);
 
 
 

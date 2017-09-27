@@ -373,19 +373,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * ContainerX object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * ContainerX have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the ContainerX object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1092,25 +1079,6 @@ ContainerX_removeFred(ContainerX_t* cx, unsigned int n);
 LIBSBML_EXTERN
 Fred_t*
 ContainerX_removeFredById(ContainerX_t* cx, const char* sid);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * ContainerX_t object have been set.
- *
- * @param cx the ContainerX_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * ContainerX_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the ContainerX_t object are:
- *
- * @memberof ContainerX_t
- */
-LIBSBML_EXTERN
-int
-ContainerX_hasRequiredElements(const ContainerX_t * cx);
 
 
 

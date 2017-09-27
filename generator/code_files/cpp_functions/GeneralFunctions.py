@@ -518,6 +518,19 @@ class GeneralFunctions():
     def write_has_required_elements(self):
         if not self.has_children:
             return
+        has_reqd_children = False
+        # if this is not a derived class and has no required elements dont write the function
+        if not self.has_std_base:
+            has_reqd_children = True
+        if not has_reqd_children:
+            for att in self.child_elements:
+                if att['reqd']:
+                    has_reqd_children = True
+            for att in self.child_lo_elements:
+                if att['reqd']:
+                    has_reqd_children = True
+        if not has_reqd_children:
+            return
 
         # create comment parts
         title_line = 'Predicate returning {0} if all the required ' \

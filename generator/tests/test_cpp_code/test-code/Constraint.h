@@ -255,19 +255,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * Constraint object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * Constraint have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Constraint object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -819,25 +806,6 @@ Constraint_unsetMath(Constraint_t * c);
 LIBSBML_EXTERN
 int
 Constraint_unsetMessage(Constraint_t * c);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Constraint_t object have been set.
- *
- * @param c the Constraint_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Constraint_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Constraint_t object are:
- *
- * @memberof Constraint_t
- */
-LIBSBML_EXTERN
-int
-Constraint_hasRequiredElements(const Constraint_t * c);
 
 
 

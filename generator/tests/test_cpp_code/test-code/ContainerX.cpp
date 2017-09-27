@@ -299,19 +299,6 @@ ContainerX::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this ContainerX
- * object have been set.
- */
-bool
-ContainerX::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1004,18 +991,6 @@ Fred_t*
 ContainerX_removeFredById(ContainerX_t* cx, const char* sid)
 {
   return (cx != NULL && sid != NULL) ? cx->removeFred(sid) : NULL;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * ContainerX_t object have been set.
- */
-LIBSBML_EXTERN
-int
-ContainerX_hasRequiredElements(const ContainerX_t * cx)
-{
-  return (cx != NULL) ? static_cast<int>(cx->hasRequiredElements()) : 0;
 }
 
 

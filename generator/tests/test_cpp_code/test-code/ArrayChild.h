@@ -276,19 +276,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * ArrayChild object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * ArrayChild have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the ArrayChild object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1049,25 +1036,6 @@ ArrayChild_unsetUnit(ArrayChild_t * ac);
 LIBSBML_EXTERN
 int
 ArrayChild_hasRequiredAttributes(const ArrayChild_t * ac);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * ArrayChild_t object have been set.
- *
- * @param ac the ArrayChild_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * ArrayChild_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the ArrayChild_t object are:
- *
- * @memberof ArrayChild_t
- */
-LIBSBML_EXTERN
-int
-ArrayChild_hasRequiredElements(const ArrayChild_t * ac);
 
 
 

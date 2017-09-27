@@ -375,19 +375,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * Uncertainty object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * Uncertainty have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Uncertainty object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1275,25 +1262,6 @@ Uncertainty_unsetUncertStatistics(Uncertainty_t * u);
 LIBSBML_EXTERN
 int
 Uncertainty_unsetDistribution(Uncertainty_t * u);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Uncertainty_t object have been set.
- *
- * @param u the Uncertainty_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Uncertainty_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Uncertainty_t object are:
- *
- * @memberof Uncertainty_t
- */
-LIBSBML_EXTERN
-int
-Uncertainty_hasRequiredElements(const Uncertainty_t * u);
 
 
 

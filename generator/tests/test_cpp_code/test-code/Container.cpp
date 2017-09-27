@@ -299,19 +299,6 @@ Container::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Container
- * object have been set.
- */
-bool
-Container::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1009,18 +996,6 @@ MyLoTest_t*
 Container_removeMyLoTestById(Container_t* c, const char* sid)
 {
   return (c != NULL && sid != NULL) ? c->removeMyLoTest(sid) : NULL;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Container_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Container_hasRequiredElements(const Container_t * c)
-{
-  return (c != NULL) ? static_cast<int>(c->hasRequiredElements()) : 0;
 }
 
 

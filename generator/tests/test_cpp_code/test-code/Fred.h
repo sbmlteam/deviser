@@ -747,19 +747,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this Fred
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this Fred
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Fred object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -2105,25 +2092,6 @@ Fred_removeOtherLO(Fred_t* f, unsigned int n);
 LIBSBML_EXTERN
 int
 Fred_hasRequiredAttributes(const Fred_t * f);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this Fred_t
- * object have been set.
- *
- * @param f the Fred_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Fred_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Fred_t object are:
- *
- * @memberof Fred_t
- */
-LIBSBML_EXTERN
-int
-Fred_hasRequiredElements(const Fred_t * f);
 
 
 

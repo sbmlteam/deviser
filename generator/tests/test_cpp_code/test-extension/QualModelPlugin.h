@@ -604,19 +604,6 @@ public:
   Transition* removeTransition(const std::string& sid);
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * QualModelPlugin object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * QualModelPlugin have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the QualModelPlugin object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 

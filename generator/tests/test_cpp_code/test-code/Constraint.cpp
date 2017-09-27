@@ -312,19 +312,6 @@ Constraint::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Constraint
- * object have been set.
- */
-bool
-Constraint::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -837,18 +824,6 @@ int
 Constraint_unsetMessage(Constraint_t * c)
 {
   return (c != NULL) ? c->unsetMessage() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Constraint_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Constraint_hasRequiredElements(const Constraint_t * c)
-{
-  return (c != NULL) ? static_cast<int>(c->hasRequiredElements()) : 0;
 }
 
 

@@ -347,19 +347,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * TwoatonceSBasePlugin object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * TwoatonceSBasePlugin have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the TwoatonceSBasePlugin object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 

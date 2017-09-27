@@ -740,19 +740,6 @@ VersSpeciesPlugin::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * VersSpeciesPlugin object have been set.
- */
-bool
-VersSpeciesPlugin::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 

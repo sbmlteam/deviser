@@ -557,19 +557,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * DrawFromDistribution object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * DrawFromDistribution have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the DrawFromDistribution object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1571,25 +1558,6 @@ LIBSBML_EXTERN
 DistribInput_t*
 DrawFromDistribution_removeDistribInputById(DrawFromDistribution_t* dfd,
                                             const char* sid);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * DrawFromDistribution_t object have been set.
- *
- * @param dfd the DrawFromDistribution_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * DrawFromDistribution_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the DrawFromDistribution_t object are:
- *
- * @memberof DrawFromDistribution_t
- */
-LIBSBML_EXTERN
-int
-DrawFromDistribution_hasRequiredElements(const DrawFromDistribution_t * dfd);
 
 
 

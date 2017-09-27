@@ -521,19 +521,6 @@ Group::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Group
- * object have been set.
- */
-bool
-Group::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1706,18 +1693,6 @@ int
 Group_hasRequiredAttributes(const Group_t * g)
 {
   return (g != NULL) ? static_cast<int>(g->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Group_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Group_hasRequiredElements(const Group_t * g)
-{
-  return (g != NULL) ? static_cast<int>(g->hasRequiredElements()) : 0;
 }
 
 

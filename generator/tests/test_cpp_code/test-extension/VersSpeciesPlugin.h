@@ -615,19 +615,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * VersSpeciesPlugin object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * VersSpeciesPlugin have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the VersSpeciesPlugin object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 

@@ -626,19 +626,6 @@ public:
   virtual bool hasRequiredAttributes() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this Event
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this Event
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Event object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1727,25 +1714,6 @@ Event_removeEventAssignment(Event_t* e, unsigned int n);
 LIBSBML_EXTERN
 int
 Event_hasRequiredAttributes(const Event_t * e);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Event_t object have been set.
- *
- * @param e the Event_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Event_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Event_t object are:
- *
- * @memberof Event_t
- */
-LIBSBML_EXTERN
-int
-Event_hasRequiredElements(const Event_t * e);
 
 
 

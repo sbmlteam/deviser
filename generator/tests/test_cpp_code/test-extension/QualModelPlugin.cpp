@@ -452,19 +452,6 @@ QualModelPlugin::removeTransition(const std::string& sid)
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * QualModelPlugin object have been set.
- */
-bool
-QualModelPlugin::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 

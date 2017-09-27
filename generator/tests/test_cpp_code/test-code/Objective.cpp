@@ -530,19 +530,6 @@ Objective::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Objective
- * object have been set.
- */
-bool
-Objective::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1921,18 +1908,6 @@ int
 Objective_hasRequiredAttributes(const Objective_t * o)
 {
   return (o != NULL) ? static_cast<int>(o->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * Objective_t object have been set.
- */
-LIBSBML_EXTERN
-int
-Objective_hasRequiredElements(const Objective_t * o)
-{
-  return (o != NULL) ? static_cast<int>(o->hasRequiredElements()) : 0;
 }
 
 

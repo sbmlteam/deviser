@@ -672,19 +672,6 @@ DrawFromDistribution::getTypeCode() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * DrawFromDistribution object have been set.
- */
-bool
-DrawFromDistribution::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1974,18 +1961,6 @@ DrawFromDistribution_removeDistribInputById(DrawFromDistribution_t* dfd,
                                             const char* sid)
 {
   return (dfd != NULL && sid != NULL) ? dfd->removeDistribInput(sid) : NULL;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * DrawFromDistribution_t object have been set.
- */
-LIBSBML_EXTERN
-int
-DrawFromDistribution_hasRequiredElements(const DrawFromDistribution_t * dfd)
-{
-  return (dfd != NULL) ? static_cast<int>(dfd->hasRequiredElements()) : 0;
 }
 
 

@@ -466,19 +466,6 @@ public:
   virtual int getTypeCode() const;
 
 
-  /**
-   * Predicate returning @c true if all the required elements for this Parent
-   * object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this Parent
-   * have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the Parent object are:
-   */
-  virtual bool hasRequiredElements() const;
-
-
 
   /** @cond doxygenLibsbmlInternal */
 
@@ -1259,25 +1246,6 @@ Parent_createSprog(Parent_t* p);
 LIBSBML_EXTERN
 Sprog_t*
 Parent_removeSprog(Parent_t* p, unsigned int n);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * Parent_t object have been set.
- *
- * @param p the Parent_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * Parent_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the Parent_t object are:
- *
- * @memberof Parent_t
- */
-LIBSBML_EXTERN
-int
-Parent_hasRequiredElements(const Parent_t * p);
 
 
 

@@ -236,19 +236,6 @@ SpatialCompartmentPlugin::unsetCompartmentMapping()
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * SpatialCompartmentPlugin object have been set.
- */
-bool
-SpatialCompartmentPlugin::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 

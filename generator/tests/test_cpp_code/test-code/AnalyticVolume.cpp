@@ -540,19 +540,6 @@ AnalyticVolume::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * AnalyticVolume object have been set.
- */
-bool
-AnalyticVolume::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -1617,18 +1604,6 @@ int
 AnalyticVolume_hasRequiredAttributes(const AnalyticVolume_t * av)
 {
   return (av != NULL) ? static_cast<int>(av->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * AnalyticVolume_t object have been set.
- */
-LIBSBML_EXTERN
-int
-AnalyticVolume_hasRequiredElements(const AnalyticVolume_t * av)
-{
-  return (av != NULL) ? static_cast<int>(av->hasRequiredElements()) : 0;
 }
 
 

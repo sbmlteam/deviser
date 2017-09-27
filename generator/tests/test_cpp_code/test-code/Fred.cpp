@@ -943,19 +943,6 @@ Fred::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this Fred
- * object have been set.
- */
-bool
-Fred::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -2737,18 +2724,6 @@ int
 Fred_hasRequiredAttributes(const Fred_t * f)
 {
   return (f != NULL) ? static_cast<int>(f->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this Fred_t
- * object have been set.
- */
-LIBSBML_EXTERN
-int
-Fred_hasRequiredElements(const Fred_t * f)
-{
-  return (f != NULL) ? static_cast<int>(f->hasRequiredElements()) : 0;
 }
 
 
