@@ -389,8 +389,7 @@ CoreversExtension::init()
   coreversExtension.addSBasePluginCreator(&sbmldocPluginCreator);
   coreversExtension.addSBasePluginCreator(&modelPluginCreator);
 
-  int result =
-    SBMLExtensionRegistry::getInstance().addExtension(&coreversExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&coreversExtension);
 }
 
 /** @endcond */

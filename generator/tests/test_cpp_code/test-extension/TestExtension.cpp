@@ -390,8 +390,7 @@ TestExtension::init()
   testExtension.addSBasePluginCreator(&sbmldocPluginCreator);
   testExtension.addSBasePluginCreator(&modelPluginCreator);
 
-  int result =
-    SBMLExtensionRegistry::getInstance().addExtension(&testExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&testExtension);
 }
 
 /** @endcond */

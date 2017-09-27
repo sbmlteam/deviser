@@ -463,8 +463,7 @@ VersExtension::init()
   versExtension.addSBasePluginCreator(&speciesPluginCreator);
   versExtension.addSBasePluginCreator(&reactionPluginCreator);
 
-  int result =
-    SBMLExtensionRegistry::getInstance().addExtension(&versExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&versExtension);
 }
 
 /** @endcond */

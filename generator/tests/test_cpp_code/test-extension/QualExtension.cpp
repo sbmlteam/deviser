@@ -393,8 +393,7 @@ QualExtension::init()
   qualExtension.addSBasePluginCreator(&sbmldocPluginCreator);
   qualExtension.addSBasePluginCreator(&modelPluginCreator);
 
-  int result =
-    SBMLExtensionRegistry::getInstance().addExtension(&qualExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&qualExtension);
 }
 
 /** @endcond */

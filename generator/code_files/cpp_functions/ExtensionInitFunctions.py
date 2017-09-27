@@ -147,8 +147,7 @@ class ExtensionInitFunctions():
                                                               name.lower()))
         code.append(self.create_code_block('line', implementation))
         code.append(self.create_code_block('line',
-                                           ['int result = '
-                                            '{0}ExtensionRegistry::'
+                                           ['{0}ExtensionRegistry::'
                                             'getInstance().addExtension(&{1}'
                                             'Extension'
                                             ')'.format(self.cap_language,

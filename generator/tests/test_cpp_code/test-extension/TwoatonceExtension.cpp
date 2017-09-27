@@ -390,8 +390,7 @@ TwoatonceExtension::init()
   twoatonceExtension.addSBasePluginCreator(&sbmldocPluginCreator);
   twoatonceExtension.addSBasePluginCreator(&sbasePluginCreator);
 
-  int result =
-    SBMLExtensionRegistry::getInstance().addExtension(&twoatonceExtension);
+  SBMLExtensionRegistry::getInstance().addExtension(&twoatonceExtension);
 }
 
 /** @endcond */
