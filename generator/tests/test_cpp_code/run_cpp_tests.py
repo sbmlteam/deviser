@@ -823,6 +823,11 @@ def main():
         test_case = 'an SBase plugin'
         fail += run_plug_test(name, class_name, test_case, num)
 
+        name = 'twoAtOnce'
+        class_name = 'TwoatonceExtension'
+        test_case = 'basic extension file with SBasePlugin'
+        fail += run_ext_test(name, class_name, test_case, 0)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -846,10 +851,9 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'twoAtOnce'
-        num = 0
-        class_name = 'TwoatonceSBasePlugin'
-        test_case = 'an SBase plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
+        class_name = 'TwoatonceExtension'
+        test_case = 'basic extension file with SBasePlugin'
+        fail += run_ext_test(name, class_name, test_case, 0)
 
 
 

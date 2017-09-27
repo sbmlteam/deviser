@@ -113,9 +113,14 @@ class ExtensionInitFunctions():
         for i in range(0, len(self.plugins)):
             name = self.plugins[i]['sbase']
             tc = query.get_typecode_format(name, self.language)
-            implementation.append('{0}ExtensionPoint {1}ExtPoint(\"core\", '
-                                  '{2})'.format(self.std_base, name.lower(),
-                                                tc))
+            if name == self.std_base:
+                implementation.append('{0}ExtensionPoint {1}ExtPoint(\"all\", '
+                                      'SBML_GENERIC_SBASE)'.format(self.std_base, name.lower(),
+                                                    tc))
+            else:
+                implementation.append('{0}ExtensionPoint {1}ExtPoint(\"core\", '
+                                      '{2})'.format(self.std_base, name.lower(),
+                                                    tc))
         code.append(self.create_code_block('line', implementation))
         implementation = ['{0}PluginCreator<{1}{2}DocumentPlugin, '
                           '{1}Extension> {3}docPluginCreator({3}docExtPoint, '
