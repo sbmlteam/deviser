@@ -31,10 +31,18 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class CoreverspkgExtension
- * @sbmlbrief{coreverspkg} Base extension class.
+ * @sbmlbrief{coreverspkg} Base extension class for the package.
+ *
+ * @htmlinclude not-sbml-warning.html
+ *
+ * This is the Coreverspkg package extension of the SBMLExtension class that is
+ * used to facilitate libSBML plug-ins in the implementation of an
+ * SBMLLevel&nbsp;3 package.
  *
  * @class CoreverspkgPkgNamespaces
  * @sbmlbrief{coreverspkg} SBMLNamespaces extension.
+ *
+ * @htmlinclude not-sbml-warning.html
  */
 
 

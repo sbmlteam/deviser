@@ -31,10 +31,18 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class TestExtension
- * @sbmlbrief{test} Base extension class.
+ * @sbmlbrief{test} Base extension class for the package.
+ *
+ * @htmlinclude not-sbml-warning.html
+ *
+ * This is the Test package extension of the SBMLExtension class that is used
+ * to facilitate libSBML plug-ins in the implementation of an SBMLLevel&nbsp;3
+ * package.
  *
  * @class TestPkgNamespaces
  * @sbmlbrief{test} SBMLNamespaces extension.
+ *
+ * @htmlinclude not-sbml-warning.html
  */
 
 

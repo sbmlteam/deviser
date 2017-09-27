@@ -31,10 +31,18 @@
  * ------------------------------------------------------------------------ -->
  *
  * @class TwoatonceExtension
- * @sbmlbrief{twoatonce} Base extension class.
+ * @sbmlbrief{twoatonce} Base extension class for the package.
+ *
+ * @htmlinclude not-sbml-warning.html
+ *
+ * This is the Twoatonce package extension of the SBMLExtension class that is
+ * used to facilitate libSBML plug-ins in the implementation of an
+ * SBMLLevel&nbsp;3 package.
  *
  * @class TwoatoncePkgNamespaces
  * @sbmlbrief{twoatonce} SBMLNamespaces extension.
+ *
+ * @htmlinclude not-sbml-warning.html
  */
 
 

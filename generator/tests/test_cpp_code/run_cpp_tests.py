@@ -850,12 +850,10 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'spatial'
-        num = 25
-        class_name = 'CSGSetOperator'
-        list_of = ''
-        test_case = 'contains list of that has abstracts that are abstract'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        name = 'groups'
+        class_name = 'GroupsExtension'
+        test_case = 'basic extension file'
+        fail += run_ext_test(name, class_name, test_case, 0)
 
 
 

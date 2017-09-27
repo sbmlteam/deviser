@@ -476,10 +476,16 @@ class BaseFile:
         self.write_blank_comment_line()
         self.write_comment_line('@class {0}'.format(self.name))
         if extension:
-            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class'
+            self.write_comment_line('@sbmlbrief{0}{1}{2} Base extension class for the package'
                                     '.'.format(self.open_br,
                                                self.package.lower(),
                                                self.close_br))
+            self.write_blank_comment_line()
+            self.write_comment_line('@htmlinclude not-sbml-warning.html')
+            self.write_blank_comment_line()
+            self.write_comment_line('This is the {0} package extension of the SBMLExtension class '
+                                    'that is used to facilitate libSBML plug-ins in the implementation of an SBML'
+                                    'Level&nbsp;3 package.'.format(strFunctions.upper_first(self.package)))
             self.write_blank_comment_line()
             self.write_comment_line('@class {0}PkgNamespaces'
                                     ''.format(up_package))
@@ -488,6 +494,8 @@ class BaseFile:
                                     ''.format(self.open_br,
                                               self.package.lower(),
                                               self.close_br))
+            self.write_blank_comment_line()
+            self.write_comment_line('@htmlinclude not-sbml-warning.html')
         elif plugin:
             self.write_comment_line('@sbmlbrief{0}{1}{2} Extension of '
                                     '{3}.'.format(self.open_br,
