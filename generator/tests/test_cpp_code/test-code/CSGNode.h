@@ -185,8 +185,8 @@ public:
    * Predicate returning @c true if this abstract "CSGNode" is of type
    * CSGPrimitive
    *
-   * @return @c true if this abstract "CSGNode" is of type CSGPrimitive, @c
-   * false otherwise
+   * @return @c true if this abstract "CSGNode" is of type CSGPrimitive,
+   * @c false otherwise
    */
   virtual bool isCSGPrimitive() const;
 
@@ -195,8 +195,8 @@ public:
    * Predicate returning @c true if this abstract "CSGNode" is of type
    * CSGTranslation
    *
-   * @return @c true if this abstract "CSGNode" is of type CSGTranslation, @c
-   * false otherwise
+   * @return @c true if this abstract "CSGNode" is of type CSGTranslation,
+   * @c false otherwise
    */
   virtual bool isCSGTranslation() const;
 
@@ -205,8 +205,8 @@ public:
    * Predicate returning @c true if this abstract "CSGNode" is of type
    * CSGRotation
    *
-   * @return @c true if this abstract "CSGNode" is of type CSGRotation, @c
-   * false otherwise
+   * @return @c true if this abstract "CSGNode" is of type CSGRotation,
+   * @c false otherwise
    */
   virtual bool isCSGRotation() const;
 
@@ -234,8 +234,8 @@ public:
    * Predicate returning @c true if this abstract "CSGNode" is of type
    * CSGSetOperator
    *
-   * @return @c true if this abstract "CSGNode" is of type CSGSetOperator, @c
-   * false otherwise
+   * @return @c true if this abstract "CSGNode" is of type CSGSetOperator,
+   * @c false otherwise
    */
   virtual bool isCSGSetOperator() const;
 

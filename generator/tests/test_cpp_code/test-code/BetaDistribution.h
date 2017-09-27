@@ -260,8 +260,8 @@ public:
   /**
    * Returns the XML element name of this BetaDistribution object.
    *
-   * For BetaDistribution, the XML element name is always @c
-   * "betaDistribution".
+   * For BetaDistribution, the XML element name is always
+   * @c "betaDistribution".
    *
    * @return the name of this element, i.e. @c "betaDistribution".
    */

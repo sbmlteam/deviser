@@ -463,8 +463,8 @@ public:
   /**
    * Returns the XML element name of this ParametricGeometry object.
    *
-   * For ParametricGeometry, the XML element name is always @c
-   * "parametricGeometry".
+   * For ParametricGeometry, the XML element name is always
+   * @c "parametricGeometry".
    *
    * @return the name of this element, i.e. @c "parametricGeometry".
    */

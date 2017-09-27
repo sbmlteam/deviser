@@ -315,8 +315,8 @@ public:
   /**
    * Returns the XML element name of this ListOfTransitions object.
    *
-   * For ListOfTransitions, the XML element name is always @c
-   * "listOfTransitions".
+   * For ListOfTransitions, the XML element name is always
+   * @c "listOfTransitions".
    *
    * @return the name of this element, i.e. @c "listOfTransitions".
    */

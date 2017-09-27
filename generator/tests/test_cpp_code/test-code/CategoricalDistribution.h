@@ -300,8 +300,8 @@ public:
   /**
    * Returns the XML element name of this CategoricalDistribution object.
    *
-   * For CategoricalDistribution, the XML element name is always @c
-   * "categoricalDistribution".
+   * For CategoricalDistribution, the XML element name is always
+   * @c "categoricalDistribution".
    *
    * @return the name of this element, i.e. @c "categoricalDistribution".
    */

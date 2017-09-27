@@ -201,8 +201,8 @@ public:
   /**
    * Returns the XML element name of this BernoulliDistribution object.
    *
-   * For BernoulliDistribution, the XML element name is always @c
-   * "bernoulliDistribution".
+   * For BernoulliDistribution, the XML element name is always
+   * @c "bernoulliDistribution".
    *
    * @return the name of this element, i.e. @c "bernoulliDistribution".
    */

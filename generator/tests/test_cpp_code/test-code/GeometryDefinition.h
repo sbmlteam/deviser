@@ -282,8 +282,8 @@ public:
   /**
    * Returns the XML element name of this GeometryDefinition object.
    *
-   * For GeometryDefinition, the XML element name is always @c
-   * "geometryDefinition".
+   * For GeometryDefinition, the XML element name is always
+   * @c "geometryDefinition".
    *
    * @return the name of this element, i.e. @c "geometryDefinition".
    */
@@ -1027,8 +1027,8 @@ GeometryDefinition_unsetIsActive(GeometryDefinition_t * gd);
  *
  * @param gd the GeometryDefinition_t structure.
  *
- * @return @c 1 if this GeometryDefinition_t is of type AnalyticGeometry_t, @c
- * 0 otherwise
+ * @return @c 1 if this GeometryDefinition_t is of type AnalyticGeometry_t,
+ * @c 0 otherwise
  *
  * @memberof GeometryDefinition_t
  */

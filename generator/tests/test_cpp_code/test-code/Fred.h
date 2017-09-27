@@ -197,8 +197,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "id" attribute is set.
    *
-   * @return @c true if this Fred's "id" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "id" attribute has been set, otherwise
+   * @c false is returned.
    */
   virtual bool isSetId() const;
 
@@ -206,8 +206,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "bol" attribute is set.
    *
-   * @return @c true if this Fred's "bol" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "bol" attribute has been set, otherwise
+   * @c false is returned.
    */
   bool isSetBol() const;
 
@@ -215,8 +215,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "num" attribute is set.
    *
-   * @return @c true if this Fred's "num" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "num" attribute has been set, otherwise
+   * @c false is returned.
    */
   bool isSetNum() const;
 
@@ -224,8 +224,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "str" attribute is set.
    *
-   * @return @c true if this Fred's "str" attribute has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "str" attribute has been set, otherwise
+   * @c false is returned.
    */
   bool isSetStr() const;
 
@@ -430,8 +430,8 @@ public:
   /**
    * Predicate returning @c true if this Fred's "other" element is set.
    *
-   * @return @c true if this Fred's "other" element has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Fred's "other" element has been set, otherwise
+   * @c false is returned.
    */
   bool isSetOther() const;
 

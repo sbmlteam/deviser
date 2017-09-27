@@ -304,11 +304,11 @@ public:
    * Returns the XML element name of this DiscreteUnivariateDistribution
    * object.
    *
-   * For DiscreteUnivariateDistribution, the XML element name is always @c
-   * "discreteUnivariateDistribution".
+   * For DiscreteUnivariateDistribution, the XML element name is always
+   * @c "discreteUnivariateDistribution".
    *
-   * @return the name of this element, i.e. @c
-   * "discreteUnivariateDistribution".
+   * @return the name of this element, i.e.
+   * @c "discreteUnivariateDistribution".
    */
   virtual const std::string& getElementName() const;
 

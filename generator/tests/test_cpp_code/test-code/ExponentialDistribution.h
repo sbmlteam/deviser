@@ -202,8 +202,8 @@ public:
   /**
    * Returns the XML element name of this ExponentialDistribution object.
    *
-   * For ExponentialDistribution, the XML element name is always @c
-   * "exponentialDistribution".
+   * For ExponentialDistribution, the XML element name is always
+   * @c "exponentialDistribution".
    *
    * @return the name of this element, i.e. @c "exponentialDistribution".
    */

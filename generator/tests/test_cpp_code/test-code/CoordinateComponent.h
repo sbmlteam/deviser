@@ -438,8 +438,8 @@ public:
   /**
    * Returns the XML element name of this CoordinateComponent object.
    *
-   * For CoordinateComponent, the XML element name is always @c
-   * "coordinateComponent".
+   * For CoordinateComponent, the XML element name is always
+   * @c "coordinateComponent".
    *
    * @return the name of this element, i.e. @c "coordinateComponent".
    */

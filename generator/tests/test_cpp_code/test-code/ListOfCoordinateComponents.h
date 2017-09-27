@@ -326,8 +326,8 @@ public:
   /**
    * Returns the XML element name of this ListOfCoordinateComponents object.
    *
-   * For ListOfCoordinateComponents, the XML element name is always @c
-   * "listOfCoordinateComponents".
+   * For ListOfCoordinateComponents, the XML element name is always
+   * @c "listOfCoordinateComponents".
    *
    * @return the name of this element, i.e. @c "listOfCoordinateComponents".
    */

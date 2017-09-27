@@ -368,8 +368,8 @@ public:
   /**
    * Returns the XML element name of this ListOfObjectives object.
    *
-   * For ListOfObjectives, the XML element name is always @c
-   * "listOfObjectives".
+   * For ListOfObjectives, the XML element name is always
+   * @c "listOfObjectives".
    *
    * @return the name of this element, i.e. @c "listOfObjectives".
    */

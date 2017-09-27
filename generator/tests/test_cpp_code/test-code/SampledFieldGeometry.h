@@ -450,8 +450,8 @@ public:
   /**
    * Returns the XML element name of this SampledFieldGeometry object.
    *
-   * For SampledFieldGeometry, the XML element name is always @c
-   * "sampledFieldGeometry".
+   * For SampledFieldGeometry, the XML element name is always
+   * @c "sampledFieldGeometry".
    *
    * @return the name of this element, i.e. @c "sampledFieldGeometry".
    */

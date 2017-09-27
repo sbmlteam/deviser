@@ -407,8 +407,8 @@ public:
   /**
    * Returns the XML element name of this ListOfGeometryDefinitions object.
    *
-   * For ListOfGeometryDefinitions, the XML element name is always @c
-   * "listOfGeometryDefinitions".
+   * For ListOfGeometryDefinitions, the XML element name is always
+   * @c "listOfGeometryDefinitions".
    *
    * @return the name of this element, i.e. @c "listOfGeometryDefinitions".
    */

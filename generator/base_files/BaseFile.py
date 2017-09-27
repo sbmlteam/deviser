@@ -187,6 +187,14 @@ class BaseFile:
                             newline += ' \"'
                             quotes_closed = True
                             reopen_quotes = True
+                        # dont break between @c and true etc
+                        # remove @c and go back a word
+                        if words[i-2] == '@c':
+                            templine = words[0]
+                            for j in range(1,i-2):
+                                templine = templine + ' ' + words[j]
+                            newline = templine
+                            i -= 1
                         lines.append(newline)
                         newline = ''
                         temp = ''

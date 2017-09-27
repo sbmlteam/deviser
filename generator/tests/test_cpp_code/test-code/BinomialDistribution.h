@@ -272,8 +272,8 @@ public:
   /**
    * Returns the XML element name of this BinomialDistribution object.
    *
-   * For BinomialDistribution, the XML element name is always @c
-   * "binomialDistribution".
+   * For BinomialDistribution, the XML element name is always
+   * @c "binomialDistribution".
    *
    * @return the name of this element, i.e. @c "binomialDistribution".
    */

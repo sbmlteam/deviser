@@ -388,8 +388,8 @@ public:
   /**
    * Returns the XML element name of this ListOfFunctionTerms object.
    *
-   * For ListOfFunctionTerms, the XML element name is always @c
-   * "listOfFunctionTerms".
+   * For ListOfFunctionTerms, the XML element name is always
+   * @c "listOfFunctionTerms".
    *
    * @return the name of this element, i.e. @c "listOfFunctionTerms".
    */

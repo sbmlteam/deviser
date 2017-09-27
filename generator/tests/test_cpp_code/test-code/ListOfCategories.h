@@ -315,8 +315,8 @@ public:
   /**
    * Returns the XML element name of this ListOfCategories object.
    *
-   * For ListOfCategories, the XML element name is always @c
-   * "listOfCategories".
+   * For ListOfCategories, the XML element name is always
+   * @c "listOfCategories".
    *
    * @return the name of this element, i.e. @c "listOfCategories".
    */

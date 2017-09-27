@@ -289,8 +289,8 @@ public:
   /**
    * Returns the XML element name of this CSGTransformation object.
    *
-   * For CSGTransformation, the XML element name is always @c
-   * "csgTransformation".
+   * For CSGTransformation, the XML element name is always
+   * @c "csgTransformation".
    *
    * @return the name of this element, i.e. @c "csgTransformation".
    */

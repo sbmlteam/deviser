@@ -351,8 +351,8 @@ public:
   /**
    * Returns the XML element name of this ListOfAnalyticVolumes object.
    *
-   * For ListOfAnalyticVolumes, the XML element name is always @c
-   * "listOfAnalyticVolumes".
+   * For ListOfAnalyticVolumes, the XML element name is always
+   * @c "listOfAnalyticVolumes".
    *
    * @return the name of this element, i.e. @c "listOfAnalyticVolumes".
    */

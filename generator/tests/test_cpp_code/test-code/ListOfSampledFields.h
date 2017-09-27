@@ -317,8 +317,8 @@ public:
   /**
    * Returns the XML element name of this ListOfSampledFields object.
    *
-   * For ListOfSampledFields, the XML element name is always @c
-   * "listOfSampledFields".
+   * For ListOfSampledFields, the XML element name is always
+   * @c "listOfSampledFields".
    *
    * @return the name of this element, i.e. @c "listOfSampledFields".
    */

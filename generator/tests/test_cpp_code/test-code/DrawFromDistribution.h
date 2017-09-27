@@ -532,8 +532,8 @@ public:
   /**
    * Returns the XML element name of this DrawFromDistribution object.
    *
-   * For DrawFromDistribution, the XML element name is always @c
-   * "drawFromDistribution".
+   * For DrawFromDistribution, the XML element name is always
+   * @c "drawFromDistribution".
    *
    * @return the name of this element, i.e. @c "drawFromDistribution".
    */

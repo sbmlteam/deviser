@@ -199,8 +199,8 @@ public:
   /**
    * Predicate returning @c true if this Def's "mess" element is set.
    *
-   * @return @c true if this Def's "mess" element has been set, otherwise @c
-   * false is returned.
+   * @return @c true if this Def's "mess" element has been set, otherwise
+   * @c false is returned.
    */
   bool isSetMess() const;
 

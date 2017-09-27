@@ -355,8 +355,8 @@ public:
   /**
    * Returns the XML element name of this ListOfAssociations object.
    *
-   * For ListOfAssociations, the XML element name is always @c
-   * "listOfAssociations".
+   * For ListOfAssociations, the XML element name is always
+   * @c "listOfAssociations".
    *
    * @return the name of this element, i.e. @c "listOfAssociations".
    */
