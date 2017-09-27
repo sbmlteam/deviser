@@ -1036,13 +1036,13 @@ ArrayChild_unsetUnit(ArrayChild_t * ac);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * ArrayChild_t object have been set.
  *
  * @param ac the ArrayChild_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * ArrayChild_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * ArrayChild_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof ArrayChild_t
  */
@@ -1052,13 +1052,13 @@ ArrayChild_hasRequiredAttributes(const ArrayChild_t * ac);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this ArrayChild_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * ArrayChild_t object have been set.
  *
  * @param ac the ArrayChild_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this ArrayChild_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * ArrayChild_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the ArrayChild_t object are:

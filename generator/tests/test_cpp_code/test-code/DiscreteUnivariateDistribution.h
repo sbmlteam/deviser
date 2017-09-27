@@ -1197,13 +1197,14 @@ DiscreteUnivariateDistribution_isGeometricDistribution(const
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * DiscreteUnivariateDistribution_t object have been set.
  *
  * @param dud the DiscreteUnivariateDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * DiscreteUnivariateDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * DiscreteUnivariateDistribution_t have been set, otherwise @c 0 (false) is
+ * returned.
  *
  * @memberof DiscreteUnivariateDistribution_t
  */
@@ -1214,13 +1215,14 @@ DiscreteUnivariateDistribution_hasRequiredAttributes(const
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * DiscreteUnivariateDistribution_t object have been set.
  *
  * @param dud the DiscreteUnivariateDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * DiscreteUnivariateDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * DiscreteUnivariateDistribution_t have been set, otherwise @c 0 (false) is
+ * returned.
  *
  *
  * @note The required elements for the DiscreteUnivariateDistribution_t object

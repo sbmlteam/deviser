@@ -1270,13 +1270,13 @@ Output_unsetOutputLevel(Output_t * o);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Output_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Output_t object have been set.
  *
  * @param o the Output_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Output_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Output_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the Output_t object are:

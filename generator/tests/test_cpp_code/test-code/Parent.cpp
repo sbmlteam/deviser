@@ -1217,8 +1217,8 @@ Parent_removeSprog(Parent_t* p, unsigned int n)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Parent_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Parent_t object have been set.
  */
 LIBSBML_EXTERN
 int

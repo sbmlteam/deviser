@@ -945,8 +945,8 @@ Boundary_unsetValue(Boundary_t * b)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Boundary_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Boundary_t object have been set.
  */
 LIBSBML_EXTERN
 int

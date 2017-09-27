@@ -1775,13 +1775,13 @@ CSGSetOperator_removeCSGNodeById(CSGSetOperator_t* csgso, const char* sid);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CSGSetOperator_t object have been set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * CSGSetOperator_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * CSGSetOperator_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the CSGSetOperator_t object are:
@@ -1795,13 +1795,13 @@ CSGSetOperator_hasRequiredAttributes(const CSGSetOperator_t * csgso);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CSGSetOperator_t object have been set.
  *
  * @param csgso the CSGSetOperator_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * CSGSetOperator_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * CSGSetOperator_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the CSGSetOperator_t object are:

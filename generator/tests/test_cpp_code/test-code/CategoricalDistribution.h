@@ -1079,13 +1079,13 @@ CategoricalDistribution_removeCategory(CategoricalDistribution_t* cd,
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CategoricalDistribution_t object have been set.
  *
  * @param cd the CategoricalDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * CategoricalDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * CategoricalDistribution_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CategoricalDistribution_t
  */
@@ -1096,13 +1096,13 @@ CategoricalDistribution_hasRequiredAttributes(const CategoricalDistribution_t *
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CategoricalDistribution_t object have been set.
  *
  * @param cd the CategoricalDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * CategoricalDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * CategoricalDistribution_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the CategoricalDistribution_t object are:

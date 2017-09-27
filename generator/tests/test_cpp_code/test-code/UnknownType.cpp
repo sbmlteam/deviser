@@ -699,7 +699,7 @@ UnknownType_unsetAttribue(UnknownType_t * ut)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * UnknownType_t object have been set.
  */
 LIBSBML_EXTERN

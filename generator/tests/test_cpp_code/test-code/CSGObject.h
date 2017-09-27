@@ -1394,13 +1394,13 @@ CSGObject_unsetCSGNode(CSGObject_t * csgo);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this CSGObject_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * CSGObject_t object have been set.
  *
  * @param csgo the CSGObject_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * CSGObject_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * CSGObject_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the CSGObject_t object are:
@@ -1415,13 +1415,13 @@ CSGObject_hasRequiredAttributes(const CSGObject_t * csgo);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this CSGObject_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * CSGObject_t object have been set.
  *
  * @param csgo the CSGObject_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this CSGObject_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * CSGObject_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the CSGObject_t object are:

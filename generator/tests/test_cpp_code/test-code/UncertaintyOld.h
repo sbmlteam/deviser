@@ -1087,13 +1087,13 @@ UncertaintyOld_unsetUncertML(UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * UncertaintyOld_t object have been set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * UncertaintyOld_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * UncertaintyOld_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof UncertaintyOld_t
  */
@@ -1103,13 +1103,13 @@ UncertaintyOld_hasRequiredAttributes(const UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * UncertaintyOld_t object have been set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * UncertaintyOld_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * UncertaintyOld_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the UncertaintyOld_t object are:

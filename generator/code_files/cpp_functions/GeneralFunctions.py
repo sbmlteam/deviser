@@ -134,8 +134,8 @@ class GeneralFunctions():
             self.struct_name = self.object_name
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         if self.is_cpp_api is False:
-            self.true = '@c 1'
-            self.false = '@c 0'
+            self.true = '@c 1 (true)'
+            self.false = '@c 0 (false)'
         else:
             self.true = '@c true'
             self.false = '@c false'

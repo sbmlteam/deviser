@@ -721,13 +721,13 @@ UnknownType_unsetAttribue(UnknownType_t * ut);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * UnknownType_t object have been set.
  *
  * @param ut the UnknownType_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * UnknownType_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * UnknownType_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof UnknownType_t
  */

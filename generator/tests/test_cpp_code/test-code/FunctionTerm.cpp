@@ -1021,7 +1021,7 @@ FunctionTerm_unsetMath(FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * FunctionTerm_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1033,7 +1033,7 @@ FunctionTerm_hasRequiredAttributes(const FunctionTerm_t * ft)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * FunctionTerm_t object have been set.
  */
 LIBSBML_EXTERN

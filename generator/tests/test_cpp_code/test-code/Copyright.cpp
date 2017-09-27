@@ -748,8 +748,8 @@ Copyright_unsetId(Copyright_t * c)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Copyright_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Copyright_t object have been set.
  */
 LIBSBML_EXTERN
 int

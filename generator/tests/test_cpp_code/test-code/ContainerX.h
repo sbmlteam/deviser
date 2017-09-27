@@ -1095,13 +1095,13 @@ ContainerX_removeFredById(ContainerX_t* cx, const char* sid);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this ContainerX_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * ContainerX_t object have been set.
  *
  * @param cx the ContainerX_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this ContainerX_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * ContainerX_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the ContainerX_t object are:

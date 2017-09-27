@@ -1388,13 +1388,13 @@ Compartment_unsetCompartmentType(Compartment_t * c);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * Compartment_t object have been set.
  *
  * @param c the Compartment_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * Compartment_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Compartment_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the Compartment_t object are:

@@ -4947,7 +4947,7 @@ MyRequiredClass_unsetArrayInt(MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * MyRequiredClass_t object have been set.
  */
 LIBSBML_EXTERN

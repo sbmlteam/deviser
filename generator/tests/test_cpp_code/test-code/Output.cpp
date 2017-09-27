@@ -1510,8 +1510,8 @@ Output_unsetOutputLevel(Output_t * o)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Output_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Output_t object have been set.
  */
 LIBSBML_EXTERN
 int

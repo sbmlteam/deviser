@@ -707,7 +707,7 @@ MySEDClass_unsetId(MySEDClass_t * msedc)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * MySEDClass_t object have been set.
  */
 LIBSEDML_EXTERN

@@ -1395,8 +1395,8 @@ BBB_removeAnotherById(BBB_t* bbb, const char* sid)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this BBB_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * BBB_t object have been set.
  */
 LIBSBML_EXTERN
 int
@@ -1407,8 +1407,8 @@ BBB_hasRequiredAttributes(const BBB_t * bbb)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this BBB_t object
- * have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this BBB_t
+ * object have been set.
  */
 LIBSBML_EXTERN
 int

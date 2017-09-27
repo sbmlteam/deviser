@@ -1387,7 +1387,7 @@ SampledFieldGeometry_removeSampledVolumeById(SampledFieldGeometry_t* sfg,
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SampledFieldGeometry_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1399,7 +1399,7 @@ SampledFieldGeometry_hasRequiredAttributes(const SampledFieldGeometry_t * sfg)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * SampledFieldGeometry_t object have been set.
  */
 LIBSBML_EXTERN

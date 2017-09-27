@@ -1013,8 +1013,8 @@ Container_removeMyLoTestById(Container_t* c, const char* sid)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Container_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Container_t object have been set.
  */
 LIBSBML_EXTERN
 int

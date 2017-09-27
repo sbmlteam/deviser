@@ -1376,13 +1376,13 @@ SampledFieldGeometry_removeSampledVolumeById(SampledFieldGeometry_t* sfg,
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SampledFieldGeometry_t object have been set.
  *
  * @param sfg the SampledFieldGeometry_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SampledFieldGeometry_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SampledFieldGeometry_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the SampledFieldGeometry_t object are:
@@ -1396,13 +1396,13 @@ SampledFieldGeometry_hasRequiredAttributes(const SampledFieldGeometry_t * sfg);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * SampledFieldGeometry_t object have been set.
  *
  * @param sfg the SampledFieldGeometry_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * SampledFieldGeometry_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * SampledFieldGeometry_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the SampledFieldGeometry_t object are:

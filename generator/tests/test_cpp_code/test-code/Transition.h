@@ -2267,13 +2267,13 @@ Transition_unsetDefaultTerm(Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * Transition_t object have been set.
  *
  * @param t the Transition_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * Transition_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Transition_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Transition_t
  */
@@ -2283,13 +2283,13 @@ Transition_hasRequiredAttributes(const Transition_t * t);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this Transition_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Transition_t object have been set.
  *
  * @param t the Transition_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this Transition_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * Transition_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the Transition_t object are:

@@ -1710,13 +1710,13 @@ Event_removeEventAssignment(Event_t* e, unsigned int n);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Event_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Event_t object have been set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Event_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Event_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the Event_t object are:
@@ -1730,13 +1730,13 @@ Event_hasRequiredAttributes(const Event_t * e);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this Event_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Event_t object have been set.
  *
  * @param e the Event_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this Event_t have
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * Event_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the Event_t object are:

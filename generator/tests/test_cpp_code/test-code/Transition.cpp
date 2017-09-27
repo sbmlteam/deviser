@@ -2238,7 +2238,7 @@ Transition_unsetDefaultTerm(Transition_t * t)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * Transition_t object have been set.
  */
 LIBSBML_EXTERN
@@ -2250,8 +2250,8 @@ Transition_hasRequiredAttributes(const Transition_t * t)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Transition_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Transition_t object have been set.
  */
 LIBSBML_EXTERN
 int

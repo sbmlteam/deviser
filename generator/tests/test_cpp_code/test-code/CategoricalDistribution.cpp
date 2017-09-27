@@ -1100,7 +1100,7 @@ CategoricalDistribution_removeCategory(CategoricalDistribution_t* cd,
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CategoricalDistribution_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1113,7 +1113,7 @@ CategoricalDistribution_hasRequiredAttributes(const CategoricalDistribution_t *
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CategoricalDistribution_t object have been set.
  */
 LIBSBML_EXTERN

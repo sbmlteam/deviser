@@ -810,8 +810,8 @@ Abc_unsetLetter(Abc_t * a)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Abc_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Abc_t object have been set.
  */
 LIBSBML_EXTERN
 int

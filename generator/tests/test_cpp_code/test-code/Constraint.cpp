@@ -841,8 +841,8 @@ Constraint_unsetMessage(Constraint_t * c)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Constraint_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Constraint_t object have been set.
  */
 LIBSBML_EXTERN
 int

@@ -1885,8 +1885,8 @@ Uncertainty_unsetDistribution(Uncertainty_t * u)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Uncertainty_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Uncertainty_t object have been set.
  */
 LIBSBML_EXTERN
 int

@@ -724,13 +724,13 @@ Unit_unsetUnit(Unit_t * u);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Unit_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Unit_t object have been set.
  *
  * @param u the Unit_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Unit_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Unit_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Unit_t
  */

@@ -1477,7 +1477,7 @@ CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CSGTransformation_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1489,7 +1489,7 @@ CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CSGTransformation_t object have been set.
  */
 LIBSBML_EXTERN

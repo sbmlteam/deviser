@@ -741,8 +741,8 @@ MyBase_unsetId(MyBase_t * mb)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this MyBase_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * MyBase_t object have been set.
  */
 LIBSBML_EXTERN
 int

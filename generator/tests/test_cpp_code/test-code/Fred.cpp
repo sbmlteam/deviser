@@ -2729,8 +2729,8 @@ Fred_removeOtherLO(Fred_t* f, unsigned int n)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Fred_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Fred_t object have been set.
  */
 LIBSBML_EXTERN
 int
@@ -2741,8 +2741,8 @@ Fred_hasRequiredAttributes(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Fred_t object
- * have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this Fred_t
+ * object have been set.
  */
 LIBSBML_EXTERN
 int

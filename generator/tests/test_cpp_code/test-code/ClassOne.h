@@ -989,13 +989,13 @@ ClassOne_unsetAtt2(ClassOne_t * co);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this ClassOne_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * ClassOne_t object have been set.
  *
  * @param co the ClassOne_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this ClassOne_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * ClassOne_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the ClassOne_t object are:

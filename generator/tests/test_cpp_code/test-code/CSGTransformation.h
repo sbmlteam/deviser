@@ -1159,13 +1159,13 @@ CSGTransformation_isCSGHomogeneousTransformation(const CSGTransformation_t *
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CSGTransformation_t object have been set.
  *
  * @param csgt the CSGTransformation_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * CSGTransformation_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof CSGTransformation_t
  */
@@ -1175,13 +1175,13 @@ CSGTransformation_hasRequiredAttributes(const CSGTransformation_t * csgt);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CSGTransformation_t object have been set.
  *
  * @param csgt the CSGTransformation_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * CSGTransformation_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * CSGTransformation_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the CSGTransformation_t object are:

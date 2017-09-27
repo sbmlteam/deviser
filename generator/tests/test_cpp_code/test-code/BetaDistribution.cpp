@@ -1373,7 +1373,7 @@ BetaDistribution_unsetBeta(BetaDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * BetaDistribution_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1385,7 +1385,7 @@ BetaDistribution_hasRequiredAttributes(const BetaDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * BetaDistribution_t object have been set.
  */
 LIBSBML_EXTERN

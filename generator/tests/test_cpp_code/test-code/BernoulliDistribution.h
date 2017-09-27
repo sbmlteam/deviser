@@ -939,13 +939,13 @@ BernoulliDistribution_unsetProb(BernoulliDistribution_t * bd);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * BernoulliDistribution_t object have been set.
  *
  * @param bd the BernoulliDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * BernoulliDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * BernoulliDistribution_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof BernoulliDistribution_t
  */
@@ -956,13 +956,13 @@ BernoulliDistribution_hasRequiredAttributes(const BernoulliDistribution_t *
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * BernoulliDistribution_t object have been set.
  *
  * @param bd the BernoulliDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * BernoulliDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * BernoulliDistribution_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the BernoulliDistribution_t object are:

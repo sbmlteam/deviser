@@ -1951,13 +1951,13 @@ SampledField_unsetSamplesLength(SampledField_t * sf);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SampledField_t object have been set.
  *
  * @param sf the SampledField_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SampledField_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SampledField_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the SampledField_t object are:

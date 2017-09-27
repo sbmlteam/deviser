@@ -953,8 +953,8 @@ Def_unsetMess(Def_t * d)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this Def_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Def_t object have been set.
  */
 LIBSBML_EXTERN
 int
@@ -965,8 +965,8 @@ Def_hasRequiredAttributes(const Def_t * d)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this Def_t object
- * have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this Def_t
+ * object have been set.
  */
 LIBSBML_EXTERN
 int

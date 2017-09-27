@@ -1171,13 +1171,13 @@ Category_unsetValue(Category_t * c);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Category_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Category_t object have been set.
  *
  * @param c the Category_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Category_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Category_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Category_t
  */
@@ -1187,13 +1187,13 @@ Category_hasRequiredAttributes(const Category_t * c);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this Category_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * Category_t object have been set.
  *
  * @param c the Category_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this Category_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * Category_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the Category_t object are:

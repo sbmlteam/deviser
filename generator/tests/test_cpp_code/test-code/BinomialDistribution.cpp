@@ -1416,7 +1416,7 @@ BinomialDistribution_unsetProbabilityOfSuccess(BinomialDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * BinomialDistribution_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1428,7 +1428,7 @@ BinomialDistribution_hasRequiredAttributes(const BinomialDistribution_t * bd)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * BinomialDistribution_t object have been set.
  */
 LIBSBML_EXTERN

@@ -1632,7 +1632,7 @@ MixedGeometry_removeOrdinalMapping(MixedGeometry_t* mg, unsigned int n)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * MixedGeometry_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1644,7 +1644,7 @@ MixedGeometry_hasRequiredAttributes(const MixedGeometry_t * mg)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * MixedGeometry_t object have been set.
  */
 LIBSBML_EXTERN

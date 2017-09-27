@@ -1059,13 +1059,13 @@ Member_unsetMetaIdRef(Member_t * m);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Member_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Member_t object have been set.
  *
  * @param m the Member_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Member_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Member_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Member_t
  */

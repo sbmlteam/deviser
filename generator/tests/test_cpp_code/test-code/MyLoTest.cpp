@@ -770,8 +770,8 @@ MyLoTest_unsetId(MyLoTest_t * mlt)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this MyLoTest_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * MyLoTest_t object have been set.
  */
 LIBSBML_EXTERN
 int

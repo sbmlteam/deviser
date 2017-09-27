@@ -1978,7 +1978,7 @@ DrawFromDistribution_removeDistribInputById(DrawFromDistribution_t* dfd,
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * DrawFromDistribution_t object have been set.
  */
 LIBSBML_EXTERN

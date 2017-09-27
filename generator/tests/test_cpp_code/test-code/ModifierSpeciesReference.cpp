@@ -645,7 +645,7 @@ ModifierSpeciesReference_free(ModifierSpeciesReference_t* msr)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * ModifierSpeciesReference_t object have been set.
  */
 LIBSBML_EXTERN

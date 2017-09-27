@@ -725,13 +725,13 @@ MyLoTest_unsetId(MyLoTest_t * mlt);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this MyLoTest_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * MyLoTest_t object have been set.
  *
  * @param mlt the MyLoTest_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this MyLoTest_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * MyLoTest_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyLoTest_t
  */

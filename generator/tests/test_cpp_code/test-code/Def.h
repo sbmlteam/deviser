@@ -875,13 +875,13 @@ Def_unsetMess(Def_t * d);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this Def_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * Def_t object have been set.
  *
  * @param d the Def_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this Def_t have
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * Def_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof Def_t
  */
@@ -891,13 +891,13 @@ Def_hasRequiredAttributes(const Def_t * d);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this Def_t object
- * have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this Def_t
+ * object have been set.
  *
  * @param d the Def_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this Def_t have
- * been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this Def_t
+ * have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the Def_t object are:

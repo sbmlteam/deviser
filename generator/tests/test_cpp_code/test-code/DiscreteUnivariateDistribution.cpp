@@ -1497,7 +1497,7 @@ DiscreteUnivariateDistribution_isGeometricDistribution(const
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * DiscreteUnivariateDistribution_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1510,7 +1510,7 @@ DiscreteUnivariateDistribution_hasRequiredAttributes(const
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * DiscreteUnivariateDistribution_t object have been set.
  */
 LIBSBML_EXTERN

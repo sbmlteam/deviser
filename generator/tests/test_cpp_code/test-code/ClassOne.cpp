@@ -1217,8 +1217,8 @@ ClassOne_unsetAtt2(ClassOne_t * co)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this ClassOne_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * ClassOne_t object have been set.
  */
 LIBSBML_EXTERN
 int

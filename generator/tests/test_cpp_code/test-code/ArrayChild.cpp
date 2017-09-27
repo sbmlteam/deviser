@@ -1244,7 +1244,7 @@ ArrayChild_unsetUnit(ArrayChild_t * ac)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * ArrayChild_t object have been set.
  */
 LIBSBML_EXTERN
@@ -1256,8 +1256,8 @@ ArrayChild_hasRequiredAttributes(const ArrayChild_t * ac)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this ArrayChild_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * ArrayChild_t object have been set.
  */
 LIBSBML_EXTERN
 int

@@ -1995,7 +1995,7 @@ CSGSetOperator_removeCSGNodeById(CSGSetOperator_t* csgso, const char* sid)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * CSGSetOperator_t object have been set.
  */
 LIBSBML_EXTERN
@@ -2008,7 +2008,7 @@ CSGSetOperator_hasRequiredAttributes(const CSGSetOperator_t * csgso)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * CSGSetOperator_t object have been set.
  */
 LIBSBML_EXTERN

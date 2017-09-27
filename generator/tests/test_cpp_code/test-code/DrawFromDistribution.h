@@ -1574,13 +1574,13 @@ DrawFromDistribution_removeDistribInputById(DrawFromDistribution_t* dfd,
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this
+ * Predicate returning @c 1 (true) if all the required elements for this
  * DrawFromDistribution_t object have been set.
  *
  * @param dfd the DrawFromDistribution_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this
- * DrawFromDistribution_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * DrawFromDistribution_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the DrawFromDistribution_t object are:

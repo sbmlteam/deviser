@@ -1158,13 +1158,13 @@ FbcAnd_removeAssociation(FbcAnd_t* fa, unsigned int n);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this FbcAnd_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * FbcAnd_t object have been set.
  *
  * @param fa the FbcAnd_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this FbcAnd_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * FbcAnd_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof FbcAnd_t
  */
@@ -1174,13 +1174,13 @@ FbcAnd_hasRequiredAttributes(const FbcAnd_t * fa);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this FbcAnd_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * FbcAnd_t object have been set.
  *
  * @param fa the FbcAnd_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this FbcAnd_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * FbcAnd_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the FbcAnd_t object are:
