@@ -173,8 +173,8 @@ public:
    * @param sid a string representing the identifier of the ClassTwo to
    * retrieve.
    *
-   * @return the ClassTwo in this ListOfClassTwos with the given id or NULL if
-   * no such ClassTwo exists.
+   * @return the ClassTwo in this ListOfClassTwos with the given @p sid or
+   * @c NULL if no such ClassTwo exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -194,8 +194,8 @@ public:
    * @param sid a string representing the identifier of the ClassTwo to
    * retrieve.
    *
-   * @return the ClassTwo in this ListOfClassTwos with the given id or NULL if
-   * no such ClassTwo exists.
+   * @return the ClassTwo in this ListOfClassTwos with the given @p sid or
+   * @c NULL if no such ClassTwo exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -441,8 +441,8 @@ ListOfClassTwos_getClassTwo(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the ClassTwo_t to
  * retrieve.
  *
- * @return the ClassTwo_t in this ListOf_t with the given id or NULL if no such
- * ClassTwo_t exists.
+ * @return the ClassTwo_t in this ListOf_t with the given @p sid or @c NULL if
+ * no such ClassTwo_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

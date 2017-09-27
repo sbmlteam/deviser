@@ -170,8 +170,8 @@ public:
    *
    * @param sid a string representing the identifier of the Child to retrieve.
    *
-   * @return the Child in this ListOfChildren with the given id or NULL if no
-   * such Child exists.
+   * @return the Child in this ListOfChildren with the given @p sid or @c NULL
+   * if no such Child exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -190,8 +190,8 @@ public:
    *
    * @param sid a string representing the identifier of the Child to retrieve.
    *
-   * @return the Child in this ListOfChildren with the given id or NULL if no
-   * such Child exists.
+   * @return the Child in this ListOfChildren with the given @p sid or @c NULL
+   * if no such Child exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -435,8 +435,8 @@ ListOfChildren_getChild(ListOf_t* lo, unsigned int n);
  *
  * @param sid a string representing the identifier of the Child_t to retrieve.
  *
- * @return the Child_t in this ListOf_t with the given id or NULL if no such
- * Child_t exists.
+ * @return the Child_t in this ListOf_t with the given @p sid or @c NULL if no
+ * such Child_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

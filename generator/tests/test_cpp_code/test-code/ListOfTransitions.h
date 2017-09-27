@@ -173,8 +173,8 @@ public:
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this ListOfTransitions with the given id or NULL
-   * if no such Transition exists.
+   * @return the Transition in this ListOfTransitions with the given @p sid or
+   * @c NULL if no such Transition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -194,8 +194,8 @@ public:
    * @param sid a string representing the identifier of the Transition to
    * retrieve.
    *
-   * @return the Transition in this ListOfTransitions with the given id or NULL
-   * if no such Transition exists.
+   * @return the Transition in this ListOfTransitions with the given @p sid or
+   * @c NULL if no such Transition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -444,8 +444,8 @@ ListOfTransitions_getTransition(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the Transition_t to
  * retrieve.
  *
- * @return the Transition_t in this ListOf_t with the given id or NULL if no
- * such Transition_t exists.
+ * @return the Transition_t in this ListOf_t with the given @p sid or @c NULL
+ * if no such Transition_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

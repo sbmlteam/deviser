@@ -175,8 +175,8 @@ public:
    * @param sid a string representing the identifier of the SampledField to
    * retrieve.
    *
-   * @return the SampledField in this ListOfSampledFields with the given id or
-   * NULL if no such SampledField exists.
+   * @return the SampledField in this ListOfSampledFields with the given @p sid
+   * or @c NULL if no such SampledField exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -196,8 +196,8 @@ public:
    * @param sid a string representing the identifier of the SampledField to
    * retrieve.
    *
-   * @return the SampledField in this ListOfSampledFields with the given id or
-   * NULL if no such SampledField exists.
+   * @return the SampledField in this ListOfSampledFields with the given @p sid
+   * or @c NULL if no such SampledField exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -446,8 +446,8 @@ ListOfSampledFields_getSampledField(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the SampledField_t to
  * retrieve.
  *
- * @return the SampledField_t in this ListOf_t with the given id or NULL if no
- * such SampledField_t exists.
+ * @return the SampledField_t in this ListOf_t with the given @p sid or @c NULL
+ * if no such SampledField_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

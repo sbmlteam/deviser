@@ -216,7 +216,7 @@ public:
    * retrieve.
    *
    * @return the MyLoTest in the ListOfMyLoTests within this Container with the
-   * given id or NULL if no such MyLoTest exists.
+   * given @p sid or @c NULL if no such MyLoTest exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -237,7 +237,7 @@ public:
    * retrieve.
    *
    * @return the MyLoTest in the ListOfMyLoTests within this Container with the
-   * given id or NULL if no such MyLoTest exists.
+   * given @p sid or @c NULL if no such MyLoTest exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -998,7 +998,7 @@ Container_getMyLoTest(Container_t* c, unsigned int n);
  * retrieve.
  *
  * @return the MyLoTest_t in the ListOfMyLoTests within this Container with the
- * given id or NULL if no such MyLoTest_t exists.
+ * given @p sid or @c NULL if no such MyLoTest_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -170,8 +170,8 @@ public:
    *
    * @param sid a string representing the identifier of the Output to retrieve.
    *
-   * @return the Output in this ListOfOutputs with the given id or NULL if no
-   * such Output exists.
+   * @return the Output in this ListOfOutputs with the given @p sid or @c NULL
+   * if no such Output exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -190,8 +190,8 @@ public:
    *
    * @param sid a string representing the identifier of the Output to retrieve.
    *
-   * @return the Output in this ListOfOutputs with the given id or NULL if no
-   * such Output exists.
+   * @return the Output in this ListOfOutputs with the given @p sid or @c NULL
+   * if no such Output exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -464,8 +464,8 @@ ListOfOutputs_getOutput(ListOf_t* lo, unsigned int n);
  *
  * @param sid a string representing the identifier of the Output_t to retrieve.
  *
- * @return the Output_t in this ListOf_t with the given id or NULL if no such
- * Output_t exists.
+ * @return the Output_t in this ListOf_t with the given @p sid or @c NULL if no
+ * such Output_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

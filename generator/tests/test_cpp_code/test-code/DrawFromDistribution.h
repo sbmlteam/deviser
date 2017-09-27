@@ -389,8 +389,8 @@ public:
    * retrieve.
    *
    * @return the DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution with the given id or NULL if no such DistribInput
-   * exists.
+   * DrawFromDistribution with the given @p sid or @c NULL if no such
+   * DistribInput exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -411,8 +411,8 @@ public:
    * retrieve.
    *
    * @return the DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution with the given id or NULL if no such DistribInput
-   * exists.
+   * DrawFromDistribution with the given @p sid or @c NULL if no such
+   * DistribInput exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1460,8 +1460,8 @@ DrawFromDistribution_getDistribInput(DrawFromDistribution_t* dfd,
  * retrieve.
  *
  * @return the DistribInput_t in the ListOfDistribInputs within this
- * DrawFromDistribution with the given id or NULL if no such DistribInput_t
- * exists.
+ * DrawFromDistribution with the given @p sid or @c NULL if no such
+ * DistribInput_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

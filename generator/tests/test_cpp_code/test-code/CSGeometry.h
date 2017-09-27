@@ -216,7 +216,7 @@ public:
    * retrieve.
    *
    * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
-   * the given id or NULL if no such CSGObject exists.
+   * the given @p sid or @c NULL if no such CSGObject exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -237,7 +237,7 @@ public:
    * retrieve.
    *
    * @return the CSGObject in the ListOfCSGObjects within this CSGeometry with
-   * the given id or NULL if no such CSGObject exists.
+   * the given @p sid or @c NULL if no such CSGObject exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1075,7 +1075,7 @@ CSGeometry_getCSGObject(CSGeometry_t* csg, unsigned int n);
  * retrieve.
  *
  * @return the CSGObject_t in the ListOfCSGObjects within this CSGeometry with
- * the given id or NULL if no such CSGObject_t exists.
+ * the given @p sid or @c NULL if no such CSGObject_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

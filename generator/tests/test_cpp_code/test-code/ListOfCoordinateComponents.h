@@ -179,7 +179,7 @@ public:
    * to retrieve.
    *
    * @return the CoordinateComponent in this ListOfCoordinateComponents with
-   * the given id or NULL if no such CoordinateComponent exists.
+   * the given @p sid or @c NULL if no such CoordinateComponent exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -201,7 +201,7 @@ public:
    * to retrieve.
    *
    * @return the CoordinateComponent in this ListOfCoordinateComponents with
-   * the given id or NULL if no such CoordinateComponent exists.
+   * the given @p sid or @c NULL if no such CoordinateComponent exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -456,8 +456,8 @@ ListOfCoordinateComponents_getCoordinateComponent(ListOf_t* lo,
  * @param sid a string representing the identifier of the CoordinateComponent_t
  * to retrieve.
  *
- * @return the CoordinateComponent_t in this ListOf_t with the given id or NULL
- * if no such CoordinateComponent_t exists.
+ * @return the CoordinateComponent_t in this ListOf_t with the given @p sid or
+ * @c NULL if no such CoordinateComponent_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

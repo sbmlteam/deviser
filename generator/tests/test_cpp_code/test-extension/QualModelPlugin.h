@@ -206,8 +206,8 @@ public:
    * to retrieve.
    *
    * @return the QualitativeSpecies in the ListOfQualitativeSpecies within this
-   * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
-   * exists.
+   * QualModelPlugin with the given @p sid or @c NULL if no such
+   * QualitativeSpecies exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -228,8 +228,8 @@ public:
    * to retrieve.
    *
    * @return the QualitativeSpecies in the ListOfQualitativeSpecies within this
-   * QualModelPlugin with the given id or NULL if no such QualitativeSpecies
-   * exists.
+   * QualModelPlugin with the given @p sid or @c NULL if no such
+   * QualitativeSpecies exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -464,7 +464,8 @@ public:
    * retrieve.
    *
    * @return the Transition in the ListOfTransitions within this
-   * QualModelPlugin with the given id or NULL if no such Transition exists.
+   * QualModelPlugin with the given @p sid or @c NULL if no such Transition
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -485,7 +486,8 @@ public:
    * retrieve.
    *
    * @return the Transition in the ListOfTransitions within this
-   * QualModelPlugin with the given id or NULL if no such Transition exists.
+   * QualModelPlugin with the given @p sid or @c NULL if no such Transition
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1199,8 +1201,8 @@ QualModelPlugin_getQualitativeSpecies(QualModelPlugin_t* qmp, unsigned int n);
  * to retrieve.
  *
  * @return the QualitativeSpecies_t in the ListOfQualitativeSpecies within this
- * QualModelPlugin with the given id or NULL if no such QualitativeSpecies_t
- * exists.
+ * QualModelPlugin with the given @p sid or @c NULL if no such
+ * QualitativeSpecies_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1391,7 +1393,8 @@ QualModelPlugin_getTransition(QualModelPlugin_t* qmp, unsigned int n);
  * retrieve.
  *
  * @return the Transition_t in the ListOfTransitions within this
- * QualModelPlugin with the given id or NULL if no such Transition_t exists.
+ * QualModelPlugin with the given @p sid or @c NULL if no such Transition_t
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

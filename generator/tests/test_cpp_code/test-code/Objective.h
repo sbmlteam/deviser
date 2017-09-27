@@ -378,7 +378,8 @@ public:
    * retrieve.
    *
    * @return the FluxObjective in the ListOfFluxObjectives within this
-   * Objective with the given id or NULL if no such FluxObjective exists.
+   * Objective with the given @p sid or @c NULL if no such FluxObjective
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -399,7 +400,8 @@ public:
    * retrieve.
    *
    * @return the FluxObjective in the ListOfFluxObjectives within this
-   * Objective with the given id or NULL if no such FluxObjective exists.
+   * Objective with the given @p sid or @c NULL if no such FluxObjective
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1546,7 +1548,8 @@ Objective_getFluxObjective(Objective_t* o, unsigned int n);
  * retrieve.
  *
  * @return the FluxObjective_t in the ListOfFluxObjectives within this
- * Objective with the given id or NULL if no such FluxObjective_t exists.
+ * Objective with the given @p sid or @c NULL if no such FluxObjective_t
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

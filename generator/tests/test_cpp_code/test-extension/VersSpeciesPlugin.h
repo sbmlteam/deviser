@@ -469,7 +469,7 @@ public:
    * retrieve.
    *
    * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
-   * with the given id or NULL if no such Another exists.
+   * with the given @p sid or @c NULL if no such Another exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -490,7 +490,7 @@ public:
    * retrieve.
    *
    * @return the Another in the ListOfAnothers within this VersSpeciesPlugin
-   * with the given id or NULL if no such Another exists.
+   * with the given @p sid or @c NULL if no such Another exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1288,7 +1288,7 @@ VersSpeciesPlugin_getAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
  * retrieve.
  *
  * @return the Another_t in the ListOfAnothers within this VersSpeciesPlugin
- * with the given id or NULL if no such Another_t exists.
+ * with the given @p sid or @c NULL if no such Another_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -301,7 +301,7 @@ public:
    * @param sid a string representing the identifier of the Input to retrieve.
    *
    * @return the Input in the ListOfInputs within this Transition with the
-   * given id or NULL if no such Input exists.
+   * given @p sid or @c NULL if no such Input exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -321,7 +321,7 @@ public:
    * @param sid a string representing the identifier of the Input to retrieve.
    *
    * @return the Input in the ListOfInputs within this Transition with the
-   * given id or NULL if no such Input exists.
+   * given @p sid or @c NULL if no such Input exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -545,7 +545,7 @@ public:
    * @param sid a string representing the identifier of the Output to retrieve.
    *
    * @return the Output in the ListOfOutputs within this Transition with the
-   * given id or NULL if no such Output exists.
+   * given @p sid or @c NULL if no such Output exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -565,7 +565,7 @@ public:
    * @param sid a string representing the identifier of the Output to retrieve.
    *
    * @return the Output in the ListOfOutputs within this Transition with the
-   * given id or NULL if no such Output exists.
+   * given @p sid or @c NULL if no such Output exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1762,7 +1762,7 @@ Transition_getInput(Transition_t* t, unsigned int n);
  * @param sid a string representing the identifier of the Input_t to retrieve.
  *
  * @return the Input_t in the ListOfInputs within this Transition with the
- * given id or NULL if no such Input_t exists.
+ * given @p sid or @c NULL if no such Input_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1936,7 +1936,7 @@ Transition_getOutput(Transition_t* t, unsigned int n);
  * @param sid a string representing the identifier of the Output_t to retrieve.
  *
  * @return the Output_t in the ListOfOutputs within this Transition with the
- * given id or NULL if no such Output_t exists.
+ * given @p sid or @c NULL if no such Output_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

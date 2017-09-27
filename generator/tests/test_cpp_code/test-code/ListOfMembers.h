@@ -262,8 +262,8 @@ public:
    *
    * @param sid a string representing the identifier of the Member to retrieve.
    *
-   * @return the Member in this ListOfMembers with the given id or NULL if no
-   * such Member exists.
+   * @return the Member in this ListOfMembers with the given @p sid or @c NULL
+   * if no such Member exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -282,8 +282,8 @@ public:
    *
    * @param sid a string representing the identifier of the Member to retrieve.
    *
-   * @return the Member in this ListOfMembers with the given id or NULL if no
-   * such Member exists.
+   * @return the Member in this ListOfMembers with the given @p sid or @c NULL
+   * if no such Member exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -741,8 +741,8 @@ ListOfMembers_getMember(ListOf_t* lo, unsigned int n);
  *
  * @param sid a string representing the identifier of the Member_t to retrieve.
  *
- * @return the Member_t in this ListOf_t with the given id or NULL if no such
- * Member_t exists.
+ * @return the Member_t in this ListOf_t with the given @p sid or @c NULL if no
+ * such Member_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

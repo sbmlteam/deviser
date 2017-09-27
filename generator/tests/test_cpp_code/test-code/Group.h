@@ -370,7 +370,7 @@ public:
    * @param sid a string representing the identifier of the Member to retrieve.
    *
    * @return the Member in the ListOfMembers within this Group with the given
-   * id or NULL if no such Member exists.
+   * @p sid or @c NULL if no such Member exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -390,7 +390,7 @@ public:
    * @param sid a string representing the identifier of the Member to retrieve.
    *
    * @return the Member in the ListOfMembers within this Group with the given
-   * id or NULL if no such Member exists.
+   * @p sid or @c NULL if no such Member exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1477,7 +1477,7 @@ Group_getMember(Group_t* g, unsigned int n);
  * @param sid a string representing the identifier of the Member_t to retrieve.
  *
  * @return the Member_t in the ListOfMembers within this Group with the given
- * id or NULL if no such Member_t exists.
+ * @p sid or @c NULL if no such Member_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

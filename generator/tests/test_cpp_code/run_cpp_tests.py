@@ -850,10 +850,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'twoAtOnce'
-        class_name = 'TwoatonceExtension'
-        test_case = 'basic extension file with SBasePlugin'
-        fail += run_ext_test(name, class_name, test_case, 0)
+        name = 'groups'
+        num = 0
+        class_name = 'GroupsModelPlugin'
+        test_case = 'basic plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
 
 
 

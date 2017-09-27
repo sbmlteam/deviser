@@ -177,8 +177,8 @@ public:
    * @param sid a string representing the identifier of the Association to
    * retrieve.
    *
-   * @return the Association in this ListOfAssociations with the given id or
-   * NULL if no such Association exists.
+   * @return the Association in this ListOfAssociations with the given @p sid
+   * or @c NULL if no such Association exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -198,8 +198,8 @@ public:
    * @param sid a string representing the identifier of the Association to
    * retrieve.
    *
-   * @return the Association in this ListOfAssociations with the given id or
-   * NULL if no such Association exists.
+   * @return the Association in this ListOfAssociations with the given @p sid
+   * or @c NULL if no such Association exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -498,8 +498,8 @@ ListOfAssociations_getAssociation(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the Association_t to
  * retrieve.
  *
- * @return the Association_t in this ListOf_t with the given id or NULL if no
- * such Association_t exists.
+ * @return the Association_t in this ListOf_t with the given @p sid or @c NULL
+ * if no such Association_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

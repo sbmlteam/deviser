@@ -180,8 +180,8 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
-   * such CSGNode exists.
+   * @return the CSGNode in this ListOfCSGNodes with the given @p sid or
+   * @c NULL if no such CSGNode exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -201,8 +201,8 @@ public:
    * @param sid a string representing the identifier of the CSGNode to
    * retrieve.
    *
-   * @return the CSGNode in this ListOfCSGNodes with the given id or NULL if no
-   * such CSGNode exists.
+   * @return the CSGNode in this ListOfCSGNodes with the given @p sid or
+   * @c NULL if no such CSGNode exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -550,8 +550,8 @@ ListOfCSGNodes_getCSGNode(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the CSGNode_t to
  * retrieve.
  *
- * @return the CSGNode_t in this ListOf_t with the given id or NULL if no such
- * CSGNode_t exists.
+ * @return the CSGNode_t in this ListOf_t with the given @p sid or @c NULL if
+ * no such CSGNode_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

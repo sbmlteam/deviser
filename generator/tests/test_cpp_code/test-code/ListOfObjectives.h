@@ -226,8 +226,8 @@ public:
    * @param sid a string representing the identifier of the Objective to
    * retrieve.
    *
-   * @return the Objective in this ListOfObjectives with the given id or NULL
-   * if no such Objective exists.
+   * @return the Objective in this ListOfObjectives with the given @p sid or
+   * @c NULL if no such Objective exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -247,8 +247,8 @@ public:
    * @param sid a string representing the identifier of the Objective to
    * retrieve.
    *
-   * @return the Objective in this ListOfObjectives with the given id or NULL
-   * if no such Objective exists.
+   * @return the Objective in this ListOfObjectives with the given @p sid or
+   * @c NULL if no such Objective exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -656,8 +656,8 @@ ListOfObjectives_getObjective(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the Objective_t to
  * retrieve.
  *
- * @return the Objective_t in this ListOf_t with the given id or NULL if no
- * such Objective_t exists.
+ * @return the Objective_t in this ListOf_t with the given @p sid or @c NULL if
+ * no such Objective_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

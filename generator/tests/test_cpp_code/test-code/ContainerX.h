@@ -212,7 +212,7 @@ public:
    * @param sid a string representing the identifier of the Fred to retrieve.
    *
    * @return the Fred in the ListOfFreds within this ContainerX with the given
-   * id or NULL if no such Fred exists.
+   * @p sid or @c NULL if no such Fred exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -232,7 +232,7 @@ public:
    * @param sid a string representing the identifier of the Fred to retrieve.
    *
    * @return the Fred in the ListOfFreds within this ContainerX with the given
-   * id or NULL if no such Fred exists.
+   * @p sid or @c NULL if no such Fred exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -991,7 +991,7 @@ ContainerX_getFred(ContainerX_t* cx, unsigned int n);
  * @param sid a string representing the identifier of the Fred_t to retrieve.
  *
  * @return the Fred_t in the ListOfFreds within this ContainerX with the given
- * id or NULL if no such Fred_t exists.
+ * @p sid or @c NULL if no such Fred_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -288,8 +288,8 @@ public:
    * retrieve.
    *
    * @return the ParametricObject in the ListOfParametricObjects within this
-   * ParametricGeometry with the given id or NULL if no such ParametricObject
-   * exists.
+   * ParametricGeometry with the given @p sid or @c NULL if no such
+   * ParametricObject exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -311,8 +311,8 @@ public:
    * retrieve.
    *
    * @return the ParametricObject in the ListOfParametricObjects within this
-   * ParametricGeometry with the given id or NULL if no such ParametricObject
-   * exists.
+   * ParametricGeometry with the given @p sid or @c NULL if no such
+   * ParametricObject exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1260,8 +1260,8 @@ ParametricGeometry_getParametricObject(ParametricGeometry_t* pg,
  * retrieve.
  *
  * @return the ParametricObject_t in the ListOfParametricObjects within this
- * ParametricGeometry with the given id or NULL if no such ParametricObject_t
- * exists.
+ * ParametricGeometry with the given @p sid or @c NULL if no such
+ * ParametricObject_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

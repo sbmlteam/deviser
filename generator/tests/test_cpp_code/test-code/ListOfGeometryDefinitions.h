@@ -185,7 +185,7 @@ public:
    * to retrieve.
    *
    * @return the GeometryDefinition in this ListOfGeometryDefinitions with the
-   * given id or NULL if no such GeometryDefinition exists.
+   * given @p sid or @c NULL if no such GeometryDefinition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -207,7 +207,7 @@ public:
    * to retrieve.
    *
    * @return the GeometryDefinition in this ListOfGeometryDefinitions with the
-   * given id or NULL if no such GeometryDefinition exists.
+   * given @p sid or @c NULL if no such GeometryDefinition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -547,8 +547,8 @@ ListOfGeometryDefinitions_getGeometryDefinition(ListOf_t* lo, unsigned int n);
  * @param sid a string representing the identifier of the GeometryDefinition_t
  * to retrieve.
  *
- * @return the GeometryDefinition_t in this ListOf_t with the given id or NULL
- * if no such GeometryDefinition_t exists.
+ * @return the GeometryDefinition_t in this ListOf_t with the given @p sid or
+ * @c NULL if no such GeometryDefinition_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

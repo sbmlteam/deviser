@@ -269,8 +269,8 @@ public:
    * retrieve.
    *
    * @return the SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry with the given id or NULL if no such SampledVolume
-   * exists.
+   * SampledFieldGeometry with the given @p sid or @c NULL if no such
+   * SampledVolume exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -291,8 +291,8 @@ public:
    * retrieve.
    *
    * @return the SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry with the given id or NULL if no such SampledVolume
-   * exists.
+   * SampledFieldGeometry with the given @p sid or @c NULL if no such
+   * SampledVolume exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1239,8 +1239,8 @@ SampledFieldGeometry_getSampledVolume(SampledFieldGeometry_t* sfg,
  * retrieve.
  *
  * @return the SampledVolume_t in the ListOfSampledVolumes within this
- * SampledFieldGeometry with the given id or NULL if no such SampledVolume_t
- * exists.
+ * SampledFieldGeometry with the given @p sid or @c NULL if no such
+ * SampledVolume_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

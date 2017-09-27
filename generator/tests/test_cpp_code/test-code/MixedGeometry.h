@@ -221,8 +221,8 @@ public:
    * to retrieve.
    *
    * @return the GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry with the given id or NULL if no such GeometryDefinition
-   * exists.
+   * this MixedGeometry with the given @p sid or @c NULL if no such
+   * GeometryDefinition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -243,8 +243,8 @@ public:
    * to retrieve.
    *
    * @return the GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry with the given id or NULL if no such GeometryDefinition
-   * exists.
+   * this MixedGeometry with the given @p sid or @c NULL if no such
+   * GeometryDefinition exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1321,8 +1321,8 @@ MixedGeometry_getGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
  * to retrieve.
  *
  * @return the GeometryDefinition_t in the ListOfGeometryDefinitions within
- * this MixedGeometry with the given id or NULL if no such GeometryDefinition_t
- * exists.
+ * this MixedGeometry with the given @p sid or @c NULL if no such
+ * GeometryDefinition_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

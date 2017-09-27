@@ -257,7 +257,7 @@ public:
    * retrieve.
    *
    * @return the Another in the ListOfAnothers within this BBB with the given
-   * id or NULL if no such Another exists.
+   * @p sid or @c NULL if no such Another exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -278,7 +278,7 @@ public:
    * retrieve.
    *
    * @return the Another in the ListOfAnothers within this BBB with the given
-   * id or NULL if no such Another exists.
+   * @p sid or @c NULL if no such Another exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1199,7 +1199,7 @@ BBB_getAnother(BBB_t* bbb, unsigned int n);
  * retrieve.
  *
  * @return the Another_t in the ListOfAnothers within this BBB with the given
- * id or NULL if no such Another_t exists.
+ * @p sid or @c NULL if no such Another_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -284,8 +284,8 @@ class ListOfQueryFunctions():
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param sid a string representing the identifier '
                       'of the {0} to retrieve.'.format(self.object_child_name))
-        return_lines = ['@return the {0} {1} with the given id'
-                        ' or NULL if no such {0} exists.'
+        return_lines = ['@return the {0} {1} with the given @p sid'
+                        ' or @c NULL if no such {0} exists.'
                         .format(self.object_child_name, return_string)]
         additional = []
         additional.append('@copydetails doc_returned_unowned_pointer')
