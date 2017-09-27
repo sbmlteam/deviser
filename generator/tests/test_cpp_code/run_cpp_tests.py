@@ -817,6 +817,12 @@ def main():
         test_case = 'class with XMLNode'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'twoAtOnce'
+        num = 0
+        class_name = 'TwoatonceSBasePlugin'
+        test_case = 'an SBase plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -839,12 +845,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
+        name = 'twoAtOnce'
         num = 0
-        class_name = 'Group'
-        list_of = 'ListOfGroups'
-        test_case = 'list of with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        class_name = 'TwoatonceSBasePlugin'
+        test_case = 'an SBase plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
 
 
 
