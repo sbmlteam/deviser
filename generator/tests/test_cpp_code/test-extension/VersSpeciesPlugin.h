@@ -1244,13 +1244,13 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addAnother_t(const Another_t* object)
- * @see createAnother_t()
- * @see getAnother_t(const std::string& sid)
- * @see getAnother_t(unsigned int n)
- * @see getNumAnothers()
- * @see removeAnother_t(const std::string& sid)
- * @see removeAnother_t(unsigned int n)
+ * @see VersSpeciesPlugin_addAnother(const Another_t* object)
+ * @see VersSpeciesPlugin_createAnother()
+ * @see VersSpeciesPlugin_getAnotherById(const std::string& sid)
+ * @see VersSpeciesPlugin_getAnother(unsigned int n)
+ * @see VersSpeciesPlugin_getNumAnothers()
+ * @see VersSpeciesPlugin_removeAnotherById(const std::string& sid)
+ * @see VersSpeciesPlugin_removeAnother(unsigned int n)
  *
  * @memberof VersSpeciesPlugin_t
  */

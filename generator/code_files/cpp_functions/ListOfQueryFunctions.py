@@ -234,26 +234,51 @@ class ListOfQueryFunctions():
 
     def add_other_referenced_functions(self, additional, this_func, object):
         additional.append(' ')
-        if this_func != 'add':
-            additional.append('@see add{0}(const {0}* object)'.format(object))
-        if this_func != 'create':
-            additional.append('@see create{0}()'.format(object))
-        if this_func != 'getid':
-            additional.append('@see get(const std::string& sid)') if self.is_list_of else \
-                additional.append('@see get{0}(const std::string& sid)'.format(object))
-        if this_func != 'getindex':
-            additional.append('@see get(unsigned int n)') if self.is_list_of else \
-                additional.append('@see get{0}(unsigned int n)'.format(object))
-        if this_func != 'getnum':
-            additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
-            # additional.append('@see size()') if self.is_list_of \
-            #     else additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
-        if this_func != 'removeid':
-            additional.append('@see remove(const std::string& sid)') if self.is_list_of else \
-                additional.append('@see remove{0}(const std::string& sid)'.format(object))
-        if this_func != 'removeindex':
-            additional.append('@see remove(unsigned int n)') if self.is_list_of else \
-                additional.append('@see remove{0}(unsigned int n)'.format(object))
+        if self.is_cpp_api:
+            if this_func != 'add':
+                additional.append('@see add{0}(const {0}* object)'.format(object))
+            if this_func != 'create':
+                additional.append('@see create{0}()'.format(object))
+            if this_func != 'getid':
+                additional.append('@see get(const std::string& sid)') if self.is_list_of else \
+                    additional.append('@see get{0}(const std::string& sid)'.format(object))
+            if this_func != 'getindex':
+                additional.append('@see get(unsigned int n)') if self.is_list_of else \
+                    additional.append('@see get{0}(unsigned int n)'.format(object))
+            if this_func != 'getnum':
+                additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
+                # additional.append('@see size()') if self.is_list_of \
+                #     else additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
+            if this_func != 'removeid':
+                additional.append('@see remove(const std::string& sid)') if self.is_list_of else \
+                    additional.append('@see remove{0}(const std::string& sid)'.format(object))
+            if this_func != 'removeindex':
+                additional.append('@see remove(unsigned int n)') if self.is_list_of else \
+                    additional.append('@see remove{0}(unsigned int n)'.format(object))
+        else:
+            lenobject = len(object)
+            objectname = object[0:lenobject-2]
+            if this_func != 'add':
+                additional.append('@see {1}_add{2}(const {0}* object)'.format(object, self.class_name, objectname))
+            if this_func != 'create':
+                additional.append('@see {0}_create{1}()'.format(self.class_name, objectname))
+            if this_func != 'getid':
+                additional.append('@see {0}_getById(const std::string& sid)'.format(self.class_name)) if self.is_list_of else \
+                    additional.append('@see {0}_get{1}ById(const std::string& sid)'.format(self.class_name, objectname))
+            if this_func != 'getindex':
+                additional.append('@see {0}_get(unsigned int n)'.format(self.class_name)) if self.is_list_of else \
+                    additional.append('@see {0}_get{1}(unsigned int n)'.format(self.class_name, objectname))
+            if this_func != 'getnum':
+                additional.append('@see {1}_getNum{0}()'.format(strFunctions.remove_prefix(self.plural), self.class_name, objectname))
+                # additional.append('@see size()') if self.is_list_of \
+                #     else additional.append('@see getNum{0}()'.format(strFunctions.remove_prefix(self.plural)))
+            if this_func != 'removeid':
+                additional.append('@see {0}_removeById(const std::string& sid)'.format(self.class_name)) if self.is_list_of else \
+                    additional.append('@see {0}_remove{1}ById(const std::string& sid)'.format(self.class_name, objectname))
+            if this_func != 'removeindex':
+                additional.append('@see {0}_remove(unsigned int n)'.format(self.class_name)) if self.is_list_of else \
+                    additional.append('@see {0}_remove{1}(unsigned int n)'.format(self.class_name, objectname))
+
 
     # function to write get by id from a listOf
     def write_get_element_by_id(self, is_const):

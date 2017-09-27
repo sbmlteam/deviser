@@ -1156,13 +1156,14 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addQualitativeSpecies_t(const QualitativeSpecies_t* object)
- * @see createQualitativeSpecies_t()
- * @see getQualitativeSpecies_t(const std::string& sid)
- * @see getQualitativeSpecies_t(unsigned int n)
- * @see getNumQualitativeSpecies()
- * @see removeQualitativeSpecies_t(const std::string& sid)
- * @see removeQualitativeSpecies_t(unsigned int n)
+ * @see QualModelPlugin_addQualitativeSpecies(const QualitativeSpecies_t*
+ * object)
+ * @see QualModelPlugin_createQualitativeSpecies()
+ * @see QualModelPlugin_getQualitativeSpeciesById(const std::string& sid)
+ * @see QualModelPlugin_getQualitativeSpecies(unsigned int n)
+ * @see QualModelPlugin_getNumQualitativeSpecies()
+ * @see QualModelPlugin_removeQualitativeSpeciesById(const std::string& sid)
+ * @see QualModelPlugin_removeQualitativeSpecies(unsigned int n)
  *
  * @memberof QualModelPlugin_t
  */
@@ -1349,13 +1350,13 @@ QualModelPlugin_removeQualitativeSpeciesById(QualModelPlugin_t* qmp,
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addTransition_t(const Transition_t* object)
- * @see createTransition_t()
- * @see getTransition_t(const std::string& sid)
- * @see getTransition_t(unsigned int n)
- * @see getNumTransitions()
- * @see removeTransition_t(const std::string& sid)
- * @see removeTransition_t(unsigned int n)
+ * @see QualModelPlugin_addTransition(const Transition_t* object)
+ * @see QualModelPlugin_createTransition()
+ * @see QualModelPlugin_getTransitionById(const std::string& sid)
+ * @see QualModelPlugin_getTransition(unsigned int n)
+ * @see QualModelPlugin_getNumTransitions()
+ * @see QualModelPlugin_removeTransitionById(const std::string& sid)
+ * @see QualModelPlugin_removeTransition(unsigned int n)
  *
  * @memberof QualModelPlugin_t
  */

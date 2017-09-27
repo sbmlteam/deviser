@@ -1721,13 +1721,13 @@ Transition_unsetName(Transition_t * t);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addInput_t(const Input_t* object)
- * @see createInput_t()
- * @see getInput_t(const std::string& sid)
- * @see getInput_t(unsigned int n)
- * @see getNumInputs()
- * @see removeInput_t(const std::string& sid)
- * @see removeInput_t(unsigned int n)
+ * @see Transition_addInput(const Input_t* object)
+ * @see Transition_createInput()
+ * @see Transition_getInputById(const std::string& sid)
+ * @see Transition_getInput(unsigned int n)
+ * @see Transition_getNumInputs()
+ * @see Transition_removeInputById(const std::string& sid)
+ * @see Transition_removeInput(unsigned int n)
  *
  * @memberof Transition_t
  */
@@ -1895,13 +1895,13 @@ Transition_removeInputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addOutput_t(const Output_t* object)
- * @see createOutput_t()
- * @see getOutput_t(const std::string& sid)
- * @see getOutput_t(unsigned int n)
- * @see getNumOutputs()
- * @see removeOutput_t(const std::string& sid)
- * @see removeOutput_t(unsigned int n)
+ * @see Transition_addOutput(const Output_t* object)
+ * @see Transition_createOutput()
+ * @see Transition_getOutputById(const std::string& sid)
+ * @see Transition_getOutput(unsigned int n)
+ * @see Transition_getNumOutputs()
+ * @see Transition_removeOutputById(const std::string& sid)
+ * @see Transition_removeOutput(unsigned int n)
  *
  * @memberof Transition_t
  */
@@ -2070,13 +2070,13 @@ Transition_removeOutputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addFunctionTerm_t(const FunctionTerm_t* object)
- * @see createFunctionTerm_t()
- * @see getFunctionTerm_t(const std::string& sid)
- * @see getFunctionTerm_t(unsigned int n)
- * @see getNumFunctionTerms()
- * @see removeFunctionTerm_t(const std::string& sid)
- * @see removeFunctionTerm_t(unsigned int n)
+ * @see Transition_addFunctionTerm(const FunctionTerm_t* object)
+ * @see Transition_createFunctionTerm()
+ * @see Transition_getFunctionTermById(const std::string& sid)
+ * @see Transition_getFunctionTerm(unsigned int n)
+ * @see Transition_getNumFunctionTerms()
+ * @see Transition_removeFunctionTermById(const std::string& sid)
+ * @see Transition_removeFunctionTerm(unsigned int n)
  *
  * @memberof Transition_t
  */

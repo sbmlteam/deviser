@@ -955,13 +955,13 @@ Container_free(Container_t* c);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addMyLoTest_t(const MyLoTest_t* object)
- * @see createMyLoTest_t()
- * @see getMyLoTest_t(const std::string& sid)
- * @see getMyLoTest_t(unsigned int n)
- * @see getNumMyLoTests()
- * @see removeMyLoTest_t(const std::string& sid)
- * @see removeMyLoTest_t(unsigned int n)
+ * @see Container_addMyLoTest(const MyLoTest_t* object)
+ * @see Container_createMyLoTest()
+ * @see Container_getMyLoTestById(const std::string& sid)
+ * @see Container_getMyLoTest(unsigned int n)
+ * @see Container_getNumMyLoTests()
+ * @see Container_removeMyLoTestById(const std::string& sid)
+ * @see Container_removeMyLoTest(unsigned int n)
  *
  * @memberof Container_t
  */

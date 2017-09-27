@@ -1436,13 +1436,13 @@ Group_unsetKind(Group_t * g);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addMember_t(const Member_t* object)
- * @see createMember_t()
- * @see getMember_t(const std::string& sid)
- * @see getMember_t(unsigned int n)
- * @see getNumMembers()
- * @see removeMember_t(const std::string& sid)
- * @see removeMember_t(unsigned int n)
+ * @see Group_addMember(const Member_t* object)
+ * @see Group_createMember()
+ * @see Group_getMemberById(const std::string& sid)
+ * @see Group_getMember(unsigned int n)
+ * @see Group_getNumMembers()
+ * @see Group_removeMemberById(const std::string& sid)
+ * @see Group_removeMember(unsigned int n)
  *
  * @memberof Group_t
  */

@@ -1042,13 +1042,13 @@ Parent_free(Parent_t* p);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addChild_t(const Child_t* object)
- * @see createChild_t()
- * @see getChild_t(const std::string& sid)
- * @see getChild_t(unsigned int n)
- * @see getNumChildren()
- * @see removeChild_t(const std::string& sid)
- * @see removeChild_t(unsigned int n)
+ * @see Parent_addChild(const Child_t* object)
+ * @see Parent_createChild()
+ * @see Parent_getChildById(const std::string& sid)
+ * @see Parent_getChild(unsigned int n)
+ * @see Parent_getNumChildren()
+ * @see Parent_removeChildById(const std::string& sid)
+ * @see Parent_removeChild(unsigned int n)
  *
  * @memberof Parent_t
  */
@@ -1156,13 +1156,13 @@ Parent_removeChild(Parent_t* p, unsigned int n);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addSprog_t(const Sprog_t* object)
- * @see createSprog_t()
- * @see getSprog_t(const std::string& sid)
- * @see getSprog_t(unsigned int n)
- * @see getNumSprogs()
- * @see removeSprog_t(const std::string& sid)
- * @see removeSprog_t(unsigned int n)
+ * @see Parent_addSprog(const Sprog_t* object)
+ * @see Parent_createSprog()
+ * @see Parent_getSprogById(const std::string& sid)
+ * @see Parent_getSprog(unsigned int n)
+ * @see Parent_getNumSprogs()
+ * @see Parent_removeSprogById(const std::string& sid)
+ * @see Parent_removeSprog(unsigned int n)
  *
  * @memberof Parent_t
  */

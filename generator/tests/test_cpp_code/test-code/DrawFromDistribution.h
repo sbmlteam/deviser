@@ -1414,13 +1414,13 @@ DrawFromDistribution_unsetDistribution(DrawFromDistribution_t * dfd);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addDistribInput_t(const DistribInput_t* object)
- * @see createDistribInput_t()
- * @see getDistribInput_t(const std::string& sid)
- * @see getDistribInput_t(unsigned int n)
- * @see getNumDistribInputs()
- * @see removeDistribInput_t(const std::string& sid)
- * @see removeDistribInput_t(unsigned int n)
+ * @see DrawFromDistribution_addDistribInput(const DistribInput_t* object)
+ * @see DrawFromDistribution_createDistribInput()
+ * @see DrawFromDistribution_getDistribInputById(const std::string& sid)
+ * @see DrawFromDistribution_getDistribInput(unsigned int n)
+ * @see DrawFromDistribution_getNumDistribInputs()
+ * @see DrawFromDistribution_removeDistribInputById(const std::string& sid)
+ * @see DrawFromDistribution_removeDistribInput(unsigned int n)
  *
  * @memberof DrawFromDistribution_t
  */

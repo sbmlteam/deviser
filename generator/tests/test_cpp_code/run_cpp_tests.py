@@ -852,10 +852,10 @@ def main():
     else:
         name = 'groups'
         num = 0
-        class_name = 'GroupsModelPlugin'
-        test_case = 'basic plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
-
+        class_name = 'Group'
+        list_of = 'ListOfGroups'
+        test_case = 'list of with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
 
     test_functions.report('CPP', fail, fails, not_tested)

@@ -950,13 +950,13 @@ ContainerX_free(ContainerX_t* cx);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addFred_t(const Fred_t* object)
- * @see createFred_t()
- * @see getFred_t(const std::string& sid)
- * @see getFred_t(unsigned int n)
- * @see getNumFreds()
- * @see removeFred_t(const std::string& sid)
- * @see removeFred_t(unsigned int n)
+ * @see ContainerX_addFred(const Fred_t* object)
+ * @see ContainerX_createFred()
+ * @see ContainerX_getFredById(const std::string& sid)
+ * @see ContainerX_getFred(unsigned int n)
+ * @see ContainerX_getNumFreds()
+ * @see ContainerX_removeFredById(const std::string& sid)
+ * @see ContainerX_removeFred(unsigned int n)
  *
  * @memberof ContainerX_t
  */

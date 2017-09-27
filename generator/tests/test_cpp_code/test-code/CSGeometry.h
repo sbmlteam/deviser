@@ -1032,13 +1032,13 @@ CSGeometry_free(CSGeometry_t* csg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addCSGObject_t(const CSGObject_t* object)
- * @see createCSGObject_t()
- * @see getCSGObject_t(const std::string& sid)
- * @see getCSGObject_t(unsigned int n)
- * @see getNumCSGObjects()
- * @see removeCSGObject_t(const std::string& sid)
- * @see removeCSGObject_t(unsigned int n)
+ * @see CSGeometry_addCSGObject(const CSGObject_t* object)
+ * @see CSGeometry_createCSGObject()
+ * @see CSGeometry_getCSGObjectById(const std::string& sid)
+ * @see CSGeometry_getCSGObject(unsigned int n)
+ * @see CSGeometry_getNumCSGObjects()
+ * @see CSGeometry_removeCSGObjectById(const std::string& sid)
+ * @see CSGeometry_removeCSGObject(unsigned int n)
  *
  * @memberof CSGeometry_t
  */

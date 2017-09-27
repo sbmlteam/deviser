@@ -1534,13 +1534,13 @@ CSGSetOperator_unsetComplementB(CSGSetOperator_t * csgso);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addCSGNode_t(const CSGNode_t* object)
- * @see createCSGNode_t()
- * @see getCSGNode_t(const std::string& sid)
- * @see getCSGNode_t(unsigned int n)
- * @see getNumCSGNodes()
- * @see removeCSGNode_t(const std::string& sid)
- * @see removeCSGNode_t(unsigned int n)
+ * @see CSGSetOperator_addCSGNode(const CSGNode_t* object)
+ * @see CSGSetOperator_createCSGNode()
+ * @see CSGSetOperator_getCSGNodeById(const std::string& sid)
+ * @see CSGSetOperator_getCSGNode(unsigned int n)
+ * @see CSGSetOperator_getNumCSGNodes()
+ * @see CSGSetOperator_removeCSGNodeById(const std::string& sid)
+ * @see CSGSetOperator_removeCSGNode(unsigned int n)
  *
  * @memberof CSGSetOperator_t
  */

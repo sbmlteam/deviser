@@ -1193,13 +1193,13 @@ SampledFieldGeometry_unsetSampledField(SampledFieldGeometry_t * sfg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see addSampledVolume_t(const SampledVolume_t* object)
- * @see createSampledVolume_t()
- * @see getSampledVolume_t(const std::string& sid)
- * @see getSampledVolume_t(unsigned int n)
- * @see getNumSampledVolumes()
- * @see removeSampledVolume_t(const std::string& sid)
- * @see removeSampledVolume_t(unsigned int n)
+ * @see SampledFieldGeometry_addSampledVolume(const SampledVolume_t* object)
+ * @see SampledFieldGeometry_createSampledVolume()
+ * @see SampledFieldGeometry_getSampledVolumeById(const std::string& sid)
+ * @see SampledFieldGeometry_getSampledVolume(unsigned int n)
+ * @see SampledFieldGeometry_getNumSampledVolumes()
+ * @see SampledFieldGeometry_removeSampledVolumeById(const std::string& sid)
+ * @see SampledFieldGeometry_removeSampledVolume(unsigned int n)
  *
  * @memberof SampledFieldGeometry_t
  */
