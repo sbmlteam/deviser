@@ -188,7 +188,7 @@ class ExtensionInitFunctions():
             return_lines.append('\"{0}\",'.format(enumVal['value']))
         return_lines.append('or @c NULL if the value is @sbmlconstant{0}{1}, {2}_t{3} or '
                             'another invalid enumeration value.'.format(self.open_br, values[-1], name, self.close_br))
-        additional = ['@if conly', '@memberof {0}_t'.format(classname), '@endif']
+        additional = ['@copydetails doc_returned_unowned_char', ' ', '@if conly', '@memberof {0}_t'.format(classname), '@endif']
 
         # create the function declaration
         arguments = ['{0}_t {1}'.format(name, abbrev_name)]

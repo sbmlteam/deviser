@@ -409,6 +409,8 @@ typedef enum
  * or @c NULL if the value is @sbmlconstant{ENUM_INVALID, Enum_t} or another
  * invalid enumeration value.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @if conly
  * @memberof Test_t
  * @endif
@@ -517,6 +519,8 @@ typedef enum
  * "dick",
  * or @c NULL if the value is @sbmlconstant{FRED_INVALID, Fred_t} or another
  * invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @if conly
  * @memberof Test_t

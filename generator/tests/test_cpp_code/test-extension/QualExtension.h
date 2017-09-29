@@ -416,6 +416,8 @@ typedef enum
  * or @c NULL if the value is @sbmlconstant{SIGN_INVALID, Sign_t} or another
  * invalid enumeration value.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @if conly
  * @memberof Input_t
  * @endif
@@ -529,6 +531,8 @@ typedef enum
  * "assignmentLevel",
  * or @c NULL if the value is @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
  * TransitionOutputEffect_t} or another invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @if conly
  * @memberof Output_t
@@ -645,6 +649,8 @@ typedef enum
  * "consumption",
  * or @c NULL if the value is @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
  * TransitionInputEffect_t} or another invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
  *
  * @if conly
  * @memberof Input_t

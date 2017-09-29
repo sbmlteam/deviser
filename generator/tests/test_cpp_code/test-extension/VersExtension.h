@@ -456,6 +456,8 @@ typedef enum
  * or @c NULL if the value is @sbmlconstant{FBC_TYPE_INVALID, FbcType_t} or
  * another invalid enumeration value.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @if conly
  * @memberof Objective_t
  * @endif

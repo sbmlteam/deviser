@@ -412,6 +412,8 @@ typedef enum
  * or @c NULL if the value is @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t} or
  * another invalid enumeration value.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @if conly
  * @memberof Group_t
  * @endif

@@ -485,6 +485,8 @@ typedef enum
  * or @c NULL if the value is @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} or
  * another invalid enumeration value.
  *
+ * @copydetails doc_returned_unowned_char
+ *
  * @if conly
  * @memberof Objective_t
  * @endif
