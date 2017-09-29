@@ -1526,7 +1526,19 @@ class SetGetFunctions():
                 implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
                                  ['return {0}'.format(global_variables.ret_att_unex)]
                 code.append(self.create_code_block('if_else', implementation))
-        elif attribute['type'] == 'string' or attribute['type'] == 'IDREF' or attribute['type'] == 'ID':
+        elif attribute['type'] == 'ID' or attribute['type'] == 'IDREF':
+            implementation = ['!(SyntaxChecker::isValidXMLID({0})'
+                              ')'.format(name),
+                              'return {0}'.format(self.invalid_att), 'else',
+                              '{0} = {1}'.format(member, name),
+                              'return {0}'.format(self.success)]
+            if not deal_with_versions:
+                code = [dict({'code_type': 'if_else', 'code': implementation})]
+            else:
+                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                                 ['return {0}'.format(global_variables.ret_att_unex)]
+                code.append(self.create_code_block('if_else', implementation))
+        elif attribute['type'] == 'string':
             implementation = ['{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:

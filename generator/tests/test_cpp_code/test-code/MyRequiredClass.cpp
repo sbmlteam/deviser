@@ -1108,8 +1108,15 @@ MyRequiredClass::setPosint1(unsigned int posint1)
 int
 MyRequiredClass::setMetaid(const std::string& metaid)
 {
-  mMetaid = metaid;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(metaid)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mMetaid = metaid;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -1119,8 +1126,15 @@ MyRequiredClass::setMetaid(const std::string& metaid)
 int
 MyRequiredClass::setMetaid1(const std::string& metaid1)
 {
-  mMetaid1 = metaid1;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(metaid1)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mMetaid1 = metaid1;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -1142,8 +1156,15 @@ MyRequiredClass::setNum4(int num4)
 int
 MyRequiredClass::setMetaidref1(const std::string& metaidref1)
 {
-  mMetaidref1 = metaidref1;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(metaidref1)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mMetaidref1 = metaidref1;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -1153,8 +1174,15 @@ MyRequiredClass::setMetaidref1(const std::string& metaidref1)
 int
 MyRequiredClass::setNotmetaid(const std::string& notmetaid)
 {
-  mNotmetaid = notmetaid;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(notmetaid)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mNotmetaid = notmetaid;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 

@@ -695,8 +695,15 @@ MyTestClass::setCorrectId(const std::string& correctId)
 int
 MyTestClass::setIdRef(const std::string& idRef)
 {
-  mIdRef = idRef;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(idRef)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mIdRef = idRef;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -706,8 +713,15 @@ MyTestClass::setIdRef(const std::string& idRef)
 int
 MyTestClass::setIdref1(const std::string& idref1)
 {
-  mIdref1 = idref1;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(idref1)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mIdref1 = idref1;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -717,8 +731,15 @@ MyTestClass::setIdref1(const std::string& idref1)
 int
 MyTestClass::setIdref2(const std::string& idref2)
 {
-  mIdref2 = idref2;
-  return LIBSBML_OPERATION_SUCCESS;
+  if (!(SyntaxChecker::isValidXMLID(idref2)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mIdref2 = idref2;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
 }
 
 
