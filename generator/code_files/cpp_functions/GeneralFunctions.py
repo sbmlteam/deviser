@@ -280,8 +280,7 @@ class GeneralFunctions():
             line = '@{0}constant{1}{2}, {3}{4}' \
                    'TypeCode_t{5}'.format(self.language, '{', self.typecode,
                                           self.cap_language, self.package, '}')
-        additional.append(line)
-        additional.append(' ')
+        return_lines.append(line)
         additional.append('@copydetails doc_warning_typecodes_not_unique')
         if not self.is_list_of:
             additional.append(' ')
@@ -331,8 +330,7 @@ class GeneralFunctions():
         line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}' \
                ''.format(self.language, '{', self.typecode, self.cap_language,
                          self.package, '}')
-        additional.append(line)
-        additional.append(' ')
+        return_lines.append(line)
         additional.append('@copydetails doc_warning_typecodes_not_unique')
         additional.append(' ')
         additional.append('@see getElementName()')

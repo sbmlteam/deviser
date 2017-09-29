@@ -320,7 +320,6 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   *
    * @sbmlconstant{SBML_DISTRIB_DISCRETEUNIVARIATEDISTRIBUTION,
    * SBMLDistribTypeCode_t}
    *

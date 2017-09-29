@@ -190,7 +190,6 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   *
    * @sbmlconstant{TEST_LO_TEST, SBMLTestTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
