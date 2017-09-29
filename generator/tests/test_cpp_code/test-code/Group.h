@@ -34,6 +34,33 @@
  * @sbmlbrief{groups} TODO:Definition of the Group class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_group_kind
+ *
+ * @par
+ * The attribute "kind" on a Group object is used to TODO:add explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Groups specification, the following are the
+ * allowable values for "kind":
+ * <ul>
+ * <li> @c "classification", TODO:add description
+ *
+ * <li> @c "partonomy", TODO:add description
+ *
+ * <li> @c "collection", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef Group_H__
 #define Group_H__

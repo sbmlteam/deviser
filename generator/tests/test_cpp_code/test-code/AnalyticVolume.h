@@ -34,6 +34,30 @@
  * @sbmlbrief{spatial} TODO:Definition of the AnalyticVolume class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_analyticvolume_functionType
+ *
+ * @par
+ * The attribute "functionType" on a AnalyticVolume object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Spatial specification, the following are the
+ * allowable values for "functionType":
+ * <ul>
+ * <li> @c "layered", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef AnalyticVolume_H__
 #define AnalyticVolume_H__

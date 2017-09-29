@@ -34,6 +34,79 @@
  * @sbmlbrief{test} TODO:Definition of the ClassThree class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_classthree_number
+ *
+ * @par
+ * The attribute "number" on a ClassThree object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * allowable values for "number":
+ * <ul>
+ * <li> @c "One", TODO:add description
+ *
+ * <li> @c "Two", TODO:add description
+ *
+ * </ul>
+ *
+ * @class doc_classthree_name
+ *
+ * @par
+ * The attribute "name" on a ClassThree object is used to TODO:add explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * allowable values for "name":
+ * <ul>
+ * <li> @c "tom", TODO:add description
+ *
+ * <li> @c "dick", TODO:add description
+ *
+ * </ul>
+ *
+ * @class doc_classthree_badName
+ *
+ * @par
+ * The attribute "badName" on a ClassThree object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * allowable values for "badName":
+ * <ul>
+ * <li> @c "tom", TODO:add description
+ *
+ * <li> @c "dick", TODO:add description
+ *
+ * </ul>
+ *
+ * @class doc_classthree_otherNum
+ *
+ * @par
+ * The attribute "otherNum" on a ClassThree object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * allowable values for "otherNum":
+ * <ul>
+ * <li> @c "One", TODO:add description
+ *
+ * <li> @c "Two", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef ClassThree_H__
 #define ClassThree_H__

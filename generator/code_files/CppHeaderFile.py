@@ -54,14 +54,32 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
         # members from object
         self.represents_class = represents_class
+        self.has_enum = False
+        self.enums = []
         if represents_class:
             self.expand_class(class_object)
+            [self.has_enum, self.enums] = self.get_enum_attributes(class_object)
 
         self.lv_info = []
         if 'root' in class_object and 'lv_info' in class_object['root']:
             self.lv_info = class_object['root']['lv_info']
     ########################################################################
+    # functions to determine enumerations
+    def get_enum_attributes(self, class_object):
+        has_enum = False
+        enums = []
+        if 'root' in class_object:
+            all_enums = class_object['root']['enums']
+            for att in class_object['attribs']:
+                if att['type'] == 'enum':
+                    for i in range(0, len(all_enums)):
+                        if att['element'] == all_enums[i]['name']:
+                            enums.append(dict({'name': att['name'], 'values': all_enums[i]['values']}))
+        if len(enums) > 0:
+            has_enum = True
+        return [has_enum, enums]
 
+    #########################################################################
     # Functions for writing the class
     def write_class(self, base_class, class_name, attributes):
         self.write_forward_class()

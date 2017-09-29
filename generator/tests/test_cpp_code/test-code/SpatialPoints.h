@@ -34,6 +34,54 @@
  * @sbmlbrief{spatial} TODO:Definition of the SpatialPoints class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_spatialpoints_compression
+ *
+ * @par
+ * The attribute "compression" on a SpatialPoints object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Spatial specification, the following are the
+ * allowable values for "compression":
+ * <ul>
+ * <li> @c "uncompressed", TODO:add description
+ *
+ * <li> @c "deflated", TODO:add description
+ *
+ * </ul>
+ *
+ * @class doc_spatialpoints_dataType
+ *
+ * @par
+ * The attribute "dataType" on a SpatialPoints object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Spatial specification, the following are the
+ * allowable values for "dataType":
+ * <ul>
+ * <li> @c "double", TODO:add description
+ *
+ * <li> @c "float", TODO:add description
+ *
+ * <li> @c "uint8", TODO:add description
+ *
+ * <li> @c "uint16", TODO:add description
+ *
+ * <li> @c "uint32", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef SpatialPoints_H__
 #define SpatialPoints_H__

@@ -87,6 +87,7 @@ class BaseFile:
         self.class_name = ''
         self.package = ''
         self.class_object = dict()
+        self.has_enum = False
 
     ########################################################################
 
@@ -453,6 +454,35 @@ class BaseFile:
                 self.write_class_comments(False, False, True)
             else:
                 self.write_class_comments(False, False, False)
+        self.close_comment()
+        if self.is_header and not self.is_list_of and self.has_enum:
+            self.skip_line()
+            self.write_enum_block()
+
+    def write_enum_block(self):
+        self.open_comment()
+        self.write_comment_line('<!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~')
+        self.write_comment_line('The following text is used as common documentation blocks copied multiple')
+        self.write_comment_line('times elsewhere in this file. The use of @class is a hack needed because')
+        self.write_comment_line('Doxygen\'s @copydetails command has limited functionality.  Symbols')
+        self.write_comment_line('beginning with "doc_" are marked as ignored in our Doxygen configuration.')
+        self.write_comment_line('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  -->')
+        self.write_blank_comment_line()
+        for enum in self.enums:
+            self.write_blank_comment_line()
+            self.write_comment_line('@class doc_{0}_{1}'.format(self.class_name.lower(), enum['name']))
+            self.write_blank_comment_line()
+            self.write_comment_line('@par')
+            self.write_comment_line('The attribute "{0}" on a {1} object is used to  TODO:add explanation'.format(enum['name'], self.class_name))
+            self.write_blank_comment_line()
+            self.write_comment_line('In the SBML')
+            self.write_comment_line('Level&nbsp;3 Version&nbsp;1 {0} specification, the following are the'.format(self.package))
+            self.write_comment_line('allowable values for "{0}":'.format(enum['name']))
+            self.write_comment_line('<ul>')
+            for value in enum['values']:
+                self.write_comment_line('<li> @c "{0}", TODO:add description'.format(value['value']))
+                self.write_blank_comment_line()
+            self.write_comment_line('</ul>')
 
         self.close_comment()
 

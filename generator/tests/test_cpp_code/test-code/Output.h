@@ -34,6 +34,32 @@
  * @sbmlbrief{qual} TODO:Definition of the Output class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_output_transitionEffect
+ *
+ * @par
+ * The attribute "transitionEffect" on a Output object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Qual specification, the following are the
+ * allowable values for "transitionEffect":
+ * <ul>
+ * <li> @c "production", TODO:add description
+ *
+ * <li> @c "assignmentLevel", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef Output_H__
 #define Output_H__

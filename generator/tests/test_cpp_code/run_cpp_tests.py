@@ -851,9 +851,12 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'groups'
-        class_name = 'GroupsExtension'
-        test_case = 'basic extension file'
-        fail += run_ext_test(name, class_name, test_case, 0)
+        num = 0
+        class_name = 'Group'
+        list_of = 'ListOfGroups'
+        test_case = 'list of with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
 

@@ -34,6 +34,34 @@
  * @sbmlbrief{spatial} TODO:Definition of the CoordinateComponent class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_coordinatecomponent_type
+ *
+ * @par
+ * The attribute "type" on a CoordinateComponent object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Spatial specification, the following are the
+ * allowable values for "type":
+ * <ul>
+ * <li> @c "cartesianX", TODO:add description
+ *
+ * <li> @c "cartesianY", TODO:add description
+ *
+ * <li> @c "cartesianZ", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef CoordinateComponent_H__
 #define CoordinateComponent_H__

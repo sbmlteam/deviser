@@ -34,6 +34,34 @@
  * @sbmlbrief{spatial} TODO:Definition of the CSGSetOperator class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_csgsetoperator_operationType
+ *
+ * @par
+ * The attribute "operationType" on a CSGSetOperator object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Spatial specification, the following are the
+ * allowable values for "operationType":
+ * <ul>
+ * <li> @c "union", TODO:add description
+ *
+ * <li> @c "intersection", TODO:add description
+ *
+ * <li> @c "relativeComplement", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef CSGSetOperator_H__
 #define CSGSetOperator_H__
