@@ -207,20 +207,23 @@ of a \UnitDefinition object in the enclosing \Model, or one of the base
 units in SBML. (Reference: SBML Level~3 Package specification for
 testAttributes, Version~1, \sec{mytestclass-class}.)}
 
-\validRule{test-20315}{The attribute \token{test:\-idRef} on a
-\MyTestClass must have a value of XML data type \token{ID}. (Reference:
-SBML Level~3 Package specification for testAttributes, Version~1,
+\validRule{test-20315}{The value of the attribute \token{test:\-idRef}
+of a \MyTestClass object must be the 'metaid' of an existing \SBase
+object defined in the enclosing \Model object. (Reference: SBML Level~3
+Package specification for testAttributes, Version~1,
 \sec{mytestclass-class}.)}
 
-\validRule{test-20316}{The attribute \token{test:\-idrefOne} on a
-\MyTestClass must have a value of XML data type \token{ID}. (Reference:
-SBML Level~3 Package specification for testAttributes, Version~1,
-\sec{mytestclass-class}.)}
+\validRule{test-20316}{The value of the attribute
+\token{test:\-idrefOne} of a \MyTestClass object must be the 'metaid' of
+an existing \SBase object defined in the enclosing \Model object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{mytestclass-class}.)}
 
-\validRule{test-20317}{The attribute \token{test:\-idrefTwo} on a
-\MyTestClass must have a value of XML data type \token{ID}. (Reference:
-SBML Level~3 Package specification for testAttributes, Version~1,
-\sec{mytestclass-class}.)}
+\validRule{test-20317}{The value of the attribute
+\token{test:\-idrefTwo} of a \MyTestClass object must be the 'metaid' of
+an existing \SBase object defined in the enclosing \Model object.
+(Reference: SBML Level~3 Package specification for testAttributes,
+Version~1, \sec{mytestclass-class}.)}
 
 
 \subsubsection*{Rules for \class{Unit} object}
@@ -388,10 +391,11 @@ Version~1, \sec{myrequiredclass-class}.)}
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
 
-\validRule{test-20621}{The attribute \token{test:\-metaidrefOne} on a
-\MyRequiredClass must have a value of XML data type \token{ID}.
-(Reference: SBML Level~3 Package specification for testAttributes,
-Version~1, \sec{myrequiredclass-class}.)}
+\validRule{test-20621}{The value of the attribute
+\token{test:\-metaidrefOne} of a \MyRequiredClass object must be the
+'metaid' of an existing \SBase object defined in the enclosing \Model
+object. (Reference: SBML Level~3 Package specification for
+testAttributes, Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20622}{The attribute \token{test:\-notmetaid} on a
 \MyRequiredClass must have a value of XML data type \token{ID}.
