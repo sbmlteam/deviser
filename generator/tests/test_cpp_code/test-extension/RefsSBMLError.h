@@ -46,6 +46,15 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 
+/**
+ * @enum RefsSBMLErrorCode_t
+ * Codes for all SBML-level errors and warnings from the 'refs' package.
+ *
+ * These are distinguished from other SBML error codes by having a number
+ * between 100000 and 199999.
+ *
+ * @copydetails doc_sbml_error_code_ranges
+ */
 typedef enum
 {
   RefsUnknown                                                 = 110100

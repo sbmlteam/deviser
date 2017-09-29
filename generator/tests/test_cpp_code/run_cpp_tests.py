@@ -496,6 +496,11 @@ def main():
         test_case = 'basic plugin'
         fail += run_plug_test(name, class_name, test_case, num)
 
+        name = 'groups'
+        class_name = 'GroupsSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
+
         name = 'test_vers'
         num = 0
         class_name = 'ClassOne'
@@ -851,15 +856,9 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'groups'
-        num = 1
-        class_name = 'Member'
-        list_of = 'ListOfMembers'
-        test_case = 'list of with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
-
-
-
-
+        class_name = 'GroupsSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

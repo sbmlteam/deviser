@@ -213,7 +213,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020304
   { TestMyTestClassNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:name' on a <myTestClass> must have a value of data "
@@ -224,7 +224,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020305
   { TestMyTestClassNumMustBeNonNegativeInteger,
-    "Num attribute must be NonNegativeInteger.",
+    "The 'num' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myTestClass> must have a value of data type "
@@ -235,7 +235,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020306
   { TestMyTestClassNum2MustBeNonNegativeInteger,
-    "Num2 attribute must be NonNegativeInteger.",
+    "The 'num2' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myTestClass> must have a value of data "
@@ -246,7 +246,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020307
   { TestMyTestClassNum3MustBeInteger,
-    "Num3 attribute must be Integer.",
+    "The 'num3' attribute must be Integer.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numThree' on a <myTestClass> must have a value of data "
@@ -257,7 +257,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020308
   { TestMyTestClassNum1MustBeDouble,
-    "Num1 attribute must be Double.",
+    "The 'num1' attribute must be Double.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numOne' on a <myTestClass> must have a value of data "
@@ -268,7 +268,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020309
   { TestMyTestClassTrueMustBeBoolean,
-    "True attribute must be Boolean.",
+    "The 'true' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:true' on a <myTestClass> must have a value of data "
@@ -279,7 +279,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020310
   { TestMyTestClassFalseMustBeBoolean,
-    "False attribute must be Boolean.",
+    "The 'false' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:false' on a <myTestClass> must have a value of data "
@@ -290,7 +290,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020311
   { TestMyTestClassUnitMustBeUnitSId,
-    "Unit attribute must be UnitSId.",
+    "The 'unit' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on a <myTestClass> must have a "
@@ -302,7 +302,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020312
   { TestMyTestClassRef1MustBeThing1,
-    "Ref1 attribute must be Thing1.",
+    "The attribute 'ref1' must point to Thing1 object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refOne' of a <myTestClass> object must be "
@@ -314,7 +314,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020313
   { TestMyTestClassRef2MustBeThing2,
-    "Ref2 attribute must be Thing2.",
+    "The attribute 'ref2' must point to Thing2 object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refTwo' of a <myTestClass> object must be "
@@ -326,7 +326,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020314
   { TestMyTestClassRefUnitMustBeUnitSId,
-    "RefUnit attribute must be UnitSId.",
+    "The 'refUnit' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refUnit' on a <myTestClass> must have a "
@@ -337,34 +337,37 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020315
-  { TestMyTestClassIdRefMustBeString,
-    "IdRef attribute must be String.",
+  { TestMyTestClassIdRefMustBeSBase,
+    "The attribute 'idRef' must point to SBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idRef' on a <myTestClass> must have a value of XML "
-    "data type 'ID'.",
+    "The value of the attribute 'test:idRef' of a <myTestClass> object must be "
+    "the 'metaid' of an existing 'SBase' object defined in the enclosing "
+    "<model> object.",
     { "L3V1 Test V1 Section"
     }
   },
 
   // 10020316
-  { TestMyTestClassIdref1MustBeString,
-    "Idref1 attribute must be String.",
+  { TestMyTestClassIdref1MustBeSBase,
+    "The attribute 'idref1' must point to SBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idrefOne' on a <myTestClass> must have a value of XML "
-    "data type 'ID'.",
+    "The value of the attribute 'test:idrefOne' of a <myTestClass> object must "
+    "be the 'metaid' of an existing 'SBase' object defined in the enclosing "
+    "<model> object.",
     { "L3V1 Test V1 Section"
     }
   },
 
   // 10020317
-  { TestMyTestClassIdref2MustBeString,
-    "Idref2 attribute must be String.",
+  { TestMyTestClassIdref2MustBeSBase,
+    "The attribute 'idref2' must point to SBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:idrefTwo' on a <myTestClass> must have a value of XML "
-    "data type 'ID'.",
+    "The value of the attribute 'test:idrefTwo' of a <myTestClass> object must "
+    "be the 'metaid' of an existing 'SBase' object defined in the enclosing "
+    "<model> object.",
     { "L3V1 Test V1 Section"
     }
   },
@@ -407,7 +410,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020404
   { TestUnitUnitMustBeUnitSId,
-    "Unit attribute must be UnitSId.",
+    "The 'unit' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on an <unit> must have a taken from "
@@ -498,7 +501,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020604
   { TestMyRequiredClassNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:name' on a <myRequiredClass> must have a value of data "
@@ -509,7 +512,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020605
   { TestMyRequiredClassNumMustBeNonNegativeInteger,
-    "Num attribute must be NonNegativeInteger.",
+    "The 'num' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:num' on a <myRequiredClass> must have a value of data "
@@ -520,7 +523,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020606
   { TestMyRequiredClassNum2MustBeNonNegativeInteger,
-    "Num2 attribute must be NonNegativeInteger.",
+    "The 'num2' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numTwo' on a <myRequiredClass> must have a value of "
@@ -531,7 +534,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020607
   { TestMyRequiredClassNum3MustBeInteger,
-    "Num3 attribute must be Integer.",
+    "The 'num3' attribute must be Integer.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numThree' on a <myRequiredClass> must have a value of "
@@ -542,7 +545,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020608
   { TestMyRequiredClassNum1MustBeDouble,
-    "Num1 attribute must be Double.",
+    "The 'num1' attribute must be Double.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numOne' on a <myRequiredClass> must have a value of "
@@ -553,7 +556,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020609
   { TestMyRequiredClassTrueMustBeBoolean,
-    "True attribute must be Boolean.",
+    "The 'true' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:true' on a <myRequiredClass> must have a value of data "
@@ -564,7 +567,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020610
   { TestMyRequiredClassFalseMustBeBoolean,
-    "False attribute must be Boolean.",
+    "The 'false' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:false' on a <myRequiredClass> must have a value of "
@@ -575,7 +578,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020611
   { TestMyRequiredClassUnitMustBeUnitSId,
-    "Unit attribute must be UnitSId.",
+    "The 'unit' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:unit' on a <myRequiredClass> must have a "
@@ -587,7 +590,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020612
   { TestMyRequiredClassRef1MustBeThing1,
-    "Ref1 attribute must be Thing1.",
+    "The attribute 'ref1' must point to Thing1 object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refOne' of a <myRequiredClass> object "
@@ -599,7 +602,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020613
   { TestMyRequiredClassRef2MustBeThing2,
-    "Ref2 attribute must be Thing2.",
+    "The attribute 'ref2' must point to Thing2 object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refTwo' of a <myRequiredClass> object "
@@ -611,7 +614,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020614
   { TestMyRequiredClassRefUnitMustBeUnitSId,
-    "RefUnit attribute must be UnitSId.",
+    "The 'refUnit' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:refUnit' on a <myRequiredClass> must have "
@@ -623,7 +626,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020615
   { TestMyRequiredClassPosintMustBeNonNegativeInteger,
-    "Posint attribute must be NonNegativeInteger.",
+    "The 'posint' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posint' on a <myRequiredClass> must have a value of "
@@ -634,7 +637,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020616
   { TestMyRequiredClassPosint2MustBeNonNegativeInteger,
-    "Posint2 attribute must be NonNegativeInteger.",
+    "The 'posint2' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintTwo' on a <myRequiredClass> must have a value of "
@@ -645,7 +648,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020617
   { TestMyRequiredClassPosint1MustBeNonNegativeInteger,
-    "Posint1 attribute must be NonNegativeInteger.",
+    "The 'posint1' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:posintOne' on a <myRequiredClass> must have a value of "
@@ -656,7 +659,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020618
   { TestMyRequiredClassMetaidMustBeString,
-    "Metaid attribute must be String.",
+    "The 'metaid' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaid' on a <myRequiredClass> must have a value of "
@@ -667,7 +670,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020619
   { TestMyRequiredClassMetaid1MustBeString,
-    "Metaid1 attribute must be String.",
+    "The 'metaid1' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:metaidOne' on a <myRequiredClass> must have a value of "
@@ -678,7 +681,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020620
   { TestMyRequiredClassNum4MustBeInteger,
-    "Num4 attribute must be Integer.",
+    "The 'num4' attribute must be Integer.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:numFour' on a <myRequiredClass> must have a value of "
@@ -688,19 +691,20 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020621
-  { TestMyRequiredClassMetaidref1MustBeString,
-    "Metaidref1 attribute must be String.",
+  { TestMyRequiredClassMetaidref1MustBeSBase,
+    "The attribute 'metaidref1' must point to SBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:metaidrefOne' on a <myRequiredClass> must have a value "
-    "of XML data type 'ID'.",
+    "The value of the attribute 'test:metaidrefOne' of a <myRequiredClass> "
+    "object must be the 'metaid' of an existing 'SBase' object defined in the "
+    "enclosing <model> object.",
     { "L3V1 Test V1 Section"
     }
   },
 
   // 10020622
   { TestMyRequiredClassNotmetaidMustBeString,
-    "Notmetaid attribute must be String.",
+    "The 'notmetaid' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'test:notmetaid' on a <myRequiredClass> must have a value of "
@@ -711,7 +715,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020623
   { TestMyRequiredClassVectorDoubleMustBeString,
-    "VectorDouble attribute must be String.",
+    "The 'vectorDouble' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:vectorDouble' of a <myRequiredClass> "
@@ -722,7 +726,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020624
   { TestMyRequiredClassVectorDouble1MustBeString,
-    "VectorDouble1 attribute must be String.",
+    "The 'vectorDouble1' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:vectorDoubleOne' of a <myRequiredClass> "
@@ -733,7 +737,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020625
   { TestMyRequiredClassVectorIntMustBeString,
-    "VectorInt attribute must be String.",
+    "The 'vectorInt' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:vectorInt' of a <myRequiredClass> object "
@@ -744,7 +748,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020626
   { TestMyRequiredClassVectorInt1MustBeString,
-    "VectorInt1 attribute must be String.",
+    "The 'vectorInt1' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:vectorIntOne' of a <myRequiredClass> "
@@ -755,7 +759,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020627
   { TestMyRequiredClassArrayDMustBeString,
-    "ArrayD attribute must be String.",
+    "The 'arrayD' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:arrayD' of a <myRequiredClass> object "
@@ -766,7 +770,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020628
   { TestMyRequiredClassArrayIntMustBeString,
-    "ArrayInt attribute must be String.",
+    "The 'arrayInt' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:arrayInt' of a <myRequiredClass> object "
@@ -825,7 +829,7 @@ static const packageErrorTableEntry testErrorTable[] =
 
   // 10020705
   { TestArrayChildNumberMustBeString,
-    "Number attribute must be String.",
+    "The 'number' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'test:number' of an <arrayChild> object must be "

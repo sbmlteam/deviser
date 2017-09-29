@@ -241,11 +241,17 @@ class ValidationRulesForClass():
                    'type {3}.'\
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('string'))
-        elif att_type == 'ID' or att_type == 'IDREF':
+        elif att_type == 'ID':
             text = 'The attribute {0} on {1} {2} must have a value of XML data ' \
                    'type {3}.'\
                 .format(name, self.indef, formatted_name,
                         strFunctions.wrap_token('ID'))
+        elif att_type == 'IDREF':
+            text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                   'the \'metaid\' of an existing \SBase object defined in the ' \
+                   'enclosing \Model object.'\
+                .format(name, self.indef, formatted_name)
+            rule_type = 'SBase'
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}{4}'\
@@ -317,7 +323,11 @@ class ValidationRulesForClass():
             .format(self.pkg_ref, strFunctions.wrap_section(refname))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
-        short = '{0} attribute must be {1}.'.format(att_name, rule_type)
+        if att_type == 'SIdRef' or att_type =='IDREF':
+            short = 'The attribute \'{0}\' must point to {1} object.'.format(strFunctions.lower_first(att_name), rule_type)
+        else:
+            short = 'The \'{0}\' attribute must be {1}.'.format(strFunctions.lower_first(att_name), rule_type)
+
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
         tc = '{0}{1}{2}MustBe{3}'.format(self.up_package, abbrev, att_name,
                                          rule_type)

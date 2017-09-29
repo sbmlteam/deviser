@@ -576,6 +576,16 @@ class ValidationFiles():
         self.error_file.write_defn_begin()
         self.error_file.write_cppns_begin()
         self.error_file.write_cdecl_begin()
+        self.error_file.open_comment()
+        self.error_file.write_comment_line('@enum {0}{1}ErrorCode_t'.format(self.up_package,self.cap_language))
+        self.error_file.write_comment_line('Codes for all {1}-level errors and warnings from the \'{0}\' package.'
+                                           ''.format(self.package,self.cap_language))
+        self.error_file.write_blank_comment_line()
+        self.error_file.write_comment_line('These are distinguished from other {0} error codes by having a number '
+                                           'between {1} and {2}.'.format(self.cap_language, self.offset, self.offset+99999))
+        self.error_file.write_blank_comment_line()
+        self.error_file.write_comment_line('@copydetails doc_sbml_error_code_ranges')
+        self.error_file.close_comment()
         self.error_file.write_line('typedef enum')
         self.error_file.write_line('{')
         first = True

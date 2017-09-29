@@ -46,6 +46,15 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 
+/**
+ * @enum DistribSBMLErrorCode_t
+ * Codes for all SBML-level errors and warnings from the 'distrib' package.
+ *
+ * These are distinguished from other SBML error codes by having a number
+ * between 1500000 and 1599999.
+ *
+ * @copydetails doc_sbml_error_code_ranges
+ */
 typedef enum
 {
   DistribUnknown                                              = 1510100

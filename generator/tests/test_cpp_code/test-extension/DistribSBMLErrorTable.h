@@ -250,7 +250,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1520504
   { DistribDistribInputNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:name' on a <distribInput> must have a value of data "
@@ -261,7 +261,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1520505
   { DistribDistribInputIndexMustBeNonNegativeInteger,
-    "Index attribute must be NonNegativeInteger.",
+    "The 'index' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:index' on a <distribInput> must have a value of "
@@ -484,7 +484,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521204
   { DistribUncertValueValueMustBeDouble,
-    "Value attribute must be Double.",
+    "The 'value' attribute must be Double.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:value' on an <uncertValue> must have a value of "
@@ -495,7 +495,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521205
   { DistribUncertValueVarMustBeSBase,
-    "Var attribute must be SBase.",
+    "The attribute 'var' must point to SBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'distrib:var' of an <uncertValue> object must "
@@ -507,7 +507,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521206
   { DistribUncertValueUnitsMustBeUnitSId,
-    "Units attribute must be UnitSId.",
+    "The 'units' attribute must be UnitSId.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'distrib:units' on an <uncertValue> must have a "
@@ -555,7 +555,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521304
   { DistribUncertBoundInclusiveMustBeBoolean,
-    "Inclusive attribute must be Boolean.",
+    "The 'inclusive' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:inclusive' on an <uncertBound> must have a value of "
@@ -616,7 +616,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521405
   { DistribExternalDistributionDefinitionURLMustBeString,
-    "DefinitionURL attribute must be String.",
+    "The 'definitionURL' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:definitionURL' on an <externalDistribution> must "
@@ -701,7 +701,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521505
   { DistribExternalParameterDefinitionURLMustBeString,
-    "DefinitionURL attribute must be String.",
+    "The 'definitionURL' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:definitionURL' on an <externalParameter> must have "
@@ -896,7 +896,7 @@ static const packageErrorTableEntry distribErrorTable[] =
 
   // 1521805
   { DistribCategoryRankMustBeNonNegativeInteger,
-    "Rank attribute must be NonNegativeInteger.",
+    "The 'rank' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'distrib:rank' on a <category> must have a value of data "

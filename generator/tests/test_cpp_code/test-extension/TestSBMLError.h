@@ -46,6 +46,15 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 
+/**
+ * @enum TestSBMLErrorCode_t
+ * Codes for all SBML-level errors and warnings from the 'test' package.
+ *
+ * These are distinguished from other SBML error codes by having a number
+ * between 10000000 and 10099999.
+ *
+ * @copydetails doc_sbml_error_code_ranges
+ */
 typedef enum
 {
   TestUnknown                                                 = 10010100
@@ -73,9 +82,9 @@ typedef enum
 , TestMyTestClassRef1MustBeThing1                             = 10020312
 , TestMyTestClassRef2MustBeThing2                             = 10020313
 , TestMyTestClassRefUnitMustBeUnitSId                         = 10020314
-, TestMyTestClassIdRefMustBeString                            = 10020315
-, TestMyTestClassIdref1MustBeString                           = 10020316
-, TestMyTestClassIdref2MustBeString                           = 10020317
+, TestMyTestClassIdRefMustBeSBase                             = 10020315
+, TestMyTestClassIdref1MustBeSBase                            = 10020316
+, TestMyTestClassIdref2MustBeSBase                            = 10020317
 , TestUnitAllowedCoreAttributes                               = 10020401
 , TestUnitAllowedCoreElements                                 = 10020402
 , TestUnitAllowedAttributes                                   = 10020403
@@ -103,7 +112,7 @@ typedef enum
 , TestMyRequiredClassMetaidMustBeString                       = 10020618
 , TestMyRequiredClassMetaid1MustBeString                      = 10020619
 , TestMyRequiredClassNum4MustBeInteger                        = 10020620
-, TestMyRequiredClassMetaidref1MustBeString                   = 10020621
+, TestMyRequiredClassMetaidref1MustBeSBase                    = 10020621
 , TestMyRequiredClassNotmetaidMustBeString                    = 10020622
 , TestMyRequiredClassVectorDoubleMustBeString                 = 10020623
 , TestMyRequiredClassVectorDouble1MustBeString                = 10020624

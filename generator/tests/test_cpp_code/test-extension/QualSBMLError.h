@@ -46,6 +46,15 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 
+/**
+ * @enum QualSBMLErrorCode_t
+ * Codes for all SBML-level errors and warnings from the 'qual' package.
+ *
+ * These are distinguished from other SBML error codes by having a number
+ * between 3000000 and 3099999.
+ *
+ * @copydetails doc_sbml_error_code_ranges
+ */
 typedef enum
 {
   QualUnknown                                                 = 3010100

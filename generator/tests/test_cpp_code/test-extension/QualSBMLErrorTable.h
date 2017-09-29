@@ -252,7 +252,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020304
   { QualQualitativeSpeciesCompartmentMustBeCompartment,
-    "Compartment attribute must be Compartment.",
+    "The attribute 'compartment' must point to Compartment object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:compartment' of a <qualitativeSpecies> "
@@ -264,7 +264,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020305
   { QualQualitativeSpeciesConstantMustBeBoolean,
-    "Constant attribute must be Boolean.",
+    "The 'constant' attribute must be Boolean.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:constant' on a <qualitativeSpecies> must have a value "
@@ -275,7 +275,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020306
   { QualQualitativeSpeciesNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:name' on a <qualitativeSpecies> must have a value of "
@@ -286,7 +286,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020307
   { QualQualitativeSpeciesInitialLevelMustBeNonNegativeInteger,
-    "InitialLevel attribute must be NonNegativeInteger.",
+    "The 'initialLevel' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:initialLevel' on a <qualitativeSpecies> must have a "
@@ -297,7 +297,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020308
   { QualQualitativeSpeciesMaxLevelMustBeNonNegativeInteger,
-    "MaxLevel attribute must be NonNegativeInteger.",
+    "The 'maxLevel' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:maxLevel' on a <qualitativeSpecies> must have a value "
@@ -358,7 +358,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020405
   { QualTransitionNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:name' on a <transition> must have a value of data type "
@@ -501,7 +501,8 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020504
   { QualInputQualitativeSpeciesMustBeQualitativeSpecies,
-    "QualitativeSpecies attribute must be QualitativeSpecies.",
+    "The attribute 'qualitativeSpecies' must point to QualitativeSpecies "
+      "object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:qualitativeSpecies' of an <input> object "
@@ -513,7 +514,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020505
   { QualInputNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:name' on an <input> must have a value of data type "
@@ -524,7 +525,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020506
   { QualInputSignMustBeSignEnum,
-    "Sign attribute must be SignEnum.",
+    "The 'sign' attribute must be SignEnum.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:sign' of an <input> object must conform "
@@ -537,7 +538,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020507
   { QualInputTransitionEffectMustBeTransitionInputEffectEnum,
-    "TransitionEffect attribute must be TransitionInputEffectEnum.",
+    "The 'transitionEffect' attribute must be TransitionInputEffectEnum.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:transitionEffect' of an <input> object "
@@ -551,7 +552,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020508
   { QualInputThresholdLevelMustBeNonNegativeInteger,
-    "ThresholdLevel attribute must be NonNegativeInteger.",
+    "The 'thresholdLevel' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:thresholdLevel' on an <input> must have a value of "
@@ -600,7 +601,8 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020604
   { QualOutputQualitativeSpeciesMustBeQualitativeSpecies,
-    "QualitativeSpecies attribute must be QualitativeSpecies.",
+    "The attribute 'qualitativeSpecies' must point to QualitativeSpecies "
+      "object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:qualitativeSpecies' of an <output> object "
@@ -612,7 +614,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020605
   { QualOutputTransitionEffectMustBeTransitionOutputEffectEnum,
-    "TransitionEffect attribute must be TransitionOutputEffectEnum.",
+    "The 'transitionEffect' attribute must be TransitionOutputEffectEnum.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:transitionEffect' of an <output> object "
@@ -626,7 +628,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020606
   { QualOutputNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:name' on an <output> must have a value of data type "
@@ -637,7 +639,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020607
   { QualOutputOutputLevelMustBeInteger,
-    "OutputLevel attribute must be Integer.",
+    "The 'outputLevel' attribute must be Integer.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:outputLevel' on an <output> must have a value of data "
@@ -684,7 +686,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020704
   { QualDefaultTermResultLevelMustBeNonNegativeInteger,
-    "ResultLevel attribute must be NonNegativeInteger.",
+    "The 'resultLevel' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:resultLevel' on a <defaultTerm> must have a value of "
@@ -743,7 +745,7 @@ static const packageErrorTableEntry qualErrorTable[] =
 
   // 3020805
   { QualFunctionTermResultLevelMustBeNonNegativeInteger,
-    "ResultLevel attribute must be NonNegativeInteger.",
+    "The 'resultLevel' attribute must be NonNegativeInteger.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'qual:resultLevel' on a <functionTerm> must have a value of "

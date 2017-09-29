@@ -380,7 +380,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020504
   { FbcFluxBoundReactionMustBeReaction,
-    "Reaction attribute must be Reaction.",
+    "The attribute 'reaction' must point to Reaction object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:reaction' of a <fluxBound> object must be "
@@ -392,7 +392,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020505
   { FbcFluxBoundOperationMustBeFbcOperationEnum,
-    "Operation attribute must be FbcOperationEnum.",
+    "The 'operation' attribute must be FbcOperationEnum.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:operation' of a <fluxBound> object must "
@@ -406,7 +406,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020506
   { FbcFluxBoundValueMustBeDouble,
-    "Value attribute must be Double.",
+    "The 'value' attribute must be Double.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:value' on a <fluxBound> must have a value of data type "
@@ -417,7 +417,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020507
   { FbcFluxBoundNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <fluxBound> must have a value of data type "
@@ -478,7 +478,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020605
   { FbcObjectiveTypeMustBeFbcTypeEnum,
-    "Type attribute must be FbcTypeEnum.",
+    "The 'type' attribute must be FbcTypeEnum.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:type' of an <objective> object must "
@@ -491,7 +491,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020607
   { FbcObjectiveNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on an <objective> must have a value of data type "
@@ -551,7 +551,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020615
   { FbcLOObjectivesActiveObjectiveMustBeObjective,
-    "ActiveObjective attribute must be Objective.",
+    "The attribute 'activeObjective' must point to Objective object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:activeObjective' of an <listOfObjectives> "
@@ -601,7 +601,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020704
   { FbcFluxObjectiveReactionMustBeReaction,
-    "Reaction attribute must be Reaction.",
+    "The attribute 'reaction' must point to Reaction object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:reaction' of a <fluxObjective> object must "
@@ -613,7 +613,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020705
   { FbcFluxObjectiveCoefficientMustBeDouble,
-    "Coefficient attribute must be Double.",
+    "The 'coefficient' attribute must be Double.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:coefficient' on a <fluxObjective> must have a value of "
@@ -624,7 +624,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020708
   { FbcFluxObjectiveNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <fluxObjective> must have a value of data "
@@ -672,7 +672,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020804
   { FbcGeneProductLabelMustBeString,
-    "Label attribute must be String.",
+    "The 'label' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:label' on a <geneProduct> must have a value of data "
@@ -683,7 +683,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020805
   { FbcGeneProductNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <geneProduct> must have a value of data type "
@@ -694,7 +694,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020806
   { FbcGeneProductAssociatedSpeciesMustBeSpecies,
-    "AssociatedSpecies attribute must be Species.",
+    "The attribute 'associatedSpecies' must point to Species object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:associatedSpecies' of a <geneProduct> "
@@ -743,7 +743,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020904
   { FbcGeneProductRefNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <geneProductRef> must have a value of data "
@@ -754,7 +754,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2020905
   { FbcGeneProductRefGeneProductMustBeGeneProduct,
-    "GeneProduct attribute must be GeneProduct.",
+    "The attribute 'geneProduct' must point to GeneProduct object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:geneProduct' of a <geneProductRef> object "
@@ -982,7 +982,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
 
   // 2021305
   { FbcGeneProductAssociationNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <geneProductAssociation> must have a value "
