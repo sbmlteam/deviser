@@ -1989,13 +1989,13 @@ Fred_unsetOther2(Fred_t * f);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Fred_addOtherLO(const OtherLO_t* object)
+ * @see Fred_addOtherLO()
  * @see Fred_createOtherLO()
- * @see Fred_getOtherLOById(const std::string& sid)
- * @see Fred_getOtherLO(unsigned int n)
+ * @see Fred_getOtherLOById()
+ * @see Fred_getOtherLO()
  * @see Fred_getNumOtherLOs()
- * @see Fred_removeOtherLOById(const std::string& sid)
- * @see Fred_removeOtherLO(unsigned int n)
+ * @see Fred_removeOtherLOById()
+ * @see Fred_removeOtherLO()
  *
  * @memberof Fred_t
  */

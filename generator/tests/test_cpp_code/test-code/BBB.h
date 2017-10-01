@@ -1142,13 +1142,13 @@ BBB_unsetId(BBB_t * bbb);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see BBB_addAnother(const Another_t* object)
+ * @see BBB_addAnother()
  * @see BBB_createAnother()
- * @see BBB_getAnotherById(const std::string& sid)
- * @see BBB_getAnother(unsigned int n)
+ * @see BBB_getAnotherById()
+ * @see BBB_getAnother()
  * @see BBB_getNumAnothers()
- * @see BBB_removeAnotherById(const std::string& sid)
- * @see BBB_removeAnother(unsigned int n)
+ * @see BBB_removeAnotherById()
+ * @see BBB_removeAnother()
  *
  * @memberof BBB_t
  */

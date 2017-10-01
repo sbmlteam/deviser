@@ -1213,14 +1213,13 @@ ParametricGeometry_unsetSpatialPoints(ParametricGeometry_t * pg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see ParametricGeometry_addParametricObject(const ParametricObject_t*
- * object)
+ * @see ParametricGeometry_addParametricObject()
  * @see ParametricGeometry_createParametricObject()
- * @see ParametricGeometry_getParametricObjectById(const std::string& sid)
- * @see ParametricGeometry_getParametricObject(unsigned int n)
+ * @see ParametricGeometry_getParametricObjectById()
+ * @see ParametricGeometry_getParametricObject()
  * @see ParametricGeometry_getNumParametricObjects()
- * @see ParametricGeometry_removeParametricObjectById(const std::string& sid)
- * @see ParametricGeometry_removeParametricObject(unsigned int n)
+ * @see ParametricGeometry_removeParametricObjectById()
+ * @see ParametricGeometry_removeParametricObject()
  *
  * @memberof ParametricGeometry_t
  */

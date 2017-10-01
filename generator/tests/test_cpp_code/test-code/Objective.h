@@ -1530,13 +1530,13 @@ Objective_unsetType(Objective_t * o);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Objective_addFluxObjective(const FluxObjective_t* object)
+ * @see Objective_addFluxObjective()
  * @see Objective_createFluxObjective()
- * @see Objective_getFluxObjectiveById(const std::string& sid)
- * @see Objective_getFluxObjective(unsigned int n)
+ * @see Objective_getFluxObjectiveById()
+ * @see Objective_getFluxObjective()
  * @see Objective_getNumFluxObjectives()
- * @see Objective_removeFluxObjectiveById(const std::string& sid)
- * @see Objective_removeFluxObjective(unsigned int n)
+ * @see Objective_removeFluxObjectiveById()
+ * @see Objective_removeFluxObjective()
  *
  * @memberof Objective_t
  */

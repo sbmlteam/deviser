@@ -964,13 +964,13 @@ CategoricalDistribution_free(CategoricalDistribution_t* cd);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see CategoricalDistribution_addCategory(const Category_t* object)
+ * @see CategoricalDistribution_addCategory()
  * @see CategoricalDistribution_createCategory()
- * @see CategoricalDistribution_getCategoryById(const std::string& sid)
- * @see CategoricalDistribution_getCategory(unsigned int n)
+ * @see CategoricalDistribution_getCategoryById()
+ * @see CategoricalDistribution_getCategory()
  * @see CategoricalDistribution_getNumCategories()
- * @see CategoricalDistribution_removeCategoryById(const std::string& sid)
- * @see CategoricalDistribution_removeCategory(unsigned int n)
+ * @see CategoricalDistribution_removeCategoryById()
+ * @see CategoricalDistribution_removeCategory()
  *
  * @memberof CategoricalDistribution_t
  */

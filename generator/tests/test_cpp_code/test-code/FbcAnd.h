@@ -1013,13 +1013,13 @@ FbcAnd_free(FbcAnd_t* fa);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see FbcAnd_addAssociation(const Association_t* object)
+ * @see FbcAnd_addAssociation()
  * @see FbcAnd_createAssociation()
- * @see FbcAnd_getAssociationById(const std::string& sid)
- * @see FbcAnd_getAssociation(unsigned int n)
+ * @see FbcAnd_getAssociationById()
+ * @see FbcAnd_getAssociation()
  * @see FbcAnd_getNumAssociations()
- * @see FbcAnd_removeAssociationById(const std::string& sid)
- * @see FbcAnd_removeAssociation(unsigned int n)
+ * @see FbcAnd_removeAssociationById()
+ * @see FbcAnd_removeAssociation()
  *
  * @memberof FbcAnd_t
  */

@@ -1720,13 +1720,13 @@ Transition_unsetName(Transition_t * t);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Transition_addInput(const Input_t* object)
+ * @see Transition_addInput()
  * @see Transition_createInput()
- * @see Transition_getInputById(const std::string& sid)
- * @see Transition_getInput(unsigned int n)
+ * @see Transition_getInputById()
+ * @see Transition_getInput()
  * @see Transition_getNumInputs()
- * @see Transition_removeInputById(const std::string& sid)
- * @see Transition_removeInput(unsigned int n)
+ * @see Transition_removeInputById()
+ * @see Transition_removeInput()
  *
  * @memberof Transition_t
  */
@@ -1894,13 +1894,13 @@ Transition_removeInputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Transition_addOutput(const Output_t* object)
+ * @see Transition_addOutput()
  * @see Transition_createOutput()
- * @see Transition_getOutputById(const std::string& sid)
- * @see Transition_getOutput(unsigned int n)
+ * @see Transition_getOutputById()
+ * @see Transition_getOutput()
  * @see Transition_getNumOutputs()
- * @see Transition_removeOutputById(const std::string& sid)
- * @see Transition_removeOutput(unsigned int n)
+ * @see Transition_removeOutputById()
+ * @see Transition_removeOutput()
  *
  * @memberof Transition_t
  */
@@ -2069,13 +2069,13 @@ Transition_removeOutputById(Transition_t* t, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Transition_addFunctionTerm(const FunctionTerm_t* object)
+ * @see Transition_addFunctionTerm()
  * @see Transition_createFunctionTerm()
- * @see Transition_getFunctionTermById(const std::string& sid)
- * @see Transition_getFunctionTerm(unsigned int n)
+ * @see Transition_getFunctionTermById()
+ * @see Transition_getFunctionTerm()
  * @see Transition_getNumFunctionTerms()
- * @see Transition_removeFunctionTermById(const std::string& sid)
- * @see Transition_removeFunctionTerm(unsigned int n)
+ * @see Transition_removeFunctionTermById()
+ * @see Transition_removeFunctionTerm()
  *
  * @memberof Transition_t
  */

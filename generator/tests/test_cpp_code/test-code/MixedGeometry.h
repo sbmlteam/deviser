@@ -1276,13 +1276,13 @@ MixedGeometry_free(MixedGeometry_t* mg);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see MixedGeometry_addGeometryDefinition(const GeometryDefinition_t* object)
+ * @see MixedGeometry_addGeometryDefinition()
  * @see MixedGeometry_createGeometryDefinition()
- * @see MixedGeometry_getGeometryDefinitionById(const std::string& sid)
- * @see MixedGeometry_getGeometryDefinition(unsigned int n)
+ * @see MixedGeometry_getGeometryDefinitionById()
+ * @see MixedGeometry_getGeometryDefinition()
  * @see MixedGeometry_getNumGeometryDefinitions()
- * @see MixedGeometry_removeGeometryDefinitionById(const std::string& sid)
- * @see MixedGeometry_removeGeometryDefinition(unsigned int n)
+ * @see MixedGeometry_removeGeometryDefinitionById()
+ * @see MixedGeometry_removeGeometryDefinition()
  *
  * @memberof MixedGeometry_t
  */
@@ -1514,13 +1514,13 @@ MixedGeometry_removeGeometryDefinitionById(MixedGeometry_t* mg,
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see MixedGeometry_addOrdinalMapping(const OrdinalMapping_t* object)
+ * @see MixedGeometry_addOrdinalMapping()
  * @see MixedGeometry_createOrdinalMapping()
- * @see MixedGeometry_getOrdinalMappingById(const std::string& sid)
- * @see MixedGeometry_getOrdinalMapping(unsigned int n)
+ * @see MixedGeometry_getOrdinalMappingById()
+ * @see MixedGeometry_getOrdinalMapping()
  * @see MixedGeometry_getNumOrdinalMappings()
- * @see MixedGeometry_removeOrdinalMappingById(const std::string& sid)
- * @see MixedGeometry_removeOrdinalMapping(unsigned int n)
+ * @see MixedGeometry_removeOrdinalMappingById()
+ * @see MixedGeometry_removeOrdinalMapping()
  *
  * @memberof MixedGeometry_t
  */

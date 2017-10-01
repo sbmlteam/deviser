@@ -1563,13 +1563,13 @@ Event_unsetDelay(Event_t * e);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see Event_addEventAssignment(const EventAssignment_t* object)
+ * @see Event_addEventAssignment()
  * @see Event_createEventAssignment()
- * @see Event_getEventAssignmentById(const std::string& sid)
- * @see Event_getEventAssignment(unsigned int n)
+ * @see Event_getEventAssignmentById()
+ * @see Event_getEventAssignment()
  * @see Event_getNumEventAssignments()
- * @see Event_removeEventAssignmentById(const std::string& sid)
- * @see Event_removeEventAssignment(unsigned int n)
+ * @see Event_removeEventAssignmentById()
+ * @see Event_removeEventAssignment()
  *
  * @memberof Event_t
  */
