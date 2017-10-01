@@ -833,6 +833,12 @@ def main():
         test_case = 'basic extension file with SBasePlugin'
         fail += run_ext_test(name, class_name, test_case, 0)
 
+        name = 'new_distrib_test'
+        num = 36
+        class_name = 'UncertaintyA'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -855,11 +861,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
-        num = 1
-        class_name = 'Member'
-        list_of = 'ListOfMembers'
-        test_case = 'list of with attribute'
+        name = 'new_distrib_test'
+        num = 36
+        class_name = 'UncertaintyA'
+        list_of = ''
+        test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
