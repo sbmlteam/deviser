@@ -888,13 +888,13 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see GroupsModelPlugin_addGroup(const Group_t* object)
+ * @see GroupsModelPlugin_addGroup()
  * @see GroupsModelPlugin_createGroup()
- * @see GroupsModelPlugin_getGroupById(const std::string& sid)
- * @see GroupsModelPlugin_getGroup(unsigned int n)
+ * @see GroupsModelPlugin_getGroupById()
+ * @see GroupsModelPlugin_getGroup()
  * @see GroupsModelPlugin_getNumGroups()
- * @see GroupsModelPlugin_removeGroupById(const std::string& sid)
- * @see GroupsModelPlugin_removeGroup(unsigned int n)
+ * @see GroupsModelPlugin_removeGroupById()
+ * @see GroupsModelPlugin_removeGroup()
  *
  * @memberof GroupsModelPlugin_t
  */
