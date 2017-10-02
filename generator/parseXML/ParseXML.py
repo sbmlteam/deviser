@@ -746,7 +746,7 @@ class ParseXML():
                 for attr in elem['attribs']:
                     attr['parent'] = elem
                     attr['root'] = package
-                    if attr['type'] != 'vector' and attr['type'] != 'array' and attr['type'] != 'enum':
+                    if attr['type'] =='lo_element':
                         if 'element' in attr and attr['element'] != '' and attr['element'] not in list_all_element:
                             self.report_error(global_variables
                                               .return_codes['unknown type used'],
