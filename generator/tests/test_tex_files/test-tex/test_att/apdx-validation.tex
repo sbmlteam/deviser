@@ -291,15 +291,15 @@ attributes \token{test:\-id}, \token{test:\-name}, \token{test:\-num},
 \token{test:\-refOne}, \token{test:\-refTwo}, \token{test:\-refUnit},
 \token{test:\-correctId}, \token{test:\-posint},
 \token{test:\-posintTwo}, \token{test:\-posintOne},
-\token{test:\-metaid}, \token{test:\-metaidOne}, \token{test:\-numFour},
-\token{test:\-metaidrefOne} and \token{test:\-notmetaid}, and may have
-the optional attributes \token{test:\-vectorDouble},
-\token{test:\-vectorDoubleOne}, \token{test:\-vectorInt},
-\token{test:\-vectorIntOne}, \token{test:\-arrayD} and
-\token{test:\-arrayInt}. No other attributes from the SBML Level 3
-testAttributes namespaces are permitted on a \MyRequiredClass object.
-(Reference: SBML Level~3 Package specification for testAttributes,
-Version~1, \sec{myrequiredclass-class}.)}
+\token{test:\-metaidTwo}, \token{test:\-metaidOne},
+\token{test:\-numFour}, \token{test:\-metaidrefOne} and
+\token{test:\-notmetaid}, and may have the optional attributes
+\token{test:\-vectorDouble}, \token{test:\-vectorDoubleOne},
+\token{test:\-vectorInt}, \token{test:\-vectorIntOne},
+\token{test:\-arrayD} and \token{test:\-arrayInt}. No other attributes
+from the SBML Level 3 testAttributes namespaces are permitted on a
+\MyRequiredClass object. (Reference: SBML Level~3 Package specification
+for testAttributes, Version~1, \sec{myrequiredclass-class}.)}
 
 \validRule{test-20604}{The attribute \token{test:\-name} on a
 \MyRequiredClass must have a value of data type \token{string}.
@@ -376,7 +376,7 @@ testAttributes, Version~1, \sec{myrequiredclass-class}.)}
 must be non negative. (Reference: SBML Level~3 Package specification for
 testAttributes, Version~1, \sec{myrequiredclass-class}.)}
 
-\validRule{test-20618}{The attribute \token{test:\-metaid} on a
+\validRule{test-20618}{The attribute \token{test:\-metaidTwo} on a
 \MyRequiredClass must have a value of XML data type \token{ID}.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{myrequiredclass-class}.)}
@@ -486,28 +486,62 @@ SBML Level 3 testAttributes namespaces are permitted on a \Container
 object. (Reference: SBML Level~3 Package specification for
 testAttributes, Version~1, \sec{container-class}.)}
 
-\validRule{test-20804}{The \ListOfMyLoTests subobject on a \Container
-object is optional, but if present, this container object must not be
-empty. (Reference: SBML Level~3 Package specification for
-testAttributes, Version~1, \sec{container-class}.)}
-
-\validRule{test-20805}{Apart from the general notes and annotations
+\validRule{test-20804}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfMyLoTests container
 object may only contain \MyLoTest objects. (Reference: SBML Level~3
 Package specification for testAttributes, Version~1,
 \sec{listofmylotests-class}.)}
 
-\validRule{test-20806}{A \ListOfMyLoTests object may have the optional
+\validRule{test-20805}{A \ListOfMyLoTests object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
 other attributes from the SBML Level 3 Core namespaces are permitted on
 a \ListOfMyLoTests object. (Reference: SBML Level~3 Package
 specification for testAttributes, Version~1,
 \sec{listofmylotests-class}.)}
 
-\validRule{test-20807}{A \ListOfMyLoTests object may have the optional
+\validRule{test-20806}{A \ListOfMyLoTests object may have the optional
 attribute \token{test:\-id}. No other attributes from the SBML Level 3
 testAttributes namespaces are permitted on a \ListOfMyLoTests object.
 (Reference: SBML Level~3 Package specification for testAttributes,
 Version~1, \sec{listofmylotests-class}.)}
+
+
+\subsubsection*{Rules for \class{Unit1} object}
+
+\validRule{test-20901}{An \UnitOne object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on an
+\UnitOne. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-20902}{An \UnitOne object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on an \UnitOne.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+
+\subsubsection*{Rules for \class{Thing1} object}
+
+\validRule{test-21001}{A \ThingOne object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ThingOne. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-21002}{A \ThingOne object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \ThingOne.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+
+\subsubsection*{Rules for \class{Thing2} object}
+
+\validRule{test-21101}{A \ThingTwo object may have the optional SBML
+Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
+attributes from the SBML Level 3 Core namespaces are permitted on a
+\ThingTwo. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
+
+\validRule{test-21102}{A \ThingTwo object may have the optional SBML
+Level~3 Core subobjects for notes and annotations. No other elements
+from the SBML Level 3 Core namespaces are permitted on a \ThingTwo.
+(Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 
