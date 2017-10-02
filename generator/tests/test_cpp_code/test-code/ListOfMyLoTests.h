@@ -377,7 +377,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{SBML_LIST_OF, SBMLTypeCode_t}
+   * @sbmlconstant{SBML_LIST_OF, SBMLTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -392,7 +392,7 @@ public:
    *
    * @return the SBML typecode for the objects contained in this
    * ListOfMyLoTests:
-   * @sbmlconstant{TEST_LO_TEST, SBMLTestTypeCode_t}
+   * @sbmlconstant{TEST_LO_TEST, SBMLTestTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

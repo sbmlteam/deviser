@@ -171,7 +171,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{MY_TEST_TYPE, SEDMLTestTypeCode_t}
+   * @sedmlconstant{MY_TEST_TYPE, SEDMLTestTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

@@ -245,7 +245,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{CORE_CONSTRAINT, SBMLCoreTypeCode_t}
+   * @sbmlconstant{CORE_CONSTRAINT, SBMLCoreTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

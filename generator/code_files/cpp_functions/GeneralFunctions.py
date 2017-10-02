@@ -274,11 +274,11 @@ class GeneralFunctions():
         additional = []
         if self.is_list_of:
             line = '@{0}constant{2}{1}_LIST_OF, ' \
-                   '{1}TypeCode_t{3}'.format(self.language, self.cap_language,
+                   '{1}TypeCode_t{3}.'.format(self.language, self.cap_language,
                                              '{', '}')
         else:
             line = '@{0}constant{1}{2}, {3}{4}' \
-                   'TypeCode_t{5}'.format(self.language, '{', self.typecode,
+                   'TypeCode_t{5}.'.format(self.language, '{', self.typecode,
                                           self.cap_language, self.package, '}')
         return_lines.append(line)
         additional.append('@copydetails doc_warning_typecodes_not_unique')
@@ -327,7 +327,7 @@ class GeneralFunctions():
                         'objects contained in this '
                         '{1}:'.format(self.cap_language, self.object_name)]
         additional = []
-        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}' \
+        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}.' \
                ''.format(self.language, '{', self.typecode, self.cap_language,
                          self.package, '}')
         return_lines.append(line)

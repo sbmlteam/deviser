@@ -1430,7 +1430,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{MY_TEST_TYPE, SBMLTestTypeCode_t}
+   * @sbmlconstant{MY_TEST_TYPE, SBMLTestTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
