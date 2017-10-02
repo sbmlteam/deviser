@@ -1235,7 +1235,7 @@ ClassOneTwo_getAttUnit(const ClassOneTwo_t * cot);
  * @return the value of the "attEnum" attribute of this ClassOneTwo_t as a
  * AbcType_t.
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  * @if clike The value is drawn from the enumeration @ref AbcType_t@endif
  *
  * @memberof ClassOneTwo_t
@@ -1255,7 +1255,7 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  *
  * @memberof ClassOneTwo_t
  */
@@ -1385,7 +1385,7 @@ ClassOneTwo_isSetAttUnit(const ClassOneTwo_t * cot);
  * @return @c 1 (true) if this ClassOneTwo_t's "attEnum" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  *
  * @memberof ClassOneTwo_t
  */
@@ -1544,7 +1544,7 @@ ClassOneTwo_setAttUnit(ClassOneTwo_t * cot, const char * attUnit);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  *
  * @memberof ClassOneTwo_t
  */
@@ -1565,7 +1565,7 @@ ClassOneTwo_setAttEnum(ClassOneTwo_t * cot, AbcType_t attEnum);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  *
  * @memberof ClassOneTwo_t
  */
@@ -1702,7 +1702,7 @@ ClassOneTwo_unsetAttUnit(ClassOneTwo_t * cot);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_classonetwo_t_attEnum
+ * @copydetails doc_classonetwo_attEnum
  *
  * @memberof ClassOneTwo_t
  */

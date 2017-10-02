@@ -1149,7 +1149,7 @@ CoordinateComponent_getId(const CoordinateComponent_t * cc);
  * @return the value of the "type" attribute of this CoordinateComponent_t as a
  * CoordinateKind_t.
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  * @if clike The value is drawn from the enumeration @ref
  * CoordinateKind_t@endif
  *
@@ -1170,7 +1170,7 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1221,7 +1221,7 @@ CoordinateComponent_isSetId(const CoordinateComponent_t * cc);
  * @return @c 1 (true) if this CoordinateComponent_t's "type" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1280,7 +1280,7 @@ CoordinateComponent_setId(CoordinateComponent_t * cc, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1302,7 +1302,7 @@ CoordinateComponent_setType(CoordinateComponent_t * cc,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  *
  * @memberof CoordinateComponent_t
  */
@@ -1357,7 +1357,7 @@ CoordinateComponent_unsetId(CoordinateComponent_t * cc);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_coordinatecomponent_t_type
+ * @copydetails doc_coordinatecomponent_type
  *
  * @memberof CoordinateComponent_t
  */

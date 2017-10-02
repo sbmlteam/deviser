@@ -938,7 +938,7 @@ Output_getQualitativeSpecies(const Output_t * o);
  * @return the value of the "transitionEffect" attribute of this Output_t as a
  * TransitionOutputEffect_t.
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  * @if clike The value is drawn from the enumeration @ref
  * TransitionOutputEffect_t@endif
  *
@@ -959,7 +959,7 @@ Output_getTransitionEffect(const Output_t * o);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  *
  * @memberof Output_t
  */
@@ -1040,7 +1040,7 @@ Output_isSetQualitativeSpecies(const Output_t * o);
  * @return @c 1 (true) if this Output_t's "transitionEffect" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  *
  * @memberof Output_t
  */
@@ -1135,7 +1135,7 @@ Output_setQualitativeSpecies(Output_t * o, const char * qualitativeSpecies);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  *
  * @memberof Output_t
  */
@@ -1158,7 +1158,7 @@ Output_setTransitionEffect(Output_t * o,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  *
  * @memberof Output_t
  */
@@ -1251,7 +1251,7 @@ Output_unsetQualitativeSpecies(Output_t * o);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_output_t_transitionEffect
+ * @copydetails doc_output_transitionEffect
  *
  * @memberof Output_t
  */

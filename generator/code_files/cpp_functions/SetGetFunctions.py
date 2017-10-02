@@ -132,6 +132,13 @@ class SetGetFunctions():
                 return
         if attribute['isArray'] and self.is_cpp_api:
             return self.write_get_array(index, const)
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
         # create comment parts
         params = []
         return_lines = []
@@ -205,7 +212,7 @@ class SetGetFunctions():
                 additional.append('@copydetails doc_returned_owned_char')
 
         if 'isEnum' in attribute and attribute['isEnum']:
-            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append(doccopy)
             additional.append('@if clike The value is drawn from the enumeration @ref {0}@endif'.format(attribute['CType']))
 #            additional.append('The possible values returned by this method are:')
         # create the function implementation
@@ -253,6 +260,13 @@ class SetGetFunctions():
             return
         if not attribute['isEnum']:
             return
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
 
         # create comment parts
         params = []
@@ -292,7 +306,7 @@ class SetGetFunctions():
             additional.append('@copydetails doc_returned_unowned_char')
             additional.append(' ')
         if 'isEnum' in attribute and attribute['isEnum']:
-            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append('{0}'.format(doccopy))
         if self.is_cpp_api:
             implementation = ['static const std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],
@@ -477,6 +491,13 @@ class SetGetFunctions():
             ob_type = 'attribute'
         else:
             ob_type = 'element'
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
 
         # create comment parts
         params = []
@@ -514,7 +535,7 @@ class SetGetFunctions():
                              .format(self.object_name, self.abbrev_parent))
 
         if 'isEnum' in attribute and attribute['isEnum']:
-            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append('{0}'.format(doccopy))
         # create the function implementation
         if self.is_cpp_api:
             if query.is_string(attribute):
@@ -650,6 +671,13 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             if attribute['type'] == 'string':
                 can_be_invalid = False
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
 
         # create comment parts
         params = []
@@ -695,7 +723,7 @@ class SetGetFunctions():
                                                       global_variables.ret_invalid_obj, self.close_br))
 
         if 'isEnum' in attribute and attribute['isEnum']:
-            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append('{0}'.format(doccopy))
         # create the function declaration
         if self.is_cpp_api:
             function = 'set{0}'.format(attribute['capAttName'])
@@ -801,6 +829,13 @@ class SetGetFunctions():
             att_type = 'const char *'
         else:
             att_type = 'std::string&'
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
 
         # create comment parts
         params = []
@@ -830,7 +865,7 @@ class SetGetFunctions():
                                 't{3}'.format(self.language, self.open_br,
                                               global_variables.ret_invalid_obj, self.close_br))
 
-        additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+        additional.append('{0}'.format(doccopy))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -1104,6 +1139,13 @@ class SetGetFunctions():
         return code
 
     def write_unset_general(self, attribute, ob_type):
+        if 'isEnum' in attribute and attribute['isEnum']:
+            if self.is_cpp_api:
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+            else:
+                l = len(self.object_name)
+                name_no_t = self.object_name[0:l-2]
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
         # create comment parts
         params = []
         return_lines = []
@@ -1148,7 +1190,7 @@ class SetGetFunctions():
                                     't{3}'.format(self.language, self.open_br,
                                                   global_variables.ret_invalid_obj, self.close_br))
         if 'isEnum' in attribute and attribute['isEnum']:
-            additional.append('@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name']))
+            additional.append('{0}'.format(doccopy))
 
         # create the function declaration
         if self.is_cpp_api:

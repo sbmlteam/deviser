@@ -1008,7 +1008,7 @@ SpatialPoints_getId(const SpatialPoints_t * sp);
  * @return the value of the "compression" attribute of this SpatialPoints_t as
  * a CompressionKind_t.
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  * @if clike The value is drawn from the enumeration @ref
  * CompressionKind_t@endif
  *
@@ -1029,7 +1029,7 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  *
  * @memberof SpatialPoints_t
  */
@@ -1062,7 +1062,7 @@ SpatialPoints_getArrayDataLength(const SpatialPoints_t * sp);
  * @return the value of the "dataType" attribute of this SpatialPoints_t as a
  * DataKind_t.
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
  *
  * @memberof SpatialPoints_t
@@ -1082,7 +1082,7 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  *
  * @memberof SpatialPoints_t
  */
@@ -1116,7 +1116,7 @@ SpatialPoints_isSetId(const SpatialPoints_t * sp);
  * @return @c 1 (true) if this SpatialPoints_t's "compression" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  *
  * @memberof SpatialPoints_t
  */
@@ -1166,7 +1166,7 @@ SpatialPoints_isSetArrayDataLength(const SpatialPoints_t * sp);
  * @return @c 1 (true) if this SpatialPoints_t's "dataType" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  *
  * @memberof SpatialPoints_t
  */
@@ -1210,7 +1210,7 @@ SpatialPoints_setId(SpatialPoints_t * sp, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  *
  * @memberof SpatialPoints_t
  */
@@ -1232,7 +1232,7 @@ SpatialPoints_setCompression(SpatialPoints_t * sp,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  *
  * @memberof SpatialPoints_t
  */
@@ -1297,7 +1297,7 @@ SpatialPoints_setArrayDataLength(SpatialPoints_t * sp, int arrayDataLength);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  *
  * @memberof SpatialPoints_t
  */
@@ -1318,7 +1318,7 @@ SpatialPoints_setDataType(SpatialPoints_t * sp, DataKind_t dataType);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  *
  * @memberof SpatialPoints_t
  */
@@ -1354,7 +1354,7 @@ SpatialPoints_unsetId(SpatialPoints_t * sp);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_compression
+ * @copydetails doc_spatialpoints_compression
  *
  * @memberof SpatialPoints_t
  */
@@ -1406,7 +1406,7 @@ SpatialPoints_unsetArrayDataLength(SpatialPoints_t * sp);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_spatialpoints_t_dataType
+ * @copydetails doc_spatialpoints_dataType
  *
  * @memberof SpatialPoints_t
  */

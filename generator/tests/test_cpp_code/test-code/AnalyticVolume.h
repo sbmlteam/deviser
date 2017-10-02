@@ -961,7 +961,7 @@ AnalyticVolume_getId(const AnalyticVolume_t * av);
  * @return the value of the "functionType" attribute of this AnalyticVolume_t
  * as a FunctionKind_t.
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  * @if clike The value is drawn from the enumeration @ref FunctionKind_t@endif
  *
  * @memberof AnalyticVolume_t
@@ -981,7 +981,7 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1047,7 +1047,7 @@ AnalyticVolume_isSetId(const AnalyticVolume_t * av);
  * @return @c 1 (true) if this AnalyticVolume_t's "functionType" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1123,7 +1123,7 @@ AnalyticVolume_setId(AnalyticVolume_t * av, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1145,7 +1145,7 @@ AnalyticVolume_setFunctionType(AnalyticVolume_t * av,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  *
  * @memberof AnalyticVolume_t
  */
@@ -1220,7 +1220,7 @@ AnalyticVolume_unsetId(AnalyticVolume_t * av);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_analyticvolume_t_functionType
+ * @copydetails doc_analyticvolume_functionType
  *
  * @memberof AnalyticVolume_t
  */

@@ -1298,7 +1298,7 @@ CSGSetOperator_free(CSGSetOperator_t* csgso);
  * @return the value of the "operationType" attribute of this CSGSetOperator_t
  * as a SetOperation_t.
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  * @if clike The value is drawn from the enumeration @ref SetOperation_t@endif
  *
  * @memberof CSGSetOperator_t
@@ -1318,7 +1318,7 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  *
  * @memberof CSGSetOperator_t
  */
@@ -1370,7 +1370,7 @@ CSGSetOperator_getComplementB(const CSGSetOperator_t * csgso);
  * @return @c 1 (true) if this CSGSetOperator_t's "operationType" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  *
  * @memberof CSGSetOperator_t
  */
@@ -1424,7 +1424,7 @@ CSGSetOperator_isSetComplementB(const CSGSetOperator_t * csgso);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  *
  * @memberof CSGSetOperator_t
  */
@@ -1447,7 +1447,7 @@ CSGSetOperator_setOperationType(CSGSetOperator_t * csgso,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  *
  * @memberof CSGSetOperator_t
  */
@@ -1508,7 +1508,7 @@ CSGSetOperator_setComplementB(CSGSetOperator_t * csgso,
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_csgsetoperator_t_operationType
+ * @copydetails doc_csgsetoperator_operationType
  *
  * @memberof CSGSetOperator_t
  */

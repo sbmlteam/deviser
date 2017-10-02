@@ -1228,7 +1228,7 @@ Group_getName(const Group_t * g);
  *
  * @return the value of the "kind" attribute of this Group_t as a GroupKind_t.
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  * @if clike The value is drawn from the enumeration @ref GroupKind_t@endif
  *
  * @memberof Group_t
@@ -1247,7 +1247,7 @@ Group_getKind(const Group_t * g);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  *
  * @memberof Group_t
  */
@@ -1294,7 +1294,7 @@ Group_isSetName(const Group_t * g);
  * @return @c 1 (true) if this Group_t's "kind" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  *
  * @memberof Group_t
  */
@@ -1358,7 +1358,7 @@ Group_setName(Group_t * g, const char * name);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  *
  * @memberof Group_t
  */
@@ -1379,7 +1379,7 @@ Group_setKind(Group_t * g, GroupKind_t kind);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  *
  * @memberof Group_t
  */
@@ -1431,7 +1431,7 @@ Group_unsetName(Group_t * g);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_group_t_kind
+ * @copydetails doc_group_kind
  *
  * @memberof Group_t
  */

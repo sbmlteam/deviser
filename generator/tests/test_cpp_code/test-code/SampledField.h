@@ -1287,7 +1287,7 @@ SampledField_getId(const SampledField_t * sf);
  * @return the value of the "dataType" attribute of this SampledField_t as a
  * DataKind_t.
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
  *
  * @memberof SampledField_t
@@ -1307,7 +1307,7 @@ SampledField_getDataType(const SampledField_t * sf);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  *
  * @memberof SampledField_t
  */
@@ -1370,7 +1370,7 @@ SampledField_getNumSamples3(const SampledField_t * sf);
  * @return the value of the "interpolationType" attribute of this
  * SampledField_t as a InterpolationKind_t.
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  * @if clike The value is drawn from the enumeration @ref
  * InterpolationKind_t@endif
  *
@@ -1392,7 +1392,7 @@ SampledField_getInterpolationType(const SampledField_t * sf);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  *
  * @memberof SampledField_t
  */
@@ -1409,7 +1409,7 @@ SampledField_getInterpolationTypeAsString(const SampledField_t * sf);
  * @return the value of the "compression" attribute of this SampledField_t as a
  * CompressionKind_t.
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  * @if clike The value is drawn from the enumeration @ref
  * CompressionKind_t@endif
  *
@@ -1430,7 +1430,7 @@ SampledField_getCompression(const SampledField_t * sf);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  *
  * @memberof SampledField_t
  */
@@ -1479,7 +1479,7 @@ SampledField_isSetId(const SampledField_t * sf);
  * @return @c 1 (true) if this SampledField_t's "dataType" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  *
  * @memberof SampledField_t
  */
@@ -1545,7 +1545,7 @@ SampledField_isSetNumSamples3(const SampledField_t * sf);
  * @return @c 1 (true) if this SampledField_t's "interpolationType" attribute
  * has been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  *
  * @memberof SampledField_t
  */
@@ -1563,7 +1563,7 @@ SampledField_isSetInterpolationType(const SampledField_t * sf);
  * @return @c 1 (true) if this SampledField_t's "compression" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  *
  * @memberof SampledField_t
  */
@@ -1638,7 +1638,7 @@ SampledField_setId(SampledField_t * sf, const char * id);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  *
  * @memberof SampledField_t
  */
@@ -1659,7 +1659,7 @@ SampledField_setDataType(SampledField_t * sf, DataKind_t dataType);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  *
  * @memberof SampledField_t
  */
@@ -1738,7 +1738,7 @@ SampledField_setNumSamples3(SampledField_t * sf, int numSamples3);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  *
  * @memberof SampledField_t
  */
@@ -1761,7 +1761,7 @@ SampledField_setInterpolationType(SampledField_t * sf,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  *
  * @memberof SampledField_t
  */
@@ -1784,7 +1784,7 @@ SampledField_setInterpolationTypeAsString(SampledField_t * sf,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  *
  * @memberof SampledField_t
  */
@@ -1806,7 +1806,7 @@ SampledField_setCompression(SampledField_t * sf,
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  *
  * @memberof SampledField_t
  */
@@ -1882,7 +1882,7 @@ SampledField_unsetId(SampledField_t * sf);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_dataType
+ * @copydetails doc_sampledfield_dataType
  *
  * @memberof SampledField_t
  */
@@ -1952,7 +1952,7 @@ SampledField_unsetNumSamples3(SampledField_t * sf);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_interpolationType
+ * @copydetails doc_sampledfield_interpolationType
  *
  * @memberof SampledField_t
  */
@@ -1970,7 +1970,7 @@ SampledField_unsetInterpolationType(SampledField_t * sf);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sampledfield_t_compression
+ * @copydetails doc_sampledfield_compression
  *
  * @memberof SampledField_t
  */

@@ -1426,7 +1426,7 @@ Fred_getStr(const Fred_t * f);
  *
  * @return the value of the "kind" attribute of this Fred_t as a Kind_t.
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  * @if clike The value is drawn from the enumeration @ref Kind_t@endif
  *
  * @memberof Fred_t
@@ -1445,7 +1445,7 @@ Fred_getKind(const Fred_t * f);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  *
  * @memberof Fred_t
  */
@@ -1522,7 +1522,7 @@ Fred_isSetStr(const Fred_t * f);
  * @return @c 1 (true) if this Fred_t's "kind" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  *
  * @memberof Fred_t
  */
@@ -1624,7 +1624,7 @@ Fred_setStr(Fred_t * f, const char * str);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  *
  * @memberof Fred_t
  */
@@ -1645,7 +1645,7 @@ Fred_setKind(Fred_t * f, Kind_t kind);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  *
  * @memberof Fred_t
  */
@@ -1731,7 +1731,7 @@ Fred_unsetStr(Fred_t * f);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_t_kind
+ * @copydetails doc_fred_kind
  *
  * @memberof Fred_t
  */

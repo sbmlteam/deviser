@@ -1305,7 +1305,7 @@ Objective_getName(const Objective_t * o);
  * @return the value of the "type" attribute of this Objective_t as a
  * FbcType_t.
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  * @if clike The value is drawn from the enumeration @ref FbcType_t@endif
  *
  * @memberof Objective_t
@@ -1325,7 +1325,7 @@ Objective_getType(const Objective_t * o);
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  *
  * @memberof Objective_t
  */
@@ -1374,7 +1374,7 @@ Objective_isSetName(const Objective_t * o);
  * @return @c 1 (true) if this Objective_t's "type" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  *
  * @memberof Objective_t
  */
@@ -1438,7 +1438,7 @@ Objective_setName(Objective_t * o, const char * name);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  *
  * @memberof Objective_t
  */
@@ -1459,7 +1459,7 @@ Objective_setType(Objective_t * o, FbcType_t type);
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  *
  * @memberof Objective_t
  */
@@ -1511,7 +1511,7 @@ Objective_unsetName(Objective_t * o);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_objective_t_type
+ * @copydetails doc_objective_type
  *
  * @memberof Objective_t
  */
