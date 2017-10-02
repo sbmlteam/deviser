@@ -5,7 +5,7 @@
       <elements>
         <element name="MyTestClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="myTestClass">
           <attributes>
-            <attribute name="id" required="false" type="Sid" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="num" required="false" type="unsigned int" abstract="false"/>
             <attribute name="num2" required="false" type="uint" abstract="false"/>
@@ -13,14 +13,14 @@
             <attribute name="num1" required="false" type="double" abstract="false"/>
             <attribute name="true" required="false" type="bool" abstract="false"/>
             <attribute name="false" required="false" type="boolean" abstract="false"/>
-            <attribute name="unit" required="false" type="UnitSid" abstract="false"/>
-            <attribute name="ref1" required="false" type="SIDREF" element="Thing1" abstract="false"/>
+            <attribute name="unit" required="false" type="UnitSId" abstract="false"/>
+            <attribute name="ref1" required="false" type="SIdRef" element="Thing1" abstract="false"/>
             <attribute name="ref2" required="false" type="SIdRef" element="Thing2" abstract="false"/>
-            <attribute name="refUnit" required="false" type="UnitSIDref" element="Unit1" abstract="false"/>
+            <attribute name="refUnit" required="false" type="UnitSIdRef" abstract="false"/>
             <attribute name="correctId" required="false" type="SId" abstract="false"/>
             <attribute name="idRef" required="false" type="IDREF" abstract="false"/>
-            <attribute name="idref1" required="false" type="idref" abstract="false"/>
-            <attribute name="idref2" required="false" type="IDRef" abstract="false"/>
+            <attribute name="idref1" required="false" type="IDREF" abstract="false"/>
+            <attribute name="idref2" required="false" type="IDREF" abstract="false"/>
           </attributes>
         </element>
         <element name="Unit" typeCode="SBML_TEST_UNIT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit">
@@ -28,17 +28,17 @@
             <attribute name="unit" required="false" type="UnitSIdRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="MyLoTest" typeCode="TEST_LO_TEST" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="false" type="Sid" abstract="false"/>
-            </attributes>
-            <listOfAttributes>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+          </attributes>
+          <listOfAttributes>
             <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
           </listOfAttributes>
         </element>
         <element name="MyRequiredClass" typeCode="MY_TEST_TYPE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="true" type="Sid" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="true" type="string" abstract="false"/>
             <attribute name="num" required="true" type="unsigned int" abstract="false"/>
             <attribute name="num2" required="true" type="uint" abstract="false"/>
@@ -46,18 +46,18 @@
             <attribute name="num1" required="true" type="double" abstract="false"/>
             <attribute name="true" required="true" type="bool" abstract="false"/>
             <attribute name="false" required="true" type="boolean" abstract="false"/>
-            <attribute name="unit" required="true" type="UnitSid" abstract="false"/>
-            <attribute name="ref1" required="true" type="SIDREF" element="Thing1" abstract="false"/>
+            <attribute name="unit" required="true" type="UnitSId" abstract="false"/>
+            <attribute name="ref1" required="true" type="SIdRef" element="Thing1" abstract="false"/>
             <attribute name="ref2" required="true" type="SIdRef" element="Thing2" abstract="false"/>
-            <attribute name="refUnit" required="true" type="UnitSIDref" element="Unit1" abstract="false"/>
+            <attribute name="refUnit" required="true" type="UnitSIdRef" abstract="false"/>
             <attribute name="correctId" required="true" type="SId" abstract="false"/>
             <attribute name="posint" required="true" type="positive integer" abstract="false"/>
             <attribute name="posint2" required="true" type="non-negative integer" abstract="false"/>
             <attribute name="posint1" required="true" type="non-negative int" abstract="false"/>
-            <attribute name="metaid" required="true" type="ID" abstract="false"/>
-            <attribute name="metaid1" required="true" type="Id" abstract="false"/>
+            <attribute name="metaid2" required="true" type="ID" abstract="false"/>
+            <attribute name="metaid1" required="true" type="ID" abstract="false"/>
             <attribute name="num4" required="true" type="integer" abstract="false"/>
-            <attribute name="metaidref1" required="true" type="idref" abstract="false"/>
+            <attribute name="metaidref1" required="true" type="IDREF" abstract="false"/>
             <attribute name="notmetaid" required="true" type="ID" abstract="false"/>
             <attribute name="vectorDouble" required="false" type="vector" element="double" abstract="false"/>
             <attribute name="vectorDouble1" required="false" type="vector" element="Double" abstract="false"/>
@@ -78,9 +78,12 @@
             <attribute name="listOfMyLoTests" required="false" type="lo_element" element="MyLoTest" abstract="false"/>
           </attributes>
         </element>
+        <element name="Unit1" typeCode="SBML_TEST_UNIT1" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit"/>
+        <element name="Thing1" typeCode="SBML_TEST_THING11" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit"/>
+        <element name="Thing2" typeCode="SBML_TEST_UNIT2" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="unit"/>
       </elements>
       <plugins>
-         <plugin extensionPoint="Species">
+        <plugin extensionPoint="Species">
           <attributes>
             <attribute name="charge" required="false" type="integer" abstract="false"/>
             <attribute name="chemicalFormula" required="false" type="string" abstract="false"/>

@@ -726,8 +726,10 @@ class ParseXML():
                         'lv_info': lv_info
                         })
 
+        list_all_element = ['SBase', 'XMLNode', 'ASTNode', 'UncertMLNode']
         # link elements
         for elem in package['elements']:
+            list_all_element.append(elem['name'])
             elem['root'] = package
             if 'attribs' in elem:
                 for attr in elem['attribs']:
@@ -744,6 +746,11 @@ class ParseXML():
                 for attr in elem['attribs']:
                     attr['parent'] = elem
                     attr['root'] = package
+                    if attr['type'] != 'vector' and attr['type'] != 'array' and attr['type'] != 'enum':
+                        if 'element' in attr and attr['element'] != '' and attr['element'] not in list_all_element:
+                            self.report_error(global_variables
+                                              .return_codes['unknown type used'],
+                                              'Unrecognized element: {0}'.format(attr['element']))
             if 'concrete' in elem:
                 for attr in elem['concrete']:
                     attr['parent'] = elem

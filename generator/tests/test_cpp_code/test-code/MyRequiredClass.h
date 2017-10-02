@@ -87,7 +87,7 @@ protected:
   bool mIsSetPosint2;
   unsigned int mPosint1;
   bool mIsSetPosint1;
-  std::string mMetaid;
+  std::string mMetaid2;
   std::string mMetaid1;
   int mNum4;
   bool mIsSetNum4;
@@ -313,12 +313,12 @@ public:
 
 
   /**
-   * Returns the value of the "metaid" attribute of this MyRequiredClass.
+   * Returns the value of the "metaid2" attribute of this MyRequiredClass.
    *
-   * @return the value of the "metaid" attribute of this MyRequiredClass as a
+   * @return the value of the "metaid2" attribute of this MyRequiredClass as a
    * string.
    */
-  const std::string& getMetaid() const;
+  const std::string& getMetaid2() const;
 
 
   /**
@@ -579,13 +579,13 @@ public:
 
 
   /**
-   * Predicate returning @c true if this MyRequiredClass's "metaid" attribute
+   * Predicate returning @c true if this MyRequiredClass's "metaid2" attribute
    * is set.
    *
-   * @return @c true if this MyRequiredClass's "metaid" attribute has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this MyRequiredClass's "metaid2" attribute has been
+   * set, otherwise @c false is returned.
    */
-  bool isSetMetaid() const;
+  bool isSetMetaid2() const;
 
 
   /**
@@ -945,14 +945,14 @@ public:
 
 
   /**
-   * Sets the value of the "metaid" attribute of this MyRequiredClass.
+   * Sets the value of the "metaid2" attribute of this MyRequiredClass.
    *
-   * @param metaid std::string& value of the "metaid" attribute to be set.
+   * @param metaid2 std::string& value of the "metaid2" attribute to be set.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setMetaid(const std::string& metaid);
+  int setMetaid2(const std::string& metaid2);
 
 
   /**
@@ -1298,13 +1298,13 @@ public:
 
 
   /**
-   * Unsets the value of the "metaid" attribute of this MyRequiredClass.
+   * Unsets the value of the "metaid2" attribute of this MyRequiredClass.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetMetaid();
+  int unsetMetaid2();
 
 
   /**
@@ -1465,7 +1465,7 @@ public:
    * @li "posint"
    * @li "posint2"
    * @li "posint1"
-   * @li "metaid"
+   * @li "metaid2"
    * @li "metaid1"
    * @li "num4"
    * @li "metaidref1"
@@ -2205,11 +2205,11 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Returns the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Returns the value of the "metaid2" attribute of this MyRequiredClass_t.
  *
- * @param mrc the MyRequiredClass_t structure whose metaid is sought.
+ * @param mrc the MyRequiredClass_t structure whose metaid2 is sought.
  *
- * @return the value of the "metaid" attribute of this MyRequiredClass_t as a
+ * @return the value of the "metaid2" attribute of this MyRequiredClass_t as a
  * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
@@ -2218,7 +2218,7 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc);
  */
 LIBSBML_EXTERN
 char *
-MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc);
+MyRequiredClass_getMetaid2(const MyRequiredClass_t * mrc);
 
 
 /**
@@ -2544,19 +2544,19 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc);
 
 
 /**
- * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid"
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid2"
  * attribute is set.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @return @c 1 (true) if this MyRequiredClass_t's "metaid" attribute has been
+ * @return @c 1 (true) if this MyRequiredClass_t's "metaid2" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
  * @memberof MyRequiredClass_t
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc);
+MyRequiredClass_isSetMetaid2(const MyRequiredClass_t * mrc);
 
 
 /**
@@ -2968,11 +2968,11 @@ MyRequiredClass_setPosint1(MyRequiredClass_t * mrc, unsigned int posint1);
 
 
 /**
- * Sets the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Sets the value of the "metaid2" attribute of this MyRequiredClass_t.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
- * @param metaid const char * value of the "metaid" attribute to be set.
+ * @param metaid2 const char * value of the "metaid2" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -2983,7 +2983,7 @@ MyRequiredClass_setPosint1(MyRequiredClass_t * mrc, unsigned int posint1);
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_setMetaid(MyRequiredClass_t * mrc, const char * metaid);
+MyRequiredClass_setMetaid2(MyRequiredClass_t * mrc, const char * metaid2);
 
 
 /**
@@ -3383,7 +3383,7 @@ MyRequiredClass_unsetPosint1(MyRequiredClass_t * mrc);
 
 
 /**
- * Unsets the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Unsets the value of the "metaid2" attribute of this MyRequiredClass_t.
  *
  * @param mrc the MyRequiredClass_t structure.
  *
@@ -3396,7 +3396,7 @@ MyRequiredClass_unsetPosint1(MyRequiredClass_t * mrc);
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_unsetMetaid(MyRequiredClass_t * mrc);
+MyRequiredClass_unsetMetaid2(MyRequiredClass_t * mrc);
 
 
 /**
@@ -3528,7 +3528,7 @@ MyRequiredClass_unsetArrayInt(MyRequiredClass_t * mrc);
  * @li "posint"
  * @li "posint2"
  * @li "posint1"
- * @li "metaid"
+ * @li "metaid2"
  * @li "metaid1"
  * @li "num4"
  * @li "metaidref1"

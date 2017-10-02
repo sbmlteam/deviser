@@ -95,6 +95,9 @@ def main():
     fail += run_deviser_test('unknown_error', '-g',
                              global_variables.
                              return_codes['missing required information'])
+    fail += run_deviser_test('bad_lo_element', '-g',
+                             global_variables.
+                             return_codes['unknown type used'])
 
 
     test_functions.report('EXIT CODES', fail, fails, not_tested)

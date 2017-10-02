@@ -489,7 +489,7 @@ static const packageErrorTableEntry testErrorTable[] =
     "'test:name', 'test:num', 'test:numTwo', 'test:numThree', 'test:numOne', "
     "'test:true', 'test:false', 'test:unit', 'test:refOne', 'test:refTwo', "
     "'test:refUnit', 'test:correctId', 'test:posint', 'test:posintTwo', "
-    "'test:posintOne', 'test:metaid', 'test:metaidOne', 'test:numFour', "
+    "'test:posintOne', 'test:metaidTwo', 'test:metaidOne', 'test:numFour', "
     "'test:metaidrefOne' and 'test:notmetaid', and may have the optional "
     "attributes 'test:vectorDouble', 'test:vectorDoubleOne', 'test:vectorInt', "
     "'test:vectorIntOne', 'test:arrayD' and 'test:arrayInt'. No other "
@@ -658,11 +658,11 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020618
-  { TestMyRequiredClassMetaidMustBeString,
-    "The 'metaid' attribute must be String.",
+  { TestMyRequiredClassMetaid2MustBeString,
+    "The 'metaid2' attribute must be String.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
-    "The attribute 'test:metaid' on a <myRequiredClass> must have a value of "
+    "The attribute 'test:metaidTwo' on a <myRequiredClass> must have a value of "
     "XML data type 'ID'.",
     { "L3V1 Test V1 Section"
     }
@@ -875,17 +875,6 @@ static const packageErrorTableEntry testErrorTable[] =
   },
 
   // 10020804
-  { TestContainerEmptyLOElements,
-    "No Empty ListOf elements allowed on <container>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "The <listOfMyLoTests> subobject on a <container> object is optional, but "
-    "if present, this container object must not be empty.",
-    { "L3V1 Test V1 Section"
-    }
-  },
-
-  // 10020805
   { TestContainerLOMyLoTestsAllowedCoreElements,
     "Core elements allowed on <listOfMyLoTests>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -897,7 +886,7 @@ static const packageErrorTableEntry testErrorTable[] =
     }
   },
 
-  // 10020806
+  // 10020805
   { TestContainerLOMyLoTestsAllowedCoreAttributes,
     "Core attributes allowed on <listOfMyLoTests>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -909,7 +898,7 @@ static const packageErrorTableEntry testErrorTable[] =
     }
   },
 
-  // 10020807
+  // 10020806
   { TestContainerLOMyLoTestsAllowedAttributes,
     "Attributes allowed on <listOfMyLoTests>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
@@ -917,6 +906,78 @@ static const packageErrorTableEntry testErrorTable[] =
     "A <listOfMyLoTests> object may have the optional attribute 'test:id'. No "
     "other attributes from the SBML Level 3 testAttributes namespaces are "
     "permitted on a <listOfMyLoTests> object. ",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020901
+  { TestUnit1AllowedCoreAttributes,
+    "Core attributes allowed on <unit1>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "An <unit1> object may have the optional SBML Level 3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on an <unit1>.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10020902
+  { TestUnit1AllowedCoreElements,
+    "Core elements allowed on <unit1>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "An <unit1> object may have the optional SBML Level 3 Core subobjects for "
+    "notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on an <unit1>.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10021001
+  { TestThing1AllowedCoreAttributes,
+    "Core attributes allowed on <thing1>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "A <thing1> object may have the optional SBML Level 3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <thing1>.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10021002
+  { TestThing1AllowedCoreElements,
+    "Core elements allowed on <thing1>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "A <thing1> object may have the optional SBML Level 3 Core subobjects for "
+    "notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on a <thing1>.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10021101
+  { TestThing2AllowedCoreAttributes,
+    "Core attributes allowed on <thing2>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "A <thing2> object may have the optional SBML Level 3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <thing2>.",
+    { "L3V1 Test V1 Section"
+    }
+  },
+
+  // 10021102
+  { TestThing2AllowedCoreElements,
+    "Core elements allowed on <thing2>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "A <thing2> object may have the optional SBML Level 3 Core subobjects for "
+    "notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on a <thing2>.",
     { "L3V1 Test V1 Section"
     }
   },

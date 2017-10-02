@@ -133,7 +133,11 @@ def plural(name):
 def singular(name):
     returned_word = name
     length = len(name)
-    if name.endswith('s'):
+    if name.endswith('ies'):
+        returned_word = name[0:length-3] + 'y'
+    elif name.endswith('es'):
+        returned_word = name[0:length-2]
+    elif name.endswith('s'):
         returned_word = name[0:length-1]
     elif name.endswith('hildren'):
         returned_word = name[0:length-3]

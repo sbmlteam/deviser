@@ -77,7 +77,7 @@ MyRequiredClass::MyRequiredClass(unsigned int level,
   , mIsSetPosint2 (false)
   , mPosint1 (SBML_INT_MAX)
   , mIsSetPosint1 (false)
-  , mMetaid ("")
+  , mMetaid2 ("")
   , mMetaid1 ("")
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
@@ -122,7 +122,7 @@ MyRequiredClass::MyRequiredClass(TestPkgNamespaces *testns)
   , mIsSetPosint2 (false)
   , mPosint1 (SBML_INT_MAX)
   , mIsSetPosint1 (false)
-  , mMetaid ("")
+  , mMetaid2 ("")
   , mMetaid1 ("")
   , mNum4 (SBML_INT_MAX)
   , mIsSetNum4 (false)
@@ -168,7 +168,7 @@ MyRequiredClass::MyRequiredClass(const MyRequiredClass& orig)
   , mIsSetPosint2 ( orig.mIsSetPosint2 )
   , mPosint1 ( orig.mPosint1 )
   , mIsSetPosint1 ( orig.mIsSetPosint1 )
-  , mMetaid ( orig.mMetaid )
+  , mMetaid2 ( orig.mMetaid2 )
   , mMetaid1 ( orig.mMetaid1 )
   , mNum4 ( orig.mNum4 )
   , mIsSetNum4 ( orig.mIsSetNum4 )
@@ -220,7 +220,7 @@ MyRequiredClass::operator=(const MyRequiredClass& rhs)
     mIsSetPosint2 = rhs.mIsSetPosint2;
     mPosint1 = rhs.mPosint1;
     mIsSetPosint1 = rhs.mIsSetPosint1;
-    mMetaid = rhs.mMetaid;
+    mMetaid2 = rhs.mMetaid2;
     mMetaid1 = rhs.mMetaid1;
     mNum4 = rhs.mNum4;
     mIsSetNum4 = rhs.mIsSetNum4;
@@ -432,12 +432,12 @@ MyRequiredClass::getPosint1() const
 
 
 /*
- * Returns the value of the "metaid" attribute of this MyRequiredClass.
+ * Returns the value of the "metaid2" attribute of this MyRequiredClass.
  */
 const std::string&
-MyRequiredClass::getMetaid() const
+MyRequiredClass::getMetaid2() const
 {
-  return mMetaid;
+  return mMetaid2;
 }
 
 
@@ -727,13 +727,13 @@ MyRequiredClass::isSetPosint1() const
 
 
 /*
- * Predicate returning @c true if this MyRequiredClass's "metaid" attribute is
+ * Predicate returning @c true if this MyRequiredClass's "metaid2" attribute is
  * set.
  */
 bool
-MyRequiredClass::isSetMetaid() const
+MyRequiredClass::isSetMetaid2() const
 {
-  return (mMetaid.empty() == false);
+  return (mMetaid2.empty() == false);
 }
 
 
@@ -1103,18 +1103,18 @@ MyRequiredClass::setPosint1(unsigned int posint1)
 
 
 /*
- * Sets the value of the "metaid" attribute of this MyRequiredClass.
+ * Sets the value of the "metaid2" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::setMetaid(const std::string& metaid)
+MyRequiredClass::setMetaid2(const std::string& metaid2)
 {
-  if (!(SyntaxChecker::isValidXMLID(metaid)))
+  if (!(SyntaxChecker::isValidXMLID(metaid2)))
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mMetaid = metaid;
+    mMetaid2 = metaid2;
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -1638,14 +1638,14 @@ MyRequiredClass::unsetPosint1()
 
 
 /*
- * Unsets the value of the "metaid" attribute of this MyRequiredClass.
+ * Unsets the value of the "metaid2" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::unsetMetaid()
+MyRequiredClass::unsetMetaid2()
 {
-  mMetaid.erase();
+  mMetaid2.erase();
 
-  if (mMetaid.empty() == true)
+  if (mMetaid2.empty() == true)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
@@ -1945,7 +1945,7 @@ MyRequiredClass::hasRequiredAttributes() const
     allPresent = false;
   }
 
-  if (isSetMetaid() == false)
+  if (isSetMetaid2() == false)
   {
     allPresent = false;
   }
@@ -2314,9 +2314,9 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
     value = getCorrectId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    value = getMetaid();
+    value = getMetaid2();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "metaid1")
@@ -2393,9 +2393,9 @@ MyRequiredClass::getAttribute(const std::string& attributeName,
     value = getCorrectId().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    value = getMetaid().c_str();
+    value = getMetaid2().c_str();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
   else if (attributeName == "metaid1")
@@ -2496,9 +2496,9 @@ MyRequiredClass::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetPosint1();
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    value = isSetMetaid();
+    value = isSetMetaid2();
   }
   else if (attributeName == "metaid1")
   {
@@ -2700,9 +2700,9 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
   {
     return_value = setCorrectId(value);
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    return_value = setMetaid(value);
+    return_value = setMetaid2(value);
   }
   else if (attributeName == "metaid1")
   {
@@ -2763,9 +2763,9 @@ MyRequiredClass::setAttribute(const std::string& attributeName,
   {
     return_value = setCorrectId(value);
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    return_value = setMetaid(value);
+    return_value = setMetaid2(value);
   }
   else if (attributeName == "metaid1")
   {
@@ -2861,9 +2861,9 @@ MyRequiredClass::unsetAttribute(const std::string& attributeName)
   {
     value = unsetPosint1();
   }
-  else if (attributeName == "metaid")
+  else if (attributeName == "metaid2")
   {
-    value = unsetMetaid();
+    value = unsetMetaid2();
   }
   else if (attributeName == "metaid1")
   {
@@ -2955,7 +2955,7 @@ MyRequiredClass::addExpectedAttributes(ExpectedAttributes& attributes)
 
   attributes.add("posint1");
 
-  attributes.add("metaid");
+  attributes.add("metaid2");
 
   attributes.add("metaid1");
 
@@ -3443,27 +3443,27 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
 
   // 
-  // metaid ID (use = "required" )
+  // metaid2 ID (use = "required" )
   // 
 
-  assigned = attributes.readInto("metaid", mMetaid);
+  assigned = attributes.readInto("metaid2", mMetaid2);
 
   if (assigned == true)
   {
-    if (mMetaid.empty() == true)
+    if (mMetaid2.empty() == true)
     {
-      logEmptyString(mMetaid, level, version, "<MyRequiredClass>");
+      logEmptyString(mMetaid2, level, version, "<MyRequiredClass>");
     }
-    else if (SyntaxChecker::isValidXMLID(mMetaid) == false)
+    else if (SyntaxChecker::isValidXMLID(mMetaid2) == false)
     {
-      log->logPackageError("test", TestMyRequiredClassMetaidMustBeID,
-        pkgVersion, level, version, "The attribute metaid='" + mMetaid + "' does "
-          "not conform to the syntax.", getLine(), getColumn());
+      log->logPackageError("test", TestMyRequiredClassMetaid2MustBeID,
+        pkgVersion, level, version, "The attribute metaid2='" + mMetaid2 + "' "
+          "does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
   {
-    std::string message = "Test attribute 'metaid' is missing from the "
+    std::string message = "Test attribute 'metaid2' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
       pkgVersion, level, version, message);
@@ -3774,9 +3774,9 @@ MyRequiredClass::writeAttributes(XMLOutputStream& stream) const
     stream.writeAttribute("posint1", getPrefix(), mPosint1);
   }
 
-  if (isSetMetaid() == true)
+  if (isSetMetaid2() == true)
   {
-    stream.writeAttribute("metaid", getPrefix(), mMetaid);
+    stream.writeAttribute("metaid2", getPrefix(), mMetaid2);
   }
 
   if (isSetMetaid1() == true)
@@ -4106,19 +4106,19 @@ MyRequiredClass_getPosint1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Returns the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Returns the value of the "metaid2" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
 char *
-MyRequiredClass_getMetaid(const MyRequiredClass_t * mrc)
+MyRequiredClass_getMetaid2(const MyRequiredClass_t * mrc)
 {
   if (mrc == NULL)
   {
     return NULL;
   }
 
-  return mrc->getMetaid().empty() ? NULL :
-    safe_strdup(mrc->getMetaid().c_str());
+  return mrc->getMetaid2().empty() ? NULL :
+    safe_strdup(mrc->getMetaid2().c_str());
 }
 
 
@@ -4377,14 +4377,14 @@ MyRequiredClass_isSetPosint1(const MyRequiredClass_t * mrc)
 
 
 /*
- * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid"
+ * Predicate returning @c 1 (true) if this MyRequiredClass_t's "metaid2"
  * attribute is set.
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_isSetMetaid(const MyRequiredClass_t * mrc)
+MyRequiredClass_isSetMetaid2(const MyRequiredClass_t * mrc)
 {
-  return (mrc != NULL) ? static_cast<int>(mrc->isSetMetaid()) : 0;
+  return (mrc != NULL) ? static_cast<int>(mrc->isSetMetaid2()) : 0;
 }
 
 
@@ -4637,13 +4637,13 @@ MyRequiredClass_setPosint1(MyRequiredClass_t * mrc, unsigned int posint1)
 
 
 /*
- * Sets the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Sets the value of the "metaid2" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_setMetaid(MyRequiredClass_t * mrc, const char * metaid)
+MyRequiredClass_setMetaid2(MyRequiredClass_t * mrc, const char * metaid2)
 {
-  return (mrc != NULL) ? mrc->setMetaid(metaid) : LIBSBML_INVALID_OBJECT;
+  return (mrc != NULL) ? mrc->setMetaid2(metaid2) : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -4898,13 +4898,13 @@ MyRequiredClass_unsetPosint1(MyRequiredClass_t * mrc)
 
 
 /*
- * Unsets the value of the "metaid" attribute of this MyRequiredClass_t.
+ * Unsets the value of the "metaid2" attribute of this MyRequiredClass_t.
  */
 LIBSBML_EXTERN
 int
-MyRequiredClass_unsetMetaid(MyRequiredClass_t * mrc)
+MyRequiredClass_unsetMetaid2(MyRequiredClass_t * mrc)
 {
-  return (mrc != NULL) ? mrc->unsetMetaid() : LIBSBML_INVALID_OBJECT;
+  return (mrc != NULL) ? mrc->unsetMetaid2() : LIBSBML_INVALID_OBJECT;
 }
 
 

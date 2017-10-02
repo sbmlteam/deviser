@@ -109,7 +109,7 @@ typedef enum
 , TestMyRequiredClassPosintMustBeNonNegativeInteger           = 10020615
 , TestMyRequiredClassPosint2MustBeNonNegativeInteger          = 10020616
 , TestMyRequiredClassPosint1MustBeNonNegativeInteger          = 10020617
-, TestMyRequiredClassMetaidMustBeString                       = 10020618
+, TestMyRequiredClassMetaid2MustBeString                      = 10020618
 , TestMyRequiredClassMetaid1MustBeString                      = 10020619
 , TestMyRequiredClassNum4MustBeInteger                        = 10020620
 , TestMyRequiredClassMetaidref1MustBeSBase                    = 10020621
@@ -128,10 +128,15 @@ typedef enum
 , TestContainerAllowedCoreAttributes                          = 10020801
 , TestContainerAllowedCoreElements                            = 10020802
 , TestContainerAllowedElements                                = 10020803
-, TestContainerEmptyLOElements                                = 10020804
-, TestContainerLOMyLoTestsAllowedCoreElements                 = 10020805
-, TestContainerLOMyLoTestsAllowedCoreAttributes               = 10020806
-, TestContainerLOMyLoTestsAllowedAttributes                   = 10020807
+, TestContainerLOMyLoTestsAllowedCoreElements                 = 10020804
+, TestContainerLOMyLoTestsAllowedCoreAttributes               = 10020805
+, TestContainerLOMyLoTestsAllowedAttributes                   = 10020806
+, TestUnit1AllowedCoreAttributes                              = 10020901
+, TestUnit1AllowedCoreElements                                = 10020902
+, TestThing1AllowedCoreAttributes                             = 10021001
+, TestThing1AllowedCoreElements                               = 10021002
+, TestThing2AllowedCoreAttributes                             = 10021101
+, TestThing2AllowedCoreElements                               = 10021102
 } TestSBMLErrorCode_t;
 
 
