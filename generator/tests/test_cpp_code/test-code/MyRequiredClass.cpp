@@ -3264,9 +3264,15 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
+      std::string msg = "The ref1 attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRef1 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyRequiredClassRef1MustBeThing1,
-        pkgVersion, level, version, "The attribute ref1='" + mRef1 + "' does not "
-          "conform to the syntax.", getLine(), getColumn());
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
   else
@@ -3291,9 +3297,15 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
+      std::string msg = "The ref2 attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRef2 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyRequiredClassRef2MustBeThing2,
-        pkgVersion, level, version, "The attribute ref2='" + mRef2 + "' does not "
-          "conform to the syntax.", getLine(), getColumn());
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
   else
@@ -3318,9 +3330,16 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
+      std::string msg = "The refUnit attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRefUnit + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyRequiredClassRefUnitMustBeUnitSId,
-        pkgVersion, level, version, "The attribute refUnit='" + mRefUnit + "' "
-          "does not conform to the syntax.", getLine(), getColumn());
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
   else
@@ -3537,9 +3556,17 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mMetaidref1) == false)
     {
+      std::string msg = "The metaidref1 attribute on the <" + getElementName()
+        + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mMetaidref1 + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("test", TestMyRequiredClassMetaidref1MustBeID,
-        pkgVersion, level, version, "The attribute metaidref1='" + mMetaidref1 +
-          "' does not conform to the syntax.", getLine(), getColumn());
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
   else

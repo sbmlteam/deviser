@@ -1260,10 +1260,10 @@ class ProtectedFunctions():
                           '']
         code.append(self.create_code_block('comment', implementation))
 
-        if att_type == 'SId' or att_type == 'SIdRef' \
-                or att_type == 'UnitSId' or att_type == 'UnitSIdRef'\
-                or att_type == 'ID' or att_type == 'IDREF':
+        if att_type == 'SId' or att_type == 'UnitSId' or att_type == 'ID':
             self.write_sid_read(index, code, attributes)
+        elif att_type == 'SIdRef' or att_type == 'UnitSIdRef' or att_type == 'IDREF':
+            self.write_sidref_read(index, code, attributes)
         elif att_type == 'enum':
             self.write_enum_read(index, code, attributes)
         elif att_type == 'string' or att_type == 'IDREF':
@@ -1314,8 +1314,6 @@ class ProtectedFunctions():
         att_type = attribute['type']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
-
-
         class_name = strFunctions.remove_prefix(self.class_name)
         line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                       member)]
@@ -1376,6 +1374,80 @@ class ProtectedFunctions():
                 self.class_name, self.package)
         else:
             class_name = strFunctions.remove_prefix(self.class_name)
+        # sort error names to be used
+        [not_used, error] = self.sort_error_names(strFunctions.upper_first(given_name), '')
+
+        if status == 'optional':
+            block = [line, first_if]
+            code.append(self.create_code_block('if', block))
+        else:
+            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+                           'is missing from the <{2}> '
+                           'element.\"'.format(self.package, name,
+                                               self.class_name),
+                           'log->{0}{1}, {2}, message'
+                           ')'.format(self.error, error, self.given_args)]
+            block = [line, first_if, 'else',
+                     self.create_code_block('line', extra_lines)]
+            code.append(self.create_code_block('if_else', block))
+
+    def write_sidref_read(self, index, code, attributes):
+        attribute = attributes[index]
+        name = attribute['xml_name']
+        given_name = attribute['name']
+        att_type = attribute['type']
+        member = attribute['memberName']
+        status = 'required' if attribute['reqd'] else 'optional'
+        line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
+                                                                      member)]
+        code.append(self.create_code_block('line', line))
+
+        check_function = 'isValidSBMLSId'.format(self.cap_language)
+        if att_type == 'IDREF':
+            check_function = 'isValidXMLID'
+        # want type without ref
+        if att_type == 'SIdRef':
+            if 'element' not in attribute or len(attribute['element']) == 0:
+                type_wanted = 'SId'
+            else:
+                type_wanted = attribute['element']
+        elif att_type.endswith('Ref') or att_type.endswith('REF'):
+            length = len(att_type)
+            type_wanted = att_type[0:length-3]
+        else:
+            type_wanted = att_type
+        [error, not_used] = self.sort_error_names(strFunctions.upper_first(given_name),
+                                            type_wanted)
+        line = ['{0}.empty() == true'.format(member)]
+        if self.is_plugin:
+            line.append('logEmptyString({0}, level, version, pkgVersion, '
+                        '\"<{1}>\")'.format(member, self.class_name))
+        else:
+            line.append('logEmptyString({0}, level, version, '
+                        '\"<{1}>\")'.format(member, self.class_name))
+        line += ['else if',
+                 'SyntaxChecker::{0}({1}) == '
+                 'false'.format(check_function, member)]
+        msgline = ['isSetId()', 'msg += \" with id \'\" + getId() + \"\'\"']
+        nested_if = self.create_code_block('if', msgline)
+        if self.is_plugin:
+            line.append('std::string msg = \"The {0} attribute on the <\" + getParentSBMLObject()->getElementName() + \">'.format(name))
+        else:
+            line.append('std::string msg = \"The {0} attribute on the <\" + getElementName() + \">'.format(name))
+        line.append(nested_if)
+        line.append('msg += \" is \'\" + {0} + \"\', which does not conform to the syntax.\"'.format(member))
+
+
+        if self.is_plugin or global_variables.is_package:
+            line.append('log->{0}{3}, {1}, '
+                        '{2}, getLine(), getColumn())'.format(self.error, self.given_args,
+                                      'msg', error))
+        else:
+            line.append('logError({1}, level, version, '
+                        '{0})'.format('msg', error))
+        first_if = self.create_code_block('else_if', line)
+
+        line = 'assigned == true'
         # sort error names to be used
         [not_used, error] = self.sort_error_names(strFunctions.upper_first(given_name), '')
 

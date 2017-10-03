@@ -1179,10 +1179,18 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mDomainType) == false)
     {
+      std::string msg = "The domainType attribute on the <" + getElementName()
+        + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mDomainType + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("spatial",
         SpatialAnalyticVolumeDomainTypeMustBeDomainType, pkgVersion, level,
-          version, "The attribute domainType='" + mDomainType + "' does not conform "
-            "to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
   else

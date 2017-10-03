@@ -2094,9 +2094,15 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
+      std::string msg = "The ref1 attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRef1 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassRef1MustBeThing1, pkgVersion,
-        level, version, "The attribute ref1='" + mRef1 + "' does not conform to "
-          "the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 
@@ -2114,9 +2120,15 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
+      std::string msg = "The ref2 attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRef2 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassRef2MustBeThing2, pkgVersion,
-        level, version, "The attribute ref2='" + mRef2 + "' does not conform to "
-          "the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 
@@ -2134,9 +2146,16 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
+      std::string msg = "The refUnit attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRefUnit + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassRefUnitMustBeUnitSId,
-        pkgVersion, level, version, "The attribute refUnit='" + mRefUnit + "' "
-          "does not conform to the syntax.", getLine(), getColumn());
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
 
@@ -2174,9 +2193,15 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdRef) == false)
     {
+      std::string msg = "The idRef attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mIdRef + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassIdRefMustBeID, pkgVersion,
-        level, version, "The attribute idRef='" + mIdRef + "' does not conform to "
-          "the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 
@@ -2194,9 +2219,16 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdref1) == false)
     {
+      std::string msg = "The idref1 attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mIdref1 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassIdref1MustBeID, pkgVersion,
-        level, version, "The attribute idref1='" + mIdref1 + "' does not conform "
-          "to the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 
@@ -2214,9 +2246,16 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdref2) == false)
     {
+      std::string msg = "The idref2 attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mIdref2 + "', which does not conform to the syntax.";
       log->logPackageError("test", TestMyTestClassIdref2MustBeID, pkgVersion,
-        level, version, "The attribute idref2='" + mIdref2 + "' does not conform "
-          "to the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 }

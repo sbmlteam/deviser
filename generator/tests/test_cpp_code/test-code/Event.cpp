@@ -1621,8 +1621,15 @@ Event::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mTimeUnits) == false)
     {
-      logError(CoreEventTimeUnitsMustBeUnitSId, level, version, "The attribute "
-        "timeUnits='" + mTimeUnits + "' does not conform to the syntax.");
+      std::string msg = "The timeUnits attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mTimeUnits + "', which does not conform to the syntax.";
+      logError(CoreEventTimeUnitsMustBeUnitSId, level, version, msg);
     }
   }
 }

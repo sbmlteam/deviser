@@ -1049,10 +1049,18 @@ Output::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mQualitativeSpecies) == false)
     {
+      std::string msg = "The qualitativeSpecies attribute on the <" +
+        getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mQualitativeSpecies + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("qual",
         QualOutputQualitativeSpeciesMustBeQualitativeSpecies, pkgVersion, level,
-          version, "The attribute qualitativeSpecies='" + mQualitativeSpecies + "' "
-            "does not conform to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
   else

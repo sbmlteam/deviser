@@ -506,10 +506,18 @@ ListOfObjectives::readL3V1V1Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
+      std::string msg = "The activeObjective attribute on the <" +
+        getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mActiveObjective + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("fbc",
         FbcLOObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
-          version, "The attribute activeObjective='" + mActiveObjective + "' does "
-            "not conform to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
 }
@@ -546,10 +554,18 @@ ListOfObjectives::readL3V1V2Attributes(const XMLAttributes& attributes)
     }
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
+      std::string msg = "The activeObjective attribute on the <" +
+        getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mActiveObjective + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("fbc",
         FbcLOObjectivesActiveObjectiveMustBeObjective, pkgVersion, level,
-          version, "The attribute activeObjective='" + mActiveObjective + "' does "
-            "not conform to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
 }

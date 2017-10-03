@@ -861,15 +861,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'spatial'
-        num = 4
-        class_name = 'SpatialReactionPlugin'
-        test_case = 'plugin only attributes'
-        fail += run_plug_test(name, class_name, test_case, num)
-
-
-
-
+        name = 'groups'
+        num = 1
+        class_name = 'Member'
+        list_of = 'ListOfMembers'
+        test_case = 'list of with attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
 
     test_functions.report('CPP', fail, fails, not_tested)

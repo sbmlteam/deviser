@@ -1202,8 +1202,14 @@ Compartment::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnits) == false)
     {
-      logError(CoreCompartmentUnitsMustBeUnitSId, level, version, "The "
-        "attribute units='" + mUnits + "' does not conform to the syntax.");
+      std::string msg = "The units attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mUnits + "', which does not conform to the syntax.";
+      logError(CoreCompartmentUnitsMustBeUnitSId, level, version, msg);
     }
   }
 
@@ -1265,8 +1271,15 @@ Compartment::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mOutside) == false)
     {
-      logError(CoreCompartmentOutsideMustBeCompartment, level, version, "The "
-        "attribute outside='" + mOutside + "' does not conform to the syntax.");
+      std::string msg = "The outside attribute on the <" + getElementName() +
+        ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mOutside + "', which does not conform to the syntax.";
+      logError(CoreCompartmentOutsideMustBeCompartment, level, version, msg);
     }
   }
 
@@ -1284,9 +1297,17 @@ Compartment::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mCompartmentType) == false)
     {
+      std::string msg = "The compartmentType attribute on the <" +
+        getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mCompartmentType + "', which does not conform to the "
+        "syntax.";
       logError(CoreCompartmentCompartmentTypeMustBeCompartmentType, level,
-        version, "The attribute compartmentType='" + mCompartmentType + "' does "
-          "not conform to the syntax.");
+        version, msg);
     }
   }
 }

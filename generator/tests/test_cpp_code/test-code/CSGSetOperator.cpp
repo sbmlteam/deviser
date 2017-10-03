@@ -1542,10 +1542,18 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementA) == false)
     {
+      std::string msg = "The complementA attribute on the <" + getElementName()
+        + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mComplementA + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("spatial",
         SpatialCSGSetOperatorComplementAMustBeCSGNode, pkgVersion, level,
-          version, "The attribute complementA='" + mComplementA + "' does not "
-            "conform to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
 
@@ -1563,10 +1571,18 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mComplementB) == false)
     {
+      std::string msg = "The complementB attribute on the <" + getElementName()
+        + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mComplementB + "', which does not conform to the "
+        "syntax.";
       log->logPackageError("spatial",
         SpatialCSGSetOperatorComplementBMustBeCSGNode, pkgVersion, level,
-          version, "The attribute complementB='" + mComplementB + "' does not "
-            "conform to the syntax.", getLine(), getColumn());
+          version, msg, getLine(), getColumn());
     }
   }
 }

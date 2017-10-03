@@ -632,9 +632,15 @@ Unit::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
+      std::string msg = "The unit attribute on the <" + getElementName() + ">;
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mUnit + "', which does not conform to the syntax.";
       log->logPackageError("test", TestUnitUnitMustBeUnitSId, pkgVersion,
-        level, version, "The attribute unit='" + mUnit + "' does not conform to "
-          "the syntax.", getLine(), getColumn());
+        level, version, msg, getLine(), getColumn());
     }
   }
 }
