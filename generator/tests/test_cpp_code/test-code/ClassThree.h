@@ -215,6 +215,10 @@ public:
    *
    * @copydetails doc_classthree_number
    * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
+   * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
+   * @li @sbmlconstant{CLASS_THREE_NUMBER_INVALID, Enum_t}
    */
   Enum_t getNumber() const;
 
@@ -226,6 +230,10 @@ public:
    * string.
    *
    * @copydetails doc_classthree_number
+   * The possible values returned by this method are:
+   * @li @c "One"
+   * @li @c "Two"
+   * @li @c "invalid ClassThreeNumber"
    */
   const std::string& getNumberAsString() const;
 
@@ -237,6 +245,10 @@ public:
    *
    * @copydetails doc_classthree_name
    * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
+   * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
+   * @li @sbmlconstant{CLASS_THREE_NAME_INVALID, Fred_t}
    */
   virtual Fred_t getName() const;
 
@@ -247,6 +259,10 @@ public:
    * @return the value of the "name" attribute of this ClassThree as a string.
    *
    * @copydetails doc_classthree_name
+   * The possible values returned by this method are:
+   * @li @c "tom"
+   * @li @c "dick"
+   * @li @c "invalid ClassThreeName"
    */
   const std::string& getNameAsString() const;
 
@@ -259,6 +275,10 @@ public:
    *
    * @copydetails doc_classthree_badName
    * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
+   * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
+   * @li @sbmlconstant{CLASS_THREE_BAD_NAME_INVALID, Fred_t}
    */
   Fred_t getBadName() const;
 
@@ -270,6 +290,10 @@ public:
    * string.
    *
    * @copydetails doc_classthree_badName
+   * The possible values returned by this method are:
+   * @li @c "tom"
+   * @li @c "dick"
+   * @li @c "invalid ClassThreeBadName"
    */
   const std::string& getBadNameAsString() const;
 
@@ -282,6 +306,10 @@ public:
    *
    * @copydetails doc_classthree_otherNum
    * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
+   * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
+   * @li @sbmlconstant{CLASS_THREE_OTHER_NUM_INVALID, Enum_t}
    */
   Enum_t getOtherNum() const;
 
@@ -293,6 +321,10 @@ public:
    * string.
    *
    * @copydetails doc_classthree_otherNum
+   * The possible values returned by this method are:
+   * @li @c "One"
+   * @li @c "Two"
+   * @li @c "invalid ClassThreeOtherNum"
    */
   const std::string& getOtherNumAsString() const;
 
@@ -1005,6 +1037,10 @@ ClassThree_free(ClassThree_t* ct);
  *
  * @copydetails doc_classthree_number
  * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
+ * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
+ * @li @sbmlconstant{CLASS_THREE_NUMBER_INVALID, Enum_t}
  *
  * @memberof ClassThree_t
  */
@@ -1024,6 +1060,10 @@ ClassThree_getNumber(const ClassThree_t * ct);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_classthree_number
+ * The possible values returned by this method are:
+ * @li @c "One"
+ * @li @c "Two"
+ * @li @c "invalid ClassThreeNumber"
  *
  * @memberof ClassThree_t
  */
@@ -1041,6 +1081,10 @@ ClassThree_getNumberAsString(const ClassThree_t * ct);
  *
  * @copydetails doc_classthree_name
  * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
+ * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
+ * @li @sbmlconstant{CLASS_THREE_NAME_INVALID, Fred_t}
  *
  * @memberof ClassThree_t
  */
@@ -1060,6 +1104,10 @@ ClassThree_getName(const ClassThree_t * ct);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_classthree_name
+ * The possible values returned by this method are:
+ * @li @c "tom"
+ * @li @c "dick"
+ * @li @c "invalid ClassThreeName"
  *
  * @memberof ClassThree_t
  */
@@ -1078,6 +1126,10 @@ ClassThree_getNameAsString(const ClassThree_t * ct);
  *
  * @copydetails doc_classthree_badName
  * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
+ * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
+ * @li @sbmlconstant{CLASS_THREE_BAD_NAME_INVALID, Fred_t}
  *
  * @memberof ClassThree_t
  */
@@ -1097,6 +1149,10 @@ ClassThree_getBadName(const ClassThree_t * ct);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_classthree_badName
+ * The possible values returned by this method are:
+ * @li @c "tom"
+ * @li @c "dick"
+ * @li @c "invalid ClassThreeBadName"
  *
  * @memberof ClassThree_t
  */
@@ -1115,6 +1171,10 @@ ClassThree_getBadNameAsString(const ClassThree_t * ct);
  *
  * @copydetails doc_classthree_otherNum
  * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
+ * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
+ * @li @sbmlconstant{CLASS_THREE_OTHER_NUM_INVALID, Enum_t}
  *
  * @memberof ClassThree_t
  */
@@ -1134,6 +1194,10 @@ ClassThree_getOtherNum(const ClassThree_t * ct);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_classthree_otherNum
+ * The possible values returned by this method are:
+ * @li @c "One"
+ * @li @c "Two"
+ * @li @c "invalid ClassThreeOtherNum"
  *
  * @memberof ClassThree_t
  */

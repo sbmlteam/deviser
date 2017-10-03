@@ -243,6 +243,10 @@ public:
    *
    * @copydetails doc_classonetwo_attEnum
    * @if clike The value is drawn from the enumeration @ref AbcType_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}
+   * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t}
+   * @li @sbmlconstant{CLASS_ONE_TWO_ATT_ENUM_INVALID, AbcType_t}
    */
   AbcType_t getAttEnum() const;
 
@@ -254,6 +258,10 @@ public:
    * string.
    *
    * @copydetails doc_classonetwo_attEnum
+   * The possible values returned by this method are:
+   * @li @c "maximize"
+   * @li @c "minimize"
+   * @li @c "invalid ClassOneTwoAttEnum"
    */
   const std::string& getAttEnumAsString() const;
 
@@ -1237,6 +1245,10 @@ ClassOneTwo_getAttUnit(const ClassOneTwo_t * cot);
  *
  * @copydetails doc_classonetwo_attEnum
  * @if clike The value is drawn from the enumeration @ref AbcType_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}
+ * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t}
+ * @li @sbmlconstant{CLASS_ONE_TWO_ATT_ENUM_INVALID, AbcType_t}
  *
  * @memberof ClassOneTwo_t
  */
@@ -1256,6 +1268,10 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_classonetwo_attEnum
+ * The possible values returned by this method are:
+ * @li @c "maximize"
+ * @li @c "minimize"
+ * @li @c "invalid ClassOneTwoAttEnum"
  *
  * @memberof ClassOneTwo_t
  */

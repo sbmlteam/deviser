@@ -174,6 +174,12 @@ public:
    * @copydetails doc_csgsetoperator_operationType
    * @if clike The value is drawn from the enumeration @ref
    * SetOperation_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
+   * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}
+   * @li @sbmlconstant{SPATIAL_SETOPERATION_RELATIVECOMPLEMENT, SetOperation_t}
+   * @li @sbmlconstant{C_S_G_SET_OPERATOR_OPERATION_TYPE_INVALID,
+   * SetOperation_t}
    */
   SetOperation_t getOperationType() const;
 
@@ -185,6 +191,11 @@ public:
    * as a string.
    *
    * @copydetails doc_csgsetoperator_operationType
+   * The possible values returned by this method are:
+   * @li @c "union"
+   * @li @c "intersection"
+   * @li @c "relativeComplement"
+   * @li @c "invalid CSGSetOperatorOperationType"
    */
   const std::string& getOperationTypeAsString() const;
 
@@ -1300,6 +1311,11 @@ CSGSetOperator_free(CSGSetOperator_t* csgso);
  *
  * @copydetails doc_csgsetoperator_operationType
  * @if clike The value is drawn from the enumeration @ref SetOperation_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
+ * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}
+ * @li @sbmlconstant{SPATIAL_SETOPERATION_RELATIVECOMPLEMENT, SetOperation_t}
+ * @li @sbmlconstant{C_S_G_SET_OPERATOR_OPERATION_TYPE_INVALID, SetOperation_t}
  *
  * @memberof CSGSetOperator_t
  */
@@ -1319,6 +1335,11 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_csgsetoperator_operationType
+ * The possible values returned by this method are:
+ * @li @c "union"
+ * @li @c "intersection"
+ * @li @c "relativeComplement"
+ * @li @c "invalid CSGSetOperatorOperationType"
  *
  * @memberof CSGSetOperator_t
  */

@@ -185,6 +185,11 @@ public:
    * @copydetails doc_coordinatecomponent_type
    * @if clike The value is drawn from the enumeration @ref
    * CoordinateKind_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
+   * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}
+   * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Z, CoordinateKind_t}
+   * @li @sbmlconstant{COORDINATE_COMPONENT_TYPE_INVALID, CoordinateKind_t}
    */
   CoordinateKind_t getType() const;
 
@@ -196,6 +201,11 @@ public:
    * string.
    *
    * @copydetails doc_coordinatecomponent_type
+   * The possible values returned by this method are:
+   * @li @c "cartesianX"
+   * @li @c "cartesianY"
+   * @li @c "cartesianZ"
+   * @li @c "invalid CoordinateComponentType"
    */
   const std::string& getTypeAsString() const;
 
@@ -1152,6 +1162,11 @@ CoordinateComponent_getId(const CoordinateComponent_t * cc);
  * @copydetails doc_coordinatecomponent_type
  * @if clike The value is drawn from the enumeration @ref
  * CoordinateKind_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
+ * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}
+ * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Z, CoordinateKind_t}
+ * @li @sbmlconstant{COORDINATE_COMPONENT_TYPE_INVALID, CoordinateKind_t}
  *
  * @memberof CoordinateComponent_t
  */
@@ -1171,6 +1186,11 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_coordinatecomponent_type
+ * The possible values returned by this method are:
+ * @li @c "cartesianX"
+ * @li @c "cartesianY"
+ * @li @c "cartesianZ"
+ * @li @c "invalid CoordinateComponentType"
  *
  * @memberof CoordinateComponent_t
  */

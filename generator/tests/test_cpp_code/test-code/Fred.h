@@ -203,6 +203,9 @@ public:
    *
    * @copydetails doc_fred_kind
    * @if clike The value is drawn from the enumeration @ref Kind_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
+   * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}
    */
   Kind_t getKind() const;
 
@@ -213,6 +216,9 @@ public:
    * @return the value of the "kind" attribute of this Fred as a string.
    *
    * @copydetails doc_fred_kind
+   * The possible values returned by this method are:
+   * @li @c "first"
+   * @li @c "invalid FredKind"
    */
   const std::string& getKindAsString() const;
 
@@ -1428,6 +1434,9 @@ Fred_getStr(const Fred_t * f);
  *
  * @copydetails doc_fred_kind
  * @if clike The value is drawn from the enumeration @ref Kind_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
+ * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}
  *
  * @memberof Fred_t
  */
@@ -1446,6 +1455,9 @@ Fred_getKind(const Fred_t * f);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_fred_kind
+ * The possible values returned by this method are:
+ * @li @c "first"
+ * @li @c "invalid FredKind"
  *
  * @memberof Fred_t
  */

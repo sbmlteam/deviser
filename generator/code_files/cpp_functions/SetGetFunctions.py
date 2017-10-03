@@ -43,7 +43,7 @@ from util import strFunctions, query, global_variables
 class SetGetFunctions():
     """Class for all functions for set/get/isset/unset"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[]):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[], has_enum=False, enums=[]):
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -74,6 +74,9 @@ class SetGetFunctions():
                     query.get_version_attributes(class_object['attribs'], i))
         else:
             self.has_multiple_versions = False
+
+        self.has_enum = has_enum
+        self.enums = enums
 
         self.lv_info = lv_info
         self.document = False
@@ -214,7 +217,12 @@ class SetGetFunctions():
         if 'isEnum' in attribute and attribute['isEnum']:
             additional.append(doccopy)
             additional.append('@if clike The value is drawn from the enumeration @ref {0}@endif'.format(attribute['CType']))
-#            additional.append('The possible values returned by this method are:')
+            additional.append('The possible values returned by this method are:')
+            if self.has_enum:
+                this_enum = self.get_matching_enum(attribute['name'])
+                [values, strvalues] = query.get_enum(this_enum, self.class_name)
+                for value in values:
+                    additional.append('@li @sbmlconstant{0}{1}, {2}{3}'.format(self.open_br, value, attribute['attTypeCode'], self.close_br))
         # create the function implementation
         if self.is_cpp_api:
             if not self.document:
@@ -239,6 +247,14 @@ class SetGetFunctions():
                      'virtual': virtual,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    # function to get the matching enum
+    def get_matching_enum(self, name):
+        for enum in self.enums:
+            if enum['name'] == name:
+                return enum
+        return None
+
 
     # function to write the correct get for doc elements in other libraries
     def write_get_for_doc_functions(self, attribute):
@@ -307,6 +323,12 @@ class SetGetFunctions():
             additional.append(' ')
         if 'isEnum' in attribute and attribute['isEnum']:
             additional.append('{0}'.format(doccopy))
+            additional.append('The possible values returned by this method are:')
+            if self.has_enum:
+                this_enum = self.get_matching_enum(attribute['name'])
+                [values, strvalues] = query.get_enum(this_enum, self.class_name)
+                for value in strvalues:
+                    additional.append('@li @c \"{0}\"'.format(value))
         if self.is_cpp_api:
             implementation = ['static const std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],
@@ -331,6 +353,11 @@ class SetGetFunctions():
                      'virtual': False,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def get_enum_type(self, attribute):
+        att_type = attribute['attTypeCode']
+        l = len(att_type)
+        return att_type[0:l-2]
 
     # function to write get function for an array
     # specialised c++ function to use an array pointer

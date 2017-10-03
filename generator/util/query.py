@@ -376,23 +376,40 @@ def get_typecode_enum(elements):
 
 
 # get enumeration values
-def get_enum(element):
-    name = element['name']
-    value = []
-    strvalue = []
-    max_length = 0
-    for i in range(0, len(element['values'])):
-        tc = element['values'][i]['name']
+def get_enum(element, class_name = ''):
+    # this function works slightly differently with enums for documentation
+    # it will only have a classname for them
+    if class_name == '':
+        name = element['name']
+        value = []
+        strvalue = []
+        max_length = 0
+        for i in range(0, len(element['values'])):
+            tc = element['values'][i]['name']
+            if len(tc) > max_length:
+                max_length = len(tc)
+            value.append(tc)
+            strvalue.append(element['values'][i]['value'])
+        tc = get_prefix(name) + '_INVALID'
         if len(tc) > max_length:
             max_length = len(tc)
         value.append(tc)
-        strvalue.append(element['values'][i]['value'])
-    tc = get_prefix(name) + '_INVALID'
-    if len(tc) > max_length:
-        max_length = len(tc)
-    value.append(tc)
-    strvalue.append('invalid {0}'.format(name))
-    return [value, strvalue, max_length]
+        strvalue.append('invalid {0}'.format(name))
+        return [value, strvalue, max_length]
+    else:
+        name = element['name']
+        nameclass = class_name + strFunctions.upper_first(name)
+        value = []
+        strvalue = []
+        for i in range(0, len(element['values'])):
+            tc = element['values'][i]['name']
+            value.append(tc)
+            strvalue.append(element['values'][i]['value'])
+        tc = get_prefix(nameclass) + '_INVALID'
+        value.append(tc)
+        strvalue.append('invalid {0}'.format(nameclass))
+        return [value, strvalue]
+
 
 
 def get_default_enum_value(attribute):

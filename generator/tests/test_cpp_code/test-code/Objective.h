@@ -198,6 +198,10 @@ public:
    *
    * @copydetails doc_objective_type
    * @if clike The value is drawn from the enumeration @ref FbcType_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}
+   * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, FbcType_t}
+   * @li @sbmlconstant{OBJECTIVE_TYPE_INVALID, FbcType_t}
    */
   FbcType_t getType() const;
 
@@ -208,6 +212,10 @@ public:
    * @return the value of the "type" attribute of this Objective as a string.
    *
    * @copydetails doc_objective_type
+   * The possible values returned by this method are:
+   * @li @c "maximize"
+   * @li @c "minimize"
+   * @li @c "invalid ObjectiveType"
    */
   const std::string& getTypeAsString() const;
 
@@ -1307,6 +1315,10 @@ Objective_getName(const Objective_t * o);
  *
  * @copydetails doc_objective_type
  * @if clike The value is drawn from the enumeration @ref FbcType_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}
+ * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, FbcType_t}
+ * @li @sbmlconstant{OBJECTIVE_TYPE_INVALID, FbcType_t}
  *
  * @memberof Objective_t
  */
@@ -1326,6 +1338,10 @@ Objective_getType(const Objective_t * o);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_objective_type
+ * The possible values returned by this method are:
+ * @li @c "maximize"
+ * @li @c "minimize"
+ * @li @c "invalid ObjectiveType"
  *
  * @memberof Objective_t
  */

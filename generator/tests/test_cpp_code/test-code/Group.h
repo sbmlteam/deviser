@@ -182,6 +182,11 @@ public:
    *
    * @copydetails doc_group_kind
    * @if clike The value is drawn from the enumeration @ref GroupKind_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t}
+   * @li @sbmlconstant{GROUP_KIND_PARTONOMY, GroupKind_t}
+   * @li @sbmlconstant{GROUP_KIND_COLLECTION, GroupKind_t}
+   * @li @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t}
    */
   GroupKind_t getKind() const;
 
@@ -192,6 +197,11 @@ public:
    * @return the value of the "kind" attribute of this Group as a string.
    *
    * @copydetails doc_group_kind
+   * The possible values returned by this method are:
+   * @li @c "classification"
+   * @li @c "partonomy"
+   * @li @c "collection"
+   * @li @c "invalid GroupKind"
    */
   const std::string& getKindAsString() const;
 
@@ -1230,6 +1240,11 @@ Group_getName(const Group_t * g);
  *
  * @copydetails doc_group_kind
  * @if clike The value is drawn from the enumeration @ref GroupKind_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t}
+ * @li @sbmlconstant{GROUP_KIND_PARTONOMY, GroupKind_t}
+ * @li @sbmlconstant{GROUP_KIND_COLLECTION, GroupKind_t}
+ * @li @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t}
  *
  * @memberof Group_t
  */
@@ -1248,6 +1263,11 @@ Group_getKind(const Group_t * g);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_group_kind
+ * The possible values returned by this method are:
+ * @li @c "classification"
+ * @li @c "partonomy"
+ * @li @c "collection"
+ * @li @c "invalid GroupKind"
  *
  * @memberof Group_t
  */

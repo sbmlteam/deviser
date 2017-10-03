@@ -202,6 +202,10 @@ public:
    * @copydetails doc_spatialpoints_compression
    * @if clike The value is drawn from the enumeration @ref
    * CompressionKind_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
+   * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
+   * @li @sbmlconstant{SPATIAL_POINTS_COMPRESSION_INVALID, CompressionKind_t}
    */
   CompressionKind_t getCompression() const;
 
@@ -213,6 +217,10 @@ public:
    * a string.
    *
    * @copydetails doc_spatialpoints_compression
+   * The possible values returned by this method are:
+   * @li @c "uncompressed"
+   * @li @c "deflated"
+   * @li @c "invalid SpatialPointsCompression"
    */
   const std::string& getCompressionAsString() const;
 
@@ -247,6 +255,13 @@ public:
    *
    * @copydetails doc_spatialpoints_dataType
    * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_POINTS_DATA_TYPE_INVALID, DataKind_t}
    */
   DataKind_t getDataType() const;
 
@@ -258,6 +273,13 @@ public:
    * string.
    *
    * @copydetails doc_spatialpoints_dataType
+   * The possible values returned by this method are:
+   * @li @c "double"
+   * @li @c "float"
+   * @li @c "uint8"
+   * @li @c "uint16"
+   * @li @c "uint32"
+   * @li @c "invalid SpatialPointsDataType"
    */
   const std::string& getDataTypeAsString() const;
 
@@ -1011,6 +1033,10 @@ SpatialPoints_getId(const SpatialPoints_t * sp);
  * @copydetails doc_spatialpoints_compression
  * @if clike The value is drawn from the enumeration @ref
  * CompressionKind_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
+ * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
+ * @li @sbmlconstant{SPATIAL_POINTS_COMPRESSION_INVALID, CompressionKind_t}
  *
  * @memberof SpatialPoints_t
  */
@@ -1030,6 +1056,10 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_spatialpoints_compression
+ * The possible values returned by this method are:
+ * @li @c "uncompressed"
+ * @li @c "deflated"
+ * @li @c "invalid SpatialPointsCompression"
  *
  * @memberof SpatialPoints_t
  */
@@ -1064,6 +1094,13 @@ SpatialPoints_getArrayDataLength(const SpatialPoints_t * sp);
  *
  * @copydetails doc_spatialpoints_dataType
  * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_POINTS_DATA_TYPE_INVALID, DataKind_t}
  *
  * @memberof SpatialPoints_t
  */
@@ -1083,6 +1120,13 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_spatialpoints_dataType
+ * The possible values returned by this method are:
+ * @li @c "double"
+ * @li @c "float"
+ * @li @c "uint8"
+ * @li @c "uint16"
+ * @li @c "uint32"
+ * @li @c "invalid SpatialPointsDataType"
  *
  * @memberof SpatialPoints_t
  */

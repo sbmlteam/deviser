@@ -185,6 +185,13 @@ public:
    * @copydetails doc_output_transitionEffect
    * @if clike The value is drawn from the enumeration @ref
    * TransitionOutputEffect_t@endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
+   * TransitionOutputEffect_t}
+   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
+   * TransitionOutputEffect_t}
+   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
+   * TransitionOutputEffect_t}
    */
   TransitionOutputEffect_t getTransitionEffect() const;
 
@@ -196,6 +203,10 @@ public:
    * string.
    *
    * @copydetails doc_output_transitionEffect
+   * The possible values returned by this method are:
+   * @li @c "production"
+   * @li @c "assignmentLevel"
+   * @li @c "invalid OutputTransitionEffect"
    */
   const std::string& getTransitionEffectAsString() const;
 
@@ -941,6 +952,13 @@ Output_getQualitativeSpecies(const Output_t * o);
  * @copydetails doc_output_transitionEffect
  * @if clike The value is drawn from the enumeration @ref
  * TransitionOutputEffect_t@endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
+ * TransitionOutputEffect_t}
+ * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
+ * TransitionOutputEffect_t}
+ * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
+ * TransitionOutputEffect_t}
  *
  * @memberof Output_t
  */
@@ -960,6 +978,10 @@ Output_getTransitionEffect(const Output_t * o);
  * @copydetails doc_returned_unowned_char
  *
  * @copydetails doc_output_transitionEffect
+ * The possible values returned by this method are:
+ * @li @c "production"
+ * @li @c "assignmentLevel"
+ * @li @c "invalid OutputTransitionEffect"
  *
  * @memberof Output_t
  */

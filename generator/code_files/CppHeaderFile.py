@@ -345,7 +345,9 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                                            self.is_cpp_api,
                                                            self.is_list_of,
                                                            self.class_object,
-                                                           self.lv_info)
+                                                           self.lv_info,
+                                                           self.has_enum,
+                                                           self.enums)
         num_attributes = len(self.class_attributes)
         for i in range(0, num_attributes):
             code = attrib_functions.write_get(True, i)

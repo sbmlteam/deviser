@@ -485,12 +485,6 @@ def main():
         fail += run_ext_test(name, class_name, test_case, 0)
 
         name = 'groups'
-        num = 0
-        class_name = 'GroupsModelPlugin'
-        test_case = 'basic plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
-
-        name = 'groups'
         num = 1
         class_name = 'GroupsSBMLDocumentPlugin'
         test_case = 'basic plugin'
@@ -861,12 +855,20 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib_test'
-        num = 36
-        class_name = 'UncertaintyA'
-        list_of = ''
-        test_case = 'concrete class'
+        name = 'groups'
+        num = 0
+        class_name = 'Group'
+        list_of = 'ListOfGroups'
+        test_case = 'list of with attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'groups'
+        class_name = 'GroupsExtension'
+        test_case = 'basic extension file'
+        fail += run_ext_test(name, class_name, test_case, 0)
+
+
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
