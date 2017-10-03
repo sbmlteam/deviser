@@ -514,8 +514,14 @@ class ParseXML():
         # read concrete versions of abstract classes and fill dictionary
         for node in pkg_node.getElementsByTagName('element'):
             element_name = self.get_value(node, 'name')
-            self.concrete_dict[element_name] = \
-                self.get_concrete_list(self, node)
+            is_abstract = self.get_bool_value(self, node, 'abstract')
+            if is_abstract:
+                concretes = self.get_concrete_list(self, node)
+                if len(concretes) == 0:
+                    self.report_error(global_variables
+                                      .return_codes['missing required information'],
+                                      'The abstract class {0} lists no instantiations'.format(element_name))
+                self.concrete_dict[element_name] = concretes
 
         # read element
         for node in pkg_node.getElementsByTagName('element'):
