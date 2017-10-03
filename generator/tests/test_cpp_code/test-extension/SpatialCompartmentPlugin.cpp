@@ -905,6 +905,87 @@ SpatialCompartmentPlugin::createObject(XMLInputStream& stream)
 #endif /* __cplusplus */
 
 
+/*
+ * Returns the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ */
+LIBSBML_EXTERN
+const CompartmentMapping_t*
+SpatialCompartmentPlugin_getCompartmentMapping(const SpatialCompartmentPlugin_t
+  * scp)
+{
+  if (scp == NULL)
+  {
+    return NULL;
+  }
+
+  return (CompartmentMapping_t*)(scp->getCompartmentMapping());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SpatialCompartmentPlugin_t's
+ * "compartmentMapping" element is set.
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_isSetCompartmentMapping(const
+  SpatialCompartmentPlugin_t * scp)
+{
+  return (scp != NULL) ? static_cast<int>(scp->isSetCompartmentMapping()) : 0;
+}
+
+
+/*
+ * Sets the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_setCompartmentMapping(
+                                               SpatialCompartmentPlugin_t *
+                                                 scp,
+                                               const CompartmentMapping_t*
+                                                 compartmentMapping)
+{
+  return (scp != NULL) ? scp->setCompartmentMapping(compartmentMapping) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new CompartmentMapping_t object, adds it to this
+ * SpatialCompartmentPlugin_t object and returns the CompartmentMapping_t
+ * object created.
+ */
+LIBSBML_EXTERN
+CompartmentMapping_t*
+SpatialCompartmentPlugin_createCompartmentMapping(SpatialCompartmentPlugin_t*
+  scp)
+{
+  if (scp == NULL)
+  {
+    return NULL;
+  }
+
+  return (CompartmentMapping_t*)(scp->createCompartmentMapping());
+}
+
+
+/*
+ * Unsets the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_unsetCompartmentMapping(SpatialCompartmentPlugin_t *
+  scp)
+{
+  return (scp != NULL) ? scp->unsetCompartmentMapping() :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

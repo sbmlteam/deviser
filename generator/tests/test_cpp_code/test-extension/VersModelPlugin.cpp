@@ -1307,6 +1307,164 @@ VersModelPlugin::writeL3V1V2Attributes(XMLOutputStream& stream) const
 #endif /* __cplusplus */
 
 
+/*
+ * Returns the value of the "version1" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+VersModelPlugin_getVersion1(const VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? vmp->getVersion1() : SBML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "version2" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+unsigned int
+VersModelPlugin_getVersion2(const VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? vmp->getVersion2() : SBML_INT_MAX;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "version1"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetVersion1(const VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? static_cast<int>(vmp->isSetVersion1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "version2"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetVersion2(const VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? static_cast<int>(vmp->isSetVersion2()) : 0;
+}
+
+
+/*
+ * Sets the value of the "version1" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setVersion1(VersModelPlugin_t * vmp, unsigned int version1)
+{
+  return (vmp != NULL) ? vmp->setVersion1(version1) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "version2" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setVersion2(VersModelPlugin_t * vmp, unsigned int version2)
+{
+  return (vmp != NULL) ? vmp->setVersion2(version2) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "version1" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetVersion1(VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? vmp->unsetVersion1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "version2" attribute of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetVersion2(VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? vmp->unsetVersion2() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "classOne" element of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+const ClassOne_t*
+VersModelPlugin_getClassOne(const VersModelPlugin_t * vmp)
+{
+  if (vmp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassOne_t*)(vmp->getClassOne());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "classOne"
+ * element is set.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetClassOne(const VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? static_cast<int>(vmp->isSetClassOne()) : 0;
+}
+
+
+/*
+ * Sets the value of the "classOne" element of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setClassOne(VersModelPlugin_t * vmp,
+                            const ClassOne_t* classOne)
+{
+  return (vmp != NULL) ? vmp->setClassOne(classOne) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new ClassOne_t object, adds it to this VersModelPlugin_t object
+ * and returns the ClassOne_t object created.
+ */
+LIBSBML_EXTERN
+ClassOne_t*
+VersModelPlugin_createClassOne(VersModelPlugin_t* vmp)
+{
+  if (vmp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassOne_t*)(vmp->createClassOne());
+}
+
+
+/*
+ * Unsets the value of the "classOne" element of this VersModelPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetClassOne(VersModelPlugin_t * vmp)
+{
+  return (vmp != NULL) ? vmp->unsetClassOne() : LIBSBML_INVALID_OBJECT;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

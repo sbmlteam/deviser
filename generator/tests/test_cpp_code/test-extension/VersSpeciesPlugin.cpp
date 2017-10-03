@@ -1996,6 +1996,311 @@ VersSpeciesPlugin_removeAnotherById(VersSpeciesPlugin_t* vsp, const char* sid)
 }
 
 
+/*
+ * Returns the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getSpecies_att_v1(const VersSpeciesPlugin_t * vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return vsp->getSpecies_att_v1().empty() ? NULL :
+    safe_strdup(vsp->getSpecies_att_v1().c_str());
+}
+
+
+/*
+ * Returns the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getString_plugin_att(const VersSpeciesPlugin_t * vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return vsp->getString_plugin_att().empty() ? NULL :
+    safe_strdup(vsp->getString_plugin_att().c_str());
+}
+
+
+/*
+ * Returns the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getSpecies_att_v2(const VersSpeciesPlugin_t * vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return vsp->getSpecies_att_v2().empty() ? NULL :
+    safe_strdup(vsp->getSpecies_att_v2().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "species_att_v1" attribute is set.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetSpecies_att_v1(const VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? static_cast<int>(vsp->isSetSpecies_att_v1()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "string_plugin_att" attribute is set.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetString_plugin_att(const VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? static_cast<int>(vsp->isSetString_plugin_att()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "species_att_v2" attribute is set.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetSpecies_att_v2(const VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? static_cast<int>(vsp->isSetSpecies_att_v2()) : 0;
+}
+
+
+/*
+ * Sets the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setSpecies_att_v1(VersSpeciesPlugin_t * vsp,
+                                    const char * species_att_v1)
+{
+  return (vsp != NULL) ? vsp->setSpecies_att_v1(species_att_v1) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setString_plugin_att(VersSpeciesPlugin_t * vsp,
+                                       const char * string_plugin_att)
+{
+  return (vsp != NULL) ? vsp->setString_plugin_att(string_plugin_att) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setSpecies_att_v2(VersSpeciesPlugin_t * vsp,
+                                    const char * species_att_v2)
+{
+  return (vsp != NULL) ? vsp->setSpecies_att_v2(species_att_v2) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetSpecies_att_v1(VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? vsp->unsetSpecies_att_v1() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetString_plugin_att(VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? vsp->unsetString_plugin_att() :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetSpecies_att_v2(VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? vsp->unsetSpecies_att_v2() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "classOne" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+const ClassOne_t*
+VersSpeciesPlugin_getClassOne(const VersSpeciesPlugin_t * vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassOne_t*)(vsp->getClassOne());
+}
+
+
+/*
+ * Returns the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+const ClassTwo_t*
+VersSpeciesPlugin_getClassTwo(const VersSpeciesPlugin_t * vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassTwo_t*)(vsp->getClassTwo());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's "classOne"
+ * element is set.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetClassOne(const VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? static_cast<int>(vsp->isSetClassOne()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's "classTwo"
+ * element is set.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetClassTwo(const VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? static_cast<int>(vsp->isSetClassTwo()) : 0;
+}
+
+
+/*
+ * Sets the value of the "classOne" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setClassOne(VersSpeciesPlugin_t * vsp,
+                              const ClassOne_t* classOne)
+{
+  return (vsp != NULL) ? vsp->setClassOne(classOne) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setClassTwo(VersSpeciesPlugin_t * vsp,
+                              const ClassTwo_t* classTwo)
+{
+  return (vsp != NULL) ? vsp->setClassTwo(classTwo) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new ClassOne_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the ClassOne_t object created.
+ */
+LIBSBML_EXTERN
+ClassOne_t*
+VersSpeciesPlugin_createClassOne(VersSpeciesPlugin_t* vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassOne_t*)(vsp->createClassOne());
+}
+
+
+/*
+ * Creates a new ClassTwo_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the ClassTwo_t object created.
+ */
+LIBSBML_EXTERN
+ClassTwo_t*
+VersSpeciesPlugin_createClassTwo(VersSpeciesPlugin_t* vsp)
+{
+  if (vsp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassTwo_t*)(vsp->createClassTwo());
+}
+
+
+/*
+ * Unsets the value of the "classOne" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetClassOne(VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? vsp->unsetClassOne() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetClassTwo(VersSpeciesPlugin_t * vsp)
+{
+  return (vsp != NULL) ? vsp->unsetClassTwo() : LIBSBML_INVALID_OBJECT;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

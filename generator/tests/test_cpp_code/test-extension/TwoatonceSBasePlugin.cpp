@@ -1429,6 +1429,255 @@ TwoatonceSBasePlugin::writeAttributes(XMLOutputStream& stream) const
 #endif /* __cplusplus */
 
 
+/*
+ * Returns the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+char *
+TwoatonceSBasePlugin_getId(const TwoatonceSBasePlugin_t * tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return tsbp->getId().empty() ? NULL : safe_strdup(tsbp->getId().c_str());
+}
+
+
+/*
+ * Returns the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+char *
+TwoatonceSBasePlugin_getName(const TwoatonceSBasePlugin_t * tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return tsbp->getName().empty() ? NULL : safe_strdup(tsbp->getName().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "id"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetId(const TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetId()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "name"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetName(const TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetName()) : 0;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setId(TwoatonceSBasePlugin_t * tsbp, const char * id)
+{
+  return (tsbp != NULL) ? tsbp->setId(id) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setName(TwoatonceSBasePlugin_t * tsbp, const char * name)
+{
+  return (tsbp != NULL) ? tsbp->setName(name) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetId(TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? tsbp->unsetId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetName(TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? tsbp->unsetName() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "normalClass" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+const NormalClass_t*
+TwoatonceSBasePlugin_getNormalClass(const TwoatonceSBasePlugin_t * tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (NormalClass_t*)(tsbp->getNormalClass());
+}
+
+
+/*
+ * Returns the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+const ClassWithRequiredID_t*
+TwoatonceSBasePlugin_getClassWithRequiredID(const TwoatonceSBasePlugin_t *
+  tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassWithRequiredID_t*)(tsbp->getClassWithRequiredID());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "normalClass" element is set.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetNormalClass(const TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetNormalClass()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "classWithRequiredID" element is set.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetClassWithRequiredID(const TwoatonceSBasePlugin_t *
+  tsbp)
+{
+  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetClassWithRequiredID()) :
+    0;
+}
+
+
+/*
+ * Sets the value of the "normalClass" element of this TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setNormalClass(TwoatonceSBasePlugin_t * tsbp,
+                                    const NormalClass_t* normalClass)
+{
+  return (tsbp != NULL) ? tsbp->setNormalClass(normalClass) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp,
+                                            const ClassWithRequiredID_t*
+                                              classWithRequiredID)
+{
+  return (tsbp != NULL) ? tsbp->setClassWithRequiredID(classWithRequiredID) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new NormalClass_t object, adds it to this TwoatonceSBasePlugin_t
+ * object and returns the NormalClass_t object created.
+ */
+LIBSBML_EXTERN
+NormalClass_t*
+TwoatonceSBasePlugin_createNormalClass(TwoatonceSBasePlugin_t* tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (NormalClass_t*)(tsbp->createNormalClass());
+}
+
+
+/*
+ * Creates a new ClassWithRequiredID_t object, adds it to this
+ * TwoatonceSBasePlugin_t object and returns the ClassWithRequiredID_t object
+ * created.
+ */
+LIBSBML_EXTERN
+ClassWithRequiredID_t*
+TwoatonceSBasePlugin_createClassWithRequiredID(TwoatonceSBasePlugin_t* tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (ClassWithRequiredID_t*)(tsbp->createClassWithRequiredID());
+}
+
+
+/*
+ * Unsets the value of the "normalClass" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetNormalClass(TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? tsbp->unsetNormalClass() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? tsbp->unsetClassWithRequiredID() :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

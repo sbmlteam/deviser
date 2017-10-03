@@ -650,6 +650,52 @@ SpatialReactionPlugin::writeAttributes(XMLOutputStream& stream) const
 #endif /* __cplusplus */
 
 
+/*
+ * Returns the value of the "isLocal" attribute of this
+ * SpatialReactionPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_getIsLocal(const SpatialReactionPlugin_t * srp)
+{
+  return (srp != NULL) ? static_cast<int>(srp->getIsLocal()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SpatialReactionPlugin_t's "isLocal"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_isSetIsLocal(const SpatialReactionPlugin_t * srp)
+{
+  return (srp != NULL) ? static_cast<int>(srp->isSetIsLocal()) : 0;
+}
+
+
+/*
+ * Sets the value of the "isLocal" attribute of this SpatialReactionPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_setIsLocal(SpatialReactionPlugin_t * srp, int isLocal)
+{
+  return (srp != NULL) ? srp->setIsLocal(isLocal) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "isLocal" attribute of this SpatialReactionPlugin_t.
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_unsetIsLocal(SpatialReactionPlugin_t * srp)
+{
+  return (srp != NULL) ? srp->unsetIsLocal() : LIBSBML_INVALID_OBJECT;
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

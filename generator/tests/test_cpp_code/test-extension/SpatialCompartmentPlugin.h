@@ -711,6 +711,134 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ *
+ * @param scp the SpatialCompartmentPlugin_t structure whose compartmentMapping
+ * is sought.
+ *
+ * @return the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t as a CompartmentMapping*.
+ *
+ * @memberof SpatialCompartmentPlugin_t
+ */
+LIBSBML_EXTERN
+const CompartmentMapping_t*
+SpatialCompartmentPlugin_getCompartmentMapping(const SpatialCompartmentPlugin_t
+  * scp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SpatialCompartmentPlugin_t's
+ * "compartmentMapping" element is set.
+ *
+ * @param scp the SpatialCompartmentPlugin_t structure.
+ *
+ * @return @c 1 (true) if this SpatialCompartmentPlugin_t's
+ * "compartmentMapping" element has been set, otherwise @c 0 (false) is
+ * returned.
+ *
+ * @memberof SpatialCompartmentPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_isSetCompartmentMapping(const
+  SpatialCompartmentPlugin_t * scp);
+
+
+/**
+ * Sets the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ *
+ * @param scp the SpatialCompartmentPlugin_t structure.
+ *
+ * @param compartmentMapping CompartmentMapping_t* value of the
+ * "compartmentMapping" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SpatialCompartmentPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_setCompartmentMapping(
+                                               SpatialCompartmentPlugin_t *
+                                                 scp,
+                                               const CompartmentMapping_t*
+                                                 compartmentMapping);
+
+
+/**
+ * Creates a new CompartmentMapping_t object, adds it to this
+ * SpatialCompartmentPlugin_t object and returns the CompartmentMapping_t
+ * object created.
+ *
+ * @param scp the SpatialCompartmentPlugin_t structure to which the
+ * CompartmentMapping_t should be added.
+ *
+ * @return a new CompartmentMapping_t object instance.
+ *
+ * @memberof SpatialCompartmentPlugin_t
+ */
+LIBSBML_EXTERN
+CompartmentMapping_t*
+SpatialCompartmentPlugin_createCompartmentMapping(SpatialCompartmentPlugin_t*
+  scp);
+
+
+/**
+ * Unsets the value of the "compartmentMapping" element of this
+ * SpatialCompartmentPlugin_t.
+ *
+ * @param scp the SpatialCompartmentPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SpatialCompartmentPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialCompartmentPlugin_unsetCompartmentMapping(SpatialCompartmentPlugin_t *
+  scp);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !SpatialCompartmentPlugin_H__ */
 
 

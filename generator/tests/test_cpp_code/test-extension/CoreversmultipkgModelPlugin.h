@@ -1008,6 +1008,371 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns the value of the "attPlug" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure whose attPlug is
+ * sought.
+ *
+ * @return the value of the "attPlug" attribute of this
+ * CoreversmultipkgModelPlugin_t as a unsigned integer.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+CoreversmultipkgModelPlugin_getAttPlug(const CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Returns the value of the "attPlug2" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure whose attPlug2 is
+ * sought.
+ *
+ * @return the value of the "attPlug2" attribute of this
+ * CoreversmultipkgModelPlugin_t as a unsigned integer.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+CoreversmultipkgModelPlugin_getAttPlug2(const CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this CoreversmultipkgModelPlugin_t's
+ * "attPlug" attribute is set.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this CoreversmultipkgModelPlugin_t's "attPlug"
+ * attribute has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_isSetAttPlug(const CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this CoreversmultipkgModelPlugin_t's
+ * "attPlug2" attribute is set.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this CoreversmultipkgModelPlugin_t's "attPlug2"
+ * attribute has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_isSetAttPlug2(const CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Sets the value of the "attPlug" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @param attPlug unsigned int value of the "attPlug" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_setAttPlug(CoreversmultipkgModelPlugin_t * cmp,
+                                       unsigned int attPlug);
+
+
+/**
+ * Sets the value of the "attPlug2" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @param attPlug2 unsigned int value of the "attPlug2" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_setAttPlug2(CoreversmultipkgModelPlugin_t * cmp,
+                                        unsigned int attPlug2);
+
+
+/**
+ * Unsets the value of the "attPlug" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_unsetAttPlug(CoreversmultipkgModelPlugin_t * cmp);
+
+
+/**
+ * Unsets the value of the "attPlug2" attribute of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_unsetAttPlug2(CoreversmultipkgModelPlugin_t * cmp);
+
+
+/**
+ * Returns the value of the "classOneTwo" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure whose classOneTwo is
+ * sought.
+ *
+ * @return the value of the "classOneTwo" element of this
+ * CoreversmultipkgModelPlugin_t as a ClassOneTwo*.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+const ClassOneTwo_t*
+CoreversmultipkgModelPlugin_getClassOneTwo(const CoreversmultipkgModelPlugin_t
+  * cmp);
+
+
+/**
+ * Returns the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure whose classMult is
+ * sought.
+ *
+ * @return the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin_t as a ClassMult*.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+const ClassMult_t*
+CoreversmultipkgModelPlugin_getClassMult(const CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this CoreversmultipkgModelPlugin_t's
+ * "classOneTwo" element is set.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this CoreversmultipkgModelPlugin_t's "classOneTwo"
+ * element has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_isSetClassOneTwo(const
+  CoreversmultipkgModelPlugin_t * cmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this CoreversmultipkgModelPlugin_t's
+ * "classMult" element is set.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this CoreversmultipkgModelPlugin_t's "classMult"
+ * element has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_isSetClassMult(const CoreversmultipkgModelPlugin_t
+  * cmp);
+
+
+/**
+ * Sets the value of the "classOneTwo" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @param classOneTwo ClassOneTwo_t* value of the "classOneTwo" element to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_setClassOneTwo(CoreversmultipkgModelPlugin_t * cmp,
+                                           const ClassOneTwo_t* classOneTwo);
+
+
+/**
+ * Sets the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @param classMult ClassMult_t* value of the "classMult" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_setClassMult(CoreversmultipkgModelPlugin_t * cmp,
+                                         const ClassMult_t* classMult);
+
+
+/**
+ * Creates a new ClassOneTwo_t object, adds it to this
+ * CoreversmultipkgModelPlugin_t object and returns the ClassOneTwo_t object
+ * created.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure to which the
+ * ClassOneTwo_t should be added.
+ *
+ * @return a new ClassOneTwo_t object instance.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+ClassOneTwo_t*
+CoreversmultipkgModelPlugin_createClassOneTwo(CoreversmultipkgModelPlugin_t*
+  cmp);
+
+
+/**
+ * Creates a new ClassMult_t object, adds it to this
+ * CoreversmultipkgModelPlugin_t object and returns the ClassMult_t object
+ * created.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure to which the
+ * ClassMult_t should be added.
+ *
+ * @return a new ClassMult_t object instance.
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+ClassMult_t*
+CoreversmultipkgModelPlugin_createClassMult(CoreversmultipkgModelPlugin_t*
+  cmp);
+
+
+/**
+ * Unsets the value of the "classOneTwo" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_unsetClassOneTwo(CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+/**
+ * Unsets the value of the "classMult" element of this
+ * CoreversmultipkgModelPlugin_t.
+ *
+ * @param cmp the CoreversmultipkgModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof CoreversmultipkgModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+CoreversmultipkgModelPlugin_unsetClassMult(CoreversmultipkgModelPlugin_t *
+  cmp);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !CoreversmultipkgModelPlugin_H__ */
 
 

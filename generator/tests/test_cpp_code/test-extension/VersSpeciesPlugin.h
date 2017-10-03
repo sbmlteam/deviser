@@ -1382,6 +1382,399 @@ VersSpeciesPlugin_removeAnotherById(VersSpeciesPlugin_t* vsp,
                                     const char* sid);
 
 
+/**
+ * Returns the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose species_att_v1 is sought.
+ *
+ * @return the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t as a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getSpecies_att_v1(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Returns the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose string_plugin_att is
+ * sought.
+ *
+ * @return the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t as a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getString_plugin_att(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Returns the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose species_att_v2 is sought.
+ *
+ * @return the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t as a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+char *
+VersSpeciesPlugin_getSpecies_att_v2(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "species_att_v1" attribute is set.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersSpeciesPlugin_t's "species_att_v1" attribute
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetSpecies_att_v1(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "string_plugin_att" attribute is set.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersSpeciesPlugin_t's "string_plugin_att"
+ * attribute has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetString_plugin_att(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's
+ * "species_att_v2" attribute is set.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersSpeciesPlugin_t's "species_att_v2" attribute
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetSpecies_att_v2(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Sets the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @param species_att_v1 const char * value of the "species_att_v1" attribute
+ * to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setSpecies_att_v1(VersSpeciesPlugin_t * vsp,
+                                    const char * species_att_v1);
+
+
+/**
+ * Sets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @param string_plugin_att const char * value of the "string_plugin_att"
+ * attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p string_plugin_att = @c NULL or an empty string
+ * is equivalent to calling VersSpeciesPlugin_unsetString_plugin_att().
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setString_plugin_att(VersSpeciesPlugin_t * vsp,
+                                       const char * string_plugin_att);
+
+
+/**
+ * Sets the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @param species_att_v2 const char * value of the "species_att_v2" attribute
+ * to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setSpecies_att_v2(VersSpeciesPlugin_t * vsp,
+                                    const char * species_att_v2);
+
+
+/**
+ * Unsets the value of the "species_att_v1" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetSpecies_att_v1(VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Unsets the value of the "string_plugin_att" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetString_plugin_att(VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Unsets the value of the "species_att_v2" attribute of this
+ * VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetSpecies_att_v2(VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Returns the value of the "classOne" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose classOne is sought.
+ *
+ * @return the value of the "classOne" element of this VersSpeciesPlugin_t as a
+ * ClassOne*.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+const ClassOne_t*
+VersSpeciesPlugin_getClassOne(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Returns the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure whose classTwo is sought.
+ *
+ * @return the value of the "classTwo" element of this VersSpeciesPlugin_t as a
+ * ClassTwo*.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+const ClassTwo_t*
+VersSpeciesPlugin_getClassTwo(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's "classOne"
+ * element is set.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersSpeciesPlugin_t's "classOne" element has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetClassOne(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersSpeciesPlugin_t's "classTwo"
+ * element is set.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersSpeciesPlugin_t's "classTwo" element has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_isSetClassTwo(const VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Sets the value of the "classOne" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @param classOne ClassOne_t* value of the "classOne" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setClassOne(VersSpeciesPlugin_t * vsp,
+                              const ClassOne_t* classOne);
+
+
+/**
+ * Sets the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @param classTwo ClassTwo_t* value of the "classTwo" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_setClassTwo(VersSpeciesPlugin_t * vsp,
+                              const ClassTwo_t* classTwo);
+
+
+/**
+ * Creates a new ClassOne_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the ClassOne_t object created.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to which the ClassOne_t should
+ * be added.
+ *
+ * @return a new ClassOne_t object instance.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+ClassOne_t*
+VersSpeciesPlugin_createClassOne(VersSpeciesPlugin_t* vsp);
+
+
+/**
+ * Creates a new ClassTwo_t object, adds it to this VersSpeciesPlugin_t object
+ * and returns the ClassTwo_t object created.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure to which the ClassTwo_t should
+ * be added.
+ *
+ * @return a new ClassTwo_t object instance.
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+ClassTwo_t*
+VersSpeciesPlugin_createClassTwo(VersSpeciesPlugin_t* vsp);
+
+
+/**
+ * Unsets the value of the "classOne" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetClassOne(VersSpeciesPlugin_t * vsp);
+
+
+/**
+ * Unsets the value of the "classTwo" element of this VersSpeciesPlugin_t.
+ *
+ * @param vsp the VersSpeciesPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersSpeciesPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersSpeciesPlugin_unsetClassTwo(VersSpeciesPlugin_t * vsp);
+
+
 
 
 END_C_DECLS

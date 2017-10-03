@@ -83,6 +83,8 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.is_cpp_api = False
         if self.is_plugin:
             self.write_child_lo_element_functions()
+            self.write_attribute_functions()
+            self.write_child_element_functions()
         elif not self.is_list_of:
             self.write_constructors()
             self.write_attribute_functions()
@@ -835,8 +837,5 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         self.write_cpp_begin()
         self.write_class()
         self.write_cpp_end()
-        if not self.is_plugin:
-            self.write_c_code()
-        elif not self.is_doc_plugin and len(self.child_lo_elements) > 0:
-            self.write_c_code()
+        self.write_c_code()
         self.write_cppns_end()

@@ -867,6 +867,254 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns the value of the "version1" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure whose version1 is sought.
+ *
+ * @return the value of the "version1" attribute of this VersModelPlugin_t as a
+ * unsigned integer.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+VersModelPlugin_getVersion1(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Returns the value of the "version2" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure whose version2 is sought.
+ *
+ * @return the value of the "version2" attribute of this VersModelPlugin_t as a
+ * unsigned integer.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+unsigned int
+VersModelPlugin_getVersion2(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "version1"
+ * attribute is set.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersModelPlugin_t's "version1" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetVersion1(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "version2"
+ * attribute is set.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersModelPlugin_t's "version2" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetVersion2(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Sets the value of the "version1" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @param version1 unsigned int value of the "version1" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setVersion1(VersModelPlugin_t * vmp, unsigned int version1);
+
+
+/**
+ * Sets the value of the "version2" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @param version2 unsigned int value of the "version2" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setVersion2(VersModelPlugin_t * vmp, unsigned int version2);
+
+
+/**
+ * Unsets the value of the "version1" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetVersion1(VersModelPlugin_t * vmp);
+
+
+/**
+ * Unsets the value of the "version2" attribute of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetVersion2(VersModelPlugin_t * vmp);
+
+
+/**
+ * Returns the value of the "classOne" element of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure whose classOne is sought.
+ *
+ * @return the value of the "classOne" element of this VersModelPlugin_t as a
+ * ClassOne*.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+const ClassOne_t*
+VersModelPlugin_getClassOne(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this VersModelPlugin_t's "classOne"
+ * element is set.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @return @c 1 (true) if this VersModelPlugin_t's "classOne" element has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_isSetClassOne(const VersModelPlugin_t * vmp);
+
+
+/**
+ * Sets the value of the "classOne" element of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @param classOne ClassOne_t* value of the "classOne" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_setClassOne(VersModelPlugin_t * vmp,
+                            const ClassOne_t* classOne);
+
+
+/**
+ * Creates a new ClassOne_t object, adds it to this VersModelPlugin_t object
+ * and returns the ClassOne_t object created.
+ *
+ * @param vmp the VersModelPlugin_t structure to which the ClassOne_t should be
+ * added.
+ *
+ * @return a new ClassOne_t object instance.
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+ClassOne_t*
+VersModelPlugin_createClassOne(VersModelPlugin_t* vmp);
+
+
+/**
+ * Unsets the value of the "classOne" element of this VersModelPlugin_t.
+ *
+ * @param vmp the VersModelPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof VersModelPlugin_t
+ */
+LIBSBML_EXTERN
+int
+VersModelPlugin_unsetClassOne(VersModelPlugin_t * vmp);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !VersModelPlugin_H__ */
 
 

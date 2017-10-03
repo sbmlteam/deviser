@@ -564,6 +564,104 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns the value of the "isLocal" attribute of this
+ * SpatialReactionPlugin_t.
+ *
+ * @param srp the SpatialReactionPlugin_t structure whose isLocal is sought.
+ *
+ * @return the value of the "isLocal" attribute of this SpatialReactionPlugin_t
+ * as a boolean.
+ *
+ * @memberof SpatialReactionPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_getIsLocal(const SpatialReactionPlugin_t * srp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SpatialReactionPlugin_t's "isLocal"
+ * attribute is set.
+ *
+ * @param srp the SpatialReactionPlugin_t structure.
+ *
+ * @return @c 1 (true) if this SpatialReactionPlugin_t's "isLocal" attribute
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SpatialReactionPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_isSetIsLocal(const SpatialReactionPlugin_t * srp);
+
+
+/**
+ * Sets the value of the "isLocal" attribute of this SpatialReactionPlugin_t.
+ *
+ * @param srp the SpatialReactionPlugin_t structure.
+ *
+ * @param isLocal int value of the "isLocal" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SpatialReactionPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_setIsLocal(SpatialReactionPlugin_t * srp, int isLocal);
+
+
+/**
+ * Unsets the value of the "isLocal" attribute of this SpatialReactionPlugin_t.
+ *
+ * @param srp the SpatialReactionPlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SpatialReactionPlugin_t
+ */
+LIBSBML_EXTERN
+int
+SpatialReactionPlugin_unsetIsLocal(SpatialReactionPlugin_t * srp);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !SpatialReactionPlugin_H__ */
 
 

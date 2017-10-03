@@ -909,6 +909,361 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
+#ifndef SWIG
+
+
+
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
+
+
+
+BEGIN_C_DECLS
+
+
+/**
+ * Returns the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure whose id is sought.
+ *
+ * @return the value of the "id" attribute of this TwoatonceSBasePlugin_t as a
+ * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+char *
+TwoatonceSBasePlugin_getId(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Returns the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure whose name is sought.
+ *
+ * @return the value of the "name" attribute of this TwoatonceSBasePlugin_t as
+ * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+char *
+TwoatonceSBasePlugin_getName(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "id"
+ * attribute is set.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @return @c 1 (true) if this TwoatonceSBasePlugin_t's "id" attribute has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetId(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "name"
+ * attribute is set.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @return @c 1 (true) if this TwoatonceSBasePlugin_t's "name" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetName(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Sets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @param id const char * value of the "id" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling TwoatonceSBasePlugin_unsetId().
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setId(TwoatonceSBasePlugin_t * tsbp, const char * id);
+
+
+/**
+ * Sets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @param name const char * value of the "name" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling TwoatonceSBasePlugin_unsetName().
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setName(TwoatonceSBasePlugin_t * tsbp,
+                             const char * name);
+
+
+/**
+ * Unsets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetId(TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Unsets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetName(TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Returns the value of the "normalClass" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure whose normalClass is
+ * sought.
+ *
+ * @return the value of the "normalClass" element of this
+ * TwoatonceSBasePlugin_t as a NormalClass*.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+const NormalClass_t*
+TwoatonceSBasePlugin_getNormalClass(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Returns the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure whose classWithRequiredID
+ * is sought.
+ *
+ * @return the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t as a ClassWithRequiredID*.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+const ClassWithRequiredID_t*
+TwoatonceSBasePlugin_getClassWithRequiredID(const TwoatonceSBasePlugin_t *
+  tsbp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "normalClass" element is set.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @return @c 1 (true) if this TwoatonceSBasePlugin_t's "normalClass" element
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetNormalClass(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "classWithRequiredID" element is set.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @return @c 1 (true) if this TwoatonceSBasePlugin_t's "classWithRequiredID"
+ * element has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetClassWithRequiredID(const TwoatonceSBasePlugin_t *
+  tsbp);
+
+
+/**
+ * Sets the value of the "normalClass" element of this TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @param normalClass NormalClass_t* value of the "normalClass" element to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setNormalClass(TwoatonceSBasePlugin_t * tsbp,
+                                    const NormalClass_t* normalClass);
+
+
+/**
+ * Sets the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @param classWithRequiredID ClassWithRequiredID_t* value of the
+ * "classWithRequiredID" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp,
+                                            const ClassWithRequiredID_t*
+                                              classWithRequiredID);
+
+
+/**
+ * Creates a new NormalClass_t object, adds it to this TwoatonceSBasePlugin_t
+ * object and returns the NormalClass_t object created.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure to which the NormalClass_t
+ * should be added.
+ *
+ * @return a new NormalClass_t object instance.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+NormalClass_t*
+TwoatonceSBasePlugin_createNormalClass(TwoatonceSBasePlugin_t* tsbp);
+
+
+/**
+ * Creates a new ClassWithRequiredID_t object, adds it to this
+ * TwoatonceSBasePlugin_t object and returns the ClassWithRequiredID_t object
+ * created.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure to which the
+ * ClassWithRequiredID_t should be added.
+ *
+ * @return a new ClassWithRequiredID_t object instance.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+ClassWithRequiredID_t*
+TwoatonceSBasePlugin_createClassWithRequiredID(TwoatonceSBasePlugin_t* tsbp);
+
+
+/**
+ * Unsets the value of the "normalClass" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetNormalClass(TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Unsets the value of the "classWithRequiredID" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp);
+
+
+
+
+END_C_DECLS
+
+
+
+
+LIBSBML_CPP_NAMESPACE_END
+
+
+
+
+#endif /* !SWIG */
+
+
+
+
 #endif /* !TwoatonceSBasePlugin_H__ */
 
 

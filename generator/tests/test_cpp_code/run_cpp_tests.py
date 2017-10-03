@@ -552,6 +552,12 @@ def main():
         test_case = 'error enumeration '
         fail += run_valid_test(name, class_name, test_case)
 
+        name = 'fbc_v2'
+        num = 0
+        class_name = 'FbcModelPlugin'
+        test_case = 'plugin with attributes'
+        fail += run_plug_test(name, class_name, test_case, num)
+
         name = 'test_child'
         num = 0
         class_name = 'MySEDClass'
@@ -855,17 +861,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
-        num = 0
-        class_name = 'Group'
-        list_of = 'ListOfGroups'
-        test_case = 'list of with attribute'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        name = 'spatial'
+        num = 4
+        class_name = 'SpatialReactionPlugin'
+        test_case = 'plugin only attributes'
+        fail += run_plug_test(name, class_name, test_case, num)
 
-        name = 'groups'
-        class_name = 'GroupsExtension'
-        test_case = 'basic extension file'
-        fail += run_ext_test(name, class_name, test_case, 0)
+
 
 
 
