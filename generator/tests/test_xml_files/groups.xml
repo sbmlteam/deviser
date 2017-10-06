@@ -34,8 +34,8 @@
       <enums>
         <enum name="GroupKind">
           <enumValues>
-            <enumValue name="GROUP_KIND_CLASSIFICATION" value="classification"/>
-            <enumValue name="GROUP_KIND_PARTONOMY" value="partonomy"/>
+            <enumValue name="CLASSIFICATION" value="classification"/>
+            <enumValue name="KIND_PARTONOMY" value="partonomy"/>
             <enumValue name="GROUP_KIND_COLLECTION" value="collection"/>
           </enumValues>
         </enum>

@@ -98,6 +98,25 @@ class ParseXML():
         return temp.nodeValue
 
     @staticmethod
+    def get_enum_value(node, name, classname, typename):
+        temp = node.getAttributeNode(name)
+        if temp is None:
+            return None
+        else:
+            tempname = temp.nodeValue.upper()
+        parts = tempname.split('_')
+        if len(parts) > 2:
+            return tempname
+        else:
+            # we dont have a classic X_Y_Z name which we want
+            if tempname.startswith(classname + '_' + typename):
+                return tempname
+            elif tempname.startswith(typename):
+                return classname + '_' + tempname
+            else:
+                return classname + '_' + typename + '_' + tempname
+
+    @staticmethod
     def get_bool_value(self, node, name):
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -203,7 +222,20 @@ class ParseXML():
             typecode = temptype
         return typecode
 
-    #####################################################################
+    def analyse_enumname(self, enum_name):
+        break_found = False
+        for i in range(1,len(enum_name)):
+            if enum_name[i].isupper():
+                break_found = True
+                break
+        if break_found:
+            cname = enum_name[0:i].upper()
+            tname = enum_name[i:].upper()
+        else:
+            cname = enum_name.upper()
+            tname = ''
+        return [cname, tname]
+  #####################################################################
 
     # Functions for looking up elements
 
@@ -707,10 +739,11 @@ class ParseXML():
         for node in self.dom.getElementsByTagName('enum'):
             values = []
             enum_name = self.get_enum_name(self, node)
+            [cname, tname] = self.analyse_enumname(enum_name)
 
             if enum_name not in names_listed:
                 for val in node.getElementsByTagName('enumValue'):
-                    values.append(dict({'name': self.get_value(val, 'name'),
+                    values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname),
                                         'value': self.get_value(val, 'value')}))
 
                 enums.append(dict({'name': enum_name, 'values': values}))
