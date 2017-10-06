@@ -189,6 +189,9 @@
           <attributes>
             <attribute name="transform" required="true" type="array" element="double" abstract="false"/>
           </attributes>
+          <concretes>
+            <concrete name="transformation" element="Transformation2D" minNumChildren="0" maxNumChildren="0"/>
+          </concretes>
         </element>
         <element name="GraphicalPrimitive1D" typeCode="SBML_RENDER_GRAPHICALPRIMITIVE1D" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Transformation2D" abstract="true">
           <attributes>
@@ -222,6 +225,10 @@
             <attribute name="typeList" required="false" type="string" abstract="false"/>
             <attribute name="g" required="false" type="element" element="RenderGroup" abstract="false"/>
           </attributes>
+          <concretes>
+            <concrete name="style" element="GlobalStyle" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="style" element="LocalStyle" minNumChildren="0" maxNumChildren="0"/>
+          </concretes>
         </element>
         <element name="RenderInformationBase" typeCode="SBML_RENDER_RENDERINFORMATION_BASE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
           <attributes>
@@ -235,6 +242,10 @@
             <attribute name="gradientDefinition" required="false" type="lo_element" element="GradientBase" abstract="false"/>
             <attribute name="lineEnding" required="false" type="lo_element" element="LineEnding" abstract="false"/>
           </attributes>
+          <concretes>
+            <concrete name="renderInformation" element="globalRenderInformation" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="renderInformation" element="localRenderInformation" minNumChildren="0" maxNumChildren="0"/>
+          </concretes>
         </element>
         <element name="DefaultValues" typeCode="SBML_RENDER_DEFAULTS" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
