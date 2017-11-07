@@ -66,6 +66,11 @@
 EXTENSION_CREATE_NS(TwoatoncePkgNamespaces, variable, sbmlns);
 #endif
 
+#ifndef TWOATONCE_CREATE_NS_WITH_VERSION
+#define TWOATONCE_CREATE_NS_WITH_VERSION(variable, sbmlns, version)\
+  EXTENSION_CREATE_NS_WITH_VERSION(TwoatoncePkgNamespaces, variable, sbmlns, version);
+#endif
+
 #include <vector>
 
 
@@ -128,6 +133,17 @@ public:
    * @copydetails doc_note_static_methods
    */
   static const std::string& getXmlnsL3V1V1();
+
+
+  /**
+   * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+   * by this libSBML extension.
+   *
+   * @return the XML namespace, as a string.
+   *
+   * @copydetails doc_note_static_methods
+   */
+  static const std::string& getXmlnsL3V2V1();
 
 
   /**
@@ -308,6 +324,19 @@ public:
    * TwoatonceSBMLErrorTable.
    */
   virtual unsigned int getErrorIdOffset() const;
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Returns true if the package has multiple versions.
+   *
+   * @return true if multiple versions, false otherwise.
+   */
+  virtual bool hasMultipleVersions() const;
 
   /** @endcond */
 

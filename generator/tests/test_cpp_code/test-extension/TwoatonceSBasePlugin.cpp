@@ -143,107 +143,6 @@ TwoatonceSBasePlugin::~TwoatonceSBasePlugin()
 
 
 /*
- * Returns the value of the "id" attribute of this TwoatonceSBasePlugin.
- */
-const std::string&
-TwoatonceSBasePlugin::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this TwoatonceSBasePlugin.
- */
-const std::string&
-TwoatonceSBasePlugin::getName() const
-{
-  return mName;
-}
-
-
-/*
- * Predicate returning @c true if this TwoatonceSBasePlugin's "id" attribute is
- * set.
- */
-bool
-TwoatonceSBasePlugin::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this TwoatonceSBasePlugin's "name" attribute
- * is set.
- */
-bool
-TwoatonceSBasePlugin::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::setId(const std::string& id)
-{
-  return SyntaxChecker::checkAndSetSId(id, mId);
-}
-
-
-/*
- * Sets the value of the "name" attribute of this TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSBML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSBML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSBML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSBML_OPERATION_FAILED;
-  }
-}
-
-
-/*
  * Returns the value of the "normalClass" element of this TwoatonceSBasePlugin.
  */
 const NormalClass*
@@ -455,19 +354,6 @@ TwoatonceSBasePlugin::unsetClassWithRequiredID()
   delete mClassWithRequiredID;
   mClassWithRequiredID = NULL;
   return LIBSBML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Predicate returning @c true if all the required attributes for this
- * TwoatonceSBasePlugin object have been set.
- */
-bool
-TwoatonceSBasePlugin::hasRequiredAttributes() const
-{
-  bool allPresent = true;
-
-  return allPresent;
 }
 
 
@@ -702,22 +588,6 @@ TwoatonceSBasePlugin::getAttribute(const std::string& attributeName,
 {
   int return_value = SBasePlugin::getAttribute(attributeName, value);
 
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -737,22 +607,6 @@ TwoatonceSBasePlugin::getAttribute(const std::string& attributeName,
 {
   int return_value = SBasePlugin::getAttribute(attributeName, value);
 
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -770,15 +624,6 @@ bool
 TwoatonceSBasePlugin::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SBasePlugin::isSetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
 
   return value;
 }
@@ -875,15 +720,6 @@ TwoatonceSBasePlugin::setAttribute(const std::string& attributeName,
 {
   int return_value = SBasePlugin::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
   return return_value;
 }
 
@@ -903,15 +739,6 @@ TwoatonceSBasePlugin::setAttribute(const std::string& attributeName,
 {
   int return_value = SBasePlugin::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
   return return_value;
 }
 
@@ -929,15 +756,6 @@ int
 TwoatonceSBasePlugin::unsetAttribute(const std::string& attributeName)
 {
   int value = SBasePlugin::unsetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
 
   return value;
 }
@@ -1294,239 +1112,8 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Adds the expected attributes for this element
- */
-void
-TwoatonceSBasePlugin::addExpectedAttributes(ExpectedAttributes& attributes)
-{
-  SBasePlugin::addExpectedAttributes(attributes);
-
-  attributes.add("id");
-
-  attributes.add("name");
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Reads the expected attributes into the member data variables
- */
-void
-TwoatonceSBasePlugin::readAttributes(const XMLAttributes& attributes,
-                                     const ExpectedAttributes&
-                                       expectedAttributes)
-{
-  unsigned int level = getLevel();
-  unsigned int version = getVersion();
-  unsigned int pkgVersion = getPackageVersion();
-  unsigned int numErrs;
-  bool assigned = false;
-  SBMLErrorLog* log = getErrorLog();
-
-  SBasePlugin::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
-
-  for (int n = numErrs-1; n >= 0; n--)
-  {
-    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownPackageAttribute);
-      log->logPackageError("twoatonce", TwoatonceSBaseAllowedAttributes,
-        pkgVersion, level, version, details);
-    }
-    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
-      log->logPackageError("twoatonce", TwoatonceSBaseAllowedAttributes,
-        pkgVersion, level, version, details);
-    }
-    else if (log->getError(n)->getErrorId() == NotSchemaConformant)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(NotSchemaConformant);
-      log->logPackageError("twoatonce", TwoatonceSBaseAllowedAttributes,
-        pkgVersion, level, version, details);
-    }
-  }
-
-  // 
-  // id SId (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, pkgVersion,
-        "<TwoatonceSBasePlugin>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      log->logPackageError("twoatonce", TwoatonceIdSyntaxRule, pkgVersion,
-        level, version, "The twoatonce:id on the <" +
-          getParentSBMLObject()->getElementName() + "> is '" + mId + "',which does "
-            "not conform to the syntax.", getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, pkgVersion,
-        "<TwoatonceSBasePlugin>");
-    }
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the attributes to the stream
- */
-void
-TwoatonceSBasePlugin::writeAttributes(XMLOutputStream& stream) const
-{
-  SBasePlugin::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
-
-
-/*
- * Returns the value of the "id" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-char *
-TwoatonceSBasePlugin_getId(const TwoatonceSBasePlugin_t * tsbp)
-{
-  if (tsbp == NULL)
-  {
-    return NULL;
-  }
-
-  return tsbp->getId().empty() ? NULL : safe_strdup(tsbp->getId().c_str());
-}
-
-
-/*
- * Returns the value of the "name" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-char *
-TwoatonceSBasePlugin_getName(const TwoatonceSBasePlugin_t * tsbp)
-{
-  if (tsbp == NULL)
-  {
-    return NULL;
-  }
-
-  return tsbp->getName().empty() ? NULL : safe_strdup(tsbp->getName().c_str());
-}
-
-
-/*
- * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "id"
- * attribute is set.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_isSetId(const TwoatonceSBasePlugin_t * tsbp)
-{
-  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetId()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's "name"
- * attribute is set.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_isSetName(const TwoatonceSBasePlugin_t * tsbp)
-{
-  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetName()) : 0;
-}
-
-
-/*
- * Sets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_setId(TwoatonceSBasePlugin_t * tsbp, const char * id)
-{
-  return (tsbp != NULL) ? tsbp->setId(id) : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_setName(TwoatonceSBasePlugin_t * tsbp, const char * name)
-{
-  return (tsbp != NULL) ? tsbp->setName(name) : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_unsetId(TwoatonceSBasePlugin_t * tsbp)
-{
-  return (tsbp != NULL) ? tsbp->unsetId() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this TwoatonceSBasePlugin_t.
- */
-LIBSBML_EXTERN
-int
-TwoatonceSBasePlugin_unsetName(TwoatonceSBasePlugin_t * tsbp)
-{
-  return (tsbp != NULL) ? tsbp->unsetName() : LIBSBML_INVALID_OBJECT;
-}
 
 
 /*

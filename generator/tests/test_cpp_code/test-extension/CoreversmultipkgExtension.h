@@ -68,8 +68,7 @@ EXTENSION_CREATE_NS(CoreversmultipkgPkgNamespaces, variable, sbmlns);
 
 #ifndef COREVERSMULTIPKG_CREATE_NS_WITH_VERSION
 #define COREVERSMULTIPKG_CREATE_NS_WITH_VERSION(variable, sbmlns, version)\
-EXTENSION_CREATE_NS_WITH_VERSION(CoreversmultipkgPkgNamespaces, variable,
-  sbmlns, version);
+  EXTENSION_CREATE_NS_WITH_VERSION(CoreversmultipkgPkgNamespaces, variable, sbmlns, version);
 #endif
 
 #include <vector>

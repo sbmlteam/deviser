@@ -81,7 +81,7 @@ TwoatonceExtension::getDefaultLevel()
 unsigned int
 TwoatonceExtension::getDefaultVersion()
 {
-  return 1;
+  return 2;
 }
 
 
@@ -105,6 +105,19 @@ TwoatonceExtension::getXmlnsL3V1V1()
 {
   static const std::string xmlns =
     "http://www.sbml.org/sbml/level3/version1/twoatonce/version1";
+  return xmlns;
+}
+
+
+/*
+ * Returns the XML namespace URI of the SBML Level&nbsp;3 package implemented
+ * by this libSBML extension.
+ */
+const std::string&
+TwoatonceExtension::getXmlnsL3V2V1()
+{
+  static const std::string xmlns =
+    "http://www.sbml.org/sbml/level3/version2/twoatonce/version1";
   return xmlns;
 }
 
@@ -211,6 +224,17 @@ TwoatonceExtension::getURI(unsigned int sbmlLevel,
     }
   }
 
+  if (sbmlLevel == 3)
+  {
+    if (sbmlVersion == 2)
+    {
+      if (pkgVersion == 1)
+      {
+        return getXmlnsL3V2V1();
+      }
+    }
+  }
+
   static std::string empty = "";
   return empty;
 }
@@ -223,6 +247,11 @@ unsigned int
 TwoatonceExtension::getLevel(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
+  {
+    return 3;
+  }
+
+  if (uri == getXmlnsL3V2V1())
   {
     return 3;
   }
@@ -242,6 +271,11 @@ TwoatonceExtension::getVersion(const std::string& uri) const
     return 1;
   }
 
+  if (uri == getXmlnsL3V2V1())
+  {
+    return 2;
+  }
+
   return 0;
 }
 
@@ -254,6 +288,11 @@ unsigned int
 TwoatonceExtension::getPackageVersion(const std::string& uri) const
 {
   if (uri == getXmlnsL3V1V1())
+  {
+    return 1;
+  }
+
+  if (uri == getXmlnsL3V2V1())
   {
     return 1;
   }
@@ -273,6 +312,11 @@ TwoatonceExtension::getSBMLExtensionNamespaces(const std::string& uri) const
   if (uri == getXmlnsL3V1V1())
   {
     pkgns = new TwoatoncePkgNamespaces(3, 1, 1);
+  }
+
+  if (uri == getXmlnsL3V2V1())
+  {
+    pkgns = new TwoatoncePkgNamespaces(3, 2, 1);
   }
 
   return pkgns;
@@ -360,6 +404,21 @@ TwoatonceExtension::getErrorIdOffset() const
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Returns true if the package has multiple versions.
+ */
+bool
+TwoatonceExtension::hasMultipleVersions() const
+{
+  return true;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Initializes twoatonce extension by creating an object of this class with the
  * required SBasePlugin derived objects and registering the object to the
  * SBMLExtensionRegistry class
@@ -378,6 +437,8 @@ TwoatonceExtension::init()
   std::vector<std::string> packageURIs;
 
   packageURIs.push_back(getXmlnsL3V1V1());
+
+  packageURIs.push_back(getXmlnsL3V2V1());
 
   SBaseExtensionPoint sbmldocExtPoint("core", SBML_DOCUMENT);
   SBaseExtensionPoint sbaseExtPoint("all", SBML_GENERIC_SBASE);

@@ -1301,7 +1301,6 @@ ClassOneTwo::addExpectedAttributes(ExpectedAttributes& attributes)
 
   if (level == 3 && coreVersion == 2 && pkgVersion == 1)
   {
-    attributes.add("id");
     attributes.add("att1");
     attributes.add("att2");
     attributes.add("attDbl");
@@ -1309,7 +1308,6 @@ ClassOneTwo::addExpectedAttributes(ExpectedAttributes& attributes)
 
   if (level == 3 && coreVersion == 2 && pkgVersion == 2)
   {
-    attributes.add("id");
     attributes.add("att1");
     attributes.add("att2");
     attributes.add("attInt");
@@ -1914,11 +1912,6 @@ ClassOneTwo::writeL3V1V2Attributes(XMLOutputStream& stream) const
 void
 ClassOneTwo::writeL3V2V1Attributes(XMLOutputStream& stream) const
 {
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
   if (isSetAtt1() == true)
   {
     stream.writeAttribute("att1", getPrefix(), mAtt1);
@@ -1947,11 +1940,6 @@ ClassOneTwo::writeL3V2V1Attributes(XMLOutputStream& stream) const
 void
 ClassOneTwo::writeL3V2V2Attributes(XMLOutputStream& stream) const
 {
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
   if (isSetAtt1() == true)
   {
     stream.writeAttribute("att1", getPrefix(), mAtt1);

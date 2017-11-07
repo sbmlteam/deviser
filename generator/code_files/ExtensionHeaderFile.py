@@ -139,14 +139,14 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         if self.num_versions > 1:
             self.write_line('#ifndef {0}_CREATE_NS_WITH_'
                             'VERSION'.format(self.cap_package))
-            self.write_line('#define {0}_CREATE_NS_WITH_'
+            self.write_line_verbatim('#define {0}_CREATE_NS_WITH_'
                             'VERSION(variable, {1}'
                             'ns, version)\\'.format(self.cap_package,
                                                     self.language))
-            self.write_line('  EXTENSION_CREATE_NS_WITH_VERSION('
+            self.write_line_verbatim('{2}EXTENSION_CREATE_NS_WITH_VERSION('
                             '{0}PkgNamespaces, variable, '
                             '{1}ns, version);'.format(self.up_package,
-                                                      self.language))
+                                                      self.language, '  '))
             self.write_line('#endif')
             self.skip_line()
         self.write_line_verbatim('#include <vector>')

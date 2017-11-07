@@ -833,6 +833,19 @@ def main():
         test_case = 'basic extension file with SBasePlugin'
         fail += run_ext_test(name, class_name, test_case, 0)
 
+        name = 'twoAtOnce'
+        num = 1
+        class_name = 'ClassWithRequiredID'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        # leave out for now as all validation needs reviewing for multiple
+        name = 'twoAtOnce'
+        class_name = 'TwoAtOnceSBMLError'
+        test_case = 'error enumeration '
+#        fail += run_valid_test(name, class_name, test_case)
+
         name = 'new_distrib_test'
         num = 36
         class_name = 'UncertaintyA'
@@ -861,10 +874,10 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'groups'
-        class_name = 'GroupsExtension'
-        test_case = 'basic extension file'
-        fail += run_ext_test(name, class_name, test_case, 0)
+        name = 'twoAtOnce'
+        class_name = 'TwoAtOnceSBMLError'
+        test_case = 'error enumeration '
+        fail += run_valid_test(name, class_name, test_case)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

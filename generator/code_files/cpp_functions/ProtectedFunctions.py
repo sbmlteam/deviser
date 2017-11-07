@@ -551,7 +551,12 @@ class ProtectedFunctions():
                     if self.version_attributes[i][j]['isArray']:
                         continue
                     name = self.version_attributes[i][j]['name']
-                    implementation.append('attributes.add(\"{0}\")'.format(name))
+                    # in l3v2 id and name are on SBase
+                    if version < 2:
+                        implementation.append('attributes.add(\"{0}\")'.format(name))
+                    else:
+                        if name != 'id' and name != 'name':
+                            implementation.append('attributes.add(\"{0}\")'.format(name))
                 code.append(self.create_code_block('if', implementation))
         # return the parts
         return dict({'title_line': title_line,
@@ -907,7 +912,13 @@ class ProtectedFunctions():
         # create the function implementation
         code = []
         for i in range(0, len(self.version_attributes[version])):
-            self.write_write_att(self.version_attributes[version], i, code)
+            # if we are l3v2 id and name are written by sbase
+            if version_val < 2:
+                self.write_write_att(self.version_attributes[version], i, code)
+            else:
+                att_name = self.version_attributes[version][i]['xml_name']
+                if att_name != 'id' and att_name != 'name':
+                    self.write_write_att(self.version_attributes[version], i, code)
 
         # return the parts
         return dict({'title_line': title_line,
