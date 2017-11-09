@@ -852,6 +852,13 @@ def main():
         list_of = ''
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'plugin_id'
+        num = 0
+        class_name = 'PluginidSBasePlugin'
+        test_case = 'an SBase plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -874,10 +881,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'twoAtOnce'
-        class_name = 'TwoAtOnceSBMLError'
-        test_case = 'error enumeration '
-        fail += run_valid_test(name, class_name, test_case)
+        name = 'plugin_id'
+        num = 0
+        class_name = 'PluginidSBasePlugin'
+        test_case = 'an SBase plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

@@ -394,7 +394,7 @@ TwoatonceExtension::getErrorTableIndex(unsigned int errorId) const
 unsigned int
 TwoatonceExtension::getErrorIdOffset() const
 {
-  return 2000000;
+  return 1400000;
 }
 
 /** @endcond */
@@ -409,7 +409,7 @@ TwoatonceExtension::getErrorIdOffset() const
 bool
 TwoatonceExtension::hasMultipleVersions() const
 {
-  return true;
+  return false;
 }
 
 /** @endcond */

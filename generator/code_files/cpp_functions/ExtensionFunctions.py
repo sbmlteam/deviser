@@ -453,6 +453,8 @@ class ExtensionFunctions():
         # should not get here but double check
         if self.num_versions == 1:
             return_value = 'false'
+        elif self.hasSinglePackageVersion():
+            return_value = 'false'
 
         # create the function implementation
         implementation = ['return {0}'.format(return_value)]
@@ -474,6 +476,15 @@ class ExtensionFunctions():
     ########################################################################
 
     # HELPER FUNCTIONS
+
+    def hasSinglePackageVersion(self):
+        singlePkg = True
+        pkgVersion = self.lv_info[0]['pkg_version']
+        for lvinfo in self.lv_info:
+            if lvinfo['pkg_version'] != pkgVersion:
+                singlePkg = False
+        return singlePkg
+
 
     @staticmethod
     def create_code_block(code_type, lines):

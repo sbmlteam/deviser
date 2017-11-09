@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="PluginID" fullname="SBase plugin with Id" number="100" offset="100000" version="1" required="false">
+  <versions>
+    <pkgVersion level="3" version="1" pkg_version="1">
+      <elements>
+        <element name="OtherNormalClass" typeCode="SBML_PLUGINID_OTHERNORMALCLASS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="SBase">
+          <references>
+            <reference name="OtherNormalClass"/>
+          </references>
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="plugAtt" required="false" type="string" abstract="false"/>
+          </attributes>
+        </plugin>
+      </plugins>
+    </pkgVersion>
+    <pkgVersion level="3" version="2" pkg_version="1">
+      <elements>
+        <element name="OtherNormalClass" typeCode="SBML_PLUGINID_OTHERNORMALCLASS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <plugins>
+        <plugin extensionPoint="SBase">
+          <references>
+            <reference name="OtherNormalClass"/>
+          </references>
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="plugAtt" required="false" type="string" abstract="false"/>
+          </attributes>
+        </plugin>
+      </plugins>
+    </pkgVersion>
+  </versions>
+</package>

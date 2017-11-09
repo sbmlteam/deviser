@@ -733,7 +733,7 @@ class Constructors():
         else:
             sep = ','
         for attrib in self.attributes:
-            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif attrib['attType'] == 'lo_element':
                 constructor_args.append('{0} {1} '
@@ -767,7 +767,7 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
-            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif attrib['isArray']:
                 constructor_args.append('{0} {1} ( NULL )'
@@ -798,7 +798,7 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
-            if attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName':
+            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif attrib['isArray']:
                 member = attrib['memberName']

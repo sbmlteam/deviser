@@ -282,6 +282,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     # function to write the data members
     def write_data_members(self, attributes):
         names_written = ['mId', 'mName']
+        if self.is_plugin:
+            names_written = []
         for i in range(0, len(attributes)):
             name = attributes[i]['memberName']
             return_type = attributes[i]['attTypeCode']
