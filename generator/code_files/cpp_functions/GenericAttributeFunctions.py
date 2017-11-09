@@ -810,7 +810,7 @@ class GenericAttributeFunctions():
         title_line = 'Returns the nth object of \"objectName" in this {0}.' \
             .format(self.class_name)
         params.append('@param elementName, the name of the element to get number of.')
-        params.append('@param index, unsigned int teh index of teh object to retrieve.')
+        params.append('@param index, unsigned int the index of the object to retrieve.')
 
         return_lines.append('@return pointer to the object.')
 
