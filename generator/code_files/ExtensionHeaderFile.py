@@ -345,7 +345,7 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
 
     ########################################################################
 
-    # Functions for writing teh fwd declarations file
+    # Functions for writing the fwd declarations file
 
     def write_docs_fwd(self):
         forward_dec = 'Forward declaration of all opaque C types.'

@@ -292,7 +292,7 @@ To integrate and compile the code with libSBML the fields requested are:
 - **SWIG executable**. 
   The location of the SWIG executable. When Deviser Edit invokes the
   compilation of libSBML with the newly integrated package it configures 
-  and builds teh Python binding, in addition to the C++ library. 
+  and builds the Python binding, in addition to the C++ library. 
   SWIG is necessary for this. It is hoped in future to add a facility to 
   directly test the build using a Python interface.
 

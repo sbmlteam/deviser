@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # @file    TexValidationRules.py
-# @brief   class to generate teh LaTeX apdx-validation file
+# @brief   class to generate the LaTeX apdx-validation file
 # @author  Frank Bergmann
 # @author  Sarah Keating
 #

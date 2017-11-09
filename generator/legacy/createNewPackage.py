@@ -340,7 +340,7 @@ def createQual():
   elements.append(sbml)
   model_plug = dict({'sbase': 'Model', 'extension': model_elem}) 
   plug = [model_plug]
-  #create teh overall package description
+  #create the overall package description
   package = dict({'name' : 'Qual', 'elements': elements, 'plugins': plug, 'number': 1100, 'sbmlElements': sbml_classes, 'offset': 3000000})
   return package
   
@@ -357,7 +357,7 @@ def createRender():
 #  model_elem.append(sbml)
 #  model_plug = dict({'sbase': 'Model', 'extension': model_elem}) 
   plug = []
-  #create teh overall package description
+  #create the overall package description
   package = dict({'name' : 'Render', 'elements': elements, 'plugins': plug, 'number': 1500, 'sbmlElements': sbml_classes, 'offset': 9000000})
   return package
 
