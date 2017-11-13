@@ -5,8 +5,9 @@
       <elements>
         <element name="ColorDefinition" typeCode="SBML_RENDER_COLORDEFINITION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="colorDefinition">
           <attributes>
-            <attribute name="id" required="false" type="SId" abstract="false"/>
-            <attribute name="value" required="false" type="string" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="value" required="true" type="string" abstract="false"/>
           </attributes>
         </element>
         <element name="Ellipse" typeCode="SBML_RENDER_ELLIPSE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="GraphicalPrimitive2D" abstract="false" elementName="ellipse">
@@ -32,6 +33,7 @@
         <element name="GradientBase" typeCode="SBML_RENDER_GRADIENTDEFINITION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="true" listOfName="listOfGradientDefinitions" listOfClassName="ListOfGradientDefinitions">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="spreadMethod" required="false" type="enum" element="GradientSpreadMethod" abstract="false"/>
             <attribute name="stop" required="false" type="inline_lo_element" element="GradientStop" abstract="false"/>
           </attributes>
@@ -179,6 +181,7 @@
         </element>
         <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
           <attributes>
+            <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="transform" required="false" type="array" element="double" abstract="false"/>
           </attributes>
           <concretes>
