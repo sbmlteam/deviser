@@ -19,7 +19,7 @@
             <attribute name="ry" required="false" type="element" element="RelAbsVector" abstract="false"/>
           </attributes>
         </element>
-        <element name="GlobalRenderInformation" typeCode="SBML_RENDER_GLOBALRENDERINFORMATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="RenderInformationBase" abstract="false" elementName="renderInformation" listOfName="listOfGlobalRenderInformation" listOfClassName="ListOfGlobalRenderInformation">
+        <element name="GlobalRenderInformation" typeCode="SBML_RENDER_GLOBALRENDERINFORMATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="RenderInformationBase" abstract="false" elementName="renderInformation" listOfName="listOfGlobalRenderInformation" listOfClassName="ListOfGlobalRenderInformation">
           <attributes>
             <attribute name="style" required="false" type="lo_element" element="GlobalStyle" abstract="false"/>
           </attributes>
@@ -29,8 +29,8 @@
             <listOfAttribute name="defaultValues" required="false" type="element" element="DefaultValues" abstract="false"/>
           </listOfAttributes>
         </element>
-        <element name="GlobalStyle" typeCode="SBML_RENDER_GLOBALSTYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="Style" abstract="false" elementName="style" listOfName="listOfStyles" listOfClassName="ListOfGlobalStyles"/>
-        <element name="GradientBase" typeCode="SBML_RENDER_GRADIENTDEFINITION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="true" listOfName="listOfGradientDefinitions" listOfClassName="ListOfGradientDefinitions">
+        <element name="GlobalStyle" typeCode="SBML_RENDER_GLOBALSTYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Style" abstract="false" elementName="style" listOfName="listOfStyles" listOfClassName="ListOfGlobalStyles"/>
+        <element name="GradientBase" typeCode="SBML_RENDER_GRADIENTDEFINITION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="true" listOfName="listOfGradientDefinitions" listOfClassName="ListOfGradientDefinitions">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -42,7 +42,7 @@
             <concrete name="radialGradient" element="RadialGradient" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="stop">
+        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="stop">
           <attributes>
             <attribute name="offset" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stop-color" required="true" type="string" abstract="false"/>
@@ -72,7 +72,7 @@
             <attribute name="href" required="true" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="LineEnding" typeCode="SBML_RENDER_LINEENDING" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="GraphicalPrimitive2D" abstract="false" elementName="lineEnding">
+        <element name="LineEnding" typeCode="SBML_RENDER_LINEENDING" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="GraphicalPrimitive2D" abstract="false" elementName="lineEnding">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
@@ -90,7 +90,7 @@
             <attribute name="z2" required="false" type="element" element="RelAbsVector" abstract="false"/>
           </attributes>
         </element>
-        <element name="LocalRenderInformation" typeCode="SBML_RENDER_LOCALRENDERINFORMATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="RenderInformationBase" abstract="false" elementName="renderInformation" listOfName="listOfRenderInformation" listOfClassName="ListOfLocalRenderInformation">
+        <element name="LocalRenderInformation" typeCode="SBML_RENDER_LOCALRENDERINFORMATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="RenderInformationBase" abstract="false" elementName="renderInformation" listOfName="listOfRenderInformation" listOfClassName="ListOfLocalRenderInformation">
           <attributes>
             <attribute name="style" required="false" type="lo_element" element="LocalStyle" abstract="false"/>
           </attributes>
@@ -100,7 +100,7 @@
             <listOfAttribute name="defaultValues" required="false" type="element" element="DefaultValues" abstract="false"/>
           </listOfAttributes>
         </element>
-        <element name="LocalStyle" typeCode="SBML_RENDER_LOCALSTYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="Style" abstract="false" elementName="style" listOfName="listOfStyles" listOfClassName="ListOfLocalStyles">
+        <element name="LocalStyle" typeCode="SBML_RENDER_LOCALSTYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Style" abstract="false" elementName="style" listOfName="listOfStyles" listOfClassName="ListOfLocalStyles">
           <attributes>
             <attribute name="idList" required="false" type="string" abstract="false"/>
           </attributes>
@@ -155,7 +155,7 @@
             <attribute name="element" required="false" type="lo_element" element="RenderPoint" abstract="false"/>
           </attributes>
         </element>
-        <element name="RenderPoint" typeCode="SBML_RENDER_POINT" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="true" elementName="element" listOfName="listOfElements" listOfClassName="ListOfCurveElements">
+        <element name="RenderPoint" typeCode="SBML_RENDER_POINT" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="true" elementName="element" listOfName="listOfElements" listOfClassName="ListOfCurveElements">
           <attributes>
             <attribute name="x" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="y" required="true" type="element" element="RelAbsVector" abstract="false"/>
@@ -179,7 +179,7 @@
             <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
           </attributes>
         </element>
-        <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
+        <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
           <attributes>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="transform" required="false" type="array" element="double" abstract="false"/>
