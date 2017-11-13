@@ -17,6 +17,7 @@
             <attribute name="cz" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="rx" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="ry" required="false" type="element" element="RelAbsVector" abstract="false"/>
+            <attribute name="ratio" required="false" type="double" abstract="false"/>
           </attributes>
         </element>
         <element name="GlobalRenderInformation" typeCode="SBML_RENDER_GLOBALRENDERINFORMATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="RenderInformationBase" abstract="false" elementName="renderInformation" listOfName="listOfGlobalRenderInformation" listOfClassName="ListOfGlobalRenderInformation">
@@ -52,7 +53,7 @@
           <attributes>
             <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
             <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
-            <attribute name="font-family" required="false" type="enum" element="FontFamily" abstract="false"/>
+            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
             <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
             <attribute name="font-style" required="false" type="enum" element="FontStyle" abstract="false"/>
             <attribute name="text-anchor" required="false" type="enum" element="HTextAnchor" abstract="false"/>
@@ -124,12 +125,13 @@
         <element name="Rectangle" typeCode="SBML_RENDER_RECTANGLE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="GraphicalPrimitive2D" abstract="false" elementName="rectangle">
           <attributes>
             <attribute name="x" required="true" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="y" required="false" type="element" element="RelAbsVector" abstract="false"/>
+            <attribute name="y" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="z" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="width" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="height" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="rX" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="rY" required="false" type="element" element="RelAbsVector" abstract="false"/>
+            <attribute name="ratio" required="false" type="double" abstract="false"/>
           </attributes>
         </element>
         <element name="RelAbsVector" typeCode="SBML_RENDER_RELABSVECTOR" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
@@ -171,7 +173,7 @@
             <attribute name="x" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="y" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="z" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="font-family" required="false" type="enum" element="FontFamily" abstract="false"/>
+            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
             <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
             <attribute name="font-style" required="false" type="enum" element="FontStyle" abstract="false"/>
             <attribute name="text-anchor" required="false" type="enum" element="HTextAnchor" abstract="false"/>
@@ -181,7 +183,6 @@
         </element>
         <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
           <attributes>
-            <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="transform" required="false" type="array" element="double" abstract="false"/>
           </attributes>
           <concretes>
@@ -191,6 +192,7 @@
         <element name="Transformation" typeCode="SBML_RENDER_TRANSFORMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
           <attributes>
             <attribute name="transform" required="true" type="array" element="double" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="transformation" element="Transformation2D" minNumChildren="0" maxNumChildren="0"/>
@@ -205,6 +207,7 @@
           </attributes>
           <concretes>
             <concrete name="text" element="Text" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="curve" element="RenderCurve" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="GraphicalPrimitive2D" typeCode="SBML_RENDER_GRAPHICALPRIMITIVE2D" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="GraphicalPrimitive1D" abstract="true">
@@ -216,7 +219,6 @@
             <concrete name="ellipse" element="Ellipse" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="rectangle" element="Rectangle" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="polygon" element="Polygon" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="curve" element="RenderCurve" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="g" element="RenderGroup" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
@@ -267,11 +269,12 @@
             <attribute name="radialGradient_fx" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="radialGradient_fy" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="radialGradient_fz" required="false" type="element" element="RelAbsVector" abstract="false"/>
+            <attribute name="fill" required="false" type="string" abstract="false"/>
             <attribute name="fill-rule" required="false" type="enum" element="FillRule" abstract="false"/>
             <attribute name="default_z" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stroke" required="false" type="string" abstract="false"/>
             <attribute name="stroke-width" required="false" type="string" abstract="false"/>
-            <attribute name="font-family" required="false" type="enum" element="FontFamily" abstract="false"/>
+            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
             <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
             <attribute name="font-style" required="false" type="enum" element="FontStyle" abstract="false"/>
@@ -279,6 +282,7 @@
             <attribute name="vtext-anchor" required="false" type="enum" element="VTextAnchor" abstract="false"/>
             <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
             <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
+            <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
           </attributes>
         </element>
       </elements>
