@@ -37,7 +37,7 @@
 # written permission.
 # ------------------------------------------------------------------------ -->
 
-from util import strFunctions, global_variables
+from util import strFunctions, global_variables, query
 
 
 class ValidationRulesForPlugin():
@@ -110,6 +110,11 @@ class ValidationRulesForPlugin():
                 self.write_core_subobject_rule(self, self.opt_child_lo_elem[i])
             self.add_rule(rule)
 
+        if len(self.reqd_child_lo_elem) > 0:
+            self.number += 1
+            rule = self.write_reqd_lo_rule()
+            self.add_rule(rule)
+
         for i in range(0, len(self.reqd_child_lo_elem)):
             self.number += 1
             rule = \
@@ -130,6 +135,54 @@ class ValidationRulesForPlugin():
                                                self.reqd_child_lo_elem[i])
             self.add_rule(rule)
 
+        lo_info = []
+        for child in self.reqd_child_lo_elem:
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(child, lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
+
+        lo_info = []
+        for child in self.opt_child_lo_elem:
+            self.number += 1
+            rule = \
+                self.write_lochild_attribute_rule(child, lo_info)
+            self.add_rule(rule)
+            if rule and 'attributes' in lo_info[0]:
+                for i in range(0, len(lo_info[0]['attributes'])):
+                    self.number += 1
+                    rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+                    self.add_rule(rule)
+
+        # lo_info = []
+        # for i in range(0, len(self.lo_reqd_att)):
+        #     self.number += 1
+        #     rule = \
+        #         self.write_lochild_attribute_rule(self.lo_reqd_att[i], lo_info)
+        #     self.add_rule(rule)
+        #     if rule and 'attributes' in lo_info[0]:
+        #         for i in range(0, len(lo_info[0]['attributes'])):
+        #             self.number += 1
+        #             rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+        #             self.add_rule(rule)
+        #
+        # lo_info = []
+        # for i in range(0, len(self.lo_opt_att)):
+        #     self.number += 1
+        #     rule = \
+        #         self.write_lochild_attribute_rule(self.lo_opt_att[i], lo_info)
+        #     self.add_rule(rule)
+        #     if rule and 'attributes' in lo_info[0]:
+        #         for i in range(0, len(lo_info[0]['attributes'])):
+        #             self.number += 1
+        #             rule = self.write_attribute_type_rule(self, lo_info[0]['attributes'][i], lo_info[0])
+        #             self.add_rule(rule)
+
     def add_rule(self, rule):
         if rule is not None:
             self.rules.append(rule)
@@ -143,10 +196,18 @@ class ValidationRulesForPlugin():
 
     # write rule about attribute type
     @staticmethod
-    def write_attribute_type_rule(self, attribute):
+    def write_attribute_type_rule(self, attribute, lo=None):
+        if lo:
+            formatted_name = lo['formatted_name']
+            refname = lo['name']
+            abbrev = strFunctions.abbrev_lo_name(refname)
+        else:
+            formatted_name = self.formatted_name
+            refname = self.name
+            abbrev = self.name
         att_type = attribute['type']
         att_name = strFunctions.upper_first(attribute['name'])
-        name = strFunctions.wrap_token(attribute['name'], self.package)
+        name = strFunctions.wrap_token(attribute['texname'], self.package)
         rule_type = 'String'
         if att_type == 'SId':
             return
@@ -156,9 +217,15 @@ class ValidationRulesForPlugin():
             # hack for render
             if ref_name == 'StartHead' or ref_name == 'EndHead':
                 ref_name = 'LineEnding'
-            text = 'The value of the attribute {0} of {1} {2} object must be ' \
-                   'the identifier of an existing \{3} object defined in the ' \
-                   'enclosing \Model object.'\
+            if ref_name == 'SBase':
+                text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                       'the identifier of an existing object derived from the \SBase class and defined in the ' \
+                       'enclosing \Model object.'\
+                    .format(name, self.indef, self.formatted_name, ref_name)
+            else:
+                text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                       'the identifier of an existing \{3} object defined in the ' \
+                       'enclosing \Model object.'\
                 .format(name, self.indef, self.formatted_name, ref_name)
             rule_type = ref_type
         elif att_type == 'string':
@@ -166,11 +233,17 @@ class ValidationRulesForPlugin():
                    'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('string'))
-        elif att_type == 'ID' or att_type == 'IDREF':
+        elif att_type == 'ID':
             text = 'The attribute {0} on {1} {2} must have a value of XML data ' \
                    'type {3}.'\
                 .format(name, self.indef, self.formatted_name,
                         strFunctions.wrap_token('ID'))
+        elif att_type == 'IDREF':
+            text = 'The value of the attribute {0} of {1} {2} object must be ' \
+                   'the \'metaid\' of an existing \SBase object defined in the ' \
+                   'enclosing \Model object.'\
+                .format(name, self.indef, formatted_name)
+            rule_type = 'SBase'
         elif att_type == 'int' or att_type == 'uint':
             text = 'The attribute {0} on {1} {2} must have a value of data ' \
                    'type {3}{4}'\
@@ -197,7 +270,7 @@ class ValidationRulesForPlugin():
                    'of the base units in SBML.'.format(name,
                                                        self.indef,
                                                        formatted_name)
-            rule_type = 'Unit'
+            rule_type = 'UnitSId'
         elif att_type == 'enum':
             enum_name = attribute['element']
             enums = attribute['parent']['root']['enums']
@@ -222,8 +295,11 @@ class ValidationRulesForPlugin():
                    'ValidationRulesForClass:write_attribute_type_rule'\
                 .format(att_type)
 
+        add_extended = True
+        if self.package == 'render':
+            add_extended = False
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = '{0} attribute must be {1}.'.format(att_name, rule_type)
@@ -242,7 +318,7 @@ class ValidationRulesForPlugin():
         if lo_child is None:
             text = '{0} {1} object may have the optional SBML Level~3 ' \
                    'Core attributes {2} and {3}. No other attributes from the ' \
-                   'SBML Level 3 Core namespaces are permitted on {4} {1}.'\
+                   'SBML Level~3 Core namespaces are permitted on {4} {1}.'\
                 .format(self.indef_u, self.formatted_name,
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'), self.indef)
@@ -255,12 +331,15 @@ class ValidationRulesForPlugin():
             lo_name = strFunctions.plural(lo_child['name'])
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
-                   'SBML Level 3 Core namespaces are permitted on a {0} object.'\
+                   'SBML Level~3 Core namespaces are permitted on a {0} object.'\
                 .format(strFunctions.get_element_name(lo_child),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
+            add_extended = True
+            if self.package == 'render':
+                add_extended = False
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
+                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.up_package,
                                                            self.name, lo_name)
@@ -280,7 +359,7 @@ class ValidationRulesForPlugin():
         if lo_child is None:
             text = '{0} {1} object may have the optional SBML Level~3 ' \
                    'Core subobjects for notes and annotations. No other ' \
-                   'elements from the SBML Level 3 Core namespaces are ' \
+                   'elements from the SBML Level~3 Core namespaces are ' \
                    'permitted on {2} {1}.'\
                 .format(self.indef_u, self.formatted_name, self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
@@ -301,8 +380,11 @@ class ValidationRulesForPlugin():
                    'permitted on all SBML objects, a \{0} container object ' \
                    'may only contain \{1} objects.'\
                 .format(loname, element)
+            add_extended = True
+            if self.package == 'render':
+                add_extended = False
             ref = '{0}, {1}.'\
-                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
+                .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
             sev = 'ERROR'
             tc = '{0}{1}LO{2}AllowedCoreElements'.format(self.up_package, self.name,
                                                      lo_name)
@@ -322,7 +404,7 @@ class ValidationRulesForPlugin():
             return
         reqd = self.parse_required(self, self.reqd_att)
         opt = self.parse_optional(self, self.opt_att)
-        no_other_statement = 'No other attributes from the SBML Level 3 {0} ' \
+        no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
                              'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
@@ -337,8 +419,11 @@ class ValidationRulesForPlugin():
             text = '{0} {1} object must have {2}, and may have {3}. {4}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
+        add_extended = True
+        if self.package == 'render':
+            add_extended = False
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Attributes allowed on <{0}>.'.format(self.lower_name)
@@ -356,7 +441,7 @@ class ValidationRulesForPlugin():
             return
         reqd = self.parse_required_elements(self.reqd_elem)
         opt = self.parse_optional_elements(self.opt_elem)
-        no_other_statement = 'No other elements from the SBML Level 3 {0} ' \
+        no_other_statement = 'No other elements from the SBML Level~3 {0} ' \
                              'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
@@ -371,8 +456,11 @@ class ValidationRulesForPlugin():
             text = '{0} {1} object must contain {2}, and may contain {3}. {4}'\
                 .format(self.indef_u, self.formatted_name,
                         reqd, opt, no_other_statement)
+        add_extended = True
+        if self.package == 'render':
+            add_extended = False
         ref = '{0}, {1}.'\
-            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, True))
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Elements allowed on <{0}>.'.format(self.lower_name)
@@ -385,6 +473,68 @@ class ValidationRulesForPlugin():
                      'reqd': self.reqd_elem, 'opt': self.opt_elem})
 
     # functions for listOf child elements
+    # might not be lo elements
+    def write_lochild_attribute_rule(self, child, lo_info):
+        child_class = query.get_class(child['name'], child['root'])
+        if not child_class or len(child_class['lo_attribs']) == 0:
+            return
+        # if these are all elements we dont need this
+        num = len(child_class['lo_attribs'])
+        count = 0
+        for attrib in child_class['lo_attribs']:
+            if self.is_element(attrib['type']):
+                count += 1
+        if count == num:
+            return
+        attributes = []
+        if len(child_class['lo_class_name']) == 0:
+            child_class['lo_class_name'] = strFunctions.list_of_name(child_class['name'])
+        formatted_name = '\\' + child_class['lo_class_name']
+        name = child_class['name']
+        child_reqd = []
+        child_opt = []
+        for attrib in child_class['lo_attribs']:
+            attributes.append(attrib)
+            if attrib['reqd']:
+                child_reqd.append(attrib)
+            else:
+                child_opt.append(attrib)
+        lo_info.append(dict({'formatted_name': formatted_name,
+                             'name': child_class['lo_class_name'],
+                             'attributes': attributes}))
+
+        reqd = self.parse_required(self, child_reqd)
+        opt = self.parse_optional(self, child_opt)
+        no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
+                             'namespaces are permitted on {1} {2} object. '\
+            .format(self.fullname, self.indef, formatted_name)
+        if len(opt) == 0 and len(reqd) > 0:
+            text = '{0} {1} object must have {2}. {3}'\
+                .format(self.indef_u, formatted_name,
+                        reqd, no_other_statement)
+        elif len(reqd) == 0 and len(opt) > 0:
+            text = '{0} {1} object may have {2}. {3}'\
+                .format(self.indef_u, formatted_name,
+                        opt, no_other_statement)
+        else:
+            text = '{0} {1} object must have {2}, and may have {3}. {4}'\
+                .format(self.indef_u, formatted_name,
+                        reqd, opt, no_other_statement)
+        ref = '{0}, {1}.'\
+            .format(self.pkg_ref,
+                    strFunctions.wrap_section(child_class['lo_class_name']))
+        sev = 'ERROR'
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+        short = 'Attributes allowed on <{0}>.'.format(strFunctions.lower_first(child_class['lo_class_name']))
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        tc = '{0}{1}LO{2}AllowedAttributes'.format(self.up_package, self.name,
+                                                   strFunctions.plural(name))
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
+                     'plugin': False, 'object': self.name, 'lo': True,
+                     'reqd': child_reqd, 'opt': child_opt,
+                     'lo_object': lo_info[0]['name']})
 
     def write_optional_lo_rule(self):
         number = len(self.opt_child_lo_elem)
@@ -429,8 +579,11 @@ class ValidationRulesForPlugin():
                 text += 'The {0} must contain at least {1} instances of the ' \
                         '\{2} object.'.format(name, num,
                                               self.opt_child_lo_elem[i]['name'])
-        ref = 'SBML Level~3 Specification for {0} Version~1, {1}.'\
-            .format(self.fullname, strFunctions.wrap_section(self.name, True, True))
+        add_extended = True
+        if self.package == 'render':
+            add_extended = False
+        ref = '{0}, {1}.'\
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name, True, add_extended))
         sev = 'ERROR'
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
@@ -447,6 +600,65 @@ class ValidationRulesForPlugin():
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref,
                      'plugin': True, 'object': self.name,
                      'lo_object': self.opt_child_lo_elem})
+
+    def write_reqd_lo_rule(self):
+        number = len(self.reqd_child_lo_elem)
+        unusual_min = False
+        no_min = 0
+        # check whether have unusual minimums
+        for i in range(0, number):
+            if 'min_lo_children' in self.reqd_child_lo_elem[i]:
+                min_no = self.reqd_child_lo_elem[i]['min_lo_children']
+                if min_no == 0:
+                    unusual_min = True
+                    no_min += 1
+                elif min_no > 1:
+                    unusual_min = True
+        if no_min == number:
+            return None
+        if number > 1:
+            obj = 'objects'
+            i = 0
+            elements = '{0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[i]))
+            for i in range(1, number-1):
+                elements += ', {0}'.format(strFunctions.get_element_name(
+                    self.reqd_child_lo_elem[i]))
+            elements += ' and {0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[i+1]))
+        else:
+            obj = 'object'
+            elements = '{0}'.format(strFunctions.get_element_name(
+                self.reqd_child_lo_elem[0]))
+
+        text = 'The {0} sub{1} on {2} {3} object must not be empty.'\
+            .format(elements, obj, self.indef, self.formatted_name)
+        if unusual_min:
+            for i in range(0, number):
+                num = strFunctions.replace_digits(str(
+                    self.reqd_child_lo_elem[i]['min_lo_children'])).lower()
+                name = strFunctions.get_element_name(self.reqd_child_lo_elem[i])
+                text += 'The {0} must contain at least {1} instances of the ' \
+                        '\{2} object.' \
+                        ''.format(name, num,
+                                  self.reqd_child_lo_elem[i]['name'])
+        ref = '{0}, {1}.'\
+            .format(self.pkg_ref, strFunctions.wrap_section(self.name))
+        sev = 'ERROR'
+        lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
+        lib_ref = 'L3V1 {0} V1 Section'.format(self.up_package)
+        if unusual_min:
+            short = 'No children in ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
+            tc = '{0}{1}LOReqdElementChildren'.format(self.up_package,
+                                                      self.name)
+        else:
+            short = 'No Empty ListOf elements allowed on <{0}>.' \
+                    ''.format(self.lower_name)
+            tc = '{0}{1}EmptyReqdLOElements'.format(self.up_package, self.name)
+        return dict({'number': self.number, 'text': text,
+                     'reference': ref, 'severity': sev, 'typecode': tc,
+                     'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})
 
     #########################################################################
 
@@ -611,3 +823,14 @@ class ValidationRulesForPlugin():
             values += ' or \"{0}\"'.format(this_enum['values'][i+1]['value'])
             return values
 
+    #########################################################################
+    @staticmethod
+    def is_element(att_type):
+        element = False
+        if att_type == 'element':
+            element = True
+        elif att_type == 'lo_element':
+            element = True
+        elif att_type == 'inline_lo_element':
+            element = True
+        return element

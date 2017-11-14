@@ -67,15 +67,14 @@ in the estAttributesPackage namespace.
 specification for SBML Level~3 Version~1, an SBML document must declare
 \uri{http://www.sbml.org/sbml/level3/version1/test/version1} as the
 XMLNamespace to use for elements of this package. (Reference: SBML
-Level~3 Package specification for testAttributes, Version~1
+Level~3 Specification for testAttributes, Version~1
 \sec{xml-namespace}.)}
 
 \validRule{test-10102}{Wherever they appear in an SBML document,
 elements and attributes from the \testAttributesPackage must use the
 \uri{http://www.sbml.org/sbml/level3/version1/test/version1} namespace,
 declaring so either explicitly or implicitly. (Reference: SBML Level~3
-Package specification for testAttributes, Version~1
-\sec{xml-namespace}.)}
+Specification for testAttributes, Version~1 \sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
@@ -102,29 +101,29 @@ the \class{SBML} object must be of data type \primtype{boolean}.
 
 \validRule{test-20103}{The value of attribute \token{test:\-required} on
 the \class{SBML} object must be set to \val{false}. (Reference: SBML
-Level~3 Package specification for testAttributes, Version~1
+Level~3 Specification for testAttributes, Version~1
 \sec{xml-namespace}.)}
 
 \subsubsection*{Rules for \class{UnknownType} object}
 
 \validRule{test-20201}{An \UnknownType object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
-attributes from the SBML Level 3 Core namespaces are permitted on an
+attributes from the SBML Level~3 Core namespaces are permitted on an
 \UnknownType. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{test-20202}{An \UnknownType object may have the optional SBML
 Level~3 Core subobjects for notes and annotations. No other elements
-from the SBML Level 3 Core namespaces are permitted on an \UnknownType.
+from the SBML Level~3 Core namespaces are permitted on an \UnknownType.
 (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{test-20203}{An \UnknownType object may have the optional
 attribute \token{test:\-attribue}. No other attributes from the SBML
-Level 3 testAttributes namespaces are permitted on an \UnknownType
-object. (Reference: SBML Level~3 Package specification for
-testAttributes, Version~1, \sec{unknowntype-class}.)}
+Level~3 testAttributes namespaces are permitted on an \UnknownType
+object. (Reference: SBML Level~3 Specification for testAttributes,
+Version~1, \sec{unknowntype-class}.)}
 
 \validRule{test-20204}{FIXME: Encountered an unknown attribute type fred
-in ValidationRulesForClass (Reference: SBML Level~3 Package
-specification for testAttributes, Version~1, \sec{unknowntype-class}.)}
+in ValidationRulesForClass (Reference: SBML Level~3 Specification for
+testAttributes, Version~1, \sec{unknowntype-class}.)}
 
 

@@ -62,7 +62,7 @@ class TexValidationRulesFile(BaseTexFile.BaseTexFile):
         self.full_pkg_command = '\\{0}Package'.format(self.fulltexname)
         self.brief_pkg_command = '\\{0}'.format(self.upper_package)
 
-        self.pkg_ref = 'SBML Level~{0} Package specification for {1}, ' \
+        self.pkg_ref = 'SBML Level~{0} Specification for {1}, ' \
                        'Version~{2}'.format(self.level,
                                             self.fullname, self.pkg_version)
         self.reqd_status = object_desc['required']

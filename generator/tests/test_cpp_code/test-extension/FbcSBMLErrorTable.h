@@ -258,6 +258,31 @@ static const packageErrorTableEntry fbcErrorTable[] =
     }
   },
 
+  // 2020211
+  { FbcModelLOObjectivesAllowedAttributes,
+    "Attributes allowed on <listOfObjectives>.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "A <listOfObjectives> object may have the optional attributes "
+    "'fbc:activeObjective' and 'fbc:activeObjective'. No other attributes from "
+    "the SBML Level 3 Flux Balance Constraints namespaces are permitted on a "
+    "<listOfObjectives> object. ",
+    { "L3V1 Fbc V1 Section"
+    }
+  },
+
+  // 2020212
+  { FbcModelActiveObjectiveMustBeObjective,
+    "ActiveObjective attribute must be Objective.",
+    LIBSBML_CAT_GENERAL_CONSISTENCY,
+    LIBSBML_SEV_ERROR,
+    "The value of the attribute 'fbc:activeObjective' of a <model> object must "
+    "be the identifier of an existing <objective> object defined in the "
+    "enclosing <model> object.",
+    { "L3V1 Fbc V1 Section"
+    }
+  },
+
   // 2020301
   { FbcSpeciesAllowedAttributes,
     "Attributes allowed on <species>.",
@@ -396,8 +421,8 @@ static const packageErrorTableEntry fbcErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:operation' of a <fluxBound> object must "
-    "conform to the syntax of SBML data type 'fbcOperation' and may only take "
-    "on the allowed values of 'fbcOperation' defined in SBML; that is, the "
+    "conform to the syntax of SBML data type 'FbcOperation' and may only take "
+    "on the allowed values of 'FbcOperation' defined in SBML; that is, the "
     "value must be one of the following: 'lessEqual', 'greaterEqual', 'less', "
     "'greater' or 'equal'.",
     { "L3V1 Fbc V1 Section"
@@ -482,8 +507,8 @@ static const packageErrorTableEntry fbcErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'fbc:type' of an <objective> object must "
-    "conform to the syntax of SBML data type 'fbcType' and may only take on the "
-    "allowed values of 'fbcType' defined in SBML; that is, the value must be "
+    "conform to the syntax of SBML data type 'FbcType' and may only take on the "
+    "allowed values of 'FbcType' defined in SBML; that is, the value must be "
     "one of the following: 'maximize' or 'minimize'.",
     { "L3V1 Fbc V1 Section"
     }
@@ -800,41 +825,6 @@ static const packageErrorTableEntry fbcErrorTable[] =
     }
   },
 
-  // 2021004
-  { FbcFbcAndEmptyLOElements,
-    "No Empty ListOf elements allowed on <and>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "The <listOfAssociations> subobject on an <and> object is optional, but if "
-    "present, this container object must not be empty.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021005
-  { FbcFbcAndLOAssociationsAllowedCoreElements,
-    "Core elements allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfAssociations> container object may only contain "
-    "<association> objects.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021006
-  { FbcFbcAndLOAssociationsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "A <listOfAssociations> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfAssociations> object.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
   // 2021101
   { FbcFbcOrAllowedCoreAttributes,
     "Core attributes allowed on <or>.",
@@ -867,41 +857,6 @@ static const packageErrorTableEntry fbcErrorTable[] =
     "An <or> object may contain one and only one instance of the "
     "<listOfAssociations> element. No other elements from the SBML Level 3 Flux "
     "Balance Constraints namespaces are permitted on an <or> object. ",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021104
-  { FbcFbcOrEmptyLOElements,
-    "No Empty ListOf elements allowed on <or>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "The <listOfAssociations> subobject on an <or> object is optional, but if "
-    "present, this container object must not be empty.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021105
-  { FbcFbcOrLOAssociationsAllowedCoreElements,
-    "Core elements allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfAssociations> container object may only contain "
-    "<association> objects.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021106
-  { FbcFbcOrLOAssociationsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "A <listOfAssociations> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfAssociations> object.",
     { "L3V1 Fbc V1 Section"
     }
   },
@@ -987,41 +942,6 @@ static const packageErrorTableEntry fbcErrorTable[] =
     LIBSBML_SEV_ERROR,
     "The attribute 'fbc:name' on a <geneProductAssociation> must have a value "
     "of data type 'string'.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021306
-  { FbcGeneProductAssociationEmptyLOElements,
-    "No Empty ListOf elements allowed on <geneProductAssociation>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "The <listOfAssociations> subobject on a <geneProductAssociation> object is "
-    "optional, but if present, this container object must not be empty.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021307
-  { FbcGeneProductAssociationLOAssociationsAllowedCoreElements,
-    "Core elements allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfAssociations> container object may only contain "
-    "<association> objects.",
-    { "L3V1 Fbc V1 Section"
-    }
-  },
-
-  // 2021308
-  { FbcGeneProductAssociationLOAssociationsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfAssociations>.",
-    LIBSBML_CAT_GENERAL_CONSISTENCY,
-    LIBSBML_SEV_ERROR,
-    "A <listOfAssociations> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfAssociations> object.",
     { "L3V1 Fbc V1 Section"
     }
   },

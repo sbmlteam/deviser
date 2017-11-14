@@ -529,8 +529,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:sign' of an <input> object must conform "
-    "to the syntax of SBML data type 'sign' and may only take on the allowed "
-    "values of 'sign' defined in SBML; that is, the value must be one of the "
+    "to the syntax of SBML data type 'Sign' and may only take on the allowed "
+    "values of 'Sign' defined in SBML; that is, the value must be one of the "
     "following: 'positive', 'negative', 'dual' or 'unknown'.",
     { "L3V1 Qual V1 Section"
     }
@@ -542,8 +542,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:transitionEffect' of an <input> object "
-    "must conform to the syntax of SBML data type 'transitionInputEffect' and "
-    "may only take on the allowed values of 'transitionInputEffect' defined in "
+    "must conform to the syntax of SBML data type 'TransitionInputEffect' and "
+    "may only take on the allowed values of 'TransitionInputEffect' defined in "
     "SBML; that is, the value must be one of the following: 'none' or "
     "'consumption'.",
     { "L3V1 Qual V1 Section"
@@ -618,8 +618,8 @@ static const packageErrorTableEntry qualErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "The value of the attribute 'qual:transitionEffect' of an <output> object "
-    "must conform to the syntax of SBML data type 'transitionOutputEffect' and "
-    "may only take on the allowed values of 'transitionOutputEffect' defined in "
+    "must conform to the syntax of SBML data type 'TransitionOutputEffect' and "
+    "may only take on the allowed values of 'TransitionOutputEffect' defined in "
     "SBML; that is, the value must be one of the following: 'production' or "
     "'assignmentLevel'.",
     { "L3V1 Qual V1 Section"

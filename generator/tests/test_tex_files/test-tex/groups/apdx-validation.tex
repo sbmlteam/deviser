@@ -65,15 +65,13 @@ in the \GroupsPackage namespace.
 for SBML Level~3 Version~1, an SBML document must declare
 \uri{http://www.sbml.org/sbml/level3/version1/groups/version1} as the
 XMLNamespace to use for elements of this package. (Reference: SBML
-Level~3 Package specification for Groups, Version~1
-\sec{xml-namespace}.)}
+Level~3 Specification for Groups, Version~1 \sec{xml-namespace}.)}
 
 \validRule{groups-10102}{Wherever they appear in an SBML document,
 elements and attributes from the \GroupsPackage must use the
 \uri{http://www.sbml.org/sbml/level3/version1/groups/version1}
 namespace, declaring so either explicitly or implicitly. (Reference:
-SBML Level~3 Package specification for Groups, Version~1
-\sec{xml-namespace}.)}
+SBML Level~3 Specification for Groups, Version~1 \sec{xml-namespace}.)}
 
 \subsubsection*{General rules about identifiers}
 
@@ -100,97 +98,95 @@ Section~4.1.2.)}
 
 \validRule{groups-20103}{The value of attribute
 \token{groups:\-required} on the \class{SBML} object must be set to
-\val{false}. (Reference: SBML Level~3 Package specification for Groups,
+\val{false}. (Reference: SBML Level~3 Specification for Groups,
 Version~1 \sec{xml-namespace}.)}
 
 \subsubsection*{Rules for extended \class{Model} object}
 
 \validRule{groups-20201}{A \Model object may contain one and only one
 instance of the \ListOfGroups element. No other elements from the SBML
-Level 3 Groups namespaces are permitted on a \Model object. (Reference:
-SBML Level~3 Package specification for Groups, Version~1,
+Level~3 Groups namespaces are permitted on a \Model object. (Reference:
+SBML Level~3 Specification for Groups, Version~1,
 \sec{extended-model-class}.)}
 
 \validRule{groups-20202}{The \ListOfGroups subobject on a \Model object
 is optional, but if present, this container object must not be empty.
-(Reference: SBML Level~3 Specification for Groups Version~1,
+(Reference: SBML Level~3 Specification for Groups, Version~1,
 \sec{extended-model-class}.)}
 
 \validRule{groups-20203}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfGroups container
-object may only contain \Group objects. (Reference: SBML Level~3 Package
-specification for Groups, Version~1, \sec{extended-model-class}.)}
+object may only contain \Group objects. (Reference: SBML Level~3
+Specification for Groups, Version~1, \sec{extended-model-class}.)}
 
 \validRule{groups-20204}{A \ListOfGroups object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
-other attributes from the SBML Level 3 Core namespaces are permitted on
-a \ListOfGroups object. (Reference: SBML Level~3 Package specification
-for Groups, Version~1, \sec{extended-model-class}.)}
+other attributes from the SBML Level~3 Core namespaces are permitted on
+a \ListOfGroups object. (Reference: SBML Level~3 Specification for
+Groups, Version~1, \sec{extended-model-class}.)}
 
 
 \subsubsection*{Rules for \class{Group} object}
 
 \validRule{groups-20301}{A \Group object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
-attributes from the SBML Level 3 Core namespaces are permitted on a
+attributes from the SBML Level~3 Core namespaces are permitted on a
 \Group. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{groups-20302}{A \Group object may have the optional SBML
 Level~3 Core subobjects for notes and annotations. No other elements
-from the SBML Level 3 Core namespaces are permitted on a \Group.
+from the SBML Level~3 Core namespaces are permitted on a \Group.
 (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{groups-20303}{A \Group object must have the required
 attribute \token{groups:\-kind}, and may have the optional attributes
 \token{groups:\-id} and \token{groups:\-name}. No other attributes from
-the SBML Level 3 Groups namespaces are permitted on a \Group object.
-(Reference: SBML Level~3 Package specification for Groups, Version~1,
+the SBML Level~3 Groups namespaces are permitted on a \Group object.
+(Reference: SBML Level~3 Specification for Groups, Version~1,
 \sec{group-class}.)}
 
 \validRule{groups-20304}{A \Group object may contain one and only one
 instance of the \ListOfMembers element. No other elements from the SBML
-Level 3 Groups namespaces are permitted on a \Group object. (Reference:
-SBML Level~3 Package specification for Groups, Version~1,
-\sec{group-class}.)}
+Level~3 Groups namespaces are permitted on a \Group object. (Reference:
+SBML Level~3 Specification for Groups, Version~1, \sec{group-class}.)}
 
 \validRule{groups-20305}{The value of the attribute
 \token{groups:\-kind} of a \Group object must conform to the syntax of
-SBML data type \primtype{groupKind} and may only take on the allowed
-values of \primtype{groupKind} defined in SBML; that is, the value must
-be one of the following: 'classification', 'partonomy' or 'collection'.
-(Reference: SBML Level~3 Package specification for Groups, Version~1,
-\sec{group-class}.)}
+SBML data type \primtype{GroupKind} and may only take on the allowed
+values of \primtype{GroupKind} defined in SBML; that is, the value must
+be one of the following: \val{classification}, \val{partonomy} or
+\val{collection}. (Reference: SBML Level~3 Specification for Groups,
+Version~1, \sec{group-class}.)}
 
 \validRule{groups-20306}{The attribute \token{groups:\-name} on a \Group
 must have a value of data type \token{string}. (Reference: SBML Level~3
-Package specification for Groups, Version~1, \sec{group-class}.)}
+Specification for Groups, Version~1, \sec{group-class}.)}
 
 \validRule{groups-20307}{The \ListOfMembers subobject on a \Group object
 is optional, but if present, this container object must not be empty.
-(Reference: SBML Level~3 Package specification for Groups, Version~1,
+(Reference: SBML Level~3 Specification for Groups, Version~1,
 \sec{group-class}.)}
 
 \validRule{groups-20308}{Apart from the general notes and annotations
 subobjects permitted on all SBML objects, a \ListOfMembers container
 object may only contain \Member objects. (Reference: SBML Level~3
-Package specification for Groups, Version~1,
-\sec{listofmembers-class}.)}
+Specification for Groups, Version~1, \sec{listofmembers-class}.)}
 
 \validRule{groups-20309}{A \ListOfMembers object may have the optional
 SBML Level~3 Core attributes \token{metaid} and \token{sboTerm}. No
-other attributes from the SBML Level 3 Core namespaces are permitted on
-a \ListOfMembers object. (Reference: SBML Level~3 Package specification
-for Groups, Version~1, \sec{listofmembers-class}.)}
+other attributes from the SBML Level~3 Core namespaces are permitted on
+a \ListOfMembers object. (Reference: SBML Level~3 Specification for
+Groups, Version~1, \sec{listofmembers-class}.)}
 
 \validRule{groups-20310}{A \ListOfMembers object may have the optional
 attributes \token{groups:\-id} and \token{groups:\-name}. No other
-attributes from the SBML Level 3 Groups namespaces are permitted on a
-\ListOfMembers object. (Reference: SBML Level~3 Package specification
-for Groups, Version~1, \sec{listofmembers-class}.)}
+attributes from the SBML Level~3 Groups namespaces are permitted on a
+\ListOfMembers object. (Reference: SBML Level~3 Specification for
+Groups, Version~1, \sec{listofmembers-class}.)}
 
 \validRule{groups-20311}{The attribute \token{groups:\-name} on a
 \ListOfMembers must have a value of data type \token{string}.
-(Reference: SBML Level~3 Package specification for Groups, Version~1,
+(Reference: SBML Level~3 Specification for Groups, Version~1,
 \sec{listofmembers-class}.)}
 
 
@@ -198,36 +194,35 @@ for Groups, Version~1, \sec{listofmembers-class}.)}
 
 \validRule{groups-20401}{A \Member object may have the optional SBML
 Level~3 Core attributes \token{metaid} and \token{sboTerm}. No other
-attributes from the SBML Level 3 Core namespaces are permitted on a
+attributes from the SBML Level~3 Core namespaces are permitted on a
 \Member. (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{groups-20402}{A \Member object may have the optional SBML
 Level~3 Core subobjects for notes and annotations. No other elements
-from the SBML Level 3 Core namespaces are permitted on a \Member.
+from the SBML Level~3 Core namespaces are permitted on a \Member.
 (Reference: SBML Level~3 Version~1 Core, Section~3.2.)}
 
 \validRule{groups-20403}{A \Member object may have the optional
 attributes \token{groups:\-id}, \token{groups:\-name},
 \token{groups:\-idRef} and \token{groups:\-metaIdRef}. No other
-attributes from the SBML Level 3 Groups namespaces are permitted on a
-\Member object. (Reference: SBML Level~3 Package specification for
-Groups, Version~1, \sec{member-class}.)}
+attributes from the SBML Level~3 Groups namespaces are permitted on a
+\Member object. (Reference: SBML Level~3 Specification for Groups,
+Version~1, \sec{member-class}.)}
 
 \validRule{groups-20404}{The attribute \token{groups:\-name} on a
 \Member must have a value of data type \token{string}. (Reference: SBML
-Level~3 Package specification for Groups, Version~1,
-\sec{member-class}.)}
+Level~3 Specification for Groups, Version~1, \sec{member-class}.)}
 
 \validRule{groups-20405}{The value of the attribute
 \token{groups:\-idRef} of a \Member object must be the identifier of an
 existing object derived from the \SBase class and defined in the
-enclosing \Model object. (Reference: SBML Level~3 Package specification
-for Groups, Version~1, \sec{member-class}.)}
+enclosing \Model object. (Reference: SBML Level~3 Specification for
+Groups, Version~1, \sec{member-class}.)}
 
 \validRule{groups-20406}{The value of the attribute
 \token{groups:\-metaIdRef} of a \Member object must be the 'metaid' of
 an existing \SBase object defined in the enclosing \Model object.
-(Reference: SBML Level~3 Package specification for Groups, Version~1,
+(Reference: SBML Level~3 Specification for Groups, Version~1,
 \sec{member-class}.)}
 
 

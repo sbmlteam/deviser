@@ -75,6 +75,8 @@ typedef enum
 , FbcModelLOObjectivesAllowedCoreAttributes                   = 2020208
 , FbcModelLOFluxBoundsAllowedCoreAttributes                   = 2020209
 , FbcModelLOGeneProductsAllowedCoreAttributes                 = 2020210
+, FbcModelLOObjectivesAllowedAttributes                       = 2020211
+, FbcModelActiveObjectiveMustBeObjective                      = 2020212
 , FbcSpeciesAllowedAttributes                                 = 2020301
 , FbcSpeciesChargeMustBeInteger                               = 2020302
 , FbcSpeciesChemicalFormulaMustBeString                       = 2020303
@@ -120,15 +122,9 @@ typedef enum
 , FbcFbcAndAllowedCoreAttributes                              = 2021001
 , FbcFbcAndAllowedCoreElements                                = 2021002
 , FbcFbcAndAllowedElements                                    = 2021003
-, FbcFbcAndEmptyLOElements                                    = 2021004
-, FbcFbcAndLOAssociationsAllowedCoreElements                  = 2021005
-, FbcFbcAndLOAssociationsAllowedCoreAttributes                = 2021006
 , FbcFbcOrAllowedCoreAttributes                               = 2021101
 , FbcFbcOrAllowedCoreElements                                 = 2021102
 , FbcFbcOrAllowedElements                                     = 2021103
-, FbcFbcOrEmptyLOElements                                     = 2021104
-, FbcFbcOrLOAssociationsAllowedCoreElements                   = 2021105
-, FbcFbcOrLOAssociationsAllowedCoreAttributes                 = 2021106
 , FbcAssociationAllowedCoreAttributes                         = 2021201
 , FbcAssociationAllowedCoreElements                           = 2021202
 , FbcGeneProductAssociationAllowedCoreAttributes              = 2021301
@@ -136,9 +132,6 @@ typedef enum
 , FbcGeneProductAssociationAllowedAttributes                  = 2021303
 , FbcGeneProductAssociationAllowedElements                    = 2021304
 , FbcGeneProductAssociationNameMustBeString                   = 2021305
-, FbcGeneProductAssociationEmptyLOElements                    = 2021306
-, FbcGeneProductAssociationLOAssociationsAllowedCoreElements  = 2021307
-, FbcGeneProductAssociationLOAssociationsAllowedCoreAttributes= 2021308
 } FbcSBMLErrorCode_t;
 
 

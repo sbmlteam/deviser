@@ -306,8 +306,8 @@ class ValidationRulesForClass():
                         strFunctions.wrap_token(array_type))
         elif att_type == 'element' and attribute['element'] == 'RelAbsVector':
             text = 'The value of the attribute {0} of {1} {2} object must ' \
-                   'conform to the syntax of SBML data type \\RelAbsVector ' \
-                   'i.e. a string encoding optionally an absolute number ' \
+                   'conform to the syntax of SBML data type \\RelAbsVector, ' \
+                   'i.e., a string encoding optionally an absolute number ' \
                    'followed by an optional relative number followed ' \
                    'by a \\% sign. Adding spaces between the ' \
                    'coordinates is encouraged, but not required.'\
@@ -343,7 +343,7 @@ class ValidationRulesForClass():
         if lo_child is None:
             text = '{0} {1} object may have the optional SBML Level~3 ' \
                    'Core attributes {2} and {3}. No other attributes from the ' \
-                   'SBML Level 3 Core namespaces are permitted on {4} {1}.'\
+                   'SBML Level~3 Core namespaces are permitted on {4} {1}.'\
                 .format(self.indef_u, self.formatted_name,
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'), self.indef)
@@ -359,7 +359,7 @@ class ValidationRulesForClass():
             lo_name = strFunctions.plural(temp)
             text = 'A {0} object may have the optional SBML Level~3 ' \
                    'Core attributes {1} and {2}. No other attributes from the ' \
-                   'SBML Level 3 Core namespaces are permitted on a {0} object.'\
+                   'SBML Level~3 Core namespaces are permitted on a {0} object.'\
                 .format(strFunctions.get_element_name(lo_child, False),
                         strFunctions.wrap_token('metaid'),
                         strFunctions.wrap_token('sboTerm'))
@@ -385,7 +385,7 @@ class ValidationRulesForClass():
         if lo_child is None:
             text = '{0} {1} object may have the optional SBML Level~3 ' \
                    'Core subobjects for notes and annotations. No other ' \
-                   'elements from the SBML Level 3 Core namespaces are ' \
+                   'elements from the SBML Level~3 Core namespaces are ' \
                    'permitted on {2} {1}.'\
                 .format(self.indef_u, self.formatted_name, self.indef)
             ref = 'SBML Level~3 Version~1 Core, Section~3.2.'
@@ -424,7 +424,7 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required(self, self.reqd_att)
         opt = self.parse_optional(self, self.opt_att)
-        no_other_statement = 'No other attributes from the SBML Level 3 {0} ' \
+        no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
                              'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
@@ -458,7 +458,7 @@ class ValidationRulesForClass():
             return
         reqd = self.parse_required_elements(self.reqd_elem)
         opt = self.parse_optional_elements(self.opt_elem)
-        no_other_statement = 'No other elements from the SBML Level 3 {0} ' \
+        no_other_statement = 'No other elements from the SBML Level~3 {0} ' \
                              'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, self.formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
@@ -519,7 +519,7 @@ class ValidationRulesForClass():
 
         reqd = self.parse_required(self, child_reqd)
         opt = self.parse_optional(self, child_opt)
-        no_other_statement = 'No other attributes from the SBML Level 3 {0} ' \
+        no_other_statement = 'No other attributes from the SBML Level~3 {0} ' \
                              'namespaces are permitted on {1} {2} object. '\
             .format(self.fullname, self.indef, formatted_name)
         if len(opt) == 0 and len(reqd) > 0:
@@ -680,7 +680,7 @@ class ValidationRulesForClass():
     @staticmethod
     def parse_required(self, attributes):
         for attrib in attributes:
-            if 'texname' not in attrib:
+            if 'texname' not in attrib or attrib['texname'] == 'RelAbsVector':
                 attrib['texname'] = attrib['name']
         num = len(attributes)
         if num == 0:
@@ -708,7 +708,7 @@ class ValidationRulesForClass():
     @staticmethod
     def parse_optional(self, attributes):
         for attrib in attributes:
-            if 'texname' not in attrib:
+            if 'texname' not in attrib or attrib['texname'] == 'RelAbsVector':
                 attrib['texname'] = attrib['name']
         num = len(attributes)
         if num == 0:
@@ -826,14 +826,14 @@ class ValidationRulesForClass():
                         self.reqd_elem.append(attributes[i])
                     else:
                         self.opt_elem.append(attributes[i])
-                        if attributes[i]['type'] != 'element':
+                        if attributes[i]['type'] != 'element' and attributes[i]['type'] != 'inline_lo_element':
                             self.opt_child_lo_elem.append(attributes[i])
 
     ########################################################################
 
     # deal with enumerations
-    @staticmethod
-    def parse_enum_values(enum, enums):
+
+    def parse_enum_values(self, enum, enums):
         this_enum = None
         for i in range(0, len(enums)):
             if enum == enums[i]['name']:
@@ -845,12 +845,11 @@ class ValidationRulesForClass():
         else:
             i = 0
             num_values = len(this_enum['values'])
-            values = '\'{0}\''.format(this_enum['values'][i]['value'])
+            values = '\\val{0}{1}{2}'.format(self.start_b, this_enum['values'][i]['value'], self.end_b)
             for i in range(1, num_values-1):
-                values += ', \'{0}\''.format(this_enum['values'][i]['value'])
+                values += ', \\val{0}{1}{2}'.format(self.start_b, this_enum['values'][i]['value'], self.end_b)
             if num_values > 1:
-                values += ' or \'{0}\'' \
-                          ''.format(this_enum['values'][i+1]['value'])
+                values += ' or \\val{0}{1}{2}'.format(self.start_b, this_enum['values'][i+1]['value'], self.end_b)
             return values
 
     #########################################################################

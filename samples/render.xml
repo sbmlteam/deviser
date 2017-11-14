@@ -43,7 +43,7 @@
             <concrete name="radialGradient" element="RadialGradient" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="stop">
+        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="stop">
           <attributes>
             <attribute name="offset" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stop-color" required="true" type="string" abstract="false"/>
@@ -182,9 +182,6 @@
           </attributes>
         </element>
         <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
-          <attributes>
-            <attribute name="transform" required="false" type="array" element="double" abstract="false"/>
-          </attributes>
           <concretes>
             <concrete name="image" element="Image" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
@@ -241,7 +238,7 @@
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="programName" required="false" type="string" abstract="false"/>
             <attribute name="programVersion" required="false" type="string" abstract="false"/>
-            <attribute name="refenceRenderInformation" required="false" type="SIdRef" element="RenderInformationBase" abstract="false"/>
+            <attribute name="referenceRenderInformation" required="false" type="SIdRef" element="RenderInformationBase" abstract="false"/>
             <attribute name="backgroundColor" required="false" type="string" abstract="false"/>
             <attribute name="colorDefinition" required="false" type="lo_element" element="ColorDefinition" abstract="false"/>
             <attribute name="gradientDefinition" required="false" type="lo_element" element="GradientBase" abstract="false"/>

@@ -242,7 +242,8 @@ def make_class(name, add_extended=False):
 
 
 def wrap_enum(name):
-    return '\\primtype{' + lower_first(name) + '}'
+#    return '\\primtype{' + lower_first(name) + '}'
+    return '\\primtype{' + name + '}'
 
 
 def get_sid_refs(refs):
