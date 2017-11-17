@@ -45,8 +45,8 @@ from util import strFunctions
 class BaseMatlabFile(BaseFile.BaseFile):
     """Common base class for all LaTeX files"""
 
-    def __init__(self, name, object_desc):
-        BaseFile.BaseFile.__init__(self, name, '.m')
+    def __init__(self, name, object_desc, filetype):
+        BaseFile.BaseFile.__init__(self, name+filetype, 'm')
 
         # change the comment delimiter and line length
         self.comment = '%'
@@ -72,15 +72,54 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.start_b = '{'
         self.end_b = '}'
 
+        self.filetype = filetype
+
     ########################################################################
 
     def write_file(self):
-        self.write_get_field()
+        self.write_line('%%%%% REMOVE END')
+        self.write_line('%%%%% ADD ADDITIONAL')
+        if self.filetype == 'sf':
+            self.write_get_field('Fieldname')
+        elif self.filetype == 'dv':
+            self.write_get_field('DefaultValue')
+        elif self.filetype == 'vt':
+            self.write_get_field('ValueType')
+        self.write_line('%%%%% REMOVE END')
+        self.write_line('%%%%% ADD ADDITIONAL')
         self.skip_line(2)
-        self.write_is_extension()
+        self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+        self.write_line('%%%% ADD isExtension')
+        self.write_line('%%%% ADD isExtension')
+        if self.filetype == 'sf':
+            self.write_is_extension('Fieldname')
+        elif self.filetype == 'dv':
+            self.write_is_extension('DefaultValue')
+        elif self.filetype == 'vt':
+            self.write_is_extension('ValueType')
+        self.write_line('%%%% END isExtension')
         self.skip_line(2)
-        self.write_get_fieldname_function()
+        self.write_line('%%%% ADD getFieldname')
+        self.write_line('%%%% ADD getFieldname')
+        if self.filetype == 'sf':
+            self.write_get_fieldname_function('Fieldnames')
+        elif self.filetype == 'dv':
+            self.write_get_fieldname_function('DefaultValues')
+        elif self.filetype == 'vt':
+            self.write_get_fieldname_function('ValueType')
+        self.write_line('%%%% END getFieldname')
         self.skip_line(2)
+        self.write_line('%%%% ADD functions')
+        self.write_line('%%%% ADD functions')
+        if self.filetype == 'sf':
+            self.write_fieldnames()
+        elif self.filetype == 'dv':
+            self.write_default_values()
+        elif self.filetype == 'vt':
+            self.write_value_types()
+        self.write_line('%%%% END functions')
+
+    def write_fieldnames(self):
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
         self.write_line('% Fieldnames')
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -91,6 +130,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         for sbmlclass in self.sbml_classes:
             self.write_get_class_fieldname(sbmlclass)
             self.skip_line(2)
+
+    def write_default_values(self):
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
         self.write_line('% DefaultValues')
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -101,6 +142,8 @@ class BaseMatlabFile(BaseFile.BaseFile):
         for sbmlclass in self.sbml_classes:
             self.write_get_class_default_values(sbmlclass)
             self.skip_line(2)
+
+    def write_value_types(self):
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
         self.write_line('% ValueTypes')
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -115,7 +158,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_plugin_values_types(self, plugin):
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}{1}DefaultValues(level, ...'.format(self.up_pack, plugin['sbase']))
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}{1}ValueType(level, ...'.format(self.up_pack, plugin['sbase']))
         self.write_line('                                                                      version, pkgVersion)')
         self.up_indent()
 
@@ -138,7 +181,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
         num_fields = 1
         self.write_line('SBMLfieldnames = {')
-        self.write_line('int32(pkgVersion), ...')
+        self.write_line('\'uint\', ...')
         for extension in plugin['extension']:
             self.write_line('\'structure\', ...'.format())
             num_fields += 1
@@ -162,7 +205,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
 
     def write_get_class_values_types(self, sbmlclass):
         self.write_line('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}DefaultValues(level, ...'.format(sbmlclass['name']))
+        self.write_line_verbatim('function [SBMLfieldnames, nNumberFields] = get{0}ValueType(level, ...'.format(sbmlclass['name']))
         self.write_line('                                                                      version, pkgVersion)')
         self.up_indent()
 
@@ -213,13 +256,15 @@ class BaseMatlabFile(BaseFile.BaseFile):
         att_name = attrib['name']
         if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'string' or att_type == 'enum':
             return '\'char\''
-        elif att_type == 'bool' or att_type == 'uint':
+        elif att_type == 'bool':
+            return '\'bool\''
+        elif att_type == 'uint' or att_type == 'int':
             return '\'uint\''
         elif att_type == 'lo_element':
             return '\'structure\''
         elif att_type == 'element':
             if att_name == 'math':
-                return '\'\''
+                return '\'char\''
             else:
                 return '\'structure\''
         elif att_type == 'double':
@@ -328,7 +373,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         att_name = attrib['name']
         if att_type == 'SId' or att_type == 'SIdRef' or att_type == 'string' or att_type == 'enum':
             return '\'\''
-        elif att_type == 'bool' or att_type == 'uint':
+        elif att_type == 'bool' or att_type == 'uint' or att_type == 'int':
             return 'int32(0)'
         elif att_type == 'lo_element':
             return '[]'
@@ -422,7 +467,10 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.write_line('\'cvterms\', ...')
         self.write_line('\'sboTerm\', ...')
         for attrib in sbmlclass['attribs']:
-            self.write_line('\'{0}_{1}\', ...'.format(self.package, attrib['name']))
+            if attrib['name'] == 'math':
+                self.write_line('\'{0}\', ...'.format(attrib['name']))
+            else:
+                self.write_line('\'{0}_{1}\', ...'.format(self.package, attrib['name']))
             num_fields += 1
         self.write_line('\'level\', ...')
         self.write_line('\'version\', ...')
@@ -439,8 +487,11 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
 
 
-    def write_get_fieldname_function(self):
-        self.write_line('function [found, fhandle] = get{0}FieldnameFunction(typecode)'.format(self.up_pack))
+    def write_get_fieldname_function(self, functionType):
+        length = len(functionType)
+        if not functionType.endswith('s'):
+            length += 1
+        self.write_line('function [found, fhandle] = get{0}{1}Function(typecode)'.format(self.up_pack, functionType[0:length-1]))
         self.up_indent()
         self.write_line('found = 1;')
         self.write_line('switch (typecode)')
@@ -450,14 +501,14 @@ class BaseMatlabFile(BaseFile.BaseFile):
                 self.open_br, sbmlclass['typecode'], sbmlclass['name'].upper(), sbmlclass['name'], strFunctions.lower_first(sbmlclass['name']),
                 self.close_br, self.package))
             self.up_indent()
-            self.write_line('fhandle = str2func(\'get{0}Fieldnames\');'.format(sbmlclass['name']))
+            self.write_line('fhandle = str2func(\'get{0}{1}\');'.format(sbmlclass['name'], functionType))
             self.down_indent()
         for plugin in self.plugins:
             self.write_line_verbatim('case {0}\'SBML_{1}_{2}\', \'{1}{3}\', \'SBML_{2}\', \'{3}\', \'{4}\'{5}'.format(
                 self.open_br, self.up_pack, plugin['sbase'].upper(), plugin['sbase'], plugin['sbase'].lower(),
                 self.close_br))
             self.up_indent()
-            self.write_line('fhandle = str2func(\'get{0}{1}Fieldnames\');'.format(self.up_pack, plugin['sbase']))
+            self.write_line('fhandle = str2func(\'get{0}{1}{2}\');'.format(self.up_pack, plugin['sbase'], functionType))
             self.down_indent()
         self.write_line('otherwise')
         self.up_indent()
@@ -469,7 +520,7 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
 
 
-    def write_is_extension(self):
+    def write_is_extension(self, functionType):
         self.write_line('function extend = is{0}Extension(typecode)'.format(self.up_pack))
         self.up_indent()
         self.write_line('extend = 0;')
@@ -487,21 +538,24 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
 
 
-    def write_get_field(self):
-        self.write_line('if strcmp(pkg, \'{0}\'))'.format(self.package))
+    def write_get_field(self, functionType):
+        useS = ''
+        self.up_indent(2)
+        self.write_line('elseif strcmp(pkg, \'{0}\')'.format(self.package))
         self.up_indent()
         self.write_line('if (extension)')
         self.up_indent()
         self.write_line('if (is{0}Extension(typecode))'.format(self.up_pack))
         self.up_indent()
-        self.write_line('[found, fhandle] = get{0}FieldnameFunction(typecode);'.format(self.up_pack))
+        self.write_line('[found, fhandle] = get{0}{1}{2}Function(typecode);'.format(self.up_pack, functionType, useS))
         self.down_indent()
         self.write_line('end;')
         self.down_indent()
         self.write_line('else')
         self.up_indent()
-        self.write_line('[found, fhandle] = get{0}FieldnameFunction(typecode);'.format(self.up_pack))
+        self.write_line('[found, fhandle] = get{0}{1}{2}Function(typecode);'.format(self.up_pack, functionType, useS))
         self.down_indent()
         self.write_line('end;')
         self.down_indent()
         self.write_line('end;')
+        self.down_indent(2)
