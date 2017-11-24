@@ -270,7 +270,7 @@
             <attribute name="fill-rule" required="false" type="enum" element="FillRule" abstract="false"/>
             <attribute name="default_z" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stroke" required="false" type="string" abstract="false"/>
-            <attribute name="stroke-width" required="false" type="string" abstract="false"/>
+            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
             <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
             <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
