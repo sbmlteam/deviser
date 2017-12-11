@@ -1062,18 +1062,18 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   // badName enum (use = "optional" )
   // 
 
-  std::string badname;
-  assigned = attributes.readInto("badName", badname);
+  std::string badName;
+  assigned = attributes.readInto("badName", badName);
 
   if (assigned == true)
   {
-    if (badname.empty() == true)
+    if (badName.empty() == true)
     {
-      logEmptyString(badname, level, version, "<ClassThree>");
+      logEmptyString(badName, level, version, "<ClassThree>");
     }
     else
     {
-      mBadName = Fred_fromString(badname.c_str());
+      mBadName = Fred_fromString(badName.c_str());
 
       if (Fred_isValid(mBadName) == 0)
       {
@@ -1084,7 +1084,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + badname + "', which is not a valid option.";
+        msg += "is '" + badName + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeBadNameMustBeFredEnum,
           pkgVersion, level, version, msg);
@@ -1096,18 +1096,18 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   // otherNum enum (use = "optional" )
   // 
 
-  std::string othernum;
-  assigned = attributes.readInto("otherNum", othernum);
+  std::string otherNum;
+  assigned = attributes.readInto("otherNum", otherNum);
 
   if (assigned == true)
   {
-    if (othernum.empty() == true)
+    if (otherNum.empty() == true)
     {
-      logEmptyString(othernum, level, version, "<ClassThree>");
+      logEmptyString(otherNum, level, version, "<ClassThree>");
     }
     else
     {
-      mOtherNum = Enum_fromString(othernum.c_str());
+      mOtherNum = Enum_fromString(otherNum.c_str());
 
       if (Enum_isValid(mOtherNum) == 0)
       {
@@ -1118,7 +1118,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + othernum + "', which is not a valid option.";
+        msg += "is '" + otherNum + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeOtherNumMustBeEnumEnum,
           pkgVersion, level, version, msg);

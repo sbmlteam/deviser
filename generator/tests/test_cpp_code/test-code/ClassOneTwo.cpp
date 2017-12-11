@@ -1787,18 +1787,18 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
   // attEnum enum (use = "required" )
   // 
 
-  std::string attenum;
-  assigned = attributes.readInto("attEnum", attenum);
+  std::string attEnum;
+  assigned = attributes.readInto("attEnum", attEnum);
 
   if (assigned == true)
   {
-    if (attenum.empty() == true)
+    if (attEnum.empty() == true)
     {
-      logEmptyString(attenum, level, version, "<ClassOneTwo>");
+      logEmptyString(attEnum, level, version, "<ClassOneTwo>");
     }
     else
     {
-      mAttEnum = AbcType_fromString(attenum.c_str());
+      mAttEnum = AbcType_fromString(attEnum.c_str());
 
       if (AbcType_isValid(mAttEnum) == 0)
       {
@@ -1809,7 +1809,7 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + attenum + "', which is not a valid option.";
+        msg += "is '" + attEnum + "', which is not a valid option.";
 
         log->logPackageError("coreversmultipkg",
           CoreversmultipkgClassOneTwoAttEnumMustBeAbcTypeEnum, pkgVersion, level,

@@ -1075,19 +1075,19 @@ Output::readAttributes(const XMLAttributes& attributes,
   // transitionEffect enum (use = "required" )
   // 
 
-  std::string transitioneffect;
-  assigned = attributes.readInto("transitionEffect", transitioneffect);
+  std::string transitionEffect;
+  assigned = attributes.readInto("transitionEffect", transitionEffect);
 
   if (assigned == true)
   {
-    if (transitioneffect.empty() == true)
+    if (transitionEffect.empty() == true)
     {
-      logEmptyString(transitioneffect, level, version, "<Output>");
+      logEmptyString(transitionEffect, level, version, "<Output>");
     }
     else
     {
       mTransitionEffect =
-        TransitionOutputEffect_fromString(transitioneffect.c_str());
+        TransitionOutputEffect_fromString(transitionEffect.c_str());
 
       if (TransitionOutputEffect_isValid(mTransitionEffect) == 0)
       {
@@ -1098,7 +1098,7 @@ Output::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + transitioneffect + "', which is not a valid option.";
+        msg += "is '" + transitionEffect + "', which is not a valid option.";
 
         log->logPackageError("qual",
           QualOutputTransitionEffectMustBeTransitionOutputEffectEnum, pkgVersion,

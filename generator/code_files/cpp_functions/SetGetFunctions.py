@@ -905,13 +905,14 @@ class SetGetFunctions():
             return_type = 'int'
 
         arguments = []
+        [att_name, unused] = strFunctions.remove_hyphens(attribute['name'])
         if self.is_cpp_api:
             arguments.append('{0} {1}'.format('const std::string&',
-                                              attribute['name']))
+                                              att_name))
         else:
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
-            arguments.append('const char * {0}'.format(attribute['name']))
+            arguments.append('const char * {0}'.format(att_name))
 
         if self.is_cpp_api:
             code = []
@@ -919,14 +920,14 @@ class SetGetFunctions():
             [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
             implementation = ['{0}_isValidString({1}.c_str()) == '
                               '0'.format(attribute['element'],
-                                         attribute['name']),
+                                         att_name),
                               '{0} = {1}'.format(attribute['memberName'],
                                                  attribute['default']),
                               'return {0}'.format(self.invalid_att), 'else',
                               '{0} = {1}_fromString'
                               '({2}.c_str())'.format(attribute['memberName'],
                                                      attribute['element'],
-                                                     attribute['name']),
+                                                     att_name),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
@@ -939,7 +940,7 @@ class SetGetFunctions():
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): '
                               '{3}'.format(self.abbrev_parent,
                                            attribute['capAttName'],
-                                           attribute['name'],
+                                           att_name,
                                            self.invalid_obj)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts

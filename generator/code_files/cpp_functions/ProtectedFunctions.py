@@ -1535,18 +1535,19 @@ class ProtectedFunctions():
         element = attribute['element']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
+        [att_name, unused] = strFunctions.remove_hyphens(attribute['name'])
 
         # sort error names to be used
-        [error, att_error] = self.sort_error_names(strFunctions.upper_first(name),'{0}Enum'.format(element))
+        [error, att_error] = self.sort_error_names(strFunctions.upper_first(att_name),'{0}Enum'.format(element))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}Unknown'.format(self.package)
             if att_error not in global_variables.error_list:
                 att_error = '{0}Unknown'.format(self.package)
 
-        line = ['std::string {0}'.format(name.lower()),
+        line = ['std::string {0}'.format(att_name),
                 'assigned = attributes.readInto(\"{0}\", '
-                '{1})'.format(name, name.lower())]
+                '{1})'.format(name, att_name)]
         code.append(self.create_code_block('line', line))
 
         line = ['isSetId()', 'msg += \"with id \'\" + getId() + \"\'\"']
@@ -1561,20 +1562,20 @@ class ProtectedFunctions():
                 self.create_code_block('line',
                                        ['msg += \"is \'\" + {0} + \"\', which '
                                         'is not a valid option.'
-                                        '\"'.format(name.lower())]),
+                                        '\"'.format(att_name)]),
                 self.create_code_block('line', ['log->{0}{1}, {2}, msg)'
                                        .format(self.error, error,
                                                self.given_args)])]
         second_if = self.create_code_block('if', line)
 
-        line = ['{0}.empty() == true'.format(name.lower()),
+        line = ['{0}.empty() == true'.format(att_name),
                 'logEmptyString({0}, level, version, '
-                '\"<{1}>\")'.format(name.lower(), self.class_name),
+                '\"<{1}>\")'.format(att_name, self.class_name),
                 'else',
                 self.create_code_block('line',
                                        ['{0} = {1}_fromString({2}.'
                                         'c_str())'.format(member, element,
-                                                          name.lower())]),
+                                                          att_name)]),
                 second_if]
         first_if = self.create_code_block('if_else', line)
 

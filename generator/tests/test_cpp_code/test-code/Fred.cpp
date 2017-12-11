@@ -2068,18 +2068,18 @@ Fred::readAttributes(const XMLAttributes& attributes,
   // myEnum enum (use = "optional" )
   // 
 
-  std::string myenum;
-  assigned = attributes.readInto("myEnum", myenum);
+  std::string kind;
+  assigned = attributes.readInto("myEnum", kind);
 
   if (assigned == true)
   {
-    if (myenum.empty() == true)
+    if (kind.empty() == true)
     {
-      logEmptyString(myenum, level, version, "<Fred>");
+      logEmptyString(kind, level, version, "<Fred>");
     }
     else
     {
-      mKind = Kind_fromString(myenum.c_str());
+      mKind = Kind_fromString(kind.c_str());
 
       if (Kind_isValid(mKind) == 0)
       {
@@ -2090,9 +2090,9 @@ Fred::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + myenum + "', which is not a valid option.";
+        msg += "is '" + kind + "', which is not a valid option.";
 
-        log->logPackageError("x", XFredMyEnumMustBeKindEnum, pkgVersion, level,
+        log->logPackageError("x", XFredKindMustBeKindEnum, pkgVersion, level,
           version, msg);
       }
     }

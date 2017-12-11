@@ -1491,18 +1491,18 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
   // operationType enum (use = "required" )
   // 
 
-  std::string operationtype;
-  assigned = attributes.readInto("operationType", operationtype);
+  std::string operationType;
+  assigned = attributes.readInto("operationType", operationType);
 
   if (assigned == true)
   {
-    if (operationtype.empty() == true)
+    if (operationType.empty() == true)
     {
-      logEmptyString(operationtype, level, version, "<CSGSetOperator>");
+      logEmptyString(operationType, level, version, "<CSGSetOperator>");
     }
     else
     {
-      mOperationType = SetOperation_fromString(operationtype.c_str());
+      mOperationType = SetOperation_fromString(operationType.c_str());
 
       if (SetOperation_isValid(mOperationType) == 0)
       {
@@ -1513,7 +1513,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + operationtype + "', which is not a valid option.";
+        msg += "is '" + operationType + "', which is not a valid option.";
 
         log->logPackageError("spatial",
           SpatialCSGSetOperatorOperationTypeMustBeSetOperationEnum, pkgVersion,

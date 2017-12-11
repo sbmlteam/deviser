@@ -1478,18 +1478,18 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   // dataType enum (use = "required" )
   // 
 
-  std::string datatype;
-  assigned = attributes.readInto("dataType", datatype);
+  std::string dataType;
+  assigned = attributes.readInto("dataType", dataType);
 
   if (assigned == true)
   {
-    if (datatype.empty() == true)
+    if (dataType.empty() == true)
     {
-      logEmptyString(datatype, level, version, "<SampledField>");
+      logEmptyString(dataType, level, version, "<SampledField>");
     }
     else
     {
-      mDataType = DataKind_fromString(datatype.c_str());
+      mDataType = DataKind_fromString(dataType.c_str());
 
       if (DataKind_isValid(mDataType) == 0)
       {
@@ -1500,7 +1500,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + datatype + "', which is not a valid option.";
+        msg += "is '" + dataType + "', which is not a valid option.";
 
         log->logPackageError("spatial",
           SpatialSampledFieldDataTypeMustBeDataKindEnum, pkgVersion, level,
@@ -1589,19 +1589,19 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   // interpolationType enum (use = "required" )
   // 
 
-  std::string interpolationtype;
-  assigned = attributes.readInto("interpolationType", interpolationtype);
+  std::string interpolationType;
+  assigned = attributes.readInto("interpolationType", interpolationType);
 
   if (assigned == true)
   {
-    if (interpolationtype.empty() == true)
+    if (interpolationType.empty() == true)
     {
-      logEmptyString(interpolationtype, level, version, "<SampledField>");
+      logEmptyString(interpolationType, level, version, "<SampledField>");
     }
     else
     {
       mInterpolationType =
-        InterpolationKind_fromString(interpolationtype.c_str());
+        InterpolationKind_fromString(interpolationType.c_str());
 
       if (InterpolationKind_isValid(mInterpolationType) == 0)
       {
@@ -1612,7 +1612,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + interpolationtype + "', which is not a valid option.";
+        msg += "is '" + interpolationType + "', which is not a valid option.";
 
         log->logPackageError("spatial",
           SpatialSampledFieldInterpolationTypeMustBeInterpolationKindEnum,

@@ -1107,18 +1107,18 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   // functionType enum (use = "required" )
   // 
 
-  std::string functiontype;
-  assigned = attributes.readInto("functionType", functiontype);
+  std::string functionType;
+  assigned = attributes.readInto("functionType", functionType);
 
   if (assigned == true)
   {
-    if (functiontype.empty() == true)
+    if (functionType.empty() == true)
     {
-      logEmptyString(functiontype, level, version, "<AnalyticVolume>");
+      logEmptyString(functionType, level, version, "<AnalyticVolume>");
     }
     else
     {
-      mFunctionType = FunctionKind_fromString(functiontype.c_str());
+      mFunctionType = FunctionKind_fromString(functionType.c_str());
 
       if (FunctionKind_isValid(mFunctionType) == 0)
       {
@@ -1129,7 +1129,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + functiontype + "', which is not a valid option.";
+        msg += "is '" + functionType + "', which is not a valid option.";
 
         log->logPackageError("spatial",
           SpatialAnalyticVolumeFunctionTypeMustBeFunctionKindEnum, pkgVersion,

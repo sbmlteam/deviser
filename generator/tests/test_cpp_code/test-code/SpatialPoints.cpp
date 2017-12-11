@@ -1155,18 +1155,18 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   // dataType enum (use = "optional" )
   // 
 
-  std::string datatype;
-  assigned = attributes.readInto("dataType", datatype);
+  std::string dataType;
+  assigned = attributes.readInto("dataType", dataType);
 
   if (assigned == true)
   {
-    if (datatype.empty() == true)
+    if (dataType.empty() == true)
     {
-      logEmptyString(datatype, level, version, "<SpatialPoints>");
+      logEmptyString(dataType, level, version, "<SpatialPoints>");
     }
     else
     {
-      mDataType = DataKind_fromString(datatype.c_str());
+      mDataType = DataKind_fromString(dataType.c_str());
 
       if (DataKind_isValid(mDataType) == 0)
       {
@@ -1177,7 +1177,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + datatype + "', which is not a valid option.";
+        msg += "is '" + dataType + "', which is not a valid option.";
 
         log->logPackageError("spatial",
           SpatialSpatialPointsDataTypeMustBeDataKindEnum, pkgVersion, level,

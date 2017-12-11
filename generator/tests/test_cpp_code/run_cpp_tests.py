@@ -871,6 +871,12 @@ def main():
         test_case = 'error enumeration '
         fail += run_valid_test(name, class_name, test_case)
 
+        name = 'render'
+        num = 23
+        class_name = 'GraphicalPrimitive2D'
+        list_of = ''
+        test_case = 'hyphenated enum ttribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -894,9 +900,12 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'render'
-        class_name = 'RenderSBMLError'
-        test_case = 'error enumeration '
-        fail += run_valid_test(name, class_name, test_case)
+        num = 23
+        class_name = 'GraphicalPrimitive2D'
+        list_of = ''
+        test_case = 'hyphenated enum ttribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
 
 
