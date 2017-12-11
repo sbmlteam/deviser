@@ -977,7 +977,7 @@ GradientStop::createObject(XMLInputStream& stream)
     if (isSetOffset())
     {
       getErrorLog()->logPackageError("render",
-        RenderGradientStopAllowedElements, getPackageVersion(), getLevel(),
+        RenderGradientStopAllowedAttributes, getPackageVersion(), getLevel(),
           getVersion());
     }
 

@@ -219,12 +219,15 @@ class ProtectedFunctions():
         name_in_error = class_name
         if not self.document:
             name_in_error = strFunctions.remove_prefix(class_name)
+        # hack forr render relAbsVector
         error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
+        error_hack = '{0}{1}AllowedAttributes'.format(self.package, name_in_error)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
                 error = '{0}UnknownError'.format(self.package)
         error_line = 'getErrorLog()->{0}{1}, ' \
                      '{2})'.format(self.error, error, self.error_args)
+        error_line_hack = 'getErrorLog()->{0}{1}, {2})'.format(self.error, error_hack, self.error_args)
         if num_children == 0:
             # do nothing we are calling a base class
             implementation = []
@@ -238,7 +241,10 @@ class ProtectedFunctions():
                 element = self.child_elements[i]
                 if 'is_ml' in element and element['is_ml']:
                     continue
-                code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
+                if element['attTypeCode'] == 'RelAbsVector*':
+                    code_added = self.get_element_implementation(element, implementation, code, ns, error_line_hack)
+                else:
+                    code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
                 children_dealt_with += 1
                 if not code_added:
                     if i < num_children - 1:
@@ -253,7 +259,10 @@ class ProtectedFunctions():
                     implementation += \
                         self.get_plugin_lo_block(element, error_line)
                 else:
-                    code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
+                    if element['attTypeCode'] == 'RelAbsVector*':
+                        code_added = self.get_element_implementation(element, implementation, code, ns, error_line_hack)
+                    else:
+                        code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
                 if not code_added:
                     if j < num_children - children_dealt_with - 1:
                         implementation.append('else if')
