@@ -215,12 +215,17 @@ class BaseCppFile(BaseFile.BaseFile):
     # Function to expand the attribute information
     def expand_attributes(self, attributes):
         for i in range(0, len(attributes)):
-            capname = strFunctions.upper_first(attributes[i]['name'])
-            attributes[i]['name'] = strFunctions.lower_first(capname)
+            [attrib_name, had_hyphen] = strFunctions.remove_hyphens(attributes[i]['name'])
+            capname = strFunctions.upper_first(attrib_name)
+            if had_hyphen:
+                orig_name = attributes[i]['name']
+                attributes[i]['name'] = strFunctions.lower_first(orig_name)
+            else:
+                attributes[i]['name'] = strFunctions.lower_first(capname)
             attributes[i]['capAttName'] = capname
             attributes[i]['memberName'] = 'm' + capname
             attributes[i]['pluralName'] = \
-                strFunctions.plural(attributes[i]['name'])
+                strFunctions.plural(attrib_name)
             attributes[i]['isEnum'] = False
             attributes[i]['isArray'] = False
             attributes[i]['isVector'] = False
@@ -280,9 +285,9 @@ class BaseCppFile(BaseFile.BaseFile):
                     query.get_default_enum_value(attributes[i])
             elif att_type == 'element':
                 el_name = attributes[i]['element']
-                at_name = attributes[i]['name']
+                at_name = attrib_name
                 attributes[i]['attType'] = 'element'
-                if attributes[i]['name'] == 'math':
+                if attrib_name == 'math':
                     if global_variables.is_package:
                         attributes[i]['attTypeCode'] = 'ASTNode*'
                         attributes[i]['CType'] = 'ASTNode_t*'

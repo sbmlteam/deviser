@@ -344,6 +344,25 @@ def remove_spaces(name):
     return newname
 
 
+def remove_hyphens(name):
+    removed_hyphen = False
+    if '-' not in name:
+        return [name, removed_hyphen]
+    else:
+        newname = ''
+        hyphen = False
+        for c in name:
+            if c != '-':
+                if not hyphen:
+                    newname += c
+                else:
+                    newname += c.upper()
+                    hyphen = False
+            else:
+                hyphen = True
+                removed_hyphen = True
+        return [newname, removed_hyphen]
+
 def texify(name):
     name = replace_digits(name)
     name = replace_underscore(name)
