@@ -214,7 +214,8 @@ class ValidationRulesForClass():
             refname = self.name
             abbrev = self.name
         att_type = attribute['type']
-        att_name = strFunctions.upper_first(attribute['name'])
+        [att_name_no_hyphen, unused] = strFunctions.remove_hyphens(attribute['name'])
+        att_name = strFunctions.upper_first(att_name_no_hyphen)
         name = strFunctions.wrap_token(attribute['texname'], self.package)
         rule_type = 'String'
         if att_type == 'SId':
