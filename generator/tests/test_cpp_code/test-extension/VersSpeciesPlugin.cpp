@@ -1762,7 +1762,7 @@ VersSpeciesPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mSpecies_att_v1) == false)
     {
       std::string msg = "The species_att_v1 attribute on the <" +
-        getParentSBMLObject()->getElementName() + ">;
+        getParentSBMLObject()->getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
