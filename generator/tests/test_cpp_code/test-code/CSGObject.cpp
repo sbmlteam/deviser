@@ -1540,7 +1540,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mDomainType) == false)
     {
       std::string msg = "The domainType attribute on the <" + getElementName()
-        + ">;
+        + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

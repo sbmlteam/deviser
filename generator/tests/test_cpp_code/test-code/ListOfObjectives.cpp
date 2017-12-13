@@ -507,7 +507,7 @@ ListOfObjectives::readL3V1V1Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
       std::string msg = "The activeObjective attribute on the <" +
-        getElementName() + ">;
+        getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -555,7 +555,7 @@ ListOfObjectives::readL3V1V2Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mActiveObjective) == false)
     {
       std::string msg = "The activeObjective attribute on the <" +
-        getElementName() + ">;
+        getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

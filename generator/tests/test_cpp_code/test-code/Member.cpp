@@ -940,7 +940,8 @@ Member::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mIdRef) == false)
     {
-      std::string msg = "The idRef attribute on the <" + getElementName() + ">;
+      std::string msg = "The idRef attribute on the <" + getElementName() +
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -967,7 +968,7 @@ Member::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidXMLID(mMetaIdRef) == false)
     {
       std::string msg = "The metaIdRef attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

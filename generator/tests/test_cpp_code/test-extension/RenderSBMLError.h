@@ -268,35 +268,9 @@ typedef enum
 , RenderDefaultValuesAllowedCoreAttributes                    = 1323001
 , RenderDefaultValuesAllowedCoreElements                      = 1323002
 , RenderDefaultValuesAllowedAttributes                        = 1323003
-, RenderDefaultValuesBackgroundColorMustBeString              = 1323004
-, RenderDefaultValuesSpreadMethodMustBeGradientSpreadMethodEnum= 1323005
-, RenderDefaultValuesFillMustBeString                         = 1323006
-, RenderDefaultValuesFillRuleMustBeFillRuleEnum               = 1323007
-, RenderDefaultValuesStrokeMustBeString                       = 1323008
-, RenderDefaultValuesStrokeWidthMustBeDouble                  = 1323009
-, RenderDefaultValuesFontFamilyMustBeString                   = 1323010
-, RenderDefaultValuesFontWeightMustBeFontWeightEnum           = 1323011
-, RenderDefaultValuesFontStyleMustBeFontStyleEnum             = 1323012
-, RenderDefaultValuesTextAnchorMustBeHTextAnchorEnum          = 1323013
-, RenderDefaultValuesVtextAnchorMustBeVTextAnchorEnum         = 1323014
-, RenderDefaultValuesStartHeadMustBeLineEnding                = 1323015
-, RenderDefaultValuesEndHeadMustBeLineEnding                  = 1323016
-, RenderDefaultValuesEnableRotationalMappingMustBeBoolean     = 1323017
-, RenderDefaultValuesLinearGradient_x1MustBeString            = 1323018
-, RenderDefaultValuesLinearGradient_y1MustBeString            = 1323019
-, RenderDefaultValuesLinearGradient_z1MustBeString            = 1323020
-, RenderDefaultValuesLinearGradient_x2MustBeString            = 1323021
-, RenderDefaultValuesLinearGradient_y2MustBeString            = 1323022
-, RenderDefaultValuesLinearGradient_z2MustBeString            = 1323023
-, RenderDefaultValuesRadialGradient_cxMustBeString            = 1323024
-, RenderDefaultValuesRadialGradient_cyMustBeString            = 1323025
-, RenderDefaultValuesRadialGradient_czMustBeString            = 1323026
-, RenderDefaultValuesRadialGradient_rMustBeString             = 1323027
-, RenderDefaultValuesRadialGradient_fxMustBeString            = 1323028
-, RenderDefaultValuesRadialGradient_fyMustBeString            = 1323029
-, RenderDefaultValuesRadialGradient_fzMustBeString            = 1323030
-, RenderDefaultValuesDefault_zMustBeString                    = 1323031
-, RenderDefaultValuesFontSizeMustBeString                     = 1323032
+, RenderDefaultValuesStrokeWidthMustBeDouble                  = 1323004
+, RenderDefaultValuesStartHeadMustBeLineEnding                = 1323005
+, RenderDefaultValuesFontSizeMustBeString                     = 1323006
 } RenderSBMLErrorCode_t;
 
 

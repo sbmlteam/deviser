@@ -493,7 +493,8 @@ class ProtectedFunctions():
         else:
             name_to_use = element
             if element.lower() != xmlname.lower():
-                name_to_use = strFunctions.upper_first(xmlname)
+                [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
+                name_to_use = strFunctions.upper_first(elem_name)
         nested_if = self.create_code_block('if',
                                            ['isSet{0}()'.format(name_to_use),
                                             error_line])
@@ -1451,9 +1452,9 @@ class ProtectedFunctions():
         msgline = ['isSetId()', 'msg += \" with id \'\" + getId() + \"\'\"']
         nested_if = self.create_code_block('if', msgline)
         if self.is_plugin:
-            line.append('std::string msg = \"The {0} attribute on the <\" + getParentSBMLObject()->getElementName() + \">'.format(name))
+            line.append('std::string msg = \"The {0} attribute on the <\" + getParentSBMLObject()->getElementName() + \">\"'.format(name))
         else:
-            line.append('std::string msg = \"The {0} attribute on the <\" + getElementName() + \">'.format(name))
+            line.append('std::string msg = \"The {0} attribute on the <\" + getElementName() + \">\"'.format(name))
         line.append(nested_if)
         line.append('msg += \" is \'\" + {0} + \"\', which does not conform to the syntax.\"'.format(member))
 
@@ -1594,10 +1595,10 @@ class ProtectedFunctions():
 
     def write_number_read(self, index, code, att_type, attributes):
         attribute = attributes[index]
-        name = attribute['xml_name']
+        [name, unused] = strFunctions.remove_hyphens(attribute['name'])
         up_name = strFunctions.upper_first(name)
         member = attribute['memberName']
-        set_name = 'mIsSet{0}'.format(strFunctions.upper_first(attribute['name']))
+        set_name = 'mIsSet{0}'.format(up_name)
         reqd = attribute['reqd']
         if att_type == 'int':
             num_type = 'Integer'
@@ -1617,7 +1618,7 @@ class ProtectedFunctions():
                 att_error = '{0}Unknown'.format(self.package)
         line = ['numErrs = log->getNumErrors()',
                 '{0} = attributes.readInto(\"{1}\", {2})'.format(set_name,
-                                                                 name,
+                                                                 attribute['xml_name'],
                                                                  member)]
         code.append(self.create_code_block('line', line))
 
@@ -1626,7 +1627,7 @@ class ProtectedFunctions():
                 'log->remove(XMLAttributeTypeMismatch)',
                 'std::string message = \"{0} attribute \'{1}\' '
                 'from the <{2}> element must be an '
-                'integer.\"'.format(self.package, name, self.class_name),
+                'integer.\"'.format(self.package, attribute['xml_name'], self.class_name),
                 'log->{0}{1}, {2}, message)'.format(self.error, error,
                                                     self.given_args)]
         if reqd:
@@ -1637,7 +1638,7 @@ class ProtectedFunctions():
                 class_name = self.class_name
             line += ['else',
                      'std::string message = \"{0} attribute \'{1}\' is missing '
-                     'from the <{2}> element.\"'.format(self.package, name,
+                     'from the <{2}> element.\"'.format(self.package, attribute['xml_name'],
                                                         class_name),
                      'log->{0}{1}, {2}, message)'.format(self.error, att_error,
                                                          self.given_args)]

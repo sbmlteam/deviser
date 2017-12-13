@@ -1050,7 +1050,7 @@ Output::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mQualitativeSpecies) == false)
     {
       std::string msg = "The qualitativeSpecies attribute on the <" +
-        getElementName() + ">;
+        getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

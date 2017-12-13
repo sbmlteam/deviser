@@ -1543,7 +1543,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mComplementA) == false)
     {
       std::string msg = "The complementA attribute on the <" + getElementName()
-        + ">;
+        + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -1572,7 +1572,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mComplementB) == false)
     {
       std::string msg = "The complementB attribute on the <" + getElementName()
-        + ">;
+        + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

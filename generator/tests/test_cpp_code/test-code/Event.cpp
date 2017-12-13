@@ -1622,7 +1622,7 @@ Event::readAttributes(
     else if (SyntaxChecker::isValidSBMLSId(mTimeUnits) == false)
     {
       std::string msg = "The timeUnits attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

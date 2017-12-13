@@ -483,7 +483,8 @@ class GenericAttributeFunctions():
                 else:
                     first = False
                 block.append('elementName == \"{0}\"'.format(elem['name']))
-                block.append('return create{0}()'.format(strFunctions.upper_first(elem['name'])))
+                [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                block.append('return create{0}()'.format(strFunctions.upper_first(elem_name)))
                 if len(block) > 2:
                     if_block = self.create_code_block('else_if', block)
                 else:
@@ -575,11 +576,12 @@ class GenericAttributeFunctions():
                     elemElem = elemName
                 else:
                     elemElem = elem['element']
+                [elem_name, unused] = strFunctions.remove_hyphens(elemName)
                 block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elemName, elem['typecode']))
                 if elem not in self.single_elements:
-                    block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                    block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
                 else:
-                    block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                    block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
 
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
@@ -665,8 +667,9 @@ class GenericAttributeFunctions():
                                                                         ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
                             block.append(nested_for)
                     else:
-                        block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
-                        block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
+                        [elem_name, unused] = strFunctions.remove_hyphens(elemName)
+                        block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
+                        block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
             else:
                 if not first:
                     block.append('else if')
@@ -695,8 +698,9 @@ class GenericAttributeFunctions():
                                                                     ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
                         block.append(nested_for)
                 else:
-                    block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elemName)))
-                    block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elemName)))
+                    [elem_name, unused] = strFunctions.remove_hyphens(elemName)
+                    block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
+                    block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
             if single:
                 if len(block) > 3:
                     if_block = self.create_code_block('else_if', block)
@@ -768,7 +772,8 @@ class GenericAttributeFunctions():
                 name = strFunctions.plural(strFunctions.upper_first(elem['name']))
                 block.append('return getNum{0}()'.format(name))
             else:
-                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem['name'])),
+                [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem_name)),
                              'return 1']
                 nested_if_block = self.create_code_block('if', nested_if)
                 block.append(nested_if_block)
@@ -834,10 +839,11 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('elementName == \"{0}\"'.format(elem['name']))
+            [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
             if elem in self.single_elements:
-                block.append('return get{0}()'.format(strFunctions.upper_first(elem['name'])))
+                block.append('return get{0}()'.format(strFunctions.upper_first(elem_name)))
             else:
-                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem['name'])))
+                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem_name)))
 
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)

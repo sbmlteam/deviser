@@ -2094,7 +2094,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      std::string msg = "The ref1 attribute on the <" + getElementName() + ">;
+      std::string msg = "The ref1 attribute on the <" + getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -2120,7 +2120,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      std::string msg = "The ref2 attribute on the <" + getElementName() + ">;
+      std::string msg = "The ref2 attribute on the <" + getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -2147,7 +2147,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
       std::string msg = "The refUnit attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -2193,7 +2193,8 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidXMLID(mIdRef) == false)
     {
-      std::string msg = "The idRef attribute on the <" + getElementName() + ">;
+      std::string msg = "The idRef attribute on the <" + getElementName() +
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -2220,7 +2221,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidXMLID(mIdref1) == false)
     {
       std::string msg = "The idref1 attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -2247,7 +2248,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidXMLID(mIdref2) == false)
     {
       std::string msg = "The idref2 attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

@@ -875,8 +875,18 @@ def main():
         num = 23
         class_name = 'GraphicalPrimitive2D'
         list_of = ''
-        test_case = 'hyphenated enum ttribute'
+        test_case = 'hyphenated enum attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'render'
+        num = 26
+        class_name = 'DefaultValues'
+        list_of = ''
+        test_case = 'hyphenated attribute'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+
+
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -900,10 +910,10 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'render'
-        num = 23
-        class_name = 'GraphicalPrimitive2D'
+        num = 26
+        class_name = 'DefaultValues'
         list_of = ''
-        test_case = 'hyphenated enum ttribute'
+        test_case = 'hyphenated enum attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

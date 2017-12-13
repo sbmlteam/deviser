@@ -1202,7 +1202,8 @@ Compartment::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnits) == false)
     {
-      std::string msg = "The units attribute on the <" + getElementName() + ">;
+      std::string msg = "The units attribute on the <" + getElementName() +
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -1272,7 +1273,7 @@ Compartment::readAttributes(
     else if (SyntaxChecker::isValidSBMLSId(mOutside) == false)
     {
       std::string msg = "The outside attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -1298,7 +1299,7 @@ Compartment::readAttributes(
     else if (SyntaxChecker::isValidSBMLSId(mCompartmentType) == false)
     {
       std::string msg = "The compartmentType attribute on the <" +
-        getElementName() + ">;
+        getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

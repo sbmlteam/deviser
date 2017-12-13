@@ -784,7 +784,7 @@ class SetGetFunctions():
             if attribute['attType'] == 'element':
                 arguments.append('const {0} {1}'
                                  .format(attribute['CType'],
-                                         attribute['name']))
+                                         att_name))
             else:
                 arguments.append('{0} {1}'
                                  .format(attribute['CType'],
@@ -1356,9 +1356,9 @@ class SetGetFunctions():
         # create the function declaration
         arguments = []
         if self.is_cpp_api:
-            function = 'create{0}'.format(name)
+            function = 'create{0}'.format(attribute['capAttName'])
         else:
-            function = '{0}_create{1}'.format(self.class_name, name)
+            function = '{0}_create{1}'.format(self.class_name, attribute['capAttName'])
             arguments.append('{0}* {1}'.format(self.object_name,
                                                self.abbrev_parent))
         return_type = '{0}'.format(att_type)
@@ -1400,9 +1400,10 @@ class SetGetFunctions():
             implementation = ['{0} == NULL'.format(self.abbrev_parent),
                               'return NULL']
             code = [self.create_code_block('if', implementation)]
+            [cpp_name, unused] = strFunctions.remove_hyphens(attribute['capAttName'])
             implementation = ['return ({0})({1}->'
                               'create{2}())'.format(att_type,
-                                                    self.abbrev_parent, name)]
+                                                    self.abbrev_parent, cpp_name)]
             code.append(self.create_code_block('line', implementation))
 
         # return the parts
@@ -1770,15 +1771,16 @@ class SetGetFunctions():
 
 
     def write_set_att_with_member(self, attribute, in_version):
+        [att_name, unused] = strFunctions.remove_hyphens(attribute['name'])
         if in_version:
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                                 attribute['name']),
+                                                 att_name),
                               'mIsSet{0} = true'
                               ''.format(attribute['capAttName']),
                               'return {0}'.format(self.success)]
         else:
             implementation = ['{0} = {1}'.format(attribute['memberName'],
-                                                 attribute['name']),
+                                                 att_name),
                               'mIsSet{0} = '
                               'false'.format(attribute['capAttName']),
                               'return {0}'

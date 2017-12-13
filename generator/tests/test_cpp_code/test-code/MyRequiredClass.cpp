@@ -3264,7 +3264,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef1) == false)
     {
-      std::string msg = "The ref1 attribute on the <" + getElementName() + ">;
+      std::string msg = "The ref1 attribute on the <" + getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -3297,7 +3297,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mRef2) == false)
     {
-      std::string msg = "The ref2 attribute on the <" + getElementName() + ">;
+      std::string msg = "The ref2 attribute on the <" + getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -3331,7 +3331,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mRefUnit) == false)
     {
       std::string msg = "The refUnit attribute on the <" + getElementName() +
-        ">;
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
@@ -3557,7 +3557,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidXMLID(mMetaidref1) == false)
     {
       std::string msg = "The metaidref1 attribute on the <" + getElementName()
-        + ">;
+        + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

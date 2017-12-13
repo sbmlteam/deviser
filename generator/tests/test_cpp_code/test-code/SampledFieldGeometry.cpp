@@ -1127,7 +1127,7 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mSampledField) == false)
     {
       std::string msg = "The sampledField attribute on the <" +
-        getElementName() + ">;
+        getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";

@@ -2038,7 +2038,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "X attribute 'myNumber' from the <Fred> element "
         "must be an integer.";
-      log->logPackageError("x", XFredMyNumberMustBeInteger, pkgVersion, level,
+      log->logPackageError("x", XFredNumMustBeInteger, pkgVersion, level,
         version, message);
     }
     else

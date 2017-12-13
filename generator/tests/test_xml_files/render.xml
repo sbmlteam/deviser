@@ -251,7 +251,7 @@
         </element>
         <element name="DefaultValues" typeCode="SBML_RENDER_DEFAULTS" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="backgroundColor" required="false" type="string" abstract="false"/>
+<!--            <attribute name="backgroundColor" required="false" type="string" abstract="false"/>
             <attribute name="spreadMethod" required="false" type="enum" element="GradientSpreadMethod" abstract="false"/>
             <attribute name="linearGradient_x1" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="linearGradient_y1" required="false" type="element" element="RelAbsVector" abstract="false"/>
@@ -270,17 +270,17 @@
             <attribute name="fill-rule" required="false" type="enum" element="FillRule" abstract="false"/>
             <attribute name="default_z" required="false" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stroke" required="false" type="string" abstract="false"/>
-            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
-            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
-            <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
+-->            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
+<!--            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
+-->            <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
+<!--            <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
             <attribute name="font-style" required="false" type="enum" element="FontStyle" abstract="false"/>
             <attribute name="text-anchor" required="false" type="enum" element="HTextAnchor" abstract="false"/>
             <attribute name="vtext-anchor" required="false" type="enum" element="VTextAnchor" abstract="false"/>
-            <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
-            <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
+-->            <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
+<!--            <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
             <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
-          </attributes>
+-->          </attributes>
         </element>
       </elements>
       <plugins>

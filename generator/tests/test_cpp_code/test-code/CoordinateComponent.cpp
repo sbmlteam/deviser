@@ -1589,7 +1589,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     }
     else if (SyntaxChecker::isValidSBMLSId(mUnit) == false)
     {
-      std::string msg = "The unit attribute on the <" + getElementName() + ">;
+      std::string msg = "The unit attribute on the <" + getElementName() + ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
