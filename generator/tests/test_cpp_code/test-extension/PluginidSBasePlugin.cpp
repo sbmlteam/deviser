@@ -1195,7 +1195,7 @@ PluginidSBasePlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("pluginid", PluginidIdSyntaxRule, pkgVersion, level,
         version, "The pluginid:id on the <" +
-          getParentSBMLObject()->getElementName() + "> is '" + mId + "',which does "
+          getParentSBMLObject()->getElementName() + "> is '" + mId + "', which does "
             "not conform to the syntax.", getLine(), getColumn());
     }
   }
@@ -1257,7 +1257,7 @@ PluginidSBasePlugin::readL3V2V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("pluginid", PluginidIdSyntaxRule, pkgVersion, level,
         version, "The pluginid:id on the <" +
-          getParentSBMLObject()->getElementName() + "> is '" + mId + "',which does "
+          getParentSBMLObject()->getElementName() + "> is '" + mId + "', which does "
             "not conform to the syntax.", getLine(), getColumn());
     }
   }

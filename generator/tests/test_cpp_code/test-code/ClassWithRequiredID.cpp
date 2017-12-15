@@ -674,7 +674,7 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("twoatonce", TwoatonceIdSyntaxRule, pkgVersion,
         level, version, "The id on the <" + getElementName() + "> is '" + mId +
-          "',which does not conform to the syntax.", getLine(), getColumn());
+          "', which does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
@@ -721,7 +721,7 @@ ClassWithRequiredID::readL3V2V1Attributes(const XMLAttributes& attributes)
     {
       log->logPackageError("twoatonce", TwoatonceIdSyntaxRule, pkgVersion,
         level, version, "The id on the <" + getElementName() + "> is '" + mId +
-          "',which does not conform to the syntax.", getLine(), getColumn());
+          "', which does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else

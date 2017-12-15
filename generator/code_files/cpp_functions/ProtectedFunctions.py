@@ -1345,11 +1345,11 @@ class ProtectedFunctions():
             check_function = 'isValidXMLID'
         if att_type == 'SId':
             if self.is_plugin:
-                invalid_line = '\"The {1}:id on the <\" + getParentSBMLObject()->getElementName() + \"> is \'\" + {0} + \"\',' \
+                invalid_line = '\"The {1}:id on the <\" + getParentSBMLObject()->getElementName() + \"> is \'\" + {0} + \"\', ' \
                                'which does not conform to ' \
                                'the syntax.\"'.format(member, self.package.lower())
             else:
-                invalid_line = '\"The id on the <\" + getElementName() + \"> is \'\" + {0} + \"\',' \
+                invalid_line = '\"The id on the <\" + getElementName() + \"> is \'\" + {0} + \"\', ' \
                                'which does not conform to ' \
                                'the syntax.\"'.format(member)
             error = '{0}IdSyntaxRule'.format(self.package)

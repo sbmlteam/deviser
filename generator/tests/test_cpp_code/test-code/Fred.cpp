@@ -1993,7 +1993,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       log->logPackageError("x", XIdSyntaxRule, pkgVersion, level, version, "The "
-        "id on the <" + getElementName() + "> is '" + mId + "',which does not "
+        "id on the <" + getElementName() + "> is '" + mId + "', which does not "
           "conform to the syntax.", getLine(), getColumn());
     }
   }

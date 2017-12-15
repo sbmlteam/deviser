@@ -638,8 +638,8 @@ MyLoTest::readAttributes(const XMLAttributes& attributes,
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       log->logPackageError("test", TestIdSyntaxRule, pkgVersion, level,
-        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
-          "does not conform to the syntax.", getLine(), getColumn());
+        version, "The id on the <" + getElementName() + "> is '" + mId + "', "
+          "which does not conform to the syntax.", getLine(), getColumn());
     }
   }
 }

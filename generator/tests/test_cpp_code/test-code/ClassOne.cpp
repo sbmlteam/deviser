@@ -850,8 +850,8 @@ ClassOne::readL3V1V1Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
-        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
-          "does not conform to the syntax.", getLine(), getColumn());
+        version, "The id on the <" + getElementName() + "> is '" + mId + "', "
+          "which does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
@@ -915,8 +915,8 @@ ClassOne::readL3V1V2Attributes(const XMLAttributes& attributes)
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
       log->logPackageError("vers", VersIdSyntaxRule, pkgVersion, level,
-        version, "The id on the <" + getElementName() + "> is '" + mId + "',which "
-          "does not conform to the syntax.", getLine(), getColumn());
+        version, "The id on the <" + getElementName() + "> is '" + mId + "', "
+          "which does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
