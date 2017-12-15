@@ -885,6 +885,12 @@ def main():
         test_case = 'hyphenated attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        # name = 'render'
+        # num = 6
+        # class_name = 'RenderGroup'
+        # list_of = ''
+        # test_case = 'very nested base'
+        # fail += run_test(name, num, class_name, test_case, list_of)
 
 
         # name = 'arrays'
@@ -910,10 +916,10 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'render'
-        num = 26
-        class_name = 'DefaultValues'
+        num = 6
+        class_name = 'RenderGroup'
         list_of = ''
-        test_case = 'hyphenated enum attribute'
+        test_case = 'very nested base'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

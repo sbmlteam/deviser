@@ -308,8 +308,13 @@ class BaseCppFile(BaseFile.BaseFile):
                 else:
                     attributes[i]['children_overwrite'] = True
             elif att_type == 'lo_element' or att_type == 'inline_lo_element':
-                name = strFunctions.list_of_name(attributes[i]['element'])
+                childclass = query.get_class(attributes[i]['element'], attributes[i]['root'])
+                if 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
+                    name = childclass['lo_class_name']
+                else:
+                    name = strFunctions.list_of_name(attributes[i]['element'])
                 plural = strFunctions.plural_no_prefix(attributes[i]['element'])
+
                 attributes[i]['attType'] = 'lo_element'
                 attributes[i]['attTypeCode'] = name
                 attributes[i]['CType'] = 'ListOf_t'
