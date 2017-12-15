@@ -828,8 +828,8 @@ FunctionTerm_unsetResultLevel(FunctionTerm_t * ft);
  *
  * @param ft the FunctionTerm_t structure whose math is sought.
  *
- * @return the value of the "math" element of this FunctionTerm_t as a
- * ASTNode*.
+ * @return the value of the "math" element of this FunctionTerm_t as a pointer
+ * to an ASTNode_t object.
  *
  * @memberof FunctionTerm_t
  */
@@ -859,7 +859,7 @@ FunctionTerm_isSetMath(const FunctionTerm_t * ft);
  *
  * @param ft the FunctionTerm_t structure.
  *
- * @param math ASTNode_t* value of the "math" element to be set.
+ * @param math ASTNode_t * pointer to the "math" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}

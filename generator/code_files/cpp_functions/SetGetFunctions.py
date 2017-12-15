@@ -168,20 +168,25 @@ class SetGetFunctions():
                                              and attribute['isEnum'] is False)
                                          else attribute['attTypeCode'])))
         else:
-            return_lines.append('@return the value of the \"{0}\" {1} of '
-                                'this {2} as a {3} {4}.'
-                                .format(attribute['name'],
-                                        ('attribute' if is_attribute
-                                         else 'element'),
-                                        self.object_name,
-                                        ('pointer to a'
-                                         if (is_attribute and
-                                             attribute['attType'] == 'string')
-                                         else ''),
-                                        (attribute['attType']
-                                         if (is_attribute
-                                             and attribute['isEnum'] is False)
-                                         else attribute['attTypeCode'])))
+            if not is_attribute and attribute['name'] == 'math':
+                return_lines.append('@return the value of the \"math\" element of '
+                                    'this {0} as a pointer to an ASTNode_t object.'
+                                    .format(self.object_name))
+            else:
+                return_lines.append('@return the value of the \"{0}\" {1} of '
+                                    'this {2} as a {3} {4}.'
+                                    .format(attribute['name'],
+                                            ('attribute' if is_attribute
+                                             else 'element'),
+                                            self.object_name,
+                                            ('pointer to a'
+                                             if (is_attribute and
+                                                 attribute['attType'] == 'string')
+                                             else ''),
+                                            (attribute['attType']
+                                             if (is_attribute
+                                                 and attribute['isEnum'] is False)
+                                             else attribute['attTypeCode'])))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -722,9 +727,14 @@ class SetGetFunctions():
                           .format(attribute['name'], att_type,
                                   ob_type, att_name))
         else:
-            params.append('@param {3} {1} value of the \"{0}\" {2} to be set.'
-                          .format(attribute['name'], att_type,
-                                  ob_type, att_name))
+            if ob_type == 'element' and att_type == 'ASTNode_t*':
+                params.append('@param {3} {1} pointer to the \"{0}\" {2} to be set.'
+                              .format(attribute['name'], 'ASTNode_t *',
+                                      ob_type, att_name))
+            else:
+                params.append('@param {3} {1} value of the \"{0}\" {2} to be set.'
+                              .format(attribute['name'], att_type,
+                                      ob_type, att_name))
         single_return = self.get_single_return(attribute) if self.is_cpp_api else False
         if single_return:
             return_lines.append("@copydetails doc_returns_one_success_code")

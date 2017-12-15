@@ -673,8 +673,8 @@ Constraint_free(Constraint_t* c);
  *
  * @param c the Constraint_t structure whose math is sought.
  *
- * @return the value of the "math" element of this Constraint_t as a
- * LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*.
+ * @return the value of the "math" element of this Constraint_t as a pointer to
+ * an ASTNode_t object.
  *
  * @memberof Constraint_t
  */
