@@ -321,6 +321,8 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['memberName'] = 'm' + plural
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
+                if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
+                    attributes[i]['used_child_name'] = strFunctions.singular(attributes[i]['xml_name'])
             elif att_type == 'array':
                 attributes[i]['isArray'] = True
                 if attributes[i]['element'] == 'Integer' or attributes[i]['element'] == 'integer':

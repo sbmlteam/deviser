@@ -592,7 +592,10 @@ def get_child_elements(elements, lo_elements, root=None):
                 concs = get_concretes(root, conc)
             else:
                 concs = None
-            child_elements.append(dict({'name': strFunctions.lower_first(strFunctions.remove_prefix(elem['element'])),
+            xmlname = strFunctions.singular(elem['name'])
+            name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
+                name = xmlname
+            child_elements.append(dict({'name': name,
                                         'typecode': typecode, 'concrete': concs, 'element': elem['element']}))
     return child_elements
 

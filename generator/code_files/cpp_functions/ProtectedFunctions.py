@@ -298,7 +298,7 @@ class ProtectedFunctions():
     def get_element_implementation(self, element, implementation, code, ns, error_line):
         code_added = False
         if element['abstract'] and \
-                not element['attType'] == 'lo_element':
+                not (element['attType'] == 'lo_element'):
             this_implement = self.get_abstract_block(element, ns, error_line)
             no_lines = len(implementation)
             if no_lines > 0:
@@ -309,15 +309,20 @@ class ProtectedFunctions():
                                                this_implement))
             code_added = True
         elif element['type'] == 'inline_lo_element':
-            this_implement = ['obj = {0}.createObject(stream'
+            my_implement = ['obj = {0}.createObject(stream'
                               ')'.format(element['memberName'])]
             no_lines = len(implementation)
+            this_implement = []
             if no_lines > 0:
-                this_implement.append('else if')
                 for i in range(0, no_lines-1):
                     this_implement.append(implementation[i])
-            code.append(self.create_code_block('line',
-                                               this_implement))
+                this_implement.append('else')
+                this_implement.append('obj = {0}.createObject(stream'
+                              ')'.format(element['memberName']))
+                code.append(self.create_code_block('if_else',
+                                                   this_implement))
+            else:
+                code.append(self.create_code_block('line', my_implement))
             code_added = True
         elif element['attType'] == 'lo_element':
             implementation += self.get_lo_block(element, error_line)

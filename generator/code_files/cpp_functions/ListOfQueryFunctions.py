@@ -74,6 +74,13 @@ class ListOfQueryFunctions():
             else:
                 self.object_name = self.class_name + '_t'
             self.object_child_name = self.child_name + '_t'
+        self.lo_name = ''
+        if 'attType' in class_object and (class_object['attType'] == 'lo_element' or class_object['attType'] == 'inline_lo_element'):
+            self.lo_name = class_object['attTypeCode']
+
+        self.used_child_name = self.child_name
+        if 'used_child_name' in class_object and class_object['used_child_name'] != '':
+            self.used_child_name = strFunctions.upper_first(class_object['used_child_name'])
         self.std_base = class_object['std_base']
         self.concretes = []
         if 'concretes' in class_object and len(class_object['concretes']) > 0:
@@ -100,7 +107,7 @@ class ListOfQueryFunctions():
             self.struct_name = self.class_name + '_t'
         else:
             self.struct_name = self.object_name
-        self.plural = strFunctions.plural(self.child_name)
+        self.plural = strFunctions.plural(strFunctions.upper_first(self.used_child_name))
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
@@ -140,8 +147,7 @@ class ListOfQueryFunctions():
             return_string = 'in this {0}'.format(self.object_name)
         else:
             return_string = 'in the {0} within this ' \
-                            '{1}'.format(strFunctions.
-                                         cap_list_of_name(self.child_name),
+                            '{1}'.format(self.lo_name,
                                          self.class_name)
 
         # useful variables
@@ -161,14 +167,14 @@ class ListOfQueryFunctions():
         additional = []
         additional.append('@copydetails doc_returned_unowned_pointer')
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'getindex', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'getindex', self.used_child_name, self.object_child_name)
 
         # create the function declaration
         arguments = []
-        used_c_name = strFunctions.remove_prefix(self.child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
         if self.is_cpp_api:
             function = 'get' if self.is_list_of else 'get{0}'\
-                .format(strFunctions.remove_prefix(self.object_child_name))
+                .format(strFunctions.remove_prefix(self.used_child_name))
         else:
             function = '{0}_get{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
@@ -232,11 +238,13 @@ class ListOfQueryFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
-    def add_other_referenced_functions(self, additional, this_func, object):
+    def add_other_referenced_functions(self, additional, this_func, object, child_object = ''):
+        if child_object == '':
+            child_object = object
         additional.append(' ')
         if self.is_cpp_api:
             if this_func != 'add':
-                additional.append('@see add{0}(const {0}* object)'.format(object))
+                additional.append('@see add{0}(const {1}* object)'.format(object, child_object))
             if this_func != 'create':
                 additional.append('@see create{0}()'.format(object))
             if this_func != 'getid':
@@ -257,7 +265,7 @@ class ListOfQueryFunctions():
                     additional.append('@see remove{0}(unsigned int n)'.format(object))
         else:
             lenobject = len(object)
-            objectname = object[0:lenobject-2]
+            objectname = object # object[0:lenobject-2]
             if this_func != 'add':
                 additional.append('@see {0}_add{1}()'.format(self.class_name, objectname))
             if this_func != 'create':
@@ -291,14 +299,13 @@ class ListOfQueryFunctions():
         # useful variables
         virtual = True if self.is_list_of else False
         used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
+        used_cpp_name = strFunctions.remove_prefix(self.used_child_name)
 
         if self.is_list_of:
             return_string = 'in this {0}'.format(self.object_name)
         else:
             return_string = 'in the {0} within this ' \
-                            '{1}'.format(strFunctions.
-                                         cap_list_of_name(self.child_name),
+                            '{1}'.format(self.lo_name,
                                          self.class_name)
         # create comment
         title_line = 'Get {0} {1} from the {2} based on its identifier.'\
@@ -315,7 +322,7 @@ class ListOfQueryFunctions():
         additional = []
         additional.append('@copydetails doc_returned_unowned_pointer')
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'getid', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'getid', self.used_child_name, self.object_child_name)
 
         # create function declaration
         if self.is_cpp_api:
@@ -582,11 +589,11 @@ class ListOfQueryFunctions():
         additional = []
         additional.append('@copydetails doc_returned_owned_pointer')
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'removeindex', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'removeindex', self.used_child_name, self.object_child_name)
         # create the function declaration
         arguments = []
-        used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
+        used_cpp_name = strFunctions.remove_prefix(self.used_child_name)
         if self.is_cpp_api:
             function = 'remove' if self.is_list_of \
                 else 'remove{0}'.format(used_cpp_name)
@@ -810,11 +817,11 @@ class ListOfQueryFunctions():
         additional = []
         if self.is_cpp_api:
             additional.append('@copydetails doc_note_object_is_copied')
-            self.add_other_referenced_functions(additional, 'add', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'add', self.used_child_name, self.object_child_name)
         # create the function declaration
         arguments = []
-        used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
+        used_cpp_name = strFunctions.remove_prefix(self.used_child_name)
         if self.is_cpp_api:
             function = 'add{0}'.format(used_cpp_name)
         else:
@@ -936,7 +943,7 @@ class ListOfQueryFunctions():
         additional = []
         additional.append('@copydetails doc_returned_unowned_pointer')
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'create', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'create', self.used_child_name, self.object_child_name)
         # create the function declaration
         arguments = []
         used_c_name = strFunctions.remove_prefix(child_name)
@@ -1074,7 +1081,7 @@ class ListOfQueryFunctions():
                                            self.object_name)]
         additional = []
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'getnum', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'getnum', self.used_child_name, self.object_child_name)
 
         # create the function declaration
         arguments = []
@@ -1132,7 +1139,7 @@ class ListOfQueryFunctions():
         if not self.is_cpp_api and not is_const:
             return
 
-        loname = strFunctions.list_of_name(self.child_name)
+        loname = self.lo_name # strFunctions.list_of_name(self.child_name)
         # create comment parts
         params = []
         if self.is_cpp_api:
@@ -1150,11 +1157,11 @@ class ListOfQueryFunctions():
             return_lines = ['@return the {0} from this {1} as a '
                             'ListOf_t *.'.format(loname, self.object_name)]
         additional = ['@copydetails doc_returned_unowned_pointer']
-        self.add_other_referenced_functions(additional, '', self.object_child_name)
+        self.add_other_referenced_functions(additional, '', strFunctions.upper_first(self.used_child_name), self.object_child_name)
 
 
         # create the function declaration
-        name_used = strFunctions.remove_prefix(loname)
+        name_used = strFunctions.cap_list_of_name(self.used_child_name) # strFunctions.remove_prefix(loname)
         if self.is_cpp_api:
             function = 'get{0}'.format(name_used)
             arguments = []
