@@ -13,9 +13,9 @@
             <attribute name="other" required="false" type="element" element="Other" abstract="false"/>
             <attribute name="other1" required="false" type="element" element="Other" abstract="false"/>
             <attribute name="other2" required="false" type="element" element="Other" xmlName="myOther" abstract="false"/>
-            <attribute name="other3" required="false" type="lo_element" element="OtherLO" xmlName="listOfProducts" abstract="false"/>
+<!--            <attribute name="other3" required="false" type="lo_element" element="OtherLO" xmlName="listOfProducts" abstract="false"/>
             <attribute name="other4" required="false" type="lo_element" element="OtherLO" xmlName="listOfReactants" abstract="false"/>
-          </attributes>
+-->          </attributes>
         </element>
         <element name="Other" typeCode="SBML_X_OTHER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>
         <element name="OtherLO" typeCode="SBML_X_OTHERLO" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false"/>

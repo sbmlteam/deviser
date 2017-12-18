@@ -32,7 +32,6 @@
  */
 #include <sbml/packages/x/sbml/Fred.h>
 #include <sbml/packages/x/validator/XSBMLError.h>
-#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;
@@ -62,7 +61,6 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   , mOther (NULL)
   , mOther1 (NULL)
   , mOther2 (NULL)
-  , mOtherLOs (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new XPkgNamespaces(level, version, pkgVersion));
   connectToChild();
@@ -83,7 +81,6 @@ Fred::Fred(XPkgNamespaces *xns)
   , mOther (NULL)
   , mOther1 (NULL)
   , mOther2 (NULL)
-  , mOtherLOs (xns)
 {
   setElementNamespace(xns->getURI());
   connectToChild();
@@ -105,7 +102,6 @@ Fred::Fred(const Fred& orig)
   , mOther ( NULL )
   , mOther1 ( NULL )
   , mOther2 ( NULL )
-  , mOtherLOs ( orig.mOtherLOs )
 {
   if (orig.mOther != NULL)
   {
@@ -141,7 +137,6 @@ Fred::operator=(const Fred& rhs)
     mIsSetNum = rhs.mIsSetNum;
     mStr = rhs.mStr;
     mKind = rhs.mKind;
-    mOtherLOs = rhs.mOtherLOs;
     delete mOther;
     if (rhs.mOther != NULL)
     {
@@ -778,128 +773,6 @@ Fred::unsetOther2()
 
 
 /*
- * Returns the ListOfOtherLOs from this Fred.
- */
-const ListOfOtherLOs*
-Fred::getListOfOtherLOs() const
-{
-  return &mOtherLOs;
-}
-
-
-/*
- * Returns the ListOfOtherLOs from this Fred.
- */
-ListOfOtherLOs*
-Fred::getListOfOtherLOs()
-{
-  return &mOtherLOs;
-}
-
-
-/*
- * Get an OtherLO from the Fred.
- */
-OtherLO*
-Fred::getOtherLO(unsigned int n)
-{
-  return mOtherLOs.get(n);
-}
-
-
-/*
- * Get an OtherLO from the Fred.
- */
-const OtherLO*
-Fred::getOtherLO(unsigned int n) const
-{
-  return mOtherLOs.get(n);
-}
-
-
-/*
- * Adds a copy of the given OtherLO to this Fred.
- */
-int
-Fred::addOtherLO(const OtherLO* olo)
-{
-  if (olo == NULL)
-  {
-    return LIBSBML_OPERATION_FAILED;
-  }
-  else if (olo->hasRequiredAttributes() == false)
-  {
-    return LIBSBML_INVALID_OBJECT;
-  }
-  else if (getLevel() != olo->getLevel())
-  {
-    return LIBSBML_LEVEL_MISMATCH;
-  }
-  else if (getVersion() != olo->getVersion())
-  {
-    return LIBSBML_VERSION_MISMATCH;
-  }
-  else if (matchesRequiredSBMLNamespacesForAddition(static_cast<const
-    SBase*>(olo)) == false)
-  {
-    return LIBSBML_NAMESPACES_MISMATCH;
-  }
-  else
-  {
-    return mOtherLOs.append(olo);
-  }
-}
-
-
-/*
- * Get the number of OtherLO objects in this Fred.
- */
-unsigned int
-Fred::getNumOtherLOs() const
-{
-  return mOtherLOs.size();
-}
-
-
-/*
- * Creates a new OtherLO object, adds it to this Fred object and returns the
- * OtherLO object created.
- */
-OtherLO*
-Fred::createOtherLO()
-{
-  OtherLO* olo = NULL;
-
-  try
-  {
-    X_CREATE_NS(xns, getSBMLNamespaces());
-    olo = new OtherLO(xns);
-    delete xns;
-  }
-  catch (...)
-  {
-  }
-
-  if (olo != NULL)
-  {
-    mOtherLOs.appendAndOwn(olo);
-  }
-
-  return olo;
-}
-
-
-/*
- * Removes the nth OtherLO from this Fred and returns a pointer to it.
- */
-OtherLO*
-Fred::removeOtherLO(unsigned int n)
-{
-  return mOtherLOs.remove(n);
-}
-
-
-/*
  * Returns the XML element name of this Fred object.
  */
 const std::string&
@@ -969,11 +842,6 @@ Fred::writeElements(XMLOutputStream& stream) const
     mOther2->write(stream);
   }
 
-  if (getNumOtherLOs() > 0)
-  {
-    mOtherLOs.write(stream);
-  }
-
   SBase::writeExtensionElements(stream);
 }
 
@@ -1005,8 +873,6 @@ Fred::accept(SBMLVisitor& v) const
   {
     mOther2->accept(v);
   }
-
-  mOtherLOs.accept(v);
 
   v.leave(*this);
   return true;
@@ -1040,8 +906,6 @@ Fred::setSBMLDocument(SBMLDocument* d)
   {
     mOther2->setSBMLDocument(d);
   }
-
-  mOtherLOs.setSBMLDocument(d);
 }
 
 /** @endcond */
@@ -1072,8 +936,6 @@ Fred::connectToChild()
   {
     mOther2->connectToParent(this);
   }
-
-  mOtherLOs.connectToParent(this);
 }
 
 /** @endcond */
@@ -1106,8 +968,6 @@ Fred::enablePackageInternal(const std::string& pkgURI,
   {
     mOther2->enablePackageInternal(pkgURI, pkgPrefix, flag);
   }
-
-  mOtherLOs.enablePackageInternal(pkgURI, pkgPrefix, flag);
 }
 
 /** @endcond */
@@ -1517,10 +1377,6 @@ Fred::createChildObject(const std::string& elementName)
   {
     return createOther2();
   }
-  else if (elementName == "otherLO")
-  {
-    return createOtherLO();
-  }
 
   return obj;
 }
@@ -1548,11 +1404,6 @@ Fred::addChildObject(const std::string& elementName, const SBase* element)
   else if (elementName == "other2" && element->getTypeCode() == SBML_X_OTHER)
   {
     return setOther2((const Other*)(element));
-  }
-  else if (elementName == "otherLO" && element->getTypeCode() ==
-    SBML_X_OTHERLO)
-  {
-    return addOtherLO((const OtherLO*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1585,16 +1436,6 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
   {
     Other * obj = getOther2();
     if (unsetOther2() == LIBSBML_OPERATION_SUCCESS) return obj;
-  }
-  else if (elementName == "otherLO")
-  {
-    for (unsigned int i = 0; i < getNumOtherLOs(); i++)
-    {
-      if (getOtherLO(i)->getId() == id)
-      {
-        return removeOtherLO(i);
-      }
-    }
   }
 
   return NULL;
@@ -1635,10 +1476,6 @@ Fred::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
-  else if (elementName == "otherLO")
-  {
-    return getNumOtherLOs();
-  }
 
   return n;
 }
@@ -1668,10 +1505,6 @@ Fred::getObject(const std::string& elementName, unsigned int index)
   else if (elementName == "other2")
   {
     return getOther2();
-  }
-  else if (elementName == "otherLO")
-  {
-    return getOtherLO(index);
   }
 
   return obj;
@@ -1736,13 +1569,6 @@ Fred::getElementBySId(const std::string& id)
     }
   }
 
-  obj = mOtherLOs.getElementBySId(id);
-
-  if (obj != NULL)
-  {
-    return obj;
-  }
-
   return obj;
 }
 
@@ -1803,18 +1629,6 @@ Fred::getElementByMetaId(const std::string& metaid)
     }
   }
 
-  if (mOtherLOs.getMetaId() == metaid)
-  {
-    return &mOtherLOs;
-  }
-
-  obj = mOtherLOs.getElementByMetaId(metaid);
-
-  if (obj != NULL)
-  {
-    return obj;
-  }
-
   return obj;
 }
 
@@ -1833,7 +1647,6 @@ Fred::getAllElements(ElementFilter* filter)
   ADD_FILTERED_POINTER(ret, sublist, mOther1, filter);
   ADD_FILTERED_POINTER(ret, sublist, mOther2, filter);
 
-  ADD_FILTERED_LIST(ret, sublist, mOtherLOs, filter);
 
   ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
 
@@ -1893,16 +1706,6 @@ Fred::createObject(XMLInputStream& stream)
     mOther2 = new Other(xns);
     mOther2->setElementName(name);
     obj = mOther2;
-  }
-  else if (name == "listOfOtherLOs")
-  {
-    if (mOtherLOs.size() != 0)
-    {
-      getErrorLog()->logPackageError("x", XFredAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
-    }
-
-    obj = &mOtherLOs;
   }
 
   delete xns;
@@ -2645,73 +2448,6 @@ int
 Fred_unsetOther2(Fred_t * f)
 {
   return (f != NULL) ? f->unsetOther2() : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Returns a ListOf_t * containing OtherLO_t objects from this Fred_t.
- */
-LIBSBML_EXTERN
-ListOf_t*
-Fred_getListOfOtherLOs(Fred_t* f)
-{
-  return (f != NULL) ? f->getListOfOtherLOs() : NULL;
-}
-
-
-/*
- * Get an OtherLO_t from the Fred_t.
- */
-LIBSBML_EXTERN
-OtherLO_t*
-Fred_getOtherLO(Fred_t* f, unsigned int n)
-{
-  return (f != NULL) ? f->getOtherLO(n) : NULL;
-}
-
-
-/*
- * Adds a copy of the given OtherLO_t to this Fred_t.
- */
-LIBSBML_EXTERN
-int
-Fred_addOtherLO(Fred_t* f, const OtherLO_t* olo)
-{
-  return (f != NULL) ? f->addOtherLO(olo) : LIBSBML_INVALID_OBJECT;
-}
-
-
-/*
- * Get the number of OtherLO_t objects in this Fred_t.
- */
-LIBSBML_EXTERN
-unsigned int
-Fred_getNumOtherLOs(Fred_t* f)
-{
-  return (f != NULL) ? f->getNumOtherLOs() : SBML_INT_MAX;
-}
-
-
-/*
- * Creates a new OtherLO_t object, adds it to this Fred_t object and returns
- * the OtherLO_t object created.
- */
-LIBSBML_EXTERN
-OtherLO_t*
-Fred_createOtherLO(Fred_t* f)
-{
-  return (f != NULL) ? f->createOtherLO() : NULL;
-}
-
-
-/*
- * Removes the nth OtherLO_t from this Fred_t and returns a pointer to it.
- */
-LIBSBML_EXTERN
-OtherLO_t*
-Fred_removeOtherLO(Fred_t* f, unsigned int n)
-{
-  return (f != NULL) ? f->removeOtherLO(n) : NULL;
 }
 
 
