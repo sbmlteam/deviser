@@ -594,6 +594,7 @@ def get_child_elements(elements, lo_elements, root=None):
                 concs = None
             xmlname = strFunctions.singular(elem['name'])
             name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
+            if not elem['is_plugin'] and (xmlname != name):
                 name = xmlname
             child_elements.append(dict({'name': name,
                                         'typecode': typecode, 'concrete': concs, 'element': elem['element']}))
