@@ -186,6 +186,11 @@ class ProtectedFunctions():
                     code.append(self.create_code_block('line',
                                                        ['delete '
                                                         '{0}'.format(ns)]))
+                    [other_packages, list_other_packages] = query.has_other_packages(self.child_elements)
+                    for package in list_other_packages:
+                        code.append(self.create_code_block('line',
+                                                           ['delete '
+                                                            '{0}'.format(package + 'ns')]))
                 code.append(self.create_code_block('line',
                                                    ['connectToChild()']))
                 code.append(self.create_code_block('line', ['return obj']))
@@ -331,11 +336,14 @@ class ProtectedFunctions():
             name = element['memberName']
             loname = element['xml_name'] if overwrite \
                 else strFunctions.lower_first(strFunctions.remove_prefix(element['element']))
+            this_ns = ns
+            if 'other_package' in element and element['other_package'] != '':
+                this_ns = '{0}ns'.format(element['other_package'])
             implementation += self.get_obj_block(name, loname,
                                                  error_line,
                                                  overwrite,
                                                  element['element'],
-                                                 ns)
+                                                 this_ns)
         return code_added
 
     def add_ns_code(self, num_children, upkg, ns, xmlns, code):
@@ -360,6 +368,13 @@ class ProtectedFunctions():
                     'get{2}Namespaces'
                     '())'.format(upkg, ns, global_variables.prefix)]
             code.append(self.create_code_block('line', line))
+            [other_packages, list_other_packages] = query.has_other_packages(self.child_elements)
+            for package in list_other_packages:
+                line = ['{0}_CREATE_NS({1}, '
+                        'get{2}Namespaces'
+                        '())'.format(package.upper(), package + 'ns', global_variables.prefix)]
+                code.append(self.create_code_block('line', line))
+
 
     def write_create_object_lo(self, upkg, ns):
         if global_variables.is_package:

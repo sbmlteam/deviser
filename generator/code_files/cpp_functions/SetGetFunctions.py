@@ -1376,18 +1376,21 @@ class SetGetFunctions():
         code = []
         if not self.is_header and self.is_cpp_api:
             member = attribute['memberName']
-            up_pack = self.package.upper()
-            low_pack = self.package.lower()
+            this_up_pack = self.package.upper()
+            this_low_pack = self.package.lower()
             implementation = ['{0} != NULL'.format(member),
                               'delete {0}'.format(member)]
             code = [self.create_code_block('if', implementation)]
             if global_variables.is_package:
+                if 'other_package' in attribute and attribute['other_package'] != '' and attribute['other_package'] != this_low_pack:
+                    this_up_pack = attribute['other_package'].upper()
+                    this_low_pack = attribute['other_package']
                 implementation = ['{0}_CREATE_NS({1}ns, '
                                   'get{2}Namespaces'
-                                  '())'.format(up_pack, low_pack,
+                                  '())'.format(this_up_pack, this_low_pack,
                                                global_variables.prefix),
                                   '{0} = new {1}'
-                                  '({2}ns)'.format(member, att_name, low_pack)]
+                                  '({2}ns)'.format(member, att_name, this_low_pack)]
             else:
                 implementation = ['{0} = new {1}(get{2}Namespaces())'.format(member, att_name, global_variables.prefix)]
             code.append(self.create_code_block('line', implementation))
@@ -1402,7 +1405,7 @@ class SetGetFunctions():
             if global_variables.is_package:
                 code.append(self.create_code_block('line',
                                                    ['delete {0}'
-                                                    'ns'.format(low_pack)]))
+                                                    'ns'.format(this_low_pack)]))
             code.append(self.create_code_block('line', ['connectToChild()']))
             code.append((self.create_code_block('line',
                                                 ['return {0}'.format(member)])))
@@ -1471,6 +1474,9 @@ class SetGetFunctions():
                               'delete {0}'.format(member)]
             code = [self.create_code_block('if', implementation)]
             if global_variables.is_package:
+                if 'other_package' in attribute and attribute['other_package'] != this_low_pack:
+                    up_pack = attribute['other_package'].upper()
+                    low_pack = attribute['other_package']
                 implementation = ['{0}_CREATE_NS({1}ns, '
                                   'get{2}Namespaces'
                                   '())'.format(up_pack, low_pack,

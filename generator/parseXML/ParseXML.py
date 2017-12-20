@@ -177,6 +177,21 @@ class ParseXML():
         return enum_name
 
     @staticmethod
+    def get_mapping(self, node):
+        name = ''
+        package = ''
+        temp = self.get_value(node, 'name')
+        # expect camelcase with upper first
+        if temp is not None:
+            name = strFunctions.upper_first(temp)
+        temp = self.get_value(node, 'package')
+        # expect lower first
+        if temp is not None:
+            package = strFunctions.lower_first(temp)
+        return [name, package]
+
+
+    @staticmethod
     def get_loclass_name_value(self, node, name):
         xml_loclass_name = ''
         temp = self.get_value(node, name)
@@ -749,6 +764,16 @@ class ParseXML():
                 enums.append(dict({'name': enum_name, 'values': values}))
                 names_listed.append(enum_name)
 
+        mappings = []
+        classes_listed = []
+        for node in self.dom.getElementsByTagName('mapping'):
+            [cname, package] = self.get_mapping(self, node)
+
+            if cname not in classes_listed:
+                mappings.append(dict({'class': cname, 'package': package}))
+                classes_listed.append(cname)
+
+
         package = dict({'name': self.package_name,
                         'elements': self.elements,
                         'plugins': self.plugins,
@@ -790,6 +815,11 @@ class ParseXML():
                             self.report_error(global_variables
                                               .return_codes['unknown type used'],
                                               'Unrecognized element: {0}'.format(attr['element']))
+                    if 'element' in attr and attr['element'] in classes_listed:
+                        for map in mappings:
+                            if map['class'] == attr['element']:
+                                attr['other_package'] = map['package']
+
             if 'concrete' in elem:
                 for attr in elem['concrete']:
                     attr['parent'] = elem

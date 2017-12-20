@@ -266,6 +266,18 @@ def has_vector(attributes):
     return False
 
 
+# return True is any of the attributes have another package
+# and a listt of packages
+def has_other_packages(attributes):
+    list_pkgs = []
+    has_pack = False
+    for attribute in attributes:
+        if 'other_package' in attribute and attribute['other_package']:
+            has_pack = True
+            list_pkgs.append(attribute['other_package'])
+    return [has_pack, list_pkgs]
+
+
 # return True is the attribute is saved as a string
 def is_string(attribute):
     if attribute['attType'] == 'string':

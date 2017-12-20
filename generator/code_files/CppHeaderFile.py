@@ -219,7 +219,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             child = self.child_elements[i]['element']
             if child != 'ASTNode' and child != 'XMLNode':
                 if global_variables.is_package:
-                    include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                    this_pkg = pkg
+                    if 'other_package' in self.child_elements[i] and self.child_elements[i]['other_package'] != '':
+                        this_pkg = self.child_elements[i]['other_package']
+                    include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, this_pkg, child)
                     if include_string not in include_lines:
                         include_lines += [include_string]
                 else:
