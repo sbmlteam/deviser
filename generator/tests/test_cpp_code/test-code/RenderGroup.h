@@ -899,6 +899,114 @@ public:
 
 
   /**
+   * Creates a new Ellipse object, adds it to this RenderGroup object and
+   * returns the Ellipse object created.
+   *
+   * @return a new Ellipse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  Ellipse* createEllipse();
+
+
+  /**
+   * Creates a new Rectangle object, adds it to this RenderGroup object and
+   * returns the Rectangle object created.
+   *
+   * @return a new Rectangle object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  Rectangle* createRectangle();
+
+
+  /**
+   * Creates a new Polygon object, adds it to this RenderGroup object and
+   * returns the Polygon object created.
+   *
+   * @return a new Polygon object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  Polygon* createPolygon();
+
+
+  /**
+   * Creates a new RenderGroup object, adds it to this RenderGroup object and
+   * returns the RenderGroup object created.
+   *
+   * @return a new RenderGroup object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  RenderGroup* createGroup();
+
+
+  /**
+   * Creates a new Text object, adds it to this RenderGroup object and returns
+   * the Text object created.
+   *
+   * @return a new Text object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  Text* createText();
+
+
+  /**
+   * Creates a new RenderCurve object, adds it to this RenderGroup object and
+   * returns the RenderCurve object created.
+   *
+   * @return a new RenderCurve object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addElement(const Transformation2D* object)
+   * @see getElement(const std::string& sid)
+   * @see getElement(unsigned int n)
+   * @see getNumElements()
+   * @see removeElement(const std::string& sid)
+   * @see removeElement(unsigned int n)
+   */
+  RenderCurve* createCurve();
+
+
+  /**
    * Removes the nth Transformation2D from this RenderGroup and returns a
    * pointer to it.
    *
@@ -2471,6 +2579,113 @@ RenderGroup_getNumElements(RenderGroup_t* rg);
 LIBSBML_EXTERN
 Image_t*
 RenderGroup_createImage(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new Ellipse_t object, adds it to this RenderGroup_t object and
+ * returns the Ellipse_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the Ellipse_t should be
+ * added.
+ *
+ * @return a new Ellipse_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+Ellipse_t*
+RenderGroup_createEllipse(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new Rectangle_t object, adds it to this RenderGroup_t object and
+ * returns the Rectangle_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the Rectangle_t should be
+ * added.
+ *
+ * @return a new Rectangle_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+Rectangle_t*
+RenderGroup_createRectangle(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new Polygon_t object, adds it to this RenderGroup_t object and
+ * returns the Polygon_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the Polygon_t should be
+ * added.
+ *
+ * @return a new Polygon_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+Polygon_t*
+RenderGroup_createPolygon(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new RenderGroup_t object, adds it to this RenderGroup_t object and
+ * returns the RenderGroup_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the RenderGroup_t should be
+ * added.
+ *
+ * @return a new RenderGroup_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+RenderGroup_t*
+RenderGroup_createGroup(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new Text_t object, adds it to this RenderGroup_t object and
+ * returns the Text_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the Text_t should be added.
+ *
+ * @return a new Text_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+Text_t*
+RenderGroup_createText(RenderGroup_t* rg);
+
+
+/**
+ * Creates a new RenderCurve_t object, adds it to this RenderGroup_t object and
+ * returns the RenderCurve_t object created.
+ *
+ * @param rg the RenderGroup_t structure to which the RenderCurve_t should be
+ * added.
+ *
+ * @return a new RenderCurve_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof RenderGroup_t
+ */
+LIBSBML_EXTERN
+RenderCurve_t*
+RenderGroup_createCurve(RenderGroup_t* rg);
 
 
 /**

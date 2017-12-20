@@ -946,9 +946,16 @@ class ListOfQueryFunctions():
             self.add_other_referenced_functions(additional, 'create', self.used_child_name, self.object_child_name)
         # create the function declaration
         arguments = []
-        used_c_name = strFunctions.remove_prefix(child_name)
+
+        remove_prefix = False
+        prefix_to_remove = ''
+        # hack for render
+        if self.package == 'Render' or self.package == 'render':
+            remove_prefix = True
+            prefix_to_remove = strFunctions.upper_first(self.package)
+        used_c_name = strFunctions.remove_prefix(child_name, False, remove_prefix, prefix_to_remove)
         if self.is_cpp_api:
-            function = 'create{0}'.format(strFunctions.remove_prefix(child))
+            function = 'create{0}'.format(strFunctions.remove_prefix(child, False, remove_prefix, prefix_to_remove))
         else:
             function = '{0}_create{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,

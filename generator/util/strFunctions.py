@@ -144,19 +144,21 @@ def singular(name):
     return returned_word
 
 
-def remove_prefix(name, in_concrete=False):
+def remove_prefix(name, in_concrete=False, remove_package=False, prefix=''):
     prefix_to_remove = ''
     if global_variables.prefix == 'SBML':
         # we might want to remove the name of the package
         if not in_concrete and global_variables.is_package \
                 and global_variables.package_prefix != '':
            prefix_to_remove = global_variables.package_prefix
+        elif remove_package and prefix != '':
+            prefix_to_remove = prefix
     else:
         prefix_to_remove = global_variables.prefix
     length = len(prefix_to_remove)
     if length == 0:
         return name
-    if name.startswith(prefix_to_remove) and not name.endswith('Document'):
+    if not name.endswith('Document') and (name.startswith(prefix_to_remove) or name.startswith(upper_first(prefix_to_remove))):
         newname = name[length:]
     else:
         newname = name

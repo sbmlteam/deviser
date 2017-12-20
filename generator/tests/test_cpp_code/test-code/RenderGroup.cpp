@@ -35,6 +35,12 @@
 #include <sbml/util/ElementFilter.h>
 
 #include <sbml/packages/render/sbml/Image.h>
+#include <sbml/packages/render/sbml/Ellipse.h>
+#include <sbml/packages/render/sbml/Rectangle.h>
+#include <sbml/packages/render/sbml/Polygon.h>
+#include <sbml/packages/render/sbml/RenderGroup.h>
+#include <sbml/packages/render/sbml/Text.h>
+#include <sbml/packages/render/sbml/RenderCurve.h>
 
 
 using namespace std;
@@ -878,6 +884,174 @@ RenderGroup::createImage()
 
 
 /*
+ * Creates a new Ellipse object, adds it to this RenderGroup object and returns
+ * the Ellipse object created.
+ */
+Ellipse*
+RenderGroup::createEllipse()
+{
+  Ellipse* e = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    e = new Ellipse(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (e != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(e);
+  }
+
+  return e;
+}
+
+
+/*
+ * Creates a new Rectangle object, adds it to this RenderGroup object and
+ * returns the Rectangle object created.
+ */
+Rectangle*
+RenderGroup::createRectangle()
+{
+  Rectangle* r = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    r = new Rectangle(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (r != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(r);
+  }
+
+  return r;
+}
+
+
+/*
+ * Creates a new Polygon object, adds it to this RenderGroup object and returns
+ * the Polygon object created.
+ */
+Polygon*
+RenderGroup::createPolygon()
+{
+  Polygon* p = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    p = new Polygon(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (p != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(p);
+  }
+
+  return p;
+}
+
+
+/*
+ * Creates a new RenderGroup object, adds it to this RenderGroup object and
+ * returns the RenderGroup object created.
+ */
+RenderGroup*
+RenderGroup::createGroup()
+{
+  RenderGroup* rg = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    rg = new RenderGroup(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (rg != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(rg);
+  }
+
+  return rg;
+}
+
+
+/*
+ * Creates a new Text object, adds it to this RenderGroup object and returns
+ * the Text object created.
+ */
+Text*
+RenderGroup::createText()
+{
+  Text* t = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    t = new Text(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (t != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(t);
+  }
+
+  return t;
+}
+
+
+/*
+ * Creates a new RenderCurve object, adds it to this RenderGroup object and
+ * returns the RenderCurve object created.
+ */
+RenderCurve*
+RenderGroup::createCurve()
+{
+  RenderCurve* rc = NULL;
+
+  try
+  {
+    RENDER_CREATE_NS(renderns, getSBMLNamespaces());
+    rc = new RenderCurve(renderns);
+    delete renderns;
+  }
+  catch (...)
+  {
+  }
+
+  if (rc != NULL)
+  {
+    mTransformation2Ds.appendAndOwn(rc);
+  }
+
+  return rc;
+}
+
+
+/*
  * Removes the nth Transformation2D from this RenderGroup and returns a pointer
  * to it.
  */
@@ -1549,6 +1723,30 @@ RenderGroup::createChildObject(const std::string& elementName)
   {
     return createImage();
   }
+  else if (elementName == "ellipse")
+  {
+    return createEllipse();
+  }
+  else if (elementName == "rectangle")
+  {
+    return createRectangle();
+  }
+  else if (elementName == "polygon")
+  {
+    return createPolygon();
+  }
+  else if (elementName == "g")
+  {
+    return createG();
+  }
+  else if (elementName == "text")
+  {
+    return createText();
+  }
+  else if (elementName == "curve")
+  {
+    return createCurve();
+  }
 
   return obj;
 }
@@ -1576,6 +1774,34 @@ RenderGroup::addChildObject(const std::string& elementName,
   {
     return addElement((const Transformation2D*)(element));
   }
+  else if (elementName == "ellipse" && element->getTypeCode() ==
+    SBML_RENDER_ELLIPSE)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
+  else if (elementName == "rectangle" && element->getTypeCode() ==
+    SBML_RENDER_RECTANGLE)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
+  else if (elementName == "polygon" && element->getTypeCode() ==
+    SBML_RENDER_POLYGON)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
+  else if (elementName == "g" && element->getTypeCode() == SBML_RENDER_GROUP)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
+  else if (elementName == "text" && element->getTypeCode() == SBML_RENDER_TEXT)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
+  else if (elementName == "curve" && element->getTypeCode() ==
+    SBML_RENDER_CURVE)
+  {
+    return addElement((const Transformation2D*)(element));
+  }
 
   return LIBSBML_OPERATION_FAILED;
 }
@@ -1600,6 +1826,66 @@ RenderGroup::removeChildObject(const std::string& elementName,
     if (unsetFontSize() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "image")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "ellipse")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "rectangle")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "polygon")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "g")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "text")
+  {
+    for (unsigned int i = 0; i < getNumElements(); i++)
+    {
+      if (getElement(i)->getId() == id)
+      {
+        return removeElement(i);
+      }
+    }
+  }
+  else if (elementName == "curve")
   {
     for (unsigned int i = 0; i < getNumElements(); i++)
     {
@@ -2770,6 +3056,78 @@ Image_t*
 RenderGroup_createImage(RenderGroup_t* rg)
 {
   return (rg != NULL) ? rg->createImage() : NULL;
+}
+
+
+/*
+ * Creates a new Ellipse_t object, adds it to this RenderGroup_t object and
+ * returns the Ellipse_t object created.
+ */
+LIBSBML_EXTERN
+Ellipse_t*
+RenderGroup_createEllipse(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createEllipse() : NULL;
+}
+
+
+/*
+ * Creates a new Rectangle_t object, adds it to this RenderGroup_t object and
+ * returns the Rectangle_t object created.
+ */
+LIBSBML_EXTERN
+Rectangle_t*
+RenderGroup_createRectangle(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createRectangle() : NULL;
+}
+
+
+/*
+ * Creates a new Polygon_t object, adds it to this RenderGroup_t object and
+ * returns the Polygon_t object created.
+ */
+LIBSBML_EXTERN
+Polygon_t*
+RenderGroup_createPolygon(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createPolygon() : NULL;
+}
+
+
+/*
+ * Creates a new RenderGroup_t object, adds it to this RenderGroup_t object and
+ * returns the RenderGroup_t object created.
+ */
+LIBSBML_EXTERN
+RenderGroup_t*
+RenderGroup_createGroup(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createGroup() : NULL;
+}
+
+
+/*
+ * Creates a new Text_t object, adds it to this RenderGroup_t object and
+ * returns the Text_t object created.
+ */
+LIBSBML_EXTERN
+Text_t*
+RenderGroup_createText(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createText() : NULL;
+}
+
+
+/*
+ * Creates a new RenderCurve_t object, adds it to this RenderGroup_t object and
+ * returns the RenderCurve_t object created.
+ */
+LIBSBML_EXTERN
+RenderCurve_t*
+RenderGroup_createCurve(RenderGroup_t* rg)
+{
+  return (rg != NULL) ? rg->createCurve() : NULL;
 }
 
 

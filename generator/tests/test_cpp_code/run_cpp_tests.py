@@ -922,10 +922,6 @@ def main():
         test_case = 'very nested base'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-
-
-
-
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 
