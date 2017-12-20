@@ -184,6 +184,7 @@
         <element name="Transformation2D" typeCode="SBML_RENDER_TRANSFORMATION2D" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="Transformation" abstract="true" listOfName="listOfDrawables" listOfClassName="ListOfDrawables">
           <concretes>
             <concrete name="image" element="Image" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="transformation" element="GraphicalPrimitive1D" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Transformation" typeCode="SBML_RENDER_TRANSFORMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
@@ -203,6 +204,7 @@
             <attribute name="stroke-dasharray" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>
+            <concrete name="transformation" element="GraphicalPrimitive2D" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="text" element="Text" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="curve" element="RenderCurve" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
