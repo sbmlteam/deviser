@@ -512,9 +512,12 @@ class ProtectedFunctions():
             name_to_use = concrete_name
         else:
             name_to_use = element
-            if element.lower() != xmlname.lower():
+            elem_name = element
+            if name_to_use.startswith(strFunctions.upper_first(self.package)):
+                 elem_name = strFunctions.remove_prefix(element, False, True, self.package)
+            elif element.lower() != xmlname.lower():
                 [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
-                name_to_use = strFunctions.upper_first(elem_name)
+            name_to_use = strFunctions.upper_first(elem_name)
         nested_if = self.create_code_block('if',
                                            ['isSet{0}()'.format(name_to_use),
                                             error_line])

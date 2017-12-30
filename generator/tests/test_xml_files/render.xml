@@ -77,7 +77,7 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
-            <attribute name="g" required="false" type="element" element="RenderGroup" abstract="false"/>
+            <attribute name="group" required="false" type="element" element="RenderGroup" xmlName="g" abstract="false"/>
             <attribute name="boundingBox" required="false" type="element" element="BoundingBox" abstract="false"/>
           </attributes>
         </element>
@@ -253,36 +253,10 @@
         </element>
         <element name="DefaultValues" typeCode="SBML_RENDER_DEFAULTS" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-<!--            <attribute name="backgroundColor" required="false" type="string" abstract="false"/>
-            <attribute name="spreadMethod" required="false" type="enum" element="GradientSpreadMethod" abstract="false"/>
-            <attribute name="linearGradient_x1" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="linearGradient_y1" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="linearGradient_z1" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="linearGradient_x2" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="linearGradient_y2" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="linearGradient_z2" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_cx" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_cy" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_cz" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_r" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_fx" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_fy" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="radialGradient_fz" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="fill" required="false" type="string" abstract="false"/>
-            <attribute name="fill-rule" required="false" type="enum" element="FillRule" abstract="false"/>
-            <attribute name="default_z" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="stroke" required="false" type="string" abstract="false"/>
--->            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
-<!--            <attribute name="font-family" required="false" type="string" element="FontFamily" abstract="false"/>
--->            <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
-<!--            <attribute name="font-weight" required="false" type="enum" element="FontWeight" abstract="false"/>
-            <attribute name="font-style" required="false" type="enum" element="FontStyle" abstract="false"/>
-            <attribute name="text-anchor" required="false" type="enum" element="HTextAnchor" abstract="false"/>
-            <attribute name="vtext-anchor" required="false" type="enum" element="VTextAnchor" abstract="false"/>
--->            <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
-<!--            <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
-            <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
--->          </attributes>
+            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
+            <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
+            <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
+          </attributes>
         </element>
       </elements>
       <plugins>

@@ -1093,7 +1093,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
 
   if (name == "spatialPoints")
   {
-    if (isSetSpatialPoints())
+    if (isSetPoints())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialParametricGeometryAllowedElements, getPackageVersion(),

@@ -892,6 +892,13 @@ def main():
         test_case = 'very nested base'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'render'
+        num = 8
+        class_name = 'LineEnding'
+        list_of = ''
+        test_case = 'uses other package class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
         # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
@@ -920,6 +927,13 @@ def main():
         class_name = 'RenderGroup'
         list_of = ''
         test_case = 'very nested base'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'render'
+        num = 8
+        class_name = 'LineEnding'
+        list_of = ''
+        test_case = 'uses other package class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)

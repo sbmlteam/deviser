@@ -77,7 +77,7 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="enableRotationalMapping" required="false" type="bool" abstract="false"/>
-            <attribute name="g" required="false" type="element" element="RenderGroup" abstract="false"/>
+            <attribute name="group" required="false" type="element" element="RenderGroup" xmlName="g" abstract="false"/>
             <attribute name="boundingBox" required="false" type="element" element="BoundingBox" abstract="false"/>
           </attributes>
         </element>
