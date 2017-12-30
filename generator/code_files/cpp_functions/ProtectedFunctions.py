@@ -229,7 +229,7 @@ class ProtectedFunctions():
         error_hack = '{0}{1}AllowedAttributes'.format(self.package, name_in_error)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{0}UnknownError'.format(self.package)
+                error = '{0}Unknown'.format(self.package)
         error_line = 'getErrorLog()->{0}{1}, ' \
                      '{2})'.format(self.error, error, self.error_args)
         error_line_hack = 'getErrorLog()->{0}{1}, {2})'.format(self.error, error_hack, self.error_args)
@@ -1161,7 +1161,7 @@ class ProtectedFunctions():
                 error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          name_in_error)
                 if error not in global_variables.error_list:
-                    error = '{0}UnknownError'.format(self.package)
+                    error = '{0}Unknown'.format(self.package)
             if c_err not in global_variables.error_list:
                 c_err = '{0}Unknown'.format(self.package)
         if global_variables.is_package:
@@ -1233,9 +1233,9 @@ class ProtectedFunctions():
                     error = '{0}Unknown'.format(self.package)
             else:
                 if core_err not in global_variables.error_list:
-                    core_err = '{0}UnknownError'.format(global_variables.prefix)
+                    core_err = '{0}Unknown'.format(global_variables.prefix)
                 if error not in global_variables.error_list:
-                    error = '{0}UnknownError'.format(global_variables.prefix)
+                    error = '{0}Unknown'.format(global_variables.prefix)
 
         if global_variables.is_package:
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
