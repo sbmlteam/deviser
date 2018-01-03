@@ -184,7 +184,7 @@ public:
    * GraphicalPrimitive2D as a FillRule_t.
    *
    * @copydetails doc_graphicalprimitive2d_fill-rule
-   * @if clike The value is drawn from the enumeration @ref FillRule_t@endif
+   * @if clike The value is drawn from the enumeration @ref FillRule_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{FILL_RULE_NONZERO, FillRule_t}
    * @li @sbmlconstant{FILL_RULE_EVENODD, FillRule_t}
@@ -869,7 +869,7 @@ GraphicalPrimitive2D_getFill(const GraphicalPrimitive2D_t * gpd);
  * GraphicalPrimitive2D_t as a FillRule_t.
  *
  * @copydetails doc_graphicalprimitive2d_fill-rule
- * @if clike The value is drawn from the enumeration @ref FillRule_t@endif
+ * @if clike The value is drawn from the enumeration @ref FillRule_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{FILL_RULE_NONZERO, FillRule_t}
  * @li @sbmlconstant{FILL_RULE_EVENODD, FillRule_t}

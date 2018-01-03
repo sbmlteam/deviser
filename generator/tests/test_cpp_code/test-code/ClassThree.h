@@ -214,7 +214,7 @@ public:
    * Enum_t.
    *
    * @copydetails doc_classthree_number
-   * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+   * @if clike The value is drawn from the enumeration @ref Enum_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
    * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
@@ -244,7 +244,7 @@ public:
    * @return the value of the "name" attribute of this ClassThree as a Fred_t.
    *
    * @copydetails doc_classthree_name
-   * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+   * @if clike The value is drawn from the enumeration @ref Fred_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
    * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
@@ -274,7 +274,7 @@ public:
    * Fred_t.
    *
    * @copydetails doc_classthree_badName
-   * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+   * @if clike The value is drawn from the enumeration @ref Fred_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
    * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
@@ -305,7 +305,7 @@ public:
    * Enum_t.
    *
    * @copydetails doc_classthree_otherNum
-   * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+   * @if clike The value is drawn from the enumeration @ref Enum_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
    * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
@@ -1036,7 +1036,7 @@ ClassThree_free(ClassThree_t* ct);
  * Enum_t.
  *
  * @copydetails doc_classthree_number
- * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+ * @if clike The value is drawn from the enumeration @ref Enum_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
  * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
@@ -1080,7 +1080,7 @@ ClassThree_getNumberAsString(const ClassThree_t * ct);
  * @return the value of the "name" attribute of this ClassThree_t as a Fred_t.
  *
  * @copydetails doc_classthree_name
- * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+ * @if clike The value is drawn from the enumeration @ref Fred_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
  * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
@@ -1125,7 +1125,7 @@ ClassThree_getNameAsString(const ClassThree_t * ct);
  * Fred_t.
  *
  * @copydetails doc_classthree_badName
- * @if clike The value is drawn from the enumeration @ref Fred_t@endif
+ * @if clike The value is drawn from the enumeration @ref Fred_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
  * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
@@ -1170,7 +1170,7 @@ ClassThree_getBadNameAsString(const ClassThree_t * ct);
  * Enum_t.
  *
  * @copydetails doc_classthree_otherNum
- * @if clike The value is drawn from the enumeration @ref Enum_t@endif
+ * @if clike The value is drawn from the enumeration @ref Enum_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
  * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}

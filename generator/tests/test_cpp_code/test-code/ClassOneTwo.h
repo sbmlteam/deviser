@@ -242,7 +242,7 @@ public:
    * AbcType_t.
    *
    * @copydetails doc_classonetwo_attEnum
-   * @if clike The value is drawn from the enumeration @ref AbcType_t@endif
+   * @if clike The value is drawn from the enumeration @ref AbcType_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}
    * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t}
@@ -1244,7 +1244,7 @@ ClassOneTwo_getAttUnit(const ClassOneTwo_t * cot);
  * AbcType_t.
  *
  * @copydetails doc_classonetwo_attEnum
- * @if clike The value is drawn from the enumeration @ref AbcType_t@endif
+ * @if clike The value is drawn from the enumeration @ref AbcType_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}
  * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t}

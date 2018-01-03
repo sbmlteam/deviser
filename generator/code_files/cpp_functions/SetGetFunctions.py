@@ -221,7 +221,7 @@ class SetGetFunctions():
 
         if 'isEnum' in attribute and attribute['isEnum']:
             additional.append(doccopy)
-            additional.append('@if clike The value is drawn from the enumeration @ref {0}@endif'.format(attribute['CType']))
+            additional.append('@if clike The value is drawn from the enumeration @ref {0} @endif'.format(attribute['CType']))
             additional.append('The possible values returned by this method are:')
             if self.has_enum:
                 this_enum = self.get_matching_enum(attribute['name'])

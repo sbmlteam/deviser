@@ -223,7 +223,7 @@ public:
    * DataKind_t.
    *
    * @copydetails doc_sampledfield_dataType
-   * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref DataKind_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}
@@ -288,8 +288,8 @@ public:
    * SampledField as a InterpolationKind_t.
    *
    * @copydetails doc_sampledfield_interpolationType
-   * @if clike The value is drawn from the enumeration @ref
-   * InterpolationKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref InterpolationKind_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_NEARESTNEIGHBOR,
    * InterpolationKind_t}
@@ -323,8 +323,8 @@ public:
    * CompressionKind_t.
    *
    * @copydetails doc_sampledfield_compression
-   * @if clike The value is drawn from the enumeration @ref
-   * CompressionKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref CompressionKind_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
@@ -1320,7 +1320,7 @@ SampledField_getId(const SampledField_t * sf);
  * DataKind_t.
  *
  * @copydetails doc_sampledfield_dataType
- * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref DataKind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}
@@ -1417,8 +1417,8 @@ SampledField_getNumSamples3(const SampledField_t * sf);
  * SampledField_t as a InterpolationKind_t.
  *
  * @copydetails doc_sampledfield_interpolationType
- * @if clike The value is drawn from the enumeration @ref
- * InterpolationKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref InterpolationKind_t
+ * @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_NEARESTNEIGHBOR,
  * InterpolationKind_t}
@@ -1466,8 +1466,8 @@ SampledField_getInterpolationTypeAsString(const SampledField_t * sf);
  * CompressionKind_t.
  *
  * @copydetails doc_sampledfield_compression
- * @if clike The value is drawn from the enumeration @ref
- * CompressionKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref CompressionKind_t
+ * @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}

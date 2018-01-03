@@ -172,8 +172,8 @@ public:
    * as a SetOperation_t.
    *
    * @copydetails doc_csgsetoperator_operationType
-   * @if clike The value is drawn from the enumeration @ref
-   * SetOperation_t@endif
+   * @if clike The value is drawn from the enumeration @ref SetOperation_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
    * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}
@@ -1310,7 +1310,7 @@ CSGSetOperator_free(CSGSetOperator_t* csgso);
  * as a SetOperation_t.
  *
  * @copydetails doc_csgsetoperator_operationType
- * @if clike The value is drawn from the enumeration @ref SetOperation_t@endif
+ * @if clike The value is drawn from the enumeration @ref SetOperation_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
  * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}

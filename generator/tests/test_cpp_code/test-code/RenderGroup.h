@@ -258,7 +258,7 @@ public:
    * FontWeight_t.
    *
    * @copydetails doc_rendergroup_font-weight
-   * @if clike The value is drawn from the enumeration @ref FontWeight_t@endif
+   * @if clike The value is drawn from the enumeration @ref FontWeight_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{FONT_WEIGHT_BOLD, FontWeight_t}
    * @li @sbmlconstant{FONT_WEIGHT_NORMAL, FontWeight_t}
@@ -289,7 +289,7 @@ public:
    * FontStyle_t.
    *
    * @copydetails doc_rendergroup_font-style
-   * @if clike The value is drawn from the enumeration @ref FontStyle_t@endif
+   * @if clike The value is drawn from the enumeration @ref FontStyle_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{FONT_STYLE_ITALIC, FontStyle_t}
    * @li @sbmlconstant{FONT_STYLE_NORMAL, FontStyle_t}
@@ -320,7 +320,8 @@ public:
    * HTextAnchor_t.
    *
    * @copydetails doc_rendergroup_text-anchor
-   * @if clike The value is drawn from the enumeration @ref HTextAnchor_t@endif
+   * @if clike The value is drawn from the enumeration @ref HTextAnchor_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{H_TEXTANCHOR_START, HTextAnchor_t}
    * @li @sbmlconstant{H_TEXTANCHOR_MIDDLE, HTextAnchor_t}
@@ -353,7 +354,8 @@ public:
    * VTextAnchor_t.
    *
    * @copydetails doc_rendergroup_vtext-anchor
-   * @if clike The value is drawn from the enumeration @ref VTextAnchor_t@endif
+   * @if clike The value is drawn from the enumeration @ref VTextAnchor_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{V_TEXTANCHOR_ANCHOR_TOP, VTextAnchor_t}
    * @li @sbmlconstant{V_TEXTANCHOR_ANCHOR_MIDDLE, VTextAnchor_t}
@@ -1744,7 +1746,7 @@ RenderGroup_getFontFamily(const RenderGroup_t * rg);
  * FontWeight_t.
  *
  * @copydetails doc_rendergroup_font-weight
- * @if clike The value is drawn from the enumeration @ref FontWeight_t@endif
+ * @if clike The value is drawn from the enumeration @ref FontWeight_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{FONT_WEIGHT_BOLD, FontWeight_t}
  * @li @sbmlconstant{FONT_WEIGHT_NORMAL, FontWeight_t}
@@ -1789,7 +1791,7 @@ RenderGroup_getFontWeightAsString(const RenderGroup_t * rg);
  * FontStyle_t.
  *
  * @copydetails doc_rendergroup_font-style
- * @if clike The value is drawn from the enumeration @ref FontStyle_t@endif
+ * @if clike The value is drawn from the enumeration @ref FontStyle_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{FONT_STYLE_ITALIC, FontStyle_t}
  * @li @sbmlconstant{FONT_STYLE_NORMAL, FontStyle_t}
@@ -1834,7 +1836,7 @@ RenderGroup_getFontStyleAsString(const RenderGroup_t * rg);
  * HTextAnchor_t.
  *
  * @copydetails doc_rendergroup_text-anchor
- * @if clike The value is drawn from the enumeration @ref HTextAnchor_t@endif
+ * @if clike The value is drawn from the enumeration @ref HTextAnchor_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{H_TEXTANCHOR_START, HTextAnchor_t}
  * @li @sbmlconstant{H_TEXTANCHOR_MIDDLE, HTextAnchor_t}
@@ -1881,7 +1883,7 @@ RenderGroup_getTextAnchorAsString(const RenderGroup_t * rg);
  * VTextAnchor_t.
  *
  * @copydetails doc_rendergroup_vtext-anchor
- * @if clike The value is drawn from the enumeration @ref VTextAnchor_t@endif
+ * @if clike The value is drawn from the enumeration @ref VTextAnchor_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{V_TEXTANCHOR_ANCHOR_TOP, VTextAnchor_t}
  * @li @sbmlconstant{V_TEXTANCHOR_ANCHOR_MIDDLE, VTextAnchor_t}

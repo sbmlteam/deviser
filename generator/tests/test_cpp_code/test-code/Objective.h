@@ -197,7 +197,7 @@ public:
    * FbcType_t.
    *
    * @copydetails doc_objective_type
-   * @if clike The value is drawn from the enumeration @ref FbcType_t@endif
+   * @if clike The value is drawn from the enumeration @ref FbcType_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}
    * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, FbcType_t}
@@ -1314,7 +1314,7 @@ Objective_getName(const Objective_t * o);
  * FbcType_t.
  *
  * @copydetails doc_objective_type
- * @if clike The value is drawn from the enumeration @ref FbcType_t@endif
+ * @if clike The value is drawn from the enumeration @ref FbcType_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, FbcType_t}
  * @li @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, FbcType_t}

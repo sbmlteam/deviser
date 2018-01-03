@@ -1,6 +1,6 @@
 /**
- * @file Output.h
- * @brief Definition of the Output class.
+ * @file OutwardBindingSite.h
+ * @brief Definition of the OutwardBindingSite class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,8 +30,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class Output
- * @sbmlbrief{qual} TODO:Definition of the Output class.
+ * @class OutwardBindingSite
+ * @sbmlbrief{multi} TODO:Definition of the OutwardBindingSite class.
  */
 
 /**
@@ -43,31 +43,33 @@
  * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
  *
  *
- * @class doc_output_transitionEffect
+ * @class doc_outwardbindingsite_bindingStatus
  *
  * @par
- * The attribute "transitionEffect" on a Output object is used to TODO:add
- * explanation
+ * The attribute "bindingStatus" on a OutwardBindingSite object is used to
+ * TODO:add explanation
  *
  * In the SBML
- * Level&nbsp;3 Version&nbsp;1 Qual specification, the following are the
- * allowable values for "transitionEffect":
+ * Level&nbsp;3 Version&nbsp;1 Multi specification, the following are the
+ * allowable values for "bindingStatus":
  * <ul>
- * <li> @c "production", TODO:add description
+ * <li> @c "bound", TODO:add description
  *
- * <li> @c "assignmentLevel", TODO:add description
+ * <li> @c "unbound", TODO:add description
+ *
+ * <li> @c "either", TODO:add description
  *
  * </ul>
  */
 
 
-#ifndef Output_H__
-#define Output_H__
+#ifndef OutwardBindingSite_H__
+#define OutwardBindingSite_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/qual/common/qualfwd.h>
+#include <sbml/packages/multi/common/multifwd.h>
 
 
 #ifdef __cplusplus
@@ -77,209 +79,199 @@
 
 
 #include <sbml/SBase.h>
-#include <sbml/packages/qual/extension/QualExtension.h>
+#include <sbml/packages/multi/extension/MultiExtension.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN Output : public SBase
+class LIBSBML_EXTERN OutwardBindingSite : public SBase
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  std::string mQualitativeSpecies;
-  TransitionOutputEffect_t mTransitionEffect;
-  int mOutputLevel;
-  bool mIsSetOutputLevel;
+  BindingStatus_t mBindingStatus;
+  std::string mComponent;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new Output using the given SBML Level, Version and
-   * &ldquo;qual&rdquo; package version.
+   * Creates a new OutwardBindingSite using the given SBML Level, Version and
+   * &ldquo;multi&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this Output.
+   * @param level an unsigned int, the SBML Level to assign to this
+   * OutwardBindingSite.
    *
-   * @param version an unsigned int, the SBML Version to assign to this Output.
+   * @param version an unsigned int, the SBML Version to assign to this
+   * OutwardBindingSite.
    *
-   * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
-   * Output.
+   * @param pkgVersion an unsigned int, the SBML Multi Version to assign to
+   * this OutwardBindingSite.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  Output(unsigned int level = QualExtension::getDefaultLevel(),
-         unsigned int version = QualExtension::getDefaultVersion(),
-         unsigned int pkgVersion = QualExtension::getDefaultPackageVersion());
+  OutwardBindingSite(unsigned int level = MultiExtension::getDefaultLevel(),
+                     unsigned int version =
+                       MultiExtension::getDefaultVersion(),
+                     unsigned int pkgVersion =
+                       MultiExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new Output using the given QualPkgNamespaces object.
+   * Creates a new OutwardBindingSite using the given MultiPkgNamespaces
+   * object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param qualns the QualPkgNamespaces object.
+   * @param multins the MultiPkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  Output(QualPkgNamespaces *qualns);
+  OutwardBindingSite(MultiPkgNamespaces *multins);
 
 
   /**
-   * Copy constructor for Output.
+   * Copy constructor for OutwardBindingSite.
    *
-   * @param orig the Output instance to copy.
+   * @param orig the OutwardBindingSite instance to copy.
    */
-  Output(const Output& orig);
+  OutwardBindingSite(const OutwardBindingSite& orig);
 
 
   /**
-   * Assignment operator for Output.
+   * Assignment operator for OutwardBindingSite.
    *
-   * @param rhs the Output object whose values are to be used as the basis of
-   * the assignment.
+   * @param rhs the OutwardBindingSite object whose values are to be used as
+   * the basis of the assignment.
    */
-  Output& operator=(const Output& rhs);
+  OutwardBindingSite& operator=(const OutwardBindingSite& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this Output object.
+   * Creates and returns a deep copy of this OutwardBindingSite object.
    *
-   * @return a (deep) copy of this Output object.
+   * @return a (deep) copy of this OutwardBindingSite object.
    */
-  virtual Output* clone() const;
+  virtual OutwardBindingSite* clone() const;
 
 
   /**
-   * Destructor for Output.
+   * Destructor for OutwardBindingSite.
    */
-  virtual ~Output();
+  virtual ~OutwardBindingSite();
 
 
   /**
-   * Returns the value of the "id" attribute of this Output.
+   * Returns the value of the "id" attribute of this OutwardBindingSite.
    *
-   * @return the value of the "id" attribute of this Output as a string.
+   * @return the value of the "id" attribute of this OutwardBindingSite as a
+   * string.
    */
   virtual const std::string& getId() const;
 
 
   /**
-   * Returns the value of the "qualitativeSpecies" attribute of this Output.
+   * Returns the value of the "name" attribute of this OutwardBindingSite.
    *
-   * @return the value of the "qualitativeSpecies" attribute of this Output as
-   * a string.
-   */
-  const std::string& getQualitativeSpecies() const;
-
-
-  /**
-   * Returns the value of the "transitionEffect" attribute of this Output.
-   *
-   * @return the value of the "transitionEffect" attribute of this Output as a
-   * TransitionOutputEffect_t.
-   *
-   * @copydetails doc_output_transitionEffect
-   * @if clike The value is drawn from the enumeration @ref
-   * TransitionOutputEffect_t @endif
-   * The possible values returned by this method are:
-   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
-   * TransitionOutputEffect_t}
-   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
-   * TransitionOutputEffect_t}
-   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
-   * TransitionOutputEffect_t}
-   */
-  TransitionOutputEffect_t getTransitionEffect() const;
-
-
-  /**
-   * Returns the value of the "transitionEffect" attribute of this Output.
-   *
-   * @return the value of the "transitionEffect" attribute of this Output as a
+   * @return the value of the "name" attribute of this OutwardBindingSite as a
    * string.
-   *
-   * @copydetails doc_output_transitionEffect
-   * The possible values returned by this method are:
-   * @li @c "production"
-   * @li @c "assignmentLevel"
-   * @li @c "invalid OutputTransitionEffect"
-   */
-  const std::string& getTransitionEffectAsString() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this Output.
-   *
-   * @return the value of the "name" attribute of this Output as a string.
    */
   virtual const std::string& getName() const;
 
 
   /**
-   * Returns the value of the "outputLevel" attribute of this Output.
+   * Returns the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite.
    *
-   * @return the value of the "outputLevel" attribute of this Output as a
-   * integer.
+   * @return the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite as a BindingStatus_t.
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
+   * @if clike The value is drawn from the enumeration @ref BindingStatus_t
+   * @endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}
+   * @li @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}
+   * @li @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t}
+   * @li @sbmlconstant{OUTWARD_BINDING_SITE_BINDING_STATUS_INVALID,
+   * BindingStatus_t}
    */
-  int getOutputLevel() const;
+  BindingStatus_t getBindingStatus() const;
 
 
   /**
-   * Predicate returning @c true if this Output's "id" attribute is set.
+   * Returns the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite.
    *
-   * @return @c true if this Output's "id" attribute has been set, otherwise
-   * @c false is returned.
+   * @return the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite as a string.
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
+   * The possible values returned by this method are:
+   * @li @c "bound"
+   * @li @c "unbound"
+   * @li @c "either"
+   * @li @c "invalid OutwardBindingSiteBindingStatus"
+   */
+  const std::string& getBindingStatusAsString() const;
+
+
+  /**
+   * Returns the value of the "component" attribute of this OutwardBindingSite.
+   *
+   * @return the value of the "component" attribute of this OutwardBindingSite
+   * as a string.
+   */
+  const std::string& getComponent() const;
+
+
+  /**
+   * Predicate returning @c true if this OutwardBindingSite's "id" attribute is
+   * set.
+   *
+   * @return @c true if this OutwardBindingSite's "id" attribute has been set,
+   * otherwise @c false is returned.
    */
   virtual bool isSetId() const;
 
 
   /**
-   * Predicate returning @c true if this Output's "qualitativeSpecies"
-   * attribute is set.
-   *
-   * @return @c true if this Output's "qualitativeSpecies" attribute has been
-   * set, otherwise @c false is returned.
-   */
-  bool isSetQualitativeSpecies() const;
-
-
-  /**
-   * Predicate returning @c true if this Output's "transitionEffect" attribute
+   * Predicate returning @c true if this OutwardBindingSite's "name" attribute
    * is set.
    *
-   * @return @c true if this Output's "transitionEffect" attribute has been
+   * @return @c true if this OutwardBindingSite's "name" attribute has been
    * set, otherwise @c false is returned.
-   *
-   * @copydetails doc_output_transitionEffect
-   */
-  bool isSetTransitionEffect() const;
-
-
-  /**
-   * Predicate returning @c true if this Output's "name" attribute is set.
-   *
-   * @return @c true if this Output's "name" attribute has been set, otherwise
-   * @c false is returned.
    */
   virtual bool isSetName() const;
 
 
   /**
-   * Predicate returning @c true if this Output's "outputLevel" attribute is
-   * set.
+   * Predicate returning @c true if this OutwardBindingSite's "bindingStatus"
+   * attribute is set.
    *
-   * @return @c true if this Output's "outputLevel" attribute has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this OutwardBindingSite's "bindingStatus" attribute has
+   * been set, otherwise @c false is returned.
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
    */
-  bool isSetOutputLevel() const;
+  bool isSetBindingStatus() const;
 
 
   /**
-   * Sets the value of the "id" attribute of this Output.
+   * Predicate returning @c true if this OutwardBindingSite's "component"
+   * attribute is set.
+   *
+   * @return @c true if this OutwardBindingSite's "component" attribute has
+   * been set, otherwise @c false is returned.
+   */
+  bool isSetComponent() const;
+
+
+  /**
+   * Sets the value of the "id" attribute of this OutwardBindingSite.
    *
    * @param id std::string& value of the "id" attribute to be set.
    *
@@ -295,53 +287,7 @@ public:
 
 
   /**
-   * Sets the value of the "qualitativeSpecies" attribute of this Output.
-   *
-   * @param qualitativeSpecies std::string& value of the "qualitativeSpecies"
-   * attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setQualitativeSpecies(const std::string& qualitativeSpecies);
-
-
-  /**
-   * Sets the value of the "transitionEffect" attribute of this Output.
-   *
-   * @param transitionEffect @if clike TransitionOutputEffect_t@else int@endif
-   * value of the "transitionEffect" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * @copydetails doc_output_transitionEffect
-   */
-  int setTransitionEffect(const TransitionOutputEffect_t transitionEffect);
-
-
-  /**
-   * Sets the value of the "transitionEffect" attribute of this Output.
-   *
-   * @param transitionEffect std::string& of the "transitionEffect" attribute
-   * to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * @copydetails doc_output_transitionEffect
-   */
-  int setTransitionEffect(const std::string& transitionEffect);
-
-
-  /**
-   * Sets the value of the "name" attribute of this Output.
+   * Sets the value of the "name" attribute of this OutwardBindingSite.
    *
    * @param name std::string& value of the "name" attribute to be set.
    *
@@ -355,20 +301,55 @@ public:
 
 
   /**
-   * Sets the value of the "outputLevel" attribute of this Output.
+   * Sets the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite.
    *
-   * @param outputLevel int value of the "outputLevel" attribute to be set.
+   * @param bindingStatus @if clike BindingStatus_t@else int@endif value of the
+   * "bindingStatus" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
+   */
+  int setBindingStatus(const BindingStatus_t bindingStatus);
+
+
+  /**
+   * Sets the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite.
+   *
+   * @param bindingStatus std::string& of the "bindingStatus" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
+   */
+  int setBindingStatus(const std::string& bindingStatus);
+
+
+  /**
+   * Sets the value of the "component" attribute of this OutwardBindingSite.
+   *
+   * @param component std::string& value of the "component" attribute to be
+   * set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setOutputLevel(int outputLevel);
+  int setComponent(const std::string& component);
 
 
   /**
-   * Unsets the value of the "id" attribute of this Output.
+   * Unsets the value of the "id" attribute of this OutwardBindingSite.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -378,28 +359,7 @@ public:
 
 
   /**
-   * Unsets the value of the "qualitativeSpecies" attribute of this Output.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  int unsetQualitativeSpecies();
-
-
-  /**
-   * Unsets the value of the "transitionEffect" attribute of this Output.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * @copydetails doc_output_transitionEffect
-   */
-  int unsetTransitionEffect();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this Output.
+   * Unsets the value of the "name" attribute of this OutwardBindingSite.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -409,13 +369,25 @@ public:
 
 
   /**
-   * Unsets the value of the "outputLevel" attribute of this Output.
+   * Unsets the value of the "bindingStatus" attribute of this
+   * OutwardBindingSite.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_outwardbindingsite_bindingStatus
+   */
+  int unsetBindingStatus();
+
+
+  /**
+   * Unsets the value of the "component" attribute of this OutwardBindingSite.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetOutputLevel();
+  int unsetComponent();
 
 
   /**
@@ -426,22 +398,23 @@ public:
 
 
   /**
-   * Returns the XML element name of this Output object.
+   * Returns the XML element name of this OutwardBindingSite object.
    *
-   * For Output, the XML element name is always @c "output".
+   * For OutwardBindingSite, the XML element name is always
+   * @c "outwardBindingSite".
    *
-   * @return the name of this element, i.e. @c "output".
+   * @return the name of this element, i.e. @c "outwardBindingSite".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this Output object.
+   * Returns the libSBML type code for this OutwardBindingSite object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{SBML_QUAL_OUTPUT, SBMLQualTypeCode_t}.
+   * @sbmlconstant{SBML_MULTI_OUTWARD_BINDING_SITE, SBMLMultiTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -452,16 +425,16 @@ public:
 
 
   /**
-   * Predicate returning @c true if all the required attributes for this Output
-   * object have been set.
+   * Predicate returning @c true if all the required attributes for this
+   * OutwardBindingSite object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * Output have been set, otherwise @c false is returned.
+   * OutwardBindingSite have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the Output object are:
-   * @li "qualitativeSpecies"
-   * @li "transitionEffect"
+   * @note The required attributes for the OutwardBindingSite object are:
+   * @li "bindingStatus"
+   * @li "component"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -521,7 +494,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -541,7 +515,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -560,7 +535,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -580,7 +556,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -600,7 +577,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -620,7 +598,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this Output.
+   * Gets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -640,13 +619,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this Output's attribute "attributeName" is
-   * set.
+   * Predicate returning @c true if this OutwardBindingSite's attribute
+   * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this Output's attribute "attributeName" has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this OutwardBindingSite's attribute "attributeName" has
+   * been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -657,7 +636,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -676,7 +656,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -695,7 +676,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -714,7 +696,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -734,7 +717,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -754,7 +738,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this Output.
+   * Sets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -774,7 +759,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this Output.
+   * Unsets the value of the "attributeName" attribute of this
+   * OutwardBindingSite.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -856,256 +842,231 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new Output_t using the given SBML Level, Version and
- * &ldquo;qual&rdquo; package version.
+ * Creates a new OutwardBindingSite_t using the given SBML Level, Version and
+ * &ldquo;multi&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this Output_t.
+ * @param level an unsigned int, the SBML Level to assign to this
+ * OutwardBindingSite_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this Output_t.
+ * @param version an unsigned int, the SBML Version to assign to this
+ * OutwardBindingSite_t.
  *
- * @param pkgVersion an unsigned int, the SBML Qual Version to assign to this
- * Output_t.
+ * @param pkgVersion an unsigned int, the SBML Multi Version to assign to this
+ * OutwardBindingSite_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
-Output_t *
-Output_create(unsigned int level,
-              unsigned int version,
-              unsigned int pkgVersion);
+OutwardBindingSite_t *
+OutwardBindingSite_create(unsigned int level,
+                          unsigned int version,
+                          unsigned int pkgVersion);
 
 
 /**
- * Creates and returns a deep copy of this Output_t object.
+ * Creates and returns a deep copy of this OutwardBindingSite_t object.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @return a (deep) copy of this Output_t object.
+ * @return a (deep) copy of this OutwardBindingSite_t object.
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
-Output_t*
-Output_clone(const Output_t* o);
+OutwardBindingSite_t*
+OutwardBindingSite_clone(const OutwardBindingSite_t* obs);
 
 
 /**
- * Frees this Output_t object.
+ * Frees this OutwardBindingSite_t object.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 void
-Output_free(Output_t* o);
+OutwardBindingSite_free(OutwardBindingSite_t* obs);
 
 
 /**
- * Returns the value of the "id" attribute of this Output_t.
+ * Returns the value of the "id" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure whose id is sought.
+ * @param obs the OutwardBindingSite_t structure whose id is sought.
  *
- * @return the value of the "id" attribute of this Output_t as a pointer to a
- * string.
+ * @return the value of the "id" attribute of this OutwardBindingSite_t as a
+ * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 char *
-Output_getId(const Output_t * o);
+OutwardBindingSite_getId(const OutwardBindingSite_t * obs);
 
 
 /**
- * Returns the value of the "qualitativeSpecies" attribute of this Output_t.
+ * Returns the value of the "name" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure whose qualitativeSpecies is sought.
+ * @param obs the OutwardBindingSite_t structure whose name is sought.
  *
- * @return the value of the "qualitativeSpecies" attribute of this Output_t as
- * a pointer to a string.
+ * @return the value of the "name" attribute of this OutwardBindingSite_t as a
+ * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 char *
-Output_getQualitativeSpecies(const Output_t * o);
+OutwardBindingSite_getName(const OutwardBindingSite_t * obs);
 
 
 /**
- * Returns the value of the "transitionEffect" attribute of this Output_t.
+ * Returns the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t.
  *
- * @param o the Output_t structure whose transitionEffect is sought.
+ * @param obs the OutwardBindingSite_t structure whose bindingStatus is sought.
  *
- * @return the value of the "transitionEffect" attribute of this Output_t as a
- * TransitionOutputEffect_t.
+ * @return the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t as a BindingStatus_t.
  *
- * @copydetails doc_output_transitionEffect
- * @if clike The value is drawn from the enumeration @ref
- * TransitionOutputEffect_t @endif
+ * @copydetails doc_outwardbindingsite_bindingStatus
+ * @if clike The value is drawn from the enumeration @ref BindingStatus_t
+ * @endif
  * The possible values returned by this method are:
- * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
- * TransitionOutputEffect_t}
- * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
- * TransitionOutputEffect_t}
- * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
- * TransitionOutputEffect_t}
+ * @li @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}
+ * @li @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}
+ * @li @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t}
+ * @li @sbmlconstant{OUTWARD_BINDING_SITE_BINDING_STATUS_INVALID,
+ * BindingStatus_t}
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
-TransitionOutputEffect_t
-Output_getTransitionEffect(const Output_t * o);
+BindingStatus_t
+OutwardBindingSite_getBindingStatus(const OutwardBindingSite_t * obs);
 
 
 /**
- * Returns the value of the "transitionEffect" attribute of this Output_t.
+ * Returns the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t.
  *
- * @param o the Output_t structure whose transitionEffect is sought.
+ * @param obs the OutwardBindingSite_t structure whose bindingStatus is sought.
  *
- * @return the value of the "transitionEffect" attribute of this Output_t as a
- * const char *.
+ * @return the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t as a const char *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_output_transitionEffect
+ * @copydetails doc_outwardbindingsite_bindingStatus
  * The possible values returned by this method are:
- * @li @c "production"
- * @li @c "assignmentLevel"
- * @li @c "invalid OutputTransitionEffect"
+ * @li @c "bound"
+ * @li @c "unbound"
+ * @li @c "either"
+ * @li @c "invalid OutwardBindingSiteBindingStatus"
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 const char *
-Output_getTransitionEffectAsString(const Output_t * o);
+OutwardBindingSite_getBindingStatusAsString(const OutwardBindingSite_t * obs);
 
 
 /**
- * Returns the value of the "name" attribute of this Output_t.
+ * Returns the value of the "component" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure whose name is sought.
+ * @param obs the OutwardBindingSite_t structure whose component is sought.
  *
- * @return the value of the "name" attribute of this Output_t as a pointer to a
- * string.
+ * @return the value of the "component" attribute of this OutwardBindingSite_t
+ * as a pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 char *
-Output_getName(const Output_t * o);
+OutwardBindingSite_getComponent(const OutwardBindingSite_t * obs);
 
 
 /**
- * Returns the value of the "outputLevel" attribute of this Output_t.
- *
- * @param o the Output_t structure whose outputLevel is sought.
- *
- * @return the value of the "outputLevel" attribute of this Output_t as a
- * integer.
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_getOutputLevel(const Output_t * o);
-
-
-/**
- * Predicate returning @c 1 (true) if this Output_t's "id" attribute is set.
- *
- * @param o the Output_t structure.
- *
- * @return @c 1 (true) if this Output_t's "id" attribute has been set,
- * otherwise @c 0 (false) is returned.
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_isSetId(const Output_t * o);
-
-
-/**
- * Predicate returning @c 1 (true) if this Output_t's "qualitativeSpecies"
+ * Predicate returning @c 1 (true) if this OutwardBindingSite_t's "id"
  * attribute is set.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @return @c 1 (true) if this Output_t's "qualitativeSpecies" attribute has
- * been set, otherwise @c 0 (false) is returned.
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_isSetQualitativeSpecies(const Output_t * o);
-
-
-/**
- * Predicate returning @c 1 (true) if this Output_t's "transitionEffect"
- * attribute is set.
- *
- * @param o the Output_t structure.
- *
- * @return @c 1 (true) if this Output_t's "transitionEffect" attribute has been
+ * @return @c 1 (true) if this OutwardBindingSite_t's "id" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_output_transitionEffect
- *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_isSetTransitionEffect(const Output_t * o);
+OutwardBindingSite_isSetId(const OutwardBindingSite_t * obs);
 
 
 /**
- * Predicate returning @c 1 (true) if this Output_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this OutwardBindingSite_t's "name"
+ * attribute is set.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @return @c 1 (true) if this Output_t's "name" attribute has been set,
- * otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this OutwardBindingSite_t's "name" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_isSetName(const Output_t * o);
+OutwardBindingSite_isSetName(const OutwardBindingSite_t * obs);
 
 
 /**
- * Predicate returning @c 1 (true) if this Output_t's "outputLevel" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this OutwardBindingSite_t's
+ * "bindingStatus" attribute is set.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @return @c 1 (true) if this Output_t's "outputLevel" attribute has been set,
- * otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this OutwardBindingSite_t's "bindingStatus" attribute
+ * has been set, otherwise @c 0 (false) is returned.
  *
- * @memberof Output_t
+ * @copydetails doc_outwardbindingsite_bindingStatus
+ *
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_isSetOutputLevel(const Output_t * o);
+OutwardBindingSite_isSetBindingStatus(const OutwardBindingSite_t * obs);
 
 
 /**
- * Sets the value of the "id" attribute of this Output_t.
+ * Predicate returning @c 1 (true) if this OutwardBindingSite_t's "component"
+ * attribute is set.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
+ *
+ * @return @c 1 (true) if this OutwardBindingSite_t's "component" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof OutwardBindingSite_t
+ */
+LIBSBML_EXTERN
+int
+OutwardBindingSite_isSetComponent(const OutwardBindingSite_t * obs);
+
+
+/**
+ * Sets the value of the "id" attribute of this OutwardBindingSite_t.
+ *
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @param id const char * value of the "id" attribute to be set.
  *
@@ -1115,85 +1076,19 @@ Output_isSetOutputLevel(const Output_t * o);
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * Calling this function with @p id = @c NULL or an empty string is equivalent
- * to calling Output_unsetId().
+ * to calling OutwardBindingSite_unsetId().
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_setId(Output_t * o, const char * id);
+OutwardBindingSite_setId(OutwardBindingSite_t * obs, const char * id);
 
 
 /**
- * Sets the value of the "qualitativeSpecies" attribute of this Output_t.
+ * Sets the value of the "name" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
- *
- * @param qualitativeSpecies const char * value of the "qualitativeSpecies"
- * attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_setQualitativeSpecies(Output_t * o, const char * qualitativeSpecies);
-
-
-/**
- * Sets the value of the "transitionEffect" attribute of this Output_t.
- *
- * @param o the Output_t structure.
- *
- * @param transitionEffect TransitionOutputEffect_t value of the
- * "transitionEffect" attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @copydetails doc_output_transitionEffect
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_setTransitionEffect(Output_t * o,
-                           TransitionOutputEffect_t transitionEffect);
-
-
-/**
- * Sets the value of the "transitionEffect" attribute of this Output_t.
- *
- * @param o the Output_t structure.
- *
- * @param transitionEffect const char * of the "transitionEffect" attribute to
- * be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @copydetails doc_output_transitionEffect
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_setTransitionEffectAsString(Output_t * o,
-                                   const char * transitionEffect);
-
-
-/**
- * Sets the value of the "name" attribute of this Output_t.
- *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @param name const char * value of the "name" attribute to be set.
  *
@@ -1202,139 +1097,172 @@ Output_setTransitionEffectAsString(Output_t * o,
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * Calling this function with @p name = @c NULL or an empty string is
- * equivalent to calling Output_unsetName().
+ * equivalent to calling OutwardBindingSite_unsetName().
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_setName(Output_t * o, const char * name);
+OutwardBindingSite_setName(OutwardBindingSite_t * obs, const char * name);
 
 
 /**
- * Sets the value of the "outputLevel" attribute of this Output_t.
+ * Sets the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
- * @param outputLevel int value of the "outputLevel" attribute to be set.
+ * @param bindingStatus BindingStatus_t value of the "bindingStatus" attribute
+ * to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof Output_t
+ * @copydetails doc_outwardbindingsite_bindingStatus
+ *
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_setOutputLevel(Output_t * o, int outputLevel);
+OutwardBindingSite_setBindingStatus(OutwardBindingSite_t * obs,
+                                    BindingStatus_t bindingStatus);
 
 
 /**
- * Unsets the value of the "id" attribute of this Output_t.
+ * Sets the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
+ *
+ * @param bindingStatus const char * of the "bindingStatus" attribute to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_outwardbindingsite_bindingStatus
+ *
+ * @memberof OutwardBindingSite_t
+ */
+LIBSBML_EXTERN
+int
+OutwardBindingSite_setBindingStatusAsString(OutwardBindingSite_t * obs,
+                                            const char * bindingStatus);
+
+
+/**
+ * Sets the value of the "component" attribute of this OutwardBindingSite_t.
+ *
+ * @param obs the OutwardBindingSite_t structure.
+ *
+ * @param component const char * value of the "component" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof OutwardBindingSite_t
+ */
+LIBSBML_EXTERN
+int
+OutwardBindingSite_setComponent(OutwardBindingSite_t * obs,
+                                const char * component);
+
+
+/**
+ * Unsets the value of the "id" attribute of this OutwardBindingSite_t.
+ *
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_unsetId(Output_t * o);
+OutwardBindingSite_unsetId(OutwardBindingSite_t * obs);
 
 
 /**
- * Unsets the value of the "qualitativeSpecies" attribute of this Output_t.
+ * Unsets the value of the "name" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_unsetQualitativeSpecies(Output_t * o);
+OutwardBindingSite_unsetName(OutwardBindingSite_t * obs);
 
 
 /**
- * Unsets the value of the "transitionEffect" attribute of this Output_t.
+ * Unsets the value of the "bindingStatus" attribute of this
+ * OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_output_transitionEffect
+ * @copydetails doc_outwardbindingsite_bindingStatus
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_unsetTransitionEffect(Output_t * o);
+OutwardBindingSite_unsetBindingStatus(OutwardBindingSite_t * obs);
 
 
 /**
- * Unsets the value of the "name" attribute of this Output_t.
+ * Unsets the value of the "component" attribute of this OutwardBindingSite_t.
  *
- * @param o the Output_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof Output_t
- */
-LIBSBML_EXTERN
-int
-Output_unsetName(Output_t * o);
-
-
-/**
- * Unsets the value of the "outputLevel" attribute of this Output_t.
- *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_unsetOutputLevel(Output_t * o);
+OutwardBindingSite_unsetComponent(OutwardBindingSite_t * obs);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required attributes for this
- * Output_t object have been set.
+ * OutwardBindingSite_t object have been set.
  *
- * @param o the Output_t structure.
+ * @param obs the OutwardBindingSite_t structure.
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
- * Output_t have been set, otherwise @c 0 (false) is returned.
+ * OutwardBindingSite_t have been set, otherwise @c 0 (false) is returned.
  *
  *
- * @note The required attributes for the Output_t object are:
- * @li "qualitativeSpecies"
- * @li "transitionEffect"
+ * @note The required attributes for the OutwardBindingSite_t object are:
+ * @li "bindingStatus"
+ * @li "component"
  *
- * @memberof Output_t
+ * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
 int
-Output_hasRequiredAttributes(const Output_t * o);
+OutwardBindingSite_hasRequiredAttributes(const OutwardBindingSite_t * obs);
 
 
 
@@ -1354,6 +1282,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !Output_H__ */
+#endif /* !OutwardBindingSite_H__ */
 
 

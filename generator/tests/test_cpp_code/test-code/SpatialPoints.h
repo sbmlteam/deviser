@@ -200,8 +200,8 @@ public:
    * a CompressionKind_t.
    *
    * @copydetails doc_spatialpoints_compression
-   * @if clike The value is drawn from the enumeration @ref
-   * CompressionKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref CompressionKind_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
@@ -254,7 +254,7 @@ public:
    * DataKind_t.
    *
    * @copydetails doc_spatialpoints_dataType
-   * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref DataKind_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}
@@ -1031,8 +1031,8 @@ SpatialPoints_getId(const SpatialPoints_t * sp);
  * a CompressionKind_t.
  *
  * @copydetails doc_spatialpoints_compression
- * @if clike The value is drawn from the enumeration @ref
- * CompressionKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref CompressionKind_t
+ * @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
@@ -1093,7 +1093,7 @@ SpatialPoints_getArrayDataLength(const SpatialPoints_t * sp);
  * DataKind_t.
  *
  * @copydetails doc_spatialpoints_dataType
- * @if clike The value is drawn from the enumeration @ref DataKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref DataKind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_DATAKIND_DOUBLE, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_FLOAT, DataKind_t}

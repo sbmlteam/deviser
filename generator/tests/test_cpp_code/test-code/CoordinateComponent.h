@@ -183,8 +183,8 @@ public:
    * CoordinateKind_t.
    *
    * @copydetails doc_coordinatecomponent_type
-   * @if clike The value is drawn from the enumeration @ref
-   * CoordinateKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref CoordinateKind_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
    * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}
@@ -1160,8 +1160,8 @@ CoordinateComponent_getId(const CoordinateComponent_t * cc);
  * CoordinateKind_t.
  *
  * @copydetails doc_coordinatecomponent_type
- * @if clike The value is drawn from the enumeration @ref
- * CoordinateKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref CoordinateKind_t
+ * @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
  * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}

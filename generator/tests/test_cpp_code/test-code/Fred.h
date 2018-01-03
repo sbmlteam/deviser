@@ -200,7 +200,7 @@ public:
    * @return the value of the "kind" attribute of this Fred as a Kind_t.
    *
    * @copydetails doc_fred_kind
-   * @if clike The value is drawn from the enumeration @ref Kind_t@endif
+   * @if clike The value is drawn from the enumeration @ref Kind_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
    * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}
@@ -1276,7 +1276,7 @@ Fred_getStr(const Fred_t * f);
  * @return the value of the "kind" attribute of this Fred_t as a Kind_t.
  *
  * @copydetails doc_fred_kind
- * @if clike The value is drawn from the enumeration @ref Kind_t@endif
+ * @if clike The value is drawn from the enumeration @ref Kind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
  * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}

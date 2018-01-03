@@ -178,8 +178,8 @@ public:
    * as a FunctionKind_t.
    *
    * @copydetails doc_analyticvolume_functionType
-   * @if clike The value is drawn from the enumeration @ref
-   * FunctionKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref FunctionKind_t
+   * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_LAYERED, FunctionKind_t}
    * @li @sbmlconstant{ANALYTIC_VOLUME_FUNCTION_TYPE_INVALID, FunctionKind_t}
@@ -968,7 +968,7 @@ AnalyticVolume_getId(const AnalyticVolume_t * av);
  * as a FunctionKind_t.
  *
  * @copydetails doc_analyticvolume_functionType
- * @if clike The value is drawn from the enumeration @ref FunctionKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref FunctionKind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_LAYERED, FunctionKind_t}
  * @li @sbmlconstant{ANALYTIC_VOLUME_FUNCTION_TYPE_INVALID, FunctionKind_t}

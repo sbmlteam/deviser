@@ -181,7 +181,7 @@ public:
    * @return the value of the "kind" attribute of this Group as a GroupKind_t.
    *
    * @copydetails doc_group_kind
-   * @if clike The value is drawn from the enumeration @ref GroupKind_t@endif
+   * @if clike The value is drawn from the enumeration @ref GroupKind_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t}
    * @li @sbmlconstant{GROUP_KIND_PARTONOMY, GroupKind_t}
@@ -1239,7 +1239,7 @@ Group_getName(const Group_t * g);
  * @return the value of the "kind" attribute of this Group_t as a GroupKind_t.
  *
  * @copydetails doc_group_kind
- * @if clike The value is drawn from the enumeration @ref GroupKind_t@endif
+ * @if clike The value is drawn from the enumeration @ref GroupKind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{GROUP_KIND_CLASSIFICATION, GroupKind_t}
  * @li @sbmlconstant{GROUP_KIND_PARTONOMY, GroupKind_t}
