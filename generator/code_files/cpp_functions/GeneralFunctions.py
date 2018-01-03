@@ -618,12 +618,20 @@ class GeneralFunctions():
     # Functions for writing general functions: writeElement, accept
     #                                setDocument, write (if we have an array)
 
+    def has_child_elements(self):
+        if self.child_elements and len(self.child_elements) > 0:
+            return True
+        elif self.child_lo_elements and len(self.child_lo_elements) > 0:
+            return True
+        else:
+            return False
+
     # function to write writeElement
     def write_write_elements(self):
         if not self.status == 'cpp_not_list':
             if not(self.status == 'cpp_list' and len(self.child_elements) > 0):
                 return
-        elif self.is_doc_plugin:
+        elif self.is_doc_plugin and not self.has_child_elements():
             return
 
         # create comment parts
@@ -804,7 +812,7 @@ class GeneralFunctions():
     def write_set_document(self):
         if not self.status == 'cpp_not_list':
             return
-        elif self.is_doc_plugin:
+        elif self.is_doc_plugin and not self.has_child_elements():
             return
 
         # create comment parts
@@ -924,7 +932,7 @@ class GeneralFunctions():
     def write_enable_package(self):
         if not self.status == 'cpp_not_list':
             return
-        elif self.is_doc_plugin:
+        elif self.is_doc_plugin and not self.has_child_elements():
             return
 
         # create comment parts
@@ -1049,7 +1057,10 @@ class GeneralFunctions():
         # create the function declaration
         function = 'connectToParent'
         return_type = 'void'
-        arguments = ['{0}* base'.format(self.std_base)]
+        if self.is_doc_plugin:
+            arguments = ['{0}* base'.format(global_variables.baseClass)]
+        else:
+            arguments = ['{0}* base'.format(self.std_base)]
 
         # create the function implementation
         implementation = ['{0}::connectToParent(base)'.format(self.base_class)]

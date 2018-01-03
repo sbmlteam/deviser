@@ -68,7 +68,7 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
     def get_enum_attributes(self, class_object):
         has_enum = False
         enums = []
-        if 'root' in class_object:
+        if 'root' in class_object and len(class_object['root']) > 0:
             all_enums = class_object['root']['enums']
             for att in class_object['attribs']:
                 if att['type'] == 'enum':

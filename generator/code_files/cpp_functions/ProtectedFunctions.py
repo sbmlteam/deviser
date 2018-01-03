@@ -76,7 +76,10 @@ class ProtectedFunctions():
         self.attributes = class_object['class_attributes']
         self.all_attributes = class_object['attribs']
         self.has_math = class_object['has_math']
-        self.std_base = class_object['std_base']
+        if 'is_doc_plugin' in class_object and class_object['is_doc_plugin']:
+            self.std_base = global_variables.baseClass
+        else:
+            self.std_base = class_object['std_base']
         self.base_class = class_object['baseClass']
         self.has_std_base = class_object['has_std_base']
         self.child_base_class = ''

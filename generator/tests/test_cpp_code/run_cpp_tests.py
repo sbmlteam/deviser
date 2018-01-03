@@ -910,7 +910,14 @@ def main():
         list_of = ''
         test_case = 'spacing of refs'
         fail += run_test(name, num, class_name, test_case, list_of)
-        # name = 'arrays'
+
+        name = 'comp'
+        num = 3
+        class_name = 'CompSBMLDocumentPlugin'
+        test_case = 'document plugin with additional items'
+        fail += run_plug_test(name, class_name, test_case, num)
+
+       # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
         # fail += run_ext_test(name, class_name, test_case, 1)
@@ -932,12 +939,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'multi'
-        num = 4
-        class_name = 'OutwardBindingSite'
-        list_of = ''
-        test_case = 'spacing of refs'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        name = 'qual'
+        num = 1
+        class_name = 'QualSBMLDocumentPlugin'
+        test_case = 'document plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

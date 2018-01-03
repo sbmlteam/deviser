@@ -134,12 +134,31 @@ class ExtensionFiles():
 
         return class_object
 
+    def get_existing_doc_plugin(self):
+        existing_plugin = None
+        for plugin in self.package['plugins']:
+            if plugin['sbase'] == 'SBMLDocument':
+                existing_plugin = plugin
+                break
+        return existing_plugin
+
     def create_document_plugin_desc(self):
         up_package = strFunctions.upper_first(self.package['name'])
+        existing_doc_plugin = self.get_existing_doc_plugin()
+        attribs = []
+        extension = []
+        lo_extension = []
+        root = []
+        if existing_doc_plugin:
+            attribs = existing_doc_plugin['attribs']
+            extension = existing_doc_plugin['extension']
+            lo_extension = existing_doc_plugin['lo_extension']
+            root = existing_doc_plugin['root']
         up_language = self.language.upper()
-        doc_plug = dict({'attribs': [],
-                         'extension': [],
-                         'lo_extension': [],
+        doc_plug = dict({'attribs': attribs,
+                         'extension': extension,
+                         'lo_extension': lo_extension,
+                         'root': root,
                          'sbase': '{0}Document'.format(up_language),
                          'name': '{0}{1}DocumentPlugin'.format(up_package,
                                                                up_language),
@@ -154,6 +173,12 @@ class ExtensionFiles():
                          'hasMath': False,
                          'is_doc_plugin': True,
                          'reqd': self.package['required']})
+        for i in range(0, len(doc_plug['extension'])):
+            doc_plug['attribs'].append(self.get_attrib_descrip
+                                           (doc_plug['extension'][i]))
+
+        for elem in doc_plug['lo_extension']:
+            doc_plug['attribs'].append(self.get_attrib_descrip(elem))
         return doc_plug
 
     @staticmethod

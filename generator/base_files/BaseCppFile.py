@@ -158,7 +158,7 @@ class BaseCppFile(BaseFile.BaseFile):
         # if 'childrenOverwriteElementName' in class_object:
         #     self.overwrites_children = \
         #         class_object['childrenOverwriteElementName']
-        if 'root' in class_object:
+        if 'root' in class_object and len(class_object['root']) > 0:
             self.overwrites_children = \
                 query.overwrites_name(class_object['root'],
                                       class_object['name'])

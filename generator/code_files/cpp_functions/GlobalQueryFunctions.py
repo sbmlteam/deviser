@@ -71,7 +71,11 @@ class GlobalQueryFunctions():
         self.child_lo_elements = class_object['child_lo_elements']
         self.child_elements = class_object['child_elements']
         self.base_class = class_object['baseClass']
-        self.std_base = class_object['std_base']
+
+        if 'is_doc_plugin' in class_object and class_object['is_doc_plugin']:
+            self.std_base = global_variables.baseClass
+        else:
+            self.std_base = class_object['std_base']
 
         self.has_only_math = class_object['has_only_math']
         self.num_children = class_object['num_children']

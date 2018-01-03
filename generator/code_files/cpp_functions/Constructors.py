@@ -469,7 +469,7 @@ class Constructors():
         ns = '{0}ns'.format(package)
         constructor_args = self.write_constructor_args(ns)
         # create the function implementation
-        if self.is_doc_plugin or not self.has_children:
+        if not self.has_children:
             code = []
         else:
             code = [dict({'code_type': 'line', 'code': ['connectToChild()']})]
