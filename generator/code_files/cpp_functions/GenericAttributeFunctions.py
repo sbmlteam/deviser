@@ -473,10 +473,17 @@ class GenericAttributeFunctions():
                         else:
                             first = False
                         concname = conc['name']
+                        concelem = conc['name']
                         if conc['name'].lower() != conc['element'].lower():
-                            concname = strFunctions.lower_first(strFunctions.remove_prefix(conc['element']))
+                            concelem = strFunctions.lower_first(strFunctions.remove_prefix(conc['element']))
+                                    # hack for render
+                            if self.package == 'Render' or self.package == 'render':
+                                remove_prefix = True
+                                prefix_to_remove = strFunctions.upper_first(self.package)
+                                concelem = strFunctions.remove_prefix(conc['element'], False, remove_prefix, prefix_to_remove)
+
                         block.append('elementName == \"{0}\"'.format(concname))
-                        block.append('return create{0}()'.format(strFunctions.upper_first(concname)))
+                        block.append('return create{0}()'.format(strFunctions.upper_first(concelem)))
                         if len(block) > 2:
                             if_block = self.create_code_block('else_if', block)
                         else:

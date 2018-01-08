@@ -947,10 +947,10 @@ def main():
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
         name = 'render'
-        num = 12
-        class_name = 'Polygon'
+        num = 6
+        class_name = 'RenderGroup'
         list_of = ''
-        test_case = 'list of with different types elements'
+        test_case = 'very nested base'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

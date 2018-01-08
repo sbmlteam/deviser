@@ -43,7 +43,7 @@
             <concrete name="radialGradient" element="RadialGradient" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="stop">
+        <element name="GradientStop" typeCode="SBML_RENDER_GRADIENT_STOP" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false" elementName="stop">
           <attributes>
             <attribute name="offset" required="true" type="element" element="RelAbsVector" abstract="false"/>
             <attribute name="stop-color" required="true" type="string" abstract="false"/>
@@ -154,7 +154,7 @@
           <attributes>
             <attribute name="startHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
             <attribute name="endHead" required="false" type="SIdRef" element="LineEnding" abstract="false"/>
-            <attribute name="element" required="false" type="lo_element" element="RenderPoint" abstract="false"/>
+            <attribute name="renderPoint" required="false" type="lo_element" element="RenderPoint" xmlName="element" abstract="true"/>
           </attributes>
         </element>
         <element name="RenderPoint" typeCode="SBML_RENDER_POINT" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="SBase" abstract="true" elementName="element" listOfName="listOfElements" listOfClassName="ListOfCurveElements">
