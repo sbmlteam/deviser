@@ -208,13 +208,13 @@
             <attribute name="scale" required="true" type="element" element="UncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="NegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
+        <element name="NegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="negativeBinomialDistribution">
           <attributes>
             <attribute name="numberOfFailures" required="true" type="element" element="UncertValue" abstract="false"/>
             <attribute name="probability" required="true" type="element" element="UncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="ParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
+        <element name="ParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="paretoDistribution">
           <attributes>
             <attribute name="scale" required="true" type="element" element="UncertValue" abstract="false"/>
             <attribute name="shape" required="true" type="element" element="UncertValue" abstract="false"/>

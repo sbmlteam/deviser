@@ -1735,17 +1735,17 @@ RenderGroup::createChildObject(const std::string& elementName)
   {
     return createPolygon();
   }
-  else if (elementName == "g")
+  else if (elementName == "renderGroup")
   {
-    return createG();
+    return createRenderGroup();
   }
   else if (elementName == "text")
   {
     return createText();
   }
-  else if (elementName == "curve")
+  else if (elementName == "renderCurve")
   {
-    return createCurve();
+    return createRenderCurve();
   }
 
   return obj;

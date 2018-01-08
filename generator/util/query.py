@@ -193,11 +193,16 @@ def add_concrete_to_list(root, concrete, mylist):
     if current is not None:
         if current['abstract'] is False:
             concrete['typecode'] = current['typecode']
-            mylist.append(concrete)
+            if concrete not in mylist:
+                mylist.append(concrete)
         else:
             for c in current['concrete']:
                 if c != concrete:
                     add_concrete_to_list(root, c, mylist)
+                else:
+                    concrete['typecode'] = current['typecode']
+                    if concrete not in mylist:
+                        mylist.append(concrete)
 
 
 # return a set of attributes with any elements/lo_elements removed

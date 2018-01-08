@@ -683,7 +683,10 @@ class GeneralFunctions():
                         att['pluralName'].startswith('csg'):
                     name = 'CSG' + att['pluralName'][3:]
                 else:
-                    name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
+                    if 'xml_name' in att and att['xml_name'] != att['name']:
+                        name = strFunctions.upper_first(strFunctions.plural(att['xml_name']))
+                    else:
+                        name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
             if att['type'] == 'inline_lo_element':
                 implementation = ['unsigned int i = 0; i < getNum{0}(); i++'.format(name),
                                   'get{0}(i)->write(stream)'.format(strFunctions.singular(name))]

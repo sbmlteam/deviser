@@ -471,8 +471,11 @@ class GenericAttributeFunctions():
                         block.append('else if')
                     else:
                         first = False
-                    block.append('elementName == \"{0}\"'.format(conc['name']))
-                    block.append('return create{0}()'.format(strFunctions.upper_first(conc['name'])))
+                    concname = conc['name']
+                    if conc['name'].lower() != conc['element'].lower():
+                        concname = strFunctions.lower_first(strFunctions.remove_prefix(conc['element']))
+                    block.append('elementName == \"{0}\"'.format(concname))
+                    block.append('return create{0}()'.format(strFunctions.upper_first(concname)))
                     if len(block) > 2:
                         if_block = self.create_code_block('else_if', block)
                     else:
@@ -505,6 +508,20 @@ class GenericAttributeFunctions():
                      'virtual': True,
                      'object_name': self.struct_name,
                      'implementation': code})
+
+    def has_elements_with_same_xml_name(self):
+        for element in self.elements:
+            if 'concrete' in element and element['concrete']:
+                names_used = []
+                for conc in element['concrete']:
+                    conc_class = query.get_class(conc['element'], conc['root'])
+                    if conc_class:
+                        if 'elementName' in conc_class and conc_class['elementName'] != '':
+                            if conc_class['elementName'] in names_used:
+                                return True
+                            else:
+                                names_used.append(conc_class['elementName'])
+        return False
 
     # function to write add functions
     def write_add_object(self):
@@ -543,15 +560,31 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& elementName', 'const {0}* element'.format(global_variables.baseClass)]
 
         code = []
-        # create the function implementation
-        last_line = ['return LIBSBML_OPERATION_FAILED']
-        first = True
-        block = []
-        if_block = []
+        if not self.has_elements_with_same_xml_name():
+            # create the function implementation
+            last_line = ['return LIBSBML_OPERATION_FAILED']
+            first = True
+            block = []
+            if_block = []
 
-        for elem in self.elements:
-            if elem['concrete']:
-                for conc in elem['concrete']:
+            for elem in self.elements:
+                if elem['concrete']:
+                    for conc in elem['concrete']:
+                        if not first:
+                            block.append('else if')
+                        else:
+                            first = False
+                        elemName = elem['name']
+                        if not elem['element'] or elem['element'] == elemName:
+                            elemElem = elemName
+                        else:
+                            elemElem = elem['element']
+                        block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(conc['name'], conc['typecode']))
+                        if elem not in self.single_elements:
+                            block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                        else:
+                            block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                else:
                     if not first:
                         block.append('else if')
                     else:
@@ -561,34 +594,22 @@ class GenericAttributeFunctions():
                         elemElem = elemName
                     else:
                         elemElem = elem['element']
-                    block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(conc['name'], conc['typecode']))
+                    [elem_name, unused] = strFunctions.remove_hyphens(elemName)
+                    block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elemName, elem['typecode']))
                     if elem not in self.single_elements:
-                        block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
+                        block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
                     else:
-                        block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elemName), elemElem))
-            else:
-                if not first:
-                    block.append('else if')
-                else:
-                    first = False
-                elemName = elem['name']
-                if not elem['element'] or elem['element'] == elemName:
-                    elemElem = elemName
-                else:
-                    elemElem = elem['element']
-                [elem_name, unused] = strFunctions.remove_hyphens(elemName)
-                block.append('elementName == \"{0}\" && element->getTypeCode() == {1}'.format(elemName, elem['typecode']))
-                if elem not in self.single_elements:
-                    block.append('return add{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
-                else:
-                    block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
+                        block.append('return set{0}((const {1}*)(element))'.format(strFunctions.upper_first(elem_name), elemElem))
 
-            if len(block) > 2:
-                if_block = self.create_code_block('else_if', block)
-            else:
-                if_block = self.create_code_block('if', block)
-        code = [if_block,
-                self.create_code_block('line', last_line)]
+                if len(block) > 2:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
+            code = [if_block,
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('comment', ['TO DO']),
+                    self.create_code_block('line', ['return -1'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -631,15 +652,47 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& elementName', 'const std::string& id']
 
         code = []
-        # create the function implementation
-        last_line = ['return NULL']
-        first = True
-        block = []
-        if_block = []
+        if not self.has_elements_with_same_xml_name():
+            # create the function implementation
+            last_line = ['return NULL']
+            first = True
+            block = []
+            if_block = []
 
-        for elem in self.elements:
-            if elem['concrete']:
-                for conc in elem['concrete']:
+            for elem in self.elements:
+                if elem['concrete']:
+                    for conc in elem['concrete']:
+                        if not first:
+                            block.append('else if')
+                        else:
+                            first = False
+                        elemName = elem['name']
+                        if not elem['element'] or elem['element'] == elemName:
+                            elemElem = elemName
+                        else:
+                            elemElem = elem['element']
+                        block.append('elementName == \"{0}\"'.format(conc['name']))
+                        single = True
+                        if elem not in self.single_elements:
+                            thisClass = query.get_class(elemElem, self.classroot)
+                            single = False
+                            hasid = False
+                            for att in thisClass['attribs']:
+                                if att['name'] == 'id':
+                                    hasid = True
+                            if hasid:
+                                block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                            else:
+                                nested_if = self.create_code_block('if', ['get{0}(i)->getId() == id'.format(strFunctions.upper_first(elemName)),
+                                                                          'return remove{0}(i)'.format(strFunctions.upper_first(elemName))])
+                                nested_for = self.create_code_block('for', ['unsigned int i = 0; i < getNum{0}(); i++'
+                                                                            ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
+                                block.append(nested_for)
+                        else:
+                            [elem_name, unused] = strFunctions.remove_hyphens(elemName)
+                            block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
+                            block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
+                else:
                     if not first:
                         block.append('else if')
                     else:
@@ -649,7 +702,7 @@ class GenericAttributeFunctions():
                         elemElem = elemName
                     else:
                         elemElem = elem['element']
-                    block.append('elementName == \"{0}\"'.format(conc['name']))
+                    block.append('elementName == \"{0}\"'.format(elem['name']))
                     single = True
                     if elem not in self.single_elements:
                         thisClass = query.get_class(elemElem, self.classroot)
@@ -670,49 +723,21 @@ class GenericAttributeFunctions():
                         [elem_name, unused] = strFunctions.remove_hyphens(elemName)
                         block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
                         block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
-            else:
-                if not first:
-                    block.append('else if')
-                else:
-                    first = False
-                elemName = elem['name']
-                if not elem['element'] or elem['element'] == elemName:
-                    elemElem = elemName
-                else:
-                    elemElem = elem['element']
-                block.append('elementName == \"{0}\"'.format(elem['name']))
-                single = True
-                if elem not in self.single_elements:
-                    thisClass = query.get_class(elemElem, self.classroot)
-                    single = False
-                    hasid = False
-                    for att in thisClass['attribs']:
-                        if att['name'] == 'id':
-                            hasid = True
-                    if hasid:
-                        block.append('return remove{0}(id)'.format(strFunctions.upper_first(elemName)))
+                if single:
+                    if len(block) > 3:
+                        if_block = self.create_code_block('else_if', block)
                     else:
-                        nested_if = self.create_code_block('if', ['get{0}(i)->getId() == id'.format(strFunctions.upper_first(elemName)),
-                                                                  'return remove{0}(i)'.format(strFunctions.upper_first(elemName))])
-                        nested_for = self.create_code_block('for', ['unsigned int i = 0; i < getNum{0}(); i++'
-                                                                    ''.format(strFunctions.plural(strFunctions.upper_first(elemName))), nested_if])
-                        block.append(nested_for)
+                        if_block = self.create_code_block('if', block)
                 else:
-                    [elem_name, unused] = strFunctions.remove_hyphens(elemName)
-                    block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
-                    block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
-            if single:
-                if len(block) > 3:
-                    if_block = self.create_code_block('else_if', block)
-                else:
-                    if_block = self.create_code_block('if', block)
-            else:
-                if len(block) > 2:
-                    if_block = self.create_code_block('else_if', block)
-                else:
-                    if_block = self.create_code_block('if', block)
-        code = [if_block,
-                self.create_code_block('line', last_line)]
+                    if len(block) > 2:
+                        if_block = self.create_code_block('else_if', block)
+                    else:
+                        if_block = self.create_code_block('if', block)
+            code = [if_block,
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('comment', ['TO DO']),
+                    self.create_code_block('line', ['return NULL'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -755,35 +780,39 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& elementName']
 
         code = []
-        # create the function implementation
-        first_line = ['unsigned int n = 0']
-        last_line = ['return n']
-        first = True
-        block = []
-        if_block = []
+        if not self.has_elements_with_same_xml_name():
+            # create the function implementation
+            first_line = ['unsigned int n = 0']
+            last_line = ['return n']
+            first = True
+            block = []
+            if_block = []
 
-        for elem in self.elements:
-            if not first:
-                block.append('else if')
-            else:
-                first = False
-            block.append('elementName == \"{0}\"'.format(elem['name']))
-            if elem in self.lo_elements:
-                name = strFunctions.plural(strFunctions.upper_first(elem['name']))
-                block.append('return getNum{0}()'.format(name))
-            else:
-                [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
-                nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem_name)),
-                             'return 1']
-                nested_if_block = self.create_code_block('if', nested_if)
-                block.append(nested_if_block)
-            if len(block) > 2:
-                if_block = self.create_code_block('else_if', block)
-            else:
-                if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+            for elem in self.elements:
+                if not first:
+                    block.append('else if')
+                else:
+                    first = False
+                block.append('elementName == \"{0}\"'.format(elem['name']))
+                if elem in self.lo_elements:
+                    name = strFunctions.plural(strFunctions.upper_first(elem['name']))
+                    block.append('return getNum{0}()'.format(name))
+                else:
+                    [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                    nested_if = ['isSet{0}()'.format(strFunctions.upper_first(elem_name)),
+                                 'return 1']
+                    nested_if_block = self.create_code_block('if', nested_if)
+                    block.append(nested_if_block)
+                if len(block) > 2:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('comment', ['TO DO']),
+                    self.create_code_block('line', ['return 0'])]
 
         # return the parts
         return dict({'title_line': title_line,
@@ -826,32 +855,36 @@ class GenericAttributeFunctions():
         arguments = ['const std::string& elementName', 'unsigned int index']
 
         code = []
-        # create the function implementation
-        first_line = ['{0}* obj = NULL'.format(global_variables.baseClass)]
-        last_line = ['return obj']
-        first = True
-        block = []
-        if_block = []
+        if not self.has_elements_with_same_xml_name():
+            # create the function implementation
+            first_line = ['{0}* obj = NULL'.format(global_variables.baseClass)]
+            last_line = ['return obj']
+            first = True
+            block = []
+            if_block = []
 
-        for elem in self.elements:
-            if not first:
-                block.append('else if')
-            else:
-                first = False
-            block.append('elementName == \"{0}\"'.format(elem['name']))
-            [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
-            if elem in self.single_elements:
-                block.append('return get{0}()'.format(strFunctions.upper_first(elem_name)))
-            else:
-                block.append('return get{0}(index)'.format(strFunctions.upper_first(elem_name)))
+            for elem in self.elements:
+                if not first:
+                    block.append('else if')
+                else:
+                    first = False
+                block.append('elementName == \"{0}\"'.format(elem['name']))
+                [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                if elem in self.single_elements:
+                    block.append('return get{0}()'.format(strFunctions.upper_first(elem_name)))
+                else:
+                    block.append('return get{0}(index)'.format(strFunctions.upper_first(elem_name)))
 
-            if len(block) > 2:
-                if_block = self.create_code_block('else_if', block)
-            else:
-                if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+                if len(block) > 2:
+                    if_block = self.create_code_block('else_if', block)
+                else:
+                    if_block = self.create_code_block('if', block)
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('comment', ['TO DO']),
+                    self.create_code_block('line', ['return NULL'])]
 
         # return the parts
         return dict({'title_line': title_line,

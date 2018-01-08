@@ -867,6 +867,13 @@ def main():
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'render'
+        num = 12
+        class_name = 'Polygon'
+        list_of = ''
+        test_case = 'list of with different types elements'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'render'
         class_name = 'RenderSBMLError'
         test_case = 'error enumeration '
         fail += run_valid_test(name, class_name, test_case)
@@ -939,12 +946,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'qual'
-        num = 1
-        class_name = 'QualSBMLDocumentPlugin'
-        test_case = 'document plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
-
+        name = 'new_distrib_test'
+        num = 36
+        class_name = 'UncertaintyA'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
