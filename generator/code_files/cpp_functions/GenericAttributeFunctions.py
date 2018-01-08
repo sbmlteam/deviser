@@ -460,41 +460,46 @@ class GenericAttributeFunctions():
             first_line = ['{0}* obj = NULL'.format(self.base_class)]
 
         last_line = ['return obj']
-        first = True
-        block = []
-        if_block = []
+        if not self.has_elements_with_same_xml_name():
+            first = True
+            block = []
+            if_block = []
 
-        for elem in self.elements:
-            if elem['concrete']:
-                for conc in elem['concrete']:
+            for elem in self.elements:
+                if elem['concrete']:
+                    for conc in elem['concrete']:
+                        if not first:
+                            block.append('else if')
+                        else:
+                            first = False
+                        concname = conc['name']
+                        if conc['name'].lower() != conc['element'].lower():
+                            concname = strFunctions.lower_first(strFunctions.remove_prefix(conc['element']))
+                        block.append('elementName == \"{0}\"'.format(concname))
+                        block.append('return create{0}()'.format(strFunctions.upper_first(concname)))
+                        if len(block) > 2:
+                            if_block = self.create_code_block('else_if', block)
+                        else:
+                            if_block = self.create_code_block('if', block)
+                else:
                     if not first:
                         block.append('else if')
                     else:
                         first = False
-                    concname = conc['name']
-                    if conc['name'].lower() != conc['element'].lower():
-                        concname = strFunctions.lower_first(strFunctions.remove_prefix(conc['element']))
-                    block.append('elementName == \"{0}\"'.format(concname))
-                    block.append('return create{0}()'.format(strFunctions.upper_first(concname)))
+                    block.append('elementName == \"{0}\"'.format(elem['name']))
+                    [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                    block.append('return create{0}()'.format(strFunctions.upper_first(elem_name)))
                     if len(block) > 2:
                         if_block = self.create_code_block('else_if', block)
                     else:
                         if_block = self.create_code_block('if', block)
-            else:
-                if not first:
-                    block.append('else if')
-                else:
-                    first = False
-                block.append('elementName == \"{0}\"'.format(elem['name']))
-                [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
-                block.append('return create{0}()'.format(strFunctions.upper_first(elem_name)))
-                if len(block) > 2:
-                    if_block = self.create_code_block('else_if', block)
-                else:
-                    if_block = self.create_code_block('if', block)
-        code = [self.create_code_block('line', first_line),
-                if_block,
-                self.create_code_block('line', last_line)]
+            code = [self.create_code_block('line', first_line),
+                    if_block,
+                    self.create_code_block('line', last_line)]
+        else:
+            code = [self.create_code_block('line', first_line),
+                    self.create_code_block('comment', ['TO DO']),
+                    self.create_code_block('line', last_line)]
 
         # return the parts
         return dict({'title_line': title_line,

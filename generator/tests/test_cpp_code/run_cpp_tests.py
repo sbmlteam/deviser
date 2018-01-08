@@ -946,12 +946,13 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib_test'
-        num = 36
-        class_name = 'UncertaintyA'
+        name = 'render'
+        num = 12
+        class_name = 'Polygon'
         list_of = ''
-        test_case = 'concrete class'
+        test_case = 'list of with different types elements'
         fail += run_test(name, num, class_name, test_case, list_of)
+
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail

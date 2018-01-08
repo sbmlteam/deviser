@@ -674,14 +674,7 @@ Polygon::createChildObject(const std::string& elementName)
 {
   GraphicalPrimitive2D* obj = NULL;
 
-  if (elementName == "renderPoint")
-  {
-    return createRenderPoint();
-  }
-  else if (elementName == "renderCubicBezier")
-  {
-    return createRenderCubicBezier();
-  }
+  // TO DO
 
   return obj;
 }
