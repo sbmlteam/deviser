@@ -227,7 +227,7 @@
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="roleList" required="false" type="string" abstract="false"/>
             <attribute name="typeList" required="false" type="string" abstract="false"/>
-            <attribute name="g" required="false" type="element" element="RenderGroup" abstract="false"/>
+            <attribute name="group" required="false" type="element" element="RenderGroup" xmlName="g" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="style" element="GlobalStyle" minNumChildren="0" maxNumChildren="0"/>
@@ -247,8 +247,8 @@
             <attribute name="lineEnding" required="false" type="lo_element" element="LineEnding" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="renderInformation" element="globalRenderInformation" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="renderInformation" element="localRenderInformation" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="renderInformation" element="GlobalRenderInformation" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="renderInformation" element="LocalRenderInformation" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="DefaultValues" typeCode="SBML_RENDER_DEFAULTS" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
