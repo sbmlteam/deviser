@@ -36,7 +36,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="spreadMethod" required="false" type="enum" element="GradientSpreadMethod" abstract="false"/>
-            <attribute name="stop" required="false" type="inline_lo_element" element="GradientStop" abstract="false"/>
+            <attribute name="gradientStop" required="false" type="inline_lo_element" element="GradientStop" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="linearGradient" element="LinearGradient" minNumChildren="0" maxNumChildren="0"/>
@@ -243,7 +243,7 @@
             <attribute name="referenceRenderInformation" required="false" type="SIdRef" element="RenderInformationBase" abstract="false"/>
             <attribute name="backgroundColor" required="false" type="string" abstract="false"/>
             <attribute name="colorDefinition" required="false" type="lo_element" element="ColorDefinition" abstract="false"/>
-            <attribute name="gradientDefinition" required="false" type="lo_element" element="GradientBase" abstract="false"/>
+            <attribute name="gradientBase" required="false" type="lo_element" element="GradientBase" xmlName="gradientDefinition" abstract="true"/>
             <attribute name="lineEnding" required="false" type="lo_element" element="LineEnding" abstract="false"/>
           </attributes>
           <concretes>
