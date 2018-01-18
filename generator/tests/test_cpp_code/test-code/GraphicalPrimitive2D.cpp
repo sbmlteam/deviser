@@ -515,41 +515,6 @@ GraphicalPrimitive2D::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this
- * GraphicalPrimitive2D.
- */
-int
-GraphicalPrimitive2D::getAttribute(const std::string& attributeName,
-                                   const char* value) const
-{
-  int return_value = GraphicalPrimitive1D::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "fill")
-  {
-    value = getFill().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "fill-rule")
-  {
-    value = getFillRuleAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this GraphicalPrimitive2D's attribute
  * "attributeName" is set.
  */
@@ -659,34 +624,6 @@ GraphicalPrimitive2D::setAttribute(const std::string& attributeName,
 int
 GraphicalPrimitive2D::setAttribute(const std::string& attributeName,
                                    const std::string& value)
-{
-  int return_value = GraphicalPrimitive1D::setAttribute(attributeName, value);
-
-  if (attributeName == "fill")
-  {
-    return_value = setFill(value);
-  }
-  else if (attributeName == "fill-rule")
-  {
-    return_value = setFillRule(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this
- * GraphicalPrimitive2D.
- */
-int
-GraphicalPrimitive2D::setAttribute(const std::string& attributeName,
-                                   const char* value)
 {
   int return_value = GraphicalPrimitive1D::setAttribute(attributeName, value);
 

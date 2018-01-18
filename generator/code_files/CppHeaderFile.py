@@ -470,8 +470,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = attrib_functions.write_get(string_atts, 'std::string')
         self.write_function_declaration(code, exclude=True)
 
-        code = attrib_functions.write_get(string_atts, 'const char*')
-        self.write_function_declaration(code, exclude=True)
+        # code = attrib_functions.write_get(string_atts, 'const char*')
+        # self.write_function_declaration(code, exclude=True)
 
         code = attrib_functions.write_is_set(query.get_unique_attributes(self.class_attributes))
         self.write_function_declaration(code, exclude=True)
@@ -491,8 +491,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         code = attrib_functions.write_set(string_atts, 'const std::string&')
         self.write_function_declaration(code, exclude=True)
 
-        code = attrib_functions.write_set(string_atts, 'const char*')
-        self.write_function_declaration(code, exclude=True)
+        # code = attrib_functions.write_set(string_atts, 'const char*')
+        # self.write_function_declaration(code, exclude=True)
 
         code = attrib_functions.write_unset(query.get_unique_attributes(self.class_attributes))
         self.write_function_declaration(code, exclude=True)

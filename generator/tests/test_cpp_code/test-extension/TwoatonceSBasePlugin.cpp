@@ -598,25 +598,6 @@ TwoatonceSBasePlugin::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this
- * TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::getAttribute(const std::string& attributeName,
-                                   const char* value) const
-{
-  int return_value = SBasePlugin::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this TwoatonceSBasePlugin's attribute
  * "attributeName" is set.
  */
@@ -717,25 +698,6 @@ TwoatonceSBasePlugin::setAttribute(const std::string& attributeName,
 int
 TwoatonceSBasePlugin::setAttribute(const std::string& attributeName,
                                    const std::string& value)
-{
-  int return_value = SBasePlugin::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this
- * TwoatonceSBasePlugin.
- */
-int
-TwoatonceSBasePlugin::setAttribute(const std::string& attributeName,
-                                   const char* value)
 {
   int return_value = SBasePlugin::setAttribute(attributeName, value);
 

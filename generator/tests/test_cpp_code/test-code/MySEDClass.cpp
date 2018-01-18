@@ -329,35 +329,6 @@ MySEDClass::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this MySEDClass.
- */
-int
-MySEDClass::getAttribute(const std::string& attributeName,
-                         const char* value) const
-{
-  int return_value = SedBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this MySEDClass's attribute "attributeName"
  * is set.
  */
@@ -454,28 +425,6 @@ MySEDClass::setAttribute(const std::string& attributeName, unsigned int value)
 int
 MySEDClass::setAttribute(const std::string& attributeName,
                          const std::string& value)
-{
-  int return_value = SedBase::setAttribute(attributeName, value);
-
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this MySEDClass.
- */
-int
-MySEDClass::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 

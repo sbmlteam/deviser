@@ -482,34 +482,6 @@ Def::getAttribute(const std::string& attributeName, std::string& value) const
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Def.
- */
-int
-Def::getAttribute(const std::string& attributeName, const char* value) const
-{
-  int return_value = SBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "letter")
-  {
-    value = getLetter().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this Def's attribute "attributeName" is set.
  */
 bool
@@ -604,28 +576,6 @@ Def::setAttribute(const std::string& attributeName, unsigned int value)
  */
 int
 Def::setAttribute(const std::string& attributeName, const std::string& value)
-{
-  int return_value = SBase::setAttribute(attributeName, value);
-
-  if (attributeName == "letter")
-  {
-    return_value = setLetter(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this Def.
- */
-int
-Def::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

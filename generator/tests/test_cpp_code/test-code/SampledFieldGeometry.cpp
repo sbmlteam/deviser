@@ -639,36 +639,6 @@ SampledFieldGeometry::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this
- * SampledFieldGeometry.
- */
-int
-SampledFieldGeometry::getAttribute(const std::string& attributeName,
-                                   const char* value) const
-{
-  int return_value = GeometryDefinition::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "sampledField")
-  {
-    value = getSampledField().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this SampledFieldGeometry's attribute
  * "attributeName" is set.
  */
@@ -774,30 +744,6 @@ SampledFieldGeometry::setAttribute(const std::string& attributeName,
 int
 SampledFieldGeometry::setAttribute(const std::string& attributeName,
                                    const std::string& value)
-{
-  int return_value = GeometryDefinition::setAttribute(attributeName, value);
-
-  if (attributeName == "sampledField")
-  {
-    return_value = setSampledField(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this
- * SampledFieldGeometry.
- */
-int
-SampledFieldGeometry::setAttribute(const std::string& attributeName,
-                                   const char* value)
 {
   int return_value = GeometryDefinition::setAttribute(attributeName, value);
 

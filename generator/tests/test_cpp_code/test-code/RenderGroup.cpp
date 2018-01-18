@@ -1394,65 +1394,6 @@ RenderGroup::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this RenderGroup.
- */
-int
-RenderGroup::getAttribute(const std::string& attributeName,
-                          const char* value) const
-{
-  int return_value = GraphicalPrimitive2D::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "startHead")
-  {
-    value = getStartHead().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "endHead")
-  {
-    value = getEndHead().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "font-family")
-  {
-    value = getFontFamily().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "font-weight")
-  {
-    value = getFontWeightAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "font-style")
-  {
-    value = getFontStyleAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "text-anchor")
-  {
-    value = getTextAnchorAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "vtext-anchor")
-  {
-    value = getVtextAnchorAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this RenderGroup's attribute "attributeName"
  * is set.
  */
@@ -1574,52 +1515,6 @@ RenderGroup::setAttribute(const std::string& attributeName,
 int
 RenderGroup::setAttribute(const std::string& attributeName,
                           const std::string& value)
-{
-  int return_value = GraphicalPrimitive2D::setAttribute(attributeName, value);
-
-  if (attributeName == "startHead")
-  {
-    return_value = setStartHead(value);
-  }
-  else if (attributeName == "endHead")
-  {
-    return_value = setEndHead(value);
-  }
-  else if (attributeName == "font-family")
-  {
-    return_value = setFontFamily(value);
-  }
-  else if (attributeName == "font-weight")
-  {
-    return_value = setFontWeight(value);
-  }
-  else if (attributeName == "font-style")
-  {
-    return_value = setFontStyle(value);
-  }
-  else if (attributeName == "text-anchor")
-  {
-    return_value = setTextAnchor(value);
-  }
-  else if (attributeName == "vtext-anchor")
-  {
-    return_value = setVtextAnchor(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this RenderGroup.
- */
-int
-RenderGroup::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = GraphicalPrimitive2D::setAttribute(attributeName, value);
 

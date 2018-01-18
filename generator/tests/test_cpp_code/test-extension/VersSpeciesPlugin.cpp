@@ -1010,45 +1010,6 @@ VersSpeciesPlugin::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this VersSpeciesPlugin.
- */
-int
-VersSpeciesPlugin::getAttribute(const std::string& attributeName,
-                                const char* value) const
-{
-  int return_value = SBasePlugin::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "species_att_v1")
-  {
-    value = getSpecies_att_v1().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "string_plugin_att")
-  {
-    value = getString_plugin_att().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "species_att_v2")
-  {
-    value = getSpecies_att_v2().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this VersSpeciesPlugin's attribute
  * "attributeName" is set.
  */
@@ -1155,37 +1116,6 @@ VersSpeciesPlugin::setAttribute(const std::string& attributeName,
 int
 VersSpeciesPlugin::setAttribute(const std::string& attributeName,
                                 const std::string& value)
-{
-  int return_value = SBasePlugin::setAttribute(attributeName, value);
-
-  if (attributeName == "species_att_v1")
-  {
-    return_value = setSpecies_att_v1(value);
-  }
-  else if (attributeName == "string_plugin_att")
-  {
-    return_value = setString_plugin_att(value);
-  }
-  else if (attributeName == "species_att_v2")
-  {
-    return_value = setSpecies_att_v2(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this VersSpeciesPlugin.
- */
-int
-VersSpeciesPlugin::setAttribute(const std::string& attributeName,
-                                const char* value)
 {
   int return_value = SBasePlugin::setAttribute(attributeName, value);
 

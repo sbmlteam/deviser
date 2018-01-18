@@ -511,24 +511,6 @@ Polygon::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this Polygon.
- */
-int
-Polygon::getAttribute(const std::string& attributeName,
-                      const char* value) const
-{
-  int return_value = GraphicalPrimitive2D::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this Polygon's attribute "attributeName" is
  * set.
  */
@@ -620,23 +602,6 @@ Polygon::setAttribute(const std::string& attributeName, unsigned int value)
 int
 Polygon::setAttribute(const std::string& attributeName,
                       const std::string& value)
-{
-  int return_value = GraphicalPrimitive2D::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this Polygon.
- */
-int
-Polygon::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = GraphicalPrimitive2D::setAttribute(attributeName, value);
 

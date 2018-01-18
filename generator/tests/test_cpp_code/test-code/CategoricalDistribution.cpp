@@ -500,26 +500,6 @@ CategoricalDistribution::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this
- * CategoricalDistribution.
- */
-int
-CategoricalDistribution::getAttribute(const std::string& attributeName,
-                                      const char* value) const
-{
-  int return_value =
-    CategoricalUnivariateDistribution::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this CategoricalDistribution's attribute
  * "attributeName" is set.
  */
@@ -625,26 +605,6 @@ CategoricalDistribution::setAttribute(const std::string& attributeName,
 int
 CategoricalDistribution::setAttribute(const std::string& attributeName,
                                       const std::string& value)
-{
-  int return_value =
-    CategoricalUnivariateDistribution::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this
- * CategoricalDistribution.
- */
-int
-CategoricalDistribution::setAttribute(const std::string& attributeName,
-                                      const char* value)
 {
   int return_value =
     CategoricalUnivariateDistribution::setAttribute(attributeName, value);

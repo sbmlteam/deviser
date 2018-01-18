@@ -671,50 +671,6 @@ ClassThree::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this ClassThree.
- */
-int
-ClassThree::getAttribute(const std::string& attributeName,
-                         const char* value) const
-{
-  int return_value = SBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "number")
-  {
-    value = getNumberAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getNameAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "badName")
-  {
-    value = getBadNameAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "otherNum")
-  {
-    value = getOtherNumAsString().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this ClassThree's attribute "attributeName"
  * is set.
  */
@@ -823,40 +779,6 @@ ClassThree::setAttribute(const std::string& attributeName, unsigned int value)
 int
 ClassThree::setAttribute(const std::string& attributeName,
                          const std::string& value)
-{
-  int return_value = SBase::setAttribute(attributeName, value);
-
-  if (attributeName == "number")
-  {
-    return_value = setNumber(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "badName")
-  {
-    return_value = setBadName(value);
-  }
-  else if (attributeName == "otherNum")
-  {
-    return_value = setOtherNum(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this ClassThree.
- */
-int
-ClassThree::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

@@ -486,24 +486,6 @@ ContainerX::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this ContainerX.
- */
-int
-ContainerX::getAttribute(const std::string& attributeName,
-                         const char* value) const
-{
-  int return_value = SBase::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this ContainerX's attribute "attributeName"
  * is set.
  */
@@ -595,23 +577,6 @@ ContainerX::setAttribute(const std::string& attributeName, unsigned int value)
 int
 ContainerX::setAttribute(const std::string& attributeName,
                          const std::string& value)
-{
-  int return_value = SBase::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this ContainerX.
- */
-int
-ContainerX::setAttribute(const std::string& attributeName, const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 

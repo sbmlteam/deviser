@@ -946,11 +946,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'render'
-        num = 6
-        class_name = 'RenderGroup'
+        name = 'new_distrib'
+        num = 2
+        class_name = 'Distribution'
         list_of = ''
-        test_case = 'very nested base'
+        test_case = 'abstract class with multiple abstract children'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

@@ -576,35 +576,6 @@ GradientStop::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this GradientStop.
- */
-int
-GradientStop::getAttribute(const std::string& attributeName,
-                           const char* value) const
-{
-  int return_value = SBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSBML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "stop-color")
-  {
-    value = getStopColor().c_str();
-    return_value = LIBSBML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Predicate returning @c true if this GradientStop's attribute "attributeName"
  * is set.
  */
@@ -702,29 +673,6 @@ GradientStop::setAttribute(const std::string& attributeName,
 int
 GradientStop::setAttribute(const std::string& attributeName,
                            const std::string& value)
-{
-  int return_value = SBase::setAttribute(attributeName, value);
-
-  if (attributeName == "stop-color")
-  {
-    return_value = setStopColor(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this GradientStop.
- */
-int
-GradientStop::setAttribute(const std::string& attributeName,
-                           const char* value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
