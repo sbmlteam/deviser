@@ -866,8 +866,8 @@ The **Maximum number of children** field is used to indicate the maximum
 number of child objects a ListOf expects. Leaving this blank implies
 there is no stated maximum value for the number of children.
 
-.. todo::
-  Clarify what code might do with min/max numbers of children
+At present these values do not impact on the code generated for the classes. In future
+versions they will be applied as validation rules.
 
 
 The **ListOf attributes** table (which has the same fields as the table
