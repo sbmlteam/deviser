@@ -296,9 +296,6 @@ To integrate and compile the code with libSBML the fields requested are:
   SWIG is necessary for this. It is hoped in future to add a facility to 
   directly test the build using a Python interface.
 
-.. todo::
-  Replace screenshot
-
 
 Figure :num:`fig-preferences` illustrates 
 a case
