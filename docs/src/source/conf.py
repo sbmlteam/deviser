@@ -271,6 +271,9 @@ class CustomLatexFormatter(LatexFormatter):
 
 PygmentsBridge.latex_formatter = CustomLatexFormatter
 
+latex_elements = {
+  'classoptions': ',openany,oneside'
+}
 
 # -- Options for manual page output ---------------------------------------
 

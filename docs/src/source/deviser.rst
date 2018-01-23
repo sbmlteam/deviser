@@ -7,6 +7,7 @@ DEVISER
 ========
 
 .. toctree::
+   :numbered:
    :maxdepth: 6
 
    background   
