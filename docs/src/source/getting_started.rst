@@ -168,7 +168,7 @@ Useful links
 ~~~~~~~~~~~~
 
 1. libSBML source code (latest release):
-   https://sourceforge.net/projects/sbml/files/libsbml/5.14.0/stable/libSBML-5.14.0-core-src.tar.gz/download
+   https://sourceforge.net/projects/sbml/files/libsbml/5.16.0/stable/libSBML-5.16.0-core-src.tar.gz/download
    **Note that there may be a later release available.**
 
 2. libSBML source code (latest code):
