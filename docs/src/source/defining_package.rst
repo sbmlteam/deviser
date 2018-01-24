@@ -61,9 +61,11 @@ The Package **required** checkbox
 The **required** checkbox is used to indicate whether the package may
 change the mathematical interpretation of the core model ([SBML_L3]_) and corresponds
 to the required attribute on the <sbml> element declaring this package
-(see below).
+(see :numref:`xml_required`).
 
 .. code-block:: XML
+   :name: xml_required
+   :caption: The <sbml> element showing the required attribute.'.
   
    <sbml xmlns=http://www.sbml.org/sbml/level3/version1/core
          xmlns:foo=http://www.sbml.org/sbml/level3/version1/foo/version1
@@ -97,7 +99,7 @@ Custom copyright
 The ‘Custom copyright’ field allows user to specify a text file containing
 a custom copyright that will be added to all files in addition to the SBML 
 Team copyright. It is possible to completely replace the copyright with
-appropriate acknowledgement. See :ref:`licensing` .
+appropriate acknowledgement. See :numref:`licensing` .
 	
 The Package **Number** field
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,7 +109,7 @@ typecodes for this package. This is a required field.
 
 Clicking the information button will generate a pop-up window
 with information regarding the Number and Offset values used by existing
-L3 packages (Figure :num:`fig-offsets`). 
+L3 packages (:numref:`fig-offsets`). 
 
 .. _pkg-offset:
 
@@ -121,7 +123,7 @@ This is a required field.
 
 Clicking the information button will generate a pop-up window with information regarding
 the Number and Offset values used by existing L3 packages 
-(Figure :num:`fig-offsets`).
+(:numref:`fig-offsets`).
 
 .. _fig-offsets:
 .. figure:: ../screenshots/deviser-numbers-offsets-1.png
@@ -141,7 +143,7 @@ Fill in the core level and version and package version numbers. These
 default to **Core level** '3' and **Core version** '1' as SBML L3V1 is the only official 
 SBML Level 3 version at the time of writing. The package version (**Pkg Version**)
 defaults to '1'. Using Deviser to specify more than one version of a package
-is discussed in :ref:`mult-vers`.
+is discussed in :numref:`mult-vers`.
 
 
 .. _fig-version:
@@ -150,7 +152,7 @@ is discussed in :ref:`mult-vers`.
     The ‘Version’ panel.
 
 Once classes have been specified they will appear on this panel 
-(see Figure :num:`fig-full-decsr`).  The order in which they're listed 
+(see :numref:`fig-full-decsr`).  The order in which they're listed 
 dictates the order in which the generation code processes the classes.  
 This list can be rearranged, which is helpful in ensuring documentation 
 is written in a specific sequence.
@@ -213,7 +215,7 @@ represented as a class object.
    </listOfReactions>
 
 
-Figure :num:`fig-libsbml-class` shows a snapshot of libSBML class hierarchy 
+:numref:`fig-libsbml-class` shows a snapshot of libSBML class hierarchy 
 corresponding to
 :ref:`SBML snippet 1 above<SBML-snippet-reaction>`. Note the correspondence of names and the getXYZ
 functions etc.
@@ -242,8 +244,7 @@ specify the details for every new XML element that the package defines
 including classes that are abstract and/or used as base classes for
 other classes. You may find yourself repeating information but this is
 necessary to facilitate creating a valid definition that the
-auto-generation code can work with (see section `A note on repeated 
-information`_ ).
+auto-generation code can work with (see :numref:`repeated_info`).
 
 Select ‘Add Class’ from the toolbar or the ‘Edit’ menu.
 
@@ -262,7 +263,7 @@ The Class **Name** field
 *************************
 
 The **Name** field is the name of the class that will be used by the
-code generation (see XML ElementName below). This field is required and
+code generation (see :numref:`xml_element_name`). This field is required and
 must be populated.
 
 The Class **BaseClass** field
@@ -296,6 +297,8 @@ mandatory. The user must enter a value. Note that using the 'wand' will populate
 field with the default typecode
 SBML\_PACKAGE\_CLASS as above. 
 
+.. _xml_element_name:
+
 The Class **XML ElementName** field
 ************************************
 
@@ -304,7 +307,7 @@ the name of the element as it will appear in the XML output. This
 defaults to the class name with a lowercase first letter. An example of
 where this might be different from the default is if two packages use
 the same class name and it is necessary to distinguish between these in
-code. The example in Figure :num:`fig-foo-kl` shows a case where we have 
+code. The example in :numref:`fig-foo-kl` shows a case where we have 
 reused the
 class ‘KineticLaw’ within our package 'foo' and indicate that code should
 generate a class named FooKineticLaw but that text and the XML output
@@ -370,18 +373,13 @@ each attribute and child element for the class. These are added and
 deleted using the ‘+’ and ‘-‘ buttons to the left of this table. The 
 possible entries are explained in detail in the Section :ref:`add-atts`.
 
-.. raw:: latex
-
-  \clearpage
-
-
 .. _add-atts:
 
 Adding attributes and child elements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we expand on the fields in the **Class attributes and child
-elements** table for a class as shown in Figure :num:`fig-add-class`.
+elements** table for a class as shown in :numref:`fig-add-class`.
 These fields are identical to those in the **ListOf attributes** table 
 that appears when the **hasListOf** checkbox is checked.
 
@@ -449,6 +447,11 @@ and additionally Deviser Edit uses:
 C++ data type. The additional types accepted by Deviser are explained in
 detail in the sections below.
 
+.. raw:: latex
+
+  \clearpage
+
+
 It should be noted that the ‘Type’ used for each attribute/child element
 determines the code generated functions that will be produced. For
 attributes with one of the accepted SBML types the functions produced are
@@ -504,7 +507,7 @@ following field values:
 :Element: integer (the numeric type of the data)
 
 
-Figure :num:`fig-array-sampledfield` shows the Deviser Edit entry for the 
+:numref:`fig-array-sampledfield` shows the Deviser Edit entry for the 
 SampledField class. Note
 it also includes an attribute to record the length of the array. This proved
 useful when using this sort of construct.
@@ -551,7 +554,7 @@ following field values:
 
 
 The enumeration is declared fully by adding an
-enumeration to the package description (see `Add enum information`_).
+enumeration to the package description (see :numref:`add_enum`).
 
 .. _fig-array-enum:
 .. figure:: ../screenshots/deviser-array-enum.png
@@ -620,7 +623,7 @@ of another class that is a child of the defining class.
 :ref:`SBML snippet 3 above<SBML-snippet-event>` shows an Event from SBML Level 3 Core
 which has a Trigger child element. The Deviser Edit entries in the Attributes 
 and child element table for the Event class are shown 
-in Figure :num:`fig-core-event`. 
+in :numref:`fig-core-event`. 
 
 :ref:`Table 1<table1>`
 gives examples of the expected XML and the functions produced for type 'element'.
@@ -631,7 +634,7 @@ Attribute/child element type ‘lo\_element’
 
 This type is used to define a child that is an instance of a 'ListOf' class. In
 the :ref:`SBML Event<SBML-snippet-event>` shown the listOfEventAssignments is
-defined as a child of type 'lo\_element' (see Figure TBC). :ref:`Table 1<table1>` 
+defined as a child of type 'lo\_element' (see :numref:`fig-core-event`). :ref:`Table 1<table1>` 
 details the corresponding XML output and functions generated.
 
 .. tabularcolumns:: |p{1.25in}|p{2.25in}|p{2.5in}|
@@ -793,8 +796,8 @@ class and not instantiated directly. This is a situation that will not
 commonly occur but happens when there is multiple nesting of classes.
 The current ‘spatial’ package defines a CSGTransformation that inherits
 from CSGNode but also contains an element of that type 
-(see Figure :num:`fig-csgtransform-uml` and
-Figure :num:`fig-csgtransform-deviser`).
+(see :numref:`fig-csgtransform-uml` and
+:numref:`fig-csgtransform-deviser`).
 
 .. _fig-csgtransform-uml:
 .. figure:: ../figures/CSGTransformation-uml.png
@@ -940,6 +943,7 @@ should be left as ‘0’.
 
   \clearpage
 
+.. _repeated_info:
 
 A note on repeated information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1034,7 +1038,7 @@ name ‘FooParameter’ but want to have XML names of ‘parameter’ and
 
 
 
-Figure :num:`fig-uml-foo-kl` shows the UML diagram produced by Deviser Edit of the package
+:numref:`fig-uml-foo-kl` shows the UML diagram produced by Deviser Edit of the package
 ‘foo’ as described so far in examples 1 and 2 while the corresponding
 SBML is shown in :ref:`SBML snippet 4<sbml-4>`.
 
@@ -1069,7 +1073,7 @@ Example 3 – Adding a base class and derived classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we define a class that will be used as a base class for others (see
-Figure :num:`fig-foo-rule`).
+:numref:`fig-foo-rule`).
 
 .. _fig-foo-rule:
 .. figure:: ../screenshots/deviser-foo-rule.png
@@ -1085,7 +1089,7 @@ This class is a base class and we tick the isBaseClass checkbox. The
 
 Here we have specified that the ListOfFooRules may contain objects of
 type Assignment or Algebraic. We specify Algebraic as a new class in
-Figure :num:`fig-foo-algebraic` and Assignment in Figure :num:`fig-foo-assignment`.
+:numref:`fig-foo-algebraic` and Assignment in :numref:`fig-foo-assignment`.
 
 
 .. _fig-foo-algebraic:
@@ -1104,7 +1108,7 @@ Note that we have changed the BaseClass field to FooRule.
 The Assignment class illustrates a slightly more complex scenario. Here
 it derives from the baseClass FooRule and adds an attribute ‘variable’
 that is a reference to a FooParameter. It have also acts as a base class
-for two further classes FooRate and FooAssignment. Figure :num:`fig-uml-foo-rules` shows the
+for two further classes FooRate and FooAssignment. :numref:`fig-uml-foo-rules` shows the
 hierarchy and :ref:`SBML snippet 5<sbml-5>` the resulting XML.
 
 .. _fig-uml-foo-rules:
@@ -1155,7 +1159,7 @@ point of extension may be much further embedded within the SBML. Here
 necessary information that links the new package classes with other
 classes. Code for any given class in any relevant function then checks
 whether it has a plugin attached and passes control to the plugin if
-necessary. Figure 18 shows two plugins on the Model class, one by the
+necessary. :numref:`fig-libsbml-plugin` shows two plugins on the Model class, one by the
 ‘qual’ package and the other by the ‘fbc’ package. Note the names
 reflect the package and the object being extended.
 
@@ -1296,7 +1300,7 @@ the **hasAttributes** checkbox.
 The table **Child attributes and child elements** appears. This is used
 for adding attributes and child elements as previously described. Here
 we specify that the Model will have a required boolean attribute
-‘useFoo’ from the foo package (Figure :num:`fig-plugin-model`). Note that it is not necessary
+‘useFoo’ from the foo package (:numref:`fig-plugin-model`). Note that it is not necessary
 to specify child elements that originate in the package being defined
 as these that have already been listed as **Child classes**.
 
@@ -1326,6 +1330,8 @@ ListOfFooRules object to the Transition object.
 .. raw:: latex
 
   \clearpage
+
+.. _add_enum:
 
 Add enum information
 --------------------
@@ -1383,13 +1389,13 @@ Assume we have an object ‘extra’ that has an attribute called ‘sign’
 which is of an enumeration type ‘Sign’. Firstly we define the class
 ‘Extra’ and specify the attribute. In this case the **Type** of the
 attribute is ‘enum’ and the **Element** field gives the name of the
-enumeration type ‘Sign’ as shown in Figure :num:`fig-foo-extra`.
+enumeration type ‘Sign’ as shown in :numref:`fig-foo-extra`.
 
 Then it is necessary to specify the enumeration itself. Use the **Add
 Enum** button from the toolbar or Edit menu.
 
 The **Name** filed is Sign (which corresponds to the **Element** field in 
-the attribute table). Figure :num:`fig-enum-sign` shows that we have specified 
+the attribute table). :numref:`fig-enum-sign` shows that we have specified 
 that the enumeration sign has three
 possible values: ‘positive’, ‘negative’ and ‘neutral. Note we used the 
 **Quick Add** field to enter 'neutral' which resulted in the enumeration
@@ -1439,8 +1445,8 @@ Overview of a defined package
 ------------------------------
 
 Select ‘Version’ from the tree in the panel on the left hand side. Now
-that all the classes have been defined these are listed here (see Figure
-:num:`fig-full-decsr`) and the ordering can be adjusted. The order will dictate the order
+that all the classes have been defined these are listed here 
+(see :numref:`fig-full-decsr`) and the ordering can be adjusted. The order will dictate the order
 of the relevant sections in the TeX documents.
 
 .. _fig-full-decsr:
@@ -1473,7 +1479,7 @@ The **Validate Description** option
  
 **Validate Description** runs a series of internal checks on the
 information provided and produces a list of Errors and Warnings.
-When invoked a pop-up window (Figure :num:`fig-validation`) will appear with 
+When invoked a pop-up window (:numref:`fig-validation`) will appear with 
 either a list of errors and/or warnings or
 a confirmation that everything is consistent. The Copy button can be
 used to copy the contents of the report to the clipboard and thus makes
@@ -1514,7 +1520,7 @@ in the same way as described in this manual.
 
 Since new versions of a package are likely to resemble existing versions the
 entire version can be duplicated by right-clicking on the Version header in the
-tree view on the left panel and selecting **Duplicate** (see Figure :num:`deviser-util1`).  
+tree view on the left panel and selecting **Duplicate** (see :numref:`deviser-util1`).  
 
 .. _deviser-util1:
 .. figure:: ../screenshots/deviser-util1.png
@@ -1522,7 +1528,7 @@ tree view on the left panel and selecting **Duplicate** (see Figure :num:`devise
    Duplicating a version of a package.
  
 This creates a complete copy of the previous package version and gives it the
-next package version number (see Figure :num:`fig-foo-v2`). The individual 
+next package version number (see :numref:`fig-foo-v2`). The individual 
 objects can then be edited or removed as necessary and any additional objects
 added.
 

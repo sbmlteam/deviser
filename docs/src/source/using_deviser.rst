@@ -17,7 +17,7 @@ UML** button on the toolbar or select **Show UML** from the Tool menu.
 Remember that this uses the yUML webservice and so will only work if you
 have an internet connection.
 
-The UML output will appear (Figure :num:`fig-yuml`). Note that each time this option
+The UML output will appear (:numref:`fig-yuml`). Note that each time this option
 is selected a new diagram is generated from the definition; the more
 complex the definition the longer it will take.
 
@@ -28,8 +28,7 @@ complex the definition the longer it will take.
 
 You will note that not all inheritance is determined. Deviser does not
 try to infer inheritance of classes from outside this package
-definition. However these can be added using the **Edit** window (Figure
-:num:`fig-yuml-edit`).
+definition. However these can be added using the **Edit** window (:numref:`fig-yuml-edit`).
 
 .. _fig-yuml-edit:
 .. figure:: ../screenshots/deviser-yuml-edit.png
@@ -55,8 +54,8 @@ Generate package code/documentation
 -------------------------------------
 
 Click on the **Generate** button on the toolbar and the Generate window
-(Figure :num:`fig-generate`) will appear. Prior to displaying the window 
-the validation checks (see :ref:`validate`) are run and any problems reported 
+(:numref:`fig-generate`) will appear. Prior to displaying the window 
+the validation checks (see :numref:`validate`) are run and any problems reported 
 to the user.
 
 
@@ -85,7 +84,7 @@ Generate basic specification documentation.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the Generate window there is a **LaTeX Generation** tab with three
-further buttons (Figure :num:`fig-generate`).
+further buttons (:numref:`fig-generate`).
 
 The **Generate LaTeX** button
 ******************************
@@ -136,7 +135,7 @@ Integrate and test the package with libSBML.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Click the **Integration and Testing** tab in the Generate window and a
-further set of buttons are revealed (Figure :num:`fig-integrate`).
+further set of buttons are revealed (:numref:`fig-integrate`).
 
 .. _fig-integrate:
 .. figure:: ../screenshots/deviser-integrate.png
@@ -150,7 +149,7 @@ C++ compiler to ensure that these are compatible with the libSBML build.
 Note that particularly on Windows OS it is necessary for the
 libSBML dependencies to be built with the same compiler as that to be
 used to build libSBML. If the user has specified the location of the source 
-code for the dependencies and the C++ compiler (see :ref:`settings`) then 
+code for the dependencies and the C++ compiler (see :numref:`settings`) then 
 this button will invoke a build of the dependencies.
 
 The **Add Code to Source Dir** button
@@ -185,7 +184,7 @@ Utility functions in Deviser Edit
 
 There are a number of functions to facilitate use of Deviser Edit and reporting
 of issues. Using the tree view on the left right clicking on an object reveals 
-a menu as shown in Figure :num:`deviser-util`.
+a menu as shown in :numref:`deviser-util`.
 
 .. _deviser-util:
 .. figure:: ../screenshots/deviser-util.png
@@ -195,7 +194,7 @@ a menu as shown in Figure :num:`deviser-util`.
 The **Add XYZ** items
 ~~~~~~~~~~~~~~~~~~~~~~~
 The various **Add** items will add the appropriate object to the Version selected.
-This will work from any object within the tree. So in Figure :num:`deviser-util` 
+This will work from any object within the tree. So in :numref:`deviser-util` 
 highlighting *FooRate* and selecting *Add Enum* would add a new Enum to the list for
 Version 3,1,1.
 
@@ -208,7 +207,7 @@ So it is possible to duplicate individual classes, plugins or enums but the head
 It is also possible to duplicate the entire version, which creates a new version
 with identical elements as the one being copied. Section :ref:`mult-vers` gives more details.
 
-In Figure :num:`deviser-util` 
+In :numref:`deviser-util` 
 highlighting *FooRate* and selecting *Duplicate* would add a new class to the list for
 Version 3,1,1. This class would be identical to *FooRate* except it would have the name 
 *FooRate_copy*. 

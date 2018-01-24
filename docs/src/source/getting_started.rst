@@ -79,7 +79,7 @@ Prerequisites
 -------------
 
 The main functionality (generating code or TeX files) is
-invoked using a Python Interpreter (see :ref:`using`). This release of Deviser has been 
+invoked using a Python Interpreter (see :numref:`using`). This release of Deviser has been 
 tested with Python 2.6, 2.7, 3.3 and 3.4. 
 Other functions provided by Deviser Edit may require further
 software. The prerequisites for each function are listed below.
@@ -117,7 +117,7 @@ operating system.
 
 On Windows we successfully used MiKTEX (MiKTeX (pronounced mick-tech) is an 
 up-to-date implementation of TeX/LaTeX and related programs for Windows) see 
-:ref:`links`.
+:numref:`links`.
 
 .. todo::
   revise linux section
@@ -297,7 +297,7 @@ To integrate and compile the code with libSBML the fields requested are:
   directly test the build using a Python interface.
 
 
-Figure :num:`fig-preferences` illustrates 
+:numref:`fig-preferences` illustrates 
 a case
 where you want to be able to generate code and TeX files but do not want to generate a 
 PDF or
@@ -319,29 +319,29 @@ User Defined Types
 
 To generate functionable code, all data types used in the package must be known
 to Deviser. Deviser has built-in support for the predefined types declared by 
-SBML L3 Core (see section :ref:`typefield`) but various SBML L3 packages may 
+SBML L3 Core (see :numref:`typefield`) but various SBML L3 packages may 
 introduce unsupported types. To enable Deviser to handle these new types, the 
 new types should be added using the **User Defined Types** tab on the 
 **Preferences** window. Use the '+' button to add a new type and then
 adjust the name as required. To remove a type, highlight it and press the '-'
 button.  The new type will then appear in the dropdown list of Types available 
 when you enter attribute 
-information. (For example, Figure :num:`fig-user-types` demonstrates adding a 
+information. (For example, :numref:`fig-user-types` demonstrates adding a 
 type called *PType*.) 
 
 Note any C++ code produced will use the type 'FIXME_[type]' where [type] 
-is the type name entered by the user (see :ref:`code snippet below<code_for_PType>`). 
+is the type name entered by the user (see :numref:`code_for_ptype`). 
 The resulting code will not compile and will need to be manually adjusted.
 
-.. _code_for_PType:
-  
+
+
     .. code-block:: C++ 
+       :name: code_for_ptype
+       :caption: Code generated for an attribute named 'P' of user defined type 'PType'.
 
             FIXME_PType getP() const;
 
             int setP(FIXME_PType p);
-
-    Code generated for an attribute named 'P' of user defined type 'PType'.
 
 .. raw:: latex
 
@@ -357,6 +357,6 @@ Misc
 
 
 When the information in a text box is required, Deviser Edit highlights the 
-field that has missing information (see Figure :num:`fig-color-highlight`). Users can customize the color
+field that has missing information (see :numref:`fig-color-highlight`). Users can customize the color
 used to highlight missing field using the **Misc** tab on the **Preferences** window.
 We leave experimenting with that to the user.

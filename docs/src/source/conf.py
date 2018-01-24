@@ -33,6 +33,8 @@ sys.path.insert(0, os.path.abspath('.'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['numfig', 'sphinx.ext.todo']
+numfig = True
+numfig_format = {'figure': 'Figure %s', 'table': 'Table %s', 'code-block': 'Listing %s', 'section':'Section %s'}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -206,6 +208,7 @@ html_static_path = ['_static']
 htmlhelp_basename = 'Deviserdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
+
 
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
