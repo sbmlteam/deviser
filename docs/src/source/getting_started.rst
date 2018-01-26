@@ -55,6 +55,10 @@ This program takes as input a Deviser XML file and either
 - generates the LaTeX files for the package specification,
   when the command-line argument is --latex or -l
 
+.. raw:: latex
+
+  \clearpage
+
 Using Deviser Edit
 ~~~~~~~~~~~~~~~~~~
 
@@ -214,6 +218,11 @@ the **Misc** tab.
 
 Settings used here will be saved and persist between sessions.
 
+.. raw:: latex
+
+  \clearpage
+
+
 .. _fig-edit:
 .. figure:: ../screenshots/deviser-edit-menu.png
 
@@ -224,11 +233,6 @@ Settings used here will be saved and persist between sessions.
 Deviser Settings
 ~~~~~~~~~~~~~~~~~
 
-.. _fig-preferences:
-.. figure:: ../screenshots/deviser-preferences.png
-
-    The Deviser Settings tab from the Preferences window; adding information about other required software.
- 
 It is not necessary to fill in all the fields if you do not
 intend to use all the functionality. With nothing entered by the user, Deviser 
 Edit will save the XML description file 
@@ -296,16 +300,17 @@ To integrate and compile the code with libSBML the fields requested are:
   SWIG is necessary for this. It is hoped in future to add a facility to 
   directly test the build using a Python interface.
 
+.. _fig-preferences:
+.. figure:: ../screenshots/deviser-preferences.png
+
+    The Deviser Settings tab from the Preferences window; adding information about other required software.
+ 
 
 :numref:`fig-preferences` illustrates 
 a case
 where you want to be able to generate code and TeX files but do not want to generate a 
 PDF or
 integrate the code automatically.
-
-.. raw:: latex
-
-  \clearpage
 
 .. _add-types:
 
@@ -342,10 +347,6 @@ The resulting code will not compile and will need to be manually adjusted.
             FIXME_PType getP() const;
 
             int setP(FIXME_PType p);
-
-.. raw:: latex
-
-  \clearpage
 
 Misc
 ~~~~~

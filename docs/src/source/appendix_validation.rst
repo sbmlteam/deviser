@@ -3,9 +3,6 @@
 Appendix C: Validation
 ======================
 
-The table lists the errors and warnings that may be produced by validating
-a package being defined within Deviser Edit.
-
 .. tabularcolumns:: |p{0.65in}|p{2.5in}|p{2.85in}|
 
 +--------------+---------------------+--------------------------------------------+
@@ -73,6 +70,9 @@ a package being defined within Deviser Edit.
 |              |                     | typecode defined, and it can not be        |
 |              |                     | generated automatically.                   |
 +--------------+---------------------+--------------------------------------------+
+
+The table lists the errors/warnings that may be produced by validating
+a package being defined within Deviser Edit.
 
 Note: The error messages will be populated with the names of attributes/classes/types etc.
 as illustrated by the 'foo_xxx' placeholders above.

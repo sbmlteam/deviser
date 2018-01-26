@@ -18,7 +18,6 @@ DEVISER
    appendix_types
    appendix_validation
    appendix_licensing
-   references
 
 
 

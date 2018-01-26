@@ -59,7 +59,7 @@ The Package **required** checkbox
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The **required** checkbox is used to indicate whether the package may
-change the mathematical interpretation of the core model ([SBML_L3]_) and corresponds
+change the mathematical interpretation of the core model and corresponds
 to the required attribute on the <sbml> element declaring this package
 (see :numref:`xml_required`).
 
@@ -533,6 +533,10 @@ The code generator produces the following code for an attribute of type 'array':
                [Name] 
                       is a placeholder for the attribute name 
                       given to the array
+.. raw:: latex
+
+  \clearpage
+
 
 .. _enum:  
        
@@ -826,10 +830,6 @@ the XML name; however if the object being listed is an element or listOf
 element there may be situations where they differ – as in 
 :ref:`Example 2<example2>` below.
 
-.. raw:: latex
-
-  \clearpage
-
 
 .. _listof:
 
@@ -938,10 +938,6 @@ there may be a requirement that it contains a certain number of children
 as with Associations in the FBC package an FBCAnd instantiation MUST
 have two children. Where there are no such requirements these fields
 should be left as ‘0’.
-
-.. raw:: latex
-
-  \clearpage
 
 .. _repeated_info:
 
@@ -1115,6 +1111,11 @@ hierarchy and :ref:`SBML snippet 5<sbml-5>` the resulting XML.
 .. figure:: ../figures/deviser-uml-foo-rules.png
 
      The UML diagram from Deviser Edit of the ListOfFooRules class
+
+.. raw:: latex
+
+  \clearpage
+
 
 .. _sbml-5: 
    
