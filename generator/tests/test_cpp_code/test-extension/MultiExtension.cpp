@@ -452,7 +452,7 @@ const char*
 BindingStatus_toString(BindingStatus_t bs)
 {
   int min = MULTI_BINDING_STATUS_BOUND;
-  int max = BINDING_STATUS_INVALID;
+  int max = MULTI_BINDING_STATUS_INVALID;
 
   if (bs < min || bs > max)
   {
@@ -465,8 +465,8 @@ BindingStatus_toString(BindingStatus_t bs)
 
 /*
  * Returns the #BindingStatus_t enumeration corresponding to the given string
- * or @sbmlconstant{BINDING_STATUS_INVALID, BindingStatus_t} if there is no
- * such match.
+ * or @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if there is
+ * no such match.
  */
 LIBSBML_EXTERN
 BindingStatus_t
@@ -484,7 +484,7 @@ BindingStatus_fromString(const char* code)
     }
   }
 
-  return BINDING_STATUS_INVALID;
+  return MULTI_BINDING_STATUS_INVALID;
 }
 
 
@@ -497,7 +497,7 @@ int
 BindingStatus_isValid(BindingStatus_t bs)
 {
   int min = MULTI_BINDING_STATUS_BOUND;
-  int max = BINDING_STATUS_INVALID;
+  int max = MULTI_BINDING_STATUS_INVALID;
 
   if (bs < min || bs >= max)
   {
@@ -540,7 +540,7 @@ const char*
 Relation_toString(Relation_t r)
 {
   int min = MULTI_RELATION_AND;
-  int max = RELATION_INVALID;
+  int max = MULTI_RELATION_INVALID;
 
   if (r < min || r > max)
   {
@@ -553,7 +553,7 @@ Relation_toString(Relation_t r)
 
 /*
  * Returns the #Relation_t enumeration corresponding to the given string or
- * @sbmlconstant{RELATION_INVALID, Relation_t} if there is no such match.
+ * @sbmlconstant{MULTI_RELATION_INVALID, Relation_t} if there is no such match.
  */
 LIBSBML_EXTERN
 Relation_t
@@ -571,7 +571,7 @@ Relation_fromString(const char* code)
     }
   }
 
-  return RELATION_INVALID;
+  return MULTI_RELATION_INVALID;
 }
 
 
@@ -584,7 +584,7 @@ int
 Relation_isValid(Relation_t r)
 {
   int min = MULTI_RELATION_AND;
-  int max = RELATION_INVALID;
+  int max = MULTI_RELATION_INVALID;
 
   if (r < min || r >= max)
   {
@@ -627,7 +627,7 @@ const char*
 RepresentationType_toString(RepresentationType_t rt)
 {
   int min = MULTI_REPRESENTATIONTYPE_SUM;
-  int max = REPRESENTATION_TYPE_INVALID;
+  int max = MULTI_REPRESENTATIONTYPE_INVALID;
 
   if (rt < min || rt > max)
   {
@@ -640,8 +640,8 @@ RepresentationType_toString(RepresentationType_t rt)
 
 /*
  * Returns the #RepresentationType_t enumeration corresponding to the given
- * string or @sbmlconstant{REPRESENTATION_TYPE_INVALID, RepresentationType_t}
- * if there is no such match.
+ * string or @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID,
+ * RepresentationType_t} if there is no such match.
  */
 LIBSBML_EXTERN
 RepresentationType_t
@@ -659,7 +659,7 @@ RepresentationType_fromString(const char* code)
     }
   }
 
-  return REPRESENTATION_TYPE_INVALID;
+  return MULTI_REPRESENTATIONTYPE_INVALID;
 }
 
 
@@ -672,7 +672,7 @@ int
 RepresentationType_isValid(RepresentationType_t rt)
 {
   int min = MULTI_REPRESENTATIONTYPE_SUM;
-  int max = REPRESENTATION_TYPE_INVALID;
+  int max = MULTI_REPRESENTATIONTYPE_INVALID;
 
   if (rt < min || rt >= max)
   {

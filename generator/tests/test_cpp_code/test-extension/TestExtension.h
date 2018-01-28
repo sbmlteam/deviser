@@ -392,9 +392,9 @@ typedef enum
  */
 typedef enum
 {
-  TEST_ENUM_ONE       /*!< The test enum is @c "One". */
-, TEST_ENUM_TWO       /*!< The test enum is @c "Two". */
-, ENUM_INVALID        /*!< Invalid Enum value. */
+  TEST_ENUM_ONE           /*!< The test enum is @c "One". */
+, TEST_ENUM_TWO           /*!< The test enum is @c "Two". */
+, TEST_ENUM_INVALID       /*!< Invalid Enum value. */
 } Enum_t;
 
 
@@ -406,8 +406,8 @@ typedef enum
  * @return A string corresponding to the given type:
  * "One",
  * "Two",
- * or @c NULL if the value is @sbmlconstant{ENUM_INVALID, Enum_t} or another
- * invalid enumeration value.
+ * or @c NULL if the value is @sbmlconstant{TEST_ENUM_INVALID, Enum_t} or
+ * another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -422,16 +422,16 @@ Enum_toString(Enum_t e);
 
 /**
  * Returns the #Enum_t enumeration corresponding to the given string or
- * @sbmlconstant{ENUM_INVALID, Enum_t} if there is no such match.
+ * @sbmlconstant{TEST_ENUM_INVALID, Enum_t} if there is no such match.
  *
  * @param code the string to convert to a #Enum_t.
  *
- * @return the corresponding #Enum_t or @sbmlconstant{ENUM_INVALID, Enum_t} if
- * no match is found.
+ * @return the corresponding #Enum_t or @sbmlconstant{TEST_ENUM_INVALID,
+ * Enum_t} if no match is found.
  *
  * @note The matching is case-sensitive: "One" will return
  * @sbmlconstant{TEST_ENUM_ONE, Enum_t}, but "One" will return
- * @sbmlconstant{ENUM_INVALID, Enum_t}.
+ * @sbmlconstant{TEST_ENUM_INVALID, Enum_t}.
  *
  * @if conly
  * @memberof Test_t
@@ -451,7 +451,7 @@ Enum_fromString(const char* code);
  * @return @c 1 (true) if the #Enum_t is
  * @sbmlconstant{TEST_ENUM_ONE, Enum_t}, or
  * @sbmlconstant{TEST_ENUM_TWO, Enum_t};
- * @c 0 (false) otherwise (including @sbmlconstant{ENUM_INVALID, Enum_t}).
+ * @c 0 (false) otherwise (including @sbmlconstant{TEST_ENUM_INVALID, Enum_t}).
  *
  * @if conly
  * @memberof Test_t
@@ -503,9 +503,9 @@ Enum_isValidString(const char* code);
  */
 typedef enum
 {
-  TEST_FRED_T_TOM        /*!< The test fred is @c "tom". */
-, TEST_FRED_T_DICK       /*!< The test fred is @c "dick". */
-, FRED_INVALID           /*!< Invalid Fred value. */
+  TEST_FRED_T_TOM           /*!< The test fred is @c "tom". */
+, TEST_FRED_T_DICK          /*!< The test fred is @c "dick". */
+, TEST_FRED_T_INVALID       /*!< Invalid Fred value. */
 } Fred_t;
 
 
@@ -517,8 +517,8 @@ typedef enum
  * @return A string corresponding to the given type:
  * "tom",
  * "dick",
- * or @c NULL if the value is @sbmlconstant{FRED_INVALID, Fred_t} or another
- * invalid enumeration value.
+ * or @c NULL if the value is @sbmlconstant{TEST_FRED_T_INVALID, Fred_t} or
+ * another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -533,16 +533,16 @@ Fred_toString(Fred_t f);
 
 /**
  * Returns the #Fred_t enumeration corresponding to the given string or
- * @sbmlconstant{FRED_INVALID, Fred_t} if there is no such match.
+ * @sbmlconstant{TEST_FRED_T_INVALID, Fred_t} if there is no such match.
  *
  * @param code the string to convert to a #Fred_t.
  *
- * @return the corresponding #Fred_t or @sbmlconstant{FRED_INVALID, Fred_t} if
- * no match is found.
+ * @return the corresponding #Fred_t or @sbmlconstant{TEST_FRED_T_INVALID,
+ * Fred_t} if no match is found.
  *
  * @note The matching is case-sensitive: "tom" will return
  * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, but "Tom" will return
- * @sbmlconstant{FRED_INVALID, Fred_t}.
+ * @sbmlconstant{TEST_FRED_T_INVALID, Fred_t}.
  *
  * @if conly
  * @memberof Test_t
@@ -562,7 +562,8 @@ Fred_fromString(const char* code);
  * @return @c 1 (true) if the #Fred_t is
  * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, or
  * @sbmlconstant{TEST_FRED_T_DICK, Fred_t};
- * @c 0 (false) otherwise (including @sbmlconstant{FRED_INVALID, Fred_t}).
+ * @c 0 (false) otherwise (including @sbmlconstant{TEST_FRED_T_INVALID,
+ * Fred_t}).
  *
  * @if conly
  * @memberof Test_t

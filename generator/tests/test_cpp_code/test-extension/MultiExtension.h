@@ -408,7 +408,7 @@ typedef enum
   MULTI_BINDING_STATUS_BOUND         /*!< The multi binding is @c "bound". */
 , MULTI_BINDING_STATUS_UNBOUND       /*!< The multi binding is @c "unbound". */
 , MULTI_BINDING_STATUS_EITHER        /*!< The multi binding is @c "either". */
-, BINDING_STATUS_INVALID             /*!< Invalid BindingStatus value. */
+, MULTI_BINDING_STATUS_INVALID       /*!< Invalid BindingStatus value. */
 } BindingStatus_t;
 
 
@@ -421,7 +421,7 @@ typedef enum
  * "bound",
  * "unbound",
  * "either",
- * or @c NULL if the value is @sbmlconstant{BINDING_STATUS_INVALID,
+ * or @c NULL if the value is @sbmlconstant{MULTI_BINDING_STATUS_INVALID,
  * BindingStatus_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -437,17 +437,18 @@ BindingStatus_toString(BindingStatus_t bs);
 
 /**
  * Returns the #BindingStatus_t enumeration corresponding to the given string
- * or @sbmlconstant{BINDING_STATUS_INVALID, BindingStatus_t} if there is no
- * such match.
+ * or @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if there is
+ * no such match.
  *
  * @param code the string to convert to a #BindingStatus_t.
  *
  * @return the corresponding #BindingStatus_t or
- * @sbmlconstant{BINDING_STATUS_INVALID, BindingStatus_t} if no match is found.
+ * @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if no match is
+ * found.
  *
  * @note The matching is case-sensitive: "bound" will return
  * @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}, but "Bound" will
- * return @sbmlconstant{BINDING_STATUS_INVALID, BindingStatus_t}.
+ * return @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t}.
  *
  * @if conly
  * @memberof Multi_t
@@ -468,8 +469,8 @@ BindingStatus_fromString(const char* code);
  * @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t},
  * @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}, or
  * @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t};
- * @c 0 (false) otherwise (including @sbmlconstant{BINDING_STATUS_INVALID,
- * BindingStatus_t}).
+ * @c 0 (false) otherwise (including
+ * @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t}).
  *
  * @if conly
  * @memberof Multi_t
@@ -522,10 +523,10 @@ BindingStatus_isValidString(const char* code);
  */
 typedef enum
 {
-  MULTI_RELATION_AND       /*!< The multi relation is @c "and". */
-, MULTI_RELATION_OR        /*!< The multi relation is @c "or". */
-, MULTI_RELATION_NOT       /*!< The multi relation is @c "not". */
-, RELATION_INVALID         /*!< Invalid Relation value. */
+  MULTI_RELATION_AND           /*!< The multi relation is @c "and". */
+, MULTI_RELATION_OR            /*!< The multi relation is @c "or". */
+, MULTI_RELATION_NOT           /*!< The multi relation is @c "not". */
+, MULTI_RELATION_INVALID       /*!< Invalid Relation value. */
 } Relation_t;
 
 
@@ -538,8 +539,8 @@ typedef enum
  * "and",
  * "or",
  * "not",
- * or @c NULL if the value is @sbmlconstant{RELATION_INVALID, Relation_t} or
- * another invalid enumeration value.
+ * or @c NULL if the value is @sbmlconstant{MULTI_RELATION_INVALID, Relation_t}
+ * or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -554,16 +555,16 @@ Relation_toString(Relation_t r);
 
 /**
  * Returns the #Relation_t enumeration corresponding to the given string or
- * @sbmlconstant{RELATION_INVALID, Relation_t} if there is no such match.
+ * @sbmlconstant{MULTI_RELATION_INVALID, Relation_t} if there is no such match.
  *
  * @param code the string to convert to a #Relation_t.
  *
- * @return the corresponding #Relation_t or @sbmlconstant{RELATION_INVALID,
- * Relation_t} if no match is found.
+ * @return the corresponding #Relation_t or
+ * @sbmlconstant{MULTI_RELATION_INVALID, Relation_t} if no match is found.
  *
  * @note The matching is case-sensitive: "and" will return
  * @sbmlconstant{MULTI_RELATION_AND, Relation_t}, but "And" will return
- * @sbmlconstant{RELATION_INVALID, Relation_t}.
+ * @sbmlconstant{MULTI_RELATION_INVALID, Relation_t}.
  *
  * @if conly
  * @memberof Multi_t
@@ -584,7 +585,7 @@ Relation_fromString(const char* code);
  * @sbmlconstant{MULTI_RELATION_AND, Relation_t},
  * @sbmlconstant{MULTI_RELATION_OR, Relation_t}, or
  * @sbmlconstant{MULTI_RELATION_NOT, Relation_t};
- * @c 0 (false) otherwise (including @sbmlconstant{RELATION_INVALID,
+ * @c 0 (false) otherwise (including @sbmlconstant{MULTI_RELATION_INVALID,
  * Relation_t}).
  *
  * @if conly
@@ -640,7 +641,7 @@ typedef enum
 {
   MULTI_REPRESENTATIONTYPE_SUM                /*!< The multi representationtype is @c "sum". */
 , MULTI_REPRESENTATIONTYPE_NUMERICVALUE       /*!< The multi representationtype is @c "numericValue". */
-, REPRESENTATION_TYPE_INVALID                 /*!< Invalid RepresentationType value. */
+, MULTI_REPRESENTATIONTYPE_INVALID            /*!< Invalid RepresentationType value. */
 } RepresentationType_t;
 
 
@@ -653,7 +654,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "sum",
  * "numericValue",
- * or @c NULL if the value is @sbmlconstant{REPRESENTATION_TYPE_INVALID,
+ * or @c NULL if the value is @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID,
  * RepresentationType_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -669,18 +670,18 @@ RepresentationType_toString(RepresentationType_t rt);
 
 /**
  * Returns the #RepresentationType_t enumeration corresponding to the given
- * string or @sbmlconstant{REPRESENTATION_TYPE_INVALID, RepresentationType_t}
- * if there is no such match.
+ * string or @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID,
+ * RepresentationType_t} if there is no such match.
  *
  * @param code the string to convert to a #RepresentationType_t.
  *
  * @return the corresponding #RepresentationType_t or
- * @sbmlconstant{REPRESENTATION_TYPE_INVALID, RepresentationType_t} if no match
- * is found.
+ * @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID, RepresentationType_t} if no
+ * match is found.
  *
  * @note The matching is case-sensitive: "sum" will return
  * @sbmlconstant{MULTI_REPRESENTATIONTYPE_SUM, RepresentationType_t}, but "Sum"
- * will return @sbmlconstant{REPRESENTATION_TYPE_INVALID,
+ * will return @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID,
  * RepresentationType_t}.
  *
  * @if conly
@@ -701,8 +702,8 @@ RepresentationType_fromString(const char* code);
  * @return @c 1 (true) if the #RepresentationType_t is
  * @sbmlconstant{MULTI_REPRESENTATIONTYPE_SUM, RepresentationType_t}, or
  * @sbmlconstant{MULTI_REPRESENTATIONTYPE_NUMERICVALUE, RepresentationType_t};
- * @c 0 (false) otherwise (including @sbmlconstant{REPRESENTATION_TYPE_INVALID,
- * RepresentationType_t}).
+ * @c 0 (false) otherwise (including
+ * @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID, RepresentationType_t}).
  *
  * @if conly
  * @memberof Multi_t

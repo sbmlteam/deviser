@@ -399,7 +399,7 @@ typedef enum
 , INPUT_SIGN_NEGATIVE       /*!< The input sign is @c "negative". */
 , INPUT_SIGN_DUAL           /*!< The input sign is @c "dual". */
 , INPUT_SIGN_UNKNOWN        /*!< The input sign is @c "unknown". */
-, SIGN_INVALID              /*!< Invalid Sign value. */
+, INPUT_SIGN_INVALID        /*!< Invalid Sign value. */
 } Sign_t;
 
 
@@ -413,8 +413,8 @@ typedef enum
  * "negative",
  * "dual",
  * "unknown",
- * or @c NULL if the value is @sbmlconstant{SIGN_INVALID, Sign_t} or another
- * invalid enumeration value.
+ * or @c NULL if the value is @sbmlconstant{INPUT_SIGN_INVALID, Sign_t} or
+ * another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -429,16 +429,16 @@ Sign_toString(Sign_t s);
 
 /**
  * Returns the #Sign_t enumeration corresponding to the given string or
- * @sbmlconstant{SIGN_INVALID, Sign_t} if there is no such match.
+ * @sbmlconstant{INPUT_SIGN_INVALID, Sign_t} if there is no such match.
  *
  * @param code the string to convert to a #Sign_t.
  *
- * @return the corresponding #Sign_t or @sbmlconstant{SIGN_INVALID, Sign_t} if
- * no match is found.
+ * @return the corresponding #Sign_t or @sbmlconstant{INPUT_SIGN_INVALID,
+ * Sign_t} if no match is found.
  *
  * @note The matching is case-sensitive: "positive" will return
  * @sbmlconstant{INPUT_SIGN_POSITIVE, Sign_t}, but "Positive" will return
- * @sbmlconstant{SIGN_INVALID, Sign_t}.
+ * @sbmlconstant{INPUT_SIGN_INVALID, Sign_t}.
  *
  * @if conly
  * @memberof Input_t
@@ -460,7 +460,8 @@ Sign_fromString(const char* code);
  * @sbmlconstant{INPUT_SIGN_NEGATIVE, Sign_t},
  * @sbmlconstant{INPUT_SIGN_DUAL, Sign_t}, or
  * @sbmlconstant{INPUT_SIGN_UNKNOWN, Sign_t};
- * @c 0 (false) otherwise (including @sbmlconstant{SIGN_INVALID, Sign_t}).
+ * @c 0 (false) otherwise (including @sbmlconstant{INPUT_SIGN_INVALID,
+ * Sign_t}).
  *
  * @if conly
  * @memberof Input_t
@@ -516,7 +517,7 @@ typedef enum
 {
   OUTPUT_TRANSITION_EFFECT_PRODUCTION             /*!< The output transition is @c "production". */
 , OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL       /*!< The output transition is @c "assignmentLevel". */
-, TRANSITION_OUTPUT_EFFECT_INVALID                /*!< Invalid TransitionOutputEffect value. */
+, OUTPUT_TRANSITION_EFFECT_INVALID                /*!< Invalid TransitionOutputEffect value. */
 } TransitionOutputEffect_t;
 
 
@@ -529,7 +530,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "production",
  * "assignmentLevel",
- * or @c NULL if the value is @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
+ * or @c NULL if the value is @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
  * TransitionOutputEffect_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -545,19 +546,19 @@ TransitionOutputEffect_toString(TransitionOutputEffect_t toe);
 
 /**
  * Returns the #TransitionOutputEffect_t enumeration corresponding to the given
- * string or @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID,
+ * string or @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
  * TransitionOutputEffect_t} if there is no such match.
  *
  * @param code the string to convert to a #TransitionOutputEffect_t.
  *
  * @return the corresponding #TransitionOutputEffect_t or
- * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t} if
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID, TransitionOutputEffect_t} if
  * no match is found.
  *
  * @note The matching is case-sensitive: "production" will return
  * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_PRODUCTION,
  * TransitionOutputEffect_t}, but "Production" will return
- * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t}.
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID, TransitionOutputEffect_t}.
  *
  * @if conly
  * @memberof Output_t
@@ -580,7 +581,7 @@ TransitionOutputEffect_fromString(const char* code);
  * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
  * TransitionOutputEffect_t};
  * @c 0 (false) otherwise (including
- * @sbmlconstant{TRANSITION_OUTPUT_EFFECT_INVALID, TransitionOutputEffect_t}).
+ * @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID, TransitionOutputEffect_t}).
  *
  * @if conly
  * @memberof Output_t
@@ -634,7 +635,7 @@ typedef enum
 {
   INPUT_TRANSITION_EFFECT_NONE              /*!< The input transition is @c "none". */
 , INPUT_TRANSITION_EFFECT_CONSUMPTION       /*!< The input transition is @c "consumption". */
-, TRANSITION_INPUT_EFFECT_INVALID           /*!< Invalid TransitionInputEffect value. */
+, INPUT_TRANSITION_EFFECT_INVALID           /*!< Invalid TransitionInputEffect value. */
 } TransitionInputEffect_t;
 
 
@@ -647,7 +648,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "none",
  * "consumption",
- * or @c NULL if the value is @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * or @c NULL if the value is @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID,
  * TransitionInputEffect_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -663,18 +664,18 @@ TransitionInputEffect_toString(TransitionInputEffect_t tie);
 
 /**
  * Returns the #TransitionInputEffect_t enumeration corresponding to the given
- * string or @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * string or @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID,
  * TransitionInputEffect_t} if there is no such match.
  *
  * @param code the string to convert to a #TransitionInputEffect_t.
  *
  * @return the corresponding #TransitionInputEffect_t or
- * @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID, TransitionInputEffect_t} if
+ * @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID, TransitionInputEffect_t} if
  * no match is found.
  *
  * @note The matching is case-sensitive: "none" will return
  * @sbmlconstant{INPUT_TRANSITION_EFFECT_NONE, TransitionInputEffect_t}, but
- * "None" will return @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID,
+ * "None" will return @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID,
  * TransitionInputEffect_t}.
  *
  * @if conly
@@ -696,7 +697,7 @@ TransitionInputEffect_fromString(const char* code);
  * @sbmlconstant{INPUT_TRANSITION_EFFECT_NONE, TransitionInputEffect_t}, or
  * @sbmlconstant{INPUT_TRANSITION_EFFECT_CONSUMPTION, TransitionInputEffect_t};
  * @c 0 (false) otherwise (including
- * @sbmlconstant{TRANSITION_INPUT_EFFECT_INVALID, TransitionInputEffect_t}).
+ * @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID, TransitionInputEffect_t}).
  *
  * @if conly
  * @memberof Input_t

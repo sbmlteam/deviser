@@ -469,7 +469,7 @@ typedef enum
 {
   OBJECTIVE_TYPE_MAXIMIZE       /*!< The objective type is @c "maximize". */
 , OBJECTIVE_TYPE_MINIMIZE       /*!< The objective type is @c "minimize". */
-, ABC_TYPE_INVALID              /*!< Invalid AbcType value. */
+, OBJECTIVE_TYPE_INVALID        /*!< Invalid AbcType value. */
 } AbcType_t;
 
 
@@ -481,8 +481,8 @@ typedef enum
  * @return A string corresponding to the given type:
  * "maximize",
  * "minimize",
- * or @c NULL if the value is @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} or
- * another invalid enumeration value.
+ * or @c NULL if the value is @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t}
+ * or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -497,16 +497,16 @@ AbcType_toString(AbcType_t at);
 
 /**
  * Returns the #AbcType_t enumeration corresponding to the given string or
- * @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} if there is no such match.
+ * @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t} if there is no such match.
  *
  * @param code the string to convert to a #AbcType_t.
  *
- * @return the corresponding #AbcType_t or @sbmlconstant{ABC_TYPE_INVALID,
- * AbcType_t} if no match is found.
+ * @return the corresponding #AbcType_t or
+ * @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t} if no match is found.
  *
  * @note The matching is case-sensitive: "maximize" will return
  * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}, but "Maximize" will
- * return @sbmlconstant{ABC_TYPE_INVALID, AbcType_t}.
+ * return @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t}.
  *
  * @if conly
  * @memberof Objective_t
@@ -526,7 +526,7 @@ AbcType_fromString(const char* code);
  * @return @c 1 (true) if the #AbcType_t is
  * @sbmlconstant{OBJECTIVE_TYPE_MAXIMIZE, AbcType_t}, or
  * @sbmlconstant{OBJECTIVE_TYPE_MINIMIZE, AbcType_t};
- * @c 0 (false) otherwise (including @sbmlconstant{ABC_TYPE_INVALID,
+ * @c 0 (false) otherwise (including @sbmlconstant{OBJECTIVE_TYPE_INVALID,
  * AbcType_t}).
  *
  * @if conly

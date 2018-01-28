@@ -401,13 +401,23 @@ def get_enum(element, class_name = ''):
         value = []
         strvalue = []
         max_length = 0
+        origsplittc = []
         for i in range(0, len(element['values'])):
             tc = element['values'][i]['name']
             if len(tc) > max_length:
                 max_length = len(tc)
             value.append(tc)
             strvalue.append(element['values'][i]['value'])
-        tc = get_prefix(name) + '_INVALID'
+            if i == 0:
+                origsplittc = tc.split('_')
+            else:
+                splittc = tc.split('_')
+                if len(splittc) < len(origsplittc):
+                    origsplittc = splittc
+        newtc = ''
+        for i in range(0, len(origsplittc)-1):
+            newtc = newtc + origsplittc[i] + '_'
+        tc = newtc + 'INVALID'
         if len(tc) > max_length:
             max_length = len(tc)
         value.append(tc)

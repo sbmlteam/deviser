@@ -491,7 +491,7 @@ const char*
 FbcType_toString(FbcType_t ft)
 {
   int min = OBJECTIVE_TYPE_MAXIMIZE;
-  int max = FBC_TYPE_INVALID;
+  int max = OBJECTIVE_TYPE_INVALID;
 
   if (ft < min || ft > max)
   {
@@ -504,7 +504,7 @@ FbcType_toString(FbcType_t ft)
 
 /*
  * Returns the #FbcType_t enumeration corresponding to the given string or
- * @sbmlconstant{FBC_TYPE_INVALID, FbcType_t} if there is no such match.
+ * @sbmlconstant{OBJECTIVE_TYPE_INVALID, FbcType_t} if there is no such match.
  */
 LIBSBML_EXTERN
 FbcType_t
@@ -522,7 +522,7 @@ FbcType_fromString(const char* code)
     }
   }
 
-  return FBC_TYPE_INVALID;
+  return OBJECTIVE_TYPE_INVALID;
 }
 
 
@@ -535,7 +535,7 @@ int
 FbcType_isValid(FbcType_t ft)
 {
   int min = OBJECTIVE_TYPE_MAXIMIZE;
-  int max = FBC_TYPE_INVALID;
+  int max = OBJECTIVE_TYPE_INVALID;
 
   if (ft < min || ft >= max)
   {

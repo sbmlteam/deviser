@@ -576,7 +576,7 @@ const char*
 AbcType_toString(AbcType_t at)
 {
   int min = OBJECTIVE_TYPE_MAXIMIZE;
-  int max = ABC_TYPE_INVALID;
+  int max = OBJECTIVE_TYPE_INVALID;
 
   if (at < min || at > max)
   {
@@ -589,7 +589,7 @@ AbcType_toString(AbcType_t at)
 
 /*
  * Returns the #AbcType_t enumeration corresponding to the given string or
- * @sbmlconstant{ABC_TYPE_INVALID, AbcType_t} if there is no such match.
+ * @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t} if there is no such match.
  */
 LIBSBML_EXTERN
 AbcType_t
@@ -607,7 +607,7 @@ AbcType_fromString(const char* code)
     }
   }
 
-  return ABC_TYPE_INVALID;
+  return OBJECTIVE_TYPE_INVALID;
 }
 
 
@@ -620,7 +620,7 @@ int
 AbcType_isValid(AbcType_t at)
 {
   int min = OBJECTIVE_TYPE_MAXIMIZE;
-  int max = ABC_TYPE_INVALID;
+  int max = OBJECTIVE_TYPE_INVALID;
 
   if (at < min || at >= max)
   {
