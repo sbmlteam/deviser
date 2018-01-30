@@ -1,5 +1,24 @@
            DEVISER NEWS -- History of user-visible changes
 
+
+====================================================================
+1.0.0 (2018-02-08)
+====================================================================
+
+This is the full release of version 1 of Deviser.
+
+Significant changes include
+
+  - dealing with both SBML L3V1 and SBML L3V2
+
+  - dealing with multiple versions of a package
+
+  - full libSBML documentation is created in line with existing 
+    documentation; in addition to code
+
+
+
+
 ====================================================================
 0.9.0 (2016-05-21)
 ====================================================================

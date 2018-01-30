@@ -1,6 +1,10 @@
                  Deviser was primarily developed by
  
-            Sarah Keating, Frank Bergmann and Michael Hucka
+      Sarah M. Keating, Frank T. Bergmann and Michael Hucka
+
+      with contributions from
+
+                Brett G. Olivier  and Lucian P. Smith
 
                                    
          For more information about Deviser, contact:

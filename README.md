@@ -6,8 +6,9 @@
 Viewer for Iterative SBML Enhancement of Representations"*. 
 
 
-*Authors*:      [Sarah Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
-with contributions from [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
+*Authors*:      [Sarah M. Keating](http://www.ebi.ac.uk/about/people/sarah-keating), and [Frank T. Bergmann](http://www.cos.uni-heidelberg.de/index.php/f.bergmann?l=_e)
+with contributions from [Brett G. Olivier](http://teusinkbruggemanlab.nl/brett-olivier/), 
+Lucian P. Smith and [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 
 *License*:      This code is licensed under the LGPL version 2.1.  Please see the file [LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/moccasin/master/LICENSE.txt) for details.
 
@@ -62,16 +63,16 @@ Full documentation is available in the [docs](deviser\docs) directory.
 
 ##### Microsoft Windows OS
 
-The deviser release includes a windows installation executable. When installed this provides the user with the Deviser Edit tool (CsDeviser.exe) and additionally includes a python interpreter and the sbmlpkgspec files for generating SBML L3 Package specifications.
+The deviser release includes a windows installation executable. When installed this provides the user with the Deviser Edit tool (QtDeviser.exe) and additionally includes a python interpreter and the sbmlpkgspec files for generating SBML L3 Package specifications.
 
 ##### Linux OS
 
-The deviser release includes a tarball suitable for Linux. This includes the Deviser Edit tool which can be used is mono is installed.
+
 
 
 #####Mac OS X
 
-The Deviser Edit tool does not (yet) work on Mac OS X systems.  However the command line version can be used. Thus downloading the release src code will provide this functionality.
+
 
 
 
@@ -79,13 +80,11 @@ The Deviser Edit tool does not (yet) work on Mac OS X systems.  However the comm
 
 Not all of the following are necessary as what is necessary depends on which operating system is being used and which Deviser functionality is required. These links are given as a quick reference.
 
-[libSBML source code](https://sourceforge.net/projects/sbml/files/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz/download) 
+[libSBML source code](https://sourceforge.net/projects/sbml/files/libsbml/5.16.0/stable/libSBML-5.16.0-core-src.tar.gz/download) 
 
 [libSBML dependency libraries for Windows users](https://github.com/sbmlteam/libSBML-dependencies)
 
 [SBML package specification template files](https://sourceforge.net/projects/sbml/files/specifications/tex/sbmlpkgspec-1.6.0.tar.gz/download)
-
-[Mono install scripts for Linux](https://github.com/nathanb/iws-snippets/tree/master/mono-install-scripts)
 
 
 
