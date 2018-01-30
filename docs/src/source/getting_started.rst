@@ -123,33 +123,6 @@ On Windows we successfully used MiKTEX (MiKTeX (pronounced mick-tech) is an
 up-to-date implementation of TeX/LaTeX and related programs for Windows) see 
 :numref:`links`.
 
-.. todo::
-  revise linux section
-
-.. 
-    COMMENTED OUT
-
-    On a standard Linux OS we found it necessary to install the
-    following packages:
-
-    -  xzdec
-
-    -  texlive-latex-base
-
-    -  texlive-latex-extra
-
-    -  texlive-fonts-extra
-
-    and run the following from the command line
-
-    -  tlmgr init-usertree
-
-    -  tlmgr install bbding
-
-    -  tlmgr install fourier
-
-.. todo::
-    Add anything Mac specific
 
 UML diagrams
 ~~~~~~~~~~~~
@@ -163,8 +136,8 @@ create UML diagrams. The Deviser Edit tool requires the OpenSSL library
 Available bundles
 ~~~~~~~~~~~~~~~~~
 
-.. todo::
-    What are we releasing this time ?
+Installers and source code bundles are available from
+https://github.com/sbmlteam/deviser/releases
 
 .. _links:
 

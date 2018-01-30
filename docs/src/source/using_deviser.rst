@@ -176,8 +176,6 @@ The **Compile libSBML with package** button
 **Compile libSBML with package** enables package foo within the libSBML
 build and runs the build.
 
-.. todo::
-    List the configuration options used by this build
 
 Utility functions in Deviser Edit
 ----------------------------------
