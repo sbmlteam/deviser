@@ -189,7 +189,7 @@
         </element>
         <element name="Transformation" typeCode="SBML_RENDER_TRANSFORMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
           <attributes>
-            <attribute name="transform" required="true" type="array" element="double" abstract="false"/>
+            <attribute name="transform" required="false" type="array" element="double" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>

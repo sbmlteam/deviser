@@ -345,7 +345,7 @@
           <enumValues>
             <enumValue name="SPATIAL_SETOPERATION_UNION" value="union"/>
             <enumValue name="SPATIAL_SETOPERATION_INTERSECTION" value="intersection"/>
-            <enumValue name="SPATIAL_SETOPERATION_RELATIVECOMPLEMENT" value="relativeComplement"/>
+            <enumValue name="SPATIAL_SETOPERATION_DIFFERENCE" value="relativeComplement"/>
           </enumValues>
         </enum>
         <enum name="InterpolationKind">
