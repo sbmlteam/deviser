@@ -537,7 +537,6 @@ The code generator produces the following code for an attribute of type 'array':
 
   \clearpage
 
-
 .. _enum:  
        
 Attribute/child element type ‘enum’
@@ -701,6 +700,10 @@ potentially variable numbers of child elements. The
 multiple instances of the same child element but that these do not occur
 within a specified ListOf element. :ref:`Table 1<table1>` gives examples of the
 expected XML and the functions produced.
+
+.. raw:: latex
+
+  \clearpage
 
 Attribute/child element type ‘vector’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1495,6 +1498,10 @@ them available for pasting elsewhere.
 
 :ref:`validation` gives a list of the errors and warnings that may be issued 
 by Deviser Edit with references to the relevant sections in the main text. 
+
+.. raw:: latex
+
+  \clearpage
 
 The **Fix Errors** option
 **************************

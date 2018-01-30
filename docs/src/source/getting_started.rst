@@ -137,7 +137,7 @@ Available bundles
 ~~~~~~~~~~~~~~~~~
 
 Installers and source code bundles are available from
-https://github.com/sbmlteam/deviser/releases
+https://github.com/sbmlteam/deviser/releases .
 
 .. _links:
 
@@ -320,6 +320,10 @@ The resulting code will not compile and will need to be manually adjusted.
             FIXME_PType getP() const;
 
             int setP(FIXME_PType p);
+
+.. raw:: latex
+
+  \clearpage
 
 Misc
 ~~~~~
