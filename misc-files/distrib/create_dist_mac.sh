@@ -50,8 +50,8 @@ mkdir templates
 cd templates
 mkdir bindings
 cp ${SOURCE_DIR}/generator/cmake_files/templates/bindings/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/bindings
-mkdir code_files
-cp ${SOURCE_DIR}/generator/cmake_files/templates/code_files/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/code_files
+mkdir code
+cp ${SOURCE_DIR}/generator/cmake_files/templates/code/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/code
 mkdir src
 cp ${SOURCE_DIR}/generator/cmake_files/templates/src/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/src
 mkdir top-level
