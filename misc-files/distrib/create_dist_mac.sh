@@ -49,13 +49,13 @@ cd cmake_files
 mkdir templates
 cd templates
 mkdir bindings
-cp ${SOURCE_DIR}/generator/cmake_files/template/bindings/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/bindings
+cp ${SOURCE_DIR}/generator/cmake_files/templates/bindings/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/bindings
 mkdir code_files
-cp ${SOURCE_DIR}/generator/cmake_files/template/code_files/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/code_files
+cp ${SOURCE_DIR}/generator/cmake_files/templates/code_files/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/code_files
 mkdir src
-cp ${SOURCE_DIR}/generator/cmake_files/template/src/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/src
+cp ${SOURCE_DIR}/generator/cmake_files/templates/src/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/src
 mkdir top-level
-cp ${SOURCE_DIR}/generator/cmake_files/template/top-level/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/top-level
+cp ${SOURCE_DIR}/generator/cmake_files/templates/top-level/*.txt ${DIST_DIR}/deviser/generator/cmake_files/templates/top-level
 cd ..
 cd ..
 
