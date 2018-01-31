@@ -27,67 +27,67 @@ cp ${SOURCE_DIR}/generator/*.py ${DIST_DIR}/deviser/generator
 
 cd generator
 mkdir base_files
-cp ${SOURCE_DIR}/base_files/*.py ${DIST_DIR}/deviser/generator/base_files
+cp ${SOURCE_DIR}/generator/base_files/*.py ${DIST_DIR}/deviser/generator/base_files
 
 mkdir bindings_files
-cp ${SOURCE_DIR}/bindings_files/*.py ${DIST_DIR}/deviser/generator/bindings_files
+cp ${SOURCE_DIR}/generator/bindings_files/*.py ${DIST_DIR}/deviser/generator/bindings_files
 
 cd bindings_files
 mkdir templates
 cd templates
 mkdir csharp
-cp ${SOURCE_DIR}/bindings_files/templates/csharp/*.* ${DIST_DIR}/deviser/generator/bindings_files/templates/csharp
+cp ${SOURCE_DIR}/generator/bindings_files/templates/csharp/*.* ${DIST_DIR}/deviser/generator/bindings_files/templates/csharp
 mkdir swig
-cp ${SOURCE_DIR}/bindings_files/templates/swig/*.* ${DIST_DIR}/deviser/generator/bindings_files/templates/swig
+cp ${SOURCE_DIR}/generator/bindings_files/templates/swig/*.* ${DIST_DIR}/deviser/generator/bindings_files/templates/swig
 cd ..
 cd ..
 
 mkdir cmake_files
-cp ${SOURCE_DIR}/cmake_files/*.py ${DIST_DIR}/deviser/generator/cmake_files
+cp ${SOURCE_DIR}/generator/cmake_files/*.py ${DIST_DIR}/deviser/generator/cmake_files
 
 cd cmake_files
 mkdir templates
 cd templates
 mkdir bindings
-cp ${SOURCE_DIR}/cmake_files/template/bindings/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/bindings
+cp ${SOURCE_DIR}/generator/cmake_files/template/bindings/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/bindings
 mkdir code_files
-cp ${SOURCE_DIR}/cmake_files/template/code_files/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/code_files
+cp ${SOURCE_DIR}/generator/cmake_files/template/code_files/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/code_files
 mkdir src
-cp ${SOURCE_DIR}/cmake_files/template/src/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/src
+cp ${SOURCE_DIR}/generator/cmake_files/template/src/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/src
 mkdir top-level
-cp ${SOURCE_DIR}/cmake_files/template/top-level/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/top-level
+cp ${SOURCE_DIR}/generator/cmake_files/template/top-level/*.txt ${DIST_DIR}/deviser/generator/cmake_files/template/top-level
 cd ..
 cd ..
 
 
 
 mkdir code_files
-cp ${SOURCE_DIR}/code_files/*.py ${DIST_DIR}/deviser/generator/code_files
+cp ${SOURCE_DIR}/generator/code_files/*.py ${DIST_DIR}/deviser/generator/code_files
 
 cd code_files
 mkdir cpp_functions
-cp ${SOURCE_DIR}/code_files/cpp_functions/*.py ${DIST_DIR}/deviser/generator/code_files/cpp_functions
+cp ${SOURCE_DIR}/generator/code_files/cpp_functions/*.py ${DIST_DIR}/deviser/generator/code_files/cpp_functions
 mkdir templates
-cp ${SOURCE_DIR}/code_files/templates/*.* ${DIST_DIR}/deviser/generator/code_files/templates
+cp ${SOURCE_DIR}/generator/code_files/templates/*.* ${DIST_DIR}/deviser/generator/code_files/templates
 cd ..
 
 mkdir parseXML
-cp ${SOURCE_DIR}/parseXML/*.py ${DIST_DIR}/deviser/generator/parseXML
+cp ${SOURCE_DIR}/generator/parseXML/*.py ${DIST_DIR}/deviser/generator/parseXML
 
 mkdir spec_files
-cp ${SOURCE_DIR}/spec_files/*.py ${DIST_DIR}/deviser/generator/spec_files
-cp ${SOURCE_DIR}/spec_files/*.txt ${DIST_DIR}/deviser/generator/spec_files
+cp ${SOURCE_DIR}/generator/spec_files/*.py ${DIST_DIR}/deviser/generator/spec_files
+cp ${SOURCE_DIR}/generator/spec_files/*.txt ${DIST_DIR}/deviser/generator/spec_files
 
 mkdir util
-cp ${SOURCE_DIR}/util/*.py ${DIST_DIR}/deviser/generator/util
+cp ${SOURCE_DIR}/generator/util/*.py ${DIST_DIR}/deviser/generator/util
 
 cd util
 mkdir templates
-cp ${SOURCE_DIR}/util/templates/*.md ${DIST_DIR}/deviser/generator/util/templates
+cp ${SOURCE_DIR}/generator/util/templates/*.md ${DIST_DIR}/deviser/generator/util/templates
 cd ..
 
 mkdir validation
-cp ${SOURCE_DIR}/validation/*.py ${DIST_DIR}/deviser/generator/validation
+cp ${SOURCE_DIR}/generator/validation/*.py ${DIST_DIR}/deviser/generator/validation
 
 
 cd $DIRECTORY
