@@ -20,11 +20,8 @@ cd deviser
 mkdir samples
 mkdir generator
 
-cd samples
 
-cp ${SOURCE_DIR}/samples/*.xml ${BUILD_DIR}/samples/*.xml
+cp ${SOURCE_DIR}/samples/*.xml ${DIST_DIR}/deviser/samples
 
-cd ..
-cd generator
 
 cd $DIRECTORY
