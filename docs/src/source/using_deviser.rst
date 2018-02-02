@@ -265,18 +265,18 @@ and versions but not for the other headers.
 Command line
 ------------
 
-The command line function deviser.py can be invoked directly.
+The command line function deviser.py can be invoked directly::
 
-deviser.py [--generate][--latex] input-file.xml
+      deviser.py [--generate][--latex] input-file.xml
 
 This program takes as input a Deviser XML file and either
 
--  --generate (-g) generates the libSBML code for the package
+-  ``--generate`` (``-g``) generates the libSBML code for the package
 
     This generates the complete src package that can be zipped and then
     unzipped over an existing libSBML src tree.
 
--  --latex (-l) generates a LaTeX scaffold for its specification.
+-  ``--latex`` (``-l``) generates a LaTeX scaffold for its specification.
 
     This generates the adx-validation.tex, macros.tex and body.tex files
     which can then be integrated into a package pdf using the
