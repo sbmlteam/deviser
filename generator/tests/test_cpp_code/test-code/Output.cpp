@@ -295,17 +295,15 @@ Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 int
 Output::setTransitionEffect(const std::string& transitionEffect)
 {
-  if (TransitionOutputEffect_isValidString(transitionEffect.c_str()) == 0)
+  mTransitionEffect =
+    TransitionOutputEffect_fromString(transitionEffect.c_str());
+
+  if (mTransitionEffect == TRANSITION_OUTPUT_EFFECT_INVALID)
   {
-    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mTransitionEffect =
-      TransitionOutputEffect_fromString(transitionEffect.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

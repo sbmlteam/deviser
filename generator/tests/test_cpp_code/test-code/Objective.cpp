@@ -243,16 +243,14 @@ Objective::setType(const FbcType_t type)
 int
 Objective::setType(const std::string& type)
 {
-  if (FbcType_isValidString(type.c_str()) == 0)
+  mType = FbcType_fromString(type.c_str());
+
+  if (mType == FBC_TYPE_INVALID)
   {
-    mType = FBC_TYPE_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mType = FbcType_fromString(type.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

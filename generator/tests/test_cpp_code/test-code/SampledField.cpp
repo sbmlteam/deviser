@@ -432,16 +432,14 @@ SampledField::setDataType(const DataKind_t dataType)
 int
 SampledField::setDataType(const std::string& dataType)
 {
-  if (DataKind_isValidString(dataType.c_str()) == 0)
+  mDataType = DataKind_fromString(dataType.c_str());
+
+  if (mDataType == DATA_KIND_INVALID)
   {
-    mDataType = DATA_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mDataType = DataKind_fromString(dataType.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -506,17 +504,14 @@ SampledField::setInterpolationType(const InterpolationKind_t interpolationType)
 int
 SampledField::setInterpolationType(const std::string& interpolationType)
 {
-  if (InterpolationKind_isValidString(interpolationType.c_str()) == 0)
+  mInterpolationType = InterpolationKind_fromString(interpolationType.c_str());
+
+  if (mInterpolationType == INTERPOLATION_KIND_INVALID)
   {
-    mInterpolationType = INTERPOLATION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mInterpolationType =
-      InterpolationKind_fromString(interpolationType.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -545,16 +540,14 @@ SampledField::setCompression(const CompressionKind_t compression)
 int
 SampledField::setCompression(const std::string& compression)
 {
-  if (CompressionKind_isValidString(compression.c_str()) == 0)
+  mCompression = CompressionKind_fromString(compression.c_str());
+
+  if (mCompression == COMPRESSION_KIND_INVALID)
   {
-    mCompression = COMPRESSION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mCompression = CompressionKind_fromString(compression.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

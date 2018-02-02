@@ -379,16 +379,14 @@ Fred::setKind(const Kind_t kind)
 int
 Fred::setKind(const std::string& kind)
 {
-  if (Kind_isValidString(kind.c_str()) == 0)
+  mKind = Kind_fromString(kind.c_str());
+
+  if (mKind == KIND_INVALID)
   {
-    mKind = KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mKind = Kind_fromString(kind.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

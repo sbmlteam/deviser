@@ -444,16 +444,14 @@ RenderGroup::setFontWeight(const FontWeight_t fontWeight)
 int
 RenderGroup::setFontWeight(const std::string& fontWeight)
 {
-  if (FontWeight_isValidString(fontWeight.c_str()) == 0)
+  mFontWeight = FontWeight_fromString(fontWeight.c_str());
+
+  if (mFontWeight == FONT_WEIGHT_INVALID)
   {
-    mFontWeight = FONT_WEIGHT_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mFontWeight = FontWeight_fromString(fontWeight.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -482,16 +480,14 @@ RenderGroup::setFontStyle(const FontStyle_t fontStyle)
 int
 RenderGroup::setFontStyle(const std::string& fontStyle)
 {
-  if (FontStyle_isValidString(fontStyle.c_str()) == 0)
+  mFontStyle = FontStyle_fromString(fontStyle.c_str());
+
+  if (mFontStyle == FONT_STYLE_INVALID)
   {
-    mFontStyle = FONT_STYLE_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mFontStyle = FontStyle_fromString(fontStyle.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -520,16 +516,14 @@ RenderGroup::setTextAnchor(const HTextAnchor_t textAnchor)
 int
 RenderGroup::setTextAnchor(const std::string& textAnchor)
 {
-  if (HTextAnchor_isValidString(textAnchor.c_str()) == 0)
+  mTextAnchor = HTextAnchor_fromString(textAnchor.c_str());
+
+  if (mTextAnchor == H_TEXT_ANCHOR_INVALID)
   {
-    mTextAnchor = H_TEXT_ANCHOR_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mTextAnchor = HTextAnchor_fromString(textAnchor.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -558,16 +552,14 @@ RenderGroup::setVtextAnchor(const VTextAnchor_t vtextAnchor)
 int
 RenderGroup::setVtextAnchor(const std::string& vtextAnchor)
 {
-  if (VTextAnchor_isValidString(vtextAnchor.c_str()) == 0)
+  mVtextAnchor = VTextAnchor_fromString(vtextAnchor.c_str());
+
+  if (mVtextAnchor == V_TEXT_ANCHOR_INVALID)
   {
-    mVtextAnchor = V_TEXT_ANCHOR_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mVtextAnchor = VTextAnchor_fromString(vtextAnchor.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

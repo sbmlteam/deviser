@@ -243,16 +243,14 @@ Group::setKind(const GroupKind_t kind)
 int
 Group::setKind(const std::string& kind)
 {
-  if (GroupKind_isValidString(kind.c_str()) == 0)
+  mKind = GroupKind_fromString(kind.c_str());
+
+  if (mKind == GROUP_KIND_INVALID)
   {
-    mKind = GROUP_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mKind = GroupKind_fromString(kind.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

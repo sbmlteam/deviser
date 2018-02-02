@@ -264,16 +264,14 @@ OutwardBindingSite::setBindingStatus(const BindingStatus_t bindingStatus)
 int
 OutwardBindingSite::setBindingStatus(const std::string& bindingStatus)
 {
-  if (BindingStatus_isValidString(bindingStatus.c_str()) == 0)
+  mBindingStatus = BindingStatus_fromString(bindingStatus.c_str());
+
+  if (mBindingStatus == BINDING_STATUS_INVALID)
   {
-    mBindingStatus = BINDING_STATUS_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mBindingStatus = BindingStatus_fromString(bindingStatus.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

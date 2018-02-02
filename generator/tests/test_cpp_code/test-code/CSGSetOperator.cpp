@@ -240,16 +240,14 @@ CSGSetOperator::setOperationType(const SetOperation_t operationType)
 int
 CSGSetOperator::setOperationType(const std::string& operationType)
 {
-  if (SetOperation_isValidString(operationType.c_str()) == 0)
+  mOperationType = SetOperation_fromString(operationType.c_str());
+
+  if (mOperationType == SET_OPERATION_INVALID)
   {
-    mOperationType = SET_OPERATION_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mOperationType = SetOperation_fromString(operationType.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

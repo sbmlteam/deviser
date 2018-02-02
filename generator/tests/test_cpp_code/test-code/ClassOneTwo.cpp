@@ -537,16 +537,14 @@ ClassOneTwo::setAttEnum(const std::string& attEnum)
 
   if (coreLevel == 4 && coreVersion == 1 && pkgVersion == 1)
   {
-    if (AbcType_isValidString(attEnum.c_str()) == 0)
+    mAttEnum = AbcType_fromString(attEnum.c_str());
+
+    if (mAttEnum == ABC_TYPE_INVALID)
     {
-      mAttEnum = ABC_TYPE_INVALID;
       return LIBSBML_INVALID_ATTRIBUTE_VALUE;
     }
-    else
-    {
-      mAttEnum = AbcType_fromString(attEnum.c_str());
-      return LIBSBML_OPERATION_SUCCESS;
-    }
+
+    return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {

@@ -284,16 +284,14 @@ AnalyticVolume::setFunctionType(const FunctionKind_t functionType)
 int
 AnalyticVolume::setFunctionType(const std::string& functionType)
 {
-  if (FunctionKind_isValidString(functionType.c_str()) == 0)
+  mFunctionType = FunctionKind_fromString(functionType.c_str());
+
+  if (mFunctionType == FUNCTION_KIND_INVALID)
   {
-    mFunctionType = FUNCTION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mFunctionType = FunctionKind_fromString(functionType.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

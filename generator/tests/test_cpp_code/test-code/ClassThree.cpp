@@ -274,16 +274,14 @@ ClassThree::setNumber(const Enum_t number)
 int
 ClassThree::setNumber(const std::string& number)
 {
-  if (Enum_isValidString(number.c_str()) == 0)
+  mNumber = Enum_fromString(number.c_str());
+
+  if (mNumber == ENUM_INVALID)
   {
-    mNumber = ENUM_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mNumber = Enum_fromString(number.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -312,16 +310,14 @@ ClassThree::setName(const Fred_t name)
 int
 ClassThree::setName(const std::string& name)
 {
-  if (Fred_isValidString(name.c_str()) == 0)
+  mName = Fred_fromString(name.c_str());
+
+  if (mName == FRED_INVALID)
   {
-    mName = FRED_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mName = Fred_fromString(name.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -350,16 +346,14 @@ ClassThree::setBadName(const Fred_t badName)
 int
 ClassThree::setBadName(const std::string& badName)
 {
-  if (Fred_isValidString(badName.c_str()) == 0)
+  mBadName = Fred_fromString(badName.c_str());
+
+  if (mBadName == FRED_INVALID)
   {
-    mBadName = FRED_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mBadName = Fred_fromString(badName.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -388,16 +382,14 @@ ClassThree::setOtherNum(const Enum_t otherNum)
 int
 ClassThree::setOtherNum(const std::string& otherNum)
 {
-  if (Enum_isValidString(otherNum.c_str()) == 0)
+  mOtherNum = Enum_fromString(otherNum.c_str());
+
+  if (mOtherNum == ENUM_INVALID)
   {
-    mOtherNum = ENUM_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mOtherNum = Enum_fromString(otherNum.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

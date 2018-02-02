@@ -928,21 +928,30 @@ class SetGetFunctions():
             code = []
             name = attribute['name']
             [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
-            implementation = ['{0}_isValidString({1}.c_str()) == '
-                              '0'.format(attribute['element'],
-                                         att_name),
-                              '{0} = {1}'.format(attribute['memberName'],
-                                                 attribute['default']),
-                              'return {0}'.format(self.invalid_att), 'else',
-                              '{0} = {1}_fromString'
-                              '({2}.c_str())'.format(attribute['memberName'],
-                                                     attribute['element'],
-                                                     att_name),
-                              'return {0}'.format(self.success)]
+            line = ['{0} = {1}_fromString({2}.c_str())'.format(attribute['memberName'],
+                                                 attribute['element'], att_name)]
+            if_block = ['{0} == {1}'.format(attribute['memberName'], attribute['default']),
+                              'return {0}'.format(self.invalid_att)]
+            success_line = ['return {0}'.format(self.success)]
+            this_code = [self.create_code_block('line', line)]
+            this_code.append(self.create_code_block('if', if_block))
+            this_code.append(self.create_code_block('line', success_line))
+
+            # implementation = ['{0}_isValidString({1}.c_str()) == '
+            #                   '0'.format(attribute['element'],
+            #                              att_name),
+            #                   '{0} = {1}'.format(attribute['memberName'],
+            #                                      attribute['default']),
+            #                   'return {0}'.format(self.invalid_att), 'else',
+            #                   '{0} = {1}_fromString'
+            #                   '({2}.c_str())'.format(attribute['memberName'],
+            #                                          attribute['element'],
+            #                                          att_name),
+            #                   'return {0}'.format(self.success)]
             if not deal_with_versions:
-                code = [dict({'code_type': 'if_else', 'code': implementation})]
+                code = this_code
             else:
-                implementation = topif + [dict({'code_type': 'if_else', 'code': implementation})] + ['else'] + \
+                implementation = topif + this_code + ['else'] + \
                                  ['return {0}'.format(global_variables.ret_att_unex)]
                 code.append(self.create_code_block('if_else', implementation))
 

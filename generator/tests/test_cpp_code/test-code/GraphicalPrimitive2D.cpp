@@ -215,16 +215,14 @@ GraphicalPrimitive2D::setFillRule(const FillRule_t fillRule)
 int
 GraphicalPrimitive2D::setFillRule(const std::string& fillRule)
 {
-  if (FillRule_isValidString(fillRule.c_str()) == 0)
+  mFillRule = FillRule_fromString(fillRule.c_str());
+
+  if (mFillRule == FILL_RULE_INVALID)
   {
-    mFillRule = FILL_RULE_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mFillRule = FillRule_fromString(fillRule.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

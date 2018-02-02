@@ -276,16 +276,14 @@ CoordinateComponent::setType(const CoordinateKind_t type)
 int
 CoordinateComponent::setType(const std::string& type)
 {
-  if (CoordinateKind_isValidString(type.c_str()) == 0)
+  mType = CoordinateKind_fromString(type.c_str());
+
+  if (mType == COORDINATE_KIND_INVALID)
   {
-    mType = COORDINATE_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mType = CoordinateKind_fromString(type.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 

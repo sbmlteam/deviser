@@ -308,16 +308,14 @@ SpatialPoints::setCompression(const CompressionKind_t compression)
 int
 SpatialPoints::setCompression(const std::string& compression)
 {
-  if (CompressionKind_isValidString(compression.c_str()) == 0)
+  mCompression = CompressionKind_fromString(compression.c_str());
+
+  if (mCompression == COMPRESSION_KIND_INVALID)
   {
-    mCompression = COMPRESSION_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mCompression = CompressionKind_fromString(compression.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
@@ -383,16 +381,14 @@ SpatialPoints::setDataType(const DataKind_t dataType)
 int
 SpatialPoints::setDataType(const std::string& dataType)
 {
-  if (DataKind_isValidString(dataType.c_str()) == 0)
+  mDataType = DataKind_fromString(dataType.c_str());
+
+  if (mDataType == DATA_KIND_INVALID)
   {
-    mDataType = DATA_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
-  {
-    mDataType = DataKind_fromString(dataType.c_str());
-    return LIBSBML_OPERATION_SUCCESS;
-  }
+
+  return LIBSBML_OPERATION_SUCCESS;
 }
 
 
