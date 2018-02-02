@@ -194,10 +194,10 @@ SampledField::getDataType() const
 /*
  * Returns the value of the "dataType" attribute of this SampledField.
  */
-const std::string&
+std::string
 SampledField::getDataTypeAsString() const
 {
-  static const std::string code_str = DataKind_toString(mDataType);
+  std::string code_str = DataKind_toString(mDataType);
   return code_str;
 }
 
@@ -245,11 +245,10 @@ SampledField::getInterpolationType() const
 /*
  * Returns the value of the "interpolationType" attribute of this SampledField.
  */
-const std::string&
+std::string
 SampledField::getInterpolationTypeAsString() const
 {
-  static const std::string code_str =
-    InterpolationKind_toString(mInterpolationType);
+  std::string code_str = InterpolationKind_toString(mInterpolationType);
   return code_str;
 }
 
@@ -267,10 +266,10 @@ SampledField::getCompression() const
 /*
  * Returns the value of the "compression" attribute of this SampledField.
  */
-const std::string&
+std::string
 SampledField::getCompressionAsString() const
 {
-  static const std::string code_str = CompressionKind_toString(mCompression);
+  std::string code_str = CompressionKind_toString(mCompression);
   return code_str;
 }
 
@@ -1957,10 +1956,10 @@ SampledField_getDataType(const SampledField_t * sf)
  * Returns the value of the "dataType" attribute of this SampledField_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getDataTypeAsString(const SampledField_t * sf)
 {
-  return DataKind_toString(sf->getDataType());
+  return (char*)(DataKind_toString(sf->getDataType()));
 }
 
 
@@ -2019,10 +2018,10 @@ SampledField_getInterpolationType(const SampledField_t * sf)
  * SampledField_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getInterpolationTypeAsString(const SampledField_t * sf)
 {
-  return InterpolationKind_toString(sf->getInterpolationType());
+  return (char*)(InterpolationKind_toString(sf->getInterpolationType()));
 }
 
 
@@ -2046,10 +2045,10 @@ SampledField_getCompression(const SampledField_t * sf)
  * Returns the value of the "compression" attribute of this SampledField_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getCompressionAsString(const SampledField_t * sf)
 {
-  return CompressionKind_toString(sf->getCompression());
+  return (char*)(CompressionKind_toString(sf->getCompression()));
 }
 
 

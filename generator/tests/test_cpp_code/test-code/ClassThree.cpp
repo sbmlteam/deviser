@@ -137,10 +137,10 @@ ClassThree::getNumber() const
 /*
  * Returns the value of the "number" attribute of this ClassThree.
  */
-const std::string&
+std::string
 ClassThree::getNumberAsString() const
 {
-  static const std::string code_str = Enum_toString(mNumber);
+  std::string code_str = Enum_toString(mNumber);
   return code_str;
 }
 
@@ -158,10 +158,10 @@ ClassThree::getName() const
 /*
  * Returns the value of the "name" attribute of this ClassThree.
  */
-const std::string&
+std::string
 ClassThree::getNameAsString() const
 {
-  static const std::string code_str = Fred_toString(mName);
+  std::string code_str = Fred_toString(mName);
   return code_str;
 }
 
@@ -179,10 +179,10 @@ ClassThree::getBadName() const
 /*
  * Returns the value of the "badName" attribute of this ClassThree.
  */
-const std::string&
+std::string
 ClassThree::getBadNameAsString() const
 {
-  static const std::string code_str = Fred_toString(mBadName);
+  std::string code_str = Fred_toString(mBadName);
   return code_str;
 }
 
@@ -200,10 +200,10 @@ ClassThree::getOtherNum() const
 /*
  * Returns the value of the "otherNum" attribute of this ClassThree.
  */
-const std::string&
+std::string
 ClassThree::getOtherNumAsString() const
 {
-  static const std::string code_str = Enum_toString(mOtherNum);
+  std::string code_str = Enum_toString(mOtherNum);
   return code_str;
 }
 
@@ -1160,10 +1160,10 @@ ClassThree_getNumber(const ClassThree_t * ct)
  * Returns the value of the "number" attribute of this ClassThree_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getNumberAsString(const ClassThree_t * ct)
 {
-  return Enum_toString(ct->getNumber());
+  return (char*)(Enum_toString(ct->getNumber()));
 }
 
 
@@ -1187,10 +1187,10 @@ ClassThree_getName(const ClassThree_t * ct)
  * Returns the value of the "name" attribute of this ClassThree_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getNameAsString(const ClassThree_t * ct)
 {
-  return Fred_toString(ct->getName());
+  return (char*)(Fred_toString(ct->getName()));
 }
 
 
@@ -1214,10 +1214,10 @@ ClassThree_getBadName(const ClassThree_t * ct)
  * Returns the value of the "badName" attribute of this ClassThree_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getBadNameAsString(const ClassThree_t * ct)
 {
-  return Fred_toString(ct->getBadName());
+  return (char*)(Fred_toString(ct->getBadName()));
 }
 
 
@@ -1241,10 +1241,10 @@ ClassThree_getOtherNum(const ClassThree_t * ct)
  * Returns the value of the "otherNum" attribute of this ClassThree_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getOtherNumAsString(const ClassThree_t * ct)
 {
-  return Enum_toString(ct->getOtherNum());
+  return (char*)(Enum_toString(ct->getOtherNum()));
 }
 
 

@@ -159,10 +159,10 @@ Group::getKind() const
 /*
  * Returns the value of the "kind" attribute of this Group.
  */
-const std::string&
+std::string
 Group::getKindAsString() const
 {
-  static const std::string code_str = GroupKind_toString(mKind);
+  std::string code_str = GroupKind_toString(mKind);
   return code_str;
 }
 
@@ -1398,10 +1398,10 @@ Group_getKind(const Group_t * g)
  * Returns the value of the "kind" attribute of this Group_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getKindAsString(const Group_t * g)
 {
-  return GroupKind_toString(g->getKind());
+  return (char*)(GroupKind_toString(g->getKind()));
 }
 
 

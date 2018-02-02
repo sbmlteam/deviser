@@ -198,7 +198,7 @@ public:
    * @li @c "layered"
    * @li @c "invalid AnalyticVolumeFunctionType"
    */
-  const std::string& getFunctionTypeAsString() const;
+  std::string getFunctionTypeAsString() const;
 
 
   /**
@@ -958,7 +958,7 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  * @memberof AnalyticVolume_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 AnalyticVolume_getFunctionTypeAsString(const AnalyticVolume_t * av);
 
 

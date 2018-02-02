@@ -149,10 +149,10 @@ GraphicalPrimitive2D::getFillRule() const
 /*
  * Returns the value of the "fill-rule" attribute of this GraphicalPrimitive2D.
  */
-const std::string&
+std::string
 GraphicalPrimitive2D::getFillRuleAsString() const
 {
-  static const std::string code_str = FillRule_toString(mFillRule);
+  std::string code_str = FillRule_toString(mFillRule);
   return code_str;
 }
 
@@ -918,10 +918,10 @@ GraphicalPrimitive2D_getFillRule(const GraphicalPrimitive2D_t * gpd)
  * GraphicalPrimitive2D_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 GraphicalPrimitive2D_getFillRuleAsString(const GraphicalPrimitive2D_t * gpd)
 {
-  return FillRule_toString(gpd->getFillRule());
+  return (char*)(FillRule_toString(gpd->getFillRule()));
 }
 
 

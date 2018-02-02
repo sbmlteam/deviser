@@ -154,10 +154,10 @@ CSGSetOperator::getOperationType() const
 /*
  * Returns the value of the "operationType" attribute of this CSGSetOperator.
  */
-const std::string&
+std::string
 CSGSetOperator::getOperationTypeAsString() const
 {
-  static const std::string code_str = SetOperation_toString(mOperationType);
+  std::string code_str = SetOperation_toString(mOperationType);
   return code_str;
 }
 
@@ -1624,10 +1624,10 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso)
  * Returns the value of the "operationType" attribute of this CSGSetOperator_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getOperationTypeAsString(const CSGSetOperator_t * csgso)
 {
-  return SetOperation_toString(csgso->getOperationType());
+  return (char*)(SetOperation_toString(csgso->getOperationType()));
 }
 
 

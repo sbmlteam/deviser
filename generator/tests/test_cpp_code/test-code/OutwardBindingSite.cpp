@@ -156,10 +156,10 @@ OutwardBindingSite::getBindingStatus() const
  * Returns the value of the "bindingStatus" attribute of this
  * OutwardBindingSite.
  */
-const std::string&
+std::string
 OutwardBindingSite::getBindingStatusAsString() const
 {
-  static const std::string code_str = BindingStatus_toString(mBindingStatus);
+  std::string code_str = BindingStatus_toString(mBindingStatus);
   return code_str;
 }
 
@@ -1122,10 +1122,10 @@ OutwardBindingSite_getBindingStatus(const OutwardBindingSite_t * obs)
  * OutwardBindingSite_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 OutwardBindingSite_getBindingStatusAsString(const OutwardBindingSite_t * obs)
 {
-  return BindingStatus_toString(obs->getBindingStatus());
+  return (char*)(BindingStatus_toString(obs->getBindingStatus()));
 }
 
 

@@ -224,10 +224,10 @@ RenderGroup::getFontWeight() const
 /*
  * Returns the value of the "font-weight" attribute of this RenderGroup.
  */
-const std::string&
+std::string
 RenderGroup::getFontWeightAsString() const
 {
-  static const std::string code_str = FontWeight_toString(mFontWeight);
+  std::string code_str = FontWeight_toString(mFontWeight);
   return code_str;
 }
 
@@ -245,10 +245,10 @@ RenderGroup::getFontStyle() const
 /*
  * Returns the value of the "font-style" attribute of this RenderGroup.
  */
-const std::string&
+std::string
 RenderGroup::getFontStyleAsString() const
 {
-  static const std::string code_str = FontStyle_toString(mFontStyle);
+  std::string code_str = FontStyle_toString(mFontStyle);
   return code_str;
 }
 
@@ -266,10 +266,10 @@ RenderGroup::getTextAnchor() const
 /*
  * Returns the value of the "text-anchor" attribute of this RenderGroup.
  */
-const std::string&
+std::string
 RenderGroup::getTextAnchorAsString() const
 {
-  static const std::string code_str = HTextAnchor_toString(mTextAnchor);
+  std::string code_str = HTextAnchor_toString(mTextAnchor);
   return code_str;
 }
 
@@ -287,10 +287,10 @@ RenderGroup::getVtextAnchor() const
 /*
  * Returns the value of the "vtext-anchor" attribute of this RenderGroup.
  */
-const std::string&
+std::string
 RenderGroup::getVtextAnchorAsString() const
 {
-  static const std::string code_str = VTextAnchor_toString(mVtextAnchor);
+  std::string code_str = VTextAnchor_toString(mVtextAnchor);
   return code_str;
 }
 
@@ -2457,10 +2457,10 @@ RenderGroup_getFontWeight(const RenderGroup_t * rg)
  * Returns the value of the "font-weight" attribute of this RenderGroup_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getFontWeightAsString(const RenderGroup_t * rg)
 {
-  return FontWeight_toString(rg->getFontWeight());
+  return (char*)(FontWeight_toString(rg->getFontWeight()));
 }
 
 
@@ -2484,10 +2484,10 @@ RenderGroup_getFontStyle(const RenderGroup_t * rg)
  * Returns the value of the "font-style" attribute of this RenderGroup_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getFontStyleAsString(const RenderGroup_t * rg)
 {
-  return FontStyle_toString(rg->getFontStyle());
+  return (char*)(FontStyle_toString(rg->getFontStyle()));
 }
 
 
@@ -2511,10 +2511,10 @@ RenderGroup_getTextAnchor(const RenderGroup_t * rg)
  * Returns the value of the "text-anchor" attribute of this RenderGroup_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getTextAnchorAsString(const RenderGroup_t * rg)
 {
-  return HTextAnchor_toString(rg->getTextAnchor());
+  return (char*)(HTextAnchor_toString(rg->getTextAnchor()));
 }
 
 
@@ -2538,10 +2538,10 @@ RenderGroup_getVtextAnchor(const RenderGroup_t * rg)
  * Returns the value of the "vtext-anchor" attribute of this RenderGroup_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getVtextAnchorAsString(const RenderGroup_t * rg)
 {
-  return VTextAnchor_toString(rg->getVtextAnchor());
+  return (char*)(VTextAnchor_toString(rg->getVtextAnchor()));
 }
 
 

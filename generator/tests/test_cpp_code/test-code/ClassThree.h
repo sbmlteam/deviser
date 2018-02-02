@@ -235,7 +235,7 @@ public:
    * @li @c "Two"
    * @li @c "invalid ClassThreeNumber"
    */
-  const std::string& getNumberAsString() const;
+  std::string getNumberAsString() const;
 
 
   /**
@@ -264,7 +264,7 @@ public:
    * @li @c "dick"
    * @li @c "invalid ClassThreeName"
    */
-  const std::string& getNameAsString() const;
+  std::string getNameAsString() const;
 
 
   /**
@@ -295,7 +295,7 @@ public:
    * @li @c "dick"
    * @li @c "invalid ClassThreeBadName"
    */
-  const std::string& getBadNameAsString() const;
+  std::string getBadNameAsString() const;
 
 
   /**
@@ -326,7 +326,7 @@ public:
    * @li @c "Two"
    * @li @c "invalid ClassThreeOtherNum"
    */
-  const std::string& getOtherNumAsString() const;
+  std::string getOtherNumAsString() const;
 
 
   /**
@@ -1028,7 +1028,7 @@ ClassThree_getNumber(const ClassThree_t * ct);
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getNumberAsString(const ClassThree_t * ct);
 
 
@@ -1072,7 +1072,7 @@ ClassThree_getName(const ClassThree_t * ct);
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getNameAsString(const ClassThree_t * ct);
 
 
@@ -1117,7 +1117,7 @@ ClassThree_getBadName(const ClassThree_t * ct);
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getBadNameAsString(const ClassThree_t * ct);
 
 
@@ -1162,7 +1162,7 @@ ClassThree_getOtherNum(const ClassThree_t * ct);
  * @memberof ClassThree_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassThree_getOtherNumAsString(const ClassThree_t * ct);
 
 

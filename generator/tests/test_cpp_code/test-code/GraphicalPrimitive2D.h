@@ -206,7 +206,7 @@ public:
    * @li @c "evenodd"
    * @li @c "invalid GraphicalPrimitive2DFill-rule"
    */
-  const std::string& getFillRuleAsString() const;
+  std::string getFillRuleAsString() const;
 
 
   /**
@@ -860,7 +860,7 @@ GraphicalPrimitive2D_getFillRule(const GraphicalPrimitive2D_t * gpd);
  * @memberof GraphicalPrimitive2D_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 GraphicalPrimitive2D_getFillRuleAsString(const GraphicalPrimitive2D_t * gpd);
 
 

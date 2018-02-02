@@ -263,7 +263,7 @@ public:
    * @li @c "minimize"
    * @li @c "invalid ClassOneTwoAttEnum"
    */
-  const std::string& getAttEnumAsString() const;
+  std::string getAttEnumAsString() const;
 
 
   /**
@@ -1236,7 +1236,7 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot);
  * @memberof ClassOneTwo_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttEnumAsString(const ClassOneTwo_t * cot);
 
 

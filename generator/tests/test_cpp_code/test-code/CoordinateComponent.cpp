@@ -190,10 +190,10 @@ CoordinateComponent::getType() const
 /*
  * Returns the value of the "type" attribute of this CoordinateComponent.
  */
-const std::string&
+std::string
 CoordinateComponent::getTypeAsString() const
 {
-  static const std::string code_str = CoordinateKind_toString(mType);
+  std::string code_str = CoordinateKind_toString(mType);
   return code_str;
 }
 
@@ -1655,10 +1655,10 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc)
  * Returns the value of the "type" attribute of this CoordinateComponent_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc)
 {
-  return CoordinateKind_toString(cc->getType());
+  return (char*)(CoordinateKind_toString(cc->getType()));
 }
 
 

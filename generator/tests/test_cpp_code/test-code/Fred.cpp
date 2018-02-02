@@ -251,10 +251,10 @@ Fred::getKind() const
 /*
  * Returns the value of the "kind" attribute of this Fred.
  */
-const std::string&
+std::string
 Fred::getKindAsString() const
 {
-  static const std::string code_str = Kind_toString(mKind);
+  std::string code_str = Kind_toString(mKind);
   return code_str;
 }
 
@@ -2002,10 +2002,10 @@ Fred_getKind(const Fred_t * f)
  * Returns the value of the "kind" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getKindAsString(const Fred_t * f)
 {
-  return Kind_toString(f->getKind());
+  return (char*)(Kind_toString(f->getKind()));
 }
 
 

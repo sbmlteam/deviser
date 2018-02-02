@@ -203,7 +203,7 @@ public:
    * @li @c "collection"
    * @li @c "invalid GroupKind"
    */
-  const std::string& getKindAsString() const;
+  std::string getKindAsString() const;
 
 
   /**
@@ -1232,7 +1232,7 @@ Group_getKind(const Group_t * g);
  * @memberof Group_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Group_getKindAsString(const Group_t * g);
 
 

@@ -207,7 +207,7 @@ public:
    * @li @c "cartesianZ"
    * @li @c "invalid CoordinateComponentType"
    */
-  const std::string& getTypeAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
@@ -1153,7 +1153,7 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  * @memberof CoordinateComponent_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CoordinateComponent_getTypeAsString(const CoordinateComponent_t * cc);
 
 

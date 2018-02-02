@@ -241,10 +241,10 @@ ClassOneTwo::getAttEnum() const
 /*
  * Returns the value of the "attEnum" attribute of this ClassOneTwo.
  */
-const std::string&
+std::string
 ClassOneTwo::getAttEnumAsString() const
 {
-  static const std::string code_str = AbcType_toString(mAttEnum);
+  std::string code_str = AbcType_toString(mAttEnum);
   return code_str;
 }
 
@@ -2079,10 +2079,10 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot)
  * Returns the value of the "attEnum" attribute of this ClassOneTwo_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 ClassOneTwo_getAttEnumAsString(const ClassOneTwo_t * cot)
 {
-  return AbcType_toString(cot->getAttEnum());
+  return (char*)(AbcType_toString(cot->getAttEnum()));
 }
 
 

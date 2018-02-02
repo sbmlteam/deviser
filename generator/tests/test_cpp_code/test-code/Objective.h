@@ -217,7 +217,7 @@ public:
    * @li @c "minimize"
    * @li @c "invalid ObjectiveType"
    */
-  const std::string& getTypeAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
@@ -1306,7 +1306,7 @@ Objective_getType(const Objective_t * o);
  * @memberof Objective_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getTypeAsString(const Objective_t * o);
 
 

@@ -218,7 +218,7 @@ public:
    * @li @c "first"
    * @li @c "invalid FredKind"
    */
-  const std::string& getKindAsString() const;
+  std::string getKindAsString() const;
 
 
   /**
@@ -1265,7 +1265,7 @@ Fred_getKind(const Fred_t * f);
  * @memberof Fred_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Fred_getKindAsString(const Fred_t * f);
 
 

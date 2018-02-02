@@ -159,10 +159,10 @@ Objective::getType() const
 /*
  * Returns the value of the "type" attribute of this Objective.
  */
-const std::string&
+std::string
 Objective::getTypeAsString() const
 {
-  static const std::string code_str = FbcType_toString(mType);
+  std::string code_str = FbcType_toString(mType);
   return code_str;
 }
 
@@ -1606,10 +1606,10 @@ Objective_getType(const Objective_t * o)
  * Returns the value of the "type" attribute of this Objective_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Objective_getTypeAsString(const Objective_t * o)
 {
-  return FbcType_toString(o->getType());
+  return (char*)(FbcType_toString(o->getType()));
 }
 
 

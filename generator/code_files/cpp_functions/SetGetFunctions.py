@@ -314,11 +314,11 @@ class SetGetFunctions():
         # create the function declaration
         if self.is_cpp_api:
             function = 'get{0}AsString'.format(attribute['capAttName'])
-            return_type = 'const std::string&'
+            return_type = 'std::string'
         else:
             function = '{0}_get{1}AsString'.format(self.class_name,
                                                    attribute['capAttName'])
-            return_type = 'const char *'
+            return_type = 'char *'
 
         arguments = []
         if not self.is_cpp_api:
@@ -335,15 +335,15 @@ class SetGetFunctions():
                 for value in strvalues:
                     additional.append('@li @c \"{0}\"'.format(value))
         if self.is_cpp_api:
-            implementation = ['static const std::string code_str =  {0}_'
+            implementation = ['std::string code_str =  {0}_'
                               'toString({1})'.format(attribute['element'],
                                                      attribute['memberName']),
                               'return code_str']
         else:
-            implementation = ['return {0}_toString({1}->get{2}()'
-                              ')'.format(attribute['element'],
-                                         self.abbrev_parent,
-                                         attribute['capAttName'])]
+            implementation = ['return (char*)({0}_toString({1}->get{2}()'
+                              '))'.format(attribute['element'],
+                                          self.abbrev_parent,
+                                          attribute['capAttName'])]
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         # return the parts

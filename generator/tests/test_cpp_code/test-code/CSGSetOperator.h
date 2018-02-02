@@ -197,7 +197,7 @@ public:
    * @li @c "relativeComplement"
    * @li @c "invalid CSGSetOperatorOperationType"
    */
-  const std::string& getOperationTypeAsString() const;
+  std::string getOperationTypeAsString() const;
 
 
   /**
@@ -1304,7 +1304,7 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso);
  * @memberof CSGSetOperator_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 CSGSetOperator_getOperationTypeAsString(const CSGSetOperator_t * csgso);
 
 

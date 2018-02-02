@@ -162,11 +162,10 @@ Output::getTransitionEffect() const
 /*
  * Returns the value of the "transitionEffect" attribute of this Output.
  */
-const std::string&
+std::string
 Output::getTransitionEffectAsString() const
 {
-  static const std::string code_str =
-    TransitionOutputEffect_toString(mTransitionEffect);
+  std::string code_str = TransitionOutputEffect_toString(mTransitionEffect);
   return code_str;
 }
 
@@ -1221,10 +1220,10 @@ Output_getTransitionEffect(const Output_t * o)
  * Returns the value of the "transitionEffect" attribute of this Output_t.
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getTransitionEffectAsString(const Output_t * o)
 {
-  return TransitionOutputEffect_toString(o->getTransitionEffect());
+  return (char*)(TransitionOutputEffect_toString(o->getTransitionEffect()));
 }
 
 

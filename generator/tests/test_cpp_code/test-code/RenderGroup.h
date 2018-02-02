@@ -279,7 +279,7 @@ public:
    * @li @c "normal"
    * @li @c "invalid RenderGroupFont-weight"
    */
-  const std::string& getFontWeightAsString() const;
+  std::string getFontWeightAsString() const;
 
 
   /**
@@ -310,7 +310,7 @@ public:
    * @li @c "normal"
    * @li @c "invalid RenderGroupFont-style"
    */
-  const std::string& getFontStyleAsString() const;
+  std::string getFontStyleAsString() const;
 
 
   /**
@@ -344,7 +344,7 @@ public:
    * @li @c "end"
    * @li @c "invalid RenderGroupText-anchor"
    */
-  const std::string& getTextAnchorAsString() const;
+  std::string getTextAnchorAsString() const;
 
 
   /**
@@ -380,7 +380,7 @@ public:
    * @li @c "baseline"
    * @li @c "invalid RenderGroupVtext-anchor"
    */
-  const std::string& getVtextAnchorAsString() const;
+  std::string getVtextAnchorAsString() const;
 
 
   /**
@@ -1738,7 +1738,7 @@ RenderGroup_getFontWeight(const RenderGroup_t * rg);
  * @memberof RenderGroup_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getFontWeightAsString(const RenderGroup_t * rg);
 
 
@@ -1783,7 +1783,7 @@ RenderGroup_getFontStyle(const RenderGroup_t * rg);
  * @memberof RenderGroup_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getFontStyleAsString(const RenderGroup_t * rg);
 
 
@@ -1830,7 +1830,7 @@ RenderGroup_getTextAnchor(const RenderGroup_t * rg);
  * @memberof RenderGroup_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getTextAnchorAsString(const RenderGroup_t * rg);
 
 
@@ -1879,7 +1879,7 @@ RenderGroup_getVtextAnchor(const RenderGroup_t * rg);
  * @memberof RenderGroup_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 RenderGroup_getVtextAnchorAsString(const RenderGroup_t * rg);
 
 

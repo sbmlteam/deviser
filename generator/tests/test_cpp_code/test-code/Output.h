@@ -208,7 +208,7 @@ public:
    * @li @c "assignmentLevel"
    * @li @c "invalid OutputTransitionEffect"
    */
-  const std::string& getTransitionEffectAsString() const;
+  std::string getTransitionEffectAsString() const;
 
 
   /**
@@ -946,7 +946,7 @@ Output_getTransitionEffect(const Output_t * o);
  * @memberof Output_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 Output_getTransitionEffectAsString(const Output_t * o);
 
 

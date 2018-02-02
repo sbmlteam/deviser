@@ -250,7 +250,7 @@ public:
    * @li @c "uint32"
    * @li @c "invalid SampledFieldDataType"
    */
-  const std::string& getDataTypeAsString() const;
+  std::string getDataTypeAsString() const;
 
 
   /**
@@ -313,7 +313,7 @@ public:
    * @li @c "linear"
    * @li @c "invalid SampledFieldInterpolationType"
    */
-  const std::string& getInterpolationTypeAsString() const;
+  std::string getInterpolationTypeAsString() const;
 
 
   /**
@@ -345,7 +345,7 @@ public:
    * @li @c "deflated"
    * @li @c "invalid SampledFieldCompression"
    */
-  const std::string& getCompressionAsString() const;
+  std::string getCompressionAsString() const;
 
 
   /**
@@ -1318,7 +1318,7 @@ SampledField_getDataType(const SampledField_t * sf);
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getDataTypeAsString(const SampledField_t * sf);
 
 
@@ -1413,7 +1413,7 @@ SampledField_getInterpolationType(const SampledField_t * sf);
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getInterpolationTypeAsString(const SampledField_t * sf);
 
 
@@ -1459,7 +1459,7 @@ SampledField_getCompression(const SampledField_t * sf);
  * @memberof SampledField_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SampledField_getCompressionAsString(const SampledField_t * sf);
 
 

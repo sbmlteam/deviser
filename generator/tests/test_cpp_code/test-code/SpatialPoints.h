@@ -222,7 +222,7 @@ public:
    * @li @c "deflated"
    * @li @c "invalid SpatialPointsCompression"
    */
-  const std::string& getCompressionAsString() const;
+  std::string getCompressionAsString() const;
 
 
   /**
@@ -281,7 +281,7 @@ public:
    * @li @c "uint32"
    * @li @c "invalid SpatialPointsDataType"
    */
-  const std::string& getDataTypeAsString() const;
+  std::string getDataTypeAsString() const;
 
 
   /**
@@ -1024,7 +1024,7 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  * @memberof SpatialPoints_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SpatialPoints_getCompressionAsString(const SpatialPoints_t * sp);
 
 
@@ -1091,7 +1091,7 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  * @memberof SpatialPoints_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 SpatialPoints_getDataTypeAsString(const SpatialPoints_t * sp);
 
 

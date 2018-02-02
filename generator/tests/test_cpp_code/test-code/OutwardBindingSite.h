@@ -216,7 +216,7 @@ public:
    * @li @c "either"
    * @li @c "invalid OutwardBindingSiteBindingStatus"
    */
-  const std::string& getBindingStatusAsString() const;
+  std::string getBindingStatusAsString() const;
 
 
   /**
@@ -934,7 +934,7 @@ OutwardBindingSite_getBindingStatus(const OutwardBindingSite_t * obs);
  * @memberof OutwardBindingSite_t
  */
 LIBSBML_EXTERN
-const char *
+char *
 OutwardBindingSite_getBindingStatusAsString(const OutwardBindingSite_t * obs);
 
 
