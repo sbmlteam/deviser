@@ -1518,7 +1518,7 @@ Defining multiple versions of a package
 ---------------------------------------
 
 .. warning::
-   Latex generation does not, as yet, deal with multiple versions.
+   Latex output generation does not, as yet, deal with multiple versions.
 
 Deviser code generation neatly handles multiple versions of a package.
 
