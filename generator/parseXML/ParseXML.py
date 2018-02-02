@@ -705,7 +705,11 @@ class ParseXML():
         self.package_name = temp.lower()
         number = self.get_int_value(self, self.dom.documentElement, 'number')
         offset = self.get_int_value(self, self.dom.documentElement, 'offset')
-        fullname = self.get_value(self.dom.documentElement, 'fullname')
+        fname = self.get_value(self.dom.documentElement, 'fullname')
+        fullname = fname
+        if fname.endswith('.'):
+            l = len(fname)
+            fullname = fname[0:l-1]
         required = self.get_bool_value(self, self.dom.documentElement, 
                                        'required')
         custom_copyright = self.get_add_code_value(self,
