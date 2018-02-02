@@ -411,7 +411,7 @@ VersExtension::getErrorIdOffset() const
  * Returns true if the package has multiple versions.
  */
 bool
-VersExtension::hasMultipleVersions() const
+VersExtension::hasMultiplePackageVersions() const
 {
   return true;
 }

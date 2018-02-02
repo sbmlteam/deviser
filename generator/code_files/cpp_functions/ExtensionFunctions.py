@@ -446,7 +446,7 @@ class ExtensionFunctions():
 
         # create the function declaration
         arguments = ['']
-        function = 'hasMultipleVersions'
+        function = 'hasMultiplePackageVersions'
         return_type = 'bool'
 
         return_value = 'true'

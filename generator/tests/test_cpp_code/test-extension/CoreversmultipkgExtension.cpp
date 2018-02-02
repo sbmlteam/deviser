@@ -499,7 +499,7 @@ CoreversmultipkgExtension::getErrorIdOffset() const
  * Returns true if the package has multiple versions.
  */
 bool
-CoreversmultipkgExtension::hasMultipleVersions() const
+CoreversmultipkgExtension::hasMultiplePackageVersions() const
 {
   return true;
 }

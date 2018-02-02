@@ -362,7 +362,7 @@ public:
    *
    * @return true if multiple versions, false otherwise.
    */
-  virtual bool hasMultipleVersions() const;
+  virtual bool hasMultiplePackageVersions() const;
 
   /** @endcond */
 

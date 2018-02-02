@@ -407,7 +407,7 @@ TwoatonceExtension::getErrorIdOffset() const
  * Returns true if the package has multiple versions.
  */
 bool
-TwoatonceExtension::hasMultipleVersions() const
+TwoatonceExtension::hasMultiplePackageVersions() const
 {
   return false;
 }
