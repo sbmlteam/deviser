@@ -9,6 +9,9 @@ This is the full release of version 1.0 of Deviser.
 
 It is available at https://github.com/sbmlteam/deviser/releases.
 
+We use Pivotal Tracker https://www.pivotaltracker.com/n/projects/977192
+to record ongoing work/issues.
+
 
 
 # The following is for [X]Emacs users.  Please leave in place.
