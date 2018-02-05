@@ -10,7 +10,7 @@ Viewer for Iterative SBML Enhancement of Representations"*.
 with contributions from [Brett G. Olivier](http://teusinkbruggemanlab.nl/brett-olivier/), 
 Lucian P. Smith and [Mike Hucka](http://www.cds.caltech.edu/~mhucka).
 
-*License*:      This code is licensed under the LGPL version 2.1.  Please see the file [LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/moccasin/master/LICENSE.txt) for details.
+*License*:      This code is licensed under the LGPL version 2.1.  Please see the file [LICENSE.txt](https://raw.githubusercontent.com/sbmlteam/deviser/master/LICENSE.txt) for details.
 
 *Repository*:   [https://github.com/sbmlteam/deviser](https://github.com/sbmlteam/deviser)
 
