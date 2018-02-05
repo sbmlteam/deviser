@@ -38,7 +38,7 @@ Deviser is written in Python and is compatible with Python version 2.6 onwards.
 
 ## Using Deviser ##
 
-The Deviser Edit tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
+The [Deviser Edit](https://github.com/sbmlteam/QtDeviser)  tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
 
 1.	Create and view a UML diagram.
 2.	Generate the necessary libSBML code for the package.
