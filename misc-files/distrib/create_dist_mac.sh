@@ -21,6 +21,7 @@ cd deviser
 
 mkdir samples
 cp ${SOURCE_DIR}/samples/*.xml ${DIST_DIR}/deviser/samples
+cp ${SOURCE_DIR}/samples/*.txt ${DIST_DIR}/deviser/samples
 
 mkdir generator
 cp ${SOURCE_DIR}/generator/*.py ${DIST_DIR}/deviser/generator
