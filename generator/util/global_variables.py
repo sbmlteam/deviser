@@ -207,11 +207,10 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
             document_class = '{0}{1}'.format(prefix, doc)
 
 
+    global package_prefix
     if pkg_prefix:
-        global package_prefix
         package_prefix = pkg_prefix
     elif pkg_prefix == '':
-        global package_prefix
         package_prefix = ''
 
 
