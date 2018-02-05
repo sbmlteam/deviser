@@ -72,13 +72,10 @@ def get_sid_refs_for_class(working_class):
 
 # return True is any of the attributes refer to elements
 def has_children(attributes):
-    if any(attribute['type'] == 'element' for attribute in attributes):
-        return True
-    elif any(attribute['type'] == 'lo_element' for attribute in attributes):
-        return True
-    elif any(attribute['type'] == 'inline_lo_element'
-             for attribute in attributes):
-        return True
+    for attribute in attributes:
+        att_type = attribute['type']
+        if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
+            return True
     return False
 
 
@@ -527,17 +524,23 @@ def get_concrete_children(concretes, root, reqd_only, base_attributes, name):
 # get the child elements of the class name
 def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
     child = get_class(name, root)
-    if not child and name == 'ASTNode':
-        return dict({'name': 'math', 'children': []})
+    if not child:
+        if name == 'ASTNode':
+            return dict({'name': 'math', 'children': []})
+        else:
+            return dict({'name': name, 'children': []})
     children = []
     num_attribs = len(child['attribs'])
     if (has_children(child['attribs'])):
         for i in range(0, num_attribs):
             att_type = child['attribs'][i]['type']
             if att_type == 'element':
-                grandchildren = get_children(child['attribs'][i]['element'],
-                                             root, reqd_only, child['attribs'][i]['xml_name'])
-                children.append(grandchildren)
+                # for distrib we have a child that is a list of children of itself
+                # this will cause recursion
+                if name != child['attribs'][i]['element']:
+                    grandchildren = get_children(child['attribs'][i]['element'],
+                                                 root, reqd_only, child['attribs'][i]['xml_name'])
+                    children.append(grandchildren)
             elif att_type == 'lo_element':
                 if 'concrete' in child['attribs'][i]:
                     num = len(child['attribs'][i]['concrete'])
@@ -559,15 +562,21 @@ def get_children(name, root, reqd_only, xml_name='', base_attribs=[]):
 #                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
 
                 else:
+                    # for distrib we have a child that is a list of children of itself
+                    # this will cause recursion
+                    if name != child['attribs'][i]['element']:
+                        grandchildren = get_children(child['attribs'][i]['element'],
+                                                     root, reqd_only)
+                        if not reqd_only:
+                            grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
+                        children.append(grandchildren)
+            elif att_type == 'inline_lo_element':
+                # for distrib we have a child that is a list of children of itself
+                # this will cause recursion
+                if name != child['attribs'][i]['element']:
                     grandchildren = get_children(child['attribs'][i]['element'],
                                                  root, reqd_only)
-                    if not reqd_only:
-                        grandchildren = insert_list_of(grandchildren, child['attribs'][i]['element'], root)
                     children.append(grandchildren)
-            elif att_type == 'inline_lo_element':
-                grandchildren = get_children(child['attribs'][i]['element'],
-                                             root, reqd_only)
-                children.append(grandchildren)
             else:
                 continue
     # need attributes from base class
