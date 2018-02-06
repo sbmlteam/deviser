@@ -82,8 +82,7 @@ A windows installation executable which installs the Deviser Edit tool (QtDevise
 
 ### Linux OS
 
-
-
+A self-contained, binary installer is available that contains Deviser, DeviserEdit and the sbmlpkgspec modules. After installation DeviserEdit can be run from either a desktop icon or by calling the DeviserEdit.sh script in the installation directory. Deviser samples can be found in the deviser/samples subdirectory.
 
 ### Mac OS X
 
