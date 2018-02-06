@@ -38,6 +38,8 @@ Deviser is written in Python and is compatible with Python version 2.6 onwards.
 
 ## Using Deviser ##
 
+### Deviser Edit GUI ###
+
 The [Deviser Edit](https://github.com/sbmlteam/QtDeviser)  tool allows you to quickly define an SBML L3 package. It then provides the  following functionality
 
 1.	Create and view a UML diagram.
@@ -47,6 +49,7 @@ The [Deviser Edit](https://github.com/sbmlteam/QtDeviser)  tool allows you to qu
 
 The Deviser Edit tool creates an XML description of the package that is used by the deviser code to generate the requested files. This XML description is exemplified in the [samples](deviser/samples) directory.
 
+### Command Line Interface ###
 
 There is command line version of the function that can be used to invoke the deviser functionality on the XML file. This is the deviser.py file found in the generator directory.
 
@@ -61,19 +64,32 @@ Full documentation is available in the [docs](deviser\docs) directory.
 
 ## Installation ##
 
-##### Microsoft Windows OS
+The deviser release includes bundles/installer for each of the main operating systems.  
 
-The deviser release includes a windows installation executable. When installed this provides the user with the Deviser Edit tool (QtDeviser.exe) and additionally includes a python interpreter and the sbmlpkgspec files for generating SBML L3 Package specifications.
+### Prerequisites
 
-##### Linux OS
+1. A C++ compiler must be installed if you wish to compile the libSBML code generated.
+2. A pdflatex compiler must be installed if you wish to generate a pdf from the TeX sources generated.
+
+**NOTE**: These may already be available on your OS.
+
+### Microsoft Windows OS
+
+A windows installation executable which installs the Deviser Edit tool (QtDeviser.exe), all the necessary Deviser files. Additionally it includes a python interpreter and the sbmlpkgspec files for generating SBML L3 Package specifications.
+
+
+### Linux OS
 
 
 
 
-##### Mac OS X
+### Mac OS X
 
+An dmg file is available containing the DeviserEdit Application that embeds the necessary Deviser and sbmlpkgspec files in addition to *docs* and *samples* directories. 
 
+### Source archives
 
+The source archives contain the Deviser code that can be used via the command line.
 
 
 ## Other resources ##
@@ -99,7 +115,7 @@ grant R01 GM070923.
 ## Copyright and license ##
 
 
-Copyright (C) 2014-2015 jointly by the California Institute of Technology, Pasadena, CA, USA, EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK and the University of Heidelberg, Heidelberg, Germany
+Copyright (C) 2014-2018 jointly by the California Institute of Technology, Pasadena, CA, USA, EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK and the University of Heidelberg, Heidelberg, Germany
 
 This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or any later version.
 
