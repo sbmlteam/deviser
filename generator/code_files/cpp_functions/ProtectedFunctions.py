@@ -647,11 +647,15 @@ class ProtectedFunctions():
         if self.base_class:
             line = ['{0}::readAttributes(attributes, '
                     'expectedAttributes)'.format(self.base_class),
-                    'numErrs = log->getNumErrors()']
+                    ]
             code.append(self.create_code_block('line', line))
 
+            ifblock = ['log']
+            line = ['numErrs = log->getNumErrors()']
+            ifblock.append(self.create_code_block('line', line))
             line = self.get_error_from_base_class()
-            code.append(self.create_code_block('for', line))
+            ifblock.append(self.create_code_block('for', line))
+            code.append(self.create_code_block('if', ifblock))
 
         if not self.has_multiple_versions:
             for i in range(0, len(self.attributes)):
@@ -1197,12 +1201,12 @@ class ProtectedFunctions():
                 use_name = strFunctions.cap_list_of_name(self.class_name)
             else:
                 use_name = strFunctions.cap_list_of_name(self.lo_name)
-            line = ['static_cast<{0}*>(getParent{1}Object())->size() '
+            line = ['log && getParent{1}Object() && static_cast<{0}*>(getParent{1}Object())->size() '
                     '< 2'.format(use_name,
                                  self.cap_language),
                     'numErrs = log->getNumErrors()', for_loop]
         else:
-            line = ['static_cast<{0}*>(getParent{1}Object())->size() '
+            line = ['log && getParent{1}Object() && static_cast<{0}*>(getParent{1}Object())->size() '
                     '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
                                  global_variables.prefix),
                     'numErrs = log->getNumErrors()', for_loop]
