@@ -1298,7 +1298,7 @@ class ProtectedFunctions():
                 '{1})'.format(name, variable)]
         code.append(self.create_code_block('if', line))
 
-    def write_read_att(self, attributes, index, code, is_l3v1 = False):
+    def write_read_att(self, attributes, index, code, is_l3v1=False):
         attribute = attributes[index]
         if attribute['isArray']:
             return
@@ -1529,9 +1529,17 @@ class ProtectedFunctions():
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
-        if is_l3v1 and name == 'name':
-            line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
-                    'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
+        if name == 'name':
+            if is_l3v1:
+                line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
+                        'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
+            elif attribute['reqd'] or not self.has_multiple_versions:
+                line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
+                                                                              member)]
+            else:
+                line = ['// read by SBase']
+                code.append(self.create_code_block('line', line))
+                return
         else:
             line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
                                                                           member)]

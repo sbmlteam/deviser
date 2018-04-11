@@ -774,15 +774,7 @@ ClassWithRequiredID::readL3V2V1Attributes(const XMLAttributes& attributes)
   // name string (use = "optional" )
   // 
 
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<ClassWithRequiredID>");
-    }
-  }
+  // read by SBase;
 }
 
 /** @endcond */
