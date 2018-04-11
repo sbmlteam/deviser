@@ -701,6 +701,9 @@ class ProtectedFunctions():
         level_val = self.lv_info[version]['core_level']
         version_val = self.lv_info[version]['core_version']
         pkg_version = self.lv_info[version]['pkg_version']
+        is_l3v1 = False
+        if (level_val == 3 and version_val == 1):
+            is_l3v1 = True
         function = 'readL{0}V{1}V{2}Attributes'.format(level_val, version_val, pkg_version)
         return_type = 'void'
         if global_variables.is_package:
@@ -725,7 +728,7 @@ class ProtectedFunctions():
         code = [dict({'code_type': 'line', 'code': implementation})]
 
         for i in range(0, len(self.version_attributes[version])):
-            self.write_read_att(self.version_attributes[version], i, code)
+            self.write_read_att(self.version_attributes[version], i, code, is_l3v1)
 
         # return the parts
         return dict({'title_line': title_line,
@@ -1295,7 +1298,7 @@ class ProtectedFunctions():
                 '{1})'.format(name, variable)]
         code.append(self.create_code_block('if', line))
 
-    def write_read_att(self, attributes, index, code):
+    def write_read_att(self, attributes, index, code, is_l3v1 = False):
         attribute = attributes[index]
         if attribute['isArray']:
             return
@@ -1312,13 +1315,13 @@ class ProtectedFunctions():
         code.append(self.create_code_block('comment', implementation))
 
         if att_type == 'SId' or att_type == 'UnitSId' or att_type == 'ID':
-            self.write_sid_read(index, code, attributes)
+            self.write_sid_read(index, code, attributes, is_l3v1)
         elif att_type == 'SIdRef' or att_type == 'UnitSIdRef' or att_type == 'IDREF':
             self.write_sidref_read(index, code, attributes)
         elif att_type == 'enum':
             self.write_enum_read(index, code, attributes)
         elif att_type == 'string' or att_type == 'IDREF':
-            self.write_string_read(index, code, attributes)
+            self.write_string_read(index, code, attributes, is_l3v1)
         elif att_type == 'int' or att_type == 'uint' or att_type == 'double':
             self.write_number_read(index, code, att_type, attributes)
         elif att_type == 'bool':
@@ -1358,7 +1361,7 @@ class ProtectedFunctions():
         line = ['{0} == false'.format(set_name), nested_if]
         code.append(self.create_code_block('if', line))
 
-    def write_sid_read(self, index, code, attributes):
+    def write_sid_read(self, index, code, attributes, is_l3v1=False):
         attribute = attributes[index]
         name = attribute['xml_name']
         given_name = attribute['name']
@@ -1366,8 +1369,12 @@ class ProtectedFunctions():
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
         class_name = strFunctions.remove_prefix(self.class_name)
-        line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
-                                                                      member)]
+        if is_l3v1 and name == 'id':
+            line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
+                    'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
+        else:
+            line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
+                                                                          member)]
         code.append(self.create_code_block('line', line))
 
         check_function = 'isValidSBMLSId'.format(self.cap_language)
@@ -1516,14 +1523,18 @@ class ProtectedFunctions():
                      self.create_code_block('line', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
-    def write_string_read(self, index, code, attributes):
+    def write_string_read(self, index, code, attributes, is_l3v1=False):
         attribute = attributes[index]
         name = attribute['xml_name']
         member = attribute['memberName']
         status = 'required' if attribute['reqd'] else 'optional'
 
-        line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
-                                                                      member)]
+        if is_l3v1 and name == 'name':
+            line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
+                    'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
+        else:
+            line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
+                                                                          member)]
         code.append(self.create_code_block('line', line))
 
         line = ['{0}.empty() == true'.format(member)]
