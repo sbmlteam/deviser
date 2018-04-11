@@ -683,7 +683,8 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
   // id SId (use = "required" )
   // 
 
-  assigned = attributes.readInto("id", mId);
+  XMLTriple tripleID("id", nURI, getPrefix());
+  assigned = attributes.readInto(tripleID, mId);
 
   if (assigned == true)
   {
@@ -711,7 +712,8 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
   // name string (use = "optional" )
   // 
 
-  assigned = attributes.readInto("name", mName);
+  XMLTriple tripleNAME("name", nURI, getPrefix());
+  assigned = attributes.readInto(tripleNAME, mName);
 
   if (assigned == true)
   {

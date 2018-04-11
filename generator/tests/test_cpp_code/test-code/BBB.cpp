@@ -1024,7 +1024,8 @@ BBB::readL3V1V1Attributes(const XMLAttributes& attributes)
   // id SId (use = "required" )
   // 
 
-  assigned = attributes.readInto("id", mId);
+  XMLTriple tripleID("id", nURI, getPrefix());
+  assigned = attributes.readInto(tripleID, mId);
 
   if (assigned == true)
   {
@@ -1070,7 +1071,8 @@ BBB::readL3V1V2Attributes(const XMLAttributes& attributes)
   // id SId (use = "required" )
   // 
 
-  assigned = attributes.readInto("id", mId);
+  XMLTriple tripleID("id", nURI, getPrefix());
+  assigned = attributes.readInto(tripleID, mId);
 
   if (assigned == true)
   {
