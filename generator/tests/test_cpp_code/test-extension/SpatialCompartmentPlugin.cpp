@@ -358,6 +358,26 @@ SpatialCompartmentPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+SpatialCompartmentPlugin::updateSBMLNamespace(const std::string& package,
+                                              unsigned int level,
+                                              unsigned int version)
+{
+  if (mCompartmentMapping != NULL)
+  {
+    mCompartmentMapping->updateSBMLNamespace(package, level, version);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this
  * SpatialCompartmentPlugin.
  */

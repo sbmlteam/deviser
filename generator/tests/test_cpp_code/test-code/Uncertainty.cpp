@@ -750,6 +750,31 @@ Uncertainty::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Uncertainty::updateSBMLNamespace(const std::string& package,
+                                 unsigned int level,
+                                 unsigned int version)
+{
+  if (mUncertStatistics != NULL)
+  {
+    mUncertStatistics->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mDistribution != NULL)
+  {
+    mDistribution->updateSBMLNamespace(package, level, version);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Uncertainty.
  */
 int

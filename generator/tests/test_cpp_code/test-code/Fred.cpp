@@ -975,6 +975,36 @@ Fred::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Fred::updateSBMLNamespace(const std::string& package,
+                          unsigned int level,
+                          unsigned int version)
+{
+  if (mOther != NULL)
+  {
+    mOther->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mOther1 != NULL)
+  {
+    mOther1->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mOther2 != NULL)
+  {
+    mOther2->updateSBMLNamespace(package, level, version);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Fred.
  */
 int
@@ -1691,23 +1721,27 @@ Fred::readAttributes(const XMLAttributes& attributes,
   SBMLErrorLog* log = getErrorLog();
 
   SBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownPackageAttribute);
-      log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
-        version, details);
-    }
-    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
-      log->logPackageError("x", XFredAllowedCoreAttributes, pkgVersion, level,
-        version, details);
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownPackageAttribute);
+        log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
+          version, details);
+      }
+      else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownCoreAttribute);
+        log->logPackageError("x", XFredAllowedCoreAttributes, pkgVersion,
+          level, version, details);
+      }
     }
   }
 

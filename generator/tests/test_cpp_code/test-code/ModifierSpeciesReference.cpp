@@ -504,8 +504,8 @@ ModifierSpeciesReference::readAttributes(
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
 
-  if
-    (static_cast<SBMLListOfModifierSpeciesReferences*>(getParentSBMLObject())->size()
+  if (log && getParentSBMLObject() &&
+    static_cast<SBMLListOfModifierSpeciesReferences*>(getParentSBMLObject())->size()
       < 2)
   {
     numErrs = log->getNumErrors();
@@ -522,16 +522,20 @@ ModifierSpeciesReference::readAttributes(
   }
 
   SimpleSpeciesReference::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SBMLUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SBMLUnknownCoreAttribute);
-      log->logError(CoreModifierSpeciesReferenceAllowedAttributes, level,
-        version, details);
+      if (log->getError(n)->getErrorId() == SBMLUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SBMLUnknownCoreAttribute);
+        log->logError(CoreModifierSpeciesReferenceAllowedAttributes, level,
+          version, details);
+      }
     }
   }
 }

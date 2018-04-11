@@ -630,6 +630,19 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
+   * Updates the namespaces when setLevelVersion is used
+   */
+  virtual void updateSBMLNamespace(const std::string& package,
+                                   unsigned int level,
+                                   unsigned int version);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
    * Predicate indicating whether 'comp' flattening has been implemented for
    * the Comp package.
    */

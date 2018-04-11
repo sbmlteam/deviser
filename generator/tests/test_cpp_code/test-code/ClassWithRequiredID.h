@@ -145,6 +145,15 @@ public:
 
 
   /**
+   * Returns the value of the "name" attribute of this ClassWithRequiredID.
+   *
+   * @return the value of the "name" attribute of this ClassWithRequiredID as a
+   * string.
+   */
+  virtual const std::string& getName() const;
+
+
+  /**
    * Predicate returning @c true if this ClassWithRequiredID's "id" attribute
    * is set.
    *
@@ -152,6 +161,16 @@ public:
    * otherwise @c false is returned.
    */
   virtual bool isSetId() const;
+
+
+  /**
+   * Predicate returning @c true if this ClassWithRequiredID's "name" attribute
+   * is set.
+   *
+   * @return @c true if this ClassWithRequiredID's "name" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  virtual bool isSetName() const;
 
 
   /**
@@ -171,6 +190,20 @@ public:
 
 
   /**
+   * Sets the value of the "name" attribute of this ClassWithRequiredID.
+   *
+   * @param name std::string& value of the "name" attribute to be set.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
+   */
+  virtual int setName(const std::string& name);
+
+
+  /**
    * Unsets the value of the "id" attribute of this ClassWithRequiredID.
    *
    * @copydetails doc_returns_success_code
@@ -178,6 +211,16 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int unsetId();
+
+
+  /**
+   * Unsets the value of the "name" attribute of this ClassWithRequiredID.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int unsetName();
 
 
   /**
@@ -698,6 +741,23 @@ ClassWithRequiredID_getId(const ClassWithRequiredID_t * cwrid);
 
 
 /**
+ * Returns the value of the "name" attribute of this ClassWithRequiredID_t.
+ *
+ * @param cwrid the ClassWithRequiredID_t structure whose name is sought.
+ *
+ * @return the value of the "name" attribute of this ClassWithRequiredID_t as a
+ * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof ClassWithRequiredID_t
+ */
+LIBSBML_EXTERN
+char *
+ClassWithRequiredID_getName(const ClassWithRequiredID_t * cwrid);
+
+
+/**
  * Predicate returning @c 1 (true) if this ClassWithRequiredID_t's "id"
  * attribute is set.
  *
@@ -711,6 +771,22 @@ ClassWithRequiredID_getId(const ClassWithRequiredID_t * cwrid);
 LIBSBML_EXTERN
 int
 ClassWithRequiredID_isSetId(const ClassWithRequiredID_t * cwrid);
+
+
+/**
+ * Predicate returning @c 1 (true) if this ClassWithRequiredID_t's "name"
+ * attribute is set.
+ *
+ * @param cwrid the ClassWithRequiredID_t structure.
+ *
+ * @return @c 1 (true) if this ClassWithRequiredID_t's "name" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof ClassWithRequiredID_t
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_isSetName(const ClassWithRequiredID_t * cwrid);
 
 
 /**
@@ -736,6 +812,27 @@ ClassWithRequiredID_setId(ClassWithRequiredID_t * cwrid, const char * id);
 
 
 /**
+ * Sets the value of the "name" attribute of this ClassWithRequiredID_t.
+ *
+ * @param cwrid the ClassWithRequiredID_t structure.
+ *
+ * @param name const char * value of the "name" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling ClassWithRequiredID_unsetName().
+ *
+ * @memberof ClassWithRequiredID_t
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_setName(ClassWithRequiredID_t * cwrid, const char * name);
+
+
+/**
  * Unsets the value of the "id" attribute of this ClassWithRequiredID_t.
  *
  * @param cwrid the ClassWithRequiredID_t structure.
@@ -750,6 +847,23 @@ ClassWithRequiredID_setId(ClassWithRequiredID_t * cwrid, const char * id);
 LIBSBML_EXTERN
 int
 ClassWithRequiredID_unsetId(ClassWithRequiredID_t * cwrid);
+
+
+/**
+ * Unsets the value of the "name" attribute of this ClassWithRequiredID_t.
+ *
+ * @param cwrid the ClassWithRequiredID_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof ClassWithRequiredID_t
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_unsetName(ClassWithRequiredID_t * cwrid);
 
 
 /**

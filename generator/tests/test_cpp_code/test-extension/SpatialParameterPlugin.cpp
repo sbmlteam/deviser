@@ -822,6 +822,41 @@ SpatialParameterPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+SpatialParameterPlugin::updateSBMLNamespace(const std::string& package,
+                                            unsigned int level,
+                                            unsigned int version)
+{
+  if (mSpatialSymbolReference != NULL)
+  {
+    mSpatialSymbolReference->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mAdvectionCoefficient != NULL)
+  {
+    mAdvectionCoefficient->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mBoundaryCondition != NULL)
+  {
+    mBoundaryCondition->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mDiffusionCoefficient != NULL)
+  {
+    mDiffusionCoefficient->updateSBMLNamespace(package, level, version);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this
  * SpatialParameterPlugin.
  */

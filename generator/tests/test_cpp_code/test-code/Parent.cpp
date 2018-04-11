@@ -502,6 +502,25 @@ Parent::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Parent::updateSBMLNamespace(const std::string& package,
+                            unsigned int level,
+                            unsigned int version)
+{
+  mChildren.updateSBMLNamespace(package, level, version);
+
+  mSprogs.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Parent.
  */
 int

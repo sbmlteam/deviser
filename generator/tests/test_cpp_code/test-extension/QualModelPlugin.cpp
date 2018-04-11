@@ -574,6 +574,25 @@ QualModelPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+QualModelPlugin::updateSBMLNamespace(const std::string& package,
+                                     unsigned int level,
+                                     unsigned int version)
+{
+  mQualitativeSpecies.updateSBMLNamespace(package, level, version);
+
+  mTransitions.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this QualModelPlugin.
  */
 int

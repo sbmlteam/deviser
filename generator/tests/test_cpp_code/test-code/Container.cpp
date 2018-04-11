@@ -398,6 +398,23 @@ Container::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Container::updateSBMLNamespace(const std::string& package,
+                               unsigned int level,
+                               unsigned int version)
+{
+  mMyLoTests.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Container.
  */
 int

@@ -125,6 +125,16 @@ ClassWithRequiredID::getId() const
 
 
 /*
+ * Returns the value of the "name" attribute of this ClassWithRequiredID.
+ */
+const std::string&
+ClassWithRequiredID::getName() const
+{
+  return mName;
+}
+
+
+/*
  * Predicate returning @c true if this ClassWithRequiredID's "id" attribute is
  * set.
  */
@@ -132,6 +142,17 @@ bool
 ClassWithRequiredID::isSetId() const
 {
   return (mId.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this ClassWithRequiredID's "name" attribute
+ * is set.
+ */
+bool
+ClassWithRequiredID::isSetName() const
+{
+  return (mName.empty() == false);
 }
 
 
@@ -146,6 +167,17 @@ ClassWithRequiredID::setId(const std::string& id)
 
 
 /*
+ * Sets the value of the "name" attribute of this ClassWithRequiredID.
+ */
+int
+ClassWithRequiredID::setName(const std::string& name)
+{
+  mName = name;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this ClassWithRequiredID.
  */
 int
@@ -154,6 +186,25 @@ ClassWithRequiredID::unsetId()
   mId.erase();
 
   if (mId.empty() == true)
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this ClassWithRequiredID.
+ */
+int
+ClassWithRequiredID::unsetName()
+{
+  mName.erase();
+
+  if (mName.empty() == true)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
@@ -361,6 +412,11 @@ ClassWithRequiredID::getAttribute(const std::string& attributeName,
     value = getId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "name")
+  {
+    value = getName();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -383,6 +439,10 @@ ClassWithRequiredID::isSetAttribute(const std::string& attributeName) const
   if (attributeName == "id")
   {
     value = isSetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = isSetName();
   }
 
   return value;
@@ -478,6 +538,10 @@ ClassWithRequiredID::setAttribute(const std::string& attributeName,
   {
     return_value = setId(value);
   }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
 
   return return_value;
 }
@@ -500,6 +564,10 @@ ClassWithRequiredID::unsetAttribute(const std::string& attributeName)
   if (attributeName == "id")
   {
     value = unsetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = unsetName();
   }
 
   return value;
@@ -526,6 +594,7 @@ ClassWithRequiredID::addExpectedAttributes(ExpectedAttributes& attributes)
   if (level == 3 && coreVersion == 1 && pkgVersion == 1)
   {
     attributes.add("id");
+    attributes.add("name");
   }
 
   if (level == 3 && coreVersion == 2 && pkgVersion == 1)
@@ -555,25 +624,29 @@ ClassWithRequiredID::readAttributes(const XMLAttributes& attributes,
   SBMLErrorLog* log = getErrorLog();
 
   SBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownPackageAttribute);
-      log->logPackageError("twoatonce",
-        TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level,
-          version, details);
-    }
-    else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
-    {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(UnknownCoreAttribute);
-      log->logPackageError("twoatonce",
-        TwoatonceClassWithRequiredIDAllowedCoreAttributes, pkgVersion, level,
-          version, details);
+      if (log->getError(n)->getErrorId() == UnknownPackageAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownPackageAttribute);
+        log->logPackageError("twoatonce",
+          TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level,
+            version, details);
+      }
+      else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(UnknownCoreAttribute);
+        log->logPackageError("twoatonce",
+          TwoatonceClassWithRequiredIDAllowedCoreAttributes, pkgVersion, level,
+            version, details);
+      }
     }
   }
 
@@ -633,6 +706,20 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
       TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
         message);
   }
+
+  // 
+  // name string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("name", mName);
+
+  if (assigned == true)
+  {
+    if (mName.empty() == true)
+    {
+      logEmptyString(mName, level, version, "<ClassWithRequiredID>");
+    }
+  }
 }
 
 /** @endcond */
@@ -679,6 +766,20 @@ ClassWithRequiredID::readL3V2V1Attributes(const XMLAttributes& attributes)
     log->logPackageError("twoatonce",
       TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
         message);
+  }
+
+  // 
+  // name string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("name", mName);
+
+  if (assigned == true)
+  {
+    if (mName.empty() == true)
+    {
+      logEmptyString(mName, level, version, "<ClassWithRequiredID>");
+    }
   }
 }
 
@@ -728,6 +829,11 @@ ClassWithRequiredID::writeL3V1V1Attributes(XMLOutputStream& stream) const
   if (isSetId() == true)
   {
     stream.writeAttribute("id", getPrefix(), mId);
+  }
+
+  if (isSetName() == true)
+  {
+    stream.writeAttribute("name", getPrefix(), mName);
   }
 }
 
@@ -816,6 +922,23 @@ ClassWithRequiredID_getId(const ClassWithRequiredID_t * cwrid)
 
 
 /*
+ * Returns the value of the "name" attribute of this ClassWithRequiredID_t.
+ */
+LIBSBML_EXTERN
+char *
+ClassWithRequiredID_getName(const ClassWithRequiredID_t * cwrid)
+{
+  if (cwrid == NULL)
+  {
+    return NULL;
+  }
+
+  return cwrid->getName().empty() ? NULL :
+    safe_strdup(cwrid->getName().c_str());
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this ClassWithRequiredID_t's "id"
  * attribute is set.
  */
@@ -824,6 +947,18 @@ int
 ClassWithRequiredID_isSetId(const ClassWithRequiredID_t * cwrid)
 {
   return (cwrid != NULL) ? static_cast<int>(cwrid->isSetId()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this ClassWithRequiredID_t's "name"
+ * attribute is set.
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_isSetName(const ClassWithRequiredID_t * cwrid)
+{
+  return (cwrid != NULL) ? static_cast<int>(cwrid->isSetName()) : 0;
 }
 
 
@@ -839,6 +974,17 @@ ClassWithRequiredID_setId(ClassWithRequiredID_t * cwrid, const char * id)
 
 
 /*
+ * Sets the value of the "name" attribute of this ClassWithRequiredID_t.
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_setName(ClassWithRequiredID_t * cwrid, const char * name)
+{
+  return (cwrid != NULL) ? cwrid->setName(name) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "id" attribute of this ClassWithRequiredID_t.
  */
 LIBSBML_EXTERN
@@ -846,6 +992,17 @@ int
 ClassWithRequiredID_unsetId(ClassWithRequiredID_t * cwrid)
 {
   return (cwrid != NULL) ? cwrid->unsetId() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this ClassWithRequiredID_t.
+ */
+LIBSBML_EXTERN
+int
+ClassWithRequiredID_unsetName(ClassWithRequiredID_t * cwrid)
+{
+  return (cwrid != NULL) ? cwrid->unsetName() : LIBSBML_INVALID_OBJECT;
 }
 
 

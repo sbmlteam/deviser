@@ -888,6 +888,38 @@ Event::connectToChild()
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Event::updateSBMLNamespace(const std::string& package,
+                           unsigned int level,
+                           unsigned int version)
+{
+  if (mTrigger != NULL)
+  {
+    mTrigger->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mPriority != NULL)
+  {
+    mPriority->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mDelay != NULL)
+  {
+    mDelay->updateSBMLNamespace(package, level, version);
+  }
+
+  mEventAssignments.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Event.
  */
 int
@@ -1504,7 +1536,8 @@ Event::readAttributes(
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
 
-  if (static_cast<SBMLListOfEvents*>(getParentSBMLObject())->size() < 2)
+  if (log && getParentSBMLObject() &&
+    static_cast<SBMLListOfEvents*>(getParentSBMLObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -1520,15 +1553,19 @@ Event::readAttributes(
   }
 
   SBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SBMLUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SBMLUnknownCoreAttribute);
-      log->logError(CoreEventAllowedAttributes, level, version, details);
+      if (log->getError(n)->getErrorId() == SBMLUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SBMLUnknownCoreAttribute);
+        log->logError(CoreEventAllowedAttributes, level, version, details);
+      }
     }
   }
 

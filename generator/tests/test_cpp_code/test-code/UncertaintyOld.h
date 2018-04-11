@@ -381,6 +381,19 @@ public:
 
 
 
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Updates the namespaces when setLevelVersion is used
+   */
+  virtual void updateSBMLNamespace(const std::string& package,
+                                   unsigned int level,
+                                   unsigned int version);
+
+  /** @endcond */
+
+
+
 
   #ifndef SWIG
 

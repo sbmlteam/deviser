@@ -503,6 +503,31 @@ TwoatonceSBasePlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+TwoatonceSBasePlugin::updateSBMLNamespace(const std::string& package,
+                                          unsigned int level,
+                                          unsigned int version)
+{
+  if (mNormalClass != NULL)
+  {
+    mNormalClass->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mClassWithRequiredID != NULL)
+  {
+    mClassWithRequiredID->updateSBMLNamespace(package, level, version);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this
  * TwoatonceSBasePlugin.
  */

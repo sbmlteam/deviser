@@ -389,6 +389,22 @@ Constraint::connectToChild()
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+Constraint::updateSBMLNamespace(const std::string& package,
+                                unsigned int level,
+                                unsigned int version)
+{
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this Constraint.
  */
 int

@@ -553,6 +553,25 @@ CompSBMLDocumentPlugin::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+CompSBMLDocumentPlugin::updateSBMLNamespace(const std::string& package,
+                                            unsigned int level,
+                                            unsigned int version)
+{
+  mExternalModelDefinitions.updateSBMLNamespace(package, level, version);
+
+  mModelDefinitions.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Predicate indicating whether 'comp' flattening has been implemented for the
  * Comp package.
  */

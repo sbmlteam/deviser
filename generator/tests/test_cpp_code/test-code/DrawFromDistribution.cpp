@@ -796,6 +796,28 @@ DrawFromDistribution::enablePackageInternal(const std::string& pkgURI,
 /** @cond doxygenLibsbmlInternal */
 
 /*
+ * Updates the namespaces when setLevelVersion is used
+ */
+void
+DrawFromDistribution::updateSBMLNamespace(const std::string& package,
+                                          unsigned int level,
+                                          unsigned int version)
+{
+  if (mDistribution != NULL)
+  {
+    mDistribution->updateSBMLNamespace(package, level, version);
+  }
+
+  mDistribInputs.updateSBMLNamespace(package, level, version);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
  * Gets the value of the "attributeName" attribute of this
  * DrawFromDistribution.
  */
