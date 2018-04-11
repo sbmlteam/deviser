@@ -200,8 +200,8 @@
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="stroke" required="false" type="string" abstract="false"/>
-            <attribute name="stroke-width" required="false" type="string" abstract="false"/>
-            <attribute name="stroke-dasharray" required="false" type="string" abstract="false"/>
+            <attribute name="stroke-width" required="false" type="double" abstract="false"/>
+            <attribute name="stroke-dashArray" required="false" type="vector" element="unsigned int" xmlName="stroke-dasharray" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="transformation" element="GraphicalPrimitive2D" minNumChildren="0" maxNumChildren="0"/>
@@ -219,6 +219,7 @@
             <concrete name="rectangle" element="Rectangle" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="polygon" element="Polygon" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="g" element="RenderGroup" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="lineEnding" element="LineEnding" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Style" typeCode="SBML_RENDER_STYLE_BASE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="true">
@@ -324,8 +325,10 @@
         </enum>
         <enum name="FillRule">
           <enumValues>
+            <enumValue name="UNSET" value="unset"/>
             <enumValue name="NONZERO" value="nonzero"/>
             <enumValue name="EVENODD" value="evenodd"/>
+            <enumValue name="INHERIT" value="inherit"/>
           </enumValues>
         </enum>
         <enum name="FontFamily">
