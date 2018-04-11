@@ -927,6 +927,56 @@ class GeneralFunctions():
                      'object_name': self.struct_name,
                      'implementation': code})
 
+    # function to write updateNamespace
+    def write_update_ns(self):
+        if not self.status == 'cpp_not_list':
+            return
+        elif not self.has_child_elements():
+            return
+
+        # create comment parts
+        title_line = 'Updates the namespaces when setLevelVersion is used'
+        params = []
+        return_lines = []
+        additional = []
+
+        # create the function declaration
+        function = 'updateSBMLNamespace'
+        return_type = 'void'
+        arguments = ['const std::string& package', 'unsigned int level', 'unsigned int version']
+
+        # create the function implementation
+        code = []
+        if self.has_children and not self.has_only_math:
+            for i in range(0, len(self.child_elements)):
+                att = self.child_elements[i]
+                if 'is_ml' in att and att['is_ml']:
+                    continue
+                else:
+                    implementation = ['{0} != NULL'.format(att['memberName']),
+                                      '{0}->{1}'
+                                      '(package, level, version)'.format(att['memberName'], function)]
+                    code.append(self.create_code_block('if', implementation))
+            for i in range(0, len(self.child_lo_elements)):
+                att = self.child_lo_elements[i]
+                implementation = ['{0}.{1}'
+                                  '(package, level, version)'.format(att['memberName'], function)]
+                code.append(dict({'code_type': 'line',
+                                  'code': implementation}))
+
+        # return the parts
+        return dict({'title_line': title_line,
+                     'params': params,
+                     'return_lines': return_lines,
+                     'additional': additional,
+                     'function': function,
+                     'return_type': return_type,
+                     'arguments': arguments,
+                     'constant': False,
+                     'virtual': True,
+                     'object_name': self.struct_name,
+                     'implementation': code})
+
     ########################################################################
 
     # Functions for dealing with packages: enablePackage, connectToChild

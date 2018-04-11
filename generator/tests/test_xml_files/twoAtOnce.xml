@@ -11,6 +11,7 @@
         <element name="ClassWithRequiredID" typeCode="SBML_TWOATONCE_CLASSWITHREQUIREDID" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="classWithRequiredID">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
       </elements>
@@ -33,6 +34,7 @@
         <element name="ClassWithRequiredID" typeCode="SBML_TWOATONCE_CLASSWITHREQUIREDID" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" elementName="classWithRequiredID">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
       </elements>
