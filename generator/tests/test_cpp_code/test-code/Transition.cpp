@@ -981,6 +981,8 @@ Transition::updateSBMLNamespace(const std::string& package,
                                 unsigned int level,
                                 unsigned int version)
 {
+  SBase::updateSBMLNamespace(package, level, version);
+
   mInputs.updateSBMLNamespace(package, level, version);
 
   mOutputs.updateSBMLNamespace(package, level, version);

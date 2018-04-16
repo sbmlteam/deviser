@@ -509,6 +509,8 @@ Parent::updateSBMLNamespace(const std::string& package,
                             unsigned int level,
                             unsigned int version)
 {
+  SBase::updateSBMLNamespace(package, level, version);
+
   mChildren.updateSBMLNamespace(package, level, version);
 
   mSprogs.updateSBMLNamespace(package, level, version);

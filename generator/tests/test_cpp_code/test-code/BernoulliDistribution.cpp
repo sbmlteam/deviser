@@ -408,6 +408,9 @@ BernoulliDistribution::updateSBMLNamespace(const std::string& package,
                                            unsigned int level,
                                            unsigned int version)
 {
+  CategoricalUnivariateDistribution::updateSBMLNamespace(package, level,
+    version);
+
   if (mProb != NULL)
   {
     mProb->updateSBMLNamespace(package, level, version);

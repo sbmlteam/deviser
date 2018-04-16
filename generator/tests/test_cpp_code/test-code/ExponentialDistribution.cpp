@@ -410,6 +410,9 @@ ExponentialDistribution::updateSBMLNamespace(const std::string& package,
                                              unsigned int level,
                                              unsigned int version)
 {
+  ContinuousUnivariateDistribution::updateSBMLNamespace(package, level,
+    version);
+
   if (mRate != NULL)
   {
     mRate->updateSBMLNamespace(package, level, version);

@@ -581,6 +581,8 @@ QualModelPlugin::updateSBMLNamespace(const std::string& package,
                                      unsigned int level,
                                      unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   mQualitativeSpecies.updateSBMLNamespace(package, level, version);
 
   mTransitions.updateSBMLNamespace(package, level, version);

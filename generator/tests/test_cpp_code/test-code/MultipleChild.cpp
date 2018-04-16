@@ -684,6 +684,7 @@ MultipleChild::updateSBMLNamespace(const std::string& package,
                                    unsigned int version)
 {
   SBase::updateSBMLNamespace(package, level, version);
+
   if (mNormalClass != NULL)
   {
     mNormalClass->updateSBMLNamespace(package, level, version);

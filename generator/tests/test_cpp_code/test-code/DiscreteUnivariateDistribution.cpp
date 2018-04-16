@@ -597,6 +597,8 @@ DiscreteUnivariateDistribution::updateSBMLNamespace(const std::string& package,
                                                     unsigned int level,
                                                     unsigned int version)
 {
+  UnivariateDistribution::updateSBMLNamespace(package, level, version);
+
   if (mTruncationLowerBound != NULL)
   {
     mTruncationLowerBound->updateSBMLNamespace(package, level, version);

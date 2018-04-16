@@ -661,6 +661,8 @@ TwoatonceSBasePlugin::updateSBMLNamespace(const std::string& package,
                                           unsigned int level,
                                           unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   if (mNormalClass != NULL)
   {
     mNormalClass->updateSBMLNamespace(package, level, version);

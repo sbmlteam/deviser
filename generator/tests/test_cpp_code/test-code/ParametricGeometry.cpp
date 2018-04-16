@@ -598,6 +598,8 @@ ParametricGeometry::updateSBMLNamespace(const std::string& package,
                                         unsigned int level,
                                         unsigned int version)
 {
+  GeometryDefinition::updateSBMLNamespace(package, level, version);
+
   if (mSpatialPoints != NULL)
   {
     mSpatialPoints->updateSBMLNamespace(package, level, version);

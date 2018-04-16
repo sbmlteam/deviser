@@ -1264,6 +1264,8 @@ RenderGroup::updateSBMLNamespace(const std::string& package,
                                  unsigned int level,
                                  unsigned int version)
 {
+  GraphicalPrimitive2D::updateSBMLNamespace(package, level, version);
+
   if (mFontSize != NULL)
   {
     mFontSize->updateSBMLNamespace(package, level, version);

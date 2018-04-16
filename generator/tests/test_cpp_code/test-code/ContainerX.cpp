@@ -405,6 +405,8 @@ ContainerX::updateSBMLNamespace(const std::string& package,
                                 unsigned int level,
                                 unsigned int version)
 {
+  SBase::updateSBMLNamespace(package, level, version);
+
   mFreds.updateSBMLNamespace(package, level, version);
 }
 

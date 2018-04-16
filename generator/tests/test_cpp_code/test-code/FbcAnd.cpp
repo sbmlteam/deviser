@@ -459,6 +459,8 @@ FbcAnd::updateSBMLNamespace(const std::string& package,
                             unsigned int level,
                             unsigned int version)
 {
+  Association::updateSBMLNamespace(package, level, version);
+
   mAssociations.updateSBMLNamespace(package, level, version);
 }
 

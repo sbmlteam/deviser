@@ -868,6 +868,8 @@ FbcModelPlugin::updateSBMLNamespace(const std::string& package,
                                     unsigned int level,
                                     unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   mObjectives.updateSBMLNamespace(package, level, version);
 
   mFluxBounds.updateSBMLNamespace(package, level, version);

@@ -567,6 +567,8 @@ BinomialDistribution::updateSBMLNamespace(const std::string& package,
                                           unsigned int level,
                                           unsigned int version)
 {
+  DiscreteUnivariateDistribution::updateSBMLNamespace(package, level, version);
+
   if (mNumberOfTrials != NULL)
   {
     mNumberOfTrials->updateSBMLNamespace(package, level, version);

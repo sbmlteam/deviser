@@ -803,6 +803,8 @@ DrawFromDistribution::updateSBMLNamespace(const std::string& package,
                                           unsigned int level,
                                           unsigned int version)
 {
+  SBase::updateSBMLNamespace(package, level, version);
+
   if (mDistribution != NULL)
   {
     mDistribution->updateSBMLNamespace(package, level, version);

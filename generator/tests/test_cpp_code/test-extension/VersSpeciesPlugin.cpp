@@ -906,6 +906,8 @@ VersSpeciesPlugin::updateSBMLNamespace(const std::string& package,
                                        unsigned int level,
                                        unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   if (mClassOne != NULL)
   {
     mClassOne->updateSBMLNamespace(package, level, version);

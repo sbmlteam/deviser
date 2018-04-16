@@ -560,6 +560,8 @@ CompSBMLDocumentPlugin::updateSBMLNamespace(const std::string& package,
                                             unsigned int level,
                                             unsigned int version)
 {
+  SBMLDocumentPlugin::updateSBMLNamespace(package, level, version);
+
   mExternalModelDefinitions.updateSBMLNamespace(package, level, version);
 
   mModelDefinitions.updateSBMLNamespace(package, level, version);

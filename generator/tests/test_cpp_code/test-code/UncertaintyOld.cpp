@@ -452,6 +452,7 @@ UncertaintyOld::updateSBMLNamespace(const std::string& package,
                                     unsigned int level,
                                     unsigned int version)
 {
+  SBase::updateSBMLNamespace(package, level, version);
 }
 
 /** @endcond */

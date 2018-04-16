@@ -946,7 +946,13 @@ class GeneralFunctions():
         arguments = ['const std::string& package', 'unsigned int level', 'unsigned int version']
 
         # create the function implementation
-        code = []
+        if self.base_class:
+            line = '{0}::updateSBMLNamespace(package, level, version)'.format(self.base_class)
+            implementation = [line]
+            code = [dict({'code_type': 'line', 'code': implementation})]
+        else:
+            code = []
+
         if self.has_children and not self.has_only_math:
             for i in range(0, len(self.child_elements)):
                 att = self.child_elements[i]

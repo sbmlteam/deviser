@@ -431,6 +431,8 @@ Polygon::updateSBMLNamespace(const std::string& package,
                              unsigned int level,
                              unsigned int version)
 {
+  GraphicalPrimitive2D::updateSBMLNamespace(package, level, version);
+
   mRenderPoints.updateSBMLNamespace(package, level, version);
 }
 

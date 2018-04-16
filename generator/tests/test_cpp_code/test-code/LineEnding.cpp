@@ -659,6 +659,8 @@ LineEnding::updateSBMLNamespace(const std::string& package,
                                 unsigned int level,
                                 unsigned int version)
 {
+  GraphicalPrimitive2D::updateSBMLNamespace(package, level, version);
+
   if (mGroup != NULL)
   {
     mGroup->updateSBMLNamespace(package, level, version);

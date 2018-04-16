@@ -458,6 +458,8 @@ CSGeometry::updateSBMLNamespace(const std::string& package,
                                 unsigned int level,
                                 unsigned int version)
 {
+  GeometryDefinition::updateSBMLNamespace(package, level, version);
+
   mCSGObjects.updateSBMLNamespace(package, level, version);
 }
 

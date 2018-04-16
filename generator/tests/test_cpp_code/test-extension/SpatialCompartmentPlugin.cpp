@@ -365,6 +365,8 @@ SpatialCompartmentPlugin::updateSBMLNamespace(const std::string& package,
                                               unsigned int level,
                                               unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   if (mCompartmentMapping != NULL)
   {
     mCompartmentMapping->updateSBMLNamespace(package, level, version);

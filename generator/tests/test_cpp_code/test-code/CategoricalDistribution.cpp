@@ -407,6 +407,9 @@ CategoricalDistribution::updateSBMLNamespace(const std::string& package,
                                              unsigned int level,
                                              unsigned int version)
 {
+  CategoricalUnivariateDistribution::updateSBMLNamespace(package, level,
+    version);
+
   mCategories.updateSBMLNamespace(package, level, version);
 }
 

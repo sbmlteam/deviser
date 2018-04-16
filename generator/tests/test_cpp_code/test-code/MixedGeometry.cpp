@@ -714,6 +714,8 @@ MixedGeometry::updateSBMLNamespace(const std::string& package,
                                    unsigned int level,
                                    unsigned int version)
 {
+  GeometryDefinition::updateSBMLNamespace(package, level, version);
+
   mGeometryDefinitions.updateSBMLNamespace(package, level, version);
 
   mOrdinalMappings.updateSBMLNamespace(package, level, version);

@@ -556,6 +556,9 @@ BetaDistribution::updateSBMLNamespace(const std::string& package,
                                       unsigned int level,
                                       unsigned int version)
 {
+  ContinuousUnivariateDistribution::updateSBMLNamespace(package, level,
+    version);
+
   if (mAlpha != NULL)
   {
     mAlpha->updateSBMLNamespace(package, level, version);

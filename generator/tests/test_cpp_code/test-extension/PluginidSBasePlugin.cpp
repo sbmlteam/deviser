@@ -486,6 +486,8 @@ PluginidSBasePlugin::updateSBMLNamespace(const std::string& package,
                                          unsigned int level,
                                          unsigned int version)
 {
+  SBasePlugin::updateSBMLNamespace(package, level, version);
+
   if (mOtherNormalClass != NULL)
   {
     mOtherNormalClass->updateSBMLNamespace(package, level, version);

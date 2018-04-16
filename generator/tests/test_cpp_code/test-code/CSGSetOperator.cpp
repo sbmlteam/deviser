@@ -812,6 +812,8 @@ CSGSetOperator::updateSBMLNamespace(const std::string& package,
                                     unsigned int level,
                                     unsigned int version)
 {
+  CSGNode::updateSBMLNamespace(package, level, version);
+
   mCSGNodes.updateSBMLNamespace(package, level, version);
 }
 

@@ -540,6 +540,8 @@ SampledFieldGeometry::updateSBMLNamespace(const std::string& package,
                                           unsigned int level,
                                           unsigned int version)
 {
+  GeometryDefinition::updateSBMLNamespace(package, level, version);
+
   mSampledVolumes.updateSBMLNamespace(package, level, version);
 }
 
