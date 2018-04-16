@@ -402,6 +402,8 @@ typedef enum
 {
   SBML_TWOATONCE_NORMALCLASS             =  2000  /*!<NormalClass */
 , SBML_TWOATONCE_CLASSWITHREQUIREDID     =  2001  /*!<ClassWithRequiredID */
+, SBML_TWOATONCE_CLASSID                 =  2002  /*!<ClassId */
+, SBML_TWOATONCE_MULTIPLECHILD           =  2003  /*!<MultipleChild */
 } SBMLTwoatonceTypeCode_t;
 
 

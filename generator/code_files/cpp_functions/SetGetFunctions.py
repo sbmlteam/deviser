@@ -43,7 +43,7 @@ from util import strFunctions, query, global_variables
 class SetGetFunctions():
     """Class for all functions for set/get/isset/unset"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[], has_enum=False, enums=[]):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[], has_enum=False, enums=[], is_element=False):
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -69,9 +69,14 @@ class SetGetFunctions():
         self.version_attributes = []
         if 'num_versions' in class_object and class_object['num_versions'] > 1:
             self.has_multiple_versions = True
-            for i in range(0, class_object['num_versions']):
-                self.version_attributes.append(
-                    query.get_version_attributes(class_object['attribs'], i))
+            if is_element:
+                for i in range(0, class_object['num_versions']):
+                    self.version_attributes.append(
+                        query.get_version_elements(class_object['child_elements'], i))
+            else:
+                for i in range(0, class_object['num_versions']):
+                    self.version_attributes.append(
+                        query.get_version_attributes(class_object['attribs'], i))
         else:
             self.has_multiple_versions = False
 
@@ -1741,7 +1746,31 @@ class SetGetFunctions():
                                       'return {0}'.format(self.success)]
                     code = [self.create_code_block('else_if', implementation)]
             else:
-                code = [dict({'code_type': 'line', 'code': ['sort element version']})]
+                implementation = ['{0} == NULL'.format(name),
+                                  'return {0}'.format(self.success),
+                                  'else if', '{0}->hasRequiredElements() '
+                                             '== false'.format(name),
+                                  'return {0}'.format(self.invalid_obj),
+                                  'else if',
+                                  'getLevel() != {0}->getLevel()'.format(name),
+                                  'return '
+                                  '{0}'.format(global_variables.ret_level_mis),
+                                  'else if', 'getVersion() != {0}->'
+                                             'getVersion()'.format(name),
+                                  'return '
+                                  '{0}'.format(global_variables.ret_vers_mis),
+                                  'else if', 'getPackageVersion() != {0}->'
+                                             'getPackageVersion()'.format(name),
+                                  'return '
+                                  '{0}'.format(global_variables.ret_pkgv_mis),
+                                  'else', 'delete {0}'.format(member),
+                                  '{0} = ({2} != NULL) ? static_cast<{1}>({2}->'
+                                  'clone()) : NULL'.format(member,
+                                                    attribute['attTypeCode'],
+                                                    name),
+                                  'if ({0} != NULL) {0}->connectToParent(this)'.format(member),
+                                  'return {0}'.format(self.success)]
+                code = [self.create_code_block('else_if', implementation)]
         else:
             code = [dict({'code_type': 'blank', 'code': []})]
         return code

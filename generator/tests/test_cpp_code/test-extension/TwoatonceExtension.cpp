@@ -134,6 +134,8 @@ const char* SBML_TWOATONCE_TYPECODE_STRINGS[] =
 {
     "NormalClass"
   , "ClassWithRequiredID"
+  , "ClassId"
+  , "MultipleChild"
 };
 
 
@@ -331,7 +333,7 @@ const char*
 TwoatonceExtension::getStringFromTypeCode(int typeCode) const
 {
   int min = SBML_TWOATONCE_NORMALCLASS;
-  int max = SBML_TWOATONCE_CLASSWITHREQUIREDID;
+  int max = SBML_TWOATONCE_MULTIPLECHILD;
 
   if (typeCode < min || typeCode > max)
   {

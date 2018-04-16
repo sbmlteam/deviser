@@ -57,6 +57,7 @@ TwoatonceSBasePlugin::TwoatonceSBasePlugin(const std::string& uri,
   : SBasePlugin(uri, prefix, twoatoncens)
   , mNormalClass (NULL)
   , mClassWithRequiredID (NULL)
+  , mMultipleChild (NULL)
 {
   connectToChild();
 }
@@ -69,6 +70,7 @@ TwoatonceSBasePlugin::TwoatonceSBasePlugin(const TwoatonceSBasePlugin& orig)
   : SBasePlugin( orig )
   , mNormalClass ( NULL )
   , mClassWithRequiredID ( NULL )
+  , mMultipleChild ( NULL )
 {
   if (orig.mNormalClass != NULL)
   {
@@ -78,6 +80,11 @@ TwoatonceSBasePlugin::TwoatonceSBasePlugin(const TwoatonceSBasePlugin& orig)
   if (orig.mClassWithRequiredID != NULL)
   {
     mClassWithRequiredID = orig.mClassWithRequiredID->clone();
+  }
+
+  if (orig.mMultipleChild != NULL)
+  {
+    mMultipleChild = orig.mMultipleChild->clone();
   }
 
   connectToChild();
@@ -113,6 +120,16 @@ TwoatonceSBasePlugin::operator=(const TwoatonceSBasePlugin& rhs)
       mClassWithRequiredID = NULL;
     }
 
+    delete mMultipleChild;
+    if (rhs.mMultipleChild != NULL)
+    {
+      mMultipleChild = rhs.mMultipleChild->clone();
+    }
+    else
+    {
+      mMultipleChild = NULL;
+    }
+
     connectToChild();
   }
 
@@ -139,6 +156,8 @@ TwoatonceSBasePlugin::~TwoatonceSBasePlugin()
   mNormalClass = NULL;
   delete mClassWithRequiredID;
   mClassWithRequiredID = NULL;
+  delete mMultipleChild;
+  mMultipleChild = NULL;
 }
 
 
@@ -185,6 +204,28 @@ TwoatonceSBasePlugin::getClassWithRequiredID()
 
 
 /*
+ * Returns the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin.
+ */
+const MultipleChild*
+TwoatonceSBasePlugin::getMultipleChild() const
+{
+  return mMultipleChild;
+}
+
+
+/*
+ * Returns the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin.
+ */
+MultipleChild*
+TwoatonceSBasePlugin::getMultipleChild()
+{
+  return mMultipleChild;
+}
+
+
+/*
  * Predicate returning @c true if this TwoatonceSBasePlugin's "normalClass"
  * element is set.
  */
@@ -203,6 +244,17 @@ bool
 TwoatonceSBasePlugin::isSetClassWithRequiredID() const
 {
   return (mClassWithRequiredID != NULL);
+}
+
+
+/*
+ * Predicate returning @c true if this TwoatonceSBasePlugin's "multipleChild"
+ * element is set.
+ */
+bool
+TwoatonceSBasePlugin::isSetMultipleChild() const
+{
+  return (mMultipleChild != NULL);
 }
 
 
@@ -282,6 +334,42 @@ TwoatonceSBasePlugin::setClassWithRequiredID(const ClassWithRequiredID*
 
 
 /*
+ * Sets the value of the "multipleChild" element of this TwoatonceSBasePlugin.
+ */
+int
+TwoatonceSBasePlugin::setMultipleChild(const MultipleChild* multipleChild)
+{
+  if (multipleChild == NULL)
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+  else if (multipleChild->hasRequiredElements() == false)
+  {
+    return LIBSBML_INVALID_OBJECT;
+  }
+  else if (getLevel() != multipleChild->getLevel())
+  {
+    return LIBSBML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != multipleChild->getVersion())
+  {
+    return LIBSBML_VERSION_MISMATCH;
+  }
+  else if (getPackageVersion() != multipleChild->getPackageVersion())
+  {
+    return LIBSBML_PKG_VERSION_MISMATCH;
+  }
+  else
+  {
+    delete mMultipleChild;
+    mMultipleChild = static_cast<MultipleChild*>(multipleChild->clone());
+    connectToChild();
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
  * Creates a new NormalClass object, adds it to this TwoatonceSBasePlugin
  * object and returns the NormalClass object created.
  */
@@ -333,6 +421,31 @@ TwoatonceSBasePlugin::createClassWithRequiredID()
 
 
 /*
+ * Creates a new MultipleChild object, adds it to this TwoatonceSBasePlugin
+ * object and returns the MultipleChild object created.
+ */
+MultipleChild*
+TwoatonceSBasePlugin::createMultipleChild()
+{
+  if (mMultipleChild != NULL)
+  {
+    delete mMultipleChild;
+  }
+
+  TWOATONCE_CREATE_NS(twoatoncens, getSBMLNamespaces());
+  mMultipleChild = new MultipleChild(twoatoncens);
+
+  mMultipleChild->setSBMLDocument(this->getSBMLDocument());
+
+  delete twoatoncens;
+
+  connectToChild();
+
+  return mMultipleChild;
+}
+
+
+/*
  * Unsets the value of the "normalClass" element of this TwoatonceSBasePlugin.
  */
 int
@@ -357,6 +470,19 @@ TwoatonceSBasePlugin::unsetClassWithRequiredID()
 }
 
 
+/*
+ * Unsets the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin.
+ */
+int
+TwoatonceSBasePlugin::unsetMultipleChild()
+{
+  delete mMultipleChild;
+  mMultipleChild = NULL;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
 
 /** @cond doxygenLibsbmlInternal */
 
@@ -374,6 +500,11 @@ TwoatonceSBasePlugin::writeElements(XMLOutputStream& stream) const
   if (isSetClassWithRequiredID() == true)
   {
     mClassWithRequiredID->write(stream);
+  }
+
+  if (isSetMultipleChild() == true)
+  {
+    mMultipleChild->write(stream);
   }
 }
 
@@ -403,6 +534,11 @@ TwoatonceSBasePlugin::accept(SBMLVisitor& v) const
     mClassWithRequiredID->accept(v);
   }
 
+  if (mMultipleChild != NULL)
+  {
+    mMultipleChild->accept(v);
+  }
+
   return true;
 }
 
@@ -428,6 +564,11 @@ TwoatonceSBasePlugin::setSBMLDocument(SBMLDocument* d)
   if (mClassWithRequiredID != NULL)
   {
     mClassWithRequiredID->setSBMLDocument(d);
+  }
+
+  if (mMultipleChild != NULL)
+  {
+    mMultipleChild->setSBMLDocument(d);
   }
 }
 
@@ -469,6 +610,11 @@ TwoatonceSBasePlugin::connectToParent(SBase* base)
   {
     mClassWithRequiredID->connectToParent(base);
   }
+
+  if (mMultipleChild != NULL)
+  {
+    mMultipleChild->connectToParent(base);
+  }
 }
 
 /** @endcond */
@@ -494,6 +640,11 @@ TwoatonceSBasePlugin::enablePackageInternal(const std::string& pkgURI,
   {
     mClassWithRequiredID->enablePackageInternal(pkgURI, pkgPrefix, flag);
   }
+
+  if (isSetMultipleChild())
+  {
+    mMultipleChild->enablePackageInternal(pkgURI, pkgPrefix, flag);
+  }
 }
 
 /** @endcond */
@@ -518,6 +669,11 @@ TwoatonceSBasePlugin::updateSBMLNamespace(const std::string& package,
   if (mClassWithRequiredID != NULL)
   {
     mClassWithRequiredID->updateSBMLNamespace(package, level, version);
+  }
+
+  if (mMultipleChild != NULL)
+  {
+    mMultipleChild->updateSBMLNamespace(package, level, version);
   }
 }
 
@@ -770,6 +926,10 @@ TwoatonceSBasePlugin::createChildObject(const std::string& elementName)
   {
     return createClassWithRequiredID();
   }
+  else if (elementName == "multipleChild")
+  {
+    return createMultipleChild();
+  }
 
   return obj;
 }
@@ -796,6 +956,11 @@ TwoatonceSBasePlugin::addChildObject(const std::string& elementName,
     SBML_TWOATONCE_CLASSWITHREQUIREDID)
   {
     return setClassWithRequiredID((const ClassWithRequiredID*)(element));
+  }
+  else if (elementName == "multipleChild" && element->getTypeCode() ==
+    SBML_TWOATONCE_MULTIPLECHILD)
+  {
+    return setMultipleChild((const MultipleChild*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -824,6 +989,11 @@ TwoatonceSBasePlugin::removeChildObject(const std::string& elementName,
   {
     ClassWithRequiredID * obj = getClassWithRequiredID();
     if (unsetClassWithRequiredID() == LIBSBML_OPERATION_SUCCESS) return obj;
+  }
+  else if (elementName == "multipleChild")
+  {
+    MultipleChild * obj = getMultipleChild();
+    if (unsetMultipleChild() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
   return NULL;
@@ -857,6 +1027,13 @@ TwoatonceSBasePlugin::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
+  else if (elementName == "multipleChild")
+  {
+    if (isSetMultipleChild())
+    {
+      return 1;
+    }
+  }
 
   return n;
 }
@@ -883,6 +1060,10 @@ TwoatonceSBasePlugin::getObject(const std::string& elementName,
   else if (elementName == "classWithRequiredID")
   {
     return getClassWithRequiredID();
+  }
+  else if (elementName == "multipleChild")
+  {
+    return getMultipleChild();
   }
 
   return obj;
@@ -927,6 +1108,20 @@ TwoatonceSBasePlugin::getElementBySId(const std::string& id)
     }
 
     obj = mClassWithRequiredID->getElementBySId(id);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
+  if (mMultipleChild != NULL)
+  {
+    if (mMultipleChild->getId() == id)
+    {
+      return mMultipleChild;
+    }
+
+    obj = mMultipleChild->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
@@ -979,6 +1174,20 @@ TwoatonceSBasePlugin::getElementByMetaId(const std::string& metaid)
     }
   }
 
+  if (mMultipleChild != NULL)
+  {
+    if (mMultipleChild->getMetaId() == metaid)
+    {
+      return mMultipleChild;
+    }
+
+    obj = mMultipleChild->getElementByMetaId(metaid);
+    if (obj != NULL)
+    {
+      return obj;
+    }
+  }
+
   return obj;
 }
 
@@ -995,6 +1204,7 @@ TwoatonceSBasePlugin::getAllElements(ElementFilter* filter)
 
   ADD_FILTERED_POINTER(ret, sublist, mNormalClass, filter);
   ADD_FILTERED_POINTER(ret, sublist, mClassWithRequiredID, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mMultipleChild, filter);
 
 
   return ret;
@@ -1086,6 +1296,19 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
       mClassWithRequiredID = new ClassWithRequiredID(twoatoncens);
       obj = mClassWithRequiredID;
     }
+    else if (name == "multipleChild")
+    {
+      if (isSetMultipleChild())
+      {
+        getErrorLog()->logPackageError("twoatonce",
+          TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
+            getVersion());
+      }
+
+      delete mMultipleChild;
+      mMultipleChild = new MultipleChild(twoatoncens);
+      obj = mMultipleChild;
+    }
   }
 
   delete twoatoncens;
@@ -1139,6 +1362,23 @@ TwoatonceSBasePlugin_getClassWithRequiredID(const TwoatonceSBasePlugin_t *
 
 
 /*
+ * Returns the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+const MultipleChild_t*
+TwoatonceSBasePlugin_getMultipleChild(const TwoatonceSBasePlugin_t * tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (MultipleChild_t*)(tsbp->getMultipleChild());
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
  * "normalClass" element is set.
  */
@@ -1161,6 +1401,18 @@ TwoatonceSBasePlugin_isSetClassWithRequiredID(const TwoatonceSBasePlugin_t *
 {
   return (tsbp != NULL) ? static_cast<int>(tsbp->isSetClassWithRequiredID()) :
     0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "multipleChild" element is set.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetMultipleChild(const TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? static_cast<int>(tsbp->isSetMultipleChild()) : 0;
 }
 
 
@@ -1188,6 +1440,20 @@ TwoatonceSBasePlugin_setClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp,
                                               classWithRequiredID)
 {
   return (tsbp != NULL) ? tsbp->setClassWithRequiredID(classWithRequiredID) :
+    LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setMultipleChild(TwoatonceSBasePlugin_t * tsbp,
+                                      const MultipleChild_t* multipleChild)
+{
+  return (tsbp != NULL) ? tsbp->setMultipleChild(multipleChild) :
     LIBSBML_INVALID_OBJECT;
 }
 
@@ -1228,6 +1494,23 @@ TwoatonceSBasePlugin_createClassWithRequiredID(TwoatonceSBasePlugin_t* tsbp)
 
 
 /*
+ * Creates a new MultipleChild_t object, adds it to this TwoatonceSBasePlugin_t
+ * object and returns the MultipleChild_t object created.
+ */
+LIBSBML_EXTERN
+MultipleChild_t*
+TwoatonceSBasePlugin_createMultipleChild(TwoatonceSBasePlugin_t* tsbp)
+{
+  if (tsbp == NULL)
+  {
+    return NULL;
+  }
+
+  return (MultipleChild_t*)(tsbp->createMultipleChild());
+}
+
+
+/*
  * Unsets the value of the "normalClass" element of this
  * TwoatonceSBasePlugin_t.
  */
@@ -1249,6 +1532,18 @@ TwoatonceSBasePlugin_unsetClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp)
 {
   return (tsbp != NULL) ? tsbp->unsetClassWithRequiredID() :
     LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetMultipleChild(TwoatonceSBasePlugin_t * tsbp)
+{
+  return (tsbp != NULL) ? tsbp->unsetMultipleChild() : LIBSBML_INVALID_OBJECT;
 }
 
 

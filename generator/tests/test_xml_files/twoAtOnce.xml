@@ -14,12 +14,26 @@
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
+        <element name="ClassId" typeCode="SBML_TWOATONCE_CLASSID" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="MultipleChild" typeCode="SBML_TWOATONCE_MULTIPLECHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="numAtt" required="false" type="double" abstract="false"/>
+            <attribute name="classId" required="false" type="lo_element" element="ClassId" abstract="false"/>
+            <attribute name="normalClass" required="false" type="element" element="NormalClass" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
       <plugins>
         <plugin extensionPoint="SBase">
           <references>
             <reference name="NormalClass"/>
             <reference name="ClassWithRequiredID"/>
+            <reference name="MultipleChild"/>
           </references>
         </plugin>
       </plugins>
@@ -37,12 +51,26 @@
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
+        <element name="ClassId" typeCode="SBML_TWOATONCE_CLASSID" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+          <attributes>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="MultipleChild" typeCode="SBML_TWOATONCE_MULTIPLECHILD" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+          <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="numAtt" required="false" type="double" abstract="false"/>
+            <attribute name="classId" required="false" type="lo_element" element="ClassId" abstract="false"/>
+            <attribute name="normalClass" required="false" type="element" element="NormalClass" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
       <plugins>
         <plugin extensionPoint="SBase">
           <references>
             <reference name="NormalClass"/>
             <reference name="ClassWithRequiredID"/>
+            <reference name="MultipleChild"/>
           </references>
         </plugin>
       </plugins>

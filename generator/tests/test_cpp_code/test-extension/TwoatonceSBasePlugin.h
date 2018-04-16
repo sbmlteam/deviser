@@ -48,6 +48,7 @@
 #include <sbml/extension/SBasePlugin.h>
 #include <sbml/packages/twoatonce/sbml/NormalClass.h>
 #include <sbml/packages/twoatonce/sbml/ClassWithRequiredID.h>
+#include <sbml/packages/twoatonce/sbml/MultipleChild.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -61,6 +62,7 @@ protected:
 
   NormalClass* mNormalClass;
   ClassWithRequiredID* mClassWithRequiredID;
+  MultipleChild* mMultipleChild;
 
   /** @endcond */
 
@@ -160,6 +162,26 @@ public:
 
 
   /**
+   * Returns the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin.
+   *
+   * @return the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin as a MultipleChild*.
+   */
+  const MultipleChild* getMultipleChild() const;
+
+
+  /**
+   * Returns the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin.
+   *
+   * @return the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin as a MultipleChild*.
+   */
+  MultipleChild* getMultipleChild();
+
+
+  /**
    * Predicate returning @c true if this TwoatonceSBasePlugin's "normalClass"
    * element is set.
    *
@@ -177,6 +199,16 @@ public:
    * element has been set, otherwise @c false is returned.
    */
   bool isSetClassWithRequiredID() const;
+
+
+  /**
+   * Predicate returning @c true if this TwoatonceSBasePlugin's "multipleChild"
+   * element is set.
+   *
+   * @return @c true if this TwoatonceSBasePlugin's "multipleChild" element has
+   * been set, otherwise @c false is returned.
+   */
+  bool isSetMultipleChild() const;
 
 
   /**
@@ -209,6 +241,21 @@ public:
 
 
   /**
+   * Sets the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin.
+   *
+   * @param multipleChild MultipleChild* value of the "multipleChild" element
+   * to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setMultipleChild(const MultipleChild* multipleChild);
+
+
+  /**
    * Creates a new NormalClass object, adds it to this TwoatonceSBasePlugin
    * object and returns the NormalClass object created.
    *
@@ -225,6 +272,15 @@ public:
    * @return a new ClassWithRequiredID object instance.
    */
   ClassWithRequiredID* createClassWithRequiredID();
+
+
+  /**
+   * Creates a new MultipleChild object, adds it to this TwoatonceSBasePlugin
+   * object and returns the MultipleChild object created.
+   *
+   * @return a new MultipleChild object instance.
+   */
+  MultipleChild* createMultipleChild();
 
 
   /**
@@ -247,6 +303,17 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetClassWithRequiredID();
+
+
+  /**
+   * Unsets the value of the "multipleChild" element of this
+   * TwoatonceSBasePlugin.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetMultipleChild();
 
 
 
@@ -797,6 +864,23 @@ TwoatonceSBasePlugin_getClassWithRequiredID(const TwoatonceSBasePlugin_t *
 
 
 /**
+ * Returns the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure whose multipleChild is
+ * sought.
+ *
+ * @return the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t as a MultipleChild*.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+const MultipleChild_t*
+TwoatonceSBasePlugin_getMultipleChild(const TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
  * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
  * "normalClass" element is set.
  *
@@ -827,6 +911,22 @@ LIBSBML_EXTERN
 int
 TwoatonceSBasePlugin_isSetClassWithRequiredID(const TwoatonceSBasePlugin_t *
   tsbp);
+
+
+/**
+ * Predicate returning @c 1 (true) if this TwoatonceSBasePlugin_t's
+ * "multipleChild" element is set.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @return @c 1 (true) if this TwoatonceSBasePlugin_t's "multipleChild" element
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_isSetMultipleChild(const TwoatonceSBasePlugin_t * tsbp);
 
 
 /**
@@ -874,6 +974,28 @@ TwoatonceSBasePlugin_setClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp,
 
 
 /**
+ * Sets the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @param multipleChild MultipleChild_t* value of the "multipleChild" element
+ * to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_setMultipleChild(TwoatonceSBasePlugin_t * tsbp,
+                                      const MultipleChild_t* multipleChild);
+
+
+/**
  * Creates a new NormalClass_t object, adds it to this TwoatonceSBasePlugin_t
  * object and returns the NormalClass_t object created.
  *
@@ -904,6 +1026,22 @@ TwoatonceSBasePlugin_createNormalClass(TwoatonceSBasePlugin_t* tsbp);
 LIBSBML_EXTERN
 ClassWithRequiredID_t*
 TwoatonceSBasePlugin_createClassWithRequiredID(TwoatonceSBasePlugin_t* tsbp);
+
+
+/**
+ * Creates a new MultipleChild_t object, adds it to this TwoatonceSBasePlugin_t
+ * object and returns the MultipleChild_t object created.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure to which the
+ * MultipleChild_t should be added.
+ *
+ * @return a new MultipleChild_t object instance.
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+MultipleChild_t*
+TwoatonceSBasePlugin_createMultipleChild(TwoatonceSBasePlugin_t* tsbp);
 
 
 /**
@@ -940,6 +1078,24 @@ TwoatonceSBasePlugin_unsetNormalClass(TwoatonceSBasePlugin_t * tsbp);
 LIBSBML_EXTERN
 int
 TwoatonceSBasePlugin_unsetClassWithRequiredID(TwoatonceSBasePlugin_t * tsbp);
+
+
+/**
+ * Unsets the value of the "multipleChild" element of this
+ * TwoatonceSBasePlugin_t.
+ *
+ * @param tsbp the TwoatonceSBasePlugin_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof TwoatonceSBasePlugin_t
+ */
+LIBSBML_EXTERN
+int
+TwoatonceSBasePlugin_unsetMultipleChild(TwoatonceSBasePlugin_t * tsbp);
 
 
 

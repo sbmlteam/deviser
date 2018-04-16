@@ -230,6 +230,15 @@ def get_version_attributes(attributes, version):
     return ver_attribs
 
 
+# return attributes for the given version only
+def get_version_elements(elements, version):
+    ver_attribs = []
+    for i in range(0, len(elements)):
+        if elements[i]['version'] == version:
+            ver_attribs.append(elements[i])
+    return ver_attribs
+
+
 # return a set of unique attributes
 #  any with multiple versions appear only once
 def get_unique_attributes(full_attributes):

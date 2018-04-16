@@ -840,6 +840,13 @@ def main():
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'twoAtOnce'
+        num = 3
+        class_name = 'MultipleChild'
+        list_of = ''
+        test_case = 'multiple versions with child elements'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         # leave out for now as all validation needs reviewing for multiple
         name = 'twoAtOnce'
         class_name = 'TwoAtOnceSBMLError'
@@ -946,11 +953,18 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib'
-        num = 2
-        class_name = 'Distribution'
+        name = 'twoAtOnce'
+        num = 0
+        class_name = 'TwoatonceSBasePlugin'
+        test_case = 'an SBase plugin'
+        fail += run_plug_test(name, class_name, test_case, num)
+
+
+        name = 'twoAtOnce'
+        num = 3
+        class_name = 'MultipleChild'
         list_of = ''
-        test_case = 'abstract class with multiple abstract children'
+        test_case = 'multiple versions with child elements'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

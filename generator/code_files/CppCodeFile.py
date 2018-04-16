@@ -329,7 +329,7 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
 
             attrib_functions = SetGetFunctions.\
                 SetGetFunctions(self.language, self.is_cpp_api,
-                                self.is_list_of, self.class_object)
+                                self.is_list_of, self.class_object, self.lv_info, False, [], True)
 
             num_elements = len(self.child_elements)
         else:
