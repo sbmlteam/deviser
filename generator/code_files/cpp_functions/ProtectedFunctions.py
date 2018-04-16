@@ -1370,7 +1370,7 @@ class ProtectedFunctions():
         status = 'required' if attribute['reqd'] else 'optional'
         class_name = strFunctions.remove_prefix(self.class_name)
         if is_l3v1 and name == 'id':
-            line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
+            line = ['XMLTriple triple{0}(\"{1}\", mURI, getPrefix())'.format(name.upper(), name),
                     'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
         else:
             line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
@@ -1531,7 +1531,7 @@ class ProtectedFunctions():
 
         if name == 'name':
             if is_l3v1:
-                line = ['XMLTriple triple{0}(\"{1}\", nURI, getPrefix())'.format(name.upper(), name),
+                line = ['XMLTriple triple{0}(\"{1}\", mURI, getPrefix())'.format(name.upper(), name),
                         'assigned = attributes.readInto(triple{0}, {1})'.format(name.upper(), member)]
             elif attribute['reqd'] or not self.has_multiple_versions:
                 line = ['assigned = attributes.readInto(\"{0}\", {1})'.format(name,
