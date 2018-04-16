@@ -1283,7 +1283,7 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
   // name string (use = "optional" )
   // 
 
-  XMLTriple tripleNAME("name", nURI, getPrefix());
+  XMLTriple tripleNAME("name", mURI, getPrefix());
   assigned = attributes.readInto(tripleNAME, mName);
 
   if (assigned == true)
@@ -1357,7 +1357,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
   // id SId (use = "required" )
   // 
 
-  XMLTriple tripleID("id", nURI, getPrefix());
+  XMLTriple tripleID("id", mURI, getPrefix());
   assigned = attributes.readInto(tripleID, mId);
 
   if (assigned == true)
@@ -1385,7 +1385,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
   // name string (use = "optional" )
   // 
 
-  XMLTriple tripleNAME("name", nURI, getPrefix());
+  XMLTriple tripleNAME("name", mURI, getPrefix());
   assigned = attributes.readInto(tripleNAME, mName);
 
   if (assigned == true)
