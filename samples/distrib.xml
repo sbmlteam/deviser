@@ -25,15 +25,15 @@
             <concrete name="externalDistribution" element="DistribExternalDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribUnivariateDistribution" typeCode="SBML_DISTRIB_UNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="true">
+        <element name="DistribUnivariateDistribution" typeCode="SBML_DISTRIB_UNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="true">
           <concretes>
             <concrete name="continuousUnivariateDistribution" element="DistribContinuousUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="discreteUnivariateDistribution" element="DistribDiscreteUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="categoricalUnivariateDistribution" element="DistribCategoricalUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribMultivariateDistribution" typeCode="SBML_DISTRIB_MULTIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="false"/>
-        <element name="DistribContinuousUnivariateDistribution" typeCode="SBML_DISTRIB_CONTINUOUSUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="continuousUnivariateDistribution">
+        <element name="DistribMultivariateDistribution" typeCode="SBML_DISTRIB_MULTIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="false"/>
+        <element name="DistribContinuousUnivariateDistribution" typeCode="SBML_DISTRIB_CONTINUOUSUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="continuousUnivariateDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -59,7 +59,7 @@
             <concrete name="weibullDistribution" element="DistribWeibullDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribDiscreteUnivariateDistribution" typeCode="SBML_DISTRIB_DISCRETEUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="discreteUnivariateDistribution">
+        <element name="DistribDiscreteUnivariateDistribution" typeCode="SBML_DISTRIB_DISCRETEUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="discreteUnivariateDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -74,7 +74,7 @@
             <concrete name="poissonDistribution" element="DistribPoissonDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribCategoricalUnivariateDistribution" typeCode="SBML_DISTRIB_CATEGORICALUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="categoricalUnivariateDistribution">
+        <element name="DistribCategoricalUnivariateDistribution" typeCode="SBML_DISTRIB_CATEGORICALUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="categoricalUnivariateDistribution">
           <concretes>
             <concrete name="bernoulliDistribution" element="DistribBernoulliDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="categoricalDistribution" element="DistribCategoricalDistribution" minNumChildren="0" maxNumChildren="0"/>
@@ -93,14 +93,14 @@
             <concrete name="externalParameter" element="DistribExternalParameter" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribUncertBound" typeCode="SBML_DISTRIB_UNCERTBOUND" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UncertValue" abstract="false" elementName="uncertBound">
+        <element name="DistribUncertBound" typeCode="SBML_DISTRIB_UNCERTBOUND" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUncertValue" abstract="false" elementName="uncertBound">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="inclusive" required="true" type="bool" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExternalDistribution" typeCode="SBML_DISTRIB_EXTERNALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="false" elementName="externalDistribution">
+        <element name="DistribExternalDistribution" typeCode="SBML_DISTRIB_EXTERNALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="false" elementName="externalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -108,7 +108,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="DistribExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="UncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
+        <element name="DistribExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribUncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -116,7 +116,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="DistribExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribNormalDistribution" typeCode="SBML_DISTRIB_NORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="normalDistribution">
+        <element name="DistribNormalDistribution" typeCode="SBML_DISTRIB_NORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="normalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -125,7 +125,7 @@
             <attribute name="variance" required="false" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribUniformDistribution" typeCode="SBML_DISTRIB_UNIFORMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="uniformDistribution">
+        <element name="DistribUniformDistribution" typeCode="SBML_DISTRIB_UNIFORMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="uniformDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -134,7 +134,7 @@
             <attribute name="numberOfClasses" required="false" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribCategoricalDistribution" typeCode="SBML_DISTRIB_CATEGORICALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CategoricalUnivariateDistribution" abstract="false" elementName="categoricalDistribution">
+        <element name="DistribCategoricalDistribution" typeCode="SBML_DISTRIB_CATEGORICALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribCategoricalUnivariateDistribution" abstract="false" elementName="categoricalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -150,14 +150,14 @@
             <attribute name="value" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBernoulliDistribution" typeCode="SBML_DISTRIB_BERNOULLIDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CategoricalUnivariateDistribution" abstract="false" elementName="bernoulliDistribution">
+        <element name="DistribBernoulliDistribution" typeCode="SBML_DISTRIB_BERNOULLIDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribCategoricalUnivariateDistribution" abstract="false" elementName="bernoulliDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="prob" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBetaDistribution" typeCode="SBML_DISTRIB_BETADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="betaDistribution">
+        <element name="DistribBetaDistribution" typeCode="SBML_DISTRIB_BETADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="betaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -165,7 +165,7 @@
             <attribute name="beta" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBinomialDistribution" typeCode="SBML_DISTRIB_BINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="binomialDistribution">
+        <element name="DistribBinomialDistribution" typeCode="SBML_DISTRIB_BINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="binomialDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -173,7 +173,7 @@
             <attribute name="probabilityOfSuccess" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribCauchyDistribution" typeCode="SBML_DISTRIB_CAUCHYDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="cauchyDistribution">
+        <element name="DistribCauchyDistribution" typeCode="SBML_DISTRIB_CAUCHYDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="cauchyDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -181,21 +181,21 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribChiSquareDistribution" typeCode="SBML_DISTRIB_CHISQUAREDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="chiSquareDistribution">
+        <element name="DistribChiSquareDistribution" typeCode="SBML_DISTRIB_CHISQUAREDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="chiSquareDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="degreesOfFreedom" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExponentialDistribution" typeCode="SBML_DISTRIB_EXPONENTIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="exponentialDistribution">
+        <element name="DistribExponentialDistribution" typeCode="SBML_DISTRIB_EXPONENTIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="exponentialDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="rate" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribFDistribution" typeCode="SBML_DISTRIB_FDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="fDistribution">
+        <element name="DistribFDistribution" typeCode="SBML_DISTRIB_FDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="fDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -203,7 +203,7 @@
             <attribute name="denominator" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribGammaDistribution" typeCode="SBML_DISTRIB_GAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="gammaDistribution">
+        <element name="DistribGammaDistribution" typeCode="SBML_DISTRIB_GAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="gammaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -211,14 +211,14 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribGeometricDistribution" typeCode="SBML_DISTRIB_GEOMETRICLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="geometricDistribution">
+        <element name="DistribGeometricDistribution" typeCode="SBML_DISTRIB_GEOMETRICLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="geometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="probability" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribHypergeometricDistribution" typeCode="SBML_DISTRIB_HYPERGEOMETRICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
+        <element name="DistribHypergeometricDistribution" typeCode="SBML_DISTRIB_HYPERGEOMETRICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -227,7 +227,7 @@
             <attribute name="populationSize" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribInverseGammaDistribution" typeCode="SBML_DISTRIB_INVERSEGAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="inverseGammaDistribution">
+        <element name="DistribInverseGammaDistribution" typeCode="SBML_DISTRIB_INVERSEGAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="inverseGammaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -235,7 +235,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLaPlaceDistribution" typeCode="SBML_DISTRIB_LAPLACEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="laPlaceDistribution">
+        <element name="DistribLaPlaceDistribution" typeCode="SBML_DISTRIB_LAPLACEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="laPlaceDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -243,7 +243,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLogNormalDistribution" typeCode="SBML_DISTRIB_LOGNORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logNormalDistribution">
+        <element name="DistribLogNormalDistribution" typeCode="SBML_DISTRIB_LOGNORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logNormalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -251,7 +251,7 @@
             <attribute name="logScale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLogisticDistribution" typeCode="SBML_DISTRIB_LOGISTICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
+        <element name="DistribLogisticDistribution" typeCode="SBML_DISTRIB_LOGISTICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -259,7 +259,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribNegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
+        <element name="DistribNegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -267,7 +267,7 @@
             <attribute name="probability" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
+        <element name="DistribParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -275,21 +275,21 @@
             <attribute name="shape" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribPoissonDistribution" typeCode="SBML_DISTRIB_POISSONDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="poissonDistribution">
+        <element name="DistribPoissonDistribution" typeCode="SBML_DISTRIB_POISSONDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="poissonDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="rate" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribRayleighDistribution" typeCode="SBML_DISTRIB_RAYLEIGHDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="rayleighDistribution">
+        <element name="DistribRayleighDistribution" typeCode="SBML_DISTRIB_RAYLEIGHDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="rayleighDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribStudentTDistribution" typeCode="SBML_DISTRIB_STUDENTTDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="studentTDistribution">
+        <element name="DistribStudentTDistribution" typeCode="SBML_DISTRIB_STUDENTTDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="studentTDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -298,7 +298,7 @@
             <attribute name="degreesOfFreedom" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribWeibullDistribution" typeCode="SBML_DISTRIB_WEIBULLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="weibullDistribution">
+        <element name="DistribWeibullDistribution" typeCode="SBML_DISTRIB_WEIBULLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="weibullDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -381,15 +381,15 @@
             <concrete name="externalDistribution" element="DistribExternalDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribUnivariateDistribution" typeCode="SBML_DISTRIB_UNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="true">
+        <element name="DistribUnivariateDistribution" typeCode="SBML_DISTRIB_UNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="true">
           <concretes>
             <concrete name="continuousUnivariateDistribution" element="DistribContinuousUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="discreteUnivariateDistribution" element="DistribDiscreteUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="categoricalUnivariateDistribution" element="DistribCategoricalUnivariateDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribMultivariateDistribution" typeCode="SBML_DISTRIB_MULTIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="false"/>
-        <element name="DistribContinuousUnivariateDistribution" typeCode="SBML_DISTRIB_CONTINUOUSUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="continuousUnivariateDistribution">
+        <element name="DistribMultivariateDistribution" typeCode="SBML_DISTRIB_MULTIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="false"/>
+        <element name="DistribContinuousUnivariateDistribution" typeCode="SBML_DISTRIB_CONTINUOUSUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="continuousUnivariateDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -415,7 +415,7 @@
             <concrete name="weibullDistribution" element="DistribWeibullDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribDiscreteUnivariateDistribution" typeCode="SBML_DISTRIB_DISCRETEUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="discreteUnivariateDistribution">
+        <element name="DistribDiscreteUnivariateDistribution" typeCode="SBML_DISTRIB_DISCRETEUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="discreteUnivariateDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -430,7 +430,7 @@
             <concrete name="poissonDistribution" element="DistribPoissonDistribution" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribCategoricalUnivariateDistribution" typeCode="SBML_DISTRIB_CATEGORICALUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UnivariateDistribution" abstract="true" elementName="categoricalUnivariateDistribution">
+        <element name="DistribCategoricalUnivariateDistribution" typeCode="SBML_DISTRIB_CATEGORICALUNIVARIATEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUnivariateDistribution" abstract="true" elementName="categoricalUnivariateDistribution">
           <concretes>
             <concrete name="bernoulliDistribution" element="DistribBernoulliDistribution" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="categoricalDistribution" element="DistribCategoricalDistribution" minNumChildren="0" maxNumChildren="0"/>
@@ -449,14 +449,14 @@
             <concrete name="externalParameter" element="DistribExternalParameter" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="DistribUncertBound" typeCode="SBML_DISTRIB_UNCERTBOUND" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UncertValue" abstract="false" elementName="uncertBound">
+        <element name="DistribUncertBound" typeCode="SBML_DISTRIB_UNCERTBOUND" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribUncertValue" abstract="false" elementName="uncertBound">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="inclusive" required="true" type="bool" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExternalDistribution" typeCode="SBML_DISTRIB_EXTERNALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Distribution" abstract="false" elementName="externalDistribution">
+        <element name="DistribExternalDistribution" typeCode="SBML_DISTRIB_EXTERNALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDistribution" abstract="false" elementName="externalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -464,7 +464,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="DistribExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="UncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
+        <element name="DistribExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribUncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -472,7 +472,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="DistribExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribNormalDistribution" typeCode="SBML_DISTRIB_NORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="normalDistribution">
+        <element name="DistribNormalDistribution" typeCode="SBML_DISTRIB_NORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="normalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -481,7 +481,7 @@
             <attribute name="variance" required="false" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribUniformDistribution" typeCode="SBML_DISTRIB_UNIFORMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="uniformDistribution">
+        <element name="DistribUniformDistribution" typeCode="SBML_DISTRIB_UNIFORMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="uniformDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -490,7 +490,7 @@
             <attribute name="numberOfClasses" required="false" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribCategoricalDistribution" typeCode="SBML_DISTRIB_CATEGORICALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CategoricalUnivariateDistribution" abstract="false" elementName="categoricalDistribution">
+        <element name="DistribCategoricalDistribution" typeCode="SBML_DISTRIB_CATEGORICALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribCategoricalUnivariateDistribution" abstract="false" elementName="categoricalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -506,14 +506,14 @@
             <attribute name="value" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBernoulliDistribution" typeCode="SBML_DISTRIB_BERNOULLIDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CategoricalUnivariateDistribution" abstract="false" elementName="bernoulliDistribution">
+        <element name="DistribBernoulliDistribution" typeCode="SBML_DISTRIB_BERNOULLIDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribCategoricalUnivariateDistribution" abstract="false" elementName="bernoulliDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="prob" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBetaDistribution" typeCode="SBML_DISTRIB_BETADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="betaDistribution">
+        <element name="DistribBetaDistribution" typeCode="SBML_DISTRIB_BETADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="betaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -521,7 +521,7 @@
             <attribute name="beta" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribBinomialDistribution" typeCode="SBML_DISTRIB_BINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="binomialDistribution">
+        <element name="DistribBinomialDistribution" typeCode="SBML_DISTRIB_BINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="binomialDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -529,7 +529,7 @@
             <attribute name="probabilityOfSuccess" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribCauchyDistribution" typeCode="SBML_DISTRIB_CAUCHYDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="cauchyDistribution">
+        <element name="DistribCauchyDistribution" typeCode="SBML_DISTRIB_CAUCHYDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="cauchyDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -537,21 +537,21 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribChiSquareDistribution" typeCode="SBML_DISTRIB_CHISQUAREDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="chiSquareDistribution">
+        <element name="DistribChiSquareDistribution" typeCode="SBML_DISTRIB_CHISQUAREDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="chiSquareDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="degreesOfFreedom" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribExponentialDistribution" typeCode="SBML_DISTRIB_EXPONENTIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="exponentialDistribution">
+        <element name="DistribExponentialDistribution" typeCode="SBML_DISTRIB_EXPONENTIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="exponentialDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="rate" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribFDistribution" typeCode="SBML_DISTRIB_FDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="fDistribution">
+        <element name="DistribFDistribution" typeCode="SBML_DISTRIB_FDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="fDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -559,7 +559,7 @@
             <attribute name="denominator" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribGammaDistribution" typeCode="SBML_DISTRIB_GAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="gammaDistribution">
+        <element name="DistribGammaDistribution" typeCode="SBML_DISTRIB_GAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="gammaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -567,14 +567,14 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribGeometricDistribution" typeCode="SBML_DISTRIB_GEOMETRICLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="geometricDistribution">
+        <element name="DistribGeometricDistribution" typeCode="SBML_DISTRIB_GEOMETRICLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="geometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="probability" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribHypergeometricDistribution" typeCode="SBML_DISTRIB_HYPERGEOMETRICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
+        <element name="DistribHypergeometricDistribution" typeCode="SBML_DISTRIB_HYPERGEOMETRICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -583,7 +583,7 @@
             <attribute name="populationSize" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribInverseGammaDistribution" typeCode="SBML_DISTRIB_INVERSEGAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="inverseGammaDistribution">
+        <element name="DistribInverseGammaDistribution" typeCode="SBML_DISTRIB_INVERSEGAMMADISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="inverseGammaDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -591,7 +591,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLaPlaceDistribution" typeCode="SBML_DISTRIB_LAPLACEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="laPlaceDistribution">
+        <element name="DistribLaPlaceDistribution" typeCode="SBML_DISTRIB_LAPLACEDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="laPlaceDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -599,7 +599,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLogNormalDistribution" typeCode="SBML_DISTRIB_LOGNORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logNormalDistribution">
+        <element name="DistribLogNormalDistribution" typeCode="SBML_DISTRIB_LOGNORMALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logNormalDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -607,7 +607,7 @@
             <attribute name="logScale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribLogisticDistribution" typeCode="SBML_DISTRIB_LOGISTICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
+        <element name="DistribLogisticDistribution" typeCode="SBML_DISTRIB_LOGISTICDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -615,7 +615,7 @@
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribNegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
+        <element name="DistribNegativeBinomialDistribution" typeCode="SBML_DISTRIB_NEGATIVEBINOMIALDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="hypergeometricDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -623,7 +623,7 @@
             <attribute name="probability" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
+        <element name="DistribParetoDistribution" typeCode="SBML_DISTRIB_PARETODISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="logisticDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -631,21 +631,21 @@
             <attribute name="shape" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribPoissonDistribution" typeCode="SBML_DISTRIB_POISSONDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DiscreteUnivariateDistribution" abstract="false" elementName="poissonDistribution">
+        <element name="DistribPoissonDistribution" typeCode="SBML_DISTRIB_POISSONDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribDiscreteUnivariateDistribution" abstract="false" elementName="poissonDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="rate" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribRayleighDistribution" typeCode="SBML_DISTRIB_RAYLEIGHDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="rayleighDistribution">
+        <element name="DistribRayleighDistribution" typeCode="SBML_DISTRIB_RAYLEIGHDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="rayleighDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="scale" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribStudentTDistribution" typeCode="SBML_DISTRIB_STUDENTTDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="studentTDistribution">
+        <element name="DistribStudentTDistribution" typeCode="SBML_DISTRIB_STUDENTTDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="studentTDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -654,7 +654,7 @@
             <attribute name="degreesOfFreedom" required="true" type="element" element="DistribUncertValue" abstract="false"/>
           </attributes>
         </element>
-        <element name="DistribWeibullDistribution" typeCode="SBML_DISTRIB_WEIBULLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="ContinuousUnivariateDistribution" abstract="false" elementName="weibullDistribution">
+        <element name="DistribWeibullDistribution" typeCode="SBML_DISTRIB_WEIBULLDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribContinuousUnivariateDistribution" abstract="false" elementName="weibullDistribution">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
