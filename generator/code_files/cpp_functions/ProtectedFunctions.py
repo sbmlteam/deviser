@@ -744,7 +744,7 @@ class ProtectedFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': False,
-                     'virtual': True,
+                     'virtual': False,
                      'object_name': self.struct_name,
                      'implementation': code})
 
@@ -977,7 +977,7 @@ class ProtectedFunctions():
                      'return_type': return_type,
                      'arguments': arguments,
                      'constant': True,
-                     'virtual': True,
+                     'virtual': False,
                      'object_name': self.struct_name,
                      'implementation': code})
 
