@@ -60,7 +60,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 MixedGeometry::MixedGeometry(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion)
-  : GeometryDefinition(level, version)
+  : GeometryDefinition(level, version, pkgVersion)
   , mGeometryDefinitions (level, version, pkgVersion)
   , mOrdinalMappings (level, version, pkgVersion)
 {

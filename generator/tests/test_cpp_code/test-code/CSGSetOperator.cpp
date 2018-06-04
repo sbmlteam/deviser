@@ -61,7 +61,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 CSGSetOperator::CSGSetOperator(unsigned int level,
                                unsigned int version,
                                unsigned int pkgVersion)
-  : CSGNode(level, version)
+  : CSGNode(level, version, pkgVersion)
   , mOperationType (SET_OPERATION_INVALID)
   , mComplementA ("")
   , mComplementB ("")

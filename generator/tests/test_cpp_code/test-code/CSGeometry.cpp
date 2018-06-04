@@ -54,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 CSGeometry::CSGeometry(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion)
-  : GeometryDefinition(level, version)
+  : GeometryDefinition(level, version, pkgVersion)
   , mCSGObjects (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,

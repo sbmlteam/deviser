@@ -33,6 +33,7 @@
 #include <sbml/packages/render/sbml/LineEnding.h>
 #include <sbml/packages/render/sbml/ListOfLineEndings.h>
 #include <sbml/packages/render/validator/RenderSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;
@@ -54,7 +55,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 LineEnding::LineEnding(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion)
-  : GraphicalPrimitive2D(level, version)
+  : GraphicalPrimitive2D(level, version, pkgVersion)
   , mEnableRotationalMapping (false)
   , mIsSetEnableRotationalMapping (false)
   , mGroup (NULL)

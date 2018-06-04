@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/distrib/sbml/BetaDistribution.h>
 #include <sbml/packages/distrib/validator/DistribSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;
@@ -53,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BetaDistribution::BetaDistribution(unsigned int level,
                                    unsigned int version,
                                    unsigned int pkgVersion)
-  : ContinuousUnivariateDistribution(level, version)
+  : ContinuousUnivariateDistribution(level, version, pkgVersion)
   , mAlpha (NULL)
   , mBeta (NULL)
 {

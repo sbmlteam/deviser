@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/twoatonce/extension/TwoatonceSBasePlugin.h>
 #include <sbml/packages/twoatonce/validator/TwoatonceSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/Model.h>
 
 

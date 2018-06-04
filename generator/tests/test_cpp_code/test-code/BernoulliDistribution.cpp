@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/distrib/sbml/BernoulliDistribution.h>
 #include <sbml/packages/distrib/validator/DistribSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;
@@ -53,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BernoulliDistribution::BernoulliDistribution(unsigned int level,
                                              unsigned int version,
                                              unsigned int pkgVersion)
-  : CategoricalUnivariateDistribution(level, version)
+  : CategoricalUnivariateDistribution(level, version, pkgVersion)
   , mProb (NULL)
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,

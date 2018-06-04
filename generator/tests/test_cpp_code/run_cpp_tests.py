@@ -953,18 +953,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'twoAtOnce'
-        num = 0
-        class_name = 'TwoatonceSBasePlugin'
-        test_case = 'an SBase plugin'
-        fail += run_plug_test(name, class_name, test_case, num)
-
-
-        name = 'twoAtOnce'
-        num = 3
-        class_name = 'MultipleChild'
+        name = 'new_distrib'
+        num = 17
+        class_name = 'BinomialDistribution'
         list_of = ''
-        test_case = 'multiple versions with child elements'
+        test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

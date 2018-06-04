@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/test/sbml/ArrayChild.h>
 #include <sbml/packages/test/validator/TestSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;

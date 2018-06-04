@@ -54,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 ParametricGeometry::ParametricGeometry(unsigned int level,
                                        unsigned int version,
                                        unsigned int pkgVersion)
-  : GeometryDefinition(level, version)
+  : GeometryDefinition(level, version, pkgVersion)
   , mSpatialPoints (NULL)
   , mParametricObjects (level, version, pkgVersion)
 {

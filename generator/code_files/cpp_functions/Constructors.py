@@ -708,11 +708,14 @@ class Constructors():
     def write_constructor_args(self, ns):
         if ns is None:
             if global_variables.has_level_version:
-                constructor_args = [': {0}(level, version)'.format(self.base_class)]
                 if global_variables.is_package:
                     parameters = 'level, version, pkgVersion'
                 else:
                     parameters = 'level, version'
+                if self.base_class != global_variables.std_base and self.base_class != 'ListOf':
+                    constructor_args = [': {0}({1})'.format(self.base_class, parameters)]
+                else:
+                    constructor_args = [': {0}(level, version)'.format(self.base_class)]
             else:
                 constructor_args = [': {0}(1, 1)'.format(self.base_class)]
                 parameters = ''

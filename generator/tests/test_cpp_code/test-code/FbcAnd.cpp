@@ -58,7 +58,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 FbcAnd::FbcAnd(unsigned int level,
                unsigned int version,
                unsigned int pkgVersion)
-  : Association(level, version)
+  : Association(level, version, pkgVersion)
   , mAssociations (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new FbcPkgNamespaces(level, version, pkgVersion));

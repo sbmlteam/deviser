@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/x/sbml/Fred.h>
 #include <sbml/packages/x/validator/XSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;

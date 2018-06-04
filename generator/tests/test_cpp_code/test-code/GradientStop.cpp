@@ -33,6 +33,7 @@
 #include <sbml/packages/render/sbml/GradientStop.h>
 #include <sbml/packages/render/sbml/ListOfGradientStops.h>
 #include <sbml/packages/render/validator/RenderSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;

@@ -54,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 CategoricalDistribution::CategoricalDistribution(unsigned int level,
                                                  unsigned int version,
                                                  unsigned int pkgVersion)
-  : CategoricalUnivariateDistribution(level, version)
+  : CategoricalUnivariateDistribution(level, version, pkgVersion)
   , mCategories (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,

@@ -33,6 +33,7 @@
 #include <sbml/packages/spatial/sbml/CoordinateComponent.h>
 #include <sbml/packages/spatial/sbml/ListOfCoordinateComponents.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;

@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/qual/sbml/ListOfFunctionTerms.h>
 #include <sbml/packages/qual/validator/QualSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/math/MathML.h>
 
 

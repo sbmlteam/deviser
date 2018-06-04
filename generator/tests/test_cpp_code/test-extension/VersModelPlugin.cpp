@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/vers/extension/VersModelPlugin.h>
 #include <sbml/packages/vers/validator/VersSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/Model.h>
 
 

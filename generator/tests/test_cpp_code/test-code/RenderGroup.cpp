@@ -62,7 +62,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 RenderGroup::RenderGroup(unsigned int level,
                          unsigned int version,
                          unsigned int pkgVersion)
-  : GraphicalPrimitive2D(level, version)
+  : GraphicalPrimitive2D(level, version, pkgVersion)
   , mStartHead ("")
   , mEndHead ("")
   , mFontFamily ("")

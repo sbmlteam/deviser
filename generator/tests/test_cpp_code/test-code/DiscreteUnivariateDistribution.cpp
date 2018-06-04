@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/distrib/sbml/DiscreteUnivariateDistribution.h>
 #include <sbml/packages/distrib/validator/DistribSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 #include <sbml/packages/distrib/sbml/BinomialDistribution.h>
 #include <sbml/packages/distrib/sbml/GeometricDistribution.h>
@@ -60,7 +61,7 @@ DiscreteUnivariateDistribution::DiscreteUnivariateDistribution(
                                                                  version,
                                                                unsigned int
                                                                  pkgVersion)
-  : UnivariateDistribution(level, version)
+  : UnivariateDistribution(level, version, pkgVersion)
   , mTruncationLowerBound (NULL)
   , mTruncationUpperBound (NULL)
 {

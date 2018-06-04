@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/coreversmultipkg/extension/CoreversmultipkgModelPlugin.h>
 #include <sbml/packages/coreversmultipkg/validator/CoreversmultipkgSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/Model.h>
 
 

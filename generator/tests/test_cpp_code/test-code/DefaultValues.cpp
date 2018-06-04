@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/render/sbml/DefaultValues.h>
 #include <sbml/packages/render/validator/RenderSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;

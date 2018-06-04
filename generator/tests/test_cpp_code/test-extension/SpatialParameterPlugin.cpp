@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/spatial/extension/SpatialParameterPlugin.h>
 #include <sbml/packages/spatial/validator/SpatialSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/Model.h>
 
 

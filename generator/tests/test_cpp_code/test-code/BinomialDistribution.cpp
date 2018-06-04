@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/distrib/sbml/BinomialDistribution.h>
 #include <sbml/packages/distrib/validator/DistribSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 
 
 using namespace std;
@@ -53,7 +54,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 BinomialDistribution::BinomialDistribution(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion)
-  : DiscreteUnivariateDistribution(level, version)
+  : DiscreteUnivariateDistribution(level, version, pkgVersion)
   , mNumberOfTrials (NULL)
   , mProbabilityOfSuccess (NULL)
 {

@@ -151,9 +151,11 @@ class CppCodeFile(BaseCppFile.BaseCppFile):
         if len(self.child_lo_elements) > 0 and global_variables.is_package:
             write_element_filter = True
         elif global_variables.is_package:
-            for element in self.child_elements:
-                if 'concrete' in element:
-                    write_element_filter = True
+            # for element in self.child_elements:
+            #     if 'concrete' in element:
+            #         write_element_filter = True
+            if self.num_children > 0 and self.num_children != self.num_non_std_children:
+                write_element_filter = True
 
         if self.is_plugin and not self.is_doc_plugin \
                 and self.language == 'sbml':

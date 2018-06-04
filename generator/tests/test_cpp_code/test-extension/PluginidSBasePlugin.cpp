@@ -32,6 +32,7 @@
  */
 #include <sbml/packages/pluginid/extension/PluginidSBasePlugin.h>
 #include <sbml/packages/pluginid/validator/PluginidSBMLError.h>
+#include <sbml/util/ElementFilter.h>
 #include <sbml/Model.h>
 
 

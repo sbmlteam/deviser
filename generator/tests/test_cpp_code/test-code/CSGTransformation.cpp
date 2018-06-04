@@ -61,7 +61,7 @@ LIBSBML_CPP_NAMESPACE_BEGIN
 CSGTransformation::CSGTransformation(unsigned int level,
                                      unsigned int version,
                                      unsigned int pkgVersion)
-  : CSGNode(level, version)
+  : CSGNode(level, version, pkgVersion)
   , mCSGNode (NULL)
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
