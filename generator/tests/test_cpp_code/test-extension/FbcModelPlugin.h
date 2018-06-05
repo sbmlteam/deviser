@@ -1416,17 +1416,6 @@ protected:
   /**
    * Reads the expected attributes into the member data variables
    */
-  void readL3V1V1Attributes(const XMLAttributes& attributes);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Reads the expected attributes into the member data variables
-   */
   void readL3V1V2Attributes(const XMLAttributes& attributes);
 
   /** @endcond */
@@ -1439,17 +1428,6 @@ protected:
    * Writes the attributes to the stream
    */
   virtual void writeAttributes(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the attributes to the stream
-   */
-  void writeL3V1V1Attributes(XMLOutputStream& stream) const;
 
   /** @endcond */
 

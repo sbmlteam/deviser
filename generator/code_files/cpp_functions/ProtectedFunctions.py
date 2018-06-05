@@ -577,28 +577,29 @@ class ProtectedFunctions():
                 name = self.attributes[i]['xml_name']
                 implementation = ['attributes.add(\"{0}\")'.format(name)]
                 code.append(dict({'code_type': 'line', 'code': implementation}))
-        else:
+        elif len(self.attributes) > 0:
             code.append(self.create_code_block('line',
                                                ['unsigned int level = getLevel()',
                                                 'unsigned int coreVersion = getVersion()',
                                                 'unsigned int pkgVersion = getPackageVersion()']))
             for i in range(0, len(self.lv_info)):
-                level_val = self.lv_info[i]['core_level']
-                version = self.lv_info[i]['core_version']
-                pkg_version = self.lv_info[i]['pkg_version']
+                if len(self.version_attributes[i]) > 0:
+                    level_val = self.lv_info[i]['core_level']
+                    version = self.lv_info[i]['core_version']
+                    pkg_version = self.lv_info[i]['pkg_version']
 
-                implementation = ['level == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version)]
-                for j in range(0, len(self.version_attributes[i])):
-                    if self.version_attributes[i][j]['isArray']:
-                        continue
-                    name = self.version_attributes[i][j]['name']
-                    # in l3v2 id and name are on SBase
-                    if version < 2:
-                        implementation.append('attributes.add(\"{0}\")'.format(name))
-                    else:
-                        if name != 'id' and name != 'name':
+                    implementation = ['level == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version)]
+                    for j in range(0, len(self.version_attributes[i])):
+                        if self.version_attributes[i][j]['isArray']:
+                            continue
+                        name = self.version_attributes[i][j]['name']
+                        # in l3v2 id and name are on SBase
+                        if version < 2:
                             implementation.append('attributes.add(\"{0}\")'.format(name))
-                code.append(self.create_code_block('if', implementation))
+                        else:
+                            if name != 'id' and name != 'name':
+                                implementation.append('attributes.add(\"{0}\")'.format(name))
+                    code.append(self.create_code_block('if', implementation))
         # return the parts
         return dict({'title_line': title_line,
                      'params': params,
@@ -667,13 +668,14 @@ class ProtectedFunctions():
                 self.write_read_att(self.attributes, i, code)
         else:
             for i in range(0, len(self.lv_info)):
-                level_val = self.lv_info[i]['core_level']
-                version = self.lv_info[i]['core_version']
-                pkg_version = self.lv_info[i]['pkg_version']
+                if len(self.version_attributes[i]) > 0:
+                    level_val = self.lv_info[i]['core_level']
+                    version = self.lv_info[i]['core_version']
+                    pkg_version = self.lv_info[i]['pkg_version']
 
-                implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
-                                  'readL{0}V{1}V{2}Attributes(attributes)'.format(level_val, version, pkg_version)]
-                code.append(self.create_code_block('if', implementation))
+                    implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
+                                      'readL{0}V{1}V{2}Attributes(attributes)'.format(level_val, version, pkg_version)]
+                    code.append(self.create_code_block('if', implementation))
 
         # return the parts
         return dict({'title_line': title_line,
@@ -692,7 +694,7 @@ class ProtectedFunctions():
     def write_read_version_attributes(self, version):
         if not self.has_multiple_versions:
             return
-        elif self.has_std_base and len(self.attributes) == 0:
+        elif len(self.version_attributes[version]) == 0:
             return
 
         # create comment
@@ -897,20 +899,21 @@ class ProtectedFunctions():
         if not self.has_multiple_versions:
             for i in range(0, len(self.attributes)):
                 self.write_write_att(self.attributes, i, code)
-        else:
+        elif len(self.attributes) > 0:
             implementation = ['unsigned int level = getLevel()',
                               'unsigned int version = getVersion()']
             if global_variables.is_package:
                 implementation += ['unsigned int pkgVersion = getPackageVersion()']
             code.append(self.create_code_block('line', implementation))
             for i in range(0, len(self.lv_info)):
-                level_val = self.lv_info[i]['core_level']
-                version = self.lv_info[i]['core_version']
-                pkg_version = self.lv_info[i]['pkg_version']
+                if len(self.version_attributes[i]) > 0:
+                    level_val = self.lv_info[i]['core_level']
+                    version = self.lv_info[i]['core_version']
+                    pkg_version = self.lv_info[i]['pkg_version']
 
-                implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
-                                  'writeL{0}V{1}V{2}Attributes(stream)'.format(level_val, version, pkg_version)]
-                code.append(self.create_code_block('if', implementation))
+                    implementation = ['level == {0} && version == {1} && pkgVersion == {2}'.format(level_val, version, pkg_version),
+                                      'writeL{0}V{1}V{2}Attributes(stream)'.format(level_val, version, pkg_version)]
+                    code.append(self.create_code_block('if', implementation))
 
 
         if global_variables.is_package and not self.is_plugin and \
@@ -937,7 +940,7 @@ class ProtectedFunctions():
     def write_write_version_attributes(self, version):
         if not self.has_multiple_versions:
             return
-        elif self.has_std_base and len(self.attributes) == 0:
+        elif len(self.version_attributes[version]) == 0:
             return
 
         # create comment

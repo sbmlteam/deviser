@@ -1,6 +1,6 @@
 /**
- * @file FbcAnd.h
- * @brief Definition of the FbcAnd class.
+ * @file DistribBernoulliDistribution.h
+ * @brief Definition of the DistribBernoulliDistribution class.
  * @author SBMLTeam
  *
  * <!--------------------------------------------------------------------------
@@ -30,18 +30,19 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class FbcAnd
- * @sbmlbrief{fbc} TODO:Definition of the FbcAnd class.
+ * @class DistribBernoulliDistribution
+ * @sbmlbrief{distrib} TODO:Definition of the DistribBernoulliDistribution
+ * class.
  */
 
 
-#ifndef FbcAnd_H__
-#define FbcAnd_H__
+#ifndef DistribBernoulliDistribution_H__
+#define DistribBernoulliDistribution_H__
 
 
 #include <sbml/common/extern.h>
 #include <sbml/common/sbmlfwd.h>
-#include <sbml/packages/fbc/common/fbcfwd.h>
+#include <sbml/packages/distrib/common/distribfwd.h>
 
 
 #ifdef __cplusplus
@@ -50,296 +51,180 @@
 #include <string>
 
 
-#include <sbml/packages/fbc/sbml/Association.h>
-#include <sbml/packages/fbc/extension/FbcExtension.h>
-#include <sbml/packages/fbc/sbml/ListOfAssociations.h>
+#include <sbml/packages/distrib/sbml/DistribCategoricalUnivariateDistribution.h>
+#include <sbml/packages/distrib/extension/DistribExtension.h>
+#include <sbml/packages/distrib/sbml/DistribUncertValue.h>
 
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSBML_EXTERN FbcAnd : public Association
+class LIBSBML_EXTERN DistribBernoulliDistribution : public
+  DistribCategoricalUnivariateDistribution
 {
 protected:
 
   /** @cond doxygenLibsbmlInternal */
 
-  ListOfAssociations mAssociations;
+  DistribUncertValue* mProb;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new FbcAnd using the given SBML Level, Version and
-   * &ldquo;fbc&rdquo; package version.
+   * Creates a new DistribBernoulliDistribution using the given SBML Level,
+   * Version and &ldquo;distrib&rdquo; package version.
    *
-   * @param level an unsigned int, the SBML Level to assign to this FbcAnd.
+   * @param level an unsigned int, the SBML Level to assign to this
+   * DistribBernoulliDistribution.
    *
-   * @param version an unsigned int, the SBML Version to assign to this FbcAnd.
+   * @param version an unsigned int, the SBML Version to assign to this
+   * DistribBernoulliDistribution.
    *
-   * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
-   * FbcAnd.
+   * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+   * this DistribBernoulliDistribution.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  FbcAnd(unsigned int level = FbcExtension::getDefaultLevel(),
-         unsigned int version = FbcExtension::getDefaultVersion(),
-         unsigned int pkgVersion = FbcExtension::getDefaultPackageVersion());
+  DistribBernoulliDistribution(
+                               unsigned int level =
+                                 DistribExtension::getDefaultLevel(),
+                               unsigned int version =
+                                 DistribExtension::getDefaultVersion(),
+                               unsigned int pkgVersion =
+                                 DistribExtension::getDefaultPackageVersion());
 
 
   /**
-   * Creates a new FbcAnd using the given FbcPkgNamespaces object.
+   * Creates a new DistribBernoulliDistribution using the given
+   * DistribPkgNamespaces object.
    *
    * @copydetails doc_what_are_sbml_package_namespaces
    *
-   * @param fbcns the FbcPkgNamespaces object.
+   * @param distribns the DistribPkgNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  FbcAnd(FbcPkgNamespaces *fbcns);
+  DistribBernoulliDistribution(DistribPkgNamespaces *distribns);
 
 
   /**
-   * Copy constructor for FbcAnd.
+   * Copy constructor for DistribBernoulliDistribution.
    *
-   * @param orig the FbcAnd instance to copy.
+   * @param orig the DistribBernoulliDistribution instance to copy.
    */
-  FbcAnd(const FbcAnd& orig);
+  DistribBernoulliDistribution(const DistribBernoulliDistribution& orig);
 
 
   /**
-   * Assignment operator for FbcAnd.
+   * Assignment operator for DistribBernoulliDistribution.
    *
-   * @param rhs the FbcAnd object whose values are to be used as the basis of
-   * the assignment.
+   * @param rhs the DistribBernoulliDistribution object whose values are to be
+   * used as the basis of the assignment.
    */
-  FbcAnd& operator=(const FbcAnd& rhs);
+  DistribBernoulliDistribution& operator=(const DistribBernoulliDistribution&
+    rhs);
 
 
   /**
-   * Creates and returns a deep copy of this FbcAnd object.
+   * Creates and returns a deep copy of this DistribBernoulliDistribution
+   * object.
    *
-   * @return a (deep) copy of this FbcAnd object.
+   * @return a (deep) copy of this DistribBernoulliDistribution object.
    */
-  virtual FbcAnd* clone() const;
+  virtual DistribBernoulliDistribution* clone() const;
 
 
   /**
-   * Destructor for FbcAnd.
+   * Destructor for DistribBernoulliDistribution.
    */
-  virtual ~FbcAnd();
+  virtual ~DistribBernoulliDistribution();
 
 
   /**
-   * Returns the ListOfAssociations from this FbcAnd.
+   * Returns the value of the "prob" element of this
+   * DistribBernoulliDistribution.
    *
-   * @return the ListOfAssociations from this FbcAnd.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
+   * @return the value of the "prob" element of this
+   * DistribBernoulliDistribution as a DistribUncertValue*.
    */
-  const ListOfAssociations* getListOfAssociations() const;
+  const DistribUncertValue* getProb() const;
 
 
   /**
-   * Returns the ListOfAssociations from this FbcAnd.
+   * Returns the value of the "prob" element of this
+   * DistribBernoulliDistribution.
    *
-   * @return the ListOfAssociations from this FbcAnd.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
+   * @return the value of the "prob" element of this
+   * DistribBernoulliDistribution as a DistribUncertValue*.
    */
-  ListOfAssociations* getListOfAssociations();
+  DistribUncertValue* getProb();
 
 
   /**
-   * Get an Association from the FbcAnd.
+   * Predicate returning @c true if this DistribBernoulliDistribution's "prob"
+   * element is set.
    *
-   * @param n an unsigned int representing the index of the Association to
-   * retrieve.
-   *
-   * @return the nth Association in the ListOfAssociations within this FbcAnd.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
+   * @return @c true if this DistribBernoulliDistribution's "prob" element has
+   * been set, otherwise @c false is returned.
    */
-  Association* getAssociation(unsigned int n);
+  bool isSetProb() const;
 
 
   /**
-   * Get an Association from the FbcAnd.
+   * Sets the value of the "prob" element of this DistribBernoulliDistribution.
    *
-   * @param n an unsigned int representing the index of the Association to
-   * retrieve.
+   * @param prob DistribUncertValue* value of the "prob" element to be set.
    *
-   * @return the nth Association in the ListOfAssociations within this FbcAnd.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
    */
-  const Association* getAssociation(unsigned int n) const;
+  int setProb(const DistribUncertValue* prob);
 
 
   /**
-   * Adds a copy of the given Association to this FbcAnd.
+   * Creates a new DistribUncertValue object, adds it to this
+   * DistribBernoulliDistribution object and returns the DistribUncertValue
+   * object created.
    *
-   * @param a the Association object to add.
+   * @return a new DistribUncertValue object instance.
+   */
+  DistribUncertValue* createProb();
+
+
+  /**
+   * Unsets the value of the "prob" element of this
+   * DistribBernoulliDistribution.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
-   * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
-   *
-   * @copydetails doc_note_object_is_copied
-   *
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
    */
-  int addAssociation(const Association* a);
+  int unsetProb();
 
 
   /**
-   * Get the number of Association objects in this FbcAnd.
+   * Returns the XML element name of this DistribBernoulliDistribution object.
    *
-   * @return the number of Association objects in this FbcAnd.
+   * For DistribBernoulliDistribution, the XML element name is always
+   * @c "bernoulliDistribution".
    *
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
-   */
-  unsigned int getNumAssociations() const;
-
-
-  /**
-   * Creates a new FbcAnd object, adds it to this FbcAnd object and returns the
-   * FbcAnd object created.
-   *
-   * @return a new FbcAnd object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
-   */
-  FbcAnd* createAnd();
-
-
-  /**
-   * Creates a new FbcOr object, adds it to this FbcAnd object and returns the
-   * FbcOr object created.
-   *
-   * @return a new FbcOr object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
-   */
-  FbcOr* createOr();
-
-
-  /**
-   * Creates a new GeneProductRef object, adds it to this FbcAnd object and
-   * returns the GeneProductRef object created.
-   *
-   * @return a new GeneProductRef object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   * @see removeAssociation(unsigned int n)
-   */
-  GeneProductRef* createGeneProductRef();
-
-
-  /**
-   * Removes the nth Association from this FbcAnd and returns a pointer to it.
-   *
-   * @param n an unsigned int representing the index of the Association to
-   * remove.
-   *
-   * @return a pointer to the nth Association in this FbcAnd.
-   *
-   * @copydetails doc_returned_owned_pointer
-   *
-   * @see addAssociation(const Association* object)
-   * @see createAssociation()
-   * @see getAssociation(const std::string& sid)
-   * @see getAssociation(unsigned int n)
-   * @see getNumAssociations()
-   * @see removeAssociation(const std::string& sid)
-   */
-  Association* removeAssociation(unsigned int n);
-
-
-  /**
-   * Returns the XML element name of this FbcAnd object.
-   *
-   * For FbcAnd, the XML element name is always @c "and".
-   *
-   * @return the name of this element, i.e. @c "and".
+   * @return the name of this element, i.e. @c "bernoulliDistribution".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSBML type code for this FbcAnd object.
+   * Returns the libSBML type code for this DistribBernoulliDistribution
+   * object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBML type code for this object:
-   * @sbmlconstant{SBML_FBC_AND, SBMLFbcTypeCode_t}.
+   * @sbmlconstant{SBML_DISTRIB_BERNOULLIDISTRIBUTION, SBMLDistribTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -350,24 +235,28 @@ public:
 
 
   /**
-   * Predicate returning @c true if all the required attributes for this FbcAnd
-   * object have been set.
+   * Predicate returning @c true if all the required attributes for this
+   * DistribBernoulliDistribution object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * FbcAnd have been set, otherwise @c false is returned.
+   * DistribBernoulliDistribution have been set, otherwise @c false is
+   * returned.
    */
   virtual bool hasRequiredAttributes() const;
 
 
   /**
-   * Predicate returning @c true if all the required elements for this FbcAnd
-   * object have been set.
+   * Predicate returning @c true if all the required elements for this
+   * DistribBernoulliDistribution object have been set.
    *
-   * @return @c true to indicate that all the required elements of this FbcAnd
-   * have been set, otherwise @c false is returned.
+   * @return @c true to indicate that all the required elements of this
+   * DistribBernoulliDistribution have been set, otherwise @c false is
+   * returned.
    *
    *
-   * @note The required elements for the FbcAnd object are:
+   * @note The required elements for the DistribBernoulliDistribution object
+   * are:
+   * @li "prob"
    */
   virtual bool hasRequiredElements() const;
 
@@ -451,7 +340,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this FbcAnd.
+   * Gets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -471,7 +361,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this FbcAnd.
+   * Gets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -490,7 +381,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this FbcAnd.
+   * Gets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -510,7 +402,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this FbcAnd.
+   * Gets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -530,7 +423,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this FbcAnd.
+   * Gets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -550,13 +444,13 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Predicate returning @c true if this FbcAnd's attribute "attributeName" is
-   * set.
+   * Predicate returning @c true if this DistribBernoulliDistribution's
+   * attribute "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this FbcAnd's attribute "attributeName" has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this DistribBernoulliDistribution's attribute
+   * "attributeName" has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -567,7 +461,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this FbcAnd.
+   * Sets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -586,7 +481,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this FbcAnd.
+   * Sets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -605,7 +501,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this FbcAnd.
+   * Sets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -624,7 +521,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this FbcAnd.
+   * Sets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -644,7 +542,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this FbcAnd.
+   * Sets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -664,7 +563,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this FbcAnd.
+   * Unsets the value of the "attributeName" attribute of this
+   * DistribBernoulliDistribution.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -681,7 +581,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Creates and returns an new "elementName" object in this FbcAnd.
+   * Creates and returns an new "elementName" object in this
+   * DistribBernoulliDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -696,7 +597,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Adds a new "elementName" object to this FbcAnd.
+   * Adds a new "elementName" object to this DistribBernoulliDistribution.
    *
    * @param elementName, the name of the element to create.
    *
@@ -717,7 +618,7 @@ public:
 
   /**
    * Removes and returns the new "elementName" object with the given id in this
-   * FbcAnd.
+   * DistribBernoulliDistribution.
    *
    * @param elementName, the name of the element to remove.
    *
@@ -735,7 +636,7 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the number of "elementName" in this FbcAnd.
+   * Returns the number of "elementName" in this DistribBernoulliDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -750,7 +651,8 @@ public:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Returns the nth object of "objectName" in this FbcAnd.
+   * Returns the nth object of "objectName" in this
+   * DistribBernoulliDistribution.
    *
    * @param elementName, the name of the element to get number of.
    *
@@ -882,242 +784,189 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new FbcAnd_t using the given SBML Level, Version and
- * &ldquo;fbc&rdquo; package version.
+ * Creates a new DistribBernoulliDistribution_t using the given SBML Level,
+ * Version and &ldquo;distrib&rdquo; package version.
  *
- * @param level an unsigned int, the SBML Level to assign to this FbcAnd_t.
+ * @param level an unsigned int, the SBML Level to assign to this
+ * DistribBernoulliDistribution_t.
  *
- * @param version an unsigned int, the SBML Version to assign to this FbcAnd_t.
+ * @param version an unsigned int, the SBML Version to assign to this
+ * DistribBernoulliDistribution_t.
  *
- * @param pkgVersion an unsigned int, the SBML Fbc Version to assign to this
- * FbcAnd_t.
+ * @param pkgVersion an unsigned int, the SBML Distrib Version to assign to
+ * this DistribBernoulliDistribution_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
-FbcAnd_t *
-FbcAnd_create(unsigned int level,
-              unsigned int version,
-              unsigned int pkgVersion);
+DistribBernoulliDistribution_t *
+DistribBernoulliDistribution_create(unsigned int level,
+                                    unsigned int version,
+                                    unsigned int pkgVersion);
 
 
 /**
- * Creates and returns a deep copy of this FbcAnd_t object.
+ * Creates and returns a deep copy of this DistribBernoulliDistribution_t
+ * object.
  *
- * @param fa the FbcAnd_t structure.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
- * @return a (deep) copy of this FbcAnd_t object.
+ * @return a (deep) copy of this DistribBernoulliDistribution_t object.
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
-FbcAnd_t*
-FbcAnd_clone(const FbcAnd_t* fa);
+DistribBernoulliDistribution_t*
+DistribBernoulliDistribution_clone(const DistribBernoulliDistribution_t* dbd);
 
 
 /**
- * Frees this FbcAnd_t object.
+ * Frees this DistribBernoulliDistribution_t object.
  *
- * @param fa the FbcAnd_t structure.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
 void
-FbcAnd_free(FbcAnd_t* fa);
+DistribBernoulliDistribution_free(DistribBernoulliDistribution_t* dbd);
 
 
 /**
- * Returns a ListOf_t * containing Association_t objects from this FbcAnd_t.
+ * Returns the value of the "prob" element of this
+ * DistribBernoulliDistribution_t.
  *
- * @param fa the FbcAnd_t structure whose ListOfAssociations is sought.
+ * @param dbd the DistribBernoulliDistribution_t structure whose prob is
+ * sought.
  *
- * @return the ListOfAssociations from this FbcAnd_t as a ListOf_t *.
+ * @return the value of the "prob" element of this
+ * DistribBernoulliDistribution_t as a DistribUncertValue*.
  *
- * @copydetails doc_returned_unowned_pointer
- *
- * @see FbcAnd_addAssociation()
- * @see FbcAnd_createAssociation()
- * @see FbcAnd_getAssociationById()
- * @see FbcAnd_getAssociation()
- * @see FbcAnd_getNumAssociations()
- * @see FbcAnd_removeAssociationById()
- * @see FbcAnd_removeAssociation()
- *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
-ListOf_t*
-FbcAnd_getListOfAssociations(FbcAnd_t* fa);
+const DistribUncertValue_t*
+DistribBernoulliDistribution_getProb(const DistribBernoulliDistribution_t *
+  dbd);
 
 
 /**
- * Get an Association_t from the FbcAnd_t.
+ * Predicate returning @c 1 (true) if this DistribBernoulliDistribution_t's
+ * "prob" element is set.
  *
- * @param fa the FbcAnd_t structure to search.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
- * @param n an unsigned int representing the index of the Association_t to
- * retrieve.
+ * @return @c 1 (true) if this DistribBernoulliDistribution_t's "prob" element
+ * has been set, otherwise @c 0 (false) is returned.
  *
- * @return the nth Association_t in the ListOfAssociations within this FbcAnd.
- *
- * @copydetails doc_returned_unowned_pointer
- *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
-Association_t*
-FbcAnd_getAssociation(FbcAnd_t* fa, unsigned int n);
+int
+DistribBernoulliDistribution_isSetProb(const DistribBernoulliDistribution_t *
+  dbd);
 
 
 /**
- * Adds a copy of the given Association_t to this FbcAnd_t.
+ * Sets the value of the "prob" element of this DistribBernoulliDistribution_t.
  *
- * @param fa the FbcAnd_t structure to which the Association_t should be added.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
- * @param a the Association_t object to add.
+ * @param prob DistribUncertValue_t* value of the "prob" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof DistribBernoulliDistribution_t
+ */
+LIBSBML_EXTERN
+int
+DistribBernoulliDistribution_setProb(DistribBernoulliDistribution_t * dbd,
+                                     const DistribUncertValue_t* prob);
+
+
+/**
+ * Creates a new DistribUncertValue_t object, adds it to this
+ * DistribBernoulliDistribution_t object and returns the DistribUncertValue_t
+ * object created.
+ *
+ * @param dbd the DistribBernoulliDistribution_t structure to which the
+ * DistribUncertValue_t should be added.
+ *
+ * @return a new DistribUncertValue_t object instance.
+ *
+ * @memberof DistribBernoulliDistribution_t
+ */
+LIBSBML_EXTERN
+DistribUncertValue_t*
+DistribBernoulliDistribution_createProb(DistribBernoulliDistribution_t* dbd);
+
+
+/**
+ * Unsets the value of the "prob" element of this
+ * DistribBernoulliDistribution_t.
+ *
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_LEVEL_MISMATCH, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_VERSION_MISMATCH, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
- * @li @sbmlconstant{LIBSBML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
 int
-FbcAnd_addAssociation(FbcAnd_t* fa, const Association_t* a);
-
-
-/**
- * Get the number of Association_t objects in this FbcAnd_t.
- *
- * @param fa the FbcAnd_t structure to query.
- *
- * @return the number of Association_t objects in this FbcAnd_t.
- *
- * @memberof FbcAnd_t
- */
-LIBSBML_EXTERN
-unsigned int
-FbcAnd_getNumAssociations(FbcAnd_t* fa);
-
-
-/**
- * Creates a new FbcAnd_t object, adds it to this FbcAnd_t object and returns
- * the FbcAnd_t object created.
- *
- * @param fa the FbcAnd_t structure to which the FbcAnd_t should be added.
- *
- * @return a new FbcAnd_t object instance.
- *
- * @copydetails doc_returned_unowned_pointer
- *
- * @memberof FbcAnd_t
- */
-LIBSBML_EXTERN
-FbcAnd_t*
-FbcAnd_createAnd(FbcAnd_t* fa);
-
-
-/**
- * Creates a new FbcOr_t object, adds it to this FbcAnd_t object and returns
- * the FbcOr_t object created.
- *
- * @param fa the FbcAnd_t structure to which the FbcOr_t should be added.
- *
- * @return a new FbcOr_t object instance.
- *
- * @copydetails doc_returned_unowned_pointer
- *
- * @memberof FbcAnd_t
- */
-LIBSBML_EXTERN
-FbcOr_t*
-FbcAnd_createOr(FbcAnd_t* fa);
-
-
-/**
- * Creates a new GeneProductRef_t object, adds it to this FbcAnd_t object and
- * returns the GeneProductRef_t object created.
- *
- * @param fa the FbcAnd_t structure to which the GeneProductRef_t should be
- * added.
- *
- * @return a new GeneProductRef_t object instance.
- *
- * @copydetails doc_returned_unowned_pointer
- *
- * @memberof FbcAnd_t
- */
-LIBSBML_EXTERN
-GeneProductRef_t*
-FbcAnd_createGeneProductRef(FbcAnd_t* fa);
-
-
-/**
- * Removes the nth Association_t from this FbcAnd_t and returns a pointer to
- * it.
- *
- * @param fa the FbcAnd_t structure to search.
- *
- * @param n an unsigned int representing the index of the Association_t to
- * remove.
- *
- * @return a pointer to the nth Association_t in this FbcAnd_t.
- *
- * @copydetails doc_returned_owned_pointer
- *
- * @memberof FbcAnd_t
- */
-LIBSBML_EXTERN
-Association_t*
-FbcAnd_removeAssociation(FbcAnd_t* fa, unsigned int n);
+DistribBernoulliDistribution_unsetProb(DistribBernoulliDistribution_t * dbd);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required attributes for this
- * FbcAnd_t object have been set.
+ * DistribBernoulliDistribution_t object have been set.
  *
- * @param fa the FbcAnd_t structure.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
- * FbcAnd_t have been set, otherwise @c 0 (false) is returned.
+ * DistribBernoulliDistribution_t have been set, otherwise @c 0 (false) is
+ * returned.
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
 int
-FbcAnd_hasRequiredAttributes(const FbcAnd_t * fa);
+DistribBernoulliDistribution_hasRequiredAttributes(const
+  DistribBernoulliDistribution_t * dbd);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required elements for this
- * FbcAnd_t object have been set.
+ * DistribBernoulliDistribution_t object have been set.
  *
- * @param fa the FbcAnd_t structure.
+ * @param dbd the DistribBernoulliDistribution_t structure.
  *
  * @return @c 1 (true) to indicate that all the required elements of this
- * FbcAnd_t have been set, otherwise @c 0 (false) is returned.
+ * DistribBernoulliDistribution_t have been set, otherwise @c 0 (false) is
+ * returned.
  *
  *
- * @note The required elements for the FbcAnd_t object are:
+ * @note The required elements for the DistribBernoulliDistribution_t object
+ * are:
+ * @li "prob"
  *
- * @memberof FbcAnd_t
+ * @memberof DistribBernoulliDistribution_t
  */
 LIBSBML_EXTERN
 int
-FbcAnd_hasRequiredElements(const FbcAnd_t * fa);
+DistribBernoulliDistribution_hasRequiredElements(const
+  DistribBernoulliDistribution_t * dbd);
 
 
 
@@ -1137,6 +986,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 
 
-#endif /* !FbcAnd_H__ */
+#endif /* !DistribBernoulliDistribution_H__ */
 
 

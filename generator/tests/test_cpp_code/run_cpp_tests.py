@@ -855,10 +855,24 @@ def main():
 
         name = 'new_distrib_test'
         num = 36
-        class_name = 'UncertaintyA'
+        class_name = 'DistribUncertainty'
         list_of = ''
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'new_distrib_test'
+        num = 16
+        class_name = 'DistribBernoulliDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        # name = 'new_distrib_test'
+        # num = 14
+        # class_name = 'DistribCategoricalDistribution'
+        # list_of = ''
+        # test_case = 'concrete class'
+        # fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'plugin_id'
         num = 0
@@ -953,13 +967,12 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib'
-        num = 17
-        class_name = 'BinomialDistribution'
+        name = 'new_distrib_test'
+        num = 16
+        class_name = 'DistribBernoulliDistribution'
         list_of = ''
         test_case = 'concrete class'
         fail += run_test(name, num, class_name, test_case, list_of)
-
 
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
