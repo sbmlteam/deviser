@@ -420,14 +420,14 @@ def get_enum(element, class_name = ''):
                 splittc = tc.split('_')
                 if len(splittc) < len(origsplittc):
                     origsplittc = splittc
-        newtc = ''
-        for i in range(0, len(origsplittc)-1):
-            newtc = newtc + origsplittc[i] + '_'
-        tc = newtc + 'INVALID'
-        if len(tc) > max_length:
-            max_length = len(tc)
-        value.append(tc)
-        strvalue.append('invalid {0}'.format(name))
+        # newtc = ''
+        # for i in range(0, len(origsplittc)-1):
+        #     newtc = newtc + origsplittc[i] + '_'
+        # tc = newtc + 'INVALID'
+        # if len(tc) > max_length:
+        #     max_length = len(tc)
+        # value.append(tc)
+        # strvalue.append('invalid {0}'.format(name))
         return [value, strvalue, max_length]
     else:
         name = element['name']
@@ -438,21 +438,21 @@ def get_enum(element, class_name = ''):
             tc = element['values'][i]['name']
             value.append(tc)
             strvalue.append(element['values'][i]['value'])
-        tc = get_prefix(nameclass) + '_INVALID'
-        value.append(tc)
-        strvalue.append('invalid {0}'.format(nameclass))
+        # tc = get_prefix(nameclass) + '_INVALID'
+        # value.append(tc)
+        # strvalue.append('invalid {0}'.format(nameclass))
         return [value, strvalue]
 
 
 
 def get_default_enum_value(attribute):
-    prefix = ''
+    default = 'INVALID'
     name = attribute['element']
     enums = attribute['root']['enums']
-    for i in range(0, len(enums)):
-        if name == enums[i]['name']:
-            prefix = get_prefix(name)
-    default = prefix + '_INVALID'
+    for enum in enums:
+        if name == enum['name']:
+            default = enum['values'][-1]['name']
+            return default
     return default
 
 

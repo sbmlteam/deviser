@@ -98,23 +98,29 @@ class ParseXML():
         return temp.nodeValue
 
     @staticmethod
-    def get_enum_value(node, name, classname, typename):
+    def get_enum_value(node, name, classname, typename, invalid=False):
         temp = node.getAttributeNode(name)
         if temp is None:
             return None
         else:
             tempname = temp.nodeValue.upper()
         parts = tempname.split('_')
-        if len(parts) > 2:
-            return tempname
-        else:
-            # we dont have a classic X_Y_Z name which we want
-            if tempname.startswith(classname + '_' + typename):
+        if not invalid:
+            if len(parts) > 2:
                 return tempname
-            elif tempname.startswith(typename):
-                return classname + '_' + tempname
             else:
-                return classname + '_' + typename + '_' + tempname
+                # we dont have a classic X_Y_Z name which we want
+                if tempname.startswith(classname + '_' + typename):
+                    return tempname
+                elif tempname.startswith(typename):
+                    return classname + '_' + tempname
+                else:
+                    return classname + '_' + typename + '_' + tempname
+        else:
+            if len(parts) > 2:
+                return '{0}_{1}_INVALID'.format(parts[0], parts[1])
+            else:
+                return classname + '_' +  tempname + '_INVALID'
 
     @staticmethod
     def get_bool_value(self, node, name):
@@ -767,6 +773,11 @@ class ParseXML():
                 for val in node.getElementsByTagName('enumValue'):
                     values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname),
                                         'value': self.get_value(val, 'value')}))
+                # add invalid name here
+                invalid_value = 'invalid {0} value'.format(enum_name)
+                values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname, invalid=True),
+                                    'value': invalid_value}))
+
 
                 enums.append(dict({'name': enum_name, 'values': values}))
                 names_listed.append(enum_name)
