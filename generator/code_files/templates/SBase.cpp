@@ -605,6 +605,28 @@ SBase::setMetaId (const std::string& metaid)
   }
 }
 
+/*
+ * Sets the id field of the given SBML_Lang object to a copy of sid.
+ */
+int
+SBase::setId (const std::string& sid)
+{
+  if (sid.empty())
+  {
+    mId.erase();
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (!(SyntaxChecker::isValidXMLID(sid)))
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mId = sid;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
 
 /*
  * Sets the annotation of this SBML_Lang object to a copy of annotation.
@@ -1574,6 +1596,25 @@ SBase::unsetMetaId ()
 
 
 /*
+ * Unsets the id of this SBML_Lang object.
+ */
+int
+SBase::unsetId ()
+{
+  mId.erase();
+
+  if (mId.empty())
+  {
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSBML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * Unsets the notes of this SBML_Lang object.
  */
 int
@@ -1857,6 +1898,197 @@ SBase::toSBML ()
 }
 
 
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::getAttribute(const std::string& attributeName, double& value) const
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::getAttribute(const std::string& attributeName, bool& value) const
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::getAttribute(const std::string& attributeName, int& value) const
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::getAttribute(const std::string& attributeName, unsigned int& value) const
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::getAttribute(const std::string& attributeName, std::string& value) const
+{
+  if (attributeName == "metaid")
+  {
+    value = getMetaId();
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "id")
+  {
+    value = getIdAttribute();
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+bool 
+SBase::isSetAttribute(const std::string& attributeName) const
+{
+  bool value = false;
+  if (attributeName == "metaid")
+  {
+    value = isSetMetaId();
+  }
+  else if (attributeName == "id")
+  {
+    value = isSetIdAttribute();
+  }
+
+  return value;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::setAttribute(const std::string& attributeName, double value)
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::setAttribute(const std::string& attributeName, bool value)
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::setAttribute(const std::string& attributeName, int value)
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::setAttribute(const std::string& attributeName, unsigned int value)
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::setAttribute(const std::string& attributeName, const std::string& value)
+{
+  int return_value = LIBSBML_OPERATION_FAILED;
+  if (attributeName == "metaid")
+  {
+    return_value = setMetaId(value);
+  }
+  else if (attributeName == "id")
+  {
+    return_value = setIdAttribute(value);
+  }
+
+  return return_value;
+}
+/** @endcond */
+
+
+/** @cond doxygenLibsbmlInternal */
+int 
+SBase::unsetAttribute(const std::string& attributeName)
+{
+  int value = LIBSBML_OPERATION_FAILED;
+  if (attributeName == "metaid")
+  {
+    value = unsetMetaId();
+  }
+  else if (attributeName == "id")
+  {
+    value = unsetIdAttribute();
+  }
+
+  return value;
+}
+/** @endcond */
+
+/** @cond doxygenLibsbmlInternal */
+SBase* 
+SBase::createChildObject(const std::string& elementName)
+{
+  return NULL;
+}
+/** @endcond */
+
+/** @cond doxygenLibsbmlInternal */
+int
+SBase::addChildObject(const std::string& elementName, const SBase* element)
+{
+  return LIBSBML_OPERATION_FAILED;
+}
+/** @endcond */
+
+/** @cond doxygenLibsbmlInternal */
+SBase*
+SBase::removeChildObject(const std::string& elementName, const std::string& id)
+{
+  return NULL;
+}
+/** @endcond */
+
+/** @cond doxygenLibsbmlInternal */
+
+unsigned int
+  SBase::getNumObjects(const std::string& objectName)
+{
+  return 0;
+}
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+SBase* 
+SBase::getObject(const std::string& objectName, unsigned int index)
+{
+  return NULL;
+}
+
+  /** @endcond */
 /** @cond doxygenLibsbmlInternal */
 /*
  * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.

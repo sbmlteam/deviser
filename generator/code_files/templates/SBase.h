@@ -706,6 +706,15 @@ public:
 
 
   /**
+  /**
+   * Sets the value of the "id" attribute of this SBML_Lang object.
+   *
+   * @copydetails doc_set_id
+   */
+  virtual int setId(const std::string& sid);
+
+
+  /**
    * Sets the value of the "annotation" subelement of this SBML_Lang object.
    *
    * The content of @p annotation is copied, and any previous content of
@@ -1230,6 +1239,14 @@ public:
 
 
   /**
+   * Unsets the value of the "id" attribute of this SBML_Lang object.
+   *
+   * @copydetails doc_unset_id
+   */
+  virtual int unsetId ();
+
+
+  /**
    * Unsets the value of the "notes" subelement of this SBML_Lang object.
    *
    * The optional SBML_Lang element named "notes", present on every major SBML_Lang
@@ -1380,6 +1397,130 @@ public:
 
 
   // ------------------------------------------------------------------
+
+  #ifndef SWIG
+   /** @cond doxygenLibsbmlInternal */
+
+
+   virtual int getAttribute(const std::string& attributeName, double& value) const;
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int getAttribute(const std::string& attributeName, bool& value) const;
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int getAttribute(const std::string& attributeName, int& value) const;
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int getAttribute(const std::string& attributeName, unsigned int& value) const;
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int getAttribute(const std::string& attributeName, std::string& value) const;
+
+  /** @endcond */
+
+//   virtual int getAttribute(const std::string& attributeName, const char * value) const;
+
+
+   virtual bool isSetAttribute(const std::string& attributeName) const;
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int setAttribute(const std::string& attributeName, double value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int setAttribute(const std::string& attributeName, bool value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int setAttribute(const std::string& attributeName, int value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int setAttribute(const std::string& attributeName, unsigned int value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int setAttribute(const std::string& attributeName, const std::string& value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+//   virtual int setAttribute(const std::string& attributeName, const char* value);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int unsetAttribute(const std::string& attributeName);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual SBase* createChildObject(const std::string& elementName);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual int addChildObject(const std::string& elementName, const SBase* element);
+
+   /** @endcond */
+
+   /** @cond doxygenLibsbmlInternal */
+
+   virtual SBase* removeChildObject(const std::string& elementName, const std::string& id);
+
+   /** @endcond */
+
+   /** @cond doxygenLibsbmlInternal */
+
+   virtual unsigned int getNumObjects(const std::string& objectName);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+   virtual SBase* getObject(const std::string& objectName, unsigned int index);
+
+  /** @endcond */
+
+  /** @cond doxygenLibsbmlInternal */
+
+  template<typename T> T getAttribute(const std::string& attributeName)
+  {
+    T result;
+    getAttribute(attributeName, result);
+    return result;
+  }
+  /** @endcond */
+
+#endif /* SWIG */
+
 
 
   /** @cond doxygenLibsbmlInternal */
