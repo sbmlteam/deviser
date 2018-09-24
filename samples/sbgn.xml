@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="SbgnML" fullname="Systems Biology Graphical Notation - Markup Language" number="100" offset="100000" version="1" required="false">
+  <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument" prefix="Sbgn" libraryName="libSBGN" isPackage="false"/>
+  <versions>
+    <pkgVersion version="2" pkg_version="0">
+      <elements>
+        <element name="Point" typeCode="SBGN_SBGNML_POINT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="point">
+          <attributes>
+            <attribute name="x" required="false" type="double" abstract="false"/>
+            <attribute name="y" required="false" type="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="BBox" typeCode="SBGN_SBGNML_BBOX" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="bbox">
+          <attributes>
+            <attribute name="x" required="false" type="double" abstract="false"/>
+            <attribute name="y" required="false" type="double" abstract="false"/>
+            <attribute name="width" required="false" type="double" abstract="false"/>
+            <attribute name="height" required="false" type="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Label" typeCode="SBGN_SBGNML_LABEL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="label">
+          <attributes>
+            <attribute name="text" required="true" type="string" abstract="false"/>
+            <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Map" typeCode="SBGN_SBGNML_MAP" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="map">
+          <attributes>
+            <attribute name="language" required="true" type="enum" element="Language" abstract="false"/>
+            <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
+            <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
+            <attribute name="arc" required="false" type="inline_lo_element" element="Arc" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Document" typeCode="SBGN_SBGNML_DOCUMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="sbgn">
+          <attributes>
+            <attribute name="map" required="true" type="element" element="Map" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Glyph" typeCode="SBGN_SBGNML_GLYPH" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="glyph">
+          <attributes>
+            <attribute name="id" required="false" type="ID" abstract="false"/>
+            <attribute name="class" required="false" type="string" abstract="false"/>
+            <attribute name="label" required="false" type="element" element="Label" abstract="false"/>
+            <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
+            <attribute name="ports" required="false" type="inline_lo_element" element="Port" abstract="false"/>
+            <attribute name="subglyphs" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Port" typeCode="SBGN_SBGNML_PORT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="port">
+          <attributes>
+            <attribute name="id" required="false" type="ID" abstract="false"/>
+            <attribute name="x" required="false" type="double" abstract="false"/>
+            <attribute name="y" required="false" type="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Arc" typeCode="SBGN_SBGNML_ARC" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="arc">
+          <attributes>
+            <attribute name="id" required="false" type="ID" abstract="false"/>
+            <attribute name="class" required="false" type="string" abstract="false"/>
+            <attribute name="source" required="false" type="IDREF" abstract="false"/>
+            <attribute name="target" required="false" type="IDREF" abstract="false"/>
+            <attribute name="glyph" required="false" type="element" element="Glyph" abstract="false"/>
+            <attribute name="start" required="false" type="element" element="Point" abstract="false"/>
+            <attribute name="nextList" required="false" type="inline_lo_element" element="Point" abstract="false"/>
+            <attribute name="end" required="false" type="element" element="Point" abstract="false"/>
+          </attributes>
+        </element>
+      </elements>
+      <enums>
+        <enum name="Language">
+          <enumValues>
+            <enumValue name="SBGNML_LANGUAGE_PROCESS_DESCRIPTION" value="process description"/>
+            <enumValue name="SBGNML_LANGUAGE_ENTITY_RELATIONSHIP" value="entity relationship"/>
+            <enumValue name="SBGNML_LANGUAGE_ACTIVITY_FLOW" value="activity flow"/>
+          </enumValues>
+        </enum>
+      </enums>
+    </pkgVersion>
+  </versions>
+</package>
