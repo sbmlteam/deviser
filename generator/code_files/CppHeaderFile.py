@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from . cpp_functions import *
-from util import query, global_variables
+from util import query, global_variables, strFunctions
 
 
 class CppHeaderFile(BaseCppFile.BaseCppFile):
@@ -170,6 +170,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                          '{1}fwd.'
                                          'h>'.format(self.language,
                                                      self.package.lower()))
+            elif len(self.enums) > 0:
+                self.write_line_verbatim('#include <{0}/common/{1}Enumerations.h>'
+                                         ''.format(self.language,
+                                                   strFunctions.upper_first(self.language)))
+
 
     def write_general_includes(self):
         pkg = self.package.lower()
