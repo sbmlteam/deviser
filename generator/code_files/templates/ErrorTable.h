@@ -25,7 +25,7 @@ typedef struct {
 static const sbmlErrorTableEntry sbmlErrorTable[] =
 {
   // 10000
-  { SBMLUnknownError, 
+  { SBMLmlUnknown,
     "Encountered unknown internal libSBML error",
     LIBSBML_CAT_INTERNAL, 
     LIBSBML_SEV_FATAL,
