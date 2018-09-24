@@ -1945,7 +1945,7 @@ SBase::getAttribute(const std::string& attributeName, std::string& value) const
   }
   else if (attributeName == "id")
   {
-    value = getIdAttribute();
+    value = getId();
     return LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1965,7 +1965,7 @@ SBase::isSetAttribute(const std::string& attributeName) const
   }
   else if (attributeName == "id")
   {
-    value = isSetIdAttribute();
+    value = isSetId();
   }
 
   return value;
@@ -2020,7 +2020,7 @@ SBase::setAttribute(const std::string& attributeName, const std::string& value)
   }
   else if (attributeName == "id")
   {
-    return_value = setIdAttribute(value);
+    return_value = setId(value);
   }
 
   return return_value;
@@ -2039,7 +2039,7 @@ SBase::unsetAttribute(const std::string& attributeName)
   }
   else if (attributeName == "id")
   {
-    value = unsetIdAttribute();
+    value = unsetId();
   }
 
   return value;

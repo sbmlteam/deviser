@@ -197,9 +197,9 @@ class BaseTemplateFile:
         else:
             line = re.sub('sbmlfwd', '{0}fwd'.format(lowerlibname), line)
         doctype = '{0}_DOCUMENT'.format(global_variables.language.upper())
-        if global_variables.document_class != 'SedDocument':
-            doctype = 'LIB_{0}_{1}'.format(strFunctions.get_library_suffix(global_variables.library_name).upper(),
-                                           strFunctions.remove_prefix(global_variables.document_class).upper())
+        # if global_variables.document_class != 'SedDocument':
+        #     doctype = 'LIB_{0}_{1}'.format(strFunctions.get_library_suffix(global_variables.library_name).upper(),
+        #                                    strFunctions.remove_prefix(global_variables.document_class).upper())
         line = re.sub('SBML_DOCUMENT', doctype, line)
         line = re.sub('SBMLDocument', global_variables.document_class, line)
         line = re.sub('toplevelname', strFunctions.lower_first(global_variables.top_level_element_name), line)

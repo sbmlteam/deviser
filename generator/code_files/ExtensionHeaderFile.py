@@ -55,7 +55,11 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         elif filetype == 'types':
             self.name = '{0}ExtensionTypes'.format(self.up_package)
         elif filetype == 'fwd':
-            self.name = '{0}fwd'.format(package['name'])
+            if package['name'].endswith('ml'):
+                length = len(package['name'])
+                self.name = '{0}fwd'.format(package['name'][0:length-2])
+            else:
+                self.name = '{0}fwd'.format(package['name'])
 
         self.brief_description = \
             'Definition of {0}.'.format(self.name)

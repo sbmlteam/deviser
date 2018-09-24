@@ -229,7 +229,10 @@ class ParseXML():
             return None
         temptype = temp.nodeValue
         if not global_variables.is_package:
-            if temptype.startswith('SBML_'):
+            if temptype.endswith('DOCUMENT'):
+                vars = temptype.split('_')
+                typecode = vars[0] + '_DOCUMENT'
+            elif temptype.startswith('SBML_'):
                 typecode = temptype[5:]
             else:
                 typecode = temptype
