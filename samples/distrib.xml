@@ -5,7 +5,7 @@
       <elements>
         <element name="DistribDrawFromDistribution" typeCode="SBML_DISTRIB_DRAWFROMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="false" elementName="drawFromDistribution">
           <attributes>
-            <attribute name="input" required="false" type="lo_element" element="DistribInput" abstract="false"/>
+            <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false"/>
             <attribute name="distribution" required="false" type="element" element="DistribDistribution" abstract="true"/>
           </attributes>
         </element>
@@ -320,7 +320,7 @@
       <elements>
         <element name="DistribDrawFromDistribution" typeCode="SBML_DISTRIB_DRAWFROMDISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="false" elementName="drawFromDistribution">
           <attributes>
-            <attribute name="input" required="false" type="lo_element" element="DistribInput" abstract="false"/>
+            <attribute name="distribInput" required="false" type="lo_element" element="DistribInput" abstract="false"/>
             <attribute name="distribution" required="false" type="element" element="DistribDistribution" abstract="true"/>
           </attributes>
         </element>
