@@ -336,6 +336,9 @@ def generate_other_library_code_files(name, ob):
     base_files.write_common_files()
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
+    if 'enums' in ob and len(ob['enums']) > 0:
+        ext = ExtensionFiles.ExtensionFiles(ob, 'enums', True)
+        ext.write_files()
     os.chdir(this_dir)
 
 

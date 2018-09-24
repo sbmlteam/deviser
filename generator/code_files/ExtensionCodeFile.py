@@ -45,10 +45,17 @@ from util import query, strFunctions
 class ExtensionCodeFile(BaseCppFile.BaseCppFile):
     """Class for all Cpp Code files"""
 
-    def __init__(self, package):
+    def __init__(self, package, filetype=''):
 
         self.up_package = strFunctions.upper_first(package['name'])
-        self.name = '{0}Extension'.format(self.up_package)
+        if filetype == '':
+            self.name = '{0}Extension'.format(self.up_package)
+        elif filetype == 'enums':
+            if package['name'].endswith('ml'):
+                length = len(package['name'])
+                self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name'][0:length-2]))
+            else:
+                self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name']))
         self.brief_description = \
             'Implementation  of {0}.'.format(self.name)
         BaseCppFile.BaseCppFile.__init__(self, self.name, 'cpp',
@@ -294,6 +301,9 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         num_enums = len(self.enums)
         if num_enums == 0:
             return
+        self.write_other_enums()
+
+    def write_other_enums(self):
         init_functions = \
             ExtensionInitFunctions.ExtensionInitFunctions(self.language,
                                                           self.package,
@@ -332,4 +342,15 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
 #        self.write_extension_instance()
         self.write_cpp_end()
         self.write_type_defs()
+        self.write_cppns_end()
+
+    # Write the extension types file
+    def write_ext_enum_code(self):
+        BaseCppFile.BaseCppFile.write_file(self)
+        self.write_line_verbatim('#include <string>')
+        self.write_line_verbatim('#include <{0}/common/{1}.h>'
+                                 ''.format(self.language,
+                                           self.name))
+        self.write_cppns_begin()
+        self.write_other_enums()
         self.write_cppns_end()

@@ -56,7 +56,7 @@ class ExtensionFiles():
 
     def write_files(self):
         self.write_header()
-        if self.file_type == '':
+        if self.file_type == '' or self.file_type == 'enums':
             self.write_code()
 
     def write_plugin_files(self, num):
@@ -76,6 +76,8 @@ class ExtensionFiles():
             types_fileout.write_types_file()
         elif self.file_type == 'fwd':
             types_fileout.write_fwd_file()
+        elif self.file_type == 'enums':
+            types_fileout.write_ext_enum_header()
         types_fileout.close_file()
 
     def write_plugin_header(self, class_descrip):
@@ -93,10 +95,13 @@ class ExtensionFiles():
         fileout.close_file()
 
     def write_code(self):
-        fileout = ExtensionCodeFile.ExtensionCodeFile(self.package)
+        fileout = ExtensionCodeFile.ExtensionCodeFile(self.package, self.file_type)
         if self.verbose:
             print('Writing file {0}'.format(fileout.filename))
-        fileout.write_file()
+        if self.file_type == '':
+            fileout.write_file()
+        elif self.file_type == 'enums':
+            fileout.write_ext_enum_code()
         fileout.close_file()
 
     def create_class_description(self, num):

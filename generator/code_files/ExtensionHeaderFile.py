@@ -60,6 +60,13 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
                 self.name = '{0}fwd'.format(package['name'][0:length-2])
             else:
                 self.name = '{0}fwd'.format(package['name'])
+        elif filetype == 'enums':
+            if package['name'].endswith('ml'):
+                length = len(package['name'])
+                self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name'][0:length-2]))
+            else:
+                self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name']))
+
 
         self.brief_description = \
             'Definition of {0}.'.format(self.name)
@@ -292,6 +299,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         num_enums = len(self.enums)
         if num_enums == 0:
             return
+        self.write_other_enums()
+
+    def write_other_enums(self):
         init_functions = \
             ExtensionInitFunctions.ExtensionInitFunctions(self.language,
                                                           self.package,
@@ -457,4 +467,16 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
             self.write_all_elements()
         self.write_cppns_end()
         self.write_end_class_or_struct()
+        self.write_defn_end()
+
+    # Write the extension types file
+    def write_ext_enum_header(self):
+        BaseCppFile.BaseCppFile.write_file(self)
+        self.write_defn_begin()
+        self.write_common_includes()
+        self.write_cppns_begin()
+        self.write_cdecl_begin()
+        self.write_other_enums()
+        self.write_cdecl_end()
+        self.write_cppns_end()
         self.write_defn_end()
