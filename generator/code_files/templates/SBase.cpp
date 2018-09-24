@@ -75,6 +75,7 @@ SBase::getAllElements()
  */
 SBase::SBase (unsigned int level, unsigned int version) 
  : mMetaId ("")
+ , mId ("")
  , mNotes(NULL)
  , mAnnotation( NULL )
  , mSBML      ( NULL )
@@ -105,6 +106,7 @@ SBase::SBase (unsigned int level, unsigned int version)
  */
 SBase::SBase (SBMLNamespaces *sbmlns) 
  : mMetaId("")
+ , mId("")
  , mNotes(NULL)
  , mAnnotation( NULL )
  , mSBML      ( NULL )
@@ -135,6 +137,7 @@ SBase::SBase (SBMLNamespaces *sbmlns)
  */
 SBase::SBase(const SBase& orig)
   : mMetaId (orig.mMetaId)
+  , mId (orig.mId)
   , mNotes (NULL)
   , mAnnotation (NULL)
   , mSBML (NULL)
@@ -184,6 +187,7 @@ SBase& SBase::operator=(const SBase& rhs)
   if(&rhs!=this)
   {
     this->mMetaId = rhs.mMetaId;
+    this->mId = rhs.mId;
 
     delete this->mNotes;
 
@@ -244,7 +248,7 @@ SBase::getMetaId ()
 const string&
 SBase::getId() const
 {
-  return mEmptyString;
+  return mId;
 }
 
 

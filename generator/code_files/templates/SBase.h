@@ -1980,6 +1980,7 @@ protected:
 
 
   std::string     mMetaId;
+  std::string     mId;
   XMLNode*        mNotes;
   XMLNode*        mAnnotation;
   SBMLDocument*   mSBML;
