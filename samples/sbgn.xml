@@ -4,7 +4,7 @@
   <versions>
     <pkgVersion version="2" pkg_version="0">
       <elements>
-        <element name="Point" typeCode="SBGN_SBGNML_POINT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="point">
+        <element name="Point" typeCode="SBGN_SBGNML_POINT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="point">
           <attributes>
             <attribute name="x" required="false" type="double" abstract="false"/>
             <attribute name="y" required="false" type="double" abstract="false"/>
@@ -40,11 +40,11 @@
         <element name="Glyph" typeCode="SBGN_SBGNML_GLYPH" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="glyph">
           <attributes>
             <attribute name="id" required="false" type="ID" abstract="false"/>
-            <attribute name="glyphclass" required="false" type="string" abstract="false"/>
+            <attribute name="clazz" required="false" type="string" abstract="false"/>
             <attribute name="label" required="false" type="element" element="Label" abstract="false"/>
             <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
             <attribute name="ports" required="false" type="inline_lo_element" element="Port" abstract="false"/>
-            <attribute name="subglyphs" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
+            <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" xmlName="glyph" abstract="false"/>
           </attributes>
         </element>
         <element name="Port" typeCode="SBGN_SBGNML_PORT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="port">
@@ -57,13 +57,13 @@
         <element name="Arc" typeCode="SBGN_SBGNML_ARC" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="arc">
           <attributes>
             <attribute name="id" required="false" type="ID" abstract="false"/>
-            <attribute name="arcclass" required="false" type="string" abstract="false"/>
+            <attribute name="clazz" required="false" type="string" abstract="false"/>
             <attribute name="source" required="false" type="IDREF" abstract="false"/>
             <attribute name="target" required="false" type="IDREF" abstract="false"/>
             <attribute name="glyph" required="false" type="element" element="Glyph" abstract="false"/>
-            <attribute name="start" required="false" type="element" element="Point" abstract="false"/>
-            <attribute name="nextList" required="false" type="inline_lo_element" element="Point" abstract="false"/>
-            <attribute name="end" required="false" type="element" element="Point" abstract="false"/>
+            <attribute name="start" required="false" type="element" element="Point" xmlName="start" abstract="false"/>
+            <attribute name="next" required="false" type="inline_lo_element" element="Point" xmlName="next" abstract="false"/>
+            <attribute name="end" required="false" type="element" element="Point" xmlName="end" abstract="false"/>
           </attributes>
         </element>
       </elements>

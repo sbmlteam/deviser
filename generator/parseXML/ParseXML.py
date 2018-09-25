@@ -439,6 +439,7 @@ class ParseXML():
             has_math = self.get_bool_value(self, node, 'hasMath')
             has_children = self.get_bool_value(self, node, 'hasChildren')
             has_list_of = self.get_bool_value(self, node, 'hasListOf')
+            children_overwrite = self.get_bool_value(self, node, 'childrenOverwriteElementName')
             abstract = self.get_bool_value(self, node, 'abstract')
             xml_element_name = \
                 self.get_element_name_value(self, node, 'elementName')
@@ -476,7 +477,8 @@ class ParseXML():
                             'lo_class_name': lo_class_name,
                             'min_lo_children': min_lo_children,
                             'num_versions': self.num_versions,
-                            'version': version_count
+                            'version': version_count,
+                            'childrenOverwriteElementName': children_overwrite
                             })
             if add_decls is not None:
                 element['addDecls'] = add_decls
