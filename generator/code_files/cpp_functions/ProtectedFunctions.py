@@ -514,18 +514,25 @@ class ProtectedFunctions():
         if len(concrete_name) > 0:
             name_to_use = concrete_name
         else:
-            name_to_use = element
-            elem_name = element
-            removed = False
-            # hack for fact that distrib prefixes everything
-            if name_to_use.startswith(strFunctions.upper_first(self.package)):
-                 elem_name = strFunctions.remove_prefix(element, False, True, self.package)
-                 removed = True
-            elif element.lower() != xmlname.lower():
-                [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
-            if removed and self.package.lower() == "distrib":
-                [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
-            name_to_use = strFunctions.upper_first(elem_name)
+            found = False
+            for child in self.child_elements:
+                if child['memberName'] == name:
+                    found = True
+                    name_to_use = child['capAttName']
+                    xmlname = child['xml_name']
+            if not found:
+                name_to_use = element
+                elem_name = element
+                removed = False
+                # hack for fact that distrib prefixes everything
+                if name_to_use.startswith(strFunctions.upper_first(self.package)):
+                     elem_name = strFunctions.remove_prefix(element, False, True, self.package)
+                     removed = True
+                elif element.lower() != xmlname.lower():
+                    [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
+                if removed and self.package.lower() == "distrib":
+                    [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
+                name_to_use = strFunctions.upper_first(elem_name)
         nested_if = self.create_code_block('if',
                                            ['isSet{0}()'.format(name_to_use),
                                             error_line])
