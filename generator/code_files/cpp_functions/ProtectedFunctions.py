@@ -270,7 +270,10 @@ class ProtectedFunctions():
                     if element['attTypeCode'] == 'RelAbsVector*':
                         code_added = self.get_element_implementation(element, implementation, code, ns, error_line_hack)
                     else:
-                        code_added = self.get_element_implementation(element, implementation, code, ns, error_line)
+                        last = False
+                        if j == i+len(self.child_lo_elements)-1:
+                            last = True
+                        code_added = self.get_element_implementation(element, implementation, code, ns, error_line, last)
                 if not code_added:
                     if j < num_children - children_dealt_with - 1:
                         implementation.append('else if')
@@ -303,7 +306,7 @@ class ProtectedFunctions():
                                                     plugin_imp]))
         return code
 
-    def get_element_implementation(self, element, implementation, code, ns, error_line):
+    def get_element_implementation(self, element, implementation, code, ns, error_line, last=False):
         code_added = False
         if element['abstract'] and \
                 not (element['attType'] == 'lo_element'):
@@ -324,10 +327,14 @@ class ProtectedFunctions():
             if no_lines > 0:
                 for i in range(0, no_lines-1):
                     this_implement.append(implementation[i])
-                this_implement.append('else')
+                if last:
+                    this_implement.append('else')
+                else:
+                    this_implement.append(implementation[i+1])
+
                 this_implement.append('obj = {0}.createObject(stream'
                               ')'.format(element['memberName']))
-                code.append(self.create_code_block('if_else',
+                code.append(self.create_code_block('else_if',
                                                    this_implement))
             else:
                 code.append(self.create_code_block('line', my_implement))
