@@ -290,7 +290,7 @@ public:
    * The annotations returned by this method will be in XML form.  LibSBML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
-   * content.  See the ModelHistory, CVTerm and RDF<Annotation>Parser classes
+   * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
    * for more information about the facilities available.
    *
    * @return the annotation of this SBML_Lang object as a tree of XMLNode objects.
@@ -313,7 +313,7 @@ public:
    * The annotations returned by this method will be in XML form.  LibSBML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
-   * content.  See the ModelHistory, CVTerm and RDF<Annotation>Parser classes
+   * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
    * for more information about the facilities available.
    *
    * @return the annotation of this SBML_Lang object as a tree of XMLNode objects.
