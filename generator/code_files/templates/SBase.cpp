@@ -77,7 +77,7 @@ SBase::SBase (unsigned int level, unsigned int version)
  : mMetaId ("")
  , mId ("")
  , mNotes(NULL)
- , mAnnotation( NULL )
+ , m<Annotation>( NULL )
  , mSBML      ( NULL )
  , mSBMLNamespaces (NULL)
  , mUserData(NULL)
@@ -108,7 +108,7 @@ SBase::SBase (SBMLNamespaces *sbmlns)
  : mMetaId("")
  , mId("")
  , mNotes(NULL)
- , mAnnotation( NULL )
+ , m<Annotation>( NULL )
  , mSBML      ( NULL )
  , mSBMLNamespaces (NULL)
  , mUserData(NULL)
@@ -139,7 +139,7 @@ SBase::SBase(const SBase& orig)
   : mMetaId (orig.mMetaId)
   , mId (orig.mId)
   , mNotes (NULL)
-  , mAnnotation (NULL)
+  , m<Annotation> (NULL)
   , mSBML (NULL)
   , mSBMLNamespaces(NULL)
   , mUserData(orig.mUserData)
@@ -153,10 +153,10 @@ SBase::SBase(const SBase& orig)
   else
     this->mNotes = NULL;
 
-  if(orig.mAnnotation != NULL)
-    this->mAnnotation = new XMLNode(*const_cast<SBase&>(orig).mAnnotation);
+  if(orig.m<Annotation> != NULL)
+    this->m<Annotation> = new XMLNode(*const_cast<SBase&>(orig).m<Annotation>);
   else
-    this->mAnnotation = NULL;
+    this->m<Annotation> = NULL;
 
   if(orig.getSBMLNamespaces() != NULL)
     this->mSBMLNamespaces =
@@ -175,7 +175,7 @@ SBase::SBase(const SBase& orig)
 SBase::~SBase ()
 {
   if (mNotes != NULL)       delete mNotes;
-  if (mAnnotation != NULL)  delete mAnnotation;
+  if (m<Annotation> != NULL)  delete m<Annotation>;
   if (mSBMLNamespaces != NULL)  delete mSBMLNamespaces;
 }
 
@@ -196,12 +196,12 @@ SBase& SBase::operator=(const SBase& rhs)
     else
       this->mNotes = NULL;
 
-    delete this->mAnnotation;
+    delete this->m<Annotation>;
 
-    if(rhs.mAnnotation != NULL)
-      this->mAnnotation = new XMLNode(*const_cast<SBase&>(rhs).mAnnotation);
+    if(rhs.m<Annotation> != NULL)
+      this->m<Annotation> = new XMLNode(*const_cast<SBase&>(rhs).m<Annotation>);
     else
-      this->mAnnotation = NULL;
+      this->m<Annotation> = NULL;
 
     this->mSBML       = rhs.mSBML;
     this->mLine       = rhs.mLine;
@@ -290,16 +290,16 @@ SBase::getNotesString() const
  * @return the annotation of this SBML_Lang object.
  */
 XMLNode*
-SBase::getAnnotation ()
+SBase::get<Annotation> ()
 {
-  return mAnnotation;
+  return m<Annotation>;
 }
 
 
 const XMLNode*
-SBase::getAnnotation () const
+SBase::get<Annotation> () const
 {
-  return const_cast<SBase *>(this)->getAnnotation();
+  return const_cast<SBase *>(this)->get<Annotation>();
 }
 
 
@@ -307,16 +307,16 @@ SBase::getAnnotation () const
  * @return the annotation of this SBML_Lang object by string.
  */
 std::string
-SBase::getAnnotationString ()
+SBase::get<Annotation>String ()
 {
-  return XMLNode::convertXMLNodeToString(getAnnotation());
+  return XMLNode::convertXMLNodeToString(get<Annotation>());
 }
 
 
 std::string
-SBase::getAnnotationString () const
+SBase::get<Annotation>String () const
 {
-  return XMLNode::convertXMLNodeToString(getAnnotation());
+  return XMLNode::convertXMLNodeToString(get<Annotation>());
 }
 
 
@@ -581,9 +581,9 @@ SBase::isSetNotes () const
  * false otherwise.
  */
 bool
-SBase::isSetAnnotation () const
+SBase::isSet<Annotation> () const
 {
-  return (mAnnotation != NULL);
+  return (m<Annotation> != NULL);
 }
 
 
@@ -636,19 +636,19 @@ SBase::setId (const std::string& sid)
  * Sets the annotation of this SBML_Lang object to a copy of annotation.
  */
 int
-SBase::setAnnotation (XMLNode* annotation)
+SBase::set<Annotation> (XMLNode* annotation)
 {
   if (annotation == NULL)
   {
-    delete mAnnotation;
-    mAnnotation = NULL;
+    delete m<Annotation>;
+    m<Annotation> = NULL;
   }
 
-  if (mAnnotation != annotation)
+  if (m<Annotation> != annotation)
   {
-    delete mAnnotation;
+    delete m<Annotation>;
 
-    mAnnotation = annotation->clone();
+    m<Annotation> = annotation->clone();
   }
 
   return LIBSBML_OPERATION_SUCCESS;
@@ -658,14 +658,14 @@ SBase::setAnnotation (XMLNode* annotation)
  * Sets the annotation (by string) of this SBML_Lang object to a copy of annotation.
  */
 int
-SBase::setAnnotation (const std::string& annotation)
+SBase::set<Annotation> (const std::string& annotation)
 {
   
   int success = LIBSBML_OPERATION_FAILED;
   
   if(annotation.empty())
   {
-    unsetAnnotation();
+    unset<Annotation>();
     return LIBSBML_OPERATION_SUCCESS;
   }
   
@@ -684,7 +684,7 @@ SBase::setAnnotation (const std::string& annotation)
   
   if(annt_xmln != NULL)
   {
-    success = setAnnotation(annt_xmln);
+    success = set<Annotation>(annt_xmln);
     delete annt_xmln;
   }
   return success;  
@@ -697,7 +697,7 @@ SBase::setAnnotation (const std::string& annotation)
  * adding additional information.
  */
 int
-SBase::appendAnnotation (const XMLNode* annotation)
+SBase::append<Annotation> (const XMLNode* annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
   unsigned int duplicates = 0;
@@ -721,22 +721,22 @@ SBase::appendAnnotation (const XMLNode* annotation)
   }
 
 
-  if (mAnnotation != NULL)
+  if (m<Annotation> != NULL)
   {
-    // if mAnnotation is just <annotation/> need to tell
+    // if m<Annotation> is just <annotation/> need to tell
     // it to no longer be an end
-    if (mAnnotation->isEnd())
+    if (m<Annotation>->isEnd())
     {
-      mAnnotation->unsetEnd();
+      m<Annotation>->unsetEnd();
     }
 
 
     // create a list of existing top level ns
       vector<string> topLevelNs;
     unsigned int i = 0;
-    for(i = 0; i < mAnnotation->getNumChildren(); i++)
+    for(i = 0; i < m<Annotation>->getNumChildren(); i++)
     {
-          topLevelNs.push_back(mAnnotation->getChild(i).getName());
+          topLevelNs.push_back(m<Annotation>->getChild(i).getName());
     }
 
 
@@ -745,7 +745,7 @@ SBase::appendAnnotation (const XMLNode* annotation)
     {
           if (find(topLevelNs.begin(), topLevelNs.end(), (new_annotation->getChild(i).getName())) != topLevelNs.end())
       {
-        mAnnotation->addChild(new_annotation->getChild(i));
+        m<Annotation>->addChild(new_annotation->getChild(i));
       }
       else
       {
@@ -761,8 +761,8 @@ SBase::appendAnnotation (const XMLNode* annotation)
     }
     else
     {
-      XMLNode *copy = mAnnotation->clone();
-      success = setAnnotation(copy);
+      XMLNode *copy = m<Annotation>->clone();
+      success = set<Annotation>(copy);
       delete copy;
     }
 
@@ -770,7 +770,7 @@ SBase::appendAnnotation (const XMLNode* annotation)
   }
   else
   {
-    success = setAnnotation(new_annotation);
+    success = set<Annotation>(new_annotation);
 
     delete new_annotation;
   }
@@ -784,7 +784,7 @@ SBase::appendAnnotation (const XMLNode* annotation)
  * adding additional information.
  */
 int
-SBase::appendAnnotation (const std::string& annotation)
+SBase::append<Annotation> (const std::string& annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
   XMLNode* annt_xmln;
@@ -800,7 +800,7 @@ SBase::appendAnnotation (const std::string& annotation)
 
   if(annt_xmln != NULL)
   {
-    success = appendAnnotation(annt_xmln);
+    success = append<Annotation>(annt_xmln);
     delete annt_xmln;
   }
 
@@ -809,18 +809,18 @@ SBase::appendAnnotation (const std::string& annotation)
 
 
 int
-SBase::removeTopLevelAnnotationElement(const std::string elementName,
+SBase::removeTopLevel<Annotation>Element(const std::string elementName,
     const std::string elementURI)
 {
 
   int success = LIBSBML_OPERATION_FAILED;
-  if (mAnnotation == NULL)
+  if (m<Annotation> == NULL)
   {
     success = LIBSBML_OPERATION_SUCCESS;
     return success;
   }
 
-  int index = mAnnotation->getIndex(elementName);
+  int index = m<Annotation>->getIndex(elementName);
   if (index < 0)
   {
     // the annotation does not have a child of this name
@@ -832,7 +832,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
     // check uri matches
     if (elementURI.empty() == false)
     {
-      XMLNode child = mAnnotation->getChild(index);
+      XMLNode child = m<Annotation>->getChild(index);
       std::string prefix = child.getPrefix();
 
       if (prefix.empty() == false
@@ -864,16 +864,16 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
     }
 
     // remove the annotation at the index corresponding to the name
-    delete mAnnotation->removeChild(index);
+    delete m<Annotation>->removeChild(index);
 
-      if (mAnnotation->getNumChildren() == 0)
+      if (m<Annotation>->getNumChildren() == 0)
         {
-          delete mAnnotation;
-          mAnnotation = NULL;
+          delete m<Annotation>;
+          m<Annotation> = NULL;
         }
 
     // check success
-    if (mAnnotation == NULL || mAnnotation->getIndex(elementName) < 0)
+    if (m<Annotation> == NULL || m<Annotation>->getIndex(elementName) < 0)
     {
       success = LIBSBML_OPERATION_SUCCESS;
     }
@@ -884,7 +884,7 @@ SBase::removeTopLevelAnnotationElement(const std::string elementName,
 
 
 int
-SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
+SBase::replaceTopLevel<Annotation>Element(const XMLNode* annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
   XMLNode * replacement = NULL;
@@ -905,10 +905,10 @@ SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
     replacement = annotation->clone();
   }
 
-  success = removeTopLevelAnnotationElement(replacement->getName());
+  success = removeTopLevel<Annotation>Element(replacement->getName());
   if (success == LIBSBML_OPERATION_SUCCESS)
   {
-    success = appendAnnotation(annotation);
+    success = append<Annotation>(annotation);
   }
 
   delete (replacement);
@@ -918,7 +918,7 @@ SBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 
 
 int
-SBase::replaceTopLevelAnnotationElement(const std::string& annotation)
+SBase::replaceTopLevel<Annotation>Element(const std::string& annotation)
 {
   int success = LIBSBML_OPERATION_FAILED;
   XMLNode* annt_xmln;
@@ -934,7 +934,7 @@ SBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 
   if(annt_xmln != NULL)
   {
-    success = replaceTopLevelAnnotationElement(annt_xmln);
+    success = replaceTopLevel<Annotation>Element(annt_xmln);
   }
 
   delete annt_xmln;
@@ -1634,10 +1634,10 @@ SBase::unsetNotes ()
  * Unsets the annotation of this SBML_Lang object.
  */
 int
-SBase::unsetAnnotation ()
+SBase::unset<Annotation> ()
 {
   XMLNode* empty = NULL;
-  return setAnnotation(empty);
+  return set<Annotation>(empty);
 }
 
 
@@ -1819,12 +1819,12 @@ SBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xml
   {
     int numNS = 0;
 
-    if (xmlns->hasURI(SBML_XMLNS_L1V1))
+    if (xmlns->hasURI(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>))
     {
       // checks different SBML_Lang XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
-      declaredURI.assign(SBML_XMLNS_L1V1);
+      declaredURI.assign(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>);
     }
 
     // checks if the SBML_Lang Namespace is explicitly defined.
@@ -2229,7 +2229,7 @@ SBase::read (XMLInputStream& stream)
         checkListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
-                   || readAnnotation(stream)
+                   || read<Annotation>(stream)
                    || readNotes(stream) ))
       {
         logUnknownElement(nextName, getLevel(), getVersion());
@@ -2280,7 +2280,7 @@ SBase::writeElements (XMLOutputStream& stream) const
 {
   if ( mNotes != NULL ) stream << *mNotes;
 
-  if (mAnnotation != NULL) stream << *mAnnotation;
+  if (m<Annotation> != NULL) stream << *m<Annotation>;
 }
 
 
@@ -2324,7 +2324,7 @@ SBase::readOtherXML (XMLInputStream& stream)
  * @return true if read an <annotation> element from the stream
  */
 bool
-SBase::readAnnotation (XMLInputStream& stream)
+SBase::read<Annotation> (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2333,16 +2333,16 @@ SBase::readAnnotation (XMLInputStream& stream)
     // If an annotation already exists, log it as an error and replace
     // the content of the existing annotation with the new one.
 
-    if (mAnnotation != NULL)
+    if (m<Annotation> != NULL)
     {
       string msg = "An SBML_Lang <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
-      logError(SBMLMultipleAnnotations, getLevel(), getVersion(), msg);
+      logError(SBMLMultiple<Annotation>s, getLevel(), getVersion(), msg);
     }
 
-    delete mAnnotation;
-    mAnnotation = new XMLNode(stream);
-    checkAnnotation();
+    delete m<Annotation>;
+    m<Annotation> = new XMLNode(stream);
+    check<Annotation>();
     return true;
   }
 
@@ -2846,7 +2846,7 @@ SBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
   * If the annotation declares an sbml namespace an error is logged.
   */
 void
-SBase::checkAnnotation()
+SBase::check<Annotation>()
 {
   unsigned int nNodes = 0;
   unsigned int match = 0;
@@ -2854,23 +2854,23 @@ SBase::checkAnnotation()
   std::vector<std::string> uri_list;
   uri_list.clear();
 
-  if (mAnnotation == NULL) return;
+  if (m<Annotation> == NULL) return;
 
   //
   // checks if the given default namespace (if any) is a valid
   // SBML_Lang namespace
   //
-  const XMLNamespaces &xmlns = mAnnotation->getNamespaces();
+  const XMLNamespaces &xmlns = m<Annotation>->getNamespaces();
   checkDefaultNamespace(&xmlns,"annotation");
 
-  while (nNodes < mAnnotation->getNumChildren())
+  while (nNodes < m<Annotation>->getNumChildren())
   {
-    XMLNode topLevel = mAnnotation->getChild(nNodes);
+    XMLNode topLevel = m<Annotation>->getChild(nNodes);
 
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
     {
-      logError(SBMLAnnotationNotElement, getLevel(), getVersion());
+      logError(SBML<Annotation>NotElement, getLevel(), getVersion());
       nNodes++;
       continue;
     }
@@ -2895,7 +2895,7 @@ SBase::checkAnnotation()
       {
         string msg = "An SBML_Lang <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
-        logError(SBMLDuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
+        logError(SBMLDuplicate<Annotation>Namespaces, getLevel(), getVersion(), msg);
       }
       uri_list.push_back(uri);
     }
@@ -2925,7 +2925,7 @@ SBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(SBMLMissingAnnotationNamespace);
+        logError(SBMLMissing<Annotation>Namespace);
       }
     }
     // cannot declare sbml namespace
@@ -2939,14 +2939,14 @@ SBase::checkAnnotation()
     if (match > 0)
     {
       msg += "uses a restricted namespace on an element in its child <annotation>.";
-      logError(SBMLNamespaceInAnnotation, getLevel(), getVersion(), msg);
+      logError(SBMLNamespaceIn<Annotation>, getLevel(), getVersion(), msg);
       break;
     }
 
     if (implicitNSdecl && prefix.empty())
     {
       msg += "assumes the sbml namespace on an element in its child <annotation>.";
-      logError(SBMLMissingAnnotationNamespace, getLevel(), getVersion(), msg);
+      logError(SBMLMissing<Annotation>Namespace, getLevel(), getVersion(), msg);
     }
     nNodes++;
   }
@@ -3215,18 +3215,18 @@ SBase_getNotesString (SBase_t *sb)
 
 LIBSBML_EXTERN
 XMLNode_t *
-SBase_getAnnotation (SBase_t *sb)
+SBase_get<Annotation> (SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getAnnotation() : NULL;
+  return (sb != NULL) ? sb->get<Annotation>() : NULL;
 }
 
 
 LIBSBML_EXTERN
 char*
-SBase_getAnnotationString (SBase_t *sb)
+SBase_get<Annotation>String (SBase_t *sb)
 {
-  return (sb != NULL && sb->isSetAnnotation()) ?
-    safe_strdup(sb->getAnnotationString().c_str()) : NULL;
+  return (sb != NULL && sb->isSet<Annotation>()) ?
+    safe_strdup(sb->get<Annotation>String().c_str()) : NULL;
 }
 
 
@@ -3248,9 +3248,9 @@ SBase_isSetNotes (const SBase_t *sb)
 
 LIBSBML_EXTERN
 int
-SBase_isSetAnnotation (const SBase_t *sb)
+SBase_isSet<Annotation> (const SBase_t *sb)
 {
-  return (sb != NULL) ? static_cast<int>( sb->isSetAnnotation() ) : 0;
+  return (sb != NULL) ? static_cast<int>( sb->isSet<Annotation>() ) : 0;
 }
 
 
@@ -3356,10 +3356,10 @@ SBase_appendNotesString (SBase_t *sb, const char *notes)
 
 LIBSBML_EXTERN
 int
-SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation)
+SBase_set<Annotation> (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
-    return sb->setAnnotation(annotation);
+    return sb->set<Annotation>(annotation);
   else
     return LIBSBML_INVALID_OBJECT;
 }
@@ -3367,17 +3367,17 @@ SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation)
 
 LIBSBML_EXTERN
 int
-SBase_setAnnotationString (SBase_t *sb, const char *annotation)
+SBase_set<Annotation>String (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if(annotation == NULL)
     {
-      return sb->unsetAnnotation();
+      return sb->unset<Annotation>();
     }
     else
     {
-      return sb->setAnnotation(annotation);
+      return sb->set<Annotation>(annotation);
     }
   }
   else
@@ -3387,10 +3387,10 @@ SBase_setAnnotationString (SBase_t *sb, const char *annotation)
 
 LIBSBML_EXTERN
 int
-SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation)
+SBase_append<Annotation> (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
-    return sb->appendAnnotation(annotation);
+    return sb->append<Annotation>(annotation);
   else
     return LIBSBML_INVALID_OBJECT;
 }
@@ -3398,12 +3398,12 @@ SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation)
 
 LIBSBML_EXTERN
 int
-SBase_appendAnnotationString (SBase_t *sb, const char *annotation)
+SBase_append<Annotation>String (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
-      return sb->appendAnnotation(annotation);
+      return sb->append<Annotation>(annotation);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3413,12 +3413,12 @@ SBase_appendAnnotationString (SBase_t *sb, const char *annotation)
 
 LIBSBML_EXTERN
 int
-SBase_removeTopLevelAnnotationElement (SBase_t *sb, const char *name)
+SBase_removeTopLevel<Annotation>Element (SBase_t *sb, const char *name)
 {
   if (sb != NULL)
   {
     if (name != NULL)
-      return sb->removeTopLevelAnnotationElement(name);
+      return sb->removeTopLevel<Annotation>Element(name);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3429,13 +3429,13 @@ SBase_removeTopLevelAnnotationElement (SBase_t *sb, const char *name)
 
 LIBSBML_EXTERN
 int
-SBase_removeTopLevelAnnotationElementWithURI (SBase_t *sb, const char *name,
+SBase_removeTopLevel<Annotation>ElementWithURI (SBase_t *sb, const char *name,
                                               const char *uri)
 {
   if (sb != NULL)
   {
     if (name != NULL && uri != NULL)
-      return sb->removeTopLevelAnnotationElement(name, uri);
+      return sb->removeTopLevel<Annotation>Element(name, uri);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3446,12 +3446,12 @@ SBase_removeTopLevelAnnotationElementWithURI (SBase_t *sb, const char *name,
 
 LIBSBML_EXTERN
 int
-SBase_replaceTopLevelAnnotationElement (SBase_t *sb, XMLNode_t *annotation)
+SBase_replaceTopLevel<Annotation>Element (SBase_t *sb, XMLNode_t *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
-      return sb->replaceTopLevelAnnotationElement(annotation);
+      return sb->replaceTopLevel<Annotation>Element(annotation);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3462,12 +3462,12 @@ SBase_replaceTopLevelAnnotationElement (SBase_t *sb, XMLNode_t *annotation)
 
 LIBSBML_EXTERN
 int
-SBase_replaceTopLevelAnnotationElementString (SBase_t *sb, const char *annotation)
+SBase_replaceTopLevel<Annotation>ElementString (SBase_t *sb, const char *annotation)
 {
   if (sb != NULL)
   {
     if (annotation != NULL)
-      return sb->replaceTopLevelAnnotationElement(annotation);
+      return sb->replaceTopLevel<Annotation>Element(annotation);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3500,10 +3500,10 @@ SBase_unsetNotes (SBase_t *sb)
 
 LIBSBML_EXTERN
 int
-SBase_unsetAnnotation (SBase_t *sb)
+SBase_unset<Annotation> (SBase_t *sb)
 {
   if (sb != NULL)
-    return sb->unsetAnnotation();
+    return sb->unset<Annotation>();
   else
     return LIBSBML_INVALID_OBJECT;
 }

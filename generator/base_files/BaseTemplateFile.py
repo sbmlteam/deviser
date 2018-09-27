@@ -231,6 +231,7 @@ class BaseTemplateFile:
         line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.upper()), line)
         line = re.sub('<SPEC_LEVEL>', '{0}'.format(global_variables.namespaces[-1]['level']), line)
         line = re.sub('<SPEC_VERSION>', '{0}'.format(global_variables.namespaces[-1]['version']), line)
+        line = re.sub('<Annotation>', global_variables.annot_element, line)
         return line
 
     @staticmethod

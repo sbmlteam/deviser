@@ -651,6 +651,7 @@ class ParseXML():
         prefix = self.get_value(node, 'prefix')
         library_name = self.get_value(node, 'libraryName')
         pkg_prefix = self.get_value(node, 'pkg_prefix')
+        annot_element = self.get_value(node, 'annotationElementName')
 
         if node.getAttributeNode('isPackage'):
             is_package = self.get_bool_value(self, node, 'isPackage')
@@ -690,7 +691,7 @@ class ParseXML():
         global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
-                                     dependency, library_version)
+                                     dependency, library_version, '', annot_element)
 
     #####################################################################
 

@@ -81,6 +81,8 @@ global has_level_version
 has_level_version = True
 global top_level_element_name
 top_level_element_name = 'sbml'
+global annot_element
+annot_element = 'Annotation'
 
 global return_codes
 return_codes= dict({'success': 0,
@@ -157,7 +159,7 @@ def set_global_fullname(fullname):
 
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
-                specifications=[], depend=[], library_vers=[], copyright=''):
+                specifications=[], depend=[], library_vers=[], copyright='', annot_elem=''):
     global language
     language = lang
 
@@ -212,6 +214,10 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         package_prefix = pkg_prefix
     elif pkg_prefix == '':
         package_prefix = ''
+
+    global annot_element
+    if annot_elem != '':
+        annot_element = annot_elem
 
 
     global library_name

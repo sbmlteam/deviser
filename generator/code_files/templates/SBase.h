@@ -290,20 +290,20 @@ public:
    * The annotations returned by this method will be in XML form.  LibSBML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
-   * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
+   * content.  See the ModelHistory, CVTerm and RDF<Annotation>Parser classes
    * for more information about the facilities available.
    *
    * @return the annotation of this SBML_Lang object as a tree of XMLNode objects.
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  XMLNode* getAnnotation ();
+  XMLNode* get<Annotation> ();
 
 
   /**
@@ -313,20 +313,20 @@ public:
    * The annotations returned by this method will be in XML form.  LibSBML
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
-   * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
+   * content.  See the ModelHistory, CVTerm and RDF<Annotation>Parser classes
    * for more information about the facilities available.
    *
    * @return the annotation of this SBML_Lang object as a tree of XMLNode objects.
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  const XMLNode* getAnnotation () const;
+  const XMLNode* get<Annotation> () const;
 
 
   /**
@@ -334,19 +334,19 @@ public:
    * character string.
    *
    * The annotations returned by this method will be in string form.  See the
-   * method getAnnotation() for a version that returns annotations in XML form.
+   * method get<Annotation>() for a version that returns annotations in XML form.
    *
    * @return the annotation of this SBML_Lang object as a character string.
    *
-   * @see getAnnotation()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  std::string getAnnotationString ();
+  std::string get<Annotation>String ();
 
 
   /**
@@ -354,19 +354,19 @@ public:
    * character string.
    *
    * The annotations returned by this method will be in string form.  See the
-   * method getAnnotation() for a version that returns annotations in XML form.
+   * method get<Annotation>() for a version that returns annotations in XML form.
    *
    * @return the annotation of this SBML_Lang object as a character string.
    *
-   * @see getAnnotation()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  std::string getAnnotationString () const;
+  std::string get<Annotation>String () const;
 
 
   /**
@@ -673,15 +673,15 @@ public:
    * @return @c true if a "annotation" subelement exists, @c false
    * otherwise.
    * 
-   * @see getAnnotation()
-   * @see getAnnotationString()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>()
+   * @see get<Annotation>String()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  bool isSetAnnotation () const;
+  bool isSet<Annotation> () const;
 
 
   /**
@@ -740,8 +740,8 @@ public:
    * annotation that is about to be assigned, it is likely that performing
    * such wholesale replacement is unfriendly towards other software
    * applications whose annotations are discarded.  An alternative may be
-   * to use SBase::appendAnnotation(const XMLNode* annotation) or
-   * SBase::appendAnnotation(const std::string& annotation).
+   * to use SBase::append<Annotation>(const XMLNode* annotation) or
+   * SBase::append<Annotation>(const std::string& annotation).
    *
    * @param annotation an XML structure that is to be used as the new content
    * of the "annotation" subelement of this object
@@ -750,14 +750,14 @@ public:
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  virtual int setAnnotation (XMLNode* annotation);
+  virtual int set<Annotation> (XMLNode* annotation);
 
 
   /**
@@ -786,8 +786,8 @@ public:
    * annotation that is about to be assigned, it is likely that performing
    * such wholesale replacement is unfriendly towards other software
    * applications whose annotations are discarded.  An alternative may be
-   * to use SBase::appendAnnotation(const XMLNode* annotation) or
-   * SBase::appendAnnotation(const std::string& annotation).
+   * to use SBase::append<Annotation>(const XMLNode* annotation) or
+   * SBase::append<Annotation>(const std::string& annotation).
    *
    * @param annotation an XML string that is to be used as the content
    * of the "annotation" subelement of this object
@@ -797,14 +797,14 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  virtual int setAnnotation (const std::string& annotation);
+  virtual int set<Annotation> (const std::string& annotation);
 
 
   /**
@@ -825,8 +825,8 @@ public:
    * the data as well as help reduce conflicts between annotations added by
    * different tools.  Please see the SBML_Lang specifications for more details.
    *
-   * Unlike SBase::setAnnotation(const XMLNode* annotation) or
-   * SBase::setAnnotation(const std::string& annotation), this method
+   * Unlike SBase::set<Annotation>(const XMLNode* annotation) or
+   * SBase::set<Annotation>(const std::string& annotation), this method
    * allows other annotations to be preserved when an application adds its
    * own data.
    *
@@ -838,14 +838,14 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const std::string& annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const std::string& annotation)
+   * @see unset<Annotation>()
    */
-  virtual int appendAnnotation (const XMLNode* annotation);
+  virtual int append<Annotation> (const XMLNode* annotation);
 
 
   /**
@@ -866,8 +866,8 @@ public:
    * the data as well as help reduce conflicts between annotations added by
    * different tools.  Please see the SBML_Lang specifications for more details.
    *
-   * Unlike SBase::setAnnotation(const XMLNode* annotation) or
-   * SBase::setAnnotation(const std::string& annotation), this method
+   * Unlike SBase::set<Annotation>(const XMLNode* annotation) or
+   * SBase::set<Annotation>(const std::string& annotation), this method
    * allows other annotations to be preserved when an application adds its
    * own data.
    *
@@ -879,14 +879,14 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see unsetAnnotation()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see unset<Annotation>()
    */
-  virtual int appendAnnotation (const std::string& annotation);
+  virtual int append<Annotation> (const std::string& annotation);
 
 
   /**
@@ -913,10 +913,10 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_ANNOTATION_NAME_NOT_FOUND LIBSBML_ANNOTATION_NAME_NOT_FOUND @endlink
    * @li @link OperationReturnValues_t#LIBSBML_ANNOTATION_NS_NOT_FOUND LIBSBML_ANNOTATION_NS_NOT_FOUND @endlink
    *
-   * @see replaceTopLevelAnnotationElement(const XMLNode *)
-   * @see replaceTopLevelAnnotationElement(const std::string&)
+   * @see replaceTopLevel<Annotation>Element(const XMLNode *)
+   * @see replaceTopLevel<Annotation>Element(const std::string&)
    */
-  int removeTopLevelAnnotationElement(const std::string elementName,
+  int removeTopLevel<Annotation>Element(const std::string elementName,
                                       const std::string elementURI = "");
 
 
@@ -931,7 +931,7 @@ public:
    *
    * This method determines the name of the element to be replaced from the
    * annotation argument. Functionally it is equivalent to calling
-   * <code> removeTopLevelAnnotationElement(name); appendAnnotation(annotation_with_name);
+   * <code> removeTopLevel<Annotation>Element(name); append<Annotation>(annotation_with_name);
    * </code> with the exception that the placement of the annotation element remains
    * the same.
    *
@@ -943,10 +943,10 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    *
-   * @see removeTopLevelAnnotationElement(const std::string elementName, const std::string elementURI)
-   * @see replaceTopLevelAnnotationElement(const std::string&)
+   * @see removeTopLevel<Annotation>Element(const std::string elementName, const std::string elementURI)
+   * @see replaceTopLevel<Annotation>Element(const std::string&)
    */
-  int replaceTopLevelAnnotationElement(const XMLNode* annotation);
+  int replaceTopLevel<Annotation>Element(const XMLNode* annotation);
 
 
   /**
@@ -960,7 +960,7 @@ public:
    *
    * This method determines the name of the element to be replaced from the
    * annotation argument. Functionally it is equivalent to calling
-   * <code> removeTopLevelAnnotationElement(name); appendAnnotation(annotation_with_name);
+   * <code> removeTopLevel<Annotation>Element(name); append<Annotation>(annotation_with_name);
    * </code> with the exception that the placement of the annotation element remains
    * the same.
    *
@@ -972,10 +972,10 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    *
-   * @see removeTopLevelAnnotationElement(const std::string elementName, const std::string elementURI)
-   * @see replaceTopLevelAnnotationElement(const XMLNode*)
+   * @see removeTopLevel<Annotation>Element(const std::string elementName, const std::string elementURI)
+   * @see replaceTopLevel<Annotation>Element(const XMLNode*)
    */
-  int replaceTopLevelAnnotationElement(const std::string& annotation);
+  int replaceTopLevel<Annotation>Element(const std::string& annotation);
 
 
   /**
@@ -1305,15 +1305,15 @@ public:
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    *
-   * @see getAnnotation()
-   * @see getAnnotationString()
-   * @see isSetAnnotation()
-   * @see setAnnotation(const XMLNode* annotation)
-   * @see setAnnotation(const std::string& annotation)
-   * @see appendAnnotation(const XMLNode* annotation)
-   * @see appendAnnotation(const std::string& annotation)
+   * @see get<Annotation>()
+   * @see get<Annotation>String()
+   * @see isSet<Annotation>()
+   * @see set<Annotation>(const XMLNode* annotation)
+   * @see set<Annotation>(const std::string& annotation)
+   * @see append<Annotation>(const XMLNode* annotation)
+   * @see append<Annotation>(const std::string& annotation)
    */
-  int unsetAnnotation ();
+  int unset<Annotation> ();
 
 
   /**
@@ -1913,7 +1913,7 @@ protected:
    * Checks the annotation does not declare an sbml namespace.
    * If the annotation declares an sbml namespace an error is logged.
    */
-  void checkAnnotation();
+  void check<Annotation>();
 
 
   /**
@@ -1982,7 +1982,7 @@ protected:
   std::string     mMetaId;
   std::string     mId;
   XMLNode*        mNotes;
-  XMLNode*        mAnnotation;
+  XMLNode*        m<Annotation>;
   SBMLDocument*   mSBML;
   SBMLNamespaces* mSBMLNamespaces;
   void*           mUserData;
@@ -2031,7 +2031,7 @@ private:
    *
    * @return true if read an <annotation> element from the stream
    */
-  bool readAnnotation (XMLInputStream& stream);
+  bool read<Annotation> (XMLInputStream& stream);
 
 
   /**
@@ -2201,7 +2201,7 @@ SBase_getNotesString (SBase_t *sb);
  */
 LIBSBML_EXTERN
 XMLNode_t *
-SBase_getAnnotation (SBase_t *sb);
+SBase_get<Annotation> (SBase_t *sb);
 
 
 /**
@@ -2217,7 +2217,7 @@ SBase_getAnnotation (SBase_t *sb);
  */
 LIBSBML_EXTERN
 char*
-SBase_getAnnotationString (SBase_t *sb);
+SBase_get<Annotation>String (SBase_t *sb);
 
 
 /**
@@ -2265,7 +2265,7 @@ SBase_isSetNotes (const SBase_t *sb);
  */
 LIBSBML_EXTERN
 int
-SBase_isSetAnnotation (const SBase_t *sb);
+SBase_isSet<Annotation> (const SBase_t *sb);
 
 
 /**
@@ -2419,7 +2419,7 @@ SBase_appendNotesString (SBase_t *sb, const char *notes);
  */
 LIBSBML_EXTERN
 int
-SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation);
+SBase_set<Annotation> (SBase_t *sb, XMLNode_t *annotation);
 
 
 /**
@@ -2436,7 +2436,7 @@ SBase_setAnnotation (SBase_t *sb, XMLNode_t *annotation);
  */
 LIBSBML_EXTERN
 int
-SBase_setAnnotationString (SBase_t *sb, const char *annotation);
+SBase_set<Annotation>String (SBase_t *sb, const char *annotation);
 
 
 /**
@@ -2453,7 +2453,7 @@ SBase_setAnnotationString (SBase_t *sb, const char *annotation);
  */
 LIBSBML_EXTERN
 int
-SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation);
+SBase_append<Annotation> (SBase_t *sb, XMLNode_t *annotation);
 
 
 /**
@@ -2470,7 +2470,7 @@ SBase_appendAnnotation (SBase_t *sb, XMLNode_t *annotation);
  */
 LIBSBML_EXTERN
 int
-SBase_appendAnnotationString (SBase_t *sb, const char *annotation);
+SBase_append<Annotation>String (SBase_t *sb, const char *annotation);
 
 
 /**
@@ -2516,7 +2516,7 @@ SBase_unsetNotes (SBase_t *sb);
  */
 LIBSBML_EXTERN
 int
-SBase_unsetAnnotation (SBase_t *sb);
+SBase_unset<Annotation> (SBase_t *sb);
 
 
 /**
