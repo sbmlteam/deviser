@@ -168,7 +168,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     namespaces = []
     if len(specifications) > 0:
         namespaces = specifications
-        if not 'level' in namespaces[0] or not namespaces[0]['level']:
+        if not 'level' in namespaces[0] or (not namespaces[0]['level'] and not namespaces[0]['version']):
             has_level_version = False
     else:
         namespaces.append(dict({'namespace': 'not defined'}))
