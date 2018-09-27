@@ -22,11 +22,11 @@ typedef enum
 , SBMLUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
 , SBMLNotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML_Lang XML schema. */
 , SBMLInvalidMathElement                    = 10201
-, SBMLMissingAnnotationNamespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
-, SBMLDuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
-, SBMLNamespaceInAnnotation             = 10403 /*!< The SBML_Lang XML namespace cannot be used in an Annotation object. */
-, SBMLMultipleAnnotations                   = 10404 /*!< Only one Annotation object is permitted under a given SBML_Lang object. */
-, SBMLAnnotationNotElement                  = 10405
+, SBMLMissing<Annotation>Namespace            = 10401 /*!< Missing declaration of the XML namespace for the annotation. */
+, SBMLDuplicate<Annotation>Namespaces         = 10402 /*!< Multiple annotations using the same XML namespace. */
+, SBMLNamespaceIn<Annotation>             = 10403 /*!< The SBML_Lang XML namespace cannot be used in an <Annotation> object. */
+, SBMLMultiple<Annotation>s                   = 10404 /*!< Only one <Annotation> object is permitted under a given SBML_Lang object. */
+, SBML<Annotation>NotElement                  = 10405
 , SBMLNotesNotInXHTMLNamespace              = 10801 /*!< Notes must be placed in the XHTML XML namespace. */
 , SBMLNotesContainsXMLDecl                  = 10802 /*!< XML declarations are not permitted in Notes objects. */
 , SBMLNotesContainsDOCTYPE                  = 10803 /*!< XML DOCTYPE elements are not permitted in Notes objects. */

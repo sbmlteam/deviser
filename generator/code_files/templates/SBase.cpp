@@ -2932,7 +2932,7 @@ SBase::check<Annotation>()
     while(!match && n < topLevel.getNamespaces().getLength())
     {
       match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(),
-                                          SPEC_NAMESPACE);
+                                          <SPEC_NAMESPACE>);
       n++;
     }
     string msg = "An SBML_Lang <" + getElementName() + "> element ";

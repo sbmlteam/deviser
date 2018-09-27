@@ -320,7 +320,7 @@ ListOf::clear (bool doDelete)
 int ListOf::removeFromParentAndDelete()
 {
   clear(true);
-  unsetAnnotation();
+  unset<Annotation>();
   unsetMetaId();
   unsetNotes();
   return LIBSBML_OPERATION_SUCCESS;

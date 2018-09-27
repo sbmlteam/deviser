@@ -92,7 +92,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10401
   {
-    SBMLMissingAnnotationNamespace,
+    SBMLMissing<Annotation>Namespace,
     "Missing declaration of the XML namespace for the annotation",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -104,7 +104,7 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10402
   {
-    SBMLDuplicateAnnotationNamespaces,
+    SBMLDuplicate<Annotation>Namespaces,
     "Multiple annotations using the same XML namespace",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
@@ -116,8 +116,8 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10403
   {
-    SBMLNamespaceInAnnotation,
-    "The SBML_Lang XML namespace cannot be used in an Annotation object",
+    SBMLNamespaceIn<Annotation>,
+    "The SBML_Lang XML namespace cannot be used in an <Annotation> object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
     "Top-level elements within an annotation element cannot use any SBML_Lang "
@@ -129,8 +129,8 @@ static const sbmlErrorTableEntry sbmlErrorTable[] =
 
   //10404
   {
-    SBMLMultipleAnnotations,
-    "Only one Annotation object is permitted under a given SBML_Lang object",
+    SBMLMultiple<Annotation>s,
+    "Only one <Annotation> object is permitted under a given SBML_Lang object",
     LIBSBML_CAT_SBML,
     LIBSBML_SEV_ERROR,
     "A given SBML_Lang object may contain at most one <annotation> element.",
