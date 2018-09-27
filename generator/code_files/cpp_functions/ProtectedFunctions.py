@@ -526,7 +526,9 @@ class ProtectedFunctions():
                 if child['memberName'] == name:
                     found = True
                     name_to_use = child['capAttName']
-                    xmlname = child['xml_name']
+                    xmlname = child['name']
+                    if 'xml_name' in child:
+                        xmlname = child['xml_name']
             if not found:
                 name_to_use = element
                 elem_name = element

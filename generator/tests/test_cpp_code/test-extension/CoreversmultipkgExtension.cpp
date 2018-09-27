@@ -564,7 +564,7 @@ const char* SBML_ABC_TYPE_STRINGS[] =
 {
   "maximize"
 , "minimize"
-, "invalid AbcType"
+, "invalid AbcType value"
 };
 
 

@@ -411,7 +411,7 @@ const char* SBML_SIGN_STRINGS[] =
 , "negative"
 , "dual"
 , "unknown"
-, "invalid Sign"
+, "invalid Sign value"
 };
 
 
@@ -496,7 +496,7 @@ const char* SBML_TRANSITION_OUTPUT_EFFECT_STRINGS[] =
 {
   "production"
 , "assignmentLevel"
-, "invalid TransitionOutputEffect"
+, "invalid TransitionOutputEffect value"
 };
 
 
@@ -509,7 +509,7 @@ const char*
 TransitionOutputEffect_toString(TransitionOutputEffect_t toe)
 {
   int min = OUTPUT_TRANSITION_EFFECT_PRODUCTION;
-  int max = OUTPUT_TRANSITION_EFFECT_INVALID;
+  int max = OUTPUT_TRANSITION_INVALID;
 
   if (toe < min || toe > max)
   {
@@ -522,8 +522,8 @@ TransitionOutputEffect_toString(TransitionOutputEffect_t toe)
 
 /*
  * Returns the #TransitionOutputEffect_t enumeration corresponding to the given
- * string or @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
- * TransitionOutputEffect_t} if there is no such match.
+ * string or @sbmlconstant{OUTPUT_TRANSITION_INVALID, TransitionOutputEffect_t}
+ * if there is no such match.
  */
 LIBSBML_EXTERN
 TransitionOutputEffect_t
@@ -541,7 +541,7 @@ TransitionOutputEffect_fromString(const char* code)
     }
   }
 
-  return OUTPUT_TRANSITION_EFFECT_INVALID;
+  return OUTPUT_TRANSITION_INVALID;
 }
 
 
@@ -554,7 +554,7 @@ int
 TransitionOutputEffect_isValid(TransitionOutputEffect_t toe)
 {
   int min = OUTPUT_TRANSITION_EFFECT_PRODUCTION;
-  int max = OUTPUT_TRANSITION_EFFECT_INVALID;
+  int max = OUTPUT_TRANSITION_INVALID;
 
   if (toe < min || toe >= max)
   {
@@ -585,7 +585,7 @@ const char* SBML_TRANSITION_INPUT_EFFECT_STRINGS[] =
 {
   "none"
 , "consumption"
-, "invalid TransitionInputEffect"
+, "invalid TransitionInputEffect value"
 };
 
 
@@ -598,7 +598,7 @@ const char*
 TransitionInputEffect_toString(TransitionInputEffect_t tie)
 {
   int min = INPUT_TRANSITION_EFFECT_NONE;
-  int max = INPUT_TRANSITION_EFFECT_INVALID;
+  int max = INPUT_TRANSITION_INVALID;
 
   if (tie < min || tie > max)
   {
@@ -611,8 +611,8 @@ TransitionInputEffect_toString(TransitionInputEffect_t tie)
 
 /*
  * Returns the #TransitionInputEffect_t enumeration corresponding to the given
- * string or @sbmlconstant{INPUT_TRANSITION_EFFECT_INVALID,
- * TransitionInputEffect_t} if there is no such match.
+ * string or @sbmlconstant{INPUT_TRANSITION_INVALID, TransitionInputEffect_t}
+ * if there is no such match.
  */
 LIBSBML_EXTERN
 TransitionInputEffect_t
@@ -630,7 +630,7 @@ TransitionInputEffect_fromString(const char* code)
     }
   }
 
-  return INPUT_TRANSITION_EFFECT_INVALID;
+  return INPUT_TRANSITION_INVALID;
 }
 
 
@@ -643,7 +643,7 @@ int
 TransitionInputEffect_isValid(TransitionInputEffect_t tie)
 {
   int min = INPUT_TRANSITION_EFFECT_NONE;
-  int max = INPUT_TRANSITION_EFFECT_INVALID;
+  int max = INPUT_TRANSITION_INVALID;
 
   if (tie < min || tie >= max)
   {

@@ -54,9 +54,9 @@ ClassThree::ClassThree(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion)
   : SBase(level, version)
-  , mNumber (ENUM_INVALID)
-  , mBadName (FRED_INVALID)
-  , mOtherNum (ENUM_INVALID)
+  , mNumber (TEST_ENUM_INVALID)
+  , mBadName (TEST_FRED_INVALID)
+  , mOtherNum (TEST_ENUM_INVALID)
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -67,9 +67,9 @@ ClassThree::ClassThree(unsigned int level,
  */
 ClassThree::ClassThree(TestPkgNamespaces *testns)
   : SBase(testns)
-  , mNumber (ENUM_INVALID)
-  , mBadName (FRED_INVALID)
-  , mOtherNum (ENUM_INVALID)
+  , mNumber (TEST_ENUM_INVALID)
+  , mBadName (TEST_FRED_INVALID)
+  , mOtherNum (TEST_ENUM_INVALID)
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -214,7 +214,7 @@ ClassThree::getOtherNumAsString() const
 bool
 ClassThree::isSetNumber() const
 {
-  return (mNumber != ENUM_INVALID);
+  return (mNumber != TEST_ENUM_INVALID);
 }
 
 
@@ -224,7 +224,7 @@ ClassThree::isSetNumber() const
 bool
 ClassThree::isSetName() const
 {
-  return (mName != FRED_INVALID);
+  return (mName != TEST_FRED_INVALID);
 }
 
 
@@ -234,7 +234,7 @@ ClassThree::isSetName() const
 bool
 ClassThree::isSetBadName() const
 {
-  return (mBadName != FRED_INVALID);
+  return (mBadName != TEST_FRED_INVALID);
 }
 
 
@@ -245,7 +245,7 @@ ClassThree::isSetBadName() const
 bool
 ClassThree::isSetOtherNum() const
 {
-  return (mOtherNum != ENUM_INVALID);
+  return (mOtherNum != TEST_ENUM_INVALID);
 }
 
 
@@ -257,7 +257,7 @@ ClassThree::setNumber(const Enum_t number)
 {
   if (Enum_isValid(number) == 0)
   {
-    mNumber = ENUM_INVALID;
+    mNumber = TEST_ENUM_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -276,7 +276,7 @@ ClassThree::setNumber(const std::string& number)
 {
   mNumber = Enum_fromString(number.c_str());
 
-  if (mNumber == ENUM_INVALID)
+  if (mNumber == TEST_ENUM_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -293,7 +293,7 @@ ClassThree::setName(const Fred_t name)
 {
   if (Fred_isValid(name) == 0)
   {
-    mName = FRED_INVALID;
+    mName = TEST_FRED_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -312,7 +312,7 @@ ClassThree::setName(const std::string& name)
 {
   mName = Fred_fromString(name.c_str());
 
-  if (mName == FRED_INVALID)
+  if (mName == TEST_FRED_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -329,7 +329,7 @@ ClassThree::setBadName(const Fred_t badName)
 {
   if (Fred_isValid(badName) == 0)
   {
-    mBadName = FRED_INVALID;
+    mBadName = TEST_FRED_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -348,7 +348,7 @@ ClassThree::setBadName(const std::string& badName)
 {
   mBadName = Fred_fromString(badName.c_str());
 
-  if (mBadName == FRED_INVALID)
+  if (mBadName == TEST_FRED_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -365,7 +365,7 @@ ClassThree::setOtherNum(const Enum_t otherNum)
 {
   if (Enum_isValid(otherNum) == 0)
   {
-    mOtherNum = ENUM_INVALID;
+    mOtherNum = TEST_ENUM_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -384,7 +384,7 @@ ClassThree::setOtherNum(const std::string& otherNum)
 {
   mOtherNum = Enum_fromString(otherNum.c_str());
 
-  if (mOtherNum == ENUM_INVALID)
+  if (mOtherNum == TEST_ENUM_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -399,7 +399,7 @@ ClassThree::setOtherNum(const std::string& otherNum)
 int
 ClassThree::unsetNumber()
 {
-  mNumber = ENUM_INVALID;
+  mNumber = TEST_ENUM_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -410,7 +410,7 @@ ClassThree::unsetNumber()
 int
 ClassThree::unsetName()
 {
-  mName = FRED_INVALID;
+  mName = TEST_FRED_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -421,7 +421,7 @@ ClassThree::unsetName()
 int
 ClassThree::unsetBadName()
 {
-  mBadName = FRED_INVALID;
+  mBadName = TEST_FRED_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -432,7 +432,7 @@ ClassThree::unsetBadName()
 int
 ClassThree::unsetOtherNum()
 {
-  mOtherNum = ENUM_INVALID;
+  mOtherNum = TEST_ENUM_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1145,7 +1145,7 @@ ClassThree_getNumber(const ClassThree_t * ct)
 {
   if (ct == NULL)
   {
-    return ENUM_INVALID;
+    return TEST_ENUM_INVALID;
   }
 
   return ct->getNumber();
@@ -1172,7 +1172,7 @@ ClassThree_getName(const ClassThree_t * ct)
 {
   if (ct == NULL)
   {
-    return FRED_INVALID;
+    return TEST_FRED_INVALID;
   }
 
   return ct->getName();
@@ -1199,7 +1199,7 @@ ClassThree_getBadName(const ClassThree_t * ct)
 {
   if (ct == NULL)
   {
-    return FRED_INVALID;
+    return TEST_FRED_INVALID;
   }
 
   return ct->getBadName();
@@ -1226,7 +1226,7 @@ ClassThree_getOtherNum(const ClassThree_t * ct)
 {
   if (ct == NULL)
   {
-    return ENUM_INVALID;
+    return TEST_ENUM_INVALID;
   }
 
   return ct->getOtherNum();

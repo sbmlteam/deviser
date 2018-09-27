@@ -913,12 +913,12 @@ def main():
         test_case = 'hyphenated attribute'
         fail += run_test(name, num, class_name, test_case, list_of)
 
-        name = 'render'
-        num = 6
-        class_name = 'RenderGroup'
-        list_of = ''
-        test_case = 'very nested base'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        # name = 'render'
+        # num = 6
+        # class_name = 'RenderGroup'
+        # list_of = ''
+        # test_case = 'very nested base'
+        # fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'render'
         num = 8

@@ -60,7 +60,7 @@ GraphicalPrimitive2D::GraphicalPrimitive2D(unsigned int level,
                                            unsigned int pkgVersion)
   : GraphicalPrimitive1D(level, version, pkgVersion)
   , mFill ("")
-  , mFillRule (FILL_RULE_INVALID)
+  , mFillRule (FILL_EVENODD_INVALID)
 {
   setSBMLNamespacesAndOwn(new RenderPkgNamespaces(level, version, pkgVersion));
 }
@@ -73,7 +73,7 @@ GraphicalPrimitive2D::GraphicalPrimitive2D(unsigned int level,
 GraphicalPrimitive2D::GraphicalPrimitive2D(RenderPkgNamespaces *renderns)
   : GraphicalPrimitive1D(renderns)
   , mFill ("")
-  , mFillRule (FILL_RULE_INVALID)
+  , mFillRule (FILL_EVENODD_INVALID)
 {
   setElementNamespace(renderns->getURI());
   loadPlugins(renderns);
@@ -175,7 +175,7 @@ GraphicalPrimitive2D::isSetFill() const
 bool
 GraphicalPrimitive2D::isSetFillRule() const
 {
-  return (mFillRule != FILL_RULE_INVALID);
+  return (mFillRule != FILL_EVENODD_INVALID);
 }
 
 
@@ -198,7 +198,7 @@ GraphicalPrimitive2D::setFillRule(const FillRule_t fillRule)
 {
   if (FillRule_isValid(fillRule) == 0)
   {
-    mFillRule = FILL_RULE_INVALID;
+    mFillRule = FILL_EVENODD_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -217,7 +217,7 @@ GraphicalPrimitive2D::setFillRule(const std::string& fillRule)
 {
   mFillRule = FillRule_fromString(fillRule.c_str());
 
-  if (mFillRule == FILL_RULE_INVALID)
+  if (mFillRule == FILL_EVENODD_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -251,7 +251,7 @@ GraphicalPrimitive2D::unsetFill()
 int
 GraphicalPrimitive2D::unsetFillRule()
 {
-  mFillRule = FILL_RULE_INVALID;
+  mFillRule = FILL_EVENODD_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -908,7 +908,7 @@ GraphicalPrimitive2D_getFillRule(const GraphicalPrimitive2D_t * gpd)
 {
   if (gpd == NULL)
   {
-    return FILL_RULE_INVALID;
+    return FILL_EVENODD_INVALID;
   }
 
   return gpd->getFillRule();

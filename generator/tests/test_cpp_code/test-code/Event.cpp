@@ -888,40 +888,6 @@ Event::connectToChild()
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Updates the namespaces when setLevelVersion is used
- */
-void
-Event::updateSBMLNamespace(const std::string& package,
-                           unsigned int level,
-                           unsigned int version)
-{
-  SBase::updateSBMLNamespace(package, level, version);
-
-  if (mTrigger != NULL)
-  {
-    mTrigger->updateSBMLNamespace(package, level, version);
-  }
-
-  if (mPriority != NULL)
-  {
-    mPriority->updateSBMLNamespace(package, level, version);
-  }
-
-  if (mDelay != NULL)
-  {
-    mDelay->updateSBMLNamespace(package, level, version);
-  }
-
-  mEventAssignments.updateSBMLNamespace(package, level, version);
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * Gets the value of the "attributeName" attribute of this Event.
  */
 int

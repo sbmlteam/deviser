@@ -406,7 +406,7 @@ const char* SBML_ENUM_STRINGS[] =
 {
   "One"
 , "Two"
-, "invalid Enum"
+, "invalid Enum value"
 };
 
 
@@ -491,7 +491,7 @@ const char* SBML_FRED_STRINGS[] =
 {
   "tom"
 , "dick"
-, "invalid Fred"
+, "invalid Fred value"
 };
 
 
@@ -503,7 +503,7 @@ const char*
 Fred_toString(Fred_t f)
 {
   int min = TEST_FRED_T_TOM;
-  int max = TEST_FRED_T_INVALID;
+  int max = TEST_FRED_INVALID;
 
   if (f < min || f > max)
   {
@@ -516,7 +516,7 @@ Fred_toString(Fred_t f)
 
 /*
  * Returns the #Fred_t enumeration corresponding to the given string or
- * @sbmlconstant{TEST_FRED_T_INVALID, Fred_t} if there is no such match.
+ * @sbmlconstant{TEST_FRED_INVALID, Fred_t} if there is no such match.
  */
 LIBSBML_EXTERN
 Fred_t
@@ -533,7 +533,7 @@ Fred_fromString(const char* code)
     }
   }
 
-  return TEST_FRED_T_INVALID;
+  return TEST_FRED_INVALID;
 }
 
 
@@ -546,7 +546,7 @@ int
 Fred_isValid(Fred_t f)
 {
   int min = TEST_FRED_T_TOM;
-  int max = TEST_FRED_T_INVALID;
+  int max = TEST_FRED_INVALID;
 
   if (f < min || f >= max)
   {

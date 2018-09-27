@@ -56,7 +56,7 @@ Output::Output(unsigned int level,
                unsigned int pkgVersion)
   : SBase(level, version)
   , mQualitativeSpecies ("")
-  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
+  , mTransitionEffect (OUTPUT_TRANSITION_INVALID)
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
 {
@@ -70,7 +70,7 @@ Output::Output(unsigned int level,
 Output::Output(QualPkgNamespaces *qualns)
   : SBase(qualns)
   , mQualitativeSpecies ("")
-  , mTransitionEffect (TRANSITION_OUTPUT_EFFECT_INVALID)
+  , mTransitionEffect (OUTPUT_TRANSITION_INVALID)
   , mOutputLevel (SBML_INT_MAX)
   , mIsSetOutputLevel (false)
 {
@@ -218,7 +218,7 @@ Output::isSetQualitativeSpecies() const
 bool
 Output::isSetTransitionEffect() const
 {
-  return (mTransitionEffect != TRANSITION_OUTPUT_EFFECT_INVALID);
+  return (mTransitionEffect != OUTPUT_TRANSITION_INVALID);
 }
 
 
@@ -278,7 +278,7 @@ Output::setTransitionEffect(const TransitionOutputEffect_t transitionEffect)
 {
   if (TransitionOutputEffect_isValid(transitionEffect) == 0)
   {
-    mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
+    mTransitionEffect = OUTPUT_TRANSITION_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -298,7 +298,7 @@ Output::setTransitionEffect(const std::string& transitionEffect)
   mTransitionEffect =
     TransitionOutputEffect_fromString(transitionEffect.c_str());
 
-  if (mTransitionEffect == TRANSITION_OUTPUT_EFFECT_INVALID)
+  if (mTransitionEffect == OUTPUT_TRANSITION_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -374,7 +374,7 @@ Output::unsetQualitativeSpecies()
 int
 Output::unsetTransitionEffect()
 {
-  mTransitionEffect = TRANSITION_OUTPUT_EFFECT_INVALID;
+  mTransitionEffect = OUTPUT_TRANSITION_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1212,7 +1212,7 @@ Output_getTransitionEffect(const Output_t * o)
 {
   if (o == NULL)
   {
-    return TRANSITION_OUTPUT_EFFECT_INVALID;
+    return OUTPUT_TRANSITION_INVALID;
   }
 
   return o->getTransitionEffect();

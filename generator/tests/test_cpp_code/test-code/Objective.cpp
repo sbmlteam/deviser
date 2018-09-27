@@ -56,7 +56,7 @@ Objective::Objective(unsigned int level,
                      unsigned int version,
                      unsigned int pkgVersion)
   : SBase(level, version)
-  , mType (FBC_TYPE_INVALID)
+  , mType (OBJECTIVE_TYPE_INVALID)
   , mFluxObjectives (level, version, pkgVersion)
 {
   setSBMLNamespacesAndOwn(new FbcPkgNamespaces(level, version, pkgVersion));
@@ -69,7 +69,7 @@ Objective::Objective(unsigned int level,
  */
 Objective::Objective(FbcPkgNamespaces *fbcns)
   : SBase(fbcns)
-  , mType (FBC_TYPE_INVALID)
+  , mType (OBJECTIVE_TYPE_INVALID)
   , mFluxObjectives (fbcns)
 {
   setElementNamespace(fbcns->getURI());
@@ -193,7 +193,7 @@ Objective::isSetName() const
 bool
 Objective::isSetType() const
 {
-  return (mType != FBC_TYPE_INVALID);
+  return (mType != OBJECTIVE_TYPE_INVALID);
 }
 
 
@@ -226,7 +226,7 @@ Objective::setType(const FbcType_t type)
 {
   if (FbcType_isValid(type) == 0)
   {
-    mType = FBC_TYPE_INVALID;
+    mType = OBJECTIVE_TYPE_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -245,7 +245,7 @@ Objective::setType(const std::string& type)
 {
   mType = FbcType_fromString(type.c_str());
 
-  if (mType == FBC_TYPE_INVALID)
+  if (mType == OBJECTIVE_TYPE_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -298,7 +298,7 @@ Objective::unsetName()
 int
 Objective::unsetType()
 {
-  mType = FBC_TYPE_INVALID;
+  mType = OBJECTIVE_TYPE_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1621,7 +1621,7 @@ Objective_getType(const Objective_t * o)
 {
   if (o == NULL)
   {
-    return FBC_TYPE_INVALID;
+    return OBJECTIVE_TYPE_INVALID;
   }
 
   return o->getType();

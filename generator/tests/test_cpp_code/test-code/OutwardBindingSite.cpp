@@ -55,7 +55,7 @@ OutwardBindingSite::OutwardBindingSite(unsigned int level,
                                        unsigned int version,
                                        unsigned int pkgVersion)
   : SBase(level, version)
-  , mBindingStatus (BINDING_STATUS_INVALID)
+  , mBindingStatus (MULTI_BINDING_INVALID)
   , mComponent ("")
 {
   setSBMLNamespacesAndOwn(new MultiPkgNamespaces(level, version, pkgVersion));
@@ -67,7 +67,7 @@ OutwardBindingSite::OutwardBindingSite(unsigned int level,
  */
 OutwardBindingSite::OutwardBindingSite(MultiPkgNamespaces *multins)
   : SBase(multins)
-  , mBindingStatus (BINDING_STATUS_INVALID)
+  , mBindingStatus (MULTI_BINDING_INVALID)
   , mComponent ("")
 {
   setElementNamespace(multins->getURI());
@@ -203,7 +203,7 @@ OutwardBindingSite::isSetName() const
 bool
 OutwardBindingSite::isSetBindingStatus() const
 {
-  return (mBindingStatus != BINDING_STATUS_INVALID);
+  return (mBindingStatus != MULTI_BINDING_INVALID);
 }
 
 
@@ -247,7 +247,7 @@ OutwardBindingSite::setBindingStatus(const BindingStatus_t bindingStatus)
 {
   if (BindingStatus_isValid(bindingStatus) == 0)
   {
-    mBindingStatus = BINDING_STATUS_INVALID;
+    mBindingStatus = MULTI_BINDING_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -266,7 +266,7 @@ OutwardBindingSite::setBindingStatus(const std::string& bindingStatus)
 {
   mBindingStatus = BindingStatus_fromString(bindingStatus.c_str());
 
-  if (mBindingStatus == BINDING_STATUS_INVALID)
+  if (mBindingStatus == MULTI_BINDING_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -338,7 +338,7 @@ OutwardBindingSite::unsetName()
 int
 OutwardBindingSite::unsetBindingStatus()
 {
-  mBindingStatus = BINDING_STATUS_INVALID;
+  mBindingStatus = MULTI_BINDING_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1112,7 +1112,7 @@ OutwardBindingSite_getBindingStatus(const OutwardBindingSite_t * obs)
 {
   if (obs == NULL)
   {
-    return BINDING_STATUS_INVALID;
+    return MULTI_BINDING_INVALID;
   }
 
   return obs->getBindingStatus();

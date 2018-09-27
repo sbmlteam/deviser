@@ -440,7 +440,7 @@ const char* SBML_BINDING_STATUS_STRINGS[] =
   "bound"
 , "unbound"
 , "either"
-, "invalid BindingStatus"
+, "invalid BindingStatus value"
 };
 
 
@@ -452,7 +452,7 @@ const char*
 BindingStatus_toString(BindingStatus_t bs)
 {
   int min = MULTI_BINDING_STATUS_BOUND;
-  int max = MULTI_BINDING_STATUS_INVALID;
+  int max = MULTI_BINDING_INVALID;
 
   if (bs < min || bs > max)
   {
@@ -465,8 +465,8 @@ BindingStatus_toString(BindingStatus_t bs)
 
 /*
  * Returns the #BindingStatus_t enumeration corresponding to the given string
- * or @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if there is
- * no such match.
+ * or @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t} if there is no such
+ * match.
  */
 LIBSBML_EXTERN
 BindingStatus_t
@@ -484,7 +484,7 @@ BindingStatus_fromString(const char* code)
     }
   }
 
-  return MULTI_BINDING_STATUS_INVALID;
+  return MULTI_BINDING_INVALID;
 }
 
 
@@ -497,7 +497,7 @@ int
 BindingStatus_isValid(BindingStatus_t bs)
 {
   int min = MULTI_BINDING_STATUS_BOUND;
-  int max = MULTI_BINDING_STATUS_INVALID;
+  int max = MULTI_BINDING_INVALID;
 
   if (bs < min || bs >= max)
   {
@@ -528,7 +528,7 @@ const char* SBML_RELATION_STRINGS[] =
   "and"
 , "or"
 , "not"
-, "invalid Relation"
+, "invalid Relation value"
 };
 
 
@@ -614,7 +614,7 @@ const char* SBML_REPRESENTATION_TYPE_STRINGS[] =
 {
   "sum"
 , "numericValue"
-, "invalid RepresentationType"
+, "invalid RepresentationType value"
 };
 
 

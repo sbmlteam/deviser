@@ -407,7 +407,7 @@ const char* SBML_GROUP_KIND_STRINGS[] =
   "classification"
 , "partonomy"
 , "collection"
-, "invalid GroupKind"
+, "invalid GroupKind value"
 };
 
 

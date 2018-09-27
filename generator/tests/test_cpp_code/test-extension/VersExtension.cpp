@@ -479,7 +479,7 @@ const char* SBML_FBC_TYPE_STRINGS[] =
 {
   "maximize"
 , "minimize"
-, "invalid FbcType"
+, "invalid FbcType value"
 };
 
 

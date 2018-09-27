@@ -55,15 +55,15 @@ SampledField::SampledField(unsigned int level,
                            unsigned int version,
                            unsigned int pkgVersion)
   : SBase(level, version)
-  , mDataType (DATA_KIND_INVALID)
+  , mDataType (SPATIAL_DATAKIND_INVALID)
   , mNumSamples1 (SBML_INT_MAX)
   , mIsSetNumSamples1 (false)
   , mNumSamples2 (SBML_INT_MAX)
   , mIsSetNumSamples2 (false)
   , mNumSamples3 (SBML_INT_MAX)
   , mIsSetNumSamples3 (false)
-  , mInterpolationType (INTERPOLATION_KIND_INVALID)
-  , mCompression (COMPRESSION_KIND_INVALID)
+  , mInterpolationType (SPATIAL_INTERPOLATIONKIND_INVALID)
+  , mCompression (SPATIAL_COMPRESSIONKIND_INVALID)
   , mSamples (NULL)
   , mSamplesLength (SBML_INT_MAX)
   , mIsSetSamplesLength (false)
@@ -78,15 +78,15 @@ SampledField::SampledField(unsigned int level,
  */
 SampledField::SampledField(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
-  , mDataType (DATA_KIND_INVALID)
+  , mDataType (SPATIAL_DATAKIND_INVALID)
   , mNumSamples1 (SBML_INT_MAX)
   , mIsSetNumSamples1 (false)
   , mNumSamples2 (SBML_INT_MAX)
   , mIsSetNumSamples2 (false)
   , mNumSamples3 (SBML_INT_MAX)
   , mIsSetNumSamples3 (false)
-  , mInterpolationType (INTERPOLATION_KIND_INVALID)
-  , mCompression (COMPRESSION_KIND_INVALID)
+  , mInterpolationType (SPATIAL_INTERPOLATIONKIND_INVALID)
+  , mCompression (SPATIAL_COMPRESSIONKIND_INVALID)
   , mSamples (NULL)
   , mSamplesLength (SBML_INT_MAX)
   , mIsSetSamplesLength (false)
@@ -316,7 +316,7 @@ SampledField::isSetId() const
 bool
 SampledField::isSetDataType() const
 {
-  return (mDataType != DATA_KIND_INVALID);
+  return (mDataType != SPATIAL_DATAKIND_INVALID);
 }
 
 
@@ -360,7 +360,7 @@ SampledField::isSetNumSamples3() const
 bool
 SampledField::isSetInterpolationType() const
 {
-  return (mInterpolationType != INTERPOLATION_KIND_INVALID);
+  return (mInterpolationType != SPATIAL_INTERPOLATIONKIND_INVALID);
 }
 
 
@@ -371,7 +371,7 @@ SampledField::isSetInterpolationType() const
 bool
 SampledField::isSetCompression() const
 {
-  return (mCompression != COMPRESSION_KIND_INVALID);
+  return (mCompression != SPATIAL_COMPRESSIONKIND_INVALID);
 }
 
 
@@ -415,7 +415,7 @@ SampledField::setDataType(const DataKind_t dataType)
 {
   if (DataKind_isValid(dataType) == 0)
   {
-    mDataType = DATA_KIND_INVALID;
+    mDataType = SPATIAL_DATAKIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -434,7 +434,7 @@ SampledField::setDataType(const std::string& dataType)
 {
   mDataType = DataKind_fromString(dataType.c_str());
 
-  if (mDataType == DATA_KIND_INVALID)
+  if (mDataType == SPATIAL_DATAKIND_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -487,7 +487,7 @@ SampledField::setInterpolationType(const InterpolationKind_t interpolationType)
 {
   if (InterpolationKind_isValid(interpolationType) == 0)
   {
-    mInterpolationType = INTERPOLATION_KIND_INVALID;
+    mInterpolationType = SPATIAL_INTERPOLATIONKIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -506,7 +506,7 @@ SampledField::setInterpolationType(const std::string& interpolationType)
 {
   mInterpolationType = InterpolationKind_fromString(interpolationType.c_str());
 
-  if (mInterpolationType == INTERPOLATION_KIND_INVALID)
+  if (mInterpolationType == SPATIAL_INTERPOLATIONKIND_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -523,7 +523,7 @@ SampledField::setCompression(const CompressionKind_t compression)
 {
   if (CompressionKind_isValid(compression) == 0)
   {
-    mCompression = COMPRESSION_KIND_INVALID;
+    mCompression = SPATIAL_COMPRESSIONKIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -542,7 +542,7 @@ SampledField::setCompression(const std::string& compression)
 {
   mCompression = CompressionKind_fromString(compression.c_str());
 
-  if (mCompression == COMPRESSION_KIND_INVALID)
+  if (mCompression == SPATIAL_COMPRESSIONKIND_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -613,7 +613,7 @@ SampledField::unsetId()
 int
 SampledField::unsetDataType()
 {
-  mDataType = DATA_KIND_INVALID;
+  mDataType = SPATIAL_DATAKIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -684,7 +684,7 @@ SampledField::unsetNumSamples3()
 int
 SampledField::unsetInterpolationType()
 {
-  mInterpolationType = INTERPOLATION_KIND_INVALID;
+  mInterpolationType = SPATIAL_INTERPOLATIONKIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -695,7 +695,7 @@ SampledField::unsetInterpolationType()
 int
 SampledField::unsetCompression()
 {
-  mCompression = COMPRESSION_KIND_INVALID;
+  mCompression = SPATIAL_COMPRESSIONKIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1944,7 +1944,7 @@ SampledField_getDataType(const SampledField_t * sf)
 {
   if (sf == NULL)
   {
-    return DATA_KIND_INVALID;
+    return SPATIAL_DATAKIND_INVALID;
   }
 
   return sf->getDataType();
@@ -2005,7 +2005,7 @@ SampledField_getInterpolationType(const SampledField_t * sf)
 {
   if (sf == NULL)
   {
-    return INTERPOLATION_KIND_INVALID;
+    return SPATIAL_INTERPOLATIONKIND_INVALID;
   }
 
   return sf->getInterpolationType();
@@ -2033,7 +2033,7 @@ SampledField_getCompression(const SampledField_t * sf)
 {
   if (sf == NULL)
   {
-    return COMPRESSION_KIND_INVALID;
+    return SPATIAL_COMPRESSIONKIND_INVALID;
   }
 
   return sf->getCompression();

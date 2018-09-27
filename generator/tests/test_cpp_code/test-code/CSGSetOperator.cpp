@@ -62,7 +62,7 @@ CSGSetOperator::CSGSetOperator(unsigned int level,
                                unsigned int version,
                                unsigned int pkgVersion)
   : CSGNode(level, version, pkgVersion)
-  , mOperationType (SET_OPERATION_INVALID)
+  , mOperationType (SPATIAL_SETOPERATION_INVALID)
   , mComplementA ("")
   , mComplementB ("")
   , mCSGNodes (level, version, pkgVersion)
@@ -78,7 +78,7 @@ CSGSetOperator::CSGSetOperator(unsigned int level,
  */
 CSGSetOperator::CSGSetOperator(SpatialPkgNamespaces *spatialns)
   : CSGNode(spatialns)
-  , mOperationType (SET_OPERATION_INVALID)
+  , mOperationType (SPATIAL_SETOPERATION_INVALID)
   , mComplementA ("")
   , mComplementB ("")
   , mCSGNodes (spatialns)
@@ -189,7 +189,7 @@ CSGSetOperator::getComplementB() const
 bool
 CSGSetOperator::isSetOperationType() const
 {
-  return (mOperationType != SET_OPERATION_INVALID);
+  return (mOperationType != SPATIAL_SETOPERATION_INVALID);
 }
 
 
@@ -223,7 +223,7 @@ CSGSetOperator::setOperationType(const SetOperation_t operationType)
 {
   if (SetOperation_isValid(operationType) == 0)
   {
-    mOperationType = SET_OPERATION_INVALID;
+    mOperationType = SPATIAL_SETOPERATION_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -242,7 +242,7 @@ CSGSetOperator::setOperationType(const std::string& operationType)
 {
   mOperationType = SetOperation_fromString(operationType.c_str());
 
-  if (mOperationType == SET_OPERATION_INVALID)
+  if (mOperationType == SPATIAL_SETOPERATION_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -293,7 +293,7 @@ CSGSetOperator::setComplementB(const std::string& complementB)
 int
 CSGSetOperator::unsetOperationType()
 {
-  mOperationType = SET_OPERATION_INVALID;
+  mOperationType = SPATIAL_SETOPERATION_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1634,7 +1634,7 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso)
 {
   if (csgso == NULL)
   {
-    return SET_OPERATION_INVALID;
+    return SPATIAL_SETOPERATION_INVALID;
   }
 
   return csgso->getOperationType();

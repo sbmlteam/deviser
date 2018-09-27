@@ -64,7 +64,7 @@ ClassOneTwo::ClassOneTwo(unsigned int level,
   , mAttDbl (util_NaN())
   , mIsSetAttDbl (false)
   , mAttUnit ("")
-  , mAttEnum (ABC_TYPE_INVALID)
+  , mAttEnum (OBJECTIVE_TYPE_INVALID)
 {
   setSBMLNamespacesAndOwn(new CoreversmultipkgPkgNamespaces(level, version,
     pkgVersion));
@@ -87,7 +87,7 @@ ClassOneTwo::ClassOneTwo(CoreversmultipkgPkgNamespaces *coreversmultipkgns)
   , mAttDbl (util_NaN())
   , mIsSetAttDbl (false)
   , mAttUnit ("")
-  , mAttEnum (ABC_TYPE_INVALID)
+  , mAttEnum (OBJECTIVE_TYPE_INVALID)
 {
   setElementNamespace(coreversmultipkgns->getURI());
   loadPlugins(coreversmultipkgns);
@@ -327,7 +327,7 @@ ClassOneTwo::isSetAttUnit() const
 bool
 ClassOneTwo::isSetAttEnum() const
 {
-  return (mAttEnum != ABC_TYPE_INVALID);
+  return (mAttEnum != OBJECTIVE_TYPE_INVALID);
 }
 
 
@@ -509,7 +509,7 @@ ClassOneTwo::setAttEnum(const AbcType_t attEnum)
   {
     if (AbcType_isValid(attEnum) == 0)
     {
-      mAttEnum = ABC_TYPE_INVALID;
+      mAttEnum = OBJECTIVE_TYPE_INVALID;
       return LIBSBML_INVALID_ATTRIBUTE_VALUE;
     }
     else
@@ -539,7 +539,7 @@ ClassOneTwo::setAttEnum(const std::string& attEnum)
   {
     mAttEnum = AbcType_fromString(attEnum.c_str());
 
-    if (mAttEnum == ABC_TYPE_INVALID)
+    if (mAttEnum == OBJECTIVE_TYPE_INVALID)
     {
       return LIBSBML_INVALID_ATTRIBUTE_VALUE;
     }
@@ -696,7 +696,7 @@ ClassOneTwo::unsetAttUnit()
 int
 ClassOneTwo::unsetAttEnum()
 {
-  mAttEnum = ABC_TYPE_INVALID;
+  mAttEnum = OBJECTIVE_TYPE_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -2071,7 +2071,7 @@ ClassOneTwo_getAttEnum(const ClassOneTwo_t * cot)
 {
   if (cot == NULL)
   {
-    return ABC_TYPE_INVALID;
+    return OBJECTIVE_TYPE_INVALID;
   }
 
   return cot->getAttEnum();
