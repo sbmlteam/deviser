@@ -4,7 +4,7 @@
     <library_version major="0" minor="1" revision="0"/>
     <language_versions>
       <version level="0" version="2" namespace="http://sbgn.org/libsbgn/0.2"/>
-      <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+<!--      <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/> -->
     </language_versions>
   </language>
   <versions>
