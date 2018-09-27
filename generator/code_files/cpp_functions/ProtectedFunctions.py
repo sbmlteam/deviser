@@ -1037,9 +1037,10 @@ class ProtectedFunctions():
                               'xmlns.add({0}Extension::getXmlnsL{1}V{2}V{3}(), '
                               'prefix)'.format(self.package, self.lv_info[0]['core_level'], self.lv_info[0]['core_version'], self.lv_info[0]['pkg_version'])]
         else:
-            implementation = ['thisxmlns && thisxmlns->hasURI({0}_XMLNS_L1V1)'.format(global_variables.language.upper()),
-                              'xmlns.add({0}_XMLNS_L1V1, '
-                              'prefix)'.format(global_variables.language.upper())]
+            implementation = ['thisxmlns && thisxmlns->hasURI({0}_XMLNS_L{1}V{2})'
+                                  .format(global_variables.language.upper(), self.lv_info[0]['core_level'], self.lv_info[0]['core_version']),
+                              'xmlns.add({0}_XMLNS_L{1}V{2}, '
+                              'prefix)'.format(global_variables.language.upper(), self.lv_info[0]['core_level'], self.lv_info[0]['core_version'])]
 
         nested_if = self.create_code_block('if', implementation)
         implementation = ['prefix.empty()',
