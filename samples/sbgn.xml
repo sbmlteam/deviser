@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="SbgnML" fullname="Systems Biology Graphical Notation - Markup Language" number="100" offset="100000" version="1" required="false">
-  <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument" prefix="Sbgn" libraryName="libSBGN" isPackage="false"/>
+  <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument" prefix="Sbgn" libraryName="libSBGN" isPackage="false">
+    <language_versions>
+      <version level="0" version="2" namespace="http://sbgn.org/libsbgn/0.2"/>
+      <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+    </language_versions>
+  </language>
   <versions>
     <pkgVersion version="2" pkg_version="0">
       <elements>
