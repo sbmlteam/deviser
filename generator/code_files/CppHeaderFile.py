@@ -575,8 +575,8 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
             code = gen_functions.write_enable_package()
             self.write_function_declaration(code, exclude=True)
 
-        code = gen_functions.write_update_ns()
-        self.write_function_declaration(code, exclude=True)
+            code = gen_functions.write_update_ns()
+            self.write_function_declaration(code, exclude=True)
 
         if self.is_doc_plugin:
             code = gen_functions.write_is_comp_flat()
