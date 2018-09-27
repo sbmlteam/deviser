@@ -283,6 +283,8 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         else:
             docname = strFunctions.prefix_name(doc['name'])
         libname = strFunctions.get_library_suffix(global_variables.library_name)
+        if not libname.endswith('ml'):
+            libname = libname + 'ml'
         fileout.copy_line_verbatim('          if ( errorId == {0}{1}Allowed'
                                    'CoreAttributes\n'.format(libname, docname))
         level = False

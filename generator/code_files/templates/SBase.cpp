@@ -2977,7 +2977,7 @@ SBase::checkXHTML(const XMLNode * xhtml)
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(SBMLUnknownError);
+    logError(SBMLmlUnknown);
     return;
   }
 
