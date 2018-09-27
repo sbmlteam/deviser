@@ -657,7 +657,7 @@ class ParseXML():
         else:
             is_package = True
 
-        versions = node.getElementsByTagName('versions')
+        versions = node.getElementsByTagName('language_versions')
         specification = []
         if versions:
             for version in versions[0].getElementsByTagName('version'):

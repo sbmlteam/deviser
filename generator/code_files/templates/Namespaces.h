@@ -12,14 +12,14 @@
 #ifdef __cplusplus
 namespace LIBSBML_CPP_NAMESPACE 
 {
-  const unsigned int SBML_DEFAULT_LEVEL   = 1;
-  const unsigned int SBML_DEFAULT_VERSION = 1;
-  const char* const SBML_XMLNS_L1V1   = SPEC_NAMESPACE;
+  const unsigned int SBML_DEFAULT_LEVEL   = <SPEC_LEVEL>;
+  const unsigned int SBML_DEFAULT_VERSION = <SPEC_VERSION>;
+<all_namespaces/>
 }
 #else
-static const unsigned int SBML_DEFAULT_LEVEL   = 1;
-static const unsigned int SBML_DEFAULT_VERSION = 1;
-static const char* const SBML_XMLNS_L1V1   = SPEC_NAMESPACE;
+static const unsigned int SBML_DEFAULT_LEVEL   = <SPEC_LEVEL>;
+static const unsigned int SBML_DEFAULT_VERSION = <SPEC_VERSION>;
+<all_namespaces_static/>
 #endif
 
 #ifdef __cplusplus
