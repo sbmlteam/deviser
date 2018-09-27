@@ -42,7 +42,7 @@
         <element name="Glyph" typeCode="SBGN_SBGNML_GLYPH" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="glyph">
           <attributes>
             <attribute name="id" required="false" type="ID" abstract="false"/>
-            <attribute name="clazz" required="false" type="string" abstract="false"/>
+            <attribute name="clazz" required="false" type="string" xmlName="class" abstract="false"/>
             <attribute name="label" required="false" type="element" element="Label" abstract="false"/>
             <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
             <attribute name="ports" required="false" type="inline_lo_element" element="Port" abstract="false"/>
@@ -60,7 +60,7 @@
         <element name="Arc" typeCode="SBGN_SBGNML_ARC" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="arc">
           <attributes>
             <attribute name="id" required="false" type="ID" abstract="false"/>
-            <attribute name="clazz" required="false" type="string" abstract="false"/>
+            <attribute name="clazz" required="false" type="string" xmlName="class" abstract="false"/>
             <attribute name="source" required="false" type="IDREF" abstract="false"/>
             <attribute name="target" required="false" type="IDREF" abstract="false"/>
             <attribute name="glyph" required="false" type="element" element="Glyph" abstract="false"/>
