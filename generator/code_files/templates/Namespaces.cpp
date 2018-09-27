@@ -22,13 +22,13 @@ SBMLNamespaces::initSBMLNamespace()
 
   switch (mLevel)
   {
-  case 1:
+  case <SPEC_LEVEL>:
   default:
     switch (mVersion)
     {
-    case 1:
+    case <SPEC_VERSION>:
     default:
-      mNamespaces->add(SBML_XMLNS_L1V1);
+      mNamespaces->add(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>);
       break;
     }
     break;
@@ -78,7 +78,7 @@ const List *
 SBMLNamespaces::getSupportedNamespaces()
 {
   List *result = new List();
-  result->add(new SBMLNamespaces(1,1));
+  result->add(new SBMLNamespaces(<SPEC_LEVEL>,<SPEC_VERSION>));
   return result;
 }
 
@@ -134,13 +134,13 @@ SBMLNamespaces::getSBMLNamespaceURI(unsigned int level,
   std::string uri = "";
   switch (level)
   {
-  case 1:
+  case <SPEC_LEVEL>:
   default:
     switch (version)
     {
-    case 1:
+    case <SPEC_VERSION>:
     default:
-      uri = SBML_XMLNS_L1V1;
+      uri = SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>;
       break;
     }
     break;
@@ -257,7 +257,7 @@ SBMLNamespaces::removeNamespace(const std::string &uri)
 bool 
 SBMLNamespaces::isSBMLNamespace(const std::string& uri)
 {
-  if (uri == SBML_XMLNS_L1V1)   return true;
+  if (uri == SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>)   return true;
 
   return false;
 }
@@ -275,10 +275,10 @@ SBMLNamespaces::isValidCombination()
   {
     int numNS = 0;
 
-    if (xmlns->hasURI(SBML_XMLNS_L1V1))
+    if (xmlns->hasURI(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>))
     {
       ++numNS;
-      declaredURI.assign(SBML_XMLNS_L1V1);
+      declaredURI.assign(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>);
     }
 
     // checks if the SBML_Lang Namespace is explicitly defined.
@@ -296,15 +296,15 @@ SBMLNamespaces::isValidCombination()
 
   switch (getLevel())
   {
-    case 1:
+    case <SPEC_LEVEL>:
      switch (version)
       {
-        case 1:
+        case <SPEC_VERSION>:
           // the namespaces contains the sbml namespaces
           // check it is the correct ns for the level/version
           if (sbmlDeclared)
           {
-            if (declaredURI != string(SBML_XMLNS_L1V1))
+            if (declaredURI != string(SBML_XMLNS_L<SPEC_LEVEL>V<SPEC_VERSION>))
             {
               valid = false;
             }
