@@ -275,7 +275,7 @@ class ProtectedFunctions():
                             last = True
                         code_added = self.get_element_implementation(element, implementation, code, ns, error_line, last)
                 if not code_added:
-                    if j < num_children - children_dealt_with - 1:
+                    if j < i + num_children - children_dealt_with - 1:
                         implementation.append('else if')
                         else_if = True
                 else:
@@ -320,25 +320,26 @@ class ProtectedFunctions():
                                                this_implement))
             code_added = True
         elif element['type'] == 'inline_lo_element':
-            my_implement = ['obj = {0}.createObject(stream'
-                              ')'.format(element['memberName'])]
-            no_lines = len(implementation)
-            this_implement = []
-            if no_lines > 0:
-                for i in range(0, no_lines-1):
-                    this_implement.append(implementation[i])
-                if last:
-                    this_implement.append('else')
-                else:
-                    this_implement.append(implementation[i+1])
-
-                this_implement.append('obj = {0}.createObject(stream'
-                              ')'.format(element['memberName']))
-                code.append(self.create_code_block('else_if',
-                                                   this_implement))
-            else:
-                code.append(self.create_code_block('line', my_implement))
-            code_added = True
+            implementation += self.get_inline_lo_block(element)
+            # my_implement = ['obj = {0}.createObject(stream'
+            #                   ')'.format(element['memberName'])]
+            # no_lines = len(implementation)
+            # this_implement = []
+            # if no_lines > 0:
+            #     for i in range(0, no_lines-1):
+            #         this_implement.append(implementation[i])
+            #     if last:
+            #         this_implement.append('else')
+            #     else:
+            #         this_implement.append(implementation[i+1])
+            #
+            #     this_implement.append('obj = {0}.createObject(stream'
+            #                   ')'.format(element['memberName']))
+            #     code.append(self.create_code_block('else_if',
+            #                                        this_implement))
+            # else:
+            #     code.append(self.create_code_block('line', my_implement))
+            # code_added = True
         elif element['attType'] == 'lo_element':
             implementation += self.get_lo_block(element, error_line)
         else:
@@ -488,6 +489,14 @@ class ProtectedFunctions():
         implementation = ['name == \"{0}\"'.format(loname),
                           nested_if, line]
         return implementation
+
+    def get_inline_lo_block(self, element):
+        name = element['name']
+        line = 'obj = {0}.createObject(stream)'.format(element['memberName'])
+        implementation = ['name == \"{0}\"'.format(name),
+                          line]
+        return implementation
+
 
     def get_plugin_lo_block(self, element, error_line):
         name = element['memberName']
