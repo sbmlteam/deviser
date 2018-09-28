@@ -290,7 +290,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
 
     # function to write the data members
     def write_data_members(self, attributes):
-        names_written = ['mId', 'mName']
+        if global_variables.is_package:
+            names_written = ['mId', 'mName']
+        else:
+            names_written = ['mId']
         if self.is_plugin:
             names_written = []
         for i in range(0, len(attributes)):
