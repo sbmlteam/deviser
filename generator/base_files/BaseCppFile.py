@@ -323,6 +323,10 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['default'] = 'NULL'
                 if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
                     attributes[i]['used_child_name'] = strFunctions.singular(attributes[i]['xml_name'])
+                if attrib_name == strFunctions.lower_first(strFunctions.remove_prefix(self.name)):
+                    attributes[i]['recursive_child'] = True
+                    attributes[i]['attTypeCode'] = '{0} *'.format(name)
+                    attributes[i]['listOfClassName'] = name
             elif att_type == 'array':
                 attributes[i]['isArray'] = True
                 if attributes[i]['element'] == 'Integer' or attributes[i]['element'] == 'integer':

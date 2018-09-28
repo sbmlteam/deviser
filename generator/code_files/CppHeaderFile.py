@@ -245,20 +245,21 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                         include_lines += [include_string]
 
         for i in range(0, len(self.child_lo_elements)):
-            child = self.child_lo_elements[i]['attTypeCode']
-            if global_variables.is_package:
-                include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
-                if include_string not in include_lines:
-                    include_lines += [include_string]
-            else:
-                include_string = '<{0}/{1}.h>'.format(self.language, child)
-                if include_string not in include_lines:
-                    include_lines += [include_string]
-            if self.is_plugin:
-                child = self.child_lo_elements[i]['element']
-                include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
-                if include_string not in include_lines:
-                    include_lines += [include_string]
+            if not 'recursive_child' in self.child_lo_elements[i]:
+                child = self.child_lo_elements[i]['attTypeCode']
+                if global_variables.is_package:
+                    include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
+                else:
+                    include_string = '<{0}/{1}.h>'.format(self.language, child)
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
+                if self.is_plugin:
+                    child = self.child_lo_elements[i]['element']
+                    include_string = '<{0}/packages/{1}/{0}/{2}.h>'.format(self.language, pkg, child)
+                    if include_string not in include_lines:
+                        include_lines += [include_string]
 
         # if we are a list of we need the header of our child object
         if self.is_list_of:
@@ -917,6 +918,11 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.write_cpp_begin()
         self.write_general_includes()
         self.write_cppns_begin()
+        # add forward declaration of any listOfclass that uses itself
+        for element in self.child_lo_elements:
+            if 'recursive_child' in element:
+                self.write_line('class {0};'.format(element['listOfClassName']))
+                self.skip_line()
         self.write_class(self.baseClass, self.name, self.attributes)
         self.write_cppns_end()
         self.write_cpp_end()

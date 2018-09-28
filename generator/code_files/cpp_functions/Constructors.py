@@ -63,6 +63,7 @@ class Constructors():
 
         self.has_children = class_object['has_children']
         self.child_elements = class_object['child_elements']
+        self.child_lo_elements = class_object['child_lo_elements']
         self.overwrites_children = class_object['overwrites_children']
         if 'elementName' in class_object and class_object['elementName'] != '':
             self.xml_name = \
@@ -520,6 +521,17 @@ class Constructors():
                               '{0} = orig.{0}->{1}()'.format(member,
                                                              clone)]
             code.append(self.create_code_block('if', implementation))
+        for i in range(0, len(self.child_lo_elements)):
+            element = self.child_lo_elements[i]
+            if 'recursive_child' in element and element['recursive_child']:
+                member = element['memberName']
+                clone = 'clone'
+                if element['element'] == 'ASTNode':
+                    clone = 'deepCopy'
+                implementation = ['orig.{0} != NULL'.format(member),
+                                  '{0} = orig.{0}->{1}()'.format(member,
+                                                                 clone)]
+                code.append(self.create_code_block('if', implementation))
         if self.document:
             implementation = ['set{0}(this)'.format(global_variables.document_class)]
             code.append(dict({'code_type': 'line', 'code': implementation}))
@@ -739,10 +751,16 @@ class Constructors():
             if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif attrib['attType'] == 'lo_element':
-                constructor_args.append('{0} {1} '
-                                        '({2})'.format(sep,
-                                                      attrib['memberName'],
-                                                      parameters))
+                if 'recursive_child' in attrib and attrib['recursive_child']:
+                    constructor_args.append('{0} {1} '
+                                            '({2})'.format(sep,
+                                                          attrib['memberName'],
+                                                          'new {0} ({1})'.format(attrib['listOfClassName'], parameters)))
+                else:
+                    constructor_args.append('{0} {1} '
+                                            '({2})'.format(sep,
+                                                          attrib['memberName'],
+                                                          parameters))
                 sep = ','
             elif 'isVector' in attrib and attrib['isVector']:
                 constructor_args.append('{0} {1} '
@@ -770,13 +788,19 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
+            use_null = True
+            if attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
+                use_null = False
+            if 'recursive_child' in attrib and attrib['recursive_child']:
+                use_null = True
+
             if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
                 continue
             elif attrib['isArray']:
                 constructor_args.append('{0} {1} ( NULL )'
                                         .format(sep, attrib['memberName']))
                 sep = ','
-            elif attrib['type'] != 'element' and attrib['element'] != 'ASTNode':
+            elif not use_null:
                 constructor_args.append('{1} {0} ( orig.{0} )'
                                         .format(attrib['memberName'], sep))
                 sep = ','

@@ -89,6 +89,10 @@ class ListOfQueryFunctions():
             self.concretes = query.get_concretes(class_object['root'],
                                                  class_object['concrete'])
 
+        self.recursive_child = False
+        if 'recursive_child' in class_object:
+            self.recursive_child = class_object['recursive_child']
+
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
@@ -111,6 +115,8 @@ class ListOfQueryFunctions():
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
+        if self.abbrev_child == self.abbrev_parent:
+            self.abbrev_child = self.abbrev_parent + '1'
         self.ideq = 'IdEq'
         if not global_variables.is_package:
             self.ideq = strFunctions.prefix_name('IdEq')
@@ -197,8 +203,11 @@ class ListOfQueryFunctions():
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
                 if not self.document:
-                    implementation = ['return {0}.get'
-                                      '(n)'.format(self.class_object['memberName'])]
+                    symbol ='.'
+                    if self.recursive_child:
+                        symbol = '->'
+                    implementation = ['return {0}{1}get'
+                                      '(n)'.format(self.class_object['memberName'], symbol)]
                 else:
                     if not is_const:
                         implementation = ['return const_cast<{1}Error*>({0}.getError'
@@ -387,8 +396,11 @@ class ListOfQueryFunctions():
         return code
 
     def cpp_not_list_write_get_element_by_id(self):
-        implementation = ['return {0}.'
-                          'get(sid)'.format(self.class_object['memberName'])]
+        symbol ='.'
+        if self.recursive_child:
+            symbol = '->'
+        implementation = ['return {0}{1}'
+                          'get(sid)'.format(self.class_object['memberName'], symbol)]
         code = [self.create_code_block('line', implementation)]
         return code
 
@@ -621,7 +633,10 @@ class ListOfQueryFunctions():
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'cpp_not_list':
                 member = self.class_object['memberName']
-                implementation = ['return {0}.remove(n)'.format(member)]
+                symbol ='.'
+                if self.recursive_child:
+                    symbol = '->'
+                implementation = ['return {0}{1}remove(n)'.format(member, symbol)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 name = self.class_object['memberName']
@@ -726,7 +741,10 @@ class ListOfQueryFunctions():
                          '(item)'.format(self.object_child_name)]))
             elif self.status == 'cpp_not_list':
                 member = self.class_object['memberName']
-                implementation = ['return {0}.remove(sid)'.format(member)]
+                symbol ='.'
+                if self.recursive_child:
+                    symbol = '->'
+                implementation = ['return {0}{1}remove(sid)'.format(member, symbol)]
                 code = [self.create_code_block('line', implementation)]
             elif self.status == 'plugin':
                 name = self.class_object['memberName']
@@ -834,7 +852,10 @@ class ListOfQueryFunctions():
         member = ''
         if not self.is_list_of:
             member = self.class_object['memberName']
-            else_lines = ['return {0}.append({1})'.format(member, self.abbrev_child)]
+            symbol ='.'
+            if self.recursive_child:
+                symbol = '->'
+            else_lines = ['return {0}{2}append({1})'.format(member, self.abbrev_child, symbol)]
         else:
             else_lines = ['return append({0})'.format(self.abbrev_child)]
         this_object = query.get_class(self.object_child_name,
@@ -879,11 +900,14 @@ class ListOfQueryFunctions():
                 implementation.append('return '
                                       '{0}'.format(global_variables.ret_ns_mis))
             if not self.is_list_of and self.has_id:
+                symbol ='.'
+                if self.recursive_child:
+                    symbol = '->'
                 implementation.append('else if')
                 implementation.append('{0}->isSetId() '
-                                      '&& ({1}.get({0}->getId())) '
+                                      '&& ({1}{2}get({0}->getId())) '
                                       '!= NULL'.format(self.abbrev_child,
-                                                       member))
+                                                       member, symbol))
                 implementation.append('return '
                                       '{0}'.format(global_variables.ret_dup_id))
             implementation.append('else')
@@ -997,8 +1021,11 @@ class ListOfQueryFunctions():
                                       '({0})'.format(self.abbrev_child))
             else:
                 member = self.class_object['memberName']
-                implementation.append('{0}.appendAndOwn'
-                                      '({1})'.format(member, self.abbrev_child))
+                symbol ='.'
+                if self.recursive_child:
+                    symbol = '->'
+                implementation.append('{0}{2}appendAndOwn'
+                                      '({1})'.format(member, self.abbrev_child, symbol))
             code.append(self.create_code_block('if', implementation))
             implementation = ['return {0}'.format(self.abbrev_child)]
             code.append(self.create_code_block('line', implementation))
@@ -1107,8 +1134,11 @@ class ListOfQueryFunctions():
             implementation = ['return size()']
         elif self.is_cpp_api and not self.is_list_of:
             if not self.document:
-                implementation = ['return {0}.'
-                                  'size()'.format(self.class_object['memberName'])]
+                symbol ='.'
+                if self.recursive_child:
+                    symbol = '->'
+                implementation = ['return {0}{1}'
+                                  'size()'.format(self.class_object['memberName'], symbol)]
             elif parameter:
                 implementation = ['return getErrorLog()->'
                                   'getNumFailsWith{0}({1})'
@@ -1173,9 +1203,9 @@ class ListOfQueryFunctions():
             function = 'get{0}'.format(name_used)
             arguments = []
             if is_const:
-                return_type = 'const {0}*'.format(loname)
+                return_type = 'const {0}*'.format(loname) if not loname.endswith('*') else 'const {0}'.format(loname)
             else:
-                return_type = '{0}*'.format(loname)
+                return_type = '{0}*'.format(loname) if not loname.endswith('*') else '{0}'.format(loname)
         else:
             function = '{0}_get{1}'.format(self.class_name, name_used)
             arguments = ['{0}* {1}'.format(self.object_name,
@@ -1185,8 +1215,10 @@ class ListOfQueryFunctions():
             else:
                 return_type = '{0}ListOf_t*'.format(global_variables.prefix)
         if self.is_cpp_api:
-            implementation = ['return '
-                              '&{0}'.format(self.class_object['memberName'])]
+            symbol ='&'
+            if self.recursive_child:
+                symbol = ''
+            implementation = ['return {1}{0}'.format(self.class_object['memberName'], symbol)]
             code = [self.create_code_block('line', implementation)]
         else:
             implementation = ['return ({0} != NULL) ? {0}->get{1}() : '
