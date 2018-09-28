@@ -75,7 +75,7 @@
             <attribute name="clazz" required="true" type="string" xmlName="class" abstract="false"/>
             <attribute name="source" required="true" type="IDREF" abstract="false"/>
             <attribute name="target" required="true" type="IDREF" abstract="false"/>
-            <attribute name="glyph" required="false" type="element" element="Glyph" abstract="false"/>
+            <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
             <attribute name="start" required="true" type="element" element="Point" xmlName="start" abstract="false"/>
             <attribute name="next" required="false" type="inline_lo_element" element="Point" xmlName="next" abstract="false"/>
             <attribute name="end" required="true" type="element" element="Point" xmlName="end" abstract="false"/>
