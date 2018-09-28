@@ -572,6 +572,18 @@ class Constructors():
         # create the function implementation
         args = ['&rhs != this'] + self.write_assignment_args(self)
         clone = 'clone'
+        for element in self.child_lo_elements:
+            if 'recursive_child' in element and element['recursive_child']:
+                member = element['memberName']
+                args += ['delete {0}'.format(member)]
+                clone = 'clone'
+                if element['element'] == 'ASTNode':
+                    clone = 'deepCopy'
+                implementation = ['rhs.{0} != NULL'.format(member),
+                                  '{0} = rhs.{0}->{1}()'.format(member,
+                                                                clone),
+                                  'else', '{0} = NULL'.format(member)]
+                args += [self.create_code_block('if_else', implementation)]
         for i in range(0, len(self.child_elements)):
             element = self.child_elements[i]
             member = element['memberName']
@@ -694,6 +706,11 @@ class Constructors():
                 member = element['memberName']
                 implementation.append('delete {0}'.format(member))
                 implementation.append('{0} = NULL'.format(member))
+            for element in self.child_lo_elements:
+                if 'recursive_child' in element and element['recursive_child']:
+                    member = element['memberName']
+                    implementation.append('delete {0}'.format(member))
+                    implementation.append('{0} = NULL'.format(member))
             if len(implementation) > 0:
                 code.append(self.create_code_block('line', implementation))
         else:
@@ -833,7 +850,8 @@ class Constructors():
                 constructor_args.append('{0} = NULL'.format(member))
                 constructor_args.append('set{0}(rhs.{1}, '
                                         'rhs.{1}Length)'.format(length, member))
-            elif attrib['type'] != 'element':
+            # straight forward assign to rhs value list ofs that are not recursive
+            elif self.assign_direct(attrib):  ## attrib['type'] != 'element':
                 constructor_args.append('{0} = rhs.{0}'
                                         .format(attrib['memberName']))
                 if attrib['isNumber'] or attrib['attType'] == 'boolean':
@@ -842,6 +860,18 @@ class Constructors():
         if self.overwrites_children:
             constructor_args.append('mElementName = rhs.mElementName')
         return constructor_args
+
+    def assign_direct(self, attrib):
+        if attrib['type'] == 'lo_element' or attrib['type'] == 'inline_lo_element':
+            if 'recursive_child' in attrib and attrib['recursive_child']:
+                direct = False
+            else:
+                direct = True
+        elif attrib['type'] != 'element':
+            direct = True
+        else:
+            direct = False
+        return direct
 
     def write_set_array(self, index):
         name = self.attributes[index]['capAttName']

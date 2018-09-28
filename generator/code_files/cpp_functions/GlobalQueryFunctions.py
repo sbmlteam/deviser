@@ -152,9 +152,11 @@ class GlobalQueryFunctions():
                     line = ['{0}.getId() == id'.format(child['memberName']),
                             'return &{0}'.format(child['memberName'])]
                     code.append(self.create_code_block('if', line))
-
-                line = [' obj = {0}.getElementBySId('
-                        'id)'.format(child['memberName'])]
+                symbol ='.'
+                if 'recursive_child' in child and child['recursive_child']:
+                    symbol = '->'
+                line = [' obj = {0}{1}getElementBySId('
+                        'id)'.format(child['memberName'], symbol)]
                 code.append(self.create_code_block('line', line))
                 code.append(if_code)
 

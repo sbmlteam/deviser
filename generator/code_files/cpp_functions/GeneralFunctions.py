@@ -850,8 +850,11 @@ class GeneralFunctions():
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{0}.{1}'
-                                  '(d)'.format(att['memberName'], function)]
+                symbol ='.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    symbol = '->'
+                implementation = ['{0}{2}{1}'
+                                  '(d)'.format(att['memberName'], function, symbol)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
 
@@ -1078,8 +1081,11 @@ class GeneralFunctions():
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{0}.connectToParent'
-                                  '(this)'.format(att['memberName'])]
+                symbol ='.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    symbol = '->'
+                implementation = ['{0}{1}connectToParent'
+                                  '(this)'.format(att['memberName'], symbol)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
         else:
@@ -1135,8 +1141,11 @@ class GeneralFunctions():
                 code.append(self.create_code_block('if', implementation))
         for i in range(0, len(self.child_lo_elements)):
             att = self.child_lo_elements[i]
-            implementation = ['{0}.connectToParent'
-                              '(base)'.format(att['memberName'])]
+            symbol ='.'
+            if 'recursive_child' in att and att['recursive_child']:
+                symbol = '->'
+            implementation = ['{0}{1}connectToParent'
+                              '(base)'.format(att['memberName'], symbol)]
             code.append(dict({'code_type': 'line',
                               'code': implementation}))
 

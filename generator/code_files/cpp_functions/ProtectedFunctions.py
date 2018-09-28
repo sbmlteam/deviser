@@ -491,8 +491,11 @@ class ProtectedFunctions():
         return implementation
 
     def get_inline_lo_block(self, element):
+        symbol ='.'
+        if 'recursive_child' in element and element['recursive_child']:
+            symbol = '->'
         name = element['name']
-        line = 'obj = {0}.createObject(stream)'.format(element['memberName'])
+        line = 'obj = {0}{1}createObject(stream)'.format(element['memberName'], symbol)
         implementation = ['name == \"{0}\"'.format(name),
                           line]
         return implementation
