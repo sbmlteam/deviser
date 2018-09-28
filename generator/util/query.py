@@ -128,10 +128,9 @@ def get_inline_parents(class_object):
     else:
         name = class_object['name']
     for element in class_object['root']['baseElements']:
-        if element['name'] != name:
-            for attrib in element['attribs']:
-                if attrib['element'] == name:
-                    parents.append(element['name'])
+        for attrib in element['attribs']:
+            if attrib['element'] == name and element['name'] not in parents:
+                parents.append(element['name'])
     return parents
 
 # return the parent class of this class

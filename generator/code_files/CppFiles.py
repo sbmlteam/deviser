@@ -87,6 +87,7 @@ class CppFiles():
                 len(self.class_object['lo_class_name']) > 0:
             lo_name = self.class_object['lo_class_name']
         descrip = copy.deepcopy(self.class_object)
+        descrip['root'] =copy.deepcopy(self.class_object['root'])
         descrip['is_list_of'] = True
         descrip['attribs'] = self.class_object['lo_attribs']
         descrip['child_base_class'] = self.class_object['baseClass']
