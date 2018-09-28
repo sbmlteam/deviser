@@ -59,7 +59,7 @@
             <attribute name="entity" required="false" type="element" element="Entity" abstract="false"/>
             <attribute name="bbox" required="true" type="element" element="BBox" abstract="false"/>
             <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" xmlName="glyph" abstract="false"/>
-            <attribute name="ports" required="false" type="inline_lo_element" element="Port" xmlName="port" abstract="false"/>
+            <attribute name="port" required="false" type="inline_lo_element" element="Port" xmlName="port" abstract="false"/>
           </attributes>
         </element>
         <element name="Port" typeCode="SBGN_SBGNML_PORT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="port">
