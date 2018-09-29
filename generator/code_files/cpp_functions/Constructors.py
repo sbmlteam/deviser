@@ -197,8 +197,11 @@ class Constructors():
                                   'level, '
                                   'version))'.format(global_variables.prefix)]
                 if self.document:
-                    implementation.append('setLevel(level)')
-                    implementation.append('setVersion(version)')
+                    for attrib in self.attributes:
+                        if attrib['name'] == 'level':
+                            implementation.append('setLevel(level)')
+                        elif attrib['name'] == 'version':
+                            implementation.append('setVersion(version)')
                     implementation.append('set{0}Document(this)'.format(global_variables.prefix))
                 if self.has_children:
                     implementation.append('connectToChild()')
@@ -365,9 +368,11 @@ class Constructors():
         implementation = ['setElementNamespace({0}'
                           '->getURI())'.format(ns)]
         if self.document:
-            if global_variables.has_level_version:
-                implementation.append('setLevel({0}->getLevel())'.format(ns))
-                implementation.append('setVersion({0}->getVersion())'.format(ns))
+            for attrib in self.attributes:
+                if attrib['name'] == 'level':
+                    implementation.append('setLevel({0}->getLevel())'.format(ns))
+                elif attrib['name'] == 'version':
+                    implementation.append('setVersion({0}->getVersion())'.format(ns))
             implementation.append('set{0}(this)'.format(global_variables.document_class))
 
         if self.has_children:
