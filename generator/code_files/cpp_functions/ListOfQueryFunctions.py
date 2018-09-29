@@ -940,7 +940,7 @@ class ListOfQueryFunctions():
         if len(self.concretes) == 0 and index == 0:
             child = self.object_child_name
             abbrev_child = self.abbrev_child
-            child_name = self.child_name
+            child_name = self.used_child_name
         else:
             if index == 0:
                 return
@@ -978,8 +978,9 @@ class ListOfQueryFunctions():
             remove_prefix = True
             prefix_to_remove = strFunctions.upper_first(self.package)
         used_c_name = strFunctions.remove_prefix(child_name, False, remove_prefix, prefix_to_remove)
+        used_cpp_name = strFunctions.remove_prefix(child_name, False, remove_prefix, prefix_to_remove)
         if self.is_cpp_api:
-            function = 'create{0}'.format(strFunctions.remove_prefix(child, False, remove_prefix, prefix_to_remove))
+            function = 'create{0}'.format(used_cpp_name)
         else:
             function = '{0}_create{1}'.format(self.class_name, used_c_name)
             arguments.append('{0}* {1}'.format(self.object_name,
@@ -1020,6 +1021,8 @@ class ListOfQueryFunctions():
                 implementation.append('appendAndOwn'
                                       '({0})'.format(self.abbrev_child))
             else:
+                if used_cpp_name != strFunctions.remove_prefix(self.child_name):
+                    implementation.append('{0}->setElementName(\"{1}\")'.format(self.abbrev_child, strFunctions.lower_first(used_cpp_name)))
                 member = self.class_object['memberName']
                 symbol ='.'
                 if self.recursive_child:
