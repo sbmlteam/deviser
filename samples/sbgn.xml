@@ -13,6 +13,7 @@
           <attributes>
             <attribute name="x" required="true" type="double" abstract="false"/>
             <attribute name="y" required="true" type="double" abstract="false"/>
+            <attribute name="point" required="false" type="inline_lo_element" element="Point" xmlName="point" abstract="false"/>
           </attributes>
         </element>
         <element name="BBox" typeCode="SBGN_SBGNML_BBOX" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="bbox">
