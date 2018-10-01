@@ -1,0 +1,13 @@
+  public:
+
+    std::string getRenderInformationAsString() const;
+
+    LIBSBML_CPP_NAMESPACE_QUALIFIER LocalRenderInformation* 
+                                    getRenderInformation() const;
+
+    void setRenderInformation(
+         const LIBSBML_CPP_NAMESPACE_QUALIFIER LocalRenderInformation *info);
+
+  protected:
+
+    virtual bool readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);

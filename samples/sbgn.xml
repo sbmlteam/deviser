@@ -31,7 +31,7 @@
             <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
           </attributes>
         </element>
-        <element name="Map" typeCode="SBGN_SBGNML_MAP" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="map">
+        <element name="Map" typeCode="SBGN_SBGNML_MAP" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="map" additionalDecls="sbgn_map.h.txt" additionalDefs="sbgn_map.cpp.txt">
           <attributes>
             <attribute name="id" required="false" type="ID" abstract="false"/>
             <attribute name="language" required="true" type="enum" element="Language" abstract="false"/>
