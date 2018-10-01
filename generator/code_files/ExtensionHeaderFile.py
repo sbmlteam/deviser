@@ -458,6 +458,9 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_fwd_file(self):
         BaseCppFile.BaseCppFile.write_file(self)
         self.write_defn_begin()
+        if not global_variables.is_package:
+            self.write_line('#include <{0}/common/lib{0}-namespace.h>'.format(global_variables.language))
+            self.skip_line()
         self.write_docs_fwd()
         self.write_class_or_struct()
         self.write_cppns_begin()
