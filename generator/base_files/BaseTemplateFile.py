@@ -284,13 +284,23 @@ class BaseTemplateFile:
         i += 1
         return i
 
-    @staticmethod
-    def write_lines(block):
+    def write_lines(self, block):
         if block == 'package' and not global_variables.is_package:
             return False
-        if block == 'has_level_version' and not global_variables.has_level_version:
-            return False
+        if block == 'has_level_version':
+            if not global_variables.has_level_version:
+                return False
+            elif not self.doc_has_level_version():
+                return False
         return True
+
+    def doc_has_level_version(self):
+        for element in self.elements:
+            if element['document']:
+                for attrib in element['attribs']:
+                    if attrib['name'] == 'level':
+                        return True
+        return False
 
     @staticmethod
     def print_omex_hack(fileout, lines, i):
