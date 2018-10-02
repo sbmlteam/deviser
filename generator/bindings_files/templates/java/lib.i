@@ -1,0 +1,2 @@
+
+%include "../swig/libsbml.i"

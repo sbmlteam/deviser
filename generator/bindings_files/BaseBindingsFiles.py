@@ -137,16 +137,31 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
             fileout.skip_line(2)
             self.copy_file_contents(fileout, filein)
             fileout.close_file()
+        elif self.binding == 'java':
+            fileout = BaseCMakeFile.BaseCMakeFile('compile-native-files')
+            filein = '{0}{1}native.cmake'.format(self.binding, os.sep)
+            if self.verbose:
+                print('Writing file {0}'.format(fileout.filename))
+            fileout.add_file_header()
+            fileout.skip_line(2)
+            self.copy_file_contents(fileout, filein)
+            fileout.close_file()
 
     def write_assembly_file(self):
-        if not self.binding == 'csharp':
-            return
-        fileout = BaseFile.BaseFile('AssemblyInfo.cs', 'in')
-        filein = '{0}{1}assembly.in'.format(self.binding, os.sep)
-        if self.verbose:
-            print('Writing file {0}'.format(fileout.filename))
-        self.copy_file_contents(fileout, filein)
-        fileout.close_file()
+        if self.binding == 'csharp':
+            fileout = BaseFile.BaseFile('AssemblyInfo.cs', 'in')
+            filein = '{0}{1}assembly.in'.format(self.binding, os.sep)
+            if self.verbose:
+                print('Writing file {0}'.format(fileout.filename))
+            self.copy_file_contents(fileout, filein)
+            fileout.close_file()
+        elif self.binding == 'java':
+            fileout = BaseFile.BaseFile('Manifest.txt', 'in')
+            filein = '{0}{1}Manifest.txt.in'.format(self.binding, os.sep)
+            if self.verbose:
+                print('Writing file {0}'.format(fileout.filename))
+            self.copy_file_contents(fileout, filein)
+            fileout.close_file()
 
     ###########################################################
     def print_includes(self, fileout):

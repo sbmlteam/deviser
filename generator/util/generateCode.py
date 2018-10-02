@@ -213,11 +213,11 @@ def generate_bindings_files_for_other(name, ob):
     ruby_dir = '{0}{1}src{1}bindings{1}ruby'.format(name, os.sep)
     swig_dir = '{0}{1}src{1}bindings{1}swig'.format(name, os.sep)
 
-    # os.chdir(java_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'java', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
-    #
+    os.chdir(java_dir)
+    bind = BindingsFiles.BindingFiles(ob, 'java', True)
+    bind.write_files()
+    os.chdir(this_dir)
+
     # os.chdir(javascript_dir)
     # bind = BindingsFiles.BindingFiles(ob, 'javascript', True)
     # bind.write_files()
