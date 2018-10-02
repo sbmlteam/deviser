@@ -162,6 +162,19 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
                 print('Writing file {0}'.format(fileout.filename))
             self.copy_file_contents(fileout, filein)
             fileout.close_file()
+        elif self.binding == 'python':
+            fileout = BaseFile.BaseFile('local-contrib', 'i')
+            filein = '{0}{1}local-contrib.i'.format(self.binding, os.sep)
+            if self.verbose:
+                print('Writing file {0}'.format(fileout.filename))
+            self.copy_file_contents(fileout, filein)
+            fileout.close_file()
+            fileout = BaseFile.BaseFile('add_version', 'cmake')
+            filein = '{0}{1}add_version.cmake'.format(self.binding, os.sep)
+            if self.verbose:
+                print('Writing file {0}'.format(fileout.filename))
+            self.copy_file_contents(fileout, filein)
+            fileout.close_file()
 
     ###########################################################
     def print_includes(self, fileout):
@@ -181,31 +194,56 @@ class BaseBindingsFiles(BaseTemplateFile.BaseTemplateFile):
 
     def print_derived_types(self, fileout):
         libname = global_variables.library_name.lower()
-        for element in self.elements:
-            if not element['name'].endswith('Document'):
-                if not 'document' in element or not element['document']:
-                    name = strFunctions.prefix_name(element['name'])
-                    fileout.copy_line_verbatim('    case (int) {0}.{1}:'
-                                               '\n'.format(libname,
-                                                           element['typecode']))
-                    fileout.copy_line_verbatim('      return new {0}(cPtr, owner)'
-                                               ';\n'.format(name))
-                    fileout.skip_line()
+        if self.binding == 'java' or self.binding == 'csharp':
+            for element in self.elements:
+                if not element['name'].endswith('Document'):
+                    if not 'document' in element or not element['document']:
+                        name = strFunctions.prefix_name(element['name'])
+                        fileout.copy_line_verbatim('    case (int) {0}.{1}:'
+                                                   '\n'.format(libname,
+                                                               element['typecode']))
+                        fileout.copy_line_verbatim('      return new {0}(cPtr, owner)'
+                                                   ';\n'.format(name))
+                        fileout.skip_line()
+        else:
+            for element in self.elements:
+                if not element['name'].endswith('Document'):
+                    if not 'document' in element or not element['document']:
+                        name = strFunctions.prefix_name(element['name'])
+                        fileout.copy_line_verbatim('    case {0}:'
+                                                   '\n'.format(element['typecode']))
+                        fileout.copy_line_verbatim('      return SWIGTYPE_p_{0}'
+                                                   ';\n'.format(name))
+                        fileout.skip_line()
 
     def print_derived_listof_types(self, fileout):
-        for element in self.elements:
-            if not element['name'].endswith('Document') and \
-                    element['hasListOf']:
-                name = strFunctions.lower_list_of_name_no_prefix(
-                    element['name'])
-                loname = strFunctions.prefix_name(
-                    strFunctions.list_of_name(element['name']))
-                fileout.copy_line_verbatim('      else if (name == \"{0}\")\n'
-                                           ''.format(name))
-                fileout.copy_line_verbatim('      {\n')
-                fileout.copy_line_verbatim('         return new {0}(cPtr, '
-                                           'owner);\n'.format(loname))
-                fileout.copy_line_verbatim('      }\n')
+        if self.binding == 'java' or self.binding == 'csharp':
+            for element in self.elements:
+                if not element['name'].endswith('Document') and \
+                        element['hasListOf']:
+                    name = strFunctions.lower_list_of_name_no_prefix(
+                        element['name'])
+                    loname = strFunctions.prefix_name(
+                        strFunctions.list_of_name(element['name']))
+                    fileout.copy_line_verbatim('      else if (name == \"{0}\")\n'
+                                               ''.format(name))
+                    fileout.copy_line_verbatim('      {\n')
+                    fileout.copy_line_verbatim('         return new {0}(cPtr, '
+                                               'owner);\n'.format(loname))
+                    fileout.copy_line_verbatim('      }\n')
+        else:
+            for element in self.elements:
+                if not element['name'].endswith('Document') and \
+                        element['hasListOf']:
+                    name = strFunctions.lower_list_of_name_no_prefix(
+                        element['name'])
+                    loname = strFunctions.prefix_name(
+                        strFunctions.list_of_name(element['name']))
+                    fileout.copy_line_verbatim('      else if (name == \"{0}\")\n'
+                                               ''.format(name))
+                    fileout.copy_line_verbatim('      {\n')
+                    fileout.copy_line_verbatim('         return SWIGTYPE_p_{0};\n'.format(loname))
+                    fileout.copy_line_verbatim('      }\n')
 
     def print_for_all_classes(self, fileout, line, classes=True, lists=True):
         l_len = len(line)

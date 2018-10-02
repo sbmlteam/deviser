@@ -233,11 +233,11 @@ def generate_bindings_files_for_other(name, ob):
     # bind.write_files()
     # os.chdir(this_dir)
     #
-    # os.chdir(python_dir)
-    # bind = BindingsFiles.BindingFiles(ob, 'python', True)
-    # bind.write_files()
-    # os.chdir(this_dir)
-    #
+    os.chdir(python_dir)
+    bind = BindingsFiles.BindingFiles(ob, 'python', True)
+    bind.write_files()
+    os.chdir(this_dir)
+
     # os.chdir(r_dir)
     # bind = BindingsFiles.BindingFiles(ob, 'r', True)
     # bind.write_files()
