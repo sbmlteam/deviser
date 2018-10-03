@@ -232,6 +232,8 @@ class BaseTemplateFile:
         line = re.sub('<SPEC_LEVEL>', '{0}'.format(global_variables.namespaces[-1]['level']), line)
         line = re.sub('<SPEC_VERSION>', '{0}'.format(global_variables.namespaces[-1]['version']), line)
         line = re.sub('<Annotation>', global_variables.annot_element, line)
+        line = re.sub('<annotation_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.annot_element)), line)
+        line = re.sub('<NS>', 'LIBSBML_CPP_NAMESPACE_QUALIFIER ', line)
         return line
 
     @staticmethod

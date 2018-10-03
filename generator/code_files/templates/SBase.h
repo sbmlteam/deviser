@@ -4,6 +4,9 @@
 
 #include <sbml/common/extern.h>
 #include <sbml/common/libsbml-namespace.h>
+<verbatim>
+#include <sbml/common/libsbml-namespace.h>
+</verbatim>
 #include <sbml/common/sbmlfwd.h>
 #include <sbml/SBMLTypeCodes.h>
 #include <sbml/SBMLNamespaces.h>
@@ -206,7 +209,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  XMLNode* getNotes();
+  <NS>XMLNode* getNotes();
 
 
   /**
@@ -232,7 +235,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  const XMLNode* getNotes() const;
+  const <NS>XMLNode* getNotes() const;
 
 
   /**
@@ -284,7 +287,7 @@ public:
 
 
   /**
-   * Returns the content of the "annotation" subelement of this object as
+   * Returns the content of the <annotation_variable> subelement of this object as
    * a tree of XMLNode objects.
    *
    * The annotations returned by this method will be in XML form.  LibSBML
@@ -303,11 +306,11 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  XMLNode* get<Annotation> ();
+  <NS>XMLNode* get<Annotation> ();
 
 
   /**
-   * Returns the content of the "annotation" subelement of this object as
+   * Returns the content of the <annotation_variable> subelement of this object as
    * a tree of XMLNode objects.
    *
    * The annotations returned by this method will be in XML form.  LibSBML
@@ -326,11 +329,11 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  const XMLNode* get<Annotation> () const;
+  const <NS>XMLNode* get<Annotation> () const;
 
 
   /**
-   * Returns the content of the "annotation" subelement of this object as a
+   * Returns the content of the <annotation_variable> subelement of this object as a
    * character string.
    *
    * The annotations returned by this method will be in string form.  See the
@@ -350,7 +353,7 @@ public:
 
 
   /**
-   * Returns the content of the "annotation" subelement of this object as a
+   * Returns the content of the <annotation_variable> subelement of this object as a
    * character string.
    *
    * The annotations returned by this method will be in string form.  See the
@@ -383,7 +386,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual const XMLNamespaces* getNamespaces() const ;
+  virtual const <NS>XMLNamespaces* getNamespaces() const ;
 
 
   /**
@@ -400,7 +403,7 @@ public:
    * @see getLevel()
    * @see getVersion()
    */
-  virtual XMLNamespaces* getNamespaces();
+  virtual <NS>XMLNamespaces* getNamespaces();
 
 
   /**
@@ -654,13 +657,13 @@ public:
 
   /**
    * Predicate returning @c true if this
-   * object's "annotation" subelement exists and has content.
+   * object's <annotation_variable> subelement exists and has content.
    *
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a target="_blank"
+   * <annotation_variable>.  The element's content type is <a target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
@@ -670,7 +673,7 @@ public:
    * the data as well as help reduce conflicts between annotations added by
    * different tools.  Please see the SBML_Lang specifications for more details.
    *
-   * @return @c true if a "annotation" subelement exists, @c false
+   * @return @c true if a <annotation_variable> subelement exists, @c false
    * otherwise.
    * 
    * @see get<Annotation>()
@@ -715,16 +718,16 @@ public:
 
 
   /**
-   * Sets the value of the "annotation" subelement of this SBML_Lang object.
+   * Sets the value of the <annotation_variable> subelement of this SBML_Lang object.
    *
    * The content of @p annotation is copied, and any previous content of
-   * this object's "annotation" subelement is deleted.
+   * this object's <annotation_variable> subelement is deleted.
    * 
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a target="_blank"
+   * <annotation_variable>.  The element's content type is <a target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
@@ -735,7 +738,7 @@ public:
    * different tools.  Please see the SBML_Lang specifications for more details.
    *
    * Call this method will result in any existing content of the
-   * "annotation" subelement to be discarded.  Unless you have taken steps
+   * <annotation_variable> subelement to be discarded.  Unless you have taken steps
    * to first copy and reconstitute any existing annotations into the @p
    * annotation that is about to be assigned, it is likely that performing
    * such wholesale replacement is unfriendly towards other software
@@ -744,7 +747,7 @@ public:
    * SBase::append<Annotation>(const std::string& annotation).
    *
    * @param annotation an XML structure that is to be used as the new content
-   * of the "annotation" subelement of this object
+   * of the <annotation_variable> subelement of this object
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -757,20 +760,20 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  virtual int set<Annotation> (XMLNode* annotation);
+  virtual int set<Annotation> (<NS>XMLNode* annotation);
 
 
   /**
-   * Sets the value of the "annotation" subelement of this SBML_Lang object.
+   * Sets the value of the <annotation_variable> subelement of this SBML_Lang object.
    *
    * The content of @p annotation is copied, and any previous content of
-   * this object's "annotation" subelement is deleted.
+   * this object's <annotation_variable> subelement is deleted.
    * 
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a target="_blank"
+   * <annotation_variable>.  The element's content type is <a target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
@@ -781,7 +784,7 @@ public:
    * different tools.  Please see the SBML_Lang specifications for more details.
    *
    * Call this method will result in any existing content of the
-   * "annotation" subelement to be discarded.  Unless you have taken steps
+   * <annotation_variable> subelement to be discarded.  Unless you have taken steps
    * to first copy and reconstitute any existing annotations into the @p
    * annotation that is about to be assigned, it is likely that performing
    * such wholesale replacement is unfriendly towards other software
@@ -790,7 +793,7 @@ public:
    * SBase::append<Annotation>(const std::string& annotation).
    *
    * @param annotation an XML string that is to be used as the content
-   * of the "annotation" subelement of this object
+   * of the <annotation_variable> subelement of this object
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -808,14 +811,14 @@ public:
 
 
   /**
-   * Appends the given @p annotation to the "annotation" subelement of this
+   * Appends the given @p annotation to the <annotation_variable> subelement of this
    * object.
    * 
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a
+   * <annotation_variable>.  The element's content type is <a
    * target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type "any"</a>,
    * allowing essentially arbitrary well-formed XML data content.
@@ -831,7 +834,7 @@ public:
    * own data.
    *
    * @param annotation an XML structure that is to be copied and appended
-   * to the content of the "annotation" subelement of this object
+   * to the content of the <annotation_variable> subelement of this object
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -845,18 +848,18 @@ public:
    * @see append<Annotation>(const std::string& annotation)
    * @see unset<Annotation>()
    */
-  virtual int append<Annotation> (const XMLNode* annotation);
+  virtual int append<Annotation> (const <NS>XMLNode* annotation);
 
 
   /**
-   * Appends the given @p annotation to the "annotation" subelement of this
+   * Appends the given @p annotation to the <annotation_variable> subelement of this
    * object.
    *
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a
+   * <annotation_variable>.  The element's content type is <a
    * target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type "any"</a>,
    * allowing essentially arbitrary well-formed XML data content.
@@ -872,7 +875,7 @@ public:
    * own data.
    *
    * @param annotation an XML string that is to be copied and appended
-   * to the content of the "annotation" subelement of this object
+   * to the content of the <annotation_variable> subelement of this object
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -890,7 +893,7 @@ public:
 
 
   /**
-   * Removes the top-level element within the "annotation" subelement of this
+   * Removes the top-level element within the <annotation_variable> subelement of this
    * SBML_Lang object with the given name and optional URI.
    *
    * SBML_Lang places a few restrictions on the organization of the content of
@@ -921,7 +924,7 @@ public:
 
 
   /**
-   * Replaces the given top-level element within the "annotation"
+   * Replaces the given top-level element within the <annotation_variable>
    * subelement of this SBML_Lang object and with the annotation element supplied.
    *
    * SBML_Lang places a few restrictions on the organization of the content of
@@ -946,11 +949,11 @@ public:
    * @see removeTopLevel<Annotation>Element(const std::string elementName, const std::string elementURI)
    * @see replaceTopLevel<Annotation>Element(const std::string&)
    */
-  int replaceTopLevel<Annotation>Element(const XMLNode* annotation);
+  int replaceTopLevel<Annotation>Element(const <NS>XMLNode* annotation);
 
 
   /**
-   * Replaces the given top-level element within the "annotation"
+   * Replaces the given top-level element within the <annotation_variable>
    * subelement of this SBML_Lang object and with the annotation element supplied.
    *
    * SBML_Lang places a few restrictions on the organization of the content of
@@ -1020,7 +1023,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int setNotes(const XMLNode* notes);
+  int setNotes(const <NS>XMLNode* notes);
 
 
   /**
@@ -1117,7 +1120,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int appendNotes(const XMLNode* notes);
+  int appendNotes(const <NS>XMLNode* notes);
 
 
   /**
@@ -1228,7 +1231,7 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setNamespaces(XMLNamespaces* xmlns);
+  int setNamespaces(<NS>XMLNamespaces* xmlns);
 
 
   /**
@@ -1285,13 +1288,13 @@ public:
 
 
   /**
-   * Unsets the value of the "annotation" subelement of this SBML_Lang object.
+   * Unsets the value of the <annotation_variable> subelement of this SBML_Lang object.
    *
    * Whereas the SBase "notes" subelement is a container for content to be
-   * shown directly to humans, the "annotation" element is a container for
+   * shown directly to humans, the <annotation_variable> element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SBase can have its own value for
-   * "annotation".  The element's content type is <a target="_blank"
+   * <annotation_variable>.  The element's content type is <a target="_blank"
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
@@ -1525,9 +1528,9 @@ public:
 
   /** @cond doxygenLibsbmlInternal */
   /**
-   * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.
+   * Reads (initializes) this SBML_Lang object by reading from <XMLInputStream.
    */
-  void read (XMLInputStream& stream);
+  void read (<NS>XMLInputStream& stream);
   /** @endcond */
 
 
@@ -1535,7 +1538,7 @@ public:
   /**
    * Writes (serializes) this SBML_Lang object by writing it to XMLOutputStream.
    */
-  virtual void write (XMLOutputStream& stream) const;
+  virtual void write (<NS>XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1551,7 +1554,7 @@ public:
    *   ...
    * </pre>@endif@~
    */
-  virtual void writeElements (XMLOutputStream& stream) const;
+  virtual void writeElements (<NS>XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -1769,7 +1772,7 @@ protected:
    * @return the SBML_Lang object corresponding to next XMLToken in the
    * XMLInputStream or @c NULL if the token was not recognized.
    */
-  virtual SBase* createObject (XMLInputStream& stream);
+  virtual SBase* createObject (<NS>XMLInputStream& stream);
 
 
   /**
@@ -1786,7 +1789,7 @@ protected:
    * @return @c true if the level, version and namespace values of this 
    * SBML_Lang object correspond to a valid set of values, @c false otherwise.
    */
-  bool hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns);
+  bool hasValidLevelVersionNamespaceCombination(int typecode, <NS>XMLNamespaces *xmlns);
 
 
   /**
@@ -1795,7 +1798,7 @@ protected:
    *
    * @return true if the subclass read from the stream, false otherwise.
    */
-  virtual bool readOtherXML (XMLInputStream& stream);
+  virtual bool readOtherXML (<NS>XMLInputStream& stream);
 
 
   /**
@@ -1865,8 +1868,8 @@ protected:
    * XMLAttributes set into their specific fields.  Be sure to call your
    * parents implementation of this method as well.
    */
-  virtual void readAttributes (const XMLAttributes& attributes, 
-                               const ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes (const <NS>XMLAttributes& attributes, 
+                               const <NS>ExpectedAttributes& expectedAttributes);
 
 
   /**
@@ -1883,7 +1886,7 @@ protected:
    * Be sure to implement wirteXMLNS() function to write xmlns attributes.
    *
    */
-  virtual void writeAttributes (XMLOutputStream& stream) const;
+  virtual void writeAttributes (<NS>XMLOutputStream& stream) const;
 
 
   /**
@@ -1892,7 +1895,7 @@ protected:
    * (if any) to the XMLOutputStream. 
    *
    */
-  virtual void writeXMLNS (XMLOutputStream& stream) const;
+  virtual void writeXMLNS (<NS>XMLOutputStream& stream) const;
 
 
   /**
@@ -1906,7 +1909,7 @@ protected:
    * Checks that the given default namespace in the given element is valid.
    * If the given default namespace is not valid, an error is logged.
    */
-  void checkDefaultNamespace(const XMLNamespaces* xmlns, 
+  void checkDefaultNamespace(const <NS>XMLNamespaces* xmlns, 
     const std::string& elementName, const std::string& prefix = "");
 
   /**
@@ -1921,13 +1924,13 @@ protected:
    * If the xhtml does not conform to the specification of valid xhtml within
    * an sbml document, an error is logged.
    */
-  void checkXHTML(const XMLNode *);
+  void checkXHTML(const <NS>XMLNode *);
 
 
   /**
    * Checks that the math ml ns has been declared
    */
-  const std::string checkMathMLNamespace(const XMLToken elem);
+  const std::string checkMathMLNamespace(const <NS>XMLToken elem);
 
    /**
    * Sets the XML namespace to which this element belongs to.
@@ -1981,8 +1984,8 @@ protected:
 
   std::string     mMetaId;
   std::string     mId;
-  XMLNode*        mNotes;
-  XMLNode*        m<Annotation>;
+  <NS>XMLNode*        mNotes;
+  <NS>XMLNode*        m<Annotation>;
   SBMLDocument*   mSBML;
   SBMLNamespaces* mSBMLNamespaces;
   void*           mUserData;
@@ -2023,7 +2026,7 @@ private:
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this SBML_Lang (XML) element.
    */
-  void setSBaseFields (const XMLToken& element);
+  void setSBaseFields (const <NS>XMLToken& element);
 
 
   /**
@@ -2031,7 +2034,7 @@ private:
    *
    * @return true if read an <annotation> element from the stream
    */
-  bool read<Annotation> (XMLInputStream& stream);
+  bool read<Annotation> (<NS>XMLInputStream& stream);
 
 
   /**
@@ -2039,7 +2042,7 @@ private:
    *
    * @return true if read a <notes> element from the stream
    */
-  bool readNotes (XMLInputStream& stream);
+  bool readNotes (<NS>XMLInputStream& stream);
 
 
   /** @endcond */
@@ -2254,11 +2257,11 @@ SBase_isSetNotes (const SBase_t *sb);
 
 /**
  * Predicate returning nonzero true or false depending on whether the given
- * structure's "annotation" subelement is set.
+ * structure's <annotation_variable> subelement is set.
  *
  * @param sb the SBase_t structure to query
  *
- * @return nonzero (for true) if the "annotation" subelement of this SBML_Lang structure
+ * @return nonzero (for true) if the <annotation_variable> subelement of this SBML_Lang structure
  * is set, zero (for false) otherwise.
  *
  * @memberof SBase_t
@@ -2278,7 +2281,7 @@ SBase_isSet<Annotation> (const SBase_t *sb);
  * only uses XML ID for the "metaid" attribute, callers should be careful
  * if they use XML ID's in XML portions of a model that are not defined
  * by SBML_Lang, such as in the application-specific content of the
- * "annotation" subelement.
+ * <annotation_variable> subelement.
  *
  * @param sb the SBase_t structure
  *
@@ -2505,7 +2508,7 @@ SBase_unsetNotes (SBase_t *sb);
 
 
 /**
- * Unsets the "annotation" subelement of the given structure.
+ * Unsets the <annotation_variable> subelement of the given structure.
  *
  * @param sb the SBase_t structure
  *
