@@ -138,33 +138,37 @@ class SetGetFunctions():
                 attribute = self.child_elements[index]
             else:
                 return
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if attribute['isArray'] and self.is_cpp_api:
             return self.write_get_array(index, const)
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
         # create comment parts
         params = []
         return_lines = []
         additional = []
+
         title_line = 'Returns the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'],
+            .format(name,
                     ('attribute' if is_attribute else 'element'),
                     (self.class_name if self.is_cpp_api else self.object_name))
 
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure whose {2} is sought.'
                           .format(self.abbrev_parent, self.object_name,
-                                  attribute['name']))
+                                  name))
 
         if self.is_cpp_api:
             return_lines.append('@return the value of the \"{0}\" {1} of '
                                 'this {2} as a {3}.'
-                                .format(attribute['name'],
+                                .format(name,
                                         ('attribute' if is_attribute
                                          else 'element'),
                                         self.class_name,
@@ -180,7 +184,7 @@ class SetGetFunctions():
             else:
                 return_lines.append('@return the value of the \"{0}\" {1} of '
                                     'this {2} as a {3} {4}.'
-                                    .format(attribute['name'],
+                                    .format(name,
                                             ('attribute' if is_attribute
                                              else 'element'),
                                             self.object_name,
@@ -284,37 +288,40 @@ class SetGetFunctions():
             attribute = self.attributes[index]
         else:
             return
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if not attribute['isEnum']:
             return
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
 
         # create comment parts
         params = []
         return_lines = []
         additional = []
         title_line = 'Returns the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'],
+            .format(name,
                     (self.class_name if self.is_cpp_api else self.object_name))
 
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure whose {2} is sought.'
                           .format(self.abbrev_parent, self.object_name,
-                                  attribute['name']))
+                                  name))
 
         if self.is_cpp_api:
             return_lines.append('@return the value of the \"{0}\" attribute '
                                 'of this {1} as a string.'
-                                .format(attribute['name'], self.class_name))
+                                .format(name, self.class_name))
         else:
             return_lines.append('@return the value of the \"{0}\" attribute '
                                 'of this {1} as a const char *.'
-                                .format(attribute['name'], self.object_name))
+                                .format(name, self.object_name))
 
         # create the function declaration
         if self.is_cpp_api:
@@ -377,17 +384,20 @@ class SetGetFunctions():
             attribute = self.attributes[index]
         else:
             return None
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         # create comment parts
         title_line = 'Returns the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'], self.class_name)
+            .format(name, self.class_name)
         params = ['@param outArray {0} array that will be used to return the '
                   'value of the \"{1}\" attribute of this '
-                  '{2}.'.format(attribute['attTypeCode'], attribute['name'],
+                  '{2}.'.format(attribute['attTypeCode'], name,
                                 self.class_name)]
         return_lines = []
         additional = ['@note the value of the \"{0}\" attribute of this '
                       '{1} is returned in the argument '
-                      'array.'.format(attribute['name'], self.class_name)]
+                      'array.'.format(name, self.class_name)]
 
         # create the function declaration
         function = 'get{0}'.format(attribute['capAttName'])
@@ -421,6 +431,8 @@ class SetGetFunctions():
         else:
             return
         name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if name == 'packageName':
             title_name = 'nickname of the {0} Level&nbsp;3 ' \
                          'package'.format(self.cap_language)
@@ -524,17 +536,20 @@ class SetGetFunctions():
                 return
         if not self.is_cpp_api and ('isVector' in attribute and attribute['isVector']):
             return
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if is_attribute:
             ob_type = 'attribute'
         else:
             ob_type = 'element'
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
 
         # create comment parts
         params = []
@@ -542,7 +557,7 @@ class SetGetFunctions():
         additional = []
         title_line = 'Predicate returning {0} if ' \
                      'this {1}\'s \"{2}\" {3} is set.' \
-            .format(self.true, self.object_name, attribute['name'],
+            .format(self.true, self.object_name, name,
                     ob_type)
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
@@ -551,7 +566,7 @@ class SetGetFunctions():
         return_lines.append('@return {0} if this {1}\'s \"{2}\" {3} has been '
                             'set, otherwise {4} is returned.'
                             .format(self.true, self.object_name,
-                                    attribute['name'],
+                                    name,
                                     ob_type, self.false))
 
         # create the function declaration
@@ -637,16 +652,19 @@ class SetGetFunctions():
             return
         if not attribute['isVector']:
             return
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         # create comment parts
         params = []
         return_lines = []
         additional = []
         title_line = 'Return the number of elements in this {0}\'s \"{1}\" attribute.' \
-            .format(self.object_name, attribute['name'])
+            .format(self.object_name, name)
 
         return_lines.append('@return the number of elements in the {0}\'s \"{1}\" attribute.'
                             .format(self.object_name,
-                                    attribute['name']))
+                                    name))
 
         # create the function declaration
         function = 'getNum{0}'.format(strFunctions.plural(attribute['capAttName']))
@@ -694,6 +712,9 @@ class SetGetFunctions():
                 return self.write_cpp_set_array(index)
             else:
                 return self.write_c_set_array(index)
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if is_attribute:
             ob_type = 'attribute'
         else:
@@ -710,35 +731,35 @@ class SetGetFunctions():
                 can_be_invalid = False
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
 
         # create comment parts
         params = []
         return_lines = []
         additional = []
         title_line = 'Sets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'], ob_type, self.object_name)
+            .format(name, ob_type, self.object_name)
 
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
-        [att_name, unused] = strFunctions.remove_hyphens(attribute['name'])
+        [att_name, unused] = strFunctions.remove_hyphens(name)
         if self.is_cpp_api and 'isEnum' in attribute and attribute['isEnum']:
             params.append('@param {3} @if clike {1}@else int@endif value of the \"{0}\" {2} to be set.'
-                          .format(attribute['name'], att_type,
+                          .format(name, att_type,
                                   ob_type, att_name))
         else:
             if ob_type == 'element' and att_type == 'ASTNode_t*':
                 params.append('@param {3} {1} pointer to the \"{0}\" {2} to be set.'
-                              .format(attribute['name'], 'ASTNode_t *',
+                              .format(name, 'ASTNode_t *',
                                       ob_type, att_name))
             else:
                 params.append('@param {3} {1} value of the \"{0}\" {2} to be set.'
-                              .format(attribute['name'], att_type,
+                              .format(name, att_type,
                                       ob_type, att_name))
         single_return = self.get_single_return(attribute) if self.is_cpp_api else False
         if single_return:
@@ -784,7 +805,7 @@ class SetGetFunctions():
             if 'isVector' in attribute and attribute['isVector']:
                 arguments.append('const {0}& {1}'
                                  .format(attribute['attTypeCode'],
-                                         attribute['name']))
+                                         name))
             else:
                 arguments.append('{0} {1}'
                                  .format(('const ' + attribute['attTypeCode']
@@ -807,7 +828,7 @@ class SetGetFunctions():
 
         if attribute['type'] == 'string' or attribute['type'] == 'SId':
             additional.append('Calling this function with @p {2} = @c NULL or an empty string is equivalent to calling '
-                              '{1}().'.format(attribute['name'], unsetfunc, att_name))
+                              '{1}().'.format(name, unsetfunc, att_name))
 
         # create the function implementation
         if self.is_cpp_api:
@@ -868,30 +889,33 @@ class SetGetFunctions():
             return
         if not attribute['isEnum']:
             return
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if not self.is_cpp_api:
             att_type = 'const char *'
         else:
             att_type = 'std::string&'
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
 
         # create comment parts
         params = []
         return_lines = []
         additional = []
         title_line = 'Sets the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'], self.object_name)
+            .format(name, self.object_name)
 
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
         params.append('@param {0} {1} of the \"{0}\" attribute to be set.'
-                      .format(attribute['name'], att_type))
+                      .format(name, att_type))
 
         return_lines.append("@copydetails doc_returns_success_code")
         return_lines.append('@li @{0}constant{1}{2}, '
@@ -920,7 +944,7 @@ class SetGetFunctions():
             return_type = 'int'
 
         arguments = []
-        [att_name, unused] = strFunctions.remove_hyphens(attribute['name'])
+        [att_name, unused] = strFunctions.remove_hyphens(name)
         if self.is_cpp_api:
             arguments.append('{0} {1}'.format('const std::string&',
                                               att_name))
@@ -931,7 +955,6 @@ class SetGetFunctions():
 
         if self.is_cpp_api:
             code = []
-            name = attribute['name']
             [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
             line = ['{0} = {1}_fromString({2}.c_str())'.format(attribute['memberName'],
                                                  attribute['element'], att_name)]
@@ -988,15 +1011,18 @@ class SetGetFunctions():
             attribute = self.attributes[index]
         else:
             return None
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         # create comment parts
         title_line = 'Sets the value of the \"{0}\" attribute of this {1}.' \
-            .format(attribute['name'], self.class_name)
+            .format(name, self.class_name)
         params = ['@param inArray {0} array value of the \"{1}\" attribute '
                   'to be set.'.format(attribute['attTypeCode'],
-                                      attribute['name']),
+                                      name),
                   '@param arrayLength int value for the length of '
                   'the \"{0}\" attribute to be '
-                  'set.'.format(attribute['name'])]
+                  'set.'.format(name)]
         return_lines = ["@copydetails doc_returns_success_code",
                         '@li @{0}constant{1}{2}, '
                         'OperationReturnValues_t{3}'.format(self.language,
@@ -1192,19 +1218,22 @@ class SetGetFunctions():
         return code
 
     def write_unset_general(self, attribute, ob_type):
+        name = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name = attribute['xml_name']
         if 'isEnum' in attribute and attribute['isEnum']:
             if self.is_cpp_api:
-                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(self.object_name.lower(), name)
             else:
                 l = len(self.object_name)
                 name_no_t = self.object_name[0:l-2]
-                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), attribute['name'])
+                doccopy = '@copydetails doc_{0}_{1}'.format(name_no_t.lower(), name)
         # create comment parts
         params = []
         return_lines = []
         additional = []
         title_line = 'Unsets the value of the \"{0}\" {1} of this {2}.' \
-            .format(attribute['name'], ob_type, self.object_name)
+            .format(name, ob_type, self.object_name)
 
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
@@ -1355,7 +1384,6 @@ class SetGetFunctions():
             return
 
         # useful variables
-        name = strFunctions.upper_first(attribute['name'])
         if self.is_cpp_api:
             att_type = attribute['attTypeCode']
             att_name = attribute['element']
@@ -1581,7 +1609,10 @@ class SetGetFunctions():
 
     def set_cpp_attribute(self, attribute):
         member = attribute['memberName']
-        [name, unused]  = strFunctions.remove_hyphens(attribute['name'])
+        name1 = attribute['name']
+        if 'xml_name' in attribute and attribute['xml_name'] != '':
+            name1 = attribute['xml_name']
+        [name, unused]  = strFunctions.remove_hyphens(name1)
         #TODO deal with plugins
         if self.is_plugin and attribute['attType'] == 'element':
             deal_with_versions = False

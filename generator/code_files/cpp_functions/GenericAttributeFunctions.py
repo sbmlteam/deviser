@@ -165,11 +165,14 @@ class GenericAttributeFunctions():
         first = True
         block = []
         for attrib in attributes:
+            name = attrib['name']
+            if 'xml_name' in attrib and attrib['xml_name'] != '':
+                name = attrib['xml_name']
             if not first:
                 block.append('else if')
             else:
                 first = False
-            block.append('attributeName == \"{0}\"'.format(attrib['name']))
+            block.append('attributeName == \"{0}\"'.format(name))
             if attrib['attType'] == 'enum':
                 lines = ['value = get{0}AsString{1}'.format(attrib['capAttName'],end_get),
                          'return_value = {0}'.format(global_variables.ret_success)]
@@ -240,11 +243,14 @@ class GenericAttributeFunctions():
         first = True
         block = []
         for attrib in attributes:
+            name = attrib['name']
+            if 'xml_name' in attrib and attrib['xml_name'] != '':
+                name = attrib['xml_name']
             if not first:
                 block.append('else if')
             else:
                 first = False
-            block.append('attributeName == \"{0}\"'.format(attrib['name']))
+            block.append('attributeName == \"{0}\"'.format(name))
             block.append('value = isSet{0}()'.format(attrib['capAttName']))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
@@ -314,11 +320,14 @@ class GenericAttributeFunctions():
         first = True
         block = []
         for attrib in attributes:
+            name = attrib['name']
+            if 'xml_name' in attrib and attrib['xml_name'] != '':
+                name = attrib['xml_name']
             if not first:
                 block.append('else if')
             else:
                 first = False
-            block.append('attributeName == \"{0}\"'.format(attrib['name']))
+            block.append('attributeName == \"{0}\"'.format(name))
             block.append('return_value = set{0}(value)'.format(attrib['capAttName']))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
@@ -386,11 +395,14 @@ class GenericAttributeFunctions():
         first = True
         block = []
         for attrib in attributes:
+            name = attrib['name']
+            if 'xml_name' in attrib and attrib['xml_name'] != '':
+                name = attrib['xml_name']
             if not first:
                 block.append('else if')
             else:
                 first = False
-            block.append('attributeName == \"{0}\"'.format(attrib['name']))
+            block.append('attributeName == \"{0}\"'.format(name))
             if attrib['attType'] == 'vector':
                 block.append('value = clear{0}()'.format(attrib['capAttName']))
             else:
