@@ -715,6 +715,7 @@ class SetGetFunctions():
         name = attribute['name']
         if 'xml_name' in attribute and attribute['xml_name'] != '':
             name = attribute['xml_name']
+        [codename, unused] = strFunctions.remove_hyphens(attribute['name'])
         if is_attribute:
             ob_type = 'attribute'
         else:
@@ -813,7 +814,7 @@ class SetGetFunctions():
                                               attribute['attType'] == 'enum' or
                                               attribute['attType'] == 'element')
                                           else attribute['attTypeCode']),
-                                         att_name))
+                                         codename))
         else:
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
@@ -824,7 +825,7 @@ class SetGetFunctions():
             else:
                 arguments.append('{0} {1}'
                                  .format(attribute['CType'],
-                                         att_name))
+                                         codename))
 
         if attribute['type'] == 'string' or attribute['type'] == 'SId':
             additional.append('Calling this function with @p {2} = @c NULL or an empty string is equivalent to calling '
@@ -842,7 +843,7 @@ class SetGetFunctions():
                                                self.abbrev_parent)
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}) : '
                               '{3}'.format(use_name, attribute['capAttName'],
-                                           att_name,
+                                           codename,
                                            self.invalid_obj)]
             code = [self.create_code_block('line', implementation)]
 
@@ -1613,6 +1614,7 @@ class SetGetFunctions():
         if 'xml_name' in attribute and attribute['xml_name'] != '':
             name1 = attribute['xml_name']
         [name, unused]  = strFunctions.remove_hyphens(name1)
+        [codename, unused] = strFunctions.remove_hyphens(attribute['name'])
         #TODO deal with plugins
         if self.is_plugin and attribute['attType'] == 'element':
             deal_with_versions = False
@@ -1638,7 +1640,7 @@ class SetGetFunctions():
             implementation = ['!(SyntaxChecker::isValidInternalSId({0})'
                               ')'.format(name),
                               'return {0}'.format(self.invalid_att), 'else',
-                              '{0} = {1}'.format(member, name),
+                              '{0} = {1}'.format(member, codename),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
@@ -1651,7 +1653,7 @@ class SetGetFunctions():
             implementation = ['!(SyntaxChecker::isValidInternalUnitSId({0})'
                               ')'.format(name),
                               'return {0}'.format(self.invalid_att), 'else',
-                              '{0} = {1}'.format(member, name),
+                              '{0} = {1}'.format(member, codename),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
@@ -1663,7 +1665,7 @@ class SetGetFunctions():
             implementation = ['!(SyntaxChecker::isValidXMLID({0})'
                               ')'.format(name),
                               'return {0}'.format(self.invalid_att), 'else',
-                              '{0} = {1}'.format(member, name),
+                              '{0} = {1}'.format(member, codename),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
@@ -1672,7 +1674,7 @@ class SetGetFunctions():
                                  ['return {0}'.format(global_variables.ret_att_unex)]
                 code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'string':
-            implementation = ['{0} = {1}'.format(member, name),
+            implementation = ['{0} = {1}'.format(member, codename),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'line', 'code': implementation})]
@@ -1686,7 +1688,7 @@ class SetGetFunctions():
                               '{0} = {1}'.format(member,
                                                  attribute['default']),
                               'return {0}'.format(self.invalid_att), 'else',
-                              '{0} = {1}'.format(member, name),
+                              '{0} = {1}'.format(member, codename),
                               'return {0}'.format(self.success)]
             if not deal_with_versions:
                 code = [dict({'code_type': 'if_else', 'code': implementation})]
@@ -1717,10 +1719,10 @@ class SetGetFunctions():
                 if not self.is_plugin:
                     clone = 'clone'
                     nested_if = []
-                    implementation = ['{0} == {1}'.format(member, name),
+                    implementation = ['{0} == {1}'.format(member, codename),
                                       'return {0}'.format(self.success),
                                       'else if',
-                                      '{0} == NULL'.format(name),
+                                      '{0} == NULL'.format(codename),
                                       'delete {0}'.format(member),
                                       '{0} = NULL'.format(member),
                                       'return {0}'.format(self.success)]
@@ -1745,7 +1747,7 @@ class SetGetFunctions():
                     implementation.append('else')
                     implementation.append('delete {0}'.format(member))
                     implementation.append('{0} = ({1} != NULL) ? {1}->{2}() '
-                                          ': NULL'.format(member, name, clone))
+                                          ': NULL'.format(member, codename, clone))
                     if len(nested_if) > 0:
                         implementation.append(nested_if)
                     implementation.append('return {0}'.format(self.success))
