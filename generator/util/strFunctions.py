@@ -417,3 +417,11 @@ def prefix_classes(working_class):
         # if 'concrete' in attrib and len(attrib['concrete']) > 0:
         #     for conc in attrib['concrete']:
         #         conc['element'] = prefix_name(conc['element'])
+
+def is_camel_case(name):
+    camel_case = False
+    adjust_name = lower_first(remove_prefix(name))
+    lower_name = adjust_name.lower()
+    if lower_name != adjust_name:
+        camel_case = True
+    return camel_case

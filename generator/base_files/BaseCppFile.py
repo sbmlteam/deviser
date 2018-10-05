@@ -319,10 +319,15 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['attTypeCode'] = name
                 attributes[i]['CType'] = 'ListOf_t'
                 attributes[i]['memberName'] = 'm' + plural
+                attributes[i]['capAttName'] = strFunctions.remove_prefix(attributes[i]['element'])
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
                 if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
-                    attributes[i]['used_child_name'] = strFunctions.singular(attributes[i]['xml_name'])
+                    possible_name = strFunctions.singular(attributes[i]['xml_name'])
+                    # need to catch case where the xmlname is lower case but comes from a camel case element
+                    if strFunctions.is_camel_case(attributes[i]['element']):
+                        possible_name = strFunctions.lower_first(attributes[i]['capAttName'])
+                    attributes[i]['used_child_name'] = possible_name
                 if attrib_name == strFunctions.lower_first(strFunctions.remove_prefix(self.name)):
                     attributes[i]['recursive_child'] = True
                     attributes[i]['attTypeCode'] = '{0} *'.format(name)
