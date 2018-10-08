@@ -845,7 +845,7 @@ class ValidationRulesForClass():
                 .format(enum)
         else:
             i = 0
-            num_values = len(this_enum['values'])
+            num_values = len(this_enum['values'])-1
             values = '\\val{0}{1}{2}'.format(self.start_b, this_enum['values'][i]['value'], self.end_b)
             for i in range(1, num_values-1):
                 values += ', \\val{0}{1}{2}'.format(self.start_b, this_enum['values'][i]['value'], self.end_b)
