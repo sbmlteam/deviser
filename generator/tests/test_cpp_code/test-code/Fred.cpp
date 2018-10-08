@@ -58,7 +58,7 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
-  , mKind (KIND_INVALID)
+  , mKind (X_KIND_INVALID)
   , mOther (NULL)
   , mOther1 (NULL)
   , mOther2 (NULL)
@@ -78,7 +78,7 @@ Fred::Fred(XPkgNamespaces *xns)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
-  , mKind (KIND_INVALID)
+  , mKind (X_KIND_INVALID)
   , mOther (NULL)
   , mOther1 (NULL)
   , mOther2 (NULL)
@@ -200,7 +200,7 @@ Fred::~Fred()
 
 
 /*
- * Returns the value of the "id" attribute of this Fred.
+ * Returns the value of the "identifier" attribute of this Fred.
  */
 const std::string&
 Fred::getId() const
@@ -210,7 +210,7 @@ Fred::getId() const
 
 
 /*
- * Returns the value of the "bol" attribute of this Fred.
+ * Returns the value of the "myBoolean" attribute of this Fred.
  */
 bool
 Fred::getBol() const
@@ -220,7 +220,7 @@ Fred::getBol() const
 
 
 /*
- * Returns the value of the "num" attribute of this Fred.
+ * Returns the value of the "myNumber" attribute of this Fred.
  */
 int
 Fred::getNum() const
@@ -230,7 +230,7 @@ Fred::getNum() const
 
 
 /*
- * Returns the value of the "str" attribute of this Fred.
+ * Returns the value of the "myString" attribute of this Fred.
  */
 const std::string&
 Fred::getStr() const
@@ -240,7 +240,7 @@ Fred::getStr() const
 
 
 /*
- * Returns the value of the "kind" attribute of this Fred.
+ * Returns the value of the "myEnum" attribute of this Fred.
  */
 Kind_t
 Fred::getKind() const
@@ -250,7 +250,7 @@ Fred::getKind() const
 
 
 /*
- * Returns the value of the "kind" attribute of this Fred.
+ * Returns the value of the "myEnum" attribute of this Fred.
  */
 std::string
 Fred::getKindAsString() const
@@ -261,7 +261,7 @@ Fred::getKindAsString() const
 
 
 /*
- * Predicate returning @c true if this Fred's "id" attribute is set.
+ * Predicate returning @c true if this Fred's "identifier" attribute is set.
  */
 bool
 Fred::isSetId() const
@@ -271,7 +271,7 @@ Fred::isSetId() const
 
 
 /*
- * Predicate returning @c true if this Fred's "bol" attribute is set.
+ * Predicate returning @c true if this Fred's "myBoolean" attribute is set.
  */
 bool
 Fred::isSetBol() const
@@ -281,7 +281,7 @@ Fred::isSetBol() const
 
 
 /*
- * Predicate returning @c true if this Fred's "num" attribute is set.
+ * Predicate returning @c true if this Fred's "myNumber" attribute is set.
  */
 bool
 Fred::isSetNum() const
@@ -291,7 +291,7 @@ Fred::isSetNum() const
 
 
 /*
- * Predicate returning @c true if this Fred's "str" attribute is set.
+ * Predicate returning @c true if this Fred's "myString" attribute is set.
  */
 bool
 Fred::isSetStr() const
@@ -301,17 +301,17 @@ Fred::isSetStr() const
 
 
 /*
- * Predicate returning @c true if this Fred's "kind" attribute is set.
+ * Predicate returning @c true if this Fred's "myEnum" attribute is set.
  */
 bool
 Fred::isSetKind() const
 {
-  return (mKind != KIND_INVALID);
+  return (mKind != X_KIND_INVALID);
 }
 
 
 /*
- * Sets the value of the "id" attribute of this Fred.
+ * Sets the value of the "identifier" attribute of this Fred.
  */
 int
 Fred::setId(const std::string& id)
@@ -321,7 +321,7 @@ Fred::setId(const std::string& id)
 
 
 /*
- * Sets the value of the "bol" attribute of this Fred.
+ * Sets the value of the "myBoolean" attribute of this Fred.
  */
 int
 Fred::setBol(bool bol)
@@ -333,7 +333,7 @@ Fred::setBol(bool bol)
 
 
 /*
- * Sets the value of the "num" attribute of this Fred.
+ * Sets the value of the "myNumber" attribute of this Fred.
  */
 int
 Fred::setNum(int num)
@@ -345,7 +345,7 @@ Fred::setNum(int num)
 
 
 /*
- * Sets the value of the "str" attribute of this Fred.
+ * Sets the value of the "myString" attribute of this Fred.
  */
 int
 Fred::setStr(const std::string& str)
@@ -356,14 +356,14 @@ Fred::setStr(const std::string& str)
 
 
 /*
- * Sets the value of the "kind" attribute of this Fred.
+ * Sets the value of the "myEnum" attribute of this Fred.
  */
 int
 Fred::setKind(const Kind_t kind)
 {
   if (Kind_isValid(kind) == 0)
   {
-    mKind = KIND_INVALID;
+    mKind = X_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -375,14 +375,14 @@ Fred::setKind(const Kind_t kind)
 
 
 /*
- * Sets the value of the "kind" attribute of this Fred.
+ * Sets the value of the "myEnum" attribute of this Fred.
  */
 int
 Fred::setKind(const std::string& kind)
 {
   mKind = Kind_fromString(kind.c_str());
 
-  if (mKind == KIND_INVALID)
+  if (mKind == X_KIND_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -392,7 +392,7 @@ Fred::setKind(const std::string& kind)
 
 
 /*
- * Unsets the value of the "id" attribute of this Fred.
+ * Unsets the value of the "identifier" attribute of this Fred.
  */
 int
 Fred::unsetId()
@@ -411,7 +411,7 @@ Fred::unsetId()
 
 
 /*
- * Unsets the value of the "bol" attribute of this Fred.
+ * Unsets the value of the "myBoolean" attribute of this Fred.
  */
 int
 Fred::unsetBol()
@@ -431,7 +431,7 @@ Fred::unsetBol()
 
 
 /*
- * Unsets the value of the "num" attribute of this Fred.
+ * Unsets the value of the "myNumber" attribute of this Fred.
  */
 int
 Fred::unsetNum()
@@ -451,7 +451,7 @@ Fred::unsetNum()
 
 
 /*
- * Unsets the value of the "str" attribute of this Fred.
+ * Unsets the value of the "myString" attribute of this Fred.
  */
 int
 Fred::unsetStr()
@@ -470,12 +470,12 @@ Fred::unsetStr()
 
 
 /*
- * Unsets the value of the "kind" attribute of this Fred.
+ * Unsets the value of the "myEnum" attribute of this Fred.
  */
 int
 Fred::unsetKind()
 {
-  mKind = KIND_INVALID;
+  mKind = X_KIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -521,7 +521,7 @@ Fred::getOther1()
 
 
 /*
- * Returns the value of the "other2" element of this Fred.
+ * Returns the value of the "myOther" element of this Fred.
  */
 const Other*
 Fred::getOther2() const
@@ -531,7 +531,7 @@ Fred::getOther2() const
 
 
 /*
- * Returns the value of the "other2" element of this Fred.
+ * Returns the value of the "myOther" element of this Fred.
  */
 Other*
 Fred::getOther2()
@@ -561,7 +561,7 @@ Fred::isSetOther1() const
 
 
 /*
- * Predicate returning @c true if this Fred's "other2" element is set.
+ * Predicate returning @c true if this Fred's "myOther" element is set.
  */
 bool
 Fred::isSetOther2() const
@@ -632,7 +632,7 @@ Fred::setOther1(const Other* other1)
 
 
 /*
- * Sets the value of the "other2" element of this Fred.
+ * Sets the value of the "myOther" element of this Fred.
  */
 int
 Fred::setOther2(const Other* other2)
@@ -653,7 +653,7 @@ Fred::setOther2(const Other* other2)
     mOther2 = (other2 != NULL) ? other2->clone() : NULL;
     if (mOther2 != NULL)
     {
-      mOther2->setElementName("other2");
+      mOther2->setElementName("myOther");
       mOther2->connectToParent(this);
     }
 
@@ -760,7 +760,7 @@ Fred::unsetOther1()
 
 
 /*
- * Unsets the value of the "other2" element of this Fred.
+ * Unsets the value of the "myOther" element of this Fred.
  */
 int
 Fred::unsetOther2()
@@ -1020,7 +1020,7 @@ Fred::getAttribute(const std::string& attributeName, bool& value) const
     return return_value;
   }
 
-  if (attributeName == "bol")
+  if (attributeName == "myBoolean")
   {
     value = getBol();
     return_value = LIBSBML_OPERATION_SUCCESS;
@@ -1048,7 +1048,7 @@ Fred::getAttribute(const std::string& attributeName, int& value) const
     return return_value;
   }
 
-  if (attributeName == "num")
+  if (attributeName == "myNumber")
   {
     value = getNum();
     return_value = LIBSBML_OPERATION_SUCCESS;
@@ -1111,17 +1111,17 @@ Fred::getAttribute(const std::string& attributeName, std::string& value) const
     return return_value;
   }
 
-  if (attributeName == "id")
+  if (attributeName == "identifier")
   {
     value = getId();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "str")
+  else if (attributeName == "myString")
   {
     value = getStr();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "kind")
+  else if (attributeName == "myEnum")
   {
     value = getKindAsString();
     return_value = LIBSBML_OPERATION_SUCCESS;
@@ -1144,23 +1144,23 @@ Fred::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
+  if (attributeName == "identifier")
   {
     value = isSetId();
   }
-  else if (attributeName == "bol")
+  else if (attributeName == "myBoolean")
   {
     value = isSetBol();
   }
-  else if (attributeName == "num")
+  else if (attributeName == "myNumber")
   {
     value = isSetNum();
   }
-  else if (attributeName == "str")
+  else if (attributeName == "myString")
   {
     value = isSetStr();
   }
-  else if (attributeName == "kind")
+  else if (attributeName == "myEnum")
   {
     value = isSetKind();
   }
@@ -1182,7 +1182,7 @@ Fred::setAttribute(const std::string& attributeName, bool value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
-  if (attributeName == "bol")
+  if (attributeName == "myBoolean")
   {
     return_value = setBol(value);
   }
@@ -1204,7 +1204,7 @@ Fred::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
-  if (attributeName == "num")
+  if (attributeName == "myNumber")
   {
     return_value = setNum(value);
   }
@@ -1260,15 +1260,15 @@ Fred::setAttribute(const std::string& attributeName, const std::string& value)
 {
   int return_value = SBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
+  if (attributeName == "identifier")
   {
     return_value = setId(value);
   }
-  else if (attributeName == "str")
+  else if (attributeName == "myString")
   {
     return_value = setStr(value);
   }
-  else if (attributeName == "kind")
+  else if (attributeName == "myEnum")
   {
     return_value = setKind(value);
   }
@@ -1290,23 +1290,23 @@ Fred::unsetAttribute(const std::string& attributeName)
 {
   int value = SBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
+  if (attributeName == "identifier")
   {
     value = unsetId();
   }
-  else if (attributeName == "bol")
+  else if (attributeName == "myBoolean")
   {
     value = unsetBol();
   }
-  else if (attributeName == "num")
+  else if (attributeName == "myNumber")
   {
     value = unsetNum();
   }
-  else if (attributeName == "str")
+  else if (attributeName == "myString")
   {
     value = unsetStr();
   }
-  else if (attributeName == "kind")
+  else if (attributeName == "myEnum")
   {
     value = unsetKind();
   }
@@ -1659,7 +1659,7 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "myOther")
   {
-    if (isSetMyOther())
+    if (isSetOther2())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
@@ -1964,7 +1964,7 @@ Fred_free(Fred_t* f)
 
 
 /*
- * Returns the value of the "id" attribute of this Fred_t.
+ * Returns the value of the "identifier" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 char *
@@ -1980,7 +1980,7 @@ Fred_getId(const Fred_t * f)
 
 
 /*
- * Returns the value of the "bol" attribute of this Fred_t.
+ * Returns the value of the "myBoolean" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -1991,7 +1991,7 @@ Fred_getBol(const Fred_t * f)
 
 
 /*
- * Returns the value of the "num" attribute of this Fred_t.
+ * Returns the value of the "myNumber" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2002,7 +2002,7 @@ Fred_getNum(const Fred_t * f)
 
 
 /*
- * Returns the value of the "str" attribute of this Fred_t.
+ * Returns the value of the "myString" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 char *
@@ -2018,7 +2018,7 @@ Fred_getStr(const Fred_t * f)
 
 
 /*
- * Returns the value of the "kind" attribute of this Fred_t.
+ * Returns the value of the "myEnum" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 Kind_t
@@ -2026,7 +2026,7 @@ Fred_getKind(const Fred_t * f)
 {
   if (f == NULL)
   {
-    return KIND_INVALID;
+    return X_KIND_INVALID;
   }
 
   return f->getKind();
@@ -2034,7 +2034,7 @@ Fred_getKind(const Fred_t * f)
 
 
 /*
- * Returns the value of the "kind" attribute of this Fred_t.
+ * Returns the value of the "myEnum" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 char *
@@ -2045,7 +2045,8 @@ Fred_getKindAsString(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "identifier" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2056,7 +2057,8 @@ Fred_isSetId(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "bol" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myBoolean" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2067,7 +2069,8 @@ Fred_isSetBol(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myNumber" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2078,7 +2081,8 @@ Fred_isSetNum(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "str" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myString" attribute is
+ * set.
  */
 LIBSBML_EXTERN
 int
@@ -2089,7 +2093,7 @@ Fred_isSetStr(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "kind" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myEnum" attribute is set.
  */
 LIBSBML_EXTERN
 int
@@ -2100,7 +2104,7 @@ Fred_isSetKind(const Fred_t * f)
 
 
 /*
- * Sets the value of the "id" attribute of this Fred_t.
+ * Sets the value of the "identifier" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2111,7 +2115,7 @@ Fred_setId(Fred_t * f, const char * id)
 
 
 /*
- * Sets the value of the "bol" attribute of this Fred_t.
+ * Sets the value of the "myBoolean" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2122,7 +2126,7 @@ Fred_setBol(Fred_t * f, int bol)
 
 
 /*
- * Sets the value of the "num" attribute of this Fred_t.
+ * Sets the value of the "myNumber" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2133,7 +2137,7 @@ Fred_setNum(Fred_t * f, int num)
 
 
 /*
- * Sets the value of the "str" attribute of this Fred_t.
+ * Sets the value of the "myString" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2144,7 +2148,7 @@ Fred_setStr(Fred_t * f, const char * str)
 
 
 /*
- * Sets the value of the "kind" attribute of this Fred_t.
+ * Sets the value of the "myEnum" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2155,7 +2159,7 @@ Fred_setKind(Fred_t * f, Kind_t kind)
 
 
 /*
- * Sets the value of the "kind" attribute of this Fred_t.
+ * Sets the value of the "myEnum" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2166,7 +2170,7 @@ Fred_setKindAsString(Fred_t * f, const char * kind)
 
 
 /*
- * Unsets the value of the "id" attribute of this Fred_t.
+ * Unsets the value of the "identifier" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2177,7 +2181,7 @@ Fred_unsetId(Fred_t * f)
 
 
 /*
- * Unsets the value of the "bol" attribute of this Fred_t.
+ * Unsets the value of the "myBoolean" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2188,7 +2192,7 @@ Fred_unsetBol(Fred_t * f)
 
 
 /*
- * Unsets the value of the "num" attribute of this Fred_t.
+ * Unsets the value of the "myNumber" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2199,7 +2203,7 @@ Fred_unsetNum(Fred_t * f)
 
 
 /*
- * Unsets the value of the "str" attribute of this Fred_t.
+ * Unsets the value of the "myString" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2210,7 +2214,7 @@ Fred_unsetStr(Fred_t * f)
 
 
 /*
- * Unsets the value of the "kind" attribute of this Fred_t.
+ * Unsets the value of the "myEnum" attribute of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2253,7 +2257,7 @@ Fred_getOther1(const Fred_t * f)
 
 
 /*
- * Returns the value of the "other2" element of this Fred_t.
+ * Returns the value of the "myOther" element of this Fred_t.
  */
 LIBSBML_EXTERN
 const Other_t*
@@ -2291,7 +2295,7 @@ Fred_isSetOther1(const Fred_t * f)
 
 
 /*
- * Predicate returning @c 1 (true) if this Fred_t's "other2" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myOther" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -2324,7 +2328,7 @@ Fred_setOther1(Fred_t * f, const Other_t* other1)
 
 
 /*
- * Sets the value of the "other2" element of this Fred_t.
+ * Sets the value of the "myOther" element of this Fred_t.
  */
 LIBSBML_EXTERN
 int
@@ -2408,7 +2412,7 @@ Fred_unsetOther1(Fred_t * f)
 
 
 /*
- * Unsets the value of the "other2" element of this Fred_t.
+ * Unsets the value of the "myOther" element of this Fred_t.
  */
 LIBSBML_EXTERN
 int

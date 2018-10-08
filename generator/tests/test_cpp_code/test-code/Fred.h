@@ -163,115 +163,115 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this Fred.
+   * Returns the value of the "identifier" attribute of this Fred.
    *
-   * @return the value of the "id" attribute of this Fred as a string.
+   * @return the value of the "identifier" attribute of this Fred as a string.
    */
   virtual const std::string& getId() const;
 
 
   /**
-   * Returns the value of the "bol" attribute of this Fred.
+   * Returns the value of the "myBoolean" attribute of this Fred.
    *
-   * @return the value of the "bol" attribute of this Fred as a boolean.
+   * @return the value of the "myBoolean" attribute of this Fred as a boolean.
    */
   bool getBol() const;
 
 
   /**
-   * Returns the value of the "num" attribute of this Fred.
+   * Returns the value of the "myNumber" attribute of this Fred.
    *
-   * @return the value of the "num" attribute of this Fred as a integer.
+   * @return the value of the "myNumber" attribute of this Fred as a integer.
    */
   int getNum() const;
 
 
   /**
-   * Returns the value of the "str" attribute of this Fred.
+   * Returns the value of the "myString" attribute of this Fred.
    *
-   * @return the value of the "str" attribute of this Fred as a string.
+   * @return the value of the "myString" attribute of this Fred as a string.
    */
   const std::string& getStr() const;
 
 
   /**
-   * Returns the value of the "kind" attribute of this Fred.
+   * Returns the value of the "myEnum" attribute of this Fred.
    *
-   * @return the value of the "kind" attribute of this Fred as a Kind_t.
+   * @return the value of the "myEnum" attribute of this Fred as a Kind_t.
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    * @if clike The value is drawn from the enumeration @ref Kind_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
-   * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}
+   * @li @sbmlconstant{X_KIND_INVALID, Kind_t}
    */
   Kind_t getKind() const;
 
 
   /**
-   * Returns the value of the "kind" attribute of this Fred.
+   * Returns the value of the "myEnum" attribute of this Fred.
    *
-   * @return the value of the "kind" attribute of this Fred as a string.
+   * @return the value of the "myEnum" attribute of this Fred as a string.
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    * The possible values returned by this method are:
    * @li @c "first"
-   * @li @c "invalid FredKind"
+   * @li @c "invalid Kind value"
    */
   std::string getKindAsString() const;
 
 
   /**
-   * Predicate returning @c true if this Fred's "id" attribute is set.
+   * Predicate returning @c true if this Fred's "identifier" attribute is set.
    *
-   * @return @c true if this Fred's "id" attribute has been set, otherwise
-   * @c false is returned.
+   * @return @c true if this Fred's "identifier" attribute has been set,
+   * otherwise @c false is returned.
    */
   virtual bool isSetId() const;
 
 
   /**
-   * Predicate returning @c true if this Fred's "bol" attribute is set.
+   * Predicate returning @c true if this Fred's "myBoolean" attribute is set.
    *
-   * @return @c true if this Fred's "bol" attribute has been set, otherwise
-   * @c false is returned.
+   * @return @c true if this Fred's "myBoolean" attribute has been set,
+   * otherwise @c false is returned.
    */
   bool isSetBol() const;
 
 
   /**
-   * Predicate returning @c true if this Fred's "num" attribute is set.
+   * Predicate returning @c true if this Fred's "myNumber" attribute is set.
    *
-   * @return @c true if this Fred's "num" attribute has been set, otherwise
-   * @c false is returned.
+   * @return @c true if this Fred's "myNumber" attribute has been set,
+   * otherwise @c false is returned.
    */
   bool isSetNum() const;
 
 
   /**
-   * Predicate returning @c true if this Fred's "str" attribute is set.
+   * Predicate returning @c true if this Fred's "myString" attribute is set.
    *
-   * @return @c true if this Fred's "str" attribute has been set, otherwise
-   * @c false is returned.
+   * @return @c true if this Fred's "myString" attribute has been set,
+   * otherwise @c false is returned.
    */
   bool isSetStr() const;
 
 
   /**
-   * Predicate returning @c true if this Fred's "kind" attribute is set.
+   * Predicate returning @c true if this Fred's "myEnum" attribute is set.
    *
-   * @return @c true if this Fred's "kind" attribute has been set, otherwise
+   * @return @c true if this Fred's "myEnum" attribute has been set, otherwise
    * @c false is returned.
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    */
   bool isSetKind() const;
 
 
   /**
-   * Sets the value of the "id" attribute of this Fred.
+   * Sets the value of the "identifier" attribute of this Fred.
    *
-   * @param id std::string& value of the "id" attribute to be set.
+   * @param id std::string& value of the "identifier" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -285,9 +285,9 @@ public:
 
 
   /**
-   * Sets the value of the "bol" attribute of this Fred.
+   * Sets the value of the "myBoolean" attribute of this Fred.
    *
-   * @param bol bool value of the "bol" attribute to be set.
+   * @param bol bool value of the "myBoolean" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -298,9 +298,9 @@ public:
 
 
   /**
-   * Sets the value of the "num" attribute of this Fred.
+   * Sets the value of the "myNumber" attribute of this Fred.
    *
-   * @param num int value of the "num" attribute to be set.
+   * @param num int value of the "myNumber" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -311,9 +311,9 @@ public:
 
 
   /**
-   * Sets the value of the "str" attribute of this Fred.
+   * Sets the value of the "myString" attribute of this Fred.
    *
-   * @param str std::string& value of the "str" attribute to be set.
+   * @param str std::string& value of the "myString" attribute to be set.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -325,38 +325,38 @@ public:
 
 
   /**
-   * Sets the value of the "kind" attribute of this Fred.
+   * Sets the value of the "myEnum" attribute of this Fred.
    *
-   * @param kind @if clike Kind_t@else int@endif value of the "kind" attribute
-   * to be set.
+   * @param kind @if clike Kind_t@else int@endif value of the "myEnum"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    */
   int setKind(const Kind_t kind);
 
 
   /**
-   * Sets the value of the "kind" attribute of this Fred.
+   * Sets the value of the "myEnum" attribute of this Fred.
    *
-   * @param kind std::string& of the "kind" attribute to be set.
+   * @param kind std::string& of the "myEnum" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    */
   int setKind(const std::string& kind);
 
 
   /**
-   * Unsets the value of the "id" attribute of this Fred.
+   * Unsets the value of the "identifier" attribute of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -366,7 +366,7 @@ public:
 
 
   /**
-   * Unsets the value of the "bol" attribute of this Fred.
+   * Unsets the value of the "myBoolean" attribute of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -376,7 +376,7 @@ public:
 
 
   /**
-   * Unsets the value of the "num" attribute of this Fred.
+   * Unsets the value of the "myNumber" attribute of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -386,7 +386,7 @@ public:
 
 
   /**
-   * Unsets the value of the "str" attribute of this Fred.
+   * Unsets the value of the "myString" attribute of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -396,12 +396,12 @@ public:
 
 
   /**
-   * Unsets the value of the "kind" attribute of this Fred.
+   * Unsets the value of the "myEnum" attribute of this Fred.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
-   * @copydetails doc_fred_kind
+   * @copydetails doc_fred_myEnum
    */
   int unsetKind();
 
@@ -439,17 +439,17 @@ public:
 
 
   /**
-   * Returns the value of the "other2" element of this Fred.
+   * Returns the value of the "myOther" element of this Fred.
    *
-   * @return the value of the "other2" element of this Fred as a Other*.
+   * @return the value of the "myOther" element of this Fred as a Other*.
    */
   const Other* getOther2() const;
 
 
   /**
-   * Returns the value of the "other2" element of this Fred.
+   * Returns the value of the "myOther" element of this Fred.
    *
-   * @return the value of the "other2" element of this Fred as a Other*.
+   * @return the value of the "myOther" element of this Fred as a Other*.
    */
   Other* getOther2();
 
@@ -473,9 +473,9 @@ public:
 
 
   /**
-   * Predicate returning @c true if this Fred's "other2" element is set.
+   * Predicate returning @c true if this Fred's "myOther" element is set.
    *
-   * @return @c true if this Fred's "other2" element has been set, otherwise
+   * @return @c true if this Fred's "myOther" element has been set, otherwise
    * @c false is returned.
    */
   bool isSetOther2() const;
@@ -508,9 +508,9 @@ public:
 
 
   /**
-   * Sets the value of the "other2" element of this Fred.
+   * Sets the value of the "myOther" element of this Fred.
    *
-   * @param other2 Other* value of the "other2" element to be set.
+   * @param other2 Other* value of the "myOther" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -568,7 +568,7 @@ public:
 
 
   /**
-   * Unsets the value of the "other2" element of this Fred.
+   * Unsets the value of the "myOther" element of this Fred.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1180,12 +1180,12 @@ Fred_free(Fred_t* f);
 
 
 /**
- * Returns the value of the "id" attribute of this Fred_t.
+ * Returns the value of the "identifier" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose id is sought.
+ * @param f the Fred_t structure whose identifier is sought.
  *
- * @return the value of the "id" attribute of this Fred_t as a pointer to a
- * string.
+ * @return the value of the "identifier" attribute of this Fred_t as a pointer
+ * to a string.
  *
  * @copydetails doc_returned_owned_char
  *
@@ -1197,11 +1197,11 @@ Fred_getId(const Fred_t * f);
 
 
 /**
- * Returns the value of the "bol" attribute of this Fred_t.
+ * Returns the value of the "myBoolean" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose bol is sought.
+ * @param f the Fred_t structure whose myBoolean is sought.
  *
- * @return the value of the "bol" attribute of this Fred_t as a boolean.
+ * @return the value of the "myBoolean" attribute of this Fred_t as a boolean.
  *
  * @memberof Fred_t
  */
@@ -1211,11 +1211,11 @@ Fred_getBol(const Fred_t * f);
 
 
 /**
- * Returns the value of the "num" attribute of this Fred_t.
+ * Returns the value of the "myNumber" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose num is sought.
+ * @param f the Fred_t structure whose myNumber is sought.
  *
- * @return the value of the "num" attribute of this Fred_t as a integer.
+ * @return the value of the "myNumber" attribute of this Fred_t as a integer.
  *
  * @memberof Fred_t
  */
@@ -1225,12 +1225,12 @@ Fred_getNum(const Fred_t * f);
 
 
 /**
- * Returns the value of the "str" attribute of this Fred_t.
+ * Returns the value of the "myString" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose str is sought.
+ * @param f the Fred_t structure whose myString is sought.
  *
- * @return the value of the "str" attribute of this Fred_t as a pointer to a
- * string.
+ * @return the value of the "myString" attribute of this Fred_t as a pointer to
+ * a string.
  *
  * @copydetails doc_returned_owned_char
  *
@@ -1242,17 +1242,17 @@ Fred_getStr(const Fred_t * f);
 
 
 /**
- * Returns the value of the "kind" attribute of this Fred_t.
+ * Returns the value of the "myEnum" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose kind is sought.
+ * @param f the Fred_t structure whose myEnum is sought.
  *
- * @return the value of the "kind" attribute of this Fred_t as a Kind_t.
+ * @return the value of the "myEnum" attribute of this Fred_t as a Kind_t.
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  * @if clike The value is drawn from the enumeration @ref Kind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
- * @li @sbmlconstant{FRED_KIND_INVALID, Kind_t}
+ * @li @sbmlconstant{X_KIND_INVALID, Kind_t}
  *
  * @memberof Fred_t
  */
@@ -1262,18 +1262,19 @@ Fred_getKind(const Fred_t * f);
 
 
 /**
- * Returns the value of the "kind" attribute of this Fred_t.
+ * Returns the value of the "myEnum" attribute of this Fred_t.
  *
- * @param f the Fred_t structure whose kind is sought.
+ * @param f the Fred_t structure whose myEnum is sought.
  *
- * @return the value of the "kind" attribute of this Fred_t as a const char *.
+ * @return the value of the "myEnum" attribute of this Fred_t as a const char
+ * *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  * The possible values returned by this method are:
  * @li @c "first"
- * @li @c "invalid FredKind"
+ * @li @c "invalid Kind value"
  *
  * @memberof Fred_t
  */
@@ -1283,12 +1284,13 @@ Fred_getKindAsString(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "identifier" attribute is
+ * set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "id" attribute has been set, otherwise
- * @c 0 (false) is returned.
+ * @return @c 1 (true) if this Fred_t's "identifier" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1298,12 +1300,13 @@ Fred_isSetId(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "bol" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myBoolean" attribute is
+ * set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "bol" attribute has been set, otherwise
- * @c 0 (false) is returned.
+ * @return @c 1 (true) if this Fred_t's "myBoolean" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1313,12 +1316,13 @@ Fred_isSetBol(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "num" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myNumber" attribute is
+ * set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "num" attribute has been set, otherwise
- * @c 0 (false) is returned.
+ * @return @c 1 (true) if this Fred_t's "myNumber" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1328,12 +1332,13 @@ Fred_isSetNum(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "str" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myString" attribute is
+ * set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "str" attribute has been set, otherwise
- * @c 0 (false) is returned.
+ * @return @c 1 (true) if this Fred_t's "myString" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
  */
@@ -1343,14 +1348,14 @@ Fred_isSetStr(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "kind" attribute is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myEnum" attribute is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "kind" attribute has been set,
+ * @return @c 1 (true) if this Fred_t's "myEnum" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  *
  * @memberof Fred_t
  */
@@ -1360,11 +1365,11 @@ Fred_isSetKind(const Fred_t * f);
 
 
 /**
- * Sets the value of the "id" attribute of this Fred_t.
+ * Sets the value of the "identifier" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param id const char * value of the "id" attribute to be set.
+ * @param id const char * value of the "identifier" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1382,11 +1387,11 @@ Fred_setId(Fred_t * f, const char * id);
 
 
 /**
- * Sets the value of the "bol" attribute of this Fred_t.
+ * Sets the value of the "myBoolean" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param bol int value of the "bol" attribute to be set.
+ * @param bol int value of the "myBoolean" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1401,11 +1406,11 @@ Fred_setBol(Fred_t * f, int bol);
 
 
 /**
- * Sets the value of the "num" attribute of this Fred_t.
+ * Sets the value of the "myNumber" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param num int value of the "num" attribute to be set.
+ * @param num int value of the "myNumber" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1420,11 +1425,11 @@ Fred_setNum(Fred_t * f, int num);
 
 
 /**
- * Sets the value of the "str" attribute of this Fred_t.
+ * Sets the value of the "myString" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param str const char * value of the "str" attribute to be set.
+ * @param str const char * value of the "myString" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1441,18 +1446,18 @@ Fred_setStr(Fred_t * f, const char * str);
 
 
 /**
- * Sets the value of the "kind" attribute of this Fred_t.
+ * Sets the value of the "myEnum" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param kind Kind_t value of the "kind" attribute to be set.
+ * @param kind Kind_t value of the "myEnum" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  *
  * @memberof Fred_t
  */
@@ -1462,18 +1467,18 @@ Fred_setKind(Fred_t * f, Kind_t kind);
 
 
 /**
- * Sets the value of the "kind" attribute of this Fred_t.
+ * Sets the value of the "myEnum" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param kind const char * of the "kind" attribute to be set.
+ * @param kind const char * of the "myEnum" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  *
  * @memberof Fred_t
  */
@@ -1483,7 +1488,7 @@ Fred_setKindAsString(Fred_t * f, const char * kind);
 
 
 /**
- * Unsets the value of the "id" attribute of this Fred_t.
+ * Unsets the value of the "identifier" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1500,7 +1505,7 @@ Fred_unsetId(Fred_t * f);
 
 
 /**
- * Unsets the value of the "bol" attribute of this Fred_t.
+ * Unsets the value of the "myBoolean" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1517,7 +1522,7 @@ Fred_unsetBol(Fred_t * f);
 
 
 /**
- * Unsets the value of the "num" attribute of this Fred_t.
+ * Unsets the value of the "myNumber" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1534,7 +1539,7 @@ Fred_unsetNum(Fred_t * f);
 
 
 /**
- * Unsets the value of the "str" attribute of this Fred_t.
+ * Unsets the value of the "myString" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1551,7 +1556,7 @@ Fred_unsetStr(Fred_t * f);
 
 
 /**
- * Unsets the value of the "kind" attribute of this Fred_t.
+ * Unsets the value of the "myEnum" attribute of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
@@ -1559,7 +1564,7 @@ Fred_unsetStr(Fred_t * f);
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_fred_kind
+ * @copydetails doc_fred_myEnum
  *
  * @memberof Fred_t
  */
@@ -1597,11 +1602,11 @@ Fred_getOther1(const Fred_t * f);
 
 
 /**
- * Returns the value of the "other2" element of this Fred_t.
+ * Returns the value of the "myOther" element of this Fred_t.
  *
- * @param f the Fred_t structure whose other2 is sought.
+ * @param f the Fred_t structure whose myOther is sought.
  *
- * @return the value of the "other2" element of this Fred_t as a Other*.
+ * @return the value of the "myOther" element of this Fred_t as a Other*.
  *
  * @memberof Fred_t
  */
@@ -1641,11 +1646,11 @@ Fred_isSetOther1(const Fred_t * f);
 
 
 /**
- * Predicate returning @c 1 (true) if this Fred_t's "other2" element is set.
+ * Predicate returning @c 1 (true) if this Fred_t's "myOther" element is set.
  *
  * @param f the Fred_t structure.
  *
- * @return @c 1 (true) if this Fred_t's "other2" element has been set,
+ * @return @c 1 (true) if this Fred_t's "myOther" element has been set,
  * otherwise @c 0 (false) is returned.
  *
  * @memberof Fred_t
@@ -1694,11 +1699,11 @@ Fred_setOther1(Fred_t * f, const Other_t* other1);
 
 
 /**
- * Sets the value of the "other2" element of this Fred_t.
+ * Sets the value of the "myOther" element of this Fred_t.
  *
  * @param f the Fred_t structure.
  *
- * @param other2 Other_t* value of the "other2" element to be set.
+ * @param other2 Other_t* value of the "myOther" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1792,7 +1797,7 @@ Fred_unsetOther1(Fred_t * f);
 
 
 /**
- * Unsets the value of the "other2" element of this Fred_t.
+ * Unsets the value of the "myOther" element of this Fred_t.
  *
  * @param f the Fred_t structure.
  *

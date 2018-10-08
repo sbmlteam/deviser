@@ -748,20 +748,19 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
-        [att_name, unused] = strFunctions.remove_hyphens(name)
         if self.is_cpp_api and 'isEnum' in attribute and attribute['isEnum']:
             params.append('@param {3} @if clike {1}@else int@endif value of the \"{0}\" {2} to be set.'
                           .format(name, att_type,
-                                  ob_type, att_name))
+                                  ob_type, codename))
         else:
             if ob_type == 'element' and att_type == 'ASTNode_t*':
                 params.append('@param {3} {1} pointer to the \"{0}\" {2} to be set.'
                               .format(name, 'ASTNode_t *',
-                                      ob_type, att_name))
+                                      ob_type, codename))
             else:
                 params.append('@param {3} {1} value of the \"{0}\" {2} to be set.'
                               .format(name, att_type,
-                                      ob_type, att_name))
+                                      ob_type, codename))
         single_return = self.get_single_return(attribute) if self.is_cpp_api else False
         if single_return:
             return_lines.append("@copydetails doc_returns_one_success_code")
@@ -821,7 +820,7 @@ class SetGetFunctions():
             if attribute['attType'] == 'element':
                 arguments.append('const {0} {1}'
                                  .format(attribute['CType'],
-                                         att_name))
+                                         codename))
             else:
                 arguments.append('{0} {1}'
                                  .format(attribute['CType'],
@@ -829,7 +828,7 @@ class SetGetFunctions():
 
         if attribute['type'] == 'string' or attribute['type'] == 'SId':
             additional.append('Calling this function with @p {2} = @c NULL or an empty string is equivalent to calling '
-                              '{1}().'.format(name, unsetfunc, att_name))
+                              '{1}().'.format(name, unsetfunc, codename))
 
         # create the function implementation
         if self.is_cpp_api:
@@ -893,6 +892,7 @@ class SetGetFunctions():
         name = attribute['name']
         if 'xml_name' in attribute and attribute['xml_name'] != '':
             name = attribute['xml_name']
+        [codename, unused] = strFunctions.remove_hyphens(attribute['name'])
         if not self.is_cpp_api:
             att_type = 'const char *'
         else:
@@ -915,8 +915,8 @@ class SetGetFunctions():
         if not self.is_cpp_api:
             params.append('@param {0} the {1} structure.'
                           .format(self.abbrev_parent, self.object_name))
-        params.append('@param {0} {1} of the \"{0}\" attribute to be set.'
-                      .format(name, att_type))
+        params.append('@param {0} {1} of the \"{2}\" attribute to be set.'
+                      .format(codename, att_type, name))
 
         return_lines.append("@copydetails doc_returns_success_code")
         return_lines.append('@li @{0}constant{1}{2}, '
@@ -945,20 +945,19 @@ class SetGetFunctions():
             return_type = 'int'
 
         arguments = []
-        [att_name, unused] = strFunctions.remove_hyphens(name)
         if self.is_cpp_api:
             arguments.append('{0} {1}'.format('const std::string&',
-                                              att_name))
+                                              codename))
         else:
             arguments.append('{0} * {1}'
                              .format(self.object_name, self.abbrev_parent))
-            arguments.append('const char * {0}'.format(att_name))
+            arguments.append('const char * {0}'.format(codename))
 
         if self.is_cpp_api:
             code = []
             [deal_with_versions, code, topif] = self.get_multiple_version_info(name)
             line = ['{0} = {1}_fromString({2}.c_str())'.format(attribute['memberName'],
-                                                 attribute['element'], att_name)]
+                                                 attribute['element'], codename)]
             if_block = ['{0} == {1}'.format(attribute['memberName'], attribute['default']),
                               'return {0}'.format(self.invalid_att)]
             success_line = ['return {0}'.format(self.success)]
@@ -988,7 +987,7 @@ class SetGetFunctions():
             implementation = ['return ({0} != NULL) ? {0}->set{1}({2}): '
                               '{3}'.format(self.abbrev_parent,
                                            attribute['capAttName'],
-                                           att_name,
+                                           codename,
                                            self.invalid_obj)]
             code = [dict({'code_type': 'line', 'code': implementation})]
         # return the parts
@@ -1684,7 +1683,7 @@ class SetGetFunctions():
                 code.append(self.create_code_block('if_else', implementation))
         elif attribute['type'] == 'enum':
             implementation = ['{0}_isValid({1}) == '
-                              '0'.format(attribute['element'], name),
+                              '0'.format(attribute['element'], codename),
                               '{0} = {1}'.format(member,
                                                  attribute['default']),
                               'return {0}'.format(self.invalid_att), 'else',
