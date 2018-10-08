@@ -230,7 +230,7 @@ public:
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
-   * @li @sbmlconstant{SAMPLED_FIELD_DATA_TYPE_INVALID, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_INVALID, DataKind_t}
    */
   DataKind_t getDataType() const;
 
@@ -248,7 +248,7 @@ public:
    * @li @c "uint8"
    * @li @c "uint16"
    * @li @c "uint32"
-   * @li @c "invalid SampledFieldDataType"
+   * @li @c "invalid DataKind value"
    */
   std::string getDataTypeAsString() const;
 
@@ -294,8 +294,7 @@ public:
    * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_NEARESTNEIGHBOR,
    * InterpolationKind_t}
    * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_LINEAR, InterpolationKind_t}
-   * @li @sbmlconstant{SAMPLED_FIELD_INTERPOLATION_TYPE_INVALID,
-   * InterpolationKind_t}
+   * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_INVALID, InterpolationKind_t}
    */
   InterpolationKind_t getInterpolationType() const;
 
@@ -311,7 +310,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "nearestNeighbor"
    * @li @c "linear"
-   * @li @c "invalid SampledFieldInterpolationType"
+   * @li @c "invalid InterpolationKind value"
    */
   std::string getInterpolationTypeAsString() const;
 
@@ -328,7 +327,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
-   * @li @sbmlconstant{SAMPLED_FIELD_COMPRESSION_INVALID, CompressionKind_t}
+   * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_INVALID, CompressionKind_t}
    */
   CompressionKind_t getCompression() const;
 
@@ -343,7 +342,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "uncompressed"
    * @li @c "deflated"
-   * @li @c "invalid SampledFieldCompression"
+   * @li @c "invalid CompressionKind value"
    */
   std::string getCompressionAsString() const;
 
@@ -1287,7 +1286,7 @@ SampledField_getId(const SampledField_t * sf);
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
- * @li @sbmlconstant{SAMPLED_FIELD_DATA_TYPE_INVALID, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_INVALID, DataKind_t}
  *
  * @memberof SampledField_t
  */
@@ -1313,7 +1312,7 @@ SampledField_getDataType(const SampledField_t * sf);
  * @li @c "uint8"
  * @li @c "uint16"
  * @li @c "uint32"
- * @li @c "invalid SampledFieldDataType"
+ * @li @c "invalid DataKind value"
  *
  * @memberof SampledField_t
  */
@@ -1383,8 +1382,7 @@ SampledField_getNumSamples3(const SampledField_t * sf);
  * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_NEARESTNEIGHBOR,
  * InterpolationKind_t}
  * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_LINEAR, InterpolationKind_t}
- * @li @sbmlconstant{SAMPLED_FIELD_INTERPOLATION_TYPE_INVALID,
- * InterpolationKind_t}
+ * @li @sbmlconstant{SPATIAL_INTERPOLATIONKIND_INVALID, InterpolationKind_t}
  *
  * @memberof SampledField_t
  */
@@ -1408,7 +1406,7 @@ SampledField_getInterpolationType(const SampledField_t * sf);
  * The possible values returned by this method are:
  * @li @c "nearestNeighbor"
  * @li @c "linear"
- * @li @c "invalid SampledFieldInterpolationType"
+ * @li @c "invalid InterpolationKind value"
  *
  * @memberof SampledField_t
  */
@@ -1431,7 +1429,7 @@ SampledField_getInterpolationTypeAsString(const SampledField_t * sf);
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
- * @li @sbmlconstant{SAMPLED_FIELD_COMPRESSION_INVALID, CompressionKind_t}
+ * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_INVALID, CompressionKind_t}
  *
  * @memberof SampledField_t
  */
@@ -1454,7 +1452,7 @@ SampledField_getCompression(const SampledField_t * sf);
  * The possible values returned by this method are:
  * @li @c "uncompressed"
  * @li @c "deflated"
- * @li @c "invalid SampledFieldCompression"
+ * @li @c "invalid CompressionKind value"
  *
  * @memberof SampledField_t
  */

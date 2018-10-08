@@ -406,6 +406,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "One",
  * "Two",
+ * "invalid Enum value",
  * or @c NULL if the value is @sbmlconstant{TEST_ENUM_INVALID, Enum_t} or
  * another invalid enumeration value.
  *
@@ -469,8 +470,9 @@ Enum_isValid(Enum_t e);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "One", or
- * "Two";
+ * "One",
+ * "Two", or
+ * "invalid Enum value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "One" will return @c 1 (true), but
@@ -503,9 +505,9 @@ Enum_isValidString(const char* code);
  */
 typedef enum
 {
-  TEST_FRED_T_TOM           /*!< The test fred is @c "tom". */
-, TEST_FRED_T_DICK          /*!< The test fred is @c "dick". */
-, TEST_FRED_T_INVALID       /*!< Invalid Fred value. */
+  TEST_FRED_T_TOM         /*!< The test fred is @c "tom". */
+, TEST_FRED_T_DICK        /*!< The test fred is @c "dick". */
+, TEST_FRED_INVALID       /*!< Invalid Fred value. */
 } Fred_t;
 
 
@@ -517,7 +519,8 @@ typedef enum
  * @return A string corresponding to the given type:
  * "tom",
  * "dick",
- * or @c NULL if the value is @sbmlconstant{TEST_FRED_T_INVALID, Fred_t} or
+ * "invalid Fred value",
+ * or @c NULL if the value is @sbmlconstant{TEST_FRED_INVALID, Fred_t} or
  * another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -533,16 +536,16 @@ Fred_toString(Fred_t f);
 
 /**
  * Returns the #Fred_t enumeration corresponding to the given string or
- * @sbmlconstant{TEST_FRED_T_INVALID, Fred_t} if there is no such match.
+ * @sbmlconstant{TEST_FRED_INVALID, Fred_t} if there is no such match.
  *
  * @param code the string to convert to a #Fred_t.
  *
- * @return the corresponding #Fred_t or @sbmlconstant{TEST_FRED_T_INVALID,
+ * @return the corresponding #Fred_t or @sbmlconstant{TEST_FRED_INVALID,
  * Fred_t} if no match is found.
  *
  * @note The matching is case-sensitive: "tom" will return
  * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, but "Tom" will return
- * @sbmlconstant{TEST_FRED_T_INVALID, Fred_t}.
+ * @sbmlconstant{TEST_FRED_INVALID, Fred_t}.
  *
  * @if conly
  * @memberof Test_t
@@ -562,8 +565,7 @@ Fred_fromString(const char* code);
  * @return @c 1 (true) if the #Fred_t is
  * @sbmlconstant{TEST_FRED_T_TOM, Fred_t}, or
  * @sbmlconstant{TEST_FRED_T_DICK, Fred_t};
- * @c 0 (false) otherwise (including @sbmlconstant{TEST_FRED_T_INVALID,
- * Fred_t}).
+ * @c 0 (false) otherwise (including @sbmlconstant{TEST_FRED_INVALID, Fred_t}).
  *
  * @if conly
  * @memberof Test_t
@@ -581,8 +583,9 @@ Fred_isValid(Fred_t f);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "tom", or
- * "dick";
+ * "tom",
+ * "dick", or
+ * "invalid Fred value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "tom" will return @c 1 (true), but

@@ -196,8 +196,7 @@ public:
    * @li @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}
    * @li @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}
    * @li @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t}
-   * @li @sbmlconstant{OUTWARD_BINDING_SITE_BINDING_STATUS_INVALID,
-   * BindingStatus_t}
+   * @li @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t}
    */
   BindingStatus_t getBindingStatus() const;
 
@@ -214,7 +213,7 @@ public:
    * @li @c "bound"
    * @li @c "unbound"
    * @li @c "either"
-   * @li @c "invalid OutwardBindingSiteBindingStatus"
+   * @li @c "invalid BindingStatus value"
    */
   std::string getBindingStatusAsString() const;
 
@@ -903,8 +902,7 @@ OutwardBindingSite_getName(const OutwardBindingSite_t * obs);
  * @li @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}
  * @li @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}
  * @li @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t}
- * @li @sbmlconstant{OUTWARD_BINDING_SITE_BINDING_STATUS_INVALID,
- * BindingStatus_t}
+ * @li @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t}
  *
  * @memberof OutwardBindingSite_t
  */
@@ -929,7 +927,7 @@ OutwardBindingSite_getBindingStatus(const OutwardBindingSite_t * obs);
  * @li @c "bound"
  * @li @c "unbound"
  * @li @c "either"
- * @li @c "invalid OutwardBindingSiteBindingStatus"
+ * @li @c "invalid BindingStatus value"
  *
  * @memberof OutwardBindingSite_t
  */

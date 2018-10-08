@@ -215,7 +215,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "maximize"
    * @li @c "minimize"
-   * @li @c "invalid ObjectiveType"
+   * @li @c "invalid FbcType value"
    */
   std::string getTypeAsString() const;
 
@@ -1314,7 +1314,7 @@ Objective_getType(const Objective_t * o);
  * The possible values returned by this method are:
  * @li @c "maximize"
  * @li @c "minimize"
- * @li @c "invalid ObjectiveType"
+ * @li @c "invalid FbcType value"
  *
  * @memberof Objective_t
  */

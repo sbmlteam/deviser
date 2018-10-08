@@ -218,7 +218,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
    * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
-   * @li @sbmlconstant{CLASS_THREE_NUMBER_INVALID, Enum_t}
+   * @li @sbmlconstant{TEST_ENUM_INVALID, Enum_t}
    */
   Enum_t getNumber() const;
 
@@ -233,7 +233,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "One"
    * @li @c "Two"
-   * @li @c "invalid ClassThreeNumber"
+   * @li @c "invalid Enum value"
    */
   std::string getNumberAsString() const;
 
@@ -248,7 +248,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
    * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
-   * @li @sbmlconstant{CLASS_THREE_NAME_INVALID, Fred_t}
+   * @li @sbmlconstant{TEST_FRED_INVALID, Fred_t}
    */
   virtual Fred_t getName() const;
 
@@ -262,7 +262,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "tom"
    * @li @c "dick"
-   * @li @c "invalid ClassThreeName"
+   * @li @c "invalid Fred value"
    */
   std::string getNameAsString() const;
 
@@ -278,7 +278,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
    * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
-   * @li @sbmlconstant{CLASS_THREE_BAD_NAME_INVALID, Fred_t}
+   * @li @sbmlconstant{TEST_FRED_INVALID, Fred_t}
    */
   Fred_t getBadName() const;
 
@@ -293,7 +293,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "tom"
    * @li @c "dick"
-   * @li @c "invalid ClassThreeBadName"
+   * @li @c "invalid Fred value"
    */
   std::string getBadNameAsString() const;
 
@@ -309,7 +309,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
    * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
-   * @li @sbmlconstant{CLASS_THREE_OTHER_NUM_INVALID, Enum_t}
+   * @li @sbmlconstant{TEST_ENUM_INVALID, Enum_t}
    */
   Enum_t getOtherNum() const;
 
@@ -324,7 +324,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "One"
    * @li @c "Two"
-   * @li @c "invalid ClassThreeOtherNum"
+   * @li @c "invalid Enum value"
    */
   std::string getOtherNumAsString() const;
 
@@ -1000,7 +1000,7 @@ ClassThree_free(ClassThree_t* ct);
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
  * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
- * @li @sbmlconstant{CLASS_THREE_NUMBER_INVALID, Enum_t}
+ * @li @sbmlconstant{TEST_ENUM_INVALID, Enum_t}
  *
  * @memberof ClassThree_t
  */
@@ -1023,7 +1023,7 @@ ClassThree_getNumber(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @c "One"
  * @li @c "Two"
- * @li @c "invalid ClassThreeNumber"
+ * @li @c "invalid Enum value"
  *
  * @memberof ClassThree_t
  */
@@ -1044,7 +1044,7 @@ ClassThree_getNumberAsString(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
  * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
- * @li @sbmlconstant{CLASS_THREE_NAME_INVALID, Fred_t}
+ * @li @sbmlconstant{TEST_FRED_INVALID, Fred_t}
  *
  * @memberof ClassThree_t
  */
@@ -1067,7 +1067,7 @@ ClassThree_getName(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @c "tom"
  * @li @c "dick"
- * @li @c "invalid ClassThreeName"
+ * @li @c "invalid Fred value"
  *
  * @memberof ClassThree_t
  */
@@ -1089,7 +1089,7 @@ ClassThree_getNameAsString(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_FRED_T_TOM, Fred_t}
  * @li @sbmlconstant{TEST_FRED_T_DICK, Fred_t}
- * @li @sbmlconstant{CLASS_THREE_BAD_NAME_INVALID, Fred_t}
+ * @li @sbmlconstant{TEST_FRED_INVALID, Fred_t}
  *
  * @memberof ClassThree_t
  */
@@ -1112,7 +1112,7 @@ ClassThree_getBadName(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @c "tom"
  * @li @c "dick"
- * @li @c "invalid ClassThreeBadName"
+ * @li @c "invalid Fred value"
  *
  * @memberof ClassThree_t
  */
@@ -1134,7 +1134,7 @@ ClassThree_getBadNameAsString(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @sbmlconstant{TEST_ENUM_ONE, Enum_t}
  * @li @sbmlconstant{TEST_ENUM_TWO, Enum_t}
- * @li @sbmlconstant{CLASS_THREE_OTHER_NUM_INVALID, Enum_t}
+ * @li @sbmlconstant{TEST_ENUM_INVALID, Enum_t}
  *
  * @memberof ClassThree_t
  */
@@ -1157,7 +1157,7 @@ ClassThree_getOtherNum(const ClassThree_t * ct);
  * The possible values returned by this method are:
  * @li @c "One"
  * @li @c "Two"
- * @li @c "invalid ClassThreeOtherNum"
+ * @li @c "invalid Enum value"
  *
  * @memberof ClassThree_t
  */

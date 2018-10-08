@@ -205,7 +205,7 @@ public:
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
    * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
-   * @li @sbmlconstant{SPATIAL_POINTS_COMPRESSION_INVALID, CompressionKind_t}
+   * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_INVALID, CompressionKind_t}
    */
   CompressionKind_t getCompression() const;
 
@@ -220,7 +220,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "uncompressed"
    * @li @c "deflated"
-   * @li @c "invalid SpatialPointsCompression"
+   * @li @c "invalid CompressionKind value"
    */
   std::string getCompressionAsString() const;
 
@@ -261,7 +261,7 @@ public:
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
    * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
-   * @li @sbmlconstant{SPATIAL_POINTS_DATA_TYPE_INVALID, DataKind_t}
+   * @li @sbmlconstant{SPATIAL_DATAKIND_INVALID, DataKind_t}
    */
   DataKind_t getDataType() const;
 
@@ -279,7 +279,7 @@ public:
    * @li @c "uint8"
    * @li @c "uint16"
    * @li @c "uint32"
-   * @li @c "invalid SpatialPointsDataType"
+   * @li @c "invalid DataKind value"
    */
   std::string getDataTypeAsString() const;
 
@@ -996,7 +996,7 @@ SpatialPoints_getId(const SpatialPoints_t * sp);
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_UNCOMPRESSED, CompressionKind_t}
  * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_DEFLATED, CompressionKind_t}
- * @li @sbmlconstant{SPATIAL_POINTS_COMPRESSION_INVALID, CompressionKind_t}
+ * @li @sbmlconstant{SPATIAL_COMPRESSIONKIND_INVALID, CompressionKind_t}
  *
  * @memberof SpatialPoints_t
  */
@@ -1019,7 +1019,7 @@ SpatialPoints_getCompression(const SpatialPoints_t * sp);
  * The possible values returned by this method are:
  * @li @c "uncompressed"
  * @li @c "deflated"
- * @li @c "invalid SpatialPointsCompression"
+ * @li @c "invalid CompressionKind value"
  *
  * @memberof SpatialPoints_t
  */
@@ -1060,7 +1060,7 @@ SpatialPoints_getArrayDataLength(const SpatialPoints_t * sp);
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT8, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT16, DataKind_t}
  * @li @sbmlconstant{SPATIAL_DATAKIND_UINT32, DataKind_t}
- * @li @sbmlconstant{SPATIAL_POINTS_DATA_TYPE_INVALID, DataKind_t}
+ * @li @sbmlconstant{SPATIAL_DATAKIND_INVALID, DataKind_t}
  *
  * @memberof SpatialPoints_t
  */
@@ -1086,7 +1086,7 @@ SpatialPoints_getDataType(const SpatialPoints_t * sp);
  * @li @c "uint8"
  * @li @c "uint16"
  * @li @c "uint32"
- * @li @c "invalid SpatialPointsDataType"
+ * @li @c "invalid DataKind value"
  *
  * @memberof SpatialPoints_t
  */

@@ -409,6 +409,7 @@ typedef enum
  * "classification",
  * "partonomy",
  * "collection",
+ * "invalid GroupKind value",
  * or @c NULL if the value is @sbmlconstant{GROUP_KIND_INVALID, GroupKind_t} or
  * another invalid enumeration value.
  *
@@ -475,8 +476,9 @@ GroupKind_isValid(GroupKind_t gk);
  *
  * @return @c 1 (true) if the string is
  * "classification",
- * "partonomy", or
- * "collection";
+ * "partonomy",
+ * "collection", or
+ * "invalid GroupKind value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "classification" will return @c 1

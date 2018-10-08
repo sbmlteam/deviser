@@ -453,6 +453,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "maximize",
  * "minimize",
+ * "invalid FbcType value",
  * or @c NULL if the value is @sbmlconstant{OBJECTIVE_TYPE_INVALID, FbcType_t}
  * or another invalid enumeration value.
  *
@@ -517,8 +518,9 @@ FbcType_isValid(FbcType_t ft);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "maximize", or
- * "minimize";
+ * "maximize",
+ * "minimize", or
+ * "invalid FbcType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "maximize" will return @c 1 (true),

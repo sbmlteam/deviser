@@ -189,7 +189,7 @@ public:
    * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
    * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}
    * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Z, CoordinateKind_t}
-   * @li @sbmlconstant{COORDINATE_COMPONENT_TYPE_INVALID, CoordinateKind_t}
+   * @li @sbmlconstant{SPATIAL_COORDINATEKIND_INVALID, CoordinateKind_t}
    */
   CoordinateKind_t getType() const;
 
@@ -205,7 +205,7 @@ public:
    * @li @c "cartesianX"
    * @li @c "cartesianY"
    * @li @c "cartesianZ"
-   * @li @c "invalid CoordinateComponentType"
+   * @li @c "invalid CoordinateKind value"
    */
   std::string getTypeAsString() const;
 
@@ -1137,7 +1137,7 @@ CoordinateComponent_getId(const CoordinateComponent_t * cc);
  * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_X, CoordinateKind_t}
  * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Y, CoordinateKind_t}
  * @li @sbmlconstant{SPATIAL_COORDINATEKIND_CARTESIAN_Z, CoordinateKind_t}
- * @li @sbmlconstant{COORDINATE_COMPONENT_TYPE_INVALID, CoordinateKind_t}
+ * @li @sbmlconstant{SPATIAL_COORDINATEKIND_INVALID, CoordinateKind_t}
  *
  * @memberof CoordinateComponent_t
  */
@@ -1161,7 +1161,7 @@ CoordinateComponent_getType(const CoordinateComponent_t * cc);
  * @li @c "cartesianX"
  * @li @c "cartesianY"
  * @li @c "cartesianZ"
- * @li @c "invalid CoordinateComponentType"
+ * @li @c "invalid CoordinateKind value"
  *
  * @memberof CoordinateComponent_t
  */

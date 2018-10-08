@@ -481,6 +481,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "maximize",
  * "minimize",
+ * "invalid AbcType value",
  * or @c NULL if the value is @sbmlconstant{OBJECTIVE_TYPE_INVALID, AbcType_t}
  * or another invalid enumeration value.
  *
@@ -545,8 +546,9 @@ AbcType_isValid(AbcType_t at);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "maximize", or
- * "minimize";
+ * "maximize",
+ * "minimize", or
+ * "invalid AbcType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "maximize" will return @c 1 (true),

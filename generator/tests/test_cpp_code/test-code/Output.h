@@ -190,8 +190,7 @@ public:
    * TransitionOutputEffect_t}
    * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
    * TransitionOutputEffect_t}
-   * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
-   * TransitionOutputEffect_t}
+   * @li @sbmlconstant{OUTPUT_TRANSITION_INVALID, TransitionOutputEffect_t}
    */
   TransitionOutputEffect_t getTransitionEffect() const;
 
@@ -206,7 +205,7 @@ public:
    * The possible values returned by this method are:
    * @li @c "production"
    * @li @c "assignmentLevel"
-   * @li @c "invalid OutputTransitionEffect"
+   * @li @c "invalid TransitionOutputEffect value"
    */
   std::string getTransitionEffectAsString() const;
 
@@ -917,8 +916,7 @@ Output_getQualitativeSpecies(const Output_t * o);
  * TransitionOutputEffect_t}
  * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL,
  * TransitionOutputEffect_t}
- * @li @sbmlconstant{OUTPUT_TRANSITION_EFFECT_INVALID,
- * TransitionOutputEffect_t}
+ * @li @sbmlconstant{OUTPUT_TRANSITION_INVALID, TransitionOutputEffect_t}
  *
  * @memberof Output_t
  */
@@ -941,7 +939,7 @@ Output_getTransitionEffect(const Output_t * o);
  * The possible values returned by this method are:
  * @li @c "production"
  * @li @c "assignmentLevel"
- * @li @c "invalid OutputTransitionEffect"
+ * @li @c "invalid TransitionOutputEffect value"
  *
  * @memberof Output_t
  */

@@ -178,8 +178,7 @@ public:
    * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
    * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}
    * @li @sbmlconstant{SPATIAL_SETOPERATION_RELATIVECOMPLEMENT, SetOperation_t}
-   * @li @sbmlconstant{C_S_G_SET_OPERATOR_OPERATION_TYPE_INVALID,
-   * SetOperation_t}
+   * @li @sbmlconstant{SPATIAL_SETOPERATION_INVALID, SetOperation_t}
    */
   SetOperation_t getOperationType() const;
 
@@ -195,7 +194,7 @@ public:
    * @li @c "union"
    * @li @c "intersection"
    * @li @c "relativeComplement"
-   * @li @c "invalid CSGSetOperatorOperationType"
+   * @li @c "invalid SetOperation value"
    */
   std::string getOperationTypeAsString() const;
 
@@ -1288,7 +1287,7 @@ CSGSetOperator_free(CSGSetOperator_t* csgso);
  * @li @sbmlconstant{SPATIAL_SETOPERATION_UNION, SetOperation_t}
  * @li @sbmlconstant{SPATIAL_SETOPERATION_INTERSECTION, SetOperation_t}
  * @li @sbmlconstant{SPATIAL_SETOPERATION_RELATIVECOMPLEMENT, SetOperation_t}
- * @li @sbmlconstant{C_S_G_SET_OPERATOR_OPERATION_TYPE_INVALID, SetOperation_t}
+ * @li @sbmlconstant{SPATIAL_SETOPERATION_INVALID, SetOperation_t}
  *
  * @memberof CSGSetOperator_t
  */
@@ -1312,7 +1311,7 @@ CSGSetOperator_getOperationType(const CSGSetOperator_t * csgso);
  * @li @c "union"
  * @li @c "intersection"
  * @li @c "relativeComplement"
- * @li @c "invalid CSGSetOperatorOperationType"
+ * @li @c "invalid SetOperation value"
  *
  * @memberof CSGSetOperator_t
  */

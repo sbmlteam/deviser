@@ -201,7 +201,7 @@ public:
    * @li @c "classification"
    * @li @c "partonomy"
    * @li @c "collection"
-   * @li @c "invalid GroupKind"
+   * @li @c "invalid GroupKind value"
    */
   std::string getKindAsString() const;
 
@@ -1240,7 +1240,7 @@ Group_getKind(const Group_t * g);
  * @li @c "classification"
  * @li @c "partonomy"
  * @li @c "collection"
- * @li @c "invalid GroupKind"
+ * @li @c "invalid GroupKind value"
  *
  * @memberof Group_t
  */

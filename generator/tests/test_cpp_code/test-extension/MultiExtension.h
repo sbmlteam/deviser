@@ -408,7 +408,7 @@ typedef enum
   MULTI_BINDING_STATUS_BOUND         /*!< The multi binding is @c "bound". */
 , MULTI_BINDING_STATUS_UNBOUND       /*!< The multi binding is @c "unbound". */
 , MULTI_BINDING_STATUS_EITHER        /*!< The multi binding is @c "either". */
-, MULTI_BINDING_STATUS_INVALID       /*!< Invalid BindingStatus value. */
+, MULTI_BINDING_INVALID              /*!< Invalid BindingStatus value. */
 } BindingStatus_t;
 
 
@@ -421,7 +421,8 @@ typedef enum
  * "bound",
  * "unbound",
  * "either",
- * or @c NULL if the value is @sbmlconstant{MULTI_BINDING_STATUS_INVALID,
+ * "invalid BindingStatus value",
+ * or @c NULL if the value is @sbmlconstant{MULTI_BINDING_INVALID,
  * BindingStatus_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -437,18 +438,17 @@ BindingStatus_toString(BindingStatus_t bs);
 
 /**
  * Returns the #BindingStatus_t enumeration corresponding to the given string
- * or @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if there is
- * no such match.
+ * or @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t} if there is no such
+ * match.
  *
  * @param code the string to convert to a #BindingStatus_t.
  *
  * @return the corresponding #BindingStatus_t or
- * @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t} if no match is
- * found.
+ * @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t} if no match is found.
  *
  * @note The matching is case-sensitive: "bound" will return
  * @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t}, but "Bound" will
- * return @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t}.
+ * return @sbmlconstant{MULTI_BINDING_INVALID, BindingStatus_t}.
  *
  * @if conly
  * @memberof Multi_t
@@ -469,8 +469,8 @@ BindingStatus_fromString(const char* code);
  * @sbmlconstant{MULTI_BINDING_STATUS_BOUND, BindingStatus_t},
  * @sbmlconstant{MULTI_BINDING_STATUS_UNBOUND, BindingStatus_t}, or
  * @sbmlconstant{MULTI_BINDING_STATUS_EITHER, BindingStatus_t};
- * @c 0 (false) otherwise (including
- * @sbmlconstant{MULTI_BINDING_STATUS_INVALID, BindingStatus_t}).
+ * @c 0 (false) otherwise (including @sbmlconstant{MULTI_BINDING_INVALID,
+ * BindingStatus_t}).
  *
  * @if conly
  * @memberof Multi_t
@@ -489,8 +489,9 @@ BindingStatus_isValid(BindingStatus_t bs);
  *
  * @return @c 1 (true) if the string is
  * "bound",
- * "unbound", or
- * "either";
+ * "unbound",
+ * "either", or
+ * "invalid BindingStatus value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "bound" will return @c 1 (true), but
@@ -539,6 +540,7 @@ typedef enum
  * "and",
  * "or",
  * "not",
+ * "invalid Relation value",
  * or @c NULL if the value is @sbmlconstant{MULTI_RELATION_INVALID, Relation_t}
  * or another invalid enumeration value.
  *
@@ -605,8 +607,9 @@ Relation_isValid(Relation_t r);
  *
  * @return @c 1 (true) if the string is
  * "and",
- * "or", or
- * "not";
+ * "or",
+ * "not", or
+ * "invalid Relation value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "and" will return @c 1 (true), but
@@ -654,6 +657,7 @@ typedef enum
  * @return A string corresponding to the given type:
  * "sum",
  * "numericValue",
+ * "invalid RepresentationType value",
  * or @c NULL if the value is @sbmlconstant{MULTI_REPRESENTATIONTYPE_INVALID,
  * RepresentationType_t} or another invalid enumeration value.
  *
@@ -721,8 +725,9 @@ RepresentationType_isValid(RepresentationType_t rt);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "sum", or
- * "numericValue";
+ * "sum",
+ * "numericValue", or
+ * "invalid RepresentationType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "sum" will return @c 1 (true), but
