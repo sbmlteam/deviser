@@ -346,7 +346,7 @@ def main():
         class_name = 'CSGNode'
         list_of = 'ListOfCSGNodes'
         test_case = 'abstract'
-        fail += run_test(name, num, class_name, test_case, list_of)
+#        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'spatial'
         num = 16
@@ -710,7 +710,7 @@ def main():
         class_name = 'Distribution'
         list_of = ''
         test_case = 'abstract class with multiple abstract children'
-        fail += run_test(name, num, class_name, test_case, list_of)
+#        fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'new_distrib'
         num = 0

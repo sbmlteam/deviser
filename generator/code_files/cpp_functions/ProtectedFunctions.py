@@ -56,6 +56,10 @@ class ProtectedFunctions():
             self.is_plugin = class_object['is_plugin']
             if 'sbase' in class_object:
                 self.base = class_object['sbase']
+
+        self.element_name = ''
+        if 'elementName' in class_object:
+            self.element_name = class_object['elementName']
         if is_list_of:
             self.child_name = class_object['lo_child']
         else:
@@ -451,15 +455,14 @@ class ProtectedFunctions():
 
         return code
 
-    @staticmethod
-    def write_create_object_class(name, ns, create=False):
+    def write_create_object_class(self, name, ns, create=False):
         if global_variables.is_package:
             use_ns = ns
         else:
             use_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
         xmlname = strFunctions.lower_first(name)
         if not global_variables.is_package:
-            temp = strFunctions.remove_prefix(name)
+            temp = strFunctions.remove_prefix(self.element_name)
             xmlname = strFunctions.lower_first(temp)
 
         if not create:

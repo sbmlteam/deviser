@@ -229,10 +229,12 @@ class BaseTemplateFile:
         line = re.sub('<SPEC_NAMESPACE>', '\"{0}\"'.format(global_variables.namespaces[-1]['namespace']), line)
         line = re.sub('language_', '{0}'.format(global_variables.language.lower()), line)
         line = re.sub('LANGUAGE', '{0}'.format(global_variables.language.upper()), line)
-        line = re.sub('<SPEC_LEVEL>', '{0}'.format(global_variables.namespaces[-1]['level']), line)
-        line = re.sub('<SPEC_VERSION>', '{0}'.format(global_variables.namespaces[-1]['version']), line)
-        line = re.sub('<Annotation>', global_variables.annot_element, line)
-        line = re.sub('<annotation_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.annot_element)), line)
+        if global_variables.namespaces is not None and len(global_variables.namespaces) > 0 and 'level' in global_variables.namespaces[-1]:
+            line = re.sub('<SPEC_LEVEL>', '{0}'.format(global_variables.namespaces[-1]['level']), line)
+            line = re.sub('<SPEC_VERSION>', '{0}'.format(global_variables.namespaces[-1]['version']), line)
+        if global_variables.annot_element is not None:
+            line = re.sub('<Annotation>', global_variables.annot_element, line)
+            line = re.sub('<annotation_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.annot_element)), line)
         line = re.sub('<NS>', 'LIBSBML_CPP_NAMESPACE_QUALIFIER ', line)
         return line
 
@@ -339,11 +341,14 @@ class BaseTemplateFile:
 
     @staticmethod
     def print_all_namespaces(fileout, static=False):
+        if global_variables.namespaces is None or len(global_variables.namespaces) == 0:
+            return
         indent = '  '
         if static:
             indent = 'static '
         for ns in global_variables.namespaces:
-            line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(global_variables.prefix.upper(),
-                                                                                 ns['level'], ns['version'],
-                                                                                 ns['namespace'], indent)
-            fileout.copy_line_verbatim(line)
+            if 'level' in ns and 'version' in ns and 'namespace' in ns:
+                line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(global_variables.prefix.upper(),
+                                                                                     ns['level'], ns['version'],
+                                                                                     ns['namespace'], indent)
+                fileout.copy_line_verbatim(line)

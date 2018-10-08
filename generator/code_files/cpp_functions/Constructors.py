@@ -62,8 +62,12 @@ class Constructors():
             self.is_list_of = True
 
         self.has_children = class_object['has_children']
-        self.child_elements = class_object['child_elements']
-        self.child_lo_elements = class_object['child_lo_elements']
+        self.child_elements = []
+        if 'child_elements' in class_object:
+            self.child_elements = class_object['child_elements']
+        self.child_lo_elements = []
+        if 'child_lo_elements' in class_object:
+            self.child_lo_elements = class_object['child_lo_elements']
         self.overwrites_children = class_object['overwrites_children']
         if 'elementName' in class_object and class_object['elementName'] != '':
             self.xml_name = \

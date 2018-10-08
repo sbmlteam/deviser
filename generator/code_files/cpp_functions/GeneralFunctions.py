@@ -88,7 +88,7 @@ class GeneralFunctions():
             self.override_name = True
             if is_list_of:
                 self.element_name = \
-                    strFunctions.lower_list_of_name_no_prefix(class_object['elementName'])
+                    strFunctions.lower_list_of_name_no_prefix(class_object['lo_child'])
             else:
                 self.element_name = class_object['elementName']
 
@@ -683,10 +683,12 @@ class GeneralFunctions():
                         att['pluralName'].startswith('csg'):
                     name = 'CSG' + att['pluralName'][3:]
                 else:
-                    if 'xml_name' in att and att['xml_name'] != att['name']:
-                        name = strFunctions.upper_first(strFunctions.plural(att['xml_name']))
-                    else:
-                        name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
+                    # if 'xml_name' in att and att['xml_name'] != att['name']:
+                    #     name = strFunctions.upper_first(strFunctions.plural(att['xml_name']))
+                    # else:
+                    #     name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
+                    # fix for sbgn but may need to sort
+                    name = strFunctions.plural(att['capAttName'])
             if att['type'] == 'inline_lo_element':
                 implementation = ['unsigned int i = 0; i < getNum{0}(); i++'.format(name),
                                   'get{0}(i)->write(stream)'.format(strFunctions.singular(name))]

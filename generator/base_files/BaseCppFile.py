@@ -300,7 +300,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 if attributes[i]['attTypeCode'] == 'XMLNode*' and not global_variables.is_package:
                     attributes[i]['attTypeCode'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}*'.format(attributes[i]['element'])
                     attributes[i]['CType'] = 'LIBSBML_CPP_NAMESPACE_QUALIFIER {0}_t*'.format(attributes[i]['element'])
-
+#                attributes[i]['capAttName'] = strFunctions.remove_prefix(attributes[i]['element'])
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
                 if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):

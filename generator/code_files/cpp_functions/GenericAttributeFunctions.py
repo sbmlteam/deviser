@@ -506,7 +506,10 @@ class GenericAttributeFunctions():
                     else:
                         first = False
                     block.append('elementName == \"{0}\"'.format(elem['name']))
-                    [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
+                    if strFunctions.is_camel_case(elem['element']):
+                        elem_name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
+                    else:
+                        [elem_name, unused] = strFunctions.remove_hyphens(elem['name'])
                     block.append('return create{0}()'.format(strFunctions.upper_first(elem_name)))
                     if len(block) > 2:
                         if_block = self.create_code_block('else_if', block)
