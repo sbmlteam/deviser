@@ -479,7 +479,9 @@ class BaseFile:
             self.write_comment_line('Level&nbsp;3 Version&nbsp;1 {0} specification, the following are the'.format(self.package))
             self.write_comment_line('allowable values for "{0}":'.format(enum['name']))
             self.write_comment_line('<ul>')
-            for value in enum['values']:
+            # dont write the invalid block
+            for i in range(0, len(enum['values'])-1):
+                value = enum['values'][i]
                 self.write_comment_line('<li> @c "{0}", TODO:add description'.format(value['value']))
                 self.write_blank_comment_line()
             self.write_comment_line('</ul>')

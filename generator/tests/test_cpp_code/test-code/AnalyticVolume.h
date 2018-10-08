@@ -182,7 +182,7 @@ public:
    * @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_LAYERED, FunctionKind_t}
-   * @li @sbmlconstant{ANALYTIC_VOLUME_FUNCTION_TYPE_INVALID, FunctionKind_t}
+   * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_INVALID, FunctionKind_t}
    */
   FunctionKind_t getFunctionType() const;
 
@@ -196,7 +196,7 @@ public:
    * @copydetails doc_analyticvolume_functionType
    * The possible values returned by this method are:
    * @li @c "layered"
-   * @li @c "invalid AnalyticVolumeFunctionType"
+   * @li @c "invalid FunctionKind value"
    */
   std::string getFunctionTypeAsString() const;
 
@@ -944,7 +944,7 @@ AnalyticVolume_getId(const AnalyticVolume_t * av);
  * @if clike The value is drawn from the enumeration @ref FunctionKind_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_LAYERED, FunctionKind_t}
- * @li @sbmlconstant{ANALYTIC_VOLUME_FUNCTION_TYPE_INVALID, FunctionKind_t}
+ * @li @sbmlconstant{SPATIAL_FUNCTIONKIND_INVALID, FunctionKind_t}
  *
  * @memberof AnalyticVolume_t
  */
@@ -966,7 +966,7 @@ AnalyticVolume_getFunctionType(const AnalyticVolume_t * av);
  * @copydetails doc_analyticvolume_functionType
  * The possible values returned by this method are:
  * @li @c "layered"
- * @li @c "invalid AnalyticVolumeFunctionType"
+ * @li @c "invalid FunctionKind value"
  *
  * @memberof AnalyticVolume_t
  */

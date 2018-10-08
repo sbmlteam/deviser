@@ -200,7 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-#    runall = False
+    runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -967,11 +967,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib_test'
-        num = 16
-        class_name = 'DistribBernoulliDistribution'
-        list_of = ''
-        test_case = 'concrete class'
+        name = 'spatial'
+        num = 12
+        class_name = 'AnalyticVolume'
+        list_of = 'ListOfAnalyticVolumes'
+        test_case = 'class with math child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)
