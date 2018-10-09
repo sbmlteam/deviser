@@ -264,7 +264,7 @@ public:
   /**
    * Sets the value of the "fill-rule" attribute of this GraphicalPrimitive2D.
    *
-   * @param fill-rule std::string& of the "fill-rule" attribute to be set.
+   * @param fillRule std::string& of the "fill-rule" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -946,7 +946,7 @@ GraphicalPrimitive2D_setFillRule(GraphicalPrimitive2D_t * gpd,
  *
  * @param gpd the GraphicalPrimitive2D_t structure.
  *
- * @param fill-rule const char * of the "fill-rule" attribute to be set.
+ * @param fillRule const char * of the "fill-rule" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
