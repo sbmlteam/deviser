@@ -683,12 +683,14 @@ class GeneralFunctions():
                         att['pluralName'].startswith('csg'):
                     name = 'CSG' + att['pluralName'][3:]
                 else:
-                    # if 'xml_name' in att and att['xml_name'] != att['name']:
-                    #     name = strFunctions.upper_first(strFunctions.plural(att['xml_name']))
-                    # else:
-                    #     name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
+                    if 'used_child_name' in att:
+                        name = strFunctions.upper_first(strFunctions.plural(att['used_child_name']))
+                    elif 'xml_name' in att and att['xml_name'] != att['name']:
+                        name = strFunctions.upper_first(strFunctions.plural(att['xml_name']))
+                    else:
+                        name = strFunctions.remove_prefix(strFunctions.upper_first(att['pluralName']))
                     # fix for sbgn but may need to sort
-                    name = strFunctions.plural(att['capAttName'])
+                    #name = strFunctions.plural(att['capAttName'])
             if att['type'] == 'inline_lo_element':
                 implementation = ['unsigned int i = 0; i < getNum{0}(); i++'.format(name),
                                   'get{0}(i)->write(stream)'.format(strFunctions.singular(name))]

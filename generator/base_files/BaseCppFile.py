@@ -222,6 +222,14 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['name'] = strFunctions.lower_first(orig_name)
             else:
                 attributes[i]['name'] = strFunctions.lower_first(capname)
+            # we may want the name to reflect an element
+            if 'element' in attributes[i] and attributes[i]['element'] != '':
+                if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
+                    possible_name = strFunctions.singular(attributes[i]['xml_name'])
+                    # need to catch case where the xmlname is lower case but comes from a camel case element
+                    if strFunctions.is_camel_case(attributes[i]['element']):
+                        if possible_name == attributes[i]['element'].lower():
+                            capname = strFunctions.upper_first(attributes[i]['element'])
             attributes[i]['capAttName'] = capname
             attributes[i]['memberName'] = 'm' + capname
             attributes[i]['pluralName'] = \
@@ -303,6 +311,12 @@ class BaseCppFile(BaseFile.BaseFile):
 #                attributes[i]['capAttName'] = strFunctions.remove_prefix(attributes[i]['element'])
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'NULL'
+                if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
+                    possible_name = strFunctions.singular(attributes[i]['xml_name'])
+                    # need to catch case where the xmlname is lower case but comes from a camel case element
+                    if strFunctions.is_camel_case(attributes[i]['element']) and possible_name == attributes[i]['element'].lower():
+                        possible_name = strFunctions.lower_first(attributes[i]['capAttName'])
+                    attributes[i]['used_child_name'] = possible_name
                 if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):
                     attributes[i]['children_overwrite'] = False
                 else:
@@ -325,7 +339,7 @@ class BaseCppFile(BaseFile.BaseFile):
                 if 'xml_name' in attributes[i] and attributes[i]['xml_name'] != '':
                     possible_name = strFunctions.singular(attributes[i]['xml_name'])
                     # need to catch case where the xmlname is lower case but comes from a camel case element
-                    if strFunctions.is_camel_case(attributes[i]['element']):
+                    if strFunctions.is_camel_case(attributes[i]['element']) and possible_name == attributes[i]['element'].lower():
                         possible_name = strFunctions.lower_first(attributes[i]['capAttName'])
                     attributes[i]['used_child_name'] = possible_name
                 if attrib_name == strFunctions.lower_first(strFunctions.remove_prefix(self.name)):

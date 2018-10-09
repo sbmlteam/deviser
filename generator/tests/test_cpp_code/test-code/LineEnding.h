@@ -227,19 +227,17 @@ public:
 
 
   /**
-   * Returns the value of the "group" element of this LineEnding.
+   * Returns the value of the "g" element of this LineEnding.
    *
-   * @return the value of the "group" element of this LineEnding as a
-   * RenderGroup*.
+   * @return the value of the "g" element of this LineEnding as a RenderGroup*.
    */
   const RenderGroup* getGroup() const;
 
 
   /**
-   * Returns the value of the "group" element of this LineEnding.
+   * Returns the value of the "g" element of this LineEnding.
    *
-   * @return the value of the "group" element of this LineEnding as a
-   * RenderGroup*.
+   * @return the value of the "g" element of this LineEnding as a RenderGroup*.
    */
   RenderGroup* getGroup();
 
@@ -263,10 +261,10 @@ public:
 
 
   /**
-   * Predicate returning @c true if this LineEnding's "group" element is set.
+   * Predicate returning @c true if this LineEnding's "g" element is set.
    *
-   * @return @c true if this LineEnding's "group" element has been set,
-   * otherwise @c false is returned.
+   * @return @c true if this LineEnding's "g" element has been set, otherwise
+   * @c false is returned.
    */
   bool isSetGroup() const;
 
@@ -282,9 +280,9 @@ public:
 
 
   /**
-   * Sets the value of the "group" element of this LineEnding.
+   * Sets the value of the "g" element of this LineEnding.
    *
-   * @param group RenderGroup* value of the "group" element to be set.
+   * @param group RenderGroup* value of the "g" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -327,7 +325,7 @@ public:
 
 
   /**
-   * Unsets the value of the "group" element of this LineEnding.
+   * Unsets the value of the "g" element of this LineEnding.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1107,12 +1105,11 @@ LineEnding_unsetEnableRotationalMapping(LineEnding_t * le);
 
 
 /**
- * Returns the value of the "group" element of this LineEnding_t.
+ * Returns the value of the "g" element of this LineEnding_t.
  *
- * @param le the LineEnding_t structure whose group is sought.
+ * @param le the LineEnding_t structure whose g is sought.
  *
- * @return the value of the "group" element of this LineEnding_t as a
- * RenderGroup*.
+ * @return the value of the "g" element of this LineEnding_t as a RenderGroup*.
  *
  * @memberof LineEnding_t
  */
@@ -1137,12 +1134,11 @@ LineEnding_getBoundingBox(const LineEnding_t * le);
 
 
 /**
- * Predicate returning @c 1 (true) if this LineEnding_t's "group" element is
- * set.
+ * Predicate returning @c 1 (true) if this LineEnding_t's "g" element is set.
  *
  * @param le the LineEnding_t structure.
  *
- * @return @c 1 (true) if this LineEnding_t's "group" element has been set,
+ * @return @c 1 (true) if this LineEnding_t's "g" element has been set,
  * otherwise @c 0 (false) is returned.
  *
  * @memberof LineEnding_t
@@ -1169,11 +1165,11 @@ LineEnding_isSetBoundingBox(const LineEnding_t * le);
 
 
 /**
- * Sets the value of the "group" element of this LineEnding_t.
+ * Sets the value of the "g" element of this LineEnding_t.
  *
  * @param le the LineEnding_t structure.
  *
- * @param group RenderGroup_t* value of the "group" element to be set.
+ * @param group RenderGroup_t* value of the "g" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1241,7 +1237,7 @@ LineEnding_createBoundingBox(LineEnding_t* le);
 
 
 /**
- * Unsets the value of the "group" element of this LineEnding_t.
+ * Unsets the value of the "g" element of this LineEnding_t.
  *
  * @param le the LineEnding_t structure.
  *

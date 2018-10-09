@@ -223,37 +223,37 @@ public:
 
 
   /**
-   * Returns the value of the "uncertML" element of this UncertaintyOld.
+   * Returns the value of the "UncertML" element of this UncertaintyOld.
    *
-   * @return the value of the "uncertML" element of this UncertaintyOld as a
+   * @return the value of the "UncertML" element of this UncertaintyOld as a
    * UncertMLNode*.
    */
   const UncertMLNode* getUncertML() const;
 
 
   /**
-   * Returns the value of the "uncertML" element of this UncertaintyOld.
+   * Returns the value of the "UncertML" element of this UncertaintyOld.
    *
-   * @return the value of the "uncertML" element of this UncertaintyOld as a
+   * @return the value of the "UncertML" element of this UncertaintyOld as a
    * UncertMLNode*.
    */
   UncertMLNode* getUncertML();
 
 
   /**
-   * Predicate returning @c true if this UncertaintyOld's "uncertML" element is
+   * Predicate returning @c true if this UncertaintyOld's "UncertML" element is
    * set.
    *
-   * @return @c true if this UncertaintyOld's "uncertML" element has been set,
+   * @return @c true if this UncertaintyOld's "UncertML" element has been set,
    * otherwise @c false is returned.
    */
   bool isSetUncertML() const;
 
 
   /**
-   * Sets the value of the "uncertML" element of this UncertaintyOld.
+   * Sets the value of the "UncertML" element of this UncertaintyOld.
    *
-   * @param uncertML UncertMLNode* value of the "uncertML" element to be set.
+   * @param uncertML UncertMLNode* value of the "UncertML" element to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -264,7 +264,7 @@ public:
 
 
   /**
-   * Unsets the value of the "uncertML" element of this UncertaintyOld.
+   * Unsets the value of the "UncertML" element of this UncertaintyOld.
    *
    * @copydetails doc_returns_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -991,11 +991,11 @@ UncertaintyOld_unsetName(UncertaintyOld_t * uo);
 
 
 /**
- * Returns the value of the "uncertML" element of this UncertaintyOld_t.
+ * Returns the value of the "UncertML" element of this UncertaintyOld_t.
  *
- * @param uo the UncertaintyOld_t structure whose uncertML is sought.
+ * @param uo the UncertaintyOld_t structure whose UncertML is sought.
  *
- * @return the value of the "uncertML" element of this UncertaintyOld_t as a
+ * @return the value of the "UncertML" element of this UncertaintyOld_t as a
  * UncertMLNode*.
  *
  * @memberof UncertaintyOld_t
@@ -1006,12 +1006,12 @@ UncertaintyOld_getUncertML(const UncertaintyOld_t * uo);
 
 
 /**
- * Predicate returning @c 1 (true) if this UncertaintyOld_t's "uncertML"
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "UncertML"
  * element is set.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @return @c 1 (true) if this UncertaintyOld_t's "uncertML" element has been
+ * @return @c 1 (true) if this UncertaintyOld_t's "UncertML" element has been
  * set, otherwise @c 0 (false) is returned.
  *
  * @memberof UncertaintyOld_t
@@ -1022,11 +1022,11 @@ UncertaintyOld_isSetUncertML(const UncertaintyOld_t * uo);
 
 
 /**
- * Sets the value of the "uncertML" element of this UncertaintyOld_t.
+ * Sets the value of the "UncertML" element of this UncertaintyOld_t.
  *
  * @param uo the UncertaintyOld_t structure.
  *
- * @param uncertML UncertMLNode_t* value of the "uncertML" element to be set.
+ * @param uncertML UncertMLNode_t* value of the "UncertML" element to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1042,7 +1042,7 @@ UncertaintyOld_setUncertML(UncertaintyOld_t * uo,
 
 
 /**
- * Unsets the value of the "uncertML" element of this UncertaintyOld_t.
+ * Unsets the value of the "UncertML" element of this UncertaintyOld_t.
  *
  * @param uo the UncertaintyOld_t structure.
  *
