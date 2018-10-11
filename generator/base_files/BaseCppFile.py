@@ -316,7 +316,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     # need to catch case where the xmlname is lower case but comes from a camel case element
                     if strFunctions.is_camel_case(attributes[i]['element']) and possible_name == attributes[i]['element'].lower():
                         possible_name = strFunctions.lower_first(attributes[i]['capAttName'])
-                    attributes[i]['used_child_name'] = possible_name
+                    [attributes[i]['used_child_name'], unused] = strFunctions.remove_hyphens(possible_name)
                 if strFunctions.compare_no_case(strFunctions.remove_prefix(el_name), at_name):
                     attributes[i]['children_overwrite'] = False
                 else:

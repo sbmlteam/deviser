@@ -624,7 +624,7 @@ def get_child_elements(elements, lo_elements, root=None):
             else:
                 concs = None
             name = strFunctions.remove_prefix(elem['name'])
-            used_child_name = name
+            [used_child_name, unused] = strFunctions.remove_hyphens(name)
             if 'used_child_name' in elem and elem['used_child_name'] != '':
                 used_child_name = elem['used_child_name']
             child_elements.append(dict({'name': name, 'typecode': typecode,
