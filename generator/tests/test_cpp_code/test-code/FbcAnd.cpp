@@ -913,7 +913,10 @@ FbcAnd::createObject(XMLInputStream& stream)
 
   const std::string& name = stream.peek().getName();
 
-  obj = mAssociations.createObject(stream);
+  if (name == "association")
+  {
+    obj = mAssociations.createObject(stream);
+  }
 
   connectToChild();
 

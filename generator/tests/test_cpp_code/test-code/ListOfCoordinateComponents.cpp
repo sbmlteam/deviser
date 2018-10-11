@@ -212,6 +212,10 @@ ListOfCoordinateComponents::addCoordinateComponent(const CoordinateComponent*
   {
     return LIBSBML_INVALID_OBJECT;
   }
+  else if (cc->hasRequiredElements() == false)
+  {
+    return LIBSBML_INVALID_OBJECT;
+  }
   else if (getLevel() != cc->getLevel())
   {
     return LIBSBML_LEVEL_MISMATCH;

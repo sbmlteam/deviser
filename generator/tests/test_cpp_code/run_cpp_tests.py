@@ -200,7 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-#    runall = False
+ #   runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -945,6 +945,27 @@ def main():
         test_case = 'document plugin with additional items'
         fail += run_plug_test(name, class_name, test_case, num)
 
+        name = 'sbgn'
+        num = 3
+        class_name = 'Map'
+        list_of = ''
+        test_case = 'list of with different types elements'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'sbgn'
+        num = 7
+        class_name = 'Arc'
+        list_of = ''
+        test_case = 'list of with different types elements'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'sbgn'
+        num = 2
+        class_name = 'Label'
+        list_of = ''
+        test_case = 'element with different xml name'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
        # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -967,13 +988,19 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'spatial'
-        num = 12
-        class_name = 'AnalyticVolume'
-        list_of = 'ListOfAnalyticVolumes'
-        test_case = 'class with math child'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        # name = 'new_distrib'
+        # num = 15
+        # class_name = 'BernoulliDistribution'
+        # list_of = ''
+        # test_case = 'concrete class'
+        # fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'new_distrib'
+        num = 17
+        class_name = 'BinomialDistribution'
+        list_of = ''
+        test_case = 'concrete class'
+        fail += run_test(name, num, class_name, test_case, list_of)
     test_functions.report('CPP', fail, fails, not_tested)
     return fail
 

@@ -202,6 +202,10 @@ ListOfTransitions::addTransition(const Transition* t)
   {
     return LIBSBML_INVALID_OBJECT;
   }
+  else if (t->hasRequiredElements() == false)
+  {
+    return LIBSBML_INVALID_OBJECT;
+  }
   else if (getLevel() != t->getLevel())
   {
     return LIBSBML_LEVEL_MISMATCH;

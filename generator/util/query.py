@@ -623,8 +623,13 @@ def get_child_elements(elements, lo_elements, root=None):
                 concs = get_concretes(root, conc)
             else:
                 concs = None
-            child_elements.append(dict({'name': strFunctions.remove_prefix(elem['name']), 'typecode': typecode,
-                                        'concrete': concs, 'element': elem['element']}))
+            name = strFunctions.remove_prefix(elem['name'])
+            used_child_name = name
+            if 'used_child_name' in elem and elem['used_child_name'] != '':
+                used_child_name = elem['used_child_name']
+            child_elements.append(dict({'name': name, 'typecode': typecode,
+                                        'concrete': concs, 'element': elem['element'],
+                                        'used_name': used_child_name}))
     for elem in lo_elements:
         if elem['element'] != 'ASTNode*' and elem['element'] != 'XMLNode*':
             if root:
@@ -640,8 +645,13 @@ def get_child_elements(elements, lo_elements, root=None):
             name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
             if not elem['is_plugin'] and (xmlname != name):
                 name = xmlname
-            child_elements.append(dict({'name': name,
-                                        'typecode': typecode, 'concrete': concs, 'element': elem['element']}))
+            name = strFunctions.remove_prefix(elem['name'])
+            used_child_name = name
+            if 'used_child_name' in elem and elem['used_child_name'] != '':
+                used_child_name = elem['used_child_name']
+            child_elements.append(dict({'name': name, 'typecode': typecode,
+                                        'concrete': concs, 'element': elem['element'],
+                                        'used_name': used_child_name}))
     return child_elements
 
 # insert a listOfParent into the tree

@@ -1254,7 +1254,7 @@ Map::addChildObject(const std::string& elementName, const SbgnBase* element)
 {
   if (elementName == "bbox" && element->getTypeCode() == SBGN_SBGNML_BBOX)
   {
-    return setBbox((const BBox*)(element));
+    return setBBox((const BBox*)(element));
   }
   else if (elementName == "glyph" && element->getTypeCode() ==
     SBGN_SBGNML_GLYPH)
@@ -1268,7 +1268,7 @@ Map::addChildObject(const std::string& elementName, const SbgnBase* element)
   else if (elementName == "arcgroup" && element->getTypeCode() ==
     SBGN_SBGNML_ARCGROUP)
   {
-    return addArcgroup((const ArcGroup*)(element));
+    return addArcGroup((const ArcGroup*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1289,8 +1289,8 @@ Map::removeChildObject(const std::string& elementName, const std::string& id)
 {
   if (elementName == "bbox")
   {
-    BBox * obj = getBbox();
-    if (unsetBbox() == LIBSBML_OPERATION_SUCCESS) return obj;
+    BBox * obj = getBBox();
+    if (unsetBBox() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "glyph")
   {
@@ -1302,11 +1302,11 @@ Map::removeChildObject(const std::string& elementName, const std::string& id)
   }
   else if (elementName == "arcgroup")
   {
-    for (unsigned int i = 0; i < getNumArcgroups(); i++)
+    for (unsigned int i = 0; i < getNumArcGroups(); i++)
     {
-      if (getArcgroup(i)->getId() == id)
+      if (getArcGroup(i)->getId() == id)
       {
-        return removeArcgroup(i);
+        return removeArcGroup(i);
       }
     }
   }
@@ -1330,7 +1330,7 @@ Map::getNumObjects(const std::string& elementName)
 
   if (elementName == "bbox")
   {
-    if (isSetBbox())
+    if (isSetBBox())
     {
       return 1;
     }
@@ -1345,7 +1345,7 @@ Map::getNumObjects(const std::string& elementName)
   }
   else if (elementName == "arcgroup")
   {
-    return getNumArcgroups();
+    return getNumArcGroups();
   }
 
   return n;
@@ -1367,7 +1367,7 @@ Map::getObject(const std::string& elementName, unsigned int index)
 
   if (elementName == "bbox")
   {
-    return getBbox();
+    return getBBox();
   }
   else if (elementName == "glyph")
   {
@@ -1379,7 +1379,7 @@ Map::getObject(const std::string& elementName, unsigned int index)
   }
   else if (elementName == "arcgroup")
   {
-    return getArcgroup(index);
+    return getArcGroup(index);
   }
 
   return obj;

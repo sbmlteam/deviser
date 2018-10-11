@@ -324,6 +324,10 @@ ListOfFunctionTerms::addFunctionTerm(const FunctionTerm* ft)
   {
     return LIBSBML_INVALID_OBJECT;
   }
+  else if (ft->hasRequiredElements() == false)
+  {
+    return LIBSBML_INVALID_OBJECT;
+  }
   else if (getLevel() != ft->getLevel())
   {
     return LIBSBML_LEVEL_MISMATCH;
