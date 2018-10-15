@@ -715,7 +715,7 @@ Fred::createOther1()
  * Other object created.
  */
 Other*
-Fred::createOther2()
+Fred::createMyOther()
 {
   if (mOther2 != NULL)
   {
@@ -1336,9 +1336,9 @@ Fred::createChildObject(const std::string& elementName)
   {
     return createOther1();
   }
-  else if (elementName == "other2")
+  else if (elementName == "myOther")
   {
-    return createOther2();
+    return createMyOther();
   }
 
   return obj;
@@ -1364,9 +1364,9 @@ Fred::addChildObject(const std::string& elementName, const SBase* element)
   {
     return setOther1((const Other*)(element));
   }
-  else if (elementName == "other2" && element->getTypeCode() == SBML_X_OTHER)
+  else if (elementName == "myOther" && element->getTypeCode() == SBML_X_OTHER)
   {
-    return setOther2((const Other*)(element));
+    return setMyOther((const Other*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1395,10 +1395,10 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
     Other * obj = getOther1();
     if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
-  else if (elementName == "other2")
+  else if (elementName == "myOther")
   {
-    Other * obj = getOther2();
-    if (unsetOther2() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Other * obj = getMyOther();
+    if (unsetMyOther() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
 
   return NULL;
@@ -1432,9 +1432,9 @@ Fred::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
-  else if (elementName == "other2")
+  else if (elementName == "myOther")
   {
-    if (isSetOther2())
+    if (isSetMyOther())
     {
       return 1;
     }
@@ -1465,9 +1465,9 @@ Fred::getObject(const std::string& elementName, unsigned int index)
   {
     return getOther1();
   }
-  else if (elementName == "other2")
+  else if (elementName == "myOther")
   {
-    return getOther2();
+    return getMyOther();
   }
 
   return obj;

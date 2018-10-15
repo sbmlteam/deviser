@@ -1502,7 +1502,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "spatialSymbolReference")
     {
-      if (isSetSymbolReference())
+      if (isSetSpatialSymbolReference())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialParameterAllowedElements, getPackageVersion(), getLevel(),

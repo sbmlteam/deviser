@@ -272,7 +272,7 @@ LineEnding::unsetEnableRotationalMapping()
 
 
 /*
- * Returns the value of the "group" element of this LineEnding.
+ * Returns the value of the "g" element of this LineEnding.
  */
 const RenderGroup*
 LineEnding::getGroup() const
@@ -282,7 +282,7 @@ LineEnding::getGroup() const
 
 
 /*
- * Returns the value of the "group" element of this LineEnding.
+ * Returns the value of the "g" element of this LineEnding.
  */
 RenderGroup*
 LineEnding::getGroup()
@@ -312,7 +312,7 @@ LineEnding::getBoundingBox()
 
 
 /*
- * Predicate returning @c true if this LineEnding's "group" element is set.
+ * Predicate returning @c true if this LineEnding's "g" element is set.
  */
 bool
 LineEnding::isSetGroup() const
@@ -333,7 +333,7 @@ LineEnding::isSetBoundingBox() const
 
 
 /*
- * Sets the value of the "group" element of this LineEnding.
+ * Sets the value of the "g" element of this LineEnding.
  */
 int
 LineEnding::setGroup(const RenderGroup* group)
@@ -354,7 +354,7 @@ LineEnding::setGroup(const RenderGroup* group)
     mGroup = (group != NULL) ? group->clone() : NULL;
     if (mGroup != NULL)
     {
-      mGroup->setElementName("group");
+      mGroup->setElementName("g");
       mGroup->connectToParent(this);
     }
 
@@ -442,7 +442,7 @@ LineEnding::createBoundingBox()
 
 
 /*
- * Unsets the value of the "group" element of this LineEnding.
+ * Unsets the value of the "g" element of this LineEnding.
  */
 int
 LineEnding::unsetGroup()
@@ -1559,7 +1559,7 @@ LineEnding_unsetEnableRotationalMapping(LineEnding_t * le)
 
 
 /*
- * Returns the value of the "group" element of this LineEnding_t.
+ * Returns the value of the "g" element of this LineEnding_t.
  */
 LIBSBML_EXTERN
 const RenderGroup_t*
@@ -1591,8 +1591,7 @@ LineEnding_getBoundingBox(const LineEnding_t * le)
 
 
 /*
- * Predicate returning @c 1 (true) if this LineEnding_t's "group" element is
- * set.
+ * Predicate returning @c 1 (true) if this LineEnding_t's "g" element is set.
  */
 LIBSBML_EXTERN
 int
@@ -1615,7 +1614,7 @@ LineEnding_isSetBoundingBox(const LineEnding_t * le)
 
 
 /*
- * Sets the value of the "group" element of this LineEnding_t.
+ * Sets the value of the "g" element of this LineEnding_t.
  */
 LIBSBML_EXTERN
 int
@@ -1672,7 +1671,7 @@ LineEnding_createBoundingBox(LineEnding_t* le)
 
 
 /*
- * Unsets the value of the "group" element of this LineEnding_t.
+ * Unsets the value of the "g" element of this LineEnding_t.
  */
 LIBSBML_EXTERN
 int
