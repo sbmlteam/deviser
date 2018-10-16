@@ -647,7 +647,6 @@ def get_child_elements(elements, lo_elements, root=None):
             name = strFunctions.lower_first(strFunctions.remove_prefix(elem['element']))
             if not elem['is_plugin'] and (xmlname != name):
                 name = xmlname
-            name = strFunctions.remove_prefix(elem['name'])
             used_child_name = name
             if 'used_child_name' in elem and elem['used_child_name'] != '':
                 used_child_name = elem['used_child_name']
