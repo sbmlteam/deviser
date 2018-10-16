@@ -62,6 +62,7 @@ Arc::Arc(unsigned int level, unsigned int version)
   , mPorts (level, version)
 {
   setSbgnNamespacesAndOwn(new SbgnNamespaces(level, version));
+  mPoints.setElementName("next");
   connectToChild();
 }
 
@@ -81,6 +82,7 @@ Arc::Arc(SbgnNamespaces *sbgnns)
   , mPorts (sbgnns)
 {
   setElementNamespace(sbgnns->getURI());
+  mPoints.setElementName("next");
   connectToChild();
 }
 
