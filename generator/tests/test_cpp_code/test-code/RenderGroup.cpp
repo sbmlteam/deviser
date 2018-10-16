@@ -66,10 +66,10 @@ RenderGroup::RenderGroup(unsigned int level,
   , mStartHead ("")
   , mEndHead ("")
   , mFontFamily ("")
-  , mFontWeight (FONT_WEIGHT_INVALID)
-  , mFontStyle (FONT_STYLE_INVALID)
-  , mTextAnchor (H_TEXT_ANCHOR_INVALID)
-  , mVtextAnchor (V_TEXT_ANCHOR_INVALID)
+  , mFontWeight (FONT_WEIGHT_NORMAL_INVALID)
+  , mFontStyle (FONT_STYLE_NORMAL_INVALID)
+  , mTextAnchor (H_END_INVALID)
+  , mVtextAnchor (V_ANCHOR_BASELINE_INVALID)
   , mFontSize (NULL)
   , mTransformation2Ds (level, version, pkgVersion)
   , mElementName("g")
@@ -87,15 +87,16 @@ RenderGroup::RenderGroup(RenderPkgNamespaces *renderns)
   , mStartHead ("")
   , mEndHead ("")
   , mFontFamily ("")
-  , mFontWeight (FONT_WEIGHT_INVALID)
-  , mFontStyle (FONT_STYLE_INVALID)
-  , mTextAnchor (H_TEXT_ANCHOR_INVALID)
-  , mVtextAnchor (V_TEXT_ANCHOR_INVALID)
+  , mFontWeight (FONT_WEIGHT_NORMAL_INVALID)
+  , mFontStyle (FONT_STYLE_NORMAL_INVALID)
+  , mTextAnchor (H_END_INVALID)
+  , mVtextAnchor (V_ANCHOR_BASELINE_INVALID)
   , mFontSize (NULL)
   , mTransformation2Ds (renderns)
   , mElementName("g")
 {
   setElementNamespace(renderns->getURI());
+  mTransformation2Ds.setElementName("elements");
   connectToChild();
   loadPlugins(renderns);
 }
@@ -335,7 +336,7 @@ RenderGroup::isSetFontFamily() const
 bool
 RenderGroup::isSetFontWeight() const
 {
-  return (mFontWeight != FONT_WEIGHT_INVALID);
+  return (mFontWeight != FONT_WEIGHT_NORMAL_INVALID);
 }
 
 
@@ -346,7 +347,7 @@ RenderGroup::isSetFontWeight() const
 bool
 RenderGroup::isSetFontStyle() const
 {
-  return (mFontStyle != FONT_STYLE_INVALID);
+  return (mFontStyle != FONT_STYLE_NORMAL_INVALID);
 }
 
 
@@ -357,7 +358,7 @@ RenderGroup::isSetFontStyle() const
 bool
 RenderGroup::isSetTextAnchor() const
 {
-  return (mTextAnchor != H_TEXT_ANCHOR_INVALID);
+  return (mTextAnchor != H_END_INVALID);
 }
 
 
@@ -368,7 +369,7 @@ RenderGroup::isSetTextAnchor() const
 bool
 RenderGroup::isSetVtextAnchor() const
 {
-  return (mVtextAnchor != V_TEXT_ANCHOR_INVALID);
+  return (mVtextAnchor != V_ANCHOR_BASELINE_INVALID);
 }
 
 
@@ -427,7 +428,7 @@ RenderGroup::setFontWeight(const FontWeight_t fontWeight)
 {
   if (FontWeight_isValid(fontWeight) == 0)
   {
-    mFontWeight = FONT_WEIGHT_INVALID;
+    mFontWeight = FONT_WEIGHT_NORMAL_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -446,7 +447,7 @@ RenderGroup::setFontWeight(const std::string& fontWeight)
 {
   mFontWeight = FontWeight_fromString(fontWeight.c_str());
 
-  if (mFontWeight == FONT_WEIGHT_INVALID)
+  if (mFontWeight == FONT_WEIGHT_NORMAL_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -463,7 +464,7 @@ RenderGroup::setFontStyle(const FontStyle_t fontStyle)
 {
   if (FontStyle_isValid(fontStyle) == 0)
   {
-    mFontStyle = FONT_STYLE_INVALID;
+    mFontStyle = FONT_STYLE_NORMAL_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -482,7 +483,7 @@ RenderGroup::setFontStyle(const std::string& fontStyle)
 {
   mFontStyle = FontStyle_fromString(fontStyle.c_str());
 
-  if (mFontStyle == FONT_STYLE_INVALID)
+  if (mFontStyle == FONT_STYLE_NORMAL_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -499,7 +500,7 @@ RenderGroup::setTextAnchor(const HTextAnchor_t textAnchor)
 {
   if (HTextAnchor_isValid(textAnchor) == 0)
   {
-    mTextAnchor = H_TEXT_ANCHOR_INVALID;
+    mTextAnchor = H_END_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -518,7 +519,7 @@ RenderGroup::setTextAnchor(const std::string& textAnchor)
 {
   mTextAnchor = HTextAnchor_fromString(textAnchor.c_str());
 
-  if (mTextAnchor == H_TEXT_ANCHOR_INVALID)
+  if (mTextAnchor == H_END_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -535,7 +536,7 @@ RenderGroup::setVtextAnchor(const VTextAnchor_t vtextAnchor)
 {
   if (VTextAnchor_isValid(vtextAnchor) == 0)
   {
-    mVtextAnchor = V_TEXT_ANCHOR_INVALID;
+    mVtextAnchor = V_ANCHOR_BASELINE_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
@@ -554,7 +555,7 @@ RenderGroup::setVtextAnchor(const std::string& vtextAnchor)
 {
   mVtextAnchor = VTextAnchor_fromString(vtextAnchor.c_str());
 
-  if (mVtextAnchor == V_TEXT_ANCHOR_INVALID)
+  if (mVtextAnchor == V_ANCHOR_BASELINE_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -626,7 +627,7 @@ RenderGroup::unsetFontFamily()
 int
 RenderGroup::unsetFontWeight()
 {
-  mFontWeight = FONT_WEIGHT_INVALID;
+  mFontWeight = FONT_WEIGHT_NORMAL_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -637,7 +638,7 @@ RenderGroup::unsetFontWeight()
 int
 RenderGroup::unsetFontStyle()
 {
-  mFontStyle = FONT_STYLE_INVALID;
+  mFontStyle = FONT_STYLE_NORMAL_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -648,7 +649,7 @@ RenderGroup::unsetFontStyle()
 int
 RenderGroup::unsetTextAnchor()
 {
-  mTextAnchor = H_TEXT_ANCHOR_INVALID;
+  mTextAnchor = H_END_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -659,7 +660,7 @@ RenderGroup::unsetTextAnchor()
 int
 RenderGroup::unsetVtextAnchor()
 {
-  mVtextAnchor = V_TEXT_ANCHOR_INVALID;
+  mVtextAnchor = V_ANCHOR_BASELINE_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -2000,7 +2001,7 @@ RenderGroup::createObject(XMLInputStream& stream)
     mFontSize->setElementName(name);
     obj = mFontSize;
   }
-  else
+  else if (name == "elements")
   {
     obj = mTransformation2Ds.createObject(stream);
   }
@@ -2466,7 +2467,7 @@ RenderGroup_getFontWeight(const RenderGroup_t * rg)
 {
   if (rg == NULL)
   {
-    return FONT_WEIGHT_INVALID;
+    return FONT_WEIGHT_NORMAL_INVALID;
   }
 
   return rg->getFontWeight();
@@ -2493,7 +2494,7 @@ RenderGroup_getFontStyle(const RenderGroup_t * rg)
 {
   if (rg == NULL)
   {
-    return FONT_STYLE_INVALID;
+    return FONT_STYLE_NORMAL_INVALID;
   }
 
   return rg->getFontStyle();
@@ -2520,7 +2521,7 @@ RenderGroup_getTextAnchor(const RenderGroup_t * rg)
 {
   if (rg == NULL)
   {
-    return H_TEXT_ANCHOR_INVALID;
+    return H_END_INVALID;
   }
 
   return rg->getTextAnchor();
@@ -2547,7 +2548,7 @@ RenderGroup_getVtextAnchor(const RenderGroup_t * rg)
 {
   if (rg == NULL)
   {
-    return V_TEXT_ANCHOR_INVALID;
+    return V_ANCHOR_BASELINE_INVALID;
   }
 
   return rg->getVtextAnchor();
