@@ -847,19 +847,22 @@ class BaseCppFile(BaseFile.BaseFile):
         up_typename = strFunctions.upper_first(typename)
         self.open_comment()
         self.write_comment_line('@enum {0}'.format(name))
-        self.write_comment_line('@brief Enumeration of values permitted as the value of the \"{0}\" attribute '
-                                'on {1} objects.'.format(typename, classname))
-        self.write_blank_comment_line()
-        self.write_comment_line('@if conly')
-        self.write_comment_line('@see {0}_get{1}()'.format(classname, up_typename))
-        self.write_comment_line('@see {0}_set{1}()'.format(classname, up_typename))
-        self.write_comment_line('@elseif java')
-        self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
-        self.write_comment_line('@see {0}::set{1}(long)'.format(classname, up_typename))
-        self.write_comment_line('@else')
-        self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
-        self.write_comment_line('@see {0}::set{1}()'.format(classname, up_typename))
-        self.write_comment_line('@endif')
+        if global_variables.library_name != 'Libsbml':
+            self.write_comment_line('@brief Enumeration of values permitted as the value of \"{0}\".'.format(name))
+        else:
+            self.write_comment_line('@brief Enumeration of values permitted as the value of the \"{0}\" attribute '
+                                    'on {1} objects.'.format(typename, classname))
+            self.write_blank_comment_line()
+            self.write_comment_line('@if conly')
+            self.write_comment_line('@see {0}_get{1}()'.format(classname, up_typename))
+            self.write_comment_line('@see {0}_set{1}()'.format(classname, up_typename))
+            self.write_comment_line('@elseif java')
+            self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
+            self.write_comment_line('@see {0}::set{1}(long)'.format(classname, up_typename))
+            self.write_comment_line('@else')
+            self.write_comment_line('@see {0}::get{1}()'.format(classname, up_typename))
+            self.write_comment_line('@see {0}::set{1}()'.format(classname, up_typename))
+            self.write_comment_line('@endif')
         self.close_comment()
 
     # Function to write the header about the typecode enumeration
