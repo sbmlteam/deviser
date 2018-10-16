@@ -664,8 +664,8 @@ static const packageErrorTableEntry renderErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <gradientBase> object may contain one and only one instance of the "
-    "<listOfStops> element. No other elements from the SBML Level 3 Render "
-    "namespaces are permitted on a <gradientBase> object. ",
+    "<listOfGradientStops> element. No other elements from the SBML Level 3 "
+    "Render namespaces are permitted on a <gradientBase> object. ",
     { "L3V1 Render V1 Section"
     }
   },
@@ -800,8 +800,8 @@ static const packageErrorTableEntry renderErrorTable[] =
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <renderGroup> object may contain one and only one instance of the "
-    "<listOfElements> element. No other elements from the SBML Level 3 Render "
-    "namespaces are permitted on a <renderGroup> object. ",
+    "<listOfTransformationTwoDs> element. No other elements from the SBML Level "
+    "3 Render namespaces are permitted on a <renderGroup> object. ",
     { "L3V1 Render V1 Section"
     }
   },
