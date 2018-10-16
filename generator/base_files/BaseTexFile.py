@@ -104,7 +104,7 @@ class BaseTexFile(BaseFile.BaseFile):
             for i in range(0, len(classes)):
                 attribs = classes[i]['attribs']
                 for j in range(0, len(attribs)):
-                    if attribs[j]['type'] == 'lo_element' or attribs[j]['type'] == 'element':
+                    if attribs[j]['type'] == 'lo_element' or attribs[j]['type'] == 'element' or attribs[j]['type'] == 'inline_lo_element':
                         name = attribs[j]['element']
                     else:
                         name = attribs[j]['name']
@@ -114,7 +114,7 @@ class BaseTexFile(BaseFile.BaseFile):
                 if 'lo_attribs' in classes[i]:
                     lo_attribs = classes[i]['lo_attribs']
                     for j in range(0, len(lo_attribs)):
-                        if lo_attribs[j]['type'] == 'lo_element' or lo_attribs[j]['type'] == 'element':
+                        if lo_attribs[j]['type'] == 'lo_element' or lo_attribs[j]['type'] == 'element' or lo_attribs[j]['type'] == 'inline_lo_element' :
                             name = lo_attribs[j]['element']
                         else:
                             name = lo_attribs[j]['name']
