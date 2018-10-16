@@ -58,7 +58,6 @@ Map::Map(unsigned int level, unsigned int version)
   , mArcGroups (level, version)
 {
   setSbgnNamespacesAndOwn(new SbgnNamespaces(level, version));
-  mArcGroups.setElementName("arcgroup");
   connectToChild();
 }
 
@@ -75,7 +74,6 @@ Map::Map(SbgnNamespaces *sbgnns)
   , mArcGroups (sbgnns)
 {
   setElementNamespace(sbgnns->getURI());
-  mArcGroups.setElementName("arcgroup");
   connectToChild();
 }
 

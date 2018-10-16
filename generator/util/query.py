@@ -749,3 +749,26 @@ def sort_attributes(all_attributes):
                  'uint_atts': uint_atts,
                  'int_atts': int_atts,
                  'string_atts': string_atts})
+
+def is_lo_repeated(class_object):
+    count = 0
+    if 'root' not in class_object or class_object['root'] is None:
+        return False
+    elif 'lo_child' not in class_object or class_object['lo_child'] == '':
+        return False
+    else:
+        child = class_object['lo_child']
+    for element in class_object['root']['baseElements']:
+        # if element['typecode'] == class_object['typecode']:
+        #     # skip this element
+        #     continue
+        for attrib in element['attribs']:
+            if attrib['type'] == 'lo_element' or attrib['type'] == 'inline_lo_element':
+                if attrib['element'] == child:
+                    if 'xml_name' in attrib and attrib['xml_name'].lower() != strFunctions.remove_prefix(attrib['element']).lower():
+                        count = count + 1
+    if count > 0:
+        return True
+    return False
+
+

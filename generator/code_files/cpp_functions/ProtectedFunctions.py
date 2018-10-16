@@ -60,7 +60,9 @@ class ProtectedFunctions():
         self.element_name = ''
         if 'elementName' in class_object:
             self.element_name = class_object['elementName']
+        self.lo_used_more_than_once = False
         if is_list_of:
+            self.lo_used_more_than_once = query.is_lo_repeated(class_object)
             self.child_name = class_object['lo_child']
         else:
             self.child_name = ''
@@ -466,10 +468,18 @@ class ProtectedFunctions():
             xmlname = strFunctions.lower_first(temp)
 
         if not create:
-            implementation = ['name == '
-                              '\"{0}\"'.format(xmlname),
-                              'object = new {0}({1})'.format(name, use_ns),
-                              'appendAndOwn(object)']
+            if self.is_list_of and self.lo_used_more_than_once:
+                nest = ['object', 'dynamic_cast<{0}*>(object)->setElementName(name)'.format(self.child_name)]
+                nested_if = self.create_code_block('if', nest)
+                implementation = ['name == mElementName',
+                                  'object = new {0}({1})'.format(name, use_ns),
+                                  nested_if,
+                                  'appendAndOwn(object)']
+            else:
+                implementation = ['name == '
+                                  '\"{0}\"'.format(xmlname),
+                                  'object = new {0}({1})'.format(name, use_ns),
+                                  'appendAndOwn(object)']
         else:
             abbrev = strFunctions.abbrev_name(name)
             implementation = ['name == '

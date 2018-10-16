@@ -966,6 +966,13 @@ def main():
         test_case = 'element with different xml name'
         fail += run_test(name, num, class_name, test_case, list_of)
 
+        name = 'sbgn'
+        num = 0
+        class_name = 'Point'
+        list_of = 'SbgnListOfPoints'
+        test_case = 'contains list of itself but with other listof used elsewhere'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
        # name = 'arrays'
         # class_name = 'ArraysExtensionTypes'
         # test_case = 'the types '
@@ -988,11 +995,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'render'
-        num = 8
-        class_name = 'LineEnding'
-        list_of = ''
-        test_case = 'uses other package class'
+        name = 'spatial'
+        num = 7
+        class_name = 'CoordinateComponent'
+        list_of = 'ListOfCoordinateComponents'
+        test_case = 'class with same child element diff name'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)

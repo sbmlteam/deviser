@@ -208,9 +208,9 @@ class Constructors():
                             implementation.append('setVersion(version)')
                     implementation.append('set{0}Document(this)'.format(global_variables.prefix))
                 if self.has_children:
-                    for lo_element in self.child_lo_elements:
-                        if lo_element['name'] != strFunctions.lower_first(strFunctions.remove_prefix(lo_element['element'])):
-                            implementation.append('{0}.setElementName(\"{1}\")'.format(lo_element['memberName'], lo_element['name']))
+                    # for lo_element in self.child_lo_elements:
+                    #     if lo_element['name'] != strFunctions.lower_first(strFunctions.remove_prefix(lo_element['element'])):
+                    #         implementation.append('{0}.setElementName(\"{1}\")'.format(lo_element['memberName'], lo_element['name']))
                     implementation.append('connectToChild()')
             else:
                 implementation = ['return new {0}(level, '
@@ -383,9 +383,10 @@ class Constructors():
             implementation.append('set{0}(this)'.format(global_variables.document_class))
 
         if self.has_children:
-            for lo_element in self.child_lo_elements:
-                if lo_element['name'] != strFunctions.lower_first(strFunctions.remove_prefix(lo_element['element'])):
-                    implementation.append('{0}.setElementName(\"{1}\")'.format(lo_element['memberName'], lo_element['name']))
+            # for lo_element in self.child_lo_elements:
+            #     if lo_element['type'] != 'inline_lo_element':
+            #         if lo_element['name'] != strFunctions.lower_first(strFunctions.remove_prefix(lo_element['element'])):
+            #             implementation.append('{0}.setElementName(\"{1}\")'.format(lo_element['memberName'], lo_element['name']))
             implementation.append('connectToChild()')
         if global_variables.is_package and not self.is_list_of:
             implementation.append('loadPlugins({0}ns)'
