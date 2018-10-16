@@ -92,10 +92,10 @@ protected:
   int mNum;
   bool mIsSetNum;
   std::string mStr;
-  Kind_t mKind;
+  Kind_t mMyEnum;
   Other* mOther;
   Other* mOther1;
-  Other* mOther2;
+  Other* mMyOther;
 
   /** @endcond */
 
@@ -205,7 +205,7 @@ public:
    * @li @sbmlconstant{X_KIND_FIRST, Kind_t}
    * @li @sbmlconstant{X_KIND_INVALID, Kind_t}
    */
-  Kind_t getKind() const;
+  Kind_t getMyEnum() const;
 
 
   /**
@@ -218,7 +218,7 @@ public:
    * @li @c "first"
    * @li @c "invalid Kind value"
    */
-  std::string getKindAsString() const;
+  std::string getMyEnumAsString() const;
 
 
   /**
@@ -265,7 +265,7 @@ public:
    *
    * @copydetails doc_fred_myEnum
    */
-  bool isSetKind() const;
+  bool isSetMyEnum() const;
 
 
   /**
@@ -337,7 +337,7 @@ public:
    *
    * @copydetails doc_fred_myEnum
    */
-  int setKind(const Kind_t kind);
+  int setMyEnum(const Kind_t kind);
 
 
   /**
@@ -352,7 +352,7 @@ public:
    *
    * @copydetails doc_fred_myEnum
    */
-  int setKind(const std::string& kind);
+  int setMyEnum(const std::string& kind);
 
 
   /**
@@ -403,7 +403,7 @@ public:
    *
    * @copydetails doc_fred_myEnum
    */
-  int unsetKind();
+  int unsetMyEnum();
 
 
   /**
@@ -443,7 +443,7 @@ public:
    *
    * @return the value of the "myOther" element of this Fred as a Other*.
    */
-  const Other* getOther2() const;
+  const Other* getMyOther() const;
 
 
   /**
@@ -451,7 +451,7 @@ public:
    *
    * @return the value of the "myOther" element of this Fred as a Other*.
    */
-  Other* getOther2();
+  Other* getMyOther();
 
 
   /**
@@ -478,7 +478,7 @@ public:
    * @return @c true if this Fred's "myOther" element has been set, otherwise
    * @c false is returned.
    */
-  bool isSetOther2() const;
+  bool isSetMyOther() const;
 
 
   /**
@@ -517,7 +517,7 @@ public:
    * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setOther2(const Other* other2);
+  int setMyOther(const Other* other2);
 
 
   /**
@@ -544,7 +544,7 @@ public:
    *
    * @return a new Other object instance.
    */
-  Other* createOther2();
+  Other* createMyOther();
 
 
   /**
@@ -574,7 +574,7 @@ public:
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sbmlconstant{LIBSBML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetOther2();
+  int unsetMyOther();
 
 
   /**
@@ -1258,7 +1258,7 @@ Fred_getStr(const Fred_t * f);
  */
 LIBSBML_EXTERN
 Kind_t
-Fred_getKind(const Fred_t * f);
+Fred_getMyEnum(const Fred_t * f);
 
 
 /**
@@ -1280,7 +1280,7 @@ Fred_getKind(const Fred_t * f);
  */
 LIBSBML_EXTERN
 char *
-Fred_getKindAsString(const Fred_t * f);
+Fred_getMyEnumAsString(const Fred_t * f);
 
 
 /**
@@ -1361,7 +1361,7 @@ Fred_isSetStr(const Fred_t * f);
  */
 LIBSBML_EXTERN
 int
-Fred_isSetKind(const Fred_t * f);
+Fred_isSetMyEnum(const Fred_t * f);
 
 
 /**
@@ -1463,7 +1463,7 @@ Fred_setStr(Fred_t * f, const char * str);
  */
 LIBSBML_EXTERN
 int
-Fred_setKind(Fred_t * f, Kind_t kind);
+Fred_setMyEnum(Fred_t * f, Kind_t kind);
 
 
 /**
@@ -1484,7 +1484,7 @@ Fred_setKind(Fred_t * f, Kind_t kind);
  */
 LIBSBML_EXTERN
 int
-Fred_setKindAsString(Fred_t * f, const char * kind);
+Fred_setMyEnumAsString(Fred_t * f, const char * kind);
 
 
 /**
@@ -1570,7 +1570,7 @@ Fred_unsetStr(Fred_t * f);
  */
 LIBSBML_EXTERN
 int
-Fred_unsetKind(Fred_t * f);
+Fred_unsetMyEnum(Fred_t * f);
 
 
 /**
@@ -1612,7 +1612,7 @@ Fred_getOther1(const Fred_t * f);
  */
 LIBSBML_EXTERN
 const Other_t*
-Fred_getOther2(const Fred_t * f);
+Fred_getMyOther(const Fred_t * f);
 
 
 /**
@@ -1657,7 +1657,7 @@ Fred_isSetOther1(const Fred_t * f);
  */
 LIBSBML_EXTERN
 int
-Fred_isSetOther2(const Fred_t * f);
+Fred_isSetMyOther(const Fred_t * f);
 
 
 /**
@@ -1714,7 +1714,7 @@ Fred_setOther1(Fred_t * f, const Other_t* other1);
  */
 LIBSBML_EXTERN
 int
-Fred_setOther2(Fred_t * f, const Other_t* other2);
+Fred_setMyOther(Fred_t * f, const Other_t* other2);
 
 
 /**
@@ -1759,7 +1759,7 @@ Fred_createOther1(Fred_t* f);
  */
 LIBSBML_EXTERN
 Other_t*
-Fred_createOther2(Fred_t* f);
+Fred_createMyOther(Fred_t* f);
 
 
 /**
@@ -1810,7 +1810,7 @@ Fred_unsetOther1(Fred_t * f);
  */
 LIBSBML_EXTERN
 int
-Fred_unsetOther2(Fred_t * f);
+Fred_unsetMyOther(Fred_t * f);
 
 
 /**

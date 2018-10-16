@@ -58,10 +58,10 @@ Fred::Fred(unsigned int level, unsigned int version, unsigned int pkgVersion)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
-  , mKind (X_KIND_INVALID)
+  , mMyEnum (X_KIND_INVALID)
   , mOther (NULL)
   , mOther1 (NULL)
-  , mOther2 (NULL)
+  , mMyOther (NULL)
 {
   setSBMLNamespacesAndOwn(new XPkgNamespaces(level, version, pkgVersion));
   connectToChild();
@@ -78,10 +78,10 @@ Fred::Fred(XPkgNamespaces *xns)
   , mNum (SBML_INT_MAX)
   , mIsSetNum (false)
   , mStr ("")
-  , mKind (X_KIND_INVALID)
+  , mMyEnum (X_KIND_INVALID)
   , mOther (NULL)
   , mOther1 (NULL)
-  , mOther2 (NULL)
+  , mMyOther (NULL)
 {
   setElementNamespace(xns->getURI());
   connectToChild();
@@ -99,10 +99,10 @@ Fred::Fred(const Fred& orig)
   , mNum ( orig.mNum )
   , mIsSetNum ( orig.mIsSetNum )
   , mStr ( orig.mStr )
-  , mKind ( orig.mKind )
+  , mMyEnum ( orig.mMyEnum )
   , mOther ( NULL )
   , mOther1 ( NULL )
-  , mOther2 ( NULL )
+  , mMyOther ( NULL )
 {
   if (orig.mOther != NULL)
   {
@@ -114,9 +114,9 @@ Fred::Fred(const Fred& orig)
     mOther1 = orig.mOther1->clone();
   }
 
-  if (orig.mOther2 != NULL)
+  if (orig.mMyOther != NULL)
   {
-    mOther2 = orig.mOther2->clone();
+    mMyOther = orig.mMyOther->clone();
   }
 
   connectToChild();
@@ -137,7 +137,7 @@ Fred::operator=(const Fred& rhs)
     mNum = rhs.mNum;
     mIsSetNum = rhs.mIsSetNum;
     mStr = rhs.mStr;
-    mKind = rhs.mKind;
+    mMyEnum = rhs.mMyEnum;
     delete mOther;
     if (rhs.mOther != NULL)
     {
@@ -158,14 +158,14 @@ Fred::operator=(const Fred& rhs)
       mOther1 = NULL;
     }
 
-    delete mOther2;
-    if (rhs.mOther2 != NULL)
+    delete mMyOther;
+    if (rhs.mMyOther != NULL)
     {
-      mOther2 = rhs.mOther2->clone();
+      mMyOther = rhs.mMyOther->clone();
     }
     else
     {
-      mOther2 = NULL;
+      mMyOther = NULL;
     }
 
     connectToChild();
@@ -194,8 +194,8 @@ Fred::~Fred()
   mOther = NULL;
   delete mOther1;
   mOther1 = NULL;
-  delete mOther2;
-  mOther2 = NULL;
+  delete mMyOther;
+  mMyOther = NULL;
 }
 
 
@@ -243,9 +243,9 @@ Fred::getStr() const
  * Returns the value of the "myEnum" attribute of this Fred.
  */
 Kind_t
-Fred::getKind() const
+Fred::getMyEnum() const
 {
-  return mKind;
+  return mMyEnum;
 }
 
 
@@ -253,9 +253,9 @@ Fred::getKind() const
  * Returns the value of the "myEnum" attribute of this Fred.
  */
 std::string
-Fred::getKindAsString() const
+Fred::getMyEnumAsString() const
 {
-  std::string code_str = Kind_toString(mKind);
+  std::string code_str = Kind_toString(mMyEnum);
   return code_str;
 }
 
@@ -304,9 +304,9 @@ Fred::isSetStr() const
  * Predicate returning @c true if this Fred's "myEnum" attribute is set.
  */
 bool
-Fred::isSetKind() const
+Fred::isSetMyEnum() const
 {
-  return (mKind != X_KIND_INVALID);
+  return (mMyEnum != X_KIND_INVALID);
 }
 
 
@@ -359,16 +359,16 @@ Fred::setStr(const std::string& str)
  * Sets the value of the "myEnum" attribute of this Fred.
  */
 int
-Fred::setKind(const Kind_t kind)
+Fred::setMyEnum(const Kind_t kind)
 {
   if (Kind_isValid(kind) == 0)
   {
-    mKind = X_KIND_INVALID;
+    mMyEnum = X_KIND_INVALID;
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mKind = kind;
+    mMyEnum = kind;
     return LIBSBML_OPERATION_SUCCESS;
   }
 }
@@ -378,11 +378,11 @@ Fred::setKind(const Kind_t kind)
  * Sets the value of the "myEnum" attribute of this Fred.
  */
 int
-Fred::setKind(const std::string& kind)
+Fred::setMyEnum(const std::string& kind)
 {
-  mKind = Kind_fromString(kind.c_str());
+  mMyEnum = Kind_fromString(kind.c_str());
 
-  if (mKind == X_KIND_INVALID)
+  if (mMyEnum == X_KIND_INVALID)
   {
     return LIBSBML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -473,9 +473,9 @@ Fred::unsetStr()
  * Unsets the value of the "myEnum" attribute of this Fred.
  */
 int
-Fred::unsetKind()
+Fred::unsetMyEnum()
 {
-  mKind = X_KIND_INVALID;
+  mMyEnum = X_KIND_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -524,9 +524,9 @@ Fred::getOther1()
  * Returns the value of the "myOther" element of this Fred.
  */
 const Other*
-Fred::getOther2() const
+Fred::getMyOther() const
 {
-  return mOther2;
+  return mMyOther;
 }
 
 
@@ -534,9 +534,9 @@ Fred::getOther2() const
  * Returns the value of the "myOther" element of this Fred.
  */
 Other*
-Fred::getOther2()
+Fred::getMyOther()
 {
-  return mOther2;
+  return mMyOther;
 }
 
 
@@ -564,9 +564,9 @@ Fred::isSetOther1() const
  * Predicate returning @c true if this Fred's "myOther" element is set.
  */
 bool
-Fred::isSetOther2() const
+Fred::isSetMyOther() const
 {
-  return (mOther2 != NULL);
+  return (mMyOther != NULL);
 }
 
 
@@ -635,26 +635,26 @@ Fred::setOther1(const Other* other1)
  * Sets the value of the "myOther" element of this Fred.
  */
 int
-Fred::setOther2(const Other* other2)
+Fred::setMyOther(const Other* other2)
 {
-  if (mOther2 == other2)
+  if (mMyOther == other2)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
   else if (other2 == NULL)
   {
-    delete mOther2;
-    mOther2 = NULL;
+    delete mMyOther;
+    mMyOther = NULL;
     return LIBSBML_OPERATION_SUCCESS;
   }
   else
   {
-    delete mOther2;
-    mOther2 = (other2 != NULL) ? other2->clone() : NULL;
-    if (mOther2 != NULL)
+    delete mMyOther;
+    mMyOther = (other2 != NULL) ? other2->clone() : NULL;
+    if (mMyOther != NULL)
     {
-      mOther2->setElementName("myOther");
-      mOther2->connectToParent(this);
+      mMyOther->setElementName("myOther");
+      mMyOther->connectToParent(this);
     }
 
     return LIBSBML_OPERATION_SUCCESS;
@@ -717,21 +717,21 @@ Fred::createOther1()
 Other*
 Fred::createMyOther()
 {
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    delete mOther2;
+    delete mMyOther;
   }
 
   X_CREATE_NS(xns, getSBMLNamespaces());
-  mOther2 = new Other(xns);
+  mMyOther = new Other(xns);
 
-  mOther2->setElementName("myOther");
+  mMyOther->setElementName("myOther");
 
   delete xns;
 
   connectToChild();
 
-  return mOther2;
+  return mMyOther;
 }
 
 
@@ -763,10 +763,10 @@ Fred::unsetOther1()
  * Unsets the value of the "myOther" element of this Fred.
  */
 int
-Fred::unsetOther2()
+Fred::unsetMyOther()
 {
-  delete mOther2;
-  mOther2 = NULL;
+  delete mMyOther;
+  mMyOther = NULL;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -836,9 +836,9 @@ Fred::writeElements(XMLOutputStream& stream) const
     mOther1->write(stream);
   }
 
-  if (isSetOther2() == true)
+  if (isSetMyOther() == true)
   {
-    mOther2->write(stream);
+    mMyOther->write(stream);
   }
 
   SBase::writeExtensionElements(stream);
@@ -868,9 +868,9 @@ Fred::accept(SBMLVisitor& v) const
     mOther1->accept(v);
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    mOther2->accept(v);
+    mMyOther->accept(v);
   }
 
   v.leave(*this);
@@ -901,9 +901,9 @@ Fred::setSBMLDocument(SBMLDocument* d)
     mOther1->setSBMLDocument(d);
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    mOther2->setSBMLDocument(d);
+    mMyOther->setSBMLDocument(d);
   }
 }
 
@@ -931,9 +931,9 @@ Fred::connectToChild()
     mOther1->connectToParent(this);
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    mOther2->connectToParent(this);
+    mMyOther->connectToParent(this);
   }
 }
 
@@ -963,9 +963,9 @@ Fred::enablePackageInternal(const std::string& pkgURI,
     mOther1->enablePackageInternal(pkgURI, pkgPrefix, flag);
   }
 
-  if (isSetOther2())
+  if (isSetMyOther())
   {
-    mOther2->enablePackageInternal(pkgURI, pkgPrefix, flag);
+    mMyOther->enablePackageInternal(pkgURI, pkgPrefix, flag);
   }
 }
 
@@ -995,9 +995,9 @@ Fred::updateSBMLNamespace(const std::string& package,
     mOther1->updateSBMLNamespace(package, level, version);
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    mOther2->updateSBMLNamespace(package, level, version);
+    mMyOther->updateSBMLNamespace(package, level, version);
   }
 }
 
@@ -1123,7 +1123,7 @@ Fred::getAttribute(const std::string& attributeName, std::string& value) const
   }
   else if (attributeName == "myEnum")
   {
-    value = getKindAsString();
+    value = getMyEnumAsString();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
 
@@ -1162,7 +1162,7 @@ Fred::isSetAttribute(const std::string& attributeName) const
   }
   else if (attributeName == "myEnum")
   {
-    value = isSetKind();
+    value = isSetMyEnum();
   }
 
   return value;
@@ -1270,7 +1270,7 @@ Fred::setAttribute(const std::string& attributeName, const std::string& value)
   }
   else if (attributeName == "myEnum")
   {
-    return_value = setKind(value);
+    return_value = setMyEnum(value);
   }
 
   return return_value;
@@ -1308,7 +1308,7 @@ Fred::unsetAttribute(const std::string& attributeName)
   }
   else if (attributeName == "myEnum")
   {
-    value = unsetKind();
+    value = unsetMyEnum();
   }
 
   return value;
@@ -1336,7 +1336,7 @@ Fred::createChildObject(const std::string& elementName)
   {
     return createOther1();
   }
-  else if (elementName == "myOther")
+  else if (elementName == "other2")
   {
     return createMyOther();
   }
@@ -1364,7 +1364,7 @@ Fred::addChildObject(const std::string& elementName, const SBase* element)
   {
     return setOther1((const Other*)(element));
   }
-  else if (elementName == "myOther" && element->getTypeCode() == SBML_X_OTHER)
+  else if (elementName == "other2" && element->getTypeCode() == SBML_X_OTHER)
   {
     return setMyOther((const Other*)(element));
   }
@@ -1395,7 +1395,7 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
     Other * obj = getOther1();
     if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
-  else if (elementName == "myOther")
+  else if (elementName == "other2")
   {
     Other * obj = getMyOther();
     if (unsetMyOther() == LIBSBML_OPERATION_SUCCESS) return obj;
@@ -1432,7 +1432,7 @@ Fred::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
-  else if (elementName == "myOther")
+  else if (elementName == "other2")
   {
     if (isSetMyOther())
     {
@@ -1465,7 +1465,7 @@ Fred::getObject(const std::string& elementName, unsigned int index)
   {
     return getOther1();
   }
-  else if (elementName == "myOther")
+  else if (elementName == "other2")
   {
     return getMyOther();
   }
@@ -1518,14 +1518,14 @@ Fred::getElementBySId(const std::string& id)
     }
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    if (mOther2->getId() == id)
+    if (mMyOther->getId() == id)
     {
-      return mOther2;
+      return mMyOther;
     }
 
-    obj = mOther2->getElementBySId(id);
+    obj = mMyOther->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
@@ -1578,14 +1578,14 @@ Fred::getElementByMetaId(const std::string& metaid)
     }
   }
 
-  if (mOther2 != NULL)
+  if (mMyOther != NULL)
   {
-    if (mOther2->getMetaId() == metaid)
+    if (mMyOther->getMetaId() == metaid)
     {
-      return mOther2;
+      return mMyOther;
     }
 
-    obj = mOther2->getElementByMetaId(metaid);
+    obj = mMyOther->getElementByMetaId(metaid);
     if (obj != NULL)
     {
       return obj;
@@ -1608,7 +1608,7 @@ Fred::getAllElements(ElementFilter* filter)
 
   ADD_FILTERED_POINTER(ret, sublist, mOther, filter);
   ADD_FILTERED_POINTER(ret, sublist, mOther1, filter);
-  ADD_FILTERED_POINTER(ret, sublist, mOther2, filter);
+  ADD_FILTERED_POINTER(ret, sublist, mMyOther, filter);
 
 
   ADD_FILTERED_FROM_PLUGIN(ret, sublist, filter);
@@ -1659,16 +1659,16 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "myOther")
   {
-    if (isSetOther2())
+    if (isSetMyOther())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion());
     }
 
-    delete mOther2;
-    mOther2 = new Other(xns);
-    mOther2->setElementName(name);
-    obj = mOther2;
+    delete mMyOther;
+    mMyOther = new Other(xns);
+    mMyOther->setElementName(name);
+    obj = mMyOther;
   }
 
   delete xns;
@@ -1849,9 +1849,9 @@ Fred::readAttributes(const XMLAttributes& attributes,
     }
     else
     {
-      mKind = Kind_fromString(kind.c_str());
+      mMyEnum = Kind_fromString(kind.c_str());
 
-      if (Kind_isValid(mKind) == 0)
+      if (Kind_isValid(mMyEnum) == 0)
       {
         std::string msg = "The myEnum on the <Fred> ";
 
@@ -1903,9 +1903,9 @@ Fred::writeAttributes(XMLOutputStream& stream) const
     stream.writeAttribute("myString", getPrefix(), mStr);
   }
 
-  if (isSetKind() == true)
+  if (isSetMyEnum() == true)
   {
-    stream.writeAttribute("myEnum", getPrefix(), Kind_toString(mKind));
+    stream.writeAttribute("myEnum", getPrefix(), Kind_toString(mMyEnum));
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -2022,14 +2022,14 @@ Fred_getStr(const Fred_t * f)
  */
 LIBSBML_EXTERN
 Kind_t
-Fred_getKind(const Fred_t * f)
+Fred_getMyEnum(const Fred_t * f)
 {
   if (f == NULL)
   {
     return X_KIND_INVALID;
   }
 
-  return f->getKind();
+  return f->getMyEnum();
 }
 
 
@@ -2038,9 +2038,9 @@ Fred_getKind(const Fred_t * f)
  */
 LIBSBML_EXTERN
 char *
-Fred_getKindAsString(const Fred_t * f)
+Fred_getMyEnumAsString(const Fred_t * f)
 {
-  return (char*)(Kind_toString(f->getKind()));
+  return (char*)(Kind_toString(f->getMyEnum()));
 }
 
 
@@ -2097,9 +2097,9 @@ Fred_isSetStr(const Fred_t * f)
  */
 LIBSBML_EXTERN
 int
-Fred_isSetKind(const Fred_t * f)
+Fred_isSetMyEnum(const Fred_t * f)
 {
-  return (f != NULL) ? static_cast<int>(f->isSetKind()) : 0;
+  return (f != NULL) ? static_cast<int>(f->isSetMyEnum()) : 0;
 }
 
 
@@ -2152,9 +2152,9 @@ Fred_setStr(Fred_t * f, const char * str)
  */
 LIBSBML_EXTERN
 int
-Fred_setKind(Fred_t * f, Kind_t kind)
+Fred_setMyEnum(Fred_t * f, Kind_t kind)
 {
-  return (f != NULL) ? f->setKind(kind) : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->setMyEnum(kind) : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -2163,9 +2163,9 @@ Fred_setKind(Fred_t * f, Kind_t kind)
  */
 LIBSBML_EXTERN
 int
-Fred_setKindAsString(Fred_t * f, const char * kind)
+Fred_setMyEnumAsString(Fred_t * f, const char * kind)
 {
-  return (f != NULL) ? f->setKind(kind): LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->setMyEnum(kind): LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -2218,9 +2218,9 @@ Fred_unsetStr(Fred_t * f)
  */
 LIBSBML_EXTERN
 int
-Fred_unsetKind(Fred_t * f)
+Fred_unsetMyEnum(Fred_t * f)
 {
-  return (f != NULL) ? f->unsetKind() : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->unsetMyEnum() : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -2261,14 +2261,14 @@ Fred_getOther1(const Fred_t * f)
  */
 LIBSBML_EXTERN
 const Other_t*
-Fred_getOther2(const Fred_t * f)
+Fred_getMyOther(const Fred_t * f)
 {
   if (f == NULL)
   {
     return NULL;
   }
 
-  return (Other_t*)(f->getOther2());
+  return (Other_t*)(f->getMyOther());
 }
 
 
@@ -2299,9 +2299,9 @@ Fred_isSetOther1(const Fred_t * f)
  */
 LIBSBML_EXTERN
 int
-Fred_isSetOther2(const Fred_t * f)
+Fred_isSetMyOther(const Fred_t * f)
 {
-  return (f != NULL) ? static_cast<int>(f->isSetOther2()) : 0;
+  return (f != NULL) ? static_cast<int>(f->isSetMyOther()) : 0;
 }
 
 
@@ -2332,9 +2332,9 @@ Fred_setOther1(Fred_t * f, const Other_t* other1)
  */
 LIBSBML_EXTERN
 int
-Fred_setOther2(Fred_t * f, const Other_t* other2)
+Fred_setMyOther(Fred_t * f, const Other_t* other2)
 {
-  return (f != NULL) ? f->setOther2(other2) : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->setMyOther(other2) : LIBSBML_INVALID_OBJECT;
 }
 
 
@@ -2378,14 +2378,14 @@ Fred_createOther1(Fred_t* f)
  */
 LIBSBML_EXTERN
 Other_t*
-Fred_createOther2(Fred_t* f)
+Fred_createMyOther(Fred_t* f)
 {
   if (f == NULL)
   {
     return NULL;
   }
 
-  return (Other_t*)(f->createOther2());
+  return (Other_t*)(f->createMyOther());
 }
 
 
@@ -2416,9 +2416,9 @@ Fred_unsetOther1(Fred_t * f)
  */
 LIBSBML_EXTERN
 int
-Fred_unsetOther2(Fred_t * f)
+Fred_unsetMyOther(Fred_t * f)
 {
-  return (f != NULL) ? f->unsetOther2() : LIBSBML_INVALID_OBJECT;
+  return (f != NULL) ? f->unsetMyOther() : LIBSBML_INVALID_OBJECT;
 }
 
 

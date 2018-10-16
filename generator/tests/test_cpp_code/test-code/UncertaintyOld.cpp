@@ -238,7 +238,7 @@ UncertaintyOld::unsetName()
 
 
 /*
- * Returns the value of the "uncertML" element of this UncertaintyOld.
+ * Returns the value of the "UncertML" element of this UncertaintyOld.
  */
 const UncertMLNode*
 UncertaintyOld::getUncertML() const
@@ -248,7 +248,7 @@ UncertaintyOld::getUncertML() const
 
 
 /*
- * Returns the value of the "uncertML" element of this UncertaintyOld.
+ * Returns the value of the "UncertML" element of this UncertaintyOld.
  */
 UncertMLNode*
 UncertaintyOld::getUncertML()
@@ -258,7 +258,7 @@ UncertaintyOld::getUncertML()
 
 
 /*
- * Predicate returning @c true if this UncertaintyOld's "uncertML" element is
+ * Predicate returning @c true if this UncertaintyOld's "UncertML" element is
  * set.
  */
 bool
@@ -269,7 +269,7 @@ UncertaintyOld::isSetUncertML() const
 
 
 /*
- * Sets the value of the "uncertML" element of this UncertaintyOld.
+ * Sets the value of the "UncertML" element of this UncertaintyOld.
  */
 int
 UncertaintyOld::setUncertML(const UncertMLNode* uncertML)
@@ -294,7 +294,7 @@ UncertaintyOld::setUncertML(const UncertMLNode* uncertML)
 
 
 /*
- * Unsets the value of the "uncertML" element of this UncertaintyOld.
+ * Unsets the value of the "UncertML" element of this UncertaintyOld.
  */
 int
 UncertaintyOld::unsetUncertML()
@@ -1140,7 +1140,7 @@ UncertaintyOld_unsetName(UncertaintyOld_t * uo)
 
 
 /*
- * Returns the value of the "uncertML" element of this UncertaintyOld_t.
+ * Returns the value of the "UncertML" element of this UncertaintyOld_t.
  */
 LIBSBML_EXTERN
 const UncertMLNode_t*
@@ -1156,7 +1156,7 @@ UncertaintyOld_getUncertML(const UncertaintyOld_t * uo)
 
 
 /*
- * Predicate returning @c 1 (true) if this UncertaintyOld_t's "uncertML"
+ * Predicate returning @c 1 (true) if this UncertaintyOld_t's "UncertML"
  * element is set.
  */
 LIBSBML_EXTERN
@@ -1168,7 +1168,7 @@ UncertaintyOld_isSetUncertML(const UncertaintyOld_t * uo)
 
 
 /*
- * Sets the value of the "uncertML" element of this UncertaintyOld_t.
+ * Sets the value of the "UncertML" element of this UncertaintyOld_t.
  */
 LIBSBML_EXTERN
 int
@@ -1180,7 +1180,7 @@ UncertaintyOld_setUncertML(UncertaintyOld_t * uo,
 
 
 /*
- * Unsets the value of the "uncertML" element of this UncertaintyOld_t.
+ * Unsets the value of the "UncertML" element of this UncertaintyOld_t.
  */
 LIBSBML_EXTERN
 int

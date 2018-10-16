@@ -230,6 +230,8 @@ class BaseCppFile(BaseFile.BaseFile):
                     if strFunctions.is_camel_case(attributes[i]['element']):
                         if possible_name == strFunctions.remove_prefix(attributes[i]['element']).lower():
                             capname = strFunctions.upper_first(strFunctions.remove_prefix(attributes[i]['element']))
+                    elif possible_name != attrib_name:
+                        capname = strFunctions.upper_first(attributes[i]['xml_name'])
             attributes[i]['capAttName'] = capname
             attributes[i]['memberName'] = 'm' + capname
             attributes[i]['pluralName'] = \
