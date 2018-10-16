@@ -391,7 +391,7 @@ class TexBodySyntaxFile(BaseTexFile.BaseTexFile):
         self.skip_line()
 
     def list_values(self, enum):
-        num_values = len(enum['values'])
+        num_values = len(enum['values'])-1
         listed = '\\const{0}{1}{2}' \
                  ''.format(self.start_b,
                            enum['values'][0]['value'].replace("_", "\_"),
