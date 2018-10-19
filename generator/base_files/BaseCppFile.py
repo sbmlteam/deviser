@@ -325,7 +325,7 @@ class BaseCppFile(BaseFile.BaseFile):
                     attributes[i]['children_overwrite'] = True
             elif att_type == 'lo_element' or att_type == 'inline_lo_element':
                 childclass = query.get_class(attributes[i]['element'], attributes[i]['root'])
-                if 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
+                if childclass and 'lo_class_name' in childclass and childclass['lo_class_name'] != '':
                     name = childclass['lo_class_name']
                 else:
                     name = strFunctions.list_of_name(attributes[i]['element'])

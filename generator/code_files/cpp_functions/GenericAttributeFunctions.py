@@ -724,9 +724,10 @@ class GenericAttributeFunctions():
                         thisClass = query.get_class(elem['element'], self.classroot)
                         single = False
                         hasid = False
-                        for att in thisClass['attribs']:
-                            if att['name'] == 'id':
-                                hasid = True
+                        if thisClass:
+                            for att in thisClass['attribs']:
+                                if att['name'] == 'id':
+                                    hasid = True
                         if hasid:
                             block.append('return remove{0}(id)'.format(strFunctions.upper_first(elem['used_name'])))
                         else:

@@ -300,7 +300,7 @@ class BaseTemplateFile:
 
     def doc_has_level_version(self):
         for element in self.elements:
-            if element['document']:
+            if 'document' in element and element['document']:
                 for attrib in element['attribs']:
                     if attrib['name'] == 'level':
                         return True
