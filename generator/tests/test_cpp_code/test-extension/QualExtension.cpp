@@ -495,7 +495,7 @@ static
 const char* SBML_TRANSITION_OUTPUT_EFFECT_STRINGS[] =
 {
   "production"
-, "assignmentLevel"
+, "assignment level"
 , "invalid TransitionOutputEffect value"
 };
 

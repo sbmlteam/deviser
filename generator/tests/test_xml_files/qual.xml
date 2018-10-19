@@ -76,7 +76,7 @@
         <enum name="TransitionOutputEffect">
           <enumValues>
             <enumValue name="OUTPUT_TRANSITION_EFFECT_PRODUCTION" value="production" />
-            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL" value="assignmentLevel" />
+            <enumValue name="OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL" value="assignment level" />
           </enumValues>
         </enum>
         <enum name="TransitionInputEffect">

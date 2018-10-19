@@ -554,7 +554,7 @@ class ValidationFiles():
             if letter == '{':
                 return_type_rep += '\'{0}'.format(next_letter)
                 i += 1
-            elif letter == '}' or next_letter == ' ':
+            elif letter == '}': ## or next_letter == ' ':
                 return_type_rep += '\''
                 in_type = False
             else:

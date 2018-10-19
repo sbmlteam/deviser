@@ -55,7 +55,7 @@
  * <ul>
  * <li> @c "production", TODO:add description
  *
- * <li> @c "assignmentLevel", TODO:add description
+ * <li> @c "assignment level", TODO:add description
  *
  * </ul>
  */
@@ -204,7 +204,7 @@ public:
    * @copydetails doc_output_transitionEffect
    * The possible values returned by this method are:
    * @li @c "production"
-   * @li @c "assignmentLevel"
+   * @li @c "assignment level"
    * @li @c "invalid TransitionOutputEffect value"
    */
   std::string getTransitionEffectAsString() const;
@@ -938,7 +938,7 @@ Output_getTransitionEffect(const Output_t * o);
  * @copydetails doc_output_transitionEffect
  * The possible values returned by this method are:
  * @li @c "production"
- * @li @c "assignmentLevel"
+ * @li @c "assignment level"
  * @li @c "invalid TransitionOutputEffect value"
  *
  * @memberof Output_t

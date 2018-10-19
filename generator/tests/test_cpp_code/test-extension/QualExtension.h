@@ -518,7 +518,7 @@ Sign_isValidString(const char* code);
 typedef enum
 {
   OUTPUT_TRANSITION_EFFECT_PRODUCTION             /*!< The output transition is @c "production". */
-, OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL       /*!< The output transition is @c "assignmentLevel". */
+, OUTPUT_TRANSITION_EFFECT_ASSIGNMENT_LEVEL       /*!< The output transition is @c "assignment level". */
 , OUTPUT_TRANSITION_INVALID                       /*!< Invalid TransitionOutputEffect value. */
 } TransitionOutputEffect_t;
 
@@ -531,7 +531,7 @@ typedef enum
  *
  * @return A string corresponding to the given type:
  * "production",
- * "assignmentLevel",
+ * "assignment level",
  * "invalid TransitionOutputEffect value",
  * or @c NULL if the value is @sbmlconstant{OUTPUT_TRANSITION_INVALID,
  * TransitionOutputEffect_t} or another invalid enumeration value.
@@ -603,7 +603,7 @@ TransitionOutputEffect_isValid(TransitionOutputEffect_t toe);
  *
  * @return @c 1 (true) if the string is
  * "production",
- * "assignmentLevel", or
+ * "assignment level", or
  * "invalid TransitionOutputEffect value";
  * @c 0 (false) otherwise.
  *

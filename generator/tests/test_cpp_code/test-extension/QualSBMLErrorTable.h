@@ -621,7 +621,7 @@ static const packageErrorTableEntry qualErrorTable[] =
     "must conform to the syntax of SBML data type 'TransitionOutputEffect' and "
     "may only take on the allowed values of 'TransitionOutputEffect' defined in "
     "SBML; that is, the value must be one of the following: 'production' or "
-    "'assignmentLevel'.",
+    "'assignment level'.",
     { "L3V1 Qual V1 Section"
     }
   },
