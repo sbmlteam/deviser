@@ -4,25 +4,24 @@
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
- * This file is part of libSEDML. Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on
- * github: https://github.com/fbergmann/libSEDML/
- * 
-
- * Copyright (c) 2013-2016, Frank T. Bergmann
- * All rights reserved.
- * 
-
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
-
- * 1. Redistributions of source code must retain the above copyright notice,
- * this
- * list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
+ * This file is part of libSBML. Please visit http://sbml.org for more
+ * information about SBML, and the latest version of libSBML.
+ *
+ * Copyright (C) 2013-2018 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ * 3. University of Heidelberg, Heidelberg, Germany
+ *
+ * Copyright (C) 2009-2013 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
+ *
+ * Copyright (C) 2006-2008 by the California Institute of Technology,
+ * Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. Japan Science and Technology Agency, Japan
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -36,11 +35,11 @@
  */
 
 
-#ifndef LIBSEDML_COMMON_H
-#define LIBSEDML_COMMON_H 1
+#ifndef LIBCOMBINE_COMMON_H
+#define LIBCOMBINE_COMMON_H 1
 
 
-#include <sedml/common/libsedml-config.h>
+#include <omex/common/libcombine-config.h>
 
 
 #include <stdio.h>
@@ -68,16 +67,16 @@
 
 
 /**
- * Default format used by libSEDML when writing out floating-point numbers
- * into the XML produced by libSEDML.  This is used by
+ * Default format used by libCombine when writing out floating-point numbers
+ * into the XML produced by libCombine.  This is used by
  * StringBuffer_appendReal.
  */
-#define LIBSEDML_FLOAT_FORMAT "%.15g"
+#define LIBCOMBINE_FLOAT_FORMAT "%.15g"
 
-#define LIBSEDML_DOUBLE_PRECISION 15
+#define LIBCOMBINE_DOUBLE_PRECISION 15
 
-static const int SEDML_INT_MAX = 2147483647;
-static const int SEDML_INT_MIN = -2147483647 - 1;
+static const int OMEX_INT_MAX = 2147483647;
+static const int OMEX_INT_MIN = -2147483647 - 1;
 
 /*
  * Sometimes the line/column numbers reported by the underlying parsers are
@@ -108,13 +107,13 @@ static const int SEDML_INT_MIN = -2147483647 - 1;
  * number could be provided by the parser.
  */
 
-#define LIBSEDML_UNKNOWN_LINE	SEDML_INT_MAX
-#define LIBSEDML_UNKNOWN_COLUMN	SEDML_INT_MAX
+#define LIBCOMBINE_UNKNOWN_LINE	OMEX_INT_MAX
+#define LIBCOMBINE_UNKNOWN_COLUMN	OMEX_INT_MAX
 
 
-#include <sedml/common/extern.h>
+#include <omex/common/extern.h>
 #include <sbml/util/memory.h>
 #include <sbml/util/util.h>
-#include <sedml/common/SedOperationReturnValues.h>
+#include <omex/common/CaOperationReturnValues.h>
 
-#endif  /* LIBSEDML_COMMON_H */
+#endif  /* LIBCOMBINE_COMMON_H */

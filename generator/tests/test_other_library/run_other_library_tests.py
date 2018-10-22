@@ -35,9 +35,13 @@ def generate_new_cpp_header(filename, num):
     if working_class['name'] == global_variables.document_class:
         working_class['document'] = True
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     all_files = CppFiles.CppFiles(working_class, True)
     all_files.write_files()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_templates(filename):
     parser = ParseXML.ParseXML(filename)
@@ -51,9 +55,13 @@ def generate_templates(filename):
     global_variables.populate_error_list(ob)
     ValidationFiles.ValidationFiles(ob, True)
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_files()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_common_templates(filename):
     parser = ParseXML.ParseXML(filename)
@@ -66,9 +74,13 @@ def generate_common_templates(filename):
     global_variables.populate_error_list(ob)
     prefix = global_variables.prefix
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     base_files = BaseClassFiles.BaseClassFiles(prefix,  ob['baseElements'], True)
     base_files.write_common_files()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_forward(filename):
     parser = ParseXML.ParseXML(filename)
@@ -80,9 +92,13 @@ def generate_forward(filename):
             working_class['document'] = True
     global_variables.populate_error_list(ob)
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     ext = ExtensionFiles.ExtensionFiles(ob, 'fwd', True)
     ext.write_files()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_binding(filename, binding):
     parser = ParseXML.ParseXML(filename)
@@ -93,6 +109,10 @@ def generate_binding(filename, binding):
         if working_class['name'] == global_variables.document_class:
             working_class['document'] = True
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     if os.path.isdir(binding):
         os.chdir(binding)
     else:
@@ -101,7 +121,7 @@ def generate_binding(filename, binding):
     all_files = BindingsFiles.BindingFiles(ob, binding, True)
     all_files.write_files()
     os.chdir('../.')
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_cmake(filename, binding):
     parser = ParseXML.ParseXML(filename)
@@ -112,6 +132,10 @@ def generate_cmake(filename, binding):
         if working_class['name'] == global_variables.document_class:
             working_class['document'] = True
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     if os.path.isdir(binding):
         os.chdir(binding)
     else:
@@ -126,7 +150,7 @@ def generate_cmake(filename, binding):
     bind = CMakeFiles.CMakeFiles(ob, this_dir, True)
     bind.write_other_library_files()
     os.chdir('../.')
-    os.chdir('../.')
+    os.chdir('../../.')
 
 def generate_global(filename):
     parser = ParseXML.ParseXML(filename)
@@ -137,8 +161,12 @@ def generate_global(filename):
         if working_class['name'] == global_variables.document_class:
             working_class['document'] = True
     os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
     generateCode.generate_global_files()
-    os.chdir('../.')
+    os.chdir('../../.')
 
 #############################################################################
 # Specific compare functions
@@ -148,59 +176,51 @@ def compare_files(correct_file, temp_file):
                                         not_tested)
 
 
-def compare_code_headers(class_name, lib=None):
-    if not lib:
-        correct_file = '.\\test-code\\{0}.h'.format(class_name)
-        temp_file = '.\\temp\\{0}.h'.format(class_name)
-    else:
-        correct_file = '.\\test-code\\{1}\\{0}.h'.format(class_name, lib)
-        temp_file = '.\\temp\\{0}.h'.format(class_name)
+def compare_code_headers(class_name):
+    correct_file = '.\\test-code\\{1}\\{0}.h'.format(class_name, global_variables.language)
+    temp_file = '.\\temp\\{1}\\{0}.h'.format(class_name, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 
 def compare_code_impl(class_name):
-    correct_file = '.\\test-code\\{0}.cpp'.format(class_name)
-    temp_file = '.\\temp\\{0}.cpp'.format(class_name)
+    correct_file = '.\\test-code\\{1}\\{0}.cpp'.format(class_name, global_variables.language)
+    temp_file = '.\\temp\\{1}\\{0}.cpp'.format(class_name, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 
 def compare_code_cmake(class_name):
-    correct_file = '.\\test-code\\{0}.cmake'.format(class_name)
-    temp_file = '.\\temp\\{0}.cmake'.format(class_name)
+    correct_file = '.\\test-code\\{1}\\{0}.cmake'.format(class_name, global_variables.language)
+    temp_file = '.\\temp\\{1}\\{0}.cmake'.format(class_name, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_code_txt(class_name, ext='txt'):
-    correct_file = '.\\test-code\\{0}.{1}'.format(class_name, ext)
-    temp_file = '.\\temp\\{0}.{1}'.format(class_name, ext)
+    correct_file = '.\\test-code\\{2}\\{0}.{1}'.format(class_name, ext, global_variables.language)
+    temp_file = '.\\temp\\{2}\\{0}.{1}'.format(class_name, ext, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_binding_headers(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{0}\\{2}\\{1}.h'.format(binding, class_name, prefix)
-    temp_file = '.\\temp\\{0}\\{1}.h'.format(binding, class_name)
+    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.h'.format(binding, class_name, prefix, global_variables.language)
+    temp_file = '.\\temp\\{2}\\{0}\\{1}.h'.format(binding, class_name, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_binding_impl(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{0}\\{2}\\{1}.cpp'.format(binding, class_name, prefix)
-    temp_file = '.\\temp\\{0}\\{1}.cpp'.format(binding, class_name)
+    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.cpp'.format(binding, class_name, prefix, global_variables.language)
+    temp_file = '.\\temp\\{2}\\{0}\\{1}.cpp'.format(binding, class_name, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_binding_interface(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix)
-    temp_file = '.\\temp\\{0}\\{1}.i'.format(binding, class_name)
+    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix, global_variables.language)
+    temp_file = '.\\temp\\{3}\\{0}\\{2}\\{1}.i'.format(binding, class_name, prefix, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_binding_file(class_name, binding, prefix):
-    correct_file = '.\\test-code\\{0}\\{2}\\{1}'.format(binding, class_name, prefix)
-    temp_file = '.\\temp\\{0}\\{1}'.format(binding, class_name)
+    correct_file = '.\\test-code\\{3}\\{0}\\{2}\\{1}'.format(binding, class_name, prefix, global_variables.language)
+    temp_file = '.\\temp\\{3}\\{0}\\{2}\\{1}'.format(binding, class_name, prefix, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 def compare_cmake_file(this_dir, prefix):
-    if this_dir == prefix:
-        correct_file = '.\\test-code\\cmake\\{0}\\CMakeLists.txt'.format(prefix)
-        temp_file = '.\\temp\\cmake\\CMakeLists.txt'
-    else:
-        correct_file = '.\\test-code\\cmake\\{1}\\{0}\\CMakeLists.txt'.format(this_dir, prefix)
-        temp_file = '.\\temp\\cmake\\{0}\\CMakeLists.txt'.format(this_dir)
+    correct_file = '.\\test-code\\{2}\\cmake\\{1}\\{0}\\CMakeLists.txt'.format(this_dir, prefix, global_variables.language)
+    temp_file = '.\\temp\\{1}\\cmake\\{0}\\CMakeLists.txt'.format(this_dir, global_variables.language)
     return compare_files(correct_file, temp_file)
 
 #############################################################################
@@ -254,8 +274,8 @@ def test_other_templates(prefix):
 def test_common_templates(name, class_name, test_case, prefix, lib):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_common_templates(filename)
-    fail = compare_code_headers('common', lib)
-    fail += compare_code_headers('extern', lib)
+    fail = compare_code_headers('common')
+    fail += compare_code_headers('extern')
     fail += compare_code_headers('lib{0}-config'.format(lib))
     fail += compare_code_impl('lib{0}-version'.format(lib))
     fail += compare_code_headers('{0}OperationReturnValues'.format(prefix))

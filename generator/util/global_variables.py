@@ -216,7 +216,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         package_prefix = ''
 
     global annot_element
-    if annot_elem != '':
+    if annot_elem and annot_elem != '':
         annot_element = annot_elem
 
 
