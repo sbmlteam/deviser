@@ -30,7 +30,7 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class 
+ * @class CaNamespaces
  * @sbmlbrief{} TODO:Definition of the CaNamespaces class.
  */
 

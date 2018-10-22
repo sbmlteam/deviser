@@ -47,11 +47,13 @@ LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new CaListOfContents instance.
+ * Creates a new CaListOfContents using the given OMEX Level and @ p version
+ * values.
  */
-CaListOfContents::CaListOfContents()
-  : CaListOf(1, 1)
+CaListOfContents::CaListOfContents(unsigned int level, unsigned int version)
+  : CaListOf(level, version)
 {
+  setCaNamespacesAndOwn(new CaNamespaces(level, version));
 }
 
 
@@ -350,7 +352,7 @@ CaListOfContents::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
  * Get a CaContent_t from the CaListOf_t.
  */
 LIBCOMBINE_EXTERN
-const CaContent_t*
+CaContent_t*
 CaListOfContents_getContent(CaListOf_t* clo, unsigned int n)
 {
   if (clo == NULL)
@@ -366,7 +368,7 @@ CaListOfContents_getContent(CaListOf_t* clo, unsigned int n)
  * Get a CaContent_t from the CaListOf_t based on its identifier.
  */
 LIBCOMBINE_EXTERN
-const CaContent_t*
+CaContent_t*
 CaListOfContents_getById(CaListOf_t* clo, const char *sid)
 {
   if (clo == NULL)
