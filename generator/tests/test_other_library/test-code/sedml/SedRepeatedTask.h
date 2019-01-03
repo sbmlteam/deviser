@@ -63,7 +63,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mRangeId;
+  std::string mRange;
   bool mResetModel;
   bool mIsSetResetModel;
 
@@ -81,11 +81,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * SedRepeatedTask.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedRepeatedTask(unsigned int level = SEDML_DEFAULT_LEVEL,
                   unsigned int version = SEDML_DEFAULT_VERSION);
@@ -97,11 +93,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedRepeatedTask(SedNamespaces *sedmlns);
 
@@ -138,12 +130,12 @@ public:
 
 
   /**
-   * Returns the value of the "rangeId" attribute of this SedRepeatedTask.
+   * Returns the value of the "range" attribute of this SedRepeatedTask.
    *
-   * @return the value of the "rangeId" attribute of this SedRepeatedTask as a
+   * @return the value of the "range" attribute of this SedRepeatedTask as a
    * string.
    */
-  const std::string& getRangeId() const;
+  const std::string& getRange() const;
 
 
   /**
@@ -156,13 +148,13 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedRepeatedTask's "rangeId" attribute
-   * is set.
+   * Predicate returning @c true if this SedRepeatedTask's "range" attribute is
+   * set.
    *
-   * @return @c true if this SedRepeatedTask's "rangeId" attribute has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedRepeatedTask's "range" attribute has been set,
+   * otherwise @c false is returned.
    */
-  bool isSetRangeId() const;
+  bool isSetRange() const;
 
 
   /**
@@ -176,16 +168,16 @@ public:
 
 
   /**
-   * Sets the value of the "rangeId" attribute of this SedRepeatedTask.
+   * Sets the value of the "range" attribute of this SedRepeatedTask.
    *
-   * @param rangeId std::string& value of the "rangeId" attribute to be set.
+   * @param rangeId std::string& value of the "range" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setRangeId(const std::string& rangeId);
+  int setRange(const std::string& rangeId);
 
 
   /**
@@ -202,13 +194,13 @@ public:
 
 
   /**
-   * Unsets the value of the "rangeId" attribute of this SedRepeatedTask.
+   * Unsets the value of the "range" attribute of this SedRepeatedTask.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetRangeId();
+  int unsetRange();
 
 
   /**
@@ -244,8 +236,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
-   * @sedmlconstant{SEDML_TASK_REPEATEDTASK, SEDMLSedmlTypeCode_t}
+   * @sedmlconstant{SEDML_TASK_REPEATEDTASK, SEDMLSedmlTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -260,9 +251,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * SedRepeatedTask have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the SedRepeatedTask object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -409,26 +397,6 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
-   *
-   * @param attributeName, the name of the attribute to retrieve.
-   *
-   * @param value, the address of the value to record.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int getAttribute(const std::string& attributeName,
-                           const char* value) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Predicate returning @c true if this SedRepeatedTask's attribute
    * "attributeName" is set.
    *
@@ -535,26 +503,6 @@ public:
    */
   virtual int setAttribute(const std::string& attributeName,
                            const std::string& value);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
-   *
-   * @param attributeName, the name of the attribute to set.
-   *
-   * @param value, the value of the attribute to set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int setAttribute(const std::string& attributeName, const char*
-    value);
 
   /** @endcond */
 
@@ -671,11 +619,9 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SEDML Version to assign to this
  * SedRepeatedTask_t.
  *
- * @throws SEDMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SEDML object, are either invalid or mismatched with respect to the parent
- * SedDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -690,6 +636,8 @@ SedRepeatedTask_create(unsigned int level, unsigned int version);
  * @param srt the SedRepeatedTask_t structure.
  *
  * @return a (deep) copy of this SedRepeatedTask_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -711,18 +659,20 @@ SedRepeatedTask_free(SedRepeatedTask_t* srt);
 
 
 /**
- * Returns the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Returns the value of the "range" attribute of this SedRepeatedTask_t.
  *
- * @param srt the SedRepeatedTask_t structure whose rangeId is sought.
+ * @param srt the SedRepeatedTask_t structure whose range is sought.
  *
- * @return the value of the "rangeId" attribute of this SedRepeatedTask_t as a
+ * @return the value of the "range" attribute of this SedRepeatedTask_t as a
  * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof SedRepeatedTask_t
  */
 LIBSEDML_EXTERN
-const char *
-SedRepeatedTask_getRangeId(const SedRepeatedTask_t * srt);
+char *
+SedRepeatedTask_getRange(const SedRepeatedTask_t * srt);
 
 
 /**
@@ -741,29 +691,29 @@ SedRepeatedTask_getResetModel(const SedRepeatedTask_t * srt);
 
 
 /**
- * Predicate returning @c 1 if this SedRepeatedTask_t's "rangeId" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "range"
+ * attribute is set.
  *
  * @param srt the SedRepeatedTask_t structure.
  *
- * @return @c 1 if this SedRepeatedTask_t's "rangeId" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedRepeatedTask_t's "range" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedRepeatedTask_t
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_isSetRangeId(const SedRepeatedTask_t * srt);
+SedRepeatedTask_isSetRange(const SedRepeatedTask_t * srt);
 
 
 /**
- * Predicate returning @c 1 if this SedRepeatedTask_t's "resetModel" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "resetModel"
+ * attribute is set.
  *
  * @param srt the SedRepeatedTask_t structure.
  *
- * @return @c 1 if this SedRepeatedTask_t's "resetModel" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedRepeatedTask_t's "resetModel" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedRepeatedTask_t
  */
@@ -773,22 +723,23 @@ SedRepeatedTask_isSetResetModel(const SedRepeatedTask_t * srt);
 
 
 /**
- * Sets the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Sets the value of the "range" attribute of this SedRepeatedTask_t.
  *
  * @param srt the SedRepeatedTask_t structure.
  *
- * @param rangeId const char * value of the "rangeId" attribute to be set.
+ * @param rangeId const char * value of the "range" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedRepeatedTask_t
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_setRangeId(SedRepeatedTask_t * srt, const char * rangeId);
+SedRepeatedTask_setRange(SedRepeatedTask_t * srt, const char * rangeId);
 
 
 /**
@@ -802,6 +753,7 @@ SedRepeatedTask_setRangeId(SedRepeatedTask_t * srt, const char * rangeId);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedRepeatedTask_t
  */
@@ -811,19 +763,20 @@ SedRepeatedTask_setResetModel(SedRepeatedTask_t * srt, int resetModel);
 
 
 /**
- * Unsets the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Unsets the value of the "range" attribute of this SedRepeatedTask_t.
  *
  * @param srt the SedRepeatedTask_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedRepeatedTask_t
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_unsetRangeId(SedRepeatedTask_t * srt);
+SedRepeatedTask_unsetRange(SedRepeatedTask_t * srt);
 
 
 /**
@@ -834,6 +787,7 @@ SedRepeatedTask_unsetRangeId(SedRepeatedTask_t * srt);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedRepeatedTask_t
  */
@@ -843,16 +797,13 @@ SedRepeatedTask_unsetResetModel(SedRepeatedTask_t * srt);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedRepeatedTask_t object have been set.
  *
  * @param srt the SedRepeatedTask_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SedRepeatedTask_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the SedRepeatedTask_t object are:
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SedRepeatedTask_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedRepeatedTask_t
  */

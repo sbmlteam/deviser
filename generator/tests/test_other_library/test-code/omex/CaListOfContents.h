@@ -63,7 +63,6 @@ class LIBCOMBINE_EXTERN CaListOfContents : public CaListOf
 public:
 
   /**
-
    * Creates a new CaListOfContents using the given OMEX Level and @ p version
    * values.
    *
@@ -323,7 +322,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the OMEX type code for this object:
-   * @omexconstant{OMEX_LIST_OF, FIXXTypeCode_t}.
+   * @omexconstant{OMEX_LIST_OF, OMEXTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -338,7 +337,7 @@ public:
    *
    * @return the OMEX typecode for the objects contained in this
    * CaListOfContents:
-   * @omexconstant{LIB_COMBINE_CONTENT, FIXXOMEXCombineTypeCode_t}.
+   * @omexconstant{LIB_COMBINE_CONTENT, OMEXCombineTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

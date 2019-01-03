@@ -82,11 +82,7 @@ public:
    *
    * @param omexns the CaNamespaces object.
    *
-   * @throws OMEXConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * OMEX object, are either invalid or mismatched with respect to the parent
-   * CaOmexManifest object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   CaContent(CaNamespaces *omexns);
 
@@ -181,10 +177,11 @@ public:
    *
    * @param location std::string& value of the "location" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @omexconstant{LIBCOMBINE_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   *
+   * Calling this function with @p location = @c NULL or an empty string is
+   * equivalent to calling unsetLocation().
    */
   int setLocation(const std::string& location);
 
@@ -194,10 +191,11 @@ public:
    *
    * @param format std::string& value of the "format" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @omexconstant{LIBCOMBINE_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   *
+   * Calling this function with @p format = @c NULL or an empty string is
+   * equivalent to calling unsetFormat().
    */
   int setFormat(const std::string& format);
 
@@ -261,8 +259,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the OMEX type code for this object:
-   *
-   * @omexconstant{LIB_COMBINE_CONTENT, OMEXCombineTypeCode_t}
+   * @omexconstant{LIB_COMBINE_CONTENT, OMEXCombineTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -428,26 +425,6 @@ public:
   /** @cond doxygenlibCombineInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this CaContent.
-   *
-   * @param attributeName, the name of the attribute to retrieve.
-   *
-   * @param value, the address of the value to record.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @omexconstant{LIBCOMBINE_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int getAttribute(const std::string& attributeName,
-                           const char* value) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenlibCombineInternal */
-
-  /**
    * Predicate returning @c true if this CaContent's attribute "attributeName"
    * is set.
    *
@@ -562,26 +539,6 @@ public:
   /** @cond doxygenlibCombineInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this CaContent.
-   *
-   * @param attributeName, the name of the attribute to set.
-   *
-   * @param value, the value of the attribute to set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @omexconstant{LIBCOMBINE_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int setAttribute(const std::string& attributeName, const char*
-    value);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenlibCombineInternal */
-
-  /**
    * Unsets the value of the "attributeName" attribute of this CaContent.
    *
    * @param attributeName, the name of the attribute to query.
@@ -685,6 +642,8 @@ CaContent_create();
  *
  * @return a (deep) copy of this CaContent_t object.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof CaContent_t
  */
 LIBCOMBINE_EXTERN
@@ -712,10 +671,12 @@ CaContent_free(CaContent_t* cc);
  * @return the value of the "location" attribute of this CaContent_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof CaContent_t
  */
 LIBCOMBINE_EXTERN
-const char *
+char *
 CaContent_getLocation(const CaContent_t * cc);
 
 
@@ -727,10 +688,12 @@ CaContent_getLocation(const CaContent_t * cc);
  * @return the value of the "format" attribute of this CaContent_t as a pointer
  * to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof CaContent_t
  */
 LIBCOMBINE_EXTERN
-const char *
+char *
 CaContent_getFormat(const CaContent_t * cc);
 
 
@@ -750,12 +713,13 @@ CaContent_getMaster(const CaContent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CaContent_t's "location" attribute is set.
+ * Predicate returning @c 1 (true) if this CaContent_t's "location" attribute
+ * is set.
  *
  * @param cc the CaContent_t structure.
  *
- * @return @c 1 if this CaContent_t's "location" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CaContent_t's "location" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof CaContent_t
  */
@@ -765,12 +729,13 @@ CaContent_isSetLocation(const CaContent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CaContent_t's "format" attribute is set.
+ * Predicate returning @c 1 (true) if this CaContent_t's "format" attribute is
+ * set.
  *
  * @param cc the CaContent_t structure.
  *
- * @return @c 1 if this CaContent_t's "format" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CaContent_t's "format" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof CaContent_t
  */
@@ -780,12 +745,13 @@ CaContent_isSetFormat(const CaContent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if this CaContent_t's "master" attribute is set.
+ * Predicate returning @c 1 (true) if this CaContent_t's "master" attribute is
+ * set.
  *
  * @param cc the CaContent_t structure.
  *
- * @return @c 1 if this CaContent_t's "master" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this CaContent_t's "master" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof CaContent_t
  */
@@ -803,8 +769,10 @@ CaContent_isSetMaster(const CaContent_t * cc);
  *
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @omexconstant{LIBCOMBINE_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p location = @c NULL or an empty string is
+ * equivalent to calling CaContent_unsetLocation().
  *
  * @memberof CaContent_t
  */
@@ -822,8 +790,10 @@ CaContent_setLocation(CaContent_t * cc, const char * location);
  *
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @omexconstant{LIBCOMBINE_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p format = @c NULL or an empty string is
+ * equivalent to calling CaContent_unsetFormat().
  *
  * @memberof CaContent_t
  */
@@ -843,6 +813,7 @@ CaContent_setFormat(CaContent_t * cc, const char * format);
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @omexconstant{LIBCOMBINE_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof CaContent_t
  */
@@ -859,6 +830,7 @@ CaContent_setMaster(CaContent_t * cc, int master);
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @omexconstant{LIBCOMBINE_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof CaContent_t
  */
@@ -875,6 +847,7 @@ CaContent_unsetLocation(CaContent_t * cc);
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @omexconstant{LIBCOMBINE_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof CaContent_t
  */
@@ -891,6 +864,7 @@ CaContent_unsetFormat(CaContent_t * cc);
  * @copydetails doc_returns_success_code
  * @li @omexconstant{LIBCOMBINE_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @omexconstant{LIBCOMBINE_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @omexconstant{LIBCOMBINE_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof CaContent_t
  */
@@ -900,13 +874,13 @@ CaContent_unsetMaster(CaContent_t * cc);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this CaContent_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * CaContent_t object have been set.
  *
  * @param cc the CaContent_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * CaContent_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * CaContent_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the CaContent_t object are:

@@ -447,19 +447,6 @@ SedDocument::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * SedDocument object have been set.
- */
-bool
-SedDocument::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -638,24 +625,6 @@ SedDocument::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedDocument.
- */
-int
-SedDocument::getAttribute(const std::string& attributeName,
-                          const char* value) const
-{
-  int return_value = SedBase::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this SedDocument's attribute "attributeName"
  * is set.
  */
@@ -779,23 +748,6 @@ SedDocument::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedDocument.
- */
-int
-SedDocument::setAttribute(const std::string& attributeName, const char* value)
-{
-  int return_value = SedBase::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Unsets the value of the "attributeName" attribute of this SedDocument.
  */
 int
@@ -844,6 +796,49 @@ SedDocument::createObject(const std::string& elementName)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Adds a new "elementName" object to this SedDocument.
+ */
+int
+SedDocument::addChildObject(const std::string& elementName,
+                            const SedBase* element)
+{
+  if (elementName == "model" && element->getTypeCode() == SEDML_MODEL)
+  {
+    return addModel((const SedModel*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedDocument.
+ */
+SedBase*
+SedDocument::removeChildObject(const std::string& elementName,
+                               const std::string& id)
+{
+  if (elementName == "model")
+  {
+    return removeModel(id);
+  }
+
+  return NULL;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Returns the number of "elementName" in this SedDocument.
  */
 unsigned int
@@ -868,7 +863,7 @@ SedDocument::getNumObjects(const std::string& elementName)
 /*
  * Returns the nth object of "objectName" in this SedDocument.
  */
-SBase*
+SedBase*
 SedDocument::getObject(const std::string& elementName, unsigned int index)
 {
   SedBase* obj = NULL;
@@ -1063,16 +1058,20 @@ SedDocument::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   SedBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedDocumentAllowedAttributes, level, version,
-        details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedDocumentAllowedAttributes, level, version,
+          details);
+      }
     }
   }
 
@@ -1261,7 +1260,8 @@ SedDocument_getVersion(const SedDocument_t * sd)
 
 
 /*
- * Predicate returning @c 1 if this SedDocument_t's "level" attribute is set.
+ * Predicate returning @c 1 (true) if this SedDocument_t's "level" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1272,7 +1272,8 @@ SedDocument_isSetLevel(const SedDocument_t * sd)
 
 
 /*
- * Predicate returning @c 1 if this SedDocument_t's "version" attribute is set.
+ * Predicate returning @c 1 (true) if this SedDocument_t's "version" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1341,7 +1342,7 @@ SedDocument_getListOfModels(SedDocument_t* sd)
  * Get a SedModel_t from the SedDocument_t.
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedDocument_getModel(SedDocument_t* sd, unsigned int n)
 {
   return (sd != NULL) ? sd->getModel(n) : NULL;
@@ -1352,7 +1353,7 @@ SedDocument_getModel(SedDocument_t* sd, unsigned int n)
  * Get a SedModel_t from the SedDocument_t based on its identifier.
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedDocument_getModelById(SedDocument_t* sd, const char *sid)
 {
   return (sd != NULL && sid != NULL) ? sd->getModel(sid) : NULL;
@@ -1418,7 +1419,7 @@ SedDocument_removeModelById(SedDocument_t* sd, const char* sid)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedDocument_t object have been set.
  */
 LIBSEDML_EXTERN
@@ -1426,18 +1427,6 @@ int
 SedDocument_hasRequiredAttributes(const SedDocument_t * sd)
 {
   return (sd != NULL) ? static_cast<int>(sd->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 if all the required elements for this SedDocument_t
- * object have been set.
- */
-LIBSEDML_EXTERN
-int
-SedDocument_hasRequiredElements(const SedDocument_t * sd)
-{
-  return (sd != NULL) ? static_cast<int>(sd->hasRequiredElements()) : 0;
 }
 
 

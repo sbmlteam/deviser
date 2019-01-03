@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
   : SedTask(level, version)
-  , mRangeId ("")
+  , mRange ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
 {
@@ -67,7 +67,7 @@ SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
  */
 SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
   : SedTask(sedmlns)
-  , mRangeId ("")
+  , mRange ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
 {
@@ -80,7 +80,7 @@ SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
  */
 SedRepeatedTask::SedRepeatedTask(const SedRepeatedTask& orig)
   : SedTask( orig )
-  , mRangeId ( orig.mRangeId )
+  , mRange ( orig.mRange )
   , mResetModel ( orig.mResetModel )
   , mIsSetResetModel ( orig.mIsSetResetModel )
 {
@@ -96,7 +96,7 @@ SedRepeatedTask::operator=(const SedRepeatedTask& rhs)
   if (&rhs != this)
   {
     SedTask::operator=(rhs);
-    mRangeId = rhs.mRangeId;
+    mRange = rhs.mRange;
     mResetModel = rhs.mResetModel;
     mIsSetResetModel = rhs.mIsSetResetModel;
   }
@@ -124,12 +124,12 @@ SedRepeatedTask::~SedRepeatedTask()
 
 
 /*
- * Returns the value of the "rangeId" attribute of this SedRepeatedTask.
+ * Returns the value of the "range" attribute of this SedRepeatedTask.
  */
 const std::string&
-SedRepeatedTask::getRangeId() const
+SedRepeatedTask::getRange() const
 {
-  return mRangeId;
+  return mRange;
 }
 
 
@@ -144,13 +144,13 @@ SedRepeatedTask::getResetModel() const
 
 
 /*
- * Predicate returning @c true if this SedRepeatedTask's "rangeId" attribute is
+ * Predicate returning @c true if this SedRepeatedTask's "range" attribute is
  * set.
  */
 bool
-SedRepeatedTask::isSetRangeId() const
+SedRepeatedTask::isSetRange() const
 {
-  return (mRangeId.empty() == false);
+  return (mRange.empty() == false);
 }
 
 
@@ -166,18 +166,18 @@ SedRepeatedTask::isSetResetModel() const
 
 
 /*
- * Sets the value of the "rangeId" attribute of this SedRepeatedTask.
+ * Sets the value of the "range" attribute of this SedRepeatedTask.
  */
 int
-SedRepeatedTask::setRangeId(const std::string& rangeId)
+SedRepeatedTask::setRange(const std::string& rangeId)
 {
-  if (!(SyntaxChecker::isValidInternalSId(rangeId)))
+  if (!(SyntaxChecker::isValidInternalSId(range)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mRangeId = rangeId;
+    mRange = rangeId;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
@@ -196,14 +196,14 @@ SedRepeatedTask::setResetModel(bool resetModel)
 
 
 /*
- * Unsets the value of the "rangeId" attribute of this SedRepeatedTask.
+ * Unsets the value of the "range" attribute of this SedRepeatedTask.
  */
 int
-SedRepeatedTask::unsetRangeId()
+SedRepeatedTask::unsetRange()
 {
-  mRangeId.erase();
+  mRange.erase();
 
-  if (mRangeId.empty() == true)
+  if (mRange.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -241,9 +241,9 @@ void
 SedRepeatedTask::renameSIdRefs(const std::string& oldid,
                                const std::string& newid)
 {
-  if (isSetRangeId() && mRangeId == oldid)
+  if (isSetRange() && mRange == oldid)
   {
-    setRangeId(newid);
+    setRange(newid);
   }
 }
 
@@ -428,38 +428,9 @@ SedRepeatedTask::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "rangeId")
+  if (attributeName == "range")
   {
-    value = getRangeId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Gets the value of the "attributeName" attribute of this SedRepeatedTask.
- */
-int
-SedRepeatedTask::getAttribute(const std::string& attributeName,
-                              const char* value) const
-{
-  int return_value = SedTask::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "rangeId")
-  {
-    value = getRangeId().c_str();
+    value = getRange();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -481,9 +452,9 @@ SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedTask::isSetAttribute(attributeName);
 
-  if (attributeName == "rangeId")
+  if (attributeName == "range")
   {
-    value = isSetRangeId();
+    value = isSetRange();
   }
   else if (attributeName == "resetModel")
   {
@@ -582,32 +553,9 @@ SedRepeatedTask::setAttribute(const std::string& attributeName,
 {
   int return_value = SedTask::setAttribute(attributeName, value);
 
-  if (attributeName == "rangeId")
+  if (attributeName == "range")
   {
-    return_value = setRangeId(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Sets the value of the "attributeName" attribute of this SedRepeatedTask.
- */
-int
-SedRepeatedTask::setAttribute(const std::string& attributeName,
-                              const char* value)
-{
-  int return_value = SedTask::setAttribute(attributeName, value);
-
-  if (attributeName == "rangeId")
-  {
-    return_value = setRangeId(value);
+    return_value = setRange(value);
   }
 
   return return_value;
@@ -627,9 +575,9 @@ SedRepeatedTask::unsetAttribute(const std::string& attributeName)
 {
   int value = SedTask::unsetAttribute(attributeName);
 
-  if (attributeName == "rangeId")
+  if (attributeName == "range")
   {
-    value = unsetRangeId();
+    value = unsetRange();
   }
   else if (attributeName == "resetModel")
   {
@@ -702,16 +650,20 @@ SedRepeatedTask::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   SedTask::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedRepeatedTaskAllowedAttributes, level, version,
-        details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedRepeatedTaskAllowedAttributes, level, version,
+          details);
+      }
     }
   }
 
@@ -719,18 +671,25 @@ SedRepeatedTask::readAttributes(
   // range SIdRef (use = "optional" )
   // 
 
-  assigned = attributes.readInto("range", mRangeId);
+  assigned = attributes.readInto("range", mRange);
 
   if (assigned == true)
   {
-    if (mRangeId.empty() == true)
+    if (mRange.empty() == true)
     {
-      logEmptyString(mRangeId, level, version, "<SedRepeatedTask>");
+      logEmptyString(mRange, level, version, "<SedRepeatedTask>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mRangeId) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
     {
-      logError(SedmlRepeatedTaskRangeIdMustBeRange, level, version, "The "
-        "attribute range='" + mRangeId + "' does not conform to the syntax.");
+      std::string msg = "The range attribute on the <" + getElementName() +
+        ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRange + "', which does not conform to the syntax.";
+      logError(SedmlRepeatedTaskRangeIdMustBeRange, level, version, msg);
     }
   }
 
@@ -767,9 +726,9 @@ SedRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedTask::writeAttributes(stream);
 
-  if (isSetRangeId() == true)
+  if (isSetRange() == true)
   {
-    stream.writeAttribute("range", getPrefix(), mRangeId);
+    stream.writeAttribute("range", getPrefix(), mRange);
   }
 
   if (isSetResetModel() == true)
@@ -831,19 +790,18 @@ SedRepeatedTask_free(SedRepeatedTask_t* srt)
 
 
 /*
- * Returns the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Returns the value of the "range" attribute of this SedRepeatedTask_t.
  */
 LIBSEDML_EXTERN
-const char *
-SedRepeatedTask_getRangeId(const SedRepeatedTask_t * srt)
+char *
+SedRepeatedTask_getRange(const SedRepeatedTask_t * srt)
 {
   if (srt == NULL)
   {
     return NULL;
   }
 
-  return srt->getRangeId().empty() ? NULL :
-    safe_strdup(srt->getRangeId().c_str());
+  return srt->getRange().empty() ? NULL : safe_strdup(srt->getRange().c_str());
 }
 
 
@@ -859,20 +817,20 @@ SedRepeatedTask_getResetModel(const SedRepeatedTask_t * srt)
 
 
 /*
- * Predicate returning @c 1 if this SedRepeatedTask_t's "rangeId" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "range"
+ * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_isSetRangeId(const SedRepeatedTask_t * srt)
+SedRepeatedTask_isSetRange(const SedRepeatedTask_t * srt)
 {
-  return (srt != NULL) ? static_cast<int>(srt->isSetRangeId()) : 0;
+  return (srt != NULL) ? static_cast<int>(srt->isSetRange()) : 0;
 }
 
 
 /*
- * Predicate returning @c 1 if this SedRepeatedTask_t's "resetModel" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "resetModel"
+ * attribute is set.
  */
 LIBSEDML_EXTERN
 int
@@ -883,13 +841,13 @@ SedRepeatedTask_isSetResetModel(const SedRepeatedTask_t * srt)
 
 
 /*
- * Sets the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Sets the value of the "range" attribute of this SedRepeatedTask_t.
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_setRangeId(SedRepeatedTask_t * srt, const char * rangeId)
+SedRepeatedTask_setRange(SedRepeatedTask_t * srt, const char * rangeId)
 {
-  return (srt != NULL) ? srt->setRangeId(rangeId) : LIBSEDML_INVALID_OBJECT;
+  return (srt != NULL) ? srt->setRange(rangeId) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -906,13 +864,13 @@ SedRepeatedTask_setResetModel(SedRepeatedTask_t * srt, int resetModel)
 
 
 /*
- * Unsets the value of the "rangeId" attribute of this SedRepeatedTask_t.
+ * Unsets the value of the "range" attribute of this SedRepeatedTask_t.
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_unsetRangeId(SedRepeatedTask_t * srt)
+SedRepeatedTask_unsetRange(SedRepeatedTask_t * srt)
 {
-  return (srt != NULL) ? srt->unsetRangeId() : LIBSEDML_INVALID_OBJECT;
+  return (srt != NULL) ? srt->unsetRange() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -928,7 +886,7 @@ SedRepeatedTask_unsetResetModel(SedRepeatedTask_t * srt)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedRepeatedTask_t object have been set.
  */
 LIBSEDML_EXTERN

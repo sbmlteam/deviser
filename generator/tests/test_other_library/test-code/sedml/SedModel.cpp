@@ -500,19 +500,6 @@ SedModel::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this SedModel
- * object have been set.
- */
-bool
-SedModel::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -700,50 +687,6 @@ SedModel::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedModel.
- */
-int
-SedModel::getAttribute(const std::string& attributeName,
-                       const char* value) const
-{
-  int return_value = SedBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "language")
-  {
-    value = getLanguage().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "source")
-  {
-    value = getSource().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this SedModel's attribute "attributeName" is
  * set.
  */
@@ -882,40 +825,6 @@ SedModel::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedModel.
- */
-int
-SedModel::setAttribute(const std::string& attributeName, const char* value)
-{
-  int return_value = SedBase::setAttribute(attributeName, value);
-
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "language")
-  {
-    return_value = setLanguage(value);
-  }
-  else if (attributeName == "source")
-  {
-    return_value = setSource(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Unsets the value of the "attributeName" attribute of this SedModel.
  */
 int
@@ -952,8 +861,8 @@ SedModel::unsetAttribute(const std::string& attributeName)
 /*
  * Creates and returns an new "elementName" object in this SedModel.
  */
-SBase*
-SedModel::createObject(const std::string& elementName)
+SedBase*
+SedModel::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
@@ -963,6 +872,55 @@ SedModel::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedModel.
+ */
+int
+SedModel::addChildObject(const std::string& elementName,
+                         const SedBase* element)
+{
+  if (elementName == "addXML" && element->getTypeCode() == SEDML_ADDXML)
+  {
+    return addChange((const SedChange*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedModel.
+ */
+SedBase*
+SedModel::removeChildObject(const std::string& elementName,
+                            const std::string& id)
+{
+  if (elementName == "addXML")
+  {
+    for (unsigned int i = 0; i < getNumChanges(); i++)
+    {
+      if (getChange(i)->getId() == id)
+      {
+        return removeChange(i);
+      }
+    }
+  }
+
+  return NULL;
 }
 
 /** @endcond */
@@ -996,7 +954,7 @@ SedModel::getNumObjects(const std::string& elementName)
 /*
  * Returns the nth object of "objectName" in this SedModel.
  */
-SBase*
+SedBase*
 SedModel::getObject(const std::string& elementName, unsigned int index)
 {
   SedBase* obj = NULL;
@@ -1112,7 +1070,8 @@ SedModel::readAttributes(
   bool assigned = false;
   SedErrorLog* log = getErrorLog();
 
-  if (static_cast<SedListOfModels*>(getParentSedObject())->size() < 2)
+  if (log && getParentSedObject() &&
+    static_cast<SedListOfModels*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -1128,15 +1087,19 @@ SedModel::readAttributes(
   }
 
   SedBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedModelAllowedAttributes, level, version, details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedModelAllowedAttributes, level, version, details);
+      }
     }
   }
 
@@ -1154,8 +1117,9 @@ SedModel::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(SedmlIdSyntaxRule, level, version, "The id '" + mId + "' does "
-        "not conform to the syntax.");
+      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
+        getElementName() + "> is '" + mId + "', which does not conform to the "
+          "syntax.");
     }
   }
   else
@@ -1305,7 +1269,7 @@ SedModel_free(SedModel_t* sm)
  * Returns the value of the "id" attribute of this SedModel_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getId(const SedModel_t * sm)
 {
   if (sm == NULL)
@@ -1321,7 +1285,7 @@ SedModel_getId(const SedModel_t * sm)
  * Returns the value of the "name" attribute of this SedModel_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getName(const SedModel_t * sm)
 {
   if (sm == NULL)
@@ -1337,7 +1301,7 @@ SedModel_getName(const SedModel_t * sm)
  * Returns the value of the "language" attribute of this SedModel_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getLanguage(const SedModel_t * sm)
 {
   if (sm == NULL)
@@ -1354,7 +1318,7 @@ SedModel_getLanguage(const SedModel_t * sm)
  * Returns the value of the "source" attribute of this SedModel_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getSource(const SedModel_t * sm)
 {
   if (sm == NULL)
@@ -1367,7 +1331,7 @@ SedModel_getSource(const SedModel_t * sm)
 
 
 /*
- * Predicate returning @c 1 if this SedModel_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this SedModel_t's "id" attribute is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1378,7 +1342,8 @@ SedModel_isSetId(const SedModel_t * sm)
 
 
 /*
- * Predicate returning @c 1 if this SedModel_t's "name" attribute is set.
+ * Predicate returning @c 1 (true) if this SedModel_t's "name" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1389,7 +1354,8 @@ SedModel_isSetName(const SedModel_t * sm)
 
 
 /*
- * Predicate returning @c 1 if this SedModel_t's "language" attribute is set.
+ * Predicate returning @c 1 (true) if this SedModel_t's "language" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1400,7 +1366,8 @@ SedModel_isSetLanguage(const SedModel_t * sm)
 
 
 /*
- * Predicate returning @c 1 if this SedModel_t's "source" attribute is set.
+ * Predicate returning @c 1 (true) if this SedModel_t's "source" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1499,7 +1466,7 @@ SedModel_unsetSource(SedModel_t * sm)
 
 
 /*
- * Returns a ListOf_t* containing SedChange_t objects from this SedModel_t.
+ * Returns a ListOf_t * containing SedChange_t objects from this SedModel_t.
  */
 LIBSEDML_EXTERN
 SedListOf_t*
@@ -1513,7 +1480,7 @@ SedModel_getListOfChanges(SedModel_t* sm)
  * Get a SedChange_t from the SedModel_t.
  */
 LIBSEDML_EXTERN
-const SedChange_t*
+SedChange_t*
 SedModel_getChange(SedModel_t* sm, unsigned int n)
 {
   return (sm != NULL) ? sm->getChange(n) : NULL;
@@ -1567,26 +1534,14 @@ SedModel_removeChange(SedModel_t* sm, unsigned int n)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this SedModel_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * SedModel_t object have been set.
  */
 LIBSEDML_EXTERN
 int
 SedModel_hasRequiredAttributes(const SedModel_t * sm)
 {
   return (sm != NULL) ? static_cast<int>(sm->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 if all the required elements for this SedModel_t
- * object have been set.
- */
-LIBSEDML_EXTERN
-int
-SedModel_hasRequiredElements(const SedModel_t * sm)
-{
-  return (sm != NULL) ? static_cast<int>(sm->hasRequiredElements()) : 0;
 }
 
 

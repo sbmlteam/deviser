@@ -73,11 +73,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * SedListOfModels.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedListOfModels(unsigned int level = SEDML_DEFAULT_LEVEL,
                   unsigned int version = SEDML_DEFAULT_VERSION);
@@ -89,11 +85,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedListOfModels(SedNamespaces *sedmlns);
 
@@ -137,7 +129,12 @@ public:
    *
    * @return the nth SedModel in this SedListOfModels.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see get(const std::string& sid)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual SedModel* get(unsigned int n);
 
@@ -150,7 +147,12 @@ public:
    *
    * @return the nth SedModel in this SedListOfModels.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see get(const std::string& sid)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const SedModel* get(unsigned int n) const;
 
@@ -161,10 +163,15 @@ public:
    * @param sid a string representing the identifier of the SedModel to
    * retrieve.
    *
-   * @return the SedModel in this SedListOfModels with the given id or NULL if
-   * no such SedModel exists.
+   * @return the SedModel in this SedListOfModels with the given @p sid or
+   * @c NULL if no such SedModel exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual SedModel* get(const std::string& sid);
 
@@ -175,10 +182,15 @@ public:
    * @param sid a string representing the identifier of the SedModel to
    * retrieve.
    *
-   * @return the SedModel in this SedListOfModels with the given id or NULL if
-   * no such SedModel exists.
+   * @return the SedModel in this SedListOfModels with the given @p sid or
+   * @c NULL if no such SedModel exists.
    *
-   * @see size()
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   virtual const SedModel* get(const std::string& sid) const;
 
@@ -191,10 +203,13 @@ public:
    *
    * @return a pointer to the nth SedModel in this SedListOfModels.
    *
-   * @see size()
+   * @copydetails doc_returned_owned_pointer
    *
    * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
    */
   virtual SedModel* remove(unsigned int n);
 
@@ -208,8 +223,12 @@ public:
    * @return the SedModel in this SedListOfModels based on the identifier or
    * NULL if no such SedModel exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(unsigned int n)
    */
   virtual SedModel* remove(const std::string& sid);
 
@@ -222,10 +241,20 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
    * @see createModel()
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   int addModel(const SedModel* sm);
 
@@ -234,6 +263,10 @@ public:
    * Get the number of SedModel objects in this SedListOfModels.
    *
    * @return the number of SedModel objects in this SedListOfModels.
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   unsigned int getNumModels() const;
 
@@ -243,6 +276,8 @@ public:
    * returns the SedModel object created.
    *
    * @return a new SedModel object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see addModel(const SedModel* sm)
    */
@@ -266,7 +301,7 @@ public:
    *
    * @return the SEDML type code for this object:
    *
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}
+   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -281,8 +316,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfModels:
-   *
-   * @sedmlconstant{SEDML_MODEL, SEDMLSedmlTypeCode_t}
+   * @sedmlconstant{SEDML_MODEL, SEDMLSedmlTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -364,10 +398,12 @@ BEGIN_C_DECLS
  *
  * @return the nth SedModel_t in this SedListOf_t.
  *
- * @memberof SedModel_t
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedListOfModels_t
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedListOfModels_getModel(SedListOf_t* slo, unsigned int n);
 
 
@@ -379,13 +415,15 @@ SedListOfModels_getModel(SedListOf_t* slo, unsigned int n);
  * @param sid a string representing the identifier of the SedModel_t to
  * retrieve.
  *
- * @return the SedModel_t in this SedListOf_t with the given id or NULL if no
- * such SedModel_t exists.
+ * @return the SedModel_t in this SedListOf_t with the given @p sid or @c NULL
+ * if no such SedModel_t exists.
  *
- * @memberof SedModel_t
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedListOfModels_t
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedListOfModels_getById(SedListOf_t* slo, const char *sid);
 
 
@@ -399,7 +437,9 @@ SedListOfModels_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedModel_t in this SedListOf_t.
  *
- * @memberof SedModel_t
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedListOfModels_t
  */
 LIBSEDML_EXTERN
 SedModel_t*
@@ -417,7 +457,9 @@ SedListOfModels_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedModel_t in this SedListOf_t based on the identifier or NULL
  * if no such SedModel_t exists.
  *
- * @memberof SedModel_t
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedListOfModels_t
  */
 LIBSEDML_EXTERN
 SedModel_t*

@@ -86,11 +86,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * SedDocument.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedDocument(unsigned int level = SEDML_DEFAULT_LEVEL,
               unsigned int version = SEDML_DEFAULT_VERSION);
@@ -101,11 +97,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedDocument(SedNamespaces *sedmlns);
 
@@ -249,7 +241,14 @@ public:
    *
    * @return the nth SedModel in the SedListOfModels within this SedDocument.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
    * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   SedModel* getModel(unsigned int n);
 
@@ -262,7 +261,14 @@ public:
    *
    * @return the nth SedModel in the SedListOfModels within this SedDocument.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
    * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   const SedModel* getModel(unsigned int n) const;
 
@@ -274,10 +280,16 @@ public:
    * retrieve.
    *
    * @return the SedModel in the SedListOfModels within this SedDocument with
-   * the given id or NULL if no such SedModel exists.
+   * the given @p sid or @c NULL if no such SedModel exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see getModel(unsigned int n)
    * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   SedModel* getModel(const std::string& sid);
 
@@ -289,10 +301,16 @@ public:
    * retrieve.
    *
    * @return the SedModel in the SedListOfModels within this SedDocument with
-   * the given id or NULL if no such SedModel exists.
+   * the given @p sid or @c NULL if no such SedModel exists.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see getModel(unsigned int n)
    * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   const SedModel* getModel(const std::string& sid) const;
 
@@ -305,10 +323,20 @@ public:
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
    * @see createModel()
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   int addModel(const SedModel* sm);
 
@@ -317,6 +345,14 @@ public:
    * Get the number of SedModel objects in this SedDocument.
    *
    * @return the number of SedModel objects in this SedDocument.
+   *
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   unsigned int getNumModels() const;
 
@@ -327,7 +363,14 @@ public:
    *
    * @return a new SedModel object instance.
    *
-   * @see addModel(const SedModel* sm)
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   SedModel* createModel();
 
@@ -340,10 +383,14 @@ public:
    *
    * @return a pointer to the nth SedModel in this SedDocument.
    *
-   * @see getNumModels
+   * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeModel(const std::string& sid)
    */
   SedModel* removeModel(unsigned int n);
 
@@ -357,8 +404,14 @@ public:
    * @return the SedModel in this SedDocument based on the identifier or NULL
    * if no such SedModel exists.
    *
-   * @note the caller owns the returned object and is responsible for deleting
-   * it.
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSedModel(const SedModel* object)
+   * @see createSedModel()
+   * @see getSedModel(const std::string& sid)
+   * @see getSedModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeSedModel(unsigned int n)
    */
   SedModel* removeModel(const std::string& sid);
 
@@ -379,8 +432,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
-   * @sedmlconstant{SEDML_DOCUMENT, SEDMLSedmlTypeCode_t}
+   * @sedmlconstant{SEDML_DOCUMENT, SEDMLSedmlTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -402,19 +454,6 @@ public:
    * @li "version"
    */
   virtual bool hasRequiredAttributes() const;
-
-
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * SedDocument object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * SedDocument have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the SedDocument object are:
-   */
-  virtual bool hasRequiredElements() const;
 
 
 
@@ -570,26 +609,6 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedDocument.
-   *
-   * @param attributeName, the name of the attribute to retrieve.
-   *
-   * @param value, the address of the value to record.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int getAttribute(const std::string& attributeName,
-                           const char* value) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Predicate returning @c true if this SedDocument's attribute
    * "attributeName" is set.
    *
@@ -704,26 +723,6 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedDocument.
-   *
-   * @param attributeName, the name of the attribute to set.
-   *
-   * @param value, the value of the attribute to set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int setAttribute(const std::string& attributeName, const char*
-    value);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Unsets the value of the "attributeName" attribute of this SedDocument.
    *
    * @param attributeName, the name of the attribute to query.
@@ -745,9 +744,48 @@ public:
    *
    * @param elementName, the name of the element to create.
    *
-   * pointer to the element created.
+   * @return pointer to the element created.
    */
-  virtual SBase* createObject(const std::string& elementName);
+  virtual SedBase* createChildObject(const std::string& elementName);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Adds a new "elementName" object to this SedDocument.
+   *
+   * @param elementName, the name of the element to create.
+   *
+   * @param element, pointer to the element to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int addChildObject(const std::string& elementName,
+                             const SedBase* element);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Removes and returns the new "elementName" object with the given id in this
+   * SedDocument.
+   *
+   * @param elementName, the name of the element to remove.
+   *
+   * @param id, the id of the element to remove.
+   *
+   * @return pointer to the element removed.
+   */
+  virtual SedBase* removeChildObject(const std::string& elementName,
+                                     const std::string& id);
 
   /** @endcond */
 
@@ -760,7 +798,7 @@ public:
    *
    * @param elementName, the name of the element to get number of.
    *
-   * unsigned int number of elements.
+   * @return unsigned int number of elements.
    */
   virtual unsigned int getNumObjects(const std::string& elementName);
 
@@ -777,9 +815,10 @@ public:
    *
    * @param index, unsigned int the index of the object to retrieve.
    *
-   * pointer to the object.
+   * @return pointer to the object.
    */
-  virtual SBase* getObject(const std::string& elementName, unsigned int index);
+  virtual SedBase* getObject(const std::string& elementName,
+                             unsigned int index);
 
   /** @endcond */
 
@@ -796,7 +835,8 @@ public:
    * @param id a string representing the id attribute of the object to
    * retrieve.
    *
-   * @return a pointer to the SedBase element with the given @p id.
+   * @return a pointer to the SedBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
    */
   virtual SedBase* getElementBySId(const std::string& id);
 
@@ -846,7 +886,14 @@ public:
    *
    * @return the nth SedError in the SedListOfErrors within this SedDocument.
    *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSedError(const SedError* object)
+   * @see createSedError()
+   * @see getSedError(const std::string& sid)
    * @see getNumErrors()
+   * @see removeSedError(const std::string& sid)
+   * @see removeSedError(unsigned int n)
    */
   SedError* getError(unsigned int n);
 
@@ -857,7 +904,9 @@ public:
    * @param n an unsigned int representing the index of the SedError to
    * retrieve.
    *
-   * @return the nth SedError in the SedListOfErrors within this SedDocument.
+   * @return the nth SedError in the within this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see getNumErrors()
    */
@@ -868,6 +917,14 @@ public:
    * Get the number of SedError objects in this SedDocument.
    *
    * @return the number of SedError objects in this SedDocument.
+   *
+   *
+   * @see addSedError(const SedError* object)
+   * @see createSedError()
+   * @see getSedError(const std::string& sid)
+   * @see getSedError(unsigned int n)
+   * @see removeSedError(const std::string& sid)
+   * @see removeSedError(unsigned int n)
    */
   unsigned int getNumErrors() const;
 
@@ -985,11 +1042,9 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SEDML Version to assign to this
  * SedDocument_t.
  *
- * @throws SEDMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SEDML object, are either invalid or mismatched with respect to the parent
- * SedDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -1004,6 +1059,8 @@ SedDocument_create(unsigned int level, unsigned int version);
  * @param sd the SedDocument_t structure.
  *
  * @return a (deep) copy of this SedDocument_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -1055,12 +1112,13 @@ SedDocument_getVersion(const SedDocument_t * sd);
 
 
 /**
- * Predicate returning @c 1 if this SedDocument_t's "level" attribute is set.
+ * Predicate returning @c 1 (true) if this SedDocument_t's "level" attribute is
+ * set.
  *
  * @param sd the SedDocument_t structure.
  *
- * @return @c 1 if this SedDocument_t's "level" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedDocument_t's "level" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedDocument_t
  */
@@ -1070,12 +1128,13 @@ SedDocument_isSetLevel(const SedDocument_t * sd);
 
 
 /**
- * Predicate returning @c 1 if this SedDocument_t's "version" attribute is set.
+ * Predicate returning @c 1 (true) if this SedDocument_t's "version" attribute
+ * is set.
  *
  * @param sd the SedDocument_t structure.
  *
- * @return @c 1 if this SedDocument_t's "version" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedDocument_t's "version" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedDocument_t
  */
@@ -1095,6 +1154,7 @@ SedDocument_isSetVersion(const SedDocument_t * sd);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedDocument_t
  */
@@ -1114,6 +1174,7 @@ SedDocument_setLevel(SedDocument_t * sd, int level);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedDocument_t
  */
@@ -1130,6 +1191,7 @@ SedDocument_setVersion(SedDocument_t * sd, int version);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedDocument_t
  */
@@ -1146,6 +1208,7 @@ SedDocument_unsetLevel(SedDocument_t * sd);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedDocument_t
  */
@@ -1160,6 +1223,16 @@ SedDocument_unsetVersion(SedDocument_t * sd);
  * @param sd the SedDocument_t structure whose "SedListOfModels" is sought.
  *
  * @return the "SedListOfModels" from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addModel()
+ * @see SedDocument_createModel()
+ * @see SedDocument_getModelById()
+ * @see SedDocument_getModel()
+ * @see SedDocument_getNumModels()
+ * @see SedDocument_removeModelById()
+ * @see SedDocument_removeModel()
  *
  * @memberof SedDocument_t
  */
@@ -1178,10 +1251,12 @@ SedDocument_getListOfModels(SedDocument_t* sd);
  *
  * @return the nth SedModel_t in the SedListOfModels within this SedDocument.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedDocument_getModel(SedDocument_t* sd, unsigned int n);
 
 
@@ -1194,12 +1269,14 @@ SedDocument_getModel(SedDocument_t* sd, unsigned int n);
  * retrieve.
  *
  * @return the SedModel_t in the SedListOfModels within this SedDocument with
- * the given id or NULL if no such SedModel_t exists.
+ * the given @p sid or @c NULL if no such SedModel_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedDocument_getModelById(SedDocument_t* sd, const char *sid);
 
 
@@ -1214,6 +1291,11 @@ SedDocument_getModelById(SedDocument_t* sd, const char *sid);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
  *
  * @memberof SedDocument_t
  */
@@ -1245,6 +1327,8 @@ SedDocument_getNumModels(SedDocument_t* sd);
  *
  * @return a new SedModel_t object instance.
  *
+ * @copydetails doc_returned_unowned_pointer
+ *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
@@ -1261,6 +1345,8 @@ SedDocument_createModel(SedDocument_t* sd);
  * @param n an unsigned int representing the index of the SedModel_t to remove.
  *
  * @return a pointer to the nth SedModel_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -1280,6 +1366,8 @@ SedDocument_removeModel(SedDocument_t* sd, unsigned int n);
  * @return the SedModel_t in this SedDocument_t based on the identifier or NULL
  * if no such SedModel_t exists.
  *
+ * @copydetails doc_returned_owned_pointer
+ *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
@@ -1288,13 +1376,13 @@ SedDocument_removeModelById(SedDocument_t* sd, const char* sid);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedDocument_t object have been set.
  *
  * @param sd the SedDocument_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SedDocument_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SedDocument_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the SedDocument_t object are:
@@ -1306,25 +1394,6 @@ SedDocument_removeModelById(SedDocument_t* sd, const char* sid);
 LIBSEDML_EXTERN
 int
 SedDocument_hasRequiredAttributes(const SedDocument_t * sd);
-
-
-/**
- * Predicate returning @c 1 if all the required elements for this SedDocument_t
- * object have been set.
- *
- * @param sd the SedDocument_t structure.
- *
- * @return @c 1 to indicate that all the required elements of this
- * SedDocument_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required elements for the SedDocument_t object are:
- *
- * @memberof SedDocument_t
- */
-LIBSEDML_EXTERN
-int
-SedDocument_hasRequiredElements(const SedDocument_t * sd);
 
 
 

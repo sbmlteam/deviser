@@ -353,7 +353,7 @@ SedListOfModels::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
  * Get a SedModel_t from the SedListOf_t.
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedListOfModels_getModel(SedListOf_t* slo, unsigned int n)
 {
   if (slo == NULL)
@@ -369,7 +369,7 @@ SedListOfModels_getModel(SedListOf_t* slo, unsigned int n)
  * Get a SedModel_t from the SedListOf_t based on its identifier.
  */
 LIBSEDML_EXTERN
-const SedModel_t*
+SedModel_t*
 SedListOfModels_getById(SedListOf_t* slo, const char *sid)
 {
   if (slo == NULL)

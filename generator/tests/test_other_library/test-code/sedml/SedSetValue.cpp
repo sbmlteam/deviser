@@ -500,19 +500,6 @@ SedSetValue::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * SedSetValue object have been set.
- */
-bool
-SedSetValue::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -697,50 +684,6 @@ SedSetValue::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedSetValue.
- */
-int
-SedSetValue::getAttribute(const std::string& attributeName,
-                          const char* value) const
-{
-  int return_value = SedBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "modelReference")
-  {
-    value = getModelReference().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "symbol")
-  {
-    value = getSymbol().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "target")
-  {
-    value = getTarget().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "range")
-  {
-    value = getRange().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this SedSetValue's attribute "attributeName"
  * is set.
  */
@@ -880,40 +823,6 @@ SedSetValue::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedSetValue.
- */
-int
-SedSetValue::setAttribute(const std::string& attributeName, const char* value)
-{
-  int return_value = SedBase::setAttribute(attributeName, value);
-
-  if (attributeName == "modelReference")
-  {
-    return_value = setModelReference(value);
-  }
-  else if (attributeName == "symbol")
-  {
-    return_value = setSymbol(value);
-  }
-  else if (attributeName == "target")
-  {
-    return_value = setTarget(value);
-  }
-  else if (attributeName == "range")
-  {
-    return_value = setRange(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Unsets the value of the "attributeName" attribute of this SedSetValue.
  */
 int
@@ -987,7 +896,8 @@ SedSetValue::readAttributes(
   bool assigned = false;
   SedErrorLog* log = getErrorLog();
 
-  if (static_cast<SedListOfSetValues*>(getParentSedObject())->size() < 2)
+  if (log && getParentSedObject() &&
+    static_cast<SedListOfSetValues*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -1003,16 +913,20 @@ SedSetValue::readAttributes(
   }
 
   SedBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedSetValueAllowedAttributes, level, version,
-        details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedSetValueAllowedAttributes, level, version,
+          details);
+      }
     }
   }
 
@@ -1030,9 +944,16 @@ SedSetValue::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
     {
-      logError(SedmlSetValueModelReferenceMustBeModel, level, version, "The "
-        "attribute modelReference='" + mModelReference + "' does not conform to "
-          "the syntax.");
+      std::string msg = "The modelReference attribute on the <" +
+        getElementName() + ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mModelReference + "', which does not conform to the "
+        "syntax.";
+      logError(SedmlSetValueModelReferenceMustBeModel, level, version, msg);
     }
   }
   else
@@ -1084,8 +1005,15 @@ SedSetValue::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
     {
-      logError(SedmlSetValueRangeMustBeRange, level, version, "The attribute "
-        "range='" + mRange + "' does not conform to the syntax.");
+      std::string msg = "The range attribute on the <" + getElementName() +
+        ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mRange + "', which does not conform to the syntax.";
+      logError(SedmlSetValueRangeMustBeRange, level, version, msg);
     }
   }
 }
@@ -1215,7 +1143,7 @@ SedSetValue_free(SedSetValue_t* ssv)
  * Returns the value of the "modelReference" attribute of this SedSetValue_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getModelReference(const SedSetValue_t * ssv)
 {
   if (ssv == NULL)
@@ -1232,7 +1160,7 @@ SedSetValue_getModelReference(const SedSetValue_t * ssv)
  * Returns the value of the "symbol" attribute of this SedSetValue_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getSymbol(const SedSetValue_t * ssv)
 {
   if (ssv == NULL)
@@ -1249,7 +1177,7 @@ SedSetValue_getSymbol(const SedSetValue_t * ssv)
  * Returns the value of the "target" attribute of this SedSetValue_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getTarget(const SedSetValue_t * ssv)
 {
   if (ssv == NULL)
@@ -1266,7 +1194,7 @@ SedSetValue_getTarget(const SedSetValue_t * ssv)
  * Returns the value of the "range" attribute of this SedSetValue_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getRange(const SedSetValue_t * ssv)
 {
   if (ssv == NULL)
@@ -1279,8 +1207,8 @@ SedSetValue_getRange(const SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if this SedSetValue_t's "modelReference" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "modelReference"
+ * attribute is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1291,7 +1219,8 @@ SedSetValue_isSetModelReference(const SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if this SedSetValue_t's "symbol" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "symbol" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1302,7 +1231,8 @@ SedSetValue_isSetSymbol(const SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if this SedSetValue_t's "target" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "target" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1313,7 +1243,8 @@ SedSetValue_isSetTarget(const SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if this SedSetValue_t's "range" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "range" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1430,7 +1361,8 @@ SedSetValue_getMath(const SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if this SedSetValue_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "math" element is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -1464,7 +1396,7 @@ SedSetValue_unsetMath(SedSetValue_t * ssv)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedSetValue_t object have been set.
  */
 LIBSEDML_EXTERN
@@ -1472,18 +1404,6 @@ int
 SedSetValue_hasRequiredAttributes(const SedSetValue_t * ssv)
 {
   return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 if all the required elements for this SedSetValue_t
- * object have been set.
- */
-LIBSEDML_EXTERN
-int
-SedSetValue_hasRequiredElements(const SedSetValue_t * ssv)
-{
-  return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredElements()) : 0;
 }
 
 

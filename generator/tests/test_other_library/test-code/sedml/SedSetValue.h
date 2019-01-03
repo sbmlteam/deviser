@@ -84,11 +84,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * SedSetValue.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedSetValue(unsigned int level = SEDML_DEFAULT_LEVEL,
               unsigned int version = SEDML_DEFAULT_VERSION);
@@ -99,11 +95,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedSetValue(SedNamespaces *sedmlns);
 
@@ -234,10 +226,11 @@ public:
    *
    * @param symbol std::string& value of the "symbol" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   *
+   * Calling this function with @p symbol = @c NULL or an empty string is
+   * equivalent to calling unsetSymbol().
    */
   int setSymbol(const std::string& symbol);
 
@@ -247,10 +240,11 @@ public:
    *
    * @param target std::string& value of the "target" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   *
+   * Calling this function with @p target = @c NULL or an empty string is
+   * equivalent to calling unsetTarget().
    */
   int setTarget(const std::string& target);
 
@@ -382,8 +376,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
-   * @sedmlconstant{SEDML_TASK_SETVALUE, SEDMLSedmlTypeCode_t}
+   * @sedmlconstant{SEDML_TASK_SETVALUE, SEDMLSedmlTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -404,19 +397,6 @@ public:
    * @li "modelReference"
    */
   virtual bool hasRequiredAttributes() const;
-
-
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * SedSetValue object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * SedSetValue have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the SedSetValue object are:
-   */
-  virtual bool hasRequiredElements() const;
 
 
 
@@ -572,26 +552,6 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedSetValue.
-   *
-   * @param attributeName, the name of the attribute to retrieve.
-   *
-   * @param value, the address of the value to record.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int getAttribute(const std::string& attributeName,
-                           const char* value) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Predicate returning @c true if this SedSetValue's attribute
    * "attributeName" is set.
    *
@@ -698,26 +658,6 @@ public:
    */
   virtual int setAttribute(const std::string& attributeName,
                            const std::string& value);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Sets the value of the "attributeName" attribute of this SedSetValue.
-   *
-   * @param attributeName, the name of the attribute to set.
-   *
-   * @param value, the value of the attribute to set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int setAttribute(const std::string& attributeName, const char*
-    value);
 
   /** @endcond */
 
@@ -834,11 +774,9 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SEDML Version to assign to this
  * SedSetValue_t.
  *
- * @throws SEDMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SEDML object, are either invalid or mismatched with respect to the parent
- * SedDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedSetValue_t
  */
@@ -853,6 +791,8 @@ SedSetValue_create(unsigned int level, unsigned int version);
  * @param ssv the SedSetValue_t structure.
  *
  * @return a (deep) copy of this SedSetValue_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedSetValue_t
  */
@@ -881,10 +821,12 @@ SedSetValue_free(SedSetValue_t* ssv);
  * @return the value of the "modelReference" attribute of this SedSetValue_t as
  * a pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof SedSetValue_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getModelReference(const SedSetValue_t * ssv);
 
 
@@ -896,10 +838,12 @@ SedSetValue_getModelReference(const SedSetValue_t * ssv);
  * @return the value of the "symbol" attribute of this SedSetValue_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof SedSetValue_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getSymbol(const SedSetValue_t * ssv);
 
 
@@ -911,10 +855,12 @@ SedSetValue_getSymbol(const SedSetValue_t * ssv);
  * @return the value of the "target" attribute of this SedSetValue_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof SedSetValue_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getTarget(const SedSetValue_t * ssv);
 
 
@@ -926,21 +872,23 @@ SedSetValue_getTarget(const SedSetValue_t * ssv);
  * @return the value of the "range" attribute of this SedSetValue_t as a
  * pointer to a string.
  *
+ * @copydetails doc_returned_owned_char
+ *
  * @memberof SedSetValue_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedSetValue_getRange(const SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if this SedSetValue_t's "modelReference" attribute
- * is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "modelReference"
+ * attribute is set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 if this SedSetValue_t's "modelReference" attribute has been
- * set, otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedSetValue_t's "modelReference" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedSetValue_t
  */
@@ -950,12 +898,13 @@ SedSetValue_isSetModelReference(const SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if this SedSetValue_t's "symbol" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "symbol" attribute
+ * is set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 if this SedSetValue_t's "symbol" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedSetValue_t's "symbol" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedSetValue_t
  */
@@ -965,12 +914,13 @@ SedSetValue_isSetSymbol(const SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if this SedSetValue_t's "target" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "target" attribute
+ * is set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 if this SedSetValue_t's "target" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedSetValue_t's "target" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedSetValue_t
  */
@@ -980,12 +930,13 @@ SedSetValue_isSetTarget(const SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if this SedSetValue_t's "range" attribute is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "range" attribute is
+ * set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 if this SedSetValue_t's "range" attribute has been set,
- * otherwise @c 0 is returned.
+ * @return @c 1 (true) if this SedSetValue_t's "range" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedSetValue_t
  */
@@ -1006,6 +957,7 @@ SedSetValue_isSetRange(const SedSetValue_t * ssv);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1024,8 +976,10 @@ SedSetValue_setModelReference(SedSetValue_t * ssv,
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p symbol = @c NULL or an empty string is
+ * equivalent to calling SedSetValue_unsetSymbol().
  *
  * @memberof SedSetValue_t
  */
@@ -1043,8 +997,10 @@ SedSetValue_setSymbol(SedSetValue_t * ssv, const char * symbol);
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p target = @c NULL or an empty string is
+ * equivalent to calling SedSetValue_unsetTarget().
  *
  * @memberof SedSetValue_t
  */
@@ -1064,6 +1020,7 @@ SedSetValue_setTarget(SedSetValue_t * ssv, const char * target);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1080,6 +1037,7 @@ SedSetValue_setRange(SedSetValue_t * ssv, const char * range);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1096,6 +1054,7 @@ SedSetValue_unsetModelReference(SedSetValue_t * ssv);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1112,6 +1071,7 @@ SedSetValue_unsetSymbol(SedSetValue_t * ssv);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1128,6 +1088,7 @@ SedSetValue_unsetTarget(SedSetValue_t * ssv);
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1141,8 +1102,8 @@ SedSetValue_unsetRange(SedSetValue_t * ssv);
  *
  * @param ssv the SedSetValue_t structure whose math is sought.
  *
- * @return the value of the "math" element of this SedSetValue_t as a
- * LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode*.
+ * @return the value of the "math" element of this SedSetValue_t as a pointer
+ * to an ASTNode_t object.
  *
  * @memberof SedSetValue_t
  */
@@ -1152,12 +1113,13 @@ SedSetValue_getMath(const SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if this SedSetValue_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this SedSetValue_t's "math" element is
+ * set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 if this SedSetValue_t's "math" element has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this SedSetValue_t's "math" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedSetValue_t
  */
@@ -1178,6 +1140,7 @@ SedSetValue_isSetMath(const SedSetValue_t * ssv);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1195,6 +1158,7 @@ SedSetValue_setMath(SedSetValue_t * ssv,
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedSetValue_t
  */
@@ -1204,13 +1168,13 @@ SedSetValue_unsetMath(SedSetValue_t * ssv);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedSetValue_t object have been set.
  *
  * @param ssv the SedSetValue_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SedSetValue_t have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SedSetValue_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required attributes for the SedSetValue_t object are:
@@ -1221,25 +1185,6 @@ SedSetValue_unsetMath(SedSetValue_t * ssv);
 LIBSEDML_EXTERN
 int
 SedSetValue_hasRequiredAttributes(const SedSetValue_t * ssv);
-
-
-/**
- * Predicate returning @c 1 if all the required elements for this SedSetValue_t
- * object have been set.
- *
- * @param ssv the SedSetValue_t structure.
- *
- * @return @c 1 to indicate that all the required elements of this
- * SedSetValue_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required elements for the SedSetValue_t object are:
- *
- * @memberof SedSetValue_t
- */
-LIBSEDML_EXTERN
-int
-SedSetValue_hasRequiredElements(const SedSetValue_t * ssv);
 
 
 

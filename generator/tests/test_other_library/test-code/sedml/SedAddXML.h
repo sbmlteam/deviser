@@ -79,11 +79,7 @@ public:
    * @param version an unsigned int, the SEDML Version to assign to this
    * SedAddXML.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedAddXML(unsigned int level = SEDML_DEFAULT_LEVEL,
             unsigned int version = SEDML_DEFAULT_VERSION);
@@ -94,11 +90,7 @@ public:
    *
    * @param sedmlns the SedNamespaces object.
    *
-   * @throws SEDMLConstructorException
-   * Thrown if the given @p level and @p version combination, or this kind of
-   * SEDML object, are either invalid or mismatched with respect to the parent
-   * SedDocument object.
-   * @copydetails doc_note_setting_lv
+   * @copydetails doc_note_setting_lv_pkg
    */
   SedAddXML(SedNamespaces *sedmlns);
 
@@ -201,8 +193,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
-   * @sedmlconstant{SEDML_ADDXML, SEDMLSedmlTypeCode_t}
+   * @sedmlconstant{SEDML_ADDXML, SEDMLSedmlTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -217,9 +208,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * SedAddXML have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the SedAddXML object are:
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -391,26 +379,6 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedAddXML.
-   *
-   * @param attributeName, the name of the attribute to retrieve.
-   *
-   * @param value, the address of the value to record.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int getAttribute(const std::string& attributeName,
-                           const char* value) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Predicate returning @c true if this SedAddXML's attribute "attributeName"
    * is set.
    *
@@ -517,26 +485,6 @@ public:
    */
   virtual int setAttribute(const std::string& attributeName,
                            const std::string& value);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Sets the value of the "attributeName" attribute of this SedAddXML.
-   *
-   * @param attributeName, the name of the attribute to set.
-   *
-   * @param value, the value of the attribute to set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int setAttribute(const std::string& attributeName, const char*
-    value);
 
   /** @endcond */
 
@@ -664,11 +612,9 @@ BEGIN_C_DECLS
  * @param version an unsigned int, the SEDML Version to assign to this
  * SedAddXML_t.
  *
- * @throws SEDMLConstructorException
- * Thrown if the given @p level and @p version combination, or this kind of
- * SEDML object, are either invalid or mismatched with respect to the parent
- * SedDocument object.
- * @copydetails doc_note_setting_lv
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedAddXML_t
  */
@@ -683,6 +629,8 @@ SedAddXML_create(unsigned int level, unsigned int version);
  * @param saxml the SedAddXML_t structure.
  *
  * @return a (deep) copy of this SedAddXML_t object.
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof SedAddXML_t
  */
@@ -719,12 +667,13 @@ SedAddXML_getNewXML(const SedAddXML_t * saxml);
 
 
 /**
- * Predicate returning @c 1 if this SedAddXML_t's "newXML" element is set.
+ * Predicate returning @c 1 (true) if this SedAddXML_t's "newXML" element is
+ * set.
  *
  * @param saxml the SedAddXML_t structure.
  *
- * @return @c 1 if this SedAddXML_t's "newXML" element has been set, otherwise
- * @c 0 is returned.
+ * @return @c 1 (true) if this SedAddXML_t's "newXML" element has been set,
+ * otherwise @c 0 (false) is returned.
  *
  * @memberof SedAddXML_t
  */
@@ -745,6 +694,7 @@ SedAddXML_isSetNewXML(const SedAddXML_t * saxml);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedAddXML_t
  */
@@ -762,6 +712,7 @@ SedAddXML_setNewXML(SedAddXML_t * saxml,
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedAddXML_t
  */
@@ -771,16 +722,13 @@ SedAddXML_unsetNewXML(SedAddXML_t * saxml);
 
 
 /**
- * Predicate returning @c 1 if all the required attributes for this SedAddXML_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * SedAddXML_t object have been set.
  *
  * @param saxml the SedAddXML_t structure.
  *
- * @return @c 1 to indicate that all the required attributes of this
- * SedAddXML_t have been set, otherwise @c 0 is returned.
- *
- *
- * @note The required attributes for the SedAddXML_t object are:
+ * @return @c 1 (true) to indicate that all the required attributes of this
+ * SedAddXML_t have been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedAddXML_t
  */
@@ -790,13 +738,13 @@ SedAddXML_hasRequiredAttributes(const SedAddXML_t * saxml);
 
 
 /**
- * Predicate returning @c 1 if all the required elements for this SedAddXML_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * SedAddXML_t object have been set.
  *
  * @param saxml the SedAddXML_t structure.
  *
- * @return @c 1 to indicate that all the required elements of this SedAddXML_t
- * have been set, otherwise @c 0 is returned.
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * SedAddXML_t have been set, otherwise @c 0 (false) is returned.
  *
  *
  * @note The required elements for the SedAddXML_t object are:

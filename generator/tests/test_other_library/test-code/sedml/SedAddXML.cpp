@@ -411,24 +411,6 @@ SedAddXML::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedAddXML.
- */
-int
-SedAddXML::getAttribute(const std::string& attributeName,
-                        const char* value) const
-{
-  int return_value = SedChange::getAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this SedAddXML's attribute "attributeName" is
  * set.
  */
@@ -533,23 +515,6 @@ SedAddXML::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedAddXML.
- */
-int
-SedAddXML::setAttribute(const std::string& attributeName, const char* value)
-{
-  int return_value = SedChange::setAttribute(attributeName, value);
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Unsets the value of the "attributeName" attribute of this SedAddXML.
  */
 int
@@ -618,15 +583,20 @@ SedAddXML::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   SedChange::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedAddXMLAllowedAttributes, level, version, details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedAddXMLAllowedAttributes, level, version,
+          details);
+      }
     }
   }
 }
@@ -753,7 +723,8 @@ SedAddXML_getNewXML(const SedAddXML_t * saxml)
 
 
 /*
- * Predicate returning @c 1 if this SedAddXML_t's "newXML" element is set.
+ * Predicate returning @c 1 (true) if this SedAddXML_t's "newXML" element is
+ * set.
  */
 LIBSEDML_EXTERN
 int
@@ -787,8 +758,8 @@ SedAddXML_unsetNewXML(SedAddXML_t * saxml)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this SedAddXML_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required attributes for this
+ * SedAddXML_t object have been set.
  */
 LIBSEDML_EXTERN
 int
@@ -800,8 +771,8 @@ SedAddXML_hasRequiredAttributes(const SedAddXML_t * saxml)
 
 
 /*
- * Predicate returning @c 1 if all the required elements for this SedAddXML_t
- * object have been set.
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * SedAddXML_t object have been set.
  */
 LIBSEDML_EXTERN
 int

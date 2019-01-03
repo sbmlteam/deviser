@@ -31,7 +31,7 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class 
+ * @class SedNamespaces
  * @sbmlbrief{} TODO:Definition of the SedNamespaces class.
  */
 
