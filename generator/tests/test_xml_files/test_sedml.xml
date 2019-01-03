@@ -2,9 +2,9 @@
 <package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false" customCopyright="sedml_copyright.txt">
   <language name="SedML" prefix="Sed" documentClass="SedDocument" baseClass="SedBase" libraryName="LibSEDML" isPackage="False">
     <library_version major="1" minor="0" revision="0"/>
-    <versions>
+    <language_versions>
       <version level="1" version="1" namespace="http://sed-ml.org/"/>
-    </versions>
+    </language_versions>
     <dependencies>
       <dependency library_name="libnuml" prefix="NUML"/>
     </dependencies>

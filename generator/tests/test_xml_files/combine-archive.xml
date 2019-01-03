@@ -2,9 +2,9 @@
 <package name="Combine" fullname="Combine Archive" version="1" required="false">
   <language name="OMEX" baseClass="CaBase" documentClass="OmexManifest" prefix="Ca" libraryName="libCombine" isPackage="false">
     <library_version major="1" minor="0" revision="0"/>
-    <versions>
-      <version namespace="http://identifiers.org/combine.specifications/omex-manifest"/>
-    </versions>
+    <language_versions>
+      <version level="1" version="1" namespace="http://identifiers.org/combine.specifications/omex-manifest"/>
+    </language_versions>
   </language>
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">

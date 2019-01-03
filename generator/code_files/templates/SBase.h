@@ -1528,7 +1528,7 @@ public:
 
   /** @cond doxygenLibsbmlInternal */
   /**
-   * Reads (initializes) this SBML_Lang object by reading from <XMLInputStream.
+   * Reads (initializes) this SBML_Lang object by reading from XMLInputStream.
    */
   void read (<NS>XMLInputStream& stream);
   /** @endcond */

@@ -1560,7 +1560,7 @@ public:
 
   /** @cond doxygenLibsedmlInternal */
   /**
-   * Reads (initializes) this SEDML object by reading from <XMLInputStream.
+   * Reads (initializes) this SEDML object by reading from XMLInputStream.
    */
   void read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
   /** @endcond */
