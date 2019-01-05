@@ -319,7 +319,6 @@ public:
    *
    * @return the number of Objective objects in this FbcModelPlugin.
    *
-   *
    * @see addObjective(const Objective* object)
    * @see createObjective()
    * @see getObjective(const std::string& sid)
@@ -571,7 +570,6 @@ public:
    * Get the number of FluxBound objects in this FbcModelPlugin.
    *
    * @return the number of FluxBound objects in this FbcModelPlugin.
-   *
    *
    * @see addFluxBound(const FluxBound* object)
    * @see createFluxBound()
@@ -827,7 +825,6 @@ public:
    * Get the number of GeneProduct objects in this FbcModelPlugin.
    *
    * @return the number of GeneProduct objects in this FbcModelPlugin.
-   *
    *
    * @see addGeneProduct(const GeneProduct* object)
    * @see createGeneProduct()

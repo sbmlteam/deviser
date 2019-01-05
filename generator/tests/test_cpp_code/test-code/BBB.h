@@ -323,7 +323,6 @@ public:
    *
    * @return the number of Another objects in this BBB.
    *
-   *
    * @see addAnother(const Another* object)
    * @see createAnother()
    * @see getAnother(const std::string& sid)

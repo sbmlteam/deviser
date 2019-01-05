@@ -283,7 +283,6 @@ public:
    *
    * @return the number of Transition objects in this ListOfTransitions.
    *
-   *
    * @see addTransition(const Transition* object)
    * @see createTransition()
    * @see get(const std::string& sid)

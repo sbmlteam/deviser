@@ -287,7 +287,6 @@ public:
    *
    * @return the number of Association objects in this ListOfAssociations.
    *
-   *
    * @see addAssociation(const Association* object)
    * @see createAssociation()
    * @see get(const std::string& sid)

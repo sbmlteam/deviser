@@ -489,7 +489,6 @@ public:
    *
    * @return the number of CSGNode objects in this CSGSetOperator.
    *
-   *
    * @see addCSGNode(const CSGNode* object)
    * @see createCSGNode()
    * @see getCSGNode(const std::string& sid)

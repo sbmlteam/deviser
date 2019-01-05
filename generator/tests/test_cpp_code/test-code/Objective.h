@@ -525,7 +525,6 @@ public:
    *
    * @return the number of FluxObjective objects in this Objective.
    *
-   *
    * @see addFluxObjective(const FluxObjective* object)
    * @see createFluxObjective()
    * @see getFluxObjective(const std::string& sid)

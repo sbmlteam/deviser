@@ -500,7 +500,6 @@ public:
    *
    * @return the number of Member objects in this Group.
    *
-   *
    * @see addMember(const Member* object)
    * @see createMember()
    * @see getMember(const std::string& sid)

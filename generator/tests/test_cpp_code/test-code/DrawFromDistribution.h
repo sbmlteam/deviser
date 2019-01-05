@@ -457,7 +457,6 @@ public:
    *
    * @return the number of DistribInput objects in this DrawFromDistribution.
    *
-   *
    * @see addDistribInput(const DistribInput* object)
    * @see createDistribInput()
    * @see getDistribInput(const std::string& sid)

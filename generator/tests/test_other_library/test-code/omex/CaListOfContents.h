@@ -277,7 +277,6 @@ public:
    *
    * @return the number of CaContent objects in this CaListOfContents.
    *
-   *
    * @see addContent(const CaContent* object)
    * @see createContent()
    * @see get(const std::string& sid)

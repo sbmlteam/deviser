@@ -433,7 +433,6 @@ public:
    *
    * @return the number of ClassId objects in this MultipleChild.
    *
-   *
    * @see addClassId(const ClassId* object)
    * @see createClassId()
    * @see getClassId(const std::string& sid)

@@ -285,7 +285,6 @@ public:
    *
    * @return the number of SampledField objects in this ListOfSampledFields.
    *
-   *
    * @see addSampledField(const SampledField* object)
    * @see createSampledField()
    * @see get(const std::string& sid)

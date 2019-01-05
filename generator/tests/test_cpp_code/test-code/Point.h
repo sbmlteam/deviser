@@ -314,7 +314,6 @@ public:
    *
    * @return the number of Point objects in this Point.
    *
-   *
    * @see addPoint(const Point* object)
    * @see createPoint()
    * @see getPoint(const std::string& sid)

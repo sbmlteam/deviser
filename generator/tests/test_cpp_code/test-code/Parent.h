@@ -238,7 +238,6 @@ public:
    *
    * @return the number of Child objects in this Parent.
    *
-   *
    * @see addChild(const Child* object)
    * @see createChild()
    * @see getChild(const std::string& sid)
@@ -390,7 +389,6 @@ public:
    * Get the number of Sprog objects in this Parent.
    *
    * @return the number of Sprog objects in this Parent.
-   *
    *
    * @see addSprog(const Sprog* object)
    * @see createSprog()

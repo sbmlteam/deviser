@@ -277,7 +277,6 @@ public:
    *
    * @return the number of Point objects in this SbgnListOfPoints.
    *
-   *
    * @see addPoint(const Point* object)
    * @see createPoint()
    * @see get(const std::string& sid)

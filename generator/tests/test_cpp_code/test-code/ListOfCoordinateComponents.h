@@ -293,7 +293,6 @@ public:
    * @return the number of CoordinateComponent objects in this
    * ListOfCoordinateComponents.
    *
-   *
    * @see addCoordinateComponent(const CoordinateComponent* object)
    * @see createCoordinateComponent()
    * @see get(const std::string& sid)

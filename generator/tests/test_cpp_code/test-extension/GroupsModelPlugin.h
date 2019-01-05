@@ -263,7 +263,6 @@ public:
    *
    * @return the number of Group objects in this GroupsModelPlugin.
    *
-   *
    * @see addGroup(const Group* object)
    * @see createGroup()
    * @see getGroup(const std::string& sid)

@@ -870,7 +870,6 @@ public:
    *
    * @return the number of Transformation2D objects in this RenderGroup.
    *
-   *
    * @see addElement(const Transformation2D* object)
    * @see createElement()
    * @see getElement(const std::string& sid)

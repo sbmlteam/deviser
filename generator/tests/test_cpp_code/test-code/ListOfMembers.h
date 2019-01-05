@@ -369,7 +369,6 @@ public:
    *
    * @return the number of Member objects in this ListOfMembers.
    *
-   *
    * @see addMember(const Member* object)
    * @see createMember()
    * @see get(const std::string& sid)

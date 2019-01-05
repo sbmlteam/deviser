@@ -388,7 +388,6 @@ public:
    *
    * @return the number of ParametricObject objects in this ParametricGeometry.
    *
-   *
    * @see addParametricObject(const ParametricObject* object)
    * @see createParametricObject()
    * @see getParametricObject(const std::string& sid)

@@ -277,7 +277,6 @@ public:
    *
    * @return the number of Fred objects in this ContainerX.
    *
-   *
    * @see addFred(const Fred* object)
    * @see createFred()
    * @see getFred(const std::string& sid)

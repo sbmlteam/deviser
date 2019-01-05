@@ -299,7 +299,6 @@ public:
    * @return the number of GeometryDefinition objects in this
    * ListOfGeometryDefinitions.
    *
-   *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
    * @see get(const std::string& sid)

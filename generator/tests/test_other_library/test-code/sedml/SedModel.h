@@ -403,7 +403,6 @@ public:
    *
    * @return the number of SedChange objects in this SedModel.
    *
-   *
    * @see addChange(const SedChange* object)
    * @see createChange()
    * @see getChange(const std::string& sid)

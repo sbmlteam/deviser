@@ -529,7 +529,6 @@ public:
    *
    * @return the number of EventAssignment objects in this Event.
    *
-   *
    * @see addEventAssignment(const EventAssignment* object)
    * @see createEventAssignment()
    * @see getEventAssignment(const std::string& sid)

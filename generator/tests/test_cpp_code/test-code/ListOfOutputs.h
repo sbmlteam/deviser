@@ -277,7 +277,6 @@ public:
    *
    * @return the number of Output objects in this ListOfOutputs.
    *
-   *
    * @see addOutput(const Output* object)
    * @see createOutput()
    * @see get(const std::string& sid)

@@ -290,7 +290,6 @@ public:
    *
    * @return the number of GeometryDefinition objects in this MixedGeometry.
    *
-   *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
    * @see getGeometryDefinition(const std::string& sid)
@@ -574,7 +573,6 @@ public:
    * Get the number of OrdinalMapping objects in this MixedGeometry.
    *
    * @return the number of OrdinalMapping objects in this MixedGeometry.
-   *
    *
    * @see addOrdinalMapping(const OrdinalMapping* object)
    * @see createOrdinalMapping()

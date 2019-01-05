@@ -275,7 +275,6 @@ public:
    *
    * @return the number of SedModel objects in this SedListOfModels.
    *
-   *
    * @see addModel(const SedModel* object)
    * @see createModel()
    * @see get(const std::string& sid)

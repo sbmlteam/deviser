@@ -281,7 +281,6 @@ public:
    *
    * @return the number of ClassTwo objects in this ListOfClassTwos.
    *
-   *
    * @see addClassTwo(const ClassTwo* object)
    * @see createClassTwo()
    * @see get(const std::string& sid)

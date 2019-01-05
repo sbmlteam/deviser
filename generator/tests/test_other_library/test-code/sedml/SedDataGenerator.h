@@ -382,7 +382,6 @@ public:
    *
    * @return the number of SedVariable objects in this SedDataGenerator.
    *
-   *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
    * @see getVariable(const std::string& sid)
@@ -540,7 +539,6 @@ public:
    * Get the number of SedParameter objects in this SedDataGenerator.
    *
    * @return the number of SedParameter objects in this SedDataGenerator.
-   *
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()

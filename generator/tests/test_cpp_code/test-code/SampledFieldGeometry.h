@@ -368,7 +368,6 @@ public:
    *
    * @return the number of SampledVolume objects in this SampledFieldGeometry.
    *
-   *
    * @see addSampledVolume(const SampledVolume* object)
    * @see createSampledVolume()
    * @see getSampledVolume(const std::string& sid)

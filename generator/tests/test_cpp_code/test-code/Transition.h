@@ -396,7 +396,6 @@ public:
    *
    * @return the number of Input objects in this Transition.
    *
-   *
    * @see addInput(const Input* object)
    * @see createInput()
    * @see getInput(const std::string& sid)
@@ -640,7 +639,6 @@ public:
    *
    * @return the number of Output objects in this Transition.
    *
-   *
    * @see addOutput(const Output* object)
    * @see createOutput()
    * @see getOutput(const std::string& sid)
@@ -817,7 +815,6 @@ public:
    * Get the number of FunctionTerm objects in this Transition.
    *
    * @return the number of FunctionTerm objects in this Transition.
-   *
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see createFunctionTerm()

@@ -289,7 +289,6 @@ public:
    * @return the number of AnalyticVolume objects in this
    * ListOfAnalyticVolumes.
    *
-   *
    * @see addAnalyticVolume(const AnalyticVolume* object)
    * @see createAnalyticVolume()
    * @see get(const std::string& sid)

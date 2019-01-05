@@ -283,7 +283,6 @@ public:
    *
    * @return the number of Category objects in this ListOfCategories.
    *
-   *
    * @see addCategory(const Category* object)
    * @see createCategory()
    * @see get(const std::string& sid)

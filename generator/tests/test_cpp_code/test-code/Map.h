@@ -482,7 +482,6 @@ public:
    *
    * @return the number of Glyph objects in this Map.
    *
-   *
    * @see addGlyph(const Glyph* object)
    * @see createGlyph()
    * @see getGlyph(const std::string& sid)
@@ -696,7 +695,6 @@ public:
    *
    * @return the number of Arc objects in this Map.
    *
-   *
    * @see addArc(const Arc* object)
    * @see createArc()
    * @see getArc(const std::string& sid)
@@ -871,7 +869,6 @@ public:
    * Get the number of ArcGroup objects in this Map.
    *
    * @return the number of ArcGroup objects in this Map.
-   *
    *
    * @see addArcGroup(const ArcGroup* object)
    * @see createArcGroup()

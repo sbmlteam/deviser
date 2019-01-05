@@ -312,7 +312,6 @@ public:
    *
    * @return the number of CSGObject objects in this CSGeometry.
    *
-   *
    * @see addCSGObject(const CSGObject* object)
    * @see createCSGObject()
    * @see getCSGObject(const std::string& sid)

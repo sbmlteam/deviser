@@ -332,7 +332,6 @@ public:
    *
    * @return the number of MyLoTest objects in this ListOfMyLoTests.
    *
-   *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
    * @see get(const std::string& sid)

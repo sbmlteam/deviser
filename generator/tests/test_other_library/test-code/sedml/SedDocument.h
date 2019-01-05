@@ -366,7 +366,6 @@ public:
    *
    * @return the number of SedModel objects in this SedDocument.
    *
-   *
    * @see addModel(const SedModel* object)
    * @see createModel()
    * @see getModel(const std::string& sid)
@@ -904,16 +903,11 @@ public:
    * @param n an unsigned int representing the index of the SedError to
    * retrieve.
    *
-   * @return the nth SedError in the SedListOfErrors within this SedDocument.
+   * @return the nth SedError within this SedDocument.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSedError(const SedError* object)
-   * @see createSedError()
-   * @see getSedError(const std::string& sid)
    * @see getNumErrors()
-   * @see removeSedError(const std::string& sid)
-   * @see removeSedError(unsigned int n)
    */
   SedError* getError(unsigned int n);
 
@@ -924,7 +918,7 @@ public:
    * @param n an unsigned int representing the index of the SedError to
    * retrieve.
    *
-   * @return the nth SedError in the within this SedDocument.
+   * @return the nth SedError within this SedDocument.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -938,13 +932,7 @@ public:
    *
    * @return the number of SedError objects in this SedDocument.
    *
-   *
-   * @see addSedError(const SedError* object)
-   * @see createSedError()
-   * @see getSedError(const std::string& sid)
-   * @see getSedError(unsigned int n)
-   * @see removeSedError(const std::string& sid)
-   * @see removeSedError(unsigned int n)
+   * @see getError(unsigned int n)
    */
   unsigned int getNumErrors() const;
 
@@ -956,6 +944,8 @@ public:
    * @param severity the severity of the SedError to return.
    *
    * @return the number of SedError objects in this SedDocument.
+   *
+   * @see getError(unsigned int n)
    */
   unsigned int getNumErrors(unsigned int severity) const;
 

@@ -288,7 +288,6 @@ public:
    *
    * @return the number of CSGNode objects in this ListOfCSGNodes.
    *
-   *
    * @see addCSGNode(const CSGNode* object)
    * @see createCSGNode()
    * @see get(const std::string& sid)

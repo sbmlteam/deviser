@@ -242,7 +242,6 @@ public:
    *
    * @return the number of RenderPoint objects in this Polygon.
    *
-   *
    * @see addElement(const RenderPoint* object)
    * @see createElement()
    * @see getElement(const std::string& sid)

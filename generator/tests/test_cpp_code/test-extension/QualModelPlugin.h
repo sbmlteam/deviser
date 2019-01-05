@@ -307,7 +307,6 @@ public:
    *
    * @return the number of QualitativeSpecies objects in this QualModelPlugin.
    *
-   *
    * @see addQualitativeSpecies(const QualitativeSpecies* object)
    * @see createQualitativeSpecies()
    * @see getQualitativeSpecies(const std::string& sid)
@@ -531,7 +530,6 @@ public:
    * Get the number of Transition objects in this QualModelPlugin.
    *
    * @return the number of Transition objects in this QualModelPlugin.
-   *
    *
    * @see addTransition(const Transition* object)
    * @see createTransition()

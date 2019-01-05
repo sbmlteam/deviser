@@ -276,7 +276,6 @@ public:
    *
    * @return the number of Group objects in this ListOfGroups.
    *
-   *
    * @see addGroup(const Group* object)
    * @see createGroup()
    * @see get(const std::string& sid)

@@ -277,7 +277,6 @@ public:
    *
    * @return the number of Child objects in this ListOfChildren.
    *
-   *
    * @see addChild(const Child* object)
    * @see createChild()
    * @see get(const std::string& sid)

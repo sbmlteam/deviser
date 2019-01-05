@@ -336,7 +336,6 @@ public:
    *
    * @return the number of Objective objects in this ListOfObjectives.
    *
-   *
    * @see addObjective(const Objective* object)
    * @see createObjective()
    * @see get(const std::string& sid)

@@ -356,7 +356,6 @@ public:
    *
    * @return the number of FunctionTerm objects in this ListOfFunctionTerms.
    *
-   *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see createFunctionTerm()
    * @see get(const std::string& sid)

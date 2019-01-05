@@ -239,7 +239,6 @@ public:
    *
    * @return the number of CaContent objects in this CaOmexManifest.
    *
-   *
    * @see addContent(const CaContent* object)
    * @see createContent()
    * @see getContent(const std::string& sid)
@@ -742,7 +741,7 @@ public:
    * @param n an unsigned int representing the index of the CaError to
    * retrieve.
    *
-   * @return the nth CaError in the CaListOfErrors within this CaDocument.
+   * @return the nth CaError within this CaDocument.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -757,7 +756,9 @@ public:
    * @param n an unsigned int representing the index of the CaError to
    * retrieve.
    *
-   * @return the nth CaError in the CaListOfErrors within this CaDocument.
+   * @return the nth CaError within this CaDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
    *
    * @see getNumErrors()
    */
@@ -768,6 +769,7 @@ public:
    * Get the number of CaError objects in this CaDocument.
    *
    * @return the number of CaError objects in this CaDocument.
+   *
    * @see getError(unsigned int n)
    */
   unsigned int getNumErrors() const;
@@ -780,6 +782,8 @@ public:
    * @param severity the severity of the CaError to return.
    *
    * @return the number of CaError objects in this CaDocument.
+   *
+   * @see getError(unsigned int n)
    */
   unsigned int getNumErrors(unsigned int severity) const;
 

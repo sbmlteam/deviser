@@ -321,7 +321,6 @@ public:
    * @return the number of ExternalModelDefinition objects in this
    * CompSBMLDocumentPlugin.
    *
-   *
    * @see addExternalModelDefinition(const ExternalModelDefinition* object)
    * @see createExternalModelDefinition()
    * @see getExternalModelDefinition(const std::string& sid)
@@ -505,7 +504,6 @@ public:
    *
    * @return the number of ModelDefinition objects in this
    * CompSBMLDocumentPlugin.
-   *
    *
    * @see addModelDefinition(const ModelDefinition* object)
    * @see createModelDefinition()

@@ -282,7 +282,6 @@ public:
    *
    * @return the number of MyLoTest objects in this Container.
    *
-   *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
    * @see getMyLoTest(const std::string& sid)

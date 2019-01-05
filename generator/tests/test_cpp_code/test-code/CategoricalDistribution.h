@@ -248,7 +248,6 @@ public:
    *
    * @return the number of Category objects in this CategoricalDistribution.
    *
-   *
    * @see addCategory(const Category* object)
    * @see createCategory()
    * @see getCategory(const std::string& sid)

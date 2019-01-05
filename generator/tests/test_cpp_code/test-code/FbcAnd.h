@@ -238,7 +238,6 @@ public:
    *
    * @return the number of Association objects in this FbcAnd.
    *
-   *
    * @see addAssociation(const Association* object)
    * @see createAssociation()
    * @see getAssociation(const std::string& sid)

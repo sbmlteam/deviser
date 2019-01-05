@@ -547,7 +547,6 @@ public:
    *
    * @return the number of Glyph objects in this Arc.
    *
-   *
    * @see addGlyph(const Glyph* object)
    * @see createGlyph()
    * @see getGlyph(const std::string& sid)
@@ -720,7 +719,6 @@ public:
    * Get the number of Point objects in this Arc.
    *
    * @return the number of Point objects in this Arc.
-   *
    *
    * @see addNext(const Point* object)
    * @see createNext()
@@ -913,7 +911,6 @@ public:
    * Get the number of Port objects in this Arc.
    *
    * @return the number of Port objects in this Arc.
-   *
    *
    * @see addPort(const Port* object)
    * @see createPort()
