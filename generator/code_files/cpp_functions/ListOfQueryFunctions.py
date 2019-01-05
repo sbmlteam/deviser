@@ -1201,7 +1201,7 @@ class ListOfQueryFunctions():
 
 
         # create the function declaration
-        name_used = strFunctions.cap_list_of_name(self.used_child_name) # strFunctions.remove_prefix(loname)
+        name_used = strFunctions.cap_list_of_name(self.used_child_name, False) # strFunctions.remove_prefix(loname)
         if self.is_cpp_api:
             function = 'get{0}'.format(name_used)
             arguments = []

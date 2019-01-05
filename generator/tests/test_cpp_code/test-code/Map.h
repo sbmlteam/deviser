@@ -352,7 +352,7 @@ public:
    * @see removeGlyph(const std::string& sid)
    * @see removeGlyph(unsigned int n)
    */
-  const SbgnListOfGlyphs* getSbgnListOfGlyphs() const;
+  const SbgnListOfGlyphs* getListOfGlyphs() const;
 
 
   /**
@@ -370,7 +370,7 @@ public:
    * @see removeGlyph(const std::string& sid)
    * @see removeGlyph(unsigned int n)
    */
-  SbgnListOfGlyphs* getSbgnListOfGlyphs();
+  SbgnListOfGlyphs* getListOfGlyphs();
 
 
   /**
@@ -566,7 +566,7 @@ public:
    * @see removeArc(const std::string& sid)
    * @see removeArc(unsigned int n)
    */
-  const SbgnListOfArcs* getSbgnListOfArcs() const;
+  const SbgnListOfArcs* getListOfArcs() const;
 
 
   /**
@@ -584,7 +584,7 @@ public:
    * @see removeArc(const std::string& sid)
    * @see removeArc(unsigned int n)
    */
-  SbgnListOfArcs* getSbgnListOfArcs();
+  SbgnListOfArcs* getListOfArcs();
 
 
   /**
@@ -780,7 +780,7 @@ public:
    * @see removeArcGroup(const std::string& sid)
    * @see removeArcGroup(unsigned int n)
    */
-  const SbgnListOfArcGroups* getSbgnListOfArcGroups() const;
+  const SbgnListOfArcGroups* getListOfArcGroups() const;
 
 
   /**
@@ -798,7 +798,7 @@ public:
    * @see removeArcGroup(const std::string& sid)
    * @see removeArcGroup(unsigned int n)
    */
-  SbgnListOfArcGroups* getSbgnListOfArcGroups();
+  SbgnListOfArcGroups* getListOfArcGroups();
 
 
   /**
@@ -1775,7 +1775,7 @@ Map_unsetBBox(Map_t * m);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfGlyphs(Map_t* m);
+Map_getListOfGlyphs(Map_t* m);
 
 
 /**
@@ -1928,7 +1928,7 @@ Map_removeGlyphById(Map_t* m, const char* sid);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfArcs(Map_t* m);
+Map_getListOfArcs(Map_t* m);
 
 
 /**
@@ -2081,7 +2081,7 @@ Map_removeArcById(Map_t* m, const char* sid);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfArcGroups(Map_t* m);
+Map_getListOfArcGroups(Map_t* m);
 
 
 /**

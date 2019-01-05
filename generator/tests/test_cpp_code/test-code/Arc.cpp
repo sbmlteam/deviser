@@ -594,7 +594,7 @@ Arc::unsetEnd()
  * Returns the SbgnListOfGlyphs from this Arc.
  */
 const SbgnListOfGlyphs*
-Arc::getSbgnListOfGlyphs() const
+Arc::getListOfGlyphs() const
 {
   return &mGlyphs;
 }
@@ -604,7 +604,7 @@ Arc::getSbgnListOfGlyphs() const
  * Returns the SbgnListOfGlyphs from this Arc.
  */
 SbgnListOfGlyphs*
-Arc::getSbgnListOfGlyphs()
+Arc::getListOfGlyphs()
 {
   return &mGlyphs;
 }
@@ -749,7 +749,7 @@ Arc::removeGlyph(const std::string& sid)
  * Returns the SbgnListOfPoints from this Arc.
  */
 const SbgnListOfPoints*
-Arc::getSbgnListOfNexts() const
+Arc::getListOfNexts() const
 {
   return &mPoints;
 }
@@ -759,7 +759,7 @@ Arc::getSbgnListOfNexts() const
  * Returns the SbgnListOfPoints from this Arc.
  */
 SbgnListOfPoints*
-Arc::getSbgnListOfNexts()
+Arc::getListOfNexts()
 {
   return &mPoints;
 }
@@ -870,7 +870,7 @@ Arc::removeNext(unsigned int n)
  * Returns the SbgnListOfPorts from this Arc.
  */
 const SbgnListOfPorts*
-Arc::getSbgnListOfPorts() const
+Arc::getListOfPorts() const
 {
   return &mPorts;
 }
@@ -880,7 +880,7 @@ Arc::getSbgnListOfPorts() const
  * Returns the SbgnListOfPorts from this Arc.
  */
 SbgnListOfPorts*
-Arc::getSbgnListOfPorts()
+Arc::getListOfPorts()
 {
   return &mPorts;
 }
@@ -2433,9 +2433,9 @@ Arc_unsetEnd(Arc_t * a)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfGlyphs(Arc_t* a)
+Arc_getListOfGlyphs(Arc_t* a)
 {
-  return (a != NULL) ? a->getSbgnListOfGlyphs() : NULL;
+  return (a != NULL) ? a->getListOfGlyphs() : NULL;
 }
 
 
@@ -2523,9 +2523,9 @@ Arc_removeGlyphById(Arc_t* a, const char* sid)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfNexts(Arc_t* a)
+Arc_getListOfNexts(Arc_t* a)
 {
-  return (a != NULL) ? a->getSbgnListOfNexts() : NULL;
+  return (a != NULL) ? a->getListOfNexts() : NULL;
 }
 
 
@@ -2590,9 +2590,9 @@ Arc_removeNext(Arc_t* a, unsigned int n)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfPorts(Arc_t* a)
+Arc_getListOfPorts(Arc_t* a)
 {
-  return (a != NULL) ? a->getSbgnListOfPorts() : NULL;
+  return (a != NULL) ? a->getListOfPorts() : NULL;
 }
 
 

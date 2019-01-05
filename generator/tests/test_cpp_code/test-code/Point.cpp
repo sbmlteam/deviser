@@ -261,7 +261,7 @@ Point::unsetY()
  * Returns the SbgnListOfPoints * from this Point.
  */
 const SbgnListOfPoints *
-Point::getSbgnListOfPoints() const
+Point::getListOfPoints() const
 {
   return mPoints;
 }
@@ -271,7 +271,7 @@ Point::getSbgnListOfPoints() const
  * Returns the SbgnListOfPoints * from this Point.
  */
 SbgnListOfPoints *
-Point::getSbgnListOfPoints()
+Point::getListOfPoints()
 {
   return mPoints;
 }
@@ -1227,9 +1227,9 @@ Point_unsetY(Point_t * p)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Point_getSbgnListOfPoints(Point_t* p)
+Point_getListOfPoints(Point_t* p)
 {
-  return (p != NULL) ? p->getSbgnListOfPoints() : NULL;
+  return (p != NULL) ? p->getListOfPoints() : NULL;
 }
 
 

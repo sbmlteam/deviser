@@ -224,7 +224,7 @@ public:
    * @see removePoint(const std::string& sid)
    * @see removePoint(unsigned int n)
    */
-  const SbgnListOfPoints * getSbgnListOfPoints() const;
+  const SbgnListOfPoints * getListOfPoints() const;
 
 
   /**
@@ -242,7 +242,7 @@ public:
    * @see removePoint(const std::string& sid)
    * @see removePoint(unsigned int n)
    */
-  SbgnListOfPoints * getSbgnListOfPoints();
+  SbgnListOfPoints * getListOfPoints();
 
 
   /**
@@ -1088,7 +1088,7 @@ Point_unsetY(Point_t * p);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Point_getSbgnListOfPoints(Point_t* p);
+Point_getListOfPoints(Point_t* p);
 
 
 /**

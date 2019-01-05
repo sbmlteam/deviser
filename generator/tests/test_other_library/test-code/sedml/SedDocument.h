@@ -221,6 +221,16 @@ public:
    * Returns the SedListOfModels from this SedDocument.
    *
    * @return the SedListOfModels from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   const SedListOfModels* getListOfModels() const;
 
@@ -229,6 +239,16 @@ public:
    * Returns the SedListOfModels from this SedDocument.
    *
    * @return the SedListOfModels from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
+   * @see getModel(const std::string& sid)
+   * @see getModel(unsigned int n)
+   * @see getNumModels()
+   * @see removeModel(const std::string& sid)
+   * @see removeModel(unsigned int n)
    */
   SedListOfModels* getListOfModels();
 
@@ -1218,11 +1238,11 @@ SedDocument_unsetVersion(SedDocument_t * sd);
 
 
 /**
- * Returns a ListOf_t* containing SedModel_t objects from this SedDocument_t.
+ * Returns a ListOf_t * containing SedModel_t objects from this SedDocument_t.
  *
- * @param sd the SedDocument_t structure whose "SedListOfModels" is sought.
+ * @param sd the SedDocument_t structure whose SedListOfModels is sought.
  *
- * @return the "SedListOfModels" from this SedDocument_t as a ListOf_t *.
+ * @return the SedListOfModels from this SedDocument_t as a ListOf_t *.
  *
  * @copydetails doc_returned_unowned_pointer
  *

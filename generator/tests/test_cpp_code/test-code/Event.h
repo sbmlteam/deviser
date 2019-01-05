@@ -404,7 +404,7 @@ public:
    * @see removeEventAssignment(const std::string& sid)
    * @see removeEventAssignment(unsigned int n)
    */
-  const SBMLListOfEventAssignments* getSBMLListOfEventAssignments() const;
+  const SBMLListOfEventAssignments* getListOfEventAssignments() const;
 
 
   /**
@@ -422,7 +422,7 @@ public:
    * @see removeEventAssignment(const std::string& sid)
    * @see removeEventAssignment(unsigned int n)
    */
-  SBMLListOfEventAssignments* getSBMLListOfEventAssignments();
+  SBMLListOfEventAssignments* getListOfEventAssignments();
 
 
   /**
@@ -1535,7 +1535,7 @@ Event_unsetDelay(Event_t * e);
  */
 LIBSBML_EXTERN
 SBMLListOf_t*
-Event_getSBMLListOfEventAssignments(Event_t* e);
+Event_getListOfEventAssignments(Event_t* e);
 
 
 /**

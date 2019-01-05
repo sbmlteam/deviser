@@ -776,8 +776,8 @@ SedDocument::unsetAttribute(const std::string& attributeName)
 /*
  * Creates and returns an new "elementName" object in this SedDocument.
  */
-SBase*
-SedDocument::createObject(const std::string& elementName)
+SedBase*
+SedDocument::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
@@ -1328,7 +1328,7 @@ SedDocument_unsetVersion(SedDocument_t * sd)
 
 
 /*
- * Returns a ListOf_t* containing SedModel_t objects from this SedDocument_t.
+ * Returns a ListOf_t * containing SedModel_t objects from this SedDocument_t.
  */
 LIBSEDML_EXTERN
 SedListOf_t*

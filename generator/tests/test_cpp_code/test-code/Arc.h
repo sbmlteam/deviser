@@ -417,7 +417,7 @@ public:
    * @see removeGlyph(const std::string& sid)
    * @see removeGlyph(unsigned int n)
    */
-  const SbgnListOfGlyphs* getSbgnListOfGlyphs() const;
+  const SbgnListOfGlyphs* getListOfGlyphs() const;
 
 
   /**
@@ -435,7 +435,7 @@ public:
    * @see removeGlyph(const std::string& sid)
    * @see removeGlyph(unsigned int n)
    */
-  SbgnListOfGlyphs* getSbgnListOfGlyphs();
+  SbgnListOfGlyphs* getListOfGlyphs();
 
 
   /**
@@ -631,7 +631,7 @@ public:
    * @see removeNext(const std::string& sid)
    * @see removeNext(unsigned int n)
    */
-  const SbgnListOfPoints* getSbgnListOfNexts() const;
+  const SbgnListOfPoints* getListOfNexts() const;
 
 
   /**
@@ -649,7 +649,7 @@ public:
    * @see removeNext(const std::string& sid)
    * @see removeNext(unsigned int n)
    */
-  SbgnListOfPoints* getSbgnListOfNexts();
+  SbgnListOfPoints* getListOfNexts();
 
 
   /**
@@ -784,7 +784,7 @@ public:
    * @see removePort(const std::string& sid)
    * @see removePort(unsigned int n)
    */
-  const SbgnListOfPorts* getSbgnListOfPorts() const;
+  const SbgnListOfPorts* getListOfPorts() const;
 
 
   /**
@@ -802,7 +802,7 @@ public:
    * @see removePort(const std::string& sid)
    * @see removePort(unsigned int n)
    */
-  SbgnListOfPorts* getSbgnListOfPorts();
+  SbgnListOfPorts* getListOfPorts();
 
 
   /**
@@ -2006,7 +2006,7 @@ Arc_unsetEnd(Arc_t * a);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfGlyphs(Arc_t* a);
+Arc_getListOfGlyphs(Arc_t* a);
 
 
 /**
@@ -2159,7 +2159,7 @@ Arc_removeGlyphById(Arc_t* a, const char* sid);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfNexts(Arc_t* a);
+Arc_getListOfNexts(Arc_t* a);
 
 
 /**
@@ -2273,7 +2273,7 @@ Arc_removeNext(Arc_t* a, unsigned int n);
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Arc_getSbgnListOfPorts(Arc_t* a);
+Arc_getListOfPorts(Arc_t* a);
 
 
 /**

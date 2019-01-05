@@ -579,7 +579,7 @@ Event::unsetDelay()
  * Returns the SBMLListOfEventAssignments from this Event.
  */
 const SBMLListOfEventAssignments*
-Event::getSBMLListOfEventAssignments() const
+Event::getListOfEventAssignments() const
 {
   return &mEventAssignments;
 }
@@ -589,7 +589,7 @@ Event::getSBMLListOfEventAssignments() const
  * Returns the SBMLListOfEventAssignments from this Event.
  */
 SBMLListOfEventAssignments*
-Event::getSBMLListOfEventAssignments()
+Event::getListOfEventAssignments()
 {
   return &mEventAssignments;
 }
@@ -1971,9 +1971,9 @@ Event_unsetDelay(Event_t * e)
  */
 LIBSBML_EXTERN
 SBMLListOf_t*
-Event_getSBMLListOfEventAssignments(Event_t* e)
+Event_getListOfEventAssignments(Event_t* e)
 {
-  return (e != NULL) ? e->getSBMLListOfEventAssignments() : NULL;
+  return (e != NULL) ? e->getListOfEventAssignments() : NULL;
 }
 
 

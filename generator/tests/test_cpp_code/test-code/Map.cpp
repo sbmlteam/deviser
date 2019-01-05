@@ -379,7 +379,7 @@ Map::unsetBBox()
  * Returns the SbgnListOfGlyphs from this Map.
  */
 const SbgnListOfGlyphs*
-Map::getSbgnListOfGlyphs() const
+Map::getListOfGlyphs() const
 {
   return &mGlyphs;
 }
@@ -389,7 +389,7 @@ Map::getSbgnListOfGlyphs() const
  * Returns the SbgnListOfGlyphs from this Map.
  */
 SbgnListOfGlyphs*
-Map::getSbgnListOfGlyphs()
+Map::getListOfGlyphs()
 {
   return &mGlyphs;
 }
@@ -534,7 +534,7 @@ Map::removeGlyph(const std::string& sid)
  * Returns the SbgnListOfArcs from this Map.
  */
 const SbgnListOfArcs*
-Map::getSbgnListOfArcs() const
+Map::getListOfArcs() const
 {
   return &mArcs;
 }
@@ -544,7 +544,7 @@ Map::getSbgnListOfArcs() const
  * Returns the SbgnListOfArcs from this Map.
  */
 SbgnListOfArcs*
-Map::getSbgnListOfArcs()
+Map::getListOfArcs()
 {
   return &mArcs;
 }
@@ -689,7 +689,7 @@ Map::removeArc(const std::string& sid)
  * Returns the SbgnListOfArcGroups from this Map.
  */
 const SbgnListOfArcGroups*
-Map::getSbgnListOfArcGroups() const
+Map::getListOfArcGroups() const
 {
   return &mArcGroups;
 }
@@ -699,7 +699,7 @@ Map::getSbgnListOfArcGroups() const
  * Returns the SbgnListOfArcGroups from this Map.
  */
 SbgnListOfArcGroups*
-Map::getSbgnListOfArcGroups()
+Map::getListOfArcGroups()
 {
   return &mArcGroups;
 }
@@ -1869,9 +1869,9 @@ Map_unsetBBox(Map_t * m)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfGlyphs(Map_t* m)
+Map_getListOfGlyphs(Map_t* m)
 {
-  return (m != NULL) ? m->getSbgnListOfGlyphs() : NULL;
+  return (m != NULL) ? m->getListOfGlyphs() : NULL;
 }
 
 
@@ -1959,9 +1959,9 @@ Map_removeGlyphById(Map_t* m, const char* sid)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfArcs(Map_t* m)
+Map_getListOfArcs(Map_t* m)
 {
-  return (m != NULL) ? m->getSbgnListOfArcs() : NULL;
+  return (m != NULL) ? m->getListOfArcs() : NULL;
 }
 
 
@@ -2049,9 +2049,9 @@ Map_removeArcById(Map_t* m, const char* sid)
  */
 LIBSBGN_EXTERN
 SbgnListOf_t*
-Map_getSbgnListOfArcGroups(Map_t* m)
+Map_getListOfArcGroups(Map_t* m)
 {
-  return (m != NULL) ? m->getSbgnListOfArcGroups() : NULL;
+  return (m != NULL) ? m->getListOfArcGroups() : NULL;
 }
 
 
