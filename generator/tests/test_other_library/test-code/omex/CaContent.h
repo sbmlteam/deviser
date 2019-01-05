@@ -72,9 +72,17 @@ protected:
 public:
 
   /**
-   * Creates a new CaContent instance.
+   * Creates a new CaContent using the given OMEX Level and @ p version values.
+   *
+   * @param level an unsigned int, the OMEX Level to assign to this CaContent.
+   *
+   * @param version an unsigned int, the OMEX Version to assign to this
+   * CaContent.
+   *
+   * @copydetails doc_note_setting_lv_pkg
    */
-  CaContent();
+  CaContent(unsigned int level = OMEX_DEFAULT_LEVEL,
+            unsigned int version = OMEX_DEFAULT_VERSION);
 
 
   /**
@@ -626,13 +634,22 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CaContent_t instance.
+ * Creates a new CaContent_t using the given OMEX Level and @ p version values.
+ *
+ * @param level an unsigned int, the OMEX Level to assign to this CaContent_t.
+ *
+ * @param version an unsigned int, the OMEX Version to assign to this
+ * CaContent_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
  *
  * @memberof CaContent_t
  */
 LIBCOMBINE_EXTERN
 CaContent_t *
-CaContent_create();
+CaContent_create(unsigned int level, unsigned int version);
 
 
 /**
