@@ -66,6 +66,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
+  std::string mName;
   SedListOfVariables mVariables;
   SedListOfParameters mParameters;
   LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode* mMath;
@@ -191,10 +192,11 @@ public:
    *
    * @param name std::string& value of the "name" attribute to be set.
    *
-   * @copydetails doc_returns_success_code
+   * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   *
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
    */
   virtual int setName(const std::string& name);
 
@@ -577,7 +579,7 @@ public:
    *
    * @return a pointer to the nth SedParameter in this SedDataGenerator.
    *
-   * @see getNumParameters
+   * @copydetails doc_returned_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
@@ -612,7 +614,6 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
    * @sedmlconstant{SEDML_DATAGENERATOR, SEDMLSedmlTypeCode_t}
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -1176,7 +1177,7 @@ SedDataGenerator_free(SedDataGenerator_t* sdg);
  * @memberof SedDataGenerator_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedDataGenerator_getId(const SedDataGenerator_t * sdg);
 
 
@@ -1193,7 +1194,7 @@ SedDataGenerator_getId(const SedDataGenerator_t * sdg);
  * @memberof SedDataGenerator_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedDataGenerator_getName(const SedDataGenerator_t * sdg);
 
 

@@ -64,6 +64,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
+  std::string mName;
   std::string mLanguage;
   std::string mSource;
   SedListOfChanges mChanges;
@@ -1016,7 +1017,7 @@ SedModel_free(SedModel_t* sm);
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getId(const SedModel_t * sm);
 
 
@@ -1033,7 +1034,7 @@ SedModel_getId(const SedModel_t * sm);
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getName(const SedModel_t * sm);
 
 
@@ -1050,7 +1051,7 @@ SedModel_getName(const SedModel_t * sm);
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getLanguage(const SedModel_t * sm);
 
 
@@ -1067,7 +1068,7 @@ SedModel_getLanguage(const SedModel_t * sm);
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedModel_getSource(const SedModel_t * sm);
 
 
@@ -1289,11 +1290,11 @@ SedModel_unsetSource(SedModel_t * sm);
 
 
 /**
- * Returns a ListOf_t* containing SedChange_t objects from this SedModel_t.
+ * Returns a ListOf_t * containing SedChange_t objects from this SedModel_t.
  *
- * @param sm the SedModel_t structure whose "SedListOfChanges" is sought.
+ * @param sm the SedModel_t structure whose SedListOfChanges is sought.
  *
- * @return the "SedListOfChanges" from this SedModel_t as a ListOf_t *.
+ * @return the SedListOfChanges from this SedModel_t as a ListOf_t *.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1327,7 +1328,7 @@ SedModel_getListOfChanges(SedModel_t* sm);
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-const SedChange_t*
+SedChange_t*
 SedModel_getChange(SedModel_t* sm, unsigned int n);
 
 

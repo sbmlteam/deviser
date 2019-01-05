@@ -60,7 +60,7 @@ typedef struct {
 static const sedmlErrorTableEntry sedmlErrorTable[] =
 {
   // 10000
-  { SedUnknownError, 
+  { SedmlUnknown,
     "Encountered unknown internal libSEDML error",
     LIBSEDML_CAT_INTERNAL, 
     LIBSEDML_SEV_FATAL,
@@ -375,7 +375,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20205
   { SedmlSedDocumentLevelMustBeInteger,
-    "Level attribute must be Integer.",
+    "The 'level' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:level' on a <sedDocument> must have a value of data "
@@ -386,7 +386,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20206
   { SedmlSedDocumentVersionMustBeInteger,
-    "Version attribute must be Integer.",
+    "The 'version' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:version' on a <sedDocument> must have a value of data "
@@ -481,7 +481,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20305
   { SedmlSedModelSourceMustBeString,
-    "Source attribute must be String.",
+    "The 'source' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:source' on a <model> must have a value of data type "
@@ -492,7 +492,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20306
   { SedmlSedModelNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:name' on a <model> must have a value of data type "
@@ -503,7 +503,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20307
   { SedmlSedModelLanguageMustBeString,
-    "Language attribute must be String.",
+    "The 'language' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:language' on a <model> must have a value of data type "
@@ -658,7 +658,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20605
   { SedmlSedSetValueModelReferenceMustBeModel,
-    "ModelReference attribute must be Model.",
+    "The attribute 'modelReference' must point to Model object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:modelReference' of a <setValue> object "
@@ -670,7 +670,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20606
   { SedmlSedSetValueSymbolMustBeString,
-    "Symbol attribute must be String.",
+    "The 'symbol' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:symbol' on a <setValue> must have a value of data "
@@ -681,7 +681,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20607
   { SedmlSedSetValueTargetMustBeString,
-    "Target attribute must be String.",
+    "The 'target' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:target' on a <setValue> must have a value of data "
@@ -692,7 +692,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20608
   { SedmlSedSetValueRangeMustBeRange,
-    "Range attribute must be Range.",
+    "The attribute 'range' must point to Range object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:range' of a <setValue> object must be "
@@ -753,7 +753,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20705
   { SedmlSedDataGeneratorNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:name' on a <dataGenerator> must have a value of data "
@@ -860,7 +860,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20804
   { SedmlSedRepeatedTaskRangeIdMustBeRange,
-    "RangeId attribute must be Range.",
+    "The attribute 'rangeId' must point to Range object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:rangeId' of a <repeatedTask> object must "
@@ -872,7 +872,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20805
   { SedmlSedRepeatedTaskResetModelMustBeBoolean,
-    "ResetModel attribute must be Boolean.",
+    "The 'resetModel' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:resetModel' on a <repeatedTask> must have a value of "
@@ -931,7 +931,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 20905
   { SedmlSedSimulationNameMustBeString,
-    "Name attribute must be String.",
+    "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:name' on a <simulation> must have a value of data "
@@ -978,11 +978,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
 
   // 21004
   { SedmlSedVectorRangeValueMustBeString,
-    "Value attribute must be String.",
+    "The 'value' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "FIXME: Encountered an unknown attribute type vector in "
-    "ValidationRulesForClass",
+    "The value of the attribute 'sedml:value' of a <vectorRange> object must be "
+    "an vector of values of type 'double'.",
     { "L3V1 Sedml V1 Section"
     }
   },

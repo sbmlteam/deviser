@@ -55,7 +55,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedDataGenerator::SedDataGenerator(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mId ("")
   , mName ("")
   , mVariables (level, version)
   , mParameters (level, version)
@@ -72,7 +71,6 @@ SedDataGenerator::SedDataGenerator(unsigned int level, unsigned int version)
  */
 SedDataGenerator::SedDataGenerator(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mId ("")
   , mName ("")
   , mVariables (sedmlns)
   , mParameters (sedmlns)
@@ -88,7 +86,6 @@ SedDataGenerator::SedDataGenerator(SedNamespaces *sedmlns)
  */
 SedDataGenerator::SedDataGenerator(const SedDataGenerator& orig)
   : SedBase( orig )
-  , mId ( orig.mId )
   , mName ( orig.mName )
   , mVariables ( orig.mVariables )
   , mParameters ( orig.mParameters )
@@ -112,7 +109,6 @@ SedDataGenerator::operator=(const SedDataGenerator& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mId = rhs.mId;
     mName = rhs.mName;
     mVariables = rhs.mVariables;
     mParameters = rhs.mParameters;
@@ -1571,7 +1567,7 @@ SedDataGenerator_getListOfVariables(SedDataGenerator_t* sdg)
  * Get a SedVariable_t from the SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
-const SedVariable_t*
+SedVariable_t*
 SedDataGenerator_getVariable(SedDataGenerator_t* sdg, unsigned int n)
 {
   return (sdg != NULL) ? sdg->getVariable(n) : NULL;
@@ -1640,7 +1636,7 @@ SedDataGenerator_getListOfParameters(SedDataGenerator_t* sdg)
  * Get a SedParameter_t from the SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
-const SedParameter_t*
+SedParameter_t*
 SedDataGenerator_getParameter(SedDataGenerator_t* sdg, unsigned int n)
 {
   return (sdg != NULL) ? sdg->getParameter(n) : NULL;

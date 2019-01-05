@@ -55,7 +55,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedModel::SedModel(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mId ("")
   , mName ("")
   , mLanguage ("")
   , mSource ("")
@@ -71,7 +70,6 @@ SedModel::SedModel(unsigned int level, unsigned int version)
  */
 SedModel::SedModel(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mId ("")
   , mName ("")
   , mLanguage ("")
   , mSource ("")
@@ -87,7 +85,6 @@ SedModel::SedModel(SedNamespaces *sedmlns)
  */
 SedModel::SedModel(const SedModel& orig)
   : SedBase( orig )
-  , mId ( orig.mId )
   , mName ( orig.mName )
   , mLanguage ( orig.mLanguage )
   , mSource ( orig.mSource )
@@ -106,7 +103,6 @@ SedModel::operator=(const SedModel& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mId = rhs.mId;
     mName = rhs.mName;
     mLanguage = rhs.mLanguage;
     mSource = rhs.mSource;
@@ -866,7 +862,7 @@ SedModel::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "change")
+  if (elementName == "addXML")
   {
     return createChange();
   }
@@ -1174,7 +1170,7 @@ SedModel::readAttributes(
   {
     std::string message = "Sedml attribute 'source' is missing from the "
       "<SedModel> element.";
-    log->logError(SedmlSedModelAllowedAttributes, level, version, message);
+    log->logError(SedmlModelAllowedAttributes, level, version, message);
   }
 }
 

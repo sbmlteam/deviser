@@ -193,7 +193,7 @@ SedError::SedError (  const unsigned int errorId
       }
     }
 
-    if ( index == 0 && mErrorId != SedUnknownError )
+    if ( index == 0 && mErrorId != SedmlUnknown )
     {
       // The id is in the range of error numbers that are supposed to be in
       // the SEDML layer, but it's NOT in our table. This is an internal error.

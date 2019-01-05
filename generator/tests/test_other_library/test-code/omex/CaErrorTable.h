@@ -59,7 +59,7 @@ typedef struct {
 static const omexErrorTableEntry omexErrorTable[] =
 {
   // 10000
-  { CaUnknownError, 
+  { CamlUnknown,
     "Encountered unknown internal libCombine error",
     LIBCOMBINE_CAT_INTERNAL, 
     LIBCOMBINE_SEV_FATAL,
@@ -240,9 +240,9 @@ static const omexErrorTableEntry omexErrorTable[] =
     "The Combine namespace is not correctly declared.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
-    "To conform to the Package specification for SBML Level 3 Version 1, an "
+    "To conform to the Package specification for SBML Level 1 Version 1, an "
     "SBML document must declare "
-    "'http://www.sbml.org/sbml/level3/version1/combine/version1' as the "
+    "'http://www.sbml.org/sbml/level1/version1/combine/version1' as the "
     "XMLNamespace to use for elements of this package.",
     { "L3V1 Combine V1 Section 3.1"
     }
@@ -255,7 +255,7 @@ static const omexErrorTableEntry omexErrorTable[] =
     LIBCOMBINE_SEV_ERROR,
     "Wherever they appear in an SBML document, elements and attributes from the "
     "Package must use the "
-    "'http://www.sbml.org/sbml/level3/version1/combine/version1' namespace, "
+    "'http://www.sbml.org/sbml/level1/version1/combine/version1' namespace, "
     "declaring so either explicitly or implicitly.",
     { "L3V1 Combine V1 Section 3.1"
     }
@@ -363,7 +363,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   // 20204
   { CombineCaContentLocationMustBeString,
-    "Location attribute must be String.",
+    "The 'location' attribute must be String.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:location' on a <content> must have a value of data "
@@ -374,7 +374,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   // 20205
   { CombineCaContentFormatMustBeString,
-    "Format attribute must be String.",
+    "The 'format' attribute must be String.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:format' on a <content> must have a value of data "
@@ -385,7 +385,7 @@ static const omexErrorTableEntry omexErrorTable[] =
 
   // 20206
   { CombineCaContentMasterMustBeBoolean,
-    "Master attribute must be Boolean.",
+    "The 'master' attribute must be Boolean.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
     "The attribute 'combine:master' on a <content> must have a value of data "
@@ -426,30 +426,6 @@ static const omexErrorTableEntry omexErrorTable[] =
     "An <omexManifest> object may contain one and only one instance of the "
     "<listOfContents> element. No other elements from the SBML Level 3 Combine "
     "Archive namespaces are permitted on an <omexManifest> object. ",
-    { "L3V1 Combine V1 Section"
-    }
-  },
-
-  // 20304
-  { CombineCaOmexManifestLOContentsAllowedCoreElements,
-    "Core elements allowed on <listOfContents>.",
-    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
-    LIBCOMBINE_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfContents> container object may only contain "
-    "<content> objects.",
-    { "L3V1 Combine V1 Section"
-    }
-  },
-
-  // 20305
-  { CombineCaOmexManifestLOContentsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfContents>.",
-    LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
-    LIBCOMBINE_SEV_ERROR,
-    "A <listOfContents> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfContents> object.",
     { "L3V1 Combine V1 Section"
     }
   },
