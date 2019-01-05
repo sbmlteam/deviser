@@ -131,6 +131,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(const std::string& sid)
    * @see getNumModels()
    * @see remove(const std::string& sid)
@@ -149,6 +151,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(const std::string& sid)
    * @see getNumModels()
    * @see remove(const std::string& sid)
@@ -168,6 +172,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(unsigned int n)
    * @see getNumModels()
    * @see remove(const std::string& sid)
@@ -187,6 +193,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(unsigned int n)
    * @see getNumModels()
    * @see remove(const std::string& sid)
@@ -205,7 +213,8 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @note the caller owns the returned object and is responsible for deleting
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumModels()
@@ -225,6 +234,8 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumModels()
@@ -263,6 +274,10 @@ public:
    * Get the number of SedModel objects in this SedListOfModels.
    *
    * @return the number of SedModel objects in this SedListOfModels.
+   *
+   *
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see remove(const std::string& sid)
@@ -279,7 +294,12 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addModel(const SedModel* sm)
+   * @see addModel(const SedModel* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumModels()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
    */
   SedModel* createModel();
 
@@ -300,7 +320,6 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   *
    * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique

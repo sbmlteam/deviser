@@ -150,8 +150,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(const std::string& sid)
    * @see getNumContents()
    * @see remove(const std::string& sid)
@@ -171,8 +171,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(unsigned int n)
    * @see getNumContents()
    * @see remove(const std::string& sid)
@@ -192,8 +192,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(unsigned int n)
    * @see getNumContents()
    * @see remove(const std::string& sid)
@@ -213,8 +213,8 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumContents()
@@ -235,8 +235,8 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumContents()
@@ -262,7 +262,7 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createCaContent()
+   * @see createContent()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumContents()
@@ -278,8 +278,8 @@ public:
    * @return the number of CaContent objects in this CaListOfContents.
    *
    *
-   * @see addCaContent(const CaContent* object)
-   * @see createCaContent()
+   * @see addContent(const CaContent* object)
+   * @see createContent()
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see remove(const std::string& sid)
@@ -296,7 +296,7 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addCaContent(const CaContent* object)
+   * @see addContent(const CaContent* object)
    * @see get(const std::string& sid)
    * @see get(unsigned int n)
    * @see getNumContents()

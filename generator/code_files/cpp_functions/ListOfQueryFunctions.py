@@ -253,9 +253,9 @@ class ListOfQueryFunctions():
         additional.append(' ')
         if self.is_cpp_api:
             if this_func != 'add':
-                additional.append('@see add{0}(const {1}* object)'.format(object, child_object))
+                additional.append('@see add{0}(const {1}* object)'.format(strFunctions.remove_prefix(object), child_object))
             if this_func != 'create':
-                additional.append('@see create{0}()'.format(object))
+                additional.append('@see create{0}()'.format(strFunctions.remove_prefix(object)))
             if this_func != 'getid':
                 additional.append('@see get(const std::string& sid)') if self.is_list_of else \
                     additional.append('@see get{0}(const std::string& sid)'.format(object))
