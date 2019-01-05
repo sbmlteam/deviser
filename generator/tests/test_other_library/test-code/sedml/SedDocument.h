@@ -406,8 +406,8 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @see addSedModel(const SedModel* object)
-   * @see createSedModel()
+   * @see addModel(const SedModel* object)
+   * @see createModel()
    * @see getSedModel(const std::string& sid)
    * @see getSedModel(unsigned int n)
    * @see getNumModels()

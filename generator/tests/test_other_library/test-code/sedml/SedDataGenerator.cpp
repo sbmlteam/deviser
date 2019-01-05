@@ -622,19 +622,6 @@ SedDataGenerator::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * SedDataGenerator object have been set.
- */
-bool
-SedDataGenerator::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -829,40 +816,6 @@ SedDataGenerator::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::getAttribute(const std::string& attributeName,
-                               const char* value) const
-{
-  int return_value = SedBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "id")
-  {
-    value = getId().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName().c_str();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Predicate returning @c true if this SedDataGenerator's attribute
  * "attributeName" is set.
  */
@@ -986,33 +939,6 @@ SedDataGenerator::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::setAttribute(const std::string& attributeName,
-                               const char* value)
-{
-  int return_value = SedBase::setAttribute(attributeName, value);
-
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
-  return return_value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
  * Unsets the value of the "attributeName" attribute of this SedDataGenerator.
  */
 int
@@ -1041,8 +967,8 @@ SedDataGenerator::unsetAttribute(const std::string& attributeName)
 /*
  * Creates and returns an new "elementName" object in this SedDataGenerator.
  */
-SBase*
-SedDataGenerator::createObject(const std::string& elementName)
+SedBase*
+SedDataGenerator::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
@@ -1056,6 +982,69 @@ SedDataGenerator::createObject(const std::string& elementName)
   }
 
   return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedDataGenerator.
+ */
+int
+SedDataGenerator::addChildObject(const std::string& elementName,
+                                 const SedBase* element)
+{
+  if (elementName == "variable" && element->getTypeCode() == TO_DO)
+  {
+    return addVariable((const SedVariable*)(element));
+  }
+  else if (elementName == "parameter" && element->getTypeCode() == TO_DO)
+  {
+    return addParameter((const SedParameter*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedDataGenerator.
+ */
+SedBase*
+SedDataGenerator::removeChildObject(const std::string& elementName,
+                                    const std::string& id)
+{
+  if (elementName == "variable")
+  {
+    for (unsigned int i = 0; i < getNumVariables(); i++)
+    {
+      if (getVariable(i)->getId() == id)
+      {
+        return removeVariable(i);
+      }
+    }
+  }
+  else if (elementName == "parameter")
+  {
+    for (unsigned int i = 0; i < getNumParameters(); i++)
+    {
+      if (getParameter(i)->getId() == id)
+      {
+        return removeParameter(i);
+      }
+    }
+  }
+
+  return NULL;
 }
 
 /** @endcond */
@@ -1093,7 +1082,7 @@ SedDataGenerator::getNumObjects(const std::string& elementName)
 /*
  * Returns the nth object of "objectName" in this SedDataGenerator.
  */
-SBase*
+SedBase*
 SedDataGenerator::getObject(const std::string& elementName,
                             unsigned int index)
 {
@@ -1228,7 +1217,8 @@ SedDataGenerator::readAttributes(
   bool assigned = false;
   SedErrorLog* log = getErrorLog();
 
-  if (static_cast<SedListOfDataGenerators*>(getParentSedObject())->size() < 2)
+  if (log && getParentSedObject() &&
+    static_cast<SedListOfDataGenerators*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -1244,16 +1234,20 @@ SedDataGenerator::readAttributes(
   }
 
   SedBase::readAttributes(attributes, expectedAttributes);
-  numErrs = log->getNumErrors();
 
-  for (int n = numErrs-1; n >= 0; n--)
+  if (log)
   {
-    if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+    numErrs = log->getNumErrors();
+
+    for (int n = numErrs-1; n >= 0; n--)
     {
-      const std::string details = log->getError(n)->getMessage();
-      log->remove(SedUnknownCoreAttribute);
-      log->logError(SedmlSedDataGeneratorAllowedAttributes, level, version,
-        details);
+      if (log->getError(n)->getErrorId() == SedUnknownCoreAttribute)
+      {
+        const std::string details = log->getError(n)->getMessage();
+        log->remove(SedUnknownCoreAttribute);
+        log->logError(SedmlSedDataGeneratorAllowedAttributes, level, version,
+          details);
+      }
     }
   }
 
@@ -1271,8 +1265,9 @@ SedDataGenerator::readAttributes(
     }
     else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      logError(SedmlIdSyntaxRule, level, version, "The id '" + mId + "' does "
-        "not conform to the syntax.");
+      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
+        getElementName() + "> is '" + mId + "', which does not conform to the "
+          "syntax.");
     }
   }
   else
@@ -1413,7 +1408,7 @@ SedDataGenerator_free(SedDataGenerator_t* sdg)
  * Returns the value of the "id" attribute of this SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedDataGenerator_getId(const SedDataGenerator_t * sdg)
 {
   if (sdg == NULL)
@@ -1429,7 +1424,7 @@ SedDataGenerator_getId(const SedDataGenerator_t * sdg)
  * Returns the value of the "name" attribute of this SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
-const char *
+char *
 SedDataGenerator_getName(const SedDataGenerator_t * sdg)
 {
   if (sdg == NULL)
@@ -1442,7 +1437,8 @@ SedDataGenerator_getName(const SedDataGenerator_t * sdg)
 
 
 /*
- * Predicate returning @c 1 if this SedDataGenerator_t's "id" attribute is set.
+ * Predicate returning @c 1 (true) if this SedDataGenerator_t's "id" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1453,8 +1449,8 @@ SedDataGenerator_isSetId(const SedDataGenerator_t * sdg)
 
 
 /*
- * Predicate returning @c 1 if this SedDataGenerator_t's "name" attribute is
- * set.
+ * Predicate returning @c 1 (true) if this SedDataGenerator_t's "name"
+ * attribute is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1525,7 +1521,8 @@ SedDataGenerator_getMath(const SedDataGenerator_t * sdg)
 
 
 /*
- * Predicate returning @c 1 if this SedDataGenerator_t's "math" element is set.
+ * Predicate returning @c 1 (true) if this SedDataGenerator_t's "math" element
+ * is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1559,7 +1556,7 @@ SedDataGenerator_unsetMath(SedDataGenerator_t * sdg)
 
 
 /*
- * Returns a ListOf_t* containing SedVariable_t objects from this
+ * Returns a ListOf_t * containing SedVariable_t objects from this
  * SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
@@ -1628,7 +1625,7 @@ SedDataGenerator_removeVariable(SedDataGenerator_t* sdg, unsigned int n)
 
 
 /*
- * Returns a ListOf_t* containing SedParameter_t objects from this
+ * Returns a ListOf_t * containing SedParameter_t objects from this
  * SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
@@ -1698,7 +1695,7 @@ SedDataGenerator_removeParameter(SedDataGenerator_t* sdg, unsigned int n)
 
 
 /*
- * Predicate returning @c 1 if all the required attributes for this
+ * Predicate returning @c 1 (true) if all the required attributes for this
  * SedDataGenerator_t object have been set.
  */
 LIBSEDML_EXTERN
@@ -1706,18 +1703,6 @@ int
 SedDataGenerator_hasRequiredAttributes(const SedDataGenerator_t * sdg)
 {
   return (sdg != NULL) ? static_cast<int>(sdg->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 if all the required elements for this
- * SedDataGenerator_t object have been set.
- */
-LIBSEDML_EXTERN
-int
-SedDataGenerator_hasRequiredElements(const SedDataGenerator_t * sdg)
-{
-  return (sdg != NULL) ? static_cast<int>(sdg->hasRequiredElements()) : 0;
 }
 
 
