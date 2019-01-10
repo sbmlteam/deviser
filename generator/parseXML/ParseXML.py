@@ -743,6 +743,7 @@ class ParseXML():
         else:
             # just in case we generate a new thing
             global_variables.reset()
+            global_variables.set_unknown_error(self.package_name)
 
         global_variables.set_global_fullname(fullname)
         global_variables.set_custom_copyright(custom_copyright)

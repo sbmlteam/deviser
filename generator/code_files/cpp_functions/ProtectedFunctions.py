@@ -1214,9 +1214,9 @@ class ProtectedFunctions():
         error = '{0}{1}LO{2}AllowedAttributes'.format(self.package,
                                                       self.parent_class,
                                                       plural)
-        unknown_error ='UnknownCoreAttribute'
+        unknown_error_att ='UnknownCoreAttribute'
         if not global_variables.is_package:
-            unknown_error = '{0}UnknownCoreAttribute' \
+            unknown_error_att = '{0}UnknownCoreAttribute' \
                             ''.format(global_variables.prefix)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
@@ -1241,9 +1241,9 @@ class ProtectedFunctions():
                                                         )]
             if_err = self.create_code_block('else_if', line)
         else:
-            line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error),
+            line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error_att),
                     'const std::string details = log->getError(n)->getMessage()',
-                    'log->remove({0})'.format(unknown_error),
+                    'log->remove({0})'.format(unknown_error_att),
                     'log->{0}{1}, {2}, details)'.format(self.error, c_err,
                                                         self.given_args)]
             if_err = self.create_code_block('if', line)
@@ -1283,9 +1283,9 @@ class ProtectedFunctions():
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
-        unknown_error ='UnknownCoreAttribute'
+        unknown_error_att ='UnknownCoreAttribute'
         if not global_variables.is_package:
-            unknown_error = '{0}UnknownCoreAttribute' \
+            unknown_error_att = '{0}UnknownCoreAttribute' \
                             ''.format(global_variables.prefix)
         if not global_variables.running_tests:
             if global_variables.is_package:
@@ -1320,9 +1320,9 @@ class ProtectedFunctions():
                                                         self.given_args)]
             if_err = self.create_code_block('else_if', line)
         else:
-            line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error),
+            line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error_att),
                     'const std::string details = log->getError(n)->getMessage()',
-                    'log->remove({0})'.format(unknown_error),
+                    'log->remove({0})'.format(unknown_error_att),
                     'log->{0}{1}, {2}, details)'.format(self.error, error,
                                                         self.given_args)]
             if_err = self.create_code_block('if', line)

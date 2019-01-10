@@ -159,6 +159,11 @@ def set_global_fullname(fullname):
     global package_full_name
     package_full_name = fullname
 
+def set_unknown_error(pkg):
+    global unknown_error
+    from util import strFunctions
+    unknown_error = '{0}Unknown'.format(strFunctions.upper_first(pkg))
+
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
                 specifications=[], depend=[], library_vers=[], copyright='', annot_elem=''):
@@ -221,7 +226,6 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         annot_element = annot_elem
     else:
         annot_element = 'Annotation'
-
 
     global library_name
     if lib:
