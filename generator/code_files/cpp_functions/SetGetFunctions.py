@@ -1380,7 +1380,7 @@ class SetGetFunctions():
             return
         elif 'is_ml' in attribute and attribute['is_ml']:
             return
-        elif attribute['abstract']:
+        elif attribute['abstract'] and not query.is_instantiated(query.get_class(attribute['element'], attribute['root'])):
             return
 
         # useful variables
@@ -1848,9 +1848,14 @@ class SetGetFunctions():
                 length = len(line)
                 line = line[0:length-4]
             else:
-                level = self.lv_info[lv_needed[0]]['core_level']
-                vers = self.lv_info[lv_needed[0]]['core_version']
-                pkg = self.lv_info[lv_needed[0]]['pkg_version']
+                if len(lv_needed) > 1:
+                    level = self.lv_info[lv_needed[0]]['core_level']
+                    vers = self.lv_info[lv_needed[0]]['core_version']
+                    pkg = self.lv_info[lv_needed[0]]['pkg_version']
+                else:
+                    level = 1
+                    vers = 1
+                    pkg = 1
                 line = 'coreLevel == {0} && coreVersion == {1} && pkgVersion == {2}'.format(level, vers, pkg)
             topif = [line]
         return[deal_with_versions, code, topif]

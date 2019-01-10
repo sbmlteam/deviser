@@ -146,7 +146,7 @@ class ValidationRulesGeneral():
         lib_sev = '{0}_SEV_ERROR'.format(global_variables.up_full_lib)
         short = 'Unknown error from {0}'.format(self.up_package)
         lib_ref = ''
-        tc = '{0}Unknown'.format(self.up_package)
+        tc = global_variables.unknown_error
         return dict({'number': self.number, 'text': text,
                      'reference': ref, 'severity': sev, 'typecode': tc,
                      'lib_sev': lib_sev, 'short': short, 'lib_ref': lib_ref})

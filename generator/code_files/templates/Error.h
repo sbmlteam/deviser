@@ -17,7 +17,7 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-  SBMLmlUnknown                      = 10000 /*!< Encountered unknown internal libSBML error. */
+  SBMLUnknown                      = 10000 /*!< Encountered unknown internal libSBML error. */
 , SBMLNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
 , SBMLUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
 , SBMLNotSchemaConformant                   = 10003 /*!< Document does not conform to the SBML_Lang XML schema. */

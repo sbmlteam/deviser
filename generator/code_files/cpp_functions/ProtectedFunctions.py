@@ -43,7 +43,9 @@ from util import strFunctions, query, global_variables
 class ProtectedFunctions():
     """Class for all protected functions"""
 
-    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=[]):
+    def __init__(self, language, is_cpp_api, is_list_of, class_object, lv_info=None):
+        if lv_info is None:
+            lv_info = []
         self.language = language
         self.cap_language = language.upper()
         self.package = class_object['package']
@@ -238,7 +240,7 @@ class ProtectedFunctions():
         error_hack = '{0}{1}AllowedAttributes'.format(self.package, name_in_error)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+                error = global_variables.unknown_error
         error_line = 'getErrorLog()->{0}{1}, ' \
                      '{2})'.format(self.error, error, self.error_args)
         error_line_hack = 'getErrorLog()->{0}{1}, {2})'.format(self.error, error_hack, self.error_args)
@@ -1221,9 +1223,9 @@ class ProtectedFunctions():
                 error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          name_in_error)
                 if error not in global_variables.error_list:
-                    error = '{0}Unknown'.format(self.package)
+                    error = global_variables.unknown_error
             if c_err not in global_variables.error_list:
-                c_err = '{0}Unknown'.format(self.package)
+                c_err = global_variables.unknown_error
         if global_variables.is_package:
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
@@ -1288,14 +1290,14 @@ class ProtectedFunctions():
         if not global_variables.running_tests:
             if global_variables.is_package:
                 if core_err not in global_variables.error_list:
-                    core_err = '{0}Unknown'.format(self.package)
+                    core_err = global_variables.unknown_error
                 if error not in global_variables.error_list:
-                    error = '{0}Unknown'.format(self.package)
+                    error = global_variables.unknown_error
             else:
                 if core_err not in global_variables.error_list:
-                    core_err = '{0}Unknown'.format(global_variables.prefix)
+                    core_err = global_variables.unknown_error
                 if error not in global_variables.error_list:
-                    error = '{0}Unknown'.format(global_variables.prefix)
+                    error = global_variables.unknown_error
 
         if global_variables.is_package:
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
@@ -1641,9 +1643,9 @@ class ProtectedFunctions():
         [error, att_error] = self.sort_error_names(strFunctions.upper_first(att_name),'{0}Enum'.format(element))
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+                error = global_variables.unknown_error
             if att_error not in global_variables.error_list:
-                att_error = '{0}Unknown'.format(self.package)
+                att_error = global_variables.unknown_error
 
         line = ['std::string {0}'.format(att_name),
                 'assigned = attributes.readInto(\"{0}\", '
@@ -1712,9 +1714,9 @@ class ProtectedFunctions():
         [error, att_error] = self.sort_error_names(up_name, num_type)
         if not global_variables.running_tests:
             if error not in global_variables.error_list:
-                error = '{0}Unknown'.format(self.package)
+                error = global_variables.unknown_error
             if att_error not in global_variables.error_list:
-                att_error = '{0}Unknown'.format(self.package)
+                att_error = global_variables.unknown_error
         line = ['numErrs = log->getNumErrors()',
                 '{0} = attributes.readInto(\"{1}\", {2})'.format(set_name,
                                                                  attribute['xml_name'],
@@ -1773,7 +1775,7 @@ class ProtectedFunctions():
             att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          class_name)
         if not global_variables.running_tests and error not in global_variables.error_list:
-            error = '{0}Unknown'.format(self.package)
+            error = global_variables.unknown_error
         if not global_variables.running_tests and att_error not in global_variables.error_list:
-            att_error = '{0}Unknown'.format(self.package)
+            att_error = global_variables.unknown_error
         return [error, att_error]

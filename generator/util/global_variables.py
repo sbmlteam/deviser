@@ -130,6 +130,8 @@ global ret_att_unex
 global namespaces
 global dependency
 global library_version
+global unknown_error
+unknown_error = ''
 
 global custom_copyright
 custom_copyright = ''
@@ -208,7 +210,6 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         if not doc.startswith(prefix):
             document_class = '{0}{1}'.format(prefix, doc)
 
-
     global package_prefix
     if pkg_prefix:
         package_prefix = pkg_prefix
@@ -218,6 +219,8 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     global annot_element
     if annot_elem and annot_elem != '':
         annot_element = annot_elem
+    else:
+        annot_element = 'Annotation'
 
 
     global library_name
@@ -265,7 +268,12 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
     global ret_att_unex
     ret_att_unex = '{0}_UNEXPECTED_ATTRIBUTE'.format(library_name.upper())
 
-
+    global unknown_error
+    if is_package:
+        import strFunctions
+        unknown_error = '{0}Unknown'.format(strFunctions.upper_first(lang))
+    else:
+        unknown_error = '{0}Unknown'.format(prfix)
 
 
 def get_return_code(index):

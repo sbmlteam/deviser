@@ -39,7 +39,7 @@
 
 from base_files import BaseCppFile
 from . cpp_functions import *
-from util import query, strFunctions
+from util import query, strFunctions, global_variables
 
 
 class ExtensionCodeFile(BaseCppFile.BaseCppFile):
@@ -51,7 +51,7 @@ class ExtensionCodeFile(BaseCppFile.BaseCppFile):
         if filetype == '':
             self.name = '{0}Extension'.format(self.up_package)
         elif filetype == 'enums':
-            if package['name'].endswith('ml'):
+            if package['name'].endswith('ml') and global_variables.is_package:
                 length = len(package['name'])
                 self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name'][0:length-2]))
             else:

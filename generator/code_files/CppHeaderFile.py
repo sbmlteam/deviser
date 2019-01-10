@@ -175,7 +175,6 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
                                          ''.format(self.language,
                                                    strFunctions.upper_first(self.language)))
 
-
     def write_general_includes(self):
         pkg = self.package.lower()
         include_lines = []

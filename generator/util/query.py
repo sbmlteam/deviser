@@ -183,17 +183,34 @@ def get_concretes(root_object, concrete_list):
     return concretes
 
 
+# basic function that checks whether the given element is instantiated
+def is_instantiated(element):
+    if element is None:
+        return False
+    if 'concrete' not in element:
+        return False
+    if 'element' not in element:
+        return False
+    for c in element['concrete']:
+        if c['element'] == element['element']:
+            return True
+    return False
+
+
 # add the non-abstract class to the list
 def add_concrete_to_list(root, concrete, mylist):
     current = get_class(concrete['element'], root)
+
     if current is not None:
-        if current['abstract'] is False:
+        # sometimes the baseclass is also instantiated (the ui calls the property isbaseclass)
+        if current['abstract'] is False or is_instantiated(current):
             concrete['typecode'] = current['typecode']
             if concrete not in mylist:
                 mylist.append(concrete)
         else:
             for c in current['concrete']:
-                if c != concrete:
+                # full comparison too expensive ... causes stackoverflow, just compare the element name
+                if c['element'] != concrete['element']:
                     add_concrete_to_list(root, c, mylist)
                 else:
                     concrete['typecode'] = current['typecode']

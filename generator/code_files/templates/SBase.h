@@ -26,6 +26,7 @@
 #include <algorithm>
 
 #include <sbml/SBMLErrorLog.h>
+#include <sbml/SBMLVisitor.h>
 
 <verbatim>
 LIBSBML_CPP_NAMESPACE_BEGIN
@@ -45,7 +46,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
-class SBMLVisitor;
 class SBMLDocument;
 
 

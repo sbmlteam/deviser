@@ -55,13 +55,15 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         elif filetype == 'types':
             self.name = '{0}ExtensionTypes'.format(self.up_package)
         elif filetype == 'fwd':
-            if package['name'].endswith('ml'):
+            # why is this necessary? this breaks things for me
+            if package['name'].endswith('ml') and global_variables.is_package:
                 length = len(package['name'])
                 self.name = '{0}fwd'.format(package['name'][0:length-2])
             else:
                 self.name = '{0}fwd'.format(package['name'])
         elif filetype == 'enums':
-            if package['name'].endswith('ml'):
+            # had issues here
+            if package['name'].endswith('ml') and global_variables.is_package:
                 length = len(package['name'])
                 self.name = '{0}Enumerations'.format(strFunctions.upper_first(package['name'][0:length-2]))
             else:
@@ -330,8 +332,12 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     # Functions for writing extension types
 
     def write_type_includes(self):
-        self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
+        if global_variables.is_package:
+            self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
                                  'fwd.h>'.format(self.language, self.package))
+        else:
+            self.write_line_verbatim('#include <{0}/packages/{1}/common/{1}'
+                                     'fwd.h>'.format(self.language, global_variables.prefix))
         self.skip_line()
         self.write_line_verbatim('#include <{0}/packages/{1}/extension/{2}'
                                  'Extension.h>'.format(self.language,

@@ -348,7 +348,13 @@ class BaseTemplateFile:
             indent = 'static '
         for ns in global_variables.namespaces:
             if 'level' in ns and 'version' in ns and 'namespace' in ns:
-                line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(global_variables.prefix.upper(),
+                if global_variables.is_package:
+                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(global_variables.prefix.upper(),
                                                                                      ns['level'], ns['version'],
                                                                                      ns['namespace'], indent)
+                else:
+                    line = '{4}const char* const {0}_XMLNS_L{1}V{2}   = \"{3}\";\n'.format(
+                        global_variables.language.upper(),
+                        ns['level'], ns['version'],
+                        ns['namespace'], indent)
                 fileout.copy_line_verbatim(line)
