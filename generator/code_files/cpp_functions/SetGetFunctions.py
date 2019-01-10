@@ -1848,7 +1848,7 @@ class SetGetFunctions():
                 length = len(line)
                 line = line[0:length-4]
             else:
-                if len(lv_needed) > 1:
+                if len(lv_needed) >= 1:
                     level = self.lv_info[lv_needed[0]]['core_level']
                     vers = self.lv_info[lv_needed[0]]['core_version']
                     pkg = self.lv_info[lv_needed[0]]['pkg_version']
