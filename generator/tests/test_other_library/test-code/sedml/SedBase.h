@@ -60,6 +60,7 @@
 #include <algorithm>
 
 #include <sedml/SedErrorLog.h>
+#include <sedml/SedVisitor.h>
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
@@ -77,7 +78,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-class SedVisitor;
 class SedDocument;
 
 

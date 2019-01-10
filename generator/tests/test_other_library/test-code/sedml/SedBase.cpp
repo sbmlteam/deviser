@@ -3005,7 +3005,7 @@ SedBase::checkXHTML(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode * xhtml)
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(SedmlUnknown);
+    logError(SedUnknown);
     return;
   }
 

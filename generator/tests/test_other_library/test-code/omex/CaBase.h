@@ -59,6 +59,7 @@
 #include <algorithm>
 
 #include <omex/CaErrorLog.h>
+#include <omex/CaVisitor.h>
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
@@ -76,7 +77,6 @@ LIBSBML_CPP_NAMESPACE_END
 
 LIBCOMBINE_CPP_NAMESPACE_BEGIN
 
-class CaVisitor;
 class CaOmexManifest;
 
 
