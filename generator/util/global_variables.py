@@ -274,8 +274,11 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
 
     global unknown_error
     if is_package:
-        from util import strFunctions
-        unknown_error = '{0}Unknown'.format(strFunctions.upper_first(lang))
+        if pkg_prefix != '':
+            unknown_error = '{0}Unknown'.format(pkg_prefix)
+        else:
+            from util import strFunctions
+            unknown_error = '{0}Unknown'.format(strFunctions.upper_first(lang))
     else:
         unknown_error = '{0}Unknown'.format(prfix)
 

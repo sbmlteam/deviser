@@ -192,7 +192,7 @@ CaError::CaError (  const unsigned int errorId
       }
     }
 
-    if ( index == 0 && mErrorId != CamlUnknown )
+    if ( index == 0 && mErrorId != CaUnknown )
     {
       // The id is in the range of error numbers that are supposed to be in
       // the OMEX layer, but it's NOT in our table. This is an internal error.

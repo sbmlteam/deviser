@@ -59,7 +59,7 @@ typedef struct {
 static const omexErrorTableEntry omexErrorTable[] =
 {
   // 10000
-  { CamlUnknown,
+  { CaUnknown,
     "Encountered unknown internal libCombine error",
     LIBCOMBINE_CAT_INTERNAL, 
     LIBCOMBINE_SEV_FATAL,

@@ -60,7 +60,7 @@ typedef struct {
 static const sedmlErrorTableEntry sedmlErrorTable[] =
 {
   // 10000
-  { SedmlUnknown,
+  { SedUnknown,
     "Encountered unknown internal libSEDML error",
     LIBSEDML_CAT_INTERNAL, 
     LIBSEDML_SEV_FATAL,

@@ -50,7 +50,7 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-  SedmlUnknown                      = 10000 /*!< Encountered unknown internal libSEDML error. */
+  SedUnknown                      = 10000 /*!< Encountered unknown internal libSEDML error. */
 , SedNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
 , SedUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
 , SedNotSchemaConformant                   = 10003 /*!< Document does not conform to the SEDML XML schema. */

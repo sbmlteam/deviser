@@ -49,7 +49,7 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-  CamlUnknown                      = 10000 /*!< Encountered unknown internal libCombine error. */
+  CaUnknown                      = 10000 /*!< Encountered unknown internal libCombine error. */
 , CaNotUTF8                               = 10001 /*!< File does not use UTF-8 encoding. */
 , CaUnrecognizedElement                   = 10002 /*!< Encountered unrecognized element. */
 , CaNotSchemaConformant                   = 10003 /*!< Document does not conform to the OMEX XML schema. */
