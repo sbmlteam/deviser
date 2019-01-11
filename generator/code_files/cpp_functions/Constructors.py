@@ -206,7 +206,7 @@ class Constructors():
                             implementation.append('setLevel(level)')
                         elif attrib['name'] == 'version':
                             implementation.append('setVersion(version)')
-                    implementation.append('set{0}Document(this)'.format(global_variables.prefix))
+                    implementation.append('set{0}(this)'.format(global_variables.document_class))
                 if self.has_children:
                     for lo_element in self.child_lo_elements:
                         if lo_element['name'].lower() != strFunctions.remove_prefix(lo_element['element']).lower():
