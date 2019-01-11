@@ -417,28 +417,28 @@ SedModel::getNumChanges() const
 
 
 /*
- * Creates a new SedAddXML object, adds it to this SedModel object and returns
- * the SedAddXML object created.
+ * Creates a new SedChange object, adds it to this SedModel object and returns
+ * the SedChange object created.
  */
-SedAddXML*
-SedModel::createAddXML()
+SedChange*
+SedModel::createChange()
 {
-  SedAddXML* saxml = NULL;
+  SedChange* sc = NULL;
 
   try
   {
-    saxml = new SedAddXML(getSedNamespaces());
+    sc = new SedChange(getSedNamespaces());
   }
   catch (...)
   {
   }
 
-  if (saxml != NULL)
+  if (sc != NULL)
   {
-    mChanges.appendAndOwn(saxml);
+    mChanges.appendAndOwn(sc);
   }
 
-  return saxml;
+  return sc;
 }
 
 
@@ -864,7 +864,7 @@ SedModel::createChildObject(const std::string& elementName)
 
   if (elementName == "addXML")
   {
-    return createChange();
+    return createAddXML();
   }
 
   return obj;
@@ -1506,14 +1506,14 @@ SedModel_getNumChanges(SedModel_t* sm)
 
 
 /*
- * Creates a new SedAddXML_t object, adds it to this SedModel_t object and
- * returns the SedAddXML_t object created.
+ * Creates a new SedChange_t object, adds it to this SedModel_t object and
+ * returns the SedChange_t object created.
  */
 LIBSEDML_EXTERN
-SedAddXML_t*
-SedModel_createAddXML(SedModel_t* sm)
+SedChange_t*
+SedModel_createChange(SedModel_t* sm)
 {
-  return (sm != NULL) ? sm->createAddXML() : NULL;
+  return (sm != NULL) ? sm->createChange() : NULL;
 }
 
 

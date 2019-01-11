@@ -414,10 +414,10 @@ public:
 
 
   /**
-   * Creates a new SedAddXML object, adds it to this SedModel object and
-   * returns the SedAddXML object created.
+   * Creates a new SedChange object, adds it to this SedModel object and
+   * returns the SedChange object created.
    *
-   * @return a new SedAddXML object instance.
+   * @return a new SedChange object instance.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -428,7 +428,7 @@ public:
    * @see removeChange(const std::string& sid)
    * @see removeChange(unsigned int n)
    */
-  SedAddXML* createChange();
+  SedChange* createChange();
 
 
   /**
@@ -1369,19 +1369,19 @@ SedModel_getNumChanges(SedModel_t* sm);
 
 
 /**
- * Creates a new SedAddXML_t object, adds it to this SedModel_t object and
- * returns the SedAddXML_t object created.
+ * Creates a new SedChange_t object, adds it to this SedModel_t object and
+ * returns the SedChange_t object created.
  *
- * @param sm the SedModel_t structure to which the SedAddXML_t should be added.
+ * @param sm the SedModel_t structure to which the SedChange_t should be added.
  *
- * @return a new SedAddXML_t object instance.
+ * @return a new SedChange_t object instance.
  *
  * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-SedAddXML_t*
+SedChange_t*
 SedModel_createChange(SedModel_t* sm);
 
 

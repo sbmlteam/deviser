@@ -952,7 +952,7 @@ class ListOfQueryFunctions():
     # function to write create element
     def write_create_element_function(self, index=0):
         is_concrete = False
-        if len(self.concretes) == 0 and index == 0:
+        if (len(self.concretes) == 0 and index == 0) or (len(self.concretes) == 1 and index == 1):
             child = self.object_child_name
             abbrev_child = self.abbrev_child
             child_name = self.used_child_name
@@ -992,8 +992,8 @@ class ListOfQueryFunctions():
         if self.package == 'Render' or self.package == 'render':
             remove_prefix = True
             prefix_to_remove = strFunctions.upper_first(self.package)
-        used_c_name = strFunctions.remove_prefix(child_name, False, remove_prefix, prefix_to_remove)
-        used_cpp_name = strFunctions.remove_prefix(child_name, False, remove_prefix, prefix_to_remove)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name, False, remove_prefix, prefix_to_remove)
+        used_cpp_name = strFunctions.remove_prefix(self.used_child_name, False, remove_prefix, prefix_to_remove)
         if self.is_cpp_api:
             function = 'create{0}'.format(used_cpp_name)
         else:

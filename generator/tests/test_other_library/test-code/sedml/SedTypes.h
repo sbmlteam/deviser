@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -47,11 +47,63 @@
 #include <sedml/SedModel.h>
 #include <sedml/SedChange.h>
 #include <sedml/SedAddXML.h>
-#include <sedml/SedSetValue.h>
-#include <sedml/SedDataGenerator.h>
-#include <sedml/SedRepeatedTask.h>
+#include <sedml/SedChangeAttribute.h>
+#include <sedml/SedVariable.h>
+#include <sedml/SedParameter.h>
 #include <sedml/SedSimulation.h>
+#include <sedml/SedUniformTimeCourse.h>
+#include <sedml/SedAlgorithm.h>
+#include <sedml/SedAbstractTask.h>
+#include <sedml/SedTask.h>
+#include <sedml/SedDataGenerator.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedPlot.h>
+#include <sedml/SedPlot2D.h>
+#include <sedml/SedPlot3D.h>
+#include <sedml/SedAbstractCurve.h>
+#include <sedml/SedCurve.h>
+#include <sedml/SedSurface.h>
+#include <sedml/SedDataSet.h>
+#include <sedml/SedReport.h>
+#include <sedml/SedAlgorithmParameter.h>
+#include <sedml/SedRange.h>
+#include <sedml/SedChangeXML.h>
+#include <sedml/SedRemoveXML.h>
+#include <sedml/SedSetValue.h>
+#include <sedml/SedUniformRange.h>
 #include <sedml/SedVectorRange.h>
+#include <sedml/SedFunctionalRange.h>
+#include <sedml/SedSubTask.h>
+#include <sedml/SedOneStep.h>
+#include <sedml/SedSteadyState.h>
+#include <sedml/SedRepeatedTask.h>
+#include <sedml/SedComputeChange.h>
+#include <sedml/SedDataDescription.h>
+#include <sedml/SedDataSource.h>
+#include <sedml/SedSlice.h>
+#include <sedml/SedParameterEstimationTask.h>
+#include <sedml/SedObjective.h>
+#include <sedml/SedLeastSquareObjectiveFunction.h>
+#include <sedml/SedAdjustableParameter.h>
+#include <sedml/SedExperimentRef.h>
+#include <sedml/SedFitExperiment.h>
+#include <sedml/SedFitMapping.h>
+#include <sedml/SedScaling.h>
+#include <sedml/SedValueScaling.h>
+#include <sedml/SedColumnScaling.h>
+#include <sedml/SedBounds.h>
+#include <sedml/SedFigure.h>
+#include <sedml/SedSubPlot.h>
+#include <sedml/SedAxis.h>
+#include <sedml/SedStyle.h>
+#include <sedml/SedLine.h>
+#include <sedml/SedMarker.h>
+#include <sedml/SedFill.h>
+#include <sedml/SedDependentVariable.h>
+#include <sedml/SedRemainingDimension.h>
+#include <sedml/SedDataRange.h>
+#include <sedml/SedSimpleRepeatedTask.h>
+#include <sedml/SedShadedArea.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>
