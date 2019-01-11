@@ -128,9 +128,15 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
     def write_common_includes(self):
         self.write_line_verbatim('#include <{0}/common'
                                  '/extern.h>'.format(self.language))
-        self.write_line_verbatim('#include <{0}/{1}'
-                                 'TypeCodes.h>'.format(self.language,
-                                                       self.cap_language))
+        if global_variables.is_package:
+            self.write_line_verbatim('#include <{0}/{1}'
+                                     'TypeCodes.h>'.format(self.language,
+                                                           self.cap_language))
+        else:
+            self.write_line_verbatim('#include <{0}/{1}'
+                                     'TypeCodes.h>'.format(self.language,
+                                                           global_variables.prefix))
+
 
     def write_general_includes(self):
         lang = self.language
