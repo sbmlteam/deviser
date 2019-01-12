@@ -466,7 +466,7 @@ class ProtectedFunctions():
             use_ns = 'get{0}Namespaces()'.format(global_variables.prefix)
         xmlname = strFunctions.lower_first(name)
         if not global_variables.is_package:
-            temp = strFunctions.remove_prefix(self.element_name)
+            temp = strFunctions.remove_prefix(name)
             xmlname = strFunctions.lower_first(temp)
 
         if not create:
