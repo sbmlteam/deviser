@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -51,7 +51,12 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedListOfSimulations.h>
 #include <sedml/SedListOfModels.h>
+#include <sedml/SedListOfAbstractTasks.h>
+#include <sedml/SedListOfDataGenerators.h>
+#include <sedml/SedListOfOutputs.h>
+#include <sedml/SedListOfDataDescriptions.h>
 #include <sedml/SedErrorLog.h>
 #include <sbml/common/libsbml-namespace.h>
 
@@ -69,7 +74,12 @@ protected:
   bool mIsSetLevel;
   int mVersion;
   bool mIsSetVersion;
+  SedListOfSimulations mSimulations;
   SedListOfModels mModels;
+  SedListOfAbstractTasks mAbstractTasks;
+  SedListOfDataGenerators mDataGenerators;
+  SedListOfOutputs mOutputs;
+  SedListOfDataDescriptions mDataDescriptions;
   SedErrorLog mErrorLog;
 
   /** @endcond */
@@ -215,6 +225,266 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetVersion();
+
+
+  /**
+   * Returns the SedListOfSimulations from this SedDocument.
+   *
+   * @return the SedListOfSimulations from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  const SedListOfSimulations* getListOfSimulations() const;
+
+
+  /**
+   * Returns the SedListOfSimulations from this SedDocument.
+   *
+   * @return the SedListOfSimulations from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedListOfSimulations* getListOfSimulations();
+
+
+  /**
+   * Get a SedSimulation from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedSimulation to
+   * retrieve.
+   *
+   * @return the nth SedSimulation in the SedListOfSimulations within this
+   * SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedSimulation* getSimulation(unsigned int n);
+
+
+  /**
+   * Get a SedSimulation from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedSimulation to
+   * retrieve.
+   *
+   * @return the nth SedSimulation in the SedListOfSimulations within this
+   * SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  const SedSimulation* getSimulation(unsigned int n) const;
+
+
+  /**
+   * Get a SedSimulation from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedSimulation to
+   * retrieve.
+   *
+   * @return the SedSimulation in the SedListOfSimulations within this
+   * SedDocument with the given @p sid or @c NULL if no such SedSimulation
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedSimulation* getSimulation(const std::string& sid);
+
+
+  /**
+   * Get a SedSimulation from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedSimulation to
+   * retrieve.
+   *
+   * @return the SedSimulation in the SedListOfSimulations within this
+   * SedDocument with the given @p sid or @c NULL if no such SedSimulation
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  const SedSimulation* getSimulation(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy of the given SedSimulation to this SedDocument.
+   *
+   * @param ss the SedSimulation object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  int addSimulation(const SedSimulation* ss);
+
+
+  /**
+   * Get the number of SedSimulation objects in this SedDocument.
+   *
+   * @return the number of SedSimulation objects in this SedDocument.
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  unsigned int getNumSimulations() const;
+
+
+  /**
+   * Creates a new SedUniformTimeCourse object, adds it to this SedDocument
+   * object and returns the SedUniformTimeCourse object created.
+   *
+   * @return a new SedUniformTimeCourse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedUniformTimeCourse* createUniformTimeCourse();
+
+
+  /**
+   * Creates a new SedOneStep object, adds it to this SedDocument object and
+   * returns the SedOneStep object created.
+   *
+   * @return a new SedOneStep object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedOneStep* createOneStep();
+
+
+  /**
+   * Creates a new SedSteadyState object, adds it to this SedDocument object
+   * and returns the SedSteadyState object created.
+   *
+   * @return a new SedSteadyState object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedSteadyState* createSteadyState();
+
+
+  /**
+   * Removes the nth SedSimulation from this SedDocument and returns a pointer
+   * to it.
+   *
+   * @param n an unsigned int representing the index of the SedSimulation to
+   * remove.
+   *
+   * @return a pointer to the nth SedSimulation in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   */
+  SedSimulation* removeSimulation(unsigned int n);
+
+
+  /**
+   * Removes the SedSimulation from this SedDocument based on its identifier
+   * and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedSimulation to
+   * remove.
+   *
+   * @return the SedSimulation in this SedDocument based on the identifier or
+   * NULL if no such SedSimulation exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see createSimulation()
+   * @see getSedSimulation(const std::string& sid)
+   * @see getSedSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSedSimulation(unsigned int n)
+   */
+  SedSimulation* removeSimulation(const std::string& sid);
 
 
   /**
@@ -433,6 +703,989 @@ public:
    * @see removeSedModel(unsigned int n)
    */
   SedModel* removeModel(const std::string& sid);
+
+
+  /**
+   * Returns the SedListOfAbstractTasks from this SedDocument.
+   *
+   * @return the SedListOfAbstractTasks from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  const SedListOfAbstractTasks* getListOfAbstractTasks() const;
+
+
+  /**
+   * Returns the SedListOfAbstractTasks from this SedDocument.
+   *
+   * @return the SedListOfAbstractTasks from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedListOfAbstractTasks* getListOfAbstractTasks();
+
+
+  /**
+   * Get a SedAbstractTask from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedAbstractTask to
+   * retrieve.
+   *
+   * @return the nth SedAbstractTask in the SedListOfAbstractTasks within this
+   * SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedAbstractTask* getAbstractTask(unsigned int n);
+
+
+  /**
+   * Get a SedAbstractTask from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedAbstractTask to
+   * retrieve.
+   *
+   * @return the nth SedAbstractTask in the SedListOfAbstractTasks within this
+   * SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  const SedAbstractTask* getAbstractTask(unsigned int n) const;
+
+
+  /**
+   * Get a SedAbstractTask from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedAbstractTask to
+   * retrieve.
+   *
+   * @return the SedAbstractTask in the SedListOfAbstractTasks within this
+   * SedDocument with the given @p sid or @c NULL if no such SedAbstractTask
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedAbstractTask* getAbstractTask(const std::string& sid);
+
+
+  /**
+   * Get a SedAbstractTask from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedAbstractTask to
+   * retrieve.
+   *
+   * @return the SedAbstractTask in the SedListOfAbstractTasks within this
+   * SedDocument with the given @p sid or @c NULL if no such SedAbstractTask
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  const SedAbstractTask* getAbstractTask(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy of the given SedAbstractTask to this SedDocument.
+   *
+   * @param sat the SedAbstractTask object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  int addAbstractTask(const SedAbstractTask* sat);
+
+
+  /**
+   * Get the number of SedAbstractTask objects in this SedDocument.
+   *
+   * @return the number of SedAbstractTask objects in this SedDocument.
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  unsigned int getNumAbstractTasks() const;
+
+
+  /**
+   * Creates a new SedTask object, adds it to this SedDocument object and
+   * returns the SedTask object created.
+   *
+   * @return a new SedTask object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedTask* createTask();
+
+
+  /**
+   * Creates a new SedRepeatedTask object, adds it to this SedDocument object
+   * and returns the SedRepeatedTask object created.
+   *
+   * @return a new SedRepeatedTask object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedRepeatedTask* createRepeatedTask();
+
+
+  /**
+   * Creates a new SedParameterEstimationTask object, adds it to this
+   * SedDocument object and returns the SedParameterEstimationTask object
+   * created.
+   *
+   * @return a new SedParameterEstimationTask object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedParameterEstimationTask* createParameterEstimationTask();
+
+
+  /**
+   * Creates a new SedSimpleRepeatedTask object, adds it to this SedDocument
+   * object and returns the SedSimpleRepeatedTask object created.
+   *
+   * @return a new SedSimpleRepeatedTask object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   * @see removeAbstractTask(unsigned int n)
+   */
+  SedSimpleRepeatedTask* createSimpleRepeatedTask();
+
+
+  /**
+   * Removes the nth SedAbstractTask from this SedDocument and returns a
+   * pointer to it.
+   *
+   * @param n an unsigned int representing the index of the SedAbstractTask to
+   * remove.
+   *
+   * @return a pointer to the nth SedAbstractTask in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getAbstractTask(const std::string& sid)
+   * @see getAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeAbstractTask(const std::string& sid)
+   */
+  SedAbstractTask* removeAbstractTask(unsigned int n);
+
+
+  /**
+   * Removes the SedAbstractTask from this SedDocument based on its identifier
+   * and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedAbstractTask to
+   * remove.
+   *
+   * @return the SedAbstractTask in this SedDocument based on the identifier or
+   * NULL if no such SedAbstractTask exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addAbstractTask(const SedAbstractTask* object)
+   * @see createAbstractTask()
+   * @see getSedAbstractTask(const std::string& sid)
+   * @see getSedAbstractTask(unsigned int n)
+   * @see getNumAbstractTasks()
+   * @see removeSedAbstractTask(unsigned int n)
+   */
+  SedAbstractTask* removeAbstractTask(const std::string& sid);
+
+
+  /**
+   * Returns the SedListOfDataGenerators from this SedDocument.
+   *
+   * @return the SedListOfDataGenerators from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  const SedListOfDataGenerators* getListOfDataGenerators() const;
+
+
+  /**
+   * Returns the SedListOfDataGenerators from this SedDocument.
+   *
+   * @return the SedListOfDataGenerators from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  SedListOfDataGenerators* getListOfDataGenerators();
+
+
+  /**
+   * Get a SedDataGenerator from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedDataGenerator to
+   * retrieve.
+   *
+   * @return the nth SedDataGenerator in the SedListOfDataGenerators within
+   * this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  SedDataGenerator* getDataGenerator(unsigned int n);
+
+
+  /**
+   * Get a SedDataGenerator from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedDataGenerator to
+   * retrieve.
+   *
+   * @return the nth SedDataGenerator in the SedListOfDataGenerators within
+   * this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  const SedDataGenerator* getDataGenerator(unsigned int n) const;
+
+
+  /**
+   * Get a SedDataGenerator from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedDataGenerator to
+   * retrieve.
+   *
+   * @return the SedDataGenerator in the SedListOfDataGenerators within this
+   * SedDocument with the given @p sid or @c NULL if no such SedDataGenerator
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  SedDataGenerator* getDataGenerator(const std::string& sid);
+
+
+  /**
+   * Get a SedDataGenerator from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedDataGenerator to
+   * retrieve.
+   *
+   * @return the SedDataGenerator in the SedListOfDataGenerators within this
+   * SedDocument with the given @p sid or @c NULL if no such SedDataGenerator
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  const SedDataGenerator* getDataGenerator(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy of the given SedDataGenerator to this SedDocument.
+   *
+   * @param sdg the SedDataGenerator object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  int addDataGenerator(const SedDataGenerator* sdg);
+
+
+  /**
+   * Get the number of SedDataGenerator objects in this SedDocument.
+   *
+   * @return the number of SedDataGenerator objects in this SedDocument.
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  unsigned int getNumDataGenerators() const;
+
+
+  /**
+   * Creates a new SedDataGenerator object, adds it to this SedDocument object
+   * and returns the SedDataGenerator object created.
+   *
+   * @return a new SedDataGenerator object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   * @see removeDataGenerator(unsigned int n)
+   */
+  SedDataGenerator* createDataGenerator();
+
+
+  /**
+   * Removes the nth SedDataGenerator from this SedDocument and returns a
+   * pointer to it.
+   *
+   * @param n an unsigned int representing the index of the SedDataGenerator to
+   * remove.
+   *
+   * @return a pointer to the nth SedDataGenerator in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getDataGenerator(const std::string& sid)
+   * @see getDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeDataGenerator(const std::string& sid)
+   */
+  SedDataGenerator* removeDataGenerator(unsigned int n);
+
+
+  /**
+   * Removes the SedDataGenerator from this SedDocument based on its identifier
+   * and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedDataGenerator to
+   * remove.
+   *
+   * @return the SedDataGenerator in this SedDocument based on the identifier
+   * or NULL if no such SedDataGenerator exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDataGenerator(const SedDataGenerator* object)
+   * @see createDataGenerator()
+   * @see getSedDataGenerator(const std::string& sid)
+   * @see getSedDataGenerator(unsigned int n)
+   * @see getNumDataGenerators()
+   * @see removeSedDataGenerator(unsigned int n)
+   */
+  SedDataGenerator* removeDataGenerator(const std::string& sid);
+
+
+  /**
+   * Returns the SedListOfOutputs from this SedDocument.
+   *
+   * @return the SedListOfOutputs from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  const SedListOfOutputs* getListOfOutputs() const;
+
+
+  /**
+   * Returns the SedListOfOutputs from this SedDocument.
+   *
+   * @return the SedListOfOutputs from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedListOfOutputs* getListOfOutputs();
+
+
+  /**
+   * Get a SedOutput from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedOutput to
+   * retrieve.
+   *
+   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedOutput* getOutput(unsigned int n);
+
+
+  /**
+   * Get a SedOutput from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedOutput to
+   * retrieve.
+   *
+   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  const SedOutput* getOutput(unsigned int n) const;
+
+
+  /**
+   * Get a SedOutput from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedOutput to
+   * retrieve.
+   *
+   * @return the SedOutput in the SedListOfOutputs within this SedDocument with
+   * the given @p sid or @c NULL if no such SedOutput exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedOutput* getOutput(const std::string& sid);
+
+
+  /**
+   * Get a SedOutput from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedOutput to
+   * retrieve.
+   *
+   * @return the SedOutput in the SedListOfOutputs within this SedDocument with
+   * the given @p sid or @c NULL if no such SedOutput exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  const SedOutput* getOutput(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy of the given SedOutput to this SedDocument.
+   *
+   * @param so the SedOutput object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  int addOutput(const SedOutput* so);
+
+
+  /**
+   * Get the number of SedOutput objects in this SedDocument.
+   *
+   * @return the number of SedOutput objects in this SedDocument.
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  unsigned int getNumOutputs() const;
+
+
+  /**
+   * Creates a new SedReport object, adds it to this SedDocument object and
+   * returns the SedReport object created.
+   *
+   * @return a new SedReport object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedReport* createReport();
+
+
+  /**
+   * Creates a new SedPlot2D object, adds it to this SedDocument object and
+   * returns the SedPlot2D object created.
+   *
+   * @return a new SedPlot2D object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedPlot2D* createPlot2D();
+
+
+  /**
+   * Creates a new SedPlot3D object, adds it to this SedDocument object and
+   * returns the SedPlot3D object created.
+   *
+   * @return a new SedPlot3D object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedPlot3D* createPlot3D();
+
+
+  /**
+   * Removes the nth SedOutput from this SedDocument and returns a pointer to
+   * it.
+   *
+   * @param n an unsigned int representing the index of the SedOutput to
+   * remove.
+   *
+   * @return a pointer to the nth SedOutput in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   */
+  SedOutput* removeOutput(unsigned int n);
+
+
+  /**
+   * Removes the SedOutput from this SedDocument based on its identifier and
+   * returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedOutput to
+   * remove.
+   *
+   * @return the SedOutput in this SedDocument based on the identifier or NULL
+   * if no such SedOutput exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see createOutput()
+   * @see getSedOutput(const std::string& sid)
+   * @see getSedOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeSedOutput(unsigned int n)
+   */
+  SedOutput* removeOutput(const std::string& sid);
+
+
+  /**
+   * Returns the SedListOfDataDescriptions from this SedDocument.
+   *
+   * @return the SedListOfDataDescriptions from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  const SedListOfDataDescriptions* getListOfDataDescriptions() const;
+
+
+  /**
+   * Returns the SedListOfDataDescriptions from this SedDocument.
+   *
+   * @return the SedListOfDataDescriptions from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  SedListOfDataDescriptions* getListOfDataDescriptions();
+
+
+  /**
+   * Get a SedDataDescription from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedDataDescription
+   * to retrieve.
+   *
+   * @return the nth SedDataDescription in the SedListOfDataDescriptions within
+   * this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  SedDataDescription* getDataDescription(unsigned int n);
+
+
+  /**
+   * Get a SedDataDescription from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedDataDescription
+   * to retrieve.
+   *
+   * @return the nth SedDataDescription in the SedListOfDataDescriptions within
+   * this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  const SedDataDescription* getDataDescription(unsigned int n) const;
+
+
+  /**
+   * Get a SedDataDescription from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedDataDescription
+   * to retrieve.
+   *
+   * @return the SedDataDescription in the SedListOfDataDescriptions within
+   * this SedDocument with the given @p sid or @c NULL if no such
+   * SedDataDescription exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  SedDataDescription* getDataDescription(const std::string& sid);
+
+
+  /**
+   * Get a SedDataDescription from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedDataDescription
+   * to retrieve.
+   *
+   * @return the SedDataDescription in the SedListOfDataDescriptions within
+   * this SedDocument with the given @p sid or @c NULL if no such
+   * SedDataDescription exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  const SedDataDescription* getDataDescription(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy of the given SedDataDescription to this SedDocument.
+   *
+   * @param sdd the SedDataDescription object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  int addDataDescription(const SedDataDescription* sdd);
+
+
+  /**
+   * Get the number of SedDataDescription objects in this SedDocument.
+   *
+   * @return the number of SedDataDescription objects in this SedDocument.
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  unsigned int getNumDataDescriptions() const;
+
+
+  /**
+   * Creates a new SedDataDescription object, adds it to this SedDocument
+   * object and returns the SedDataDescription object created.
+   *
+   * @return a new SedDataDescription object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   * @see removeDataDescription(unsigned int n)
+   */
+  SedDataDescription* createDataDescription();
+
+
+  /**
+   * Removes the nth SedDataDescription from this SedDocument and returns a
+   * pointer to it.
+   *
+   * @param n an unsigned int representing the index of the SedDataDescription
+   * to remove.
+   *
+   * @return a pointer to the nth SedDataDescription in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getDataDescription(const std::string& sid)
+   * @see getDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeDataDescription(const std::string& sid)
+   */
+  SedDataDescription* removeDataDescription(unsigned int n);
+
+
+  /**
+   * Removes the SedDataDescription from this SedDocument based on its
+   * identifier and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedDataDescription
+   * to remove.
+   *
+   * @return the SedDataDescription in this SedDocument based on the identifier
+   * or NULL if no such SedDataDescription exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addDataDescription(const SedDataDescription* object)
+   * @see createDataDescription()
+   * @see getSedDataDescription(const std::string& sid)
+   * @see getSedDataDescription(unsigned int n)
+   * @see getNumDataDescriptions()
+   * @see removeSedDataDescription(unsigned int n)
+   */
+  SedDataDescription* removeDataDescription(const std::string& sid);
 
 
   /**
@@ -1228,6 +2481,205 @@ SedDocument_unsetVersion(SedDocument_t * sd);
 
 
 /**
+ * Returns a ListOf_t * containing SedSimulation_t objects from this
+ * SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfSimulations is sought.
+ *
+ * @return the SedListOfSimulations from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addSimulation()
+ * @see SedDocument_createSimulation()
+ * @see SedDocument_getSimulationById()
+ * @see SedDocument_getSimulation()
+ * @see SedDocument_getNumSimulations()
+ * @see SedDocument_removeSimulationById()
+ * @see SedDocument_removeSimulation()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfSimulations(SedDocument_t* sd);
+
+
+/**
+ * Get a SedSimulation_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedSimulation_t to
+ * retrieve.
+ *
+ * @return the nth SedSimulation_t in the SedListOfSimulations within this
+ * SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSimulation_t*
+SedDocument_getSimulation(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedSimulation_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedSimulation_t to
+ * retrieve.
+ *
+ * @return the SedSimulation_t in the SedListOfSimulations within this
+ * SedDocument with the given @p sid or @c NULL if no such SedSimulation_t
+ * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSimulation_t*
+SedDocument_getSimulationById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedSimulation_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedSimulation_t should be
+ * added.
+ *
+ * @param ss the SedSimulation_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addSimulation(SedDocument_t* sd, const SedSimulation_t* ss);
+
+
+/**
+ * Get the number of SedSimulation_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedSimulation_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumSimulations(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedUniformTimeCourse_t object, adds it to this SedDocument_t
+ * object and returns the SedUniformTimeCourse_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedUniformTimeCourse_t
+ * should be added.
+ *
+ * @return a new SedUniformTimeCourse_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedUniformTimeCourse_t*
+SedDocument_createUniformTimeCourse(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedOneStep_t object, adds it to this SedDocument_t object and
+ * returns the SedOneStep_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedOneStep_t should be
+ * added.
+ *
+ * @return a new SedOneStep_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedOneStep_t*
+SedDocument_createOneStep(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedSteadyState_t object, adds it to this SedDocument_t object
+ * and returns the SedSteadyState_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedSteadyState_t should
+ * be added.
+ *
+ * @return a new SedSteadyState_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSteadyState_t*
+SedDocument_createSteadyState(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedSimulation_t from this SedDocument_t and returns a
+ * pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedSimulation_t to
+ * remove.
+ *
+ * @return a pointer to the nth SedSimulation_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSimulation_t*
+SedDocument_removeSimulation(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedSimulation_t from this SedDocument_t based on its identifier
+ * and returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedSimulation_t to
+ * remove.
+ *
+ * @return the SedSimulation_t in this SedDocument_t based on the identifier or
+ * NULL if no such SedSimulation_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSimulation_t*
+SedDocument_removeSimulationById(SedDocument_t* sd, const char* sid);
+
+
+/**
  * Returns a ListOf_t * containing SedModel_t objects from this SedDocument_t.
  *
  * @param sd the SedDocument_t structure whose SedListOfModels is sought.
@@ -1383,6 +2835,752 @@ SedDocument_removeModel(SedDocument_t* sd, unsigned int n);
 LIBSEDML_EXTERN
 SedModel_t*
 SedDocument_removeModelById(SedDocument_t* sd, const char* sid);
+
+
+/**
+ * Returns a ListOf_t * containing SedAbstractTask_t objects from this
+ * SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfAbstractTasks is
+ * sought.
+ *
+ * @return the SedListOfAbstractTasks from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addAbstractTask()
+ * @see SedDocument_createAbstractTask()
+ * @see SedDocument_getAbstractTaskById()
+ * @see SedDocument_getAbstractTask()
+ * @see SedDocument_getNumAbstractTasks()
+ * @see SedDocument_removeAbstractTaskById()
+ * @see SedDocument_removeAbstractTask()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfAbstractTasks(SedDocument_t* sd);
+
+
+/**
+ * Get a SedAbstractTask_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedAbstractTask_t to
+ * retrieve.
+ *
+ * @return the nth SedAbstractTask_t in the SedListOfAbstractTasks within this
+ * SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAbstractTask_t*
+SedDocument_getAbstractTask(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedAbstractTask_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedAbstractTask_t to
+ * retrieve.
+ *
+ * @return the SedAbstractTask_t in the SedListOfAbstractTasks within this
+ * SedDocument with the given @p sid or @c NULL if no such SedAbstractTask_t
+ * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAbstractTask_t*
+SedDocument_getAbstractTaskById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedAbstractTask_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedAbstractTask_t should
+ * be added.
+ *
+ * @param sat the SedAbstractTask_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addAbstractTask(SedDocument_t* sd, const SedAbstractTask_t* sat);
+
+
+/**
+ * Get the number of SedAbstractTask_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedAbstractTask_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumAbstractTasks(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedTask_t object, adds it to this SedDocument_t object and
+ * returns the SedTask_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedTask_t should be
+ * added.
+ *
+ * @return a new SedTask_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedTask_t*
+SedDocument_createTask(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedRepeatedTask_t object, adds it to this SedDocument_t object
+ * and returns the SedRepeatedTask_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedRepeatedTask_t should
+ * be added.
+ *
+ * @return a new SedRepeatedTask_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedRepeatedTask_t*
+SedDocument_createRepeatedTask(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedParameterEstimationTask_t object, adds it to this
+ * SedDocument_t object and returns the SedParameterEstimationTask_t object
+ * created.
+ *
+ * @param sd the SedDocument_t structure to which the
+ * SedParameterEstimationTask_t should be added.
+ *
+ * @return a new SedParameterEstimationTask_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedParameterEstimationTask_t*
+SedDocument_createParameterEstimationTask(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedSimpleRepeatedTask_t object, adds it to this SedDocument_t
+ * object and returns the SedSimpleRepeatedTask_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedSimpleRepeatedTask_t
+ * should be added.
+ *
+ * @return a new SedSimpleRepeatedTask_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedSimpleRepeatedTask_t*
+SedDocument_createSimpleRepeatedTask(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedAbstractTask_t from this SedDocument_t and returns a
+ * pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedAbstractTask_t to
+ * remove.
+ *
+ * @return a pointer to the nth SedAbstractTask_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAbstractTask_t*
+SedDocument_removeAbstractTask(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedAbstractTask_t from this SedDocument_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedAbstractTask_t to
+ * remove.
+ *
+ * @return the SedAbstractTask_t in this SedDocument_t based on the identifier
+ * or NULL if no such SedAbstractTask_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAbstractTask_t*
+SedDocument_removeAbstractTaskById(SedDocument_t* sd, const char* sid);
+
+
+/**
+ * Returns a ListOf_t * containing SedDataGenerator_t objects from this
+ * SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfDataGenerators is
+ * sought.
+ *
+ * @return the SedListOfDataGenerators from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addDataGenerator()
+ * @see SedDocument_createDataGenerator()
+ * @see SedDocument_getDataGeneratorById()
+ * @see SedDocument_getDataGenerator()
+ * @see SedDocument_getNumDataGenerators()
+ * @see SedDocument_removeDataGeneratorById()
+ * @see SedDocument_removeDataGenerator()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfDataGenerators(SedDocument_t* sd);
+
+
+/**
+ * Get a SedDataGenerator_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedDataGenerator_t to
+ * retrieve.
+ *
+ * @return the nth SedDataGenerator_t in the SedListOfDataGenerators within
+ * this SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataGenerator_t*
+SedDocument_getDataGenerator(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedDataGenerator_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedDataGenerator_t to
+ * retrieve.
+ *
+ * @return the SedDataGenerator_t in the SedListOfDataGenerators within this
+ * SedDocument with the given @p sid or @c NULL if no such SedDataGenerator_t
+ * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataGenerator_t*
+SedDocument_getDataGeneratorById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedDataGenerator_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedDataGenerator_t should
+ * be added.
+ *
+ * @param sdg the SedDataGenerator_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addDataGenerator(SedDocument_t* sd,
+                             const SedDataGenerator_t* sdg);
+
+
+/**
+ * Get the number of SedDataGenerator_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedDataGenerator_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumDataGenerators(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedDataGenerator_t object, adds it to this SedDocument_t
+ * object and returns the SedDataGenerator_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedDataGenerator_t should
+ * be added.
+ *
+ * @return a new SedDataGenerator_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataGenerator_t*
+SedDocument_createDataGenerator(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedDataGenerator_t from this SedDocument_t and returns a
+ * pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedDataGenerator_t to
+ * remove.
+ *
+ * @return a pointer to the nth SedDataGenerator_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataGenerator_t*
+SedDocument_removeDataGenerator(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedDataGenerator_t from this SedDocument_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedDataGenerator_t to
+ * remove.
+ *
+ * @return the SedDataGenerator_t in this SedDocument_t based on the identifier
+ * or NULL if no such SedDataGenerator_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataGenerator_t*
+SedDocument_removeDataGeneratorById(SedDocument_t* sd, const char* sid);
+
+
+/**
+ * Returns a ListOf_t * containing SedOutput_t objects from this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfOutputs is sought.
+ *
+ * @return the SedListOfOutputs from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addOutput()
+ * @see SedDocument_createOutput()
+ * @see SedDocument_getOutputById()
+ * @see SedDocument_getOutput()
+ * @see SedDocument_getNumOutputs()
+ * @see SedDocument_removeOutputById()
+ * @see SedDocument_removeOutput()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfOutputs(SedDocument_t* sd);
+
+
+/**
+ * Get a SedOutput_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedOutput_t to
+ * retrieve.
+ *
+ * @return the nth SedOutput_t in the SedListOfOutputs within this SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedOutput_t*
+SedDocument_getOutput(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedOutput_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedOutput_t to
+ * retrieve.
+ *
+ * @return the SedOutput_t in the SedListOfOutputs within this SedDocument with
+ * the given @p sid or @c NULL if no such SedOutput_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedOutput_t*
+SedDocument_getOutputById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedOutput_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedOutput_t should be
+ * added.
+ *
+ * @param so the SedOutput_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addOutput(SedDocument_t* sd, const SedOutput_t* so);
+
+
+/**
+ * Get the number of SedOutput_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedOutput_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumOutputs(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedReport_t object, adds it to this SedDocument_t object and
+ * returns the SedReport_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedReport_t should be
+ * added.
+ *
+ * @return a new SedReport_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedReport_t*
+SedDocument_createReport(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedPlot2D_t object, adds it to this SedDocument_t object and
+ * returns the SedPlot2D_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedPlot2D_t should be
+ * added.
+ *
+ * @return a new SedPlot2D_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedPlot2D_t*
+SedDocument_createPlot2D(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedPlot3D_t object, adds it to this SedDocument_t object and
+ * returns the SedPlot3D_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedPlot3D_t should be
+ * added.
+ *
+ * @return a new SedPlot3D_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedPlot3D_t*
+SedDocument_createPlot3D(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedOutput_t from this SedDocument_t and returns a pointer to
+ * it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedOutput_t to
+ * remove.
+ *
+ * @return a pointer to the nth SedOutput_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedOutput_t*
+SedDocument_removeOutput(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedOutput_t from this SedDocument_t based on its identifier and
+ * returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedOutput_t to
+ * remove.
+ *
+ * @return the SedOutput_t in this SedDocument_t based on the identifier or
+ * NULL if no such SedOutput_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedOutput_t*
+SedDocument_removeOutputById(SedDocument_t* sd, const char* sid);
+
+
+/**
+ * Returns a ListOf_t * containing SedDataDescription_t objects from this
+ * SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfDataDescriptions is
+ * sought.
+ *
+ * @return the SedListOfDataDescriptions from this SedDocument_t as a ListOf_t
+ * *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addDataDescription()
+ * @see SedDocument_createDataDescription()
+ * @see SedDocument_getDataDescriptionById()
+ * @see SedDocument_getDataDescription()
+ * @see SedDocument_getNumDataDescriptions()
+ * @see SedDocument_removeDataDescriptionById()
+ * @see SedDocument_removeDataDescription()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfDataDescriptions(SedDocument_t* sd);
+
+
+/**
+ * Get a SedDataDescription_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedDataDescription_t
+ * to retrieve.
+ *
+ * @return the nth SedDataDescription_t in the SedListOfDataDescriptions within
+ * this SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_getDataDescription(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedDataDescription_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedDataDescription_t
+ * to retrieve.
+ *
+ * @return the SedDataDescription_t in the SedListOfDataDescriptions within
+ * this SedDocument with the given @p sid or @c NULL if no such
+ * SedDataDescription_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_getDataDescriptionById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedDataDescription_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedDataDescription_t
+ * should be added.
+ *
+ * @param sdd the SedDataDescription_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addDataDescription(SedDocument_t* sd,
+                               const SedDataDescription_t* sdd);
+
+
+/**
+ * Get the number of SedDataDescription_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedDataDescription_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumDataDescriptions(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedDataDescription_t object, adds it to this SedDocument_t
+ * object and returns the SedDataDescription_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedDataDescription_t
+ * should be added.
+ *
+ * @return a new SedDataDescription_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_createDataDescription(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedDataDescription_t from this SedDocument_t and returns a
+ * pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedDataDescription_t
+ * to remove.
+ *
+ * @return a pointer to the nth SedDataDescription_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_removeDataDescription(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedDataDescription_t from this SedDocument_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedDataDescription_t
+ * to remove.
+ *
+ * @return the SedDataDescription_t in this SedDocument_t based on the
+ * identifier or NULL if no such SedDataDescription_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_removeDataDescriptionById(SedDocument_t* sd, const char* sid);
 
 
 /**
