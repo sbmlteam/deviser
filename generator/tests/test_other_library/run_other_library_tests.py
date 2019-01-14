@@ -100,6 +100,24 @@ def generate_forward(filename):
     ext.write_files()
     os.chdir('../../.')
 
+def generate_enum(filename):
+    parser = ParseXML.ParseXML(filename)
+    ob = parser.parse_deviser_xml()
+    for wc in ob['baseElements']:
+        strFunctions.prefix_classes(wc)
+    for working_class in ob['baseElements']:
+        if working_class['name'] == global_variables.document_class:
+            working_class['document'] = True
+    global_variables.populate_error_list(ob)
+    os.chdir('./temp')
+    newdir = global_variables.language
+    if not os.path.isdir(newdir):
+        os.mkdir(newdir)
+    os.chdir(newdir)
+    ext = ExtensionFiles.ExtensionFiles(ob, 'enums', True)
+    ext.write_files()
+    os.chdir('../../.')
+
 def generate_binding(filename, binding):
     parser = ParseXML.ParseXML(filename)
     ob = parser.parse_deviser_xml()
@@ -286,12 +304,23 @@ def test_common_templates(name, class_name, test_case, prefix, lib):
     print('')
     return fail
 
+
 def run_forward(name, class_name, test_case):
     filename = test_functions.set_up_test(name, class_name, test_case)
     generate_forward(filename)
     fail = compare_code_headers(class_name)
     print('')
     return fail
+
+
+def run_enum(name, class_name, test_case):
+    filename = test_functions.set_up_test(name, class_name, test_case)
+    generate_enum(filename)
+    fail = compare_code_headers(class_name)
+    fail += compare_code_impl(class_name)
+    print('')
+    return fail
+
 
 def test_bindings(name, class_name, test_case, binding, prefix):
     filename = test_functions.set_up_test(name, class_name, test_case)
@@ -347,7 +376,7 @@ def testSedML(fail):
     class_name = 'SedModel'
     list_of = 'SedListOfModels'
     test_case = 'model'
-    fail += run_test(name, num, class_name, test_case, list_of)
+#    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 0
@@ -369,9 +398,14 @@ def testSedML(fail):
     fail += test_common_templates(name, class_name, test_case, 'Sed', 'sedml')
 
     name = 'test_sedml'
+    class_name = 'SedmlEnumerations'
+    test_case = 'enumnerations'
+    fail += run_enum(name, class_name, test_case)
+
+    name = 'test_sedml'
     class_name = 'sedmlfwd'
     test_case = 'forward declarations'
-    fail += run_forward(name, class_name, test_case)
+#    fail += run_forward(name, class_name, test_case)
 
     name = 'test_sedml'
     num = 3
@@ -385,34 +419,48 @@ def testSedML(fail):
     class_name = 'SedSetValue'
     list_of = ''
     test_case = 'astnode used'
-    fail += run_test(name, num, class_name, test_case, list_of)
+#    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 5
     class_name = 'SedDataGenerator'
     list_of = ''
     test_case = 'astnode in getElementBySId bug'
-    fail += run_test(name, num, class_name, test_case, list_of)
+ #   fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 6
     class_name = 'SedRepeatedTask'
     list_of = ''
     test_case = 'attribute with different xml name'
-    fail += run_test(name, num, class_name, test_case, list_of)
+#    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 7
     class_name = 'SedSimulation'
     list_of = ''
     test_case = 'child element'
-    fail += run_test(name, num, class_name, test_case, list_of)
+#    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 8
     class_name = 'SedVectorRange'
     list_of = ''
     test_case = 'deal with vectors'
+#    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 10
+    class_name = 'SedAbstractTask'
+    list_of = 'SedListOfAbstractTasks'
+    test_case = 'catch different abstract types'
+    fail += run_test(name, num, class_name, test_case, list_of)
+
+    name = 'test_sedml'
+    num = 13
+    class_name = 'SedOutput'
+    list_of = 'SedListOfOutputs'
+    test_case = 'catch different abstract types'
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
@@ -493,6 +541,7 @@ def testCombine(fail):
 
 def main():
 
+    test_all = True
     # set up the enivornment
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
@@ -500,9 +549,19 @@ def main():
     if not os.path.isdir('temp'):
         os.mkdir('temp')
     fail = 0
+    global_variables.reset()
 
-    fail = testSedML(fail)
-    fail = testCombine(fail)
+    if test_all:
+        fail = testSedML(fail)
+        fail = testCombine(fail)
+    else:
+        name = 'test_sedml'
+        num = 10
+        class_name = 'SedAbstractTask'
+        list_of = 'SedListOfAbstractTasks'
+        test_case = 'catch different abstract types'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
     return fail
