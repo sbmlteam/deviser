@@ -61,6 +61,7 @@ ListOfCSGNodes::ListOfCSGNodes(unsigned int level,
                                unsigned int version,
                                unsigned int pkgVersion)
   : ListOf(level, version)
+  , mElementName("csgNode")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -72,6 +73,7 @@ ListOfCSGNodes::ListOfCSGNodes(unsigned int level,
  */
 ListOfCSGNodes::ListOfCSGNodes(SpatialPkgNamespaces *spatialns)
   : ListOf(spatialns)
+  , mElementName("csgNode")
 {
   setElementNamespace(spatialns->getURI());
 }
@@ -82,6 +84,7 @@ ListOfCSGNodes::ListOfCSGNodes(SpatialPkgNamespaces *spatialns)
  */
 ListOfCSGNodes::ListOfCSGNodes(const ListOfCSGNodes& orig)
   : ListOf( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -95,6 +98,7 @@ ListOfCSGNodes::operator=(const ListOfCSGNodes& rhs)
   if (&rhs != this)
   {
     ListOf::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -414,9 +418,23 @@ ListOfCSGNodes::createCSGSetOperator()
 const std::string&
 ListOfCSGNodes::getElementName() const
 {
-  static const string name = "listOfCSGNodes";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this ListOfCSGNodes object.
+ */
+void
+ListOfCSGNodes::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

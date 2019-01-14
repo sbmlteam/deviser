@@ -63,6 +63,7 @@ CSGTransformation::CSGTransformation(unsigned int level,
                                      unsigned int pkgVersion)
   : CSGNode(level, version, pkgVersion)
   , mCSGNode (NULL)
+  , mElementName("csgTransformation")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -76,6 +77,7 @@ CSGTransformation::CSGTransformation(unsigned int level,
 CSGTransformation::CSGTransformation(SpatialPkgNamespaces *spatialns)
   : CSGNode(spatialns)
   , mCSGNode (NULL)
+  , mElementName("csgTransformation")
 {
   setElementNamespace(spatialns->getURI());
   connectToChild();
@@ -89,6 +91,7 @@ CSGTransformation::CSGTransformation(SpatialPkgNamespaces *spatialns)
 CSGTransformation::CSGTransformation(const CSGTransformation& orig)
   : CSGNode( orig )
   , mCSGNode ( NULL )
+  , mElementName ( orig.mElementName )
 {
   if (orig.mCSGNode != NULL)
   {
@@ -108,6 +111,7 @@ CSGTransformation::operator=(const CSGTransformation& rhs)
   if (&rhs != this)
   {
     CSGNode::operator=(rhs);
+    mElementName = rhs.mElementName;
     delete mCSGNode;
     if (rhs.mCSGNode != NULL)
     {
@@ -407,9 +411,23 @@ CSGTransformation::isCSGHomogeneousTransformation() const
 const std::string&
 CSGTransformation::getElementName() const
 {
-  static const string name = "csgTransformation";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this CSGTransformation object.
+ */
+void
+CSGTransformation::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

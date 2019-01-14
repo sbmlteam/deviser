@@ -71,6 +71,7 @@ protected:
 
   bool mIsActive;
   bool mIsSetIsActive;
+  std::string mElementName;
 
   /** @endcond */
 
@@ -288,6 +289,17 @@ public:
    * @return the name of this element, i.e. @c "geometryDefinition".
    */
   virtual const std::string& getElementName() const;
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Sets the XML name of this GeometryDefinition object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
 
 
   /**

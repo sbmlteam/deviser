@@ -66,6 +66,13 @@ class MixedGeometry;
 
 class LIBSBML_EXTERN ListOfGeometryDefinitions : public ListOf
 {
+protected:
+
+  /** @cond doxygenLibsbmlInternal */
+
+  std::string mElementName;
+
+  /** @endcond */
 
 public:
 
@@ -412,6 +419,17 @@ public:
    * @return the name of this element, i.e. @c "listOfGeometryDefinitions".
    */
   virtual const std::string& getElementName() const;
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Sets the XML name of this ListOfGeometryDefinitions object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
 
 
   /**

@@ -71,6 +71,7 @@ protected:
 
   UncertBound* mTruncationLowerBound;
   UncertBound* mTruncationUpperBound;
+  std::string mElementName;
 
   /** @endcond */
 
@@ -311,6 +312,17 @@ public:
    * @c "discreteUnivariateDistribution".
    */
   virtual const std::string& getElementName() const;
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Sets the XML name of this DiscreteUnivariateDistribution object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
 
 
   /**

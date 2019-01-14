@@ -61,6 +61,7 @@ GraphicalPrimitive2D::GraphicalPrimitive2D(unsigned int level,
   : GraphicalPrimitive1D(level, version, pkgVersion)
   , mFill ("")
   , mFillRule (FILL_EVENODD_INVALID)
+  , mElementName("graphicalPrimitive2D")
 {
   setSBMLNamespacesAndOwn(new RenderPkgNamespaces(level, version, pkgVersion));
 }
@@ -74,6 +75,7 @@ GraphicalPrimitive2D::GraphicalPrimitive2D(RenderPkgNamespaces *renderns)
   : GraphicalPrimitive1D(renderns)
   , mFill ("")
   , mFillRule (FILL_EVENODD_INVALID)
+  , mElementName("graphicalPrimitive2D")
 {
   setElementNamespace(renderns->getURI());
   loadPlugins(renderns);
@@ -87,6 +89,7 @@ GraphicalPrimitive2D::GraphicalPrimitive2D(const GraphicalPrimitive2D& orig)
   : GraphicalPrimitive1D( orig )
   , mFill ( orig.mFill )
   , mFillRule ( orig.mFillRule )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -102,6 +105,7 @@ GraphicalPrimitive2D::operator=(const GraphicalPrimitive2D& rhs)
     GraphicalPrimitive1D::operator=(rhs);
     mFill = rhs.mFill;
     mFillRule = rhs.mFillRule;
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -306,9 +310,23 @@ GraphicalPrimitive2D::isRenderGroup() const
 const std::string&
 GraphicalPrimitive2D::getElementName() const
 {
-  static const string name = "graphicalPrimitive2D";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this GraphicalPrimitive2D object.
+ */
+void
+GraphicalPrimitive2D::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

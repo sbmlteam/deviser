@@ -58,6 +58,7 @@ ListOfAssociations::ListOfAssociations(unsigned int level,
                                        unsigned int version,
                                        unsigned int pkgVersion)
   : ListOf(level, version)
+  , mElementName("listOfAssociations")
 {
   setSBMLNamespacesAndOwn(new FbcPkgNamespaces(level, version, pkgVersion));
 }
@@ -68,6 +69,7 @@ ListOfAssociations::ListOfAssociations(unsigned int level,
  */
 ListOfAssociations::ListOfAssociations(FbcPkgNamespaces *fbcns)
   : ListOf(fbcns)
+  , mElementName("listOfAssociations")
 {
   setElementNamespace(fbcns->getURI());
 }
@@ -78,6 +80,7 @@ ListOfAssociations::ListOfAssociations(FbcPkgNamespaces *fbcns)
  */
 ListOfAssociations::ListOfAssociations(const ListOfAssociations& orig)
   : ListOf( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -91,6 +94,7 @@ ListOfAssociations::operator=(const ListOfAssociations& rhs)
   if (&rhs != this)
   {
     ListOf::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -329,9 +333,23 @@ ListOfAssociations::createGeneProductRef()
 const std::string&
 ListOfAssociations::getElementName() const
 {
-  static const string name = "listOfAssociations";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this ListOfAssociations object.
+ */
+void
+ListOfAssociations::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

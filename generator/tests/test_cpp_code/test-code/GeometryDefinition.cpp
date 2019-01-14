@@ -63,6 +63,7 @@ GeometryDefinition::GeometryDefinition(unsigned int level,
   : SBase(level, version)
   , mIsActive (false)
   , mIsSetIsActive (false)
+  , mElementName("geometryDefinition")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -77,6 +78,7 @@ GeometryDefinition::GeometryDefinition(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
   , mIsActive (false)
   , mIsSetIsActive (false)
+  , mElementName("geometryDefinition")
 {
   setElementNamespace(spatialns->getURI());
   loadPlugins(spatialns);
@@ -90,6 +92,7 @@ GeometryDefinition::GeometryDefinition(const GeometryDefinition& orig)
   : SBase( orig )
   , mIsActive ( orig.mIsActive )
   , mIsSetIsActive ( orig.mIsSetIsActive )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -105,6 +108,7 @@ GeometryDefinition::operator=(const GeometryDefinition& rhs)
     SBase::operator=(rhs);
     mIsActive = rhs.mIsActive;
     mIsSetIsActive = rhs.mIsSetIsActive;
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -293,9 +297,23 @@ GeometryDefinition::isMixedGeometry() const
 const std::string&
 GeometryDefinition::getElementName() const
 {
-  static const string name = "geometryDefinition";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this GeometryDefinition object.
+ */
+void
+GeometryDefinition::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

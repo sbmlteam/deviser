@@ -59,6 +59,7 @@ Association::Association(unsigned int level,
                          unsigned int version,
                          unsigned int pkgVersion)
   : SBase(level, version)
+  , mElementName("association")
 {
   setSBMLNamespacesAndOwn(new FbcPkgNamespaces(level, version, pkgVersion));
 }
@@ -69,6 +70,7 @@ Association::Association(unsigned int level,
  */
 Association::Association(FbcPkgNamespaces *fbcns)
   : SBase(fbcns)
+  , mElementName("association")
 {
   setElementNamespace(fbcns->getURI());
   loadPlugins(fbcns);
@@ -80,6 +82,7 @@ Association::Association(FbcPkgNamespaces *fbcns)
  */
 Association::Association(const Association& orig)
   : SBase( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -93,6 +96,7 @@ Association::operator=(const Association& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -154,9 +158,23 @@ Association::isGeneProductRef() const
 const std::string&
 Association::getElementName() const
 {
-  static const string name = "association";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this Association object.
+ */
+void
+Association::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

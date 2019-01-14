@@ -66,6 +66,7 @@ Distribution::Distribution(unsigned int level,
                            unsigned int version,
                            unsigned int pkgVersion)
   : SBase(level, version)
+  , mElementName("distribution")
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,
     pkgVersion));
@@ -77,6 +78,7 @@ Distribution::Distribution(unsigned int level,
  */
 Distribution::Distribution(DistribPkgNamespaces *distribns)
   : SBase(distribns)
+  , mElementName("distribution")
 {
   setElementNamespace(distribns->getURI());
   loadPlugins(distribns);
@@ -88,6 +90,7 @@ Distribution::Distribution(DistribPkgNamespaces *distribns)
  */
 Distribution::Distribution(const Distribution& orig)
   : SBase( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -101,6 +104,7 @@ Distribution::operator=(const Distribution& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -252,9 +256,23 @@ Distribution::isExternalDistribution() const
 const std::string&
 Distribution::getElementName() const
 {
-  static const string name = "distribution";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this Distribution object.
+ */
+void
+Distribution::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

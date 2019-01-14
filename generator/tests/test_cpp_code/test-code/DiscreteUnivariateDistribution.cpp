@@ -64,6 +64,7 @@ DiscreteUnivariateDistribution::DiscreteUnivariateDistribution(
   : UnivariateDistribution(level, version, pkgVersion)
   , mTruncationLowerBound (NULL)
   , mTruncationUpperBound (NULL)
+  , mElementName("discreteUnivariateDistribution")
 {
   setSBMLNamespacesAndOwn(new DistribPkgNamespaces(level, version,
     pkgVersion));
@@ -80,6 +81,7 @@ DiscreteUnivariateDistribution::DiscreteUnivariateDistribution(DistribPkgNamespa
   : UnivariateDistribution(distribns)
   , mTruncationLowerBound (NULL)
   , mTruncationUpperBound (NULL)
+  , mElementName("discreteUnivariateDistribution")
 {
   setElementNamespace(distribns->getURI());
   connectToChild();
@@ -95,6 +97,7 @@ DiscreteUnivariateDistribution::DiscreteUnivariateDistribution(const
   : UnivariateDistribution( orig )
   , mTruncationLowerBound ( NULL )
   , mTruncationUpperBound ( NULL )
+  , mElementName ( orig.mElementName )
 {
   if (orig.mTruncationLowerBound != NULL)
   {
@@ -120,6 +123,7 @@ DiscreteUnivariateDistribution::operator=(const DiscreteUnivariateDistribution&
   if (&rhs != this)
   {
     UnivariateDistribution::operator=(rhs);
+    mElementName = rhs.mElementName;
     delete mTruncationLowerBound;
     if (rhs.mTruncationLowerBound != NULL)
     {
@@ -410,9 +414,23 @@ DiscreteUnivariateDistribution::isGeometricDistribution() const
 const std::string&
 DiscreteUnivariateDistribution::getElementName() const
 {
-  static const string name = "discreteUnivariateDistribution";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this DiscreteUnivariateDistribution object.
+ */
+void
+DiscreteUnivariateDistribution::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

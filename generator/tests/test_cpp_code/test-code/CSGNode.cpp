@@ -62,6 +62,7 @@ CSGNode::CSGNode(unsigned int level,
                  unsigned int version,
                  unsigned int pkgVersion)
   : SBase(level, version)
+  , mElementName("csgNode")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -73,6 +74,7 @@ CSGNode::CSGNode(unsigned int level,
  */
 CSGNode::CSGNode(SpatialPkgNamespaces *spatialns)
   : SBase(spatialns)
+  , mElementName("csgNode")
 {
   setElementNamespace(spatialns->getURI());
   loadPlugins(spatialns);
@@ -84,6 +86,7 @@ CSGNode::CSGNode(SpatialPkgNamespaces *spatialns)
  */
 CSGNode::CSGNode(const CSGNode& orig)
   : SBase( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -97,6 +100,7 @@ CSGNode::operator=(const CSGNode& rhs)
   if (&rhs != this)
   {
     SBase::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -241,9 +245,23 @@ CSGNode::isCSGSetOperator() const
 const std::string&
 CSGNode::getElementName() const
 {
-  static const string name = "csgNode";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this CSGNode object.
+ */
+void
+CSGNode::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

@@ -64,6 +64,13 @@ class GeneProductRef;
 
 class LIBSBML_EXTERN ListOfAssociations : public ListOf
 {
+protected:
+
+  /** @cond doxygenLibsbmlInternal */
+
+  std::string mElementName;
+
+  /** @endcond */
 
 public:
 
@@ -360,6 +367,17 @@ public:
    * @return the name of this element, i.e. @c "listOfAssociations".
    */
   virtual const std::string& getElementName() const;
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Sets the XML name of this ListOfAssociations object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
 
 
   /**

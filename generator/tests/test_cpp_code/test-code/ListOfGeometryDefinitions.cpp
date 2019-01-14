@@ -60,6 +60,7 @@ ListOfGeometryDefinitions::ListOfGeometryDefinitions(unsigned int level,
                                                      unsigned int version,
                                                      unsigned int pkgVersion)
   : ListOf(level, version)
+  , mElementName("listOfGeometryDefinitions")
 {
   setSBMLNamespacesAndOwn(new SpatialPkgNamespaces(level, version,
     pkgVersion));
@@ -73,6 +74,7 @@ ListOfGeometryDefinitions::ListOfGeometryDefinitions(unsigned int level,
 ListOfGeometryDefinitions::ListOfGeometryDefinitions(SpatialPkgNamespaces
   *spatialns)
   : ListOf(spatialns)
+  , mElementName("listOfGeometryDefinitions")
 {
   setElementNamespace(spatialns->getURI());
 }
@@ -84,6 +86,7 @@ ListOfGeometryDefinitions::ListOfGeometryDefinitions(SpatialPkgNamespaces
 ListOfGeometryDefinitions::ListOfGeometryDefinitions(const
   ListOfGeometryDefinitions& orig)
   : ListOf( orig )
+  , mElementName ( orig.mElementName )
 {
 }
 
@@ -97,6 +100,7 @@ ListOfGeometryDefinitions::operator=(const ListOfGeometryDefinitions& rhs)
   if (&rhs != this)
   {
     ListOf::operator=(rhs);
+    mElementName = rhs.mElementName;
   }
 
   return *this;
@@ -398,9 +402,23 @@ ListOfGeometryDefinitions::createMixedGeometry()
 const std::string&
 ListOfGeometryDefinitions::getElementName() const
 {
-  static const string name = "listOfGeometryDefinitions";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibsbmlInternal */
+
+/*
+ * Sets the XML name of this ListOfGeometryDefinitions object.
+ */
+void
+ListOfGeometryDefinitions::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*

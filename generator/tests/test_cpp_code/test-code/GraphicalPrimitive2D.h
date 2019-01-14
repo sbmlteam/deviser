@@ -96,6 +96,7 @@ protected:
 
   std::string mFill;
   FillRule_t mFillRule;
+  std::string mElementName;
 
   /** @endcond */
 
@@ -347,6 +348,17 @@ public:
    * @return the name of this element, i.e. @c "graphicalPrimitive2D".
    */
   virtual const std::string& getElementName() const;
+
+
+
+  /** @cond doxygenLibsbmlInternal */
+
+  /**
+   * Sets the XML name of this GraphicalPrimitive2D object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
 
 
   /**
