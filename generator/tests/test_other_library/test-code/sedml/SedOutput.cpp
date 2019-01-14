@@ -57,6 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedOutput::SedOutput(unsigned int level, unsigned int version)
   : SedBase(level, version)
+  , mName ("")
   , mElementName("output")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
@@ -68,6 +69,7 @@ SedOutput::SedOutput(unsigned int level, unsigned int version)
  */
 SedOutput::SedOutput(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
+  , mName ("")
   , mElementName("output")
 {
   setElementNamespace(sedmlns->getURI());
@@ -79,6 +81,7 @@ SedOutput::SedOutput(SedNamespaces *sedmlns)
  */
 SedOutput::SedOutput(const SedOutput& orig)
   : SedBase( orig )
+  , mName ( orig.mName )
   , mElementName ( orig.mElementName )
 {
 }
@@ -93,6 +96,7 @@ SedOutput::operator=(const SedOutput& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
+    mName = rhs.mName;
     mElementName = rhs.mElementName;
   }
 

@@ -59,6 +59,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
   : SedBase(level, version)
+  , mName ("")
   , mElementName("abstractTask")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
@@ -71,6 +72,7 @@ SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
  */
 SedAbstractTask::SedAbstractTask(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
+  , mName ("")
   , mElementName("abstractTask")
 {
   setElementNamespace(sedmlns->getURI());
@@ -82,6 +84,7 @@ SedAbstractTask::SedAbstractTask(SedNamespaces *sedmlns)
  */
 SedAbstractTask::SedAbstractTask(const SedAbstractTask& orig)
   : SedBase( orig )
+  , mName ( orig.mName )
   , mElementName ( orig.mElementName )
 {
 }
@@ -96,6 +99,7 @@ SedAbstractTask::operator=(const SedAbstractTask& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
+    mName = rhs.mName;
     mElementName = rhs.mElementName;
   }
 
