@@ -83,8 +83,10 @@ class Constructors():
         self.document = False
         if 'document' in class_object:
             self.document = class_object['document']
-
-
+        # we do overwrite if we have concrete
+        if not self.overwrites_children and 'concretes' in class_object:
+            if len(class_object['concretes']) > 0:
+                self.overwrites_children = True
 
     ########################################################################
 

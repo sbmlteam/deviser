@@ -102,6 +102,12 @@ class GeneralFunctions():
         self.has_math = class_object['has_math']
         self.has_array = class_object['has_array']
         self.overwrites_children = class_object['overwrites_children']
+        # we do overwrite if we have concrete
+        if not self.overwrites_children and 'concretes' in class_object:
+            if len(class_object['concretes']) > 0:
+                self.overwrites_children = True
+
+
         self.has_children = class_object['has_children']
         self.has_only_math = class_object['has_only_math']
         self.num_non_std_children = class_object['num_non_std_children']

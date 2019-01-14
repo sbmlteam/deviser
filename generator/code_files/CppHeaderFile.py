@@ -63,6 +63,10 @@ class CppHeaderFile(BaseCppFile.BaseCppFile):
         self.lv_info = []
         if 'root' in class_object and 'lv_info' in class_object['root']:
             self.lv_info = class_object['root']['lv_info']
+        # we do overwrite if we have concrete
+        if not self.overwrites_children and 'concretes' in class_object:
+            if len(class_object['concretes']) > 0:
+                self.overwrites_children = True
     ########################################################################
     # functions to determine enumerations
     def get_enum_attributes(self, class_object):
