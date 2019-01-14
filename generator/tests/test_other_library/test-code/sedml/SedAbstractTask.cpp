@@ -669,7 +669,7 @@ SedAbstractTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedDocumentLOAbstractTasksAllowedCoreAttributes,
+        log->logError(SedmlSedDocumentLOtOfAbstractTasksAllowedCoreAttributes,
           level, version, details);
       }
     }
@@ -716,7 +716,7 @@ SedAbstractTask::readAttributes(
   {
     std::string message = "Sedml attribute 'id' is missing from the "
       "<SedAbstractTask> element.";
-    log->logError(SedUnknown, level, version, message);
+    log->logError(SedmlAbstractTaskAllowedAttributes, level, version, message);
   }
 
   // 

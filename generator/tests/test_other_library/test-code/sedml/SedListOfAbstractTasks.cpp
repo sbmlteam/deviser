@@ -418,25 +418,25 @@ SedListOfAbstractTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     appendAndOwn(object);
   }
 
-  if (name == "abstractTask")
+  if (name == "task")
   {
     object = new SedTask(getSedNamespaces());
     appendAndOwn(object);
   }
 
-  if (name == "abstractTask")
+  if (name == "repeatedTask")
   {
     object = new SedRepeatedTask(getSedNamespaces());
     appendAndOwn(object);
   }
 
-  if (name == "abstractTask")
+  if (name == "parameterEstimationTask")
   {
     object = new SedParameterEstimationTask(getSedNamespaces());
     appendAndOwn(object);
   }
 
-  if (name == "abstractTask")
+  if (name == "simpleRepeatedTask")
   {
     object = new SedSimpleRepeatedTask(getSedNamespaces());
     appendAndOwn(object);

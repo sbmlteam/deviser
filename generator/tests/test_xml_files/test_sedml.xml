@@ -103,7 +103,7 @@
             <attribute name="algorithmParameter" required="false" type="lo_element" element="AlgorithmParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfTasks">
+        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfAbstractTasks">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
