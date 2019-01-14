@@ -782,7 +782,9 @@ class Constructors():
         else:
             sep = ','
         for attrib in self.attributes:
-            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+            if not self.is_plugin and global_variables.language == 'sbml' and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+                continue
+            elif global_variables.language != 'sbml' and attrib['memberName'] == 'mId':
                 continue
             elif attrib['attType'] == 'lo_element':
                 if 'recursive_child' in attrib and attrib['recursive_child']:
@@ -828,7 +830,9 @@ class Constructors():
             if 'recursive_child' in attrib and attrib['recursive_child']:
                 use_null = True
 
-            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+            if not self.is_plugin and global_variables.language == 'sbml' and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+                continue
+            elif global_variables.language != 'sbml' and attrib['memberName'] == 'mId':
                 continue
             elif attrib['isArray']:
                 constructor_args.append('{0} {1} ( NULL )'
@@ -859,7 +863,9 @@ class Constructors():
         else:
             constructor_args = []
         for attrib in self.attributes:
-            if not self.is_plugin and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+            if not self.is_plugin and global_variables.language == 'sbml' and (attrib['memberName'] == 'mId' or attrib['memberName'] == 'mName'):
+                continue
+            elif global_variables.language != 'sbml' and attrib['memberName'] == 'mId':
                 continue
             elif attrib['isArray']:
                 member = attrib['memberName']

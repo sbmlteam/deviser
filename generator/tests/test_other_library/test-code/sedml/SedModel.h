@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -414,10 +414,10 @@ public:
 
 
   /**
-   * Creates a new SedChange object, adds it to this SedModel object and
-   * returns the SedChange object created.
+   * Creates a new SedAddXML object, adds it to this SedModel object and
+   * returns the SedAddXML object created.
    *
-   * @return a new SedChange object instance.
+   * @return a new SedAddXML object instance.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -428,7 +428,79 @@ public:
    * @see removeChange(const std::string& sid)
    * @see removeChange(unsigned int n)
    */
-  SedChange* createChange();
+  SedAddXML* createAddXML();
+
+
+  /**
+   * Creates a new SedChangeXML object, adds it to this SedModel object and
+   * returns the SedChangeXML object created.
+   *
+   * @return a new SedChangeXML object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChange(const SedChange* object)
+   * @see getChange(const std::string& sid)
+   * @see getChange(unsigned int n)
+   * @see getNumChanges()
+   * @see removeChange(const std::string& sid)
+   * @see removeChange(unsigned int n)
+   */
+  SedChangeXML* createChangeXML();
+
+
+  /**
+   * Creates a new SedRemoveXML object, adds it to this SedModel object and
+   * returns the SedRemoveXML object created.
+   *
+   * @return a new SedRemoveXML object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChange(const SedChange* object)
+   * @see getChange(const std::string& sid)
+   * @see getChange(unsigned int n)
+   * @see getNumChanges()
+   * @see removeChange(const std::string& sid)
+   * @see removeChange(unsigned int n)
+   */
+  SedRemoveXML* createRemoveXML();
+
+
+  /**
+   * Creates a new SedChangeAttribute object, adds it to this SedModel object
+   * and returns the SedChangeAttribute object created.
+   *
+   * @return a new SedChangeAttribute object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChange(const SedChange* object)
+   * @see getChange(const std::string& sid)
+   * @see getChange(unsigned int n)
+   * @see getNumChanges()
+   * @see removeChange(const std::string& sid)
+   * @see removeChange(unsigned int n)
+   */
+  SedChangeAttribute* createChangeAttribute();
+
+
+  /**
+   * Creates a new SedComputeChange object, adds it to this SedModel object and
+   * returns the SedComputeChange object created.
+   *
+   * @return a new SedComputeChange object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addChange(const SedChange* object)
+   * @see getChange(const std::string& sid)
+   * @see getChange(unsigned int n)
+   * @see getNumChanges()
+   * @see removeChange(const std::string& sid)
+   * @see removeChange(unsigned int n)
+   */
+  SedComputeChange* createComputeChange();
 
 
   /**
@@ -1369,20 +1441,92 @@ SedModel_getNumChanges(SedModel_t* sm);
 
 
 /**
- * Creates a new SedChange_t object, adds it to this SedModel_t object and
- * returns the SedChange_t object created.
+ * Creates a new SedAddXML_t object, adds it to this SedModel_t object and
+ * returns the SedAddXML_t object created.
  *
- * @param sm the SedModel_t structure to which the SedChange_t should be added.
+ * @param sm the SedModel_t structure to which the SedAddXML_t should be added.
  *
- * @return a new SedChange_t object instance.
+ * @return a new SedAddXML_t object instance.
  *
  * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedModel_t
  */
 LIBSEDML_EXTERN
-SedChange_t*
-SedModel_createChange(SedModel_t* sm);
+SedAddXML_t*
+SedModel_createAddXML(SedModel_t* sm);
+
+
+/**
+ * Creates a new SedChangeXML_t object, adds it to this SedModel_t object and
+ * returns the SedChangeXML_t object created.
+ *
+ * @param sm the SedModel_t structure to which the SedChangeXML_t should be
+ * added.
+ *
+ * @return a new SedChangeXML_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedModel_t
+ */
+LIBSEDML_EXTERN
+SedChangeXML_t*
+SedModel_createChangeXML(SedModel_t* sm);
+
+
+/**
+ * Creates a new SedRemoveXML_t object, adds it to this SedModel_t object and
+ * returns the SedRemoveXML_t object created.
+ *
+ * @param sm the SedModel_t structure to which the SedRemoveXML_t should be
+ * added.
+ *
+ * @return a new SedRemoveXML_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedModel_t
+ */
+LIBSEDML_EXTERN
+SedRemoveXML_t*
+SedModel_createRemoveXML(SedModel_t* sm);
+
+
+/**
+ * Creates a new SedChangeAttribute_t object, adds it to this SedModel_t object
+ * and returns the SedChangeAttribute_t object created.
+ *
+ * @param sm the SedModel_t structure to which the SedChangeAttribute_t should
+ * be added.
+ *
+ * @return a new SedChangeAttribute_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedModel_t
+ */
+LIBSEDML_EXTERN
+SedChangeAttribute_t*
+SedModel_createChangeAttribute(SedModel_t* sm);
+
+
+/**
+ * Creates a new SedComputeChange_t object, adds it to this SedModel_t object
+ * and returns the SedComputeChange_t object created.
+ *
+ * @param sm the SedModel_t structure to which the SedComputeChange_t should be
+ * added.
+ *
+ * @return a new SedComputeChange_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedModel_t
+ */
+LIBSEDML_EXTERN
+SedComputeChange_t*
+SedModel_createComputeChange(SedModel_t* sm);
 
 
 /**

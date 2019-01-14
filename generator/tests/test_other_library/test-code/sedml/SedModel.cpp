@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -36,6 +36,10 @@
 #include <sbml/xml/XMLInputStream.h>
 
 #include <sedml/SedAddXML.h>
+#include <sedml/SedChangeXML.h>
+#include <sedml/SedRemoveXML.h>
+#include <sedml/SedChangeAttribute.h>
+#include <sedml/SedComputeChange.h>
 
 
 using namespace std;
@@ -417,28 +421,132 @@ SedModel::getNumChanges() const
 
 
 /*
- * Creates a new SedChange object, adds it to this SedModel object and returns
- * the SedChange object created.
+ * Creates a new SedAddXML object, adds it to this SedModel object and returns
+ * the SedAddXML object created.
  */
-SedChange*
-SedModel::createChange()
+SedAddXML*
+SedModel::createAddXML()
 {
-  SedChange* sc = NULL;
+  SedAddXML* saxml = NULL;
 
   try
   {
-    sc = new SedChange(getSedNamespaces());
+    saxml = new SedAddXML(getSedNamespaces());
   }
   catch (...)
   {
   }
 
-  if (sc != NULL)
+  if (saxml != NULL)
   {
-    mChanges.appendAndOwn(sc);
+    mChanges.appendAndOwn(saxml);
   }
 
-  return sc;
+  return saxml;
+}
+
+
+/*
+ * Creates a new SedChangeXML object, adds it to this SedModel object and
+ * returns the SedChangeXML object created.
+ */
+SedChangeXML*
+SedModel::createChangeXML()
+{
+  SedChangeXML* scxml = NULL;
+
+  try
+  {
+    scxml = new SedChangeXML(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (scxml != NULL)
+  {
+    mChanges.appendAndOwn(scxml);
+  }
+
+  return scxml;
+}
+
+
+/*
+ * Creates a new SedRemoveXML object, adds it to this SedModel object and
+ * returns the SedRemoveXML object created.
+ */
+SedRemoveXML*
+SedModel::createRemoveXML()
+{
+  SedRemoveXML* srxml = NULL;
+
+  try
+  {
+    srxml = new SedRemoveXML(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (srxml != NULL)
+  {
+    mChanges.appendAndOwn(srxml);
+  }
+
+  return srxml;
+}
+
+
+/*
+ * Creates a new SedChangeAttribute object, adds it to this SedModel object and
+ * returns the SedChangeAttribute object created.
+ */
+SedChangeAttribute*
+SedModel::createChangeAttribute()
+{
+  SedChangeAttribute* sca = NULL;
+
+  try
+  {
+    sca = new SedChangeAttribute(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sca != NULL)
+  {
+    mChanges.appendAndOwn(sca);
+  }
+
+  return sca;
+}
+
+
+/*
+ * Creates a new SedComputeChange object, adds it to this SedModel object and
+ * returns the SedComputeChange object created.
+ */
+SedComputeChange*
+SedModel::createComputeChange()
+{
+  SedComputeChange* scc = NULL;
+
+  try
+  {
+    scc = new SedComputeChange(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (scc != NULL)
+  {
+    mChanges.appendAndOwn(scc);
+  }
+
+  return scc;
 }
 
 
@@ -866,6 +974,22 @@ SedModel::createChildObject(const std::string& elementName)
   {
     return createAddXML();
   }
+  else if (elementName == "changeXML")
+  {
+    return createChangeXML();
+  }
+  else if (elementName == "removeXML")
+  {
+    return createRemoveXML();
+  }
+  else if (elementName == "changeAttribute")
+  {
+    return createChangeAttribute();
+  }
+  else if (elementName == "computeChange")
+  {
+    return createComputeChange();
+  }
 
   return obj;
 }
@@ -884,6 +1008,26 @@ SedModel::addChildObject(const std::string& elementName,
                          const SedBase* element)
 {
   if (elementName == "addXML" && element->getTypeCode() == SEDML_ADDXML)
+  {
+    return addChange((const SedChange*)(element));
+  }
+  else if (elementName == "changeXML" && element->getTypeCode() ==
+    SEDML_CHANGE_CHANGEXML)
+  {
+    return addChange((const SedChange*)(element));
+  }
+  else if (elementName == "removeXML" && element->getTypeCode() ==
+    SEDML_CHANGE_REMOVEXML)
+  {
+    return addChange((const SedChange*)(element));
+  }
+  else if (elementName == "changeAttribute" && element->getTypeCode() ==
+    SEDML_SEDML_CHANGEATTRIBUTE)
+  {
+    return addChange((const SedChange*)(element));
+  }
+  else if (elementName == "computeChange" && element->getTypeCode() ==
+    SEDML_COMPUTECHANGE)
   {
     return addChange((const SedChange*)(element));
   }
@@ -906,6 +1050,46 @@ SedModel::removeChildObject(const std::string& elementName,
                             const std::string& id)
 {
   if (elementName == "addXML")
+  {
+    for (unsigned int i = 0; i < getNumChanges(); i++)
+    {
+      if (getChange(i)->getId() == id)
+      {
+        return removeChange(i);
+      }
+    }
+  }
+  else if (elementName == "changeXML")
+  {
+    for (unsigned int i = 0; i < getNumChanges(); i++)
+    {
+      if (getChange(i)->getId() == id)
+      {
+        return removeChange(i);
+      }
+    }
+  }
+  else if (elementName == "removeXML")
+  {
+    for (unsigned int i = 0; i < getNumChanges(); i++)
+    {
+      if (getChange(i)->getId() == id)
+      {
+        return removeChange(i);
+      }
+    }
+  }
+  else if (elementName == "changeAttribute")
+  {
+    for (unsigned int i = 0; i < getNumChanges(); i++)
+    {
+      if (getChange(i)->getId() == id)
+      {
+        return removeChange(i);
+      }
+    }
+  }
+  else if (elementName == "computeChange")
   {
     for (unsigned int i = 0; i < getNumChanges(); i++)
     {
@@ -1506,14 +1690,62 @@ SedModel_getNumChanges(SedModel_t* sm)
 
 
 /*
- * Creates a new SedChange_t object, adds it to this SedModel_t object and
- * returns the SedChange_t object created.
+ * Creates a new SedAddXML_t object, adds it to this SedModel_t object and
+ * returns the SedAddXML_t object created.
  */
 LIBSEDML_EXTERN
-SedChange_t*
-SedModel_createChange(SedModel_t* sm)
+SedAddXML_t*
+SedModel_createAddXML(SedModel_t* sm)
 {
-  return (sm != NULL) ? sm->createChange() : NULL;
+  return (sm != NULL) ? sm->createAddXML() : NULL;
+}
+
+
+/*
+ * Creates a new SedChangeXML_t object, adds it to this SedModel_t object and
+ * returns the SedChangeXML_t object created.
+ */
+LIBSEDML_EXTERN
+SedChangeXML_t*
+SedModel_createChangeXML(SedModel_t* sm)
+{
+  return (sm != NULL) ? sm->createChangeXML() : NULL;
+}
+
+
+/*
+ * Creates a new SedRemoveXML_t object, adds it to this SedModel_t object and
+ * returns the SedRemoveXML_t object created.
+ */
+LIBSEDML_EXTERN
+SedRemoveXML_t*
+SedModel_createRemoveXML(SedModel_t* sm)
+{
+  return (sm != NULL) ? sm->createRemoveXML() : NULL;
+}
+
+
+/*
+ * Creates a new SedChangeAttribute_t object, adds it to this SedModel_t object
+ * and returns the SedChangeAttribute_t object created.
+ */
+LIBSEDML_EXTERN
+SedChangeAttribute_t*
+SedModel_createChangeAttribute(SedModel_t* sm)
+{
+  return (sm != NULL) ? sm->createChangeAttribute() : NULL;
+}
+
+
+/*
+ * Creates a new SedComputeChange_t object, adds it to this SedModel_t object
+ * and returns the SedComputeChange_t object created.
+ */
+LIBSEDML_EXTERN
+SedComputeChange_t*
+SedModel_createComputeChange(SedModel_t* sm)
+{
+  return (sm != NULL) ? sm->createComputeChange() : NULL;
 }
 
 
