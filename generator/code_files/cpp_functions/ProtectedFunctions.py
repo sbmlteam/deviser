@@ -1279,7 +1279,7 @@ class ProtectedFunctions():
                 class_name = '{0}LO{1}'.format(self.parent_class,
                                                self.class_name[6:])
             else:
-                class_name = self.class_name
+                class_name = strFunctions.remove_prefix(self.class_name)
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
