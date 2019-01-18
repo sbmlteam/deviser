@@ -326,91 +326,91 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20201
-  { SedmlSedDocumentAllowedCoreAttributes,
-    "Core attributes allowed on <sedDocument>.",
+  { SedmlDocumentAllowedCoreAttributes,
+    "Core attributes allowed on <document>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level 3 Core attributes "
+    "A <document> object may have the optional SBML Level 3 Core attributes "
     "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedDocument>.",
+    "namespaces are permitted on a <document>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20202
-  { SedmlSedDocumentAllowedCoreElements,
-    "Core elements allowed on <sedDocument>.",
+  { SedmlDocumentAllowedCoreElements,
+    "Core elements allowed on <document>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may have the optional SBML Level 3 Core subobjects "
-    "for notes and annotations. No other elements from the SBML Level 3 Core "
-    "namespaces are permitted on a <sedDocument>.",
+    "A <document> object may have the optional SBML Level 3 Core subobjects for "
+    "notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on a <document>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20203
-  { SedmlSedDocumentAllowedAttributes,
-    "Attributes allowed on <sedDocument>.",
+  { SedmlDocumentAllowedAttributes,
+    "Attributes allowed on <document>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object must have the required attributes 'sedml:level' and "
+    "A <document> object must have the required attributes 'sedml:level' and "
     "'sedml:version'. No other attributes from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <sedDocument> object. ",
+    "namespaces are permitted on a <document> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20204
-  { SedmlSedDocumentAllowedElements,
-    "Elements allowed on <sedDocument>.",
+  { SedmlDocumentAllowedElements,
+    "Elements allowed on <document>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <sedDocument> object may contain one and only one instance of each of "
-    "the <listOfSimulations,> <listOfModels,> <listOfAbstractTasks,> "
-    "<listOfDataGenerators,> <listOfOutputs> and <listOfDataDescriptions> "
+    "A <document> object may contain one and only one instance of each of the "
+    "<listOfDataDescriptions,> <listOfModels,> <listOfSimulations,> "
+    "<listOfAbstractTasks,> <listOfDataGenerators> and <listOfOutputs> "
     "elements. No other elements from the SBML Level 3 SEDML namespaces are "
-    "permitted on a <sedDocument> object. ",
+    "permitted on a <document> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20205
-  { SedmlSedDocumentLevelMustBeInteger,
+  { SedmlDocumentLevelMustBeInteger,
     "The 'level' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:level' on a <sedDocument> must have a value of data "
-    "type 'integer'.",
+    "The attribute 'sedml:level' on a <document> must have a value of data type "
+    "'integer'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20206
-  { SedmlSedDocumentVersionMustBeInteger,
+  { SedmlDocumentVersionMustBeInteger,
     "The 'version' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:version' on a <sedDocument> must have a value of data "
+    "The attribute 'sedml:version' on a <document> must have a value of data "
     "type 'integer'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20207
-  { SedmlSedDocumentLOSimulationsAllowedCoreElements,
-    "Core elements allowed on <listOfSimulations>.",
+  { SedmlDocumentLODataDescriptionsAllowedCoreElements,
+    "Core elements allowed on <listOfDataDescriptions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfSimulations> container object may only contain "
-    "<simulation> objects.",
+    "SBML objects, a <listOfDataDescriptions> container object may only contain "
+    "<dataDescription> objects.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20208
-  { SedmlSedDocumentLOModelsAllowedCoreElements,
+  { SedmlDocumentLOModelsAllowedCoreElements,
     "Core elements allowed on <listOfModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -422,7 +422,19 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20209
-  { SedmlSedDocumentLOAbstractTasksAllowedCoreElements,
+  { SedmlDocumentLOSimulationsAllowedCoreElements,
+    "Core elements allowed on <listOfSimulations>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "Apart from the general notes and annotations subobjects permitted on all "
+    "SBML objects, a <listOfSimulations> container object may only contain "
+    "<simulation> objects.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20210
+  { SedmlDocumentLOAbstractTasksAllowedCoreElements,
     "Core elements allowed on <listOfAbstractTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -433,8 +445,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20210
-  { SedmlSedDocumentLODataGeneratorsAllowedCoreElements,
+  // 20211
+  { SedmlDocumentLODataGeneratorsAllowedCoreElements,
     "Core elements allowed on <listOfDataGenerators>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -445,8 +457,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20211
-  { SedmlSedDocumentLOOutputsAllowedCoreElements,
+  // 20212
+  { SedmlDocumentLOOutputsAllowedCoreElements,
     "Core elements allowed on <listOfOutputs>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -457,32 +469,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20212
-  { SedmlSedDocumentLODataDescriptionsAllowedCoreElements,
-    "Core elements allowed on <listOfDataDescriptions>.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfDataDescriptions> container object may only contain "
-    "<dataDescription> objects.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
   // 20213
-  { SedmlSedDocumentLOSimulationsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfSimulations>.",
+  { SedmlDocumentLODataDescriptionsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfDataDescriptions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <listOfSimulations> object may have the optional SBML Level 3 Core "
+    "A <listOfDataDescriptions> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfSimulations> object.",
+    "3 Core namespaces are permitted on a <listOfDataDescriptions> object.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20214
-  { SedmlSedDocumentLOModelsAllowedCoreAttributes,
+  { SedmlDocumentLOModelsAllowedCoreAttributes,
     "Core attributes allowed on <listOfModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -494,7 +494,19 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20215
-  { SedmlSedDocumentLOAbstractTasksAllowedCoreAttributes,
+  { SedmlDocumentLOSimulationsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfSimulations>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <listOfSimulations> object may have the optional SBML Level 3 Core "
+    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
+    "3 Core namespaces are permitted on a <listOfSimulations> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20216
+  { SedmlDocumentLOAbstractTasksAllowedCoreAttributes,
     "Core attributes allowed on <listOfAbstractTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -505,8 +517,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20216
-  { SedmlSedDocumentLODataGeneratorsAllowedCoreAttributes,
+  // 20217
+  { SedmlDocumentLODataGeneratorsAllowedCoreAttributes,
     "Core attributes allowed on <listOfDataGenerators>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -517,8 +529,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20217
-  { SedmlSedDocumentLOOutputsAllowedCoreAttributes,
+  // 20218
+  { SedmlDocumentLOOutputsAllowedCoreAttributes,
     "Core attributes allowed on <listOfOutputs>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -529,20 +541,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20218
-  { SedmlSedDocumentLODataDescriptionsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfDataDescriptions>.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <listOfDataDescriptions> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfDataDescriptions> object.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
   // 20301
-  { SedmlSedModelAllowedCoreAttributes,
+  { SedmlModelAllowedCoreAttributes,
     "Core attributes allowed on <model>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -554,7 +554,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20302
-  { SedmlSedModelAllowedCoreElements,
+  { SedmlModelAllowedCoreElements,
     "Core elements allowed on <model>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -566,7 +566,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20303
-  { SedmlSedModelAllowedAttributes,
+  { SedmlModelAllowedAttributes,
     "Attributes allowed on <model>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -579,7 +579,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20304
-  { SedmlSedModelAllowedElements,
+  { SedmlModelAllowedElements,
     "Elements allowed on <model>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -591,7 +591,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20305
-  { SedmlSedModelSourceMustBeString,
+  { SedmlModelSourceMustBeString,
     "The 'source' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -602,7 +602,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20306
-  { SedmlSedModelNameMustBeString,
+  { SedmlModelNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -613,7 +613,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20307
-  { SedmlSedModelLanguageMustBeString,
+  { SedmlModelLanguageMustBeString,
     "The 'language' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -624,7 +624,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20308
-  { SedmlSedModelLOChangesAllowedCoreElements,
+  { SedmlModelLOChangesAllowedCoreElements,
     "Core elements allowed on <listOfChanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -636,7 +636,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20309
-  { SedmlSedModelLOChangesAllowedCoreAttributes,
+  { SedmlModelLOChangesAllowedCoreAttributes,
     "Core attributes allowed on <listOfChanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -648,7 +648,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20401
-  { SedmlSedChangeAllowedCoreAttributes,
+  { SedmlChangeAllowedCoreAttributes,
     "Core attributes allowed on <change>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -660,7 +660,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20402
-  { SedmlSedChangeAllowedCoreElements,
+  { SedmlChangeAllowedCoreElements,
     "Core elements allowed on <change>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -672,7 +672,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20403
-  { SedmlSedChangeAllowedAttributes,
+  { SedmlChangeAllowedAttributes,
     "Attributes allowed on <change>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -684,7 +684,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20404
-  { SedmlSedChangeTargetMustBeString,
+  { SedmlChangeTargetMustBeString,
     "The 'target' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -695,7 +695,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20501
-  { SedmlSedAddXMLAllowedCoreAttributes,
+  { SedmlAddXMLAllowedCoreAttributes,
     "Core attributes allowed on <addXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -707,7 +707,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20502
-  { SedmlSedAddXMLAllowedCoreElements,
+  { SedmlAddXMLAllowedCoreElements,
     "Core elements allowed on <addXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -719,7 +719,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20503
-  { SedmlSedAddXMLAllowedElements,
+  { SedmlAddXMLAllowedElements,
     "Elements allowed on <addXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -731,7 +731,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20601
-  { SedmlSedChangeAttributeAllowedCoreAttributes,
+  { SedmlChangeAttributeAllowedCoreAttributes,
     "Core attributes allowed on <changeAttribute>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -743,7 +743,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20602
-  { SedmlSedChangeAttributeAllowedCoreElements,
+  { SedmlChangeAttributeAllowedCoreElements,
     "Core elements allowed on <changeAttribute>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -755,7 +755,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20603
-  { SedmlSedChangeAttributeAllowedAttributes,
+  { SedmlChangeAttributeAllowedAttributes,
     "Attributes allowed on <changeAttribute>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -767,7 +767,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20604
-  { SedmlSedChangeAttributeNewValueMustBeString,
+  { SedmlChangeAttributeNewValueMustBeString,
     "The 'newValue' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -778,7 +778,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20701
-  { SedmlSedVariableAllowedCoreAttributes,
+  { SedmlVariableAllowedCoreAttributes,
     "Core attributes allowed on <variable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -790,7 +790,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20702
-  { SedmlSedVariableAllowedCoreElements,
+  { SedmlVariableAllowedCoreElements,
     "Core elements allowed on <variable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -802,7 +802,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20703
-  { SedmlSedVariableAllowedAttributes,
+  { SedmlVariableAllowedAttributes,
     "Attributes allowed on <variable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -815,7 +815,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20704
-  { SedmlSedVariableAllowedElements,
+  { SedmlVariableAllowedElements,
     "Elements allowed on <variable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -827,7 +827,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20705
-  { SedmlSedVariableNameMustBeString,
+  { SedmlVariableNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -838,7 +838,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20706
-  { SedmlSedVariableSymbolMustBeString,
+  { SedmlVariableSymbolMustBeString,
     "The 'symbol' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -849,7 +849,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20707
-  { SedmlSedVariableTargetMustBeString,
+  { SedmlVariableTargetMustBeString,
     "The 'target' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -860,7 +860,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20708
-  { SedmlSedVariableTaskReferenceMustBeTask,
+  { SedmlVariableTaskReferenceMustBeTask,
     "The attribute 'taskReference' must point to Task object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -872,7 +872,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20709
-  { SedmlSedVariableModelReferenceMustBeModel,
+  { SedmlVariableModelReferenceMustBeModel,
     "The attribute 'modelReference' must point to Model object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -884,7 +884,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20710
-  { SedmlSedVariableLORemainingDimensionsAllowedCoreElements,
+  { SedmlVariableLORemainingDimensionsAllowedCoreElements,
     "Core elements allowed on <listOfRemainingDimensions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -896,7 +896,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20711
-  { SedmlSedVariableLORemainingDimensionsAllowedCoreAttributes,
+  { SedmlVariableLORemainingDimensionsAllowedCoreAttributes,
     "Core attributes allowed on <listOfRemainingDimensions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -909,7 +909,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20801
-  { SedmlSedParameterAllowedCoreAttributes,
+  { SedmlParameterAllowedCoreAttributes,
     "Core attributes allowed on <parameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -921,7 +921,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20802
-  { SedmlSedParameterAllowedCoreElements,
+  { SedmlParameterAllowedCoreElements,
     "Core elements allowed on <parameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -933,7 +933,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20803
-  { SedmlSedParameterAllowedAttributes,
+  { SedmlParameterAllowedAttributes,
     "Attributes allowed on <parameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -946,7 +946,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20804
-  { SedmlSedParameterValueMustBeDouble,
+  { SedmlParameterValueMustBeDouble,
     "The 'value' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -957,7 +957,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20805
-  { SedmlSedParameterNameMustBeString,
+  { SedmlParameterNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -968,7 +968,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20901
-  { SedmlSedSimulationAllowedCoreAttributes,
+  { SedmlSimulationAllowedCoreAttributes,
     "Core attributes allowed on <simulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -980,7 +980,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20902
-  { SedmlSedSimulationAllowedCoreElements,
+  { SedmlSimulationAllowedCoreElements,
     "Core elements allowed on <simulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -992,7 +992,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20903
-  { SedmlSedSimulationAllowedAttributes,
+  { SedmlSimulationAllowedAttributes,
     "Attributes allowed on <simulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1004,7 +1004,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20904
-  { SedmlSedSimulationAllowedElements,
+  { SedmlSimulationAllowedElements,
     "Elements allowed on <simulation>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1016,7 +1016,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20905
-  { SedmlSedSimulationNameMustBeString,
+  { SedmlSimulationNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1027,7 +1027,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21001
-  { SedmlSedUniformTimeCourseAllowedCoreAttributes,
+  { SedmlUniformTimeCourseAllowedCoreAttributes,
     "Core attributes allowed on <uniformTimeCourse>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1039,7 +1039,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21002
-  { SedmlSedUniformTimeCourseAllowedCoreElements,
+  { SedmlUniformTimeCourseAllowedCoreElements,
     "Core elements allowed on <uniformTimeCourse>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1051,7 +1051,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21003
-  { SedmlSedUniformTimeCourseAllowedAttributes,
+  { SedmlUniformTimeCourseAllowedAttributes,
     "Attributes allowed on <uniformTimeCourse>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1065,7 +1065,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21004
-  { SedmlSedUniformTimeCourseInitialTimeMustBeDouble,
+  { SedmlUniformTimeCourseInitialTimeMustBeDouble,
     "The 'initialTime' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1076,7 +1076,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21005
-  { SedmlSedUniformTimeCourseOutputStartTimeMustBeDouble,
+  { SedmlUniformTimeCourseOutputStartTimeMustBeDouble,
     "The 'outputStartTime' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1087,7 +1087,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21006
-  { SedmlSedUniformTimeCourseOutputEndTimeMustBeDouble,
+  { SedmlUniformTimeCourseOutputEndTimeMustBeDouble,
     "The 'outputEndTime' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1098,7 +1098,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21007
-  { SedmlSedUniformTimeCourseNumberOfPointsMustBeInteger,
+  { SedmlUniformTimeCourseNumberOfPointsMustBeInteger,
     "The 'numberOfPoints' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1109,7 +1109,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21008
-  { SedmlSedUniformTimeCourseNumberOfStepsMustBeInteger,
+  { SedmlUniformTimeCourseNumberOfStepsMustBeInteger,
     "The 'numberOfSteps' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1120,7 +1120,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21101
-  { SedmlSedAlgorithmAllowedCoreAttributes,
+  { SedmlAlgorithmAllowedCoreAttributes,
     "Core attributes allowed on <algorithm>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1132,7 +1132,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21102
-  { SedmlSedAlgorithmAllowedCoreElements,
+  { SedmlAlgorithmAllowedCoreElements,
     "Core elements allowed on <algorithm>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1144,7 +1144,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21103
-  { SedmlSedAlgorithmAllowedAttributes,
+  { SedmlAlgorithmAllowedAttributes,
     "Attributes allowed on <algorithm>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1156,7 +1156,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21104
-  { SedmlSedAlgorithmAllowedElements,
+  { SedmlAlgorithmAllowedElements,
     "Elements allowed on <algorithm>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1168,7 +1168,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21105
-  { SedmlSedAlgorithmKisaoIDMustBeString,
+  { SedmlAlgorithmKisaoIDMustBeString,
     "The 'kisaoID' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1179,7 +1179,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21106
-  { SedmlSedAlgorithmLOAlgorithmParametersAllowedCoreElements,
+  { SedmlAlgorithmLOAlgorithmParametersAllowedCoreElements,
     "Core elements allowed on <listOfAlgorithmParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1191,7 +1191,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21107
-  { SedmlSedAlgorithmLOAlgorithmParametersAllowedCoreAttributes,
+  { SedmlAlgorithmLOAlgorithmParametersAllowedCoreAttributes,
     "Core attributes allowed on <listOfAlgorithmParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1204,7 +1204,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21201
-  { SedmlSedAbstractTaskAllowedCoreAttributes,
+  { SedmlAbstractTaskAllowedCoreAttributes,
     "Core attributes allowed on <abstractTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1216,7 +1216,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21202
-  { SedmlSedAbstractTaskAllowedCoreElements,
+  { SedmlAbstractTaskAllowedCoreElements,
     "Core elements allowed on <abstractTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1228,7 +1228,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21203
-  { SedmlSedAbstractTaskAllowedAttributes,
+  { SedmlAbstractTaskAllowedAttributes,
     "Attributes allowed on <abstractTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1240,7 +1240,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21204
-  { SedmlSedAbstractTaskNameMustBeString,
+  { SedmlAbstractTaskNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1251,7 +1251,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21301
-  { SedmlSedTaskAllowedCoreAttributes,
+  { SedmlTaskAllowedCoreAttributes,
     "Core attributes allowed on <task>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1263,7 +1263,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21302
-  { SedmlSedTaskAllowedCoreElements,
+  { SedmlTaskAllowedCoreElements,
     "Core elements allowed on <task>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1275,7 +1275,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21303
-  { SedmlSedTaskAllowedAttributes,
+  { SedmlTaskAllowedAttributes,
     "Attributes allowed on <task>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1287,7 +1287,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21304
-  { SedmlSedTaskModelReferenceMustBeModel,
+  { SedmlTaskModelReferenceMustBeModel,
     "The attribute 'modelReference' must point to Model object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1299,7 +1299,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21305
-  { SedmlSedTaskSimulationReferenceMustBeSimulation,
+  { SedmlTaskSimulationReferenceMustBeSimulation,
     "The attribute 'simulationReference' must point to Simulation object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1311,7 +1311,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21401
-  { SedmlSedDataGeneratorAllowedCoreAttributes,
+  { SedmlDataGeneratorAllowedCoreAttributes,
     "Core attributes allowed on <dataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1323,7 +1323,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21402
-  { SedmlSedDataGeneratorAllowedCoreElements,
+  { SedmlDataGeneratorAllowedCoreElements,
     "Core elements allowed on <dataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1335,7 +1335,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21403
-  { SedmlSedDataGeneratorAllowedAttributes,
+  { SedmlDataGeneratorAllowedAttributes,
     "Attributes allowed on <dataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1347,7 +1347,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21404
-  { SedmlSedDataGeneratorAllowedElements,
+  { SedmlDataGeneratorAllowedElements,
     "Elements allowed on <dataGenerator>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1360,7 +1360,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21405
-  { SedmlSedDataGeneratorNameMustBeString,
+  { SedmlDataGeneratorNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1371,7 +1371,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21406
-  { SedmlSedDataGeneratorLOVariablesAllowedCoreElements,
+  { SedmlDataGeneratorLOVariablesAllowedCoreElements,
     "Core elements allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1383,7 +1383,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21407
-  { SedmlSedDataGeneratorLOParametersAllowedCoreElements,
+  { SedmlDataGeneratorLOParametersAllowedCoreElements,
     "Core elements allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1395,7 +1395,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21408
-  { SedmlSedDataGeneratorLOVariablesAllowedCoreAttributes,
+  { SedmlDataGeneratorLOVariablesAllowedCoreAttributes,
     "Core attributes allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1407,7 +1407,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21409
-  { SedmlSedDataGeneratorLOParametersAllowedCoreAttributes,
+  { SedmlDataGeneratorLOParametersAllowedCoreAttributes,
     "Core attributes allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1419,7 +1419,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21501
-  { SedmlSedOutputAllowedCoreAttributes,
+  { SedmlOutputAllowedCoreAttributes,
     "Core attributes allowed on <output>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1431,7 +1431,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21502
-  { SedmlSedOutputAllowedCoreElements,
+  { SedmlOutputAllowedCoreElements,
     "Core elements allowed on <output>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1443,7 +1443,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21503
-  { SedmlSedOutputAllowedAttributes,
+  { SedmlOutputAllowedAttributes,
     "Attributes allowed on <output>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1455,7 +1455,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21504
-  { SedmlSedOutputNameMustBeString,
+  { SedmlOutputNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1466,7 +1466,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21601
-  { SedmlSedPlotAllowedCoreAttributes,
+  { SedmlPlotAllowedCoreAttributes,
     "Core attributes allowed on <plot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1478,7 +1478,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21602
-  { SedmlSedPlotAllowedCoreElements,
+  { SedmlPlotAllowedCoreElements,
     "Core elements allowed on <plot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1490,7 +1490,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21603
-  { SedmlSedPlotAllowedAttributes,
+  { SedmlPlotAllowedAttributes,
     "Attributes allowed on <plot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1502,7 +1502,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21604
-  { SedmlSedPlotAllowedElements,
+  { SedmlPlotAllowedElements,
     "Elements allowed on <plot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1514,7 +1514,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21605
-  { SedmlSedPlotLegendMustBeBoolean,
+  { SedmlPlotLegendMustBeBoolean,
     "The 'legend' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1525,7 +1525,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21606
-  { SedmlSedPlotHeightMustBeDouble,
+  { SedmlPlotHeightMustBeDouble,
     "The 'height' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1536,7 +1536,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21607
-  { SedmlSedPlotWidthMustBeDouble,
+  { SedmlPlotWidthMustBeDouble,
     "The 'width' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1547,7 +1547,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21701
-  { SedmlSedPlot2DAllowedCoreAttributes,
+  { SedmlPlot2DAllowedCoreAttributes,
     "Core attributes allowed on <plot2D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1559,7 +1559,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21702
-  { SedmlSedPlot2DAllowedCoreElements,
+  { SedmlPlot2DAllowedCoreElements,
     "Core elements allowed on <plot2D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1571,7 +1571,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21703
-  { SedmlSedPlot2DAllowedElements,
+  { SedmlPlot2DAllowedElements,
     "Elements allowed on <plot2D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1583,7 +1583,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21704
-  { SedmlSedPlot2DLOAbstractCurvesAllowedCoreElements,
+  { SedmlPlot2DLOAbstractCurvesAllowedCoreElements,
     "Core elements allowed on <listOfAbstractCurves>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1595,7 +1595,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21705
-  { SedmlSedPlot2DLOAbstractCurvesAllowedCoreAttributes,
+  { SedmlPlot2DLOAbstractCurvesAllowedCoreAttributes,
     "Core attributes allowed on <listOfAbstractCurves>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1607,7 +1607,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21801
-  { SedmlSedPlot3DAllowedCoreAttributes,
+  { SedmlPlot3DAllowedCoreAttributes,
     "Core attributes allowed on <plot3D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1619,7 +1619,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21802
-  { SedmlSedPlot3DAllowedCoreElements,
+  { SedmlPlot3DAllowedCoreElements,
     "Core elements allowed on <plot3D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1631,7 +1631,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21803
-  { SedmlSedPlot3DAllowedElements,
+  { SedmlPlot3DAllowedElements,
     "Elements allowed on <plot3D>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1643,7 +1643,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21804
-  { SedmlSedPlot3DLOSurfacesAllowedCoreElements,
+  { SedmlPlot3DLOSurfacesAllowedCoreElements,
     "Core elements allowed on <listOfSurfaces>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1655,7 +1655,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21805
-  { SedmlSedPlot3DLOSurfacesAllowedCoreAttributes,
+  { SedmlPlot3DLOSurfacesAllowedCoreAttributes,
     "Core attributes allowed on <listOfSurfaces>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1667,7 +1667,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21901
-  { SedmlSedAbstractCurveAllowedCoreAttributes,
+  { SedmlAbstractCurveAllowedCoreAttributes,
     "Core attributes allowed on <abstractCurve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1679,7 +1679,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21902
-  { SedmlSedAbstractCurveAllowedCoreElements,
+  { SedmlAbstractCurveAllowedCoreElements,
     "Core elements allowed on <abstractCurve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1691,7 +1691,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21903
-  { SedmlSedAbstractCurveAllowedAttributes,
+  { SedmlAbstractCurveAllowedAttributes,
     "Attributes allowed on <abstractCurve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1704,7 +1704,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21904
-  { SedmlSedAbstractCurveNameMustBeString,
+  { SedmlAbstractCurveNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1715,7 +1715,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21905
-  { SedmlSedAbstractCurveLogXMustBeBoolean,
+  { SedmlAbstractCurveLogXMustBeBoolean,
     "The 'logX' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1726,7 +1726,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21906
-  { SedmlSedAbstractCurveOrderMustBeInteger,
+  { SedmlAbstractCurveOrderMustBeInteger,
     "The 'order' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1737,7 +1737,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21907
-  { SedmlSedAbstractCurveStyleMustBeStyle,
+  { SedmlAbstractCurveStyleMustBeStyle,
     "The attribute 'style' must point to Style object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1749,7 +1749,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21908
-  { SedmlSedAbstractCurveYAxisMustBeString,
+  { SedmlAbstractCurveYAxisMustBeString,
     "The 'yAxis' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1760,7 +1760,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21909
-  { SedmlSedAbstractCurveXDataReferenceMustBeDataReference,
+  { SedmlAbstractCurveXDataReferenceMustBeDataReference,
     "The attribute 'xDataReference' must point to DataReference object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1772,7 +1772,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22001
-  { SedmlSedCurveAllowedCoreAttributes,
+  { SedmlCurveAllowedCoreAttributes,
     "Core attributes allowed on <curve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1784,7 +1784,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22002
-  { SedmlSedCurveAllowedCoreElements,
+  { SedmlCurveAllowedCoreElements,
     "Core elements allowed on <curve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1796,7 +1796,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22003
-  { SedmlSedCurveAllowedAttributes,
+  { SedmlCurveAllowedAttributes,
     "Attributes allowed on <curve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1810,7 +1810,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22004
-  { SedmlSedCurveLogYMustBeBoolean,
+  { SedmlCurveLogYMustBeBoolean,
     "The 'logY' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1821,7 +1821,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22005
-  { SedmlSedCurveYDataReferenceMustBeDataGenerator,
+  { SedmlCurveYDataReferenceMustBeDataGenerator,
     "The attribute 'yDataReference' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1833,20 +1833,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22006
-  { SedmlSedCurveTypeMustBeCurveKindEnum,
-    "The 'type' attribute must be CurveKindEnum.",
+  { SedmlCurveTypeMustBeCurveTypeEnum,
+    "The 'type' attribute must be CurveTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:type' of a <curve> object must conform "
-    "to the syntax of SBML data type 'CurveKind' and may only take on the "
-    "allowed values of 'CurveKind' defined in SBML; that is, the value must be "
+    "to the syntax of SBML data type 'CurveType' and may only take on the "
+    "allowed values of 'CurveType' defined in SBML; that is, the value must be "
     "one of the following: 'points', 'bar' or 'barStacked'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 22007
-  { SedmlSedCurveXErrorUpperMustBeDataGenerator,
+  { SedmlCurveXErrorUpperMustBeDataGenerator,
     "The attribute 'xErrorUpper' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1858,7 +1858,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22008
-  { SedmlSedCurveXErrorLowerMustBeDataGenerator,
+  { SedmlCurveXErrorLowerMustBeDataGenerator,
     "The attribute 'xErrorLower' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1870,7 +1870,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22009
-  { SedmlSedCurveYErrorUpperMustBeDataGenerator,
+  { SedmlCurveYErrorUpperMustBeDataGenerator,
     "The attribute 'yErrorUpper' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1882,7 +1882,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22010
-  { SedmlSedCurveYErrorLowerMustBeDataGenerator,
+  { SedmlCurveYErrorLowerMustBeDataGenerator,
     "The attribute 'yErrorLower' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1894,7 +1894,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22101
-  { SedmlSedSurfaceAllowedCoreAttributes,
+  { SedmlSurfaceAllowedCoreAttributes,
     "Core attributes allowed on <surface>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1906,7 +1906,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22102
-  { SedmlSedSurfaceAllowedCoreElements,
+  { SedmlSurfaceAllowedCoreElements,
     "Core elements allowed on <surface>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1918,19 +1918,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22103
-  { SedmlSedSurfaceAllowedAttributes,
+  { SedmlSurfaceAllowedAttributes,
     "Attributes allowed on <surface>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <surface> object must have the required attributes 'sedml:logZ' and "
-    "'sedml:zDataReference'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:zDataReference', and may have the optional attribute "
+    "'sedml:surfaceType'. No other attributes from the SBML Level 3 SEDML "
     "namespaces are permitted on a <surface> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 22104
-  { SedmlSedSurfaceLogZMustBeBoolean,
+  { SedmlSurfaceLogZMustBeBoolean,
     "The 'logZ' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1941,7 +1942,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22105
-  { SedmlSedSurfaceZDataReferenceMustBeDataGenerator,
+  { SedmlSurfaceZDataReferenceMustBeDataGenerator,
     "The attribute 'zDataReference' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1952,8 +1953,22 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 22106
+  { SedmlSurfaceSurfaceTypeMustBeSurfaceTypeEnum,
+    "The 'surfaceType' attribute must be SurfaceTypeEnum.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:surfaceType' of a <surface> object must "
+    "conform to the syntax of SBML data type 'SurfaceType' and may only take on "
+    "the allowed values of 'SurfaceType' defined in SBML; that is, the value "
+    "must be one of the following: 'parametricCurve', 'surfaceMesh', "
+    "'surfaceContour', 'contour', 'heatMap', 'stackedCurves' or 'bar'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   // 22201
-  { SedmlSedDataSetAllowedCoreAttributes,
+  { SedmlDataSetAllowedCoreAttributes,
     "Core attributes allowed on <dataSet>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1965,7 +1980,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22202
-  { SedmlSedDataSetAllowedCoreElements,
+  { SedmlDataSetAllowedCoreElements,
     "Core elements allowed on <dataSet>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1977,7 +1992,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22203
-  { SedmlSedDataSetAllowedAttributes,
+  { SedmlDataSetAllowedAttributes,
     "Attributes allowed on <dataSet>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -1990,7 +2005,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22204
-  { SedmlSedDataSetLabelMustBeString,
+  { SedmlDataSetLabelMustBeString,
     "The 'label' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2001,7 +2016,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22205
-  { SedmlSedDataSetDataReferenceMustBeDataGenerator,
+  { SedmlDataSetDataReferenceMustBeDataGenerator,
     "The attribute 'dataReference' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2013,7 +2028,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22206
-  { SedmlSedDataSetNameMustBeString,
+  { SedmlDataSetNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2024,7 +2039,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22301
-  { SedmlSedReportAllowedCoreAttributes,
+  { SedmlReportAllowedCoreAttributes,
     "Core attributes allowed on <report>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2036,7 +2051,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22302
-  { SedmlSedReportAllowedCoreElements,
+  { SedmlReportAllowedCoreElements,
     "Core elements allowed on <report>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2048,7 +2063,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22303
-  { SedmlSedReportAllowedElements,
+  { SedmlReportAllowedElements,
     "Elements allowed on <report>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2060,7 +2075,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22304
-  { SedmlSedReportLODataSetsAllowedCoreElements,
+  { SedmlReportLODataSetsAllowedCoreElements,
     "Core elements allowed on <listOfDataSets>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2072,7 +2087,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22305
-  { SedmlSedReportLODataSetsAllowedCoreAttributes,
+  { SedmlReportLODataSetsAllowedCoreAttributes,
     "Core attributes allowed on <listOfDataSets>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2084,7 +2099,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22401
-  { SedmlSedAlgorithmParameterAllowedCoreAttributes,
+  { SedmlAlgorithmParameterAllowedCoreAttributes,
     "Core attributes allowed on <algorithmParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2096,7 +2111,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22402
-  { SedmlSedAlgorithmParameterAllowedCoreElements,
+  { SedmlAlgorithmParameterAllowedCoreElements,
     "Core elements allowed on <algorithmParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2108,7 +2123,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22403
-  { SedmlSedAlgorithmParameterAllowedAttributes,
+  { SedmlAlgorithmParameterAllowedAttributes,
     "Attributes allowed on <algorithmParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2120,7 +2135,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22404
-  { SedmlSedAlgorithmParameterKisaoIDMustBeString,
+  { SedmlAlgorithmParameterKisaoIDMustBeString,
     "The 'kisaoID' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2131,7 +2146,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22405
-  { SedmlSedAlgorithmParameterValueMustBeString,
+  { SedmlAlgorithmParameterValueMustBeString,
     "The 'value' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2142,7 +2157,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22501
-  { SedmlSedRangeAllowedCoreAttributes,
+  { SedmlRangeAllowedCoreAttributes,
     "Core attributes allowed on <range>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2154,7 +2169,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22502
-  { SedmlSedRangeAllowedCoreElements,
+  { SedmlRangeAllowedCoreElements,
     "Core elements allowed on <range>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2166,7 +2181,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22503
-  { SedmlSedRangeAllowedAttributes,
+  { SedmlRangeAllowedAttributes,
     "Attributes allowed on <range>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2178,7 +2193,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22601
-  { SedmlSedChangeXMLAllowedCoreAttributes,
+  { SedmlChangeXMLAllowedCoreAttributes,
     "Core attributes allowed on <changeXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2190,7 +2205,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22602
-  { SedmlSedChangeXMLAllowedCoreElements,
+  { SedmlChangeXMLAllowedCoreElements,
     "Core elements allowed on <changeXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2202,7 +2217,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22603
-  { SedmlSedChangeXMLAllowedElements,
+  { SedmlChangeXMLAllowedElements,
     "Elements allowed on <changeXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2214,7 +2229,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22701
-  { SedmlSedRemoveXMLAllowedCoreAttributes,
+  { SedmlRemoveXMLAllowedCoreAttributes,
     "Core attributes allowed on <removeXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2226,7 +2241,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22702
-  { SedmlSedRemoveXMLAllowedCoreElements,
+  { SedmlRemoveXMLAllowedCoreElements,
     "Core elements allowed on <removeXML>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2238,7 +2253,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22801
-  { SedmlSedSetValueAllowedCoreAttributes,
+  { SedmlSetValueAllowedCoreAttributes,
     "Core attributes allowed on <setValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2250,7 +2265,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22802
-  { SedmlSedSetValueAllowedCoreElements,
+  { SedmlSetValueAllowedCoreElements,
     "Core elements allowed on <setValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2262,7 +2277,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22803
-  { SedmlSedSetValueAllowedAttributes,
+  { SedmlSetValueAllowedAttributes,
     "Attributes allowed on <setValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2275,7 +2290,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22804
-  { SedmlSedSetValueAllowedElements,
+  { SedmlSetValueAllowedElements,
     "Elements allowed on <setValue>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2287,7 +2302,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22805
-  { SedmlSedSetValueModelReferenceMustBeModel,
+  { SedmlSetValueModelReferenceMustBeModel,
     "The attribute 'modelReference' must point to Model object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2299,7 +2314,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22806
-  { SedmlSedSetValueSymbolMustBeString,
+  { SedmlSetValueSymbolMustBeString,
     "The 'symbol' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2310,7 +2325,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22807
-  { SedmlSedSetValueTargetMustBeString,
+  { SedmlSetValueTargetMustBeString,
     "The 'target' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2321,7 +2336,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22808
-  { SedmlSedSetValueRangeMustBeRange,
+  { SedmlSetValueRangeMustBeRange,
     "The attribute 'range' must point to Range object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2333,7 +2348,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22901
-  { SedmlSedUniformRangeAllowedCoreAttributes,
+  { SedmlUniformRangeAllowedCoreAttributes,
     "Core attributes allowed on <uniformRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2345,7 +2360,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22902
-  { SedmlSedUniformRangeAllowedCoreElements,
+  { SedmlUniformRangeAllowedCoreElements,
     "Core elements allowed on <uniformRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2357,7 +2372,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22903
-  { SedmlSedUniformRangeAllowedAttributes,
+  { SedmlUniformRangeAllowedAttributes,
     "Attributes allowed on <uniformRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2370,7 +2385,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22904
-  { SedmlSedUniformRangeStartMustBeDouble,
+  { SedmlUniformRangeStartMustBeDouble,
     "The 'start' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2381,7 +2396,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22905
-  { SedmlSedUniformRangeEndMustBeDouble,
+  { SedmlUniformRangeEndMustBeDouble,
     "The 'end' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2392,7 +2407,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22906
-  { SedmlSedUniformRangeNumberOfPointsMustBeInteger,
+  { SedmlUniformRangeNumberOfPointsMustBeInteger,
     "The 'numberOfPoints' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2403,7 +2418,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22907
-  { SedmlSedUniformRangeTypeMustBeString,
+  { SedmlUniformRangeTypeMustBeString,
     "The 'type' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2414,7 +2429,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23001
-  { SedmlSedVectorRangeAllowedCoreAttributes,
+  { SedmlVectorRangeAllowedCoreAttributes,
     "Core attributes allowed on <vectorRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2426,7 +2441,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23002
-  { SedmlSedVectorRangeAllowedCoreElements,
+  { SedmlVectorRangeAllowedCoreElements,
     "Core elements allowed on <vectorRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2438,7 +2453,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23003
-  { SedmlSedVectorRangeAllowedAttributes,
+  { SedmlVectorRangeAllowedAttributes,
     "Attributes allowed on <vectorRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2450,7 +2465,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23004
-  { SedmlSedVectorRangeValueMustBeString,
+  { SedmlVectorRangeValueMustBeString,
     "The 'value' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2461,7 +2476,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23101
-  { SedmlSedFunctionalRangeAllowedCoreAttributes,
+  { SedmlFunctionalRangeAllowedCoreAttributes,
     "Core attributes allowed on <functionalRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2473,7 +2488,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23102
-  { SedmlSedFunctionalRangeAllowedCoreElements,
+  { SedmlFunctionalRangeAllowedCoreElements,
     "Core elements allowed on <functionalRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2485,7 +2500,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23103
-  { SedmlSedFunctionalRangeAllowedAttributes,
+  { SedmlFunctionalRangeAllowedAttributes,
     "Attributes allowed on <functionalRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2497,12 +2512,12 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23104
-  { SedmlSedFunctionalRangeAllowedElements,
+  { SedmlFunctionalRangeAllowedElements,
     "Elements allowed on <functionalRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <functionalRange> object may contain one and only one instance of each "
-    "of the ASTNode, <listOfVariables> and <listOfParameters> elements. No "
+    "of the <listOfVariables,> <listOfParameters> and ASTNode elements. No "
     "other elements from the SBML Level 3 SEDML namespaces are permitted on a "
     "<functionalRange> object. ",
     { "L3V1 Sedml V1 Section"
@@ -2510,7 +2525,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23105
-  { SedmlSedFunctionalRangeRangeMustBeRange,
+  { SedmlFunctionalRangeRangeMustBeRange,
     "The attribute 'range' must point to Range object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2522,7 +2537,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23106
-  { SedmlSedFunctionalRangeLOVariablesAllowedCoreElements,
+  { SedmlFunctionalRangeLOVariablesAllowedCoreElements,
     "Core elements allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2534,7 +2549,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23107
-  { SedmlSedFunctionalRangeLOParametersAllowedCoreElements,
+  { SedmlFunctionalRangeLOParametersAllowedCoreElements,
     "Core elements allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2546,7 +2561,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23108
-  { SedmlSedFunctionalRangeLOVariablesAllowedCoreAttributes,
+  { SedmlFunctionalRangeLOVariablesAllowedCoreAttributes,
     "Core attributes allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2558,7 +2573,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23109
-  { SedmlSedFunctionalRangeLOParametersAllowedCoreAttributes,
+  { SedmlFunctionalRangeLOParametersAllowedCoreAttributes,
     "Core attributes allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2570,7 +2585,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23201
-  { SedmlSedSubTaskAllowedCoreAttributes,
+  { SedmlSubTaskAllowedCoreAttributes,
     "Core attributes allowed on <subTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2582,7 +2597,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23202
-  { SedmlSedSubTaskAllowedCoreElements,
+  { SedmlSubTaskAllowedCoreElements,
     "Core elements allowed on <subTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2594,7 +2609,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23203
-  { SedmlSedSubTaskAllowedAttributes,
+  { SedmlSubTaskAllowedAttributes,
     "Attributes allowed on <subTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2606,7 +2621,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23204
-  { SedmlSedSubTaskOrderMustBeInteger,
+  { SedmlSubTaskOrderMustBeInteger,
     "The 'order' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2617,7 +2632,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23205
-  { SedmlSedSubTaskTaskMustBeAbstractTask,
+  { SedmlSubTaskTaskMustBeAbstractTask,
     "The attribute 'task' must point to AbstractTask object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2629,7 +2644,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23301
-  { SedmlSedOneStepAllowedCoreAttributes,
+  { SedmlOneStepAllowedCoreAttributes,
     "Core attributes allowed on <oneStep>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2641,7 +2656,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23302
-  { SedmlSedOneStepAllowedCoreElements,
+  { SedmlOneStepAllowedCoreElements,
     "Core elements allowed on <oneStep>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2653,7 +2668,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23303
-  { SedmlSedOneStepAllowedAttributes,
+  { SedmlOneStepAllowedAttributes,
     "Attributes allowed on <oneStep>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2665,7 +2680,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23304
-  { SedmlSedOneStepStepMustBeDouble,
+  { SedmlOneStepStepMustBeDouble,
     "The 'step' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2676,7 +2691,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23401
-  { SedmlSedSteadyStateAllowedCoreAttributes,
+  { SedmlSteadyStateAllowedCoreAttributes,
     "Core attributes allowed on <steadyState>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2688,7 +2703,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23402
-  { SedmlSedSteadyStateAllowedCoreElements,
+  { SedmlSteadyStateAllowedCoreElements,
     "Core elements allowed on <steadyState>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2700,7 +2715,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23501
-  { SedmlSedRepeatedTaskAllowedCoreAttributes,
+  { SedmlRepeatedTaskAllowedCoreAttributes,
     "Core attributes allowed on <repeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2712,7 +2727,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23502
-  { SedmlSedRepeatedTaskAllowedCoreElements,
+  { SedmlRepeatedTaskAllowedCoreElements,
     "Core elements allowed on <repeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2724,7 +2739,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23503
-  { SedmlSedRepeatedTaskAllowedAttributes,
+  { SedmlRepeatedTaskAllowedAttributes,
     "Attributes allowed on <repeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2736,7 +2751,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23504
-  { SedmlSedRepeatedTaskAllowedElements,
+  { SedmlRepeatedTaskAllowedElements,
     "Elements allowed on <repeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2749,7 +2764,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23505
-  { SedmlSedRepeatedTaskRangeIdMustBeRange,
+  { SedmlRepeatedTaskRangeIdMustBeRange,
     "The attribute 'rangeId' must point to Range object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2761,7 +2776,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23506
-  { SedmlSedRepeatedTaskResetModelMustBeBoolean,
+  { SedmlRepeatedTaskResetModelMustBeBoolean,
     "The 'resetModel' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2772,7 +2787,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23507
-  { SedmlSedRepeatedTaskLORangesAllowedCoreElements,
+  { SedmlRepeatedTaskLORangesAllowedCoreElements,
     "Core elements allowed on <listOfRanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2784,7 +2799,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23508
-  { SedmlSedRepeatedTaskLOSetValuesAllowedCoreElements,
+  { SedmlRepeatedTaskLOSetValuesAllowedCoreElements,
     "Core elements allowed on <listOfSetValues>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2796,7 +2811,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23509
-  { SedmlSedRepeatedTaskLOSubTasksAllowedCoreElements,
+  { SedmlRepeatedTaskLOSubTasksAllowedCoreElements,
     "Core elements allowed on <listOfSubTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2808,7 +2823,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23510
-  { SedmlSedRepeatedTaskLORangesAllowedCoreAttributes,
+  { SedmlRepeatedTaskLORangesAllowedCoreAttributes,
     "Core attributes allowed on <listOfRanges>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2820,7 +2835,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23511
-  { SedmlSedRepeatedTaskLOSetValuesAllowedCoreAttributes,
+  { SedmlRepeatedTaskLOSetValuesAllowedCoreAttributes,
     "Core attributes allowed on <listOfSetValues>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2832,7 +2847,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23512
-  { SedmlSedRepeatedTaskLOSubTasksAllowedCoreAttributes,
+  { SedmlRepeatedTaskLOSubTasksAllowedCoreAttributes,
     "Core attributes allowed on <listOfSubTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2844,7 +2859,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23601
-  { SedmlSedComputeChangeAllowedCoreAttributes,
+  { SedmlComputeChangeAllowedCoreAttributes,
     "Core attributes allowed on <computeChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2856,7 +2871,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23602
-  { SedmlSedComputeChangeAllowedCoreElements,
+  { SedmlComputeChangeAllowedCoreElements,
     "Core elements allowed on <computeChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2868,7 +2883,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23603
-  { SedmlSedComputeChangeAllowedElements,
+  { SedmlComputeChangeAllowedElements,
     "Elements allowed on <computeChange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2881,7 +2896,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23604
-  { SedmlSedComputeChangeLOVariablesAllowedCoreElements,
+  { SedmlComputeChangeLOVariablesAllowedCoreElements,
     "Core elements allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2893,7 +2908,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23605
-  { SedmlSedComputeChangeLOParametersAllowedCoreElements,
+  { SedmlComputeChangeLOParametersAllowedCoreElements,
     "Core elements allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2905,7 +2920,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23606
-  { SedmlSedComputeChangeLOVariablesAllowedCoreAttributes,
+  { SedmlComputeChangeLOVariablesAllowedCoreAttributes,
     "Core attributes allowed on <listOfVariables>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2917,7 +2932,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23607
-  { SedmlSedComputeChangeLOParametersAllowedCoreAttributes,
+  { SedmlComputeChangeLOParametersAllowedCoreAttributes,
     "Core attributes allowed on <listOfParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2929,7 +2944,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23701
-  { SedmlSedDataDescriptionAllowedCoreAttributes,
+  { SedmlDataDescriptionAllowedCoreAttributes,
     "Core attributes allowed on <dataDescription>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2941,7 +2956,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23702
-  { SedmlSedDataDescriptionAllowedCoreElements,
+  { SedmlDataDescriptionAllowedCoreElements,
     "Core elements allowed on <dataDescription>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2953,7 +2968,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23703
-  { SedmlSedDataDescriptionAllowedAttributes,
+  { SedmlDataDescriptionAllowedAttributes,
     "Attributes allowed on <dataDescription>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2966,7 +2981,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23704
-  { SedmlSedDataDescriptionAllowedElements,
+  { SedmlDataDescriptionAllowedElements,
     "Elements allowed on <dataDescription>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2979,7 +2994,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23705
-  { SedmlSedDataDescriptionNameMustBeString,
+  { SedmlDataDescriptionNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -2990,7 +3005,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23706
-  { SedmlSedDataDescriptionFormatMustBeString,
+  { SedmlDataDescriptionFormatMustBeString,
     "The 'format' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3001,7 +3016,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23707
-  { SedmlSedDataDescriptionSourceMustBeString,
+  { SedmlDataDescriptionSourceMustBeString,
     "The 'source' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3012,7 +3027,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23708
-  { SedmlSedDataDescriptionLODataSourcesAllowedCoreElements,
+  { SedmlDataDescriptionLODataSourcesAllowedCoreElements,
     "Core elements allowed on <listOfDataSources>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3024,7 +3039,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23709
-  { SedmlSedDataDescriptionLODataSourcesAllowedCoreAttributes,
+  { SedmlDataDescriptionLODataSourcesAllowedCoreAttributes,
     "Core attributes allowed on <listOfDataSources>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3036,7 +3051,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23801
-  { SedmlSedDataSourceAllowedCoreAttributes,
+  { SedmlDataSourceAllowedCoreAttributes,
     "Core attributes allowed on <dataSource>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3048,7 +3063,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23802
-  { SedmlSedDataSourceAllowedCoreElements,
+  { SedmlDataSourceAllowedCoreElements,
     "Core elements allowed on <dataSource>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3060,7 +3075,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23803
-  { SedmlSedDataSourceAllowedAttributes,
+  { SedmlDataSourceAllowedAttributes,
     "Attributes allowed on <dataSource>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3073,7 +3088,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23804
-  { SedmlSedDataSourceAllowedElements,
+  { SedmlDataSourceAllowedElements,
     "Elements allowed on <dataSource>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3085,7 +3100,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23805
-  { SedmlSedDataSourceNameMustBeString,
+  { SedmlDataSourceNameMustBeString,
     "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3096,7 +3111,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23806
-  { SedmlSedDataSourceIndexSetMustBe,
+  { SedmlDataSourceIndexSetMustBe,
     "The attribute 'indexSet' must point to object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3108,7 +3123,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23807
-  { SedmlSedDataSourceLOSlicesAllowedCoreElements,
+  { SedmlDataSourceLOSlicesAllowedCoreElements,
     "Core elements allowed on <listOfSlices>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3120,7 +3135,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23808
-  { SedmlSedDataSourceLOSlicesAllowedCoreAttributes,
+  { SedmlDataSourceLOSlicesAllowedCoreAttributes,
     "Core attributes allowed on <listOfSlices>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3132,7 +3147,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23901
-  { SedmlSedSliceAllowedCoreAttributes,
+  { SedmlSliceAllowedCoreAttributes,
     "Core attributes allowed on <slice>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3144,7 +3159,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23902
-  { SedmlSedSliceAllowedCoreElements,
+  { SedmlSliceAllowedCoreElements,
     "Core elements allowed on <slice>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3156,7 +3171,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23903
-  { SedmlSedSliceAllowedAttributes,
+  { SedmlSliceAllowedAttributes,
     "Attributes allowed on <slice>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3168,7 +3183,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23904
-  { SedmlSedSliceReferenceMustBe,
+  { SedmlSliceReferenceMustBe,
     "The attribute 'reference' must point to object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3180,7 +3195,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23905
-  { SedmlSedSliceValueMustBeString,
+  { SedmlSliceValueMustBeString,
     "The 'value' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3191,7 +3206,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24001
-  { SedmlSedParameterEstimationTaskAllowedCoreAttributes,
+  { SedmlParameterEstimationTaskAllowedCoreAttributes,
     "Core attributes allowed on <parameterEstimationTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3203,7 +3218,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24002
-  { SedmlSedParameterEstimationTaskAllowedCoreElements,
+  { SedmlParameterEstimationTaskAllowedCoreElements,
     "Core elements allowed on <parameterEstimationTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3215,7 +3230,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24003
-  { SedmlSedParameterEstimationTaskAllowedElements,
+  { SedmlParameterEstimationTaskAllowedElements,
     "Elements allowed on <parameterEstimationTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3228,7 +3243,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24004
-  { SedmlSedParameterEstimationTaskLOAdjustableParametersAllowedCoreElements,
+  { SedmlParameterEstimationTaskLOAdjustableParametersAllowedCoreElements,
     "Core elements allowed on <listOfAdjustableParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3240,7 +3255,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24005
-  { SedmlSedParameterEstimationTaskLOFitExperimentsAllowedCoreElements,
+  { SedmlParameterEstimationTaskLOFitExperimentsAllowedCoreElements,
     "Core elements allowed on <listOfFitExperiments>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3252,7 +3267,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24006
-  { SedmlSedParameterEstimationTaskLOAdjustableParametersAllowedCoreAttributes,
+  { SedmlParameterEstimationTaskLOAdjustableParametersAllowedCoreAttributes,
     "Core attributes allowed on <listOfAdjustableParameters>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3265,7 +3280,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24007
-  { SedmlSedParameterEstimationTaskLOFitExperimentsAllowedCoreAttributes,
+  { SedmlParameterEstimationTaskLOFitExperimentsAllowedCoreAttributes,
     "Core attributes allowed on <listOfFitExperiments>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3277,7 +3292,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24101
-  { SedmlSedObjectiveAllowedCoreAttributes,
+  { SedmlObjectiveAllowedCoreAttributes,
     "Core attributes allowed on <objective>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3289,7 +3304,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24102
-  { SedmlSedObjectiveAllowedCoreElements,
+  { SedmlObjectiveAllowedCoreElements,
     "Core elements allowed on <objective>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3301,7 +3316,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24201
-  { SedmlSedLeastSquareObjectiveFunctionAllowedCoreAttributes,
+  { SedmlLeastSquareObjectiveFunctionAllowedCoreAttributes,
     "Core attributes allowed on <leastSquareObjectiveFunction>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3314,7 +3329,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24202
-  { SedmlSedLeastSquareObjectiveFunctionAllowedCoreElements,
+  { SedmlLeastSquareObjectiveFunctionAllowedCoreElements,
     "Core elements allowed on <leastSquareObjectiveFunction>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3327,7 +3342,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24301
-  { SedmlSedAdjustableParameterAllowedCoreAttributes,
+  { SedmlAdjustableParameterAllowedCoreAttributes,
     "Core attributes allowed on <adjustableParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3339,7 +3354,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24302
-  { SedmlSedAdjustableParameterAllowedCoreElements,
+  { SedmlAdjustableParameterAllowedCoreElements,
     "Core elements allowed on <adjustableParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3351,7 +3366,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24303
-  { SedmlSedAdjustableParameterAllowedAttributes,
+  { SedmlAdjustableParameterAllowedAttributes,
     "Attributes allowed on <adjustableParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3364,7 +3379,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24304
-  { SedmlSedAdjustableParameterAllowedElements,
+  { SedmlAdjustableParameterAllowedElements,
     "Elements allowed on <adjustableParameter>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3377,7 +3392,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24305
-  { SedmlSedAdjustableParameterModelReferenceMustBeModel,
+  { SedmlAdjustableParameterModelReferenceMustBeModel,
     "The attribute 'modelReference' must point to Model object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3389,7 +3404,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24306
-  { SedmlSedAdjustableParameterTargetMustBeString,
+  { SedmlAdjustableParameterTargetMustBeString,
     "The 'target' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3400,7 +3415,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24307
-  { SedmlSedAdjustableParameterLOExperimentRefsAllowedCoreElements,
+  { SedmlAdjustableParameterLOExperimentRefsAllowedCoreElements,
     "Core elements allowed on <listOfExperimentRefs>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3412,7 +3427,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24308
-  { SedmlSedAdjustableParameterLOExperimentRefsAllowedCoreAttributes,
+  { SedmlAdjustableParameterLOExperimentRefsAllowedCoreAttributes,
     "Core attributes allowed on <listOfExperimentRefs>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3424,7 +3439,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24401
-  { SedmlSedExperimentRefAllowedCoreAttributes,
+  { SedmlExperimentRefAllowedCoreAttributes,
     "Core attributes allowed on <experimentRef>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3436,7 +3451,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24402
-  { SedmlSedExperimentRefAllowedCoreElements,
+  { SedmlExperimentRefAllowedCoreElements,
     "Core elements allowed on <experimentRef>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3448,7 +3463,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24403
-  { SedmlSedExperimentRefAllowedAttributes,
+  { SedmlExperimentRefAllowedAttributes,
     "Attributes allowed on <experimentRef>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3460,7 +3475,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24404
-  { SedmlSedExperimentRefExperimentIdMustBeFitExperiment,
+  { SedmlExperimentRefExperimentIdMustBeFitExperiment,
     "The attribute 'experimentId' must point to FitExperiment object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3472,7 +3487,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24501
-  { SedmlSedFitExperimentAllowedCoreAttributes,
+  { SedmlFitExperimentAllowedCoreAttributes,
     "Core attributes allowed on <fitExperiment>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3484,7 +3499,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24502
-  { SedmlSedFitExperimentAllowedCoreElements,
+  { SedmlFitExperimentAllowedCoreElements,
     "Core elements allowed on <fitExperiment>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3496,19 +3511,19 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24503
-  { SedmlSedFitExperimentAllowedAttributes,
+  { SedmlFitExperimentAllowedAttributes,
     "Attributes allowed on <fitExperiment>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <fitExperiment> object may have the optional attributes 'sedml:source' "
-    "and 'sedml:id'. No other attributes from the SBML Level 3 SEDML namespaces "
-    "are permitted on a <fitExperiment> object. ",
+    "A <fitExperiment> object may have the optional attributes 'sedml:id', "
+    "'sedml:source' and 'sedml:represents'. No other attributes from the SBML "
+    "Level 3 SEDML namespaces are permitted on a <fitExperiment> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24504
-  { SedmlSedFitExperimentAllowedElements,
+  { SedmlFitExperimentAllowedElements,
     "Elements allowed on <fitExperiment>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3521,7 +3536,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24505
-  { SedmlSedFitExperimentSourceMustBeString,
+  { SedmlFitExperimentSourceMustBeString,
     "The 'source' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3532,7 +3547,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24506
-  { SedmlSedFitExperimentLOFitMappingsAllowedCoreElements,
+  { SedmlFitExperimentRepresentsMustBeExperimentTypeEnum,
+    "The 'represents' attribute must be ExperimentTypeEnum.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:represents' of a <fitExperiment> object "
+    "must conform to the syntax of SBML data type 'ExperimentType' and may only "
+    "take on the allowed values of 'ExperimentType' defined in SBML; that is, "
+    "the value must be one of the following: 'TimeCourse' or 'SteadyState'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 24507
+  { SedmlFitExperimentLOFitMappingsAllowedCoreElements,
     "Core elements allowed on <listOfFitMappings>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3543,8 +3571,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 24507
-  { SedmlSedFitExperimentLOFitMappingsAllowedCoreAttributes,
+  // 24508
+  { SedmlFitExperimentLOFitMappingsAllowedCoreAttributes,
     "Core attributes allowed on <listOfFitMappings>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3556,7 +3584,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24601
-  { SedmlSedFitMappingAllowedCoreAttributes,
+  { SedmlFitMappingAllowedCoreAttributes,
     "Core attributes allowed on <fitMapping>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3568,7 +3596,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24602
-  { SedmlSedFitMappingAllowedCoreElements,
+  { SedmlFitMappingAllowedCoreElements,
     "Core elements allowed on <fitMapping>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3580,7 +3608,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24603
-  { SedmlSedFitMappingAllowedAttributes,
+  { SedmlFitMappingAllowedAttributes,
     "Attributes allowed on <fitMapping>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3592,7 +3620,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24604
-  { SedmlSedFitMappingAllowedElements,
+  { SedmlFitMappingAllowedElements,
     "Elements allowed on <fitMapping>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3604,7 +3632,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24605
-  { SedmlSedFitMappingColNumberMustBeInteger,
+  { SedmlFitMappingColNumberMustBeInteger,
     "The 'colNumber' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3615,7 +3643,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24606
-  { SedmlSedFitMappingDataGeneratorMustBeDataGenerator,
+  { SedmlFitMappingDataGeneratorMustBeDataGenerator,
     "The attribute 'dataGenerator' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3627,7 +3655,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24607
-  { SedmlSedFitMappingTypeMustBeMappingTypeEnum,
+  { SedmlFitMappingTypeMustBeMappingTypeEnum,
     "The 'type' attribute must be MappingTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3640,7 +3668,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24701
-  { SedmlSedScalingAllowedCoreAttributes,
+  { SedmlScalingAllowedCoreAttributes,
     "Core attributes allowed on <scaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3652,7 +3680,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24702
-  { SedmlSedScalingAllowedCoreElements,
+  { SedmlScalingAllowedCoreElements,
     "Core elements allowed on <scaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3664,7 +3692,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24801
-  { SedmlSedValueScalingAllowedCoreAttributes,
+  { SedmlValueScalingAllowedCoreAttributes,
     "Core attributes allowed on <valueScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3676,7 +3704,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24802
-  { SedmlSedValueScalingAllowedCoreElements,
+  { SedmlValueScalingAllowedCoreElements,
     "Core elements allowed on <valueScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3688,7 +3716,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24803
-  { SedmlSedValueScalingAllowedAttributes,
+  { SedmlValueScalingAllowedAttributes,
     "Attributes allowed on <valueScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3700,7 +3728,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24804
-  { SedmlSedValueScalingWeightMustBeString,
+  { SedmlValueScalingWeightMustBeString,
     "The 'weight' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3711,7 +3739,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24901
-  { SedmlSedColumnScalingAllowedCoreAttributes,
+  { SedmlColumnScalingAllowedCoreAttributes,
     "Core attributes allowed on <columnScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3723,7 +3751,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24902
-  { SedmlSedColumnScalingAllowedCoreElements,
+  { SedmlColumnScalingAllowedCoreElements,
     "Core elements allowed on <columnScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3735,7 +3763,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24903
-  { SedmlSedColumnScalingAllowedAttributes,
+  { SedmlColumnScalingAllowedAttributes,
     "Attributes allowed on <columnScaling>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3747,7 +3775,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24904
-  { SedmlSedColumnScalingColNumberMustBeInteger,
+  { SedmlColumnScalingColNumberMustBeInteger,
     "The 'colNumber' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3758,7 +3786,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25001
-  { SedmlSedBoundsAllowedCoreAttributes,
+  { SedmlBoundsAllowedCoreAttributes,
     "Core attributes allowed on <bounds>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3770,7 +3798,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25002
-  { SedmlSedBoundsAllowedCoreElements,
+  { SedmlBoundsAllowedCoreElements,
     "Core elements allowed on <bounds>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3782,7 +3810,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25003
-  { SedmlSedBoundsAllowedAttributes,
+  { SedmlBoundsAllowedAttributes,
     "Attributes allowed on <bounds>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3794,7 +3822,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25004
-  { SedmlSedBoundsStartingValueMustBeDouble,
+  { SedmlBoundsStartingValueMustBeDouble,
     "The 'startingValue' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3805,7 +3833,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25005
-  { SedmlSedBoundsLowerBoundMustBeDouble,
+  { SedmlBoundsLowerBoundMustBeDouble,
     "The 'lowerBound' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3816,7 +3844,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25006
-  { SedmlSedBoundsUpperBoundMustBeDouble,
+  { SedmlBoundsUpperBoundMustBeDouble,
     "The 'upperBound' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3827,7 +3855,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25101
-  { SedmlSedFigureAllowedCoreAttributes,
+  { SedmlFigureAllowedCoreAttributes,
     "Core attributes allowed on <figure>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3839,7 +3867,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25102
-  { SedmlSedFigureAllowedCoreElements,
+  { SedmlFigureAllowedCoreElements,
     "Core elements allowed on <figure>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3851,7 +3879,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25103
-  { SedmlSedFigureAllowedAttributes,
+  { SedmlFigureAllowedAttributes,
     "Attributes allowed on <figure>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3863,7 +3891,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25104
-  { SedmlSedFigureAllowedElements,
+  { SedmlFigureAllowedElements,
     "Elements allowed on <figure>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3875,7 +3903,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25105
-  { SedmlSedFigureNumRowsMustBeInteger,
+  { SedmlFigureNumRowsMustBeInteger,
     "The 'numRows' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3886,7 +3914,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25106
-  { SedmlSedFigureNumColumnsMustBeInteger,
+  { SedmlFigureNumColumnsMustBeInteger,
     "The 'numColumns' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3897,7 +3925,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25107
-  { SedmlSedFigureLOSubPlotsAllowedCoreElements,
+  { SedmlFigureLOSubPlotsAllowedCoreElements,
     "Core elements allowed on <listOfSubPlots>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3909,7 +3937,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25108
-  { SedmlSedFigureLOSubPlotsAllowedCoreAttributes,
+  { SedmlFigureLOSubPlotsAllowedCoreAttributes,
     "Core attributes allowed on <listOfSubPlots>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3921,7 +3949,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25201
-  { SedmlSedSubPlotAllowedCoreAttributes,
+  { SedmlSubPlotAllowedCoreAttributes,
     "Core attributes allowed on <subPlot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3933,7 +3961,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25202
-  { SedmlSedSubPlotAllowedCoreElements,
+  { SedmlSubPlotAllowedCoreElements,
     "Core elements allowed on <subPlot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3945,7 +3973,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25203
-  { SedmlSedSubPlotAllowedAttributes,
+  { SedmlSubPlotAllowedAttributes,
     "Attributes allowed on <subPlot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3958,7 +3986,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25204
-  { SedmlSedSubPlotPlotMustBePlot,
+  { SedmlSubPlotPlotMustBePlot,
     "The attribute 'plot' must point to Plot object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3970,7 +3998,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25205
-  { SedmlSedSubPlotRowMustBeInteger,
+  { SedmlSubPlotRowMustBeInteger,
     "The 'row' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3981,7 +4009,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25206
-  { SedmlSedSubPlotColumnMustBeInteger,
+  { SedmlSubPlotColumnMustBeInteger,
     "The 'column' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -3992,7 +4020,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25207
-  { SedmlSedSubPlotRowSpanMustBeInteger,
+  { SedmlSubPlotRowSpanMustBeInteger,
     "The 'rowSpan' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4003,7 +4031,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25208
-  { SedmlSedSubPlotColumnSpanMustBeInteger,
+  { SedmlSubPlotColumnSpanMustBeInteger,
     "The 'columnSpan' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4014,7 +4042,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25301
-  { SedmlSedAxisAllowedCoreAttributes,
+  { SedmlAxisAllowedCoreAttributes,
     "Core attributes allowed on <axis>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4026,7 +4054,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25302
-  { SedmlSedAxisAllowedCoreElements,
+  { SedmlAxisAllowedCoreElements,
     "Core elements allowed on <axis>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4038,7 +4066,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25303
-  { SedmlSedAxisAllowedAttributes,
+  { SedmlAxisAllowedAttributes,
     "Attributes allowed on <axis>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4051,20 +4079,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25304
-  { SedmlSedAxisTypeMustBeAxisKindEnum,
-    "The 'type' attribute must be AxisKindEnum.",
+  { SedmlAxisTypeMustBeAxisTypeEnum,
+    "The 'type' attribute must be AxisTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:type' of an <axis> object must conform "
-    "to the syntax of SBML data type 'AxisKind' and may only take on the "
-    "allowed values of 'AxisKind' defined in SBML; that is, the value must be "
+    "to the syntax of SBML data type 'AxisType' and may only take on the "
+    "allowed values of 'AxisType' defined in SBML; that is, the value must be "
     "one of the following: 'linear' or 'log10'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 25305
-  { SedmlSedAxisMinMustBeDouble,
+  { SedmlAxisMinMustBeDouble,
     "The 'min' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4075,7 +4103,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25306
-  { SedmlSedAxisMaxMustBeDouble,
+  { SedmlAxisMaxMustBeDouble,
     "The 'max' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4086,7 +4114,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25307
-  { SedmlSedAxisGridMustBeBoolean,
+  { SedmlAxisGridMustBeBoolean,
     "The 'grid' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4097,7 +4125,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25308
-  { SedmlSedAxisStyleMustBeStyle,
+  { SedmlAxisStyleMustBeStyle,
     "The attribute 'style' must point to Style object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4109,7 +4137,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25401
-  { SedmlSedStyleAllowedCoreAttributes,
+  { SedmlStyleAllowedCoreAttributes,
     "Core attributes allowed on <style>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4121,7 +4149,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25402
-  { SedmlSedStyleAllowedCoreElements,
+  { SedmlStyleAllowedCoreElements,
     "Core elements allowed on <style>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4133,7 +4161,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25403
-  { SedmlSedStyleAllowedAttributes,
+  { SedmlStyleAllowedAttributes,
     "Attributes allowed on <style>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4145,7 +4173,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25404
-  { SedmlSedStyleAllowedElements,
+  { SedmlStyleAllowedElements,
     "Elements allowed on <style>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4157,7 +4185,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25405
-  { SedmlSedStyleBaseStyleMustBeStyle,
+  { SedmlStyleBaseStyleMustBeStyle,
     "The attribute 'baseStyle' must point to Style object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4169,7 +4197,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25501
-  { SedmlSedLineAllowedCoreAttributes,
+  { SedmlLineAllowedCoreAttributes,
     "Core attributes allowed on <line>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4181,7 +4209,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25502
-  { SedmlSedLineAllowedCoreElements,
+  { SedmlLineAllowedCoreElements,
     "Core elements allowed on <line>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4193,7 +4221,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25503
-  { SedmlSedLineAllowedAttributes,
+  { SedmlLineAllowedAttributes,
     "Attributes allowed on <line>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4205,20 +4233,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25504
-  { SedmlSedLineStyleMustBeLineKindEnum,
-    "The 'style' attribute must be LineKindEnum.",
+  { SedmlLineStyleMustBeLineTypeEnum,
+    "The 'style' attribute must be LineTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:style' of a <line> object must conform "
-    "to the syntax of SBML data type 'LineKind' and may only take on the "
-    "allowed values of 'LineKind' defined in SBML; that is, the value must be "
+    "to the syntax of SBML data type 'LineType' and may only take on the "
+    "allowed values of 'LineType' defined in SBML; that is, the value must be "
     "one of the following: 'none', 'solid', 'dash', 'dot' or 'dashDot'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 25505
-  { SedmlSedLineColorMustBeString,
+  { SedmlLineColorMustBeString,
     "The 'color' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4229,7 +4257,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25506
-  { SedmlSedLineThicknessMustBeDouble,
+  { SedmlLineThicknessMustBeDouble,
     "The 'thickness' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4240,7 +4268,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25601
-  { SedmlSedMarkerAllowedCoreAttributes,
+  { SedmlMarkerAllowedCoreAttributes,
     "Core attributes allowed on <marker>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4252,7 +4280,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25602
-  { SedmlSedMarkerAllowedCoreElements,
+  { SedmlMarkerAllowedCoreElements,
     "Core elements allowed on <marker>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4264,7 +4292,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25603
-  { SedmlSedMarkerAllowedAttributes,
+  { SedmlMarkerAllowedAttributes,
     "Attributes allowed on <marker>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4277,7 +4305,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25604
-  { SedmlSedMarkerSizeMustBeDouble,
+  { SedmlMarkerSizeMustBeDouble,
     "The 'size' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4288,13 +4316,13 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25605
-  { SedmlSedMarkerStyleMustBeMarkerKindEnum,
-    "The 'style' attribute must be MarkerKindEnum.",
+  { SedmlMarkerStyleMustBeMarkerTypeEnum,
+    "The 'style' attribute must be MarkerTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:style' of a <marker> object must conform "
-    "to the syntax of SBML data type 'MarkerKind' and may only take on the "
-    "allowed values of 'MarkerKind' defined in SBML; that is, the value must be "
+    "to the syntax of SBML data type 'MarkerType' and may only take on the "
+    "allowed values of 'MarkerType' defined in SBML; that is, the value must be "
     "one of the following: 'none', 'square', 'circle', 'diamond', 'xCross', "
     "'plus', 'star', 'triangleUp', 'triangleDown', 'triangleLeft', "
     "'triangleRight', 'hDash' or 'vDash'.",
@@ -4303,7 +4331,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25606
-  { SedmlSedMarkerFillMustBeString,
+  { SedmlMarkerFillMustBeString,
     "The 'fill' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4314,7 +4342,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25607
-  { SedmlSedMarkerLineColorMustBeString,
+  { SedmlMarkerLineColorMustBeString,
     "The 'lineColor' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4325,7 +4353,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25608
-  { SedmlSedMarkerLineThicknessMustBeDouble,
+  { SedmlMarkerLineThicknessMustBeDouble,
     "The 'lineThickness' attribute must be Double.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4336,7 +4364,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25701
-  { SedmlSedFillAllowedCoreAttributes,
+  { SedmlFillAllowedCoreAttributes,
     "Core attributes allowed on <fill>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4348,7 +4376,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25702
-  { SedmlSedFillAllowedCoreElements,
+  { SedmlFillAllowedCoreElements,
     "Core elements allowed on <fill>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4360,7 +4388,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25703
-  { SedmlSedFillAllowedAttributes,
+  { SedmlFillAllowedAttributes,
     "Attributes allowed on <fill>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4372,7 +4400,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25704
-  { SedmlSedFillColorMustBeString,
+  { SedmlFillColorMustBeString,
     "The 'color' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4383,7 +4411,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25705
-  { SedmlSedFillSecondColorMustBeString,
+  { SedmlFillSecondColorMustBeString,
     "The 'secondColor' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4394,7 +4422,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25801
-  { SedmlSedDependentVariableAllowedCoreAttributes,
+  { SedmlDependentVariableAllowedCoreAttributes,
     "Core attributes allowed on <dependentVariable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4406,7 +4434,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25802
-  { SedmlSedDependentVariableAllowedCoreElements,
+  { SedmlDependentVariableAllowedCoreElements,
     "Core elements allowed on <dependentVariable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4418,7 +4446,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25803
-  { SedmlSedDependentVariableAllowedAttributes,
+  { SedmlDependentVariableAllowedAttributes,
     "Attributes allowed on <dependentVariable>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4431,7 +4459,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25804
-  { SedmlSedDependentVariableTermMustBeString,
+  { SedmlDependentVariableTermMustBeString,
     "The 'term' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4442,7 +4470,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25805
-  { SedmlSedDependentVariableTarget2MustBeString,
+  { SedmlDependentVariableTarget2MustBeString,
     "The 'target2' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4453,7 +4481,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25806
-  { SedmlSedDependentVariableSymbol2MustBeString,
+  { SedmlDependentVariableSymbol2MustBeString,
     "The 'symbol2' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4464,7 +4492,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25901
-  { SedmlSedRemainingDimensionAllowedCoreAttributes,
+  { SedmlRemainingDimensionAllowedCoreAttributes,
     "Core attributes allowed on <remainingDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4476,7 +4504,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25902
-  { SedmlSedRemainingDimensionAllowedCoreElements,
+  { SedmlRemainingDimensionAllowedCoreElements,
     "Core elements allowed on <remainingDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4488,7 +4516,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25903
-  { SedmlSedRemainingDimensionAllowedAttributes,
+  { SedmlRemainingDimensionAllowedAttributes,
     "Attributes allowed on <remainingDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4501,7 +4529,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25904
-  { SedmlSedRemainingDimensionTargetMustBe,
+  { SedmlRemainingDimensionTargetMustBe,
     "The attribute 'target' must point to object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4513,7 +4541,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25905
-  { SedmlSedRemainingDimensionDimensionTargetMustBe,
+  { SedmlRemainingDimensionDimensionTargetMustBe,
     "The attribute 'dimensionTarget' must point to object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4525,7 +4553,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26001
-  { SedmlSedDataRangeAllowedCoreAttributes,
+  { SedmlDataRangeAllowedCoreAttributes,
     "Core attributes allowed on <dataRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4537,7 +4565,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26002
-  { SedmlSedDataRangeAllowedCoreElements,
+  { SedmlDataRangeAllowedCoreElements,
     "Core elements allowed on <dataRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4549,7 +4577,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26003
-  { SedmlSedDataRangeAllowedAttributes,
+  { SedmlDataRangeAllowedAttributes,
     "Attributes allowed on <dataRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4561,7 +4589,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26004
-  { SedmlSedDataRangeSourceRefMustBe,
+  { SedmlDataRangeSourceRefMustBe,
     "The attribute 'sourceRef' must point to object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4573,7 +4601,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26101
-  { SedmlSedSimpleRepeatedTaskAllowedCoreAttributes,
+  { SedmlSimpleRepeatedTaskAllowedCoreAttributes,
     "Core attributes allowed on <simpleRepeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4585,7 +4613,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26102
-  { SedmlSedSimpleRepeatedTaskAllowedCoreElements,
+  { SedmlSimpleRepeatedTaskAllowedCoreElements,
     "Core elements allowed on <simpleRepeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4597,7 +4625,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26103
-  { SedmlSedSimpleRepeatedTaskAllowedAttributes,
+  { SedmlSimpleRepeatedTaskAllowedAttributes,
     "Attributes allowed on <simpleRepeatedTask>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4610,7 +4638,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26104
-  { SedmlSedSimpleRepeatedTaskResetModelMustBeBoolean,
+  { SedmlSimpleRepeatedTaskResetModelMustBeBoolean,
     "The 'resetModel' attribute must be Boolean.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4621,7 +4649,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26105
-  { SedmlSedSimpleRepeatedTaskNumRepeatsMustBeInteger,
+  { SedmlSimpleRepeatedTaskNumRepeatsMustBeInteger,
     "The 'numRepeats' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4632,7 +4660,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26201
-  { SedmlSedShadedAreaAllowedCoreAttributes,
+  { SedmlShadedAreaAllowedCoreAttributes,
     "Core attributes allowed on <shadedArea>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4644,7 +4672,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26202
-  { SedmlSedShadedAreaAllowedCoreElements,
+  { SedmlShadedAreaAllowedCoreElements,
     "Core elements allowed on <shadedArea>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4656,7 +4684,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26203
-  { SedmlSedShadedAreaAllowedAttributes,
+  { SedmlShadedAreaAllowedAttributes,
     "Attributes allowed on <shadedArea>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4669,7 +4697,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26204
-  { SedmlSedShadedAreaYDataReferenceFromMustBeDataGenerator,
+  { SedmlShadedAreaYDataReferenceFromMustBeDataGenerator,
     "The attribute 'yDataReferenceFrom' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
@@ -4681,7 +4709,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26205
-  { SedmlSedShadedAreaYDataReferenceToMustBeDataGenerator,
+  { SedmlShadedAreaYDataReferenceToMustBeDataGenerator,
     "The attribute 'yDataReferenceTo' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,

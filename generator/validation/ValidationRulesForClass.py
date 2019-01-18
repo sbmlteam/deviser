@@ -46,7 +46,7 @@ class ValidationRulesForClass():
 
     def __init__(self, object_desc, spec_name, number, package, pkg_ref):
         # members from object
-        self.name = strFunctions.remove_prefix(object_desc['name'])
+        self.name = strFunctions.remove_prefix(object_desc['name'], False, False, '', True)
         self.fullname = spec_name
         self.number = number
         self.package = package.lower() 
