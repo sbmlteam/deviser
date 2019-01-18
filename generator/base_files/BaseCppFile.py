@@ -422,6 +422,8 @@ class BaseCppFile(BaseFile.BaseFile):
             attribute = self.attributes[i]
             att_type = attribute['attType']
             name = attribute['name']
+            if 'xml_name' in attribute and len(attribute['xml_name']) > 0 and attribute['xml_name'] != name:
+                name = attribute['xml_name']
             if att_type == 'lo_element' and name not in listed_elements:
                 # check for concrete instances
                 if attribute['type'] == 'inline_lo_element':
