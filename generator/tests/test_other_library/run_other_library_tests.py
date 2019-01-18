@@ -376,7 +376,7 @@ def testSedML(fail):
     class_name = 'SedModel'
     list_of = 'SedListOfModels'
     test_case = 'model'
-#    fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 0
@@ -542,6 +542,7 @@ def testCombine(fail):
 def main():
 
     test_all = True
+#    test_all = False
     # set up the enivornment
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
@@ -556,10 +557,10 @@ def main():
         fail = testCombine(fail)
     else:
         name = 'test_sedml'
-        num = 10
-        class_name = 'SedAbstractTask'
-        list_of = 'SedListOfAbstractTasks'
-        test_case = 'catch different abstract types'
+        num = 0
+        class_name = 'SedDocument'
+        list_of = ''
+        test_case = 'document'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 

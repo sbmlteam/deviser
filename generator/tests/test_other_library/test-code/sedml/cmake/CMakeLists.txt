@@ -192,6 +192,9 @@ if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
       NAMES swig
       PATHS
+        c:/swigwin-3.0.12
+        c:/swigwin-3.0.10
+        c:/swigwin-3.0.8
         c:/swigwin-3.0.5
         c:/swigwin-3.0.2
         c:/swigwin-3.0.0

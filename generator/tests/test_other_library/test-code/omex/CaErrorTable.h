@@ -325,7 +325,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20201
-  { CombineCaContentAllowedCoreAttributes,
+  { CombineContentAllowedCoreAttributes,
     "Core attributes allowed on <content>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -337,7 +337,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20202
-  { CombineCaContentAllowedCoreElements,
+  { CombineContentAllowedCoreElements,
     "Core elements allowed on <content>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -349,7 +349,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20203
-  { CombineCaContentAllowedAttributes,
+  { CombineContentAllowedAttributes,
     "Attributes allowed on <content>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -362,7 +362,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20204
-  { CombineCaContentLocationMustBeString,
+  { CombineContentLocationMustBeString,
     "The 'location' attribute must be String.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -373,7 +373,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20205
-  { CombineCaContentFormatMustBeString,
+  { CombineContentFormatMustBeString,
     "The 'format' attribute must be String.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -384,7 +384,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20206
-  { CombineCaContentMasterMustBeBoolean,
+  { CombineContentMasterMustBeBoolean,
     "The 'master' attribute must be Boolean.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -395,7 +395,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20301
-  { CombineCaOmexManifestAllowedCoreAttributes,
+  { CombineOmexManifestAllowedCoreAttributes,
     "Core attributes allowed on <omexManifest>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -407,7 +407,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20302
-  { CombineCaOmexManifestAllowedCoreElements,
+  { CombineOmexManifestAllowedCoreElements,
     "Core elements allowed on <omexManifest>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,
@@ -419,7 +419,7 @@ static const omexErrorTableEntry omexErrorTable[] =
   },
 
   // 20303
-  { CombineCaOmexManifestAllowedElements,
+  { CombineOmexManifestAllowedElements,
     "Elements allowed on <omexManifest>.",
     LIBCOMBINE_CAT_GENERAL_CONSISTENCY,
     LIBCOMBINE_SEV_ERROR,

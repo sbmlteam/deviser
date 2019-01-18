@@ -711,7 +711,7 @@ CaContent::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(CaUnknownCoreAttribute);
-        log->logError(CombineCaContentAllowedAttributes, level, version,
+        log->logError(CombineContentAllowedAttributes, level, version,
           details);
       }
     }

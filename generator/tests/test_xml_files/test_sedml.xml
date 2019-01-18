@@ -16,15 +16,15 @@
           <attributes>
             <attribute name="level" required="true" type="int" abstract="false"/>
             <attribute name="version" required="true" type="int" abstract="false"/>
-            <attribute name="simulation" required="false" type="lo_element" element="Simulation" abstract="true"/>
+            <attribute name="dataDescription" required="false" type="lo_element" element="DataDescription" abstract="false"/>
             <attribute name="model" required="false" type="lo_element" element="Model" abstract="false"/>
+            <attribute name="simulation" required="false" type="lo_element" element="Simulation" abstract="true"/>
             <attribute name="task" required="false" type="lo_element" element="AbstractTask" abstract="true"/>
             <attribute name="dataGenerator" required="false" type="lo_element" element="DataGenerator" abstract="false"/>
             <attribute name="output" required="false" type="lo_element" element="Output" abstract="true"/>
-            <attribute name="dataDescription" required="false" type="lo_element" element="DataDescription" abstract="false"/>
           </attributes>
         </element>
-        <element name="Model" typeCode="SBML_SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="Model" typeCode="SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -33,7 +33,7 @@
             <attribute name="change" required="false" type="lo_element" element="Change" abstract="true"/>
           </attributes>
         </element>
-        <element name="Change" typeCode="SBML_SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
+        <element name="Change" typeCode="SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
           <attributes>
             <attribute name="target" required="true" type="string" abstract="false"/>
           </attributes>
@@ -45,12 +45,12 @@
             <concrete name="computeChange" element="ComputeChange" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="AddXML" typeCode="SEDML_ADDXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
+        <element name="AddXML" typeCode="SEDML_CHANGE_ADDXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
           <attributes>
             <attribute name="newXML" required="true" type="element" element="XMLNode*" abstract="false"/>
           </attributes>
         </element>
-        <element name="ChangeAttribute" typeCode="SEDML_SEDML_CHANGEATTRIBUTE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
+        <element name="ChangeAttribute" typeCode="SEDML_CHANGE_ATTRIBUTE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
           <attributes>
             <attribute name="newValue" required="true" type="string" abstract="false"/>
           </attributes>
@@ -88,7 +88,7 @@
             <concrete name="steadyState" element="SteadyState" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="UniformTimeCourse" typeCode="SEDML_SIMULATION_UNIFORM_TIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="uniformTimeCourse">
+        <element name="UniformTimeCourse" typeCode="SEDML_SIMULATION_UNIFORMTIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="uniformTimeCourse">
           <attributes>
             <attribute name="initialTime" required="true" type="double" abstract="false"/>
             <attribute name="outputStartTime" required="true" type="double" abstract="false"/>
@@ -103,7 +103,7 @@
             <attribute name="algorithmParameter" required="false" type="lo_element" element="AlgorithmParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfTasks" listOfClassName="ListOfAbstractTasks">
+        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfTasks">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -134,7 +134,7 @@
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
         </element>
-        <element name="Output" typeCode="SEDML_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfOutputs">
+        <element name="Output" typeCode="SEDML_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfOutputs">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -145,7 +145,7 @@
             <concrete name="plot3D" element="Plot3D" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="Plot" typeCode="SEDML_PLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="true">
+        <element name="Plot" typeCode="SEDML_OUTPUT_PLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="true">
           <attributes>
             <attribute name="legend" required="false" type="bool" abstract="false"/>
             <attribute name="height" required="false" type="double" abstract="false"/>
@@ -189,7 +189,7 @@
           <attributes>
             <attribute name="logY" required="true" type="bool" abstract="false"/>
             <attribute name="yDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
-            <attribute name="type" required="true" type="enum" element="CurveKind" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="CurveType" abstract="false"/>
             <attribute name="xErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="xErrorLower" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="yErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
@@ -204,6 +204,7 @@
           <attributes>
             <attribute name="logZ" required="true" type="bool" abstract="false"/>
             <attribute name="zDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
+            <attribute name="surfaceType" required="false" type="enum" element="SurfaceType" abstract="false"/>
           </attributes>
         </element>
         <element name="DataSet" typeCode="SEDML_OUTPUT_DATASET" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="dataSet">
@@ -233,6 +234,7 @@
             <concrete name="uniformRange" element="UniformRange" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="vectorRange" element="VectorRange" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="functionalRange" element="FunctionalRange" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="dataRange" element="DataRange" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="ChangeXML" typeCode="SEDML_CHANGE_CHANGEXML" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false" elementName="changeXML">
@@ -266,9 +268,9 @@
         <element name="FunctionalRange" typeCode="SEDML_RANGE_FUNCTIONALRANGE" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="functionalRange">
           <attributes>
             <attribute name="range" required="true" type="SIdRef" element="Range" abstract="false"/>
-            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
             <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
             <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
           </attributes>
         </element>
         <element name="SubTask" typeCode="SEDML_TASK_SUBTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
@@ -292,14 +294,14 @@
             <attribute name="subTask" required="false" type="lo_element" element="SubTask" abstract="false"/>
           </attributes>
         </element>
-        <element name="ComputeChange" typeCode="SEDML_COMPUTECHANGE" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
+        <element name="ComputeChange" typeCode="SEDML_CHANGE_COMPUTECHANGE" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
           <attributes>
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
             <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
             <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="DataDescription" typeCode="SEDML_DATADESCRIPTION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="DataDescription" typeCode="SEDML_DATA_DESCRIPTION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -309,7 +311,7 @@
             <attribute name="dataSource" required="false" type="lo_element" element="DataSource" abstract="false"/>
           </attributes>
         </element>
-        <element name="DataSource" typeCode="SEDML_DATASOURCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="DataSource" typeCode="SEDML_DATA_SOURCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
@@ -317,7 +319,7 @@
             <attribute name="slice" required="false" type="lo_element" element="Slice" abstract="false"/>
           </attributes>
         </element>
-        <element name="Slice" typeCode="SEDML_SLICE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="Slice" typeCode="SEDML_DATA_SLICE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="reference" required="true" type="SIdRef" abstract="false"/>
             <attribute name="value" required="true" type="string" abstract="false"/>
@@ -352,10 +354,11 @@
         </element>
         <element name="FitExperiment" typeCode="SEDML_FIT_EXPERIMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
-            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
-            <attribute name="source" required="false" type="string" abstract="false"/>
-            <attribute name="fitMapping" required="false" type="lo_element" element="FitMapping" abstract="false"/>
             <attribute name="id" required="false" type="SId" abstract="false"/>
+            <attribute name="source" required="false" type="string" abstract="false"/>
+            <attribute name="represents" required="false" type="enum" element="ExperimentType" abstract="false"/>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
+            <attribute name="fitMapping" required="false" type="lo_element" element="FitMapping" abstract="false"/>
           </attributes>
         </element>
         <element name="FitMapping" typeCode="SEDML_FITMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
@@ -407,7 +410,7 @@
         </element>
         <element name="Axis" typeCode="SEDML_AXIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" abstract="false">
           <attributes>
-            <attribute name="type" required="true" type="enum" element="AxisKind" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="AxisType" abstract="false"/>
             <attribute name="min" required="false" type="double" abstract="false"/>
             <attribute name="max" required="false" type="double" abstract="false"/>
             <attribute name="grid" required="false" type="bool" abstract="false"/>
@@ -424,7 +427,7 @@
         </element>
         <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
-            <attribute name="style" required="false" type="enum" element="LineKind" abstract="false"/>
+            <attribute name="style" required="false" type="enum" element="LineType" abstract="false"/>
             <attribute name="color" required="false" type="string" abstract="false"/>
             <attribute name="thickness" required="false" type="double" abstract="false"/>
           </attributes>
@@ -432,7 +435,7 @@
         <element name="Marker" typeCode="SEDML_MARKER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
             <attribute name="size" required="false" type="double" abstract="false"/>
-            <attribute name="style" required="false" type="enum" element="MarkerKind" abstract="false"/>
+            <attribute name="style" required="false" type="enum" element="MarkerType" abstract="false"/>
             <attribute name="fill" required="false" type="string" abstract="false"/>
             <attribute name="lineColor" required="false" type="string" abstract="false"/>
             <attribute name="lineThickness" required="false" type="double" abstract="false"/>
@@ -457,12 +460,12 @@
             <attribute name="dimensionTarget" required="false" type="SIdRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="DataRange" typeCode="SEDML_DATARANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
+        <element name="DataRange" typeCode="SEDML_DATA_RANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
           <attributes>
             <attribute name="sourceRef" required="true" type="SIdRef" abstract="false"/>
           </attributes>
         </element>
-        <element name="SimpleRepeatedTask" typeCode="SEDML_SIMPLEREPEATEDTASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Task" abstract="false">
+        <element name="SimpleRepeatedTask" typeCode="SEDML_TASK_SIMPLEREPEATEDTASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Task" abstract="false">
           <attributes>
             <attribute name="resetModel" required="true" type="bool" abstract="false"/>
             <attribute name="numRepeats" required="true" type="integer" abstract="false"/>
@@ -488,43 +491,60 @@
             <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
           </enumValues>
         </enum>
-        <enum name="AxisKind">
+        <enum name="AxisType">
           <enumValues>
-            <enumValue name="SEDML_AXISKIND_LINEAR" value="linear"/>
-            <enumValue name="SEDML_AXISKIND_LOG10" value="log10"/>
+            <enumValue name="SEDML_AXISTYPE_LINEAR" value="linear"/>
+            <enumValue name="SEDML_AXISTYPE_LOG10" value="log10"/>
           </enumValues>
         </enum>
-        <enum name="LineKind">
+        <enum name="LineType">
           <enumValues>
-            <enumValue name="SEDML_LINEKIND_NONE" value="none"/>
-            <enumValue name="SEDML_LINEKIND_SOLID" value="solid"/>
-            <enumValue name="SEDML_LINEKIND_DASH" value="dash"/>
-            <enumValue name="SEDML_LINEKIND_DOT" value="dot"/>
-            <enumValue name="SEDML_LINEKIND_DASHDOT" value="dashDot"/>
+            <enumValue name="SEDML_LINETYPE_NONE" value="none"/>
+            <enumValue name="SEDML_LINETYPE_SOLID" value="solid"/>
+            <enumValue name="SEDML_LINETYPE_DASH" value="dash"/>
+            <enumValue name="SEDML_LINETYPE_DOT" value="dot"/>
+            <enumValue name="SEDML_LINETYPE_DASHDOT" value="dashDot"/>
           </enumValues>
         </enum>
-        <enum name="MarkerKind">
+        <enum name="MarkerType">
           <enumValues>
-            <enumValue name="SEDML_MARKERKIND_NONE" value="none"/>
-            <enumValue name="SEDML_MARKERKIND_SQUARE" value="square"/>
-            <enumValue name="SEDML_MARKERKIND_CIRCLE" value="circle"/>
-            <enumValue name="SEDML_MARKERKIND_DIAMOND" value="diamond"/>
-            <enumValue name="SEDML_MARKERKIND_XCROSS" value="xCross"/>
-            <enumValue name="SEDML_MARKERKIND_PLUS" value="plus"/>
-            <enumValue name="SEDML_MARKERKIND_STAR" value="star"/>
-            <enumValue name="SEDML_MARKERKIND_TRIANGLEUP" value="triangleUp"/>
-            <enumValue name="SEDML_MARKERKIND_TRIANGLEDOWN" value="triangleDown"/>
-            <enumValue name="SEDML_MARKERKIND_TRIANGLELEFT" value="triangleLeft"/>
-            <enumValue name="SEDML_MARKERKIND_TRIANGLERIGHT" value="triangleRight"/>
-            <enumValue name="SEDML_MARKERKIND_HDASH" value="hDash"/>
-            <enumValue name="SEDML_MARKERKIND_VDASH" value="vDash"/>
+            <enumValue name="SEDML_MARKERTYPE_NONE" value="none"/>
+            <enumValue name="SEDML_MARKERTYPE_SQUARE" value="square"/>
+            <enumValue name="SEDML_MARKERTYPE_CIRCLE" value="circle"/>
+            <enumValue name="SEDML_MARKERTYPE_DIAMOND" value="diamond"/>
+            <enumValue name="SEDML_MARKERTYPE_XCROSS" value="xCross"/>
+            <enumValue name="SEDML_MARKERTYPE_PLUS" value="plus"/>
+            <enumValue name="SEDML_MARKERTYPE_STAR" value="star"/>
+            <enumValue name="SEDML_MARKERTYPE_TRIANGLEUP" value="triangleUp"/>
+            <enumValue name="SEDML_MARKERTYPE_TRIANGLEDOWN" value="triangleDown"/>
+            <enumValue name="SEDML_MARKERTYPE_TRIANGLELEFT" value="triangleLeft"/>
+            <enumValue name="SEDML_MARKERTYPE_TRIANGLERIGHT" value="triangleRight"/>
+            <enumValue name="SEDML_MARKERTYPE_HDASH" value="hDash"/>
+            <enumValue name="SEDML_MARKERTYPE_VDASH" value="vDash"/>
           </enumValues>
         </enum>
-        <enum name="CurveKind">
+        <enum name="CurveType">
           <enumValues>
-            <enumValue name="SEDML_CURVEKIND_POINTS" value="points"/>
-            <enumValue name="SEDML_CURVEKIND_BAR" value="bar"/>
-            <enumValue name="SEDML_CURVEKIND_BARSTACKED" value="barStacked"/>
+            <enumValue name="SEDML_CURVETYPE_POINTS" value="points"/>
+            <enumValue name="SEDML_CURVETYPE_BAR" value="bar"/>
+            <enumValue name="SEDML_CURVETYPE_BARSTACKED" value="barStacked"/>
+          </enumValues>
+        </enum>
+        <enum name="SurfaceType">
+          <enumValues>
+            <enumValue name="SEDML_SURFACETYPE_PARAMETRICCURVE" value="parametricCurve"/>
+            <enumValue name="SEDML_SURFACETYPE_SURFACEMESH" value="surfaceMesh"/>
+            <enumValue name="SEDML_SURFACETYPE_SURFACECONTOUR" value="surfaceContour"/>
+            <enumValue name="SEDML_SURFACETYPE_CONTOUR" value="contour"/>
+            <enumValue name="SEDML_SURFACETYPE_HEATMAP" value="heatMap"/>
+            <enumValue name="SEDML_SURFACETYPE_STACKEDCURVES" value="stackedCurves"/>
+            <enumValue name="SEDML_SURFACETYPE_BAR" value="bar"/>
+          </enumValues>
+        </enum>
+        <enum name="ExperimentType">
+          <enumValues>
+            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
           </enumValues>
         </enum>
       </enums>

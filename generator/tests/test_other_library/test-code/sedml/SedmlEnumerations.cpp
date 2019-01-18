@@ -213,69 +213,69 @@ ExperimentType_isValidString(const char* code)
 
 
 static
-const char* SEDML_AXIS_KIND_STRINGS[] =
+const char* SEDML_AXIS_TYPE_STRINGS[] =
 {
   "linear"
 , "log10"
-, "invalid AxisKind value"
+, "invalid AxisType value"
 };
 
 
 /*
- * Returns the string version of the provided #AxisKind_t enumeration.
+ * Returns the string version of the provided #AxisType_t enumeration.
  */
 LIBSEDML_EXTERN
 const char*
-AxisKind_toString(AxisKind_t ak)
+AxisType_toString(AxisType_t at)
 {
-  int min = SEDML_AXISKIND_LINEAR;
-  int max = SEDML_AXISKIND_INVALID;
+  int min = SEDML_AXISTYPE_LINEAR;
+  int max = SEDML_AXISTYPE_INVALID;
 
-  if (ak < min || ak > max)
+  if (at < min || at > max)
   {
-    return "(Unknown AxisKind value)";
+    return "(Unknown AxisType value)";
   }
 
-  return SEDML_AXIS_KIND_STRINGS[ak - min];
+  return SEDML_AXIS_TYPE_STRINGS[at - min];
 }
 
 
 /*
- * Returns the #AxisKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_AXISKIND_INVALID, AxisKind_t} if there is no such match.
+ * Returns the #AxisType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_AXISTYPE_INVALID, AxisType_t} if there is no such match.
  */
 LIBSEDML_EXTERN
-AxisKind_t
-AxisKind_fromString(const char* code)
+AxisType_t
+AxisType_fromString(const char* code)
 {
   static int size =
-    sizeof(SEDML_AXIS_KIND_STRINGS)/sizeof(SEDML_AXIS_KIND_STRINGS[0]);
+    sizeof(SEDML_AXIS_TYPE_STRINGS)/sizeof(SEDML_AXIS_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
   {
-    if (type == SEDML_AXIS_KIND_STRINGS[i])
+    if (type == SEDML_AXIS_TYPE_STRINGS[i])
     {
-      return (AxisKind_t)(i);
+      return (AxisType_t)(i);
     }
   }
 
-  return SEDML_AXISKIND_INVALID;
+  return SEDML_AXISTYPE_INVALID;
 }
 
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #AxisKind_t is valid.
+ * given #AxisType_t is valid.
  */
 LIBSEDML_EXTERN
 int
-AxisKind_isValid(AxisKind_t ak)
+AxisType_isValid(AxisType_t at)
 {
-  int min = SEDML_AXISKIND_LINEAR;
-  int max = SEDML_AXISKIND_INVALID;
+  int min = SEDML_AXISTYPE_LINEAR;
+  int max = SEDML_AXISTYPE_INVALID;
 
-  if (ak < min || ak >= max)
+  if (at < min || at >= max)
   {
     return 0;
   }
@@ -288,83 +288,83 @@ AxisKind_isValid(AxisKind_t ak)
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #AxisKind_t.
+ * given string is a valid #AxisType_t.
  */
 LIBSEDML_EXTERN
 int
-AxisKind_isValidString(const char* code)
+AxisType_isValidString(const char* code)
 {
-  return AxisKind_isValid(AxisKind_fromString(code));
+  return AxisType_isValid(AxisType_fromString(code));
 }
 
 
 static
-const char* SEDML_LINE_KIND_STRINGS[] =
+const char* SEDML_LINE_TYPE_STRINGS[] =
 {
   "none"
 , "solid"
 , "dash"
 , "dot"
 , "dashDot"
-, "invalid LineKind value"
+, "invalid LineType value"
 };
 
 
 /*
- * Returns the string version of the provided #LineKind_t enumeration.
+ * Returns the string version of the provided #LineType_t enumeration.
  */
 LIBSEDML_EXTERN
 const char*
-LineKind_toString(LineKind_t lk)
+LineType_toString(LineType_t lt)
 {
-  int min = SEDML_LINEKIND_NONE;
-  int max = SEDML_LINEKIND_INVALID;
+  int min = SEDML_LINETYPE_NONE;
+  int max = SEDML_LINETYPE_INVALID;
 
-  if (lk < min || lk > max)
+  if (lt < min || lt > max)
   {
-    return "(Unknown LineKind value)";
+    return "(Unknown LineType value)";
   }
 
-  return SEDML_LINE_KIND_STRINGS[lk - min];
+  return SEDML_LINE_TYPE_STRINGS[lt - min];
 }
 
 
 /*
- * Returns the #LineKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_LINEKIND_INVALID, LineKind_t} if there is no such match.
+ * Returns the #LineType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t} if there is no such match.
  */
 LIBSEDML_EXTERN
-LineKind_t
-LineKind_fromString(const char* code)
+LineType_t
+LineType_fromString(const char* code)
 {
   static int size =
-    sizeof(SEDML_LINE_KIND_STRINGS)/sizeof(SEDML_LINE_KIND_STRINGS[0]);
+    sizeof(SEDML_LINE_TYPE_STRINGS)/sizeof(SEDML_LINE_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
   {
-    if (type == SEDML_LINE_KIND_STRINGS[i])
+    if (type == SEDML_LINE_TYPE_STRINGS[i])
     {
-      return (LineKind_t)(i);
+      return (LineType_t)(i);
     }
   }
 
-  return SEDML_LINEKIND_INVALID;
+  return SEDML_LINETYPE_INVALID;
 }
 
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #LineKind_t is valid.
+ * given #LineType_t is valid.
  */
 LIBSEDML_EXTERN
 int
-LineKind_isValid(LineKind_t lk)
+LineType_isValid(LineType_t lt)
 {
-  int min = SEDML_LINEKIND_NONE;
-  int max = SEDML_LINEKIND_INVALID;
+  int min = SEDML_LINETYPE_NONE;
+  int max = SEDML_LINETYPE_INVALID;
 
-  if (lk < min || lk >= max)
+  if (lt < min || lt >= max)
   {
     return 0;
   }
@@ -377,18 +377,18 @@ LineKind_isValid(LineKind_t lk)
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #LineKind_t.
+ * given string is a valid #LineType_t.
  */
 LIBSEDML_EXTERN
 int
-LineKind_isValidString(const char* code)
+LineType_isValidString(const char* code)
 {
-  return LineKind_isValid(LineKind_fromString(code));
+  return LineType_isValid(LineType_fromString(code));
 }
 
 
 static
-const char* SEDML_MARKER_KIND_STRINGS[] =
+const char* SEDML_MARKER_TYPE_STRINGS[] =
 {
   "none"
 , "square"
@@ -403,66 +403,66 @@ const char* SEDML_MARKER_KIND_STRINGS[] =
 , "triangleRight"
 , "hDash"
 , "vDash"
-, "invalid MarkerKind value"
+, "invalid MarkerType value"
 };
 
 
 /*
- * Returns the string version of the provided #MarkerKind_t enumeration.
+ * Returns the string version of the provided #MarkerType_t enumeration.
  */
 LIBSEDML_EXTERN
 const char*
-MarkerKind_toString(MarkerKind_t mk)
+MarkerType_toString(MarkerType_t mt)
 {
-  int min = SEDML_MARKERKIND_NONE;
-  int max = SEDML_MARKERKIND_INVALID;
+  int min = SEDML_MARKERTYPE_NONE;
+  int max = SEDML_MARKERTYPE_INVALID;
 
-  if (mk < min || mk > max)
+  if (mt < min || mt > max)
   {
-    return "(Unknown MarkerKind value)";
+    return "(Unknown MarkerType value)";
   }
 
-  return SEDML_MARKER_KIND_STRINGS[mk - min];
+  return SEDML_MARKER_TYPE_STRINGS[mt - min];
 }
 
 
 /*
- * Returns the #MarkerKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_MARKERKIND_INVALID, MarkerKind_t} if there is no such
+ * Returns the #MarkerType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_MARKERTYPE_INVALID, MarkerType_t} if there is no such
  * match.
  */
 LIBSEDML_EXTERN
-MarkerKind_t
-MarkerKind_fromString(const char* code)
+MarkerType_t
+MarkerType_fromString(const char* code)
 {
   static int size =
-    sizeof(SEDML_MARKER_KIND_STRINGS)/sizeof(SEDML_MARKER_KIND_STRINGS[0]);
+    sizeof(SEDML_MARKER_TYPE_STRINGS)/sizeof(SEDML_MARKER_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
   {
-    if (type == SEDML_MARKER_KIND_STRINGS[i])
+    if (type == SEDML_MARKER_TYPE_STRINGS[i])
     {
-      return (MarkerKind_t)(i);
+      return (MarkerType_t)(i);
     }
   }
 
-  return SEDML_MARKERKIND_INVALID;
+  return SEDML_MARKERTYPE_INVALID;
 }
 
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #MarkerKind_t is valid.
+ * given #MarkerType_t is valid.
  */
 LIBSEDML_EXTERN
 int
-MarkerKind_isValid(MarkerKind_t mk)
+MarkerType_isValid(MarkerType_t mt)
 {
-  int min = SEDML_MARKERKIND_NONE;
-  int max = SEDML_MARKERKIND_INVALID;
+  int min = SEDML_MARKERTYPE_NONE;
+  int max = SEDML_MARKERTYPE_INVALID;
 
-  if (mk < min || mk >= max)
+  if (mt < min || mt >= max)
   {
     return 0;
   }
@@ -475,82 +475,82 @@ MarkerKind_isValid(MarkerKind_t mk)
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #MarkerKind_t.
+ * given string is a valid #MarkerType_t.
  */
 LIBSEDML_EXTERN
 int
-MarkerKind_isValidString(const char* code)
+MarkerType_isValidString(const char* code)
 {
-  return MarkerKind_isValid(MarkerKind_fromString(code));
+  return MarkerType_isValid(MarkerType_fromString(code));
 }
 
 
 static
-const char* SEDML_CURVE_KIND_STRINGS[] =
+const char* SEDML_CURVE_TYPE_STRINGS[] =
 {
   "points"
 , "bar"
 , "barStacked"
-, "invalid CurveKind value"
+, "invalid CurveType value"
 };
 
 
 /*
- * Returns the string version of the provided #CurveKind_t enumeration.
+ * Returns the string version of the provided #CurveType_t enumeration.
  */
 LIBSEDML_EXTERN
 const char*
-CurveKind_toString(CurveKind_t ck)
+CurveType_toString(CurveType_t ct)
 {
-  int min = SEDML_CURVEKIND_POINTS;
-  int max = SEDML_CURVEKIND_INVALID;
+  int min = SEDML_CURVETYPE_POINTS;
+  int max = SEDML_CURVETYPE_INVALID;
 
-  if (ck < min || ck > max)
+  if (ct < min || ct > max)
   {
-    return "(Unknown CurveKind value)";
+    return "(Unknown CurveType value)";
   }
 
-  return SEDML_CURVE_KIND_STRINGS[ck - min];
+  return SEDML_CURVE_TYPE_STRINGS[ct - min];
 }
 
 
 /*
- * Returns the #CurveKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_CURVEKIND_INVALID, CurveKind_t} if there is no such
+ * Returns the #CurveType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t} if there is no such
  * match.
  */
 LIBSEDML_EXTERN
-CurveKind_t
-CurveKind_fromString(const char* code)
+CurveType_t
+CurveType_fromString(const char* code)
 {
   static int size =
-    sizeof(SEDML_CURVE_KIND_STRINGS)/sizeof(SEDML_CURVE_KIND_STRINGS[0]);
+    sizeof(SEDML_CURVE_TYPE_STRINGS)/sizeof(SEDML_CURVE_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
   {
-    if (type == SEDML_CURVE_KIND_STRINGS[i])
+    if (type == SEDML_CURVE_TYPE_STRINGS[i])
     {
-      return (CurveKind_t)(i);
+      return (CurveType_t)(i);
     }
   }
 
-  return SEDML_CURVEKIND_INVALID;
+  return SEDML_CURVETYPE_INVALID;
 }
 
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #CurveKind_t is valid.
+ * given #CurveType_t is valid.
  */
 LIBSEDML_EXTERN
 int
-CurveKind_isValid(CurveKind_t ck)
+CurveType_isValid(CurveType_t ct)
 {
-  int min = SEDML_CURVEKIND_POINTS;
-  int max = SEDML_CURVEKIND_INVALID;
+  int min = SEDML_CURVETYPE_POINTS;
+  int max = SEDML_CURVETYPE_INVALID;
 
-  if (ck < min || ck >= max)
+  if (ct < min || ct >= max)
   {
     return 0;
   }
@@ -563,13 +563,105 @@ CurveKind_isValid(CurveKind_t ck)
 
 /*
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #CurveKind_t.
+ * given string is a valid #CurveType_t.
  */
 LIBSEDML_EXTERN
 int
-CurveKind_isValidString(const char* code)
+CurveType_isValidString(const char* code)
 {
-  return CurveKind_isValid(CurveKind_fromString(code));
+  return CurveType_isValid(CurveType_fromString(code));
+}
+
+
+static
+const char* SEDML_SURFACE_TYPE_STRINGS[] =
+{
+  "parametricCurve"
+, "surfaceMesh"
+, "surfaceContour"
+, "contour"
+, "heatMap"
+, "stackedCurves"
+, "bar"
+, "invalid SurfaceType value"
+};
+
+
+/*
+ * Returns the string version of the provided #SurfaceType_t enumeration.
+ */
+LIBSEDML_EXTERN
+const char*
+SurfaceType_toString(SurfaceType_t st)
+{
+  int min = SEDML_SURFACETYPE_PARAMETRICCURVE;
+  int max = SEDML_SURFACETYPE_INVALID;
+
+  if (st < min || st > max)
+  {
+    return "(Unknown SurfaceType value)";
+  }
+
+  return SEDML_SURFACE_TYPE_STRINGS[st - min];
+}
+
+
+/*
+ * Returns the #SurfaceType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_SURFACETYPE_INVALID, SurfaceType_t} if there is no such
+ * match.
+ */
+LIBSEDML_EXTERN
+SurfaceType_t
+SurfaceType_fromString(const char* code)
+{
+  static int size =
+    sizeof(SEDML_SURFACE_TYPE_STRINGS)/sizeof(SEDML_SURFACE_TYPE_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SEDML_SURFACE_TYPE_STRINGS[i])
+    {
+      return (SurfaceType_t)(i);
+    }
+  }
+
+  return SEDML_SURFACETYPE_INVALID;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #SurfaceType_t is valid.
+ */
+LIBSEDML_EXTERN
+int
+SurfaceType_isValid(SurfaceType_t st)
+{
+  int min = SEDML_SURFACETYPE_PARAMETRICCURVE;
+  int max = SEDML_SURFACETYPE_INVALID;
+
+  if (st < min || st >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #SurfaceType_t.
+ */
+LIBSEDML_EXTERN
+int
+SurfaceType_isValidString(const char* code)
+{
+  return SurfaceType_isValid(SurfaceType_fromString(code));
 }
 
 

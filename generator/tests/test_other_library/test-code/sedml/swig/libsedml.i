@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -358,14 +358,85 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedChange.h>
 %include <sedml/SedListOfChanges.h>
 %include <sedml/SedAddXML.h>
-%include <sedml/SedSetValue.h>
-%include <sedml/SedListOfSetValues.h>
-%include <sedml/SedDataGenerator.h>
-%include <sedml/SedListOfDataGenerators.h>
-%include <sedml/SedRepeatedTask.h>
+%include <sedml/SedChangeAttribute.h>
+%include <sedml/SedVariable.h>
+%include <sedml/SedListOfVariables.h>
+%include <sedml/SedParameter.h>
+%include <sedml/SedListOfParameters.h>
 %include <sedml/SedSimulation.h>
 %include <sedml/SedListOfSimulations.h>
+%include <sedml/SedUniformTimeCourse.h>
+%include <sedml/SedAlgorithm.h>
+%include <sedml/SedAbstractTask.h>
+%include <sedml/SedListOfAbstractTasks.h>
+%include <sedml/SedTask.h>
+%include <sedml/SedDataGenerator.h>
+%include <sedml/SedListOfDataGenerators.h>
+%include <sedml/SedOutput.h>
+%include <sedml/SedListOfOutputs.h>
+%include <sedml/SedPlot.h>
+%include <sedml/SedPlot2D.h>
+%include <sedml/SedPlot3D.h>
+%include <sedml/SedAbstractCurve.h>
+%include <sedml/SedListOfAbstractCurves.h>
+%include <sedml/SedCurve.h>
+%include <sedml/SedSurface.h>
+%include <sedml/SedListOfSurfaces.h>
+%include <sedml/SedDataSet.h>
+%include <sedml/SedListOfDataSets.h>
+%include <sedml/SedReport.h>
+%include <sedml/SedAlgorithmParameter.h>
+%include <sedml/SedListOfAlgorithmParameters.h>
+%include <sedml/SedRange.h>
+%include <sedml/SedListOfRanges.h>
+%include <sedml/SedChangeXML.h>
+%include <sedml/SedRemoveXML.h>
+%include <sedml/SedSetValue.h>
+%include <sedml/SedListOfSetValues.h>
+%include <sedml/SedUniformRange.h>
 %include <sedml/SedVectorRange.h>
+%include <sedml/SedFunctionalRange.h>
+%include <sedml/SedSubTask.h>
+%include <sedml/SedListOfSubTasks.h>
+%include <sedml/SedOneStep.h>
+%include <sedml/SedSteadyState.h>
+%include <sedml/SedRepeatedTask.h>
+%include <sedml/SedComputeChange.h>
+%include <sedml/SedDataDescription.h>
+%include <sedml/SedListOfDataDescriptions.h>
+%include <sedml/SedDataSource.h>
+%include <sedml/SedListOfDataSources.h>
+%include <sedml/SedSlice.h>
+%include <sedml/SedListOfSlices.h>
+%include <sedml/SedParameterEstimationTask.h>
+%include <sedml/SedObjective.h>
+%include <sedml/SedLeastSquareObjectiveFunction.h>
+%include <sedml/SedAdjustableParameter.h>
+%include <sedml/SedListOfAdjustableParameters.h>
+%include <sedml/SedExperimentRef.h>
+%include <sedml/SedListOfExperimentRefs.h>
+%include <sedml/SedFitExperiment.h>
+%include <sedml/SedListOfFitExperiments.h>
+%include <sedml/SedFitMapping.h>
+%include <sedml/SedListOfFitMappings.h>
+%include <sedml/SedScaling.h>
+%include <sedml/SedValueScaling.h>
+%include <sedml/SedColumnScaling.h>
+%include <sedml/SedBounds.h>
+%include <sedml/SedFigure.h>
+%include <sedml/SedSubPlot.h>
+%include <sedml/SedListOfSubPlots.h>
+%include <sedml/SedAxis.h>
+%include <sedml/SedStyle.h>
+%include <sedml/SedLine.h>
+%include <sedml/SedMarker.h>
+%include <sedml/SedFill.h>
+%include <sedml/SedDependentVariable.h>
+%include <sedml/SedRemainingDimension.h>
+%include <sedml/SedListOfRemainingDimensions.h>
+%include <sedml/SedDataRange.h>
+%include <sedml/SedSimpleRepeatedTask.h>
+%include <sedml/SedShadedArea.h>
 
 %include <numl/common/extern.h>
 %include <numl/common/libnuml-namespace.h>

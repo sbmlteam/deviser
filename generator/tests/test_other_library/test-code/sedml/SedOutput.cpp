@@ -672,8 +672,7 @@ SedOutput::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedOutputAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlOutputAllowedAttributes, level, version, details);
       }
     }
   }

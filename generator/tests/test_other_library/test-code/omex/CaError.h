@@ -72,15 +72,15 @@ typedef enum
 , InvalidNamespaceOnCa      = 20101
 , AllowedAttributes      = 20102
 , CaEmptyListElement      = 20103
-, CombineCaContentAllowedCoreAttributes      = 20201
-, CombineCaContentAllowedCoreElements      = 20202
-, CombineCaContentAllowedAttributes      = 20203
-, CombineCaContentLocationMustBeString      = 20204
-, CombineCaContentFormatMustBeString      = 20205
-, CombineCaContentMasterMustBeBoolean      = 20206
-, CombineCaOmexManifestAllowedCoreAttributes      = 20301
-, CombineCaOmexManifestAllowedCoreElements      = 20302
-, CombineCaOmexManifestAllowedElements      = 20303
+, CombineContentAllowedCoreAttributes      = 20201
+, CombineContentAllowedCoreElements      = 20202
+, CombineContentAllowedAttributes      = 20203
+, CombineContentLocationMustBeString      = 20204
+, CombineContentFormatMustBeString      = 20205
+, CombineContentMasterMustBeBoolean      = 20206
+, CombineOmexManifestAllowedCoreAttributes      = 20301
+, CombineOmexManifestAllowedCoreElements      = 20302
+, CombineOmexManifestAllowedElements      = 20303
 , CaUnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the OMEX Core namespace. */
 , CaCodesUpperBound                   = 99999 /*!< Upper boundary of libCombine-specific diagnostic codes. */
 } CaErrorCode_t;

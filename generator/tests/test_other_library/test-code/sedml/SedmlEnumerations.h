@@ -262,27 +262,27 @@ ExperimentType_isValidString(const char* code);
 
 
 /**
- * @enum AxisKind_t
- * @brief Enumeration of values permitted as the value of "AxisKind_t".
+ * @enum AxisType_t
+ * @brief Enumeration of values permitted as the value of "AxisType_t".
  */
 typedef enum
 {
-  SEDML_AXISKIND_LINEAR        /*!< The sedml axiskind is @c "linear". */
-, SEDML_AXISKIND_LOG10         /*!< The sedml axiskind is @c "log10". */
-, SEDML_AXISKIND_INVALID       /*!< Invalid AxisKind value. */
-} AxisKind_t;
+  SEDML_AXISTYPE_LINEAR        /*!< The sedml axistype is @c "linear". */
+, SEDML_AXISTYPE_LOG10         /*!< The sedml axistype is @c "log10". */
+, SEDML_AXISTYPE_INVALID       /*!< Invalid AxisType value. */
+} AxisType_t;
 
 
 /**
- * Returns the string version of the provided #AxisKind_t enumeration.
+ * Returns the string version of the provided #AxisType_t enumeration.
  *
- * @param ak the #AxisKind_t enumeration value to convert.
+ * @param at the #AxisType_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
  * "linear",
  * "log10",
- * "invalid AxisKind value",
- * or @c NULL if the value is @sbmlconstant{SEDML_AXISKIND_INVALID, AxisKind_t}
+ * "invalid AxisType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_AXISTYPE_INVALID, AxisType_t}
  * or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -293,42 +293,42 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char*
-AxisKind_toString(AxisKind_t ak);
+AxisType_toString(AxisType_t at);
 
 
 /**
- * Returns the #AxisKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_AXISKIND_INVALID, AxisKind_t} if there is no such match.
+ * Returns the #AxisType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_AXISTYPE_INVALID, AxisType_t} if there is no such match.
  *
- * @param code the string to convert to a #AxisKind_t.
+ * @param code the string to convert to a #AxisType_t.
  *
- * @return the corresponding #AxisKind_t or
- * @sbmlconstant{SEDML_AXISKIND_INVALID, AxisKind_t} if no match is found.
+ * @return the corresponding #AxisType_t or
+ * @sbmlconstant{SEDML_AXISTYPE_INVALID, AxisType_t} if no match is found.
  *
  * @note The matching is case-sensitive: "linear" will return
- * @sbmlconstant{SEDML_AXISKIND_LINEAR, AxisKind_t}, but "Linear" will return
- * @sbmlconstant{SEDML_AXISKIND_INVALID, AxisKind_t}.
+ * @sbmlconstant{SEDML_AXISTYPE_LINEAR, AxisType_t}, but "Linear" will return
+ * @sbmlconstant{SEDML_AXISTYPE_INVALID, AxisType_t}.
  *
  * @if conly
  * @memberof Sedml_t
  * @endif
  */
 LIBSEDML_EXTERN
-AxisKind_t
-AxisKind_fromString(const char* code);
+AxisType_t
+AxisType_fromString(const char* code);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #AxisKind_t is valid.
+ * given #AxisType_t is valid.
  *
- * @param ak the #AxisKind_t enumeration to query.
+ * @param at the #AxisType_t enumeration to query.
  *
- * @return @c 1 (true) if the #AxisKind_t is
- * @sbmlconstant{SEDML_AXISKIND_LINEAR, AxisKind_t}, or
- * @sbmlconstant{SEDML_AXISKIND_LOG10, AxisKind_t};
- * @c 0 (false) otherwise (including @sbmlconstant{SEDML_AXISKIND_INVALID,
- * AxisKind_t}).
+ * @return @c 1 (true) if the #AxisType_t is
+ * @sbmlconstant{SEDML_AXISTYPE_LINEAR, AxisType_t}, or
+ * @sbmlconstant{SEDML_AXISTYPE_LOG10, AxisType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SEDML_AXISTYPE_INVALID,
+ * AxisType_t}).
  *
  * @if conly
  * @memberof Sedml_t
@@ -336,19 +336,19 @@ AxisKind_fromString(const char* code);
  */
 LIBSEDML_EXTERN
 int
-AxisKind_isValid(AxisKind_t ak);
+AxisType_isValid(AxisType_t at);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #AxisKind_t.
+ * given string is a valid #AxisType_t.
  *
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
  * "linear",
  * "log10", or
- * "invalid AxisKind value";
+ * "invalid AxisType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "linear" will return @c 1 (true), but
@@ -360,28 +360,28 @@ AxisKind_isValid(AxisKind_t ak);
  */
 LIBSEDML_EXTERN
 int
-AxisKind_isValidString(const char* code);
+AxisType_isValidString(const char* code);
 
 
 /**
- * @enum LineKind_t
- * @brief Enumeration of values permitted as the value of "LineKind_t".
+ * @enum LineType_t
+ * @brief Enumeration of values permitted as the value of "LineType_t".
  */
 typedef enum
 {
-  SEDML_LINEKIND_NONE          /*!< The sedml linekind is @c "none". */
-, SEDML_LINEKIND_SOLID         /*!< The sedml linekind is @c "solid". */
-, SEDML_LINEKIND_DASH          /*!< The sedml linekind is @c "dash". */
-, SEDML_LINEKIND_DOT           /*!< The sedml linekind is @c "dot". */
-, SEDML_LINEKIND_DASHDOT       /*!< The sedml linekind is @c "dashDot". */
-, SEDML_LINEKIND_INVALID       /*!< Invalid LineKind value. */
-} LineKind_t;
+  SEDML_LINETYPE_NONE          /*!< The sedml linetype is @c "none". */
+, SEDML_LINETYPE_SOLID         /*!< The sedml linetype is @c "solid". */
+, SEDML_LINETYPE_DASH          /*!< The sedml linetype is @c "dash". */
+, SEDML_LINETYPE_DOT           /*!< The sedml linetype is @c "dot". */
+, SEDML_LINETYPE_DASHDOT       /*!< The sedml linetype is @c "dashDot". */
+, SEDML_LINETYPE_INVALID       /*!< Invalid LineType value. */
+} LineType_t;
 
 
 /**
- * Returns the string version of the provided #LineKind_t enumeration.
+ * Returns the string version of the provided #LineType_t enumeration.
  *
- * @param lk the #LineKind_t enumeration value to convert.
+ * @param lt the #LineType_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
  * "none",
@@ -389,8 +389,8 @@ typedef enum
  * "dash",
  * "dot",
  * "dashDot",
- * "invalid LineKind value",
- * or @c NULL if the value is @sbmlconstant{SEDML_LINEKIND_INVALID, LineKind_t}
+ * "invalid LineType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}
  * or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
@@ -401,45 +401,45 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char*
-LineKind_toString(LineKind_t lk);
+LineType_toString(LineType_t lt);
 
 
 /**
- * Returns the #LineKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_LINEKIND_INVALID, LineKind_t} if there is no such match.
+ * Returns the #LineType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t} if there is no such match.
  *
- * @param code the string to convert to a #LineKind_t.
+ * @param code the string to convert to a #LineType_t.
  *
- * @return the corresponding #LineKind_t or
- * @sbmlconstant{SEDML_LINEKIND_INVALID, LineKind_t} if no match is found.
+ * @return the corresponding #LineType_t or
+ * @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t} if no match is found.
  *
  * @note The matching is case-sensitive: "none" will return
- * @sbmlconstant{SEDML_LINEKIND_NONE, LineKind_t}, but "None" will return
- * @sbmlconstant{SEDML_LINEKIND_INVALID, LineKind_t}.
+ * @sbmlconstant{SEDML_LINETYPE_NONE, LineType_t}, but "None" will return
+ * @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}.
  *
  * @if conly
  * @memberof Sedml_t
  * @endif
  */
 LIBSEDML_EXTERN
-LineKind_t
-LineKind_fromString(const char* code);
+LineType_t
+LineType_fromString(const char* code);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #LineKind_t is valid.
+ * given #LineType_t is valid.
  *
- * @param lk the #LineKind_t enumeration to query.
+ * @param lt the #LineType_t enumeration to query.
  *
- * @return @c 1 (true) if the #LineKind_t is
- * @sbmlconstant{SEDML_LINEKIND_NONE, LineKind_t},
- * @sbmlconstant{SEDML_LINEKIND_SOLID, LineKind_t},
- * @sbmlconstant{SEDML_LINEKIND_DASH, LineKind_t},
- * @sbmlconstant{SEDML_LINEKIND_DOT, LineKind_t}, or
- * @sbmlconstant{SEDML_LINEKIND_DASHDOT, LineKind_t};
- * @c 0 (false) otherwise (including @sbmlconstant{SEDML_LINEKIND_INVALID,
- * LineKind_t}).
+ * @return @c 1 (true) if the #LineType_t is
+ * @sbmlconstant{SEDML_LINETYPE_NONE, LineType_t},
+ * @sbmlconstant{SEDML_LINETYPE_SOLID, LineType_t},
+ * @sbmlconstant{SEDML_LINETYPE_DASH, LineType_t},
+ * @sbmlconstant{SEDML_LINETYPE_DOT, LineType_t}, or
+ * @sbmlconstant{SEDML_LINETYPE_DASHDOT, LineType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SEDML_LINETYPE_INVALID,
+ * LineType_t}).
  *
  * @if conly
  * @memberof Sedml_t
@@ -447,12 +447,12 @@ LineKind_fromString(const char* code);
  */
 LIBSEDML_EXTERN
 int
-LineKind_isValid(LineKind_t lk);
+LineType_isValid(LineType_t lt);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #LineKind_t.
+ * given string is a valid #LineType_t.
  *
  * @param code the string to query.
  *
@@ -462,7 +462,7 @@ LineKind_isValid(LineKind_t lk);
  * "dash",
  * "dot",
  * "dashDot", or
- * "invalid LineKind value";
+ * "invalid LineType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "none" will return @c 1 (true), but
@@ -474,36 +474,36 @@ LineKind_isValid(LineKind_t lk);
  */
 LIBSEDML_EXTERN
 int
-LineKind_isValidString(const char* code);
+LineType_isValidString(const char* code);
 
 
 /**
- * @enum MarkerKind_t
- * @brief Enumeration of values permitted as the value of "MarkerKind_t".
+ * @enum MarkerType_t
+ * @brief Enumeration of values permitted as the value of "MarkerType_t".
  */
 typedef enum
 {
-  SEDML_MARKERKIND_NONE                /*!< The sedml markerkind is @c "none". */
-, SEDML_MARKERKIND_SQUARE              /*!< The sedml markerkind is @c "square". */
-, SEDML_MARKERKIND_CIRCLE              /*!< The sedml markerkind is @c "circle". */
-, SEDML_MARKERKIND_DIAMOND             /*!< The sedml markerkind is @c "diamond". */
-, SEDML_MARKERKIND_XCROSS              /*!< The sedml markerkind is @c "xCross". */
-, SEDML_MARKERKIND_PLUS                /*!< The sedml markerkind is @c "plus". */
-, SEDML_MARKERKIND_STAR                /*!< The sedml markerkind is @c "star". */
-, SEDML_MARKERKIND_TRIANGLEUP          /*!< The sedml markerkind is @c "triangleUp". */
-, SEDML_MARKERKIND_TRIANGLEDOWN        /*!< The sedml markerkind is @c "triangleDown". */
-, SEDML_MARKERKIND_TRIANGLELEFT        /*!< The sedml markerkind is @c "triangleLeft". */
-, SEDML_MARKERKIND_TRIANGLERIGHT       /*!< The sedml markerkind is @c "triangleRight". */
-, SEDML_MARKERKIND_HDASH               /*!< The sedml markerkind is @c "hDash". */
-, SEDML_MARKERKIND_VDASH               /*!< The sedml markerkind is @c "vDash". */
-, SEDML_MARKERKIND_INVALID             /*!< Invalid MarkerKind value. */
-} MarkerKind_t;
+  SEDML_MARKERTYPE_NONE                /*!< The sedml markertype is @c "none". */
+, SEDML_MARKERTYPE_SQUARE              /*!< The sedml markertype is @c "square". */
+, SEDML_MARKERTYPE_CIRCLE              /*!< The sedml markertype is @c "circle". */
+, SEDML_MARKERTYPE_DIAMOND             /*!< The sedml markertype is @c "diamond". */
+, SEDML_MARKERTYPE_XCROSS              /*!< The sedml markertype is @c "xCross". */
+, SEDML_MARKERTYPE_PLUS                /*!< The sedml markertype is @c "plus". */
+, SEDML_MARKERTYPE_STAR                /*!< The sedml markertype is @c "star". */
+, SEDML_MARKERTYPE_TRIANGLEUP          /*!< The sedml markertype is @c "triangleUp". */
+, SEDML_MARKERTYPE_TRIANGLEDOWN        /*!< The sedml markertype is @c "triangleDown". */
+, SEDML_MARKERTYPE_TRIANGLELEFT        /*!< The sedml markertype is @c "triangleLeft". */
+, SEDML_MARKERTYPE_TRIANGLERIGHT       /*!< The sedml markertype is @c "triangleRight". */
+, SEDML_MARKERTYPE_HDASH               /*!< The sedml markertype is @c "hDash". */
+, SEDML_MARKERTYPE_VDASH               /*!< The sedml markertype is @c "vDash". */
+, SEDML_MARKERTYPE_INVALID             /*!< Invalid MarkerType value. */
+} MarkerType_t;
 
 
 /**
- * Returns the string version of the provided #MarkerKind_t enumeration.
+ * Returns the string version of the provided #MarkerType_t enumeration.
  *
- * @param mk the #MarkerKind_t enumeration value to convert.
+ * @param mt the #MarkerType_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
  * "none",
@@ -519,9 +519,9 @@ typedef enum
  * "triangleRight",
  * "hDash",
  * "vDash",
- * "invalid MarkerKind value",
- * or @c NULL if the value is @sbmlconstant{SEDML_MARKERKIND_INVALID,
- * MarkerKind_t} or another invalid enumeration value.
+ * "invalid MarkerType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_MARKERTYPE_INVALID,
+ * MarkerType_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -531,54 +531,54 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char*
-MarkerKind_toString(MarkerKind_t mk);
+MarkerType_toString(MarkerType_t mt);
 
 
 /**
- * Returns the #MarkerKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_MARKERKIND_INVALID, MarkerKind_t} if there is no such
+ * Returns the #MarkerType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_MARKERTYPE_INVALID, MarkerType_t} if there is no such
  * match.
  *
- * @param code the string to convert to a #MarkerKind_t.
+ * @param code the string to convert to a #MarkerType_t.
  *
- * @return the corresponding #MarkerKind_t or
- * @sbmlconstant{SEDML_MARKERKIND_INVALID, MarkerKind_t} if no match is found.
+ * @return the corresponding #MarkerType_t or
+ * @sbmlconstant{SEDML_MARKERTYPE_INVALID, MarkerType_t} if no match is found.
  *
  * @note The matching is case-sensitive: "none" will return
- * @sbmlconstant{SEDML_MARKERKIND_NONE, MarkerKind_t}, but "None" will return
- * @sbmlconstant{SEDML_MARKERKIND_INVALID, MarkerKind_t}.
+ * @sbmlconstant{SEDML_MARKERTYPE_NONE, MarkerType_t}, but "None" will return
+ * @sbmlconstant{SEDML_MARKERTYPE_INVALID, MarkerType_t}.
  *
  * @if conly
  * @memberof Sedml_t
  * @endif
  */
 LIBSEDML_EXTERN
-MarkerKind_t
-MarkerKind_fromString(const char* code);
+MarkerType_t
+MarkerType_fromString(const char* code);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #MarkerKind_t is valid.
+ * given #MarkerType_t is valid.
  *
- * @param mk the #MarkerKind_t enumeration to query.
+ * @param mt the #MarkerType_t enumeration to query.
  *
- * @return @c 1 (true) if the #MarkerKind_t is
- * @sbmlconstant{SEDML_MARKERKIND_NONE, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_SQUARE, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_CIRCLE, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_DIAMOND, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_XCROSS, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_PLUS, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_STAR, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_TRIANGLEUP, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_TRIANGLEDOWN, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_TRIANGLELEFT, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_TRIANGLERIGHT, MarkerKind_t},
- * @sbmlconstant{SEDML_MARKERKIND_HDASH, MarkerKind_t}, or
- * @sbmlconstant{SEDML_MARKERKIND_VDASH, MarkerKind_t};
- * @c 0 (false) otherwise (including @sbmlconstant{SEDML_MARKERKIND_INVALID,
- * MarkerKind_t}).
+ * @return @c 1 (true) if the #MarkerType_t is
+ * @sbmlconstant{SEDML_MARKERTYPE_NONE, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_SQUARE, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_CIRCLE, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_DIAMOND, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_XCROSS, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_PLUS, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_STAR, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_TRIANGLEUP, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_TRIANGLEDOWN, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_TRIANGLELEFT, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_TRIANGLERIGHT, MarkerType_t},
+ * @sbmlconstant{SEDML_MARKERTYPE_HDASH, MarkerType_t}, or
+ * @sbmlconstant{SEDML_MARKERTYPE_VDASH, MarkerType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SEDML_MARKERTYPE_INVALID,
+ * MarkerType_t}).
  *
  * @if conly
  * @memberof Sedml_t
@@ -586,12 +586,12 @@ MarkerKind_fromString(const char* code);
  */
 LIBSEDML_EXTERN
 int
-MarkerKind_isValid(MarkerKind_t mk);
+MarkerType_isValid(MarkerType_t mt);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #MarkerKind_t.
+ * given string is a valid #MarkerType_t.
  *
  * @param code the string to query.
  *
@@ -609,7 +609,7 @@ MarkerKind_isValid(MarkerKind_t mk);
  * "triangleRight",
  * "hDash",
  * "vDash", or
- * "invalid MarkerKind value";
+ * "invalid MarkerType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "none" will return @c 1 (true), but
@@ -621,34 +621,34 @@ MarkerKind_isValid(MarkerKind_t mk);
  */
 LIBSEDML_EXTERN
 int
-MarkerKind_isValidString(const char* code);
+MarkerType_isValidString(const char* code);
 
 
 /**
- * @enum CurveKind_t
- * @brief Enumeration of values permitted as the value of "CurveKind_t".
+ * @enum CurveType_t
+ * @brief Enumeration of values permitted as the value of "CurveType_t".
  */
 typedef enum
 {
-  SEDML_CURVEKIND_POINTS           /*!< The sedml curvekind is @c "points". */
-, SEDML_CURVEKIND_BAR              /*!< The sedml curvekind is @c "bar". */
-, SEDML_CURVEKIND_BARSTACKED       /*!< The sedml curvekind is @c "barStacked". */
-, SEDML_CURVEKIND_INVALID          /*!< Invalid CurveKind value. */
-} CurveKind_t;
+  SEDML_CURVETYPE_POINTS           /*!< The sedml curvetype is @c "points". */
+, SEDML_CURVETYPE_BAR              /*!< The sedml curvetype is @c "bar". */
+, SEDML_CURVETYPE_BARSTACKED       /*!< The sedml curvetype is @c "barStacked". */
+, SEDML_CURVETYPE_INVALID          /*!< Invalid CurveType value. */
+} CurveType_t;
 
 
 /**
- * Returns the string version of the provided #CurveKind_t enumeration.
+ * Returns the string version of the provided #CurveType_t enumeration.
  *
- * @param ck the #CurveKind_t enumeration value to convert.
+ * @param ct the #CurveType_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
  * "points",
  * "bar",
  * "barStacked",
- * "invalid CurveKind value",
- * or @c NULL if the value is @sbmlconstant{SEDML_CURVEKIND_INVALID,
- * CurveKind_t} or another invalid enumeration value.
+ * "invalid CurveType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_CURVETYPE_INVALID,
+ * CurveType_t} or another invalid enumeration value.
  *
  * @copydetails doc_returned_unowned_char
  *
@@ -658,44 +658,44 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char*
-CurveKind_toString(CurveKind_t ck);
+CurveType_toString(CurveType_t ct);
 
 
 /**
- * Returns the #CurveKind_t enumeration corresponding to the given string or
- * @sbmlconstant{SEDML_CURVEKIND_INVALID, CurveKind_t} if there is no such
+ * Returns the #CurveType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t} if there is no such
  * match.
  *
- * @param code the string to convert to a #CurveKind_t.
+ * @param code the string to convert to a #CurveType_t.
  *
- * @return the corresponding #CurveKind_t or
- * @sbmlconstant{SEDML_CURVEKIND_INVALID, CurveKind_t} if no match is found.
+ * @return the corresponding #CurveType_t or
+ * @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t} if no match is found.
  *
  * @note The matching is case-sensitive: "points" will return
- * @sbmlconstant{SEDML_CURVEKIND_POINTS, CurveKind_t}, but "Points" will return
- * @sbmlconstant{SEDML_CURVEKIND_INVALID, CurveKind_t}.
+ * @sbmlconstant{SEDML_CURVETYPE_POINTS, CurveType_t}, but "Points" will return
+ * @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t}.
  *
  * @if conly
  * @memberof Sedml_t
  * @endif
  */
 LIBSEDML_EXTERN
-CurveKind_t
-CurveKind_fromString(const char* code);
+CurveType_t
+CurveType_fromString(const char* code);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #CurveKind_t is valid.
+ * given #CurveType_t is valid.
  *
- * @param ck the #CurveKind_t enumeration to query.
+ * @param ct the #CurveType_t enumeration to query.
  *
- * @return @c 1 (true) if the #CurveKind_t is
- * @sbmlconstant{SEDML_CURVEKIND_POINTS, CurveKind_t},
- * @sbmlconstant{SEDML_CURVEKIND_BAR, CurveKind_t}, or
- * @sbmlconstant{SEDML_CURVEKIND_BARSTACKED, CurveKind_t};
- * @c 0 (false) otherwise (including @sbmlconstant{SEDML_CURVEKIND_INVALID,
- * CurveKind_t}).
+ * @return @c 1 (true) if the #CurveType_t is
+ * @sbmlconstant{SEDML_CURVETYPE_POINTS, CurveType_t},
+ * @sbmlconstant{SEDML_CURVETYPE_BAR, CurveType_t}, or
+ * @sbmlconstant{SEDML_CURVETYPE_BARSTACKED, CurveType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SEDML_CURVETYPE_INVALID,
+ * CurveType_t}).
  *
  * @if conly
  * @memberof Sedml_t
@@ -703,12 +703,12 @@ CurveKind_fromString(const char* code);
  */
 LIBSEDML_EXTERN
 int
-CurveKind_isValid(CurveKind_t ck);
+CurveType_isValid(CurveType_t ct);
 
 
 /**
  * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #CurveKind_t.
+ * given string is a valid #CurveType_t.
  *
  * @param code the string to query.
  *
@@ -716,7 +716,7 @@ CurveKind_isValid(CurveKind_t ck);
  * "points",
  * "bar",
  * "barStacked", or
- * "invalid CurveKind value";
+ * "invalid CurveType value";
  * @c 0 (false) otherwise.
  *
  * @note The matching is case-sensitive: "points" will return @c 1 (true), but
@@ -728,7 +728,132 @@ CurveKind_isValid(CurveKind_t ck);
  */
 LIBSEDML_EXTERN
 int
-CurveKind_isValidString(const char* code);
+CurveType_isValidString(const char* code);
+
+
+/**
+ * @enum SurfaceType_t
+ * @brief Enumeration of values permitted as the value of "SurfaceType_t".
+ */
+typedef enum
+{
+  SEDML_SURFACETYPE_PARAMETRICCURVE       /*!< The sedml surfacetype is @c "parametricCurve". */
+, SEDML_SURFACETYPE_SURFACEMESH           /*!< The sedml surfacetype is @c "surfaceMesh". */
+, SEDML_SURFACETYPE_SURFACECONTOUR        /*!< The sedml surfacetype is @c "surfaceContour". */
+, SEDML_SURFACETYPE_CONTOUR               /*!< The sedml surfacetype is @c "contour". */
+, SEDML_SURFACETYPE_HEATMAP               /*!< The sedml surfacetype is @c "heatMap". */
+, SEDML_SURFACETYPE_STACKEDCURVES         /*!< The sedml surfacetype is @c "stackedCurves". */
+, SEDML_SURFACETYPE_BAR                   /*!< The sedml surfacetype is @c "bar". */
+, SEDML_SURFACETYPE_INVALID               /*!< Invalid SurfaceType value. */
+} SurfaceType_t;
+
+
+/**
+ * Returns the string version of the provided #SurfaceType_t enumeration.
+ *
+ * @param st the #SurfaceType_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "parametricCurve",
+ * "surfaceMesh",
+ * "surfaceContour",
+ * "contour",
+ * "heatMap",
+ * "stackedCurves",
+ * "bar",
+ * "invalid SurfaceType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_SURFACETYPE_INVALID,
+ * SurfaceType_t} or another invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+const char*
+SurfaceType_toString(SurfaceType_t st);
+
+
+/**
+ * Returns the #SurfaceType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_SURFACETYPE_INVALID, SurfaceType_t} if there is no such
+ * match.
+ *
+ * @param code the string to convert to a #SurfaceType_t.
+ *
+ * @return the corresponding #SurfaceType_t or
+ * @sbmlconstant{SEDML_SURFACETYPE_INVALID, SurfaceType_t} if no match is
+ * found.
+ *
+ * @note The matching is case-sensitive: "parametricCurve" will return
+ * @sbmlconstant{SEDML_SURFACETYPE_PARAMETRICCURVE, SurfaceType_t}, but
+ * "ParametricCurve" will return @sbmlconstant{SEDML_SURFACETYPE_INVALID,
+ * SurfaceType_t}.
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+SurfaceType_t
+SurfaceType_fromString(const char* code);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #SurfaceType_t is valid.
+ *
+ * @param st the #SurfaceType_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #SurfaceType_t is
+ * @sbmlconstant{SEDML_SURFACETYPE_PARAMETRICCURVE, SurfaceType_t},
+ * @sbmlconstant{SEDML_SURFACETYPE_SURFACEMESH, SurfaceType_t},
+ * @sbmlconstant{SEDML_SURFACETYPE_SURFACECONTOUR, SurfaceType_t},
+ * @sbmlconstant{SEDML_SURFACETYPE_CONTOUR, SurfaceType_t},
+ * @sbmlconstant{SEDML_SURFACETYPE_HEATMAP, SurfaceType_t},
+ * @sbmlconstant{SEDML_SURFACETYPE_STACKEDCURVES, SurfaceType_t}, or
+ * @sbmlconstant{SEDML_SURFACETYPE_BAR, SurfaceType_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{SEDML_SURFACETYPE_INVALID,
+ * SurfaceType_t}).
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+int
+SurfaceType_isValid(SurfaceType_t st);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #SurfaceType_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "parametricCurve",
+ * "surfaceMesh",
+ * "surfaceContour",
+ * "contour",
+ * "heatMap",
+ * "stackedCurves",
+ * "bar", or
+ * "invalid SurfaceType value";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "parametricCurve" will return @c 1
+ * (true), but "ParametricCurve" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+int
+SurfaceType_isValidString(const char* code);
 
 
 
