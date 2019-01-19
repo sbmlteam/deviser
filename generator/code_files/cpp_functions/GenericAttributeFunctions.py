@@ -602,6 +602,8 @@ class GenericAttributeFunctions():
                         else:
                             first = False
                         elemName = elem['name']
+                        if 'used_name' in elem and elem['used_name'] != '':
+                            elemName = elem['used_name']
                         if not elem['element'] or elem['element'] == elemName:
                             elemElem = elemName
                         else:
@@ -688,6 +690,8 @@ class GenericAttributeFunctions():
                         else:
                             first = False
                         elemName = elem['name']
+                        if 'used_name' in elem and elem['used_name'] != '':
+                            elemName = elem['used_name']
                         if not elem['element'] or elem['element'] == elemName:
                             elemElem = elemName
                         else:

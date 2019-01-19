@@ -19,7 +19,7 @@
             <attribute name="dataDescription" required="false" type="lo_element" element="DataDescription" abstract="false"/>
             <attribute name="model" required="false" type="lo_element" element="Model" abstract="false"/>
             <attribute name="simulation" required="false" type="lo_element" element="Simulation" abstract="true"/>
-            <attribute name="task" required="false" type="lo_element" element="AbstractTask" abstract="true"/>
+            <attribute name="task" required="false" type="lo_element" element="AbstractTask" xmlName="task" abstract="true"/>
             <attribute name="dataGenerator" required="false" type="lo_element" element="DataGenerator" abstract="false"/>
             <attribute name="output" required="false" type="lo_element" element="Output" abstract="true"/>
           </attributes>

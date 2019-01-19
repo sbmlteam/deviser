@@ -322,7 +322,7 @@ class ListOfQueryFunctions():
 
         # useful variables
         virtual = True if self.is_list_of else False
-        used_c_name = strFunctions.remove_prefix(self.child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
         used_cpp_name = strFunctions.remove_prefix(self.used_child_name)
 
         if self.is_list_of:
@@ -712,11 +712,11 @@ class ListOfQueryFunctions():
         additional = []
         additional.append('@copydetails doc_returned_owned_pointer')
         if self.is_cpp_api:
-            self.add_other_referenced_functions(additional, 'removeid', self.object_child_name)
+            self.add_other_referenced_functions(additional, 'removeid', self.used_child_name, self.object_child_name)
         # create the function declaration
         arguments = []
-        used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
+        used_cpp_name = strFunctions.remove_prefix(self.used_child_name)
         if self.is_cpp_api:
             function = 'remove' if self.is_list_of \
                 else 'remove{0}'.format(used_cpp_name)

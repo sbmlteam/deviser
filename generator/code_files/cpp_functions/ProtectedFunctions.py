@@ -233,8 +233,7 @@ class ProtectedFunctions():
             class_name = self.class_name
         # sort error names to be used
         name_in_error = class_name
-        if not self.document:
-            name_in_error = strFunctions.remove_prefix(class_name)
+        name_in_error = strFunctions.remove_prefix(class_name, False, False, '', True)
         # hack forr render relAbsVector
         error = '{0}{1}AllowedElements'.format(self.package, name_in_error)
         error_hack = '{0}{1}AllowedAttributes'.format(self.package, name_in_error)
@@ -1279,7 +1278,7 @@ class ProtectedFunctions():
                 class_name = '{0}LO{1}'.format(self.parent_class,
                                                self.class_name[6:])
             else:
-                class_name = strFunctions.remove_prefix(self.class_name)
+                class_name = strFunctions.remove_prefix(self.class_name, False, False, '', True)
             core_err = '{0}{1}AllowedCoreAttributes'.format(self.package,
                                                             class_name)
         error = '{0}{1}AllowedAttributes'.format(self.package, class_name)
@@ -1766,7 +1765,7 @@ class ProtectedFunctions():
             att_error = '{0}{1}AllowedAttributes'.format(self.package,
                                                          class_name)
         else:
-            class_name = strFunctions.remove_prefix(self.class_name)
+            class_name = strFunctions.remove_prefix(self.class_name, False, False, '', True)
             if class_name.startswith('ListOf'):
                 temp = 'LO{0}'.format(class_name[6:])
                 class_name = temp

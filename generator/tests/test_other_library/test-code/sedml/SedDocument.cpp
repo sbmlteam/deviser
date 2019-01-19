@@ -68,12 +68,12 @@ SedDocument::SedDocument(unsigned int level, unsigned int version)
   , mIsSetLevel (false)
   , mVersion (SEDML_INT_MAX)
   , mIsSetVersion (false)
-  , mSimulations (level, version)
+  , mDataDescriptions (level, version)
   , mModels (level, version)
+  , mSimulations (level, version)
   , mAbstractTasks (level, version)
   , mDataGenerators (level, version)
   , mOutputs (level, version)
-  , mDataDescriptions (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   setLevel(level);
@@ -92,12 +92,12 @@ SedDocument::SedDocument(SedNamespaces *sedmlns)
   , mIsSetLevel (false)
   , mVersion (SEDML_INT_MAX)
   , mIsSetVersion (false)
-  , mSimulations (sedmlns)
+  , mDataDescriptions (sedmlns)
   , mModels (sedmlns)
+  , mSimulations (sedmlns)
   , mAbstractTasks (sedmlns)
   , mDataGenerators (sedmlns)
   , mOutputs (sedmlns)
-  , mDataDescriptions (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   setLevel(sedmlns->getLevel());
@@ -116,12 +116,12 @@ SedDocument::SedDocument(const SedDocument& orig)
   , mIsSetLevel ( orig.mIsSetLevel )
   , mVersion ( orig.mVersion )
   , mIsSetVersion ( orig.mIsSetVersion )
-  , mSimulations ( orig.mSimulations )
+  , mDataDescriptions ( orig.mDataDescriptions )
   , mModels ( orig.mModels )
+  , mSimulations ( orig.mSimulations )
   , mAbstractTasks ( orig.mAbstractTasks )
   , mDataGenerators ( orig.mDataGenerators )
   , mOutputs ( orig.mOutputs )
-  , mDataDescriptions ( orig.mDataDescriptions )
 {
   setSedDocument(this);
 
@@ -142,12 +142,12 @@ SedDocument::operator=(const SedDocument& rhs)
     mIsSetLevel = rhs.mIsSetLevel;
     mVersion = rhs.mVersion;
     mIsSetVersion = rhs.mIsSetVersion;
-    mSimulations = rhs.mSimulations;
+    mDataDescriptions = rhs.mDataDescriptions;
     mModels = rhs.mModels;
+    mSimulations = rhs.mSimulations;
     mAbstractTasks = rhs.mAbstractTasks;
     mDataGenerators = rhs.mDataGenerators;
     mOutputs = rhs.mOutputs;
-    mDataDescriptions = rhs.mDataDescriptions;
     connectToChild();
     setSedDocument(this);
   }
@@ -223,6 +223,12 @@ SedDocument::setLevel(int level)
 {
   mLevel = level;
   mIsSetLevel = true;
+
+  if (mIsSetVersion)
+  {
+    setSedNamespacesAndOwn(new SedNamespaces(level, mVersion);
+  }
+
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -235,6 +241,12 @@ SedDocument::setVersion(int version)
 {
   mVersion = version;
   mIsSetVersion = true;
+
+  if (mIsSetLevel)
+  {
+    setSedNamespacesAndOwn(new SedNamespaces(mLevel, version);
+  }
+
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -276,6 +288,317 @@ SedDocument::unsetVersion()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Returns the SedListOfDataDescriptions from this SedDocument.
+ */
+const SedListOfDataDescriptions*
+SedDocument::getListOfDataDescriptions() const
+{
+  return &mDataDescriptions;
+}
+
+
+/*
+ * Returns the SedListOfDataDescriptions from this SedDocument.
+ */
+SedListOfDataDescriptions*
+SedDocument::getListOfDataDescriptions()
+{
+  return &mDataDescriptions;
+}
+
+
+/*
+ * Get a SedDataDescription from the SedDocument.
+ */
+SedDataDescription*
+SedDocument::getDataDescription(unsigned int n)
+{
+  return mDataDescriptions.get(n);
+}
+
+
+/*
+ * Get a SedDataDescription from the SedDocument.
+ */
+const SedDataDescription*
+SedDocument::getDataDescription(unsigned int n) const
+{
+  return mDataDescriptions.get(n);
+}
+
+
+/*
+ * Get a SedDataDescription from the SedDocument based on its identifier.
+ */
+SedDataDescription*
+SedDocument::getDataDescription(const std::string& sid)
+{
+  return mDataDescriptions.get(sid);
+}
+
+
+/*
+ * Get a SedDataDescription from the SedDocument based on its identifier.
+ */
+const SedDataDescription*
+SedDocument::getDataDescription(const std::string& sid) const
+{
+  return mDataDescriptions.get(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedDataDescription to this SedDocument.
+ */
+int
+SedDocument::addDataDescription(const SedDataDescription* sdd)
+{
+  if (sdd == NULL)
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+  else if (sdd->hasRequiredAttributes() == false)
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else if (getLevel() != sdd->getLevel())
+  {
+    return LIBSEDML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != sdd->getVersion())
+  {
+    return LIBSEDML_VERSION_MISMATCH;
+  }
+  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+    SedBase*>(sdd)) == false)
+  {
+    return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sdd->isSetId() && (mDataDescriptions.get(sdd->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
+  }
+  else
+  {
+    return mDataDescriptions.append(sdd);
+  }
+}
+
+
+/*
+ * Get the number of SedDataDescription objects in this SedDocument.
+ */
+unsigned int
+SedDocument::getNumDataDescriptions() const
+{
+  return mDataDescriptions.size();
+}
+
+
+/*
+ * Creates a new SedDataDescription object, adds it to this SedDocument object
+ * and returns the SedDataDescription object created.
+ */
+SedDataDescription*
+SedDocument::createDataDescription()
+{
+  SedDataDescription* sdd = NULL;
+
+  try
+  {
+    sdd = new SedDataDescription(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sdd != NULL)
+  {
+    mDataDescriptions.appendAndOwn(sdd);
+  }
+
+  return sdd;
+}
+
+
+/*
+ * Removes the nth SedDataDescription from this SedDocument and returns a
+ * pointer to it.
+ */
+SedDataDescription*
+SedDocument::removeDataDescription(unsigned int n)
+{
+  return mDataDescriptions.remove(n);
+}
+
+
+/*
+ * Removes the SedDataDescription from this SedDocument based on its identifier
+ * and returns a pointer to it.
+ */
+SedDataDescription*
+SedDocument::removeDataDescription(const std::string& sid)
+{
+  return mDataDescriptions.remove(sid);
+}
+
+
+/*
+ * Returns the SedListOfModels from this SedDocument.
+ */
+const SedListOfModels*
+SedDocument::getListOfModels() const
+{
+  return &mModels;
+}
+
+
+/*
+ * Returns the SedListOfModels from this SedDocument.
+ */
+SedListOfModels*
+SedDocument::getListOfModels()
+{
+  return &mModels;
+}
+
+
+/*
+ * Get a SedModel from the SedDocument.
+ */
+SedModel*
+SedDocument::getModel(unsigned int n)
+{
+  return mModels.get(n);
+}
+
+
+/*
+ * Get a SedModel from the SedDocument.
+ */
+const SedModel*
+SedDocument::getModel(unsigned int n) const
+{
+  return mModels.get(n);
+}
+
+
+/*
+ * Get a SedModel from the SedDocument based on its identifier.
+ */
+SedModel*
+SedDocument::getModel(const std::string& sid)
+{
+  return mModels.get(sid);
+}
+
+
+/*
+ * Get a SedModel from the SedDocument based on its identifier.
+ */
+const SedModel*
+SedDocument::getModel(const std::string& sid) const
+{
+  return mModels.get(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedModel to this SedDocument.
+ */
+int
+SedDocument::addModel(const SedModel* sm)
+{
+  if (sm == NULL)
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+  else if (sm->hasRequiredAttributes() == false)
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else if (getLevel() != sm->getLevel())
+  {
+    return LIBSEDML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != sm->getVersion())
+  {
+    return LIBSEDML_VERSION_MISMATCH;
+  }
+  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+    SedBase*>(sm)) == false)
+  {
+    return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sm->isSetId() && (mModels.get(sm->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
+  }
+  else
+  {
+    return mModels.append(sm);
+  }
+}
+
+
+/*
+ * Get the number of SedModel objects in this SedDocument.
+ */
+unsigned int
+SedDocument::getNumModels() const
+{
+  return mModels.size();
+}
+
+
+/*
+ * Creates a new SedModel object, adds it to this SedDocument object and
+ * returns the SedModel object created.
+ */
+SedModel*
+SedDocument::createModel()
+{
+  SedModel* sm = NULL;
+
+  try
+  {
+    sm = new SedModel(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sm != NULL)
+  {
+    mModels.appendAndOwn(sm);
+  }
+
+  return sm;
+}
+
+
+/*
+ * Removes the nth SedModel from this SedDocument and returns a pointer to it.
+ */
+SedModel*
+SedDocument::removeModel(unsigned int n)
+{
+  return mModels.remove(n);
+}
+
+
+/*
+ * Removes the SedModel from this SedDocument based on its identifier and
+ * returns a pointer to it.
+ */
+SedModel*
+SedDocument::removeModel(const std::string& sid)
+{
+  return mModels.remove(sid);
 }
 
 
@@ -492,175 +815,20 @@ SedDocument::removeSimulation(const std::string& sid)
 
 
 /*
- * Returns the SedListOfModels from this SedDocument.
+ * Returns the SedListOfTasks from this SedDocument.
  */
-const SedListOfModels*
-SedDocument::getListOfModels() const
-{
-  return &mModels;
-}
-
-
-/*
- * Returns the SedListOfModels from this SedDocument.
- */
-SedListOfModels*
-SedDocument::getListOfModels()
-{
-  return &mModels;
-}
-
-
-/*
- * Get a SedModel from the SedDocument.
- */
-SedModel*
-SedDocument::getModel(unsigned int n)
-{
-  return mModels.get(n);
-}
-
-
-/*
- * Get a SedModel from the SedDocument.
- */
-const SedModel*
-SedDocument::getModel(unsigned int n) const
-{
-  return mModels.get(n);
-}
-
-
-/*
- * Get a SedModel from the SedDocument based on its identifier.
- */
-SedModel*
-SedDocument::getModel(const std::string& sid)
-{
-  return mModels.get(sid);
-}
-
-
-/*
- * Get a SedModel from the SedDocument based on its identifier.
- */
-const SedModel*
-SedDocument::getModel(const std::string& sid) const
-{
-  return mModels.get(sid);
-}
-
-
-/*
- * Adds a copy of the given SedModel to this SedDocument.
- */
-int
-SedDocument::addModel(const SedModel* sm)
-{
-  if (sm == NULL)
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-  else if (sm->hasRequiredAttributes() == false)
-  {
-    return LIBSEDML_INVALID_OBJECT;
-  }
-  else if (getLevel() != sm->getLevel())
-  {
-    return LIBSEDML_LEVEL_MISMATCH;
-  }
-  else if (getVersion() != sm->getVersion())
-  {
-    return LIBSEDML_VERSION_MISMATCH;
-  }
-  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
-    SedBase*>(sm)) == false)
-  {
-    return LIBSEDML_NAMESPACES_MISMATCH;
-  }
-  else if (sm->isSetId() && (mModels.get(sm->getId())) != NULL)
-  {
-    return LIBSEDML_DUPLICATE_OBJECT_ID;
-  }
-  else
-  {
-    return mModels.append(sm);
-  }
-}
-
-
-/*
- * Get the number of SedModel objects in this SedDocument.
- */
-unsigned int
-SedDocument::getNumModels() const
-{
-  return mModels.size();
-}
-
-
-/*
- * Creates a new SedModel object, adds it to this SedDocument object and
- * returns the SedModel object created.
- */
-SedModel*
-SedDocument::createModel()
-{
-  SedModel* sm = NULL;
-
-  try
-  {
-    sm = new SedModel(getSedNamespaces());
-  }
-  catch (...)
-  {
-  }
-
-  if (sm != NULL)
-  {
-    mModels.appendAndOwn(sm);
-  }
-
-  return sm;
-}
-
-
-/*
- * Removes the nth SedModel from this SedDocument and returns a pointer to it.
- */
-SedModel*
-SedDocument::removeModel(unsigned int n)
-{
-  return mModels.remove(n);
-}
-
-
-/*
- * Removes the SedModel from this SedDocument based on its identifier and
- * returns a pointer to it.
- */
-SedModel*
-SedDocument::removeModel(const std::string& sid)
-{
-  return mModels.remove(sid);
-}
-
-
-/*
- * Returns the SedListOfAbstractTasks from this SedDocument.
- */
-const SedListOfAbstractTasks*
-SedDocument::getListOfAbstractTasks() const
+const SedListOfTasks*
+SedDocument::getListOfTasks() const
 {
   return &mAbstractTasks;
 }
 
 
 /*
- * Returns the SedListOfAbstractTasks from this SedDocument.
+ * Returns the SedListOfTasks from this SedDocument.
  */
-SedListOfAbstractTasks*
-SedDocument::getListOfAbstractTasks()
+SedListOfTasks*
+SedDocument::getListOfTasks()
 {
   return &mAbstractTasks;
 }
@@ -670,7 +838,7 @@ SedDocument::getListOfAbstractTasks()
  * Get a SedAbstractTask from the SedDocument.
  */
 SedAbstractTask*
-SedDocument::getAbstractTask(unsigned int n)
+SedDocument::getTask(unsigned int n)
 {
   return mAbstractTasks.get(n);
 }
@@ -680,7 +848,7 @@ SedDocument::getAbstractTask(unsigned int n)
  * Get a SedAbstractTask from the SedDocument.
  */
 const SedAbstractTask*
-SedDocument::getAbstractTask(unsigned int n) const
+SedDocument::getTask(unsigned int n) const
 {
   return mAbstractTasks.get(n);
 }
@@ -690,7 +858,7 @@ SedDocument::getAbstractTask(unsigned int n) const
  * Get a SedAbstractTask from the SedDocument based on its identifier.
  */
 SedAbstractTask*
-SedDocument::getAbstractTask(const std::string& sid)
+SedDocument::getTask(const std::string& sid)
 {
   return mAbstractTasks.get(sid);
 }
@@ -700,7 +868,7 @@ SedDocument::getAbstractTask(const std::string& sid)
  * Get a SedAbstractTask from the SedDocument based on its identifier.
  */
 const SedAbstractTask*
-SedDocument::getAbstractTask(const std::string& sid) const
+SedDocument::getTask(const std::string& sid) const
 {
   return mAbstractTasks.get(sid);
 }
@@ -710,7 +878,7 @@ SedDocument::getAbstractTask(const std::string& sid) const
  * Adds a copy of the given SedAbstractTask to this SedDocument.
  */
 int
-SedDocument::addAbstractTask(const SedAbstractTask* sat)
+SedDocument::addTask(const SedAbstractTask* sat)
 {
   if (sat == NULL)
   {
@@ -748,7 +916,7 @@ SedDocument::addAbstractTask(const SedAbstractTask* sat)
  * Get the number of SedAbstractTask objects in this SedDocument.
  */
 unsigned int
-SedDocument::getNumAbstractTasks() const
+SedDocument::getNumTasks() const
 {
   return mAbstractTasks.size();
 }
@@ -863,7 +1031,7 @@ SedDocument::createSimpleRepeatedTask()
  * to it.
  */
 SedAbstractTask*
-SedDocument::removeAbstractTask(unsigned int n)
+SedDocument::removeTask(unsigned int n)
 {
   return mAbstractTasks.remove(n);
 }
@@ -874,7 +1042,7 @@ SedDocument::removeAbstractTask(unsigned int n)
  * and returns a pointer to it.
  */
 SedAbstractTask*
-SedDocument::removeAbstractTask(const std::string& sid)
+SedDocument::removeTask(const std::string& sid)
 {
   return mAbstractTasks.remove(sid);
 }
@@ -1248,162 +1416,6 @@ SedDocument::removeOutput(const std::string& sid)
 
 
 /*
- * Returns the SedListOfDataDescriptions from this SedDocument.
- */
-const SedListOfDataDescriptions*
-SedDocument::getListOfDataDescriptions() const
-{
-  return &mDataDescriptions;
-}
-
-
-/*
- * Returns the SedListOfDataDescriptions from this SedDocument.
- */
-SedListOfDataDescriptions*
-SedDocument::getListOfDataDescriptions()
-{
-  return &mDataDescriptions;
-}
-
-
-/*
- * Get a SedDataDescription from the SedDocument.
- */
-SedDataDescription*
-SedDocument::getDataDescription(unsigned int n)
-{
-  return mDataDescriptions.get(n);
-}
-
-
-/*
- * Get a SedDataDescription from the SedDocument.
- */
-const SedDataDescription*
-SedDocument::getDataDescription(unsigned int n) const
-{
-  return mDataDescriptions.get(n);
-}
-
-
-/*
- * Get a SedDataDescription from the SedDocument based on its identifier.
- */
-SedDataDescription*
-SedDocument::getDataDescription(const std::string& sid)
-{
-  return mDataDescriptions.get(sid);
-}
-
-
-/*
- * Get a SedDataDescription from the SedDocument based on its identifier.
- */
-const SedDataDescription*
-SedDocument::getDataDescription(const std::string& sid) const
-{
-  return mDataDescriptions.get(sid);
-}
-
-
-/*
- * Adds a copy of the given SedDataDescription to this SedDocument.
- */
-int
-SedDocument::addDataDescription(const SedDataDescription* sdd)
-{
-  if (sdd == NULL)
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-  else if (sdd->hasRequiredAttributes() == false)
-  {
-    return LIBSEDML_INVALID_OBJECT;
-  }
-  else if (getLevel() != sdd->getLevel())
-  {
-    return LIBSEDML_LEVEL_MISMATCH;
-  }
-  else if (getVersion() != sdd->getVersion())
-  {
-    return LIBSEDML_VERSION_MISMATCH;
-  }
-  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
-    SedBase*>(sdd)) == false)
-  {
-    return LIBSEDML_NAMESPACES_MISMATCH;
-  }
-  else if (sdd->isSetId() && (mDataDescriptions.get(sdd->getId())) != NULL)
-  {
-    return LIBSEDML_DUPLICATE_OBJECT_ID;
-  }
-  else
-  {
-    return mDataDescriptions.append(sdd);
-  }
-}
-
-
-/*
- * Get the number of SedDataDescription objects in this SedDocument.
- */
-unsigned int
-SedDocument::getNumDataDescriptions() const
-{
-  return mDataDescriptions.size();
-}
-
-
-/*
- * Creates a new SedDataDescription object, adds it to this SedDocument object
- * and returns the SedDataDescription object created.
- */
-SedDataDescription*
-SedDocument::createDataDescription()
-{
-  SedDataDescription* sdd = NULL;
-
-  try
-  {
-    sdd = new SedDataDescription(getSedNamespaces());
-  }
-  catch (...)
-  {
-  }
-
-  if (sdd != NULL)
-  {
-    mDataDescriptions.appendAndOwn(sdd);
-  }
-
-  return sdd;
-}
-
-
-/*
- * Removes the nth SedDataDescription from this SedDocument and returns a
- * pointer to it.
- */
-SedDataDescription*
-SedDocument::removeDataDescription(unsigned int n)
-{
-  return mDataDescriptions.remove(n);
-}
-
-
-/*
- * Removes the SedDataDescription from this SedDocument based on its identifier
- * and returns a pointer to it.
- */
-SedDataDescription*
-SedDocument::removeDataDescription(const std::string& sid)
-{
-  return mDataDescriptions.remove(sid);
-}
-
-
-/*
  * Returns the XML element name of this SedDocument object.
  */
 const std::string&
@@ -1459,9 +1471,9 @@ SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeElements(stream);
 
-  if (getNumSimulations() > 0)
+  if (getNumDataDescriptions() > 0)
   {
-    mSimulations.write(stream);
+    mDataDescriptions.write(stream);
   }
 
   if (getNumModels() > 0)
@@ -1469,7 +1481,12 @@ SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
     mModels.write(stream);
   }
 
-  if (getNumAbstractTasks() > 0)
+  if (getNumSimulations() > 0)
+  {
+    mSimulations.write(stream);
+  }
+
+  if (getNumTasks() > 0)
   {
     mAbstractTasks.write(stream);
   }
@@ -1482,11 +1499,6 @@ SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (getNumOutputs() > 0)
   {
     mOutputs.write(stream);
-  }
-
-  if (getNumDataDescriptions() > 0)
-  {
-    mDataDescriptions.write(stream);
   }
 }
 
@@ -1519,17 +1531,17 @@ SedDocument::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 
-  mSimulations.setSedDocument(d);
+  mDataDescriptions.setSedDocument(d);
 
   mModels.setSedDocument(d);
+
+  mSimulations.setSedDocument(d);
 
   mAbstractTasks.setSedDocument(d);
 
   mDataGenerators.setSedDocument(d);
 
   mOutputs.setSedDocument(d);
-
-  mDataDescriptions.setSedDocument(d);
 }
 
 /** @endcond */
@@ -1546,17 +1558,17 @@ SedDocument::connectToChild()
 {
   SedBase::connectToChild();
 
-  mSimulations.connectToParent(this);
+  mDataDescriptions.connectToParent(this);
 
   mModels.connectToParent(this);
+
+  mSimulations.connectToParent(this);
 
   mAbstractTasks.connectToParent(this);
 
   mDataGenerators.connectToParent(this);
 
   mOutputs.connectToParent(this);
-
-  mDataDescriptions.connectToParent(this);
 }
 
 /** @endcond */
@@ -1826,7 +1838,15 @@ SedDocument::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "uniformTimeCourse")
+  if (elementName == "dataDescription")
+  {
+    return createDataDescription();
+  }
+  else if (elementName == "model")
+  {
+    return createModel();
+  }
+  else if (elementName == "uniformTimeCourse")
   {
     return createUniformTimeCourse();
   }
@@ -1837,10 +1857,6 @@ SedDocument::createChildObject(const std::string& elementName)
   else if (elementName == "steadyState")
   {
     return createSteadyState();
-  }
-  else if (elementName == "model")
-  {
-    return createModel();
   }
   else if (elementName == "task")
   {
@@ -1874,10 +1890,6 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createPlot3D();
   }
-  else if (elementName == "dataDescription")
-  {
-    return createDataDescription();
-  }
 
   return obj;
 }
@@ -1895,8 +1907,17 @@ int
 SedDocument::addChildObject(const std::string& elementName,
                             const SedBase* element)
 {
-  if (elementName == "uniformTimeCourse" && element->getTypeCode() ==
-    SEDML_SIMULATION_UNIFORM_TIMECOURSE)
+  if (elementName == "dataDescription" && element->getTypeCode() ==
+    SEDML_DATA_DESCRIPTION)
+  {
+    return addDataDescription((const SedDataDescription*)(element));
+  }
+  else if (elementName == "model" && element->getTypeCode() == SEDML_MODEL)
+  {
+    return addModel((const SedModel*)(element));
+  }
+  else if (elementName == "uniformTimeCourse" && element->getTypeCode() ==
+    SEDML_SIMULATION_UNIFORMTIMECOURSE)
   {
     return addSimulation((const SedSimulation*)(element));
   }
@@ -1910,28 +1931,24 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addSimulation((const SedSimulation*)(element));
   }
-  else if (elementName == "model" && element->getTypeCode() == SEDML_MODEL)
-  {
-    return addModel((const SedModel*)(element));
-  }
   else if (elementName == "task" && element->getTypeCode() == SEDML_TASK)
   {
-    return addAbstractTask((const SedAbstractTask*)(element));
+    return addTask((const SedAbstractTask*)(element));
   }
   else if (elementName == "repeatedTask" && element->getTypeCode() ==
     SEDML_TASK_REPEATEDTASK)
   {
-    return addAbstractTask((const SedAbstractTask*)(element));
+    return addTask((const SedAbstractTask*)(element));
   }
   else if (elementName == "parameterEstimationTask" && element->getTypeCode()
     == SEDML_TASK_PARAMETER_ESTIMATION)
   {
-    return addAbstractTask((const SedAbstractTask*)(element));
+    return addTask((const SedAbstractTask*)(element));
   }
   else if (elementName == "simpleRepeatedTask" && element->getTypeCode() ==
-    SEDML_SIMPLEREPEATEDTASK)
+    SEDML_TASK_SIMPLEREPEATEDTASK)
   {
-    return addAbstractTask((const SedAbstractTask*)(element));
+    return addTask((const SedAbstractTask*)(element));
   }
   else if (elementName == "dataGenerator" && element->getTypeCode() ==
     SEDML_DATAGENERATOR)
@@ -1953,11 +1970,6 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addOutput((const SedOutput*)(element));
   }
-  else if (elementName == "dataDescription" && element->getTypeCode() ==
-    SEDML_DATADESCRIPTION)
-  {
-    return addDataDescription((const SedDataDescription*)(element));
-  }
 
   return LIBSBML_OPERATION_FAILED;
 }
@@ -1976,7 +1988,15 @@ SedBase*
 SedDocument::removeChildObject(const std::string& elementName,
                                const std::string& id)
 {
-  if (elementName == "uniformTimeCourse")
+  if (elementName == "dataDescription")
+  {
+    return removeDataDescription(id);
+  }
+  else if (elementName == "model")
+  {
+    return removeModel(id);
+  }
+  else if (elementName == "uniformTimeCourse")
   {
     return removeSimulation(id);
   }
@@ -1988,25 +2008,21 @@ SedDocument::removeChildObject(const std::string& elementName,
   {
     return removeSimulation(id);
   }
-  else if (elementName == "model")
-  {
-    return removeModel(id);
-  }
   else if (elementName == "task")
   {
-    return removeAbstractTask(id);
+    return removeTask(id);
   }
   else if (elementName == "repeatedTask")
   {
-    return removeAbstractTask(id);
+    return removeTask(id);
   }
   else if (elementName == "parameterEstimationTask")
   {
-    return removeAbstractTask(id);
+    return removeTask(id);
   }
   else if (elementName == "simpleRepeatedTask")
   {
-    return removeAbstractTask(id);
+    return removeTask(id);
   }
   else if (elementName == "dataGenerator")
   {
@@ -2023,10 +2039,6 @@ SedDocument::removeChildObject(const std::string& elementName,
   else if (elementName == "plot3D")
   {
     return removeOutput(id);
-  }
-  else if (elementName == "dataDescription")
-  {
-    return removeDataDescription(id);
   }
 
   return NULL;
@@ -2046,17 +2058,21 @@ SedDocument::getNumObjects(const std::string& elementName)
 {
   unsigned int n = 0;
 
-  if (elementName == "simulation")
+  if (elementName == "dataDescription")
   {
-    return getNumSimulations();
+    return getNumDataDescriptions();
   }
   else if (elementName == "model")
   {
     return getNumModels();
   }
+  else if (elementName == "simulation")
+  {
+    return getNumSimulations();
+  }
   else if (elementName == "abstractTask")
   {
-    return getNumAbstractTasks();
+    return getNumTasks();
   }
   else if (elementName == "dataGenerator")
   {
@@ -2065,10 +2081,6 @@ SedDocument::getNumObjects(const std::string& elementName)
   else if (elementName == "output")
   {
     return getNumOutputs();
-  }
-  else if (elementName == "dataDescription")
-  {
-    return getNumDataDescriptions();
   }
 
   return n;
@@ -2088,17 +2100,21 @@ SedDocument::getObject(const std::string& elementName, unsigned int index)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "simulation")
+  if (elementName == "dataDescription")
   {
-    return getSimulation(index);
+    return getDataDescription(index);
   }
   else if (elementName == "model")
   {
     return getModel(index);
   }
+  else if (elementName == "simulation")
+  {
+    return getSimulation(index);
+  }
   else if (elementName == "abstractTask")
   {
-    return getAbstractTask(index);
+    return getTask(index);
   }
   else if (elementName == "dataGenerator")
   {
@@ -2107,10 +2123,6 @@ SedDocument::getObject(const std::string& elementName, unsigned int index)
   else if (elementName == "output")
   {
     return getOutput(index);
-  }
-  else if (elementName == "dataDescription")
-  {
-    return getDataDescription(index);
   }
 
   return obj;
@@ -2133,7 +2145,7 @@ SedDocument::getElementBySId(const std::string& id)
 
   SedBase* obj = NULL;
 
-  obj = mSimulations.getElementBySId(id);
+  obj = mDataDescriptions.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -2141,6 +2153,13 @@ SedDocument::getElementBySId(const std::string& id)
   }
 
   obj = mModels.getElementBySId(id);
+
+  if (obj != NULL)
+  {
+    return obj;
+  }
+
+  obj = mSimulations.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -2162,13 +2181,6 @@ SedDocument::getElementBySId(const std::string& id)
   }
 
   obj = mOutputs.getElementBySId(id);
-
-  if (obj != NULL)
-  {
-    return obj;
-  }
-
-  obj = mDataDescriptions.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -2274,31 +2286,41 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfSimulations")
+  if (name == "listOfDataDescriptions")
   {
-    if (mSimulations.size() != 0)
+    if (mDataDescriptions.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion());
     }
 
-    obj = &mSimulations;
+    obj = &mDataDescriptions;
   }
   else if (name == "listOfModels")
   {
     if (mModels.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion());
     }
 
     obj = &mModels;
   }
-  else if (name == "listOfAbstractTasks")
+  else if (name == "listOfSimulations")
+  {
+    if (mSimulations.size() != 0)
+    {
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
+        getVersion());
+    }
+
+    obj = &mSimulations;
+  }
+  else if (name == "listOfTasks")
   {
     if (mAbstractTasks.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -2308,7 +2330,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   {
     if (mDataGenerators.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion());
     }
 
@@ -2318,21 +2340,11 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   {
     if (mOutputs.size() != 0)
     {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
         getVersion());
     }
 
     obj = &mOutputs;
-  }
-  else if (name == "listOfDataDescriptions")
-  {
-    if (mDataDescriptions.size() != 0)
-    {
-      getErrorLog()->logError(SedmlSedDocumentAllowedElements, getLevel(),
-        getVersion());
-    }
-
-    obj = &mDataDescriptions;
   }
 
   connectToChild();
@@ -2394,8 +2406,7 @@ SedDocument::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedDocumentAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlDocumentAllowedAttributes, level, version, details);
       }
     }
   }
@@ -2415,15 +2426,13 @@ SedDocument::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'level' from the <SedDocument> "
         "element must be an integer.";
-      log->logError(SedmlSedDocumentLevelMustBeInteger, level, version,
-        message);
+      log->logError(SedmlDocumentLevelMustBeInteger, level, version, message);
     }
     else
     {
       std::string message = "Sedml attribute 'level' is missing from the "
         "<SedDocument> element.";
-      log->logError(SedmlSedDocumentAllowedAttributes, level, version,
-        message);
+      log->logError(SedmlDocumentAllowedAttributes, level, version, message);
     }
   }
 
@@ -2442,15 +2451,14 @@ SedDocument::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'version' from the <SedDocument> "
         "element must be an integer.";
-      log->logError(SedmlSedDocumentVersionMustBeInteger, level, version,
+      log->logError(SedmlDocumentVersionMustBeInteger, level, version,
         message);
     }
     else
     {
       std::string message = "Sedml attribute 'version' is missing from the "
         "<SedDocument> element.";
-      log->logError(SedmlSedDocumentAllowedAttributes, level, version,
-        message);
+      log->logError(SedmlDocumentAllowedAttributes, level, version, message);
     }
   }
 }
@@ -2653,6 +2661,190 @@ SedDocument_unsetVersion(SedDocument_t * sd)
 
 
 /*
+ * Returns a ListOf_t * containing SedDataDescription_t objects from this
+ * SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfDataDescriptions(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getListOfDataDescriptions() : NULL;
+}
+
+
+/*
+ * Get a SedDataDescription_t from the SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_getDataDescription(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->getDataDescription(n) : NULL;
+}
+
+
+/*
+ * Get a SedDataDescription_t from the SedDocument_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_getDataDescriptionById(SedDocument_t* sd, const char *sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->getDataDescription(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedDataDescription_t to this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addDataDescription(SedDocument_t* sd,
+                               const SedDataDescription_t* sdd)
+{
+  return (sd != NULL) ? sd->addDataDescription(sdd) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedDataDescription_t objects in this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumDataDescriptions(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getNumDataDescriptions() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedDataDescription_t object, adds it to this SedDocument_t
+ * object and returns the SedDataDescription_t object created.
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_createDataDescription(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->createDataDescription() : NULL;
+}
+
+
+/*
+ * Removes the nth SedDataDescription_t from this SedDocument_t and returns a
+ * pointer to it.
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_removeDataDescription(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->removeDataDescription(n) : NULL;
+}
+
+
+/*
+ * Removes the SedDataDescription_t from this SedDocument_t based on its
+ * identifier and returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedDataDescription_t*
+SedDocument_removeDataDescriptionById(SedDocument_t* sd, const char* sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->removeDataDescription(sid) : NULL;
+}
+
+
+/*
+ * Returns a ListOf_t * containing SedModel_t objects from this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfModels(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getListOfModels() : NULL;
+}
+
+
+/*
+ * Get a SedModel_t from the SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedModel_t*
+SedDocument_getModel(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->getModel(n) : NULL;
+}
+
+
+/*
+ * Get a SedModel_t from the SedDocument_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedModel_t*
+SedDocument_getModelById(SedDocument_t* sd, const char *sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->getModel(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedModel_t to this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addModel(SedDocument_t* sd, const SedModel_t* sm)
+{
+  return (sd != NULL) ? sd->addModel(sm) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedModel_t objects in this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumModels(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getNumModels() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedModel_t object, adds it to this SedDocument_t object and
+ * returns the SedModel_t object created.
+ */
+LIBSEDML_EXTERN
+SedModel_t*
+SedDocument_createModel(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->createModel() : NULL;
+}
+
+
+/*
+ * Removes the nth SedModel_t from this SedDocument_t and returns a pointer to
+ * it.
+ */
+LIBSEDML_EXTERN
+SedModel_t*
+SedDocument_removeModel(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->removeModel(n) : NULL;
+}
+
+
+/*
+ * Removes the SedModel_t from this SedDocument_t based on its identifier and
+ * returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedModel_t*
+SedDocument_removeModelById(SedDocument_t* sd, const char* sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->removeModel(sid) : NULL;
+}
+
+
+/*
  * Returns a ListOf_t * containing SedSimulation_t objects from this
  * SedDocument_t.
  */
@@ -2769,105 +2961,14 @@ SedDocument_removeSimulationById(SedDocument_t* sd, const char* sid)
 
 
 /*
- * Returns a ListOf_t * containing SedModel_t objects from this SedDocument_t.
- */
-LIBSEDML_EXTERN
-SedListOf_t*
-SedDocument_getListOfModels(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->getListOfModels() : NULL;
-}
-
-
-/*
- * Get a SedModel_t from the SedDocument_t.
- */
-LIBSEDML_EXTERN
-SedModel_t*
-SedDocument_getModel(SedDocument_t* sd, unsigned int n)
-{
-  return (sd != NULL) ? sd->getModel(n) : NULL;
-}
-
-
-/*
- * Get a SedModel_t from the SedDocument_t based on its identifier.
- */
-LIBSEDML_EXTERN
-SedModel_t*
-SedDocument_getModelById(SedDocument_t* sd, const char *sid)
-{
-  return (sd != NULL && sid != NULL) ? sd->getModel(sid) : NULL;
-}
-
-
-/*
- * Adds a copy of the given SedModel_t to this SedDocument_t.
- */
-LIBSEDML_EXTERN
-int
-SedDocument_addModel(SedDocument_t* sd, const SedModel_t* sm)
-{
-  return (sd != NULL) ? sd->addModel(sm) : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/*
- * Get the number of SedModel_t objects in this SedDocument_t.
- */
-LIBSEDML_EXTERN
-unsigned int
-SedDocument_getNumModels(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->getNumModels() : SEDML_INT_MAX;
-}
-
-
-/*
- * Creates a new SedModel_t object, adds it to this SedDocument_t object and
- * returns the SedModel_t object created.
- */
-LIBSEDML_EXTERN
-SedModel_t*
-SedDocument_createModel(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->createModel() : NULL;
-}
-
-
-/*
- * Removes the nth SedModel_t from this SedDocument_t and returns a pointer to
- * it.
- */
-LIBSEDML_EXTERN
-SedModel_t*
-SedDocument_removeModel(SedDocument_t* sd, unsigned int n)
-{
-  return (sd != NULL) ? sd->removeModel(n) : NULL;
-}
-
-
-/*
- * Removes the SedModel_t from this SedDocument_t based on its identifier and
- * returns a pointer to it.
- */
-LIBSEDML_EXTERN
-SedModel_t*
-SedDocument_removeModelById(SedDocument_t* sd, const char* sid)
-{
-  return (sd != NULL && sid != NULL) ? sd->removeModel(sid) : NULL;
-}
-
-
-/*
  * Returns a ListOf_t * containing SedAbstractTask_t objects from this
  * SedDocument_t.
  */
 LIBSEDML_EXTERN
 SedListOf_t*
-SedDocument_getListOfAbstractTasks(SedDocument_t* sd)
+SedDocument_getListOfTasks(SedDocument_t* sd)
 {
-  return (sd != NULL) ? sd->getListOfAbstractTasks() : NULL;
+  return (sd != NULL) ? sd->getListOfTasks() : NULL;
 }
 
 
@@ -2876,9 +2977,9 @@ SedDocument_getListOfAbstractTasks(SedDocument_t* sd)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedDocument_getAbstractTask(SedDocument_t* sd, unsigned int n)
+SedDocument_getTask(SedDocument_t* sd, unsigned int n)
 {
-  return (sd != NULL) ? sd->getAbstractTask(n) : NULL;
+  return (sd != NULL) ? sd->getTask(n) : NULL;
 }
 
 
@@ -2887,9 +2988,9 @@ SedDocument_getAbstractTask(SedDocument_t* sd, unsigned int n)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedDocument_getAbstractTaskById(SedDocument_t* sd, const char *sid)
+SedDocument_getTaskById(SedDocument_t* sd, const char *sid)
 {
-  return (sd != NULL && sid != NULL) ? sd->getAbstractTask(sid) : NULL;
+  return (sd != NULL && sid != NULL) ? sd->getTask(sid) : NULL;
 }
 
 
@@ -2898,9 +2999,9 @@ SedDocument_getAbstractTaskById(SedDocument_t* sd, const char *sid)
  */
 LIBSEDML_EXTERN
 int
-SedDocument_addAbstractTask(SedDocument_t* sd, const SedAbstractTask_t* sat)
+SedDocument_addTask(SedDocument_t* sd, const SedAbstractTask_t* sat)
 {
-  return (sd != NULL) ? sd->addAbstractTask(sat) : LIBSEDML_INVALID_OBJECT;
+  return (sd != NULL) ? sd->addTask(sat) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -2909,9 +3010,9 @@ SedDocument_addAbstractTask(SedDocument_t* sd, const SedAbstractTask_t* sat)
  */
 LIBSEDML_EXTERN
 unsigned int
-SedDocument_getNumAbstractTasks(SedDocument_t* sd)
+SedDocument_getNumTasks(SedDocument_t* sd)
 {
-  return (sd != NULL) ? sd->getNumAbstractTasks() : SEDML_INT_MAX;
+  return (sd != NULL) ? sd->getNumTasks() : SEDML_INT_MAX;
 }
 
 
@@ -2970,9 +3071,9 @@ SedDocument_createSimpleRepeatedTask(SedDocument_t* sd)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedDocument_removeAbstractTask(SedDocument_t* sd, unsigned int n)
+SedDocument_removeTask(SedDocument_t* sd, unsigned int n)
 {
-  return (sd != NULL) ? sd->removeAbstractTask(n) : NULL;
+  return (sd != NULL) ? sd->removeTask(n) : NULL;
 }
 
 
@@ -2982,9 +3083,9 @@ SedDocument_removeAbstractTask(SedDocument_t* sd, unsigned int n)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedDocument_removeAbstractTaskById(SedDocument_t* sd, const char* sid)
+SedDocument_removeTaskById(SedDocument_t* sd, const char* sid)
 {
-  return (sd != NULL && sid != NULL) ? sd->removeAbstractTask(sid) : NULL;
+  return (sd != NULL && sid != NULL) ? sd->removeTask(sid) : NULL;
 }
 
 
@@ -3192,99 +3293,6 @@ SedOutput_t*
 SedDocument_removeOutputById(SedDocument_t* sd, const char* sid)
 {
   return (sd != NULL && sid != NULL) ? sd->removeOutput(sid) : NULL;
-}
-
-
-/*
- * Returns a ListOf_t * containing SedDataDescription_t objects from this
- * SedDocument_t.
- */
-LIBSEDML_EXTERN
-SedListOf_t*
-SedDocument_getListOfDataDescriptions(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->getListOfDataDescriptions() : NULL;
-}
-
-
-/*
- * Get a SedDataDescription_t from the SedDocument_t.
- */
-LIBSEDML_EXTERN
-SedDataDescription_t*
-SedDocument_getDataDescription(SedDocument_t* sd, unsigned int n)
-{
-  return (sd != NULL) ? sd->getDataDescription(n) : NULL;
-}
-
-
-/*
- * Get a SedDataDescription_t from the SedDocument_t based on its identifier.
- */
-LIBSEDML_EXTERN
-SedDataDescription_t*
-SedDocument_getDataDescriptionById(SedDocument_t* sd, const char *sid)
-{
-  return (sd != NULL && sid != NULL) ? sd->getDataDescription(sid) : NULL;
-}
-
-
-/*
- * Adds a copy of the given SedDataDescription_t to this SedDocument_t.
- */
-LIBSEDML_EXTERN
-int
-SedDocument_addDataDescription(SedDocument_t* sd,
-                               const SedDataDescription_t* sdd)
-{
-  return (sd != NULL) ? sd->addDataDescription(sdd) : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/*
- * Get the number of SedDataDescription_t objects in this SedDocument_t.
- */
-LIBSEDML_EXTERN
-unsigned int
-SedDocument_getNumDataDescriptions(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->getNumDataDescriptions() : SEDML_INT_MAX;
-}
-
-
-/*
- * Creates a new SedDataDescription_t object, adds it to this SedDocument_t
- * object and returns the SedDataDescription_t object created.
- */
-LIBSEDML_EXTERN
-SedDataDescription_t*
-SedDocument_createDataDescription(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->createDataDescription() : NULL;
-}
-
-
-/*
- * Removes the nth SedDataDescription_t from this SedDocument_t and returns a
- * pointer to it.
- */
-LIBSEDML_EXTERN
-SedDataDescription_t*
-SedDocument_removeDataDescription(SedDocument_t* sd, unsigned int n)
-{
-  return (sd != NULL) ? sd->removeDataDescription(n) : NULL;
-}
-
-
-/*
- * Removes the SedDataDescription_t from this SedDocument_t based on its
- * identifier and returns a pointer to it.
- */
-LIBSEDML_EXTERN
-SedDataDescription_t*
-SedDocument_removeDataDescriptionById(SedDocument_t* sd, const char* sid)
-{
-  return (sd != NULL && sid != NULL) ? sd->removeDataDescription(sid) : NULL;
 }
 
 

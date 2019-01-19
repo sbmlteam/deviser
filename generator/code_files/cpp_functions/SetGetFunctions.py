@@ -1696,14 +1696,34 @@ class SetGetFunctions():
                                  ['return {0}'.format(global_variables.ret_att_unex)]
                 code.append(self.create_code_block('if_else', implementation))
         elif query.has_is_set_member(attribute):
-            if not deal_with_versions:
-                implementation = self.write_set_att_with_member(attribute, True)
+            att_name = attribute['name']
+            if self.class_name.endswith('Document') and (att_name == 'level' or att_name == 'version'):
+                other_name = 'level'
+                if att_name == 'level':
+                    other_name = 'version'
+                if_code = self.create_code_block('if', ['mIsSet{0}'.format(strFunctions.upper_first(other_name)),
+                                                        'set{0}NamespacesAndOwn(new {0}Namespaces({1}, {2})'
+                                                        ''.format(global_variables.prefix,
+                                                                  'mLevel' if att_name == 'version' else 'level',
+                                                                  'mVersion' if other_name == 'version' else 'version')])
+
+                implementation = ['{0} = {1}'.format(attribute['memberName'], att_name),
+                                  'mIsSet{0} = true'.format(attribute['capAttName'])]
                 code.append(self.create_code_block('line', implementation))
+                code.append(if_code)
+                code.append(self.create_code_block('line', ['return {0}'.format(self.success)]))
+#                implementation.append(if_code)
+#                implementation2 = ['return {0}'.format(self.success)]
+#                implementation.append[dict({'code_type': 'line', 'code': implementation2})]
             else:
-                implementation = topif + \
-                                 self.write_set_att_with_member(attribute, True) + ['else'] + \
-                                 self.write_set_att_with_member(attribute, False)
-                code.append(self.create_code_block('if_else', implementation))
+                if not deal_with_versions:
+                    implementation = self.write_set_att_with_member(attribute, True)
+                    code.append(self.create_code_block('line', implementation))
+                else:
+                    implementation = topif + \
+                                     self.write_set_att_with_member(attribute, True) + ['else'] + \
+                                     self.write_set_att_with_member(attribute, False)
+                    code.append(self.create_code_block('if_else', implementation))
         elif 'isVector' in attribute and attribute['isVector']:
             implementation = ['{0} = {1}'.format(member, name),
                               'return {0}'.format(self.success)]
