@@ -1712,9 +1712,6 @@ class SetGetFunctions():
                 code.append(self.create_code_block('line', implementation))
                 code.append(if_code)
                 code.append(self.create_code_block('line', ['return {0}'.format(self.success)]))
-#                implementation.append(if_code)
-#                implementation2 = ['return {0}'.format(self.success)]
-#                implementation.append[dict({'code_type': 'line', 'code': implementation2})]
             else:
                 if not deal_with_versions:
                     implementation = self.write_set_att_with_member(attribute, True)
