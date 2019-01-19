@@ -694,8 +694,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new AnalyticGeometry (GeometryDefinition_t) using the given SBML
- * Level, Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new AnalyticGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * GeometryDefinition_t.
@@ -713,15 +713,15 @@ BEGIN_C_DECLS
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-GeometryDefinition_t *
+AnalyticGeometry_t *
 GeometryDefinition_createAnalyticGeometry(unsigned int level,
                                           unsigned int version,
                                           unsigned int pkgVersion);
 
 
 /**
- * Creates a new SampledFieldGeometry (GeometryDefinition_t) using the given
- * SBML Level, Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new SampledFieldGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * GeometryDefinition_t.
@@ -739,15 +739,15 @@ GeometryDefinition_createAnalyticGeometry(unsigned int level,
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-GeometryDefinition_t *
+SampledFieldGeometry_t *
 GeometryDefinition_createSampledFieldGeometry(unsigned int level,
                                               unsigned int version,
                                               unsigned int pkgVersion);
 
 
 /**
- * Creates a new CSGeometry (GeometryDefinition_t) using the given SBML Level,
- * Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new CSGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * GeometryDefinition_t.
@@ -765,15 +765,15 @@ GeometryDefinition_createSampledFieldGeometry(unsigned int level,
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-GeometryDefinition_t *
+CSGeometry_t *
 GeometryDefinition_createCSGeometry(unsigned int level,
                                     unsigned int version,
                                     unsigned int pkgVersion);
 
 
 /**
- * Creates a new ParametricGeometry (GeometryDefinition_t) using the given SBML
- * Level, Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new ParametricGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * GeometryDefinition_t.
@@ -791,15 +791,15 @@ GeometryDefinition_createCSGeometry(unsigned int level,
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-GeometryDefinition_t *
+ParametricGeometry_t *
 GeometryDefinition_createParametricGeometry(unsigned int level,
                                             unsigned int version,
                                             unsigned int pkgVersion);
 
 
 /**
- * Creates a new MixedGeometry (GeometryDefinition_t) using the given SBML
- * Level, Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new MixedGeometry using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this
  * GeometryDefinition_t.
@@ -817,7 +817,7 @@ GeometryDefinition_createParametricGeometry(unsigned int level,
  * @memberof GeometryDefinition_t
  */
 LIBSBML_EXTERN
-GeometryDefinition_t *
+MixedGeometry_t *
 GeometryDefinition_createMixedGeometry(unsigned int level,
                                        unsigned int version,
                                        unsigned int pkgVersion);

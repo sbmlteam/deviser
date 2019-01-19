@@ -467,39 +467,39 @@ Association::unsetAttribute(const std::string& attributeName)
 
 
 /*
- * Creates a new FbcAnd (Association_t) using the given SBML Level, Version and
+ * Creates a new FbcAnd using the given SBML Level, Version and
  * &ldquo;fbc&rdquo; package version.
  */
 LIBSBML_EXTERN
-Association_t *
-Association_createFbcAnd(unsigned int level,
-                         unsigned int version,
-                         unsigned int pkgVersion)
+FbcAnd_t *
+Association_createAnd(unsigned int level,
+                      unsigned int version,
+                      unsigned int pkgVersion)
 {
   return new FbcAnd(level, version, pkgVersion);
 }
 
 
 /*
- * Creates a new FbcOr (Association_t) using the given SBML Level, Version and
+ * Creates a new FbcOr using the given SBML Level, Version and
  * &ldquo;fbc&rdquo; package version.
  */
 LIBSBML_EXTERN
-Association_t *
-Association_createFbcOr(unsigned int level,
-                        unsigned int version,
-                        unsigned int pkgVersion)
+FbcOr_t *
+Association_createOr(unsigned int level,
+                     unsigned int version,
+                     unsigned int pkgVersion)
 {
   return new FbcOr(level, version, pkgVersion);
 }
 
 
 /*
- * Creates a new GeneProductRef (Association_t) using the given SBML Level,
- * Version and &ldquo;fbc&rdquo; package version.
+ * Creates a new GeneProductRef using the given SBML Level, Version and
+ * &ldquo;fbc&rdquo; package version.
  */
 LIBSBML_EXTERN
-Association_t *
+GeneProductRef_t *
 Association_createGeneProductRef(unsigned int level,
                                  unsigned int version,
                                  unsigned int pkgVersion)

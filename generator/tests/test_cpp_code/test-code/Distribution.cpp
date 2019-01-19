@@ -566,11 +566,11 @@ Distribution::unsetAttribute(const std::string& attributeName)
 
 
 /*
- * Creates a new BetaDistribution (Distribution_t) using the given SBML Level,
- * Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new BetaDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+BetaDistribution_t *
 Distribution_createBetaDistribution(unsigned int level,
                                     unsigned int version,
                                     unsigned int pkgVersion)
@@ -580,11 +580,11 @@ Distribution_createBetaDistribution(unsigned int level,
 
 
 /*
- * Creates a new CauchyDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new CauchyDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+CauchyDistribution_t *
 Distribution_createCauchyDistribution(unsigned int level,
                                       unsigned int version,
                                       unsigned int pkgVersion)
@@ -594,11 +594,11 @@ Distribution_createCauchyDistribution(unsigned int level,
 
 
 /*
- * Creates a new ExponentialDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new ExponentialDistribution using the given SBML Level, Version
+ * and &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+ExponentialDistribution_t *
 Distribution_createExponentialDistribution(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion)
@@ -608,11 +608,11 @@ Distribution_createExponentialDistribution(unsigned int level,
 
 
 /*
- * Creates a new LogisticDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new LogisticDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+LogisticDistribution_t *
 Distribution_createLogisticDistribution(unsigned int level,
                                         unsigned int version,
                                         unsigned int pkgVersion)
@@ -622,11 +622,11 @@ Distribution_createLogisticDistribution(unsigned int level,
 
 
 /*
- * Creates a new NormalDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new NormalDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+NormalDistribution_t *
 Distribution_createNormalDistribution(unsigned int level,
                                       unsigned int version,
                                       unsigned int pkgVersion)
@@ -636,11 +636,11 @@ Distribution_createNormalDistribution(unsigned int level,
 
 
 /*
- * Creates a new BinomialDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new BinomialDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+BinomialDistribution_t *
 Distribution_createBinomialDistribution(unsigned int level,
                                         unsigned int version,
                                         unsigned int pkgVersion)
@@ -650,11 +650,11 @@ Distribution_createBinomialDistribution(unsigned int level,
 
 
 /*
- * Creates a new GeometricDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new GeometricDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+GeometricDistribution_t *
 Distribution_createGeometricDistribution(unsigned int level,
                                          unsigned int version,
                                          unsigned int pkgVersion)
@@ -664,11 +664,11 @@ Distribution_createGeometricDistribution(unsigned int level,
 
 
 /*
- * Creates a new BernoulliDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new BernoulliDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+BernoulliDistribution_t *
 Distribution_createBernoulliDistribution(unsigned int level,
                                          unsigned int version,
                                          unsigned int pkgVersion)
@@ -678,11 +678,11 @@ Distribution_createBernoulliDistribution(unsigned int level,
 
 
 /*
- * Creates a new CategoricalDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new CategoricalDistribution using the given SBML Level, Version
+ * and &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+CategoricalDistribution_t *
 Distribution_createCategoricalDistribution(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion)
@@ -692,11 +692,11 @@ Distribution_createCategoricalDistribution(unsigned int level,
 
 
 /*
- * Creates a new MultivariateDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new MultivariateDistribution using the given SBML Level, Version
+ * and &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+MultivariateDistribution_t *
 Distribution_createMultivariateDistribution(unsigned int level,
                                             unsigned int version,
                                             unsigned int pkgVersion)
@@ -706,11 +706,11 @@ Distribution_createMultivariateDistribution(unsigned int level,
 
 
 /*
- * Creates a new ExternalDistribution (Distribution_t) using the given SBML
- * Level, Version and &ldquo;distrib&rdquo; package version.
+ * Creates a new ExternalDistribution using the given SBML Level, Version and
+ * &ldquo;distrib&rdquo; package version.
  */
 LIBSBML_EXTERN
-Distribution_t *
+ExternalDistribution_t *
 Distribution_createExternalDistribution(unsigned int level,
                                         unsigned int version,
                                         unsigned int pkgVersion)

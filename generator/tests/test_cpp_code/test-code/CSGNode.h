@@ -638,82 +638,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new CSGPrimitive (CSGNode_t) using the given SBML Level, Version
- * and &ldquo;spatial&rdquo; package version.
- *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGNode_t.
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t.
- *
- * @copydetails doc_note_setting_lv_pkg
- *
- * @copydetails doc_returned_owned_pointer
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGPrimitive(unsigned int level,
-                           unsigned int version,
-                           unsigned int pkgVersion);
-
-
-/**
- * Creates a new CSGTranslation (CSGNode_t) using the given SBML Level, Version
- * and &ldquo;spatial&rdquo; package version.
- *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGNode_t.
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t.
- *
- * @copydetails doc_note_setting_lv_pkg
- *
- * @copydetails doc_returned_owned_pointer
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGTranslation(unsigned int level,
-                             unsigned int version,
-                             unsigned int pkgVersion);
-
-
-/**
- * Creates a new CSGRotation (CSGNode_t) using the given SBML Level, Version
- * and &ldquo;spatial&rdquo; package version.
- *
- * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
- *
- * @param version an unsigned int, the SBML Version to assign to this
- * CSGNode_t.
- *
- * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
- * this CSGNode_t.
- *
- * @copydetails doc_note_setting_lv_pkg
- *
- * @copydetails doc_returned_owned_pointer
- *
- * @memberof CSGNode_t
- */
-LIBSBML_EXTERN
-CSGNode_t *
-CSGNode_createCSGRotation(unsigned int level,
-                          unsigned int version,
-                          unsigned int pkgVersion);
-
-
-/**
- * Creates a new CSGScale (CSGNode_t) using the given SBML Level, Version and
+ * Creates a new CSGPrimitive using the given SBML Level, Version and
  * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
@@ -731,15 +656,90 @@ CSGNode_createCSGRotation(unsigned int level,
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
-CSGNode_t *
+CSGPrimitive_t *
+CSGNode_createCSGPrimitive(unsigned int level,
+                           unsigned int version,
+                           unsigned int pkgVersion);
+
+
+/**
+ * Creates a new CSGTranslation using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
+ *
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
+ *
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
+ *
+ * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
+ * this CSGNode_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof CSGNode_t
+ */
+LIBSBML_EXTERN
+CSGTranslation_t *
+CSGNode_createCSGTranslation(unsigned int level,
+                             unsigned int version,
+                             unsigned int pkgVersion);
+
+
+/**
+ * Creates a new CSGRotation using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
+ *
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
+ *
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
+ *
+ * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
+ * this CSGNode_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof CSGNode_t
+ */
+LIBSBML_EXTERN
+CSGRotation_t *
+CSGNode_createCSGRotation(unsigned int level,
+                          unsigned int version,
+                          unsigned int pkgVersion);
+
+
+/**
+ * Creates a new CSGScale using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
+ *
+ * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
+ *
+ * @param version an unsigned int, the SBML Version to assign to this
+ * CSGNode_t.
+ *
+ * @param pkgVersion an unsigned int, the SBML Spatial Version to assign to
+ * this CSGNode_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof CSGNode_t
+ */
+LIBSBML_EXTERN
+CSGScale_t *
 CSGNode_createCSGScale(unsigned int level,
                        unsigned int version,
                        unsigned int pkgVersion);
 
 
 /**
- * Creates a new CSGHomogeneousTransformation (CSGNode_t) using the given SBML
- * Level, Version and &ldquo;spatial&rdquo; package version.
+ * Creates a new CSGHomogeneousTransformation using the given SBML Level,
+ * Version and &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
@@ -756,15 +756,15 @@ CSGNode_createCSGScale(unsigned int level,
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
-CSGNode_t *
+CSGHomogeneousTransformation_t *
 CSGNode_createCSGHomogeneousTransformation(unsigned int level,
                                            unsigned int version,
                                            unsigned int pkgVersion);
 
 
 /**
- * Creates a new CSGSetOperator (CSGNode_t) using the given SBML Level, Version
- * and &ldquo;spatial&rdquo; package version.
+ * Creates a new CSGSetOperator using the given SBML Level, Version and
+ * &ldquo;spatial&rdquo; package version.
  *
  * @param level an unsigned int, the SBML Level to assign to this CSGNode_t.
  *
@@ -781,7 +781,7 @@ CSGNode_createCSGHomogeneousTransformation(unsigned int level,
  * @memberof CSGNode_t
  */
 LIBSBML_EXTERN
-CSGNode_t *
+CSGSetOperator_t *
 CSGNode_createCSGSetOperator(unsigned int level,
                              unsigned int version,
                              unsigned int pkgVersion);
