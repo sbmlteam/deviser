@@ -970,14 +970,14 @@ FbcAnd::readAttributes(const XMLAttributes& attributes,
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
-        log->logPackageError("fbc", FbcFbcAndAllowedAttributes, pkgVersion,
-          level, version, details);
+        log->logPackageError("fbc", FbcAndAllowedAttributes, pkgVersion, level,
+          version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("fbc", FbcFbcAndAllowedCoreAttributes, pkgVersion,
+        log->logPackageError("fbc", FbcAndAllowedCoreAttributes, pkgVersion,
           level, version, details);
       }
     }

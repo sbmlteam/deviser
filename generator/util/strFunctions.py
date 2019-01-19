@@ -166,7 +166,7 @@ def remove_prefix(name, in_concrete=False, remove_package=False, prefix='', remo
     if not name.endswith('Document') and (name.startswith(prefix_to_remove) or name.startswith(upper_first(prefix_to_remove))):
         newname = name[length:]
     else:
-        if remove_doc_prefix:
+        if remove_doc_prefix and name.endswith('Document'):
             newname = name[length:]
         else:
             newname = name

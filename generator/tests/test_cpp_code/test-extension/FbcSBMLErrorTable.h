@@ -790,7 +790,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021001
-  { FbcFbcAndAllowedCoreAttributes,
+  { FbcAndAllowedCoreAttributes,
     "Core attributes allowed on <and>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -802,7 +802,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021002
-  { FbcFbcAndAllowedCoreElements,
+  { FbcAndAllowedCoreElements,
     "Core elements allowed on <and>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -814,7 +814,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021003
-  { FbcFbcAndAllowedElements,
+  { FbcAndAllowedElements,
     "Elements allowed on <and>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -826,7 +826,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021101
-  { FbcFbcOrAllowedCoreAttributes,
+  { FbcOrAllowedCoreAttributes,
     "Core attributes allowed on <or>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -838,7 +838,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021102
-  { FbcFbcOrAllowedCoreElements,
+  { FbcOrAllowedCoreElements,
     "Core elements allowed on <or>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
@@ -850,7 +850,7 @@ static const packageErrorTableEntry fbcErrorTable[] =
   },
 
   // 2021103
-  { FbcFbcOrAllowedElements,
+  { FbcOrAllowedElements,
     "Elements allowed on <or>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
