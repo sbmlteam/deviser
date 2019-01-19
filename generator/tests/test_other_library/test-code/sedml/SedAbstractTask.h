@@ -654,8 +654,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedTask (SedAbstractTask_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedTask using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractTask_t.
@@ -670,13 +669,13 @@ BEGIN_C_DECLS
  * @memberof SedAbstractTask_t
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedTask(unsigned int level, unsigned int version);
+SedTask_t *
+SedAbstractTask_createTask(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedRepeatedTask (SedAbstractTask_t) using the given SEDML
- * Level and @ p version values.
+ * Creates a new SedRepeatedTask using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractTask_t.
@@ -691,14 +690,13 @@ SedAbstractTask_createSedTask(unsigned int level, unsigned int version);
  * @memberof SedAbstractTask_t
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedRepeatedTask(unsigned int level,
-                                      unsigned int version);
+SedRepeatedTask_t *
+SedAbstractTask_createRepeatedTask(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedParameterEstimationTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedParameterEstimationTask using the given SEDML Level and @ p
+ * version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractTask_t.
@@ -713,14 +711,14 @@ SedAbstractTask_createSedRepeatedTask(unsigned int level,
  * @memberof SedAbstractTask_t
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedParameterEstimationTask(unsigned int level,
-                                                 unsigned int version);
+SedParameterEstimationTask_t *
+SedAbstractTask_createParameterEstimationTask(unsigned int level,
+                                              unsigned int version);
 
 
 /**
- * Creates a new SedSimpleRepeatedTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedSimpleRepeatedTask using the given SEDML Level and @ p
+ * version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractTask_t.
@@ -735,9 +733,9 @@ SedAbstractTask_createSedParameterEstimationTask(unsigned int level,
  * @memberof SedAbstractTask_t
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedSimpleRepeatedTask(unsigned int level,
-                                            unsigned int version);
+SedSimpleRepeatedTask_t *
+SedAbstractTask_createSimpleRepeatedTask(unsigned int level,
+                                         unsigned int version);
 
 
 /**

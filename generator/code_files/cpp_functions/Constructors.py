@@ -108,9 +108,9 @@ class Constructors():
                 return
             else:
                 i = index - 1
-            ob_name = '{0} ({1})'.format(self.concretes[i]['element'],
+            ob_name = '{0}'.format(self.concretes[i]['element'],
                                        self.object_name)
-            create = 'create{0}'.format(self.concretes[i]['element'])
+            create = 'create{0}'.format(strFunctions.remove_prefix(self.concretes[i]['element']))
         # create doc string header
         title_line = 'Creates a new {0} using the given {1} Level' \
             .format(ob_name, self.cap_language)
@@ -154,7 +154,10 @@ class Constructors():
             return_type = ''
         else:
             function = '{0}_{1}'.format(self.class_name, create)
-            return_type = '{0} *'.format(self.object_name)
+            if not ob_name.endswith('_t'):
+                return_type = '{0}_t *'.format(ob_name)
+            else:
+                return_type = '{0} *'.format(ob_name)
 
         if global_variables.is_package:
             arguments = [
@@ -215,8 +218,12 @@ class Constructors():
                             implementation.append('{0}.setElementName(\"{1}\")'.format(lo_element['memberName'], lo_element['name']))
                     implementation.append('connectToChild()')
             else:
+                name_to_use = ob_name
+                if ob_name.endswith('_t'):
+                    length = len(ob_name)
+                    name_to_use = ob_name[0:length-2]
                 implementation = ['return new {0}(level, '
-                                  'version)'.format(self.class_name)]
+                                  'version)'.format(name_to_use)]
 
         code = [dict({'code_type': 'line', 'code': implementation})]
 

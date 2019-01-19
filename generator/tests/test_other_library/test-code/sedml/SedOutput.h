@@ -637,8 +637,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedReport (SedOutput_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedReport using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedOutput_t.
  *
@@ -652,13 +651,12 @@ BEGIN_C_DECLS
  * @memberof SedOutput_t
  */
 LIBSEDML_EXTERN
-SedOutput_t *
-SedOutput_createSedReport(unsigned int level, unsigned int version);
+SedReport_t *
+SedOutput_createReport(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedPlot2D (SedOutput_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedPlot2D using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedOutput_t.
  *
@@ -672,13 +670,12 @@ SedOutput_createSedReport(unsigned int level, unsigned int version);
  * @memberof SedOutput_t
  */
 LIBSEDML_EXTERN
-SedOutput_t *
-SedOutput_createSedPlot2D(unsigned int level, unsigned int version);
+SedPlot2D_t *
+SedOutput_createPlot2D(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedPlot3D (SedOutput_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedPlot3D using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedOutput_t.
  *
@@ -692,8 +689,8 @@ SedOutput_createSedPlot2D(unsigned int level, unsigned int version);
  * @memberof SedOutput_t
  */
 LIBSEDML_EXTERN
-SedOutput_t *
-SedOutput_createSedPlot3D(unsigned int level, unsigned int version);
+SedPlot3D_t *
+SedOutput_createPlot3D(unsigned int level, unsigned int version);
 
 
 /**

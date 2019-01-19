@@ -32,7 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedAbstractTask.h>
-#include <sedml/SedListOfAbstractTasks.h>
+#include <sedml/SedListOfTasks.h>
 #include <sbml/xml/XMLInputStream.h>
 
 #include <sedml/SedTask.h>
@@ -673,7 +673,7 @@ SedAbstractTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedDocumentLOtOfAbstractTasksAllowedCoreAttributes,
+        log->logError(SedmlDocumentLOTasksAllowedCoreAttributes,
           level, version, details);
       }
     }
@@ -691,7 +691,7 @@ SedAbstractTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedAbstractTaskAllowedAttributes, level, version,
+        log->logError(SedmlAbstractTaskAllowedAttributes, level, version,
           details);
       }
     }
@@ -773,53 +773,51 @@ SedAbstractTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedTask (SedAbstractTask_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedTask using the given SEDML Level and @ p version values.
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedTask(unsigned int level, unsigned int version)
+SedTask_t *
+SedAbstractTask_createTask(unsigned int level, unsigned int version)
 {
-  return new SedAbstractTask(level, version);
+  return new SedTask(level, version);
 }
 
 
 /*
- * Creates a new SedRepeatedTask (SedAbstractTask_t) using the given SEDML
- * Level and @ p version values.
+ * Creates a new SedRepeatedTask using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedRepeatedTask(unsigned int level,
-                                      unsigned int version)
+SedRepeatedTask_t *
+SedAbstractTask_createRepeatedTask(unsigned int level, unsigned int version)
 {
-  return new SedAbstractTask(level, version);
+  return new SedRepeatedTask(level, version);
 }
 
 
 /*
- * Creates a new SedParameterEstimationTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedParameterEstimationTask using the given SEDML Level and @ p
+ * version values.
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedParameterEstimationTask(unsigned int level,
-                                                 unsigned int version)
+SedParameterEstimationTask_t *
+SedAbstractTask_createParameterEstimationTask(unsigned int level,
+                                              unsigned int version)
 {
-  return new SedAbstractTask(level, version);
+  return new SedParameterEstimationTask(level, version);
 }
 
 
 /*
- * Creates a new SedSimpleRepeatedTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedSimpleRepeatedTask using the given SEDML Level and @ p
+ * version values.
  */
 LIBSEDML_EXTERN
-SedAbstractTask_t *
-SedAbstractTask_createSedSimpleRepeatedTask(unsigned int level,
-                                            unsigned int version)
+SedSimpleRepeatedTask_t *
+SedAbstractTask_createSimpleRepeatedTask(unsigned int level,
+                                         unsigned int version)
 {
-  return new SedAbstractTask(level, version);
+  return new SedSimpleRepeatedTask(level, version);
 }
 
 
