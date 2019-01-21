@@ -126,7 +126,8 @@ class ProtectedFunctions():
         self.plural = strFunctions.plural(self.child_name)
         self.lo_name = ''
         if 'lo_class_name' in class_object and class_object['lo_class_name'] != '':
-            self.lo_name = class_object['lo_class_name'][6:]
+            loname = strFunctions.remove_prefix(class_object['lo_class_name'])
+            self.lo_name = loname[6:]
         self.indef_name = strFunctions.get_indefinite(self.object_child_name)
         self.abbrev_parent = strFunctions.abbrev_name(self.object_name)
         self.abbrev_child = strFunctions.abbrev_name(self.child_name)
@@ -1202,16 +1203,16 @@ class ProtectedFunctions():
     # HELPER FUNCTIONS
 
     def get_error_from_list_of_read(self):
-        name_in_error = strFunctions.remove_prefix(self.class_name)
+        name_in_error = strFunctions.remove_prefix(self.class_name, False, False, '', True)
         if self.lo_name == '':
             plural = strFunctions.plural(name_in_error)
         else:
             plural = self.lo_name
         c_err = '{0}{1}LO{2}AllowedCoreAttributes'.format(self.package,
-                                                          self.parent_class,
+                                                          strFunctions.remove_prefix(self.parent_class, False, False, '', True),
                                                           plural)
         error = '{0}{1}LO{2}AllowedAttributes'.format(self.package,
-                                                      self.parent_class,
+                                                      strFunctions.remove_prefix(self.parent_class, False, False, '', True),
                                                       plural)
         unknown_error_att ='UnknownCoreAttribute'
         if not global_variables.is_package:
