@@ -693,7 +693,7 @@ CaContent::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(CaUnknownCoreAttribute);
-        log->logError(CombineCaOmexManifestLOContentsAllowedCoreAttributes,
+        log->logError(CombineOmexManifestLOContentsAllowedCoreAttributes,
           level, version, details);
       }
     }
