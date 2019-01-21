@@ -108,5 +108,6 @@
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>
 
+#include <sbml/math/FormulaFormatter.h>  
 
 #endif  /* SedTypes_h */

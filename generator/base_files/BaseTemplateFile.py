@@ -181,6 +181,9 @@ class BaseTemplateFile:
             elif line.startswith('<all_namespaces_static/>'):
                 self.print_all_namespaces(fileout, True)
                 i += 1
+            elif line.startswith('<insert_other_includes/>'):
+                self.print_all_other_includes(fileout)
+                i += 1
             else:
                 line = self.adjust_line(line)
                 fileout.copy_line_verbatim(line)
@@ -358,3 +361,10 @@ class BaseTemplateFile:
                         ns['level'], ns['version'],
                         ns['namespace'], indent)
                 fileout.copy_line_verbatim(line)
+
+    @staticmethod
+    def print_all_other_includes(fileout):
+        if global_variables.uses_ASTNode:
+            line = '#include <sbml/math/FormulaFormatter.h>'
+            fileout.copy_line_verbatim(line)
+            fileout.copy_line_verbatim('  ')

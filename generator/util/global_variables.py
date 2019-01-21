@@ -83,6 +83,16 @@ global top_level_element_name
 top_level_element_name = 'sbml'
 global annot_element
 annot_element = 'Annotation'
+global notes_element
+notes_element = 'Notes'
+global use_id
+use_id = True
+global use_name
+use_name = True
+global uses_ASTNode
+uses_ASTNode = False
+global uses_XMLNode
+uses_XMLNode = False
 
 global return_codes
 return_codes= dict({'success': 0,
@@ -166,7 +176,8 @@ def set_unknown_error(pkg):
 
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
-                specifications=[], depend=[], library_vers=[], copyright='', annot_elem=''):
+                specifications=[], depend=[], library_vers=[], copyright='', annot_elem='',
+                notes_elem='', use_id_1=True, use_name_1=True, ast=False, xml=False):
     global language
     language = lang
 
@@ -226,6 +237,32 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         annot_element = annot_elem
     else:
         annot_element = 'Annotation'
+
+    global notes_element
+    if notes_elem and notes_elem != '':
+        notes_element = notes_elem
+    else:
+        notes_element = 'Notes'
+
+    global use_id
+    use_id = True
+    if not use_id_1:
+        use_id = False
+
+    global use_name
+    use_name = True
+    if not use_name_1:
+        use_name = False
+
+    global uses_ASTNode
+    uses_ASTNode = False
+    if ast:
+        uses_ASTNode = True
+
+    global uses_XMLNode
+    uses_XMLNode = False
+    if xml:
+        uses_XMLNode = True
 
     global library_name
     if lib:

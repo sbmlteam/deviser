@@ -13,5 +13,7 @@
 #include <sbml/SBMLReader.h>
 #include <sbml/SBMLWriter.h>
 
+<insert_other_includes/>
+
 
 #endif  /* SBMLTypes_h */

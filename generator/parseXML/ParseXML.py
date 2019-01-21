@@ -651,7 +651,9 @@ class ParseXML():
         prefix = self.get_value(node, 'prefix')
         library_name = self.get_value(node, 'libraryName')
         pkg_prefix = self.get_value(node, 'pkg_prefix')
-        annot_element = self.get_value(node, 'annotationElementName')
+#        annot_element = self.get_value(node, 'annotationElementName')
+        uses_ASTNode = self.get_bool_value(self, node, 'uses_ASTNode')
+        uses_XMLNode = self.get_bool_value(self, node, 'uses_XMLNode')
 
         if node.getAttributeNode('isPackage'):
             is_package = self.get_bool_value(self, node, 'isPackage')
@@ -684,6 +686,17 @@ class ParseXML():
                                 'minor': minor,
                                 'revision': rev})
 
+        variants = node.getElementsByTagName('libsbml_variants')
+        annot_element = ''
+        notes_element = ''
+        use_id = True
+        use_name = True
+        if variants:
+            annot_element = self.get_value(node, 'annotationElementName')
+            notes_element = self.get_value(node, 'notesElementName')
+            use_id = self.get_bool_value(self, node, 'include_id')
+            use_name = self.get_bool_value(self, node, 'include_name')
+
         # some sanity checking
         if not language or language == '':
             language = 'sbml'
@@ -691,7 +704,8 @@ class ParseXML():
         global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
-                                     dependency, library_version, '', annot_element)
+                                     dependency, library_version, '', annot_element,
+                                     notes_element, use_id, use_name, uses_ASTNode, uses_XMLNode)
 
     #####################################################################
 
