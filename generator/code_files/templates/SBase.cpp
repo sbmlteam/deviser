@@ -76,7 +76,7 @@ SBase::getAllElements()
 SBase::SBase (unsigned int level, unsigned int version) 
  : mMetaId ("")
  , mId ("")
- , mNotes(NULL)
+ , m<Notes>(NULL)
  , m<Annotation>( NULL )
  , mSBML      ( NULL )
  , mSBMLNamespaces (NULL)
@@ -107,7 +107,7 @@ SBase::SBase (unsigned int level, unsigned int version)
 SBase::SBase (SBMLNamespaces *sbmlns) 
  : mMetaId("")
  , mId("")
- , mNotes(NULL)
+ , m<Notes>(NULL)
  , m<Annotation>( NULL )
  , mSBML      ( NULL )
  , mSBMLNamespaces (NULL)
@@ -138,7 +138,7 @@ SBase::SBase (SBMLNamespaces *sbmlns)
 SBase::SBase(const SBase& orig)
   : mMetaId (orig.mMetaId)
   , mId (orig.mId)
-  , mNotes (NULL)
+  , m<Notes> (NULL)
   , m<Annotation> (NULL)
   , mSBML (NULL)
   , mSBMLNamespaces(NULL)
@@ -148,10 +148,10 @@ SBase::SBase(const SBase& orig)
   , mParentSBMLObject(NULL)
   , mURI(orig.mURI)
 {
-  if(orig.mNotes != NULL)
-    this->mNotes = new <NS>XMLNode(*const_cast<SBase&>(orig).getNotes());
+  if(orig.m<Notes> != NULL)
+    this->m<Notes> = new <NS>XMLNode(*const_cast<SBase&>(orig).get<Notes>());
   else
-    this->mNotes = NULL;
+    this->m<Notes> = NULL;
 
   if(orig.m<Annotation> != NULL)
     this->m<Annotation> = new <NS>XMLNode(*const_cast<SBase&>(orig).m<Annotation>);
@@ -174,7 +174,7 @@ SBase::SBase(const SBase& orig)
  */
 SBase::~SBase ()
 {
-  if (mNotes != NULL)       delete mNotes;
+  if (m<Notes> != NULL)       delete m<Notes>;
   if (m<Annotation> != NULL)  delete m<Annotation>;
   if (mSBMLNamespaces != NULL)  delete mSBMLNamespaces;
 }
@@ -189,12 +189,12 @@ SBase& SBase::operator=(const SBase& rhs)
     this->mMetaId = rhs.mMetaId;
     this->mId = rhs.mId;
 
-    delete this->mNotes;
+    delete this->m<Notes>;
 
-    if(rhs.mNotes != NULL)
-      this->mNotes = new <NS>XMLNode(*const_cast<SBase&>(rhs).getNotes());
+    if(rhs.m<Notes> != NULL)
+      this->m<Notes> = new <NS>XMLNode(*const_cast<SBase&>(rhs).get<Notes>());
     else
-      this->mNotes = NULL;
+      this->m<Notes> = NULL;
 
     delete this->m<Annotation>;
 
@@ -256,16 +256,16 @@ SBase::getId() const
  * @return the notes of this SBML_Lang object.
  */
 <NS>XMLNode*
-SBase::getNotes()
+SBase::get<Notes>()
 {
-  return mNotes;
+  return m<Notes>;
 }
 
 
 const <NS>XMLNode*
-SBase::getNotes() const
+SBase::get<Notes>() const
 {
-  return mNotes;
+  return m<Notes>;
 }
 
 
@@ -273,16 +273,16 @@ SBase::getNotes() const
  * @return the notes of this SBML_Lang object by string.
  */
 std::string
-SBase::getNotesString()
+SBase::get<Notes>String()
 {
-  return <NS>XMLNode::convertXMLNodeToString(mNotes);
+  return <NS>XMLNode::convertXMLNodeToString(m<Notes>);
 }
 
 
 std::string
-SBase::getNotesString() const
+SBase::get<Notes>String() const
 {
-  return <NS>XMLNode::convertXMLNodeToString(mNotes);
+  return <NS>XMLNode::convertXMLNodeToString(m<Notes>);
 }
 
 
@@ -570,9 +570,9 @@ SBase::isSetId() const
  * otherwise.
  */
 bool
-SBase::isSetNotes () const
+SBase::isSet<Notes> () const
 {
-  return (mNotes != NULL);
+  return (m<Notes> != NULL);
 }
 
 
@@ -947,33 +947,33 @@ SBase::replaceTopLevel<Annotation>Element(const std::string& annotation)
  * Sets the notes of this SBML_Lang object to a copy of notes.
  */
 int
-SBase::setNotes(const <NS>XMLNode* notes)
+SBase::set<Notes>(const <NS>XMLNode* notes)
 {
-  if (mNotes == notes)
+  if (m<Notes> == notes)
   {
     return LIBSBML_OPERATION_SUCCESS;
   }
   else if (notes == NULL)
   {
-    delete mNotes;
-    mNotes = NULL;
+    delete m<Notes>;
+    m<Notes> = NULL;
     return LIBSBML_OPERATION_SUCCESS;
   }
 
-  delete mNotes;
+  delete m<Notes>;
   const string&  name = notes->getName();
 
   /* check for notes tags and add if necessary */
 
   if (name == "notes")
   {
-    mNotes = static_cast<<NS>XMLNode*>( notes->clone() );
+    m<Notes> = static_cast<<NS>XMLNode*>( notes->clone() );
   }
   else
   {
     <NS>XMLToken notes_t = <NS>XMLToken(<NS>XMLTriple("notes", "", ""),
                                 <NS>XMLAttributes());
-    mNotes = new <NS>XMLNode(notes_t);
+    m<Notes> = new <NS>XMLNode(notes_t);
 
     // The root node of the given XMLNode tree can be an empty XMLNode
     // (i.e. neither start, end, nor text XMLNode) if the given notes was
@@ -984,7 +984,7 @@ SBase::setNotes(const <NS>XMLNode* notes)
     {
       for (unsigned int i=0; i < notes->getNumChildren(); i++)
       {
-        if (mNotes->addChild(notes->getChild(i)) < 0)
+        if (m<Notes>->addChild(notes->getChild(i)) < 0)
         {
           return LIBSBML_OPERATION_FAILED;
         }
@@ -992,15 +992,15 @@ SBase::setNotes(const <NS>XMLNode* notes)
     }
     else
     {
-      if (mNotes->addChild(*notes) < 0)
+      if (m<Notes>->addChild(*notes) < 0)
         return LIBSBML_OPERATION_FAILED;
     }
   }
 
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(mNotes, NULL))
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(m<Notes>, NULL))
     {
-      delete mNotes;
-      mNotes = NULL;
+      delete m<Notes>;
+      m<Notes> = NULL;
       return LIBSBML_INVALID_OBJECT;
     }
 
@@ -1012,13 +1012,13 @@ SBase::setNotes(const <NS>XMLNode* notes)
  * Sets the notes (by std::string) of this SBML_Lang object to a copy of notes.
  */
 int
-SBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
+SBase::set<Notes>(const std::string& notes, bool addXHTMLMarkup)
 {
   int success = LIBSBML_OPERATION_FAILED;
   
   if (notes.empty())
   {
-    success = unsetNotes();
+    success = unset<Notes>();
   }
   else
   {
@@ -1053,17 +1053,17 @@ SBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 
           // create a text node from the text given
           xmlnode->addChild(*notes_xmln);
-          success = setNotes(xmlnode);
+          success = set<Notes>(xmlnode);
           delete xmlnode;
         }
         else
         {
-          success = setNotes(notes_xmln);
+          success = set<Notes>(notes_xmln);
         }
       }
       else
       {
-        success = setNotes(notes_xmln);
+        success = set<Notes>(notes_xmln);
       }
 
       delete notes_xmln;
@@ -1079,7 +1079,7 @@ SBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
  * adding additional information.
  */
 int
-SBase::appendNotes(const <NS>XMLNode* notes)
+SBase::append<Notes>(const <NS>XMLNode* notes)
 {
   int success = LIBSBML_OPERATION_FAILED;
   if(notes == NULL)
@@ -1095,20 +1095,20 @@ SBase::appendNotes(const <NS>XMLNode* notes)
   //  1. A complete XHTML document (minus the XML and DOCTYPE
   //     declarations), that is, XHTML content beginning with the
   //     html tag.
-  //     (_NotesType is _ANotesHTML.)
+  //     (_<Notes>Type is _A<Notes>HTML.)
   //
   //  2. The body element from an XHTML document.
-  //     (_NotesType is _ANotesBody.)
+  //     (_<Notes>Type is _A<Notes>Body.)
   //
   //  3. Any XHTML content that would be permitted within a body
   //     element, each one must declare the XML namespace separately.
-  //     (_NotesType is _ANotesAny.)
+  //     (_<Notes>Type is _A<Notes>Any.)
   //
 
-  typedef enum { _ANotesHTML, _ANotesBody, _ANotesAny } _NotesType;
+  typedef enum { _A<Notes>HTML, _A<Notes>Body, _A<Notes>Any } _<Notes>Type;
 
-  _NotesType addedNotesType = _ANotesAny;
-  <NS>XMLNode   addedNotes;
+  _<Notes>Type added<Notes>Type = _A<Notes>Any;
+  <NS>XMLNode   added<Notes>;
 
   //------------------------------------------------------------
   //
@@ -1131,22 +1131,22 @@ SBase::appendNotes(const <NS>XMLNode* notes)
 
       if (cname == "html")
       {
-        addedNotes = notes->getChild(0);
-        addedNotesType = _ANotesHTML;
+        added<Notes> = notes->getChild(0);
+        added<Notes>Type = _A<Notes>HTML;
       }
       else if (cname == "body")
       {
-        addedNotes = notes->getChild(0);
-        addedNotesType = _ANotesBody;
+        added<Notes> = notes->getChild(0);
+        added<Notes>Type = _A<Notes>Body;
       }
       else
       {
         // the notes tag must NOT be stripped if notes->getChild(0) node
         // is neither "html" nor "body" element because the children of
-        // the addedNotes will be added to the curNotes later if the node
+        // the added<Notes> will be added to the cur<Notes> later if the node
         // is neither "html" nor "body".
-        addedNotes = *notes;
-        addedNotesType = _ANotesAny;
+        added<Notes> = *notes;
+        added<Notes>Type = _A<Notes>Any;
       }
     }
     else
@@ -1165,8 +1165,8 @@ SBase::appendNotes(const <NS>XMLNode* notes)
     {
       if (notes->getNumChildren() > 0)
       {
-        addedNotes = *notes;
-        addedNotesType = _ANotesAny;
+        added<Notes> = *notes;
+        added<Notes>Type = _A<Notes>Any;
       }
       else
       {
@@ -1178,36 +1178,36 @@ SBase::appendNotes(const <NS>XMLNode* notes)
     {
       if (name == "html")
       {
-        addedNotes = *notes;
-        addedNotesType = _ANotesHTML;
+        added<Notes> = *notes;
+        added<Notes>Type = _A<Notes>HTML;
       }
       else if (name == "body")
       {
-        addedNotes = *notes;
-        addedNotesType = _ANotesBody;
+        added<Notes> = *notes;
+        added<Notes>Type = _A<Notes>Body;
       }
       else
       {
         // The given notes node needs to be added to a parent node
         // if the node is neither "html" nor "body" element because the
-        // children of addedNotes will be added to the curNotes later if the
+        // children of added<Notes> will be added to the cur<Notes> later if the
         // node is neither "html" nor "body" (i.e. any XHTML element that
         // would be permitted within a "body" element)
-        addedNotes.addChild(*notes);
-        addedNotesType = _ANotesAny;
+        added<Notes>.addChild(*notes);
+        added<Notes>Type = _A<Notes>Any;
       }
     }
   }
 
   //
-  // checks the addedNotes of "html" if the html tag contains "head" and
+  // checks the added<Notes> of "html" if the html tag contains "head" and
   // "body" tags which must be located in this order.
   //
-  if (addedNotesType == _ANotesHTML)
+  if (added<Notes>Type == _A<Notes>HTML)
   {
-    if ((addedNotes.getNumChildren() != 2) ||
-        ( (addedNotes.getChild(0).getName() != "head") ||
-          (addedNotes.getChild(1).getName() != "body")
+    if ((added<Notes>.getNumChildren() != 2) ||
+        ( (added<Notes>.getChild(0).getName() != "head") ||
+          (added<Notes>.getChild(1).getName() != "body")
         )
        )
     {
@@ -1219,28 +1219,28 @@ SBase::appendNotes(const <NS>XMLNode* notes)
   if (getLevel() > 2
     || (getLevel() == 2 && getVersion() > 1))
   {
-    <NS>XMLNode tmpNotes(<NS>XMLTriple("notes","",""), <NS>XMLAttributes());
+    <NS>XMLNode tmp<Notes>(<NS>XMLTriple("notes","",""), <NS>XMLAttributes());
 
-    if (addedNotesType == _ANotesAny)
+    if (added<Notes>Type == _A<Notes>Any)
     {
-      for (unsigned int i=0; i < addedNotes.getNumChildren(); i++)
+      for (unsigned int i=0; i < added<Notes>.getNumChildren(); i++)
       {
-        tmpNotes.addChild(addedNotes.getChild(i));
+        tmp<Notes>.addChild(added<Notes>.getChild(i));
       }
     }
     else
     {
-      tmpNotes.addChild(addedNotes);
+      tmp<Notes>.addChild(added<Notes>);
     }
 
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, NULL))
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmp<Notes>, NULL))
     {
       return LIBSBML_INVALID_OBJECT;
     }
   }
 
 
-  if ( mNotes != NULL )
+  if ( m<Notes> != NULL )
   {
     //------------------------------------------------------------
     //
@@ -1248,17 +1248,17 @@ SBase::appendNotes(const <NS>XMLNode* notes)
     //
     //------------------------------------------------------------
 
-    _NotesType curNotesType   = _ANotesAny;
-    <NS>XMLNode&  curNotes = *mNotes;
+    _<Notes>Type cur<Notes>Type   = _A<Notes>Any;
+    <NS>XMLNode&  cur<Notes> = *m<Notes>;
 
-    // curNotes.getChild(0) must be "html", "body", or any XHTML
+    // cur<Notes>.getChild(0) must be "html", "body", or any XHTML
     // element that would be permitted within a "body" element .
 
-    const string& cname = curNotes.getChild(0).getName();
+    const string& cname = cur<Notes>.getChild(0).getName();
 
     if (cname == "html")
     {
-      <NS>XMLNode& curHTML = curNotes.getChild(0);
+      <NS>XMLNode& curHTML = cur<Notes>.getChild(0);
       //
       // checks the curHTML if the html tag contains "head" and "body" tags
       // which must be located in this order, otherwise nothing will be done.
@@ -1271,15 +1271,15 @@ SBase::appendNotes(const <NS>XMLNode* notes)
       {
         return LIBSBML_INVALID_OBJECT;
       }
-      curNotesType = _ANotesHTML;
+      cur<Notes>Type = _A<Notes>HTML;
     }
     else if (cname == "body")
     {
-      curNotesType = _ANotesBody;
+      cur<Notes>Type = _A<Notes>Body;
     }
     else
     {
-      curNotesType = _ANotesAny;
+      cur<Notes>Type = _A<Notes>Any;
     }
 
     /*
@@ -1296,16 +1296,16 @@ SBase::appendNotes(const <NS>XMLNode* notes)
 
     unsigned int i;
 
-    if (curNotesType == _ANotesHTML)
+    if (cur<Notes>Type == _A<Notes>HTML)
     {
-      <NS>XMLNode& curHTML = curNotes.getChild(0);
+      <NS>XMLNode& curHTML = cur<Notes>.getChild(0);
       <NS>XMLNode& curBody = curHTML.getChild(1);
 
-      if (addedNotesType == _ANotesHTML)
+      if (added<Notes>Type == _A<Notes>HTML)
       {
         // adds the given html tag to the current html tag
 
-        <NS>XMLNode& addedBody = addedNotes.getChild(1);
+        <NS>XMLNode& addedBody = added<Notes>.getChild(1);
 
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
@@ -1313,105 +1313,105 @@ SBase::appendNotes(const <NS>XMLNode* notes)
             return LIBSBML_OPERATION_FAILED;
         }
       }
-      else if ((addedNotesType == _ANotesBody)
-             || (addedNotesType == _ANotesAny))
+      else if ((added<Notes>Type == _A<Notes>Body)
+             || (added<Notes>Type == _A<Notes>Any))
       {
         // adds the given body or other tag (permitted in the body) to the current
         // html tag
 
-        for (i=0; i < addedNotes.getNumChildren(); i++)
+        for (i=0; i < added<Notes>.getNumChildren(); i++)
         {
-          if (curBody.addChild(addedNotes.getChild(i)) < 0 )
+          if (curBody.addChild(added<Notes>.getChild(i)) < 0 )
             return LIBSBML_OPERATION_FAILED;
         }
       }
       success = LIBSBML_OPERATION_SUCCESS;
     }
-    else if (curNotesType == _ANotesBody)
+    else if (cur<Notes>Type == _A<Notes>Body)
     {
-      if (addedNotesType == _ANotesHTML)
+      if (added<Notes>Type == _A<Notes>HTML)
       {
         // adds the given html tag to the current body tag
 
-        <NS>XMLNode  addedHTML(addedNotes);
+        <NS>XMLNode  addedHTML(added<Notes>);
         <NS>XMLNode& addedBody = addedHTML.getChild(1);
-        <NS>XMLNode& curBody   = curNotes.getChild(0);
+        <NS>XMLNode& curBody   = cur<Notes>.getChild(0);
 
         for (i=0; i < curBody.getNumChildren(); i++)
         {
           addedBody.insertChild(i,curBody.getChild(i));
         }
 
-        curNotes.removeChildren();
-        if (curNotes.addChild(addedHTML) < 0)
+        cur<Notes>.removeChildren();
+        if (cur<Notes>.addChild(addedHTML) < 0)
           return LIBSBML_OPERATION_FAILED;
       }
-      else if ((addedNotesType == _ANotesBody) || (addedNotesType == _ANotesAny))
+      else if ((added<Notes>Type == _A<Notes>Body) || (added<Notes>Type == _A<Notes>Any))
       {
         // adds the given body or other tag (permitted in the body) to the current
         // body tag
 
-        <NS>XMLNode& curBody = curNotes.getChild(0);
+        <NS>XMLNode& curBody = cur<Notes>.getChild(0);
 
-        for (i=0; i < addedNotes.getNumChildren(); i++)
+        for (i=0; i < added<Notes>.getNumChildren(); i++)
         {
-          if (curBody.addChild(addedNotes.getChild(i)) < 0)
+          if (curBody.addChild(added<Notes>.getChild(i)) < 0)
             return LIBSBML_OPERATION_FAILED;
         }
       }
       success = LIBSBML_OPERATION_SUCCESS;
     }
-    else if (curNotesType == _ANotesAny)
+    else if (cur<Notes>Type == _A<Notes>Any)
     {
-      if (addedNotesType == _ANotesHTML)
+      if (added<Notes>Type == _A<Notes>HTML)
       {
         // adds the given html tag to the current any tag permitted in the body.
 
-        <NS>XMLNode  addedHTML(addedNotes);
+        <NS>XMLNode  addedHTML(added<Notes>);
         <NS>XMLNode& addedBody = addedHTML.getChild(1);
 
-        for (i=0; i < curNotes.getNumChildren(); i++)
+        for (i=0; i < cur<Notes>.getNumChildren(); i++)
         {
-          addedBody.insertChild(i,curNotes.getChild(i));
+          addedBody.insertChild(i,cur<Notes>.getChild(i));
         }
 
-        curNotes.removeChildren();
-        if (curNotes.addChild(addedHTML) < 0)
+        cur<Notes>.removeChildren();
+        if (cur<Notes>.addChild(addedHTML) < 0)
           return LIBSBML_OPERATION_FAILED;
       }
-      else if (addedNotesType == _ANotesBody)
+      else if (added<Notes>Type == _A<Notes>Body)
       {
         // adds the given body tag to the current any tag permitted in the body.
 
-        <NS>XMLNode addedBody(addedNotes);
+        <NS>XMLNode addedBody(added<Notes>);
 
-        for (i=0; i < curNotes.getNumChildren(); i++)
+        for (i=0; i < cur<Notes>.getNumChildren(); i++)
         {
-          addedBody.insertChild(i,curNotes.getChild(i));
+          addedBody.insertChild(i,cur<Notes>.getChild(i));
         }
 
-        curNotes.removeChildren();
-        if (curNotes.addChild(addedBody) < 0)
+        cur<Notes>.removeChildren();
+        if (cur<Notes>.addChild(addedBody) < 0)
           return LIBSBML_OPERATION_FAILED;
       }
-      else if (addedNotesType == _ANotesAny)
+      else if (added<Notes>Type == _A<Notes>Any)
       {
         // adds the given any tag permitted in the boy to that of the current
         // any tag.
 
-        for (i=0; i < addedNotes.getNumChildren(); i++)
+        for (i=0; i < added<Notes>.getNumChildren(); i++)
         {
-          if (curNotes.addChild(addedNotes.getChild(i)) < 0)
+          if (cur<Notes>.addChild(added<Notes>.getChild(i)) < 0)
             return LIBSBML_OPERATION_FAILED;
         }
       }
       success = LIBSBML_OPERATION_SUCCESS;
     }
   }
-  else // if (mNotes == NULL)
+  else // if (m<Notes> == NULL)
   {
-    // setNotes accepts XMLNode with/without top level notes tags.
-    success = setNotes(notes);
+    // set<Notes> accepts XMLNode with/without top level notes tags.
+    success = set<Notes>(notes);
   }
 
   return success;
@@ -1423,7 +1423,7 @@ SBase::appendNotes(const <NS>XMLNode* notes)
  * adding additional information.
  */
 int
-SBase::appendNotes(const std::string& notes)
+SBase::append<Notes>(const std::string& notes)
 {
   int success = LIBSBML_OPERATION_FAILED;
   if (notes.empty())
@@ -1445,7 +1445,7 @@ SBase::appendNotes(const std::string& notes)
 
   if(notes_xmln != NULL)
   {
-    success = appendNotes(notes_xmln);
+    success = append<Notes>(notes_xmln);
     delete notes_xmln;
   }
   return success;
@@ -1622,10 +1622,10 @@ SBase::unsetId ()
  * Unsets the notes of this SBML_Lang object.
  */
 int
-SBase::unsetNotes ()
+SBase::unset<Notes> ()
 {
-  delete mNotes;
-  mNotes = NULL;
+  delete m<Notes>;
+  m<Notes> = NULL;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -1880,7 +1880,7 @@ SBase::getSBMLNamespaces() const
   
   // initialize SBML_Lang namespace if need be
   if (mSBMLNamespaces == NULL)
-    const_cast<SBase*>(this)->mSBMLNamespaces = new SBMLNamespaces();
+    const_cast<SBase*>(this)->mSBMLNamespaces = new SBMLNamespaces(getLevel(), getVersion());
   return mSBMLNamespaces;  
 }
 /** @endcond */
@@ -2230,7 +2230,7 @@ SBase::read (<NS>XMLInputStream& stream)
       }
       else if ( !( readOtherXML(stream)
                    || read<Annotation>(stream)
-                   || readNotes(stream) ))
+                   || read<Notes>(stream) ))
       {
         logUnknownElement(nextName, getLevel(), getVersion());
         stream.skipPastEnd( stream.next() );
@@ -2278,7 +2278,7 @@ SBase::write (<NS>XMLOutputStream& stream) const
 void
 SBase::writeElements (<NS>XMLOutputStream& stream) const
 {
-  if ( mNotes != NULL ) stream << *mNotes;
+  if ( m<Notes> != NULL ) stream << *m<Notes>;
 
   if (m<Annotation> != NULL) stream << *m<Annotation>;
 }
@@ -2356,7 +2356,7 @@ SBase::read<Annotation> (<NS>XMLInputStream& stream)
  * @return true if read a <notes> element from the stream
  */
 bool
-SBase::readNotes (<NS>XMLInputStream& stream)
+SBase::read<Notes> (<NS>XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
@@ -2366,19 +2366,19 @@ SBase::readNotes (<NS>XMLInputStream& stream)
     // If an annotation element already exists, then the ordering is wrong.
     // In either case, replace existing content with the new notes read.
 
-    if (mNotes != NULL)
+    if (m<Notes> != NULL)
     {
-      logError(SBMLOnlyOneNotesElementAllowed, getLevel(), getVersion());
+      logError(SBMLOnlyOne<Notes>ElementAllowed, getLevel(), getVersion());
     }
 
-    delete mNotes;
-    mNotes = new <NS>XMLNode(stream);
+    delete m<Notes>;
+    m<Notes> = new <NS>XMLNode(stream);
 
     //
     // checks if the given default namespace (if any) is a valid
     // SBML_Lang namespace
     //
-    const <NS>XMLNamespaces &xmlns = mNotes->getNamespaces();
+    const <NS>XMLNamespaces &xmlns = m<Notes>->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
 
     return true;
@@ -2970,10 +2970,10 @@ SBase::checkXHTML(const <NS>XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = SBMLNotesNotInXHTMLNamespace;
-    errorXML  = SBMLNotesContainsXMLDecl;
-    errorDOC  = SBMLNotesContainsDOCTYPE;
-    errorELEM = SBMLInvalidNotesContent;
+    errorNS   = SBML<Notes>NotInXHTMLNamespace;
+    errorXML  = SBML<Notes>ContainsXMLDecl;
+    errorDOC  = SBML<Notes>ContainsDOCTYPE;
+    errorELEM = SBMLInvalid<Notes>Content;
   }
   else                                  // We shouldn't ever get to this point.
   {
@@ -3198,18 +3198,18 @@ SBase_getVersion (const SBase_t *sb)
 
 LIBSBML_EXTERN
 XMLNode_t *
-SBase_getNotes (SBase_t *sb)
+SBase_get<Notes> (SBase_t *sb)
 {
-  return (sb != NULL) ? sb->getNotes() : NULL;
+  return (sb != NULL) ? sb->get<Notes>() : NULL;
 }
 
 
 LIBSBML_EXTERN
 char*
-SBase_getNotesString (SBase_t *sb)
+SBase_get<Notes>String (SBase_t *sb)
 {
-  return (sb != NULL && sb->isSetNotes()) ?
-    safe_strdup(sb->getNotesString().c_str()) : NULL;
+  return (sb != NULL && sb->isSet<Notes>()) ?
+    safe_strdup(sb->get<Notes>String().c_str()) : NULL;
 }
 
 
@@ -3240,9 +3240,9 @@ SBase_isSetMetaId (const SBase_t *sb)
 
 LIBSBML_EXTERN
 int
-SBase_isSetNotes (const SBase_t *sb)
+SBase_isSet<Notes> (const SBase_t *sb)
 {
-  return (sb != NULL) ? static_cast<int>( sb->isSetNotes() ) : 0;
+  return (sb != NULL) ? static_cast<int>( sb->isSet<Notes>() ) : 0;
 }
 
 
@@ -3278,10 +3278,10 @@ SBase_setNamespaces (SBase_t *sb, XMLNamespaces_t *xmlns)
 
 LIBSBML_EXTERN
 int
-SBase_setNotes (SBase_t *sb, XMLNode_t *notes)
+SBase_set<Notes> (SBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
-    return sb->setNotes(notes);
+    return sb->set<Notes>(notes);
   else
     return LIBSBML_INVALID_OBJECT;
 }
@@ -3289,17 +3289,17 @@ SBase_setNotes (SBase_t *sb, XMLNode_t *notes)
 
 LIBSBML_EXTERN
 int
-SBase_setNotesString (SBase_t *sb, const char *notes)
+SBase_set<Notes>String (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
     if(notes == NULL)
     {
-      return sb->unsetNotes();
+      return sb->unset<Notes>();
     }
     else
     {
-      return sb->setNotes(notes);
+      return sb->set<Notes>(notes);
     }
   }
   else
@@ -3309,17 +3309,17 @@ SBase_setNotesString (SBase_t *sb, const char *notes)
 
 LIBSBML_EXTERN
 int
-SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes)
+SBase_set<Notes>StringAddMarkup (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
     if(notes == NULL)
     {
-      return sb->unsetNotes();
+      return sb->unset<Notes>();
     }
     else
     {
-      return sb->setNotes(notes, true);
+      return sb->set<Notes>(notes, true);
     }
   }
   else
@@ -3329,10 +3329,10 @@ SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes)
 
 LIBSBML_EXTERN
 int
-SBase_appendNotes (SBase_t *sb, XMLNode_t *notes)
+SBase_append<Notes> (SBase_t *sb, XMLNode_t *notes)
 {
   if (sb != NULL)
-    return sb->appendNotes(notes);
+    return sb->append<Notes>(notes);
   else
     return LIBSBML_INVALID_OBJECT;
 }
@@ -3340,12 +3340,12 @@ SBase_appendNotes (SBase_t *sb, XMLNode_t *notes)
 
 LIBSBML_EXTERN
 int
-SBase_appendNotesString (SBase_t *sb, const char *notes)
+SBase_append<Notes>String (SBase_t *sb, const char *notes)
 {
   if (sb != NULL)
   {
     if (notes != NULL)
-      return sb->appendNotes(notes);
+      return sb->append<Notes>(notes);
     else
       return LIBSBML_INVALID_OBJECT;
   }
@@ -3489,10 +3489,10 @@ SBase_unsetMetaId (SBase_t *sb)
 
 LIBSBML_EXTERN
 int
-SBase_unsetNotes (SBase_t *sb)
+SBase_unset<Notes> (SBase_t *sb)
 {
   if (sb != NULL)
-    return sb->unsetNotes();
+    return sb->unset<Notes>();
   else
     return LIBSBML_INVALID_OBJECT;
 }

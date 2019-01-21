@@ -238,6 +238,9 @@ class BaseTemplateFile:
         if global_variables.annot_element is not None:
             line = re.sub('<Annotation>', global_variables.annot_element, line)
             line = re.sub('<annotation_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.annot_element)), line)
+        if global_variables.notes_element is not None:
+            line = re.sub('<Notes>', global_variables.notes_element, line)
+            line = re.sub('<notes_variable>', '\"{0}\"'.format(strFunctions.lower_first(global_variables.notes_element)), line)
         line = re.sub('<NS>', 'LIBSBML_CPP_NAMESPACE_QUALIFIER ', line)
         return line
 

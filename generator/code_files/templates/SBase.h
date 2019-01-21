@@ -195,21 +195,21 @@ public:
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
-   * getNotesString().
+   * get<Notes>String().
    *
    * @return the content of the "notes" subelement of this SBML_Lang object as a
    * tree structure composed of XMLNode objects.
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  <NS>XMLNode* getNotes();
+  <NS>XMLNode* get<Notes>();
 
 
   /**
@@ -221,28 +221,28 @@ public:
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
-   * getNotesString().
+   * get<Notes>String().
    *
    * @return the content of the "notes" subelement of this SBML_Lang object as a
    * tree structure composed of XMLNode objects.
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  const <NS>XMLNode* getNotes() const;
+  const <NS>XMLNode* get<Notes>() const;
 
 
   /**
    * Returns the content of the "notes" subelement of this object as a
    * string.
    *
-   * For an alternative method of accessing the notes, see getNotes(),
+   * For an alternative method of accessing the notes, see get<Notes>(),
    * which returns the content as an XMLNode tree structure.  Depending on
    * an application's needs, one or the other method may be more
    * convenient.
@@ -250,23 +250,23 @@ public:
    * @return the content of the "notes" subelement of this SBML_Lang object as a
    * string.
    *
-   * @see getNotes()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  std::string getNotesString ();
+  std::string get<Notes>String ();
 
 
   /**
    * Returns the content of the "notes" subelement of this object as a
    * string.
    *
-   * For an alternative method of accessing the notes, see getNotes(),
+   * For an alternative method of accessing the notes, see get<Notes>(),
    * which returns the content as an XMLNode tree structure.  Depending on
    * an application's needs, one or the other method may be more
    * convenient.
@@ -274,16 +274,16 @@ public:
    * @return the content of the "notes" subelement of this SBML_Lang object as a
    * string.
    *
-   * @see getNotes()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  std::string getNotesString () const;
+  std::string get<Notes>String () const;
 
 
   /**
@@ -643,16 +643,16 @@ public:
    *
    * @return @c true if a "notes" subelement exists, @c false otherwise.
    * 
-   * @see getNotes()
-   * @see getNotesString()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>()
+   * @see get<Notes>String()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  bool isSetNotes () const;
+  bool isSet<Notes> () const;
 
 
   /**
@@ -1015,15 +1015,15 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const std::string& notes, bool addXHTMLMarkup)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const std::string& notes, bool addXHTMLMarkup)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int setNotes(const <NS>XMLNode* notes);
+  int set<Notes>(const <NS>XMLNode* notes);
 
 
   /**
@@ -1067,15 +1067,15 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int setNotes(const std::string& notes, bool addXHTMLMarkup = false);
+  int set<Notes>(const std::string& notes, bool addXHTMLMarkup = false);
 
 
   /**
@@ -1112,15 +1112,15 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes, bool addXHTMLMarkup)
-   * @see appendNotes(const std::string& notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes, bool addXHTMLMarkup)
+   * @see append<Notes>(const std::string& notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int appendNotes(const <NS>XMLNode* notes);
+  int append<Notes>(const <NS>XMLNode* notes);
 
 
   /**
@@ -1157,15 +1157,15 @@ public:
    * @li @link OperationReturnValues_t#LIBSBML_INVALID_OBJECT LIBSBML_INVALID_OBJECT @endlink
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_FAILED LIBSBML_OPERATION_FAILED @endlink
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes, bool addXHTMLMarkup)
-   * @see appendNotes(const XMLNode* notes)
-   * @see unsetNotes()
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes, bool addXHTMLMarkup)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see unset<Notes>()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int appendNotes(const std::string& notes);
+  int append<Notes>(const std::string& notes);
 
 
   /** @cond doxygenLibsbmlInternal */
@@ -1276,15 +1276,15 @@ public:
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSBML_OPERATION_SUCCESS LIBSBML_OPERATION_SUCCESS @endlink
    *
-   * @see getNotesString()
-   * @see isSetNotes()
-   * @see setNotes(const XMLNode* notes)
-   * @see setNotes(const std::string& notes, bool addXHTMLMarkup)
-   * @see appendNotes(const XMLNode* notes)
-   * @see appendNotes(const std::string& notes)
+   * @see get<Notes>String()
+   * @see isSet<Notes>()
+   * @see set<Notes>(const XMLNode* notes)
+   * @see set<Notes>(const std::string& notes, bool addXHTMLMarkup)
+   * @see append<Notes>(const XMLNode* notes)
+   * @see append<Notes>(const std::string& notes)
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode@endif)
    */
-  int unsetNotes ();
+  int unset<Notes> ();
 
 
   /**
@@ -1983,8 +1983,13 @@ protected:
 
 
   std::string     mMetaId;
+  <if_id>
   std::string     mId;
-  <NS>XMLNode*        mNotes;
+  </if_id>
+  <if_name>
+  std::string     mName;
+  </if_name>
+  <NS>XMLNode*        m<Notes>;
   <NS>XMLNode*        m<Annotation>;
   SBMLDocument*   mSBML;
   SBMLNamespaces* mSBMLNamespaces;
@@ -2042,7 +2047,7 @@ private:
    *
    * @return true if read a <notes> element from the stream
    */
-  bool readNotes (<NS>XMLInputStream& stream);
+  bool read<Notes> (<NS>XMLInputStream& stream);
 
 
   /** @endcond */
@@ -2174,7 +2179,7 @@ SBase_getColumn (const SBase_t *sb);
  */
 LIBSBML_EXTERN
 XMLNode_t *
-SBase_getNotes (SBase_t *sb);
+SBase_get<Notes> (SBase_t *sb);
 
 
 /**
@@ -2190,7 +2195,7 @@ SBase_getNotes (SBase_t *sb);
  */
 LIBSBML_EXTERN
 char*
-SBase_getNotesString (SBase_t *sb);
+SBase_get<Notes>String (SBase_t *sb);
 
 
 /**
@@ -2252,7 +2257,7 @@ SBase_isSetMetaId (const SBase_t *sb);
  */
 LIBSBML_EXTERN
 int
-SBase_isSetNotes (const SBase_t *sb);
+SBase_isSet<Notes> (const SBase_t *sb);
 
 
 /**
@@ -2334,7 +2339,7 @@ SBase_setNamespaces (SBase_t *sb, XMLNamespaces_t *xmlns);
  */
 LIBSBML_EXTERN
 int
-SBase_setNotes (SBase_t *sb, XMLNode_t *notes);
+SBase_set<Notes> (SBase_t *sb, XMLNode_t *notes);
 
 
 /**
@@ -2352,7 +2357,7 @@ SBase_setNotes (SBase_t *sb, XMLNode_t *notes);
  */
 LIBSBML_EXTERN
 int
-SBase_setNotesString (SBase_t *sb, const char *notes);
+SBase_set<Notes>String (SBase_t *sb, const char *notes);
 
 
 /**
@@ -2370,7 +2375,7 @@ SBase_setNotesString (SBase_t *sb, const char *notes);
  */
 LIBSBML_EXTERN
 int
-SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes);
+SBase_set<Notes>StringAddMarkup (SBase_t *sb, const char *notes);
 
 
 /**
@@ -2388,7 +2393,7 @@ SBase_setNotesStringAddMarkup (SBase_t *sb, const char *notes);
  */
 LIBSBML_EXTERN
 int
-SBase_appendNotes (SBase_t *sb, XMLNode_t *notes);
+SBase_append<Notes> (SBase_t *sb, XMLNode_t *notes);
 
 
 /**
@@ -2406,7 +2411,7 @@ SBase_appendNotes (SBase_t *sb, XMLNode_t *notes);
  */
 LIBSBML_EXTERN
 int
-SBase_appendNotesString (SBase_t *sb, const char *notes);
+SBase_append<Notes>String (SBase_t *sb, const char *notes);
 
 
 /**
@@ -2504,7 +2509,7 @@ SBase_unsetMetaId (SBase_t *sb);
  */
 LIBSBML_EXTERN
 int
-SBase_unsetNotes (SBase_t *sb);
+SBase_unset<Notes> (SBase_t *sb);
 
 
 /**

@@ -687,21 +687,26 @@ class ParseXML():
                                 'revision': rev})
 
         variants = node.getElementsByTagName('libsbml_variants')
+        variant = variants[0]
+#        if variants:
+#            variant = variants[0].getElementsByTagName('libsbml_variants')
+
         annot_element = ''
         notes_element = ''
         use_id = True
         use_name = True
-        if variants:
-            annot_element = self.get_value(node, 'annotationElementName')
-            notes_element = self.get_value(node, 'notesElementName')
-            use_id = self.get_bool_value(self, node, 'include_id')
-            use_name = self.get_bool_value(self, node, 'include_name')
+        if variant:
+            base_node = variant.getElementsByTagName('base')
+            annot_element = self.get_value(base_node[0], 'annotationElementName')
+            notes_element = self.get_value(base_node[0], 'notesElementName')
+            use_id = self.get_bool_value(self, base_node[0], 'include_id')
+            use_name = self.get_bool_value(self, base_node[0], 'include_name')
 
         # some sanity checking
         if not language or language == '':
             language = 'sbml'
         # set the globals
-        global_variables.set_globals(language.lower(), base_class,
+        global_variables.set_globals(strFunctions.lower_first(language), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
                                      dependency, library_version, '', annot_element,
