@@ -481,8 +481,37 @@ class ExtensionHeaderFile(BaseCppFile.BaseCppFile):
         else:
             self.write_all_elements()
         self.write_cppns_end()
+        # if we are in another library and using either ASTNode or XMLNode
+        # we need to declare these here
+        if global_variables.uses_ASTNode or global_variables.uses_XMLNode:
+            self.write_libsbml_fwd()
         self.write_end_class_or_struct()
         self.write_defn_end()
+
+    # Write the forward declarations for libsbml AST/XML
+    def write_libsbml_fwd(self):
+        self.skip_line()
+        self.write_line('#include <sbml/common/libsbml-namespace.h>')
+        self.skip_line()
+        self.write_line('LIBSBML_CPP_NAMESPACE_BEGIN')
+        self.skip_line()
+        if global_variables.uses_ASTNode:
+            self.open_comment()
+            self.write_comment_line('@var typedef class ASTNode ASTNode_t')
+            self.write_comment_line('@copydoc ASTNode')
+            self.close_comment()
+            self.write_line('typedef CLASS_OR_STRUCT ASTNode                     ASTNode_t;')
+            self.skip_line()
+        if global_variables.uses_XMLNode:
+            self.open_comment()
+            self.write_comment_line('@var typedef class XMLNode XMLNode_t')
+            self.write_comment_line('@copydoc XMLNode')
+            self.close_comment()
+            self.write_line('typedef CLASS_OR_STRUCT XMLNode                     XMLNode_t;')
+            self.skip_line()
+        self.write_line('LIBSBML_CPP_NAMESPACE_END')
+        self.skip_line()
+
 
     # Write the extension types file
     def write_ext_enum_header(self):

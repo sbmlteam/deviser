@@ -405,7 +405,7 @@ def testSedML(fail):
     name = 'test_sedml'
     class_name = 'sedmlfwd'
     test_case = 'forward declarations'
-#    fail += run_forward(name, class_name, test_case)
+    fail += run_forward(name, class_name, test_case)
 
     name = 'test_sedml'
     num = 3
@@ -454,7 +454,7 @@ def testSedML(fail):
     class_name = 'SedAbstractTask'
     list_of = 'SedListOfAbstractTasks'
     test_case = 'catch different abstract types'
-    fail += run_test(name, num, class_name, test_case, list_of)
+#    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 13
@@ -557,11 +557,10 @@ def main():
         fail = testCombine(fail)
     else:
         name = 'test_sedml'
-        num = 0
-        class_name = 'SedDocument'
-        list_of = ''
-        test_case = 'document'
-        fail += run_test(name, num, class_name, test_case, list_of)
+        class_name = 'sedmlfwd'
+        test_case = 'forward declarations'
+        fail += run_forward(name, class_name, test_case)
+
 
 
     test_functions.report('OTHER LIBRARY', fail, fails, not_tested)
