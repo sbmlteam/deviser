@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -364,6 +364,70 @@ SedDataGenerator::getVariable(unsigned int n) const
 
 
 /*
+ * Get a SedVariable from the SedDataGenerator based on its identifier.
+ */
+SedVariable*
+SedDataGenerator::getVariable(const std::string& sid)
+{
+  return mVariables.get(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedDataGenerator based on its identifier.
+ */
+const SedVariable*
+SedDataGenerator::getVariable(const std::string& sid) const
+{
+  return mVariables.get(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedDataGenerator based on the TaskReference to
+ * which it refers.
+ */
+const SedVariable*
+SedDataGenerator::getVariableByTaskReference(const std::string& sid) const
+{
+  return mVariables.getByTaskReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedDataGenerator based on the TaskReference to
+ * which it refers.
+ */
+SedVariable*
+SedDataGenerator::getVariableByTaskReference(const std::string& sid)
+{
+  return mVariables.getByTaskReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedDataGenerator based on the ModelReference to
+ * which it refers.
+ */
+const SedVariable*
+SedDataGenerator::getVariableByModelReference(const std::string& sid) const
+{
+  return mVariables.getByModelReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedDataGenerator based on the ModelReference to
+ * which it refers.
+ */
+SedVariable*
+SedDataGenerator::getVariableByModelReference(const std::string& sid)
+{
+  return mVariables.getByModelReference(sid);
+}
+
+
+/*
  * Adds a copy of the given SedVariable to this SedDataGenerator.
  */
 int
@@ -389,6 +453,10 @@ SedDataGenerator::addVariable(const SedVariable* sv)
     SedBase*>(sv)) == false)
   {
     return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sv->isSetId() && (mVariables.get(sv->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
   }
   else
   {
@@ -445,6 +513,17 @@ SedDataGenerator::removeVariable(unsigned int n)
 
 
 /*
+ * Removes the SedVariable from this SedDataGenerator based on its identifier
+ * and returns a pointer to it.
+ */
+SedVariable*
+SedDataGenerator::removeVariable(const std::string& sid)
+{
+  return mVariables.remove(sid);
+}
+
+
+/*
  * Returns the SedListOfParameters from this SedDataGenerator.
  */
 const SedListOfParameters*
@@ -485,6 +564,26 @@ SedDataGenerator::getParameter(unsigned int n) const
 
 
 /*
+ * Get a SedParameter from the SedDataGenerator based on its identifier.
+ */
+SedParameter*
+SedDataGenerator::getParameter(const std::string& sid)
+{
+  return mParameters.get(sid);
+}
+
+
+/*
+ * Get a SedParameter from the SedDataGenerator based on its identifier.
+ */
+const SedParameter*
+SedDataGenerator::getParameter(const std::string& sid) const
+{
+  return mParameters.get(sid);
+}
+
+
+/*
  * Adds a copy of the given SedParameter to this SedDataGenerator.
  */
 int
@@ -510,6 +609,10 @@ SedDataGenerator::addParameter(const SedParameter* sp)
     SedBase*>(sp)) == false)
   {
     return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sp->isSetId() && (mParameters.get(sp->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
   }
   else
   {
@@ -562,6 +665,17 @@ SedParameter*
 SedDataGenerator::removeParameter(unsigned int n)
 {
   return mParameters.remove(n);
+}
+
+
+/*
+ * Removes the SedParameter from this SedDataGenerator based on its identifier
+ * and returns a pointer to it.
+ */
+SedParameter*
+SedDataGenerator::removeParameter(const std::string& sid)
+{
+  return mParameters.remove(sid);
 }
 
 
@@ -993,11 +1107,12 @@ int
 SedDataGenerator::addChildObject(const std::string& elementName,
                                  const SedBase* element)
 {
-  if (elementName == "variable" && element->getTypeCode() == TO_DO)
+  if (elementName == "variable" && element->getTypeCode() == SEDML_VARIABLE)
   {
     return addVariable((const SedVariable*)(element));
   }
-  else if (elementName == "parameter" && element->getTypeCode() == TO_DO)
+  else if (elementName == "parameter" && element->getTypeCode() ==
+    SEDML_PARAMETER)
   {
     return addParameter((const SedParameter*)(element));
   }
@@ -1021,23 +1136,11 @@ SedDataGenerator::removeChildObject(const std::string& elementName,
 {
   if (elementName == "variable")
   {
-    for (unsigned int i = 0; i < getNumVariables(); i++)
-    {
-      if (getVariable(i)->getId() == id)
-      {
-        return removeVariable(i);
-      }
-    }
+    return removeVariable(id);
   }
   else if (elementName == "parameter")
   {
-    for (unsigned int i = 0; i < getNumParameters(); i++)
-    {
-      if (getParameter(i)->getId() == id)
-      {
-        return removeParameter(i);
-      }
-    }
+    return removeParameter(id);
   }
 
   return NULL;
@@ -1223,8 +1326,8 @@ SedDataGenerator::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlLODataGeneratorsAllowedCoreAttributes, level,
-          version, details);
+        log->logError(SedmlDocumentLODataGeneratorsAllowedCoreAttributes,
+          level, version, details);
       }
     }
   }
@@ -1241,7 +1344,7 @@ SedDataGenerator::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedDataGeneratorAllowedAttributes, level, version,
+        log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
           details);
       }
     }
@@ -1575,6 +1678,45 @@ SedDataGenerator_getVariable(SedDataGenerator_t* sdg, unsigned int n)
 
 
 /*
+ * Get a SedVariable_t from the SedDataGenerator_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableById(SedDataGenerator_t* sdg, const char *sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->getVariable(sid) : NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedDataGenerator_t based on the TaskReference
+ * to which it refers.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableByTaskReference(SedDataGenerator_t* sdg,
+                                            const char *sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->getVariableByTaskReference(sid) :
+    NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedDataGenerator_t based on the ModelReference
+ * to which it refers.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableByModelReference(SedDataGenerator_t* sdg,
+                                             const char *sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->getVariableByModelReference(sid) :
+    NULL;
+}
+
+
+/*
  * Adds a copy of the given SedVariable_t to this SedDataGenerator_t.
  */
 LIBSEDML_EXTERN
@@ -1621,6 +1763,18 @@ SedDataGenerator_removeVariable(SedDataGenerator_t* sdg, unsigned int n)
 
 
 /*
+ * Removes the SedVariable_t from this SedDataGenerator_t based on its
+ * identifier and returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_removeVariableById(SedDataGenerator_t* sdg, const char* sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->removeVariable(sid) : NULL;
+}
+
+
+/*
  * Returns a ListOf_t * containing SedParameter_t objects from this
  * SedDataGenerator_t.
  */
@@ -1640,6 +1794,17 @@ SedParameter_t*
 SedDataGenerator_getParameter(SedDataGenerator_t* sdg, unsigned int n)
 {
   return (sdg != NULL) ? sdg->getParameter(n) : NULL;
+}
+
+
+/*
+ * Get a SedParameter_t from the SedDataGenerator_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedDataGenerator_getParameterById(SedDataGenerator_t* sdg, const char *sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->getParameter(sid) : NULL;
 }
 
 
@@ -1687,6 +1852,18 @@ SedParameter_t*
 SedDataGenerator_removeParameter(SedDataGenerator_t* sdg, unsigned int n)
 {
   return (sdg != NULL) ? sdg->removeParameter(n) : NULL;
+}
+
+
+/*
+ * Removes the SedParameter_t from this SedDataGenerator_t based on its
+ * identifier and returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedDataGenerator_removeParameterById(SedDataGenerator_t* sdg, const char* sid)
+{
+  return (sdg != NULL && sid != NULL) ? sdg->removeParameter(sid) : NULL;
 }
 
 

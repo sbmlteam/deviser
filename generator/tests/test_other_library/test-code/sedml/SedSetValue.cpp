@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -906,8 +906,8 @@ SedSetValue::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlLOSetValuesAllowedCoreAttributes, level, version,
-          details);
+        log->logError(SedmlRepeatedTaskLOSetValuesAllowedCoreAttributes, level,
+          version, details);
       }
     }
   }
@@ -924,8 +924,7 @@ SedSetValue::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedSetValueAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlSetValueAllowedAttributes, level, version, details);
       }
     }
   }

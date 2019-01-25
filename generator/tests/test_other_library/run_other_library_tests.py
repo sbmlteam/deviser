@@ -415,18 +415,18 @@ def testSedML(fail):
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
-    num = 4
+    num = 26
     class_name = 'SedSetValue'
     list_of = ''
     test_case = 'astnode used'
-#    fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
-    num = 5
+    num = 12
     class_name = 'SedDataGenerator'
     list_of = ''
     test_case = 'astnode in getElementBySId bug'
- #   fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 6

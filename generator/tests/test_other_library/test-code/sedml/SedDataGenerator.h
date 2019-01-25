@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -352,6 +352,110 @@ public:
 
 
   /**
+   * Get a SedVariable from the SedDataGenerator based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedVariable to
+   * retrieve.
+   *
+   * @return the SedVariable in the SedListOfVariables within this
+   * SedDataGenerator with the given @p sid or @c NULL if no such SedVariable
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addVariable(const SedVariable* object)
+   * @see createVariable()
+   * @see getVariable(unsigned int n)
+   * @see getNumVariables()
+   * @see removeVariable(const std::string& sid)
+   * @see removeVariable(unsigned int n)
+   */
+  SedVariable* getVariable(const std::string& sid);
+
+
+  /**
+   * Get a SedVariable from the SedDataGenerator based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedVariable to
+   * retrieve.
+   *
+   * @return the SedVariable in the SedListOfVariables within this
+   * SedDataGenerator with the given @p sid or @c NULL if no such SedVariable
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addVariable(const SedVariable* object)
+   * @see createVariable()
+   * @see getVariable(unsigned int n)
+   * @see getNumVariables()
+   * @see removeVariable(const std::string& sid)
+   * @see removeVariable(unsigned int n)
+   */
+  const SedVariable* getVariable(const std::string& sid) const;
+
+
+  /**
+   * Get a SedVariable from the SedDataGenerator based on the TaskReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "taskReference" attribute of the
+   * SedVariable object to retrieve.
+   *
+   * @return the first SedVariable in this SedDataGenerator based on the given
+   * taskReference attribute or NULL if no such SedVariable exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedVariable* getVariableByTaskReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedVariable from the SedDataGenerator based on the TaskReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "taskReference" attribute of the
+   * SedVariable object to retrieve.
+   *
+   * @return the first SedVariable in this SedDataGenerator based on the given
+   * taskReference attribute or NULL if no such SedVariable exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedVariable* getVariableByTaskReference(const std::string& sid);
+
+
+  /**
+   * Get a SedVariable from the SedDataGenerator based on the ModelReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "modelReference" attribute of the
+   * SedVariable object to retrieve.
+   *
+   * @return the first SedVariable in this SedDataGenerator based on the given
+   * modelReference attribute or NULL if no such SedVariable exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedVariable* getVariableByModelReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedVariable from the SedDataGenerator based on the ModelReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "modelReference" attribute of the
+   * SedVariable object to retrieve.
+   *
+   * @return the first SedVariable in this SedDataGenerator based on the given
+   * modelReference attribute or NULL if no such SedVariable exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedVariable* getVariableByModelReference(const std::string& sid);
+
+
+  /**
    * Adds a copy of the given SedVariable to this SedDataGenerator.
    *
    * @param sv the SedVariable object to add.
@@ -432,6 +536,28 @@ public:
 
 
   /**
+   * Removes the SedVariable from this SedDataGenerator based on its identifier
+   * and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedVariable to
+   * remove.
+   *
+   * @return the SedVariable in this SedDataGenerator based on the identifier
+   * or NULL if no such SedVariable exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addVariable(const SedVariable* object)
+   * @see createVariable()
+   * @see getVariable(const std::string& sid)
+   * @see getVariable(unsigned int n)
+   * @see getNumVariables()
+   * @see removeVariable(unsigned int n)
+   */
+  SedVariable* removeVariable(const std::string& sid);
+
+
+  /**
    * Returns the SedListOfParameters from this SedDataGenerator.
    *
    * @return the SedListOfParameters from this SedDataGenerator.
@@ -507,6 +633,50 @@ public:
    * @see removeParameter(unsigned int n)
    */
   const SedParameter* getParameter(unsigned int n) const;
+
+
+  /**
+   * Get a SedParameter from the SedDataGenerator based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedParameter to
+   * retrieve.
+   *
+   * @return the SedParameter in the SedListOfParameters within this
+   * SedDataGenerator with the given @p sid or @c NULL if no such SedParameter
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParameter(const SedParameter* object)
+   * @see createParameter()
+   * @see getParameter(unsigned int n)
+   * @see getNumParameters()
+   * @see removeParameter(const std::string& sid)
+   * @see removeParameter(unsigned int n)
+   */
+  SedParameter* getParameter(const std::string& sid);
+
+
+  /**
+   * Get a SedParameter from the SedDataGenerator based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedParameter to
+   * retrieve.
+   *
+   * @return the SedParameter in the SedListOfParameters within this
+   * SedDataGenerator with the given @p sid or @c NULL if no such SedParameter
+   * exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addParameter(const SedParameter* object)
+   * @see createParameter()
+   * @see getParameter(unsigned int n)
+   * @see getNumParameters()
+   * @see removeParameter(const std::string& sid)
+   * @see removeParameter(unsigned int n)
+   */
+  const SedParameter* getParameter(const std::string& sid) const;
 
 
   /**
@@ -590,6 +760,28 @@ public:
 
 
   /**
+   * Removes the SedParameter from this SedDataGenerator based on its
+   * identifier and returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedParameter to
+   * remove.
+   *
+   * @return the SedParameter in this SedDataGenerator based on the identifier
+   * or NULL if no such SedParameter exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addParameter(const SedParameter* object)
+   * @see createParameter()
+   * @see getParameter(const std::string& sid)
+   * @see getParameter(unsigned int n)
+   * @see getNumParameters()
+   * @see removeParameter(unsigned int n)
+   */
+  SedParameter* removeParameter(const std::string& sid);
+
+
+  /**
    * @copydoc doc_renamesidref_common
    */
   virtual void renameSIdRefs(const std::string& oldid,
@@ -612,7 +804,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_DATAGENERATOR, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_DATAGENERATOR, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1424,6 +1616,71 @@ SedDataGenerator_getVariable(SedDataGenerator_t* sdg, unsigned int n);
 
 
 /**
+ * Get a SedVariable_t from the SedDataGenerator_t based on its identifier.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedVariable_t to
+ * retrieve.
+ *
+ * @return the SedVariable_t in the SedListOfVariables within this
+ * SedDataGenerator with the given @p sid or @c NULL if no such SedVariable_t
+ * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableById(SedDataGenerator_t* sdg, const char *sid);
+
+
+/**
+ * Get a SedVariable_t from the SedDataGenerator_t based on the TaskReference
+ * to which it refers.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the "taskReference" attribute of the
+ * SedVariable_t object to retrieve.
+ *
+ * @return the first SedVariable_t in this SedDataGenerator_t based on the
+ * given taskReference attribute or NULL if no such SedVariable_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableByTaskReference(SedDataGenerator_t* sdg,
+                                            const char *sid);
+
+
+/**
+ * Get a SedVariable_t from the SedDataGenerator_t based on the ModelReference
+ * to which it refers.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the "modelReference" attribute of the
+ * SedVariable_t object to retrieve.
+ *
+ * @return the first SedVariable_t in this SedDataGenerator_t based on the
+ * given modelReference attribute or NULL if no such SedVariable_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_getVariableByModelReference(SedDataGenerator_t* sdg,
+                                             const char *sid);
+
+
+/**
  * Adds a copy of the given SedVariable_t to this SedDataGenerator_t.
  *
  * @param sdg the SedDataGenerator_t structure to which the SedVariable_t
@@ -1501,6 +1758,27 @@ SedDataGenerator_removeVariable(SedDataGenerator_t* sdg, unsigned int n);
 
 
 /**
+ * Removes the SedVariable_t from this SedDataGenerator_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedVariable_t to
+ * remove.
+ *
+ * @return the SedVariable_t in this SedDataGenerator_t based on the identifier
+ * or NULL if no such SedVariable_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedDataGenerator_removeVariableById(SedDataGenerator_t* sdg, const char* sid);
+
+
+/**
  * Returns a ListOf_t * containing SedParameter_t objects from this
  * SedDataGenerator_t.
  *
@@ -1545,6 +1823,27 @@ SedDataGenerator_getListOfParameters(SedDataGenerator_t* sdg);
 LIBSEDML_EXTERN
 SedParameter_t*
 SedDataGenerator_getParameter(SedDataGenerator_t* sdg, unsigned int n);
+
+
+/**
+ * Get a SedParameter_t from the SedDataGenerator_t based on its identifier.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedParameter_t to
+ * retrieve.
+ *
+ * @return the SedParameter_t in the SedListOfParameters within this
+ * SedDataGenerator with the given @p sid or @c NULL if no such SedParameter_t
+ * exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedDataGenerator_getParameterById(SedDataGenerator_t* sdg, const char *sid);
 
 
 /**
@@ -1622,6 +1921,28 @@ SedDataGenerator_createParameter(SedDataGenerator_t* sdg);
 LIBSEDML_EXTERN
 SedParameter_t*
 SedDataGenerator_removeParameter(SedDataGenerator_t* sdg, unsigned int n);
+
+
+/**
+ * Removes the SedParameter_t from this SedDataGenerator_t based on its
+ * identifier and returns a pointer to it.
+ *
+ * @param sdg the SedDataGenerator_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedParameter_t to
+ * remove.
+ *
+ * @return the SedParameter_t in this SedDataGenerator_t based on the
+ * identifier or NULL if no such SedParameter_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDataGenerator_t
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedDataGenerator_removeParameterById(SedDataGenerator_t* sdg,
+                                     const char* sid);
 
 
 /**
