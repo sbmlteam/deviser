@@ -126,93 +126,6 @@ MappingType_isValidString(const char* code)
 
 
 static
-const char* SEDML_EXPERIMENT_TYPE_STRINGS[] =
-{
-  "TimeCourse"
-, "SteadyState"
-, "invalid ExperimentType value"
-};
-
-
-/*
- * Returns the string version of the provided #ExperimentType_t enumeration.
- */
-LIBSEDML_EXTERN
-const char*
-ExperimentType_toString(ExperimentType_t et)
-{
-  int min = SEDML_EXPERIMENTTYPE_TIMECOURSE;
-  int max = SEDML_EXPERIMENTTYPE_INVALID;
-
-  if (et < min || et > max)
-  {
-    return "(Unknown ExperimentType value)";
-  }
-
-  return SEDML_EXPERIMENT_TYPE_STRINGS[et - min];
-}
-
-
-/*
- * Returns the #ExperimentType_t enumeration corresponding to the given string
- * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
- * no such match.
- */
-LIBSEDML_EXTERN
-ExperimentType_t
-ExperimentType_fromString(const char* code)
-{
-  static int size =
-    sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
-  std::string type(code);
-
-  for (int i = 0; i < size; i++)
-  {
-    if (type == SEDML_EXPERIMENT_TYPE_STRINGS[i])
-    {
-      return (ExperimentType_t)(i);
-    }
-  }
-
-  return SEDML_EXPERIMENTTYPE_INVALID;
-}
-
-
-/*
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #ExperimentType_t is valid.
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValid(ExperimentType_t et)
-{
-  int min = SEDML_EXPERIMENTTYPE_TIMECOURSE;
-  int max = SEDML_EXPERIMENTTYPE_INVALID;
-
-  if (et < min || et >= max)
-  {
-    return 0;
-  }
-  else
-  {
-    return 1;
-  }
-}
-
-
-/*
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #ExperimentType_t.
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValidString(const char* code)
-{
-  return ExperimentType_isValid(ExperimentType_fromString(code));
-}
-
-
-static
 const char* SEDML_AXIS_TYPE_STRINGS[] =
 {
   "linear"
@@ -662,6 +575,93 @@ int
 SurfaceType_isValidString(const char* code)
 {
   return SurfaceType_isValid(SurfaceType_fromString(code));
+}
+
+
+static
+const char* SEDML_EXPERIMENT_TYPE_STRINGS[] =
+{
+  "SteadyState"
+, "TimeCourse"
+, "invalid ExperimentType value"
+};
+
+
+/*
+ * Returns the string version of the provided #ExperimentType_t enumeration.
+ */
+LIBSEDML_EXTERN
+const char*
+ExperimentType_toString(ExperimentType_t et)
+{
+  int min = SEDML_EXPERIMENTTYPE_STEADYSTATE;
+  int max = SEDML_EXPERIMENTTYPE_INVALID;
+
+  if (et < min || et > max)
+  {
+    return "(Unknown ExperimentType value)";
+  }
+
+  return SEDML_EXPERIMENT_TYPE_STRINGS[et - min];
+}
+
+
+/*
+ * Returns the #ExperimentType_t enumeration corresponding to the given string
+ * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
+ * no such match.
+ */
+LIBSEDML_EXTERN
+ExperimentType_t
+ExperimentType_fromString(const char* code)
+{
+  static int size =
+    sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SEDML_EXPERIMENT_TYPE_STRINGS[i])
+    {
+      return (ExperimentType_t)(i);
+    }
+  }
+
+  return SEDML_EXPERIMENTTYPE_INVALID;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ExperimentType_t is valid.
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValid(ExperimentType_t et)
+{
+  int min = SEDML_EXPERIMENTTYPE_STEADYSTATE;
+  int max = SEDML_EXPERIMENTTYPE_INVALID;
+
+  if (et < min || et >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ExperimentType_t.
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValidString(const char* code)
+{
+  return ExperimentType_isValid(ExperimentType_fromString(code));
 }
 
 

@@ -60,6 +60,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedReport;
 class SedPlot2D;
 class SedPlot3D;
+class SedFigure;
 
 class LIBSEDML_EXTERN SedOutput : public SedBase
 {
@@ -242,6 +243,16 @@ public:
    * @c false otherwise
    */
   virtual bool isSedPlot3D() const;
+
+
+  /**
+   * Predicate returning @c true if this abstract "SedOutput" is of type
+   * SedFigure
+   *
+   * @return @c true if this abstract "SedOutput" is of type SedFigure,
+   * @c false otherwise
+   */
+  virtual bool isSedFigure() const;
 
 
   /**
@@ -694,6 +705,25 @@ SedOutput_createPlot3D(unsigned int level, unsigned int version);
 
 
 /**
+ * Creates a new SedFigure using the given SEDML Level and @ p version values.
+ *
+ * @param level an unsigned int, the SEDML Level to assign to this SedOutput_t.
+ *
+ * @param version an unsigned int, the SEDML Version to assign to this
+ * SedOutput_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+SedFigure_t *
+SedOutput_createFigure(unsigned int level, unsigned int version);
+
+
+/**
  * Creates and returns a deep copy of this SedOutput_t object.
  *
  * @param so the SedOutput_t structure.
@@ -904,6 +934,20 @@ SedOutput_isSedPlot2D(const SedOutput_t * so);
 LIBSEDML_EXTERN
 int
 SedOutput_isSedPlot3D(const SedOutput_t * so);
+
+
+/**
+ * Predicate returning @c 1 if this SedOutput_t is of type SedFigure_t
+ *
+ * @param so the SedOutput_t structure.
+ *
+ * @return @c 1 if this SedOutput_t is of type SedFigure_t, @c 0 otherwise
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_isSedFigure(const SedOutput_t * so);
 
 
 /**

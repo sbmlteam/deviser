@@ -61,6 +61,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedReport;
 class SedPlot2D;
 class SedPlot3D;
+class SedFigure;
 
 class LIBSEDML_EXTERN SedListOfOutputs : public SedListOf
 {
@@ -350,6 +351,24 @@ public:
    * @see remove(unsigned int n)
    */
   SedPlot3D* createPlot3D();
+
+
+  /**
+   * Creates a new SedFigure object, adds it to this SedListOfOutputs object
+   * and returns the SedFigure object created.
+   *
+   * @return a new SedFigure object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
+   */
+  SedFigure* createFigure();
 
 
   /**

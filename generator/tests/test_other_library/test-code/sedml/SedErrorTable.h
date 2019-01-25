@@ -368,31 +368,31 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <document> object may contain one and only one instance of each of the "
     "<listOfDataDescriptions,> <listOfModels,> <listOfSimulations,> "
-    "<listOfAbstractTasks,> <listOfDataGenerators> and <listOfOutputs> "
-    "elements. No other elements from the SBML Level 3 SEDML namespaces are "
-    "permitted on a <document> object. ",
+    "<listOfAbstractTasks,> <listOfDataGenerators,> <listOfOutputs> and "
+    "<listOfStyles> elements. No other elements from the SBML Level 3 SEDML "
+    "namespaces are permitted on a <document> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20205
-  { SedmlDocumentLevelMustBeInteger,
-    "The 'level' attribute must be Integer.",
+  { SedmlDocumentLevelMustBeNonNegativeInteger,
+    "The 'level' attribute must be NonNegativeInteger.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:level' on a <document> must have a value of data type "
-    "'integer'.",
+    "'integer', and must be non negative.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20206
-  { SedmlDocumentVersionMustBeInteger,
-    "The 'version' attribute must be Integer.",
+  { SedmlDocumentVersionMustBeNonNegativeInteger,
+    "The 'version' attribute must be NonNegativeInteger.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:version' on a <document> must have a value of data "
-    "type 'integer'.",
+    "type 'integer', and must be non negative.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -470,6 +470,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20213
+  { SedmlDocumentLOStylesAllowedCoreElements,
+    "Core elements allowed on <listOfStyles>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "Apart from the general notes and annotations subobjects permitted on all "
+    "SBML objects, a <listOfStyles> container object may only contain <style> "
+    "objects.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20214
   { SedmlDocumentLODataDescriptionsAllowedCoreAttributes,
     "Core attributes allowed on <listOfDataDescriptions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -481,7 +493,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20214
+  // 20215
   { SedmlDocumentLOModelsAllowedCoreAttributes,
     "Core attributes allowed on <listOfModels>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -493,7 +505,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20215
+  // 20216
   { SedmlDocumentLOSimulationsAllowedCoreAttributes,
     "Core attributes allowed on <listOfSimulations>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -505,7 +517,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20216
+  // 20217
   { SedmlDocumentLOAbstractTasksAllowedCoreAttributes,
     "Core attributes allowed on <listOfAbstractTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -517,7 +529,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20217
+  // 20218
   { SedmlDocumentLODataGeneratorsAllowedCoreAttributes,
     "Core attributes allowed on <listOfDataGenerators>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -529,7 +541,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 20218
+  // 20219
   { SedmlDocumentLOOutputsAllowedCoreAttributes,
     "Core attributes allowed on <listOfOutputs>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -537,6 +549,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <listOfOutputs> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfOutputs> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 20220
+  { SedmlDocumentLOStylesAllowedCoreAttributes,
+    "Core attributes allowed on <listOfStyles>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <listOfStyles> object may have the optional SBML Level 3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on a <listOfStyles> object.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3515,9 +3539,9 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <fitExperiment>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <fitExperiment> object may have the optional attributes 'sedml:id', "
-    "'sedml:source' and 'sedml:represents'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <fitExperiment> object. ",
+    "A <fitExperiment> object may have the optional attributes 'sedml:id' and "
+    "'sedml:represents'. No other attributes from the SBML Level 3 SEDML "
+    "namespaces are permitted on a <fitExperiment> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3536,17 +3560,6 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24505
-  { SedmlFitExperimentSourceMustBeString,
-    "The 'source' attribute must be String.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:source' on a <fitExperiment> must have a value of "
-    "data type 'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 24506
   { SedmlFitExperimentRepresentsMustBeExperimentTypeEnum,
     "The 'represents' attribute must be ExperimentTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -3554,12 +3567,12 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "The value of the attribute 'sedml:represents' of a <fitExperiment> object "
     "must conform to the syntax of SBML data type 'ExperimentType' and may only "
     "take on the allowed values of 'ExperimentType' defined in SBML; that is, "
-    "the value must be one of the following: 'TimeCourse' or 'SteadyState'.",
+    "the value must be one of the following: 'SteadyState' or 'TimeCourse'.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
-  // 24507
+  // 24506
   { SedmlFitExperimentLOFitMappingsAllowedCoreElements,
     "Core elements allowed on <listOfFitMappings>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -3571,7 +3584,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 24508
+  // 24507
   { SedmlFitExperimentLOFitMappingsAllowedCoreAttributes,
     "Core attributes allowed on <listOfFitMappings>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -3612,9 +3625,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <fitMapping>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <fitMapping> object must have the required attributes 'sedml:colNumber', "
-    "'sedml:dataGenerator' and 'sedml:type'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <fitMapping> object. ",
+    "A <fitMapping> object must have the required attributes "
+    "'sedml:dataSource', 'sedml:dataGenerator' and 'sedml:type'. No other "
+    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "<fitMapping> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3632,12 +3646,13 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24605
-  { SedmlFitMappingColNumberMustBeInteger,
-    "The 'colNumber' attribute must be Integer.",
+  { SedmlFitMappingDataSourceMustBeDataSource,
+    "The attribute 'dataSource' must point to DataSource object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:colNumber' on a <fitMapping> must have a value of "
-    "data type 'integer'.",
+    "The value of the attribute 'sedml:dataSource' of a <fitMapping> object "
+    "must be the identifier of an existing <dataSource> object defined in the "
+    "enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3768,19 +3783,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <columnScaling> object must have the required attribute "
-    "'sedml:colNumber'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:dataSource'. No other attributes from the SBML Level 3 SEDML "
     "namespaces are permitted on a <columnScaling> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24904
-  { SedmlColumnScalingColNumberMustBeInteger,
-    "The 'colNumber' attribute must be Integer.",
+  { SedmlColumnScalingDataSourceMustBeDataSource,
+    "The attribute 'dataSource' must point to DataSource object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:colNumber' on a <columnScaling> must have a value of "
-    "data type 'integer'.",
+    "The value of the attribute 'sedml:dataSource' of a <columnScaling> object "
+    "must be the identifier of an existing <dataSource> object defined in the "
+    "enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4165,9 +4181,9 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <style>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <style> object may have the optional attribute 'sedml:baseStyle'. No "
-    "other attributes from the SBML Level 3 SEDML namespaces are permitted on a "
-    "<style> object. ",
+    "A <style> object must have the required attribute 'sedml:id', and may have "
+    "the optional attribute 'sedml:baseStyle'. No other attributes from the "
+    "SBML Level 3 SEDML namespaces are permitted on a <style> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },

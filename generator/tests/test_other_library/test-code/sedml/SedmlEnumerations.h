@@ -157,111 +157,6 @@ MappingType_isValidString(const char* code);
 
 
 /**
- * @enum ExperimentType_t
- * @brief Enumeration of values permitted as the value of "ExperimentType_t".
- */
-typedef enum
-{
-  SEDML_EXPERIMENTTYPE_TIMECOURSE        /*!< The sedml experimenttype is @c "TimeCourse". */
-, SEDML_EXPERIMENTTYPE_STEADYSTATE       /*!< The sedml experimenttype is @c "SteadyState". */
-, SEDML_EXPERIMENTTYPE_INVALID           /*!< Invalid ExperimentType value. */
-} ExperimentType_t;
-
-
-/**
- * Returns the string version of the provided #ExperimentType_t enumeration.
- *
- * @param et the #ExperimentType_t enumeration value to convert.
- *
- * @return A string corresponding to the given type:
- * "TimeCourse",
- * "SteadyState",
- * "invalid ExperimentType value",
- * or @c NULL if the value is @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID,
- * ExperimentType_t} or another invalid enumeration value.
- *
- * @copydetails doc_returned_unowned_char
- *
- * @if conly
- * @memberof Sedml_t
- * @endif
- */
-LIBSEDML_EXTERN
-const char*
-ExperimentType_toString(ExperimentType_t et);
-
-
-/**
- * Returns the #ExperimentType_t enumeration corresponding to the given string
- * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
- * no such match.
- *
- * @param code the string to convert to a #ExperimentType_t.
- *
- * @return the corresponding #ExperimentType_t or
- * @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if no match is
- * found.
- *
- * @note The matching is case-sensitive: "TimeCourse" will return
- * @sbmlconstant{SEDML_EXPERIMENTTYPE_TIMECOURSE, ExperimentType_t}, but
- * "TimeCourse" will return @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID,
- * ExperimentType_t}.
- *
- * @if conly
- * @memberof Sedml_t
- * @endif
- */
-LIBSEDML_EXTERN
-ExperimentType_t
-ExperimentType_fromString(const char* code);
-
-
-/**
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #ExperimentType_t is valid.
- *
- * @param et the #ExperimentType_t enumeration to query.
- *
- * @return @c 1 (true) if the #ExperimentType_t is
- * @sbmlconstant{SEDML_EXPERIMENTTYPE_TIMECOURSE, ExperimentType_t}, or
- * @sbmlconstant{SEDML_EXPERIMENTTYPE_STEADYSTATE, ExperimentType_t};
- * @c 0 (false) otherwise (including
- * @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t}).
- *
- * @if conly
- * @memberof Sedml_t
- * @endif
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValid(ExperimentType_t et);
-
-
-/**
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #ExperimentType_t.
- *
- * @param code the string to query.
- *
- * @return @c 1 (true) if the string is
- * "TimeCourse",
- * "SteadyState", or
- * "invalid ExperimentType value";
- * @c 0 (false) otherwise.
- *
- * @note The matching is case-sensitive: "TimeCourse" will return @c 1 (true),
- * but "TimeCourse" will return @c 0 (false).
- *
- * @if conly
- * @memberof Sedml_t
- * @endif
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValidString(const char* code);
-
-
-/**
  * @enum AxisType_t
  * @brief Enumeration of values permitted as the value of "AxisType_t".
  */
@@ -854,6 +749,111 @@ SurfaceType_isValid(SurfaceType_t st);
 LIBSEDML_EXTERN
 int
 SurfaceType_isValidString(const char* code);
+
+
+/**
+ * @enum ExperimentType_t
+ * @brief Enumeration of values permitted as the value of "ExperimentType_t".
+ */
+typedef enum
+{
+  SEDML_EXPERIMENTTYPE_STEADYSTATE       /*!< The sedml experimenttype is @c "SteadyState". */
+, SEDML_EXPERIMENTTYPE_TIMECOURSE        /*!< The sedml experimenttype is @c "TimeCourse". */
+, SEDML_EXPERIMENTTYPE_INVALID           /*!< Invalid ExperimentType value. */
+} ExperimentType_t;
+
+
+/**
+ * Returns the string version of the provided #ExperimentType_t enumeration.
+ *
+ * @param et the #ExperimentType_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "SteadyState",
+ * "TimeCourse",
+ * "invalid ExperimentType value",
+ * or @c NULL if the value is @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID,
+ * ExperimentType_t} or another invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+const char*
+ExperimentType_toString(ExperimentType_t et);
+
+
+/**
+ * Returns the #ExperimentType_t enumeration corresponding to the given string
+ * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
+ * no such match.
+ *
+ * @param code the string to convert to a #ExperimentType_t.
+ *
+ * @return the corresponding #ExperimentType_t or
+ * @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if no match is
+ * found.
+ *
+ * @note The matching is case-sensitive: "SteadyState" will return
+ * @sbmlconstant{SEDML_EXPERIMENTTYPE_STEADYSTATE, ExperimentType_t}, but
+ * "SteadyState" will return @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID,
+ * ExperimentType_t}.
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+ExperimentType_t
+ExperimentType_fromString(const char* code);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ExperimentType_t is valid.
+ *
+ * @param et the #ExperimentType_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #ExperimentType_t is
+ * @sbmlconstant{SEDML_EXPERIMENTTYPE_STEADYSTATE, ExperimentType_t}, or
+ * @sbmlconstant{SEDML_EXPERIMENTTYPE_TIMECOURSE, ExperimentType_t};
+ * @c 0 (false) otherwise (including
+ * @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t}).
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValid(ExperimentType_t et);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ExperimentType_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "SteadyState",
+ * "TimeCourse", or
+ * "invalid ExperimentType value";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "SteadyState" will return @c 1 (true),
+ * but "SteadyState" will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Sedml_t
+ * @endif
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValidString(const char* code);
 
 
 

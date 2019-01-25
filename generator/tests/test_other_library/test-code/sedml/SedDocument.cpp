@@ -44,6 +44,7 @@
 #include <sedml/SedReport.h>
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
+#include <sedml/SedFigure.h>
 
 
 using namespace std;
@@ -74,6 +75,7 @@ SedDocument::SedDocument(unsigned int level, unsigned int version)
   , mAbstractTasks (level, version)
   , mDataGenerators (level, version)
   , mOutputs (level, version)
+  , mStyles (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   setLevel(level);
@@ -98,6 +100,7 @@ SedDocument::SedDocument(SedNamespaces *sedmlns)
   , mAbstractTasks (sedmlns)
   , mDataGenerators (sedmlns)
   , mOutputs (sedmlns)
+  , mStyles (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   setLevel(sedmlns->getLevel());
@@ -122,6 +125,7 @@ SedDocument::SedDocument(const SedDocument& orig)
   , mAbstractTasks ( orig.mAbstractTasks )
   , mDataGenerators ( orig.mDataGenerators )
   , mOutputs ( orig.mOutputs )
+  , mStyles ( orig.mStyles )
 {
   setSedDocument(this);
 
@@ -148,6 +152,7 @@ SedDocument::operator=(const SedDocument& rhs)
     mAbstractTasks = rhs.mAbstractTasks;
     mDataGenerators = rhs.mDataGenerators;
     mOutputs = rhs.mOutputs;
+    mStyles = rhs.mStyles;
     connectToChild();
     setSedDocument(this);
   }
@@ -177,7 +182,7 @@ SedDocument::~SedDocument()
 /*
  * Returns the value of the "level" attribute of this SedDocument.
  */
-int
+unsigned int
 SedDocument::getLevel() const
 {
   return mLevel;
@@ -187,7 +192,7 @@ SedDocument::getLevel() const
 /*
  * Returns the value of the "version" attribute of this SedDocument.
  */
-int
+unsigned int
 SedDocument::getVersion() const
 {
   return mVersion;
@@ -219,7 +224,7 @@ SedDocument::isSetVersion() const
  * Sets the value of the "level" attribute of this SedDocument.
  */
 int
-SedDocument::setLevel(int level)
+SedDocument::setLevel(unsigned int level)
 {
   mLevel = level;
   mIsSetLevel = true;
@@ -237,7 +242,7 @@ SedDocument::setLevel(int level)
  * Sets the value of the "version" attribute of this SedDocument.
  */
 int
-SedDocument::setVersion(int version)
+SedDocument::setVersion(unsigned int version)
 {
   mVersion = version;
   mIsSetVersion = true;
@@ -1395,6 +1400,32 @@ SedDocument::createPlot3D()
 
 
 /*
+ * Creates a new SedFigure object, adds it to this SedDocument object and
+ * returns the SedFigure object created.
+ */
+SedFigure*
+SedDocument::createFigure()
+{
+  SedFigure* sf = NULL;
+
+  try
+  {
+    sf = new SedFigure(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sf != NULL)
+  {
+    mOutputs.appendAndOwn(sf);
+  }
+
+  return sf;
+}
+
+
+/*
  * Removes the nth SedOutput from this SedDocument and returns a pointer to it.
  */
 SedOutput*
@@ -1412,6 +1443,183 @@ SedOutput*
 SedDocument::removeOutput(const std::string& sid)
 {
   return mOutputs.remove(sid);
+}
+
+
+/*
+ * Returns the SedListOfStyles from this SedDocument.
+ */
+const SedListOfStyles*
+SedDocument::getListOfStyles() const
+{
+  return &mStyles;
+}
+
+
+/*
+ * Returns the SedListOfStyles from this SedDocument.
+ */
+SedListOfStyles*
+SedDocument::getListOfStyles()
+{
+  return &mStyles;
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument.
+ */
+SedStyle*
+SedDocument::getStyle(unsigned int n)
+{
+  return mStyles.get(n);
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument.
+ */
+const SedStyle*
+SedDocument::getStyle(unsigned int n) const
+{
+  return mStyles.get(n);
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument based on its identifier.
+ */
+SedStyle*
+SedDocument::getStyle(const std::string& sid)
+{
+  return mStyles.get(sid);
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument based on its identifier.
+ */
+const SedStyle*
+SedDocument::getStyle(const std::string& sid) const
+{
+  return mStyles.get(sid);
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument based on the BaseStyle to which it
+ * refers.
+ */
+const SedStyle*
+SedDocument::getStyleByBaseStyle(const std::string& sid) const
+{
+  return mStyles.getByBaseStyle(sid);
+}
+
+
+/*
+ * Get a SedStyle from the SedDocument based on the BaseStyle to which it
+ * refers.
+ */
+SedStyle*
+SedDocument::getStyleByBaseStyle(const std::string& sid)
+{
+  return mStyles.getByBaseStyle(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedStyle to this SedDocument.
+ */
+int
+SedDocument::addStyle(const SedStyle* ss)
+{
+  if (ss == NULL)
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+  else if (ss->hasRequiredAttributes() == false)
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else if (getLevel() != ss->getLevel())
+  {
+    return LIBSEDML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != ss->getVersion())
+  {
+    return LIBSEDML_VERSION_MISMATCH;
+  }
+  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+    SedBase*>(ss)) == false)
+  {
+    return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (ss->isSetId() && (mStyles.get(ss->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
+  }
+  else
+  {
+    return mStyles.append(ss);
+  }
+}
+
+
+/*
+ * Get the number of SedStyle objects in this SedDocument.
+ */
+unsigned int
+SedDocument::getNumStyles() const
+{
+  return mStyles.size();
+}
+
+
+/*
+ * Creates a new SedStyle object, adds it to this SedDocument object and
+ * returns the SedStyle object created.
+ */
+SedStyle*
+SedDocument::createStyle()
+{
+  SedStyle* ss = NULL;
+
+  try
+  {
+    ss = new SedStyle(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (ss != NULL)
+  {
+    mStyles.appendAndOwn(ss);
+  }
+
+  return ss;
+}
+
+
+/*
+ * Removes the nth SedStyle from this SedDocument and returns a pointer to it.
+ */
+SedStyle*
+SedDocument::removeStyle(unsigned int n)
+{
+  return mStyles.remove(n);
+}
+
+
+/*
+ * Removes the SedStyle from this SedDocument based on its identifier and
+ * returns a pointer to it.
+ */
+SedStyle*
+SedDocument::removeStyle(const std::string& sid)
+{
+  return mStyles.remove(sid);
 }
 
 
@@ -1500,6 +1708,11 @@ SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   {
     mOutputs.write(stream);
   }
+
+  if (getNumStyles() > 0)
+  {
+    mStyles.write(stream);
+  }
 }
 
 /** @endcond */
@@ -1542,6 +1755,8 @@ SedDocument::setSedDocument(SedDocument* d)
   mDataGenerators.setSedDocument(d);
 
   mOutputs.setSedDocument(d);
+
+  mStyles.setSedDocument(d);
 }
 
 /** @endcond */
@@ -1569,6 +1784,8 @@ SedDocument::connectToChild()
   mDataGenerators.connectToParent(this);
 
   mOutputs.connectToParent(this);
+
+  mStyles.connectToParent(this);
 }
 
 /** @endcond */
@@ -1601,22 +1818,6 @@ int
 SedDocument::getAttribute(const std::string& attributeName, int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
-
-  if (return_value == LIBSEDML_OPERATION_SUCCESS)
-  {
-    return return_value;
-  }
-
-  if (attributeName == "level")
-  {
-    value = getLevel();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "version")
-  {
-    value = getVersion();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
 
   return return_value;
 }
@@ -1653,6 +1854,22 @@ SedDocument::getAttribute(const std::string& attributeName,
                           unsigned int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "level")
+  {
+    value = getLevel();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "version")
+  {
+    value = getVersion();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -1733,15 +1950,6 @@ SedDocument::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "level")
-  {
-    return_value = setLevel(value);
-  }
-  else if (attributeName == "version")
-  {
-    return_value = setVersion(value);
-  }
-
   return return_value;
 }
 
@@ -1776,6 +1984,15 @@ SedDocument::setAttribute(const std::string& attributeName,
                           unsigned int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "level")
+  {
+    return_value = setLevel(value);
+  }
+  else if (attributeName == "version")
+  {
+    return_value = setVersion(value);
+  }
 
   return return_value;
 }
@@ -1890,6 +2107,14 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createPlot3D();
   }
+  else if (elementName == "figure")
+  {
+    return createFigure();
+  }
+  else if (elementName == "style")
+  {
+    return createStyle();
+  }
 
   return obj;
 }
@@ -1970,6 +2195,14 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addOutput((const SedOutput*)(element));
   }
+  else if (elementName == "figure" && element->getTypeCode() == SEDML_FIGURE)
+  {
+    return addOutput((const SedOutput*)(element));
+  }
+  else if (elementName == "style" && element->getTypeCode() == SEDML_STYLE)
+  {
+    return addStyle((const SedStyle*)(element));
+  }
 
   return LIBSBML_OPERATION_FAILED;
 }
@@ -2040,6 +2273,14 @@ SedDocument::removeChildObject(const std::string& elementName,
   {
     return removeOutput(id);
   }
+  else if (elementName == "figure")
+  {
+    return removeOutput(id);
+  }
+  else if (elementName == "style")
+  {
+    return removeStyle(id);
+  }
 
   return NULL;
 }
@@ -2082,6 +2323,10 @@ SedDocument::getNumObjects(const std::string& elementName)
   {
     return getNumOutputs();
   }
+  else if (elementName == "style")
+  {
+    return getNumStyles();
+  }
 
   return n;
 }
@@ -2123,6 +2368,10 @@ SedDocument::getObject(const std::string& elementName, unsigned int index)
   else if (elementName == "output")
   {
     return getOutput(index);
+  }
+  else if (elementName == "style")
+  {
+    return getStyle(index);
   }
 
   return obj;
@@ -2181,6 +2430,13 @@ SedDocument::getElementBySId(const std::string& id)
   }
 
   obj = mOutputs.getElementBySId(id);
+
+  if (obj != NULL)
+  {
+    return obj;
+  }
+
+  obj = mStyles.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -2346,6 +2602,16 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
     obj = &mOutputs;
   }
+  else if (name == "listOfStyles")
+  {
+    if (mStyles.size() != 0)
+    {
+      getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
+        getVersion());
+    }
+
+    obj = &mStyles;
+  }
 
   connectToChild();
 
@@ -2412,7 +2678,7 @@ SedDocument::readAttributes(
   }
 
   // 
-  // level int (use = "required" )
+  // level uint (use = "required" )
   // 
 
   numErrs = log->getNumErrors();
@@ -2426,7 +2692,8 @@ SedDocument::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'level' from the <SedDocument> "
         "element must be an integer.";
-      log->logError(SedmlDocumentLevelMustBeInteger, level, version, message);
+      log->logError(SedmlDocumentLevelMustBeNonNegativeInteger, level, version,
+        message);
     }
     else
     {
@@ -2437,7 +2704,7 @@ SedDocument::readAttributes(
   }
 
   // 
-  // version int (use = "required" )
+  // version uint (use = "required" )
   // 
 
   numErrs = log->getNumErrors();
@@ -2451,8 +2718,8 @@ SedDocument::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'version' from the <SedDocument> "
         "element must be an integer.";
-      log->logError(SedmlDocumentVersionMustBeInteger, level, version,
-        message);
+      log->logError(SedmlDocumentVersionMustBeNonNegativeInteger, level,
+        version, message);
     }
     else
     {
@@ -2574,7 +2841,7 @@ SedDocument_free(SedDocument_t* sd)
  * Returns the value of the "level" attribute of this SedDocument_t.
  */
 LIBSEDML_EXTERN
-int
+unsigned int
 SedDocument_getLevel(const SedDocument_t * sd)
 {
   return (sd != NULL) ? sd->getLevel() : SEDML_INT_MAX;
@@ -2585,7 +2852,7 @@ SedDocument_getLevel(const SedDocument_t * sd)
  * Returns the value of the "version" attribute of this SedDocument_t.
  */
 LIBSEDML_EXTERN
-int
+unsigned int
 SedDocument_getVersion(const SedDocument_t * sd)
 {
   return (sd != NULL) ? sd->getVersion() : SEDML_INT_MAX;
@@ -2621,7 +2888,7 @@ SedDocument_isSetVersion(const SedDocument_t * sd)
  */
 LIBSEDML_EXTERN
 int
-SedDocument_setLevel(SedDocument_t * sd, int level)
+SedDocument_setLevel(SedDocument_t * sd, unsigned int level)
 {
   return (sd != NULL) ? sd->setLevel(level) : LIBSEDML_INVALID_OBJECT;
 }
@@ -2632,7 +2899,7 @@ SedDocument_setLevel(SedDocument_t * sd, int level)
  */
 LIBSEDML_EXTERN
 int
-SedDocument_setVersion(SedDocument_t * sd, int version)
+SedDocument_setVersion(SedDocument_t * sd, unsigned int version)
 {
   return (sd != NULL) ? sd->setVersion(version) : LIBSEDML_INVALID_OBJECT;
 }
@@ -3273,6 +3540,18 @@ SedDocument_createPlot3D(SedDocument_t* sd)
 
 
 /*
+ * Creates a new SedFigure_t object, adds it to this SedDocument_t object and
+ * returns the SedFigure_t object created.
+ */
+LIBSEDML_EXTERN
+SedFigure_t*
+SedDocument_createFigure(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->createFigure() : NULL;
+}
+
+
+/*
  * Removes the nth SedOutput_t from this SedDocument_t and returns a pointer to
  * it.
  */
@@ -3293,6 +3572,109 @@ SedOutput_t*
 SedDocument_removeOutputById(SedDocument_t* sd, const char* sid)
 {
   return (sd != NULL && sid != NULL) ? sd->removeOutput(sid) : NULL;
+}
+
+
+/*
+ * Returns a ListOf_t * containing SedStyle_t objects from this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfStyles(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getListOfStyles() : NULL;
+}
+
+
+/*
+ * Get a SedStyle_t from the SedDocument_t.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyle(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->getStyle(n) : NULL;
+}
+
+
+/*
+ * Get a SedStyle_t from the SedDocument_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyleById(SedDocument_t* sd, const char *sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->getStyle(sid) : NULL;
+}
+
+
+/*
+ * Get a SedStyle_t from the SedDocument_t based on the BaseStyle to which it
+ * refers.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyleByBaseStyle(SedDocument_t* sd, const char *sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->getStyleByBaseStyle(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedStyle_t to this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addStyle(SedDocument_t* sd, const SedStyle_t* ss)
+{
+  return (sd != NULL) ? sd->addStyle(ss) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedStyle_t objects in this SedDocument_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumStyles(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->getNumStyles() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedStyle_t object, adds it to this SedDocument_t object and
+ * returns the SedStyle_t object created.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_createStyle(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->createStyle() : NULL;
+}
+
+
+/*
+ * Removes the nth SedStyle_t from this SedDocument_t and returns a pointer to
+ * it.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_removeStyle(SedDocument_t* sd, unsigned int n)
+{
+  return (sd != NULL) ? sd->removeStyle(n) : NULL;
+}
+
+
+/*
+ * Removes the SedStyle_t from this SedDocument_t based on its identifier and
+ * returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_removeStyleById(SedDocument_t* sd, const char* sid)
+{
+  return (sd != NULL && sid != NULL) ? sd->removeStyle(sid) : NULL;
 }
 
 

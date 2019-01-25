@@ -57,6 +57,7 @@
 #include <sedml/SedListOfTasks.h>
 #include <sedml/SedListOfDataGenerators.h>
 #include <sedml/SedListOfOutputs.h>
+#include <sedml/SedListOfStyles.h>
 #include <sedml/SedErrorLog.h>
 #include <sbml/common/libsbml-namespace.h>
 
@@ -70,9 +71,9 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  int mLevel;
+  unsigned int mLevel;
   bool mIsSetLevel;
-  int mVersion;
+  unsigned int mVersion;
   bool mIsSetVersion;
   SedListOfDataDescriptions mDataDescriptions;
   SedListOfModels mModels;
@@ -80,6 +81,7 @@ protected:
   SedListOfTasks mAbstractTasks;
   SedListOfDataGenerators mDataGenerators;
   SedListOfOutputs mOutputs;
+  SedListOfStyles mStyles;
   SedErrorLog mErrorLog;
 
   /** @endcond */
@@ -147,18 +149,18 @@ public:
    * Returns the value of the "level" attribute of this SedDocument.
    *
    * @return the value of the "level" attribute of this SedDocument as a
-   * integer.
+   * unsigned integer.
    */
-  int getLevel() const;
+  unsigned int getLevel() const;
 
 
   /**
    * Returns the value of the "version" attribute of this SedDocument.
    *
    * @return the value of the "version" attribute of this SedDocument as a
-   * integer.
+   * unsigned integer.
    */
-  int getVersion() const;
+  unsigned int getVersion() const;
 
 
   /**
@@ -184,27 +186,27 @@ public:
   /**
    * Sets the value of the "level" attribute of this SedDocument.
    *
-   * @param level int value of the "level" attribute to be set.
+   * @param level unsigned int value of the "level" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setLevel(int level);
+  int setLevel(unsigned int level);
 
 
   /**
    * Sets the value of the "version" attribute of this SedDocument.
    *
-   * @param version int value of the "version" attribute to be set.
+   * @param version unsigned int value of the "version" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setVersion(int version);
+  int setVersion(unsigned int version);
 
 
   /**
@@ -1644,6 +1646,24 @@ public:
 
 
   /**
+   * Creates a new SedFigure object, adds it to this SedDocument object and
+   * returns the SedFigure object created.
+   *
+   * @return a new SedFigure object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedFigure* createFigure();
+
+
+  /**
    * Removes the nth SedOutput from this SedDocument and returns a pointer to
    * it.
    *
@@ -1684,6 +1704,254 @@ public:
    * @see removeOutput(unsigned int n)
    */
   SedOutput* removeOutput(const std::string& sid);
+
+
+  /**
+   * Returns the SedListOfStyles from this SedDocument.
+   *
+   * @return the SedListOfStyles from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  const SedListOfStyles* getListOfStyles() const;
+
+
+  /**
+   * Returns the SedListOfStyles from this SedDocument.
+   *
+   * @return the SedListOfStyles from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  SedListOfStyles* getListOfStyles();
+
+
+  /**
+   * Get a SedStyle from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedStyle to
+   * retrieve.
+   *
+   * @return the nth SedStyle in the SedListOfStyles within this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  SedStyle* getStyle(unsigned int n);
+
+
+  /**
+   * Get a SedStyle from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the SedStyle to
+   * retrieve.
+   *
+   * @return the nth SedStyle in the SedListOfStyles within this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  const SedStyle* getStyle(unsigned int n) const;
+
+
+  /**
+   * Get a SedStyle from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedStyle to
+   * retrieve.
+   *
+   * @return the SedStyle in the SedListOfStyles within this SedDocument with
+   * the given @p sid or @c NULL if no such SedStyle exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  SedStyle* getStyle(const std::string& sid);
+
+
+  /**
+   * Get a SedStyle from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedStyle to
+   * retrieve.
+   *
+   * @return the SedStyle in the SedListOfStyles within this SedDocument with
+   * the given @p sid or @c NULL if no such SedStyle exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  const SedStyle* getStyle(const std::string& sid) const;
+
+
+  /**
+   * Get a SedStyle from the SedDocument based on the BaseStyle to which it
+   * refers.
+   *
+   * @param sid a string representing the "baseStyle" attribute of the SedStyle
+   * object to retrieve.
+   *
+   * @return the first SedStyle in this SedDocument based on the given
+   * baseStyle attribute or NULL if no such SedStyle exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedStyle* getStyleByBaseStyle(const std::string& sid) const;
+
+
+  /**
+   * Get a SedStyle from the SedDocument based on the BaseStyle to which it
+   * refers.
+   *
+   * @param sid a string representing the "baseStyle" attribute of the SedStyle
+   * object to retrieve.
+   *
+   * @return the first SedStyle in this SedDocument based on the given
+   * baseStyle attribute or NULL if no such SedStyle exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedStyle* getStyleByBaseStyle(const std::string& sid);
+
+
+  /**
+   * Adds a copy of the given SedStyle to this SedDocument.
+   *
+   * @param ss the SedStyle object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  int addStyle(const SedStyle* ss);
+
+
+  /**
+   * Get the number of SedStyle objects in this SedDocument.
+   *
+   * @return the number of SedStyle objects in this SedDocument.
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  unsigned int getNumStyles() const;
+
+
+  /**
+   * Creates a new SedStyle object, adds it to this SedDocument object and
+   * returns the SedStyle object created.
+   *
+   * @return a new SedStyle object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   * @see removeStyle(unsigned int n)
+   */
+  SedStyle* createStyle();
+
+
+  /**
+   * Removes the nth SedStyle from this SedDocument and returns a pointer to
+   * it.
+   *
+   * @param n an unsigned int representing the index of the SedStyle to remove.
+   *
+   * @return a pointer to the nth SedStyle in this SedDocument.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(const std::string& sid)
+   */
+  SedStyle* removeStyle(unsigned int n);
+
+
+  /**
+   * Removes the SedStyle from this SedDocument based on its identifier and
+   * returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedStyle to remove.
+   *
+   * @return the SedStyle in this SedDocument based on the identifier or NULL
+   * if no such SedStyle exists.
+   *
+   * @copydetails doc_returned_owned_pointer
+   *
+   * @see addStyle(const SedStyle* object)
+   * @see createStyle()
+   * @see getStyle(const std::string& sid)
+   * @see getStyle(unsigned int n)
+   * @see getNumStyles()
+   * @see removeStyle(unsigned int n)
+   */
+  SedStyle* removeStyle(const std::string& sid);
 
 
   /**
@@ -2348,12 +2616,12 @@ SedDocument_free(SedDocument_t* sd);
  * @param sd the SedDocument_t structure whose level is sought.
  *
  * @return the value of the "level" attribute of this SedDocument_t as a
- * integer.
+ * unsigned integer.
  *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
-int
+unsigned int
 SedDocument_getLevel(const SedDocument_t * sd);
 
 
@@ -2363,12 +2631,12 @@ SedDocument_getLevel(const SedDocument_t * sd);
  * @param sd the SedDocument_t structure whose version is sought.
  *
  * @return the value of the "version" attribute of this SedDocument_t as a
- * integer.
+ * unsigned integer.
  *
  * @memberof SedDocument_t
  */
 LIBSEDML_EXTERN
-int
+unsigned int
 SedDocument_getVersion(const SedDocument_t * sd);
 
 
@@ -2409,7 +2677,7 @@ SedDocument_isSetVersion(const SedDocument_t * sd);
  *
  * @param sd the SedDocument_t structure.
  *
- * @param level int value of the "level" attribute to be set.
+ * @param level unsigned int value of the "level" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -2421,7 +2689,7 @@ SedDocument_isSetVersion(const SedDocument_t * sd);
  */
 LIBSEDML_EXTERN
 int
-SedDocument_setLevel(SedDocument_t * sd, int level);
+SedDocument_setLevel(SedDocument_t * sd, unsigned int level);
 
 
 /**
@@ -2429,7 +2697,7 @@ SedDocument_setLevel(SedDocument_t * sd, int level);
  *
  * @param sd the SedDocument_t structure.
  *
- * @param version int value of the "version" attribute to be set.
+ * @param version unsigned int value of the "version" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -2441,7 +2709,7 @@ SedDocument_setLevel(SedDocument_t * sd, int level);
  */
 LIBSEDML_EXTERN
 int
-SedDocument_setVersion(SedDocument_t * sd, int version);
+SedDocument_setVersion(SedDocument_t * sd, unsigned int version);
 
 
 /**
@@ -3539,6 +3807,24 @@ SedDocument_createPlot3D(SedDocument_t* sd);
 
 
 /**
+ * Creates a new SedFigure_t object, adds it to this SedDocument_t object and
+ * returns the SedFigure_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedFigure_t should be
+ * added.
+ *
+ * @return a new SedFigure_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedFigure_t*
+SedDocument_createFigure(SedDocument_t* sd);
+
+
+/**
  * Removes the nth SedOutput_t from this SedDocument_t and returns a pointer to
  * it.
  *
@@ -3577,6 +3863,185 @@ SedDocument_removeOutput(SedDocument_t* sd, unsigned int n);
 LIBSEDML_EXTERN
 SedOutput_t*
 SedDocument_removeOutputById(SedDocument_t* sd, const char* sid);
+
+
+/**
+ * Returns a ListOf_t * containing SedStyle_t objects from this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure whose SedListOfStyles is sought.
+ *
+ * @return the SedListOfStyles from this SedDocument_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addStyle()
+ * @see SedDocument_createStyle()
+ * @see SedDocument_getStyleById()
+ * @see SedDocument_getStyle()
+ * @see SedDocument_getNumStyles()
+ * @see SedDocument_removeStyleById()
+ * @see SedDocument_removeStyle()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfStyles(SedDocument_t* sd);
+
+
+/**
+ * Get a SedStyle_t from the SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedStyle_t to
+ * retrieve.
+ *
+ * @return the nth SedStyle_t in the SedListOfStyles within this SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyle(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Get a SedStyle_t from the SedDocument_t based on its identifier.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedStyle_t to
+ * retrieve.
+ *
+ * @return the SedStyle_t in the SedListOfStyles within this SedDocument with
+ * the given @p sid or @c NULL if no such SedStyle_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyleById(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Get a SedStyle_t from the SedDocument_t based on the BaseStyle to which it
+ * refers.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the "baseStyle" attribute of the SedStyle_t
+ * object to retrieve.
+ *
+ * @return the first SedStyle_t in this SedDocument_t based on the given
+ * baseStyle attribute or NULL if no such SedStyle_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_getStyleByBaseStyle(SedDocument_t* sd, const char *sid);
+
+
+/**
+ * Adds a copy of the given SedStyle_t to this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to which the SedStyle_t should be
+ * added.
+ *
+ * @param ss the SedStyle_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addStyle(SedDocument_t* sd, const SedStyle_t* ss);
+
+
+/**
+ * Get the number of SedStyle_t objects in this SedDocument_t.
+ *
+ * @param sd the SedDocument_t structure to query.
+ *
+ * @return the number of SedStyle_t objects in this SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumStyles(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedStyle_t object, adds it to this SedDocument_t object and
+ * returns the SedStyle_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedStyle_t should be
+ * added.
+ *
+ * @return a new SedStyle_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_createStyle(SedDocument_t* sd);
+
+
+/**
+ * Removes the nth SedStyle_t from this SedDocument_t and returns a pointer to
+ * it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedStyle_t to remove.
+ *
+ * @return a pointer to the nth SedStyle_t in this SedDocument_t.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_removeStyle(SedDocument_t* sd, unsigned int n);
+
+
+/**
+ * Removes the SedStyle_t from this SedDocument_t based on its identifier and
+ * returns a pointer to it.
+ *
+ * @param sd the SedDocument_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedStyle_t to remove.
+ *
+ * @return the SedStyle_t in this SedDocument_t based on the identifier or NULL
+ * if no such SedStyle_t exists.
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedStyle_t*
+SedDocument_removeStyleById(SedDocument_t* sd, const char* sid);
 
 
 /**

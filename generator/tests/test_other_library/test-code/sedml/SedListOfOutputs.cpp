@@ -37,6 +37,7 @@
 #include <sedml/SedReport.h>
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
+#include <sedml/SedFigure.h>
 
 
 using namespace std;
@@ -319,6 +320,32 @@ SedListOfOutputs::createPlot3D()
 
 
 /*
+ * Creates a new SedFigure object, adds it to this SedListOfOutputs object and
+ * returns the SedFigure object created.
+ */
+SedFigure*
+SedListOfOutputs::createFigure()
+{
+  SedFigure* sf = NULL;
+
+  try
+  {
+    sf = new SedFigure(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sf != NULL)
+  {
+    appendAndOwn(sf);
+  }
+
+  return sf;
+}
+
+
+/*
  * Returns the XML element name of this SedListOfOutputs object.
  */
 const std::string&
@@ -401,6 +428,12 @@ SedListOfOutputs::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
+  if (name == "figure")
+  {
+    object = new SedFigure(getSedNamespaces());
+    appendAndOwn(object);
+  }
+
   return object;
 }
 
@@ -448,7 +481,7 @@ SedListOfOutputs::isValidTypeForList(SedBase* item)
   unsigned int tc = item->getTypeCode();
 
   return ((tc == SEDML_OUTPUT_REPORT) || (tc == SEDML_OUTPUT_PLOT2D) || (tc ==
-    SEDML_OUTPUT_PLOT3D));
+    SEDML_OUTPUT_PLOT3D) || (tc == SEDML_FIGURE));
 }
 
 /** @endcond */

@@ -38,6 +38,7 @@
 #include <sedml/SedReport.h>
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
+#include <sedml/SedFigure.h>
 
 
 using namespace std;
@@ -252,6 +253,17 @@ bool
 SedOutput::isSedPlot3D() const
 {
   return dynamic_cast<const SedPlot3D*>(this) != NULL;
+}
+
+
+/*
+ * Predicate returning @c true if this abstract "SedOutput" is of type
+ * SedFigure
+ */
+bool
+SedOutput::isSedFigure() const
+{
+  return dynamic_cast<const SedFigure*>(this) != NULL;
 }
 
 
@@ -786,6 +798,17 @@ SedOutput_createPlot3D(unsigned int level, unsigned int version)
 
 
 /*
+ * Creates a new SedFigure using the given SEDML Level and @ p version values.
+ */
+LIBSEDML_EXTERN
+SedFigure_t *
+SedOutput_createFigure(unsigned int level, unsigned int version)
+{
+  return new SedFigure(level, version);
+}
+
+
+/*
  * Creates and returns a deep copy of this SedOutput_t object.
  */
 LIBSEDML_EXTERN
@@ -946,6 +969,17 @@ int
 SedOutput_isSedPlot3D(const SedOutput_t * so)
 {
   return (so != NULL) ? static_cast<int>(so->isSedPlot3D()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedOutput_t is of type SedFigure_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_isSedFigure(const SedOutput_t * so)
+{
+  return (so != NULL) ? static_cast<int>(so->isSedFigure()) : 0;
 }
 
 
