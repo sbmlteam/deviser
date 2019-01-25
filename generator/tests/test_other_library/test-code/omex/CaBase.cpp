@@ -1900,7 +1900,7 @@ CaBase::getCaNamespaces() const
   
   // initialize OMEX namespace if need be
   if (mCaNamespaces == NULL)
-    const_cast<CaBase*>(this)->mCaNamespaces = new CaNamespaces();
+    const_cast<CaBase*>(this)->mCaNamespaces = new CaNamespaces(getLevel(), getVersion());
   return mCaNamespaces;  
 }
 /** @endcond */

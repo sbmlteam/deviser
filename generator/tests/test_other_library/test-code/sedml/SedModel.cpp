@@ -1007,7 +1007,7 @@ int
 SedModel::addChildObject(const std::string& elementName,
                          const SedBase* element)
 {
-  if (elementName == "addXML" && element->getTypeCode() == SEDML_ADDXML)
+  if (elementName == "addXML" && element->getTypeCode() == SEDML_CHANGE_ADDXML)
   {
     return addChange((const SedChange*)(element));
   }
@@ -1022,12 +1022,12 @@ SedModel::addChildObject(const std::string& elementName,
     return addChange((const SedChange*)(element));
   }
   else if (elementName == "changeAttribute" && element->getTypeCode() ==
-    SEDML_SEDML_CHANGEATTRIBUTE)
+    SEDML_CHANGE_ATTRIBUTE)
   {
     return addChange((const SedChange*)(element));
   }
   else if (elementName == "computeChange" && element->getTypeCode() ==
-    SEDML_COMPUTECHANGE)
+    SEDML_CHANGE_COMPUTECHANGE)
   {
     return addChange((const SedChange*)(element));
   }
@@ -1260,7 +1260,7 @@ SedModel::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedDocumentLOModelsAllowedCoreAttributes, level,
+        log->logError(SedmlDocumentLOModelsAllowedCoreAttributes, level,
           version, details);
       }
     }
@@ -1278,7 +1278,7 @@ SedModel::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedModelAllowedAttributes, level, version, details);
+        log->logError(SedmlModelAllowedAttributes, level, version, details);
       }
     }
   }

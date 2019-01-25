@@ -217,7 +217,7 @@ SedAddXML::getElementName() const
 int
 SedAddXML::getTypeCode() const
 {
-  return SEDML_ADDXML;
+  return SEDML_CHANGE_ADDXML;
 }
 
 
@@ -594,8 +594,7 @@ SedAddXML::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedAddXMLAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlAddXMLAllowedAttributes, level, version, details);
       }
     }
   }

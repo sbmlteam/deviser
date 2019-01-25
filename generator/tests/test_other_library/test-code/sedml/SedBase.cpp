@@ -1905,7 +1905,7 @@ SedBase::getSedNamespaces() const
   
   // initialize SEDML namespace if need be
   if (mSedNamespaces == NULL)
-    const_cast<SedBase*>(this)->mSedNamespaces = new SedNamespaces();
+    const_cast<SedBase*>(this)->mSedNamespaces = new SedNamespaces(getLevel(), getVersion());
   return mSedNamespaces;  
 }
 /** @endcond */

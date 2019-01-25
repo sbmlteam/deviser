@@ -706,7 +706,7 @@ class ParseXML():
         if not language or language == '':
             language = 'sbml'
         # set the globals
-        global_variables.set_globals(strFunctions.lower_first(language), base_class,
+        global_variables.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
                                      dependency, library_version, '', annot_element,

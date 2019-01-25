@@ -1983,12 +1983,7 @@ protected:
 
 
   std::string     mMetaId;
-  <if_id>
   std::string     mId;
-  </if_id>
-  <if_name>
-  std::string     mName;
-  </if_name>
   <NS>XMLNode*        m<Notes>;
   <NS>XMLNode*        m<Annotation>;
   SBMLDocument*   mSBML;
