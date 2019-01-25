@@ -14,14 +14,15 @@
       <elements>
         <element name="SedDocument" typeCode="SEDML_DOCUMENT" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="sedML">
           <attributes>
-            <attribute name="level" required="true" type="int" abstract="false"/>
-            <attribute name="version" required="true" type="int" abstract="false"/>
+            <attribute name="level" required="true" type="unsigned int" abstract="false"/>
+            <attribute name="version" required="true" type="unsigned int" abstract="false"/>
             <attribute name="dataDescription" required="false" type="lo_element" element="DataDescription" abstract="false"/>
             <attribute name="model" required="false" type="lo_element" element="Model" abstract="false"/>
             <attribute name="simulation" required="false" type="lo_element" element="Simulation" abstract="true"/>
             <attribute name="task" required="false" type="lo_element" element="AbstractTask" xmlName="task" abstract="true"/>
             <attribute name="dataGenerator" required="false" type="lo_element" element="DataGenerator" abstract="false"/>
             <attribute name="output" required="false" type="lo_element" element="Output" abstract="true"/>
+            <attribute name="style" required="false" type="lo_element" element="Style" abstract="false"/>
           </attributes>
         </element>
         <element name="Model" typeCode="SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
@@ -143,6 +144,7 @@
             <concrete name="report" element="Report" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="plot2D" element="Plot2D" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="plot3D" element="Plot3D" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="figure" element="Figure" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Plot" typeCode="SEDML_OUTPUT_PLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="true">
@@ -355,7 +357,6 @@
         <element name="FitExperiment" typeCode="SEDML_FIT_EXPERIMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
-            <attribute name="source" required="false" type="string" abstract="false"/>
             <attribute name="represents" required="false" type="enum" element="ExperimentType" abstract="false"/>
             <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
             <attribute name="fitMapping" required="false" type="lo_element" element="FitMapping" abstract="false"/>
@@ -363,7 +364,7 @@
         </element>
         <element name="FitMapping" typeCode="SEDML_FITMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
-            <attribute name="colNumber" required="true" type="int" abstract="false"/>
+            <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
             <attribute name="dataGenerator" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="MappingType" abstract="false"/>
             <attribute name="scaling" required="true" type="element" element="Scaling" abstract="true"/>
@@ -382,7 +383,7 @@
         </element>
         <element name="ColumnScaling" typeCode="SEDML_COLUMNSCALING" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Scaling" abstract="false">
           <attributes>
-            <attribute name="colNumber" required="true" type="int" abstract="false"/>
+            <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
           </attributes>
         </element>
         <element name="Bounds" typeCode="SEDML_BOUNDS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
@@ -417,12 +418,13 @@
             <attribute name="style" required="false" type="SIdRef" element="Style" abstract="false"/>
           </attributes>
         </element>
-        <element name="Style" typeCode="SEDML_STYLE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Style" typeCode="SEDML_STYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="baseStyle" required="false" type="SIdRef" element="Style" abstract="false"/>
             <attribute name="line" required="false" type="element" element="Line" abstract="false"/>
             <attribute name="marker" required="false" type="element" element="Marker" abstract="false"/>
             <attribute name="fill" required="false" type="element" element="Fill" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
         <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
@@ -483,12 +485,6 @@
           <enumValues>
             <enumValue name="SEDML_MAPPINGTYPE_VARIABLE" value="Variable"/>
             <enumValue name="SEDML_MAPPINGTYPE_PARAMETER" value="Parameter"/>
-          </enumValues>
-        </enum>
-        <enum name="ExperimentType">
-          <enumValues>
-            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
-            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
           </enumValues>
         </enum>
         <enum name="AxisType">
