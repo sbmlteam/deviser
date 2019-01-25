@@ -996,7 +996,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBGN type code for this object:
-   * @sbgnconstant{SBGN_SBGNML_ARC, SBGNSbgnmlTypeCode_t}.
+   * @sbgnconstant{SBGN_SBGNML_ARC, SbgnTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

@@ -321,7 +321,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the OMEX type code for this object:
-   * @omexconstant{OMEX_LIST_OF, OMEXTypeCode_t}.
+   * @omexconstant{OMEX_LIST_OF, CaTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */

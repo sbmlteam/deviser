@@ -304,7 +304,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the OMEX type code for this object:
-   * @omexconstant{LIB_COMBINE_OMEXMANIFEST, OMEXCombineTypeCode_t}.
+   * @omexconstant{LIB_COMBINE_OMEXMANIFEST, CaTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

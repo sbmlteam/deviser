@@ -332,7 +332,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SBGN type code for this object:
-   * @sbgnconstant{SBGN_LIST_OF, SBGNTypeCode_t}.
+   * @sbgnconstant{SBGN_LIST_OF, SbgnTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */

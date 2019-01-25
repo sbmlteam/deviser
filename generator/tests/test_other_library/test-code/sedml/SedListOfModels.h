@@ -319,7 +319,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */

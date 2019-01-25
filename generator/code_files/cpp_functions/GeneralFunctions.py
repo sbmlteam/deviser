@@ -278,14 +278,24 @@ class GeneralFunctions():
         return_lines = ['@return the {0} type code for this '
                         'object:'.format(self.cap_language)]
         additional = []
-        if self.is_list_of:
-            line = '@{0}constant{2}{1}_LIST_OF, ' \
-                   '{1}TypeCode_t{3}.'.format(self.language, self.cap_language,
-                                             '{', '}')
+        if global_variables.is_package:
+            if self.is_list_of:
+                line = '@{0}constant{2}{1}_LIST_OF, ' \
+                       '{1}TypeCode_t{3}.'.format(self.language, self.cap_language,
+                                                 '{', '}')
+            else:
+                line = '@{0}constant{1}{2}, {3}{4}' \
+                       'TypeCode_t{5}.'.format(self.language, '{', self.typecode,
+                                              self.cap_language, self.package, '}')
         else:
-            line = '@{0}constant{1}{2}, {3}{4}' \
-                   'TypeCode_t{5}.'.format(self.language, '{', self.typecode,
-                                          self.cap_language, self.package, '}')
+            if self.is_list_of:
+                line = '@{0}constant{2}{1}_LIST_OF, ' \
+                       '{4}TypeCode_t{3}.'.format(self.language, self.cap_language,
+                                                 '{', '}', global_variables.prefix)
+            else:
+                line = '@{0}constant{1}{2}, {3}' \
+                       'TypeCode_t{4}.'.format(self.language, '{', self.typecode,
+                                              global_variables.prefix, '}')
         return_lines.append(line)
         additional.append('@copydetails doc_warning_typecodes_not_unique')
         if not self.is_list_of:
