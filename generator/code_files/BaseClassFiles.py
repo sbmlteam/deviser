@@ -61,17 +61,17 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     def write_files(self):
         self.write_all_files('SBase')
-        self.write_all_files('ListOf')
-        self.write_all_files('ConstructorException')
-        self.write_all_files('Reader')
-        self.write_all_files('Writer')
-        self.write_all_files('ErrorLog')
-        self.write_all_files('Namespaces')
-        self.write_all_files('Error')
-        self.write_all_files('Visitor')
-        self.write_all_files('TypeCodes')
-        self.write_header('Types')
-        self.write_header('ErrorTable')
+        # self.write_all_files('ListOf')
+        # self.write_all_files('ConstructorException')
+        # self.write_all_files('Reader')
+        # self.write_all_files('Writer')
+        # self.write_all_files('ErrorLog')
+        # self.write_all_files('Namespaces')
+        # self.write_all_files('Error')
+        # self.write_all_files('Visitor')
+        # self.write_all_files('TypeCodes')
+        # self.write_header('Types')
+        # self.write_header('ErrorTable')
 
     def write_common_files(self):
         self.write_header('common', True)
@@ -281,7 +281,7 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
         if not doc:
             docname = 'Document'
         else:
-            docname = strFunctions.prefix_name(doc['name'])
+            docname = strFunctions.remove_prefix(doc['name'], False, False, '', True)
         libname = strFunctions.get_library_suffix(global_variables.library_name)
         if not libname.endswith('ml'):
             libname = libname + 'ml'
@@ -297,11 +297,11 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
                     version = True
         if level:
             fileout.copy_line_verbatim('            || errorId == {0}{1}'
-                                       'LevelMustBeInteger\n'
+                                       'LevelMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         if version:
             fileout.copy_line_verbatim('            || errorId == {0}{1}'
-                                       'VersionMustBeInteger\n'
+                                       'VersionMustBeNonNegativeInteger\n'
                                        ''.format(libname, docname))
         fileout.copy_line_verbatim('            || errorId == InvalidNamespace'
                                    'On{0})\n'.format(global_variables.prefix))

@@ -177,7 +177,7 @@ def set_unknown_error(pkg):
 
 def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
                 specifications=[], depend=[], library_vers=[], copyright='', annot_elem='',
-                notes_elem='', use_id_1=True, use_name_1=True, ast=False, xml=False):
+                notes_elem='', use_id_1=True, use_name_1=True, ast=False, xml=False, top_name=''):
     global language
     language = lang
 
@@ -226,6 +226,9 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         if not doc.startswith(prefix):
             document_class = '{0}{1}'.format(prefix, doc)
 
+    global top_level_element_name
+    if top_name != '':
+        top_level_element_name = top_name
     global package_prefix
     if pkg_prefix:
         package_prefix = pkg_prefix

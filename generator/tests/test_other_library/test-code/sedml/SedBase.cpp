@@ -2141,7 +2141,7 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
    * thus the MathML reader can find out what level/version
    * of SEDML it is parsing
    */
-  if (element.getName() == "sedml")
+  if (element.getName() == "sedML")
   {
  //   stream.setSedNamespaces(this->getSedNamespaces());
     // need to check that any prefix on the sedmlns also occurs on element
@@ -2174,9 +2174,9 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if ( errorId == SedmlSedDocumentAllowedCoreAttributes
-            || errorId == SedmlSedDocumentLevelMustBeInteger
-            || errorId == SedmlSedDocumentVersionMustBeInteger
+          if ( errorId == SedmlDocumentAllowedCoreAttributes
+            || errorId == SedmlDocumentLevelMustBeNonNegativeInteger
+            || errorId == SedmlDocumentVersionMustBeNonNegativeInteger
             || errorId == InvalidNamespaceOnSed)
           {
             errorLoggedAlready = true;
@@ -2610,7 +2610,7 @@ SedBase::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& at
     // if we happen to be on the sedml element (document) then
     // getPrefix() and mURI have not been set and just return defaults
     // thus a prefix does not appear to come from the right place !!!
-    if (!prefix.empty() && getElementName() == "sedml")
+    if (!prefix.empty() && getElementName() == "sedML")
     {
       if (!expectedAttributes.hasAttribute(name))
       {
@@ -3175,6 +3175,15 @@ SedBase::getElementNamespace() const
 /** @endcond */
 
 #endif /* __cplusplus */
+
+
+LIBSEDML_EXTERN
+int
+SedBase_getTypeCode (const SedBase_t *sb)
+{
+  return (sb != NULL) ? sb->getTypeCode() : SEDML_UNKNOWN;
+}
+
 
 LIBSEDML_EXTERN
 const char *

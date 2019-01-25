@@ -654,6 +654,8 @@ class ParseXML():
         annot_element = self.get_value(node, 'annotationElementName')
         uses_ASTNode = self.get_bool_value(self, node, 'uses_ASTNode')
         uses_XMLNode = self.get_bool_value(self, node, 'uses_XMLNode')
+        top_level_element = self.get_value(node, 'topLevelElementName')
+
 
         if node.getAttributeNode('isPackage'):
             is_package = self.get_bool_value(self, node, 'isPackage')
@@ -710,7 +712,8 @@ class ParseXML():
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
                                      dependency, library_version, '', annot_element,
-                                     notes_element, use_id, use_name, uses_ASTNode, uses_XMLNode)
+                                     notes_element, use_id, use_name, uses_ASTNode, uses_XMLNode,
+                                     top_level_element)
 
     #####################################################################
 
