@@ -1702,7 +1702,7 @@ class SetGetFunctions():
                 if att_name == 'level':
                     other_name = 'version'
                 if_code = self.create_code_block('if', ['mIsSet{0}'.format(strFunctions.upper_first(other_name)),
-                                                        'set{0}NamespacesAndOwn(new {0}Namespaces({1}, {2})'
+                                                        'set{0}NamespacesAndOwn(new {0}Namespaces({1}, {2}))'
                                                         ''.format(global_variables.prefix,
                                                                   'mLevel' if att_name == 'version' else 'level',
                                                                   'mVersion' if other_name == 'version' else 'version')])

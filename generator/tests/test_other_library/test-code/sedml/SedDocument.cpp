@@ -231,7 +231,7 @@ SedDocument::setLevel(unsigned int level)
 
   if (mIsSetVersion)
   {
-    setSedNamespacesAndOwn(new SedNamespaces(level, mVersion);
+    setSedNamespacesAndOwn(new SedNamespaces(level, mVersion));
   }
 
   return LIBSEDML_OPERATION_SUCCESS;
@@ -249,7 +249,7 @@ SedDocument::setVersion(unsigned int version)
 
   if (mIsSetLevel)
   {
-    setSedNamespacesAndOwn(new SedNamespaces(mLevel, version);
+    setSedNamespacesAndOwn(new SedNamespaces(mLevel, version));
   }
 
   return LIBSEDML_OPERATION_SUCCESS;
