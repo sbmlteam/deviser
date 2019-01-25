@@ -494,6 +494,12 @@
             <enumValue name="SEDML_MAPPINGTYPE_PARAMETER" value="Parameter"/>
           </enumValues>
         </enum>
+        <enum name="ExperimentType">
+          <enumValues>
+            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
+          </enumValues>
+        </enum>
         <enum name="AxisType">
           <enumValues>
             <enumValue name="SEDML_AXISTYPE_LINEAR" value="linear"/>
@@ -542,12 +548,6 @@
             <enumValue name="SEDML_SURFACETYPE_HEATMAP" value="heatMap"/>
             <enumValue name="SEDML_SURFACETYPE_STACKEDCURVES" value="stackedCurves"/>
             <enumValue name="SEDML_SURFACETYPE_BAR" value="bar"/>
-          </enumValues>
-        </enum>
-        <enum name="ExperimentType">
-          <enumValues>
-            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
-            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
           </enumValues>
         </enum>
       </enums>
