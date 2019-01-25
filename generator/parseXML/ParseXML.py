@@ -687,9 +687,9 @@ class ParseXML():
                                 'revision': rev})
 
         variants = node.getElementsByTagName('libsbml_variants')
-        variant = variants[0]
-#        if variants:
-#            variant = variants[0].getElementsByTagName('libsbml_variants')
+        variant = None
+        if variants:
+            variant = variants[0]
 
         annot_element = ''
         notes_element = ''
