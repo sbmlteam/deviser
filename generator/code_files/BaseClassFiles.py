@@ -61,17 +61,17 @@ class BaseClassFiles(BaseTemplateFile.BaseTemplateFile):
 
     def write_files(self):
         self.write_all_files('SBase')
-        # self.write_all_files('ListOf')
-        # self.write_all_files('ConstructorException')
-        # self.write_all_files('Reader')
-        # self.write_all_files('Writer')
-        # self.write_all_files('ErrorLog')
-        # self.write_all_files('Namespaces')
-        # self.write_all_files('Error')
-        # self.write_all_files('Visitor')
-        # self.write_all_files('TypeCodes')
-        # self.write_header('Types')
-        # self.write_header('ErrorTable')
+        self.write_all_files('ListOf')
+        self.write_all_files('ConstructorException')
+        self.write_all_files('Reader')
+        self.write_all_files('Writer')
+        self.write_all_files('ErrorLog')
+        self.write_all_files('Namespaces')
+        self.write_all_files('Error')
+        self.write_all_files('Visitor')
+        self.write_all_files('TypeCodes')
+        self.write_header('Types')
+        self.write_header('ErrorTable')
 
     def write_common_files(self):
         self.write_header('common', True)

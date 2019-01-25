@@ -218,7 +218,7 @@ CaReader::readInternal (const char* content, bool isFile)
   {
     XMLInputStream stream(content, isFile, "", d->getErrorLog());
 
-    if (stream.peek().isStart() && stream.peek().getName() != "omexManifest")
+    if (stream.peek().isStart() && stream.peek().getName() != "omex")
     {
       // the root element ought to be an omex element. 
       d->getErrorLog()->logError(CaNotSchemaConformant);

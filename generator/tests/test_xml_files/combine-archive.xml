@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="Combine" fullname="Combine Archive" version="1" required="false">
-  <language name="OMEX" baseClass="CaBase" documentClass="OmexManifest" prefix="Ca" libraryName="libCombine" isPackage="false">
+  <language name="OMEX" baseClass="CaBase" documentClass="OmexManifest" prefix="Ca" libraryName="libCombine" isPackage="false" topLevelElementName="omex">
     <library_version major="1" minor="0" revision="0"/>
     <language_versions>
       <version level="1" version="1" namespace="http://identifiers.org/combine.specifications/omex-manifest"/>

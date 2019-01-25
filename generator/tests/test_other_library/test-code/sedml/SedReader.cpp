@@ -219,7 +219,7 @@ SedReader::readInternal (const char* content, bool isFile)
   {
     XMLInputStream stream(content, isFile, "", d->getErrorLog());
 
-    if (stream.peek().isStart() && stream.peek().getName() != "sedml")
+    if (stream.peek().isStart() && stream.peek().getName() != "sedML")
     {
       // the root element ought to be an sedml element. 
       d->getErrorLog()->logError(SedNotSchemaConformant);

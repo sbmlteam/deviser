@@ -226,8 +226,7 @@ def set_globals(lang, base, doc, prfix, lib, is_pack, pkg_prefix,
         if not doc.startswith(prefix):
             document_class = '{0}{1}'.format(prefix, doc)
 
-    global top_level_element_name
-    if top_name != '':
+    if top_name and top_name != '':
         top_level_element_name = top_name
     global package_prefix
     if pkg_prefix:

@@ -2169,7 +2169,7 @@ CaBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         {
           unsigned int errorId =
                              this->getErrorLog()->getError(n)->getErrorId();
-          if ( errorId == CombinemlCaOmexManifestAllowedCoreAttributes
+          if ( errorId == CombinemlOmexManifestAllowedCoreAttributes
             || errorId == InvalidNamespaceOnCa)
           {
             errorLoggedAlready = true;
@@ -3168,6 +3168,15 @@ CaBase::getElementNamespace() const
 /** @endcond */
 
 #endif /* __cplusplus */
+
+
+LIBCOMBINE_EXTERN
+int
+CaBase_getTypeCode (const CaBase_t *sb)
+{
+  return (sb != NULL) ? sb->getTypeCode() : OMEX_UNKNOWN;
+}
+
 
 LIBCOMBINE_EXTERN
 const char *
