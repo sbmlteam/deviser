@@ -3148,6 +3148,15 @@ SBase::getElementNamespace() const
 
 #endif /* __cplusplus */
 
+
+LIBSBML_EXTERN
+int
+SBase_getTypeCode (const SBase_t *sb)
+{
+  return (sb != NULL) ? sb->getTypeCode() : SBML_UNKNOWN;
+}
+
+
 LIBSBML_EXTERN
 const char *
 SBase_getMetaId (SBase_t *sb)
