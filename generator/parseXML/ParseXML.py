@@ -651,7 +651,7 @@ class ParseXML():
         prefix = self.get_value(node, 'prefix')
         library_name = self.get_value(node, 'libraryName')
         pkg_prefix = self.get_value(node, 'pkg_prefix')
-#        annot_element = self.get_value(node, 'annotationElementName')
+        annot_element = self.get_value(node, 'annotationElementName')
         uses_ASTNode = self.get_bool_value(self, node, 'uses_ASTNode')
         uses_XMLNode = self.get_bool_value(self, node, 'uses_XMLNode')
 
@@ -686,21 +686,21 @@ class ParseXML():
                                 'minor': minor,
                                 'revision': rev})
 
-        variants = node.getElementsByTagName('libsbml_variants')
-        variant = None
-        if variants:
-            variant = variants[0]
+        # variants = node.getElementsByTagName('libsbml_variants')
+        # variant = None
+        # if variants:
+        #     variant = variants[0]
 
-        annot_element = ''
+        # annot_element = ''
         notes_element = ''
         use_id = True
-        use_name = True
-        if variant:
-            base_node = variant.getElementsByTagName('base')
-            annot_element = self.get_value(base_node[0], 'annotationElementName')
-            notes_element = self.get_value(base_node[0], 'notesElementName')
-            use_id = self.get_bool_value(self, base_node[0], 'include_id')
-            use_name = self.get_bool_value(self, base_node[0], 'include_name')
+        use_name = False
+        # if variant:
+        #     base_node = variant.getElementsByTagName('base')
+        #     annot_element = self.get_value(base_node[0], 'annotationElementName')
+        #     notes_element = self.get_value(base_node[0], 'notesElementName')
+        #     use_id = self.get_bool_value(self, base_node[0], 'include_id')
+        #     use_name = self.get_bool_value(self, base_node[0], 'include_name')
 
         # some sanity checking
         if not language or language == '':
