@@ -2116,7 +2116,7 @@ SBase::read (<NS>XMLInputStream& stream)
    * thus the MathML reader can find out what level/version
    * of SBML_Lang it is parsing
    */
-  if (element.getName() == "top-level-name")
+  if (element.getName() == "toplevelname")
   {
  //   stream.setSBMLNamespaces(this->getSBMLNamespaces());
     // need to check that any prefix on the sbmlns also occurs on element
@@ -2582,7 +2582,7 @@ SBase::readAttributes (const <NS>XMLAttributes& attributes,
     // if we happen to be on the sbml element (document) then
     // getPrefix() and mURI have not been set and just return defaults
     // thus a prefix does not appear to come from the right place !!!
-    if (!prefix.empty() && getElementName() == "top-level-name")
+    if (!prefix.empty() && getElementName() == "toplevelname")
     {
       if (!expectedAttributes.hasAttribute(name))
       {

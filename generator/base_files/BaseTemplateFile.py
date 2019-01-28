@@ -196,8 +196,6 @@ class BaseTemplateFile:
         if lowerlibname.startswith('lib'):
             nonlibname = lowerlibname[3:]
         line = re.sub('nonlibsbml', nonlibname, line)
-        if global_variables.top_level_element_name:
-            line = re.sub('top-level-name', global_variables.top_level_element_name, line)
         line = re.sub('SBase', global_variables.std_base, line)
         line = re.sub('LIBSBML', global_variables.library_name.upper(), line)
         line = re.sub('LibSBML', strFunctions.upper_first(global_variables.library_name), line)
@@ -213,7 +211,7 @@ class BaseTemplateFile:
         #                                    strFunctions.remove_prefix(global_variables.document_class).upper())
         line = re.sub('SBML_DOCUMENT', doctype, line)
         line = re.sub('SBMLDocument', global_variables.document_class, line)
-        line = re.sub('toplevelname', strFunctions.lower_first(global_variables.top_level_element_name), line)
+        line = re.sub('toplevelname', global_variables.top_level_element_name, line)
         line = re.sub('CAT_SBML',
                       'CAT_{0}'.format(global_variables.language.upper()), line)
         line = re.sub('SBML_Lang',
