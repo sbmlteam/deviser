@@ -577,7 +577,7 @@ SedRepeatedTask::getTaskChangeByRange(const std::string& sid)
  * Adds a copy of the given SedSetValue to this SedRepeatedTask.
  */
 int
-SedRepeatedTask::addSetValue(const SedSetValue* ssv)
+SedRepeatedTask::addTaskChange(const SedSetValue* ssv)
 {
   if (ssv == NULL)
   {
@@ -626,7 +626,7 @@ SedRepeatedTask::getNumTaskChanges() const
  * returns the SedSetValue object created.
  */
 SedSetValue*
-SedRepeatedTask::createSetValue()
+SedRepeatedTask::createTaskChange()
 {
   SedSetValue* ssv = NULL;
 
@@ -640,6 +640,7 @@ SedRepeatedTask::createSetValue()
 
   if (ssv != NULL)
   {
+    ssv->setElementName("taskChange");
     mSetValues.appendAndOwn(ssv);
   }
 
@@ -652,7 +653,7 @@ SedRepeatedTask::createSetValue()
  * to it.
  */
 SedSetValue*
-SedRepeatedTask::removeSetValue(unsigned int n)
+SedRepeatedTask::removeTaskChange(unsigned int n)
 {
   return mSetValues.remove(n);
 }
