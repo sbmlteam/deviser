@@ -435,6 +435,24 @@ public:
 
 
   /**
+   * Creates a new SedDataRange object, adds it to this SedRepeatedTask object
+   * and returns the SedDataRange object created.
+   *
+   * @return a new SedDataRange object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addRange(const SedRange* object)
+   * @see getRange(const std::string& sid)
+   * @see getRange(unsigned int n)
+   * @see getNumRanges()
+   * @see removeRange(const std::string& sid)
+   * @see removeRange(unsigned int n)
+   */
+  SedDataRange* createDataRange();
+
+
+  /**
    * Removes the nth SedRange from this SedRepeatedTask and returns a pointer
    * to it.
    *
@@ -467,10 +485,10 @@ public:
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
-   * @see getSedRange(const std::string& sid)
-   * @see getSedRange(unsigned int n)
+   * @see getRange(const std::string& sid)
+   * @see getRange(unsigned int n)
    * @see getNumRanges()
-   * @see removeSedRange(unsigned int n)
+   * @see removeRange(unsigned int n)
    */
   SedRange* removeRange(const std::string& sid);
 
@@ -482,13 +500,13 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
   const SedListOfSetValues* getListOfTaskChanges() const;
 
@@ -500,13 +518,13 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
   SedListOfSetValues* getListOfTaskChanges();
 
@@ -522,12 +540,12 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
   SedSetValue* getTaskChange(unsigned int n);
 
@@ -543,12 +561,12 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
   const SedSetValue* getTaskChange(unsigned int n) const;
 
@@ -565,7 +583,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedSetValue* getTaskChangeByModelReference(const std::string& sid) const;
+  const SedSetValue* getTaskChangeByModelReference(const std::string& sid)
+    const;
 
 
   /**
@@ -629,14 +648,14 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
-  int addSetValue(const SedSetValue* ssv);
+  int addTaskChange(const SedSetValue* ssv);
 
 
   /**
@@ -644,12 +663,12 @@ public:
    *
    * @return the number of SedSetValue objects in this SedRepeatedTask.
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
   unsigned int getNumTaskChanges() const;
 
@@ -662,14 +681,14 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
+   * @see addTaskChange(const SedSetValue* object)
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
-   * @see removeSetValue(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
    */
-  SedSetValue* createSetValue();
+  SedSetValue* createTaskChange();
 
 
   /**
@@ -683,14 +702,14 @@ public:
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @see addSetValue(const SedSetValue* object)
-   * @see createSetValue()
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
-   * @see removeSetValue(const std::string& sid)
+   * @see removeTaskChange(const std::string& sid)
    */
-  SedSetValue* removeSetValue(unsigned int n);
+  SedSetValue* removeTaskChange(unsigned int n);
 
 
   /**
@@ -1746,6 +1765,24 @@ SedRepeatedTask_createFunctionalRange(SedRepeatedTask_t* srt);
 
 
 /**
+ * Creates a new SedDataRange_t object, adds it to this SedRepeatedTask_t
+ * object and returns the SedDataRange_t object created.
+ *
+ * @param srt the SedRepeatedTask_t structure to which the SedDataRange_t
+ * should be added.
+ *
+ * @return a new SedDataRange_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedDataRange_t*
+SedRepeatedTask_createDataRange(SedRepeatedTask_t* srt);
+
+
+/**
  * Removes the nth SedRange_t from this SedRepeatedTask_t and returns a pointer
  * to it.
  *
@@ -1795,13 +1832,13 @@ SedRepeatedTask_removeRangeById(SedRepeatedTask_t* srt, const char* sid);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see SedRepeatedTask_addSetValue()
- * @see SedRepeatedTask_createSetValue()
+ * @see SedRepeatedTask_addTaskChange()
+ * @see SedRepeatedTask_createTaskChange()
  * @see SedRepeatedTask_getTaskChangeById()
  * @see SedRepeatedTask_getTaskChange()
  * @see SedRepeatedTask_getNumTaskChanges()
- * @see SedRepeatedTask_removeSetValueById()
- * @see SedRepeatedTask_removeSetValue()
+ * @see SedRepeatedTask_removeTaskChangeById()
+ * @see SedRepeatedTask_removeTaskChange()
  *
  * @memberof SedRepeatedTask_t
  */
@@ -1849,7 +1886,7 @@ SedRepeatedTask_getTaskChange(SedRepeatedTask_t* srt, unsigned int n);
 LIBSEDML_EXTERN
 SedSetValue_t*
 SedRepeatedTask_getTaskChangeByModelReference(SedRepeatedTask_t* srt,
-                                            const char *sid);
+                                              const char *sid);
 
 
 /**
@@ -1894,7 +1931,8 @@ SedRepeatedTask_getTaskChangeByRange(SedRepeatedTask_t* srt, const char *sid);
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addSetValue(SedRepeatedTask_t* srt, const SedSetValue_t* ssv);
+SedRepeatedTask_addTaskChange(SedRepeatedTask_t* srt,
+                              const SedSetValue_t* ssv);
 
 
 /**
@@ -1926,7 +1964,7 @@ SedRepeatedTask_getNumTaskChanges(SedRepeatedTask_t* srt);
  */
 LIBSEDML_EXTERN
 SedSetValue_t*
-SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt);
+SedRepeatedTask_createTaskChange(SedRepeatedTask_t* srt);
 
 
 /**
@@ -1946,7 +1984,7 @@ SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt);
  */
 LIBSEDML_EXTERN
 SedSetValue_t*
-SedRepeatedTask_removeSetValue(SedRepeatedTask_t* srt, unsigned int n);
+SedRepeatedTask_removeTaskChange(SedRepeatedTask_t* srt, unsigned int n);
 
 
 /**

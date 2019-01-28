@@ -37,6 +37,7 @@
 #include <sedml/SedUniformRange.h>
 #include <sedml/SedVectorRange.h>
 #include <sedml/SedFunctionalRange.h>
+#include <sedml/SedDataRange.h>
 
 
 using namespace std;
@@ -437,6 +438,32 @@ SedRepeatedTask::createFunctionalRange()
   }
 
   return sfr;
+}
+
+
+/*
+ * Creates a new SedDataRange object, adds it to this SedRepeatedTask object
+ * and returns the SedDataRange object created.
+ */
+SedDataRange*
+SedRepeatedTask::createDataRange()
+{
+  SedDataRange* sdr = NULL;
+
+  try
+  {
+    sdr = new SedDataRange(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sdr != NULL)
+  {
+    mRanges.appendAndOwn(sdr);
+  }
+
+  return sdr;
 }
 
 

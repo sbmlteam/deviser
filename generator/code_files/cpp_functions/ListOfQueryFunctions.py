@@ -480,8 +480,8 @@ class ListOfQueryFunctions():
         additional = ['@copydetails doc_returned_unowned_pointer']
 
         # create function declaration
-        used_c_name = strFunctions.remove_prefix(self.child_name)
-        used_cpp_name = strFunctions.remove_prefix(self.object_child_name)
+        used_c_name = strFunctions.remove_prefix(self.used_child_name)
+        used_cpp_name = used_c_name
         if self.is_cpp_api:
             if self.is_list_of:
                 function = 'getBy{0}'.format(element)
