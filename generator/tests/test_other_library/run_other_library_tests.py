@@ -429,11 +429,11 @@ def testSedML(fail):
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
-    num = 6
+    num = 33
     class_name = 'SedRepeatedTask'
     list_of = ''
     test_case = 'attribute with different xml name'
-#    fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 7
@@ -557,9 +557,11 @@ def main():
         fail = testCombine(fail)
     else:
         name = 'test_sedml'
-        class_name = 'sedmlfwd'
-        test_case = 'forward declarations'
-        fail += run_forward(name, class_name, test_case)
+        num = 33
+        class_name = 'SedRepeatedTask'
+        list_of = ''
+        test_case = 'attribute with different xml name'
+        fail += run_test(name, num, class_name, test_case, list_of)
 
 
 

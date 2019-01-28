@@ -81,6 +81,7 @@ SedDocument::SedDocument(unsigned int level, unsigned int version)
   setLevel(level);
   setVersion(version);
   setSedDocument(this);
+  mAbstractTasks.setElementName("task");
   connectToChild();
 }
 
@@ -106,6 +107,7 @@ SedDocument::SedDocument(SedNamespaces *sedmlns)
   setLevel(sedmlns->getLevel());
   setVersion(sedmlns->getVersion());
   setSedDocument(this);
+  mAbstractTasks.setElementName("task");
   connectToChild();
 }
 
@@ -2311,7 +2313,7 @@ SedDocument::getNumObjects(const std::string& elementName)
   {
     return getNumSimulations();
   }
-  else if (elementName == "abstractTask")
+  else if (elementName == "task")
   {
     return getNumTasks();
   }
@@ -2357,7 +2359,7 @@ SedDocument::getObject(const std::string& elementName, unsigned int index)
   {
     return getSimulation(index);
   }
-  else if (elementName == "abstractTask")
+  else if (elementName == "task")
   {
     return getTask(index);
   }

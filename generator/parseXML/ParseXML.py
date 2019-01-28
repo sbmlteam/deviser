@@ -375,7 +375,13 @@ class ParseXML():
         # if the type if lo_element we actually want the name to be
         # just that of the element
         if attr_type == 'lo_element':
-            attr_name = strFunctions.lower_first(attr_element)
+
+            if attr_name.startswith('listOf') or attr_name.startswith('ListOf'):
+                attr_name = strFunctions.lower_first(attr_element)
+            elif attr_name.endswith('s'):
+                plural = strFunctions.plural(strFunctions.lower_first(attr_element))
+                if plural == attr_name:
+                    attr_name = strFunctions.lower_first(attr_element)
 
         # xml name defaults to name
         attr_xml_name = self.get_value(node, 'xmlName')

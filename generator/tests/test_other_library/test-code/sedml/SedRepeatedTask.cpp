@@ -66,6 +66,7 @@ SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
   , mSubTasks (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  mSetValues.setElementName("taskChange");
   connectToChild();
 }
 
@@ -84,6 +85,7 @@ SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
   , mSubTasks (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
+  mSetValues.setElementName("taskChange");
   connectToChild();
 }
 
@@ -1236,9 +1238,13 @@ SedRepeatedTask::createChildObject(const std::string& elementName)
   {
     return createFunctionalRange();
   }
-  else if (elementName == "setValue")
+  else if (elementName == "dataRange")
   {
-    return createSetValue();
+    return createDataRange();
+  }
+  else if (elementName == "taskChange")
+  {
+    return createTaskChange();
   }
   else if (elementName == "subTask")
   {
@@ -1276,10 +1282,15 @@ SedRepeatedTask::addChildObject(const std::string& elementName,
   {
     return addRange((const SedRange*)(element));
   }
-  else if (elementName == "setValue" && element->getTypeCode() ==
+  else if (elementName == "dataRange" && element->getTypeCode() ==
+    SEDML_DATA_RANGE)
+  {
+    return addRange((const SedRange*)(element));
+  }
+  else if (elementName == "taskChange" && element->getTypeCode() ==
     SEDML_TASK_SETVALUE)
   {
-    return addSetValue((const SedSetValue*)(element));
+    return addTaskChange((const SedSetValue*)(element));
   }
   else if (elementName == "subTask" && element->getTypeCode() ==
     SEDML_TASK_SUBTASK)
@@ -1316,13 +1327,17 @@ SedRepeatedTask::removeChildObject(const std::string& elementName,
   {
     return removeRange(id);
   }
-  else if (elementName == "setValue")
+  else if (elementName == "dataRange")
+  {
+    return removeRange(id);
+  }
+  else if (elementName == "taskChange")
   {
     for (unsigned int i = 0; i < getNumTaskChanges(); i++)
     {
       if (getTaskChange(i)->getId() == id)
       {
-        return removeSetValue(i);
+        return removeTaskChange(i);
       }
     }
   }
@@ -1358,7 +1373,7 @@ SedRepeatedTask::getNumObjects(const std::string& elementName)
   {
     return getNumRanges();
   }
-  else if (elementName == "setValue")
+  else if (elementName == "taskChange")
   {
     return getNumTaskChanges();
   }
@@ -1388,7 +1403,7 @@ SedRepeatedTask::getObject(const std::string& elementName, unsigned int index)
   {
     return getRange(index);
   }
-  else if (elementName == "setValue")
+  else if (elementName == "taskChange")
   {
     return getTaskChange(index);
   }
@@ -1863,6 +1878,18 @@ SedRepeatedTask_createFunctionalRange(SedRepeatedTask_t* srt)
 
 
 /*
+ * Creates a new SedDataRange_t object, adds it to this SedRepeatedTask_t
+ * object and returns the SedDataRange_t object created.
+ */
+LIBSEDML_EXTERN
+SedDataRange_t*
+SedRepeatedTask_createDataRange(SedRepeatedTask_t* srt)
+{
+  return (srt != NULL) ? srt->createDataRange() : NULL;
+}
+
+
+/*
  * Removes the nth SedRange_t from this SedRepeatedTask_t and returns a pointer
  * to it.
  */
@@ -1916,7 +1943,7 @@ SedRepeatedTask_getTaskChange(SedRepeatedTask_t* srt, unsigned int n)
 LIBSEDML_EXTERN
 SedSetValue_t*
 SedRepeatedTask_getTaskChangeByModelReference(SedRepeatedTask_t* srt,
-                                            const char *sid)
+                                              const char *sid)
 {
   return (srt != NULL && sid != NULL) ? srt->getTaskChangeByModelReference(sid) :
     NULL;
@@ -1940,9 +1967,10 @@ SedRepeatedTask_getTaskChangeByRange(SedRepeatedTask_t* srt, const char *sid)
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addSetValue(SedRepeatedTask_t* srt, const SedSetValue_t* ssv)
+SedRepeatedTask_addTaskChange(SedRepeatedTask_t* srt,
+                              const SedSetValue_t* ssv)
 {
-  return (srt != NULL) ? srt->addSetValue(ssv) : LIBSEDML_INVALID_OBJECT;
+  return (srt != NULL) ? srt->addTaskChange(ssv) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1963,9 +1991,9 @@ SedRepeatedTask_getNumTaskChanges(SedRepeatedTask_t* srt)
  */
 LIBSEDML_EXTERN
 SedSetValue_t*
-SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt)
+SedRepeatedTask_createTaskChange(SedRepeatedTask_t* srt)
 {
-  return (srt != NULL) ? srt->createSetValue() : NULL;
+  return (srt != NULL) ? srt->createTaskChange() : NULL;
 }
 
 
@@ -1975,9 +2003,9 @@ SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt)
  */
 LIBSEDML_EXTERN
 SedSetValue_t*
-SedRepeatedTask_removeSetValue(SedRepeatedTask_t* srt, unsigned int n)
+SedRepeatedTask_removeTaskChange(SedRepeatedTask_t* srt, unsigned int n)
 {
-  return (srt != NULL) ? srt->removeSetValue(n) : NULL;
+  return (srt != NULL) ? srt->removeTaskChange(n) : NULL;
 }
 
 

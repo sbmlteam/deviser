@@ -2563,8 +2563,8 @@ static const packageErrorTableEntry renderErrorTable[] =
     "optional, but if present, these container objects must not be empty.The "
     "<listOfColorDefinitions> must contain at least zero instances of the "
     "<colorDefinition> object.The <listOfGradientBases> must contain at least "
-    "one instances of the <gradientBase> object.The <listOfLineEndings> must "
-    "contain at least one instances of the <lineEnding> object.",
+    "one instances of the <gradientDefinition> object.The <listOfLineEndings> "
+    "must contain at least one instances of the <lineEnding> object.",
     { "L3V1 Render V1 Section"
     }
   },

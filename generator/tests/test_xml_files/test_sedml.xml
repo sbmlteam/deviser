@@ -295,7 +295,7 @@
             <attribute name="rangeId" required="false" type="SIdRef" element="Range" xmlName="range" abstract="false"/>
             <attribute name="resetModel" required="false" type="bool" abstract="false"/>
             <attribute name="range" required="false" type="lo_element" element="Range" abstract="true"/>
-            <attribute name="taskChange" required="false" type="lo_element" element="SetValue" abstract="false" xmlName="taskChange"/>
+            <attribute name="taskChange" required="false" type="lo_element" element="SetValue" abstract="false"/>
             <attribute name="subTask" required="false" type="lo_element" element="SubTask" abstract="false"/>
           </attributes>
         </element>
