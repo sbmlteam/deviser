@@ -571,6 +571,93 @@ Fred_isValidString(const char* code)
 }
 
 
+static
+const char* SBML_EXTRA_LONG_STRINGS[] =
+{
+  "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+, "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ"
+, "invalid ExtraLong value"
+};
+
+
+/*
+ * Returns the string version of the provided #ExtraLong_t enumeration.
+ */
+LIBSBML_EXTERN
+const char*
+ExtraLong_toString(ExtraLong_t el)
+{
+  int min = TEST_EXTRALONG_FRANK;
+  int max = TEST_EXTRALONG_INVALID;
+
+  if (el < min || el > max)
+  {
+    return "(Unknown ExtraLong value)";
+  }
+
+  return SBML_EXTRA_LONG_STRINGS[el - min];
+}
+
+
+/*
+ * Returns the #ExtraLong_t enumeration corresponding to the given string or
+ * @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t} if there is no such
+ * match.
+ */
+LIBSBML_EXTERN
+ExtraLong_t
+ExtraLong_fromString(const char* code)
+{
+  static int size =
+    sizeof(SBML_EXTRA_LONG_STRINGS)/sizeof(SBML_EXTRA_LONG_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SBML_EXTRA_LONG_STRINGS[i])
+    {
+      return (ExtraLong_t)(i);
+    }
+  }
+
+  return TEST_EXTRALONG_INVALID;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ExtraLong_t is valid.
+ */
+LIBSBML_EXTERN
+int
+ExtraLong_isValid(ExtraLong_t el)
+{
+  int min = TEST_EXTRALONG_FRANK;
+  int max = TEST_EXTRALONG_INVALID;
+
+  if (el < min || el >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ExtraLong_t.
+ */
+LIBSBML_EXTERN
+int
+ExtraLong_isValidString(const char* code)
+{
+  return ExtraLong_isValid(ExtraLong_fromString(code));
+}
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

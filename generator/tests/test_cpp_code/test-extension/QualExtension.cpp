@@ -529,8 +529,7 @@ LIBSBML_EXTERN
 TransitionOutputEffect_t
 TransitionOutputEffect_fromString(const char* code)
 {
-  static int size =
-    sizeof(SBML_TRANSITION_OUTPUT_EFFECT_STRINGS)/sizeof(SBML_TRANSITION_OUTPUT_EFFECT_STRINGS[0]);
+  static int size = sizeof(SBML_TRANSITION_OUTPUT_EFFECT_STRINGS)/sizeof(SBML_TRANSITION_OUTPUT_EFFECT_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
@@ -618,8 +617,7 @@ LIBSBML_EXTERN
 TransitionInputEffect_t
 TransitionInputEffect_fromString(const char* code)
 {
-  static int size =
-    sizeof(SBML_TRANSITION_INPUT_EFFECT_STRINGS)/sizeof(SBML_TRANSITION_INPUT_EFFECT_STRINGS[0]);
+  static int size = sizeof(SBML_TRANSITION_INPUT_EFFECT_STRINGS)/sizeof(SBML_TRANSITION_INPUT_EFFECT_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)

@@ -875,6 +875,8 @@ class BaseCppFile(BaseFile.BaseFile):
         self.write_line('static')
         self.write_line('const char* {0}[] ='.format(name))
         self.write_line('{')
+        # here we directly write out the line so that deviser does not try and
+        # chop it up into lines of a given length
         self.file_out.write('  \"{0}\"\n'.format(enum_str[0]))
         for i in range(1, number):
             self.file_out.write(', \"{0}\"\n'.format(enum_str[i]))

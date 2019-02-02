@@ -168,6 +168,11 @@ class BaseFile:
                             reopen_quotes = True
                         lines.append(temp)
                         temp = ''
+                    elif len(words[i-1]) > (max_length-5):
+                        newline = temp
+                        lines.append(newline)
+                        newline = ''
+                        temp = ''
                     else:
                         rollback = True
                         if in_quotes:
@@ -201,6 +206,7 @@ class BaseFile:
                         temp = ''
                         if rollback:
                             i -= 1
+                            rollback = False
             else:
                 # dont break between @c and true etc
                 # remove @c and go back a word
@@ -482,7 +488,7 @@ class BaseFile:
             # dont write the invalid block
             for i in range(0, len(enum['values'])-1):
                 value = enum['values'][i]
-                self.write_comment_line('<li> @c "{0}", TODO:add description'.format(value['value']))
+                self.file_out.write(' * <li> @c "{0}", TODO:add description\n'.format(value['value']))
                 self.write_blank_comment_line()
             self.write_comment_line('</ul>')
 

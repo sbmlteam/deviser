@@ -57,6 +57,7 @@ ClassThree::ClassThree(unsigned int level,
   , mNumber (TEST_ENUM_INVALID)
   , mBadName (TEST_FRED_INVALID)
   , mOtherNum (TEST_ENUM_INVALID)
+  , mLongEnum (TEST_EXTRALONG_INVALID)
 {
   setSBMLNamespacesAndOwn(new TestPkgNamespaces(level, version, pkgVersion));
 }
@@ -70,6 +71,7 @@ ClassThree::ClassThree(TestPkgNamespaces *testns)
   , mNumber (TEST_ENUM_INVALID)
   , mBadName (TEST_FRED_INVALID)
   , mOtherNum (TEST_ENUM_INVALID)
+  , mLongEnum (TEST_EXTRALONG_INVALID)
 {
   setElementNamespace(testns->getURI());
   loadPlugins(testns);
@@ -84,6 +86,7 @@ ClassThree::ClassThree(const ClassThree& orig)
   , mNumber ( orig.mNumber )
   , mBadName ( orig.mBadName )
   , mOtherNum ( orig.mOtherNum )
+  , mLongEnum ( orig.mLongEnum )
 {
 }
 
@@ -100,6 +103,7 @@ ClassThree::operator=(const ClassThree& rhs)
     mNumber = rhs.mNumber;
     mBadName = rhs.mBadName;
     mOtherNum = rhs.mOtherNum;
+    mLongEnum = rhs.mLongEnum;
   }
 
   return *this;
@@ -209,6 +213,27 @@ ClassThree::getOtherNumAsString() const
 
 
 /*
+ * Returns the value of the "longEnum" attribute of this ClassThree.
+ */
+ExtraLong_t
+ClassThree::getLongEnum() const
+{
+  return mLongEnum;
+}
+
+
+/*
+ * Returns the value of the "longEnum" attribute of this ClassThree.
+ */
+std::string
+ClassThree::getLongEnumAsString() const
+{
+  std::string code_str = ExtraLong_toString(mLongEnum);
+  return code_str;
+}
+
+
+/*
  * Predicate returning @c true if this ClassThree's "number" attribute is set.
  */
 bool
@@ -246,6 +271,17 @@ bool
 ClassThree::isSetOtherNum() const
 {
   return (mOtherNum != TEST_ENUM_INVALID);
+}
+
+
+/*
+ * Predicate returning @c true if this ClassThree's "longEnum" attribute is
+ * set.
+ */
+bool
+ClassThree::isSetLongEnum() const
+{
+  return (mLongEnum != TEST_EXTRALONG_INVALID);
 }
 
 
@@ -394,6 +430,42 @@ ClassThree::setOtherNum(const std::string& otherNum)
 
 
 /*
+ * Sets the value of the "longEnum" attribute of this ClassThree.
+ */
+int
+ClassThree::setLongEnum(const ExtraLong_t longEnum)
+{
+  if (ExtraLong_isValid(longEnum) == 0)
+  {
+    mLongEnum = TEST_EXTRALONG_INVALID;
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mLongEnum = longEnum;
+    return LIBSBML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "longEnum" attribute of this ClassThree.
+ */
+int
+ClassThree::setLongEnum(const std::string& longEnum)
+{
+  mLongEnum = ExtraLong_fromString(longEnum.c_str());
+
+  if (mLongEnum == TEST_EXTRALONG_INVALID)
+  {
+    return LIBSBML_INVALID_ATTRIBUTE_VALUE;
+  }
+
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
  * Unsets the value of the "number" attribute of this ClassThree.
  */
 int
@@ -433,6 +505,17 @@ int
 ClassThree::unsetOtherNum()
 {
   mOtherNum = TEST_ENUM_INVALID;
+  return LIBSBML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "longEnum" attribute of this ClassThree.
+ */
+int
+ClassThree::unsetLongEnum()
+{
+  mLongEnum = TEST_EXTRALONG_INVALID;
   return LIBSBML_OPERATION_SUCCESS;
 }
 
@@ -652,6 +735,11 @@ ClassThree::getAttribute(const std::string& attributeName,
     value = getOtherNumAsString();
     return_value = LIBSBML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "longEnum")
+  {
+    value = getLongEnumAsString();
+    return_value = LIBSBML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -686,6 +774,10 @@ ClassThree::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "otherNum")
   {
     value = isSetOtherNum();
+  }
+  else if (attributeName == "longEnum")
+  {
+    value = isSetLongEnum();
   }
 
   return value;
@@ -790,6 +882,10 @@ ClassThree::setAttribute(const std::string& attributeName,
   {
     return_value = setOtherNum(value);
   }
+  else if (attributeName == "longEnum")
+  {
+    return_value = setLongEnum(value);
+  }
 
   return return_value;
 }
@@ -824,6 +920,10 @@ ClassThree::unsetAttribute(const std::string& attributeName)
   {
     value = unsetOtherNum();
   }
+  else if (attributeName == "longEnum")
+  {
+    value = unsetLongEnum();
+  }
 
   return value;
 }
@@ -849,6 +949,8 @@ ClassThree::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("badName");
 
   attributes.add("otherNum");
+
+  attributes.add("longEnum");
 }
 
 /** @endcond */
@@ -1043,6 +1145,40 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
       }
     }
   }
+
+  // 
+  // longEnum enum (use = "optional" )
+  // 
+
+  std::string longEnum;
+  assigned = attributes.readInto("longEnum", longEnum);
+
+  if (assigned == true)
+  {
+    if (longEnum.empty() == true)
+    {
+      logEmptyString(longEnum, level, version, "<ClassThree>");
+    }
+    else
+    {
+      mLongEnum = ExtraLong_fromString(longEnum.c_str());
+
+      if (ExtraLong_isValid(mLongEnum) == 0)
+      {
+        std::string msg = "The longEnum on the <ClassThree> ";
+
+        if (isSetId())
+        {
+          msg += "with id '" + getId() + "'";
+        }
+
+        msg += "is '" + longEnum + "', which is not a valid option.";
+
+        log->logPackageError("test", TestClassThreeLongEnumMustBeExtraLongEnum,
+          pkgVersion, level, version, msg);
+      }
+    }
+  }
 }
 
 /** @endcond */
@@ -1077,6 +1213,12 @@ ClassThree::writeAttributes(XMLOutputStream& stream) const
   if (isSetOtherNum() == true)
   {
     stream.writeAttribute("otherNum", getPrefix(), Enum_toString(mOtherNum));
+  }
+
+  if (isSetLongEnum() == true)
+  {
+    stream.writeAttribute("longEnum", getPrefix(),
+      ExtraLong_toString(mLongEnum));
   }
 
   SBase::writeExtensionAttributes(stream);
@@ -1245,6 +1387,33 @@ ClassThree_getOtherNumAsString(const ClassThree_t * ct)
 
 
 /*
+ * Returns the value of the "longEnum" attribute of this ClassThree_t.
+ */
+LIBSBML_EXTERN
+ExtraLong_t
+ClassThree_getLongEnum(const ClassThree_t * ct)
+{
+  if (ct == NULL)
+  {
+    return TEST_EXTRALONG_INVALID;
+  }
+
+  return ct->getLongEnum();
+}
+
+
+/*
+ * Returns the value of the "longEnum" attribute of this ClassThree_t.
+ */
+LIBSBML_EXTERN
+char *
+ClassThree_getLongEnumAsString(const ClassThree_t * ct)
+{
+  return (char*)(ExtraLong_toString(ct->getLongEnum()));
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this ClassThree_t's "number" attribute is
  * set.
  */
@@ -1289,6 +1458,18 @@ int
 ClassThree_isSetOtherNum(const ClassThree_t * ct)
 {
   return (ct != NULL) ? static_cast<int>(ct->isSetOtherNum()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this ClassThree_t's "longEnum" attribute
+ * is set.
+ */
+LIBSBML_EXTERN
+int
+ClassThree_isSetLongEnum(const ClassThree_t * ct)
+{
+  return (ct != NULL) ? static_cast<int>(ct->isSetLongEnum()) : 0;
 }
 
 
@@ -1381,6 +1562,28 @@ ClassThree_setOtherNumAsString(ClassThree_t * ct, const char * otherNum)
 
 
 /*
+ * Sets the value of the "longEnum" attribute of this ClassThree_t.
+ */
+LIBSBML_EXTERN
+int
+ClassThree_setLongEnum(ClassThree_t * ct, ExtraLong_t longEnum)
+{
+  return (ct != NULL) ? ct->setLongEnum(longEnum) : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "longEnum" attribute of this ClassThree_t.
+ */
+LIBSBML_EXTERN
+int
+ClassThree_setLongEnumAsString(ClassThree_t * ct, const char * longEnum)
+{
+  return (ct != NULL) ? ct->setLongEnum(longEnum): LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "number" attribute of this ClassThree_t.
  */
 LIBSBML_EXTERN
@@ -1421,6 +1624,17 @@ int
 ClassThree_unsetOtherNum(ClassThree_t * ct)
 {
   return (ct != NULL) ? ct->unsetOtherNum() : LIBSBML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "longEnum" attribute of this ClassThree_t.
+ */
+LIBSBML_EXTERN
+int
+ClassThree_unsetLongEnum(ClassThree_t * ct)
+{
+  return (ct != NULL) ? ct->unsetLongEnum() : LIBSBML_INVALID_OBJECT;
 }
 
 

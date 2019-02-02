@@ -2528,8 +2528,7 @@ static const packageErrorTableEntry renderErrorTable[] =
   },
 
   // 1322908
-  {
-    RenderRenderInformationBaseReferenceRenderInformationMustBeRenderInformationBase,
+  { RenderRenderInformationBaseReferenceRenderInformationMustBeRenderInformationBase,
     "The attribute 'referenceRenderInformation' must point to "
       "RenderInformationBase object.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,

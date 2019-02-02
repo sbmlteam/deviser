@@ -291,8 +291,7 @@ CompSBMLDocumentPlugin::createExternalModelDefinition()
 ExternalModelDefinition*
 CompSBMLDocumentPlugin::removeExternalModelDefinition(unsigned int n)
 {
-  return
-    static_cast<ExternalModelDefinition*>(mExternalModelDefinitions.remove(n));
+  return static_cast<ExternalModelDefinition*>(mExternalModelDefinitions.remove(n));
 }
 
 
@@ -303,8 +302,7 @@ CompSBMLDocumentPlugin::removeExternalModelDefinition(unsigned int n)
 ExternalModelDefinition*
 CompSBMLDocumentPlugin::removeExternalModelDefinition(const std::string& sid)
 {
-  return
-    static_cast<ExternalModelDefinition*>(mExternalModelDefinitions.remove(sid));
+  return static_cast<ExternalModelDefinition*>(mExternalModelDefinitions.remove(sid));
 }
 
 
@@ -1183,8 +1181,7 @@ CompSBMLDocumentPlugin::appendFrom(const Model* model)
     return LIBSBML_INVALID_OBJECT;
   }
 
-  ret =
-    mExternalModelDefinitions.appendFrom(plug->getListOfExternalModelDefinitions());
+  ret = mExternalModelDefinitions.appendFrom(plug->getListOfExternalModelDefinitions());
 
   if (ret != LIBSBML_OPERATION_SUCCESS)
   {
@@ -1337,9 +1334,8 @@ int
 CompSBMLDocumentPlugin_addExternalModelDefinition(
                                                   CompSBMLDocumentPlugin_t*
                                                     csbmldp,
-                                                  const
-                                                    ExternalModelDefinition_t*
-                                                      emd)
+                                                  const ExternalModelDefinition_t*
+                                                    emd)
 {
   return (csbmldp != NULL) ? csbmldp->addExternalModelDefinition(emd) :
     LIBSBML_INVALID_OBJECT;

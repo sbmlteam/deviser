@@ -105,6 +105,22 @@
  * <li> @c "Two", TODO:add description
  *
  * </ul>
+ *
+ * @class doc_classthree_longEnum
+ *
+ * @par
+ * The attribute "longEnum" on a ClassThree object is used to TODO:add
+ * explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Test specification, the following are the
+ * allowable values for "longEnum":
+ * <ul>
+ * <li> @c "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3", TODO:add description
+ *
+ * <li> @c "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ", TODO:add description
+ *
+ * </ul>
  */
 
 
@@ -139,6 +155,7 @@ protected:
   Enum_t mNumber;
   Fred_t mBadName;
   Enum_t mOtherNum;
+  ExtraLong_t mLongEnum;
 
   /** @endcond */
 
@@ -330,6 +347,37 @@ public:
 
 
   /**
+   * Returns the value of the "longEnum" attribute of this ClassThree.
+   *
+   * @return the value of the "longEnum" attribute of this ClassThree as a
+   * ExtraLong_t.
+   *
+   * @copydetails doc_classthree_longEnum
+   * @if clike The value is drawn from the enumeration @ref ExtraLong_t @endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{TEST_EXTRALONG_FRANK, ExtraLong_t}
+   * @li @sbmlconstant{TEST_EXTRALONG_SARAH, ExtraLong_t}
+   * @li @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t}
+   */
+  ExtraLong_t getLongEnum() const;
+
+
+  /**
+   * Returns the value of the "longEnum" attribute of this ClassThree.
+   *
+   * @return the value of the "longEnum" attribute of this ClassThree as a
+   * string.
+   *
+   * @copydetails doc_classthree_longEnum
+   * The possible values returned by this method are:
+   * @li @c "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+   * @li @c "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ"
+   * @li @c "invalid ExtraLong value"
+   */
+  std::string getLongEnumAsString() const;
+
+
+  /**
    * Predicate returning @c true if this ClassThree's "number" attribute is
    * set.
    *
@@ -374,6 +422,18 @@ public:
    * @copydetails doc_classthree_otherNum
    */
   bool isSetOtherNum() const;
+
+
+  /**
+   * Predicate returning @c true if this ClassThree's "longEnum" attribute is
+   * set.
+   *
+   * @return @c true if this ClassThree's "longEnum" attribute has been set,
+   * otherwise @c false is returned.
+   *
+   * @copydetails doc_classthree_longEnum
+   */
+  bool isSetLongEnum() const;
 
 
   /**
@@ -501,6 +561,37 @@ public:
 
 
   /**
+   * Sets the value of the "longEnum" attribute of this ClassThree.
+   *
+   * @param longEnum @if clike ExtraLong_t@else int@endif value of the
+   * "longEnum" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_longEnum
+   */
+  int setLongEnum(const ExtraLong_t longEnum);
+
+
+  /**
+   * Sets the value of the "longEnum" attribute of this ClassThree.
+   *
+   * @param longEnum std::string& of the "longEnum" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_longEnum
+   */
+  int setLongEnum(const std::string& longEnum);
+
+
+  /**
    * Unsets the value of the "number" attribute of this ClassThree.
    *
    * @copydetails doc_returns_one_success_code
@@ -542,6 +633,17 @@ public:
    * @copydetails doc_classthree_otherNum
    */
   int unsetOtherNum();
+
+
+  /**
+   * Unsets the value of the "longEnum" attribute of this ClassThree.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_classthree_longEnum
+   */
+  int unsetLongEnum();
 
 
   /**
@@ -1167,6 +1269,51 @@ ClassThree_getOtherNumAsString(const ClassThree_t * ct);
 
 
 /**
+ * Returns the value of the "longEnum" attribute of this ClassThree_t.
+ *
+ * @param ct the ClassThree_t structure whose longEnum is sought.
+ *
+ * @return the value of the "longEnum" attribute of this ClassThree_t as a
+ * ExtraLong_t.
+ *
+ * @copydetails doc_classthree_longEnum
+ * @if clike The value is drawn from the enumeration @ref ExtraLong_t @endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{TEST_EXTRALONG_FRANK, ExtraLong_t}
+ * @li @sbmlconstant{TEST_EXTRALONG_SARAH, ExtraLong_t}
+ * @li @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t}
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+ExtraLong_t
+ClassThree_getLongEnum(const ClassThree_t * ct);
+
+
+/**
+ * Returns the value of the "longEnum" attribute of this ClassThree_t.
+ *
+ * @param ct the ClassThree_t structure whose longEnum is sought.
+ *
+ * @return the value of the "longEnum" attribute of this ClassThree_t as a
+ * const char *.
+ *
+ * @copydetails doc_returned_unowned_char
+ *
+ * @copydetails doc_classthree_longEnum
+ * The possible values returned by this method are:
+ * @li @c "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+ * @li @c "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ"
+ * @li @c "invalid ExtraLong value"
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+char *
+ClassThree_getLongEnumAsString(const ClassThree_t * ct);
+
+
+/**
  * Predicate returning @c 1 (true) if this ClassThree_t's "number" attribute is
  * set.
  *
@@ -1236,6 +1383,24 @@ ClassThree_isSetBadName(const ClassThree_t * ct);
 LIBSBML_EXTERN
 int
 ClassThree_isSetOtherNum(const ClassThree_t * ct);
+
+
+/**
+ * Predicate returning @c 1 (true) if this ClassThree_t's "longEnum" attribute
+ * is set.
+ *
+ * @param ct the ClassThree_t structure.
+ *
+ * @return @c 1 (true) if this ClassThree_t's "longEnum" attribute has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @copydetails doc_classthree_longEnum
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+int
+ClassThree_isSetLongEnum(const ClassThree_t * ct);
 
 
 /**
@@ -1407,6 +1572,48 @@ ClassThree_setOtherNumAsString(ClassThree_t * ct, const char * otherNum);
 
 
 /**
+ * Sets the value of the "longEnum" attribute of this ClassThree_t.
+ *
+ * @param ct the ClassThree_t structure.
+ *
+ * @param longEnum ExtraLong_t value of the "longEnum" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_longEnum
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+int
+ClassThree_setLongEnum(ClassThree_t * ct, ExtraLong_t longEnum);
+
+
+/**
+ * Sets the value of the "longEnum" attribute of this ClassThree_t.
+ *
+ * @param ct the ClassThree_t structure.
+ *
+ * @param longEnum const char * of the "longEnum" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_ATTRIBUTE_VALUE, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_longEnum
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+int
+ClassThree_setLongEnumAsString(ClassThree_t * ct, const char * longEnum);
+
+
+/**
  * Unsets the value of the "number" attribute of this ClassThree_t.
  *
  * @param ct the ClassThree_t structure.
@@ -1476,6 +1683,24 @@ ClassThree_unsetBadName(ClassThree_t * ct);
 LIBSBML_EXTERN
 int
 ClassThree_unsetOtherNum(ClassThree_t * ct);
+
+
+/**
+ * Unsets the value of the "longEnum" attribute of this ClassThree_t.
+ *
+ * @param ct the ClassThree_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sbmlconstant{LIBSBML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_classthree_longEnum
+ *
+ * @memberof ClassThree_t
+ */
+LIBSBML_EXTERN
+int
+ClassThree_unsetLongEnum(ClassThree_t * ct);
 
 
 /**

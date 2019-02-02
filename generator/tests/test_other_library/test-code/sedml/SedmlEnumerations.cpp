@@ -75,8 +75,7 @@ LIBSEDML_EXTERN
 MappingType_t
 MappingType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SEDML_MAPPING_TYPE_STRINGS)/sizeof(SEDML_MAPPING_TYPE_STRINGS[0]);
+  static int size = sizeof(SEDML_MAPPING_TYPE_STRINGS)/sizeof(SEDML_MAPPING_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
@@ -528,8 +527,7 @@ LIBSEDML_EXTERN
 SurfaceType_t
 SurfaceType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SEDML_SURFACE_TYPE_STRINGS)/sizeof(SEDML_SURFACE_TYPE_STRINGS[0]);
+  static int size = sizeof(SEDML_SURFACE_TYPE_STRINGS)/sizeof(SEDML_SURFACE_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
@@ -615,8 +613,7 @@ LIBSEDML_EXTERN
 ExperimentType_t
 ExperimentType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
+  static int size = sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)

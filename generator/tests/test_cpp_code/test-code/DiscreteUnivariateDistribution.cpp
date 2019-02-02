@@ -1389,8 +1389,7 @@ int
 DiscreteUnivariateDistribution_setTruncationLowerBound(
                                                        DiscreteUnivariateDistribution_t
                                                          * dud,
-                                                       const UncertBound_t*
-                                                         truncationLowerBound)
+                                                       const UncertBound_t* truncationLowerBound)
 {
   return (dud != NULL) ? dud->setTruncationLowerBound(truncationLowerBound) :
     LIBSBML_INVALID_OBJECT;
@@ -1406,8 +1405,7 @@ int
 DiscreteUnivariateDistribution_setTruncationUpperBound(
                                                        DiscreteUnivariateDistribution_t
                                                          * dud,
-                                                       const UncertBound_t*
-                                                         truncationUpperBound)
+                                                       const UncertBound_t* truncationUpperBound)
 {
   return (dud != NULL) ? dud->setTruncationUpperBound(truncationUpperBound) :
     LIBSBML_INVALID_OBJECT;

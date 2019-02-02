@@ -458,8 +458,7 @@ CoreversmultipkgExtension::getErrorTable(unsigned int index) const
 unsigned int
 CoreversmultipkgExtension::getErrorTableIndex(unsigned int errorId) const
 {
-  unsigned int tableSize =
-    sizeof(coreversmultipkgErrorTable)/sizeof(coreversmultipkgErrorTable[0]);
+  unsigned int tableSize = sizeof(coreversmultipkgErrorTable)/sizeof(coreversmultipkgErrorTable[0]);
   unsigned int index = 0;
 
   for (unsigned int i = 0; i < tableSize; i++)

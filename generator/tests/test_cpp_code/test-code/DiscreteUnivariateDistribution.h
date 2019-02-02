@@ -97,8 +97,7 @@ public:
                                    DistribExtension::getDefaultLevel(),
                                  unsigned int version =
                                    DistribExtension::getDefaultVersion(),
-                                 unsigned int pkgVersion =
-                                   DistribExtension::getDefaultPackageVersion());
+                                 unsigned int pkgVersion = DistribExtension::getDefaultPackageVersion());
 
 
   /**
@@ -1041,8 +1040,7 @@ int
 DiscreteUnivariateDistribution_setTruncationLowerBound(
                                                        DiscreteUnivariateDistribution_t
                                                          * dud,
-                                                       const UncertBound_t*
-                                                         truncationLowerBound);
+                                                       const UncertBound_t* truncationLowerBound);
 
 
 /**
@@ -1066,8 +1064,7 @@ int
 DiscreteUnivariateDistribution_setTruncationUpperBound(
                                                        DiscreteUnivariateDistribution_t
                                                          * dud,
-                                                       const UncertBound_t*
-                                                         truncationUpperBound);
+                                                       const UncertBound_t* truncationUpperBound);
 
 
 /**

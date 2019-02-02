@@ -135,8 +135,7 @@ main(int argc, char** argv)
 
   Compartment* compartment = document->createCompartment();
 
-  SpatialCompartmentPlugin* cplugin =
-    static_cast<SpatialCompartmentPlugin*>(compartment->getPlugin("spatial"));
+  SpatialCompartmentPlugin* cplugin = static_cast<SpatialCompartmentPlugin*>(compartment->getPlugin("spatial"));
 
   CompartmentMapping* cm = cplugin->createCompartmentMapping();
 

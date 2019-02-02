@@ -964,9 +964,8 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
       }
 
       msg += " is '" + mComponent + "', which does not conform to the syntax.";
-      log->logPackageError("multi",
-        MultiOutwardBindingSiteComponentMustBeMultiSpeciesType,SpeciesTypeInstance,SpeciesTypeComponentIndex,
-          pkgVersion, level, version, msg, getLine(), getColumn());
+      log->logPackageError("multi", MultiOutwardBindingSiteComponentMustBeMultiSpeciesType,SpeciesTypeInstance,SpeciesTypeComponentIndex,
+        pkgVersion, level, version, msg, getLine(), getColumn());
     }
   }
   else

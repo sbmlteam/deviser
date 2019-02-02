@@ -472,8 +472,7 @@ LIBSBML_EXTERN
 BindingStatus_t
 BindingStatus_fromString(const char* code)
 {
-  static int size =
-    sizeof(SBML_BINDING_STATUS_STRINGS)/sizeof(SBML_BINDING_STATUS_STRINGS[0]);
+  static int size = sizeof(SBML_BINDING_STATUS_STRINGS)/sizeof(SBML_BINDING_STATUS_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
@@ -647,8 +646,7 @@ LIBSBML_EXTERN
 RepresentationType_t
 RepresentationType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SBML_REPRESENTATION_TYPE_STRINGS)/sizeof(SBML_REPRESENTATION_TYPE_STRINGS[0]);
+  static int size = sizeof(SBML_REPRESENTATION_TYPE_STRINGS)/sizeof(SBML_REPRESENTATION_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)

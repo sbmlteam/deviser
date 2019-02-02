@@ -600,6 +600,123 @@ int
 Fred_isValidString(const char* code);
 
 
+/**
+ * @enum ExtraLong_t
+ * @brief Enumeration of values permitted as the value of the "extralong"
+ * attribute on Test objects.
+ *
+ * @if conly
+ * @see Test_getExtralong()
+ * @see Test_setExtralong()
+ * @elseif java
+ * @see Test::getExtralong()
+ * @see Test::setExtralong(long)
+ * @else
+ * @see Test::getExtralong()
+ * @see Test::setExtralong()
+ * @endif
+ */
+typedef enum
+{
+  TEST_EXTRALONG_FRANK         /*!< The test extralong is @c "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3". */
+, TEST_EXTRALONG_SARAH         /*!< The test extralong is @c "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ". */
+, TEST_EXTRALONG_INVALID       /*!< Invalid ExtraLong value. */
+} ExtraLong_t;
+
+
+/**
+ * Returns the string version of the provided #ExtraLong_t enumeration.
+ *
+ * @param el the #ExtraLong_t enumeration value to convert.
+ *
+ * @return A string corresponding to the given type:
+ * "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3",
+ * "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ",
+ * "invalid ExtraLong value",
+ * or @c NULL if the value is @sbmlconstant{TEST_EXTRALONG_INVALID,
+ * ExtraLong_t} or another invalid enumeration value.
+ *
+ * @copydetails doc_returned_unowned_char
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
+ */
+LIBSBML_EXTERN
+const char*
+ExtraLong_toString(ExtraLong_t el);
+
+
+/**
+ * Returns the #ExtraLong_t enumeration corresponding to the given string or
+ * @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t} if there is no such
+ * match.
+ *
+ * @param code the string to convert to a #ExtraLong_t.
+ *
+ * @return the corresponding #ExtraLong_t or
+ * @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t} if no match is found.
+ *
+ * @note The matching is case-sensitive: "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+ * will return @sbmlconstant{TEST_EXTRALONG_FRANK, ExtraLong_t}, but "Http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+ * will return @sbmlconstant{TEST_EXTRALONG_INVALID, ExtraLong_t}.
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
+ */
+LIBSBML_EXTERN
+ExtraLong_t
+ExtraLong_fromString(const char* code);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ExtraLong_t is valid.
+ *
+ * @param el the #ExtraLong_t enumeration to query.
+ *
+ * @return @c 1 (true) if the #ExtraLong_t is
+ * @sbmlconstant{TEST_EXTRALONG_FRANK, ExtraLong_t}, or
+ * @sbmlconstant{TEST_EXTRALONG_SARAH, ExtraLong_t};
+ * @c 0 (false) otherwise (including @sbmlconstant{TEST_EXTRALONG_INVALID,
+ * ExtraLong_t}).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
+ */
+LIBSBML_EXTERN
+int
+ExtraLong_isValid(ExtraLong_t el);
+
+
+/**
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ExtraLong_t.
+ *
+ * @param code the string to query.
+ *
+ * @return @c 1 (true) if the string is
+ * "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3",
+ * "sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ", "
+ * "or
+ * "invalid ExtraLong value";
+ * @c 0 (false) otherwise.
+ *
+ * @note The matching is case-sensitive: "http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+ * will return @c 1 (true), but "Http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"
+ * will return @c 0 (false).
+ *
+ * @if conly
+ * @memberof Test_t
+ * @endif
+ */
+LIBSBML_EXTERN
+int
+ExtraLong_isValidString(const char* code);
+
+
 
 
 LIBSBML_CPP_NAMESPACE_END

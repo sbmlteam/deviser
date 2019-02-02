@@ -504,9 +504,8 @@ ModifierSpeciesReference::readAttributes(
   bool assigned = false;
   SBMLErrorLog* log = getErrorLog();
 
-  if (log && getParentSBMLObject() &&
-    static_cast<SBMLListOfModifierSpeciesReferences*>(getParentSBMLObject())->size()
-      < 2)
+  if (log && getParentSBMLObject() && static_cast<SBMLListOfModifierSpeciesReferences*>(getParentSBMLObject())->size()
+    < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)

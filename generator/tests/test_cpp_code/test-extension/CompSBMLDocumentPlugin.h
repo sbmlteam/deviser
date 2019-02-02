@@ -1239,9 +1239,8 @@ int
 CompSBMLDocumentPlugin_addExternalModelDefinition(
                                                   CompSBMLDocumentPlugin_t*
                                                     csbmldp,
-                                                  const
-                                                    ExternalModelDefinition_t*
-                                                      emd);
+                                                  const ExternalModelDefinition_t*
+                                                    emd);
 
 
 /**

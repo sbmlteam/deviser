@@ -15,6 +15,7 @@
             <attribute name="name" required="true" type="enum" element="Fred_t" abstract="false"/>
             <attribute name="badName" required="false" type="enum" element="fred" abstract="false"/>
             <attribute name="otherNum" required="false" type="enum" element="Enum_t" abstract="false"/>
+            <attribute name="longEnum" required="false" type="enum" element="ExtraLong_t" abstract="false"/>
           </attributes>
         </element>
       </elements>
@@ -37,6 +38,12 @@
           <enumValues>
             <enumValue name="TEST_FRED_T_TOM" value="tom"/>
             <enumValue name="TEST_FRED_T_DICK" value="dick"/>
+          </enumValues>
+        </enum>
+        <enum name="ExtraLong_t">
+          <enumValues>
+            <enumValue name="TEST_EXTRALONG_FRANK" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"/>
+            <enumValue name="TEST_EXTRALONG_SARAH" value="sarahasdfghjklkjhgfdsasdfghjhjklqwertyqwrtyhgfdssfghkjakakalkalklpoiutytrewhhhhhhhsshshshshshhshshhshhshhsssssssssssaaevenlongerlongerlongeraZ"/>
           </enumValues>
         </enum>
       </enums>

@@ -83,8 +83,7 @@ public:
                                SpatialExtension::getDefaultLevel(),
                              unsigned int version =
                                SpatialExtension::getDefaultVersion(),
-                             unsigned int pkgVersion =
-                               SpatialExtension::getDefaultPackageVersion());
+                             unsigned int pkgVersion = SpatialExtension::getDefaultPackageVersion());
 
 
   /**
