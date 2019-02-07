@@ -214,6 +214,7 @@ def add_concrete_to_list(root, concrete, mylist):
                     add_concrete_to_list(root, c, mylist)
                 else:
                     concrete['typecode'] = current['typecode']
+                    # TO DO look at potential overflow
                     if concrete not in mylist:
                         mylist.append(concrete)
 
