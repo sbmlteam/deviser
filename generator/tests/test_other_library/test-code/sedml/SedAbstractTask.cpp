@@ -664,7 +664,7 @@ SedAbstractTask::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   if (log && getParentSedObject() &&
-    static_cast<SedListOfAbstractTasks*>(getParentSedObject())->size() < 2)
+    static_cast<SedListOfTasks*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)

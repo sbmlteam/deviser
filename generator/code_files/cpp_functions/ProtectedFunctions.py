@@ -1251,18 +1251,18 @@ class ProtectedFunctions():
         line = ['int n = numErrs-1; n >= 0; n--', if_err]
         for_loop = self.create_code_block('for', line)
 
+        if self.lo_name == '':
+            use_name = strFunctions.cap_list_of_name(self.class_name)
+        else:
+            use_name = strFunctions.cap_list_of_name(self.lo_name)
         if global_variables.is_package:
-            if self.lo_name == '':
-                use_name = strFunctions.cap_list_of_name(self.class_name)
-            else:
-                use_name = strFunctions.cap_list_of_name(self.lo_name)
             line = ['log && getParent{1}Object() && static_cast<{0}*>(getParent{1}Object())->size() '
                     '< 2'.format(use_name,
                                  self.cap_language),
                     'numErrs = log->getNumErrors()', for_loop]
         else:
             line = ['log && getParent{1}Object() && static_cast<{0}*>(getParent{1}Object())->size() '
-                    '< 2'.format(strFunctions.cap_list_of_name(self.class_name),
+                    '< 2'.format(use_name,
                                  global_variables.prefix),
                     'numErrs = log->getNumErrors()', for_loop]
 

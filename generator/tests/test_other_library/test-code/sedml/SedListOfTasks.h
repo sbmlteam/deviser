@@ -1,6 +1,6 @@
 /**
- * @file SedListOfAbstractTasks.h
- * @brief Definition of the SedListOfAbstractTasks class.
+ * @file SedListOfTasks.h
+ * @brief Definition of the SedListOfTasks class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,13 +31,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedListOfAbstractTasks
- * @sbmlbrief{sedml} TODO:Definition of the SedListOfAbstractTasks class.
+ * @class SedListOfTasks
+ * @sbmlbrief{sedml} TODO:Definition of the SedListOfTasks class.
  */
 
 
-#ifndef SedListOfAbstractTasks_H__
-#define SedListOfAbstractTasks_H__
+#ifndef SedListOfTasks_H__
+#define SedListOfTasks_H__
 
 
 #include <sedml/common/extern.h>
@@ -63,7 +63,7 @@ class SedRepeatedTask;
 class SedParameterEstimationTask;
 class SedSimpleRepeatedTask;
 
-class LIBSEDML_EXTERN SedListOfAbstractTasks : public SedListOf
+class LIBSEDML_EXTERN SedListOfTasks : public SedListOf
 {
 protected:
 
@@ -76,70 +76,70 @@ protected:
 public:
 
   /**
-   * Creates a new SedListOfAbstractTasks using the given SEDML Level and @ p
-   * version values.
+   * Creates a new SedListOfTasks using the given SEDML Level and @ p version
+   * values.
    *
    * @param level an unsigned int, the SEDML Level to assign to this
-   * SedListOfAbstractTasks.
+   * SedListOfTasks.
    *
    * @param version an unsigned int, the SEDML Version to assign to this
-   * SedListOfAbstractTasks.
+   * SedListOfTasks.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedListOfAbstractTasks(unsigned int level = SEDML_DEFAULT_LEVEL,
-                         unsigned int version = SEDML_DEFAULT_VERSION);
+  SedListOfTasks(unsigned int level = SEDML_DEFAULT_LEVEL,
+                 unsigned int version = SEDML_DEFAULT_VERSION);
 
 
   /**
-   * Creates a new SedListOfAbstractTasks using the given SedNamespaces object
-   * @p sedmlns.
+   * Creates a new SedListOfTasks using the given SedNamespaces object @p
+   * sedmlns.
    *
    * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedListOfAbstractTasks(SedNamespaces *sedmlns);
+  SedListOfTasks(SedNamespaces *sedmlns);
 
 
   /**
-   * Copy constructor for SedListOfAbstractTasks.
+   * Copy constructor for SedListOfTasks.
    *
-   * @param orig the SedListOfAbstractTasks instance to copy.
+   * @param orig the SedListOfTasks instance to copy.
    */
-  SedListOfAbstractTasks(const SedListOfAbstractTasks& orig);
+  SedListOfTasks(const SedListOfTasks& orig);
 
 
   /**
-   * Assignment operator for SedListOfAbstractTasks.
+   * Assignment operator for SedListOfTasks.
    *
-   * @param rhs the SedListOfAbstractTasks object whose values are to be used
-   * as the basis of the assignment.
+   * @param rhs the SedListOfTasks object whose values are to be used as the
+   * basis of the assignment.
    */
-  SedListOfAbstractTasks& operator=(const SedListOfAbstractTasks& rhs);
+  SedListOfTasks& operator=(const SedListOfTasks& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this SedListOfAbstractTasks object.
+   * Creates and returns a deep copy of this SedListOfTasks object.
    *
-   * @return a (deep) copy of this SedListOfAbstractTasks object.
+   * @return a (deep) copy of this SedListOfTasks object.
    */
-  virtual SedListOfAbstractTasks* clone() const;
+  virtual SedListOfTasks* clone() const;
 
 
   /**
-   * Destructor for SedListOfAbstractTasks.
+   * Destructor for SedListOfTasks.
    */
-  virtual ~SedListOfAbstractTasks();
+  virtual ~SedListOfTasks();
 
 
   /**
-   * Get a SedAbstractTask from the SedListOfAbstractTasks.
+   * Get a SedAbstractTask from the SedListOfTasks.
    *
    * @param n an unsigned int representing the index of the SedAbstractTask to
    * retrieve.
    *
-   * @return the nth SedAbstractTask in this SedListOfAbstractTasks.
+   * @return the nth SedAbstractTask in this SedListOfTasks.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -154,12 +154,12 @@ public:
 
 
   /**
-   * Get a SedAbstractTask from the SedListOfAbstractTasks.
+   * Get a SedAbstractTask from the SedListOfTasks.
    *
    * @param n an unsigned int representing the index of the SedAbstractTask to
    * retrieve.
    *
-   * @return the nth SedAbstractTask in this SedListOfAbstractTasks.
+   * @return the nth SedAbstractTask in this SedListOfTasks.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -174,14 +174,13 @@ public:
 
 
   /**
-   * Get a SedAbstractTask from the SedListOfAbstractTasks based on its
-   * identifier.
+   * Get a SedAbstractTask from the SedListOfTasks based on its identifier.
    *
    * @param sid a string representing the identifier of the SedAbstractTask to
    * retrieve.
    *
-   * @return the SedAbstractTask in this SedListOfAbstractTasks with the given
-   * @p sid or @c NULL if no such SedAbstractTask exists.
+   * @return the SedAbstractTask in this SedListOfTasks with the given @p sid
+   * or @c NULL if no such SedAbstractTask exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -196,14 +195,13 @@ public:
 
 
   /**
-   * Get a SedAbstractTask from the SedListOfAbstractTasks based on its
-   * identifier.
+   * Get a SedAbstractTask from the SedListOfTasks based on its identifier.
    *
    * @param sid a string representing the identifier of the SedAbstractTask to
    * retrieve.
    *
-   * @return the SedAbstractTask in this SedListOfAbstractTasks with the given
-   * @p sid or @c NULL if no such SedAbstractTask exists.
+   * @return the SedAbstractTask in this SedListOfTasks with the given @p sid
+   * or @c NULL if no such SedAbstractTask exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -218,14 +216,13 @@ public:
 
 
   /**
-   * Removes the nth SedAbstractTask from this SedListOfAbstractTasks and
-   * returns a pointer to it.
+   * Removes the nth SedAbstractTask from this SedListOfTasks and returns a
+   * pointer to it.
    *
    * @param n an unsigned int representing the index of the SedAbstractTask to
    * remove.
    *
-   * @return a pointer to the nth SedAbstractTask in this
-   * SedListOfAbstractTasks.
+   * @return a pointer to the nth SedAbstractTask in this SedListOfTasks.
    *
    * @copydetails doc_returned_owned_pointer
    *
@@ -240,14 +237,14 @@ public:
 
 
   /**
-   * Removes the SedAbstractTask from this SedListOfAbstractTasks based on its
+   * Removes the SedAbstractTask from this SedListOfTasks based on its
    * identifier and returns a pointer to it.
    *
    * @param sid a string representing the identifier of the SedAbstractTask to
    * remove.
    *
-   * @return the SedAbstractTask in this SedListOfAbstractTasks based on the
-   * identifier or NULL if no such SedAbstractTask exists.
+   * @return the SedAbstractTask in this SedListOfTasks based on the identifier
+   * or NULL if no such SedAbstractTask exists.
    *
    * @copydetails doc_returned_owned_pointer
    *
@@ -262,7 +259,7 @@ public:
 
 
   /**
-   * Adds a copy of the given SedAbstractTask to this SedListOfAbstractTasks.
+   * Adds a copy of the given SedAbstractTask to this SedListOfTasks.
    *
    * @param sat the SedAbstractTask object to add.
    *
@@ -288,10 +285,9 @@ public:
 
 
   /**
-   * Get the number of SedAbstractTask objects in this SedListOfAbstractTasks.
+   * Get the number of SedAbstractTask objects in this SedListOfTasks.
    *
-   * @return the number of SedAbstractTask objects in this
-   * SedListOfAbstractTasks.
+   * @return the number of SedAbstractTask objects in this SedListOfTasks.
    *
    * @see addAbstractTask(const SedAbstractTask* object)
    * @see createAbstractTask()
@@ -304,8 +300,8 @@ public:
 
 
   /**
-   * Creates a new SedTask object, adds it to this SedListOfAbstractTasks
-   * object and returns the SedTask object created.
+   * Creates a new SedTask object, adds it to this SedListOfTasks object and
+   * returns the SedTask object created.
    *
    * @return a new SedTask object instance.
    *
@@ -322,9 +318,8 @@ public:
 
 
   /**
-   * Creates a new SedRepeatedTask object, adds it to this
-   * SedListOfAbstractTasks object and returns the SedRepeatedTask object
-   * created.
+   * Creates a new SedRepeatedTask object, adds it to this SedListOfTasks
+   * object and returns the SedRepeatedTask object created.
    *
    * @return a new SedRepeatedTask object instance.
    *
@@ -342,8 +337,8 @@ public:
 
   /**
    * Creates a new SedParameterEstimationTask object, adds it to this
-   * SedListOfAbstractTasks object and returns the SedParameterEstimationTask
-   * object created.
+   * SedListOfTasks object and returns the SedParameterEstimationTask object
+   * created.
    *
    * @return a new SedParameterEstimationTask object instance.
    *
@@ -360,9 +355,8 @@ public:
 
 
   /**
-   * Creates a new SedSimpleRepeatedTask object, adds it to this
-   * SedListOfAbstractTasks object and returns the SedSimpleRepeatedTask object
-   * created.
+   * Creates a new SedSimpleRepeatedTask object, adds it to this SedListOfTasks
+   * object and returns the SedSimpleRepeatedTask object created.
    *
    * @return a new SedSimpleRepeatedTask object instance.
    *
@@ -379,9 +373,9 @@ public:
 
 
   /**
-   * Returns the XML element name of this SedListOfAbstractTasks object.
+   * Returns the XML element name of this SedListOfTasks object.
    *
-   * For SedListOfAbstractTasks, the XML element name is always
+   * For SedListOfTasks, the XML element name is always
    * @c "listOfAbstractTasks".
    *
    * @return the name of this element, i.e. @c "listOfAbstractTasks".
@@ -393,7 +387,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the XML name of this SedListOfAbstractTasks object.
+   * Sets the XML name of this SedListOfTasks object.
    */
   virtual void setElementName(const std::string& name);
 
@@ -401,12 +395,12 @@ public:
 
 
   /**
-   * Returns the libSEDML type code for this SedListOfAbstractTasks object.
+   * Returns the libSEDML type code for this SedListOfTasks object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -415,13 +409,13 @@ public:
 
   /**
    * Returns the libSEDML type code for the SEDML objects contained in this
-   * SedListOfAbstractTasks object.
+   * SedListOfTasks object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML typecode for the objects contained in this
-   * SedListOfAbstractTasks:
-   * @sedmlconstant{SEDML_SEDML_ABSTRACTTASK, SEDMLSedmlTypeCode_t}.
+   * SedListOfTasks:
+   * @sedmlconstant{SEDML_SEDML_ABSTRACTTASK, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -446,7 +440,7 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Creates a new SedAbstractTask in this SedListOfAbstractTasks
+   * Creates a new SedAbstractTask in this SedListOfTasks
    */
   virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     stream);
@@ -516,11 +510,11 @@ BEGIN_C_DECLS
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @memberof SedListOfAbstractTasks_t
+ * @memberof SedListOfTasks_t
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_getAbstractTask(SedListOf_t* slo, unsigned int n);
+SedListOfTasks_getAbstractTask(SedListOf_t* slo, unsigned int n);
 
 
 /**
@@ -536,11 +530,11 @@ SedListOfAbstractTasks_getAbstractTask(SedListOf_t* slo, unsigned int n);
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @memberof SedListOfAbstractTasks_t
+ * @memberof SedListOfTasks_t
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_getById(SedListOf_t* slo, const char *sid);
+SedListOfTasks_getById(SedListOf_t* slo, const char *sid);
 
 
 /**
@@ -556,11 +550,11 @@ SedListOfAbstractTasks_getById(SedListOf_t* slo, const char *sid);
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedListOfAbstractTasks_t
+ * @memberof SedListOfTasks_t
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_remove(SedListOf_t* slo, unsigned int n);
+SedListOfTasks_remove(SedListOf_t* slo, unsigned int n);
 
 
 /**
@@ -577,11 +571,11 @@ SedListOfAbstractTasks_remove(SedListOf_t* slo, unsigned int n);
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedListOfAbstractTasks_t
+ * @memberof SedListOfTasks_t
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_removeById(SedListOf_t* slo, const char* sid);
+SedListOfTasks_removeById(SedListOf_t* slo, const char* sid);
 
 
 
@@ -601,6 +595,6 @@ LIBSEDML_CPP_NAMESPACE_END
 
 
 
-#endif /* !SedListOfAbstractTasks_H__ */
+#endif /* !SedListOfTasks_H__ */
 
 

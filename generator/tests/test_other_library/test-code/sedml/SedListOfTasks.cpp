@@ -1,6 +1,6 @@
 /**
- * @file SedListOfAbstractTasks.cpp
- * @brief Implementation of the SedListOfAbstractTasks class.
+ * @file SedListOfTasks.cpp
+ * @brief Implementation of the SedListOfTasks class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,7 +31,7 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sedml/SedListOfAbstractTasks.h>
+#include <sedml/SedListOfTasks.h>
 #include <sbml/xml/XMLInputStream.h>
 
 #include <sedml/SedTask.h>
@@ -53,11 +53,10 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfAbstractTasks using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedListOfTasks using the given SEDML Level and @ p version
+ * values.
  */
-SedListOfAbstractTasks::SedListOfAbstractTasks(unsigned int level,
-                                               unsigned int version)
+SedListOfTasks::SedListOfTasks(unsigned int level, unsigned int version)
   : SedListOf(level, version)
   , mElementName("abstractTask")
 {
@@ -66,10 +65,10 @@ SedListOfAbstractTasks::SedListOfAbstractTasks(unsigned int level,
 
 
 /*
- * Creates a new SedListOfAbstractTasks using the given SedNamespaces object @p
+ * Creates a new SedListOfTasks using the given SedNamespaces object @p
  * sedmlns.
  */
-SedListOfAbstractTasks::SedListOfAbstractTasks(SedNamespaces *sedmlns)
+SedListOfTasks::SedListOfTasks(SedNamespaces *sedmlns)
   : SedListOf(sedmlns)
   , mElementName("abstractTask")
 {
@@ -78,10 +77,9 @@ SedListOfAbstractTasks::SedListOfAbstractTasks(SedNamespaces *sedmlns)
 
 
 /*
- * Copy constructor for SedListOfAbstractTasks.
+ * Copy constructor for SedListOfTasks.
  */
-SedListOfAbstractTasks::SedListOfAbstractTasks(const SedListOfAbstractTasks&
-  orig)
+SedListOfTasks::SedListOfTasks(const SedListOfTasks& orig)
   : SedListOf( orig )
   , mElementName ( orig.mElementName )
 {
@@ -89,10 +87,10 @@ SedListOfAbstractTasks::SedListOfAbstractTasks(const SedListOfAbstractTasks&
 
 
 /*
- * Assignment operator for SedListOfAbstractTasks.
+ * Assignment operator for SedListOfTasks.
  */
-SedListOfAbstractTasks&
-SedListOfAbstractTasks::operator=(const SedListOfAbstractTasks& rhs)
+SedListOfTasks&
+SedListOfTasks::operator=(const SedListOfTasks& rhs)
 {
   if (&rhs != this)
   {
@@ -105,61 +103,59 @@ SedListOfAbstractTasks::operator=(const SedListOfAbstractTasks& rhs)
 
 
 /*
- * Creates and returns a deep copy of this SedListOfAbstractTasks object.
+ * Creates and returns a deep copy of this SedListOfTasks object.
  */
-SedListOfAbstractTasks*
-SedListOfAbstractTasks::clone() const
+SedListOfTasks*
+SedListOfTasks::clone() const
 {
-  return new SedListOfAbstractTasks(*this);
+  return new SedListOfTasks(*this);
 }
 
 
 /*
- * Destructor for SedListOfAbstractTasks.
+ * Destructor for SedListOfTasks.
  */
-SedListOfAbstractTasks::~SedListOfAbstractTasks()
+SedListOfTasks::~SedListOfTasks()
 {
 }
 
 
 /*
- * Get a SedAbstractTask from the SedListOfAbstractTasks.
+ * Get a SedAbstractTask from the SedListOfTasks.
  */
 SedAbstractTask*
-SedListOfAbstractTasks::get(unsigned int n)
+SedListOfTasks::get(unsigned int n)
 {
   return static_cast<SedAbstractTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedAbstractTask from the SedListOfAbstractTasks.
+ * Get a SedAbstractTask from the SedListOfTasks.
  */
 const SedAbstractTask*
-SedListOfAbstractTasks::get(unsigned int n) const
+SedListOfTasks::get(unsigned int n) const
 {
   return static_cast<const SedAbstractTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedAbstractTask from the SedListOfAbstractTasks based on its
- * identifier.
+ * Get a SedAbstractTask from the SedListOfTasks based on its identifier.
  */
 SedAbstractTask*
-SedListOfAbstractTasks::get(const std::string& sid)
+SedListOfTasks::get(const std::string& sid)
 {
   return const_cast<SedAbstractTask*>(static_cast<const
-    SedListOfAbstractTasks&>(*this).get(sid));
+    SedListOfTasks&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedAbstractTask from the SedListOfAbstractTasks based on its
- * identifier.
+ * Get a SedAbstractTask from the SedListOfTasks based on its identifier.
  */
 const SedAbstractTask*
-SedListOfAbstractTasks::get(const std::string& sid) const
+SedListOfTasks::get(const std::string& sid) const
 {
   vector<SedBase*>::const_iterator result;
   result = find_if(mItems.begin(), mItems.end(),
@@ -170,22 +166,22 @@ SedListOfAbstractTasks::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedAbstractTask from this SedListOfAbstractTasks and returns
- * a pointer to it.
+ * Removes the nth SedAbstractTask from this SedListOfTasks and returns a
+ * pointer to it.
  */
 SedAbstractTask*
-SedListOfAbstractTasks::remove(unsigned int n)
+SedListOfTasks::remove(unsigned int n)
 {
   return static_cast<SedAbstractTask*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedAbstractTask from this SedListOfAbstractTasks based on its
- * identifier and returns a pointer to it.
+ * Removes the SedAbstractTask from this SedListOfTasks based on its identifier
+ * and returns a pointer to it.
  */
 SedAbstractTask*
-SedListOfAbstractTasks::remove(const std::string& sid)
+SedListOfTasks::remove(const std::string& sid)
 {
   SedBase* item = NULL;
   vector<SedBase*>::iterator result;
@@ -204,10 +200,10 @@ SedListOfAbstractTasks::remove(const std::string& sid)
 
 
 /*
- * Adds a copy of the given SedAbstractTask to this SedListOfAbstractTasks.
+ * Adds a copy of the given SedAbstractTask to this SedListOfTasks.
  */
 int
-SedListOfAbstractTasks::addAbstractTask(const SedAbstractTask* sat)
+SedListOfTasks::addAbstractTask(const SedAbstractTask* sat)
 {
   if (sat == NULL)
   {
@@ -238,21 +234,21 @@ SedListOfAbstractTasks::addAbstractTask(const SedAbstractTask* sat)
 
 
 /*
- * Get the number of SedAbstractTask objects in this SedListOfAbstractTasks.
+ * Get the number of SedAbstractTask objects in this SedListOfTasks.
  */
 unsigned int
-SedListOfAbstractTasks::getNumAbstractTasks() const
+SedListOfTasks::getNumAbstractTasks() const
 {
   return size();
 }
 
 
 /*
- * Creates a new SedTask object, adds it to this SedListOfAbstractTasks object
- * and returns the SedTask object created.
+ * Creates a new SedTask object, adds it to this SedListOfTasks object and
+ * returns the SedTask object created.
  */
 SedTask*
-SedListOfAbstractTasks::createTask()
+SedListOfTasks::createTask()
 {
   SedTask* st = NULL;
 
@@ -274,11 +270,11 @@ SedListOfAbstractTasks::createTask()
 
 
 /*
- * Creates a new SedRepeatedTask object, adds it to this SedListOfAbstractTasks
- * object and returns the SedRepeatedTask object created.
+ * Creates a new SedRepeatedTask object, adds it to this SedListOfTasks object
+ * and returns the SedRepeatedTask object created.
  */
 SedRepeatedTask*
-SedListOfAbstractTasks::createRepeatedTask()
+SedListOfTasks::createRepeatedTask()
 {
   SedRepeatedTask* srt = NULL;
 
@@ -301,11 +297,11 @@ SedListOfAbstractTasks::createRepeatedTask()
 
 /*
  * Creates a new SedParameterEstimationTask object, adds it to this
- * SedListOfAbstractTasks object and returns the SedParameterEstimationTask
- * object created.
+ * SedListOfTasks object and returns the SedParameterEstimationTask object
+ * created.
  */
 SedParameterEstimationTask*
-SedListOfAbstractTasks::createParameterEstimationTask()
+SedListOfTasks::createParameterEstimationTask()
 {
   SedParameterEstimationTask* spet = NULL;
 
@@ -327,12 +323,11 @@ SedListOfAbstractTasks::createParameterEstimationTask()
 
 
 /*
- * Creates a new SedSimpleRepeatedTask object, adds it to this
- * SedListOfAbstractTasks object and returns the SedSimpleRepeatedTask object
- * created.
+ * Creates a new SedSimpleRepeatedTask object, adds it to this SedListOfTasks
+ * object and returns the SedSimpleRepeatedTask object created.
  */
 SedSimpleRepeatedTask*
-SedListOfAbstractTasks::createSimpleRepeatedTask()
+SedListOfTasks::createSimpleRepeatedTask()
 {
   SedSimpleRepeatedTask* ssrt = NULL;
 
@@ -354,10 +349,10 @@ SedListOfAbstractTasks::createSimpleRepeatedTask()
 
 
 /*
- * Returns the XML element name of this SedListOfAbstractTasks object.
+ * Returns the XML element name of this SedListOfTasks object.
  */
 const std::string&
-SedListOfAbstractTasks::getElementName() const
+SedListOfTasks::getElementName() const
 {
   return mElementName;
 }
@@ -367,10 +362,10 @@ SedListOfAbstractTasks::getElementName() const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the XML name of this SedListOfAbstractTasks object.
+ * Sets the XML name of this SedListOfTasks object.
  */
 void
-SedListOfAbstractTasks::setElementName(const std::string& name)
+SedListOfTasks::setElementName(const std::string& name)
 {
   mElementName = name;
 }
@@ -379,10 +374,10 @@ SedListOfAbstractTasks::setElementName(const std::string& name)
 
 
 /*
- * Returns the libSEDML type code for this SedListOfAbstractTasks object.
+ * Returns the libSEDML type code for this SedListOfTasks object.
  */
 int
-SedListOfAbstractTasks::getTypeCode() const
+SedListOfTasks::getTypeCode() const
 {
   return SEDML_LIST_OF;
 }
@@ -390,10 +385,10 @@ SedListOfAbstractTasks::getTypeCode() const
 
 /*
  * Returns the libSEDML type code for the SEDML objects contained in this
- * SedListOfAbstractTasks object.
+ * SedListOfTasks object.
  */
 int
-SedListOfAbstractTasks::getItemTypeCode() const
+SedListOfTasks::getItemTypeCode() const
 {
   return SEDML_SEDML_ABSTRACTTASK;
 }
@@ -403,42 +398,67 @@ SedListOfAbstractTasks::getItemTypeCode() const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Creates a new SedAbstractTask in this SedListOfAbstractTasks
+ * Creates a new SedAbstractTask in this SedListOfTasks
  */
 SedBase*
-SedListOfAbstractTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLInputStream& stream)
+SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
 {
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;
 
-  if (name == "abstractTask")
+  if (name == mElementName)
   {
     object = new SedAbstractTask(getSedNamespaces());
+    if (object)
+    {
+      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
+    }
+
     appendAndOwn(object);
   }
 
-  if (name == "task")
+  if (name == mElementName)
   {
     object = new SedTask(getSedNamespaces());
+    if (object)
+    {
+      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
+    }
+
     appendAndOwn(object);
   }
 
-  if (name == "repeatedTask")
+  if (name == mElementName)
   {
     object = new SedRepeatedTask(getSedNamespaces());
+    if (object)
+    {
+      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
+    }
+
     appendAndOwn(object);
   }
 
-  if (name == "parameterEstimationTask")
+  if (name == mElementName)
   {
     object = new SedParameterEstimationTask(getSedNamespaces());
+    if (object)
+    {
+      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
+    }
+
     appendAndOwn(object);
   }
 
-  if (name == "simpleRepeatedTask")
+  if (name == mElementName)
   {
     object = new SedSimpleRepeatedTask(getSedNamespaces());
+    if (object)
+    {
+      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
+    }
+
     appendAndOwn(object);
   }
 
@@ -455,8 +475,8 @@ SedListOfAbstractTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Writes the namespace for the Sedml package
  */
 void
-SedListOfAbstractTasks::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER
-  XMLOutputStream& stream) const
+SedListOfTasks::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
 {
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
   std::string prefix = getPrefix();
@@ -484,12 +504,12 @@ SedListOfAbstractTasks::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * checks concrete types
  */
 bool
-SedListOfAbstractTasks::isValidTypeForList(SedBase* item)
+SedListOfTasks::isValidTypeForList(SedBase* item)
 {
   unsigned int tc = item->getTypeCode();
 
   return ((tc == SEDML_TASK) || (tc == SEDML_TASK_REPEATEDTASK) || (tc ==
-    SEDML_TASK_PARAMETER_ESTIMATION) || (tc == SEDML_SIMPLEREPEATEDTASK));
+    SEDML_TASK_PARAMETER_ESTIMATION) || (tc == SEDML_TASK_SIMPLEREPEATEDTASK));
 }
 
 /** @endcond */
@@ -505,14 +525,14 @@ SedListOfAbstractTasks::isValidTypeForList(SedBase* item)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_getAbstractTask(SedListOf_t* slo, unsigned int n)
+SedListOfTasks_getAbstractTask(SedListOf_t* slo, unsigned int n)
 {
   if (slo == NULL)
   {
     return NULL;
   }
 
-  return static_cast <SedListOfAbstractTasks*>(slo)->get(n);
+  return static_cast <SedListOfTasks*>(slo)->get(n);
 }
 
 
@@ -521,15 +541,14 @@ SedListOfAbstractTasks_getAbstractTask(SedListOf_t* slo, unsigned int n)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_getById(SedListOf_t* slo, const char *sid)
+SedListOfTasks_getById(SedListOf_t* slo, const char *sid)
 {
   if (slo == NULL)
   {
     return NULL;
   }
 
-  return (sid != NULL) ? static_cast <SedListOfAbstractTasks*>(slo)->get(sid) :
-    NULL;
+  return (sid != NULL) ? static_cast <SedListOfTasks*>(slo)->get(sid) : NULL;
 }
 
 
@@ -539,14 +558,14 @@ SedListOfAbstractTasks_getById(SedListOf_t* slo, const char *sid)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_remove(SedListOf_t* slo, unsigned int n)
+SedListOfTasks_remove(SedListOf_t* slo, unsigned int n)
 {
   if (slo == NULL)
   {
     return NULL;
   }
 
-  return static_cast <SedListOfAbstractTasks*>(slo)->remove(n);
+  return static_cast <SedListOfTasks*>(slo)->remove(n);
 }
 
 
@@ -556,15 +575,15 @@ SedListOfAbstractTasks_remove(SedListOf_t* slo, unsigned int n)
  */
 LIBSEDML_EXTERN
 SedAbstractTask_t*
-SedListOfAbstractTasks_removeById(SedListOf_t* slo, const char* sid)
+SedListOfTasks_removeById(SedListOf_t* slo, const char* sid)
 {
   if (slo == NULL)
   {
     return NULL;
   }
 
-  return (sid != NULL) ? static_cast
-    <SedListOfAbstractTasks*>(slo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfTasks*>(slo)->remove(sid) :
+    NULL;
 }
 
 

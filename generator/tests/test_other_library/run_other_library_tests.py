@@ -443,18 +443,18 @@ def testSedML(fail):
     fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
-    num = 8
+    num = 28
     class_name = 'SedVectorRange'
     list_of = ''
     test_case = 'deal with vectors'
-#    fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 10
     class_name = 'SedAbstractTask'
-    list_of = 'SedListOfAbstractTasks'
+    list_of = 'SedListOfTasks'
     test_case = 'catch different abstract types'
-#    fail += run_test(name, num, class_name, test_case, list_of)
+    fail += run_test(name, num, class_name, test_case, list_of)
 
     name = 'test_sedml'
     num = 13
@@ -557,10 +557,10 @@ def main():
         fail = testCombine(fail)
     else:
         name = 'test_sedml'
-        num = 33
-        class_name = 'SedRepeatedTask'
-        list_of = ''
-        test_case = 'attribute with different xml name'
+        num = 10
+        class_name = 'SedAbstractTask'
+        list_of = 'SedListOfTasks'
+        test_case = 'catch different abstract types'
         fail += run_test(name, num, class_name, test_case, list_of)
 
 
