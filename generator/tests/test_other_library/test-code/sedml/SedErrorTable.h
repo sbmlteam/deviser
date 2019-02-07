@@ -2159,6 +2159,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 22404
+  { SedmlAlgorithmParameterAllowedElements,
+    "Elements allowed on <algorithmParameter>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "An <algorithmParameter> object may contain one and only one instance of "
+    "the <listOfAlgorithmParameters> element. No other elements from the SBML "
+    "Level 3 SEDML namespaces are permitted on an <algorithmParameter> object. ",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22405
   { SedmlAlgorithmParameterKisaoIDMustBeString,
     "The 'kisaoID' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -2169,13 +2181,38 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 22405
+  // 22406
   { SedmlAlgorithmParameterValueMustBeString,
     "The 'value' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:value' on an <algorithmParameter> must have a value "
     "of data type 'string'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22407
+  { SedmlAlgorithmParameterLOAlgorithmParametersAllowedCoreElements,
+    "Core elements allowed on <listOfAlgorithmParameters>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "Apart from the general notes and annotations subobjects permitted on all "
+    "SBML objects, a <listOfAlgorithmParameters> container object may only "
+    "contain <algorithmParameter> objects.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22408
+  { SedmlAlgorithmParameterLOAlgorithmParametersAllowedCoreAttributes,
+    "Core attributes allowed on <listOfAlgorithmParameters>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <listOfAlgorithmParameters> object may have the optional SBML Level 3 "
+    "Core attributes 'metaid' and 'sboTerm'. No other attributes from the SBML "
+    "Level 3 Core namespaces are permitted on a <listOfAlgorithmParameters> "
+    "object.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3900,7 +3937,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <figure> object may have the optional attributes 'sedml:numRows' and "
-    "'sedml:numColumns'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:numCols'. No other attributes from the SBML Level 3 SEDML "
     "namespaces are permitted on a <figure> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3930,12 +3967,12 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25106
-  { SedmlFigureNumColumnsMustBeInteger,
-    "The 'numColumns' attribute must be Integer.",
+  { SedmlFigureNumColsMustBeInteger,
+    "The 'numCols' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:numColumns' on a <figure> must have a value of data "
-    "type 'integer'.",
+    "The attribute 'sedml:numCols' on a <figure> must have a value of data type "
+    "'integer'.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3994,8 +4031,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <subPlot> object must have the required attributes 'sedml:plot', "
-    "'sedml:row' and 'sedml:column', and may have the optional attributes "
-    "'sedml:rowSpan' and 'sedml:columnSpan'. No other attributes from the SBML "
+    "'sedml:row' and 'sedml:col', and may have the optional attributes "
+    "'sedml:rowSpan' and 'sedml:colSpan'. No other attributes from the SBML "
     "Level 3 SEDML namespaces are permitted on a <subPlot> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4025,11 +4062,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25206
-  { SedmlSubPlotColumnMustBeInteger,
-    "The 'column' attribute must be Integer.",
+  { SedmlSubPlotColMustBeInteger,
+    "The 'col' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:column' on a <subPlot> must have a value of data type "
+    "The attribute 'sedml:col' on a <subPlot> must have a value of data type "
     "'integer'.",
     { "L3V1 Sedml V1 Section"
     }
@@ -4047,11 +4084,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25208
-  { SedmlSubPlotColumnSpanMustBeInteger,
-    "The 'columnSpan' attribute must be Integer.",
+  { SedmlSubPlotColSpanMustBeInteger,
+    "The 'colSpan' attribute must be Integer.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:columnSpan' on a <subPlot> must have a value of data "
+    "The attribute 'sedml:colSpan' on a <subPlot> must have a value of data "
     "type 'integer'.",
     { "L3V1 Sedml V1 Section"
     }

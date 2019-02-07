@@ -233,6 +233,7 @@
           <attributes>
             <attribute name="kisaoID" required="true" type="string" abstract="false"/>
             <attribute name="value" required="true" type="string" abstract="false"/>
+            <attribute name="algorithmParameter" required="false" type="lo_element" element="AlgorithmParameter" abstract="false"/>
           </attributes>
         </element>
         <element name="Range" typeCode="SEDML_RANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
@@ -403,7 +404,7 @@
         <element name="Figure" typeCode="SEDML_FIGURE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
           <attributes>
             <attribute name="numRows" required="false" type="integer" abstract="false"/>
-            <attribute name="numColumns" required="false" type="integer" abstract="false"/>
+            <attribute name="numCols" required="false" type="integer" abstract="false"/>
             <attribute name="subPlot" required="false" type="lo_element" element="SubPlot" abstract="false"/>
           </attributes>
         </element>
@@ -411,9 +412,9 @@
           <attributes>
             <attribute name="plot" required="true" type="SIdRef" element="Plot" abstract="false"/>
             <attribute name="row" required="true" type="integer" abstract="false"/>
-            <attribute name="column" required="true" type="integer" abstract="false"/>
+            <attribute name="col" required="true" type="integer" abstract="false"/>
             <attribute name="rowSpan" required="false" type="integer" abstract="false"/>
-            <attribute name="columnSpan" required="false" type="integer" abstract="false"/>
+            <attribute name="colSpan" required="false" type="integer" abstract="false"/>
           </attributes>
         </element>
         <element name="Axis" typeCode="SEDML_AXIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" abstract="false">
@@ -427,11 +428,11 @@
         </element>
         <element name="Style" typeCode="SEDML_STYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="baseStyle" required="false" type="SIdRef" element="Style" abstract="false"/>
-            <attribute name="line" required="false" type="element" element="Line" abstract="false"/>
+            <attribute name="line" required="false" type="element" element="Line" xmlName="line" abstract="false"/>
             <attribute name="marker" required="false" type="element" element="Marker" abstract="false"/>
             <attribute name="fill" required="false" type="element" element="Fill" abstract="false"/>
-            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
         <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
@@ -494,12 +495,6 @@
             <enumValue name="SEDML_MAPPINGTYPE_PARAMETER" value="Parameter"/>
           </enumValues>
         </enum>
-        <enum name="ExperimentType">
-          <enumValues>
-            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
-            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
-          </enumValues>
-        </enum>
         <enum name="AxisType">
           <enumValues>
             <enumValue name="SEDML_AXISTYPE_LINEAR" value="linear"/>
@@ -548,6 +543,12 @@
             <enumValue name="SEDML_SURFACETYPE_HEATMAP" value="heatMap"/>
             <enumValue name="SEDML_SURFACETYPE_STACKEDCURVES" value="stackedCurves"/>
             <enumValue name="SEDML_SURFACETYPE_BAR" value="bar"/>
+          </enumValues>
+        </enum>
+        <enum name="ExperimentType">
+          <enumValues>
+            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
           </enumValues>
         </enum>
       </enums>

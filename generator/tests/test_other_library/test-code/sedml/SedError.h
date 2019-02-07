@@ -227,8 +227,11 @@ typedef enum
 , SedmlAlgorithmParameterAllowedCoreAttributes      = 22401
 , SedmlAlgorithmParameterAllowedCoreElements      = 22402
 , SedmlAlgorithmParameterAllowedAttributes      = 22403
-, SedmlAlgorithmParameterKisaoIDMustBeString      = 22404
-, SedmlAlgorithmParameterValueMustBeString      = 22405
+, SedmlAlgorithmParameterAllowedElements      = 22404
+, SedmlAlgorithmParameterKisaoIDMustBeString      = 22405
+, SedmlAlgorithmParameterValueMustBeString      = 22406
+, SedmlAlgorithmParameterLOAlgorithmParametersAllowedCoreElements      = 22407
+, SedmlAlgorithmParameterLOAlgorithmParametersAllowedCoreAttributes      = 22408
 , SedmlRangeAllowedCoreAttributes      = 22501
 , SedmlRangeAllowedCoreElements      = 22502
 , SedmlRangeAllowedAttributes      = 22503
@@ -375,7 +378,7 @@ typedef enum
 , SedmlFigureAllowedAttributes      = 25103
 , SedmlFigureAllowedElements      = 25104
 , SedmlFigureNumRowsMustBeInteger      = 25105
-, SedmlFigureNumColumnsMustBeInteger      = 25106
+, SedmlFigureNumColsMustBeInteger      = 25106
 , SedmlFigureLOSubPlotsAllowedCoreElements      = 25107
 , SedmlFigureLOSubPlotsAllowedCoreAttributes      = 25108
 , SedmlSubPlotAllowedCoreAttributes      = 25201
@@ -383,9 +386,9 @@ typedef enum
 , SedmlSubPlotAllowedAttributes      = 25203
 , SedmlSubPlotPlotMustBePlot      = 25204
 , SedmlSubPlotRowMustBeInteger      = 25205
-, SedmlSubPlotColumnMustBeInteger      = 25206
+, SedmlSubPlotColMustBeInteger      = 25206
 , SedmlSubPlotRowSpanMustBeInteger      = 25207
-, SedmlSubPlotColumnSpanMustBeInteger      = 25208
+, SedmlSubPlotColSpanMustBeInteger      = 25208
 , SedmlAxisAllowedCoreAttributes      = 25301
 , SedmlAxisAllowedCoreElements      = 25302
 , SedmlAxisAllowedAttributes      = 25303
