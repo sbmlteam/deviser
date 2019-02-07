@@ -199,7 +199,10 @@ class SetGetFunctions():
 
         # create the function declaration
         if self.is_cpp_api:
-            function = 'get{0}'.format(attribute['capAttName'])
+            if attribute['attType'] == 'vector':
+                function = 'get{0}'.format(strFunctions.upper_first(attribute['pluralName']))
+            else:
+                function = 'get{0}'.format(attribute['capAttName'])
             if attribute['attType'] == 'string' \
                     or attribute['attType'] == 'element':
                 if const:
@@ -789,15 +792,18 @@ class SetGetFunctions():
         if 'isEnum' in attribute and attribute['isEnum']:
             additional.append('{0}'.format(doccopy))
         # create the function declaration
+        name_to_use = attribute['capAttName']
+        if 'isVector' in attribute and attribute['isVector']:
+            name_to_use = strFunctions.upper_first(attribute['pluralName'])
         if self.is_cpp_api:
-            function = 'set{0}'.format(attribute['capAttName'])
+            function = 'set{0}'.format(name_to_use)
             return_type = 'int'
-            unsetfunc = 'unset{0}'.format(attribute['capAttName'])
+            unsetfunc = 'unset{0}'.format(name_to_use)
         else:
             function = '{0}_set{1}'.format(self.class_name,
-                                           attribute['capAttName'])
+                                           name_to_use)
             unsetfunc = '{0}_unset{1}'.format(self.class_name,
-                                           attribute['capAttName'])
+                                           name_to_use)
             return_type = 'int'
 
         arguments = []

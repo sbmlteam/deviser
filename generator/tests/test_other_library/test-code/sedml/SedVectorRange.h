@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -134,7 +134,7 @@ public:
    * @return the value of the "value" attribute of this SedVectorRange as a
    * vector.
    */
-  const std::vector<double>& getValue() const;
+  const std::vector<double>& getValues() const;
 
 
   /**
@@ -163,7 +163,7 @@ public:
    * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setValue(const std::vector<double>& value);
+  int setValues(const std::vector<double>& value);
 
 
   /**
@@ -205,7 +205,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_RANGE_VECTORRANGE, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_RANGE_VECTORRANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

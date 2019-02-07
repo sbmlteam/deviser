@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -119,7 +119,7 @@ SedVectorRange::~SedVectorRange()
  * Returns the value of the "value" attribute of this SedVectorRange.
  */
 const std::vector<double>&
-SedVectorRange::getValue() const
+SedVectorRange::getValues() const
 {
   return mValue;
 }
@@ -150,7 +150,7 @@ SedVectorRange::getNumValues() const
  * Sets the value of the "value" attribute of this SedVectorRange.
  */
 int
-SedVectorRange::setValue(const std::vector<double>& value)
+SedVectorRange::setValues(const std::vector<double>& value)
 {
   mValue = value;
   return LIBSEDML_OPERATION_SUCCESS;
@@ -376,7 +376,7 @@ SedVectorRange::isSetAttribute(const std::string& attributeName) const
 
   if (attributeName == "value")
   {
-    value = isSetValue();
+    value = hasValues();
   }
 
   return value;
@@ -485,7 +485,7 @@ SedVectorRange::unsetAttribute(const std::string& attributeName)
 
   if (attributeName == "value")
   {
-    value = clearValue();
+    value = clearValues();
   }
 
   return value;
@@ -563,7 +563,7 @@ SedVectorRange::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedVectorRangeAllowedAttributes, level, version,
+        log->logError(SedmlVectorRangeAllowedAttributes, level, version,
           details);
       }
     }

@@ -251,7 +251,10 @@ class GenericAttributeFunctions():
             else:
                 first = False
             block.append('attributeName == \"{0}\"'.format(name))
-            block.append('value = isSet{0}()'.format(attrib['capAttName']))
+            if 'isVector' in attrib and attrib['isVector']:
+                block.append('value = has{0}()'.format(strFunctions.upper_first(attrib['pluralName'])))
+            else:
+                block.append('value = isSet{0}()'.format(attrib['capAttName']))
             if len(block) > 2:
                 if_block = self.create_code_block('else_if', block)
             else:
@@ -404,7 +407,7 @@ class GenericAttributeFunctions():
                 first = False
             block.append('attributeName == \"{0}\"'.format(name))
             if attrib['attType'] == 'vector':
-                block.append('value = clear{0}()'.format(attrib['capAttName']))
+                block.append('value = clear{0}()'.format(strFunctions.upper_first(attrib['pluralName'])))
             else:
                 block.append('value = unset{0}()'.format(attrib['capAttName']))
             if len(block) > 2:
