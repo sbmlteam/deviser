@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -35,6 +35,10 @@
 #include <sedml/SedListOfSimulations.h>
 #include <sbml/xml/XMLInputStream.h>
 
+#include <sedml/SedUniformTimeCourse.h>
+#include <sedml/SedOneStep.h>
+#include <sedml/SedSteadyState.h>
+
 
 using namespace std;
 
@@ -54,7 +58,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedSimulation::SedSimulation(unsigned int level, unsigned int version)
   : SedBase(level, version)
+  , mName ("")
   , mAlgorithm (NULL)
+  , mElementName("simulation")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -66,7 +72,9 @@ SedSimulation::SedSimulation(unsigned int level, unsigned int version)
  */
 SedSimulation::SedSimulation(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
+  , mName ("")
   , mAlgorithm (NULL)
+  , mElementName("simulation")
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -78,7 +86,9 @@ SedSimulation::SedSimulation(SedNamespaces *sedmlns)
  */
 SedSimulation::SedSimulation(const SedSimulation& orig)
   : SedBase( orig )
+  , mName ( orig.mName )
   , mAlgorithm ( NULL )
+  , mElementName ( orig.mElementName )
 {
   if (orig.mAlgorithm != NULL)
   {
@@ -98,6 +108,8 @@ SedSimulation::operator=(const SedSimulation& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
+    mName = rhs.mName;
+    mElementName = rhs.mElementName;
     delete mAlgorithm;
     if (rhs.mAlgorithm != NULL)
     {
@@ -329,14 +341,61 @@ SedSimulation::unsetAlgorithm()
 
 
 /*
+ * Predicate returning @c true if this abstract "SedSimulation" is of type
+ * SedUniformTimeCourse
+ */
+bool
+SedSimulation::isSedUniformTimeCourse() const
+{
+  return dynamic_cast<const SedUniformTimeCourse*>(this) != NULL;
+}
+
+
+/*
+ * Predicate returning @c true if this abstract "SedSimulation" is of type
+ * SedOneStep
+ */
+bool
+SedSimulation::isSedOneStep() const
+{
+  return dynamic_cast<const SedOneStep*>(this) != NULL;
+}
+
+
+/*
+ * Predicate returning @c true if this abstract "SedSimulation" is of type
+ * SedSteadyState
+ */
+bool
+SedSimulation::isSedSteadyState() const
+{
+  return dynamic_cast<const SedSteadyState*>(this) != NULL;
+}
+
+
+/*
  * Returns the XML element name of this SedSimulation object.
  */
 const std::string&
 SedSimulation::getElementName() const
 {
-  static const string name = "simulation";
-  return name;
+  return mElementName;
 }
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Sets the XML name of this SedSimulation object.
+ */
+void
+SedSimulation::setElementName(const std::string& name)
+{
+  mElementName = name;
+}
+
+/** @endcond */
 
 
 /*
@@ -730,7 +789,8 @@ int
 SedSimulation::addChildObject(const std::string& elementName,
                               const SedBase* element)
 {
-  if (elementName == "algorithm" && element->getTypeCode() == TO_DO)
+  if (elementName == "algorithm" && element->getTypeCode() ==
+    SEDML_SIMULATION_ALGORITHM)
   {
     return setAlgorithm((const SedAlgorithm*)(element));
   }
@@ -927,8 +987,8 @@ SedSimulation::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlLOSimulationsAllowedCoreAttributes, level, version,
-          details);
+        log->logError(SedmlDocumentLOSimulationsAllowedCoreAttributes, level,
+          version, details);
       }
     }
   }
@@ -945,7 +1005,7 @@ SedSimulation::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSedSimulationAllowedAttributes, level, version,
+        log->logError(SedmlSimulationAllowedAttributes, level, version,
           details);
       }
     }
@@ -1027,14 +1087,38 @@ SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedSimulation_t using the given SEDML Level and @ p version
+ * Creates a new SedUniformTimeCourse using the given SEDML Level and @ p
+ * version values.
+ */
+LIBSEDML_EXTERN
+SedUniformTimeCourse_t *
+SedSimulation_createUniformTimeCourse(unsigned int level,
+                                      unsigned int version)
+{
+  return new SedUniformTimeCourse(level, version);
+}
+
+
+/*
+ * Creates a new SedOneStep using the given SEDML Level and @ p version values.
+ */
+LIBSEDML_EXTERN
+SedOneStep_t *
+SedSimulation_createOneStep(unsigned int level, unsigned int version)
+{
+  return new SedOneStep(level, version);
+}
+
+
+/*
+ * Creates a new SedSteadyState using the given SEDML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_create(unsigned int level, unsigned int version)
+SedSteadyState_t *
+SedSimulation_createSteadyState(unsigned int level, unsigned int version)
 {
-  return new SedSimulation(level, version);
+  return new SedSteadyState(level, version);
 }
 
 
@@ -1235,6 +1319,40 @@ int
 SedSimulation_unsetAlgorithm(SedSimulation_t * ss)
 {
   return (ss != NULL) ? ss->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSimulation_t is of type
+ * SedUniformTimeCourse_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedUniformTimeCourse(const SedSimulation_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSedUniformTimeCourse()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedOneStep_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedOneStep(const SedSimulation_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSedOneStep()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedSteadyState_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedSteadyState(const SedSimulation_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSedSteadyState()) : 0;
 }
 
 

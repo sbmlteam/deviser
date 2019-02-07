@@ -9,7 +9,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
 
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2019, Frank T. Bergmann
  * All rights reserved.
  * 
 
@@ -58,6 +58,10 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
+class SedUniformTimeCourse;
+class SedOneStep;
+class SedSteadyState;
+
 class LIBSEDML_EXTERN SedSimulation : public SedBase
 {
 protected:
@@ -66,6 +70,7 @@ protected:
 
   std::string mName;
   SedAlgorithm* mAlgorithm;
+  std::string mElementName;
 
   /** @endcond */
 
@@ -276,6 +281,36 @@ public:
 
 
   /**
+   * Predicate returning @c true if this abstract "SedSimulation" is of type
+   * SedUniformTimeCourse
+   *
+   * @return @c true if this abstract "SedSimulation" is of type
+   * SedUniformTimeCourse, @c false otherwise
+   */
+  virtual bool isSedUniformTimeCourse() const;
+
+
+  /**
+   * Predicate returning @c true if this abstract "SedSimulation" is of type
+   * SedOneStep
+   *
+   * @return @c true if this abstract "SedSimulation" is of type SedOneStep,
+   * @c false otherwise
+   */
+  virtual bool isSedOneStep() const;
+
+
+  /**
+   * Predicate returning @c true if this abstract "SedSimulation" is of type
+   * SedSteadyState
+   *
+   * @return @c true if this abstract "SedSimulation" is of type
+   * SedSteadyState, @c false otherwise
+   */
+  virtual bool isSedSteadyState() const;
+
+
+  /**
    * Returns the XML element name of this SedSimulation object.
    *
    * For SedSimulation, the XML element name is always @c "simulation".
@@ -285,13 +320,24 @@ public:
   virtual const std::string& getElementName() const;
 
 
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Sets the XML name of this SedSimulation object.
+   */
+  virtual void setElementName(const std::string& name);
+
+  /** @endcond */
+
+
   /**
    * Returns the libSEDML type code for this SedSimulation object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SIMULATION, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_SIMULATION, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -780,7 +826,49 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedSimulation_t using the given SEDML Level and @ p version
+ * Creates a new SedUniformTimeCourse using the given SEDML Level and @ p
+ * version values.
+ *
+ * @param level an unsigned int, the SEDML Level to assign to this
+ * SedSimulation_t.
+ *
+ * @param version an unsigned int, the SEDML Version to assign to this
+ * SedSimulation_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+SedUniformTimeCourse_t *
+SedSimulation_createUniformTimeCourse(unsigned int level,
+                                      unsigned int version);
+
+
+/**
+ * Creates a new SedOneStep using the given SEDML Level and @ p version values.
+ *
+ * @param level an unsigned int, the SEDML Level to assign to this
+ * SedSimulation_t.
+ *
+ * @param version an unsigned int, the SEDML Version to assign to this
+ * SedSimulation_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+SedOneStep_t *
+SedSimulation_createOneStep(unsigned int level, unsigned int version);
+
+
+/**
+ * Creates a new SedSteadyState using the given SEDML Level and @ p version
  * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
@@ -796,8 +884,8 @@ BEGIN_C_DECLS
  * @memberof SedSimulation_t
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_create(unsigned int level, unsigned int version);
+SedSteadyState_t *
+SedSimulation_createSteadyState(unsigned int level, unsigned int version);
 
 
 /**
@@ -1055,6 +1143,51 @@ SedSimulation_createAlgorithm(SedSimulation_t* ss);
 LIBSEDML_EXTERN
 int
 SedSimulation_unsetAlgorithm(SedSimulation_t * ss);
+
+
+/**
+ * Predicate returning @c 1 if this SedSimulation_t is of type
+ * SedUniformTimeCourse_t
+ *
+ * @param ss the SedSimulation_t structure.
+ *
+ * @return @c 1 if this SedSimulation_t is of type SedUniformTimeCourse_t, @c 0
+ * otherwise
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedUniformTimeCourse(const SedSimulation_t * ss);
+
+
+/**
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedOneStep_t
+ *
+ * @param ss the SedSimulation_t structure.
+ *
+ * @return @c 1 if this SedSimulation_t is of type SedOneStep_t, @c 0 otherwise
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedOneStep(const SedSimulation_t * ss);
+
+
+/**
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedSteadyState_t
+ *
+ * @param ss the SedSimulation_t structure.
+ *
+ * @return @c 1 if this SedSimulation_t is of type SedSteadyState_t, @c 0
+ * otherwise
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedSteadyState(const SedSimulation_t * ss);
 
 
 /**
