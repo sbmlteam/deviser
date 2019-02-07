@@ -485,7 +485,7 @@ MyRequiredClass::getNotmetaid() const
  * Returns the value of the "vectorDouble" attribute of this MyRequiredClass.
  */
 const std::vector<double>&
-MyRequiredClass::getVectorDouble() const
+MyRequiredClass::getVectorDoubles() const
 {
   return mVectorDouble;
 }
@@ -495,7 +495,7 @@ MyRequiredClass::getVectorDouble() const
  * Returns the value of the "vectorDouble1" attribute of this MyRequiredClass.
  */
 const std::vector<double>&
-MyRequiredClass::getVectorDouble1() const
+MyRequiredClass::getVectorDouble1s() const
 {
   return mVectorDouble1;
 }
@@ -505,7 +505,7 @@ MyRequiredClass::getVectorDouble1() const
  * Returns the value of the "vectorInt" attribute of this MyRequiredClass.
  */
 const std::vector<int>&
-MyRequiredClass::getVectorInt() const
+MyRequiredClass::getVectorInts() const
 {
   return mVectorInt;
 }
@@ -515,7 +515,7 @@ MyRequiredClass::getVectorInt() const
  * Returns the value of the "vectorInt1" attribute of this MyRequiredClass.
  */
 const std::vector<int>&
-MyRequiredClass::getVectorInt1() const
+MyRequiredClass::getVectorInt1s() const
 {
   return mVectorInt1;
 }
@@ -1190,7 +1190,7 @@ MyRequiredClass::setNotmetaid(const std::string& notmetaid)
  * Sets the value of the "vectorDouble" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::setVectorDouble(const std::vector<double>& vectorDouble)
+MyRequiredClass::setVectorDoubles(const std::vector<double>& vectorDouble)
 {
   mVectorDouble = vectorDouble;
   return LIBSBML_OPERATION_SUCCESS;
@@ -1212,7 +1212,7 @@ MyRequiredClass::addVectorDouble(double vectorDouble)
  * Sets the value of the "vectorDouble1" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::setVectorDouble1(const std::vector<double>& vectorDouble1)
+MyRequiredClass::setVectorDouble1s(const std::vector<double>& vectorDouble1)
 {
   mVectorDouble1 = vectorDouble1;
   return LIBSBML_OPERATION_SUCCESS;
@@ -1234,7 +1234,7 @@ MyRequiredClass::addVectorDouble1(double vectorDouble1)
  * Sets the value of the "vectorInt" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::setVectorInt(const std::vector<int>& vectorInt)
+MyRequiredClass::setVectorInts(const std::vector<int>& vectorInt)
 {
   mVectorInt = vectorInt;
   return LIBSBML_OPERATION_SUCCESS;
@@ -1256,7 +1256,7 @@ MyRequiredClass::addVectorInt(int vectorInt)
  * Sets the value of the "vectorInt1" attribute of this MyRequiredClass.
  */
 int
-MyRequiredClass::setVectorInt1(const std::vector<int>& vectorInt1)
+MyRequiredClass::setVectorInt1s(const std::vector<int>& vectorInt1)
 {
   mVectorInt1 = vectorInt1;
   return LIBSBML_OPERATION_SUCCESS;
@@ -2439,19 +2439,19 @@ MyRequiredClass::isSetAttribute(const std::string& attributeName) const
   }
   else if (attributeName == "vectorDouble")
   {
-    value = isSetVectorDouble();
+    value = hasVectorDoubles();
   }
   else if (attributeName == "vectorDouble1")
   {
-    value = isSetVectorDouble1();
+    value = hasVectorDouble1s();
   }
   else if (attributeName == "vectorInt")
   {
-    value = isSetVectorInt();
+    value = hasVectorInts();
   }
   else if (attributeName == "vectorInt1")
   {
-    value = isSetVectorInt1();
+    value = hasVectorInt1s();
   }
   else if (attributeName == "arrayD")
   {
@@ -2741,19 +2741,19 @@ MyRequiredClass::unsetAttribute(const std::string& attributeName)
   }
   else if (attributeName == "vectorDouble")
   {
-    value = clearVectorDouble();
+    value = clearVectorDoubles();
   }
   else if (attributeName == "vectorDouble1")
   {
-    value = clearVectorDouble1();
+    value = clearVectorDouble1s();
   }
   else if (attributeName == "vectorInt")
   {
-    value = clearVectorInt();
+    value = clearVectorInts();
   }
   else if (attributeName == "vectorInt1")
   {
-    value = clearVectorInt1();
+    value = clearVectorInt1s();
   }
   else if (attributeName == "arrayD")
   {

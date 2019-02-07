@@ -347,7 +347,7 @@ public:
    *
    * @return the SBGN typecode for the objects contained in this
    * SbgnListOfPoints:
-   * @sbgnconstant{SBGN_SBGNML_POINT, SBGNSbgnmlTypeCode_t}.
+   * @sbgnconstant{SBGN_SBGNML_POINT, SbgnTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

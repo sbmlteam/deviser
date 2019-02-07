@@ -363,7 +363,7 @@ public:
    * @return the value of the "vectorDouble" attribute of this MyRequiredClass
    * as a vector.
    */
-  const std::vector<double>& getVectorDouble() const;
+  const std::vector<double>& getVectorDoubles() const;
 
 
   /**
@@ -373,7 +373,7 @@ public:
    * @return the value of the "vectorDouble1" attribute of this MyRequiredClass
    * as a vector.
    */
-  const std::vector<double>& getVectorDouble1() const;
+  const std::vector<double>& getVectorDouble1s() const;
 
 
   /**
@@ -382,7 +382,7 @@ public:
    * @return the value of the "vectorInt" attribute of this MyRequiredClass as
    * a vector.
    */
-  const std::vector<int>& getVectorInt() const;
+  const std::vector<int>& getVectorInts() const;
 
 
   /**
@@ -391,7 +391,7 @@ public:
    * @return the value of the "vectorInt1" attribute of this MyRequiredClass as
    * a vector.
    */
-  const std::vector<int>& getVectorInt1() const;
+  const std::vector<int>& getVectorInt1s() const;
 
 
   /**
@@ -1012,7 +1012,7 @@ public:
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setVectorDouble(const std::vector<double>& vectorDouble);
+  int setVectorDoubles(const std::vector<double>& vectorDouble);
 
 
   /**
@@ -1038,7 +1038,7 @@ public:
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setVectorDouble1(const std::vector<double>& vectorDouble1);
+  int setVectorDouble1s(const std::vector<double>& vectorDouble1);
 
 
   /**
@@ -1064,7 +1064,7 @@ public:
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setVectorInt(const std::vector<int>& vectorInt);
+  int setVectorInts(const std::vector<int>& vectorInt);
 
 
   /**
@@ -1089,7 +1089,7 @@ public:
    * @copydetails doc_returns_one_success_code
    * @li @sbmlconstant{LIBSBML_OPERATION_SUCCESS, OperationReturnValues_t}
    */
-  int setVectorInt1(const std::vector<int>& vectorInt1);
+  int setVectorInt1s(const std::vector<int>& vectorInt1);
 
 
   /**
