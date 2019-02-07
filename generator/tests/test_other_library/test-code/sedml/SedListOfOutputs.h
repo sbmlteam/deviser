@@ -413,7 +413,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfOutputs:
-   * @sedmlconstant{SEDML_OUTPUT, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

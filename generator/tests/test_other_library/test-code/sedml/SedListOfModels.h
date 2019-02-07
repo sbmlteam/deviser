@@ -334,7 +334,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfModels:
-   * @sedmlconstant{SEDML_MODEL, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_MODEL, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

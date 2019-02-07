@@ -336,7 +336,7 @@ public:
    *
    * @return the OMEX typecode for the objects contained in this
    * CaListOfContents:
-   * @omexconstant{LIB_COMBINE_CONTENT, OMEXCombineTypeCode_t}.
+   * @omexconstant{LIB_COMBINE_CONTENT, CaTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

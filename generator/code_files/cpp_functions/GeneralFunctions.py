@@ -343,9 +343,8 @@ class GeneralFunctions():
                         'objects contained in this '
                         '{1}:'.format(self.cap_language, self.object_name)]
         additional = []
-        line = '@{0}constant{1}{2}, {3}{4}TypeCode_t{5}.' \
-               ''.format(self.language, '{', self.typecode, self.cap_language,
-                         self.package, '}')
+        line = '@{0}constant{1}{2}, {3}TypeCode_t{4}.'.format(self.language, '{', self.typecode,
+                                                              global_variables.prefix, '}')
         return_lines.append(line)
         additional.append('@copydetails doc_warning_typecodes_not_unique')
         additional.append(' ')
