@@ -1300,7 +1300,8 @@ class ProtectedFunctions():
                 if core_err not in global_variables.error_list:
                     core_err = global_variables.unknown_error
                 if error not in global_variables.error_list:
-                    error = global_variables.unknown_error
+                    error = '{0}{1}AllowedAttributes'.format(self.package, strFunctions.remove_prefix(self.base_class))
+#                    error = global_variables.unknown_error
 
         if global_variables.is_package:
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',

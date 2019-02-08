@@ -253,7 +253,7 @@
           </attributes>
         </element>
         <element name="RemoveXML" typeCode="SEDML_CHANGE_REMOVEXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false" elementName="removeXML"/>
-        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" listOfName="listOfChanges">
           <attributes>
             <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
             <attribute name="symbol" required="false" type="string" abstract="false"/>
@@ -495,6 +495,12 @@
             <enumValue name="SEDML_MAPPINGTYPE_PARAMETER" value="Parameter"/>
           </enumValues>
         </enum>
+        <enum name="ExperimentType">
+          <enumValues>
+            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
+          </enumValues>
+        </enum>
         <enum name="AxisType">
           <enumValues>
             <enumValue name="SEDML_AXISTYPE_LINEAR" value="linear"/>
@@ -543,12 +549,6 @@
             <enumValue name="SEDML_SURFACETYPE_HEATMAP" value="heatMap"/>
             <enumValue name="SEDML_SURFACETYPE_STACKEDCURVES" value="stackedCurves"/>
             <enumValue name="SEDML_SURFACETYPE_BAR" value="bar"/>
-          </enumValues>
-        </enum>
-        <enum name="ExperimentType">
-          <enumValues>
-            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
-            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
           </enumValues>
         </enum>
       </enums>
