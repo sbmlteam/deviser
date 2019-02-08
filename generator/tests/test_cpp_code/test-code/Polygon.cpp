@@ -823,7 +823,7 @@ Polygon::createObject(XMLInputStream& stream)
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfCurveElements")
+  if (name == "listOfElements")
   {
     if (mRenderPoints.size() != 0)
     {

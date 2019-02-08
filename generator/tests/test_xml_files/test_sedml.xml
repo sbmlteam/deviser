@@ -249,7 +249,7 @@
           </attributes>
         </element>
         <element name="RemoveXML" typeCode="SEDML_CHANGE_REMOVEXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false" elementName="removeXML"/>
-        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" listOfName="listOfChanges">
           <attributes>
             <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
             <attribute name="symbol" required="false" type="string" abstract="false"/>

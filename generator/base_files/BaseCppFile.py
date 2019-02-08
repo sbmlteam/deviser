@@ -388,17 +388,19 @@ class BaseCppFile(BaseFile.BaseFile):
         names_to_sort = []
         xml_names = []
         for attribute in self.attributes:
-            if attribute['xml_name'] in xml_names:
-                names_to_sort.append(attribute['xml_name'])
-                need_to_adjust = True
-            else:
-                xml_names.append(attribute['xml_name'])
+            if 'xml_name' in attribute and attribute['xml_name'] != '':
+                xml_name = attribute['xml_name']
+                if xml_name in xml_names:
+                    names_to_sort.append(xml_name)
+                    need_to_adjust = True
+                else:
+                    xml_names.append(xml_name)
         if not need_to_adjust:
             return
         else:
             for name in names_to_sort:
                 for attribute in self.attributes:
-                    if attribute['xml_name'] == name:
+                    if 'xml_name' in attribute and attribute['xml_name'] == name:
                         att_type = attribute['attType']
                         if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
                             continue;

@@ -496,6 +496,9 @@ class ProtectedFunctions():
         name = element['memberName']
         loname = strFunctions.lower_first(
             strFunctions.remove_prefix(element['attTypeCode']))
+        if 'used_child_name' in element and element['used_child_name'] != '':
+            loname = strFunctions.lower_first(
+            strFunctions.remove_prefix(strFunctions.cap_list_of_name(element['used_child_name'])))
         nested_if = self.create_code_block('if',
                                            ['{0}.size() '
                                             '!= 0'.format(name),

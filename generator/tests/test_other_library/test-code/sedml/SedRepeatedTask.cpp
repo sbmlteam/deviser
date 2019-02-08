@@ -1481,7 +1481,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
     obj = &mRanges;
   }
-  else if (name == "listOfChanges")
+  else if (name == "listOfTaskChanges")
   {
     if (mSetValues.size() != 0)
     {
