@@ -54,6 +54,7 @@ class BaseCppFile(BaseFile.BaseFile):
         # expand the information for the attributes
         if attributes:
             self.attributes = self.expand_attributes(attributes)
+            self.sort_name_mismatches()
             self.child_elements = self.get_children()
             self.child_lo_elements = self.get_lo_children()
         else:
@@ -381,6 +382,29 @@ class BaseCppFile(BaseFile.BaseFile):
                 attributes[i]['isNumber'] = False
                 attributes[i]['default'] = 'FIXME_{0}'.format(att_type)
         return attributes
+
+    def sort_name_mismatches(self):
+        need_to_adjust = False
+        names_to_sort = []
+        xml_names = []
+        for attribute in self.attributes:
+            if attribute['xml_name'] in xml_names:
+                names_to_sort.append(attribute['xml_name'])
+                need_to_adjust = True
+            else:
+                xml_names.append(attribute['xml_name'])
+        if not need_to_adjust:
+            return
+        else:
+            for name in names_to_sort:
+                for attribute in self.attributes:
+                    if attribute['xml_name'] == name:
+                        att_type = attribute['attType']
+                        if att_type == 'element' or att_type == 'lo_element' or att_type == 'inline_lo_element':
+                            continue;
+                        else:
+                            attribute['capAttName'] = strFunctions.upper_first(attribute['name'])
+                            attribute['memberName'] = 'm{0}'.format(attribute['capAttName'])
 
     def create_lo_other_child_element_class(self, name, parent):
         capname = strFunctions.upper_first(name)

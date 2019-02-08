@@ -58,7 +58,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
   : SedAbstractTask(level, version)
-  , mRange ("")
+  , mRangeId ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
   , mRanges (level, version)
@@ -77,7 +77,7 @@ SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
  */
 SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
   : SedAbstractTask(sedmlns)
-  , mRange ("")
+  , mRangeId ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
   , mRanges (sedmlns)
@@ -95,7 +95,7 @@ SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
  */
 SedRepeatedTask::SedRepeatedTask(const SedRepeatedTask& orig)
   : SedAbstractTask( orig )
-  , mRange ( orig.mRange )
+  , mRangeId ( orig.mRangeId )
   , mResetModel ( orig.mResetModel )
   , mIsSetResetModel ( orig.mIsSetResetModel )
   , mRanges ( orig.mRanges )
@@ -115,7 +115,7 @@ SedRepeatedTask::operator=(const SedRepeatedTask& rhs)
   if (&rhs != this)
   {
     SedAbstractTask::operator=(rhs);
-    mRange = rhs.mRange;
+    mRangeId = rhs.mRangeId;
     mResetModel = rhs.mResetModel;
     mIsSetResetModel = rhs.mIsSetResetModel;
     mRanges = rhs.mRanges;
@@ -152,7 +152,7 @@ SedRepeatedTask::~SedRepeatedTask()
 const std::string&
 SedRepeatedTask::getRangeId() const
 {
-  return mRange;
+  return mRangeId;
 }
 
 
@@ -173,7 +173,7 @@ SedRepeatedTask::getResetModel() const
 bool
 SedRepeatedTask::isSetRangeId() const
 {
-  return (mRange.empty() == false);
+  return (mRangeId.empty() == false);
 }
 
 
@@ -194,13 +194,13 @@ SedRepeatedTask::isSetResetModel() const
 int
 SedRepeatedTask::setRangeId(const std::string& rangeId)
 {
-  if (!(SyntaxChecker::isValidInternalSId(rangeId)))
+  if (!(SyntaxChecker::isValidInternalSId(range)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mRange = rangeId;
+    mRangeId = rangeId;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
@@ -224,9 +224,9 @@ SedRepeatedTask::setResetModel(bool resetModel)
 int
 SedRepeatedTask::unsetRangeId()
 {
-  mRange.erase();
+  mRangeId.erase();
 
-  if (mRange.empty() == true)
+  if (mRangeId.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -811,7 +811,7 @@ void
 SedRepeatedTask::renameSIdRefs(const std::string& oldid,
                                const std::string& newid)
 {
-  if (isSetRangeId() && mRange == oldid)
+  if (isSetRangeId() && mRangeId == oldid)
   {
     setRangeId(newid);
   }
@@ -1571,15 +1571,15 @@ SedRepeatedTask::readAttributes(
   // range SIdRef (use = "optional" )
   // 
 
-  assigned = attributes.readInto("range", mRange);
+  assigned = attributes.readInto("range", mRangeId);
 
   if (assigned == true)
   {
-    if (mRange.empty() == true)
+    if (mRangeId.empty() == true)
     {
-      logEmptyString(mRange, level, version, "<SedRepeatedTask>");
+      logEmptyString(mRangeId, level, version, "<SedRepeatedTask>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mRangeId) == false)
     {
       std::string msg = "The range attribute on the <" + getElementName() +
         ">";
@@ -1588,7 +1588,7 @@ SedRepeatedTask::readAttributes(
         msg += " with id '" + getId() + "'";
       }
 
-      msg += " is '" + mRange + "', which does not conform to the syntax.";
+      msg += " is '" + mRangeId + "', which does not conform to the syntax.";
       logError(SedmlRepeatedTaskRangeIdMustBeRange, level, version, msg);
     }
   }
@@ -1628,7 +1628,7 @@ SedRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (isSetRangeId() == true)
   {
-    stream.writeAttribute("range", getPrefix(), mRange);
+    stream.writeAttribute("range", getPrefix(), mRangeId);
   }
 
   if (isSetResetModel() == true)
@@ -1701,7 +1701,8 @@ SedRepeatedTask_getRangeId(const SedRepeatedTask_t * srt)
     return NULL;
   }
 
-  return srt->getRangeId().empty() ? NULL : safe_strdup(srt->getRangeId().c_str());
+  return srt->getRangeId().empty() ? NULL :
+    safe_strdup(srt->getRangeId().c_str());
 }
 
 
@@ -1945,8 +1946,8 @@ SedSetValue_t*
 SedRepeatedTask_getTaskChangeByModelReference(SedRepeatedTask_t* srt,
                                               const char *sid)
 {
-  return (srt != NULL && sid != NULL) ? srt->getTaskChangeByModelReference(sid) :
-    NULL;
+  return (srt != NULL && sid != NULL) ? srt->getTaskChangeByModelReference(sid)
+    : NULL;
 }
 
 

@@ -66,7 +66,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mRange;
+  std::string mRangeId;
   bool mResetModel;
   bool mIsSetResetModel;
   SedListOfRanges mRanges;
