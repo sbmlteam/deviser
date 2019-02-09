@@ -257,7 +257,9 @@ def wrap_enum(name):
 
 
 def get_sid_refs(refs):
-    if ',' not in refs:
+    if refs == '':
+        return['', 'SId']
+    elif ',' not in refs:
         return [upper_first(refs), upper_first(refs)]
     else:
         ret_string = ''
@@ -308,7 +310,10 @@ def get_element_name_no_prefix(attribute):
         if len(name) == 0:
             name = attribute['name']
         if attribute['type'] == 'lo_element':
-            return '\{0}'.format(cap_list_of_name_no_prefix(name))
+            if 'listOfClassName' in attribute and attribute['listOfClassName'] != '':
+                return '\{0}'.format(remove_prefix(attribute['listOfClassName']))
+            else:
+                return '\{0}'.format(cap_list_of_name_no_prefix(name))
         elif attribute['type'] == 'inline_lo_element':
             return '\{0}'.format(cap_list_of_name_no_prefix(name))
         elif attribute['type'] == 'element':
