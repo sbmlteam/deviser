@@ -83,7 +83,7 @@
             <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribUncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfDistribExternalParameters">
+        <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribUncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
           <attributes>
             <attribute name="definitionURL" required="true" type="string" abstract="false"/>
             <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
@@ -112,7 +112,7 @@
             <attribute name="category" required="true" type="lo_element" element="Category" abstract="false"/>
           </attributes>
         </element>
-        <element name="Category" typeCode="SBML_DISTRIB_CATEGORY" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="DistribBase" abstract="false" elementName="category" listOfName="listOfCategories" listOfClassName="ListOfDistribCategories">
+        <element name="Category" typeCode="SBML_DISTRIB_CATEGORY" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" baseClass="DistribBase" abstract="false" elementName="category" listOfName="listOfCategories" listOfClassName="ListOfCategories">
           <attributes>
             <attribute name="rank" required="false" type="non-negative int" abstract="false"/>
             <attribute name="probability" required="false" type="element" element="UncertValue" abstract="false"/>
