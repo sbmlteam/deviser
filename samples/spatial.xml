@@ -157,7 +157,6 @@
           <concretes>
             <concrete name="csgPrimitive" element="CSGPrimitive" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="csgTransformation" element="CSGTransformation" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="csgPseudoPrimitive" element="CSGPseudoPrimitive" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="csgSetOperator" element="CSGSetOperator" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
@@ -197,7 +196,6 @@
         <element name="CSGHomogeneousTransformation" typeCode="SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGTransformation" abstract="false" elementName="csgHomogeneousTransformation">
           <attributes>
             <attribute name="forwardTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
-            <attribute name="reverseTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
           </attributes>
         </element>
         <element name="TransformationComponent" typeCode="SBML_SPATIAL_TRANSFORMATIONCOMPONENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
@@ -209,11 +207,6 @@
         <element name="CSGPrimitive" typeCode="SBML_SPATIAL_CSGPRIMITIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgPrimitive">
           <attributes>
             <attribute name="primitiveType" required="true" type="enum" element="PrimitiveKind" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="CSGPseudoPrimitive" typeCode="SBML_SPATIAL_CSGPSEUDOPRIMITIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgPseudoPrimitive">
-          <attributes>
-            <attribute name="csgObjectRef" required="true" type="SIdRef" element="CSGObject" abstract="false"/>
           </attributes>
         </element>
         <element name="CSGSetOperator" typeCode="SBML_SPATIAL_CSGSETOPERATOR" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGNode" abstract="false" elementName="csgSetOperator">
