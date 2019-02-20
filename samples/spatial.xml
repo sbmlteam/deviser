@@ -239,7 +239,7 @@
         <element name="BoundaryCondition" typeCode="SBML_SPATIAL_BOUNDARYCONDITION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="variable" required="true" type="SIdRef" element="Species" abstract="false"/>
-            <attribute name="type" required="true" type="enum" element="BoundaryConditionKind" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="BoundaryKind" abstract="false"/>
             <attribute name="coordinateBoundary" required="false" type="SIdRef" element="Boundary" abstract="false"/>
             <attribute name="boundaryDomainType" required="false" type="SIdRef" element="DomainType" abstract="false"/>
           </attributes>
@@ -270,8 +270,6 @@
         </element>
         <element name="SpatialPoints" typeCode="SBML_SPATIAL_SPATIALPOINTS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
-            <attribute name="id" required="true" type="SId" abstract="false"/>
-            <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="compression" required="true" type="enum" element="CompressionKind" abstract="false"/>
             <attribute name="arrayData" required="true" type="array" element="double" abstract="false"/>
             <attribute name="arrayDataLength" required="true" type="int" abstract="false"/>
@@ -310,7 +308,7 @@
         </plugin>
       </plugins>
       <enums>
-        <enum name="BoundaryConditionKind">
+        <enum name="BoundaryKind">
           <enumValues>
             <enumValue name="SPATIAL_BOUNDARYKIND_ROBIN_VALUE_COEFFICIENT" value="Robin_valueCoefficient"/>
             <enumValue name="SPATIAL_BOUNDARYKIND_ROBIN_INWARD_NORMAL_GRADIENT_COEFFICIENT" value="Robin_inwardNormalGradientCoefficient"/>
