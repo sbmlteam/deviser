@@ -414,6 +414,13 @@ class BaseFile:
                                 'http://sbml.org for more information about '
                                 'SBML, and the latest version of libSBML.')
         self.write_blank_comment_line()
+        self.write_comment_line('Copyright (C) 2019 jointly by the '
+                                'following organizations:')
+        self.write_comment_line('    1. California Institute of Technology, '
+                                'Pasadena, CA, USA')
+        self.write_comment_line('    2. University of Heidelberg, Heidelberg, '
+                                'Germany')
+        self.write_blank_comment_line()
         self.write_comment_line('Copyright (C) 2013-2018 jointly by the '
                                 'following organizations:')
         self.write_comment_line('    1. California Institute of Technology, '
