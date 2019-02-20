@@ -196,11 +196,11 @@
         </element>
         <element name="CSGHomogeneousTransformation" typeCode="SBML_SPATIAL_CSGHOMOGENEOUSTRANSFORMATION" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="CSGTransformation" abstract="false" elementName="csgHomogeneousTransformation">
           <attributes>
-            <attribute name="forwardTransformation" required="true" type="element" element="TransformationComponents" abstract="false"/>
-            <attribute name="reverseTransformation" required="true" type="element" element="TransformationComponents" abstract="false"/>
+            <attribute name="forwardTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
+            <attribute name="reverseTransformation" required="true" type="element" element="TransformationComponent" abstract="false"/>
           </attributes>
         </element>
-        <element name="TransformationComponents" typeCode="SBML_SPATIAL_TRANSFORMATIONCOMPONENTS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="TransformationComponent" typeCode="SBML_SPATIAL_TRANSFORMATIONCOMPONENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
             <attribute name="components" required="true" type="array" element="double" abstract="false"/>
             <attribute name="componentsLength" required="true" type="int" abstract="false"/>
