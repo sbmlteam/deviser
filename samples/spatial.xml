@@ -97,7 +97,7 @@
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="domainType" required="true" type="SIdRef" element="DomainType" abstract="false"/>
-            <attribute name="sampledValue" required="true" type="double" abstract="false"/>
+            <attribute name="sampledValue" required="false" type="double" abstract="false"/>
             <attribute name="minValue" required="false" type="double" abstract="false"/>
             <attribute name="maxValue" required="false" type="double" abstract="false"/>
           </attributes>
