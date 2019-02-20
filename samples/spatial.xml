@@ -263,11 +263,6 @@
             <attribute name="sampledField" required="false" type="lo_element" element="SampledField" abstract="false"/>
           </attributes>
         </element>
-        <element name="CoordinateReference" typeCode="SBML_SPATIAL_COORDINATEREFERENCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SBase" abstract="false">
-          <attributes>
-            <attribute name="coordinate" required="true" type="enum" element="CoordinateKind" abstract="false"/>
-          </attributes>
-        </element>
         <element name="MixedGeometry" typeCode="SBML_SPATIAL_MIXEDGEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="GeometryDefinition" abstract="false">
           <attributes>
             <attribute name="geometryDefinition" required="false" type="lo_element" element="GeometryDefinition" abstract="true"/>
