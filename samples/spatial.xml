@@ -244,7 +244,7 @@
             <attribute name="boundaryDomainType" required="false" type="SIdRef" element="DomainType" abstract="false"/>
           </attributes>
         </element>
-        <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
+        <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false" additionalDecls="spatial_geometry.h.txt" additionalDefs="spatial_geometry.cpp.txt">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="coordinateSystem" required="true" type="enum" element="GeometryKind" abstract="false"/>
