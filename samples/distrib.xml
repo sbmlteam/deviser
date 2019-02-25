@@ -18,7 +18,7 @@
             <concrete name="externalParameter" element="ExternalParameter" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribUncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
+        <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="UncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
           <attributes>
             <attribute name="definitionURL" required="true" type="string" abstract="false"/>
             <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
