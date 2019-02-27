@@ -434,12 +434,12 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20210
-  { SedmlDocumentLOAbstractTasksAllowedCoreElements,
-    "Core elements allowed on <listOfAbstractTasks>.",
+  { SedmlDocumentLOTasksAllowedCoreElements,
+    "Core elements allowed on <listOfTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfAbstractTasks> container object may only contain "
+    "SBML objects, a <listOfTasks> container object may only contain "
     "<abstractTask> objects.",
     { "L3V1 Sedml V1 Section"
     }
@@ -518,8 +518,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20217
-  { SedmlDocumentLOAbstractTasksAllowedCoreAttributes,
-    "Core attributes allowed on <listOfAbstractTasks>.",
+  { SedmlDocumentLOTasksAllowedCoreAttributes,
+    "Core attributes allowed on <listOfTasks>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <listOfAbstractTasks> object may have the optional SBML Level 3 Core "
@@ -1607,20 +1607,20 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 21704
-  { SedmlPlot2DLOAbstractCurvesAllowedCoreElements,
-    "Core elements allowed on <listOfAbstractCurves>.",
+  { SedmlPlot2DLOCurvesAllowedCoreElements,
+    "Core elements allowed on <listOfCurves>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfAbstractCurves> container object may only contain "
+    "SBML objects, a <listOfCurves> container object may only contain "
     "<abstractCurve> objects.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 21705
-  { SedmlPlot2DLOAbstractCurvesAllowedCoreAttributes,
-    "Core attributes allowed on <listOfAbstractCurves>.",
+  { SedmlPlot2DLOCurvesAllowedCoreAttributes,
+    "Core attributes allowed on <listOfCurves>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <listOfAbstractCurves> object may have the optional SBML Level 3 Core "
@@ -3172,8 +3172,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23806
-  { SedmlDataSourceIndexSetMustBe,
-    "The attribute 'indexSet' must point to object.",
+  { SedmlDataSourceIndexSetMustBeSId,
+    "The attribute 'indexSet' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:indexSet' of a <dataSource> object must "
@@ -3244,8 +3244,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 23904
-  { SedmlSliceReferenceMustBe,
-    "The attribute 'reference' must point to object.",
+  { SedmlSliceReferenceMustBeSId,
+    "The attribute 'reference' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:reference' of a <slice> object must be "
@@ -4582,8 +4582,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25904
-  { SedmlRemainingDimensionTargetMustBe,
-    "The attribute 'target' must point to object.",
+  { SedmlRemainingDimensionTargetMustBeSId,
+    "The attribute 'target' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:target' of a <remainingDimension> object "
@@ -4594,8 +4594,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25905
-  { SedmlRemainingDimensionDimensionTargetMustBe,
-    "The attribute 'dimensionTarget' must point to object.",
+  { SedmlRemainingDimensionDimensionTargetMustBeSId,
+    "The attribute 'dimensionTarget' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:dimensionTarget' of a "
@@ -4642,8 +4642,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26004
-  { SedmlDataRangeSourceRefMustBe,
-    "The attribute 'sourceRef' must point to object.",
+  { SedmlDataRangeSourceRefMustBeSId,
+    "The attribute 'sourceRef' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:sourceRef' of a <dataRange> object must "
