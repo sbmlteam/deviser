@@ -7,6 +7,10 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
+ * Copyright (C) 2019 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. University of Heidelberg, Heidelberg, Germany
+ *
  * Copyright (C) 2013-2018 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
@@ -165,8 +169,8 @@ typedef enum
 , RenderPolygonAllowedCoreElements                            = 1321702
 , RenderPolygonAllowedElements                                = 1321703
 , RenderPolygonEmptyLOElements                                = 1321704
-, RenderPolygonLORenderPointsAllowedCoreElements              = 1321705
-, RenderPolygonLORenderPointsAllowedCoreAttributes            = 1321706
+, RenderPolygonLOCurveElementsAllowedCoreElements             = 1321705
+, RenderPolygonLOCurveElementsAllowedCoreAttributes           = 1321706
 , RenderRadialGradientAllowedCoreAttributes                   = 1321801
 , RenderRadialGradientAllowedCoreElements                     = 1321802
 , RenderRadialGradientAllowedAttributes                       = 1321803
@@ -204,8 +208,8 @@ typedef enum
 , RenderRenderCurveStartHeadMustBeLineEnding                  = 1322105
 , RenderRenderCurveEndHeadMustBeLineEnding                    = 1322106
 , RenderRenderCurveEmptyLOElements                            = 1322107
-, RenderRenderCurveLORenderPointsAllowedCoreElements          = 1322108
-, RenderRenderCurveLORenderPointsAllowedCoreAttributes        = 1322109
+, RenderRenderCurveLOCurveElementsAllowedCoreElements         = 1322108
+, RenderRenderCurveLOCurveElementsAllowedCoreAttributes       = 1322109
 , RenderRenderPointAllowedCoreAttributes                      = 1322201
 , RenderRenderPointAllowedCoreElements                        = 1322202
 , RenderRenderPointAllowedAttributes                          = 1322203
@@ -260,10 +264,10 @@ typedef enum
 , RenderRenderInformationBaseBackgroundColorMustBeString      = 1322909
 , RenderRenderInformationBaseLOElementChildren                = 1322910
 , RenderRenderInformationBaseLOColorDefinitionsAllowedCoreElements= 1322911
-, RenderRenderInformationBaseLOGradientBasesAllowedCoreElements= 1322912
+, RenderRenderInformationBaseLOGradientDefinitionsAllowedCoreElements= 1322912
 , RenderRenderInformationBaseLOLineEndingsAllowedCoreElements = 1322913
 , RenderRenderInformationBaseLOColorDefinitionsAllowedCoreAttributes= 1322914
-, RenderRenderInformationBaseLOGradientBasesAllowedCoreAttributes= 1322915
+, RenderRenderInformationBaseLOGradientDefinitionsAllowedCoreAttributes= 1322915
 , RenderRenderInformationBaseLOLineEndingsAllowedCoreAttributes= 1322916
 , RenderDefaultValuesAllowedCoreAttributes                    = 1323001
 , RenderDefaultValuesAllowedCoreElements                      = 1323002

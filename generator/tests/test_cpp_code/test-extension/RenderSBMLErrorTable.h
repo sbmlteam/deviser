@@ -7,6 +7,10 @@
  * This file is part of libSBML. Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
+ * Copyright (C) 2019 jointly by the following organizations:
+ * 1. California Institute of Technology, Pasadena, CA, USA
+ * 2. University of Heidelberg, Heidelberg, Germany
+ *
  * Copyright (C) 2013-2018 jointly by the following organizations:
  * 1. California Institute of Technology, Pasadena, CA, USA
  * 2. EMBL European Bioinformatics Institute (EMBL-EBI), Hinxton, UK
@@ -1374,20 +1378,20 @@ static const packageErrorTableEntry renderErrorTable[] =
   },
 
   // 1321705
-  { RenderPolygonLORenderPointsAllowedCoreElements,
-    "Core elements allowed on <listOfRenderPoints>.",
+  { RenderPolygonLOCurveElementsAllowedCoreElements,
+    "Core elements allowed on <listOfCurveElements>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfRenderPoints> container object may only contain "
+    "SBML objects, a <listOfCurveElements> container object may only contain "
     "<renderPoint> objects.",
     { "L3V1 Render V1 Section"
     }
   },
 
   // 1321706
-  { RenderPolygonLORenderPointsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfRenderPoints>.",
+  { RenderPolygonLOCurveElementsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfCurveElements>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfRenderPoints> object may have the optional SBML Level 3 Core "
@@ -1886,20 +1890,20 @@ static const packageErrorTableEntry renderErrorTable[] =
   },
 
   // 1322108
-  { RenderRenderCurveLORenderPointsAllowedCoreElements,
-    "Core elements allowed on <listOfRenderPoints>.",
+  { RenderRenderCurveLOCurveElementsAllowedCoreElements,
+    "Core elements allowed on <listOfCurveElements>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfRenderPoints> container object may only contain "
+    "SBML objects, a <listOfCurveElements> container object may only contain "
     "<renderPoint> objects.",
     { "L3V1 Render V1 Section"
     }
   },
 
   // 1322109
-  { RenderRenderCurveLORenderPointsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfRenderPoints>.",
+  { RenderRenderCurveLOCurveElementsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfCurveElements>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfRenderPoints> object may have the optional SBML Level 3 Core "
@@ -2581,13 +2585,13 @@ static const packageErrorTableEntry renderErrorTable[] =
   },
 
   // 1322912
-  { RenderRenderInformationBaseLOGradientBasesAllowedCoreElements,
-    "Core elements allowed on <listOfGradientBases>.",
+  { RenderRenderInformationBaseLOGradientDefinitionsAllowedCoreElements,
+    "Core elements allowed on <listOfGradientDefinitions>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfGradientBases> container object may only contain "
-    "<gradientBase> objects.",
+    "SBML objects, a <listOfGradientDefinitions> container object may only "
+    "contain <gradientBase> objects.",
     { "L3V1 Render V1 Section"
     }
   },
@@ -2617,8 +2621,8 @@ static const packageErrorTableEntry renderErrorTable[] =
   },
 
   // 1322915
-  { RenderRenderInformationBaseLOGradientBasesAllowedCoreAttributes,
-    "Core attributes allowed on <listOfGradientBases>.",
+  { RenderRenderInformationBaseLOGradientDefinitionsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfGradientDefinitions>.",
     LIBSBML_CAT_GENERAL_CONSISTENCY,
     LIBSBML_SEV_ERROR,
     "A <listOfGradientBases> object may have the optional SBML Level 3 Core "
