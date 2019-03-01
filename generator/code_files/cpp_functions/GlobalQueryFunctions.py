@@ -230,15 +230,23 @@ class GlobalQueryFunctions():
             num_lo = len(self.child_lo_elements)
             name = []
             for i in range(0, num_lo):
+                qualifier = '.'
+                pointer = '&'
+                if 'recursive_child' in self.child_lo_elements[i] and self.child_lo_elements[i]['recursive_child']:
+                    qualifier = '->'
+                    pointer = ''
                 name.append(self.child_lo_elements[i]['memberName'])
-                first_if = ['{0}.getMetaId() == metaid'.format(name[i]),
-                            'return &{0}'.format(name[i])]
+                first_if = ['{0}{1}getMetaId() == metaid'.format(name[i], qualifier),
+                            'return {1}{0}'.format(name[i], pointer)]
                 code.append(self.create_code_block('if', first_if))
             if_block = ['obj != NULL', 'return obj']
             if_code = self.create_code_block('if', if_block)
             for i in range(0, num_lo):
-                line = 'obj = {0}.getElementByMetaId' \
-                       '(metaid)'.format(name[i])
+                qualifier = '.'
+                if 'recursive_child' in self.child_lo_elements[i] and self.child_lo_elements[i]['recursive_child']:
+                    qualifier = '->'
+                line = 'obj = {0}{1}getElementByMetaId' \
+                       '(metaid)'.format(name[i], qualifier)
                 code.append(self.create_code_block('line', [line]))
                 code.append(if_code)
             if self.is_list_of:
@@ -306,8 +314,11 @@ class GlobalQueryFunctions():
             implementation = []
             for i in range(0, len(self.child_lo_elements)):
                 name = self.child_lo_elements[i]['memberName']
-                implementation.append('ADD_FILTERED_LIST(ret, sublist, {0}, '
-                                      'filter)'.format(name))
+                elementType = 'LIST'
+                if 'recursive_child' in self.child_lo_elements[i] and self.child_lo_elements[i]['recursive_child']:
+                    elementType = 'POINTER'
+                implementation.append('ADD_FILTERED_{1}(ret, sublist, {0}, '
+                                      'filter)'.format(name, elementType))
             code.append(self.create_code_block('line', implementation))
             if not self.is_plugin:
                 code.append(self.create_code_block('line',

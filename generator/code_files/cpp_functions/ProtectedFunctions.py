@@ -499,11 +499,16 @@ class ProtectedFunctions():
         if 'used_child_name' in element and element['used_child_name'] != '':
             loname = strFunctions.lower_first(
             strFunctions.remove_prefix(strFunctions.cap_list_of_name(element['used_child_name'])))
+        qualifier = '.'
+        pointer = '&'
+        if 'recursive_child' in element and element['recursive_child']:
+            qualifier = '->'
+            pointer = ''
         nested_if = self.create_code_block('if',
-                                           ['{0}.size() '
-                                            '!= 0'.format(name),
+                                           ['{0}{1}size() '
+                                            '!= 0'.format(name, qualifier),
                                             error_line])
-        line = 'obj = &{0}'.format(name)
+        line = 'obj = {1}{0}'.format(name, pointer)
         implementation = ['name == \"{0}\"'.format(loname),
                           nested_if, line]
         return implementation

@@ -200,7 +200,7 @@ def run_constraints_test(name, class_name, test_case):
 def main():
 
     runall = True
-#    runall = False
+    runall = False
     this_dir = os.path.dirname(os.path.abspath(__file__))
     (path_to_tests, other) = os.path.split(this_dir)
     test_functions.set_path_to_tests(path_to_tests)
@@ -787,6 +787,13 @@ def main():
         test_case = 'error enumeration '
         fail += run_valid_test(name, class_name, test_case)
 
+        name = 'new_distrib'
+        num = 11
+        class_name = 'ExternalParameter'
+        list_of = ''
+        test_case = 'class contains a listOf iteself'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
         name = 'test_core_vers'
         class_name = 'CoreversExtension'
         test_case = 'core version extension file'
@@ -1004,11 +1011,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'spatial'
-        num = 30
-        class_name = 'Geometry'
+        name = 'new_distrib'
+        num = 11
+        class_name = 'ExternalParameter'
         list_of = ''
-        test_case = 'class with math child'
+        test_case = 'class contains a listOf iteself'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)

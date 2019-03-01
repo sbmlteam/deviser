@@ -717,9 +717,12 @@ class GeneralFunctions():
                 code.append(dict({'code_type': 'for',
                                   'code': implementation}))
             else:
+                qualifier = '.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    qualifier = '->'
                 implementation = ['getNum{0}() > '
                                   '0'.format(name),
-                                  '{0}.write(stream)'.format(att['memberName'])]
+                                  '{0}{1}write(stream)'.format(att['memberName'], qualifier)]
                 code.append(dict({'code_type': 'if',
                                   'code': implementation}))
         if not self.is_plugin and global_variables.is_package:
@@ -813,7 +816,10 @@ class GeneralFunctions():
                                   'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{0}.accept(v)'.format(att['memberName'])]
+                qualifier = '.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    qualifier = '->'
+                implementation = ['{0}{1}accept(v)'.format(att['memberName'], qualifier)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
             if not self.is_plugin:
@@ -992,8 +998,11 @@ class GeneralFunctions():
                     code.append(self.create_code_block('if', implementation))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{0}.{1}'
-                                  '(package, level, version)'.format(att['memberName'], function)]
+                qualifier = '.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    qualifier = '->'
+                implementation = ['{0}{2}{1}'
+                                  '(package, level, version)'.format(att['memberName'], function, qualifier)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
 
@@ -1053,9 +1062,12 @@ class GeneralFunctions():
                                       'code': implementation}))
             for i in range(0, len(self.child_lo_elements)):
                 att = self.child_lo_elements[i]
-                implementation = ['{0}.enablePackageInternal'
+                qualifier = '.'
+                if 'recursive_child' in att and att['recursive_child']:
+                    qualifier = '->'
+                implementation = ['{0}{1}enablePackageInternal'
                                   '(pkgURI, pkgPrefix, '
-                                  'flag)'.format(att['memberName'])]
+                                  'flag)'.format(att['memberName'], qualifier)]
                 code.append(dict({'code_type': 'line',
                                   'code': implementation}))
 
