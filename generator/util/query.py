@@ -337,11 +337,22 @@ def has_attribute(element, attribute):
 def has_lo_attribute(element, attribute):
     if element is None:
         return False
+    elif isV2BaseAttribute(element, attribute):
+        return True
     elif element['lo_attribs'] is None:
         return False
     else:
         for attrib in element['lo_attribs']:
             if attribute == attrib['name']:
+                return True
+    return False
+
+def isV2BaseAttribute(element, attribute):
+    if attribute != 'id' and attribute != 'name':
+        return False
+    if 'root' in element:
+        if 'base_version' in element['root']:
+            if element['root']['base_version'] == 2:
                 return True
     return False
 
