@@ -1125,6 +1125,11 @@ MultipleChild::getElementBySId(const std::string& id)
     }
   }
 
+  if (mClassIds.getId() == id)
+  {
+    return &mClassIds;
+  }
+
   obj = mClassIds.getElementBySId(id);
 
   if (obj != NULL)

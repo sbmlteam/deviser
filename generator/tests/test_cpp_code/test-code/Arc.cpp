@@ -1746,6 +1746,11 @@ Arc::getElementBySId(const std::string& id)
     }
   }
 
+  if (mGlyphs.getId() == id)
+  {
+    return &mGlyphs;
+  }
+
   obj = mGlyphs.getElementBySId(id);
 
   if (obj != NULL)
@@ -1758,6 +1763,11 @@ Arc::getElementBySId(const std::string& id)
   if (obj != NULL)
   {
     return obj;
+  }
+
+  if (mPorts.getId() == id)
+  {
+    return &mPorts;
   }
 
   obj = mPorts.getElementBySId(id);

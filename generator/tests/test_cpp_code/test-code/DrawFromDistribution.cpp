@@ -1351,6 +1351,11 @@ DrawFromDistribution::getElementBySId(const std::string& id)
     }
   }
 
+  if (mDistribInputs.getId() == id)
+  {
+    return &mDistribInputs;
+  }
+
   obj = mDistribInputs.getElementBySId(id);
 
   if (obj != NULL)

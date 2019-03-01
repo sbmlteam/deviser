@@ -789,6 +789,11 @@ CategoricalDistribution::getElementBySId(const std::string& id)
 
   SBase* obj = NULL;
 
+  if (mCategories.getId() == id)
+  {
+    return &mCategories;
+  }
+
   obj = mCategories.getElementBySId(id);
 
   if (obj != NULL)

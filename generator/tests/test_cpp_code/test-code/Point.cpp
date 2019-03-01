@@ -901,6 +901,11 @@ Point::getElementBySId(const std::string& id)
 
   SbgnBase* obj = NULL;
 
+  if (mPoints->getId() == id)
+  {
+    return mPoints;
+  }
+
   obj = mPoints->getElementBySId(id);
 
   if (obj != NULL)

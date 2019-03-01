@@ -148,13 +148,15 @@ class GlobalQueryFunctions():
                                                     if_code]))
 
             for child in self.child_lo_elements:
-                if query.has_lo_attribute(query.get_class(child['name'], child['root']), 'id'):
-                    line = ['{0}.getId() == id'.format(child['memberName']),
-                            'return &{0}'.format(child['memberName'])]
-                    code.append(self.create_code_block('if', line))
                 symbol ='.'
+                pointer = '&'
                 if 'recursive_child' in child and child['recursive_child']:
                     symbol = '->'
+                    pointer = ''
+                if query.has_lo_attribute(query.get_class(child['name'], child['root']), 'id'):
+                    line = ['{0}{1}getId() == id'.format(child['memberName'], symbol),
+                            'return {1}{0}'.format(child['memberName'], pointer)]
+                    code.append(self.create_code_block('if', line))
                 line = [' obj = {0}{1}getElementBySId('
                         'id)'.format(child['memberName'], symbol)]
                 code.append(self.create_code_block('line', line))

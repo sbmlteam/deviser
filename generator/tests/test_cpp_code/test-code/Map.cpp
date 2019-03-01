@@ -1418,11 +1418,21 @@ Map::getElementBySId(const std::string& id)
     }
   }
 
+  if (mGlyphs.getId() == id)
+  {
+    return &mGlyphs;
+  }
+
   obj = mGlyphs.getElementBySId(id);
 
   if (obj != NULL)
   {
     return obj;
+  }
+
+  if (mArcs.getId() == id)
+  {
+    return &mArcs;
   }
 
   obj = mArcs.getElementBySId(id);
