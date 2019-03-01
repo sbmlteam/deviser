@@ -412,6 +412,13 @@ def main():
         fail += run_test(name, num, class_name, test_case, list_of)
 
         name = 'spatial'
+        num = 30
+        class_name = 'Geometry'
+        list_of = ''
+        test_case = 'class with math child'
+        fail += run_test(name, num, class_name, test_case, list_of)
+
+        name = 'spatial'
         num = 31
         class_name = 'MixedGeometry'
         list_of = ''
@@ -997,18 +1004,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'new_distrib_test'
-        num = 16
-        class_name = 'DistribBernoulliDistribution'
+        name = 'spatial'
+        num = 30
+        class_name = 'Geometry'
         list_of = ''
-        test_case = 'concrete class'
-        fail += run_test(name, num, class_name, test_case, list_of)
-
-        name = 'new_distrib_test'
-        num = 14
-        class_name = 'DistribCategoricalDistribution'
-        list_of = ''
-        test_case = 'concrete class'
+        test_case = 'class with math child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)

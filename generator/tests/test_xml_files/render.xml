@@ -59,7 +59,7 @@
             <attribute name="text-anchor" required="false" type="enum" element="HTextAnchor" abstract="false"/>
             <attribute name="vtext-anchor" required="false" type="enum" element="VTextAnchor" abstract="false"/>
             <attribute name="font-size" required="false" type="element" element="RelAbsVector" abstract="false"/>
-            <attribute name="elements" required="false" type="inline_lo_element" element="Transformation2D" abstract="true"/>
+            <attribute name="elements" required="false" type="inline_lo_element" element="Transformation2D" abstract="true" xmlName="element"/>
           </attributes>
         </element>
         <element name="Image" typeCode="SBML_RENDER_IMAGE" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="Transformation2D" abstract="false" elementName="image">
