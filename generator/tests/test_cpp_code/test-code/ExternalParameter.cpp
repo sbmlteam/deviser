@@ -1002,16 +1002,15 @@ ExternalParameter::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("distrib",
-          DistribExternalParameterLOExternalParametersAllowedAttributes,
+          DistribExternalDistributionLOExternalParametersAllowedAttributes,
             pkgVersion, level, version, details);
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
-        log->logPackageError("distrib",
-          DistribExternalParameterLOExternalParametersAllowedCoreAttributes,
-            pkgVersion, level, version, details);
+        log->logPackageError("distrib", DistribExternalDistributionLOExternalParametersAllowedCoreAttributes,
+          pkgVersion, level, version, details);
       }
     }
   }
