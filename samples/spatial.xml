@@ -270,6 +270,8 @@
         </element>
         <element name="SpatialPoints" typeCode="SBML_SPATIAL_SPATIALPOINTS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SBase" abstract="false">
           <attributes>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
             <attribute name="compression" required="true" type="enum" element="CompressionKind" abstract="false"/>
             <attribute name="arrayData" required="true" type="array" element="double" abstract="false"/>
             <attribute name="arrayDataLength" required="true" type="int" abstract="false"/>
