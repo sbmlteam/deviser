@@ -924,7 +924,8 @@ SedSetValue::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSetValueAllowedAttributes, level, version, details);
+        log->logError(SedmlSetValueAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

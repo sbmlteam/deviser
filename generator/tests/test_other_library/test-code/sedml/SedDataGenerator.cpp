@@ -1345,7 +1345,7 @@ SedDataGenerator::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
