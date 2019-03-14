@@ -1316,7 +1316,7 @@ MultipleChild::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("twoatonce",
           TwoatonceMultipleChildAllowedAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1324,7 +1324,7 @@ MultipleChild::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("twoatonce",
           TwoatonceMultipleChildAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

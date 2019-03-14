@@ -1550,7 +1550,8 @@ Map::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SbgnUnknownCoreAttribute);
-        log->logError(SbgnmlMapAllowedAttributes, level, version, details);
+        log->logError(SbgnmlMapAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

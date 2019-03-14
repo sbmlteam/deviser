@@ -1010,7 +1010,8 @@ Point::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SbgnUnknownCoreAttribute);
-        log->logError(SbgnmlPointAllowedAttributes, level, version, details);
+        log->logError(SbgnmlPointAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

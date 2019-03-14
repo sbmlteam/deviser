@@ -1536,7 +1536,8 @@ Event::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SBMLUnknownCoreAttribute);
-        log->logError(CoreEventAllowedAttributes, level, version, details);
+        log->logError(CoreEventAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

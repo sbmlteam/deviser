@@ -1153,7 +1153,7 @@ BetaDistribution::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("distrib",
           DistribBetaDistributionAllowedAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1161,7 +1161,7 @@ BetaDistribution::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("distrib",
           DistribBetaDistributionAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

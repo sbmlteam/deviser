@@ -1383,20 +1383,20 @@ class GeneralFunctions():
                           'log->remove(XMLAttributeTypeMismatch)',
                           'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
-                          'getVersion())'.format(self.package.lower(),
-                                                 error),
+                          'getVersion())'
+                          ''.format(self.package.lower(), error),
                           'else',
                           'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
-                          'getVersion())'.format(self.package.lower(),
-                                                 req_error)
+                          'getVersion())'
+                          ''.format(self.package.lower(), req_error)
                           ]
         nested_if = self.create_code_block('if_else', implementation)
         implementation = ['mRequired != {0}'.format(self.required),
                           'log->logPackageError(\"{0}\", {1}, '
                           'getPackageVersion(), getLevel(), '
-                          'getVersion())'.format(self.package.lower(),
-                                                 value_error)
+                          'getVersion())'
+                          ''.format(self.package.lower(), value_error)
                           ]
         second_nested_if = self.create_code_block('if', implementation)
         implementation = ['assigned == false', nested_if,

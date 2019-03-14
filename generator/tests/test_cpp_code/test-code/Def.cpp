@@ -680,14 +680,14 @@ Def::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("copy", CopyDefAllowedAttributes, pkgVersion,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("copy", CopyDefAllowedCoreAttributes, pkgVersion,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }

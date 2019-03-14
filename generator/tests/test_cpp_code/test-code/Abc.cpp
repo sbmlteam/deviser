@@ -550,14 +550,14 @@ Abc::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("copy", CopyAbcAllowedAttributes, pkgVersion,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("copy", CopyAbcAllowedCoreAttributes, pkgVersion,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }

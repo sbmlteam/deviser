@@ -1406,7 +1406,7 @@ CoreversmultipkgModelPlugin::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1414,7 +1414,7 @@ CoreversmultipkgModelPlugin::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == NotSchemaConformant)
       {
@@ -1422,7 +1422,7 @@ CoreversmultipkgModelPlugin::readAttributes(const XMLAttributes& attributes,
         log->remove(NotSchemaConformant);
         log->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
     }
   }

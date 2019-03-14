@@ -1912,7 +1912,8 @@ Arc::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SbgnUnknownCoreAttribute);
-        log->logError(SbgnmlArcAllowedAttributes, level, version, details);
+        log->logError(SbgnmlArcAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

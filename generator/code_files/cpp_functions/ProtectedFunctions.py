@@ -1313,28 +1313,28 @@ class ProtectedFunctions():
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(UnknownPackageAttribute)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                        self.given_args),
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'
+                    ''.format(self.error, error, self.given_args),
                     'else if', 'log->getError(n)->getErrorId() == '
                                'UnknownCoreAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(UnknownCoreAttribute)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, core_err,
-                                                        self.given_args)]
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'
+                    ''.format(self.error, core_err, self.given_args)]
             if self.is_plugin:
                 line += ['else if', 'log->getError(n)->getErrorId() == '
                             'NotSchemaConformant',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(NotSchemaConformant)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                        self.given_args)]
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'
+                    ''.format(self.error, error, self.given_args)]
             if_err = self.create_code_block('else_if', line)
         else:
             line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error_att),
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove({0})'.format(unknown_error_att),
-                    'log->{0}{1}, {2}, details)'.format(self.error, error,
-                                                        self.given_args)]
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'
+                    ''.format(self.error, error, self.given_args)]
             if_err = self.create_code_block('if', line)
 
 
