@@ -205,7 +205,13 @@ def add_concrete_to_list(root, concrete, mylist):
         # sometimes the baseclass is also instantiated (the ui calls the property isbaseclass)
         if current['abstract'] is False or is_instantiated(current):
             concrete['typecode'] = current['typecode']
-            if concrete not in mylist:
+            found = False
+            i = 0
+            while not found and i < len(mylist):
+                if mylist[i]['element'] == concrete['element']:
+                    found = True
+                i+=1
+            if not found:
                 mylist.append(concrete)
         else:
             for c in current['concrete']:
@@ -214,8 +220,13 @@ def add_concrete_to_list(root, concrete, mylist):
                     add_concrete_to_list(root, c, mylist)
                 else:
                     concrete['typecode'] = current['typecode']
-                    # TO DO look at potential overflow
-                    if concrete not in mylist:
+                    found = False
+                    i = 0
+                    while not found and i < len(mylist):
+                        if mylist[i]['element'] == concrete['element']:
+                            found = True
+                        i+=1
+                    if not found:
                         mylist.append(concrete)
 
 
