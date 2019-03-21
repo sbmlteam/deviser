@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="SbgnML" fullname="Systems Biology Graphical Notation - Markup Language" number="100" offset="100000" version="1" required="false">
-  <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument" prefix="Sbgn" libraryName="libSBGN" annotationElementName="Extension" isPackage="false">
-    <library_version major="0" minor="1" revision="0"/>
+  <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument" prefix="Sbgn" libraryName="libSBGN" annotationElementName="Extension" topLevelElementName="Extension" isPackage="false" uses_ASTNode="true" uses_XMLNode="true">
+    <library_version major="2" minor="0" revision="0"/>
     <language_versions>
+      <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
       <version level="0" version="2" namespace="http://sbgn.org/libsbgn/0.2"/>
+      <version level="0" version="1" namespace="http://sbgn.org/libsbgn/pd/0.1"/>
     </language_versions>
   </language>
   <versions>
@@ -26,31 +28,32 @@
         </element>
         <element name="Label" typeCode="SBGN_SBGNML_LABEL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="label">
           <attributes>
-            <attribute name="id" required="false" type="ID" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="text" required="true" type="string" abstract="false"/>
             <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
           </attributes>
         </element>
-        <element name="Map" typeCode="SBGN_SBGNML_MAP" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="map" additionalDecls="sbgn_map.h.txt" additionalDefs="sbgn_map.cpp.txt">
+        <element name="Map" typeCode="SBGN_SBGNML_MAP" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="1" maxNumListOfChildren="0" abstract="false" elementName="map" additionalDecls="sbgn_map.h.txt" additionalDefs="sbgn_map.cpp.txt">
           <attributes>
-            <attribute name="id" required="false" type="ID" abstract="false"/>
-            <attribute name="language" required="true" type="enum" element="Language" abstract="false"/>
+            <attribute name="id" required="true" type="ID" abstract="false"/>
+            <attribute name="language" required="false" type="enum" element="Language" abstract="false"/>
             <attribute name="bbox" required="false" type="element" element="BBox" abstract="false"/>
             <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
             <attribute name="arc" required="false" type="inline_lo_element" element="Arc" abstract="false"/>
             <attribute name="arcgroup" required="false" type="inline_lo_element" element="ArcGroup" abstract="false"/>
+            <attribute name="version" required="false" type="enum" element="MapType" abstract="false"/>
           </attributes>
         </element>
         <element name="Document" typeCode="SBGN_SBGNML_DOCUMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="sbgn">
           <attributes>
-            <attribute name="map" required="true" type="element" element="Map" abstract="false"/>
+            <attribute name="map" required="true" type="inline_lo_element" element="Map" abstract="false"/>
           </attributes>
         </element>
         <element name="Glyph" typeCode="SBGN_SBGNML_GLYPH" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="glyph">
           <attributes>
-            <attribute name="id" required="true" type="ID" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="clazz" required="true" type="string" xmlName="class" abstract="false"/>
-            <attribute name="compartmentRef" required="false" type="IDREF" element="Glyph" abstract="false"/>
+            <attribute name="compartmentRef" required="false" type="SIdRef" element="Glyph" abstract="false"/>
             <attribute name="compartmentOrder" required="false" type="double" abstract="false"/>
             <attribute name="orientation" required="false" type="enum" element="Orientation" abstract="false"/>
             <attribute name="label" required="false" type="element" element="Label" abstract="false"/>
@@ -61,6 +64,8 @@
             <attribute name="bbox" required="true" type="element" element="BBox" abstract="false"/>
             <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" xmlName="glyph" abstract="false"/>
             <attribute name="port" required="false" type="inline_lo_element" element="Port" xmlName="port" abstract="false"/>
+            <attribute name="mapRef" required="false" type="SIdRef" element="Map" abstract="false"/>
+            <attribute name="tagRef" required="false" type="SIdRef" element="Glyph" abstract="false"/>
           </attributes>
         </element>
         <element name="Port" typeCode="SBGN_SBGNML_PORT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="port">
@@ -177,11 +182,29 @@
             <enumValue name="SBGNML_ENTITYTYPE_MACROMOLECULE" value="macromolecule"/>
             <enumValue name="SBGNML_ENTITYTYPE_NUCLEIC_ACID_FEATURE" value="nucleic acid feature"/>
             <enumValue name="SBGNML_ENTITYTYPE_COMPLEX" value="complex"/>
+            <enumValue name="SBGNML_ENTITYTYPE_PERTURBATION" value="perturbation"/>
           </enumValues>
         </enum>
         <enum name="ArcGroupType">
           <enumValues>
             <enumValue name="SBGNML_ARCGROUPTYPE_INTERACTION" value="interaction"/>
+          </enumValues>
+        </enum>
+        <enum name="MapType">
+          <enumValues>
+            <enumValue name="SBGNML_MAPTYPE_PD_L1_V1_3" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.3"/>
+            <enumValue name="SBGNML_MAPTYPE_PD_L1_V1_2" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.2"/>
+            <enumValue name="SBGNML_MAPTYPE_PD_L1_V1_1" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.1"/>
+            <enumValue name="SBGNML_MAPTYPE_PD_L1_V1_0" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1.0"/>
+            <enumValue name="SBGNML_MAPTYPE_PD_L1_V1" value="http://identifiers.org/combine.specifications/sbgn.pd.level-1.version-1"/>
+            <enumValue name="SBGNML_MAPTYPE_ER_L1_V2" value="http://identifiers.org/combine.specifications/sbgn.er.level-1.version-2"/>
+            <enumValue name="SBGNML_MAPTYPE_ER_L1_V1_2" value="http://identifiers.org/combine.specifications/sbgn.er.level-1.version-1.2"/>
+            <enumValue name="SBGNML_MAPTYPE_ER_L1_V1_1" value="http://identifiers.org/combine.specifications/sbgn.er.level-1.version-1.1"/>
+            <enumValue name="SBGNML_MAPTYPE_ER_L1_V1_0" value="http://identifiers.org/combine.specifications/sbgn.er.level-1.version-1.0"/>
+            <enumValue name="SBGNML_MAPTYPE_ER_L1_V1" value="http://identifiers.org/combine.specifications/sbgn.er.level-1.version-1"/>
+            <enumValue name="SBGNML_MAPTYPE_AF_L1_V1_2" value="http://identifiers.org/combine.specifications/sbgn.af.level-1.version-1.2"/>
+            <enumValue name="SBGNML_MAPTYPE_AF_L1_V1_0" value="http://identifiers.org/combine.specifications/sbgn.af.level-1.version-1.0"/>
+            <enumValue name="SBGNML_MAPTYPE_AF_L1_V1" value="http://identifiers.org/combine.specifications/sbgn.af.level-1.version-1"/>
           </enumValues>
         </enum>
       </enums>
