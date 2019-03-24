@@ -249,7 +249,7 @@ public:
    * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
-   * this ParametricGeometry or @c NULL if no such object exists..
+   * this ParametricGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -270,7 +270,7 @@ public:
    * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
-   * this ParametricGeometry or @c NULL if no such object exists..
+   * this ParametricGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1211,7 +1211,7 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg);
  * retrieve.
  *
  * @return the nth ParametricObject_t in the ListOfParametricObjects within
- * this ParametricGeometry or @c NULL if no such object exists..
+ * this ParametricGeometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

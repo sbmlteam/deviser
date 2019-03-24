@@ -808,7 +808,7 @@ public:
    * retrieve.
    *
    * @return the nth Transformation2D in the ListOfDrawables within this
-   * RenderGroup or @c NULL if no such object exists..
+   * RenderGroup or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -829,7 +829,7 @@ public:
    * retrieve.
    *
    * @return the nth Transformation2D in the ListOfDrawables within this
-   * RenderGroup or @c NULL if no such object exists..
+   * RenderGroup or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -2492,7 +2492,7 @@ RenderGroup_getListOfElements(RenderGroup_t* rg);
  * retrieve.
  *
  * @return the nth Transformation2D_t in the ListOfDrawables within this
- * RenderGroup or @c NULL if no such object exists..
+ * RenderGroup or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

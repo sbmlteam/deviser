@@ -180,7 +180,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -201,7 +201,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGObject in the ListOfCSGObjects within this CSGeometry
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1033,7 +1033,7 @@ CSGeometry_getListOfCSGObjects(CSGeometry_t* csg);
  * retrieve.
  *
  * @return the nth CSGObject_t in the ListOfCSGObjects within this CSGeometry
- * or @c NULL if no such object exists..
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

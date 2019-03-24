@@ -343,7 +343,7 @@ public:
    * to retrieve.
    *
    * @return the nth CoordinateComponent in the ListOfCoordinateComponents
-   * within this Geometry or @c NULL if no such object exists..
+   * within this Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -364,7 +364,7 @@ public:
    * to retrieve.
    *
    * @return the nth CoordinateComponent in the ListOfCoordinateComponents
-   * within this Geometry or @c NULL if no such object exists..
+   * within this Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -568,7 +568,7 @@ public:
    * retrieve.
    *
    * @return the nth DomainType in the ListOfDomainTypes within this Geometry
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -589,7 +589,7 @@ public:
    * retrieve.
    *
    * @return the nth DomainType in the ListOfDomainTypes within this Geometry
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -788,7 +788,7 @@ public:
    * @param n an unsigned int representing the index of the Domain to retrieve.
    *
    * @return the nth Domain in the ListOfDomains within this Geometry or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -808,7 +808,7 @@ public:
    * @param n an unsigned int representing the index of the Domain to retrieve.
    *
    * @return the nth Domain in the ListOfDomains within this Geometry or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1032,7 +1032,7 @@ public:
    * retrieve.
    *
    * @return the nth AdjacentDomains in the ListOfAdjacentDomains within this
-   * Geometry or @c NULL if no such object exists..
+   * Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1053,7 +1053,7 @@ public:
    * retrieve.
    *
    * @return the nth AdjacentDomains in the ListOfAdjacentDomains within this
-   * Geometry or @c NULL if no such object exists..
+   * Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1318,7 +1318,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this Geometry or @c NULL if no such object exists..
+   * this Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1339,7 +1339,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this Geometry or @c NULL if no such object exists..
+   * this Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1615,7 +1615,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledField in the ListOfSampledFields within this
-   * Geometry or @c NULL if no such object exists..
+   * Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1636,7 +1636,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledField in the ListOfSampledFields within this
-   * Geometry or @c NULL if no such object exists..
+   * Geometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -2626,7 +2626,7 @@ Geometry_getListOfCoordinateComponents(Geometry_t* g);
  * to retrieve.
  *
  * @return the nth CoordinateComponent_t in the ListOfCoordinateComponents
- * within this Geometry or @c NULL if no such object exists..
+ * within this Geometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2789,7 +2789,7 @@ Geometry_getListOfDomainTypes(Geometry_t* g);
  * retrieve.
  *
  * @return the nth DomainType_t in the ListOfDomainTypes within this Geometry
- * or @c NULL if no such object exists..
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2947,7 +2947,7 @@ Geometry_getListOfDomains(Geometry_t* g);
  * @param n an unsigned int representing the index of the Domain_t to retrieve.
  *
  * @return the nth Domain_t in the ListOfDomains within this Geometry or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3124,7 +3124,7 @@ Geometry_getListOfAdjacentDomains(Geometry_t* g);
  * retrieve.
  *
  * @return the nth AdjacentDomains_t in the ListOfAdjacentDomains within this
- * Geometry or @c NULL if no such object exists..
+ * Geometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3329,7 +3329,7 @@ Geometry_getListOfGeometryDefinitions(Geometry_t* g);
  * to retrieve.
  *
  * @return the nth GeometryDefinition_t in the ListOfGeometryDefinitions within
- * this Geometry or @c NULL if no such object exists..
+ * this Geometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3562,7 +3562,7 @@ Geometry_getListOfSampledFields(Geometry_t* g);
  * retrieve.
  *
  * @return the nth SampledField_t in the ListOfSampledFields within this
- * Geometry or @c NULL if no such object exists..
+ * Geometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

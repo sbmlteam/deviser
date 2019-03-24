@@ -231,7 +231,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry or @c NULL if no such object exists..
+   * SampledFieldGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -252,7 +252,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry or @c NULL if no such object exists..
+   * SampledFieldGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1190,7 +1190,7 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
  * retrieve.
  *
  * @return the nth SampledVolume_t in the ListOfSampledVolumes within this
- * SampledFieldGeometry or @c NULL if no such object exists..
+ * SampledFieldGeometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

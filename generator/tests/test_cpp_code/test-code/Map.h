@@ -383,7 +383,7 @@ public:
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
    * @return the nth Glyph in the SbgnListOfGlyphs within this Map or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -403,7 +403,7 @@ public:
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
    * @return the nth Glyph in the SbgnListOfGlyphs within this Map or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -598,7 +598,7 @@ public:
    * @param n an unsigned int representing the index of the Arc to retrieve.
    *
    * @return the nth Arc in the SbgnListOfArcs within this Map or @c NULL if no
-   * such object exists..
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -618,7 +618,7 @@ public:
    * @param n an unsigned int representing the index of the Arc to retrieve.
    *
    * @return the nth Arc in the SbgnListOfArcs within this Map or @c NULL if no
-   * such object exists..
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -814,7 +814,7 @@ public:
    * retrieve.
    *
    * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -835,7 +835,7 @@ public:
    * retrieve.
    *
    * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1793,7 +1793,7 @@ Map_getListOfGlyphs(Map_t* m);
  * @param n an unsigned int representing the index of the Glyph_t to retrieve.
  *
  * @return the nth Glyph_t in the SbgnListOfGlyphs within this Map or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1947,7 +1947,7 @@ Map_getListOfArcs(Map_t* m);
  * @param n an unsigned int representing the index of the Arc_t to retrieve.
  *
  * @return the nth Arc_t in the SbgnListOfArcs within this Map or @c NULL if no
- * such object exists..
+ * such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2102,7 +2102,7 @@ Map_getListOfArcGroups(Map_t* m);
  * retrieve.
  *
  * @return the nth ArcGroup_t in the SbgnListOfArcGroups within this Map or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

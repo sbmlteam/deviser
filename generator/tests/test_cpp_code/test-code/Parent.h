@@ -179,7 +179,7 @@ public:
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
    * @return the nth Child in the ListOfChildren within this Parent or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -199,7 +199,7 @@ public:
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
    * @return the nth Child in the ListOfChildren within this Parent or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -333,7 +333,7 @@ public:
    * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -353,7 +353,7 @@ public:
    * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
    * @return the nth Sprog in the ListOfSprogs within this Parent or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1030,7 +1030,7 @@ Parent_getListOfChildren(Parent_t* p);
  * @param n an unsigned int representing the index of the Child_t to retrieve.
  *
  * @return the nth Child_t in the ListOfChildren within this Parent or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1145,7 +1145,7 @@ Parent_getListOfSprogs(Parent_t* p);
  * @param n an unsigned int representing the index of the Sprog_t to retrieve.
  *
  * @return the nth Sprog_t in the ListOfSprogs within this Parent or @c NULL if
- * no such object exists..
+ * no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -180,7 +180,7 @@ public:
    * retrieve.
    *
    * @return the nth RenderPoint in the ListOfCurveElements within this Polygon
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -201,7 +201,7 @@ public:
    * retrieve.
    *
    * @return the nth RenderPoint in the ListOfCurveElements within this Polygon
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -956,7 +956,7 @@ Polygon_getListOfElements(Polygon_t* p);
  * retrieve.
  *
  * @return the nth RenderPoint_t in the ListOfCurveElements within this Polygon
- * or @c NULL if no such object exists..
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

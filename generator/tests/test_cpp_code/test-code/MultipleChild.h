@@ -331,7 +331,7 @@ public:
    * retrieve.
    *
    * @return the nth ClassId in the ListOfClassIds within this MultipleChild or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -352,7 +352,7 @@ public:
    * retrieve.
    *
    * @return the nth ClassId in the ListOfClassIds within this MultipleChild or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1412,7 +1412,7 @@ MultipleChild_getListOfClassIds(MultipleChild_t* mc);
  * retrieve.
  *
  * @return the nth ClassId_t in the ListOfClassIds within this MultipleChild or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

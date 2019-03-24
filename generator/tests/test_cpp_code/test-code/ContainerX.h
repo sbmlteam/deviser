@@ -178,7 +178,7 @@ public:
    * @param n an unsigned int representing the index of the Fred to retrieve.
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -198,7 +198,7 @@ public:
    * @param n an unsigned int representing the index of the Fred to retrieve.
    *
    * @return the nth Fred in the ListOfFreds within this ContainerX or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -937,7 +937,7 @@ ContainerX_getListOfFreds(ContainerX_t* cx);
  * @param n an unsigned int representing the index of the Fred_t to retrieve.
  *
  * @return the nth Fred_t in the ListOfFreds within this ContainerX or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

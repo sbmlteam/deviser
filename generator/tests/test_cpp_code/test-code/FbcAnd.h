@@ -178,7 +178,7 @@ public:
    * retrieve.
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -199,7 +199,7 @@ public:
    * retrieve.
    *
    * @return the nth Association in the ListOfAssociations within this FbcAnd
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -971,7 +971,7 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
  * retrieve.
  *
  * @return the nth Association_t in the ListOfAssociations within this FbcAnd
- * or @c NULL if no such object exists..
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

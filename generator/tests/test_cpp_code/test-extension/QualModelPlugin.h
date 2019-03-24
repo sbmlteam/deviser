@@ -168,7 +168,7 @@ public:
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
-   * this QualModelPlugin or @c NULL if no such object exists..
+   * this QualModelPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -189,7 +189,7 @@ public:
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
-   * this QualModelPlugin or @c NULL if no such object exists..
+   * this QualModelPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -425,7 +425,7 @@ public:
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
-   * QualModelPlugin or @c NULL if no such object exists..
+   * QualModelPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -446,7 +446,7 @@ public:
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
-   * QualModelPlugin or @c NULL if no such object exists..
+   * QualModelPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1142,7 +1142,7 @@ QualModelPlugin_getListOfQualitativeSpecies(QualModelPlugin_t* qmp);
  * to retrieve.
  *
  * @return the nth QualitativeSpecies_t in the ListOfQualitativeSpecies within
- * this QualModelPlugin or @c NULL if no such object exists..
+ * this QualModelPlugin or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1335,7 +1335,7 @@ QualModelPlugin_getListOfTransitions(QualModelPlugin_t* qmp);
  * retrieve.
  *
  * @return the nth Transition_t in the ListOfTransitions within this
- * QualModelPlugin or @c NULL if no such object exists..
+ * QualModelPlugin or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

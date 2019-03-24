@@ -191,7 +191,7 @@ public:
    * retrieve.
    *
    * @return the nth Objective in this ListOfObjectives or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -212,7 +212,7 @@ public:
    * retrieve.
    *
    * @return the nth Objective in this ListOfObjectives or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -641,7 +641,7 @@ ListOfObjectives_unsetActiveObjective(ListOf_t * lo);
  * retrieve.
  *
  * @return the nth Objective_t in this ListOf_t or @c NULL if no such object
- * exists..
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

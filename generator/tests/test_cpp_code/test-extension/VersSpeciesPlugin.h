@@ -431,7 +431,7 @@ public:
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
-   * VersSpeciesPlugin or @c NULL if no such object exists..
+   * VersSpeciesPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -452,7 +452,7 @@ public:
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
-   * VersSpeciesPlugin or @c NULL if no such object exists..
+   * VersSpeciesPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1231,7 +1231,7 @@ VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp);
  * retrieve.
  *
  * @return the nth Another_t in the ListOfAnothers within this
- * VersSpeciesPlugin or @c NULL if no such object exists..
+ * VersSpeciesPlugin or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

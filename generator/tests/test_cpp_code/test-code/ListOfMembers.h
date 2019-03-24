@@ -229,7 +229,7 @@ public:
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
    * @return the nth Member in this ListOfMembers or @c NULL if no such object
-   * exists..
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -249,7 +249,7 @@ public:
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
    * @return the nth Member in this ListOfMembers or @c NULL if no such object
-   * exists..
+   * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -727,7 +727,7 @@ ListOfMembers_unsetName(ListOf_t * lo);
  * @param n an unsigned int representing the index of the Member_t to retrieve.
  *
  * @return the nth Member_t in this ListOf_t or @c NULL if no such object
- * exists..
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

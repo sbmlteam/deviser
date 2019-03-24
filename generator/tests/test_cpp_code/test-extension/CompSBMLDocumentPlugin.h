@@ -175,7 +175,7 @@ public:
    *
    * @return the nth ExternalModelDefinition in the
    * @return the nth ExternalModelDefinition in the ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -197,7 +197,7 @@ public:
    *
    * @return the nth ExternalModelDefinition in the
    * @return the nth ExternalModelDefinition in the ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -444,7 +444,7 @@ public:
    * retrieve.
    *
    * @return the nth ModelDefinition in the ListOfModelDefinitions within this
-   * CompSBMLDocumentPlugin or @c NULL if no such object exists..
+   * CompSBMLDocumentPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -465,7 +465,7 @@ public:
    * retrieve.
    *
    * @return the nth ModelDefinition in the ListOfModelDefinitions within this
-   * CompSBMLDocumentPlugin or @c NULL if no such object exists..
+   * CompSBMLDocumentPlugin or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1157,7 +1157,7 @@ CompSBMLDocumentPlugin_getListOfExternalModelDefinitions(CompSBMLDocumentPlugin_
  *
  * @return the nth ExternalModelDefinition_t in the
  * ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1372,7 +1372,7 @@ CompSBMLDocumentPlugin_getListOfModelDefinitions(CompSBMLDocumentPlugin_t*
  * retrieve.
  *
  * @return the nth ModelDefinition_t in the ListOfModelDefinitions within this
- * CompSBMLDocumentPlugin or @c NULL if no such object exists..
+ * CompSBMLDocumentPlugin or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

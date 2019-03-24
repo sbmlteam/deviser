@@ -448,7 +448,7 @@ public:
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
    * @return the nth Glyph in the SbgnListOfGlyphs within this Arc or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -468,7 +468,7 @@ public:
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
    * @return the nth Glyph in the SbgnListOfGlyphs within this Arc or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -663,7 +663,7 @@ public:
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
    * @return the nth Point in the SbgnListOfPoints within this Arc or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -683,7 +683,7 @@ public:
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
    * @return the nth Point in the SbgnListOfPoints within this Arc or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -817,7 +817,7 @@ public:
    * @param n an unsigned int representing the index of the Port to retrieve.
    *
    * @return the nth Port in the SbgnListOfPorts within this Arc or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -837,7 +837,7 @@ public:
    * @param n an unsigned int representing the index of the Port to retrieve.
    *
    * @return the nth Port in the SbgnListOfPorts within this Arc or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -2024,7 +2024,7 @@ Arc_getListOfGlyphs(Arc_t* a);
  * @param n an unsigned int representing the index of the Glyph_t to retrieve.
  *
  * @return the nth Glyph_t in the SbgnListOfGlyphs within this Arc or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2178,7 +2178,7 @@ Arc_getListOfNexts(Arc_t* a);
  * @param n an unsigned int representing the index of the Point_t to retrieve.
  *
  * @return the nth Point_t in the SbgnListOfPoints within this Arc or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2293,7 +2293,7 @@ Arc_getListOfPorts(Arc_t* a);
  * @param n an unsigned int representing the index of the Port_t to retrieve.
  *
  * @return the nth Port_t in the SbgnListOfPorts within this Arc or @c NULL if
- * no such object exists..
+ * no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

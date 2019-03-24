@@ -267,7 +267,7 @@ public:
    * @param n an unsigned int representing the index of the Input to retrieve.
    *
    * @return the nth Input in the ListOfInputs within this Transition or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -287,7 +287,7 @@ public:
    * @param n an unsigned int representing the index of the Input to retrieve.
    *
    * @return the nth Input in the ListOfInputs within this Transition or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -512,7 +512,7 @@ public:
    * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in the ListOfOutputs within this Transition or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -532,7 +532,7 @@ public:
    * @param n an unsigned int representing the index of the Output to retrieve.
    *
    * @return the nth Output in the ListOfOutputs within this Transition or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -758,7 +758,7 @@ public:
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
-   * Transition or @c NULL if no such object exists..
+   * Transition or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -779,7 +779,7 @@ public:
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
-   * Transition or @c NULL if no such object exists..
+   * Transition or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1721,7 +1721,7 @@ Transition_getListOfInputs(Transition_t* t);
  * @param n an unsigned int representing the index of the Input_t to retrieve.
  *
  * @return the nth Input_t in the ListOfInputs within this Transition or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1896,7 +1896,7 @@ Transition_getListOfOutputs(Transition_t* t);
  * @param n an unsigned int representing the index of the Output_t to retrieve.
  *
  * @return the nth Output_t in the ListOfOutputs within this Transition or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2073,7 +2073,7 @@ Transition_getListOfFunctionTerms(Transition_t* t);
  * retrieve.
  *
  * @return the nth FunctionTerm_t in the ListOfFunctionTerms within this
- * Transition or @c NULL if no such object exists..
+ * Transition or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

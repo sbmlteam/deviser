@@ -180,7 +180,7 @@ public:
    * retrieve.
    *
    * @return the nth MyLoTest in the ListOfMyLoTests within this Container or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -201,7 +201,7 @@ public:
    * retrieve.
    *
    * @return the nth MyLoTest in the ListOfMyLoTests within this Container or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -943,7 +943,7 @@ Container_getListOfMyLoTests(Container_t* c);
  * retrieve.
  *
  * @return the nth MyLoTest_t in the ListOfMyLoTests within this Container or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

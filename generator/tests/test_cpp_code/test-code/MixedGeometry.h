@@ -183,7 +183,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry or @c NULL if no such object exists..
+   * this MixedGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -204,7 +204,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry or @c NULL if no such object exists..
+   * this MixedGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -480,7 +480,7 @@ public:
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
-   * MixedGeometry or @c NULL if no such object exists..
+   * MixedGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -501,7 +501,7 @@ public:
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
-   * MixedGeometry or @c NULL if no such object exists..
+   * MixedGeometry or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1275,7 +1275,7 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg);
  * to retrieve.
  *
  * @return the nth GeometryDefinition_t in the ListOfGeometryDefinitions within
- * this MixedGeometry or @c NULL if no such object exists..
+ * this MixedGeometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1513,7 +1513,7 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg);
  * retrieve.
  *
  * @return the nth OrdinalMapping_t in the ListOfOrdinalMappings within this
- * MixedGeometry or @c NULL if no such object exists..
+ * MixedGeometry or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

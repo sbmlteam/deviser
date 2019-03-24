@@ -164,7 +164,7 @@ public:
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
    * @return the nth Group in the ListOfGroups within this GroupsModelPlugin or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -184,7 +184,7 @@ public:
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
    * @return the nth Group in the ListOfGroups within this GroupsModelPlugin or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -889,7 +889,7 @@ GroupsModelPlugin_getListOfGroups(GroupsModelPlugin_t* gmp);
  * @param n an unsigned int representing the index of the Group_t to retrieve.
  *
  * @return the nth Group_t in the ListOfGroups within this GroupsModelPlugin or
- * @c NULL if no such object exists..
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

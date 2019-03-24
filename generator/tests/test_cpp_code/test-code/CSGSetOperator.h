@@ -387,7 +387,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -408,7 +408,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGNode in the ListOfCSGNodes within this CSGSetOperator
-   * or @c NULL if no such object exists..
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1583,7 +1583,7 @@ CSGSetOperator_getListOfCSGNodes(CSGSetOperator_t* csgso);
  * retrieve.
  *
  * @return the nth CSGNode_t in the ListOfCSGNodes within this CSGSetOperator
- * or @c NULL if no such object exists..
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

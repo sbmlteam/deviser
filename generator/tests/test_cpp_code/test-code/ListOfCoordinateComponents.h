@@ -141,7 +141,7 @@ public:
    * to retrieve.
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -162,7 +162,7 @@ public:
    * to retrieve.
    *
    * @return the nth CoordinateComponent in this ListOfCoordinateComponents or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -439,7 +439,7 @@ BEGIN_C_DECLS
  * to retrieve.
  *
  * @return the nth CoordinateComponent_t in this ListOf_t or @c NULL if no such
- * object exists..
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

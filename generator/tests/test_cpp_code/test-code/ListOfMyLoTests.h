@@ -189,7 +189,7 @@ public:
    * retrieve.
    *
    * @return the nth MyLoTest in this ListOfMyLoTests or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -210,7 +210,7 @@ public:
    * retrieve.
    *
    * @return the nth MyLoTest in this ListOfMyLoTests or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -592,7 +592,7 @@ ListOfMyLoTests_unsetId(ListOf_t * lo);
  * retrieve.
  *
  * @return the nth MyLoTest_t in this ListOf_t or @c NULL if no such object
- * exists..
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

@@ -373,7 +373,7 @@ public:
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
    * @return the nth Member in the ListOfMembers within this Group or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -393,7 +393,7 @@ public:
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
    * @return the nth Member in the ListOfMembers within this Group or @c NULL
-   * if no such object exists..
+   * if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1470,7 +1470,7 @@ Group_getListOfMembers(Group_t* g);
  * @param n an unsigned int representing the index of the Member_t to retrieve.
  *
  * @return the nth Member_t in the ListOfMembers within this Group or @c NULL
- * if no such object exists..
+ * if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

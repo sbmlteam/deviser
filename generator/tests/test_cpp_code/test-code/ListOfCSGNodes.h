@@ -152,7 +152,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGNode in this ListOfCSGNodes or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -173,7 +173,7 @@ public:
    * retrieve.
    *
    * @return the nth CSGNode in this ListOfCSGNodes or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -553,7 +553,7 @@ BEGIN_C_DECLS
  * retrieve.
  *
  * @return the nth CSGNode_t in this ListOf_t or @c NULL if no such object
- * exists..
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

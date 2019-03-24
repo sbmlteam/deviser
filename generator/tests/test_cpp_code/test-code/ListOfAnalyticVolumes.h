@@ -141,7 +141,7 @@ public:
    * retrieve.
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -162,7 +162,7 @@ public:
    * retrieve.
    *
    * @return the nth AnalyticVolume in this ListOfAnalyticVolumes or @c NULL if
-   * no such object exists..
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -465,7 +465,7 @@ BEGIN_C_DECLS
  * retrieve.
  *
  * @return the nth AnalyticVolume_t in this ListOf_t or @c NULL if no such
- * object exists..
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

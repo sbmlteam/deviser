@@ -351,7 +351,7 @@ public:
    * retrieve.
    *
    * @return the nth DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution or @c NULL if no such object exists..
+   * DrawFromDistribution or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -372,7 +372,7 @@ public:
    * retrieve.
    *
    * @return the nth DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution or @c NULL if no such object exists..
+   * DrawFromDistribution or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1398,7 +1398,7 @@ DrawFromDistribution_getListOfDistribInputs(DrawFromDistribution_t* dfd);
  * retrieve.
  *
  * @return the nth DistribInput_t in the ListOfDistribInputs within this
- * DrawFromDistribution or @c NULL if no such object exists..
+ * DrawFromDistribution or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

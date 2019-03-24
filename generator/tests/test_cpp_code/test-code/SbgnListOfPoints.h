@@ -137,7 +137,7 @@ public:
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
    * @return the nth Point in this SbgnListOfPoints or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -157,7 +157,7 @@ public:
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
    * @return the nth Point in this SbgnListOfPoints or @c NULL if no such
-   * object exists..
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -435,7 +435,7 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the Point_t to retrieve.
  *
  * @return the nth Point_t in this SbgnListOf_t or @c NULL if no such object
- * exists..
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

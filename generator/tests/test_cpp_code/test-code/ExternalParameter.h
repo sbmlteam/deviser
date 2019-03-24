@@ -231,7 +231,7 @@ public:
    * to retrieve.
    *
    * @return the nth ExternalParameter in the ListOfExternalParameters * within
-   * this ExternalParameter or @c NULL if no such object exists..
+   * this ExternalParameter or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -252,7 +252,7 @@ public:
    * to retrieve.
    *
    * @return the nth ExternalParameter in the ListOfExternalParameters * within
-   * this ExternalParameter or @c NULL if no such object exists..
+   * this ExternalParameter or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1075,7 +1075,7 @@ ExternalParameter_getListOfExternalParameters(ExternalParameter_t* ep);
  * to retrieve.
  *
  * @return the nth ExternalParameter_t in the ListOfExternalParameters * within
- * this ExternalParameter or @c NULL if no such object exists..
+ * this ExternalParameter or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

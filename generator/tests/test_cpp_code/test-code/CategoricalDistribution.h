@@ -186,7 +186,7 @@ public:
    * retrieve.
    *
    * @return the nth Category in the ListOfCategories within this
-   * CategoricalDistribution or @c NULL if no such object exists..
+   * CategoricalDistribution or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -207,7 +207,7 @@ public:
    * retrieve.
    *
    * @return the nth Category in the ListOfCategories within this
-   * CategoricalDistribution or @c NULL if no such object exists..
+   * CategoricalDistribution or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -963,7 +963,7 @@ CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd);
  * retrieve.
  *
  * @return the nth Category_t in the ListOfCategories within this
- * CategoricalDistribution or @c NULL if no such object exists..
+ * CategoricalDistribution or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

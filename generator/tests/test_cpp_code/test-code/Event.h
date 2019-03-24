@@ -436,7 +436,7 @@ public:
    * retrieve.
    *
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
-   * this Event or @c NULL if no such object exists..
+   * this Event or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -457,7 +457,7 @@ public:
    * retrieve.
    *
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
-   * this Event or @c NULL if no such object exists..
+   * this Event or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1550,7 +1550,7 @@ Event_getListOfEventAssignments(Event_t* e);
  * retrieve.
  *
  * @return the nth EventAssignment_t in the SBMLListOfEventAssignments within
- * this Event or @c NULL if no such object exists..
+ * this Event or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

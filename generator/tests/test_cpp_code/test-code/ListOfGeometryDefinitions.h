@@ -155,7 +155,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in this ListOfGeometryDefinitions or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -176,7 +176,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in this ListOfGeometryDefinitions or
-   * @c NULL if no such object exists..
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -550,7 +550,7 @@ BEGIN_C_DECLS
  * to retrieve.
  *
  * @return the nth GeometryDefinition_t in this ListOf_t or @c NULL if no such
- * object exists..
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *

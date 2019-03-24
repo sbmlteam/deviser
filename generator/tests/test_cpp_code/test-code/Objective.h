@@ -388,7 +388,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective or @c NULL if no such object exists..
+   * Objective or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -409,7 +409,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective or @c NULL if no such object exists..
+   * Objective or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1546,7 +1546,7 @@ Objective_getListOfFluxObjectives(Objective_t* o);
  * retrieve.
  *
  * @return the nth FluxObjective_t in the ListOfFluxObjectives within this
- * Objective or @c NULL if no such object exists..
+ * Objective or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
