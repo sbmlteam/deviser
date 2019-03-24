@@ -14,10 +14,10 @@ SbgnMap::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
 std::string SbgnMap::getRenderInformationAsString() const
 {
-  auto* info = getRenderInformation();
+  LIBSBML_CPP_NAMESPACE_QUALIFIER LocalRenderInformation* info = getRenderInformation();
   if (info != NULL)
   {
-    auto& node = info->toXML();
+    LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode node = info->toXML();
     return XMLNode::convertXMLNodeToString(&node);
   }
   return std::string();
@@ -34,7 +34,7 @@ getRenderInformationNode(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* node)
 
   for (unsigned int i = 0; i < node->getNumChildren(); ++i)
   {
-    const auto& current = node->getChild(i);
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode& current = node->getChild(i);
     if (current.getName() == "renderInformation")
       return &current;
   }
@@ -45,15 +45,16 @@ getRenderInformationNode(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* node)
 LIBSBML_CPP_NAMESPACE_QUALIFIER LocalRenderInformation*
 SbgnMap::getRenderInformation() const
 {
-  const auto* node = getExtension();
+  const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* node = getExtension();
   if (node == NULL) 
     return NULL;
 
-  const auto* infoNode = getRenderInformationNode(node);
+  const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* infoNode = getRenderInformationNode(node);
   if (infoNode == NULL)
     return NULL;
 
-  auto* result = new LIBSBML_CPP_NAMESPACE_QUALIFIER
+  LIBSBML_CPP_NAMESPACE_QUALIFIER
+    LocalRenderInformation* result = new LIBSBML_CPP_NAMESPACE_QUALIFIER
     LocalRenderInformation();
 
   result->parseXML(*infoNode);
@@ -67,7 +68,7 @@ SbgnMap::setRenderInformation(
 {
   if (info == NULL) return;
 
-  auto xml = info->toXML();
+  XMLNode xml = info->toXML();
 
   xml.addNamespace(info->getURI());
 

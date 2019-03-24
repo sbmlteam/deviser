@@ -41,7 +41,7 @@
             <attribute name="glyph" required="false" type="inline_lo_element" element="Glyph" abstract="false"/>
             <attribute name="arc" required="false" type="inline_lo_element" element="Arc" abstract="false"/>
             <attribute name="arcgroup" required="false" type="inline_lo_element" element="ArcGroup" abstract="false"/>
-            <attribute name="version" required="false" type="enum" element="MapType" abstract="false"/>
+            <attribute name="mapVersion" required="false" type="enum" element="MapType" xmlName="version" abstract="false"/>
           </attributes>
         </element>
         <element name="Document" typeCode="SBGN_SBGNML_DOCUMENT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false" elementName="sbgn">
