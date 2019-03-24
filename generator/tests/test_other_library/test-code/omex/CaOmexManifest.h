@@ -176,7 +176,7 @@ public:
    * retrieve.
    *
    * @return the nth CaContent in the CaListOfContents within this
-   * CaOmexManifest.
+   * CaOmexManifest or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -197,7 +197,7 @@ public:
    * retrieve.
    *
    * @return the nth CaContent in the CaListOfContents within this
-   * CaOmexManifest.
+   * CaOmexManifest or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -280,7 +280,7 @@ public:
    *
    * @return a pointer to the nth CaContent in this CaOmexManifest.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addContent(const CaContent* object)
    * @see createContent()
@@ -745,7 +745,8 @@ public:
    * @param n an unsigned int representing the index of the CaError to
    * retrieve.
    *
-   * @return the nth CaError within this CaDocument.
+   * @return the nth CaError within this CaDocument or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -760,7 +761,8 @@ public:
    * @param n an unsigned int representing the index of the CaError to
    * retrieve.
    *
-   * @return the nth CaError within this CaDocument.
+   * @return the nth CaError within this CaDocument or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -928,7 +930,7 @@ CaOmexManifest_getListOfContents(CaOmexManifest_t* com);
  * retrieve.
  *
  * @return the nth CaContent_t in the CaListOfContents within this
- * CaOmexManifest.
+ * CaOmexManifest or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1006,7 +1008,7 @@ CaOmexManifest_createContent(CaOmexManifest_t* com);
  *
  * @return a pointer to the nth CaContent_t in this CaOmexManifest_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CaOmexManifest_t
  */

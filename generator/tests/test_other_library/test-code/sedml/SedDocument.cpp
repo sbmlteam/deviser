@@ -2549,7 +2549,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mDataDescriptions.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mDataDescriptions;
@@ -2559,7 +2559,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mModels.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mModels;
@@ -2569,7 +2569,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mSimulations.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSimulations;
@@ -2579,7 +2579,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mAbstractTasks.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mAbstractTasks;
@@ -2589,7 +2589,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mDataGenerators.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mDataGenerators;
@@ -2599,7 +2599,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mOutputs.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mOutputs;
@@ -2609,7 +2609,7 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mStyles.size() != 0)
     {
       getErrorLog()->logError(SedmlDocumentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mStyles;

@@ -316,7 +316,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedDataGenerator.
+   * SedDataGenerator or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -337,7 +337,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedDataGenerator.
+   * SedDataGenerator or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -523,7 +523,7 @@ public:
    *
    * @return a pointer to the nth SedVariable in this SedDataGenerator.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -545,7 +545,7 @@ public:
    * @return the SedVariable in this SedDataGenerator based on the identifier
    * or NULL if no such SedVariable exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -600,7 +600,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedDataGenerator.
+   * SedDataGenerator or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -621,7 +621,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedDataGenerator.
+   * SedDataGenerator or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -747,7 +747,7 @@ public:
    *
    * @return a pointer to the nth SedParameter in this SedDataGenerator.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
@@ -769,7 +769,7 @@ public:
    * @return the SedParameter in this SedDataGenerator based on the identifier
    * or NULL if no such SedParameter exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
@@ -1604,7 +1604,7 @@ SedDataGenerator_getListOfVariables(SedDataGenerator_t* sdg);
  * retrieve.
  *
  * @return the nth SedVariable_t in the SedListOfVariables within this
- * SedDataGenerator.
+ * SedDataGenerator or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1748,7 +1748,7 @@ SedDataGenerator_createVariable(SedDataGenerator_t* sdg);
  *
  * @return a pointer to the nth SedVariable_t in this SedDataGenerator_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDataGenerator_t
  */
@@ -1769,7 +1769,7 @@ SedDataGenerator_removeVariable(SedDataGenerator_t* sdg, unsigned int n);
  * @return the SedVariable_t in this SedDataGenerator_t based on the identifier
  * or NULL if no such SedVariable_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDataGenerator_t
  */
@@ -1814,7 +1814,7 @@ SedDataGenerator_getListOfParameters(SedDataGenerator_t* sdg);
  * retrieve.
  *
  * @return the nth SedParameter_t in the SedListOfParameters within this
- * SedDataGenerator.
+ * SedDataGenerator or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1914,7 +1914,7 @@ SedDataGenerator_createParameter(SedDataGenerator_t* sdg);
  *
  * @return a pointer to the nth SedParameter_t in this SedDataGenerator_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDataGenerator_t
  */
@@ -1935,7 +1935,7 @@ SedDataGenerator_removeParameter(SedDataGenerator_t* sdg, unsigned int n);
  * @return the SedParameter_t in this SedDataGenerator_t based on the
  * identifier or NULL if no such SedParameter_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDataGenerator_t
  */

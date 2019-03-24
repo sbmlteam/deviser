@@ -130,7 +130,8 @@ public:
    * @param n an unsigned int representing the index of the CaContent to
    * retrieve.
    *
-   * @return the nth CaContent in this CaListOfContents.
+   * @return the nth CaContent in this CaListOfContents or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -150,7 +151,8 @@ public:
    * @param n an unsigned int representing the index of the CaContent to
    * retrieve.
    *
-   * @return the nth CaContent in this CaListOfContents.
+   * @return the nth CaContent in this CaListOfContents or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -215,7 +217,7 @@ public:
    *
    * @return a pointer to the nth CaContent in this CaListOfContents.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addContent(const CaContent* object)
    * @see createContent()
@@ -237,7 +239,7 @@ public:
    * @return the CaContent in this CaListOfContents based on the identifier or
    * NULL if no such CaContent exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addContent(const CaContent* object)
    * @see createContent()
@@ -421,7 +423,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the CaContent_t to
  * retrieve.
  *
- * @return the nth CaContent_t in this CaListOf_t.
+ * @return the nth CaContent_t in this CaListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -463,7 +466,7 @@ CaListOfContents_getById(CaListOf_t* clo, const char *sid);
  *
  * @return a pointer to the nth CaContent_t in this CaListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CaListOfContents_t
  */
@@ -484,7 +487,7 @@ CaListOfContents_remove(CaListOf_t* clo, unsigned int n);
  * @return the CaContent_t in this CaListOf_t based on the identifier or NULL
  * if no such CaContent_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CaListOfContents_t
  */

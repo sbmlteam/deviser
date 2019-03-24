@@ -272,7 +272,7 @@ public:
    * to retrieve.
    *
    * @return the nth SedDataDescription in the SedListOfDataDescriptions within
-   * this SedDocument.
+   * this SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -293,7 +293,7 @@ public:
    * to retrieve.
    *
    * @return the nth SedDataDescription in the SedListOfDataDescriptions within
-   * this SedDocument.
+   * this SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -419,7 +419,7 @@ public:
    *
    * @return a pointer to the nth SedDataDescription in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataDescription(const SedDataDescription* object)
    * @see createDataDescription()
@@ -441,7 +441,7 @@ public:
    * @return the SedDataDescription in this SedDocument based on the identifier
    * or NULL if no such SedDataDescription exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataDescription(const SedDataDescription* object)
    * @see createDataDescription()
@@ -495,7 +495,8 @@ public:
    * @param n an unsigned int representing the index of the SedModel to
    * retrieve.
    *
-   * @return the nth SedModel in the SedListOfModels within this SedDocument.
+   * @return the nth SedModel in the SedListOfModels within this SedDocument or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -515,7 +516,8 @@ public:
    * @param n an unsigned int representing the index of the SedModel to
    * retrieve.
    *
-   * @return the nth SedModel in the SedListOfModels within this SedDocument.
+   * @return the nth SedModel in the SedListOfModels within this SedDocument or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -638,7 +640,7 @@ public:
    *
    * @return a pointer to the nth SedModel in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addModel(const SedModel* object)
    * @see createModel()
@@ -659,7 +661,7 @@ public:
    * @return the SedModel in this SedDocument based on the identifier or NULL
    * if no such SedModel exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addModel(const SedModel* object)
    * @see createModel()
@@ -714,7 +716,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSimulation in the SedListOfSimulations within this
-   * SedDocument.
+   * SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -735,7 +737,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSimulation in the SedListOfSimulations within this
-   * SedDocument.
+   * SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -897,7 +899,7 @@ public:
    *
    * @return a pointer to the nth SedSimulation in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSimulation(const SedSimulation* object)
    * @see createSimulation()
@@ -919,7 +921,7 @@ public:
    * @return the SedSimulation in this SedDocument based on the identifier or
    * NULL if no such SedSimulation exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSimulation(const SedSimulation* object)
    * @see createSimulation()
@@ -974,7 +976,7 @@ public:
    * retrieve.
    *
    * @return the nth SedAbstractTask in the SedListOfTasks within this
-   * SedDocument.
+   * SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -995,7 +997,7 @@ public:
    * retrieve.
    *
    * @return the nth SedAbstractTask in the SedListOfTasks within this
-   * SedDocument.
+   * SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1174,7 +1176,7 @@ public:
    *
    * @return a pointer to the nth SedAbstractTask in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTask(const SedAbstractTask* object)
    * @see createTask()
@@ -1196,7 +1198,7 @@ public:
    * @return the SedAbstractTask in this SedDocument based on the identifier or
    * NULL if no such SedAbstractTask exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTask(const SedAbstractTask* object)
    * @see createTask()
@@ -1251,7 +1253,7 @@ public:
    * retrieve.
    *
    * @return the nth SedDataGenerator in the SedListOfDataGenerators within
-   * this SedDocument.
+   * this SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1272,7 +1274,7 @@ public:
    * retrieve.
    *
    * @return the nth SedDataGenerator in the SedListOfDataGenerators within
-   * this SedDocument.
+   * this SedDocument or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1398,7 +1400,7 @@ public:
    *
    * @return a pointer to the nth SedDataGenerator in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataGenerator(const SedDataGenerator* object)
    * @see createDataGenerator()
@@ -1420,7 +1422,7 @@ public:
    * @return the SedDataGenerator in this SedDocument based on the identifier
    * or NULL if no such SedDataGenerator exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataGenerator(const SedDataGenerator* object)
    * @see createDataGenerator()
@@ -1474,7 +1476,8 @@ public:
    * @param n an unsigned int representing the index of the SedOutput to
    * retrieve.
    *
-   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument.
+   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1494,7 +1497,8 @@ public:
    * @param n an unsigned int representing the index of the SedOutput to
    * retrieve.
    *
-   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument.
+   * @return the nth SedOutput in the SedListOfOutputs within this SedDocument
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1672,7 +1676,7 @@ public:
    *
    * @return a pointer to the nth SedOutput in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const SedOutput* object)
    * @see createOutput()
@@ -1694,7 +1698,7 @@ public:
    * @return the SedOutput in this SedDocument based on the identifier or NULL
    * if no such SedOutput exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const SedOutput* object)
    * @see createOutput()
@@ -1748,7 +1752,8 @@ public:
    * @param n an unsigned int representing the index of the SedStyle to
    * retrieve.
    *
-   * @return the nth SedStyle in the SedListOfStyles within this SedDocument.
+   * @return the nth SedStyle in the SedListOfStyles within this SedDocument or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1768,7 +1773,8 @@ public:
    * @param n an unsigned int representing the index of the SedStyle to
    * retrieve.
    *
-   * @return the nth SedStyle in the SedListOfStyles within this SedDocument.
+   * @return the nth SedStyle in the SedListOfStyles within this SedDocument or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1921,7 +1927,7 @@ public:
    *
    * @return a pointer to the nth SedStyle in this SedDocument.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addStyle(const SedStyle* object)
    * @see createStyle()
@@ -1942,7 +1948,7 @@ public:
    * @return the SedStyle in this SedDocument based on the identifier or NULL
    * if no such SedStyle exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addStyle(const SedStyle* object)
    * @see createStyle()
@@ -2422,7 +2428,8 @@ public:
    * @param n an unsigned int representing the index of the SedError to
    * retrieve.
    *
-   * @return the nth SedError within this SedDocument.
+   * @return the nth SedError within this SedDocument or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -2437,7 +2444,8 @@ public:
    * @param n an unsigned int representing the index of the SedError to
    * retrieve.
    *
-   * @return the nth SedError within this SedDocument.
+   * @return the nth SedError within this SedDocument or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -2782,7 +2790,7 @@ SedDocument_getListOfDataDescriptions(SedDocument_t* sd);
  * to retrieve.
  *
  * @return the nth SedDataDescription_t in the SedListOfDataDescriptions within
- * this SedDocument.
+ * this SedDocument or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2882,7 +2890,7 @@ SedDocument_createDataDescription(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedDataDescription_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -2903,7 +2911,7 @@ SedDocument_removeDataDescription(SedDocument_t* sd, unsigned int n);
  * @return the SedDataDescription_t in this SedDocument_t based on the
  * identifier or NULL if no such SedDataDescription_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -2944,7 +2952,8 @@ SedDocument_getListOfModels(SedDocument_t* sd);
  * @param n an unsigned int representing the index of the SedModel_t to
  * retrieve.
  *
- * @return the nth SedModel_t in the SedListOfModels within this SedDocument.
+ * @return the nth SedModel_t in the SedListOfModels within this SedDocument or
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3041,7 +3050,7 @@ SedDocument_createModel(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedModel_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3061,7 +3070,7 @@ SedDocument_removeModel(SedDocument_t* sd, unsigned int n);
  * @return the SedModel_t in this SedDocument_t based on the identifier or NULL
  * if no such SedModel_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3104,7 +3113,7 @@ SedDocument_getListOfSimulations(SedDocument_t* sd);
  * retrieve.
  *
  * @return the nth SedSimulation_t in the SedListOfSimulations within this
- * SedDocument.
+ * SedDocument or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3239,7 +3248,7 @@ SedDocument_createSteadyState(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedSimulation_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3260,7 +3269,7 @@ SedDocument_removeSimulation(SedDocument_t* sd, unsigned int n);
  * @return the SedSimulation_t in this SedDocument_t based on the identifier or
  * NULL if no such SedSimulation_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3303,7 +3312,7 @@ SedDocument_getListOfTasks(SedDocument_t* sd);
  * retrieve.
  *
  * @return the nth SedAbstractTask_t in the SedListOfTasks within this
- * SedDocument.
+ * SedDocument or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3456,7 +3465,7 @@ SedDocument_createSimpleRepeatedTask(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedAbstractTask_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3477,7 +3486,7 @@ SedDocument_removeTask(SedDocument_t* sd, unsigned int n);
  * @return the SedAbstractTask_t in this SedDocument_t based on the identifier
  * or NULL if no such SedAbstractTask_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3521,7 +3530,7 @@ SedDocument_getListOfDataGenerators(SedDocument_t* sd);
  * retrieve.
  *
  * @return the nth SedDataGenerator_t in the SedListOfDataGenerators within
- * this SedDocument.
+ * this SedDocument or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3621,7 +3630,7 @@ SedDocument_createDataGenerator(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedDataGenerator_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3642,7 +3651,7 @@ SedDocument_removeDataGenerator(SedDocument_t* sd, unsigned int n);
  * @return the SedDataGenerator_t in this SedDocument_t based on the identifier
  * or NULL if no such SedDataGenerator_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3683,7 +3692,8 @@ SedDocument_getListOfOutputs(SedDocument_t* sd);
  * @param n an unsigned int representing the index of the SedOutput_t to
  * retrieve.
  *
- * @return the nth SedOutput_t in the SedListOfOutputs within this SedDocument.
+ * @return the nth SedOutput_t in the SedListOfOutputs within this SedDocument
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -3835,7 +3845,7 @@ SedDocument_createFigure(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedOutput_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3856,7 +3866,7 @@ SedDocument_removeOutput(SedDocument_t* sd, unsigned int n);
  * @return the SedOutput_t in this SedDocument_t based on the identifier or
  * NULL if no such SedOutput_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -3897,7 +3907,8 @@ SedDocument_getListOfStyles(SedDocument_t* sd);
  * @param n an unsigned int representing the index of the SedStyle_t to
  * retrieve.
  *
- * @return the nth SedStyle_t in the SedListOfStyles within this SedDocument.
+ * @return the nth SedStyle_t in the SedListOfStyles within this SedDocument or
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -4015,7 +4026,7 @@ SedDocument_createStyle(SedDocument_t* sd);
  *
  * @return a pointer to the nth SedStyle_t in this SedDocument_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */
@@ -4035,7 +4046,7 @@ SedDocument_removeStyle(SedDocument_t* sd, unsigned int n);
  * @return the SedStyle_t in this SedDocument_t based on the identifier or NULL
  * if no such SedStyle_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDocument_t
  */

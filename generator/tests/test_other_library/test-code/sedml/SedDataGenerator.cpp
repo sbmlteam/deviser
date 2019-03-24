@@ -1253,7 +1253,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mVariables.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mVariables;
@@ -1263,7 +1263,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mParameters.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mParameters;
@@ -1327,7 +1327,7 @@ SedDataGenerator::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDocumentLODataGeneratorsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }

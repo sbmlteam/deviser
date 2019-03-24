@@ -262,7 +262,7 @@ public:
    * retrieve.
    *
    * @return the nth SedRange in the SedListOfRanges within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -283,7 +283,7 @@ public:
    * retrieve.
    *
    * @return the nth SedRange in the SedListOfRanges within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -460,7 +460,7 @@ public:
    *
    * @return a pointer to the nth SedRange in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
@@ -481,7 +481,7 @@ public:
    * @return the SedRange in this SedRepeatedTask based on the identifier or
    * NULL if no such SedRange exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
@@ -536,7 +536,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSetValue in the SedListOfSetValues within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -557,7 +557,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSetValue in the SedListOfSetValues within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -700,7 +700,7 @@ public:
    *
    * @return a pointer to the nth SedSetValue in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
    * @see createTaskChange()
@@ -755,7 +755,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSubTask in the SedListOfSubTasks within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -776,7 +776,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSubTask in the SedListOfSubTasks within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -888,7 +888,7 @@ public:
    *
    * @return a pointer to the nth SedSubTask in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSubTask(const SedSubTask* object)
    * @see createSubTask()
@@ -1641,7 +1641,7 @@ SedRepeatedTask_getListOfRanges(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedRange_t in the SedListOfRanges within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1792,7 +1792,7 @@ SedRepeatedTask_createDataRange(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedRange_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -1812,7 +1812,7 @@ SedRepeatedTask_removeRange(SedRepeatedTask_t* srt, unsigned int n);
  * @return the SedRange_t in this SedRepeatedTask_t based on the identifier or
  * NULL if no such SedRange_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -1856,7 +1856,7 @@ SedRepeatedTask_getListOfTaskChanges(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedSetValue_t in the SedListOfSetValues within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1978,7 +1978,7 @@ SedRepeatedTask_createTaskChange(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedSetValue_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -2022,7 +2022,7 @@ SedRepeatedTask_getListOfSubTasks(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedSubTask_t in the SedListOfSubTasks within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2121,7 +2121,7 @@ SedRepeatedTask_createSubTask(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedSubTask_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */

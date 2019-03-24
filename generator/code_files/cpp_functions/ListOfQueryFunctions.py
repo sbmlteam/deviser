@@ -150,16 +150,16 @@ class ListOfQueryFunctions():
             return
 
         if self.is_list_of:
-            return_string = 'in this {0} or @c NULL if no such object exists.'.format(self.object_name)
+            return_string = 'in this {0} or @c NULL if no such object exists'.format(self.object_name)
         else:
             if self.lo_name != '':
                 return_string = 'in the {0} within this ' \
-                                '{1} or @c NULL if no such object exists.' \
+                                '{1} or @c NULL if no such object exists' \
                                 ''.format(self.lo_name,
                                           self.class_name)
             else:
                 return_string = 'within this ' \
-                                '{0} or @c NULL if no such object exists.'.format(self.class_name)
+                                '{0} or @c NULL if no such object exists'.format(self.class_name)
         # useful variables
         virtual = True if self.is_list_of else False
         # create comment parts

@@ -1476,7 +1476,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mRanges.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mRanges;
@@ -1486,7 +1486,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mSetValues.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSetValues;
@@ -1496,7 +1496,7 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mSubTasks.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSubTasks;

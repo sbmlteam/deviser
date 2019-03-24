@@ -127,7 +127,8 @@ public:
    * @param n an unsigned int representing the index of the SedModel to
    * retrieve.
    *
-   * @return the nth SedModel in this SedListOfModels.
+   * @return the nth SedModel in this SedListOfModels or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -147,7 +148,8 @@ public:
    * @param n an unsigned int representing the index of the SedModel to
    * retrieve.
    *
-   * @return the nth SedModel in this SedListOfModels.
+   * @return the nth SedModel in this SedListOfModels or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -211,7 +213,7 @@ public:
    *
    * @return a pointer to the nth SedModel in this SedListOfModels.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addModel(const SedModel* object)
    * @see createModel()
@@ -232,7 +234,7 @@ public:
    * @return the SedModel in this SedListOfModels based on the identifier or
    * NULL if no such SedModel exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addModel(const SedModel* object)
    * @see createModel()
@@ -414,7 +416,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedModel_t to
  * retrieve.
  *
- * @return the nth SedModel_t in this SedListOf_t.
+ * @return the nth SedModel_t in this SedListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -455,7 +458,7 @@ SedListOfModels_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedModel_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfModels_t
  */
@@ -475,7 +478,7 @@ SedListOfModels_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedModel_t in this SedListOf_t based on the identifier or NULL
  * if no such SedModel_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfModels_t
  */
