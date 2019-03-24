@@ -242,8 +242,8 @@ class ProtectedFunctions():
             if error not in global_variables.error_list:
                 error = global_variables.unknown_error
         error_line = 'getErrorLog()->{0}{1}, ' \
-                     '{2})'.format(self.error, error, self.error_args)
-        error_line_hack = 'getErrorLog()->{0}{1}, {2})'.format(self.error, error_hack, self.error_args)
+                     '{2}, \"\", getLine(), getColumn())'.format(self.error, error, self.error_args)
+        error_line_hack = 'getErrorLog()->{0}{1}, {2}, \"\", getLine(), getColumn())'.format(self.error, error_hack, self.error_args)
         if num_children == 0:
             # do nothing we are calling a base class
             implementation = []
@@ -1238,13 +1238,13 @@ class ProtectedFunctions():
             line = ['log->getError(n)->getErrorId() == UnknownPackageAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(UnknownPackageAttribute)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, error,
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'.format(self.error, error,
                                                         self.given_args),
                     'else if', 'log->getError(n)->getErrorId() == '
                                'UnknownCoreAttribute',
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove(UnknownCoreAttribute)',
-                    'log->{0}{1}, {2}, details)'.format(self.error, c_err,
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'.format(self.error, c_err,
                                                         self.given_args,
                                                         )]
             if_err = self.create_code_block('else_if', line)
@@ -1252,7 +1252,7 @@ class ProtectedFunctions():
             line = ['log->getError(n)->getErrorId() == {0}'.format(unknown_error_att),
                     'const std::string details = log->getError(n)->getMessage()',
                     'log->remove({0})'.format(unknown_error_att),
-                    'log->{0}{1}, {2}, details)'.format(self.error, c_err,
+                    'log->{0}{1}, {2}, details, getLine(), getColumn())'.format(self.error, c_err,
                                                         self.given_args)]
             if_err = self.create_code_block('if', line)
 

@@ -286,7 +286,7 @@ class GlobalQueryFunctions():
                      'those nested to an arbitrary depth.'.format(self.std_base)
         params = ['@param filter an ElementFilter that may impose restrictions on '
                   'the objects to be retrieved.']
-        return_lines = ['@return  a List* pointer of pointers to all '
+        return_lines = ['@return  a List pointer of pointers to all '
                         '{0} child objects with any restriction '
                         'imposed.'.format(self.std_base)]
         additional = []

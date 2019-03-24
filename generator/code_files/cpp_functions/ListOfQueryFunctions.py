@@ -150,15 +150,16 @@ class ListOfQueryFunctions():
             return
 
         if self.is_list_of:
-            return_string = 'in this {0}'.format(self.object_name)
+            return_string = 'in this {0} or @c NULL if no such object exists.'.format(self.object_name)
         else:
             if self.lo_name != '':
                 return_string = 'in the {0} within this ' \
-                                '{1}'.format(self.lo_name,
-                                             self.class_name)
+                                '{1} or @c NULL if no such object exists.' \
+                                ''.format(self.lo_name,
+                                          self.class_name)
             else:
                 return_string = 'within this ' \
-                                '{0}'.format(self.class_name)
+                                '{0} or @c NULL if no such object exists.'.format(self.class_name)
         # useful variables
         virtual = True if self.is_list_of else False
         # create comment parts
@@ -614,7 +615,7 @@ class ListOfQueryFunctions():
         return_lines = ['@return a pointer to the nth {0} in this {1}.'.format(
             self.object_child_name, self.object_name)]
         additional = []
-        additional.append('@copydetails doc_returned_owned_pointer')
+        additional.append('@copydetails doc_warning_returns_owned_pointer')
         if self.is_cpp_api:
             self.add_other_referenced_functions(additional, 'removeindex', self.used_child_name, self.object_child_name)
         # create the function declaration
@@ -710,7 +711,7 @@ class ListOfQueryFunctions():
                         'exists.'.format(self.object_child_name,
                                          self.object_name)]
         additional = []
-        additional.append('@copydetails doc_returned_owned_pointer')
+        additional.append('@copydetails doc_warning_returns_owned_pointer')
         if self.is_cpp_api:
             self.add_other_referenced_functions(additional, 'removeid', self.used_child_name, self.object_child_name)
         # create the function declaration
