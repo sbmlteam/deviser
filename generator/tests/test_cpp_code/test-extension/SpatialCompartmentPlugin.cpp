@@ -870,7 +870,7 @@ SpatialCompartmentPlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("spatial",
           SpatialCompartmentAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mCompartmentMapping;

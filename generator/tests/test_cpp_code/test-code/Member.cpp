@@ -785,7 +785,7 @@ Member::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("groups", GroupsGroupLOMembersAllowedAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -793,7 +793,7 @@ Member::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("groups",
           GroupsGroupLOMembersAllowedCoreAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
     }
   }

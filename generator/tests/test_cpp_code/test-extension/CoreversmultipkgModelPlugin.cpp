@@ -1302,7 +1302,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mClassOneTwo;
@@ -1315,7 +1315,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mClassMult;

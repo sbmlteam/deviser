@@ -436,7 +436,7 @@ public:
    * retrieve.
    *
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
-   * this Event.
+   * this Event or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -457,7 +457,7 @@ public:
    * retrieve.
    *
    * @return the nth EventAssignment in the SBMLListOfEventAssignments within
-   * this Event.
+   * this Event or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -570,7 +570,7 @@ public:
    *
    * @return a pointer to the nth EventAssignment in this Event.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addEventAssignment(const EventAssignment* object)
    * @see createEventAssignment()
@@ -1550,7 +1550,7 @@ Event_getListOfEventAssignments(Event_t* e);
  * retrieve.
  *
  * @return the nth EventAssignment_t in the SBMLListOfEventAssignments within
- * this Event.
+ * this Event or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1649,7 +1649,7 @@ Event_createEventAssignment(Event_t* e);
  *
  * @return a pointer to the nth EventAssignment_t in this Event_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Event_t
  */

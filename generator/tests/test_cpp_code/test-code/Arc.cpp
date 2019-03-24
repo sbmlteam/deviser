@@ -1799,7 +1799,7 @@ Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetStart())
     {
       getErrorLog()->logError(SbgnmlArcAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mStart;
@@ -1812,7 +1812,7 @@ Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetEnd())
     {
       getErrorLog()->logError(SbgnmlArcAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mEnd;
@@ -1895,7 +1895,7 @@ Arc::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SbgnUnknownCoreAttribute);
         log->logError(SbgnmlMapLOArcsAllowedCoreAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }

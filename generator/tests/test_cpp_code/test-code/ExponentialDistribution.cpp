@@ -883,7 +883,7 @@ ExponentialDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribExponentialDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mRate;

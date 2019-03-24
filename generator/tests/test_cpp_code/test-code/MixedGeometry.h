@@ -183,7 +183,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry.
+   * this MixedGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -204,7 +204,7 @@ public:
    * to retrieve.
    *
    * @return the nth GeometryDefinition in the ListOfGeometryDefinitions within
-   * this MixedGeometry.
+   * this MixedGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -403,7 +403,7 @@ public:
    *
    * @return a pointer to the nth GeometryDefinition in this MixedGeometry.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
@@ -425,7 +425,7 @@ public:
    * @return the GeometryDefinition in this MixedGeometry based on the
    * identifier or NULL if no such GeometryDefinition exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
@@ -480,7 +480,7 @@ public:
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
-   * MixedGeometry.
+   * MixedGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -501,7 +501,7 @@ public:
    * retrieve.
    *
    * @return the nth OrdinalMapping in the ListOfOrdinalMappings within this
-   * MixedGeometry.
+   * MixedGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -615,7 +615,7 @@ public:
    *
    * @return a pointer to the nth OrdinalMapping in this MixedGeometry.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOrdinalMapping(const OrdinalMapping* object)
    * @see createOrdinalMapping()
@@ -1105,7 +1105,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1275,7 +1275,7 @@ MixedGeometry_getListOfGeometryDefinitions(MixedGeometry_t* mg);
  * to retrieve.
  *
  * @return the nth GeometryDefinition_t in the ListOfGeometryDefinitions within
- * this MixedGeometry.
+ * this MixedGeometry or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1447,7 +1447,7 @@ MixedGeometry_createMixedGeometry(MixedGeometry_t* mg);
  *
  * @return a pointer to the nth GeometryDefinition_t in this MixedGeometry_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1468,7 +1468,7 @@ MixedGeometry_removeGeometryDefinition(MixedGeometry_t* mg, unsigned int n);
  * @return the GeometryDefinition_t in this MixedGeometry_t based on the
  * identifier or NULL if no such GeometryDefinition_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof MixedGeometry_t
  */
@@ -1513,7 +1513,7 @@ MixedGeometry_getListOfOrdinalMappings(MixedGeometry_t* mg);
  * retrieve.
  *
  * @return the nth OrdinalMapping_t in the ListOfOrdinalMappings within this
- * MixedGeometry.
+ * MixedGeometry or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1615,7 +1615,7 @@ MixedGeometry_createOrdinalMapping(MixedGeometry_t* mg);
  *
  * @return a pointer to the nth OrdinalMapping_t in this MixedGeometry_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof MixedGeometry_t
  */

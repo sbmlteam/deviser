@@ -140,7 +140,8 @@ public:
    * @param n an unsigned int representing the index of the CoordinateComponent
    * to retrieve.
    *
-   * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
+   * @return the nth CoordinateComponent in this ListOfCoordinateComponents or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -160,7 +161,8 @@ public:
    * @param n an unsigned int representing the index of the CoordinateComponent
    * to retrieve.
    *
-   * @return the nth CoordinateComponent in this ListOfCoordinateComponents.
+   * @return the nth CoordinateComponent in this ListOfCoordinateComponents or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -228,7 +230,7 @@ public:
    * @return a pointer to the nth CoordinateComponent in this
    * ListOfCoordinateComponents.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCoordinateComponent(const CoordinateComponent* object)
    * @see createCoordinateComponent()
@@ -250,7 +252,7 @@ public:
    * @return the CoordinateComponent in this ListOfCoordinateComponents based
    * on the identifier or NULL if no such CoordinateComponent exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCoordinateComponent(const CoordinateComponent* object)
    * @see createCoordinateComponent()
@@ -436,7 +438,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the CoordinateComponent_t
  * to retrieve.
  *
- * @return the nth CoordinateComponent_t in this ListOf_t.
+ * @return the nth CoordinateComponent_t in this ListOf_t or @c NULL if no such
+ * object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -479,7 +482,7 @@ ListOfCoordinateComponents_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth CoordinateComponent_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCoordinateComponents_t
  */
@@ -500,7 +503,7 @@ ListOfCoordinateComponents_remove(ListOf_t* lo, unsigned int n);
  * @return the CoordinateComponent_t in this ListOf_t based on the identifier
  * or NULL if no such CoordinateComponent_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCoordinateComponents_t
  */

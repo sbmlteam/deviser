@@ -1471,7 +1471,7 @@ Map::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetBBox())
     {
       getErrorLog()->logError(SbgnmlMapAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mBBox;

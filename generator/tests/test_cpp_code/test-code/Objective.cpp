@@ -1116,7 +1116,8 @@ Objective::createObject(XMLInputStream& stream)
     if (mFluxObjectives.size() != 0)
     {
       getErrorLog()->logPackageError("fbc", FbcObjectiveAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mFluxObjectives;
@@ -1191,14 +1192,14 @@ Objective::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("fbc", FbcModelLOObjectivesAllowedAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("fbc", FbcModelLOObjectivesAllowedCoreAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
   }

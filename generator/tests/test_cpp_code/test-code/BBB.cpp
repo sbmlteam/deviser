@@ -912,7 +912,8 @@ BBB::createObject(XMLInputStream& stream)
     if (mAnothers.size() != 0)
     {
       getErrorLog()->logPackageError("vers", VersBBBAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mAnothers;

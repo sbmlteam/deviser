@@ -151,7 +151,8 @@ public:
    * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
-   * @return the nth CSGNode in this ListOfCSGNodes.
+   * @return the nth CSGNode in this ListOfCSGNodes or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -171,7 +172,8 @@ public:
    * @param n an unsigned int representing the index of the CSGNode to
    * retrieve.
    *
-   * @return the nth CSGNode in this ListOfCSGNodes.
+   * @return the nth CSGNode in this ListOfCSGNodes or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -235,7 +237,7 @@ public:
    *
    * @return a pointer to the nth CSGNode in this ListOfCSGNodes.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see createCSGNode()
@@ -256,7 +258,7 @@ public:
    * @return the CSGNode in this ListOfCSGNodes based on the identifier or NULL
    * if no such CSGNode exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCSGNode(const CSGNode* object)
    * @see createCSGNode()
@@ -550,7 +552,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the CSGNode_t to
  * retrieve.
  *
- * @return the nth CSGNode_t in this ListOf_t.
+ * @return the nth CSGNode_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -590,7 +593,7 @@ ListOfCSGNodes_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth CSGNode_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCSGNodes_t
  */
@@ -610,7 +613,7 @@ ListOfCSGNodes_remove(ListOf_t* lo, unsigned int n);
  * @return the CSGNode_t in this ListOf_t based on the identifier or NULL if no
  * such CSGNode_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCSGNodes_t
  */

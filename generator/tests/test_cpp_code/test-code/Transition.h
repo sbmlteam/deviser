@@ -266,7 +266,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Input to retrieve.
    *
-   * @return the nth Input in the ListOfInputs within this Transition.
+   * @return the nth Input in the ListOfInputs within this Transition or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -285,7 +286,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Input to retrieve.
    *
-   * @return the nth Input in the ListOfInputs within this Transition.
+   * @return the nth Input in the ListOfInputs within this Transition or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -435,7 +437,7 @@ public:
    *
    * @return a pointer to the nth Input in this Transition.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addInput(const Input* object)
    * @see createInput()
@@ -456,7 +458,7 @@ public:
    * @return the Input in this Transition based on the identifier or NULL if no
    * such Input exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addInput(const Input* object)
    * @see createInput()
@@ -509,7 +511,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Output to retrieve.
    *
-   * @return the nth Output in the ListOfOutputs within this Transition.
+   * @return the nth Output in the ListOfOutputs within this Transition or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -528,7 +531,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Output to retrieve.
    *
-   * @return the nth Output in the ListOfOutputs within this Transition.
+   * @return the nth Output in the ListOfOutputs within this Transition or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -678,7 +682,7 @@ public:
    *
    * @return a pointer to the nth Output in this Transition.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const Output* object)
    * @see createOutput()
@@ -699,7 +703,7 @@ public:
    * @return the Output in this Transition based on the identifier or NULL if
    * no such Output exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const Output* object)
    * @see createOutput()
@@ -754,7 +758,7 @@ public:
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
-   * Transition.
+   * Transition or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -775,7 +779,7 @@ public:
    * retrieve.
    *
    * @return the nth FunctionTerm in the ListOfFunctionTerms within this
-   * Transition.
+   * Transition or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -857,7 +861,7 @@ public:
    *
    * @return a pointer to the nth FunctionTerm in this Transition.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see createFunctionTerm()
@@ -1409,7 +1413,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1716,7 +1720,8 @@ Transition_getListOfInputs(Transition_t* t);
  *
  * @param n an unsigned int representing the index of the Input_t to retrieve.
  *
- * @return the nth Input_t in the ListOfInputs within this Transition.
+ * @return the nth Input_t in the ListOfInputs within this Transition or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1830,7 +1835,7 @@ Transition_createInput(Transition_t* t);
  *
  * @return a pointer to the nth Input_t in this Transition_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1850,7 +1855,7 @@ Transition_removeInput(Transition_t* t, unsigned int n);
  * @return the Input_t in this Transition_t based on the identifier or NULL if
  * no such Input_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -1890,7 +1895,8 @@ Transition_getListOfOutputs(Transition_t* t);
  *
  * @param n an unsigned int representing the index of the Output_t to retrieve.
  *
- * @return the nth Output_t in the ListOfOutputs within this Transition.
+ * @return the nth Output_t in the ListOfOutputs within this Transition or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2004,7 +2010,7 @@ Transition_createOutput(Transition_t* t);
  *
  * @return a pointer to the nth Output_t in this Transition_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -2024,7 +2030,7 @@ Transition_removeOutput(Transition_t* t, unsigned int n);
  * @return the Output_t in this Transition_t based on the identifier or NULL if
  * no such Output_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Transition_t
  */
@@ -2067,7 +2073,7 @@ Transition_getListOfFunctionTerms(Transition_t* t);
  * retrieve.
  *
  * @return the nth FunctionTerm_t in the ListOfFunctionTerms within this
- * Transition.
+ * Transition or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2145,7 +2151,7 @@ Transition_createFunctionTerm(Transition_t* t);
  *
  * @return a pointer to the nth FunctionTerm_t in this Transition_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Transition_t
  */

@@ -1021,7 +1021,7 @@ PluginidSBasePlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("pluginid",
           PluginidSBaseAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mOtherNormalClass;

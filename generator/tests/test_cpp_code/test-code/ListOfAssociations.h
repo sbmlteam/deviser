@@ -148,7 +148,8 @@ public:
    * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in this ListOfAssociations.
+   * @return the nth Association in this ListOfAssociations or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -168,7 +169,8 @@ public:
    * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in this ListOfAssociations.
+   * @return the nth Association in this ListOfAssociations or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -233,7 +235,7 @@ public:
    *
    * @return a pointer to the nth Association in this ListOfAssociations.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see createAssociation()
@@ -255,7 +257,7 @@ public:
    * @return the Association in this ListOfAssociations based on the identifier
    * or NULL if no such Association exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see createAssociation()
@@ -498,7 +500,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the Association_t to
  * retrieve.
  *
- * @return the nth Association_t in this ListOf_t.
+ * @return the nth Association_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -540,7 +543,7 @@ ListOfAssociations_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Association_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfAssociations_t
  */
@@ -561,7 +564,7 @@ ListOfAssociations_remove(ListOf_t* lo, unsigned int n);
  * @return the Association_t in this ListOf_t based on the identifier or NULL
  * if no such Association_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfAssociations_t
  */

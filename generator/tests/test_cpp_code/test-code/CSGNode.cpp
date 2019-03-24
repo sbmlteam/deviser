@@ -635,7 +635,7 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
           SpatialCSGObjectLOCSGNodesAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -643,7 +643,7 @@ CSGNode::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
           SpatialCSGObjectLOCSGNodesAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

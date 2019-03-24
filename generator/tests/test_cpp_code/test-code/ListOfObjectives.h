@@ -190,7 +190,8 @@ public:
    * @param n an unsigned int representing the index of the Objective to
    * retrieve.
    *
-   * @return the nth Objective in this ListOfObjectives.
+   * @return the nth Objective in this ListOfObjectives or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -210,7 +211,8 @@ public:
    * @param n an unsigned int representing the index of the Objective to
    * retrieve.
    *
-   * @return the nth Objective in this ListOfObjectives.
+   * @return the nth Objective in this ListOfObjectives or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -275,7 +277,7 @@ public:
    *
    * @return a pointer to the nth Objective in this ListOfObjectives.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addObjective(const Objective* object)
    * @see createObjective()
@@ -297,7 +299,7 @@ public:
    * @return the Objective in this ListOfObjectives based on the identifier or
    * NULL if no such Objective exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addObjective(const Objective* object)
    * @see createObjective()
@@ -638,7 +640,8 @@ ListOfObjectives_unsetActiveObjective(ListOf_t * lo);
  * @param n an unsigned int representing the index of the Objective_t to
  * retrieve.
  *
- * @return the nth Objective_t in this ListOf_t.
+ * @return the nth Objective_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -679,7 +682,7 @@ ListOfObjectives_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Objective_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfObjectives_t
  */
@@ -700,7 +703,7 @@ ListOfObjectives_remove(ListOf_t* lo, unsigned int n);
  * @return the Objective_t in this ListOf_t based on the identifier or NULL if
  * no such Objective_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfObjectives_t
  */

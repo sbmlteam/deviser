@@ -1997,7 +1997,7 @@ RenderGroup::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("render",
         RenderRenderGroupAllowedAttributes, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mFontSize;

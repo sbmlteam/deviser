@@ -943,7 +943,7 @@ ExternalParameter::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribExternalParameterAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = mExternalParameters;
@@ -1003,14 +1003,14 @@ ExternalParameter::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("distrib",
           DistribExternalDistributionLOExternalParametersAllowedAttributes,
-            pkgVersion, level, version, details);
+            pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownCoreAttribute);
         log->logPackageError("distrib", DistribExternalDistributionLOExternalParametersAllowedCoreAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
   }

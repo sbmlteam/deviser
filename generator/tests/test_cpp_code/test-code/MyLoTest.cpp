@@ -543,7 +543,7 @@ MyLoTest::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("test", TestContainerLOMyLoTestsAllowedAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -551,7 +551,7 @@ MyLoTest::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("test",
           TestContainerLOMyLoTestsAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

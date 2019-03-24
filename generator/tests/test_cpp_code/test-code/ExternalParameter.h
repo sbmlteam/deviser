@@ -231,7 +231,7 @@ public:
    * to retrieve.
    *
    * @return the nth ExternalParameter in the ListOfExternalParameters * within
-   * this ExternalParameter.
+   * this ExternalParameter or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -252,7 +252,7 @@ public:
    * to retrieve.
    *
    * @return the nth ExternalParameter in the ListOfExternalParameters * within
-   * this ExternalParameter.
+   * this ExternalParameter or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -334,7 +334,7 @@ public:
    *
    * @return a pointer to the nth ExternalParameter in this ExternalParameter.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addExternalParameter(const ExternalParameter* object)
    * @see createExternalParameter()
@@ -830,7 +830,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1075,7 +1075,7 @@ ExternalParameter_getListOfExternalParameters(ExternalParameter_t* ep);
  * to retrieve.
  *
  * @return the nth ExternalParameter_t in the ListOfExternalParameters * within
- * this ExternalParameter.
+ * this ExternalParameter or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1158,7 +1158,7 @@ ExternalParameter_createExternalParameter(ExternalParameter_t* ep);
  * @return a pointer to the nth ExternalParameter_t in this
  * ExternalParameter_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ExternalParameter_t
  */

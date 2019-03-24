@@ -249,7 +249,7 @@ public:
    * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
-   * this ParametricGeometry.
+   * this ParametricGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -270,7 +270,7 @@ public:
    * retrieve.
    *
    * @return the nth ParametricObject in the ListOfParametricObjects within
-   * this ParametricGeometry.
+   * this ParametricGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -429,7 +429,7 @@ public:
    *
    * @return a pointer to the nth ParametricObject in this ParametricGeometry.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParametricObject(const ParametricObject* object)
    * @see createParametricObject()
@@ -451,7 +451,7 @@ public:
    * @return the ParametricObject in this ParametricGeometry based on the
    * identifier or NULL if no such ParametricObject exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParametricObject(const ParametricObject* object)
    * @see createParametricObject()
@@ -954,7 +954,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1211,7 +1211,7 @@ ParametricGeometry_getListOfParametricObjects(ParametricGeometry_t* pg);
  * retrieve.
  *
  * @return the nth ParametricObject_t in the ListOfParametricObjects within
- * this ParametricGeometry.
+ * this ParametricGeometry or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1339,7 +1339,7 @@ ParametricGeometry_createParametricObject(ParametricGeometry_t* pg);
  * @return a pointer to the nth ParametricObject_t in this
  * ParametricGeometry_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ParametricGeometry_t
  */
@@ -1361,7 +1361,7 @@ ParametricGeometry_removeParametricObject(ParametricGeometry_t* pg,
  * @return the ParametricObject_t in this ParametricGeometry_t based on the
  * identifier or NULL if no such ParametricObject_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ParametricGeometry_t
  */

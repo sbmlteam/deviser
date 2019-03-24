@@ -372,7 +372,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth Member in the ListOfMembers within this Group.
+   * @return the nth Member in the ListOfMembers within this Group or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -391,7 +392,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth Member in the ListOfMembers within this Group.
+   * @return the nth Member in the ListOfMembers within this Group or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -539,7 +541,7 @@ public:
    *
    * @return a pointer to the nth Member in this Group.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMember(const Member* object)
    * @see createMember()
@@ -560,7 +562,7 @@ public:
    * @return the Member in this Group based on the identifier or NULL if no
    * such Member exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMember(const Member* object)
    * @see createMember()
@@ -1041,7 +1043,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1467,7 +1469,8 @@ Group_getListOfMembers(Group_t* g);
  *
  * @param n an unsigned int representing the index of the Member_t to retrieve.
  *
- * @return the nth Member_t in the ListOfMembers within this Group.
+ * @return the nth Member_t in the ListOfMembers within this Group or @c NULL
+ * if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1580,7 +1583,7 @@ Group_createMember(Group_t* g);
  *
  * @return a pointer to the nth Member_t in this Group_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Group_t
  */
@@ -1600,7 +1603,7 @@ Group_removeMember(Group_t* g, unsigned int n);
  * @return the Member_t in this Group_t based on the identifier or NULL if no
  * such Member_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Group_t
  */

@@ -1283,7 +1283,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mNormalClass;
@@ -1296,7 +1296,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mClassWithRequiredID;
@@ -1309,7 +1309,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
-            getVersion());
+            getVersion(), "", getLine(), getColumn());
       }
 
       delete mMultipleChild;

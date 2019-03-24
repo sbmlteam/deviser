@@ -1009,7 +1009,7 @@ SampledFieldGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialSampledFieldGeometryAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSampledVolumes;

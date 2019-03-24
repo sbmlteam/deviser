@@ -882,7 +882,7 @@ CSGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGeometryAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mCSGObjects;

@@ -179,7 +179,8 @@ public:
    * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
+   * @return the nth MyLoTest in the ListOfMyLoTests within this Container or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -199,7 +200,8 @@ public:
    * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in the ListOfMyLoTests within this Container.
+   * @return the nth MyLoTest in the ListOfMyLoTests within this Container or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -321,7 +323,7 @@ public:
    *
    * @return a pointer to the nth MyLoTest in this Container.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
@@ -342,7 +344,7 @@ public:
    * @return the MyLoTest in this Container based on the identifier or NULL if
    * no such MyLoTest exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
@@ -809,7 +811,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -940,7 +942,8 @@ Container_getListOfMyLoTests(Container_t* c);
  * @param n an unsigned int representing the index of the MyLoTest_t to
  * retrieve.
  *
- * @return the nth MyLoTest_t in the ListOfMyLoTests within this Container.
+ * @return the nth MyLoTest_t in the ListOfMyLoTests within this Container or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1035,7 +1038,7 @@ Container_createMyLoTest(Container_t* c);
  *
  * @return a pointer to the nth MyLoTest_t in this Container_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Container_t
  */
@@ -1055,7 +1058,7 @@ Container_removeMyLoTest(Container_t* c, unsigned int n);
  * @return the MyLoTest_t in this Container_t based on the identifier or NULL
  * if no such MyLoTest_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Container_t
  */

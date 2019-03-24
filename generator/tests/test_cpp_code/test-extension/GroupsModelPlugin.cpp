@@ -857,7 +857,8 @@ GroupsModelPlugin::createObject(XMLInputStream& stream)
       if (mGroups.size() != 0)
       {
         getErrorLog()->logPackageError("groups", GroupsModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mGroups;

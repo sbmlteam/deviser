@@ -382,7 +382,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
-   * @return the nth Glyph in the SbgnListOfGlyphs within this Map.
+   * @return the nth Glyph in the SbgnListOfGlyphs within this Map or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -401,7 +402,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Glyph to retrieve.
    *
-   * @return the nth Glyph in the SbgnListOfGlyphs within this Map.
+   * @return the nth Glyph in the SbgnListOfGlyphs within this Map or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -521,7 +523,7 @@ public:
    *
    * @return a pointer to the nth Glyph in this Map.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGlyph(const Glyph* object)
    * @see createGlyph()
@@ -542,7 +544,7 @@ public:
    * @return the Glyph in this Map based on the identifier or NULL if no such
    * Glyph exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGlyph(const Glyph* object)
    * @see createGlyph()
@@ -595,7 +597,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Arc to retrieve.
    *
-   * @return the nth Arc in the SbgnListOfArcs within this Map.
+   * @return the nth Arc in the SbgnListOfArcs within this Map or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -614,7 +617,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Arc to retrieve.
    *
-   * @return the nth Arc in the SbgnListOfArcs within this Map.
+   * @return the nth Arc in the SbgnListOfArcs within this Map or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -734,7 +738,7 @@ public:
    *
    * @return a pointer to the nth Arc in this Map.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addArc(const Arc* object)
    * @see createArc()
@@ -755,7 +759,7 @@ public:
    * @return the Arc in this Map based on the identifier or NULL if no such Arc
    * exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addArc(const Arc* object)
    * @see createArc()
@@ -809,7 +813,8 @@ public:
    * @param n an unsigned int representing the index of the ArcGroup to
    * retrieve.
    *
-   * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map.
+   * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -829,7 +834,8 @@ public:
    * @param n an unsigned int representing the index of the ArcGroup to
    * retrieve.
    *
-   * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map.
+   * @return the nth ArcGroup in the SbgnListOfArcGroups within this Map or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -909,7 +915,7 @@ public:
    *
    * @return a pointer to the nth ArcGroup in this Map.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addArcGroup(const ArcGroup* object)
    * @see createArcGroup()
@@ -1786,7 +1792,8 @@ Map_getListOfGlyphs(Map_t* m);
  *
  * @param n an unsigned int representing the index of the Glyph_t to retrieve.
  *
- * @return the nth Glyph_t in the SbgnListOfGlyphs within this Map.
+ * @return the nth Glyph_t in the SbgnListOfGlyphs within this Map or @c NULL
+ * if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1879,7 +1886,7 @@ Map_createGlyph(Map_t* m);
  *
  * @return a pointer to the nth Glyph_t in this Map_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Map_t
  */
@@ -1899,7 +1906,7 @@ Map_removeGlyph(Map_t* m, unsigned int n);
  * @return the Glyph_t in this Map_t based on the identifier or NULL if no such
  * Glyph_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Map_t
  */
@@ -1939,7 +1946,8 @@ Map_getListOfArcs(Map_t* m);
  *
  * @param n an unsigned int representing the index of the Arc_t to retrieve.
  *
- * @return the nth Arc_t in the SbgnListOfArcs within this Map.
+ * @return the nth Arc_t in the SbgnListOfArcs within this Map or @c NULL if no
+ * such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2032,7 +2040,7 @@ Map_createArc(Map_t* m);
  *
  * @return a pointer to the nth Arc_t in this Map_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Map_t
  */
@@ -2052,7 +2060,7 @@ Map_removeArc(Map_t* m, unsigned int n);
  * @return the Arc_t in this Map_t based on the identifier or NULL if no such
  * Arc_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Map_t
  */
@@ -2093,7 +2101,8 @@ Map_getListOfArcGroups(Map_t* m);
  * @param n an unsigned int representing the index of the ArcGroup_t to
  * retrieve.
  *
- * @return the nth ArcGroup_t in the SbgnListOfArcGroups within this Map.
+ * @return the nth ArcGroup_t in the SbgnListOfArcGroups within this Map or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2167,7 +2176,7 @@ Map_createArcGroup(Map_t* m);
  *
  * @return a pointer to the nth ArcGroup_t in this Map_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Map_t
  */

@@ -1073,7 +1073,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mAlpha;
@@ -1087,7 +1087,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mBeta;

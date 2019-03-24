@@ -1560,7 +1560,8 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
       if (isSetClassOne())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       delete mClassOne;
@@ -1572,7 +1573,8 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
       if (isSetClassTwo())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       delete mClassTwo;
@@ -1584,7 +1586,8 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
       if (mAnothers.size() != 0)
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mAnothers;

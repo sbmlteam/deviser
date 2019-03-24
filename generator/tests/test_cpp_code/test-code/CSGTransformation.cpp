@@ -1101,7 +1101,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1114,7 +1114,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1127,7 +1127,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1140,7 +1140,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1153,7 +1153,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1166,7 +1166,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;

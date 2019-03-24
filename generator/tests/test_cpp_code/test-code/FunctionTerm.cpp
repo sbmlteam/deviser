@@ -734,7 +734,7 @@ FunctionTerm::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("qual",
           QualTransitionLOFunctionTermsAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -742,7 +742,7 @@ FunctionTerm::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("qual",
           QualTransitionLOFunctionTermsAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

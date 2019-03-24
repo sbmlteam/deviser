@@ -330,7 +330,8 @@ public:
    * @param n an unsigned int representing the index of the ClassId to
    * retrieve.
    *
-   * @return the nth ClassId in the ListOfClassIds within this MultipleChild.
+   * @return the nth ClassId in the ListOfClassIds within this MultipleChild or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -350,7 +351,8 @@ public:
    * @param n an unsigned int representing the index of the ClassId to
    * retrieve.
    *
-   * @return the nth ClassId in the ListOfClassIds within this MultipleChild.
+   * @return the nth ClassId in the ListOfClassIds within this MultipleChild or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -473,7 +475,7 @@ public:
    *
    * @return a pointer to the nth ClassId in this MultipleChild.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addClassId(const ClassId* object)
    * @see createClassId()
@@ -494,7 +496,7 @@ public:
    * @return the ClassId in this MultipleChild based on the identifier or NULL
    * if no such ClassId exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addClassId(const ClassId* object)
    * @see createClassId()
@@ -975,7 +977,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1409,7 +1411,8 @@ MultipleChild_getListOfClassIds(MultipleChild_t* mc);
  * @param n an unsigned int representing the index of the ClassId_t to
  * retrieve.
  *
- * @return the nth ClassId_t in the ListOfClassIds within this MultipleChild.
+ * @return the nth ClassId_t in the ListOfClassIds within this MultipleChild or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1506,7 +1509,7 @@ MultipleChild_createClassId(MultipleChild_t* mc);
  *
  * @return a pointer to the nth ClassId_t in this MultipleChild_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof MultipleChild_t
  */
@@ -1526,7 +1529,7 @@ MultipleChild_removeClassId(MultipleChild_t* mc, unsigned int n);
  * @return the ClassId_t in this MultipleChild_t based on the identifier or
  * NULL if no such ClassId_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof MultipleChild_t
  */

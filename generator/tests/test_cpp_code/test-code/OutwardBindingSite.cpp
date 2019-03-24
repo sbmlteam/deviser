@@ -832,7 +832,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("multi",
           MultiSpeciesLOOutwardBindingSitesAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -840,7 +840,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("multi",
           MultiSpeciesLOOutwardBindingSitesAllowedCoreAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
     }
   }

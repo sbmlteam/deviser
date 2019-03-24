@@ -873,7 +873,7 @@ CategoricalDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribCategoricalDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mCategories;

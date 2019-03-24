@@ -136,7 +136,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
-   * @return the nth Point in this SbgnListOfPoints.
+   * @return the nth Point in this SbgnListOfPoints or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -155,7 +156,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
-   * @return the nth Point in this SbgnListOfPoints.
+   * @return the nth Point in this SbgnListOfPoints or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -217,7 +219,7 @@ public:
    *
    * @return a pointer to the nth Point in this SbgnListOfPoints.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addPoint(const Point* object)
    * @see createPoint()
@@ -238,7 +240,7 @@ public:
    * @return the Point in this SbgnListOfPoints based on the identifier or NULL
    * if no such Point exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addPoint(const Point* object)
    * @see createPoint()
@@ -432,7 +434,8 @@ BEGIN_C_DECLS
  *
  * @param n an unsigned int representing the index of the Point_t to retrieve.
  *
- * @return the nth Point_t in this SbgnListOf_t.
+ * @return the nth Point_t in this SbgnListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -471,7 +474,7 @@ SbgnListOfPoints_getById(SbgnListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth Point_t in this SbgnListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SbgnListOfPoints_t
  */
@@ -491,7 +494,7 @@ SbgnListOfPoints_remove(SbgnListOf_t* slo, unsigned int n);
  * @return the Point_t in this SbgnListOf_t based on the identifier or NULL if
  * no such Point_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SbgnListOfPoints_t
  */

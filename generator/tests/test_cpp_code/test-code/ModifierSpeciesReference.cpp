@@ -519,7 +519,7 @@ ModifierSpeciesReference::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SBMLUnknownCoreAttribute);
         log->logError(CoreReactionLOModifierSpeciesReferencesAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }

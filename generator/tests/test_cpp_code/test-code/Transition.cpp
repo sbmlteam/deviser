@@ -1538,7 +1538,8 @@ Transition::createObject(XMLInputStream& stream)
     if (mInputs.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mInputs;
@@ -1548,7 +1549,8 @@ Transition::createObject(XMLInputStream& stream)
     if (mOutputs.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mOutputs;
@@ -1558,7 +1560,8 @@ Transition::createObject(XMLInputStream& stream)
     if (mFunctionTerms.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mFunctionTerms;
@@ -1619,7 +1622,7 @@ Transition::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("qual", QualModelLOTransitionsAllowedAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1627,7 +1630,7 @@ Transition::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("qual",
           QualModelLOTransitionsAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

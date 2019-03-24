@@ -163,7 +163,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
-   * @return the nth Group in the ListOfGroups within this GroupsModelPlugin.
+   * @return the nth Group in the ListOfGroups within this GroupsModelPlugin or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -182,7 +183,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
-   * @return the nth Group in the ListOfGroups within this GroupsModelPlugin.
+   * @return the nth Group in the ListOfGroups within this GroupsModelPlugin or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -303,7 +305,7 @@ public:
    *
    * @return a pointer to the nth Group in this GroupsModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGroup(const Group* object)
    * @see createGroup()
@@ -324,7 +326,7 @@ public:
    * @return the Group in this GroupsModelPlugin based on the identifier or
    * NULL if no such Group exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGroup(const Group* object)
    * @see createGroup()
@@ -777,7 +779,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -886,7 +888,8 @@ GroupsModelPlugin_getListOfGroups(GroupsModelPlugin_t* gmp);
  *
  * @param n an unsigned int representing the index of the Group_t to retrieve.
  *
- * @return the nth Group_t in the ListOfGroups within this GroupsModelPlugin.
+ * @return the nth Group_t in the ListOfGroups within this GroupsModelPlugin or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -982,7 +985,7 @@ GroupsModelPlugin_createGroup(GroupsModelPlugin_t* gmp);
  *
  * @return a pointer to the nth Group_t in this GroupsModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof GroupsModelPlugin_t
  */
@@ -1002,7 +1005,7 @@ GroupsModelPlugin_removeGroup(GroupsModelPlugin_t* gmp, unsigned int n);
  * @return the Group_t in this GroupsModelPlugin_t based on the identifier or
  * NULL if no such Group_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof GroupsModelPlugin_t
  */

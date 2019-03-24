@@ -254,7 +254,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
-   * @return the nth Point in the SbgnListOfPoints * within this Point.
+   * @return the nth Point in the SbgnListOfPoints * within this Point or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -273,7 +274,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Point to retrieve.
    *
-   * @return the nth Point in the SbgnListOfPoints * within this Point.
+   * @return the nth Point in the SbgnListOfPoints * within this Point or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -353,7 +355,7 @@ public:
    *
    * @return a pointer to the nth Point in this Point.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addPoint(const Point* object)
    * @see createPoint()
@@ -1101,7 +1103,8 @@ Point_getListOfPoints(Point_t* p);
  *
  * @param n an unsigned int representing the index of the Point_t to retrieve.
  *
- * @return the nth Point_t in the SbgnListOfPoints * within this Point.
+ * @return the nth Point_t in the SbgnListOfPoints * within this Point or
+ * @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1175,7 +1178,7 @@ Point_createPoint(Point_t* p);
  *
  * @return a pointer to the nth Point_t in this Point_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Point_t
  */

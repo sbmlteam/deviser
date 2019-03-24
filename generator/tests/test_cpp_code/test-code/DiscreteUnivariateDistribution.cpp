@@ -1152,7 +1152,8 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
     }
 
     delete mTruncationLowerBound;
@@ -1166,7 +1167,8 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
     }
 
     delete mTruncationUpperBound;

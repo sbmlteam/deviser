@@ -228,7 +228,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth Member in this ListOfMembers.
+   * @return the nth Member in this ListOfMembers or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -247,7 +248,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Member to retrieve.
    *
-   * @return the nth Member in this ListOfMembers.
+   * @return the nth Member in this ListOfMembers or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -309,7 +311,7 @@ public:
    *
    * @return a pointer to the nth Member in this ListOfMembers.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMember(const Member* object)
    * @see createMember()
@@ -330,7 +332,7 @@ public:
    * @return the Member in this ListOfMembers based on the identifier or NULL
    * if no such Member exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMember(const Member* object)
    * @see createMember()
@@ -724,7 +726,8 @@ ListOfMembers_unsetName(ListOf_t * lo);
  *
  * @param n an unsigned int representing the index of the Member_t to retrieve.
  *
- * @return the nth Member_t in this ListOf_t.
+ * @return the nth Member_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -763,7 +766,7 @@ ListOfMembers_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Member_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfMembers_t
  */
@@ -783,7 +786,7 @@ ListOfMembers_remove(ListOf_t* lo, unsigned int n);
  * @return the Member_t in this ListOf_t based on the identifier or NULL if no
  * such Member_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfMembers_t
  */

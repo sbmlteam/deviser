@@ -1452,7 +1452,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1465,7 +1465,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1478,7 +1478,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1491,7 +1491,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1504,7 +1504,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1517,7 +1517,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1530,7 +1530,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1543,7 +1543,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1556,7 +1556,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1569,7 +1569,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1582,7 +1582,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1596,7 +1596,7 @@ DrawFromDistribution::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribDrawFromDistributionAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mDistribInputs;

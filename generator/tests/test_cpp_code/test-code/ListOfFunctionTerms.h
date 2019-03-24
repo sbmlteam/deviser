@@ -210,7 +210,8 @@ public:
    * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
-   * @return the nth FunctionTerm in this ListOfFunctionTerms.
+   * @return the nth FunctionTerm in this ListOfFunctionTerms or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -230,7 +231,8 @@ public:
    * @param n an unsigned int representing the index of the FunctionTerm to
    * retrieve.
    *
-   * @return the nth FunctionTerm in this ListOfFunctionTerms.
+   * @return the nth FunctionTerm in this ListOfFunctionTerms or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -295,7 +297,7 @@ public:
    *
    * @return a pointer to the nth FunctionTerm in this ListOfFunctionTerms.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see createFunctionTerm()
@@ -317,7 +319,7 @@ public:
    * @return the FunctionTerm in this ListOfFunctionTerms based on the
    * identifier or NULL if no such FunctionTerm exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFunctionTerm(const FunctionTerm* object)
    * @see createFunctionTerm()
@@ -509,7 +511,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -574,7 +576,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the FunctionTerm_t to
  * retrieve.
  *
- * @return the nth FunctionTerm_t in this ListOf_t.
+ * @return the nth FunctionTerm_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -616,7 +619,7 @@ ListOfFunctionTerms_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth FunctionTerm_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfFunctionTerms_t
  */
@@ -637,7 +640,7 @@ ListOfFunctionTerms_remove(ListOf_t* lo, unsigned int n);
  * @return the FunctionTerm_t in this ListOf_t based on the identifier or NULL
  * if no such FunctionTerm_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfFunctionTerms_t
  */

@@ -1134,7 +1134,8 @@ Category::createObject(XMLInputStream& stream)
     if (isSetProbability())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     delete mProbability;
@@ -1147,7 +1148,8 @@ Category::createObject(XMLInputStream& stream)
     if (isSetValue())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     delete mValue;
@@ -1212,7 +1214,7 @@ Category::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("distrib",
           DistribCategoricalDistributionLOCategoriesAllowedAttributes,
-            pkgVersion, level, version, details);
+            pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1220,7 +1222,7 @@ Category::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("distrib",
           DistribCategoricalDistributionLOCategoriesAllowedCoreAttributes,
-            pkgVersion, level, version, details);
+            pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
   }

@@ -1331,7 +1331,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
           SpatialGeometryLOSampledFieldsAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1339,7 +1339,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
           SpatialGeometryLOSampledFieldsAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

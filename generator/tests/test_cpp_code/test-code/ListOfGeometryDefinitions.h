@@ -154,7 +154,8 @@ public:
    * @param n an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
-   * @return the nth GeometryDefinition in this ListOfGeometryDefinitions.
+   * @return the nth GeometryDefinition in this ListOfGeometryDefinitions or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -174,7 +175,8 @@ public:
    * @param n an unsigned int representing the index of the GeometryDefinition
    * to retrieve.
    *
-   * @return the nth GeometryDefinition in this ListOfGeometryDefinitions.
+   * @return the nth GeometryDefinition in this ListOfGeometryDefinitions or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -242,7 +244,7 @@ public:
    * @return a pointer to the nth GeometryDefinition in this
    * ListOfGeometryDefinitions.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
@@ -264,7 +266,7 @@ public:
    * @return the GeometryDefinition in this ListOfGeometryDefinitions based on
    * the identifier or NULL if no such GeometryDefinition exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeometryDefinition(const GeometryDefinition* object)
    * @see createGeometryDefinition()
@@ -547,7 +549,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the GeometryDefinition_t
  * to retrieve.
  *
- * @return the nth GeometryDefinition_t in this ListOf_t.
+ * @return the nth GeometryDefinition_t in this ListOf_t or @c NULL if no such
+ * object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -589,7 +592,7 @@ ListOfGeometryDefinitions_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth GeometryDefinition_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfGeometryDefinitions_t
  */
@@ -610,7 +613,7 @@ ListOfGeometryDefinitions_remove(ListOf_t* lo, unsigned int n);
  * @return the GeometryDefinition_t in this ListOf_t based on the identifier or
  * NULL if no such GeometryDefinition_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfGeometryDefinitions_t
  */

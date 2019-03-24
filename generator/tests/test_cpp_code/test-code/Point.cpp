@@ -993,7 +993,7 @@ Point::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SbgnUnknownCoreAttribute);
         log->logError(SbgnmlArcLOPointsAllowedCoreAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }

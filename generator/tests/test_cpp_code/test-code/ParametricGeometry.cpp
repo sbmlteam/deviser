@@ -1089,7 +1089,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialParametricGeometryAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mSpatialPoints;
@@ -1102,7 +1102,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialParametricGeometryAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mParametricObjects;

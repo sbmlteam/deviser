@@ -1106,7 +1106,8 @@ QualModelPlugin::createObject(XMLInputStream& stream)
       if (mQualitativeSpecies.size() != 0)
       {
         getErrorLog()->logPackageError("qual", QualModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mQualitativeSpecies;
@@ -1120,7 +1121,8 @@ QualModelPlugin::createObject(XMLInputStream& stream)
       if (mTransitions.size() != 0)
       {
         getErrorLog()->logPackageError("qual", QualModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mTransitions;

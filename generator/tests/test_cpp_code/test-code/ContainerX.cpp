@@ -827,7 +827,8 @@ ContainerX::createObject(XMLInputStream& stream)
     if (mFreds.size() != 0)
     {
       getErrorLog()->logPackageError("x", XContainerXAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mFreds;

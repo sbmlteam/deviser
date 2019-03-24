@@ -136,7 +136,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
-   * @return the nth Group in this ListOfGroups.
+   * @return the nth Group in this ListOfGroups or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -155,7 +156,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Group to retrieve.
    *
-   * @return the nth Group in this ListOfGroups.
+   * @return the nth Group in this ListOfGroups or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -216,7 +218,7 @@ public:
    *
    * @return a pointer to the nth Group in this ListOfGroups.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGroup(const Group* object)
    * @see createGroup()
@@ -237,7 +239,7 @@ public:
    * @return the Group in this ListOfGroups based on the identifier or NULL if
    * no such Group exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGroup(const Group* object)
    * @see createGroup()
@@ -416,7 +418,8 @@ BEGIN_C_DECLS
  *
  * @param n an unsigned int representing the index of the Group_t to retrieve.
  *
- * @return the nth Group_t in this ListOf_t.
+ * @return the nth Group_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -455,7 +458,7 @@ ListOfGroups_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Group_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfGroups_t
  */
@@ -475,7 +478,7 @@ ListOfGroups_remove(ListOf_t* lo, unsigned int n);
  * @return the Group_t in this ListOf_t based on the identifier or NULL if no
  * such Group_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfGroups_t
  */

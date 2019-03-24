@@ -1020,7 +1020,7 @@ DefaultValues::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("render",
         RenderDefaultValuesAllowedAttributes, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mFontSize;

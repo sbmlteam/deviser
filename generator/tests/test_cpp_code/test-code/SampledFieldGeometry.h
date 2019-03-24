@@ -231,7 +231,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry.
+   * SampledFieldGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -252,7 +252,7 @@ public:
    * retrieve.
    *
    * @return the nth SampledVolume in the ListOfSampledVolumes within this
-   * SampledFieldGeometry.
+   * SampledFieldGeometry or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -409,7 +409,7 @@ public:
    *
    * @return a pointer to the nth SampledVolume in this SampledFieldGeometry.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSampledVolume(const SampledVolume* object)
    * @see createSampledVolume()
@@ -431,7 +431,7 @@ public:
    * @return the SampledVolume in this SampledFieldGeometry based on the
    * identifier or NULL if no such SampledVolume exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSampledVolume(const SampledVolume* object)
    * @see createSampledVolume()
@@ -945,7 +945,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1190,7 +1190,7 @@ SampledFieldGeometry_getListOfSampledVolumes(SampledFieldGeometry_t* sfg);
  * retrieve.
  *
  * @return the nth SampledVolume_t in the ListOfSampledVolumes within this
- * SampledFieldGeometry.
+ * SampledFieldGeometry or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1316,7 +1316,7 @@ SampledFieldGeometry_createSampledVolume(SampledFieldGeometry_t* sfg);
  *
  * @return a pointer to the nth SampledVolume_t in this SampledFieldGeometry_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */
@@ -1338,7 +1338,7 @@ SampledFieldGeometry_removeSampledVolume(SampledFieldGeometry_t* sfg,
  * @return the SampledVolume_t in this SampledFieldGeometry_t based on the
  * identifier or NULL if no such SampledVolume_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SampledFieldGeometry_t
  */

@@ -1469,7 +1469,8 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
       if (mObjectives.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mObjectives;
@@ -1483,7 +1484,8 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
       if (mFluxBounds.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mFluxBounds;
@@ -1497,7 +1499,8 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
       if (mGeneProducts.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       obj = &mGeneProducts;

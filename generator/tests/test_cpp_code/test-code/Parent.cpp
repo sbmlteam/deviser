@@ -984,7 +984,8 @@ Parent::createObject(XMLInputStream& stream)
     if (mChildren.size() != 0)
     {
       getErrorLog()->logPackageError("nasty", NastyParentAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mChildren;
@@ -994,7 +995,8 @@ Parent::createObject(XMLInputStream& stream)
     if (mSprogs.size() != 0)
     {
       getErrorLog()->logPackageError("nasty", NastyParentAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mSprogs;

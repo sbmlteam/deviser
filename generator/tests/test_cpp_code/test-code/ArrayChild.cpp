@@ -941,7 +941,8 @@ ArrayChild::createObject(XMLInputStream& stream)
     if (isSetUnit())
     {
       getErrorLog()->logPackageError("test", TestArrayChildAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     delete mUnit;

@@ -1067,7 +1067,7 @@ Compartment::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SBMLUnknownCoreAttribute);
         log->logError(CoreModelLOCompartmentsAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }

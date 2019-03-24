@@ -1399,7 +1399,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1412,7 +1412,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1425,7 +1425,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1438,7 +1438,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1451,7 +1451,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1464,7 +1464,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1477,7 +1477,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1490,7 +1490,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1503,7 +1503,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1516,7 +1516,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1529,7 +1529,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mDistribution;
@@ -1542,7 +1542,7 @@ Uncertainty::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mUncertStatistics;

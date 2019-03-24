@@ -388,7 +388,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective.
+   * Objective or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -409,7 +409,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxObjective in the ListOfFluxObjectives within this
-   * Objective.
+   * Objective or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -566,7 +566,7 @@ public:
    *
    * @return a pointer to the nth FluxObjective in this Objective.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFluxObjective(const FluxObjective* object)
    * @see createFluxObjective()
@@ -588,7 +588,7 @@ public:
    * @return the FluxObjective in this Objective based on the identifier or
    * NULL if no such FluxObjective exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFluxObjective(const FluxObjective* object)
    * @see createFluxObjective()
@@ -1070,7 +1070,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1546,7 +1546,7 @@ Objective_getListOfFluxObjectives(Objective_t* o);
  * retrieve.
  *
  * @return the nth FluxObjective_t in the ListOfFluxObjectives within this
- * Objective.
+ * Objective or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1666,7 +1666,7 @@ Objective_createFluxObjective(Objective_t* o);
  *
  * @return a pointer to the nth FluxObjective_t in this Objective_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Objective_t
  */
@@ -1687,7 +1687,7 @@ Objective_removeFluxObjective(Objective_t* o, unsigned int n);
  * @return the FluxObjective_t in this Objective_t based on the identifier or
  * NULL if no such FluxObjective_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Objective_t
  */

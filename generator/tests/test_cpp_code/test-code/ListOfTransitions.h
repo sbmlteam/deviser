@@ -137,7 +137,8 @@ public:
    * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this ListOfTransitions.
+   * @return the nth Transition in this ListOfTransitions or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -157,7 +158,8 @@ public:
    * @param n an unsigned int representing the index of the Transition to
    * retrieve.
    *
-   * @return the nth Transition in this ListOfTransitions.
+   * @return the nth Transition in this ListOfTransitions or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -222,7 +224,7 @@ public:
    *
    * @return a pointer to the nth Transition in this ListOfTransitions.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see createTransition()
@@ -244,7 +246,7 @@ public:
    * @return the Transition in this ListOfTransitions based on the identifier
    * or NULL if no such Transition exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see createTransition()
@@ -426,7 +428,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the Transition_t to
  * retrieve.
  *
- * @return the nth Transition_t in this ListOf_t.
+ * @return the nth Transition_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -467,7 +470,7 @@ ListOfTransitions_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Transition_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfTransitions_t
  */
@@ -488,7 +491,7 @@ ListOfTransitions_remove(ListOf_t* lo, unsigned int n);
  * @return the Transition_t in this ListOf_t based on the identifier or NULL if
  * no such Transition_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfTransitions_t
  */

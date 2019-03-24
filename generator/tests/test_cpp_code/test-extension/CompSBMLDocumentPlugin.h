@@ -174,7 +174,8 @@ public:
    * ExternalModelDefinition to retrieve.
    *
    * @return the nth ExternalModelDefinition in the
-   * ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin.
+   * @return the nth ExternalModelDefinition in the ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -195,7 +196,8 @@ public:
    * ExternalModelDefinition to retrieve.
    *
    * @return the nth ExternalModelDefinition in the
-   * ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin.
+   * @return the nth ExternalModelDefinition in the ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or
+   * @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -364,7 +366,7 @@ public:
    * @return a pointer to the nth ExternalModelDefinition in this
    * CompSBMLDocumentPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addExternalModelDefinition(const ExternalModelDefinition* object)
    * @see createExternalModelDefinition()
@@ -386,7 +388,7 @@ public:
    * @return the ExternalModelDefinition in this CompSBMLDocumentPlugin based
    * on the identifier or NULL if no such ExternalModelDefinition exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addExternalModelDefinition(const ExternalModelDefinition* object)
    * @see createExternalModelDefinition()
@@ -442,7 +444,7 @@ public:
    * retrieve.
    *
    * @return the nth ModelDefinition in the ListOfModelDefinitions within this
-   * CompSBMLDocumentPlugin.
+   * CompSBMLDocumentPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -463,7 +465,7 @@ public:
    * retrieve.
    *
    * @return the nth ModelDefinition in the ListOfModelDefinitions within this
-   * CompSBMLDocumentPlugin.
+   * CompSBMLDocumentPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -548,7 +550,7 @@ public:
    * @return a pointer to the nth ModelDefinition in this
    * CompSBMLDocumentPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addModelDefinition(const ModelDefinition* object)
    * @see createModelDefinition()
@@ -1057,7 +1059,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1154,7 +1156,8 @@ CompSBMLDocumentPlugin_getListOfExternalModelDefinitions(CompSBMLDocumentPlugin_
  * ExternalModelDefinition_t to retrieve.
  *
  * @return the nth ExternalModelDefinition_t in the
- * ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin.
+ * ListOfExternalModelDefinitions within this CompSBMLDocumentPlugin or @c NULL
+ * if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1296,7 +1299,7 @@ CompSBMLDocumentPlugin_createExternalModelDefinition(CompSBMLDocumentPlugin_t*
  * @return a pointer to the nth ExternalModelDefinition_t in this
  * CompSBMLDocumentPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CompSBMLDocumentPlugin_t
  */
@@ -1320,7 +1323,7 @@ CompSBMLDocumentPlugin_removeExternalModelDefinition(
  * @return the ExternalModelDefinition_t in this CompSBMLDocumentPlugin_t based
  * on the identifier or NULL if no such ExternalModelDefinition_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CompSBMLDocumentPlugin_t
  */
@@ -1369,7 +1372,7 @@ CompSBMLDocumentPlugin_getListOfModelDefinitions(CompSBMLDocumentPlugin_t*
  * retrieve.
  *
  * @return the nth ModelDefinition_t in the ListOfModelDefinitions within this
- * CompSBMLDocumentPlugin.
+ * CompSBMLDocumentPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1455,7 +1458,7 @@ CompSBMLDocumentPlugin_createModelDefinition(CompSBMLDocumentPlugin_t*
  * @return a pointer to the nth ModelDefinition_t in this
  * CompSBMLDocumentPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CompSBMLDocumentPlugin_t
  */

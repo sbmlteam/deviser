@@ -1419,7 +1419,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetTrigger())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mTrigger;
@@ -1431,7 +1431,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetPriority())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mPriority;
@@ -1443,7 +1443,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetDelay())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mDelay;
@@ -1455,7 +1455,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (mEventAssignments.size() != 0)
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mEventAssignments;
@@ -1519,7 +1519,7 @@ Event::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SBMLUnknownCoreAttribute);
         log->logError(CoreModelLOEventsAllowedCoreAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }

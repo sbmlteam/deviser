@@ -991,7 +991,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
           SpatialAnalyticGeometryLOAnalyticVolumesAllowedAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -999,7 +999,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
           SpatialAnalyticGeometryLOAnalyticVolumesAllowedCoreAttributes,
-            pkgVersion, level, version, details);
+            pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
   }

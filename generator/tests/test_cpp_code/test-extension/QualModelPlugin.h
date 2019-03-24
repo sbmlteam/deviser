@@ -168,7 +168,7 @@ public:
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
-   * this QualModelPlugin.
+   * this QualModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -189,7 +189,7 @@ public:
    * to retrieve.
    *
    * @return the nth QualitativeSpecies in the ListOfQualitativeSpecies within
-   * this QualModelPlugin.
+   * this QualModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -348,7 +348,7 @@ public:
    *
    * @return a pointer to the nth QualitativeSpecies in this QualModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addQualitativeSpecies(const QualitativeSpecies* object)
    * @see createQualitativeSpecies()
@@ -370,7 +370,7 @@ public:
    * @return the QualitativeSpecies in this QualModelPlugin based on the
    * identifier or NULL if no such QualitativeSpecies exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addQualitativeSpecies(const QualitativeSpecies* object)
    * @see createQualitativeSpecies()
@@ -425,7 +425,7 @@ public:
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
-   * QualModelPlugin.
+   * QualModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -446,7 +446,7 @@ public:
    * retrieve.
    *
    * @return the nth Transition in the ListOfTransitions within this
-   * QualModelPlugin.
+   * QualModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -572,7 +572,7 @@ public:
    *
    * @return a pointer to the nth Transition in this QualModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see createTransition()
@@ -594,7 +594,7 @@ public:
    * @return the Transition in this QualModelPlugin based on the identifier or
    * NULL if no such Transition exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTransition(const Transition* object)
    * @see createTransition()
@@ -1046,7 +1046,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1142,7 +1142,7 @@ QualModelPlugin_getListOfQualitativeSpecies(QualModelPlugin_t* qmp);
  * to retrieve.
  *
  * @return the nth QualitativeSpecies_t in the ListOfQualitativeSpecies within
- * this QualModelPlugin.
+ * this QualModelPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1268,7 +1268,7 @@ QualModelPlugin_createQualitativeSpecies(QualModelPlugin_t* qmp);
  *
  * @return a pointer to the nth QualitativeSpecies_t in this QualModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1290,7 +1290,7 @@ QualModelPlugin_removeQualitativeSpecies(QualModelPlugin_t* qmp,
  * @return the QualitativeSpecies_t in this QualModelPlugin_t based on the
  * identifier or NULL if no such QualitativeSpecies_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1335,7 +1335,7 @@ QualModelPlugin_getListOfTransitions(QualModelPlugin_t* qmp);
  * retrieve.
  *
  * @return the nth Transition_t in the ListOfTransitions within this
- * QualModelPlugin.
+ * QualModelPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1434,7 +1434,7 @@ QualModelPlugin_createTransition(QualModelPlugin_t* qmp);
  *
  * @return a pointer to the nth Transition_t in this QualModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */
@@ -1455,7 +1455,7 @@ QualModelPlugin_removeTransition(QualModelPlugin_t* qmp, unsigned int n);
  * @return the Transition_t in this QualModelPlugin_t based on the identifier
  * or NULL if no such Transition_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof QualModelPlugin_t
  */

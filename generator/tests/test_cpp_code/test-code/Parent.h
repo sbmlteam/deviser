@@ -178,7 +178,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
-   * @return the nth Child in the ListOfChildren within this Parent.
+   * @return the nth Child in the ListOfChildren within this Parent or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -197,7 +198,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
-   * @return the nth Child in the ListOfChildren within this Parent.
+   * @return the nth Child in the ListOfChildren within this Parent or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -277,7 +279,7 @@ public:
    *
    * @return a pointer to the nth Child in this Parent.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChild(const Child* object)
    * @see createChild()
@@ -330,7 +332,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
-   * @return the nth Sprog in the ListOfSprogs within this Parent.
+   * @return the nth Sprog in the ListOfSprogs within this Parent or @c NULL if
+   * no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -349,7 +352,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Sprog to retrieve.
    *
-   * @return the nth Sprog in the ListOfSprogs within this Parent.
+   * @return the nth Sprog in the ListOfSprogs within this Parent or @c NULL if
+   * no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -429,7 +433,7 @@ public:
    *
    * @return a pointer to the nth Sprog in this Parent.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSprog(const Sprog* object)
    * @see createSprog()
@@ -896,7 +900,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1025,7 +1029,8 @@ Parent_getListOfChildren(Parent_t* p);
  *
  * @param n an unsigned int representing the index of the Child_t to retrieve.
  *
- * @return the nth Child_t in the ListOfChildren within this Parent.
+ * @return the nth Child_t in the ListOfChildren within this Parent or @c NULL
+ * if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1099,7 +1104,7 @@ Parent_createChild(Parent_t* p);
  *
  * @return a pointer to the nth Child_t in this Parent_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Parent_t
  */
@@ -1139,7 +1144,8 @@ Parent_getListOfSprogs(Parent_t* p);
  *
  * @param n an unsigned int representing the index of the Sprog_t to retrieve.
  *
- * @return the nth Sprog_t in the ListOfSprogs within this Parent.
+ * @return the nth Sprog_t in the ListOfSprogs within this Parent or @c NULL if
+ * no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1213,7 +1219,7 @@ Parent_createSprog(Parent_t* p);
  *
  * @return a pointer to the nth Sprog_t in this Parent_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Parent_t
  */

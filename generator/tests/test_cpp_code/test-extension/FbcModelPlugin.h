@@ -215,7 +215,7 @@ public:
    * retrieve.
    *
    * @return the nth Objective in the ListOfObjectives within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -236,7 +236,7 @@ public:
    * retrieve.
    *
    * @return the nth Objective in the ListOfObjectives within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -360,7 +360,7 @@ public:
    *
    * @return a pointer to the nth Objective in this FbcModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addObjective(const Objective* object)
    * @see createObjective()
@@ -382,7 +382,7 @@ public:
    * @return the Objective in this FbcModelPlugin based on the identifier or
    * NULL if no such Objective exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addObjective(const Objective* object)
    * @see createObjective()
@@ -437,7 +437,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxBound in the ListOfFluxBounds within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -458,7 +458,7 @@ public:
    * retrieve.
    *
    * @return the nth FluxBound in the ListOfFluxBounds within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -612,7 +612,7 @@ public:
    *
    * @return a pointer to the nth FluxBound in this FbcModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFluxBound(const FluxBound* object)
    * @see createFluxBound()
@@ -634,7 +634,7 @@ public:
    * @return the FluxBound in this FbcModelPlugin based on the identifier or
    * NULL if no such FluxBound exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFluxBound(const FluxBound* object)
    * @see createFluxBound()
@@ -689,7 +689,7 @@ public:
    * retrieve.
    *
    * @return the nth GeneProduct in the ListOfGeneProducts within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -710,7 +710,7 @@ public:
    * retrieve.
    *
    * @return the nth GeneProduct in the ListOfGeneProducts within this
-   * FbcModelPlugin.
+   * FbcModelPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -867,7 +867,7 @@ public:
    *
    * @return a pointer to the nth GeneProduct in this FbcModelPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeneProduct(const GeneProduct* object)
    * @see createGeneProduct()
@@ -889,7 +889,7 @@ public:
    * @return the GeneProduct in this FbcModelPlugin based on the identifier or
    * NULL if no such GeneProduct exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addGeneProduct(const GeneProduct* object)
    * @see createGeneProduct()
@@ -1355,7 +1355,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1505,7 +1505,7 @@ FbcModelPlugin_getListOfObjectives(FbcModelPlugin_t* fmp);
  * retrieve.
  *
  * @return the nth Objective_t in the ListOfObjectives within this
- * FbcModelPlugin.
+ * FbcModelPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1603,7 +1603,7 @@ FbcModelPlugin_createObjective(FbcModelPlugin_t* fmp);
  *
  * @return a pointer to the nth Objective_t in this FbcModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */
@@ -1624,7 +1624,7 @@ FbcModelPlugin_removeObjective(FbcModelPlugin_t* fmp, unsigned int n);
  * @return the Objective_t in this FbcModelPlugin_t based on the identifier or
  * NULL if no such Objective_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */
@@ -1667,7 +1667,7 @@ FbcModelPlugin_getListOfFluxBounds(FbcModelPlugin_t* fmp);
  * retrieve.
  *
  * @return the nth FluxBound_t in the ListOfFluxBounds within this
- * FbcModelPlugin.
+ * FbcModelPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1786,7 +1786,7 @@ FbcModelPlugin_createFluxBound(FbcModelPlugin_t* fmp);
  *
  * @return a pointer to the nth FluxBound_t in this FbcModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */
@@ -1807,7 +1807,7 @@ FbcModelPlugin_removeFluxBound(FbcModelPlugin_t* fmp, unsigned int n);
  * @return the FluxBound_t in this FbcModelPlugin_t based on the identifier or
  * NULL if no such FluxBound_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */
@@ -1851,7 +1851,7 @@ FbcModelPlugin_getListOfGeneProducts(FbcModelPlugin_t* fmp);
  * retrieve.
  *
  * @return the nth GeneProduct_t in the ListOfGeneProducts within this
- * FbcModelPlugin.
+ * FbcModelPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1972,7 +1972,7 @@ FbcModelPlugin_createGeneProduct(FbcModelPlugin_t* fmp);
  *
  * @return a pointer to the nth GeneProduct_t in this FbcModelPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */
@@ -1993,7 +1993,7 @@ FbcModelPlugin_removeGeneProduct(FbcModelPlugin_t* fmp, unsigned int n);
  * @return the GeneProduct_t in this FbcModelPlugin_t based on the identifier
  * or NULL if no such GeneProduct_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcModelPlugin_t
  */

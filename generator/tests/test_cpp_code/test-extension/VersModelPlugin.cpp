@@ -1041,7 +1041,8 @@ VersModelPlugin::createObject(XMLInputStream& stream)
       if (isSetClassOne())
       {
         getErrorLog()->logPackageError("vers", VersModelAllowedElements,
-          getPackageVersion(), getLevel(), getVersion());
+          getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+            getColumn());
       }
 
       delete mClassOne;

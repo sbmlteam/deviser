@@ -1298,7 +1298,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1311,7 +1311,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1324,7 +1324,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1337,7 +1337,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1350,7 +1350,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1363,7 +1363,7 @@ CSGObject::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mCSGNode;
@@ -1431,7 +1431,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
           SpatialCSGeometryLOCSGObjectsAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1439,7 +1439,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
           SpatialCSGeometryLOCSGObjectsAllowedCoreAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
     }
   }

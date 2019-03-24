@@ -139,7 +139,8 @@ public:
    * @param n an unsigned int representing the index of the Category to
    * retrieve.
    *
-   * @return the nth Category in this ListOfCategories.
+   * @return the nth Category in this ListOfCategories or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -159,7 +160,8 @@ public:
    * @param n an unsigned int representing the index of the Category to
    * retrieve.
    *
-   * @return the nth Category in this ListOfCategories.
+   * @return the nth Category in this ListOfCategories or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -223,7 +225,7 @@ public:
    *
    * @return a pointer to the nth Category in this ListOfCategories.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCategory(const Category* object)
    * @see createCategory()
@@ -244,7 +246,7 @@ public:
    * @return the Category in this ListOfCategories based on the identifier or
    * NULL if no such Category exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCategory(const Category* object)
    * @see createCategory()
@@ -426,7 +428,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the Category_t to
  * retrieve.
  *
- * @return the nth Category_t in this ListOf_t.
+ * @return the nth Category_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -466,7 +469,7 @@ ListOfCategories_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Category_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCategories_t
  */
@@ -486,7 +489,7 @@ ListOfCategories_remove(ListOf_t* lo, unsigned int n);
  * @return the Category_t in this ListOf_t based on the identifier or NULL if
  * no such Category_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfCategories_t
  */

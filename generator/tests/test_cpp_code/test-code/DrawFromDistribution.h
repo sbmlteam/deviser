@@ -351,7 +351,7 @@ public:
    * retrieve.
    *
    * @return the nth DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution.
+   * DrawFromDistribution or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -372,7 +372,7 @@ public:
    * retrieve.
    *
    * @return the nth DistribInput in the ListOfDistribInputs within this
-   * DrawFromDistribution.
+   * DrawFromDistribution or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -498,7 +498,7 @@ public:
    *
    * @return a pointer to the nth DistribInput in this DrawFromDistribution.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDistribInput(const DistribInput* object)
    * @see createDistribInput()
@@ -520,7 +520,7 @@ public:
    * @return the DistribInput in this DrawFromDistribution based on the
    * identifier or NULL if no such DistribInput exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDistribInput(const DistribInput* object)
    * @see createDistribInput()
@@ -1000,7 +1000,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1398,7 +1398,7 @@ DrawFromDistribution_getListOfDistribInputs(DrawFromDistribution_t* dfd);
  * retrieve.
  *
  * @return the nth DistribInput_t in the ListOfDistribInputs within this
- * DrawFromDistribution.
+ * DrawFromDistribution or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1501,7 +1501,7 @@ DrawFromDistribution_createDistribInput(DrawFromDistribution_t* dfd);
  *
  * @return a pointer to the nth DistribInput_t in this DrawFromDistribution_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof DrawFromDistribution_t
  */
@@ -1523,7 +1523,7 @@ DrawFromDistribution_removeDistribInput(DrawFromDistribution_t* dfd,
  * @return the DistribInput_t in this DrawFromDistribution_t based on the
  * identifier or NULL if no such DistribInput_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof DrawFromDistribution_t
  */

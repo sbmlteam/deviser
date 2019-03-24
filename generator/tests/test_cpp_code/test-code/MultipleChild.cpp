@@ -1226,7 +1226,7 @@ MultipleChild::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("twoatonce",
         TwoatonceMultipleChildAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mNormalClass;
@@ -1239,7 +1239,7 @@ MultipleChild::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("twoatonce",
         TwoatonceMultipleChildAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mClassIds;

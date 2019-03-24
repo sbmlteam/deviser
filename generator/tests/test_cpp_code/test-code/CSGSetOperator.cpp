@@ -1364,7 +1364,7 @@ CSGSetOperator::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGSetOperatorAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mCSGNodes;

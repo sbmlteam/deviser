@@ -1242,7 +1242,7 @@ MixedGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialMixedGeometryAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mGeometryDefinitions;
@@ -1253,7 +1253,7 @@ MixedGeometry::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialMixedGeometryAllowedElements, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mOrdinalMappings;

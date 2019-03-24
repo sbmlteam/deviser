@@ -177,7 +177,8 @@ public:
    * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in the ListOfAssociations within this FbcAnd.
+   * @return the nth Association in the ListOfAssociations within this FbcAnd
+   * or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -197,7 +198,8 @@ public:
    * @param n an unsigned int representing the index of the Association to
    * retrieve.
    *
-   * @return the nth Association in the ListOfAssociations within this FbcAnd.
+   * @return the nth Association in the ListOfAssociations within this FbcAnd
+   * or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -314,7 +316,7 @@ public:
    *
    * @return a pointer to the nth Association in this FbcAnd.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAssociation(const Association* object)
    * @see createAssociation()
@@ -804,7 +806,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -968,7 +970,8 @@ FbcAnd_getListOfAssociations(FbcAnd_t* fa);
  * @param n an unsigned int representing the index of the Association_t to
  * retrieve.
  *
- * @return the nth Association_t in the ListOfAssociations within this FbcAnd.
+ * @return the nth Association_t in the ListOfAssociations within this FbcAnd
+ * or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1079,7 +1082,7 @@ FbcAnd_createGeneProductRef(FbcAnd_t* fa);
  *
  * @return a pointer to the nth Association_t in this FbcAnd_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof FbcAnd_t
  */

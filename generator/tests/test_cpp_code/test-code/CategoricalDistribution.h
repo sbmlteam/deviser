@@ -186,7 +186,7 @@ public:
    * retrieve.
    *
    * @return the nth Category in the ListOfCategories within this
-   * CategoricalDistribution.
+   * CategoricalDistribution or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -207,7 +207,7 @@ public:
    * retrieve.
    *
    * @return the nth Category in the ListOfCategories within this
-   * CategoricalDistribution.
+   * CategoricalDistribution or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -288,7 +288,7 @@ public:
    *
    * @return a pointer to the nth Category in this CategoricalDistribution.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCategory(const Category* object)
    * @see createCategory()
@@ -793,7 +793,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -963,7 +963,7 @@ CategoricalDistribution_getListOfCategories(CategoricalDistribution_t* cd);
  * retrieve.
  *
  * @return the nth Category_t in the ListOfCategories within this
- * CategoricalDistribution.
+ * CategoricalDistribution or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1042,7 +1042,7 @@ CategoricalDistribution_createCategory(CategoricalDistribution_t* cd);
  *
  * @return a pointer to the nth Category_t in this CategoricalDistribution_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof CategoricalDistribution_t
  */

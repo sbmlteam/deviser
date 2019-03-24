@@ -139,7 +139,8 @@ public:
    * @param n an unsigned int representing the index of the SampledField to
    * retrieve.
    *
-   * @return the nth SampledField in this ListOfSampledFields.
+   * @return the nth SampledField in this ListOfSampledFields or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -159,7 +160,8 @@ public:
    * @param n an unsigned int representing the index of the SampledField to
    * retrieve.
    *
-   * @return the nth SampledField in this ListOfSampledFields.
+   * @return the nth SampledField in this ListOfSampledFields or @c NULL if no
+   * such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -224,7 +226,7 @@ public:
    *
    * @return a pointer to the nth SampledField in this ListOfSampledFields.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSampledField(const SampledField* object)
    * @see createSampledField()
@@ -246,7 +248,7 @@ public:
    * @return the SampledField in this ListOfSampledFields based on the
    * identifier or NULL if no such SampledField exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSampledField(const SampledField* object)
    * @see createSampledField()
@@ -428,7 +430,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SampledField_t to
  * retrieve.
  *
- * @return the nth SampledField_t in this ListOf_t.
+ * @return the nth SampledField_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -470,7 +473,7 @@ ListOfSampledFields_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth SampledField_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfSampledFields_t
  */
@@ -491,7 +494,7 @@ ListOfSampledFields_remove(ListOf_t* lo, unsigned int n);
  * @return the SampledField_t in this ListOf_t based on the identifier or NULL
  * if no such SampledField_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfSampledFields_t
  */

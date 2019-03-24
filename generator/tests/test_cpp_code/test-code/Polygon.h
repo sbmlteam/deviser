@@ -179,8 +179,8 @@ public:
    * @param n an unsigned int representing the index of the RenderPoint to
    * retrieve.
    *
-   * @return the nth RenderPoint in the ListOfCurveElements within this
-   * Polygon.
+   * @return the nth RenderPoint in the ListOfCurveElements within this Polygon
+   * or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -200,8 +200,8 @@ public:
    * @param n an unsigned int representing the index of the RenderPoint to
    * retrieve.
    *
-   * @return the nth RenderPoint in the ListOfCurveElements within this
-   * Polygon.
+   * @return the nth RenderPoint in the ListOfCurveElements within this Polygon
+   * or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -300,7 +300,7 @@ public:
    *
    * @return a pointer to the nth RenderPoint in this Polygon.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addElement(const RenderPoint* object)
    * @see createElement()
@@ -790,7 +790,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -955,8 +955,8 @@ Polygon_getListOfElements(Polygon_t* p);
  * @param n an unsigned int representing the index of the RenderPoint_t to
  * retrieve.
  *
- * @return the nth RenderPoint_t in the ListOfCurveElements within this
- * Polygon.
+ * @return the nth RenderPoint_t in the ListOfCurveElements within this Polygon
+ * or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1050,7 +1050,7 @@ Polygon_createCubicBezier(Polygon_t* p);
  *
  * @return a pointer to the nth RenderPoint_t in this Polygon_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof Polygon_t
  */

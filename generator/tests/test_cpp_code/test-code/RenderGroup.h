@@ -808,7 +808,7 @@ public:
    * retrieve.
    *
    * @return the nth Transformation2D in the ListOfDrawables within this
-   * RenderGroup.
+   * RenderGroup or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -829,7 +829,7 @@ public:
    * retrieve.
    *
    * @return the nth Transformation2D in the ListOfDrawables within this
-   * RenderGroup.
+   * RenderGroup or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -1019,7 +1019,7 @@ public:
    *
    * @return a pointer to the nth Transformation2D in this RenderGroup.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addElement(const Transformation2D* object)
    * @see createElement()
@@ -1527,7 +1527,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -2492,7 +2492,7 @@ RenderGroup_getListOfElements(RenderGroup_t* rg);
  * retrieve.
  *
  * @return the nth Transformation2D_t in the ListOfDrawables within this
- * RenderGroup.
+ * RenderGroup or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2676,7 +2676,7 @@ RenderGroup_createCurve(RenderGroup_t* rg);
  *
  * @return a pointer to the nth Transformation2D_t in this RenderGroup_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof RenderGroup_t
  */

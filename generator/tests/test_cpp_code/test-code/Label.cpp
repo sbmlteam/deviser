@@ -880,7 +880,7 @@ Label::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetBBox())
     {
       getErrorLog()->logError(SbgnmlLabelAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mBBox;

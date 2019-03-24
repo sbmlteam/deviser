@@ -1211,7 +1211,8 @@ LineEnding::createObject(XMLInputStream& stream)
     if (isSetGroup())
     {
       getErrorLog()->logPackageError("render", RenderLineEndingAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     delete mGroup;
@@ -1224,7 +1225,8 @@ LineEnding::createObject(XMLInputStream& stream)
     if (isSetBoundingBox())
     {
       getErrorLog()->logPackageError("render", RenderLineEndingAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     delete mBoundingBox;
@@ -1292,7 +1294,7 @@ LineEnding::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("render",
           RenderRenderInformationBaseLOLineEndingsAllowedAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1300,7 +1302,7 @@ LineEnding::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("render",
           RenderRenderInformationBaseLOLineEndingsAllowedCoreAttributes,
-            pkgVersion, level, version, details);
+            pkgVersion, level, version, details, getLine(), getColumn());
       }
     }
   }

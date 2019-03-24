@@ -1345,7 +1345,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mBoundaryMin;
@@ -1359,7 +1359,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),
-          getLevel(), getVersion());
+          getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mBoundaryMax;
@@ -1429,7 +1429,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("spatial",
           SpatialGeometryLOCoordinateComponentsAllowedAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1437,7 +1437,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("spatial",
           SpatialGeometryLOCoordinateComponentsAllowedCoreAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
     }
   }

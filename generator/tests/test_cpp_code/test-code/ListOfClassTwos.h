@@ -137,7 +137,8 @@ public:
    * @param n an unsigned int representing the index of the ClassTwo to
    * retrieve.
    *
-   * @return the nth ClassTwo in this ListOfClassTwos.
+   * @return the nth ClassTwo in this ListOfClassTwos or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -157,7 +158,8 @@ public:
    * @param n an unsigned int representing the index of the ClassTwo to
    * retrieve.
    *
-   * @return the nth ClassTwo in this ListOfClassTwos.
+   * @return the nth ClassTwo in this ListOfClassTwos or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -221,7 +223,7 @@ public:
    *
    * @return a pointer to the nth ClassTwo in this ListOfClassTwos.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addClassTwo(const ClassTwo* object)
    * @see createClassTwo()
@@ -242,7 +244,7 @@ public:
    * @return the ClassTwo in this ListOfClassTwos based on the identifier or
    * NULL if no such ClassTwo exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addClassTwo(const ClassTwo* object)
    * @see createClassTwo()
@@ -423,7 +425,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the ClassTwo_t to
  * retrieve.
  *
- * @return the nth ClassTwo_t in this ListOf_t.
+ * @return the nth ClassTwo_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -463,7 +466,7 @@ ListOfClassTwos_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth ClassTwo_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfClassTwos_t
  */
@@ -483,7 +486,7 @@ ListOfClassTwos_remove(ListOf_t* lo, unsigned int n);
  * @return the ClassTwo_t in this ListOf_t based on the identifier or NULL if
  * no such ClassTwo_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfClassTwos_t
  */

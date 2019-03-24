@@ -188,7 +188,8 @@ public:
    * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in this ListOfMyLoTests.
+   * @return the nth MyLoTest in this ListOfMyLoTests or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -208,7 +209,8 @@ public:
    * @param n an unsigned int representing the index of the MyLoTest to
    * retrieve.
    *
-   * @return the nth MyLoTest in this ListOfMyLoTests.
+   * @return the nth MyLoTest in this ListOfMyLoTests or @c NULL if no such
+   * object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -272,7 +274,7 @@ public:
    *
    * @return a pointer to the nth MyLoTest in this ListOfMyLoTests.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
@@ -293,7 +295,7 @@ public:
    * @return the MyLoTest in this ListOfMyLoTests based on the identifier or
    * NULL if no such MyLoTest exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addMyLoTest(const MyLoTest* object)
    * @see createMyLoTest()
@@ -589,7 +591,8 @@ ListOfMyLoTests_unsetId(ListOf_t * lo);
  * @param n an unsigned int representing the index of the MyLoTest_t to
  * retrieve.
  *
- * @return the nth MyLoTest_t in this ListOf_t.
+ * @return the nth MyLoTest_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -629,7 +632,7 @@ ListOfMyLoTests_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth MyLoTest_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfMyLoTests_t
  */
@@ -649,7 +652,7 @@ ListOfMyLoTests_remove(ListOf_t* lo, unsigned int n);
  * @return the MyLoTest_t in this ListOf_t based on the identifier or NULL if
  * no such MyLoTest_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfMyLoTests_t
  */

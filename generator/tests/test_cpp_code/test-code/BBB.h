@@ -220,7 +220,8 @@ public:
    * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in the ListOfAnothers within this BBB.
+   * @return the nth Another in the ListOfAnothers within this BBB or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -240,7 +241,8 @@ public:
    * @param n an unsigned int representing the index of the Another to
    * retrieve.
    *
-   * @return the nth Another in the ListOfAnothers within this BBB.
+   * @return the nth Another in the ListOfAnothers within this BBB or @c NULL
+   * if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -362,7 +364,7 @@ public:
    *
    * @return a pointer to the nth Another in this BBB.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAnother(const Another* object)
    * @see createAnother()
@@ -383,7 +385,7 @@ public:
    * @return the Another in this BBB based on the identifier or NULL if no such
    * Another exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAnother(const Another* object)
    * @see createAnother()
@@ -864,7 +866,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1141,7 +1143,8 @@ BBB_getListOfAnothers(BBB_t* bbb);
  * @param n an unsigned int representing the index of the Another_t to
  * retrieve.
  *
- * @return the nth Another_t in the ListOfAnothers within this BBB.
+ * @return the nth Another_t in the ListOfAnothers within this BBB or @c NULL
+ * if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1235,7 +1238,7 @@ BBB_createAnother(BBB_t* bbb);
  *
  * @return a pointer to the nth Another_t in this BBB_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof BBB_t
  */
@@ -1255,7 +1258,7 @@ BBB_removeAnother(BBB_t* bbb, unsigned int n);
  * @return the Another_t in this BBB_t based on the identifier or NULL if no
  * such Another_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof BBB_t
  */

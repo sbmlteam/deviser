@@ -2350,7 +2350,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mCoordinateComponents.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mCoordinateComponents;
@@ -2360,7 +2361,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mDomainTypes.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mDomainTypes;
@@ -2370,7 +2372,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mDomains.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mDomains;
@@ -2380,7 +2383,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mAdjacentDomains.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mAdjacentDomains;
@@ -2390,7 +2394,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mGeometryDefinitions.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mGeometryDefinitions;
@@ -2400,7 +2405,8 @@ Geometry::createObject(XMLInputStream& stream)
     if (mSampledFields.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mSampledFields;

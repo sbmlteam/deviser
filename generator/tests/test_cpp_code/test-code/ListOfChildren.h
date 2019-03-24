@@ -136,7 +136,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
-   * @return the nth Child in this ListOfChildren.
+   * @return the nth Child in this ListOfChildren or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -155,7 +156,8 @@ public:
    *
    * @param n an unsigned int representing the index of the Child to retrieve.
    *
-   * @return the nth Child in this ListOfChildren.
+   * @return the nth Child in this ListOfChildren or @c NULL if no such object
+   * exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -217,7 +219,7 @@ public:
    *
    * @return a pointer to the nth Child in this ListOfChildren.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChild(const Child* object)
    * @see createChild()
@@ -238,7 +240,7 @@ public:
    * @return the Child in this ListOfChildren based on the identifier or NULL
    * if no such Child exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChild(const Child* object)
    * @see createChild()
@@ -418,7 +420,8 @@ BEGIN_C_DECLS
  *
  * @param n an unsigned int representing the index of the Child_t to retrieve.
  *
- * @return the nth Child_t in this ListOf_t.
+ * @return the nth Child_t in this ListOf_t or @c NULL if no such object
+ * exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -457,7 +460,7 @@ ListOfChildren_getById(ListOf_t* lo, const char *sid);
  *
  * @return a pointer to the nth Child_t in this ListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfChildren_t
  */
@@ -477,7 +480,7 @@ ListOfChildren_remove(ListOf_t* lo, unsigned int n);
  * @return the Child_t in this ListOf_t based on the identifier or NULL if no
  * such Child_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof ListOfChildren_t
  */

@@ -431,7 +431,7 @@ public:
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
-   * VersSpeciesPlugin.
+   * VersSpeciesPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -452,7 +452,7 @@ public:
    * retrieve.
    *
    * @return the nth Another in the ListOfAnothers within this
-   * VersSpeciesPlugin.
+   * VersSpeciesPlugin or @c NULL if no such object exists..
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -575,7 +575,7 @@ public:
    *
    * @return a pointer to the nth Another in this VersSpeciesPlugin.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAnother(const Another* object)
    * @see createAnother()
@@ -596,7 +596,7 @@ public:
    * @return the Another in this VersSpeciesPlugin based on the identifier or
    * NULL if no such Another exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAnother(const Another* object)
    * @see createAnother()
@@ -1059,7 +1059,7 @@ public:
    * @param filter an ElementFilter that may impose restrictions on the objects
    * to be retrieved.
    *
-   * @return a List* pointer of pointers to all SBase child objects with any
+   * @return a List pointer of pointers to all SBase child objects with any
    * restriction imposed.
    */
   virtual List* getAllElements(ElementFilter * filter = NULL);
@@ -1231,7 +1231,7 @@ VersSpeciesPlugin_getListOfAnothers(VersSpeciesPlugin_t* vsp);
  * retrieve.
  *
  * @return the nth Another_t in the ListOfAnothers within this
- * VersSpeciesPlugin.
+ * VersSpeciesPlugin or @c NULL if no such object exists..
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1328,7 +1328,7 @@ VersSpeciesPlugin_createAnother(VersSpeciesPlugin_t* vsp);
  *
  * @return a pointer to the nth Another_t in this VersSpeciesPlugin_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */
@@ -1348,7 +1348,7 @@ VersSpeciesPlugin_removeAnother(VersSpeciesPlugin_t* vsp, unsigned int n);
  * @return the Another_t in this VersSpeciesPlugin_t based on the identifier or
  * NULL if no such Another_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof VersSpeciesPlugin_t
  */

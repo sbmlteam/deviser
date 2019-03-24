@@ -1110,7 +1110,8 @@ Group::createObject(XMLInputStream& stream)
     if (mMembers.size() != 0)
     {
       getErrorLog()->logPackageError("groups", GroupsGroupAllowedElements,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
 
     obj = &mMembers;
@@ -1173,7 +1174,7 @@ Group::readAttributes(const XMLAttributes& attributes,
         const std::string details = log->getError(n)->getMessage();
         log->remove(UnknownPackageAttribute);
         log->logPackageError("groups", GroupsModelLOGroupsAllowedAttributes,
-          pkgVersion, level, version, details);
+          pkgVersion, level, version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1181,7 +1182,7 @@ Group::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("groups",
           GroupsModelLOGroupsAllowedCoreAttributes, pkgVersion, level, version,
-            details);
+            details, getLine(), getColumn());
       }
     }
   }

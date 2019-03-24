@@ -136,7 +136,15 @@ class BaseFile:
                         in_quotes = True
                         quotes_closed = False
                     # check we dont also end
+                    end_found = False
                     if words[i].endswith('\"'):
+                        in_quotes = False
+                        quotes_closed = True
+                    else:
+                        for c in range(1, len(words[i])):
+                            if words[i][c] == '\"':
+                                end_found = True
+                    if end_found and in_quotes and not quotes_closed:
                         in_quotes = False
                         quotes_closed = True
                 else:

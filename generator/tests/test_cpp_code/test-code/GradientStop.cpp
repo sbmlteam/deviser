@@ -954,7 +954,7 @@ GradientStop::createObject(XMLInputStream& stream)
     {
       getErrorLog()->logPackageError("render",
         RenderGradientStopAllowedAttributes, getPackageVersion(), getLevel(),
-          getVersion());
+          getVersion(), "", getLine(), getColumn());
     }
 
     delete mOffset;
@@ -1019,7 +1019,7 @@ GradientStop::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownPackageAttribute);
         log->logPackageError("render",
           RenderGradientBaseLOGradientStopsAllowedAttributes, pkgVersion, level,
-            version, details);
+            version, details, getLine(), getColumn());
       }
       else if (log->getError(n)->getErrorId() == UnknownCoreAttribute)
       {
@@ -1027,7 +1027,7 @@ GradientStop::readAttributes(const XMLAttributes& attributes,
         log->remove(UnknownCoreAttribute);
         log->logPackageError("render",
           RenderGradientBaseLOGradientStopsAllowedCoreAttributes, pkgVersion,
-            level, version, details);
+            level, version, details, getLine(), getColumn());
       }
     }
   }
