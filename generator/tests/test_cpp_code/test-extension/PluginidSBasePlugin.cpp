@@ -1175,7 +1175,7 @@ PluginidSBasePlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Pluginid attribute 'id' is missing from the "
       "<PluginidSBasePlugin> element.";
     log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1237,7 +1237,7 @@ PluginidSBasePlugin::readL3V2V1Attributes(const XMLAttributes& attributes)
     std::string message = "Pluginid attribute 'id' is missing from the "
       "<PluginidSBasePlugin> element.";
     log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 

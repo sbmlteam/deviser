@@ -1493,7 +1493,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'id' is missing from the "
       "<CSGObject> element.";
     log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1529,7 +1529,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'domainType' is missing from the "
       "<CSGObject> element.";
     log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1548,7 +1548,7 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
       std::string message = "Spatial attribute 'ordinal' from the <CSGObject> "
         "element must be an integer.";
       log->logPackageError("spatial", SpatialCSGObjectOrdinalMustBeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 }

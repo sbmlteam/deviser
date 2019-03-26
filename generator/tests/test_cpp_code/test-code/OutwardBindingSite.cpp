@@ -935,7 +935,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("multi",
           MultiOutwardBindingSiteBindingStatusMustBeBindingStatusEnum,
-            pkgVersion, level, version, msg);
+            pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -943,7 +943,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Multi attribute 'bindingStatus' is missing.";
     log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -977,7 +977,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
     std::string message = "Multi attribute 'component' is missing from the "
       "<OutwardBindingSite> element.";
     log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

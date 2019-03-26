@@ -1075,7 +1075,7 @@ GradientStop::readAttributes(const XMLAttributes& attributes,
     std::string message = "Render attribute 'stop-color' is missing from the "
       "<GradientStop> element.";
     log->logPackageError("render", RenderGradientStopAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

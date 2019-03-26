@@ -1060,7 +1060,7 @@ ExternalParameter::readAttributes(const XMLAttributes& attributes,
     std::string message = "Distrib attribute 'definitionURL' is missing from "
       "the <ExternalParameter> element.";
     log->logPackageError("distrib", DistribExternalParameterAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

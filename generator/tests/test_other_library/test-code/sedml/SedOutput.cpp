@@ -706,14 +706,15 @@ SedOutput::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
   {
     std::string message = "Sedml attribute 'id' is missing from the <SedOutput> "
       "element.";
-    log->logError(SedmlOutputAllowedAttributes, level, version, message);
+    log->logError(SedmlOutputAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 

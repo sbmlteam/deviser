@@ -230,12 +230,14 @@ SpatialSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     {
       log->remove(XMLAttributeTypeMismatch);
       log->logPackageError("spatial", SpatialAttributeRequiredMustBeBoolean,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
     else
     {
       log->logPackageError("spatial", SpatialAttributeRequiredMissing,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
   else
@@ -244,7 +246,8 @@ SpatialSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     if (mRequired != true)
     {
       log->logPackageError("spatial", SpatialAttributeRequiredMustHaveValue,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
 }

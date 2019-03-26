@@ -2190,7 +2190,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("render",
           RenderRenderGroupFontWeightMustBeFontWeightEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -2225,7 +2225,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("render",
           RenderRenderGroupFontStyleMustBeFontStyleEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -2260,7 +2260,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("render",
           RenderRenderGroupTextAnchorMustBeHTextAnchorEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -2295,7 +2295,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("render",
           RenderRenderGroupVtextAnchorMustBeVTextAnchorEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }

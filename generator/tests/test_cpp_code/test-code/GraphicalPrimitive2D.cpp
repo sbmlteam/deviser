@@ -816,7 +816,7 @@ GraphicalPrimitive2D::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("render",
           RenderGraphicalPrimitive2DFillRuleMustBeFillRuleEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }

@@ -1472,7 +1472,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialCSGSetOperatorOperationTypeMustBeSetOperationEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1480,7 +1480,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'operationType' is missing.";
     log->logPackageError("spatial", SpatialCSGSetOperatorAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 

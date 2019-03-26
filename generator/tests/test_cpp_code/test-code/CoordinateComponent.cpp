@@ -1494,7 +1494,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
       "<CoordinateComponent> element.";
     log->logPackageError("spatial",
       SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 
@@ -1527,7 +1527,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialCoordinateComponentTypeMustBeCoordinateKindEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1536,7 +1536,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'type' is missing.";
     log->logPackageError("spatial",
       SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 

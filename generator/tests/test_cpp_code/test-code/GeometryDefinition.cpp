@@ -794,7 +794,7 @@ GeometryDefinition::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'id' is missing from the "
       "<GeometryDefinition> element.";
     log->logPackageError("spatial", SpatialGeometryDefinitionAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 

@@ -674,12 +674,14 @@ CompSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     {
       log->remove(XMLAttributeTypeMismatch);
       log->logPackageError("comp", CompAttributeRequiredMustBeBoolean,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
     else
     {
       log->logPackageError("comp", CompAttributeRequiredMissing,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
   else
@@ -688,7 +690,8 @@ CompSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     if (mRequired != true)
     {
       log->logPackageError("comp", CompAttributeRequiredMustHaveValue,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
 }

@@ -1384,7 +1384,7 @@ MultipleChild::readL3V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Twoatonce attribute 'id' is missing from the "
       "<MultipleChild> element.";
     log->logPackageError("twoatonce", TwoatonceMultipleChildAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1404,7 +1404,7 @@ MultipleChild::readL3V1V1Attributes(const XMLAttributes& attributes)
         "<MultipleChild> element must be an integer.";
       log->logPackageError("twoatonce",
         TwoatonceMultipleChildNumAttMustBeDouble, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 }
@@ -1452,7 +1452,7 @@ MultipleChild::readL3V2V1Attributes(const XMLAttributes& attributes)
     std::string message = "Twoatonce attribute 'id' is missing from the "
       "<MultipleChild> element.";
     log->logPackageError("twoatonce", TwoatonceMultipleChildAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1472,7 +1472,7 @@ MultipleChild::readL3V2V1Attributes(const XMLAttributes& attributes)
         "<MultipleChild> element must be an integer.";
       log->logPackageError("twoatonce",
         TwoatonceMultipleChildNumAttMustBeDouble, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 }

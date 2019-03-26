@@ -1300,14 +1300,15 @@ SedModel::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
   {
     std::string message = "Sedml attribute 'id' is missing from the <SedModel> "
       "element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message);
+    log->logError(SedmlModelAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 
@@ -1355,7 +1356,8 @@ SedModel::readAttributes(
   {
     std::string message = "Sedml attribute 'source' is missing from the "
       "<SedModel> element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message);
+    log->logError(SedmlModelAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 }
 

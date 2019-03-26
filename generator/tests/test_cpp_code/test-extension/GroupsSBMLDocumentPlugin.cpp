@@ -230,12 +230,14 @@ GroupsSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     {
       log->remove(XMLAttributeTypeMismatch);
       log->logPackageError("groups", GroupsAttributeRequiredMustBeBoolean,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
     else
     {
       log->logPackageError("groups", GroupsAttributeRequiredMissing,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
   else
@@ -244,7 +246,8 @@ GroupsSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     if (mRequired != false)
     {
       log->logPackageError("groups", GroupsAttributeRequiredMustHaveValue,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
 }

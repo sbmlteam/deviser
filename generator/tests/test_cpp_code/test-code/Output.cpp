@@ -996,7 +996,7 @@ Output::readAttributes(const XMLAttributes& attributes,
     std::string message = "Qual attribute 'qualitativeSpecies' is missing from "
       "the <Output> element.";
     log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1030,7 +1030,7 @@ Output::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("qual",
           QualOutputTransitionEffectMustBeTransitionOutputEffectEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1038,7 +1038,7 @@ Output::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Qual attribute 'transitionEffect' is missing.";
     log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1071,7 +1071,7 @@ Output::readAttributes(const XMLAttributes& attributes,
       std::string message = "Qual attribute 'outputLevel' from the <Output> "
         "element must be an integer.";
       log->logPackageError("qual", QualOutputOutputLevelMustBeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 }

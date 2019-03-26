@@ -1275,7 +1275,7 @@ Group::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + kind + "', which is not a valid option.";
 
         log->logPackageError("groups", GroupsGroupKindMustBeGroupKindEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1283,7 +1283,7 @@ Group::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Groups attribute 'kind' is missing.";
     log->logPackageError("groups", GroupsGroupAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 }
 

@@ -1118,7 +1118,7 @@ DefaultValues::readAttributes(const XMLAttributes& attributes,
         "<DefaultValues> element must be an integer.";
       log->logPackageError("render",
         RenderDefaultValuesStrokeWidthMustBeDouble, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 

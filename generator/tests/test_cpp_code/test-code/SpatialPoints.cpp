@@ -1012,7 +1012,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'id' is missing from the "
       "<SpatialPoints> element.";
     log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1045,7 +1045,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialSpatialPointsCompressionMustBeCompressionKindEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1053,7 +1053,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'compression' is missing.";
     log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1074,14 +1074,14 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
         "<SpatialPoints> element must be an integer.";
       log->logPackageError("spatial",
         SpatialSpatialPointsArrayDataLengthMustBeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Spatial attribute 'arrayDataLength' is missing "
         "from the <SpatialPoints> element.";
       log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1115,7 +1115,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialSpatialPointsDataTypeMustBeDataKindEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }

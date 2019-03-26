@@ -953,14 +953,16 @@ SedSetValue::readAttributes(
 
       msg += " is '" + mModelReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlSetValueModelReferenceMustBeModel, level, version, msg);
+      logError(SedmlSetValueModelReferenceMustBeModel, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else
   {
     std::string message = "Sedml attribute 'modelReference' is missing from the "
       "<SedSetValue> element.";
-    log->logError(SedmlSetValueAllowedAttributes, level, version, message);
+    log->logError(SedmlSetValueAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 
@@ -1013,7 +1015,8 @@ SedSetValue::readAttributes(
       }
 
       msg += " is '" + mRange + "', which does not conform to the syntax.";
-      logError(SedmlSetValueRangeMustBeRange, level, version, msg);
+      logError(SedmlSetValueRangeMustBeRange, level, version, msg, getLine(),
+        getColumn());
     }
   }
 }

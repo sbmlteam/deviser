@@ -1011,11 +1011,11 @@ def main():
         # test_case = 'validator'
         # fail += run_valid_test(name, class_name, test_case, False)
     else:
-        name = 'copy_add'
-        num = 0
-        class_name = 'Abc'
-        list_of = ''
-        test_case = 'class with additional code'
+        name = 'spatial'
+        num = 12
+        class_name = 'AnalyticVolume'
+        list_of = 'ListOfAnalyticVolumes'
+        test_case = 'class with math child'
         fail += run_test(name, num, class_name, test_case, list_of)
 
     test_functions.report('CPP', fail, fails, not_tested)

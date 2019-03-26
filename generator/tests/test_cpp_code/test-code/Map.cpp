@@ -1571,7 +1571,7 @@ Map::readAttributes(
     else if (SyntaxChecker::isValidXMLID(mId) == false)
     {
       logError(SbgnmlMapIdMustBeID, level, version, "The attribute id='" + mId
-        + "' does not conform to the syntax.");
+        + "' does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -1603,15 +1603,16 @@ Map::readAttributes(
 
         msg += "is '" + language + "', which is not a valid option.";
 
-        log->logError(SbgnmlMapLanguageMustBeLanguageEnum, level, version,
-          msg);
+        log->logError(SbgnmlMapLanguageMustBeLanguageEnum, level, version, msg,
+          getLine(), getColumn());
       }
     }
   }
   else
   {
     std::string message = "Sbgnml attribute 'language' is missing.";
-    log->logError(SbgnmlMapAllowedAttributes, level, version, message);
+    log->logError(SbgnmlMapAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 }
 

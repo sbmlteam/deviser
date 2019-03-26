@@ -2905,7 +2905,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'id' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -2926,7 +2926,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'name' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -2946,14 +2946,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         "element must be an integer.";
       log->logPackageError("test",
         TestMyRequiredClassNumMustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'num' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -2974,14 +2974,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         "element must be an integer.";
       log->logPackageError("test",
         TestMyRequiredClassNum2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'num2' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3001,14 +3001,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num3' from the <MyRequiredClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyRequiredClassNum3MustBeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'num3' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3028,14 +3028,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num1' from the <MyRequiredClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyRequiredClassNum1MustBeDouble,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'num1' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3113,7 +3113,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'unit' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3146,7 +3146,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'ref1' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3179,7 +3179,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'ref2' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3213,7 +3213,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'refUnit' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3240,7 +3240,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'correctId' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3260,14 +3260,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         "element must be an integer.";
       log->logPackageError("test",
         TestMyRequiredClassPosintMustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'posint' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3288,14 +3288,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         "<MyRequiredClass> element must be an integer.";
       log->logPackageError("test",
         TestMyRequiredClassPosint2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'posint2' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3316,14 +3316,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
         "<MyRequiredClass> element must be an integer.";
       log->logPackageError("test",
         TestMyRequiredClassPosint1MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'posint1' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3351,7 +3351,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'metaid2' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3378,7 +3378,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'metaid1' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3397,14 +3397,14 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num4' from the <MyRequiredClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyRequiredClassNum4MustBeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Test attribute 'num4' is missing from the "
         "<MyRequiredClass> element.";
       log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -3440,7 +3440,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'metaidref1' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -3467,7 +3467,7 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
     std::string message = "Test attribute 'notmetaid' is missing from the "
       "<MyRequiredClass> element.";
     log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

@@ -1394,7 +1394,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'id' is missing from the "
       "<SampledField> element.";
     log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1427,7 +1427,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialSampledFieldDataTypeMustBeDataKindEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1435,7 +1435,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'dataType' is missing.";
     log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1455,14 +1455,14 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         "<SampledField> element must be an integer.";
       log->logPackageError("spatial",
         SpatialSampledFieldNumSamples1MustBeInteger, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Spatial attribute 'numSamples1' is missing from "
         "the <SampledField> element.";
       log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1483,7 +1483,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         "<SampledField> element must be an integer.";
       log->logPackageError("spatial",
         SpatialSampledFieldNumSamples2MustBeInteger, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 
@@ -1504,7 +1504,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         "<SampledField> element must be an integer.";
       log->logPackageError("spatial",
         SpatialSampledFieldNumSamples3MustBeInteger, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 
@@ -1539,7 +1539,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialSampledFieldInterpolationTypeMustBeInterpolationKindEnum,
-            pkgVersion, level, version, msg);
+            pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1547,7 +1547,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'interpolationType' is missing.";
     log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1580,7 +1580,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialSampledFieldCompressionMustBeCompressionKindEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1588,7 +1588,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'compression' is missing.";
     log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1608,14 +1608,14 @@ SampledField::readAttributes(const XMLAttributes& attributes,
         "<SampledField> element must be an integer.";
       log->logPackageError("spatial",
         SpatialSampledFieldSamplesLengthMustBeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Spatial attribute 'samplesLength' is missing from "
         "the <SampledField> element.";
       log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 }

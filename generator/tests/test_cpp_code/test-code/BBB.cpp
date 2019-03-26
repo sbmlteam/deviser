@@ -1052,7 +1052,7 @@ BBB::readL3V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Vers attribute 'id' is missing from the <BBB> "
       "element.";
     log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
-      version, message);
+      version, message, getLine(), getColumn());
   }
 }
 
@@ -1099,7 +1099,7 @@ BBB::readL3V1V2Attributes(const XMLAttributes& attributes)
     std::string message = "Vers attribute 'id' is missing from the <BBB> "
       "element.";
     log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
-      version, message);
+      version, message, getLine(), getColumn());
   }
 }
 

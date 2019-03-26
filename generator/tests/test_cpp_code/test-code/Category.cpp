@@ -1269,7 +1269,7 @@ Category::readAttributes(const XMLAttributes& attributes,
         "element must be an integer.";
       log->logPackageError("distrib",
         DistribCategoryRankMustBeNonNegativeInteger, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 }

@@ -968,7 +968,7 @@ Label::readAttributes(
     else if (SyntaxChecker::isValidXMLID(mId) == false)
     {
       logError(SbgnmlLabelIdMustBeID, level, version, "The attribute id='" +
-        mId + "' does not conform to the syntax.");
+        mId + "' does not conform to the syntax.", getLine(), getColumn());
     }
   }
 
@@ -989,7 +989,8 @@ Label::readAttributes(
   {
     std::string message = "Sbgnml attribute 'text' is missing from the <Label> "
       "element.";
-    log->logError(SbgnmlLabelAllowedAttributes, level, version, message);
+    log->logError(SbgnmlLabelAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 }
 

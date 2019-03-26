@@ -817,7 +817,7 @@ ClassOne::readL3V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
       "element.";
     log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -883,7 +883,7 @@ ClassOne::readL3V1V2Attributes(const XMLAttributes& attributes)
     std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
       "element.";
     log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 

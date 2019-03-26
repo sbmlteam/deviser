@@ -1031,7 +1031,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + number + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeNumberMustBeEnumEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1039,7 +1039,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Test attribute 'number' is missing.";
     log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1071,7 +1071,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + name + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeNameMustBeFredEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1079,7 +1079,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Test attribute 'name' is missing.";
     log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1111,7 +1111,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + badName + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeBadNameMustBeFredEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1145,7 +1145,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + otherNum + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeOtherNumMustBeEnumEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1179,7 +1179,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + longEnum + "', which is not a valid option.";
 
         log->logPackageError("test", TestClassThreeLongEnumMustBeExtraLongEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }

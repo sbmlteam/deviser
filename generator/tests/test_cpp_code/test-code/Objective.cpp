@@ -1283,7 +1283,7 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Fbc attribute 'id' is missing from the <Objective> "
       "element.";
     log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1330,7 +1330,7 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
         msg += "is '" + type + "', which is not a valid option.";
 
         log->logPackageError("fbc", FbcObjectiveTypeMustBeFbcTypeEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1338,7 +1338,7 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
   {
     std::string message = "Fbc attribute 'type' is missing.";
     log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 }
 
@@ -1385,7 +1385,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
     std::string message = "Fbc attribute 'id' is missing from the <Objective> "
       "element.";
     log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1432,7 +1432,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
         msg += "is '" + type + "', which is not a valid option.";
 
         log->logPackageError("fbc", FbcObjectiveTypeMustBeFbcTypeEnum,
-          pkgVersion, level, version, msg);
+          pkgVersion, level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1440,7 +1440,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
   {
     std::string message = "Fbc attribute 'type' is missing.";
     log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message);
+      level, version, message, getLine(), getColumn());
   }
 }
 

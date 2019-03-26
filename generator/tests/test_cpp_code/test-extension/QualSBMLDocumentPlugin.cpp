@@ -229,12 +229,14 @@ QualSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     {
       log->remove(XMLAttributeTypeMismatch);
       log->logPackageError("qual", QualAttributeRequiredMustBeBoolean,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
     else
     {
       log->logPackageError("qual", QualAttributeRequiredMissing,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
   else
@@ -243,7 +245,8 @@ QualSBMLDocumentPlugin::readAttributes(const XMLAttributes& attributes,
     if (mRequired != false)
     {
       log->logPackageError("qual", QualAttributeRequiredMustHaveValue,
-        getPackageVersion(), getLevel(), getVersion());
+        getPackageVersion(), getLevel(), getVersion(), "", getLine(),
+          getColumn());
     }
   }
 }

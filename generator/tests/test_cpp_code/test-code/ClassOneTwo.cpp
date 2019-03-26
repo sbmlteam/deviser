@@ -1360,7 +1360,7 @@ ClassOneTwo::readL3V1V2Attributes(const XMLAttributes& attributes)
       "<ClassOneTwo> element.";
     log->logPackageError("coreversmultipkg",
       CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 
@@ -1413,7 +1413,7 @@ ClassOneTwo::readL3V1V2Attributes(const XMLAttributes& attributes)
         "<ClassOneTwo> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgClassOneTwoAttIntMustBeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }
@@ -1463,7 +1463,7 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
       "<ClassOneTwo> element.";
     log->logPackageError("coreversmultipkg",
       CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 
@@ -1521,7 +1521,7 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
         "<ClassOneTwo> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgClassOneTwoAttDblMustBeDouble, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }
@@ -1571,7 +1571,7 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
       "<ClassOneTwo> element.";
     log->logPackageError("coreversmultipkg",
       CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 
@@ -1629,7 +1629,7 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
         "<ClassOneTwo> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgClassOneTwoAttIntMustBeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }
@@ -1742,7 +1742,7 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
 
         log->logPackageError("coreversmultipkg",
           CoreversmultipkgClassOneTwoAttEnumMustBeAbcTypeEnum, pkgVersion, level,
-            version, msg);
+            version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1751,7 +1751,7 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
     std::string message = "Coreversmultipkg attribute 'attEnum' is missing.";
     log->logPackageError("coreversmultipkg",
       CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 }
 

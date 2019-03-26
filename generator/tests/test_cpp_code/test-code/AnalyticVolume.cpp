@@ -1054,7 +1054,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'id' is missing from the "
       "<AnalyticVolume> element.";
     log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1087,7 +1087,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialAnalyticVolumeFunctionTypeMustBeFunctionKindEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1095,7 +1095,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'functionType' is missing.";
     log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 
@@ -1115,7 +1115,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
         "<AnalyticVolume> element must be an integer.";
       log->logPackageError("spatial",
         SpatialAnalyticVolumeOrdinalMustBeInteger, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 
@@ -1152,7 +1152,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     std::string message = "Spatial attribute 'domainType' is missing from the "
       "<AnalyticVolume> element.";
     log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

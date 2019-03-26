@@ -2531,7 +2531,7 @@ Geometry::readAttributes(const XMLAttributes& attributes,
 
         log->logPackageError("spatial",
           SpatialGeometryCoordinateSystemMustBeGeometryKindEnum, pkgVersion,
-            level, version, msg);
+            level, version, msg, getLine(), getColumn());
       }
     }
   }
@@ -2539,7 +2539,7 @@ Geometry::readAttributes(const XMLAttributes& attributes,
   {
     std::string message = "Spatial attribute 'coordinateSystem' is missing.";
     log->logPackageError("spatial", SpatialGeometryAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 }
 

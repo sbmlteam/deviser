@@ -1836,7 +1836,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num' from the <MyTestClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyTestClassNumMustBeNonNegativeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1856,7 +1856,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num2' from the <MyTestClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyTestClassNum2MustBeNonNegativeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1876,7 +1876,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num3' from the <MyTestClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyTestClassNum3MustBeInteger,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1896,7 +1896,7 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
       std::string message = "Test attribute 'num1' from the <MyTestClass> "
         "element must be an integer.";
       log->logPackageError("test", TestMyTestClassNum1MustBeDouble, pkgVersion,
-        level, version, message);
+        level, version, message, getLine(), getColumn());
     }
   }
 

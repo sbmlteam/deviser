@@ -1119,7 +1119,7 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
       "<SampledFieldGeometry> element.";
     log->logPackageError("spatial",
       SpatialSampledFieldGeometryAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 }
 

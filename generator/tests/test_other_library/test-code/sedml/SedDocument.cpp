@@ -2696,13 +2696,14 @@ SedDocument::readAttributes(
       std::string message = "Sedml attribute 'level' from the <SedDocument> "
         "element must be an integer.";
       log->logError(SedmlDocumentLevelMustBeNonNegativeInteger, level, version,
-        message);
+        message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'level' is missing from the "
         "<SedDocument> element.";
-      log->logError(SedmlDocumentAllowedAttributes, level, version, message);
+      log->logError(SedmlDocumentAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -2722,13 +2723,14 @@ SedDocument::readAttributes(
       std::string message = "Sedml attribute 'version' from the <SedDocument> "
         "element must be an integer.";
       log->logError(SedmlDocumentVersionMustBeNonNegativeInteger, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'version' is missing from the "
         "<SedDocument> element.";
-      log->logError(SedmlDocumentAllowedAttributes, level, version, message);
+      log->logError(SedmlDocumentAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

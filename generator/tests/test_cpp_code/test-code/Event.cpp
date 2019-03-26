@@ -1589,7 +1589,8 @@ Event::readAttributes(
       }
 
       msg += " is '" + mTimeUnits + "', which does not conform to the syntax.";
-      logError(CoreEventTimeUnitsMustBeUnitSId, level, version, msg);
+      logError(CoreEventTimeUnitsMustBeUnitSId, level, version, msg, getLine(),
+        getColumn());
     }
   }
 }

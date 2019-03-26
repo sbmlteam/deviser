@@ -1485,7 +1485,7 @@ class ProtectedFunctions():
                                       invalid_line, error))
         else:
             line.append('logError({1}, level, version, '
-                        '{0})'.format(invalid_line, error))
+                        '{0}, getLine(), getColumn())'.format(invalid_line, error))
         first_if = self.create_code_block('else_if', line)
 
         line = 'assigned == true'
@@ -1505,7 +1505,7 @@ class ProtectedFunctions():
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
-                           'log->{0}{1}, {2}, message'
+                           'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1564,7 +1564,7 @@ class ProtectedFunctions():
                                       'msg', error))
         else:
             line.append('logError({1}, level, version, '
-                        '{0})'.format('msg', error))
+                        '{0}, getLine(), getColumn())'.format('msg', error))
         first_if = self.create_code_block('else_if', line)
 
         line = 'assigned == true'
@@ -1579,7 +1579,7 @@ class ProtectedFunctions():
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
-                           'log->{0}{1}, {2}, message'
+                           'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1635,7 +1635,7 @@ class ProtectedFunctions():
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
-                           'log->{0}{1}, {2}, message'
+                           'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1675,7 +1675,7 @@ class ProtectedFunctions():
                                        ['msg += \"is \'\" + {0} + \"\', which '
                                         'is not a valid option.'
                                         '\"'.format(att_name)]),
-                self.create_code_block('line', ['log->{0}{1}, {2}, msg)'
+                self.create_code_block('line', ['log->{0}{1}, {2}, msg, getLine(), getColumn())'
                                        .format(self.error, error,
                                                self.given_args)])]
         second_if = self.create_code_block('if', line)
@@ -1698,7 +1698,7 @@ class ProtectedFunctions():
         else:
             extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
                            'is missing.\"'.format(self.package, name),
-                           'log->{0}{1}, {2}, message'
+                           'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, att_error, self.given_args)]
             block = [line, first_if, 'else',
                      self.create_code_block('line', extra_lines)]
@@ -1739,8 +1739,8 @@ class ProtectedFunctions():
                 'std::string message = \"{0} attribute \'{1}\' '
                 'from the <{2}> element must be an '
                 'integer.\"'.format(self.package, attribute['xml_name'], self.class_name),
-                'log->{0}{1}, {2}, message)'.format(self.error, error,
-                                                    self.given_args)]
+                'log->{0}{1}, {2}, message, getLine(), getColumn())'
+                ''.format(self.error, error, self.given_args)]
         if reqd:
             if self.is_plugin:
                 class_name = strFunctions.get_class_from_plugin(
@@ -1751,8 +1751,8 @@ class ProtectedFunctions():
                      'std::string message = \"{0} attribute \'{1}\' is missing '
                      'from the <{2}> element.\"'.format(self.package, attribute['xml_name'],
                                                         class_name),
-                     'log->{0}{1}, {2}, message)'.format(self.error, att_error,
-                                                         self.given_args)]
+                     'log->{0}{1}, {2}, message, getLine(), getColumn())'
+                     ''.format(self.error, att_error, self.given_args)]
 
             if_error = self.create_code_block('if_else', line)
         else:

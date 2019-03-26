@@ -709,7 +709,7 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
       "<ClassWithRequiredID> element.";
     log->logPackageError("twoatonce",
       TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 
@@ -771,7 +771,7 @@ ClassWithRequiredID::readL3V2V1Attributes(const XMLAttributes& attributes)
       "<ClassWithRequiredID> element.";
     log->logPackageError("twoatonce",
       TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
-        message);
+        message, getLine(), getColumn());
   }
 
   // 

@@ -1485,7 +1485,7 @@ CoreversmultipkgModelPlugin::readL3V1V2Attributes(const XMLAttributes&
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgModelAttPlugMustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }
@@ -1527,7 +1527,7 @@ CoreversmultipkgModelPlugin::readL3V2V1Attributes(const XMLAttributes&
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }
@@ -1569,7 +1569,7 @@ CoreversmultipkgModelPlugin::readL3V2V2Attributes(const XMLAttributes&
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
@@ -1577,7 +1577,7 @@ CoreversmultipkgModelPlugin::readL3V2V2Attributes(const XMLAttributes&
         "from the <Model> element.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgModelAllowedAttributes, pkgVersion, level, version,
-          message);
+          message, getLine(), getColumn());
     }
   }
 }
@@ -1619,7 +1619,7 @@ CoreversmultipkgModelPlugin::readL4V1V1Attributes(const XMLAttributes&
         "<CoreversmultipkgModelPlugin> element must be an integer.";
       log->logPackageError("coreversmultipkg",
         CoreversmultipkgModelAttPlug2MustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
   }
 }

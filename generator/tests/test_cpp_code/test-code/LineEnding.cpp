@@ -1356,7 +1356,7 @@ LineEnding::readAttributes(const XMLAttributes& attributes,
     std::string message = "Render attribute 'id' is missing from the "
       "<LineEnding> element.";
     log->logPackageError("render", RenderLineEndingAllowedAttributes,
-      pkgVersion, level, version, message);
+      pkgVersion, level, version, message, getLine(), getColumn());
   }
 
   // 

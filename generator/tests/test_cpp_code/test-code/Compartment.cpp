@@ -1105,7 +1105,8 @@ Compartment::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Core attribute 'size' from the <Compartment> "
         "element must be an integer.";
-      log->logError(CoreCompartmentSizeMustBeDouble, level, version, message);
+      log->logError(CoreCompartmentSizeMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1124,8 +1125,8 @@ Compartment::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Core attribute 'volume' from the <Compartment> "
         "element must be an integer.";
-      log->logError(CoreCompartmentVolumeMustBeDouble, level, version,
-        message);
+      log->logError(CoreCompartmentVolumeMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1151,7 +1152,8 @@ Compartment::readAttributes(
       }
 
       msg += " is '" + mUnits + "', which does not conform to the syntax.";
-      logError(CoreCompartmentUnitsMustBeUnitSId, level, version, msg);
+      logError(CoreCompartmentUnitsMustBeUnitSId, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1172,7 +1174,7 @@ Compartment::readAttributes(
       std::string message = "Core attribute 'spatialDimensions' from the "
         "<Compartment> element must be an integer.";
       log->logError(CoreCompartmentSpatialDimensionsMustBeNonNegativeInteger,
-        level, version, message);
+        level, version, message, getLine(), getColumn());
     }
   }
 
@@ -1221,7 +1223,8 @@ Compartment::readAttributes(
       }
 
       msg += " is '" + mOutside + "', which does not conform to the syntax.";
-      logError(CoreCompartmentOutsideMustBeCompartment, level, version, msg);
+      logError(CoreCompartmentOutsideMustBeCompartment, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1249,7 +1252,7 @@ Compartment::readAttributes(
       msg += " is '" + mCompartmentType + "', which does not conform to the "
         "syntax.";
       logError(CoreCompartmentCompartmentTypeMustBeCompartmentType, level,
-        version, msg);
+        version, msg, getLine(), getColumn());
     }
   }
 }

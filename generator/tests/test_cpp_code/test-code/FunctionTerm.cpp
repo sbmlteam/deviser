@@ -789,14 +789,14 @@ FunctionTerm::readAttributes(const XMLAttributes& attributes,
         "<FunctionTerm> element must be an integer.";
       log->logPackageError("qual",
         QualFunctionTermResultLevelMustBeNonNegativeInteger, pkgVersion, level,
-          version, message);
+          version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Qual attribute 'resultLevel' is missing from the "
         "<FunctionTerm> element.";
       log->logPackageError("qual", QualFunctionTermAllowedAttributes,
-        pkgVersion, level, version, message);
+        pkgVersion, level, version, message, getLine(), getColumn());
     }
   }
 }

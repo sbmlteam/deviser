@@ -1779,7 +1779,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
     std::string message = "X attribute 'identifier' is missing from the <Fred> "
       "element.";
     log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
-      version, message);
+      version, message, getLine(), getColumn());
   }
 
   // 
@@ -1816,14 +1816,14 @@ Fred::readAttributes(const XMLAttributes& attributes,
       std::string message = "X attribute 'myNumber' from the <Fred> element "
         "must be an integer.";
       log->logPackageError("x", XFredNumMustBeInteger, pkgVersion, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "X attribute 'myNumber' is missing from the <Fred> "
         "element.";
       log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
   }
 
@@ -1870,7 +1870,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
         msg += "is '" + kind + "', which is not a valid option.";
 
         log->logPackageError("x", XFredKindMustBeKindEnum, pkgVersion, level,
-          version, msg);
+          version, msg, getLine(), getColumn());
       }
     }
   }

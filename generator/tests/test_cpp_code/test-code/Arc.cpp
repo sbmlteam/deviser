@@ -1933,14 +1933,15 @@ Arc::readAttributes(
     else if (SyntaxChecker::isValidXMLID(mId) == false)
     {
       logError(SbgnmlArcIdMustBeID, level, version, "The attribute id='" + mId
-        + "' does not conform to the syntax.");
+        + "' does not conform to the syntax.", getLine(), getColumn());
     }
   }
   else
   {
     std::string message = "Sbgnml attribute 'id' is missing from the <Arc> "
       "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message);
+    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 
@@ -1960,7 +1961,8 @@ Arc::readAttributes(
   {
     std::string message = "Sbgnml attribute 'class' is missing from the <Arc> "
       "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message);
+    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 
@@ -1985,14 +1987,16 @@ Arc::readAttributes(
       }
 
       msg += " is '" + mSource + "', which does not conform to the syntax.";
-      logError(SbgnmlArcSourceMustBeID, level, version, msg);
+      logError(SbgnmlArcSourceMustBeID, level, version, msg, getLine(),
+        getColumn());
     }
   }
   else
   {
     std::string message = "Sbgnml attribute 'source' is missing from the <Arc> "
       "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message);
+    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 
@@ -2017,14 +2021,16 @@ Arc::readAttributes(
       }
 
       msg += " is '" + mTarget + "', which does not conform to the syntax.";
-      logError(SbgnmlArcTargetMustBeID, level, version, msg);
+      logError(SbgnmlArcTargetMustBeID, level, version, msg, getLine(),
+        getColumn());
     }
   }
   else
   {
     std::string message = "Sbgnml attribute 'target' is missing from the <Arc> "
       "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message);
+    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 }
 

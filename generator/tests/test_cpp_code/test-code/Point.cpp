@@ -1031,13 +1031,15 @@ Point::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sbgnml attribute 'x' from the <Point> element must "
         "be an integer.";
-      log->logError(SbgnmlPointXMustBeDouble, level, version, message);
+      log->logError(SbgnmlPointXMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sbgnml attribute 'x' is missing from the <Point> "
         "element.";
-      log->logError(SbgnmlPointAllowedAttributes, level, version, message);
+      log->logError(SbgnmlPointAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1056,13 +1058,15 @@ Point::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sbgnml attribute 'y' from the <Point> element must "
         "be an integer.";
-      log->logError(SbgnmlPointYMustBeDouble, level, version, message);
+      log->logError(SbgnmlPointYMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sbgnml attribute 'y' is missing from the <Point> "
         "element.";
-      log->logError(SbgnmlPointAllowedAttributes, level, version, message);
+      log->logError(SbgnmlPointAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 }
