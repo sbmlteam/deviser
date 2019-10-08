@@ -505,7 +505,7 @@ class ProtectedFunctions():
             qualifier = '->'
             pointer = ''
         nested_if = self.create_code_block('if',
-                                           ['{0}{1}size() '
+                                           ['getErrorLog() && {0}{1}size() '
                                             '!= 0'.format(name, qualifier),
                                             error_line])
         line = 'obj = {1}{0}'.format(name, pointer)
@@ -578,7 +578,7 @@ class ProtectedFunctions():
                     [elem_name, unused] = strFunctions.remove_hyphens(xmlname)
                 name_to_use = strFunctions.upper_first(elem_name)
         nested_if = self.create_code_block('if',
-                                           ['isSet{0}()'.format(name_to_use),
+                                           ['getErrorLog() && isSet{0}()'.format(name_to_use),
                                             error_line])
         implementation.append('name == \"{0}\"'.format(xmlname))
         implementation.append(nested_if)
@@ -1041,9 +1041,9 @@ class ProtectedFunctions():
 
     # function to write writeXMLNS
     def write_write_xmlns(self):
-        if not self.is_list_of:
-            if not self.document:
-                return
+        #if not self.is_list_of:
+        if not self.document:
+            return
 
         # create comment parts
         title_line = 'Writes the namespace for the {0} package'\
@@ -1398,14 +1398,14 @@ class ProtectedFunctions():
         name = attribute['xml_name']
         member = attribute['memberName']
         set_name = 'mIsSet{0}'.format(strFunctions.upper_first(attribute['name']))
-        line = ['numErrs = log->getNumErrors()',
+        line = ['numErrs = log ? log->getNumErrors() : 0',
                 '{0} = attributes.readInto(\"{1}\", '
                 '{2})'.format(set_name, name, member)]
         code.append(self.create_code_block('line', line))
 
         # sort error names to be used
         [error_bool, error] = self.sort_error_names(strFunctions.upper_first(attribute['name']), 'Boolean')
-        line = ['log->getNumErrors() == numErrs + 1 && log->contains(XMLAttributeTypeMismatch)',
+        line = ['log && log->getNumErrors() == numErrs + 1 && log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
                 'log->{0}{1}, {2})'.format(self.error, error_bool, self.given_args)]
         if attribute['reqd']:
@@ -1501,14 +1501,15 @@ class ProtectedFunctions():
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+            extra_lines = ['log',
+                            'std::string message = \"{0} attribute \'{1}\' '
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
                            'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
-                     self.create_code_block('line', extra_lines)]
+                     self.create_code_block('if', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
     def write_sidref_read(self, index, code, attributes):
@@ -1575,14 +1576,14 @@ class ProtectedFunctions():
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+            extra_lines = ['log','std::string message = \"{0} attribute \'{1}\' '
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
                            'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
-                     self.create_code_block('line', extra_lines)]
+                     self.create_code_block('if', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
     def write_string_read(self, index, code, attributes, is_l3v1=False):
@@ -1631,14 +1632,14 @@ class ProtectedFunctions():
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+            extra_lines = ['log', 'std::string message = \"{0} attribute \'{1}\' '
                            'is missing from the <{2}> '
                            'element.\"'.format(self.package, name,
                                                self.class_name),
                            'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, error, self.given_args)]
             block = [line, first_if, 'else',
-                     self.create_code_block('line', extra_lines)]
+                     self.create_code_block('if', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
     def write_enum_read(self, index, code, attributes):
@@ -1665,7 +1666,7 @@ class ProtectedFunctions():
         line = ['isSetId()', 'msg += \"with id \'\" + getId() + \"\'\"']
         if_id = self.create_code_block('if', line)
 
-        line = ['{0}_isValid({1}) == 0'.format(element, member),
+        line = ['log && {0}_isValid({1}) == 0'.format(element, member),
                 self.create_code_block('line',
                                        ['std::string msg = \"The {0} on the '
                                         '<{1}'
@@ -1696,12 +1697,12 @@ class ProtectedFunctions():
             block = [line, first_if]
             code.append(self.create_code_block('if', block))
         else:
-            extra_lines = ['std::string message = \"{0} attribute \'{1}\' '
+            extra_lines = ['log','std::string message = \"{0} attribute \'{1}\' '
                            'is missing.\"'.format(self.package, name),
                            'log->{0}{1}, {2}, message, getLine(), getColumn()'
                            ')'.format(self.error, att_error, self.given_args)]
             block = [line, first_if, 'else',
-                     self.create_code_block('line', extra_lines)]
+                     self.create_code_block('if', extra_lines)]
             code.append(self.create_code_block('if_else', block))
 
     def write_number_read(self, index, code, att_type, attributes):
@@ -1727,13 +1728,13 @@ class ProtectedFunctions():
                 error = global_variables.unknown_error
             if att_error not in global_variables.error_list:
                 att_error = global_variables.unknown_error
-        line = ['numErrs = log->getNumErrors()',
+        line = ['numErrs = log ? log->getNumErrors() : 0',
                 '{0} = attributes.readInto(\"{1}\", {2})'.format(set_name,
                                                                  attribute['xml_name'],
                                                                  member)]
         code.append(self.create_code_block('line', line))
 
-        line = ['log->getNumErrors() == numErrs + 1 && '
+        line = ['log && log->getNumErrors() == numErrs + 1 && '
                 'log->contains(XMLAttributeTypeMismatch)',
                 'log->remove(XMLAttributeTypeMismatch)',
                 'std::string message = \"{0} attribute \'{1}\' '
@@ -1758,7 +1759,7 @@ class ProtectedFunctions():
         else:
             if_error = self.create_code_block('if', line)
 
-        line = [' {0} == false'.format(set_name),
+        line = [' {0} == false && log'.format(set_name),
                 if_error]
         second_if = self.create_code_block('if', line)
         code.append(second_if)
