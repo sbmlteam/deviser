@@ -56,6 +56,12 @@ docs/_build/
 # PyBuilder
 target/
 
+# Emacs
+*~
+.#*
+.git/COMMIT_EDITMSG
+TAGS
+
 #mine
 testOutput/
 .idea/
