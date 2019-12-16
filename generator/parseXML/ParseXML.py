@@ -398,7 +398,7 @@ class ParseXML():
                                'version': version_count,
                                'version_info': version_info
                                })
-        if attr_abstract:
+        if attr_abstract and attr_element  in self.concrete_dict:
             attribute_dict['concrete'] = self.concrete_dict[attr_element]
 
         return attribute_dict
