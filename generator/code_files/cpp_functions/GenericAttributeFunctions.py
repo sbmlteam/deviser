@@ -718,8 +718,9 @@ class GenericAttributeFunctions():
                                 block.append(nested_for)
                         else:
                             [elem_name, unused] = strFunctions.remove_hyphens(elemName)
-                            block.append('{0} * obj = get{1}()'.format(elemElem, strFunctions.upper_first(elem_name)))
-                            block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem_name)))
+                            block.append('{0} * obj = m{1}'.format(elemElem, strFunctions.upper_first(elem_name)))
+                            block.append('m{0} = NULL'.format(strFunctions.upper_first(elem_name)))
+                            block.append('return obj')
                 else:
                     if not first:
                         block.append('else if')
@@ -744,8 +745,8 @@ class GenericAttributeFunctions():
                                                                         ''.format(strFunctions.plural(strFunctions.upper_first(elem['used_name']))), nested_if])
                             block.append(nested_for)
                     else:
-                        block.append('{0} * obj = get{1}()'.format(elem['element'], strFunctions.upper_first(elem['used_name'])))
-                        block.append('if (unset{0}() == LIBSBML_OPERATION_SUCCESS) return obj'.format(strFunctions.upper_first(elem['used_name'])))
+                        block.append('{0} * obj = m{1}'.format(elem['element'], strFunctions.upper_first(elem['used_name'])))
+                        block.append('m{0} = NULL; return obj'.format(strFunctions.upper_first(elem['used_name'])))                        
                 if single:
                     if len(block) > 3:
                         if_block = self.create_code_block('else_if', block)
