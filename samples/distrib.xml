@@ -3,52 +3,26 @@
   <versions>
     <pkgVersion level="3" version="1" pkg_version="1">
       <elements>
-        <element name="Distribution" typeCode="SBML_DISTRIB_DISTRIBUTION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="false" elementName="distribution">
-          <attributes>
-            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="UncertValue" typeCode="SBML_DISTRIB_UNCERTVALUE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="true" elementName="uncertValue" listOfName="listOfUncertValues" listOfClassName="ListOfUncertValues">
+        <element name="UncertParameter" typeCode="SBML_DISTRIB_UNCERTPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribBase" abstract="true" elementName="uncertParameter" listOfName="listOfUncertParameters" listOfClassName="ListOfUncertParameters">
           <attributes>
             <attribute name="value" required="false" type="double" abstract="false"/>
             <attribute name="var" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="units" required="false" type="UnitSIdRef" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="UncertType" abstract="false"/>
+            <attribute name="definitionURL" required="false" type="string" abstract="false"/>
+            <attribute name="uncertParameter" required="false" type="lo_element" element="UncertParameter" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="externalParameter" element="ExternalParameter" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="uncertSpan" element="UncertScan" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="ExternalParameter" typeCode="SBML_DISTRIB_EXTERNALPARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="UncertValue" abstract="false" elementName="externalParameter" listOfName="listOfExternalParameters" listOfClassName="ListOfExternalParameters">
+        <element name="Uncertainty" typeCode="SBML_DISTRIB_UNCERTAINTY" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="DistribBase" abstract="false" elementName="uncertainty" listOfName="listOfUncertainties" listOfClassName="ListOfUncertainties">
           <attributes>
-            <attribute name="definitionURL" required="true" type="string" abstract="false"/>
-            <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" abstract="false"/>
-          </attributes>
-          <listOfAttributes>
-            <listOfAttribute name="id" required="false" type="SId" abstract="false"/>
-            <listOfAttribute name="name" required="false" type="string" abstract="false"/>
-          </listOfAttributes>
-        </element>
-        <element name="Uncertainty" typeCode="SBML_DISTRIB_UNCERTAINTY" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="false" elementName="uncertainty">
-          <attributes>
-            <attribute name="coefficientOfVariation" required="false" type="element" element="UncertValue" xmlName="coefficientOfVariation" abstract="false"/>
-            <attribute name="kurtosis" required="false" type="element" element="UncertValue" xmlName="kurtosis" abstract="false"/>
-            <attribute name="mean" required="false" type="element" element="UncertValue" xmlName="mean" abstract="false"/>
-            <attribute name="median" required="false" type="element" element="UncertValue" xmlName="median" abstract="false"/>
-            <attribute name="mode" required="false" type="element" element="UncertValue" xmlName="mode" abstract="false"/>
-            <attribute name="sampleSize" required="false" type="element" element="UncertValue" xmlName="sampleSize" abstract="false"/>
-            <attribute name="skewness" required="false" type="element" element="UncertValue" xmlName="skewness" abstract="false"/>
-            <attribute name="standardDeviation" required="false" type="element" element="UncertValue" xmlName="standardDeviation" abstract="false"/>
-            <attribute name="standardError" required="false" type="element" element="UncertValue" xmlName="standardError" abstract="false"/>
-            <attribute name="variance" required="false" type="element" element="UncertValue" xmlName="variance" abstract="false"/>
-            <attribute name="confidenceInterval" required="false" type="element" element="UncertStatisticSpan" xmlName="confidenceInterval" abstract="false"/>
-            <attribute name="credibleInterval" required="false" type="element" element="UncertStatisticSpan" xmlName="credibleInterval" abstract="false"/>
-            <attribute name="interquartileRange" required="false" type="element" element="UncertStatisticSpan" xmlName="interquartileRange" abstract="false"/>
-            <attribute name="range" required="false" type="element" element="UncertStatisticSpan" xmlName="range" abstract="false"/>
-            <attribute name="externalParameter" required="false" type="lo_element" element="ExternalParameter" xmlName="externalParameter" abstract="false"/>
-            <attribute name="distribution" required="false" type="element" element="Distribution" xmlName="distribution" abstract="false"/>
+            <attribute name="uncertParameter" required="false" type="inline_lo_element" element="UncertParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="UncertStatisticSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="DistribBase" abstract="false" elementName="uncertStatisticSpan" listOfName="listOfUncertStatisticSpans" listOfClassName="ListOfUncertStatisticSpans">
+        <element name="UncertSpan" typeCode="SBML_DISTRIB_UNCERTSTATISTICSPAN" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="UncertParameter" abstract="false" elementName="uncertSpan" listOfName="listOfUncertSpans" listOfClassName="ListOfUncertStatisticSpans">
           <attributes>
             <attribute name="varLower" required="false" type="SIdRef" element="SBase" abstract="false"/>
             <attribute name="valueLower" required="false" type="double" abstract="false"/>
@@ -62,20 +36,40 @@
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="distribution" element="Distribution" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="uncertValue" element="UncertValue" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="uncertainty" element="Uncertainty" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="uncertStatisticSpan" element="UncertStatisticSpan" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="uncertParameter" element="UncertParameter" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
       </elements>
       <plugins>
         <plugin extensionPoint="SBase">
           <references>
-            <reference name="Uncertainty"/>
+            <reference name="ListOfUncertainties"/>
           </references>
         </plugin>
       </plugins>
+      <enums>
+        <enum name="UncertType">
+          <enumValues>
+            <enumValue name="DISTRIB_UNCERTTYPE_DISTRIBUTION" value="distribution"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_EXTERNALPARAMETER" value="externalParameter"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_COEFFIENTOFVARIATION" value="coeffientOfVariation"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_KURTOSIS" value="kurtosis"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_MEAN" value="mean"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_MEDIAN" value="median"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_MODE" value="mode"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_SAMPLESIZE" value="sampleSize"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_SKEWNESS" value="skewness"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_STANDARDDEVIATION" value="standardDeviation"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_STANDARDERROR" value="standardError"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_VARIANCE" value="variance"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_CONFIDENCEINTERVAL" value="confidenceInterval"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_CREDIBLEINTERVAL" value="credibleInterval"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_INTERQUARTILERANGE" value="interquartileRange"/>
+            <enumValue name="DISTRIB_UNCERTTYPE_RANGE" value="range"/>
+          </enumValues>
+        </enum>
+      </enums>
       <mappings>
         <mapping name="Category"/>
         <mapping name="DistribUncertValue"/>
