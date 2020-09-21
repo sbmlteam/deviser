@@ -35,7 +35,6 @@
 # of Heidelberg, nor the names of any contributors, may be used to endorse
 # or promote products derived from this software without specific prior
 # written permission.
-#
 # ------------------------------------------------------------------------ -->
 
 
