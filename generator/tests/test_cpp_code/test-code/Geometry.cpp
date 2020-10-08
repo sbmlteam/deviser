@@ -2347,7 +2347,7 @@ Geometry::createObject(XMLInputStream& stream)
 
   if (name == "listOfCoordinateComponents")
   {
-    if (mCoordinateComponents.size() != 0)
+    if (getErrorLog() && mCoordinateComponents.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2358,7 +2358,7 @@ Geometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfDomainTypes")
   {
-    if (mDomainTypes.size() != 0)
+    if (getErrorLog() && mDomainTypes.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2369,7 +2369,7 @@ Geometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfDomains")
   {
-    if (mDomains.size() != 0)
+    if (getErrorLog() && mDomains.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2380,7 +2380,7 @@ Geometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfAdjacentDomains")
   {
-    if (mAdjacentDomains.size() != 0)
+    if (getErrorLog() && mAdjacentDomains.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2391,7 +2391,7 @@ Geometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfGeometryDefinitions")
   {
-    if (mGeometryDefinitions.size() != 0)
+    if (getErrorLog() && mGeometryDefinitions.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2402,7 +2402,7 @@ Geometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfSampledFields")
   {
-    if (mSampledFields.size() != 0)
+    if (getErrorLog() && mSampledFields.size() != 0)
     {
       getErrorLog()->logPackageError("spatial", SpatialGeometryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -2518,7 +2518,7 @@ Geometry::readAttributes(const XMLAttributes& attributes,
     {
       mCoordinateSystem = GeometryKind_fromString(coordinateSystem.c_str());
 
-      if (GeometryKind_isValid(mCoordinateSystem) == 0)
+      if (log && GeometryKind_isValid(mCoordinateSystem) == 0)
       {
         std::string msg = "The coordinateSystem on the <Geometry> ";
 
@@ -2537,9 +2537,12 @@ Geometry::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'coordinateSystem' is missing.";
-    log->logPackageError("spatial", SpatialGeometryAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'coordinateSystem' is missing.";
+      log->logPackageError("spatial", SpatialGeometryAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 }
 

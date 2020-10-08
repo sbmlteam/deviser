@@ -839,8 +839,8 @@ VersModelPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "classOne")
   {
-    ClassOne * obj = getClassOne();
-    if (unsetClassOne() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassOne * obj = mClassOne;
+    mClassOne = NULL; return obj;
   }
 
   return NULL;
@@ -1038,7 +1038,7 @@ VersModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOne")
     {
-      if (isSetClassOne())
+      if (getErrorLog() && isSetClassOne())
       {
         getErrorLog()->logPackageError("vers", VersModelAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1173,12 +1173,12 @@ VersModelPlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
   // version1 uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetVersion1 = attributes.readInto("version1", mVersion1);
 
-  if ( mIsSetVersion1 == false)
+  if ( mIsSetVersion1 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1213,12 +1213,12 @@ VersModelPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
   // version2 uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetVersion2 = attributes.readInto("version2", mVersion2);
 
-  if ( mIsSetVersion2 == false)
+  if ( mIsSetVersion2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

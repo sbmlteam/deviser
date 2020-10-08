@@ -1738,8 +1738,8 @@ RenderGroup::removeChildObject(const std::string& elementName,
 {
   if (elementName == "font-size")
   {
-    RelAbsVector * obj = getFontSize();
-    if (unsetFontSize() == LIBSBML_OPERATION_SUCCESS) return obj;
+    RelAbsVector * obj = mFontSize;
+    mFontSize = NULL; return obj;
   }
   else if (elementName == "image")
   {
@@ -1993,7 +1993,7 @@ RenderGroup::createObject(XMLInputStream& stream)
 
   if (name == "font-size")
   {
-    if (isSetFontSize())
+    if (getErrorLog() && isSetFontSize())
     {
       getErrorLog()->logPackageError("render",
         RenderRenderGroupAllowedAttributes, getPackageVersion(), getLevel(),
@@ -2177,7 +2177,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
     {
       mFontWeight = FontWeight_fromString(fontWeight.c_str());
 
-      if (FontWeight_isValid(mFontWeight) == 0)
+      if (log && FontWeight_isValid(mFontWeight) == 0)
       {
         std::string msg = "The font-weight on the <RenderGroup> ";
 
@@ -2212,7 +2212,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
     {
       mFontStyle = FontStyle_fromString(fontStyle.c_str());
 
-      if (FontStyle_isValid(mFontStyle) == 0)
+      if (log && FontStyle_isValid(mFontStyle) == 0)
       {
         std::string msg = "The font-style on the <RenderGroup> ";
 
@@ -2247,7 +2247,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
     {
       mTextAnchor = HTextAnchor_fromString(textAnchor.c_str());
 
-      if (HTextAnchor_isValid(mTextAnchor) == 0)
+      if (log && HTextAnchor_isValid(mTextAnchor) == 0)
       {
         std::string msg = "The text-anchor on the <RenderGroup> ";
 
@@ -2282,7 +2282,7 @@ RenderGroup::readAttributes(const XMLAttributes& attributes,
     {
       mVtextAnchor = VTextAnchor_fromString(vtextAnchor.c_str());
 
-      if (VTextAnchor_isValid(mVtextAnchor) == 0)
+      if (log && VTextAnchor_isValid(mVtextAnchor) == 0)
       {
         std::string msg = "The vtext-anchor on the <RenderGroup> ";
 

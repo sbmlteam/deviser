@@ -1020,12 +1020,12 @@ Point::readAttributes(
   // x double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetX = attributes.readInto("x", mX);
 
-  if ( mIsSetX == false)
+  if ( mIsSetX == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1047,12 +1047,12 @@ Point::readAttributes(
   // y double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetY = attributes.readInto("y", mY);
 
-  if ( mIsSetY == false)
+  if ( mIsSetY == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

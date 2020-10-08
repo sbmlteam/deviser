@@ -528,33 +528,6 @@ ListOfCSGNodes::createObject(XMLInputStream& stream)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Writes the namespace for the Spatial package
- */
-void
-ListOfCSGNodes::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(SpatialExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(SpatialExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * checks concrete types
  */
 bool

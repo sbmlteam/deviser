@@ -1028,8 +1028,8 @@ MultipleChild::removeChildObject(const std::string& elementName,
 {
   if (elementName == "normalClass")
   {
-    NormalClass * obj = getNormalClass();
-    if (unsetNormalClass() == LIBSBML_OPERATION_SUCCESS) return obj;
+    NormalClass * obj = mNormalClass;
+    mNormalClass = NULL; return obj;
   }
   else if (elementName == "classId")
   {
@@ -1222,7 +1222,7 @@ MultipleChild::createObject(XMLInputStream& stream)
 
   if (name == "normalClass")
   {
-    if (isSetNormalClass())
+    if (getErrorLog() && isSetNormalClass())
     {
       getErrorLog()->logPackageError("twoatonce",
         TwoatonceMultipleChildAllowedElements, getPackageVersion(), getLevel(),
@@ -1235,7 +1235,7 @@ MultipleChild::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfClassIds")
   {
-    if (mClassIds.size() != 0)
+    if (getErrorLog() && mClassIds.size() != 0)
     {
       getErrorLog()->logPackageError("twoatonce",
         TwoatonceMultipleChildAllowedElements, getPackageVersion(), getLevel(),
@@ -1381,22 +1381,26 @@ MultipleChild::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Twoatonce attribute 'id' is missing from the "
-      "<MultipleChild> element.";
-    log->logPackageError("twoatonce", TwoatonceMultipleChildAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Twoatonce attribute 'id' is missing from the "
+        "<MultipleChild> element.";
+      log->logPackageError("twoatonce",
+        TwoatonceMultipleChildAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // numAtt double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumAtt = attributes.readInto("numAtt", mNumAtt);
 
-  if ( mIsSetNumAtt == false)
+  if ( mIsSetNumAtt == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1449,22 +1453,26 @@ MultipleChild::readL3V2V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Twoatonce attribute 'id' is missing from the "
-      "<MultipleChild> element.";
-    log->logPackageError("twoatonce", TwoatonceMultipleChildAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Twoatonce attribute 'id' is missing from the "
+        "<MultipleChild> element.";
+      log->logPackageError("twoatonce",
+        TwoatonceMultipleChildAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // numAtt double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumAtt = attributes.readInto("numAtt", mNumAtt);
 
-  if ( mIsSetNumAtt == false)
+  if ( mIsSetNumAtt == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

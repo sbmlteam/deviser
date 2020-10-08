@@ -993,10 +993,13 @@ Output::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Qual attribute 'qualitativeSpecies' is missing from "
-      "the <Output> element.";
-    log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Qual attribute 'qualitativeSpecies' is missing "
+        "from the <Output> element.";
+      log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1017,7 +1020,7 @@ Output::readAttributes(const XMLAttributes& attributes,
       mTransitionEffect =
         TransitionOutputEffect_fromString(transitionEffect.c_str());
 
-      if (TransitionOutputEffect_isValid(mTransitionEffect) == 0)
+      if (log && TransitionOutputEffect_isValid(mTransitionEffect) == 0)
       {
         std::string msg = "The transitionEffect on the <Output> ";
 
@@ -1036,9 +1039,12 @@ Output::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Qual attribute 'transitionEffect' is missing.";
-    log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Qual attribute 'transitionEffect' is missing.";
+      log->logPackageError("qual", QualOutputAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1059,12 +1065,12 @@ Output::readAttributes(const XMLAttributes& attributes,
   // outputLevel int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOutputLevel = attributes.readInto("outputLevel", mOutputLevel);
 
-  if ( mIsSetOutputLevel == false)
+  if ( mIsSetOutputLevel == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

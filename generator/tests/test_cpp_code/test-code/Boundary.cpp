@@ -692,22 +692,25 @@ Boundary::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<Boundary> element.";
-    log->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<Boundary> element.";
+      log->logPackageError("spatial", SpatialBoundaryAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // value double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetValue = attributes.readInto("value", mValue);
 
-  if ( mIsSetValue == false)
+  if ( mIsSetValue == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

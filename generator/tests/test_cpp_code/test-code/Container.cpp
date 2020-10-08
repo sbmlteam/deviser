@@ -828,7 +828,7 @@ Container::createObject(XMLInputStream& stream)
 
   if (name == "listOfMyLoTests")
   {
-    if (mMyLoTests.size() != 0)
+    if (getErrorLog() && mMyLoTests.size() != 0)
     {
       getErrorLog()->logPackageError("test", TestContainerAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

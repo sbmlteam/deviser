@@ -791,22 +791,26 @@ GeometryDefinition::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<GeometryDefinition> element.";
-    log->logPackageError("spatial", SpatialGeometryDefinitionAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<GeometryDefinition> element.";
+      log->logPackageError("spatial",
+        SpatialGeometryDefinitionAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // isActive bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetIsActive = attributes.readInto("isActive", mIsActive);
 
   if (mIsSetIsActive == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

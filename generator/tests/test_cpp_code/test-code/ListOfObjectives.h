@@ -523,17 +523,6 @@ protected:
   /** @endcond */
 
 
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the namespace for the Fbc package
-   */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
 };
 
 

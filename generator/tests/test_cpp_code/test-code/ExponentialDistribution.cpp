@@ -721,8 +721,8 @@ ExponentialDistribution::removeChildObject(const std::string& elementName,
 {
   if (elementName == "rate")
   {
-    UncertValue * obj = getRate();
-    if (unsetRate() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mRate;
+    mRate = NULL; return obj;
   }
 
   return NULL;
@@ -879,7 +879,7 @@ ExponentialDistribution::createObject(XMLInputStream& stream)
 
   if (name == "rate")
   {
-    if (isSetRate())
+    if (getErrorLog() && isSetRate())
     {
       getErrorLog()->logPackageError("distrib",
         DistribExponentialDistributionAllowedElements, getPackageVersion(),

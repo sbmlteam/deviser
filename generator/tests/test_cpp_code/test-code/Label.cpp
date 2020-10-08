@@ -773,8 +773,8 @@ Label::removeChildObject(const std::string& elementName,
 {
   if (elementName == "bbox")
   {
-    BBox * obj = getBBox();
-    if (unsetBBox() == LIBSBML_OPERATION_SUCCESS) return obj;
+    BBox * obj = mBBox;
+    mBBox = NULL; return obj;
   }
 
   return NULL;
@@ -877,7 +877,7 @@ Label::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "bbox")
   {
-    if (isSetBBox())
+    if (getErrorLog() && isSetBBox())
     {
       getErrorLog()->logError(SbgnmlLabelAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -987,10 +987,13 @@ Label::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'text' is missing from the <Label> "
-      "element.";
-    log->logError(SbgnmlLabelAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'text' is missing from the "
+        "<Label> element.";
+      log->logError(SbgnmlLabelAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

@@ -1391,18 +1391,18 @@ Fred::removeChildObject(const std::string& elementName, const std::string& id)
 {
   if (elementName == "other")
   {
-    Other * obj = getOther();
-    if (unsetOther() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Other * obj = mOther;
+    mOther = NULL; return obj;
   }
   else if (elementName == "other1")
   {
-    Other * obj = getOther1();
-    if (unsetOther1() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Other * obj = mOther1;
+    mOther1 = NULL; return obj;
   }
   else if (elementName == "other2")
   {
-    Other * obj = getMyOther();
-    if (unsetMyOther() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Other * obj = mMyOther;
+    mMyOther = NULL; return obj;
   }
 
   return NULL;
@@ -1638,7 +1638,7 @@ Fred::createObject(XMLInputStream& stream)
 
   if (name == "other")
   {
-    if (isSetOther())
+    if (getErrorLog() && isSetOther())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1651,7 +1651,7 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "other1")
   {
-    if (isSetOther1())
+    if (getErrorLog() && isSetOther1())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1665,7 +1665,7 @@ Fred::createObject(XMLInputStream& stream)
   }
   else if (name == "myOther")
   {
-    if (isSetMyOther())
+    if (getErrorLog() && isSetMyOther())
     {
       getErrorLog()->logPackageError("x", XFredAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1776,22 +1776,25 @@ Fred::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "X attribute 'identifier' is missing from the <Fred> "
-      "element.";
-    log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
-      version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "X attribute 'identifier' is missing from the "
+        "<Fred> element.";
+      log->logPackageError("x", XFredAllowedAttributes, pkgVersion, level,
+        version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // myBoolean bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetBol = attributes.readInto("myBoolean", mBol);
 
   if (mIsSetBol == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1804,12 +1807,12 @@ Fred::readAttributes(const XMLAttributes& attributes,
   // myNumber int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum = attributes.readInto("myNumber", mNum);
 
-  if ( mIsSetNum == false)
+  if ( mIsSetNum == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1858,7 +1861,7 @@ Fred::readAttributes(const XMLAttributes& attributes,
     {
       mMyEnum = Kind_fromString(kind.c_str());
 
-      if (Kind_isValid(mMyEnum) == 0)
+      if (log && Kind_isValid(mMyEnum) == 0)
       {
         std::string msg = "The myEnum on the <Fred> ";
 

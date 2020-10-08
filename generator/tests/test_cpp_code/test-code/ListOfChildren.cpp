@@ -321,33 +321,6 @@ ListOfChildren::createObject(XMLInputStream& stream)
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the namespace for the Nasty package
- */
-void
-ListOfChildren::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(NastyExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(NastyExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

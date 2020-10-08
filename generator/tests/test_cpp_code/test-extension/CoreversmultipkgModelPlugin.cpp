@@ -1053,13 +1053,13 @@ CoreversmultipkgModelPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "classOneTwo")
   {
-    ClassOneTwo * obj = getClassOneTwo();
-    if (unsetClassOneTwo() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassOneTwo * obj = mClassOneTwo;
+    mClassOneTwo = NULL; return obj;
   }
   else if (elementName == "classMult")
   {
-    ClassMult * obj = getClassMult();
-    if (unsetClassMult() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassMult * obj = mClassMult;
+    mClassMult = NULL; return obj;
   }
 
   return NULL;
@@ -1298,7 +1298,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOneTwo")
     {
-      if (isSetClassOneTwo())
+      if (getErrorLog() && isSetClassOneTwo())
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
@@ -1311,7 +1311,7 @@ CoreversmultipkgModelPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "classMult")
     {
-      if (isSetClassMult())
+      if (getErrorLog() && isSetClassMult())
       {
         getErrorLog()->logPackageError("coreversmultipkg",
           CoreversmultipkgModelAllowedElements, getPackageVersion(), getLevel(),
@@ -1472,12 +1472,12 @@ CoreversmultipkgModelPlugin::readL3V1V2Attributes(const XMLAttributes&
   // attPlug uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttPlug = attributes.readInto("attPlug", mAttPlug);
 
-  if ( mIsSetAttPlug == false)
+  if ( mIsSetAttPlug == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1514,12 +1514,12 @@ CoreversmultipkgModelPlugin::readL3V2V1Attributes(const XMLAttributes&
   // attPlug2 uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttPlug2 = attributes.readInto("attPlug2", mAttPlug2);
 
-  if ( mIsSetAttPlug2 == false)
+  if ( mIsSetAttPlug2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1556,12 +1556,12 @@ CoreversmultipkgModelPlugin::readL3V2V2Attributes(const XMLAttributes&
   // attPlug2 uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttPlug2 = attributes.readInto("attPlug2", mAttPlug2);
 
-  if ( mIsSetAttPlug2 == false)
+  if ( mIsSetAttPlug2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1606,12 +1606,12 @@ CoreversmultipkgModelPlugin::readL4V1V1Attributes(const XMLAttributes&
   // attPlug2 uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttPlug2 = attributes.readInto("attPlug2", mAttPlug2);
 
-  if ( mIsSetAttPlug2 == false)
+  if ( mIsSetAttPlug2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

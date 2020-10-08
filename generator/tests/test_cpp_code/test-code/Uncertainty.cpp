@@ -1143,63 +1143,74 @@ Uncertainty::removeChildObject(const std::string& elementName,
 {
   if (elementName == "uncertStatistics")
   {
-    UncertStatistics * obj = getUncertStatistics();
-    if (unsetUncertStatistics() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertStatistics * obj = mUncertStatistics;
+    mUncertStatistics = NULL; return obj;
   }
   else if (elementName == "betaDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "cauchyDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "exponentialDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "logisticDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "normalDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "binomialDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "geometricDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "bernoulliDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "categoricalDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "multivariateDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
   else if (elementName == "externalDistribution")
   {
-    Distribution * obj = getDistribution();
-    if (unsetDistribution() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Distribution * obj = mDistribution;
+    mDistribution = NULL;
+    return obj;
   }
 
   return NULL;
@@ -1395,7 +1406,7 @@ Uncertainty::createObject(XMLInputStream& stream)
 
   if (name == "betaDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1408,7 +1419,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "cauchyDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1421,7 +1432,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "exponentialDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1434,7 +1445,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "logisticDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1447,7 +1458,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "normalDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1460,7 +1471,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "binomialDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1473,7 +1484,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "geometricDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1486,7 +1497,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "bernoulliDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1499,7 +1510,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "categoricalDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1512,7 +1523,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "multivariateDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1525,7 +1536,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "externalDistribution")
   {
-    if (isSetDistribution())
+    if (getErrorLog() && isSetDistribution())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),
@@ -1538,7 +1549,7 @@ Uncertainty::createObject(XMLInputStream& stream)
   }
   else if (name == "uncertStatistics")
   {
-    if (isSetUncertStatistics())
+    if (getErrorLog() && isSetUncertStatistics())
     {
       getErrorLog()->logPackageError("distrib",
         DistribUncertaintyAllowedElements, getPackageVersion(), getLevel(),

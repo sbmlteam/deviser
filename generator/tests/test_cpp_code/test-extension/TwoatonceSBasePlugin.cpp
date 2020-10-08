@@ -989,18 +989,18 @@ TwoatonceSBasePlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "normalClass")
   {
-    NormalClass * obj = getNormalClass();
-    if (unsetNormalClass() == LIBSBML_OPERATION_SUCCESS) return obj;
+    NormalClass * obj = mNormalClass;
+    mNormalClass = NULL; return obj;
   }
   else if (elementName == "classWithRequiredID")
   {
-    ClassWithRequiredID * obj = getClassWithRequiredID();
-    if (unsetClassWithRequiredID() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassWithRequiredID * obj = mClassWithRequiredID;
+    mClassWithRequiredID = NULL; return obj;
   }
   else if (elementName == "multipleChild")
   {
-    MultipleChild * obj = getMultipleChild();
-    if (unsetMultipleChild() == LIBSBML_OPERATION_SUCCESS) return obj;
+    MultipleChild * obj = mMultipleChild;
+    mMultipleChild = NULL; return obj;
   }
 
   return NULL;
@@ -1279,7 +1279,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
   {
     if (name == "normalClass")
     {
-      if (isSetNormalClass())
+      if (getErrorLog() && isSetNormalClass())
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
@@ -1292,7 +1292,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "classWithRequiredID")
     {
-      if (isSetClassWithRequiredID())
+      if (getErrorLog() && isSetClassWithRequiredID())
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),
@@ -1305,7 +1305,7 @@ TwoatonceSBasePlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "multipleChild")
     {
-      if (isSetMultipleChild())
+      if (getErrorLog() && isSetMultipleChild())
       {
         getErrorLog()->logPackageError("twoatonce",
           TwoatonceSBaseAllowedElements, getPackageVersion(), getLevel(),

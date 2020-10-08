@@ -1238,7 +1238,7 @@ MixedGeometry::createObject(XMLInputStream& stream)
 
   if (name == "listOfGeometryDefinitions")
   {
-    if (mGeometryDefinitions.size() != 0)
+    if (getErrorLog() && mGeometryDefinitions.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialMixedGeometryAllowedElements, getPackageVersion(), getLevel(),
@@ -1249,7 +1249,7 @@ MixedGeometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfOrdinalMappings")
   {
-    if (mOrdinalMappings.size() != 0)
+    if (getErrorLog() && mOrdinalMappings.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialMixedGeometryAllowedElements, getPackageVersion(), getLevel(),

@@ -598,33 +598,6 @@ ListOfMembers::writeAttributes(XMLOutputStream& stream) const
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the namespace for the Groups package
- */
-void
-ListOfMembers::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(GroupsExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(GroupsExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

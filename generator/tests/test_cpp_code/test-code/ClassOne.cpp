@@ -814,22 +814,25 @@ ClassOne::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
-      "element.";
-    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
+        "element.";
+      log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // att1 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
   if (mIsSetAtt1 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -880,22 +883,25 @@ ClassOne::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
-      "element.";
-    log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Vers attribute 'id' is missing from the <ClassOne> "
+        "element.";
+      log->logPackageError("vers", VersClassOneAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // att2 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt2 = attributes.readInto("att2", mAtt2);
 
   if (mIsSetAtt2 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

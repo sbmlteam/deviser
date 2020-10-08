@@ -1113,7 +1113,7 @@ Objective::createObject(XMLInputStream& stream)
 
   if (name == "listOfFluxObjectives")
   {
-    if (mFluxObjectives.size() != 0)
+    if (getErrorLog() && mFluxObjectives.size() != 0)
     {
       getErrorLog()->logPackageError("fbc", FbcObjectiveAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1280,10 +1280,13 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Fbc attribute 'id' is missing from the <Objective> "
-      "element.";
-    log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Fbc attribute 'id' is missing from the <Objective> "
+        "element.";
+      log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1318,7 +1321,7 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
     {
       mType = FbcType_fromString(type.c_str());
 
-      if (FbcType_isValid(mType) == 0)
+      if (log && FbcType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <Objective> ";
 
@@ -1336,9 +1339,12 @@ Objective::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Fbc attribute 'type' is missing.";
-    log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Fbc attribute 'type' is missing.";
+      log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 }
 
@@ -1382,10 +1388,13 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Fbc attribute 'id' is missing from the <Objective> "
-      "element.";
-    log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Fbc attribute 'id' is missing from the <Objective> "
+        "element.";
+      log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1420,7 +1429,7 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
     {
       mType = FbcType_fromString(type.c_str());
 
-      if (FbcType_isValid(mType) == 0)
+      if (log && FbcType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <Objective> ";
 
@@ -1438,9 +1447,12 @@ Objective::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Fbc attribute 'type' is missing.";
-    log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Fbc attribute 'type' is missing.";
+      log->logPackageError("fbc", FbcObjectiveAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 }
 

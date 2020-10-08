@@ -1360,7 +1360,7 @@ CSGSetOperator::createObject(XMLInputStream& stream)
 
   if (name == "listOfCSGNodes")
   {
-    if (mCSGNodes.size() != 0)
+    if (getErrorLog() && mCSGNodes.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGSetOperatorAllowedElements, getPackageVersion(), getLevel(),
@@ -1459,7 +1459,7 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
     {
       mOperationType = SetOperation_fromString(operationType.c_str());
 
-      if (SetOperation_isValid(mOperationType) == 0)
+      if (log && SetOperation_isValid(mOperationType) == 0)
       {
         std::string msg = "The operationType on the <CSGSetOperator> ";
 
@@ -1478,9 +1478,12 @@ CSGSetOperator::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'operationType' is missing.";
-    log->logPackageError("spatial", SpatialCSGSetOperatorAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'operationType' is missing.";
+      log->logPackageError("spatial", SpatialCSGSetOperatorAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 

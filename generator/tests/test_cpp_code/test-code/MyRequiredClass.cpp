@@ -2902,10 +2902,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'id' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'id' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -2923,22 +2926,25 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'name' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'name' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // num uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum = attributes.readInto("num", mNum);
 
-  if ( mIsSetNum == false)
+  if ( mIsSetNum == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -2961,12 +2967,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // num2 uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum2 = attributes.readInto("num2", mNum2);
 
-  if ( mIsSetNum2 == false)
+  if ( mIsSetNum2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -2989,12 +2995,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // num3 int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum3 = attributes.readInto("num3", mNum3);
 
-  if ( mIsSetNum3 == false)
+  if ( mIsSetNum3 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3016,12 +3022,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // num1 double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum1 = attributes.readInto("num1", mNum1);
 
-  if ( mIsSetNum1 == false)
+  if ( mIsSetNum1 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3043,12 +3049,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // true bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetTrue = attributes.readInto("true", mTrue);
 
   if (mIsSetTrue == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3068,12 +3074,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // false bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetFalse = attributes.readInto("false", mFalse);
 
   if (mIsSetFalse == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3110,10 +3116,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'unit' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'unit' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3143,10 +3152,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'ref1' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'ref1' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3176,10 +3188,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'ref2' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'ref2' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3210,10 +3225,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'refUnit' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'refUnit' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3237,22 +3255,25 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'correctId' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'correctId' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // posint uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetPosint = attributes.readInto("posint", mPosint);
 
-  if ( mIsSetPosint == false)
+  if ( mIsSetPosint == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3275,12 +3296,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // posint2 uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetPosint2 = attributes.readInto("posint2", mPosint2);
 
-  if ( mIsSetPosint2 == false)
+  if ( mIsSetPosint2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3303,12 +3324,12 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   // posint1 uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetPosint1 = attributes.readInto("posint1", mPosint1);
 
-  if ( mIsSetPosint1 == false)
+  if ( mIsSetPosint1 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3348,10 +3369,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'metaid2' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'metaid2' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3375,22 +3399,25 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'metaid1' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'metaid1' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // num4 int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum4 = attributes.readInto("num4", mNum4);
 
-  if ( mIsSetNum4 == false)
+  if ( mIsSetNum4 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -3437,10 +3464,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'metaidref1' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'metaidref1' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -3464,10 +3494,13 @@ MyRequiredClass::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'notmetaid' is missing from the "
-      "<MyRequiredClass> element.";
-    log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'notmetaid' is missing from the "
+        "<MyRequiredClass> element.";
+      log->logPackageError("test", TestMyRequiredClassAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 }
 

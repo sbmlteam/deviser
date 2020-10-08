@@ -1535,7 +1535,7 @@ Transition::createObject(XMLInputStream& stream)
 
   if (name == "listOfInputs")
   {
-    if (mInputs.size() != 0)
+    if (getErrorLog() && mInputs.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1546,7 +1546,7 @@ Transition::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfOutputs")
   {
-    if (mOutputs.size() != 0)
+    if (getErrorLog() && mOutputs.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1557,7 +1557,7 @@ Transition::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfFunctionTerms")
   {
-    if (mFunctionTerms.size() != 0)
+    if (getErrorLog() && mFunctionTerms.size() != 0)
     {
       getErrorLog()->logPackageError("qual", QualTransitionAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

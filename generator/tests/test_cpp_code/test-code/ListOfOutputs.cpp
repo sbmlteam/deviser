@@ -362,33 +362,6 @@ ListOfOutputs::createObject(XMLInputStream& stream)
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the namespace for the Qual package
- */
-void
-ListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(QualExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(QualExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

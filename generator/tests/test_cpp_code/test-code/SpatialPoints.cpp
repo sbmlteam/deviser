@@ -1009,10 +1009,13 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<SpatialPoints> element.";
-    log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<SpatialPoints> element.";
+      log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1032,7 +1035,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
     {
       mCompression = CompressionKind_fromString(compression.c_str());
 
-      if (CompressionKind_isValid(mCompression) == 0)
+      if (log && CompressionKind_isValid(mCompression) == 0)
       {
         std::string msg = "The compression on the <SpatialPoints> ";
 
@@ -1051,22 +1054,25 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'compression' is missing.";
-    log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'compression' is missing.";
+      log->logPackageError("spatial", SpatialSpatialPointsAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // arrayDataLength int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetArrayDataLength = attributes.readInto("arrayDataLength",
     mArrayDataLength);
 
-  if ( mIsSetArrayDataLength == false)
+  if ( mIsSetArrayDataLength == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1102,7 +1108,7 @@ SpatialPoints::readAttributes(const XMLAttributes& attributes,
     {
       mDataType = DataKind_fromString(dataType.c_str());
 
-      if (DataKind_isValid(mDataType) == 0)
+      if (log && DataKind_isValid(mDataType) == 0)
       {
         std::string msg = "The dataType on the <SpatialPoints> ";
 

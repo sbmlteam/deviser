@@ -1273,13 +1273,13 @@ VersSpeciesPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "classOne")
   {
-    ClassOne * obj = getClassOne();
-    if (unsetClassOne() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassOne * obj = mClassOne;
+    mClassOne = NULL; return obj;
   }
   else if (elementName == "classTwo")
   {
-    ClassTwo * obj = getClassTwo();
-    if (unsetClassTwo() == LIBSBML_OPERATION_SUCCESS) return obj;
+    ClassTwo * obj = mClassTwo;
+    mClassTwo = NULL; return obj;
   }
   else if (elementName == "another")
   {
@@ -1557,7 +1557,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "classOne")
     {
-      if (isSetClassOne())
+      if (getErrorLog() && isSetClassOne())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1570,7 +1570,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "classTwo")
     {
-      if (isSetClassTwo())
+      if (getErrorLog() && isSetClassTwo())
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1583,7 +1583,7 @@ VersSpeciesPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "listOfAnothers")
     {
-      if (mAnothers.size() != 0)
+      if (getErrorLog() && mAnothers.size() != 0)
       {
         getErrorLog()->logPackageError("vers", VersSpeciesAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),

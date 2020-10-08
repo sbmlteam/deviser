@@ -929,13 +929,13 @@ Category::removeChildObject(const std::string& elementName,
 {
   if (elementName == "probability")
   {
-    UncertValue * obj = getProbability();
-    if (unsetProbability() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mProbability;
+    mProbability = NULL; return obj;
   }
   else if (elementName == "value")
   {
-    UncertValue * obj = getValue();
-    if (unsetValue() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mValue;
+    mValue = NULL; return obj;
   }
 
   return NULL;
@@ -1131,7 +1131,7 @@ Category::createObject(XMLInputStream& stream)
 
   if (name == "probability")
   {
-    if (isSetProbability())
+    if (getErrorLog() && isSetProbability())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1145,7 +1145,7 @@ Category::createObject(XMLInputStream& stream)
   }
   else if (name == "value")
   {
-    if (isSetValue())
+    if (getErrorLog() && isSetValue())
     {
       getErrorLog()->logPackageError("distrib", DistribCategoryAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1256,12 +1256,12 @@ Category::readAttributes(const XMLAttributes& attributes,
   // rank uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetRank = attributes.readInto("rank", mRank);
 
-  if ( mIsSetRank == false)
+  if ( mIsSetRank == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

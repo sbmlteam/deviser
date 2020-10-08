@@ -1107,7 +1107,7 @@ Group::createObject(XMLInputStream& stream)
 
   if (name == "listOfMembers")
   {
-    if (mMembers.size() != 0)
+    if (getErrorLog() && mMembers.size() != 0)
     {
       getErrorLog()->logPackageError("groups", GroupsGroupAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1263,7 +1263,7 @@ Group::readAttributes(const XMLAttributes& attributes,
     {
       mKind = GroupKind_fromString(kind.c_str());
 
-      if (GroupKind_isValid(mKind) == 0)
+      if (log && GroupKind_isValid(mKind) == 0)
       {
         std::string msg = "The kind on the <Group> ";
 
@@ -1281,9 +1281,12 @@ Group::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Groups attribute 'kind' is missing.";
-    log->logPackageError("groups", GroupsGroupAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Groups attribute 'kind' is missing.";
+      log->logPackageError("groups", GroupsGroupAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 }
 

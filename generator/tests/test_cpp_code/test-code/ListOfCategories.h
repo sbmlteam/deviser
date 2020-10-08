@@ -382,17 +382,6 @@ protected:
   /** @endcond */
 
 
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the namespace for the Distrib package
-   */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
 };
 
 

@@ -773,8 +773,8 @@ UncertaintyOld::removeChildObject(const std::string& elementName,
 {
   if (elementName == "uncertML")
   {
-    UncertMLNode * obj = getUncertML();
-    if (unsetUncertML() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertMLNode * obj = mUncertML;
+    mUncertML = NULL; return obj;
   }
 
   return NULL;

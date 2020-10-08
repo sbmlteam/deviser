@@ -1227,18 +1227,18 @@ Event::removeChildObject(const std::string& elementName,
 {
   if (elementName == "trigger")
   {
-    Trigger * obj = getTrigger();
-    if (unsetTrigger() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Trigger * obj = mTrigger;
+    mTrigger = NULL; return obj;
   }
   else if (elementName == "priority")
   {
-    Priority * obj = getPriority();
-    if (unsetPriority() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Priority * obj = mPriority;
+    mPriority = NULL; return obj;
   }
   else if (elementName == "delay")
   {
-    Delay * obj = getDelay();
-    if (unsetDelay() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Delay * obj = mDelay;
+    mDelay = NULL; return obj;
   }
   else if (elementName == "eventAssignment")
   {
@@ -1416,7 +1416,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "trigger")
   {
-    if (isSetTrigger())
+    if (getErrorLog() && isSetTrigger())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1428,7 +1428,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "priority")
   {
-    if (isSetPriority())
+    if (getErrorLog() && isSetPriority())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1440,7 +1440,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "delay")
   {
-    if (isSetDelay())
+    if (getErrorLog() && isSetDelay())
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1452,7 +1452,7 @@ Event::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "sBMLListOfEventAssignments")
   {
-    if (mEventAssignments.size() != 0)
+    if (getErrorLog() && mEventAssignments.size() != 0)
     {
       getErrorLog()->logError(CoreEventAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1546,13 +1546,13 @@ Event::readAttributes(
   // useValuesFromTriggerTime bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetUseValuesFromTriggerTime =
     attributes.readInto("useValuesFromTriggerTime", mUseValuesFromTriggerTime);
 
   if (mIsSetUseValuesFromTriggerTime == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

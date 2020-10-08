@@ -829,7 +829,7 @@ Polygon::createObject(XMLInputStream& stream)
 
   if (name == "listOfElements")
   {
-    if (mRenderPoints.size() != 0)
+    if (getErrorLog() && mRenderPoints.size() != 0)
     {
       getErrorLog()->logPackageError("render", RenderPolygonAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

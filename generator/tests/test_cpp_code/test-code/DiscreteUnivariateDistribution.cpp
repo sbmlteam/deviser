@@ -944,13 +944,13 @@ DiscreteUnivariateDistribution::removeChildObject(
 {
   if (elementName == "truncationLowerBound")
   {
-    UncertBound * obj = getTruncationLowerBound();
-    if (unsetTruncationLowerBound() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertBound * obj = mTruncationLowerBound;
+    mTruncationLowerBound = NULL; return obj;
   }
   else if (elementName == "truncationUpperBound")
   {
-    UncertBound * obj = getTruncationUpperBound();
-    if (unsetTruncationUpperBound() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertBound * obj = mTruncationUpperBound;
+    mTruncationUpperBound = NULL; return obj;
   }
 
   return NULL;
@@ -1148,7 +1148,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
 
   if (name == "truncationLowerBound")
   {
-    if (isSetTruncationLowerBound())
+    if (getErrorLog() && isSetTruncationLowerBound())
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,
@@ -1163,7 +1163,7 @@ DiscreteUnivariateDistribution::createObject(XMLInputStream& stream)
   }
   else if (name == "truncationUpperBound")
   {
-    if (isSetTruncationUpperBound())
+    if (getErrorLog() && isSetTruncationUpperBound())
     {
       getErrorLog()->logPackageError("distrib",
         DistribDiscreteUnivariateDistributionAllowedElements,

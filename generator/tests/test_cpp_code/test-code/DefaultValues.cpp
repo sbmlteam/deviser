@@ -859,8 +859,8 @@ DefaultValues::removeChildObject(const std::string& elementName,
 {
   if (elementName == "font-size")
   {
-    RelAbsVector * obj = getFontSize();
-    if (unsetFontSize() == LIBSBML_OPERATION_SUCCESS) return obj;
+    RelAbsVector * obj = mFontSize;
+    mFontSize = NULL; return obj;
   }
 
   return NULL;
@@ -1016,7 +1016,7 @@ DefaultValues::createObject(XMLInputStream& stream)
 
   if (name == "font-size")
   {
-    if (isSetFontSize())
+    if (getErrorLog() && isSetFontSize())
     {
       getErrorLog()->logPackageError("render",
         RenderDefaultValuesAllowedAttributes, getPackageVersion(), getLevel(),
@@ -1105,12 +1105,12 @@ DefaultValues::readAttributes(const XMLAttributes& attributes,
   // stroke-width double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetStrokeWidth = attributes.readInto("stroke-width", mStrokeWidth);
 
-  if ( mIsSetStrokeWidth == false)
+  if ( mIsSetStrokeWidth == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

@@ -388,18 +388,6 @@ protected:
 
   friend class Point;
   friend class Arc;
-
-  /** @cond doxygenlibSBGNInternal */
-
-  /**
-   * Writes the namespace for the Sbgnml package
-   */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
-
-  /** @endcond */
-
-
 };
 
 

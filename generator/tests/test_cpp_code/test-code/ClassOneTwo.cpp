@@ -1356,23 +1356,26 @@ ClassOneTwo::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Coreversmultipkg attribute 'id' is missing from the "
-      "<ClassOneTwo> element.";
-    log->logPackageError("coreversmultipkg",
-      CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Coreversmultipkg attribute 'id' is missing from "
+        "the <ClassOneTwo> element.";
+      log->logPackageError("coreversmultipkg",
+        CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // att1 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
   if (mIsSetAtt1 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1400,12 +1403,12 @@ ClassOneTwo::readL3V1V2Attributes(const XMLAttributes& attributes)
   // attInt int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttInt = attributes.readInto("attInt", mAttInt);
 
-  if ( mIsSetAttInt == false)
+  if ( mIsSetAttInt == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1459,23 +1462,26 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Coreversmultipkg attribute 'id' is missing from the "
-      "<ClassOneTwo> element.";
-    log->logPackageError("coreversmultipkg",
-      CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Coreversmultipkg attribute 'id' is missing from "
+        "the <ClassOneTwo> element.";
+      log->logPackageError("coreversmultipkg",
+        CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // att1 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
   if (mIsSetAtt1 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1489,12 +1495,12 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
   // att2 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt2 = attributes.readInto("att2", mAtt2);
 
   if (mIsSetAtt2 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1508,12 +1514,12 @@ ClassOneTwo::readL3V2V1Attributes(const XMLAttributes& attributes)
   // attDbl double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttDbl = attributes.readInto("attDbl", mAttDbl);
 
-  if ( mIsSetAttDbl == false)
+  if ( mIsSetAttDbl == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1567,23 +1573,26 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Coreversmultipkg attribute 'id' is missing from the "
-      "<ClassOneTwo> element.";
-    log->logPackageError("coreversmultipkg",
-      CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Coreversmultipkg attribute 'id' is missing from "
+        "the <ClassOneTwo> element.";
+      log->logPackageError("coreversmultipkg",
+        CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
   // att1 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
   if (mIsSetAtt1 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1597,12 +1606,12 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
   // att2 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt2 = attributes.readInto("att2", mAtt2);
 
   if (mIsSetAtt2 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1616,12 +1625,12 @@ ClassOneTwo::readL3V2V2Attributes(const XMLAttributes& attributes)
   // attInt int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAttInt = attributes.readInto("attInt", mAttInt);
 
-  if ( mIsSetAttInt == false)
+  if ( mIsSetAttInt == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1657,12 +1666,12 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
   // att1 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt1 = attributes.readInto("att1", mAtt1);
 
   if (mIsSetAtt1 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1676,12 +1685,12 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
   // att2 bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetAtt2 = attributes.readInto("att2", mAtt2);
 
   if (mIsSetAtt2 == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1729,7 +1738,7 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
     {
       mAttEnum = AbcType_fromString(attEnum.c_str());
 
-      if (AbcType_isValid(mAttEnum) == 0)
+      if (log && AbcType_isValid(mAttEnum) == 0)
       {
         std::string msg = "The attEnum on the <ClassOneTwo> ";
 
@@ -1748,10 +1757,13 @@ ClassOneTwo::readL4V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Coreversmultipkg attribute 'attEnum' is missing.";
-    log->logPackageError("coreversmultipkg",
-      CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Coreversmultipkg attribute 'attEnum' is missing.";
+      log->logPackageError("coreversmultipkg",
+        CoreversmultipkgClassOneTwoAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 }
 

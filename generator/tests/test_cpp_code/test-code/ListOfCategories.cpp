@@ -324,33 +324,6 @@ ListOfCategories::createObject(XMLInputStream& stream)
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the namespace for the Distrib package
- */
-void
-ListOfCategories::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(DistribExtension::getXmlnsL3V2V1()))
-    {
-      xmlns.add(DistribExtension::getXmlnsL3V2V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

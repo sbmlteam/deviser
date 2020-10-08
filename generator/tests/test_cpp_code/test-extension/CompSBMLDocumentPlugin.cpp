@@ -1230,7 +1230,7 @@ CompSBMLDocumentPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "listOfExternalModelDefinitions")
     {
-      if (mExternalModelDefinitions.size() != 0)
+      if (getErrorLog() && mExternalModelDefinitions.size() != 0)
       {
         getErrorLog()->logPackageError("comp", CompSBMLDocumentAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1246,7 +1246,7 @@ CompSBMLDocumentPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "listOfModelDefinitions")
     {
-      if (mModelDefinitions.size() != 0)
+      if (getErrorLog() && mModelDefinitions.size() != 0)
       {
         getErrorLog()->logPackageError("comp", CompSBMLDocumentAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),

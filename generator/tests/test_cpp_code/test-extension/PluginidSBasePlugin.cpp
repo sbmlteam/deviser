@@ -817,8 +817,8 @@ PluginidSBasePlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "otherNormalClass")
   {
-    OtherNormalClass * obj = getOtherNormalClass();
-    if (unsetOtherNormalClass() == LIBSBML_OPERATION_SUCCESS) return obj;
+    OtherNormalClass * obj = mOtherNormalClass;
+    mOtherNormalClass = NULL; return obj;
   }
 
   return NULL;
@@ -1017,7 +1017,7 @@ PluginidSBasePlugin::createObject(XMLInputStream& stream)
   {
     if (name == "otherNormalClass")
     {
-      if (isSetOtherNormalClass())
+      if (getErrorLog() && isSetOtherNormalClass())
       {
         getErrorLog()->logPackageError("pluginid",
           PluginidSBaseAllowedElements, getPackageVersion(), getLevel(),
@@ -1172,10 +1172,13 @@ PluginidSBasePlugin::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Pluginid attribute 'id' is missing from the "
-      "<PluginidSBasePlugin> element.";
-    log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Pluginid attribute 'id' is missing from the "
+        "<PluginidSBasePlugin> element.";
+      log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1234,10 +1237,13 @@ PluginidSBasePlugin::readL3V2V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Pluginid attribute 'id' is missing from the "
-      "<PluginidSBasePlugin> element.";
-    log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Pluginid attribute 'id' is missing from the "
+        "<PluginidSBasePlugin> element.";
+      log->logPackageError("pluginid", PluginidSBaseAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 

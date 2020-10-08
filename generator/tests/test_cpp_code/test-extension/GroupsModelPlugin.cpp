@@ -854,7 +854,7 @@ GroupsModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "listOfGroups")
     {
-      if (mGroups.size() != 0)
+      if (getErrorLog() && mGroups.size() != 0)
       {
         getErrorLog()->logPackageError("groups", GroupsModelAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),

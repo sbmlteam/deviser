@@ -425,33 +425,6 @@ ListOfAssociations::createObject(XMLInputStream& stream)
 /** @cond doxygenLibsbmlInternal */
 
 /*
- * Writes the namespace for the Fbc package
- */
-void
-ListOfAssociations::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(FbcExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(FbcExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibsbmlInternal */
-
-/*
  * checks concrete types
  */
 bool

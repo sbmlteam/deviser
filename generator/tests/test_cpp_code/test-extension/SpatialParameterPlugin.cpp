@@ -1171,23 +1171,23 @@ SpatialParameterPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "spatialSymbolReference")
   {
-    SpatialSymbolReference * obj = getSpatialSymbolReference();
-    if (unsetSpatialSymbolReference() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SpatialSymbolReference * obj = mSpatialSymbolReference;
+    mSpatialSymbolReference = NULL; return obj;
   }
   else if (elementName == "advectionCoefficient")
   {
-    AdvectionCoefficient * obj = getAdvectionCoefficient();
-    if (unsetAdvectionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
+    AdvectionCoefficient * obj = mAdvectionCoefficient;
+    mAdvectionCoefficient = NULL; return obj;
   }
   else if (elementName == "boundaryCondition")
   {
-    BoundaryCondition * obj = getBoundaryCondition();
-    if (unsetBoundaryCondition() == LIBSBML_OPERATION_SUCCESS) return obj;
+    BoundaryCondition * obj = mBoundaryCondition;
+    mBoundaryCondition = NULL; return obj;
   }
   else if (elementName == "diffusionCoefficient")
   {
-    DiffusionCoefficient * obj = getDiffusionCoefficient();
-    if (unsetDiffusionCoefficient() == LIBSBML_OPERATION_SUCCESS) return obj;
+    DiffusionCoefficient * obj = mDiffusionCoefficient;
+    mDiffusionCoefficient = NULL; return obj;
   }
 
   return NULL;
@@ -1506,7 +1506,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "spatialSymbolReference")
     {
-      if (isSetSpatialSymbolReference())
+      if (getErrorLog() && isSetSpatialSymbolReference())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
@@ -1519,7 +1519,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "advectionCoefficient")
     {
-      if (isSetAdvectionCoefficient())
+      if (getErrorLog() && isSetAdvectionCoefficient())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
@@ -1532,7 +1532,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "boundaryCondition")
     {
-      if (isSetBoundaryCondition())
+      if (getErrorLog() && isSetBoundaryCondition())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialParameterAllowedElements, getPackageVersion(), getLevel(),
@@ -1545,7 +1545,7 @@ SpatialParameterPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "diffusionCoefficient")
     {
-      if (isSetDiffusionCoefficient())
+      if (getErrorLog() && isSetDiffusionCoefficient())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialParameterAllowedElements, getPackageVersion(), getLevel(),

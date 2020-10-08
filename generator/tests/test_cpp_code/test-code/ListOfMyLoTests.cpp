@@ -491,33 +491,6 @@ ListOfMyLoTests::writeAttributes(XMLOutputStream& stream) const
 
 
 
-/** @cond doxygenLibsbmlInternal */
-
-/*
- * Writes the namespace for the Test package
- */
-void
-ListOfMyLoTests::writeXMLNS(XMLOutputStream& stream) const
-{
-  XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
-
-  if (prefix.empty())
-  {
-    const XMLNamespaces* thisxmlns = getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(TestExtension::getXmlnsL3V1V1()))
-    {
-      xmlns.add(TestExtension::getXmlnsL3V1V1(), prefix);
-    }
-  }
-
-  stream << xmlns;
-}
-
-/** @endcond */
-
-
-
 
 #endif /* __cplusplus */
 

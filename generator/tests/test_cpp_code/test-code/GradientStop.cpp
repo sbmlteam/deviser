@@ -793,8 +793,8 @@ GradientStop::removeChildObject(const std::string& elementName,
 {
   if (elementName == "offset")
   {
-    RelAbsVector * obj = getOffset();
-    if (unsetOffset() == LIBSBML_OPERATION_SUCCESS) return obj;
+    RelAbsVector * obj = mOffset;
+    mOffset = NULL; return obj;
   }
 
   return NULL;
@@ -950,7 +950,7 @@ GradientStop::createObject(XMLInputStream& stream)
 
   if (name == "offset")
   {
-    if (isSetOffset())
+    if (getErrorLog() && isSetOffset())
     {
       getErrorLog()->logPackageError("render",
         RenderGradientStopAllowedAttributes, getPackageVersion(), getLevel(),
@@ -1072,10 +1072,13 @@ GradientStop::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Render attribute 'stop-color' is missing from the "
-      "<GradientStop> element.";
-    log->logPackageError("render", RenderGradientStopAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Render attribute 'stop-color' is missing from the "
+        "<GradientStop> element.";
+      log->logPackageError("render", RenderGradientStopAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 }
 

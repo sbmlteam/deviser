@@ -1589,13 +1589,13 @@ Arc::removeChildObject(const std::string& elementName, const std::string& id)
 {
   if (elementName == "start")
   {
-    Point * obj = getStart();
-    if (unsetStart() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Point * obj = mStart;
+    mStart = NULL; return obj;
   }
   else if (elementName == "end")
   {
-    Point * obj = getEnd();
-    if (unsetEnd() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Point * obj = mEnd;
+    mEnd = NULL; return obj;
   }
   else if (elementName == "glyph")
   {
@@ -1796,7 +1796,7 @@ Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "start")
   {
-    if (isSetStart())
+    if (getErrorLog() && isSetStart())
     {
       getErrorLog()->logError(SbgnmlArcAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1809,7 +1809,7 @@ Arc::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "end")
   {
-    if (isSetEnd())
+    if (getErrorLog() && isSetEnd())
     {
       getErrorLog()->logError(SbgnmlArcAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1938,10 +1938,13 @@ Arc::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'id' is missing from the <Arc> "
-      "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'id' is missing from the <Arc> "
+        "element.";
+      log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1959,10 +1962,13 @@ Arc::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'class' is missing from the <Arc> "
-      "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'class' is missing from the <Arc> "
+        "element.";
+      log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1993,10 +1999,13 @@ Arc::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'source' is missing from the <Arc> "
-      "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'source' is missing from the "
+        "<Arc> element.";
+      log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -2027,10 +2036,13 @@ Arc::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'target' is missing from the <Arc> "
-      "element.";
-    log->logError(SbgnmlArcAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'target' is missing from the "
+        "<Arc> element.";
+      log->logError(SbgnmlArcAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

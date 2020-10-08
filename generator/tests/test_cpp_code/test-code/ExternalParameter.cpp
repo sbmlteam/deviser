@@ -939,7 +939,7 @@ ExternalParameter::createObject(XMLInputStream& stream)
 
   if (name == "listOfExternalParameters")
   {
-    if (mExternalParameters->size() != 0)
+    if (getErrorLog() && mExternalParameters->size() != 0)
     {
       getErrorLog()->logPackageError("distrib",
         DistribExternalParameterAllowedElements, getPackageVersion(), getLevel(),
@@ -1057,10 +1057,14 @@ ExternalParameter::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Distrib attribute 'definitionURL' is missing from "
-      "the <ExternalParameter> element.";
-    log->logPackageError("distrib", DistribExternalParameterAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Distrib attribute 'definitionURL' is missing from "
+        "the <ExternalParameter> element.";
+      log->logPackageError("distrib",
+        DistribExternalParameterAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 }
 

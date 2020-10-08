@@ -666,8 +666,8 @@ SpatialCompartmentPlugin::removeChildObject(const std::string& elementName,
 {
   if (elementName == "compartmentMapping")
   {
-    CompartmentMapping * obj = getCompartmentMapping();
-    if (unsetCompartmentMapping() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CompartmentMapping * obj = mCompartmentMapping;
+    mCompartmentMapping = NULL; return obj;
   }
 
   return NULL;
@@ -866,7 +866,7 @@ SpatialCompartmentPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "compartmentMapping")
     {
-      if (isSetCompartmentMapping())
+      if (getErrorLog() && isSetCompartmentMapping())
       {
         getErrorLog()->logPackageError("spatial",
           SpatialCompartmentAllowedElements, getPackageVersion(), getLevel(),

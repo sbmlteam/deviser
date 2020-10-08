@@ -914,33 +914,39 @@ CSGTransformation::removeChildObject(const std::string& elementName,
 {
   if (elementName == "csgPrimitive")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgTranslation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgRotation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgScale")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgHomogeneousTransformation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgSetOperator")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
 
   return NULL;
@@ -1097,7 +1103,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
 
   if (name == "csgPrimitive")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
@@ -1110,7 +1116,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
   }
   else if (name == "csgTranslation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
@@ -1123,7 +1129,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
   }
   else if (name == "csgRotation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
@@ -1136,7 +1142,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
   }
   else if (name == "csgScale")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
@@ -1149,7 +1155,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
   }
   else if (name == "csgHomogeneousTransformation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),
@@ -1162,7 +1168,7 @@ CSGTransformation::createObject(XMLInputStream& stream)
   }
   else if (name == "csgSetOperator")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGTransformationAllowedElements, getPackageVersion(), getLevel(),

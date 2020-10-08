@@ -878,7 +878,7 @@ CSGeometry::createObject(XMLInputStream& stream)
 
   if (name == "listOfCSGObjects")
   {
-    if (mCSGObjects.size() != 0)
+    if (getErrorLog() && mCSGObjects.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGeometryAllowedElements, getPackageVersion(), getLevel(),

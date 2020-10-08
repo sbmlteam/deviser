@@ -866,13 +866,13 @@ BetaDistribution::removeChildObject(const std::string& elementName,
 {
   if (elementName == "alpha")
   {
-    UncertValue * obj = getAlpha();
-    if (unsetAlpha() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mAlpha;
+    mAlpha = NULL; return obj;
   }
   else if (elementName == "beta")
   {
-    UncertValue * obj = getBeta();
-    if (unsetBeta() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mBeta;
+    mBeta = NULL; return obj;
   }
 
   return NULL;
@@ -1069,7 +1069,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
 
   if (name == "alpha")
   {
-    if (isSetAlpha())
+    if (getErrorLog() && isSetAlpha())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),
@@ -1083,7 +1083,7 @@ BetaDistribution::createObject(XMLInputStream& stream)
   }
   else if (name == "beta")
   {
-    if (isSetBeta())
+    if (getErrorLog() && isSetBeta())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBetaDistributionAllowedElements, getPackageVersion(), getLevel(),

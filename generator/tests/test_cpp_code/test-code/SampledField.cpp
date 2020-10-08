@@ -1391,10 +1391,13 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<SampledField> element.";
-    log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<SampledField> element.";
+      log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1414,7 +1417,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
     {
       mDataType = DataKind_fromString(dataType.c_str());
 
-      if (DataKind_isValid(mDataType) == 0)
+      if (log && DataKind_isValid(mDataType) == 0)
       {
         std::string msg = "The dataType on the <SampledField> ";
 
@@ -1433,21 +1436,24 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'dataType' is missing.";
-    log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'dataType' is missing.";
+      log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // numSamples1 int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumSamples1 = attributes.readInto("numSamples1", mNumSamples1);
 
-  if ( mIsSetNumSamples1 == false)
+  if ( mIsSetNumSamples1 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1470,12 +1476,12 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   // numSamples2 int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumSamples2 = attributes.readInto("numSamples2", mNumSamples2);
 
-  if ( mIsSetNumSamples2 == false)
+  if ( mIsSetNumSamples2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1491,12 +1497,12 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   // numSamples3 int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumSamples3 = attributes.readInto("numSamples3", mNumSamples3);
 
-  if ( mIsSetNumSamples3 == false)
+  if ( mIsSetNumSamples3 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1526,7 +1532,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
       mInterpolationType =
         InterpolationKind_fromString(interpolationType.c_str());
 
-      if (InterpolationKind_isValid(mInterpolationType) == 0)
+      if (log && InterpolationKind_isValid(mInterpolationType) == 0)
       {
         std::string msg = "The interpolationType on the <SampledField> ";
 
@@ -1545,9 +1551,13 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'interpolationType' is missing.";
-    log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'interpolationType' is "
+        "missing.";
+      log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1567,7 +1577,7 @@ SampledField::readAttributes(const XMLAttributes& attributes,
     {
       mCompression = CompressionKind_fromString(compression.c_str());
 
-      if (CompressionKind_isValid(mCompression) == 0)
+      if (log && CompressionKind_isValid(mCompression) == 0)
       {
         std::string msg = "The compression on the <SampledField> ";
 
@@ -1586,21 +1596,24 @@ SampledField::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'compression' is missing.";
-    log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'compression' is missing.";
+      log->logPackageError("spatial", SpatialSampledFieldAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // samplesLength int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetSamplesLength = attributes.readInto("samplesLength", mSamplesLength);
 
-  if ( mIsSetSamplesLength == false)
+  if ( mIsSetSamplesLength == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

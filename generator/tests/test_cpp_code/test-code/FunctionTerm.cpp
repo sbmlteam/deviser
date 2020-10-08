@@ -776,12 +776,12 @@ FunctionTerm::readAttributes(const XMLAttributes& attributes,
   // resultLevel uint (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetResultLevel = attributes.readInto("resultLevel", mResultLevel);
 
-  if ( mIsSetResultLevel == false)
+  if ( mIsSetResultLevel == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

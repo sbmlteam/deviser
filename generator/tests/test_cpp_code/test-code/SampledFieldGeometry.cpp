@@ -1005,7 +1005,7 @@ SampledFieldGeometry::createObject(XMLInputStream& stream)
 
   if (name == "listOfSampledVolumes")
   {
-    if (mSampledVolumes.size() != 0)
+    if (getErrorLog() && mSampledVolumes.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialSampledFieldGeometryAllowedElements, getPackageVersion(),
@@ -1115,11 +1115,14 @@ SampledFieldGeometry::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'sampledField' is missing from the "
-      "<SampledFieldGeometry> element.";
-    log->logPackageError("spatial",
-      SpatialSampledFieldGeometryAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'sampledField' is missing from "
+        "the <SampledFieldGeometry> element.";
+      log->logPackageError("spatial",
+        SpatialSampledFieldGeometryAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 }
 

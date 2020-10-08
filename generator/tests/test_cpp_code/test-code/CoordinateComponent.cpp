@@ -1138,13 +1138,13 @@ CoordinateComponent::removeChildObject(const std::string& elementName,
 {
   if (elementName == "boundaryMin")
   {
-    Boundary * obj = getBoundaryMin();
-    if (unsetBoundaryMin() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Boundary * obj = mBoundaryMin;
+    mBoundaryMin = NULL; return obj;
   }
   else if (elementName == "boundaryMax")
   {
-    Boundary * obj = getBoundaryMax();
-    if (unsetBoundaryMax() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Boundary * obj = mBoundaryMax;
+    mBoundaryMax = NULL; return obj;
   }
 
   return NULL;
@@ -1341,7 +1341,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
 
   if (name == "boundaryMin")
   {
-    if (isSetBoundaryMin())
+    if (getErrorLog() && isSetBoundaryMin())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),
@@ -1355,7 +1355,7 @@ CoordinateComponent::createObject(XMLInputStream& stream)
   }
   else if (name == "boundaryMax")
   {
-    if (isSetBoundaryMax())
+    if (getErrorLog() && isSetBoundaryMax())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCoordinateComponentAllowedElements, getPackageVersion(),
@@ -1490,11 +1490,14 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<CoordinateComponent> element.";
-    log->logPackageError("spatial",
-      SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<CoordinateComponent> element.";
+      log->logPackageError("spatial",
+        SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1514,7 +1517,7 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
     {
       mType = CoordinateKind_fromString(type.c_str());
 
-      if (CoordinateKind_isValid(mType) == 0)
+      if (log && CoordinateKind_isValid(mType) == 0)
       {
         std::string msg = "The type on the <CoordinateComponent> ";
 
@@ -1533,10 +1536,13 @@ CoordinateComponent::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'type' is missing.";
-    log->logPackageError("spatial",
-      SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'type' is missing.";
+      log->logPackageError("spatial",
+        SpatialCoordinateComponentAllowedAttributes, pkgVersion, level, version,
+          message, getLine(), getColumn());
+    }
   }
 
   // 

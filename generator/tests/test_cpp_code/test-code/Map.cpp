@@ -1291,8 +1291,8 @@ Map::removeChildObject(const std::string& elementName, const std::string& id)
 {
   if (elementName == "bbox")
   {
-    BBox * obj = getBBox();
-    if (unsetBBox() == LIBSBML_OPERATION_SUCCESS) return obj;
+    BBox * obj = mBBox;
+    mBBox = NULL; return obj;
   }
   else if (elementName == "glyph")
   {
@@ -1468,7 +1468,7 @@ Map::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "bbox")
   {
-    if (isSetBBox())
+    if (getErrorLog() && isSetBBox())
     {
       getErrorLog()->logError(SbgnmlMapAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1592,7 +1592,7 @@ Map::readAttributes(
     {
       mLanguage = Language_fromString(language.c_str());
 
-      if (Language_isValid(mLanguage) == 0)
+      if (log && Language_isValid(mLanguage) == 0)
       {
         std::string msg = "The language on the <Map> ";
 
@@ -1610,9 +1610,12 @@ Map::readAttributes(
   }
   else
   {
-    std::string message = "Sbgnml attribute 'language' is missing.";
-    log->logError(SbgnmlMapAllowedAttributes, level, version, message,
-      getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sbgnml attribute 'language' is missing.";
+      log->logError(SbgnmlMapAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

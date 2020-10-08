@@ -1019,7 +1019,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
     {
       mNumber = Enum_fromString(number.c_str());
 
-      if (Enum_isValid(mNumber) == 0)
+      if (log && Enum_isValid(mNumber) == 0)
       {
         std::string msg = "The number on the <ClassThree> ";
 
@@ -1037,9 +1037,12 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'number' is missing.";
-    log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'number' is missing.";
+      log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1059,7 +1062,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
     {
       mName = Fred_fromString(name.c_str());
 
-      if (Fred_isValid(mName) == 0)
+      if (log && Fred_isValid(mName) == 0)
       {
         std::string msg = "The name on the <ClassThree> ";
 
@@ -1077,9 +1080,12 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Test attribute 'name' is missing.";
-    log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
-      level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Test attribute 'name' is missing.";
+      log->logPackageError("test", TestClassThreeAllowedAttributes, pkgVersion,
+        level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1099,7 +1105,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
     {
       mBadName = Fred_fromString(badName.c_str());
 
-      if (Fred_isValid(mBadName) == 0)
+      if (log && Fred_isValid(mBadName) == 0)
       {
         std::string msg = "The badName on the <ClassThree> ";
 
@@ -1133,7 +1139,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
     {
       mOtherNum = Enum_fromString(otherNum.c_str());
 
-      if (Enum_isValid(mOtherNum) == 0)
+      if (log && Enum_isValid(mOtherNum) == 0)
       {
         std::string msg = "The otherNum on the <ClassThree> ";
 
@@ -1167,7 +1173,7 @@ ClassThree::readAttributes(const XMLAttributes& attributes,
     {
       mLongEnum = ExtraLong_fromString(longEnum.c_str());
 
-      if (ExtraLong_isValid(mLongEnum) == 0)
+      if (log && ExtraLong_isValid(mLongEnum) == 0)
       {
         std::string msg = "The longEnum on the <ClassThree> ";
 

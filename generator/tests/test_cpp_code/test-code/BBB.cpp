@@ -909,7 +909,7 @@ BBB::createObject(XMLInputStream& stream)
 
   if (name == "listOfAnothers")
   {
-    if (mAnothers.size() != 0)
+    if (getErrorLog() && mAnothers.size() != 0)
     {
       getErrorLog()->logPackageError("vers", VersBBBAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1049,10 +1049,13 @@ BBB::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing from the <BBB> "
-      "element.";
-    log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
-      version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Vers attribute 'id' is missing from the <BBB> "
+        "element.";
+      log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
+        version, message, getLine(), getColumn());
+    }
   }
 }
 
@@ -1096,10 +1099,13 @@ BBB::readL3V1V2Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Vers attribute 'id' is missing from the <BBB> "
-      "element.";
-    log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
-      version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Vers attribute 'id' is missing from the <BBB> "
+        "element.";
+      log->logPackageError("vers", VersBBBAllowedAttributes, pkgVersion, level,
+        version, message, getLine(), getColumn());
+    }
   }
 }
 

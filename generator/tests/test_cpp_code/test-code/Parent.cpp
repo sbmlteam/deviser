@@ -981,7 +981,7 @@ Parent::createObject(XMLInputStream& stream)
 
   if (name == "listOfChildren")
   {
-    if (mChildren.size() != 0)
+    if (getErrorLog() && mChildren.size() != 0)
     {
       getErrorLog()->logPackageError("nasty", NastyParentAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -992,7 +992,7 @@ Parent::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfSprogs")
   {
-    if (mSprogs.size() != 0)
+    if (getErrorLog() && mSprogs.size() != 0)
     {
       getErrorLog()->logPackageError("nasty", NastyParentAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

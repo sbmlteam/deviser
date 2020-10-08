@@ -1824,12 +1824,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum = attributes.readInto("num", mNum);
 
-  if ( mIsSetNum == false)
+  if ( mIsSetNum == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1844,12 +1844,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num2 uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum2 = attributes.readInto("num2", mNum2);
 
-  if ( mIsSetNum2 == false)
+  if ( mIsSetNum2 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1864,12 +1864,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num3 int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum3 = attributes.readInto("num3", mNum3);
 
-  if ( mIsSetNum3 == false)
+  if ( mIsSetNum3 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1884,12 +1884,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // num1 double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNum1 = attributes.readInto("num1", mNum1);
 
-  if ( mIsSetNum1 == false)
+  if ( mIsSetNum1 == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1904,12 +1904,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // true bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetTrue = attributes.readInto("true", mTrue);
 
   if (mIsSetTrue == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1922,12 +1922,12 @@ MyTestClass::readAttributes(const XMLAttributes& attributes,
   // false bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetFalse = attributes.readInto("false", mFalse);
 
   if (mIsSetFalse == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

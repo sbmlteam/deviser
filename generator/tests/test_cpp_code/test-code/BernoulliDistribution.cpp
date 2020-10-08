@@ -720,8 +720,8 @@ BernoulliDistribution::removeChildObject(const std::string& elementName,
 {
   if (elementName == "prob")
   {
-    UncertValue * obj = getProb();
-    if (unsetProb() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mProb;
+    mProb = NULL; return obj;
   }
 
   return NULL;
@@ -878,7 +878,7 @@ BernoulliDistribution::createObject(XMLInputStream& stream)
 
   if (name == "prob")
   {
-    if (isSetProb())
+    if (getErrorLog() && isSetProb())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBernoulliDistributionAllowedElements, getPackageVersion(),

@@ -922,7 +922,7 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
     {
       mBindingStatus = BindingStatus_fromString(bindingStatus.c_str());
 
-      if (BindingStatus_isValid(mBindingStatus) == 0)
+      if (log && BindingStatus_isValid(mBindingStatus) == 0)
       {
         std::string msg = "The bindingStatus on the <OutwardBindingSite> ";
 
@@ -941,9 +941,12 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Multi attribute 'bindingStatus' is missing.";
-    log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Multi attribute 'bindingStatus' is missing.";
+      log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -974,10 +977,13 @@ OutwardBindingSite::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Multi attribute 'component' is missing from the "
-      "<OutwardBindingSite> element.";
-    log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Multi attribute 'component' is missing from the "
+        "<OutwardBindingSite> element.";
+      log->logPackageError("multi", MultiOutwardBindingSiteAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 }
 

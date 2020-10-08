@@ -705,11 +705,14 @@ ClassWithRequiredID::readL3V1V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Twoatonce attribute 'id' is missing from the "
-      "<ClassWithRequiredID> element.";
-    log->logPackageError("twoatonce",
-      TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Twoatonce attribute 'id' is missing from the "
+        "<ClassWithRequiredID> element.";
+      log->logPackageError("twoatonce",
+        TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level,
+          version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -767,11 +770,14 @@ ClassWithRequiredID::readL3V2V1Attributes(const XMLAttributes& attributes)
   }
   else
   {
-    std::string message = "Twoatonce attribute 'id' is missing from the "
-      "<ClassWithRequiredID> element.";
-    log->logPackageError("twoatonce",
-      TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level, version,
-        message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Twoatonce attribute 'id' is missing from the "
+        "<ClassWithRequiredID> element.";
+      log->logPackageError("twoatonce",
+        TwoatonceClassWithRequiredIDAllowedAttributes, pkgVersion, level,
+          version, message, getLine(), getColumn());
+    }
   }
 
   // 

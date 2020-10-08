@@ -781,8 +781,8 @@ ArrayChild::removeChildObject(const std::string& elementName,
 {
   if (elementName == "unit")
   {
-    Unit * obj = getUnit();
-    if (unsetUnit() == LIBSBML_OPERATION_SUCCESS) return obj;
+    Unit * obj = mUnit;
+    mUnit = NULL; return obj;
   }
 
   return NULL;
@@ -938,7 +938,7 @@ ArrayChild::createObject(XMLInputStream& stream)
 
   if (name == "unit")
   {
-    if (isSetUnit())
+    if (getErrorLog() && isSetUnit())
     {
       getErrorLog()->logPackageError("test", TestArrayChildAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

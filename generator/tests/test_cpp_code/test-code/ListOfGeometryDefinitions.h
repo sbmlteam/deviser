@@ -496,17 +496,6 @@ protected:
   /** @cond doxygenLibsbmlInternal */
 
   /**
-   * Writes the namespace for the Spatial package
-   */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
    * checks concrete types
    */
   virtual bool isValidTypeForList(SBase* item);

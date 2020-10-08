@@ -869,7 +869,7 @@ CategoricalDistribution::createObject(XMLInputStream& stream)
 
   if (name == "listOfCategories")
   {
-    if (mCategories.size() != 0)
+    if (getErrorLog() && mCategories.size() != 0)
     {
       getErrorLog()->logPackageError("distrib",
         DistribCategoricalDistributionAllowedElements, getPackageVersion(),

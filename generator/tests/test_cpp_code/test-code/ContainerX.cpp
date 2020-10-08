@@ -824,7 +824,7 @@ ContainerX::createObject(XMLInputStream& stream)
 
   if (name == "listOfFreds")
   {
-    if (mFreds.size() != 0)
+    if (getErrorLog() && mFreds.size() != 0)
     {
       getErrorLog()->logPackageError("x", XContainerXAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),

@@ -474,17 +474,6 @@ protected:
   /** @endcond */
 
 
-
-  /** @cond doxygenLibsbmlInternal */
-
-  /**
-   * Writes the namespace for the Test package
-   */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
-
-  /** @endcond */
-
-
 };
 
 

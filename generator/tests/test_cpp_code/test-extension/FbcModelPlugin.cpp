@@ -1466,7 +1466,7 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
   {
     if (name == "listOfObjectives")
     {
-      if (mObjectives.size() != 0)
+      if (getErrorLog() && mObjectives.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1481,7 +1481,7 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "listOfFluxBounds")
     {
-      if (mFluxBounds.size() != 0)
+      if (getErrorLog() && mFluxBounds.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1496,7 +1496,7 @@ FbcModelPlugin::createObject(XMLInputStream& stream)
     }
     else if (name == "listOfGeneProducts")
     {
-      if (mGeneProducts.size() != 0)
+      if (getErrorLog() && mGeneProducts.size() != 0)
       {
         getErrorLog()->logPackageError("fbc", FbcModelAllowedElements,
           getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1621,12 +1621,12 @@ FbcModelPlugin::readL3V1V2Attributes(const XMLAttributes& attributes)
   // strict bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetStrict = attributes.readInto("strict", mStrict);
 
   if (mIsSetStrict == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

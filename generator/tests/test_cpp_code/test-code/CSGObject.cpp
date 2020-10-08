@@ -1112,33 +1112,39 @@ CSGObject::removeChildObject(const std::string& elementName,
 {
   if (elementName == "csgPrimitive")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgTranslation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgRotation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgScale")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgHomogeneousTransformation")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
   else if (elementName == "csgSetOperator")
   {
-    CSGNode * obj = getCSGNode();
-    if (unsetCSGNode() == LIBSBML_OPERATION_SUCCESS) return obj;
+    CSGNode * obj = mCSGNode;
+    mCSGNode = NULL;
+    return obj;
   }
 
   return NULL;
@@ -1294,7 +1300,7 @@ CSGObject::createObject(XMLInputStream& stream)
 
   if (name == "csgPrimitive")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1307,7 +1313,7 @@ CSGObject::createObject(XMLInputStream& stream)
   }
   else if (name == "csgTranslation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1320,7 +1326,7 @@ CSGObject::createObject(XMLInputStream& stream)
   }
   else if (name == "csgRotation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1333,7 +1339,7 @@ CSGObject::createObject(XMLInputStream& stream)
   }
   else if (name == "csgScale")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1346,7 +1352,7 @@ CSGObject::createObject(XMLInputStream& stream)
   }
   else if (name == "csgHomogeneousTransformation")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1359,7 +1365,7 @@ CSGObject::createObject(XMLInputStream& stream)
   }
   else if (name == "csgSetOperator")
   {
-    if (isSetCSGNode())
+    if (getErrorLog() && isSetCSGNode())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialCSGObjectAllowedElements, getPackageVersion(), getLevel(),
@@ -1490,10 +1496,13 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<CSGObject> element.";
-    log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<CSGObject> element.";
+      log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1526,22 +1535,25 @@ CSGObject::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'domainType' is missing from the "
-      "<CSGObject> element.";
-    log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'domainType' is missing from the "
+        "<CSGObject> element.";
+      log->logPackageError("spatial", SpatialCSGObjectAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // ordinal int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOrdinal = attributes.readInto("ordinal", mOrdinal);
 
-  if ( mIsSetOrdinal == false)
+  if ( mIsSetOrdinal == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

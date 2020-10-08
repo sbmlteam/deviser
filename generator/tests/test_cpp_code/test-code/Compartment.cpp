@@ -1094,12 +1094,12 @@ Compartment::readAttributes(
   // size double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetSize = attributes.readInto("size", mSize);
 
-  if ( mIsSetSize == false)
+  if ( mIsSetSize == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1114,12 +1114,12 @@ Compartment::readAttributes(
   // volume double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetVolume = attributes.readInto("volume", mVolume);
 
-  if ( mIsSetVolume == false)
+  if ( mIsSetVolume == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1161,13 +1161,13 @@ Compartment::readAttributes(
   // spatialDimensions uint (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetSpatialDimensions = attributes.readInto("spatialDimensions",
     mSpatialDimensions);
 
-  if ( mIsSetSpatialDimensions == false)
+  if ( mIsSetSpatialDimensions == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1182,12 +1182,12 @@ Compartment::readAttributes(
   // constant bool (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetConstant = attributes.readInto("constant", mConstant);
 
   if (mIsSetConstant == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

@@ -895,8 +895,8 @@ ParametricGeometry::removeChildObject(const std::string& elementName,
 {
   if (elementName == "spatialPoints")
   {
-    SpatialPoints * obj = getSpatialPoints();
-    if (unsetSpatialPoints() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SpatialPoints * obj = mSpatialPoints;
+    mSpatialPoints = NULL; return obj;
   }
   else if (elementName == "parametricObject")
   {
@@ -1085,7 +1085,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
 
   if (name == "spatialPoints")
   {
-    if (isSetSpatialPoints())
+    if (getErrorLog() && isSetSpatialPoints())
     {
       getErrorLog()->logPackageError("spatial",
         SpatialParametricGeometryAllowedElements, getPackageVersion(),
@@ -1098,7 +1098,7 @@ ParametricGeometry::createObject(XMLInputStream& stream)
   }
   else if (name == "listOfParametricObjects")
   {
-    if (mParametricObjects.size() != 0)
+    if (getErrorLog() && mParametricObjects.size() != 0)
     {
       getErrorLog()->logPackageError("spatial",
         SpatialParametricGeometryAllowedElements, getPackageVersion(),

@@ -891,13 +891,13 @@ BinomialDistribution::removeChildObject(const std::string& elementName,
 {
   if (elementName == "numberOfTrials")
   {
-    UncertValue * obj = getNumberOfTrials();
-    if (unsetNumberOfTrials() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mNumberOfTrials;
+    mNumberOfTrials = NULL; return obj;
   }
   else if (elementName == "probabilityOfSuccess")
   {
-    UncertValue * obj = getProbabilityOfSuccess();
-    if (unsetProbabilityOfSuccess() == LIBSBML_OPERATION_SUCCESS) return obj;
+    UncertValue * obj = mProbabilityOfSuccess;
+    mProbabilityOfSuccess = NULL; return obj;
   }
 
   return NULL;
@@ -1094,7 +1094,7 @@ BinomialDistribution::createObject(XMLInputStream& stream)
 
   if (name == "numberOfTrials")
   {
-    if (isSetNumberOfTrials())
+    if (getErrorLog() && isSetNumberOfTrials())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBinomialDistributionAllowedElements, getPackageVersion(),
@@ -1108,7 +1108,7 @@ BinomialDistribution::createObject(XMLInputStream& stream)
   }
   else if (name == "probabilityOfSuccess")
   {
-    if (isSetProbabilityOfSuccess())
+    if (getErrorLog() && isSetProbabilityOfSuccess())
     {
       getErrorLog()->logPackageError("distrib",
         DistribBinomialDistributionAllowedElements, getPackageVersion(),

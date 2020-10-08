@@ -1051,10 +1051,13 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'id' is missing from the "
-      "<AnalyticVolume> element.";
-    log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'id' is missing from the "
+        "<AnalyticVolume> element.";
+      log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1074,7 +1077,7 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
     {
       mFunctionType = FunctionKind_fromString(functionType.c_str());
 
-      if (FunctionKind_isValid(mFunctionType) == 0)
+      if (log && FunctionKind_isValid(mFunctionType) == 0)
       {
         std::string msg = "The functionType on the <AnalyticVolume> ";
 
@@ -1093,21 +1096,24 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'functionType' is missing.";
-    log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'functionType' is missing.";
+      log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // ordinal int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOrdinal = attributes.readInto("ordinal", mOrdinal);
 
-  if ( mIsSetOrdinal == false)
+  if ( mIsSetOrdinal == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1149,10 +1155,13 @@ AnalyticVolume::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Spatial attribute 'domainType' is missing from the "
-      "<AnalyticVolume> element.";
-    log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Spatial attribute 'domainType' is missing from the "
+        "<AnalyticVolume> element.";
+      log->logPackageError("spatial", SpatialAnalyticVolumeAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 }
 

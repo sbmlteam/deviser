@@ -1004,13 +1004,13 @@ LineEnding::removeChildObject(const std::string& elementName,
 {
   if (elementName == "group")
   {
-    RenderGroup * obj = getGroup();
-    if (unsetGroup() == LIBSBML_OPERATION_SUCCESS) return obj;
+    RenderGroup * obj = mGroup;
+    mGroup = NULL; return obj;
   }
   else if (elementName == "boundingBox")
   {
-    BoundingBox * obj = getBoundingBox();
-    if (unsetBoundingBox() == LIBSBML_OPERATION_SUCCESS) return obj;
+    BoundingBox * obj = mBoundingBox;
+    mBoundingBox = NULL; return obj;
   }
 
   return NULL;
@@ -1208,7 +1208,7 @@ LineEnding::createObject(XMLInputStream& stream)
 
   if (name == "g")
   {
-    if (isSetGroup())
+    if (getErrorLog() && isSetGroup())
     {
       getErrorLog()->logPackageError("render", RenderLineEndingAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1222,7 +1222,7 @@ LineEnding::createObject(XMLInputStream& stream)
   }
   else if (name == "boundingBox")
   {
-    if (isSetBoundingBox())
+    if (getErrorLog() && isSetBoundingBox())
     {
       getErrorLog()->logPackageError("render", RenderLineEndingAllowedElements,
         getPackageVersion(), getLevel(), getVersion(), "", getLine(),
@@ -1353,23 +1353,26 @@ LineEnding::readAttributes(const XMLAttributes& attributes,
   }
   else
   {
-    std::string message = "Render attribute 'id' is missing from the "
-      "<LineEnding> element.";
-    log->logPackageError("render", RenderLineEndingAllowedAttributes,
-      pkgVersion, level, version, message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Render attribute 'id' is missing from the "
+        "<LineEnding> element.";
+      log->logPackageError("render", RenderLineEndingAllowedAttributes,
+        pkgVersion, level, version, message, getLine(), getColumn());
+    }
   }
 
   // 
   // enableRotationalMapping bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetEnableRotationalMapping =
     attributes.readInto("enableRotationalMapping", mEnableRotationalMapping);
 
   if (mIsSetEnableRotationalMapping == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

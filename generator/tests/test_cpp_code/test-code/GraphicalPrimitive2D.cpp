@@ -803,7 +803,7 @@ GraphicalPrimitive2D::readAttributes(const XMLAttributes& attributes,
     {
       mFillRule = FillRule_fromString(fillRule.c_str());
 
-      if (FillRule_isValid(mFillRule) == 0)
+      if (log && FillRule_isValid(mFillRule) == 0)
       {
         std::string msg = "The fill-rule on the <GraphicalPrimitive2D> ";
 
