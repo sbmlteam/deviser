@@ -68,7 +68,7 @@ def main():
     fail += run_deviser_test('non-existent', '-g',
                              global_variables.
                              return_codes['failed to read file'])
-gitkraken    fail += run_deviser_test('test_child', '-g',
+    fail += run_deviser_test('test_child', '-g',
                              global_variables.
                              return_codes['success'])
     fail += run_deviser_test('test_child', 'missing',
