@@ -176,9 +176,9 @@ provided and then we work through several examples.
 What is a class ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In SBML XML elements are used to capture the information relating to
+In SBML, XML elements are used to capture the information relating to
 particular objects by means of attributes to specify characteristics of
-the element and where necessary child elements to provide further
+the element and, where necessary, child elements to provide further
 information. SBML generally uses an enclosing listOf element to group
 elements of the same type together. The names of attributes and elements
 are chosen to be intuitive and libSBML mimics these names and structure
@@ -189,7 +189,7 @@ represented as a class object.
 
 .. _SBML-snippet-reaction:
 
-   SBML snippet 1: A SBML Level 3 Core ListOfReactions element.
+   SBML snippet 1: A SBML Level 3 Core ``listOfReactions`` element.
 
 
 .. code-block:: XML
