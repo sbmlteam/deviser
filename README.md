@@ -86,9 +86,9 @@ The source archives contain the Deviser code that can be used via the command li
 
 Not all of the following are necessary as what is necessary depends on which operating system is being used and which Deviser functionality is required. These links are given as a quick reference.
 
-* [libSBML source code](https://sourceforge.net/projects/sbml/files/libsbml/5.16.0/stable/libSBML-5.16.0-core-src.tar.gz/download) 
+* [libSBML source code](https://github.com/sbmlteam/libsbml 
 * [libSBML dependency libraries for Windows users](https://github.com/sbmlteam/libSBML-dependencies)
-* [SBML package specification template files](https://sourceforge.net/projects/sbml/files/specifications/tex/sbmlpkgspec-1.6.0.tar.gz/download)
+* [SBML package specification template files](https://github.com/sbmlteam/sbmlpkgspec)
 
 
 ## Acknowledgments ##
