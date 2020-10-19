@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# @file    createPackageFromXml.py
+# @file    ParseXML.py
 # @brief   function to take the output from Deviser Edit and create
 #             the expected dictionaries
 # @author  Frank Bergmann

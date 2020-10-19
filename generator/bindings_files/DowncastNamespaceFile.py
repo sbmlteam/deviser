@@ -54,12 +54,10 @@ class DowncastNamespaceFile():
 
         if binding == 'csharp' or binding == 'java':
             self.fileout = BaseInterfaceFile.BaseInterfaceFile(name)
-            self.fileout.brief_description = 'Casting to most specific ' \
-                                             'namespace object for ' \
-                                             '{0}'.format(binding)
         else:
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
-            self.fileout.brief_description = 'Casting to most specific ' \
+
+        self.fileout.brief_description = 'Casting to most specific ' \
                                              'namespace object for ' \
                                              '{0}'.format(binding)
 
