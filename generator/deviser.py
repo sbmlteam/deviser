@@ -68,7 +68,7 @@ def generateLaTeXFor(filename):
 def main(args):
     """Usage: deviser  [--generate | --latex ] input-filename
        This program will use a Deviser xml file, and generate either a C++
-       libSBML extionsion for it, or generate a LaTeX scaffold for its
+       libSBML extension for it, or generate a LaTeX scaffold for its
        specification.
     """
 

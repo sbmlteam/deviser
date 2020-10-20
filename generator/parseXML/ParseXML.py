@@ -58,7 +58,7 @@ class ParseXML():
 
         if global_variables.code_returned == \
                 global_variables.return_codes['success']:
-            self.dom = parse(filename)
+            self.dom = parse(filename)  # A Document Object Model instance.
 
         self.temp_dir = os.path.dirname(filename)
         self.abs_dir = os.path.abspath(filename)
@@ -247,8 +247,17 @@ class ParseXML():
         return typecode
 
     def analyse_enumname(self, enum_name):
+        """
+        Pulls out "parts" of the name of an <enum> node, depending on
+        whether an upper-case letter is found in the name or not.
+
+        TODO: why?
+
+        :param enum_name: The name of the <enum> node. e.g. "BoundaryKind"
+        :return: returns "parts" of name, e.g. cname="BOUNDARY" and tname="KIND"
+        """
         break_found = False
-        for i in range(1,len(enum_name)):
+        for i in range(1, len(enum_name)):
             if enum_name[i].isupper():
                 break_found = True
                 break
@@ -734,22 +743,26 @@ class ParseXML():
 
     def parse_deviser_xml(self):
         """
-        Parses the given filename and returns a dictionary with
+        Parses the given filename (e.g. dyn.xml) and returns a dictionary with
         the definition contained in it
+
+        Example of <package> node:
+        <package name="dyn" fullname="Dynamic Processes" number="400"
+         offset="9000000" version="1" required="true">
+
+        Some names, e.g. "additionalDecls", can occur in more than one type of node,
+        e.g. in <plugin> and <element> nodes (at least) in this case.
+
         """
-
-        enums = []
-
-        temp = self.get_value(self.dom.documentElement, 'name')
+        temp = self.get_value(self.dom.documentElement, 'name')  # e.g. "dyn"
         # we expect this to be lower case
         self.package_name = temp.lower()
         number = self.get_int_value(self, self.dom.documentElement, 'number')
         offset = self.get_int_value(self, self.dom.documentElement, 'offset')
-        fname = self.get_value(self.dom.documentElement, 'fullname')
-        fullname = fname
-        if fname.endswith('.'):
-            l = len(fname)
-            fullname = fname[0:l-1]
+        fullname = self.get_value(self.dom.documentElement, 'fullname')
+        if fullname.endswith('.'):
+            l = len(fullname)
+            fullname = fullname[0:l-1]  # Remove trailing '.'
         required = self.get_bool_value(self, self.dom.documentElement, 
                                        'required')
         custom_copyright = self.get_add_code_value(self,
@@ -785,7 +798,8 @@ class ParseXML():
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
         self.version_count = 0
 
-        lv_info = []
+        # Iterate over pkgVersion nodes:
+        lv_info = []  # List of dictionaries, one dict per <pkgVersion> node.
         for node in self.dom.getElementsByTagName('pkgVersion'):
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
@@ -793,8 +807,11 @@ class ParseXML():
             self.get_elements_for_version(node)
             self.get_plugins_for_version(node)
             lv_info.append(dict({'core_level': sbml_level, 'core_version': sbml_version, 'pkg_version': pkg_version}))
-            self.version_count = self.version_count+1
+            self.version_count = self.version_count + 1
 
+        # Now iterate over <enum> nodes (if any).
+        # Each one may have multiple <enumValue> nodes.
+        enums = []
         names_listed = []
         for node in self.dom.getElementsByTagName('enum'):
             values = []
@@ -809,7 +826,6 @@ class ParseXML():
                 invalid_value = 'invalid {0} value'.format(enum_name)
                 values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname, invalid=True),
                                     'value': invalid_value}))
-
 
                 enums.append(dict({'name': enum_name, 'values': values}))
                 names_listed.append(enum_name)

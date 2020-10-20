@@ -52,6 +52,16 @@ directories = []
 
 
 def generate_code_for(filename, overwrite=True):
+    """
+    Main 'workhorse' function that creates a libSBML extension (??)
+    for the given filename
+
+    :param filename: name of file to parse, e.g. samples/dyn.xml
+    :param overwrite: blah
+    :return: returns nothing
+    """
+
+    # Attempt to parse the XML file:
     global_variables.running_tests = False
     parser = ParseXML.ParseXML(filename)
     ob = []
@@ -432,6 +442,8 @@ def check_directory_structure():
 
 
 def create_dir(name, skip_existing):
+    """ skip_existing seems to be a synonym for `overwrite` parameter, used
+     in function create_dir_structure(). I don't think it is being used properly here."""
     if os.path.exists(name):
         if skip_existing:
             done = True
