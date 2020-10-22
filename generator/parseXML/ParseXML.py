@@ -79,6 +79,7 @@ class ParseXML():
         if v is None:
             return False
         return v.lower() in ("yes", "true", "1")
+        # TODO what is returned if v.lower() is "false"?
 
     @staticmethod
     def to_int(v):
@@ -164,7 +165,7 @@ class ParseXML():
     def get_element_class_name(self, node):
         class_name = None
         temp = self.get_value(node, 'name')
-        # expect camelcase with upper first
+        # Expect CamelCase with upper first
         if temp is not None:
             class_name = strFunctions.upper_first(temp)
         return class_name
@@ -173,7 +174,7 @@ class ParseXML():
     def get_enum_name(self, node):
         enum_name = ''
         temp = self.get_value(node, 'name')
-        # expect camelcase with upper first
+        # Expect CamelCase with upper first
         if temp is not None:
             last = len(temp)
             # strip _t if it is there; since we add it later
@@ -184,16 +185,28 @@ class ParseXML():
 
     @staticmethod
     def get_mapping(self, node):
+        '''
+        Used to get information from a <mapping> node
+
+        :param node: the <mapping> node to interrogate
+        :return: returns [name, package] tuple
+        '''
         name = ''
-        package = ''
+        package = ''  # TODO Maybe better as None?
+
+        # Example values for `name`:
+        # "Transition", "QualitativeSpecies"
         temp = self.get_value(node, 'name')
-        # expect camelcase with upper first
+        # expect CamelCase with upper first
         if temp is not None:
             name = strFunctions.upper_first(temp)
+
+        # Example for `package`: "qual"
         temp = self.get_value(node, 'package')
-        # expect lower first
+        # Expect lower-case first letter:
         if temp is not None:
             package = strFunctions.lower_first(temp)
+
         return [name, package]
 
 
@@ -201,7 +214,7 @@ class ParseXML():
     def get_loclass_name_value(self, node, name):
         xml_loclass_name = ''
         temp = self.get_value(node, name)
-        # we expect this to be camel case starting with lower
+        # we expect this to be CamelCase starting with lower
         if temp is not None:
             xml_loclass_name = strFunctions.upper_first(temp)
         return xml_loclass_name
@@ -304,6 +317,7 @@ class ParseXML():
     # Functions for standardizing types/name etc
 
     def standardize_types(self, attrib_type):
+        # TODO A dictionary would work well here
         name = attrib_type.lower()
         if name == 'boolean' or name == 'bool':
             return 'bool'
@@ -363,16 +377,30 @@ class ParseXML():
 
     @staticmethod
     def get_attribute_description(self, node, version_count):
+        """
+        Extract information from an <attribute> node.
+
+        :param node: the <attribute> node to query
+        :param version_count: number of <pkgVersion> nodes
+        :return: dictionary of info about the node
+
+        Example of an <attribute> node:
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+        """
         version_info = []
         for i in range(0, self.num_versions):
             version_info.append(False)
         version_info[version_count] = True
+
         attr_name = self.get_value(node, 'name')
         if not attr_name:
             self.report_error(global_variables
                               .return_codes['missing required information'],
                               'An attribute must have a Name')
+
         required = self.get_bool_value(self, node, 'required')
+
         attr_type = self.get_type_value(self, node)
         if not attr_type:
             self.report_error(global_variables
@@ -381,10 +409,9 @@ class ParseXML():
         attr_abstract = self.get_bool_value(self, node, 'abstract')
         attr_element = self.get_element_value(self, node)
 
-        # if the type if lo_element we actually want the name to be
-        # just that of the element
+        # If the type is lo_element we actually want the name to be
+        # just that of the element.
         if attr_type == 'lo_element':
-
             if attr_name.startswith('listOf') or attr_name.startswith('ListOf'):
                 attr_name = strFunctions.lower_first(attr_element)
             elif attr_name.endswith('s'):
@@ -660,6 +687,22 @@ class ParseXML():
                      'prefix': prefix})
 
     def read_language_element(self, node):
+        """
+        Interrogates a <language> node and updates global_variables
+
+        :param node: the <language> node
+        :return: returns nothing
+
+        Example of a <language> node starting element:
+        <language name="SBGN" baseClass="SbgnBase" documentClass="SbgnDocument"
+         prefix="Sbgn" libraryName="libSBGN"
+         annotationElementName="Extension" topLevelElementName="Extension"
+         isPackage="false" uses_ASTNode="true" uses_XMLNode="true">
+
+        The <language> node can also contain nodes of at least the following
+        types: <library_version>, <language_version> and <dependencies>.
+        These are also interrogated in this function.
+        """
         language = self.get_value(node, 'name')
         base_class = self.get_value(node, 'baseClass')
         document_class = self.get_value(node, 'documentClass')
@@ -671,26 +714,38 @@ class ParseXML():
         uses_XMLNode = self.get_bool_value(self, node, 'uses_XMLNode')
         top_level_element = self.get_value(node, 'topLevelElementName')
 
-
         if node.getAttributeNode('isPackage'):
             is_package = self.get_bool_value(self, node, 'isPackage')
         else:
             is_package = True
 
+        # Get the NodeList of <language_version> nodes, if any:
         versions = node.getElementsByTagName('language_versions')
         specification = []
+        # A <language_versions> node can contain multiple <version> nodes.
+        # If the NodeList of <language_version> nodes has at least one entry,
+        # we get the first one and then iterate over the <version> node(s)
+        # it has, if any:
         if versions:
             for version in versions[0].getElementsByTagName('version'):
                 specification.append(self.get_version_information(version))
 
+        # Example <dependencies> node:
+        # <dependencies>
+        #   <dependency library_name="libnuml" prefix="NUML"/>
+        # </dependencies>
         dependencies = node.getElementsByTagName('dependencies')
         dependency = []
         if dependencies:
             for depend in dependencies[0].getElementsByTagName('dependency'):
                 dependency.append(self.get_dependency_information(depend))
 
+        # Example of a <library_version> node:
+        # <library_version major="2" minor="0" revision="0"/>
         library = node.getElementsByTagName('library_version')
         if library:
+            # TODO can we guarantee these 3 values are always present in
+            # a <library_version> node?
             major = self.get_int_value(self, library[0], 'major')
             minor = self.get_int_value(self, library[0], 'minor')
             rev = self.get_int_value(self, library[0], 'revision')
@@ -753,9 +808,11 @@ class ParseXML():
         Some names, e.g. "additionalDecls", can occur in more than one type of node,
         e.g. in <plugin> and <element> nodes (at least) in this case.
 
+        :return: the `package` dictionary structure
+
         """
         temp = self.get_value(self.dom.documentElement, 'name')  # e.g. "dyn"
-        # we expect this to be lower case
+        # we expect this to be lower case:
         self.package_name = temp.lower()
         number = self.get_int_value(self, self.dom.documentElement, 'number')
         offset = self.get_int_value(self, self.dom.documentElement, 'offset')
@@ -792,6 +849,7 @@ class ParseXML():
         global_variables.add_additional_declaration(add_declarations)
 
         # get package information
+        # TODO Should these numbers be hardcoded here? Maybe better in their own file?
         sbml_level = 3
         sbml_version = 1
         pkg_version = 1
@@ -819,6 +877,8 @@ class ParseXML():
             [cname, tname] = self.analyse_enumname(enum_name)
 
             if enum_name not in names_listed:
+                # Example enumValue data:
+                # name="SPATIAL_GEOMETRYKIND_CARTESIAN", value="cartesian"
                 for val in node.getElementsByTagName('enumValue'):
                     values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname),
                                         'value': self.get_value(val, 'value')}))
