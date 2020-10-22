@@ -57,7 +57,7 @@ def generate_code_for(filename, overwrite=True):
     for the given filename
 
     :param filename: name of file to parse, e.g. samples/dyn.xml
-    :param overwrite: blah
+    :param overwrite: currently an issue (#12)
     :return: returns nothing
     """
 
