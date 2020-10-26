@@ -110,7 +110,7 @@ class ParseXML():
             if len(parts) > 2:
                 return tempname
             else:
-                # we dont have a classic X_Y_Z name which we want
+                # we don't have a classic X_Y_Z name which we want
                 if tempname.startswith(classname + '_' + typename):
                     return tempname
                 elif tempname.startswith(typename):
@@ -187,6 +187,8 @@ class ParseXML():
     def get_mapping(self, node):
         '''
         Used to get information from a <mapping> node
+        e.g.
+        <mapping name="DimensionDescription" package="numl"/>
 
         :param node: the <mapping> node to interrogate
         :return: returns [name, package] tuple
@@ -214,7 +216,7 @@ class ParseXML():
     def get_loclass_name_value(self, node, name):
         xml_loclass_name = ''
         temp = self.get_value(node, name)
-        # we expect this to be CamelCase starting with lower
+        # we expect this to be camelCase starting with lower
         if temp is not None:
             xml_loclass_name = strFunctions.upper_first(temp)
         return xml_loclass_name
