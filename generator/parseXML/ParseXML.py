@@ -79,7 +79,7 @@ class ParseXML():
         if v is None:
             return False
         return v.lower() in ("yes", "true", "1")
-        # TODO what is returned if v.lower() is "false"?
+        # See issue #15.
 
     @staticmethod
     def to_int(v):
@@ -218,7 +218,7 @@ class ParseXML():
         temp = self.get_value(node, name)
         # we expect this to be camelCase starting with lower
         if temp is not None:
-            xml_loclass_name = strFunctions.upper_first(temp)
+            xml_loclass_name = strFunctions.upper_first(temp)  # See issue 16
         return xml_loclass_name
 
     @staticmethod
@@ -319,31 +319,22 @@ class ParseXML():
     # Functions for standardizing types/name etc
 
     def standardize_types(self, attrib_type):
-        # TODO A dictionary would work well here
         name = attrib_type.lower()
-        if name == 'boolean' or name == 'bool':
-            return 'bool'
-        elif self.matches_unsigned_int(name):
+        if self.matches_unsigned_int(name):
             return 'uint'
-        elif name == 'integer' or name == 'int':
-            return 'int'
-        elif name == 'sidref':
-            return 'SIdRef'
-        elif name == 'unitsidref':
-            return 'UnitSIdRef'
-        elif name == 'sid':
-            return 'SId'
-        elif name == 'unitsid':
-            return 'UnitSId'
-        elif name == 'idref':
-            return 'IDREF'
-        elif name == 'id':
-            return 'ID'
-        elif name == 'uint' or name == 'string' or name == 'double' \
-                or name == 'enum' or name == 'element' or name == 'lo_element':
-            return name
         else:
-            return attrib_type
+            mytypes = dict({'boolean': 'bool', 'bool': 'bool',
+                'integer': 'int', 'int': 'int', 'sidref': 'SIdRef',
+                'unitsidref': 'UnitSIdRef', 'sid': 'SId', 'unitsid': 'UnitSId',
+                'idref': 'IDREF', 'id': 'ID',
+                'uint': 'uint', 'string': 'string', 'double': 'double',
+                'enum': 'enum', 'element': 'element', 'lo_element': 'lo_element',
+            })
+            if name in mytypes:
+                return mytypes[name]
+            else:
+                return attrib_type
+
 
     @staticmethod
     def matches_unsigned_int(name):
@@ -850,8 +841,7 @@ class ParseXML():
         global_variables.add_additional_implementation(add_implementation)
         global_variables.add_additional_declaration(add_declarations)
 
-        # get package information
-        # TODO Should these numbers be hardcoded here? Maybe better in their own file?
+        # get package information - see issue 17
         sbml_level = 3
         sbml_version = 1
         pkg_version = 1
