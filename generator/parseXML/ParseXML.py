@@ -37,6 +37,33 @@
 # or promote products derived from this software without specific prior
 # written permission.
 # ------------------------------------------------------------------------ -->
+#
+# A note on XML terminology
+# =========================
+# XML Node example from https://www.w3schools.com/xml/xml_attributes.asp:
+#
+# <person gender="female">
+#   <firstname>Anna</firstname>
+#   <lastname>Smith</lastname>
+# </person>
+#
+# person is an element.
+# Here, gender is an attribute (aka "attribute node").
+# <firstname> is an element (aka "element node")
+#
+# Helpful info on https://www.w3schools.com/xml/dom_nodes.asp: (q.v. for examples)
+#
+# According to the XML DOM, *everything* in an XML document is a node:
+# The entire document is a document node
+# Every XML element is an element node
+# The text in the XML elements are text nodes
+# Every attribute is an attribute node
+# Comments are comment nodes
+#
+# A common error in DOM processing is to expect an element node to contain text.
+# However, the text of an element node is stored in a text node.
+# In this example: <year>2005</year>, the element node <year> holds a text node with the value "2005".
+# "2005" is not the value of the <year> element!
 
 from xml.dom.minidom import *
 import os.path
@@ -76,10 +103,19 @@ class ParseXML():
 
     @staticmethod
     def to_bool(v):
+        '''
+        Get boolean value of a node's value string
+
+        :param v: the string value
+        :returns: True if v has the value "yes", "true", or "1". Else False
+
+        i.e.
+        In  : [ to_bool(x) for x in ['false', 'true', '0', '1', None, 'yes', 'no']]
+        Out : [False, True, False, True, False, True, False]
+        '''
         if v is None:
             return False
         return v.lower() in ("yes", "true", "1")
-        # See issue #15.
 
     @staticmethod
     def to_int(v):
@@ -93,6 +129,15 @@ class ParseXML():
 
     @staticmethod
     def get_value(node, name):
+        '''
+        Extract a value from an attribute node
+        e.g. Given the node <person gender="female">,
+        the attribute node is "gender" and its value is "female"
+
+        :param node: the
+        :param name:
+        :return: returns the value
+        '''
         temp = node.getAttributeNode(name)
         if temp is None:
             return None
