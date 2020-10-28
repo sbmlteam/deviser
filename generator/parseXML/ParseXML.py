@@ -47,7 +47,7 @@
 #   <lastname>Smith</lastname>
 # </person>
 #
-# person is an element.
+# <person> is an element.
 # Here, gender is an attribute (aka "attribute node").
 # <firstname> is an element (aka "element node")
 #
@@ -77,7 +77,12 @@ class ParseXML():
     """Class for all Cpp Header files"""
 
     def __init__(self, filename):
+        '''
+        ParseXML constructor. Check XML file exists and parse it.
+        Initialise instance variables.
 
+        :param filename: The (path to the) XML file to parse
+        '''
         if not os.path.isfile(filename):
             global_variables.code_returned = \
                 global_variables.return_codes['failed to read file']
@@ -85,7 +90,7 @@ class ParseXML():
 
         if global_variables.code_returned == \
                 global_variables.return_codes['success']:
-            self.dom = parse(filename)  # A Document Object Model instance.
+            self.dom = parse(filename)  # A Document Object Model (i.e. a Document) instance.
 
         self.temp_dir = os.path.dirname(filename)
         self.abs_dir = os.path.abspath(filename)
@@ -107,11 +112,13 @@ class ParseXML():
         Get boolean value of a node's value string
 
         :param v: the string value
-        :returns: True if v has the value "yes", "true", or "1". Else False
+        :returns: True if v exists and v.lower() has the value
+                  "yes", "true", or "1".
+                  Else False.
 
         i.e.
-        In  : [ to_bool(x) for x in ['false', 'true', '0', '1', None, 'yes', 'no']]
-        Out : [False, True, False, True, False, True, False]
+        In  : [to_bool(x) for x in ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
+        Out : [False, True, False, True, False, True, False, True]
         '''
         if v is None:
             return False
@@ -119,6 +126,17 @@ class ParseXML():
 
     @staticmethod
     def to_int(v):
+        '''
+        Convert a value string to an int
+
+        :param v: the string value to convert to an int, e.g. "2.6"
+        :return: returns an int (0 if v is None), e.g. 2
+
+        Just using int(v) doesn't work.
+
+        TODO: Is float(v) ever likely to not be an int?
+        If so, do we want to always round it down as is done here?
+        '''
         if v is None:
             return 0
         return int(float(v))
@@ -134,9 +152,9 @@ class ParseXML():
         e.g. Given the node <person gender="female">,
         the attribute node is "gender" and its value is "female"
 
-        :param node: the
-        :param name:
-        :return: returns the value
+        :param node: the node, e.g. <person> in this example
+        :param name: the name of the attribute node whose value we want, e.g. "gender"
+        :return: returns the value (e.g. "female" in this example)
         '''
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -208,6 +226,17 @@ class ParseXML():
 
     @staticmethod
     def get_element_class_name(self, node):
+        '''
+        Get the name of the class from an <element> node
+
+        :param node: the <element> node
+        :return: returns the name, if present, ensuring it starts in upper-case.
+                 Else returns `None`.
+
+        e.g. Given a node like:
+        <element name="Geometry" typeCode="SBML_SPATIAL_GEOMETRY" ...>
+        get the value of the `name` attribute ("Geometry" in this example).
+        '''
         class_name = None
         temp = self.get_value(node, 'name')
         # Expect CamelCase with upper first
@@ -268,9 +297,17 @@ class ParseXML():
 
     @staticmethod
     def get_add_code_value(self, node, name):
+        '''
+        Gets the value of a filename; the file contains code.
+
+        :param node: element node to process
+        :param name: the name of the attribute whose value we want.
+                     Example name = "additionalDecls"
+        :return: the filename (e.g. "spatial_geometry.h.txt")
+        '''
         add_code = self.get_value(node, name)
         if add_code is not None:
-            # do we have the full path or not
+            # Do we have the full path or not?
             if not os.path.exists(add_code):
                 temp = self.temp_dir + '//' + add_code
                 if os.path.exists(temp):
@@ -479,6 +516,23 @@ class ParseXML():
 
     @staticmethod
     def get_element_description(self, node, version_count):
+        '''
+
+
+        :param node: the <element> node
+        :param version_count: the number of package versions
+           (Strictly, the number of <pkgVersion> nodes in the
+           XML file we parse.)
+        :return:
+        '''
+
+        # Example <element> node:
+        #
+        # <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
+        # hasListOf="true" hasChildren="false" hasMath="false"
+        # childrenOverwriteElementName="false" minNumListOfChildren="0"
+        # maxNumListOfChildren="0" abstract="false">
+        #
         element_name = self.get_element_class_name(self, node)
         if not element_name:
             self.report_error(global_variables
@@ -647,10 +701,27 @@ class ParseXML():
             return plugin_dict
 
     def get_elements_for_version(self, pkg_node):
-#        version_count = self.get_int_value(self, pkg_node, 'version_count')
+        '''
+        Iterate over <element> nodes nested within a <pkgVersion> node.
+        Extract information from these. Use it to update the ParseXML
+        object's `concrete_dict` dictionary and `sbml_elements`
+        list (of dictionaries).
+
+        :param pkg_node: The <pkgVersion> node
+
+        '''
+
+        # version_count = self.get_int_value(self, pkg_node, 'version_count')
 
         # read concrete versions of abstract classes and fill dictionary
         for node in pkg_node.getElementsByTagName('element'):
+            # Example <element> node:
+            #
+            # <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
+            #    hasListOf="true" hasChildren="false" hasMath="false"
+            #    childrenOverwriteElementName="false" minNumListOfChildren="0"
+            #    maxNumListOfChildren="0" abstract="false">
+            #
             element_name = self.get_value(node, 'name')
             is_abstract = self.get_bool_value(self, node, 'abstract')
             if is_abstract:
@@ -836,8 +907,14 @@ class ParseXML():
 
     def parse_deviser_xml(self):
         """
-        Parses the given filename (e.g. dyn.xml) and returns a dictionary with
-        the definition contained in it
+        Parses the filename given in __init__ (e.g. "dyn.xml") and returns a
+        big dictionary with the definition contained in it.
+
+        :return: the big `package` dictionary structure
+
+        The dom.documentElement is the main property of the document object,
+        i.e. the top-level (enclosing) node. In our case, this is the
+        <package> node.
 
         Example of <package> node:
         <package name="dyn" fullname="Dynamic Processes" number="400"
@@ -845,8 +922,6 @@ class ParseXML():
 
         Some names, e.g. "additionalDecls", can occur in more than one type of node,
         e.g. in <plugin> and <element> nodes (at least) in this case.
-
-        :return: the `package` dictionary structure
 
         """
         temp = self.get_value(self.dom.documentElement, 'name')  # e.g. "dyn"
@@ -872,6 +947,8 @@ class ParseXML():
 
         # setup global variables
         languages = self.dom.getElementsByTagName('language')
+        # Example of a <language> element node:
+        # <language name="SedML" baseClass="SedBase" ... >
         if len(languages) > 0: 
             # read the first element
             node = languages[0]
@@ -893,12 +970,19 @@ class ParseXML():
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
         self.version_count = 0
 
-        # Iterate over pkgVersion nodes:
+        # Iterate over pkgVersion nodes.
         lv_info = []  # List of dictionaries, one dict per <pkgVersion> node.
+        # Example <pkgVersion> node:
+        # <pkgVersion level="3" version="1" pkg_version="1">
+        #     <elements...>
+        #     <plugins...>
+        # </pkgVersion>
         for node in self.dom.getElementsByTagName('pkgVersion'):
             sbml_level = self.get_int_value(self, node, 'level')
             sbml_version = self.get_int_value(self, node, 'version')
             pkg_version = self.get_int_value(self, node, 'pkg_version')
+            # <elements> and <plugins> are nodes nested within the
+            # <pkgVersion> node
             self.get_elements_for_version(node)
             self.get_plugins_for_version(node)
             lv_info.append(dict({'core_level': sbml_level, 'core_version': sbml_version, 'pkg_version': pkg_version}))
@@ -914,8 +998,8 @@ class ParseXML():
             [cname, tname] = self.analyse_enumname(enum_name)
 
             if enum_name not in names_listed:
-                # Example enumValue data:
-                # name="SPATIAL_GEOMETRYKIND_CARTESIAN", value="cartesian"
+                # Example enumValue element node, val:
+                # <enumValue name="SPATIAL_GEOMETRYKIND_CARTESIAN" value="cartesian"/>
                 for val in node.getElementsByTagName('enumValue'):
                     values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname),
                                         'value': self.get_value(val, 'value')}))
