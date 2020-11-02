@@ -3,7 +3,7 @@ Background
 ===============
 
 The Systems Biology Markup Language (SBML) provides a *lingua franca* for 
-respresenting computational models in a machine readable format.  This faciliates
+representing computational models in a machine readable format.  This facilitates
 both the exchange of models between different software platforms and the re-use 
 of these models for subsequent research.
 

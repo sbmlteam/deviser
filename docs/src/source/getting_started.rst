@@ -40,7 +40,7 @@ Using command line
 ~~~~~~~~~~~~~~~~~~
 
 A command line interface is available to produce code files and LaTeX files.
-This invokes the deviser.py function that is available in the *deviser\generator* 
+This invokes the deviser.py function that is available in the *deviser/generator* 
 directory of the Deviser distribution.
 
 
@@ -51,7 +51,7 @@ This is invoked as::
 This program takes as input a Deviser XML file and either
 
 - generates libSBML code for the package,
-  when the comman-line argument is ``--generate`` or ``-g``
+  when the command-line argument is ``--generate`` or ``-g``
 - generates the LaTeX files for the package specification,
   when the command-line argument is ``--latex`` or ``-l``
 
@@ -129,7 +129,7 @@ UML diagrams
 
 Deviser allows you to create and view very basic UML diagrams based on
 the classes specified. Since it uses the free yUML (http://yuml.me/) web
-service, you will be necessary to be connected to the internet to
+service, it will be necessary to be connected to the internet to
 create UML diagrams. The Deviser Edit tool requires the OpenSSL library 
 (https://www.openssl.org/) to access yUML.
 
@@ -176,7 +176,7 @@ tell the Deviser Edit tool where it will find things on your system.
 You can also configure the Edit tool to set some other preferences.
 For example, data types not fully supported by Deviser can still be used as types for 
 attributes by adding them via the Deviser Edit tool.
-Also, deviser Edit highlights required fields, and the settings provide the option to 
+Also, Deviser Edit highlights required fields, and the settings provide the option to 
 customize the color used for this highlighting.    
 
 Setting these values is done by selecting the menu option *Edit Preferences*
@@ -288,7 +288,7 @@ User Defined Types
 
     The User Defined Types tab from the Preferences window; adding information about other data types.
 
-To generate functionable code, all data types used in the package must be known
+To generate functional code, all data types used in the package must be known
 to Deviser. Deviser has built-in support for the predefined types declared by 
 SBML L3 Core (see :numref:`typefield`) but various SBML L3 packages may 
 introduce unsupported types. To enable Deviser to handle these new types, the 
