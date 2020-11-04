@@ -124,6 +124,7 @@ class ParseXML():
             return False
         return v.lower() in ("yes", "true", "1")
 
+
     @staticmethod
     def to_int(v):
         '''
@@ -163,12 +164,23 @@ class ParseXML():
 
     @staticmethod
     def get_enum_value(node, name, classname, typename, invalid=False):
-        temp = node.getAttributeNode(name)
+        '''
+        Get the name value of an enumValue node such as
+        <enumValue name="SPATIAL_COMPRESSIONKIND_DEFLATED" value="deflated"/>
+
+        :param node: the <enumValue> node
+        :param name: the node's name attribute (e.g. the string "name")
+        :param classname: class name of parent <enum> node (e.g. "BOUNDARY")
+        :param typename: type name of parent <enum> node (e.g. "KIND")
+        :param invalid: Set this to True if you want to get the invalid form of the name attribute.
+        :return: the value of the name attribute (e.g. "SPATIAL_COMPRESSIONKIND_DE)
+        '''
+        temp = node.getAttributeNode(name)  # Get node's "name" attribute node
         if temp is None:
             return None
         else:
-            tempname = temp.nodeValue.upper()
-        parts = tempname.split('_')
+            tempname = temp.nodeValue.upper()  # e.g. "SPATIAL_COMPRESSIONKIND_DEFLATED"
+        parts = tempname.split('_')  # TODO what if tempname is "" or None?
         if not invalid:
             if len(parts) > 2:
                 return tempname
@@ -246,12 +258,20 @@ class ParseXML():
 
     @staticmethod
     def get_enum_name(self, node):
+        '''
+        Gets the name attribute of an <enum> node
+        such as <enum name="BoundaryKind">
+
+        :param node: the <enum> node
+        :return: returns the name (e.g. "BoundaryKind") or
+                 an empty string if no name value held.
+        '''
         enum_name = ''
         temp = self.get_value(node, 'name')
         # Expect CamelCase with upper first
         if temp is not None:
             last = len(temp)
-            # strip _t if it is there; since we add it later
+            # strip _t if it is there; since we add it later  TODO why? and where?
             if temp.endswith('_t'):
                 last -= 2
             enum_name = strFunctions.upper_first(temp[0:last])
@@ -345,13 +365,17 @@ class ParseXML():
 
     def analyse_enumname(self, enum_name):
         """
-        Pulls out "parts" of the name of an <enum> node, depending on
-        whether an upper-case letter is found in the name or not.
+        Pulls out classname and typename "parts" of the name of an <enum> node,
+        depending on whether an upper-case letter is found in the name or not.
 
         TODO: why?
 
         :param enum_name: The name of the <enum> node. e.g. "BoundaryKind"
-        :return: returns "parts" of name, e.g. cname="BOUNDARY" and tname="KIND"
+        :return: returns tuple with classname and typename "parts" of name,
+                 e.g. cname="BOUNDARY" and tname="KIND".
+                 But if enum_name is all lower-case (after first character),
+                 return it in upper case as the value for cname,
+                 and set tname to "" (empty string).
         """
         break_found = False
         for i in range(1, len(enum_name)):
@@ -930,9 +954,12 @@ class ParseXML():
         number = self.get_int_value(self, self.dom.documentElement, 'number')
         offset = self.get_int_value(self, self.dom.documentElement, 'offset')
         fullname = self.get_value(self.dom.documentElement, 'fullname')
+
+        # Remove trailing '.'
         if fullname.endswith('.'):
             l = len(fullname)
-            fullname = fullname[0:l-1]  # Remove trailing '.'
+            fullname = fullname[0:l-1]
+
         required = self.get_bool_value(self, self.dom.documentElement, 
                                        'required')
         custom_copyright = self.get_add_code_value(self,
@@ -989,21 +1016,26 @@ class ParseXML():
             self.version_count = self.version_count + 1
 
         # Now iterate over <enum> nodes (if any).
-        # Each one may have multiple <enumValue> nodes.
+        # Each one may have one or more <enumValue> nodes.
         enums = []
         names_listed = []
         for node in self.dom.getElementsByTagName('enum'):
-            values = []
-            enum_name = self.get_enum_name(self, node)
+            values = []  # List of dictionaries, each with key = enumValue node's name, value = its value
+            enum_name = self.get_enum_name(self, node)  # e.g. "BoundaryKind"
+            # Get classname and typename e.g. ["BOUNDARY", "KIND"]:
             [cname, tname] = self.analyse_enumname(enum_name)
 
-            if enum_name not in names_listed:
+            if enum_name not in names_listed:  # So we don't add two with same name (presumably an error)
                 # Example enumValue element node, val:
-                # <enumValue name="SPATIAL_GEOMETRYKIND_CARTESIAN" value="cartesian"/>
+                # <enumValue name="SPATIAL_BOUNDARYKIND_NEUMANN" value="Neumann"/>
                 for val in node.getElementsByTagName('enumValue'):
                     values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname),
                                         'value': self.get_value(val, 'value')}))
+                    # e.g. values.append(dict('name': "SPATIAL_BOUNDARYKIND_NEUMANN", 'value': "Neumann")
+
                 # add invalid name here
+                # e.g. values.append(dict('name': 'SPATIAL_BOUNDARYKIND_INVALID',
+                #                         'value': 'invalid BoundaryKind value')
                 invalid_value = 'invalid {0} value'.format(enum_name)
                 values.append(dict({'name': self.get_enum_value(val, 'name', cname, tname, invalid=True),
                                     'value': invalid_value}))

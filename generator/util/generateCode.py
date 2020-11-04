@@ -39,7 +39,6 @@
 
 import sys
 import os
-
 from parseXML import ParseXML
 from code_files import ExtensionFiles, CppFiles, ValidationFiles, BaseClassFiles
 from bindings_files import BindingsFiles
@@ -50,6 +49,15 @@ import shutil
 
 directories = []
 
+# TODO: this code (and other code files) would be a bit more readable
+# (and smaller) if we changed a line like:
+#  if global_variables.code_returned == \
+#             global_variables.return_codes['success']:
+# to:
+#  if code_returned == return_codes['success']:
+# or:
+#  import global_variables as gv
+#  if gv.code_returned == gv.return_codes['success']:
 
 def generate_code_for(filename, overwrite=True):
     """
@@ -77,7 +85,7 @@ def generate_code_for(filename, overwrite=True):
             global_variables.return_codes['success']:
         name = ob['name'.lower()]
         language = global_variables.language
-        # TO DO REMEMBER TO REMOVE
+        # TO DO REMEMBER TO REMOVE   TODO why?
         # try:
         if global_variables.is_package:
             generate_package_code(name, language, overwrite, ob)
@@ -89,6 +97,9 @@ def generate_code_for(filename, overwrite=True):
 
 
 def generate_other_library_code(name, language, overwrite, ob):
+    '''
+    Documentation for this function held off until issue #12 resolved.
+    '''
     if not create_dir_structure(name, language, overwrite):
         print('Problem encountered creating directories')
         print('Either delete what directory structure is there or')
@@ -119,6 +130,9 @@ def generate_global_files():
 
 
 def generate_package_code(name, language, overwrite, ob):
+    '''
+    Documentation for this function held off until issue #12 resolved.
+    '''
     if not create_dir_structure(name, language, overwrite):
         print('Problem encountered creating directories')
         print('Either delete what directory structure is there or')
@@ -128,9 +142,15 @@ def generate_package_code(name, language, overwrite, ob):
     generate_code_files(name, ob)
     generate_bindings_files(name, ob)
     generate_cmake_files(name, ob)
-    generate_example_files(name, ob)
+    generate_example_files(ob)
 
-def generate_example_files(name, ob):
+def generate_example_files(ob):
+    '''
+    Generate the files in the `examples` directory
+
+    :param ob:
+    :return: returns nothing
+    '''
     this_dir = os.getcwd()
     os.chdir('examples')
     cmake = CMakeFiles.CMakeFiles(ob, this_dir, True)
@@ -410,6 +430,9 @@ def populate_other_library_directories(name, lang):
 
 
 def create_dir_structure(pkgname, lang, overwrite):
+    '''
+        Documentation for this function held off until issue #12 resolved.
+    '''
     if global_variables.is_package:
         populate_package_directories(pkgname, lang)
     else:
@@ -443,7 +466,10 @@ def check_directory_structure():
 
 def create_dir(name, skip_existing):
     """ skip_existing seems to be a synonym for `overwrite` parameter, used
-     in function create_dir_structure(). I don't think it is being used properly here."""
+     in function create_dir_structure(). I don't think it is being used properly here.
+
+     See issue #12
+     """
     if os.path.exists(name):
         if skip_existing:
             done = True
@@ -460,7 +486,7 @@ def create_dir(name, skip_existing):
 
 
 def main(args):
-    if len(args) != 2:
+    if len(args) != 2:  # TODO could be *too many* args as well.
         global_variables.code_returned = \
             global_variables.return_codes['missing function argument']
         print ('Usage: generateCode.py xmlfile')
