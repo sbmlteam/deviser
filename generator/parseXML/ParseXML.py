@@ -109,7 +109,7 @@ class ParseXML():
     @staticmethod
     def to_bool(v):
         '''
-        Get boolean value of a node's value string
+        Get **boolean** value of a node's value string
 
         :param v: the string value
         :returns: True if v exists and v.lower() has the value
@@ -173,7 +173,8 @@ class ParseXML():
         :param classname: class name of parent <enum> node (e.g. "BOUNDARY")
         :param typename: type name of parent <enum> node (e.g. "KIND")
         :param invalid: Set this to True if you want to get the invalid form of the name attribute.
-        :return: the value of the name attribute (e.g. "SPATIAL_COMPRESSIONKIND_DE)
+        :return: returns the value of the name attribute (e.g. "SPATIAL_COMPRESSIONKIND_DEFLATED",
+                 or like "SPATIAL_BOUNDARYKIND_INVALID" if `invalid` is `True`)
         '''
         temp = node.getAttributeNode(name)  # Get node's "name" attribute node
         if temp is None:
@@ -200,9 +201,20 @@ class ParseXML():
 
     @staticmethod
     def get_bool_value(self, node, name):
+        '''
+        Get the boolean value True or False from a node like
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+
+        :node: the node
+        :name: the name of the attribute desired, e.g. "abstract" or "required"
+        :return: returns True or False depending on desired attribute's value.
+        '''
         temp = node.getAttributeNode(name)
         if temp is None:
             return False
+        # temp.nodeValue is a string like "true"
+        # We want the boolean value (e.g. True) rather than the string (e.g. "true")
         return self.to_bool(temp.nodeValue)
 
     @staticmethod
