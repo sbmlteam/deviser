@@ -47,10 +47,10 @@
 import sys
 
 try:
-    from util import generateLatex, generateCode, global_variables
+    from util import generateLatex, generateCode, global_variables as gv
 except:
-    from util import global_variables
-    global_variables.code_returned = global_variables.return_codes['unknown error - please report']
+    from util import global_variables as gv
+    gv.code_returned = gv.return_codes['unknown error - please report']
 #from legacy import run
 
 def generatePackageFor(filename):
@@ -90,15 +90,13 @@ def main(args):
     """
 
     # reset the global return code as this is a new call to deviser
-    global_variables.code_returned = global_variables.return_codes['success']
+    gv.code_returned = gv.return_codes['success']
 
     if len(args) != 3:  # TODO: there could also be too many args (>3)!
-        global_variables.code_returned = \
-            global_variables.return_codes['missing function argument']
+        gv.code_returned = gv.return_codes['missing function argument']
         print(main.__doc__)
 
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
 
         operation = args[1].lower()
         filename = args[2]
@@ -110,20 +108,18 @@ def main(args):
         elif operation == '--latex' or operation == '-l':
             generateLaTeXFor(filename)
         else:
-            global_variables.code_returned = \
-                global_variables.return_codes['invalid function arguments']
+            gv.code_returned = gv.return_codes['invalid function arguments']
             print(main.__doc__)
 
-    return global_variables.code_returned
+    return gv.code_returned
 
 if __name__ == '__main__':
-    if global_variables.code_returned == \
-            global_variables.return_codes['success']:
+    if gv.code_returned == gv.return_codes['success']:
         try:
             main(sys.argv)
-            sys.exit(global_variables.code_returned)
+            sys.exit(gv.code_returned)
         except Exception as ex:
             print('\nAn exception was raised while running deviser: \"{}\"'.format(ex))
-            sys.exit(global_variables.code_returned)
+            sys.exit(gv.code_returned)
     else:
-        sys.exit(global_variables.code_returned)
+        sys.exit(gv.code_returned)
