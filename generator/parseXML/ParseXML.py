@@ -70,7 +70,7 @@ import os.path
 from util import query
 
 from util import strFunctions
-from util import global_variables
+from util import global_variables as gv
 
 
 class ParseXML():
@@ -84,12 +84,11 @@ class ParseXML():
         :param filename: The (path to the) XML file to parse
         '''
         if not os.path.isfile(filename):
-            global_variables.code_returned = \
-                global_variables.return_codes['failed to read file']
+            gv.code_returned = gv.return_codes['failed to read file']
             print('{0} not found'.format(filename))
 
-        if global_variables.code_returned == \
-                global_variables.return_codes['success']:
+        if gv.code_returned == \
+                gv.return_codes['success']:
             self.dom = parse(filename)  # A Document Object Model (i.e. a Document) instance.
 
         self.temp_dir = os.path.dirname(filename)
@@ -363,7 +362,7 @@ class ParseXML():
         if temp is None:
             return None
         temptype = temp.nodeValue
-        if not global_variables.is_package:
+        if not gv.is_package:
             if temptype.endswith('DOCUMENT'):
                 vars = temptype.split('_')
                 typecode = vars[0] + '_DOCUMENT'
@@ -506,16 +505,14 @@ class ParseXML():
 
         attr_name = self.get_value(node, 'name')
         if not attr_name:
-            self.report_error(global_variables
-                              .return_codes['missing required information'],
+            self.report_error(gv.return_codes['missing required information'],
                               'An attribute must have a Name')
 
         required = self.get_bool_value(self, node, 'required')
 
         attr_type = self.get_type_value(self, node)
         if not attr_type:
-            self.report_error(global_variables
-                              .return_codes['missing required information'],
+            self.report_error(gv.return_codes['missing required information'],
                               'An attribute must have a Type')
         attr_abstract = self.get_bool_value(self, node, 'abstract')
         attr_element = self.get_element_value(self, node)
@@ -571,8 +568,7 @@ class ParseXML():
         #
         element_name = self.get_element_class_name(self, node)
         if not element_name:
-            self.report_error(global_variables
-                              .return_codes['missing required information'],
+            self.report_error(gv.return_codes['missing required information'],
                               'A Class must have a Name')
         element = None
         # check whether we have an element with this
@@ -603,8 +599,7 @@ class ParseXML():
                 base_class = 'SBase'
             type_code = self.get_typecode(self, node)
             if not type_code:
-                self.report_error(global_variables
-                                  .return_codes['missing required information'],
+                self.report_error(gv.return_codes['missing required information'],
                                   'A Class must have a TypeCode')
             has_math = self.get_bool_value(self, node, 'hasMath')
             has_children = self.get_bool_value(self, node, 'hasChildren')
@@ -763,8 +758,7 @@ class ParseXML():
             if is_abstract:
                 concretes = self.get_concrete_list(self, node)
                 if len(concretes) == 0:
-                    self.report_error(global_variables
-                                      .return_codes['missing required information'],
+                    self.report_error(gv.return_codes['missing required information'],
                                       'The abstract class {0} lists no instantiations'.format(element_name))
                 self.concrete_dict[element_name] = concretes
 
@@ -923,7 +917,7 @@ class ParseXML():
         if not language or language == '':
             language = 'sbml'
         # set the globals
-        global_variables.set_globals(language.lower(), base_class,
+        gv.set_globals(language.lower(), base_class,
                                      document_class, prefix, library_name,
                                      is_package, pkg_prefix, specification,
                                      dependency, library_version, '', annot_element,
@@ -934,8 +928,8 @@ class ParseXML():
 
     @staticmethod
     def report_error(code, message):
-        global_variables.code_returned = code
-        print('{0}'.format(global_variables.get_return_code(code)))
+        gv.code_returned = code
+        print('{0}'.format(gv.get_return_code(code)))
         print('{0}'.format(message))
     #####################################################################
 
@@ -994,13 +988,13 @@ class ParseXML():
             self.read_language_element(node)
         else:
             # just in case we generate a new thing
-            global_variables.reset()
-            global_variables.set_unknown_error(self.package_name)
+            gv.reset()
+            gv.set_unknown_error(self.package_name)
 
-        global_variables.set_global_fullname(fullname)
-        global_variables.set_custom_copyright(custom_copyright)
-        global_variables.add_additional_implementation(add_implementation)
-        global_variables.add_additional_declaration(add_declarations)
+        gv.set_global_fullname(fullname)
+        gv.set_custom_copyright(custom_copyright)
+        gv.add_additional_implementation(add_implementation)
+        gv.add_additional_declaration(add_declarations)
 
         # get package information - see issue 17
         sbml_level = 3
@@ -1103,8 +1097,7 @@ class ParseXML():
                     attr['root'] = package
                     if attr['type'] =='lo_element':
                         if 'element' in attr and attr['element'] != '' and attr['element'] not in list_all_element:
-                            self.report_error(global_variables
-                                              .return_codes['unknown type used'],
+                            self.report_error(gv.return_codes['unknown type used'],
                                               'Unrecognized element: {0}'.format(attr['element']))
                     if 'element' in attr and attr['element'] in classes_listed:
                         for map in mappings:
