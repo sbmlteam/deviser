@@ -43,7 +43,7 @@ from util import strFunctions
 
 
 class BaseMatlabFile(BaseFile.BaseFile):
-    """Common base class for all LaTeX files"""
+    """Common base class for all Matlab files"""
 
     def __init__(self, name, object_desc, filetype):
         BaseFile.BaseFile.__init__(self, name+filetype, 'm')
@@ -559,3 +559,4 @@ class BaseMatlabFile(BaseFile.BaseFile):
         self.down_indent()
         self.write_line('end;')
         self.down_indent(2)
+

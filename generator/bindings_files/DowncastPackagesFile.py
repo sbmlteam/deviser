@@ -57,19 +57,14 @@ class DowncastPackagesFile():
 
         if self.local and len(name) > 0:
             self.fileout = BaseCppFile.BaseCppFile(name, 'i', None)
-            self.fileout.brief_description = 'Casting to most specific ' \
-                                             'packages object for ' \
-                                             '{0}'.format(binding)
         elif binding == 'csharp' or binding == 'java':
             self.fileout = BaseCppFile.BaseCppFile(name, 'i', None)
-            self.fileout.brief_description = 'Casting to most specific ' \
-                                             'packages object for ' \
-                                             '{0}'.format(binding)
         else:
             self.fileout = BaseCppFile.BaseCppFile(name, 'cpp', None)
-            self.fileout.brief_description = 'Casting to most specific ' \
-                                             'packages object for ' \
-                                             '{0}'.format(binding)
+
+        self.fileout.brief_description = 'Casting to most specific ' \
+                                         'packages object for ' \
+                                         '{0}'.format(binding)
 
         self.elements = elements
         self.plugins = plugins

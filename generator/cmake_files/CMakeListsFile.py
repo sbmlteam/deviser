@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# @file    CMakeLists.py
+# @file    CMakeListsFile.py
 # @brief   class for generating cmake lists file
 # @author  Frank Bergmann
 # @author  Sarah Keating
