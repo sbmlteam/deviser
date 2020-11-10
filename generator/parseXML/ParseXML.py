@@ -319,6 +319,9 @@ class ParseXML():
 
     @staticmethod
     def get_loclass_name_value(self, node, name):
+        '''
+        TODO: resolve issue #16 before documenting this function.
+        '''
         xml_loclass_name = ''
         temp = self.get_value(node, name)
         # we expect this to be camelCase starting with lower
@@ -379,14 +382,35 @@ class ParseXML():
         Pulls out classname and typename "parts" of the name of an <enum> node,
         depending on whether an upper-case letter is found in the name or not.
 
-        TODO: why?
-
         :param enum_name: The name of the <enum> node. e.g. "BoundaryKind"
         :return: returns tuple with classname and typename "parts" of name,
                  e.g. cname="BOUNDARY" and tname="KIND".
                  But if enum_name is all lower-case (after first character),
                  return it in upper case as the value for cname,
                  and set tname to "" (empty string).
+
+        Explanation from Sarah:
+
+        So this one is due to the different styles of naming in an enum.
+        We want the code to end up with a name that is FOO_BAR_XYZ but we
+        cannot guarantee that these have been entered this way. I used
+        cname (classname) and tname (typename) to distinguish.
+
+        So you might have BOUNDARYKIND or BOUNDARY_KIND or BoundaryKind;
+        which are all the classname and so we want:
+
+        typedef enum
+        {
+        SPATIAL_BOUNDARYKIND_ROBIN_VALUE_COEFFICIENT /*!< The spatial boundarykind is @c "Robin_valueCoefficient". /
+      , SPATIAL_BOUNDARYKIND_ROBIN_INWARD_NORMAL_GRADIENT_COEFFICIENT /!< The spatial boundarykind is @c "Robin_inwardNormalGradientCoefficient". /
+      , SPATIAL_BOUNDARYKIND_ROBIN_SUM /!< The spatial boundarykind is @c "Robin_sum". /
+      , SPATIAL_BOUNDARYKIND_NEUMANN /!< The spatial boundarykind is @c "Neumann". /
+      , SPATIAL_BOUNDARYKIND_DIRICHLET /!< The spatial boundarykind is @c "Dirichlet". /
+      , SPATIAL_BOUNDARYKIND_INVALID /!< Invalid BoundaryKind value. */
+      } BoundaryKind_t;
+
+    so first two parts are always the same and then the part after second _ is value - which might have underscores.
+
         """
         break_found = False
         for i in range(1, len(enum_name)):
@@ -739,7 +763,7 @@ class ParseXML():
         list (of dictionaries).
 
         :param pkg_node: The <pkgVersion> node
-
+        :return: returns nothing
         '''
 
         # version_count = self.get_int_value(self, pkg_node, 'version_count')
@@ -841,6 +865,7 @@ class ParseXML():
         The <language> node can also contain nodes of at least the following
         types: <library_version>, <language_version> and <dependencies>.
         These are also interrogated in this function.
+        TODO: Sarah would prefer to have new functions for interrogating each type of node
         """
         language = self.get_value(node, 'name')
         base_class = self.get_value(node, 'baseClass')
