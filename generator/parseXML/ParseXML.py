@@ -111,7 +111,7 @@ class ParseXML():
         Get **boolean** value of a node's value string
 
         :param v: the string value
-        :returns: True if v exists and v.lower() has the value
+        :return: True if v exists and v.lower() has the value
                   "yes", "true", or "1".
                   Else False.
 
@@ -218,6 +218,18 @@ class ParseXML():
 
     @staticmethod
     def get_int_value(self, node, name):
+        '''
+        Gets the string value of a node with attribute name
+        and converts it to an int, which it returns
+
+        :param node: the node in question
+        :param name: the name of the attribute node whose value we want
+        :return: returns the integer which is stored in string form in the attribute node's value.
+
+        e.g. for a case like <pkgVersion level="3" version="1" pkg_version="1">
+        the node is pkgVersion and the name is one of 'level,' 'version' or 'pkg_version'
+        In this example the int values returned would be, respectively, 3, 1 or 1
+        '''
         temp = node.getAttributeNode(name)
         if temp is None:
             return 0
@@ -225,6 +237,16 @@ class ParseXML():
 
     @staticmethod
     def get_type_value(self, node):
+        '''
+        Given a node like:
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+        get the value of the "type" node's value, in "standardized" form
+
+        :param node: the node, e.g. <attribute>
+        :return: looks up key (e.g. "lo_element") in standardize_types()'s dictionary
+        and returns the value (in this example, "lo_element" is returned).
+        '''
         temp = node.getAttributeNode('type')
         if temp is None:
             return None
@@ -460,6 +482,12 @@ class ParseXML():
     # Functions for standardizing types/name etc
 
     def standardize_types(self, attrib_type):
+        '''
+        For different types, return a "standardized" form
+
+        :param attrib_type: (string) value of the type (e.g. 'boolean')
+        :return: returns the "standardized" type string (e.g. 'bool')
+        '''
         name = attrib_type.lower()
         if self.matches_unsigned_int(name):
             return 'uint'
@@ -479,6 +507,14 @@ class ParseXML():
 
     @staticmethod
     def matches_unsigned_int(name):
+        '''
+        Specialist function to check that a type string
+        is (or is equivalent to) "unsigned int"
+
+        :param name: the value of the type string, e.g. "positive int"
+        :return: True if this is (or equivalent to) unsigned int type;
+        False otherwise.
+        '''
         if name == 'unsigned integer':
             return True
         elif name == 'unsigned int':
@@ -844,6 +880,13 @@ class ParseXML():
                      'namespace': namespace})
 
     def get_dependency_information(self, node):
+        '''
+        Get information from a <dependency> node
+        e.g. <dependency library_name="libnuml" prefix="NUML"/>
+
+        :param node: the dependency node
+        :return: returns a dictionary with the extracted information.
+        '''
         library = self.get_value(node, 'library_name')
         prefix = self.get_value(node, 'prefix')
         return dict({'library': library,
@@ -953,6 +996,14 @@ class ParseXML():
 
     @staticmethod
     def report_error(code, message):
+        '''
+        Prints an error to output (probably stdout)
+
+        :param code: one of the return_codes entries from global_variables
+        e.g. gv.return_codes['missing required information']
+        :param message: a message to go with the code, e.g. 'A Class must have a Name'
+        :return: returns nothing.
+        '''
         gv.code_returned = code
         print('{0}'.format(gv.get_return_code(code)))
         print('{0}'.format(message))
