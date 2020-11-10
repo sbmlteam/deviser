@@ -219,7 +219,7 @@ class ParseXML():
     @staticmethod
     def get_int_value(self, node, name):
         '''
-        Gets the string value of a node with attribute name
+        Obtains the string value of a node with attribute `name`
         and converts it to an int, which it returns
 
         :param node: the node in question
@@ -228,7 +228,7 @@ class ParseXML():
 
         e.g. for a case like <pkgVersion level="3" version="1" pkg_version="1">
         the node is pkgVersion and the name is one of 'level,' 'version' or 'pkg_version'
-        In this example the int values returned would be, respectively, 3, 1 or 1
+        In this example the int value returned would be, respectively, 3, 1 or 1
         '''
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -254,14 +254,34 @@ class ParseXML():
 
     @staticmethod
     def get_element_value(self, node):
+        '''
+        Given an <attribute> node, get the "standard form" of the element node's value
+
+        :param node: the attribute node
+        :return: returns "standard form" of the name (e.g. "SampledVolume")
+           (see strFunctions.standard_element_name())
+
+        Example <attribute> node:
+        <attribute name="sampledVolume" required="false" type="lo_element"
+         element="SampledVolume" abstract="false"/>
+        '''
         element = ''
-        temp = self.get_value(node, 'element')
+        temp = self.get_value(node, 'element')  # e.g. "SampledVolume"
         if temp is not None:
-            element = strFunctions.standard_element_name(temp)
+            element = strFunctions.standard_element_name(temp)  # q.v.
         return element
 
     @staticmethod
     def get_element_name_value(self, node, name):
+        '''
+        Given an <element> node, obtain the value of the attribute called `name`
+
+        :param node: the node
+        :param name: the name of the value required (e.g. "elementName")
+        :return: the string value required, adjusted if required (e.g. "csgNode").
+
+        Example element node:  <element ... elementName = "csgNode" ...>
+        '''
         xml_element_name = ''
         temp = self.get_value(node, name)
         # we expect this to be camel case starting with lower
@@ -536,6 +556,15 @@ class ParseXML():
 
     @staticmethod
     def get_concrete_list(self, node):
+        '''
+        Given an <element> node, find any child <concrete> nodes.
+        :param node: the <element> node
+        :return: a list of dictionaries, each of which contains values for
+             the "name" and "element" attribute value nodes in the <concrete> node(s)
+
+        Example of a <concrete> node, nested under an <element> node:
+        <concrete name="csgPrimitive" element="CSGPrimitive" minNumChildren="0" maxNumChildren="0"/>
+        '''
         concrete_list = []
         for concrete in node.getElementsByTagName('concrete'):
             concrete_list.append(
@@ -625,6 +654,9 @@ class ParseXML():
         # hasListOf="true" hasChildren="false" hasMath="false"
         # childrenOverwriteElementName="false" minNumListOfChildren="0"
         # maxNumListOfChildren="0" abstract="false">
+
+
+
         #
         element_name = self.get_element_class_name(self, node)
         if not element_name:
