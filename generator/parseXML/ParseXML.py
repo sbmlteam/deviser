@@ -376,6 +376,8 @@ class ParseXML():
         :param name: the name of the attribute whose value we want.
                      Example name = "additionalDecls"
         :return: the filename (e.g. "spatial_geometry.h.txt")
+
+        e.g. <element name="Geometry"...additionalDecls="spatial_geometry.h.txt"...>
         '''
         add_code = self.get_value(node, name)
         if add_code is not None:
@@ -391,7 +393,14 @@ class ParseXML():
     @staticmethod
     def get_lo_min_children(self, node):
         '''
+        Gets the integer value of a <element> node's
+        minNumListOfChildren attribute node.
 
+        :param node: the <element> node in question
+        :return: returns this value, if present, else returns 1.
+
+        TODO: does this return value of 1 matter? Some of the sample XML files
+        e.g. sbgn.xml have existing minNumListOfChildren attribute values of 1
         '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
@@ -486,6 +495,7 @@ class ParseXML():
             return None
         for element in elements:
             if 'isListOf' in element and element['isListOf'] is True:
+                # The <element> node has attribute hasListOf="true"
                 name_to_match = strFunctions.list_of_name(element['name'])
                 if 'listOfClassName' in element:
                     if element['listOfClassName'] != '':
@@ -663,7 +673,7 @@ class ParseXML():
         # check whether we have an element with this
         # name in a different version, i.e. does element_name
         # occur in any of the element dictionaries in
-        # self.sbml_element?
+        # the self.sbml_element list of dictionaries?
         if version_count > 0:
             element = query.get_matching_element('name', element_name,
                                                  self.sbml_elements)
@@ -705,7 +715,7 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'elementName')
             xml_lo_element_name = \
                 self.get_element_name_value(self, node, 'listOfName')
-            lo_class_name = \
+            lo_class_name = \  # Some element nodes have a listOfClassName attribute node.
                 self.get_loclass_name_value(self, node, 'listOfClassName')
             min_lo_children = self.get_lo_min_children(self, node)
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
@@ -753,14 +763,31 @@ class ParseXML():
 
     @staticmethod
     def get_plugin_description(self, node, version_count):
-        ext_point = self.get_value(node, 'extensionPoint')
+        '''
+        Get information from a <plugin> node (nested within a <pkgVersion> node)
+
+        :param node: the <plugin> node
+        :param version_count: number of <plugin> nodes
+
+        Example <plugin> node:
+
+        <plugin extensionPoint="Model">
+          <attributes>
+            <attribute name="useFoo" required="true" type="boolean" abstract="false"/>
+          </attributes>
+        </plugin>
+        '''
+        ext_point = self.get_value(node, 'extensionPoint')  # e.g. "Model"
         plugin = None
         # check whether we have an element with this
         # name in a different version
         if version_count > 0:
             plugin = query.get_matching_element('sbase', ext_point,
                                                 self.plugins)
-        if plugin:
+
+        if plugin:  # We already have info about this plugin
+            # Some <plugin> nodes have a reference node
+            # e.g. <reference name="FooKineticLaw"/>
             for reference in node.getElementsByTagName('reference'):
                 temp = self.find_element(self.elements,
                                          self.get_value(reference, 'name'))
@@ -881,7 +908,7 @@ class ParseXML():
                 self.plugins.append(plugin)
 
     @staticmethod
-    def find_child_occurences(name, elements):
+    def find_child_occurrences(name, elements):
         found = False
         parent = ''
         num_elements = len(elements)
@@ -902,7 +929,7 @@ class ParseXML():
         for elem in package['baseElements']:
             name = elem['name']
             [occurs_as_child, parent] = \
-                self.find_child_occurences(name, package['baseElements'])
+                self.find_child_occurrences(name, package['baseElements'])
             if occurs_as_child:
                 elem['parent'] = parent
 
@@ -1112,7 +1139,7 @@ class ParseXML():
         sbml_version = 1
         pkg_version = 1
         self.num_versions = len(self.dom.getElementsByTagName('pkgVersion'))
-        self.version_count = 0
+        self.version_count = 0  # Number of pkgVersion nodes in the document.
 
         # Iterate over pkgVersion nodes.
         lv_info = []  # List of dictionaries, one dict per <pkgVersion> node.
