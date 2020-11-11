@@ -67,11 +67,8 @@
 
 from xml.dom.minidom import *
 import os.path
-from util import query
-
-from util import strFunctions
-from util import global_variables as gv
-
+from util import query, strFunctions, global_variables as gv
+# get_matching_element is defined in util/query.py
 
 class ParseXML():
     """Class for all Cpp Header files"""
@@ -87,8 +84,7 @@ class ParseXML():
             gv.code_returned = gv.return_codes['failed to read file']
             print('{0} not found'.format(filename))
 
-        if gv.code_returned == \
-                gv.return_codes['success']:
+        if gv.code_returned == gv.return_codes['success']:
             self.dom = parse(filename)  # A Document Object Model (i.e. a Document) instance.
 
         self.temp_dir = os.path.dirname(filename)
@@ -97,7 +93,7 @@ class ParseXML():
         self.concrete_dict = dict({})
         self.package_name = ''
         self.elements = []
-        self.sbml_elements = []
+        self.sbml_elements = []  # Empty list of "element" dictionaries.
         self.num_versions = 1
         self.plugins = []
 
@@ -116,7 +112,8 @@ class ParseXML():
                   Else False.
 
         i.e.
-        In  : [to_bool(x) for x in ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
+        In  : [to_bool(x) for x in
+              ['false', 'true', '0', '1', None, 'yes', 'no', 'Yes']]
         Out : [False, True, False, True, False, True, False, True]
         '''
         if v is None:
@@ -280,7 +277,7 @@ class ParseXML():
         :param name: the name of the value required (e.g. "elementName")
         :return: the string value required, adjusted if required (e.g. "csgNode").
 
-        Example element node:  <element ... elementName = "csgNode" ...>
+        Example element node:  <element ... elementName="csgNode" ...>
         '''
         xml_element_name = ''
         temp = self.get_value(node, name)
@@ -334,8 +331,7 @@ class ParseXML():
     def get_mapping(self, node):
         '''
         Used to get information from a <mapping> node
-        e.g.
-        <mapping name="DimensionDescription" package="numl"/>
+        e.g. <mapping name="DimensionDescription" package="numl"/>
 
         :param node: the <mapping> node to interrogate
         :return: returns [name, package] tuple
@@ -394,6 +390,9 @@ class ParseXML():
 
     @staticmethod
     def get_lo_min_children(self, node):
+        '''
+
+        '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -639,32 +638,32 @@ class ParseXML():
     @staticmethod
     def get_element_description(self, node, version_count):
         '''
-
+        Extract information from an <element> node
 
         :param node: the <element> node
         :param version_count: the number of package versions
            (Strictly, the number of <pkgVersion> nodes in the
            XML file we parse.)
-        :return:
+        :return: returns an "element" dictionary of info. If this element
+            already exists in the self.sbml_elements list of dictionaries,
+            return that; else, create a new such dictionary and return it.
+
+        Example <element> node:
+
+        <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
+         hasListOf="true" hasChildren="false" hasMath="false"
+         childrenOverwriteElementName="false" minNumListOfChildren="0"
+         maxNumListOfChildren="0" abstract="false">
         '''
-
-        # Example <element> node:
-        #
-        # <element name="DynElement" typeCode="SBML_DYN_DYNELEMENT"
-        # hasListOf="true" hasChildren="false" hasMath="false"
-        # childrenOverwriteElementName="false" minNumListOfChildren="0"
-        # maxNumListOfChildren="0" abstract="false">
-
-
-
-        #
-        element_name = self.get_element_class_name(self, node)
+        element_name = self.get_element_class_name(self, node)  # e.g. "DynElement"
         if not element_name:
             self.report_error(gv.return_codes['missing required information'],
                               'A Class must have a Name')
         element = None
         # check whether we have an element with this
-        # name in a different version
+        # name in a different version, i.e. does element_name
+        # occur in any of the element dictionaries in
+        # self.sbml_element?
         if version_count > 0:
             element = query.get_matching_element('name', element_name,
                                                  self.sbml_elements)
@@ -672,12 +671,15 @@ class ParseXML():
             #     if existing['name'] == element_name:
             #         element = existing
 
-        if element:
+        if element:  # Found an existing element with this name.
+            # <attribute> node(s) are listed within an <element> node
             for attr in node.getElementsByTagName('attribute'):
+                # Add the dictionary for attribute `attr` to the list.
                 element['attribs'].append(
                     self.get_attribute_description(self, attr, version_count))
 
             for attr in node.getElementsByTagName('listOfAttribute'):
+                # e.g. <listOfAttribute name="local" required="true" type="bool" abstract="false"/>
                 element['lo_attribs'].append(
                     self.get_attribute_description(self, attr, version_count))
             element['num_versions'] = self.num_versions
@@ -686,6 +688,7 @@ class ParseXML():
             return None
 
         else:
+            # Extract information to use in generating a new "element" dictionary.
             base_class = self.get_value(node, 'baseClass')
             if not base_class:
                 base_class = 'SBase'
