@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+<!-- the main package element -->
   <start>
     <element name="package">
       <attribute name="fullname">
-        <data type="NCName"/>
+        <data type="string"/>
       </attribute>
       <attribute name="name">
-        <data type="NCName"/>
+        <data type="string"/>
       </attribute>
       <attribute name="number">
         <data type="integer"/>
@@ -20,192 +22,471 @@
       <attribute name="version">
         <data type="integer"/>
       </attribute>
-      <element name="versions">
-        <element name="pkgVersion">
-          <attribute name="level">
-            <data type="integer"/>
-          </attribute>
-          <attribute name="pkg_version">
-            <data type="integer"/>
-          </attribute>
-          <attribute name="version">
-            <data type="integer"/>
-          </attribute>
-          <element name="elements">
-            <oneOrMore>
-              <element name="element">
-                <attribute name="abstract">
-                  <data type="boolean"/>
-                </attribute>
-                <optional>
-                  <attribute name="baseClass">
-                    <data type="NCName"/>
-                  </attribute>
-                </optional>
-                <attribute name="childrenOverwriteElementName">
-                  <data type="boolean"/>
-                </attribute>
-                <optional>
-                  <attribute name="elementName">
-                    <data type="NCName"/>
-                  </attribute>
-                </optional>
-                <attribute name="hasChildren">
-                  <data type="boolean"/>
-                </attribute>
-                <attribute name="hasListOf">
-                  <data type="boolean"/>
-                </attribute>
-                <attribute name="hasMath">
-                  <data type="boolean"/>
-                </attribute>
-                <optional>
-                  <attribute name="listOfClassName">
-                    <data type="NCName"/>
-                  </attribute>
-                </optional>
-                <optional>
-                  <attribute name="listOfName">
-                    <data type="NCName"/>
-                  </attribute>
-                </optional>
-                <optional>
-                  <attribute name="maxNumListOfChildren">
-                    <data type="integer"/>
-                  </attribute>
-                </optional>
-                <optional>
-                  <attribute name="minNumListOfChildren">
-                    <data type="integer"/>
-                  </attribute>
-                </optional>
-                <attribute name="name">
-                  <data type="NCName"/>
-                </attribute>
-                <attribute name="typeCode">
-                  <data type="NCName"/>
-                </attribute>
-                <optional>
-                  <ref name="attributes"/>
-                </optional>
-                <optional>
-                  <choice>
-                    <element name="concretes">
-                      <element name="concrete">
-                        <attribute name="element">
-                          <data type="NCName"/>
-                        </attribute>
-                        <attribute name="maxNumChildren">
-                          <data type="integer"/>
-                        </attribute>
-                        <attribute name="minNumChildren">
-                          <data type="integer"/>
-                        </attribute>
-                        <attribute name="name">
-                          <data type="NCName"/>
-                        </attribute>
-                      </element>
-                    </element>
-                    <element name="listOfAttributes">
-                      <element name="listOfAttribute">
-                        <attribute name="abstract">
-                          <data type="boolean"/>
-                        </attribute>
-                        <attribute name="element">
-                          <data type="NCName"/>
-                        </attribute>
-                        <attribute name="name">
-                          <data type="NCName"/>
-                        </attribute>
-                        <attribute name="required">
-                          <data type="boolean"/>
-                        </attribute>
-                        <attribute name="type">
-                          <data type="NCName"/>
-                        </attribute>
-                      </element>
-                    </element>
-                  </choice>
-                </optional>
-              </element>
-            </oneOrMore>
-          </element>
-          <element name="plugins">
-            <oneOrMore>
-              <element name="plugin">
-                <attribute name="extensionPoint">
-                  <data type="NCName"/>
-                </attribute>
-                <optional>
-                  <element name="references">
-                    <oneOrMore>
-                      <element name="reference">
-                        <attribute name="name">
-                          <data type="NCName"/>
-                        </attribute>
-                      </element>
-                    </oneOrMore>
-                  </element>
-                </optional>
-                <optional>
-                  <ref name="attributes"/>
-                </optional>
-              </element>
-            </oneOrMore>
-          </element>
-          <element name="enums">
-            <oneOrMore>
-              <element name="enum">
-                <attribute name="name">
-                  <data type="NCName"/>
-                </attribute>
-                <element name="enumValues">
-                  <oneOrMore>
-                    <element name="enumValue">
-                      <attribute name="name">
-                        <data type="NCName"/>
-                      </attribute>
-                      <attribute name="value">
-                        <data type="NCName"/>
-                      </attribute>
-                    </element>
-                  </oneOrMore>
-                </element>
-              </element>
-            </oneOrMore>
-          </element>
-          <element name="mappings">
-            <element name="mapping">
-              <attribute name="name">
-                <data type="NCName"/>
-              </attribute>
-            </element>
-          </element>
-        </element>
-      </element>
-    </element>
+      <optional>
+        <attribute name="additionalDefs">
+          <data type="string"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="additionalDecls">
+          <data type="string"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="customCopyright">
+          <data type="string"/>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="languageblock"/>
+        </optional>
+      <ref name="pkgVersionBlock"/>
+   </element>
   </start>
-  <define name="attributes">
-    <element name="attributes">
+  
+<!-- pkg version -->
+  <define name="singlePkgVersion">
+    <element name="pkgVersion">
+      <optional>
+        <attribute name="level">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <attribute name="pkg_version">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="version">
+        <data type="integer"/>
+      </attribute>
+      <ref name="elementsBlock"/>
+      <optional>
+        <ref name="pluginBlock"/>
+      </optional>
+      <optional>
+        <ref name="enumBlock"/>
+      </optional>
+      <optional>
+        <ref name="mappingBlock"/>
+      </optional>
+    </element>
+  </define>
+  
+  
+  <!-- package versions -->
+ <define name="pkgVersionBlock">
+   <element name="versions">
+     <oneOrMore>
+       <ref name="singlePkgVersion"/>
+     </oneOrMore>
+   </element>
+ </define>
+
+  <!-- block for elements -->
+  <define name="elementsBlock">
+   <element name="elements">
+     <oneOrMore>
+       <element name="element">
+         <attribute name="abstract">
+           <data type="boolean"/>
+         </attribute>
+         <optional>
+           <attribute name="baseClass">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <attribute name="childrenOverwriteElementName">
+           <data type="boolean"/>
+         </attribute>
+         <optional>
+           <attribute name="elementName">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <attribute name="hasChildren">
+           <data type="boolean"/>
+         </attribute>
+         <attribute name="hasListOf">
+           <data type="boolean"/>
+         </attribute>
+         <attribute name="hasMath">
+           <data type="boolean"/>
+         </attribute>
+         <optional>
+           <attribute name="listOfClassName">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="listOfName">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="maxNumListOfChildren">
+             <data type="integer"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="minNumListOfChildren">
+             <data type="integer"/>
+           </attribute>
+         </optional>
+         <attribute name="name">
+           <data type="string"/>
+         </attribute>
+         <attribute name="typeCode">
+           <data type="string"/>
+         </attribute>
+         <optional>
+           <attribute name="additionalDefs">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="additionalDecls">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <ref name="attributeBlock"/>
+         </optional>
+         <optional>
+           <choice>
+             <ref name="concreteBlock"/>
+              <ref name="listOfAttributesBlock"/>
+           </choice>
+         </optional>
+         
+       </element>
+     </oneOrMore>
+   </element>
+ </define> 
+  
+  
+  <!--  -->
+ <define name="pluginBlock">
+   <element name="plugins">
+     <oneOrMore>
+       <element name="plugin">
+         <attribute name="extensionPoint">
+           <data type="string"/>
+         </attribute>
+         <optional>
+           <attribute name="additionalDefs">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="additionalDecls">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <element name="references">
+             <oneOrMore>
+               <element name="reference">
+                 <attribute name="name">
+                   <data type="string"/>
+                 </attribute>
+               </element>
+             </oneOrMore>
+           </element>
+         </optional>
+         <optional>
+           <ref name="attributeBlock"/>
+         </optional>
+         <optional>
+           <attribute name="typecode">
+             <data type="string"/>
+           </attribute>
+         </optional>
+         <optional>
+           <attribute name="package">
+             <data type="string"/>
+           </attribute>
+         </optional>
+       </element>
+     </oneOrMore>
+   </element>
+ </define>
+ 
+  <!-- block for list enums that may be used -->
+  <define name="enumBlock">
+    <element name="enums">
       <oneOrMore>
-        <element name="attribute">
+        <element name="enum">
+          <attribute name="name">
+            <data type="string"/>
+          </attribute>
+          <element name="enumValues">
+            <oneOrMore>
+              <element name="enumValue">
+                <attribute name="name">
+                  <data type="string"/>
+                </attribute>
+                <attribute name="value">
+                  <data type="string"/>
+                </attribute>
+              </element>
+            </oneOrMore>
+          </element>
+          
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+  
+  
+  
+  <!-- block for mapping classes that come from other SBML packages
+  e.g.
+  <mappings>
+    <mapping name="BoundingBox" package="layout"/>
+  </mappings>
+  
+  -->
+  <define name="mappingBlock">
+    <element name="mappings">
+      <oneOrMore>
+        <element name="mapping">
+          <attribute name="name">
+            <data type="string"/>
+          </attribute>
+          <optional>
+            <attribute name="package">
+              <data type="string"/>
+            </attribute>
+          </optional>
+          
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+  <!-- block for detailing attributes that may occur on an SBML <listOf...> element -->
+  
+  <define name="listOfAttributesBlock">
+    <element name="listOfAttributes">
+      <oneOrMore>
+        <element name="listOfAttribute">
           <attribute name="abstract">
             <data type="boolean"/>
           </attribute>
           <optional>
-            <attribute name="element"/>
+            <attribute name="element">
+              <data type="string"/>
+            </attribute>
           </optional>
           <attribute name="name">
-            <data type="NCName"/>
+            <data type="string"/>
           </attribute>
           <attribute name="required">
             <data type="boolean"/>
           </attribute>
           <attribute name="type">
-            <data type="NCName"/>
+            <data type="string"/>
           </attribute>
         </element>
       </oneOrMore>
     </element>
+  </define>
+  
+  
+  <!-- the concreteBlock which defines instanstiations of abstract base classes
+    e.g.
+    <element name="RenderInformationBase" abstract="true">
+    <attributes/>
+    <concretes>
+      <concrete name="renderInformation" element="GlobalRenderInformation" minNumChildren="0" maxNumChildren="0"/>
+   </concretes>
+  -->
+  <define name="concreteBlock">
+    <element name="concretes">
+      <oneOrMore>
+        <element name="concrete">
+          <attribute name="element">
+            <data type="string"/>
+          </attribute>
+          <attribute name="maxNumChildren">
+            <data type="integer"/>
+          </attribute>
+          <attribute name="minNumChildren">
+            <data type="integer"/>
+          </attribute>
+          <attribute name="name">
+            <data type="string"/>
+          </attribute>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+  
+  <!-- These are the subsections used above -->
+  
+  <!-- A block of attributes -->
+  <define name="attributeBlock">
+    <element name="attributes">
+      <oneOrMore>
+        <ref name="singleAttribute"/>
+      </oneOrMore>
+    </element>
+  </define>
+  
+  
+  <!-- A single attribute entry 
+  
+  e.g.  <attribute name="math" required="false" type="element" element="ASTNode" abstract="false"/>
+  -->
+  <define name="singleAttribute">
+    <element name="attribute">
+      <attribute name="abstract">
+        <data type="boolean"/>
+      </attribute>
+      <optional>
+        <attribute name="element"/>
+      </optional>
+      <attribute name="name">
+        <data type="string"/>
+      </attribute>
+      <attribute name="required">
+        <data type="boolean"/>
+      </attribute>
+      <attribute name="type">
+        <data type="string"/>
+      </attribute>
+      <optional>
+        <attribute name="xmlName">
+          <data type="string"/>
+        </attribute>
+      </optional>
+    </element>    
+  </define>
+  
+  <!-- library version block used with languageblock -->
+  <define name="singleLibraryVersion">
+    <element name="library_version">
+      <attribute name="major">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="minor">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="revision">
+        <data type="integer"/>
+      </attribute>
+    </element>    
+  </define>
+  
+  <!-- singleLanguageVersion used within <language_version>
+    
+    e.g.
+    <language_versions>
+      <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+    </language_versions>
+     -->
+  <define name="singleLanguageVersion">
+    <element name="version">
+      <attribute name="level">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="namespace">
+        <data type="anyURI"/>
+      </attribute>
+      <attribute name="version">
+        <data type="integer"/>
+      </attribute>
+    </element>
+  </define>
+
+  <!-- languageVersionBlock used within <language> 
+    <language ...>
+    <language_versions>
+      ...
+    </language_versions>
+    </language>
+  -->
+  <define name="languageVersionBlock">
+  <element name="language_versions">
+    <oneOrMore>
+      <ref name="singleLanguageVersion"/>
+    </oneOrMore>
+    </element>
+  </define>
+  
+  <!-- singleDepenendcy used within <dependencies>
+    
+    e.g.
+    <dependencies>
+    <dependency library_name="libnuml" prefix="NUML"/>
+    </dependencies>
+    
+  -->
+  <define name="singleDependency">
+    <element name="dependency">
+      <attribute name="library_name">
+        <data type="string"/>
+      </attribute>
+      <attribute name="prefix">
+        <data type="string"/>
+      </attribute>
+    </element>
+  </define>
+  
+  <!-- dependencyBlock used within <language> 
+    <language ...>
+    <dependencies>
+    ...
+    </dependencies>
+    </>
+  -->
+  <define name="dependencyBlock">
+    <element name="dependencies">
+      <oneOrMore>
+        <ref name="singleDependency"/>
+      </oneOrMore>
+    </element>
+  </define>
+ 
+  <!-- languageblock used within <package>  -->
+  <define name="languageblock">
+    <element name="language">
+      <attribute name="annotationElementName">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="baseClass">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="documentClass">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="isPackage">
+        <data type="boolean"/>
+      </attribute>
+      <attribute name="libraryName">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="name">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="prefix">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="topLevelElementName">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="uses_ASTNode">
+        <data type="boolean"/>
+      </attribute>
+      <attribute name="uses_XMLNode">
+        <data type="boolean"/>
+      </attribute>
+      <optional>
+      <ref name="singleLibraryVersion"/>
+        </optional>
+      <ref name="languageVersionBlock"/>
+      <optional>
+        <ref name="dependencyBlock"/>
+      </optional>
+    </element>
+    
   </define>
 </grammar>
