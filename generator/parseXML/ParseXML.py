@@ -95,9 +95,9 @@ class ParseXML():
 
         # These two lists hold dictionary structures referred to
         # as "elements". But the elements in the self.sbml_elements
-        # list hold more items than the self.elements list..
+        # list have more keys than those in the self.elements list.
         self.elements = []
-        self.sbml_elements = []  # Empty list of "element" dictionaries.
+        self.sbml_elements = []
 
         self.num_versions = 1
         self.plugins = []
@@ -838,9 +838,12 @@ class ParseXML():
     def get_plugin_description(self, node, version_count):
         '''
         Get information from a <plugin> node (nested within a <pkgVersion> node)
+        and create a new dictionary, and return it, or update an existing one,
+        if present, and return None.
 
         :param node: the <plugin> node
         :param version_count: number of <plugin> nodes
+        :return: returns a new dictionary or None.
 
         Example <plugin> node:
 
@@ -858,7 +861,10 @@ class ParseXML():
             plugin = query.get_matching_element('sbase', ext_point,
                                                 self.plugins)
 
-        if plugin:  # We already have info about this plugin
+        if plugin:
+            # We already have info about this plugin in self.plugins;
+            # now update it.
+
             # Some <plugin> nodes have a reference node
             # e.g. <reference name="FooKineticLaw"/>
             for reference in node.getElementsByTagName('reference'):
@@ -937,7 +943,7 @@ class ParseXML():
         :return: returns nothing
         '''
 
-        # version_count = self.get_int_value(self, pkg_node, 'version_count')
+        # [Old code: version_count = self.get_int_value(self, pkg_node, 'version_count')]
 
         # read concrete versions of abstract classes and fill dictionary
         for node in pkg_node.getElementsByTagName('element'):
@@ -973,7 +979,15 @@ class ParseXML():
                 self.sbml_elements.append(element)
 
     def get_plugins_for_version(self, pkg_node):
-#        version_count = self.get_int_value(self, pkg_node, 'version_count')
+        '''
+        Given a <pkgVersion> node, iterate over its <plugin> nodes, if any,
+        and update the self.plugins list.
+
+        :param pkg_node: the pkgVersion node
+        :return: this function doesn't return anything.
+        '''
+
+        # [Old code: version_count = self.get_int_value(self, pkg_node, 'version_count')]
 
         for node in pkg_node.getElementsByTagName('plugin'):
             plugin = self.get_plugin_description(self, node, self.version_count)
@@ -982,14 +996,53 @@ class ParseXML():
 
     @staticmethod
     def find_child_occurrences(name, elements):
+        '''
+        :param name: the name attribute of an <element> node
+        :param element: list of dictionaries, each representing an <element> node
+        :return: returns list containing [found, parent] (NB can be [False, '']).
+
+        e.g. given the structure (from file samples/sbgn.xml):
+
+        <element name="Point" ....>
+          <attributes>
+            <attribute name="x" required="true" type="double" abstract="false"/>
+            <attribute name="y" required="true" type="double" abstract="false"/>
+            <attribute name="point" required="false" ... element="Point" ... abstract="false"/>
+          </attributes>
+        </element>
+
+        the third <attribute> node is a "child" of the "Point" element.
+
+        TODO: Sarah, does the <attribute> node have to be nested within its parent <element>
+        node, as in this example? I think it does, judging by the dictionary structures,
+        but you would know better than me!! If so, we need to stress that we are using the
+        same parlance to mean two things:
+        (1) parent and child, as here
+        (2) given a node <outer>, with one or more node(s) <inner> nested within it, I have said
+        in other places that <outer> is the parent node and <inner> the child node
+
+        '''
         found = False
         parent = ''
         num_elements = len(elements)
         index = 0
+
+        # Iterate over the `elements` list of dictionaries:
         while not found and index < num_elements:
+
+            # Find the `elem` dictionary at this position:
             elem = elements[index]
             if 'attribs' in elem:
+                # Iterate over the list of dictionaries stored
+                # as value of elem's 'attribs' entry (this
+                # corresponds to the <attribute> nodes nested within
+                # this <element> node
                 for attr in elem['attribs']:
+
+                    # If the <attribute> node's type attribute is 'lo_element'
+                    # or 'element', AND its element attribute is the same
+                    # as the name attribute of the <element> node, that means
+                    # the <attribute> node is a child of the <element> node
                     if attr['type'] == 'lo_element' \
                             or attr['type'] == 'element':
                         if attr['element'] == name:
@@ -999,6 +1052,15 @@ class ParseXML():
         return [found, parent]
 
     def add_parent_elements(self, package):
+        '''
+        Given the dictionary `package`, iterate over the list of
+        dictionaries stored as the value of its 'baseElements'
+        entry. For each dictionary, if it is a "child" of another
+        dictionary, update its "parent" entry with that dictionary.
+
+        :param package: the main dictionary which holds the other components.
+        :returns: nothing.
+        '''
         for elem in package['baseElements']:
             name = elem['name']
             [occurs_as_child, parent] = \
@@ -1287,6 +1349,7 @@ class ParseXML():
                         })
 
         list_all_element = ['SBase', 'XMLNode', 'ASTNode', 'UncertMLNode']
+
         # link elements
         for elem in package['elements']:
             list_all_element.append(elem['name'])
