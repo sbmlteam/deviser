@@ -149,13 +149,13 @@ Useful links
    **Note that there may be a later release available.**
 
 2. libSBML source code (latest code):
-   https://sourceforge.net/p/sbml/code/HEAD/tree/trunk/libsbml/
+   https://github.com/sbmlteam/libsbml
 
 3. libSBML dependencies:
    https://github.com/sbmlteam/libSBML-dependencies
 
 4. SBML package specification LaTeX template files:
-   https://sourceforge.net/projects/sbml/files/specifications/tex/SBMLPkgSpec-1.6.0.tar.gz/download
+   https://github.com/sbmlteam/sbmlpkgspec
 
 5. CMake:
    http://www.cmake.org/
