@@ -92,8 +92,13 @@ class ParseXML():
 
         self.concrete_dict = dict({})
         self.package_name = ''
+
+        # These two lists hold dictionary structures referred to
+        # as "elements". But the elements in the self.sbml_elements
+        # list hold more items than the self.elements list..
         self.elements = []
         self.sbml_elements = []  # Empty list of "element" dictionaries.
+
         self.num_versions = 1
         self.plugins = []
 
@@ -401,6 +406,11 @@ class ParseXML():
 
         TODO: does this return value of 1 matter? Some of the sample XML files
         e.g. sbgn.xml have existing minNumListOfChildren attribute values of 1
+        Sarah: "SBML did have the rule that a ListOf element could not be
+        empty so the minNumListOfChildren was '1' by default - hence the code.
+        This does need revisiting - I've added an issue"
+
+        See issue 23.
         '''
         name = 'minNumListOfChildren'
         temp = node.getAttributeNode(name)
@@ -410,6 +420,19 @@ class ParseXML():
 
     @staticmethod
     def get_typecode(self, node):
+        '''
+        Given an <element> node, pulls out the value of its
+        typeCode attribute node, if present, and sends this
+        back, possibly changing it a little before doing so.
+
+        :param node: the <element> node
+        :return: returns the (possibly tweaked) value.
+
+        e.g. given an element like:
+        <element name="SedDocument" typeCode="SEDML_DOCUMENT" ...>
+        this will return "SEDML_DOCUMENT"
+        Whereas a typeCode value of "SBML_SOMETHING" will return "SOMETHING".
+        '''
         name = 'typeCode'
         temp = node.getAttributeNode(name)
         if temp is None:
@@ -480,6 +503,20 @@ class ParseXML():
 
     @staticmethod
     def find_element(elements, name):
+        '''
+        Find a dictionary with name `name`
+
+        :param elements: a list of "element" dictionaries
+        :param name: name to look for, e.g. "FooKineticLaw"
+        :return: the existing element dictionary, if it exists; else None.
+
+        In more detail:
+        Given a list of "elements" dictionaries and a name
+        (e.g. "FooKineticLaw"), see if any dictionaries in
+        the list have a 'name' entry with value name
+        (i.e. name to search for is "FooKineticLaw" in this example.)
+        Return that dictionary, or None if not found..
+        '''
         if elements is None or name is None:
             return None
         else:
@@ -491,17 +528,53 @@ class ParseXML():
 
     @staticmethod
     def find_lo_element(elements, name):
+        '''
+        TODO: Sarah, please check if this description is correct!
+
+        Does a dictionary in `elements` list have a "listOf" entry for `name`?
+
+        :param elements: list of "element" dictionaries
+        :param name: value of name concerned.:
+        :return: returns matching dictionary, if there is one in the list.
+
+        e.g. given a name of "FooParameter", and a list of "element" dictionaries
+        representing a set of element nodes, including this one:
+
+        <element name="FooParameter" ... hasListOf="true" ...
+         listOfName="listOfParameters" ...
+         listOfClassName="ListOfFooParameters" ... >
+
+        iterate over the dictionaries and, for any with an entry for
+        key 'isListOf' [which corresponds to a hasListOf attribute node],
+        which has the value True, then see if
+        that dictionary has a "listOfClassName" entry with value
+        "ListOfFooParameters". If so, return that dictionary object.
+
+        If the dictionary has an empty entry for key "listOfClassName", update that
+        entry with the value "ListOfFooParameters", and return that dictionary object.
+
+        If no element dictionaries meet the matching criteria, return None.
+        '''
         if elements is None or name is None:
             return None
+
         for element in elements:
+
+            # Does the <element> node has attribute hasListOf="true"?
             if 'isListOf' in element and element['isListOf'] is True:
-                # The <element> node has attribute hasListOf="true"
+
+                # e.g. element['name'] might be "FooParameter", and
+                # so name_to_match is "ListOfFooParameters"
                 name_to_match = strFunctions.list_of_name(element['name'])
                 if 'listOfClassName' in element:
                     if element['listOfClassName'] != '':
                         name_to_match = element['listOfClassName']
                     else:
                         element['listOfClassName'] = name_to_match
+
+                # TODO have I explained the above correctly, given this next line?
+                # I'm confused because isn't name_to_match.lower() "listoffooparameters"
+                # and name.lower() "fooparameter"? If so, they won't match!
                 if name_to_match.lower() == name.lower():
                     return element
         return None
