@@ -788,7 +788,8 @@ class ParseXML():
                 self.get_element_name_value(self, node, 'elementName')
             xml_lo_element_name = \
                 self.get_element_name_value(self, node, 'listOfName')
-            lo_class_name = \  # Some element nodes have a listOfClassName attribute node.
+            # Some element nodes have a listOfClassName attribute node:
+            lo_class_name = \
                 self.get_loclass_name_value(self, node, 'listOfClassName')
             min_lo_children = self.get_lo_min_children(self, node)
             add_decls = self.get_add_code_value(self, node, 'additionalDecls')
@@ -1069,6 +1070,17 @@ class ParseXML():
                 elem['parent'] = parent
 
     def get_version_information(self, node):
+        '''
+        Extract version information from a <version> node and
+        return it in a dictionary
+
+        :param node: the version node
+        :return: dict with entries for 'level', 'version' and 'namespace'.
+
+        Example <version> node:
+
+         <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
+        '''
         level = self.get_int_value(self, node, 'level')
         version = self.get_int_value(self, node, 'version')
         namespace = self.get_value(node, 'namespace')
@@ -1105,6 +1117,7 @@ class ParseXML():
         The <language> node can also contain nodes of at least the following
         types: <library_version>, <language_version> and <dependencies>.
         These are also interrogated in this function.
+
         TODO: Sarah would prefer to have new functions for interrogating each type of node
         """
         language = self.get_value(node, 'name')
@@ -1127,6 +1140,8 @@ class ParseXML():
         versions = node.getElementsByTagName('language_versions')
         specification = []
         # A <language_versions> node can contain multiple <version> nodes.
+        # Example:
+        # <version level="0" version="3" namespace="http://sbgn.org/libsbgn/0.3"/>
         # If the NodeList of <language_version> nodes has at least one entry,
         # we get the first one and then iterate over the <version> node(s)
         # it has, if any:
