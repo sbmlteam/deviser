@@ -1,5 +1,5 @@
-#### Instructions for using Sphinx with the deviser code.
-######Matthew Gillman, 17th November 2020.
+## Instructions for using Sphinx with the deviser code.
+#### Matthew Gillman, 17th November 2020.
 
 These are the steps to do everything from scratch.
 In practice, once items such as `conf.py` are added to git, it will be simpler than this.
@@ -41,7 +41,7 @@ sys.path.insert(0, '../generator')
 ```
 Give values for Authors, Copyright (in quotes)
 
-#####Changing to a nicer theme (optional step) 
+### Changing to a nicer theme (optional step) 
 The default theme for Sphinx is alabaster. That's OK, but we can get
 nicer-looking documents with the sphinx_rtd_theme theme instead.
 
@@ -69,7 +69,7 @@ And add `import sphinx_rtd_theme` near top of `conf.py`.
 for local install of `sphinx-apidoc`, etc.] 
 
 
-####Building the HTML pages.
+### Building the HTML pages.
  
 Now in `deviser/sphinxdocs`, execute the command  
  
@@ -94,13 +94,13 @@ and navigate to the `index.html` file therein.
 We don't really want to add the `.rst` and `.html` files to git, as we can always
 regenerate them.
 
-####Re-building
+### Re-building
 If you make a change to the docs in your Python code, the relevant `.rst` and `.html` files
 will need to be re-built. In this case the `-f` option will need to be added to the 
 `sphinx-apidoc` command, to force it to overwrite the existing `.rst` file(s). And the
 `make html` command will then need to be re-run, too.
 
-####Building once a lot of the above is in git
+### Building once a lot of the above is in git
 The `.rst` and `.html` files should not be in git, as we can always regenerate them.
 So you may find that the `sphinxdocs/conf.py` already exists. Edit if required and then
 proceed to `sphinx-apidoc` and `make html` steps.
