@@ -270,7 +270,7 @@ class ParseXML():
         element = ''
         temp = self.get_value(node, 'element')  # e.g. "SampledVolume"
         if temp is not None:
-            element = strFunctions.standard_element_name(temp)  # q.v.
+            element = strFunctions.standard_element_name(temp)
         return element
 
     @staticmethod
@@ -1013,14 +1013,16 @@ class ParseXML():
         </element>
 
         the third <attribute> node is a "child" of the "Point" element.
+        Actually, a grandchild to be more precise.
 
-        TODO: Sarah, does the <attribute> node have to be nested within its parent <element>
-        node, as in this example? I think it does, judging by the dictionary structures,
-        but you would know better than me!! If so, we need to stress that we are using the
-        same parlance to mean two things:
-        (1) parent and child, as here
-        (2) given a node <outer>, with one or more node(s) <inner> nested within it, I have said
-        in other places that <outer> is the parent node and <inner> the child node
+        The <attribute> node has to be nested within its parent <element>
+        node, as in this example. Again, its grandparent to be more precise.
+
+        We are using the same terms to mean two things:
+        (1) parent and child, as here  (and grandparent, grandchild, etc)
+        (2) given a node <outer>, with one or more node(s) <inner> nested
+        within it, I have said in other places that <outer> is the parent
+        node and <inner> the child node
 
         '''
         found = False
