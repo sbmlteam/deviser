@@ -15,12 +15,12 @@ didn't add them in. There is probably a way to do this - TODO add top-level file
 Start in `Deviser/deviser` directory. 
 So this next command will only pick up those files in `Deviser/deviser/generator` directory: 
  
-`$ sphinx-apidoc -n -o sphinxdocs -e -M -F --ext-autodoc --ext-doctest --ext-coverage  
+`$ sphinx-apidoc -n -o sphinx-docs -e -M -F --ext-autodoc --ext-doctest --ext-coverage  
 --ext-githubpages generator '*tests*'`  
  
 The `–n` option means this is a dry-run, to see what will be produced. 
 You can then remove the –n option when you want to begin.
-Here, the output directory (for .rst files) is `Deviser/deviser/sphinxdocs`
+Here, the output directory (for .rst files) is `Deviser/deviser/sphinx-docs`
 We may not need all the extensions listed (run `sphinx-apidoc --help` for what they do.)
 The `-e` option creates separate a HTML file for each module (`.py` file), rather than
 one enormous one.
@@ -29,7 +29,7 @@ for files matching this pattern.
 
 [It's possible a couple of options above may not be needed, perhaps the `-M` and `-F` ones?]
  
-Now `cd` into `Deviser/deviser/sphinxdocs`.
+Now `cd` into `Deviser/deviser/sphinx-docs`.
 
 There should be a file `conf.py` there, along with lots of `.rst` files with names like
 `generator.validation.RNGSchemaFiles.rst`. 
@@ -72,7 +72,7 @@ for local install of `sphinx-apidoc`, etc.]
 
 ### Building the HTML pages.
  
-Now in `deviser/sphinxdocs`, execute the command  
+Now in `deviser/sphinx-docs`, execute the command  
  
 `make html BUILDDIR="../sphinx-html"`
  
@@ -105,5 +105,23 @@ will need to be re-built. In this case the `-f` option will need to be added to 
 
 ### Building once a lot of the above is in git
 The `.rst` and `.html` files should not be in git, as we can always regenerate them.
-So you may find that the `sphinxdocs/conf.py` already exists. Edit if required and then
+So you may find that the `sphinx-docs/conf.py` already exists. Edit if required and then
 proceed to `sphinx-apidoc` and `make html` steps.
+
+### Further enhancements
+If you don't want to display fully-qualified domain names of classes,
+e.g. you want to say "class C" rather than "class A.B.C", add the following
+line to `conf.py`:
+ `add_module_names = False`
+Then the module name at the top of the page will still be in A.B format,
+but the individual classes in that module (.py file) will appear in
+the form "class C".
+ 
+Another possible change is if you want to add more document types to the
+Sphinx build. For example, you could add this to `conf.py`:
+```
+source_suffix = {
+'.rst': 'restructuredtext',
+'.txt': 'restructuredtext',
+'.md': 'markdown',
+}``` 

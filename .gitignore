@@ -68,3 +68,9 @@ testOutput/
 .DS_Store
 .vs
 .vscode
+
+# Ignore Sphinx-generated .rst files:
+sphinx-docs/*.rst
+sphinx-docs/Makefile
+sphinx-docs/make.bat
+
